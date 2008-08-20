@@ -24,6 +24,7 @@ namespace Hash
             size = strlen((const char*) rawdata);
         if (0 == size)
             return true;
+        return true;
     }
 
 } // namespace Hash
