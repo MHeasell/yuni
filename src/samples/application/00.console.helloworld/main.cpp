@@ -6,6 +6,8 @@
 
 //
 // Our own application class
+// To make it a simple console application,
+// we have it inherit Yuni::Application::Console.
 //
 class HelloWorld : public Yuni::Application::Console
 {
@@ -18,6 +20,7 @@ public:
     virtual ~HelloWorld()
     {}
 
+    // Overload execute() to implement our own behaviour
     virtual void execute()
     {
         std::cout << "Hello world" << std::endl;
@@ -28,12 +31,12 @@ public:
 
 int main(int argc, char* argv[])
 {
-    // Our app
+    // Instanciate our app, feeding it the console arguments
     HelloWorld app(argc, argv);
 
-    // Run our app
+    // Run the execute() method to launch the app
     app.execute();
 
-    // Exiting
+    // Exit the app
     return app.exitCode();
 }
