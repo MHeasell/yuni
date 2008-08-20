@@ -22,7 +22,7 @@ namespace Yuni
         //! Default constructor
         Version();
         //! Constructor with a given version
-        Version(const int h, const l, const int r = 0);
+        Version(const int h, const int l, const int r = 0);
         //! Copy constructor
         Version(const Version& c);
         //@}
