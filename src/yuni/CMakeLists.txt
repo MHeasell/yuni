@@ -36,17 +36,43 @@ Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I'${PROJECT_SOURCE_DIR}/..'")
 
 
 
-#
-# Yuni Modules
-#
-ADD_SUBDIRECTORY(misc)
-ADD_SUBDIRECTORY(hash)
-ADD_SUBDIRECTORY(threads)
-ADD_SUBDIRECTORY(application)
+Include(FindThreads)
+IF(NOT CMAKE_USE_PTHREADS_INIT)
+    MESSAGE(FATAL_ERROR "PThreads is required.")
+ENDIF(NOT CMAKE_USE_PTHREADS_INIT)
 
 
-add_library(yuni STATIC misc/yuni.cpp)
-target_link_libraries(yuni
-    yuni-misc yuni-application yuni-hash yuni-threads
-)
+
+#
+# The Yuni Library
+#
+set(SRC "")
+
+# String
+set(SRC ${SRC} misc/string.h misc/string.cpp)
+
+# Version
+set(SRC ${SRC} misc/version.h misc/version.cpp)
+
+# Hash
+set(SRC ${SRC}  hash/abstract.h hash/abstract.cpp
+                hash/md5.h hash/md5.cpp)
+
+# System
+set(SRC ${SRC}  system/stdint.h system/os.h) 
+
+# Threads
+set(SRC ${SRC}  threads/mutex.h threads/mutex.cpp
+                threads/abstract.thread.h threads/abstract.thread.cpp
+                threads/thread.h threads/thread.cpp
+                threads/timer.h threads/timer.cpp
+                threads/jobs.abstract.h threads/jobs.abstract.cpp
+                threads/cpu.cpp)
+
+# Application
+set(SRC ${SRC}  application/abstract.h application/abstract.cpp
+                application/console.h application/console.cpp)
+
+
+add_library(yuni STATIC ${SRC})
 
