@@ -11,10 +11,18 @@ namespace Yuni
     class Version
     {
     public:
+        /*!
+        ** \brief Get the version of the Yuni Library
+        */
+        void InternalLib(Version& v);
+
+    public:
         //! \name Constructor
         //@{
         //! Default constructor
         Version();
+        //! Copy constructor
+        Version(const Version& c);
         //@}
 
         int hi() const {return pHi;}

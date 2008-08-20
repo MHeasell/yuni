@@ -13,8 +13,14 @@ namespace Hash
     class Abstract
     {
     public:
+    public:
+        //! \name Constructor & Destructor
+        //@{
+        //! Default constructor
         Abstract();
+        //! Destructor
         virtual ~Abstract();
+        //@}
 
         /*!
         ** \brief Reset the hash value
@@ -25,21 +31,29 @@ namespace Hash
         ** \brief Compute the hash from a string
         **
         ** \param s The string
-        ** \return True if the operation has succeeded, False otherwise
+        ** \return The hash value 
         */
-        bool fromString(const String& s) {return fromRawData(s.c_str(), s.size());}
+        const String& fromString(const String& s) {return fromRawData(s.c_str(), s.size());}
 
         /*!
         ** \brief Compute the hash from raw data
         **
         ** \param rawdata The buffer
         ** \param size The size of the buffer. AutoDetectNullChar will make an autodetection of the length
-        ** \return True if the operation has succeeded, False otherwise
+        ** \return The hash value 
         */
-        virtual bool fromRawData(const void* rawdata, uint64 size = AutoDetectNullChar) = 0;
+        virtual const String& fromRawData(const void* rawdata, uint64 size = AutoDetectNullChar) = 0;
 
         /*!
-        ** \brief Get the hash value
+        ** \brief Compute the hash of a given file
+        **
+        ** \param The filename
+        ** \return The hash value 
+        */
+        virtual const String& fromFile(const String& filename) = 0;
+
+        /*!
+        ** \brief Get the last hash value
         */
         const String& value() const {return pValue;}
         //! Get the hash value
@@ -56,7 +70,8 @@ namespace Hash
     protected:
         //! The hash value
         String pValue;
-    };
+
+    }; // class Hash::Abstract
 
 
 } // namespace Hash
