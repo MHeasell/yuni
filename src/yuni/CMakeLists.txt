@@ -45,3 +45,8 @@ ADD_SUBDIRECTORY(threads)
 ADD_SUBDIRECTORY(application)
 
 
+add_library(yuni STATIC misc/yuni.cpp)
+target_link_libraries(yuni
+    yuni-misc yuni-application yuni-hash yuni-threads
+)
+
