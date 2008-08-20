@@ -48,11 +48,10 @@ ENDIF(NOT CMAKE_USE_PTHREADS_INIT)
 #
 set(SRC "")
 
-# String
-set(SRC ${SRC} misc/string.h misc/string.cpp)
-
-# Version
-set(SRC ${SRC} misc/version.h misc/version.cpp)
+# Misc
+set(SRC ${SRC}  misc/string.h misc/string.cpp
+                misc/paths.h misc/paths.cpp
+                misc/version.h misc/version.cpp)
 
 # Hash
 set(SRC ${SRC}  hash/abstract.h hash/abstract.cpp

@@ -34,8 +34,10 @@ namespace Application
         bool terminated() const {return pTerminated;}
         /*!
         ** \brief Indicate that the application should stop as soon as possible
+        **
+        ** \param ex The new exit code value
         */
-        void terminate() {pTerminated = true;}
+        void terminate(const sint8 ex = 0) {pTerminated = true; pExitCode = ex;}
 
         /*!
         ** \brief Get the full filename of the application
@@ -47,6 +49,10 @@ namespace Application
         */
         const String& rootFolder() const {return pRootFolder;}
 
+        /*!
+        ** \brief Get the exit code to use
+        */
+        sint8 exitCode() const {return pExitCode;}
 
     private:
         /*!
@@ -62,6 +68,8 @@ namespace Application
         String pExeName;
         //! The root folder of the application
         String pRootFolder;
+        //! Exit code
+        sint8 pExitCode;
 
     }; // class Application::Abstract
 
