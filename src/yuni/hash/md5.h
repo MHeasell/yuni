@@ -16,7 +16,7 @@ namespace Hash
     {
     public:
         MD5();
-        virtual MD5();
+        virtual ~MD5();
 
 
         virtual bool fromRawData(const void* rawdata, uint64 size = AutoDetectNullChar);

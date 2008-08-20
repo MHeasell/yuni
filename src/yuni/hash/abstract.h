@@ -13,8 +13,8 @@ namespace Hash
     class Abstract
     {
     public:
-        Abstract() :pValue() {}
-        virtual ~Abstract() {}
+        Abstract();
+        virtual ~Abstract();
 
         /*!
         ** \brief Reset the hash value
