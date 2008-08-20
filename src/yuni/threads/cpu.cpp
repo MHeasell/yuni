@@ -1,0 +1,59 @@
+
+#include <yuni/threads/abstract.thread.h>
+#ifdef YUNI_OS_DARWIN
+#   include <sys/param.h>
+#   include <sys/sysctl.h>
+#endif
+
+
+
+
+
+namespace Yuni
+{
+namespace Threads
+{
+namespace Private
+{
+
+
+
+#ifdef YUNI_OS_DARWIN
+# define YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
+    int AbstractThreadModel::CPUCount()
+    {
+        int count;
+        size_t size = sizeof(count);
+
+        if (sysctlbyname("hw.ncpu", &count, &size, NULL, 0))
+            return 1;
+        return count;
+    }
+#endif
+
+
+#ifdef YUNI_OS_WINDOWS
+# define YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
+    int AbstractThreadModel::CPUCount()
+    {
+        SYSTEM_INFO si;
+        GetSystemInfo(&si);
+        return si.dwNumberOfProcessors;
+    }
+#endif
+
+
+
+
+} // namespace Private
+} // namespace Threads
+} // namespace Yuni
+
+
+
+
+#ifndef YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
+#  error "The method AbstractThreadModel::CPUCount has not been implemented for the current platform"
+#endif
+
+
