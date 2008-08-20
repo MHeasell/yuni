@@ -19,7 +19,7 @@ namespace Yuni
         :pHi(0), pLo(0), pRevision(0), pAuthor(), pWebUrl()
     {}
 
-    Version::Version(const int h, const l, const int r)
+    Version::Version(const int h, const int l, const int r)
         :pHi(h), pLo(l), pRevision(r), pAuthor(), pWebUrl()
     {}
 
@@ -88,7 +88,7 @@ namespace Yuni
     }
 
 
-    String Version::toString()
+    String Version::toString() const
     {
         String r;
         r << pHi << "." << pLo;
