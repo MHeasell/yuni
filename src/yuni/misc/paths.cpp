@@ -121,9 +121,14 @@ namespace Paths
 	    // FIXME: Find a better way to find driver letters
 	    if (p.size() == 2 && ':' == p[1]) 
 	        return true;
-	    # endif
+        struct _stat s;
+        if ('\\' != p[p.size() -1])
+            return (_stat(p.c_str(), &s) == 0);
+        return (_stat(String(p, 0, p.size() - 1).c_str(), &s) == 0);
+        # else
         struct stat s;
         return (stat(p.c_str(), &s) == 0);
+	    # endif
     }
 
     bool MakeDir(const String& p)
