@@ -56,7 +56,10 @@ set(SRC ${SRC}  misc/string.h misc/string.cpp
 
 # Hash
 set(SRC ${SRC}  hash/abstract.h hash/abstract.cpp
-                hash/md5.h hash/md5.cpp)
+                hash/md5.h hash/md5.cpp
+                hash/key.h
+                hash/table.h hash/table.hxx
+                hash/dictionary.h)
 
 # System
 set(SRC ${SRC}  system/stdint.h system/os.h) 
