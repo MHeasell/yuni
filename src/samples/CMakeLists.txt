@@ -18,7 +18,7 @@ Include(CheckIncludeFile)
 #
 String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
 IF(${VA} EQUAL 0)
-    Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -Winline -fstack-check")
+    Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check")
 ENDIF(${VA} EQUAL 0)
 Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 
@@ -33,5 +33,6 @@ Set(YUNI_STATIC_LIB "${PROJECT_SOURCE_DIR}/../../bin/libs/${CMAKE_SYSTEM_NAME}/l
 Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I'${PROJECT_SOURCE_DIR}/..'")
 
 
+ADD_SUBDIRECTORY(sharedptr)
 ADD_SUBDIRECTORY(application)
 ADD_SUBDIRECTORY(hash)
