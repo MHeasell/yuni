@@ -19,6 +19,7 @@ namespace Yuni
     {
     public:
         typedef T element_type;
+        typedef unsigned int ReferenceSize;
 
     public:
         //! \name Constructors & Destructor
@@ -51,13 +52,17 @@ namespace Yuni
         */
         bool unique()  const throw() {return (counter ? counter->count == 1 : true);}
 
+        /*!
+        ** \brief Get how many references are linked to our pointer
+        */
+        ReferenceSize refsCount() const {return (counter ? counter->count : 0);}
 
     private:
         struct Counter
         {
-            Counter(T* p = 0, unsigned int c = 1) :ptr(p), count(c) {}
+            Counter(T* p = 0, ReferenceSize c = 1) :ptr(p), count(c) {}
             T* ptr;
-            unsigned int count;
+            ReferenceSize count;
         }* counter;
 
         void acquire(Counter* c) throw()
