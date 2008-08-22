@@ -52,7 +52,8 @@ set(SRC "")
 set(SRC ${SRC}  misc/string.h misc/string.cpp
                 misc/paths.h misc/paths.cpp
                 misc/files.h misc/files.cpp
-                misc/version.h misc/version.cpp)
+                misc/version.h misc/version.cpp
+                misc/static.h)
 
 # Hash
 set(SRC ${SRC}  hash/abstract.h hash/abstract.cpp
@@ -75,6 +76,10 @@ set(SRC ${SRC}  threads/mutex.h threads/mutex.cpp
 # Application
 set(SRC ${SRC}  application/abstract.h application/abstract.cpp
                 application/console.h application/console.cpp)
+
+# Gfx
+set(SRC ${SRC}  gfx/point2D.h gfx/point2D.cpp
+                gfx/point3D.h gfx/point3D.cpp)
 
 
 add_library(yuni STATIC ${SRC})
