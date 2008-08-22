@@ -8,7 +8,7 @@ namespace Gfx
 
     std::ostream& Point2D::print(std::ostream& out) const
     {
-        out << "(" << X << "," << Y << ")";
+        out << "(" << x << "," << y << ")";
         return out;
     }
 

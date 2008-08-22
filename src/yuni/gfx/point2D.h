@@ -20,47 +20,74 @@ namespace Gfx
         //! \name Constructors & Destructor
         //{
         //! Default constructor
-        Point2D() : X(0.0f), Y(0.0f) {}
+        Point2D() : x(0.0f), y(0.0f) {}
         /*!
         ** \brief Constructor
-        ** \param x The default X coordinate
-        ** \param y The default Y coordinate
+        ** \param x1 The default x coordinate
+        ** \param y1 The default y coordinate
         */
-        Point2D(float x, float y): X(x), Y(y) {}
+        Point2D(float x1, float y1): x(x1), y(y1) {}
         //! Constructor by copy
-        Point2D(const Point2D& p) : X(p.X), Y(p.Y) {}
+        Point2D(const Point2D& p) : x(p.x), y(p.y) {}
         //! Destructor
         virtual ~Point2D() {}
         //}
 
+        //! Reset the point to origin
+        Point2D& reset() {x = y = 0.0f; return *this;}
 
         //! Move the point to new coordinates
-        void move(float x, float y) { X = x; Y = y; }
-        void move(const Point2D& p) { X = p.X; Y = p.Y; }
+        void move(float x1, float y1) { x = x1; y = y1; }
+        void move(const Point2D& p) { x = p.x; y = p.y; }
 
 
         /*!
         ** \brief Translate the point with the same value for all coordinates
         ** \param k The value to add to all coordinates
         */
-        void translate(float k) { X += k; Y += k; }
+        void translate(float k) { x += k; y += k; }
         /*!
         ** \brief Translate the point with relative coordinates
-        ** \param x The value to add to the X coordinate
-        ** \param y The value to add to the Y coordinate
+        ** \param x1 The value to add to the x coordinate
+        ** \param y1 The value to add to the y coordinate
         */
-        void translate(float x, float y) { X += x; Y += y; }
+        void translate(float x1, float y1) { x += x1; y += y1; }
         /*!
         ** \brief Translate the point with relative coordinates from another Point
         ** \param p 
         */
-        void translate(const Point2D& p) { X += p.X; Y += p.Y; }
+        void translate(const Point2D& p) { x += p.x; y += p.y; }
 
-        //! Calculate the mean between two points
+        /*!
+        ** \brief Calculate the mean between two points
+        ** The calling object is modified to store the value
+        ** \param p Point to compute the mean with
+        */
         void mean(const Point2D& p)
         {
-          X = (X + p.X) / 2.0f;
-          Y = (Y + p.Y) / 2.0f;
+          x = (x + p.x) / 2.0f;
+          y = (y + p.y) / 2.0f;
+        }
+        /*!
+        ** \brief Calculate the mean between two points
+        ** The calling object is modified to store the value
+        ** \param p1 Point to compute the mean with
+        ** \param p2 Second point to compute the mean with
+        */
+        Point2D& mean(const Point2D& p1, const Point2D& p2)
+        {
+          x = (p1.x + p2.x) / 2.0f;
+          y = (p1.y + p2.y) / 2.0f;
+          return *this;
+        }
+        /*!
+        ** \brief Calculate the mean between two points
+        ** \param p1 First point
+        ** \param p2 Second point
+        */
+        static Point2D& Mean(const Point2D& p1, const Point2D& p2)
+        {
+          return Point2D().mean(p1, p2);
         }
 
 
@@ -69,17 +96,17 @@ namespace Gfx
 
         /*!
         ** \brief Reset all coordinates
-        ** \param x The new value for the X coordinate
-        ** \param y The new value for the Y coordinate
+        ** \param x1 The new value for the x coordinate
+        ** \param y1 The new value for the y coordinate
         ** \see move()
         */
-        void operator () (float x, float y) { X = x; Y = y; }
+        void operator () (float x1, float y1) { x = x1; x = y1; }
         /*!
         ** \brief Copy all coordinates from another point
         ** \param p The coordinates to copy
         ** \see move()
         */
-        void operator () (const Point2D& p) { X = p.X; Y = p.Y; }
+        void operator () (const Point2D& p) { x = p.x; y = p.y; }
         
 
         /*!
@@ -87,21 +114,20 @@ namespace Gfx
         ** \param k The value to add to all coordinates
         ** \see translate()
         */
-        Point2D& operator += (const float k) { X += k; Y += k; return (*this); }
+        Point2D& operator += (const float k) { x += k; y += k; return (*this); }
         /*!
         ** \brief Translate the point with relative coordinates
-        ** \param x The value to add to the X coordinate
-        ** \param y The value to add to the Y coordinate
+        ** \param p Point to use as reference x and y for the translation
         ** \see translate()
         */
-        Point2D& operator += (const Point2D& p) { X += p.X; Y += p.Y; return (*this); }
+        Point2D& operator += (const Point2D& p) { x += p.x; y += p.y; return (*this); }
 
         /*!
         ** \brief Comparison operator
         ** \param rhs
         */
         bool operator == (const Point2D& rhs) const
-        { return rhs.X == X && rhs.Y == Y; }
+        { return rhs.x == x && rhs.y == y; }
 
         bool operator != (const Point2D& rhs) const
         { return !(*this == rhs); }
@@ -111,7 +137,7 @@ namespace Gfx
         ** \param p The new coordinates
         ** \see move()
         */
-        Point2D& operator = (const Point2D& p) { X = p.X; Y = p.Y; return (*this); }
+        Point2D& operator = (const Point2D& p) { x = p.x; y = p.x; return (*this); }
 
         //} Operators
 
@@ -124,9 +150,9 @@ namespace Gfx
 
     public:
         //! X coordinate
-        float X;
+        float x;
         //! Y coordinate
-        float Y;
+        float y;
 
     }; // class Point2D
 

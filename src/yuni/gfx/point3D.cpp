@@ -8,7 +8,7 @@ namespace Gfx
 
     std::ostream& Point3D::print(std::ostream& out) const
     {
-        out << "(" << X << "," << Y << "," << Z << ")";
+        out << "(" << x << "," << y << "," << z << ")";
         return out;
     }
 
