@@ -13,7 +13,6 @@ namespace Hash
     class Abstract
     {
     public:
-    public:
         //! \name Constructor & Destructor
         //@{
         //! Default constructor
