@@ -1,4 +1,3 @@
-
 #ifndef __YUNI_POINT3D_H__
 # define __YUNI_POINT3D_H__
 

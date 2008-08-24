@@ -1,8 +1,10 @@
-
 #ifndef __YUNI_POINT2D_H__
 # define __YUNI_POINT2D_H__
 
 # include <iostream>
+# include <yuni/misc/math.h>
+
+
 
 namespace Yuni
 {
