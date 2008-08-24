@@ -82,6 +82,10 @@ set(SRC ${SRC}  application/abstract.h application/abstract.cpp
 # Gfx
 set(SRC ${SRC}  gfx/point2D.h gfx/point3D.h)
 
+# User Interface
+set(SRC ${SRC}  gfx/ui/window.h gfx/ui/window.cpp
+                gfx/ui/component.h gfx/ui/component.cpp)
+
 
 add_library(yuni STATIC ${SRC})
 
