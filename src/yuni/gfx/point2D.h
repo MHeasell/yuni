@@ -10,7 +10,7 @@ namespace Gfx
 {
 
 
-    /*! \class Point2d
+    /*! \class Point2D
     **
     ** \brief Represents a 2D-point
     */

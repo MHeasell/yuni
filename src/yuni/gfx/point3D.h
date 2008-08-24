@@ -10,7 +10,7 @@ namespace Gfx
 {
 
 
-    /*! \class Point3d
+    /*! \class Point3D
     **
     ** \brief Represents a 3D-point
     */
