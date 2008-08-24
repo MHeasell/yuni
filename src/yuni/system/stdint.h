@@ -2,6 +2,7 @@
 # define __YUNI_SYSTEM_STANDARD_INTERFACE_INT_DATA_H__
 
 /*!
+** \file stdint.h
 ** \brief Standard types used by the Yuni Library
 */
 
