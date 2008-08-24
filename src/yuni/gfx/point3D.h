@@ -3,6 +3,9 @@
 # define __YUNI_POINT3D_H__
 
 # include <iostream>
+# include <yuni/misc/math.h>
+
+
 
 namespace Yuni
 {
@@ -109,6 +112,26 @@ namespace Gfx
           return Point3D().mean(p1, p2);
         }
 
+
+        /*!
+        ** \brief Get if the point is close to another point
+        **
+        ** \param rhs The other point
+        ** \param delta Delta value
+        */
+        bool closeTo(const Point3D<T>& rhs, const T delta) const
+        { return Math::Abs(x-rhs.x) < delta && Math::Abs(y-rhs.y) < delta && Math::Abs(z-rhs.z) < delta; }
+
+        /*!
+        ** \brief Get if the point is close to another point
+        **
+        ** \param x1 The X coordinate of the other point
+        ** \param y1 The Y coordinate of the other point
+        ** \param z1 The Z coordinate of the other point
+        ** \param delta Delta value
+        */
+        bool closeTo(const T x1, const T y1, const T z1, const T delta) const
+        { return Math::Abs(x-x1) < delta && Math::Abs(y-y1) < delta && Math::Abs(z-z1) < delta; }
 
 
         //! \name Operators
