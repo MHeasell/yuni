@@ -67,7 +67,9 @@ namespace Paths
     **
     ** The path part will be extracted according the system-dependant path-separator
     **
+    ** \param p The original filename
     ** \param systemDependant Consider only the system-dependant path-separator
+    ** \return The path part of the original filename
     **
     ** \code
     **      std::cout << Paths::ExtractFilePath("/tmp/foo.txt") std::endl; // write `/tmp/`
@@ -85,12 +87,42 @@ namespace Paths
     ** The file name will be extracted according the last occurence
     ** of the system-dependant path-separator (if systemDependant = true)
     **
+    ** \param p The original filename
     ** \param systemDependant Consider only the system-dependant path-separator
+    ** \return The bare filename from the original one
     **
     ** \see Paths::Separator
     */
     String ExtractFileName(const String& p, const bool systemDependant = true);
+    /*!
+    ** \brief Extract bare file name for each entry in a list
+    **
+    ** The file name will be extracted according the last occurence
+    ** of the system-dependant path-separator (if systemDependant = true).
+    **
+    ** Each entry in the list will be replaced by the new value according `ExtractFileName(const String&, const bool)`.
+    **
+    ** \param[in,out] p The list to process
+    ** \param systemDependant Consider only the system-dependant path-separator
+    **
+    ** \see ExtractFileName(const String&, const bool)
+    ** \see Paths::Separator
+    */
     void ExtractFileName(String::List& p, const bool systemDependant = true);
+    /*!
+    ** \brief Extract bare file name for each entry in a list
+    **
+    ** The file name will be extracted according the last occurence
+    ** of the system-dependant path-separator (if systemDependant = true).
+    **
+    ** Each entry in the list will be replaced by the new value according `ExtractFileName(const String&, const bool)`.
+    **
+    ** \param[in,out] p The list to process
+    ** \param systemDependant Consider only the system-dependant path-separator
+    **
+    ** \see ExtractFileName(const String&, const bool)
+    ** \see Paths::Separator
+    */
     void ExtractFileName(String::Vector& p, const bool systemDependant = true);
 
     /*!
@@ -98,6 +130,9 @@ namespace Paths
     **
     ** The file name will be extracted according the last occurence
     ** of the system-dependant path-separator
+    **
+    ** \param p The original file name
+    ** \return The bare file name without its extension
     **
     ** \see Paths::Separator
     */
