@@ -8,26 +8,27 @@
         - Console (Yuni::Application::Console)
         - Gfx3D (Yuni::Application::Gfx3D)
     - gfx
+        - UI
+            - Font
+            - ThemeManager
+            - Panel
+            - Button
+            - Label
+            - Form
+            - CheckBox
+            - RadioButton
+            - Edit
+            - Memo
+            - ListBox
+            - Notebook
+            - Menu / PopupMenu / MenuItem
+
         - g2D
             - Image::Abstract (Png/jpeg...)
                 - Image::PNG ...
             - Vector
             - Point
-            - UI
-                - Font
-                - ThemeManager
-                - Panel
-                - Button
-                - Label
-                - Form
-                - CheckBox
-                - RadioButton
-                - Edit
-                - Memo
-                - ListBox
-                - Notebook
-                - Menu / PopupMenu / MenuItem
-        - g3D
+         - g3D
             - Point
             - Vector
             - Camera
