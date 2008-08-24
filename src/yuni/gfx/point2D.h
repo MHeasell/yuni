@@ -14,30 +14,31 @@ namespace Gfx
     **
     ** \brief Represents a 2D-point
     */
+    template<typename T = float>
     class Point2D
     {
     public:
         //! \name Constructors & Destructor
         //{
         //! Default constructor
-        Point2D() : x(0.0f), y(0.0f) {}
+        Point2D() : x(0), y(0) {}
         /*!
         ** \brief Constructor
         ** \param x1 The default x coordinate
         ** \param y1 The default y coordinate
         */
-        Point2D(float x1, float y1): x(x1), y(y1) {}
+        Point2D(const T x1, const T y1): x(x1), y(y1) {}
         //! Constructor by copy
-        Point2D(const Point2D& p) : x(p.x), y(p.y) {}
+        Point2D(const Point2D<T>& p) : x(p.x), y(p.y) {}
         //! Destructor
         virtual ~Point2D() {}
         //}
 
         //! Reset the point to origin
-        Point2D& reset() {x = y = 0.0f; return *this;}
+        Point2D<T>& reset() {x = y = 0; return *this;}
 
         //! Move the point to new coordinates
-        void move(float x1, float y1) { x = x1; y = y1; }
+        void move(const T x1, const T y1) { x = x1; y = y1; }
         void move(const Point2D& p) { x = p.x; y = p.y; }
 
 
@@ -45,13 +46,13 @@ namespace Gfx
         ** \brief Translate the point with the same value for all coordinates
         ** \param k The value to add to all coordinates
         */
-        void translate(float k) { x += k; y += k; }
+        void translate(const T k) { x += k; y += k; }
         /*!
         ** \brief Translate the point with relative coordinates
         ** \param x1 The value to add to the x coordinate
         ** \param y1 The value to add to the y coordinate
         */
-        void translate(float x1, float y1) { x += x1; y += y1; }
+        void translate(const T x1, T y1) { x += x1; y += y1; }
         /*!
         ** \brief Translate the point with relative coordinates from another Point
         ** \param p 
@@ -100,7 +101,7 @@ namespace Gfx
         ** \param y1 The new value for the y coordinate
         ** \see move()
         */
-        void operator () (float x1, float y1) { x = x1; x = y1; }
+        void operator () (const T x1, const T y1) { x = x1; x = y1; }
         /*!
         ** \brief Copy all coordinates from another point
         ** \param p The coordinates to copy
@@ -114,7 +115,7 @@ namespace Gfx
         ** \param k The value to add to all coordinates
         ** \see translate()
         */
-        Point2D& operator += (const float k) { x += k; y += k; return (*this); }
+        Point2D& operator += (const T k) { x += k; y += k; return (*this); }
         /*!
         ** \brief Translate the point with relative coordinates
         ** \param p Point to use as reference x and y for the translation
@@ -145,14 +146,18 @@ namespace Gfx
         /*!
         ** \brief Print the point
         */
-        std::ostream& print(std::ostream& out) const;
+        std::ostream& print(std::ostream& out) const
+        {
+            out << "(" << x << "," << y << ")";
+            return out;
+        }
 
 
     public:
         //! X coordinate
-        float x;
+        T x;
         //! Y coordinate
-        float y;
+        T y;
 
     }; // class Point2D
 
@@ -162,13 +167,18 @@ namespace Gfx
 
 
 
-//! Operator overload for stream printing
-inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Point2D& p)
+//! name Operator overload for stream printing
+//@{
+
+template<typename T>
+inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Point2D<T>& p)
 { return p.print(out); }
 
-inline const Yuni::Gfx::Point2D operator + (const Yuni::Gfx::Point2D& lhs, const Yuni::Gfx::Point2D& rhs)
-{ return Yuni::Gfx::Point2D(lhs) += rhs; }
+template<typename T>
+inline const Yuni::Gfx::Point2D<T> operator + (const Yuni::Gfx::Point2D<T>& lhs, const Yuni::Gfx::Point2D<T>& rhs)
+{ return Yuni::Gfx::Point2D<T>(lhs) += rhs; }
 
+//@}
 
 
 #endif // __YUNI_POINT2D_H__

@@ -14,20 +14,21 @@ namespace Gfx
     **
     ** \brief Represents a 3D-point
     */
+    template<typename T = float>
     class Point3D
     {
     public:
         //! \name Constructors & Destructor
         //{
         //! Default constructor
-        Point3D() : x(0.0f), y(0.0f), z(0.0f) {}
+        Point3D() : x(0), y(0), z(0) {}
         /*!
         ** \brief Constructor
         ** \param x The default X coordinate
         ** \param y The default Y coordinate
         ** \param z The default Z coordinate
         */
-        Point3D(float x1, float y1, float z1): x(x1), y(y1), z(z1) {}
+        Point3D(const T x1, const T y1, const T z1): x(x1), y(y1), z(z1) {}
         //! Constructor by copy
         Point3D(const Point3D& p) : x(p.x), y(p.y), z(p.z) {}
         //! Destructor
@@ -36,7 +37,7 @@ namespace Gfx
 
 
         //! Move the point to new coordinates
-        void move(float x1, float y1, float z1) { x = x1; y = y1; z = z1; }
+        void move(const T x1, const T y1, const T z1) { x = x1; y = y1; z = z1; }
         void move(const Point3D& p) { x = p.x; y = p.y; z = p.z; }
 
 
@@ -44,7 +45,7 @@ namespace Gfx
         ** \brief Translate the point with the same value for all coordinates
         ** \param k The value to add to all coordinates
         */
-        void translate(float k) { x += k; y += k; z += k; }
+        void translate(const T k) { x += k; y += k; z += k; }
         /*!
         ** \brief Translate the point with relative coordinates
         ** \param x The value to add to the X coordinate
@@ -105,7 +106,7 @@ namespace Gfx
         ** \param z The new value for the Z coordinate
         ** \see move()
         */
-        void operator () (float x1, float y1, float z1) { x = x1; y = y1; z = z1; }
+        void operator () (const T x1, const T y1, const T z1) { x = x1; y = y1; z = z1; }
         /*!
         ** \brief Copy all coordinates from another point
         ** \param p The coordinates to copy
@@ -119,7 +120,7 @@ namespace Gfx
         ** \param k The value to add to all coordinates
         ** \see translate()
         */
-        Point3D& operator += (const float k) { x += k; y += k; z += k; return (*this); }
+        Point3D& operator += (const T k) { x += k; y += k; z += k; return (*this); }
         /*!
         ** \brief Translate the point with relative coordinates
         ** \param x The value to add to the X coordinate
@@ -152,16 +153,20 @@ namespace Gfx
         /*!
         ** \brief Print the point
         */
-        std::ostream& print(std::ostream& out) const;
+        std::ostream& print(std::ostream& out) const
+        {
+            out << "(" << x << "," << y << "," << z << ")";
+            return out;
+        }
 
 
     public:
         //! X coordinate
-        float x;
+        T x;
         //! Y coordinate
-        float y;
+        T y;
         //! Z coordinate
-        float z;
+        T z;
 
     }; // class Point3D
 
@@ -171,13 +176,18 @@ namespace Gfx
 
 
 
-//! Operator overload for stream printing
-inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Point3D& p)
+//! \name Operator overload for stream printing
+//@{
+
+template<typename T>
+inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Point3D<T>& p)
 { return p.print(out); }
 
-inline const Yuni::Gfx::Point3D operator + (const Yuni::Gfx::Point3D& lhs, const Yuni::Gfx::Point3D& rhs)
-{ return Yuni::Gfx::Point3D(lhs) += rhs; }
+template<typename T>
+inline const Yuni::Gfx::Point3D<T> operator + (const Yuni::Gfx::Point3D<T>& lhs, const Yuni::Gfx::Point3D<T>& rhs)
+{ return Yuni::Gfx::Point3D<T>(lhs) += rhs; }
 
+//@}
 
 
 #endif // __YUNI_POINT3D_H__
