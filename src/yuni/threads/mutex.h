@@ -10,8 +10,7 @@ namespace Yuni
 
 
     /*! \class Mutex
-    **
-    ** \brief  Mechanism to avoid the simultaneous use of a common resource
+    **  \brief  Mechanism to avoid the simultaneous use of a common resource
     */
     class Mutex 
     {
@@ -24,6 +23,9 @@ namespace Yuni
         ~Mutex() {pthread_mutex_destroy(&pPthreadLock);}
         //@}
 
+        //! \name Lock & Unlock
+        //@{
+
         /*!
         ** \brief Lock the mutex
         */
@@ -33,11 +35,16 @@ namespace Yuni
         ** \brief Release the lock
         */
         void unlock() {pthread_mutex_unlock(&pPthreadLock);}
+
+        //@}
     
+        //! \name PThread wrapper
+        //@{
         /*!
         ** \brief Get the original PThread mutex
         */
         pthread_mutex_t& pthreadMutex() {return pPthreadLock;}
+        //@}
 
     private:
         //! The PThread mutex
@@ -48,6 +55,10 @@ namespace Yuni
 
 
     /*! \class MutexLocker
+    **  \brief Locks a mutex in the constructor and unlocks it in the destructor.
+    **
+    **  This class is especially usefull for `get` accessor` and/or returned values
+    **  which have to be thread-safe.
     **
     ** \code
     **      class Foo
@@ -75,9 +86,25 @@ namespace Yuni
     class MutexLocker
     {
     public:
+        //! \name Constructor & Destructor
+        //@{
+        /*!
+        ** \brief Constructor
+        **
+        ** \param m The mutex to lock
+        */
         MutexLocker(Mutex& m) : pMutex(m) { m.lock(); }
+        //! Destructor
         ~MutexLocker() { pMutex.unlock(); }
+        //@}
+
+        /*!
+        ** \brief Get the original mutex
+        */
+        Mutex& get() const {return pMutex;}
+
     private:
+        //! Reference to the real mutex
         Mutex& pMutex;
 
     }; // MutexLocker

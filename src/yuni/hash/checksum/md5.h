@@ -2,7 +2,7 @@
 # define __YUNI_HASH_MD5_H__
 
 # include <yuni/yuni.h>
-# include <yuni/hash/abstract.h>
+# include <yuni/hash/checksum/abstract.h>
 
 
 
@@ -10,10 +10,12 @@ namespace Yuni
 {
 namespace Hash
 {
+namespace Checksum
+{
 
 
     /*!
-    ** \brief MD5 
+    ** \brief MD5 Checksum 
     **
     ** Compute the MD5 from a string : 
     ** \code
@@ -42,7 +44,7 @@ namespace Hash
     ** std::cout << md5["Hello world"] << std::endl;
     ** \endcode
     */
-    class MD5 : public Hash::Abstract
+    class MD5 : public Hash::Checksum::Abstract
     {
     public:
         /*!
@@ -56,7 +58,8 @@ namespace Hash
         /*!
         ** \brief Compute the hash from raw data 
         **
-        ** \param s The string
+        ** \param rawdata The original buffer
+        ** \param size Size of the given buffer.
         ** \return The hash value 
         */
         static String FromRawData(const void* rawdata, uint64 size = AutoDetectNullChar) {return MD5().fromRawData(rawdata, size);}
@@ -77,6 +80,7 @@ namespace Hash
 
 
 
+} // namespace Checksum
 } // namespace Hash
 } // namespace Yuni
 

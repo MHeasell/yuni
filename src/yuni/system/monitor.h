@@ -52,7 +52,7 @@ namespace Devices
         //! \name Constructors and Destructor
         //@{
         //! Default constructor
-        Monitor() : pHandle(Monitor::InvalidHandle);
+        Monitor() : pHandle(Monitor::InvalidHandle) {}
         //! Constructor with a given handle
         explicit Monitor(const Monitor::Handle h) { select(h); }
         //! Destructor

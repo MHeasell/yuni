@@ -7,8 +7,20 @@
 
 namespace Yuni
 {
+
+/*!
+** \brief Tools which use hashing mechanisms
+*/
 namespace Hash
 {
+
+/*!
+** \brief Checksums
+*/
+namespace Checksum
+{
+
+
 
     class Abstract
     {
@@ -46,7 +58,7 @@ namespace Hash
         /*!
         ** \brief Compute the hash of a given file
         **
-        ** \param The filename
+        ** \param filename The filename to analyze
         ** \return The hash value 
         */
         virtual const String& fromFile(const String& filename) = 0;
@@ -73,6 +85,8 @@ namespace Hash
     }; // class Hash::Abstract
 
 
+
+} // namespace Checksum
 } // namespace Hash
 } // namespace Yuni
 

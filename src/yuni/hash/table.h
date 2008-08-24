@@ -2,10 +2,12 @@
 # define __YUNI_HASH_TABLE_H__
 
 # include <yuni/yuni.h>
+# include <yuni/hash/std.hashmap.h>
 # include <yuni/string.h>
-# include <ext/hash_fun.h>
-# include <ext/hash_map>
 # include <yuni/hash/key.h>
+# include <yuni/threads/mutex.h>
+
+
 
 
 namespace Yuni
@@ -13,29 +15,37 @@ namespace Yuni
 namespace Hash
 {
 
+    static const int optNone = 0;
+    static const int optThreadSafe = 1;
+    static const int optIgnoreCase = 2;
 
-    /*! \class Hash::Table
+
+
+
+    /*! \class Table
     **
     ** \brief Unique Associative container
+    **
+    ** \internal Do not forget to broadcast changes into Hash::Dictionary as well
     */
-    template<class K, typename V>
+    template<typename K, typename V, bool ThreadSafe = false>
     class Table
     {
     public:
         //! An iterator
-        typedef typename __gnu_cxx::hash_map< K, V, __gnu_cxx::hash<K> >::iterator  iterator;
+        typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::hash<K> >::iterator  iterator;
         //! A const iterator
-        typedef typename __gnu_cxx::hash_map< K, V, __gnu_cxx::hash<K> >::const_iterator  const_iterator;
+        typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::hash<K> >::const_iterator  const_iterator;
 
     public:
         //! \name Constructors & Destructor
         //@{
         //! Default constructor
-        Table();
+        Table() : pTable() {}
         //! Copy constructor
-        Table(const Table& c);
+        Table(const Table& c) : pTable(c.pTable) {}
         //! Destructor
-        virtual ~Table();
+        virtual ~Table() {}
         //@}
 
         /*!
@@ -72,7 +82,8 @@ namespace Hash
         ** \param defvalue The default value if the key can not be found
         ** \return The value ofthe key, `defvalue` if the key could not be found
         */
-        V& value(const K& key, const V& defvalue = V()) const;
+        V value(const K& key, const V& defvalue = V()) const;
+
 
         /*!
         ** \brief Get an iterator pointing to the beginning of the table
@@ -89,7 +100,7 @@ namespace Hash
         /*!
         ** \brief Clear the table
         */
-        void clear();
+        void clear() {pTable.clear();}
 
         /*!
         ** \brief Erase a single key
@@ -99,9 +110,10 @@ namespace Hash
         */
         void erase(const K& key);
 
+
     private:
         //! The real hash map
-        __gnu_cxx::hash_map< K, V, __gnu_cxx::hash<K> >  pTable;
+        YuniSTLExt::hash_map< K, V, YuniSTLExt::hash<K> >  pTable;
 
     }; // class Hash::Table
 
