@@ -18,7 +18,7 @@ Include(CheckIncludeFile)
 #
 String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
 IF(${VA} EQUAL 0)
-    Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check")
+    Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
 ENDIF(${VA} EQUAL 0)
 Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 

@@ -1,6 +1,8 @@
 
-#include <yuni/hash/md5.h>
+#include <yuni/hash/checksum/md5.h>
 #include <fstream>
+
+
 
 
 //! Constants for the Private::MD5::transform routine
@@ -12,7 +14,7 @@
 #  define BYTE_ORDER 0
 #endif
 
-#define T_MASK ((md5_word_t)~0)
+#define T_MASK ((MD5TypeUInt32)~0)
 #define T1 /* 0xd76aa478 */ (T_MASK ^ 0x28955b87)
 #define T2 /* 0xe8c7b756 */ (T_MASK ^ 0x173848a9)
 #define T3    0x242070db
@@ -81,13 +83,17 @@
 
 
 
+
 namespace Yuni
 {
 namespace Hash
 {
+namespace Checksum
+{
+
 
     MD5::MD5()
-        :Hash::Abstract()
+        :Hash::Checksum::Abstract()
     {}
 
     MD5::~MD5()
@@ -97,31 +103,37 @@ namespace Hash
     namespace
     {
 
-        typedef unsigned char md5_byte_t; /* 8-bit byte */
-        typedef uint32 md5_word_t; /* 32-bit word */
+        typedef unsigned char MD5TypeByte; /* 8-bit byte */
+        typedef uint32 MD5TypeUInt32; /* 32-bit word */
 
-        /* Define the state of the MD5 Algorithm. */
-        typedef struct md5_state_s
+        /*!
+         * \brief Define the state of the MD5 Algorithm
+         */
+        struct MD5TypeState
         {
-            md5_word_t count[2];    /* message length in bits, lsw first */
-            md5_word_t abcd[4];     /* digest buffer */
-            md5_byte_t buf[64];     /* accumulate block */
-        } md5_state_t;
+            //! Message length in bits, lsw first
+            MD5TypeUInt32  count[2];
+            //! Digest buffer
+            MD5TypeUInt32  abcd[4];
+            //! Accumulate block
+            MD5TypeByte  buf[64];
+        };
 
 
-        void md5_process(md5_state_t* pms, const md5_byte_t* data /*[64]*/)
+
+        void md5_process(MD5TypeState* pms, const MD5TypeByte* data /*[64]*/)
         {
-            md5_word_t
+            MD5TypeUInt32
                 a = pms->abcd[0], b = pms->abcd[1],
                 c = pms->abcd[2], d = pms->abcd[3];
-            md5_word_t t;
+            MD5TypeUInt32 t;
             # if BYTE_ORDER > 0
             /* Define storage only for big-endian CPUs. */
-            md5_word_t X[16];
+            MD5TypeUInt32 X[16];
             # else
             /* Define storage for little-endian or both types of CPUs. */
-            md5_word_t xbuf[16];
-            const md5_word_t *X;
+            MD5TypeUInt32 xbuf[16];
+            const MD5TypeUInt32 *X;
             # endif
 
             {
@@ -133,7 +145,7 @@ namespace Hash
                  */
                 static const int w = 1;
 
-                if (*((const md5_byte_t *)&w)) /* dynamic little-endian */
+                if (*((const MD5TypeByte *)&w)) /* dynamic little-endian */
                 # endif
                 # if BYTE_ORDER <= 0		/* little-endian */
                 {
@@ -141,9 +153,9 @@ namespace Hash
                      * On little-endian machines, we can process properly aligned
                      * data without copying it.
                      */
-                    if (!((data - (const md5_byte_t *)0) & 3)) {
+                    if (!((data - (const MD5TypeByte *)0) & 3)) {
                         /* data are properly aligned */
-                        X = (const md5_word_t *)data;
+                        X = (const MD5TypeUInt32 *)data;
                     } else {
                         /* not aligned */
                         memcpy(xbuf, data, 64);
@@ -160,7 +172,7 @@ namespace Hash
                      * On big-endian machines, we must arrange the bytes in the
                      * right order.
                      */
-                    const md5_byte_t *xp = data;
+                    const MD5TypeByte *xp = data;
                     int i;
 
                 #  if BYTE_ORDER == 0
@@ -176,14 +188,14 @@ namespace Hash
 
             #define ROTATE_LEFT(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
 
-            /* Round 1. */
-            /* Let [abcd k s i] denote the operation
-               a = b + ((a + F(b,c,d) + X[k] + T[i]) <<< s). */
+            // Round 1
+            // Let [abcd k s i] denote the operation
+            // a = b + ((a + F(b,c,d) + X[k] + T[i]) <<< s)
             # define F(x, y, z) (((x) & (y)) | (~(x) & (z)))
             # define SET(a, b, c, d, k, s, Ti) \
                     t = a + F(b,c,d) + X[k] + Ti;\
                     a = ROTATE_LEFT(t, s) + b
-            /* Do the following 16 operations. */
+            // Do the following 16 operations.
             SET(a, b, c, d,  0,  7,  T1);
             SET(d, a, b, c,  1, 12,  T2);
             SET(c, d, a, b,  2, 17,  T3);
@@ -202,14 +214,14 @@ namespace Hash
             SET(b, c, d, a, 15, 22, T16);
             # undef SET
 
-            /* Round 2. */
-            /* Let [abcd k s i] denote the operation
-               a = b + ((a + G(b,c,d) + X[k] + T[i]) <<< s). */
+            // Round 2
+            // Let [abcd k s i] denote the operation
+            // a = b + ((a + G(b,c,d) + X[k] + T[i]) <<< s)
             # define G(x, y, z) (((x) & (z)) | ((y) & ~(z)))
             # define SET(a, b, c, d, k, s, Ti)\
                     t = a + G(b,c,d) + X[k] + Ti;\
                     a = ROTATE_LEFT(t, s) + b
-            /* Do the following 16 operations. */
+            // Do the following 16 operations
             SET(a, b, c, d,  1,  5, T17);
             SET(d, a, b, c,  6,  9, T18);
             SET(c, d, a, b, 11, 14, T19);
@@ -228,14 +240,14 @@ namespace Hash
             SET(b, c, d, a, 12, 20, T32);
             # undef SET
 
-            /* Round 3. */
-            /* Let [abcd k s t] denote the operation
-               a = b + ((a + H(b,c,d) + X[k] + T[i]) <<< s). */
+            // Round 3
+            // Let [abcd k s t] denote the operation
+            // a = b + ((a + H(b,c,d) + X[k] + T[i]) <<< s)
             # define H(x, y, z) ((x) ^ (y) ^ (z))
             # define SET(a, b, c, d, k, s, Ti)\
                     t = a + H(b,c,d) + X[k] + Ti;\
                     a = ROTATE_LEFT(t, s) + b
-            /* Do the following 16 operations. */
+            // Do the following 16 operations
             SET(a, b, c, d,  5,  4, T33);
             SET(d, a, b, c,  8, 11, T34);
             SET(c, d, a, b, 11, 16, T35);
@@ -254,14 +266,14 @@ namespace Hash
             SET(b, c, d, a,  2, 23, T48);
             # undef SET
 
-            /* Round 4. */
-            /* Let [abcd k s t] denote the operation
-               a = b + ((a + I(b,c,d) + X[k] + T[i]) <<< s). */
+            // Round 4
+            // Let [abcd k s t] denote the operation
+            // a = b + ((a + I(b,c,d) + X[k] + T[i]) <<< s)
             # define I(x, y, z) ((y) ^ ((x) | ~(z)))
             # define SET(a, b, c, d, k, s, Ti)\
                     t = a + I(b,c,d) + X[k] + Ti;\
                     a = ROTATE_LEFT(t, s) + b
-            /* Do the following 16 operations. */
+            // Do the following 16 operations
             SET(a, b, c, d,  0,  6, T49);
             SET(d, a, b, c,  7, 10, T50);
             SET(c, d, a, b, 14, 15, T51);
@@ -280,9 +292,9 @@ namespace Hash
             SET(b, c, d, a,  9, 21, T64);
             # undef SET
 
-            /* Then perform the following additions. (That is increment each
-               of the four registers by the value it had before this block
-               was started.) */
+            // Then perform the following additions. (That is increment each
+            // of the four registers by the value it had before this block
+            // was started.)
             pms->abcd[0] += a;
             pms->abcd[1] += b;
             pms->abcd[2] += c;
@@ -290,7 +302,7 @@ namespace Hash
         }
 
 
-        void md5_init(md5_state_t *pms)
+        void md5ImplInit(MD5TypeState *pms)
         {
             pms->count[0] = pms->count[1] = 0;
             pms->abcd[0] = 0x67452301;
@@ -300,23 +312,23 @@ namespace Hash
         }
 
 
-        void md5_append(md5_state_t *pms, const md5_byte_t *data, int nbytes)
+        void md5ImplAppend(MD5TypeState *pms, const MD5TypeByte *data, int nbytes)
         {
-            const md5_byte_t *p = data;
+            const MD5TypeByte *p = data;
             int left = nbytes;
             int offset = (pms->count[0] >> 3) & 63;
-            md5_word_t nbits = (md5_word_t)(nbytes << 3);
+            MD5TypeUInt32 nbits = (MD5TypeUInt32)(nbytes << 3);
 
             if (nbytes <= 0)
                 return;
 
-            /* Update the message length. */
+            // Update the message length
             pms->count[1] += nbytes >> 29;
             pms->count[0] += nbits;
             if (pms->count[0] < nbits)
                 pms->count[1]++;
 
-            /* Process an initial partial block. */
+            // Process an initial partial block
             if (offset)
             {
                 int copy = (offset + nbytes > 64 ? 64 - offset : nbytes);
@@ -329,40 +341,41 @@ namespace Hash
                 md5_process(pms, pms->buf);
             }
 
-            /* Process full blocks. */
+            // Process full blocks
             for (; left >= 64; p += 64, left -= 64)
                 md5_process(pms, p);
 
-            /* Process a final partial block. */
+            // Process a final partial block
             if (left)
                 memcpy(pms->buf, p, left);
         }
 
 
-        void md5_finish(md5_state_t *pms, md5_byte_t digest[16])
+
+        void md5ImplFinish(MD5TypeState *pms, MD5TypeByte digest[16])
         {
-            static const md5_byte_t pad[64] =
+            static const MD5TypeByte pad[64] =
             {
                 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
             };
-            md5_byte_t data[8];
+            MD5TypeByte data[8];
 
-            /* Save the length before padding. */
+            // Save the length before padding
             for (int i = 0; i < 8; ++i)
-                data[i] = (md5_byte_t)(pms->count[i >> 2] >> ((i & 3) << 3));
-            /* Pad to 56 bytes mod 64. */
-            md5_append(pms, pad, ((55 - (pms->count[0] >> 3)) & 63) + 1);
-            /* Append the length. */
-            md5_append(pms, data, 8);
+                data[i] = (MD5TypeByte)(pms->count[i >> 2] >> ((i & 3) << 3));
+            // Pad to 56 bytes mod 64
+            md5ImplAppend(pms, pad, ((55 - (pms->count[0] >> 3)) & 63) + 1);
+            // Append the length
+            md5ImplAppend(pms, data, 8);
             for (int i = 0; i < 16; ++i)
-                digest[i] = (md5_byte_t)(pms->abcd[i >> 2] >> ((i & 3) << 3));
+                digest[i] = (MD5TypeByte)(pms->abcd[i >> 2] >> ((i & 3) << 3));
         }
 
 
-        void md5DigestToString(String& s, md5_byte_t digest[16])
+        void md5DigestToString(String& s, MD5TypeByte digest[16])
         {
             char hex[33];
             for (int i = 0; i < 16; ++i)
@@ -372,6 +385,9 @@ namespace Hash
         }
 
     } // anonymous namespace
+
+
+
 
 
 
@@ -386,15 +402,16 @@ namespace Hash
         if (0 == size)
             return pValue;
 
-        md5_state_t state;
-        md5_byte_t digest[16];
+        MD5TypeState state;
+        MD5TypeByte digest[16];
 
-        md5_init(&state);
-        md5_append(&state, (const md5_byte_t*)rawdata, size);
-        md5_finish(&state, digest);
+        md5ImplInit(&state);
+        md5ImplAppend(&state, (const MD5TypeByte*)rawdata, size);
+        md5ImplFinish(&state, digest);
         md5DigestToString(pValue, digest);
         return pValue;
     }
+
 
     const String& MD5::fromFile(const String& filename)
     {
@@ -402,10 +419,10 @@ namespace Hash
         std::ifstream stream(filename.c_str(), std::ifstream::binary | std::fstream::in);
         if (stream.is_open())
         {
-            md5_state_t state;
-            md5_byte_t digest[16];
+            MD5TypeState state;
+            MD5TypeByte digest[16];
 
-            md5_init(&state);
+            md5ImplInit(&state);
 
             unsigned char buffer[1024];
             int len(0);
@@ -414,14 +431,17 @@ namespace Hash
             {
                 stream.read((char*)buffer, 1024); // note that return value of read is unusable.
                 len = stream.gcount();
-                md5_append(&state, (const md5_byte_t*)buffer, len);
+                md5ImplAppend(&state, (const MD5TypeByte*)buffer, len);
             }
-            md5_finish(&state, digest);
+            md5ImplFinish(&state, digest);
             md5DigestToString(pValue, digest);
         }
         return pValue;
     }
 
+
+
+} // namespace Checksum
 } // namespace Hash
 } // namespace Yuni
 

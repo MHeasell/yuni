@@ -3,7 +3,8 @@
 
 # include <yuni/yuni.h>
 # include <yuni/string.h>
-# include <ext/hash_fun.h>
+# include <yuni/hash/std.hashmap.h>
+
 
 
 namespace Yuni
@@ -35,7 +36,12 @@ namespace Hash
 } // namespace Yuni
 
 
+
+# ifdef YUNI_OS_GNU_HASH_MAP
 namespace __gnu_cxx
+# else
+namespace stdext
+# endif
 {
 
     template<>
@@ -58,6 +64,7 @@ namespace __gnu_cxx
         }
     };
 
-} // namespace __gnu_cxx
+} // namespace YuniSTLExt
+
 
 #endif // __YUNI_HASH_KEY_H__

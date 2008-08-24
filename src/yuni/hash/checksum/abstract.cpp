@@ -1,10 +1,12 @@
 
-#include <yuni/hash/abstract.h>
+#include <yuni/hash/checksum/abstract.h>
 
 
 namespace Yuni
 {
 namespace Hash
+{
+namespace Checksum
 {
 
     Abstract::Abstract()
@@ -14,6 +16,8 @@ namespace Hash
     Abstract::~Abstract()
     {}
 
+
+} // namespace Checksum
 } // namespace Hash
 } // namespace Yuni
 

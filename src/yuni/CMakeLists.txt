@@ -18,7 +18,7 @@ Include(CheckIncludeFile)
 #
 String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
 IF(${VA} EQUAL 0)
-    Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check")
+    Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
 ENDIF(${VA} EQUAL 0)
 Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 
@@ -53,11 +53,13 @@ set(SRC ${SRC}  misc/string.h misc/string.cpp
                 misc/paths.h misc/paths.cpp
                 misc/files.h misc/files.cpp
                 misc/version.h misc/version.cpp
-                misc/static.h)
+                misc/static.h
+                misc/math.h)
 
 # Hash
-set(SRC ${SRC}  hash/abstract.h hash/abstract.cpp
-                hash/md5.h hash/md5.cpp
+set(SRC ${SRC}  hash/checksum/abstract.h hash/checksum/abstract.cpp
+                hash/checksum/md5.h hash/checksum/md5.cpp
+                hash/std.hashmap.h
                 hash/key.h
                 hash/table.h hash/table.hxx
                 hash/dictionary.h)
@@ -78,8 +80,7 @@ set(SRC ${SRC}  application/abstract.h application/abstract.cpp
                 application/console.h application/console.cpp)
 
 # Gfx
-set(SRC ${SRC}  gfx/point2D.h gfx/point2D.cpp
-                gfx/point3D.h gfx/point3D.cpp)
+set(SRC ${SRC}  gfx/point2D.h gfx/point3D.h)
 
 
 add_library(yuni STATIC ${SRC})
