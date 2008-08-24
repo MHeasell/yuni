@@ -198,7 +198,8 @@ namespace Yuni
 
         /*!
         ** \brief Formatted string 
-        ** \param format The format of the new string
+        **
+        ** \param f The format of the new string
         ** \return A new string
         */ 
         static String Format(const String& f, ...);
@@ -411,17 +412,21 @@ namespace Yuni
 
         /*!
         ** \brief Divide a string into several parts
-        ** \param[out] All found parts
-        ** \param sepearators Sequence of chars considered as a separator
+        **
+        ** \param[out] out All found parts
+        ** \param separators Sequence of chars considered as a separator
         ** \param emptyBefore True to clear the vector before fulfill it
+        **
         ** \warning Do not take care of string representation (with `'` or `"`)
         */
         void split(String::Vector& out, const String& separators = YUNI_WSTR_SEPARATORS, const bool emptyBefore = true) const;
         /*!
         ** \brief Divide a string into several parts
-        ** \param[out] All found parts
-        ** \param sepearators Sequence of chars considered as a separator
+        **
+        ** \param[out] out All found parts
+        ** \param separators Sequence of chars considered as a separator
         ** \param emptyBefore True to clear the list before fulfill it
+        **
         ** \warning Do not take care of string representation (with `'` or `"`)
         */
         void split(String::List& out, const String& separators = YUNI_WSTR_SEPARATORS, const bool emptyBefore = true) const;
@@ -434,6 +439,7 @@ namespace Yuni
         **
         ** \param[out] key The key that has been found
         ** \param[out] value The associated value
+        ** \param chcase Options for the extraction
         **
         ** \see String::ToKeyValue()
         */
@@ -469,7 +475,8 @@ namespace Yuni
 
         /*!
         ** \brief Reset the current value with a formatted string 
-        ** \param format The format of the new string
+        **
+        ** \param f The format of the new string
         ** \return Always *this
         */
         String& format(const String& f, ...);
@@ -477,7 +484,7 @@ namespace Yuni
 
         /*!
         ** \brief Append a formatted string 
-        ** \param format The format of the new string
+        ** \param f The format of the new string
         ** \return Always *this
         */
         String& appendFormat(const String& f, ...);
