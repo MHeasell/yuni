@@ -37,31 +37,45 @@ namespace Gfx
         //! Reset the point to origin
         Point2D<T>& reset() {x = y = 0; return *this;}
 
-        //! Move the point to new coordinates
+
+        /*!
+        ** \brief Move the point to new coordinates
+        ** 
+        ** \param x1 The new X coordinate
+        ** \param y1 The new Y coordinate
+        */
         void move(const T x1, const T y1) { x = x1; y = y1; }
+        /*!
+        ** \brief Move the point to new coordinates
+        ** \param p The new coordinates
+        */
         void move(const Point2D& p) { x = p.x; y = p.y; }
 
 
         /*!
         ** \brief Translate the point with the same value for all coordinates
+        **
         ** \param k The value to add to all coordinates
         */
         void translate(const T k) { x += k; y += k; }
         /*!
         ** \brief Translate the point with relative coordinates
+        **
         ** \param x1 The value to add to the x coordinate
         ** \param y1 The value to add to the y coordinate
         */
         void translate(const T x1, T y1) { x += x1; y += y1; }
         /*!
         ** \brief Translate the point with relative coordinates from another Point
-        ** \param p 
+        ** \param p The values to add to the coordinates 
         */
         void translate(const Point2D& p) { x += p.x; y += p.y; }
 
         /*!
         ** \brief Calculate the mean between two points
+        **
         ** The calling object is modified to store the value
+        **
         ** \param p Point to compute the mean with
         */
         void mean(const Point2D& p)
@@ -71,9 +85,12 @@ namespace Gfx
         }
         /*!
         ** \brief Calculate the mean between two points
+        **
         ** The calling object is modified to store the value
+        **
         ** \param p1 Point to compute the mean with
         ** \param p2 Second point to compute the mean with
+        ** \return Always *this
         */
         Point2D& mean(const Point2D& p1, const Point2D& p2)
         {
@@ -83,8 +100,10 @@ namespace Gfx
         }
         /*!
         ** \brief Calculate the mean between two points
+        **
         ** \param p1 First point
         ** \param p2 Second point
+        ** \return A new instance of Point3D
         */
         static Point2D& Mean(const Point2D& p1, const Point2D& p2)
         {
@@ -92,11 +111,13 @@ namespace Gfx
         }
 
 
+
         //! \name Operators
         //{
 
         /*!
         ** \brief Reset all coordinates
+        **
         ** \param x1 The new value for the x coordinate
         ** \param y1 The new value for the y coordinate
         ** \see move()
@@ -112,30 +133,47 @@ namespace Gfx
 
         /*!
         ** \brief Translate the point with the same value for all coordinates
+        **
         ** \param k The value to add to all coordinates
+        ** \return Always *this
+        **
         ** \see translate()
         */
         Point2D& operator += (const T k) { x += k; y += k; return (*this); }
         /*!
         ** \brief Translate the point with relative coordinates
+        **
         ** \param p Point to use as reference x and y for the translation
+        ** \return Always *this
+        **
         ** \see translate()
         */
         Point2D& operator += (const Point2D& p) { x += p.x; y += p.y; return (*this); }
 
         /*!
-        ** \brief Comparison operator
-        ** \param rhs
+        ** \brief Comparison operator (equal with)
+        **
+        ** \param rhs The other point to compare with
+        ** \return True if the two points are equal
         */
         bool operator == (const Point2D& rhs) const
         { return rhs.x == x && rhs.y == y; }
 
+        /*!
+        ** \brief Comparison operator (non equal with)
+        **
+        ** \param rhs The other point to compare with
+        ** \return True if the two points are not equal
+        */
         bool operator != (const Point2D& rhs) const
         { return !(*this == rhs); }
 
         /*!
         ** \brief Assign new values for all coordinates from another point
+        **
         ** \param p The new coordinates
+        ** \return Always *this
+        **
         ** \see move()
         */
         Point2D& operator = (const Point2D& p) { x = p.x; y = p.x; return (*this); }
