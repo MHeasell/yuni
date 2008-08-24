@@ -36,7 +36,7 @@ namespace Yuni
 {
 
     /*! \class String
-    ** \brief A String implementation for `Worlds`
+    ** \brief A String implementation for the Yuni framework 
     **
     ** \code
     **      Yuni::String a("abcd");
