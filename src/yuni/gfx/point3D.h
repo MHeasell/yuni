@@ -24,9 +24,9 @@ namespace Gfx
         Point3D() : x(0), y(0), z(0) {}
         /*!
         ** \brief Constructor
-        ** \param x The default X coordinate
-        ** \param y The default Y coordinate
-        ** \param z The default Z coordinate
+        ** \param x1 The default X coordinate
+        ** \param y1 The default Y coordinate
+        ** \param z1 The default Z coordinate
         */
         Point3D(const T x1, const T y1, const T z1): x(x1), y(y1), z(z1) {}
         //! Constructor by copy
@@ -36,8 +36,18 @@ namespace Gfx
         //}
 
 
-        //! Move the point to new coordinates
+        /*!
+        ** \brief Move the point to new coordinates
+        ** 
+        ** \param x1 The new X coordinate
+        ** \param y1 The new Y coordinate
+        ** \param z1 The new Z coordinate
+        */
         void move(const T x1, const T y1, const T z1) { x = x1; y = y1; z = z1; }
+        /*!
+        ** \brief Move the point to new coordinates
+        ** \param p The new coordinates
+        */
         void move(const Point3D& p) { x = p.x; y = p.y; z = p.z; }
 
 
@@ -48,14 +58,14 @@ namespace Gfx
         void translate(const T k) { x += k; y += k; z += k; }
         /*!
         ** \brief Translate the point with relative coordinates
-        ** \param x The value to add to the X coordinate
-        ** \param y The value to add to the Y coordinate
-        ** \param z The value to add to the Z coordinate
+        ** \param x1 The value to add to the X coordinate
+        ** \param y1 The value to add to the Y coordinate
+        ** \param z1 The value to add to the Z coordinate
         */
         void translate(float x1, float y1, float z1) { x += x1; y += y1; z += z1; }
         /*!
         ** \brief Translate the point with relative coordinates from another Point
-        ** \param p 
+        ** \param p The values to add to the coordinates 
         */
         void translate(const Point3D& p) { x += p.x; y += p.y; z += p.z; }
 
@@ -73,9 +83,12 @@ namespace Gfx
         }
         /*!
         ** \brief Calculate the mean between two points
+        **
         ** The calling object is modified to store the value
+        **
         ** \param p1 Point to compute the mean with
         ** \param p2 Second point to compute the mean with
+        ** \return Always *this
         */
         Point3D& mean(const Point3D& p1, const Point3D& p2)
         {
@@ -86,8 +99,10 @@ namespace Gfx
         }
         /*!
         ** \brief Calculate the mean between two points
+        **
         ** \param p1 First point
         ** \param p2 Second point
+        ** \return A new instance of Point3D
         */
         static Point3D& Mean(const Point3D& p1, const Point3D& p2)
         {
@@ -101,15 +116,18 @@ namespace Gfx
 
         /*!
         ** \brief Reset all coordinates
-        ** \param x The new value for the X coordinate
-        ** \param y The new value for the Y coordinate
-        ** \param z The new value for the Z coordinate
+        **
+        ** \param x1 The new value for the X coordinate
+        ** \param y1 The new value for the Y coordinate
+        ** \param z1 The new value for the Z coordinate
         ** \see move()
         */
         void operator () (const T x1, const T y1, const T z1) { x = x1; y = y1; z = z1; }
         /*!
         ** \brief Copy all coordinates from another point
+        **
         ** \param p The coordinates to copy
+        **
         ** \see move()
         */
         void operator () (const Point3D& p) { x = p.x; y = p.y; z = p.z; }
@@ -117,32 +135,47 @@ namespace Gfx
 
         /*!
         ** \brief Translate the point with the same value for all coordinates
+        **
         ** \param k The value to add to all coordinates
+        ** \return Always *this
+        **
         ** \see translate()
         */
         Point3D& operator += (const T k) { x += k; y += k; z += k; return (*this); }
         /*!
         ** \brief Translate the point with relative coordinates
-        ** \param x The value to add to the X coordinate
-        ** \param y The value to add to the Y coordinate
-        ** \param z The value to add to the Z coordinate
+        **
+        ** \param p The values to add to coordinates
+        ** \return Always *this
+        **
         ** \see translate()
         */
         Point3D& operator += (const Point3D& p) { x += p.x; y += p.y; z += p.z; return (*this); }
 
         /*!
-        ** \brief Comparison operator
-        ** \param rhs
+        ** \brief Comparison operator (equal with)
+        **
+        ** \param rhs The other point to compare with
+        ** \return True if the two points are equal
         */
         bool operator == (const Point3D& rhs) const
         { return rhs.x == x && rhs.y == y && rhs.z == z; }
 
+        /*!
+        ** \brief Comparison operator (non equal with)
+        **
+        ** \param rhs The other point to compare with
+        ** \return True if the two points are not equal
+        */
         bool operator != (const Point3D& rhs) const
         { return !(*this == rhs); }
 
         /*!
         ** \brief Assign new values for all coordinates from another point
+        **
         ** \param p The new coordinates
+        ** \return Always *this
+        **
         ** \see move()
         */
         Point3D& operator = (const Point3D& p) { x = p.x; y = p.y; z = p.z; return (*this); }
@@ -152,6 +185,9 @@ namespace Gfx
 
         /*!
         ** \brief Print the point
+        **
+        ** \param out An output stream
+        ** \return The output stream `out`
         */
         std::ostream& print(std::ostream& out) const
         {
