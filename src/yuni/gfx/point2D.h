@@ -111,6 +111,26 @@ namespace Gfx
         }
 
 
+        /*!
+        ** \brief Get if the point is close to another point
+        **
+        ** \param rhs The other point
+        ** \param delta Delta value
+        */
+        bool closeTo(const Point2D<T>& rhs, const T delta) const
+        { return Math::Abs(x-rhs.x) < delta && Math::Abs(y-rhs.y) < delta; }
+
+        /*!
+        ** \brief Get if the point is close to another point
+        **
+        ** \param x1 The X coordinate of the other point
+        ** \param y1 The Y coordinate of the other point
+        ** \param delta Delta value
+        */
+        bool closeTo(const T x1, const T y1, const T delta) const
+        { return Math::Abs(x-x1) < delta && Math::Abs(y-y1) < delta; }
+
+
 
         //! \name Operators
         //{
