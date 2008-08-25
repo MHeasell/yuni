@@ -53,7 +53,7 @@ namespace Math
     /*!
     ** \brief Ensure an expression is contained in a range of values
     **
-    ** \param[in,out] expr The expression thaht must be checked and modified if needed
+    ** \param[in,out] expr The expression that must be checked and modified if needed
     ** \param min The lower bound limit allowed for the expression `v`
     ** \param max The upper bound limit allowed for the expression `v`
     ** \return Always `expr`
