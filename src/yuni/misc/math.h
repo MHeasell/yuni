@@ -34,18 +34,43 @@ namespace Math
     ** \param b The second expression
     ** \return The expression considered as the smaller
     */
+    template<typename T>
     T& Min(T& a, T& b) {return a < b ? a : b;}
 
 
     /*!
     ** \brief Ensure that an expression was contained in a range of values
     **
-    ** \param v An expression
+    ** \param expr An expression
     ** \param min The lower bound limit allowed for the expression `v`
-    ** \param min The upper bound limit allowed for the expression `v`
+    ** \param max The upper bound limit allowed for the expression `v`
     ** \return The expression itself, or a bound limit
     */
-    T& MinMax(T& v, T& min, T& max) {return ((v < min) ? min : ((v > max) ? max : v));}
+    template<typename T>
+    T& MinMax(T& expr, T& min, T& max) {return ((expr < min) ? min : ((expr > max) ? max : expr));}
+
+
+    /*!
+    ** \brief Ensure an expression is contained in a range of values
+    **
+    ** \param[in,out] expr The expression thaht must be checked and modified if needed
+    ** \param min The lower bound limit allowed for the expression `v`
+    ** \param max The upper bound limit allowed for the expression `v`
+    ** \return Always `expr`
+    */
+    template<typename T>
+    T& EnsureInRange(T& expr, const T& min, const T& max)
+    {
+        if (expr < min)
+            expr = min;
+        else
+        {
+            if (expr > max)
+                expr = max;
+        }
+        return expr;
+    }
+
 
 
 } // namespace Math
