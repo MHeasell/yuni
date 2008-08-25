@@ -36,7 +36,7 @@ Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 #
 # The target directory for static libs
 #
-Set(TARGET_LIBS "${PROJECT_SOURCE_DIR}/../../bin/libs/${CMAKE_SYSTEM_NAME}")
+Set(TARGET_LIBS "${PROJECT_SOURCE_DIR}/../../bin/static/")
 Set(LIBRARY_OUTPUT_PATH "${TARGET_LIBS}")
 Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 
