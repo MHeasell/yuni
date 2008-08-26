@@ -47,7 +47,7 @@ namespace Math
     ** \return The expression itself, or a bound limit
     */
     template<typename T>
-    T& MinMax(const T& expr, const T& min, const T& max) {return ((expr < min) ? min : ((expr > max) ? max : expr));}
+    const T& MinMax(const T& expr, const T& min, const T& max) {return ((expr < min) ? min : ((expr > max) ? max : expr));}
 
 
     /*!
