@@ -25,7 +25,7 @@ namespace Math
     ** \return The expression considered as the grater
     */
     template<typename T>
-    T& Max(T& a, T& b) {return a < b ? b : a;}
+    const T& Max(const T& a, const T& b) {return a < b ? b : a;}
 
     /*!
     ** \brief Get the expression considered as the smaller
@@ -35,7 +35,7 @@ namespace Math
     ** \return The expression considered as the smaller
     */
     template<typename T>
-    T& Min(T& a, T& b) {return a < b ? a : b;}
+    const T& Min(const T& a, const T& b) {return a < b ? a : b;}
 
 
     /*!
