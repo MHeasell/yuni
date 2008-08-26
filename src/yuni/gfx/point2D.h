@@ -1,5 +1,5 @@
-#ifndef __YUNI_POINT2D_H__
-# define __YUNI_POINT2D_H__
+#ifndef __YUNI_GFX_POINT2D_H__
+# define __YUNI_GFX_POINT2D_H__
 
 # include <iostream>
 # include <yuni/misc/math.h>
@@ -241,4 +241,4 @@ inline const Yuni::Gfx::Point2D<T> operator + (const Yuni::Gfx::Point2D<T>& lhs,
 //@}
 
 
-#endif // __YUNI_POINT2D_H__
+#endif // __YUNI_GFX_POINT2D_H__
