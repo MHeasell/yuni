@@ -20,10 +20,20 @@ namespace Gfx
     class Point3D
     {
     public:
-        //! \name Constructors & Destructor
-        //{
+        //! \name Constructors
+        //@{
+
         //! Default constructor
         Point3D() : x(0), y(0), z(0) {}
+
+        /*!
+        ** \brief Constructor
+        ** \param x1 The default X coordinate
+        ** \param y1 The default Y coordinate
+        */
+        template<typename U, typename V>
+        Point3D(const U x1, const V y1): x((T)x1), y((T)y1), z(T()) {}
+
         /*!
         ** \brief Constructor
         ** \param x1 The default X coordinate
@@ -32,13 +42,15 @@ namespace Gfx
         */
         template<typename U, typename V, typename W>
         Point3D(const U x1, const V y1, const W z1): x((T)x1), y((T)y1), z((T)z1) {}
+        
         //! Constructor by copy
         template<typename U>
         Point3D(const Point3D<U>& p) : x((T)p.x), y((T)p.y), z((T)p.z) {}
-        //! Destructor
-        virtual ~Point3D() {}
-        //}
+        
+        //@} // Constructors
 
+        //! Reset the point to origin
+        Point3D<T>& reset() {x = y = z = T(); return *this;}
 
         /*!
         ** \brief Move the point to new coordinates
