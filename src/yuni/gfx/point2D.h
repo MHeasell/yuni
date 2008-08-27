@@ -51,7 +51,7 @@ namespace Gfx
         ** \brief Move the point to new coordinates
         ** \param p The new coordinates
         */
-        void move(const Point2D& p) { x = p.x; y = p.y; }
+        void move(const Point2D<T>& p) { x = p.x; y = p.y; }
 
 
         /*!
@@ -71,7 +71,7 @@ namespace Gfx
         ** \brief Translate the point with relative coordinates from another Point
         ** \param p The values to add to the coordinates 
         */
-        void translate(const Point2D& p) { x += p.x; y += p.y; }
+        void translate(const Point2D<T>& p) { x += p.x; y += p.y; }
 
         /*!
         ** \brief Calculate the mean between two points
@@ -80,7 +80,7 @@ namespace Gfx
         **
         ** \param p Point to compute the mean with
         */
-        void mean(const Point2D& p)
+        void mean(const Point2D<T>& p)
         {
           x = (x + p.x) / 2.0f;
           y = (y + p.y) / 2.0f;
@@ -94,7 +94,7 @@ namespace Gfx
         ** \param p2 Second point to compute the mean with
         ** \return Always *this
         */
-        Point2D& mean(const Point2D& p1, const Point2D& p2)
+        Point2D<T>& mean(const Point2D<T>& p1, const Point2D<T>& p2)
         {
           x = (p1.x + p2.x) / 2.0f;
           y = (p1.y + p2.y) / 2.0f;
@@ -107,9 +107,9 @@ namespace Gfx
         ** \param p2 Second point
         ** \return A new instance of Point3D
         */
-        static Point2D& Mean(const Point2D& p1, const Point2D& p2)
+        static Point2D<T>& Mean(const Point2D<T>& p1, const Point2D<T>& p2)
         {
-          return Point2D().mean(p1, p2);
+          return Point2D<T>().mean(p1, p2);
         }
 
 
@@ -150,7 +150,7 @@ namespace Gfx
         ** \param p The coordinates to copy
         ** \see move()
         */
-        void operator () (const Point2D& p) { x = p.x; y = p.y; }
+        void operator () (const Point2D<T>& p) { x = p.x; y = p.y; }
         
 
         /*!
@@ -161,7 +161,7 @@ namespace Gfx
         **
         ** \see translate()
         */
-        Point2D& operator += (const T k) { x += k; y += k; return (*this); }
+        Point2D<T>& operator += (const T k) { x += k; y += k; return (*this); }
         /*!
         ** \brief Translate the point with relative coordinates
         **
@@ -170,7 +170,7 @@ namespace Gfx
         **
         ** \see translate()
         */
-        Point2D& operator += (const Point2D& p) { x += p.x; y += p.y; return (*this); }
+        Point2D<T>& operator += (const Point2D<T>& p) { x += p.x; y += p.y; return (*this); }
 
         /*!
         ** \brief Comparison operator (equal with)
@@ -178,7 +178,7 @@ namespace Gfx
         ** \param rhs The other point to compare with
         ** \return True if the two points are equal
         */
-        bool operator == (const Point2D& rhs) const
+        bool operator == (const Point2D<T>& rhs) const
         { return rhs.x == x && rhs.y == y; }
 
         /*!
@@ -187,7 +187,7 @@ namespace Gfx
         ** \param rhs The other point to compare with
         ** \return True if the two points are not equal
         */
-        bool operator != (const Point2D& rhs) const
+        bool operator != (const Point2D<T>& rhs) const
         { return !(*this == rhs); }
 
         /*!
@@ -198,7 +198,7 @@ namespace Gfx
         **
         ** \see move()
         */
-        Point2D& operator = (const Point2D& p) { x = p.x; y = p.x; return (*this); }
+        Point2D<T>& operator = (const Point2D<T>& p) { x = p.x; y = p.x; return (*this); }
 
         //} Operators
 
