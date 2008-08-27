@@ -29,15 +29,17 @@ namespace Gfx
         ** \param x1 The default x coordinate
         ** \param y1 The default y coordinate
         */
-        Point2D(const T x1, const T y1): x(x1), y(y1) {}
+        template<typename U, typename V>
+        Point2D(const U x1, const V y1): x((T)x1), y((T)y1) {}
         //! Constructor by copy
-        Point2D(const Point2D<T>& p) : x(p.x), y(p.y) {}
+        template<typename U>
+        Point2D(const Point2D<U>& p) : x((T)p.x), y((T)p.y) {}
         //! Destructor
         virtual ~Point2D() {}
         //}
 
         //! Reset the point to origin
-        Point2D<T>& reset() {x = y = 0; return *this;}
+        Point2D<T>& reset() {x = y = T(); return *this;}
 
 
         /*!
@@ -46,12 +48,14 @@ namespace Gfx
         ** \param x1 The new X coordinate
         ** \param y1 The new Y coordinate
         */
-        void move(const T x1, const T y1) { x = x1; y = y1; }
+        template<typename U, typename V>
+        void move(const U x1, const V y1) { x = (T)x1; y = (T)y1; }
         /*!
         ** \brief Move the point to new coordinates
         ** \param p The new coordinates
         */
-        void move(const Point2D<T>& p) { x = p.x; y = p.y; }
+        template<typename U>
+        void move(const Point2D<U>& p) { x = (T)p.x; y = (T)p.y; }
 
 
         /*!
@@ -59,19 +63,22 @@ namespace Gfx
         **
         ** \param k The value to add to all coordinates
         */
-        void translate(const T k) { x += k; y += k; }
+        template<typename U>
+        void translate(const U k) { x += (T)k; y += (T)k; }
         /*!
         ** \brief Translate the point with relative coordinates
         **
         ** \param x1 The value to add to the x coordinate
         ** \param y1 The value to add to the y coordinate
         */
-        void translate(const T x1, T y1) { x += x1; y += y1; }
+        template<typename U, typename V>
+        void translate(const U x1, const V y1) { x += (T)x1; y += (T)y1; }
         /*!
         ** \brief Translate the point with relative coordinates from another Point
         ** \param p The values to add to the coordinates 
         */
-        void translate(const Point2D<T>& p) { x += p.x; y += p.y; }
+        template<typename U>
+        void translate(const Point2D<U>& p) { x += (T)p.x; y += (T)p.y; }
 
         /*!
         ** \brief Calculate the mean between two points
@@ -80,7 +87,7 @@ namespace Gfx
         **
         ** \param p Point to compute the mean with
         */
-        void mean(const Point2D<T>& p)
+        template<typename U> void mean(const Point2D<U>& p)
         {
           x = (x + p.x) / 2.0f;
           y = (y + p.y) / 2.0f;
@@ -94,7 +101,8 @@ namespace Gfx
         ** \param p2 Second point to compute the mean with
         ** \return Always *this
         */
-        Point2D<T>& mean(const Point2D<T>& p1, const Point2D<T>& p2)
+        template<typename U, typename V>
+        Point2D<T>& mean(const Point2D<U>& p1, const Point2D<V>& p2)
         {
           x = (p1.x + p2.x) / 2.0f;
           y = (p1.y + p2.y) / 2.0f;
@@ -119,8 +127,9 @@ namespace Gfx
         ** \param rhs The other point
         ** \param delta Delta value
         */
-        bool closeTo(const Point2D<T>& rhs, const T delta) const
-        { return Math::Abs(x-rhs.x) < delta && Math::Abs(y-rhs.y) < delta; }
+        template<typename U, typename V>
+        bool closeTo(const Point2D<U>& rhs, const V delta) const
+        { return Math::Abs((U)x-rhs.x) < delta && Math::Abs((U)y-rhs.y) < delta; }
 
         /*!
         ** \brief Get if the point is close to another point
@@ -129,8 +138,9 @@ namespace Gfx
         ** \param y1 The Y coordinate of the other point
         ** \param delta Delta value
         */
-        bool closeTo(const T x1, const T y1, const T delta) const
-        { return Math::Abs(x-x1) < delta && Math::Abs(y-y1) < delta; }
+        template<typename U, typename V>
+        bool closeTo(const U x1, const U y1, const V delta) const
+        { return Math::Abs((U)x-x1) < delta && Math::Abs((U)y-y1) < delta; }
 
 
 
@@ -144,13 +154,13 @@ namespace Gfx
         ** \param y1 The new value for the y coordinate
         ** \see move()
         */
-        void operator () (const T x1, const T y1) { x = x1; x = y1; }
+        template<typename U> void operator () (const U x1, const U y1) { x = (T)x1; x = (T)y1; }
         /*!
         ** \brief Copy all coordinates from another point
         ** \param p The coordinates to copy
         ** \see move()
         */
-        void operator () (const Point2D<T>& p) { x = p.x; y = p.y; }
+        template<typename U> void operator () (const Point2D<U>& p) { x = (T)p.x; y = (T)p.y; }
         
 
         /*!
@@ -161,7 +171,8 @@ namespace Gfx
         **
         ** \see translate()
         */
-        Point2D<T>& operator += (const T k) { x += k; y += k; return (*this); }
+        template<typename U>
+        Point2D<T>& operator += (const U k) { x += (T)k; y += (T)k; return (*this); }
         /*!
         ** \brief Translate the point with relative coordinates
         **
@@ -170,7 +181,8 @@ namespace Gfx
         **
         ** \see translate()
         */
-        Point2D<T>& operator += (const Point2D<T>& p) { x += p.x; y += p.y; return (*this); }
+        template<typename U>
+        Point2D<T>& operator += (const Point2D<U>& p) { x += (T)p.x; y += (T)p.y; return (*this); }
 
         /*!
         ** \brief Comparison operator (equal with)
@@ -178,8 +190,8 @@ namespace Gfx
         ** \param rhs The other point to compare with
         ** \return True if the two points are equal
         */
-        bool operator == (const Point2D<T>& rhs) const
-        { return rhs.x == x && rhs.y == y; }
+        template<typename U> bool operator == (const Point2D<U>& rhs) const
+        { return (T)rhs.x == x && (T)rhs.y == y; }
 
         /*!
         ** \brief Comparison operator (non equal with)
@@ -187,7 +199,7 @@ namespace Gfx
         ** \param rhs The other point to compare with
         ** \return True if the two points are not equal
         */
-        bool operator != (const Point2D<T>& rhs) const
+        template<typename U> bool operator != (const Point2D<U>& rhs) const
         { return !(*this == rhs); }
 
         /*!
@@ -198,7 +210,8 @@ namespace Gfx
         **
         ** \see move()
         */
-        Point2D<T>& operator = (const Point2D<T>& p) { x = p.x; y = p.y; return (*this); }
+        template<typename U>
+        Point2D<T>& operator = (const Point2D<U>& p) { x = (T)p.x; y = (T)p.y; return (*this); }
 
         //} Operators
 
