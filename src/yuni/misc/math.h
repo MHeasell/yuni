@@ -13,9 +13,9 @@ namespace Math
     /*!
     ** \brief Get the integer absolute value
     */
-    int Abs(const int a) {return abs(a);}
-    float Abs(const float a) {return fabsf(a);}
-    double Abs(const double a) {return fabs(a);}
+    inline int Abs(const int a)  {return abs(a);}
+    inline float Abs(const float a)  {return fabsf(a);}
+    inline double Abs(const double a)  {return fabs(a);}
 
     /*!
     ** \brief Get the expression considered as the greater
@@ -25,7 +25,7 @@ namespace Math
     ** \return The expression considered as the grater
     */
     template<typename T>
-    const T& Max(const T& a, const T& b) {return a < b ? b : a;}
+    inline const T& Max(const T& a, const T& b)  {return a < b ? b : a;}
 
     /*!
     ** \brief Get the expression considered as the smaller
@@ -35,7 +35,7 @@ namespace Math
     ** \return The expression considered as the smaller
     */
     template<typename T>
-    const T& Min(const T& a, const T& b) {return a < b ? a : b;}
+    inline const T& Min(const T& a, const T& b)  {return a < b ? a : b;}
 
 
     /*!
@@ -47,7 +47,8 @@ namespace Math
     ** \return The expression itself, or a bound limit
     */
     template<typename T>
-    const T& MinMax(const T& expr, const T& min, const T& max) {return ((expr < min) ? min : ((expr > max) ? max : expr));}
+    inline const T& MinMax(const T& expr, const T& min, const T& max)
+    {return ((expr < min) ? min : ((expr > max) ? max : expr));}
 
 
     /*!
@@ -59,7 +60,7 @@ namespace Math
     ** \return Always `expr`
     */
     template<typename T>
-    T& EnsureInRange(T& expr, const T& min, const T& max)
+    inline T& EnsureInRange(T& expr, const T& min, const T& max)
     {
         if (expr < min)
             expr = min;
@@ -71,6 +72,15 @@ namespace Math
         return expr;
     }
 
+
+    /*!
+    ** \brief Swap the value of two variables
+    **
+    ** \param a The first value
+    ** \param b the second value
+    */
+    template<typename T>
+    inline void Swap(T& a, T&b) { T tmp(b); b = a; a = tmp; }
 
 
 } // namespace Math
