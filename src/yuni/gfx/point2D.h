@@ -198,7 +198,7 @@ namespace Gfx
         **
         ** \see move()
         */
-        Point2D<T>& operator = (const Point2D<T>& p) { x = p.x; y = p.x; return (*this); }
+        Point2D<T>& operator = (const Point2D<T>& p) { x = p.x; y = p.y; return (*this); }
 
         //} Operators
 
