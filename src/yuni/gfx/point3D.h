@@ -30,9 +30,11 @@ namespace Gfx
         ** \param y1 The default Y coordinate
         ** \param z1 The default Z coordinate
         */
-        Point3D(const T x1, const T y1, const T z1): x(x1), y(y1), z(z1) {}
+        template<typename U, typename V, typename W>
+        Point3D(const U x1, const V y1, const W z1): x((T)x1), y((T)y1), z((T)z1) {}
         //! Constructor by copy
-        Point3D(const Point3D& p) : x(p.x), y(p.y), z(p.z) {}
+        template<typename U>
+        Point3D(const Point3D<U>& p) : x((T)p.x), y((T)p.y), z((T)p.z) {}
         //! Destructor
         virtual ~Point3D() {}
         //}
@@ -45,31 +47,36 @@ namespace Gfx
         ** \param y1 The new Y coordinate
         ** \param z1 The new Z coordinate
         */
-        void move(const T x1, const T y1, const T z1) { x = x1; y = y1; z = z1; }
+        template<typename U, typename V, typename W>
+        void move(const U x1, const V y1, const W z1) { x = (T)x1; y = (T)y1; z = (T)z1; }
         /*!
         ** \brief Move the point to new coordinates
         ** \param p The new coordinates
         */
-        void move(const Point3D<T>& p) { x = p.x; y = p.y; z = p.z; }
+        template<typename U>
+        void move(const Point3D<U>& p) { x = (T)p.x; y = (T)p.y; z = (T)p.z; }
 
 
         /*!
         ** \brief Translate the point with the same value for all coordinates
         ** \param k The value to add to all coordinates
         */
-        void translate(const T k) { x += k; y += k; z += k; }
+        template<typename U>
+        void translate(const U k) { x += (T)k; y += (T)k; z += (T)k; }
         /*!
         ** \brief Translate the point with relative coordinates
         ** \param x1 The value to add to the X coordinate
         ** \param y1 The value to add to the Y coordinate
         ** \param z1 The value to add to the Z coordinate
         */
-        void translate(float x1, float y1, float z1) { x += x1; y += y1; z += z1; }
+        template<typename U, typename V, typename W>
+        void translate(const U x1, const V y1, const W z1) { x += (T)x1; y += (T)y1; z += (T)z1; }
         /*!
         ** \brief Translate the point with relative coordinates from another Point
         ** \param p The values to add to the coordinates 
         */
-        void translate(const Point3D<T>& p) { x += p.x; y += p.y; z += p.z; }
+        template<typename U>
+        void translate(const Point3D<U>& p) { x += (T)p.x; y += (T)p.y; z += (T)p.z; }
 
 
         /*!
@@ -77,11 +84,12 @@ namespace Gfx
         ** The calling object is modified to store the value
         ** \param p Point to compute the mean with
         */
-        void mean(const Point3D<T>& p)
+        template<typename U>
+        void mean(const Point3D<U>& p)
         {
-          x = (x + p.x) / 2.0f;
-          y = (y + p.y) / 2.0f;
-          z = (z + p.z) / 2.0f;
+          x = (T) ((x + p.x) / 2.0f);
+          y = (T) ((y + p.y) / 2.0f);
+          z = (T) ((z + p.z) / 2.0f);
         }
         /*!
         ** \brief Calculate the mean between two points
@@ -92,11 +100,12 @@ namespace Gfx
         ** \param p2 Second point to compute the mean with
         ** \return Always *this
         */
-        Point3D<T>& mean(const Point3D<T>& p1, const Point3D<T>& p2)
+        template<typename U, typename V>
+        Point3D<T>& mean(const Point3D<U>& p1, const Point3D<V>& p2)
         {
-          x = (p1.x + p2.x) / 2.0f;
-          y = (p1.y + p2.y) / 2.0f;
-          z = (p1.z + p2.z) / 2.0f;
+          x = (T) ((p1.x + p2.x) / 2.0f);
+          y = (T) ((p1.y + p2.y) / 2.0f);
+          z = (T) ((p1.z + p2.z) / 2.0f);
           return *this;
         }
         /*!
@@ -106,7 +115,8 @@ namespace Gfx
         ** \param p2 Second point
         ** \return A new instance of Point3D
         */
-        static Point3D<T>& Mean(const Point3D<T>& p1, const Point3D<T>& p2)
+        template<typename U, typename V>
+        static Point3D<T>& Mean(const Point3D<U>& p1, const Point3D<V>& p2)
         {
           return Point3D<T>().mean(p1, p2);
         }
@@ -118,7 +128,8 @@ namespace Gfx
         ** \param rhs The other point
         ** \param delta Delta value
         */
-        bool closeTo(const Point3D<T>& rhs, const T delta) const
+        template<typename U, typename V>
+        bool closeTo(const Point3D<U>& rhs, const V delta) const
         { return Math::Abs(x-rhs.x) < delta && Math::Abs(y-rhs.y) < delta && Math::Abs(z-rhs.z) < delta; }
 
         /*!
@@ -129,7 +140,8 @@ namespace Gfx
         ** \param z1 The Z coordinate of the other point
         ** \param delta Delta value
         */
-        bool closeTo(const T x1, const T y1, const T z1, const T delta) const
+        template<typename U, typename V, typename W, typename D>
+        bool closeTo(const U x1, const V y1, const W z1, const D delta) const
         { return Math::Abs(x-x1) < delta && Math::Abs(y-y1) < delta && Math::Abs(z-z1) < delta; }
 
 
@@ -144,7 +156,8 @@ namespace Gfx
         ** \param z1 The new value for the Z coordinate
         ** \see move()
         */
-        void operator () (const T x1, const T y1, const T z1) { x = x1; y = y1; z = z1; }
+        template<typename U, typename V, typename W>
+        void operator () (const U x1, const V y1, const W z1) { x = (T)x1; y = (T)y1; z = (T)z1; }
         /*!
         ** \brief Copy all coordinates from another point
         **
@@ -152,7 +165,8 @@ namespace Gfx
         **
         ** \see move()
         */
-        void operator () (const Point3D<T>& p) { x = p.x; y = p.y; z = p.z; }
+        template<typename U>
+        void operator () (const Point3D<U>& p) { x = (T)p.x; y = (T)p.y; z = (T)p.z; }
         
 
         /*!
@@ -163,7 +177,8 @@ namespace Gfx
         **
         ** \see translate()
         */
-        Point3D<T>& operator += (const T k) { x += k; y += k; z += k; return (*this); }
+        template<typename U>
+        Point3D<T>& operator += (const U k) { x += (T)k; y += (T)k; z += (T)k; return (*this); }
         /*!
         ** \brief Translate the point with relative coordinates
         **
@@ -172,7 +187,8 @@ namespace Gfx
         **
         ** \see translate()
         */
-        Point3D<T>& operator += (const Point3D<T>& p) { x += p.x; y += p.y; z += p.z; return (*this); }
+        template<typename U>
+        Point3D<T>& operator += (const Point3D<U>& p) { x += (T)p.x; y += (T)p.y; z += (T)p.z; return (*this); }
 
         /*!
         ** \brief Comparison operator (equal with)
@@ -180,8 +196,8 @@ namespace Gfx
         ** \param rhs The other point to compare with
         ** \return True if the two points are equal
         */
-        bool operator == (const Point3D<T>& rhs) const
-        { return rhs.x == x && rhs.y == y && rhs.z == z; }
+        template<typename U> bool operator == (const Point3D<U>& rhs) const
+        { return (T)rhs.x == x && (T)rhs.y == y && (T)rhs.z == z; }
 
         /*!
         ** \brief Comparison operator (non equal with)
@@ -189,7 +205,7 @@ namespace Gfx
         ** \param rhs The other point to compare with
         ** \return True if the two points are not equal
         */
-        bool operator != (const Point3D<T>& rhs) const
+        template<typename U> bool operator != (const Point3D<U>& rhs) const
         { return !(*this == rhs); }
 
         /*!
@@ -200,7 +216,8 @@ namespace Gfx
         **
         ** \see move()
         */
-        Point3D<T>& operator = (const Point3D<T>& p) { x = p.x; y = p.y; z = p.z; return (*this); }
+        template<typename U>
+        Point3D<T>& operator = (const Point3D<U>& p) { x = (T)p.x; y = (T)p.y; z = (T)p.z; return (*this); }
 
         //} Operators
 
