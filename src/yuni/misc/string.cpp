@@ -1,6 +1,7 @@
 
 #include <yuni/string.h>
 #include <algorithm>
+#include <cstdarg>
 
 
 
