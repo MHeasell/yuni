@@ -11,34 +11,36 @@ namespace Gfx
 {
 namespace G3D
 {
-    /*!
-    ** \brief An edge is a segment between two vertices
-    ** \see Edge
-    */
-    class Edge;
+	/*!
+	** \brief An edge is a segment between two vertices
+	** \see Edge
+	*/
+	class Edge;
 
-    /*!
-    ** \brief A vertex is a point in space which is the start of two edges of a triangle in a mesh.
-    */
-    class Vertex
-    {
-    public:
-        //! \name Constructors and destructors
-        //@{
-        Vertex(): pCoord()
-        {}
-        Vertex(float x, float y, float z): pCoord(x, y, z)
-        {}
-        ~Vertex() {}
-        //@}
+	/*!
+	** \brief A vertex is a point in space which is the start of two edges of a triangle in a mesh.
+	*/
+	class Vertex
+	{
+	public:
+		//! \name Constructors and destructors
+		//@{
+		Vertex(): pCoord()
+		{}
+		template<typename U, typename V, typename W>
+		Vertex(const U x, const V y, const W z): pCoord(x, y, z)
+		{}
+		~Vertex() {}
+		//@}
 
 
-    private:
-        typedef std::vector<Edge> EdgeList;
-        EdgeList pEdges;
-        Yuni::Gfx::Point3D pCoord;
-    }; // Vertex
+	private:
+		Edge::Vector pEdges;
+		Yuni::Gfx::Point3D pCoord;
+
+	}; // Vertex
  
+
 } // G3D
 } // Gfx
 } // Yuni
