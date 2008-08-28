@@ -4,6 +4,11 @@
 #   include <sys/param.h>
 #   include <sys/sysctl.h>
 #endif
+#ifdef YUNI_OS_LINUX
+#	include <fstream>
+#   include <string>
+#   include <yuni/misc/string.h>
+#endif
 
 
 
@@ -42,6 +47,31 @@ namespace Private
 	}
 #endif
 
+#ifdef YUNI_OS_LINUX
+# define YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
+	int AbstractThreadModel::CPUCount()
+	{
+		/*
+		 * It seems there's no better way to get this info on Linux systems.
+		 * If somebody can find it without depending on the location of /proc,
+		 * please patch this function.
+		 */
+		int count = 0;
+		std::ifstream cpuInfo("/proc/cpuinfo", std::ifstream::in);
+		String lineBuffer;
+
+		std::getline(cpuInfo, lineBuffer);
+		while (cpuInfo.good())
+		{
+			if (std::string::npos != lineBuffer.find("processor"))
+				count++;
+			std::getline(cpuInfo, lineBuffer);
+		}
+		cpuInfo.close();
+
+		return (0 == count ? 1 : count);
+	}
+#endif
 
 
 
