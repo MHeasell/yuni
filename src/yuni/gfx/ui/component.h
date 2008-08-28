@@ -71,16 +71,20 @@ namespace UI
 	public:
 		//! \name Constructor & Destructor
 		//@{
-		//! \name Constructor & Destructor
+
 		/*!
 		** \brief Constructor
 		**
-		** \param o
+		** \param wnd The parent window
+		** \param o The parent component, if any
 		*/
-		Component(Window& wnd, Component* o);
+		Component(Window& wnd, Component* o = NULL);
+
 		//! Destructor
 		virtual ~Component();
+
 		//@}
+
 
 		//! The owner of this component
 		Component* owner() const {return pOwner;}

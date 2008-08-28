@@ -194,7 +194,8 @@ namespace Gfx
 		/*!
 		** \brief Get if a point is contained inside the rect
 		**
-		** \param p The point
+		** \param nx The X-coordinate of the point
+		** \param ny The Y-coordinate of the point
 		** \return True if the point is contained inside the rect
 		*/
 		template<typename U, typename V> bool contains(const U nx, const V ny) const
