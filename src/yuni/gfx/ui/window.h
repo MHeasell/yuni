@@ -50,7 +50,7 @@ namespace UI
 		/*!
 		** \brief Find a component in the window
 		**
-		** \param name Name of the component
+		** \param comName Name of the component
 		** \return The component, NULL if not found
 		*/
 		ShredPtr<Component> findComponent(const String& comName);

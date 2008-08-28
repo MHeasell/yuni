@@ -13,6 +13,7 @@ namespace G3D
 
 	/*!
 	** \brief A triangle is a 3-sided polygon
+	**
 	** The triangle is the base element for all meshes
 	** It knows its edges, and its vertices.
 	*/
