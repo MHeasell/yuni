@@ -21,11 +21,12 @@ namespace UI
 
 
 
-	/*! \class Window
-	**  \brief Window
+	/*!
+	** \brief Window
 	*/
 	class Window
 	{
+		friend class Component;
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -48,32 +49,101 @@ namespace UI
 		//@{
 
 		/*!
-		** \brief Find a component in the window
+		** \brief Delete all components
+		*/
+		void clear();
+
+		/*!
+		** \brief Remove a component and all its children
 		**
 		** \param comName Name of the component
-		** \return The component, NULL if not found
 		*/
-		ShredPtr<Component> findComponent(const String& comName);
+		void remove(const String& comName);
+		/*!
+		** \brief Remove a component and all its children
+		** 
+		** As the pointer is managed by a ref counter, the component will be really
+		** destroyed when all references are released, in the best case
+		** at the end of the call to this method. However, after the call to
+		** this method, the component must be considered as destroyed.
+
+		** \param c Reference to the 
+		*/
+		void remove(SharedPtr<Component> c);
 
 		/*!
-		** \brief Register a component
+		** \brief Find a component by its name
 		**
-		** The registration is used to have a direct link between
-		** the name of the component and the component itself
-		**
-		** \param comPtr The component to register
+		** \param comName Name of the component
+		** \return A shared pointer to the component, the pointer may be null if not found
 		*/
-		void registerComponent(Component* comPtr);
+		ShredPtr<Component> find(const String& comName);
 
 		/*!
-		** \brief Unregister a component
+		** \brief Find a component by its pointer
 		**
-		** \param comPtr The component to unregister
+		** \param comPtr Pointer of the component
+		** \return A shared pointer to the component, the pointer may be null if not found
 		*/
-		void unregisterComponent(const Component* comPtr);
+		ShredPtr<Component> find(Component* comPtr);
 
 		//@}
 		
+	private:
+		//! Table of all components indexed by their name
+		typedef Hash::Dictionary< SharedPtr<Component>, Hash::optIgnoreCase>  ComponentsByName;
+
+	private:
+		/*!
+		** \brief Register a component to the list of all components (thread-safe)
+		** \param c The component to register
+		*/
+		void internalRegisterComponent(Component* c);
+
+		/*!
+		** \brief Register a component by its name (thread-safe)
+		**
+		** This routine must be used with the method `internalRegisterComponent()`
+		** and they are complementary
+		**
+		** \param c Pointer to the component. Nothing will be done if equals to null
+		** \param prevName The previous name of the component
+		** \param newName The new name of the component
+		**
+		** \see internalRegisterComponent()
+		*/
+		void internalReRegisterComName(Component* c, const String& prevName, const String& newName);
+
+		/*!
+		** \brief Find a component by its pointer (not thread-safe)
+		**
+		** \param comPtr Pointer of the component
+		** \return A shared pointer to the component, the pointer may be null if not found
+		*/
+		ShredPtr<Component> internalFindComponent(Component* comPtr);
+
+		/*!
+		** \brief Find a component by its name (not thread-safe)
+		**
+		** \param comName Name of the component
+		** \return A shared pointer to the component, the pointer may be null if not found
+		*/
+		ShredPtr<Component> internalFindComponent(const String& comName);
+
+		/*!
+		** \brief Remove a component by its pointer (not thread-safe)
+		**
+		** As the pointer is managed by a ref counter, the component will be really
+		** destroyed when all references are released, in the best case
+		** at the end of the call to this method. However, after the call to
+		** this method, the component must be considered as destroyed.
+		**
+		** \param c Reference to the component
+		*/
+		void internalRemove(SharedPtr<Component>& c);
+
+
+
 	private:
 		//! Mutex
 		Mutex pMutex;
@@ -81,8 +151,11 @@ namespace UI
 		String pTitle;
 		//! Name of the window
 		String pName;
+
+		//! All components
+		Component::List pAllComponents;
 		//! All references to components that have a non-empty name
-		Hash::Dictionary< SharedPtr<Component>, Hash::optIgnoreCase> pRefComponents;
+		ComponentsByName pRefComponents;
 
 	}; // class Window
 

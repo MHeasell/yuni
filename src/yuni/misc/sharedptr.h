@@ -48,6 +48,11 @@ namespace Yuni
 		T* get() const throw()  {return counter ? counter->ptr : 0;}
 
 		/*!
+		** \brief Get if the pointer is null
+		*/
+		bool null() const {return counter && counter->ptr;}
+
+		/*!
 		** \brief Get if this reference is an unique reference
 		*/
 		bool unique()  const throw() {return (counter ? counter->count == 1 : true);}
