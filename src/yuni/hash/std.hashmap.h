@@ -3,7 +3,7 @@
 
 
 
-# ifdef YUNI_OS_WINDOWS && ifdef YUNI_OS_MSVC
+# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 
 // Microsoft Visual Studio Implementation
 //
@@ -13,7 +13,7 @@
 #   include <cliext/hash_fun.h>
 namespace YuniSTLExt = ::stdext;
 
-# else // YUNI_OS_WINDOWS && ifdef YUNI_OS_MSVC
+# else // !YUNI_OS_WINDOWS || !YUNI_OS_MSVC
 
 // Gnu implementation
 
@@ -23,7 +23,7 @@ namespace YuniSTLExt = ::__gnu_cxx;
 
 #   define YUNI_OS_GNU_HASH_MAP
 
-# endif // YUNI_OS_WINDOWS && ifdef YUNI_OS_MSVC
+# endif // YUNI_OS_WINDOWS && YUNI_OS_MSVC
 
 
 
