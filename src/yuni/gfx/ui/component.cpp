@@ -14,6 +14,9 @@ namespace UI
 	Component::Component(Window& wnd, Component* o)
 		:pWindow(wnd), pOwner(o)
 	{
+		// Register this component to the parent window
+		wnd.internalRegisterComponent(this);
+		// Register this component to the parent component as well
 		if (o)
 			o->items.add(this);
 	}
@@ -28,9 +31,10 @@ namespace UI
 
 	void Component::name(const String& n)
 	{
-		pWindow.unregisterComponent(this);
+		pMutex.lock();
+		pWindow.internalReRegisterComName(this, pName, n);
 		pName = n;
-		pWindow.registerComponent(this);
+		pMutex.unlock();
 	}
 
 

@@ -7,7 +7,7 @@
 # include <yuni/gfx/ui/window.h>
 # include <yuni/string.h>
 # include <yuni/misc/sharedptr.h>
-
+# include <list>
 
 
 namespace Yuni
@@ -19,8 +19,16 @@ namespace UI
 
 	class Window;
 
+
+
 	class Component
 	{
+	public:
+		//! Vector of components
+		typedef std::vector< SharedPtr<Component> >  Vector;
+		//! List of components
+		typedef std::list< SharedPtr<Component> >  List;
+
 	public:
 		/*!
 		** \brief Component List
