@@ -1,9 +1,12 @@
-
 #ifndef __YUNI_GFX_G3D_EDGE_H__
 # define __YUNI_GFX_G3D_EDGE_H__
 
+# include <yuni/yuni.h>
+# include <yuni/gfx/g3d/vertex.h>
 # include <vector>
-# include "yuni/gfx/g3d/vertex.h"
+# include <list>
+
+
 
 namespace Yuni
 {
@@ -11,6 +14,8 @@ namespace Gfx
 {
 namespace G3D
 {
+
+
 	/*!
 	** \brief An edge is a segment between two vertices
 	*/
