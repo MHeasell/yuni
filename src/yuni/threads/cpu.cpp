@@ -20,26 +20,26 @@ namespace Private
 
 #ifdef YUNI_OS_DARWIN
 # define YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
-    int AbstractThreadModel::CPUCount()
-    {
-        int count;
-        size_t size = sizeof(count);
+	int AbstractThreadModel::CPUCount()
+	{
+		int count;
+		size_t size = sizeof(count);
 
-        if (sysctlbyname("hw.ncpu", &count, &size, NULL, 0))
-            return 1;
-        return count;
-    }
+		if (sysctlbyname("hw.ncpu", &count, &size, NULL, 0))
+			return 1;
+		return count;
+	}
 #endif
 
 
 #ifdef YUNI_OS_WINDOWS
 # define YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
-    int AbstractThreadModel::CPUCount()
-    {
-        SYSTEM_INFO si;
-        GetSystemInfo(&si);
-        return si.dwNumberOfProcessors;
-    }
+	int AbstractThreadModel::CPUCount()
+	{
+		SYSTEM_INFO si;
+		GetSystemInfo(&si);
+		return si.dwNumberOfProcessors;
+	}
 #endif
 
 

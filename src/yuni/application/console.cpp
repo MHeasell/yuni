@@ -7,12 +7,12 @@ namespace Yuni
 namespace Application
 {
 
-    Console::Console(int argc, char* argv[])
-        :Abstract(argc, argv)
-    {}
+	Console::Console(int argc, char* argv[])
+		:Abstract(argc, argv)
+	{}
 
-    Console::~Console()
-    {}
+	Console::~Console()
+	{}
 
 
 } // namespace Application

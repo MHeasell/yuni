@@ -13,23 +13,23 @@ namespace Hash
 {
 
 
-    class Key
-    {
-    public:
-        //! Default Constructor
-        Key() : pID(0) {}
-        //! Constructor with a given unique ID
-        Key(const size_t i) : pID(i) {}
+	class Key
+	{
+	public:
+		//! Default Constructor
+		Key() : pID(0) {}
+		//! Constructor with a given unique ID
+		Key(const size_t i) : pID(i) {}
 
-        /*!
-        ** \brief Get the unique ID
-        */
-        const size_t uid() const {return pID;}
+		/*!
+		** \brief Get the unique ID
+		*/
+		const size_t uid() const {return pID;}
 
-    protected:
-        size_t pID;
+	protected:
+		size_t pID;
 
-    }; // class Hash::Key
+	}; // class Hash::Key
 
 
 } // namespace Hash
@@ -44,25 +44,25 @@ namespace stdext
 # endif
 {
 
-    template<>
-    class hash<Yuni::Hash::Key>
-    {
-    public:
-        size_t operator()(const Yuni::Hash::Key& __s) const
-        { return __s.uid(); }
-    };
+	template<>
+	class hash<Yuni::Hash::Key>
+	{
+	public:
+		size_t operator()(const Yuni::Hash::Key& __s) const
+		{ return __s.uid(); }
+	};
 
 
-    template <>
-    class hash<Yuni::String>
-    {
-    public:
-        size_t operator()(const Yuni::String& str) const
-        {
-            hash<char const *> h;
-            return (h(str.c_str()));
-        }
-    };
+	template <>
+	class hash<Yuni::String>
+	{
+	public:
+		size_t operator()(const Yuni::String& str) const
+		{
+			hash<char const *> h;
+			return (h(str.c_str()));
+		}
+	};
 
 } // namespace YuniSTLExt
 

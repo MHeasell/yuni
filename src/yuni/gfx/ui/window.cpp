@@ -11,40 +11,63 @@ namespace Gfx
 namespace UI
 {
 
-    Window::Window()
-    {}
+	Window::Window()
+		:pMutex(), pTitle(), pName(), pRefComponents()
+	{}
 
-    Window::~Window()
-    {}
+	Window::~Window()
+	{}
 
-    
-    void Window::registerComponent(Component* comPtr)
-    {
-        if (comPtr && !(comPtr->name().empty()))
-            pRefComponents[comPtr->name()] = comPtr;
-    }
+	
+	void Window::registerComponent(Component* comPtr)
+	{
+		pMutex.lock();
+		if (comPtr && !(comPtr->name().empty()))
+			pRefComponents[comPtr->name()] = comPtr;
+		pMutex.unlock();
+	}
 
-    void Window::unregisterComponent(const Component* comPtr)
-    {
-        if (comPtr && !(comPtr->name().empty()))
-            pRefComponents.erase(comPtr->name());
-    }
-    
-    Component* Window::findComponent(const String& comName)
-    {
-        return comName.empty() ? NULL : pRefComponents.value(comName, NULL);
-    }
+	void Window::unregisterComponent(const Component* comPtr)
+	{
+		pMutex.lock();
+		if (comPtr && !(comPtr->name().empty()))
+			pRefComponents.erase(comPtr->name());
+		pMutex.unlock();
+	}
+	
+	SharedPtr<Component> Window::findComponent(const String& comName)
+	{
+		MutexLocker locker(pMutex);
+		return comName.empty() ? NULL : pRefComponents.value(comName, NULL);
+	}
  
 
-    void Window::name(const String& s)
-    {
-        pName = s;
-    }
+	void Window::name(const String& s)
+	{
+		pMutex.lock();
+		pName = s;
+		pMutex.unlock();
+	}
 
-    void Window::title(const String& s)
-    {
-        pTitle = s;
-    }
+	void Window::title(const String& s)
+	{
+		pMutex.lock();
+		pTitle = s;
+		pMutex.unlock();
+	}
+
+	String Window::title()
+	{
+		MutexLocker locker(pMutex);
+		return pTitle;
+	}
+
+	String Window::name()
+	{
+		MutexLocker locker(pMutex);
+		return pName;
+	}
+
 
 
 } // namespace UI

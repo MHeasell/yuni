@@ -7,19 +7,19 @@ CMake_minimum_required(VERSION 2.6)
 #Set(CMAKE_VERBOSE_MAKEFILE ON)
 # Policy
 IF(NOT CMAKE_MINOR_VERSION EQUAL 4 OR NOT CMAKE_MAJOR_VERSION EQUAL 2 )
-    cmake_policy(SET CMP0004 OLD)
-    cmake_policy(SET CMP0003 NEW)
+	cmake_policy(SET CMP0004 OLD)
+	cmake_policy(SET CMP0003 NEW)
 ENDIF(NOT CMAKE_MINOR_VERSION EQUAL 4 OR NOT CMAKE_MAJOR_VERSION EQUAL 2 )
 Include(CheckIncludeFile)
 
 
 
 IF(NOT WIN32)
-    IF(NOT CACHE_OS_INFO)
-        EXECUTE_PROCESS(COMMAND "uname" "-a" OUTPUT_VARIABLE OS_INFO OUTPUT_STRIP_TRAILING_WHITESPACE)
+	IF(NOT CACHE_OS_INFO)
+		EXECUTE_PROCESS(COMMAND "uname" "-a" OUTPUT_VARIABLE OS_INFO OUTPUT_STRIP_TRAILING_WHITESPACE)
 		SET(CACHE_OS_INFO "${OS_INFO}" CACHE STRING "Informations about the hardware")
-    ENDIF(NOT CACHE_OS_INFO)
-    MESSAGE(STATUS ${CACHE_OS_INFO})
+	ENDIF(NOT CACHE_OS_INFO)
+	MESSAGE(STATUS ${CACHE_OS_INFO})
 ENDIF(NOT WIN32)
 
 
@@ -29,7 +29,7 @@ ENDIF(NOT WIN32)
 #
 String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
 IF(${VA} EQUAL 0)
-    Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
+	Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
 ENDIF(${VA} EQUAL 0)
 Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 
@@ -49,7 +49,7 @@ Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I'${PROJECT_SOURCE_DIR}/..'")
 
 Include(FindThreads)
 IF(NOT CMAKE_USE_PTHREADS_INIT)
-    MESSAGE(FATAL_ERROR "PThreads is required.")
+	MESSAGE(FATAL_ERROR "PThreads is required.")
 ENDIF(NOT CMAKE_USE_PTHREADS_INIT)
 
 
@@ -61,41 +61,43 @@ set(SRC "")
 
 # Misc
 set(SRC ${SRC}  misc/string.h misc/string.cpp
-                misc/paths.h misc/paths.cpp
-                misc/files.h misc/files.cpp
-                misc/version.h misc/version.cpp
-                misc/static.h
-                misc/math.h)
+				misc/paths.h misc/paths.cpp
+				misc/files.h misc/files.cpp
+				misc/version.h misc/version.cpp
+				misc/static.h
+				misc/math.h)
 
 # Hash
 set(SRC ${SRC}  hash/checksum/abstract.h hash/checksum/abstract.cpp
-                hash/checksum/md5.h hash/checksum/md5.cpp
-                hash/std.hashmap.h
-                hash/key.h
-                hash/table.h hash/table.hxx
-                hash/dictionary.h)
+				hash/checksum/md5.h hash/checksum/md5.cpp
+				hash/std.hashmap.h
+				hash/key.h
+				hash/table.h hash/table.hxx
+				hash/dictionary.h)
 
 # System
 set(SRC ${SRC}  system/stdint.h system/os.h) 
 
 # Threads
 set(SRC ${SRC}  threads/mutex.h threads/mutex.cpp
-                threads/abstract.thread.h threads/abstract.thread.cpp
-                threads/thread.h threads/thread.cpp
-                threads/timer.h threads/timer.cpp
-                threads/jobs.abstract.h threads/jobs.abstract.cpp
-                threads/cpu.cpp)
+				threads/abstract.thread.h threads/abstract.thread.cpp
+				threads/thread.h threads/thread.cpp
+				threads/timer.h threads/timer.cpp
+				threads/jobs.abstract.h threads/jobs.abstract.cpp
+				threads/cpu.cpp)
 
 # Application
 set(SRC ${SRC}  application/abstract.h application/abstract.cpp
-                application/console.h application/console.cpp)
+				application/console.h application/console.cpp)
 
 # Gfx
-set(SRC ${SRC}  gfx/point2D.h gfx/point3D.h)
+set(SRC ${SRC}  gfx/point2D.h gfx/point3D.h
+				gfx/color.converters.h gfx/color.converters.cpp
+				gfx/rgba.h)
 
 # User Interface
-set(SRC ${SRC}  gfx/ui/window.h gfx/ui/window.cpp
-                gfx/ui/component.h gfx/ui/component.cpp)
+set(SRC ${SRC}	gfx/ui/window.h gfx/ui/window.cpp
+				gfx/ui/component.h gfx/ui/component.cpp)
 
 
 add_library(yuni STATIC ${SRC})
