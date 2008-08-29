@@ -1,10 +1,10 @@
 #ifndef __YUNI_HASH_DICTIONARY_H__
 # define __YUNI_HASH_DICTIONARY_H__
 
-# include <yuni/yuni.h>
-# include <yuni/hash/table.h>
-# include <yuni/string.h>
-# include <yuni/misc/static.h>
+# include "../yuni.h"
+# include "table.h"
+# include "../misc/string.h"
+# include "../misc/static.h"
 
 
 

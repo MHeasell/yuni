@@ -1,7 +1,7 @@
 
-#include <yuni/gfx/color.converters.h>
-#include <yuni/misc/math.h>
-#include <yuni/gfx/rgba.h>
+#include "color.converters.h"
+#include "../misc/math.h"
+#include "rgba.h"
 
 
 

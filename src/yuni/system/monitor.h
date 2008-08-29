@@ -1,9 +1,9 @@
 #ifndef __YUNI_SYSTEM_SCREEN_H__
 # define __YUNI_SYSTEM_SCREEN_H__
 
-# include <yuni/yuni.h>
-# include <yuni/string.h>
 # include <vector>
+# include "../yuni.h"
+# include "../misc/string.h"
 
 
 namespace Yuni

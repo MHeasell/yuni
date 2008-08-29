@@ -2,7 +2,7 @@
 # define __YUNI_PATHS_H__
 
 
-# include <yuni/misc/paths.h>
+# include "misc/paths.h"
 
 
 #endif // __YUNI_PATHS_H__

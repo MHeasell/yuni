@@ -1,5 +1,5 @@
 
-#include <yuni/application/console.h>
+#include "console.h"
 
 
 namespace Yuni

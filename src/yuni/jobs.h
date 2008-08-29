@@ -2,7 +2,7 @@
 # define __YUNI_JOBS_H__
 
 
-# include <yuni/threads/jobs.h>
+# include "threads/jobs.h"
 
 
 #endif // __YUNI_JOBS_H__

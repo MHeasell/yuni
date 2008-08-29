@@ -1,7 +1,7 @@
 #ifndef __YUNI_MISC_VERSION_H__
 # define __YUNI_MISC_VERSION_H__
 
-# include <yuni/string.h>
+# include "string.h"
 
 
 

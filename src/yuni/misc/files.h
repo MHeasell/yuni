@@ -1,8 +1,8 @@
 #ifndef __YUNI_MISC_FILES_H__
 # define __YUNI_MISC_FILES_H__
 
-# include <yuni/yuni.h>
-# include <yuni/string.h>
+# include "../yuni.h"
+# include "string.h"
 
 
 

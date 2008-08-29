@@ -1,12 +1,11 @@
 #ifndef __YUNI_MISC_STRING_H__
 # define __YUNI_MISC_STRING_H__
 
-# include <yuni/yuni.h>
 # include <sstream>
 # include <list>
 # include <vector>
 # include <string>
-
+# include "../yuni.h"
 
 
 //! \name Macros for Yuni::String

@@ -9,9 +9,9 @@
 //@}
 
 // Operating System / Architecture detection
-# include <yuni/system/os.h>
+# include "system/os.h"
 // Standard Types
-# include <yuni/system/stdint.h>
+# include "system/stdint.h"
 
 
 /*!

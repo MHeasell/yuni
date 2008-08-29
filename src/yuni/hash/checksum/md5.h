@@ -1,8 +1,8 @@
 #ifndef __YUNI_HASH_MD5_H__
 # define __YUNI_HASH_MD5_H__
 
-# include <yuni/yuni.h>
-# include <yuni/hash/checksum/abstract.h>
+# include "../../yuni.h"
+# include "abstract.h"
 
 
 

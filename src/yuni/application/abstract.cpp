@@ -1,6 +1,6 @@
 
-#include <yuni/application/abstract.h>
-#include <yuni/paths.h>
+#include "abstract.h"
+#include "../misc/paths.h"
 
 
 namespace Yuni

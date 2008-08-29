@@ -1,9 +1,8 @@
 
-#include <yuni/misc/files.h>
-#include <yuni/misc/paths.h>
 #include <fstream>
 #include <sys/stat.h>
-
+#include "files.h"
+#include "paths.h"
 
 namespace Yuni
 {

@@ -1,6 +1,6 @@
 
-# include <yuni/yuni.h>
-# include <yuni/gfx/ui/window.h>
+# include "../../yuni.h"
+# include "window.h"
 
 
 

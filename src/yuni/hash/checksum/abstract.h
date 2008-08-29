@@ -1,8 +1,8 @@
 #ifndef __YUNI_HASH_ABSTRACT_H__
 # define __YUNI_HASH_ABSTRACT_H__
 
-# include <yuni/yuni.h>
-# include <yuni/string.h>
+# include "../../yuni.h"
+# include "../../misc/string.h"
 
 
 namespace Yuni

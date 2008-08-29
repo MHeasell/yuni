@@ -2,7 +2,7 @@
 # define __YUNI_GFX_RECT_2D_H__
 
 # include <iostream>
-# include <yuni/gfx/point2D.h>
+# include "point2D.h"
 
 
 
