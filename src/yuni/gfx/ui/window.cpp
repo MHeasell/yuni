@@ -36,7 +36,7 @@ namespace UI
 		if (c)
 		{
 			// Add the component to the list
-			pAllComponent.push_back(SharedPtr<Component>(c));
+			pAllComponents.push_back(SharedPtr<Component>(c));
 		}
 	}
 
@@ -49,7 +49,7 @@ namespace UI
 		SharedPtr<Component> s (this->internalFindComponent(c));
 		// Remove the previous association between the name and the component
 		if (!oldName.empty())
-			pRefComponents.erase(comName);
+			pRefComponents.erase(oldName);
 		// Set the association between the name and the component
 		if (!s.null() && !newName.empty()) 
 			pRefComponents[newName] = s;
@@ -68,7 +68,7 @@ namespace UI
 	{
 		if (comName.empty()) // No component can match an empty name
 			return SharedPtr<Component>();
-		ComponentsByName::const_iterator it = pRefComponents.find(comName);
+		ComponentsByName::iterator it = pRefComponents.find(comName);
 		return  (pRefComponents.end() == it) ? SharedPtr<Component>() : SharedPtr<Component>(it->second);
 	}
  
@@ -96,10 +96,10 @@ namespace UI
 
 	void Window::remove(const String& comName)
 	{
-		if (!name.empty())
+		if (!comName.empty())
 		{
 			pMutex.lock();
-			this->internalRemove(internalFindComponent(comName));
+			this->internalRemove(this->internalFindComponent(comName));
 			pMutex.unlock();
 		}
 	}
@@ -112,7 +112,7 @@ namespace UI
 	}
 
 
-	void Window::internalRemove(SharedPtr<Component>& c)
+	void Window::internalRemove(SharedPtr<Component> c)
 	{
 		if (c.null()) // no pointer, nothing to do, aborting
 			return;
@@ -126,7 +126,7 @@ namespace UI
 		// Remove the association in the list of all components
 		for (Component::List::iterator i = pAllComponents.begin(); i != pAllComponents.end(); ++i)
 		{
-			if (i->get() == comObj)
+			if (i->get() == c.get())
 			{
 				pAllComponents.erase(i);
 				break;

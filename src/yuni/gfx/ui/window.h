@@ -7,6 +7,7 @@
 # include <yuni/gfx/ui/component.h>
 # include <yuni/hash/dictionary.h>
 # include <yuni/misc/sharedptr.h>
+# include <yuni/threads/mutex.h>
 
 
 
@@ -77,7 +78,7 @@ namespace UI
 		** \param comName Name of the component
 		** \return A shared pointer to the component, the pointer may be null if not found
 		*/
-		ShredPtr<Component> find(const String& comName);
+		SharedPtr<Component> find(const String& comName);
 
 		/*!
 		** \brief Find a component by its pointer
@@ -85,7 +86,7 @@ namespace UI
 		** \param comPtr Pointer of the component
 		** \return A shared pointer to the component, the pointer may be null if not found
 		*/
-		ShredPtr<Component> find(Component* comPtr);
+		SharedPtr<Component> find(Component* comPtr);
 
 		//@}
 		
@@ -120,7 +121,7 @@ namespace UI
 		** \param comPtr Pointer of the component
 		** \return A shared pointer to the component, the pointer may be null if not found
 		*/
-		ShredPtr<Component> internalFindComponent(Component* comPtr);
+		SharedPtr<Component> internalFindComponent(Component* comPtr);
 
 		/*!
 		** \brief Find a component by its name (not thread-safe)
@@ -128,7 +129,7 @@ namespace UI
 		** \param comName Name of the component
 		** \return A shared pointer to the component, the pointer may be null if not found
 		*/
-		ShredPtr<Component> internalFindComponent(const String& comName);
+		SharedPtr<Component> internalFindComponent(const String& comName);
 
 		/*!
 		** \brief Remove a component by its pointer (not thread-safe)
@@ -140,7 +141,7 @@ namespace UI
 		**
 		** \param c Reference to the component
 		*/
-		void internalRemove(SharedPtr<Component>& c);
+		void internalRemove(SharedPtr<Component> c);
 
 
 

@@ -4,10 +4,11 @@
 # include <yuni/yuni.h>
 # include <yuni/gfx/point2d.h>
 # include <vector>
-# include <yuni/gfx/ui/window.h>
 # include <yuni/string.h>
 # include <yuni/misc/sharedptr.h>
 # include <list>
+# include <yuni/threads/mutex.h>
+
 
 
 namespace Yuni
@@ -114,6 +115,8 @@ namespace UI
 
 
 	protected:
+		//! Mutex
+		Mutex pMutex;
 		//! The parent window
 		Window& pWindow;
 		//! The owner of this component
@@ -133,5 +136,8 @@ namespace UI
 } // namespace UI
 } // namespace Gfx
 } // namespace Yuni
+
+
+# include <yuni/gfx/ui/window.h>
 
 #endif // __YUNI_USER_INTERFACE_COMPONENT_H__
