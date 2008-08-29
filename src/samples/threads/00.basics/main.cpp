@@ -9,7 +9,7 @@ Yuni::Mutex mutex;
  * \brief This class represents a task that should be executed
  * in a separate thread.
  *
- * This task is implemented in the execute() method, and consists
+ * This task is implemented in the onExecute() method, and consists
  * here of a sample: counting beer bottles.
  */
 class BottleTask : public Yuni::Threads::Abstract
@@ -26,7 +26,7 @@ public:
 
 protected:
 	//! The beer-bottle counting implementation itself
-	virtual void execute()
+	virtual void onExecute()
 	{
 		int i = 99;
 
@@ -57,7 +57,8 @@ protected:
 			 * without any events - or return true - a stop signal was received.
 			 *
 			 * In the latter case, we may have a timeout before being killed,
-			 * so if possible defer any time-consuming task to the onStop* methods.
+			 * so if possible defer any time-consuming task to the onStopped()
+			 * methods.
 			 */
 
 			if (suspend(100))
@@ -70,7 +71,7 @@ protected:
 	 * execution has stopped, but we can also free thread-specific
 	 * ressources and do general cleanup.
 	 */
-	virtual void stopTimer()
+	virtual void onStopped()
 	{
 		std::cout << " [b] I have been interrupted." << std::endl;
 	}
