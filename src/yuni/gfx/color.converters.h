@@ -130,7 +130,7 @@ namespace Proxy
 	struct Compare< RGBA<V>, RGBA<W> >
 	{
 		inline static bool check(const RGBA<V>& lhs, const RGBA<W>& rhs)
-		{ return lhs = RGBA<V>(rhs); }
+		{ return lhs == RGBA<V>(rhs); }
 	};
 
 
