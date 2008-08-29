@@ -1,13 +1,12 @@
 
 #include <yuni/threads/abstract.thread.h>
 #ifdef YUNI_OS_DARWIN
-#   include <sys/param.h>
-#   include <sys/sysctl.h>
+#	include <sys/param.h>
+#	include <sys/sysctl.h>
 #endif
 #ifdef YUNI_OS_LINUX
 #	include <fstream>
-#   include <string>
-#   include <yuni/misc/string.h>
+#	include <yuni/string.h>
 #endif
 
 
@@ -64,7 +63,7 @@ namespace Private
 		while (cpuInfo.good())
 		{
 			if (std::string::npos != lineBuffer.find("processor"))
-				count++;
+				++count;
 			std::getline(cpuInfo, lineBuffer);
 		}
 		cpuInfo.close();
