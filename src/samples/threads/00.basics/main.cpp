@@ -60,7 +60,7 @@ protected:
 			 * so if possible defer any time-consuming task to the onStop* methods.
 			 */
 
-			if (suspend(0))
+			if (suspend(100))
 				return;
 		}
 	}
