@@ -1,21 +1,24 @@
-
 #ifndef __YUNI_GFX_G3D_VERTEX_H__
 # define __YUNI_GFX_G3D_VERTEX_H__
 
 # include <vector>
-# include "../point3D.h"
+# include "point3D.h"
+
+
 
 namespace Yuni
 {
 namespace Gfx
 {
-namespace G3D
-{
+
+
 	/*!
 	** \brief An edge is a segment between two vertices
 	** \see Edge
 	*/
 	class Edge;
+
+
 
 	/*!
 	** \brief A vertex is a point in space which is the start of two edges of a triangle in a mesh.
@@ -72,8 +75,9 @@ namespace G3D
 	}; // Vertex
 
 
-} // G3D
-} // Gfx
-} // Yuni
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_G3D_VERTEX_H__

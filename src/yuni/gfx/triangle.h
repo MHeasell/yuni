@@ -1,15 +1,15 @@
-
 #ifndef __YUNI_GFX_G3D_TRIANGLE_H__
 # define __YUNI_GFX_G3D_TRIANGLE_H__
 
 # include "edge.h"
 
+
+
 namespace Yuni
 {
 namespace Gfx
 {
-namespace G3D
-{
+
 
 	/*!
 	** \brief A triangle is a 3-sided polygon
@@ -52,8 +52,7 @@ namespace G3D
 	};
 
 
-} // G3D
-} // Gfx
-} // Yuni
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_G3D_TRIANGLE_H__

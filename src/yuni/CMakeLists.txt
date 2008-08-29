@@ -93,7 +93,8 @@ set(SRC ${SRC}  application/abstract.h application/abstract.cpp
 # Gfx
 set(SRC ${SRC}  gfx/point2D.h gfx/point3D.h
 				gfx/color.converters.h gfx/color.converters.cpp
-				gfx/rgba.h)
+				gfx/rgba.h
+				gfx/vertex.h gfx/triangle.h gfx/edge.h)
 
 # User Interface
 set(SRC ${SRC}	gfx/ui/window.h gfx/ui/window.cpp

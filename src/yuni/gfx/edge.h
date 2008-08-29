@@ -3,15 +3,13 @@
 
 # include <vector>
 # include <list>
-# include "../../yuni.h"
+# include "../yuni.h"
 # include "vertex.h"
 
 
 namespace Yuni
 {
 namespace Gfx
-{
-namespace G3D
 {
 
 
@@ -72,8 +70,7 @@ namespace G3D
  
 
 
-} // G3D
-} // Gfx
-} // Yuni
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_G3D_EDGE_H__
