@@ -86,15 +86,21 @@ namespace Hash
 
 
 		/*!
-		** \brief Get an iterator pointing to the beginning of the table
+		** \brief Returns a read/write iterator that points to the first element of the table
 		*/
 		iterator begin() {return pTable.begin();}
+		/*!
+		** \brief Returns a read-only (constant) iterator that points to the first element of the table
+		*/
 		const_iterator begin() const {return pTable.begin();}
 
 		/*!
-		** \brief Get an iterator pointing to the end of the table
+		** \brief Returns a read/write iterator that points to the end of the table
 		*/
 		iterator end() {return pTable.end();}
+		/*!
+		** \brief Returns a read-only (constant) iterator that points to the end of the table
+		*/
 		const_iterator end() const {return pTable.end();}
 
 		/*!
