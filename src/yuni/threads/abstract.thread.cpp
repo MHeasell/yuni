@@ -1,6 +1,4 @@
 
-#include <yuni/threads/thread.h>
-#include <yuni/threads/abstract.thread.h>
 #include <time.h>
 #include <sys/errno.h>
 #include <iostream>
@@ -10,6 +8,10 @@
 #include <sys/types.h>
 #include <time.h>
 #include <assert.h>
+#include <unistd.h>
+
+#include "yuni/threads/thread.h"
+#include "yuni/threads/abstract.thread.h"
 
 
 
@@ -21,8 +23,24 @@ namespace Threads
 namespace Private
 {
 
+
+	unsigned int AbstractThreadModel::ProcessID()
+	{
+		return getpid();
+	}
+
+
+
+
 	namespace
 	{
+		/*!
+		 * \brief Get a new timespec struct representing X milli seconds in the future 
+		 *
+		 * \param[in,out] The timespec struct
+		 * \param millisecs The count of milli seconds
+		 * \return Always `time` itself
+		 */
 		struct timespec* millisecondsFromNow(struct timespec* time, int millisecs)
 		{
 			# ifdef YUNI_OS_WINDOWS
@@ -72,12 +90,12 @@ namespace Private
 
 			AbstractThreadModel* t = (AbstractThreadModel *) arg;
 			t->pIsRunning = true;
-			if (!t->startTimer())
+			if (t->onStarting())
 			{
 				// Launch the code
-				t->internalExecute();
+				t->baseExecute();
 				// The thread has stopped
-				t->stopTimer();
+				t->onStopped();
 			}
 			t->signalThreadAboutToExit();
 			if (t->pFreeOnTerminate)
@@ -134,65 +152,83 @@ namespace Private
 		return pIsRunning;
 	}
 
+
 	bool AbstractThreadModel::stop(const uint16 timeout)
 	{
 		MutexLocker locker(pMutex);
-		if (!pIsRunning)
+		if (!pIsRunning) // already stopped
 			return true;
+
+		// Early indicates that this thread should stop
 		pShouldStop = true;
+		// As we explicitly ask to stop (external call), this class must not destroy itself
 		pFreeOnTerminate = false;
 
-		p_mutexThreadIsAboutToExit.lock();
+		pMutexThreadIsAboutToExit.lock();
 
-		p_threadMustStopMutex.lock();
+		pThreadMustStopMutex.lock();
 		pthread_cond_signal(&p_threadMustStopCond);
-		p_threadMustStopMutex.unlock();
-
-		struct timeval mytime;
-		struct timespec myts;
-
-		gettimeofday(&mytime, NULL);
-		myts.tv_sec = mytime.tv_sec + timeout;
-		myts.tv_nsec = mytime.tv_usec * 1000;																		
+		pThreadMustStopMutex.unlock();
 
 		if (pIsRunning)
 		{
-			int result = pthread_cond_timedwait(&p_threadIsAboutToExit, &p_mutexThreadIsAboutToExit.pthreadMutex(), &myts);
+			// The thread is still running
+
+			// Timeout
+			struct timeval mytime;
+			struct timespec myts;
+			gettimeofday(&mytime, NULL);
+			myts.tv_sec = mytime.tv_sec + timeout;
+			myts.tv_nsec = mytime.tv_usec * 1000;																		
+
+			// Waiting for the end of the thread
+			int result = pthread_cond_timedwait(&p_threadIsAboutToExit, &pMutexThreadIsAboutToExit.pthreadMutex(), &myts);
 			if (result) // A problem occured, or we timed out.
+			{
+				// We are out of time, no choice but to kill our thread
 				pthread_cancel(pThreadID);
+			}
 		}
 
-		p_mutexThreadIsAboutToExit.unlock();
+		pMutexThreadIsAboutToExit.unlock();
+		// Wait for the thread be completely stopped
 		pthread_join(pThreadID, NULL);
+		// The thread is no longer running
 		pIsRunning = false;
 		return true;
 	}
 
 
-	bool AbstractThreadModel::suspend(uint32 delay)
+	bool AbstractThreadModel::suspend(const uint32 delay)
 	{
-		MutexLocker locker(p_threadMustStopMutex);
-		if (pShouldStop)
+		MutexLocker locker(pThreadMustStopMutex);
+	
+		// The thread should stop as soon as possible
+		if (pShouldStop) 
 			return true;
-		if (!pIsRunning)
-			return false; // If we have not started, why bother to wait..										
 
+		// If we have not started, why bother to wait...
+		if (!pIsRunning)
+			return false; 
+
+		// We should rest for a while...
 		if (delay)
 		{
 			struct timespec ts;
-			pthread_cond_timedwait(&p_threadMustStopCond, &p_threadMustStopMutex.pthreadMutex(),
+			pthread_cond_timedwait(&p_threadMustStopCond, &pThreadMustStopMutex.pthreadMutex(),
 								   millisecondsFromNow(&ts, delay));
 		}
 		return (pShouldStop || !pIsRunning);
 	}
 
+
 	void AbstractThreadModel::signalThreadAboutToExit()
 	{
 		pShouldStop = true;
 		pIsRunning = false;
-		p_mutexThreadIsAboutToExit.lock();
+		pMutexThreadIsAboutToExit.lock();
 		pthread_cond_signal(&p_threadIsAboutToExit);
-		p_mutexThreadIsAboutToExit.unlock();
+		pMutexThreadIsAboutToExit.unlock();
 	}
 
 
@@ -201,16 +237,11 @@ namespace Private
 		MutexLocker locker(pMutex);
 		pShouldStop = true;
 
-		p_threadMustStopMutex.lock();
+		pThreadMustStopMutex.lock();
 		pthread_cond_signal(&p_threadMustStopCond);
-		p_threadMustStopMutex.unlock();
+		pThreadMustStopMutex.unlock();
 	}
 
-
-	void AbstractThreadModel::internalExecute()
-	{
-		baseExecute();
-	}
 
 
 } // namespace Private

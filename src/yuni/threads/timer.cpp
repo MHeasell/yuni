@@ -28,15 +28,17 @@ namespace Threads
 		assert(isRunning() == false);
 	}
 
+
 	void Timer::baseExecute()
 	{
 		pMutex.lock();
 		if (!pCyclesCount)
 		{
+			// Inifite loop
 			pMutex.unlock();
-			while(true)
+			while (true)
 			{
-				if (suspend(pTimeInterval) || execute())
+				if (suspend(pTimeInterval) || !onExecute(0))
 					return;
 			}
 		}
@@ -44,16 +46,20 @@ namespace Threads
 		{
 			pCycleCurrent = 0;
 			pMutex.unlock();
-			while(true)
+
+			while (true)
 			{
 				pMutex.lock();
 				uint32 nnTimeInterval(pTimeInterval);
 				pMutex.unlock();
-				if (suspend(nnTimeInterval) || execute())
+
+				// Wait then execute the timer
+				if (suspend(nnTimeInterval) || !onExecute(pCycleCurrent))
 					return;
+
 				pMutex.lock();
 				++pCycleCurrent;
-				if (pCycleCurrent >= pCyclesCount)
+				if (pCycleCurrent >= pCyclesCount) // the maximum number of cycle is reached
 				{
 					pMutex.unlock();
 					return;
@@ -62,6 +68,7 @@ namespace Threads
 			}
 		}
 	}
+
 
 	uint32 Timer::timeInterval()
 	{
