@@ -7,8 +7,10 @@ Yuni::Mutex mutex;
 
 /*!
  * \brief This class represents a task that should be executed
- *	in a separate thread. This task is implemented in the execute()
- *	method, and consists here of a sample: counting beer bottles.
+ * in a separate thread.
+ *
+ * This task is implemented in the execute() method, and consists
+ * here of a sample: counting beer bottles.
  */
 class BottleTask : public Yuni::Threads::Abstract
 {
@@ -16,41 +18,66 @@ public:
 	/*!
 	 * \brief Our sample constructor.
 	 * \param[in] identifier A thread identifier, used only for display
-	 *						 purposes
-	 */
-	BottleTask(int identifier) :Yuni::Threads::Abstract(), x(identifier) {}
-	
+	 *            purposes
+   */
+	BottleTask(const int identifier) :Yuni::Threads::Abstract(), x(identifier) {}
+
 	virtual ~BottleTask() {stop();}
 
 protected:
 	//! The beer-bottle counting implementation itself
-   virtual void execute()
-   {
-	   int i = 99;
-       while(true)
-       {
-		   mutex.lock();
-		   std::cout << " ["<< x <<"] " << i-- << " bottles of beer on a wall. Calculating a very complicated thing ..." << std::endl;
-		   mutex.unlock();
-		   sleep(1);
-           if (suspend(0))
-               return;
-       }
-   }
+	virtual void execute()
+	{
+		int i = 99;
 
-   /*!
-	* \brief In this, we just signal to the user that the thread 
-	* execution has stopped, but we can also free thread-specific
-	* ressources and do general cleanup.
-	*/
-   virtual void stopTimer()
-   {
-	   std::cout << " [b] I have been interrupted." << std::endl;
-   }
+		while(true)
+		{
+			mutex.lock();
+			std::cout << " ["<< x <<"] " << i-- << " bottles of beer on a wall. Calculating a very complicated thing ..." << std::endl;
+			mutex.unlock();
+			
+			/*
+			 * Simulate some work. The work of the thread is here simulated by
+			 * a call to sleep(). This is intended to simulate a perdiod of
+			 * work during which the task cannot be interrupted by stop() methods
+			 * - for example a long calculation, for the purpose of this example.
+			 *
+			 * The bottom line is: DO NOT use sleep() to wait in threads.
+			 */
+			sleep(1);
+
+			/*
+			 * After our work, if the task is repetitive, we will want to check
+			 * if we have to stop doing it and will eventually pause for some
+			 * seconds (while listening to any stop signal).
+			 * This is the purpose of the suspend function. We pass here 100ms as
+			 * the time to wait before returning if no stop() signal is received.
+			 * 
+			 * suspend() will either return false - the specified time elapsed
+			 * without any events - or return true - a stop signal was received.
+			 *
+			 * In the latter case, we may have a timeout before being killed,
+			 * so if possible defer any time-consuming task to the onStop* methods.
+			 */
+
+			if (suspend(0))
+				return;
+		}
+	}
+
+	/*!
+	 * \brief In this, we just signal to the user that the thread 
+	 * execution has stopped, but we can also free thread-specific
+	 * ressources and do general cleanup.
+	 */
+	virtual void stopTimer()
+	{
+		std::cout << " [b] I have been interrupted." << std::endl;
+	}
 
 private:
-   //! The class can hold the variables of your choice.
-   int x;
+	//! The class can hold the variables of your choice.
+	int x;
 };
 
 int main(void)
@@ -106,8 +133,9 @@ int main(void)
 
 	/*
 	 * Delete the thread object.
-	 */
+   */
 	delete t;
+
 	return 0;
 }
 
