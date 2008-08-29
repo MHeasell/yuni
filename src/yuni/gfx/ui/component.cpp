@@ -26,7 +26,6 @@ namespace UI
 		items.clear();
 		if (pOwner)
 			pOwner->items.remove(this);
-		pWindow.unregisterComponent(this);
 	}
 
 	void Component::name(const String& n)
