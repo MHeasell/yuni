@@ -78,6 +78,9 @@ set(SRC ${SRC}  hash/checksum/abstract.h hash/checksum/abstract.cpp
 # System
 set(SRC ${SRC}  system/stdint.h system/os.h) 
 
+# Devices
+set(SRC ${SRC}  system/devices/monitor.h system/devices/monitor.cpp) 
+
 # Threads
 set(SRC ${SRC}  threads/mutex.h threads/mutex.cpp
 				threads/abstract.thread.h threads/abstract.thread.cpp
