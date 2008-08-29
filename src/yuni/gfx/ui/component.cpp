@@ -1,7 +1,7 @@
 
-# include <yuni/yuni.h>
-# include <yuni/gfx/point2d.h>
-# include <yuni/gfx/ui/component.h>
+# include "../../yuni.h"
+# include "../point2D.h"
+# include "component.h"
 
 
 namespace Yuni

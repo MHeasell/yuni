@@ -2,7 +2,7 @@
 # define __YUNI_GFX_POINT3D_H__
 
 # include <iostream>
-# include <yuni/misc/math.h>
+# include "../misc/math.h"
 
 
 

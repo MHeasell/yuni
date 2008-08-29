@@ -1,5 +1,5 @@
 
-#include <yuni/hash/checksum/abstract.h>
+#include "abstract.h"
 
 
 namespace Yuni

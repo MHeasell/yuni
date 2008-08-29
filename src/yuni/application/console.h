@@ -1,7 +1,7 @@
 #ifndef __YUNI_APPLICATION_CONSOLE_H__
 # define __YUNI_APPLICATION_CONSOLE_H__
 
-# include <yuni/application/abstract.h>
+# include "abstract.h"
 
 
 

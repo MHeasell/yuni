@@ -1,5 +1,5 @@
 
-#include <yuni/misc/version.h>
+#include "version.h"
 
 namespace Yuni
 {

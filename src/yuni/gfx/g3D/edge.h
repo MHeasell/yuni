@@ -1,11 +1,10 @@
 #ifndef __YUNI_GFX_G3D_EDGE_H__
 # define __YUNI_GFX_G3D_EDGE_H__
 
-# include <yuni/yuni.h>
-# include <yuni/gfx/g3d/vertex.h>
 # include <vector>
 # include <list>
-
+# include "../../yuni.h"
+# include "vertex.h"
 
 
 namespace Yuni

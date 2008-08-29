@@ -1,11 +1,10 @@
 #ifndef __YUNI_GFX_COLOR_CONVERTERS_H__
 # define __YUNI_GFX_COLOR_CONVERTERS_H__
 
-# include <yuni/yuni.h>
 # include <iostream>
-# include <yuni/string.h>
-# include <yuni/misc/math.h>
-
+# include "../yuni.h"
+# include "../misc/string.h"
+# include "../misc/math.h"
 
 
 namespace Yuni

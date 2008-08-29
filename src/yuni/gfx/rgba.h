@@ -1,8 +1,8 @@
 #ifndef __YUNI_GFX_RGB_A_H__
 # define __YUNI_GFX_RGB_A_H__
 
-# include <yuni/string.h>
-# include <yuni/gfx/color.converters.h>
+# include "../misc/string.h"
+# include "color.converters.h"
 
 
 

@@ -1,13 +1,13 @@
 #ifndef __YUNI_USER_INTERFACE_FORM_H__
 # define __YUNI_USER_INTERFACE_FORM_H__
 
-# include <yuni/yuni.h>
-# include <yuni/gfx/point2d.h>
 # include <vector>
-# include <yuni/gfx/ui/component.h>
-# include <yuni/hash/dictionary.h>
-# include <yuni/misc/sharedptr.h>
-# include <yuni/threads/mutex.h>
+# include "../../yuni.h"
+# include "../point2D.h"
+# include "component.h"
+# include "../../hash/dictionary.h"
+# include "../../misc/sharedptr.h"
+# include "../../threads/mutex.h"
 
 
 

@@ -3,7 +3,7 @@
 # define __YUNI_GFX_G3D_VERTEX_H__
 
 # include <vector>
-# include "yuni/gfx/point3D.h"
+# include "../point3D.h"
 
 namespace Yuni
 {

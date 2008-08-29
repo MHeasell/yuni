@@ -1,5 +1,4 @@
 
-#include <yuni/paths.h>
 #ifndef YUNI_OS_WINDOWS
 # include <stdlib.h>
 #else
@@ -8,6 +7,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fstream>
+#include "paths.h"
 
 
 
