@@ -12,6 +12,10 @@ IF(NOT CMAKE_MINOR_VERSION EQUAL 4 OR NOT CMAKE_MAJOR_VERSION EQUAL 2 )
 ENDIF(NOT CMAKE_MINOR_VERSION EQUAL 4 OR NOT CMAKE_MAJOR_VERSION EQUAL 2 )
 Include(CheckIncludeFile)
 
+#
+# Check for Threads.
+#
+Include(FindThreads)
 
 #
 # Command line options for G++
@@ -37,3 +41,10 @@ ADD_SUBDIRECTORY(sharedptr)
 ADD_SUBDIRECTORY(colors)
 ADD_SUBDIRECTORY(application)
 ADD_SUBDIRECTORY(hash)
+IF(CMAKE_USE_PTHREADS_INIT)
+	ADD_SUBDIRECTORY(threads)
+ELSE(CMAKE_USE_PTHREADS_INIT)
+	MESSAGE(WARNING " PThread support missing, threads samples skipped.")
+ENDIF(CMAKE_USE_PTHREADS_INIT)
+
+
