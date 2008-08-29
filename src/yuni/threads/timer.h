@@ -58,34 +58,94 @@ namespace Threads
 		virtual ~Timer();
 		//@}
 
-		//! Get the time interval (in `ms`)
+		//! \name Time interval
+		//@{
+
+		/*!
+		** \brief Get the time interval (in `ms`)
+		*/
 		uint32 timeInterval(); 
-		//! Set the time interval (in `ms`)
+
+		/*!
+		** \brief Set the time interval (in `ms`)
+		**
+		** The change of this value will be taken into consideration at the next pause
+		** the timer will make
+		**
+		** \param t The new time interal in milliseconds
+		*/
 		void timeInterval(const uint32 t);
 
-		//! Get the maximum number of cycle to execute (0 means infinite)
+		//@}
+
+
+		//! \name Cycles
+		//@{
+
+		/*!
+		** \brief Get the maximum number of cycle to execute (0 means infinite)
+		*/
 		uint32 cycleMax();
+
 		/*!
 		** \brief Set the maximum number of cycle to execute
+		**
+		** This value will only be taken into consideration at the next start of
+		** the timer. If you want that the change be done immediately, you have
+		** to restart the timer.
 		*/
 		void cycleMax(const uint32 t);
 
-	protected:
-		virtual void baseExecute();
+		//@}
 
-		virtual bool startTimer() {return false;}
+
+	protected:
 		/*!
-		** \brief Code to execute when the thread is running
-		** \return True to stop the execution of the thread
+		** \brief Event: The timer has just been started
+		**
+		** This event is executed in the thread which has just been created.
+		**
+		** It can be directly stopped if returning false. However the `onStopped` event
+		** will not be called.
+		**
+		** \return True to continue the execution of the thread, false to abort the
+		** execution right now
 		*/
-		virtual bool execute() = 0;
-		virtual void stopTimer() {}
+		virtual bool onStarting() {return true;}
+
+		/*!
+		** \brief Event: Execute a new cycle
+		**
+		** There is no really need to use suspend() in this method, it will be already
+		** done for you.
+		**
+		** \param cycleCount The current cycle number. Always 0 in the case of an infinite timer 
+		** \return True to continue the execution of the timer, False otherwise
+		*/
+		virtual bool onExecute(const uint32 cycleCount) = 0;
+
+		/*!
+		** \brief Event: The timer has been stopped
+		**
+		** This event is executed in the thread.
+		**
+		** \attention You should not rely on this event to release your resources. There is no guaranty
+		** that this method will be called, especially if the thread has been killed because
+		** it did not stop before the timeout was reached.
+		*/
+		virtual void onStopped() {}
+
+
+	private:
+		//! Calls `onExecute()` each `pTimeInterval` milliseconds
+		virtual void baseExecute();
 
 	private:
 		//! The time interval
 		uint32 pTimeInterval;
 		//! The maximum number of cycles before stopping, 0 means infinite
 		uint32 pCyclesCount;
+		//! The current cycle
 		uint32 pCycleCurrent;
 
 	}; // class Thread::Timer
