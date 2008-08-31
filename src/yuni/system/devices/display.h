@@ -22,6 +22,9 @@ namespace Display
 {
 
 
+	/*!
+	** \brief Informations about all available display
+	*/
 	class List
 	{
 	public:

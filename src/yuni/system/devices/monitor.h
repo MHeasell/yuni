@@ -33,7 +33,14 @@ namespace Display
 		//! Vector of monitor
 		typedef std::vector< SharedPtr<Monitor> >  Vector;
 
-		//! Handle for a single monitor
+		/*!
+		** \brief Handle for a single monitor
+		**
+		** This handle is system-dependant
+		** <ul>
+		**    <li>Mac OS : The equivalent is `CGDirectDisplayID`</li> 
+		** </ul>
+		*/
 		typedef uint32  Handle;
 		//! Value for an invalid handle
 		static const Handle InvalidHandle = (Handle)(-1);
