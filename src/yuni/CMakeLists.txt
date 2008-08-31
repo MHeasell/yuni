@@ -102,7 +102,8 @@ set(SRC ${SRC}  application/abstract.h application/abstract.cpp
 				application/console.h application/console.cpp)
 
 # Gfx
-set(SRC ${SRC}  gfx/point2D.h gfx/point3D.h
+set(SRC ${SRC}  gfx/device.h gfx/device.cpp
+				gfx/point2D.h gfx/point3D.h
 				gfx/color.converters.h gfx/color.converters.cpp
 				gfx/rgba.h
 				gfx/vertex.h gfx/triangle.h gfx/edge.h)
