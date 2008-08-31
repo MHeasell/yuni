@@ -1,5 +1,9 @@
 Project(YUNI)
 
+Message(STATUS "")
+Message(STATUS "The Yuni Framework")
+Message(STATUS "")
+
 #
 # CMake Stuff
 #
@@ -16,10 +20,10 @@ Include(CheckIncludeFile)
 
 IF(NOT WIN32)
 	IF(NOT CACHE_OS_INFO)
-		EXECUTE_PROCESS(COMMAND "uname" "-a" OUTPUT_VARIABLE OS_INFO OUTPUT_STRIP_TRAILING_WHITESPACE)
+		EXECUTE_PROCESS(COMMAND "uname" "-mrsv" OUTPUT_VARIABLE OS_INFO OUTPUT_STRIP_TRAILING_WHITESPACE)
 		SET(CACHE_OS_INFO "${OS_INFO}" CACHE STRING "Informations about the hardware")
 	ENDIF(NOT CACHE_OS_INFO)
-	MESSAGE(STATUS ${CACHE_OS_INFO})
+	MESSAGE(STATUS "Operating System: ${CACHE_OS_INFO}")
 ENDIF(NOT WIN32)
 
 
@@ -27,10 +31,12 @@ ENDIF(NOT WIN32)
 #
 # Command line options for G++
 #
-String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
-IF(${VA} EQUAL 0)
-	Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
-ENDIF(${VA} EQUAL 0)
+IF(NOT WIN32)
+	String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
+	IF(${VA} EQUAL 0)
+		Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
+	ENDIF(${VA} EQUAL 0)
+Endif(NOT WIN32)
 Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 
 #
@@ -79,7 +85,9 @@ set(SRC ${SRC}  hash/checksum/abstract.h hash/checksum/abstract.cpp
 set(SRC ${SRC}  system/stdint.h system/os.h) 
 
 # Devices
-set(SRC ${SRC}  system/devices/monitor.h system/devices/monitor.cpp) 
+set(SRC ${SRC}  system/devices/devices.h system/devices/display.cpp
+				system/devices/monitor.h system/devices/monitor.cpp
+				system/devices/resolution.h system/devices/resolution.cpp) 
 
 # Threads
 set(SRC ${SRC}  threads/mutex.h threads/mutex.cpp
