@@ -54,6 +54,25 @@ namespace Display
 		pResolutions.push_back(r);
 	}
 
+	
+	bool Monitor::resolutionIsValid(const SharedPtr<Resolution>& rhs) const
+	{
+		if (rhs.get()) // The pointer must be valid
+		{
+			// Browse all available resolutions
+			// The lookup should be done in the usual way since it is a sorted descendant list
+			for (Resolution::Vector::const_iterator it = pResolutions.begin(); it != pResolutions.end(); ++it)
+			{
+				if (it->get() && *(*it) == *rhs)
+					return true;
+			}
+		}
+		return false;
+	}
+
+
+
+
 } // namespace Display
 } // namespace Devices
 } // namespace System
