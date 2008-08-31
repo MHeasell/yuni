@@ -145,6 +145,19 @@ namespace Display
 
 		//@}
 
+		//! \name Stream printing
+		//@{
+
+		/*!
+		** \brief Print the resolution
+		**
+		** \param[in,out] out An output stream
+		** \return The output stream `out`
+		*/
+		std::ostream& print(std::ostream& out) const;
+
+		//@}
+
 	private:
 		//! Height of the screen
 		uint32 pWidth;
@@ -162,5 +175,16 @@ namespace Display
 } // namespace Devices
 } // namespace System
 } // namespace Yuni
+
+
+
+//! \name Operator overload for stream printing
+//@{
+
+inline std::ostream& operator << (std::ostream& out, const Yuni::System::Devices::Display::Resolution& rhs)
+{ return rhs.print(out); }
+
+//@}
+
 
 #endif // __YUNI_SYSTEM_DEVICES_DISPLAY_RESOLUTION_H__
