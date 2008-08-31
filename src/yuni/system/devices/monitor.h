@@ -131,6 +131,14 @@ namespace Display
 		SharedPtr<Resolution> recommendedResolution() const {return *pResolutions.begin();}
 
 		/*!
+		** \brief Get if a resolution is valid for this monitor
+		**
+		** \param rhs The resolution to check
+		** \return True if the resolution is valid, merely if this resolution is in the list
+		*/
+		bool resolutionIsValid(const SharedPtr<Resolution>& rhs) const;
+
+		/*!
 		** \brief Get if this monitor is the primary display
 		*/
 		bool primary() const {return pPrimary;}
