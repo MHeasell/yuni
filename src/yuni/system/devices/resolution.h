@@ -79,6 +79,72 @@ namespace Display
 
 		//@}
 
+
+		//! \name Operators
+		//@{
+
+		/*!
+		** \brief Comparison operator (equal with)
+		**
+		** \param rhs The other resolution to compare with
+		** \return True if the two resolution are equal
+		*/
+		bool operator == (const Resolution& rhs) const
+		{ return rhs.pWidth == pWidth && rhs.pHeight == pHeight && rhs.pBitsPerPixel == pBitsPerPixel; }
+
+		/*!
+		** \brief Comparison operator (non equal with)
+		**
+		** \param rhs The other resolution to compare with
+		** \return True if the two resolution are not equal
+		*/
+		bool operator != (const Resolution& rhs) const {return !(*this == rhs);}
+
+		/*!
+		** \brief Comparison operator (less than)
+		**
+		** \param rhs The other resolution to compare with
+		** \return True if *this < rhs
+		*/
+		bool operator < (const Resolution& rhs) const;
+
+		/*!
+		** \brief Comparison operator (less than or equal)
+		**
+		** \param rhs The other resolution to compare with
+		** \return True if *this <= rhs
+		*/
+		bool operator <= (const Resolution& rhs) const
+		{ return pWidth <= rhs.pWidth && pHeight <= rhs.pHeight && pBitsPerPixel <= rhs.pBitsPerPixel; }
+
+		/*!
+		** \brief Comparison operator (greater than)
+		**
+		** \param rhs The other resolution to compare with
+		** \return True if *this > rhs
+		*/
+		bool operator > (const Resolution& rhs) const;
+
+		/*!
+		** \brief Comparison operator (greater than or equal)
+		**
+		** \param rhs The other resolution to compare with
+		** \return True if *this >= rhs
+		*/
+		bool operator >= (const Resolution& rhs) const
+		{ return pWidth >= rhs.pWidth && pHeight >= rhs.pHeight && pBitsPerPixel >= rhs.pBitsPerPixel; }
+
+		/*!
+		** \brief Assign new values from another resolution 
+		**
+		** \param p The new values
+		** \return Always *this
+		*/
+		Resolution& operator = (const Resolution& p)
+		{ pWidth = p.pWidth; pHeight = p.pHeight; pBitsPerPixel = p.pBitsPerPixel; return (*this); }
+
+		//@}
+
 	private:
 		//! Height of the screen
 		uint32 pWidth;

@@ -44,6 +44,35 @@ namespace Display
 	}
 
 
+	bool Resolution::operator < (const Resolution& rhs) const
+	{
+		if (pWidth < rhs.pWidth)
+			return true;
+		if (pWidth == rhs.pWidth)
+		{
+			if (pHeight < rhs.pHeight)
+				return true;
+			if (pHeight == rhs.pHeight)
+				return (pBitsPerPixel < rhs.pBitsPerPixel);
+		}
+		return false;
+	}
+
+	bool Resolution::operator > (const Resolution& rhs) const
+	{
+		if (pWidth > rhs.pWidth)
+			return true;
+		if (pWidth == rhs.pWidth)
+		{
+			if (pHeight > rhs.pHeight)
+				return true;
+			if (pHeight == rhs.pHeight)
+				return (pBitsPerPixel > rhs.pBitsPerPixel);
+		}
+		return false;
+	}
+
+
 
 } // namespace Display
 } // namespace Devices
