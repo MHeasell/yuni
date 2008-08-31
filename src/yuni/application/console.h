@@ -11,12 +11,11 @@ namespace Application
 {
 
 
-	/*! \class Yuni::Application::Console
-	**
+	/*!
 	** \brief Console Application
 	**
 	** \code
-	** class HelloWorld
+	** class HelloWorld : public Yuni::Application::Console
 	** {
 	** public:
 	**	  HelloWorld(nt argc, char* argv[]) : Yuni::Application::Console(argc, argv) {}
@@ -60,7 +59,7 @@ namespace Application
 		/*!
 		** \brief The main routine for the console application
 		*/
-		virtual void execute() = 0;
+		virtual void onExecute() = 0;
 
 	}; // class Application::Console
 
