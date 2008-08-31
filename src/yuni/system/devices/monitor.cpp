@@ -1,13 +1,6 @@
 
-#ifdef YUNI_OS_WINDOWS
-#  ifndef WIN32_LEAN_AND_MEAN
-#	 define WIN32_LEAN_AND_MEAN
-#  endif
-#  include <windows.h>
-#endif // ifdef YUNI_OS_WINDOWS
 #include "monitor.h"
 #include "../../hash/checksum/md5.h"
-
 
 
 namespace Yuni
@@ -16,20 +9,52 @@ namespace System
 {
 namespace Devices
 {
+namespace Display
+{
 
 
-	String Monitor::guid() const
+	Monitor::Monitor()
+		:pHandle(Monitor::InvalidHandle), pName(), pResolutions(),
+		pPrimary(false), pHardwareAcceleration(false), pBuiltin(false)
+	{}
+
+	Monitor::Monitor(const String& nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b)
+		:pHandle(hwn), pName(nm), pResolutions(),
+		pPrimary(p), pHardwareAcceleration(a), pBuiltin(b)
+	{}
+
+	Monitor::Monitor(const Monitor& c)
+		:pHandle(c.pHandle), pName(c.pName), pResolutions(c.pResolutions), pPrimary(c.pPrimary),
+		pHardwareAcceleration(c.pHardwareAcceleration), pBuiltin(c.pBuiltin)
+	{}
+
+
+	Monitor::~Monitor()
 	{
-		String hash;
-		hash << pName << " :: ";
-		for (Resolution::Vector::const_iterator i = pResolutions.begin(); i != pResolutions.end(); ++i)
-			hash << i->width() << "x" << i->height() << "-";
-		Hash::Checksum::MD5 md5;
-		return md5.fromString(hash);
+		pResolutions.clear();
 	}
 
 
+	const String& Monitor::guid()
+	{
+		// We assume that `pResolutions` is not empty
+		if (pMD5Cache.empty())
+		{
+			Hash::Checksum::MD5 md5;
+			pMD5Cache = md5.fromString(String() << pName << "/"
+				<< (*pResolutions.begin())->toString()
+				<< "/" << pPrimary << "/" << pBuiltin << "/" << pHardwareAcceleration);
+		}
+		return pMD5Cache;
+	}
 
+
+	void Monitor::addResolution(SharedPtr<Resolution>& r)
+	{
+		pResolutions.push_back(r);
+	}
+
+} // namespace Display
 } // namespace Devices
 } // namespace System
 } // namespace Yuni
