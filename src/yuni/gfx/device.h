@@ -200,6 +200,16 @@ namespace Gfx
 
 		//@}
 
+		//! \name Consistency
+		//@{
+
+		/*!
+		** \brief Ensures settings are valid
+		*/
+		void ensuresSettingsAreValid();
+
+		//@}
+
 		//! \name Locks
 		//@{
 
@@ -212,6 +222,13 @@ namespace Gfx
 		** \brief Avoid any further changes 
 		*/
 		void lock();
+
+		/*!
+		** \brief Allow further changes
+		**
+		** \warning This method should not be used by the Yuni library
+		*/
+		void unlock();
 
 		//@}
 

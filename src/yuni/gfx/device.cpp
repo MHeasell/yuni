@@ -136,22 +136,26 @@ namespace Gfx
 			pVSync = v;
 	}
 
+	void Device::ensuresSettingsAreValid()
+	{
+		if (!pMonitor->valid())
+		{
+			System::Devices::Display::List allDisplays;
+			pMonitor = allDisplays.primary();
+		}
+		if (!pMonitor->resolutionIsValid(pResolution))
+			pResolution = pMonitor->recommendedResolution();
+	}
 
 	void Device::lock()
 	{
-		if (!pLocked)
-		{
-			pLocked = true;
-			if (!pMonitor->valid())
-			{
-				System::Devices::Display::List allDisplays;
-				pMonitor = allDisplays.primary();
-			}
-			if (!pMonitor->resolutionIsValid(pResolution))
-				pResolution = pMonitor->recommendedResolution();
-		}
+		pLocked = true;
 	}
 
+	void Device::unlock()
+	{
+		pLocked = false;
+	}
 
 } // namespace Gfx
 } // namespace Yuni
