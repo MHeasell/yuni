@@ -36,7 +36,7 @@ namespace Yuni
 		//@{
 		//! The operator =
 		SharedPtr& operator = (const SharedPtr& rhs);
-		SharedPtr& operator = (const T* rhs) { *this = SharedPtr<T>(rhs); }
+		SharedPtr& operator = (T* rhs) { *this = SharedPtr<T>(rhs); return *this;}
 		//! The operator *
 		T& operator * () const throw() {return *counter->ptr;}
 		//! The operator ->
