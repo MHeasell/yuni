@@ -24,8 +24,8 @@ namespace Gfx
 			case ygdtNull:     { return "Null"; }
 			case ygdtSoftware: { return "Software"; }
 			case ygdtOpenGL:   { return "OpenGL"; }
-			case ygdtDirectX9: { return "DirectX"; } // The latest version of DirectX 
-			case ygdtDirectX8: { return "DirectX (v8)"; }
+			case ygdtDirectX9: { return "Microsoft DirectX"; } // The latest version of DirectX 
+			case ygdtDirectX8: { return "Microsoft DirectX (v8)"; }
 		}
 		return "Null";
 	}
@@ -42,11 +42,11 @@ namespace Gfx
 		if ("opengl" == s || "open gl" == s)
 			return ygdtOpenGL;
 		// Microsoft DirectX
-		if ("directx" == s) // The latest version of DirectX
+		if ("directx" == s || "microsoft Directx") // The latest version of DirectX
 			return ygdtDirectX9;
-		if ("directx8" == s || "directx v8" == s || "directx (v8)" == s)
+		if ("directx8" == s || "directx v8" == s || "directx (v8)" == s || "microsoft directx (v8)" == s)
 			return ygdtDirectX8;
-		if ("directx9" == s || "directx v9" == s || "directx (v9)" == s)
+		if ("directx9" == s || "directx v9" == s || "directx (v9)" == s || "microsoft directx (v9)" == s)
 			return ygdtDirectX9;
 		// Software
 		if ("software" == s)
@@ -157,7 +157,22 @@ namespace Gfx
 		pLocked = false;
 	}
 
+
+	std::ostream& Device::print(std::ostream& out) const
+	{
+		out << TypeToString(pType) << " - ";
+		if (pResolution.null())
+			out << "<Invalid Resolution>";
+		else
+			out << *pResolution;
+		out << " - Fullscreen:" << String(pFullscreen) << ", "
+			<< "VSync:" << String(pVSync) << ", "
+			<< "Stencilbuffer:" << String(pStencilbuffer);
+		return out;
+	}
+
+
+
 } // namespace Gfx
 } // namespace Yuni
-
 

@@ -1,6 +1,7 @@
 #ifndef __YUNI_GFX_DEVICE_H__
 # define __YUNI_GFX_DEVICE_H__
 
+# include <iostream>
 # include "../yuni.h"
 # include "../sharedptr.h"
 # include "../system/devices/resolution.h"
@@ -232,6 +233,18 @@ namespace Gfx
 
 		//@}
 
+		//! \name Stream printing
+		//@{
+
+		/*!
+		** \brief Print the point
+		**
+		** \param[in,out] out An output stream
+		** \return The output stream `out`
+		*/
+		std::ostream& print(std::ostream& out) const;
+
+		//@}
 
 	private:
 		//! If changes are allowed or not
@@ -256,5 +269,17 @@ namespace Gfx
 
 } // namespace Gfx
 } // namespace Yuni
+
+
+
+
+//! \name Operator overload for stream printing
+//@{
+
+inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Device& rhs)
+{ return rhs.print(out); }
+
+//@}
+
 
 #endif // __YUNI_GFX_DEVICE_H__
