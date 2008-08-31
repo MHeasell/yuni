@@ -218,6 +218,9 @@ namespace Gfx
 
 		/*!
 		** \brief Print the point
+		**
+		** \param[in,out] out An output stream
+		** \return The output stream `out`
 		*/
 		std::ostream& print(std::ostream& out) const
 		{
