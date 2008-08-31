@@ -42,7 +42,7 @@ namespace Display
 		**
 		** The result is guaranteed to be valid for use.
 		*/
-		SharedPtr<Monitor> primary() const {return pPrimary;}
+		const SharedPtr<Monitor>& primary() const {return pPrimary;}
 
 		/*!
 		** \brief All available monitors
