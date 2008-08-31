@@ -30,7 +30,7 @@ namespace Gfx
 		return "Null";
 	}
 
-	Type Device::StringToType(String s)
+	Device::Type Device::StringToType(String s)
 	{
 		if (s.empty()) // no data
 			return DefaultType;
