@@ -21,7 +21,7 @@ public:
 	{}
 
 	// Overload execute() to implement our own behaviour
-	virtual void execute()
+	virtual void onExecute()
 	{
 		std::cout << "Hello world" << std::endl;
 	}
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 	HelloWorld app(argc, argv);
 
 	// Run the execute() method to launch the app
-	app.execute();
+	app.onExecute();
 
 	// Exit the app
 	return app.exitCode();
