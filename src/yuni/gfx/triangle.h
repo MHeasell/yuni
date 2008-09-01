@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_G3D_TRIANGLE_H__
-# define __YUNI_GFX_G3D_TRIANGLE_H__
+#ifndef __YUNI_GFX_TRIANGLE_H__
+# define __YUNI_GFX_TRIANGLE_H__
 
 # include "edge.h"
 
@@ -55,4 +55,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_G3D_TRIANGLE_H__
+#endif // __YUNI_GFX_TRIANGLE_H__

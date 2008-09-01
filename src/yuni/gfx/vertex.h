@@ -1,9 +1,8 @@
-#ifndef __YUNI_GFX_G3D_VERTEX_H__
-# define __YUNI_GFX_G3D_VERTEX_H__
+#ifndef __YUNI_GFX_VERTEX_H__
+# define __YUNI_GFX_VERTEX_H__
 
 # include <vector>
-# include "point3D.h"
-
+# include "yuni/gfx/point3D.h"
 
 
 namespace Yuni
@@ -30,7 +29,7 @@ namespace Gfx
 		//@{
 		Vertex(): pPosition()
 		{}
-		Vertex(const Yuni::Gfx::Point3D& position): pPosition(position)
+		Vertex(const Point3D<float>& position): pPosition(position)
 		{}
 		template<typename U, typename V, typename W>
 		Vertex(const U x, const V y, const W z): pCoord(x, y, z)
@@ -63,14 +62,14 @@ namespace Gfx
 
 
 		//! Position of the vertex in space
-		const Yuni::Gfx::Point3D& position() const
+		const Point3D<float>& position() const
 		{
 			return pPosition;
 		}
 
 	private:
 		Edge::Vector pEdges;
-		Yuni::Gfx::Point3D pPosition;
+		Point3D<float> pPosition;
 
 	}; // Vertex
 
@@ -80,4 +79,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_G3D_VERTEX_H__
+#endif // __YUNI_GFX_VERTEX_H__
