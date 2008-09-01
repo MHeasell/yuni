@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_G3D_EDGE_H__
-# define __YUNI_GFX_G3D_EDGE_H__
+#ifndef __YUNI_GFX_EDGE_H__
+# define __YUNI_GFX_EDGE_H__
 
 # include <vector>
 # include <list>
@@ -73,4 +73,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_G3D_EDGE_H__
+#endif // __YUNI_GFX_EDGE_H__
