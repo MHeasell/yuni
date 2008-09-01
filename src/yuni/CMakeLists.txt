@@ -46,10 +46,6 @@ Set(TARGET_LIBS "${PROJECT_SOURCE_DIR}/../../bin/static/")
 Set(LIBRARY_OUTPUT_PATH "${TARGET_LIBS}")
 Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 
-#
-# The common paths for Yuni headers
-#
-Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I'${PROJECT_SOURCE_DIR}/..'")
 
 
 

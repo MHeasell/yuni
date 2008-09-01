@@ -91,6 +91,6 @@ namespace Yuni
 } // namespace Yuni
 
 
-# include <yuni/misc/sharedptr.hxx>
+# include "sharedptr.hxx"
 
 #endif // __YUNI_MISC_SHARED_POINTER_H__

@@ -138,6 +138,7 @@ namespace UI
 } // namespace Yuni
 
 
-# include <yuni/gfx/ui/window.h>
+// The class component must be declared before all classes related to the UI
+# include "window.h"
 
 #endif // __YUNI_USER_INTERFACE_COMPONENT_H__

@@ -1,10 +1,9 @@
 #ifndef __YUNI_THREADS_JOBS_ABSTRACT_H__
 # define __YUNI_THREADS_JOBS_ABSTRACT_H__
 
-# include "yuni/yuni.h"
-# include "yuni/string.h"
-# include "yuni/threads/thread.h"
-# include "yuni/string.h"
+# include "../yuni.h"
+# include "../string.h"
+# include "thread.h"
 
 
 

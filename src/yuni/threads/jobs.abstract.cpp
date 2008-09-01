@@ -1,5 +1,5 @@
 
-#include "yuni/threads/jobs.h"
+#include "jobs.h"
 
 
 # define YUNI_JOBS_PRIORITY_MIN  -100

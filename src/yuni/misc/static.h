@@ -2,10 +2,14 @@
 # define __YUNI_MISC_STATIC_IF_H__
 
 
+
 namespace Yuni
 {
 namespace Static
 {
+
+
+
 
 	namespace Remove
 	{
@@ -18,6 +22,9 @@ namespace Static
 		template <typename T> struct Const<const T> { typedef T t; };
 
 	} // namespace Remove
+
+
+
 
 
 
@@ -35,6 +42,9 @@ namespace Static
 		{ return tr; }
 	};
 
+
+
+
 	template <typename IfTrue, typename IfFalse>
 	struct If<false, IfTrue, IfFalse>
 	{
@@ -48,6 +58,9 @@ namespace Static
 		static const RetFalse& choose (const RetTrue&, const RetFalse& fa)
 		{ return fa; }
 	};
+
+
+
 
 } // namespace Static
 } // namespaec Yuni

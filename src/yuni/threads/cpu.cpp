@@ -1,12 +1,12 @@
 
-#include <yuni/threads/abstract.thread.h>
+#include "abstract.thread.h"
 #ifdef YUNI_OS_DARWIN
 #	include <sys/param.h>
 #	include <sys/sysctl.h>
 #endif
 #ifdef YUNI_OS_LINUX
 #	include <fstream>
-#	include <yuni/string.h>
+#	include "../string.h"
 #endif
 
 
