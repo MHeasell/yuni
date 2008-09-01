@@ -1,6 +1,6 @@
 
-#include <yuni/threads/thread.h>
-#include <yuni/threads/abstract.thread.h>
+#include "thread.h"
+#include "abstract.thread.h"
 #include <assert.h>
 
 

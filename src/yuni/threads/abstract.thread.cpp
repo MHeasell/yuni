@@ -10,8 +10,8 @@
 #include <assert.h>
 #include <unistd.h>
 
-#include "yuni/threads/thread.h"
-#include "yuni/threads/abstract.thread.h"
+#include "thread.h"
+#include "abstract.thread.h"
 
 
 

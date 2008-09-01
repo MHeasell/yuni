@@ -1,6 +1,6 @@
 
-#include <yuni/threads/timer.h>
-#include <yuni/threads/abstract.thread.h>
+#include "timer.h"
+#include "abstract.thread.h"
 #include <assert.h>
 
 

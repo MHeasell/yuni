@@ -1,11 +1,10 @@
 #ifndef __YUNI_THREADS_PRIVATE_ABSTRACT_H__
 # define __YUNI_THREADS_PRIVATE_ABSTRACT_H__
 
-# include "yuni/yuni.h"
 # include <pthread.h>
-# include "yuni/yuni.h"
-# include "yuni/string.h"
-# include "yuni/threads/mutex.h"
+# include "../yuni.h"
+# include "mutex.h"
+# include "../string.h"
 
 
 

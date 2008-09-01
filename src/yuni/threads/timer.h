@@ -1,9 +1,9 @@
 #ifndef __YUNI_THREADS_THREAD_TIMER_H__
 # define __YUNI_THREADS_THREAD_TIMER_H__
 
-# include <yuni/yuni.h>
-# include <yuni/threads/mutex.h>
-# include <yuni/threads/abstract.thread.h>
+# include "../yuni.h"
+# include "mutex.h"
+# include "abstract.thread.h"
 
 
 

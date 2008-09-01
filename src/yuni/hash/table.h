@@ -130,6 +130,6 @@ namespace Hash
 } // namespace Yuni
 
 
-# include <yuni/hash/table.hxx>
+# include "table.hxx"
 
 #endif // __YUNI_HASH_TABLE_H__
