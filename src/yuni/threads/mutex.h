@@ -2,6 +2,7 @@
 # define __YUNI_THREADS_MUTEX_H__
 
 # include <pthread.h>
+# include "../yuni.h"
 
 
 
@@ -15,10 +16,26 @@ namespace Yuni
 	class Mutex 
 	{
 	public:
+		/*!
+		** \brief A class-level locking mechanism
+		**
+		** A class-level locking operation locks all objects in a given class during that operation
+		*/
+		template<class T>
+		class ClassLevelLockable
+		{
+		public:
+			//! A dedicated mutex for the class T
+			static Mutex mutex;
+
+		}; // class ClassLevelLockable
+
+
+	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		Mutex();
+		Mutex(const bool recursive = false);
 		//! Destructor
 		~Mutex() {pthread_mutex_destroy(&pPthreadLock);}
 		//@}
@@ -37,7 +54,7 @@ namespace Yuni
 		void unlock() {pthread_mutex_unlock(&pPthreadLock);}
 
 		//@}
-	
+
 		//! \name PThread wrapper
 		//@{
 		/*!
@@ -51,6 +68,8 @@ namespace Yuni
 		pthread_mutex_t pPthreadLock;
 
 	}; // class Mutex
+
+
 
 
 
@@ -101,13 +120,22 @@ namespace Yuni
 		/*!
 		** \brief Get the original mutex
 		*/
-		Mutex& get() const {return pMutex;}
+		Mutex& mutex() const {return pMutex;}
 
 	private:
 		//! Reference to the real mutex
 		Mutex& pMutex;
 
 	}; // MutexLocker
+
+
+
+
+	//! All mutexes for each class
+	template<class T> Mutex Mutex::ClassLevelLockable<T>::mutex;
+
+
+
 
 
 } // namespace Yuni
