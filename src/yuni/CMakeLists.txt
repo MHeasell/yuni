@@ -35,7 +35,7 @@ IF(NOT WIN32)
 	Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 Else(NOT WIN32)
 	IF(MINGW)
-		Set(CMAKE_CXX_OTHER_FLAGS "-03  -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
+		Set(CMAKE_CXX_OTHER_FLAGS "-Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
 		Message(STATUS "Added C++ flags `${CMAKE_CXX_OTHER_FLAGS}`")
 		Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
 	ENDIF(MINGW)
@@ -95,9 +95,9 @@ set(SRC ${SRC}
 set(SRC ${SRC}
                 system/stdint.h system/os.h
                 system/windows.hdr.h  system/windows/gettimeofday.h) 
-If(WIN32)
+If(WIN32 AND MSVC)
     set(SRC ${SRC} system/windows/gettimeofday.cpp)
-EndIF(WIN32)
+EndIF(WIN32 AND MSVC)
 
 # Devices
 set(SRC ${SRC}

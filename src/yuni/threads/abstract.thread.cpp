@@ -19,7 +19,7 @@
 #include "abstract.thread.h"
 
 
-#ifdef YUNI_OS_WINDOWS
+#if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 #	define YUNI_OS_GETPID  _getpid
 #else
 #	define YUNI_OS_GETPID  getpid
@@ -54,7 +54,7 @@ namespace Private
 		 */
 		struct timespec* millisecondsFromNow(struct timespec* time, int millisecs)
 		{
-			# ifdef YUNI_OS_WINDOWS
+			# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 			struct _timeb currSysTime;
 			# else
 			struct timeb currSysTime;
@@ -64,7 +64,7 @@ namespace Private
 			const sint64 NANOSEC_PER_SEC = 1000000000;
 
 			/* get current system time and add millisecs */
-			# ifdef YUNI_OS_WINDOWS
+			# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 			_ftime_s(&currSysTime);
 			# else
 			ftime(&currSysTime);

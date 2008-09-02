@@ -1,6 +1,5 @@
 
 #include <algorithm>
-#include <cstdarg>
 #include "string.h"
 
 
@@ -41,7 +40,7 @@ namespace Yuni
 	{
 		size_t l = wcslen(v);
 		char* b = new char[l + 1];
-		#ifndef YUNI_OS_WINDOWS
+		#if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
 		wcstombs(&b[0], v, l);
 		#else
 		size_t i;
