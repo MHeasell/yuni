@@ -43,8 +43,8 @@ Else(NOT WIN32)
 		Set(CMAKE_CXX_OTHER_FLAGS "/GR /WX /Ob2 /Ot /MDd")
 		Message(STATUS "Added C++ flags `${CMAKE_CXX_OTHER_FLAGS}`")
 		Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
-	ENDIF
-ENDIF(WIN32)
+	ENDIF(MSVC)
+ENDIF(NOT WIN32)
 
 #
 # The target directory for static libs
