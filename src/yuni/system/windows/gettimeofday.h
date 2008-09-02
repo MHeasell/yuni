@@ -5,13 +5,21 @@
 
 # ifdef YUNI_OS_WINDOWS
 #	include "../windows.hdr.h"
-#	include <time.h>
-#	if defined(_MSC_VER) || defined(_MSC_EXTENSIONS)
-#		define DELTA_EPOCH_IN_MICROSECS  11644473600000000Ui64
-#	else
-#		define DELTA_EPOCH_IN_MICROSECS  11644473600000000ULL
-#	endif
-# endif
+
+# ifndef YUNI_OS_MSVC
+
+#   include <sys/time.h>
+
+# else // YUNI_OS_MSVC
+
+#   ifdef YUNI_OS_WINDOWS
+#	    include <time.h>
+#	    if defined(_MSC_VER) || defined(_MSC_EXTENSIONS)
+#		    define DELTA_EPOCH_IN_MICROSECS  11644473600000000Ui64
+#	    else
+#		    define DELTA_EPOCH_IN_MICROSECS  11644473600000000ULL
+#	    endif
+#   endif
 
 namespace Yuni
 {
@@ -32,5 +40,8 @@ namespace Yuni
 
 } // namespace Yuni
 
+
+#   endif // YUNI_OS_MSVC
+# endif // YUNI_OS_WINDOWS
 
 #endif // __YUNI_SYSTEM_WINDOWS_GETTIMEOFDAY_H__

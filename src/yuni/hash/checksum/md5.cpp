@@ -380,7 +380,7 @@ namespace Checksum
 			char hex[33];
 			for (int i = 0; i < 16; ++i)
 			{
-				# ifdef YUNI_OS_WINDOWS
+				# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 				_snprintf_s(hex + i * 2, sizeof(hex), sizeof(hex), "%02x", digest[i]);
 				# else
 				snprintf(hex + i * 2, sizeof(hex), "%02x", digest[i]);
