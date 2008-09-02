@@ -8,9 +8,9 @@ namespace Yuni
 {
 
     /*!
-    ** \brief Suspend thread execution for an interval measured in milliseconds
+    ** \brief Suspend thread execution for an interval measured in seconds
     **
-    ** \param seconds Number of milliseconds to wait
+    ** \param seconds Number of seconds to wait
     **
     ** \note You should consider that this method can not be interrupted.
     ** You should not use this routine when using the thread facility provided
@@ -18,7 +18,7 @@ namespace Yuni
     **
     ** \see Yuni::Threads::Abstract::suspend()
     */
-    void Sleep(const uint32 milliseconds);
+    void Sleep(const uint32 seconds);
 
 
 } // namespace Yuni
