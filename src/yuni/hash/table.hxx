@@ -17,7 +17,7 @@ namespace Hash
 	class Table<K, V, true>
 	{
 	public:
-		typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::hash<K> >::iterator  iterator;
+		typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN<K> >::iterator  iterator;
 
 	public:
 		Table() : pTable() {}
@@ -44,7 +44,7 @@ namespace Hash
 		//! The mutex
 		Mutex pMutex;
 		//! The real hash map
-		YuniSTLExt::hash_map< K, V, YuniSTLExt::hash<K> >  pTable;
+		YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN<K> >  pTable;
 	};
 
 

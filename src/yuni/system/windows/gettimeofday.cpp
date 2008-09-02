@@ -34,8 +34,12 @@ namespace Yuni
 				_tzset();
 				tzflag++;
 			}
-			tz->tz_minuteswest = _timezone / 60;
-			tz->tz_dsttime = _daylight;
+			long tzone(0);
+			_get_timezone(&tzone);
+			tz->tz_minuteswest = tzone / 60;
+			int dlight(0);
+			_get_daylight(&dlight);
+			tz->tz_dsttime = dlight;
 		}
 
 		return 0;

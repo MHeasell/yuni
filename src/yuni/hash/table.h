@@ -33,9 +33,9 @@ namespace Hash
 	{
 	public:
 		//! An iterator
-		typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::hash<K> >::iterator  iterator;
+		typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN<K> >::iterator  iterator;
 		//! A const iterator
-		typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::hash<K> >::const_iterator  const_iterator;
+		typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN <K> >::const_iterator  const_iterator;
 
 	public:
 		//! \name Constructors & Destructor
@@ -119,7 +119,7 @@ namespace Hash
 
 	private:
 		//! The real hash map
-		YuniSTLExt::hash_map< K, V, YuniSTLExt::hash<K> >  pTable;
+		YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN<K> >  pTable;
 
 	}; // class Hash::Table
 

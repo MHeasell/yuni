@@ -8,6 +8,7 @@
 #	include <fstream>
 #	include "../string.h"
 #endif
+#include "../system/windows.hdr.h"
 
 
 

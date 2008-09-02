@@ -37,31 +37,46 @@ namespace Hash
 
 
 
+
+/*!
+** \internal __gnu_cxx is deprecated in C++0x
+*/
+
 # ifdef YUNI_OS_GNU_HASH_MAP
+#	define YUNI_OS_HASH_MAP_INHERIT
+#	define YUNI_OS_HASH_MAP_FUN hash
 namespace __gnu_cxx
 # else
+#	define YUNI_OS_HASH_MAP_FUN hash_compare
+#	define YUNI_OS_HASH_MAP_INHERIT  : public stdext::hash_compare <std::string>
 namespace stdext
 # endif
 {
 
 	template<>
-	class hash<Yuni::Hash::Key>
+	class YUNI_OS_HASH_MAP_FUN <Yuni::Hash::Key> YUNI_OS_HASH_MAP_INHERIT
 	{
 	public:
 		size_t operator()(const Yuni::Hash::Key& __s) const
 		{ return __s.uid(); }
+
+		bool operator () (const Yuni::Hash::Key& lhs, const Yuni::Hash::Key& rhs) const
+		{ return lhs.uid() < rhs.uid(); }
 	};
 
 
 	template <>
-	class hash<Yuni::String>
+	class YUNI_OS_HASH_MAP_FUN <Yuni::String> YUNI_OS_HASH_MAP_INHERIT
 	{
 	public:
-		size_t operator()(const Yuni::String& str) const
+		size_t operator () (const Yuni::String& str) const
 		{
-			hash<char const *> h;
+			YUNI_OS_HASH_MAP_FUN <char const *> h;
 			return (h(str.c_str()));
 		}
+
+		bool operator () (const Yuni::String& lhs, const Yuni::String& rhs)
+		{ return lhs < rhs; }
 	};
 
 } // namespace YuniSTLExt

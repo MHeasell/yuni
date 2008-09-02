@@ -1,18 +1,29 @@
 
-#include <time.h>
-#include <sys/errno.h>
+#include "../yuni.h"
 #include <iostream>
-#include <unistd.h>
-#include <sys/time.h>
+#include <time.h>
 #include <sys/timeb.h>
 #include <sys/types.h>
-#include <time.h>
 #include <assert.h>
-#include <unistd.h>
+#ifndef YUNI_OS_WINDOWS
+#	include <sys/errno.h>
+#	include <unistd.h>
+#	include <sys/time.h>
+#else
+#	include "../system/windows.hdr.h"
+#	include <process.h>
+#	include "../system/windows/gettimeofday.h"
+#endif
 
 #include "thread.h"
 #include "abstract.thread.h"
 
+
+#ifdef YUNI_OS_WINDOWS
+#	define YUNI_OS_GETPID  _getpid
+#else
+#	define YUNI_OS_GETPID  getpid
+#endif
 
 
 
@@ -26,7 +37,7 @@ namespace Private
 
 	unsigned int AbstractThreadModel::ProcessID()
 	{
-		return getpid();
+		return YUNI_OS_GETPID();
 	}
 
 
@@ -54,7 +65,7 @@ namespace Private
 
 			/* get current system time and add millisecs */
 			# ifdef YUNI_OS_WINDOWS
-			_ftime(&currSysTime);
+			_ftime_s(&currSysTime);
 			# else
 			ftime(&currSysTime);
 			# endif
@@ -105,16 +116,9 @@ namespace Private
 	}
 
 
-	AbstractThreadModel::AbstractThreadModel(const AbstractThreadModel&)
-		:pMutex(), pThreadID(0), pIsRunning(false), pFreeOnTerminate(false), pShouldStop(true)
-	{
-		pthread_cond_init(&p_threadMustStopCond, NULL);
-		pthread_cond_init(&p_threadIsAboutToExit, NULL);
-	}
-
 
 	AbstractThreadModel::AbstractThreadModel()
-		:pMutex(), pThreadID(0), pIsRunning(false), pFreeOnTerminate(false), pShouldStop(true)
+		:pMutex(), pThreadID(), pIsRunning(false), pFreeOnTerminate(false), pShouldStop(true)
 	{
 		pthread_cond_init(&p_threadMustStopCond, NULL);
 		pthread_cond_init(&p_threadIsAboutToExit, NULL);
