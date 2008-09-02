@@ -32,13 +32,18 @@ IF(NOT WIN32)
 	IF(${VA} EQUAL 0)
 		Set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Werror -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
 	ENDIF(${VA} EQUAL 0)
-Endif(NOT WIN32)
-Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
-
-IF(WIN32)
-	Set(CMAKE_CXX_OTHER_FLAGS "/GR /WX /Ob2 /Ot /MDd")
-    Message(STATUS "Added C++ flags `${CMAKE_CXX_OTHER_FLAGS}`")
-	Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
+	Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
+Else(NOT WIN32)
+	IF(MINGW)
+		Set(CMAKE_CXX_OTHER_FLAGS "-03  -Woverloaded-virtual -Wextra -Wshadow -Wconversion -fstack-check -funroll-loops")
+		Message(STATUS "Added C++ flags `${CMAKE_CXX_OTHER_FLAGS}`")
+		Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
+	ENDIF(MINGW)
+	IF(MSVC)
+		Set(CMAKE_CXX_OTHER_FLAGS "/GR /WX /Ob2 /Ot /MDd")
+		Message(STATUS "Added C++ flags `${CMAKE_CXX_OTHER_FLAGS}`")
+		Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
+	ENDIF
 ENDIF(WIN32)
 
 #
@@ -130,7 +135,8 @@ set(SRC ${SRC}
 
 
 # External Lib: Irrlicht
-#Set(SRC ${SRC}	private/gfx3d/irrlicht/irrlicht-for-yuni.h private/gfx3d/irrlicht/irrlicht-for-yuni.cpp)
+#Set(SRC ${SRC}
+#				private/gfx3d/irrlicht/irrlicht-for-yuni.h private/gfx3d/irrlicht/irrlicht-for-yuni.cpp)
 
 
 
