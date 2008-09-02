@@ -383,7 +383,7 @@ namespace Checksum
 				# ifdef YUNI_OS_WINDOWS
 				_snprintf_s(hex + i * 2, sizeof(hex), sizeof(hex), "%02x", digest[i]);
 				# else
-				sprintf(hex + i * 2, sizeof(hex), "%02x", digest[i]);
+				snprintf(hex + i * 2, sizeof(hex), "%02x", digest[i]);
 				# endif
 			}
 			hex[32] = '\0';
