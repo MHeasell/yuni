@@ -3,7 +3,7 @@
 #if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 # include "windows.hdr.h"
 #else
-# include <time.h>
+# include <unistd.h>
 #endif
 
 
@@ -11,12 +11,12 @@
 namespace Yuni
 {
 
-    void Sleep(const uint32 milliseconds)
+    void Sleep(const uint32 seconds)
     {
         # if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-        ::Sleep(milliseconds);
+        ::Sleep(1000 * seconds);
         # else
-        nanosleep(milliseconds * 1000);
+        sleep(seconds);
         # endif
     }
 
