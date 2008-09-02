@@ -381,7 +381,7 @@ namespace Checksum
 			for (int i = 0; i < 16; ++i)
 			{
 				# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-				_snprintf_s(hex + i * 2, sizeof(hex), sizeof(hex), "%02x", digest[i]);
+				_snprintf_s(hex + i * 2, sizeof(hex), 2, "%02x", digest[i]);
 				# else
 				snprintf(hex + i * 2, sizeof(hex), "%02x", digest[i]);
 				# endif

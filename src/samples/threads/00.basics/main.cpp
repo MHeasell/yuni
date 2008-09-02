@@ -1,9 +1,15 @@
 #include <yuni/yuni.h>
 #include <yuni/threads.h>
 #include <iostream>
+#include <yuni/system/sleep.h>
+
+
 
 //! This mutex will serve to synchronize the standard output.
-Yuni::Mutex mutex;
+static Yuni::Mutex mutex;
+
+
+
 
 /*!
  * \brief This class represents a task that should be executed
@@ -30,7 +36,7 @@ protected:
 	{
 		int i = 99;
 
-		while(true)
+		while (true)
 		{
 			mutex.lock();
 			std::cout << " ["<< x <<"] " << i-- << " bottles of beer on a wall. Calculating a very complicated thing ..." << std::endl;
@@ -44,7 +50,7 @@ protected:
 			 *
 			 * The bottom line is: DO NOT use sleep() to wait in threads.
 			 */
-			sleep(1);
+            Yuni::Sleep(1000 /* ms */);
 
 			/*
 			 * After our work, if the task is repetitive, we will want to check
@@ -116,7 +122,7 @@ int main(void)
 	mutex.unlock();
 
 	// Simulate a long processing
-	sleep(5);
+	Yuni::Sleep(5000 /* ms */);
 
 	mutex.lock();
 	std::cout << "[M] Stopping bottle counting..." << std::endl;
