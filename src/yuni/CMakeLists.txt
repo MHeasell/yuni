@@ -35,6 +35,12 @@ IF(NOT WIN32)
 Endif(NOT WIN32)
 Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 
+IF(WIN32)
+	Set(CMAKE_CXX_OTHER_FLAGS "/GR /WX /Ob2 /Ot /MDd")
+    Message(STATUS "Added C++ flags `${CMAKE_CXX_OTHER_FLAGS}`")
+	Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
+ENDIF(WIN32)
+
 #
 # The target directory for static libs
 #
@@ -44,12 +50,17 @@ Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 
 
 
-
-Include(FindThreads)
-IF(NOT CMAKE_USE_PTHREADS_INIT)
-	MESSAGE(FATAL_ERROR "PThreads is required.")
-ENDIF(NOT CMAKE_USE_PTHREADS_INIT)
-
+#
+# PThreads
+#
+If(WIN32)
+    Include_Directories("${PROJECT_SOURCE_DIR}/../../externals/pthreads/win32/include")
+Else(WIN32)
+    Include(FindThreads)
+    IF(NOT CMAKE_USE_PTHREADS_INIT)
+	    MESSAGE(FATAL_ERROR "PThreads is required.")
+    ENDIF(NOT CMAKE_USE_PTHREADS_INIT)
+EndIF(WIN32)
 
 
 #
@@ -76,7 +87,12 @@ set(SRC ${SRC}
 				hash/dictionary.h)
 
 # System
-set(SRC ${SRC}  system/stdint.h system/os.h) 
+set(SRC ${SRC}
+                system/stdint.h system/os.h
+                system/windows.hdr.h  system/windows/gettimeofday.h) 
+If(WIN32)
+    set(SRC ${SRC} system/windows/gettimeofday.cpp)
+EndIF(WIN32)
 
 # Devices
 set(SRC ${SRC}
@@ -119,6 +135,6 @@ set(SRC ${SRC}
 
 
 
-add_library(yuni STATIC ${SRC})
+Add_Library(yuni STATIC ${SRC})
 
 

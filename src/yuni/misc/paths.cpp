@@ -1,11 +1,12 @@
 
+#include "../system/windows.hdr.h"
 #ifndef YUNI_OS_WINDOWS
-# include <stdlib.h>
+#	include <stdlib.h>
+#	include <unistd.h>
 #else
-# include <windows.h>
+#	include <direct.h>
 #endif 
 #include <sys/stat.h>
-#include <unistd.h>
 #include <fstream>
 #include "paths.h"
 
@@ -32,10 +33,18 @@ namespace Paths
 
 	String CurrentDirectory()
 	{
+		# ifdef YUNI_OS_WINDOWS
+		char* c = _getcwd(NULL, 0);
+		# else
 		char* c = getcwd(NULL, 0);
-		String ret(c);
-		free(c);
-		return String(ret);
+		# endif
+		if (NULL != c)
+		{
+			String ret(c);
+			free(c);
+			return String(ret);
+		}
+		return String();
 	}
 
 
@@ -148,7 +157,7 @@ namespace Paths
 			if (!Exists(pth))
 			{
 				# ifdef YUNI_OS_WINDOWS
-				if (mkdir(pth.c_str()))
+				if (_mkdir(pth.c_str()))
 				# else
 				if (mkdir(pth.c_str(), 01755))
 				# endif

@@ -22,6 +22,11 @@ namespace Yuni
 		int  tz_dsttime;     // type of dst correction
 	};
 
+	typedef struct timeval
+	{
+		long tv_sec;
+		long tv_usec;
+	} timeval;
 
 	int gettimeofday(struct timeval *tv, struct timezone *tz);
 

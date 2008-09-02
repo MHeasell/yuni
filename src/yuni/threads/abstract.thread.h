@@ -89,8 +89,6 @@ namespace Private
 		//@{
 		//! Default constructor
 		AbstractThreadModel();
-		//! Copy constructor
-		AbstractThreadModel(const AbstractThreadModel& c);
 		//! Destructor
 		virtual ~AbstractThreadModel();
 		//@}

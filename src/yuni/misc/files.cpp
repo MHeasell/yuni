@@ -25,7 +25,7 @@ namespace Files
 			file.seekg(0, std::ios_base::beg);
 			std::ifstream::pos_type begin_pos = file.tellg();
 			file.seekg(0, std::ios_base::end);
-			if ((file.tellg() - begin_pos) > sizeLimit)
+			if ((uint32)(file.tellg() - begin_pos) > sizeLimit)
 				return false;
 			file.seekg(0, std::ios_base::beg);
 		}
@@ -82,8 +82,8 @@ namespace Files
 			f.open(filename.c_str(), std::ios::in | std::ios::binary);
 			if (f.is_open())
 			{
-				char* ret = new char[size + 1];
-				f.read((char*)ret, size);
+				char* ret = new char[(int)size + 1];
+				f.read((char*)ret, (std::streamsize)size);
 				f.close();
 				ret[size] = '\0';
 				return ret;

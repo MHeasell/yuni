@@ -401,7 +401,7 @@ namespace Yuni
 		// Implement vasprintf() by hand with two calls to vsnprintf()
 		// Remove this when Microsoft adds support for vasprintf()
 		#   if defined YUNI_OS_MSVC
-		int sizeneeded = _vsnprintf(NULL, 0, f, parg) + 1;
+		int sizeneeded = vsnprintf_s(NULL, 0, 0, f, parg) + 1;
 		#   else
 		int sizeneeded = vsnprintf(NULL, 0, f, parg) + 1;
 		#   endif
@@ -412,8 +412,8 @@ namespace Yuni
 		b = (char*)malloc(sizeneeded);
 		if (b == NULL)
 			return *this;
-		#   if defined YUNI_OS_MSVC
-		if (_vsnprintf(b, sizeneeded, f, parg) < 0)
+		#   ifdef YUNI_OS_MSVC
+		if (vsnprintf_s(b, sizeneeded, sizeneeded, f, parg) < 0)
 		#   else
 		if (vsnprintf(b, sizeneeded, f, parg) < 0)
 		#   endif

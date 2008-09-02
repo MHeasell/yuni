@@ -8,9 +8,12 @@
 // Microsoft Visual Studio Implementation
 //
 
+#	ifdef _DEFINE_DEPRECATED_HASH_CLASSES
+#		undef _DEFINE_DEPRECATED_HASH_CLASSES
+#	endif
 #   define _DEFINE_DEPRECATED_HASH_CLASSES 0
-#   include <cliext/hash_map>
-#   include <cliext/hash_fun.h>
+#   include <hash_map>
+#	include <functional>
 namespace YuniSTLExt = ::stdext;
 
 # else // !YUNI_OS_WINDOWS || !YUNI_OS_MSVC

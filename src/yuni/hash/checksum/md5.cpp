@@ -1,7 +1,7 @@
 
 #include <fstream>
 #include "md5.h"
-
+#include "../../system/windows.hdr.h"
 
 
 
@@ -379,7 +379,13 @@ namespace Checksum
 		{
 			char hex[33];
 			for (int i = 0; i < 16; ++i)
-				snprintf(hex + i * 2, sizeof(hex), "%02x", digest[i]);
+			{
+				# ifdef YUNI_OS_WINDOWS
+				_snprintf_s(hex + i * 2, sizeof(hex), sizeof(hex), "%02x", digest[i]);
+				# else
+				sprintf(hex + i * 2, sizeof(hex), "%02x", digest[i]);
+				# endif
+			}
 			hex[32] = '\0';
 			s = hex;
 		}
@@ -406,7 +412,7 @@ namespace Checksum
 		MD5TypeByte digest[16];
 
 		md5ImplInit(&state);
-		md5ImplAppend(&state, (const MD5TypeByte*)rawdata, size);
+		md5ImplAppend(&state, (const MD5TypeByte*)rawdata, (int)size);
 		md5ImplFinish(&state, digest);
 		md5DigestToString(pValue, digest);
 		return pValue;
