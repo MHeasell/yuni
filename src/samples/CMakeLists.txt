@@ -1,4 +1,4 @@
-Project(YUNI-SAMPLES)
+Project(YUNI-SAMPLES CXX)
 
 Message(STATUS "")
 Message(STATUS "Samples for the Yuni Framework")
