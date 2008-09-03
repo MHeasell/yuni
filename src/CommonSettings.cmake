@@ -19,8 +19,11 @@ If(MSVC)
     Message(STATUS "Compiler: Visual Studio")
 EndIF(MSVC)
 If(MINGW)
-    Message(STATIS "Compiler: MinGW")
+    Message(STATUS "Compiler: MinGW")
 EndIf(MINGW)
+If(XCODE)
+    Message(STATUS "Compiler: XCode")
+EndIf(XCODE)
 
 
 #
