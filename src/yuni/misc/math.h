@@ -92,13 +92,58 @@ namespace Math
 	** \endcode
 	*/
 	template <int N>
-	class Factorial
+	struct Factorial
 	{
 		enum { value = N * Factorial<N-1>::value };
 	};
 
 	//! Factorial(1) = 1
 	template <> struct Factorial<1> { enum { value = 1 }; };
+
+
+
+	/*!
+	** \brief The power function
+	**
+	** \f$value = x^y\f$
+	**
+	** \tparam X The value
+	** \tparam Y The power
+	**
+	** \code
+	**    std::cout << Power<8, 3>::value << std::endl; // 512
+	** \endcode
+	*/
+	template<int X, int Y>
+	struct Power
+	{
+		enum { value = X * Power<X,Y-1>::value };
+	};
+
+	template <int X> struct Power<X,0> { enum { value = 1 }; };
+
+
+
+
+	/*!
+	** \brief The Square root function
+	**
+	** \f$value = \sqrt{N}\f$
+	**
+	** \code
+	**    std::cout << SquareRoot<16>::value << std::endl; // 4
+	** \endcode
+	**
+	** \internal Via iteration
+	*/
+	template <int N, int I = 1>
+	struct SquareRoot
+	{
+		enum { value = (I*I < N) ? SquareRoot<N, I+1>::value : I };
+	};
+
+	// partial specialization to end the iteration
+	template<int N> struct SquareRoot<N,N> { enum { value = N }; };
 
 
 
