@@ -83,6 +83,26 @@ namespace Math
 	inline void Swap(T& a, T&b) { T tmp(b); b = a; a = tmp; }
 
 
+
+	/*!
+	** \brief The factorial function
+	**
+	** \code
+	**    std::cout << Factorial<7>::value << std::endl;
+	** \endcode
+	*/
+	template <int N>
+	class Factorial
+	{
+		enum { value = N * Factorial<N-1>::value };
+	};
+
+	//! Factorial(1) = 1
+	template <> struct Factorial<1> { enum { value = 1 }; };
+
+
+
+
 } // namespace Math
 } // namespace Yuni
 
