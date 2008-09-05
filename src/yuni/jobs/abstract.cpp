@@ -1,5 +1,6 @@
 
-#include "jobs.h"
+#include "abstract.h"
+#include "../misc/math.h"
 
 
 # define YUNI_JOBS_PRIORITY_MIN  -100
@@ -19,6 +20,8 @@ namespace Jobs
 
 	Abstract::~Abstract()
 	{}
+
+
 
 	String Abstract::name()
 	{
@@ -42,15 +45,7 @@ namespace Jobs
 	void Abstract::priority(const int p)
 	{
 		pMutex.lock();
-		if (p < YUNI_JOBS_PRIORITY_MIN)
-			pPriority = YUNI_JOBS_PRIORITY_MIN;
-		else
-		{
-			if (p > YUNI_JOBS_PRIORITY_MAX)
-				pPriority = YUNI_JOBS_PRIORITY_MAX;
-			else
-				pPriority = p;
-		}
+		pPriority = Math::MinMax<int>(YUNI_JOBS_PRIORITY_MIN, YUNI_JOBS_PRIORITY_MAX, p);
 		pMutex.unlock();
 	}
 
@@ -63,10 +58,11 @@ namespace Jobs
 	}
 
 
-	bool Abstract::suspend(uint32 delay)
+	bool Abstract::suspend(const uint32 delay)
 	{
 		return (pThread) ? pThread->suspend(delay) : false;
 	}
+
 
 
 } // namespace Jobs

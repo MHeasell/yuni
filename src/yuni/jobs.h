@@ -2,7 +2,22 @@
 # define __YUNI_JOBS_H__
 
 
-# include "threads/jobs.h"
+namespace Yuni
+{
+
+/*!
+** \brief Tools to handle numerous jobs (synchronous or not)
+*/
+namespace Jobs
+{
+} // namespace Jobs
+} // namespace Yuni
+
+
+
+// class Yuni::Jobs::Abstract
+# include "jobs/abstract.h"
+
 
 
 #endif // __YUNI_JOBS_H__

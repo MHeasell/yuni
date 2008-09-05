@@ -80,10 +80,14 @@ set(SRC_THREADS
 				threads/abstract.thread.h threads/abstract.thread.cpp
 				threads/thread.h threads/thread.cpp
 				threads/timer.h threads/timer.cpp
-				threads/jobs.abstract.h threads/jobs.abstract.cpp
 				threads/cpu.cpp)
 source_group(Threads FILES ${SRC_THREADS})
 
+# Jobs
+set(SRC_JOBS
+				jobs.h
+				jobs/abstract.h jobs/abstract.cpp)
+source_group(Jobs FILES ${SRC_THREADS})
 
 
 # Application
@@ -125,7 +129,7 @@ Add_Library(yuni STATIC
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}
-				${SRC_THREADS}
+				${SRC_THREADS} ${SRC_JOBS}
 				${SRC_APPLICATION}
 				${SRC_GFX} ${SRC_GFX_UI}
 				)
