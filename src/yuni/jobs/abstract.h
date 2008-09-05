@@ -1,9 +1,9 @@
-#ifndef __YUNI_THREADS_JOBS_ABSTRACT_H__
-# define __YUNI_THREADS_JOBS_ABSTRACT_H__
+#ifndef __YUNI_JOBS_ABSTRACT_H__
+# define __YUNI_JOBS_ABSTRACT_H__
 
 # include "../yuni.h"
+# include "../threads/thread.h"
 # include "../string.h"
-# include "thread.h"
 
 
 
@@ -13,8 +13,9 @@ namespace Jobs
 {
 
 
+
 	/*!
-	** \brief Job Interface
+	** \brief Job Interface (abstract)
 	*/
 	class Abstract 
 	{
@@ -27,21 +28,25 @@ namespace Jobs
 		virtual ~Abstract();
 		//@}
 
-		/*!
-		** \brief Implement this method to define the job
-		** \return True to execute again this job
-		*/
-		virtual bool onExecute() = 0;
-
+		//! \name Name of the job
+		//@{
 		//! Get the full human-readable name of this job
 		String name();
 		//! Set the name of the job
 		void name(const String& n);
+		//@}
 
+
+		//! \name Priority
+		//@{
 		//! Get the priority of this job
 		sint8 priority();
 		//! Set the priority of this job
 		void priority(const int p);
+		//@}
+
+		//! \name Relation to a thread
+		//@{
 
 		/*!
 		** \brief Attach this job to a given thread
@@ -53,8 +58,16 @@ namespace Jobs
 		*/
 		void detachFromThread() {attachToThread(NULL);}
 
+		//@}
+
 
 	protected:
+		/*!
+		** \brief Implement this method to define the job
+		** \return True to execute again this job
+		*/
+		virtual bool onExecute() = 0;
+
 		/*!
 		** \brief Suspend the execution of the job of X miliseconds
 		**
@@ -65,7 +78,7 @@ namespace Jobs
 		**
 		** \see AbstractThreadModel::suspend()
 		*/
-		bool suspend(uint32 delay = 0);
+		bool suspend(const uint32 delay = 0);
 
 
 	protected:
@@ -83,7 +96,9 @@ namespace Jobs
 	}; // class Job
 
 
+
+
 } // namespace Jobs
 } // namespace Yuni
 
-#endif // __YUNI_THREADS_JOBS_ABSTRACT_H__
+#endif // __YUNI_JOBS_ABSTRACT_H__
