@@ -53,13 +53,15 @@ ENDIF(NOT WIN32)
 #
 # PThreads
 #
-If(WIN32)
+Include(FindThreads)
+If(CMAKE_USE_WIN32_THREADS_INIT)
     Include_Directories("${PROJECT_SOURCE_DIR}/../../externals/pthreads/win32/include")
-Else(WIN32)
-    Include(FindThreads)
+	Message(STATUS "Threading Support: PThreads for Windows (externals/pthreads)")
+Else(CMAKE_USE_WIN32_THREADS_INIT)
     IF(NOT CMAKE_USE_PTHREADS_INIT)
 	    MESSAGE(FATAL_ERROR "PThreads is required.")
     ENDIF(NOT CMAKE_USE_PTHREADS_INIT)
-EndIF(WIN32)
-
+	Link_libraries(${CMAKE_THREAD_LIBS_INIT})
+	Message(STATUS "Threading Support: PThreads (${CMAKE_THREAD_LIBS_INIT})")
+EndIF(CMAKE_USE_WIN32_THREADS_INIT)
 
