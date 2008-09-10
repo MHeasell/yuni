@@ -2,7 +2,7 @@
 
 root=`dirname "${0}"`
 
-find "${root}/../" '(' -name 'cmake*' \
+find "${root}/../src" '(' -name 'cmake*' \
             -or -name 'CMakeCache*' \
             -or -name 'CMakeFiles' \
             -or -name 'Makefile' \
