@@ -51,7 +51,12 @@ namespace Yuni
 		/*!
 		** \brief Get if the pointer is null
 		*/
-		bool null() const {return counter && counter->ptr;}
+		bool null() const {return !counter || !counter->ptr;}
+
+		/*!
+		** \brief Get if the pointer is valid
+		*/
+		bool valid() const {return counter && counter->ptr;}
 
 		/*!
 		** \brief Get if this reference is an unique reference
