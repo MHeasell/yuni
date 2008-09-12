@@ -27,7 +27,7 @@ namespace Yuni
 		//! Constructor with an optional value
 		SharedPtr(T* p = 0) :counter(0) {if (p) counter = new Counter(p);}
 		//! Copy constructor
-		SharedPtr(const SharedPtr& c) throw() {acquire(c.counter);}
+		SharedPtr(const SharedPtr<T>& c) throw() {acquire(c.counter);}
 		//! Destructor
 		~SharedPtr() {release();}
 		//@}
