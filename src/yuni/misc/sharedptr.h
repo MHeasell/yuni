@@ -41,6 +41,19 @@ namespace Yuni
 		T& operator * () const throw() {return *counter->ptr;}
 		//! The operator ->
 		T* operator-> () const throw() {return counter->ptr;}
+
+		//! Equality operators
+		bool operator == (const T* rhs) const { return get() == rhs; }
+		bool operator == (const SharedPtr& rhs) const { return get() == rhs.get(); }
+		bool operator != (const T* rhs) const { return get() != rhs; }
+		bool operator != (const SharedPtr& rhs) const { return get() != rhs.get(); }
+
+		//! Inequality operators
+		int operator < (const SharedPtr& rhs) const { return get() < rhs.get(); }
+		int operator <= (const SharedPtr& rhs) const { return get() <= rhs.get(); }
+		int operator > (const SharedPtr& rhs) const { return get() > rhs.get(); }
+		int operator >= (const SharedPtr& rhs) const { return get() >= rhs.get(); }
+
 		//@}
 
 		/*!
