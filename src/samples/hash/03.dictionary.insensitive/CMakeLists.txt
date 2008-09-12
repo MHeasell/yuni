@@ -1,4 +1,4 @@
 
 ADD_EXECUTABLE(hash_03_dictionary_insensitive main.cpp)
-target_link_libraries(hash_03_dictionary_insensitive yuni)
+target_link_libraries(hash_03_dictionary_insensitive yuni-static)
 

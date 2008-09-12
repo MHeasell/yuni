@@ -1,4 +1,4 @@
 
 ADD_EXECUTABLE(test-gfx-points-2d main.cpp)
-target_link_libraries(test-gfx-points-2d yuni)
+target_link_libraries(test-gfx-points-2d yuni-static)
 
