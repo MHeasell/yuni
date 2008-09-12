@@ -50,7 +50,7 @@ protected:
 			 *
 			 * The bottom line is: DO NOT use sleep() to wait in threads.
 			 */
-            Yuni::Sleep(1000 /* ms */);
+            Yuni::Sleep(1 /* second */);
 
 			/*
 			 * After our work, if the task is repetitive, we will want to check
@@ -122,7 +122,7 @@ int main(void)
 	mutex.unlock();
 
 	// Simulate a long processing
-	Yuni::Sleep(5000 /* ms */);
+	Yuni::Sleep(5 /* second */);
 
 	mutex.lock();
 	std::cout << "[M] Stopping bottle counting..." << std::endl;
