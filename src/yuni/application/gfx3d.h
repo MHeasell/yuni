@@ -15,7 +15,7 @@ namespace Application
 	/*!
 	** \brief 3D Application
 	*/
-	class YUNI_EXPORT Gfx3D : public Application::Abstract
+	class Gfx3D : public Application::Abstract
 	{
 	public:
 		/*!
