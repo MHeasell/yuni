@@ -6,7 +6,7 @@ namespace Yuni
 {
 
 	template<class T>
-	SharedPtr<T>& SharedPtr<T>::operator = (const SharedPtr& rhs)
+	SharedPtr<T>& SharedPtr<T>::operator = (const SharedPtr<T>& rhs)
 	{
 		if (this != &rhs)
 		{

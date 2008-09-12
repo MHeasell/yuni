@@ -35,8 +35,8 @@ namespace Yuni
 		//! \name Operators
 		//@{
 		//! The operator =
-		SharedPtr& operator = (const SharedPtr& rhs);
-		SharedPtr& operator = (T* rhs) { *this = SharedPtr<T>(rhs); return *this;}
+		SharedPtr<T>& operator = (const SharedPtr<T>& rhs);
+		SharedPtr<T>& operator = (T* rhs) { *this = SharedPtr<T>(rhs); return *this;}
 		//! The operator *
 		T& operator * () const throw() {return *counter->ptr;}
 		//! The operator ->
@@ -44,15 +44,15 @@ namespace Yuni
 
 		//! Equality operators
 		bool operator == (const T* rhs) const { return get() == rhs; }
-		bool operator == (const SharedPtr& rhs) const { return get() == rhs.get(); }
+		bool operator == (const SharedPtr<T>& rhs) const { return get() == rhs.get(); }
 		bool operator != (const T* rhs) const { return get() != rhs; }
-		bool operator != (const SharedPtr& rhs) const { return get() != rhs.get(); }
+		bool operator != (const SharedPtr<T>& rhs) const { return get() != rhs.get(); }
 
 		//! Inequality operators
-		int operator < (const SharedPtr& rhs) const { return get() < rhs.get(); }
-		int operator <= (const SharedPtr& rhs) const { return get() <= rhs.get(); }
-		int operator > (const SharedPtr& rhs) const { return get() > rhs.get(); }
-		int operator >= (const SharedPtr& rhs) const { return get() >= rhs.get(); }
+		int operator < (const SharedPtr<T>& rhs) const { return get() < rhs.get(); }
+		int operator <= (const SharedPtr<T>& rhs) const { return get() <= rhs.get(); }
+		int operator > (const SharedPtr<T>& rhs) const { return get() > rhs.get(); }
+		int operator >= (const SharedPtr<T>& rhs) const { return get() >= rhs.get(); }
 
 		//@}
 
