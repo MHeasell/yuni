@@ -62,7 +62,7 @@ namespace Gfx
 
 	Device::Device()
 		:pLocked(false), pType(DefaultType), pMonitor(), pResolution(), pFullscreen(false),
-		pStencilbuffer(true), pVSync(true)
+		pStencilbuffer(false), pVSync(false)
 	{}
 
 	Device::Device(const Device& c)
@@ -138,7 +138,7 @@ namespace Gfx
 
 	void Device::ensuresSettingsAreValid()
 	{
-		if (!pMonitor->valid())
+		if (pMonitor.null() || !pMonitor->valid())
 		{
 			System::Devices::Display::List allDisplays;
 			pMonitor = allDisplays.primary();

@@ -29,7 +29,9 @@ set(SRC_MISC
 				misc/files.h misc/files.cpp
 				misc/version.h misc/version.cpp
 				misc/static.h
-				misc/math.h)
+				misc/math.h
+				misc/sharedptr.h misc/scopeptr.h
+				misc/event.h misc/event.private.h)
 
 source_group(Misc FILES ${SRC_MISC})
 
@@ -54,7 +56,8 @@ source_group(Hash\\Checksum FILES ${SRC_HASH_CHECKSUM})
 # System
 set(SRC_SYSTEM
                 system/stdint.h system/os.h
-                system/sleep.h system/sleep.cpp) 
+                system/sleep.h system/sleep.cpp
+				system/endian.h) 
 source_group(System FILES ${SRC_SYSTEM})
 
 # System - Microsoft Windows
@@ -105,7 +108,8 @@ set(SRC_GFX
 				gfx/point2D.h gfx/point3D.h
 				gfx/color.converters.h gfx/color.converters.cpp
 				gfx/rgba.h
-				gfx/vertex.h gfx/triangle.h gfx/edge.h)
+				gfx/vertex.h gfx/triangle.h gfx/edge.h
+				gfx/engine.h gfx/engine.cpp)
 source_group(Gfx FILES ${SRC_GFX})
 
 
@@ -121,10 +125,21 @@ source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
 #Set(SRC ${SRC}
 #				private/gfx3d/irrlicht/irrlicht-for-yuni.h private/gfx3d/irrlicht/irrlicht-for-yuni.cpp)
 
+set(SRC_EXTERNAL_3D_IRRLICHT
+				private/gfx3d/irrlicht/irr.h
+				private/gfx3d/irrlicht/irr.engine.h private/gfx3d/irrlicht/irr.engine.cpp)
+source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
+
+
+if(YUNI_EXTERNAL_3D_IRRLICHT)
+	Message(STATUS "External: 3D: The Irrlicht Engine")
+	set(SRC_EXTERNAL_3D private/gfx3d/abstract.h ${SRC_EXTERNAL_3D_IRRLICHT})
+Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 
 
 
-Add_Library(yuni STATIC
+Add_definitions("-DYUNI_LIBRARY_STATIC")
+Add_Library(yuni-static STATIC
 				${SRC_MISC}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
@@ -132,6 +147,8 @@ Add_Library(yuni STATIC
 				${SRC_THREADS} ${SRC_JOBS}
 				${SRC_APPLICATION}
 				${SRC_GFX} ${SRC_GFX_UI}
+				${SRC_EXTERNAL_3D}
 				)
 
+SET_TARGET_PROPERTIES(yuni-static PROPERTIES OUTPUT_NAME "yuni")
 

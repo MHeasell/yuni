@@ -11,7 +11,7 @@ namespace Application
 {
 
 
-	class Abstract
+	class YUNI_EXPORT Abstract
 	{
 	public:
 		/*!
