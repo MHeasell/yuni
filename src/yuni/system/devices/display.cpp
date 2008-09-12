@@ -129,7 +129,7 @@ namespace Display
 				// uint32_t modelNumber = CGDisplayModelNumber(displayArray[i]);
 				// uint32_t serialNumer = CGDisplaySerialNumber(displayArray[i]);
 
-				SharedPtr<Monitor> newMonitor(new Monitor("", displayArray[i], mainDisplay, ha, builtin));
+				SharedPtr<Monitor> newMonitor(new Monitor("", (Monitor::Handle)displayArray[i], mainDisplay, ha, builtin));
 				SharedPtr<OrderedResolutions> res(new OrderedResolutions());
 				cocoaGetAllAvailableModesUseful(displayArray[i], res);
 				// Add it to the list

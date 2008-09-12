@@ -183,6 +183,9 @@ namespace Display
 
 inline std::ostream& operator << (std::ostream& out, const Yuni::System::Devices::Display::Resolution& rhs)
 { return rhs.print(out); }
+inline std::ostream& operator << (std::ostream& out, const Yuni::SharedPtr<Yuni::System::Devices::Display::Resolution>& rhs)
+{ return rhs->print(out); }
+
 
 //@}
 

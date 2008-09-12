@@ -15,7 +15,7 @@ namespace Application
 	/*!
 	** \brief 3D Application
 	*/
-	class Gfx3D : public Application::Abstract
+	class YUNI_EXPORT Gfx3D : public Application::Abstract
 	{
 	public:
 		/*!
@@ -55,9 +55,18 @@ namespace Application
 		virtual void onAfterCreateDevice(const bool /* success */) {}
 		//@}
 
+		virtual bool onPreExecute() {return true;}
+
+		void execute();
+
+		virtual void onExecute() {}
+
 	public:
 		//! Informations about the 3D device
 		Gfx::Device device;
+
+	private:
+		void initializeEngine();
 
 	}; // class Application::Gfx3D
 

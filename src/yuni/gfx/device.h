@@ -135,8 +135,7 @@ namespace Gfx
 		/*!
 		** \brief Monitor
 		*/
-		const SharedPtr<System::Devices::Display::Monitor>& monitor() const
-		{return pMonitor;}
+		SharedPtr<System::Devices::Display::Monitor> monitor() const {return pMonitor;}
 
 		/*!
 		** \brief Set the monitor to use
@@ -152,7 +151,7 @@ namespace Gfx
 		/*!
 		** \brief Screen resolution
 		*/
-		const SharedPtr<System::Devices::Display::Resolution>& resolution() const
+		SharedPtr<System::Devices::Display::Resolution> resolution() const
 		{return pResolution;}
 
 		/*!
@@ -278,6 +277,9 @@ namespace Gfx
 
 inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Device& rhs)
 { return rhs.print(out); }
+inline std::ostream& operator << (std::ostream& out, const Yuni::SharedPtr<Yuni::Gfx::Device>& rhs)
+{ return rhs->print(out); }
+
 
 //@}
 
