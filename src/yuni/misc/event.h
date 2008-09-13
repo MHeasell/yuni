@@ -1,6 +1,7 @@
 #ifndef __YUNI_MISC_EVENTS_H__
 # define __YUNI_MISC_EVENTS_H__
 
+# include "../yuni.h"
 # include <algorithm>
 # include <list>
 # include <set>
