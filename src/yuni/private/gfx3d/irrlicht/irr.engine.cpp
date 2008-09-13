@@ -69,7 +69,8 @@ namespace Irrlicht
 		// Create the Irrlicht device
 		std::cout << "[yuni] " << pDevice << std::endl;
 		pIrrDevice = irr::createDevice(YuniDeviceToIrrDevice(dc->type()),
-				irr::core::dimension2d<irr::s32>(pDevice->resolution()->width(), pDevice->resolution()->height()),
+				//irr::core::dimension2d<irr::s32>(pDevice->resolution()->width(), pDevice->resolution()->height()),
+				irr::core::dimension2d<irr::s32>(800, 600),
 				(int) pDevice->resolution()->bitPerPixel(),
 				pDevice->fullscreen(), pDevice->stencilbuffer(), pDevice->vsync(), NULL);
 
