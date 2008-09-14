@@ -23,11 +23,16 @@ namespace Gfx
 	public:
 		enum Type
 		{
-			/*! The Null device */       ygdtNull = 0,
-			/*! The Software renderer */ ygdtSoftware,
-			/*! The OpenGL device */     ygdtOpenGL,
-			/*! The Microsoft DirectX device (version 9) */  ygdtDirectX9,   
-			/*! The Microsoft DirectX device (version 8) */  ygdtDirectX8
+			//! Null Device
+			ygdtNull = 0,
+			//! Software renderer
+			ygdtSoftware,
+			//! OpenGL
+			ygdtOpenGL,
+			//! Microsoft DirectX device (version 9)
+			ygdtDirectX9,   
+			//! Microsoft DirectX device (version 8)
+			ygdtDirectX8
 		};
 
 		//! The default type according the plateform

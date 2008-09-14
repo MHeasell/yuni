@@ -15,7 +15,7 @@ namespace Irrlicht
 {
 
 
-	class Engine : public Private::Gfx::Abstract
+	class Engine : public Private::Gfx::EngineAbstract
 	{
 	public:
 		Engine();
@@ -28,6 +28,8 @@ namespace Irrlicht
 		virtual void release();
 		virtual bool ready() const {return (pIrrDevice != NULL);}
 		virtual void run();
+		virtual void waitForEngineToStop();
+		virtual void applicationTitle(const String& t);
 
 	private:
 		static irr::video::E_DRIVER_TYPE YuniDeviceToIrrDevice(const Yuni::Gfx::Device::Type& t);
@@ -41,8 +43,14 @@ namespace Irrlicht
 		irr::video::IVideoDriver* pIrrVideoDriver;
 		//! The Irrlicht Scene manager
 		irr::scene::ISceneManager* pIrrSceneManager;
+		//! The background color
+		irr::video::SColor pBackgroundColor;
+		//! 
+		bool pRunnable;
 
 	}; // class Engine
+
+
 
 
 } // namespace Irrlicht
