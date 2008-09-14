@@ -3,7 +3,8 @@
 
 # include "device.h"
 # include "../misc/sharedptr.h"
-
+# include "../threads/mutex.h"
+# include "../misc/event.proxy.h"
 
 
 namespace Yuni
@@ -25,17 +26,32 @@ namespace Gfx
 
 	public:
 		/*!
+		** \brief Private constructor
+		*/
+		Engine();
+		/*!
 		** \brief Destructor
 		*/
 		~Engine();
 
+
+		//! \name Information about the 3D Device
+		//@{
+
 		/*!
 		** \brief Get the name of the external 3D engine
 		*/
-		String name() const;
+		String name();
+		
+		/*!
+		** \brief Get informations about the device currently being used
+		*/
+		SharedPtr<Device> device() const {return pDevice;}
+
+		//@}
 
 		/*!
-		** \brief Initialize the 3D device
+		** \brief Reset the 3D Device
 		**
 		** If the 3D Device has already been initialized, it will be
 		** released first.
@@ -43,25 +59,52 @@ namespace Gfx
 		** \param dc Informations about the device to initialize.
 		** \return True if the operation succeeded, False otherwise
 		*/
-		bool initialize(const SharedPtr<Device>& dc);
+		bool reset(const SharedPtr<Device>& dc);
+
+		/*!
+		** \brief Reset the 3D Device with optimal settings
+		**
+		** \param fullscreenMode True to enable the fullscreen mode
+		** \return True if the operation succeeded, False otherwise
+		*/
+		bool resetWithRecommendedSettings(const bool fullscreenMode = true);
+
+		/*!
+		** \brief Reset the 3D Device with safe settings
+		**
+		** \param fullscreenMode True to enable the fullscreen mode
+		** \return True if the operation succeeded, False otherwise
+		*/
+		bool resetWithFailSafeSettings(const bool fullscreenMode = false);
+
+		/*!
+		** \brief Run the 3D Engine in an infinite loop
+		*/
+		void run();
 
 		/*!
 		** \brief Release the 3D engine
 		*/
 		void release();
 
-		/*!
-		** \brief Get informations about the device currently being used
-		*/
-		SharedPtr<Device> device() const {return pDevice;}
+		//! \name Application title
+		//@{
+		//! Get the application title
+		String applicationTitle();
+		//! Set the application title
+		void applicationTitle(const String& t);
+		//@}
+
+
+	public:
+		//! Event: THe FPS has changed
+		Event::Proxy::P1<int> onFPSChanged;
 
 	private:
-		/*!
-		** \brief Private constructor
-		*/
-		Engine();
-
+		
 	private:
+		//! Mutex
+		Mutex pMutex;
 		bool pDeviceIsInitialized;
 		//! Information about the device
 		SharedPtr<Device> pDevice;

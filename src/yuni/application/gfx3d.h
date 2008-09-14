@@ -3,6 +3,8 @@
 
 # include "abstract.h"
 # include "../gfx/device.h"
+# include "../misc/event.h"
+# include "../gfx/engine.h"
 
 
 
@@ -15,7 +17,7 @@ namespace Application
 	/*!
 	** \brief 3D Application
 	*/
-	class Gfx3D : public Application::Abstract
+	class Gfx3D : public Application::Abstract, public Event::Receiver
 	{
 	public:
 		/*!
@@ -38,6 +40,15 @@ namespace Application
 		virtual ~Gfx3D();
 		
 		//@}
+
+		//! \name Application title
+		//@{
+		//! Get the application title
+		String title() const {return Gfx::Engine::Instance()->applicationTitle();}
+		//! Set the application title
+		void title(const String& t) {Gfx::Engine::Instance()->applicationTitle(t);}
+		//@}
+
 
 		//! \name Events
 		//@{
@@ -64,9 +75,6 @@ namespace Application
 	public:
 		//! Informations about the 3D device
 		Gfx::Device device;
-
-	private:
-		void initializeEngine();
 
 	}; // class Application::Gfx3D
 

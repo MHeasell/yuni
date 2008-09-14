@@ -24,39 +24,51 @@ namespace Gfx
 		#	error "The external 3D engine is not defined"
 		# endif
 
+		Engine globalEngine;
+
 	} // anonymous namespace
 
 
 
 	Engine* Engine::Instance()
 	{
-		static Engine eng;
-		return &eng;
+		return &globalEngine;
 	}
 
 
 	Engine::Engine()
-		:pDeviceIsInitialized(false)
-	{}
+		:pDeviceIsInitialized(false)	
+	{
+		// Redirect all events
+		onFPSChanged.assign(&external3DEngine.onFPSChanged);
+	}
 
 
 	Engine::~Engine()
 	{
-		release();
+		onFPSChanged.disconnectAll();
+		this->release();
 	}
 
 
-	String Engine::name() const
+
+	String Engine::name()
 	{
+		MutexLocker locker(pMutex);
 		return external3DEngine.name();
 	}
 
 
-	bool Engine::initialize(const SharedPtr<Device>& dc)
-	{
-		// Ensure that a device is not already initialized
-		release();
 
+	bool Engine::reset(const SharedPtr<Device>& dc)
+	{
+		// Lock
+		MutexLocker locker(pMutex);
+
+		// Ensure that a device is not already initialized
+		external3DEngine.waitForEngineToStop();
+
+		// There is nothing to do if the device is null
 		if (dc.valid())
 		{
 			// Getting a reference to the information about the Device
@@ -75,15 +87,74 @@ namespace Gfx
 	}
 
 
-	void Engine::release()
+
+	bool Engine::resetWithFailSafeSettings(const bool fullscreenMode)
 	{
-		if (pDeviceIsInitialized)
-		{
-			external3DEngine.release();
-			pDeviceIsInitialized = false;
-		}
+		// Informations about the device
+		SharedPtr<Gfx::Device> newDevice(new Gfx::Device());
+		newDevice->fullscreen(fullscreenMode);
+		// The fail-safe resolution
+		SharedPtr<System::Devices::Display::Resolution> fsRes(new System::Devices::Display::Resolution(800, 600));
+		newDevice->resolution(fsRes);
+
+		// Apply the new settings
+		return this->reset(newDevice);
 	}
 
+
+
+	bool Engine::resetWithRecommendedSettings(const bool fullscreenMode)
+	{
+		// Informations about the device
+		SharedPtr<Gfx::Device> newDevice(new Gfx::Device());
+		newDevice->fullscreen(fullscreenMode);
+
+		// Apply the new settings
+		return this->reset(newDevice);
+	}
+
+
+	void Engine::run()
+	{
+		pMutex.lock();
+		if (pDeviceIsInitialized)
+		{
+			pMutex.unlock();
+			external3DEngine.run();
+			return;
+		}
+		pMutex.unlock();
+	}
+
+
+	void Engine::release()
+	{
+		pMutex.lock();
+		if (pDeviceIsInitialized)
+		{
+			pMutex.unlock();
+			// Ensure that a device is not already initialized
+			external3DEngine.waitForEngineToStop();
+			// Releasing...
+			external3DEngine.release();
+
+			pMutex.lock();
+			pDeviceIsInitialized = false;
+		}
+		pMutex.unlock();
+	}
+
+
+	void Engine::applicationTitle(const String& t)
+	{
+		external3DEngine.applicationTitle(t);
+	}
+
+
+	String Engine::applicationTitle()
+	{
+		return (dynamic_cast<Private::Gfx::EngineAbstract*>(&external3DEngine))->applicationTitle();
+	}
 
 
 } // namespace Gfx

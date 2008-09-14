@@ -4,6 +4,9 @@
 # include "../../yuni.h"
 # include "../../gfx/device.h"
 # include "../../sharedptr.h"
+# include "../../threads/mutex.h"
+# include "../../misc/event.h"
+
 
 
 namespace Yuni
@@ -13,28 +16,47 @@ namespace Private
 namespace Gfx
 {
 
-	class Abstract
+
+
+	/*!
+	** \brief Base class for back-end 3D engine (abstract)
+	**
+	** \see class Yuni::Private::Gfx::Irrlich::Engine
+	*/
+	class EngineAbstract
 	{
 	public:
 		//! \name Constructor & Destructor
 		//@{
 
-		/*!
-		** \brief Default Constructor
-		*/
-		Abstract():pFPS(0) {}
-		/*!
-		** \brief Destructor
-		*/
-		virtual ~Abstract() {}
+		//! Default Constructor
+		EngineAbstract();
+
+		//! Destructor
+		virtual ~EngineAbstract();
 
 		//@}
 
 
-		/*!
-		** \brief Name of the Gfx back-end
-		*/
+		//! \name Information about the 3D Device back-end
+		//@{
+
+		//! Name of the Gfx back-end
 		virtual String name() const = 0;
+
+		//! The FPS count
+		sint32 fps() const {return pFPS;}
+
+		//! Get if the engine is running
+		bool isRunning() const {return pIsRunning;}
+
+		//! Get if the engine is ready
+		virtual bool ready() const = 0;
+
+		//@}
+
+		//! \name Services
+		//@{
 
 		/*!
 		** \brief Initialize the 3D Device from the Gfx back-end
@@ -55,19 +77,43 @@ namespace Gfx
 		virtual void release() = 0;
 
 		/*!
-		** \brief Get if the engine is ready
-		*/
-		virtual bool ready() const = 0;
-
-		/*!
 		** \brief Run the device
 		*/
 		virtual void run() = 0;
 
-		sint32 fps() const {return pFPS;}
+		/*!
+		** \brief Wait for the engine to stop
+		**
+		** \internal The device will only be closed, but not destroyed. This feature is mainly
+		** useful to reset on the fly the screen resolution
+		*/
+		virtual void waitForEngineToStop() = 0;
+
+		//@} // Services
+
+
+		//! \name Application title
+		//@{
+		//! Get the application title
+		String applicationTitle();
+		//! Set the application title
+		virtual void applicationTitle(const String& t) = 0;
+		//@}
+
+
+	public:
+		//! Event: THe FPS has changed
+		Event::E1<int> onFPSChanged;
 
 	protected:
+		//! Mutex
+		Mutex pMutex;
+		//! FPC count
 		sint32 pFPS;
+		//! Get if the engine is running
+		bool pIsRunning;
+		//! Application title
+		String pApplicationTitle;
 
 	}; // class Abstract
 
@@ -76,7 +122,5 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Private
 } // namespace Yuni
-
-
 
 #endif // __YUNI_PRIVATE_GFX3D_ABSTRACT_H__

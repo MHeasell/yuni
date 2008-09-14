@@ -31,7 +31,7 @@ set(SRC_MISC
 				misc/static.h
 				misc/math.h
 				misc/sharedptr.h misc/scopeptr.h
-				misc/event.h misc/event.private.h)
+				misc/event.h misc/event.proxy.h misc/event.private.h)
 
 source_group(Misc FILES ${SRC_MISC})
 
@@ -133,7 +133,9 @@ source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
 
 if(YUNI_EXTERNAL_3D_IRRLICHT)
 	Message(STATUS "External: 3D: The Irrlicht Engine")
-	set(SRC_EXTERNAL_3D private/gfx3d/abstract.h ${SRC_EXTERNAL_3D_IRRLICHT})
+	set(SRC_EXTERNAL_3D
+				private/gfx3d/abstract.h private/gfx3d/abstract.cpp
+				${SRC_EXTERNAL_3D_IRRLICHT})
 Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 
 
