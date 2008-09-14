@@ -63,7 +63,7 @@ IF("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 		IF(${VA} EQUAL 0)
 			Set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2")
 			If(APPLE)
-				Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4")
+				Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4")
 			ENdif(APPLE)
 		ENDIF(${VA} EQUAL 0)
 		Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
@@ -94,7 +94,7 @@ Else("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 		IF(${VA} EQUAL 0)
 			Set(CMAKE_CXX_FLAGS "-ggdb2 -gfull -Wall -Woverloaded-virtual -Wextra -Wconversion -fstack-check -funroll-loops")
 			If(APPLE)
-				Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4")
+				Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4")
 			ENdif(APPLE)
 		ENDIF(${VA} EQUAL 0)
 		Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
@@ -144,3 +144,8 @@ ADD_DEFINITIONS("-DYUNI_EXTERNAL_3D_IRRLICHT")
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/../../externals/irrlicht/include")
 Set(YUNI_EXTERNAL_3D_IRRLICHT "1")
 
+
+#
+# Extra - Bundles
+#
+SET(MACOSX_BUNDLE_COPYRIGHT "Yuni - 2008")
