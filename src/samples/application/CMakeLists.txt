@@ -1,4 +1,5 @@
 
 ADD_SUBDIRECTORY(00.console.helloworld)
 ADD_SUBDIRECTORY(01.gfx3d)
+ADD_SUBDIRECTORY(02.gfx3d.fps)
 
