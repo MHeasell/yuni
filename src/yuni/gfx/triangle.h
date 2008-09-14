@@ -4,7 +4,6 @@
 # include "edge.h"
 
 
-
 namespace Yuni
 {
 namespace Gfx
@@ -27,15 +26,15 @@ namespace Gfx
 		{}
 		//! \brief Copy constructor
 		Triangle(const Triangle& t):
-			pVertex1(t.Vertex1), pVertex2(t.vertex2), pVertex3(t.Vertex3)
+			pVertex1(t.vertex1()), pVertex2(t.vertex2()), pVertex3(t.vertex3())
 		{}
 		//@}
 
 		//! \name Accessors
 		//@{
-		const Vertex& Vertex1() const { return pVertex1; }
-		const Vertex& Vertex2() const { return pVertex2; }
-		const Vertex& Vertex3() const { return pVertex3; }
+		const Vertex& vertex1() const { return pVertex1; }
+		const Vertex& vertex2() const { return pVertex2; }
+		const Vertex& vertex3() const { return pVertex3; }
 		//@}
 
 	private:
@@ -48,7 +47,7 @@ namespace Gfx
 		// TODO
 
 		//! \brief Surface normal
-		Vector3D<float> pNormal;
+		// Vector3D<float> pNormal;
 	};
 
 

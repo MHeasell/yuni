@@ -2,8 +2,8 @@
 #ifndef __YUNI_GFX_MESH_H__
 # define __YUNI_GFX_MESH_H__
 
-# include "yuni/gfx/triangle.h"
-# include "yuni/misc/sharedptr.h"
+# include "triangle.h"
+# include "../misc/sharedptr.h"
 
 namespace Yuni
 {
@@ -18,7 +18,7 @@ namespace Gfx
 	class Mesh
 	{
 	public:
-		Mesh();
+		Mesh() {}
 
 		/*!
 		** \brief Add a triangle to the mesh
@@ -27,7 +27,10 @@ namespace Gfx
 		** \param tri Triangle to add
 		** \returns True on success, false on failure
 		*/
-		bool addTriangle(Triangle& tri);
+		void addTriangle(const SharedPtr<Triangle>& tri)
+		{
+			pTriangles.push_back(tri);
+		}
 
 	protected:
 		typedef std::vector<SharedPtr<Triangle> > TriangleList;

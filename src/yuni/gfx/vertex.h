@@ -2,8 +2,8 @@
 # define __YUNI_GFX_VERTEX_H__
 
 # include <vector>
-# include "yuni/gfx/point3D.h"
-
+# include "point3D.h"
+# include "../misc/sharedptr.h"
 
 namespace Yuni
 {
@@ -32,7 +32,7 @@ namespace Gfx
 		Vertex(const Point3D<float>& position): pPosition(position)
 		{}
 		template<typename U, typename V, typename W>
-		Vertex(const U x, const V y, const W z): pCoord(x, y, z)
+		Vertex(const U x, const V y, const W z): pPosition(x, y, z)
 		{}
 		~Vertex() {}
 		//@}
@@ -44,7 +44,7 @@ namespace Gfx
 		** \param other The other vertex to compare with
 		** \return True if the two vertices are coincident
 		*/
-		bool operator == (const Edge& other) const
+		bool operator == (const Vertex& other) const
 		{
 			return pPosition == other.position();
 		}
@@ -55,7 +55,7 @@ namespace Gfx
 		** \param other The other vertex to compare with
 		** \return True if the two vertices are distinct
 		*/
-		bool operator != (const Edge& other) const
+		bool operator != (const Vertex& other) const
 		{
 			return !(*this == other);
 		}
@@ -68,7 +68,7 @@ namespace Gfx
 		}
 
 	private:
-		Edge::Vector pEdges;
+		std::vector<SharedPtr<Edge> > pEdges;
 		Point3D<float> pPosition;
 
 	}; // Vertex
