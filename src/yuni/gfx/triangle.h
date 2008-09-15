@@ -20,7 +20,7 @@ namespace Gfx
 	{
 	public:
 		//! \name Constructors
-        //@{
+		//@{
 		Triangle(const Vertex& v1, const Vertex& v2, const Vertex& v3):
 			pVertex1(v1), pVertex2(v2), pVertex3(v3)
 		{}

@@ -42,7 +42,7 @@ namespace Gfx
 		** \brief Get the name of the external 3D engine
 		*/
 		String name();
-		
+
 		/*!
 		** \brief Get informations about the device currently being used
 		*/
@@ -101,7 +101,7 @@ namespace Gfx
 		Event::Proxy::P1<int> onFPSChanged;
 
 	private:
-		
+
 	private:
 		//! Mutex
 		Mutex pMutex;

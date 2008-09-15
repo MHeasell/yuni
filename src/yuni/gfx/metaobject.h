@@ -1,33 +1,35 @@
 
-#ifndef __LIB_3D_METAOBJECT_H__
-# define __LIB_3D_METAOBJECT_H__
+#ifndef __YUNI_GFX_METAOBJECT_H__
+# define __YUNI_GFX_METAOBJECT_H__
 
-namespace W
+# include "point3D.h"
+
+namespace Yuni
 {
-namespace GUI3D
+namespace Gfx
 {
 
-    /*! class MetaObject
-    ** 
-    ** Meta objects define implicit surfaces using a generic field function.
-    ** This class is abstract.
-    */
-    class MetaObject
-    {
-    public:
+	/*! class MetaObject
+	**
+	** Meta objects define implicit surfaces using a generic field function.
+	** This class is abstract.
+	*/
+	class MetaObject
+	{
+	public:
 	MetaObject(bool pPositive = true) {}
-        virtual ~MetaObject() {}
-    
-        //! Calculate the value of a point through the object's function
-        virtual float operator()(const Point& p) const = 0;
+		virtual ~MetaObject() {}
 
-    private:
-        //! Is the object a positive or negative force? (usually true)
+		//! Calculate the value of a point through the object's function
+		virtual float operator()(const Point3D<float>& p) const = 0;
+
+	private:
+		//! Is the object a positive or negative force? (usually true)
 	bool pPositive;
 
-    }; // class MetaObject
+	}; // class MetaObject
 
-} // GUI3D
-} // W
+} // Gfx
+} // Yuni
 
-#endif // __LIB_3D_METAOBBJECT_H_
+#endif // __YUNI_GFX_METAOBBJECT_H_
