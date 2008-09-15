@@ -18,6 +18,9 @@ namespace Gfx
 	class Mesh
 	{
 	public:
+		/*!
+		** Main Constructor
+		*/
 		Mesh() {}
 
 		/*!
@@ -25,7 +28,6 @@ namespace Gfx
 		** This will fail if the triangle exists already in the mesh,
 		** and the edges and vertices have to be updated.
 		** \param tri Triangle to add
-		** \returns True on success, false on failure
 		*/
 		void addTriangle(const SharedPtr<Triangle>& tri)
 		{
