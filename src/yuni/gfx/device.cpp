@@ -8,7 +8,7 @@ namespace Yuni
 {
 namespace Gfx
 {
-	
+
 # ifdef YUNI_OS_WINDOWS
 	const Device::Type Device::DefaultType = ygdtDirectX9;
 # else
@@ -21,10 +21,10 @@ namespace Gfx
 	{
 		switch (t)
 		{
-			case ygdtNull:     { return "Null"; }
+			case ygdtNull:	   { return "Null"; }
 			case ygdtSoftware: { return "Software"; }
 			case ygdtOpenGL:   { return "OpenGL"; }
-			case ygdtDirectX9: { return "Microsoft DirectX"; } // The latest version of DirectX 
+			case ygdtDirectX9: { return "Microsoft DirectX"; } // The latest version of DirectX
 			case ygdtDirectX8: { return "Microsoft DirectX (v8)"; }
 		}
 		return "Null";
@@ -74,7 +74,7 @@ namespace Gfx
 	Device::~Device()
 	{}
 
-		
+
 	bool Device::type(const Type newType)
 	{
 		if (!pLocked && newType != ygdtNull)
@@ -96,7 +96,7 @@ namespace Gfx
 	{
 		return pLocked ? false : type(StringToType(s));
 	}
-	
+
 	void Device::fullscreen(const bool f)
 	{
 		if (!pLocked)
@@ -122,14 +122,14 @@ namespace Gfx
 			pResolution = new System::Devices::Display::Resolution(w, h, d);
 	}
 
-	
+
 	void Device::stencilbuffer(const bool s)
 	{
 		if (!pLocked)
 			pStencilbuffer = s;
 	}
 
-	
+
 	void Device::vsync(const bool v)
 	{
 		if (!pLocked)

@@ -57,7 +57,7 @@ source_group(Hash\\Checksum FILES ${SRC_HASH_CHECKSUM})
 set(SRC_SYSTEM
                 system/stdint.h system/os.h
                 system/sleep.h system/sleep.cpp
-				system/endian.h) 
+				system/endian.h)
 source_group(System FILES ${SRC_SYSTEM})
 
 # System - Microsoft Windows
@@ -72,7 +72,7 @@ source_group(System\\Windows FILES ${SRC_SYSTEM_WINDOWS})
 set(SRC_DEVICES
 				system/devices/devices.h system/devices/display.cpp
 				system/devices/monitor.h system/devices/monitor.cpp
-				system/devices/resolution.h system/devices/resolution.cpp) 
+				system/devices/resolution.h system/devices/resolution.cpp)
 source_group(System\\Devices FILES ${SRC_DEVICES})
 
 
@@ -105,10 +105,13 @@ source_group(Application FILES ${SRC_APPLICATION})
 # Gfx
 set(SRC_GFX
 				gfx/device.h gfx/device.cpp
-				gfx/point2D.h gfx/point3D.h
+				gfx/point2D.h gfx/point3D.h gfx/vector3D.h
 				gfx/color.converters.h gfx/color.converters.cpp
 				gfx/rgba.h
-				gfx/vertex.h gfx/triangle.h gfx/edge.h
+				gfx/vertex.h gfx/triangle.h gfx/edge.h gfx/mesh.h
+				gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
+				gfx/metaobject.h gfx/metaball.h
+				gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
 				gfx/engine.h gfx/engine.cpp)
 source_group(Gfx FILES ${SRC_GFX})
 
