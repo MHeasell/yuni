@@ -19,7 +19,7 @@ namespace Files
 {
 
     //! The maximum allowed size for a file
-    const uint64 SizeHardLimit = 83886080;  // 80Mo = 10 * 1024 * 1024
+    const uint64 SizeHardLimit = 83886080;  // 80Mo = 80 * 1024 * 1024
 
 
     /*!
@@ -38,9 +38,9 @@ namespace Files
     ** if the extension can not be found, the new extension will be
     ** appended to it
     ** As this function is used when loading OTA or TDF files, the folder
-    ** separator is not system-dependant.
+    ** separator is not system-dependent.
     **
-    ** \param filename The orignal filename
+    ** \param filename The original filename
     ** \param newExt The new extension (ex: `.ota`)
     ** \return The filename with the new extension
     */
@@ -65,28 +65,28 @@ namespace Files
 
 
     /*!
-    ** \brief Load the entierly content of a file into memory
+    ** \brief Load the entire content of a file into memory
     **
     ** \param filename The filename to open
     ** \param hardlimit If the size of the file exceeds this limit, it will not be loaded 
-    ** \return The content of the file, null terminated , NULL if size > hardlimit or if any errors has occured.
+    ** \return The content of the file, null terminated, NULL if size > hardlimit or if any error has occurred.
     ** If not NULL, this value must be deleted with the keyword `delete[]`
     */
     char* LoadContentInMemory(const String& filename, const uint64 hardlimit = SizeHardLimit);
 
     /*!
-    ** \brief Load the entierly content of a file into memory
+    ** \brief Load the entire content of a file into memory
     **
     ** \param filename The filename to open
     ** \param[out] size The size of the file
     ** \param hardlimit If the size of the file exceeds this limit, it will not be loaded 
-    ** \return The content of the file, null terminated , NULL if size > hardlimit or if any errors has occured.
+    ** \return The content of the file, null terminated , NULL if size > hardlimit or if any error has occurred.
     ** If not NULL, this value must be deleted with the keyword `delete[]`
     */
     char* LoadContentInMemory(const String& filename, uint64& size, const uint64 hardlimit = SizeHardLimit);
 
     /*!
-    ** \brief Save the content of a string iinto a file
+    ** \brief Save the content of a string into a file
     **
     ** \param filename The filename to create/overwrite
     ** \param content The new content of the file
