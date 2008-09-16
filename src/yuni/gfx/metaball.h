@@ -25,10 +25,10 @@ namespace Gfx
 			pCenter(pos), pDensity(density)
 		{}
 		MetaBall(float x, float y, float z, float density = 1):
-		  pCenter(x, y, z), pDensity(density)
+			pCenter(x, y, z), pDensity(density)
 		{}
 		MetaBall(const MetaBall& other):
-		pCenter(other.center()), pDensity(other.density())
+			MetaObject(), pCenter(other.center()), pDensity(other.density())
 		{}
 
 		//! Calculate the value of a point through the metaball's function

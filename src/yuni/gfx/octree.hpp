@@ -64,7 +64,7 @@ namespace Gfx
 		// Nothing will be done if the node contains no point
 		while (pPoints.size() > 0)
 		{
-			Point crtPoint(pPoints.back());
+			Point3D<float> crtPoint(pPoints.back());
 			pPoints.pop_back();
 			uint16 index = getChildIndex(crtPoint);
 			// Create the child if necessary
@@ -154,22 +154,22 @@ namespace Gfx
 	{
 		if (NULL != pChildren[index])
 		return pChildren[index];
-		Point newMin(pMin);
-		Point newMax(pMax);
+		Point3D<float> newMin(pMin);
+		Point3D<float> newMax(pMax);
 		// We use the binary encoding of the index to determine
 		// the new coordinates
 		if ((index & 4) != 0)
-			newMin.X = pCenter.X;
+			newMin.x = pCenter.x;
 		else
-			newMax.X = pCenter.X;
+			newMax.x = pCenter.x;
 		if ((index & 2) != 0)
-			newMin.Y = pCenter.Y;
+			newMin.y = pCenter.y;
 		else
-			newMax.Y = pCenter.Y;
+			newMax.y = pCenter.y;
 		if ((index & 1) != 0)
-			newMin.Z = pCenter.Z;
+			newMin.z = pCenter.z;
 		else
-			newMax.Z = pCenter.Z;
+			newMax.z = pCenter.z;
 		// Create the new tree node
 		pChildren[index] = new Octree(newMin, newMax, NULL);
 		++pNbChildren;
@@ -181,7 +181,7 @@ namespace Gfx
 	std::ostream& Octree<T>::print(std::ostream& out) const
 	{
 		out << "Printing Octree node:" << std::endl;
-		for (std::vector<Point>::const_iterator it = pPoints.begin();
+		for (std::vector<Point3D<float> >::const_iterator it = pPoints.begin();
 			 it != pPoints.end();
 			 ++it)
 			out << (*it) << std::endl;
