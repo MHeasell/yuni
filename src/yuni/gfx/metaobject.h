@@ -17,15 +17,19 @@ namespace Gfx
 	class MetaObject
 	{
 	public:
-	MetaObject(bool pPositive = true) {}
-		virtual ~MetaObject() {}
+		MetaObject(): pPositive(true)
+		{}
+		MetaObject(bool positive): pPositive(positive)
+		{}
+		virtual ~MetaObject()
+		{}
 
 		//! Calculate the value of a point through the object's function
 		virtual float operator()(const Point3D<float>& p) const = 0;
 
 	private:
 		//! Is the object a positive or negative force? (usually true)
-	bool pPositive;
+		bool pPositive;
 
 	}; // class MetaObject
 
