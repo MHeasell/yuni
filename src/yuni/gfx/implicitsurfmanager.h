@@ -13,7 +13,7 @@ namespace Gfx
 
 	/*!
 	** \class ImplicitSurfManager
-	** Manager for all implicit surface regions.
+	** \brief Manager for all implicit surface regions.
 	*/
 	class ImplicitSurfManager
 	{

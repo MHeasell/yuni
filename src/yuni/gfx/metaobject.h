@@ -9,7 +9,7 @@ namespace Yuni
 namespace Gfx
 {
 
-	/*! class MetaObject
+	/*! \class MetaObject
 	**
 	** Meta objects define implicit surfaces using a generic field function.
 	** This class is abstract.

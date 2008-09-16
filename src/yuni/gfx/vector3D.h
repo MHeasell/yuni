@@ -93,7 +93,9 @@ namespace Gfx
 
 		/*!
 		** \brief Calculate the mean between two points
+		**
 		** The calling object is modified to store the value
+		**
 		** \param p Point to compute the mean with
 		*/
 		template<typename U>

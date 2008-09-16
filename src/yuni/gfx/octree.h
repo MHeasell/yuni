@@ -12,7 +12,8 @@ namespace Yuni
 namespace Gfx
 {
 
-	/*! Class Octree
+	/*! \class Octree
+	** \brief Octree datastructure
 	**
 	** An octree is a tree representing a space partioning.
 	** A cube of space is split in 8 smaller cubes around the center.
@@ -32,6 +33,8 @@ namespace Gfx
 	** 5 : X >= Xc , Y < Yc , Z >= Zc
 	** 6 : X >= Xc , Y >= Yc , Z < Zc
 	** 7 : X >= Xc , Y >= Yc , Z >= Zc
+	**
+	** \tparam T 
 	*/
 	template <typename T>
 	class Octree
@@ -40,32 +43,67 @@ namespace Gfx
 		const uint16 MAX_POINTS_PER_NODE;
 
 	public:
+		//! \name Constructor & Destructor
+		//@{
+
+		/*!
+		** \brief Constructor
+		*/
 		Octree(const Point3D<float>& min, const Point3D<float>& max, T* data);
+
+		//! Destructor
 		virtual ~Octree();
+
+		//@}
 
 		//! Accessor to the value of this treenode
 		const T& data() const { return *pData; }
 		//! Is the node a leaf?
 		bool isLeaf() const { return 0 == pNbChildren; }
 		//! Depth of the tree
-		inline uint16 depth() const;
+		uint16 depth() const;
 		//! Number of nodes in the tree
-		inline uint32 nodeCount() const;
+		uint32 nodeCount() const;
 		//! Number of points in the tree
-		inline uint32 pointCount() const;
+		uint32 pointCount() const;
 
-		//! Add a single point to the  Octree
+		/*!
+		** \brief Add a single point to the  Octree
+		** \param p The point to add
+		*/
 		Octree<T>* addPoint(const SharedPtr<Point3D<float> >& p);
-		//! Find the smallest existing cube containing the given point
+
+		/*!
+		** \brief Recursive find of the deepest node (the smallest bounding box) containing a given point
+		**
+		** \param p The point
+		** \return The node found
+		*/
 		Octree<T>* findSmallestBBox(const Point3D<float>& p) const;
-		//! Split a leaf into subnodes
+
+		/*!
+		** \brief Split a leaf into subnodes
+		*/
 		void split();
 
-		//! Find the index of the child containing the given point
+		/*!
+		** \brief Find the index of the child containing the given point
+		** \return A value in [0..7]
+		*/
 		uint16 getChildIndex(const Point3D<float>& p) const;
-		//! Create a child node at given index
+
+		/*!
+		** \brief Create a child node at given index, if it does not exist yet
+		**
+		** Automatically calculate its boundaries
+		**
+		** \return The child in any case
+		*/
 		Octree<T>* createChild(uint16 index);
 
+		/*!
+		** \brief Print all the points contained in the tree (used for debug)
+		*/
 		std::ostream& print(std::ostream& out) const;
 
 	private:
@@ -83,7 +121,7 @@ namespace Gfx
 		//! Store this to know when the node is a leaf (avoid counting children)
 		uint16 pNbChildren;
 		//! Leaves (and only leaves!) can contain points
-		std::vector<SharedPtr<Point3D<float> > > pPoints;
+		std::vector< SharedPtr<Point3D<float> > > pPoints;
 
 	}; // class Octree
 

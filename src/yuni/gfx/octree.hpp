@@ -74,9 +74,6 @@ namespace Gfx
 		}
 	}
 
-	/*! Recursive find of the deepest node (the smallest bounding box)
-	** containing a given point.
-	*/
 	template <typename T>
 	Octree<T>* Octree<T>::findSmallestBBox(const Point3D<float>& p) const
 	{
@@ -129,9 +126,6 @@ namespace Gfx
 		return pPoints.size() + childPointCount;
 	}
 
-	/*! Get the index of the child containing this point.
-	** Return value is in [0..7]
-	*/
 	template <typename T>
 	uint16 Octree<T>::getChildIndex(const Point3D<float>& p) const
 	{
@@ -145,10 +139,6 @@ namespace Gfx
 		return index;
 	}
 
-	/*! Create a child at specified index if it does not exist yet
-	** Automatically calculate its boundaries
-	** In any case, return the child
-	*/
 	template <typename T>
 	Octree<T>* Octree<T>::createChild(uint16 index)
 	{
@@ -176,14 +166,11 @@ namespace Gfx
 		return pChildren[index];
 	}
 
-	//! Print all the points contained in the tree (used for debug)
 	template <typename T>
 	std::ostream& Octree<T>::print(std::ostream& out) const
 	{
 		out << "Printing Octree node:" << std::endl;
-		for (std::vector<Point3D<float> >::const_iterator it = pPoints.begin();
-			 it != pPoints.end();
-			 ++it)
+		for (std::vector<Point3D<float> >::const_iterator it = pPoints.begin(); it != pPoints.end(); ++it)
 			out << (*it) << std::endl;
 		out << "Recursing on " << pNbChildren << " children:" << std::endl;
 		for (uint16 i = 0; i < 7; ++i)

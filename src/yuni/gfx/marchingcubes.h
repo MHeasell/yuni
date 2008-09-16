@@ -13,6 +13,7 @@ namespace Gfx
 
 	/*!
 	** \class MarchingCubes
+	**
 	** The Marching Cubes algorithm finds cubes intersecting the surface,
 	** and matches the cubes with certain patterns to find to which neighbour
 	** cubes the algorithm should propagate.
@@ -37,10 +38,12 @@ namespace Gfx
 	private:
 		/*!
 		** \brief Marching cubes polygonization algorithm implementation
+		**
 		** Marching cubes uses an 8-bit code to represent to which pattern
 		** case a certain cube corresponds. Each bit corresponds to a corner
 		** vertex of the cube.
 		** Calculate this code for a cube.
+		**
 		** \param min Point of minimum x, y, z in the cube
 		** \param max Point of maximum x, y, z in the cube
 		*/

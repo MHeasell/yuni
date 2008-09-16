@@ -23,7 +23,9 @@ namespace Gfx
 		ImplicitSurface();
 		~ImplicitSurface();
 
-		/*! Create a new metaball
+		/*!
+		** \brief Create a new metaball
+		**
 		** It becomes the responsibility of the ImplicitSurface, so
 		** it must not be deleted elsewhere.
 		*/
