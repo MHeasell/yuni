@@ -6,7 +6,7 @@ namespace Yuni
 namespace Gfx
 {
 
-	Mesh* MarchingCubes::operator () (float density, uint16 maxDepth)
+	Mesh* MarchingCubes::operator () (float density, uint16 /*maxDepth*/)
 	{
 		pDensity = density;
 		return NULL;

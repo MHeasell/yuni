@@ -3,10 +3,11 @@ namespace Yuni
 {
 namespace Gfx
 {
+	
 
 	template <typename T>
 	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, T* data = NULL):
-		MAX_POINTS_PER_NODE(32), pData(data),
+		MaxPointsPerNode(32), pData(data),
 		pCenter(0, 0, 0), pMin(min), pMax(max)
 	{
 		// The Center is the mean of the min and the max
@@ -35,7 +36,7 @@ namespace Gfx
 		// If this is a leaf
 		if (isLeaf())
 		{
-			if (pPoints.size() < MAX_POINTS_PER_NODE)
+			if (pPoints.size() < MaxPointsPerNode)
 			{
 				// Directly add the point to the node
 				pPoints.push_back(p);
