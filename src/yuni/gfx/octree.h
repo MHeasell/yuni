@@ -139,6 +139,6 @@ std::ostream& operator<<(std::ostream& out, const Yuni::Gfx::Octree<T>& tree)
 }
 
 
-# include "octree.hpp"
+# include "octree.hxx"
 
 #endif // __YUNI_GFX_OCTREE_H__
