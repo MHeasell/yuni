@@ -10,12 +10,14 @@ namespace Yuni
 {
 namespace Gfx
 {
+
 	//! This threshold indicates the limit value for the influence of a metaball
 	const float INFLUENCE_THRESHOLD = 6.0f;
 
 	/*!
 	** \class MetaBall
 	** \brief Metaballs are the simplest and most used meta objects.
+	**
 	** They have a sphere shape and can use a number of field functions.
 	*/
 	class MetaBall: public MetaObject
@@ -78,10 +80,12 @@ namespace Gfx
 		}
 
 		/*! \brief A metaball density function with finite support
+		**
 		** D(r) = a(1 - 3r^2/b^2)	when 0 <= r <= b / 3
 		** D(r) = 3a/2(1 - r/b)^2	when b / 3 <= r <= b
 		** D(r) = 0					when b <= r
 		** where a is a scaling factor (density), and b a threshold
+		**
 		** \param p Point to calculate the density for
 		** \return The calculated density
 		*/
@@ -102,7 +106,9 @@ namespace Gfx
 
 		/*!
 		** \brief A soft object polynomial density function, w/ finite support
+		**
 		** D(r) = a(1 - 4r^6/9b^6 + 17r^4/9b^4 - 22r^2/9b^2)
+		**
 		** \param p Point to calculate the density for
 		** \return The calculated density
 		*/

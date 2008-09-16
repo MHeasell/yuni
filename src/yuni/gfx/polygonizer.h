@@ -1,4 +1,3 @@
-
 #ifndef __YUNI_GFX_POLYGONIZER_H__
 # define __YUNI_GFX_POLYGONIZER_H__
 
@@ -11,7 +10,9 @@ namespace Yuni
 namespace Gfx
 {
 
-	/*! class Polygonizer
+
+	/*! \class Polygonizer
+	**
 	** A polygonizer is the abstraction of an algorithm
 	** able to create a triangle mesh from an isosurface.
 	*/
@@ -23,10 +24,13 @@ namespace Gfx
 		{}
 		virtual ~Polygonizer() {}
 
-		/*! Actually calculate the mesh from the isosurface.
+		/*!
+		** \brief Calculate the mesh from the isosurface
+		**
 		** The purpose is to find points which solve:
 		**   Surface(Point) = density.
 		** Then we create triangles and a mesh from these points.
+		** 
 		** \param density Value that defines the isosurface
 		** \param maxDepth Maximum refinement depth for the algorithm
 		** \return A new Mesh approximating the surface
@@ -34,8 +38,12 @@ namespace Gfx
 		virtual Mesh* operator () (float density, uint16 maxDepth) = 0;
 
 	protected:
-		/*! Calculate the density of a point, and use the surface's density
+		/*!
+		** \brief Determine if a given point is inside or outside the surface
+		**
+		** Calculate the density of a point, and use the surface's density
 		** to determine if the point is inside or outside the surface.
+		**
 		** \param p Point to calculate
 		** \return True if the point is inside the isosurface, false otherwise
 		*/
