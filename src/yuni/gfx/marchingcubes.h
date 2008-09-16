@@ -14,6 +14,8 @@ namespace Gfx
 	/*!
 	** \class MarchingCubes
 	**
+	** \brief Marching cubes approximates an implicit surface using smaller and smaller cubes
+	**
 	** The Marching Cubes algorithm finds cubes intersecting the surface,
 	** and matches the cubes with certain patterns to find to which neighbour
 	** cubes the algorithm should propagate.

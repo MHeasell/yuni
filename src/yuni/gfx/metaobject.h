@@ -9,20 +9,29 @@ namespace Yuni
 namespace Gfx
 {
 
-	/*! \class MetaObject
+	/*!
+	** \class MetaObject
 	**
-	** Meta objects define implicit surfaces using a generic field function.
+	** \brief Meta objects define implicit surfaces using a generic field function.
+	**
+	** Actually, meta objects are simplistic implicit surfaces themselves.
 	** This class is abstract.
 	*/
 	class MetaObject
 	{
 	public:
+		//! \name Constructors and destructor
+		//@{
+		//! Default constructor
 		MetaObject(): pPositive(true)
 		{}
+		//! Full constructor
 		MetaObject(bool positive): pPositive(positive)
 		{}
+		//! Destructor
 		virtual ~MetaObject()
 		{}
+		//@}
 
 		//! Calculate the value of a point through the object's function
 		virtual float operator()(const Point3D<float>& p) const = 0;

@@ -11,10 +11,9 @@ namespace Gfx
 {
 
 
-	/*! \class Polygonizer
-	**
-	** A polygonizer is the abstraction of an algorithm
-	** able to create a triangle mesh from an isosurface.
+	/*!
+	** \class Polygonizer
+	** \brief A polygonizer is the abstraction of an algorithm able to create a triangle mesh from an isosurface.
 	*/
 	class Polygonizer
 	{
@@ -30,7 +29,7 @@ namespace Gfx
 		** The purpose is to find points which solve:
 		**   Surface(Point) = density.
 		** Then we create triangles and a mesh from these points.
-		** 
+		**
 		** \param density Value that defines the isosurface
 		** \param maxDepth Maximum refinement depth for the algorithm
 		** \return A new Mesh approximating the surface

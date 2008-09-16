@@ -30,7 +30,7 @@ namespace Gfx
 			//! OpenGL
 			ygdtOpenGL,
 			//! Microsoft DirectX device (version 9)
-			ygdtDirectX9,   
+			ygdtDirectX9,
 			//! Microsoft DirectX device (version 8)
 			ygdtDirectX8
 		};
@@ -39,7 +39,7 @@ namespace Gfx
 		static const Type DefaultType;
 
 
-		//! \name Device type convertions
+		//! \name Device type conversions
 		//@{
 
 		/*!
@@ -148,7 +148,7 @@ namespace Gfx
 		void monitor(const SharedPtr<System::Devices::Display::Monitor>& m);
 
 		//@}
-		
+
 
 		//! \name The Display resolution
 		//@{
@@ -224,7 +224,7 @@ namespace Gfx
 		bool locked() const {return pLocked;}
 
 		/*!
-		** \brief Avoid any further changes 
+		** \brief Avoid any further changes
 		*/
 		void lock();
 
