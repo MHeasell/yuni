@@ -23,15 +23,24 @@ namespace Gfx
 	class MetaBall: public MetaObject
 	{
 	public:
+		//! \name Constructors and destructor
+		//@{
+		//! Constructor requiring a 3D point
 		MetaBall(const Point3D<float>& pos, float density = 1):
 			pCenter(pos), pDensity(density)
 		{}
+		//! Constructor requiring the coordinates of a 3D point
 		MetaBall(float x, float y, float z, float density = 1):
 			pCenter(x, y, z), pDensity(density)
 		{}
+		//! Copy constructor
 		MetaBall(const MetaBall& other):
 			MetaObject(), pCenter(other.center()), pDensity(other.density())
 		{}
+		//! Destructor
+		virtual ~MetaBall()
+		{}
+		//@}
 
 		//! Calculate the value of a point through the metaball's function
 		virtual float operator()(const Point3D<float>& p) const

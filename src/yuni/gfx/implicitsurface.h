@@ -11,10 +11,13 @@ namespace Yuni
 namespace Gfx
 {
 
-	/*! class ImplicitSurface
+	/*!
+	** \class ImplicitSurface
 	**
-	** An implicit surface or isosurface is defined
-	** by metaobjects interacting with each other.
+	** \brief An implicit surface is a mathematical function defining a spacial surface
+	**
+	** An implicit surface is defined by metaobjects
+	** interacting with each other.
 	**
 	*/
 	class ImplicitSurface
