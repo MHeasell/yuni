@@ -18,21 +18,25 @@ namespace Gfx
 	** An octree is a tree representing a space partioning.
 	** A cube of space is split in 8 smaller cubes around the center.
 	**
-	** The position of the children in the array is the following:
+	** The position of the children in the array is the following :
+	** \code
 	**   0    1    2    3    4    5    6    7  
 	** ------- < X -------||------- >=X -------
 	** -- < Y --||-- >=Y -||- < Y --||-- >=Y --
 	**  <Z ||>=Z||<Z ||>=Z||<Z ||>=Z||<Z ||>=Z
+	** \endcode
 	**
-	** Or written differently, with Xc, Yc, Zc, being the center's coords:
-	** 0 : X < Xc , Y < Yc , Z < Zc
-	** 1 : X < Xc , Y < Yc , Z >= Zc
-	** 2 : X < Xc , Y >= Yc , Z < Zc
-	** 3 : X < Xc , Y >= Yc , Z >= Zc
-	** 4 : X >= Xc , Y < Yc , Z < Zc
-	** 5 : X >= Xc , Y < Yc , Z >= Zc
-	** 6 : X >= Xc , Y >= Yc , Z < Zc
-	** 7 : X >= Xc , Y >= Yc , Z >= Zc
+	** Or written differently, with Xc, Yc, Zc, being the center's coords :
+	** \code
+	**    0 : X < Xc,  Y < Yc,  Z < Zc
+	**    1 : X < Xc,  Y < Yc,  Z >= Zc
+	**    2 : X < Xc,  Y >= Yc, Z < Zc
+	**    3 : X < Xc,  Y >= Yc, Z >= Zc
+	**    4 : X >= Xc, Y < Yc,  Z < Zc
+	**    5 : X >= Xc, Y < Yc,  Z >= Zc
+	**    6 : X >= Xc, Y >= Yc, Z < Zc
+	**    7 : X >= Xc, Y >= Yc, Z >= Zc
+	** \endcode
 	**
 	** \tparam T 
 	*/
@@ -40,7 +44,8 @@ namespace Gfx
 	class Octree
 	{
 	public:
-		const uint16 MAX_POINTS_PER_NODE;
+		//! Max points per node
+		const uint16 MaxPointsPerNode;
 
 	public:
 		//! \name Constructor & Destructor
@@ -58,7 +63,7 @@ namespace Gfx
 
 		//! Accessor to the value of this treenode
 		const T& data() const { return *pData; }
-		//! Is the node a leaf?
+		//! Is the node a leaf ?
 		bool isLeaf() const { return 0 == pNbChildren; }
 		//! Depth of the tree
 		uint16 depth() const;
