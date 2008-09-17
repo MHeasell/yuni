@@ -32,11 +32,26 @@ namespace Yuni
 		~SharedPtr() {release();}
 		//@}
 
+		//! \name Reset the reference
+		//@{
+
+		/*!
+		** \brief Release the inner reference
+		*/
+		SharedPtr<T>& reset();
+		/*!
+		** \brief Assign a new reference
+		*/
+		SharedPtr<T>& reset(const SharedPtr<T>& rhs);
+
+		//@}
+
+
 		//! \name Operators
 		//@{
 		//! The operator =
-		SharedPtr<T>& operator = (const SharedPtr<T>& rhs);
-		SharedPtr<T>& operator = (T* rhs) { *this = SharedPtr<T>(rhs); return *this;}
+		SharedPtr<T>& operator = (const SharedPtr<T>& rhs) {return reset(rhs);}
+		SharedPtr<T>& operator = (T* rhs) { return reset(SharedPtr<T>(rhs));}
 		//! The operator *
 		T& operator * () const throw() {return *counter->ptr;}
 		//! The operator ->
