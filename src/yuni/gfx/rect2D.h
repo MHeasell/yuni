@@ -75,6 +75,25 @@ namespace Gfx
 			return *this;
 		}
 
+		/*!
+		** \brief Reset the rectangle coordinates to cover two 2D-points
+		**
+		** \param a The first X-coordinate
+		** \param b The first Y-coordinate
+		** \param c The second X-coordinate
+		** \param d The second Y-coordinate
+		*/
+		template<typename U, typename V, typename W, typename X>
+		Rect2D<T>& reset(const U a, const V b, const W c, const X d)
+		{
+			x1 = Math::Min( (T) a, (T) c);
+			y1 = Math::Min( (T) b, (T) d);
+			x2 = Math::Max( (T) a, (T) c);
+			y2 = Math::Max( (T) b, (T) d);
+			return *this;
+		}
+
+
 
 		/*!
 		** \brief Reset the rectangle coordinates to cover two other rectangles
