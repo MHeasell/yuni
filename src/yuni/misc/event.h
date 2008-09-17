@@ -79,6 +79,13 @@ namespace Event
 		virtual void disconnectAllNotifiers()
 		{
 			pMutex.lock();
+			internalDisconnectAllNotifiers();
+			pMutex.unlock();
+		}
+
+	protected:
+		virtual void internalDisconnectAllNotifiers()
+		{
 			if (!pNotifiers.empty())
 			{
 				std::set<Notifier*> copy(pNotifiers);
@@ -86,7 +93,6 @@ namespace Event
 				for (std::set<Notifier*>::const_iterator i = copy.begin(); i != copy.end(); ++i)
 					(*i)->disconnect(this, false);
 			}
-			pMutex.unlock();
 		}
 
 	protected:
