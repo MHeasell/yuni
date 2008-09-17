@@ -6,7 +6,15 @@ namespace Yuni
 {
 
 	template<class T>
-	SharedPtr<T>& SharedPtr<T>::operator = (const SharedPtr<T>& rhs)
+	SharedPtr<T>& SharedPtr<T>::reset()
+	{
+		release();
+		return *this;
+	}
+
+
+	template<class T>
+	SharedPtr<T>& SharedPtr<T>::reset(const SharedPtr<T>& rhs)
 	{
 		if (this != &rhs)
 		{
