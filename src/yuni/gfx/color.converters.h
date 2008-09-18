@@ -41,7 +41,7 @@ namespace Proxy
 		static T& Assign(T& th, const U& a1);
 
 		/*!
-		** \brief Assign the values between RGB Color Models from a single argument
+		** \brief Assign the values between RGB Color Models from 2 arguments
 		**
 		** \param th The instance where assignation will be done
 		** \param a1 The value
@@ -76,8 +76,41 @@ namespace Proxy
 
 		static T& Inc(T& to, const U& inc);
 
+	}; // class Values
+
+	template<>
+	template<typename A, typename B>
+	struct Values< RGB<A>, RGBA<B> > 
+	{
+		inline static RGB<A>& Assign(RGB<A>& th, const RGBA<B>& a1)
+		{
+			return th.assign(a1.red, a1.green, a1.blue);
+		}
+
+		inline static RGB<A>& Inc(RGB<A>& to, const RGBA<B>& inc)
+		{
+			return (to += RGB<A>(inc));
+		}
+
+	};
+
+	template<>
+	template<typename A, typename B>
+	struct Values< RGBA<A>, RGB<B> > 
+	{
+		inline static RGBA<A>& Assign(RGBA<A>& th, const RGB<B>& a1)
+		{
+			return th.assign(a1.red, a1.green, a1.blue);
+		}
+
+		inline static RGBA<A>& Inc(RGBA<A>& to, const RGB<B>& inc)
+		{
+			return (to += RGBA<A>(inc));
+		}
 
 	}; // class Values
+
+
 
 
 
@@ -107,6 +140,41 @@ namespace Proxy
 	};
 
 
+	template<>
+	template<typename S>
+	struct Streamer< RGBA<S> >
+	{
+		inline static std::ostream& toOStream(std::ostream& out, const RGBA<S>& th)
+		{
+			out << "r:" << th.red << ",g:" << th.green << ",b:" << th.blue << ",a:" << th.alpha;
+			return out;
+		}
+
+		inline static String toString(const RGBA<S>& th)
+		{
+			return String() << "r:" << th.red << ",g:" << th.green << ",b:" << th.blue << ",a:" << th.alpha;
+		}
+	};
+
+	template<>
+	template<typename S>
+	struct Streamer< RGB<S> >
+	{
+		inline static std::ostream& toOStream(std::ostream& out, const RGB<S>& th)
+		{
+			out << "r:" << th.red << ",g:" << th.green << ",b:" << th.blue;
+			return out;
+		}
+
+		inline static String toString(const RGB<S>& th)
+		{
+			return String() << "r:" << th.red << ",g:" << th.green << ",b:" << th.blue;
+		}
+	};
+
+
+
+
 
 
 
@@ -114,14 +182,17 @@ namespace Proxy
 	template<typename T, typename U>
 	struct Compare
 	{
-		static bool check(const T& lhs, const U& rhs);
+		/*!
+		** \brief Test if two Color models are equal
+		*/
+		static bool equals(const T& lhs, const U& rhs);
 	};
 
 	// Compare RGBA with the same type
 	template<typename V>
 	struct Compare< RGBA<V>, RGBA<V> >
 	{
-		inline static bool check(const RGBA<V>& lhs, const RGBA<V>& rhs)
+		inline static bool equals(const RGBA<V>& lhs, const RGBA<V>& rhs)
 		{ return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha; }
 	};
 	
@@ -129,8 +200,8 @@ namespace Proxy
 	template<typename V, typename W>
 	struct Compare< RGBA<V>, RGBA<W> >
 	{
-		inline static bool check(const RGBA<V>& lhs, const RGBA<W>& rhs)
-		{ return lhs == RGBA<V>(rhs); }
+		inline static bool equals(const RGBA<V>& lhs, const RGBA<W>& rhs)
+		{ return Compare< RGBA<V>, RGBA<V> >::equals(lhs, RGBA<V>(rhs)); }
 	};
 
 
@@ -138,15 +209,23 @@ namespace Proxy
 	template<typename V>
 	struct Compare< RGB<V>, RGB<V> >
 	{
-		inline static bool check(const RGB<V>& lhs, const RGB<V>& rhs)
+		inline static bool equals(const RGB<V>& lhs, const RGB<V>& rhs)
 		{ return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue; }
+	};
+
+	// Compare RGB with not the same type
+	template<typename V, typename W>
+	struct Compare< RGB<V>, RGB<W> >
+	{
+		inline static bool equals(const RGB<V>& lhs, const RGB<W>& rhs)
+		{ return Compare< RGB<V>, RGB<V> >::equals(lhs.red, RGB<V>(rhs)); }
 	};
 
 	// Compare RGBA - RGB
 	template<typename V>
 	struct Compare< RGBA<V>, RGB<V> >
 	{
-		inline static bool check(const RGBA<V>& lhs, const RGB<V>& rhs)
+		inline static bool equals(const RGBA<V>& lhs, const RGB<V>& rhs)
 		{ return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue; }
 	};
 
@@ -154,7 +233,7 @@ namespace Proxy
 	template<typename V>
 	struct Compare< RGB<V>, RGBA<V> >
 	{
-		inline static bool check(const RGB<V>& lhs, const RGBA<V>& rhs)
+		inline static bool equals(const RGB<V>& lhs, const RGBA<V>& rhs)
 		{ return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue; }
 	};
 
