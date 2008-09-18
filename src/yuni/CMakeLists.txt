@@ -107,7 +107,7 @@ set(SRC_GFX
 				gfx/device.h gfx/device.cpp
 				gfx/point2D.h gfx/point3D.h gfx/vector3D.h
 				gfx/color.converters.h gfx/color.converters.cpp
-				gfx/rgba.h
+				gfx/rgba.h gfx/rgb.h
 				gfx/vertex.h gfx/triangle.h gfx/edge.h gfx/mesh.h
 				gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
 				gfx/metaobject.h gfx/metaball.h
@@ -119,8 +119,8 @@ source_group(Gfx FILES ${SRC_GFX})
 
 # User Interface
 set(SRC_GFX_UI
-				gfx/ui/window.h gfx/ui/window.cpp
-				gfx/ui/component.h gfx/ui/component.cpp)
+				gfx/ui/component.h gfx/ui/component.cpp
+				gfx/ui/control.h gfx/ui/control.cpp)
 source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
 
 

@@ -22,13 +22,16 @@ int main(void)
 
 	// A color completely transparent
 	Gfx::Color::RGBA<float> f_transparent(0.3f, 0.72f, 0.2345f, 0.3f);
+	std::cout << "Transparent : " << f_transparent << std::endl;
 
 	// Convertions
 	Gfx::Color::RGBA<float> f_convert (Gfx::Color::RGBA<uint8>(242, 24, 183, 255));
-	std::cout << f_convert << std::endl;
+	std::cout << "Convert 1 : " << f_convert << std::endl;
 
 	Gfx::Color::RGBA<uint8> f_convert2 (Gfx::Color::RGBA<float>(0.1f, 0.9f, 0.24f, 0.3f));
-	std::cout << f_convert2 << std::endl;
+	std::cout << "Convert 2 : " << f_convert2 << std::endl;
+	Gfx::Color::RGBA<uint8> f_convert3 (Gfx::Color::RGBA<float>(0.1f, 0.9f, 0.24f, 0.3f));
+	std::cout << "Convert 3 : " << f_convert3.toString() << std::endl;
 	
 	// Compare 2 color models
 	std::cout << (f_red == f_green) << std::endl;
