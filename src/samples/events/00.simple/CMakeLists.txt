@@ -1,4 +1,5 @@
 
+include_directories(${YUNI_INCLUDE})
 ADD_EXECUTABLE(events_00_simple main.cpp)
-target_link_libraries(events_00_simple yuni-static)
+target_link_libraries(events_00_simple ${YUNI_LIBRARIES})
 
