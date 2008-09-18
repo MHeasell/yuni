@@ -114,12 +114,12 @@ namespace Gfx
 		/*!
 		** \brief Get the equivalent Point2D for the top left
 		*/
-		template<typename U = T>
+		template<typename U>
 		Point2D<U> topLeft() const {return Point2D<U>((U)x1, (U)y1);}
 		/*!
 		** \brief Get the equivalent Point2D for the bottom right
 		*/
-		template<typename U = T>
+		template<typename U>
 		Point2D<U> bottomRight() const {return Point2D<U>((U)x2, (U)y2);}
 
 
