@@ -7,10 +7,15 @@
 # include "../misc/sharedptr.h"
 # include "point3D.h"
 
+
+
+# define YUNI_OCTREE_MAX_CHILDREN  8
+
 namespace Yuni
 {
 namespace Gfx
 {
+
 
 	/*! \class Octree
 	** \brief Octree datastructure
@@ -76,7 +81,7 @@ namespace Gfx
 		** \brief Add a single point to the  Octree
 		** \param p The point to add
 		*/
-		Octree<T>* addPoint(const SharedPtr<Point3D<float> >& p);
+		Octree<T>* addPoint(const Point3D<float>& p);
 
 		/*!
 		** \brief Recursive find of the deepest node (the smallest bounding box) containing a given point
@@ -112,6 +117,9 @@ namespace Gfx
 		std::ostream& print(std::ostream& out) const;
 
 	private:
+		typedef typename std::vector< Point3D<float> >  PointList;
+
+	private:
 		//! Value of the node. Can be anything at all.
 		T* pData;
 		//! Center point for the node
@@ -122,11 +130,11 @@ namespace Gfx
 		Point3D<float> pMax;
 
 		//! Links to the children nodes
-		Octree<T>* pChildren[8];
+		Octree<T>* pChildren[YUNI_OCTREE_MAX_CHILDREN];
 		//! Store this to know when the node is a leaf (avoid counting children)
 		uint16 pNbChildren;
 		//! Leaves (and only leaves!) can contain points
-		std::vector< SharedPtr<Point3D<float> > > pPoints;
+		PointList pPoints;
 
 	}; // class Octree
 
