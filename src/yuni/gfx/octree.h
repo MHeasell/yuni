@@ -59,6 +59,7 @@ namespace Gfx
 		/*!
 		** \brief Constructor
 		*/
+		Octree();
 		Octree(const Point3D<float>& min, const Point3D<float>& max, T* data);
 
 		//! Destructor
@@ -93,8 +94,16 @@ namespace Gfx
 
 		/*!
 		** \brief Split a leaf into subnodes
+		** Also move each point it contained to the right sub-node.
+		** If the node is not a leaf / has no point, do nothing.
 		*/
 		void split();
+
+		/*!
+		** \brief Grow the tree to a complete tree of given depth
+		** Be careful! This is the only case where we might create empty leaves!
+		*/
+		void growTo(uint16 depth);
 
 		/*!
 		** \brief Find the index of the child containing the given point
@@ -115,6 +124,15 @@ namespace Gfx
 		** \brief Print all the points contained in the tree (used for debug)
 		*/
 		std::ostream& print(std::ostream& out) const;
+
+	private:
+
+		/*!
+		** \brief Split a leaf node into sub-nodes
+		** Also move each point it contained to the right sub-node.
+		** If the node is not has no point, force the split anyway.
+		*/
+		void forceSplit();
 
 	private:
 		typedef typename std::vector< Point3D<float> >  PointList;

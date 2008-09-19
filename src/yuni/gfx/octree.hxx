@@ -6,6 +6,11 @@ namespace Gfx
 
 
 	template <typename T>
+	Octree<T>::Octree(): Octree(Point3D<float>(0.0f, 0.0f, 0.0f), Point3D<float>(0.0f, 0.0f, 0.0f))
+	{
+	}
+
+	template <typename T>
 	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, T* data = NULL):
 		MaxPointsPerNode(32), pData(data),
 		pCenter(0, 0, 0), pMin(min), pMax(max)
@@ -23,13 +28,13 @@ namespace Gfx
 	{
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
-			if (NULL != pChildren[i])
+			if (pChildren[i])
 				delete pChildren[i];
 		}
 	}
 
 
-	//! Add a single point to the Octree
+	//! \brief Add a single point to the Octree
 	template <typename T>
 	Octree<T>* Octree<T>::addPoint(const Point3D<float>& p)
 	{
@@ -54,9 +59,10 @@ namespace Gfx
 		return pChildren[index]->addPoint(p);
 	}
 
-	/*! Split a leaf node into sub-nodes, and move each point
-	** it contained to the right sub-node.
-	** If the node is not a leaf, do nothing.
+	/*!
+	** \brief Split a leaf node into sub-nodes
+	** Also move each point it contained to the right sub-node.
+	** If the node is not a leaf / has no point, do nothing.
 	*/
 	template <typename T>
 	void Octree<T>::split()
@@ -74,6 +80,41 @@ namespace Gfx
 			pChildren[index]->addPoint(crtPoint);
 		}
 	}
+
+	/*!
+	** \brief Split a leaf node into sub-nodes
+	** Also move each point it contained to the right sub-node.
+	** If the node is not has no point, force the split anyway.
+	*/
+	template <typename T>
+	void Octree<T>::forceSplit()
+	{
+		// First, try to split cleanly
+		split();
+		// Loop on all children to see if some were not created
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+			// Force the creation for all missing children
+			if (NULL == pChildren[i])
+				createChild(index);
+	}
+
+	/*!
+	** \brief Grow the tree to a complete tree of given depth
+	** Be careful! This is the only case where we might create empty leaves!
+	*/
+	void growTo(uint16 depth)
+	{
+		if (depth > 0)
+		{
+			// Split
+			forceSplit();
+			// Loop on all children
+			for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+				// Recursive call
+				pChildren[i]->growTo(depth - 1);
+		}
+	}
+
 
 	template <typename T>
 	Octree<T>* Octree<T>::findSmallestBBox(const Point3D<float>& p) const
@@ -113,7 +154,7 @@ namespace Gfx
 		uint32 childNodeCount = 0;
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
-			if (NULL != pChildren[i])
+			if (pChildren[i])
 				childNodeCount += pChildren[i]->nodeCount();
 		}
 		return 1 + childNodeCount;
@@ -126,7 +167,7 @@ namespace Gfx
 		uint32 childPointCount = 0;
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
-			if (NULL != pChildren[i])
+			if (pChildren[i])
 				childPointCount += pChildren[i]->pointCount();
 		}
 		return pPoints.size() + childPointCount;
@@ -148,7 +189,7 @@ namespace Gfx
 	template <typename T>
 	Octree<T>* Octree<T>::createChild(uint16 index)
 	{
-		if (NULL != pChildren[index])
+		if (pChildren[index])
 			return pChildren[index];
 		Point3D<float> newMin(pMin);
 		Point3D<float> newMax(pMax);
@@ -181,7 +222,7 @@ namespace Gfx
 		out << "Recursing on " << pNbChildren << " children:" << std::endl;
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
-			if (NULL != pChildren[i])
+			if (pChildren[i])
 				pChildren[i]->print(out);
 		}
 		return out;
