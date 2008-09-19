@@ -3,7 +3,7 @@ namespace Yuni
 {
 namespace Gfx
 {
-	
+
 
 	template <typename T>
 	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, T* data = NULL):
@@ -110,7 +110,7 @@ namespace Gfx
 	template <typename T>
 	uint32 Octree<T>::nodeCount() const
 	{
-		uint32_t childNodeCount = 0;
+		uint32 childNodeCount = 0;
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
 			if (NULL != pChildren[i])
