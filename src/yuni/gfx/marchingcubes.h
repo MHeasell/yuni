@@ -24,22 +24,29 @@ namespace Gfx
 	{
 	public:
 		//! Constructor
-		MarchingCubes(ImplicitSurface& surf): Polygonizer(surf)
+		MarchingCubes(const ImplicitSurface& surf): Polygonizer(surf)
 		{}
 		virtual ~MarchingCubes() {}
 
 		/*!
-		** \brief Actually calculate the mesh from the isosurface.
+		** \brief Polygonise a whole mesh given an isosurface
 		** \param density Value defining the isosurface's limit
-		** \param maxDepth Maximum refinement depth for the algorithm
+		** \param granularity Refinement value for the algorithm
 		** \return A triangle mesh approximating the isosurface
 		*/
-		virtual Mesh* operator () (float density, uint16 maxDepth);
+		virtual Mesh* operator () (float density, float granularity);
 
+	private:
+		//! Represents a cube as needed by the marching cubes algorithm
+		struct Cube
+		{
+			Point3D<float> min;
+			Point3D<float> max;
+		};
 
 	private:
 		/*!
-		** \brief Marching cubes polygonization algorithm implementation
+		** \brief Marching cubes special index [0..256] calculation
 		**
 		** Marching cubes uses an 8-bit code to represent to which pattern
 		** case a certain cube corresponds. Each bit corresponds to a corner
@@ -49,7 +56,16 @@ namespace Gfx
 		** \param min Point of minimum x, y, z in the cube
 		** \param max Point of maximum x, y, z in the cube
 		*/
-		uint8 code(const Point3D<float>& min, const Point3D<float>& max) const;
+		uint8 cubeIndex(const Point3D<float>& min, const Point3D<float>& max) const;
+
+		/*
+		** \brief Interpolate the point at which the surface cuts the edge
+		** Linearly interpolate the position where an isosurface cuts
+		** an edge between two vertices, each with their own scalar value
+		*/
+		Point3D<float> interpolateVertex(double isolevel, Point3D<float> p1, Point3D<float> p2,
+			double valp1, double valp2) const;
+
 
 	}; // Class MarchingCubes
 

@@ -57,9 +57,14 @@ namespace Gfx
 		//! Accessor to the density of the metaball
 		const float density() const
 		{
-			return pDensity;
+			return pPositive ? pDensity : -pDensity;
 		}
 
+		//! Get any point that we know is inside the surface
+		const Point3D<float> getInsidePoint() const
+		{
+			return pCenter;
+		}
 
 
 		/*!
@@ -138,7 +143,9 @@ namespace Gfx
 		}
 
 	private:
+		//! Center of the metaball
 		Point3D<float> pCenter;
+		//! The density of a metaball represents approximately its radius
 		float pDensity;
 
 	}; // class MetaBall

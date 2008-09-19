@@ -14,7 +14,8 @@ namespace Gfx
 	{
 	}
 
-	/*! Create a new metaball
+	/*!
+	** \brief Create a new metaball
 	** It becomes the responsibility of the ImplicitSurface, so
 	** it must not be deleted elsewhere.
 	*/
@@ -25,6 +26,11 @@ namespace Gfx
 		return newMB;
 	}
 
+	/*!
+	** \brief Create a new metaball
+	** It becomes the responsibility of the ImplicitSurface, so
+	** it must not be deleted elsewhere.
+	*/
 	MetaBall* ImplicitSurface::addMetaBall(float x, float y, float z, float density)
 	{
 		MetaBall* newMB = new MetaBall(x, y, z, density);
@@ -32,9 +38,12 @@ namespace Gfx
 		return newMB;
 	}
 
-	/*! Calculate the density of a point regarding the isosurface
+	/*!
+	** \brief Calculate the density of a point regarding to the isosurface
 	** The density is the sum of all the densities of the metaobjects
 	** defining the isosurface.
+	**
+	** \param p Point to calculate the value for
 	*/
 	float ImplicitSurface::operator()(const Point3D<float>& p) const
 	{

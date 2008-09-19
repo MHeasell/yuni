@@ -19,7 +19,7 @@ namespace Gfx
 	{
 	public:
 		//! Constructor
-		Polygonizer(ImplicitSurface& surf): pSurface(surf)
+		Polygonizer(const ImplicitSurface& surf): pSurface(surf)
 		{}
 		virtual ~Polygonizer() {}
 
@@ -27,35 +27,32 @@ namespace Gfx
 		** \brief Calculate the mesh from the isosurface
 		**
 		** The purpose is to find points which solve:
-		**   Surface(Point) = density.
+		**   Surface(Point) = isoValue
 		** Then we create triangles and a mesh from these points.
 		**
 		** \param density Value that defines the isosurface
-		** \param maxDepth Maximum refinement depth for the algorithm
+		** \param granularity Refinement value for the algorithm
 		** \return A new Mesh approximating the surface
 		*/
-		virtual Mesh* operator () (float density, uint16 maxDepth) = 0;
+		virtual Mesh* operator () (float isoValue, float granularity) = 0;
 
 	protected:
 		/*!
 		** \brief Determine if a given point is inside or outside the surface
 		**
-		** Calculate the density of a point, and use the surface's density
-		** to determine if the point is inside or outside the surface.
+		** Calculate the value of a point to determine if the point is inside or outside the surface.
 		**
 		** \param p Point to calculate
+		** \param isoValue Border value for the surface
 		** \return True if the point is inside the isosurface, false otherwise
 		*/
-		bool isInsideSurface(const Point3D<float>& p) const
+		bool isInsideSurface(const Point3D<float>& p, float isoValue) const
 		{
-			return pSurface(p) >= pDensity;
+			return pSurface(p) >= isoValue;
 		}
 
 		//! The isosurface we want to polygonize
-		ImplicitSurface& pSurface;
-
-		//! Density defining the isosurface
-		float pDensity;
+		const ImplicitSurface& pSurface;
 
 	}; // Class Polygonizer
 
