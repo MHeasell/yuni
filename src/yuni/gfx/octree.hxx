@@ -13,7 +13,7 @@ namespace Gfx
 		// The Center is the mean of the min and the max
 		pCenter.move(min);
 		pCenter.mean(max);
-		for (uint16 i = 0; i < 8; ++i)
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 			pChildren[i] = NULL;
 		pNbChildren = 0;
 	}
@@ -21,7 +21,7 @@ namespace Gfx
 	template <typename T>
 	Octree<T>::~Octree()
 	{
-		for (uint16 i = 0; i < 8; ++i)
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
 			if (NULL != pChildren[i])
 				delete pChildren[i];
@@ -31,7 +31,7 @@ namespace Gfx
 
 	//! Add a single point to the Octree
 	template <typename T>
-	Octree<T>* Octree<T>::addPoint(const SharedPtr<Point3D<float> >& p)
+	Octree<T>* Octree<T>::addPoint(const Point3D<float>& p)
 	{
 		// If this is a leaf
 		if (isLeaf())
@@ -63,7 +63,7 @@ namespace Gfx
 	{
 		// Loop on all points
 		// Nothing will be done if the node contains no point
-		while (pPoints.size() > 0)
+		while (!pPoints.empty())
 		{
 			Point3D<float> crtPoint(pPoints.back());
 			pPoints.pop_back();
@@ -94,13 +94,14 @@ namespace Gfx
 	uint16 Octree<T>::depth() const
 	{
 		uint16 maxChildDepth = 0;
-		for (uint16 i = 0; i < 7; ++i)
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
-			if (NULL == pChildren[i])
-				continue;
-			uint16_t childDepth = pChildren[i]->depth();
-			if (maxChildDepth < childDepth)
-				maxChildDepth = childDepth;
+			if (pChildren[i])
+			{
+				uint16_t childDepth = pChildren[i]->depth();
+				if (maxChildDepth < childDepth)
+					maxChildDepth = childDepth;
+			}
 		}
 		return 1 + maxChildDepth;
 	}
@@ -110,9 +111,11 @@ namespace Gfx
 	uint32 Octree<T>::nodeCount() const
 	{
 		uint32_t childNodeCount = 0;
-		for (uint16 i = 0; i < 7; ++i)
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+		{
 			if (NULL != pChildren[i])
 				childNodeCount += pChildren[i]->nodeCount();
+		}
 		return 1 + childNodeCount;
 	}
 
@@ -121,9 +124,11 @@ namespace Gfx
 	uint32 Octree<T>::pointCount() const
 	{
 		uint32 childPointCount = 0;
-		for (uint16 i = 0; i < 7; ++i)
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+		{
 			if (NULL != pChildren[i])
 				childPointCount += pChildren[i]->pointCount();
+		}
 		return pPoints.size() + childPointCount;
 	}
 
@@ -144,7 +149,7 @@ namespace Gfx
 	Octree<T>* Octree<T>::createChild(uint16 index)
 	{
 		if (NULL != pChildren[index])
-		return pChildren[index];
+			return pChildren[index];
 		Point3D<float> newMin(pMin);
 		Point3D<float> newMax(pMax);
 		// We use the binary encoding of the index to determine
@@ -171,10 +176,10 @@ namespace Gfx
 	std::ostream& Octree<T>::print(std::ostream& out) const
 	{
 		out << "Printing Octree node:" << std::endl;
-		for (std::vector<Point3D<float> >::const_iterator it = pPoints.begin(); it != pPoints.end(); ++it)
+		for (PointList::const_iterator it = pPoints.begin(); it != pPoints.end(); ++it)
 			out << (*it) << std::endl;
 		out << "Recursing on " << pNbChildren << " children:" << std::endl;
-		for (uint16 i = 0; i < 7; ++i)
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
 			if (NULL != pChildren[i])
 				pChildren[i]->print(out);
