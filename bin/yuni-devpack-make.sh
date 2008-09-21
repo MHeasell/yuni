@@ -8,7 +8,7 @@ pkgOS=""
 pkgArch="`uname -m`"
 pkgCompiler=""
 pkgSource=""
-pkgCompiler=""
+pkgCompiler="g++"
 pkgTarget=""
 
 zip=""
@@ -64,8 +64,6 @@ printPkgSettings()
 	fi
 	if [ ! "x${pkgCompiler}" = "x" ]; then
 		echo " * Compiler: '${pkgCompiler}'"
-	else
-		echo " * Compiler: <unused>"
 	fi
 	if [ ! "x${pkgSource}" = "x" ]; then
 		echo " * Source: '${pkgSource}'"
@@ -92,7 +90,7 @@ help()
 	echo "   -o  : Operating system (ex: '-o macos', '-o linux', '-o windows)"
 	echo "   -a  : Architecture (ex: '-a 386', '-a ppc', '-a ub')"
 	echo "   -f  : Target folder for the package"
-	echo "   -c  : Compiler (ex: '-c vs9', '-c mingw', '-c g++4.2')"
+	echo "   -c  : Compiler (ex: '-c vs9', '-c mingw', '-c g++', '-c g++4.2')"
 	echo "   -t  : Target (ex: '-t release', '-t debug')"
 	echo "   -z  : The program 'zip' to use to compress (archive) files (ex: '-z/usr/bin/zip')"
 	echo "   -h  : This help"
@@ -102,6 +100,7 @@ help()
 	echo
 	echo "Note: The source directory should be like this :"
 	echo "  + <the source dir>"
+	echo "    |- cmake (.cmake)"
 	echo "    |- include (.h)"
 	echo "    \- lib"
 	echo "       |- debug/ (.a,.so,.dll,.lib)"
@@ -166,7 +165,7 @@ printPkgSettings
 
 good='1'
 if [ "x${pkgName}" = "x" ]; then
-	echo "[ERROR] The name of the package is missing (ex: '-n irrlicht', '-n lua', ...)"
+	echo "[ERROR] The name of the package is missing (ex: '-n irrlicht', '-n lua')"
 	good='0'
 fi
 if [ "x${pkgVersion}" = "x" ]; then
@@ -178,11 +177,15 @@ if [ "x${pkgRevision}" = "x" ]; then
 	good='0'
 fi
 if [ "x${pkgOS}" = "x" ]; then
-	echo "[ERROR] The operating system is missing (ex: '-o macos', '-o linux', '-o windows', ...)"
+	echo "[ERROR] The operating system is missing (ex: '-o macos', '-o linux', '-o windows')"
 	good='0'
 fi
 if [ "x${pkgArch}" = "x" ]; then
-	echo "[ERROR] The architecture is missing (ex: '-a i386', '-a ppc', '-a ub', ...)"
+	echo "[ERROR] The architecture is missing (ex: '-a i386', '-a ppc', '-a ub')"
+	good='0'
+fi
+if [ "x${pkgCompiler}" = "x" ]; then
+	echo "[ERROR] The compiler is missing (ex: '-c vs9', '-c mingw', '-c g++', '-c g++4.2')"
 	good='0'
 fi
 if [ "x${pkgTarget}" = "x" ]; then
