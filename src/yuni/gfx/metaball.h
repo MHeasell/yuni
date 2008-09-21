@@ -2,7 +2,6 @@
 #ifndef __YUNI_GFX_METABALL_H__
 # define __YUNI_GFX_METABALL_H__
 
-# include <math.h>
 # include "point3D.h"
 # include "metaobject.h"
 
@@ -60,10 +59,12 @@ namespace Gfx
 			return pPositive ? pDensity : -pDensity;
 		}
 
-		//! Get any point that we know is inside the surface
-		const Point3D<float> getInsidePoint() const
+		//! Get points that we know are inside the surface, here we give the center
+		const std::vector<Point3D<float> > insidePoints() const
 		{
-			return pCenter;
+			std::vector<Point3D<float> > points;
+			points.push_back(center);
+			return std::vector<Point3D<float> >(points);
 		}
 
 

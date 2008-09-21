@@ -42,11 +42,11 @@ namespace Gfx
 		*/
 		template<typename U, typename V, typename W>
 		Point3D(const U x1, const V y1, const W z1): x((T)x1), y((T)y1), z((T)z1) {}
-		
+
 		//! Constructor by copy
 		template<typename U>
 		Point3D(const Point3D<U>& p) : x((T)p.x), y((T)p.y), z((T)p.z) {}
-		
+
 		//@} // Constructors
 
 		//! Reset the point to origin
@@ -54,7 +54,7 @@ namespace Gfx
 
 		/*!
 		** \brief Move the point to new coordinates
-		** 
+		**
 		** \param x1 The new X coordinate
 		** \param y1 The new Y coordinate
 		** \param z1 The new Z coordinate
@@ -85,7 +85,7 @@ namespace Gfx
 		void translate(const U x1, const V y1, const W z1) { x += (T)x1; y += (T)y1; z += (T)z1; }
 		/*!
 		** \brief Translate the point with relative coordinates from another Point
-		** \param p The values to add to the coordinates 
+		** \param p The values to add to the coordinates
 		*/
 		template<typename U>
 		void translate(const Point3D<U>& p) { x += (T)p.x; y += (T)p.y; z += (T)p.z; }
@@ -179,7 +179,7 @@ namespace Gfx
 		*/
 		template<typename U>
 		void operator () (const Point3D<U>& p) { x = (T)p.x; y = (T)p.y; z = (T)p.z; }
-		
+
 
 		/*!
 		** \brief Translate the point with the same value for all coordinates

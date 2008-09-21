@@ -5,37 +5,37 @@ namespace Yuni
 {
 namespace Gfx
 {
-
-	ImplicitSurface::ImplicitSurface()
-	{
-	}
-
 	ImplicitSurface::~ImplicitSurface()
 	{
+		while (!pSubSurfaces.empty())
+		{
+			ImplicitSurface* surf = pSubSurfaces.back();
+			delete surf;
+			pSubSurfaces.pop_back();
+		}
+	}
+
+	//! Get some good points that we know are inside the surface
+	const std::vector<Point3D<float> > ImplicitSurface::insidePoints() const
+	{
+		std::vector<Point3D<float> > points;
+		for (unsigned int i = 0; i < pSubSurfaces.size(); ++i)
+		{
+			std::vector<Point3D<float> > surfPoints = pSubSurfaces[i]->insidePoints();
+			for (unsigned int j = 0; j < surfPoints.size(); ++i)
+				points.push_back(surfPoints[j]);
+		}
+		return std::vector<Point3D<float> >(points);
 	}
 
 	/*!
-	** \brief Create a new metaball
+	** \brief Add a subsurface as a component of this implicit surface
 	** It becomes the responsibility of the ImplicitSurface, so
 	** it must not be deleted elsewhere.
 	*/
-	MetaBall* ImplicitSurface::addMetaBall(const Point3D<float>& p, float density)
+	void ImplicitSurface::addSubSurface(ImplicitSurface* surf)
 	{
-		MetaBall* newMB = new MetaBall(p, density);
-		pObjects.push_back(newMB);
-		return newMB;
-	}
-
-	/*!
-	** \brief Create a new metaball
-	** It becomes the responsibility of the ImplicitSurface, so
-	** it must not be deleted elsewhere.
-	*/
-	MetaBall* ImplicitSurface::addMetaBall(float x, float y, float z, float density)
-	{
-		MetaBall* newMB = new MetaBall(x, y, z, density);
-		pObjects.push_back(newMB);
-		return newMB;
+		pSubSurfaces.push_back(surf);
 	}
 
 	/*!
@@ -48,8 +48,8 @@ namespace Gfx
 	float ImplicitSurface::operator()(const Point3D<float>& p) const
 	{
 		float res = 0.0f;
-		for (std::vector<MetaObject*>::const_iterator it = pObjects.begin();
-			it != pObjects.end();
+		for (std::vector<ImplicitSurface*>::const_iterator it = pSubSurfaces.begin();
+			it != pSubSurfaces.end();
 			++it)
 			res += (**it)(p);
 		return res;

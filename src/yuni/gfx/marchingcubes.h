@@ -53,17 +53,21 @@ namespace Gfx
 		** vertex of the cube.
 		** Calculate this code for a cube.
 		**
-		** \param min Point of minimum x, y, z in the cube
-		** \param max Point of maximum x, y, z in the cube
+		** \param isoValue Limit value for belonging in the surface or not
+		** \param cell The cell we want to calculate the marching cubes special case for
 		*/
-		uint8 cubeIndex(const Point3D<float>& min, const Point3D<float>& max) const;
+		uint8 cubeIndex(float isoValue, const Cube& cell) const;
+
+
+		Mesh* polygoniseCell(float isoValue, const Cube& cell) const;
 
 		/*
 		** \brief Interpolate the point at which the surface cuts the edge
 		** Linearly interpolate the position where an isosurface cuts
 		** an edge between two vertices, each with their own scalar value
 		*/
-		Point3D<float> interpolateVertex(double isolevel, Point3D<float> p1, Point3D<float> p2,
+		Point3D<float> interpolateVertex(double isolevel,
+			const Point3D<float>& p1, const Point3D<float>& p2,
 			double valp1, double valp2) const;
 
 
