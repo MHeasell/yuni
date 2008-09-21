@@ -3,7 +3,6 @@
 # define __YUNI_GFX_IMPLICITSURFACE_H__
 
 # include <vector>
-# include "metaball.h"
 # include "octree.h"
 
 namespace Yuni
@@ -26,28 +25,21 @@ namespace Gfx
 		//! \name Constructors and destructor
 		//@{
 		//! \brief Main constructor
-		ImplicitSurface();
+		ImplicitSurface() {}
 		//! \brief Destructor
 		virtual ~ImplicitSurface();
 		//@}
 
 		//! Get some good points that we know are inside the surface
-		const std::vector<Point3D<float> > insidePoints() const
-		{
-			std::vector<Point3D<float> > points = new std::vector<Point3D<float >();
-			for (int i = 0; i < pObjects.size(); ++i)
-				points.push_back(pObjects.getInsidePoint());
-			return points;
-		}
+		virtual const std::vector<Point3D<float> > insidePoints() const;
 
 		/*!
-		** \brief Create a new metaball
+		** \brief Add a subsurface as a component of this implicit surface
 		**
 		** It becomes the responsibility of the ImplicitSurface, so
 		** it must not be deleted elsewhere.
 		*/
-		MetaBall* addMetaBall(const Point3D<float>& p, float density);
-		MetaBall* addMetaBall(float x, float y, float z, float density);
+		void addSubSurface(ImplicitSurface* surf);
 
 		/*!
 		** \brief Calculate the value of a point regarding to the isosurface
@@ -59,8 +51,8 @@ namespace Gfx
 		virtual float operator()(const Point3D<float>& p) const;
 
 	private:
-		//! The meta objects forming the surface
-		std::vector<MetaObject*> pObjects;
+		//! An implicit surface can be composed of subsurfaces
+		std::vector<ImplicitSurface*> pSubSurfaces;
 
 	}; // class ImplicitSurface
 

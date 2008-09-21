@@ -6,6 +6,7 @@
 # include "../yuni.h"
 # include "../misc/sharedptr.h"
 # include "point3D.h"
+# include "bbox3D.h"
 
 
 
@@ -77,6 +78,9 @@ namespace Gfx
 		uint32 nodeCount() const;
 		//! Number of points in the tree
 		uint32 pointCount() const;
+		//! Get the bounding box for this tree
+		const BBox3D<float>& boundingBox() const
+		{ return pBBox; }
 
 		/*!
 		** \brief Add a single point to the  Octree
@@ -90,7 +94,7 @@ namespace Gfx
 		** \param p The point
 		** \return The node found
 		*/
-		Octree<T>* findSmallestBBox(const Point3D<float>& p) const;
+		const Octree<T>* findSmallestBBox(const Point3D<float>& p) const;
 
 		/*!
 		** \brief Split a leaf into subnodes
@@ -142,10 +146,8 @@ namespace Gfx
 		T* pData;
 		//! Center point for the node
 		Point3D<float> pCenter;
-		//! Min point of the bounding box
-		Point3D<float> pMin;
-		//! Max point of the bounding box
-		Point3D<float> pMax;
+		//! Bounding box for the points in the tree
+		BBox3D<float> pBBox;
 
 		//! Links to the children nodes
 		Octree<T>* pChildren[YUNI_OCTREE_MAX_CHILDREN];

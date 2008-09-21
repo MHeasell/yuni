@@ -1,5 +1,5 @@
 
-# include "misc/math.h"
+# include "../misc/math.h"
 # include "marchingcubes.h"
 # include "octree.h"
 
@@ -13,44 +13,48 @@ namespace Gfx
 	*/
 	Mesh* MarchingCubes::operator () (float isoValue, float granularity)
 	{
-		pDensity = density;
 		std::vector<Point3D<float> > startPoints = pSurface.insidePoints();
 		if (startPoints.empty())
 			return NULL;
-		Octree<float> tree();
+		Octree<float> tree;
 		// This is stupid, do something better!
-		tree.growTo(granularity * 100);
-		for (int i = 0; i < startPoints.size(); ++i)
+		tree.growTo((int)granularity * 100);
+		Mesh* mesh = NULL;
+		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
-			Octree<float>* leaf = tree.findSmallestBBox(startPoints[i]);
+			const Octree<float>* leaf = tree.findSmallestBBox(startPoints[i]);
 			Cube cell;
-			cell.min = leaf->min();
-			cell.max = leaf->max();
-			polygoniseCell(isoValue);
+			cell.min = leaf->boundingBox().min();
+			cell.max = leaf->boundingBox().max();
+			if (!mesh)
+				mesh = polygoniseCell(isoValue, cell);
+			else
+				mesh->fusion(polygoniseCell(isoValue, cell));
 		}
+		return mesh;
 	}
 
 
-	uint8 MarchingCubes::cubeIndex(const Cube& cell) const
+	uint8 MarchingCubes::cubeIndex(float isoValue, const Cube& cell) const
 	{
-		Point3D<float>& min = cell.min;
-		Point3D<float>& max = cell.max;
+		const Point3D<float>& min = cell.min;
+		const Point3D<float>& max = cell.max;
 		uint8 code = 0;
-		if (isInsideSurface(min))
+		if (isInsideSurface(min, isoValue))
 			code &= 1;
-		if (isInsideSurface(Point3D<float>(max.x, min.y, min.z)))
+		if (isInsideSurface(Point3D<float>(max.x, min.y, min.z), isoValue))
 			code &= 2;
-		if (isInsideSurface(Point3D<float>(max.x, max.y, min.z)))
+		if (isInsideSurface(Point3D<float>(max.x, max.y, min.z), isoValue))
 			code &= 4;
-		if (isInsideSurface(Point3D<float>(min.x, max.y, min.z)))
+		if (isInsideSurface(Point3D<float>(min.x, max.y, min.z), isoValue))
 			code &= 8;
-		if (isInsideSurface(Point3D<float>(min.x, min.y, max.z)))
+		if (isInsideSurface(Point3D<float>(min.x, min.y, max.z), isoValue))
 			code &= 16;
-		if (isInsideSurface(Point3D<float>(max.x, min.y, max.z)))
+		if (isInsideSurface(Point3D<float>(max.x, min.y, max.z), isoValue))
 			code &= 32;
-		if (isInsideSurface(max))
+		if (isInsideSurface(max, isoValue))
 			code &= 64;
-		if (isInsideSurface(Point3D<float>(min.x, max.y, max.z)))
+		if (isInsideSurface(Point3D<float>(min.x, max.y, max.z), isoValue))
 			code &= 128;
 		return code;
 	}
@@ -65,7 +69,7 @@ namespace Gfx
 	** NULL will be returned if the cell is either totally above
 	** of totally below the isolevel.
 	*/
-	Mesh* MarchingCubes::polygoniseCell(float isoValue, const Cube& cell)
+	Mesh* MarchingCubes::polygoniseCell(float isoValue, const Cube& cell) const
 	{
 		const int edgeTable[256] =
 			{
@@ -362,66 +366,83 @@ namespace Gfx
 				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
 			};
 
+		//! Calculate the various points of the cube and associate them with indices
+		const Point3D<float> points[8] =
+			{
+				cell.min,
+				Point3D<float>(cell.max.x, cell.min.y, cell.min.z),
+				Point3D<float>(cell.max.x, cell.max.y, cell.min.z),
+				Point3D<float>(cell.min.x, cell.max.y, cell.min.z),
+				Point3D<float>(cell.min.x, cell.min.y, cell.max.z),
+				Point3D<float>(cell.max.x, cell.min.y, cell.max.z),
+				cell.max,
+				Point3D<float>(cell.min.x, cell.max.y, cell.max.z),
+			};
+
 		/*
 		  Determine the index into the edge table which
 		  tells us which vertices are inside of the surface
 		*/
-		int cubeIndex = cubeIndex(cell);
+		uint8 index = cubeIndex(isoValue, cell);
 
 		/* Cube is entirely in/out of the surface */
-		if (edgeTable[cubeIndex] == 0)
-			return(0);
+		if (edgeTable[index] == 0)
+			return NULL;
+
+		float vals[8];
+		// Actually calculate the value for each of the cell's 8 points
+		for (unsigned int i = 0; i < 8; ++i)
+			vals[i] = pSurface(points[i]);
 
 		/* Find the vertices where the surface intersects the cube */
 		Point3D<float> vertices[12];
-		if (edgeTable[cubeIndex] & 1)
+		if (edgeTable[index] & 1)
 			vertices[0] =
-				VertexInterp(isolevel, grid.p[0], grid.p[1], grid.val[0], grid.val[1]);
-		if (edgeTable[cubeIndex] & 2)
+				interpolateVertex(isoValue, points[0], points[1], vals[0], vals[1]);
+		if (edgeTable[index] & 2)
 			vertices[1] =
-				VertexInterp(isolevel, grid.p[1], grid.p[2], grid.val[1], grid.val[2]);
-		if (edgeTable[cubeIndex] & 4)
+				interpolateVertex(isoValue, points[1], points[2], vals[1], vals[2]);
+		if (edgeTable[index] & 4)
 			vertices[2] =
-				VertexInterp(isolevel, grid.p[2], grid.p[3], grid.val[2], grid.val[3]);
-		if (edgeTable[cubeIndex] & 8)
+				interpolateVertex(isoValue, points[2], points[3], vals[2], vals[3]);
+		if (edgeTable[index] & 8)
 			vertices[3] =
-				VertexInterp(isolevel, grid.p[3], grid.p[0], grid.val[3], grid.val[0]);
-		if (edgeTable[cubeIndex] & 16)
+				interpolateVertex(isoValue, points[3], points[0], vals[3], vals[0]);
+		if (edgeTable[index] & 16)
 			vertices[4] =
-				VertexInterp(isolevel, grid.p[4], grid.p[5], grid.val[4], grid.val[5]);
-		if (edgeTable[cubeIndex] & 32)
+				interpolateVertex(isoValue, points[4], points[5], vals[4], vals[5]);
+		if (edgeTable[index] & 32)
 			vertices[5] =
-				VertexInterp(isolevel, grid.p[5], grid.p[6], grid.val[5], grid.val[6]);
-		if (edgeTable[cubeIndex] & 64)
+				interpolateVertex(isoValue, points[5], points[6], vals[5], vals[6]);
+		if (edgeTable[index] & 64)
 			vertices[6] =
-				VertexInterp(isolevel, grid.p[6], grid.p[7], grid.val[6], grid.val[7]);
-		if (edgeTable[cubeIndex] & 128)
+				interpolateVertex(isoValue, points[6], points[7], vals[6], vals[7]);
+		if (edgeTable[index] & 128)
 			vertices[7] =
-				VertexInterp(isolevel, grid.p[7], grid.p[4], grid.val[7], grid.val[4]);
-		if (edgeTable[cubeIndex] & 256)
+				interpolateVertex(isoValue, points[7], points[4], vals[7], vals[4]);
+		if (edgeTable[index] & 256)
 			vertices[8] =
-				VertexInterp(isolevel, grid.p[0], grid.p[4], grid.val[0], grid.val[4]);
-		if (edgeTable[cubeIndex] & 512)
+				interpolateVertex(isoValue, points[0], points[4], vals[0], vals[4]);
+		if (edgeTable[index] & 512)
 			vertices[9] =
-				VertexInterp(isolevel, grid.p[1], grid.p[5], grid.val[1], grid.val[5]);
-		if (edgeTable[cubeIndex] & 1024)
+				interpolateVertex(isoValue, points[1], points[5], vals[1], vals[5]);
+		if (edgeTable[index] & 1024)
 			vertices[10] =
-				VertexInterp(isolevel, grid.p[2], grid.p[6], grid.val[2], grid.val[6]);
-		if (edgeTable[cubeIndex] & 2048)
+				interpolateVertex(isoValue, points[2], points[6], vals[2], vals[6]);
+		if (edgeTable[index] & 2048)
 			vertices[11] =
-				VertexInterp(isolevel, grid.p[3], grid.p[7], grid.val[3], grid.val[7]);
+				interpolateVertex(isoValue, points[3], points[7], vals[3], vals[7]);
 
-		/* Create the triangle */
-		int nbTriangles = 0;
-		for (int i = 0; triTable[cubeIndex][i] != -1; i += 3)
+		/* Create the mesh and the triangles */
+		Mesh* mesh = new Mesh();
+		for (int i = 0; triTable[index][i] != -1; i += 3)
 		{
-			triangles[ntriang].p[0] = vertices[triTable[cubeIndex][i]];
-			triangles[ntriang].p[1] = vertices[triTable[cubeIndex][i + 1]];
-			triangles[ntriang].p[2] = vertices[triTable[cubeIndex][i + 2]];
-			nbTriangles++;
+			Triangle* tri = new Triangle(vertices[triTable[index][i]], vertices[triTable[index][i + 1]],
+				vertices[triTable[index][i + 2]]);
+			mesh->addTriangle(SharedPtr<Triangle>(tri));
 		}
 
-		return(nbTriangles);
+		return mesh;
 	}
 
 	/*
@@ -429,18 +450,19 @@ namespace Gfx
 	** Linearly interpolate the position where an isosurface cuts
 	** an edge between two vertices, each with their own scalar value
 	*/
-	Point3D<float> interpolateVertex(double isolevel, Point3D<float> p1, Point3D<float> p2,
+	Point3D<float> MarchingCubes::interpolateVertex(double isoValue,
+		const Point3D<float>& p1, const Point3D<float>& p2,
 		double valp1, double valp2) const
 	{
 		double mu;
 
-		if (Yuni::Math::Abs(isolevel - valp1) < 0.00001)
+		if (Yuni::Math::Abs(isoValue - valp1) < 0.00001)
 			return(p1);
-		if (Yuni::Math::Abs(isolevel - valp2) < 0.00001)
+		if (Yuni::Math::Abs(isoValue - valp2) < 0.00001)
 			return(p2);
 		if (Yuni::Math::Abs(valp1 - valp2) < 0.00001)
 			return(p1);
-		mu = (isolevel - valp1) / (valp2 - valp1);
+		mu = (isoValue - valp1) / (valp2 - valp1);
 
 		return Point3D<float>(p1.x + mu * (p2.x - p1.x), p1.y + mu * (p2.y - p1.y), p1.z + mu * (p2.z - p1.z));
 	}

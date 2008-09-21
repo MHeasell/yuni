@@ -34,9 +34,6 @@ namespace Gfx
 		{}
 		//@}
 
-		//! Get any point that we know is inside the surface
-		const Point3D<float> getInsidePoint() const = 0;
-
 	private:
 		//! Is the object a positive or negative force? (usually true)
 		bool pPositive;

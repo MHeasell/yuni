@@ -6,14 +6,16 @@ namespace Gfx
 
 
 	template <typename T>
-	Octree<T>::Octree(): Octree(Point3D<float>(0.0f, 0.0f, 0.0f), Point3D<float>(0.0f, 0.0f, 0.0f))
+	Octree<T>::Octree():
+		MaxPointsPerNode(32), pData(NULL),
+		pCenter(0, 0, 0), pBBox(Point3D<float>(0.0f, 0.0f, 0.0f), Point3D<float>(0.0f, 0.0f, 0.0f))
 	{
 	}
 
 	template <typename T>
 	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, T* data = NULL):
 		MaxPointsPerNode(32), pData(data),
-		pCenter(0, 0, 0), pMin(min), pMax(max)
+		pCenter(0, 0, 0), pBBox(min, max)
 	{
 		// The Center is the mean of the min and the max
 		pCenter.move(min);
@@ -95,14 +97,15 @@ namespace Gfx
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 			// Force the creation for all missing children
 			if (NULL == pChildren[i])
-				createChild(index);
+				createChild(i);
 	}
 
 	/*!
 	** \brief Grow the tree to a complete tree of given depth
 	** Be careful! This is the only case where we might create empty leaves!
 	*/
-	void growTo(uint16 depth)
+	template <typename T>
+	void Octree<T>::growTo(uint16 depth)
 	{
 		if (depth > 0)
 		{
@@ -117,7 +120,7 @@ namespace Gfx
 
 
 	template <typename T>
-	Octree<T>* Octree<T>::findSmallestBBox(const Point3D<float>& p) const
+	const Octree<T>* Octree<T>::findSmallestBBox(const Point3D<float>& p) const
 	{
 		if (isLeaf())
 			return this;
@@ -127,7 +130,7 @@ namespace Gfx
 		if (NULL == child)
 			return this;
 		// Recursive call
-		return child->findSmallestBox(p);
+		return child->findSmallestBBox(p);
 	}
 
 	//! Depth of the tree
@@ -191,8 +194,8 @@ namespace Gfx
 	{
 		if (pChildren[index])
 			return pChildren[index];
-		Point3D<float> newMin(pMin);
-		Point3D<float> newMax(pMax);
+		Point3D<float> newMin(pBBox.min());
+		Point3D<float> newMax(pBBox.max());
 		// We use the binary encoding of the index to determine
 		// the new coordinates
 		if ((index & 4) != 0)
