@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_COLOR_CONVERTERS_H__
-# define __YUNI_GFX_COLOR_CONVERTERS_H__
+#ifndef __YUNI_GFX_COLOR_PROXY_H__
+# define __YUNI_GFX_COLOR_PROXY_H__
 
 # include <iostream>
 # include "../yuni.h"
@@ -244,4 +244,4 @@ namespace Proxy
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_COLOR_CONVERTERS_H__
+#endif // __YUNI_GFX_COLOR_PROXY_H__

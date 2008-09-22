@@ -1,5 +1,5 @@
 
-#include "color.converters.h"
+#include "color.proxy.h"
 #include "../misc/math.h"
 #include "rgba.h"
 #include "rgb.h"
@@ -122,37 +122,6 @@ namespace Proxy
 		return th;
 	}
 
-	template<>
-	RGBA<uint8>& Values< RGBA<uint8>, RGBA<float> >::Assign(RGBA<uint8>& th, const RGBA<float>& a1)
-	{
-		th.red   = (uint8) (a1.red   * 255.0f);
-		th.green = (uint8) (a1.green * 255.0f);
-		th.blue  = (uint8) (a1.blue  * 255.0f);
-		th.alpha = (uint8) (a1.alpha * 255.0f);
-		return th;
-	}
-
-
-
-
-	template<>
-	RGB<uint8>& Values< RGB<uint8>, uint8 >::Assign(RGB<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3, const uint8& /*a4*/)
-	{
-		th.red   = a1;
-		th.green = a2;
-		th.blue  = a3;
-		return th;
-	}
-
-	template<>
-	RGB<uint8>& Values< RGB<uint8>, uint8 >::Assign(RGB<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3)
-	{
-		th.red   = a1;
-		th.green = a2;
-		th.blue  = a3;
-		return th;
-	}
-
 
 	template<>
 	RGB<float>& Values< RGB<float>, float >::Assign(RGB<float>& th, const float& a1, const float& a2, const float& a3, const float& /*a4*/)
@@ -169,6 +138,36 @@ namespace Proxy
 		th.red   = Math::MinMax<float>(a1, 0.0f, 1.0f);
 		th.green = Math::MinMax<float>(a2, 0.0f, 1.0f);
 		th.blue  = Math::MinMax<float>(a3, 0.0f, 1.0f);
+		return th;
+	}
+
+
+
+	template<>
+	RGBA<uint8>& Values< RGBA<uint8>, RGBA<float> >::Assign(RGBA<uint8>& th, const RGBA<float>& a1)
+	{
+		th.red   = (uint8) (a1.red   * 255.0f);
+		th.green = (uint8) (a1.green * 255.0f);
+		th.blue  = (uint8) (a1.blue  * 255.0f);
+		th.alpha = (uint8) (a1.alpha * 255.0f);
+		return th;
+	}
+
+	template<>
+	RGB<uint8>& Values< RGB<uint8>, uint8 >::Assign(RGB<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3, const uint8& /*a4*/)
+	{
+		th.red   = a1;
+		th.green = a2;
+		th.blue  = a3;
+		return th;
+	}
+
+	template<>
+	RGB<uint8>& Values< RGB<uint8>, uint8 >::Assign(RGB<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3)
+	{
+		th.red   = a1;
+		th.green = a2;
+		th.blue  = a3;
 		return th;
 	}
 
@@ -202,6 +201,61 @@ namespace Proxy
 
 
 
+	template<>
+	RGB<uint8>& Values< RGB<uint8>, float >::Assign(RGB<uint8>& th, const float& a1, const float& a2, const float& a3)
+	{
+		th.red   = (uint8) (a1 * 255.0f);
+		th.green = (uint8) (a2 * 255.0f);
+		th.blue  = (uint8) (a3 * 255.0f);
+		return th;
+	}
+
+
+# define YUNI_CONVERT_UN_SIGNED_VALUE_MT(S, O) \
+	template<> \
+	RGB< S >& Values< RGB< S >, float >::Assign(RGB< S >& th, const O & a1, const O & a2, const O & a3) \
+	{ \
+		th.red   = ( S ) (Math::MinMax< O >(a1, 0.0f, 1.0f) * 255.0f); \
+		th.green = ( S ) (Math::MinMax< O >(a2, 0.0f, 1.0f) * 255.0f); \
+		th.blue  = ( S ) (Math::MinMax< O >(a3, 0.0f, 1.0f) * 255.0f); \
+		return th; \
+	} \
+	\
+	template<> \
+	RGB< S >& Values< RGB< S >, float >::Assign(RGB< S >& th, const O & a1, const O & a2, const O & a3, const O &) \
+	{ \
+		th.red   = ( S ) (Math::MinMax< O >(a1, 0.0f, 1.0f) * 255.0f); \
+		th.green = ( S ) (Math::MinMax< O >(a2, 0.0f, 1.0f) * 255.0f); \
+		th.blue  = ( S ) (Math::MinMax< O >(a3, 0.0f, 1.0f) * 255.0f); \
+		return th; \
+	} \
+	template<> \
+	RGBA< S >& Values< RGBA< S >, float >::Assign(RGBA< S >& th, const O & a1, const O & a2, const O & a3) \
+	{ \
+		th.red   = ( S ) (Math::MinMax< O >(a1, 0.0f, 1.0f) * 255.0f); \
+		th.green = ( S ) (Math::MinMax< O >(a2, 0.0f, 1.0f) * 255.0f); \
+		th.blue  = ( S ) (Math::MinMax< O >(a3, 0.0f, 1.0f) * 255.0f); \
+		th.alpha = 255; \
+		return th; \
+	} \
+	\
+	template<> \
+	RGBA< S >& Values< RGBA< S >, float >::Assign(RGBA< S >& th, const O & a1, const O & a2, const O & a3, const O & a4) \
+	{ \
+		th.red   = ( S ) (Math::MinMax< O >(a1, 0.0f, 1.0f) * 255.0f); \
+		th.green = ( S ) (Math::MinMax< O >(a2, 0.0f, 1.0f) * 255.0f); \
+		th.blue  = ( S ) (Math::MinMax< O >(a3, 0.0f, 1.0f) * 255.0f); \
+		th.alpha = ( S ) (Math::MinMax< O >(a4, 0.0f, 1.0f) * 255.0f); \
+		return th; \
+	}
+
+
+	YUNI_CONVERT_UN_SIGNED_VALUE_MT(uint16, float)
+	YUNI_CONVERT_UN_SIGNED_VALUE_MT(uint32, float)
+	YUNI_CONVERT_UN_SIGNED_VALUE_MT(uint64, float)
+	YUNI_CONVERT_UN_SIGNED_VALUE_MT(sint16, float)
+	YUNI_CONVERT_UN_SIGNED_VALUE_MT(sint32, float)
+	YUNI_CONVERT_UN_SIGNED_VALUE_MT(sint64, float)
 
 
 
@@ -334,9 +388,21 @@ namespace Proxy
 	}
 
 
-	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8, sint16)
-	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8, sint32)
-	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8, sint64)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8,  sint16)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8,  sint32)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8,  sint64)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint16, sint16)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint16, sint32)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint16, sint64)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint32, sint16)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint32, sint32)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint32, sint64)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint64, sint16)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint64, sint32)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint64, sint64)
+
+
+
 
 
 # define YUNI_CONVERT_UNSIGNED_VALUE_FOR_UINT8(O,T) \
@@ -379,9 +445,20 @@ namespace Proxy
 	}
 
 
-	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8, uint16)
-	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8, uint32)
-	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8, uint64)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8,  uint16)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8,  uint32)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint8,  uint64)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint16, uint16)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint16, uint32)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint16, uint64)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint32, uint16)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint32, uint32)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint32, uint64)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint64, uint16)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint64, uint32)
+	YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(uint64, uint64)
+
+
 
 
 
