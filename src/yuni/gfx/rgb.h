@@ -2,7 +2,7 @@
 # define __YUNI_GFX_RGB_H__
 
 # include "../misc/string.h"
-# include "color.converters.h"
+# include "color.proxy.h"
 
 
 

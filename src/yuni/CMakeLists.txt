@@ -106,7 +106,7 @@ source_group(Application FILES ${SRC_APPLICATION})
 set(SRC_GFX
 				gfx/device.h gfx/device.cpp
 				gfx/point2D.h gfx/point3D.h gfx/vector3D.h
-				gfx/color.converters.h gfx/color.converters.cpp
+				gfx/color.proxy.h gfx/color.proxy.cpp
 				gfx/rgba.h gfx/rgb.h
 				gfx/vertex.h gfx/triangle.h gfx/edge.h gfx/mesh.h
 				gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
