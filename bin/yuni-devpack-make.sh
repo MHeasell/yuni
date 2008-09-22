@@ -79,6 +79,26 @@ printPkgSettings()
 }
 
 
+# $1 The folder
+checkDevPackFolder()
+{
+	if [ ! -d "${1}/cmake" ]; then
+		echo "[ERROR] Invalid DevPack structure: The folder '${1}/cmake' is missing"
+		exit 5
+	fi
+	if [ ! -d "${1}/${pkgCompiler}" ]; then
+		echo "[ERROR] Invalid DevPack structure: The folder '${1}/${pkgCompiler}' is missing"
+		exit 5
+	fi
+	if [ ! -d "${1}/${pkgCompiler}/include" ]; then
+		echo "[WARNING] Invalid DevPack structure: The folder '${1}/${pkgCompiler}/include' is missing"
+	fi
+	if [ ! -d "${1}/${pkgCompiler}/lib/${pkgTarget}" ]; then
+		echo "[WARNING] Invalid DevPack structure: The folder '${1}/${pkgCompiler}/lib/${pkgTarget}' is missing"
+	fi
+}
+
+
 help()
 {
 	echo "Yuni - Package maker for externals dependencies"
@@ -101,10 +121,11 @@ help()
 	echo "Note: The source directory should be like this :"
 	echo "  + <the source dir>"
 	echo "    |- cmake (.cmake)"
-	echo "    |- include (.h)"
-	echo "    \- lib"
-	echo "       |- debug/ (.a,.so,.dll,.lib)"
-	echo "       \- release/ (.a,.so,.dll,.lib)"
+	echo "    |- <compiler> (g++, vs9...)"
+	echo "       |- include (.h)"
+	echo "       \- lib"
+	echo "          |- debug/ (.a,.so,.dll,.lib)"
+	echo "          \- release/ (.a,.so,.dll,.lib)"
 	echo
 	exit 0
 }
@@ -207,11 +228,7 @@ if [ "${good}" -eq 0 ]; then
 fi
 
 
-target="${targetFolder}/${pkgName}-${pkgVersion}-${pkgRevision}-${pkgOS}-${pkgArch}"
-if [ ! "x${pkgCompiler}" = "x" ]; then
-	target="${target}-${pkgCompiler}"
-fi
-target="${target}-${pkgTarget}.zip"
+target="${targetFolder}/${pkgName}-${pkgVersion}-${pkgRevision}-${pkgOS}-${pkgArch}-${pkgCompiler}-${pkgTarget}.zip"
 
 echo " * Archive : ${target}"
 if [ -f "${target}" ]; then
@@ -220,7 +237,11 @@ if [ -f "${target}" ]; then
 
 fi
 
+checkDevPackFolder "${pkgSource}"
 
+
+devpack="${pkgSource}/yndevpack-${pkgName}-${pkgVersion}-${pkgRevision}-${pkgOS}-${pkgArch}-${pkgCompiler}-${pkgTarget}"
+echo 1 > "${devpack}"
 
 tmpfile=`"${mktemp}" -t yunipackagemaker.XXXXXX` || exit 4
 
@@ -243,6 +264,7 @@ rm -f "${tmpfile}"
 if [ -f "${tmpfile}" ]; then
 	echo "[WARNING] The temporary file could be removed: '${tmpfile}'"
 fi
+rm -f "${devpack}"
 
 
 echo "Done."
