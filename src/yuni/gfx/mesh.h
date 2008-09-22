@@ -39,12 +39,14 @@ namespace Gfx
 
 		/*!
 		** \brief Make a fusion between two meshes
+		**
 		** For the moment, the process is a bit simplistic:
 		** Take each triangle of one mesh and add it to the other,
 		** and recalculate the edges from nothing
 		*/
 		void fusion(Mesh* /*mesh*/)
 		{
+			// TODO
 		}
 
 	protected:

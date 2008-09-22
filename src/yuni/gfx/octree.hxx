@@ -8,14 +8,14 @@ namespace Gfx
 	template <typename T>
 	Octree<T>::Octree():
 		MaxPointsPerNode(32), pData(NULL),
-		pCenter(0, 0, 0), pBBox(Point3D<float>(0.0f, 0.0f, 0.0f), Point3D<float>(0.0f, 0.0f, 0.0f))
+		pCenter(0, 0, 0), pBoundingBox(Point3D<float>(0.0f, 0.0f, 0.0f), Point3D<float>(0.0f, 0.0f, 0.0f))
 	{
 	}
 
 	template <typename T>
 	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, T* data = NULL):
 		MaxPointsPerNode(32), pData(data),
-		pCenter(0, 0, 0), pBBox(min, max)
+		pCenter(0, 0, 0), pBoundingBox(min, max)
 	{
 		// The Center is the mean of the min and the max
 		pCenter.move(min);
@@ -63,6 +63,7 @@ namespace Gfx
 
 	/*!
 	** \brief Split a leaf node into sub-nodes
+	**
 	** Also move each point it contained to the right sub-node.
 	** If the node is not a leaf / has no point, do nothing.
 	*/
@@ -85,6 +86,7 @@ namespace Gfx
 
 	/*!
 	** \brief Split a leaf node into sub-nodes
+	**
 	** Also move each point it contained to the right sub-node.
 	** If the node is not has no point, force the split anyway.
 	*/
@@ -102,6 +104,7 @@ namespace Gfx
 
 	/*!
 	** \brief Grow the tree to a complete tree of given depth
+	**
 	** Be careful! This is the only case where we might create empty leaves!
 	*/
 	template <typename T>
@@ -120,7 +123,7 @@ namespace Gfx
 
 
 	template <typename T>
-	const Octree<T>* Octree<T>::findSmallestBBox(const Point3D<float>& p) const
+	const Octree<T>* Octree<T>::findContainingLeaf(const Point3D<float>& p) const
 	{
 		if (isLeaf())
 			return this;
@@ -130,7 +133,7 @@ namespace Gfx
 		if (NULL == child)
 			return this;
 		// Recursive call
-		return child->findSmallestBBox(p);
+		return child->findContainingLeaf(p);
 	}
 
 	//! Depth of the tree
@@ -194,8 +197,8 @@ namespace Gfx
 	{
 		if (pChildren[index])
 			return pChildren[index];
-		Point3D<float> newMin(pBBox.min());
-		Point3D<float> newMax(pBBox.max());
+		Point3D<float> newMin(pBoundingBox.min());
+		Point3D<float> newMax(pBoundingBox.max());
 		// We use the binary encoding of the index to determine
 		// the new coordinates
 		if ((index & 4) != 0)

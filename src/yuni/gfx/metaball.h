@@ -70,6 +70,7 @@ namespace Gfx
 
 		/*!
 		** \brief Simple density function for euclidean distance
+		**
 		** \param p Point to calculate the density for
 		** \return The calculated density
 		*/
@@ -94,7 +95,8 @@ namespace Gfx
 			return pow(1.0f - r2, 2);
 		}
 
-		/*! \brief A metaball density function with finite support
+		/*!
+		** \brief A metaball density function with finite support
 		**
 		** D(r) = a(1 - 3r^2/b^2)	when 0 <= r <= b / 3
 		** D(r) = 3a/2(1 - r/b)^2	when b / 3 <= r <= b
