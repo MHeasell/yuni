@@ -58,11 +58,20 @@ namespace Gfx
 		*/
 		uint8 cubeIndex(float isoValue, const Cube& cell) const;
 
-
+		/*!
+		** \brief Do the polygonization of a single cell of the grid
+		**
+		** Nothing will be done if the surface does not intersect the cell
+		** Otherwise, triangles will be computed and a mesh will be created
+		**
+		** \param isoValue Limit value for belonging in the surface or not
+		** \param cell The cell we want to find the triangles for
+		*/
 		Mesh* polygoniseCell(float isoValue, const Cube& cell) const;
 
 		/*
 		** \brief Interpolate the point at which the surface cuts the edge
+		**
 		** Linearly interpolate the position where an isosurface cuts
 		** an edge between two vertices, each with their own scalar value
 		*/

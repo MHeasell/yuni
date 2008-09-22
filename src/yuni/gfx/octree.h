@@ -6,7 +6,7 @@
 # include "../yuni.h"
 # include "../misc/sharedptr.h"
 # include "point3D.h"
-# include "bbox3D.h"
+# include "boundingbox.h"
 
 
 
@@ -18,7 +18,8 @@ namespace Gfx
 {
 
 
-	/*! \class Octree
+	/*!
+	** \class Octree
 	** \brief Octree datastructure
 	**
 	** An octree is a tree representing a space partioning.
@@ -79,25 +80,27 @@ namespace Gfx
 		//! Number of points in the tree
 		uint32 pointCount() const;
 		//! Get the bounding box for this tree
-		const BBox3D<float>& boundingBox() const
-		{ return pBBox; }
+		const BoundingBox<float>& boundingBox() const
+		{ return pBoundingBox; }
 
 		/*!
 		** \brief Add a single point to the  Octree
+		**
 		** \param p The point to add
 		*/
 		Octree<T>* addPoint(const Point3D<float>& p);
 
 		/*!
-		** \brief Recursive find of the deepest node (the smallest bounding box) containing a given point
+		** \brief Recursive find of the leaf whose bounding box contains a given point
 		**
 		** \param p The point
 		** \return The node found
 		*/
-		const Octree<T>* findSmallestBBox(const Point3D<float>& p) const;
+		const Octree<T>* findContainingLeaf(const Point3D<float>& p) const;
 
 		/*!
 		** \brief Split a leaf into subnodes
+		**
 		** Also move each point it contained to the right sub-node.
 		** If the node is not a leaf / has no point, do nothing.
 		*/
@@ -105,6 +108,7 @@ namespace Gfx
 
 		/*!
 		** \brief Grow the tree to a complete tree of given depth
+		**
 		** Be careful! This is the only case where we might create empty leaves!
 		*/
 		void growTo(uint16 depth);
@@ -133,6 +137,7 @@ namespace Gfx
 
 		/*!
 		** \brief Split a leaf node into sub-nodes
+		**
 		** Also move each point it contained to the right sub-node.
 		** If the node is not has no point, force the split anyway.
 		*/
@@ -147,7 +152,7 @@ namespace Gfx
 		//! Center point for the node
 		Point3D<float> pCenter;
 		//! Bounding box for the points in the tree
-		BBox3D<float> pBBox;
+		BoundingBox<float> pBoundingBox;
 
 		//! Links to the children nodes
 		Octree<T>* pChildren[YUNI_OCTREE_MAX_CHILDREN];

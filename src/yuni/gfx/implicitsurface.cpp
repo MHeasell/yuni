@@ -1,4 +1,6 @@
 
+#include <algorithm>
+#include "../misc/stl.functions.h"
 #include "implicitsurface.h"
 
 namespace Yuni
@@ -7,12 +9,8 @@ namespace Gfx
 {
 	ImplicitSurface::~ImplicitSurface()
 	{
-		while (!pSubSurfaces.empty())
-		{
-			ImplicitSurface* surf = pSubSurfaces.back();
-			delete surf;
-			pSubSurfaces.pop_back();
-		}
+		//std::for_each(pSubSurfaces.begin(), pSubSurfaces.end(), Yuni::Misc::Delete<ImplicitSurface>());
+		Yuni::Misc::STLDeleteAndClear<ImplicitSurface, std::vector<ImplicitSurface*> >(pSubSurfaces);
 	}
 
 	//! Get some good points that we know are inside the surface

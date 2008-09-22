@@ -2,7 +2,7 @@
 # define __YUNI_GFX_TRIANGLE_H__
 
 # include "edge.h"
-
+# include "vector3D.h"
 
 namespace Yuni
 {
@@ -38,16 +38,16 @@ namespace Gfx
 		//@}
 
 	private:
-		//! \brief Vertices
+		//! Vertices
 		Vertex pVertex1;
 		Vertex pVertex2;
 		Vertex pVertex3;
 
-		//! \brief Edges
+		//! Edges
 		// TODO
 
-		//! \brief Surface normal
-		// Vector3D<float> pNormal;
+		//! Surface normal
+		Vector3D<float> pNormal;
 	};
 
 

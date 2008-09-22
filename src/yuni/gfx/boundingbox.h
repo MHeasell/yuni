@@ -1,6 +1,6 @@
 
-#ifndef __YUNI_GFX_BBOX3D_H__
-# define __YUNI_GFX_BBOX3D_H__
+#ifndef __YUNI_GFX_BOUNDINGBOX_H__
+# define __YUNI_GFX_BOUNDINGBOX_H__
 
 # include "point3D.h"
 # include "triangle.h"
@@ -13,14 +13,14 @@ namespace Gfx
 	** \brief A bounding box in 3D that grows with what is added inside
 	*/
 	template <typename T>
-	class BBox3D
+	class BoundingBox
 	{
 	public:
 		//! \name Constructors and destructor
 		//@{
-		BBox3D(): pMin(), pMax()
+		BoundingBox(): pMin(), pMax()
 		{}
-		BBox3D(const Point3D<T>& min, const Point3D<T>& max): pMin(min), pMax(max)
+		BoundingBox(const Point3D<T>& min, const Point3D<T>& max): pMin(min), pMax(max)
 		{}
 		//@}
 
@@ -72,4 +72,4 @@ namespace Gfx
 } // Gfx
 } // Yuni
 
-#endif // __YUNI_GFX_BBOX3D_H__
+#endif // __YUNI_GFX_BOUNDINGBOX_H__

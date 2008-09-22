@@ -22,7 +22,7 @@ namespace Gfx
 		Mesh* mesh = NULL;
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
-			const Octree<float>* leaf = tree.findSmallestBBox(startPoints[i]);
+			const Octree<float>* leaf = tree.findContainingLeaf(startPoints[i]);
 			Cube cell;
 			cell.min = leaf->boundingBox().min();
 			cell.max = leaf->boundingBox().max();
@@ -366,7 +366,7 @@ namespace Gfx
 				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
 			};
 
-		//! Calculate the various points of the cube and associate them with indices
+		// Calculate the various points of the cube and associate them with indices
 		const Point3D<float> points[8] =
 			{
 				cell.min,
@@ -379,13 +379,12 @@ namespace Gfx
 				Point3D<float>(cell.min.x, cell.max.y, cell.max.z),
 			};
 
-		/*
-		  Determine the index into the edge table which
-		  tells us which vertices are inside of the surface
-		*/
+		
+		// Determine the index into the edge table which
+		// tells us which vertices are inside of the surface
 		uint8 index = cubeIndex(isoValue, cell);
 
-		/* Cube is entirely in/out of the surface */
+		// Cube is entirely in/out of the surface
 		if (edgeTable[index] == 0)
 			return NULL;
 
@@ -394,7 +393,7 @@ namespace Gfx
 		for (unsigned int i = 0; i < 8; ++i)
 			vals[i] = pSurface(points[i]);
 
-		/* Find the vertices where the surface intersects the cube */
+		// Find the vertices where the surface intersects the cube
 		Point3D<float> vertices[12];
 		if (edgeTable[index] & 1)
 			vertices[0] =
@@ -447,6 +446,7 @@ namespace Gfx
 
 	/*
 	** \brief Interpolate the point at which the surface cuts the edge
+	**
 	** Linearly interpolate the position where an isosurface cuts
 	** an edge between two vertices, each with their own scalar value
 	*/
