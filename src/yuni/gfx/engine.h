@@ -81,6 +81,12 @@ namespace Gfx
 		bool resetWithFailSafeSettings(const bool fullscreenMode = false);
 
 		/*!
+		** \brief Toggle the fullscreen mode
+		** \return The current status of the fullscreen mode
+		*/
+		bool toggleFullscreen();
+
+		/*!
 		** \brief Run the 3D Engine in an infinite loop
 		*/
 		void run();
@@ -108,6 +114,7 @@ namespace Gfx
 	private:
 		//! Mutex
 		Mutex pMutex;
+		//! If the device is initialized
 		bool pDeviceIsInitialized;
 		//! Information about the device
 		SharedPtr<Device> pDevice;

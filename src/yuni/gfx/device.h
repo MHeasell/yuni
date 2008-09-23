@@ -128,9 +128,12 @@ namespace Gfx
 		/*!
 		** \brief Fullscreen
 		*/
+		//! Get if the fullscreen mode should be used
 		bool fullscreen() const {return pFullscreen;}
 		//! Set the fullscreen mode
 		void fullscreen(const bool f);
+		//! Toggle the fullscreen mode
+		bool toggleFullscreen();
 
 		//@}
 
@@ -181,7 +184,7 @@ namespace Gfx
 		/*!
 		** \brief Get if we want to use the stencil buffer for drawing shadows
 		*/
-		bool stencilbuffer() const {return pStencilbuffer; }
+		bool stencilbuffer() const {return pStencilbuffer;}
 
 		/*!
 		** \brief Set the stencilbuffer mode for drawing shadows
@@ -192,27 +195,18 @@ namespace Gfx
 
 		//! \name VSync (only useful in the fullscreen mode)
 		//@{
-
-		/*!
-		** \brief VSync
-		*/
+		//! Get if the VSync should be used
 		bool vsync() const {return pVSync;}
-
-		/*!
-		** \brief Set the VSync mode
-		*/
+		//! Set the VSync mode
 		void vsync(const bool v);
-
 		//@}
 
 		//! \name Consistency
 		//@{
-
 		/*!
 		** \brief Ensures settings are valid
 		*/
 		void ensuresSettingsAreValid();
-
 		//@}
 
 		//! \name Locks

@@ -10,8 +10,10 @@ namespace Gfx
 {
 
 # ifdef YUNI_OS_WINDOWS
+	//! The Default device on Microsoft Windows should be DirectX
 	const Device::Type Device::DefaultType = ygdtDirectX9;
 # else
+	//! The Default device on Unixes should be OpenGL
 	const Device::Type Device::DefaultType = ygdtOpenGL;
 # endif
 
@@ -79,6 +81,8 @@ namespace Gfx
 	{
 		if (!pLocked && newType != ygdtNull)
 		{
+			// On platforms other than Microsoft Windows only the OpenGL and software devices
+			// are available
 			# ifndef YUNI_OS_WINDOWS
 			if (newType == ygdtOpenGL || newType == ygdtSoftware)
 			{
@@ -103,6 +107,11 @@ namespace Gfx
 			pFullscreen = f;
 	}
 
+	bool Device::toggleFullscreen()
+	{
+		pFullscreen = !pFullscreen;
+		return pFullscreen;
+	}
 
 	void Device::monitor(const SharedPtr<System::Devices::Display::Monitor>& m)
 	{
@@ -138,11 +147,17 @@ namespace Gfx
 
 	void Device::ensuresSettingsAreValid()
 	{
+		// The monitor must be valid
 		if (pMonitor.null() || !pMonitor->valid())
 		{
+			// The monitor does not seem valid. We'll grab the whole list and we
+			// will pick up the primary display as the default monitor
 			System::Devices::Display::List allDisplays;
 			pMonitor = allDisplays.primary();
 		}
+		// The resolution must be valid for the given monitor
+		// It is especially important on OS X where the color depth must be
+		// the same as the user's desktop to allow switching to full-screen mode
 		if (!pMonitor->resolutionIsValid(pResolution))
 			pResolution = pMonitor->recommendedResolution();
 	}
