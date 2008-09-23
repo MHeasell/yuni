@@ -10,6 +10,12 @@ namespace Gfx
 		MaxPointsPerNode(32), pData(NULL),
 		pCenter(0, 0, 0), pBoundingBox(Point3D<float>(0.0f, 0.0f, 0.0f), Point3D<float>(0.0f, 0.0f, 0.0f))
 	{
+		// The Center is the mean of the min and the max
+		pCenter.move(pBoundingBox.min());
+		pCenter.mean(pBoundingBox.max());
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+			pChildren[i] = NULL;
+		pNbChildren = 0;
 	}
 
 	template <typename T>
