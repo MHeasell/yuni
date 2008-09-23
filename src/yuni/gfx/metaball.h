@@ -25,11 +25,11 @@ namespace Gfx
 		//! \name Constructors and destructor
 		//@{
 		//! Constructor requiring a 3D point
-		MetaBall(const Point3D<float>& pos, float density = 1):
+		MetaBall(const Point3D<float>& pos, float density = 1.0f):
 			pCenter(pos), pDensity(density)
 		{}
 		//! Constructor requiring the coordinates of a 3D point
-		MetaBall(float x, float y, float z, float density = 1):
+		MetaBall(float x, float y, float z, float density = 1.0f):
 			pCenter(x, y, z), pDensity(density)
 		{}
 		//! Copy constructor
@@ -63,7 +63,7 @@ namespace Gfx
 		const std::vector<Point3D<float> > insidePoints() const
 		{
 			std::vector<Point3D<float> > points;
-			points.push_back(center);
+			points.push_back(center());
 			return std::vector<Point3D<float> >(points);
 		}
 

@@ -30,11 +30,11 @@ namespace Gfx
 		MetaObject(bool positive): pPositive(positive)
 		{}
 		//! Destructor
-		virtual ~MetaObject
+		virtual ~MetaObject()
 		{}
 		//@}
 
-	private:
+	protected:
 		//! Is the object a positive or negative force? (usually true)
 		bool pPositive;
 
