@@ -46,6 +46,7 @@ namespace Gfx
 
 	Engine::~Engine()
 	{
+		// Disconnect all connected events
 		onFPSChanged.disconnectAll();
 		this->release();
 	}
@@ -155,6 +156,21 @@ namespace Gfx
 	{
 		return (dynamic_cast<Private::Gfx::EngineAbstract*>(&external3DEngine))->applicationTitle();
 	}
+
+
+	bool Engine::toggleFullscreen()
+	{
+		// Lock
+		MutexLocker locker(pMutex);
+		// Toggle the flag for the fullscreen mode
+		const bool f = pDevice->toggleFullscreen();
+		// Reset the device
+		// TODO Find a better way to toggle the fullscreen mode
+		this->reset(pDevice);
+		// Return the current status for the fullscreen mode
+		return f;
+	}
+
 
 
 } // namespace Gfx
