@@ -20,7 +20,7 @@ namespace Gfx
 		for (unsigned int i = 0; i < pSubSurfaces.size(); ++i)
 		{
 			std::vector<Point3D<float> > surfPoints = pSubSurfaces[i]->insidePoints();
-			for (unsigned int j = 0; j < surfPoints.size(); ++i)
+			for (unsigned int j = 0; j < surfPoints.size(); ++j)
 				points.push_back(surfPoints[j]);
 		}
 		return std::vector<Point3D<float> >(points);
