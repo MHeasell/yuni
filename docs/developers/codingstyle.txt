@@ -45,7 +45,7 @@ GENERAL
   if (YUNI_I_CAN_PUSH_ON_THE_RED_BUTTON == foo)
      startThermoNuclearWar();
   
-
+* Use the keyword `NULL` instead of `0` for pointers
 
 
 NAMING CONVENTION
@@ -148,10 +148,10 @@ BEST PRACTICES
 
 * Use and abuse LOG_ASSERT tests.
 
-* Prefer this form :
-    if (NULL == p)
+* Prefer this form (assuming `int i;`):
+    if (42 == i)
   to
-    if (p == NULL)
+    if (i == 42)
 
 * Don't put an else right after a return.
   Delete the else, it's unnecessary and increases indentation level.
@@ -183,4 +183,6 @@ BEST PRACTICES
 * Prefer inlines to macros. In C++ macros are not needed for code efficiency
 
 * The system headers should be included before any other include
+
+* Avoid as much as possible Copy constructor for Return Values. Use reference instead.
 
