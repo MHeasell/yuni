@@ -67,7 +67,8 @@ namespace Gfx
 		Point3D<T> pMin;
 		//! Maximum X,Y,Z coordinates of the box
 		Point3D<T> pMax;
-	};
+
+	}; // class BoundingBox
 
 } // Gfx
 } // Yuni

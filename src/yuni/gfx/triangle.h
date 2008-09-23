@@ -24,7 +24,7 @@ namespace Gfx
 		Triangle(const Vertex& v1, const Vertex& v2, const Vertex& v3):
 			pVertex1(v1), pVertex2(v2), pVertex3(v3)
 		{}
-		//! \brief Copy constructor
+		//! Copy constructor
 		Triangle(const Triangle& t):
 			pVertex1(t.vertex1()), pVertex2(t.vertex2()), pVertex3(t.vertex3())
 		{}

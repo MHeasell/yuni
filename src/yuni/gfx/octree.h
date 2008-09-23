@@ -58,9 +58,7 @@ namespace Gfx
 		//! \name Constructor & Destructor
 		//@{
 
-		/*!
-		** \brief Constructor
-		*/
+		//! Constructors
 		Octree();
 		Octree(const Point3D<float>& min, const Point3D<float>& max, T* data);
 
