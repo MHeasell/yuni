@@ -30,11 +30,11 @@ namespace Gfx
 
 		/*!
 		** \brief Polygonise a whole mesh given an isosurface
-		** \param density Value defining the isosurface's limit
+		** \param isoValue Value defining the isosurface's limit
 		** \param granularity Refinement value for the algorithm
 		** \return A triangle mesh approximating the isosurface
 		*/
-		virtual Mesh* operator () (float density, float granularity);
+		virtual Mesh* operator () (float isoValue, float granularity);
 
 	private:
 		//! Represents a cube as needed by the marching cubes algorithm
