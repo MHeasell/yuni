@@ -19,9 +19,7 @@ namespace Gfx
 	class Mesh
 	{
 	public:
-		/*!
-		** Main Constructor
-		*/
+		//! Main Constructor
 		Mesh() {}
 
 		/*!
