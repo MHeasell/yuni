@@ -1,4 +1,5 @@
 
+# include <queue>
 # include "../misc/math.h"
 # include "marchingcubes.h"
 # include "octree.h"
@@ -21,12 +22,12 @@ namespace Gfx
 		if (startPoints.empty())
 			return NULL;
 
+		std::queue<Point3D<float> > toVisit;
 		Octree<float> tree;
-		// This is stupid, do something better!
-		tree.growTo((int)granularity * 100);
 		Mesh* mesh = NULL;
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
+			toVisit.Enqueue(startPoints[i]);
 			const Octree<float>* leaf = tree.findContainingLeaf(startPoints[i]);
 			Cube cell;
 			cell.min = leaf->boundingBox().min();
