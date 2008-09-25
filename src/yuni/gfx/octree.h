@@ -145,6 +145,8 @@ namespace Gfx
 		//! Bounding box for the points in the tree
 		BoundingBox<float> pBoundingBox;
 
+		//! Link to the parent octree (container cube)
+		Octree<T>* container;
 		//! Links to the children nodes
 		Octree<T>* pChildren[YUNI_OCTREE_MAX_CHILDREN];
 		//! Store this to know when the node is a leaf (avoid counting children)
