@@ -9,16 +9,15 @@ namespace Gfx
 {
 	ImplicitSurface::~ImplicitSurface()
 	{
-		//std::for_each(pSubSurfaces.begin(), pSubSurfaces.end(), Yuni::Misc::Delete<ImplicitSurface>());
 		Yuni::Misc::STLDeleteAndClear<ImplicitSurface, std::vector<ImplicitSurface*> >(pSubSurfaces);
 	}
 
 	//! Get some good points that we know are inside the surface
-	void ImplicitSurface::insidePoints(Point3DFList& points) const
+	void ImplicitSurface::insidePoints(PointList& points) const
 	{
 		for (unsigned int i = 0; i < pSubSurfaces.size(); ++i)
 		{
-			Point3DFList surfPoints;
+			PointList surfPoints;
 			pSubSurfaces[i]->insidePoints(surfPoints);
 			for (unsigned int j = 0; j < surfPoints.size(); ++j)
 				points.push_back(surfPoints[j]);

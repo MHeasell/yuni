@@ -14,7 +14,7 @@ namespace Gfx
 	Mesh* MarchingCubes::operator () (float isoValue, float granularity)
 	{
 		if (granularity < 0.0f)
-			return;
+			return NULL;
 
 		std::vector<Point3D<float> > startPoints;
 		pSurface.insidePoints(startPoints);
