@@ -91,35 +91,18 @@ namespace Gfx
 	}
 
 	/*!
-	** \brief Split a leaf node into sub-nodes
-	**
-	** Also move each point it contained to the right sub-node.
-	** If the node is not has no point, force the split anyway.
-	*/
-	template <typename T>
-	void Octree<T>::forceSplit()
-	{
-		// First, try to split cleanly
-		split();
-		// Loop on all children to see if some were not created
-		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
-			// Force the creation for all missing children
-			if (NULL == pChildren[i])
-				createChild(i);
-	}
-
-	/*!
 	** \brief Grow the tree to a complete tree of given depth
 	**
-	** Be careful! This is the only case where we might create empty leaves!
+	** Only the branches containing points will be grown
+	** This is a recursive method
 	*/
 	template <typename T>
 	void Octree<T>::growTo(uint16 depth)
 	{
 		if (depth > 0)
 		{
-			// Split
-			forceSplit();
+			// Split the node if it contains points
+			split();
 			// Loop on all children
 			for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 				// Recursive call
