@@ -13,9 +13,14 @@ namespace Gfx
 	*/
 	Mesh* MarchingCubes::operator () (float isoValue, float granularity)
 	{
-		std::vector<Point3D<float> > startPoints = pSurface.insidePoints();
+		if (granularity < 0.0f)
+			return;
+
+		std::vector<Point3D<float> > startPoints;
+		pSurface.insidePoints(startPoints);
 		if (startPoints.empty())
 			return NULL;
+
 		Octree<float> tree;
 		// This is stupid, do something better!
 		tree.growTo((int)granularity * 100);

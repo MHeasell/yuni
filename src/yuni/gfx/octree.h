@@ -97,17 +97,10 @@ namespace Gfx
 		const Octree<T>* findContainingLeaf(const Point3D<float>& p) const;
 
 		/*!
-		** \brief Split a leaf into subnodes
+		** \brief Grow the tree to given depth
 		**
-		** Also move each point it contained to the right sub-node.
-		** If the node is not a leaf / has no point, do nothing.
-		*/
-		void split();
-
-		/*!
-		** \brief Grow the tree to a complete tree of given depth
-		**
-		** Be careful! This is the only case where we might create empty leaves!
+		** Only the branches containing points will be grown
+		** This is a recursive method
 		*/
 		void growTo(uint16 depth);
 
@@ -134,12 +127,12 @@ namespace Gfx
 	private:
 
 		/*!
-		** \brief Split a leaf node into sub-nodes
+		** \brief Split a leaf into subnodes
 		**
 		** Also move each point it contained to the right sub-node.
-		** If the node is not has no point, force the split anyway.
+		** If the node is not a leaf / has no point, do nothing.
 		*/
-		void forceSplit();
+		void split();
 
 	private:
 		typedef typename std::vector< Point3D<float> >  PointList;

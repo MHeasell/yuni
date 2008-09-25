@@ -14,16 +14,15 @@ namespace Gfx
 	}
 
 	//! Get some good points that we know are inside the surface
-	const std::vector<Point3D<float> > ImplicitSurface::insidePoints() const
+	void ImplicitSurface::insidePoints(Point3DFList& points) const
 	{
-		std::vector<Point3D<float> > points;
 		for (unsigned int i = 0; i < pSubSurfaces.size(); ++i)
 		{
-			std::vector<Point3D<float> > surfPoints = pSubSurfaces[i]->insidePoints();
+			Point3DFList surfPoints;
+			pSubSurfaces[i]->insidePoints(surfPoints);
 			for (unsigned int j = 0; j < surfPoints.size(); ++j)
 				points.push_back(surfPoints[j]);
 		}
-		return std::vector<Point3D<float> >(points);
 	}
 
 	/*!
