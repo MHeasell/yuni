@@ -22,6 +22,9 @@ namespace Gfx
 	class ImplicitSurface
 	{
 	public:
+		typedef std::vector<Point3D<float> > PointList;
+
+	public:
 		//! \name Constructors and destructor
 		//@{
 		//! \brief Main constructor
@@ -35,7 +38,7 @@ namespace Gfx
 		**
 		** \param[out] points Empty point list to fill.
 		*/
-		virtual void insidePoints(Point3DFList& points) const;
+		virtual void insidePoints(PointList& points) const;
 
 		/*!
 		** \brief Add a subsurface as a component of this implicit surface
@@ -53,9 +56,6 @@ namespace Gfx
 		** \param p Point to calculate the value for
 		*/
 		virtual float operator()(const Point3D<float>& p) const;
-
-	protected:
-		typedef std::vector<Point3D<float> > Point3DFList;
 
 	private:
 		//! An implicit surface can be composed of subsurfaces
