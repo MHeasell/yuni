@@ -1,6 +1,9 @@
 #ifndef __YUNI_GFX_UI_UPDATER_H__
 # define __YUNI_GFX_UI_UPDATER_H__
 
+# include "control.h"
+# include "../../sharedptr.h"
+
 
 namespace Yuni
 {
@@ -10,40 +13,51 @@ namespace UI
 {
 
 
+	/*!
+	** \brief Prevent a control from drawing during the lifespan of an instance of this class
+	*/
 	class Updater
 	{
 	public:
+		//! \name Constructors & Destructor
+		//@{
+
+		/*!
+		** \brief Constructor
+		*/
 		template<class C> Updater(const SharedPtr<C>& comObj)
-			:pComObj(comObj.get())
+			:pCntrl(comObj)
 		{
-			pComObj->beginUpdate();
+			pCntrl->beginUpdate();
 		}
 
-		Updater(Component* comObj)
-			:pComObj(comObj)
-		{
-			pComObj->beginUpdate();
-		}
-
+		/*!
+		** \brief Copy constructor
+		*/
 		Updater(const Updater& c)
-			:pComObj(c.pComObj)
+			:pCntrl(c.pCntrl)
 		{
-			pComObj->beginUpdate();
+			pCntrl->beginUpdate();
 		}
 
+		/*!
+		** \brief Destructor
+		*/
+		~Updater() {pCntrl->endUpdate();}
 
-		~Updater() {pComObj->endUpdate();}
+		//@}
 
 	private:
-		Component* pComObj;
-	};
+		//! Reference to the control
+		SharedPtr<Control> pCntrl;
+
+	}; // class Updater
+
 
 
 
 } // namespace UI
 } // namespace Gfx
 } // namespace Yuni
-
-
 
 #endif // __YUNI_GFX_UI_UPDATER_H__

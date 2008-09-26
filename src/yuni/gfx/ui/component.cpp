@@ -2,6 +2,7 @@
 #include "component.h"
 
 
+
 namespace Yuni
 {
 namespace Gfx
@@ -13,41 +14,38 @@ namespace UI
 
 	Component::~Component()
 	{
+		// Make sure all disconnections are done
 		if (pState != csDestroying)
-			onBeforeDestruction();
+			onBeforeDestructionWL();
 		// Delete all children
 		clear();
 	}
 
-	void Component::destroying()
+	bool Component::destroying()
 	{
-		pMutex.lock();
-		onBeforeDestruction();
-		pMutex.unlock();
+		MutexLocker locker(pMutex);
+		return onBeforeDestructionWL();
 	}
 
 
-	bool Component::onBeforeDestruction()
+	bool Component::onBeforeDestructionWL()
 	{
-		// Lock
-		MutexLocker locker(pMutex);
-
-		if (pState == csDestroying) // already done
+		if (pState == csDestroying) // already done, nothing to do
 			return false;
 
 		// The state has just changed
 		pState = csDestroying;
 
-		// Disconnect all notifiers
-		internalDisconnectAllNotifiers();
-
 		// It is better to detach first this component from its parent
 		// In this way, it prevents against unwanted operations on these children, like
 		// redrawing or input events for example.
-		internalDetachFromParent();
+		detachFromParentWL();
 
-		// Keep posted all children
-		this->broadcastOnBeforeDestruction();
+		// Disconnect all notifiers
+		disconnectAllNotifiersWL();
+
+		// Keep posted all children that they will be deleted shortly
+		this->broadcastOnBeforeDestructionWL();
 
 		return true;
 	}
@@ -62,27 +60,29 @@ namespace UI
 	void Component::name(const String& n)
 	{
 		pMutex.lock();
-		pName = n;
+		if (csDestroying != pState)
+			pName = n;
 		pMutex.unlock();
 	}
 
 	
-	void Component::internalDetachFromParent()
+	void Component::detachFromParentWL()
 	{
-		if (pParent.valid()) // Double check
+		if (pParent.valid())
 		{
-			pParent->internalUnregisterChild(this);
+			Component* prnt = pParent.get();
 			pParent.reset();
+			prnt->internalUnregisterChild(this);
 		}
 	}
 
 
 	void Component::detachFromParent()
 	{
-		if (pParent.valid())
+		if (pParent.valid()) // avoid unnecessary locks
 		{
-			pMutex.lock();
-			internalDetachFromParent();
+			pMutex.lock(); // Double check
+			detachFromParentWL();
 			pMutex.unlock();
 		}
 	}
@@ -98,14 +98,19 @@ namespace UI
 			// If the new parent is not valid, to detach this component from the current parent
 			// will be faster
 			this->detachFromParent();
+			// An invalid parent is not managed as an error
 			return true;
 		}
 
 		// Lock
 		MutexLocker locker(pMutex);
-		if (pState == csDestroying)
+		if (csDestroying == pState)
 		{
+			// The component is in a destroying state. We should abort as soon as possible
+			// A new parent will be useless at this step and the better thing to do
+			// is to make sure we no longer belong to a parent
 			this->detachFromParent();
+			// The operation obviously failed
 			return false;
 		}
 		
@@ -118,7 +123,7 @@ namespace UI
 		{
 			// We have to check if the new parent is not one of our children and if it 
 			// is not already our parent
-			if (pParent == newParent || this->internalExistsChildFromPtr(newParent.get(), true))
+			if (pParent == newParent || this->existsChildFromPtrWL(newParent.get(), true))
 				return false;
 
 			SharedPtr<Component> myself;
@@ -136,12 +141,14 @@ namespace UI
 
 		// Ok, we can make have this new parent
 		pParent = newParent;
+		// Invalidate the control
+		invalidateWL();
 		// Success
 		return true;
 	}
 
 
-	bool Component::internalExistsChildFromPtr(const void* toFind, const bool recursive)
+	bool Component::existsChildFromPtrWL(const void* toFind, const bool recursive)
 	{
 		if (recursive)
 		{
@@ -163,7 +170,7 @@ namespace UI
 	}
 
 
-	bool Component::internalFindChildFromPtr(SharedPtr<Component>& out, const void* toFind, const bool recursive)
+	bool Component::findChildFromPtrWL(SharedPtr<Component>& out, const void* toFind, const bool recursive)
 	{
 		if (recursive)
 		{
@@ -192,7 +199,7 @@ namespace UI
 		return false;
 	}
 
-	bool Component::internalFindChildFromString(SharedPtr<Component>& out, const String& toFind, const bool recursive)
+	bool Component::findChildFromStringWL(SharedPtr<Component>& out, const String& toFind, const bool recursive)
 	{
 		if (recursive)
 		{
@@ -228,7 +235,7 @@ namespace UI
 		if (toFind.empty())
 			return false;
 		MutexLocker locker(pMutex);
-		return this->internalFindChildFromString(out, toFind, recursive);
+		return (csDestroying != pState) && findChildFromStringWL(out, toFind, recursive);
 	}
 
 
@@ -237,17 +244,18 @@ namespace UI
 		if (toFind)
 		{
 			MutexLocker locker(pMutex);
-			return this->internalFindChildFromPtr(out, toFind, recursive);
+			return (csDestroying != pState) && findChildFromPtrWL(out, toFind, recursive);
 		}
 		return false;
 	}
+
 
 	bool Component::existsChildFromPtr(const void* toFind, const bool recursive)
 	{
 		if (toFind)
 		{
 			MutexLocker locker(pMutex);
-			return this->internalExistsChildFromPtr(toFind, recursive);
+			return (csDestroying != pState) && existsChildFromPtrWL(toFind, recursive);
 		}
 		return false;
 	}
@@ -281,7 +289,8 @@ namespace UI
 			pMutex.lock();
 			if (!pChildren.empty())
 			{
-				for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+				Vector::iterator end = pChildren.end();
+				for (Vector::iterator i = pChildren.begin(); i != end; ++i)
 				{
 					if (i->get() == nc)
 					{
@@ -294,19 +303,22 @@ namespace UI
 			pMutex.unlock();
 		}
 	}
+	
 
 
 	uint32 Component::childrenCount()
 	{
 		MutexLocker locker(pMutex);
-		return (uint32)pChildren.size();
+		return (uint32) pChildren.size();
 	}
 
 
 	SharedPtr<Component> Component::child(const uint32 indx)
 	{
 		MutexLocker locker(pMutex);
-		return (pState != csReady || pChildren.empty() || pChildren.size() >= indx) ? SharedPtr<Component>() : pChildren[indx];
+		return (csDestroying == pState || pChildren.empty() || pChildren.size() >= indx)
+			? SharedPtr<Component>()
+			: pChildren[indx];
 	}
 
 
@@ -328,9 +340,17 @@ namespace UI
 			Component::Vector backup(pChildren);
 			// Empty the original one
 			pChildren.clear();
+
 			// Indicates we will destroy them
-			this->broadcastOnBeforeDestruction();
-			// We can safely unlock here all references have been destroyed
+			// If the state is already set to `csDestroying`, that means the method
+			// `broadcastOnBeforeDestructionWL` has already been called by `onBeforeDestructionWL()`
+			if (pState != csDestroying)
+				broadcastOnBeforeDestructionWL();
+
+			// Invalidate this component
+			invalidateWL();
+
+			// We can safely unlock here, just before all children are destroyed
 			pMutex.unlock();
 
 			// All children will really be destroyed here
@@ -340,10 +360,14 @@ namespace UI
 	}
 
 
-	void Component::broadcastOnBeforeDestruction()
+	void Component::broadcastOnBeforeDestructionWL()
 	{
+		// Message to all children : You will be deleted shortly !
 		for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
-			(*i)->onBeforeDestruction();
+		{
+			if (!(*i)->destroying())
+				return;
+		}
 	}
 
 
@@ -354,12 +378,11 @@ namespace UI
 	}
 
 
-	bool Component::valid()
+	bool Component::ready()
 	{
 		MutexLocker locker(pMutex);
 		return (pState == csReady);
 	}
-
 
 
 } // namespace UI

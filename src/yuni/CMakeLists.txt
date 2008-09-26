@@ -31,7 +31,7 @@ set(SRC_MISC
 				misc/static.h
 				misc/math.h
 				misc/sharedptr.h misc/scopeptr.h
-				misc/event.h misc/event.proxy.h misc/event.private.h)
+				misc/event.h misc/event.proxy.h misc/event.private.h misc/event.cpp)
 
 source_group(Misc FILES ${SRC_MISC})
 
