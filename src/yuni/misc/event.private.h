@@ -125,7 +125,7 @@ namespace Events
 		virtual ~ItTmpl0()
 		{
 			if (pNotifier->isDisconnectionBroadcastAllowed())
-				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->unregisterEventNotifier(pNotifier);
+				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->disconnectEventNotifier(pNotifier);
 		}
 
 		virtual void emit(const Yuni::Event::EmitMode em)
@@ -157,7 +157,7 @@ namespace Events
 		virtual ~ItTmpl1()
 		{
 			if (pNotifier->isDisconnectionBroadcastAllowed())
-				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->unregisterEventNotifier(pNotifier);
+				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->disconnectEventNotifier(pNotifier);
 		}
 
 		virtual void emit(T1 a1, const Yuni::Event::EmitMode em)
@@ -189,7 +189,7 @@ namespace Events
 		virtual ~ItTmpl2()
 		{
 			if (pNotifier->isDisconnectionBroadcastAllowed())
-				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->unregisterEventNotifier(pNotifier);
+				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->disconnectEventNotifier(pNotifier);
 		}
 
 		virtual void emit(T1 a1, T2 a2, const Yuni::Event::EmitMode em)
@@ -221,7 +221,7 @@ namespace Events
 		virtual ~ItTmpl3()
 		{
 			if (pNotifier->isDisconnectionBroadcastAllowed())
-				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->unregisterEventNotifier(pNotifier);
+				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->disconnectEventNotifier(pNotifier);
 		}
 
 		virtual void emit(T1 a1, T2 a2, T3 a3, const Yuni::Event::EmitMode em)
@@ -253,7 +253,7 @@ namespace Events
 		virtual ~ItTmpl4()
 		{
 			if (pNotifier->isDisconnectionBroadcastAllowed())
-				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->unregisterEventNotifier(pNotifier);
+				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->disconnectEventNotifier(pNotifier);
 		}
 
 		virtual void emit(T1 a1, T2 a2, T3 a3, T4 a4, const Yuni::Event::EmitMode em)
@@ -285,7 +285,7 @@ namespace Events
 		virtual ~ItTmpl5()
 		{
 			if (pNotifier->isDisconnectionBroadcastAllowed())
-				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->unregisterEventNotifier(pNotifier);
+				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->disconnectEventNotifier(pNotifier);
 		}
 
 		virtual void emit(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, const Yuni::Event::EmitMode em)
@@ -317,7 +317,7 @@ namespace Events
 		virtual ~ItTmpl6()
 		{
 			if (pNotifier->isDisconnectionBroadcastAllowed())
-				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->unregisterEventNotifier(pNotifier);
+				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->disconnectEventNotifier(pNotifier);
 		}
 
 		virtual void emit(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, const Yuni::Event::EmitMode em)
@@ -349,7 +349,7 @@ namespace Events
 		virtual ~ItTmpl7()
 		{
 			if (pNotifier->isDisconnectionBroadcastAllowed())
-				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->unregisterEventNotifier(pNotifier);
+				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->disconnectEventNotifier(pNotifier);
 		}
 
 		virtual void emit(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, const Yuni::Event::EmitMode em)
@@ -381,7 +381,7 @@ namespace Events
 		virtual ~ItTmpl8()
 		{
 			if (pNotifier->isDisconnectionBroadcastAllowed())
-				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->unregisterEventNotifier(pNotifier);
+				(dynamic_cast<Yuni::Event::Receiver*>(pObj))->disconnectEventNotifier(pNotifier);
 		}
 
 		virtual void emit(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, const Yuni::Event::EmitMode em)
