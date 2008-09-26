@@ -13,57 +13,83 @@ namespace UI
 
 	Control::~Control()
 	{
+		beginUpdateWL();
 		if (pState != csDestroying)
-			onBeforeDestruction();
+			destroying();
 		// Delete all children
 		clear();
+		endUpdateWL();
 	}
-	
-	void Control::internalCachePosSizeUpdate()
+		
+	bool Control::onBeforeDestructionWL()
 	{
-		pCacheBounds.reset(pLeft, pTop, pLeft + pWidth, pTop + pHeight);
+		if (Component::onBeforeDestructionWL())
+		{
+			// Prevent this control from drawing
+			pUpdateSessionRefCount = LONG_MAX;
+
+			// Disconnect all anchors
+			anchors[Anchor::akLeft].resetSiblingWL();
+			anchors[Anchor::akTop].resetSiblingWL();
+			anchors[Anchor::akRight].resetSiblingWL();
+			anchors[Anchor::akBottom].resetSiblingWL();
+			return true;
+		}
+		return false;
 	}
 	
-	Rect2D<int> Control::bounds()
+	void Control::internalCachePosSizeUpdateWL()
+	{
+		if (!pUpdateSessionRefCount)
+		{
+			pCacheBounds.reset(pPosition.x, pPosition.y, pPosition.x + pSize.x, pPosition.y + pSize.y);
+		}
+	}
+	
+	Rect2D<float> Control::bounds()
 	{
 		MutexLocker locker(pMutex);
 		return pCacheBounds;
 	}
 
-	void Control::bounds(Rect2D<int> r)
+	void Control::bounds(Rect2D<float> r)
 	{
 		r.repair();
 		pMutex.lock();
-		pLeft = r.x1;
-		pTop = r.y1;
-		pWidth = r.x2 - r.x1;
-		pHeight = r.y2 - r.y1;
-		internalCachePosSizeUpdate();
-		internalInvalidate();
+		pPosition.x = r.x1;
+		pPosition.y = r.y1;
+		pSize.x = r.x2 - r.x1;
+		pSize.y = r.y2 - r.y1;
+		if (!pUpdateSessionRefCount)
+		{
+			internalCachePosSizeUpdateWL();
+			invalidateWL();
+		}
 		pMutex.unlock();
 	}
 
-	Point2D<int> Control::position()
+	Point2D<float> Control::position()
 	{
 		MutexLocker locker(pMutex);
-		return Point2D<int>(pLeft, pTop);
+		return pPosition;
 	}
 
-	void Control::position(const Point2D<int>& np)
+	void Control::position(const Point2D<float>& np)
 	{
 		pMutex.lock();
-		pLeft = np.x;
-		pTop = np.y;
-		internalCachePosSizeUpdate();
+		pPosition = np;
+		if (!pUpdateSessionRefCount)
+			internalCachePosSizeUpdateWL();
 		pMutex.unlock();
 	}
 
-	void Control::position(const int x, const int y)
+	void Control::position(const float x, const float y)
 	{
 		pMutex.lock();
-		pLeft = x;
-		pTop = y;
-		internalCachePosSizeUpdate();
+		pPosition.x = x;
+		pPosition.y = y;
+		if (!pUpdateSessionRefCount)
+			internalCachePosSizeUpdateWL();
 		pMutex.unlock();
 	}
 
@@ -79,7 +105,7 @@ namespace UI
 	{
 		pMutex.lock();
 		pVisible = v;
-		internalInvalidate();
+		invalidateWL();
 		pMutex.unlock();
 	}
 	
@@ -94,54 +120,96 @@ namespace UI
 	{
 		pMutex.lock();
 		pEnabled = v;
-		internalInvalidate();
+		invalidateWL();
 		pMutex.unlock();
 	}
 
-	bool Control::isVisible(const Rect2D<int>& limits)
+	bool Control::isVisible(const Rect2D<float>& limits)
 	{
 		MutexLocker locker(pMutex);
 		return pVisible && limits.collidedWith(pCacheBounds);
 	}
 		
 	
-	Point2D<int> Control::dimensions()
+	Point2D<float> Control::dimensions()
 	{
 		MutexLocker locker(pMutex);
-		return Point2D<int>(pWidth, pHeight);
+		return pSize;
 	}
 
 
-	void Control::dimensions(const int w, const int h)
+	void Control::dimensions(const float w, const float h)
 	{
 		pMutex.lock();
-		pWidth = w;
-		pHeight = h;
-		internalCachePosSizeUpdate();
-		internalInvalidate();
+		pSize.x = w;
+		pSize.y = h;
+		if (!pUpdateSessionRefCount)
+		{
+			internalCachePosSizeUpdateWL();
+			invalidateWL();
+		}
+		pMutex.unlock();
+	}
+
+	void Control::invalidate()
+	{
+		pMutex.lock();
+		invalidateWL();
 		pMutex.unlock();
 	}
 
 
-	void Control::invalidate()
+	void Control::invalidateWL()
 	{
-		if (!pIsInvalidated)
-		{
-			pMutex.lock();
-			internalInvalidate();
-			pMutex.unlock();
-		}
-	}
-
-
-	void Control::internalInvalidate()
-	{
-		if (!pIsInvalidated)
+		if (!pUpdateSessionRefCount && !pIsInvalidated && csDestroying != pState)
 		{
 			// TODO Invalidation code here
 			pIsInvalidated = true;
+			internalCachePosSizeUpdateWL();
 		}
 	}
+
+
+	void Control::beginUpdate()
+	{
+		pMutex.lock();
+		++pUpdateSessionRefCount;
+		pMutex.unlock();
+	}
+
+	void Control::endUpdate()
+	{
+		pMutex.lock();
+		endUpdateWL();
+		pMutex.unlock();
+	}
+
+	void Control::beginUpdateWL()
+	{
+		if (!pUpdateSessionRefCount)
+		{
+			++pUpdateSessionRefCount;
+			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+				(*i)->beginUpdate();
+		}
+		else
+			++pUpdateSessionRefCount;
+	}
+
+	void Control::endUpdateWL()
+	{
+		if (pUpdateSessionRefCount > 0 && csDestroying != pState)
+		{
+			--pUpdateSessionRefCount;
+			if (!pUpdateSessionRefCount)
+			{
+				for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+					(*i)->endUpdate();
+				invalidateWL();
+			}
+		}
+	}
+
 
 
 } // namespace UI

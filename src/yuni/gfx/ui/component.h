@@ -77,14 +77,16 @@ namespace UI
 		//! Get the state of the component
 		State state();
 
-		//! Get if the component is valid
-		virtual bool valid();
+		//! Get if the component is ready to perform operations
+		virtual bool ready();
 
 		/*!
 		** \brief Indicates that the component will be destroyed and it should not be longer considered
 		** as valid
+		**
+		** \return False if the component already noticed that it will be deleted shortly
 		*/
-		void destroying();
+		bool destroying();
 
 		//@}
 
@@ -180,6 +182,15 @@ namespace UI
 		//@}
 
 
+		//! \name Z-Order
+		//@{
+		//! Send the component to the back
+		void sendToBack();
+		//! Send the component to the front
+		void bringToFront();
+		//@}
+
+
 		//! \name Operators
 		//@{
 
@@ -190,26 +201,26 @@ namespace UI
 
 		//@}
 
-		//! \name Updates
-		//@{
-
-		void beginUpdate();
-
-		void endUpdate();
-
-		//@}
 	protected:
+		/*!
+		** \brief Invalidate the control
+		**
+		** If the control is invalidate, that means its caches are invalidate
+		** and the control should be redrawn as soon as possible
+		*/
+		virtual void invalidateWL() {}
+
 		/*!
 		** \brief Event: Called before the component is really destroyed
 		** 
 		** \return True to continue to broadcast the event to derived classes
 		*/
-		virtual bool onBeforeDestruction();
+		virtual bool onBeforeDestructionWL();
 
 		/*!
 		** \brief Broadcast the event onBeforeDestruction to all children (not thread safe)
 		*/
-		void broadcastOnBeforeDestruction();
+		void broadcastOnBeforeDestructionWL();
 
 		/*!
 		** \brief Try to find a child according its pointer address (not thread-safe)
@@ -219,7 +230,7 @@ namespace UI
 		** \param recursive True to Iterate all sub-children
 		** \return True if the component was found, false otherwise
 		*/
-		bool internalFindChildFromPtr(SharedPtr<Component>& out, const void* toFind, const bool recursive);
+		bool findChildFromPtrWL(SharedPtr<Component>& out, const void* toFind, const bool recursive);
 		/*!
 		** \brief Try to find a child according its pointer address (not thread-safe)
 		**
@@ -230,7 +241,7 @@ namespace UI
 		** \param recursive True to Iterate all sub-children
 		** \return True if the component was found, false otherwise
 		*/
-		bool internalExistsChildFromPtr(const void* toFind, const bool recursive);
+		bool existsChildFromPtrWL(const void* toFind, const bool recursive);
 
 		/*!
 		** \brief Try to find a child according its name (not thread-safe)
@@ -240,7 +251,7 @@ namespace UI
 		** \param recursive True to Iterate all sub-children
 		** \return True if the component was found, false otherwise
 		*/
-		bool internalFindChildFromString(SharedPtr<Component>& out, const String& toFind, const bool recursive);
+		bool findChildFromStringWL(SharedPtr<Component>& out, const String& toFind, const bool recursive);
 
 		/*!
 		** \brief Detach the component from its parent (not thread-safe)
@@ -248,11 +259,14 @@ namespace UI
 		** As this component will no longer belong to any another component, it won't be
 		** drawn if it is a visual component. It would be like if the component would not exist.
 		*/
-		void internalDetachFromParent();
+		void detachFromParentWL();
 
 	protected:
 		//! State of the component
 		State pState;
+
+		//! All children
+		Component::Vector pChildren;
 
 	private:
 		/*!
@@ -276,8 +290,6 @@ namespace UI
 		SharedPtr<Component> pParent;
 		//! Name of this component
 		String pName;
-		//! All children
-		Component::Vector pChildren;
 
 	}; // class Component
 
