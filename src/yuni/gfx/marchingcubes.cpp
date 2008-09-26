@@ -27,7 +27,7 @@ namespace Gfx
 		Mesh* mesh = NULL;
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
-			toVisit.Enqueue(startPoints[i]);
+			toVisit.push(startPoints[i]);
 			const Octree<float>* leaf = tree.findContainingLeaf(startPoints[i]);
 			Cube cell;
 			cell.min = leaf->boundingBox().min();
