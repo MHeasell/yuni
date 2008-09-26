@@ -53,47 +53,34 @@ namespace Event
 	class Receiver
 	{
 	public:
-		Receiver()
-			:pMutex(true /* Recursive */)
-		{}
+		//! \name Constructor & Destructor
+		//@{
+		//! Constructor
+		Receiver() : pMutex(true /* Recursive */) {}
+		//! Destructor
+		virtual ~Receiver() {disconnectAllNotifiers();}
+		//@}
 
-		virtual ~Receiver()
-		{
-			disconnectAllNotifiers();
-		}
+		/*!
+		** \brief Connect a notifier to this class
+		*/
+		void connectEventNotifier(Notifier* n);
 
-		virtual void registerEventNotifier(Notifier* n)
-		{
-			pMutex.lock();
-			pNotifiers.insert(n);
-			pMutex.unlock();
-		}
+		/*!
+		** \brief Disconnect a notifier to this class
+		*/
+		void disconnectEventNotifier(Notifier* n);
 
-		virtual void unregisterEventNotifier(Notifier* n)
-		{
-			pMutex.lock();
-			pNotifiers.erase(n);
-			pMutex.unlock();
-		}
-
-		virtual void disconnectAllNotifiers()
-		{
-			pMutex.lock();
-			internalDisconnectAllNotifiers();
-			pMutex.unlock();
-		}
+		/*!
+		** \brief Disconnect all notifiers
+		*/
+		void disconnectAllNotifiers();
 
 	protected:
-		virtual void internalDisconnectAllNotifiers()
-		{
-			if (!pNotifiers.empty())
-			{
-				std::set<Notifier*> copy(pNotifiers);
-				pNotifiers.clear();
-				for (std::set<Notifier*>::const_iterator i = copy.begin(); i != copy.end(); ++i)
-					(*i)->disconnect(this, false);
-			}
-		}
+		/*!
+		** \brief Disconnect all notifiers (thread-unsafe)
+		*/
+		void disconnectAllNotifiersWL();
 
 	protected:
 		//! Mutex
@@ -154,7 +141,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl0<C>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->registerEventNotifier(this);
+				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -247,7 +234,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl1<C, T1>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->registerEventNotifier(this);
+				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -342,7 +329,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl2<C, T1, T2>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->registerEventNotifier(this);
+				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -435,7 +422,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl3<C, T1, T2, T3>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->registerEventNotifier(this);
+				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -528,7 +515,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl4<C, T1, T2, T3, T4>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->registerEventNotifier(this);
+				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -621,7 +608,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl5<C, T1, T2, T3, T4, T5>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->registerEventNotifier(this);
+				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -714,7 +701,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl6<C, T1, T2, T3, T4, T5, T6>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->registerEventNotifier(this);
+				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -807,7 +794,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl7<C, T1, T2, T3, T4, T5, T6, T7>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->registerEventNotifier(this);
+				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -900,7 +887,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl8<C, T1, T2, T3, T4, T5, T6, T7, T8>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->registerEventNotifier(this);
+				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
