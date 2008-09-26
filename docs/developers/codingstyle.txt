@@ -89,7 +89,6 @@ NAMING CONVENTION
 * Macros and defines are all in uppercase
   All Macros defined an exported header of yuni must have the prefix YUNI_
 
-
 * The symbol to indicate a pointer or a reference are sticked to the
   type because they are part of it
   GOOD
@@ -97,6 +96,9 @@ NAMING CONVENTION
   BAD
   void foo(const String & s);
 
+* In any thread-safe class, the methods providing thread-unsafe access
+  to the instance (usually methods that are equivalent to thread-safe methods not using
+  locks on purpose) should be suffixed with "WL".
 
 
 COMMENTS
