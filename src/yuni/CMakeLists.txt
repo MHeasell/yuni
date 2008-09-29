@@ -121,7 +121,8 @@ source_group(Gfx FILES ${SRC_GFX})
 # User Interface
 set(SRC_GFX_UI
 				gfx/ui/component.h gfx/ui/component.cpp
-				gfx/ui/control.h gfx/ui/control.cpp)
+				gfx/ui/control.h gfx/ui/control.cpp gfx/ui/anchor.cpp
+				gfx/ui/controller.h gfx/ui/controller.cpp)
 source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
 
 

@@ -24,12 +24,19 @@ namespace UI
 		/*!
 		** \brief Constructor
 		*/
-		Window(const SharedPtr<Window>& prnt);
+		Window(const SharedPtr<Control>& prnt);
 
 		//! Destructor
 		~Window();
 
 		//@}
+
+		//! \name Type
+		//@{
+		//! Get the string representation of the type of component
+		virtual String type() const {return "Window";}
+		//@}
+
 
 		//! \name Caption
 		//@{
@@ -39,18 +46,13 @@ namespace UI
 		void caption(const String& c);
 		//@}
 	
-		//! \name Z-Order
-		//@{
-		virtual void sendToBack();
-		virtual void bringToFront();
-		//@}
+
+	protected:
+		virtual bool onBeforeDestructionWL();
 
 	protected:
 		//! Caption of the window
 		String pCaption;
-
-	private:
-		mutable void resetGroupParent(WindowsGroup* g);
 
 	}; // class Window
 
