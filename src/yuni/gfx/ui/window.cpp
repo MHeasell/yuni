@@ -11,7 +11,7 @@ namespace Gfx
 namespace UI
 {
 
-	Window::Window(const SharedPtr<Window>& prnt)
+	Window::Window(const SharedPtr<Control>& prnt)
 		:Control(prnt), pCaption()
 	{}
 
@@ -35,6 +35,12 @@ namespace UI
 		pCaption = c;
 		internalInvalidate();
 		pMutex.unlock();
+	}
+
+	
+	bool Window::onBeforeDestructionWL()
+	{
+		return Control::onBeforeDestructionWL();
 	}
 
 

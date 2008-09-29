@@ -10,34 +10,54 @@ namespace UI
 {
 
 
+	Control::Control()
+		:Component(), pChildren(), pParent(), pPosition(), pSize(50, 50),
+		pVisible(true), pEnabled(true),
+		pIsInvalidate(true), pAutosize(false), pUpdateSessionRefCount(0)
+	{
+		anchors[Anchor::akLeft].pOwner = this;
+		anchors[Anchor::akTop].pOwner = this;
+		anchors[Anchor::akRight].pOwner = this;
+		anchors[Anchor::akBottom].pOwner = this;
+	}
+
+
 
 	Control::~Control()
 	{
-		beginUpdateWL();
 		if (pState != csDestroying)
 			destroying();
 		// Delete all children
 		clear();
-		endUpdateWL();
 	}
 		
 	bool Control::onBeforeDestructionWL()
 	{
-		if (Component::onBeforeDestructionWL())
+		if (Control::onBeforeDestructionWL())
 		{
+			// It is better to detach first this component from its parent
+			// In this way, it prevents against unwanted operations on these children, like
+			// redrawing or input events for example.
+			detachFromParentWL();
+
 			// Prevent this control from drawing
-			pUpdateSessionRefCount = LONG_MAX;
+			pUpdateSessionRefCount = INT_MAX;
 
 			// Disconnect all anchors
 			anchors[Anchor::akLeft].resetSiblingWL();
 			anchors[Anchor::akTop].resetSiblingWL();
 			anchors[Anchor::akRight].resetSiblingWL();
 			anchors[Anchor::akBottom].resetSiblingWL();
+
+			// Keep posted all children that they will be deleted shortly
+			this->broadcastOnBeforeDestructionWL();
+
 			return true;
 		}
 		return false;
 	}
 	
+
 	void Control::internalCachePosSizeUpdateWL()
 	{
 		if (!pUpdateSessionRefCount)
@@ -45,6 +65,7 @@ namespace UI
 			pCacheBounds.reset(pPosition.x, pPosition.y, pPosition.x + pSize.x, pPosition.y + pSize.y);
 		}
 	}
+
 	
 	Rect2D<float> Control::bounds()
 	{
@@ -54,19 +75,30 @@ namespace UI
 
 	void Control::bounds(Rect2D<float> r)
 	{
+		// Ensure the point (x1,y1) is the top-left coordinate
 		r.repair();
+
+		// Lock
 		pMutex.lock();
+
+		// (x1,y1)
+		//    +------------------+
+		//    |                  |     |
+		//    |                  |   height
+		//    |                  |     |
+		//    +------------------+
+		//    <-- width -->   (x2,y2)
 		pPosition.x = r.x1;
 		pPosition.y = r.y1;
 		pSize.x = r.x2 - r.x1;
 		pSize.y = r.y2 - r.y1;
-		if (!pUpdateSessionRefCount)
-		{
-			internalCachePosSizeUpdateWL();
+		if (!pUpdateSessionRefCount) // not inside an update
 			invalidateWL();
-		}
+
+		// unlock
 		pMutex.unlock();
 	}
+
 
 	Point2D<float> Control::position()
 	{
@@ -74,21 +106,23 @@ namespace UI
 		return pPosition;
 	}
 
+
 	void Control::position(const Point2D<float>& np)
 	{
 		pMutex.lock();
 		pPosition = np;
-		if (!pUpdateSessionRefCount)
+		if (!pUpdateSessionRefCount) // Not inside an update
 			internalCachePosSizeUpdateWL();
 		pMutex.unlock();
 	}
+
 
 	void Control::position(const float x, const float y)
 	{
 		pMutex.lock();
 		pPosition.x = x;
 		pPosition.y = y;
-		if (!pUpdateSessionRefCount)
+		if (!pUpdateSessionRefCount) // not inside an update
 			internalCachePosSizeUpdateWL();
 		pMutex.unlock();
 	}
@@ -144,10 +178,7 @@ namespace UI
 		pSize.x = w;
 		pSize.y = h;
 		if (!pUpdateSessionRefCount)
-		{
-			internalCachePosSizeUpdateWL();
 			invalidateWL();
-		}
 		pMutex.unlock();
 	}
 
@@ -173,7 +204,7 @@ namespace UI
 	void Control::beginUpdate()
 	{
 		pMutex.lock();
-		++pUpdateSessionRefCount;
+		beginUpdateWL();
 		pMutex.unlock();
 	}
 
@@ -186,29 +217,452 @@ namespace UI
 
 	void Control::beginUpdateWL()
 	{
-		if (!pUpdateSessionRefCount)
+		if (csDestroying != pState) // if it will be destroyed shortly, we should abort immediately
 		{
-			++pUpdateSessionRefCount;
-			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
-				(*i)->beginUpdate();
+			if (!pUpdateSessionRefCount)
+			{
+				++pUpdateSessionRefCount;
+				// We have just started an update. We must inform all children they should start
+				// an update too
+				for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+					(*i)->beginUpdate();
+			}
+			else
+				++pUpdateSessionRefCount;
 		}
-		else
-			++pUpdateSessionRefCount;
 	}
+
 
 	void Control::endUpdateWL()
 	{
 		if (pUpdateSessionRefCount > 0 && csDestroying != pState)
 		{
+			// Dec the reference count
 			--pUpdateSessionRefCount;
+			// If equals to 0, we are back to a normal state
 			if (!pUpdateSessionRefCount)
 			{
+				// Back to a normal state, all children should end their update too
+				// before we invalidate this control
 				for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
 					(*i)->endUpdate();
+				// Finally the control must be invalidate
 				invalidateWL();
 			}
 		}
 	}
+
+
+	bool Control::autosize()
+	{
+		MutexLocker locker(pMutex);
+		return pAutosize;
+	}
+
+	void Control::autosize(const bool a)
+	{
+		pMutex.lock();
+		if (a != pAutosize)
+		{
+			pAutosize = a;
+			if (!pUpdateSessionRefCount)
+				invalidateWL();
+		}
+		pMutex.unlock();
+	}
+
+
+	void Control::sendToBack()
+	{
+		pMutex.lock();
+		if (csDestroying == pState)
+		{
+			pMutex.unlock();
+			return;
+		}
+		SharedPtr<Control> prnt(pParent);
+		pMutex.unlock();
+		if (prnt.valid())
+			prnt->internalChildSendToBack(this);
+	}
+
+
+	void Control::internalChildSendToBack(Control* c)
+	{
+		// Lock
+		MutexLocker locker(pMutex);
+		if (csDestroying == pState || NULL == c || pChildren.empty())
+			return;
+
+		// Browsing all children to find our control
+		Vector::iterator i = pChildren.begin();
+		if (i->get() == c) // The first item is our control, nothing to do
+			return;
+		++i;
+		for (; i != pChildren.end(); ++i)
+		{
+			if (i->get() == c) // It seems we've found our control
+			{
+				// Keeping a reference to our component
+				SharedPtr<Control> it(*i);
+				// Removing the child
+				pChildren.erase(i);
+				// Inserting it at the begining
+				pChildren.insert(pChildren.begin(), it);
+				// Invalidate itself
+				invalidateWL();
+				return;
+			}
+		}
+	}
+
+
+	void Control::bringToFront()
+	{
+		pMutex.lock();
+		if (csDestroying == pState)
+		{
+			pMutex.unlock();
+			return;
+		}
+		SharedPtr<Control> prnt(pParent);
+		pMutex.unlock();
+		if (prnt.valid())
+			prnt->internalChildBringToFront(this);
+	}
+
+
+	void Control::internalChildBringToFront(Control* c)
+	{
+		// Lock
+		MutexLocker locker(pMutex);
+		if (pChildren.empty() || csDestroying == pState || NULL == c)
+			return;
+
+		// Browsing all children to find our control
+		for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+		{
+			if (i->get() == c) // It seems we've found our control
+			{
+				// Keeping a reference to our component
+				SharedPtr<Control> it(*i);
+				// Removing the child
+				pChildren.erase(i);
+				// Inserting it at the end
+				pChildren.push_back(it);
+				// Invalidate itself
+				invalidateWL();
+				return;
+			}
+		}
+	}
+
+	
+	void Control::detachFromParentWL()
+	{
+		if (pParent.valid())
+		{
+			Control* prnt = pParent.get();
+			pParent.reset();
+			prnt->internalUnregisterChild(this);
+		}
+	}
+
+
+	void Control::detachFromParent()
+	{
+		if (pParent.valid()) // avoid unnecessary locks
+		{
+			pMutex.lock(); // Double check
+			detachFromParentWL();
+			pMutex.unlock();
+		}
+	}
+
+
+	bool Control::parent(const SharedPtr<Control>& newParent)
+	{
+		if (newParent == this) // A component can not be a parent for itself
+			return false;
+
+		if (newParent.null() || pState == csDestroying)
+		{
+			// If the new parent is not valid, to detach this component from the current parent
+			// will be faster
+			this->detachFromParent();
+			// An invalid parent is not managed as an error
+			return true;
+		}
+
+		// Lock
+		MutexLocker locker(pMutex);
+		if (csDestroying == pState)
+		{
+			// The component is in a destroying state. We should abort as soon as possible
+			// A new parent will be useless at this step and the better thing to do
+			// is to make sure we no longer belong to a parent
+			this->detachFromParent();
+			// The operation obviously failed
+			return false;
+		}
+		
+		if (pParent.null())
+		{
+			// This component has never been affected to a shared pointer
+			newParent->internalRegisterChild(this);
+		}
+		else
+		{
+			// We have to check if the new parent is not one of our children and if it 
+			// is not already our parent
+			if (pParent == newParent || this->existsChildFromPtrWL(newParent.get(), true))
+				return false;
+
+			SharedPtr<Control> myself;
+			if (pParent->findChildFromPtr(myself, this, false))
+			{
+				// Adding myself to the list of children of the new parent
+				newParent->internalRegisterChild(myself);
+				// Removing myself from the previous parent
+				pParent->internalUnregisterChild(this);
+			}
+			else
+				// We can safely add ourselves in the list of children of the new parent
+				newParent->internalRegisterChild(this);
+		}
+
+		// Ok, we can make have this new parent
+		pParent = newParent;
+		// Invalidate the control
+		invalidateWL();
+		
+		// Success
+		return true;
+	}
+
+
+	bool Control::existsChildFromPtrWL(const void* toFind, const bool recursive)
+	{
+		if (recursive)
+		{
+			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			{
+				if (i->get() == toFind || (*i)->existsChildFromPtr(toFind, recursive))
+					return true;
+			}
+		}
+		else
+		{
+			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			{
+				if (i->get() == toFind)
+					return true;
+			}
+		}
+		return false;
+	}
+
+
+	bool Control::findChildFromPtrWL(SharedPtr<Control>& out, const void* toFind, const bool recursive)
+	{
+		if (recursive)
+		{
+			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			{
+				if (i->get() == toFind)
+				{
+					out.reset(*i);
+					return true;
+				}
+				if ((*i)->findChildFromPtr(out, toFind, recursive))
+					return true;
+			}
+		}
+		else
+		{
+			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			{
+				if (i->get() == toFind)
+				{
+					out.reset(*i);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	
+	bool Control::findChildFromStringWL(SharedPtr<Control>& out, const String& toFind, const bool recursive)
+	{
+		if (recursive)
+		{
+			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			{
+				if ((*i)->name() == toFind)
+				{
+					out.reset(*i);
+					return true;
+				}
+				if ((*i)->findChildFromName(out, toFind, recursive))
+					return true;
+			}
+		}
+		else
+		{
+			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			{
+				if ((*i)->name() == toFind)
+				{
+					out.reset(*i);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+
+
+	bool Control::findChildFromName(SharedPtr<Control>& out, const String& toFind, const bool recursive)
+	{
+		if (toFind.empty())
+			return false;
+		MutexLocker locker(pMutex);
+		return (csDestroying != pState) && findChildFromStringWL(out, toFind, recursive);
+	}
+
+
+	bool Control::findChildFromPtr(SharedPtr<Control>& out, const void* toFind, const bool recursive)
+	{
+		if (toFind)
+		{
+			MutexLocker locker(pMutex);
+			return (csDestroying != pState) && findChildFromPtrWL(out, toFind, recursive);
+		}
+		return false;
+	}
+
+
+	bool Control::existsChildFromPtr(const void* toFind, const bool recursive)
+	{
+		if (toFind)
+		{
+			MutexLocker locker(pMutex);
+			return (csDestroying != pState) && existsChildFromPtrWL(toFind, recursive);
+		}
+		return false;
+	}
+
+
+	void Control::internalRegisterChild(Control* nc)
+	{
+		if (nc)
+		{
+			pMutex.lock();
+			pChildren.push_back(SharedPtr<Control>(nc));
+			pMutex.unlock();
+		}
+	}
+
+
+	void Control::internalRegisterChild(const SharedPtr<Control>& nc)
+	{
+		if (nc.valid())
+		{
+			pMutex.lock();
+			pChildren.push_back(nc);
+			pMutex.unlock();
+		}
+	}
+
+
+	void Control::internalUnregisterChild(Control* nc)
+	{
+		if (nc)
+		{
+			pMutex.lock();
+			if (!pChildren.empty())
+			{
+				Vector::iterator end = pChildren.end();
+				for (Vector::iterator i = pChildren.begin(); i != end; ++i)
+				{
+					if (i->get() == nc)
+					{
+						pChildren.erase(i);
+						pMutex.unlock();
+						return;
+					}
+				}
+			}
+			pMutex.unlock();
+		}
+	}
+	
+
+
+	uint32 Control::childrenCount()
+	{
+		MutexLocker locker(pMutex);
+		return (uint32) pChildren.size();
+	}
+
+
+	SharedPtr<Control> Control::child(const uint32 indx)
+	{
+		MutexLocker locker(pMutex);
+		return (csDestroying == pState || pChildren.empty() || pChildren.size() >= indx)
+			? SharedPtr<Control>()
+			: pChildren[indx];
+	}
+
+
+	SharedPtr<Control> Control::operator [] (const String& nm)
+	{
+		SharedPtr<Control> out;
+		this->findChildFromName(out, nm, false);
+		return out;
+	}
+
+
+
+	void Control::clear()
+	{
+		pMutex.lock();
+		if (!pChildren.empty())
+		{
+			// We make a copy of the list, to avoid manipulations while the list is being emptied
+			Control::Vector copy(pChildren);
+			// Empty the original one
+			pChildren.clear();
+
+			if (pState != csDestroying)
+			{
+				// Indicates we will destroy them
+				// If the state is already set to `csDestroying`, that means the method
+				// `broadcastOnBeforeDestructionWL` has already been called by `onBeforeDestructionWL()`
+				broadcastOnBeforeDestructionWL();
+				// Invalidate this component
+				invalidateWL();
+			}
+
+			// We can safely unlock here, just before all children are destroyed
+			pMutex.unlock();
+
+			// All children will really be destroyed here
+			return;
+		}
+		pMutex.unlock();
+	}
+
+
+	void Control::broadcastOnBeforeDestructionWL()
+	{
+		// Message to all children : You will be deleted shortly !
+		for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			(*i)->destroying();
+	}
+
 
 
 
