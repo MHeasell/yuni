@@ -3,6 +3,7 @@
 
 # include <vector>
 # include "point3D.h"
+# include "vector3D.h"
 # include "../misc/sharedptr.h"
 
 namespace Yuni
@@ -68,8 +69,14 @@ namespace Gfx
 		}
 
 	private:
+		//! Edges linked to this vertex
 		std::vector<SharedPtr<Edge> > pEdges;
+
+		//! Position of the vertex in space
 		Point3D<float> pPosition;
+
+		//! Normal of the vertex (useful for lighting)
+		Vector3D<float> pNormal;
 
 	}; // Vertex
 
