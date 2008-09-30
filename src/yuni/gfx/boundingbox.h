@@ -62,6 +62,18 @@ namespace Gfx
 			addPoint(tri.vertex3());
 		}
 
+		//! Is the point inside the bounding box?
+		bool contains(const Point3D<T>& point)
+		{
+			if (pMin.x > point.x || pMax.x < point.x)
+				return false;
+			if (pMin.y > point.y || pMax.y < point.y)
+				return false;
+			if (pMin.z > point.z || pMax.z < point.z)
+				return false;
+			return true;
+		}
+
 	private:
 		//! Minimum X,Y,Z coordinates of the box
 		Point3D<T> pMin;

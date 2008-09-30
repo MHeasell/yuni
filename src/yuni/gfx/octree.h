@@ -84,7 +84,11 @@ namespace Gfx
 		/*!
 		** \brief Add a single point to the  Octree
 		**
+		** The call should look like this:
+		**   myTree = myTree->addPoint(myPoint);
+		**
 		** \param p The point to add
+		** \returns The new root of the tree.
 		*/
 		Octree<T>* addPoint(const Point3D<float>& p);
 
@@ -105,6 +109,13 @@ namespace Gfx
 		void growTo(uint16 depth);
 
 		/*!
+		** \brief Print all the points contained in the tree (used for debug)
+		*/
+		std::ostream& print(std::ostream& out) const;
+
+	private:
+
+		/*!
 		** \brief Find the index of the child containing the given point
 		** \return A value in [0..7]
 		*/
@@ -118,13 +129,6 @@ namespace Gfx
 		** \return The child in any case
 		*/
 		Octree<T>* createChild(uint16 index);
-
-		/*!
-		** \brief Print all the points contained in the tree (used for debug)
-		*/
-		std::ostream& print(std::ostream& out) const;
-
-	private:
 
 		/*!
 		** \brief Split a leaf into subnodes

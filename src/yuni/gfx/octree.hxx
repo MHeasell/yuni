@@ -46,6 +46,22 @@ namespace Gfx
 	template <typename T>
 	Octree<T>* Octree<T>::addPoint(const Point3D<float>& p)
 	{
+		// If the point is outside the box (we cannot be in a downward recursive call)
+		if (!boundingBox().contains(p))
+		{
+			Point3D<float> newMin(boundingBox().min());
+			Point3D<float> newMax(boundingBox().max());
+			newMin.x *= 2.0f;
+			newMin.y *= 2.0f;
+			newMin.z *= 2.0f;
+			newMax.x *= 2.0f;
+			newMax.y *= 2.0f;
+			newMax.z *= 2.0f;
+			Octree<T>* newRoot = new Octree<T>(newMin, newMax, NULL);
+			newRoot->createChild(newRoot->getChildIndex(pCenter));
+			return newRoot->addPoint(p);
+		}
+
 		// If this is a leaf
 		if (isLeaf())
 		{
