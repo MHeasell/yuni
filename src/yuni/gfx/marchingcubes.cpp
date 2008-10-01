@@ -17,26 +17,52 @@ namespace Gfx
 		if (granularity < 0.0f)
 			return NULL;
 
+		// Get some good starting points inside the surface
 		std::vector<Point3D<float> > startPoints;
 		pSurface.insidePoints(startPoints);
+		// We need at least one. The surface is incorrect if it cannot provide any
 		if (startPoints.empty())
 			return NULL;
 
 		std::queue<Point3D<float> > toVisit;
-		Octree<float> tree;
-		Mesh* mesh = NULL;
+		std::vector<Triangle*> triangles;
+		Octree<float>* visited = new Octree<float>(cellAroundPoint(startPoints[0], granularity));
+		// Loop on the points inside the surface
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
-			toVisit.push(startPoints[i]);
-			const Octree<float>* leaf = tree.findContainingLeaf(startPoints[i]);
-			Cube cell;
-			cell.min = leaf->boundingBox().min();
-			cell.max = leaf->boundingBox().max();
-			if (!mesh)
-				mesh = polygoniseCell(isoValue, cell);
-			else
-				mesh->fusion(polygoniseCell(isoValue, cell));
+			// Add the start point to the queue
+			Point3D<float> crtPoint(startPoints[i]);
+			toVisit.push(crtPoint);
+			// Also add its cell to the octree (mark as visited)
+			visited = visited->addPoint(crtPoint);
+			// Propagate using the queue around the start point
+			while (!toVisit.empty())
+			{
+				// Remove the next point from the queue for treatment
+				crtPoint(toVisit.front());
+				toVisit.pop();
+				// Calculate the corresponding cell
+				const Octree<float>* leaf = visited->findContainingLeaf(startPoints[i]);
+				Cube cell(leaf->boundingBox().min(), leaf->boundingBox().max());
+				// Calculate if the surface crosses the cell, and create the triangles
+				unsigned int nbTrianglesCreated = polygoniseCell(isoValue, cell, triangles);
+				if (0 == nbTrianglesCreated)
+				{
+					// Add the upper neighbour cell to the queue
+					// TODO
+					continue;
+				}
+				// Add the correct neighbours depending on the case... yuk
+				// TODO
+			}
 		}
+		// This is weird, we have not found any crossing of the surface but we stopped anyway Oo
+		if (triangles.empty())
+			return NULL;
+
+		Mesh* mesh = new Mesh();
+		for (std::vector<Triangle*>::const_iterator it = triangles.begin(); it != triangles.end(); ++it)
+			mesh->addTriangle(SharedPtr<Triangle>(*it));
 		return mesh;
 	}
 
@@ -65,17 +91,26 @@ namespace Gfx
 		return code;
 	}
 
+	BoundingBox<float> MarchingCubes::cellAroundPoint(const Point3D<float>& p, float width)
+	{
+		float diff = width / 2.0f;
+		Point3D<float> min(p.x - diff, p.y - diff, p.z - diff);
+		Point3D<float> max(p.x + diff, p.y + diff, p.z + diff);
+		return BoundingBox<float>(min, max);
+	}
 
 	/*
 	** \brief Create the triangles for a single cell for a given isosurface
+	**
 	** Given a grid cell and an isolevel, calculate the triangular
 	** facets required to represent the isosurface through the cell.
 	** Return the number of triangular facets, the array "triangles"
 	** will be loaded up with the vertices at most 5 triangular facets.
-	** NULL will be returned if the cell is either totally above
+	** No triangle will be created if the cell is either totally above
 	** of totally below the isolevel.
 	*/
-	Mesh* MarchingCubes::polygoniseCell(float isoValue, const Cube& cell) const
+	unsigned int MarchingCubes::polygoniseCell(float isoValue, const Cube& cell,
+		std::vector<Triangle*>& triangles) const
 	{
 		const int edgeTable[256] =
 			{
@@ -385,14 +420,13 @@ namespace Gfx
 				Point3D<float>(cell.min.x, cell.max.y, cell.max.z),
 			};
 
-		
 		// Determine the index into the edge table which
 		// tells us which vertices are inside of the surface
 		uint8 index = cubeIndex(isoValue, cell);
 
 		// Cube is entirely in/out of the surface
 		if (edgeTable[index] == 0)
-			return NULL;
+			return 0;
 
 		float vals[8];
 		// Actually calculate the value for each of the cell's 8 points
@@ -438,16 +472,17 @@ namespace Gfx
 			vertices[11] =
 				interpolateVertex(isoValue, points[3], points[7], vals[3], vals[7]);
 
-		/* Create the mesh and the triangles */
-		Mesh* mesh = new Mesh();
+		/* Create the triangles */
+		unsigned int nbTriangles = 0;
 		for (int i = 0; triTable[index][i] != -1; i += 3)
 		{
 			Triangle* tri = new Triangle(vertices[triTable[index][i]], vertices[triTable[index][i + 1]],
 				vertices[triTable[index][i + 2]]);
-			mesh->addTriangle(SharedPtr<Triangle>(tri));
+			triangles.push_back(tri);
+			++nbTriangles;
 		}
 
-		return mesh;
+		return nbTriangles;
 	}
 
 	/*
