@@ -3,16 +3,14 @@ namespace Yuni
 {
 namespace Gfx
 {
-
-
 	template <typename T>
-	Octree<T>::Octree():
-		MaxPointsPerNode(32), pData(NULL),
-		pCenter(0, 0, 0), pBoundingBox(Point3D<float>(0.0f, 0.0f, 0.0f), Point3D<float>(0.0f, 0.0f, 0.0f))
+	Octree<T>::Octree(const BoundingBox<float>& limits, T* data = NULL):
+		MaxPointsPerNode(32), pData(data),
+		pCenter(), pBoundingBox(limits)
 	{
 		// The Center is the mean of the min and the max
-		pCenter.move(pBoundingBox.min());
-		pCenter.mean(pBoundingBox.max());
+		pCenter.move(limits.min());
+		pCenter.mean(limits.max());
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 			pChildren[i] = NULL;
 		pNbChildren = 0;
@@ -80,7 +78,8 @@ namespace Gfx
 		// Create the new child if necessary
 		if (NULL == pChildren[index])
 			createChild(index);
-		return pChildren[index]->addPoint(p);
+		pChildren[index]->addPoint(p);
+		return this;
 	}
 
 	/*!
@@ -130,6 +129,8 @@ namespace Gfx
 	template <typename T>
 	const Octree<T>* Octree<T>::findContainingLeaf(const Point3D<float>& p) const
 	{
+		if (!boundingBox().contains(p))
+			return NULL;
 		if (isLeaf())
 			return this;
 		// Find which sub-node will contain the point

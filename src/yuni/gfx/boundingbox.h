@@ -18,9 +18,10 @@ namespace Gfx
 	public:
 		//! \name Constructors and destructor
 		//@{
-		BoundingBox(): pMin(), pMax()
+		BoundingBox(): pMin(), pMax(), pCenter()
 		{}
-		BoundingBox(const Point3D<T>& min, const Point3D<T>& max): pMin(min), pMax(max)
+		BoundingBox(const Point3D<T>& min, const Point3D<T>& max):
+			pMin(min), pMax(max), pCenter(min.x + max.x / 2, min.y + max.y / 2, min.z + max.z / 2)
 		{}
 		//@}
 
@@ -33,6 +34,12 @@ namespace Gfx
 		const Point3D<T>& max() const
 		{
 			return pMax;
+		}
+
+		//! Get the center of the box
+		const Point3D<T>& center() const
+		{
+			return pCenter;
 		}
 
 		//! Add a point that can possibly grow the bounding box
@@ -63,7 +70,7 @@ namespace Gfx
 		}
 
 		//! Is the point inside the bounding box?
-		bool contains(const Point3D<T>& point)
+		bool contains(const Point3D<T>& point) const
 		{
 			if (pMin.x > point.x || pMax.x < point.x)
 				return false;
@@ -79,6 +86,8 @@ namespace Gfx
 		Point3D<T> pMin;
 		//! Maximum X,Y,Z coordinates of the box
 		Point3D<T> pMax;
+		//! Center of the box
+		Point3D<T> pCenter;
 
 	}; // class BoundingBox
 

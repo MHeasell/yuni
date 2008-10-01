@@ -59,7 +59,7 @@ namespace Gfx
 		//@{
 
 		//! Constructors
-		Octree();
+		Octree(const BoundingBox<float>& limits, T* data);
 		Octree(const Point3D<float>& min, const Point3D<float>& max, T* data);
 
 		//! Destructor
@@ -88,7 +88,7 @@ namespace Gfx
 		**   myTree = myTree->addPoint(myPoint);
 		**
 		** \param p The point to add
-		** \returns The new root of the tree.
+		** \returns The new root of the tree, or this if it has not changed
 		*/
 		Octree<T>* addPoint(const Point3D<float>& p);
 
