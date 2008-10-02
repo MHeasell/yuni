@@ -26,37 +26,38 @@ namespace Gfx
 
 		std::queue<Point3D<float> > toVisit;
 		std::vector<Triangle*> triangles;
-		Octree<float>* visited = new Octree<float>(cellAroundPoint(startPoints[0], granularity));
+		Octree<uint8>* visited = new Octree<uint8>(cellAroundPoint(startPoints[0], granularity));
 		// Loop on the points inside the surface
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
 			// Add the start point to the queue
 			Point3D<float> crtPoint(startPoints[i]);
 			toVisit.push(crtPoint);
-			// Also add its cell to the octree (mark as visited)
-			visited = visited->addPoint(crtPoint);
 			// Propagate using the queue around the start point
 			while (!toVisit.empty())
 			{
 				// Remove the next point from the queue for treatment
 				crtPoint(toVisit.front());
 				toVisit.pop();
+				// Add the point to the octree (mark as visited)
+				visited = visited->addPoint(crtPoint);
 				// Calculate the corresponding cell
-				const Octree<float>* leaf = visited->findContainingLeaf(startPoints[i]);
-				Cube cell(leaf->boundingBox().min(), leaf->boundingBox().max());
+				Octree<uint8>* leaf = visited->findContainingLeaf(startPoints[i]);
+				uint8 index = cubeIndex(isoValue, leaf->boundingBox());
+				leaf->setData(new uint8(index));
 				// Calculate if the surface crosses the cell, and create the triangles
-				unsigned int nbTrianglesCreated = polygoniseCell(isoValue, cell, triangles);
+				unsigned int nbTrianglesCreated = polygoniseCell(isoValue, leaf->boundingBox(), triangles);
 				if (0 == nbTrianglesCreated)
 				{
 					// Add the upper neighbour cell to the queue
-					// TODO
+					toVisit.push(Point3D<float>(crtPoint.x - granularity, crtPoint.y, crtPoint.z));
 					continue;
 				}
 				// Add the correct neighbours depending on the case... yuk
 				// TODO
 			}
 		}
-		// This is weird, we have not found any crossing of the surface but we stopped anyway Oo
+		// This is weird, we stopped without meshing any triangle Oo
 		if (triangles.empty())
 			return NULL;
 
@@ -67,27 +68,27 @@ namespace Gfx
 	}
 
 
-	uint8 MarchingCubes::cubeIndex(float isoValue, const Cube& cell) const
+	uint8 MarchingCubes::cubeIndex(float isoValue, const BoundingBox<float>& cell) const
 	{
-		const Point3D<float>& min = cell.min;
-		const Point3D<float>& max = cell.max;
+		const Point3D<float>& min = cell.min();
+		const Point3D<float>& max = cell.max();
 		uint8 code = 0;
 		if (isInsideSurface(min, isoValue))
-			code &= 1;
+			code |= 1;
 		if (isInsideSurface(Point3D<float>(max.x, min.y, min.z), isoValue))
-			code &= 2;
+			code |= 2;
 		if (isInsideSurface(Point3D<float>(max.x, max.y, min.z), isoValue))
-			code &= 4;
+			code |= 4;
 		if (isInsideSurface(Point3D<float>(min.x, max.y, min.z), isoValue))
-			code &= 8;
+			code |= 8;
 		if (isInsideSurface(Point3D<float>(min.x, min.y, max.z), isoValue))
-			code &= 16;
+			code |= 16;
 		if (isInsideSurface(Point3D<float>(max.x, min.y, max.z), isoValue))
-			code &= 32;
+			code |= 32;
 		if (isInsideSurface(max, isoValue))
-			code &= 64;
+			code |= 64;
 		if (isInsideSurface(Point3D<float>(min.x, max.y, max.z), isoValue))
-			code &= 128;
+			code |= 128;
 		return code;
 	}
 
@@ -109,7 +110,7 @@ namespace Gfx
 	** No triangle will be created if the cell is either totally above
 	** of totally below the isolevel.
 	*/
-	unsigned int MarchingCubes::polygoniseCell(float isoValue, const Cube& cell,
+	unsigned int MarchingCubes::polygoniseCell(float isoValue, const BoundingBox<float>& cell,
 		std::vector<Triangle*>& triangles) const
 	{
 		const int edgeTable[256] =
@@ -410,14 +411,14 @@ namespace Gfx
 		// Calculate the various points of the cube and associate them with indices
 		const Point3D<float> points[8] =
 			{
-				cell.min,
-				Point3D<float>(cell.max.x, cell.min.y, cell.min.z),
-				Point3D<float>(cell.max.x, cell.max.y, cell.min.z),
-				Point3D<float>(cell.min.x, cell.max.y, cell.min.z),
-				Point3D<float>(cell.min.x, cell.min.y, cell.max.z),
-				Point3D<float>(cell.max.x, cell.min.y, cell.max.z),
-				cell.max,
-				Point3D<float>(cell.min.x, cell.max.y, cell.max.z),
+				cell.min(),
+				Point3D<float>(cell.max().x, cell.min().y, cell.min().z),
+				Point3D<float>(cell.max().x, cell.max().y, cell.min().z),
+				Point3D<float>(cell.min().x, cell.max().y, cell.min().z),
+				Point3D<float>(cell.min().x, cell.min().y, cell.max().z),
+				Point3D<float>(cell.max().x, cell.min().y, cell.max().z),
+				cell.max(),
+				Point3D<float>(cell.min().x, cell.max().y, cell.max().z),
 			};
 
 		// Determine the index into the edge table which
