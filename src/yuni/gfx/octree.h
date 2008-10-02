@@ -67,8 +67,9 @@ namespace Gfx
 
 		//@}
 
-		//! Accessor to the value of this treenode
+		//! Accessors to the value of this treenode
 		const T& data() const { return *pData; }
+		void setData(T* data) { if (pData) delete pData; pData = data; }
 		//! Is the node a leaf ?
 		bool isLeaf() const { return 0 == pNbChildren; }
 		//! Depth of the tree
@@ -90,7 +91,7 @@ namespace Gfx
 		** \param p The point to add
 		** \returns The new root of the tree, or this if it has not changed
 		*/
-		Octree<T>* addPoint(const Point3D<float>& p);
+		Octree<T>* addPoint(const Point3D<float>& p, T* data = NULL);
 
 		/*!
 		** \brief Recursive find of the leaf whose bounding box contains a given point
@@ -98,7 +99,7 @@ namespace Gfx
 		** \param p The point
 		** \return The node found
 		*/
-		const Octree<T>* findContainingLeaf(const Point3D<float>& p) const;
+		Octree<T>* findContainingLeaf(const Point3D<float>& p);
 
 		/*!
 		** \brief Grow the tree to given depth

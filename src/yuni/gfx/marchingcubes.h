@@ -64,7 +64,7 @@ namespace Gfx
 		** \param isoValue Limit value for belonging in the surface or not
 		** \param cell The cell we want to calculate the marching cubes special case for
 		*/
-		uint8 cubeIndex(float isoValue, const Cube& cell) const;
+		uint8 cubeIndex(float isoValue, const BoundingBox<float>& cell) const;
 
 		/*!
 		** \brief Create a cube having the given point as center
@@ -83,7 +83,8 @@ namespace Gfx
 		** \param isoValue Limit value for belonging in the surface or not
 		** \param cell The cell we want to find the triangles for
 		*/
-		unsigned int polygoniseCell(float isoValue, const Cube& cell, std::vector<Triangle*>& triangles) const;
+		unsigned int polygoniseCell(float isoValue, const BoundingBox<float>& cell,
+			std::vector<Triangle*>& triangles) const;
 
 		/*
 		** \brief Interpolate the point at which the surface cuts the edge

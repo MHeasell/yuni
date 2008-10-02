@@ -34,6 +34,8 @@ namespace Gfx
 	{
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
+			if (pData)
+				delete pData;
 			if (pChildren[i])
 				delete pChildren[i];
 		}
@@ -42,7 +44,7 @@ namespace Gfx
 
 	//! \brief Add a single point to the Octree
 	template <typename T>
-	Octree<T>* Octree<T>::addPoint(const Point3D<float>& p)
+	Octree<T>* Octree<T>::addPoint(const Point3D<float>& p, T* data)
 	{
 		// If the point is outside the box (we cannot be in a downward recursive call)
 		if (!boundingBox().contains(p))
@@ -57,7 +59,7 @@ namespace Gfx
 			newMax.z *= 2.0f;
 			Octree<T>* newRoot = new Octree<T>(newMin, newMax, NULL);
 			newRoot->createChild(newRoot->getChildIndex(pCenter));
-			return newRoot->addPoint(p);
+			return newRoot->addPoint(p, data);
 		}
 
 		// If this is a leaf
@@ -78,7 +80,7 @@ namespace Gfx
 		// Create the new child if necessary
 		if (NULL == pChildren[index])
 			createChild(index);
-		pChildren[index]->addPoint(p);
+		pChildren[index]->addPoint(p, data);
 		return this;
 	}
 
@@ -127,7 +129,7 @@ namespace Gfx
 
 
 	template <typename T>
-	const Octree<T>* Octree<T>::findContainingLeaf(const Point3D<float>& p) const
+	Octree<T>* Octree<T>::findContainingLeaf(const Point3D<float>& p)
 	{
 		if (!boundingBox().contains(p))
 			return NULL;
