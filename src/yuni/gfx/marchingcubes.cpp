@@ -1,5 +1,4 @@
 
-# include <queue>
 # include "../misc/math.h"
 # include "marchingcubes.h"
 # include "octree.h"
@@ -41,32 +40,67 @@ namespace Gfx
 				toVisit.pop();
 				// Add the point to the octree (mark as visited)
 				visited = visited->addPoint(crtPoint);
-				// Calculate the corresponding cell
+				// Check if it was Calculate the corresponding cell
 				Octree<uint8>* leaf = visited->findContainingLeaf(startPoints[i]);
-				uint8 index = cubeIndex(isoValue, leaf->boundingBox());
-				leaf->setData(new uint8(index));
+				if (!leaf->data())
+				{
+					uint8 index = cubeIndex(isoValue, leaf->boundingBox());
+					leaf->setData(new uint8(index));
+				}
 				// Calculate if the surface crosses the cell, and create the triangles
 				unsigned int nbTrianglesCreated = polygoniseCell(isoValue, leaf->boundingBox(), triangles);
 				if (0 == nbTrianglesCreated)
 				{
 					// Add the upper neighbour cell to the queue
-					toVisit.push(Point3D<float>(crtPoint.x - granularity, crtPoint.y, crtPoint.z));
+					toVisit.push(Point3D<float>(crtPoint.x, crtPoint.y + granularity, crtPoint.z));
 					continue;
 				}
-				// Add the correct neighbours depending on the case... yuk
-				// TODO
+				// Add the correct neighbours depending on the case
+				AddNeighboursToQueue(crtPoint, 0, toVisit);
 			}
 		}
 		// This is weird, we stopped without meshing any triangle Oo
 		if (triangles.empty())
 			return NULL;
 
+		// Create the mesh from the triangle list
 		Mesh* mesh = new Mesh();
 		for (std::vector<Triangle*>::const_iterator it = triangles.begin(); it != triangles.end(); ++it)
 			mesh->addTriangle(SharedPtr<Triangle>(*it));
 		return mesh;
 	}
 
+	void MarchingCubes::AddNeighboursToQueue(const Point3D<float> current, int edgeCase,
+		std::queue<Point3D<float> >& pointQueue) const
+	{
+		const Point3D<float> cutNeighbours[6];
+/*
+		if (edgeTable[index] & 1)
+			;
+		if (edgeTable[index] & 2)
+			;
+		if (edgeTable[index] & 4)
+			;
+		if (edgeTable[index] & 8)
+			;
+		if (edgeTable[index] & 16)
+			;
+		if (edgeTable[index] & 32)
+			;
+		if (edgeTable[index] & 64)
+			;
+		if (edgeTable[index] & 128)
+			;
+		if (edgeTable[index] & 256)
+			;
+		if (edgeTable[index] & 512)
+			;
+		if (edgeTable[index] & 1024)
+			;
+		if (edgeTable[index] & 2048)
+			;
+*/
+	}
 
 	uint8 MarchingCubes::cubeIndex(float isoValue, const BoundingBox<float>& cell) const
 	{
@@ -113,7 +147,7 @@ namespace Gfx
 	unsigned int MarchingCubes::polygoniseCell(float isoValue, const BoundingBox<float>& cell,
 		std::vector<Triangle*>& triangles) const
 	{
-		const int edgeTable[256] =
+		static const int edgeTable[256] =
 			{
 				0x0  , 0x109, 0x203, 0x30a, 0x406, 0x50f, 0x605, 0x70c,
 				0x80c, 0x905, 0xa0f, 0xb06, 0xc0a, 0xd03, 0xe09, 0xf00,
@@ -148,7 +182,7 @@ namespace Gfx
 				0xf00, 0xe09, 0xd03, 0xc0a, 0xb06, 0xa0f, 0x905, 0x80c,
 				0x70c, 0x605, 0x50f, 0x406, 0x30a, 0x203, 0x109, 0x0
 			};
-		const int triTable[256][16] =
+		static const int triTable[256][16] =
 			{
 				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
 				{0, 8, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
