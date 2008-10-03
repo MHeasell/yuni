@@ -3,6 +3,7 @@
 # define __LIB_3D_MARCHINGCUBES_H__
 
 # include <vector>
+# include <queue>
 # include "../yuni.h"
 # include "polygonizer.h"
 # include "implicitsurface.h"
@@ -38,21 +39,6 @@ namespace Gfx
 		virtual Mesh* operator () (float isoValue, float granularity);
 
 	private:
-		//! Represents a cube as needed by the marching cubes algorithm
-		struct Cube
-		{
-			Cube(Point3D<float> mini, Point3D<float> maxi): min(mini), max(maxi) {}
-			Point3D<float> min;
-			Point3D<float> max;
-
-			Point3D<float> center() const
-			{
-				return Point3D<float>((min.x + max.x) / 2.0f,
-					(min.y + max.y) / 2.0f, (min.z + max.z) / 2.0f);
-			}
-		};
-
-	private:
 		/*!
 		** \brief Marching cubes special index [0..256] calculation
 		**
@@ -75,13 +61,24 @@ namespace Gfx
 		BoundingBox<float> cellAroundPoint(const Point3D<float>& center, float width);
 
 		/*!
+		** \brief Enqueue the neighbour cells that are also cut by the surface
+		** \param current Current center of the cell (cut by the surface)
+		** \param edgeCase Value representing which edges of the cube are intersected
+		** \param pointQueue Queue in which to enqueue the neighbour cells center
+		*/
+		void AddNeighboursToQueue(const Point3D<float> current, int edgeCase,
+			std::queue<Point3D<float> >& pointQueue) const;
+
+		/*!
 		** \brief Do the polygonization of a single cell of the grid
 		**
 		** Nothing will be done if the surface does not intersect the cell
-		** Otherwise, triangles will be computed and a mesh will be created
+		** Otherwise, triangles will be computed using marching cubes
 		**
 		** \param isoValue Limit value for belonging in the surface or not
 		** \param cell The cell we want to find the triangles for
+		** \param triangles The created triangles will be added here (at the end)
+		** \returns Number of triangles created on this cell
 		*/
 		unsigned int polygoniseCell(float isoValue, const BoundingBox<float>& cell,
 			std::vector<Triangle*>& triangles) const;
