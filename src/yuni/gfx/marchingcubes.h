@@ -39,6 +39,10 @@ namespace Gfx
 		virtual Mesh* operator () (float isoValue, float granularity);
 
 	private:
+		//! Association table between the marching cubes case index and the edge configuration
+		static const int sEdgeTable[256];
+
+	private:
 		/*!
 		** \brief Marching cubes special index [0..256] calculation
 		**
@@ -92,7 +96,6 @@ namespace Gfx
 		Point3D<float> interpolateVertex(double isolevel,
 			const Point3D<float>& p1, const Point3D<float>& p2,
 			double valp1, double valp2) const;
-
 
 	}; // Class MarchingCubes
 
