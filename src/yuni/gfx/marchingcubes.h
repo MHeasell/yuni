@@ -42,6 +42,9 @@ namespace Gfx
 		//! Association table between the marching cubes case index and the edge configuration
 		static const int sEdgeTable[256];
 
+		//! Association table between the marching cubes case index and the vertices forming the facets to create
+		static const int sTriangleTable[256][16];
+
 	private:
 		/*!
 		** \brief Marching cubes special index [0..256] calculation
@@ -65,15 +68,6 @@ namespace Gfx
 		BoundingBox<float> cellAroundPoint(const Point3D<float>& center, float width);
 
 		/*!
-		** \brief Enqueue the neighbour cells that are also cut by the surface
-		** \param current Current center of the cell (cut by the surface)
-		** \param edgeCase Value representing which edges of the cube are intersected
-		** \param pointQueue Queue in which to enqueue the neighbour cells center
-		*/
-		void AddNeighboursToQueue(const Point3D<float> current, int edgeCase,
-			std::queue<Point3D<float> >& pointQueue) const;
-
-		/*!
 		** \brief Do the polygonization of a single cell of the grid
 		**
 		** Nothing will be done if the surface does not intersect the cell
@@ -82,10 +76,11 @@ namespace Gfx
 		** \param isoValue Limit value for belonging in the surface or not
 		** \param cell The cell we want to find the triangles for
 		** \param triangles The created triangles will be added here (at the end)
+		** \param pointQueue Queue in which to enqueue the neighbour cells center
 		** \returns Number of triangles created on this cell
 		*/
 		unsigned int polygoniseCell(float isoValue, const BoundingBox<float>& cell,
-			std::vector<Triangle*>& triangles) const;
+			std::vector<Triangle*>& triangles, std::queue<Point3D<float> >& pointQueue) const;
 
 		/*
 		** \brief Interpolate the point at which the surface cuts the edge
