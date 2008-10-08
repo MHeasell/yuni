@@ -31,7 +31,7 @@ namespace Policy
 		class MutexLocker
 		{
 		public:
-			MutexLocker(Host&) {}
+			template<class C> MutexLocker(C&) {}
 			~MutexLocker() {}
 		}; // class MutexLocker
 
