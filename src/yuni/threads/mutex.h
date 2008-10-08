@@ -74,10 +74,12 @@ namespace Yuni
 
 
 	/*! \class MutexLocker
-	**  \brief Locks a mutex in the constructor and unlocks it in the destructor.
+	** \brief Locks a mutex in the constructor and unlocks it in the destructor.
 	**
-	**  This class is especially usefull for `get` accessor` and/or returned values
-	**  which have to be thread-safe.
+	** This class is especially usefull for `get` accessor` and/or returned values
+	** which have to be thread-safe.
+	**
+	** \deprecated Consider Threads::Policy::*LevelLockable<>::MutexLocker instead
 	**
 	** \code
 	**	  class Foo
