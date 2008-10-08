@@ -17,15 +17,15 @@ namespace Gfx
 			return NULL;
 
 		// Get some good starting points inside the surface
-		std::vector<Point3D<float> > startPoints;
+		PointList startPoints;
 		pSurface.insidePoints(startPoints);
 		// We need at least one. The surface is incorrect if it cannot provide any
 		if (startPoints.empty())
 			return NULL;
 
-		std::queue<Point3D<float> > toVisit;
-		std::vector<Triangle*> triangles;
-		Octree<uint8>* visited = new Octree<uint8>(cellAroundPoint(startPoints[0], granularity));
+		Queue toVisit;
+		TriangleList triangles;
+		Octree<bool>* visited = new Octree<bool>(cellAroundPoint(startPoints[0], granularity));
 		// Loop on the points inside the surface
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
@@ -40,19 +40,24 @@ namespace Gfx
 				toVisit.pop();
 				// Add the point to the octree (mark as visited)
 				visited = visited->addPoint(crtPoint);
-				// Check if it was Calculate the corresponding cell
-				Octree<uint8>* leaf = visited->findContainingLeaf(startPoints[i]);
-				if (!leaf->data())
-				{
-					uint8 index = cubeIndex(isoValue, leaf->boundingBox());
-					leaf->setData(new uint8(index));
-				}
+				// Check if it was visited and calculated already
+				Octree<bool>* leaf = visited->findContainingLeaf(crtPoint);
+				leaf->growToSize(granularity);
+				leaf = leaf->findContainingLeaf(crtPoint);
+				if (leaf->data())
+					continue;
 				// Calculate if the surface crosses the cell, and create the triangles
-				unsigned int nbTrianglesCreated =
-					polygoniseCell(isoValue, leaf->boundingBox(), triangles, toVisit);
+				unsigned int nbTrianglesCreated = polygoniseCell(isoValue, granularity,
+					leaf->boundingBox(), triangles, toVisit);
 				if (0 == nbTrianglesCreated)
+				{
 					// Add the upper neighbour cell to the queue
 					toVisit.push(Point3D<float>(crtPoint.x, crtPoint.y + granularity, crtPoint.z));
+					// Mark as visited, false
+					leaf->setData(new bool(false));
+				}
+				else
+					leaf->setData(new bool(true));
 			}
 		}
 		// This is weird, we stopped without meshing any triangle Oo
@@ -61,31 +66,29 @@ namespace Gfx
 
 		// Create the mesh from the triangle list
 		Mesh* mesh = new Mesh();
-		for (std::vector<Triangle*>::const_iterator it = triangles.begin(); it != triangles.end(); ++it)
+		for (TriangleList::const_iterator it = triangles.begin(); it != triangles.end(); ++it)
 			mesh->addTriangle(SharedPtr<Triangle>(*it));
 		return mesh;
 	}
 
-	uint8 MarchingCubes::cubeIndex(float isoValue, const BoundingBox<float>& cell) const
+	uint8 MarchingCubes::cubeIndex(float isoValue, const float vals[8]) const
 	{
-		const Point3D<float>& min = cell.min();
-		const Point3D<float>& max = cell.max();
 		uint8 code = 0;
-		if (isInsideSurface(min, isoValue))
+		if (vals[0] >= isoValue)
 			code |= 1;
-		if (isInsideSurface(Point3D<float>(max.x, min.y, min.z), isoValue))
+		if (vals[1] >= isoValue)
 			code |= 2;
-		if (isInsideSurface(Point3D<float>(max.x, max.y, min.z), isoValue))
+		if (vals[2] >= isoValue)
 			code |= 4;
-		if (isInsideSurface(Point3D<float>(min.x, max.y, min.z), isoValue))
+		if (vals[3] >= isoValue)
 			code |= 8;
-		if (isInsideSurface(Point3D<float>(min.x, min.y, max.z), isoValue))
+		if (vals[4] >= isoValue)
 			code |= 16;
-		if (isInsideSurface(Point3D<float>(max.x, min.y, max.z), isoValue))
+		if (vals[5] >= isoValue)
 			code |= 32;
-		if (isInsideSurface(max, isoValue))
+		if (vals[6] >= isoValue)
 			code |= 64;
-		if (isInsideSurface(Point3D<float>(min.x, max.y, max.z), isoValue))
+		if (vals[7] >= isoValue)
 			code |= 128;
 		return code;
 	}
@@ -108,8 +111,8 @@ namespace Gfx
 	** No triangle will be created if the cell is either totally above
 	** of totally below the isolevel.
 	*/
-	unsigned int MarchingCubes::polygoniseCell(float isoValue, const BoundingBox<float>& cell,
-		std::vector<Triangle*>& triangles, std::queue<Point3D<float> >& pointQueue) const
+	unsigned int MarchingCubes::polygoniseCell(float isoValue, float width,
+		const BoundingBox<float>& cell, TriangleList& triangles, Queue& pointQueue) const
 	{
 		// Calculate the various points of the cube and associate them with indices
 		const Point3D<float> points[8] =
@@ -124,60 +127,142 @@ namespace Gfx
 				Point3D<float>(cell.min().x, cell.max().y, cell.max().z),
 			};
 
+		float vals[8];
+		// Actually calculate the value for each of the cell's 8 points
+		for (unsigned int i = 0; i < 8; ++i)
+			vals[i] = pSurface(points[i]);
+
 		// Determine the index into the edge table which
 		// tells us which vertices are inside of the surface
-		uint8 index = cubeIndex(isoValue, cell);
+		uint8 index = cubeIndex(isoValue, vals);
 
 		// Cube is entirely in/out of the surface
 		unsigned int edgeCase = sEdgeTable[index];
 		if (edgeCase == 0)
 			return 0;
 
-		float vals[8];
-		// Actually calculate the value for each of the cell's 8 points
-		for (unsigned int i = 0; i < 8; ++i)
-			vals[i] = pSurface(points[i]);
+		// Depending on this cube's configuration, we can deduce which neighbour cubes
+		// are cut by the surface.
+		bool neighbourCubesCut[8] =
+			{
+				// -x    +x     -y     +y     -z     +z
+				false, false, false, false, false, false
+			};
 
 		// Find the vertices where the surface intersects the cube
 		Point3D<float> vertices[12];
 		if (edgeCase & 1)
-			vertices[0] =
-				interpolateVertex(isoValue, points[0], points[1], vals[0], vals[1]);
+		{
+			vertices[0] = interpolateVertex(isoValue, points[0], points[1], vals[0], vals[1]);
+			// -y
+			neighbourCubesCut[2] = true;
+			// -z
+			neighbourCubesCut[4] = true;
+		}
 		if (edgeCase & 2)
-			vertices[1] =
-				interpolateVertex(isoValue, points[1], points[2], vals[1], vals[2]);
+		{
+			vertices[1] = interpolateVertex(isoValue, points[1], points[2], vals[1], vals[2]);
+			// +x
+			neighbourCubesCut[1] = true;
+			// -z
+			neighbourCubesCut[4] = true;
+		}
 		if (edgeCase & 4)
-			vertices[2] =
-				interpolateVertex(isoValue, points[2], points[3], vals[2], vals[3]);
+		{
+			vertices[2] = interpolateVertex(isoValue, points[2], points[3], vals[2], vals[3]);
+			// +y
+			neighbourCubesCut[3] = true;
+			// -z
+			neighbourCubesCut[4] = true;
+		}
 		if (edgeCase & 8)
-			vertices[3] =
-				interpolateVertex(isoValue, points[3], points[0], vals[3], vals[0]);
+		{
+			vertices[3] = interpolateVertex(isoValue, points[3], points[0], vals[3], vals[0]);
+			// -x
+			neighbourCubesCut[0] = true;
+			// -z
+			neighbourCubesCut[4] = true;
+		}
 		if (edgeCase & 16)
-			vertices[4] =
-				interpolateVertex(isoValue, points[4], points[5], vals[4], vals[5]);
+		{
+			vertices[4] = interpolateVertex(isoValue, points[4], points[5], vals[4], vals[5]);
+			// -y
+			neighbourCubesCut[2] = true;
+			// +z
+			neighbourCubesCut[5] = true;
+		}
 		if (edgeCase & 32)
-			vertices[5] =
-				interpolateVertex(isoValue, points[5], points[6], vals[5], vals[6]);
+		{
+			vertices[5] = interpolateVertex(isoValue, points[5], points[6], vals[5], vals[6]);
+			// +x
+			neighbourCubesCut[1] = true;
+			// +z
+			neighbourCubesCut[5] = true;
+		}
 		if (edgeCase & 64)
-			vertices[6] =
-				interpolateVertex(isoValue, points[6], points[7], vals[6], vals[7]);
+		{
+			vertices[6] = interpolateVertex(isoValue, points[6], points[7], vals[6], vals[7]);
+			// +y
+			neighbourCubesCut[3] = true;
+			// +z
+			neighbourCubesCut[5] = true;
+		}
 		if (edgeCase & 128)
-			vertices[7] =
-				interpolateVertex(isoValue, points[7], points[4], vals[7], vals[4]);
+		{
+			vertices[7] = interpolateVertex(isoValue, points[7], points[4], vals[7], vals[4]);
+			// -x
+			neighbourCubesCut[0] = true;
+			// +z
+			neighbourCubesCut[5] = true;
+		}
 		if (edgeCase & 256)
-			vertices[8] =
-				interpolateVertex(isoValue, points[0], points[4], vals[0], vals[4]);
+		{
+			vertices[8] = interpolateVertex(isoValue, points[0], points[4], vals[0], vals[4]);
+			// -x
+			neighbourCubesCut[0] = true;
+			// -y
+			neighbourCubesCut[2] = true;
+		}
 		if (edgeCase & 512)
-			vertices[9] =
-				interpolateVertex(isoValue, points[1], points[5], vals[1], vals[5]);
+		{
+			vertices[9] = interpolateVertex(isoValue, points[1], points[5], vals[1], vals[5]);
+			// +x
+			neighbourCubesCut[1] = true;
+			// -y
+			neighbourCubesCut[2] = true;
+		}
 		if (edgeCase & 1024)
-			vertices[10] =
-				interpolateVertex(isoValue, points[2], points[6], vals[2], vals[6]);
+		{
+			vertices[10] = interpolateVertex(isoValue, points[2], points[6], vals[2], vals[6]);
+			// +x
+			neighbourCubesCut[1] = true;
+			// +y
+			neighbourCubesCut[3] = true;
+		}
 		if (edgeCase & 2048)
-			vertices[11] =
-				interpolateVertex(isoValue, points[3], points[7], vals[3], vals[7]);
+		{
+			vertices[11] = interpolateVertex(isoValue, points[3], points[7], vals[3], vals[7]);
+			// -x
+			neighbourCubesCut[0] = true;
+			// +y
+			neighbourCubesCut[3] = true;
+		}
 
-		/* Create the triangles */
+		// Enqueue the neighbour cubes that are cut by the surface
+		if (neighbourCubesCut[0])
+			pointQueue.push(Point3D<float>(cell.center().x - width, cell.center().y, cell.center().z));
+		if (neighbourCubesCut[1])
+			pointQueue.push(Point3D<float>(cell.center().x + width, cell.center().y, cell.center().z));
+		if (neighbourCubesCut[2])
+			pointQueue.push(Point3D<float>(cell.center().x, cell.center().y - width, cell.center().z));
+		if (neighbourCubesCut[3])
+			pointQueue.push(Point3D<float>(cell.center().x, cell.center().y + width, cell.center().z));
+		if (neighbourCubesCut[4])
+			pointQueue.push(Point3D<float>(cell.center().x, cell.center().y, cell.center().z - width));
+		if (neighbourCubesCut[5])
+			pointQueue.push(Point3D<float>(cell.center().x, cell.center().y, cell.center().z + width));
+
+		// Create the triangles
 		unsigned int nbTriangles = 0;
 		for (int i = 0; sTriangleTable[index][i] != -1; i += 3)
 		{
@@ -203,11 +288,11 @@ namespace Gfx
 		double mu;
 
 		if (Yuni::Math::Abs(isoValue - valp1) < 0.00001)
-			return(p1);
+			return p1;
 		if (Yuni::Math::Abs(isoValue - valp2) < 0.00001)
-			return(p2);
+			return p2;
 		if (Yuni::Math::Abs(valp1 - valp2) < 0.00001)
-			return(p1);
+			return p1;
 		mu = (isoValue - valp1) / (valp2 - valp1);
 
 		return Point3D<float>(p1.x + mu * (p2.x - p1.x), p1.y + mu * (p2.y - p1.y), p1.z + mu * (p2.z - p1.z));

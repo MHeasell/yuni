@@ -68,7 +68,7 @@ namespace Gfx
 		//@}
 
 		//! Accessors to the value of this treenode
-		const T& data() const { return *pData; }
+		const T* data() const { return pData; }
 		void setData(T* data) { if (pData) delete pData; pData = data; }
 		//! Is the node a leaf ?
 		bool isLeaf() const { return 0 == pNbChildren; }
@@ -107,7 +107,15 @@ namespace Gfx
 		** Only the branches containing points will be grown
 		** This is a recursive method
 		*/
-		void growTo(uint16 depth);
+		void growToDepth(uint16 depth);
+
+		/*!
+		** \brief Grow the tree to have leaves of the given size
+		**
+		** Only the branches containing points will be grown
+		** This is a recursive method
+		*/
+		void growToSize(float size);
 
 		/*!
 		** \brief Print all the points contained in the tree (used for debug)
