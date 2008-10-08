@@ -35,7 +35,7 @@ namespace Yuni
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		Mutex(const bool recursive = false);
+		Mutex(const bool recursive = true);
 		//! Destructor
 		~Mutex() {pthread_mutex_destroy(&pPthreadLock);}
 		//@}
