@@ -48,7 +48,7 @@ namespace Gfx
 					continue;
 				// Calculate if the surface crosses the cell, and create the triangles
 				unsigned int nbTrianglesCreated = polygoniseCell(isoValue, granularity,
-					leaf->boundingBox(), triangles, toVisit);
+					cellAroundPoint(crtPoint, granularity), triangles, toVisit);
 				if (0 == nbTrianglesCreated)
 				{
 					// Add the upper neighbour cell to the queue
