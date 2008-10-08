@@ -25,7 +25,7 @@ namespace UI
 
 	bool Component::destroying()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return onBeforeDestructionWL();
 	}
 
@@ -47,7 +47,7 @@ namespace UI
 
 	String Component::name()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return pName;
 	}
 
@@ -62,14 +62,14 @@ namespace UI
 
 	Component::State Component::state()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return pState;
 	}
 
 
 	bool Component::ready()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return (pState == csReady);
 	}
 

@@ -69,7 +69,7 @@ namespace UI
 	
 	Rect2D<float> Control::bounds()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return pCacheBounds;
 	}
 
@@ -102,7 +102,7 @@ namespace UI
 
 	Point2D<float> Control::position()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return pPosition;
 	}
 
@@ -130,7 +130,7 @@ namespace UI
 	
 	bool Control::visible()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return pVisible;
 	}
 
@@ -145,7 +145,7 @@ namespace UI
 	
 	bool Control::enabled()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return pEnabled;
 	}
 
@@ -160,14 +160,14 @@ namespace UI
 
 	bool Control::isVisible(const Rect2D<float>& limits)
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return pVisible && limits.collidedWith(pCacheBounds);
 	}
 		
 	
 	Point2D<float> Control::dimensions()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return pSize;
 	}
 
@@ -255,7 +255,7 @@ namespace UI
 
 	bool Control::autosize()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return pAutosize;
 	}
 
@@ -290,7 +290,7 @@ namespace UI
 	void Control::internalChildSendToBack(Control* c)
 	{
 		// Lock
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		if (csDestroying == pState || NULL == c || pChildren.empty())
 			return;
 
@@ -335,7 +335,7 @@ namespace UI
 	void Control::internalChildBringToFront(Control* c)
 	{
 		// Lock
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		if (pChildren.empty() || csDestroying == pState || NULL == c)
 			return;
 
@@ -395,7 +395,7 @@ namespace UI
 		}
 
 		// Lock
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		if (csDestroying == pState)
 		{
 			// The component is in a destroying state. We should abort as soon as possible
@@ -528,7 +528,7 @@ namespace UI
 	{
 		if (toFind.empty())
 			return false;
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return (csDestroying != pState) && findChildFromStringWL(out, toFind, recursive);
 	}
 
@@ -537,7 +537,7 @@ namespace UI
 	{
 		if (toFind)
 		{
-			MutexLocker locker(pMutex);
+			MutexLocker locker(*this);
 			return (csDestroying != pState) && findChildFromPtrWL(out, toFind, recursive);
 		}
 		return false;
@@ -548,7 +548,7 @@ namespace UI
 	{
 		if (toFind)
 		{
-			MutexLocker locker(pMutex);
+			MutexLocker locker(*this);
 			return (csDestroying != pState) && existsChildFromPtrWL(toFind, recursive);
 		}
 		return false;
@@ -603,14 +603,14 @@ namespace UI
 
 	uint32 Control::childrenCount()
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return (uint32) pChildren.size();
 	}
 
 
 	SharedPtr<Control> Control::child(const uint32 indx)
 	{
-		MutexLocker locker(pMutex);
+		MutexLocker locker(*this);
 		return (csDestroying == pState || pChildren.empty() || pChildren.size() >= indx)
 			? SharedPtr<Control>()
 			: pChildren[indx];
