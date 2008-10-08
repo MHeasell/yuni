@@ -15,7 +15,7 @@ namespace UI
 
 	SharedPtr<Control> Control::Anchor::sibling()
 	{
-		MutexLocker locker(pOwner->pMutex);
+		Control::MutexLocker locker(*pOwner);
 		return pSibling;
 	}
 
@@ -33,20 +33,20 @@ namespace UI
 
 	std::pair<float, Unit> Control::Anchor::borderSpace()
 	{
-		MutexLocker locker(pOwner->pMutex);
+		Control::MutexLocker locker(*pOwner);
 		return std::pair<float, Unit>(pValue, pUnit);
 	}
 
 	Unit Control::Anchor::borderSpaceUnit()
 	{
-		MutexLocker locker(pOwner->pMutex);
+		Control::MutexLocker locker(*pOwner);
 		return pUnit;
 	}
 
 
 	float Control::Anchor::borderSpaceValue()
 	{
-		MutexLocker locker(pOwner->pMutex);
+		Control::MutexLocker locker(*pOwner);
 		return pValue;
 	}
 

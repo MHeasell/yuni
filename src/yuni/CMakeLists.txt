@@ -79,7 +79,7 @@ source_group(System\\Devices FILES ${SRC_DEVICES})
 
 # Threads
 set(SRC_THREADS
-				threads/mutex.h threads/mutex.cpp
+				threads/mutex.h threads/mutex.cpp threads/policies.h
 				threads/abstract.thread.h threads/abstract.thread.cpp
 				threads/thread.h threads/thread.cpp
 				threads/timer.h threads/timer.cpp

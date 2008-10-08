@@ -1,6 +1,7 @@
 #ifndef __YUNI_MISC_EVENTS_PRIVATE_H__
 # define __YUNI_MISC_EVENTS_PRIVATE_H__
 
+# include "sharedptr.h"
 
 
 namespace Yuni

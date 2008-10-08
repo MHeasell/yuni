@@ -6,7 +6,7 @@
 # include <list>
 # include <set>
 # include "sharedptr.h"
-# include "../threads/mutex.h"
+# include "../threads/policies.h"
 
 
 
@@ -25,10 +25,14 @@ namespace Event
 	/*!
 	** \brief Notifier
 	*/
-	class Notifier
+	class Notifier : public Threads::Policy::ObjectLevelLockable<Notifier>
 	{
 	public:
-		Notifier() : pMutex(), pBroadcastDisconnection(true) {}
+		Notifier()
+			:Threads::Policy::ObjectLevelLockable<Notifier>(),
+			pBroadcastDisconnection(true)
+		{}
+		
 		virtual ~Notifier() {}
 		
 		virtual void disconnect(const void* cl, const bool broadcast = true) = 0;
@@ -39,8 +43,6 @@ namespace Event
 		bool isDisconnectionBroadcastAllowed() const {return pBroadcastDisconnection;}
 
 	protected:
-		//! Mutex
-		Mutex pMutex;
 		bool pBroadcastDisconnection;
 
 	}; // class Notifier
@@ -50,13 +52,13 @@ namespace Event
 	/*!
 	** \brief Receiver
 	*/
-	class Receiver
+	class Receiver : public Threads::Policy::ObjectLevelLockable<Receiver>
 	{
 	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Constructor
-		Receiver() : pMutex(true /* Recursive */) {}
+		Receiver() :Threads::Policy::ObjectLevelLockable<Receiver>() {}
 		//! Destructor
 		virtual ~Receiver() {disconnectAllNotifiers();}
 		//@}
@@ -81,10 +83,6 @@ namespace Event
 		** \brief Disconnect all notifiers (thread-unsafe)
 		*/
 		void disconnectAllNotifiersWL();
-
-	protected:
-		//! Mutex
-		Mutex pMutex;
 
 	private:
 		//! All notifiers
