@@ -114,7 +114,7 @@ namespace Gfx
 	** This is a recursive method
 	*/
 	template <typename T>
-	void Octree<T>::growTo(uint16 depth)
+	void Octree<T>::growToDepth(uint16 depth)
 	{
 		if (depth > 0)
 		{
@@ -122,9 +122,29 @@ namespace Gfx
 			split();
 			// Loop on all children
 			for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
-				// Recursive call
-				pChildren[i]->growTo(depth - 1);
+				if (pChildren[i])
+					// Recursive call
+					pChildren[i]->growToDepth(depth - 1);
 		}
+	}
+
+	/*!
+	** \brief Grow the tree to have leaves of the given size
+	**
+	** Only the branches containing points will be grown
+	** This is a recursive method
+	*/
+	template <typename T>
+	void Octree<T>::growToSize(float size)
+	{
+		if (isLeaf() && boundingBox().max().x - boundingBox().min().x > size)
+			// Split the node if it contains points
+			split();
+		// Loop on all children
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+			if (pChildren[i])
+				// Recursive call
+				pChildren[i]->growToSize(size);
 	}
 
 

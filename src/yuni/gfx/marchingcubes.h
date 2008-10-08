@@ -39,6 +39,14 @@ namespace Gfx
 		virtual Mesh* operator () (float isoValue, float granularity);
 
 	private:
+		//! \name Typedefs
+		//@{
+		typedef std::vector<Point3D<float> > PointList;
+		typedef std::vector<Triangle*> TriangleList;
+		typedef std::queue<Point3D<float> > Queue;
+		//@}
+
+	private:
 		//! Association table between the marching cubes case index and the edge configuration
 		static const int sEdgeTable[256];
 
@@ -55,14 +63,14 @@ namespace Gfx
 		** Calculate this code for a cube.
 		**
 		** \param isoValue Limit value for belonging in the surface or not
-		** \param cell The cell we want to calculate the marching cubes special case for
+		** \param vals The calculated values of the 8 vertices of the cell
 		*/
-		uint8 cubeIndex(float isoValue, const BoundingBox<float>& cell) const;
+		uint8 cubeIndex(float isoValue, const float vals[8]) const;
 
 		/*!
 		** \brief Create a cube having the given point as center
 		** \param center Point to use as center
-		** \param width Size of the edges of the cube
+		** \param width Size of the cell's edges. Manages mesh precision
 		** \returns A newly created cell with the given center and width
 		*/
 		BoundingBox<float> cellAroundPoint(const Point3D<float>& center, float width);
@@ -74,13 +82,14 @@ namespace Gfx
 		** Otherwise, triangles will be computed using marching cubes
 		**
 		** \param isoValue Limit value for belonging in the surface or not
+		** \param width Size of the cell's sides. Manages mesh precision
 		** \param cell The cell we want to find the triangles for
 		** \param triangles The created triangles will be added here (at the end)
 		** \param pointQueue Queue in which to enqueue the neighbour cells center
 		** \returns Number of triangles created on this cell
 		*/
-		unsigned int polygoniseCell(float isoValue, const BoundingBox<float>& cell,
-			std::vector<Triangle*>& triangles, std::queue<Point3D<float> >& pointQueue) const;
+		unsigned int polygoniseCell(float isoValue, float width, const BoundingBox<float>& cell,
+			TriangleList& triangles, Queue& pointQueue) const;
 
 		/*
 		** \brief Interpolate the point at which the surface cuts the edge

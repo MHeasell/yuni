@@ -37,6 +37,21 @@ namespace Gfx
 		const Vertex& vertex3() const { return pVertex3; }
 		//@}
 
+		/*!
+		** \brief Print the triangle
+		**
+		** \param[in,out] out An output stream
+		** \return The output stream `out`
+		*/
+		std::ostream& print(std::ostream& out) const
+		{
+			out << "Triangle with vertices at:" << std::endl;
+			out << pVertex1.position() << std::endl;
+			out << pVertex2.position() << std::endl;
+			out << pVertex3.position() << std::endl;
+			return out;
+		}
+
 	private:
 		//! Vertices
 		Vertex pVertex1;

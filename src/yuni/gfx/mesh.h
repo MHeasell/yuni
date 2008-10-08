@@ -35,6 +35,20 @@ namespace Gfx
 			pTriangles.push_back(tri);
 		}
 
+		/*!
+		** \brief Print the mesh
+		**
+		** \param[in,out] out An output stream
+		** \return The output stream `out`
+		*/
+		std::ostream& print(std::ostream& out) const
+		{
+			out << "Mesh containing " << pTriangles.size() << " triangles." << std::endl;
+			for (TriangleList::const_iterator it = pTriangles.begin(); it != pTriangles.end(); ++it)
+				(*it)->print(out);
+			return out;
+		}
+
 	protected:
 		typedef std::vector<SharedPtr<Triangle> > TriangleList;
 
