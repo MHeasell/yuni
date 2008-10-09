@@ -22,6 +22,10 @@ Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 # The Yuni Library
 #
 
+set(SRC_POLICIES
+				policies/threads.h)
+source_group(Policies FILES ${SRC_POLICIES})
+
 # Misc
 set(SRC_MISC
 				misc/string.h misc/string.cpp
@@ -79,7 +83,7 @@ source_group(System\\Devices FILES ${SRC_DEVICES})
 
 # Threads
 set(SRC_THREADS
-				threads/mutex.h threads/mutex.cpp threads/policies.h
+				threads/mutex.h threads/mutex.cpp
 				threads/abstract.thread.h threads/abstract.thread.cpp
 				threads/thread.h threads/thread.cpp
 				threads/timer.h threads/timer.cpp
@@ -148,7 +152,7 @@ Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Add_Library(yuni-static STATIC
-				${SRC_MISC}
+				${SRC_POLICIES} ${SRC_MISC}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}
