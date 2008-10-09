@@ -38,57 +38,52 @@ namespace Gfx
 				// Remove the next point from the queue for treatment
 				crtPoint(toVisit.front());
 				toVisit.pop();
+				// If already visited, do not treat it again
+				if (visited->contains(crtPoint))
+					continue;
 				// Add the point to the octree (mark as visited)
 				visited = visited->addPoint(crtPoint);
-				// Check if it was visited and calculated already
-				Octree<bool>* leaf = visited->findContainingLeaf(crtPoint);
-				leaf->growToSize(granularity);
-				leaf = leaf->findContainingLeaf(crtPoint);
-				if (leaf->data())
-					continue;
 				// Calculate if the surface crosses the cell, and create the triangles
 				unsigned int nbTrianglesCreated = polygoniseCell(isoValue, granularity,
 					cellAroundPoint(crtPoint, granularity), triangles, toVisit);
 				if (0 == nbTrianglesCreated)
-				{
 					// Add the upper neighbour cell to the queue
 					toVisit.push(Point3D<float>(crtPoint.x, crtPoint.y + granularity, crtPoint.z));
-					// Mark as visited, false
-					leaf->setData(new bool(false));
-				}
-				else
-					leaf->setData(new bool(true));
 			}
 		}
 		// This is weird, we stopped without meshing any triangle Oo
 		if (triangles.empty())
+		{
+			delete visited;
 			return NULL;
+		}
 
 		// Create the mesh from the triangle list
 		Mesh* mesh = new Mesh();
 		for (TriangleList::const_iterator it = triangles.begin(); it != triangles.end(); ++it)
 			mesh->addTriangle(SharedPtr<Triangle>(*it));
+		delete visited;
 		return mesh;
 	}
 
 	uint8 MarchingCubes::cubeIndex(float isoValue, const float vals[8]) const
 	{
 		uint8 code = 0;
-		if (vals[0] >= isoValue)
+		if (vals[0] > isoValue)
 			code |= 1;
-		if (vals[1] >= isoValue)
+		if (vals[1] > isoValue)
 			code |= 2;
-		if (vals[2] >= isoValue)
+		if (vals[2] > isoValue)
 			code |= 4;
-		if (vals[3] >= isoValue)
+		if (vals[3] > isoValue)
 			code |= 8;
-		if (vals[4] >= isoValue)
+		if (vals[4] > isoValue)
 			code |= 16;
-		if (vals[5] >= isoValue)
+		if (vals[5] > isoValue)
 			code |= 32;
-		if (vals[6] >= isoValue)
+		if (vals[6] > isoValue)
 			code |= 64;
-		if (vals[7] >= isoValue)
+		if (vals[7] > isoValue)
 			code |= 128;
 		return code;
 	}

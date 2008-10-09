@@ -11,6 +11,7 @@
 
 
 # define YUNI_OCTREE_MAX_CHILDREN  8
+# define YUNI_OCTREE_MAX_POINTS_PER_NODE 1
 
 namespace Yuni
 {
@@ -45,7 +46,7 @@ namespace Gfx
 	**    7 : X >= Xc, Y >= Yc, Z >= Zc
 	** \endcode
 	**
-	** \tparam T 
+	** \tparam T
 	*/
 	template <typename T>
 	class Octree
@@ -100,6 +101,9 @@ namespace Gfx
 		** \return The node found
 		*/
 		Octree<T>* findContainingLeaf(const Point3D<float>& p);
+
+		//! Tells if the point already in the tree
+		bool contains(const Point3D<float>& p) const;
 
 		/*!
 		** \brief Grow the tree to given depth

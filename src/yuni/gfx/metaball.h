@@ -77,7 +77,8 @@ namespace Gfx
 			float r2 = pow(pCenter.x - p.x, 2);
 			r2 += pow(pCenter.y - p.y, 2);
 			r2 += pow(pCenter.z - p.z, 2);
-			return 1.0f / r2;
+			return r2;
+//			return 1.0f / r2;
 		}
 
 		/*!
