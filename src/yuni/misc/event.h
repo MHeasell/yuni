@@ -6,7 +6,7 @@
 # include <list>
 # include <set>
 # include "sharedptr.h"
-# include "../threads/policies.h"
+# include "../policies/threads.h"
 
 
 
@@ -23,17 +23,23 @@ namespace Event
 
 
 	/*!
-	** \brief Notifier
+	** \brief Base class for Notifiers
 	*/
-	class Notifier : public Threads::Policy::ObjectLevelLockable<Notifier>
+	class Notifier : public Policy::ObjectLevelLockable<Notifier>
 	{
 	public:
+		//! \name Constructor & Destructor
+		//@{
+
+		//! Default constructor
 		Notifier()
-			:Threads::Policy::ObjectLevelLockable<Notifier>(),
-			pBroadcastDisconnection(true)
+			:Policy::ObjectLevelLockable<Notifier>(), pBroadcastDisconnection(true)
 		{}
 		
+		//! Destructor
 		virtual ~Notifier() {}
+
+		//@}
 		
 		virtual void disconnect(const void* cl, const bool broadcast = true) = 0;
 
@@ -50,15 +56,15 @@ namespace Event
 
 
 	/*!
-	** \brief Receiver
+	** \brief Provide the ability to receive events
 	*/
-	class Receiver : public Threads::Policy::ObjectLevelLockable<Receiver>
+	class Receiver : public Policy::ObjectLevelLockable<Receiver>
 	{
 	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Constructor
-		Receiver() :Threads::Policy::ObjectLevelLockable<Receiver>() {}
+		Receiver() :Policy::ObjectLevelLockable<Receiver>() {}
 		//! Destructor
 		virtual ~Receiver() {disconnectAllNotifiers();}
 		//@}
@@ -139,7 +145,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl0<C>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
+				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -232,7 +238,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl1<C, T1>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
+				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -327,7 +333,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl2<C, T1, T2>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
+				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -420,7 +426,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl3<C, T1, T2, T3>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
+				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -513,7 +519,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl4<C, T1, T2, T3, T4>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
+				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -606,7 +612,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl5<C, T1, T2, T3, T4, T5>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
+				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -699,7 +705,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl6<C, T1, T2, T3, T4, T5, T6>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
+				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -792,7 +798,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl7<C, T1, T2, T3, T4, T5, T6, T7>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
+				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}
@@ -885,7 +891,7 @@ namespace Event
 			if (cl)
 			{
 				pReceiverList.push_back(new Private::Events::ItTmpl8<C, T1, T2, T3, T4, T5, T6, T7, T8>(this, cl, fn));
-				(dynamic_cast<Receiver*>(cl))->connectEventNotifier(this);
+				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
 			}
 			pMutex.unlock();
 		}

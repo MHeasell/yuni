@@ -1,16 +1,14 @@
-#ifndef __YUNI_THREADS_POLICIES_H__
-# define __YUNI_THREADS_POLICIES_H__
+#ifndef __YUNI_POLICIES_THREADS_H__
+# define __YUNI_POLICIES_THREADS_H__
 
 # ifdef YUNI_WINDOWS
 #	include "../system/windows.hdr.h"
 # endif
-# include "mutex.h"
+# include "../threads/mutex.h"
 
 
 
 namespace Yuni
-{
-namespace Threads
 {
 namespace Policy
 {
@@ -126,8 +124,7 @@ namespace Policy
 
 
 
-} // namespace Models
-} // namespace Threads
+} // namespace Policy
 } // namespace Yuni
 
-#endif // __YUNI_THREADS_POLICIES_H__
+#endif // __YUNI_POLICIES_THREADS_H__
