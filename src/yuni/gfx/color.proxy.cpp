@@ -8,6 +8,8 @@
 
 namespace Yuni
 {
+namespace Private
+{
 namespace Gfx
 {
 namespace Color
@@ -21,27 +23,27 @@ namespace Proxy
 	 */
 
 	template<>
-	std::ostream& Streamer< RGBA<uint8> >::toOStream(std::ostream& out, const RGBA<uint8>& th)
+	std::ostream& Streamer< Yuni::Gfx::Color::RGBA<uint8> >::toOStream(std::ostream& out, const Yuni::Gfx::Color::RGBA<uint8>& th)
 	{
 		out << "r:" << (int)th.red << ",g:" << (int)th.green << ",b:" << (int)th.blue << ",a:" << (int)th.alpha;
 		return out;
 	}
 
 	template<>
-	std::ostream& Streamer< RGB<uint8> >::toOStream(std::ostream& out, const RGB<uint8>& th)
+	std::ostream& Streamer< Yuni::Gfx::Color::RGB<uint8> >::toOStream(std::ostream& out, const Yuni::Gfx::Color::RGB<uint8>& th)
 	{
 		out << "r:" << (int)th.red << ",g:" << (int)th.green << ",b:" << (int)th.blue;
 		return out;
 	}
 
 	template<>
-	String Streamer< RGBA<uint8> >::toString(const RGBA<uint8>& th)
+	String Streamer< Yuni::Gfx::Color::RGBA<uint8> >::toString(const Yuni::Gfx::Color::RGBA<uint8>& th)
 	{
 		return String() << "r:" << (int)th.red << ",g:" << (int)th.green << ",b:" << (int)th.blue << ",a:" << (int)th.alpha;
 	}
 
 	template<>
-	String Streamer< RGB<uint8> >::toString(const RGB<uint8>& th)
+	String Streamer< Yuni::Gfx::Color::RGB<uint8> >::toString(const Yuni::Gfx::Color::RGB<uint8>& th)
 	{
 		return String() << "r:" << (int)th.red << ",g:" << (int)th.green << ",b:" << (int)th.blue;
 	}
@@ -61,7 +63,7 @@ namespace Proxy
 	 */
 
 	template<>
-	RGBA<uint8>& Values< RGBA<uint8>, uint8 >::Assign(RGBA<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3, const uint8& a4)
+	Yuni::Gfx::Color::RGBA<uint8>& Values< Yuni::Gfx::Color::RGBA<uint8>, uint8 >::Assign(Yuni::Gfx::Color::RGBA<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3, const uint8& a4)
 	{
 		th.red   = a1;
 		th.green = a2;
@@ -71,7 +73,7 @@ namespace Proxy
 	}
 
 	template<>
-	RGBA<uint8>& Values< RGBA<uint8>, uint8 >::Assign(RGBA<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3)
+	Yuni::Gfx::Color::RGBA<uint8>& Values< Yuni::Gfx::Color::RGBA<uint8>, uint8 >::Assign(Yuni::Gfx::Color::RGBA<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3)
 	{
 		th.red   = a1;
 		th.green = a2;
@@ -82,7 +84,7 @@ namespace Proxy
 
 
 	template<>
-	RGBA<float>& Values< RGBA<float>, float >::Assign(RGBA<float>& th, const float& a1, const float& a2, const float& a3, const float& a4)
+	Yuni::Gfx::Color::RGBA<float>& Values< Yuni::Gfx::Color::RGBA<float>, float >::Assign(Yuni::Gfx::Color::RGBA<float>& th, const float& a1, const float& a2, const float& a3, const float& a4)
 	{
 		th.red   = Math::MinMax<float>(a1, 0.0f, 1.0f);
 		th.green = Math::MinMax<float>(a2, 0.0f, 1.0f);
@@ -92,7 +94,7 @@ namespace Proxy
 	}
 
 	template<>
-	RGBA<float>& Values< RGBA<float>, float >::Assign(RGBA<float>& th, const float& a1, const float& a2, const float& a3)
+	Yuni::Gfx::Color::RGBA<float>& Values< Yuni::Gfx::Color::RGBA<float>, float >::Assign(Yuni::Gfx::Color::RGBA<float>& th, const float& a1, const float& a2, const float& a3)
 	{
 		th.red   = Math::MinMax<float>(a1, 0.0f, 1.0f);
 		th.green = Math::MinMax<float>(a2, 0.0f, 1.0f);
@@ -103,7 +105,7 @@ namespace Proxy
 
 
 	template<>
-	RGBA<float>& Values< RGBA<float>, uint8 >::Assign(RGBA<float>& th, const uint8& r, const uint8& g, const uint8& b, const uint8& a)
+	Yuni::Gfx::Color::RGBA<float>& Values< Yuni::Gfx::Color::RGBA<float>, uint8 >::Assign(Yuni::Gfx::Color::RGBA<float>& th, const uint8& r, const uint8& g, const uint8& b, const uint8& a)
 	{
 		th.red   = r / 255.0f;
 		th.green = g / 255.0f;
@@ -113,7 +115,7 @@ namespace Proxy
 	}
 
 	template<>
-	RGBA<float>& Values< RGBA<float>, RGBA<uint8> >::Assign(RGBA<float>& th, const RGBA<uint8>& a1)
+	Yuni::Gfx::Color::RGBA<float>& Values< Yuni::Gfx::Color::RGBA<float>, Yuni::Gfx::Color::RGBA<uint8> >::Assign(Yuni::Gfx::Color::RGBA<float>& th, const Yuni::Gfx::Color::RGBA<uint8>& a1)
 	{
 		th.red   = a1.red   / 255.0f;
 		th.green = a1.green / 255.0f;
@@ -124,7 +126,7 @@ namespace Proxy
 
 
 	template<>
-	RGB<float>& Values< RGB<float>, float >::Assign(RGB<float>& th, const float& a1, const float& a2, const float& a3, const float& /*a4*/)
+	Yuni::Gfx::Color::RGB<float>& Values< Yuni::Gfx::Color::RGB<float>, float >::Assign(Yuni::Gfx::Color::RGB<float>& th, const float& a1, const float& a2, const float& a3, const float& /*a4*/)
 	{
 		th.red   = Math::MinMax<float>(a1, 0.0f, 1.0f);
 		th.green = Math::MinMax<float>(a2, 0.0f, 1.0f);
@@ -133,7 +135,7 @@ namespace Proxy
 	}
 
 	template<>
-	RGB<float>& Values< RGB<float>, float >::Assign(RGB<float>& th, const float& a1, const float& a2, const float& a3)
+	Yuni::Gfx::Color::RGB<float>& Values< Yuni::Gfx::Color::RGB<float>, float >::Assign(Yuni::Gfx::Color::RGB<float>& th, const float& a1, const float& a2, const float& a3)
 	{
 		th.red   = Math::MinMax<float>(a1, 0.0f, 1.0f);
 		th.green = Math::MinMax<float>(a2, 0.0f, 1.0f);
@@ -144,7 +146,7 @@ namespace Proxy
 
 
 	template<>
-	RGBA<uint8>& Values< RGBA<uint8>, RGBA<float> >::Assign(RGBA<uint8>& th, const RGBA<float>& a1)
+	Yuni::Gfx::Color::RGBA<uint8>& Values< Yuni::Gfx::Color::RGBA<uint8>, Yuni::Gfx::Color::RGBA<float> >::Assign(Yuni::Gfx::Color::RGBA<uint8>& th, const Yuni::Gfx::Color::RGBA<float>& a1)
 	{
 		th.red   = (uint8) (a1.red   * 255.0f);
 		th.green = (uint8) (a1.green * 255.0f);
@@ -154,7 +156,7 @@ namespace Proxy
 	}
 
 	template<>
-	RGB<uint8>& Values< RGB<uint8>, uint8 >::Assign(RGB<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3, const uint8& /*a4*/)
+	Yuni::Gfx::Color::RGB<uint8>& Values< Yuni::Gfx::Color::RGB<uint8>, uint8 >::Assign(Yuni::Gfx::Color::RGB<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3, const uint8& /*a4*/)
 	{
 		th.red   = a1;
 		th.green = a2;
@@ -163,7 +165,7 @@ namespace Proxy
 	}
 
 	template<>
-	RGB<uint8>& Values< RGB<uint8>, uint8 >::Assign(RGB<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3)
+	Yuni::Gfx::Color::RGB<uint8>& Values< Yuni::Gfx::Color::RGB<uint8>, uint8 >::Assign(Yuni::Gfx::Color::RGB<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3)
 	{
 		th.red   = a1;
 		th.green = a2;
@@ -173,7 +175,7 @@ namespace Proxy
 
 
 	template<>
-	RGB<float>& Values< RGB<float>, uint8 >::Assign(RGB<float>& th, const uint8& r, const uint8& g, const uint8& b, const uint8& /*a*/)
+	Yuni::Gfx::Color::RGB<float>& Values< Yuni::Gfx::Color::RGB<float>, uint8 >::Assign(Yuni::Gfx::Color::RGB<float>& th, const uint8& r, const uint8& g, const uint8& b, const uint8& /*a*/)
 	{
 		th.red   = r / 255.0f;
 		th.green = g / 255.0f;
@@ -182,7 +184,7 @@ namespace Proxy
 	}
 
 	template<>
-	RGB<float>& Values< RGB<float>, RGB<uint8> >::Assign(RGB<float>& th, const RGB<uint8>& a1)
+	Yuni::Gfx::Color::RGB<float>& Values< Yuni::Gfx::Color::RGB<float>, Yuni::Gfx::Color::RGB<uint8> >::Assign(Yuni::Gfx::Color::RGB<float>& th, const Yuni::Gfx::Color::RGB<uint8>& a1)
 	{
 		th.red   = a1.red   / 255.0f;
 		th.green = a1.green / 255.0f;
@@ -191,7 +193,7 @@ namespace Proxy
 	}
 
 	template<>
-	RGB<uint8>& Values< RGB<uint8>, RGB<float> >::Assign(RGB<uint8>& th, const RGB<float>& a1)
+	Yuni::Gfx::Color::RGB<uint8>& Values< Yuni::Gfx::Color::RGB<uint8>, Yuni::Gfx::Color::RGB<float> >::Assign(Yuni::Gfx::Color::RGB<uint8>& th, const Yuni::Gfx::Color::RGB<float>& a1)
 	{
 		th.red   = (uint8) (a1.red   * 255.0f);
 		th.green = (uint8) (a1.green * 255.0f);
@@ -202,7 +204,7 @@ namespace Proxy
 
 
 	template<>
-	RGB<uint8>& Values< RGB<uint8>, float >::Assign(RGB<uint8>& th, const float& a1, const float& a2, const float& a3)
+	Yuni::Gfx::Color::RGB<uint8>& Values< Yuni::Gfx::Color::RGB<uint8>, float >::Assign(Yuni::Gfx::Color::RGB<uint8>& th, const float& a1, const float& a2, const float& a3)
 	{
 		th.red   = (uint8) (a1 * 255.0f);
 		th.green = (uint8) (a2 * 255.0f);
@@ -213,7 +215,7 @@ namespace Proxy
 
 # define YUNI_CONVERT_UN_SIGNED_VALUE_MT(S, O) \
 	template<> \
-	RGB< S >& Values< RGB< S >, float >::Assign(RGB< S >& th, const O & a1, const O & a2, const O & a3) \
+	Yuni::Gfx::Color::RGB< S >& Values< Yuni::Gfx::Color::RGB< S >, float >::Assign(Yuni::Gfx::Color::RGB< S >& th, const O & a1, const O & a2, const O & a3) \
 	{ \
 		th.red   = ( S ) (Math::MinMax< O >(a1, 0.0f, 1.0f) * 255.0f); \
 		th.green = ( S ) (Math::MinMax< O >(a2, 0.0f, 1.0f) * 255.0f); \
@@ -222,7 +224,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGB< S >& Values< RGB< S >, float >::Assign(RGB< S >& th, const O & a1, const O & a2, const O & a3, const O &) \
+	Yuni::Gfx::Color::RGB< S >& Values< Yuni::Gfx::Color::RGB< S >, float >::Assign(Yuni::Gfx::Color::RGB< S >& th, const O & a1, const O & a2, const O & a3, const O &) \
 	{ \
 		th.red   = ( S ) (Math::MinMax< O >(a1, 0.0f, 1.0f) * 255.0f); \
 		th.green = ( S ) (Math::MinMax< O >(a2, 0.0f, 1.0f) * 255.0f); \
@@ -230,7 +232,7 @@ namespace Proxy
 		return th; \
 	} \
 	template<> \
-	RGBA< S >& Values< RGBA< S >, float >::Assign(RGBA< S >& th, const O & a1, const O & a2, const O & a3) \
+	Yuni::Gfx::Color::RGBA< S >& Values< Yuni::Gfx::Color::RGBA< S >, float >::Assign(Yuni::Gfx::Color::RGBA< S >& th, const O & a1, const O & a2, const O & a3) \
 	{ \
 		th.red   = ( S ) (Math::MinMax< O >(a1, 0.0f, 1.0f) * 255.0f); \
 		th.green = ( S ) (Math::MinMax< O >(a2, 0.0f, 1.0f) * 255.0f); \
@@ -240,7 +242,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGBA< S >& Values< RGBA< S >, float >::Assign(RGBA< S >& th, const O & a1, const O & a2, const O & a3, const O & a4) \
+	Yuni::Gfx::Color::RGBA< S >& Values< Yuni::Gfx::Color::RGBA< S >, float >::Assign(Yuni::Gfx::Color::RGBA< S >& th, const O & a1, const O & a2, const O & a3, const O & a4) \
 	{ \
 		th.red   = ( S ) (Math::MinMax< O >(a1, 0.0f, 1.0f) * 255.0f); \
 		th.green = ( S ) (Math::MinMax< O >(a2, 0.0f, 1.0f) * 255.0f); \
@@ -261,7 +263,7 @@ namespace Proxy
 
 # define YUNI_CONVERT_SIGNED_VALUE_FOR_FLOAT(O,T) \
 	template<> \
-	RGBA< O >& Values< RGBA< O >, T >::Assign(RGBA< O >& th, const T& a1, const T& a2, const T& a3, const T& a4) \
+	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3, const T& a4) \
 	{ \
 		th.red   = (O) Math::MinMax< T >(a1, 0, 255) / 255.0f; \
 		th.green = (O) Math::MinMax< T >(a2, 0, 255) / 255.0f; \
@@ -271,7 +273,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGBA< O >& Values< RGBA< O >, T >::Assign(RGBA< O >& th, const T& a1, const T& a2, const T& a3) \
+	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
 		th.red   = (O) Math::MinMax< T >(a1, 0, 255) / 255.0f; \
 		th.green = (O) Math::MinMax< T >(a2, 0, 255) / 255.0f; \
@@ -281,7 +283,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGB< O >& Values< RGB< O >, T >::Assign(RGB< O >& th, const T& a1, const T& a2, const T& a3, const T& /*a4*/) \
+	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3, const T& /*a4*/) \
 	{ \
 		th.red   = (O) Math::MinMax< T >(a1, 0, 255) / 255.0f; \
 		th.green = (O) Math::MinMax< T >(a2, 0, 255) / 255.0f; \
@@ -290,7 +292,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGB< O >& Values< RGB< O >, T >::Assign(RGB< O >& th, const T& a1, const T& a2, const T& a3) \
+	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
 		th.red   = (O) Math::MinMax< T >(a1, 0, 255) / 255.0f; \
 		th.green = (O) Math::MinMax< T >(a2, 0, 255) / 255.0f; \
@@ -305,7 +307,7 @@ namespace Proxy
 
 # define YUNI_CONVERT_UNSIGNED_VALUE_FOR_FLOAT(O,T) \
 	template<> \
-	RGBA< O >& Values< RGBA< O >, T >::Assign(RGBA< O >& th, const T& a1, const T& a2, const T& a3, const T& a4) \
+	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3, const T& a4) \
 	{ \
 		th.red   = (O) Math::Max< T >(a1, 255) / 255.0f; \
 		th.green = (O) Math::Max< T >(a2, 255) / 255.0f; \
@@ -315,7 +317,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGBA< O >& Values< RGBA< O >, T >::Assign(RGBA< O >& th, const T& a1, const T& a2, const T& a3) \
+	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
 		th.red   = (O) Math::Max< T >(a1, 255) / 255.0f; \
 		th.green = (O) Math::Max< T >(a2, 255) / 255.0f; \
@@ -325,7 +327,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGB< O >& Values< RGB< O >, T >::Assign(RGB< O >& th, const T& a1, const T& a2, const T& a3, const T& /*a4*/) \
+	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3, const T& /*a4*/) \
 	{ \
 		th.red   = (O) Math::Max< T >(a1, 255) / 255.0f; \
 		th.green = (O) Math::Max< T >(a2, 255) / 255.0f; \
@@ -334,7 +336,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGB< O >& Values< RGB< O >, T >::Assign(RGB< O >& th, const T& a1, const T& a2, const T& a3) \
+	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
 		th.red   = (O) Math::Max< T >(a1, 255) / 255.0f; \
 		th.green = (O) Math::Max< T >(a2, 255) / 255.0f; \
@@ -350,7 +352,7 @@ namespace Proxy
 
 # define YUNI_CONVERT_SIGNED_VALUE_FOR_UINT8(O,T) \
 	template<> \
-	RGBA< O >& Values< RGBA< O >, T >::Assign(RGBA< O >& th, const T& a1, const T& a2, const T& a3, const T& a4) \
+	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3, const T& a4) \
 	{ \
 		th.red   = (O) Math::MinMax<T>(a1, 0, 255); \
 		th.green = (O) Math::MinMax<T>(a2, 0, 255); \
@@ -360,7 +362,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGBA< O >& Values< RGBA< O >, T >::Assign(RGBA< O >& th, const T& a1, const T& a2, const T& a3) \
+	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
 		th.red   = (O) Math::MinMax<T>(a1, 0, 255); \
 		th.green = (O) Math::MinMax<T>(a2, 0, 255); \
@@ -370,7 +372,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGB< O >& Values< RGB< O >, T >::Assign(RGB< O >& th, const T& a1, const T& a2, const T& a3, const T&) \
+	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3, const T&) \
 	{ \
 		th.red   = (O) Math::MinMax<T>(a1, 0, 255); \
 		th.green = (O) Math::MinMax<T>(a2, 0, 255); \
@@ -379,7 +381,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGB< O >& Values< RGB< O >, T >::Assign(RGB< O >& th, const T& a1, const T& a2, const T& a3) \
+	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
 		th.red   = (O) Math::MinMax<T>(a1, 0, 255); \
 		th.green = (O) Math::MinMax<T>(a2, 0, 255); \
@@ -407,7 +409,7 @@ namespace Proxy
 
 # define YUNI_CONVERT_UNSIGNED_VALUE_FOR_UINT8(O,T) \
 	template<> \
-	RGBA< O >& Values< RGBA< O >, T >::Assign(RGBA< O >& th, const T& a1, const T& a2, const T& a3, const T& a4) \
+	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3, const T& a4) \
 	{ \
 		th.red   = (O) Math::Max<T>(a1, 255); \
 		th.green = (O) Math::Max<T>(a2, 255); \
@@ -417,7 +419,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGBA< O >& Values< RGBA< O >, T >::Assign(RGBA< O >& th, const T& a1, const T& a2, const T& a3) \
+	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
 		th.red   = (O) Math::Max<T>(a1, 255); \
 		th.green = (O) Math::Max<T>(a2, 255); \
@@ -427,7 +429,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGB< O >& Values< RGB< O >, T >::Assign(RGB< O >& th, const T& a1, const T& a2, const T& a3, const T&) \
+	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3, const T&) \
 	{ \
 		th.red   = (O) Math::Max<T>(a1, 255); \
 		th.green = (O) Math::Max<T>(a2, 255); \
@@ -436,7 +438,7 @@ namespace Proxy
 	} \
 	\
 	template<> \
-	RGB< O >& Values< RGB< O >, T >::Assign(RGB< O >& th, const T& a1, const T& a2, const T& a3) \
+	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
 		th.red   = (O) Math::Max<T>(a1, 255); \
 		th.green = (O) Math::Max<T>(a2, 255); \
@@ -472,14 +474,14 @@ namespace Proxy
 	 */
 
 	template<>
-	bool Compare< RGBA<float>, RGBA<float> >::equals(const RGBA<float>& lhs, const RGBA<float>& rhs)
+	bool Compare< Yuni::Gfx::Color::RGBA<float>, Yuni::Gfx::Color::RGBA<float> >::equals(const Yuni::Gfx::Color::RGBA<float>& lhs, const Yuni::Gfx::Color::RGBA<float>& rhs)
 	{
 		return Math::Abs(lhs.red - rhs.red) < 0.0001 && Math::Abs(lhs.green - rhs.green) < 0.0001
 			&& Math::Abs(lhs.blue - rhs.blue) < 0.0001 && Math::Abs(lhs.alpha - rhs.alpha) < 0.0001;
 	}
 
 	template<>
-	bool Compare< RGB<float>, RGB<float> >::equals(const RGB<float>& lhs, const RGB<float>& rhs)
+	bool Compare< Yuni::Gfx::Color::RGB<float>, Yuni::Gfx::Color::RGB<float> >::equals(const Yuni::Gfx::Color::RGB<float>& lhs, const Yuni::Gfx::Color::RGB<float>& rhs)
 	{
 		return Math::Abs(lhs.red - rhs.red) < 0.0001 && Math::Abs(lhs.green - rhs.green) < 0.0001
 			&& Math::Abs(lhs.blue - rhs.blue) < 0.0001;
@@ -491,5 +493,6 @@ namespace Proxy
 } // namespace Proxy
 } // namespace Color
 } // namespace Gfx
+} // namespace Private
 } // namespace Yuni
 
