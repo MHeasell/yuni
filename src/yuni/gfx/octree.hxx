@@ -5,7 +5,7 @@ namespace Gfx
 {
 	template <typename T>
 	Octree<T>::Octree(const BoundingBox<float>& limits, T* data = NULL):
-		MaxPointsPerNode(32), pData(data),
+		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data),
 		pCenter(), pBoundingBox(limits)
 	{
 		// The Center is the mean of the min and the max
@@ -18,7 +18,7 @@ namespace Gfx
 
 	template <typename T>
 	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, T* data = NULL):
-		MaxPointsPerNode(32), pData(data),
+		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data),
 		pCenter(0, 0, 0), pBoundingBox(min, max)
 	{
 		// The Center is the mean of the min and the max
@@ -78,7 +78,7 @@ namespace Gfx
 		// Find the correct child to propagate to
 		uint16 index = getChildIndex(p);
 		// Create the new child if necessary
-		if (NULL == pChildren[index])
+		if (!pChildren[index])
 			createChild(index);
 		pChildren[index]->addPoint(p, data);
 		return this;
@@ -101,7 +101,7 @@ namespace Gfx
 			pPoints.pop_back();
 			uint16 index = getChildIndex(crtPoint);
 			// Create the child if necessary
-			if (NULL == pChildren[index])
+			if (!pChildren[index])
 				createChild(index);
 			pChildren[index]->addPoint(crtPoint);
 		}
@@ -158,11 +158,34 @@ namespace Gfx
 		// Find which sub-node will contain the point
 		Octree<T>* child = pChildren[getChildIndex(p)];
 		// If there is no child to recurse on, we are on the correct node
-		if (NULL == child)
+		if (!child)
 			return this;
 		// Recursive call
 		return child->findContainingLeaf(p);
 	}
+
+
+	//! Tells if the point already in the tree
+	template <typename T>
+	bool Octree<T>::contains(const Point3D<float>& p) const
+	{
+		if (!boundingBox().contains(p))
+			return false;
+		if (isLeaf())
+		{
+			for (PointList::const_iterator it = pPoints.begin(); it != pPoints.end(); ++it)
+				if ((*it) == p)
+					return true;
+			return false;
+		}
+		// Find which sub-node will contain the point
+		Octree<T>* child = pChildren[getChildIndex(p)];
+		if (!child)
+			return false;
+		// Recursive call
+		return child->contains(p);
+	}
+
 
 	//! Depth of the tree
 	template <typename T>
