@@ -103,7 +103,7 @@ namespace Math
 
 
 	/*!
-	** \brief The power function
+	** \brief The power function for Integer values
 	**
 	** \f$value = x^y\f$
 	**
@@ -111,14 +111,14 @@ namespace Math
 	** \tparam Y The power
 	**
 	** \code
-	**    std::cout << Power<8, 3>::value << std::endl; // 512
+	**    std::cout << Yuni::Math::Power<8, 3>::value << std::endl; // 512
 	** \endcode
 	*/
 	template<int X, int Y>
 	struct Power
 	{
-		enum { value = X * Power<X,Y-1>::value };
-	};
+		enum { value = X * Power<X, Y-1>::value };
+	}; // class Power
 
 	template <int X> struct Power<X,0> { enum { value = 1 }; };
 
@@ -126,7 +126,7 @@ namespace Math
 
 
 	/*!
-	** \brief The Square root function
+	** \brief The Square root function for integer values
 	**
 	** \f$value = \sqrt{N}\f$
 	**
@@ -140,7 +140,7 @@ namespace Math
 	struct SquareRoot
 	{
 		enum { value = (I*I < N) ? SquareRoot<N, I+1>::value : I };
-	};
+	}; // class SquareRoot
 
 	// partial specialization to end the iteration
 	template<int N> struct SquareRoot<N,N> { enum { value = N }; };
