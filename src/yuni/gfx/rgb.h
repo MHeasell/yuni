@@ -179,7 +179,7 @@ namespace Color
 		//! The blue channel
 		T blue;
 
-	}; // class RGg
+	}; // class RGB
 
 
 
