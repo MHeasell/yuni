@@ -2,8 +2,9 @@
 #ifndef __YUNI_GFX_MESH_H__
 # define __YUNI_GFX_MESH_H__
 
-# include "triangle.h"
 # include "../misc/sharedptr.h"
+# include "triangle.h"
+# include "mesh.proxy.h"
 
 namespace Yuni
 {
@@ -54,6 +55,9 @@ namespace Gfx
 
 		//! The Mesh knows all the triangles that define it
 		TriangleList pTriangles;
+
+		//! Proxy for the library-specific representation
+		Yuni::Private::Gfx::ProxyMesh* pProxy;
 	};
 
 } // Gfx

@@ -113,7 +113,8 @@ set(SRC_GFX
 				gfx/color.proxy.h gfx/color.proxy.cpp
 				gfx/rgba.h gfx/rgb.h
 				gfx/boundingbox.h
-				gfx/vertex.h gfx/triangle.h gfx/edge.h gfx/mesh.h
+				gfx/vertex.h gfx/triangle.h gfx/edge.h
+				gfx/mesh.h gfx/mesh.proxy.h
 				gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
 				gfx/metaobject.h gfx/metaball.h
 				gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
@@ -137,7 +138,8 @@ source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
 
 set(SRC_EXTERNAL_3D_IRRLICHT
 				private/gfx3d/irrlicht/irr.h
-				private/gfx3d/irrlicht/irr.engine.h private/gfx3d/irrlicht/irr.engine.cpp)
+				private/gfx3d/irrlicht/irr.engine.h private/gfx3d/irrlicht/irr.engine.cpp
+				private/gfx3d/irrlicht/irr.mesh.h private/gfx3d/irrlicht/irr.mesh.cpp)
 source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
 
 
