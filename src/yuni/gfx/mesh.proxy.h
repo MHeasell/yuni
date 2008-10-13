@@ -1,6 +1,6 @@
 
-#ifndef __MESH_PROXY_H__
-# define __MESH_PROXY_H__
+#ifndef __YUNI_PRIVATE_GFX_MESH_PROXY_H__
+# define __YUNI_PRIVATE_GFX_MESH_PROXY_H__
 
 # include <vector>
 # include "triangle.h"
@@ -37,4 +37,4 @@ namespace Gfx
 } // Private
 } // Yuni
 
-#endif // __MESH_PROXY_H__
+#endif // __YUNI_PRIVATE_GFX_MESH_PROXY_H__
