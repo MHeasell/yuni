@@ -61,8 +61,46 @@ namespace Static
 
 
 
+	template<bool X, typename T> struct CompileTimeError;
+	template<typename T> struct CompileTimeError<true, T> { enum { Error = 1}; };
+
 
 } // namespace Static
 } // namespaec Yuni
+
+
+/*!
+** \brief String concatenation
+*/
+# define YUNI_JOIN(X,Y)  X##Y
+
+
+/*!
+** \def YUNI_STATIC_ASSERT(X,ID)
+** \brief Assert at compile time
+**
+** YUNI_STATIC_ASSERT is like assert for C++, except that the test is done at compile time.
+** (only when the test is possible at compile time).
+**
+** Here is an example to produce an error when a code is
+** instancied by the compiler:
+** \code
+** class CanNotBeInstancied
+** {
+**		YUNI_STATIC_ASSERT(false, ThisClassMustNotBeInstancied);
+** };
+** // Will produce something like this :
+** // error: incomplete type ‘CompileTimeError<false, YuniStaticAssert_ThisClassMustNotBeInstancied::Failed>’ used in nested name specifier
+** \endcode
+**
+** This macro might be used anywhere.
+** This tool is used by the ownership policy `NoCopy`.
+*/
+# define YUNI_STATIC_ASSERT(X,ID)  \
+		struct YUNI_JOIN(YuniStaticAssert_,ID) \
+		{ struct Failed; enum { value = CompileTimeError<(0 != (X)), Failed>::Error }; }
+
+
+
 
 #endif // __YUNI_MISC_STATIC_IF_H__
