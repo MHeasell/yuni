@@ -98,7 +98,7 @@ namespace Static
 */
 # define YUNI_STATIC_ASSERT(X,ID)  \
 		struct YUNI_JOIN(YuniStaticAssert_,ID) \
-		{ struct Failed; enum { value = CompileTimeError<(0 != (X)), Failed>::Error }; }
+		{ struct Failed; enum { value = Yuni::CompileTimeError<(0 != (X)), Failed>::Error }; }
 
 
 
