@@ -95,6 +95,9 @@ namespace Static
 **
 ** This macro might be used anywhere.
 ** This tool is used by the ownership policy `NoCopy`.
+**
+** \param X An expression
+** \param ID An unique ID for the current scope
 */
 # define YUNI_STATIC_ASSERT(X,ID)  \
 		struct YUNI_JOIN(YuniStaticAssert_,ID) \
