@@ -16,9 +16,15 @@ namespace Yuni
 namespace Threads
 {
 
+	/*!
+	** \defgroup Threads Threading support
+	*/
+
+
 
 	/*! \class Abstract
 	**  \brief Higher-level threading interface (abstract)
+	**  \ingroup Threads
 	**
 	** To create your own thread, you only have to implement the methode execute(), as follow:
 	** 

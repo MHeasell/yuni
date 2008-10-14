@@ -15,6 +15,7 @@ namespace Threads
 
 	/*!
 	** \brief A thread that execute a method each X seconds
+	** \ingroup Threads
 	**
 	**
 	** \code

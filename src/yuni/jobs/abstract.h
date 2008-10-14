@@ -16,6 +16,7 @@ namespace Jobs
 
 	/*!
 	** \brief Job Interface (abstract)
+	** \ingroup Jobs
 	*/
 	class Abstract 
 	{

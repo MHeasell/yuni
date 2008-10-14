@@ -14,6 +14,11 @@ namespace Jobs
 } // namespace Yuni
 
 
+/*!
+** \defgroup Jobs Jobs
+** \ingroup Threads
+*/
+
 
 // class Yuni::Jobs::Abstract
 # include "jobs/abstract.h"
