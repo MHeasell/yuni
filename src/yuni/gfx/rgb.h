@@ -52,7 +52,6 @@ namespace Color
 		** \param r The default value for the `red` channel
 		** \param g The default value for the `green` channel
 		** \param b The default value for the `blue` channel
-		** \param a The default value for the `alpha` channel (unused)
 		*/
 		template<typename U>
 		RGB(const U& r, const U& g, const U& b, const U& /*a*/)
@@ -97,7 +96,6 @@ namespace Color
 		** \param r The new color component `red`
 		** \param g The new color component `green`
 		** \param b The new color component `blue`
-		** \param a The new color component `alpha` (unused)
 		** \return Always `*this`
 		*/
 		template<typename U>
@@ -127,7 +125,6 @@ namespace Color
 		** \param r The new color component `red`
 		** \param g The new color component `green`
 		** \param b The new color component `blue`
-		** \param a The new color component `alpha` (unused)
 		** \return Always `*this`
 		*/
 		template<typename U>
