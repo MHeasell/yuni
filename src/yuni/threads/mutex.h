@@ -12,6 +12,7 @@ namespace Yuni
 
 	/*! \class Mutex
 	**  \brief  Mechanism to avoid the simultaneous use of a common resource
+	**  \ingroup Threads
 	*/
 	class Mutex 
 	{
