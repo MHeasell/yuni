@@ -30,7 +30,7 @@ namespace Gfx
 		**   Surface(Point) = isoValue
 		** Then we create triangles and a mesh from these points.
 		**
-		** \param density Value that defines the isosurface
+		** \param isoValue Value that defines the isosurface
 		** \param granularity Refinement value for the algorithm
 		** \return A new Mesh approximating the surface
 		*/

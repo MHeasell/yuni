@@ -154,6 +154,7 @@ namespace Event
 		** \brief Disconnect a receiver
 		**
 		** \param cl The object to disconnect
+		** \param broadcast Broadcast the disconnection when destroyed
 		*/
 		virtual void disconnect(const void* cl, const bool broadcast = true)
 		{
@@ -247,6 +248,7 @@ namespace Event
 		** \brief Disconnect a receiver
 		**
 		** \param cl The object to disconnect
+		** \param broadcast Broadcast the disconnection when destroyed
 		*/
 		virtual void disconnect(const void* cl, const bool broadcast = true)
 		{
@@ -342,6 +344,7 @@ namespace Event
 		** \brief Disconnect a receiver
 		**
 		** \param cl The object to disconnect
+		** \param broadcast Broadcast the disconnection when destroyed
 		*/
 		virtual void disconnect(const void* cl, const bool broadcast = true)
 		{
@@ -435,6 +438,7 @@ namespace Event
 		** \brief Disconnect a receiver
 		**
 		** \param cl The object to disconnect
+		** \param broadcast Broadcast the disconnection when destroyed
 		*/
 		virtual void disconnect(const void* cl, const bool broadcast = true)
 		{
@@ -528,6 +532,7 @@ namespace Event
 		** \brief Disconnect a receiver
 		**
 		** \param cl The object to disconnect
+		** \param broadcast Broadcast the disconnection when destroyed
 		*/
 		virtual void disconnect(const void* cl, const bool broadcast = true)
 		{
@@ -621,6 +626,7 @@ namespace Event
 		** \brief Disconnect a receiver
 		**
 		** \param cl The object to disconnect
+		** \param broadcast Broadcast the disconnection when destroyed
 		*/
 		virtual void disconnect(const void* cl, const bool broadcast = true)
 		{
@@ -714,6 +720,7 @@ namespace Event
 		** \brief Disconnect a receiver
 		**
 		** \param cl The object to disconnect
+		** \param broadcast Broadcast the disconnection when destroyed
 		*/
 		virtual void disconnect(const void* cl, const bool broadcast = true)
 		{
@@ -807,6 +814,7 @@ namespace Event
 		** \brief Disconnect a receiver
 		**
 		** \param cl The object to disconnect
+		** \param broadcast Broadcast the disconnection when destroyed
 		*/
 		virtual void disconnect(const void* cl, const bool broadcast = true)
 		{
@@ -900,6 +908,7 @@ namespace Event
 		** \brief Disconnect a receiver
 		**
 		** \param cl The object to disconnect
+		** \param broadcast Broadcast the disconnection when destroyed
 		*/
 		virtual void disconnect(const void* cl, const bool broadcast = true)
 		{

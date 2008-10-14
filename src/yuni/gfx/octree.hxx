@@ -42,7 +42,13 @@ namespace Gfx
 	}
 
 
-	//! \brief Add a single point to the Octree
+	/*!
+	 * \brief Add a single point to the Octree
+	 *
+	 * \param p
+	 * \param data
+	 * \return
+	 */
 	template <typename T>
 	Octree<T>* Octree<T>::addPoint(const Point3D<float>& p, T* data)
 	{

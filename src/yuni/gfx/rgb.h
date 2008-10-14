@@ -16,6 +16,7 @@ namespace Color
 
 	/*! \class RGB
 	**  \brief 32Bits RGB Color Model (Additive color model) 
+	**  \ingroup ColorModels
 	**
 	** \internal Do not forget to broadcast changes to specialized template as well
 	*/
