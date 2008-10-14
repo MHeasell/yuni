@@ -1,6 +1,12 @@
 #ifndef __YUNI_POLICIES_THREADS_H__
 # define __YUNI_POLICIES_THREADS_H__
+/*!
+** \file
+** \brief Threading policies
+*/
 
+
+# include "policies.h"
 # ifdef YUNI_WINDOWS
 #	include "../system/windows.hdr.h"
 # endif
@@ -13,9 +19,14 @@ namespace Yuni
 namespace Policy
 {
 
+	/*!
+	** \defgroup ThreadingPolicies Threading policies
+	** \ingroup Policies
+	*/
 
 	/*!
 	** \brief Implementation of the Threading Model policy in a single-threaded environnement
+	** \ingroup ThreadingPolicies
 	**
 	** No synchronization is required in this case
 	*/
@@ -50,6 +61,7 @@ namespace Policy
 
 	/*!
 	** \brief Implementation of the Threading Model policy in a multi-threaded environnement (one mutex per object)
+	** \ingroup ThreadingPolicies
 	*/
 	template<class Host>
 	class ObjectLevelLockable
@@ -89,6 +101,7 @@ namespace Policy
 
 	/*!
 	** \brief Implementation of the Threading Model policy in a multi-threaded environnement (one mutex per class)
+	** \ingroup ThreadingPolicies
 	*/
 	template<class Host>
 	class ClassLevelLockable
