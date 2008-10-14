@@ -61,7 +61,7 @@ namespace Application
 		/*!
 		** \brief Event: After the 3D Device has been created
 		**
-		** \param success True if the creation of the 3D device has succeeded
+		** \param bool True if the creation of the 3D device has succeeded
 		*/
 		virtual void onAfterCreateDevice(const bool /* success */) {}
 		//@}

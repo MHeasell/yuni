@@ -16,6 +16,7 @@ namespace Color
 
 	/*! \class RGBA
 	**  \brief 32Bits RGB Color Model with alpha channel (Additive color model + transparency) 
+	**  \ingroup ColorModels
 	**
 	** \internal Do not forget to broadcast changes to specialized template as well
 	*/
