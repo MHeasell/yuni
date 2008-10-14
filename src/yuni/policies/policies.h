@@ -20,4 +20,10 @@ namespace Policy
 } // namespace Policy
 } // namespace Yuni
 
+
+# include "checking.h"
+# include "conversions.h"
+# include "threading.h"
+# include "storage.h"
+
 #endif // __YUNI_POLICIES_POLICIES_H__
