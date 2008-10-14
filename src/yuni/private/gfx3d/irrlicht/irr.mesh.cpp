@@ -13,10 +13,10 @@ namespace Irrlicht
 	void Mesh::update(const TriangleList& triangles)
 	{
 		irr::scene::IMeshBuffer* buffer = pIrrMesh->getMeshBuffer(0);
-		if (buffer)
-			delete buffer;
-		//buffer = new irr::scene::CMeshBuffer<??>();
-		
+		if (!buffer)
+			return;
+		uint16* indices = buffer->getIndices();
+		void* vertices = buffer->getVertices();
 		for (TriangleList::const_iterator it = triangles.begin(); it != triangles.end(); ++it)
 			;
 	}
