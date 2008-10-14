@@ -1,6 +1,11 @@
 #ifndef __YUNI_POLICIES_STORAGE_H__
 # define __YUNI_POLICIES_STORAGE_H__
+/*!
+** \file
+** \brief Storage policies
+*/
 
+# include "policies.h"
 # include <functional>
 
 
@@ -11,9 +16,15 @@ namespace Policy
 namespace Storage
 {
 	
+	/*!
+	** \defgroup StoragePolicies Storage policies
+	** \ingroup Policies
+	*/
+
 
 	/*!
 	** \brief Implementation of the default storage policy
+	** \ingroup StoragePolicies
 	**
 	** \tparam T The data type
 	*/
@@ -73,6 +84,7 @@ namespace Storage
 
 	/*!
 	** \brief Implementation of the Array storage policy
+	** \ingroup StoragePolicies
 	**
 	** \tparam T The data type
 	*/
