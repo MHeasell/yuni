@@ -5,7 +5,6 @@
 ** \brief Storage policies
 */
 
-# include "policies.h"
 # include <functional>
 
 
@@ -46,7 +45,7 @@ namespace Storage
 		//! \name Constructors
 		//@{
 		Pointer() :pData(DefaultValue()) {}
-		template<class U> Pointer(const Default<U>&) :pData(DefaultValue()) {}
+		template<class U> Pointer(const Pointer<U>&) :pData(DefaultValue()) {}
 		template<class U> Pointer(const StoredType& p) :pData(p) {}
 		//@}
 
@@ -56,7 +55,6 @@ namespace Storage
 		//! \name Get the data
 		//@{
 		friend PointerType get(const Pointer& rhs) {return rhs.pData;}
-		friend const StoredType& reference(const Pointer& rhs) const {return rhs.pData;}
 		friend StoredType& reference(Pointer& rhs) {return rhs.pData;}
 		//@}
 
@@ -105,18 +103,17 @@ namespace Storage
 	public:
 		//! \name Constructors
 		//@{
-		Default() :pData(DefaultValue()) {}
-		template<class U> Default(const Default<U>&) :pData(DefaultValue()) {}
-		template<class U> Default(const StoredType& p) :pData(p) {}
+		Array() :pData(DefaultValue()) {}
+		template<class U> Array(const Pointer<U>&) :pData(DefaultValue()) {}
+		template<class U> Array(const StoredType& p) :pData(p) {}
 		//@}
 
 		//! Swap the data
-		void swap(Pointer& rhs) {std::swap(pData, rhs.pData);}
+		void swap(PointerType& rhs) {std::swap(pData, rhs.pData);}
 
 		//! \name Get the data
 		//@{
 		friend PointerType get(const Array& rhs) {return rhs.pData;}
-		friend const StoredType& reference(const Array& rhs) const {return rhs.pData;}
 		friend StoredType& reference(Array& rhs) {return rhs.pData;}
 		//@}
 
