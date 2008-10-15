@@ -3,9 +3,6 @@
 #include "../misc/math.h"
 
 
-# define YUNI_JOBS_PRIORITY_MIN  -100
-# define YUNI_JOBS_PRIORITY_MAX  100
-
 
 
 namespace Yuni
@@ -15,7 +12,7 @@ namespace Jobs
 
 
 	Abstract::Abstract()
-		:pMutex(), pName(), pPriority(0), pThread(NULL)
+		:pMutex(), pName(), pPriority(prNormal), pThread(NULL)
 	{}
 
 	Abstract::~Abstract()
@@ -36,16 +33,16 @@ namespace Jobs
 		pMutex.unlock();
 	}
 
-	sint8 Abstract::priority()
+	Priority Abstract::priority()
 	{
 		MutexLocker locker(pMutex);
 		return pPriority;
 	}
 
-	void Abstract::priority(const int p)
+	void Abstract::priority(const Priority p)
 	{
 		pMutex.lock();
-		pPriority = Math::MinMax<int>(YUNI_JOBS_PRIORITY_MIN, YUNI_JOBS_PRIORITY_MAX, p);
+		pPriority = p;
 		pMutex.unlock();
 	}
 

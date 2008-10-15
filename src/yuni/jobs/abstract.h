@@ -12,6 +12,23 @@ namespace Yuni
 namespace Jobs
 {
 
+	/*!
+	** \brief Priority for a single job
+	*/
+	enum Priority
+	{
+		//! Priority : The lowest
+		prLowest = -2,
+		//! Priority : Below than normal
+		prBelowNormal = -1,
+		//! Priority : Normal
+		prNormal = 0,
+		//! Priority : Above than normal
+		prAboveNormal = 1,
+		//! Priority : The highest
+		prHighest = 2
+	};
+
 
 
 	/*!
@@ -41,9 +58,9 @@ namespace Jobs
 		//! \name Priority
 		//@{
 		//! Get the priority of this job
-		sint8 priority();
+		Priority priority();
 		//! Set the priority of this job
-		void priority(const int p);
+		void priority(const Priority p);
 		//@}
 
 		//! \name Relation to a thread
@@ -90,7 +107,7 @@ namespace Jobs
 		//! Name of the job
 		String pName;
 		//! Priority for this job
-		sint8 pPriority;
+		Priority pPriority;
 		//! The attached thread to this job, if any
 		Threads::Private::AbstractThreadModel* pThread;
 
