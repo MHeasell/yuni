@@ -80,8 +80,6 @@ namespace Yuni
 	** This class is especially usefull for `get` accessor` and/or returned values
 	** which have to be thread-safe.
 	**
-	** \deprecated Consider Threads::Policy::*LevelLockable<>::MutexLocker instead
-	**
 	** \code
 	**	  class Foo
 	**	  {
