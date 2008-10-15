@@ -57,7 +57,15 @@ namespace Jobs
 
 	bool Abstract::suspend(const uint32 delay)
 	{
-		return (pThread) ? pThread->suspend(delay) : false;
+		pMutex.lock();
+		if (pThread)
+		{
+			Threads::Private::AbstractThreadModel* t(pThread);
+			pMutex.unlock();
+			return t->suspend(delay);
+		}
+		pMutex.unlock();
+		return false;
 	}
 
 
