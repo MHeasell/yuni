@@ -23,11 +23,15 @@ namespace Gfx
 		//@{
 		Triangle(const Vertex& v1, const Vertex& v2, const Vertex& v3):
 			pVertex1(v1), pVertex2(v2), pVertex3(v3)
-		{}
+		{
+			calculateEdges();
+		}
 		//! Copy constructor
 		Triangle(const Triangle& t):
 			pVertex1(t.vertex1()), pVertex2(t.vertex2()), pVertex3(t.vertex3())
-		{}
+		{
+			calculateEdges();
+		}
 		//@}
 
 		//! \name Accessors
@@ -53,13 +57,27 @@ namespace Gfx
 		}
 
 	private:
+		/*!
+		** \brief Create the edges of the triangle given its vertices
+		*/
+		void calculateEdges()
+		{
+			pEdges.push_back(SharedPtr<Edge>(new Edge(pVertex1, pVertex2)));
+			pEdges.push_back(SharedPtr<Edge>(new Edge(pVertex2, pVertex3)));
+			pEdges.push_back(SharedPtr<Edge>(new Edge(pVertex3, pVertex1)));
+		}
+
+	private:
+		typedef std::vector<SharedPtr<Edge> > EdgeList;
+
+	private:
 		//! Vertices
 		Vertex pVertex1;
 		Vertex pVertex2;
 		Vertex pVertex3;
 
 		//! Edges
-		// TODO
+		EdgeList pEdges;
 
 		//! Surface normal
 		Vector3D<float> pNormal;
