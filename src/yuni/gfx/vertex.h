@@ -4,6 +4,7 @@
 # include <vector>
 # include "point3D.h"
 # include "vector3D.h"
+# include "../misc/string.h"
 # include "../misc/sharedptr.h"
 
 namespace Yuni
@@ -68,9 +69,20 @@ namespace Gfx
 			return pPosition;
 		}
 
+		//! Get a string representing the object to use as hash key
+		SharedPtr<String> asString() const
+		{
+			String* str = new String();
+			(*str) << pPosition.x << " " << pPosition.y << " " << pPosition.z;
+			return str;
+		}
+
+	private:
+		typedef std::vector<SharedPtr<Edge> > EdgeList;
+
 	private:
 		//! Edges linked to this vertex
-		std::vector<SharedPtr<Edge> > pEdges;
+		EdgeList pEdges;
 
 		//! Position of the vertex in space
 		Point3D<float> pPosition;

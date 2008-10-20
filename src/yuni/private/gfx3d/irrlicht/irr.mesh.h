@@ -21,6 +21,9 @@ namespace Irrlicht
 	class Mesh: public Yuni::Private::Gfx::ProxyMesh
 	{
 	public:
+		Mesh(): pIrrMesh(NULL)
+		{}
+
 		/*!
 		** \brief Update the Irrlicht mesh from the Yuni mesh
 		** \param triangles List of triangles that will feed the Irrlicht mesh

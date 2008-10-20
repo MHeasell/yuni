@@ -67,7 +67,7 @@ namespace Gfx
 		Vertex pVertex2;
 
 	}; // Edge
- 
+
 
 
 } // namespace Gfx
