@@ -21,7 +21,7 @@ namespace Gfx
 	{
 	public:
 		//! Main Constructor
-		Mesh() {}
+		Mesh();
 
 		/*!
 		** \brief Add a triangle to the mesh
@@ -42,12 +42,17 @@ namespace Gfx
 		** \param[in,out] out An output stream
 		** \return The output stream `out`
 		*/
-		std::ostream& print(std::ostream& out) const
+		std::ostream& print(std::ostream& out) const;
+
+		/*!
+		** \brief Update the library-specific representation with the new data
+		**
+		** This is not done automatically to avoid doing it uselessly
+		** (for example if more changes will be done).
+		*/
+		void update()
 		{
-			out << "Mesh containing " << pTriangles.size() << " triangles." << std::endl;
-			for (TriangleList::const_iterator it = pTriangles.begin(); it != pTriangles.end(); ++it)
-				(*it)->print(out);
-			return out;
+			pProxy->update(pTriangles);
 		}
 
 	protected:

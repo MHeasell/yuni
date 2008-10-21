@@ -117,7 +117,7 @@ set(SRC_GFX
 				gfx/rgba.h gfx/rgb.h
 				gfx/boundingbox.h
 				gfx/vertex.h gfx/triangle.h gfx/edge.h
-				gfx/mesh.h gfx/mesh.proxy.h
+				gfx/mesh.h gfx/mesh.cpp gfx/mesh.proxy.h
 				gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
 				gfx/metaobject.h gfx/metaball.h
 				gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
