@@ -24,7 +24,7 @@ namespace Irrlicht
 		Hash::Dictionary<int> hashTab;
 		Hash::Dictionary<Yuni::Gfx::Vertex> hashVertices;
 		uint32 count = 0;
-		uint16 indices[nbTriangles * 3];
+		uint16* indices = new uint16[nbTriangles * 3];
 		for (uint32 i = 0; i < nbTriangles * 3 && count < nbTriangles * 3; ++i)
 		{
 			const Yuni::Gfx::Vertex& vertex = (i % 3 == 0) ? triangles[i]->vertex1() :
@@ -43,6 +43,7 @@ namespace Irrlicht
 		buffer->Indices.set_used(nbTriangles * 3);
 		for (uint32 i = 0; i < nbTriangles * 3; ++i)
 			buffer->Indices[i] = indices[i];
+		delete indices;
 
 		buffer->Vertices.set_used(hashTab.size());
 		for (Hash::Dictionary<int>::const_iterator it = hashTab.begin(); it != hashTab.end(); ++it)
