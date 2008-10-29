@@ -25,7 +25,7 @@ namespace Gfx
 
 		Queue toVisit;
 		TriangleList triangles;
-		Octree<bool>* visited = new Octree<bool>(cellAroundPoint(startPoints[0], granularity));
+		Octree<bool>* visited = new Octree<bool>(cellAroundPoint(startPoints[0], granularity), NULL);
 		// Loop on the points inside the surface
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
