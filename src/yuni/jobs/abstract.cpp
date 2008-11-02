@@ -12,7 +12,7 @@ namespace Jobs
 
 
 	Abstract::Abstract()
-		:pMutex(), pName(), pPriority(prNormal), pThread(NULL)
+		:pMutex(), pState(jsIdle), pName(), pProgression(0.0f), pThread(NULL)
 	{}
 
 	Abstract::~Abstract()
@@ -33,19 +33,6 @@ namespace Jobs
 		pMutex.unlock();
 	}
 
-	Priority Abstract::priority()
-	{
-		MutexLocker locker(pMutex);
-		return pPriority;
-	}
-
-	void Abstract::priority(const Priority p)
-	{
-		pMutex.lock();
-		pPriority = p;
-		pMutex.unlock();
-	}
-
 	
 	void Abstract::attachToThread(Threads::Private::AbstractThreadModel* t)
 	{
@@ -54,18 +41,65 @@ namespace Jobs
 		pMutex.unlock();
 	}
 
+	Threads::Private::AbstractThreadModel* Abstract::attachedThread()
+	{
+		MutexLocker locker(pMutex);
+		return pThread;
+	}
+
 
 	bool Abstract::suspend(const uint32 delay)
 	{
 		pMutex.lock();
-		if (pThread)
+		if (pThread && jsRunning == pState)
 		{
 			Threads::Private::AbstractThreadModel* t(pThread);
+			pState = jsSleeping;
 			pMutex.unlock();
-			return t->suspend(delay);
+			bool sRet = t->suspend(delay);
+			
+			pMutex.lock();
+			pState = jsRunning;
+			pMutex.unlock();
+			return sRet;
 		}
 		pMutex.unlock();
 		return false;
+	}
+
+
+	void Abstract::progression(const float p)
+	{
+		pMutex.lock();
+		pProgression = p;
+		pMutex.unlock();
+	}
+
+
+	State Abstract::state()
+	{
+		MutexLocker locker(pMutex);
+		return pState;
+	}
+
+
+	void Abstract::execute()
+	{
+		// Lock
+		pMutex.lock();
+		// Reset some data
+		pProgression = 0;
+		pState = jsRunning;
+		// Unlock
+		pMutex.unlock();
+
+		// Execute the specific implementation of the job
+		onExecute();
+
+		// The job has finished
+		pMutex.lock();
+		pState = jsIdle;
+		pMutex.unlock();
 	}
 
 

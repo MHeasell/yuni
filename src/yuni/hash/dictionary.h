@@ -44,7 +44,9 @@ namespace Hash
 	class Dictionary : public Table<String, V, false>
 	{
 	public:
+		//! An Iterator for the dictionary
 		typedef typename Table<String, V, false> ::iterator  iterator;
+		//! A Const iterator for the dictionary
 		typedef typename Table<String, V, false> ::const_iterator  const_iterator;
 
 	public:
@@ -128,4 +130,3 @@ namespace Hash
 
 
 #endif // __YUNI_HASH_DICTIONARY_H__
-

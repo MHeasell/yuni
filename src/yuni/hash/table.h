@@ -117,7 +117,7 @@ namespace Hash
 		void erase(const K& key);
 
 		//! Number of elements in the table
-		int size() const { return pTable.size(); }
+		int size() const {return pTable.size();}
 
 	private:
 		//! The real hash map
