@@ -13,21 +13,19 @@ namespace Jobs
 {
 
 	/*!
-	** \brief Priority for a single job
+	** \brief Various states for a single job
 	*/
-	enum Priority
+	enum State
 	{
-		//! Priority : The lowest
-		prLowest = -2,
-		//! Priority : Below than normal
-		prBelowNormal = -1,
-		//! Priority : Normal
-		prNormal = 0,
-		//! Priority : Above than normal
-		prAboveNormal = 1,
-		//! Priority : The highest
-		prHighest = 2
+		//! The job does nothing
+		jsIdle = 0,
+		//! The job is currently running
+		jsRunning,
+		//! The job is running but has been suspended
+		jsSleeping
 	};
+
+
 
 
 
@@ -54,14 +52,22 @@ namespace Jobs
 		void name(const String& n);
 		//@}
 
-
-		//! \name Priority
+		//! \name Progression
 		//@{
-		//! Get the priority of this job
-		Priority priority();
-		//! Set the priority of this job
-		void priority(const Priority p);
+		//! Get the progression in percent (value between 0.0 and 1.0)
+		float progression();
 		//@}
+
+		//! \name State of the job
+		//@{
+		//! Get the current state of the job
+		State state();
+		//@}
+
+		/*!
+		** \brief Execute the job
+		*/
+		void execute();
 
 		//! \name Relation to a thread
 		//@{
@@ -71,6 +77,13 @@ namespace Jobs
 		** \param t The thread which execute this job
 		*/
 		void attachToThread(Threads::Private::AbstractThreadModel* t);
+
+		/*!
+		** \brief Get the attached thread
+		** \return The attached thread. Null if no thread is attached
+		*/
+		Threads::Private::AbstractThreadModel* attachedThread();
+
 		/*!
 		** \brief Detach this job from the previous attached thread
 		*/
@@ -85,6 +98,9 @@ namespace Jobs
 		** \return True to execute again this job
 		*/
 		virtual bool onExecute() = 0;
+
+		//! Set the progression in percent
+		void progression(const float);
 
 		/*!
 		** \brief Suspend the execution of the job of X miliseconds
@@ -104,10 +120,12 @@ namespace Jobs
 		Mutex pMutex;
 
 	private:
+		//! State of the job
+		State pState;
 		//! Name of the job
 		String pName;
-		//! Priority for this job
-		Priority pPriority;
+		//! Progression
+		float pProgression;
 		//! The attached thread to this job, if any
 		Threads::Private::AbstractThreadModel* pThread;
 
