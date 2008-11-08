@@ -1,7 +1,7 @@
 Project(YUNI-SAMPLES CXX)
 
 Message(STATUS "")
-Message(STATUS "Samples for the Yuni Framework")
+Message(STATUS "Samples")
 Message(STATUS "")
 CMake_minimum_required(VERSION 2.6)
 
@@ -17,5 +17,5 @@ ADD_SUBDIRECTORY(application)
 ADD_SUBDIRECTORY(hash)
 ADD_SUBDIRECTORY(threads)
 ADD_SUBDIRECTORY(events)
-
+ADD_SUBDIRECTORY(ui)
 
