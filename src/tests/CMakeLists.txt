@@ -1,7 +1,7 @@
 Project(YUNI-TESTS CXX)
 
 Message(STATUS "")
-Message(STATUS "Tests for the Yuni Framework")
+Message(STATUS "Tests")
 Message(STATUS "")
 CMake_minimum_required(VERSION 2.6)
 

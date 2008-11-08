@@ -136,8 +136,6 @@ source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
 
 
 # External Lib: Irrlicht
-#Set(SRC ${SRC}
-#				private/gfx3d/irrlicht/irrlicht-for-yuni.h private/gfx3d/irrlicht/irrlicht-for-yuni.cpp)
 
 set(SRC_EXTERNAL_3D_IRRLICHT
 				private/gfx3d/irrlicht/irr.h
@@ -148,11 +146,13 @@ source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
 
 if(YUNI_EXTERNAL_3D_IRRLICHT)
 	Message(STATUS "External: 3D: The Irrlicht Engine")
-	set(SRC_EXTERNAL_3D
+	# Headers for Irrlicht
+	DEVPACK_IMPORT_IRRLICHT()
+	Set(SRC_EXTERNAL_3D
 				private/gfx3d/abstract.h private/gfx3d/abstract.cpp
+				${YUNI_EXT_IRRLICHT_SRC}  # From DevPack 'irrlicht-headers'
 				${SRC_EXTERNAL_3D_IRRLICHT})
 Endif(YUNI_EXTERNAL_3D_IRRLICHT)
-
 
 
 Add_definitions("-DYUNI_LIBRARY_STATIC")

@@ -19,6 +19,53 @@ mktemp=""
 targetFolder=`dirname "$0"`
 
 
+
+#
+# \brief Print the absolute path of a given path
+#
+# \param $1 A relative or absolute path
+# \return (echo) The absolute path
+#
+rel2abs() 
+{
+	# make sure file is specified 
+	if [ -z "$1" ] 
+	then 
+		echo "$1" 
+		return 1
+	fi
+	# already absolute case 
+	if [ "${1:0:1}" = "/" ] || [ "$PWD" = "/" ] 
+	then 
+		ABS="" 
+	else 
+		ABS="$PWD" 
+	fi 
+	# loop thru path 
+	IFS="/" 
+	for DIR in $1 
+	do 
+		if [ -n "$DIR" ] 
+		then 
+			if [ "$DIR" = ".." ] 
+			then 
+				ABS="${ABS%/*}" 
+			elif [ "$DIR" != "." ] 
+			then 
+				ABS="$ABS/$DIR" 
+			fi
+		fi
+	done 
+	IFS=":" 
+	echo "$ABS" 
+	return 0 
+}
+
+
+
+#
+# \brief Try to find all needed programs
+#
 checkEnv()
 {
 	if [ "x${find}" = "x" -o ! -x "${find}" ]; then
@@ -45,6 +92,11 @@ checkEnv()
 }
 
 
+
+
+#
+# \brief Generate a summary of all settings
+#
 printPkgSettings()
 {
 	if [ ! "x${pkgName}" = "x" ]; then
@@ -79,26 +131,39 @@ printPkgSettings()
 }
 
 
-# $1 The folder
-checkDevPackFolder()
+
+#
+# \brief Check if a folder exists
+#
+# If the folder does not exist, the script will abort (exit 5)
+#
+checkSingleFolder()
 {
-	if [ ! -d "${1}/cmake" ]; then
-		echo "[ERROR] Invalid DevPack structure: The folder '${1}/cmake' is missing"
+	if [ ! -d "${1}" ]; then
+		echo "[ERROR] Invalid DevPack structure: The folder '${1}' is missing"
 		exit 5
-	fi
-	if [ ! -d "${1}/${pkgCompiler}" ]; then
-		echo "[ERROR] Invalid DevPack structure: The folder '${1}/${pkgCompiler}' is missing"
-		exit 5
-	fi
-	if [ ! -d "${1}/${pkgCompiler}/include" ]; then
-		echo "[WARNING] Invalid DevPack structure: The folder '${1}/${pkgCompiler}/include' is missing"
-	fi
-	if [ ! -d "${1}/${pkgCompiler}/lib/${pkgTarget}" ]; then
-		echo "[WARNING] Invalid DevPack structure: The folder '${1}/${pkgCompiler}/lib/${pkgTarget}' is missing"
 	fi
 }
 
+#
+# \brief Check the consistency of a dev pack folder
+# \param $1 The folder
+#
+checkDevPackFolderConsistency()
+{
+	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/cmake"
+	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgCompiler}"
+	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgCompiler}/include"
+	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgCompiler}/lib"
+}
 
+
+
+
+
+#
+# \brief Generate the Help
+#
 help()
 {
 	echo "Yuni - Package maker for externals dependencies"
@@ -112,44 +177,75 @@ help()
 	echo "   -f  : Target folder for the package"
 	echo "   -c  : Compiler (ex: '-c vs9', '-c mingw', '-c g++', '-c g++4.2')"
 	echo "   -t  : Target (ex: '-t release', '-t debug')"
-	echo "   -z  : The program 'zip' to use to compress (archive) files (ex: '-z/usr/bin/zip')"
+	echo "   -z  : The absolute path to the program 'zip' to use to compress (archive) files (ex: '-z/usr/bin/zip')"
 	echo "   -h  : This help"
 	echo
 	echo "Example:"
-	echo "  ./makepackage.sh -n irrlicht -v1.4.1 -r3 ~/projects/irrlicht/1.4.1/trunk"
+	echo "  ./makepackage.sh -n irrlicht -v1.4.1 -r3 ~/somewhere/on/my/disks/my-devpacks/irrlicht"
 	echo
 	echo "Note: The source directory should be like this :"
 	echo "  + <the source dir>"
-	echo "    |- cmake (.cmake)"
-	echo "    |- <compiler> (g++, vs9...)"
-	echo "       |- include (.h)"
-	echo "       \- lib"
-	echo "          |- debug/ (.a,.so,.dll,.lib)"
-	echo "          \- release/ (.a,.so,.dll,.lib)"
+	echo "    |- <version>"
+	echo "       \- <revision>"
+	echo "          |- cmake (.cmake)"
+	echo "          |- <compiler> (g++, vs9...)"
+	echo "             |- include (.h)"
+	echo "             \- lib"
+	echo "                |- debug/ (.a,.so,.dll,.lib)"
+	echo "                \- release/ (.a,.so,.dll,.lib)"
 	echo
-	exit 0
+	exit 0  # Exits now
 }
 
 
-# -- Auto Detection - OS --
-if [ -x "/usr/bin/sw_vers" ]; then
-	# OS X
-	pkgOS="macos"
-else
-	linuxRelease=`ls /etc/*-release 2&>/dev/null`
-	if [ ! "x${linuxRelease}" = "x" ]; then
-		# GNU/Linux
-		pkgOS="linux"
+
+
+#
+# \brief Operating System Auto Detection
+#
+operatingSystemAutoDetection()
+{
+	unamedata=`uname -a`
+	pkgOS=""
+	if [ ! "`echo "${unamedata}" | grep -i Darwin`" = "" ]; then
+		pkgOS="macos" ; return
 	fi
-fi
+	if [ ! "`echo "${unamedata}" | grep -i Linux`" = "" ]; then
+		pkgOS="linux" ; return
+	fi
+	if [ ! "`echo "${unamedata}" | grep -i SunOS`" = "" ]; then
+		pkgOS="sun" ; return
+	fi
+	if [ ! "`echo "${unamedata}" | grep -i HP-UX`" = "" ]; then
+		pkgOS="hpux" ; return
+	fi
+	if [ ! "`echo "${unamedata}" | grep -i FreeBSD`" = "" ]; then
+		pkgOS="freebsd" ; return
+	fi
+	if [ ! "`echo "${unamedata}" | grep -i DargonFly`" = "" ]; then
+		pkgOS="dragonfly" ; return
+	fi
+	if [ ! "`echo "${unamedata}" | grep -i Cygwin`" = "" ]; then
+		pkgOS="cygwin" ; return
+	fi
+}
+
+# Try to detect the OS
+operatingSystemAutoDetection
 
 
 
+
+
+# Parse all command line arguments
+#
+# All options
 args=`getopt n:v:r:o:c:a:s:z:f:t:h $*`
+# Help
 if [ $? != 0 ]; then
 	help
-	exit 2
 fi
+# All other options
 set -- $args
 for i
 do
@@ -169,21 +265,30 @@ do
     esac
 done
 
+# The unmatched command line argument is devpack source folder
 pkgSource="$*"
 
+# Get the absolute path for the target folder
+targetFolder=`rel2abs "${targetFolder}"`
 
+
+
+# Check the env (all needed programs)
 checkEnv
 
 
 
 #
-# Go go go
+# --- Start the packaging ---
 #
-
 echo "Yuni - Package maker for externals dependencies"
 printPkgSettings
 
 
+
+
+
+# Check the consistency of all settings
 good='1'
 if [ "x${pkgName}" = "x" ]; then
 	echo "[ERROR] The name of the package is missing (ex: '-n irrlicht', '-n lua')"
@@ -210,7 +315,7 @@ if [ "x${pkgCompiler}" = "x" ]; then
 	good='0'
 fi
 if [ "x${pkgTarget}" = "x" ]; then
-	echo "[ERROR] The target is missing"
+	echo "[ERROR] The target is missing (ex: '-t release', '-t debug')"
 	good='0'
 fi
 
@@ -228,24 +333,35 @@ if [ "${good}" -eq 0 ]; then
 fi
 
 
+# The target DevPack - compressed file
 target="${targetFolder}/${pkgName}-${pkgVersion}-${pkgRevision}-${pkgOS}-${pkgArch}-${pkgCompiler}-${pkgTarget}.zip"
-
 echo " * Archive : ${target}"
 if [ -f "${target}" ]; then
 	echo "The archive file already exists. Aborting."
 	exit 1
-
 fi
 
-checkDevPackFolder "${pkgSource}"
+
+# Check the source folder consistency
+checkDevPackFolderConsistency "${pkgSource}"
 
 
+
+# The `yndevpack-*` file 
 devpack="${pkgSource}/yndevpack-${pkgName}-${pkgVersion}-${pkgRevision}-${pkgOS}-${pkgArch}-${pkgCompiler}-${pkgTarget}"
+if [ ! -f "${devpack}" ]; then
+	shouldDeleteDevPackIndex=1
+else
+	shouldDeleteDevPackIndex=0
+fi
 echo 1 > "${devpack}"
 
+# The tmpfile is the list of files to include
 tmpfile=`"${mktemp}" -t yunipackagemaker.XXXXXX` || exit 4
 
-# Waht files to include
+
+
+# What files to include
 cd "${pkgSource}" \
 	&& echo "Searching files to include into the package..." \
 	&& "${find}" . '(' ! -path '*/.*' -and ! -name '*.o' -and ! -name '#*' ')' > "${tmpfile}" \
@@ -259,14 +375,17 @@ else
 fi
 
 
-# Removing the tmp file
+
+# Removing the tmp files
 rm -f "${tmpfile}"
 if [ -f "${tmpfile}" ]; then
-	echo "[WARNING] The temporary file could be removed: '${tmpfile}'"
+	echo "[WARNING] The temporary file should be removed: '${tmpfile}'"
 fi
-rm -f "${devpack}"
+if [ "${shouldDeleteDevPackIndex}" -eq 1 ]; then
+	rm -f "${devpack}"
+fi
 
 
+# Done.
 echo "Done."
-
 

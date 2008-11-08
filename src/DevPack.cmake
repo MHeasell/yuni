@@ -1,0 +1,250 @@
+
+#
+# DevPacks Settings
+#
+SET(DevPackSourceFolder     "${CMAKE_SOURCE_DIR}/../devpacks")
+SET(DevPackReceiptsFolder   "${CMAKE_SOURCE_DIR}/../devpacks/receipts")
+SET(DevPackRepositoryURL    "http://devpacks.libyuni.org/")
+SET(DevPackSourceURL        "http://devpacks.libyuni.org/downloads")
+SET(DevPackPrefix           "yndevpack")
+
+
+
+
+
+
+# Where is unzip ?
+SET(DevPackSourceZIP)
+Find_Program(DevPackSourceZIP NAMES "unzip" "unzip.exe" PATHS "${CMAKE_SOURCE_DIR}/../bin")
+String(COMPARE EQUAL "${DevPackSourceZIP}" "DevPackSourceZIP-NOTFOUND" DevPackUnzipHasNotBeenFound)
+IF(DevPackUnzipHasNotBeenFound)
+	Message(SEND_ERROR "The program 'unzip' has not been found")
+EndIF(DevPackUnzipHasNotBeenFound)
+
+
+
+
+MACRO(DEVPACK_LIST_CONTAINS var value)
+	SET(${var})
+	FOREACH (value2 ${ARGN})
+		IF ("${value}" STREQUAL "${value2}")
+			SET(${var} TRUE)
+		ENDIF ("${value}" STREQUAL "${value2}")
+	ENDFOREACH (value2)
+ENDMACRO(DEVPACK_LIST_CONTAINS)
+
+
+#
+# Check if a DevPack is installed
+#
+MACRO(DEVPACK_IS_INSTALLED var dpname dpversion dprelease dpos dparch dpcompiler dptarget)
+
+	# Specific to the given pack
+	SET(DevPackFolder "${DevPackSourceFolder}/${dpname}")
+	SET(DevPackShortFilename "${dpname}-${dpversion}-r${dprelease}-${dpos}-${dparch}-${dpcompiler}-${dptarget}")
+	# File for informations about the pack
+	SET(DevPackFileInfo "${DevPackFolder}/${DevPackPrefix}-${DevPackShortFilename}")
+	# Title for this pack
+	SET(DevPackTitle "DevPack: ${dpname} (${dpversion}-r${dprelease}, ${dpos}, ${dparch}, ${dpcompiler}, ${dptarget})")
+	# Is this pack already available
+	SET(var FALSE)
+	SET(DevPackReady)
+
+	# Trying to find the appropriate file
+	File(GLOB FilesFound RELATIVE "${DevPackFolder}" "${DevPackFolder}/${DevPackPrefix}-*")
+	DEVPACK_LIST_CONTAINS(Contains "${DevPackPrefix}-${DevPackShortFilename}" ${FilesFound})
+	IF(Contains)
+		File(STRINGS "${DevPackFileInfo}" DevPackInfo)
+		List(FIND "${DevPackInfo}" "1" DevPackReady)
+		DEVPACK_LIST_CONTAINS(DevPackReady "1" ${DevPackInfo})
+		IF(NOT DevPackReady)
+			DEVPACK_LIST_CONTAINS(DevPackReady "ok" ${DevPackInfo})
+		ENDIF(NOT DevPackReady)
+	ENDIF(Contains)
+
+	If(DevPackReady)
+		SET(${var} TRUE)
+	EndIf(DevPackReady)
+
+ENDMACRO(DEVPACK_IS_INSTALLED)
+
+
+
+
+#
+# Check if a DevPack is already avialable in the `receipts` folder
+#
+MACRO(DEVPACK_IS_IN_RECEIPTS var dpname dpversion dprelease dpos dparch dpcompiler dptarget)
+
+	# Specific to the given pack
+	SET(DevPackFolder "${DevPackSourceFolder}/${dpname}")
+	SET(DevPackShortFilename "${dpname}-${dpversion}-r${dprelease}-${dpos}-${dparch}-${dpcompiler}-${dptarget}")
+	# Is this pack already available
+	SET(var FALSE)
+	SET(DevPackReady)
+
+	# Trying to find the appropriate file
+	File(GLOB FilesFound RELATIVE "${DevPackReceiptsFolder}" "${DevPackReceiptsFolder}/${DevPackShortFilename}.zip")
+	DEVPACK_LIST_CONTAINS(Contains "${DevPackShortFilename}.zip" ${FilesFound})
+	IF(Contains)
+		SET(${var} TRUE)
+	ENDIF(Contains)
+
+ENDMACRO(DEVPACK_IS_IN_RECEIPTS)
+
+
+
+
+
+
+#
+# Import settings from a DevPack
+#
+MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
+
+	# Specific to the given pack
+	SET(DevPackFolder "${DevPackSourceFolder}/${dpname}")
+	SET(DevPackShortFilename "${dpname}-${dpversion}-r${dprelease}-${dpos}-${dparch}-${dpcompiler}-${dptarget}")
+	# File for informations about the pack
+	SET(DevPackFileInfo "${DevPackFolder}/${DevPackPrefix}-${DevPackShortFilename}")
+	SET(DevPackURL "${DevPackSourceURL}/${DevPackShortFilename}.zip")
+		
+	# Title for this pack
+	SET(DevPackTitle "DevPack: ${dpname} (${dpversion}-r${dprelease}, ${dpos}, ${dparch}, ${dpcompiler}, ${dptarget})")
+	# Is this pack already available
+	SET(DevPackReady FALSE)
+
+	DEVPACK_IS_INSTALLED(DevPackReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}" "${dparch}"
+		"${dpcompiler}" "${dptarget}")
+
+	IF(NOT DevPackReady)
+
+		Message(STATUS "${DevPackTitle}: Missing")
+		File(MAKE_DIRECTORY "${DevPackReceiptsFolder}")
+		File(MAKE_DIRECTORY "${DevPackFolder}")
+		Set(DevPackReceiptReady FALSE)
+
+		DEVPACK_IS_IN_RECEIPTS(DevPackReceiptReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}" "${dparch}"
+			"${dpcompiler}" "${dptarget}")
+		IF(NOT DevPackReceiptReady)
+			Message(STATUS " . Downloading ${DevPackURL}")
+			# Download the Pack
+			File(DOWNLOAD "${DevPackURL}" "${DevPackReceiptsFolder}/${DevPackShortFilename}.zip"
+					STATUS DevPackDwnlStatus TIMEOUT 30)
+			DEVPACK_IS_IN_RECEIPTS(DevPackReceiptReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}"
+				"${dparch}" "${dpcompiler}" "${dptarget}")
+			IF(NOT DevPackReceiptReady)
+				Message(STATUS " . !! The download has failed")
+			EndIF(NOT DevPackReceiptReady)
+		EndIF(NOT DevPackReceiptReady)
+
+		IF(DevPackReceiptReady)
+			# Execute `unzip`
+			Message(STATUS " . Extracting the receipt file")
+			execute_process(COMMAND "${DevPackSourceZIP}"
+					-u "${DevPackReceiptsFolder}/${DevPackShortFilename}.zip"
+					-d "${DevPackFolder}"
+					WORKING_DIRECTORY "${DevPackFolder}" OUTPUT_QUIET)
+		EndIF(DevPackReceiptReady)
+		
+		DEVPACK_IS_INSTALLED(DevPackReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}" "${dparch}"
+			"${dpcompiler}" "${dptarget}")
+
+	Else(NOT DevPackReady)
+		Message(STATUS "${DevPackTitle}")
+	EndIf(NOT DevPackReady)
+
+	IF(NOT DevPackReady)
+		Message("")
+		Message("[!!] The installation of the DevPack `${dpname}` has failed.")
+		Message("     You can download the DevPack from this url :")
+		Message("      `${DevPackURL}`")
+		Message("     And put it into the `receipts` folder :")
+		Message("      `${DevPackReceiptsFolder}`")
+		Message("")
+		Message("[!!] If the devpack is already available in the receipts folder and you still have")
+		Message("     issues, please manually remove it and try again.")
+		Message("     Please visit `${DevPackRepositoryURL}` for all devpacks.")
+		Message("")
+		Message(FATAL_ERROR "Aborting now.")
+	Else(NOT DevPackReady)
+		SET(YUNI_CURRENT_DEVPACK_SOURCE_DIR "${DevPackFolder}/${dpversion}/r${dprelease}/${dpcompiler}")
+		Include("${DevPackFolder}/${dpversion}/r${dprelease}/cmake/CMakeLists-${dpname}-${dpos}-${dparch}-${dpcompiler}-${dptarget}.cmake")
+	EndIF(NOT DevPackReady)
+
+ENDMACRO(DEVPACK_IMPORT)
+
+
+
+
+
+
+MACRO(DEVPACK_SMART_IMPORT dpname dpversion dprelease dptarget)
+	SET(dpos		) # macos, windows, linux, sun
+	SET(dparch      ) # i386, ppc
+	SET(dpcompiler  "unknown") # g++, vs8, vs9, mingw
+
+	IF(CMAKE_COMPILER_IS_GNUCXX)
+		SET(dpcompiler "g++")
+	ENDIF(CMAKE_COMPILER_IS_GNUCXX)
+	# Trying to find out the operating system
+	IF(WIN32)
+		SET(dpos   "windows")
+		SET(dparch "i386")
+		IF(MINGW)
+			SET(dpcompiler "mingw")
+		ELSE(MINGW)
+			SET(dpcompiler "vs.unknown")
+			IF(MSVC70)
+				SET(dpcompiler "vs7")
+			ENDIF(MSVC70)
+			IF(MSVC80)
+				SET(dpcompiler "vs8")
+			ENDIF(MSVC80)
+			IF(MSVC90)
+				SET(dpcompiler "vs9")
+			ENDIF(MSVC80)
+		ENDIF(MINGW)
+	ELSE(WIN32)
+		execute_process(COMMAND "uname" "-p" OUTPUT_VARIABLE UNAME_P OUTPUT_STRIP_TRAILING_WHITESPACE)
+		String(TOLOWER "${UNAME_P}" UNAME_P)
+		String(COMPARE EQUAL "${UNAME_P}" "i386" IsI386)
+		String(COMPARE EQUAL "${UNAME_P}" "powerpc" IsPPC)
+		IF(IsI386)
+			SET(dparch "i386")
+		ENDIF(IsI386)
+		IF(IsPPC)
+			SET(dparch "ppc")
+		ENDIF(IsPPC)
+	ENDIF(WIN32)
+
+	IF(NOT dpos)
+		String(TOLOWER "${CMAKE_SYSTEM_NAME}" DevPackSystemName)
+		String(COMPARE EQUAL "${DevPackSystemName}" "linux" IsLinux)
+		IF(IsLinux)
+			SET(dpos "linux")
+		ENDIF(IsLinux)
+		String(COMPARE EQUAL "${DevPackSystemName}" "windows" IsWindows)
+		IF(IsWindows)
+			SET(dpos "windows")
+		ENDIF(IsWindows)
+		String(COMPARE EQUAL "${DevPackSystemName}" "freebsd" IsFreeBSD)
+		IF(IsFreeBSD)
+			SET(dpos "freebsd")
+		ENDIF(IsFreeBSD)
+		String(COMPARE EQUAL "${DevPackSystemName}" "darwin" IsDarwin)
+		IF(IsDarwin)
+			SET(dpos "macos")
+		ENDIF(IsDarwin)
+	ENDIF(NOT dpos)
+
+	IF(NOT dparch)
+		SET(dparch "i386")
+	ENDIF(NOT dparch)
+
+	# Import
+	DEVPACK_IMPORT("${dpname}" "${dpversion}" "${dprelease}" "${dpos}" "${dparch}" "${dpcompiler}" "${dptarget}")
+
+ENDMACRO(DEVPACK_SMART_IMPORT)
+
+
