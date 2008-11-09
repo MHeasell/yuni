@@ -3,7 +3,7 @@
 MACRO(DEVPACK_IMPORT_IRRLICHT)
 	If(YUNI_EXTERNAL_3D_IRRLICHT)
 		IF(APPLE)
-			DEVPACK_IMPORT("irrlicht" "1.4.2" "1" "macos" "ub" "g++" "all")
+			DEVPACK_IMPORT("irrlicht" "1.4.2" "2" "macos" "ub" "g++" "all")
 		EndIF(APPLE)
 	EndIf(YUNI_EXTERNAL_3D_IRRLICHT)
 ENDMACRO(DEVPACK_IMPORT_IRRLICHT)
