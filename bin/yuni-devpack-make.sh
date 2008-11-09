@@ -146,15 +146,31 @@ checkSingleFolder()
 }
 
 #
+# \brief Check if a file exists
+#
+# If the file does not exist, the script will abort (exit 5)
+#
+checkSingleFile()
+{
+	if [ ! -f "${1}" ]; then
+		echo "[ERROR] Invalid DevPack structure: The file '${1}' is missing"
+		exit 5
+	fi
+}
+
+
+#
 # \brief Check the consistency of a dev pack folder
 # \param $1 The folder
 #
 checkDevPackFolderConsistency()
 {
-	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/cmake"
-	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgCompiler}"
-	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgCompiler}/include"
-	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgCompiler}/lib"
+	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/cmake"
+	cmakelist="CMakeLists-${pkgName}-${pkgOS}-${pkgCompiler}-${pkgTarget}.cmake"
+	checkSingleFile "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/cmake/${cmakelist}"
+	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/${pkgCompiler}"
+	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/${pkgCompiler}/include"
+	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/${pkgCompiler}/lib"
 }
 
 
@@ -187,12 +203,13 @@ help()
 	echo "  + <the source dir>"
 	echo "    |- <version>"
 	echo "       \- <revision>"
-	echo "          |- cmake (.cmake)"
-	echo "          |- <compiler> (g++, vs9...)"
-	echo "             |- include (.h)"
-	echo "             \- lib"
-	echo "                |- debug/ (.a,.so,.dll,.lib)"
-	echo "                \- release/ (.a,.so,.dll,.lib)"
+	echo "          \- <arch>"
+	echo "             |- cmake (.cmake)"
+	echo "             |- <compiler> (g++, vs9...)"
+	echo "                |- include (.h)"
+	echo "                \- lib"
+	echo "                   |- debug/ (.a,.so,.dll,.lib)"
+	echo "                   \- release/ (.a,.so,.dll,.lib)"
 	echo
 	exit 0  # Exits now
 }
@@ -348,7 +365,8 @@ checkDevPackFolderConsistency "${pkgSource}"
 
 
 # The `yndevpack-*` file 
-devpack="${pkgSource}/yndevpack-${pkgName}-${pkgVersion}-${pkgRevision}-${pkgOS}-${pkgArch}-${pkgCompiler}-${pkgTarget}"
+devpackfile="yndevpack-${pkgName}-${pkgVersion}-${pkgRevision}-${pkgOS}-${pkgArch}-${pkgCompiler}-${pkgTarget}"
+devpack="${pkgSource}/${devpackfile}"
 if [ ! -f "${devpack}" ]; then
 	shouldDeleteDevPackIndex=1
 else
@@ -360,11 +378,15 @@ echo 1 > "${devpack}"
 tmpfile=`"${mktemp}" -t yunipackagemaker.XXXXXX` || exit 4
 
 
+# && "${find}" . '(' -path ''*/${pkgVersion}/r${pkgRevision}/${pkgArch}/${pkgCompiler}/*'' -and ! -path '*/.*' -and ! -name '*.o' -and ! -name '#*' ')' > "${tmpfile}" \
 
 # What files to include
+cmakelist="CMakeLists-${pkgName}-${pkgOS}-${pkgCompiler}-${pkgTarget}.cmake"
 cd "${pkgSource}" \
 	&& echo "Searching files to include into the package..." \
-	&& "${find}" . '(' ! -path '*/.*' -and ! -name '*.o' -and ! -name '#*' ')' > "${tmpfile}" \
+	&& "${find}" . '(' -regex "\./${pkgVersion}/${pkgRevision}/${pkgArch}/${pkgCompiler}/.*" -and -not -name '.*' -and -not -iname '*.o' -and -not -name '#*' ')' > "${tmpfile}" \
+	&& echo "./${pkgVersion}/${pkgRevision}/${pkgArch}/cmake/${cmakelist}" >> "${tmpfile}" \
+	&& echo "./${devpackfile}" >> "${tmpfile}" \
 	&& echo "Creating the archive... Please wait..." \
 	&& "${zip}" -n .Z:.zip:.png:.gif:.snd:.mp3:.jpg:.rar:.bz2:.gz -Xyr "${target}" . -i@"${tmpfile}"
 result="$?"
