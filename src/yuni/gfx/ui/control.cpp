@@ -11,10 +11,12 @@ namespace UI
 
 
 	Control::Control()
-		:Component(), pChildren(), pParent(), pPosition(), pSize(50, 50),
+		:Component(), // parent
+		pChildren(), pParent(), pPosition(), pSize(50, 50),
 		pVisible(true), pEnabled(true),
 		pIsInvalidate(true), pAutosize(false), pUpdateSessionRefCount(0)
 	{
+		// see the other constructor in `control.hxx`
 		// Initialize anchors
 		anchors[Anchor::akLeft].pOwner = this;
 		anchors[Anchor::akTop].pOwner = this;
@@ -47,7 +49,7 @@ namespace UI
 			detachFromParentWL();
 
 			// Prevent this control from drawing
-			pUpdateSessionRefCount = INT_MAX;
+			pUpdateSessionRefCount = INT_MAX / 2;
 
 			// Disconnect all anchors
 			anchors[Anchor::akLeft].resetSiblingWL();
@@ -445,8 +447,9 @@ namespace UI
 
 		// Ok, we can make have this new parent
 		pParent = newParent;
-		// Invalidate the control
-		invalidateWL();
+		// Invalidate the control and all children
+		beginUpdateWL();
+		endUpdateWL();
 		
 		// Success
 		return true;
@@ -559,7 +562,7 @@ namespace UI
 
 	bool Control::findChildFromPtr(SharedPtr<Control>& out, const void* toFind, const bool recursive)
 	{
-		if (toFind)
+		if (NULL != toFind)
 		{
 			MutexLocker locker(*this);
 			return (csDestroying != pState) && findChildFromPtrWL(out, toFind, recursive);
@@ -570,7 +573,7 @@ namespace UI
 
 	bool Control::existsChildFromPtr(const void* toFind, const bool recursive)
 	{
-		if (toFind)
+		if (NULL != toFind)
 		{
 			MutexLocker locker(*this);
 			return (csDestroying != pState) && existsChildFromPtrWL(toFind, recursive);
