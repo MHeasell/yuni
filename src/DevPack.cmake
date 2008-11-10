@@ -18,7 +18,7 @@ SET(DevPackSourceZIP)
 Find_Program(DevPackSourceZIP NAMES "unzip" "unzip.exe" PATHS "${CMAKE_SOURCE_DIR}/../bin")
 String(COMPARE EQUAL "${DevPackSourceZIP}" "DevPackSourceZIP-NOTFOUND" DevPackUnzipHasNotBeenFound)
 IF(DevPackUnzipHasNotBeenFound)
-	Message(SEND_ERROR "The program 'unzip' has not been found")
+	Message(FATAL_ERROR "The program 'unzip' has not been found")
 EndIF(DevPackUnzipHasNotBeenFound)
 
 
