@@ -386,12 +386,9 @@ namespace UI
 
 	void Control::detachFromParent()
 	{
-		if (pParent.valid()) // avoid unnecessary locks
-		{
-			pMutex.lock(); // Double check
-			detachFromParentWL();
-			pMutex.unlock();
-		}
+		pMutex.lock();
+		detachFromParentWL();
+		pMutex.unlock();
 	}
 
 
