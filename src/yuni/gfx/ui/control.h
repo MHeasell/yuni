@@ -9,7 +9,8 @@
 # include "../../threads/mutex.h"
 
 
-# define YUNI_GFX_UI_BORDER_SPACE_MAX  3.0f
+//! The maximum distance between two controls
+# define YUNI_GFX_UI_BORDER_SPACE_MAX  4.0f
 
 
 namespace Yuni
@@ -28,7 +29,7 @@ namespace UI
 	{
 		//! The standard unit
 		unStandard,
-		//! Percent
+		//! Percent of the screen
 		unPercent
 	};
 
@@ -60,37 +61,69 @@ namespace UI
 			/*!
 			** \brief Constructor
 			*/
-			Anchor() : /*pOwner(o), */ pSibling(), pUnit(unPercent), pValue(0.0f) {}
+			Anchor() : pOwner(NULL), pSibling(), pUnit(unPercent), pValue(0.0f) {}
 			//! Destructor
 			~Anchor() {}
 			//@}
 
+			/*!
+			** \brief Set the unit and the distance between the two controls
+			** \param v The new distance
+			** \param u The new unit
+			*/
+			void reset(const float v, const Unit& u = unPercent);
+			//! Get the current distance and unit used
+			std::pair<float, Unit> get();
+
+
+			//! \name Sibling
+			//@{
 			//! Get the sibling
 			SharedPtr<Control> sibling();
 			//! Set the sibling
 			template<class C> void sibling(const SharedPtr<C>& s);
+			//@}
 
+			//! \name Unit
+			//@{
+			//! Get the unit actually in use
+			Unit unit();
 			/*!
-			** \brief Set the border space
-			** \param v The value of the border space
-			** \param u The unit of the border space value
+			** \brief Set the unit
+			**
+			** The control will be forced to be redrawn if this method is not called
+			** inside the `beginUpdate()` and `endUpdate()` methodes
+			**
+			** \see Control::beginUpdate()
+			** \see Control::endUpdate()
 			*/
-			void borderSpace(const float v, const Unit& u = unPercent);
-			//! Get the border space
-			std::pair<float, Unit> borderSpace();
+			void unit(const Unit& u);
+			//@}
 
-			//! Get the border space unit only
-			Unit borderSpaceUnit();
-			//! Set the border space unit only
-			void borderSpaceUnit(const Unit& u);
-
-			//! Get the border space value only
-			float borderSpaceValue();
-			//! Set the border space value only
-			void borderSpaceValue(const float v);
+			//! \name Distance
+			//@{
+			//! Get the distance (according the unit) between the two controls
+			float distance();
+			/*!
+			** \brief Set the distance between the two controls
+			**
+			** The control will be forced to be redrawn if this method is not called
+			** inside the `beginUpdate()` and `endUpdate()` methodes
+			**
+			** \see Control::beginUpdate()
+			** \see Control::endUpdate()
+			*/
+			void distance(const float v);
+			//@}
 
 		private:
-			void resetSiblingWL();
+			void resetSiblingWL() {pSibling.reset();}
+
+			/*!
+			** \brief Reset the variable `pValue` (without locks)
+			** \param newV The new value to assign
+			*/
+			void setNewValueWL(const float newV);
 
 		private:
 			//! Mutex from
@@ -117,6 +150,9 @@ namespace UI
 
 		/*!
 		** \brief Constructor
+		**
+		** \param prnt The parent for this new control
+		** \tparam The class of the parent
 		*/
 		template<class C> Control(const SharedPtr<C>& prnt);
 
@@ -124,6 +160,9 @@ namespace UI
 		virtual ~Control();
 
 		//@}
+
+		// Get the string representation of the type of component (from the ancestor)
+		// virtual String type() const = 0; 
 
 
 		//! \name Parent
@@ -448,9 +487,9 @@ namespace UI
 
 
 	private:
-		//!
+		//! Autosize
 		bool pAutosize;
-		//!
+		//! 
 		int pUpdateSessionRefCount;
 		//!
 		bool pIsInvalidated;

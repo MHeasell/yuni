@@ -16,6 +16,8 @@ namespace UI
 		pVisible(true), pEnabled(true),
 		pIsInvalidate(true), pAutosize(false), pUpdateSessionRefCount(0)
 	{
+		// see the other constructor in `control.cpp`
+		// Initialize anchors
 		anchors[Anchor::akLeft].pOwner = this;
 		anchors[Anchor::akTop].pOwner = this;
 		anchors[Anchor::akRight].pOwner = this;
