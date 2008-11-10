@@ -15,6 +15,7 @@ namespace UI
 		pVisible(true), pEnabled(true),
 		pIsInvalidate(true), pAutosize(false), pUpdateSessionRefCount(0)
 	{
+		// Initialize anchors
 		anchors[Anchor::akLeft].pOwner = this;
 		anchors[Anchor::akTop].pOwner = this;
 		anchors[Anchor::akRight].pOwner = this;
@@ -26,14 +27,19 @@ namespace UI
 	Control::~Control()
 	{
 		if (pState != csDestroying)
+		{
+			// If the control is not yet aware of its destruction, it's time to inform it
+			// However, this statement should never be reached from here
 			destroying();
+		}
 		// Delete all children
 		clear();
 	}
-		
+
+
 	bool Control::onBeforeDestructionWL()
 	{
-		if (Control::onBeforeDestructionWL())
+		if (Component::onBeforeDestructionWL()) // ask to the ancestor first
 		{
 			// It is better to detach first this component from its parent
 			// In this way, it prevents against unwanted operations on these children, like
@@ -63,6 +69,7 @@ namespace UI
 		if (!pUpdateSessionRefCount)
 		{
 			pCacheBounds.reset(pPosition.x, pPosition.y, pPosition.x + pSize.x, pPosition.y + pSize.y);
+			// Make some stuff here...
 		}
 	}
 
@@ -259,6 +266,7 @@ namespace UI
 		return pAutosize;
 	}
 
+
 	void Control::autosize(const bool a)
 	{
 		pMutex.lock();
@@ -299,7 +307,9 @@ namespace UI
 		if (i->get() == c) // The first item is our control, nothing to do
 			return;
 		++i;
-		for (; i != pChildren.end(); ++i)
+		// End of the container
+		Vector::iterator end = pChildren.end();
+		for (; i != end; ++i)
 		{
 			if (i->get() == c) // It seems we've found our control
 			{
@@ -339,8 +349,10 @@ namespace UI
 		if (pChildren.empty() || csDestroying == pState || NULL == c)
 			return;
 
+		// End of the container
+		Vector::iterator end = pChildren.end();
 		// Browsing all children to find our control
-		for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+		for (Vector::iterator i = pChildren.begin(); i != end; ++i)
 		{
 			if (i->get() == c) // It seems we've found our control
 			{
@@ -362,8 +374,11 @@ namespace UI
 	{
 		if (pParent.valid())
 		{
+			// We make sure that we are really disconnected from the parent
+			// We suppose here the parent can not be destroyed before ourselves
 			Control* prnt = pParent.get();
 			pParent.reset();
+			// Keep inform the parent that we are no longer one of its children
 			prnt->internalUnregisterChild(this);
 		}
 	}
@@ -465,22 +480,28 @@ namespace UI
 
 	bool Control::findChildFromPtrWL(SharedPtr<Control>& out, const void* toFind, const bool recursive)
 	{
+		// End of the container
+		Vector::iterator end = pChildren.end();
+
+		// We want to make a recursive search
 		if (recursive)
 		{
-			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			for (Vector::iterator i = pChildren.begin(); i != end; ++i)
 			{
 				if (i->get() == toFind)
 				{
 					out.reset(*i);
 					return true;
 				}
+				// Ask to the child too
 				if ((*i)->findChildFromPtr(out, toFind, recursive))
 					return true;
 			}
 		}
 		else
 		{
-			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			// We only want to find one of out child
+			for (Vector::iterator i = pChildren.begin(); i != end; ++i)
 			{
 				if (i->get() == toFind)
 				{
@@ -495,22 +516,28 @@ namespace UI
 	
 	bool Control::findChildFromStringWL(SharedPtr<Control>& out, const String& toFind, const bool recursive)
 	{
+		// End of the container
+		Vector::iterator end = pChildren.end();
+
+		// We want to make a recursive search
 		if (recursive)
 		{
-			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			for (Vector::iterator i = pChildren.begin(); i != end; ++i)
 			{
 				if ((*i)->name() == toFind)
 				{
 					out.reset(*i);
 					return true;
 				}
+				// Ask to the child too
 				if ((*i)->findChildFromName(out, toFind, recursive))
 					return true;
 			}
 		}
 		else
 		{
-			for (Vector::iterator i = pChildren.begin(); i != pChildren.end(); ++i)
+			// We only want to find one of out child
+			for (Vector::iterator i = pChildren.begin(); i != end; ++i)
 			{
 				if ((*i)->name() == toFind)
 				{
@@ -581,7 +608,7 @@ namespace UI
 	{
 		if (nc)
 		{
-			pMutex.lock();
+			MutexLocker locker(*this);
 			if (!pChildren.empty())
 			{
 				Vector::iterator end = pChildren.end();
@@ -590,12 +617,10 @@ namespace UI
 					if (i->get() == nc)
 					{
 						pChildren.erase(i);
-						pMutex.unlock();
 						return;
 					}
-				}
-			}
-			pMutex.unlock();
+				} // for ...
+			} // !pChildren.empty()
 		}
 	}
 	
@@ -649,11 +674,15 @@ namespace UI
 			// We can safely unlock here, just before all children are destroyed
 			pMutex.unlock();
 
-			// All children will really be destroyed here
+			// All children will really be destroyed here  (Control::Vector copy)
+			// Note: The tool `MutexLocker should not be used here`. We want to be
+			// sure of the destruction order
 			return;
 		}
 		pMutex.unlock();
 	}
+
+
 
 
 	void Control::broadcastOnBeforeDestructionWL()
