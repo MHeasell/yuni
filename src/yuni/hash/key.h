@@ -75,7 +75,7 @@ namespace stdext
 			return (h(str.c_str()));
 		}
 
-		bool operator () (const Yuni::String& lhs, const Yuni::String& rhs)
+		bool operator () (const Yuni::String& lhs, const Yuni::String& rhs) const
 		{ return lhs < rhs; }
 	};
 
