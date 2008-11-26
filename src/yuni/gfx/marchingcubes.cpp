@@ -111,16 +111,16 @@ namespace Gfx
 	{
 		// Calculate the various points of the cube and associate them with indices
 		const Point3D<float> points[8] =
-			{
-				cell.min(),
-				Point3D<float>(cell.max().x, cell.min().y, cell.min().z),
-				Point3D<float>(cell.max().x, cell.max().y, cell.min().z),
-				Point3D<float>(cell.min().x, cell.max().y, cell.min().z),
-				Point3D<float>(cell.min().x, cell.min().y, cell.max().z),
-				Point3D<float>(cell.max().x, cell.min().y, cell.max().z),
-				cell.max(),
-				Point3D<float>(cell.min().x, cell.max().y, cell.max().z),
-			};
+		{
+			cell.min(),
+			Point3D<float>(cell.max().x, cell.min().y, cell.min().z),
+			Point3D<float>(cell.max().x, cell.max().y, cell.min().z),
+			Point3D<float>(cell.min().x, cell.max().y, cell.min().z),
+			Point3D<float>(cell.min().x, cell.min().y, cell.max().z),
+			Point3D<float>(cell.max().x, cell.min().y, cell.max().z),
+			cell.max(),
+			Point3D<float>(cell.min().x, cell.max().y, cell.max().z),
+		};
 
 		float vals[8];
 		// Actually calculate the value for each of the cell's 8 points
@@ -132,17 +132,17 @@ namespace Gfx
 		uint8 index = cubeIndex(isoValue, vals);
 
 		// Cube is entirely in/out of the surface
-		unsigned int edgeCase = sEdgeTable[index];
-		if (edgeCase == 0)
+		const unsigned int edgeCase = sEdgeTable[index];
+		if (0 == edgeCase)
 			return 0;
 
 		// Depending on this cube's configuration, we can deduce which neighbour cubes
 		// are cut by the surface.
 		bool neighbourCubesCut[8] =
-			{
-				// -x    +x     -y     +y     -z     +z
-				false, false, false, false, false, false
-			};
+		{
+			// -x    +x     -y     +y     -z     +z
+			false, false, false, false, false, false
+		};
 
 		// Find the vertices where the surface intersects the cube
 		Point3D<float> vertices[12];
@@ -269,6 +269,9 @@ namespace Gfx
 
 		return nbTriangles;
 	}
+
+
+
 
 	/*
 	** \brief Interpolate the point at which the surface cuts the edge
