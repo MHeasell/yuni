@@ -11,3 +11,4 @@ Include("${PROJECT_SOURCE_DIR}/../FindYuni.cmake")
 
 
 ADD_SUBDIRECTORY(automatic)
+ADD_SUBDIRECTORY(manual)
