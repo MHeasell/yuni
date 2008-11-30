@@ -1,7 +1,7 @@
-#ifndef __YUNI_MISC_EVENTS_PRIVATE_H__
-# define __YUNI_MISC_EVENTS_PRIVATE_H__
+#ifndef __YUNI_TOOLBOX_EVENT_PRIVATE_H__
+# define __YUNI_TOOLBOX_EVENT_PRIVATE_H__
 
-# include "../toolbox/smartptr/sharedptr.h"
+# include "../smartptr/sharedptr.h"
 
 
 namespace Yuni
@@ -522,4 +522,4 @@ namespace Events
 } // namespace Private
 } // namespace yuni
 
-#endif // __YUNI_MISC_EVENTS_PRIVATE_H__
+#endif // __YUNI_TOOLBOX_EVENT_PRIVATE_H__

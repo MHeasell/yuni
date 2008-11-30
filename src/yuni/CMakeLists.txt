@@ -41,6 +41,13 @@ set(SRC_SMARTPTR
 source_group(ToolBox\\SmartPtr FILES ${SRC_SMARTPTR})
 
 
+set(SRC_EVENT
+				toolbox/event/event.h toolbox/event/event.cpp
+				toolbox/event/event.private.h toolbox/event/event.proxy.h
+				toolbox/event.h)
+source_group(ToolBox\\Event FILES ${SRC_EVENT})
+
+
 
 
 # Misc
@@ -49,8 +56,7 @@ set(SRC_MISC
 				misc/files.h misc/files.cpp
 				misc/version.h misc/version.cpp
 				misc/static.h
-				misc/math.h
-				misc/event.h misc/event.proxy.h misc/event.private.h misc/event.cpp)
+				misc/math.h)
 
 source_group(Misc FILES ${SRC_MISC})
 
@@ -170,6 +176,7 @@ Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Add_Library(yuni-static STATIC
 				${SRC_STRING} ${SRC_POLICIES} ${SRC_SMARTPTR} ${SRC_MISC}
+				${SRC_EVENT}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}
