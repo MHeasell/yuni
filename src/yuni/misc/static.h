@@ -61,6 +61,13 @@ namespace Static
 
 
 
+	/*!
+	** \brief Compile time Error Definition
+	**
+	** \attention This class should not be used directly. Consieder the
+	** macro `YUNI_STATIC_ASSERT` instead.
+	** \see YUNI_STATIC_ASSERT()
+	*/
 	template<bool X, typename T> struct CompileTimeError;
 	template<typename T> struct CompileTimeError<true, T> { enum { Error = 1}; };
 
@@ -101,7 +108,7 @@ namespace Static
 */
 # define YUNI_STATIC_ASSERT(X,ID)  \
 		struct YUNI_JOIN(YuniStaticAssert_,ID) \
-		{ struct Failed; enum { value = Yuni::CompileTimeError<(0 != (X)), Failed>::Error }; }
+		{ struct Failed; enum { value = Yuni::Static::CompileTimeError<(0 != (X)), Failed>::Error }; }
 
 
 
