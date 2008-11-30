@@ -4,7 +4,7 @@
 # include <vector>
 # include <list>
 # include "../../yuni.h"
-# include "../../string.h"
+# include "../../toolbox/string.h"
 # include "../../toolbox/smartptr/sharedptr.h"
 
 

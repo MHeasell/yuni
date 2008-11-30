@@ -3,7 +3,7 @@
 
 # include "../../yuni.h"
 # include "../../toolbox/smartptr/sharedptr.h"
-# include "../../string.h"
+# include "../../toolbox/string.h"
 # include "../../threads/mutex.h"
 # include "component.h"
 # include "control.h"

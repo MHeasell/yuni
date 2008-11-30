@@ -3,7 +3,7 @@
 
 # include "../yuni.h"
 # include "../threads/thread.h"
-# include "../string.h"
+# include "../toolbox/string.h"
 
 
 

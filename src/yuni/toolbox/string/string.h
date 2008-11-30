@@ -6,7 +6,7 @@
 # include <vector>
 # include <string>
 # include <cstdarg>
-# include "../yuni.h"
+# include "../../yuni.h"
 
 
 //! \name Macros for Yuni::String

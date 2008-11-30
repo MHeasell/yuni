@@ -6,7 +6,7 @@
 #endif
 #ifdef YUNI_OS_LINUX
 #	include <fstream>
-#	include "../string.h"
+#	include "../toolbox/string.h"
 #endif
 #include "../system/windows.hdr.h"
 

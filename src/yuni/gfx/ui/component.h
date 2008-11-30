@@ -1,12 +1,12 @@
 #ifndef __YUNI_GFX_UI_COMPONENTS_H__
 # define __YUNI_GFX_UI_COMPONENTS_H__
 
-# include "../../yuni.h"
-# include "../../string.h"
-# include "../../threads/mutex.h"
-# include "../../toolbox/smartptr/sharedptr.h"
 # include <list>
 # include <vector>
+# include "../../yuni.h"
+# include "../../threads/mutex.h"
+# include "../../toolbox/string.h"
+# include "../../toolbox/smartptr/sharedptr.h"
 # include "../../misc/event.h"
 
 

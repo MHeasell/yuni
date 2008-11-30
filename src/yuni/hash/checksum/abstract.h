@@ -2,7 +2,7 @@
 # define __YUNI_HASH_ABSTRACT_H__
 
 # include "../../yuni.h"
-# include "../../misc/string.h"
+# include "../../toolbox/string.h"
 
 
 namespace Yuni

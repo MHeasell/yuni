@@ -1,7 +1,7 @@
 #ifndef __YUNI_GFX_RGB_A_H__
 # define __YUNI_GFX_RGB_A_H__
 
-# include "../misc/string.h"
+# include "../toolbox/string.h"
 # include "color.proxy.h"
 
 

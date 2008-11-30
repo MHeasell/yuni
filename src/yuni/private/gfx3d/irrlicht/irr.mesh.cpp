@@ -1,6 +1,6 @@
 
 #include "../../../yuni.h"
-#include "../../../misc/string.h"
+#include "../../../toolbox/string.h"
 #include "../../../hash/dictionary.h"
 #include "irr.mesh.h"
 

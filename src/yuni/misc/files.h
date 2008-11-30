@@ -2,7 +2,7 @@
 # define __YUNI_MISC_FILES_H__
 
 # include "../yuni.h"
-# include "string.h"
+# include "../toolbox/string.h"
 
 
 

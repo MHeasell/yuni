@@ -1,6 +1,5 @@
 
 #include <yuni/yuni.h>
-#include <yuni/string.h>		   // Yuni::String
 #include <yuni/hash/dictionary.h>  // Yuni::Hash::Dictionary
 #include <iostream>				// std::cout
 
