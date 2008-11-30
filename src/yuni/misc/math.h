@@ -3,6 +3,7 @@
 
 # include <stdlib.h>
 # include <math.h>
+# include <cstring>
 
 
 namespace Yuni
@@ -27,6 +28,9 @@ namespace Math
 	template<typename T>
 	inline const T& Max(const T& a, const T& b)  {return a < b ? b : a;}
 
+	// Maximum of two C-strings
+	inline const char* Max(const char* a, const char* b) {return std::strcmp(a, b) < 0 ? b : a;}
+
 	/*!
 	** \brief Get the expression considered as the smaller
 	**
@@ -36,6 +40,9 @@ namespace Math
 	*/
 	template<typename T>
 	inline const T& Min(const T& a, const T& b)  {return a < b ? a : b;}
+
+	// Minimum of two C-strings
+	inline const char* Min(const char* a, const char* b) {return std::strcmp(a, b) < 0 ? a : b;}
 
 
 	/*!
