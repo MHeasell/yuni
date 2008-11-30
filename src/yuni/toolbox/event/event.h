@@ -1,12 +1,12 @@
-#ifndef __YUNI_MISC_EVENTS_H__
-# define __YUNI_MISC_EVENTS_H__
+#ifndef __YUNI_TOOLBOX_EVENT_EVENT_H__
+# define __YUNI_TOOLBOX_EVENT_EVENT_H__
 
-# include "../yuni.h"
 # include <algorithm>
 # include <list>
 # include <set>
-# include "../toolbox/smartptr/sharedptr.h"
-# include "../toolbox/policies/threading.h"
+# include "../../yuni.h"
+# include "../smartptr/sharedptr.h"
+# include "../policies/threading.h"
 
 
 
@@ -967,4 +967,4 @@ namespace Event
 } // namespace Event
 } // namespace Yuni
 
-#endif // __YUNI_MISC_EVENTS_H__
+#endif // __YUNI_TOOLBOX_EVENT_EVENT_H__

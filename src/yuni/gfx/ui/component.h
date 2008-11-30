@@ -7,7 +7,7 @@
 # include "../../threads/mutex.h"
 # include "../../toolbox/string.h"
 # include "../../toolbox/smartptr/sharedptr.h"
-# include "../../misc/event.h"
+# include "../../toolbox/event/event.h"
 
 
 namespace Yuni

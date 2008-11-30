@@ -1,10 +1,11 @@
 #ifndef __YUNI_GFX_ENGINE_H__
 # define __YUNI_GFX_ENGINE_H__
 
+# include "../yuni.h"
 # include "device.h"
 # include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/event/event.proxy.h"
 # include "../threads/mutex.h"
-# include "../misc/event.proxy.h"
 
 
 namespace Yuni
