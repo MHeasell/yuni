@@ -1,5 +1,5 @@
-#ifndef __YUNI_MISC_STATIC_IF_H__
-# define __YUNI_MISC_STATIC_IF_H__
+#ifndef __YUNI_MISC_STATIC_H__
+# define __YUNI_MISC_STATIC_H__
 
 
 
@@ -113,4 +113,4 @@ namespace Static
 
 
 
-#endif // __YUNI_MISC_STATIC_IF_H__
+#endif // __YUNI_MISC_STATIC_H__
