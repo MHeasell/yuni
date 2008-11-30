@@ -21,6 +21,11 @@ Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 #
 # The Yuni Library
 #
+set(SRC_STRING
+				toolbox/string/string.h toolbox/string/string.cpp
+				toolbox/string.h)
+source_group(ToolBox\\String FILES ${SRC_STRING})
+
 
 set(SRC_POLICIES
 				toolbox/policies/threading.h
@@ -35,9 +40,11 @@ set(SRC_SMARTPTR
 				toolbox/smartptr/scopeptr.h)
 source_group(ToolBox\\SmartPtr FILES ${SRC_SMARTPTR})
 
+
+
+
 # Misc
 set(SRC_MISC
-				misc/string.h misc/string.cpp
 				misc/paths.h misc/paths.cpp
 				misc/files.h misc/files.cpp
 				misc/version.h misc/version.cpp
@@ -162,7 +169,7 @@ Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Add_Library(yuni-static STATIC
-				${SRC_POLICIES} ${SRC_SMARTPTR} ${SRC_MISC}
+				${SRC_STRING} ${SRC_POLICIES} ${SRC_SMARTPTR} ${SRC_MISC}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}

@@ -3,7 +3,7 @@
 
 # include "../yuni.h"
 # include "std.hashmap.h"
-# include "../misc/string.h"
+# include "../toolbox/string.h"
 # include "key.h"
 # include "../threads/mutex.h"
 

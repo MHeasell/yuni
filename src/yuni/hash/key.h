@@ -2,7 +2,7 @@
 # define __YUNI_HASH_KEY_H__
 
 # include "../yuni.h"
-# include "../misc/string.h"
+# include "../toolbox/string.h"
 # include "std.hashmap.h"
 
 

@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include "../yuni.h"
-# include "../misc/string.h"
+# include "../toolbox/string.h"
 # include "../misc/math.h"
 
 
