@@ -1,5 +1,5 @@
-#ifndef __YUNI_MISC_MATH_H__
-# define __YUNI_MISC_MATH_H__
+#ifndef __YUNI_TOOLBOX_MATH_MATH_H__
+# define __YUNI_TOOLBOX_MATH_MATH_H__
 
 # include <stdlib.h>
 # include <math.h>
@@ -177,8 +177,8 @@ namespace Math
 
 
 
-
 } // namespace Math
 } // namespace Yuni
 
-#endif // __YUNI_MISC_MATH_H__
+
+#ifndef // __YUNI_TOOLBOX_MATH_MATH_H__

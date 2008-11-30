@@ -1,4 +1,3 @@
-
 #ifndef __LIB_3D_MARCHINGCUBES_H__
 # define __LIB_3D_MARCHINGCUBES_H__
 
@@ -8,10 +7,12 @@
 # include "polygonizer.h"
 # include "implicitsurface.h"
 
+
 namespace Yuni
 {
 namespace Gfx
 {
+
 
 	/*!
 	** \class MarchingCubes

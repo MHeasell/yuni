@@ -1,6 +1,6 @@
 
 #include "color.proxy.h"
-#include "../misc/math.h"
+#include "../toolbox/math.h"
 #include "rgba.h"
 #include "rgb.h"
 

@@ -4,7 +4,6 @@
 # include <iostream>
 # include "../yuni.h"
 # include "../toolbox/string.h"
-# include "../misc/math.h"
 
 
 namespace Yuni

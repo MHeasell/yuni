@@ -2,7 +2,7 @@
 # define __YUNI_GFX_POINT2D_H__
 
 # include <iostream>
-# include "../misc/math.h"
+# include "../toolbox/math.h"
 
 
 
