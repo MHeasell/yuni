@@ -23,11 +23,11 @@ Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 #
 
 set(SRC_POLICIES
-				policies/threading.h
-				policies/checking.h
-				policies/ownership.h
-				policies/storage.h)
-source_group(Policies FILES ${SRC_POLICIES})
+				toolbox/smartptr/policies/threading.h
+				toolbox/smartptr/policies/checking.h
+				toolbox/smartptr/policies/ownership.h
+				toolbox/smartptr/policies/storage.h)
+source_group(ToolBox\\SmartPtr\\Policies FILES ${SRC_POLICIES})
 
 # Misc
 set(SRC_MISC
