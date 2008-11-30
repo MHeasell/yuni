@@ -32,6 +32,17 @@ namespace Math
 	inline const char* Max(const char* a, const char* b) {return std::strcmp(a, b) < 0 ? b : a;}
 
 	/*!
+	** \brief Maximum of three values
+	**
+	** \param a The first expression
+	** \param b The second expression
+	** \param c The third expression
+	** \return The expression considered as the grater
+	*/
+	template<typename T>
+	inline const T& Max(const T& a, const T& b, const T& c) {return Max<T>(Max<T>(a, b), c);}
+
+	/*!
 	** \brief Get the expression considered as the smaller
 	**
 	** \param a The first expression
@@ -43,6 +54,18 @@ namespace Math
 
 	// Minimum of two C-strings
 	inline const char* Min(const char* a, const char* b) {return std::strcmp(a, b) < 0 ? a : b;}
+
+	/*!
+	** \brief Minimum of three values
+	**
+	** \param a The first expression
+	** \param b The second expression
+	** \param c The third expression
+	** \return The expression considered as the smaller
+	*/
+	template<typename T>
+	inline const T& Min(const T& a, const T& b, const T& c) {return Min<T>(Min<T>(a, b), c);}
+
 
 
 	/*!
