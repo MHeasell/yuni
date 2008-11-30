@@ -1,12 +1,14 @@
-
-# include "../misc/math.h"
 # include "marchingcubes.h"
 # include "octree.h"
+# include "../toolbox/math.h"
+
 
 namespace Yuni
 {
 namespace Gfx
 {
+
+
 
 	/*
 	** \brief Polygonize a whole mesh for a given isosurface

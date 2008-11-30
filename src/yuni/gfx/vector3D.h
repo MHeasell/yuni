@@ -2,7 +2,7 @@
 # define __YUNI_GFX_VECTOR3D_H__
 
 # include <iostream>
-# include "../misc/math.h"
+# include "../toolbox/math.h"
 
 
 
