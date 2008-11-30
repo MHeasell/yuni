@@ -6,7 +6,7 @@
 # include "../../yuni.h"
 # include "../../string.h"
 # include "resolution.h"
-# include "../../misc/sharedptr.h"
+# include "../../toolbox/smartptr/sharedptr.h"
 
 
 

@@ -5,7 +5,7 @@
 # include <list>
 # include "../../yuni.h"
 # include "../../string.h"
-# include "../../misc/sharedptr.h"
+# include "../../toolbox/smartptr/sharedptr.h"
 
 
 

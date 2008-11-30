@@ -1,7 +1,7 @@
 #ifndef __YUNI_POLICIES_POLICIES_H__
 # define __YUNI_POLICIES_POLICIES_H__
 
-# include "../yuni.h"
+# include "../../yuni.h"
 
 
 /*!

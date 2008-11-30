@@ -4,7 +4,7 @@
 # include <vector>
 # include <iostream>
 # include "../yuni.h"
-# include "../misc/sharedptr.h"
+# include "../toolbox/smartptr/sharedptr.h"
 # include "point3D.h"
 # include "boundingbox.h"
 

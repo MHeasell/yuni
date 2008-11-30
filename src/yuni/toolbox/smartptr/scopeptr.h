@@ -1,7 +1,7 @@
 #ifndef __YUNI_MISC_SCOPE_PTR_H__
 # define __YUNI_MISC_SCOPE_PTR_H__
 
-# include "../yuni.h"
+# include "../../yuni.h"
 
 
 

@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include "../yuni.h"
-# include "../sharedptr.h"
+# include "../toolbox/smartptr/sharedptr.h"
 # include "../system/devices/resolution.h"
 # include "../system/devices/monitor.h"
 

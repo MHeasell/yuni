@@ -5,7 +5,7 @@
 # include "point3D.h"
 # include "vector3D.h"
 # include "../misc/string.h"
-# include "../misc/sharedptr.h"
+# include "../toolbox/smartptr/sharedptr.h"
 
 namespace Yuni
 {

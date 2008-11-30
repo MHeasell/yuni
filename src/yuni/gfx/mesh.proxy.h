@@ -1,10 +1,11 @@
-
 #ifndef __YUNI_PRIVATE_GFX_MESH_PROXY_H__
 # define __YUNI_PRIVATE_GFX_MESH_PROXY_H__
 
 # include <vector>
 # include "triangle.h"
-# include "../misc/sharedptr.h"
+# include "../toolbox/smartptr/sharedptr.h"
+
+
 
 namespace Yuni
 {
@@ -12,6 +13,8 @@ namespace Private
 {
 namespace Gfx
 {
+
+
 	/*!
 	** \class ProxyMesh
 	** \brief This is a proxy for the library-specific representation of a mesh
@@ -32,6 +35,8 @@ namespace Gfx
 		virtual void update(const TriangleList& triangles) = 0;
 
 	};
+
+
 
 } // Gfx
 } // Private

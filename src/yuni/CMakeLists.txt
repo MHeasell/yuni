@@ -23,11 +23,17 @@ Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 #
 
 set(SRC_POLICIES
-				toolbox/smartptr/policies/threading.h
-				toolbox/smartptr/policies/checking.h
-				toolbox/smartptr/policies/ownership.h
-				toolbox/smartptr/policies/storage.h)
-source_group(ToolBox\\SmartPtr\\Policies FILES ${SRC_POLICIES})
+				toolbox/policies/threading.h
+				toolbox/policies/checking.h
+				toolbox/policies/ownership.h
+				toolbox/policies/storage.h)
+source_group(ToolBox\\Policies FILES ${SRC_SMARTPTR})
+
+
+set(SRC_SMARTPTR
+				toolbox/smartptr/sharedptr.h toolbox/smartptr/sharedptr.hxx
+				toolbox/smartptr/scopeptr.h)
+source_group(ToolBox\\SmartPtr FILES ${SRC_SMARTPTR})
 
 # Misc
 set(SRC_MISC
@@ -37,7 +43,6 @@ set(SRC_MISC
 				misc/version.h misc/version.cpp
 				misc/static.h
 				misc/math.h
-				misc/sharedptr.h misc/scopeptr.h
 				misc/event.h misc/event.proxy.h misc/event.private.h misc/event.cpp)
 
 source_group(Misc FILES ${SRC_MISC})
@@ -157,7 +162,7 @@ Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Add_Library(yuni-static STATIC
-				${SRC_POLICIES} ${SRC_MISC}
+				${SRC_POLICIES} ${SRC_SMARTPTR} ${SRC_MISC}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}

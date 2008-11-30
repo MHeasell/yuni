@@ -1,7 +1,7 @@
 #ifndef __YUNI_MISC_SHARED_POINTER_H__
 # define __YUNI_MISC_SHARED_POINTER_H__
 
-# include "../yuni.h"
+# include "../../yuni.h"
 
 
 namespace Yuni

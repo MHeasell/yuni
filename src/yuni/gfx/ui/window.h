@@ -2,7 +2,7 @@
 # define __YUNI_GFX_UI_WINDOW_H__
 
 # include "../../yuni.h"
-# include "../../sharedptr.h"
+# include "../../toolbox/smartptr/sharedptr.h"
 # include "../../string.h"
 
 

@@ -4,7 +4,7 @@
 # include "../../yuni.h"
 # include "../../string.h"
 # include "../../threads/mutex.h"
-# include "../../misc/sharedptr.h"
+# include "../../toolbox/smartptr/sharedptr.h"
 # include <list>
 # include <vector>
 # include "../../misc/event.h"
