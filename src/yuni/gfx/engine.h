@@ -2,7 +2,7 @@
 # define __YUNI_GFX_ENGINE_H__
 
 # include "device.h"
-# include "../misc/sharedptr.h"
+# include "../toolbox/smartptr/sharedptr.h"
 # include "../threads/mutex.h"
 # include "../misc/event.proxy.h"
 

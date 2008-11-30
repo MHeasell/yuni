@@ -5,8 +5,8 @@
 # include <algorithm>
 # include <list>
 # include <set>
-# include "sharedptr.h"
-# include "../policies/threading.h"
+# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/policies/threading.h"
 
 
 

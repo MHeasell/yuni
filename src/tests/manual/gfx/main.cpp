@@ -1,8 +1,10 @@
 
-#include "misc/sharedptr.h"
-#include "gfx/mesh.h"
-#include "gfx/marchingcubes.h"
-#include "gfx/metaball.h"
+#include <yuni/yuni.h>
+#include <yuni/gfx/mesh.h>
+#include <yuni/gfx/marchingcubes.h>
+#include <yuni/gfx/metaball.h>
+
+
 
 using namespace Yuni;
 using namespace Yuni::Gfx;

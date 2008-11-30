@@ -1,6 +1,6 @@
 
 #include <yuni/yuni.h>
-#include <yuni/sharedptr.h>
+#include <yuni/toolbox/smartptr/sharedptr.h>
 #include <vector>
 #include <iostream>
 

@@ -7,9 +7,9 @@
 
 
 # ifdef YUNI_WINDOWS
-#	include "../system/windows.hdr.h"
+#	include "../../system/windows.hdr.h"
 # endif
-# include "../threads/mutex.h"
+# include "../../threads/mutex.h"
 
 
 

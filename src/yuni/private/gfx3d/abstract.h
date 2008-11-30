@@ -3,7 +3,7 @@
 
 # include "../../yuni.h"
 # include "../../gfx/device.h"
-# include "../../sharedptr.h"
+# include "../../toolbox/smartptr/sharedptr.h"
 # include "../../threads/mutex.h"
 # include "../../misc/event.h"
 

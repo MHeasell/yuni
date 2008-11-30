@@ -1,6 +1,5 @@
 
 #include <yuni/yuni.h>
-#include <yuni/sharedptr.h>
 #include <yuni/system/devices/display.h>
 #include <iostream>
 
