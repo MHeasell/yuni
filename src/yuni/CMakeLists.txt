@@ -21,35 +21,35 @@ Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 #
 # The Yuni Library
 #
-set(SRC_STRING
+set(SRC_TOOLBOX_STRING
 				toolbox/string/string.h toolbox/string/string.cpp
 				toolbox/string.h)
-source_group(ToolBox\\String FILES ${SRC_STRING})
+source_group(ToolBox\\String FILES ${SRC_TOOLBOX_STRING})
 
 
-set(SRC_POLICIES
+set(SRC_TOOLBOX_POLICIES
 				toolbox/policies/threading.h
 				toolbox/policies/checking.h
 				toolbox/policies/ownership.h
 				toolbox/policies/storage.h)
-source_group(ToolBox\\Policies FILES ${SRC_SMARTPTR})
+source_group(ToolBox\\Policies FILES ${SRC_TOOLBOX_SMARTPTR})
 
 
-set(SRC_SMARTPTR
+set(SRC_TOOLBOX_SMARTPTR
 				toolbox/smartptr/sharedptr.h toolbox/smartptr/sharedptr.hxx
 				toolbox/smartptr/scopeptr.h)
-source_group(ToolBox\\SmartPtr FILES ${SRC_SMARTPTR})
+source_group(ToolBox\\SmartPtr FILES ${SRC_TOOLBOX_SMARTPTR})
 
 
-set(SRC_EVENT
+set(SRC_TOOLBOX_EVENT
 				toolbox/event/event.h toolbox/event/event.cpp
 				toolbox/event/event.private.h toolbox/event/event.proxy.h
 				toolbox/event.h)
-source_group(ToolBox\\Event FILES ${SRC_EVENT})
+source_group(ToolBox\\Event FILES ${SRC_TOOLBOX_EVENT})
 
 
-set(SRC_MATH	toolbox/math/math.h  toolbox/math.h)
-source_group(ToolBox\\Math FILES ${SRC_MATH})
+set(SRC_TOOLBOX_MATH	toolbox/math/math.h  toolbox/math.h)
+source_group(ToolBox\\Math FILES ${SRC_TOOLBOX_MATH})
 
 
 set(SRC_VERSION	toolbox/version/version.h  toolbox/version/version.cpp)
@@ -181,9 +181,10 @@ Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Add_Library(yuni-static STATIC
-				${SRC_STRING} ${SRC_POLICIES} ${SRC_SMARTPTR} ${SRC_MISC}
-				${SRC_EVENT} ${SRC_VERSION}
-				${SRC_MATH}
+				${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_POLICIES}
+				${SRC_TOOLBOX_SMARTPTR} ${SRC_MISC}
+				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
+				${SRC_TOOLBOX_MATH}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}
