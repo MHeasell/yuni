@@ -52,13 +52,16 @@ set(SRC_MATH	toolbox/math/math.h  toolbox/math.h)
 source_group(ToolBox\\Math FILES ${SRC_MATH})
 
 
+set(SRC_VERSION	toolbox/version/version.h  toolbox/version/version.cpp)
+source_group(ToolBox\\Version FILES ${SRC_VERSION})
+
+
 
 
 # Misc
 set(SRC_MISC
 				misc/paths.h misc/paths.cpp
 				misc/files.h misc/files.cpp
-				misc/version.h misc/version.cpp
 				misc/static.h)
 
 source_group(Misc FILES ${SRC_MISC})
@@ -179,7 +182,7 @@ Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Add_Library(yuni-static STATIC
 				${SRC_STRING} ${SRC_POLICIES} ${SRC_SMARTPTR} ${SRC_MISC}
-				${SRC_EVENT}
+				${SRC_EVENT} ${SRC_VERSION}
 				${SRC_MATH}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
