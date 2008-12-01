@@ -181,4 +181,4 @@ namespace Math
 } // namespace Yuni
 
 
-#ifndef // __YUNI_TOOLBOX_MATH_MATH_H__
+#endif // __YUNI_TOOLBOX_MATH_MATH_H__
