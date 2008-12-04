@@ -26,7 +26,6 @@ set(SRC_TOOLBOX_STRING
 				toolbox/string.h)
 source_group(ToolBox\\String FILES ${SRC_TOOLBOX_STRING})
 
-
 set(SRC_TOOLBOX_POLICIES
 				toolbox/policies/threading.h
 				toolbox/policies/checking.h
@@ -50,6 +49,14 @@ source_group(ToolBox\\Event FILES ${SRC_TOOLBOX_EVENT})
 
 set(SRC_TOOLBOX_MATH	toolbox/math/math.h  toolbox/math.h)
 source_group(ToolBox\\Math FILES ${SRC_TOOLBOX_MATH})
+
+set(SRC_TOOLBOX_GETOPT
+				toolbox/getopt/getopt.h
+				toolbox/getopt/convertions.h
+				toolbox/getopt/convertions.hxx
+				toolbox/getopt/option.h toolbox/getopt/option.hxx toolbox/getopt/option.cpp
+				toolbox/getopt/parser.h toolbox/getopt/parser.hxx toolbox/getopt/parser.cpp)
+source_group(ToolBox\\GetOpt FILES ${SRC_TOOLBOX_GETOPT})
 
 
 set(SRC_VERSION	toolbox/version/version.h  toolbox/version/version.cpp)
@@ -185,6 +192,7 @@ Add_Library(yuni-static STATIC
 				${SRC_TOOLBOX_SMARTPTR} ${SRC_MISC}
 				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
 				${SRC_TOOLBOX_MATH}
+				${SRC_TOOLBOX_GETOPT}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}
