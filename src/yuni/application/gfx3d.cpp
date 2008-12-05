@@ -21,7 +21,7 @@ namespace Application
 
 
 	Gfx3D::Gfx3D(int argc, char* argv[])
-		:Abstract(argc, argv), Event::Receiver(), device()
+		:AApplication(argc, argv), Event::Receiver(), device()
 	{
 		Gfx::Engine::Instance()->applicationTitle("Loading");
 		atexit(&GracefullyStopTheEngine);

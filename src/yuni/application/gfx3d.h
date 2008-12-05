@@ -1,7 +1,7 @@
 #ifndef __YUNI_APPLICATION_GFX_3D_H__
 # define __YUNI_APPLICATION_GFX_3D_H__
 
-# include "abstract.h"
+# include "application.h"
 # include "../gfx/device.h"
 # include "../toolbox/event/event.h"
 # include "../gfx/engine.h"
@@ -17,13 +17,13 @@ namespace Application
 	/*!
 	** \brief 3D Application
 	*/
-	class Gfx3D : public Application::Abstract, public Event::Receiver
+	class Gfx3D : public Application::AApplication, public Event::Receiver
 	{
 	public:
 		/*!
 		** \brief Get the global instance of the console application
 		*/
-		static Gfx3D* Instance() {return dynamic_cast<Gfx3D*>(Abstract::Instance());}
+		static Gfx3D* Instance() {return dynamic_cast<Gfx3D*>(AApplication::Instance());}
 
 	public:
 		//! \name Constructor & Destructor

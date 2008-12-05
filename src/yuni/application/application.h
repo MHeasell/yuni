@@ -1,5 +1,5 @@
-#ifndef __YUNI_APPLICATION_ABSTRACT_H__
-# define __YUNI_APPLICATION_ABSTRACT_H__
+#ifndef __YUNI_APPLICATION_AAPPLICATION_H__
+# define __YUNI_APPLICATION_AAPPLICATION_H__
 
 # include "../yuni.h"
 # include "../toolbox/string.h"
@@ -11,21 +11,21 @@ namespace Application
 {
 
 
-	class Abstract
+	class AApplication
 	{
 	public:
 		/*!
 		** \brief Get the global instance of the application
 		*/
-		static Abstract* Instance();
+		static AApplication* Instance();
 
 	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Constructor
-		Abstract(int argc, char* argv[]);
+		AApplication(int argc, char* argv[]);
 		//! Destructor
-		virtual ~Abstract();
+		virtual ~AApplication();
 		//@}
 
 		/*!
@@ -71,7 +71,7 @@ namespace Application
 		//! Exit code
 		sint8 pExitCode;
 
-	}; // class Application::Abstract
+	}; // class Application::AApplication
 
 
 
@@ -82,4 +82,4 @@ namespace Application
 } // namespace Yuni
 
 
-#endif // __YUNI_APPLICATION_ABSTRACT_H__
+#endif // __YUNI_APPLICATION_AAPPLICATION_H__

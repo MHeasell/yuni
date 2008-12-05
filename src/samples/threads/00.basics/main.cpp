@@ -18,7 +18,7 @@ static Yuni::Mutex mutex;
  * This task is implemented in the onExecute() method, and consists
  * here of a sample: counting beer bottles.
  */
-class BottleTask : public Yuni::Threads::Abstract
+class BottleTask : public Yuni::Threads::AThread
 {
 public:
 	/*!
@@ -26,7 +26,7 @@ public:
 	 * \param[in] identifier A thread identifier, used only for display
 	 *            purposes
    */
-	BottleTask(const int identifier) :Yuni::Threads::Abstract(), x(identifier) {}
+	BottleTask(const int identifier) :Yuni::Threads::AThread(), x(identifier) {}
 
 	virtual ~BottleTask() {stop();}
 
@@ -94,7 +94,7 @@ int main(void)
 	 * how many CPUs the system has, so you can plan how you will
 	 * manage your resources.
 	 */
-	std::cout << "[M] Your system has " << Yuni::Threads::Abstract::CPUCount()
+	std::cout << "[M] Your system has " << Yuni::Threads::AThread::CPUCount()
 		<< " logical processor(s)." << std::endl;
 
 	/*
@@ -103,7 +103,7 @@ int main(void)
 	 * We can use it as an abstract or specific class, depending
 	 * on the way we want to manage it.
 	 */
-	Yuni::Threads::Abstract * t = new BottleTask(0);
+	Yuni::Threads::AThread * t = new BottleTask(0);
 	std::cout << "[M] Starting bottle counting..." << std::endl;
 
 	/*

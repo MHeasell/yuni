@@ -37,7 +37,7 @@ namespace UI
 	/*!
 	** \brief Control (Visual component)
 	*/
-	class Control : public Component
+	class Control : public AComponent
 	{
 	public:
 		//! Vector of components

@@ -10,11 +10,11 @@ namespace Threads
 {
 
 
-	Abstract::Abstract()
-		:Private::AbstractThreadModel()
+	AThread::AThread()
+		:Private::AThreadModel()
 	{}
 
-	Abstract::~Abstract()
+	AThread::~AThread()
 	{
 		assert(isRunning() == false);
 	}

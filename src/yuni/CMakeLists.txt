@@ -85,7 +85,7 @@ source_group(Hash FILES ${SRC_HASH})
 
 # Hash - Checksums
 set(SRC_HASH_CHECKSUM
-				hash/checksum/abstract.h hash/checksum/abstract.cpp
+				hash/checksum/checksum.h hash/checksum/checksum.cpp
 				hash/checksum/md5.h hash/checksum/md5.cpp)
 source_group(Hash\\Checksum FILES ${SRC_HASH_CHECKSUM})
 
@@ -127,13 +127,13 @@ source_group(Threads FILES ${SRC_THREADS})
 # Jobs
 set(SRC_JOBS
 				jobs.h
-				jobs/abstract.h jobs/abstract.cpp)
+				jobs/job.h jobs/job.cpp)
 source_group(Jobs FILES ${SRC_THREADS})
 
 
 # Application
 set(SRC_APPLICATION
-				application/abstract.h application/abstract.cpp
+				application/application.h application/application.cpp
 				application/console.h application/console.cpp
 				application/gfx3d.h application/gfx3d.cpp)
 source_group(Application FILES ${SRC_APPLICATION})

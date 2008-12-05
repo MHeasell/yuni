@@ -16,7 +16,7 @@ namespace Yuni
     ** You should not use this routine when using the thread facility provided
     ** by the Yuni library and you should prefer the method `suspend()` instead.
     **
-    ** \see Yuni::Threads::Abstract::suspend()
+    ** \see Yuni::Threads::AThread::suspend()
     */
     void Sleep(const uint32 seconds);
 

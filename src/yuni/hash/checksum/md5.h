@@ -2,7 +2,7 @@
 # define __YUNI_HASH_MD5_H__
 
 # include "../../yuni.h"
-# include "abstract.h"
+# include "checksum.h"
 
 
 
@@ -44,7 +44,7 @@ namespace Checksum
 	** std::cout << md5["Hello world"] << std::endl;
 	** \endcode
 	*/
-	class MD5 : public Hash::Checksum::Abstract
+	class MD5 : public Hash::Checksum::AChecksum
 	{
 	public:
 		/*!

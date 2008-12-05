@@ -44,7 +44,7 @@ namespace Threads
 	** }
 	** \endcode
 	*/
-	class Timer : public Private::AbstractThreadModel
+	class Timer : public Private::AThreadModel
 	{
 	public:
 		//! \name Constructor & Destructor
