@@ -1,5 +1,5 @@
 
-#include "abstract.h"
+#include "job.h"
 #include "../toolbox/math.h"
 
 
@@ -11,22 +11,22 @@ namespace Jobs
 {
 
 
-	Abstract::Abstract()
+	AJob::AJob()
 		:pMutex(), pState(jsIdle), pName(), pProgression(0.0f), pThread(NULL)
 	{}
 
-	Abstract::~Abstract()
+	AJob::~AJob()
 	{}
 
 
 
-	String Abstract::name()
+	String AJob::name()
 	{
 		MutexLocker locker(pMutex);
 		return pName;
 	}
 
-	void Abstract::name(const String& n)
+	void AJob::name(const String& n)
 	{
 		pMutex.lock();
 		pName = n;
@@ -34,26 +34,26 @@ namespace Jobs
 	}
 
 	
-	void Abstract::attachToThread(Threads::Private::AbstractThreadModel* t)
+	void AJob::attachToThread(Threads::Private::AThreadModel* t)
 	{
 		pMutex.lock();
 		pThread = t;
 		pMutex.unlock();
 	}
 
-	Threads::Private::AbstractThreadModel* Abstract::attachedThread()
+	Threads::Private::AThreadModel* AJob::attachedThread()
 	{
 		MutexLocker locker(pMutex);
 		return pThread;
 	}
 
 
-	bool Abstract::suspend(const uint32 delay)
+	bool AJob::suspend(const uint32 delay)
 	{
 		pMutex.lock();
 		if (pThread && jsRunning == pState)
 		{
-			Threads::Private::AbstractThreadModel* t(pThread);
+			Threads::Private::AThreadModel* t(pThread);
 			pState = jsSleeping;
 			pMutex.unlock();
 			bool sRet = t->suspend(delay);
@@ -68,7 +68,7 @@ namespace Jobs
 	}
 
 
-	void Abstract::progression(const float p)
+	void AJob::progression(const float p)
 	{
 		pMutex.lock();
 		pProgression = p;
@@ -76,14 +76,14 @@ namespace Jobs
 	}
 
 
-	State Abstract::state()
+	State AJob::state()
 	{
 		MutexLocker locker(pMutex);
 		return pState;
 	}
 
 
-	void Abstract::execute()
+	void AJob::execute()
 	{
 		// Lock
 		pMutex.lock();

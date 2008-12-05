@@ -9,11 +9,11 @@ namespace Hash
 namespace Checksum
 {
 
-	Abstract::Abstract()
+	AChecksum::AChecksum()
 		:pValue()
 	{}
 
-	Abstract::~Abstract()
+	AChecksum::~AChecksum()
 	{}
 
 

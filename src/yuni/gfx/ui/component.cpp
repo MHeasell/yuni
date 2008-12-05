@@ -11,26 +11,26 @@ namespace UI
 {
 
 
-	Component::Component()
+	AComponent::AComponent()
 		:Event::Receiver(), pState(csReady), pName()
 	{}
 
 
-	Component::~Component()
+	AComponent::~AComponent()
 	{
 		// Make sure all disconnections are done
 		if (pState != csDestroying)
 			onBeforeDestructionWL();
 	}
 
-	bool Component::destroying()
+	bool AComponent::destroying()
 	{
 		MutexLocker locker(*this);
 		return onBeforeDestructionWL();
 	}
 
 
-	bool Component::onBeforeDestructionWL()
+	bool AComponent::onBeforeDestructionWL()
 	{
 		if (pState == csDestroying) // already done, nothing to do
 			return false;
@@ -45,13 +45,13 @@ namespace UI
 	}
 
 
-	String Component::name()
+	String AComponent::name()
 	{
 		MutexLocker locker(*this);
 		return pName;
 	}
 
-	void Component::name(const String& n)
+	void AComponent::name(const String& n)
 	{
 		pMutex.lock();
 		if (csDestroying != pState)
@@ -60,14 +60,14 @@ namespace UI
 	}
 
 
-	Component::State Component::state()
+	AComponent::State AComponent::state()
 	{
 		MutexLocker locker(*this);
 		return pState;
 	}
 
 
-	bool Component::ready()
+	bool AComponent::ready()
 	{
 		MutexLocker locker(*this);
 		return (pState == csReady);

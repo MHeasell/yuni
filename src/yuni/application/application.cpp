@@ -1,5 +1,5 @@
 
-#include "abstract.h"
+#include "application.h"
 #include "../misc/paths.h"
 
 
@@ -11,16 +11,16 @@ namespace Application
 	namespace
 	{
 		//! The global instance of the application
-		Abstract* gApplicationInstance = NULL;
+		AApplication* gApplicationInstance = NULL;
 
 	} // anonymous namespace
 
-	Abstract* Abstract::Instance()
+	AApplication* AApplication::Instance()
 	{
 		return gApplicationInstance;
 	}
 
-	Abstract::Abstract(int argc, char* argv[])
+	AApplication::AApplication(int argc, char* argv[])
 		:pTerminated(false), pExeName(), pRootFolder()
 	{
 		if (NULL != gApplicationInstance)
@@ -29,13 +29,13 @@ namespace Application
 		pTerminated = parseCommandLine(argc, argv);
 	}
 
-	Abstract::~Abstract()
+	AApplication::~AApplication()
 	{
 		gApplicationInstance = NULL;
 	}
 
 
-	bool Abstract::parseCommandLine(int /*argc*/, char* argv[])
+	bool AApplication::parseCommandLine(int /*argc*/, char* argv[])
 	{
 		// Find the absolute folder of the application
 		if (Paths::IsAbsolute(argv[0]))

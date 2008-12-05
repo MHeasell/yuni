@@ -53,7 +53,7 @@ namespace Gfx
 
 	private:
 		//! List of meta-objects in the manager
-		std::vector<SharedPtr<MetaObject> > pObjects;
+		std::vector<SharedPtr<AMetaObject> > pObjects;
 
 	}; // class ImplicitSurfManager
 

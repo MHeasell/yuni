@@ -15,8 +15,8 @@ namespace Jobs
 
 
 
-// class Yuni::Jobs::Abstract
-# include "jobs/abstract.h"
+// class Yuni::Jobs::AJob
+# include "jobs/job.h"
 
 
 

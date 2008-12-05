@@ -1,5 +1,5 @@
-#ifndef __YUNI_THREADS_THREAD_ABSTRACT_H__
-# define __YUNI_THREADS_THREAD_ABSTRACT_H__
+#ifndef __YUNI_THREADS_ATHREAD_H__
+# define __YUNI_THREADS_ATHREAD_H__
 
 # include "../yuni.h"
 # include "mutex.h"
@@ -22,17 +22,17 @@ namespace Threads
 
 
 
-	/*! \class Abstract
+	/*! \class AThread
 	**  \brief Higher-level threading interface (abstract)
 	**  \ingroup Threads
 	**
 	** To create your own thread, you only have to implement the methode execute(), as follow:
 	** 
 	** \code
-	** class MyOwnThread : public Yuni::Threads::Abstract
+	** class MyOwnThread : public Yuni::Threads::AThread
 	** {
 	** public:
-	**   MyOwnThread(int p): Yuni::Threads::Abstract(), pTag(p)  {}
+	**   MyOwnThread(int p): Yuni::Threads::AThread(), pTag(p)  {}
 	**   virtual ~MyOwnThread() {stop();} // Required
 	**
 	** protected:
@@ -59,15 +59,15 @@ namespace Threads
 	** }
 	** \endcode
 	*/
-	class Abstract : public Private::AbstractThreadModel
+	class AThread : public Private::AThreadModel
 	{
 	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		Abstract();
+		AThread();
 		//! Destructor
-		virtual ~Abstract();
+		virtual ~AThread();
 		//@}
 
 	protected:
@@ -119,7 +119,7 @@ namespace Threads
 		//! Merely calls our `onExecute()` event
 		virtual void baseExecute() {onExecute();}
 
-	}; // class Abstract
+	}; // class AThread
 
 
 
@@ -127,4 +127,4 @@ namespace Threads
 } // namespace Threads
 } // namespace Yuni
 
-#endif // __YUNI_THREADS_THREAD_ABSTRACT_H__
+#endif // __YUNI_THREADS_ATHREAD_H__

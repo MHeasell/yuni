@@ -1,5 +1,5 @@
-#ifndef __YUNI_JOBS_ABSTRACT_H__
-# define __YUNI_JOBS_ABSTRACT_H__
+#ifndef __YUNI_JOBS_AJOB_H__
+# define __YUNI_JOBS_AJOB_H__
 
 # include "../yuni.h"
 # include "../threads/thread.h"
@@ -33,15 +33,15 @@ namespace Jobs
 	** \brief Job Interface (abstract)
 	** \ingroup Jobs
 	*/
-	class Abstract 
+	class AJob
 	{
 	public:
 		//! \name Contructor & Destructor
 		//@{
 		//! Default constructor
-		Abstract();
+		AJob();
 		//! Destructor
-		virtual ~Abstract();
+		virtual ~AJob();
 		//@}
 
 		//! \name Name of the job
@@ -76,13 +76,13 @@ namespace Jobs
 		** \brief Attach this job to a given thread
 		** \param t The thread which execute this job
 		*/
-		void attachToThread(Threads::Private::AbstractThreadModel* t);
+		void attachToThread(Threads::Private::AThreadModel* t);
 
 		/*!
 		** \brief Get the attached thread
 		** \return The attached thread. Null if no thread is attached
 		*/
-		Threads::Private::AbstractThreadModel* attachedThread();
+		Threads::Private::AThreadModel* attachedThread();
 
 		/*!
 		** \brief Detach this job from the previous attached thread
@@ -110,7 +110,7 @@ namespace Jobs
 		** \param delay The delay in miliseconds. O will only return if the thred should exit
 		** \return True indicates that the job should stop immediately
 		**
-		** \see AbstractThreadModel::suspend()
+		** \see AThreadModel::suspend()
 		*/
 		bool suspend(const uint32 delay = 0);
 
@@ -127,7 +127,7 @@ namespace Jobs
 		//! Progression
 		float pProgression;
 		//! The attached thread to this job, if any
-		Threads::Private::AbstractThreadModel* pThread;
+		Threads::Private::AThreadModel* pThread;
 
 	}; // class Job
 
@@ -137,4 +137,4 @@ namespace Jobs
 } // namespace Jobs
 } // namespace Yuni
 
-#endif // __YUNI_JOBS_ABSTRACT_H__
+#endif // __YUNI_JOBS_AJOB_H__

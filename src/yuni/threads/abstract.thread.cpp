@@ -35,7 +35,7 @@ namespace Private
 {
 
 
-	unsigned int AbstractThreadModel::ProcessID()
+	unsigned int AThreadModel::ProcessID()
 	{
 		return YUNI_OS_GETPID();
 	}
@@ -89,7 +89,7 @@ namespace Private
 	extern "C"
 	{
 		/*!
-		 * \brief This procedure will be run in a separate thread and will run AbstractThreadModel::baseExecute()
+		 * \brief This procedure will be run in a separate thread and will run AThreadModel::baseExecute()
 		 */
 		void* threadMethodForPThread(void* arg)
 		{
@@ -99,7 +99,7 @@ namespace Private
 			pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 			pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
 
-			AbstractThreadModel* t = (AbstractThreadModel *) arg;
+			AThreadModel* t = (AThreadModel *) arg;
 			t->pIsRunning = true;
 			if (t->onStarting())
 			{
@@ -117,14 +117,14 @@ namespace Private
 
 
 
-	AbstractThreadModel::AbstractThreadModel()
+	AThreadModel::AThreadModel()
 		:pMutex(), pThreadID(), pIsRunning(false), pFreeOnTerminate(false), pShouldStop(true)
 	{
 		pthread_cond_init(&p_threadMustStopCond, NULL);
 		pthread_cond_init(&p_threadIsAboutToExit, NULL);
 	}
 
-	AbstractThreadModel::~AbstractThreadModel()
+	AThreadModel::~AThreadModel()
 	{
 		assert(pIsRunning == false);
 
@@ -132,13 +132,13 @@ namespace Private
 		pthread_cond_destroy(&p_threadIsAboutToExit);
 	}
 
-	bool AbstractThreadModel::freeOnTerminate()
+	bool AThreadModel::freeOnTerminate()
 	{
 		MutexLocker locker(pMutex);
 		return pFreeOnTerminate;
 	}
 
-	void AbstractThreadModel::freeOnTerminate(const bool f)
+	void AThreadModel::freeOnTerminate(const bool f)
 	{
 		pMutex.lock();
 		pFreeOnTerminate = f;
@@ -146,7 +146,7 @@ namespace Private
 	}
 
 
-	bool AbstractThreadModel::start()
+	bool AThreadModel::start()
 	{
 		MutexLocker locker(pMutex);
 		if (pIsRunning)
@@ -157,7 +157,7 @@ namespace Private
 	}
 
 
-	bool AbstractThreadModel::stop(const uint16 timeout)
+	bool AThreadModel::stop(const uint16 timeout)
 	{
 		MutexLocker locker(pMutex);
 		if (!pIsRunning) // already stopped
@@ -203,7 +203,7 @@ namespace Private
 	}
 
 
-	bool AbstractThreadModel::suspend(const uint32 delay)
+	bool AThreadModel::suspend(const uint32 delay)
 	{
 		MutexLocker locker(pThreadMustStopMutex);
 	
@@ -226,7 +226,7 @@ namespace Private
 	}
 
 
-	void AbstractThreadModel::signalThreadAboutToExit()
+	void AThreadModel::signalThreadAboutToExit()
 	{
 		pShouldStop = true;
 		pIsRunning = false;
@@ -236,7 +236,7 @@ namespace Private
 	}
 
 
-	void AbstractThreadModel::gracefulStop()
+	void AThreadModel::gracefulStop()
 	{
 		MutexLocker locker(pMutex);
 		pShouldStop = true;

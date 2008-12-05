@@ -23,7 +23,7 @@ namespace UI
 	/*!
 	** \brief Base class for any UI component
 	*/
-	class Component : public Event::Receiver
+	class AComponent : public Event::Receiver
 	{
 		friend class Control;
 	public:
@@ -47,10 +47,10 @@ namespace UI
 		/*!
 		** \brief Constructor
 		*/
-		Component();
+		AComponent();
 
 		//! Destructor
-		virtual ~Component();
+		virtual ~AComponent();
 
 		//@}
 
@@ -103,7 +103,7 @@ namespace UI
 		//! Name of this component
 		String pName;
 
-	}; // class Component
+	}; // class AComponent
 
 
 

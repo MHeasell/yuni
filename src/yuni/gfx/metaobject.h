@@ -11,26 +11,26 @@ namespace Gfx
 {
 
 	/*!
-	** \class MetaObject
+	** \class AMetaObject
 	**
 	** \brief Meta objects define implicit surfaces using a generic field function.
 	**
 	** Actually, meta objects are simplistic implicit surfaces themselves.
 	** This class is abstract.
 	*/
-	class MetaObject: public ImplicitSurface
+	class AMetaObject: public ImplicitSurface
 	{
 	public:
 		//! \name Constructors and destructor
 		//@{
 		//! Default constructor
-		MetaObject(): pPositive(true)
+		AMetaObject(): pPositive(true)
 		{}
 		//! Full constructor
-		MetaObject(bool positive): pPositive(positive)
+		AMetaObject(bool positive): pPositive(positive)
 		{}
 		//! Destructor
-		virtual ~MetaObject()
+		virtual ~AMetaObject()
 		{}
 		//@}
 
@@ -38,7 +38,7 @@ namespace Gfx
 		//! Is the object a positive or negative force? (usually true)
 		bool pPositive;
 
-	}; // class MetaObject
+	}; // class AMetaObject
 
 } // Gfx
 } // Yuni

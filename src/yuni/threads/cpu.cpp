@@ -24,8 +24,8 @@ namespace Private
 
 
 #ifdef YUNI_OS_DARWIN
-# define YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
-	int AbstractThreadModel::CPUCount()
+# define YUNI_ATHREADMODEL_CPUCOUNT
+	int AThreadModel::CPUCount()
 	{
 		int count;
 		size_t size = sizeof(count);
@@ -38,8 +38,8 @@ namespace Private
 
 
 #ifdef YUNI_OS_WINDOWS
-# define YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
-	int AbstractThreadModel::CPUCount()
+# define YUNI_ATHREADMODEL_CPUCOUNT
+	int AThreadModel::CPUCount()
 	{
 		SYSTEM_INFO si;
 		GetSystemInfo(&si);
@@ -48,8 +48,8 @@ namespace Private
 #endif
 
 #ifdef YUNI_OS_LINUX
-# define YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
-	int AbstractThreadModel::CPUCount()
+# define YUNI_ATHREADMODEL_CPUCOUNT
+	int AThreadModel::CPUCount()
 	{
 		/*
 		 * It seems there's no better way to get this info on Linux systems.
@@ -82,8 +82,8 @@ namespace Private
 
 
 
-#ifndef YUNI_ABSTRACTTHREADMODEL_CPUCOUNT
-#  error "The method AbstractThreadModel::CPUCount has not been implemented for the current platform"
+#ifndef YUNI_ATHREADMODEL_CPUCOUNT
+#  error "The method AThreadModel::CPUCount has not been implemented for the current platform"
 #endif
 
 

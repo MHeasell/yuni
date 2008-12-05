@@ -1,7 +1,7 @@
 #ifndef __YUNI_APPLICATION_CONSOLE_H__
 # define __YUNI_APPLICATION_CONSOLE_H__
 
-# include "abstract.h"
+# include "application.h"
 
 
 
@@ -35,13 +35,13 @@ namespace Application
 	** }
 	** \endcode
 	*/
-	class YUNI_EXPORT Console : public Application::Abstract
+	class YUNI_EXPORT Console : public Application::AApplication
 	{
 	public:
 		/*!
 		** \brief Get the global instance of the console application
 		*/
-		static Console* Instance() {return dynamic_cast<Console*>(Abstract::Instance());}
+		static Console* Instance() {return dynamic_cast<Console*>(AApplication::Instance());}
 
 	public:
 		//! \name Constructor & Destructor

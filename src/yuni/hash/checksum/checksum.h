@@ -1,5 +1,5 @@
-#ifndef __YUNI_HASH_ABSTRACT_H__
-# define __YUNI_HASH_ABSTRACT_H__
+#ifndef __YUNI_HASH_ACHECKSUM_H__
+# define __YUNI_HASH_ACHECKSUM_H__
 
 # include "../../yuni.h"
 # include "../../toolbox/string.h"
@@ -22,15 +22,15 @@ namespace Checksum
 
 
 
-	class Abstract
+	class AChecksum
 	{
 	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		Abstract();
+		AChecksum();
 		//! Destructor
-		virtual ~Abstract();
+		virtual ~AChecksum();
 		//@}
 
 		/*!
@@ -82,7 +82,7 @@ namespace Checksum
 		//! The hash value
 		String pValue;
 
-	}; // class Hash::Abstract
+	}; // class Hash::AChecksum
 
 
 
@@ -90,4 +90,4 @@ namespace Checksum
 } // namespace Hash
 } // namespace Yuni
 
-#endif // __YUNI_HASH_ABSTRACT_H__
+#endif // __YUNI_HASH_ACHECKSUM_H__

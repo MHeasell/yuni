@@ -18,7 +18,7 @@ namespace Private
 	extern "C"
 	{
 		/*!
-		** \brief This procedure will be run in a separate thread and will run AbstractThreadModel::baseExecute()
+		** \brief This procedure will be run in a separate thread and will run AThreadModel::baseExecute()
 		*/
 		void* threadMethodForPThread(void* arg);
 	}
@@ -31,7 +31,7 @@ namespace Private
 	**
 	** \attention This class should not be directly used
 	*/
-	class AbstractThreadModel
+	class AThreadModel
 	{
 		friend void* threadMethodForPThread(void* arg);
 	public:
@@ -49,10 +49,10 @@ namespace Private
 		** \brief Convenient method to create, start and return a new instancied thread
 		**
 		** \code
-		** class MyOwnThread : public Yuni::Threads::Abstract
+		** class MyOwnThread : public Yuni::Threads::AThread
 		** {
 		** public:
-		**   MyOwnThread(int p): Yuni::Threads::Abstract(), pTag(p)  {}
+		**   MyOwnThread(int p): Yuni::Threads::AThread(), pTag(p)  {}
 		**   virtual ~MyOwnThread() {stop();} // Required
 		**
 		** protected:
@@ -75,7 +75,7 @@ namespace Private
 		** }
 		** \endcode
 		**
-		** \tparam T A descendant of the class Yuni::Private::AbstractThreadModel
+		** \tparam T A descendant of the class Yuni::Private::AThreadModel
 		** \param f True to destroy the thread as soon as it has stopped
 		** \return A pointer to the new instance
 		*/
@@ -88,9 +88,9 @@ namespace Private
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		AbstractThreadModel();
+		AThreadModel();
 		//! Destructor
-		virtual ~AbstractThreadModel();
+		virtual ~AThreadModel();
 		//@}
 
 
@@ -228,7 +228,7 @@ namespace Private
 		pthread_cond_t p_threadMustStopCond;
 		pthread_cond_t p_threadIsAboutToExit;
 
-	}; // class Private::AbstractThreadModel
+	}; // class Private::AThreadModel
 
 
 } // namespace Private

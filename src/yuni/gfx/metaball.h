@@ -19,7 +19,7 @@ namespace Gfx
 	**
 	** They have a sphere shape and can use a number of field functions.
 	*/
-	class MetaBall: public MetaObject
+	class MetaBall: public AMetaObject
 	{
 	public:
 		//! \name Constructors and destructor
@@ -34,7 +34,7 @@ namespace Gfx
 		{}
 		//! Copy constructor
 		MetaBall(const MetaBall& other):
-			MetaObject(), pCenter(other.center()), pDensity(other.density())
+			AMetaObject(), pCenter(other.center()), pDensity(other.density())
 		{}
 		//! Destructor
 		virtual ~MetaBall()
