@@ -58,8 +58,12 @@ namespace Gfx
 		virtual float operator()(const Point3D<float>& p) const;
 
 	private:
+		//! Sub Surfaces
+		typedef std::vector<ImplicitSurface*>  SubSurfaces;
+
+	private:
 		//! An implicit surface can be composed of subsurfaces
-		std::vector<ImplicitSurface*> pSubSurfaces;
+		SubSurfaces pSubSurfaces;
 
 	}; // class ImplicitSurface
 

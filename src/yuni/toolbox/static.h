@@ -13,14 +13,20 @@ namespace Static
 
 	namespace Remove
 	{
-		template <typename T> struct Reference { typedef T t; };
-		template <typename T> struct Reference<T&> { typedef T t; };
-		template <typename T> struct Reference<const T&> { typedef const T t; };
+		template <typename T> struct Reference { typedef T Type; };
+		template <typename T> struct Reference<T&> { typedef T Type; };
+		template <typename T> struct Reference<T*> { typedef T Type; };
+		template <typename T> struct Reference<const T*> { typedef T Type; };
+		template <typename T> struct Reference<const T&> { typedef const T Type; };
 
 
-		template <typename T> struct Const { typedef T t; };
-		template <typename T> struct Const<const T> { typedef T t; };
+		template <typename T> struct Const { typedef T Type; };
+		template <typename T> struct Const<const T> { typedef T Type; };
 
+		template <typename T> struct All
+		{
+			typedef typename Remove::Const<typename Remove::Reference<T>::Type>::Type Type;
+		};
 	} // namespace Remove
 
 
@@ -32,8 +38,8 @@ namespace Static
 	struct If
 	{
 		typedef IfTrue t;
-		typedef typename Remove::Const<typename Remove::Reference<IfTrue>::t>::t  RetTrue;
-		typedef typename Remove::Const<typename Remove::Reference<IfFalse>::t>::t RetFalse;
+		typedef typename Remove::All<IfTrue>::Type   RetTrue;
+		typedef typename Remove::All<IfFalse>::Type  RetFalse;
 
 		static RetTrue& choose (RetTrue& tr, RetFalse&)
 		{return tr;}
@@ -49,8 +55,8 @@ namespace Static
 	struct If<false, IfTrue, IfFalse>
 	{
 		typedef IfFalse t;
-		typedef typename Remove::Const<typename Remove::Reference<IfTrue>::t>::t  RetTrue;
-		typedef typename Remove::Const<typename Remove::Reference<IfFalse>::t>::t RetFalse;
+		typedef typename Remove::All<IfTrue>::Type   RetTrue;
+		typedef typename Remove::All<IfFalse>::Type  RetFalse;
 
 		static RetFalse& choose (RetTrue&, RetFalse& fa)
 		{ return fa; }
