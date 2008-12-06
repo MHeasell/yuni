@@ -2,7 +2,7 @@
 # define __YUNI_TOOLBOX_STL_ALGORITHM_H__
 
 # include <algorithm>
-# include "../static.h"
+# include "../static/remove.h"
 
 
 namespace Yuni

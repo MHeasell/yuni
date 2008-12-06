@@ -21,6 +21,13 @@ Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 #
 # The Yuni Library
 #
+set(SRC_TOOLBOX_STATIC
+				toolbox/static/if.h
+				toolbox/static/remove.h
+				toolbox/static/assert.h)
+source_group(ToolBox\\Static FILES ${SRC_TOOLBOX_STATIC})
+
+
 set(SRC_TOOLBOX_STRING
 				toolbox/string/string.h toolbox/string/string.cpp
 				toolbox/string.h)
@@ -75,10 +82,6 @@ source_group(ToolBox\\Version FILES ${SRC_VERSION})
 
 
 
-
-# Misc
-set(SRC_MISC
-				misc/static.h)
 
 source_group(Misc FILES ${SRC_MISC})
 
@@ -197,7 +200,7 @@ Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Add_Library(yuni-static STATIC
-				${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_STL} ${SRC_TOOLBOX_POLICIES}
+				${SRC_TOOLBOX_STATIC} ${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_STL} ${SRC_TOOLBOX_POLICIES}
 				${SRC_TOOLBOX_SMARTPTR} ${SRC_MISC}
 				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
 				${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT} ${SRC_TOOLBOX_FS}
