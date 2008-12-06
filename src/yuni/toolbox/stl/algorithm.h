@@ -15,6 +15,8 @@ namespace STL
 
 	/*!
 	** \brief Functor to delete a pointer: used in automatic clearing of an STL container
+	**
+	** \tparam T The original type of items of a STL container
 	*/
 	template <typename T>
 	struct Delete
@@ -30,6 +32,10 @@ namespace STL
 
 	/*!
 	** \brief Syntactic sugar to free all pointers in an STL container and clear it
+	**
+	** \param container The container to clear
+	** \tparam T The type of items to remove
+	** \tparam U A STL container
 	**
 	** \code
 	** typedef std::vector<int> List;
