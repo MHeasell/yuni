@@ -12,7 +12,7 @@ namespace Gfx
 
 	ImplicitSurface::~ImplicitSurface()
 	{
-		Yuni::ToolBox::STL::DeleteAndClear<ImplicitSurface, std::vector<ImplicitSurface*> >(pSubSurfaces);
+		Yuni::ToolBox::STL::DeleteAndClear<ImplicitSurface, SubSurfaces>(pSubSurfaces);
 	}
 
 
@@ -50,9 +50,8 @@ namespace Gfx
 	float ImplicitSurface::operator()(const Point3D<float>& p) const
 	{
 		float res = 0.0f;
-		for (std::vector<ImplicitSurface*>::const_iterator it = pSubSurfaces.begin();
-			it != pSubSurfaces.end();
-			++it)
+		SubSurfaces::const_iterator end = pSubSurfaces.end();
+		for (SubSurfaces::const_iterator it = pSubSurfaces.begin(); it != end; ++it)
 			res += (**it)(p);
 		return res;
 	}
