@@ -24,7 +24,8 @@ Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 set(SRC_TOOLBOX_STATIC
 				toolbox/static/if.h
 				toolbox/static/remove.h
-				toolbox/static/assert.h)
+				toolbox/static/assert.h
+				toolbox/static/types.h)
 source_group(ToolBox\\Static FILES ${SRC_TOOLBOX_STATIC})
 
 
