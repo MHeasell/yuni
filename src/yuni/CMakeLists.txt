@@ -55,6 +55,12 @@ source_group(ToolBox\\Event FILES ${SRC_TOOLBOX_EVENT})
 set(SRC_TOOLBOX_MATH	toolbox/math/math.h  toolbox/math.h)
 source_group(ToolBox\\Math FILES ${SRC_TOOLBOX_MATH})
 
+set(SRC_TOOLBOX_FS
+				toolbox/fs/paths.h toolbox/fs/paths.cpp  toolbox/paths.h
+				toolbox/fs/files.h toolbox/fs/files.cpp  toolbox/files.h)
+source_group(ToolBox\\FileSystem FILES ${SRC_TOOLBOX_FS})
+
+
 set(SRC_TOOLBOX_GETOPT
 				toolbox/getopt/getopt.h
 				toolbox/getopt/convertions.h
@@ -72,8 +78,6 @@ source_group(ToolBox\\Version FILES ${SRC_VERSION})
 
 # Misc
 set(SRC_MISC
-				misc/paths.h misc/paths.cpp
-				misc/files.h misc/files.cpp
 				misc/static.h)
 
 source_group(Misc FILES ${SRC_MISC})
@@ -196,7 +200,7 @@ Add_Library(yuni-static STATIC
 				${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_STL} ${SRC_TOOLBOX_POLICIES}
 				${SRC_TOOLBOX_SMARTPTR} ${SRC_MISC}
 				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
-				${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT}
+				${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT} ${SRC_TOOLBOX_FS}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}
