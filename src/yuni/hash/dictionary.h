@@ -4,7 +4,6 @@
 # include "../yuni.h"
 # include "table.h"
 # include "../toolbox/string.h"
-# include "../toolbox/static.h"
 
 
 

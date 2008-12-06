@@ -16,7 +16,6 @@
 
 # include "policies.h"
 # include "../policies/threads.h"
-# include "../misc/static.h"
 
 
 namespace Yuni
