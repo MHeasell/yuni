@@ -1,8 +1,8 @@
-#ifndef __YUNI_MISC_FILES_H__
-# define __YUNI_MISC_FILES_H__
+#ifndef __YUNI_TOOLBOX_FS_FILES_H__
+# define __YUNI_TOOLBOX_FS_FILES_H__
 
-# include "../yuni.h"
-# include "../toolbox/string.h"
+# include "../../yuni.h"
+# include "../string.h"
 
 
 
@@ -18,8 +18,12 @@ namespace Paths
 namespace Files
 {
 
+
     //! The maximum allowed size for a file
     const uint64 SizeHardLimit = 83886080;  // 80Mo = 80 * 1024 * 1024
+
+
+
 
 
     /*!
@@ -113,4 +117,4 @@ namespace Files
 } // namespace Paths
 } // namespace Yuni
 
-#endif // __YUNI_MISC_FILES_H__
+#endif // __YUNI_TOOLBOX_FS_FILES_H__

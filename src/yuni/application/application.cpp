@@ -1,12 +1,14 @@
 
 #include "application.h"
-#include "../misc/paths.h"
+#include "../toolbox/paths.h"
+
 
 
 namespace Yuni
 {
 namespace Application
 {
+
 
 	namespace
 	{
@@ -15,10 +17,16 @@ namespace Application
 
 	} // anonymous namespace
 
+
+
+	
+
+
 	AApplication* AApplication::Instance()
 	{
 		return gApplicationInstance;
 	}
+
 
 	AApplication::AApplication(int argc, char* argv[])
 		:pTerminated(false), pExeName(), pRootFolder()
@@ -28,6 +36,7 @@ namespace Application
 		gApplicationInstance = this;
 		pTerminated = parseCommandLine(argc, argv);
 	}
+
 
 	AApplication::~AApplication()
 	{
@@ -59,7 +68,7 @@ namespace Application
 		return false;
 	}
 
+
+
 } // namespace Application
 } // namespace Yuni
-
-

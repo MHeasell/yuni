@@ -1,8 +1,8 @@
-#ifndef __YUNI_MISC_PATHS_H__
-# define __YUNI_MISC_PATHS_H__
+#ifndef __YUNI_TOOLBOX_FS_PATHS_H__
+# define __YUNI_TOOLBOX_FS_PATHS_H__
 
-# include "../yuni.h"
-# include "../toolbox/string.h"
+# include "../../yuni.h"
+# include "../string.h"
 
 
 
@@ -49,6 +49,8 @@ namespace Paths
 	*/
 	bool Exists(const String& p);
 
+
+
 	/*!
 	** \brief Create Path Recursively
 	**
@@ -57,10 +59,14 @@ namespace Paths
 	*/
 	bool MakeDir(const String& p);
 
+
+
 	/*!
 	** \brief Retrieve the current directory
 	*/
 	String CurrentDirectory();
+
+
 
 	/*!
 	** \brief Extract the path part of a filename
@@ -80,6 +86,8 @@ namespace Paths
 	** \see Paths::Separator
 	*/
 	String ExtractFilePath(const String& p, const bool systemDependant = true);
+
+
 
 	/*!
 	** \brief Extract the bare file name
@@ -125,6 +133,8 @@ namespace Paths
 	*/
 	void ExtractFileName(String::Vector& p, const bool systemDependant = true);
 
+
+
 	/*!
 	** \brief Extract the bare file name without its extension
 	**
@@ -137,6 +147,8 @@ namespace Paths
 	** \see Paths::Separator
 	*/
 	String ExtractFileNameWithoutExtension(const String& p);
+
+
 
 	/*!
 	** \brief Extract the extention of a file name
@@ -167,4 +179,4 @@ namespace Paths
 } // namespace Yuni
 
 
-#endif // __YUNI_MISC_PATHS_H__
+#endif // __YUNI_TOOLBOX_FS_PATHS_H__
