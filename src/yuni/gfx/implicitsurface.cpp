@@ -1,16 +1,20 @@
 
 #include <algorithm>
-#include "../misc/stl.functions.h"
+#include "../toolbox/stl/algorithm.h"
 #include "implicitsurface.h"
+
 
 namespace Yuni
 {
 namespace Gfx
 {
+
+
 	ImplicitSurface::~ImplicitSurface()
 	{
-		Yuni::Misc::STLDeleteAndClear<ImplicitSurface, std::vector<ImplicitSurface*> >(pSubSurfaces);
+		Yuni::ToolBox::STL::DeleteAndClear<ImplicitSurface, std::vector<ImplicitSurface*> >(pSubSurfaces);
 	}
+
 
 	//! Get some good points that we know are inside the surface
 	void ImplicitSurface::insidePoints(PointList& points) const
@@ -24,6 +28,7 @@ namespace Gfx
 		}
 	}
 
+
 	/*!
 	** \brief Add a subsurface as a component of this implicit surface
 	** It becomes the responsibility of the ImplicitSurface, so
@@ -33,6 +38,7 @@ namespace Gfx
 	{
 		pSubSurfaces.push_back(surf);
 	}
+
 
 	/*!
 	** \brief Calculate the density of a point regarding to the isosurface
@@ -51,5 +57,7 @@ namespace Gfx
 		return res;
 	}
 
-} // Gfx
-} // Yuni
+
+
+} // namespace Gfx
+} // namespace Yuni

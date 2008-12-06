@@ -26,6 +26,11 @@ set(SRC_TOOLBOX_STRING
 				toolbox/string.h)
 source_group(ToolBox\\String FILES ${SRC_TOOLBOX_STRING})
 
+set(SRC_TOOLBOX_STL
+				toolbox/stl/algorithm.h)
+source_group(ToolBox\\Stl FILES ${SRC_TOOLBOX_STL})
+
+
 set(SRC_TOOLBOX_POLICIES
 				toolbox/policies/threading.h
 				toolbox/policies/checking.h
@@ -188,11 +193,10 @@ Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Add_Library(yuni-static STATIC
-				${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_POLICIES}
+				${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_STL} ${SRC_TOOLBOX_POLICIES}
 				${SRC_TOOLBOX_SMARTPTR} ${SRC_MISC}
 				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
-				${SRC_TOOLBOX_MATH}
-				${SRC_TOOLBOX_GETOPT}
+				${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT}
 				${SRC_HASH_CHECKSUM} ${SRC_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}
