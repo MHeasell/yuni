@@ -12,15 +12,15 @@ namespace Threads
 {
 
 	Timer::Timer()
-		:Private::AbstractThreadModel(), pTimeInterval(1000), pCyclesCount(0)
+		:Private::AThreadModel(), pTimeInterval(1000), pCyclesCount(0)
 	{}
 
 	Timer::Timer(const uint32 t)
-		:Private::AbstractThreadModel(), pTimeInterval(t), pCyclesCount(0)
+		:Private::AThreadModel(), pTimeInterval(t), pCyclesCount(0)
 	{}
 
 	Timer::Timer(const uint32 t, const uint32 c)
-		:Private::AbstractThreadModel(), pTimeInterval(t), pCyclesCount(c)
+		:Private::AThreadModel(), pTimeInterval(t), pCyclesCount(c)
 	{}
 
 	Timer::~Timer()
