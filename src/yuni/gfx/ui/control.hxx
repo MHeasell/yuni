@@ -12,7 +12,7 @@ namespace UI
 
 	template<class C>
 	Control::Control(const SharedPtr<C>& prnt)
-		:Component(), pChildren(), pParent(), pPosition(), pSize(50, 50),
+		:AComponent(), pChildren(), pParent(), pPosition(), pSize(50, 50),
 		pVisible(true), pEnabled(true),
 		pIsInvalidate(true), pAutosize(false), pUpdateSessionRefCount(0)
 	{

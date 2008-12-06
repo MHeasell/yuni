@@ -170,11 +170,11 @@ namespace Irrlicht
 	/*!
 	 * \todo Must be removed. Created for debug purposes
 	 */
-	class ThreadWaitForEngineToStop : public Yuni::Threads::Abstract
+	class ThreadWaitForEngineToStop : public Yuni::Threads::AThread
 	{
 	public:
 		ThreadWaitForEngineToStop(Yuni::Private::Gfx::EngineAbstract& engineToWait)
-			:Yuni::Threads::Abstract(), pEngineToWait(engineToWait)
+			:Yuni::Threads::AThread(), pEngineToWait(engineToWait)
 		{}
 
 		~ThreadWaitForEngineToStop() {stop();}

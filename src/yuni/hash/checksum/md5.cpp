@@ -93,7 +93,7 @@ namespace Checksum
 
 
 	MD5::MD5()
-		:Hash::Checksum::Abstract()
+		:Hash::Checksum::AChecksum()
 	{}
 
 	MD5::~MD5()

@@ -11,7 +11,7 @@ namespace UI
 
 
 	Control::Control()
-		:Component(), // parent
+		:AComponent(), // parent
 		pChildren(), pParent(), pPosition(), pSize(50, 50),
 		pVisible(true), pEnabled(true),
 		pIsInvalidate(true), pAutosize(false), pUpdateSessionRefCount(0)
@@ -41,7 +41,7 @@ namespace UI
 
 	bool Control::onBeforeDestructionWL()
 	{
-		if (Component::onBeforeDestructionWL()) // ask to the ancestor first
+		if (AComponent::onBeforeDestructionWL()) // ask to the ancestor first
 		{
 			// It is better to detach first this component from its parent
 			// In this way, it prevents against unwanted operations on these children, like
