@@ -1,4 +1,9 @@
 
-ADD_EXECUTABLE(manual-gfx-marchingcubes main.cpp)
-target_link_libraries(manual-gfx-marchingcubes yuni-static)
+include_directories(${YUNI_INCLUDE})
+ADD_EXECUTABLE(manual-gfx-marchingcubes MACOSX_BUNDLE main.cpp)
+SET(MACOSX_BUNDLE_BUNDLE_NAME "Yuni - Test - Marching Cubes")
+SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "yunihw")
+SET(MACOSX_BUNDLE_ICON_FILE "sample.icns")
+target_link_libraries(manual-gfx-marchingcubes ${YUNI_LIBRARIES} ${YUNI_EXT_IRRLICHT_LIB})
+
 

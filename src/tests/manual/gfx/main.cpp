@@ -1,5 +1,6 @@
 
 #include <yuni/yuni.h>
+#include <yuni/application/gfx3d.h>
 #include <yuni/gfx/mesh.h>
 #include <yuni/gfx/marchingcubes.h>
 #include <yuni/gfx/metaball.h>
@@ -9,7 +10,37 @@
 using namespace Yuni;
 using namespace Yuni::Gfx;
 
-int main(void)
+
+
+
+class MeshTestApplication : public Application::Gfx3D
+{
+public:
+	MeshTestApplication(int argc, char* argv[])
+		:Application::Gfx3D(argc, argv)
+	{
+		// We connect our own method to the event
+		Gfx::Engine::Instance()->onFPSChanged.connect(this, &MeshTestApplication::onFPSChanged);
+	}
+
+	virtual ~MeshTestApplication()
+	{
+		// It is advised to disconnect all events at this stade
+		this->disconnectAllNotifiers();
+	}
+
+	void onFPSChanged(int fps)
+	{
+		// The FPS count has changed
+		// We will set the application title according the new value
+		this->title(String() << "Hello World ! - " << fps << " fps");
+	}
+};
+
+
+
+
+int main(int argc, char* argv[])
 {
 	// Create a stupid mesh with only one triangle
 	Mesh mesh;
@@ -35,5 +66,7 @@ int main(void)
 // 		return 1;
 // 	mesh2->print(std::cout);
 
-	return 0;
+	MeshTestApplication app(argc, argv);
+	app.execute();
+	return app.exitCode();
 }
