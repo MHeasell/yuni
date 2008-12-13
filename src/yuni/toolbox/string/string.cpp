@@ -34,7 +34,7 @@ namespace Yuni
 		size_t i;
 		wcstombs_s(&i, &b[0], l, v, l);
 		#endif
-		append(b);
+		this->append(b);
 		delete b;
 		return *this;
 	}
@@ -43,13 +43,16 @@ namespace Yuni
 
 	bool String::toBool() const
 	{
-		if (empty() || "0" == *this)
+		if (this->empty() || "0" == *this)
 			return false;
-		if ("1" == *this)
-			return true;
+		if (1 == this->length())
+		{
+			char c((*this)[0]);
+			return ('1' == c || 'Y' == c || 'y' == c || 'O' == c || 'o' == c);
+		}
 		String s(*this);
 		s.toLower();
-		return ("true" == s || "on" == s);
+		return ("true" == s || "on" == s || "yes" == s);
 	}
 
 
@@ -69,6 +72,7 @@ namespace Yuni
 		return *this;
 	}
 
+
 	void
 	String::split(String::Vector& out, const String& separators, const bool emptyBefore) const
 	{
@@ -80,10 +84,10 @@ namespace Yuni
 		while (!s.empty())
 		{																											
 			String::size_type i = s.find(separators);																					
-			if (i == std::string::npos)																							
+			if (std::string::npos == i)																							
 			{																										
 				out.push_back(String::Trim(s));																		
-				return;																							  
+				return;
 			}
 			else
 			{																										
@@ -92,6 +96,8 @@ namespace Yuni
 			}																										
 		}
 	}
+
+
 
 	void
 	String::split(String::List& out, const String& separators, const bool emptyBefore) const
@@ -104,7 +110,7 @@ namespace Yuni
 		while (!s.empty())
 		{																											
 			String::size_type i = s.find(separators);																					
-			if (i == std::string::npos)																							
+			if (std::string::npos == i)																							
 			{																										
 				out.push_back(String::Trim(s));																		
 				return;																							  
@@ -130,7 +136,7 @@ namespace Yuni
 			return;
 		}
 		// Begining of a section
-		if (s[pos] == '[')
+		if ('[' == s[pos])
 		{
 			key = "[";
 			pos = s.find_first_not_of(YUNI_WSTR_SEPARATORS, pos + 1);
@@ -225,9 +231,11 @@ namespace Yuni
 	}
 
 
+
 	String& String::convertAntiSlashesIntoSlashes()
 	{
-		for (String::iterator i = this->begin(); i != this->end(); ++i)
+		String::iterator end(this->end());
+		for (String::iterator i = this->begin(); i != end; ++i)
 		{
 			if (*i == '\\')
 				*i = '/';
@@ -235,9 +243,12 @@ namespace Yuni
 		return *this;
 	}
 
+
+
 	String& String::convertSlashesIntoAntiSlashes()
 	{
-		for (String::iterator i = this->begin(); i != this->end(); ++i)
+		String::iterator end(this->end());
+		for (String::iterator i = this->begin(); i != end; ++i)
 		{
 			if (*i == '/')
 				*i = '\\';
@@ -245,18 +256,24 @@ namespace Yuni
 		return *this;
 	}
 
+
+
 	uint32 String::hashValue() const
 	{
+		String::const_iterator end(this->end());
 		uint32 hash = 0;
-		for (String::const_iterator i = this->begin(); i != this->end(); ++i)
+		for (String::const_iterator i = this->begin(); i != end; ++i)
 			hash = (hash << 5) - hash + *i;
 		return hash;
 	}
 
+
+
 	int String::FindInList(const String::Vector& l, const char* s)
 	{
+		String::Vector::const_iterator end(l.end());
 		int indx(0);
-		for (String::Vector::const_iterator i = l.begin(); i != l.end(); ++i, ++indx)
+		for (String::Vector::const_iterator i = l.begin(); i != end; ++i, ++indx)
 		{
 			if(s == *i)
 				return indx;
@@ -267,14 +284,16 @@ namespace Yuni
 
 	int String::FindInList(const String::Vector& l, const String& s)
 	{
+		String::Vector::const_iterator end(l.end());
 		int indx(0);
-		for (String::Vector::const_iterator i = l.begin(); i != l.end(); ++i, ++indx)
+		for (String::Vector::const_iterator i = l.begin(); i != end; ++i, ++indx)
 		{
 			if(s == *i)
 				return indx;
 		}
 		return -1;
 	}
+
 
 
 	String& String::findAndReplace(char toSearch, const char replaceWith, const enum String::CharCase option)
@@ -295,10 +314,10 @@ namespace Yuni
 				if (*i == toSearch)
 					*i = replaceWith;
 			}
-
 		}
 		return *this;
 	}
+
 
 
 	String& String::findAndReplace(const String& toSearch, const String& replaceWith, const enum String::CharCase option)
@@ -307,7 +326,7 @@ namespace Yuni
 		{
 			String::size_type p = 0;
 			String::size_type siz = toSearch.size();
-			while ((p = this->find(toSearch, p)) != String::npos)
+			while (String::npos != (p = this->find(toSearch, p)))
 				this->replace(p, siz, replaceWith);
 		}
 		else
@@ -368,6 +387,7 @@ namespace Yuni
 	}
 
 
+
 	String& String::vappendFormat(const char* f, va_list parg)
 	{
 		char* b;
@@ -384,7 +404,7 @@ namespace Yuni
 			return *this;
 		}
 		b = (char*)malloc(sizeneeded);
-		if (b == NULL)
+		if (NULL == b)
 			return *this;
 		#   ifdef YUNI_OS_MSVC
 		if (vsnprintf_s(b, sizeneeded, sizeneeded, f, parg) < 0)
@@ -431,5 +451,4 @@ namespace Yuni
 
 
 
-
-}
+} // namespace Yuni
