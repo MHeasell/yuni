@@ -225,25 +225,25 @@ namespace Yuni
 		//! Constructor with a default value from a single char
 		String(const char v) :std::string() {*this += v;}
 		//! Constructor with a default value from an int (8 bits)
-		String(const sint8 v) :std::string() {*this << v;}
+		explicit String(const sint8 v) :std::string() {*this << v;}
 		//! Constructor with a default value from an int (16 bits)
-		String(const sint16 v) :std::string() {*this << v;}
+		explicit String(const sint16 v) :std::string() {*this << v;}
 		//! Constructor with a default value from an int (32 bits)
-		String(const sint32 v) :std::string() {*this << v;}
+		explicit String(const sint32 v) :std::string() {*this << v;}
 		//! Constructor with a default value from an int (64 bits)
-		String(const sint64 v) :std::string() {*this << v;}
+		explicit String(const sint64 v) :std::string() {*this << v;}
 		//! Constructor with a default value from an unsigned int (8 bits)
-		String(const uint8 v) :std::string() {*this << v;}
+		explicit String(const uint8 v) :std::string() {*this << v;}
 		//! Constructor with a default value from an unsigned int (16 bits)
-		String(const uint16 v) :std::string() {*this << v;}
+		explicit String(const uint16 v) :std::string() {*this << v;}
 		//! Constructor with a default value from an unsigned int (32 bits)
-		String(const uint32 v) :std::string() {*this << v;}
+		explicit String(const uint32 v) :std::string() {*this << v;}
 		//! Constructor with a default value from an unsigned int (64 bits)
-		String(const uint64 v) :std::string() {*this << v;}
+		explicit String(const uint64 v) :std::string() {*this << v;}
 		//! Constructor with a default value from a float
-		String(const float v) :std::string() {*this << v;}
+		explicit String(const float v) :std::string() {*this << v;}
 		//! Constructor with a default value from a double
-		String(const double v) :std::string() {*this << v;}
+		explicit String(const double v) :std::string() {*this << v;}
 		//! Destructor
 		~String() {}
 		//@}
