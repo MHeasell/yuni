@@ -1,5 +1,6 @@
 
 #include <algorithm>
+#include <ctype.h>
 #include "string.h"
 
 
@@ -7,19 +8,6 @@
 namespace Yuni
 {
 
-	namespace
-	{
-		inline int stdLowerCase (int c)
-		{
-			return tolower(c);
-		}
-
-		inline int stdUpperCase (int c)
-		{
-			return toupper(c);
-		}
-	}
- 
 
 	String::String(const char* v)
 		:std::string()
@@ -51,19 +39,6 @@ namespace Yuni
 		return *this;
 	}
 
-	String&
-	String::toLower()
-	{
-		std::transform (this->begin(), this->end(), this->begin(), stdLowerCase);
-		return *this;
-	}
-
-	String&
-	String::toUpper()
-	{
-		std::transform (this->begin(), this->end(), this->begin(), stdUpperCase);
-		return *this;
-	}
 
 
 	bool String::toBool() const

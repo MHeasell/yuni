@@ -391,12 +391,14 @@ namespace Yuni
 		** \brief Convert the case (lower case) of characters in the string using the UTF8 charset
 		** \return Returns *this
 		*/
-		String& toLower();
+		String& toLower()
+		{std::transform (this->begin(), this->end(), this->begin(), tolower);return *this;}
 		/*!
 		** \brief Convert the case (upper case) of characters in the string using the UTF8 charset
 		** \return Returns *this
 		*/
-		String& toUpper();
+		String& toUpper()
+		{std::transform (this->begin(), this->end(), this->begin(), toupper);return *this;}
 		//@} Case convertion
 
 
