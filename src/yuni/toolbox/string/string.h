@@ -2,6 +2,7 @@
 # define __YUNI_MISC_STRING_H__
 
 # include <sstream>
+# include <algorithm>
 # include <list>
 # include <vector>
 # include <string>
