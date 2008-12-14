@@ -22,7 +22,7 @@ namespace Display
 
 	Resolution::Resolution(const uint32 w, const uint32 h, const uint8 b)
 	{
-		pBitsPerPixel = (b == 32 ||  b == 24 || b == 16 || b == 8) ? b : 32;
+		pBitsPerPixel = (32 == b ||  24 == b || 16 == b || 8 == b) ? (uint8)b : (uint8)32;
 		pWidth  = Math::MinMax<uint32>(w, MinWidth,  MaxWidth);
 		pHeight = Math::MinMax<uint32>(h, MinHeight, MaxHeight);
 	}
