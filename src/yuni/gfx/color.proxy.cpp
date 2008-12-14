@@ -107,20 +107,20 @@ namespace Proxy
 	template<>
 	Yuni::Gfx::Color::RGBA<float>& Values< Yuni::Gfx::Color::RGBA<float>, uint8 >::Assign(Yuni::Gfx::Color::RGBA<float>& th, const uint8& r, const uint8& g, const uint8& b, const uint8& a)
 	{
-		th.red   = r / 255.0f;
-		th.green = g / 255.0f;
-		th.blue  = b / 255.0f;
-		th.alpha = a / 255.0f;
+		th.red   = (float)r / 255.0f;
+		th.green = (float)g / 255.0f;
+		th.blue  = (float)b / 255.0f;
+		th.alpha = (float)a / 255.0f;
 		return th;
 	}
 
 	template<>
 	Yuni::Gfx::Color::RGBA<float>& Values< Yuni::Gfx::Color::RGBA<float>, Yuni::Gfx::Color::RGBA<uint8> >::Assign(Yuni::Gfx::Color::RGBA<float>& th, const Yuni::Gfx::Color::RGBA<uint8>& a1)
 	{
-		th.red   = a1.red   / 255.0f;
-		th.green = a1.green / 255.0f;
-		th.blue  = a1.blue  / 255.0f;
-		th.alpha = a1.alpha / 255.0f;
+		th.red   = (float)a1.red   / 255.0f;
+		th.green = (float)a1.green / 255.0f;
+		th.blue  = (float)a1.blue  / 255.0f;
+		th.alpha = (float)a1.alpha / 255.0f;
 		return th;
 	}
 
@@ -177,18 +177,18 @@ namespace Proxy
 	template<>
 	Yuni::Gfx::Color::RGB<float>& Values< Yuni::Gfx::Color::RGB<float>, uint8 >::Assign(Yuni::Gfx::Color::RGB<float>& th, const uint8& r, const uint8& g, const uint8& b, const uint8& /*a*/)
 	{
-		th.red   = r / 255.0f;
-		th.green = g / 255.0f;
-		th.blue  = b / 255.0f;
+		th.red   = (float) r / 255.0f;
+		th.green = (float) g / 255.0f;
+		th.blue  = (float) b / 255.0f;
 		return th;
 	}
 
 	template<>
 	Yuni::Gfx::Color::RGB<float>& Values< Yuni::Gfx::Color::RGB<float>, Yuni::Gfx::Color::RGB<uint8> >::Assign(Yuni::Gfx::Color::RGB<float>& th, const Yuni::Gfx::Color::RGB<uint8>& a1)
 	{
-		th.red   = a1.red   / 255.0f;
-		th.green = a1.green / 255.0f;
-		th.blue  = a1.blue  / 255.0f;
+		th.red   = (float) a1.red   / 255.0f;
+		th.green = (float) a1.green / 255.0f;
+		th.blue  = (float) a1.blue  / 255.0f;
 		return th;
 	}
 
