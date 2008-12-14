@@ -1,5 +1,4 @@
 
-#include <algorithm>
 #include <ctype.h>
 #include "string.h"
 
@@ -300,7 +299,7 @@ namespace Yuni
 	{
 		if (option == soIgnoreCase)
 		{
-			toSearch = tolower(toSearch);
+			toSearch = (char)tolower(toSearch);
 			for (String::iterator i = this->begin(); i != this->end(); ++i)
 			{
 				if (tolower(*i) == toSearch)
