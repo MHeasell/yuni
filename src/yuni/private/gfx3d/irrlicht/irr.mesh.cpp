@@ -1,7 +1,7 @@
 
 #include "../../../yuni.h"
 #include "../../../toolbox/string.h"
-#include "../../../hash/dictionary.h"
+#include "../../../toolbox/hash/dictionary.h"
 #include "../../../gfx/vertex.h"
 #include "irr.mesh.h"
 

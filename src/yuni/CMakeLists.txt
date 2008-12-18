@@ -83,25 +83,24 @@ set(SRC_VERSION	toolbox/version/version.h  toolbox/version/version.cpp)
 source_group(ToolBox\\Version FILES ${SRC_VERSION})
 
 
-
-
-source_group(Misc FILES ${SRC_MISC})
-
-
+# Hash - Checksums
+set(SRC_TOOLBOX_HASH_CHECKSUM
+				toolbox/hash/checksum/checksum.h toolbox/hash/checksum/checksum.cpp
+				toolbox/hash/checksum/md5.h toolbox/hash/checksum/md5.cpp)
+source_group(ToolBox\\Hash\\Checksum FILES ${SRC_TOOLBOX_HASH_CHECKSUM})
 
 # hash
-set(SRC_HASH
-				hash/std.hashmap.h
-				hash/key.h
-				hash/table.h hash/table.hxx
-				hash/dictionary.h)
-source_group(Hash FILES ${SRC_HASH})
+set(SRC_TOOLBOX_HASH
+				toolbox/hash/std.hashmap.h
+				toolbox/hash/key.h
+				toolbox/hash/table.h toolbox/hash/table.hxx
+				toolbox/hash/dictionary.h)
+source_group(ToolBox\\Hash FILES ${SRC_TOOLBOX_HASH})
 
-# Hash - Checksums
-set(SRC_HASH_CHECKSUM
-				hash/checksum/checksum.h hash/checksum/checksum.cpp
-				hash/checksum/md5.h hash/checksum/md5.cpp)
-source_group(Hash\\Checksum FILES ${SRC_HASH_CHECKSUM})
+
+
+
+
 
 
 
@@ -203,10 +202,10 @@ Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Add_Library(yuni-static STATIC
 				${SRC_TOOLBOX_STATIC} ${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_STL} ${SRC_TOOLBOX_POLICIES}
-				${SRC_TOOLBOX_SMARTPTR} ${SRC_MISC}
+				${SRC_TOOLBOX_SMARTPTR}
 				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
 				${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT} ${SRC_TOOLBOX_FS}
-				${SRC_HASH_CHECKSUM} ${SRC_HASH}
+				${SRC_TOOLBOX_HASH_CHECKSUM} ${SRC_TOOLBOX_HASH}
 				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
 				${SRC_DEVICES}
 				${SRC_THREADS} ${SRC_JOBS}

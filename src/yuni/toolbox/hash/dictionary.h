@@ -1,9 +1,9 @@
 #ifndef __YUNI_HASH_DICTIONARY_H__
 # define __YUNI_HASH_DICTIONARY_H__
 
-# include "../yuni.h"
+# include "../../yuni.h"
 # include "table.h"
-# include "../toolbox/string.h"
+# include "../string.h"
 
 
 

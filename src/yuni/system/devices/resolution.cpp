@@ -1,6 +1,6 @@
 
 #include "resolution.h"
-#include "../../hash/checksum/md5.h"
+#include "../../toolbox/hash/checksum/md5.h"
 #include "../../toolbox/math.h"
 
 
