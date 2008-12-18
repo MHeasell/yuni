@@ -1,11 +1,11 @@
 #ifndef __YUNI_HASH_TABLE_H__
 # define __YUNI_HASH_TABLE_H__
 
-# include "../yuni.h"
+# include "../../yuni.h"
 # include "std.hashmap.h"
-# include "../toolbox/string.h"
+# include "../string.h"
 # include "key.h"
-# include "../threads/mutex.h"
+# include "../../threads/mutex.h"
 
 
 

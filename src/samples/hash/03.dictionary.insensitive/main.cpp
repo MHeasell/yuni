@@ -1,7 +1,9 @@
 
-#include <iostream>	                // std::cout
+#include <iostream>	                      // std::cout
 #include <yuni/yuni.h>
-#include <yuni/hash/dictionary.h>   // Yuni::Hash::Dictionary
+#include <yuni/toolbox/hash/dictionary.h> // Yuni::Hash::Dictionary
+
+
 
 Yuni::Hash::Dictionary<Yuni::String, Yuni::Hash::optIgnoreCase | Yuni::Hash::optThreadSafe>  logins;
 

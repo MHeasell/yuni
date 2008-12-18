@@ -1,7 +1,7 @@
 
-#include <yuni/yuni.h>                    // The Yuni Global header
-#include <yuni/hash/checksum/md5.h>       // The MD5 class
-#include <iostream>	                      // Only for std::cout
+#include <yuni/yuni.h>                      // The Yuni Global header
+#include <yuni/toolbox/hash/checksum/md5.h> // The MD5 class
+#include <iostream>	                        // Only for std::cout
 
 
 int main(int /*argc*/, char* argv[])

@@ -1,8 +1,8 @@
 #ifndef __YUNI_HASH_KEY_H__
 # define __YUNI_HASH_KEY_H__
 
-# include "../yuni.h"
-# include "../toolbox/string.h"
+# include "../../yuni.h"
+# include "../string.h"
 # include "std.hashmap.h"
 
 

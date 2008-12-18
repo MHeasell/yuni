@@ -1,8 +1,8 @@
 #ifndef __YUNI_HASH_ACHECKSUM_H__
 # define __YUNI_HASH_ACHECKSUM_H__
 
-# include "../../yuni.h"
-# include "../../toolbox/string.h"
+# include "../../../yuni.h"
+# include "../../string.h"
 
 
 namespace Yuni
