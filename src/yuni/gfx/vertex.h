@@ -41,15 +41,27 @@ namespace Gfx
 
 
 		/*!
+		** \brief Position of the vertex in space
+		*/
+		const Point3D<float>& position() const {return pPosition;}
+
+
+		/*!
+		** \brief Get a string representing the object to use as hash key
+		*/
+		String toString() const
+		{ return String() << pPosition.x << "," << pPosition.y << "," << pPosition.z; }
+
+		//! \name Operators
+		//@{
+
+		/*!
 		** \brief Comparison operator (equal with)
 		**
 		** \param other The other vertex to compare with
 		** \return True if the two vertices are coincident
 		*/
-		bool operator == (const Vertex& other) const
-		{
-			return pPosition == other.position();
-		}
+		bool operator == (const Vertex& other) const {return pPosition == other.position();}
 
 		/*!
 		** \brief Comparison operator (non equal with)
@@ -57,36 +69,19 @@ namespace Gfx
 		** \param other The other vertex to compare with
 		** \return True if the two vertices are distinct
 		*/
-		bool operator != (const Vertex& other) const
-		{
-			return !(*this == other);
-		}
+		bool operator != (const Vertex& other) const {return !(*this == other);}
 
-
-		//! Position of the vertex in space
-		const Point3D<float>& position() const
-		{
-			return pPosition;
-		}
-
-		//! Get a string representing the object to use as hash key
-		SharedPtr<String> asString() const
-		{
-			String* str = new String();
-			(*str) << pPosition.x << " " << pPosition.y << " " << pPosition.z;
-			return str;
-		}
+		//@}
 
 	private:
-		typedef std::vector<SharedPtr<Edge> > EdgeList;
+		//! List of edges
+		typedef std::vector< SharedPtr<Edge> > EdgeList;
 
 	private:
 		//! Edges linked to this vertex
 		EdgeList pEdges;
-
 		//! Position of the vertex in space
 		Point3D<float> pPosition;
-
 		//! Normal of the vertex (useful for lighting)
 		Vector3D<float> pNormal;
 
