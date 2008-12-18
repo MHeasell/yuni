@@ -27,7 +27,8 @@ namespace Gfx
 	{
 	public:
 		//! Constructor
-		MarchingCubes(const ImplicitSurface& surf): Polygonizer(surf)
+		MarchingCubes(const ImplicitSurface& surf)
+			:Polygonizer(surf)
 		{}
 		virtual ~MarchingCubes() {}
 
