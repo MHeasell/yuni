@@ -16,6 +16,7 @@
 
 # include "policies.h"
 # include "../policies/threads.h"
+# include "../static/assert.h"
 
 
 namespace Yuni

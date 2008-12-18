@@ -43,7 +43,8 @@ set(SRC_TOOLBOX_POLICIES
 				toolbox/policies/threading.h
 				toolbox/policies/checking.h
 				toolbox/policies/ownership.h
-				toolbox/policies/storage.h)
+				toolbox/policies/storage.h
+				toolbox/policies/constness.h)
 source_group(ToolBox\\Policies FILES ${SRC_TOOLBOX_SMARTPTR})
 
 
