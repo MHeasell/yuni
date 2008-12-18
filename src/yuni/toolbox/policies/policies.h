@@ -25,5 +25,6 @@ namespace Policy
 # include "conversions.h"
 # include "threading.h"
 # include "storage.h"
+# include "constness.h"
 
 #endif // __YUNI_POLICIES_POLICIES_H__
