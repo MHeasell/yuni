@@ -29,6 +29,9 @@ namespace Gfx
 	public:
 		//! \name Constructors and destructors
 		//@{
+		/*!
+		** \brief Default constructor
+		*/
 		Vertex(): pPosition()
 		{}
 		Vertex(const Point3D<float>& position): pPosition(position)

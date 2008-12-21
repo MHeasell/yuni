@@ -20,6 +20,19 @@ namespace Gfx
 	class Point3D
 	{
 	public:
+		/*!
+		** \brief Calculate the mean between two points
+		**
+		** \param p1 First point
+		** \param p2 Second point
+		** \return A new instance of Point3D
+		*/
+		template<typename U, typename V>
+		static Point3D<T>& Mean(const Point3D<U>& p1, const Point3D<V>& p2)
+		{ return Point3D<T>().mean(p1, p2); }
+
+
+	public:
 		//! \name Constructors
 		//@{
 
@@ -99,10 +112,11 @@ namespace Gfx
 		template<typename U>
 		void mean(const Point3D<U>& p)
 		{
-		  x = (T) ((x + p.x) / 2.0f);
-		  y = (T) ((y + p.y) / 2.0f);
-		  z = (T) ((z + p.z) / 2.0f);
+			x = (T) ((x + p.x) / 2.0f);
+			y = (T) ((y + p.y) / 2.0f);
+			z = (T) ((z + p.z) / 2.0f);
 		}
+
 		/*!
 		** \brief Calculate the mean between two points
 		**
@@ -115,24 +129,11 @@ namespace Gfx
 		template<typename U, typename V>
 		Point3D<T>& mean(const Point3D<U>& p1, const Point3D<V>& p2)
 		{
-		  x = (T) ((p1.x + p2.x) / 2.0f);
-		  y = (T) ((p1.y + p2.y) / 2.0f);
-		  z = (T) ((p1.z + p2.z) / 2.0f);
-		  return *this;
+			x = (T) ((p1.x + p2.x) / 2.0f);
+			y = (T) ((p1.y + p2.y) / 2.0f);
+			z = (T) ((p1.z + p2.z) / 2.0f);
+			return *this;
 		}
-		/*!
-		** \brief Calculate the mean between two points
-		**
-		** \param p1 First point
-		** \param p2 Second point
-		** \return A new instance of Point3D
-		*/
-		template<typename U, typename V>
-		static Point3D<T>& Mean(const Point3D<U>& p1, const Point3D<V>& p2)
-		{
-		  return Point3D<T>().mean(p1, p2);
-		}
-
 
 		/*!
 		** \brief Get if the point is close to another point
@@ -191,6 +192,7 @@ namespace Gfx
 		*/
 		template<typename U>
 		Point3D<T>& operator += (const U k) { x += (T)k; y += (T)k; z += (T)k; return (*this); }
+
 		/*!
 		** \brief Translate the point with relative coordinates
 		**
@@ -258,8 +260,10 @@ namespace Gfx
 	}; // class Point3D
 
 
+
 } // Gfx
 } // Yuni
+
 
 
 

@@ -46,8 +46,8 @@ namespace Gfx
 		*/
 		bool operator == (const Edge& other) const
 		{
-			return (pVertex1 == other.vertex1() && pVertex2 == other.vertex2()) ||
-				(pVertex1 == other.vertex2() && pVertex2 == other.vertex1());
+			return (pVertex1 == other.vertex1() && pVertex2 == other.vertex2())
+				|| (pVertex1 == other.vertex2() && pVertex2 == other.vertex1());
 		}
 
 		/*!

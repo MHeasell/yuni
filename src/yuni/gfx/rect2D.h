@@ -43,7 +43,8 @@ namespace Gfx
 		*/
 		template<typename U>
 		Rect2D(const U ax1, const U ay1, const U ax2, const U ay2)
-			:x1((T)ax1), y1((T)ay1), x2((T)ax2), y2((T)ay2) {}
+			:x1((T)ax1), y1((T)ay1), x2((T)ax2), y2((T)ay2)
+		{}
 		
 		/*!
 		** \brief Construct the rectangle to cover two other rectangles
@@ -152,6 +153,7 @@ namespace Gfx
 			x2 = (T)ax1 + (x2 - x1); y2 = (T)ay1 + (y2 - y1);
 			x1 = (T)ax1; y1 = (T)ay1;
 		}
+
 		/*!
 		** \brief Move the entire rect
 		**

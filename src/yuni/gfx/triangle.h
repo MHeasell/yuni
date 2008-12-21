@@ -4,6 +4,7 @@
 # include "edge.h"
 # include "vector3D.h"
 
+
 namespace Yuni
 {
 namespace Gfx
@@ -26,13 +27,16 @@ namespace Gfx
 		{
 			calculateEdges();
 		}
+
 		//! Copy constructor
 		Triangle(const Triangle& t):
 			pVertex1(t.vertex1()), pVertex2(t.vertex2()), pVertex3(t.vertex3())
 		{
 			calculateEdges();
 		}
+
 		//@}
+
 
 		//! \name Accessors
 		//@{
@@ -81,7 +85,10 @@ namespace Gfx
 
 		//! Surface normal
 		Vector3D<float> pNormal;
-	};
+
+	}; // class Triangle
+
+
 
 
 } // namespace Gfx
