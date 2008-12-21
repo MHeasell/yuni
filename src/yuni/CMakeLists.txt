@@ -97,26 +97,25 @@ set(SRC_TOOLBOX_HASH
 				toolbox/hash/dictionary.h)
 source_group(ToolBox\\Hash FILES ${SRC_TOOLBOX_HASH})
 
-
-
-
-
-
-
-
 # System
-set(SRC_SYSTEM
-                system/stdint.h system/os.h
-                system/sleep.h system/sleep.cpp
-				system/endian.h)
-source_group(System FILES ${SRC_SYSTEM})
+set(SRC_TOOLBOX_SYSTEM
+                toolbox/system/stdint.h toolbox/system/os.h
+                toolbox/system/sleep.h toolbox/system/sleep.cpp
+				toolbox/system/endian.h)
+source_group(ToolBox\\System FILES ${SRC_TOOLBOX_SYSTEM})
 
 # System - Microsoft Windows
-set(SRC_SYSTEM_WINDOWS system/windows.hdr.h  system/windows/gettimeofday.h)
+set(SRC_TOOLBOX_SYSTEM_WINDOWS toolbox/system/windows.hdr.h  toolbox/system/windows/gettimeofday.h)
 If(WIN32 AND MSVC)
-    set(SRC_SYSTEM_WINDOWS ${SRC_SYSTEM_WINDOWS} system/windows/gettimeofday.cpp)
+    set(SRC_SYSTEM_WINDOWS ${SRC_TOOLBOX_SYSTEM_WINDOWS} toolbox/system/windows/gettimeofday.cpp)
 EndIF(WIN32 AND MSVC)
-source_group(System\\Windows FILES ${SRC_SYSTEM_WINDOWS})
+source_group(ToolBox\\System\\Windows FILES ${SRC_TOOLBOX_SYSTEM_WINDOWS})
+
+
+
+
+
+
 
 
 # Devices
@@ -206,7 +205,7 @@ Add_Library(yuni-static STATIC
 				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
 				${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT} ${SRC_TOOLBOX_FS}
 				${SRC_TOOLBOX_HASH_CHECKSUM} ${SRC_TOOLBOX_HASH}
-				${SRC_SYSTEM} ${SRC_SYSTEM_WINDOWS}
+				${SRC_TOOLBOX_SYSTEM} ${SRC_TOOLBOX_SYSTEM_WINDOWS}
 				${SRC_DEVICES}
 				${SRC_THREADS} ${SRC_JOBS}
 				${SRC_APPLICATION}

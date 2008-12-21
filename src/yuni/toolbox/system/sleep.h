@@ -1,7 +1,7 @@
 #ifndef __YUNI_SYSTEM_WINDOWS_SLEEP_H__
 # define __YUNI_SYSTEM_WINDOWS_SLEEP_H__
 
-# include "../yuni.h"
+# include "../../yuni.h"
 
 
 namespace Yuni
