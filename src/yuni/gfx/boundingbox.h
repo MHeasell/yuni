@@ -1,14 +1,18 @@
-
 #ifndef __YUNI_GFX_BOUNDINGBOX_H__
 # define __YUNI_GFX_BOUNDINGBOX_H__
 
 # include "point3D.h"
 # include "triangle.h"
 
+
+
 namespace Yuni
 {
 namespace Gfx
 {
+
+
+
 	/*!
 	** \brief A bounding box in 3D that grows with what is added inside
 	*/
@@ -25,61 +29,35 @@ namespace Gfx
 		{}
 		//@}
 
-		//! Get the minimum coordinates of the box
-		const Point3D<T>& min() const
-		{
-			return pMin;
-		}
-		//! Get the maximum coordinates of the box
-		const Point3D<T>& max() const
-		{
-			return pMax;
-		}
+		/*!
+		** \brief Get the minimum coordinates of the box
+		*/
+		const Point3D<T>& min() const {return pMin;}
 
-		//! Get the center of the box
-		const Point3D<T>& center() const
-		{
-			return pCenter;
-		}
+		/*!
+		** \brief Get the maximum coordinates of the box
+		*/
+		const Point3D<T>& max() const {return pMax;}
 
-		//! Add a point that can possibly grow the bounding box
-		void addPoint(const Point3D<T>& point)
-		{
-			// Update the minimum
-			if (point.x < pMin.x)
-				pMin.x - point.x;
-			if (point.y < pMin.y)
-				pMin.y - point.y;
-			if (point.z < pMin.z)
-				pMin.z - point.z;
-			// Update the maximum
-			if (point.x > pMax.x)
-				pMax.x - point.x;
-			if (point.y > pMax.y)
-				pMax.y - point.y;
-			if (point.z > pMax.z)
-				pMax.z - point.z;
-		}
+		/*!
+		** \brief Get the center of the box
+		*/
+		const Point3D<T>& center() const {return pCenter;}
 
-		//! Add a triangle that can possibly grow the bounding box
-		void addTriangle(const Triangle& tri)
-		{
-			addPoint(tri.vertex1());
-			addPoint(tri.vertex2());
-			addPoint(tri.vertex3());
-		}
+		/*!
+		** \brief Add a point that can possibly grow the bounding box
+		*/
+		void addPoint(const Point3D<T>& point);
 
-		//! Is the point inside the bounding box?
-		bool contains(const Point3D<T>& point) const
-		{
-			if (pMin.x > point.x || pMax.x < point.x)
-				return false;
-			if (pMin.y > point.y || pMax.y < point.y)
-				return false;
-			if (pMin.z > point.z || pMax.z < point.z)
-				return false;
-			return true;
-		}
+		/*!
+		** \brief Add a triangle that can possibly grow the bounding box
+		*/
+		void addTriangle(const Triangle& tri);
+
+		/*!
+		** \brief Is the point inside the bounding box?
+		*/
+		bool contains(const Point3D<T>& point) const;
 
 	private:
 		//! Minimum X,Y,Z coordinates of the box
@@ -91,7 +69,12 @@ namespace Gfx
 
 	}; // class BoundingBox
 
-} // Gfx
-} // Yuni
+
+
+} // namespace Gfx
+} // namespace Yuni
+
+
+# include "boundingbox.hxx"
 
 #endif // __YUNI_GFX_BOUNDINGBOX_H__

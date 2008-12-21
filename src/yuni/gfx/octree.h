@@ -9,9 +9,9 @@
 # include "boundingbox.h"
 
 
-
 # define YUNI_OCTREE_MAX_CHILDREN  8
 # define YUNI_OCTREE_MAX_POINTS_PER_NODE 1
+
 
 namespace Yuni
 {
@@ -152,6 +152,7 @@ namespace Gfx
 		void split();
 
 	private:
+		//! List of points
 		typedef typename std::vector< Point3D<float> >  PointList;
 
 	private:
@@ -174,14 +175,16 @@ namespace Gfx
 	}; // class Octree
 
 
-} // Gfx
-} // Yuni
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 
 
 //! Operator overload for stream printing
 template <typename T>
-std::ostream& operator<<(std::ostream& out, const Yuni::Gfx::Octree<T>& tree)
+inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Octree<T>& tree)
 {
 	return tree.print(out);
 }

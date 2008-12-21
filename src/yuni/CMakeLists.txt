@@ -158,7 +158,7 @@ set(SRC_GFX
 				gfx/point2D.h gfx/point3D.h gfx/vector3D.h
 				gfx/color.proxy.h gfx/color.proxy.cpp
 				gfx/rgba.h gfx/rgb.h
-				gfx/boundingbox.h
+				gfx/boundingbox.h gfx/boundingbox.hxx
 				gfx/vertex.h gfx/triangle.h gfx/edge.h
 				gfx/mesh.h gfx/mesh.cpp gfx/mesh.proxy.h
 				gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h

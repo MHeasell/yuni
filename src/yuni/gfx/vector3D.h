@@ -13,12 +13,23 @@ namespace Gfx
 
 
 	/*!
-	** \class Vector3D
 	** \brief Represents a 3D-vector, with generic homogeneous content
 	*/
 	template<typename T = float>
 	class Vector3D
 	{
+	public:
+		/*!
+		** \brief Calculate the mean between two points
+		**
+		** \param p1 First point
+		** \param p2 Second point
+		** \return A new instance of Vector3D
+		*/
+		template<typename U, typename V>
+		static Vector3D<T>& Mean(const Vector3D<U>& p1, const Vector3D<V>& p2)
+		{return Vector3D<T>().mean(p1, p2);}
+
 	public:
 		//! \name Constructors
 		//@{
@@ -49,8 +60,16 @@ namespace Gfx
 		
 		//@} // Constructors
 
+
+		//! \name Reset the coordinates
+		//@{
 		//! Reset the vector to the null vector
 		Vector3D<T>& reset() {x = y = z = T(); return *this;}
+		//@}
+
+
+		//! \name Add coordinates
+		//@{
 
 		/*!
 		** \brief Add coordinates to a vector
@@ -68,6 +87,11 @@ namespace Gfx
 		template<typename U>
 		void add(const Vector3D<U>& p) { x += (T)p.x; y += (T)p.y; z += (T)p.z; }
 
+		//@}
+
+
+		//! \name Translation
+		//@{
 
 		/*!
 		** \brief Add the same value for all coordinates to the vector
@@ -90,6 +114,11 @@ namespace Gfx
 		template<typename U>
 		void translate(const Vector3D<U>& p) { x += (T)p.x; y += (T)p.y; z += (T)p.z; }
 
+		//@} Translation
+
+
+		//! \name Mean
+		//@{
 
 		/*!
 		** \brief Calculate the mean between two points
@@ -105,6 +134,7 @@ namespace Gfx
 		  y = (T) ((y + p.y) / 2.0f);
 		  z = (T) ((z + p.z) / 2.0f);
 		}
+
 		/*!
 		** \brief Calculate the mean between two points
 		**
@@ -122,18 +152,8 @@ namespace Gfx
 		  z = (T) ((p1.z + p2.z) / 2.0f);
 		  return *this;
 		}
-		/*!
-		** \brief Calculate the mean between two points
-		**
-		** \param p1 First point
-		** \param p2 Second point
-		** \return A new instance of Vector3D
-		*/
-		template<typename U, typename V>
-		static Vector3D<T>& Mean(const Vector3D<U>& p1, const Vector3D<V>& p2)
-		{
-		  return Vector3D<T>().mean(p1, p2);
-		}
+
+		//@}
 
 
 		//! \name Operators
@@ -237,8 +257,11 @@ namespace Gfx
 	}; // class Vector3D
 
 
+
+
 } // Gfx
 } // Yuni
+
 
 
 
