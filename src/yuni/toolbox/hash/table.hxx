@@ -39,6 +39,8 @@ namespace Hash
 		void clear() {pTable.clear();}
 
 		void erase(const K& key);
+		
+		std::pair<iterator, bool> insert(const K& key) {MutexLocker locker(pMutex);return pTable.insert(key);}
 
 	private:
 		//! The mutex
@@ -51,7 +53,7 @@ namespace Hash
 
 
 	template<typename K, typename V, bool ThreadSafe>
-	void Table<K,V,ThreadSafe>::erase(const K& key)
+	inline void Table<K,V,ThreadSafe>::erase(const K& key)
 	{
 		iterator it = pTable.find(key);
 		if (pTable.end() != it)
@@ -60,7 +62,7 @@ namespace Hash
 
 
 	template<typename K, typename V, bool ThreadSafe>
-	V Table<K,V,ThreadSafe>::value(const K& key, const V& defvalue) const
+	inline V Table<K,V,ThreadSafe>::value(const K& key, const V& defvalue) const
 	{
 		const_iterator it = pTable.find(key);
 		return (it == pTable.end()) ? defvalue : it->second;
@@ -68,7 +70,7 @@ namespace Hash
 	
 	
 	template<typename K, typename V>
-	V Table<K,V,true>::value(const K& key, const V& defvalue)
+	inline V Table<K,V,true>::value(const K& key, const V& defvalue)
 	{
 		MutexLocker locker(pMutex);
 		iterator it = pTable.find(key);

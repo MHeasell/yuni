@@ -119,6 +119,12 @@ namespace Hash
 		//! Number of elements in the table
 		int size() const {return pTable.size();}
 
+		/*!
+		** \brief Insert a key
+		** \param key The key to insert in the hash map
+		*/
+		std::pair<iterator, bool> insert(const K& key) {return pTable.insert(key);}
+
 	private:
 		//! The real hash map
 		YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN<K> >  pTable;
