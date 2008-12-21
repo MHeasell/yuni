@@ -30,9 +30,9 @@
 //@}
 
 // Operating System / Architecture detection
-# include "system/os.h"
+# include "toolbox/system/os.h"
 // Standard Types
-# include "system/stdint.h"
+# include "toolbox/system/stdint.h"
 
 
 /*!
