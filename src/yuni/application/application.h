@@ -3,6 +3,7 @@
 
 # include "../yuni.h"
 # include "../toolbox/string.h"
+# include "../toolbox/getopt/getopt.h"
 
 
 namespace Yuni
@@ -71,7 +72,7 @@ namespace Application
 		//! Exit code
 		sint8 pExitCode;
 
-	}; // class Application::AApplication
+	}; // class AApplication
 
 
 
