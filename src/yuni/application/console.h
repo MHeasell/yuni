@@ -35,7 +35,7 @@ namespace Application
 	** }
 	** \endcode
 	*/
-	class YUNI_EXPORT Console : public Application::AApplication
+	class Console : public Application::AApplication
 	{
 	public:
 		/*!
