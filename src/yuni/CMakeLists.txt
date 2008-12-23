@@ -107,7 +107,7 @@ source_group(ToolBox\\System FILES ${SRC_TOOLBOX_SYSTEM})
 # System - Microsoft Windows
 set(SRC_TOOLBOX_SYSTEM_WINDOWS toolbox/system/windows.hdr.h  toolbox/system/windows/gettimeofday.h)
 If(WIN32 AND MSVC)
-    set(SRC_SYSTEM_WINDOWS ${SRC_TOOLBOX_SYSTEM_WINDOWS} toolbox/system/windows/gettimeofday.cpp)
+    set(SRC_TOOLBOX_SYSTEM_WINDOWS ${SRC_TOOLBOX_SYSTEM_WINDOWS} toolbox/system/windows/gettimeofday.cpp)
 EndIF(WIN32 AND MSVC)
 source_group(ToolBox\\System\\Windows FILES ${SRC_TOOLBOX_SYSTEM_WINDOWS})
 
