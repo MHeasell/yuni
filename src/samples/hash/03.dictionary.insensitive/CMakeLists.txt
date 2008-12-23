@@ -1,4 +1,5 @@
 
+include_directories(${YUNI_INCLUDE})
 ADD_EXECUTABLE(hash_03_dictionary_insensitive main.cpp)
-target_link_libraries(hash_03_dictionary_insensitive yuni-static)
+target_link_libraries(hash_03_dictionary_insensitive ${YUNI_LIBRARIES})
 
