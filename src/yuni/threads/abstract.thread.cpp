@@ -10,9 +10,9 @@
 #	include <unistd.h>
 #	include <sys/time.h>
 #else
-#	include "../system/windows.hdr.h"
+#	include "../toolbox/system/windows.hdr.h"
 #	include <process.h>
-#	include "../system/windows/gettimeofday.h"
+#	include "../toolbox/system/windows/gettimeofday.h"
 #endif
 
 #include "thread.h"

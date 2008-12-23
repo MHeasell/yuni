@@ -1,7 +1,7 @@
 #ifndef __YUNI_SYSTEM_WINDOWS_GETTIMEOFDAY_H__
 # define __YUNI_SYSTEM_WINDOWS_GETTIMEOFDAY_H__
 
-# include "../../yuni.h"
+# include "../yuni.h"
 
 # ifdef YUNI_OS_WINDOWS
 #	include "../windows.hdr.h"
