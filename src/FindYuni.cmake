@@ -5,9 +5,10 @@
 #
 # The common paths for Yuni headers
 #
-SET(YUNI_INCLUDE "${PROJECT_SOURCE_DIR}/..")
 
-SET(YUNI_LIBRARIES  yuni-static)
+LIST(APPEND YUNI_INCLUDE "${PROJECT_SOURCE_DIR}/..")
+
+LIST(APPEND YUNI_LIBRARIES  yuni-static)
 
 IF(APPLE)
 	LIST(APPEND YUNI_LIBRARIES  "-framework Cocoa")
