@@ -40,23 +40,25 @@ namespace Hash
 	** \internal Do not forget to broadcast changes into Hash::Table as well
 	*/
 	template<typename V, int Options = optNone>
-	class Dictionary : public Table<String, V, false>
+	class Dictionary : public Table<String, V, Policy::SingleThreaded>
 	{
 	public:
+		//! Table
+		typedef Table<String, V, Policy::SingleThreaded> TableType;
 		//! An Iterator for the dictionary
-		typedef typename Table<String, V, false> ::iterator  iterator;
+		typedef typename TableType::iterator  iterator;
 		//! A Const iterator for the dictionary
-		typedef typename Table<String, V, false> ::const_iterator  const_iterator;
+		typedef typename TableType::const_iterator  const_iterator;
 
 	public:
 		//! \name Constructors & Destructor
 		//@{
 		//! Default constructor
-		Dictionary() : Table<String, V, false>() {}
+		Dictionary() : TableType() {}
 		//! Copy constructor
-		Dictionary(const Dictionary& c) : Table<String, V, false>(c) {}
+		Dictionary(const Dictionary& c) : TableType(c) {}
 		//! Destructor
-		virtual ~Dictionary() {Table<String, V, false>::clear();}
+		virtual ~Dictionary() {TableType::clear();}
 		//@}
 
 		/*!
@@ -65,7 +67,7 @@ namespace Hash
 		** \param key The key to find
 		** \return True if the key exists, False otherwise
 		*/
-		bool exists(const String& key) const {return Table<String, V, false>::exists(key);}
+		bool exists(const String& key) const {return TableType::exists(key);}
 		/*!
 		** \brief Get/Set an entry
 		**
@@ -74,7 +76,7 @@ namespace Hash
 		** \param key The key to get/set
 		** \return The value of the key
 		*/
-		V& operator[] (const String& key) {return (*(static_cast < Table<String, V, false > * > (this)))[key];}
+		V& operator[] (const String& key) {return (*(static_cast < TableType* > (this)))[key];}
 
 		/*!
 		** \brief Find a key in the table
@@ -82,8 +84,8 @@ namespace Hash
 		** \param key The key to find
 		** \return The iterator pointing to the key, end() if not found
 		*/
-		iterator find(const String& key) {return Table<String, V, false>::find(key);}
-		const_iterator find(const String& key) const {return Table<String, V, false>::find(key);}
+		iterator find(const String& key) {return TableType::find(key);}
+		const_iterator find(const String& key) const {return TableType::find(key);}
 
 		/*!
 		** \brief Get the value of a key
@@ -92,24 +94,24 @@ namespace Hash
 		** \param defvalue The default value if the key can not be found
 		** \return The value ofthe key, `defvalue` if the key could not be found
 		*/
-		V value(const String& key, const V& defvalue = V()) const {return Table<String, V, false>::value(key, defvalue);}
+		V value(const String& key, const V& defvalue = V()) {return TableType::value(key, defvalue);}
 
 		/*!
 		** \brief Get an iterator pointing to the beginning of the table
 		*/
-		iterator begin() {return Table<String, V, false>::begin();}
-		const_iterator begin() const {return Table<String, V, false>::begin();}
+		iterator begin() {return TableType::begin();}
+		//const_iterator begin() const {return TableType::begin();}
 
 		/*!
 		** \brief Get an iterator pointing to the end of the table
 		*/
-		iterator end() {return Table<String, V, false>::end();}
-		const_iterator end() const {return Table<String, V, false>::end();}
+		iterator end() {return TableType::end();}
+		//const_iterator end() const {return TableType::end();}
 
 		/*!
 		** \brief Clear the table
 		*/
-		void clear() {Table<String, V, false>::clear();}
+		void clear() {TableType::clear();}
 
 		/*!
 		** \brief Erase a single key
@@ -117,7 +119,12 @@ namespace Hash
 		** \param key The key to find
 		** \return True if the key has been erased, False if not found
 		*/
-		void erase(const String& key) {Table<String, V, false>::erase(key);}
+		void erase(const String& key) {TableType::erase(key);}
+
+		/*!
+		** \brief Size of the dictionary
+		*/
+		int size() {return TableType::size();}
 
 	}; // class Hash::Dictionary
 

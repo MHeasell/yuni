@@ -5,7 +5,7 @@
 # include "std.hashmap.h"
 # include "../string.h"
 # include "key.h"
-# include "../../threads/mutex.h"
+# include "../policies/threading.h"
 
 
 
@@ -15,10 +15,12 @@ namespace Yuni
 namespace Hash
 {
 
-	static const int optNone = 0;
-	static const int optThreadSafe = 1;
-	static const int optIgnoreCase = 2;
-
+	enum Options
+	{
+		optNone = 0,
+		optThreadSafe = 1,
+		optIgnoreCase = 2
+	};
 
 
 
@@ -28,10 +30,12 @@ namespace Hash
 	**
 	** \internal Do not forget to broadcast changes into Hash::Dictionary as well
 	*/
-	template<typename K, typename V, bool ThreadSafe = false>
-	class Table
+	template<typename K, typename V, template<class> class TP = Policy::SingleThreaded>
+	class Table : TP<V>
 	{
 	public:
+		//! The threading policy used
+		typedef TP<V> ThreadingPolicy;
 		//! An iterator
 		typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN<K> >::iterator  iterator;
 		//! A const iterator
@@ -41,11 +45,15 @@ namespace Hash
 		//! \name Constructors & Destructor
 		//@{
 		//! Default constructor
-		Table() : pTable() {}
+		Table()
+			:ThreadingPolicy(), pTable()
+		{}
 		//! Copy constructor
-		Table(const Table& c) : pTable(c.pTable) {}
+		Table(const Table& c)
+			:ThreadingPolicy(), pTable(c.pTable)
+		{}
 		//! Destructor
-		virtual ~Table() {}
+		virtual ~Table() {this->clear();}
 		//@}
 
 		/*!
@@ -54,7 +62,7 @@ namespace Hash
 		** \param key The key to find
 		** \return True if the key exists, False otherwise
 		*/
-		bool exists(const K& key) const {return pTable.find(key) != pTable.end();}
+		bool exists(const K& key); 
 
 		/*!
 		** \brief Get/Set an entry
@@ -64,7 +72,7 @@ namespace Hash
 		** \param key The key to get/set
 		** \return The value of the key
 		*/
-		V& operator[] (const K& key) {return pTable[key];}
+		V& operator[] (const K& key);
 
 		/*!
 		** \brief Find a key in the table
@@ -72,8 +80,7 @@ namespace Hash
 		** \param key The key to find
 		** \return The iterator pointing to the key, end() if not found
 		*/
-		iterator find(const K& key) {return pTable.find(key);}
-		const_iterator find(const K& key) const {return pTable.find(key);}
+		iterator find(const K& key);
 
 		/*!
 		** \brief Get the value of a key
@@ -82,31 +89,31 @@ namespace Hash
 		** \param defvalue The default value if the key can not be found
 		** \return The value ofthe key, `defvalue` if the key could not be found
 		*/
-		V value(const K& key, const V& defvalue = V()) const;
+		V value(const K& key, const V& defvalue = V());
 
 
 		/*!
 		** \brief Returns a read/write iterator that points to the first element of the table
 		*/
-		iterator begin() {return pTable.begin();}
+		iterator begin();
 		/*!
 		** \brief Returns a read-only (constant) iterator that points to the first element of the table
 		*/
-		const_iterator begin() const {return pTable.begin();}
+		//const_iterator begin() const {return pTable.begin();}
 
 		/*!
 		** \brief Returns a read/write iterator that points to the end of the table
 		*/
-		iterator end() {return pTable.end();}
+		iterator end();
 		/*!
 		** \brief Returns a read-only (constant) iterator that points to the end of the table
 		*/
-		const_iterator end() const {return pTable.end();}
+		//const_iterator end() const {return pTable.end();}
 
 		/*!
 		** \brief Clear the table
 		*/
-		void clear() {pTable.clear();}
+		void clear();
 
 		/*!
 		** \brief Erase a single key
@@ -117,19 +124,21 @@ namespace Hash
 		void erase(const K& key);
 
 		//! Number of elements in the table
-		int size() const {return pTable.size();}
+		int size();
 
 		/*!
 		** \brief Insert a key
 		** \param key The key to insert in the hash map
 		*/
-		std::pair<iterator, bool> insert(const K& key) {return pTable.insert(key);}
+		std::pair<iterator, bool> insert(const K& key);
 
 	private:
 		//! The real hash map
 		YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN<K> >  pTable;
 
 	}; // class Hash::Table
+
+
 
 
 

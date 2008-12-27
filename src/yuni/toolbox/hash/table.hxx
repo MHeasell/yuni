@@ -7,87 +7,86 @@ namespace Yuni
 namespace Hash
 {
 
-
-	/*!
-	** Partial specialization when the hash table must be thread-safe
-	** Be cautious : Choose carefully the routines you call to avoid
-	** as musch as possible the overhead produced by the locking mechanism
-	*/
-	template<typename K, typename V>
-	class Table<K, V, true>
+	template<typename K, typename V, template<class> class TP>
+	inline bool Table<K,V,TP>::exists(const K& key)
 	{
-	public:
-		typedef typename YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN<K> >::iterator  iterator;
+		typename Table<K,V,TP>::ThreadingPolicy::MutexLocker locker(*this);
+		return pTable.find(key) != pTable.end();
+	}
 
-	public:
-		Table() : pTable() {}
-		Table(const Table& c) : pTable(c.pTable) {}
-		virtual ~Table() {}
-
-		bool exists(const K& key) {MutexLocker locker(pMutex);return pTable.find(key) != pTable.end();}
-
-		V& operator[] (const K& key) {MutexLocker locker(pMutex);return pTable[key];}
-
-		iterator find(const K& key) {MutexLocker locker(pMutex);return pTable.find(key);}
-
-		V value(const K& key, const V& defvalue = V());
-
-		iterator begin() {MutexLocker locker(pMutex);return pTable.begin();}
-
-		iterator end() {MutexLocker locker(pMutex); return pTable.end();}
-
-		void clear() {pTable.clear();}
-
-		void erase(const K& key);
 		
-		std::pair<iterator, bool> insert(const K& key) {MutexLocker locker(pMutex);return pTable.insert(key);}
-
-	private:
-		//! The mutex
-		Mutex pMutex;
-		//! The real hash map
-		YuniSTLExt::hash_map< K, V, YuniSTLExt::YUNI_OS_HASH_MAP_FUN<K> >  pTable;
-	};
-
-
-
-
-	template<typename K, typename V, bool ThreadSafe>
-	inline void Table<K,V,ThreadSafe>::erase(const K& key)
+	template<typename K, typename V, template<class> class TP>
+	inline V& Table<K,V,TP>::operator[] (const K& key)
 	{
-		iterator it = pTable.find(key);
-		if (pTable.end() != it)
-			pTable.erase(it);
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		return pTable[key];
 	}
 
 
-	template<typename K, typename V, bool ThreadSafe>
-	inline V Table<K,V,ThreadSafe>::value(const K& key, const V& defvalue) const
+	template<typename K, typename V, template<class> class TP>
+	inline typename Table<K,V,TP>::iterator Table<K,V,TP>::find(const K& key)
 	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		return pTable.find(key);
+	}
+
+
+	template<typename K, typename V, template<class> class TP>
+	inline V Table<K,V,TP>::value(const K& key, const V& defvalue)
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
 		const_iterator it = pTable.find(key);
 		return (it == pTable.end()) ? defvalue : it->second;
 	}
 	
-	
-	template<typename K, typename V>
-	inline V Table<K,V,true>::value(const K& key, const V& defvalue)
+	template<typename K, typename V, template<class> class TP>
+	inline void Table<K,V,TP>::erase(const K& key)
 	{
-		MutexLocker locker(pMutex);
-		iterator it = pTable.find(key);
-		return (it == pTable.end()) ? defvalue : it->second;
-	}
-
-	template<typename K, typename V>
-	void Table<K,V,true>::erase(const K& key)
-	{
-		pMutex.lock();
+		typename ThreadingPolicy::MutexLocker locker(*this);
 		iterator it = pTable.find(key);
 		if (pTable.end() != it)
 			pTable.erase(it);
-		pMutex.unlock();
 	}
 
 
+	template<typename K, typename V, template<class> class TP>
+	typename Table<K,V,TP>::iterator Table<K,V,TP>::begin()
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		return pTable.begin();
+	}
+	
+
+	template<typename K, typename V, template<class> class TP>
+	typename Table<K,V,TP>::iterator Table<K,V,TP>::end()
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		return pTable.end();
+	}
+
+		
+	template<typename K, typename V, template<class> class TP>
+	void Table<K,V,TP>::clear()
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		pTable.clear();
+	}
+
+
+	template<typename K, typename V, template<class> class TP>
+	inline int Table<K,V,TP>::size()
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		return pTable.size();
+	}
+
+
+	template<typename K, typename V, template<class> class TP>
+	inline std::pair<typename Table<K,V,TP>::iterator, bool> Table<K,V,TP>::insert(const K& key)
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		return pTable.insert(key);
+	}
 
 
 
