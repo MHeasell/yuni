@@ -8,12 +8,9 @@
 
 LIST(APPEND YUNI_INCLUDE "${PROJECT_SOURCE_DIR}/..")
 
-LIST(APPEND YUNI_LIBRARIES  yuni-static)
 
-IF(APPLE)
-	LIST(APPEND YUNI_LIBRARIES  "-framework Cocoa")
-ENDIF(APPLE)
-
+Set(YUNI_STATIC_CORE yuni-static-core)
+Set(YUNI_STATIC_GFX3D yuni-static-gfx3d)
 
 #
 # Irrlicht
