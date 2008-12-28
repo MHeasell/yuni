@@ -1,26 +1,16 @@
-Project(YUNI CXX)
 
 Message(STATUS "")
-Message(STATUS "The Yuni Framework")
+Message(STATUS "Modules")
 Message(STATUS "")
-CMake_minimum_required(VERSION 2.6)
 
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../CommonSettings.cmake")
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../Modules.cmake")
 
-Include("${PROJECT_SOURCE_DIR}/../CommonSettings.cmake")
-
-
-#
-# The target directory for static libs
-#
-Set(TARGET_LIBS "${PROJECT_SOURCE_DIR}/../../bin/static/")
-Set(LIBRARY_OUTPUT_PATH "${TARGET_LIBS}")
-Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
+Message(STATUS "--- Module: Core")
 
 
 
-#
-# The Yuni Library
-#
+
 set(SRC_TOOLBOX_STATIC
 				toolbox/static/if.h
 				toolbox/static/remove.h
@@ -112,21 +102,6 @@ EndIF(WIN32 AND MSVC)
 source_group(ToolBox\\System\\Windows FILES ${SRC_TOOLBOX_SYSTEM_WINDOWS})
 
 
-
-
-
-
-
-
-# Devices
-set(SRC_DEVICES
-				system/devices/devices.h system/devices/display.cpp
-				system/devices/monitor.h system/devices/monitor.cpp
-				system/devices/resolution.h system/devices/resolution.cpp)
-source_group(System\\Devices FILES ${SRC_DEVICES})
-
-
-
 # Threads
 set(SRC_THREADS
 				threads/mutex.h threads/mutex.cpp
@@ -146,18 +121,54 @@ source_group(Jobs FILES ${SRC_THREADS})
 # Application
 set(SRC_APPLICATION
 				application/application.h application/application.cpp
-				application/console.h application/console.cpp
-				application/gfx3d.h application/gfx3d.cpp)
+				application/console.h application/console.cpp)
 source_group(Application FILES ${SRC_APPLICATION})
 
+Set(SRC_RGB
+		gfx/color.proxy.h gfx/color.proxy.cpp
+		gfx/rgba.h gfx/rgb.h)
+source_group(Gfx FILES ${SRC_RGB})
 
 
-# Gfx
-set(SRC_GFX
+
+Add_Library(yuni-static-core STATIC
+				${SRC_TOOLBOX_STATIC} ${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_STL} ${SRC_TOOLBOX_POLICIES}
+				${SRC_TOOLBOX_SMARTPTR}
+				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
+				${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT} ${SRC_TOOLBOX_FS}
+				${SRC_TOOLBOX_HASH_CHECKSUM} ${SRC_TOOLBOX_HASH}
+				${SRC_TOOLBOX_SYSTEM} ${SRC_TOOLBOX_SYSTEM_WINDOWS}
+				${SRC_THREADS} ${SRC_JOBS}
+				${SRC_APPLICATION} ${SRC_RGB}
+				)
+
+
+
+
+
+
+#
+# Module : GFX 3D
+#
+If(YUNI_MODULE_GFX3D)
+
+	Message(STATUS "--- Module: Gfx3D")
+
+	# Devices
+	set(SRC_DEVICES
+				system/devices/devices.h system/devices/display.cpp
+				system/devices/monitor.h system/devices/monitor.cpp
+				system/devices/resolution.h system/devices/resolution.cpp)
+	source_group(System\\Devices FILES ${SRC_DEVICES})
+
+	set(SRC_APPLICATION_GFX
+				application/gfx3d.h application/gfx3d.cpp)
+	source_group(Application FILES ${SRC_APPLICATION_GFX})
+
+	# Gfx
+	set(SRC_GFX
 				gfx/device.h gfx/device.cpp
 				gfx/point2D.h gfx/point3D.h gfx/vector3D.h
-				gfx/color.proxy.h gfx/color.proxy.cpp
-				gfx/rgba.h gfx/rgb.h
 				gfx/boundingbox.h gfx/boundingbox.hxx
 				gfx/vertex.h gfx/triangle.h gfx/edge.h
 				gfx/mesh.h gfx/mesh.cpp gfx/mesh.proxy.h
@@ -166,58 +177,46 @@ set(SRC_GFX
 				gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
 				gfx/octree.h gfx/octree.hxx
 				gfx/engine.h gfx/engine.cpp)
-source_group(Gfx FILES ${SRC_GFX})
+	source_group(Gfx FILES ${SRC_GFX})
 
-
-# User Interface
-set(SRC_GFX_UI
+	# User Interface
+	set(SRC_GFX_UI
 				gfx/ui/component.h gfx/ui/component.cpp
 				gfx/ui/control.h gfx/ui/control.cpp gfx/ui/anchor.cpp
 				gfx/ui/controller.h gfx/ui/controller.cpp)
-source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
+	source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
 
-
-
-# External Lib: Irrlicht
-
-set(SRC_EXTERNAL_3D_IRRLICHT
+	# External Lib: Irrlicht
+	set(SRC_EXTERNAL_3D_IRRLICHT
 				private/gfx3d/irrlicht/irr.h
 				private/gfx3d/irrlicht/irr.engine.h private/gfx3d/irrlicht/irr.engine.cpp
 				private/gfx3d/irrlicht/irr.mesh.h private/gfx3d/irrlicht/irr.mesh.cpp)
-source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
+	source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
 
-
-if(YUNI_EXTERNAL_3D_IRRLICHT)
-	Message(STATUS "External: 3D: The Irrlicht Engine")
-	# Headers for Irrlicht
-	DEVPACK_IMPORT_IRRLICHT()
-	Set(SRC_EXTERNAL_3D
+	if(YUNI_EXTERNAL_3D_IRRLICHT)
+		# Headers for Irrlicht
+		DEVPACK_IMPORT_IRRLICHT()
+		Set(SRC_EXTERNAL_3D
 				private/gfx3d/abstract.h private/gfx3d/abstract.cpp
 				${YUNI_EXT_IRRLICHT_SRC}  # From DevPack 'irrlicht-headers'
 				${SRC_EXTERNAL_3D_IRRLICHT})
-Endif(YUNI_EXTERNAL_3D_IRRLICHT)
+	Endif(YUNI_EXTERNAL_3D_IRRLICHT)
 
-
-Add_definitions("-DYUNI_LIBRARY_STATIC")
-
-
-Include_directories(${YUNI_INCLUDE})
-
-
-
-Add_Library(yuni-static STATIC
-				${SRC_TOOLBOX_STATIC} ${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_STL} ${SRC_TOOLBOX_POLICIES}
-				${SRC_TOOLBOX_SMARTPTR}
-				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
-				${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT} ${SRC_TOOLBOX_FS}
-				${SRC_TOOLBOX_HASH_CHECKSUM} ${SRC_TOOLBOX_HASH}
-				${SRC_TOOLBOX_SYSTEM} ${SRC_TOOLBOX_SYSTEM_WINDOWS}
-				${SRC_DEVICES}
-				${SRC_THREADS} ${SRC_JOBS}
-				${SRC_APPLICATION}
+	Add_Library(yuni-static-gfx3d STATIC
+				${SRC_DEVICES} ${SRC_APPLICATION_GFX}
 				${SRC_GFX} ${SRC_GFX_UI}
 				${SRC_EXTERNAL_3D}
 				)
 
-SET_TARGET_PROPERTIES(yuni-static PROPERTIES OUTPUT_NAME "yuni")
+EndIf(YUNI_MODULE_GFX3D)
+
+
+
+
+#
+# Misc
+#
+Add_definitions("-DYUNI_LIBRARY_STATIC")
+Include_directories(${YUNI_INCLUDE})
+
 

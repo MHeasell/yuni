@@ -16,32 +16,6 @@ Include(CheckIncludeFile)
 
 
 
-#
-# Informations about the system
-#
-Message(STATUS "System: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
-If(MSVC)
-    Message(STATUS "Compiler: Visual Studio")
-EndIF(MSVC)
-If(MINGW)
-    Message(STATUS "Compiler: MinGW")
-EndIf(MINGW)
-If(XCODE)
-    Message(STATUS "Compiler: XCode")
-EndIf(XCODE)
-If(CMAKE_COMPILER_IS_GNUCXX)
-	If(NOT GNUCXX_VERSION)
-		# -dumpversion might be used
-		Execute_process(COMMAND ${CMAKE_CXX_COMPILER} "--version" OUTPUT_VARIABLE GNUCXX_VERSION_N ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
-		String(REGEX REPLACE "Copyright.*" "" GNUCXX_VERSION_N "${GNUCXX_VERSION_N}")
-		String(STRIP "${GNUCXX_VERSION_N}" GNUCXX_VERSION_N)
-		SET(GNUCXX_VERSION "${GNUCXX_VERSION_N}" CACHE INTERNAL "Version of the Gnu Gxx compiler")
-	EndIf(NOT GNUCXX_VERSION)
-	Message(STATUS "g++ Variant : ${GNUCXX_VERSION}")
-EndIf(CMAKE_COMPILER_IS_GNUCXX)
-
-
-
 
 
 
@@ -56,7 +30,7 @@ IF("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 	#
 	# Build Configuration: Release
 	#
-	Message(STATUS "* Build Configuration: Release")
+	Message(STATUS "Build Configuration: Release")
 
 	IF(NOT WIN32)
 		String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
@@ -83,7 +57,7 @@ Else("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 	#
 	# Build Configuration: Debug
 	#
-	Message(STATUS "* Build Configuration: Debug")
+	Message(STATUS "Build Configuration: Debug")
 
 
 	IF(NOT WIN32)
@@ -131,16 +105,10 @@ Else(CMAKE_USE_WIN32_THREADS_INIT)
 EndIF(CMAKE_USE_WIN32_THREADS_INIT)
 
 
-
-
-
-#
-# 3D Back-end
-#
-Set(YUNI_EXTERNAL_3D_IRRLICHT TRUE)
-
-
 #
 # Extra - Bundles
 #
-SET(MACOSX_BUNDLE_COPYRIGHT "Yuni - 2008")
+SET(MACOSX_BUNDLE_COPYRIGHT "Yuni - 2008/2009")
+
+
+
