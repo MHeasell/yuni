@@ -124,8 +124,10 @@ set(SRC_APPLICATION
 				application/console.h application/console.cpp)
 source_group(Application FILES ${SRC_APPLICATION})
 
-Set(SRC_RGB
+Set(SRC_GFX_CORE
 		gfx/color.proxy.h gfx/color.proxy.cpp
+		gfx/point2D.h gfx/point3D.h gfx/vector3D.h
+		gfx/octree.h gfx/octree.hxx
 		gfx/rgba.h gfx/rgb.h)
 source_group(Gfx FILES ${SRC_RGB})
 
@@ -139,7 +141,7 @@ Add_Library(yuni-static-core STATIC
 				${SRC_TOOLBOX_HASH_CHECKSUM} ${SRC_TOOLBOX_HASH}
 				${SRC_TOOLBOX_SYSTEM} ${SRC_TOOLBOX_SYSTEM_WINDOWS}
 				${SRC_THREADS} ${SRC_JOBS}
-				${SRC_APPLICATION} ${SRC_RGB}
+				${SRC_APPLICATION} ${SRC_GFX_CORE}
 				)
 
 
@@ -168,14 +170,12 @@ If(YUNI_MODULE_GFX3D)
 	# Gfx
 	set(SRC_GFX
 				gfx/device.h gfx/device.cpp
-				gfx/point2D.h gfx/point3D.h gfx/vector3D.h
-				gfx/boundingbox.h gfx/boundingbox.hxx
 				gfx/vertex.h gfx/triangle.h gfx/edge.h
 				gfx/mesh.h gfx/mesh.cpp gfx/mesh.proxy.h
 				gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
 				gfx/metaobject.h gfx/metaball.h
+				gfx/boundingbox.h gfx/boundingbox.hxx
 				gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
-				gfx/octree.h gfx/octree.hxx
 				gfx/engine.h gfx/engine.cpp)
 	source_group(Gfx FILES ${SRC_GFX})
 
