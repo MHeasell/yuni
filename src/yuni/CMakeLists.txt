@@ -210,6 +210,37 @@ If(YUNI_MODULE_GFX3D)
 
 EndIf(YUNI_MODULE_GFX3D)
 
+#
+# Module : Script
+#
+If(YUNI_MODULE_SCRIPT)
+
+	Message(STATUS "--- Module: Script")
+
+	# Scripts
+	set(SRC_SCRIPT
+				script/dummy.cpp)
+	source_group("Script\\Abstract Script Interface" FILES ${SRC_SCRIPT})
+
+	# External Lib: Lua script
+	if(YUNI_EXTERNAL_SCRIPT_LUA)
+		# Headers for Lua
+		DEVPACK_IMPORT_LUA()
+		Set(SRC_EXTERNAL_SCRIPT_LUA
+				${YUNI_EXT_LUA_SRC}  # From DevPack 'lua'
+			)
+
+	Endif(YUNI_EXTERNAL_SCRIPT_LUA)
+
+	Add_Library(yuni-static-script STATIC
+				${SRC_SCRIPT}
+				${SRC_EXTERNAL_SCRIPT_LUA}
+				)
+
+EndIf(YUNI_MODULE_SCRIPT)
+
+
+
 
 
 

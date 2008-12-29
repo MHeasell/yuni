@@ -1,0 +1,6 @@
+IF(YUNI_MODULE_SCRIPT)
+	Message(STATUS "Sample: Script / A Simple Lua Hello World (not functional yet)")
+	include_directories(${YUNI_INCLUDE})
+	ADD_EXECUTABLE(script_00_helloworld main.cpp)
+	target_link_libraries(script_00_helloworld ${YUNI_STATIC_CORE} ${YUNI_STATIC_SCRIPT})
+EndIF(YUNI_MODULE_SCRIPT)
