@@ -16,7 +16,7 @@
 //! Macro to append some data to the string
 # define YUNI_WSTR_APPEND	  std::stringstream out; \
 								out << v; \
-								append(out.str());\
+								static_cast<std::string*>(this)->append(out.str());\
 								return *this
 
 //! Macro to convert the string into a given type
@@ -25,7 +25,7 @@
 								return v;
 
 //! Macro to append the value of a boolean (true -> "true", false -> "false")
-# define YUNI_WSTR_APPEND_BOOL(X)   append(X ? "true" : "false")
+# define YUNI_WSTR_APPEND_BOOL(X)   static_cast<std::string*>(this)->append(X ? "true" : "false")
 
 //@} // Macros for Yuni::String
 
@@ -246,18 +246,18 @@ namespace Yuni
 		//! Constructor with a default value from a double
 		explicit String(const double v) :std::string() {*this << v;}
 		//! Destructor
-		~String() {}
+		virtual ~String() {}
 		//@}
 
 
 		//! \name The operator `<<`
 		//@{
 		//! Append a string (char*) 
-		String& operator << (const char* v) {append(v);return *this;}
+		String& operator << (const char* v) {static_cast<std::string*>(this)->append(v);return *this;}
 		//! Append a string (stl)
-		String& operator << (const std::string& v) {append(v);return *this;}
+		String& operator << (const std::string& v) {static_cast<std::string*>(this)->append(v);return *this;}
 		//! Append a string (Yuni::String)
-		String& operator << (const String& v) {append(v);return *this;}
+		String& operator << (const String& v) {static_cast<std::string*>(this)->append(v);return *this;}
 		//! Append a single char
 		String& operator << (const char v) {*(static_cast<std::string*>(this)) += v; return *this;}
 		//! Append a wide string (wchar_t*)
@@ -317,11 +317,11 @@ namespace Yuni
 		//! \name The operator `+=` (with the same abilities than the operator `<<`)
 		//@{
 		//! Append a string (char*) 
-		String& operator += (const char* v) {append(v); return *this;}
+		String& operator += (const char* v) {static_cast<std::string*>(this)->append(v); return *this;}
 		//! Append a string (stl)
-		String& operator += (const std::string& v) {append(v); return *this;}
+		String& operator += (const std::string& v) {static_cast<std::string*>(this)->append(v); return *this;}
 		//! Append a string (Yuni::String)
-		String& operator += (const Yuni::String& v) {append(v); return *this; }
+		String& operator += (const Yuni::String& v) {static_cast<std::string*>(this)->append(v); return *this; }
 		//! Append a single char
 		String& operator += (const char v) {*(static_cast<std::string*>(this)) += (char)v; return *this;}
 		//! Append a wide string (wchar_t*)
