@@ -62,9 +62,17 @@ Message(STATUS "Libraries output: `${TARGET_LIBS}`")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/DevPack.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/DevPackStandardImports.cmake")
 
+# Modules
+Include("${CMAKE_CURRENT_SOURCE_DIR}/Modules.cmake")
+
+
 
 # Sub Directories
 Add_SubDirectory(yuni)
-Add_SubDirectory(tests)
-Add_SubDirectory(samples)
+IF(YUNI_TESTS)
+	Add_SubDirectory(tests)
+EndIF(YUNI_TESTS)
+IF(YUNI_SAMPLES)
+	Add_SubDirectory(samples)
+EndIF(YUNI_SAMPLES)
 
