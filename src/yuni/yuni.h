@@ -23,22 +23,32 @@
 */
 
 
+
+
+
 //! \name Informations about the Yuni Library
 //@{
+//! The hi part of the version of the yuni library
 # define YUNI_VERSION_HI  0
+//! The lo part of the version of the yuni library
 # define YUNI_VERSION_LO  1
 //@}
 
-// Operating System / Architecture detection
-# include "toolbox/system/os.h"
+
+// Operating System / Capabilities auto-detection
+# include "toolbox/system/capabilities.h"
 // Standard Types
 # include "toolbox/system/stdint.h"
 
 
+
+
+
 /*!
-** \brief The global Yuni Framework
+** \brief The Yuni Framework
 */
 namespace Yuni
 {}
+
 
 #endif // __YUNI_COMMONS_H__
