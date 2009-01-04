@@ -13,7 +13,7 @@ namespace Yuni
 		{
 			pthread_mutexattr_t mutexattr;
 			pthread_mutexattr_init(&mutexattr);
-			# ifdef YUNI_OS_DARWIN
+			# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD)
 			pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE);
 			# else
 			pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE_NP);
