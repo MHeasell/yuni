@@ -260,8 +260,6 @@ namespace Yuni
 		String& operator << (const char v) {*(static_cast<std::string*>(this)) += v; return *this;}
 		//! Append a wide string (wchar_t*)
 		String& operator << (const wchar_t* v);
-		//! Append an int (8 bits)
-		String& operator << (const sint8 v) {YUNI_WSTR_APPEND;}
 		//! Append an unsigned int (8 bits)
 		String& operator << (const uint8 v) {YUNI_WSTR_APPEND;}
 		//! Append an int (16 bits)
@@ -324,8 +322,6 @@ namespace Yuni
 		String& operator += (const char v) {*(static_cast<std::string*>(this)) += (char)v; return *this;}
 		//! Append a wide string (wchar_t*)
 		String& operator += (const wchar_t* v) {*this << v; return *this;}
-		//! Append an int (8 bits)
-		String& operator += (const sint8 v) {*this << v; return *this;}
 		//! Append an unsigned int (8 bits)
 		String& operator += (const uint8 v) {*this << v; return *this;}
 		//! Append an int (16 bits)
@@ -361,8 +357,6 @@ namespace Yuni
 		const String operator + (const char* rhs) { return String(*this) += rhs; }
 		//! Create a new String from the concatenation of *this and a wide string
 		const String operator + (const wchar_t* rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a signed int (8 bits)
-		const String operator + (const sint8 rhs) { return String(*this) += rhs; }
 		//! Create a new String from the concatenation of *this and a signed int (16 bits)
 		const String operator + (const sint16 rhs) { return String(*this) += rhs; }
 		//! Create a new String from the concatenation of *this and a signed int (32 bits)
