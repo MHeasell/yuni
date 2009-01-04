@@ -144,11 +144,11 @@
 #			define YUNI_OS_OPENBSD
 #		endif
 #		if defined(sun) || defined(__sun)
-/* Solaris (<= 4.x) */
+/* Solaris */
 #			if defined(__SVR4) || defined(__svr4__)
 #				 define YUNI_OS_SOLARIS
 #			else
-/* SunOS (>= 5.x) */
+/* SunOS */
 #				 define YUNI_OS_SUNOS
 #			endif
 #			if defined(__SUNPRO_C) || defined(__SUNPRO_CC)
