@@ -8,6 +8,7 @@ namespace Yuni
 {
 
 
+
 	String::String(const char* v)
 		:std::string()
 	{
@@ -390,7 +391,7 @@ namespace Yuni
 	String& String::vappendFormat(const char* f, va_list parg)
 	{
 		char* b;
-		# if defined YUNI_OS_WINDOWS
+		# if defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_SOLARIS)
 		// Implement vasprintf() by hand with two calls to vsnprintf()
 		// Remove this when Microsoft adds support for vasprintf()
 		#   if defined YUNI_OS_MSVC
