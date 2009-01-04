@@ -75,15 +75,23 @@ namespace Private
 
 
 
+
+#ifndef YUNI_ATHREADMODEL_CPUCOUNT
+#  warning "The method AThreadModel::CPUCount has not been implemented for the current platform"
+
+	int AThreadModel::CPUCount()
+	{
+		return 1; // Default value
+	}
+
+#endif
+
+
+
 } // namespace Private
 } // namespace Threads
 } // namespace Yuni
 
 
-
-
-#ifndef YUNI_ATHREADMODEL_CPUCOUNT
-#  error "The method AThreadModel::CPUCount has not been implemented for the current platform"
-#endif
 
 
