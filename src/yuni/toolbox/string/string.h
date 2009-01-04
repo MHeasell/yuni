@@ -225,8 +225,6 @@ namespace Yuni
 		String(const char* v, String::size_type n) :std::string(v, n) {}
 		//! Constructor with a default value from a single char
 		String(const char v) :std::string() {*this += v;}
-		//! Constructor with a default value from an int (8 bits)
-		explicit String(const sint8 v) :std::string() {*this << v;}
 		//! Constructor with a default value from an int (16 bits)
 		explicit String(const sint16 v) :std::string() {*this << v;}
 		//! Constructor with a default value from an int (32 bits)
