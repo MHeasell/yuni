@@ -89,7 +89,7 @@ source_group(ToolBox\\Hash FILES ${SRC_TOOLBOX_HASH})
 
 # System
 set(SRC_TOOLBOX_SYSTEM
-                toolbox/system/stdint.h toolbox/system/os.h
+                toolbox/system/stdint.h toolbox/system/capabilities.h
                 toolbox/system/sleep.h toolbox/system/sleep.cpp
 				toolbox/system/endian.h)
 source_group(ToolBox\\System FILES ${SRC_TOOLBOX_SYSTEM})
