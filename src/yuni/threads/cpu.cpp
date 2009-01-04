@@ -1,6 +1,6 @@
 
 #include "abstract.thread.h"
-#ifdef YUNI_OS_DARWIN
+#if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD)
 #	include <sys/param.h>
 #	include <sys/sysctl.h>
 #endif
@@ -23,7 +23,7 @@ namespace Private
 
 
 
-#ifdef YUNI_OS_DARWIN
+#if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD)
 # define YUNI_ATHREADMODEL_CPUCOUNT
 	int AThreadModel::CPUCount()
 	{
