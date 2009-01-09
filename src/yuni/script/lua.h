@@ -46,17 +46,29 @@ namespace Script
 		virtual Language language() const { return slLua; }
 		//@}
 
-	public:
 		//! \name Script load & save operations
 		//@{
 
-		//! Loads a script from a file to memory
 		virtual bool loadFromFile(const String& file);
 
-		//! Loads a script from a string to memory
 		virtual bool loadFromString(const String& script);
 
 		//@}
+
+		//! \name Execution control
+		//@{
+		virtual bool run();
+
+		virtual bool call(const String& method, RetValues& retValues, const Variant& arg1);
+		//@}
+
+	private:
+		/*!
+		** \brief Pushes a variant on the Lua stack.
+		** \return True if the variant was pushed, false if the variant was null.
+		** \param[in] var the variant to push on the stack
+		*/
+		bool push(const Variant &var);
 	
 	private:
 		//! A proxy to the Lua language API.

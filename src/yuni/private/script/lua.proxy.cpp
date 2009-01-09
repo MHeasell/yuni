@@ -10,13 +10,10 @@ namespace Script
 
 	LuaProxy::LuaProxy()
 	{
-		this->pState = luaL_newstate();
-		luaL_openlibs(this->pState);
 	}
 
 	LuaProxy::~LuaProxy()
 	{
-		lua_close(this->pState);
 	}
 
 } // namespace Script
