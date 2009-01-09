@@ -43,8 +43,8 @@ namespace Yuni
 	typedef uint16_t  uint16;
 	typedef int16_t   sint16;
 	// 8-bit ints, guaranteed to be 1 byte in size
-	typedef uint8_t   uint8;
-	typedef int8_t    sint8;
+	typedef unsigned char  uint8;
+	typedef char           sint8;
 # endif
 
 
