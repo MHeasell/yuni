@@ -2,6 +2,7 @@
 #define __YUNI_PRIVATE_SCRIPT_LUA_PROXY__
 
 # include <lua.hpp>
+# include "../../script/lua.h"
 # include "../../yuni.h"
 
 namespace Yuni
@@ -18,15 +19,16 @@ namespace Script
 	** \brief A proxy to avoid lua.h inclusions for user programs
 	** while using the Yuni::Script::Lua class.
 	**
-	** This class should contain everything that deals with anything
-	** contained or included by <lua.hpp>, so that a user program
-	** does not have to include it.
+	** This class should contain every lua-related state variable the
+	** Yuni::Script::Lua class may use. Any specific methods can
+	** also be put there.
 	**
 	** \see class Yuni::Script::Lua
 	*/
 	class LuaProxy
 	{
-	public:
+		friend class Yuni::Script::Lua;
+	private:
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
@@ -34,10 +36,13 @@ namespace Script
 		//! Destructor
 		~LuaProxy();
 		//@}
-	
-	private:
-		//! The Lua internal state storage
+
+		//! \name Proxy storages and variables
+		//@{
+		//! Lua internal state storage
 		lua_State*	pState;
+		//@}
+
 	}; // class LuaProxy
 
 } // namespace Script

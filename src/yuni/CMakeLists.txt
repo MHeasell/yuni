@@ -221,6 +221,7 @@ If(YUNI_MODULE_SCRIPT)
 	set(SRC_SCRIPT
 				script.h
 				script/script.h script/script.cpp
+				script/variant.h script/variant.cpp
 		)
 	source_group("Script\\Script Abstraction" FILES ${SRC_SCRIPT})
 
