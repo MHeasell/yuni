@@ -159,3 +159,19 @@ IF(MODULES)
 ENDIF(MODULES)
 
 
+IF(YUNI_MODULE_GFX3D)
+	IF(NOT YUNI_EXTERNAL_3D_IRRLICHT)
+		Message(STATUS "[!!] Warning: No external extension for the `Gfx3D` module. The module has been disabled.")
+		Set(YUNI_MODULE_GFX3D FALSE)
+	ENDIF(NOT YUNI_EXTERNAL_3D_IRRLICHT)
+ENDIF(YUNI_MODULE_GFX3D)
+
+IF(YUNI_MODULE_SCRIPT)
+	IF(NOT YUNI_EXTERNAL_SCRIPT_LUA)
+		Message(STATUS "[!!] Warning: No external extension for the `script` module. The module has been disabled.")
+		Set(YUNI_MODULE_SCRIPT FALSE)
+	ENDIF(NOT YUNI_EXTERNAL_SCRIPT_LUA)
+ENDIF(YUNI_MODULE_SCRIPT)
+
+
+
