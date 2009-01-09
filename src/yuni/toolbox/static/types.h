@@ -13,13 +13,50 @@ namespace Type
 
 	//! \name Fundamental types
 	//@{
-
 	/*!
 	** \brief Get if a type is fundamental
 	*/
-	template <typename T>
-	struct IsFundamental  { enum { Yes = 0, No = 1} };
+	template <typename T> struct IsFundamental
+	{
+		// Default to No
+		enum { Yes = 0, No = 1 };
+	};
+	//@}
 
+
+	//! \name Compound types
+	//@{
+	/*!
+	** \brief Determine the compound type
+	*/
+	template <typename T>
+	struct Compound
+	{
+		enum { IsPointer = 0, IsReference = 0, IsArray = 0, IsPtrMember = 0 };
+		typedef T BaseType;
+	};
+	//@}
+
+
+	//! \name Comparison
+	//@{
+	template<typename T, typename U>
+	struct AreEqual
+	{
+		// Two types are not equal by default
+		enum { Yes = 0, No = 1 };
+	};
+	//@}
+
+
+
+
+
+
+
+
+	//! \name Overloads
+	//@{
 
 	// Those types are fundamental for sure
 	//
@@ -43,22 +80,7 @@ namespace Type
 	template <> struct IsFundamental<uint32> {enum{Yes = 1, No = 0}};
 	template <> struct IsFundamental<uint64> {enum{Yes = 1, No = 0}};
 
-	//@}
 
-
-	//! \name Cmpound types
-	//@{
-
-
-	/*!
-	** \brief Determine the compound type
-	*/
-	template <typename T>
-	struct Compound
-	{
-		enum { IsPointer = 0, IsReference = 0, IsArray = 0, IsPtrMember = 0 };
-		typedef T BaseType;
-	};
 
 	// Specialization for references
 	template <typename T>
@@ -101,9 +123,14 @@ namespace Type
 	};
 
 
+	
+	template<typename W>
+	struct AreEqual<W, W>
+	{
+		enum { Yes = 1, No = 0 };
+	};
 
-
-	//@} // Compound types
+	//@} // Overloads
 
 
 } // namespace Type
