@@ -57,9 +57,10 @@ namespace Type
 	** \brief Determine if two types are stricly identical
 	**
 	** \code
-	**	std::cout << StrictlyEqual<int, int>::Yes << std::endl; // print 1
-	**	std::cout << StrictlyEqual<int, int&>::Yes << std::endl; // print 1
 	**	std::cout << StrictlyEqual<int, bool>::Yes << std::endl; // print 0
+	**	std::cout << StrictlyEqual<int, int>::Yes << std::endl; // print 1
+	**	std::cout << StrictlyEqual<int, int&>::Yes << std::endl; // print 0
+	**	std::cout << StrictlyEqual<int, const int>::Yes << std::endl; // print 0
 	** \endcode
 	*/
 	template<typename T, typename U>
@@ -73,9 +74,10 @@ namespace Type
 	** \brief Determine if two types (without any identifier) are identical
 	**
 	** \code
-	**	std::cout << Equal<int, int>::Yes << std::endl; // print 1
-	**	std::cout << Equal<int, int&>::Yes << std::endl; // print 0
 	**	std::cout << Equal<int, bool>::Yes << std::endl; // print 0
+	**	std::cout << Equal<int, int>::Yes << std::endl; // print 1
+	**	std::cout << Equal<int, int&>::Yes << std::endl; // print 1
+	**	std::cout << Equal<int, const int>::Yes << std::endl; // print 1
 	** \endcode
 	*/
 	template<typename A, typename B>
