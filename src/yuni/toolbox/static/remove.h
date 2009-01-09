@@ -32,7 +32,7 @@ namespace Remove
 
 	template <typename T> struct All
 	{
-		typedef typename Remove::Const<typename Remove::Reference<T>::Type>::Type Type;
+		typedef typename Remove::Const< typename Remove::Reference<T>::Type >::Type Type;
 	};
 
 
