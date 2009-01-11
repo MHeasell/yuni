@@ -30,6 +30,7 @@ namespace Script
 	*/
 	class Lua : public AScript
 	{
+
 	public:
 		//! \name Contructor & Destructor
 		//@{
@@ -59,7 +60,24 @@ namespace Script
 		//@{
 		virtual bool run();
 
-		virtual bool call(const String& method, RetValues& retValues, const Variant& arg1);
+		virtual bool call(const String& method, Variant* retValues, const Variant& arg1);
+
+
+		#define YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(cb) \
+			virtual bool bind(const String& method, cb, void *callBackData = 0)
+
+		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback0);
+		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback1);
+		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback2);
+		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback3);
+		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback4);
+		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback5);
+		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback6);
+		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback7);
+		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback8);
+
+
+		#undef YUNI_SCRIPT_LUA_DECLARE_BIND_WITH
 		//@}
 
 	private:
@@ -69,10 +87,16 @@ namespace Script
 		** \param[in] var the variant to push on the stack
 		*/
 		bool push(const Variant &var);
+
+		/*!
+		** \brief Callback Proxy
+		*/
+		static int callbackProxy(void *lua_state);
 	
 	private:
 		//! A proxy to the Lua language API.
 		Yuni::Private::Script::LuaProxy *pProxy;
+
 
 	}; // class Lua
 

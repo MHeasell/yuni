@@ -28,6 +28,10 @@ set(SRC_TOOLBOX_STL
 				toolbox/stl/algorithm.h)
 source_group(ToolBox\\Stl FILES ${SRC_TOOLBOX_STL})
 
+set(SRC_TOOLBOX_VARIANT
+				toolbox/variant.h
+				toolbox/variant.cpp)
+source_group(ToolBox\\Variant FILES ${SRC_TOOLBOX_VARIANT)
 
 set(SRC_TOOLBOX_POLICIES
 				toolbox/policies/threading.h
@@ -134,7 +138,11 @@ source_group(Gfx FILES ${SRC_RGB})
 
 
 Add_Library(yuni-static-core STATIC
-				${SRC_TOOLBOX_STATIC} ${SRC_TOOLBOX_STRING} ${SRC_TOOLBOX_STL} ${SRC_TOOLBOX_POLICIES}
+				${SRC_TOOLBOX_STATIC}
+				${SRC_TOOLBOX_STRING}
+				${SRC_TOOLBOX_STL}
+				${SRC_TOOLBOX_VARIANT}
+				${SRC_TOOLBOX_POLICIES}
 				${SRC_TOOLBOX_SMARTPTR}
 				${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
 				${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT} ${SRC_TOOLBOX_FS}
@@ -221,7 +229,6 @@ If(YUNI_MODULE_SCRIPT)
 	set(SRC_SCRIPT
 				script.h
 				script/script.h script/script.cpp
-				script/variant.h script/variant.cpp
 		)
 	source_group("Script\\Script Abstraction" FILES ${SRC_SCRIPT})
 
