@@ -6,8 +6,6 @@
 
 namespace Yuni
 {
-namespace Script
-{
 	/*!
 	** \brief Variant class. Can hold basic types of
 	** values (int, double, string, ...) that may be
@@ -32,13 +30,10 @@ namespace Script
 			vtPointer
 		};
 
-	private:
-		Variant() { pType = vtNone; }
-
-
 	public:
 		//! \name Contructors & Destructor
 		//@{
+		Variant() { pType = vtNone; }
 		Variant(const short value) { pStore.vsShort = value; pType = vtShort; }
 		Variant(const int value) { pStore.vsInt = value; pType = vtInt; }
 		Variant(const String& value) { pStore.vsString = &value; pType = vtString; }
@@ -86,7 +81,6 @@ namespace Script
 	}; // class Variant
 
 
-} // namespace Script
 } // namespace Yuni
 
 
