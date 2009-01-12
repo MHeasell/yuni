@@ -31,7 +31,7 @@ source_group(ToolBox\\Stl FILES ${SRC_TOOLBOX_STL})
 set(SRC_TOOLBOX_VARIANT
 				toolbox/variant.h
 				toolbox/variant.cpp)
-source_group(ToolBox\\Variant FILES ${SRC_TOOLBOX_VARIANT)
+source_group(ToolBox\\Variant FILES ${SRC_TOOLBOX_VARIANT})
 
 set(SRC_TOOLBOX_POLICIES
 				toolbox/policies/threading.h
