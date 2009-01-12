@@ -181,7 +181,7 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 
 	IF(NOT DevPackReady)
 
-		Message(STATUS "${DevPackTitle}: Missing")
+		Message(STATUS "   ${DevPackTitle}: Missing")
 		File(MAKE_DIRECTORY "${DevPackReceiptsFolder}")
 		File(MAKE_DIRECTORY "${DevPackFolder}")
 		Set(DevPackReceiptReady FALSE)
@@ -189,20 +189,20 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 		DEVPACK_IS_IN_RECEIPTS(DevPackReceiptReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}" "${dparch}"
 			"${dpcompiler}" "${dptarget}")
 		IF(NOT DevPackReceiptReady)
-			Message(STATUS " . Downloading ${DevPackURL}")
+			Message(STATUS "    . Downloading ${DevPackURL}")
 			# Download the Pack
 			File(DOWNLOAD "${DevPackURL}" "${DevPackReceiptsFolder}/${DevPackShortFilename}.zip"
 					STATUS DevPackDwnlStatus TIMEOUT 30)
 			DEVPACK_IS_IN_RECEIPTS(DevPackReceiptReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}"
 				"${dparch}" "${dpcompiler}" "${dptarget}")
 			IF(NOT DevPackReceiptReady)
-				Message(STATUS " . !! The download has failed")
+				Message(STATUS "    . !! The download has failed")
 			EndIF(NOT DevPackReceiptReady)
 		EndIF(NOT DevPackReceiptReady)
 
 		IF(DevPackReceiptReady)
 			# Execute `unzip`
-			Message(STATUS " . Extracting the receipt file")
+			Message(STATUS "    . Extracting the receipt file")
 			execute_process(COMMAND "${DevPackSourceZIP}"
 					-u "${DevPackReceiptsFolder}/${DevPackShortFilename}.zip"
 					-d "${DevPackFolder}"
@@ -213,7 +213,7 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 			"${dpcompiler}" "${dptarget}")
 
 	Else(NOT DevPackReady)
-		Message(STATUS "${DevPackTitle}")
+		Message(STATUS "   ${DevPackTitle}")
 	EndIf(NOT DevPackReady)
 
 	IF(NOT DevPackReady)

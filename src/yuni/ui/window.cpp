@@ -1,5 +1,5 @@
 
-# include "../../yuni.h"
+# include "../yuni.h"
 # include "window.h"
 
 

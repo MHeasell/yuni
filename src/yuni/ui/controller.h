@@ -1,10 +1,10 @@
 #ifndef __YUNI_GFX_UI_CONTROLLER_H__
 # define __YUNI_GFX_UI_CONTROLLER_H__
 
-# include "../../yuni.h"
-# include "../../toolbox/smartptr/sharedptr.h"
-# include "../../toolbox/string.h"
-# include "../../threads/mutex.h"
+# include "../yuni.h"
+# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/string.h"
+# include "../threads/mutex.h"
 # include "component.h"
 # include "control.h"
 # include "window.h"

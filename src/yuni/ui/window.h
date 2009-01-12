@@ -1,9 +1,9 @@
 #ifndef __YUNI_GFX_UI_WINDOW_H__
 # define __YUNI_GFX_UI_WINDOW_H__
 
-# include "../../yuni.h"
-# include "../../toolbox/smartptr/sharedptr.h"
-# include "../../toolbox/string.h"
+# include "../yuni.h"
+# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/string.h"
 
 
 
