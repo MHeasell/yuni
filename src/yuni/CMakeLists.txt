@@ -6,7 +6,7 @@ Message(STATUS "")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../CommonSettings.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../Modules.cmake")
 
-Message(STATUS "--- Module: Core")
+Message(STATUS "Module: Core")
 
 
 
@@ -162,7 +162,7 @@ Add_Library(yuni-static-core STATIC
 #
 If(YUNI_MODULE_GFX3D)
 
-	Message(STATUS "--- Module: Gfx3D")
+	Message(STATUS "Module: Gfx3D")
 
 	# Devices
 	set(SRC_DEVICES
@@ -187,23 +187,17 @@ If(YUNI_MODULE_GFX3D)
 				gfx/engine.h gfx/engine.cpp)
 	source_group(Gfx FILES ${SRC_GFX})
 
-	# User Interface
-	set(SRC_GFX_UI
-				gfx/ui/component.h gfx/ui/component.cpp
-				gfx/ui/control.h gfx/ui/control.cpp gfx/ui/anchor.cpp
-				gfx/ui/controller.h gfx/ui/controller.cpp)
-	source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
-
-	# External Lib: Irrlicht
-	set(SRC_EXTERNAL_3D_IRRLICHT
+	if(YUNI_EXTERNAL_3D_IRRLICHT)
+		Message(STATUS "Module: Gfx3D::Irrlicht")
+		# Headers for Irrlicht
+		DEVPACK_IMPORT_IRRLICHT()
+		# External Lib: Irrlicht
+		set(SRC_EXTERNAL_3D_IRRLICHT
 				private/gfx3d/irrlicht/irr.h
 				private/gfx3d/irrlicht/irr.engine.h private/gfx3d/irrlicht/irr.engine.cpp
 				private/gfx3d/irrlicht/irr.mesh.h private/gfx3d/irrlicht/irr.mesh.cpp)
-	source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
+		source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
 
-	if(YUNI_EXTERNAL_3D_IRRLICHT)
-		# Headers for Irrlicht
-		DEVPACK_IMPORT_IRRLICHT()
 		Set(SRC_EXTERNAL_3D
 				private/gfx3d/abstract.h private/gfx3d/abstract.cpp
 				${YUNI_EXT_IRRLICHT_SRC}  # From DevPack 'irrlicht-headers'
@@ -212,7 +206,7 @@ If(YUNI_MODULE_GFX3D)
 
 	Add_Library(yuni-static-gfx3d STATIC
 				${SRC_DEVICES} ${SRC_APPLICATION_GFX}
-				${SRC_GFX} ${SRC_GFX_UI}
+				${SRC_GFX}
 				${SRC_EXTERNAL_3D}
 				)
 
@@ -223,7 +217,7 @@ EndIf(YUNI_MODULE_GFX3D)
 #
 If(YUNI_MODULE_SCRIPT)
 
-	Message(STATUS "--- Module: Script")
+	Message(STATUS "Module: Script")
 
 	# Scripts
 	set(SRC_SCRIPT
@@ -234,6 +228,7 @@ If(YUNI_MODULE_SCRIPT)
 
 	# External Lib: Lua script
 	if(YUNI_EXTERNAL_SCRIPT_LUA)
+		Message(STATUS "Module: Script::Lua")
 		# Headers for Lua
 		DEVPACK_IMPORT_LUA()
 		Set(SRC_EXTERNAL_SCRIPT_LUA
@@ -251,6 +246,40 @@ If(YUNI_MODULE_SCRIPT)
 				)
 
 EndIf(YUNI_MODULE_SCRIPT)
+
+
+#
+# Module : User Interface
+#
+If(YUNI_MODULE_UI)
+
+	Message(STATUS "Module: UI::Core (User Interface)")
+	
+	# User Interface
+	set(SRC_GFX_UI
+				ui/component.h ui/component.cpp
+				ui/control.h ui/control.cpp ui/anchor.cpp
+				ui/controller.h ui/controller.cpp)
+	source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
+
+	Add_Library(yuni-static-ui-core STATIC
+				${SRC_GFX_UI}
+				)
+
+	IF(YUNI_MODULE_UI_DUMMY)
+		
+		Message(STATUS "Module: UI::Dummy")
+
+	ENDIF(YUNI_MODULE_UI_DUMMY)
+
+
+	IF(YUNI_MODULE_UI_3D)
+		
+		Message(STATUS "Module: UI::Gfx3D")
+
+	ENDIF(YUNI_MODULE_UI_3D)
+
+EndIf(YUNI_MODULE_UI)
 
 
 

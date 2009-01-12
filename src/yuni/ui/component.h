@@ -3,11 +3,12 @@
 
 # include <list>
 # include <vector>
-# include "../../yuni.h"
-# include "../../threads/mutex.h"
-# include "../../toolbox/string.h"
-# include "../../toolbox/smartptr/sharedptr.h"
-# include "../../toolbox/event/event.h"
+# include "../yuni.h"
+# include "../threads/mutex.h"
+# include "../toolbox/string.h"
+# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/event/event.h"
+
 
 
 namespace Yuni

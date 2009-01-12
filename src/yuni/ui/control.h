@@ -2,11 +2,11 @@
 # define __YUNI_GFX_UI_CONTROL_H__
 
 # include <utility>
-# include "../../yuni.h"
+# include "../yuni.h"
 # include "component.h"
-# include "../rect2D.h"
-# include "../point2D.h"
-# include "../../threads/mutex.h"
+# include "../gfx/rect2D.h"
+# include "../gfx/point2D.h"
+# include "../threads/mutex.h"
 
 
 //! The maximum distance between two controls
