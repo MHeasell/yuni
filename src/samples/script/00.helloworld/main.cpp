@@ -29,7 +29,7 @@ int main()
 
 	// Just run the script, executing any instruction in the main
 	// scope.
-	sc->run();
+	sc->prepare();
 
 	if (!sc->loadFromString("foo();"))
 	{ // An error has occured.
@@ -38,23 +38,23 @@ int main()
 	}
 
 	// Run it again, just to see ?
-	sc->run();
+	sc->prepare();
 
 	// Declare a variant to store the call results
 	Yuni::Variant ret;
 
 	// Then call a function.
-	if (!sc->call("callMeOnly", &ret))
+	if (!sc->call(&ret, "callMeOnly"))
 	{
 		std::cout << "[EE] Error while calling callMeOnly()" << std::endl;
 	}
 	
 	// Then call a function with one argument, for example an Int.
-	if (!sc->call("callMeWithArg", &ret, 42))
-		std::cout << "[EE] Error while calling callMeWithArg(42)" << std::endl;
+	if (!sc->call(&ret, "callMeWithArg", 42, 15.2))
+		std::cout << "[EE] Error while calling callMeWithArg(42, 15.2)" << std::endl;
 
 	// Then call a function with one argument, for example a String
-	if (!sc->call("callMeWithArg", &ret, "Hello, World !"))
+	if (!sc->call(&ret, "callMeWithArg", "Hello, World !", 45.22432))
 		std::cout << "[EE] Error while calling callMeWithArg(\"Hello, World !\")" << std::endl;
 
 
@@ -66,7 +66,7 @@ int main()
 	else
 	{
 		std::cout << "Fine, bar was bound. Call it !" << std::endl;
-		if (!sc->call("callBar"))
+		if (!sc->call(NULL, "callBar"))
 		{
 			std::cout << "[EE] Error while calling callBar()" << std::endl;
 		}
