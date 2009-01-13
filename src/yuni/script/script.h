@@ -6,6 +6,9 @@
 # include <vector>
 # include "../toolbox/variant.h"
 
+// Defines complex macros used to declare call() and bind().
+# include "script.defines.h"
+
 /*
 ** TODO: Enable or disable a precise language support at compile-time via defines.
 */
@@ -45,17 +48,19 @@ namespace Script
 		#define YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH(cbargs, name) \
 		typedef bool (*name)cbargs
 
-		//! Various Callback types (\see AScript::bind())
+		//! \name Various Callback types (\see AScript::bind())
+		//@{
 
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *), Callback0);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, const Variant&), Callback1);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, const Variant&, const Variant&), Callback2);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, const Variant&, const Variant&, const Variant&), Callback3);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, const Variant&, const Variant&, const Variant&, const Variant&), Callback4);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&), Callback5);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&), Callback6);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&), Callback7);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&, const Variant&), Callback8);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_1_VARIANT), Callback1);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_2_VARIANTS), Callback2);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_3_VARIANTS), Callback3);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_4_VARIANTS), Callback4);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_5_VARIANTS), Callback5);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_6_VARIANTS), Callback6);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_7_VARIANTS), Callback7);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_8_VARIANTS), Callback8);
+		//@}
 
 		#undef YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH
 
@@ -69,7 +74,6 @@ namespace Script
 		virtual ~AScript();
 		//@}
 
-	public:
 		//! \name Language
 		//@{
 		//! Returns the script language
@@ -122,16 +126,23 @@ namespace Script
 		** In case of error while parsing scripts, the parsing stops at the first problem
 		** and this function returns false.
 		*/
-		virtual bool run() = 0;
+		virtual bool prepare() = 0;
 
 		/*!
+		** \brief This method is merely a shortcut for the "main" function in
+		** the current script. It is equivalent to: call("main");
+		** \return True if the "main" function was successfully called.
+		*/
+		bool run();
+
+		/*!
+		** \fn bool call(Variant *retValues, const String& method, const Variant& arg1)
 		** \brief This family of functions calls the specified function.
 		**		  It exists in 9 different versions, from 0 to 8 arguments.
-		** \return True if the call was successful, false if any error occured.
-		** \param[in] method The method to call in the script namespace
 		** \param[out] retValues A variant containing the (or a list of) the return
 		**			   values. You may pass NULL there if you do
-					   not wish to do anything with the return value.
+		**			   not wish to do anything with the return value.
+		** \param[in] method The method to call in the script namespace
 		** \param[in] arg1 The first argument (and so on.) You can pass Variant::Null as a
 		**			  value to mean the same thing as "nil" in Lua.
 		** \return True if the call was made without any runtime fatal error.
@@ -158,15 +169,26 @@ namespace Script
 		**
 		** \endcode
 		*/
-		virtual bool call(const String& method, Variant *retValues = NULL, const Variant& arg1 = Variant::Null) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH() = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_1_VARIANT) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_2_VARIANTS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_3_VARIANTS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_4_VARIANTS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_5_VARIANTS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_6_VARIANTS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_7_VARIANTS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_8_VARIANTS) = 0;
+
 
 		/*!
+		** \fn bool bind(const String& method, Callback1 callback, void *callbackData)
 		** \brief This family of function binds a C++ global function with 0 to 8 Yuni::Variant arguments in
 		** the lua namespace, with the (script namespace) name method.
 		** \param[in] method The method name in the lua namespace
 		** \param[in] callback the callback function (a global function or a static method), taking an AScript* as first
 		**			  argument, and 0 to 8 Yuni::Variant arguments.
 		** \param[in] callbackData Not yet implemented. Will be any user data that you wish to pass as a context to callback().
+		** \return True if the function was successfully bound.
 		**
 		** Warning, the callback protocol will change soon.
 		**
@@ -195,29 +217,26 @@ namespace Script
 		** \endcode
 		*/
 
-		#define YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(cb) \
-			virtual bool bind(const String& method, cb callback, void *callBackData = 0) = 0
-
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback0);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback1);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback2);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback3);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback4);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback5);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback6);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback7);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback8);
-
-		#undef YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback0) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback1) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback2) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback3) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback4) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback5) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback6) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback7) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback8) = 0;
 
 		//@}
 
-	private:
 
 	}; // class AScript
 
 
 } // namespace Script
 } // namespace Yuni
+
+// Cleans up complex macros used to declare call() and bind().
+# include "script.undefs.h"
 
 #endif // __YUNI_SCRIPT_SCRIPT_H__

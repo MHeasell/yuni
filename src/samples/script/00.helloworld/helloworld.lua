@@ -10,11 +10,11 @@ function callMeOnly()
 	print "callMeOnly() called, successful.";
 end
 
-function callMeWithArg(arg)
-	print ("callMeWithArg() called with arg " .. arg .. " successful.");
+function callMeWithArg(arg, arg2)
+	print ("callMeWithArg() called with arg " .. arg .. " and " .. arg2 .. " successful.");
 end
 
 function callBar()
 	print "Let's call the C++ bar().";
-	bar();
+	bar(2);
 end

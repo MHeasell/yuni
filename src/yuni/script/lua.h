@@ -5,7 +5,8 @@
 # include "../toolbox/string.h"
 # include "script.h"
 
-
+// Macros for call() and bind()
+# include "script.defines.h"
 
 namespace Yuni
 {
@@ -40,7 +41,6 @@ namespace Script
 		virtual ~Lua();
 		//@}
 
-	public:
 		//! \name Language
 		//@{
 		//! Returns the script language
@@ -58,23 +58,30 @@ namespace Script
 
 		//! \name Execution control
 		//@{
-		virtual bool run();
+		virtual bool prepare();
 
-		virtual bool call(const String& method, Variant* retValues, const Variant& arg1);
+		// call()
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH();
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_1_VARIANT);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_2_VARIANTS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_3_VARIANTS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_4_VARIANTS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_5_VARIANTS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_6_VARIANTS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_7_VARIANTS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_8_VARIANTS);
 
 
-		#define YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(cb) \
-			virtual bool bind(const String& method, cb, void *callBackData = 0)
-
-		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback0);
-		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback1);
-		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback2);
-		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback3);
-		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback4);
-		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback5);
-		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback6);
-		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback7);
-		YUNI_SCRIPT_LUA_DECLARE_BIND_WITH(Callback8);
+		// bind()
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback0);
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback1);
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback2);
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback3);
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback4);
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback5);
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback6);
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback7);
+		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback8);
 
 
 		#undef YUNI_SCRIPT_LUA_DECLARE_BIND_WITH
@@ -104,4 +111,6 @@ namespace Script
 } // namespace Script
 } // namespace Yuni
 
-#endif // __YUNI_SCRIPT_SCRIPT_H__
+# include "script.undefs.h"
+
+#endif // __YUNI_SCRIPT_LUA_H__

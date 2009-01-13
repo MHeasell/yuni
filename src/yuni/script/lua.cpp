@@ -3,6 +3,10 @@
 #include "../private/script/lua.proxy.h"
 #include <iostream>
 
+
+// Defines for call() and bind()
+#include "script.defines.h"
+
 namespace Yuni
 {
 namespace Script
@@ -69,7 +73,7 @@ namespace Script
 		return true;
 	}
 
-	bool Lua::run()
+	bool Lua::prepare()
 	{
 		if (lua_pcall(pProxy->pState, 0, 0, 0) != 0)
 		{
@@ -108,6 +112,9 @@ namespace Script
 			case Variant::vtPointer:
 				lua_pushlightuserdata(pProxy->pState, var.asPointer());
 				return true;
+			case Variant::vtNone:
+				lua_pushnil(pProxy->pState);
+				return true;
 
 			default:
 				break;
@@ -115,41 +122,169 @@ namespace Script
 		return false;
 	}
 
-	bool Lua::call(const String& method, Variant* retValues, const Variant& arg1)
+
+	/*
+	 * Implementation of the call() method variants.
+	 * This is done via macros, because it's very repetitive and
+	 * will be unmaintainable otherwise. The drawback is that it's a little
+	 * harder to understand.
+	 *
+	 * In the first macro below, _PART1, we get the method on the stack.
+	 * If the stack did not move, the method does not exist, so we bail out.
+	 *
+	 * Then, we push, via the _PUSH_ARG macro, every argument given to our
+	 * function (they are named argX by _X_VARIANTS macros).
+	 *
+	 * Finally, we make the call and catch any errors with _PART2.
+	 *
+	 * TODO: implement the return value handling.
+	 */
+
+# define YUNI_SCRIPT_LUA_DEFINE_CALL_PART1 \
+	\
+		int argc = 0; \
+		int stackTop = lua_gettop(pProxy->pState); \
+		lua_getfield(pProxy->pState, LUA_GLOBALSINDEX, method.c_str()); \
+		int stackPos = lua_gettop(pProxy->pState); \
+		if (stackTop == stackPos) /* Nothing has been pushed on the stack ? Strange. */ \
+		{ \
+			return false; /* The call can't succeed, we have nothing to call. */ \
+		}
+
+# define YUNI_SCRIPT_LUA_DEFINE_CALL_PART2 \
+		if (lua_pcall(pProxy->pState, argc, LUA_MULTRET, 0) != 0) \
+		{ \
+			size_t len; \
+			std::cout << lua_tolstring(pProxy->pState, lua_gettop(pProxy->pState), &len) << std::endl; \
+			lua_pop(pProxy->pState, 1); \
+			return false; \
+		} \
+		/* The call succeeded. Pop any values still hanging on the stack. */ \
+		stackPos = lua_gettop(pProxy->pState); \
+		while (stackPos > stackTop) /* While we stil have remains from our previous call */ \
+		{ \
+			lua_pop(pProxy->pState, 1); \
+			(void)retValues; \
+			std::cout << "Popped." << std::endl; \
+		} \
+		\
+		return true; 
+
+# define YUNI_SCRIPT_LUA_PUSH_ARG(arg) \
+		argc += (this->push(arg) ? 1 : 0);
+
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua)
 	{
-		int argc = 0;
-		int stackTop = lua_gettop(pProxy->pState);
-		lua_getfield(pProxy->pState, LUA_GLOBALSINDEX, method.c_str());
-		int stackPos = lua_gettop(pProxy->pState);
-		if (stackTop == stackPos) // Nothing has been pushed on the stack ? Strange.
-		{
-			return false; // The call can't succeed, we have nothing to call.
-		}
-
-		argc += (this->push(arg1) ? 1 : 0);
-			
-		if (lua_pcall(pProxy->pState, argc, LUA_MULTRET, 0) != 0)
-		{
-			size_t len;
-			std::cout << lua_tolstring(pProxy->pState, lua_gettop(pProxy->pState), &len) << std::endl;
-			lua_pop(pProxy->pState, 1);
-			return false;
-		}
-		// The call succeeded. Pop any values still hanging on the stack.
-		stackPos = lua_gettop(pProxy->pState);
-		while (stackPos > stackTop) // While we stil have remains from our previous call
-		{
-			lua_pop(pProxy->pState, 1);
-			(void)retValues;
-			std::cout << "Popped." << std::endl;
-		}
-
-		return true;
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 	}
 
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_1_VARIANT)
+	{
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
+	}
+
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_2_VARIANTS)
+	{
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg2)
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
+	}
+
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_3_VARIANTS)
+	{
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg2)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg3)
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
+	}
+
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_4_VARIANTS)
+	{
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg2)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg3)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg4)
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
+	}
+
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_5_VARIANTS)
+	{
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg2)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg3)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg4)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg5)
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
+	}
+
+
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_6_VARIANTS)
+	{
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg2)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg3)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg4)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg5)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg6)
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
+	}
+
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_7_VARIANTS)
+	{
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg2)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg3)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg4)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg5)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg6)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg7)
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
+	}
+
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_8_VARIANTS)
+	{
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg2)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg3)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg4)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg5)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg6)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg7)
+		YUNI_SCRIPT_LUA_PUSH_ARG(arg8)
+		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
+	}
+
+
+#undef YUNI_SCRIPT_LUA_PUSH_ARG
+#undef YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
+#undef YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
+
 	
-// Warning: this function is ugly. Please avoid reading it. Or, if you're brave,
-// provide a work-around.
+	/*
+	 * Warning: this function is ugly. Please avoid reading it. Or, if you're brave,
+	 * provide a work-around. Or, see it as Abstract Art.
+	 *
+	 * We have to call the function back with some Variants so that the function doesn't
+	 * have to deal with Lua's stack. So, we must push on the lua stack a C closure that
+	 * is a proxy to the real callback. We push pointers to the essential data, along with
+	 * the number of arguments of the callback, in order to make the correct function call
+	 * in the proxy, and pass along any user data we were provided.
+	 *
+	 * The proxy will in turn extract parameters from the lua stack, and call the bound
+	 * function.
+	 *
+	 * TODO: implement userdata passing.
+	 */
 
 #define YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(cb, argcount) \
 	bool Lua::bind(const String& method, cb callback, void *callbackData) \
@@ -182,7 +317,7 @@ namespace Script
 		// TODO: please add some ASSERTs in this section.
 		lua_State *state = static_cast<lua_State *>(st);
 
-		Lua *This = static_cast<Lua *>(const_cast<void *>(lua_touserdata(state, lua_upvalueindex(1))));
+		Lua *This = static_cast<Lua *>(lua_touserdata(state, lua_upvalueindex(1)));
 		
 		int argCount = lua_tointeger(state, lua_upvalueindex(4)); // Get the original function argument count.
 
@@ -212,3 +347,5 @@ namespace Script
 
 } // namespace Script
 } // namespace Yuni
+
+# include "script.undefs.h"

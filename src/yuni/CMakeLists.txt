@@ -223,6 +223,7 @@ If(YUNI_MODULE_SCRIPT)
 	set(SRC_SCRIPT
 				script.h
 				script/script.h script/script.cpp
+				private/script/script.defines.h private/script/script.undefs.h
 		)
 	source_group("Script\\Script Abstraction" FILES ${SRC_SCRIPT})
 
