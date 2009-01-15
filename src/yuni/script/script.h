@@ -3,7 +3,6 @@
 
 # include "../yuni.h"
 # include "../toolbox/string.h"
-# include <vector>
 # include "../toolbox/variant.h"
 
 // Defines complex macros used to declare call() and bind().
@@ -18,8 +17,9 @@ namespace Yuni
 namespace Script
 {
 
-	//! Construct to store the return values.
-	typedef std::vector<Variant> RetValues;
+
+#define YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH(cbargs, name) \
+	typedef bool (*name)cbargs
 
 	/*!
 	** \brief All the supported languages.
@@ -45,9 +45,6 @@ namespace Script
 	{
 	public:
 
-		#define YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH(cbargs, name) \
-		typedef bool (*name)cbargs
-
 		//! \name Various Callback types (\see AScript::bind())
 		//@{
 
@@ -62,7 +59,6 @@ namespace Script
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_8_VARIANTS), Callback8);
 		//@}
 
-		#undef YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH
 
 
 	public:
@@ -84,30 +80,81 @@ namespace Script
 		//@{
 
 		/*!
-		** \brief Schedules the loading of the specified file in the script context.
+		** \brief Loads the specified file a fresh script context.
 		** \param[in] file The file to load
-		** \return True if the file is readable, false otherwise.
-		** \see run(), call()
+		** \return True if the script was at least parsed correcty.
 		**
-		** The specified file may not be read immediately. To ensure a correct 
-		** behavior, the loaded script file must remain accessible until you
-		** use one of the following methods - which will parse and run any
-		** pending scripts: run(), call().
-		** You may call this method several times to sequentially load several
-		** files in the same script context. The files will be parsed and run 
-		** sequentially in this case (FIFO).
-		**
+		** This method is equivalent to calling reset() just before appendFromFile().
 		*/
-		virtual bool loadFromFile(const String& file) = 0;
+		virtual bool loadFromFile(const String& file)
+			{ this->reset(); return appendFromFile(file); }
 
 		/*!
-		** \brief Schedules the loading of a script chunk in the script context.
-		** \todo Enhance the Script class documentation with a doxygen example.
-		** \param[in] script The string containing the chunk to load.
-		** \return True
-		** This function behaves the same as loadFromFile, and uses the same queue.
+		** \brief Loads the specified file in the current context.
+		** \param[in] file The file to load
+		** \return True if the script was at least parsed correcty.
+		** \see run(), call()
+		**
+		** The specified file will be parsed and may or may not be evaluated
+		** immediately, depending on the capacities of the underlying script
+		** engine. You may call this method several times to sequentially load several
+		** files in the same script context. The files will be parsed (and evaluated 
+		** on subsequent calls to call() or prepare()) in the same order.
+		** sequentially in this case (FIFO).
 		*/
-		virtual bool loadFromString(const String& script) = 0;
+		virtual bool appendFromFile(const String& file) = 0;
+
+		/*!
+		** \brief Loads the specified string in a fresh script context
+		** \param[in] script The string to load
+		** \return True if the script was at least parsed correcty.
+		** \see loadFromFile()
+		**
+		** Behaves like loadFromFile().
+		*/
+		virtual bool loadFromString(const String& script)
+			{ this->reset(); return appendFromString(script); }
+
+		/*!
+		** \brief Loads the specified string in the current context
+		** \param[in] script The string to load
+		** \return True if the script was at least parsed correcty.
+		** \see appendFromFile()
+		**
+		** Behaves like appendFromFile().
+		*/
+		virtual bool appendFromString(const String& script) = 0;
+
+		/*!
+		** \brief Loads the specified buffer a fresh context
+		** \param[in] scriptBuf The buffer to load
+		** \param[in] scriptSize The size of the data in scriptBuf.
+		** \return True if the script was at least parsed correcty.
+		** \see loadFromFile()
+		**
+		** Behaves like loadFromFile().
+		*/
+		virtual bool loadFromBuffer(const char *scriptBuf, const unsigned int scriptSize)
+			{ this->reset(); return appendFromBuffer(scriptBuf, scriptSize); }
+
+		/*!
+		** \brief Loads the specified buffer in the current context
+		** \param[in] scriptBuf The buffer to load
+		** \param[in] scriptSize The size of the data in scriptBuf.
+		** \return True if the script was at least parsed correcty.
+		** \see appendFromFile()
+		**
+		** Behaves like appendFromFile().
+		*/
+		virtual bool appendFromBuffer(const char *scriptBuf, const unsigned int scriptSize) = 0;
+
+		/*!
+		** \brief Restarts the script engine
+		**
+		** Almost equivalent to destroying and re-creating the script object. The
+		** script engine is initialized again.
+		*/
+		virtual void reset() = 0;
 
 		//@}
 
@@ -235,6 +282,9 @@ namespace Script
 
 } // namespace Script
 } // namespace Yuni
+
+
+#undef YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH
 
 // Cleans up complex macros used to declare call() and bind().
 # include "script.undefs.h"

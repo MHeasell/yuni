@@ -6,13 +6,14 @@
 
 // Defines for call() and bind()
 #include "script.defines.h"
+#include "../private/script/script.defines.h"
 
 namespace Yuni
 {
 namespace Script
 {
 
-	Lua::Lua()
+	Lua::Lua() : pEvalPending(0)
 	{
 		this->pProxy = new Private::Script::LuaProxy();
 		this->pProxy->pState = luaL_newstate();
@@ -25,7 +26,18 @@ namespace Script
 		delete this->pProxy;
 	}
 
-	bool Lua::loadFromFile(const String& file)
+	void Lua::reset()
+	{
+		lua_close(this->pProxy->pState);
+		this->pProxy->pState = luaL_newstate();
+		luaL_openlibs(this->pProxy->pState);
+		pEvalPending = 0;
+	}
+
+	/*
+	 * TODO: Use Events to emit proper signals.
+	 */
+	bool Lua::appendFromFile(const String& file)
 	{
 		int result = luaL_loadfile(pProxy->pState, file.c_str());
 		switch (result)
@@ -46,13 +58,16 @@ namespace Script
 				return false;
 				break;
 			default:
+				pEvalPending++;
+				if (pEvalPending > 1)
+					lua_insert(pProxy->pState, -pEvalPending);
 				// Ok
 				break;
 		}
 		return true;
 	}
 
-	bool Lua::loadFromString(const String& script)
+	bool Lua::appendFromString(const String& script)
 	{
 		int result = luaL_loadstring(pProxy->pState, script.c_str());
 		switch (result)
@@ -68,6 +83,35 @@ namespace Script
 				return false;
 				break;
 			default:
+				pEvalPending++;
+				if (pEvalPending > 1)
+					lua_insert(pProxy->pState, -pEvalPending);
+				// Ok
+				break;
+		}
+		return true;
+	}
+
+	bool Lua::appendFromBuffer(const char * scriptBuf, const unsigned int scriptSize)
+	{
+		int result = luaL_loadbuffer(pProxy->pState, scriptBuf, scriptSize, "<unnamed_buffer>");
+		switch (result)
+		{
+			case LUA_ERRSYNTAX:
+				// Emit errsyntax, return false
+				std::cout << "Lua: Syntax error" << std::endl;
+				return false;
+				break;
+			case LUA_ERRMEM:
+				// Emit insufficient memory, return false
+				std::cout << "Lua: Insufficient memory" << std::endl;
+				return false;
+				break;
+			default:
+				pEvalPending++;
+				if (pEvalPending > 1)
+					lua_insert(pProxy->pState, -pEvalPending);
+				// Ok
 				break;
 		}
 		return true;
@@ -75,18 +119,23 @@ namespace Script
 
 	bool Lua::prepare()
 	{
-		if (lua_pcall(pProxy->pState, 0, 0, 0) != 0)
+		while (pEvalPending > 0)
 		{
-			size_t len;
-			std::cout << lua_tolstring(pProxy->pState, lua_gettop(pProxy->pState), &len) << std::endl;
-			lua_pop(pProxy->pState, 1);
-			return false;
+			pEvalPending--;
+			if (lua_pcall(pProxy->pState, 0, 0, 0) != 0)
+			{
+				size_t len;
+				std::cout << lua_tolstring(pProxy->pState, lua_gettop(pProxy->pState), &len) << std::endl;
+				lua_pop(pProxy->pState, 1);
+				return false;
+			}
 		}
 		return true;
 	}
 
 	bool Lua::push(const Variant &var)
 	{
+		lua_checkstack(pProxy->pState, 1);
 		switch (var.type())
 		{
 			case Variant::vtShort:
@@ -142,6 +191,8 @@ namespace Script
 
 # define YUNI_SCRIPT_LUA_DEFINE_CALL_PART1 \
 	\
+		if (pEvalPending && !this->prepare()) \
+			return false; /* A script runtime error occured while evaluating loaded chunks. */ \
 		int argc = 0; \
 		int stackTop = lua_gettop(pProxy->pState); \
 		lua_getfield(pProxy->pState, LUA_GLOBALSINDEX, method.c_str()); \
@@ -348,4 +399,5 @@ namespace Script
 } // namespace Script
 } // namespace Yuni
 
-# include "script.undefs.h"
+#include "../private/script/script.undefs.h"
+#include "script.undefs.h"

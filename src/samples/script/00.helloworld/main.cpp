@@ -3,15 +3,15 @@
  * module. It is *not functional* yet, so it returns an error.
  */
 
-#include <yuni/script.h>
 #include <iostream>
+#include <yuni/script.h>
 
-bool
-bar(Yuni::Script::AScript* sc, const Yuni::Variant& arg1)
-{ // Prints two integers
-	(void)sc;
-	std::cout << "Hi, i'm bar(). Here is 1 integer: " << arg1.asInt() << std::endl;
- 	return true;
+namespace {
+	bool bar(Yuni::Script::AScript*, const Yuni::Variant& arg1)
+	{ // Prints two integers
+		std::cout << "Hi, i'm bar(). Here is 1 integer: " << arg1.asInt() << std::endl;
+	 	return true;
+	}
 }
 
 int main()
@@ -27,17 +27,26 @@ int main()
 		std::cout << "[EE] Error while loading script." << std::endl;
 	}
 
-	// Just run the script, executing any instruction in the main
-	// scope.
-	sc->prepare();
-
-	if (!sc->loadFromString("foo();"))
+	if (!sc->appendFromString("foo();"))
 	{ // An error has occured.
 		// TODO: We must be able to determinate exactly what prevented the script loading.
 		std::cout << "[EE] Error while loading string script." << std::endl;
 	}
 
+	sc->call(NULL, "foo");
+
+	if (!sc->appendFromString("print(\"Pyo !\");"))
+	{ // An error has occured.
+		// TODO: We must be able to determinate exactly what prevented the script loading.
+		std::cout << "[EE] Error while loading string script." << std::endl;
+	}
+
+
+
 	// Run it again, just to see ?
+	sc->prepare();
+
+	// And again.
 	sc->prepare();
 
 	// Declare a variant to store the call results
@@ -61,7 +70,7 @@ int main()
 	// Test binding methods, with objects.
 	//Sample aSample;
 	//sc->bind("bar", &Sample::bar, &aSample);
-	if (!sc->bind("bar", &(::bar)))
+	if (!sc->bind("bar", &(bar)))
 		std::cout << "[EE] Error while binding ::bar()" << std::endl;
 	else
 	{
@@ -72,8 +81,6 @@ int main()
 		}
 
 	}
-
-
 
 
 

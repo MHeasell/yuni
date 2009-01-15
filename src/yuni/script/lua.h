@@ -50,9 +50,13 @@ namespace Script
 		//! \name Script load & save operations
 		//@{
 
-		virtual bool loadFromFile(const String& file);
+		virtual bool appendFromFile(const String& file);
 
-		virtual bool loadFromString(const String& script);
+		virtual bool appendFromString(const String& script);
+		
+		virtual bool appendFromBuffer(const char * scriptBuf, const unsigned int scriptSize);
+
+		virtual void reset();
 
 		//@}
 
@@ -71,7 +75,6 @@ namespace Script
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_7_VARIANTS);
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_8_VARIANTS);
 
-
 		// bind()
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback0);
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback1);
@@ -83,8 +86,6 @@ namespace Script
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback7);
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback8);
 
-
-		#undef YUNI_SCRIPT_LUA_DECLARE_BIND_WITH
 		//@}
 
 	private:
@@ -103,6 +104,9 @@ namespace Script
 	private:
 		//! A proxy to the Lua language API.
 		Yuni::Private::Script::LuaProxy *pProxy;
+
+		//! How many scripts are pending evaluation
+		unsigned int pEvalPending;
 
 
 	}; // class Lua
