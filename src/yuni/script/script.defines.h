@@ -1,6 +1,14 @@
 #ifndef __YUNI_SCRIPT_SCRIPT_DEFINES_H__
 # define __YUNI_SCRIPT_SCRIPT_DEFINES_H__
 
+/*!
+** \file
+** Defines macros for method declaration in AScript & co.
+** The macros in this file are used to declare functions with 
+** various argument counts (bind() and call()) in AScript declaration,
+** and declarations of all classes inheriting from it.
+*/
+
 # define YUNI_SCRIPT_SCRIPT_VARIANT(name) \
 	const Variant & name
 
@@ -65,13 +73,8 @@
 # define YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(...) \
 	virtual bool call(Variant *retValues, const String& method, ## __VA_ARGS__)
 
-# define YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Class, ...) \
-	bool Class::call(Variant *retValues, const String& method, ##__VA_ARGS__)
-
-#define YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(cb) \
+# define YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(cb) \
 			virtual bool bind(const String& method, cb, void *callBackData = NULL)
-
-
 
 
 #endif /* !__YUNI_SCRIPT_SCRIPT_DEFINES_H__ */
