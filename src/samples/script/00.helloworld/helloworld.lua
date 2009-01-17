@@ -1,4 +1,4 @@
-# Lua basic program
+-- Lua basic program
 
 print "Hello, world. I have been evaluated."
 
