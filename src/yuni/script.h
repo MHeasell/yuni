@@ -14,7 +14,7 @@ namespace Yuni
 ** \brief Scripting engine and related tools [work in progress]
 ** \ingroup Script
 ** 
-** WARNING. This whole module is currently a work in progress, and is
+** \warning This whole module is currently a work in progress, and is
 ** far from anything functional.
 ** The compilation is disabled by default, enable at your own risks.
 **
