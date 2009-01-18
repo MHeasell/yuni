@@ -12,14 +12,17 @@
 ** TODO: Enable or disable a precise language support at compile-time via defines.
 */
 
+
+# define YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH(cbargs, name)  \
+			typedef bool (*name)cbargs
+
+
+
 namespace Yuni
 {
 namespace Script
 {
 
-
-#define YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH(cbargs, name) \
-	typedef bool (*name)cbargs
 
 	/*!
 	** \brief All the supported languages.
@@ -44,10 +47,8 @@ namespace Script
 	class AScript
 	{
 	public:
-
 		//! \name Various Callback types (\see AScript::bind())
 		//@{
-
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *), Callback0);
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_1_VARIANT), Callback1);
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_2_VARIANTS), Callback2);
@@ -58,7 +59,6 @@ namespace Script
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_7_VARIANTS), Callback7);
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_8_VARIANTS), Callback8);
 		//@}
-
 
 
 	public:
@@ -76,24 +76,23 @@ namespace Script
 		virtual Language language() const = 0;
 		//@}
 
+
 		//! \name Script load & save operations
 		//@{
 
 		/*!
 		** \brief Loads the specified file a fresh script context.
-		** \param[in] file The file to load
-		** \return True if the script was at least parsed correcty.
 		**
 		** This method is equivalent to calling reset() just before appendFromFile().
+		**
+		** \param[in] file The file to load
+		** \return True if the script was at least parsed correcty.
 		*/
 		virtual bool loadFromFile(const String& file)
-			{ this->reset(); return appendFromFile(file); }
+		{ this->reset(); return appendFromFile(file); }
 
 		/*!
 		** \brief Loads the specified file in the current context.
-		** \param[in] file The file to load
-		** \return True if the script was at least parsed correcty.
-		** \see run(), call()
 		**
 		** The specified file will be parsed and may or may not be evaluated
 		** immediately, depending on the capacities of the underlying script
@@ -101,50 +100,58 @@ namespace Script
 		** files in the same script context. The files will be parsed (and evaluated 
 		** on subsequent calls to call() or prepare()) in the same order.
 		** sequentially in this case (FIFO).
+		**
+		** \param[in] file The file to load
+		** \return True if the script was at least parsed correcty.
+		** \see run(), call()
 		*/
 		virtual bool appendFromFile(const String& file) = 0;
 
 		/*!
 		** \brief Loads the specified string in a fresh script context
+		**
+		** Behaves like loadFromFile().
+		**
 		** \param[in] script The string to load
 		** \return True if the script was at least parsed correcty.
 		** \see loadFromFile()
-		**
-		** Behaves like loadFromFile().
 		*/
 		virtual bool loadFromString(const String& script)
-			{ this->reset(); return appendFromString(script); }
+		{ this->reset(); return appendFromString(script); }
 
 		/*!
 		** \brief Loads the specified string in the current context
+		**
+		** Behaves like appendFromFile().
+		**
 		** \param[in] script The string to load
 		** \return True if the script was at least parsed correcty.
 		** \see appendFromFile()
-		**
-		** Behaves like appendFromFile().
 		*/
 		virtual bool appendFromString(const String& script) = 0;
 
 		/*!
 		** \brief Loads the specified buffer a fresh context
+		**
+		** Behaves like loadFromFile().
+		**
 		** \param[in] scriptBuf The buffer to load
 		** \param[in] scriptSize The size of the data in scriptBuf.
 		** \return True if the script was at least parsed correcty.
 		** \see loadFromFile()
-		**
-		** Behaves like loadFromFile().
 		*/
 		virtual bool loadFromBuffer(const char *scriptBuf, const unsigned int scriptSize)
-			{ this->reset(); return appendFromBuffer(scriptBuf, scriptSize); }
+		{ this->reset(); return appendFromBuffer(scriptBuf, scriptSize); }
 
 		/*!
 		** \brief Loads the specified buffer in the current context
+		**
+		** Behaves like appendFromFile().
+		**
 		** \param[in] scriptBuf The buffer to load
 		** \param[in] scriptSize The size of the data in scriptBuf.
 		** \return True if the script was at least parsed correcty.
 		** \see appendFromFile()
-		**
-		** Behaves like appendFromFile().
 		*/
 		virtual bool appendFromBuffer(const char *scriptBuf, const unsigned int scriptSize) = 0;
 
@@ -164,7 +171,6 @@ namespace Script
 		/*!
 		** \brief Parses and run any pending script or script chunk loaded with
 		** loadFromString() or loadFromFile().
-		** \return True if there was no error returned by the script engine, false otherwise.
 		**
 		** Once the scripts are run, they are removed from the queue, and subsequent
 		** calls to run() won't do anything. If you want to repeat a particular action,
@@ -172,15 +178,21 @@ namespace Script
 		**
 		** In case of error while parsing scripts, the parsing stops at the first problem
 		** and this function returns false.
+		**
+		** \return True if there was no error returned by the script engine, false otherwise.
 		*/
 		virtual bool prepare() = 0;
 
 		/*!
-		** \brief This method is merely a shortcut for the "main" function in
+		** \brief Call the default entry point of the script
+		**
+		** This method is a convenient shortcut for the "main" function in
 		** the current script. It is equivalent to: call("main");
+		**
 		** \return True if the "main" function was successfully called.
 		*/
-		bool run();
+		bool run() {return call(NULL, "main");}
+
 
 		/*!
 		** \fn bool call(Variant *retValues, const String& method, const Variant& arg1)

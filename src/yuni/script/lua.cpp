@@ -8,23 +8,27 @@
 #include "script.defines.h"
 #include "../private/script/script.defines.h"
 
+
 namespace Yuni
 {
 namespace Script
 {
 
-	Lua::Lua() : pEvalPending(0)
+	Lua::Lua()
+		:pEvalPending(0)
 	{
 		this->pProxy = new Private::Script::LuaProxy();
 		this->pProxy->pState = luaL_newstate();
 		luaL_openlibs(this->pProxy->pState);
 	}
 
+
 	Lua::~Lua()
 	{
 		lua_close(this->pProxy->pState);
 		delete this->pProxy;
 	}
+
 
 	void Lua::reset()
 	{
@@ -34,12 +38,13 @@ namespace Script
 		pEvalPending = 0;
 	}
 
+
 	/*
 	 * TODO: Use Events to emit proper signals.
 	 */
 	bool Lua::appendFromFile(const String& file)
 	{
-		int result = luaL_loadfile(pProxy->pState, file.c_str());
+		const int result = luaL_loadfile(pProxy->pState, file.c_str());
 		switch (result)
 		{
 			case LUA_ERRSYNTAX:
@@ -58,7 +63,7 @@ namespace Script
 				return false;
 				break;
 			default:
-				pEvalPending++;
+				++pEvalPending;
 				if (pEvalPending > 1)
 					lua_insert(pProxy->pState, -pEvalPending);
 				// Ok
@@ -67,9 +72,10 @@ namespace Script
 		return true;
 	}
 
+
 	bool Lua::appendFromString(const String& script)
 	{
-		int result = luaL_loadstring(pProxy->pState, script.c_str());
+		const int result = luaL_loadstring(pProxy->pState, script.c_str());
 		switch (result)
 		{
 			case LUA_ERRSYNTAX:
@@ -83,7 +89,7 @@ namespace Script
 				return false;
 				break;
 			default:
-				pEvalPending++;
+				++pEvalPending;
 				if (pEvalPending > 1)
 					lua_insert(pProxy->pState, -pEvalPending);
 				// Ok
@@ -94,7 +100,7 @@ namespace Script
 
 	bool Lua::appendFromBuffer(const char * scriptBuf, const unsigned int scriptSize)
 	{
-		int result = luaL_loadbuffer(pProxy->pState, scriptBuf, scriptSize, "<unnamed_buffer>");
+		const int result = luaL_loadbuffer(pProxy->pState, scriptBuf, scriptSize, "<unnamed_buffer>");
 		switch (result)
 		{
 			case LUA_ERRSYNTAX:
@@ -108,7 +114,7 @@ namespace Script
 				return false;
 				break;
 			default:
-				pEvalPending++;
+				++pEvalPending;
 				if (pEvalPending > 1)
 					lua_insert(pProxy->pState, -pEvalPending);
 				// Ok
@@ -116,6 +122,7 @@ namespace Script
 		}
 		return true;
 	}
+
 
 	bool Lua::prepare()
 	{
@@ -132,6 +139,7 @@ namespace Script
 		}
 		return true;
 	}
+
 
 	bool Lua::push(const Variant &var)
 	{
@@ -202,6 +210,8 @@ namespace Script
 			return false; /* The call can't succeed, we have nothing to call. */ \
 		}
 
+
+
 # define YUNI_SCRIPT_LUA_DEFINE_CALL_PART2 \
 		if (lua_pcall(pProxy->pState, argc, LUA_MULTRET, 0) != 0) \
 		{ \
@@ -220,6 +230,8 @@ namespace Script
 		} \
 		\
 		return true; 
+
+
 
 # define YUNI_SCRIPT_LUA_PUSH_ARG(arg) \
 		argc += (this->push(arg) ? 1 : 0);

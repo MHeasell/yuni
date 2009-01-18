@@ -8,6 +8,8 @@
 // Macros for call() and bind()
 # include "script.defines.h"
 
+
+
 namespace Yuni
 {
 
@@ -25,6 +27,8 @@ namespace Script
 
 namespace Script
 {
+
+
 	/*!
 	** \brief The class implementing the Lua language scripting.
 	** \ingroup Script
@@ -85,14 +89,13 @@ namespace Script
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback6);
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback7);
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback8);
-
 		//@}
 
 	private:
 		/*!
 		** \brief Pushes a variant on the Lua stack.
-		** \return True if the variant was pushed, false if the variant was null.
 		** \param[in] var the variant to push on the stack
+		** \return True if the variant was pushed, false if the variant was null.
 		*/
 		bool push(const Variant &var);
 
@@ -108,8 +111,9 @@ namespace Script
 		//! How many scripts are pending evaluation
 		unsigned int pEvalPending;
 
-
 	}; // class Lua
+
+
 
 
 } // namespace Script

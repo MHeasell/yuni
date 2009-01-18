@@ -16,10 +16,6 @@ namespace Script
 		// Nothing to do here for now.
 	}
 
-	bool AScript::run()
-	{
-		return call(NULL, "main");
-	}
 
 } // namespace Script
 } // namespace Yuni
