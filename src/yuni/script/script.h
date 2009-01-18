@@ -47,7 +47,10 @@ namespace Script
 	class AScript
 	{
 	public:
-		//! \name Various Callback types (\see AScript::bind())
+		/*!
+        ** \name Various Callback types
+        ** \see AScript::bind()
+        */
 		//@{
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *), Callback0);
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_1_VARIANT), Callback1);
@@ -183,6 +186,7 @@ namespace Script
 		*/
 		virtual bool prepare() = 0;
 
+
 		/*!
 		** \brief Call the default entry point of the script
 		**
@@ -195,10 +199,11 @@ namespace Script
 
 
 		/*!
-		** \fn bool call(Variant *retValues, const String& method, const Variant& arg1)
 		** \brief This family of functions calls the specified function.
-		**		  It exists in 9 different versions, from 0 to 8 arguments.
-		** \param[out] retValues A variant containing the (or a list of) the return
+		**		  
+        ** It exists in 9 different versions, from 0 to 8 arguments.
+		** 
+        ** \param[out] retValues A variant containing the (or a list of) the return
 		**			   values. You may pass NULL there if you do
 		**			   not wish to do anything with the return value.
 		** \param[in] method The method to call in the script namespace
@@ -240,16 +245,16 @@ namespace Script
 
 
 		/*!
-		** \fn bool bind(const String& method, Callback1 callback, void *callbackData)
 		** \brief This family of function binds a C++ global function with 0 to 8 Yuni::Variant arguments in
 		** the lua namespace, with the (script namespace) name method.
+        **
 		** \param[in] method The method name in the lua namespace
 		** \param[in] callback the callback function (a global function or a static method), taking an AScript* as first
 		**			  argument, and 0 to 8 Yuni::Variant arguments.
 		** \param[in] callbackData Not yet implemented. Will be any user data that you wish to pass as a context to callback().
 		** \return True if the function was successfully bound.
 		**
-		** Warning, the callback protocol will change soon.
+		** \warning, the callback protocol will change soon.
 		**
 		** \code
 		**
@@ -275,7 +280,6 @@ namespace Script
 		**
 		** \endcode
 		*/
-
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback0) = 0;
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback1) = 0;
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback2) = 0;
