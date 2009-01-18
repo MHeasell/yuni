@@ -258,7 +258,7 @@ namespace Script
 		**
 		** \code
 		**
-		** bool my_print(AScript *, const Variant &toPrint)
+		** bool myPrint(AScript *, const Variant &toPrint)
 		** {
 		**	 if (toPrint.type() != Variant::vtCString)
 		**		return false;
@@ -268,7 +268,7 @@ namespace Script
 		**
 		** Script::AScript *sc = ...; 
 		**
-		** if (!sc->bind("my_print_function", &(::my_print)))
+		** if (!sc->bind("myPrint_function", &(::myPrint)))
 		** {
 		**		// The function could not be bound
 		** }
