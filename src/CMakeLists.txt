@@ -7,6 +7,9 @@ Message(STATUS "The Yuni Framework")
 Message(STATUS "")
 
 
+Set(YUNI_INSTALL_CXX_FLAGS   "")
+Set(YUNI_INSTALL_CXX_DEFINES "")
+
 
 #
 # Informations about the system
@@ -16,13 +19,19 @@ IF(APPLE)
 	execute_process(COMMAND sw_vers -productVersion OUTPUT_VARIABLE SW_PV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	execute_process(COMMAND sw_vers -buildVersion OUTPUT_VARIABLE SW_BV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	execute_process(COMMAND sysctl -n hw.packages OUTPUT_VARIABLE HI_CPU_COUNT OUTPUT_STRIP_TRAILING_WHITESPACE)
-	execute_process(COMMAND sysctl -n machdep.cpu.core_count OUTPUT_VARIABLE HI_CPU_CORE_COUNT OUTPUT_STRIP_TRAILING_WHITESPACE)
+	execute_process(COMMAND sysctl -n machdep.cpu.core_count OUTPUT_VARIABLE HI_CPU_CORE_COUNT
+		OUTPUT_STRIP_TRAILING_WHITESPACE)
+	# SSE
 	execute_process(COMMAND sysctl -n hw.optional.sse OUTPUT_VARIABLE CPU_SSE1 OUTPUT_STRIP_TRAILING_WHITESPACE)
 	execute_process(COMMAND sysctl -n hw.optional.sse2 OUTPUT_VARIABLE CPU_SSE2 OUTPUT_STRIP_TRAILING_WHITESPACE)
 	execute_process(COMMAND sysctl -n hw.optional.sse3 OUTPUT_VARIABLE CPU_SSE3 OUTPUT_STRIP_TRAILING_WHITESPACE)
-	execute_process(COMMAND sysctl -n hw.cpu64bit_capable OUTPUT_VARIABLE HI_CPU_i64 OUTPUT_STRIP_TRAILING_WHITESPACE)
+	# 64Bits ?
+	execute_process(COMMAND sysctl -n hw.cpu64bit_capable OUTPUT_VARIABLE HI_CPU_i64
+		OUTPUT_STRIP_TRAILING_WHITESPACE)
+	# Display
 	Message(STATUS "System: ${SW_PN} ${SW_PV} ${SW_BV} - ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
-	Message(STATUS "${HI_CPU_COUNT} CPUs (${HI_CPU_CORE_COUNT}-Core), SSE1:${CPU_SSE1}, SSE2:${CPU_SSE2}, SSE3:${CPU_SSE3}, x86_64:${HI_CPU_i64}")
+	Message(STATUS "   ${HI_CPU_COUNT} CPUs (${HI_CPU_CORE_COUNT}-Core), SSE1:${CPU_SSE1}, SSE2:${CPU_SSE2}, "
+		"SSE3:${CPU_SSE3}, x86_64:${HI_CPU_i64}")
 ELSE(APPLE)
 	Message(STATUS "System: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 ENDIF(APPLE)
@@ -53,8 +62,9 @@ Set(TARGET_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/../bin/static/")
 Set(LIBRARY_OUTPUT_PATH "${TARGET_LIBS}")
 Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 
-Message(STATUS "Root folder: `${CMAKE_CURRENT_SOURCE_DIR}`")
-Message(STATUS "Libraries output: `${TARGET_LIBS}`")
+Message(STATUS "Folders")
+Message(STATUS "   root: `${CMAKE_CURRENT_SOURCE_DIR}`")
+Message(STATUS "   libs: `${TARGET_LIBS}`")
 
 
 
