@@ -60,6 +60,22 @@ namespace Gfx
 			return out;
 		}
 
+		/*!
+		** \brief Generate the OpenGL code for this triangle
+		**
+		** \param[in,out] out An output stream
+		** \return The output stream `out`
+		*/
+		std::ostream& glPrint(std::ostream& out) const
+		{
+			out << "glBegin(GL_TRIANGLES);" << std::endl;
+			pVertex1.glPrint(out);
+			pVertex2.glPrint(out);
+			pVertex3.glPrint(out);
+			out << "glEnd();" << std::endl;
+			return out;
+		}
+
 	private:
 		/*!
 		** \brief Create the edges of the triangle given its vertices
