@@ -76,6 +76,19 @@ namespace Gfx
 
 		//@}
 
+		/*!
+		** \brief Generate the OpenGL code for this vertex
+		**
+		** \param[in,out] out An output stream
+		** \return The output stream `out`
+		*/
+		std::ostream& glPrint(std::ostream& out) const
+		{
+			out << "glVertex3f" << pPosition << ";" << std::endl;
+			return out;
+		}
+
+
 	private:
 		//! List of edges
 		typedef std::vector< SharedPtr<Edge> > EdgeList;

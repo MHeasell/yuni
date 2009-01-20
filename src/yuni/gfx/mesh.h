@@ -45,6 +45,14 @@ namespace Gfx
 		std::ostream& print(std::ostream& out) const;
 
 		/*!
+		** \brief Generate OpenGL code corresponding to this mesh
+		**
+		** \param[in,out] out An output stream
+		** \return The output stream `out`
+		*/
+		std::ostream& glPrint(std::ostream& out) const;
+
+		/*!
 		** \brief Update the library-specific representation with the new data
 		**
 		** This is not done automatically to avoid doing it uselessly

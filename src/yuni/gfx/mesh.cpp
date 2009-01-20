@@ -20,6 +20,13 @@ namespace Gfx
 		return out;
 	}
 
+	std::ostream& Mesh::glPrint(std::ostream& out) const
+	{
+		for (TriangleList::const_iterator it = pTriangles.begin(); it != pTriangles.end(); ++it)
+			(*it)->glPrint(out);
+		return out;
+	}
+
 
 } // Gfx
 } // Yuni
