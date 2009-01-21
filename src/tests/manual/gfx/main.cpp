@@ -2,7 +2,7 @@
  * WARNING: this file uses bare irrlicht calls for now, and until Application::Gfx3D and/or friends implements
  * methods to display something on the devices.
  *
- * This is mainly a sample to enable Loomchild to test his Poligonizers algorithms.
+ * This is mainly a sample to enable Loomchild to test his Polygonizers algorithms.
  *
  */
 #include <stdexcept>
@@ -45,12 +45,12 @@ public:
 
 		// We use the Metaball algorithm
 		ImplicitSurface surf;
-		surf.addSubSurface(new MetaBall(Point3D<float>(0.0f, 0.0f, 0.0f), 1.0f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(0.0f, 0.0f, 0.0f), 3.0f));
 
 		// Create a mesh using marchingcubes with an isovalue of 4, and a 1.0 mesh size
 		Mesh* mesh2 = MarchingCubes(surf)(4.0f, 1.0f);
 		if (!mesh2)
-			throw std::runtime_error("Poligonization failed.");
+			throw std::runtime_error("Polygonization failed.");
 
 		const Mesh::TriangleList& tList = mesh2->triangles();
 
@@ -162,26 +162,6 @@ int main(int argc, char* argv[])
 	SharedPtr<Triangle> tri(new Triangle(Vertex(0.0f, 0.0f, 0.0f),
 										 Vertex(0.0f, 4.0f, 0.0f), Vertex(3.0f, 0.0f, 0.0f)));
 	mesh.addTriangle(tri);
-	//	mesh.print(std::cout);
-
-	// Create an implicitsurface containing one metaball centered on (0,0,0), density=1.0f
-	ImplicitSurface surf;
-	surf.addSubSurface(new MetaBall(Point3D<float>(1.0f, 0.0f, 0.0f), 2.0f));
-
-	// Create a mesh using marchingcubes with an isovalue of 4, and a 1.0 mesh size
-	Mesh* mesh2 = MarchingCubes(surf)(4.0f, 1.0f);
-	if (!mesh2)
-		return 1;
-	//mesh2->print(std::cout);
-	//	mesh2->update();
-
-	//	mesh2->glPrint(std::cout);
-
-	// Create another mesh using marchingcubes with an isovalue of 7, and a 0.2 mesh size
-	// 	mesh2 = MarchingCubes(surf)(7.0f, 0.2f);
-	// 	if (!mesh2)
-	// 		return 1;
-	// 	mesh2->print(std::cout);
 
 	{ /* Bare irrlicht calls. TODO: remove them ASAP. */
 		using namespace irr;
