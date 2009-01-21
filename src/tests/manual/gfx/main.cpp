@@ -106,7 +106,7 @@ public:
 
 		driver->setMaterial(pMaterial);
 		driver->setTransform(video::ETS_WORLD, AbsoluteTransformation);
-		driver->drawIndexedTriangleList(&(pVertices[0]), pVertices.size(), &(pIndexes[0]), pIndexes.size());
+		driver->drawIndexedTriangleList(&(pVertices[0]), pVertices.size(), &(pIndexes[0]), pIndexes.size() / 3);
 	}
 
 	virtual const core::aabbox3d<f32>& getBoundingBox() const
