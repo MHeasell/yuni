@@ -6,11 +6,8 @@ namespace Gfx
 	template <typename T>
 	Octree<T>::Octree(const BoundingBox<float>& limits, T* data = NULL):
 		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data),
-		pCenter(), pBoundingBox(limits)
+		pBoundingBox(limits)
 	{
-		// The Center is the mean of the min and the max
-		pCenter.move(limits.min());
-		pCenter.mean(limits.max());
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 			pChildren[i] = NULL;
 		pNbChildren = 0;
@@ -18,12 +15,8 @@ namespace Gfx
 
 	template <typename T>
 	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, T* data = NULL):
-		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data),
-		pCenter(0, 0, 0), pBoundingBox(min, max)
+		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data), pBoundingBox(min, max)
 	{
-		// The Center is the mean of the min and the max
-		pCenter.move(min);
-		pCenter.mean(max);
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 			pChildren[i] = NULL;
 		pNbChildren = 0;
@@ -57,14 +50,24 @@ namespace Gfx
 		{
 			Point3D<float> newMin(boundingBox().min());
 			Point3D<float> newMax(boundingBox().max());
-			newMin.x *= 2.0f;
-			newMin.y *= 2.0f;
-			newMin.z *= 2.0f;
-			newMax.x *= 2.0f;
-			newMax.y *= 2.0f;
-			newMax.z *= 2.0f;
+			float width = newMax.x - newMin.x;
+			// Adjust x
+			if (p.x < newMin.x)
+				newMin.x -= width;
+			else
+				newMax.x += width;
+			// Adjust y
+			if (p.y < newMin.y)
+				newMin.y -= width;
+			else
+				newMax.y += width;
+			// Adjust z if necessary
+			if (p.z < newMin.z)
+				newMin.z -= width;
+			else
+				newMax.z += width;
 			Octree<T>* newRoot = new Octree<T>(newMin, newMax, NULL);
-			newRoot->createChild(newRoot->getChildIndex(pCenter));
+			newRoot->createChild(newRoot->getChildIndex(boundingBox().center()));
 			return newRoot->addPoint(p, data);
 		}
 
@@ -240,11 +243,12 @@ namespace Gfx
 	uint16 Octree<T>::getChildIndex(const Point3D<float>& p) const
 	{
 		uint16 index = 0;
-		if (p.x >= pCenter.x)
+		const Point3D<float>& center = boundingBox().center();
+		if (p.x >= center.x)
 			index += 4;
-		if (p.y >= pCenter.y)
+		if (p.y >= center.y)
 			index += 2;
-		if (p.z >= pCenter.z)
+		if (p.z >= center.z)
 			index += 1;
 		return index;
 	}
@@ -256,20 +260,21 @@ namespace Gfx
 			return pChildren[index];
 		Point3D<float> newMin(pBoundingBox.min());
 		Point3D<float> newMax(pBoundingBox.max());
+		const Point3D<float>& center = pBoundingBox.center();
 		// We use the binary encoding of the index to determine
 		// the new coordinates
 		if ((index & 4) != 0)
-			newMin.x = pCenter.x;
+			newMin.x = center.x;
 		else
-			newMax.x = pCenter.x;
+			newMax.x = center.x;
 		if ((index & 2) != 0)
-			newMin.y = pCenter.y;
+			newMin.y = center.y;
 		else
-			newMax.y = pCenter.y;
+			newMax.y = center.y;
 		if ((index & 1) != 0)
-			newMin.z = pCenter.z;
+			newMin.z = center.z;
 		else
-			newMax.z = pCenter.z;
+			newMax.z = center.z;
 		// Create the new tree node
 		pChildren[index] = new Octree(newMin, newMax, NULL);
 		++pNbChildren;

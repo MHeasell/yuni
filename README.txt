@@ -23,12 +23,12 @@ The Yuni project is connected with all those domains :
 
 
 
-What is not the Yuni project ?
+What the Yuni project is not :
 ------------------------------
 
  - It is not a 3D engine. Yuni only provides a common wrapper to external 3D
   engines (such as Irrlicht or Ogre for example).
- - It is not a physic engine. Yuni only provides a common wrapper to external
+ - It is not a physics engine. Yuni only provides a common wrapper to external
   physics engines (such as ODE for example)
  - It is not a sound engine. Yuni only provides a common wrapper to external
   sound engines (such as FMod for example)
