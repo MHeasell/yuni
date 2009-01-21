@@ -20,6 +20,10 @@ namespace Gfx
 	class Mesh
 	{
 	public:
+		//! Type for Triangle list
+		typedef std::vector<SharedPtr<Triangle> > TriangleList;
+
+	public:
 		//! Main Constructor
 		Mesh();
 
@@ -53,6 +57,16 @@ namespace Gfx
 		std::ostream& glPrint(std::ostream& out) const;
 
 		/*!
+		** \brief Access to the mesh's triangle list
+		**
+		** \return A const reference to the mesh's triangle list
+		*/
+		const TriangleList& triangles() const
+		{
+			return pTriangles;
+		}
+
+		/*!
 		** \brief Update the library-specific representation with the new data
 		**
 		** This is not done automatically to avoid doing it uselessly
@@ -64,7 +78,6 @@ namespace Gfx
 		}
 
 	protected:
-		typedef std::vector<SharedPtr<Triangle> > TriangleList;
 
 		//! The Mesh knows all the triangles that define it
 		TriangleList pTriangles;
