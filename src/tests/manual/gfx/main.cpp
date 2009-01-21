@@ -166,7 +166,7 @@ int main(int argc, char* argv[])
 
 	// Create an implicitsurface containing one metaball centered on (0,0,0), density=1.0f
 	ImplicitSurface surf;
-	surf.addSubSurface(new MetaBall(Point3D<float>(0.0f, 0.0f, 0.0f), 2.0f));
+	surf.addSubSurface(new MetaBall(Point3D<float>(1.0f, 0.0f, 0.0f), 2.0f));
 
 	// Create a mesh using marchingcubes with an isovalue of 4, and a 1.0 mesh size
 	Mesh* mesh2 = MarchingCubes(surf)(4.0f, 1.0f);

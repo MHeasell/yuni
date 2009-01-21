@@ -158,8 +158,7 @@ namespace Gfx
 	private:
 		//! Value of the node. Can be anything at all.
 		T* pData;
-		//! Center point for the node
-		Point3D<float> pCenter;
+
 		//! Bounding box for the points in the tree
 		BoundingBox<float> pBoundingBox;
 
