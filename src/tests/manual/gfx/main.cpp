@@ -45,8 +45,38 @@ public:
 
 		// We use the Metaball algorithm
 		ImplicitSurface surf;
-		surf.addSubSurface(new MetaBall(Point3D<float>(0.0f, 0.0f, 0.0f), 25.0f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(5.0f, 0.0f, 0.0f), 20.0f));
+
+		// The following coordinates are meant to resemble the Yuni logo, in 2d, like this:
+		// I don't know if the result can look good or not, but it sounded like a fun idea.
+		/*   
+		                  
+		                * *
+		    * *      *
+		  *    *   *
+		       * *
+		       *
+		      *
+		     *
+		 
+		 */
+
+		// Here's a scaling factor.
+# define FACT 10.0f
+
+		// And the metaballs.
+		surf.addSubSurface(new MetaBall(Point3D<float>(-3.5631f * FACT, -1.1995f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-2.6458f * FACT, -1.6933f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-1.1289f * FACT, -1.6933f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-0.9172f * FACT, -0.9172f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-1.1289f * FACT, 0.3528f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-1.27f * FACT, 1.4464f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-1.8344f * FACT, 2.3283f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-2.3989f * FACT, 3.2103f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-0.0353f * FACT, 0.6703f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(1.1289f * FACT, -0.1764f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(2.2931f * FACT, -1.0231f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(3.4572f * FACT, -1.8697f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(4.7272f * FACT, -2.2931f * FACT, 0.0f), 0.1f));
 
 		// Create a mesh using marchingcubes with an isovalue of 4, and a 1.0 mesh size
 		Mesh* mesh2 = MarchingCubes(surf)(4.0f, 1.0f);
@@ -186,7 +216,7 @@ int main(int argc, char* argv[])
 		guienv->addStaticText(L"Hello World! (i'm using irrlicht directly, it's bad.)",
 							  core::rect<s32>(10,10,260,22), true);
 
-		smgr->addCameraSceneNode(0, core::vector3df(0, -8, 0), core::vector3df(0,0,0));
+		smgr->addCameraSceneNode(0, core::vector3df(0, -40, 0), core::vector3df(0,0,0));
 
 		IrrMetaballNode *myNode = new IrrMetaballNode(smgr->getRootSceneNode(), smgr, 666);
 
