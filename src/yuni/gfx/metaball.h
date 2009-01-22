@@ -44,7 +44,7 @@ namespace Gfx
 		//! Calculate the value of a point through the metaball's function
 		virtual float operator()(const Point3D<float>& p) const
 		{
-			return distance(p);
+			return metaballs(p);
 		}
 
 		//! Accessor to the center point of the metaball
@@ -77,8 +77,7 @@ namespace Gfx
 			float r2 = pow(pCenter.x - p.x, 2);
 			r2 += pow(pCenter.y - p.y, 2);
 			r2 += pow(pCenter.z - p.z, 2);
-			return r2;
-//			return 1.0f / r2;
+			return pDensity * r2;
 		}
 
 		/*!

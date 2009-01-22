@@ -45,7 +45,8 @@ public:
 
 		// We use the Metaball algorithm
 		ImplicitSurface surf;
-		surf.addSubSurface(new MetaBall(Point3D<float>(0.0f, 0.0f, 0.0f), 3.0f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(0.0f, 0.0f, 0.0f), 25.0f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(5.0f, 0.0f, 0.0f), 20.0f));
 
 		// Create a mesh using marchingcubes with an isovalue of 4, and a 1.0 mesh size
 		Mesh* mesh2 = MarchingCubes(surf)(4.0f, 1.0f);
