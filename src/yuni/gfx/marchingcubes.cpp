@@ -46,7 +46,7 @@ namespace Gfx
 				// Add the point to the octree (mark as visited)
 				visited = visited->addPoint(crtPoint);
 				// Calculate if the surface crosses the cell, and create the triangles
-				unsigned int nbTrianglesCreated = polygoniseCell(isoValue, granularity,
+				int nbTrianglesCreated = polygoniseCell(isoValue, granularity,
 					cellAroundPoint(crtPoint, granularity), triangles, toVisit);
 				if (0 == nbTrianglesCreated)
 					// Add the upper neighbour cell to the queue
@@ -71,21 +71,21 @@ namespace Gfx
 	uint8 MarchingCubes::cubeIndex(float isoValue, const float vals[8]) const
 	{
 		uint8 code = 0;
-		if (vals[0] > isoValue)
+		if (vals[0] < isoValue)
 			code |= 1;
-		if (vals[1] > isoValue)
+		if (vals[1] < isoValue)
 			code |= 2;
-		if (vals[2] > isoValue)
+		if (vals[2] < isoValue)
 			code |= 4;
-		if (vals[3] > isoValue)
+		if (vals[3] < isoValue)
 			code |= 8;
-		if (vals[4] > isoValue)
+		if (vals[4] < isoValue)
 			code |= 16;
-		if (vals[5] > isoValue)
+		if (vals[5] < isoValue)
 			code |= 32;
-		if (vals[6] > isoValue)
+		if (vals[6] < isoValue)
 			code |= 64;
-		if (vals[7] > isoValue)
+		if (vals[7] < isoValue)
 			code |= 128;
 		return code;
 	}
@@ -108,7 +108,7 @@ namespace Gfx
 	** No triangle will be created if the cell is either totally above
 	** of totally below the isolevel.
 	*/
-	unsigned int MarchingCubes::polygoniseCell(float isoValue, float width,
+	int MarchingCubes::polygoniseCell(float isoValue, float width,
 		const BoundingBox<float>& cell, TriangleList& triangles, Queue& pointQueue) const
 	{
 		// Calculate the various points of the cube and associate them with indices
@@ -134,9 +134,12 @@ namespace Gfx
 		uint8 index = cubeIndex(isoValue, vals);
 
 		// Cube is entirely in/out of the surface
-		const unsigned int edgeCase = sEdgeTable[index];
-		if (0 == edgeCase)
+		if (0 == index)
 			return 0;
+		if (255 == index)
+			return -1;
+
+		const unsigned int edgeCase = sEdgeTable[index];
 
 		// Depending on this cube's configuration, we can deduce which neighbour cubes
 		// are cut by the surface.
