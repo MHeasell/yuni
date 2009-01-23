@@ -202,7 +202,7 @@ int main(int argc, char* argv[])
 			createDevice(video::EDT_OPENGL, core::dimension2d<s32>(640, 480), 16,
 						 false, false, false, 0);
 #else
-		createDevice(video::EDT_SOFTWARE, core::dimension2d<s32>(640, 480), 16,
+			createDevice(video::EDT_DIRECT3D9, core::dimension2d<s32>(640, 480), 16,
 					 false, false, false, 0);
 #endif
 		if (!device)
