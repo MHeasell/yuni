@@ -61,13 +61,13 @@ public:
 		 */
 
 		// Here's a scaling factor.
-# define FACT 10.0f
+# define FACT 3.0f
 
 		// And the metaballs.
-		surf.addSubSurface(new MetaBall(Point3D<float>(-3.5631f * FACT, -1.1995f * FACT, 0.0f), 0.3f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-2.6458f * FACT, -1.6933f * FACT, 0.0f), 0.3f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-1.1289f * FACT, -1.6933f * FACT, 0.0f), 0.3f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-0.9172f * FACT, -0.9172f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-3.5631f * FACT, -1.1995f * FACT, 0.0f), 0.2f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-2.6458f * FACT, -1.6933f * FACT, 0.0f), 0.2f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-1.1289f * FACT, -1.6933f * FACT, 0.0f), 0.2f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-0.9172f * FACT, -0.9172f * FACT, 0.0f), 0.2f));
 		surf.addSubSurface(new MetaBall(Point3D<float>(-1.1289f * FACT, 0.3528f * FACT, 0.0f), 0.3f));
 		surf.addSubSurface(new MetaBall(Point3D<float>(-1.27f * FACT, 1.4464f * FACT, 0.0f), 0.3f));
 		surf.addSubSurface(new MetaBall(Point3D<float>(-1.8344f * FACT, 2.3283f * FACT, 0.0f), 0.3f));
@@ -78,8 +78,8 @@ public:
 		surf.addSubSurface(new MetaBall(Point3D<float>(3.4572f * FACT, -1.8697f * FACT, 0.0f), 0.1f));
 		surf.addSubSurface(new MetaBall(Point3D<float>(4.7272f * FACT, -2.2931f * FACT, 0.0f), 0.1f));
 
-		// Create a mesh using marchingcubes with an isovalue of 4, and a 1.0 mesh size
-		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 1.0f);
+		// Create a mesh using marchingcubes with an isovalue of 0.05, and a 2.0 mesh size
+		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 2.0f);
 		if (!mesh2)
 			throw std::runtime_error("Polygonization failed.");
 
