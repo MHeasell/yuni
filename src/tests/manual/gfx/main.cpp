@@ -79,7 +79,7 @@ public:
 		surf.addSubSurface(new MetaBall(Point3D<float>(4.7272f * FACT, -2.2931f * FACT, 0.0f), 0.1f));
 
 		// Create a mesh using marchingcubes with an isovalue of 4, and a 1.0 mesh size
-		Mesh* mesh2 = MarchingCubes(surf)(4.0f, 1.0f);
+		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 1.0f);
 		if (!mesh2)
 			throw std::runtime_error("Polygonization failed.");
 

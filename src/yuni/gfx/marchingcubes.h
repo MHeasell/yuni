@@ -88,9 +88,9 @@ namespace Gfx
 		** \param cell The cell we want to find the triangles for
 		** \param triangles The created triangles will be added here (at the end)
 		** \param pointQueue Queue in which to enqueue the neighbour cells center
-		** \returns Number of triangles created on this cell
+		** \returns Number of triangles created on this cell, 0 if in the surface, -1 if outside the surface
 		*/
-		unsigned int polygoniseCell(float isoValue, float width, const BoundingBox<float>& cell,
+		int polygoniseCell(float isoValue, float width, const BoundingBox<float>& cell,
 			TriangleList& triangles, Queue& pointQueue) const;
 
 		/*
