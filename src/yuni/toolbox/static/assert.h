@@ -1,6 +1,9 @@
 #ifndef __YUNI_TOOLBOX_STATIC_ASSERT_H__
 # define __YUNI_TOOLBOX_STATIC_ASSERT_H__
 
+# include "../defines.h"
+
+
 
 namespace Yuni
 {
@@ -22,11 +25,6 @@ namespace Static
 } // namespace Static
 } // namespaec Yuni
 
-
-/*!
-** \brief String concatenation
-*/
-# define YUNI_JOIN(X,Y)  X##Y
 
 
 /*!
