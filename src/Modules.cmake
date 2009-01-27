@@ -15,6 +15,10 @@ Set(YUNI_MODULE_SCRIPT                    FALSE)
 Set(YUNI_MODULE_UI                        FALSE)
 	Set(YUNI_MODULE_UI_DUMMY              TRUE)
 	Set(YUNI_MODULE_UI_3D                 TRUE)
+# Database
+Set(YUNI_MODULE_DATABASE                  FALSE)
+	Set(YUNI_MODULE_DB_PSQL               TRUE)
+
 
 
 # Tests
@@ -34,6 +38,7 @@ Set(YUNI_SAMPLES FALSE)
 IF(MODULES)
 	Set(KeywordError FALSE)
 	String(REPLACE "," ";" MODULES "${MODULES}")
+	String(REPLACE " " ";" MODULES "${MODULES}")
 	String(REPLACE "+" "" MODULES "${MODULES}")
 	ForEach(it ${MODULES})
 		Set(KeywordIsKnown FALSE)
@@ -58,6 +63,7 @@ IF(MODULES)
 			Set(YUNI_MODULE_UI TRUE)
 			Set(YUNI_MODULE_UI_DUMMY TRUE)
 			Set(YUNI_MODULE_UI_3D TRUE)
+			Set(YUNI_MODULE_DATABASE TRUE)
 			Set(YUNI_SAMPLES TRUE)
 			Set(YUNI_TESTS TRUE)
 			Set(KeywordIsKnown TRUE)
@@ -171,6 +177,29 @@ IF(MODULES)
 		EndIf("${it}" STREQUAL "-ui3d")
 
 
+		# db (Database)
+		If("${it}" STREQUAL "db")
+			Set(KeywordIsKnown TRUE)
+			Set(YUNI_MODULE_DATABASE TRUE)
+		EndIf("${it}" STREQUAL "db")
+		# -db
+		If("${it}" STREQUAL "-db")
+			Set(KeywordIsKnown TRUE)
+			Set(YUNI_MODULE_DATABASE FALSE)
+		EndIf("${it}" STREQUAL "-db")
+
+		# PostgreSQL (Database)
+		If("${it}" STREQUAL "psql")
+			Set(KeywordIsKnown TRUE)
+			Set(YUNI_MODULE_DB_PSQL TRUE)
+		EndIf("${it}" STREQUAL "psql")
+		# -psql
+		If("${it}" STREQUAL "-psql")
+			Set(KeywordIsKnown TRUE)
+			Set(YUNI_MODULE_DB_PSQL FALSE)
+		EndIf("${it}" STREQUAL "-psql")
+
+
 		If(NOT KeywordIsKnown)
 			Message(STATUS "[!!] Unknown module from command line: `${it}` (ignored)")
 			Set(KeywordError TRUE)
@@ -231,6 +260,13 @@ IF(YUNI_MODULE_SCRIPT)
 		Set(YUNI_MODULE_SCRIPT FALSE)
 	ENDIF(NOT YUNI_EXTERNAL_SCRIPT_LUA)
 ENDIF(YUNI_MODULE_SCRIPT)
+
+IF(YUNI_MODULE_DATABASE)
+	IF(NOT YUNI_MODULE_DB_PSQL)
+		Message(STATUS "[!!] Warning: No external extension for the `database` module. The module has been disabled.")
+		Set(YUNI_MODULE_DATABASE FALSE)
+	ENDIF(NOT YUNI_MODULE_DB_PSQL)
+ENDIF(YUNI_MODULE_DATABASE)
 
 
 
