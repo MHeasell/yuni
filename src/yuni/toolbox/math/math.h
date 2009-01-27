@@ -6,6 +6,8 @@
 # include <cstring>
 
 
+# define EPSILON 0.00001
+
 namespace Yuni
 {
 namespace Math
@@ -175,6 +177,25 @@ namespace Math
 	// partial specialization to end the iteration
 	template<int N> struct SquareRoot<N,N> { enum { value = N }; };
 
+
+	/*!
+	** \brief Compare two floats
+	*/
+	template <typename T>
+	inline bool Equals(const T a, const T b)
+	{
+		return Abs(a - b) < EPSILON;
+	}
+
+
+	/*!
+	** \brief Compare two doubles
+	*/
+	template <>
+	inline bool Equals(const int a, const int b)
+	{
+		return a == b;
+	}
 
 
 } // namespace Math

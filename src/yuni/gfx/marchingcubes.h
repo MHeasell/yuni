@@ -83,6 +83,13 @@ namespace Gfx
 		** Nothing will be done if the surface does not intersect the cell
 		** Otherwise, triangles will be computed using marching cubes
 		**
+		** Given a grid cell and an isolevel, calculate the triangular
+		** facets required to represent the isosurface through the cell.
+		** Return the number of triangular facets, the array "triangles"
+		** will be loaded up with the vertices at most 5 triangular facets.
+		** No triangle will be created if the cell is either totally above
+		** of totally below the isolevel.
+		**
 		** \param isoValue Limit value for belonging in the surface or not
 		** \param width Size of the cell's sides. Manages mesh precision
 		** \param cell The cell we want to find the triangles for

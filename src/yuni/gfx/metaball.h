@@ -62,7 +62,7 @@ namespace Gfx
 		//! Get points that we know are inside the surface, here we give the center
 		void insidePoints(ImplicitSurface::PointList& points) const
 		{
-			points.push_back(SharedPtr<Point3D<float> >(new Point3D<float>(center())));
+			points.push_back(center());
 		}
 
 
