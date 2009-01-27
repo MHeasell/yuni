@@ -22,7 +22,8 @@ namespace Gfx
 	class ImplicitSurface
 	{
 	public:
-		typedef std::vector<Point3D<float> > PointList;
+		typedef std::vector<SharedPtr<Point3D<float> > > PointList;
+		//typedef std::vector<Point3D<float> > PointList;
 
 	public:
 		//! \name Constructors and destructor

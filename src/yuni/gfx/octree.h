@@ -62,6 +62,8 @@ namespace Gfx
 		//! Constructors
 		Octree(const BoundingBox<float>& limits, T* data);
 		Octree(const Point3D<float>& min, const Point3D<float>& max, T* data);
+		Octree(const BoundingBox<float>& limits, uint16 depth, T* data);
+		Octree(const Point3D<float>& min, const Point3D<float>& max, uint16 depth, T* data);
 
 		//! Destructor
 		virtual ~Octree();
@@ -153,7 +155,7 @@ namespace Gfx
 
 	private:
 		//! List of points
-		typedef typename std::vector< Point3D<float> >  PointList;
+		typedef typename std::vector< SharedPtr< Point3D<float> > >  PointList;
 
 	private:
 		//! Value of the node. Can be anything at all.
@@ -168,6 +170,8 @@ namespace Gfx
 		Octree<T>* pChildren[YUNI_OCTREE_MAX_CHILDREN];
 		//! Store this to know when the node is a leaf (avoid counting children)
 		uint16 pNbChildren;
+		//! Keep the depth to avoid having to calculate it each time
+		uint16 pDepth;
 		//! Leaves (and only leaves!) can contain points
 		PointList pPoints;
 

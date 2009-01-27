@@ -6,20 +6,37 @@ namespace Gfx
 	template <typename T>
 	Octree<T>::Octree(const BoundingBox<float>& limits, T* data = NULL):
 		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data),
-		pBoundingBox(limits)
+		pBoundingBox(limits), pNbChildren(0), pDepth(1)
 	{
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 			pChildren[i] = NULL;
-		pNbChildren = 0;
 	}
 
 	template <typename T>
 	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, T* data = NULL):
-		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data), pBoundingBox(min, max)
+		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data), pBoundingBox(min, max),
+		pNbChildren(0), pDepth(1)
 	{
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 			pChildren[i] = NULL;
-		pNbChildren = 0;
+	}
+
+	template <typename T>
+	Octree<T>::Octree(const BoundingBox<float>& limits, uint16 depth, T* data = NULL):
+		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data),
+		pBoundingBox(limits), pNbChildren(0), pDepth(1)
+	{
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+			pChildren[i] = NULL;
+	}
+
+	template <typename T>
+	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, uint16 depth, T* data = NULL):
+		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data), pBoundingBox(min, max),
+		pNbChildren(0), pDepth(1)
+	{
+		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+			pChildren[i] = NULL;
 	}
 
 	template <typename T>
@@ -61,7 +78,7 @@ namespace Gfx
 				newMin.y -= width;
 			else
 				newMax.y += width;
-			// Adjust z if necessary
+			// Adjust z
 			if (p.z < newMin.z)
 				newMin.z -= width;
 			else
@@ -71,19 +88,19 @@ namespace Gfx
 			return newRoot->addPoint(p, data);
 		}
 
-		// If this is a leaf
-		if (isLeaf())
+		// If this is a leaf and the leaf is at the lowest level in the tree
+		if (isLeaf() && depth() == 1)
 		{
 			if (pPoints.size() < MaxPointsPerNode)
 			{
 				// Directly add the point to the node
-				pPoints.push_back(p);
+				pPoints.push_back(SharedPtr<Point3D<float> >(new Point3D<float>(p)));
 				return this;
 			}
 			// If there are too many points, split the node into subnodes
 			split();
 		}
-		// If this is an inside node
+		// If this is an inside node or a leaf too high in the tree
 		// Find the correct child to propagate to
 		uint16 index = getChildIndex(p);
 		// Create the new child if necessary
@@ -106,7 +123,7 @@ namespace Gfx
 		// Nothing will be done if the node contains no point
 		while (!pPoints.empty())
 		{
-			Point3D<float> crtPoint(pPoints.back());
+			Point3D<float> crtPoint(*(pPoints.back()));
 			pPoints.pop_back();
 			uint16 index = getChildIndex(crtPoint);
 			// Create the child if necessary
@@ -162,13 +179,13 @@ namespace Gfx
 	{
 		if (!boundingBox().contains(p))
 			return NULL;
-		if (isLeaf())
+		if (isLeaf() && depth() == 1)
 			return this;
 		// Find which sub-node will contain the point
 		Octree<T>* child = pChildren[getChildIndex(p)];
 		// If there is no child to recurse on, we are on the correct node
 		if (!child)
-			return this;
+			return NULL;
 		// Recursive call
 		return child->findContainingLeaf(p);
 	}
@@ -183,7 +200,7 @@ namespace Gfx
 		if (isLeaf())
 		{
 			for (PointList::const_iterator it = pPoints.begin(); it != pPoints.end(); ++it)
-				if ((*it) == p)
+				if ((**it) == p)
 					return true;
 			return false;
 		}
@@ -200,17 +217,7 @@ namespace Gfx
 	template <typename T>
 	uint16 Octree<T>::depth() const
 	{
-		uint16 maxChildDepth = 0;
-		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
-		{
-			if (pChildren[i])
-			{
-				uint16_t childDepth = pChildren[i]->depth();
-				if (maxChildDepth < childDepth)
-					maxChildDepth = childDepth;
-			}
-		}
-		return 1 + maxChildDepth;
+		return pDepth;
 	}
 
 	//! Number of nodes in the tree
@@ -276,7 +283,7 @@ namespace Gfx
 		else
 			newMax.z = center.z;
 		// Create the new tree node
-		pChildren[index] = new Octree(newMin, newMax, NULL);
+		pChildren[index] = new Octree(newMin, newMax, depth() - 1, NULL);
 		++pNbChildren;
 		return pChildren[index];
 	}
