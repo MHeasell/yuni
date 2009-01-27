@@ -1,66 +1,57 @@
 
+#include <string.h>
+#include "octree.h"
+
+
+
 namespace Yuni
 {
 namespace Gfx
 {
-	template <typename T>
-	Octree<T>::Octree(const BoundingBox<float>& limits, T* data = NULL):
-		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data),
+
+
+	Octree::Octree(const BoundingBox<float>& limits)
+		:MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE),
 		pBoundingBox(limits), pNbChildren(0), pDepth(1)
 	{
-		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
-			pChildren[i] = NULL;
+		memset(pChildren, 0, YUNI_OCTREE_MAX_CHILDREN * sizeof(Octree*));
 	}
 
-	template <typename T>
-	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, T* data = NULL):
-		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data), pBoundingBox(min, max),
+
+	Octree::Octree(const Point3D<float>& min, const Point3D<float>& max)
+		:MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pBoundingBox(min, max),
 		pNbChildren(0), pDepth(1)
 	{
-		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
-			pChildren[i] = NULL;
+		memset(pChildren, 0, YUNI_OCTREE_MAX_CHILDREN * sizeof(Octree*));
 	}
 
-	template <typename T>
-	Octree<T>::Octree(const BoundingBox<float>& limits, uint16 depth, T* data = NULL):
-		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data),
-		pBoundingBox(limits), pNbChildren(0), pDepth(1)
+
+	Octree::Octree(const BoundingBox<float>& limits, uint16 depth)
+		:MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE),
+		pBoundingBox(limits), pNbChildren(0), pDepth(depth)
 	{
-		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
-			pChildren[i] = NULL;
+		memset(pChildren, 0, YUNI_OCTREE_MAX_CHILDREN * sizeof(Octree*));
 	}
 
-	template <typename T>
-	Octree<T>::Octree(const Point3D<float>& min, const Point3D<float>& max, uint16 depth, T* data = NULL):
-		MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pData(data), pBoundingBox(min, max),
-		pNbChildren(0), pDepth(1)
+	Octree::Octree(const Point3D<float>& min, const Point3D<float>& max, uint16 depth)
+		:MaxPointsPerNode(YUNI_OCTREE_MAX_POINTS_PER_NODE), pBoundingBox(min, max),
+		pNbChildren(0), pDepth(depth)
 	{
-		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
-			pChildren[i] = NULL;
+		memset(pChildren, 0, YUNI_OCTREE_MAX_CHILDREN * sizeof(Octree*));
 	}
 
-	template <typename T>
-	Octree<T>::~Octree()
+
+	Octree::~Octree()
 	{
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
-			if (pData)
-				delete pData;
 			if (pChildren[i])
 				delete pChildren[i];
 		}
 	}
 
 
-	/*!
-	 * \brief Add a single point to the Octree
-	 *
-	 * \param p
-	 * \param data
-	 * \return
-	 */
-	template <typename T>
-	Octree<T>* Octree<T>::addPoint(const Point3D<float>& p, T* data)
+	Octree* Octree::addPoint(const Point3D<float>& p)
 	{
 		// If the point is outside the box (we cannot be in a downward recursive call)
 		if (!boundingBox().contains(p))
@@ -83,9 +74,9 @@ namespace Gfx
 				newMin.z -= width;
 			else
 				newMax.z += width;
-			Octree<T>* newRoot = new Octree<T>(newMin, newMax, NULL);
+			Octree* newRoot = new Octree(newMin, newMax, depth() + 1);
 			newRoot->createChild(newRoot->getChildIndex(boundingBox().center()));
-			return newRoot->addPoint(p, data);
+			return newRoot->addPoint(p);
 		}
 
 		// If this is a leaf and the leaf is at the lowest level in the tree
@@ -94,7 +85,7 @@ namespace Gfx
 			if (pPoints.size() < MaxPointsPerNode)
 			{
 				// Directly add the point to the node
-				pPoints.push_back(SharedPtr<Point3D<float> >(new Point3D<float>(p)));
+				pPoints.push_back(p);
 				return this;
 			}
 			// If there are too many points, split the node into subnodes
@@ -106,24 +97,18 @@ namespace Gfx
 		// Create the new child if necessary
 		if (!pChildren[index])
 			createChild(index);
-		pChildren[index]->addPoint(p, data);
+		pChildren[index]->addPoint(p);
 		return this;
 	}
 
-	/*!
-	** \brief Split a leaf node into sub-nodes
-	**
-	** Also move each point it contained to the right sub-node.
-	** If the node is not a leaf / has no point, do nothing.
-	*/
-	template <typename T>
-	void Octree<T>::split()
+
+	void Octree::split()
 	{
 		// Loop on all points
 		// Nothing will be done if the node contains no point
 		while (!pPoints.empty())
 		{
-			Point3D<float> crtPoint(*(pPoints.back()));
+			Point3D<float> crtPoint(pPoints.back());
 			pPoints.pop_back();
 			uint16 index = getChildIndex(crtPoint);
 			// Create the child if necessary
@@ -133,14 +118,8 @@ namespace Gfx
 		}
 	}
 
-	/*!
-	** \brief Grow the tree to a complete tree of given depth
-	**
-	** Only the branches containing points will be grown
-	** This is a recursive method
-	*/
-	template <typename T>
-	void Octree<T>::growToDepth(uint16 depth)
+
+	void Octree::growToDepth(uint16 depth)
 	{
 		if (depth > 0)
 		{
@@ -154,14 +133,8 @@ namespace Gfx
 		}
 	}
 
-	/*!
-	** \brief Grow the tree to have leaves of the given size
-	**
-	** Only the branches containing points will be grown
-	** This is a recursive method
-	*/
-	template <typename T>
-	void Octree<T>::growToSize(float size)
+
+	void Octree::growToSize(float size)
 	{
 		if (isLeaf() && boundingBox().max().x - boundingBox().min().x > size)
 			// Split the node if it contains points
@@ -174,15 +147,14 @@ namespace Gfx
 	}
 
 
-	template <typename T>
-	Octree<T>* Octree<T>::findContainingLeaf(const Point3D<float>& p)
+	Octree* Octree::findContainingLeaf(const Point3D<float>& p)
 	{
 		if (!boundingBox().contains(p))
 			return NULL;
 		if (isLeaf() && depth() == 1)
 			return this;
 		// Find which sub-node will contain the point
-		Octree<T>* child = pChildren[getChildIndex(p)];
+		Octree* child = pChildren[getChildIndex(p)];
 		// If there is no child to recurse on, we are on the correct node
 		if (!child)
 			return NULL;
@@ -191,21 +163,19 @@ namespace Gfx
 	}
 
 
-	//! Tells if the point already in the tree
-	template <typename T>
-	bool Octree<T>::contains(const Point3D<float>& p) const
+	bool Octree::contains(const Point3D<float>& p) const
 	{
 		if (!boundingBox().contains(p))
 			return false;
 		if (isLeaf())
 		{
 			for (PointList::const_iterator it = pPoints.begin(); it != pPoints.end(); ++it)
-				if ((**it) == p)
+				if ((*it) == p)
 					return true;
 			return false;
 		}
 		// Find which sub-node will contain the point
-		Octree<T>* child = pChildren[getChildIndex(p)];
+		Octree* child = pChildren[getChildIndex(p)];
 		if (!child)
 			return false;
 		// Recursive call
@@ -213,16 +183,7 @@ namespace Gfx
 	}
 
 
-	//! Depth of the tree
-	template <typename T>
-	uint16 Octree<T>::depth() const
-	{
-		return pDepth;
-	}
-
-	//! Number of nodes in the tree
-	template <typename T>
-	uint32 Octree<T>::nodeCount() const
+	uint32 Octree::nodeCount() const
 	{
 		uint32 childNodeCount = 0;
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
@@ -233,9 +194,8 @@ namespace Gfx
 		return 1 + childNodeCount;
 	}
 
-	//! Number of points in the tree
-	template <typename T>
-	uint32 Octree<T>::pointCount() const
+
+	uint32 Octree::pointCount() const
 	{
 		uint32 childPointCount = 0;
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
@@ -246,8 +206,7 @@ namespace Gfx
 		return pPoints.size() + childPointCount;
 	}
 
-	template <typename T>
-	uint16 Octree<T>::getChildIndex(const Point3D<float>& p) const
+	uint16 Octree::getChildIndex(const Point3D<float>& p) const
 	{
 		uint16 index = 0;
 		const Point3D<float>& center = boundingBox().center();
@@ -260,8 +219,8 @@ namespace Gfx
 		return index;
 	}
 
-	template <typename T>
-	Octree<T>* Octree<T>::createChild(uint16 index)
+
+	Octree* Octree::createChild(uint16 index)
 	{
 		if (pChildren[index])
 			return pChildren[index];
@@ -283,13 +242,13 @@ namespace Gfx
 		else
 			newMax.z = center.z;
 		// Create the new tree node
-		pChildren[index] = new Octree(newMin, newMax, depth() - 1, NULL);
+		pChildren[index] = new Octree(newMin, newMax, depth() - 1);
 		++pNbChildren;
 		return pChildren[index];
 	}
 
-	template <typename T>
-	std::ostream& Octree<T>::print(std::ostream& out) const
+
+	std::ostream& Octree::print(std::ostream& out) const
 	{
 		out << "Printing Octree node:" << std::endl;
 		for (PointList::const_iterator it = pPoints.begin(); it != pPoints.end(); ++it)
@@ -304,5 +263,9 @@ namespace Gfx
 	}
 
 
-} // Gfx
-} // Yuni
+
+
+
+} // namespace Gfx
+} // namespace Yuni
+

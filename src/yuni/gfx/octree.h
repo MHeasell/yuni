@@ -10,7 +10,7 @@
 
 
 # define YUNI_OCTREE_MAX_CHILDREN  8
-# define YUNI_OCTREE_MAX_POINTS_PER_NODE 1
+# define YUNI_OCTREE_MAX_POINTS_PER_NODE 1024
 
 
 namespace Yuni
@@ -45,10 +45,7 @@ namespace Gfx
 	**    6 : X >= Xc, Y >= Yc, Z < Zc
 	**    7 : X >= Xc, Y >= Yc, Z >= Zc
 	** \endcode
-	**
-	** \tparam T
 	*/
-	template <typename T>
 	class Octree
 	{
 	public:
@@ -56,27 +53,23 @@ namespace Gfx
 		const uint16 MaxPointsPerNode;
 
 	public:
-		//! \name Constructor & Destructor
+		//! \name Constructors & Destructor
 		//@{
 
-		//! Constructors
-		Octree(const BoundingBox<float>& limits, T* data);
-		Octree(const Point3D<float>& min, const Point3D<float>& max, T* data);
-		Octree(const BoundingBox<float>& limits, uint16 depth, T* data);
-		Octree(const Point3D<float>& min, const Point3D<float>& max, uint16 depth, T* data);
+		Octree(const BoundingBox<float>& limits);
+		Octree(const BoundingBox<float>& limits, uint16 depth);
+		Octree(const Point3D<float>& min, const Point3D<float>& max);
+		Octree(const Point3D<float>& min, const Point3D<float>& max, uint16 depth);
 
 		//! Destructor
 		virtual ~Octree();
 
 		//@}
 
-		//! Accessors to the value of this treenode
-		const T* data() const { return pData; }
-		void setData(T* data) { if (pData) delete pData; pData = data; }
 		//! Is the node a leaf ?
 		bool isLeaf() const { return 0 == pNbChildren; }
 		//! Depth of the tree
-		uint16 depth() const;
+		uint16 depth() const {return pDepth;}
 		//! Number of nodes in the tree
 		uint32 nodeCount() const;
 		//! Number of points in the tree
@@ -94,7 +87,7 @@ namespace Gfx
 		** \param p The point to add
 		** \returns The new root of the tree, or this if it has not changed
 		*/
-		Octree<T>* addPoint(const Point3D<float>& p, T* data = NULL);
+		Octree* addPoint(const Point3D<float>& p);
 
 		/*!
 		** \brief Recursive find of the leaf whose bounding box contains a given point
@@ -102,7 +95,7 @@ namespace Gfx
 		** \param p The point
 		** \return The node found
 		*/
-		Octree<T>* findContainingLeaf(const Point3D<float>& p);
+		Octree* findContainingLeaf(const Point3D<float>& p);
 
 		//! Tells if the point already in the tree
 		bool contains(const Point3D<float>& p) const;
@@ -143,7 +136,7 @@ namespace Gfx
 		**
 		** \return The child in any case
 		*/
-		Octree<T>* createChild(uint16 index);
+		Octree* createChild(uint16 index);
 
 		/*!
 		** \brief Split a leaf into subnodes
@@ -155,19 +148,16 @@ namespace Gfx
 
 	private:
 		//! List of points
-		typedef typename std::vector< SharedPtr< Point3D<float> > >  PointList;
+		typedef std::vector< Point3D<float> >  PointList;
 
 	private:
-		//! Value of the node. Can be anything at all.
-		T* pData;
-
 		//! Bounding box for the points in the tree
 		BoundingBox<float> pBoundingBox;
 
 		//! Link to the parent octree (container cube)
-		Octree<T>* container;
+		Octree* container;
 		//! Links to the children nodes
-		Octree<T>* pChildren[YUNI_OCTREE_MAX_CHILDREN];
+		Octree* pChildren[YUNI_OCTREE_MAX_CHILDREN];
 		//! Store this to know when the node is a leaf (avoid counting children)
 		uint16 pNbChildren;
 		//! Keep the depth to avoid having to calculate it each time
@@ -187,12 +177,11 @@ namespace Gfx
 
 //! Operator overload for stream printing
 template <typename T>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Octree<T>& tree)
+inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Octree& tree)
 {
 	return tree.print(out);
 }
 
 
-# include "octree.hxx"
 
 #endif // __YUNI_GFX_OCTREE_H__

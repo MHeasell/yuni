@@ -27,12 +27,12 @@ namespace Gfx
 
 		Queue toVisit;
 		TriangleList triangles;
-		Octree<bool>* visited = new Octree<bool>(cellAroundPoint(*(startPoints[0]), granularity), NULL);
+		Octree* visited = new Octree(cellAroundPoint(startPoints[0], granularity));
 		// Loop on the points inside the surface
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
 			// Add the start point to the queue
-			Point3D<float> crtPoint(*(startPoints[i]));
+			Point3D<float> crtPoint(startPoints[i]);
 			// Avoid treating a start point in a cube we already visited
 			if (i > 0 && NULL != visited->findContainingLeaf(crtPoint))
 				continue;
@@ -101,16 +101,7 @@ namespace Gfx
 		return BoundingBox<float>(min, max);
 	}
 
-	/*
-	** \brief Create the triangles for a single cell for a given isosurface
-	**
-	** Given a grid cell and an isolevel, calculate the triangular
-	** facets required to represent the isosurface through the cell.
-	** Return the number of triangular facets, the array "triangles"
-	** will be loaded up with the vertices at most 5 triangular facets.
-	** No triangle will be created if the cell is either totally above
-	** of totally below the isolevel.
-	*/
+
 	int MarchingCubes::polygoniseCell(float isoValue, float width,
 		const BoundingBox<float>& cell, TriangleList& triangles, Queue& pointQueue) const
 	{
@@ -281,12 +272,6 @@ namespace Gfx
 
 
 
-	/*
-	** \brief Interpolate the point at which the surface cuts the edge
-	**
-	** Linearly interpolate the position where an isosurface cuts
-	** an edge between two vertices, each with their own scalar value
-	*/
 	Point3D<float> MarchingCubes::interpolateVertex(double isoValue,
 		const Point3D<float>& p1, const Point3D<float>& p2,
 		double valp1, double valp2) const
@@ -601,6 +586,8 @@ namespace Gfx
 		{0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
 		{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
 	};
+
+
 
 } // Gfx
 } // Yuni

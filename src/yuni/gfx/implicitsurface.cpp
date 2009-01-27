@@ -52,7 +52,7 @@ namespace Gfx
 		float res = 0.0f;
 		SubSurfaces::const_iterator end = pSubSurfaces.end();
 		for (SubSurfaces::const_iterator it = pSubSurfaces.begin(); it != end; ++it)
-			res += (**it)(p);
+			res += (*(*it))(p);
 		return res;
 	}
 
