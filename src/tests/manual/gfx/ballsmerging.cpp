@@ -51,7 +51,7 @@ public:
 		surf.addSubSurface(new MetaBall(Point3D<float>(7.0f, 0.0f, 0.0f), 0.2f));
 
 		// Create a mesh using marchingcubes with an isovalue of 0.05, and a 2.0 mesh size
-		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 2.0f);
+		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 1.0f);
 		if (!mesh2)
 			throw std::runtime_error("Polygonization failed.");
 
@@ -160,12 +160,6 @@ public:
 
 int main(int argc, char* argv[])
 {
-	// Create a stupid mesh with only one triangle
-	Mesh mesh;
-	SharedPtr<Triangle> tri(new Triangle(Vertex(0.0f, 0.0f, 0.0f),
-										 Vertex(0.0f, 4.0f, 0.0f), Vertex(3.0f, 0.0f, 0.0f)));
-	mesh.addTriangle(tri);
-
 	{ /* Bare irrlicht calls. TODO: remove them ASAP. */
 		using namespace irr;
 

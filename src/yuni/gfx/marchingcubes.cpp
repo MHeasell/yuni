@@ -27,12 +27,15 @@ namespace Gfx
 
 		Queue toVisit;
 		TriangleList triangles;
-		Octree<bool>* visited = new Octree<bool>(cellAroundPoint(startPoints[0], granularity), NULL);
+		Octree<bool>* visited = new Octree<bool>(cellAroundPoint(*(startPoints[0]), granularity), NULL);
 		// Loop on the points inside the surface
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
 			// Add the start point to the queue
-			Point3D<float> crtPoint(startPoints[i]);
+			Point3D<float> crtPoint(*(startPoints[i]));
+			// Avoid treating a start point in a cube we already visited
+			if (i > 0 && NULL != visited->findContainingLeaf(crtPoint))
+				continue;
 			toVisit.push(crtPoint);
 			// Propagate using the queue around the start point
 			while (!toVisit.empty())

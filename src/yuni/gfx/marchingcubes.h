@@ -43,7 +43,7 @@ namespace Gfx
 	private:
 		//! \name Typedefs
 		//@{
-		typedef std::vector<Point3D<float> > PointList;
+		typedef ImplicitSurface::PointList PointList;
 		typedef std::vector<Triangle*> TriangleList;
 		typedef std::queue<Point3D<float> > Queue;
 		//@}
