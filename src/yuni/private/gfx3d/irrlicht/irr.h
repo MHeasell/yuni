@@ -19,7 +19,8 @@
 #	pragma GCC diagnostic ignored "-Woverloaded-virtual"
 # endif
 
-# include <irrlicht.h>
+//# include <irrlicht.h>
+# include "../../../../../devpacks/irrlicht/1.4.2/r2/i386/vs8/include/irrlicht.h"
 
 // Restore all warnings
 # ifdef YUNI_IGNORE_GCC_WARNINGS

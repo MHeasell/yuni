@@ -40,7 +40,7 @@ public:
 	IrrMetaballNode(scene::ISceneNode* parent, scene::ISceneManager* mgr, s32 id)
 		: scene::ISceneNode(parent, mgr, id)
 	{
-		pMaterial.Wireframe = true;
+		pMaterial.Wireframe = false;
 		pMaterial.Lighting = false;
 
 		// We use the Metaball algorithm
@@ -61,17 +61,18 @@ public:
 		 */
 
 		// Here's a scaling factor.
-# define FACT 3.0f
+# define FACT 4.0f
 
 		// And the metaballs.
-		surf.addSubSurface(new MetaBall(Point3D<float>(-3.5631f * FACT, -1.1995f * FACT, 0.0f), 0.2f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-2.6458f * FACT, -1.6933f * FACT, 0.0f), 0.2f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-1.1289f * FACT, -1.6933f * FACT, 0.0f), 0.2f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-0.9172f * FACT, -0.9172f * FACT, 0.0f), 0.2f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-1.1289f * FACT, 0.3528f * FACT, 0.0f), 0.3f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-1.27f * FACT, 1.4464f * FACT, 0.0f), 0.3f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-1.8344f * FACT, 2.3283f * FACT, 0.0f), 0.3f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(-2.3989f * FACT, 3.2103f * FACT, 0.0f), 0.3f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-3.5631f * FACT, -1.1995f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-2.6458f * FACT, -1.6933f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-2.0f * FACT, -1.8f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-1.1289f * FACT, -1.6933f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-0.9172f * FACT, -0.9172f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-1.1289f * FACT, 0.3528f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-1.27f * FACT, 1.4464f * FACT, 0.0f), 0.1f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-1.8344f * FACT, 2.3283f * FACT, 0.0f), 0.2f));
+		surf.addSubSurface(new MetaBall(Point3D<float>(-2.3989f * FACT, 3.2103f * FACT, 0.0f), 0.2f));
 		surf.addSubSurface(new MetaBall(Point3D<float>(-0.0353f * FACT, 0.6703f * FACT, 0.0f), 0.1f));
 		surf.addSubSurface(new MetaBall(Point3D<float>(1.1289f * FACT, -0.1764f * FACT, 0.0f), 0.1f));
 		surf.addSubSurface(new MetaBall(Point3D<float>(2.2931f * FACT, -1.0231f * FACT, 0.0f), 0.1f));
@@ -79,7 +80,7 @@ public:
 		surf.addSubSurface(new MetaBall(Point3D<float>(4.7272f * FACT, -2.2931f * FACT, 0.0f), 0.1f));
 
 		// Create a mesh using marchingcubes with an isovalue of 0.05, and a 2.0 mesh size
-		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 3.0f);
+		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 0.5f);
 		if (!mesh2)
 			throw std::runtime_error("Polygonization failed.");
 
@@ -210,7 +211,7 @@ int main(int argc, char* argv[])
 		guienv->addStaticText(L"Hello World! (i'm using irrlicht directly, it's bad.)",
 							  core::rect<s32>(10,10,260,22), true);
 
-		smgr->addCameraSceneNode(0, core::vector3df(0, -40, 0), core::vector3df(0,0,0));
+		smgr->addCameraSceneNode(0, core::vector3df(0, 0, -40), core::vector3df(0, 0, 100));
 
 		IrrMetaballNode *myNode = new IrrMetaballNode(smgr->getRootSceneNode(), smgr, 666);
 
