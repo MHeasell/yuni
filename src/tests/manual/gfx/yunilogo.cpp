@@ -118,8 +118,7 @@ public:
 
 			vertexCount += 3;
 		}
-
-
+		delete mesh2;
 	}
 
 
