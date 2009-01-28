@@ -44,7 +44,7 @@ namespace Gfx
 				crtPoint(toVisit.front());
 				toVisit.pop();
 				// If already visited, do not treat it again
-				if (visited->contains(crtPoint))
+				if (NULL != visited->findContainingLeaf(crtPoint))
 					continue;
 				// Add the point to the octree (mark as visited)
 				visited = visited->addPoint(crtPoint);
