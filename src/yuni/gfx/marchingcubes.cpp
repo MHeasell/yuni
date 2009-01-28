@@ -27,7 +27,7 @@ namespace Gfx
 
 		Queue toVisit;
 		TriangleList triangles;
-		Octree* visited = new Octree(cellAroundPoint(startPoints[0], granularity));
+		Octree* visited = NULL;
 		// Loop on the points inside the surface
 		for (unsigned int i = 0; i < startPoints.size(); ++i)
 		{
@@ -43,8 +43,10 @@ namespace Gfx
 				// Remove the next point from the queue for treatment
 				crtPoint(toVisit.front());
 				toVisit.pop();
+				if (NULL == visited)
+					visited = new Octree(cellAroundPoint(startPoints[0], granularity));
 				// If already visited, do not treat it again
-				if (NULL != visited->findContainingLeaf(crtPoint))
+				else if (NULL != visited->findContainingLeaf(crtPoint))
 					continue;
 				// Add the point to the octree (mark as visited)
 				visited = visited->addPoint(crtPoint);

@@ -36,61 +36,29 @@ private:
 	video::SMaterial pMaterial;
 	//! Our Bounding box.
 	core::aabbox3d<f32> pBox;
+	//! First metaball
+	MetaBall* pMetaball1;
+	//! Second metaball
+	MetaBall* pMetaball2;
+
+	const float MAX_DISTANCE;
+
 public:
-	IrrMetaballNode(scene::ISceneNode* parent, scene::ISceneManager* mgr, s32 id)
-		: scene::ISceneNode(parent, mgr, id)
+	IrrMetaballNode(scene::ISceneNode* parent, scene::ISceneManager* mgr, s32 id, float &distance, bool& direction)
+		: scene::ISceneNode(parent, mgr, id), MAX_DISTANCE(14.0f)
 	{
 		pMaterial.Wireframe = true;
 		pMaterial.Lighting = false;
 
-		// We use the Metaball algorithm
-		ImplicitSurface surf;
-
-		// And the metaballs.
-		surf.addSubSurface(new MetaBall(Point3D<float>(0.0f, 0.0f, 0.0f), 0.2f));
-		surf.addSubSurface(new MetaBall(Point3D<float>(7.0f, 0.0f, 0.0f), 0.2f));
-
-		// Create a mesh using marchingcubes with an isovalue of 0.05, and a 2.0 mesh size
-		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 0.5f);
-		if (!mesh2)
-			throw std::runtime_error("Polygonization failed.");
-
-		const Mesh::TriangleList& tList = mesh2->triangles();
-
-		int vertexCount = 0;
-		for (Mesh::TriangleList::const_iterator triangle = tList.begin(); triangle != tList.end(); ++triangle)
-		{
-			const Gfx::Vertex &tVertex1 = (*triangle)->vertex1();
-			video::S3DVertex vx1(tVertex1.position().x, tVertex1.position().y, tVertex1.position().z,
-				0, 0, 0, video::SColor(255,255,0,0), 0, 0);
-
-			const Gfx::Vertex &tVertex2 = (*triangle)->vertex2();
-			video::S3DVertex vx2(tVertex2.position().x, tVertex2.position().y, tVertex2.position().z,
-				0, 0, 0, video::SColor(255,0,255,0), 0, 0);
-
-			const Gfx::Vertex &tVertex3 = (*triangle)->vertex3();
-			video::S3DVertex vx3(tVertex3.position().x, tVertex3.position().y, tVertex3.position().z,
-				0, 0, 0, video::SColor(255,0,0,255), 0, 0);
-
-			pVertices.push_back(vx1);
-			if (vertexCount == 0)
-				pBox.reset(vx1.Pos);
-			else
-				pBox.addInternalPoint(vx1.Pos);
-			pIndexes.push_back(vertexCount);
-
-			pVertices.push_back(vx2);
-			pIndexes.push_back(vertexCount + 1);
-			pBox.addInternalPoint(vx2.Pos);
-
-			pVertices.push_back(vx3);
-			pIndexes.push_back(vertexCount + 2);
-			pBox.addInternalPoint(vx3.Pos);
-
-			vertexCount += 3;
-		}
-
-
+		if (distance >= MAX_DISTANCE)
+			direction = true;
+		if (distance <= 0.0f)
+			direction = false;
+		distance += direction ? -0.5f : 0.5f;
+		pMetaball1 = new MetaBall(Point3D<float>(-distance / 2.0f, 0.0f, 0.0f), 0.2f);
+		pMetaball2 = new MetaBall(Point3D<float>(distance / 2.0f, 0.0f, 0.0f), 0.2f);
+		
+		UpdateMesh();
 	}
 
 
@@ -128,6 +96,59 @@ public:
 		return pMaterial;
 	}    
 
+private:
+
+	void UpdateMesh()
+	{
+		// We use the Metaball algorithm
+		ImplicitSurface surf;
+
+		// And the metaballs.
+		surf.addSubSurface(pMetaball1);
+		surf.addSubSurface(pMetaball2);
+
+		// Create a mesh using marchingcubes with an isovalue of 0.05, and a 2.0 mesh size
+		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 2.5f);
+		if (!mesh2)
+			throw std::runtime_error("Polygonization failed.");
+
+		const Mesh::TriangleList& tList = mesh2->triangles();
+
+		int vertexCount = 0;
+		pIndexes.clear();
+		pVertices.clear();
+		for (Mesh::TriangleList::const_iterator triangle = tList.begin(); triangle != tList.end(); ++triangle)
+		{
+			const Gfx::Vertex &tVertex1 = (*triangle)->vertex1();
+			video::S3DVertex vx1(tVertex1.position().x, tVertex1.position().y, tVertex1.position().z,
+				0, 0, 0, video::SColor(255,255,0,0), 0, 0);
+
+			const Gfx::Vertex &tVertex2 = (*triangle)->vertex2();
+			video::S3DVertex vx2(tVertex2.position().x, tVertex2.position().y, tVertex2.position().z,
+				0, 0, 0, video::SColor(255,0,255,0), 0, 0);
+
+			const Gfx::Vertex &tVertex3 = (*triangle)->vertex3();
+			video::S3DVertex vx3(tVertex3.position().x, tVertex3.position().y, tVertex3.position().z,
+				0, 0, 0, video::SColor(255,0,0,255), 0, 0);
+
+			pVertices.push_back(vx1);
+			if (vertexCount == 0)
+				pBox.reset(vx1.Pos);
+			else
+				pBox.addInternalPoint(vx1.Pos);
+			pIndexes.push_back(vertexCount);
+
+			pVertices.push_back(vx2);
+			pIndexes.push_back(vertexCount + 1);
+			pBox.addInternalPoint(vx2.Pos);
+
+			pVertices.push_back(vx3);
+			pIndexes.push_back(vertexCount + 2);
+			pBox.addInternalPoint(vx3.Pos);
+
+			vertexCount += 3;
+		}
+	}
 };
 
 
@@ -184,26 +205,28 @@ int main(int argc, char* argv[])
 
 		smgr->addCameraSceneNode(0, core::vector3df(0, -40, 0), core::vector3df(0,0,0));
 
-		IrrMetaballNode *myNode = new IrrMetaballNode(smgr->getRootSceneNode(), smgr, 666);
-
-		scene::ISceneNodeAnimator* anim =
-			smgr->createRotationAnimator(core::vector3df(0.1f, 0, 0.1f));
-
-		if (anim)
-		{
-			myNode->addAnimator(anim);
-			anim->drop();
-			anim = 0;
-		}
-		myNode->drop();
-		myNode = 0; 
-
 		u32 frames=0;
+		// Distance between the 2 metaballs
+		float distance = 0.0f;
+		// Direction of the metaballs movement: true means coming closer, false means away from each other
+		bool direction = false;
 		while(device->run())
 		{
 			driver->beginScene(true, true, video::SColor(0,0,0,0));
 
 			smgr->drawAll();
+			irr::scene::ISceneNode* root = smgr->getRootSceneNode();
+			if (root->getChildren().getSize() > 0)
+			{
+				irr::scene::ISceneNode* child = *(root->getChildren().begin());
+				root->removeChild(child);
+			}
+
+			// Create our very metaballs node
+			IrrMetaballNode *myNode = new IrrMetaballNode(smgr->getRootSceneNode(), smgr, 666, distance, direction);
+			myNode->drop();
+			myNode = 0; 
+
 
 			driver->endScene();
 			if (++frames==100)
