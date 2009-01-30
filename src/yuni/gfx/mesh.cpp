@@ -12,6 +12,11 @@ namespace Gfx
 		pProxy = new Yuni::Private::Gfx::Irrlicht::Mesh();
 	}
 
+	Mesh::~Mesh()
+	{
+	  delete pProxy;
+	}
+
 	std::ostream& Mesh::print(std::ostream& out) const
 	{
 		out << "Mesh containing " << pTriangles.size() << " triangles." << std::endl;
