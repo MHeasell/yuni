@@ -26,6 +26,7 @@ namespace Gfx
 	public:
 		//! Main Constructor
 		Mesh();
+		~Mesh();
 
 		/*!
 		** \brief Add a triangle to the mesh
