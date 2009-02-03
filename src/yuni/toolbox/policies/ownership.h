@@ -192,7 +192,7 @@ namespace Ownership
 
 	private:
 		//! The reference count
-		unsigned int* pCount;
+		ThreadingPolicy::Volatile<unsigned int>::Type* pCount;
 
 	}; // class ReferenceCountedMT
 
