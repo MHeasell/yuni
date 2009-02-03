@@ -155,7 +155,7 @@ Set(SRC_GFX
 		gfx/vertex.h gfx/triangle.h gfx/edge.h
 		gfx/mesh.h gfx/mesh.cpp gfx/mesh.proxy.h
 		gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
-		gfx/metaobject.h gfx/metaball.h
+		gfx/metaobject.h gfx/metaball.h gfx/metabox.h
 		gfx/boundingbox.h gfx/boundingbox.hxx
 		gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
 		gfx/engine.h gfx/engine.cpp)
