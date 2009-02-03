@@ -62,7 +62,7 @@ namespace Hash
 		** \param key The key to find
 		** \return True if the key exists, False otherwise
 		*/
-		bool exists(const K& key); 
+		bool exists(const K& key);
 
 		/*!
 		** \brief Get/Set an entry
