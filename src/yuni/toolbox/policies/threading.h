@@ -43,6 +43,12 @@ namespace Policy
 			~MutexLocker() {}
 		}; // class MutexLocker
 
+
+		/*!
+		** \brief A volative type
+		*/
+		template<typename T = Host> struct Volatile { typedef T Type; };
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -78,6 +84,11 @@ namespace Policy
 			Host& pHostToLock;
 		}; // class MutexLocker
 		
+		/*!
+		** \brief A volative type
+		*/
+		template<typename T = Host> struct Volatile { typedef volatile T Type; };
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -116,6 +127,11 @@ namespace Policy
 			~MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.unlock();}
 		}; // class MutexLocker
 		
+		/*!
+		** \brief A volative type
+		*/
+		template<typename T = Host> struct Volatile { typedef volatile T Type; };
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
