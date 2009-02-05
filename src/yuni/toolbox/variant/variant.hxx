@@ -62,6 +62,16 @@ namespace Yuni
 		return *reinterpret_cast<T const*>(pObject);
 	}
 
+	template <typename T>
+	void Variant::initFromCString(T source)
+	{
+		pTable = Private::Variant::Table<String>::get();
+		if (sizeof(String) <= sizeof(void*))
+			new (&pObject) String(source);
+		else
+			pObject = new String(source);
+	}
+
 }
 
 #endif /* !__YUNI_TOOLBOX_VARIANT_VARIANT_HXX__ */

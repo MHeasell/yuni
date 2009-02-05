@@ -37,11 +37,21 @@ namespace Yuni
 		template <typename T>
 		Variant(const T& source);
 
-		//! Copy of an existing C string
-		Variant(const char* source);
+		//! Copy of an existing const C string
+		Variant(const char* source)
+		{ initFromCString(source); }
 
-		//! Copy of an existing C wide string
-		Variant(const wchar_t* source);
+		//! Copy of an existing const C wide string
+		Variant(const wchar_t* source)
+		{ initFromCString(source); }
+
+		//! Copy of an existing const C string
+		Variant(char* source)
+		{ initFromCString(source); }
+
+		//! Copy of an existing const C wide string
+		Variant(wchar_t* source)
+		{ initFromCString(source); }
 
 		//! Empty constructor
 		Variant();
@@ -51,6 +61,7 @@ namespace Yuni
 
 		//! Destructor
 		~Variant();
+
 
 		//@}
 
@@ -153,6 +164,12 @@ namespace Yuni
 		const T& to() const;
 
 		//@}
+
+	private:
+
+		//! Special initializer for C Strings copys
+		template <typename T>
+		void initFromCString(T source);
 
 	private:
 		//! Static function pointer table storage

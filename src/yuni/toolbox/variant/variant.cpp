@@ -4,24 +4,6 @@
 namespace Yuni
 {
 
-	Variant::Variant(const char* source)
-	{
-		pTable = Private::Variant::Table<String>::get();
-		if (sizeof(String) <= sizeof(void*))
-			new (&pObject) String(source);
-		else
-			pObject = new String(source);
-	}
-
-	Variant::Variant(const wchar_t* source)
-	{
-		pTable = Private::Variant::Table<String>::get();
-		if (sizeof(String) <= sizeof(void*))
-			new (&pObject) String(source);
-		else
-			pObject = new String(source);
-	}
-
 	Variant::Variant()
 	{
 		pTable = Private::Variant::Table<Private::Variant::Empty>::get();
@@ -69,10 +51,6 @@ namespace Yuni
 		pTable = Private::Variant::Table<Private::Variant::Empty>::get();
 		pObject = NULL;
 	}
-
-
-
-
 
 } // namespace Yuni
 
