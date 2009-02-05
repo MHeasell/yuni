@@ -2,12 +2,12 @@
 About the Yuni project
 ======================
 
-The Yuni project is a high-level cross-platform framework. This framework
-intends to provide the most complete set of coherent API as possible
-related to 3D programming, especially game programming. It intends to be a
-reliable and simple bridge between different worlds to make all sorts of
-applications, letting the user focus on its real work.
-The Yuni project is connected with all those domains :
+Yuni is a high-level cross-platform framework. This framework intends to
+provide the most complete set of coherent API as possible related to 3D
+programming, especially game programming. It intends to be a reliable and
+simple bridge between different worlds to make all sorts of applications,
+letting the user focus on her real work. The Yuni project is connected with
+all those domains :
  - 3D graphics
  - Physics
  - 2D/3D User Interface in 3D context

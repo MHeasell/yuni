@@ -149,7 +149,7 @@ namespace Variant
     {
 		//! Equals true if the given type is smalled than a pointer.
 		static const bool isSmall = sizeof(T) <= sizeof(void*);
-      
+
 		/*!
 		** \brief Returns a pointer on a static function table
 		**
@@ -169,7 +169,7 @@ namespace Variant
 		    return &staticTable;
 	    }
     };
-    
+
 	/*!
 	** \brief Variant type for an empty Variant.
 	*/
