@@ -14,7 +14,7 @@ namespace Static
 	template <bool b, typename IfTrue, typename IfFalse>
 	struct If
 	{
-		typedef IfTrue t;
+		typedef IfTrue ResultType;
 		typedef typename Remove::All<IfTrue>::Type   RetTrue;
 		typedef typename Remove::All<IfFalse>::Type  RetFalse;
 
@@ -31,7 +31,7 @@ namespace Static
 	template <typename IfTrue, typename IfFalse>
 	struct If<false, IfTrue, IfFalse>
 	{
-		typedef IfFalse t;
+		typedef IfFalse ResultType;
 		typedef typename Remove::All<IfTrue>::Type   RetTrue;
 		typedef typename Remove::All<IfFalse>::Type  RetFalse;
 
