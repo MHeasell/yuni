@@ -163,34 +163,34 @@ namespace Script
 		lua_checkstack(pProxy->pState, 1);
 		if (var.is<short>())
 		{
-			lua_pushinteger(pProxy->pState, var.cast<short>());
+			lua_pushinteger(pProxy->pState, var.to<short>());
 			return true;
 		}
 		if (var.is<int>())
 		{
-			lua_pushinteger(pProxy->pState, var.cast<int>());
+			lua_pushinteger(pProxy->pState, var.to<int>());
 			return true;
 		}
 		if (var.is<std::string>())
 		{
-			const std::string &str = var.cast<std::string>();
+			const std::string &str = var.to<std::string>();
 			lua_pushlstring(pProxy->pState, str.c_str(), str.size());
 			return true;
 		}
 		if (var.is<char*>())
 		{
-			const char* str = var.cast<char*>();
+			const char* str = var.to<char*>();
 			lua_pushlstring(pProxy->pState, str, strlen(str));
 			return true;
 		}
 		if (var.is<double>())
 		{
-			lua_pushnumber(pProxy->pState, var.cast<double>());
+			lua_pushnumber(pProxy->pState, var.to<double>());
 			return true;
 		}
 		if (var.is<void*>())
 		{
-			lua_pushlightuserdata(pProxy->pState, var.cast<void*>());
+			lua_pushlightuserdata(pProxy->pState, var.to<void*>());
 			return true;
 		}
 		if (var.empty())
@@ -224,6 +224,7 @@ namespace Script
 	\
 		if (pEvalPending && !this->prepare()) \
 			return false; /* A script runtime error occured while evaluating loaded chunks. */ \
+		(void)retValues; \
 		int argc = 0; \
 		int stackTop = lua_gettop(pProxy->pState); \
 		lua_getfield(pProxy->pState, LUA_GLOBALSINDEX, method.c_str()); \

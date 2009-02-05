@@ -1,0 +1,147 @@
+#ifndef __YUNI_TOOLBOX_VARIANT_VARIANT_PRIVATE_H__
+#define __YUNI_TOOLBOX_VARIANT_VARIANT_PRIVATE_H__
+
+#include "../static/types.h"
+
+namespace Yuni
+{
+namespace Private
+{
+/*!
+** \brief Variant implementation details
+**
+** This namespace stores a big part of the actual Variant
+** implementation, in particular the Static Function Pointer
+** Table Polymorphism Pattern (SFPTPP) implementation.
+*/
+namespace Variant
+{
+
+	/*!
+	** \brief Static function pointer table
+	**
+	** All the operations done on Variant storage objects are done via
+	** the functions currently defined in pTable. Depending on the size of the object,
+	** this member may use different approachs to store the data.
+	** This function table defines the function pointers to the different operations.
+	*/
+	struct FunctionPtrTable
+	{
+		const std::type_info& (*type)();
+		void (*staticDelete)(void**);
+		void (*clone)(void* const*, void**);
+		void (*move)(void* const*, void**);
+	};
+
+	/*!
+	** \brief Static functions for small objects (smaller than a void *)
+	**
+	** The goal of this struct is to use pObject as a sort of union
+	** to store object smaller than pointer size. Of course, this means that
+	** bigger objects can be stored faster if you use 64-bit addresses.
+	*/
+	template <bool isSmall>
+	struct Functions
+	{
+		template <typename T>
+		struct Type
+		{
+			static const std::type_info& type()
+			{
+				return typeid(T);
+			}
+
+			static void staticDelete(void** object)
+			{
+				reinterpret_cast<T*>(object)->~T();
+			}
+
+			static void clone(void* const* source, void** dest)
+			{
+				new (dest) T(*reinterpret_cast<T const*>(source));
+			}
+
+			static void move(void* const* source, void** dest)
+			{
+				reinterpret_cast<T*>(dest)->~T();
+				*reinterpret_cast<T*>(dest) = *reinterpret_cast<T const*>(source);
+			}
+		};
+	};
+
+	/*!
+	** \brief Static functions implementations for big objects (larger than a void *)
+	**
+	** This implementation stores big objects as normal objects (ie. a pointer to an alloc'ed
+	** object in pObject.)
+	*/
+	template <>
+	struct Functions<false>
+	{
+		template <typename T>
+		struct Type
+		{
+			static const std::type_info& type()
+			{
+				return typeid(T);
+			}
+
+			static void staticDelete(void** object)
+			{
+				delete(*reinterpret_cast<T**>(object));
+			}
+
+			static void clone(void* const* source, void** dest)
+			{
+				*dest = new T(**reinterpret_cast<T* const*>(source));
+			}
+
+			static void move(void* const* source, void** dest)
+			{
+				(*reinterpret_cast<T**>(dest))->~T();
+				**reinterpret_cast<T**>(dest) = **reinterpret_cast<T* const*>(source);
+			}
+		};
+	};
+
+	/*!
+	** \brief Structure providing function table for a type.
+	**
+	** This structure provides a function to get the appropriate function table for
+	** a given type in an allegedly sexy way. (like Table<T>::get())
+	*/
+    template<typename T>
+    struct Table
+    {
+		/*!
+		** \brief Returns a pointer on a static function table
+		**
+		** The static function table depends on the type and its size.
+		** One different function table will be instanciated by type.
+		*/
+	    static FunctionPtrTable * get()
+	    {
+		    static FunctionPtrTable staticTable =
+			{
+				Functions<Static::Type::IsSmall<T>::Yes>::template Type<T>::type,
+				Functions<Static::Type::IsSmall<T>::Yes>::template Type<T>::staticDelete,
+				Functions<Static::Type::IsSmall<T>::Yes>::template Type<T>::clone,
+				Functions<Static::Type::IsSmall<T>::Yes>::template Type<T>::move
+		    };
+
+		    return &staticTable;
+	    }
+    };
+
+	/*!
+	** \brief Variant type for an empty Variant.
+	*/
+    struct Empty {
+    };
+
+} // namespace Variant
+} // namespace Private
+} // namespace Yuni
+
+
+#endif /* !__YUNI_TOOLBOX_VARIANT_VARIANT_PRIVATE_H__ */
