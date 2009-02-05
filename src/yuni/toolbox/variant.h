@@ -286,6 +286,8 @@ namespace Variant
 
 			if (pTable == rhsTable)
 			{ // Yes, so we can avoid reallocating, and re-use memory.
+				// Destruct our current object
+				pTable->staticDelete(&pObject);
 				if (sizeof(U) <= sizeof(void*))
 					// Create copy on-top of object pointer itself
 					new (&pObject) U(rhs);
