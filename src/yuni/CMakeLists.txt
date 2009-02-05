@@ -32,7 +32,10 @@ Set(SRC_TOOLBOX_STL
 source_group(ToolBox\\Stl FILES ${SRC_TOOLBOX_STL})
 
 Set(SRC_TOOLBOX_VARIANT
-				toolbox/variant.h)
+				toolbox/variant.h
+				toolbox/variant/variant.h
+				toolbox/variant/variant.hxx
+				toolbox/variant/variant.cpp)
 source_group(ToolBox\\Variant FILES ${SRC_TOOLBOX_VARIANT})
 
 Set(SRC_TOOLBOX_POLICIES

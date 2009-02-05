@@ -24,6 +24,15 @@ namespace Type
 	};
 	//@}
 
+	//! \name Small types (fits in a pointer size)
+	//@{
+	/*!
+	** \brief Get if a type size is <= to a pointer size
+	*/
+	template <typename T> struct IsSmall
+	{
+		enum { Yes = sizeof(T) <= sizeof(void*), No = sizeof(T) > sizeof(void *) };
+	};
 
 	//! \name Compound types
 	//@{
