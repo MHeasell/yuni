@@ -3,6 +3,7 @@
 
 # include "../yuni.h"
 # include "../toolbox/string.h"
+# include "../toolbox/event.h"
 # include "../toolbox/variant.h"
 
 // Defines complex macros used to declare call() and bind().
@@ -292,6 +293,19 @@ namespace Script
 
 		//@}
 
+	public:
+
+		//! Type for script run-time error events
+		typedef Event::E5<Language, const String& /* file */, unsigned int /* line */,
+			unsigned int /* position */, const String& /*errorString */> ScriptErrorEvent;
+
+		/*!
+		** \brief Event for script errors
+		**
+		** This event will be emitted on every script error reported
+		** by the underlying script engine.
+		*/
+		ScriptErrorEvent scriptErrorEvent;
 
 	}; // class AScript
 

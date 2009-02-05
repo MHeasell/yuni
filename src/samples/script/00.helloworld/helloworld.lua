@@ -4,6 +4,7 @@ print "Hello, world. I have been evaluated."
 
 function foo()
 	print "The Lua foo() was called.";
+	return 1;
 end
 
 function callMeOnly()

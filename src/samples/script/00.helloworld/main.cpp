@@ -9,7 +9,8 @@
 namespace {
 	bool bar(Yuni::Script::AScript*, const Yuni::Variant& arg1)
 	{ // Prints two integers
-		std::cout << "Hi, i'm bar(). Here is 1 integer: " << arg1.asInt() << std::endl;
+		if (arg1.is<int>())
+			std::cout << "Hi, i'm bar(). Here is 1 integer: " << arg1.cast<int>() << std::endl;
 	 	return true;
 	}
 }
