@@ -1,8 +1,6 @@
 #ifndef __YUNI_TOOLBOX_VARIANT_VARIANT_H__
 #define __YUNI_TOOLBOX_VARIANT_VARIANT_H__
 
-# include <algorithm>
-
 # include "../../yuni.h"
 # include "../exceptions.h"
 # include "../string.h"
@@ -10,6 +8,7 @@
 
 namespace Yuni
 {
+
 	/*!
 	** \brief Classic Variant type implementation.
 	**
@@ -81,11 +80,16 @@ namespace Yuni
 		{ return assign<T, T>(rhs); }
 
 		/*!
-		** \brief Specialized assign for C Strings. Less than ideal.
+		** \brief Specialized assign for C Strings.
 		*/
-		template <int S>
-		Variant& assign(char const (&rhs)[S])
-		{ return assign<char const[S], String>(rhs); }
+		Variant& assign(const char* rhs)
+		{ return assign<const char*, String>(rhs); }
+
+		/*!
+		** \brief Specialized assign for C Wide Strings.
+		*/
+		Variant& assign(const wchar_t* rhs)
+		{ return assign<const wchar_t*, String>(rhs); }
 
 		/*!
 		** \brief Assignment operator for convenience
@@ -151,14 +155,10 @@ namespace Yuni
 		//@}
 
 	private:
-		/*!
-		** \brief Static function pointer table storage
-		*/
+		//! Static function pointer table storage
 		Private::Variant::FunctionPtrTable * pTable;
 
-		/*!
-		** \brief Object storage.
-		*/
+		//! Object storage.
 		void* pObject;
 	};
 

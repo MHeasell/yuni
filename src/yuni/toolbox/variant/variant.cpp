@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "variant.h"
 
 namespace Yuni
