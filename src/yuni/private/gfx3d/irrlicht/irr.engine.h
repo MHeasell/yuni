@@ -14,13 +14,20 @@ namespace Gfx
 namespace Irrlicht
 {
 
-
+	/*!
+	** \class Engine
+	** \brief Graphics engine specialization for Irrlicht
+	*/
 	class Engine : public Private::Gfx::EngineAbstract
 	{
 	public:
+
+		//! \name Constructors & Destructor
+		//@{
 		Engine();
 		Engine(SharedPtr<Yuni::Gfx::Device> dc);
 		virtual ~Engine();
+		//@}
 
 		virtual String name() const {return "Irrlicht Engine";}
 
@@ -45,7 +52,7 @@ namespace Irrlicht
 		irr::scene::ISceneManager* pIrrSceneManager;
 		//! The background color
 		irr::video::SColor pBackgroundColor;
-		//! 
+		//! Can the engine be run?
 		bool pRunnable;
 
 	}; // class Engine
