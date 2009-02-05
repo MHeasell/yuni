@@ -140,42 +140,65 @@ namespace Script
 		return true;
 	}
 
+	int Lua::popReturnValues(int args)
+	{
+		int popped = 0;
+		while (args > 0)
+		{
+		/*	if (lua_isboolean(pProxy->pState))
+			{
+		*/
+				
+			lua_pop(pProxy->pState, 1);
+
+			std::cout << "Lua: popped a value" << std::endl;
+			++popped;
+			--args;
+		}
+		return popped;
+	}
 
 	bool Lua::push(const Variant &var)
 	{
 		lua_checkstack(pProxy->pState, 1);
-		switch (var.type())
+		if (var.is<short>())
 		{
-			case Variant::vtShort:
-				lua_pushinteger(pProxy->pState, var.asShort());
-				return true;
-			case Variant::vtInt:
-				lua_pushinteger(pProxy->pState, var.asInt());
-				return true;
-			case Variant::vtString:
-				{
-					const String& str = var.asString();
-					lua_pushlstring(pProxy->pState, str.c_str(), str.size());
-					return true;
-				}
-			case Variant::vtCString:
-				{
-					lua_pushlstring(pProxy->pState, var.asCString(), strlen(var.asCString()));
-					return true;
-				}
-			case Variant::vtDouble:
-				lua_pushnumber(pProxy->pState, var.asDouble());
-				return true;
-			case Variant::vtPointer:
-				lua_pushlightuserdata(pProxy->pState, var.asPointer());
-				return true;
-			case Variant::vtNone:
-				lua_pushnil(pProxy->pState);
-				return true;
-
-			default:
-				break;
+			lua_pushinteger(pProxy->pState, var.cast<short>());
+			return true;
 		}
+		if (var.is<int>())
+		{
+			lua_pushinteger(pProxy->pState, var.cast<int>());
+			return true;
+		}
+		if (var.is<std::string>())
+		{
+			const std::string &str = var.cast<std::string>();
+			lua_pushlstring(pProxy->pState, str.c_str(), str.size());
+			return true;
+		}
+		if (var.is<char*>())
+		{
+			const char* str = var.cast<char*>();
+			lua_pushlstring(pProxy->pState, str, strlen(str));
+			return true;
+		}
+		if (var.is<double>())
+		{
+			lua_pushnumber(pProxy->pState, var.cast<double>());
+			return true;
+		}
+		if (var.is<void*>())
+		{
+			lua_pushlightuserdata(pProxy->pState, var.cast<void*>());
+			return true;
+		}
+		if (var.empty())
+		{
+			lua_pushnil(pProxy->pState);
+			return true;
+		}
+
 		return false;
 	}
 
@@ -213,7 +236,7 @@ namespace Script
 
 
 # define YUNI_SCRIPT_LUA_DEFINE_CALL_PART2 \
-		if (lua_pcall(pProxy->pState, argc, LUA_MULTRET, 0) != 0) \
+		if (lua_pcall(pProxy->pState, argc, 1, 0) != 0) \
 		{ \
 			size_t len; \
 			std::cout << lua_tolstring(pProxy->pState, lua_gettop(pProxy->pState), &len) << std::endl; \
@@ -222,13 +245,7 @@ namespace Script
 		} \
 		/* The call succeeded. Pop any values still hanging on the stack. */ \
 		stackPos = lua_gettop(pProxy->pState); \
-		while (stackPos > stackTop) /* While we stil have remains from our previous call */ \
-		{ \
-			lua_pop(pProxy->pState, 1); \
-			(void)retValues; \
-			std::cout << "Popped." << std::endl; \
-		} \
-		\
+		this->popReturnValues(stackPos - stackTop); \
 		return true; 
 
 

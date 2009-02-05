@@ -92,6 +92,14 @@ namespace Script
 		//@}
 
 	private:
+
+		/*!
+		** \brief Pops a number of values from the Lua stack and put them in a Variant.
+		** \param[in] valuesToPop The number of values to pop
+		** \return The number of values successfully popped and converted.
+		*/
+		int popReturnValues(int valuesToPop);
+
 		/*!
 		** \brief Pushes a variant on the Lua stack.
 		** \param[in] var the variant to push on the stack
