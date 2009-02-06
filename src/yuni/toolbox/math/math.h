@@ -10,11 +10,17 @@
 
 namespace Yuni
 {
+
+/*!
+** \brief Common mathematical operations and transformations
+** \ingroup Math
+*/
 namespace Math
 {
 
 	/*!
 	** \brief Get the integer absolute value
+	** \ingroup Math
 	*/
 	inline int Abs(const int a)  {return abs(a);}
 	inline float Abs(const float a)  {return fabsf(a);}
@@ -22,6 +28,7 @@ namespace Math
 
 	/*!
 	** \brief Get the expression considered as the greater
+	** \ingroup Math
 	**
 	** \param a The first expression
 	** \param b The second expression
@@ -35,6 +42,7 @@ namespace Math
 
 	/*!
 	** \brief Maximum of three values
+	** \ingroup Math
 	**
 	** \param a The first expression
 	** \param b The second expression
@@ -46,6 +54,7 @@ namespace Math
 
 	/*!
 	** \brief Get the expression considered as the smaller
+	** \ingroup Math
 	**
 	** \param a The first expression
 	** \param b The second expression
@@ -59,6 +68,7 @@ namespace Math
 
 	/*!
 	** \brief Minimum of three values
+	** \ingroup Math
 	**
 	** \param a The first expression
 	** \param b The second expression
@@ -72,6 +82,7 @@ namespace Math
 
 	/*!
 	** \brief Ensure that an expression was contained in a range of values
+	** \ingroup Math
 	**
 	** \param expr An expression
 	** \param min The lower bound limit allowed for the expression `v`
@@ -85,6 +96,7 @@ namespace Math
 
 	/*!
 	** \brief Ensure an expression is contained in a range of values
+	** \ingroup Math
 	**
 	** \param[in,out] expr The expression that must be checked and modified if needed
 	** \param min The lower bound limit allowed for the expression `v`
@@ -107,6 +119,7 @@ namespace Math
 
 	/*!
 	** \brief Swap the value of two variables
+	** \ingroup Math
 	**
 	** \param a The first value
 	** \param b the second value
@@ -118,6 +131,7 @@ namespace Math
 
 	/*!
 	** \brief The factorial function
+	** \ingroup Math
 	**
 	** \code
 	**    std::cout << Factorial<7>::value << std::endl;
@@ -136,6 +150,7 @@ namespace Math
 
 	/*!
 	** \brief The power function for Integer values
+	** \ingroup Math
 	**
 	** \f$value = x^y\f$
 	**
@@ -159,6 +174,7 @@ namespace Math
 
 	/*!
 	** \brief The Square root function for integer values
+	** \ingroup Math
 	**
 	** \f$value = \sqrt{N}\f$
 	**
@@ -180,6 +196,7 @@ namespace Math
 
 	/*!
 	** \brief Compare two floats
+	** \ingroup Math
 	*/
 	template <typename T>
 	inline bool Equals(const T a, const T b)
@@ -190,12 +207,15 @@ namespace Math
 
 	/*!
 	** \brief Compare two doubles
+	** \ingroup Math
 	*/
 	template <>
 	inline bool Equals(const int a, const int b)
 	{
 		return a == b;
 	}
+
+
 
 
 } // namespace Math

@@ -3,22 +3,23 @@
 
 # include "policies.h"
 
+
 namespace Yuni
 {
 namespace Policy
 {
+
+/*!
+** \brief Constness policies
+** \ingroup Policies
+*/
 namespace Constness
 {
 
 
 	/*!
-	** \defgroup ConstnessPolicy Constness policies
-	** \ingroup Policies
-	*/
-
-
-	/*!
 	** \brief Don't Propagate constness of pointed or referred object
+	** \ingroup Policies
 	*/
 	template<typename T>
 	struct DontPropagateConst
@@ -29,6 +30,7 @@ namespace Constness
 
 	/*!
 	** \brief Propagate constness of pointed or referred object
+	** \ingroup Policies
 	*/
 	template<typename T>
 	struct PropagateConst

@@ -13,6 +13,12 @@ namespace UI
 {
 
 
+	/*!
+	** \brief
+	** \ingroup ui
+	**
+	** \todo Work in progress
+	*/
 	class WindowsGroup : public Component
 	{
 	public:
@@ -26,14 +32,19 @@ namespace UI
 		bool acquire(const SharedPtr<Window>& wnd);
 
 	private:
+		/*!
+		**
+		*/
 		bool internalAcquire(const SharedPtr<Window>& wnd);
-	};
+
+	}; // class WindowsGroup
+
+
+
 
 
 } // namespace UI
 } // namespace Gfx
 } // namespace Yuni
-
-
 
 #endif // __YUNI_GFX_UI_WINDOW_H__

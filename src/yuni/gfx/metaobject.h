@@ -1,9 +1,10 @@
-
 #ifndef __YUNI_GFX_METAOBJECT_H__
 # define __YUNI_GFX_METAOBJECT_H__
 
 # include "point3D.h"
 # include "implicitsurface.h"
+
+
 
 namespace Yuni
 {
@@ -11,9 +12,8 @@ namespace Gfx
 {
 
 	/*!
-	** \class AMetaObject
-	**
 	** \brief Meta objects define implicit surfaces using a generic field function.
+	** \ingroup Gfx3DAlgorithms 
 	**
 	** Actually, meta objects are simplistic implicit surfaces themselves.
 	** This class is abstract.

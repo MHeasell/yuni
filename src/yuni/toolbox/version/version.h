@@ -8,6 +8,11 @@
 namespace Yuni
 {
 
+
+	/*!
+	** \brief Provides version informations
+	** \ingroup Toolbox
+	*/
 	class Version
 	{
 	public:

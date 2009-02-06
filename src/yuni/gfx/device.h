@@ -17,6 +17,7 @@ namespace Gfx
 
 	/*!
 	** \brief Informations about a 3D device
+	** \ingroup Gfx
 	*/
 	class Device
 	{

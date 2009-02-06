@@ -4,15 +4,12 @@
 # include "../../yuni.h"
 
 
-/*!
-** \defgroup Policies Policies
-*/
-
 namespace Yuni
 {
 
 /*!
 ** \brief All available policies
+** \ingroup Policies
 */
 namespace Policy
 {

@@ -37,8 +37,9 @@
 namespace Yuni
 {
 
-	/*! \class String
+	/*!
 	** \brief A String implementation for the Yuni framework 
+	** \ingroup Toolbox
 	**
 	** \code
 	**	  Yuni::String a("abcd");

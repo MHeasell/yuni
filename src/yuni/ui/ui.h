@@ -9,6 +9,7 @@ namespace Gfx
 
 /*!
 ** \brief User Interface
+** \ingroup ui
 */
 namespace UI
 {

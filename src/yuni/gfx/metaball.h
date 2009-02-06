@@ -1,26 +1,29 @@
-
 #ifndef __YUNI_GFX_METABALL_H__
 # define __YUNI_GFX_METABALL_H__
 
 # include "point3D.h"
 # include "metaobject.h"
 
+
 namespace Yuni
 {
 namespace Gfx
 {
 
-	//! This threshold indicates the limit value for the influence of a metaball
-	const float INFLUENCE_THRESHOLD = 6.0f;
-
+	
 	/*!
-	** \class MetaBall
 	** \brief Metaballs are the simplest and most used meta objects.
+	** \ingroup Gfx3DAlgorithms
 	**
 	** They have a sphere shape and can use a number of field functions.
 	*/
 	class MetaBall: public AMetaObject
 	{
+	public:
+		//! This threshold indicates the limit value for the influence of a metaball
+		static const float InfluenceThreshold;
+
+
 	public:
 		//! \name Constructors and destructor
 		//@{
@@ -47,23 +50,22 @@ namespace Gfx
 			return metaballs(p);
 		}
 
-		//! Accessor to the center point of the metaball
+		/*!
+		** \brief Accessor to the center point of the metaball
+		*/
 		const Point3D<float>& center() const
-		{
-			return pCenter;
-		}
+		{return pCenter;}
 
-		//! Accessor to the density of the metaball
-		const float density() const
-		{
-			return pPositive ? pDensity : -pDensity;
-		}
+		/*!
+		** \brief Accessor to the density of the metaball
+		*/
+		const float density() const  {return pPositive ? pDensity : -pDensity;}
 
-		//! Get points that we know are inside the surface, here we give the center
+		/*!
+		** \brief Get points that we know are inside the surface, here we give the center
+		*/
 		void insidePoints(ImplicitSurface::PointList& points) const
-		{
-			points.push_back(center());
-		}
+		{points.push_back(center());}
 
 
 		/*!
@@ -72,26 +74,14 @@ namespace Gfx
 		** \param p Point to calculate the density for
 		** \return The calculated density
 		*/
-		float distance(const Point3D<float>& p) const
-		{
-			float r2 = pow(pCenter.x - p.x, 2);
-			r2 += pow(pCenter.y - p.y, 2);
-			r2 += pow(pCenter.z - p.z, 2);
-			return pDensity * r2;
-		}
+		float distance(const Point3D<float>& p) const;
 
 		/*!
 		** \brief Polynomial approximation for euclidean distance
 		** \param p Point to calculate the density for
 		** \return The calculated density
 		*/
-		float polynomial(const Point3D<float>& p) const
-		{
-			float r2 = pow(pCenter.x - p.x, 2);
-			r2 += pow(pCenter.y - p.y, 2);
-			r2 += pow(pCenter.z - p.z, 2);
-			return pow(1.0f - r2, 2);
-		}
+		float polynomial(const Point3D<float>& p) const;
 
 		/*!
 		** \brief A metaball density function with finite support
@@ -104,20 +94,7 @@ namespace Gfx
 		** \param p Point to calculate the density for
 		** \return The calculated density
 		*/
-		float metaballs(const Point3D<float>& p) const
-		{
-			float r2 = pow(pCenter.x - p.x, 2);
-			r2 += pow(pCenter.y - p.y, 2);
-			r2 += pow(pCenter.z - p.z, 2);
-			float r = sqrt(r2);
-			float a = pDensity;
-			float b = INFLUENCE_THRESHOLD;
-			if (r >= b)
-				return 0;
-			if (r <= (b / 3.0f))
-				return a * (1.0f - (3.0f * r2 / (b * b)));
-			return 1.5f * a * pow(1.0f - (r / b), 2);
-		}
+		float metaballs(const Point3D<float>& p) const;
 
 		/*!
 		** \brief A soft object polynomial density function, w/ finite support
@@ -127,21 +104,8 @@ namespace Gfx
 		** \param p Point to calculate the density for
 		** \return The calculated density
 		*/
-		float softObjects(const Point3D<float>& p) const
-		{
-			float a = pDensity;
-			float b2 = INFLUENCE_THRESHOLD * INFLUENCE_THRESHOLD;
-			float b4 = b2 * b2;
-			float b6 = b4 * b2;
-			float r2 = pow(pCenter.x - p.x, 2);
-			r2 += pow(pCenter.y - p.y, 2);
-			r2 += pow(pCenter.z - p.z, 2);
-			float r4 = r2 * r2;
-			float r6 = r4 * r2;
-			return a  * (1 - (4.0f * r6 / 9.0f / b6)
-				+ (17.0f * r4 / 9.0f / b4)
-				- (22.0f * r2 / 9.0f / b2));
-		}
+		float softObjects(const Point3D<float>& p) const;
+
 
 	private:
 		//! Center of the metaball
@@ -151,7 +115,11 @@ namespace Gfx
 
 	}; // class MetaBall
 
-} // Gfx
-} // Yuni
+
+
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_METABALL_H__

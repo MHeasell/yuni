@@ -20,8 +20,8 @@ namespace Gfx
 
 
 	/*!
-	** \class Octree
 	** \brief Octree datastructure
+	** \ingroup Gfx
 	**
 	** An octree is a tree representing a space partioning.
 	** A cube of space is split in 8 smaller cubes around the center.

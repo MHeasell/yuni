@@ -21,6 +21,11 @@ Set(SRC_TOOLBOX_STATIC
 				toolbox/static/types.h)
 source_group(ToolBox\\Static FILES ${SRC_TOOLBOX_STATIC})
 
+Set(SRC_TOOLBOX_EXCEPTIONS
+				toolbox/exceptions.h
+				toolbox/exceptions/badcast.h )
+source_group(ToolBox\\Exceptions FILES ${SRC_TOOLBOX_EXCEPTIONS})
+
 
 Set(SRC_TOOLBOX_STRING
 				toolbox/string/string.h toolbox/string/string.cpp
@@ -157,7 +162,7 @@ Set(SRC_GFX
 		gfx/vertex.h gfx/triangle.h gfx/edge.h
 		gfx/mesh.h gfx/mesh.cpp gfx/mesh.proxy.h
 		gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
-		gfx/metaobject.h gfx/metaball.h gfx/metabox.h
+		gfx/metaobject.h gfx/metaball.h  gfx/metaball.cpp  gfx/metabox.h
 		gfx/boundingbox.h gfx/boundingbox.hxx
 		gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
 		gfx/engine.h gfx/engine.cpp)
@@ -183,6 +188,7 @@ Set(SRC_EXTERNAL_3D
 Add_Library(yuni-static-core STATIC
 			${SRC_TOOLBOX_STATIC}
 			${SRC_TOOLBOX_STRING}
+			${SRC_TOOLBOX_EXCEPTIONS}
 			${SRC_TOOLBOX_STL}
 			${SRC_TOOLBOX_VARIANT}
 			${SRC_TOOLBOX_POLICIES}
@@ -302,28 +308,25 @@ EndIf(YUNI_MODULE_UI)
 #
 # Module : Database
 #
-# If(YUNI_MODULE_DATABASEI)
+If(YUNI_MODULE_DATABASEI)
 
-# 	Message(STATUS "Module: Database::Core")
+	Message(STATUS "Module: Database::Core")
 	
-# 	# Database
-# 	Set(SRC_DB
-# 				sql/driver.h    sql/driver.cpp
-# 				sql/database.h  sql/database.cpp)
-# 	source_group("Database" FILES ${SRC_DB})
+	# Database
+	Set(SRC_DB
+			sql/driver.h
+			sql/database.h  sql/database.cpp)
+	source_group("Database" FILES ${SRC_DB})
 
-# 	Add_Library(yuni-static-database-core STATIC ${SRC_DB})
+	Add_Library(yuni-static-database-core STATIC ${SRC_DB})
 
-# 	IF(YUNI_MODULE_DB_PSQLA)
-# 		Set(SRC_DB_PSQL
-# 			database/postgresql/engine.h  database/postgresql/engine.cpp)
-	
-# 		Add_Library(yuni-static-database-postgresql STATIC ${SRC_DB_PSQL})
-# 		Message(STATUS "Module: Database::PostgreSQL")
+	IF(YUNI_MODULE_DB_PSQL)
+		Set(SRC_DB_PSQL	 private/sql/postgresql/driver.h  private/sql/postgresql/driver.cpp)
+		Add_Library(yuni-static-database-postgresql STATIC ${SRC_DB_PSQL})
+		Message(STATUS "Module: Database::PostgreSQL")
+	ENDIF(YUNI_MODULE_DB_PSQL)
 
-# 	ENDIF(YUNI_MODULE_DB_PSQLA)
-
-# EndIf(YUNI_MODULE_DATABASEI)
+EndIf(YUNI_MODULE_DATABASEI)
 
 
 

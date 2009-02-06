@@ -9,6 +9,11 @@ namespace Yuni
 {
 namespace System
 {
+
+/*!
+** \brief Endianness
+** \ingroup Endianness
+*/
 namespace Endianness
 {
 
@@ -16,6 +21,7 @@ namespace Endianness
 
 	/*!
 	** \brief Information about the CPU byte order
+	** \ingroup Endianness
 	*/
 	enum ByteOrder
 	{
@@ -27,6 +33,7 @@ namespace Endianness
 
 	/*!
 	** \brief Determine the CPU byte order
+	** \ingroup Endianness
 	**
 	** \return LittleEndian if the cpu seems to use the Little-endian order, BigEndian otherwise
 	*/
@@ -40,6 +47,7 @@ namespace Endianness
 
 	/*!
 	** \brief Swap bytes for a `N` bytes long variable
+	** \ingroup Endianness
 	**
 	** \param[in,out] in A pointer to the variable to swap
 	** \param size Size of the data
@@ -55,6 +63,7 @@ namespace Endianness
 
 	/*!
 	** \brief Swap bytes for a 2 bytes long variable
+	** \ingroup Endianness
 	**
 	** \param[in,out] in The variable
 	*/
@@ -63,6 +72,7 @@ namespace Endianness
 
 	/*!
 	** \brief Swap bytes for a 4 bytes long variable
+	** \ingroup Endianness
 	**
 	** \param[in,out] in The variable
 	*/
@@ -71,6 +81,7 @@ namespace Endianness
 
 	/*!
 	** \brief Swap bytes for a 8 bytes long variable
+	** \ingroup Endianness
 	**
 	** \param[in,out] in The variable
 	*/
@@ -85,6 +96,7 @@ namespace Endianness
 
 	/*!
 	** \brief Swap bytes for a 16 bytes long variable
+	** \ingroup Endianness
 	**
 	** \param[in,out] in The variable
 	*/

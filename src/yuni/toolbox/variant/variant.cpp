@@ -1,8 +1,10 @@
 #include <algorithm>
 #include "variant.h"
 
+
 namespace Yuni
 {
+
 
 	Variant::Variant()
 	{
@@ -10,22 +12,26 @@ namespace Yuni
 		pObject = NULL;
 	}
 
+
 	Variant::Variant(const Variant& rhs)
 	{
 		pTable = Private::Variant::Table<Private::Variant::Empty>::get();
 		assign(rhs);
 	}
 
+
 	Variant::~Variant()
 	{
 		pTable->staticDelete(&pObject);
 	}
 
+
 	Variant& Variant::assign(const Variant& rhs)
 	{
 		// Are we copying from the same type (using the same table) ?
 		if (pTable == rhs.pTable)
-		{ // If so, we can avoid reallocation
+		{
+			// If so, we can avoid reallocation
 			pTable->move(&rhs.pObject, &pObject);
 		}
 		else
@@ -37,21 +43,24 @@ namespace Yuni
 		return *this;
 	}
 
-	void Variant::swap(Variant& one, Variant& other)
+
+	void Variant::Swap(Variant& one, Variant& other)
 	{
 		std::swap(one.pTable, other.pTable);
 		std::swap(one.pObject, other.pObject);
 	}
 
+
 	void Variant::reset()
 	{
-		if (empty())
-			return ;
-		pTable->staticDelete(&pObject);
-		pTable = Private::Variant::Table<Private::Variant::Empty>::get();
-		pObject = NULL;
+		if (!this->empty())
+		{
+			pTable->staticDelete(&pObject);
+			pTable = Private::Variant::Table<Private::Variant::Empty>::get();
+			pObject = NULL;
+		}
 	}
 
+
+
 } // namespace Yuni
-
-

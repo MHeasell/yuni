@@ -12,9 +12,9 @@ namespace Gfx
 {
 
 
-	/*! \class Point3D
-	**
+	/*!
 	** \brief Represents a 3D-point
+	** \ingroup Gfx
 	*/
 	template<typename T = float>
 	class Point3D

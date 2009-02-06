@@ -2,10 +2,6 @@
 # define __YUNI_SCRIPT_H__
 
 
-/*!
-** \defgroup Script Scripting support
-*/
-
 
 namespace Yuni
 {

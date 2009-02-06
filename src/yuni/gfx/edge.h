@@ -15,6 +15,7 @@ namespace Gfx
 
 	/*!
 	** \brief An edge is a segment between two vertices
+	** \ingroup Gfx
 	*/
 	class Edge
 	{

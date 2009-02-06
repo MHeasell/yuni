@@ -9,11 +9,17 @@
 
 namespace Yuni
 {
+
+/*!
+** \brief Jobs (Multithreading programming)
+** \ingroup Jobs
+*/
 namespace Jobs
 {
 
 	/*!
 	** \brief Various states for a single job
+	** \ingroup Jobs
 	*/
 	enum State
 	{

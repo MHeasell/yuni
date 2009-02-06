@@ -24,6 +24,7 @@ namespace UI
 
 	/*!
 	** \brief Units that can be used to positionate/resize UI controls
+	** \ingroup ui
 	*/
 	enum Unit
 	{
@@ -36,6 +37,7 @@ namespace UI
 
 	/*!
 	** \brief Control (Visual component)
+	** \ingroup ui
 	*/
 	class Control : public AComponent
 	{

@@ -23,17 +23,18 @@ namespace Yuni
 {
 namespace Policy
 {
+
+/*!
+** \brief Ownership policies
+** \ingroup Policies
+*/
 namespace Ownership
 {
 	
-	/*!
-	** \defgroup OwnershipPolicies Ownership policies
-	** \ingroup Policies
-	*/
 
 	/*!
 	** \brief Implementation of the reference counting ownership policy
-	** \ingroup OwnershipPolicies
+	** \ingroup Policies
 	*/
 	template<class T>
 	class ReferenceCounted
@@ -91,7 +92,7 @@ namespace Ownership
 
 	/*!
 	** \brief Implementation of the COM intrusive reference counting ownership policy
-	** \ingroup OwnershipPolicies
+	** \ingroup Policies
 	*/
 	template<class T>
 	class COMReferenceCounted
@@ -135,7 +136,7 @@ namespace Ownership
 
 	/*!
 	** \brief Implementation of the thread-safe reference counting ownership policy
-	** \ingroup OwnershipPolicies
+	** \ingroup Policies
 	*/
 	template<class T>
 	class ReferenceCountedMT
@@ -202,7 +203,7 @@ namespace Ownership
 
 	/*!
 	** \brief Implementation of the destructive copy ownership policy
-	** \ingroup OwnershipPolicies
+	** \ingroup Policies
 	*/
 	template<class T>
 	class DestructiveCopy
@@ -237,7 +238,7 @@ namespace Ownership
 
 	/*!
 	** \brief Implementation of the no-copy ownership policy
-	** \ingroup OwnershipPolicies
+	** \ingroup Policies
 	*/
 	template<class T>
 	class NoCopy

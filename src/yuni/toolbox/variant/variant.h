@@ -2,34 +2,43 @@
 #define __YUNI_TOOLBOX_VARIANT_VARIANT_H__
 
 # include "../../yuni.h"
-# include "../exceptions.h"
+# include "../exceptions/badcast.h"
 # include "../string.h"
 # include "variant.private.h"
+
+
 
 namespace Yuni
 {
 
 	/*!
 	** \brief Classic Variant type implementation.
+	** \ingroup Toolbox
 	**
 	** This is a relatively classic, yet (i hope) fast implementation of
 	** a Variant type.
 	**
 	** How to use:
 	** \code
-	**
 	** Variant v(3.14);
 	**
 	** if (v.is<double>())
 	**   // Be sure to check the type before, otherwise Variant will throw an exception.
 	**   std::cout << v.cast<double>();
-	**
 	** \endcode
 	*/
 	class Variant
 	{
 	public:
+		/*!
+		** \brief Swaps a variant with another
+		** \param[in,out] one Variant 1
+		** \param[in,out] other Variant 2
+		*/
+		static void Swap(Variant& one, Variant& other);
 
+
+	public:
 		//! \name Constructors
 		//@{
 
@@ -62,8 +71,8 @@ namespace Yuni
 		//! Destructor
 		~Variant();
 
-
 		//@}
+
 
 		//! \name Alteration methods
 		//@{
@@ -106,15 +115,7 @@ namespace Yuni
 		** \brief Assignment operator for convenience
 		*/
 		template <typename T>
-		Variant& operator=(T const& rhs)
-		{ return assign(rhs); }
-
-		/*!
-		** \brief Swaps a variant with another
-		** \param[in][out] one Variant 1
-		** \param[in][out] other Variant 2
-		*/
-		static void swap(Variant& one, Variant& other);
+		Variant& operator = (T const& rhs) {return assign(rhs);}
 
 		/*!
 		** \brief Resets the Variant to an empty state.
@@ -131,16 +132,14 @@ namespace Yuni
 		**
 		** Can be used to compare with typeid(MyType).
 		*/
-		const std::type_info& type() const
-		{ return pTable->type(); }
+		const std::type_info& type() const {return pTable->type();}
 
 
 		/*!
 		** \brief Returns true if the object is of the specified type
 		*/
 		template <typename T>
-		bool is() const
-		{ return type() == typeid(T); }
+		bool is() const {return type() == typeid(T);}
 
 
 		/*!
@@ -178,6 +177,9 @@ namespace Yuni
 		//! Object storage.
 		void* pObject;
 	};
+
+
+
 
 } // namespace Yuni
 

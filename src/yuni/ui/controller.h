@@ -18,6 +18,10 @@ namespace UI
 {
 
 
+	/*!
+	** \brief
+	** \ingroup ui
+	*/
 	class Controller
 	{
 	public:

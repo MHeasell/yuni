@@ -12,18 +12,18 @@ namespace Yuni
 {
 namespace Policy
 {
+
+/*!
+** \brief Storage policies
+** \ingroup Policies
+*/
 namespace Storage
 {
 	
-	/*!
-	** \defgroup StoragePolicies Storage policies
-	** \ingroup Policies
-	*/
-
 
 	/*!
 	** \brief Implementation of the default storage policy
-	** \ingroup StoragePolicies
+	** \ingroup Policies
 	**
 	** \tparam T The data type
 	*/
@@ -82,7 +82,7 @@ namespace Storage
 
 	/*!
 	** \brief Implementation of the Array storage policy
-	** \ingroup StoragePolicies
+	** \ingroup Policies
 	**
 	** \tparam T The data type
 	*/
