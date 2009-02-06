@@ -7,17 +7,17 @@ namespace Yuni
 {
 namespace Policy
 {
+
+/*!
+** \brief Convertion policies
+** \ingroup Policies
+*/
 namespace Conversion
 {
 
+
 	/*!
-	** \defgroup ConversionPolicies Conversion policies
 	** \ingroup Policies
-	*/
-
-
-	/*! \class Allow
-	** \ingroup ConversionPolicies
 	*/
 	struct Allow
 	{
@@ -25,8 +25,8 @@ namespace Conversion
 	};
 
 
-	/*! \class Disallow
-	** \ingroup ConversionPolicies
+	/*!
+	** \ingroup Policies
 	*/
 	struct Disallow
 	{

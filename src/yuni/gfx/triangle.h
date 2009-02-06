@@ -13,6 +13,7 @@ namespace Gfx
 
 	/*!
 	** \brief A triangle is a 3-sided polygon
+	** \ingroup Gfx
 	**
 	** The triangle is the base element for all meshes
 	** It knows its edges, and its vertices.

@@ -11,6 +11,7 @@ namespace Yuni
 
 /*
 ** \brief Path manipulation functions
+** \ingroup PathsAndFiles
 */
 namespace Paths
 {
@@ -20,6 +21,7 @@ namespace Paths
 	//@{
 
 	//! The path-separator character according to the platform
+	//! \ingroup PathsAndFiles
 	# ifdef YUNI_OS_WINDOWS
 	const char Separator = '\\';
 	# else
@@ -27,6 +29,7 @@ namespace Paths
 	# endif
 
 	//! The path-separator character according to the platform (stored in a string instead of a char)
+	//! \ingroup PathsAndFiles
 	# ifdef YUNI_OS_WINDOWS
 	const String SeparatorAsString = "\\";
 	# else
@@ -44,6 +47,8 @@ namespace Paths
 
 	/*!
 	** \brief Test if a file/folder exists
+	** \ingroup PathsAndFiles
+	**
 	** \param p The folder/filename to test
 	** \return True if it exists, false otherwise
 	*/
@@ -53,6 +58,7 @@ namespace Paths
 
 	/*!
 	** \brief Create Path Recursively
+	** \ingroup PathsAndFiles
 	**
 	** \param p The path to create if it does not exist
 	** return True if the operation succeeded, false otherwise
@@ -63,6 +69,7 @@ namespace Paths
 
 	/*!
 	** \brief Retrieve the current directory
+	** \ingroup PathsAndFiles
 	*/
 	String CurrentDirectory();
 
@@ -70,6 +77,7 @@ namespace Paths
 
 	/*!
 	** \brief Extract the path part of a filename
+	** \ingroup PathsAndFiles
 	**
 	** The path part will be extracted according the system-dependant path-separator
 	**
@@ -91,6 +99,7 @@ namespace Paths
 
 	/*!
 	** \brief Extract the bare file name
+	** \ingroup PathsAndFiles
 	**
 	** The file name will be extracted according the last occurence
 	** of the system-dependant path-separator (if systemDependant = true)
@@ -104,6 +113,7 @@ namespace Paths
 	String ExtractFileName(const String& p, const bool systemDependant = true);
 	/*!
 	** \brief Extract bare file name for each entry in a list
+	** \ingroup PathsAndFiles
 	**
 	** The file name will be extracted according the last occurence
 	** of the system-dependant path-separator (if systemDependant = true).
@@ -119,6 +129,7 @@ namespace Paths
 	void ExtractFileName(String::List& p, const bool systemDependant = true);
 	/*!
 	** \brief Extract bare file name for each entry in a list
+	** \ingroup PathsAndFiles
 	**
 	** The file name will be extracted according the last occurence
 	** of the system-dependant path-separator (if systemDependant = true).
@@ -137,6 +148,7 @@ namespace Paths
 
 	/*!
 	** \brief Extract the bare file name without its extension
+	** \ingroup PathsAndFiles
 	**
 	** The file name will be extracted according the last occurence
 	** of the system-dependant path-separator
@@ -152,6 +164,8 @@ namespace Paths
 
 	/*!
 	** \brief Extract the extention of a file name
+	** \ingroup PathsAndFiles
+	**
 	** \param s Filename
 	** \return The extenion of the filename (with the leading '.') in lowercase, empty if no extension is present
 	**
@@ -165,6 +179,7 @@ namespace Paths
 
 	/*!
 	** \brief Get if a path is absolute 
+	** \ingroup PathsAndFiles
 	**
 	** \param p The path or the filename to test
 	** \return True if the path is an absolute path or empty, false otherwise
@@ -175,8 +190,8 @@ namespace Paths
 
 
 
+
 } // namespace Paths
 } // namespace Yuni
-
 
 #endif // __YUNI_TOOLBOX_FS_PATHS_H__

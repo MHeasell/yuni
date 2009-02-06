@@ -11,9 +11,11 @@ namespace Yuni
 {
 namespace Gfx
 {
+
+
 	/*!
-	** \class MetaBox
 	** \brief Metaboxes are a simple metaobject for a 3D box
+	** \ingroup Gfx3DAlgorithms 
 	*/
 	class MetaBox: public AMetaObject
 	{

@@ -12,6 +12,11 @@
 
 namespace Yuni
 {
+
+/*!
+** \brief Events
+** \ingroup Toolbox
+*/
 namespace Event
 {
 
@@ -24,6 +29,7 @@ namespace Event
 
 	/*!
 	** \brief Base class for Notifiers
+	** \ingroup Toolbox
 	*/
 	class Notifier : public Policy::ObjectLevelLockable<Notifier>
 	{
@@ -57,6 +63,7 @@ namespace Event
 
 	/*!
 	** \brief Provide the ability to receive events
+	** \ingroup Toolbox
 	*/
 	class Receiver : public Policy::ObjectLevelLockable<Receiver>
 	{
@@ -117,6 +124,7 @@ namespace Event
 
 	/*!
 	** \brief Event (with no parameter)
+	** \ingroup Toolbox
 	*/
 	class E0 : public Notifier
 	{
@@ -210,6 +218,7 @@ namespace Event
 
 	/*!
 	** \brief Event (with 1 parameters)
+	** \ingroup Toolbox
 	*/
 	template<typename T1>
 	class E1 : public Notifier
@@ -306,6 +315,7 @@ namespace Event
 
 	/*!
 	** \brief Event (with 2 parameters)
+	** \ingroup Toolbox
 	*/
 	template<typename T1, typename T2>
 	class E2 : public Notifier
@@ -400,6 +410,7 @@ namespace Event
 
 	/*!
 	** \brief Event (with 3 parameters)
+	** \ingroup Toolbox
 	*/
 	template<typename T1, typename T2, typename T3>
 	class E3 : public Notifier
@@ -494,6 +505,7 @@ namespace Event
 
 	/*!
 	** \brief Event (with 4 parameters)
+	** \ingroup Toolbox
 	*/
 	template<typename T1, typename T2, typename T3, typename T4>
 	class E4 : public Notifier
@@ -588,6 +600,7 @@ namespace Event
 
 	/*!
 	** \brief Event (with 5 parameters)
+	** \ingroup Toolbox
 	*/
 	template<typename T1, typename T2, typename T3, typename T4, typename T5>
 	class E5 : public Notifier
@@ -682,6 +695,7 @@ namespace Event
 
 	/*!
 	** \brief Event (with 6 parameters)
+	** \ingroup Toolbox
 	*/
 	template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
 	class E6 : public Notifier
@@ -776,6 +790,7 @@ namespace Event
 
 	/*!
 	** \brief Event (with 7 parameters)
+	** \ingroup Toolbox
 	*/
 	template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
 	class E7 : public Notifier
@@ -870,6 +885,7 @@ namespace Event
 
 	/*!
 	** \brief Event (with 8 parameters)
+	** \ingroup Toolbox
 	*/
 	template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
 	class E8 : public Notifier

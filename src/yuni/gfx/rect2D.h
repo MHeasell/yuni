@@ -5,7 +5,6 @@
 # include "point2D.h"
 
 
-
 namespace Yuni
 {
 namespace Gfx
@@ -13,6 +12,7 @@ namespace Gfx
 
 	/*!
 	** \brief 2D-Rectangle
+	** \ingroup Gfx
 	*/
 	template<typename T>
 	class Rect2D

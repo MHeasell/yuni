@@ -13,6 +13,7 @@ namespace Gfx
 
 	/*!
 	** \brief A mesh is a set of linked and spatially positioned triangles.
+	** \ingroup Gfx
 	**
 	** Every 3D model has an associated mesh, on which textures are applied.
 	** Even implicit surfaces have to be converted to meshes for display.

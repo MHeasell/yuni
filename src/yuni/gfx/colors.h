@@ -16,10 +16,6 @@ namespace Color
 } // namespace Gfx
 } // namespace Yuni
 
-/*!
-** \defgroup ColorModels Color models
-*/
-
 
 # include "rgba.h"
 # include "rgb.h"

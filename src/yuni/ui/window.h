@@ -15,6 +15,10 @@ namespace UI
 {
 
 
+	/*!
+	** \brief
+	** \ingroup ui
+	*/
 	class Window : public Control
 	{
 	public:

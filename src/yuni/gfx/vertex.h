@@ -7,22 +7,21 @@
 # include "../toolbox/string.h"
 # include "../toolbox/smartptr/sharedptr.h"
 
+
+
 namespace Yuni
 {
 namespace Gfx
 {
 
-
-	/*!
-	** \brief An edge is a segment between two vertices
-	** \see Edge
-	*/
+	// Forward declaration
 	class Edge;
 
 
 
 	/*!
 	** \brief A vertex is a point in space which is the start of two edges of a triangle in a mesh.
+	** \ingroup Gfx
 	*/
 	class Vertex
 	{

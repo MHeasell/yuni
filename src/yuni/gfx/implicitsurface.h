@@ -11,17 +11,16 @@ namespace Gfx
 {
 
 	/*!
-	** \class ImplicitSurface
-	**
 	** \brief An implicit surface is a mathematical function defining a spacial surface
+	** \ingroup Gfx
 	**
 	** An implicit surface is defined by metaobjects
 	** interacting with each other.
-	**
 	*/
 	class ImplicitSurface
 	{
 	public:
+		//! List of points
 		typedef std::vector< Point3D<float> > PointList;
 
 	public:

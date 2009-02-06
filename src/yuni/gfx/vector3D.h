@@ -14,6 +14,7 @@ namespace Gfx
 
 	/*!
 	** \brief Represents a 3D-vector, with generic homogeneous content
+	** \ingroup Gfx
 	*/
 	template<typename T = float>
 	class Vector3D

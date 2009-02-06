@@ -19,13 +19,14 @@ namespace Policy
 {
 
 	/*!
-	** \defgroup ThreadingPolicies Threading policies
+	** \name THreading policies
 	** \ingroup Policies
 	*/
+	//@{
 
 	/*!
 	** \brief Implementation of the Threading Model policy in a single-threaded environnement
-	** \ingroup ThreadingPolicies
+	** \ingroup Policies
 	**
 	** No synchronization is required in this case
 	*/
@@ -66,7 +67,7 @@ namespace Policy
 
 	/*!
 	** \brief Implementation of the Threading Model policy in a multi-threaded environnement (one mutex per object)
-	** \ingroup ThreadingPolicies
+	** \ingroup Policies
 	*/
 	template<class Host>
 	class ObjectLevelLockable
@@ -111,7 +112,7 @@ namespace Policy
 
 	/*!
 	** \brief Implementation of the Threading Model policy in a multi-threaded environnement (one mutex per class)
-	** \ingroup ThreadingPolicies
+	** \ingroup Policies
 	*/
 	template<class Host>
 	class ClassLevelLockable
@@ -151,6 +152,7 @@ namespace Policy
 
 
 
+	//@}
 
 } // namespace Policy
 } // namespace Yuni

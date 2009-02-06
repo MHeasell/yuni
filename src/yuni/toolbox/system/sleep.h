@@ -9,6 +9,7 @@ namespace Yuni
 
     /*!
     ** \brief Suspend thread execution for an interval measured in seconds
+	** \ingroup Toolbox
     **
     ** \param seconds Number of seconds to wait
     **
@@ -23,6 +24,7 @@ namespace Yuni
 
 	/*!
 	** \brief Suspend thread execution for an interval measured in milliseconds
+	** \ingroup Toolbox
 	**
 	** \param milliseconds NUmber of milliseconds to wait
 	**

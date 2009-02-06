@@ -15,6 +15,7 @@ namespace Gfx
 
 	/*!
 	** \brief A bounding box in 3D that grows with what is added inside
+	** \ingroup Gfx
 	*/
 	template <typename T>
 	class BoundingBox

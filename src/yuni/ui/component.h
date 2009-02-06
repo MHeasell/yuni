@@ -18,17 +18,22 @@ namespace Gfx
 namespace UI
 {
 
+	// Foraward declaration
 	class Control;
+
+
 
 
 	/*!
 	** \brief Base class for any UI component
+	** \ingroup ui
 	*/
 	class AComponent : public Event::Receiver
 	{
 		friend class Control;
 	public:
 		//! State of the component
+		//! \ingroup ui
 		enum State
 		{
 			//! The component is loading its data (constructor)
@@ -109,11 +114,10 @@ namespace UI
 
 
 
+
+
 } // namespace UI
 } // namespace Gfx
 } // namespace Yuni
-
-
-
 
 #endif // __YUNI_GFX_UI_COMPONENTS_H__

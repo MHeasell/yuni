@@ -9,18 +9,19 @@ namespace Yuni
 {
 namespace Policy
 {
+	
+	
+/*!
+** \brief Checking policies
+** \ingroup Policies
+*/
 namespace Checking
 {
 
+
 	/*!
-	** \defgroup CheckingPolicy Checking policies
-	** \ingroup Policies
-	*/
-
-
-	/*! \class None
 	** \brief Do not make any check
-	** \ingroup CheckingPolicy
+	** \ingroup Policies
 	*/
 	template<class T>
 	class None

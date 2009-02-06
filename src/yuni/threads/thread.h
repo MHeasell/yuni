@@ -16,11 +16,6 @@ namespace Yuni
 namespace Threads
 {
 
-	/*!
-	** \defgroup Threads Threading support
-	*/
-
-
 
 	/*! \class AThread
 	**  \brief Higher-level threading interface (abstract)

@@ -5,6 +5,7 @@
 # include "implicitsurface.h"
 # include "mesh.h"
 
+
 namespace Yuni
 {
 namespace Gfx
@@ -12,8 +13,8 @@ namespace Gfx
 
 
 	/*!
-	** \class Polygonizer
 	** \brief A polygonizer is the abstraction of an algorithm able to create a triangle mesh from an isosurface.
+	** \ingroup Gfx3DAlgorithms 
 	*/
 	class Polygonizer
 	{

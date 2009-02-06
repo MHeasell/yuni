@@ -83,7 +83,7 @@ public:
 		return 1;
 	}
 
-	virtual video::SMaterial& getMaterial(u32 i)
+	virtual video::SMaterial& getMaterial(u32)
 	{
 		return pMaterial;
 	}    
@@ -170,13 +170,14 @@ public:
 
 
 
-int main(int argc, char* argv[])
+int main(int, char**)
 {
-	{ /* Bare irrlicht calls. TODO: remove them ASAP. */
+	{
+		/* Bare irrlicht calls. TODO: remove them ASAP. */
 		using namespace irr;
 
 		IrrlichtDevice *device =
-#ifdef _IRR_OSX_PLATFORM_
+#ifdef YUNI_OS_MAC
 			createDevice(video::EDT_OPENGL, core::dimension2d<s32>(640, 480), 16,
 						 false, false, false, 0);
 #else
@@ -211,7 +212,7 @@ int main(int argc, char* argv[])
 		myNode = 0; 
 
 		u32 frames=0;
-		while(device->run())
+		while (device->run())
 		{
 			driver->beginScene(true, true, video::SColor(0,0,0,0));
 
@@ -231,9 +232,6 @@ int main(int argc, char* argv[])
 		}
 
 		device->drop();
-
-
-
 	}
 
 

@@ -14,12 +14,14 @@ namespace Paths
 
 /*!
 ** \brief Tools to handle files
+** \ingroup PathsAndFiles
 */
 namespace Files
 {
 
 
-    //! The maximum allowed size for a file
+    //! The maximum allowed size for a file (Default: 80Mo)
+	//! \ingroup PathsAndFiles
     const uint64 SizeHardLimit = 83886080;  // 80Mo = 80 * 1024 * 1024
 
 
@@ -28,6 +30,7 @@ namespace Files
 
     /*!
     ** \brief Get the size of a file
+	** \ingroup PathsAndFiles
     **
     ** \param filename The file
     ** \param[out] size The size of the file. 0 if any errors has occured
@@ -38,6 +41,7 @@ namespace Files
 
     /*!
     ** \brief Replace the extension
+	** \ingroup PathsAndFiles
     **
     ** if the extension can not be found, the new extension will be
     ** appended to it
@@ -57,6 +61,7 @@ namespace Files
 
     /*!
     ** \brief Open and Read the content of a file and write it into a 1D array
+	** \ingroup PathsAndFiles
     **
     ** \param[out] out The content of the file
     ** \param filename Filename to open
@@ -70,6 +75,7 @@ namespace Files
 
     /*!
     ** \brief Load the entire content of a file into memory
+	** \ingroup PathsAndFiles
     **
     ** \param filename The filename to open
     ** \param hardlimit If the size of the file exceeds this limit, it will not be loaded 
@@ -80,6 +86,7 @@ namespace Files
 
     /*!
     ** \brief Load the entire content of a file into memory
+	** \ingroup PathsAndFiles
     **
     ** \param filename The filename to open
     ** \param[out] size The size of the file
@@ -91,6 +98,7 @@ namespace Files
 
     /*!
     ** \brief Save the content of a string into a file
+	** \ingroup PathsAndFiles
     **
     ** \param filename The filename to create/overwrite
     ** \param content The new content of the file
@@ -103,6 +111,7 @@ namespace Files
     
     /*!
     ** \brief Copy a single file
+	** \ingroup PathsAndFiles
     **
     ** \param from The source file
     ** \param to The target file

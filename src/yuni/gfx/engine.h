@@ -16,6 +16,7 @@ namespace Gfx
 
 	/*!
 	** \brief The graphics engine
+	** \ingroup Gfx
 	**
 	** Singleton class that manages the graphical display,
 	** and the various features that go with it.
