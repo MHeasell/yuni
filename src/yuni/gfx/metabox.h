@@ -15,7 +15,7 @@ namespace Gfx
 
 	/*!
 	** \brief Metaboxes are a simple metaobject for a 3D box
-	** \ingroup Gfx3DAlgorithms 
+	** \ingroup Gfx3DAlgorithms
 	*/
 	class MetaBox: public AMetaObject
 	{
