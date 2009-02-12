@@ -20,10 +20,10 @@ namespace Gfx
 	public:
 		//! \name Constructors
 		//@{
-		
+
 		//! Default constructor
 		Rect2D() : x1(0), y1(0), x2(0), y2(0) {}
-		
+
 		/*!
 		** \brief Construct the rectangle to cover two 2D-points
 		**
@@ -32,7 +32,7 @@ namespace Gfx
 		*/
 		template<typename U, typename V>
 		Rect2D(const Point2D<U>& a, const Point2D<V>& b) { reset(a, b); }
-		
+
 		/*!
 		** \brief Constructor with given coordinates
 		**
@@ -45,7 +45,7 @@ namespace Gfx
 		Rect2D(const U ax1, const U ay1, const U ax2, const U ay2)
 			:x1((T)ax1), y1((T)ay1), x2((T)ax2), y2((T)ay2)
 		{}
-		
+
 		/*!
 		** \brief Construct the rectangle to cover two other rectangles
 		**
