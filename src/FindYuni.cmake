@@ -9,9 +9,10 @@
 LIST(APPEND YUNI_INCLUDE "${PROJECT_SOURCE_DIR}/..")
 
 
-Set(YUNI_STATIC_CORE yuni-static-core)
-Set(YUNI_STATIC_GFX3D yuni-static-gfx3d)
+Set(YUNI_STATIC_CORE   yuni-static-core)
+Set(YUNI_STATIC_GFX3D  yuni-static-gfx3d)
 Set(YUNI_STATIC_SCRIPT yuni-static-script)
+Set(YUNI_STATIC_NET    yuni-static-net)
 
 
 #
