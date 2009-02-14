@@ -13,7 +13,7 @@ namespace Yuni
 		:std::string()
 	{
 		if (v)
-			append(v);
+			this->append(v);
 	}
 
 	String::String(const wchar_t* v) 
@@ -72,56 +72,6 @@ namespace Yuni
 		return *this;
 	}
 
-
-	void
-	String::split(String::Vector& out, const String& separators, const bool emptyBefore) const
-	{
-		// Empty the container
-		if (emptyBefore)
-			out.clear();
-		// TODO This method should be rewritten for better performance
-		String s(*this);
-		while (!s.empty())
-		{																											
-			String::size_type i = s.find(separators);																					
-			if (std::string::npos == i)																							
-			{																										
-				out.push_back(String::Trim(s));																		
-				return;
-			}
-			else
-			{																										
-				out.push_back(String::Trim(s.substr(0, i)));														  
-				s = s.substr(i + 1, s.size() - i - 1);															   
-			}																										
-		}
-	}
-
-
-
-	void
-	String::split(String::List& out, const String& separators, const bool emptyBefore) const
-	{
-		// Empty the container
-		if (emptyBefore)
-			out.clear();
-		// TODO This method should be rewritten for better performance
-		String s(*this);
-		while (!s.empty())
-		{																											
-			String::size_type i = s.find(separators);																					
-			if (std::string::npos == i)																							
-			{																										
-				out.push_back(String::Trim(s));																		
-				return;																							  
-			}
-			else
-			{																										
-				out.push_back(String::Trim(s.substr(0, i)));														  
-				s = s.substr(i + 1, s.size() - i - 1);															   
-			}																										
-		}
-	}
 
 
 	void String::ToKeyValue(const String& s, String& key, String& value, const enum String::CharCase chcase)
@@ -448,6 +398,23 @@ namespace Yuni
 		va_end(parg);
 		return s;
 	}
+
+
+	String::Size String::countChar(const String::Char c) const
+	{
+		if (this->empty())
+			return 0;
+		String::Size ret = 0;
+		String::const_iterator end = this->end();
+		for (String::const_iterator i = this->begin(); i != end; ++i)
+		{
+			if (c == *i)
+				++ret;
+		}
+		return ret;
+	}
+	
+
 
 
 
