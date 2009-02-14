@@ -21,6 +21,10 @@
 **
 **
 **
+** \defgroup Net Networking support
+** \defgroup Protocol Protocols
+** \ingroup Net
+**
 ** \defgroup Toolbox Toolbox
 **
 ** \defgroup Endianness Endianness
