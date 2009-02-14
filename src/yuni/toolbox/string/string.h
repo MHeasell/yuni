@@ -189,7 +189,7 @@ namespace Yuni
 
 
 		/*!
-		** \brief Get the number of occurence of a char
+		** \brief Get the number of occurences of a char
 		**
 		** \param s The string
 		** \param c The char to find in the string
