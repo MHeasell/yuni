@@ -202,6 +202,25 @@ Add_Library(yuni-static-core STATIC
 
 
 
+#
+# Module : Network
+#
+If(YUNI_MODULE_NET)
+
+	Message(STATUS "Module: Network")
+
+	# Scripts
+	Set(SRC_NET
+			net/protocol.h  net/protocol.cpp
+		)
+	source_group("Network\\Protocol" FILES ${SRC_NET})
+
+	Add_Library(yuni-static-net STATIC
+				${SRC_NET}
+				)
+
+EndIf(YUNI_MODULE_NET)
+
 
 
 
