@@ -8,6 +8,9 @@
 
 namespace Yuni
 {
+namespace Toolbox
+{
+
 
 /*
 ** \brief Path manipulation functions
@@ -192,6 +195,7 @@ namespace Paths
 
 
 } // namespace Paths
+} // namespace Toolbox
 } // namespace Yuni
 
 #endif // __YUNI_TOOLBOX_FS_PATHS_H__

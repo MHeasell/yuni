@@ -3,8 +3,13 @@
 #include <sys/stat.h>
 #include "files.h"
 #include "paths.h"
+#include <ctype.h>
+
+
 
 namespace Yuni
+{
+namespace Toolbox
 {
 namespace Paths
 {
@@ -13,7 +18,7 @@ namespace Files
 
 
 	template<class T>
-	bool TmplLoadFromFile(T& out, const String& filename, const uint32 sizeLimit, const bool emptyListBefore)
+	bool TmplLoadFromFile(T& out, const String& filename, const bool emptyListBefore, const uint32 sizeLimit)
 	{
 		if (emptyListBefore)
 			out.clear();
@@ -35,17 +40,19 @@ namespace Files
 		return true;
 	}
 	 
-	bool Load(String::List& out, const String& filename, const uint32 sizeLimit, const bool emptyListBefore)
+	bool Load(String::List& out, const String& filename, const bool emptyListBefore, const uint32 sizeLimit)
 	{
-		return TmplLoadFromFile< String::List >(out, filename, sizeLimit, emptyListBefore);
+		return TmplLoadFromFile< String::List >(out, filename, emptyListBefore, sizeLimit);
 	}
 	 
-	bool Load(String::Vector& out, const String& filename, const uint32 sizeLimit, const bool emptyListBefore)
+	bool Load(String::Vector& out, const String& filename, const bool emptyListBefore, const uint32 sizeLimit)
 	{
-		return TmplLoadFromFile< String::Vector >(out, filename, sizeLimit, emptyListBefore);
+		return TmplLoadFromFile< String::Vector >(out, filename, emptyListBefore, sizeLimit);
 	}
 	
 
+
+	
 	bool Size(const String& filename, uint64& size)
 	{
 		struct stat results;
@@ -59,11 +66,13 @@ namespace Files
 	}
 
 
+	
 	char* LoadContentInMemory(const String& filename, const uint64 hardlimit)
 	{
 		uint64 s;
 		return LoadContentInMemory(filename, s, hardlimit);
 	}
+	
 	
 
 	char* LoadContentInMemory(const String& filename, uint64& size, const uint64 hardlimit)
@@ -93,6 +102,7 @@ namespace Files
 	}
 
 
+	
 	bool SaveToFile(const String& filename, const String& content)
 	{
 		std::ofstream dst(filename.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
@@ -104,6 +114,7 @@ namespace Files
 		return false;
 	}
 
+	
 
 	String ReplaceExtension(const String& filename, const String& newExt)
 	{
@@ -118,6 +129,7 @@ namespace Files
 		return filename.substr(0, p) + newExt;
 	}
 
+	
 
 
 	bool Copy(const String& from, const String& to, const bool overwrite)
@@ -135,14 +147,146 @@ namespace Files
 				dst << src.rdbuf();
 				return true;
 			}
-			return false;
 		}
 		return false;
 	}
 
 
 
+
+
+
+
+
+	String RemoveDotSegmentsFromUnixFilename(const String& filename)
+	{
+		if (filename.empty())
+			return filename;
+		
+		const String::Size howManySlashes = filename.countChar('/');
+		if (!howManySlashes)
+			return filename;
+
+		String::Vector stack(2 * (howManySlashes + 1) /* Ex: path/to/somewhere */);
+		
+		const String::Size length = filename.length();
+		const bool isAbsolute = ('/' == filename[0]);
+		String::Index lastPosition = 0;
+		String::Index posInStack = 0;
+		String::Index realSegmentsFound = 0;
+
+		// Index in the sequence
+		String::Index indx = 0;
+		String::Char c;
+
+		for (; indx < length; ++indx)
+		{
+			if ('/' == (c = filename[indx])) // A slash has been found
+			{
+				const String::Size len = indx - lastPosition;
+				switch (len)
+				{
+					case 0:
+						break;
+					case 1:
+						{
+							if ('.' != filename[lastPosition])
+							{
+								stack[posInStack++].assign(filename, lastPosition, 1);
+								stack[posInStack++] = "/";
+								++realSegmentsFound;
+							}
+							break;
+						}
+					case 2:
+						{
+							if ('.' == filename[lastPosition] && '.' == filename[lastPosition + 1])
+							{
+								if (realSegmentsFound)
+								{
+									// We have some segments, we have to the parent folder in any cases
+									posInStack -= 2;
+									--realSegmentsFound;
+								}
+								else
+								{
+									// We only have to go to the parent folder only if the path is absolute
+									// For example : ../../somewhere
+									if (!isAbsolute)
+									{
+										// We have to keep the `..`
+										stack[posInStack++] = "..";
+										stack[posInStack++] = "/";
+									}
+								}
+							}
+							else
+							{
+								stack[posInStack++].assign(filename, lastPosition, 2);
+								stack[posInStack++] = "/";
+								++realSegmentsFound;
+							}
+							break;
+						}
+					default:
+						{
+							stack[posInStack++].assign(filename, lastPosition, len);
+							stack[posInStack++] = "/";
+							++realSegmentsFound;
+							break;
+						}
+				}
+				lastPosition = indx + 1;
+			}
+		}
+
+		if (lastPosition < length)
+		{
+			switch (length - lastPosition)
+			{
+				case 1:
+					{
+						if ('.' != filename[lastPosition])
+							stack[posInStack++].assign(filename, lastPosition, 1);
+						break;
+					}
+				case 2:
+					{
+						if ('.' == filename[lastPosition] && '.' == filename[lastPosition + 1])
+						{
+							if (realSegmentsFound)
+								posInStack -= 2;
+							else
+							{
+								if (!isAbsolute)
+									stack[posInStack++] = "..";
+							}
+						}
+						else
+							stack[posInStack++].assign(filename, lastPosition, 2);
+						break;
+					}
+				default:
+					stack[posInStack++].assign(filename, lastPosition, length - lastPosition);
+			}
+		}
+		if (posInStack)
+		{
+			String ret;
+			if (isAbsolute)
+				ret += "/";
+			for (String::Index i = 0; i < posInStack; ++i)
+				ret += stack[i];
+			return ret;
+		}
+		return (isAbsolute) ? String("/") : String(".");
+	}
+
+
+
+
 } // namespace Files
 } // namespace Paths
+} // namespace Toolbox
 } // namespace Yuni
 

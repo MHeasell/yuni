@@ -9,6 +9,8 @@
 
 namespace Yuni
 {
+namespace Toolbox
+{
 namespace Paths
 {
 
@@ -20,7 +22,7 @@ namespace Files
 {
 
 
-    //! The maximum allowed size for a file (Default: 80Mo)
+    //! The maximum allowed size for a file in memory (Default: 80Mo)
 	//! \ingroup PathsAndFiles
     const uint64 SizeHardLimit = 83886080;  // 80Mo = 80 * 1024 * 1024
 
@@ -65,12 +67,14 @@ namespace Files
     **
     ** \param[out] out The content of the file
     ** \param filename Filename to open
-    ** \param sizeLimit Do not load files with a size > to this value. The value `0` disables this feature.
     ** \param emptyListBefore Empty the list before any operation
+    ** \param sizeLimit Do not load files with a size > to this value. The value `0` disables this feature.
     ** \return True if the operation succeeded, False otherwise
     */
-    bool Load(String::Vector& out, const String& filename, const uint32 sizeLimit = 0, const bool emptyListBefore = true);
-    bool Load(String::List& out, const String& filename, const uint32 sizeLimit = 0, const bool emptyListBefore = true);
+    bool Load(String::Vector& out, const String& filename, const bool emptyListBefore = true,
+			const uint32 sizeLimit = SizeHardLimit);
+    bool Load(String::List& out, const String& filename, const bool emptyListBefore = true,
+			const uint32 sizeLimit = SizeHardLimit);
 
 
     /*!
@@ -122,8 +126,27 @@ namespace Files
 
 
 
+	/*!
+	** \brief Remove dot segments in an unix filename
+	** \ingroup PathsAndFiles
+	**
+	** This routine removes dot segments (`.` and `..`) from a given filename.
+	** However, in the case of a relative filename (ex: `../path/to/file`) the
+	** first dot segments (`..` only) can not be removed to preserve the meaning
+	** of the data.
+	** Any final slash will be removed.
+	** 
+	** \param filename The filename
+	** \return A new string string with dot segments removed
+	*/
+	String RemoveDotSegmentsFromUnixFilename(const String& filename);
+
+
+
+
 } // namespace Files
 } // namespace Paths
+} // namespace Toolbox
 } // namespace Yuni
 
 #endif // __YUNI_TOOLBOX_FS_FILES_H__
