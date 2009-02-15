@@ -64,6 +64,12 @@ Set(SRC_TOOLBOX_EVENT
 				toolbox/event.h)
 source_group(ToolBox\\Event FILES ${SRC_TOOLBOX_EVENT})
 
+Set(SRC_TOOLBOX_URI
+				toolbox/uri/uri.private.h  toolbox/uri/uri.private.cpp
+				toolbox/uri/uri.h  toolbox/uri/uri.cpp
+				toolbox/uri.h)
+source_group(ToolBox\\Event FILES ${SRC_TOOLBOX_EVENT})
+
 
 Set(SRC_TOOLBOX_MATH	toolbox/math/math.h  toolbox/math.h)
 source_group(ToolBox\\Math FILES ${SRC_TOOLBOX_MATH})
@@ -107,6 +113,7 @@ Set(SRC_TOOLBOX_SYSTEM
                 toolbox/system/sleep.h toolbox/system/sleep.cpp
 				toolbox/system/endian.h)
 source_group(ToolBox\\System FILES ${SRC_TOOLBOX_SYSTEM})
+
 
 # System - Microsoft Windows
 Set(SRC_TOOLBOX_SYSTEM_WINDOWS toolbox/system/windows.hdr.h  toolbox/system/windows/gettimeofday.h)
@@ -188,6 +195,7 @@ Set(SRC_EXTERNAL_3D
 Add_Library(yuni-static-core STATIC
 			${SRC_TOOLBOX_STATIC}
 			${SRC_TOOLBOX_STRING}
+			${SRC_TOOLBOX_URI}
 			${SRC_TOOLBOX_EXCEPTIONS}
 			${SRC_TOOLBOX_STL}
 			${SRC_TOOLBOX_VARIANT}
