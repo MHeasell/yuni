@@ -5,16 +5,23 @@
 
 # Core
 Set(YUNI_MODULE_CORE                      TRUE) # Must be equals to True
+
 # Gfx3D
 Set(YUNI_MODULE_GFX3D                     FALSE)
 	Set(YUNI_EXTERNAL_3D_IRRLICHT         TRUE)
+
 # Scripts
 Set(YUNI_MODULE_SCRIPT                    FALSE)
 	Set(YUNI_EXTERNAL_SCRIPT_LUA          TRUE)
+
+# Network
+Set(YUNI_MODULE_NET                       TRUE)
+
 # UI (User Interface)
 Set(YUNI_MODULE_UI                        FALSE)
 	Set(YUNI_MODULE_UI_DUMMY              TRUE)
 	Set(YUNI_MODULE_UI_3D                 TRUE)
+
 # Database
 Set(YUNI_MODULE_DATABASE                  FALSE)
 	Set(YUNI_MODULE_DB_PSQL               TRUE)
@@ -59,6 +66,7 @@ IF(MODULES)
 		If("${it}" STREQUAL "all")
 			Set(YUNI_MODULE_CORE TRUE)
 			Set(YUNI_MODULE_GFX3D TRUE)
+			Set(YUNI_MODULE_NET TRUE)
 			Set(YUNI_MODULE_SCRIPT TRUE)
 			Set(YUNI_MODULE_UI TRUE)
 			Set(YUNI_MODULE_UI_DUMMY TRUE)
@@ -70,6 +78,16 @@ IF(MODULES)
 		EndIf("${it}" STREQUAL "all")
 
 
+		# net 
+		If("${it}" STREQUAL "net")
+			Set(YUNI_MODULE_NET TRUE)
+			Set(KeywordIsKnown TRUE)
+		EndIf("${it}" STREQUAL "net")
+		# -net
+		If("${it}" STREQUAL "-net")
+			Set(YUNI_MODULE_NET FALSE)
+			Set(KeywordIsKnown TRUE)
+		EndIf("${it}" STREQUAL "-net")
 
 		# gfx3d
 		If("${it}" STREQUAL "gfx3d")

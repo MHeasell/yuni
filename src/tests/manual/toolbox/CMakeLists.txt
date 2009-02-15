@@ -1,3 +1,4 @@
 
 ADD_SUBDIRECTORY(variant)
+ADD_SUBDIRECTORY(uri)
 
