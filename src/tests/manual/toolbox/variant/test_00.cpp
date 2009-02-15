@@ -2,7 +2,6 @@
 #include <string>
 #include <complex>
 #include <yuni/toolbox/string.h>
-#include <yuni/toolbox/fs/files.h>
 #include <yuni/toolbox/variant.h>
 
 using namespace Yuni;
@@ -72,38 +71,9 @@ void simpleTest()
 
 
 
-template<typename T>
-void splitter(const String& s)
-{
-	std::vector<T> list;
-	s.split(list);
-
-	String t;
-	t.append(list, ", ", "`");
-	std::cout << t << std::endl;
-
-}
-
-
-void testDS(const String& s)
-{
-	std::cout << " ::: " << s << std::endl;
-	std::cout << " >>> " << Yuni::Toolbox::Paths::Files::RemoveDotSegmentsFromUnixFilename(s) << std::endl;
-}
-
 
 int main(void)
 {
-	testDS("..");
-	testDS(".");
-	testDS("./");
-	testDS("../../piko/../");
-	testDS("../../piko/..");
-	testDS("piko/./nyu/../chiii");
-	testDS("./piko/./nyu/../chiii");
-	testDS("/piko/./nyu/../chiii");
-	testDS("/piko/./nyu/../chiii/../../../");
-	testDS("/piko/./nyu/../chiii/../../..");
-	// simpleTest();
+	simpleTest();	
 	return 0;
 }
