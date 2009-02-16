@@ -19,7 +19,7 @@ namespace Yuni
 			++count;
 		}
 	}
-	
+
 
 	template<template<class,class> class U, class Type, class Alloc>
 	void String::append(const U<Type,Alloc>& list, const String& sep, const String& enclosure, const unsigned int max)
@@ -34,7 +34,7 @@ namespace Yuni
 			++count;
 		}
 	}
-	
+
 
 
 

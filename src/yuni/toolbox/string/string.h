@@ -510,13 +510,13 @@ namespace Yuni
 		** \brief Convert all antislashes into slashes
 		** \return Returns *this
 		*/
-		String& convertAntiSlashesIntoSlashes();
+		String& convertBackSlashesIntoSlashes();
 
 		/*!
 		** \brief Convert all slashes into antislashes
 		** \return Returns *this
 		*/
-		String& convertSlashesIntoAntiSlashes();
+		String& convertSlashesIntoBackSlashes();
 
 		/*!
 		** \brief Get the hash value of this string
