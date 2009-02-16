@@ -41,7 +41,7 @@ namespace Yuni
 {
 
 	/*!
-	** \brief A String implementation for the Yuni framework 
+	** \brief A String implementation for the Yuni framework
 	** \ingroup Toolbox
 	**
 	** Examples :
@@ -174,18 +174,18 @@ namespace Yuni
 		static String Trim(const String& s, const String& trimChars = YUNI_WSTR_SEPARATORS) {return String(s).trim(trimChars);}
 
 		/*!
-		** \brief Convert all antislashes into slashes
+		** \brief Convert all backslashes into slashes
 		** \param s The string to convert
 		** \return A new string
 		*/
-		static String ConvertAntiSlashesIntoSlashes(const String& s) {return String(s).convertAntiSlashesIntoSlashes();}
+		static String ConvertBackSlashesIntoSlashes(const String& s) {return String(s).convertBackSlashesIntoSlashes();}
 
 		/*!
-		** \brief Convert all slashes into antislashes
+		** \brief Convert all slashes into backslashes
 		** \param s The string to convert
 		** \return A new string
-		*/ 
-		static String ConvertSlashesIntoAntiSlashes(const String& s) {return String(s).convertSlashesIntoAntiSlashes();}
+		*/
+		static String ConvertSlashesIntoBackSlashes(const String& s) {return String(s).convertSlashesIntoBackSlashes();}
 
 
 		/*!
@@ -241,11 +241,11 @@ namespace Yuni
 		static int FindInList(const String::Vector& l, const String& s);
 
 		/*!
-		** \brief Formatted string 
+		** \brief Formatted string
 		**
 		** \param f The format of the new string
 		** \return A new string
-		*/ 
+		*/
 		static String Format(const String& f, ...);
 		static String Format(const char* f, ...);
 
@@ -262,7 +262,7 @@ namespace Yuni
 		//! Constructor with a default value from a wide string (wchar_t*)
 		String(const wchar_t* v);
 		//! Constructor with a default value from a string (char*)
-		String(const char* v); 
+		String(const char* v);
 		//! Constructor with a default value from a string (char*) and a length
 		String(const char* v, String::size_type n) :std::string(v, n) {}
 		//! Constructor with a default value from a single char
@@ -529,7 +529,7 @@ namespace Yuni
 
 		//! \name The operator `<<`
 		//@{
-		//! Append a string (char*) 
+		//! Append a string (char*)
 		String& operator << (const char* v) {static_cast<std::string*>(this)->append(v);return *this;}
 		//! Append a string (stl)
 		String& operator << (const std::string& v) {static_cast<std::string*>(this)->append(v);return *this;}
@@ -555,7 +555,7 @@ namespace Yuni
 		String& operator << (const uint64 v) {YUNI_WSTR_APPEND;}
 		//! Convert then Append a float
 		String& operator << (const float v) {YUNI_WSTR_APPEND;}
-		//! Convert then Append a double 
+		//! Convert then Append a double
 		String& operator << (const double v) {YUNI_WSTR_APPEND;}
 		//! Convert then Append a boolean (will be converted into "true" or "false")
 		String& operator << (const bool v) {YUNI_WSTR_APPEND_BOOL(v);return *this;}
@@ -567,7 +567,7 @@ namespace Yuni
 
 		//! \name The operator `+=` (with the same abilities than the operator `<<`)
 		//@{
-		//! Append a string (char*) 
+		//! Append a string (char*)
 		String& operator += (const char* v) {static_cast<std::string*>(this)->append(v); return *this;}
 		//! Append a string (stl)
 		String& operator += (const std::string& v) {static_cast<std::string*>(this)->append(v); return *this;}
@@ -593,7 +593,7 @@ namespace Yuni
 		String& operator += (const uint64 v) {*this << v; return *this; }
 		//! Convert then Append a float
 		String& operator += (const float v) {*this << v; return *this; }
-		//! Convert then Append a double 
+		//! Convert then Append a double
 		String& operator += (const double v) {*this << v; return *this; }
 		//! Convert then Append a boolean (will be converted into "true" or "false")
 		String& operator += (const bool v) {YUNI_WSTR_APPEND_BOOL(v); return *this; }
@@ -644,7 +644,7 @@ namespace Yuni
 		** \brief Convert a string into another type, given by the template parameter `T`
 		** \param[out] t The destination variable
 		** \param s The string to convert
-		** \param f The base to use for the convertion (std::hex, std::dec, ...)
+		** \param f The base to use for the conversion (std::hex, std::dec, ...)
 		** \return True if the operation succeeded, False otherwise
 		*/
 		template <class T>
