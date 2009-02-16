@@ -16,7 +16,7 @@ namespace Yuni
 			this->append(v);
 	}
 
-	String::String(const wchar_t* v) 
+	String::String(const wchar_t* v)
 		:std::string()
 	{
 		if (v)
@@ -60,13 +60,13 @@ namespace Yuni
 	String::trim(const String& trimChars)
 	{
 		// Find the first character position after excluding leading blank spaces
-		std::string::size_type startpos = this->find_first_not_of(trimChars); 
+		std::string::size_type startpos = this->find_first_not_of(trimChars);
 		// Find the first character position from reverse af
-		std::string::size_type endpos   = this->find_last_not_of(trimChars); 
- 
+		std::string::size_type endpos   = this->find_last_not_of(trimChars);
+
 		// if all spaces or empty return an empty string
 		if ((std::string::npos == startpos) || (std::string::npos == endpos))
-		   this->clear(); 
+		   this->clear();
 		else
 			*this = this->substr(startpos, endpos - startpos + 1);
 		return *this;
@@ -76,7 +76,7 @@ namespace Yuni
 
 	void String::ToKeyValue(const String& s, String& key, String& value, const enum String::CharCase chcase)
 	{
-		// The first usefull character
+		// The first useful character
 		String::size_type pos = s.find_first_not_of(YUNI_WSTR_SEPARATORS);
 		if (pos == String::npos)
 		{
@@ -85,7 +85,7 @@ namespace Yuni
 			value.clear();
 			return;
 		}
-		// Begining of a section
+		// Beginning of a section
 		if ('[' == s[pos])
 		{
 			key = "[";
@@ -95,7 +95,7 @@ namespace Yuni
 			value = s.substr(pos, end - pos + 1);
 			return;
 		}
-		// The first `=` character 
+		// The first `=` character
 		String::size_type equal = s.find_first_of('=', pos);
 		if (equal == String::npos)
 		{
@@ -154,7 +154,7 @@ namespace Yuni
 		}
 		if (semicolon == String::npos)
 		{
-			// if none is present, looks for a comment to strip it
+			// if none is present, look for a comment to strip it
 			slashes = s.find("//", equal);
 			slashes = s.find_last_not_of(YUNI_WSTR_SEPARATORS, slashes - 1);
 			value = s.substr(equal, 1 + slashes - equal);
@@ -176,13 +176,13 @@ namespace Yuni
 			if (needReplaceSemicolons)
 				value.findAndReplace("\\;", ";", soCaseSensitive);
 		}
-		else 
+		else
 			value.clear();
 	}
 
 
 
-	String& String::convertAntiSlashesIntoSlashes()
+	String& String::convertBackSlashesIntoSlashes()
 	{
 		String::iterator end(this->end());
 		for (String::iterator i = this->begin(); i != end; ++i)
@@ -195,7 +195,7 @@ namespace Yuni
 
 
 
-	String& String::convertSlashesIntoAntiSlashes()
+	String& String::convertSlashesIntoBackSlashes()
 	{
 		String::iterator end(this->end());
 		for (String::iterator i = this->begin(); i != end; ++i)
