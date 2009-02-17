@@ -22,14 +22,20 @@ namespace Yuni
 
 		if (pTable == rhsTable)
 		{ // Yes, so we can avoid reallocating, and re-use memory.
-			// Destruct our current object
-			pTable->staticDelete(&pObject);
 			if (sizeof(U) <= sizeof(void*))
+			{
+				// Call the destructor on the object to clean up.
+				reinterpret_cast<U*>(&pObject)->~U();
 				// Create copy on-top of object pointer itself
 				new (&pObject) U(rhs);
+			}
 			else
+			{
+				// Call the destructor on the old object, but do not deallocate memory !
+				reinterpret_cast<U*>(pObject)->~U(); 
 				// Create copy on-top of the old version
 				new (pObject) U(rhs);
+			}
 		}
 		else
 		{ // No, this was not the same type.
