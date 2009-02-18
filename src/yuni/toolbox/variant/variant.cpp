@@ -8,14 +8,14 @@ namespace Yuni
 
 	Variant::Variant()
 	{
-		pTable = Private::Variant::Table<Private::Variant::Empty>::get();
+		pTable = Private::Variant::Table<Private::Variant::Empty>::Get();
 		pObject = NULL;
 	}
 
 
 	Variant::Variant(const Variant& rhs)
 	{
-		pTable = Private::Variant::Table<Private::Variant::Empty>::get();
+		pTable = Private::Variant::Table<Private::Variant::Empty>::Get();
 		assign(rhs);
 	}
 
@@ -56,7 +56,7 @@ namespace Yuni
 		if (!this->empty())
 		{
 			pTable->staticDelete(&pObject);
-			pTable = Private::Variant::Table<Private::Variant::Empty>::get();
+			pTable = Private::Variant::Table<Private::Variant::Empty>::Get();
 			pObject = NULL;
 		}
 	}

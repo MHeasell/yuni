@@ -7,7 +7,7 @@ namespace Yuni
 	template <typename T>
 	Variant::Variant(const T& source)
 	{
-		pTable = Private::Variant::Table<T>::get();
+		pTable = Private::Variant::Table<T>::Get();
 		if (sizeof(T) <= sizeof(void*))
 			new (&pObject) T(source);
 		else
@@ -18,10 +18,11 @@ namespace Yuni
 	Variant& Variant::assign(const T& rhs)
 	{
 		// Are we copying between the same type of variants ?
-		Private::Variant::FunctionPtrTable* rhsTable = Private::Variant::Table<U>::get();
+		Private::Variant::TypeManipulationTable* rhsTable = Private::Variant::Table<U>::Get();
 
 		if (pTable == rhsTable)
-		{ // Yes, so we can avoid reallocating, and re-use memory.
+		{
+			// Yes, so we can avoid reallocating, and re-use memory.
 			if (sizeof(U) <= sizeof(void*))
 			{
 				// Call the destructor on the object to clean up.
@@ -38,7 +39,8 @@ namespace Yuni
 			}
 		}
 		else
-		{ // No, this was not the same type.
+		{
+			// No, this was not the same type.
 			reset();
 			if (sizeof(U) <= sizeof(void*))
 			{
@@ -71,7 +73,7 @@ namespace Yuni
 	template <typename T>
 	void Variant::initFromCString(T source)
 	{
-		pTable = Private::Variant::Table<String>::get();
+		pTable = Private::Variant::Table<String>::Get();
 		if (sizeof(String) <= sizeof(void*))
 			new (&pObject) String(source);
 		else

@@ -25,7 +25,7 @@ namespace Variant
 	** this member may use different approachs to store the data.
 	** This function table defines the function pointers to the different operations.
 	*/
-	struct FunctionPtrTable
+	struct TypeManipulationTable
 	{
 		const std::type_info& (*type)();
 		void (*staticDelete)(void**);
@@ -44,24 +44,24 @@ namespace Variant
 	struct Functions
 	{
 		template <typename T>
-		struct Type
+		struct TypeManipulator
 		{
-			static const std::type_info& type()
+			static const std::type_info& Type()
 			{
 				return typeid(T);
 			}
 
-			static void staticDelete(void** object)
+			static void Delete(void** object)
 			{
 				reinterpret_cast<T*>(object)->~T();
 			}
 
-			static void clone(void* const* source, void** dest)
+			static void Clone(void* const* source, void** dest)
 			{
 				new (dest) T(*reinterpret_cast<T const*>(source));
 			}
 
-			static void move(void* const* source, void** dest)
+			static void Move(void* const* source, void** dest)
 			{
 				reinterpret_cast<T*>(dest)->~T();
 				*reinterpret_cast<T*>(dest) = *reinterpret_cast<T const*>(source);
@@ -79,24 +79,24 @@ namespace Variant
 	struct Functions<false>
 	{
 		template <typename T>
-		struct Type
+		struct TypeManipulator
 		{
-			static const std::type_info& type()
+			static const std::type_info& Type()
 			{
 				return typeid(T);
 			}
 
-			static void staticDelete(void** object)
+			static void Delete(void** object)
 			{
 				delete(*reinterpret_cast<T**>(object));
 			}
 
-			static void clone(void* const* source, void** dest)
+			static void Clone(void* const* source, void** dest)
 			{
 				*dest = new T(**reinterpret_cast<T* const*>(source));
 			}
 
-			static void move(void* const* source, void** dest)
+			static void Move(void* const* source, void** dest)
 			{
 				(*reinterpret_cast<T**>(dest))->~T();
 				**reinterpret_cast<T**>(dest) = **reinterpret_cast<T* const*>(source);
@@ -119,14 +119,14 @@ namespace Variant
 		** The static function table depends on the type and its size.
 		** One different function table will be instanciated by type.
 		*/
-	    static FunctionPtrTable * get()
+	    static TypeManipulationTable * Get()
 	    {
-		    static FunctionPtrTable staticTable =
+		    static TypeManipulationTable staticTable =
 			{
-				Functions<Static::Type::IsSmall<T>::Yes>::template Type<T>::type,
-				Functions<Static::Type::IsSmall<T>::Yes>::template Type<T>::staticDelete,
-				Functions<Static::Type::IsSmall<T>::Yes>::template Type<T>::clone,
-				Functions<Static::Type::IsSmall<T>::Yes>::template Type<T>::move
+				Functions<Static::Type::IsSmall<T>::Yes>::template TypeManipulator<T>::Type,
+				Functions<Static::Type::IsSmall<T>::Yes>::template TypeManipulator<T>::Delete,
+				Functions<Static::Type::IsSmall<T>::Yes>::template TypeManipulator<T>::Clone,
+				Functions<Static::Type::IsSmall<T>::Yes>::template TypeManipulator<T>::Move
 		    };
 
 		    return &staticTable;
