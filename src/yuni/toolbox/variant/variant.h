@@ -147,7 +147,7 @@ namespace Yuni
 		** \return True if the variant contains no value.
 		*/
 		bool empty() const
-		{ return pTable == Private::Variant::Table<Private::Variant::Empty>::get(); }
+		{ return pTable == Private::Variant::Table<Private::Variant::Empty>::Get(); }
 
 		//@}
 
@@ -172,7 +172,7 @@ namespace Yuni
 
 	private:
 		//! Static function pointer table storage
-		Private::Variant::FunctionPtrTable * pTable;
+		Private::Variant::TypeManipulationTable * pTable;
 
 		//! Object storage.
 		void* pObject;
