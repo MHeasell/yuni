@@ -18,7 +18,8 @@ Set(SRC_TOOLBOX_STATIC
 				toolbox/static/if.h
 				toolbox/static/remove.h
 				toolbox/static/assert.h
-				toolbox/static/types.h)
+				toolbox/static/types.h
+				toolbox/static/moveconstructor.h)
 source_group(ToolBox\\Static FILES ${SRC_TOOLBOX_STATIC})
 
 Set(SRC_TOOLBOX_EXCEPTIONS
@@ -54,7 +55,9 @@ source_group(ToolBox\\Policies FILES ${SRC_TOOLBOX_SMARTPTR})
 
 Set(SRC_TOOLBOX_SMARTPTR
 				toolbox/smartptr/sharedptr.h toolbox/smartptr/sharedptr.hxx
-				toolbox/smartptr/scopeptr.h)
+				toolbox/smartptr/scopeptr.h
+				toolbox/smartptr/smartptr.h  toolbox/smartptr/smartptr.hxx
+				)
 source_group(ToolBox\\SmartPtr FILES ${SRC_TOOLBOX_SMARTPTR})
 
 

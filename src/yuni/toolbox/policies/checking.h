@@ -36,6 +36,8 @@ namespace Checking
 
 		static void onDereference(const T&) {}
 
+		static void swapPointer(None&) {}
+
 	}; // class None
 
 

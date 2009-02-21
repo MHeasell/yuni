@@ -1,0 +1,350 @@
+#ifndef __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_H__
+# define __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_H__
+
+# include "../../yuni.h"
+# include "../policies/policies.h"
+# include "../static/if.h"
+# include "../static/moveconstructor.h"
+
+
+
+namespace Yuni
+{
+
+
+	/*!
+	** \brief Smart Pointer
+	**
+	** Smart pointers are abstract data type classes to simplify the memory management,
+	** especially in a multithreaded context.
+	** They simulate a pointer. They behave much like built-in C++ pointers except
+	** that they automatically delete the object pointed to at the appropriate time
+	** (automatic garbage collection), and can provide additional bounds checking.
+	**
+	** here is a simple example :
+	** \code
+	** #include <iostream>
+	** #include <yuni/toolbox/smartptr.h>
+	**
+	** struct Foo
+	** {
+	**		Foo(int v) : value(v) {}
+	**		int value;
+	** };
+	**
+	** int main(void)
+	** {
+	**		SmartPtr<Foo> ptr;
+	**		
+	**		// Allocating a new `Foo` instance
+	**		ptr = new Foo(42);
+	**		
+	**		// Displaying its value, like if it were a standard pointer
+	**		if (ptr)
+	**			std::cout << "Value : " << ptr->value << std::endl;
+	**
+	**		// The instance will automatically be deleted when no needed
+	**		return 0;
+	** }
+	** \endcode
+	**
+	**
+	** Here is a more complex example, dealing with inheritance :
+	** \code
+	** #include <iostream>
+	** #include <yuni/toolbox/smartptr.h>
+	**
+	**
+	** struct Foo
+	** {
+	**		Foo()
+	**			:pValue(0)
+	**		{
+	**			std::cout << (void*)this << " Constructor" << std::endl;
+	**		}
+	**		Foo(const int v)
+	**			:pValue(v)
+	**		{
+	**			std::cout << (void*)this << " Constructor, value = " << pValue << std::endl;
+	**		}
+	**		virtual ~Foo()
+	**		{
+	**			std::cout << (void*)this << " Destructor, value = " << pValue << std::endl;
+	**		}
+	**
+	**		virtual void print() const {std::cout << "Foo : " << pValue << std::endl;}
+	**
+	** protected:
+	**		int pValue;
+	** };
+	**
+	** struct Bar : public Foo
+	** {
+	** public:
+	**		Bar() {}
+	**		Bar(const int v)
+	**			:Foo(v)
+	**		{}
+	**		virtual Bar() {}
+	**
+	**		virtual void print() const {std::cout << "Bar : " << pValue << std::endl;}
+	** };
+	**
+	** int main(void)
+	** {
+	**		Yuni::SmartPtr<Foo>  p1(new Foo(42));
+	**		Yuni::SmartPtr<Bar>  p2(new Bar(72));
+	**
+	**		// The original pointer stored by p1 will no longer be needed anymore
+	**		// and will be destroyed
+	**		// For obvious reasons, we can not assign p2 to p1 (`Foo` is a superclass of `Bar`)
+	**		p1 = p2;
+	**
+	**		// Print the values, p1 and p2 have the same pointer actually
+	**		p1->print(); // 72
+	**		p2->print(); // 72
+	**
+	**		// The original pointer stored in p2 will be destroyed here
+	**		return 0;
+	** }
+	** \endcode
+	**
+	**
+	** \note This smart pointer is thread-safe by default. If you do not need a locking
+	**       mechanism, you should change the ownership policy.
+	**
+	**
+	** \tparam T      The type
+	** \tparam OwspP  The ownership policy
+	** \tparam ChckP  The Checking policy
+	** \tparam TrckP  The Tracking policy
+	** \tparam ConvP  The Conversion policy
+	** \tparam StorP  The Storage policy
+	** \tparam ConsP  The Constness policy
+	*/
+	template< typename T,                                                     // The original type
+		template <class> class OwspP = Policy::Ownership::ReferenceCountedMT, // Ownership policy
+		template <class> class ChckP = Policy::Checking::None,                // Checking policy
+		template <class> class TrckP = Policy::Tracking::None,                // Tracking policy
+		class ConvP                  = Policy::Conversion::Allow,             // Conversion policy
+		template <class> class StorP = Policy::Storage::Pointer,              // Storage policy
+		template <class> class ConsP = Policy::Constness::DontPropagateConst  // Constness policy
+		>
+	class SmartPtr
+		:public StorP<T>,                              // inherits from the storage policy
+		 public OwspP<typename StorP<T>::PointerType>, // inherits from the ownership policy
+		 public ChckP<typename StorP<T>::StoredType>,  // inherits from the checking policy
+		 public ConvP,                                 // inherits from the conversion policy
+		 public TrckP<T>                               // inherits from the tracking policy
+	{
+	public:
+		//! \name Type alias
+		//@{
+
+		//! Original type
+		typedef T  Type;
+		//! The Storage policy
+		typedef StorP<T>  StoragePolicy;
+		//! The Ownership policy
+		typedef OwspP<typename StorP<T>::PointerType>  OwnershipPolicy;
+		//! The conversion policy
+		typedef ConvP  ConversionPolicy;
+		//! The checking policy
+		typedef ChckP<typename StorP<T>::StoredType>  CheckingPolicy;
+		//! The Constness policy
+		typedef ConsP<T>  ConstnessPolicy;
+		//! The tracking policy
+		typedef TrckP<T>  TrackingPolicy;
+
+		//! the Pointer type
+		typedef typename StoragePolicy::PointerType    PointerType;
+		//! The Stored type
+		typedef typename StoragePolicy::StoredType     StoredType;
+		//! The Reference type
+		typedef typename StoragePolicy::ReferenceType  ReferenceType;
+		//! The Pointer type (const)
+		typedef typename ConstnessPolicy::Type*        ConstPointerType;
+		//! The Reference type (const)
+		typedef typename ConstnessPolicy::Type&        ConstReferenceType;
+
+
+		//! Alias to itself
+		typedef SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP> SmartPtrType;
+
+		//! The Type to use for the copy constructor
+		typedef typename Static::If<OwnershipPolicy::destructiveCopy, SmartPtrType, const SmartPtrType>::ResultType  CopyType;
+
+		//@} // alias
+
+	public:
+		/*!
+		** \brief Get the internal stored pointer by the smart pointer
+		**
+		** \note This methode should be used with care, especially in a multithreaded world
+		** \param p The smart pointer
+		** \return The internal stored pointer (may be null)
+		*/
+		static T* ExtractPointer(const SmartPtr& p);
+
+
+	private:
+		/*!
+		** \internal This class is used to provide a dummy type which will
+		** produce an useless constructor with an improbable prototype.
+		*/
+		struct NeverMatched;
+		//! Implicit - Conversions are allowed
+		typedef typename Static::If< ConversionPolicy::allow, const StoredType&, NeverMatched>::ResultType ImplicitStoredType;
+		//! Explicit - Conversions are not allowed
+        typedef typename Static::If<!ConversionPolicy::allow, const StoredType&, NeverMatched>::ResultType ExplicitStoredType;
+
+
+	public:
+		//! \name Constructors & Destructor
+		//@{
+		
+		//! Default constructor
+		SmartPtr();
+		
+		//! Constructor with a given pointer, when implicit types are not allowed
+		explicit SmartPtr(ExplicitStoredType ptr);
+		
+		//! Constructor with a given pointer, when implicit types are allowed
+		SmartPtr(ImplicitStoredType ptr);
+		
+		//! Copy constructor
+		SmartPtr(CopyType& rhs);
+
+		//! Copy constructor
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs);
+
+		//! Copy constructor
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		SmartPtr(SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs);
+
+		//! Move Constructor
+		SmartPtr(Static::MoveConstructor<SmartPtrType> rhs);
+
+		//! Destructor
+		~SmartPtr();
+
+		//@}
+
+		//! \name Swap
+		//@{
+		//! Swap from another smartptr
+		void swap(SmartPtr& rhs);
+		//@}
+
+
+		//! \name Operator * / ->
+		//@{
+		PointerType operator -> ();
+		ConstPointerType operator -> () const;
+		ReferenceType operator * ();
+		ConstReferenceType operator * () const;
+		//@}
+
+		//! \name Operator =
+		//@{
+
+		//! Copy
+		SmartPtr& operator = (CopyType& rhs);
+
+		//! Copy from another smartptr
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		SmartPtr& operator = (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs);
+
+		//! Copy from another smartptr
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		SmartPtr& operator = (SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs);
+
+		//@}
+
+
+		//! \name Comparisons
+		//@{
+		
+		//! Operator `!` (to enable if (!mysmartptr) ...)
+		bool operator ! () const;
+		
+		//! operator `==`
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		bool operator == (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+
+		//! Operator `!=`
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		bool operator != (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+
+		//! Operator `<`
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		bool operator < (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+
+		//! Operator `>`
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		bool operator > (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+
+		//! Operator `<=`
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		bool operator <= (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+
+		//! Operator `>=`
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			template <class> class TrckP1, class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		bool operator >= (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+
+		//@}
+
+
+	private:
+		//! Empty class to allow  `if (mySmartPtr) ...`
+		struct AutomaticConversion
+		{
+			//! Disabling the delete operator
+			void operator delete (void*);
+		};
+
+	public:
+		//! \name Cast-Operator
+		//@{
+		//! Cast-Operator
+		operator Static::MoveConstructor<SmartPtr> () {return Static::MoveConstructor<SmartPtr>(*this);}
+		//! Cast-Operator for `if (mySmartPtr) ...`
+		operator AutomaticConversion* () const
+		{
+			static AutomaticConversion tester;
+			return (!storagePointer(*this)) ? NULL : &tester;
+		}
+		//@}
+
+	}; // class SmartPtr
+
+
+
+
+} // namespace Yuni
+
+
+# include "smartptr.hxx"
+
+#endif // __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_H__

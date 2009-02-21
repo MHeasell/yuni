@@ -21,6 +21,7 @@ namespace Storage
 {
 	
 
+
 	/*!
 	** \brief Implementation of the default storage policy
 	** \ingroup Policies
@@ -45,17 +46,19 @@ namespace Storage
 		//! \name Constructors
 		//@{
 		Pointer() :pData(DefaultValue()) {}
-		template<class U> Pointer(const Pointer<U>&) :pData(DefaultValue()) {}
-		template<class U> Pointer(const StoredType& p) :pData(p) {}
+		Pointer(const Pointer&) :pData(0) {}
+		template<class U> Pointer(const Pointer<U>&) :pData(0) {}
+		Pointer(const StoredType& p) :pData(p) {}
 		//@}
 
 		//! Swap the data
-		void swap(Pointer& rhs) {std::swap(pData, rhs.pData);}
+		void swapPointer(Pointer& rhs) {std::swap(pData, rhs.pData);}
 
 		//! \name Get the data
 		//@{
-		friend PointerType get(const Pointer& rhs) {return rhs.pData;}
-		friend StoredType& reference(Pointer& rhs) {return rhs.pData;}
+		friend PointerType storagePointer(const Pointer& rhs) {return rhs.pData;}
+		friend StoredType& storageReference(Pointer& rhs) {return rhs.pData;}
+		friend const StoredType& storageReference(const Pointer& rhs) {return rhs.pData;}
 		//@}
 
 		//! \name Operators
@@ -104,17 +107,19 @@ namespace Storage
 		//! \name Constructors
 		//@{
 		Array() :pData(DefaultValue()) {}
-		template<class U> Array(const Pointer<U>&) :pData(DefaultValue()) {}
-		template<class U> Array(const StoredType& p) :pData(p) {}
+		Array(const Array&) :pData(0) {}
+		template<class U> Array(const Pointer<U>&) :pData(0) {}
+		Array(const StoredType& p) :pData(p) {}
 		//@}
 
 		//! Swap the data
-		void swap(PointerType& rhs) {std::swap(pData, rhs.pData);}
+		void swapPointer(PointerType& rhs) {std::swap(pData, rhs.pData);}
 
 		//! \name Get the data
 		//@{
-		friend PointerType get(const Array& rhs) {return rhs.pData;}
-		friend StoredType& reference(Array& rhs) {return rhs.pData;}
+		friend PointerType storagePointer(const Array& rhs) {return rhs.pData;}
+		friend StoredType& storageReference(Array& rhs) {return rhs.pData;}
+		friend const StoredType& storageReference(const Array& rhs) {return rhs.pData;}
 		//@}
 
 		//! \name Operators
@@ -134,6 +139,8 @@ namespace Storage
 		StoredType pData;
 
 	}; // class Array
+
+
 
 
 

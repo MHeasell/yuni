@@ -22,6 +22,7 @@ namespace Conversion
 	struct Allow
 	{
 		enum { allow = true };
+		static void swapPointer(Allow&) {}
 	};
 
 
@@ -40,7 +41,10 @@ namespace Conversion
 		Disallow(const Allow&) {}
 
 		enum { allow = false };
+
+		static void swapPointer(Disallow&) {}
 	};
+
 
 
 } // namespace Conversion
