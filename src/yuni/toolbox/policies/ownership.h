@@ -15,7 +15,7 @@
 
 
 # include "policies.h"
-# include "../policies/threads.h"
+# include "../policies/threading.h"
 # include "../static/assert.h"
 
 
@@ -40,16 +40,24 @@ namespace Ownership
 	class ReferenceCounted
 	{
 	public:
+		enum
+		{
+			//! Get if the ownership policy is destructive
+			destructiveCopy = false
+		};
+	public:
 		//! \name Constructors
 		//@{
 		//! Default constructor
 		ReferenceCounted()
 			:pCount(new unsigned int(1))
 		{}
+		
 		//! Copy constructor
 		ReferenceCounted(const ReferenceCounted& c)
 			:pCount(c.pCount)
 		{}
+
 		//! Copy constructor for any king of template parameter
 		template<typename U> ReferenceCounted(const ReferenceCounted<U>& c)
 			:pCount(reinterpret_cast<const ReferenceCounted&>(c).pCount)
@@ -69,7 +77,7 @@ namespace Ownership
 		/*!
 		** \brief Release the reference
 		*/
-		bool release(const T& rhs)
+		bool release(const T&)
 		{
 			if (!(--(*pCount)))
 			{
@@ -80,6 +88,8 @@ namespace Ownership
 			return false;
 		}
 
+		void swapPointer(ReferenceCounted& rhs) {std::swap(pCount, rhs.pCount);}
+		
 	private:
 		//! The reference count
 		unsigned int* pCount;
@@ -97,6 +107,13 @@ namespace Ownership
 	template<class T>
 	class COMReferenceCounted
 	{
+	public:
+		enum
+		{
+			//! Get if the ownership policy is destructive
+			destructiveCopy = false
+		};
+
 	public:
 		//! \name Constructors
 		//@{
@@ -129,6 +146,8 @@ namespace Ownership
 			return false;
 		}
 
+		static void swapPointer(COMReferenceCounted& rhs) {}
+
 	}; // class COMReferenceCounted
 
 
@@ -142,7 +161,13 @@ namespace Ownership
 	class ReferenceCountedMT
 	{
 	public:
-		typedef Policy::ClassLevelLockable< ReferenceCountedMT<T> >::MutexLocker  MutexLocker; 
+		enum
+		{
+			//! Get if the ownership policy is destructive
+			destructiveCopy = false
+		};
+
+		typedef typename Policy::ClassLevelLockable< ReferenceCountedMT<T> >  ThreadingPolicy; 
 	public:
 		//! \name Constructors
 		//@{
@@ -153,15 +178,15 @@ namespace Ownership
 		//! Copy constructor
 		ReferenceCountedMT(const ReferenceCountedMT& c)
 		{
-			MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker locker(*this);
 			pCount = c.pCount;
 		}
 		//! Copy constructor for any king of template parameter
 		template<typename U> ReferenceCountedMT(const ReferenceCountedMT<U>& c)
 		{
-			MutexLocker locker1(*this);
-			Policy::ClassLevelLockable< ReferenceCountedMT<U> >::MutexLocker locker2(*this);
-			pCount = reinterpret_cast<const ReferenceCounted&>(c).pCount;
+			typename ThreadingPolicy::MutexLocker locker1(*this);
+			typename Policy::ClassLevelLockable< ReferenceCountedMT<U> >::MutexLocker locker2(*this);
+			pCount = reinterpret_cast<const ReferenceCountedMT<T>&>(c).pCount;
 		}
 		//@}
 
@@ -171,7 +196,7 @@ namespace Ownership
 		*/
 		T clone(const T& rhs)
 		{
-			MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker locker(*this);
 			++(*pCount);
 			return rhs;
 		}
@@ -179,9 +204,9 @@ namespace Ownership
 		/*!
 		** \brief Release the reference
 		*/
-		bool release(const T& rhs)
+		bool release(const T&)
 		{
-			MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker locker(*this);
 			if (!(--(*pCount)))
 			{
 				delete pCount;
@@ -191,9 +216,16 @@ namespace Ownership
 			return false;
 		}
 
+		void swapPointer(ReferenceCountedMT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker locker2(rhs);
+			std::swap(pCount, rhs.pCount);
+		}
+
 	private:
 		//! The reference count
-		ThreadingPolicy::Volatile<unsigned int>::Type* pCount;
+		typename ThreadingPolicy::template Volatile<unsigned int>::Type* pCount;
 
 	}; // class ReferenceCountedMT
 
@@ -208,6 +240,13 @@ namespace Ownership
 	template<class T>
 	class DestructiveCopy
 	{
+	public:
+		enum
+		{
+			//! Get if the ownership policy is destructive
+			destructiveCopy = true
+		};
+
 	public:
 		//! \name Constructors
 		//@{
@@ -230,6 +269,10 @@ namespace Ownership
 			return result;
 		}
 
+		static bool release(const T&) {return true;}
+
+		static void swapPointer(DestructiveCopy& rhs) {}
+
 	}; // class DestructiveCopy
 
 
@@ -243,6 +286,13 @@ namespace Ownership
 	template<class T>
 	class NoCopy
 	{
+	public:
+		enum
+		{
+			//! Get if the ownership policy is destructive
+			destructiveCopy = false
+		};
+
 	public:
 		//! \name Constructors
 		//@{
@@ -263,6 +313,8 @@ namespace Ownership
 		}
 
 		static bool release(const T&) {return true;}
+
+		static void swapPointer(NoCopy& rhs) {}
 
 	}; // class NoCopy
 

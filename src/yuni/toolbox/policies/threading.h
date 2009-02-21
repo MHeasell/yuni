@@ -48,7 +48,7 @@ namespace Policy
 		/*!
 		** \brief A volative type
 		*/
-		template<typename T = Host> struct Volatile { typedef T Type; };
+		template<typename U> struct Volatile { typedef U Type; };
 
 	public:
 		//! \name Constructor & Destructor
@@ -88,7 +88,7 @@ namespace Policy
 		/*!
 		** \brief A volative type
 		*/
-		template<typename T = Host> struct Volatile { typedef volatile T Type; };
+		template<typename U> struct Volatile { typedef volatile U Type; };
 
 	public:
 		//! \name Constructor & Destructor
@@ -131,7 +131,7 @@ namespace Policy
 		/*!
 		** \brief A volative type
 		*/
-		template<typename T = Host> struct Volatile { typedef volatile T Type; };
+		template<typename U> struct Volatile { typedef volatile U Type; };
 
 	public:
 		//! \name Constructor & Destructor
