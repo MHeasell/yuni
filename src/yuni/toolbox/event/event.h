@@ -5,8 +5,7 @@
 # include <list>
 # include <set>
 # include "../../yuni.h"
-# include "../smartptr/sharedptr.h"
-# include "../policies/threading.h"
+# include "../smartptr/smartptr.h"
 
 
 
@@ -129,7 +128,7 @@ namespace Event
 	class E0 : public Notifier
 	{
 	private:
-		typedef std::list< SharedPtr< Private::Events::It0 > >  ReceiverList;
+		typedef std::list< SmartPtr< Private::Events::It0 > >  ReceiverList;
 
 	public:
 		//! \name Constructor & Destructor
@@ -224,7 +223,7 @@ namespace Event
 	class E1 : public Notifier
 	{
 	private:
-		typedef typename std::list< SharedPtr< Private::Events::It1<T1> > >  ReceiverList;
+		typedef typename std::list< SmartPtr< Private::Events::It1<T1> > >  ReceiverList;
 
 	public:
 		//! \name Constructor & Destructor
@@ -321,7 +320,7 @@ namespace Event
 	class E2 : public Notifier
 	{
 	private:
-		typedef typename std::list< SharedPtr< Private::Events::It2<T1, T2> > >  ReceiverList;
+		typedef typename std::list< SmartPtr< Private::Events::It2<T1, T2> > >  ReceiverList;
 
 	public:
 		//! \name Constructor & Destructor
@@ -416,7 +415,7 @@ namespace Event
 	class E3 : public Notifier
 	{
 	private:
-		typedef typename std::list< SharedPtr< Private::Events::It3<T1, T2, T3> > >  ReceiverList;
+		typedef typename std::list< SmartPtr< Private::Events::It3<T1, T2, T3> > >  ReceiverList;
 
 	public:
 		//! \name Constructor & Destructor
@@ -511,7 +510,7 @@ namespace Event
 	class E4 : public Notifier
 	{
 	private:
-		typedef typename std::list< SharedPtr< Private::Events::It4<T1, T2, T3, T4> > >  ReceiverList;
+		typedef typename std::list< SmartPtr< Private::Events::It4<T1, T2, T3, T4> > >  ReceiverList;
 
 	public:
 		//! \name Constructor & Destructor
@@ -606,7 +605,7 @@ namespace Event
 	class E5 : public Notifier
 	{
 	private:
-		typedef typename std::list< SharedPtr< Private::Events::It5<T1, T2, T3, T4, T5> > >  ReceiverList;
+		typedef typename std::list< SmartPtr< Private::Events::It5<T1, T2, T3, T4, T5> > >  ReceiverList;
 
 	public:
 		//! \name Constructor & Destructor
@@ -701,7 +700,7 @@ namespace Event
 	class E6 : public Notifier
 	{
 	private:
-		typedef typename std::list< SharedPtr< Private::Events::It6<T1, T2, T3, T4, T5, T6> > >  ReceiverList;
+		typedef typename std::list< SmartPtr< Private::Events::It6<T1, T2, T3, T4, T5, T6> > >  ReceiverList;
 
 	public:
 		//! \name Constructor & Destructor
@@ -796,7 +795,7 @@ namespace Event
 	class E7 : public Notifier
 	{
 	private:
-		typedef typename std::list< SharedPtr< Private::Events::It7<T1, T2, T3, T4, T5, T6, T7> > >  ReceiverList;
+		typedef typename std::list< SmartPtr< Private::Events::It7<T1, T2, T3, T4, T5, T6, T7> > >  ReceiverList;
 
 	public:
 		//! \name Constructor & Destructor
@@ -891,7 +890,7 @@ namespace Event
 	class E8 : public Notifier
 	{
 	private:
-		typedef typename std::list< SharedPtr< Private::Events::It8<T1, T2, T3, T4, T5, T6, T7, T8> > >  ReceiverList;
+		typedef typename std::list< SmartPtr< Private::Events::It8<T1, T2, T3, T4, T5, T6, T7, T8> > >  ReceiverList;
 
 	public:
 		//! \name Constructor & Destructor
