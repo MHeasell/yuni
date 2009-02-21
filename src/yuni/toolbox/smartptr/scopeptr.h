@@ -17,12 +17,14 @@ namespace Yuni
 	** object pointed when it goes out of the scope.
 	**
 	** This class is not copyable
+	**
+	** \deprecated Use smart pointers instead
 	*/
 	template<typename T>
 	class ScopePtr
 	{
 	public:
-		ScopePtr(T* p = 0) :pPtr(p) {}
+		YUNI_DEPRECATED ScopePtr(T* p = 0) :pPtr(p) {}
 		~ScopePtr() { if (pPtr) delete pPtr; }
 
 		ScopePtr& operator = (T* rhs) { if (pPtr) delete pPtr; pPtr = rhs; }

@@ -13,6 +13,8 @@ namespace Yuni
 	** Shared pointers are objects which store pointers to dynamically allocated (heap) object
 	** They behave much like built-in C++ pointers except that they automatically delete the
 	** object pointed to at the appropriate time.
+	**
+	** \deprecated Use smart pointers instead
 	*/
 	template <class T>
 	class SharedPtr
@@ -25,9 +27,9 @@ namespace Yuni
 		//! \name Constructors & Destructor
 		//@{
 		//! Constructor with an optional value
-		SharedPtr(T* p = 0) :counter(0) {if (p) counter = new Counter(p);}
+		YUNI_DEPRECATED SharedPtr(T* p = 0) :counter(0) {if (p) counter = new Counter(p);}
 		//! Copy constructor
-		SharedPtr(const SharedPtr<T>& c) throw() {acquire(c.counter);}
+		YUNI_DEPRECATED SharedPtr(const SharedPtr<T>& c) throw() {acquire(c.counter);}
 		//! Destructor
 		~SharedPtr() {release();}
 		//@}
