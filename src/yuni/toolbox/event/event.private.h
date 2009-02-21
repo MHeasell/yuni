@@ -417,7 +417,7 @@ namespace Events
 	{
 	public:
 		RemoveIfIt0(const void* p) : o(p) {}
-		bool operator () (const SharedPtr< It0 >& i) const {return i->checkObj(o);}
+		bool operator () (const SmartPtr< It0 >& i) const {return i->checkObj(o);}
 
 	private:
 		const void* o;
@@ -429,7 +429,7 @@ namespace Events
 	{
 	public:
 		RemoveIfIt1(const void* p) : o(p) {}
-		bool operator () (const SharedPtr< It1<T1> >& i) const {return i->checkObj(o);}
+		bool operator () (const SmartPtr< It1<T1> >& i) const {return i->checkObj(o);}
 
 	private:
 		const void* o;
@@ -441,7 +441,7 @@ namespace Events
 	{
 	public:
 		RemoveIfIt2(const void* p) : o(p) {}
-		bool operator () (const SharedPtr< It2<T1,T2> >& i) const {return i->checkObj(o);}
+		bool operator () (const SmartPtr< It2<T1,T2> >& i) const {return i->checkObj(o);}
 
 	private:
 		const void* o;
@@ -452,7 +452,7 @@ namespace Events
 	{
 	public:
 		RemoveIfIt3(const void* p) : o(p) {}
-		bool operator () (const SharedPtr< It3<T1,T2,T3> >& i) const {return i->checkObj(o);}
+		bool operator () (const SmartPtr< It3<T1,T2,T3> >& i) const {return i->checkObj(o);}
 
 	private:
 		const void* o;
@@ -463,7 +463,7 @@ namespace Events
 	{
 	public:
 		RemoveIfIt4(const void* p) : o(p) {}
-		bool operator () (const SharedPtr< It4<T1,T2,T3,T4> >& i) const {return i->checkObj(o);}
+		bool operator () (const SmartPtr< It4<T1,T2,T3,T4> >& i) const {return i->checkObj(o);}
 
 	private:
 		const void* o;
@@ -474,7 +474,7 @@ namespace Events
 	{
 	public:
 		RemoveIfIt5(const void* p) : o(p) {}
-		bool operator () (const SharedPtr< It5<T1,T2,T3,T4,T5> >& i) const {return i->checkObj(o);}
+		bool operator () (const SmartPtr< It5<T1,T2,T3,T4,T5> >& i) const {return i->checkObj(o);}
 
 	private:
 		const void* o;
@@ -485,7 +485,7 @@ namespace Events
 	{
 	public:
 		RemoveIfIt6(const void* p) : o(p) {}
-		bool operator () (const SharedPtr< It6<T1,T2,T3,T4,T5,T6> >& i) const {return i->checkObj(o);}
+		bool operator () (const SmartPtr< It6<T1,T2,T3,T4,T5,T6> >& i) const {return i->checkObj(o);}
 
 	private:
 		const void* o;
@@ -496,7 +496,7 @@ namespace Events
 	{
 	public:
 		RemoveIfIt7(const void* p) : o(p) {}
-		bool operator () (const SharedPtr< It7<T1,T2,T3,T4,T5,T6,T7> >& i) const {return i->checkObj(o);}
+		bool operator () (const SmartPtr< It7<T1,T2,T3,T4,T5,T6,T7> >& i) const {return i->checkObj(o);}
 
 	private:
 		const void* o;
@@ -507,7 +507,7 @@ namespace Events
 	{
 	public:
 		RemoveIfIt8(const void* p) : o(p) {}
-		bool operator () (const SharedPtr< It8<T1,T2,T3,T4,T5,T6,T7,T8> >& i) const {return i->checkObj(o);}
+		bool operator () (const SmartPtr< It8<T1,T2,T3,T4,T5,T6,T7,T8> >& i) const {return i->checkObj(o);}
 
 	private:
 		const void* o;
