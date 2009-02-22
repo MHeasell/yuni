@@ -1,6 +1,9 @@
 #ifndef __YUNI_SYSTEM_OS_DETECTION_H__
 # define __YUNI_SYSTEM_OS_DETECTION_H__
 
+/* !!! "C compatibility" header !!! */
+
+
 /*!
 ** \brief Operating System / Capabilities Auto-Detection
 **

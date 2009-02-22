@@ -60,6 +60,12 @@ Set(SRC_TOOLBOX_SMARTPTR
 				)
 source_group(ToolBox\\SmartPtr FILES ${SRC_TOOLBOX_SMARTPTR})
 
+Set(SRC_TOOLBOX_TREE_N
+				toolbox/tree/treeN.h  toolbox/tree/treeN.hxx
+				)
+source_group(ToolBox\\Tree FILES ${SRC_TOOLBOX_TREE_N})
+
+
 
 Set(SRC_TOOLBOX_EVENT
 				toolbox/event/event.h toolbox/event/event.cpp
@@ -204,6 +210,7 @@ Add_Library(yuni-static-core STATIC
 			${SRC_TOOLBOX_VARIANT}
 			${SRC_TOOLBOX_POLICIES}
 			${SRC_TOOLBOX_SMARTPTR}
+			${SRC_TOOLBOX_TREE_N}
 			${SRC_TOOLBOX_EVENT} ${SRC_VERSION}
 			${SRC_TOOLBOX_MATH} ${SRC_TOOLBOX_GETOPT} ${SRC_TOOLBOX_FS}
 			${SRC_TOOLBOX_HASH_CHECKSUM} ${SRC_TOOLBOX_HASH}

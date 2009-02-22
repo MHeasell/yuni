@@ -150,6 +150,20 @@ namespace Toolbox
 		typedef SmartPtr<Node, Policy::Ownership::ReferenceCounted>    PtrSingleThreaded;
 		//! Pointer to a node
 		typedef typename Static::If<ThreadingPolicy::threadSafe, PtrThreadSafe, PtrSingleThreaded>::ResultType Ptr;
+
+		//! The Storage policy
+		typedef typename Ptr::StoragePolicy    StoragePolicy;
+		//! The Ownership policy
+		typedef typename Ptr::OwnershipPolicy  OwnershipPolicy;
+		//! The conversion policy
+		typedef typename Ptr::ConversionPolicy ConversionPolicy;
+		//! The checking policy
+		typedef typename Ptr::CheckingPolicy   CheckingPolicy;
+		//! The Constness policy
+		typedef typename Ptr::ConstnessPolicy  ConstnessPolicy;
+		//! The tracking policy
+		typedef typename Ptr::TrackingPolicy   TrackingPolicy;
+
 		//! Size
 		typedef unsigned int SizeType;
 		//! Size (signed)
