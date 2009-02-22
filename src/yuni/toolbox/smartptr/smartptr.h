@@ -2,6 +2,8 @@
 # define __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_H__
 
 # include "../../yuni.h"
+# include <list>
+# include <vector>
 # include "../policies/policies.h"
 # include "../static/if.h"
 # include "../static/moveconstructor.h"
@@ -177,6 +179,11 @@ namespace Yuni
 
 		//! The Type to use for the copy constructor
 		typedef typename Static::If<OwnershipPolicy::destructiveCopy, SmartPtrType, const SmartPtrType>::ResultType  CopyType;
+
+		//! Vector
+		typedef std::vector<SmartPtrType>  Vector;
+		//! List
+		typedef std::list<SmartPtrType>  List;
 
 		//@} // alias
 
