@@ -50,6 +50,9 @@ namespace Policy
 		*/
 		template<typename U> struct Volatile { typedef U Type; };
 
+		//! Get if this policy is thread-safe
+		enum { threadSafe = false };
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -89,6 +92,9 @@ namespace Policy
 		** \brief A volative type
 		*/
 		template<typename U> struct Volatile { typedef volatile U Type; };
+
+		//! Get if this policy is thread-safe
+		enum { threadSafe = true };
 
 	public:
 		//! \name Constructor & Destructor
@@ -132,6 +138,9 @@ namespace Policy
 		** \brief A volative type
 		*/
 		template<typename U> struct Volatile { typedef volatile U Type; };
+
+		//! Get if this policy is thread-safe
+		enum { threadSafe = true };
 
 	public:
 		//! \name Constructor & Destructor
