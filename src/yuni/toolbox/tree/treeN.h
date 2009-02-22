@@ -4,6 +4,7 @@
 # include "../../yuni.h"
 # include <list>
 # include <vector>
+# include <stack>
 # include "../static/if.h"
 # include "../smartptr/smartptr.h"
 
@@ -129,25 +130,40 @@ namespace Toolbox
 	**
 	** \note When manipulating nodes, always prefer to use the `Ptr` typedef.
 	**
+	** \note Any checking policy might be used (passed to the smart pointer).
+	**       However, we want to be able to have NULL pointers.
+	**
+	** \note This implementation will be more efficient when handling large dataset,
+	**       and in a multithreaded context.
+	**
 	**
 	** \tparam T The real type of the tree class
-	** \tparam TP The threading policy
-	**
+	** \tparam TP The Threading policy
+	** \tparam ChckP  The Checking policy
+	** \tparam TrckP  The Tracking policy
+	** \tparam ConvP  The Conversion policy
 	*/
-	template<class T, template<class> class TP = Policy::ObjectLevelLockable>
+	template<class T,                                                // The original type
+		template<class> class TP     = Policy::ObjectLevelLockable,  // The threading policy
+		template <class> class ChckP = Policy::Checking::None,       // Checking policy
+		template <class> class TrckP = Policy::Tracking::None,       // Tracking policy
+		class ConvP			         = Policy::Conversion::Allow     // Conversion policy
+		>
 	class TreeN : public TP< TreeN<T,TP> >
 	{
 	public:
-		//! The threading policy
-		typedef TP< TreeN<T,TP> >  ThreadingPolicy;
 		//! The real type
 		typedef T Type;
 		//! Node
-		typedef TreeN<T,TP> Node;
+		typedef TreeN<T,TP,ChckP,TrckP,ConvP> Node;
+
+		//! The threading policy
+		typedef TP<Node>  ThreadingPolicy;
+
 		//! A thread-safe node type 
-		typedef SmartPtr<Node, Policy::Ownership::ReferenceCountedMT>  PtrThreadSafe;
-		//! A standard node type
-		typedef SmartPtr<Node, Policy::Ownership::ReferenceCounted>    PtrSingleThreaded;
+		typedef SmartPtr<Node, Policy::Ownership::ReferenceCountedMT,ChckP,TrckP,ConvP>  PtrThreadSafe;
+		//! A default node type
+		typedef SmartPtr<Node, Policy::Ownership::ReferenceCounted,ChckP,TrckP,ConvP>    PtrSingleThreaded;
 		//! Pointer to a node
 		typedef typename Static::If<ThreadingPolicy::threadSafe, PtrThreadSafe, PtrSingleThreaded>::ResultType Ptr;
 
@@ -164,6 +180,11 @@ namespace Toolbox
 		//! The tracking policy
 		typedef typename Ptr::TrackingPolicy   TrackingPolicy;
 
+		//! A const Pointer
+		typedef typename Ptr::ConstSmartPtrType ConstPtr;
+		//! A non-const pointer
+		typedef typename Ptr::NonConstSmartPtrType NonConstPtr;
+
 		//! Size
 		typedef unsigned int SizeType;
 		//! Size (signed)
@@ -173,6 +194,13 @@ namespace Toolbox
 		typedef std::vector<Ptr>  Vector;
 		//! A list of nodes (std::list)
 		typedef std::list<Ptr>    List;
+
+		// iterators
+		class iterator;
+
+		# include "treeN.iterator.def.h"
+		# include "treeN.iterator.h"
+		# include "treeN.iterator.undef.h"
 
 	public:
 		//! \name Constructors & Destructor
@@ -225,6 +253,7 @@ namespace Toolbox
 		void push_back(Ptr& node);
 		void push_back(T* node);
 
+
 		/*!
 		** \brief Append a child node at the begining
 		** \param node The new child node
@@ -269,30 +298,11 @@ namespace Toolbox
 		//@{
 
 		//! Return iterator to the first child of the node
-		//iterator  begin();
+		iterator  begin() {return iterator(pFirstChild);}
+		const iterator  begin() const {return iterator(pFirstChild);}
 		//! Return iterator to the last child of the node
-		//iterator  end();
-
-		//! Return leaf iterator to the first leaf
-		//traversal_iterator  begin_traversal();
-		//! Return leaf iterator to the last leaf
-		//traversal_iterator  end_traversal();
-
-		//! Return leaf iterator to the first leaf
-		//leaf_iterator  begin_leaf();
-		//! Return leaf iterator to the last leaf
-		//leaf_iterator  end_leaf();
-
-
-		//! Return sibling iterator to the first sibling
-		//sibling_iterator begin_sibling();
-		//! Return sibling end iterator the last sibling
-		//sibling_iterator end_sibling();
-
-		//! Return fixed-depth iterator
-		//depth_iterator begin_depth(const SizeType d);
-		//! Return fixed-depth iterator
-		//depth_iterator end_depth(const SizeType d);
+		iterator  end() {return iterator();}
+		const iterator  end() const {return iterator();}
 
 	
 		/*!
@@ -323,14 +333,26 @@ namespace Toolbox
 		/*!
 		** \brief Get the first child
 		*/
-		Ptr& firstChild() {return pFirstChild;}
-		const Ptr& firstChild() const {return pFirstChild;}
+		Ptr firstChild() {return pFirstChild;}
+		const Ptr firstChild() const {return pFirstChild;}
 
 		/*!
 		** \brief Get the last child
 		*/
-		Ptr& lastChild() {return pLastChild;}
-		const Ptr& lastChild() const {return pLastChild;}
+		Ptr lastChild() {return pLastChild;}
+		const Ptr lastChild() const {return pLastChild;}
+
+		/*!
+		** \brief Get the previous sibling
+		*/
+		Ptr previousSibling() {return pPreviousSibling;}
+		const Ptr previousSibling() const {return pPreviousSibling;}
+
+		/*!
+		** \brief Get the next sibling
+		*/
+		Ptr nextSibling() {return pNextSibling;}
+		const Ptr nextSibling() const {return pNextSibling;}
 
 		//@}
 		
@@ -478,7 +500,7 @@ namespace Toolbox
 		**
 		** Should only be used for debugging purposes only
 		*/
-		std::ostream& print(std::ostream& out, const unsigned int level = 0);
+		std::ostream& print(std::ostream& out, const bool recursive = true, const unsigned int level = 0);
 
 		
 
@@ -533,7 +555,6 @@ namespace Toolbox
 		//! The last child
 		Ptr pLastChild;
 
-	
 	private:
 		/*!
 		** \brief Remove a child without any real checks

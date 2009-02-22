@@ -8,15 +8,17 @@ namespace Yuni
 namespace Toolbox
 {
 
-	template<class T, template<class> class TP>
-	inline TreeN<T,TP>::TreeN()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline TreeN<T,TP,ChckP,TrckP,ConvP>::TreeN()
 		:pParent(), pHaveParent(false), pChildrenCount(0)
 	{}
 
 
 
-	template<class T, template<class> class TP>
-	inline TreeN<T,TP>::~TreeN()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline TreeN<T,TP,ChckP,TrckP,ConvP>::~TreeN()
 	{
 		// The node should be detached as soon as possible to avoid
 		// any operation on it
@@ -26,46 +28,52 @@ namespace Toolbox
 	}
 
 
-	template<class T, template<class> class TP>
-	inline bool TreeN<T,TP>::empty()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline bool TreeN<T,TP,ChckP,TrckP,ConvP>::empty()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return (0 == pChildrenCount);
 	}
 	
 
-	template<class T, template<class> class TP>
-	inline bool TreeN<T,TP>::leaf()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline bool TreeN<T,TP,ChckP,TrckP,ConvP>::leaf()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return (0 == pChildrenCount);
 	}
 
 
-	template<class T, template<class> class TP>
-	inline typename TreeN<T,TP>::SizeType TreeN<T,TP>::count()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline typename TreeN<T,TP,ChckP,TrckP,ConvP>::SizeType TreeN<T,TP,ChckP,TrckP,ConvP>::count()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return pChildrenCount;
 	}
 		
-	template<class T, template<class> class TP>
-	inline typename TreeN<T,TP>::SizeType TreeN<T,TP>::size()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline typename TreeN<T,TP,ChckP,TrckP,ConvP>::SizeType TreeN<T,TP,ChckP,TrckP,ConvP>::size()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return pChildrenCount;
 	}
 
-	template<class T, template<class> class TP>
-	inline void TreeN<T,TP>::detachFromParent()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline void TreeN<T,TP,ChckP,TrckP,ConvP>::detachFromParent()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		if (pHaveParent)
 			detachFromParentWL();
 	}
 
-	template<class T, template<class> class TP>
-	inline void TreeN<T,TP>::detachFromParentWL()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline void TreeN<T,TP,ChckP,TrckP,ConvP>::detachFromParentWL()
 	{
 		// Remove the reference from the parent
 		pParent->internalRemoveChild(*this);
@@ -77,8 +85,9 @@ namespace Toolbox
 	}
 
 
-	template<class T, template<class> class TP>
-	inline void TreeN<T,TP>::parent(TreeN<T,TP>::Ptr& newParent)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline void TreeN<T,TP,ChckP,TrckP,ConvP>::parent(TreeN<T,TP,ChckP,TrckP,ConvP>::Ptr& newParent)
 	{
 		detachFromParent();
 		newParent->push_back(this);
@@ -86,15 +95,17 @@ namespace Toolbox
 
 	
 	
-	template<class T, template<class> class TP>
-	inline bool TreeN<T,TP>::internalRemoveChild(Node& node)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline bool TreeN<T,TP,ChckP,TrckP,ConvP>::internalRemoveChild(Node& node)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return internalRemoveChildWL(node);
 	}
 	
-	template<class T, template<class> class TP>
-	bool TreeN<T,TP>::internalRemoveChildWL(Node& node)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	bool TreeN<T,TP,ChckP,TrckP,ConvP>::internalRemoveChildWL(Node& node)
 	{
 		if (!node.pPreviousSibling)
 		{
@@ -122,8 +133,9 @@ namespace Toolbox
 	}
 
 
-	template<class T, template<class> class TP>
-	inline bool TreeN<T,TP>::remove(TreeN<T,TP>::Ptr& node)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline bool TreeN<T,TP,ChckP,TrckP,ConvP>::remove(TreeN<T,TP,ChckP,TrckP,ConvP>::Ptr& node)
 	{
 		return (node->parent() == *this) ? internalRemoveChild(*node) : false;
 	}
@@ -133,9 +145,10 @@ namespace Toolbox
 
 	
 
-	template<class T, template<class> class TP>
-	typename TreeN<T,TP>::Ptr
-	TreeN<T,TP>::findFromIndexWL(const typename TreeN<T,TP>::SizeType index)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	typename TreeN<T,TP,ChckP,TrckP,ConvP>::Ptr
+	TreeN<T,TP,ChckP,TrckP,ConvP>::findFromIndexWL(const typename TreeN<T,TP,ChckP,TrckP,ConvP>::SizeType index)
 	{
 		if (index < pChildrenCount)
 		{
@@ -170,18 +183,20 @@ namespace Toolbox
 
 	
 
-	template<class T, template<class> class TP>
-	inline typename TreeN<T,TP>::Ptr
-	TreeN<T,TP>::find(const typename TreeN<T,TP>::SizeType index)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline typename TreeN<T,TP,ChckP,TrckP,ConvP>::Ptr
+	TreeN<T,TP,ChckP,TrckP,ConvP>::find(const typename TreeN<T,TP,ChckP,TrckP,ConvP>::SizeType index)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return findFromIndexWL(index);
 	}
 
 	
-	template<class T, template<class> class TP>
-	inline typename TreeN<T,TP>::Ptr
-	TreeN<T,TP>::find(const typename TreeN<T,TP>::SignedSizeType index)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline typename TreeN<T,TP,ChckP,TrckP,ConvP>::Ptr
+	TreeN<T,TP,ChckP,TrckP,ConvP>::find(const typename TreeN<T,TP,ChckP,TrckP,ConvP>::SignedSizeType index)
 	{
 		if (index >= 0)
 		{
@@ -193,9 +208,10 @@ namespace Toolbox
 
 
 
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	inline bool
-	TreeN<T,TP>::remove(const typename TreeN<T,TP>::SizeType index)
+	TreeN<T,TP,ChckP,TrckP,ConvP>::remove(const typename TreeN<T,TP,ChckP,TrckP,ConvP>::SizeType index)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		Ptr* p = findFromIndexWL(index);
@@ -204,9 +220,10 @@ namespace Toolbox
 
 
 	
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	inline bool
-	TreeN<T,TP>::remove(const typename TreeN<T,TP>::SignedSizeType index)
+	TreeN<T,TP,ChckP,TrckP,ConvP>::remove(const typename TreeN<T,TP,ChckP,TrckP,ConvP>::SignedSizeType index)
 	{
 		if (index >= 0)
 		{
@@ -219,24 +236,25 @@ namespace Toolbox
 
 
 	
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	void
-	TreeN<T,TP>::internalDetachFromParentWithoutNotify()
+	TreeN<T,TP,ChckP,TrckP,ConvP>::internalDetachFromParentWithoutNotify()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		if (pHaveParent)
-		{
-			// Removing our references to the parent
-			pHaveParent = false;
-			pParent = NULL;
-			pPreviousSibling = NULL;
-			pNextSibling = NULL;
-		}
+		// Removing all our children before
+		clearWL();
+		// Removing our references to the parent
+		pHaveParent = false;
+		pParent = NULL;
+		pPreviousSibling = NULL;
+		pNextSibling = NULL;
 	}
 
 
-	template<class T, template<class> class TP>
-	void TreeN<T,TP>::clear()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	void TreeN<T,TP,ChckP,TrckP,ConvP>::clear()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		if (pChildrenCount)
@@ -244,33 +262,48 @@ namespace Toolbox
 	}
 
 
-	template<class T, template<class> class TP>
-	void TreeN<T,TP>::clearWL()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	void TreeN<T,TP,ChckP,TrckP,ConvP>::clearWL()
 	{
-		Node* it = Ptr::ExtractPointer(pFirstChild);
-		while (NULL != it)
 		{
-			it->internalDetachFromParentWithoutNotify();
-			it = Ptr::ExtractPointer(it->pNextSibling);
+			std::stack<Ptr> queue;
+
+			// Getting a copy of the list of all children
+			const iterator end;
+			for (iterator i = begin(); i != end; ++i)
+				queue.push(*i);
+
+			// Now we have a copy of the list, we can safely removing our links
+			// with out children
+
+			while (!queue.empty())
+			{
+				queue.top()->internalDetachFromParentWithoutNotify();
+				queue.pop();
+			}
 		}
+
 		pLastChild = NULL;
 		pFirstChild = NULL;
 		pChildrenCount = 0;
 	}
 
 
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	inline void
-	TreeN<T,TP>::append(typename TreeN<T,TP>::Ptr& node)
+	TreeN<T,TP,ChckP,TrckP,ConvP>::append(typename TreeN<T,TP,ChckP,TrckP,ConvP>::Ptr& node)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		pushBackWL(node);
 	}
 
 
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	inline void
-	TreeN<T,TP>::append(T* node)
+	TreeN<T,TP,ChckP,TrckP,ConvP>::append(T* node)
 	{
 		Ptr tmp(node);
 		typename ThreadingPolicy::MutexLocker locker(*this);
@@ -278,18 +311,20 @@ namespace Toolbox
 	}
 
 
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	inline void
-	TreeN<T,TP>::push_back(T* node)
+	TreeN<T,TP,ChckP,TrckP,ConvP>::push_back(T* node)
 	{
 		Ptr tmp(node);
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		pushBackWL(tmp);
 	}
 
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	inline void
-	TreeN<T,TP>::push_front(T* node)
+	TreeN<T,TP,ChckP,TrckP,ConvP>::push_front(T* node)
 	{
 		Ptr tmp(node);
 		typename ThreadingPolicy::MutexLocker locker(*this);
@@ -297,15 +332,20 @@ namespace Toolbox
 	}
 
 
-	template<class T, template<class> class TP>
-	inline void TreeN<T,TP>::push_back(Ptr& node)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline void
+	TreeN<T,TP,ChckP,TrckP,ConvP>::push_back(Ptr& node)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		pushBackWL(node);
 	}
 
-	template<class T, template<class> class TP>
-	void TreeN<T,TP>::pushBackWL(Ptr& node)
+
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	void
+	TreeN<T,TP,ChckP,TrckP,ConvP>::pushBackWL(Ptr& node)
 	{
 		if (!pChildrenCount)
 		{
@@ -328,16 +368,20 @@ namespace Toolbox
 
 
 
-	template<class T, template<class> class TP>
-	inline void TreeN<T,TP>::push_front(Ptr& node)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline void
+	TreeN<T,TP,ChckP,TrckP,ConvP>::push_front(Ptr& node)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		pushFrontWL(node);
 	}
 
 
-	template<class T, template<class> class TP>
-	void TreeN<T,TP>::pushFrontWL(Ptr& node)
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	void
+	TreeN<T,TP,ChckP,TrckP,ConvP>::pushFrontWL(Ptr& node)
 	{
 		if (!pChildrenCount)
 		{
@@ -359,24 +403,27 @@ namespace Toolbox
 
 
 
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	inline void
-	TreeN<T,TP>::printBeginWL(std::ostream& out, const unsigned int) const
+	TreeN<T,TP,ChckP,TrckP,ConvP>::printBeginWL(std::ostream& out, const unsigned int) const
 	{
 		out << "<node>";
 	}
 
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	inline void
-	TreeN<T,TP>::printEndWL(std::ostream& out, const unsigned int) const
+	TreeN<T,TP,ChckP,TrckP,ConvP>::printEndWL(std::ostream& out, const unsigned int) const
 	{
 		out << "</node>";
 	}
 
 
-	template<class T, template<class> class TP>
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
 	std::ostream&
-	TreeN<T,TP>::print(std::ostream& out, const unsigned int level)
+	TreeN<T,TP,ChckP,TrckP,ConvP>::print(std::ostream& out, const bool recursive, const unsigned int level)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		for (unsigned int i = 0; i < level; ++i)
@@ -384,14 +431,11 @@ namespace Toolbox
 		printBeginWL(out, level);
 		out << "\n";
 
-		if (pChildrenCount)
+		if (recursive && pChildrenCount)
 		{
-			Node* it = Ptr::ExtractPointer(pFirstChild);
-			while (NULL != it)
-			{
-				it->print(out, level + 1);
-				it = Ptr::ExtractPointer(it->pNextSibling);
-			}
+			const iterator end;
+			for (iterator i = begin(); i != end; ++i)
+				i->print(out, true, level + 1);
 		}
 
 		for (unsigned int i = 0; i < level; ++i)
@@ -402,16 +446,18 @@ namespace Toolbox
 	}
 
 
-	template<class T, template<class> class TP>
-	inline bool TreeN<T,TP>::equals(const Ptr& node) const
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline bool TreeN<T,TP,ChckP,TrckP,ConvP>::equals(const Ptr& node) const
 	{
 		return (this == node);
 	}
 
 
-	template<class T, template<class> class TP>
-	typename TreeN<T,TP>::SizeType
-	TreeN<T,TP>::depth()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	typename TreeN<T,TP,ChckP,TrckP,ConvP>::SizeType
+	TreeN<T,TP,ChckP,TrckP,ConvP>::depth()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return (pHaveParent) ? (1 + pParent->depth()) : 0; 
@@ -420,29 +466,32 @@ namespace Toolbox
 
 
 
-	template<class T, template<class> class TP>
-	typename TreeN<T,TP>::SizeType
-	TreeN<T,TP>::treeHeight()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	typename TreeN<T,TP,ChckP,TrckP,ConvP>::SizeType
+	TreeN<T,TP,ChckP,TrckP,ConvP>::treeHeight()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		if (!pChildrenCount)
 			return 0;
 		SizeType d = 0;
-		Node* it = Ptr::ExtractPointer(pFirstChild);
-		while (NULL != it)
+
+		const iterator end;
+		for (iterator i = begin(); i != end; ++i)
 		{
-			SizeType nd = it->treeHeight();
+			SizeType nd = i->treeHeight();
 			if (nd > d)
 				d = nd;
-			it = Ptr::ExtractPointer(it->pNextSibling);
 		}
+
 		return d + 1;
 	}
 
 
 
-	template<class T, template<class> class TP>
-	void TreeN<T,TP>::bringToFront()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	void TreeN<T,TP,ChckP,TrckP,ConvP>::bringToFront()
 	{
 		// Locking
 		typename ThreadingPolicy::MutexLocker locker(*this);
@@ -460,8 +509,10 @@ namespace Toolbox
 	}
 
 
-	template<class T, template<class> class TP>
-	void TreeN<T,TP>::sendToBack()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	void
+	TreeN<T,TP,ChckP,TrckP,ConvP>::sendToBack()
 	{
 		// Locking
 		typename ThreadingPolicy::MutexLocker locker(*this);
@@ -479,15 +530,20 @@ namespace Toolbox
 	}
 
 
-	template<class T, template<class> class TP>
-	inline void TreeN<T,TP>::invalidate()
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline void
+	TreeN<T,TP,ChckP,TrckP,ConvP>::invalidate()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		invalidateWL();
 	}
 
-	template<class T, template<class> class TP>
-	inline bool TreeN<T,TP>::isInvalidated()
+
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline bool
+	TreeN<T,TP,ChckP,TrckP,ConvP>::isInvalidated()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return isInvalidatedWL();

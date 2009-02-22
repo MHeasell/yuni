@@ -170,6 +170,10 @@ namespace Yuni
 
 		//! Alias to itself
 		typedef SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP> SmartPtrType;
+		//! A smart pointer with a const pointer
+		typedef SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,Policy::Constness::PropagateConst> ConstSmartPtrType;
+		//! A smart pointer with a non-const pointer
+		typedef SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,Policy::Constness::DontPropagateConst> NonConstSmartPtrType;
 
 		//! The Type to use for the copy constructor
 		typedef typename Static::If<OwnershipPolicy::destructiveCopy, SmartPtrType, const SmartPtrType>::ResultType  CopyType;
