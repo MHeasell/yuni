@@ -62,6 +62,8 @@ source_group(ToolBox\\SmartPtr FILES ${SRC_TOOLBOX_SMARTPTR})
 
 Set(SRC_TOOLBOX_TREE_N
 				toolbox/tree/treeN.h  toolbox/tree/treeN.hxx
+				toolbox/tree/treeN.iterator.def.h  toolbox/tree/treeN.iterator.undef.h
+				toolbox/tree/treeN.iterator.h
 				)
 source_group(ToolBox\\Tree FILES ${SRC_TOOLBOX_TREE_N})
 
