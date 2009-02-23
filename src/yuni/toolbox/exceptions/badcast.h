@@ -16,7 +16,7 @@ namespace Exceptions
 	** \brief Is thrown in case of impossible cast from one type to another.
 	** \ingroup Exceptions
 	**
-	** \see Variant
+	** \see Any
 	*/
 	struct BadCast : public std::bad_cast
 	{

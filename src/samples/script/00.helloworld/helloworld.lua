@@ -9,10 +9,12 @@ end
 
 function callMeOnly()
 	print "callMeOnly() called, successful.";
+	return 1;
 end
 
 function callMeWithArg(arg, arg2)
 	print ("callMeWithArg() called with arg " .. arg .. " and " .. arg2 .. " successful.");
+	return 1, 2, 3;
 end
 
 function callBar()

@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_VARIANT_VARIANT_PRIVATE_H__
-#define __YUNI_TOOLBOX_VARIANT_VARIANT_PRIVATE_H__
+#ifndef __YUNI_TOOLBOX_ANY_ANY_PRIVATE_H__
+#define __YUNI_TOOLBOX_ANY_ANY_PRIVATE_H__
 
 #include "../static/types.h"
 
@@ -8,19 +8,19 @@ namespace Yuni
 namespace Private
 {
 /*!
-** \brief Variant implementation details
+** \brief Any implementation details
 **
-** This namespace stores a big part of the actual Variant
+** This namespace stores a big part of the actual Any
 ** implementation, in particular the Static Function Pointer
 ** Table Polymorphism Pattern (SFPTPP) implementation.
 */
-namespace Variant
+namespace Any
 {
 
 	/*!
 	** \brief Static function pointer table
 	**
-	** All the operations done on Variant storage objects are done via
+	** All the operations done on Any storage objects are done via
 	** the functions currently defined in pTable. Depending on the size of the object,
 	** this member may use different approachs to store the data.
 	** This function table defines the function pointers to the different operations.
@@ -134,14 +134,14 @@ namespace Variant
     };
 
 	/*!
-	** \brief Variant type for an empty Variant.
+	** \brief Any type for an empty Any.
 	*/
     struct Empty {
     };
 
-} // namespace Variant
+} // namespace Any
 } // namespace Private
 } // namespace Yuni
 
 
-#endif /* !__YUNI_TOOLBOX_VARIANT_VARIANT_PRIVATE_H__ */
+#endif /* !__YUNI_TOOLBOX_ANY_ANY_PRIVATE_H__ */
