@@ -1,10 +1,10 @@
-#ifndef __YUNI_TOOLBOX_VARIANT_VARIANT_H__
-#define __YUNI_TOOLBOX_VARIANT_VARIANT_H__
+#ifndef __YUNI_TOOLBOX_ANY_VARIANT_H__
+#define __YUNI_TOOLBOX_ANY_VARIANT_H__
 
 # include "../../yuni.h"
 # include "../exceptions/badcast.h"
 # include "../string.h"
-# include "variant.private.h"
+# include "any.private.h"
 
 
 
@@ -12,30 +12,30 @@ namespace Yuni
 {
 
 	/*!
-	** \brief Classic Variant type implementation.
+	** \brief Classic Any type implementation.
 	** \ingroup Toolbox
 	**
 	** This is a relatively classic, yet (i hope) fast implementation of
-	** a Variant type.
+	** a Any type.
 	**
 	** How to use:
 	** \code
-	** Variant v(3.14);
+	** Any v(3.14);
 	**
 	** if (v.is<double>())
-	**   // Be sure to check the type before, otherwise Variant will throw an exception.
+	**   // Be sure to check the type before, otherwise Any will throw an exception.
 	**   std::cout << v.cast<double>();
 	** \endcode
 	*/
-	class Variant
+	class Any
 	{
 	public:
 		/*!
-		** \brief Swaps a variant with another
-		** \param[in,out] one Variant 1
-		** \param[in,out] other Variant 2
+		** \brief Swaps a any with another
+		** \param[in,out] one Any 1
+		** \param[in,out] other Any 2
 		*/
-		static void Swap(Variant& one, Variant& other);
+		static void Swap(Any& one, Any& other);
 
 
 	public:
@@ -44,32 +44,32 @@ namespace Yuni
 
 		//! Copy of an existing variable
 		template <typename T>
-		Variant(const T& source);
+		Any(const T& source);
 
 		//! Copy of an existing const C string
-		Variant(const char* source)
+		Any(const char* source)
 		{ initFromCString(source); }
 
 		//! Copy of an existing const C wide string
-		Variant(const wchar_t* source)
+		Any(const wchar_t* source)
 		{ initFromCString(source); }
 
 		//! Copy of an existing const C string
-		Variant(char* source)
+		Any(char* source)
 		{ initFromCString(source); }
 
 		//! Copy of an existing const C wide string
-		Variant(wchar_t* source)
+		Any(wchar_t* source)
 		{ initFromCString(source); }
 
 		//! Empty constructor
-		Variant();
+		Any();
 
 		//! Copy constructor
-		Variant(const Variant& rhs);
+		Any(const Any& rhs);
 
 		//! Destructor
-		~Variant();
+		~Any();
 
 		//@}
 
@@ -78,47 +78,47 @@ namespace Yuni
 		//@{
 
 		/*!
-		** \brief Assignment from another Variant
-		** \param[in] rhs The Variant to assign from
-		** \return This Variant
+		** \brief Assignment from another Any
+		** \param[in] rhs The Any to assign from
+		** \return This Any
 		*/
-		Variant& assign(const Variant& rhs);
+		Any& assign(const Any& rhs);
 
 		/*!
 		** \brief Assignment from any object, with any storage type.
 		** \param[in] rhs The object to assign from
-		** \return This Variant
+		** \return This Any
 		*/
 		template <typename T, typename U>
-		Variant& assign(const T& rhs);
+		Any& assign(const T& rhs);
 
 		/*!
 		** \brief Specialized assign for simple types.
 		*/
 		template <typename T>
-		Variant& assign(const T& rhs)
+		Any& assign(const T& rhs)
 		{ return assign<T, T>(rhs); }
 
 		/*!
 		** \brief Specialized assign for C Strings.
 		*/
-		Variant& assign(const char* rhs)
+		Any& assign(const char* rhs)
 		{ return assign<const char*, String>(rhs); }
 
 		/*!
 		** \brief Specialized assign for C Wide Strings.
 		*/
-		Variant& assign(const wchar_t* rhs)
+		Any& assign(const wchar_t* rhs)
 		{ return assign<const wchar_t*, String>(rhs); }
 
 		/*!
 		** \brief Assignment operator for convenience
 		*/
 		template <typename T>
-		Variant& operator = (T const& rhs) {return assign(rhs);}
+		Any& operator = (T const& rhs) {return assign(rhs);}
 
 		/*!
-		** \brief Resets the Variant to an empty state.
+		** \brief Resets the Any to an empty state.
 		*/
 		void reset();
 
@@ -143,11 +143,11 @@ namespace Yuni
 
 
 		/*!
-		** \brief Checks if the variant has been assigned a value.
-		** \return True if the variant contains no value.
+		** \brief Checks if the any has been assigned a value.
+		** \return True if the any contains no value.
 		*/
 		bool empty() const
-		{ return pTable == Private::Variant::Table<Private::Variant::Empty>::Get(); }
+		{ return pTable == Private::Any::Table<Private::Any::Empty>::Get(); }
 
 		//@}
 
@@ -155,7 +155,7 @@ namespace Yuni
 		//@{
 
 		/*!
-		** \brief Casts the Variant to the T type. Throws a Yuni::Exceptions::BadCast
+		** \brief Casts the Any to the T type. Throws a Yuni::Exceptions::BadCast
 		** if not possible.
 		** \return A T object.
 		*/
@@ -172,7 +172,7 @@ namespace Yuni
 
 	private:
 		//! Static function pointer table storage
-		Private::Variant::TypeManipulationTable * pTable;
+		Private::Any::TypeManipulationTable * pTable;
 
 		//! Object storage.
 		void* pObject;
@@ -183,8 +183,8 @@ namespace Yuni
 
 } // namespace Yuni
 
-# include "variant.hxx"
+# include "any.hxx"
 
-#endif /* !__YUNI_TOOLBOX_VARIANT_H__ */
+#endif /* !__YUNI_TOOLBOX_ANY_H__ */
 
 

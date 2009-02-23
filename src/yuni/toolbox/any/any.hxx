@@ -1,13 +1,13 @@
-#ifndef __YUNI_TOOLBOX_VARIANT_VARIANT_HXX__
-#define __YUNI_TOOLBOX_VARIANT_VARIANT_HXX__
+#ifndef __YUNI_TOOLBOX_ANY_ANY_HXX__
+#define __YUNI_TOOLBOX_ANY_ANY_HXX__
 
 namespace Yuni
 {
 
 	template <typename T>
-	Variant::Variant(const T& source)
+	Any::Any(const T& source)
 	{
-		pTable = Private::Variant::Table<T>::Get();
+		pTable = Private::Any::Table<T>::Get();
 		if (sizeof(T) <= sizeof(void*))
 			new (&pObject) T(source);
 		else
@@ -15,10 +15,10 @@ namespace Yuni
 	}
 
 	template <typename T, typename U>
-	Variant& Variant::assign(const T& rhs)
+	Any& Any::assign(const T& rhs)
 	{
 		// Are we copying between the same type of variants ?
-		Private::Variant::TypeManipulationTable* rhsTable = Private::Variant::Table<U>::Get();
+		Private::Any::TypeManipulationTable* rhsTable = Private::Any::Table<U>::Get();
 
 		if (pTable == rhsTable)
 		{
@@ -59,7 +59,7 @@ namespace Yuni
 	}
 
 	template <typename T>
-	const T& Variant::to() const
+	const T& Any::to() const
 	{
 		if (type() != typeid(T))
 			throw Exceptions::BadCast(type(), typeid(T));
@@ -71,9 +71,9 @@ namespace Yuni
 	}
 
 	template <typename T>
-	void Variant::initFromCString(T source)
+	void Any::initFromCString(T source)
 	{
-		pTable = Private::Variant::Table<String>::Get();
+		pTable = Private::Any::Table<String>::Get();
 		if (sizeof(String) <= sizeof(void*))
 			new (&pObject) String(source);
 		else
@@ -82,6 +82,6 @@ namespace Yuni
 
 }
 
-#endif /* !__YUNI_TOOLBOX_VARIANT_VARIANT_HXX__ */
+#endif /* !__YUNI_TOOLBOX_ANY_ANY_HXX__ */
 
 

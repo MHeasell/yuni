@@ -37,12 +37,12 @@ Set(SRC_TOOLBOX_STL
 				toolbox/stl/algorithm.h)
 source_group(ToolBox\\Stl FILES ${SRC_TOOLBOX_STL})
 
-Set(SRC_TOOLBOX_VARIANT
-				toolbox/variant.h
-				toolbox/variant/variant.h
-				toolbox/variant/variant.hxx
-				toolbox/variant/variant.cpp)
-source_group(ToolBox\\Variant FILES ${SRC_TOOLBOX_VARIANT})
+Set(SRC_TOOLBOX_ANY
+				toolbox/any.h
+				toolbox/any/any.h
+				toolbox/any/any.hxx
+				toolbox/any/any.cpp)
+source_group(ToolBox\\Any FILES ${SRC_TOOLBOX_ANY})
 
 Set(SRC_TOOLBOX_POLICIES
 				toolbox/policies/threading.h
@@ -209,7 +209,7 @@ Add_Library(yuni-static-core STATIC
 			${SRC_TOOLBOX_URI}
 			${SRC_TOOLBOX_EXCEPTIONS}
 			${SRC_TOOLBOX_STL}
-			${SRC_TOOLBOX_VARIANT}
+			${SRC_TOOLBOX_ANY}
 			${SRC_TOOLBOX_POLICIES}
 			${SRC_TOOLBOX_SMARTPTR}
 			${SRC_TOOLBOX_TREE_N}

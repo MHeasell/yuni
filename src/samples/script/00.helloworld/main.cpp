@@ -6,9 +6,11 @@
 #include <iostream>
 #include <yuni/script.h>
 
-namespace {
-	bool bar(Yuni::Script::AScript*, const Yuni::Variant& arg1)
-	{ // Prints two integers
+namespace
+{
+	bool bar(Yuni::Script::AScript*, const Yuni::Any& arg1)
+	{
+		// Prints two integers
 		if (arg1.is<int>())
 			std::cout << "Hi, i'm bar(). Here is 1 integer: " << arg1.to<int>() << std::endl;
 	 	return true;
@@ -23,13 +25,15 @@ int main()
 
 	// Load a hello world script
 	if (!sc->loadFromFile("helloworld.lua"))
-	{ // An error has occured.
+	{
+		// An error has occured.
 		// TODO: We must be able to determinate exactly what prevented the script loading.
 		std::cout << "[EE] Error while loading script." << std::endl;
 	}
 
 	if (!sc->appendFromString("foo();"))
-	{ // An error has occured.
+	{
+		// An error has occured.
 		// TODO: We must be able to determinate exactly what prevented the script loading.
 		std::cout << "[EE] Error while loading string script." << std::endl;
 	}
@@ -37,12 +41,11 @@ int main()
 	sc->call(NULL, "foo");
 
 	if (!sc->appendFromString("print(\"Pyo !\");"))
-	{ // An error has occured.
+	{
+		// An error has occured.
 		// TODO: We must be able to determinate exactly what prevented the script loading.
 		std::cout << "[EE] Error while loading string script." << std::endl;
 	}
-
-
 
 	// Run it again, just to see ?
 	sc->prepare();
@@ -51,7 +54,7 @@ int main()
 	sc->prepare();
 
 	// Declare a variant to store the call results
-	Yuni::Variant ret;
+	Yuni::Any ret;
 
 	// Then call a function.
 	if (!sc->call(&ret, "callMeOnly"))
@@ -65,12 +68,10 @@ int main()
 
 	// Then call a function with one argument, for example a String
 	if (!sc->call(&ret, "callMeWithArg", "Hello, World !", 45.22432))
-		std::cout << "[EE] Error while calling callMeWithArg(\"Hello, World !\")" << std::endl;
+		std::cout << "[EE] Error while calling callMeWithArg(\"Hello, World !\", 45.22432)" << std::endl;
 
+	std::cout << "Got result of type " << ret.type().name() << std::endl;
 
-	// Test binding methods, with objects.
-	//Sample aSample;
-	//sc->bind("bar", &Sample::bar, &aSample);
 	if (!sc->bind("bar", &(bar)))
 		std::cout << "[EE] Error while binding ::bar()" << std::endl;
 	else
@@ -82,8 +83,6 @@ int main()
 		}
 
 	}
-
-
 
 	// Destroy the script object to release the resources.
 	delete sc;

@@ -22,13 +22,11 @@ namespace Script
 		luaL_openlibs(this->pProxy->pState);
 	}
 
-
 	Lua::~Lua()
 	{
 		lua_close(this->pProxy->pState);
 		delete this->pProxy;
 	}
-
 
 	void Lua::reset()
 	{
@@ -37,7 +35,6 @@ namespace Script
 		luaL_openlibs(this->pProxy->pState);
 		pEvalPending = 0;
 	}
-
 
 	/*
 	 * TODO: Use Events to emit proper signals.
@@ -71,7 +68,6 @@ namespace Script
 		}
 		return true;
 	}
-
 
 	bool Lua::appendFromString(const String& script)
 	{
@@ -123,7 +119,6 @@ namespace Script
 		return true;
 	}
 
-
 	bool Lua::prepare()
 	{
 		while (pEvalPending > 0)
@@ -140,25 +135,81 @@ namespace Script
 		return true;
 	}
 
-	int Lua::popReturnValues(int args)
+	int Lua::popReturnValues(int args, Any* poppedValues)
 	{
-		int popped = 0;
-		while (args > 0)
-		{
-		/*	if (lua_isboolean(pProxy->pState))
-			{
-		*/
-				
-			lua_pop(pProxy->pState, 1);
+		if (0 == args)
+			return 0;
 
-			std::cout << "Lua: popped a value" << std::endl;
-			++popped;
-			--args;
+		if (!poppedValues) /* We don't care, pop all values at once */
+		{
+			lua_pop(pProxy->pState, args);
+			return args;
 		}
+		
+		// We have only one value, output it directly.
+		if (1 == args)
+		{
+			Any& result = (*poppedValues);
+			switch (lua_type(pProxy->pState, lua_gettop(pProxy->pState)))
+			{
+				case LUA_TNIL:
+					result = Any(); /* Empty variant */
+					break;
+				case LUA_TNUMBER:
+					result = lua_tonumber(pProxy->pState, lua_gettop(pProxy->pState));
+					break;
+				case LUA_TBOOLEAN:
+					result = lua_toboolean(pProxy->pState, lua_gettop(pProxy->pState));
+					break;
+				case LUA_TSTRING:
+					result = lua_tostring(pProxy->pState, lua_gettop(pProxy->pState));
+					break;
+				case LUA_TLIGHTUSERDATA:
+					result = lua_tonumber(pProxy->pState, lua_gettop(pProxy->pState));
+					break;
+				default:
+					/* So we did not convert the result. Output an empty Any. */
+					result = Any();
+					std::cerr << "Lua: Return type not implemented." << std::endl;
+			}
+			lua_pop(pProxy->pState, 1);
+			return 1;
+		}
+
+		// We have multiple values, output a vector of these.
+		int popped = 1;
+		MultipleReturn result(args);
+		for (; popped <= args; ++popped)
+		{
+			switch (lua_type(pProxy->pState, lua_gettop(pProxy->pState)))
+			{
+				case LUA_TNIL:
+					result[args - popped] = Any(); /* Empty variant */
+					break;
+				case LUA_TNUMBER:
+					result[args - popped] = lua_tonumber(pProxy->pState, lua_gettop(pProxy->pState));
+					break;
+				case LUA_TBOOLEAN:
+					result[args - popped] = lua_toboolean(pProxy->pState, lua_gettop(pProxy->pState));
+					break;
+				case LUA_TSTRING:
+					result[args - popped] = lua_tostring(pProxy->pState, lua_gettop(pProxy->pState));
+					break;
+				case LUA_TLIGHTUSERDATA:
+					result[args - popped] = lua_tonumber(pProxy->pState, lua_gettop(pProxy->pState));
+					break;
+				default:
+					/* So we did not convert the result. Output an empty Any. */
+					result[args - popped] = Any();
+					std::cerr << "Lua: Return element " << args - popped << " type not implemented." << std::endl;
+			}
+			lua_pop(pProxy->pState, 1);
+		}
+		(*poppedValues) = result;
 		return popped;
 	}
 
-	bool Lua::push(const Variant &var)
+	bool Lua::push(const Any &var)
 	{
 		lua_checkstack(pProxy->pState, 1);
 		if (var.is<short>())
@@ -171,16 +222,16 @@ namespace Script
 			lua_pushinteger(pProxy->pState, var.to<int>());
 			return true;
 		}
+		if (var.is<String>()) /* String type encompasses also C Strings. See Any impl. */
+		{
+			const String &str = var.to<String>();
+			lua_pushlstring(pProxy->pState, str.c_str(), str.size());
+			return true;
+		}
 		if (var.is<std::string>())
 		{
 			const std::string &str = var.to<std::string>();
 			lua_pushlstring(pProxy->pState, str.c_str(), str.size());
-			return true;
-		}
-		if (var.is<char*>())
-		{
-			const char* str = var.to<char*>();
-			lua_pushlstring(pProxy->pState, str, strlen(str));
 			return true;
 		}
 		if (var.is<double>())
@@ -213,7 +264,7 @@ namespace Script
 	 * If the stack did not move, the method does not exist, so we bail out.
 	 *
 	 * Then, we push, via the _PUSH_ARG macro, every argument given to our
-	 * function (they are named argX by _X_VARIANTS macros).
+	 * function (they are named argX by _X_ANYS macros).
 	 *
 	 * Finally, we make the call and catch any errors with _PART2.
 	 *
@@ -224,7 +275,6 @@ namespace Script
 	\
 		if (pEvalPending && !this->prepare()) \
 			return false; /* A script runtime error occured while evaluating loaded chunks. */ \
-		(void)retValues; \
 		int argc = 0; \
 		int stackTop = lua_gettop(pProxy->pState); \
 		lua_getfield(pProxy->pState, LUA_GLOBALSINDEX, method.c_str()); \
@@ -237,7 +287,7 @@ namespace Script
 
 
 # define YUNI_SCRIPT_LUA_DEFINE_CALL_PART2 \
-		if (lua_pcall(pProxy->pState, argc, 1, 0) != 0) \
+		if (lua_pcall(pProxy->pState, argc, LUA_MULTRET, 0) != 0) \
 		{ \
 			size_t len; \
 			std::cout << lua_tolstring(pProxy->pState, lua_gettop(pProxy->pState), &len) << std::endl; \
@@ -246,7 +296,7 @@ namespace Script
 		} \
 		/* The call succeeded. Pop any values still hanging on the stack. */ \
 		stackPos = lua_gettop(pProxy->pState); \
-		this->popReturnValues(stackPos - stackTop); \
+		this->popReturnValues(stackPos - stackTop, retValues); \
 		return true; 
 
 
@@ -260,14 +310,14 @@ namespace Script
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 	}
 
-	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_1_VARIANT)
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_1_ANY)
 	{
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
 		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 	}
 
-	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_2_VARIANTS)
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_2_ANYS)
 	{
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
 		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
@@ -275,7 +325,7 @@ namespace Script
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 	}
 
-	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_3_VARIANTS)
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_3_ANYS)
 	{
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
 		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
@@ -284,7 +334,7 @@ namespace Script
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 	}
 
-	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_4_VARIANTS)
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_4_ANYS)
 	{
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
 		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
@@ -294,7 +344,7 @@ namespace Script
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 	}
 
-	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_5_VARIANTS)
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_5_ANYS)
 	{
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
 		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
@@ -306,7 +356,7 @@ namespace Script
 	}
 
 
-	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_6_VARIANTS)
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_6_ANYS)
 	{
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
 		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
@@ -318,7 +368,7 @@ namespace Script
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 	}
 
-	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_7_VARIANTS)
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_7_ANYS)
 	{
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
 		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
@@ -331,7 +381,7 @@ namespace Script
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 	}
 
-	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_8_VARIANTS)
+	YUNI_SCRIPT_SCRIPT_DEFINE_CALL_WITH(Lua, YUNI_SCRIPT_SCRIPT_8_ANYS)
 	{
 		YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
 		YUNI_SCRIPT_LUA_PUSH_ARG(arg1)
@@ -355,7 +405,7 @@ namespace Script
 	 * Warning: this function is ugly. Please avoid reading it. Or, if you're brave,
 	 * provide a work-around. Or, see it as Abstract Art.
 	 *
-	 * We have to call the function back with some Variants so that the function doesn't
+	 * We have to call the function back with some Anys so that the function doesn't
 	 * have to deal with Lua's stack. So, we must push on the lua stack a C closure that
 	 * is a proxy to the real callback. We push pointers to the essential data, along with
 	 * the number of arguments of the callback, in order to make the correct function call

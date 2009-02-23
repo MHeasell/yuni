@@ -70,14 +70,14 @@ namespace Script
 
 		// call()
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH();
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_1_VARIANT);
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_2_VARIANTS);
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_3_VARIANTS);
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_4_VARIANTS);
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_5_VARIANTS);
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_6_VARIANTS);
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_7_VARIANTS);
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_8_VARIANTS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_1_ANY);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_2_ANYS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_3_ANYS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_4_ANYS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_5_ANYS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_6_ANYS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_7_ANYS);
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_8_ANYS);
 
 		// bind()
 		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback0);
@@ -94,18 +94,21 @@ namespace Script
 	private:
 
 		/*!
-		** \brief Pops a number of values from the Lua stack and put them in a Variant.
+		** \brief Pops a number of values from the Lua stack and put them in a Any.
 		** \param[in] valuesToPop The number of values to pop
+		** \param[in] values A pointer on a variant that will contain either the only one
+		**                   popped value, or a vector containing all the popped value.
+		**                   Pass null if you do not care about the popped values.
 		** \return The number of values successfully popped and converted.
 		*/
-		int popReturnValues(int valuesToPop);
+		int popReturnValues(int valuesToPop, Any *values);
 
 		/*!
 		** \brief Pushes a variant on the Lua stack.
 		** \param[in] var the variant to push on the stack
 		** \return True if the variant was pushed, false if the variant was null.
 		*/
-		bool push(const Variant &var);
+		bool push(const Any &var);
 
 		/*!
 		** \brief Callback Proxy

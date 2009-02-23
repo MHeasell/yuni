@@ -4,7 +4,7 @@
 # include "../yuni.h"
 # include "../toolbox/string.h"
 # include "../toolbox/event.h"
-# include "../toolbox/variant.h"
+# include "../toolbox/any.h"
 
 // Defines complex macros used to declare call() and bind().
 # include "script.defines.h"
@@ -54,14 +54,14 @@ namespace Script
         */
 		//@{
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *), Callback0);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_1_VARIANT), Callback1);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_2_VARIANTS), Callback2);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_3_VARIANTS), Callback3);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_4_VARIANTS), Callback4);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_5_VARIANTS), Callback5);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_6_VARIANTS), Callback6);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_7_VARIANTS), Callback7);
-		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_8_VARIANTS), Callback8);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_1_ANY), Callback1);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_2_ANYS), Callback2);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_3_ANYS), Callback3);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_4_ANYS), Callback4);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_5_ANYS), Callback5);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_6_ANYS), Callback6);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_7_ANYS), Callback7);
+		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_8_ANYS), Callback8);
 		//@}
 
 
@@ -208,7 +208,7 @@ namespace Script
 		**			   values. You may pass NULL there if you do
 		**			   not wish to do anything with the return value.
 		** \param[in] method The method to call in the script namespace
-		** \param[in] arg1 The first argument (and so on.) You can pass Variant::Null as a
+		** \param[in] arg1 The first argument (and so on.) You can pass an empty Any as a
 		**			  value to mean the same thing as "nil" in Lua.
 		** \return True if the call was made without any runtime fatal error.
 		**
@@ -217,7 +217,7 @@ namespace Script
 		**
 		** \code
 		**
-		** Variant ret;
+		** Any ret;
 		** Script::AScript *sc = ...; 
 		** std::vector<int> intVector;
 		**
@@ -235,23 +235,23 @@ namespace Script
 		** \endcode
 		*/
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH() = 0;
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_1_VARIANT) = 0;
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_2_VARIANTS) = 0;
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_3_VARIANTS) = 0;
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_4_VARIANTS) = 0;
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_5_VARIANTS) = 0;
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_6_VARIANTS) = 0;
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_7_VARIANTS) = 0;
-		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_8_VARIANTS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_1_ANY) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_2_ANYS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_3_ANYS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_4_ANYS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_5_ANYS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_6_ANYS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_7_ANYS) = 0;
+		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_8_ANYS) = 0;
 
 
 		/*!
-		** \brief This family of function binds a C++ global function with 0 to 8 Yuni::Variant arguments in
+		** \brief This family of function binds a C++ global function with 0 to 8 Yuni::Any arguments in
 		** the lua namespace, with the (script namespace) name method.
         **
 		** \param[in] method The method name in the lua namespace
 		** \param[in] callback the callback function (a global function or a static method), taking an AScript* as first
-		**			  argument, and 0 to 8 Yuni::Variant arguments.
+		**			  argument, and 0 to 8 Yuni::Any arguments.
 		** \param[in] callbackData Not yet implemented. Will be any user data that you wish to pass as a context to callback().
 		** \return True if the function was successfully bound.
 		**
@@ -259,9 +259,9 @@ namespace Script
 		**
 		** \code
 		**
-		** bool myPrint(AScript *, const Variant &toPrint)
+		** bool myPrint(AScript *, const Any &toPrint)
 		** {
-		**	 if (toPrint.type() != Variant::vtCString)
+		**	 if (toPrint.type() != Any::vtCString)
 		**		return false;
 		**	 std::cout << toPrint << std::endl;
 		**	 return true;
@@ -299,6 +299,7 @@ namespace Script
 		typedef Event::E5<Language, const String& /* file */, unsigned int /* line */,
 			unsigned int /* position */, const String& /*errorString */> ScriptErrorEvent;
 
+
 		/*!
 		** \brief Event for script errors
 		**
@@ -308,6 +309,11 @@ namespace Script
 		ScriptErrorEvent scriptErrorEvent;
 
 	}; // class AScript
+
+	//! Type for multiple return values
+	typedef std::vector<Any> MultipleReturn;
+
+
 
 
 } // namespace Script

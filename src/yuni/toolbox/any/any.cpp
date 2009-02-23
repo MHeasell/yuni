@@ -1,32 +1,32 @@
 #include <algorithm>
-#include "variant.h"
+#include "any.h"
 
 
 namespace Yuni
 {
 
 
-	Variant::Variant()
+	Any::Any()
 	{
-		pTable = Private::Variant::Table<Private::Variant::Empty>::Get();
+		pTable = Private::Any::Table<Private::Any::Empty>::Get();
 		pObject = NULL;
 	}
 
 
-	Variant::Variant(const Variant& rhs)
+	Any::Any(const Any& rhs)
 	{
-		pTable = Private::Variant::Table<Private::Variant::Empty>::Get();
+		pTable = Private::Any::Table<Private::Any::Empty>::Get();
 		assign(rhs);
 	}
 
 
-	Variant::~Variant()
+	Any::~Any()
 	{
 		pTable->staticDelete(&pObject);
 	}
 
 
-	Variant& Variant::assign(const Variant& rhs)
+	Any& Any::assign(const Any& rhs)
 	{
 		// Are we copying from the same type (using the same table) ?
 		if (pTable == rhs.pTable)
@@ -44,19 +44,19 @@ namespace Yuni
 	}
 
 
-	void Variant::Swap(Variant& one, Variant& other)
+	void Any::Swap(Any& one, Any& other)
 	{
 		std::swap(one.pTable, other.pTable);
 		std::swap(one.pObject, other.pObject);
 	}
 
 
-	void Variant::reset()
+	void Any::reset()
 	{
 		if (!this->empty())
 		{
 			pTable->staticDelete(&pObject);
-			pTable = Private::Variant::Table<Private::Variant::Empty>::Get();
+			pTable = Private::Any::Table<Private::Any::Empty>::Get();
 			pObject = NULL;
 		}
 	}
