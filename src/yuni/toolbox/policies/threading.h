@@ -87,7 +87,7 @@ namespace Policy
 		private:
 			Host& pHostToLock;
 		}; // class MutexLocker
-		
+
 		/*!
 		** \brief A volative type
 		*/
@@ -133,7 +133,7 @@ namespace Policy
 			template<class C> MutexLocker(C&) {Mutex::ClassLevelLockable<Host>::mutex.lock();}
 			~MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.unlock();}
 		}; // class MutexLocker
-		
+
 		/*!
 		** \brief A volative type
 		*/

@@ -138,6 +138,18 @@ namespace Display
 		}
 
 # endif
+
+
+# ifdef YUNI_OS_WINDOWS
+
+		void refreshForWindows(MonitorsFound& lst)
+		{
+			//GetSystemMetrics();
+			//EnumMonitors
+		}
+
+# endif
+
 	} // anonymous namespace
 
 
@@ -174,6 +186,10 @@ namespace Display
 
 # ifdef YUNI_OS_MAC
 		refreshForCocoa(lst);
+# else
+#  ifdef YUNI_OS_WINDOWS
+		refreshForWindows(lst);
+#  endif
 # endif
 
 		for (MonitorsFound::iterator it = lst.begin(); it != lst.end(); ++it)

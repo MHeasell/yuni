@@ -2,7 +2,8 @@
 #ifndef __YUNI_GFX_OBJECT3D_H__
 # define __YUNI_GFX_OBJECT3D_H__
 
-# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/smartptr/smartptr.h"
+# include "../toolbox/tree/treeN.h"
 # include "skeleton.h"
 
 namespace Yuni
@@ -14,13 +15,10 @@ namespace Gfx
 	** \brief A 3D object is an abstract scene object
 	**
 	** It can contain other objects, and has a skeleton for its mesh
+	** It also has a shared "template" object storing every characteristic common with similar objects
 	*/
-	class Object3D
+	class Object3D: TreeN<Object3D>
 	{
-	public:
-		//! Type for Object list
-		typedef std::vector<SharedPtr<Object3D> > ObjectList;
-
 	public:
 		//! \name Constructors & Destructor
 		//@{
@@ -31,7 +29,7 @@ namespace Gfx
 		{}
 
 		//! Constructor with mesh initialization
-		Object3D(SharedPtr<Skeleton>& skeleton, Object3D* parent)
+		Object3D(SmartPtr<Skeleton>& skeleton, SmartPtr<Object3D>& parent)
 			: pParent(parent), pSkeleton(skeleton)
 		{}
 
@@ -44,33 +42,13 @@ namespace Gfx
 		//@{
 
 		/*!
-		** \brief Access to the object's children
-		**
-		** \return A reference to the object's children
-		*/
-		ObjectList& children()
-		{
-			return pChildren;
-		}
-
-		/*!
 		** \brief Access to the object's skeleton
 		**
 		** \return A smart pointer to the object's skeleton, can point to NULL
 		*/
-		const SharedPtr<Skeleton>& skeleton()
+		const SmartPtr<Skeleton>& skeleton()
 		{
 			return pSkeleton;
-		}
-
-		/*!
-		** \brief Add a child to the object
-		**
-		** \param child Child to add
-		*/
-		void addChild(Object3D& child)
-		{
-			pChildren.push_back(tri);
 		}
 
 		/*!
@@ -78,7 +56,7 @@ namespace Gfx
 		**
 		** \param newSkeleton Skeleton to use
 		*/
-		void setSkeleton(const SharedPtr<Skeleton>& newSkeleton)
+		void setSkeleton(const SmartPtr<Skeleton>& newSkeleton)
 		{
 			// No freeing of the old skeleton is necessary here
 			// Smart pointers should do that for us
@@ -88,13 +66,10 @@ namespace Gfx
 		//@}
 
 	protected:
-		Object3D* pParent;
-
-		//! The Object can contain other objects
-		ObjectList pChildren;
+		SmartPtr<Object3D> pParent;
 
 		//! The Skeleton for this object (contains the mesh)
-		SharedPtr<Skeleton> pSkeleton;
+		SmartPtr<Skeleton> pSkeleton;
 	};
 
 } // Gfx
