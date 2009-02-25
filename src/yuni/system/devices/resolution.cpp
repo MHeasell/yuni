@@ -14,7 +14,7 @@ namespace Display
 {
 
 	const uint32 Resolution::MinWidth  = 640;   // 640x480
-	const uint32 Resolution::MinHeight = 640;
+	const uint32 Resolution::MinHeight = 480;
 	const uint32 Resolution::MaxWidth  = 2560;  // 2560x2048
 	const uint32 Resolution::MaxHeight = 2048;
 

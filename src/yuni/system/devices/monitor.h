@@ -38,7 +38,7 @@ namespace Display
 		**
 		** This handle is system-dependant
 		** <ul>
-		**    <li>Mac OS : The equivalent is `CGDirectDisplayID`</li> 
+		**    <li>Mac OS : The equivalent is `CGDirectDisplayID`</li>
 		** </ul>
 		*/
 		typedef uint32  Handle;
@@ -67,10 +67,10 @@ namespace Display
 
 		//! Constructor by copy
 		Monitor(const Monitor& c);
-		
+
 		//! Destructor
 		virtual ~Monitor();
-		
+
 		//@}
 
 
@@ -119,7 +119,7 @@ namespace Display
 		** \brief Get all available resolutions for this screen
 		**
 		** The returned value is guaranteed to not be empty and to be
-		** a sorted descendant list. 
+		** a sorted descendant list.
 		*/
 		const Resolution::Vector& resolutions() const {return pResolutions;}
 
@@ -161,7 +161,7 @@ namespace Display
 		** \brief Add a new resolution in the list
 		**
 		** \param[in] r The resolution to add
-		** \internal It is a sorted descendant list. The first value must be the highest available value 
+		** \internal It is a sorted descendant list. The first value must be the highest available value
 		*/
 		void addResolution(SharedPtr<Resolution>& r);
 
@@ -172,7 +172,7 @@ namespace Display
 		String pName;
 		/*!
 		** \brief All resolutions
-		** \internal It is a sorted descendant list. The first value must be the highest available value 
+		** \internal It is a sorted descendant list. The first value must be the highest available value
 		*/
 		Resolution::Vector pResolutions;
 		//! Primary

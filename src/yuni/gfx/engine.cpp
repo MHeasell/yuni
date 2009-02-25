@@ -37,7 +37,7 @@ namespace Gfx
 
 
 	Engine::Engine()
-		:pDeviceIsInitialized(false)	
+		:pDeviceIsInitialized(false)
 	{
 		// Redirect all events
 		onFPSChanged.assign(&external3DEngine.onFPSChanged);

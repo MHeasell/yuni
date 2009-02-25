@@ -37,7 +37,7 @@
 **
 ** - BEOS
 ** YUNI_OS_BEOS
-** 
+**
 ** - DragonFLY
 ** YUNI_OS_DRAGONFLY
 **
@@ -165,7 +165,7 @@
 #	endif
 # endif /* BEOS */
 # endif /* Microsoft Windows */
- 
+
 
 
 
@@ -174,7 +174,7 @@
 #	define YUNI_OS_GCC
 #	define YUNI_OS_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
 # else
-#	define YUNI_OS_GCC_VERSION 0 
+#	define YUNI_OS_GCC_VERSION 0
 # endif
 
 /* Intel Compiler */
@@ -206,7 +206,7 @@
 #	endif
 # else
 #	define YUNI_EXPORT
-# endif 
+# endif
 
 
 
@@ -215,7 +215,7 @@
 # ifdef YUNI_OS_GCC
 #	define ALWAYS_INLINE  __attribute__((always_inline))
 # else
-#	define ALWAYS_INLINE 
+#	define ALWAYS_INLINE
 # endif
 
 
