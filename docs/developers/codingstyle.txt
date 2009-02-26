@@ -2,7 +2,7 @@
 GENERAL
 -------
 
-* Do not use Java coding style 
+* Do not use Java coding style
   GOOD :
   if ()
   {
@@ -24,7 +24,7 @@ GENERAL
 	source code                 .cpp
 	source code for template    .hxx
     Text files                  .txt
-  
+
 * Always leave at one space before and after operators
   GOOD
   if (a == 10 && b == 42)
@@ -44,17 +44,17 @@ GENERAL
   GOOD
   if (YUNI_I_CAN_PUSH_ON_THE_RED_BUTTON == foo)
      startThermoNuclearWar();
-  
+
 * Use the keyword `NULL` instead of `0` for pointers
 
 
 NAMING CONVENTION
-------
+-----------------
 
 * namespaces (camel case + begins with an upper case)
   GOOD :
   namespace HereIsANewNamespace {}
-  
+
 * Classes (camel case) :
   GOOD :
   class IAmAClass
@@ -80,17 +80,17 @@ NAMING CONVENTION
   int       pTest;
   int PTest;
 
-* Always prefer a variable name that say what the variable is used for
+* Always prefer a variable name that describes what the variable is used for
   GOOD
   if (hours < 24 && minutes < 60 && seconds < 60)
   BAD
   if (a < 24 && b < 60 && c < 60)
 
 * Macros and defines are all in uppercase
-  All Macros defined an exported header of yuni must have the prefix YUNI_
+  All Macros that define an exported header of yuni must have the prefix YUNI_
 
-* The symbol to indicate a pointer or a reference are sticked to the
-  type because they are part of it
+* The symbol to indicate a pointer or a reference must be sticked to the
+  type because it is part of it
   GOOD
   void foo(const String& s);
   BAD
@@ -135,7 +135,7 @@ COMMENTS
 
 
 BEST PRACTICES
-------------
+--------------
 
  * Prefer this test (for strings) :
       if (!s.empty())
@@ -156,7 +156,7 @@ BEST PRACTICES
     if (i == 42)
 
 * Don't put an else right after a return.
-  Delete the else, it's unnecessary and increases indentation level.
+  Delete the else, it's unnecessary and increases indent level.
   BAD :
   if (...)
      return;
@@ -167,7 +167,7 @@ BEST PRACTICES
   that we should expect to get a NULL value and in this case the NULL value
   has a meaning
 
-* Avoid as much as possible const char* or char*. Use Yuni::String instead 
+* Avoid as much as possible const char* or char*. Use Yuni::String instead
   for strings.
 
 * Avoid as much as possible all constructors by copy
@@ -180,7 +180,7 @@ BEST PRACTICES
 * Be Const Correct : Use and abuse the const keyword from the start. It is a
   nightmare to add it in later.
 
-* Don't place using namespace directive in headers
+* Don't place "using namespace" directives in headers
 
 * Prefer inlines to macros. In C++ macros are not needed for code efficiency
 
@@ -188,3 +188,4 @@ BEST PRACTICES
 
 * Avoid as much as possible Copy constructor for Return Values. Use reference instead.
 
+* Compile time is without incidence. Increasing compile time to reduce execution time (e.g. with templates) is encouraged.
