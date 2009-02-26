@@ -70,7 +70,7 @@ namespace Display
 			return value;
 		}
 
-		void cocoaGetAllAvailableModesUseful(CGDirectDisplayID display, SharedPtr<OrderedResolutions>& res) 
+		void cocoaGetAllAvailableModesUseful(CGDirectDisplayID display, SharedPtr<OrderedResolutions>& res)
 		{
 			// get a list of all possible display modes for this system.
 			CFArrayRef availableModes = CGDisplayAvailableModes(display);
@@ -142,10 +142,57 @@ namespace Display
 
 # ifdef YUNI_OS_WINDOWS
 
+		void windowsGetMonitorResolutions(HDC device, SharedPtr<OrderedResolutions>& res)
+		{
+			int width = GetDeviceCaps(device, HORZRES);
+			int height = GetDeviceCaps(device, VERTRES);
+			int colorDepth = GetDeviceCaps(hMonitorDC, BITSPIXEL) * GetDeviceCaps(hMonitorDC, PLANES);
+			res
+		}
+
+		/*!
+		** \brief Callback for the EnumDisplayMonitors call
+		*/
+		BOOL CALLBACK EnumMonitorsCallback(HMONITOR handle, HDC context, LPRECT rect, LPARAM data)
+		{
+			// Get information about the monitor
+			MONITORINFOEX info;
+			info.cbSize = sizeof(MONITORINFOEX);
+			if (!GetMonitorInfo(handle, &info))
+				// If this failed the rest probably won't work, give up
+				return false;
+
+			HDC monitorDC = CreateDC("DISPLAY", info.szDevice, NULL, NULL);
+			// for Win98:
+			// CreateDC(NULL, info.szDevice, NULL, NULL);
+
+			if (monitorDC)
+			{
+				SharedPtr<OrderedResolutions> res(new OrderedResolutions());
+				windowsGetMonitorResolutions(monitorDC, res);
+				DeleteDC(monitorDC);
+			}
+
+			bool mainDisplay = (flags & MONITORINFOF_PRIMARY);
+			// Create the new monitor
+			SharedPtr<Monitor> newMonitor(new Monitor("", (Monitor::Handle)displayArray[i], mainDisplay, true, true));
+			// Add the monitor and its resolutions to the list
+			lst.push_back(SingleMonitorFound(newMonitor, res));
+			return true;
+		}
+
+		/*!
+		** \brief Windows-specific implementation for the monitor / resolution list refresh
+		*/
 		void refreshForWindows(MonitorsFound& lst)
 		{
-			//GetSystemMetrics();
-			//EnumMonitors
+			// First get the number of monitors we should be expecting
+			const int numMonitors = GetSystemMetrics(SM_CMONITORS);
+			if (numMonitors > YUNI_DEVICE_MAX_DISPLAYS)
+				// TODO: This is quite rough, something prettier should be done
+				return;
+			// Enumerate on handles to _all_ the monitors, InfoCallback is called for each handle
+			EnumDisplayMonitors(NULL, NULL, EnumMonitorsCallback, reinterpret_cast<LPARAM>(lst));
 		}
 
 # endif
