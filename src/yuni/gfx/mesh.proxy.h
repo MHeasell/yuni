@@ -3,7 +3,7 @@
 
 # include <vector>
 # include "triangle.h"
-# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/smartptr/smartptr.h"
 
 
 
@@ -22,7 +22,7 @@ namespace Gfx
 	class ProxyMesh
 	{
 	protected:
-		typedef std::vector<Yuni::SharedPtr<Yuni::Gfx::Triangle> > TriangleList;
+		typedef std::vector<Yuni::SmartPtr<Yuni::Gfx::Triangle> > TriangleList;
 
 	public:
 		//! Virtual destructor

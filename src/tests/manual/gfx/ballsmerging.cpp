@@ -108,7 +108,7 @@ private:
 		surf.addSubSurface(pMetaball2);
 
 		// Create a mesh using marchingcubes with an isovalue of 0.05, and a 2.0 mesh size
-		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 2.5f);
+		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 1.0f);
 		if (!mesh2)
 			throw std::runtime_error("Polygonization failed.");
 

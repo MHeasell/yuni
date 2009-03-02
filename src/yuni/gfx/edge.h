@@ -21,9 +21,9 @@ namespace Gfx
 	{
 	public:
 		//! Vector of Edges
-		typedef std::vector< SharedPtr<Edge> >  Vector;
+		typedef std::vector< SmartPtr<Edge> >  Vector;
 		//! List of Edges
-		typedef std::list< SharedPtr<Edge> >  List;
+		typedef std::list< SmartPtr<Edge> >  List;
 
 	public:
 		//! \name Constructors and destructors

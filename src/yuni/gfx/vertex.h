@@ -5,7 +5,7 @@
 # include "point3D.h"
 # include "vector3D.h"
 # include "../toolbox/string.h"
-# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/smartptr/smartptr.h"
 
 
 
@@ -90,7 +90,7 @@ namespace Gfx
 
 	private:
 		//! List of edges
-		typedef std::vector< SharedPtr<Edge> > EdgeList;
+		typedef std::vector< SmartPtr<Edge> > EdgeList;
 
 	private:
 		//! Edges linked to this vertex

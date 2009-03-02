@@ -13,9 +13,8 @@ namespace Gfx
 {
 namespace Irrlicht
 {
-	
 
-	
+
 
 	class VertexWithIndex
 	{
@@ -61,7 +60,7 @@ namespace Irrlicht
 			{
 				// The vertex does not exist in the list
 				hash[key] = VertexWithIndex(index, vertex);
-				indices[index] = index; 
+				indices[index] = index;
 			}
 			else
 				// The vertex already exists in the list
@@ -110,7 +109,7 @@ namespace Irrlicht
 		/*
 		for (uint32 i = 0; i < nbTriangles * 3 && count < nbTriangles * 3; ++i)
 		{
-			const Yuni::Gfx::Vertex& vertex = (i % 3 == 0) 
+			const Yuni::Gfx::Vertex& vertex = (i % 3 == 0)
 				? triangles[i % 3]->vertex1()
 				: ((i % 3 == 1)
 				   ? triangles[i % 3]->vertex2()
@@ -122,7 +121,7 @@ namespace Irrlicht
 			{
 				hashTab[key] = count;
 				hashVertices[key] = vertex;
-				indices[i] = count; 
+				indices[i] = count;
 				++count;
 			}
 		}
