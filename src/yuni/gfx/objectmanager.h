@@ -2,6 +2,7 @@
 #ifndef __YUNI_GFX_OBJECTMANAGER_H__
 # define __YUNI_GFX_OBJECTMANAGER_H__
 
+# include "../toolbox/hash/table.h"
 # include "../toolbox/smartptr/smartptr.h"
 
 namespace Yuni
