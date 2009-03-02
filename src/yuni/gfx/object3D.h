@@ -17,20 +17,20 @@ namespace Gfx
 	** It can contain other objects, and has a skeleton for its mesh
 	** It also has a shared "template" object storing every characteristic common with similar objects
 	*/
-	class Object3D: TreeN<Object3D>
+	class Object3D: public Toolbox::TreeN<Object3D>
 	{
 	public:
 		//! \name Constructors & Destructor
 		//@{
 
 		//! Default Constructor
-		Object3D(Object3D* parent = NULL)
-		: pParent(parent)
+		Object3D()
+		  : pID(0)
 		{}
 
 		//! Constructor with mesh initialization
-		Object3D(SmartPtr<Skeleton>& skeleton, SmartPtr<Object3D>& parent)
-			: pParent(parent), pSkeleton(skeleton)
+		Object3D(SmartPtr<Skeleton>& skeleton)
+		  : pID(0), pSkeleton(skeleton)
 		{}
 
 		//! Default Destructor
@@ -63,10 +63,16 @@ namespace Gfx
 			pSkeleton = newSkeleton;
 		}
 
+		uint32 ID()
+		{
+			return pID;
+		}
+
 		//@}
 
 	protected:
-		SmartPtr<Object3D> pParent;
+		//! Unique identifier for this object (type can still change)
+		uint32 pID;
 
 		//! The Skeleton for this object (contains the mesh)
 		SmartPtr<Skeleton> pSkeleton;

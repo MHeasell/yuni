@@ -15,13 +15,13 @@ namespace Gfx
 
 	SmartPtr<ObjectManager> ObjectManager::Instance()
 	{
-		return SmartPtr<ObjectManager>(globalEngine);
+		return SmartPtr<ObjectManager>(objectManager);
 	}
 
 
 	void ObjectManager::registerObject(SmartPtr<Object3D>& obj)
 	{
-		pObjects.
+		pObjects[obj->ID()] = obj;
 	}
 
 
