@@ -68,7 +68,7 @@ namespace Gfx
 		// Create the mesh from the triangle list
 		Mesh* mesh = new Mesh();
 		for (TriangleList::const_iterator it = triangles.begin(); it != triangles.end(); ++it)
-			mesh->addTriangle(SharedPtr<Triangle>(*it));
+			mesh->addTriangle(SmartPtr<Triangle>(*it));
 		delete visited;
 		return mesh;
 	}

@@ -1,6 +1,7 @@
 #ifndef __YUNI_GFX_TRIANGLE_H__
 # define __YUNI_GFX_TRIANGLE_H__
 
+# include "../toolbox/smartptr/smartptr.h"
 # include "edge.h"
 # include "vector3D.h"
 
@@ -83,13 +84,13 @@ namespace Gfx
 		*/
 		void calculateEdges()
 		{
-			pEdges.push_back(SharedPtr<Edge>(new Edge(pVertex1, pVertex2)));
-			pEdges.push_back(SharedPtr<Edge>(new Edge(pVertex2, pVertex3)));
-			pEdges.push_back(SharedPtr<Edge>(new Edge(pVertex3, pVertex1)));
+			pEdges.push_back(SmartPtr<Edge>(new Edge(pVertex1, pVertex2)));
+			pEdges.push_back(SmartPtr<Edge>(new Edge(pVertex2, pVertex3)));
+			pEdges.push_back(SmartPtr<Edge>(new Edge(pVertex3, pVertex1)));
 		}
 
 	private:
-		typedef std::vector<SharedPtr<Edge> > EdgeList;
+		typedef std::vector<SmartPtr<Edge> > EdgeList;
 
 	private:
 		//! Vertices

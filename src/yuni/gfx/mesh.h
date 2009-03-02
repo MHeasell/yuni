@@ -2,7 +2,7 @@
 #ifndef __YUNI_GFX_MESH_H__
 # define __YUNI_GFX_MESH_H__
 
-# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/smartptr/smartptr.h"
 # include "triangle.h"
 # include "mesh.proxy.h"
 
@@ -22,7 +22,7 @@ namespace Gfx
 	{
 	public:
 		//! Type for Triangle list
-		typedef std::vector<SharedPtr<Triangle> > TriangleList;
+		typedef std::vector<SmartPtr<Triangle> > TriangleList;
 
 	public:
 		//! Main Constructor
@@ -37,7 +37,7 @@ namespace Gfx
 		**
 		** \param tri Triangle to add
 		*/
-		void addTriangle(const SharedPtr<Triangle>& tri)
+		void addTriangle(const SmartPtr<Triangle>& tri)
 		{
 			pTriangles.push_back(tri);
 		}

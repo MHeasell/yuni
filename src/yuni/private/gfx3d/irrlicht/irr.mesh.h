@@ -31,7 +31,7 @@ namespace Irrlicht
 		virtual void update(const TriangleList& triangles);
 
 	private:
-		typedef std::vector<Yuni::SharedPtr<Yuni::Gfx::Triangle> > TriangleList;
+		typedef std::vector<Yuni::SmartPtr<Yuni::Gfx::Triangle> > TriangleList;
 
 		//! The Irrlicht mesh
 		irr::scene::SMesh* pIrrMesh;
