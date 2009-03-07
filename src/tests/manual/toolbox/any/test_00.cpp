@@ -41,7 +41,7 @@ void simpleTest()
 	cout << "expecting q     : "; char c = 'q'; outputAny(c, cout);
 	cout << "expecting 3.14  : "; double d = 3.14; outputAny(d, cout);
 	cout << "expecting (1,2) : "; complex<int> x(1,2); outputAny(x, cout);
-	cout << "expecting piko  : "; char * s = "piko"; outputAny(s, cout);
+	cout << "expecting piko  : "; const char * s = "piko"; outputAny(s, cout);
 
 	Yuni::Any a;
 	cout << "expecting 42    : "; outputAny(a = n, cout);
