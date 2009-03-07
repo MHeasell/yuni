@@ -1,7 +1,7 @@
 #ifndef __YUNI_TOOLBOX_STATIC_ASSERT_H__
 # define __YUNI_TOOLBOX_STATIC_ASSERT_H__
 
-# include "../defines.h"
+# include "../preprocessor/std.h"
 
 
 
