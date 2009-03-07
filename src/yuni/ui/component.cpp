@@ -12,7 +12,7 @@ namespace UI
 
 
 	AComponent::AComponent()
-		:Event::Receiver(), pState(csReady), pName()
+		:pState(csReady), pName()
 	{}
 
 
@@ -39,7 +39,7 @@ namespace UI
 		pState = csDestroying;
 
 		// Disconnect all notifiers
-		disconnectAllNotifiersWL();
+		destroyingObserver();
 
 		return true;
 	}

@@ -21,7 +21,7 @@ namespace Application
 
 
 	Gfx3D::Gfx3D(int argc, char* argv[])
-		:AApplication(argc, argv), Event::Receiver(), device()
+		:AApplication(argc, argv), device()
 	{
 		Gfx::Engine::Instance()->applicationTitle("Loading");
 		atexit(&GracefullyStopTheEngine);
@@ -31,7 +31,7 @@ namespace Application
 	Gfx3D::~Gfx3D()
 	{
 		// Ensures all notifiers are not linked with this class
-		this->disconnectAllNotifiers();
+		destroyingObserver();
 	}
 
 	

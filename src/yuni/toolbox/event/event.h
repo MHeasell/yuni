@@ -1,11 +1,13 @@
 #ifndef __YUNI_TOOLBOX_EVENT_EVENT_H__
 # define __YUNI_TOOLBOX_EVENT_EVENT_H__
 
-# include <algorithm>
-# include <list>
-# include <set>
 # include "../../yuni.h"
-# include "../smartptr/smartptr.h"
+# include "../preprocessor/std.h"
+# include "../preprocessor/enum.h"
+# include <vector>
+# include <list>
+# include "event.declaration.h"
+
 
 
 
@@ -14,93 +16,589 @@ namespace Yuni
 
 /*!
 ** \brief Events
-** \ingroup Toolbox
+** \ingroup Events
 */
 namespace Event
 {
 
-	enum EmitMode
+
+
+	class Immediate
 	{
-		emImmediate = 0,
-		emDeferred
+		template<class C, class R, class A1, class A2>
+		static void FireEvent(C* o, R (C::*method)(A1, A2), A1 a1, A2 a2)
+		{(o->*method)(a1,a2);}
+	};
+
+	
+
+
+
+
+	/*!
+	** \brief Observer (Base class)
+	** \ingroup Events
+	**
+	** Only classes derived from the class `Observer` can pretend to receive
+	** signals from an event. This is due to the fact that there is a strong
+	** relationship between the emitter and the receiver, to prevent the
+	** corruption of pointers.
+	**
+	** The class uses the CRTP (Curiously recurring template pattern) Idiom to
+	** broadcast the good type to the threading policy.
+	**
+	** The derived class *must* disconnect all event emitters as soon as possible
+	** when the instance is being destroyed to avoid race exceptions (the VTable may
+	** partially be deleted). The method `destroyingObserver()` prevents any further
+	** connection with an event emitter and must always be called at least from the
+	** destructor.
+	**
+	**
+	** A complete example using the threading policies :
+	** \code
+	** #include <iostream>
+	** #include <yuni/toolbox/event.h>
+	**
+	**
+	** template<template<class> class TP = Policy::SingleThreaded>
+	** class ThermalSensor : public TP<ThermalSensor>
+	** {
+	** public:
+	** 		//! The threading policy
+	** 		typedef TP<ThermalSensor>  ThreadingPolicy;
+	**
+	** public:
+	** 		ThermalSensor() :pLastValue(0.) {}
+	** 		~ThermalSensor() {}
+	**
+	** 		Event::E1<void, float, TP> eventOnChanged;
+	**
+	** 		void update(const float newT)
+	** 		{
+	** 			{
+	** 				typename ThreadingPolicy::MutexLocker locker(*this);
+	** 				if (pLastValue - newT < 0.1f)
+	** 					pLastValue = newT;
+	** 				else
+	** 					return;
+	** 			}
+	** 			onChanged(newT);
+	** 		}
+	** 		
+	** private:
+	** 		float pLastValue;
+	** };
+	**
+	**
+	** template<template<class> class TP = Policy::SingleThreaded>
+	** class Radiator : Event::Observer<Radiator<TP>, TP>
+	** {
+	** public:
+	** 		//! The threading policy
+	** 		typedef TP<ThermalSensor>  ThreadingPolicy;
+	**
+	** public:
+	** 		Radiator(const String& name, const float limit)
+	** 			:pName(name), pStarted(false), pLimit(limit)
+	** 		{}
+	**
+	** 		~Radiator()
+	** 		{
+	** 			destroyingObserver();
+	** 		}
+	**
+	** 		String name()
+	** 		{
+	** 			typename ThreadingPolicy::MutexLocker locker(*this);
+	** 			return pName;
+	** 		}
+	**
+	** 		void start()
+	** 		{
+	** 			typename ThreadingPolicy::MutexLocker locker(*this);
+	** 			if (!pStarted)
+	** 			{
+	** 				pStarted = true;
+	** 				std::cout << "The radiator `" << pName << "` has started." << std::endl;
+	** 			}
+	** 		}
+	**
+	** 		void stop()
+	** 		{
+	** 			typename ThreadingPolicy::MutexLocker locker(*this);
+	** 			if (pStarted)
+	** 			{
+	** 				pStarted = false;
+	** 				std::cout << "The radiator `" << pName << "`has stopped." << std::endl;
+	** 			}
+	** 		}
+	** 		
+	** 		void onTemperatureChanged(float t)
+	** 		{
+	** 			std::cout << "Temperature: " << t << std::endl;
+	** 			checkTemperature(t);
+	** 		}
+	**
+	** 		float limit() const {return pLimit;}
+	** 		void limit(const float newL) {pLimit = newL;}
+	**
+	** private:
+	** 		void checkTemperature(float t)
+	** 		{
+	** 			typename ThreadingPolicy::MutexLocker locker(*this);
+	** 			if (t >= pLimit)
+	** 			{
+	** 				if (pStarted)
+	** 					stop();
+	** 			}
+	** 			else
+	** 			{
+	** 				if (!pStarted)
+	** 					start();
+	** 			}
+	** 		}
+	**
+	** private:
+	** 		const String pName;
+	** 		bool pStarted;
+	** 		float pLimit;
+	** };
+	**
+	**
+	** int main(void)
+	** {
+	** 		// Our thermal sensor
+	** 		ThermalSensor<> sensor;
+	**
+	** 		// Our observer
+	** 		Radiator<> radiatorA("A", 30.0);
+	** 		Radiator<> radiatorB("B", 16.0);
+	** 		sensor.eventOnChanged.connect(&radiatorA, &Radiator::onTemperatureChanged);
+	** 		sensor.eventOnChanged.connect(&radiatorB, &Radiator::onTemperatureChanged);
+	**
+	** 		sensor.update(-2.);
+	** 		sensor.update(10.1);
+	** 		sensor.update(15.9);
+	** 		sensor.update(22.7);
+	** 		sensor.update(42.);
+	** 		
+	** 		return 0;
+	** }
+	** \endcode
+	*/
+	template<class D, template<class> class TP = SingleThreaded>
+	class Observer : public TP<D>, public IObserver
+	{
+		YUNI_EVENT_ALLFRIEND_DECL_E;
+	public:
+		//! The threading policy
+		typedef TP<D>  ThreadingPolicy;
+
+	public:
+		//! \name Constructor & Destructor
+		//@{
+		//! Default constructor
+		Observer() :pCanObserve(true) {}
+		//! Destructor
+		virtual ~Observer();
+		//@}
+
+	protected:
+		/*!
+		** \brief Disconnect all event emitters and prevents any further connection 
+		*/
+		void destroyingObserver();
+
+		/*!
+		** \brief Disconnect all event emitters, if any
+		*/
+		void disconnectAllEventEmitters();
+
+		/*!
+		** \brief Disconnect an event emitter, if connected to the observer
+		**
+		** \param event The event to disconnect
+		*/
+		void disconnectEvent(const IEvent* event);
+
+	private:
+		/*!
+		** \internal Attach an event emitter without doing anything else
+		*/
+		virtual void internalAttachEvent(IEvent* evt);
+		
+		/*!
+		** \internal Detach an event emitter without doing anything else
+		*/
+		virtual void internalDetachEvent(const IEvent* evt);
+
+	private:
+		//! List of events that are linked with the observer
+		IEvent::List pEvents;
+		//!
+		bool pCanObserve;
+		
+	}; // class Observer
+
+	
+
+
+
+	/*!
+	** \brief Event with no argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam TP The threading policy
+	*/
+	template<class R = void, template<class> class TP>
+	class E0: public TP< E0<R,TP> >, public IEvent
+	{
+	public:
+		typedef TP< E0<R, TP> >  ThreadingPolicy;
+		typedef std::list<IObserverItemA0<R>*> ObserverList;
+
+	public:
+		E0()
+		{}
+
+		virtual ~E0()
+		{
+			disconnectAll();
+		}
+
+		template<class C>
+		void connect(C* observer, R (C::*method)())
+		{
+			if (observer)
+			{
+				typename ThreadingPolicy::MutexLocker locker(*this);
+				pObservers.push_back(new ObserverItemA0<C, Immediate, R>(observer, method));
+				observer->internalAttachEvent(this);
+			}
+		}
+
+		void disconnect(IObserver* o)
+		{
+			if (NULL != o && removeFromObserverList(o))
+				o->internalDetachEvent(this);
+		}
+
+		void disconnectAll()
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			if (!pObservers.empty())
+			{
+				const typename ObserverList::iterator end = pObservers.end();
+				for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+					((*i)->observer())->internalDetachEvent(this);
+				pObservers.clear();
+			}
+		}
+
+		void execute()
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			const typename ObserverList::iterator end = pObservers.end();
+			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+				(*i)->fireEvent();
+		}
+
+		void operator () () {execute();}
+
+	private:
+		bool removeFromObserverList(const IObserver* o)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			if (!pObservers.empty())
+			{
+				const typename ObserverList::iterator end = pObservers.end();
+				typename ObserverList::iterator i = pObservers.begin();
+				while (i != end)
+				{
+					if ((*i)->observer() == o)
+					{
+						pObservers.erase(i++);
+						continue;
+					}
+					++i;
+				}
+			}
+			return false;
+		}
+
+		virtual void internalDetachObserver(const IObserver* o)
+		{
+			removeFromObserverList(o);
+		}
+
+	private:
+		ObserverList pObservers;
 	};
 
 
+
+# define YUNI_EVENT_IMPL(N) \
+	template<class R, YUNI_ENUM(N,class A), template<class> class TP> \
+	class YUNI_JOIN(E,N) : public TP< YUNI_JOIN(E,N)<R, YUNI_ENUM(N,A), TP> >, public IEvent \
+	{ \
+	public: \
+		typedef TP< YUNI_JOIN(E,N)<R, YUNI_ENUM(N,A), TP> >  ThreadingPolicy; \
+		typedef std::list<YUNI_JOIN(IObserverItemA,N)<R, YUNI_ENUM(N,A)>*> ObserverList; \
+		\
+	public: \
+		YUNI_JOIN(E,N)() \
+		{} \
+		\
+		virtual ~YUNI_JOIN(E,N)() \
+		{ \
+			disconnectAll(); \
+		} \
+		\
+		template<class C> \
+		void connect(C* observer, R (C::*method)(YUNI_ENUM(N,A))) \
+		{ \
+			if (observer) \
+			{ \
+				typename ThreadingPolicy::MutexLocker locker(*this); \
+				pObservers.push_back(new YUNI_JOIN(ObserverItemA,N)<C, Immediate, R, YUNI_ENUM(N,A)>(observer, method)); \
+				observer->internalAttachEvent(this); \
+			} \
+		} \
+		\
+		void disconnect(IObserver* o) \
+		{ \
+			if (NULL != o && removeFromObserverList(o)) \
+				o->internalDetachEvent(this); \
+		} \
+		\
+		void disconnectAll() \
+		{ \
+			typename ThreadingPolicy::MutexLocker locker(*this); \
+			if (!pObservers.empty()) \
+			{ \
+				const typename ObserverList::iterator end = pObservers.end(); \
+				for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i) \
+					((*i)->observer())->internalDetachEvent(this); \
+				pObservers.clear(); \
+			} \
+		} \
+		\
+		void execute(YUNI_ENUM_2(N, A, a)) \
+		{ \
+			typename ThreadingPolicy::MutexLocker locker(*this); \
+			const typename ObserverList::iterator end = pObservers.end(); \
+			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i) \
+				(*i)->fireEvent(YUNI_ENUM(N, a)); \
+		} \
+		\
+		void operator () (YUNI_ENUM_2(N, A,a)) {execute(YUNI_ENUM(N,a));} \
+		\
+	private: \
+		bool removeFromObserverList(const IObserver* o) \
+		{ \
+			typename ThreadingPolicy::MutexLocker locker(*this); \
+			if (!pObservers.empty()) \
+			{ \
+				const typename ObserverList::iterator end = pObservers.end(); \
+				typename ObserverList::iterator i = pObservers.begin(); \
+				while (i != end) \
+				{ \
+					if ((*i)->observer() == o) \
+					{ \
+						pObservers.erase(i++); \
+						continue; \
+					} \
+					++i; \
+				} \
+			} \
+			return false; \
+		} \
+		\
+		virtual void internalDetachObserver(const IObserver* o) \
+		{ \
+			removeFromObserverList(o); \
+		} \
+		\
+	private: \
+		ObserverList pObservers; \
+	}
+
+
+
+
+	
 	/*!
-	** \brief Base class for Notifiers
-	** \ingroup Toolbox
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam TP The threading policy
 	*/
-	class Notifier : public Policy::ObjectLevelLockable<Notifier>
-	{
-	public:
-		//! \name Constructor & Destructor
-		//@{
-
-		//! Default constructor
-		Notifier()
-			:Policy::ObjectLevelLockable<Notifier>(), pBroadcastDisconnection(true)
-		{}
-		
-		//! Destructor
-		virtual ~Notifier() {}
-
-		//@}
-		
-		virtual void disconnect(const void* cl, const bool broadcast = true) = 0;
-
-		/*!
-		** \brief Get if the information can be broacasted
-		*/
-		bool isDisconnectionBroadcastAllowed() const {return pBroadcastDisconnection;}
-
-	protected:
-		bool pBroadcastDisconnection;
-
-	}; // class Notifier
-
-
+	YUNI_EVENT_IMPL(1);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(2);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(3);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam A3 Type for the 4th argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(4);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam A3 Type for the 4th argument
+	** \tparam A4 Type for the 5th argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(5);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam A3 Type for the 4th argument
+	** \tparam A4 Type for the 5th argument
+	** \tparam A5 Type for the 6th argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(6);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam A3 Type for the 4th argument
+	** \tparam A4 Type for the 5th argument
+	** \tparam A5 Type for the 6th argument
+	** \tparam A6 Type for the 7th argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(7);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam A3 Type for the 4th argument
+	** \tparam A4 Type for the 5th argument
+	** \tparam A5 Type for the 6th argument
+	** \tparam A6 Type for the 7th argument
+	** \tparam A7 Type for the 8th argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(8);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam A3 Type for the 4th argument
+	** \tparam A4 Type for the 5th argument
+	** \tparam A5 Type for the 6th argument
+	** \tparam A6 Type for the 7th argument
+	** \tparam A7 Type for the 8th argument
+	** \tparam A8 Type for the 9th argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(9);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam A3 Type for the 4th argument
+	** \tparam A4 Type for the 5th argument
+	** \tparam A5 Type for the 6th argument
+	** \tparam A6 Type for the 7th argument
+	** \tparam A7 Type for the 8th argument
+	** \tparam A8 Type for the 9th argument
+	** \tparam A9 Type for the 10th argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(10);
+	
+	/*!
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam A3 Type for the 4th argument
+	** \tparam A4 Type for the 5th argument
+	** \tparam A5 Type for the 6th argument
+	** \tparam A6 Type for the 7th argument
+	** \tparam A8 Type for the 9th argument
+	** \tparam A9 Type for the 10th argument
+	** \tparam A10 Type for the 11th argument
+	** \tparam TP The threading policy
+	*/
+	YUNI_EVENT_IMPL(11);
 
 	/*!
-	** \brief Provide the ability to receive events
-	** \ingroup Toolbox
+	** \brief Event with a single argument
+	** \ingroup Events
+	** \tparam R Type for the returned value
+	** \tparam A0 Type for the first argument
+	** \tparam A1 Type for the second argument
+	** \tparam A2 Type for the third argument
+	** \tparam A3 Type for the 4th argument
+	** \tparam A4 Type for the 5th argument
+	** \tparam A5 Type for the 6th argument
+	** \tparam A6 Type for the 7th argument
+	** \tparam A7 Type for the 8th argument
+	** \tparam A8 Type for the 9th argument
+	** \tparam A9 Type for the 10th argument
+	** \tparam A10 Type for the 11th argument
+	** \tparam A11 Type for the 12th argument
+	** \tparam TP The threading policy
 	*/
-	class Receiver : public Policy::ObjectLevelLockable<Receiver>
-	{
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		Receiver() :Policy::ObjectLevelLockable<Receiver>() {}
-		//! Destructor
-		virtual ~Receiver() {disconnectAllNotifiers();}
-		//@}
-
-		/*!
-		** \brief Connect a notifier to this class
-		*/
-		void connectEventNotifier(Notifier* n);
-
-		/*!
-		** \brief Disconnect a notifier to this class
-		*/
-		void disconnectEventNotifier(Notifier* n);
-
-		/*!
-		** \brief Disconnect all notifiers
-		*/
-		void disconnectAllNotifiers();
-
-	protected:
-		/*!
-		** \brief Disconnect all notifiers (thread-unsafe)
-		*/
-		void disconnectAllNotifiersWL();
-
-	private:
-		//! All notifiers
-		std::set<Notifier*> pNotifiers;
-
-	}; // class Receiver
+	YUNI_EVENT_IMPL(12);
 
 
 
@@ -108,878 +606,11 @@ namespace Event
 } // namespace Event
 } // namespace Yuni
 
+# include "event.hxx"
 
 
-
-# include "event.private.h"
-
-
-
-
-namespace Yuni
-{
-namespace Event
-{
-
-	/*!
-	** \brief Event (with no parameter)
-	** \ingroup Toolbox
-	*/
-	class E0 : public Notifier
-	{
-	private:
-		typedef std::list< SmartPtr< Private::Events::It0 > >  ReceiverList;
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		E0() :Notifier() {}
-		//! Destructor
-		virtual ~E0() {disconnectAll();}
-		//@}
-
-		/*!
-		** \brief Connect a new receiver
-		**
-		** \param[in] cl
-		** \param[in] fn
-		*/
-		template<class C> void connect(C* cl, void (C::*fn)(void))
-		{
-			// assert((dynamic_cast<Receiver*>(cl) == true));
-			pMutex.lock();
-			if (cl)
-			{
-				pReceiverList.push_back(new Private::Events::ItTmpl0<C>(this, cl, fn));
-				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect a receiver
-		**
-		** \param cl The object to disconnect
-		** \param broadcast Broadcast the disconnection when destroyed
-		*/
-		virtual void disconnect(const void* cl, const bool broadcast = true)
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				pBroadcastDisconnection = broadcast;
-				pReceiverList.erase(std::remove_if(pReceiverList.begin(), pReceiverList.end(),
-					Private::Events::RemoveIfIt0(cl) ), 
-					pReceiverList.end());
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect all receivers
-		*/
-		void disconnectAll()
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				ReceiverList copy(pReceiverList);
-				pReceiverList.clear();
-				pBroadcastDisconnection = true;
-				pMutex.unlock();
-				// Remove an item in the list will call the method `disconnect()`
-				copy.clear();
-				return;
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Emit an event for all receivers
-		*/
-		void operator () (const EmitMode em = emImmediate)
-		{
-			pMutex.lock();
-			for (ReceiverList::iterator i = pReceiverList.begin(); i != pReceiverList.end(); ++i)
-				(*i)->emit(em);
-			pMutex.unlock();
-		}
-
-	private:
-		//! All connected receivers
-		ReceiverList pReceiverList;
-
-	}; // class E0
-
-
-
-	/*!
-	** \brief Event (with 1 parameters)
-	** \ingroup Toolbox
-	*/
-	template<typename T1>
-	class E1 : public Notifier
-	{
-	private:
-		typedef typename std::list< SmartPtr< Private::Events::It1<T1> > >  ReceiverList;
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		E1() :Notifier() {}
-		//! Destructor
-		virtual ~E1() {disconnectAll();}
-		//@}
-
-		/*!
-		** \brief Connect a new receiver
-		**
-		** \param[in] cl
-		** \param[in] fn
-		*/
-		template<class C> void connect(C* cl, void (C::*fn)(T1))
-		{
-			// assert((dynamic_cast<Receiver*>(cl) == true));
-			pMutex.lock();
-			if (cl)
-			{
-				pReceiverList.push_back(new Private::Events::ItTmpl1<C, T1>(this, cl, fn));
-				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect a receiver
-		**
-		** \param cl The object to disconnect
-		** \param broadcast Broadcast the disconnection when destroyed
-		*/
-		virtual void disconnect(const void* cl, const bool broadcast = true)
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				pBroadcastDisconnection = broadcast;
-				pReceiverList.erase(std::remove_if(pReceiverList.begin(), pReceiverList.end(),
-					Private::Events::RemoveIfIt1<T1>(cl) ), 
-					pReceiverList.end());
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Disconnect all receivers
-		*/
-		void disconnectAll()
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				ReceiverList copy(pReceiverList);
-				pReceiverList.clear();
-				pBroadcastDisconnection = true;
-				pMutex.unlock();
-				// Remove an item in the list will call the method `disconnect()`
-				copy.clear();
-				return;
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Emit an event for all receivers
-		*/
-		void operator () (T1 a1, const EmitMode em = emImmediate)
-		{
-			pMutex.lock();
-			for (typename ReceiverList::iterator i = pReceiverList.begin(); i != pReceiverList.end(); ++i)
-				(*i)->emit(a1, em);
-			pMutex.unlock();
-		}
-
-	private:
-		//! All connected receivers
-		ReceiverList pReceiverList;
-
-	}; // class E1
-
-
-
-
-	/*!
-	** \brief Event (with 2 parameters)
-	** \ingroup Toolbox
-	*/
-	template<typename T1, typename T2>
-	class E2 : public Notifier
-	{
-	private:
-		typedef typename std::list< SmartPtr< Private::Events::It2<T1, T2> > >  ReceiverList;
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		E2() :Notifier() {}
-		//! Destructor
-		virtual ~E2() {disconnectAll();}
-		//@}
-
-		/*!
-		** \brief Connect a new receiver
-		**
-		** \param[in] cl
-		** \param[in] fn
-		*/
-		template<class C> void connect(C* cl, void (C::*fn)(T1, T2))
-		{
-			// assert((dynamic_cast<Receiver*>(cl) == true));
-			pMutex.lock();
-			if (cl)
-			{
-				pReceiverList.push_back(new Private::Events::ItTmpl2<C, T1, T2>(this, cl, fn));
-				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect a receiver
-		**
-		** \param cl The object to disconnect
-		** \param broadcast Broadcast the disconnection when destroyed
-		*/
-		virtual void disconnect(const void* cl, const bool broadcast = true)
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				pBroadcastDisconnection = broadcast;
-				pReceiverList.erase(std::remove_if(pReceiverList.begin(), pReceiverList.end(),
-					Private::Events::RemoveIfIt2<T1, T2>(cl) ), 
-					pReceiverList.end());
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect all receivers
-		*/
-		void disconnectAll()
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				ReceiverList copy(pReceiverList);
-				pReceiverList.clear();
-				pBroadcastDisconnection = true;
-				pMutex.unlock();
-				// Remove an item in the list will call the method `disconnect()`
-				copy.clear();
-				return;
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Emit an event for all receivers
-		*/
-		void operator () (T1 a1, T2 a2, const EmitMode em = emImmediate)
-		{
-			pMutex.lock();
-			for (typename ReceiverList::iterator i = pReceiverList.begin(); i != pReceiverList.end(); ++i)
-				(*i)->emit(a1, a2, em);
-			pMutex.unlock();
-		}
-
-	private:
-		//! All connected receivers
-		ReceiverList pReceiverList;
-
-	}; // class E2
-
-
-
-	/*!
-	** \brief Event (with 3 parameters)
-	** \ingroup Toolbox
-	*/
-	template<typename T1, typename T2, typename T3>
-	class E3 : public Notifier
-	{
-	private:
-		typedef typename std::list< SmartPtr< Private::Events::It3<T1, T2, T3> > >  ReceiverList;
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		E3() :Notifier() {}
-		//! Destructor
-		virtual ~E3() {disconnectAll();}
-		//@}
-
-		/*!
-		** \brief Connect a new receiver
-		**
-		** \param[in] cl
-		** \param[in] fn
-		*/
-		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3))
-		{
-			// assert((dynamic_cast<Receiver*>(cl) == true));
-			pMutex.lock();
-			if (cl)
-			{
-				pReceiverList.push_back(new Private::Events::ItTmpl3<C, T1, T2, T3>(this, cl, fn));
-				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect a receiver
-		**
-		** \param cl The object to disconnect
-		** \param broadcast Broadcast the disconnection when destroyed
-		*/
-		virtual void disconnect(const void* cl, const bool broadcast = true)
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				pBroadcastDisconnection = broadcast;
-				pReceiverList.erase(std::remove_if(pReceiverList.begin(), pReceiverList.end(),
-					Private::Events::RemoveIfIt3<T1, T2, T3>(cl) ), 
-					pReceiverList.end());
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect all receivers
-		*/
-		void disconnectAll()
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				ReceiverList copy(pReceiverList);
-				pReceiverList.clear();
-				pBroadcastDisconnection = true;
-				pMutex.unlock();
-				// Remove an item in the list will call the method `disconnect()`
-				copy.clear();
-				return;
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Emit an event for all receivers
-		*/
-		void operator () (T1 a1, T2 a2, T3 a3, const EmitMode em = emImmediate)
-		{
-			pMutex.lock();
-			for (typename ReceiverList::iterator i = pReceiverList.begin(); i != pReceiverList.end(); ++i)
-				(*i)->emit(a1, a2, a3, em);
-			pMutex.unlock();
-		}
-
-	private:
-		//! All connected receivers
-		ReceiverList pReceiverList;
-
-	}; // class E3
-
-
-
-	/*!
-	** \brief Event (with 4 parameters)
-	** \ingroup Toolbox
-	*/
-	template<typename T1, typename T2, typename T3, typename T4>
-	class E4 : public Notifier
-	{
-	private:
-		typedef typename std::list< SmartPtr< Private::Events::It4<T1, T2, T3, T4> > >  ReceiverList;
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		E4() :Notifier() {}
-		//! Destructor
-		virtual ~E4() {disconnectAll();}
-		//@}
-
-		/*!
-		** \brief Connect a new receiver
-		**
-		** \param[in] cl
-		** \param[in] fn
-		*/
-		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4))
-		{
-			// assert((dynamic_cast<Receiver*>(cl) == true));
-			pMutex.lock();
-			if (cl)
-			{
-				pReceiverList.push_back(new Private::Events::ItTmpl4<C, T1, T2, T3, T4>(this, cl, fn));
-				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect a receiver
-		**
-		** \param cl The object to disconnect
-		** \param broadcast Broadcast the disconnection when destroyed
-		*/
-		virtual void disconnect(const void* cl, const bool broadcast = true)
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				pBroadcastDisconnection = broadcast;
-				pReceiverList.erase(std::remove_if(pReceiverList.begin(), pReceiverList.end(),
-					Private::Events::RemoveIfIt4<T1, T2, T3, T4>(cl) ), 
-					pReceiverList.end());
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect all receivers
-		*/
-		void disconnectAll()
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				ReceiverList copy(pReceiverList);
-				pReceiverList.clear();
-				pBroadcastDisconnection = true;
-				pMutex.unlock();
-				// Remove an item in the list will call the method `disconnect()`
-				copy.clear();
-				return;
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Emit an event for all receivers
-		*/
-		void operator () (T1 a1, T2 a2, T3 a3, T4 a4, const EmitMode em = emImmediate)
-		{
-			pMutex.lock();
-			for (typename ReceiverList::iterator i = pReceiverList.begin(); i != pReceiverList.end(); ++i)
-				(*i)->emit(a1, a2, a3, a4, em);
-			pMutex.unlock();
-		}
-
-	private:
-		//! All connected receivers
-		ReceiverList pReceiverList;
-
-	}; // class E4
-
-
-
-	/*!
-	** \brief Event (with 5 parameters)
-	** \ingroup Toolbox
-	*/
-	template<typename T1, typename T2, typename T3, typename T4, typename T5>
-	class E5 : public Notifier
-	{
-	private:
-		typedef typename std::list< SmartPtr< Private::Events::It5<T1, T2, T3, T4, T5> > >  ReceiverList;
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		E5() :Notifier() {}
-		//! Destructor
-		virtual ~E5() {disconnectAll();}
-		//@}
-
-		/*!
-		** \brief Connect a new receiver
-		**
-		** \param[in] cl
-		** \param[in] fn
-		*/
-		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4, T5))
-		{
-			// assert((dynamic_cast<Receiver*>(cl) == true));
-			pMutex.lock();
-			if (cl)
-			{
-				pReceiverList.push_back(new Private::Events::ItTmpl5<C, T1, T2, T3, T4, T5>(this, cl, fn));
-				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect a receiver
-		**
-		** \param cl The object to disconnect
-		** \param broadcast Broadcast the disconnection when destroyed
-		*/
-		virtual void disconnect(const void* cl, const bool broadcast = true)
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				pBroadcastDisconnection = broadcast;
-				pReceiverList.erase(std::remove_if(pReceiverList.begin(), pReceiverList.end(),
-					Private::Events::RemoveIfIt5<T1, T2, T3, T4, T5>(cl) ), 
-					pReceiverList.end());
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect all receivers
-		*/
-		void disconnectAll()
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				ReceiverList copy(pReceiverList);
-				pReceiverList.clear();
-				pBroadcastDisconnection = true;
-				pMutex.unlock();
-				// Remove an item in the list will call the method `disconnect()`
-				copy.clear();
-				return;
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Emit an event for all receivers
-		*/
-		void operator () (T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, const EmitMode em = emImmediate)
-		{
-			pMutex.lock();
-			for (typename ReceiverList::iterator i = pReceiverList.begin(); i != pReceiverList.end(); ++i)
-				(*i)->emit(a1, a2, a3, a4, a5, em);
-			pMutex.unlock();
-		}
-
-	private:
-		//! All connected receivers
-		ReceiverList pReceiverList;
-
-	}; // class E5
-
-
-
-	/*!
-	** \brief Event (with 6 parameters)
-	** \ingroup Toolbox
-	*/
-	template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-	class E6 : public Notifier
-	{
-	private:
-		typedef typename std::list< SmartPtr< Private::Events::It6<T1, T2, T3, T4, T5, T6> > >  ReceiverList;
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		E6() :Notifier() {}
-		//! Destructor
-		virtual ~E6() {disconnectAll();}
-		//@}
-
-		/*!
-		** \brief Connect a new receiver
-		**
-		** \param[in] cl
-		** \param[in] fn
-		*/
-		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4, T5, T6))
-		{
-			// assert((dynamic_cast<Receiver*>(cl) == true));
-			pMutex.lock();
-			if (cl)
-			{
-				pReceiverList.push_back(new Private::Events::ItTmpl6<C, T1, T2, T3, T4, T5, T6>(this, cl, fn));
-				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect a receiver
-		**
-		** \param cl The object to disconnect
-		** \param broadcast Broadcast the disconnection when destroyed
-		*/
-		virtual void disconnect(const void* cl, const bool broadcast = true)
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				pBroadcastDisconnection = broadcast;
-				pReceiverList.erase(std::remove_if(pReceiverList.begin(), pReceiverList.end(),
-					Private::Events::RemoveIfIt6<T1, T2, T3, T4, T5, T6>(cl) ), 
-					pReceiverList.end());
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect all receivers
-		*/
-		void disconnectAll()
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				ReceiverList copy(pReceiverList);
-				pReceiverList.clear();
-				pBroadcastDisconnection = true;
-				pMutex.unlock();
-				// Remove an item in the list will call the method `disconnect()`
-				copy.clear();
-				return;
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Emit an event for all receivers
-		*/
-		void operator () (T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, const EmitMode em = emImmediate)
-		{
-			pMutex.lock();
-			for (typename ReceiverList::iterator i = pReceiverList.begin(); i != pReceiverList.end(); ++i)
-				(*i)->emit(a1, a2, a3, a4, a5, a6, em);
-			pMutex.unlock();
-		}
-
-	private:
-		//! All connected receivers
-		ReceiverList pReceiverList;
-
-	}; // class E6
-
-
-
-	/*!
-	** \brief Event (with 7 parameters)
-	** \ingroup Toolbox
-	*/
-	template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-	class E7 : public Notifier
-	{
-	private:
-		typedef typename std::list< SmartPtr< Private::Events::It7<T1, T2, T3, T4, T5, T6, T7> > >  ReceiverList;
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		E7() :Notifier() {}
-		//! Destructor
-		virtual ~E7() {disconnectAll();}
-		//@}
-
-		/*!
-		** \brief Connect a new receiver
-		**
-		** \param[in] cl
-		** \param[in] fn
-		*/
-		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4, T5, T6, T7))
-		{
-			// assert((dynamic_cast<Receiver*>(cl) == true));
-			pMutex.lock();
-			if (cl)
-			{
-				pReceiverList.push_back(new Private::Events::ItTmpl7<C, T1, T2, T3, T4, T5, T6, T7>(this, cl, fn));
-				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect a receiver
-		**
-		** \param cl The object to disconnect
-		** \param broadcast Broadcast the disconnection when destroyed
-		*/
-		virtual void disconnect(const void* cl, const bool broadcast = true)
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				pBroadcastDisconnection = broadcast;
-				pReceiverList.erase(std::remove_if(pReceiverList.begin(), pReceiverList.end(),
-					Private::Events::RemoveIfIt7<T1, T2, T3, T4, T5, T6, T7>(cl) ), 
-					pReceiverList.end());
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect all receivers
-		*/
-		void disconnectAll()
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				ReceiverList copy(pReceiverList);
-				pReceiverList.clear();
-				pBroadcastDisconnection = true;
-				pMutex.unlock();
-				// Remove an item in the list will call the method `disconnect()`
-				copy.clear();
-				return;
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Emit an event for all receivers
-		*/
-		void operator () (T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, const EmitMode em = emImmediate)
-		{
-			pMutex.lock();
-			for (typename ReceiverList::iterator i = pReceiverList.begin(); i != pReceiverList.end(); ++i)
-				(*i)->emit(a1, a2, a3, a4, a5, a6, a7, em);
-			pMutex.unlock();
-		}
-
-	private:
-		//! All connected receivers
-		ReceiverList pReceiverList;
-
-	}; // class E7
-
-
-
-	/*!
-	** \brief Event (with 8 parameters)
-	** \ingroup Toolbox
-	*/
-	template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-	class E8 : public Notifier
-	{
-	private:
-		typedef typename std::list< SmartPtr< Private::Events::It8<T1, T2, T3, T4, T5, T6, T7, T8> > >  ReceiverList;
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Constructor
-		E8() :Notifier() {}
-		//! Destructor
-		virtual ~E8() {disconnectAll();}
-		//@}
-
-		/*!
-		** \brief Connect a new receiver
-		**
-		** \param[in] cl
-		** \param[in] fn
-		*/
-		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4, T5, T6, T7, T8))
-		{
-			// assert((dynamic_cast<Receiver*>(cl) == true));
-			pMutex.lock();
-			if (cl)
-			{
-				pReceiverList.push_back(new Private::Events::ItTmpl8<C, T1, T2, T3, T4, T5, T6, T7, T8>(this, cl, fn));
-				(static_cast<Receiver*>(cl))->connectEventNotifier(this);
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect a receiver
-		**
-		** \param cl The object to disconnect
-		** \param broadcast Broadcast the disconnection when destroyed
-		*/
-		virtual void disconnect(const void* cl, const bool broadcast = true)
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				pBroadcastDisconnection = broadcast;
-				pReceiverList.erase(std::remove_if(pReceiverList.begin(), pReceiverList.end(),
-					Private::Events::RemoveIfIt8<T1, T2, T3, T4, T5, T6, T7, T8>(cl) ), 
-					pReceiverList.end());
-			}
-			pMutex.unlock();
-		}
-
-		/*!
-		** \brief Disconnect all receivers
-		*/
-		void disconnectAll()
-		{
-			pMutex.lock();
-			if (!pReceiverList.empty())
-			{
-				ReceiverList copy(pReceiverList);
-				pReceiverList.clear();
-				pBroadcastDisconnection = true;
-				pMutex.unlock();
-				// Remove an item in the list will call the method `disconnect()`
-				copy.clear();
-				return;
-			}
-			pMutex.unlock();
-		}
-
-
-		/*!
-		** \brief Emit an event for all receivers
-		*/
-		void operator () (T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, const EmitMode em = emImmediate)
-		{
-			pMutex.lock();
-			for (typename ReceiverList::iterator i = pReceiverList.begin(); i != pReceiverList.end(); ++i)
-				(*i)->emit(a1, a2, a3, a4, a5, a6, a7, a8, em);
-			pMutex.unlock();
-		}
-
-	private:
-		//! All connected receivers
-		ReceiverList pReceiverList;
-
-	}; // class E8
-
-
-
-
-
-} // namespace Event
-} // namespace Yuni
+# undef YUNI_EVENT_IMPL
+# undef YUNI_EVENT_FRIEND_DECL_E
+# undef YUNI_EVENT_ALLFRIEND_DECL_E
 
 #endif // __YUNI_TOOLBOX_EVENT_EVENT_H__

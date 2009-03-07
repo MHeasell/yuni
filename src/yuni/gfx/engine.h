@@ -109,7 +109,7 @@ namespace Gfx
 
 	public:
 		//! Event: THe FPS has changed
-		Event::Proxy::P1<int> onFPSChanged;
+		Event::Proxy::P1<void, int> onFPSChanged;
 
 	private:
 

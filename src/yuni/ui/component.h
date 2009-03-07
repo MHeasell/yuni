@@ -4,7 +4,7 @@
 # include <list>
 # include <vector>
 # include "../yuni.h"
-# include "../threads/mutex.h"
+# include "../toolbox/policies/threading.h"
 # include "../toolbox/string.h"
 # include "../toolbox/smartptr/sharedptr.h"
 # include "../toolbox/event/event.h"
@@ -28,7 +28,7 @@ namespace UI
 	** \brief Base class for any UI component
 	** \ingroup ui
 	*/
-	class AComponent : public Event::Receiver
+	class AComponent : public Event::Observer<AComponent, Policy::ObjectLevelLockable>
 	{
 		friend class Control;
 	public:

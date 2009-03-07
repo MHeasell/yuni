@@ -12,7 +12,7 @@ using namespace Yuni;
 //
 // Each template parameter is the type for each argument
 // Here is an event with 2 arguments :
-Event::E2<const Yuni::String&, const Yuni::String&> emailHasBeenReceived;
+Event::E2<void, const Yuni::String&, const Yuni::String&> emailHasBeenReceived;
 
 
 
@@ -23,12 +23,11 @@ Event::E2<const Yuni::String&, const Yuni::String&> emailHasBeenReceived;
  * To be able to receive events, the class must inherit from the base class
  * `Yuni::Event::Receiver`
  */
-class Subscriber : public Event::Receiver
+class Subscriber : public Event::Observer<Subscriber>
 {
 public:
 	//! Constructor
 	Subscriber()
-		:Event::Receiver()
 	{
 		// This class want to be aware when an event is fired
 		emailHasBeenReceived.connect(this, &Subscriber::onMailReceived);
@@ -40,7 +39,7 @@ public:
 		// It is really encouraged to disconnect all events as soon as possible.
 		// The base class will do it, however the inherited class will already
 		// be removed from the vtable and it might lead to a critical error
-		disconnectAllNotifiers();
+		destroyingObserver();
 	}
 
 	/*!
