@@ -103,7 +103,7 @@ namespace Gfx
 
 	public:
 		//! Event: THe FPS has changed
-		Event::E1<int> onFPSChanged;
+		Event::E1<void, int> onFPSChanged;
 
 	protected:
 		//! Mutex

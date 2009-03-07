@@ -17,7 +17,7 @@ namespace Application
 	/*!
 	** \brief 3D Application
 	*/
-	class Gfx3D : public Application::AApplication, public Event::Receiver
+	class Gfx3D : public Application::AApplication, public Event::Observer<Gfx3D>
 	{
 	public:
 		/*!

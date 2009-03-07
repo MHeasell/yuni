@@ -21,7 +21,7 @@ public:
 	virtual ~HelloWorld()
 	{
 		// It is advised to disconnect all events at this stade
-		this->disconnectAllNotifiers();
+		destroyingObserver();
 	}
 
 	void onFPSChanged(int fps)

@@ -46,6 +46,9 @@
 ** \ingroup Toolbox
 **
 **
+** \defgroup Events
+** \ingroup Toolbox
+**
 **
 ** \defgroup ui User Interface
 */
