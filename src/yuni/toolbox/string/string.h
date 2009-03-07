@@ -7,6 +7,7 @@
 # include <vector>
 # include <string>
 # include <cstdarg>
+# include <limits.h>
 # include "../../yuni.h"
 # include "../static/assert.h"
 
