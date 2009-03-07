@@ -17,7 +17,7 @@ namespace Yuni
 
 # if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 #   if defined(_INTEGRAL_MAX_BITS) && _INTEGRAL_MAX_BITS >= 64 // For Visual 6.x and later
-	// 64-bit ints, guaranteed to be 4 bytes in size
+	// 64-bit ints, guaranteed to be 8 bytes in size
 	typedef unsigned __int64  uint64;
 	typedef signed __int64    sint64;
 #   else

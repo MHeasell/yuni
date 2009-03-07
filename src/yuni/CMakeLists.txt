@@ -10,9 +10,11 @@ Message(STATUS "Module: Core")
 
 
 
-Set(SRC_TOOLBOX_MISC
-				toolbox/defines.h)
-source_group(ToolBox ${SRC_TOOLBOX_MISC})
+Set(SRC_TOOLBOX_PREPROCESSOR
+				toolbox/preprocessor/std.h
+				toolbox/preprocessor/capabilities.h
+				toolbox/preprocessor/enum.h)
+source_group(ToolBox\\Preprocessor FILES ${SRC_TOOLBOX_PREPROCESSOR})
 
 Set(SRC_TOOLBOX_STATIC
 				toolbox/static/if.h
@@ -204,6 +206,7 @@ Set(SRC_EXTERNAL_3D
 # The core library
 #
 Add_Library(yuni-static-core STATIC
+			${SRC_TOOLBOX_PREPROCESSOR}
 			${SRC_TOOLBOX_STATIC}
 			${SRC_TOOLBOX_STRING}
 			${SRC_TOOLBOX_URI}

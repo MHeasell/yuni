@@ -26,18 +26,25 @@
 
 
 
-//! \name Informations about the Yuni Library
-//@{
+/*! \name Informations about the Yuni Library */
+/*@{*/
 //! The hi part of the version of the yuni library
 # define YUNI_VERSION_HI  0
-//! The lo part of the version of the yuni library
+/*! The lo part of the version of the yuni library */
 # define YUNI_VERSION_LO  1
-//@}
+/*@}*/
 
 
-// Operating System / Capabilities auto-detection
+/* The Yuni Framework is a C++ Library, even if some parts are voluntary C compatible */
+# ifndef __cplusplus
+#	error C++ Only
+# endif
+
+/* Standard Preprocessor tools */
+# include "toolbox/preprocessor/std.h"
+/* Operating System / Capabilities auto-detection */
 # include "toolbox/system/capabilities.h"
-// Standard Types
+/* Standard Types */
 # include "toolbox/system/stdint.h"
 
 
@@ -52,4 +59,4 @@ namespace Yuni
 
 
 
-#endif // __YUNI_COMMONS_H__
+#endif /* __YUNI_COMMONS_H__ */
