@@ -306,9 +306,11 @@ namespace Script
 		** This event will be emitted on every script error reported
 		** by the underlying script engine.
 		*/
-		ScriptErrorEvent scriptErrorEvent;
+		ScriptErrorEvent onError;
 
 	}; // class AScript
+
+
 
 	//! Type for multiple return values
 	typedef std::vector<Any> MultipleReturn;
@@ -319,8 +321,6 @@ namespace Script
 } // namespace Script
 } // namespace Yuni
 
-
-#undef YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH
 
 // Cleans up complex macros used to declare call() and bind().
 # include "script.undefs.h"

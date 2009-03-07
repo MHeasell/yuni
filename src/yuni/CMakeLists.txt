@@ -74,6 +74,7 @@ source_group(ToolBox\\Tree FILES ${SRC_TOOLBOX_TREE_N})
 Set(SRC_TOOLBOX_EVENT
 				toolbox/event/event.h toolbox/event/event.hxx
 				toolbox/event/event.declaration.h
+				toolbox/event/event.defines.h toolbox/event/event.undef.h
 				toolbox/event.h)
 source_group(ToolBox\\Event FILES ${SRC_TOOLBOX_EVENT})
 
