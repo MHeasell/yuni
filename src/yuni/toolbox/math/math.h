@@ -6,7 +6,7 @@
 # include <cstring>
 
 
-# define EPSILON 0.00001
+# define YUNI_EPSILON 0.00001
 
 namespace Yuni
 {
@@ -198,22 +198,11 @@ namespace Math
 	** \brief Compare two floats
 	** \ingroup Math
 	*/
-	template <typename T>
-	inline bool Equals(const T a, const T b)
-	{
-		return Abs(a - b) < EPSILON;
-	}
+	template <typename U>
+	inline bool Equals(const U a, const U b) {return (a == b);}
 
-
-	/*!
-	** \brief Compare two doubles
-	** \ingroup Math
-	*/
-	template <>
-	inline bool Equals(const int a, const int b)
-	{
-		return a == b;
-	}
+	template<> inline bool Equals(const float a, const float b) {return Abs(a - b) < YUNI_EPSILON;}
+	template<> inline bool Equals(const double a, const double b) {return Abs(a - b) < YUNI_EPSILON;}
 
 
 
