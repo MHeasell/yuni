@@ -228,7 +228,7 @@ namespace Toolbox
 		void parent(Ptr& newParent);
 
 		/*!
-		** \briuef Detach the node from its parent
+		** \brief Detach the node from its parent
 		*/
 		void detachFromParent();
 
