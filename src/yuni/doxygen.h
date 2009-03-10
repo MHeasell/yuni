@@ -25,7 +25,15 @@
 ** \defgroup Protocol Protocols
 ** \ingroup Net
 **
+**
+**
 ** \defgroup Toolbox Toolbox
+**
+**
+**
+** \defgroup Units Units of measurement
+** \ingroup Toolbox
+**
 **
 ** \defgroup Endianness Endianness
 ** \ingroup Toolbox
@@ -46,7 +54,7 @@
 ** \ingroup Toolbox
 **
 **
-** \defgroup Events
+** \defgroup Events Events
 ** \ingroup Toolbox
 **
 **

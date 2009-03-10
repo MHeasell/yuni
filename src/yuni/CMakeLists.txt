@@ -70,6 +70,19 @@ Set(SRC_TOOLBOX_TREE_N
 source_group(ToolBox\\Tree FILES ${SRC_TOOLBOX_TREE_N})
 
 
+Set(SRC_TOOLBOX_UNIT
+				toolbox/unit/define.h toolbox/unit/undef.h
+				toolbox/unit/unit.h toolbox/unit/unit.hxx
+				toolbox/unit.h
+				toolbox/unit/angle.h
+				toolbox/unit/length.h
+				toolbox/unit/length/length.h
+				toolbox/unit/length/metric.h
+				toolbox/unit/length/extra.h
+				toolbox/unit/luminance.h
+)
+source_group(ToolBox\\Unit FILES ${SRC_TOOLBOX_UNIT})
+
 
 Set(SRC_TOOLBOX_EVENT
 				toolbox/event/event.h toolbox/event/event.hxx
@@ -211,6 +224,7 @@ Add_Library(yuni-static-core STATIC
 			${SRC_TOOLBOX_STATIC}
 			${SRC_TOOLBOX_STRING}
 			${SRC_TOOLBOX_URI}
+			${SRC_TOOLBOX_UNIT}
 			${SRC_TOOLBOX_EXCEPTIONS}
 			${SRC_TOOLBOX_STL}
 			${SRC_TOOLBOX_ANY}

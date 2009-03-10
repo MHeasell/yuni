@@ -61,7 +61,7 @@
 ** - Borland C++ : YUNI_OS_BORLAND
 ** - MinGW: YUNI_OS_MINGW
 ** - Cygwin : YUNI_OS_CYGWIN
-** - Gcc/G++ : YUNI_OS_GCC, YUNI_OS_GCC_VERSION : #if YUNI_OS_GCC_VERSION > 30200  (> 3.2.0)
+** - Gcc/G++ : YUNI_OS_GCC, YUNI_OS_GCC_VERSION : if YUNI_OS_GCC_VERSION > 30200  (> 3.2.0)
 ** - Intel Compiler: YUNI_OS_INTELCOMPILER
 ** - Sun Studio: YUNI_OS_SUNSTUDIO
 **
