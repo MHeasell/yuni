@@ -30,55 +30,6 @@
 
 
 	
-namespace Yuni
-{
-namespace Event
-{
-
-	template<class Host>
-	class SingleThreaded
-	{
-	public:
-		/*!
-		** \brief Locks a mutex in the constructor and unlocks it in the destructor.
-		*/
-		class MutexLocker
-		{
-		public:
-			template<class C> MutexLocker(C&) {}
-			~MutexLocker() {}
-		}; // class MutexLocker
-
-
-		/*!
-		** \brief A volative type
-		*/
-		template<typename U> struct Volatile { typedef U Type; };
-
-		//! Get if this policy is thread-safe
-		enum { threadSafe = false };
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		//! Default constructor
-		SingleThreaded() {}
-		//! Copy constructor
-		SingleThreaded(const SingleThreaded&) {}
-		//! Destructor
-		~SingleThreaded() {}
-		//@}
-
-	}; // class SingleThreaded
-
-
-}
-}
-
-
-	
-
-
 
 namespace Yuni
 {
@@ -94,9 +45,9 @@ namespace Event
 
 	
 # define YUNI_EVENT_FORWARD_DECL_E(N) \
-	template<class R, YUNI_ENUM(N, class A), template<class> class TP = SingleThreaded> class YUNI_JOIN(E,N)
+	template<class R, YUNI_ENUM(N, class A), template<class> class TP = Policy::ObjectLevelLockable> class YUNI_JOIN(E,N)
 
-	template<class R, template<class> class TP = SingleThreaded> class E0;
+	template<class R, template<class> class TP = Policy::ObjectLevelLockable> class E0;
 	YUNI_EVENT_FORWARD_DECL_E(1);
 	YUNI_EVENT_FORWARD_DECL_E(2);
 	YUNI_EVENT_FORWARD_DECL_E(3);

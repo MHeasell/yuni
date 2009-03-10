@@ -6,6 +6,7 @@
 # include "../preprocessor/enum.h"
 # include <vector>
 # include <list>
+# include "../policies/threading.h"
 # include "event.declaration.h"
 # include "event.defines.h"
 
@@ -60,7 +61,7 @@ namespace Event
 	** #include <yuni/toolbox/event.h>
 	**
 	**
-	** template<template<class> class TP = Policy::SingleThreaded>
+	** template<template<class> class TP = Policy::ObjectLevelLockable>
 	** class ThermalSensor : public TP<ThermalSensor>
 	** {
 	** public:
@@ -90,7 +91,7 @@ namespace Event
 	** };
 	**
 	**
-	** template<template<class> class TP = Policy::SingleThreaded>
+	** template<template<class> class TP = Policy::ObjectLevelLockable>
 	** class Radiator : Event::Observer<Radiator<TP>, TP>
 	** {
 	** public:
@@ -186,7 +187,7 @@ namespace Event
 	** }
 	** \endcode
 	*/
-	template<class D, template<class> class TP = SingleThreaded>
+	template<class D, template<class> class TP = Policy::ObjectLevelLockable>
 	class Observer : public TP<D>, public IObserver
 	{
 		YUNI_EVENT_ALLFRIEND_DECL_E;
