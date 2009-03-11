@@ -14,44 +14,44 @@ namespace Yuni
 			pObject = new T(source);
 	}
 
-	template <typename T, typename U>
+	template <typename T>
 	Any& Any::assign(const T& rhs)
 	{
 		// Are we copying between the same type of variants ?
-		Private::Any::TypeManipulationTable* rhsTable = Private::Any::Table<U>::Get();
+		Private::Any::TypeManipulationTable* rhsTable = Private::Any::Table<T>::Get();
 
 		if (pTable == rhsTable)
 		{
 			// Yes, so we can avoid reallocating, and re-use memory.
-			if (sizeof(U) <= sizeof(void*))
+			if (sizeof(T) <= sizeof(void*))
 			{
 				// Call the destructor on the object to clean up.
-				reinterpret_cast<U*>(&pObject)->~U();
+				reinterpret_cast<T*>(&pObject)->~T();
 				// Create copy on-top of object pointer itself
-				new (&pObject) U(rhs);
+				new (&pObject) T(rhs);
 			}
 			else
 			{
 				// Call the destructor on the old object, but do not deallocate memory !
-				reinterpret_cast<U*>(pObject)->~U(); 
+				reinterpret_cast<T*>(pObject)->~T(); 
 				// Create copy on-top of the old version
-				new (pObject) U(rhs);
+				new (pObject) T(rhs);
 			}
 		}
 		else
 		{
 			// No, this was not the same type.
 			reset();
-			if (sizeof(U) <= sizeof(void*))
+			if (sizeof(T) <= sizeof(void*))
 			{
 				// Create copy on-top of object pointer itself
-				new (&pObject) U(rhs);
+				new (&pObject) T(rhs);
 				// Update table pointer
 				pTable = rhsTable;
 			}
 			else
 			{
-				pObject = new U(rhs);
+				pObject = new T(rhs);
 				pTable = rhsTable;
 			}
 		}

@@ -85,31 +85,24 @@ namespace Yuni
 		Any& assign(const Any& rhs);
 
 		/*!
-		** \brief Assignment from any object, with any storage type.
+		** \brief Assignment from any object
 		** \param[in] rhs The object to assign from
 		** \return This Any
 		*/
-		template <typename T, typename U>
-		Any& assign(const T& rhs);
-
-		/*!
-		** \brief Specialized assign for simple types.
-		*/
 		template <typename T>
-		Any& assign(const T& rhs)
-		{ return assign<T, T>(rhs); }
+		Any& assign(const T& rhs);
 
 		/*!
 		** \brief Specialized assign for C Strings.
 		*/
 		Any& assign(const char* rhs)
-		{ return assign<const char*, String>(rhs); }
+		{ return assign<String>(rhs); }
 
 		/*!
 		** \brief Specialized assign for C Wide Strings.
 		*/
 		Any& assign(const wchar_t* rhs)
-		{ return assign<const wchar_t*, String>(rhs); }
+		{ return assign<String>(rhs); }
 
 		/*!
 		** \brief Assignment operator for convenience
