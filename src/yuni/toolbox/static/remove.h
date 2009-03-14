@@ -27,7 +27,9 @@ namespace Remove
 	//@{
 	//! Remove the "Const" part of a type
 	template <typename T> struct Const { typedef T Type; };
-	template <typename T> struct Const<const T> { typedef T Type; };
+	template <typename T> struct Const<const T>  { typedef T Type; };
+	template <typename T> struct Const<const T*> { typedef T* Type; };
+	template <typename T> struct Const<const T&> { typedef T& Type; };
 	//@}
 
 	template <typename T> struct All
