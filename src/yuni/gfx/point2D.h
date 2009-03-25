@@ -44,7 +44,7 @@ namespace Gfx
 
 		/*!
 		** \brief Move the point to new coordinates
-		** 
+		**
 		** \param x1 The new X coordinate
 		** \param y1 The new Y coordinate
 		*/
@@ -75,7 +75,7 @@ namespace Gfx
 		void translate(const U x1, const V y1) { x += (T)x1; y += (T)y1; }
 		/*!
 		** \brief Translate the point with relative coordinates from another Point
-		** \param p The values to add to the coordinates 
+		** \param p The values to add to the coordinates
 		*/
 		template<typename U>
 		void translate(const Point2D<U>& p) { x += (T)p.x; y += (T)p.y; }
@@ -89,8 +89,8 @@ namespace Gfx
 		*/
 		template<typename U> void mean(const Point2D<U>& p)
 		{
-		  x = (x + p.x) / 2.0f;
-		  y = (y + p.y) / 2.0f;
+			x = (x + p.x) / 2.0f;
+			y = (y + p.y) / 2.0f;
 		}
 		/*!
 		** \brief Calculate the mean between two points
@@ -104,9 +104,9 @@ namespace Gfx
 		template<typename U, typename V>
 		Point2D<T>& mean(const Point2D<U>& p1, const Point2D<V>& p2)
 		{
-		  x = (p1.x + p2.x) / 2.0f;
-		  y = (p1.y + p2.y) / 2.0f;
-		  return *this;
+			x = (p1.x + p2.x) / 2.0f;
+			y = (p1.y + p2.y) / 2.0f;
+			return *this;
 		}
 		/*!
 		** \brief Calculate the mean between two points
@@ -117,7 +117,7 @@ namespace Gfx
 		*/
 		static Point2D<T>& Mean(const Point2D<T>& p1, const Point2D<T>& p2)
 		{
-		  return Point2D<T>().mean(p1, p2);
+			return Point2D<T>().mean(p1, p2);
 		}
 
 
@@ -161,7 +161,7 @@ namespace Gfx
 		** \see move()
 		*/
 		template<typename U> void operator () (const Point2D<U>& p) { x = (T)p.x; y = (T)p.y; }
-		
+
 
 		/*!
 		** \brief Translate the point with the same value for all coordinates
@@ -238,8 +238,9 @@ namespace Gfx
 
 
 
-} // Gfx
-} // Yuni
+
+} // namespace Gfx
+} // namespace Yuni
 
 
 

@@ -9,8 +9,8 @@ namespace Yuni
 {
 namespace Policy
 {
-	
-	
+
+
 /*!
 ** \brief Tracking policies
 ** \ingroup Policies

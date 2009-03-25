@@ -1,14 +1,15 @@
-
 #ifndef __YUNI_GFX_IMPLICITSURFACE_H__
 # define __YUNI_GFX_IMPLICITSURFACE_H__
 
 # include <vector>
 # include "octree.h"
 
+
 namespace Yuni
 {
 namespace Gfx
 {
+
 
 	/*!
 	** \brief An implicit surface is a mathematical function defining a spacial surface
@@ -65,6 +66,10 @@ namespace Gfx
 		SubSurfaces pSubSurfaces;
 
 	}; // class ImplicitSurface
+
+
+
+
 
 } // Gfx
 } // Yuni

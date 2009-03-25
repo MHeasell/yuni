@@ -7,19 +7,19 @@
 namespace Yuni
 {
 
-    /*!
-    ** \brief Suspend thread execution for an interval measured in seconds
+	/*!
+	** \brief Suspend thread execution for an interval measured in seconds
 	** \ingroup Toolbox
-    **
-    ** \param seconds Number of seconds to wait
-    **
-    ** \note You should consider that this method can not be interrupted.
-    ** You should not use this routine when using the thread facility provided
-    ** by the Yuni library and you should prefer the method `suspend()` instead.
-    **
-    ** \see Yuni::Threads::AThread::suspend()
-    */
-    void Sleep(const uint32 seconds);
+	**
+	** \param seconds Number of seconds to wait
+	**
+	** \note You should consider that this method can not be interrupted.
+	** You should not use this routine when using the thread facility provided
+	** by the Yuni library and you should prefer the method `suspend()` instead.
+	**
+	** \see Yuni::Threads::AThread::suspend()
+	*/
+	void Sleep(const uint32 seconds);
 
 
 	/*!
@@ -28,9 +28,9 @@ namespace Yuni
 	**
 	** \param milliseconds NUmber of milliseconds to wait
 	**
-    ** \note You should consider that this method can not be interrupted.
-    ** You should not use this routine when using the thread facility provided
-    ** by the Yuni library and you should prefer the method `suspend()` instead.
+	** \note You should consider that this method can not be interrupted.
+	** You should not use this routine when using the thread facility provided
+	** by the Yuni library and you should prefer the method `suspend()` instead.
 	*/
 	void SleepMilliSeconds(const uint32 milliseconds);
 

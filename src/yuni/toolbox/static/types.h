@@ -222,14 +222,14 @@ namespace Type
 	};
 
 
-	
+
 	template<typename W>
 	struct StrictlyEqual<W, W>
 	{
 		enum { Yes = 1, No = 0 };
 	};
 
-	
+
 	template<typename T>
 	struct IsConst<const T>
 	{

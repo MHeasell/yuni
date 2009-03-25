@@ -14,7 +14,7 @@ namespace Gfx
 
 	Mesh::~Mesh()
 	{
-	  delete pProxy;
+		delete pProxy;
 	}
 
 	std::ostream& Mesh::print(std::ostream& out) const
@@ -33,5 +33,5 @@ namespace Gfx
 	}
 
 
-} // Gfx
-} // Yuni
+} // namespace Gfx
+} // namespace Yuni

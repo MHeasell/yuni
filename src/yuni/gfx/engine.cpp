@@ -16,8 +16,8 @@ namespace Gfx
 	{
 
 		/*!
-		 * \brief The external 3D engine
-		 */
+		* \brief The external 3D engine
+		*/
 		# ifdef YUNI_EXTERNAL_3D_IRRLICHT
 		Private::Gfx::Irrlicht::Engine external3DEngine;
 		# else

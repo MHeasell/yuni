@@ -65,7 +65,7 @@ namespace Threads
 		/*!
 		** \brief Get the time interval (in `ms`)
 		*/
-		uint32 timeInterval(); 
+		uint32 timeInterval();
 
 		/*!
 		** \brief Set the time interval (in `ms`)
@@ -120,7 +120,7 @@ namespace Threads
 		** There is no really need to use suspend() in this method, it will be already
 		** done for you.
 		**
-		** \param cycleCount The current cycle number. Always 0 in the case of an infinite timer 
+		** \param cycleCount The current cycle number. Always 0 in the case of an infinite timer
 		** \return True to continue the execution of the timer, False otherwise
 		*/
 		virtual bool onExecute(const uint32 cycleCount) = 0;

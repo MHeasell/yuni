@@ -25,7 +25,7 @@ namespace Proxy
 		virtual ~P0() {disconnectAll();}
 
 		void assign(EventType* p) {pProxy = p;}
-		
+
 		template<class C> void connect(C* cl, void (C::*fn)(void))
 		{if (pProxy) pProxy->connect(cl, fn);}
 
@@ -56,7 +56,7 @@ namespace Proxy
 		virtual ~P1() {disconnectAll();}
 
 		void assign(EventType* p) {pProxy = p;}
-		
+
 		template<class C> void connect(C* cl, void (C::*fn)(T1))
 		{if (pProxy) pProxy->connect(cl, fn);}
 
@@ -87,7 +87,7 @@ namespace Proxy
 		virtual ~P2() {disconnectAll();}
 
 		void assign(EventType* p) {pProxy = p;}
-		
+
 		template<class C> void connect(C* cl, void (C::*fn)(T1, T2))
 		{if (pProxy) pProxy->connect(cl, fn);}
 
@@ -118,7 +118,7 @@ namespace Proxy
 		virtual ~P3() {disconnectAll();}
 
 		void assign(EventType* p) {pProxy = p;}
-		
+
 		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3))
 		{if (pProxy) pProxy->connect(cl, fn);}
 
@@ -150,7 +150,7 @@ namespace Proxy
 		virtual ~P4() {disconnectAll();}
 
 		void assign(EventType* p) {pProxy = p;}
-		
+
 		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4))
 		{if (pProxy) pProxy->connect(cl, fn);}
 
@@ -181,7 +181,7 @@ namespace Proxy
 		virtual ~P5() {disconnectAll();}
 
 		void assign(EventType* p) {pProxy = p;}
-		
+
 		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4, T5))
 		{if (pProxy) pProxy->connect(cl, fn);}
 
@@ -212,7 +212,7 @@ namespace Proxy
 		virtual ~P6() {disconnectAll();}
 
 		void assign(EventType* p) {pProxy = p;}
-		
+
 		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4, T5, T6))
 		{if (pProxy) pProxy->connect(cl, fn);}
 
@@ -244,7 +244,7 @@ namespace Proxy
 		virtual ~P7() {disconnectAll();}
 
 		void assign(EventType* p) {pProxy = p;}
-		
+
 		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4, T5, T6, T7))
 		{if (pProxy) pProxy->connect(cl, fn);}
 
@@ -275,7 +275,7 @@ namespace Proxy
 		virtual ~P8() {disconnectAll();}
 
 		void assign(EventType* p) {pProxy = p;}
-		
+
 		template<class C> void connect(C* cl, void (C::*fn)(T1, T2, T3, T4, T5, T6, T7, T8))
 		{if (pProxy) pProxy->connect(cl, fn);}
 

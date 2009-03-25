@@ -73,6 +73,7 @@ namespace Gfx
 		return mesh;
 	}
 
+
 	uint8 MarchingCubes::cubeIndex(float isoValue, const float vals[8]) const
 	{
 		uint8 code = 0;
@@ -94,6 +95,7 @@ namespace Gfx
 			code |= 128;
 		return code;
 	}
+
 
 	BoundingBox<float> MarchingCubes::cellAroundPoint(const Point3D<float>& p, float width)
 	{
@@ -591,5 +593,5 @@ namespace Gfx
 
 
 
-} // Gfx
-} // Yuni
+} // namespace Gfx
+} // namespace Yuni

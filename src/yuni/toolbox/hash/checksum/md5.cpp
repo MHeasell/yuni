@@ -108,8 +108,8 @@ namespace Checksum
 		typedef uint32 MD5TypeUInt32; /* 32-bit word */
 
 		/*!
-		 * \brief Define the state of the MD5 Algorithm
-		 */
+		* \brief Define the state of the MD5 Algorithm
+		*/
 		struct MD5TypeState
 		{
 			//! Message length in bits, lsw first
@@ -140,10 +140,10 @@ namespace Checksum
 			{
 				# if BYTE_ORDER == 0
 				/*
-				 * Determine dynamically whether this is a big-endian or
-				 * little-endian machine, since we can use a more efficient
-				 * algorithm on the latter.
-				 */
+				* Determine dynamically whether this is a big-endian or
+				* little-endian machine, since we can use a more efficient
+				* algorithm on the latter.
+				*/
 				static const int w = 1;
 
 				if (*((const MD5TypeByte *)&w)) /* dynamic little-endian */
@@ -151,9 +151,9 @@ namespace Checksum
 				# if BYTE_ORDER <= 0		/* little-endian */
 				{
 					/*
-					 * On little-endian machines, we can process properly aligned
-					 * data without copying it.
-					 */
+					* On little-endian machines, we can process properly aligned
+					* data without copying it.
+					*/
 					if (!((data - (const MD5TypeByte *)0) & 3)) {
 						/* data are properly aligned */
 						X = (const MD5TypeUInt32 *)data;
@@ -170,9 +170,9 @@ namespace Checksum
 				# if BYTE_ORDER >= 0		/* big-endian */
 				{
 					/*
-					 * On big-endian machines, we must arrange the bytes in the
-					 * right order.
-					 */
+					* On big-endian machines, we must arrange the bytes in the
+					* right order.
+					*/
 					const MD5TypeByte *xp = data;
 					int i;
 

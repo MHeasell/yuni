@@ -15,9 +15,9 @@ namespace Checksum
 
 
 	/*!
-	** \brief MD5 Checksum 
+	** \brief MD5 Checksum
 	**
-	** Compute the MD5 from a string : 
+	** Compute the MD5 from a string :
 	** \code
 	** Yuni::Hash::MD5 md5;
 	** md5.fromString("Hello world");
@@ -51,16 +51,16 @@ namespace Checksum
 		** \brief Compute the hash from a string
 		**
 		** \param s The string
-		** \return The hash value 
+		** \return The hash value
 		*/
 		static String FromString(const String& s) {return MD5().fromString(s);}
 
 		/*!
-		** \brief Compute the hash from raw data 
+		** \brief Compute the hash from raw data
 		**
 		** \param rawdata The original buffer
 		** \param size Size of the given buffer.
-		** \return The hash value 
+		** \return The hash value
 		*/
 		static String FromRawData(const void* rawdata, uint64 size = AutoDetectNullChar) {return MD5().fromRawData(rawdata, size);}
 

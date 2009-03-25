@@ -122,7 +122,7 @@ namespace Yuni
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>& 
+	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>&
 	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator = (typename SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::CopyType& rhs)
 	{
 		SmartPtr tmp(rhs);
@@ -138,7 +138,7 @@ namespace Yuni
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
 		template <class> class TrckP1, class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>& 
+	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>&
 	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator = (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs)
 	{
 		SmartPtr tmp(rhs);
@@ -154,7 +154,7 @@ namespace Yuni
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
 		template <class> class TrckP1, class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>& 
+	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>&
 	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator = (SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs)
 	{
 		SmartPtr tmp(rhs);
@@ -167,7 +167,7 @@ namespace Yuni
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline void 
+	inline void
 	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::swap(SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>& rhs)
 	{
 		OwnershipPolicy::swapPointer(rhs);

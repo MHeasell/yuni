@@ -54,11 +54,11 @@ namespace Gfx
 		*/
 		template<typename U, typename V, typename W>
 		Vector3D(const U x1, const V y1, const W z1): x((T)x1), y((T)y1), z((T)z1) {}
-		
+
 		//! Constructor by copy
 		template<typename U>
 		Vector3D(const Vector3D<U>& v) : x((T)v.x), y((T)v.y), z((T)v.z) {}
-		
+
 		//@} // Constructors
 
 
@@ -74,7 +74,7 @@ namespace Gfx
 
 		/*!
 		** \brief Add coordinates to a vector
-		** 
+		**
 		** \param x1 The X coordinate to add
 		** \param y1 The Y coordinate to add
 		** \param z1 The Z coordinate to add
@@ -110,7 +110,7 @@ namespace Gfx
 		void translate(const U x1, const V y1, const W z1) { x += (T)x1; y += (T)y1; z += (T)z1; }
 		/*!
 		** \brief Translate the point with relative coordinates from another Point
-		** \param p The values to add to the coordinates 
+		** \param p The values to add to the coordinates
 		*/
 		template<typename U>
 		void translate(const Vector3D<U>& p) { x += (T)p.x; y += (T)p.y; z += (T)p.z; }
@@ -131,9 +131,9 @@ namespace Gfx
 		template<typename U>
 		void mean(const Vector3D<U>& p)
 		{
-		  x = (T) ((x + p.x) / 2.0f);
-		  y = (T) ((y + p.y) / 2.0f);
-		  z = (T) ((z + p.z) / 2.0f);
+			x = (T) ((x + p.x) / 2.0f);
+			y = (T) ((y + p.y) / 2.0f);
+			z = (T) ((z + p.z) / 2.0f);
 		}
 
 		/*!
@@ -148,10 +148,10 @@ namespace Gfx
 		template<typename U, typename V>
 		Vector3D<T>& mean(const Vector3D<U>& p1, const Vector3D<V>& p2)
 		{
-		  x = (T) ((p1.x + p2.x) / 2.0f);
-		  y = (T) ((p1.y + p2.y) / 2.0f);
-		  z = (T) ((p1.z + p2.z) / 2.0f);
-		  return *this;
+			x = (T) ((p1.x + p2.x) / 2.0f);
+			y = (T) ((p1.y + p2.y) / 2.0f);
+			z = (T) ((p1.z + p2.z) / 2.0f);
+			return *this;
 		}
 
 		//@}
@@ -179,7 +179,7 @@ namespace Gfx
 		*/
 		template<typename U>
 		void operator () (const Vector3D<U>& v) { x = (T)v.x; y = (T)v.y; z = (T)v.z; }
-		
+
 
 		/*!
 		** \brief Translate the point with the same value for all coordinates
@@ -260,8 +260,8 @@ namespace Gfx
 
 
 
-} // Gfx
-} // Yuni
+} // namespace Gfx
+} // namespace Yuni
 
 
 

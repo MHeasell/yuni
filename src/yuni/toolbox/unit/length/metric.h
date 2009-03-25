@@ -13,7 +13,7 @@ namespace Unit
 {
 namespace Length
 {
-	
+
 	//! \brief Yottametre
 	//! \ingroup UnitLength
 	YUNI_UNIT_IMPL(Yottametre, "yottameter", "Ym", int64_t, 1e24);
@@ -81,7 +81,7 @@ namespace Length
 	//! \ingroup UnitLength
 	YUNI_UNIT_IMPL(Yoctometre, "yoctometre", "ym,", double, 1e-24);
 
-	
+
 
 } // namespace Length
 } // namespace Unit

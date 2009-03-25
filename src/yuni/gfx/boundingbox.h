@@ -23,11 +23,15 @@ namespace Gfx
 	public:
 		//! \name Constructors and destructor
 		//@{
-		BoundingBox(): pMin(), pMax(), pCenter()
-		{}
-		BoundingBox(const Point3D<T>& min, const Point3D<T>& max):
-			pMin(min), pMax(max), pCenter((min.x + max.x) / 2, (min.y + max.y) / 2, (min.z + max.z) / 2)
-		{}
+
+		//! Default constructor
+		BoundingBox();
+		
+		/*!
+		** \brief Constructor
+		*/
+		BoundingBox(const Point3D<T>& min, const Point3D<T>& max);
+		
 		//@}
 
 		/*!

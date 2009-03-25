@@ -42,7 +42,7 @@ namespace Checksum
 		** \brief Compute the hash from a string
 		**
 		** \param s The string
-		** \return The hash value 
+		** \return The hash value
 		*/
 		const String& fromString(const String& s) {return fromRawData(s.c_str(), s.size());}
 
@@ -51,7 +51,7 @@ namespace Checksum
 		**
 		** \param rawdata The buffer
 		** \param size The size of the buffer. AutoDetectNullChar will make an autodetection of the length
-		** \return The hash value 
+		** \return The hash value
 		*/
 		virtual const String& fromRawData(const void* rawdata, uint64 size = AutoDetectNullChar) = 0;
 
@@ -59,7 +59,7 @@ namespace Checksum
 		** \brief Compute the hash of a given file
 		**
 		** \param filename The filename to analyze
-		** \return The hash value 
+		** \return The hash value
 		*/
 		virtual const String& fromFile(const String& filename) = 0;
 

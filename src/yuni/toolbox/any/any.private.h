@@ -3,10 +3,12 @@
 
 #include "../static/types.h"
 
+
 namespace Yuni
 {
 namespace Private
 {
+
 /*!
 ** \brief Any implementation details
 **
@@ -16,6 +18,7 @@ namespace Private
 */
 namespace Any
 {
+
 
 	/*!
 	** \brief Static function pointer table
@@ -32,6 +35,8 @@ namespace Any
 		void (*clone)(void* const*, void**);
 		void (*move)(void* const*, void**);
 	};
+
+
 
 	/*!
 	** \brief Static functions for small objects (smaller than a void *)
@@ -69,6 +74,7 @@ namespace Any
 		};
 	};
 
+
 	/*!
 	** \brief Static functions implementations for big objects (larger than a void *)
 	**
@@ -104,40 +110,44 @@ namespace Any
 		};
 	};
 
+
 	/*!
 	** \brief Structure providing function table for a type.
 	**
 	** This structure provides a function to get the appropriate function table for
 	** a given type in an allegedly sexy way. (like Table<T>::get())
 	*/
-    template<typename T>
-    struct Table
-    {
+	template<typename T>
+	struct Table
+	{
 		/*!
 		** \brief Returns a pointer on a static function table
 		**
 		** The static function table depends on the type and its size.
 		** One different function table will be instanciated by type.
 		*/
-	    static TypeManipulationTable * Get()
-	    {
-		    static TypeManipulationTable staticTable =
+		static TypeManipulationTable * Get()
+		{
+			static TypeManipulationTable staticTable =
 			{
 				Functions<Static::Type::IsSmall<T>::Yes>::template TypeManipulator<T>::Type,
 				Functions<Static::Type::IsSmall<T>::Yes>::template TypeManipulator<T>::Delete,
 				Functions<Static::Type::IsSmall<T>::Yes>::template TypeManipulator<T>::Clone,
 				Functions<Static::Type::IsSmall<T>::Yes>::template TypeManipulator<T>::Move
-		    };
+			};
 
-		    return &staticTable;
-	    }
-    };
+			return &staticTable;
+		}
+	};
+
+
 
 	/*!
 	** \brief Any type for an empty Any.
 	*/
-    struct Empty {
-    };
+	struct Empty {};
+
+
 
 } // namespace Any
 } // namespace Private

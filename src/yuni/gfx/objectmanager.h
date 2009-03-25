@@ -1,9 +1,9 @@
-
 #ifndef __YUNI_GFX_OBJECTMANAGER_H__
 # define __YUNI_GFX_OBJECTMANAGER_H__
 
 # include "../toolbox/hash/table.h"
 # include "../toolbox/smartptr/smartptr.h"
+
 
 namespace Yuni
 {
@@ -51,7 +51,10 @@ namespace Gfx
 	}; // ObjectManager
 
 
-} // Gfx
-} // Yuni
+
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // !__YUNI_GFX_OBJECTMANAGER_H__

@@ -28,7 +28,7 @@ namespace Gfx
 	**
 	** The position of the children in the array is the following :
 	** \code
-	**   0    1    2    3    4    5    6    7  
+	**   0    1    2    3    4    5    6    7
 	** ------- < X -------||------- >=X -------
 	** -- < Y --||-- >=Y -||- < Y --||-- >=Y --
 	**  <Z ||>=Z||<Z ||>=Z||<Z ||>=Z||<Z ||>=Z

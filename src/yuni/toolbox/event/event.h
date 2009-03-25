@@ -31,7 +31,7 @@ namespace Event
 		{(o->*method)(a1,a2);}
 	};
 
-	
+
 
 
 
@@ -85,7 +85,7 @@ namespace Event
 	** 			}
 	** 			onChanged(newT);
 	** 		}
-	** 		
+	**
 	** private:
 	** 		float pLastValue;
 	** };
@@ -133,7 +133,7 @@ namespace Event
 	** 				std::cout << "The radiator `" << pName << "`has stopped." << std::endl;
 	** 			}
 	** 		}
-	** 		
+	** 
 	** 		void onTemperatureChanged(float t)
 	** 		{
 	** 			std::cout << "Temperature: " << t << std::endl;
@@ -182,7 +182,7 @@ namespace Event
 	** 		sensor.update(15.9);
 	** 		sensor.update(22.7);
 	** 		sensor.update(42.);
-	** 		
+	**
 	** 		return 0;
 	** }
 	** \endcode
@@ -206,7 +206,7 @@ namespace Event
 
 	protected:
 		/*!
-		** \brief Disconnect all event emitters and prevents any further connection 
+		** \brief Disconnect all event emitters and prevents any further connection
 		*/
 		void destroyingObserver();
 
@@ -227,7 +227,7 @@ namespace Event
 		** \internal Attach an event emitter without doing anything else
 		*/
 		virtual void internalAttachEvent(IEvent* evt);
-		
+
 		/*!
 		** \internal Detach an event emitter without doing anything else
 		*/
@@ -238,10 +238,9 @@ namespace Event
 		IEvent::List pEvents;
 		//!
 		bool pCanObserve;
-		
+
 	}; // class Observer
 
-	
 
 
 
@@ -337,7 +336,7 @@ namespace Event
 	};
 
 
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -346,7 +345,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(1);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -356,7 +355,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(2);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -367,7 +366,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(3);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -379,7 +378,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(4);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -392,7 +391,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(5);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -406,7 +405,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(6);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -421,7 +420,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(7);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -437,7 +436,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(8);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -454,7 +453,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(9);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events
@@ -472,7 +471,7 @@ namespace Event
 	** \tparam TP The threading policy
 	*/
 	YUNI_EVENT_IMPL(10);
-	
+
 	/*!
 	** \brief Event with a single argument
 	** \ingroup Events

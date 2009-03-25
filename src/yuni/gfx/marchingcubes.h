@@ -111,7 +111,11 @@ namespace Gfx
 
 	}; // Class MarchingCubes
 
-} // Gfx
-} // Yuni
+
+
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_MARCHINGCUBES_H__

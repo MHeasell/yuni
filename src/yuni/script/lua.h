@@ -21,6 +21,7 @@ namespace Script
 	** \see file yuni/private/script/lua.proxy.h
 	*/
 	class LuaProxy;
+
 } // namespace Script
 } // namespace Private
 
@@ -57,7 +58,7 @@ namespace Script
 		virtual bool appendFromFile(const String& file);
 
 		virtual bool appendFromString(const String& script);
-		
+
 		virtual bool appendFromBuffer(const char * scriptBuf, const unsigned int scriptSize);
 
 		virtual void reset();
@@ -114,7 +115,7 @@ namespace Script
 		** \brief Callback Proxy
 		*/
 		static int callbackProxy(void *lua_state);
-	
+
 	private:
 		//! A proxy to the Lua language API.
 		Yuni::Private::Script::LuaProxy *pProxy;

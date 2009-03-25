@@ -48,7 +48,7 @@ namespace Yuni
 	**
 	**
 	** Here is a typical way of how to use this class :
-	** \code 
+	** \code
 	** Uri uri("http://www.example.org");
 	** uri.defaultPathIfEmpty(); // Ensure the path is not empty
 	** switch (uri.protocol())
@@ -58,7 +58,7 @@ namespace Yuni
 	** 		default: ...; // Unsupported protocol
 	** }
 	** \endcode
-	** 
+	**
 	**
 	** It is possible to modify only a part of the URI :
 	** \code
@@ -73,22 +73,22 @@ namespace Yuni
 	** \endcode
 	**
 	**
-	** 
+	**
 	** \note An URL refers to a subset of URIs
-	** 
+	**
 	** \note <b>Modifying an URI</b> : If any modification is brought to any part
 	** of the URI, the returned value of the method `isValid()` should no longer
 	** be used, because this variable is set when the URI is built from a simple
 	** string.
 	**
-	** 
-	** 
+	**
+	**
 	** \note <b>Special scheme</b> : When the scheme `file` is used, the server
 	** field should not be used (`file://foo/tmp` should lead to `/tmp`, but
 	** `file:///foo/tmp` will lead to `/foo/tmp`).
 	**
 	**
-	** 
+	**
 	** \note <b>Suffix reference</b> : The URI syntax is designed for unambiguous
 	** reference to resources but traditional uses allow (for convenient reasons)
 	** a suffix of the URI as a reference consisting of only the authority and path
@@ -103,7 +103,7 @@ namespace Yuni
 	**
 	** Uri uri3("www.libyuni.org/downloads");
 	** // Server: `www.libyuni.org`, path: `/downloads`
-	** std::cout << "Server: `" << uri3.server() << "`, path: `" << uri3.path() << "`" << std::endl; 
+	** std::cout << "Server: `" << uri3.server() << "`, path: `" << uri3.path() << "`" << std::endl;
 	** \endcode
 	**
 	**
@@ -254,7 +254,7 @@ namespace Yuni
 
 		//! \name Conversion
 		//@{
-		
+
 		/*!
 		** \brief Reconstruct the URI to a string
 		*/
@@ -265,7 +265,7 @@ namespace Yuni
 		** \param out The stream output
 		*/
 		std::ostream& print(std::ostream& out) const {out << pInfos.toString();return out;}
-		
+
 		//@}
 
 

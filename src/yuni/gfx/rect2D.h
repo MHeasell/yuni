@@ -299,8 +299,10 @@ namespace Gfx
 
 
 
-} // Gfx
-} // Yuni
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 
 

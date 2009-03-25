@@ -35,7 +35,7 @@ namespace Uri
 		isValid = false;
 	}
 
-	
+
 	void Informations::assign(const Informations& rhs)
 	{
 		scheme   = rhs.scheme;
@@ -47,7 +47,7 @@ namespace Uri
 		fragment = rhs.fragment;
 		isValid  = rhs.isValid;
 	}
-	
+
 
 
 
@@ -58,7 +58,7 @@ namespace Uri
 			String s;
 			if (!scheme.empty())
 				s << scheme << ":";
-			if (!server.empty()) 
+			if (!server.empty())
 			{
 				if (!scheme.empty())
 					s << "//";
@@ -102,7 +102,7 @@ namespace Uri
 
 
 
-} // namespace Uri	
+} // namespace Uri
 } // namespace Private
 } // namespace Yuni
 

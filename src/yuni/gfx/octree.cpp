@@ -127,9 +127,11 @@ namespace Gfx
 			split();
 			// Loop on all children
 			for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+			{
 				if (pChildren[i])
 					// Recursive call
 					pChildren[i]->growToDepth(depth - 1);
+			}
 		}
 	}
 
@@ -141,9 +143,11 @@ namespace Gfx
 			split();
 		// Loop on all children
 		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+		{
 			if (pChildren[i])
 				// Recursive call
 				pChildren[i]->growToSize(size);
+		}
 	}
 
 
@@ -205,6 +209,7 @@ namespace Gfx
 		}
 		return pPoints.size() + childPointCount;
 	}
+
 
 	uint16 Octree::getChildIndex(const Point3D<float>& p) const
 	{

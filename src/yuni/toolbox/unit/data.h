@@ -40,7 +40,7 @@ namespace Bit
 	//! \ingroup UnitDataBit
 	struct Quantity;
 
-		
+
 
 	//! SI (byte)
 	//! \ingroup UnitDataBit
@@ -77,7 +77,7 @@ namespace Bit
 	YUNI_UNIT_IMPL(Bit, "bit", "B", int, 1);
 
 
-	
+
 } // namespace Bit
 
 
@@ -151,7 +151,7 @@ namespace Octet
 	YUNI_UNIT_IMPL(Octet, "octet", "o", int, 1);
 
 
-	
+
 } // namespace Octet
 
 
