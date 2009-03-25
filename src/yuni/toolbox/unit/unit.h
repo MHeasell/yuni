@@ -33,7 +33,7 @@ namespace Unit
 	** std::cout << Unit::Length::Inch<>(k) << Unit::Length::Inch::Symbol() << std::endl;
 	** \endcode
 	**
-	** 
+	**
 	** It is impossible by design to make conversions from a quantity to another
 	** one (for example a length and a temperature). If it is really what you
 	** want to do, you have to explicitly use the method `value()` to avoid any
@@ -50,10 +50,10 @@ namespace Unit
 	** the same than the stored value.
 	** \code
 	** Unit::Length::Metre<int> m(600); // 600 m
-	** 
+	**
 	** Unit::Length::Kilometre<int> k1(m);
 	** std::cout << "In km (int) : " k1 << std::endl; // 0
-	** 
+	**
 	** Unit::Length::Kilometre<double> k2(m);
 	** std::cout << "In km (double)" << k2 << std::endl; // 0.6
 	**
@@ -62,7 +62,7 @@ namespace Unit
 	** Unit::Length::Metre<int, double> m2(k); // should be 600 m
 	** std::cout << "In meters (double for conversions) : " << m2 << std::endl; // 600m
 	** \endcode
-	** 
+	**
 	**
 	** This class should not be directly used, even for template methods.
 	** Always prefer the SI bse unit.
@@ -75,7 +75,7 @@ namespace Unit
 	**  	std::cout << distance << " " << distance.unitName() << std::endl;
 	** }
 	** \endcode
-	** 
+	**
 	** A better example would be :
 	** \code
 	** #include <yuni/unit/length.h>
@@ -87,7 +87,7 @@ namespace Unit
 	**  	std::cout << distance << " " << distance.unitName() << std::endl;
 	** }
 	** \endcode
-	** 
+	**
 	**
 	** \note This class is not thread-safe.
 	**
@@ -128,7 +128,7 @@ namespace Unit
 		typedef Child  Type;
 		//! The stored type
 		typedef T InnerType;
-		
+
 		//! Symbol used for the Unit of measurement (may be empty)
 		static const char* Symbol() {return Child::Symbol();}
 		//! Name of the Unit of measurement
@@ -144,21 +144,21 @@ namespace Unit
 		//! Default constructor
 		Abstract();
 
-		//! Constructor from a raw value 
+		//! Constructor from a raw value
 		Abstract(const sint16 u);
-		//! Constructor from a raw value 
+		//! Constructor from a raw value
 		Abstract(const sint32 u);
-		//! Constructor from a raw value 
+		//! Constructor from a raw value
 		Abstract(const sint64 u);
-		//! Constructor from a raw value 
+		//! Constructor from a raw value
 		Abstract(const uint16 u);
-		//! Constructor from a raw value 
+		//! Constructor from a raw value
 		Abstract(const uint32 u);
-		//! Constructor from a raw value 
+		//! Constructor from a raw value
 		Abstract(const uint64 u);
-		//! Constructor from a raw value 
+		//! Constructor from a raw value
 		Abstract(const float u);
-		//! Constructor from a raw value 
+		//! Constructor from a raw value
 		Abstract(const double u);
 
 		/*!
@@ -185,7 +185,7 @@ namespace Unit
 
 		//@}
 
-		
+
 		//! \name Value
 		//@{
 		/*!
@@ -193,8 +193,8 @@ namespace Unit
 		*/
 		T value() const {return pValue;}
 		//@}
-	
-		
+
+
 		//! \name Informations about the Unit
 		//@{
 		//! Symbol used for the Unit of measurement (may be empty)
@@ -204,7 +204,7 @@ namespace Unit
 		//! Relation to SI
 		N relationToSI() const {return Child::RelationToSI();}
 		//@}
-	
+
 		//! \name Conversion to SI
 		//@{
 		template<typename U>
@@ -415,7 +415,6 @@ namespace Unit
 		AbstractType  operator -- (int);
 		//@}
 
-		
 		//! \name Operator `!`
 		//@{
 		bool operator ! () const {return !pValue;}

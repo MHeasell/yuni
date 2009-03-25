@@ -7,6 +7,23 @@ namespace Yuni
 namespace Gfx
 {
 
+
+
+	template<typename T>
+	inline
+	BoundingBox<T>::BoundingBox()
+		:pMin(), pMax(), pCenter()
+	{}
+
+
+	template<typename T>
+	inline
+	BoundingBox<T>::BoundingBox(const Point3D<T>& min, const Point3D<T>& max)
+		:pMin(min), pMax(max),
+		pCenter((min.x + max.x) / 2, (min.y + max.y) / 2, (min.z + max.z) / 2)
+	{}
+
+
 	template<typename T>
 	void BoundingBox<T>::addPoint(const Point3D<T>& point)
 	{

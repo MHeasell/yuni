@@ -30,7 +30,7 @@ namespace Length
 	//! \ingroup UnitLength
 	YUNI_UNIT_IMPL(SIBaseUnit, "metre", "m", int,1);
 
-	
+
 } // namespace Length
 } // namespace Unit
 } // namespace Yuni

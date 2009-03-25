@@ -20,7 +20,7 @@ namespace Static
 
 		static RetTrue& choose (RetTrue& tr, RetFalse&)
 		{return tr;}
-		
+
 		static const RetTrue& choose (const RetTrue& tr, const RetFalse&)
 		{ return tr; }
 	};
@@ -37,7 +37,7 @@ namespace Static
 
 		static RetFalse& choose (RetTrue&, RetFalse& fa)
 		{ return fa; }
-		
+
 		static const RetFalse& choose (const RetTrue&, const RetFalse& fa)
 		{ return fa; }
 	};

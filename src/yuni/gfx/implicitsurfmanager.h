@@ -6,10 +6,12 @@
 # include "metaball.h"
 # include "octree.h"
 
+
 namespace Yuni
 {
 namespace Gfx
 {
+
 
 	/*!
 	** \brief Manager for all implicit surface regions.
@@ -56,6 +58,8 @@ namespace Gfx
 		std::vector<SharedPtr<AMetaObject> > pObjects;
 
 	}; // class ImplicitSurfManager
+
+
 
 } // Gfx
 } // Yuni

@@ -77,7 +77,7 @@ namespace Endianness
 	** \param[in,out] in The variable
 	*/
 	inline void SwapBytes4(char* in) { std::swap(in[0], in[3]); std::swap(in[1], in[2]); }
-	
+
 
 	/*!
 	** \brief Swap bytes for a 8 bytes long variable

@@ -21,10 +21,9 @@ namespace Uri
 	public:
 		//! \name Constructors
 		//@{
-		
+		//! Default constructor
 		Informations();
 		Informations(const Informations& rhs);
-
 		//@}
 
 		void assign(const Informations& rhs);
@@ -51,7 +50,7 @@ namespace Uri
 
 
 
-} // namespace Uri	
+} // namespace Uri
 } // namespace Private
 } // namespace Yuni
 

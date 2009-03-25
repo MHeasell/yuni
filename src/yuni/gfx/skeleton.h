@@ -1,4 +1,3 @@
-
 #ifndef __YUNI_GFX_SKELETON_H__
 # define __YUNI_GFX_SKELETON_H__
 
@@ -6,10 +5,12 @@
 # include "../toolbox/tree/treeN.h"
 # include "mesh.h"
 
+
 namespace Yuni
 {
 namespace Gfx
 {
+
 
 	/*!
 	** \brief A skeleton contains a mesh and possibly sub-skeletons
@@ -33,7 +34,6 @@ namespace Gfx
 
 		//@}
 
-
 		//! \name Accessors
 		//@{
 
@@ -42,10 +42,7 @@ namespace Gfx
 		**
 		** \return A smart pointer to the object's mesh, can point to NULL
 		*/
-		const SmartPtr<Mesh>& mesh()
-		{
-			return pMesh;
-		}
+		const SmartPtr<Mesh>& mesh() {return pMesh;}
 
 		//@}
 
@@ -60,7 +57,11 @@ namespace Gfx
 		Vector3D<float> pRotation;
 	};
 
-} // Gfx
-} // Yuni
+
+
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_SKELETON_H__

@@ -19,7 +19,6 @@ namespace Application
 
 
 
-	
 
 
 	AApplication* AApplication::Instance()
@@ -57,7 +56,7 @@ namespace Application
 			if (!r.empty())
 				pRootFolder = Toolbox::Paths::ExtractFilePath(r);
 		}
-   
+  
 		// Find The absolution exe name
 		pExeName.clear();
 		if (pRootFolder.empty())

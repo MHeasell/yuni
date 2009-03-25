@@ -49,9 +49,9 @@ namespace Script
 	{
 	public:
 		/*!
-        ** \name Various Callback types
-        ** \see AScript::bind()
-        */
+		** \name Various Callback types
+		** \see AScript::bind()
+		*/
 		//@{
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *), Callback0);
 		YUNI_SCRIPT_SCRIPT_DEFINE_CBTYPE_WITH((AScript *, YUNI_SCRIPT_SCRIPT_1_ANY), Callback1);
@@ -101,7 +101,7 @@ namespace Script
 		** The specified file will be parsed and may or may not be evaluated
 		** immediately, depending on the capacities of the underlying script
 		** engine. You may call this method several times to sequentially load several
-		** files in the same script context. The files will be parsed (and evaluated 
+		** files in the same script context. The files will be parsed (and evaluated
 		** on subsequent calls to call() or prepare()) in the same order.
 		** sequentially in this case (FIFO).
 		**
@@ -201,10 +201,10 @@ namespace Script
 
 		/*!
 		** \brief This family of functions calls the specified function.
-		**		  
-        ** It exists in 9 different versions, from 0 to 8 arguments.
-		** 
-        ** \param[out] retValues A variant containing the (or a list of) the return
+		**
+		** It exists in 9 different versions, from 0 to 8 arguments.
+		**
+		** \param[out] retValues A variant containing the (or a list of) the return
 		**			   values. You may pass NULL there if you do
 		**			   not wish to do anything with the return value.
 		** \param[in] method The method to call in the script namespace
@@ -218,7 +218,7 @@ namespace Script
 		** \code
 		**
 		** Any ret;
-		** Script::AScript *sc = ...; 
+		** Script::AScript *sc = ...;
 		** std::vector<int> intVector;
 		**
 		** [...]
@@ -248,7 +248,7 @@ namespace Script
 		/*!
 		** \brief This family of function binds a C++ global function with 0 to 8 Yuni::Any arguments in
 		** the lua namespace, with the (script namespace) name method.
-        **
+		**
 		** \param[in] method The method name in the lua namespace
 		** \param[in] callback the callback function (a global function or a static method), taking an AScript* as first
 		**			  argument, and 0 to 8 Yuni::Any arguments.
@@ -267,7 +267,7 @@ namespace Script
 		**	 return true;
 		** }
 		**
-		** Script::AScript *sc = ...; 
+		** Script::AScript *sc = ...;
 		**
 		** if (!sc->bind("myPrint_function", &(::myPrint)))
 		** {

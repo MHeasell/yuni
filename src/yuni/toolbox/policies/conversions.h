@@ -36,7 +36,7 @@ namespace Conversion
 		/*!
 		** \brief Copy constructor
 		**
-		** It is possible to initialize a `Disallow` policy with an `Allow` policy 
+		** It is possible to initialize a `Disallow` policy with an `Allow` policy
 		*/
 		Disallow(const Allow&) {}
 

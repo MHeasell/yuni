@@ -50,7 +50,7 @@ namespace Length
 	//! \brief Finger
 	//! \ingroup UnitLength
 	YUNI_UNIT_IMPL(Finger, "finger", "", double, 0.022225);
-	
+
 	//! \brief Foot (Benoît)(H)
 	//! \ingroup UnitLength
 	YUNI_UNIT_IMPL(FootBenoit, "foot (Benoit)", "ft(Ben)", double, 0.304799735);
@@ -119,7 +119,7 @@ namespace Length
 	//! \brief Mickey
 	//! \ingroup UnitLength
 	YUNI_UNIT_IMPL(Mickey, "mickey", "", double, 1.27e-4);
-	
+
 	//! \brief Micron
 	//! \ingroup UnitLength
 	YUNI_UNIT_IMPL(Micron, "micron", "µ", double, 1e-6);

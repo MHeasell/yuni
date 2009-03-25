@@ -6,10 +6,12 @@
 # include "triangle.h"
 # include "mesh.proxy.h"
 
+
 namespace Yuni
 {
 namespace Gfx
 {
+
 
 	/*!
 	** \brief A mesh is a set of linked and spatially positioned triangles.
@@ -37,10 +39,7 @@ namespace Gfx
 		**
 		** \param tri Triangle to add
 		*/
-		void addTriangle(const SmartPtr<Triangle>& tri)
-		{
-			pTriangles.push_back(tri);
-		}
+		void addTriangle(const SmartPtr<Triangle>& tri) {pTriangles.push_back(tri);}
 
 		/*!
 		** \brief Print the mesh
@@ -63,10 +62,7 @@ namespace Gfx
 		**
 		** \return A const reference to the mesh's triangle list
 		*/
-		const TriangleList& triangles() const
-		{
-			return pTriangles;
-		}
+		const TriangleList& triangles() const {return pTriangles;}
 
 		/*!
 		** \brief Update the library-specific representation with the new data
@@ -74,21 +70,21 @@ namespace Gfx
 		** This is not done automatically to avoid doing it uselessly
 		** (for example if more changes will be done).
 		*/
-		void update()
-		{
-			pProxy->update(pTriangles);
-		}
+		void update() {pProxy->update(pTriangles);}
 
 	protected:
-
 		//! The Mesh knows all the triangles that define it
 		TriangleList pTriangles;
 
 		//! Proxy for the library-specific representation
 		Yuni::Private::Gfx::ProxyMesh* pProxy;
-	};
 
-} // Gfx
-} // Yuni
+	}; // class Mesh
+
+
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_MESH_H__

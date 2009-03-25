@@ -63,8 +63,8 @@ namespace Gfx
 		float r4 = r2 * r2;
 		float r6 = r4 * r2;
 		return a  * (1 - (4.0f * r6 / 9.0f / b6)
-					 + (17.0f * r4 / 9.0f / b4)
-					 - (22.0f * r2 / 9.0f / b2));
+				+ (17.0f * r4 / 9.0f / b4)
+				- (22.0f * r2 / 9.0f / b2));
 	}
 
 

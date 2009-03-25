@@ -28,7 +28,7 @@ namespace Application
 	public:
 		//! \name Constructor & Destructor
 		//@{
-		
+
 		/*!
 		** \brief Constructor
 		** \param argc The number of arguments
@@ -38,7 +38,7 @@ namespace Application
 
 		//! Destructor
 		virtual ~Gfx3D();
-		
+
 		//@}
 
 		//! \name Application title

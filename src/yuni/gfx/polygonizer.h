@@ -13,8 +13,9 @@ namespace Gfx
 
 
 	/*!
-	** \brief A polygonizer is the abstraction of an algorithm able to create a triangle mesh from an isosurface.
-	** \ingroup Gfx3DAlgorithms 
+	** \brief A polygonizer is the abstraction of an algorithm able to create a
+	**        triangle mesh from an isosurface.
+	** \ingroup Gfx3DAlgorithms
 	*/
 	class Polygonizer
 	{
@@ -57,7 +58,12 @@ namespace Gfx
 
 	}; // Class Polygonizer
 
-} // Gfx
-} // Yuni
+
+
+
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_POLYGONIZER_H__

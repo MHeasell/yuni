@@ -34,12 +34,12 @@ namespace Gfx
 		*/
 		virtual void update(const TriangleList& triangles) = 0;
 
-	};
+	}; // class ProxyMesh
 
 
 
-} // Gfx
-} // Private
-} // Yuni
+} // namespace Gfx
+} // namespace Private
+} // namespace Yuni
 
 #endif // __YUNI_PRIVATE_GFX_MESH_PROXY_H__

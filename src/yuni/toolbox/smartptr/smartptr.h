@@ -37,10 +37,10 @@ namespace Yuni
 	** int main(void)
 	** {
 	**		SmartPtr<Foo> ptr;
-	**		
+	**
 	**		// Allocating a new `Foo` instance
 	**		ptr = new Foo(42);
-	**		
+	**
 	**		// Displaying its value, like if it were a standard pointer
 	**		if (ptr)
 	**			std::cout << "Value : " << ptr->value << std::endl;
@@ -134,10 +134,10 @@ namespace Yuni
 		>
 	class SmartPtr
 		:public StorP<T>,                              // inherits from the storage policy
-		 public OwspP<typename StorP<T>::PointerType>, // inherits from the ownership policy
-		 public ChckP<typename StorP<T>::StoredType>,  // inherits from the checking policy
-		 public ConvP,                                 // inherits from the conversion policy
-		 public TrckP<T>                               // inherits from the tracking policy
+		public OwspP<typename StorP<T>::PointerType>, // inherits from the ownership policy
+		public ChckP<typename StorP<T>::StoredType>,  // inherits from the checking policy
+		public ConvP,                                 // inherits from the conversion policy
+		public TrckP<T>                               // inherits from the tracking policy
 	{
 	public:
 		//! \name Type alias
@@ -207,22 +207,22 @@ namespace Yuni
 		//! Implicit - Conversions are allowed
 		typedef typename Static::If< ConversionPolicy::allow, const StoredType&, NeverMatched>::ResultType ImplicitStoredType;
 		//! Explicit - Conversions are not allowed
-        typedef typename Static::If<!ConversionPolicy::allow, const StoredType&, NeverMatched>::ResultType ExplicitStoredType;
+		typedef typename Static::If<!ConversionPolicy::allow, const StoredType&, NeverMatched>::ResultType ExplicitStoredType;
 
 
 	public:
 		//! \name Constructors & Destructor
 		//@{
-		
+
 		//! Default constructor
 		SmartPtr();
-		
+
 		//! Constructor with a given pointer, when implicit types are not allowed
 		explicit SmartPtr(ExplicitStoredType ptr);
-		
+
 		//! Constructor with a given pointer, when implicit types are allowed
 		SmartPtr(ImplicitStoredType ptr);
-		
+
 		//! Copy constructor
 		SmartPtr(CopyType& rhs);
 
@@ -284,10 +284,10 @@ namespace Yuni
 
 		//! \name Comparisons
 		//@{
-		
+
 		//! Operator `!` (to enable if (!mysmartptr) ...)
 		bool operator ! () const;
-		
+
 		//! operator `==`
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
 			template <class> class TrckP1, class ConvP1,

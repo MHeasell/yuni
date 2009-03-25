@@ -10,7 +10,7 @@ namespace Yuni
 namespace Gfx
 {
 
-	
+
 	/*!
 	** \brief Metaballs are the simplest and most used meta objects.
 	** \ingroup Gfx3DAlgorithms
@@ -53,8 +53,7 @@ namespace Gfx
 		/*!
 		** \brief Accessor to the center point of the metaball
 		*/
-		const Point3D<float>& center() const
-		{return pCenter;}
+		const Point3D<float>& center() const {return pCenter;}
 
 		/*!
 		** \brief Accessor to the density of the metaball

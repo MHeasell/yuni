@@ -34,7 +34,7 @@ namespace Application
 		destroyingObserver();
 	}
 
-	
+
 
 	void Gfx3D::execute()
 	{

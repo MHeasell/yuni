@@ -29,7 +29,7 @@
 	YUNI_EVENT_FRIEND_DECL_E(12);\
 
 
-	
+
 
 namespace Yuni
 {
@@ -37,13 +37,13 @@ namespace Event
 {
 
 	class IEvent;
-	
-	class IObserver;
-	
-	template<class D, template<class> class TP> class Observer;
-	
 
-	
+	class IObserver;
+
+	template<class D, template<class> class TP> class Observer;
+
+
+
 # define YUNI_EVENT_FORWARD_DECL_E(N) \
 	template<class R, YUNI_ENUM(N, class A), template<class> class TP = Policy::ObjectLevelLockable> class YUNI_JOIN(E,N)
 
@@ -60,7 +60,7 @@ namespace Event
 	YUNI_EVENT_FORWARD_DECL_E(10);
 	YUNI_EVENT_FORWARD_DECL_E(11);
 	YUNI_EVENT_FORWARD_DECL_E(12);
-	
+
 # undef YUNI_EVENT_FORWARD_DECL_E
 
 
@@ -74,7 +74,7 @@ namespace Event
 		virtual bool equalsTo(const IObserver* o) const = 0;
 		virtual R fireEvent() = 0;
 	};
-	
+
 	template<class C, class Mode, class R, class Dummy = void>
 	class ObserverItemA0 : public IObserverItemA0<R, Dummy>
 	{
@@ -95,8 +95,8 @@ namespace Event
 	private:
 		C* pObserver;
 		R (C::*pMethod)(void);
- 	}; // class ObserverItem
-	
+	}; // class ObserverItem
+
 
 # define YUNI_EVENT_OBSERVER_IMPL(N) \
 	template<class R, YUNI_ENUM(N,class A), class Dummy = void>  \
@@ -129,8 +129,8 @@ namespace Event
 	private: \
 		C* pObserver; \
 		R (C::*pMethod)( YUNI_ENUM(N, A) ); \
- 	} // class ObserverItem
-	
+	} // class ObserverItem
+
 	YUNI_EVENT_OBSERVER_IMPL(1);
 	YUNI_EVENT_OBSERVER_IMPL(2);
 	YUNI_EVENT_OBSERVER_IMPL(3);
@@ -148,7 +148,7 @@ namespace Event
 
 
 
-	
+
 	/*!
 	** \brief Event (Interface)
 	** \ingroup Events
@@ -179,7 +179,7 @@ namespace Event
 			}
 			return false;
 		}
-		
+
 		static bool RemoveFromList(List& lst, const IEvent* e)
 		{
 			const List::iterator end = lst.end();
@@ -193,7 +193,7 @@ namespace Event
 			}
 			return false;
 		}
-		
+
 	protected:
 		virtual void internalDetachObserver(const IObserver* o) = 0;
 	};

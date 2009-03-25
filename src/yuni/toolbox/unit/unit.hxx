@@ -74,7 +74,7 @@ namespace Unit
 		:pValue((T)u)
 	{}
 
-		
+
 	template<class Q, class Child, typename T, typename P, typename N>
 	template<typename P1>
 	inline

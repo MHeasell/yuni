@@ -37,7 +37,7 @@ namespace Luminance
 	YUNI_UNIT_IMPL(Lambert, "lambert", "L", double, 3183.09886);
 
 
-	
+
 } // namespace Luminance
 } // namespace Unit
 } // namespace Yuni

@@ -4,7 +4,7 @@
 /*!
 ** \file
 ** Defines macros for method declaration in AScript & co.
-** The macros in this file are used to declare functions with 
+** The macros in this file are used to declare functions with
 ** various argument counts (bind() and call()) in AScript declaration,
 ** and declarations of all classes inheriting from it.
 */

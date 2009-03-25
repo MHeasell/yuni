@@ -30,7 +30,7 @@ namespace Policy
 */
 namespace Ownership
 {
-	
+
 
 	/*!
 	** \brief Implementation of the reference counting ownership policy
@@ -52,7 +52,7 @@ namespace Ownership
 		ReferenceCounted()
 			:pCount(new unsigned int(1))
 		{}
-		
+
 		//! Copy constructor
 		ReferenceCounted(const ReferenceCounted& c)
 			:pCount(c.pCount)
@@ -89,7 +89,7 @@ namespace Ownership
 		}
 
 		void swapPointer(ReferenceCounted& rhs) {std::swap(pCount, rhs.pCount);}
-		
+
 	private:
 		//! The reference count
 		unsigned int* pCount;
@@ -167,7 +167,8 @@ namespace Ownership
 			destructiveCopy = false
 		};
 
-		typedef typename Policy::ClassLevelLockable< ReferenceCountedMT<T> >  ThreadingPolicy; 
+		typedef typename Policy::ClassLevelLockable< ReferenceCountedMT<T> >  ThreadingPolicy;
+
 	public:
 		//! \name Constructors
 		//@{

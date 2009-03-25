@@ -33,7 +33,7 @@ namespace Yuni
 		//@}
 
 		int hi() const {return pHi;}
-		void hi(const int h); 
+		void hi(const int h);
 
 		int lo() const {return pLo;}
 		void lo(const int l);

@@ -20,10 +20,10 @@ namespace Yuni
 	Uri::Uri(const Uri& rhs)
 		:pInfos(rhs.pInfos)
 	{}
-	
 
 
-	
+
+
 	class BuildSession
 	{
 	public:
@@ -32,90 +32,90 @@ namespace Yuni
 			length(str.length()), lastPosition(0), indx(0),
 			pMustRemoveDotSegments(false)
 		{}
-		
+
 		/*!
-		 * \brief Build informations about the URI
-		 */
+		* \brief Build informations about the URI
+		*/
 		void run();
-	
-		
+
+
 	private:
 		/*!
-		 * \brief 
-		 */
+		* \brief
+		*/
 		bool postFlight();
 
 		/*!
-		 * \brief Extract the scheme part
-		 *
-		 * The scheme may not exist and it is possible to be directly redirect
-		 * to the method of the path extraction
-		 */
+		* \brief Extract the scheme part
+		*
+		* The scheme may not exist and it is possible to be directly redirect
+		* to the method of the path extraction
+		*/
 		bool extractScheme(const String::value_type c);
 
 		/*!
-		 * \brief May Extract the server informations
-		 *
-		 * At this point of the global extraction, we are not sure to deal with
-		 * some server informations. It could possibly be a path
-		 */
+		* \brief May Extract the server informations
+		*
+		* At this point of the global extraction, we are not sure to deal with
+		* some server informations. It could possibly be a path
+		*/
 		bool extractAuthorty(const String::value_type c);
 
 		/*!
-		 * \brief Extract the server informations
-		 *
-		 * The method `extractAuthorty()` has detected some real server informations.
-		 * Actually the following string has been detected :
-		 * \code
-		 * scheme://
-		 * \endcode
-		 * But it can be a path, like this :
-		 * \code
-		 * file:///path/to/somewhere
-		 * \endcode
-		 */
+		* \brief Extract the server informations
+		*
+		* The method `extractAuthorty()` has detected some real server informations.
+		* Actually the following string has been detected :
+		* \code
+		* scheme://
+		* \endcode
+		* But it can be a path, like this :
+		* \code
+		* file:///path/to/somewhere
+		* \endcode
+		*/
 		bool extractServerInfos(const String::value_type c);
 
 		/*!
-		 * \brief Extract the port of the server
-		 *
-		 * The method `extractServerInfos()` has detected that a port value
-		 * was given.
-		 * Actually it might not be a port value, but a password. For example :
-		 * \code
-		 * myserver:8080
-		 * \endcode
-		 * and
-		 * \code
-		 * myuser:mypass
-		 * \endcode
-		 * The difference between the two items is ambigous until we found a `@`.
-		 */
+		* \brief Extract the port of the server
+		*
+		* The method `extractServerInfos()` has detected that a port value
+		* was given.
+		* Actually it might not be a port value, but a password. For example :
+		* \code
+		* myserver:8080
+		* \endcode
+		* and
+		* \code
+		* myuser:mypass
+		* \endcode
+		* The difference between the two items is ambigous until we found a `@`.
+		*/
 		bool extractPort(const String::value_type c);
 
 		/*!
-		 * \brief Extract the path
-		 *
-		 * The path may be prefixed by a query and/or a fragment
-		 */
+		* \brief Extract the path
+		*
+		* The path may be prefixed by a query and/or a fragment
+		*/
 		bool extractPath(const String::value_type c);
 
 		/*!
-		 * \brief Extract the query
-		 */
+		* \brief Extract the query
+		*/
 		bool extractQuery(const String::value_type c);
 
 		/*!
-		 * \brief Extract the fragment
-		 */
+		* \brief Extract the fragment
+		*/
 		bool extractFragment();
 
 
 
 	private:
 		/*!
-		 ** \brief All parts in an URI
-		 */
+		** \brief All parts in an URI
+		*/
 		enum Parts
 		{
 			partScheme,
@@ -210,7 +210,7 @@ namespace Yuni
 			{
 				// This solution to detect final dot (eg. `/path/to/file/.`) is not
 				// really satisfying and can lead to unnecessary tests to remove
-				// the dot segments (e.g. `file://filewith_missing_extension.`). 
+				// the dot segments (e.g. `file://filewith_missing_extension.`).
 				pMustRemoveDotSegments = ('.' == infos.path[infos.path.length() - 1]);
 			}
 			if (pMustRemoveDotSegments)
@@ -243,7 +243,7 @@ namespace Yuni
 						//
 						return true;
 					}
-					// A bracket should not be alone in the middle of the nowhere 
+					// A bracket should not be alone in the middle of the nowhere
 					return false;
 				}
 			case '.' :
@@ -388,7 +388,7 @@ namespace Yuni
 					if (1 != tag) // must begin by a bracket
 						return false;
 					// New state : a tag has been found and has been closed
-					tag = 2; 
+					tag = 2;
 					break;
 				}
 			case '/': // Begining of a path
@@ -404,7 +404,7 @@ namespace Yuni
 					}
 					else
 						// Forbidden [::/] is not a valid IPv6 address for sure
-						return false; 
+						return false;
 					break;
 				}
 			case ':': // Port value or IPv6 address ?
@@ -435,7 +435,7 @@ namespace Yuni
 					}
 					else
 						// forbidden  [::?] is not a valid IPv6 address for sure
-						return false; 
+						return false;
 					break;
 				}
 			case '#': // Fragment ?
@@ -574,7 +574,7 @@ namespace Yuni
 		return true;
 	}
 
-	
+
 
 	inline bool BuildSession::extractFragment()
 	{

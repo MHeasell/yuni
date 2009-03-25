@@ -1,10 +1,11 @@
-
 #ifndef __YUNI_GFX_OBJECT3D_H__
 # define __YUNI_GFX_OBJECT3D_H__
 
 # include "../toolbox/smartptr/smartptr.h"
 # include "../toolbox/tree/treeN.h"
 # include "skeleton.h"
+
+
 
 namespace Yuni
 {
@@ -24,13 +25,11 @@ namespace Gfx
 		//@{
 
 		//! Default Constructor
-		Object3D()
-		  : pID(0)
-		{}
+		Object3D() : pID(0) {}
 
 		//! Constructor with mesh initialization
 		Object3D(SmartPtr<Skeleton>& skeleton)
-		  : pID(0), pSkeleton(skeleton)
+			: pID(0), pSkeleton(skeleton)
 		{}
 
 		//! Default Destructor
@@ -46,10 +45,7 @@ namespace Gfx
 		**
 		** \return A smart pointer to the object's skeleton, can point to NULL
 		*/
-		const SmartPtr<Skeleton>& skeleton()
-		{
-			return pSkeleton;
-		}
+		const SmartPtr<Skeleton>& skeleton() {return pSkeleton;}
 
 		/*!
 		** \brief Set the skeleton to use for this object
@@ -63,22 +59,23 @@ namespace Gfx
 			pSkeleton = newSkeleton;
 		}
 
-		uint32 ID()
-		{
-			return pID;
-		}
+		//! Get the id
+		uint32 ID() const {return pID;}
 
 		//@}
 
 	protected:
 		//! Unique identifier for this object (type can still change)
 		uint32 pID;
-
 		//! The Skeleton for this object (contains the mesh)
 		SmartPtr<Skeleton> pSkeleton;
-	};
 
-} // Gfx
-} // Yuni
+	}; // class Object3D
+
+
+
+
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_OBJECT3D_H__

@@ -33,7 +33,7 @@ namespace Yuni
 			else
 			{
 				// Call the destructor on the old object, but do not deallocate memory !
-				reinterpret_cast<T*>(pObject)->~T(); 
+				reinterpret_cast<T*>(pObject)->~T();
 				// Create copy on-top of the old version
 				new (pObject) T(rhs);
 			}
@@ -83,5 +83,3 @@ namespace Yuni
 }
 
 #endif /* !__YUNI_TOOLBOX_ANY_ANY_HXX__ */
-
-

@@ -14,7 +14,7 @@ namespace Hash
 		return pTable.find(key) != pTable.end();
 	}
 
-		
+
 	template<typename K, typename V, template<class> class TP>
 	inline V& Table<K,V,TP>::operator[] (const K& key)
 	{
@@ -38,7 +38,7 @@ namespace Hash
 		const_iterator it = pTable.find(key);
 		return (it == pTable.end()) ? defvalue : it->second;
 	}
-	
+
 	template<typename K, typename V, template<class> class TP>
 	inline void Table<K,V,TP>::erase(const K& key)
 	{
@@ -55,7 +55,7 @@ namespace Hash
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return pTable.begin();
 	}
-	
+
 
 	template<typename K, typename V, template<class> class TP>
 	typename Table<K,V,TP>::iterator Table<K,V,TP>::end()
@@ -64,7 +64,7 @@ namespace Hash
 		return pTable.end();
 	}
 
-		
+
 	template<typename K, typename V, template<class> class TP>
 	void Table<K,V,TP>::clear()
 	{

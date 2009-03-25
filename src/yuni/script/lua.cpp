@@ -14,6 +14,8 @@ namespace Yuni
 namespace Script
 {
 
+
+
 	Lua::Lua()
 		:pEvalPending(0)
 	{
@@ -22,11 +24,13 @@ namespace Script
 		luaL_openlibs(this->pProxy->pState);
 	}
 
+
 	Lua::~Lua()
 	{
 		lua_close(this->pProxy->pState);
 		delete this->pProxy;
 	}
+
 
 	void Lua::reset()
 	{
@@ -36,9 +40,10 @@ namespace Script
 		pEvalPending = 0;
 	}
 
+
 	/*
-	 * TODO: Use Events to emit proper signals.
-	 */
+	* TODO: Use Events to emit proper signals.
+	*/
 	bool Lua::appendFromFile(const String& file)
 	{
 		const int result = luaL_loadfile(pProxy->pState, file.c_str());
@@ -69,6 +74,7 @@ namespace Script
 		return true;
 	}
 
+
 	bool Lua::appendFromString(const String& script)
 	{
 		const int result = luaL_loadstring(pProxy->pState, script.c_str());
@@ -93,6 +99,7 @@ namespace Script
 		}
 		return true;
 	}
+
 
 	bool Lua::appendFromBuffer(const char * scriptBuf, const unsigned int scriptSize)
 	{
@@ -119,6 +126,7 @@ namespace Script
 		return true;
 	}
 
+
 	bool Lua::prepare()
 	{
 		while (pEvalPending > 0)
@@ -135,6 +143,7 @@ namespace Script
 		return true;
 	}
 
+
 	int Lua::popReturnValues(int args, Any* poppedValues)
 	{
 		if (0 == args)
@@ -145,7 +154,7 @@ namespace Script
 			lua_pop(pProxy->pState, args);
 			return args;
 		}
-		
+
 		// We have only one value, output it directly.
 		if (1 == args)
 		{
@@ -209,7 +218,8 @@ namespace Script
 		return popped;
 	}
 
-	bool Lua::push(const Any &var)
+
+	bool Lua::push(const Any& var)
 	{
 		lua_checkstack(pProxy->pState, 1);
 		if (var.is<short>())
@@ -255,21 +265,21 @@ namespace Script
 
 
 	/*
-	 * Implementation of the call() method variants.
-	 * This is done via macros, because it's very repetitive and
-	 * will be unmaintainable otherwise. The drawback is that it's a little
-	 * harder to understand.
-	 *
-	 * In the first macro below, _PART1, we get the method on the stack.
-	 * If the stack did not move, the method does not exist, so we bail out.
-	 *
-	 * Then, we push, via the _PUSH_ARG macro, every argument given to our
-	 * function (they are named argX by _X_ANYS macros).
-	 *
-	 * Finally, we make the call and catch any errors with _PART2.
-	 *
-	 * TODO: implement the return value handling.
-	 */
+	* Implementation of the call() method variants.
+	* This is done via macros, because it's very repetitive and
+	* will be unmaintainable otherwise. The drawback is that it's a little
+	* harder to understand.
+	*
+	* In the first macro below, _PART1, we get the method on the stack.
+	* If the stack did not move, the method does not exist, so we bail out.
+	*
+	* Then, we push, via the _PUSH_ARG macro, every argument given to our
+	* function (they are named argX by _X_ANYS macros).
+	*
+	* Finally, we make the call and catch any errors with _PART2.
+	*
+	* TODO: implement the return value handling.
+	*/
 
 # define YUNI_SCRIPT_LUA_DEFINE_CALL_PART1 \
 	\
@@ -297,7 +307,7 @@ namespace Script
 		/* The call succeeded. Pop any values still hanging on the stack. */ \
 		stackPos = lua_gettop(pProxy->pState); \
 		this->popReturnValues(stackPos - stackTop, retValues); \
-		return true; 
+		return true;
 
 
 
@@ -400,22 +410,22 @@ namespace Script
 #undef YUNI_SCRIPT_LUA_DEFINE_CALL_PART1
 #undef YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 
-	
+
 	/*
-	 * Warning: this function is ugly. Please avoid reading it. Or, if you're brave,
-	 * provide a work-around. Or, see it as Abstract Art.
-	 *
-	 * We have to call the function back with some Anys so that the function doesn't
-	 * have to deal with Lua's stack. So, we must push on the lua stack a C closure that
-	 * is a proxy to the real callback. We push pointers to the essential data, along with
-	 * the number of arguments of the callback, in order to make the correct function call
-	 * in the proxy, and pass along any user data we were provided.
-	 *
-	 * The proxy will in turn extract parameters from the lua stack, and call the bound
-	 * function.
-	 *
-	 * TODO: implement userdata passing.
-	 */
+	* Warning: this function is ugly. Please avoid reading it. Or, if you're brave,
+	* provide a work-around. Or, see it as Abstract Art.
+	*
+	* We have to call the function back with some Anys so that the function doesn't
+	* have to deal with Lua's stack. So, we must push on the lua stack a C closure that
+	* is a proxy to the real callback. We push pointers to the essential data, along with
+	* the number of arguments of the callback, in order to make the correct function call
+	* in the proxy, and pass along any user data we were provided.
+	*
+	* The proxy will in turn extract parameters from the lua stack, and call the bound
+	* function.
+	*
+	* TODO: implement userdata passing.
+	*/
 
 #define YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(cb, argcount) \
 	bool Lua::bind(const String& method, cb callback, void *callbackData) \
@@ -449,7 +459,7 @@ namespace Script
 		lua_State *state = static_cast<lua_State *>(st);
 
 		Lua *This = static_cast<Lua *>(lua_touserdata(state, lua_upvalueindex(1)));
-		
+
 		int argCount = lua_tointeger(state, lua_upvalueindex(4)); // Get the original function argument count.
 
 		switch (argCount)
@@ -465,7 +475,7 @@ namespace Script
 					Callback1 call = reinterpret_cast<Callback1>(lua_touserdata(state, lua_upvalueindex(2)));
 					return call(This, 1);
 				}
-				break; 
+				break;
 			default:
 				lua_pushstring(state, "Yuni::Script::Lua::callbackProxy(): received garbage data.");
 				lua_error(state); // Never returns.
@@ -476,8 +486,10 @@ namespace Script
 	}
 
 
+
 } // namespace Script
 } // namespace Yuni
 
 #include "../private/script/script.undefs.h"
 #include "script.undefs.h"
+
