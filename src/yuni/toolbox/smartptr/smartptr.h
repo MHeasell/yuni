@@ -119,7 +119,6 @@ namespace Yuni
 	** \tparam T      The type
 	** \tparam OwspP  The ownership policy
 	** \tparam ChckP  The Checking policy
-	** \tparam TrckP  The Tracking policy
 	** \tparam ConvP  The Conversion policy
 	** \tparam StorP  The Storage policy
 	** \tparam ConsP  The Constness policy
@@ -127,7 +126,6 @@ namespace Yuni
 	template< typename T,                                                     // The original type
 		template <class> class OwspP = Policy::Ownership::ReferenceCountedMT, // Ownership policy
 		template <class> class ChckP = Policy::Checking::None,                // Checking policy
-		template <class> class TrckP = Policy::Tracking::None,                // Tracking policy
 		class ConvP                  = Policy::Conversion::Allow,             // Conversion policy
 		template <class> class StorP = Policy::Storage::Pointer,              // Storage policy
 		template <class> class ConsP = Policy::Constness::DontPropagateConst  // Constness policy
@@ -136,8 +134,7 @@ namespace Yuni
 		:public StorP<T>,                              // inherits from the storage policy
 		public OwspP<typename StorP<T>::PointerType>, // inherits from the ownership policy
 		public ChckP<typename StorP<T>::StoredType>,  // inherits from the checking policy
-		public ConvP,                                 // inherits from the conversion policy
-		public TrckP<T>                               // inherits from the tracking policy
+		public ConvP                                  // inherits from the conversion policy
 	{
 	public:
 		//! \name Type alias
@@ -155,8 +152,6 @@ namespace Yuni
 		typedef ChckP<typename StorP<T>::StoredType>  CheckingPolicy;
 		//! The Constness policy
 		typedef ConsP<T>  ConstnessPolicy;
-		//! The tracking policy
-		typedef TrckP<T>  TrackingPolicy;
 
 		//! the Pointer type
 		typedef typename StoragePolicy::PointerType    PointerType;
@@ -171,11 +166,11 @@ namespace Yuni
 
 
 		//! Alias to itself
-		typedef SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP> SmartPtrType;
+		typedef SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP> SmartPtrType;
 		//! A smart pointer with a const pointer
-		typedef SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,Policy::Constness::PropagateConst> ConstSmartPtrType;
+		typedef SmartPtr<T,OwspP,ChckP,ConvP,StorP,Policy::Constness::PropagateConst> ConstSmartPtrType;
 		//! A smart pointer with a non-const pointer
-		typedef SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,Policy::Constness::DontPropagateConst> NonConstSmartPtrType;
+		typedef SmartPtr<T,OwspP,ChckP,ConvP,StorP,Policy::Constness::DontPropagateConst> NonConstSmartPtrType;
 
 		//! The Type to use for the copy constructor
 		typedef typename Static::If<OwnershipPolicy::destructiveCopy, SmartPtrType, const SmartPtrType>::ResultType  CopyType;
@@ -228,15 +223,15 @@ namespace Yuni
 
 		//! Copy constructor
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs);
+		SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs);
 
 		//! Copy constructor
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		SmartPtr(SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs);
+		SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs);
 
 		//! Move Constructor
 		SmartPtr(Static::MoveConstructor<SmartPtrType> rhs);
@@ -269,15 +264,15 @@ namespace Yuni
 
 		//! Copy from another smartptr
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		SmartPtr& operator = (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs);
+		SmartPtr& operator = (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs);
 
 		//! Copy from another smartptr
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		SmartPtr& operator = (SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs);
+		SmartPtr& operator = (SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs);
 
 		//@}
 
@@ -290,39 +285,39 @@ namespace Yuni
 
 		//! operator `==`
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		bool operator == (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+		bool operator == (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const;
 
 		//! Operator `!=`
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		bool operator != (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+		bool operator != (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const;
 
 		//! Operator `<`
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		bool operator < (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+		bool operator < (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const;
 
 		//! Operator `>`
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		bool operator > (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+		bool operator > (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const;
 
 		//! Operator `<=`
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		bool operator <= (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+		bool operator <= (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const;
 
 		//! Operator `>=`
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-			template <class> class TrckP1, class ConvP1,
+			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
-		bool operator >= (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const;
+		bool operator >= (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const;
 
 		//@}
 

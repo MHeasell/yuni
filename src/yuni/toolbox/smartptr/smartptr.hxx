@@ -6,9 +6,9 @@ namespace Yuni
 {
 
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline T* SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::ExtractPointer(const SmartPtr& p)
+	inline T* SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ExtractPointer(const SmartPtr& p)
 	{
 		return storagePointer(p);
 	}
@@ -18,9 +18,9 @@ namespace Yuni
 
 	// Default constructor
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::SmartPtr()
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr()
 	{
 		// Checking if a null value is allowed, or not
 		CheckingPolicy::onDefault(storagePointer(*this));
@@ -29,9 +29,9 @@ namespace Yuni
 
 	// Explicit
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::ExplicitStoredType ptr)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ExplicitStoredType ptr)
 		:StoragePolicy(ptr)
 	{
 		// Check if the checking policy allows the given value
@@ -41,9 +41,9 @@ namespace Yuni
 
 	// Implicit
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::ImplicitStoredType ptr)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ImplicitStoredType ptr)
 		:StoragePolicy(ptr)
 	{
 		// Check if the checking policy allows the given value
@@ -53,10 +53,10 @@ namespace Yuni
 
 	// Copy constructor
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::CopyType& rhs)
-		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs), TrackingPolicy(rhs)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::CopyType& rhs)
+		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs)
 	{
 		// Cloning the stored data
 		storageReference(*this) = OwnershipPolicy::clone(storageReference(rhs));
@@ -65,13 +65,13 @@ namespace Yuni
 
 	// Copy constructor
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
+		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs)
-		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs), TrackingPolicy(rhs)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs)
+		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs)
 	{
 		// Cloning the stored data
 		storageReference(*this) = OwnershipPolicy::clone(storageReference(rhs));
@@ -80,13 +80,13 @@ namespace Yuni
 
 	// Copy constructor
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
+		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::SmartPtr(SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs)
-		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs), TrackingPolicy(rhs)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs)
+		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs)
 	{
 		// Cloning the stored data
 		storageReference(*this) = OwnershipPolicy::clone(storageReference(rhs));
@@ -96,18 +96,18 @@ namespace Yuni
 
 	// Move constructor
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::SmartPtr(Static::MoveConstructor<SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP> > rhs)
-		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs), TrackingPolicy(rhs)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(Static::MoveConstructor<SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP> > rhs)
+		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs)
 	{}
 
 
 	// Destructor
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::~SmartPtr()
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::~SmartPtr()
 	{
 		// Shall we destroy the data ?
 		if (OwnershipPolicy::release(storagePointer(*static_cast<StoragePolicy*>(this))))
@@ -120,10 +120,10 @@ namespace Yuni
 
 	// Operator =
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>&
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator = (typename SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::CopyType& rhs)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>&
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator = (typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::CopyType& rhs)
 	{
 		SmartPtr tmp(rhs);
 		tmp.swap(*this);
@@ -133,29 +133,13 @@ namespace Yuni
 
 	// Operator =
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
-		template <class> class StorP, template <class> class ConsP>
-	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
-		template <class> class StorP1, template <class> class ConsP1>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>&
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator = (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs)
-	{
-		SmartPtr tmp(rhs);
-		tmp.swap(*this);
-		return *this;
-	}
-
-
-	// Operator =
-	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
+		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
-	inline SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>&
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator = (SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>&
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator = (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs)
 	{
 		SmartPtr tmp(rhs);
 		tmp.swap(*this);
@@ -165,10 +149,26 @@ namespace Yuni
 
 	// Operator =
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+		class ConvP1,
+		template <class> class StorP1, template <class> class ConsP1>
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>&
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator = (SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs)
+	{
+		SmartPtr tmp(rhs);
+		tmp.swap(*this);
+		return *this;
+	}
+
+
+	// Operator =
+	template<typename T, template <class> class OwspP, template <class> class ChckP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::swap(SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>& rhs)
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::swap(SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>& rhs)
 	{
 		OwnershipPolicy::swapPointer(rhs);
 		ConversionPolicy::swapPointer(rhs);
@@ -179,10 +179,10 @@ namespace Yuni
 
 	// Operator ->
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline typename SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::ConstPointerType
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator -> () const
+	inline typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ConstPointerType
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator -> () const
 	{
 		CheckingPolicy::onDereference(storageReference(*this));
 		return StoragePolicy::operator -> ();
@@ -191,10 +191,10 @@ namespace Yuni
 
 	// Operator ->
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline typename SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::PointerType
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator -> ()
+	inline typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::PointerType
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator -> ()
 	{
 		CheckingPolicy::onDereference(storageReference(*this));
 		return StoragePolicy::operator -> ();
@@ -203,10 +203,10 @@ namespace Yuni
 
 	// Operator ->
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline typename SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::ConstReferenceType
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator * () const
+	inline typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ConstReferenceType
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator * () const
 	{
 		CheckingPolicy::onDereference(storageReference(*this));
 		return StoragePolicy::operator * ();
@@ -215,10 +215,10 @@ namespace Yuni
 
 	// Operator ->
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline typename SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::ReferenceType
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator * ()
+	inline typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ReferenceType
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator * ()
 	{
 		CheckingPolicy::onDereference(storageReference(*this));
 		return StoragePolicy::operator * ();
@@ -227,10 +227,10 @@ namespace Yuni
 
 	// Operator ->
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline bool
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator ! () const
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator ! () const
 	{
 		return storagePointer(*this) == NULL;
 	}
@@ -238,13 +238,13 @@ namespace Yuni
 
 	// Operator ==
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
+		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline bool
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator == (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator == (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const
 	{
 		return (storagePointer(*this) == storagePointer(rhs));
 	}
@@ -253,13 +253,13 @@ namespace Yuni
 
 	// Operator !=
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
+		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline bool
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator != (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator != (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const
 	{
 		return (storagePointer(*this) != storagePointer(rhs));
 	}
@@ -267,13 +267,13 @@ namespace Yuni
 
 	// Operator <
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
+		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline bool
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator < (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator < (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const
 	{
 		return (storagePointer(*this) < storagePointer(rhs));
 	}
@@ -281,13 +281,13 @@ namespace Yuni
 
 	// Operator >
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
+		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline bool
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator > (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator > (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const
 	{
 		return (storagePointer(*this) > storagePointer(rhs));
 	}
@@ -295,13 +295,13 @@ namespace Yuni
 
 	// Operator <=
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
+		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline bool
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator <= (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator <= (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const
 	{
 		return (storagePointer(*this) <= storagePointer(rhs));
 	}
@@ -309,13 +309,13 @@ namespace Yuni
 
 	// Operator >=
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		template <class> class TrckP, class ConvP,
+		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
-		template <class> class TrckP1, class ConvP1,
+		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline bool
-	SmartPtr<T,OwspP,ChckP,TrckP,ConvP,StorP,ConsP>::operator >= (const SmartPtr<T1,OwspP1,ChckP1,TrckP1,ConvP1,StorP1,ConsP1>& rhs) const
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator >= (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const
 	{
 		return (storagePointer(*this) >= storagePointer(rhs));
 	}
