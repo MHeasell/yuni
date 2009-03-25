@@ -1,5 +1,12 @@
 Project(YUNI-TESTS CXX)
 
+CMake_minimum_required(VERSION 2.6)
+
+IF(POLICY CMP0011)
+	CMake_Policy(SET CMP0011 NEW)
+ENDIF(POLICY CMP0011)
+
+
 Message(STATUS "")
 Message(STATUS "Tests")
 Message(STATUS "")

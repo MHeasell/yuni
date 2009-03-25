@@ -1,9 +1,15 @@
 Project(YUNI-SAMPLES CXX)
 
+CMake_minimum_required(VERSION 2.6)
+
+IF(POLICY CMP0011)
+	CMake_Policy(SET CMP0011 NEW)
+ENDIF(POLICY CMP0011)
+
+
 Message(STATUS "")
 Message(STATUS "Samples")
 Message(STATUS "")
-CMake_minimum_required(VERSION 2.6)
 
 
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../CommonSettings.cmake")
