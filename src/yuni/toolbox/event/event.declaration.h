@@ -47,7 +47,7 @@ namespace Event
 # define YUNI_EVENT_FORWARD_DECL_E(N) \
 	template<class R, YUNI_ENUM(N, class A), template<class> class TP = Policy::ObjectLevelLockable> class YUNI_JOIN(E,N)
 
-	template<class R, template<class> class TP = Policy::ObjectLevelLockable> class E0;
+	template<class R = void, template<class> class TP = Policy::ObjectLevelLockable> class E0;
 	YUNI_EVENT_FORWARD_DECL_E(1);
 	YUNI_EVENT_FORWARD_DECL_E(2);
 	YUNI_EVENT_FORWARD_DECL_E(3);
