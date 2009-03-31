@@ -69,7 +69,7 @@ namespace Yuni
 
 		// if all spaces or empty return an empty string
 		if ((std::string::npos == startpos) || (std::string::npos == endpos))
-		   this->clear();
+			this->clear();
 		else
 			*this = this->substr(startpos, endpos - startpos + 1);
 		return *this;
@@ -345,9 +345,9 @@ namespace Yuni
 	template<class char_type> int
 	vprintf_generic(char_type* buffer, size_t bufferSize, const char_type* format, va_list argptr);
 
-    template<> inline int
+	template<> inline int
 	vprintf_generic<char>(char* buffer, size_t bufferSize, const char* format, va_list argptr)
-    {
+	{
 		# if defined YUNI_OS_MSVC
 		#	ifdef SECURE_VSPRINTF
 			return _vsnprintf_s(buffer, bufferSize-1, _TRUNCATE, format, argptr);
@@ -357,12 +357,12 @@ namespace Yuni
 		# else
 			return vsnprintf(buffer, bufferSize-1, format, argptr);
 		# endif
-    }
+	}
 
 	# ifdef YUNI_OS_WINDOWS
-    template<> inline int
+	template<> inline int
 	vprintf_generic<wchar_t>(wchar_t* buffer, size_t bufferSize, const wchar_t* format, va_list argptr)
-    {
+	{
 		# if defined YUNI_OS_MSVC
 		#	ifdef SECURE_VSPRINTF
 			return _vsnwprintf_s(buffer, bufferSize-1, _TRUNCATE, format, argptr);
@@ -372,28 +372,28 @@ namespace Yuni
 		# else
 			return vsnwprintf(buffer, bufferSize-1, format, argptr);
 		# endif
-    }
-    # endif
+	}
+	# endif
 
 
 	template<class Type, class Traits>
-    static int
+	static int
 	impl_vsprintf(std::basic_string<Type,Traits> & outStr, const Type* format, va_list args)
-    {
-	    if (!format)
+	{
+		if (!format)
 			return 0;
 
-        static const size_t ChunkSize = 1024;
-        size_t curBufSize = 0;
+		static const size_t ChunkSize = 1024;
+		size_t curBufSize = 0;
 
-        // keep trying to write the string to an ever-increasing buffer until
-        // either we get the string written or we run out of memory
-        while (1)
-        {
+		// keep trying to write the string to an ever-increasing buffer until
+		// either we get the string written or we run out of memory
+		while (1)
+		{
 			// allocate a local buffer
 			curBufSize += ChunkSize;
 			std::auto_ptr<Type> localBuffer(new Type[curBufSize]);
-            if (!localBuffer.get())
+			if (!localBuffer.get())
 				return -1;
 
 			// format output to local buffer
@@ -410,7 +410,7 @@ namespace Yuni
 			return i;
 		}
 		return -1;
-    }
+	}
 
 
 	String& String::vappendFormat(const char* f, va_list parg)
@@ -458,7 +458,7 @@ namespace Yuni
 		}
 		return ret;
 	}
-	
+
 
 
 
