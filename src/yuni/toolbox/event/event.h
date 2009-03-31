@@ -243,15 +243,14 @@ namespace Event
 
 
 
-
 	/*!
 	** \brief Event with no argument
 	** \ingroup Events
 	** \tparam R Type for the returned value
 	** \tparam TP The threading policy
 	*/
-	template<class R = void, template<class> class TP>
-	class E0: public TP< E0<R,TP> >, public IEvent
+	template<class R, template<class> class TP>
+	class E0: public IEvent, public TP< E0<R,TP> >
 	{
 	public:
 		typedef TP< E0<R, TP> >  ThreadingPolicy;

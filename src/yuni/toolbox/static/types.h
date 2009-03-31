@@ -117,18 +117,23 @@ namespace Type
 	//
 	template <> struct IsFundamental<bool> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<signed char> {enum{Yes = 1, No = 0};};
+	template <> struct IsFundamental<unsigned char> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<wchar_t> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<float> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<double> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<long double> {enum{Yes = 1, No = 0};};
 	// Signed int
+	# ifndef YUNI_TYPES_INT8_CHAR_ARE_IDENTICAL
 	template <> struct IsFundamental<sint8>  {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<sint16> {enum{Yes = 1, No = 0};};
+	# endif
 	template <> struct IsFundamental<sint32> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<sint64> {enum{Yes = 1, No = 0};};
 	// Unsigned int
+	# ifndef YUNI_TYPES_INT8_CHAR_ARE_IDENTICAL
 	template <> struct IsFundamental<uint8>  {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<uint16> {enum{Yes = 1, No = 0};};
+	# endif
 	template <> struct IsFundamental<uint32> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<uint64> {enum{Yes = 1, No = 0};};
 
