@@ -1,9 +1,9 @@
 
+#define _CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES  1
 #include <ctype.h>
 #include "string.h"
-#ifdef YUNI_OS_MSVC
-#	include "strsafe.h"
-#endif
+#include <memory>
+
 
 
 
@@ -341,39 +341,81 @@ namespace Yuni
 
 
 
+
+	template<class char_type> int
+	vprintf_generic(char_type* buffer, size_t bufferSize, const char_type* format, va_list argptr);
+
+    template<> inline int
+	vprintf_generic<char>(char* buffer, size_t bufferSize, const char* format, va_list argptr)
+    {
+		# if defined YUNI_OS_MSVC
+		#	ifdef SECURE_VSPRINTF
+			return _vsnprintf_s(buffer, bufferSize-1, _TRUNCATE, format, argptr);
+		#	else
+			return _vsnprintf(buffer, bufferSize-1, format, argptr);
+		#	endif
+		# else
+			return vsnprintf(buffer, bufferSize-1, format, argptr);
+		# endif
+    }
+
+	# ifdef YUNI_OS_WINDOWS
+    template<> inline int
+	vprintf_generic<wchar_t>(wchar_t* buffer, size_t bufferSize, const wchar_t* format, va_list argptr)
+    {
+		# if defined YUNI_OS_MSVC
+		#	ifdef SECURE_VSPRINTF
+			return _vsnwprintf_s(buffer, bufferSize-1, _TRUNCATE, format, argptr);
+		#	else
+			return _vsnwprintf(buffer, bufferSize-1, format, argptr);
+		#	endif
+		# else
+			return vsnwprintf(buffer, bufferSize-1, format, argptr);
+		# endif
+    }
+    # endif
+
+
+	template<class Type, class Traits>
+    static int
+	impl_vsprintf(std::basic_string<Type,Traits> & outStr, const Type* format, va_list args)
+    {
+	    if (!format)
+			return 0;
+
+        static const size_t ChunkSize = 1024;
+        size_t curBufSize = 0;
+
+        // keep trying to write the string to an ever-increasing buffer until
+        // either we get the string written or we run out of memory
+        while (1)
+        {
+			// allocate a local buffer
+			curBufSize += ChunkSize;
+			std::auto_ptr<Type> localBuffer(new Type[curBufSize]);
+            if (!localBuffer.get())
+				return -1;
+
+			// format output to local buffer
+			int i = vprintf_generic(localBuffer.get(), curBufSize * sizeof(Type), format, args);
+			if (-1 == i)
+				continue;
+			else
+			{
+				if (i < 0)
+					return i;
+			}
+
+			outStr.append(localBuffer.get(), i);
+			return i;
+		}
+		return -1;
+    }
+
+
 	String& String::vappendFormat(const char* f, va_list parg)
 	{
-		char* b;
-		# if defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_SOLARIS)
-		// Implement vasprintf() by hand with two calls to vsnprintf()
-		// Remove this when Microsoft adds support for vasprintf()
-		#   if defined YUNI_OS_MSVC
-		int sizeneeded = vsnprintf_s(NULL, 0, 0, f, parg) + 1;
-		#   else
-		int sizeneeded = vsnprintf(NULL, 0, f, parg) + 1;
-		#   endif
-		if (sizeneeded < 0)
-		{
-			return *this;
-		}
-		b = (char*)malloc(sizeneeded);
-		if (NULL == b)
-			return *this;
-		#   ifdef YUNI_OS_MSVC
-		if (S_OK != StringCchVPrintf(b, sizeneeded, f, parg))
-		#   else
-		if (vsnprintf(b, sizeneeded, f, parg) < 0)
-		#   endif
-		{
-			free(b);
-			return *this;
-		}
-		# else
-		if (vasprintf(&b, f, parg) < 0)
-			return *this;
-		# endif
-		this->append(b);
-		free(b);
+		impl_vsprintf(*this, f, parg);
 		return *this;
 	}
 
