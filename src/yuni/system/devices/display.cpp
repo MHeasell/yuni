@@ -6,6 +6,9 @@
 #	include <CoreFoundation/CoreFoundation.h>
 #	include <ApplicationServices/ApplicationServices.h>
 #endif
+#ifdef YUNI_OS_WINDOWS
+#	include <windows.h>
+#endif
 
 #define YUNI_DEVICE_MAX_DISPLAYS   64
 
@@ -146,8 +149,8 @@ namespace Display
 		{
 			int width = GetDeviceCaps(device, HORZRES);
 			int height = GetDeviceCaps(device, VERTRES);
-			int colorDepth = GetDeviceCaps(hMonitorDC, BITSPIXEL) * GetDeviceCaps(hMonitorDC, PLANES);
-			res
+			int colorDepth = GetDeviceCaps(device, BITSPIXEL) * GetDeviceCaps(device, PLANES);
+			(*res)[width][height] = (uint8)colorDepth;
 		}
 
 		/*!
@@ -155,6 +158,9 @@ namespace Display
 		*/
 		BOOL CALLBACK EnumMonitorsCallback(HMONITOR handle, HDC context, LPRECT rect, LPARAM data)
 		{
+			static uint32 count = 0;
+
+			MonitorsFound* lst = (MonitorsFound*)data;
 			// Get information about the monitor
 			MONITORINFOEX info;
 			info.cbSize = sizeof(MONITORINFOEX);
@@ -166,18 +172,17 @@ namespace Display
 			// for Win98:
 			// CreateDC(NULL, info.szDevice, NULL, NULL);
 
-			if (monitorDC)
-			{
-				SharedPtr<OrderedResolutions> res(new OrderedResolutions());
-				windowsGetMonitorResolutions(monitorDC, res);
-				DeleteDC(monitorDC);
-			}
+			if (!monitorDC)
+				return false;
+			SharedPtr<OrderedResolutions> res(new OrderedResolutions());
+			windowsGetMonitorResolutions(monitorDC, res);
+			DeleteDC(monitorDC);
 
-			bool mainDisplay = (flags & MONITORINFOF_PRIMARY);
+			bool mainDisplay = (info.dwFlags & MONITORINFOF_PRIMARY);
 			// Create the new monitor
-			SharedPtr<Monitor> newMonitor(new Monitor("", (Monitor::Handle)displayArray[i], mainDisplay, true, true));
+			SharedPtr<Monitor> newMonitor(new Monitor(info.szDevice, (Monitor::Handle)count++, mainDisplay, true, true));
 			// Add the monitor and its resolutions to the list
-			lst.push_back(SingleMonitorFound(newMonitor, res));
+			lst->push_back(SingleMonitorFound(newMonitor, res));
 			return true;
 		}
 
@@ -192,7 +197,7 @@ namespace Display
 				// TODO: This is quite rough, something prettier should be done
 				return;
 			// Enumerate on handles to _all_ the monitors, InfoCallback is called for each handle
-			EnumDisplayMonitors(NULL, NULL, EnumMonitorsCallback, reinterpret_cast<LPARAM>(lst));
+			EnumDisplayMonitors(NULL, NULL, EnumMonitorsCallback, (LPARAM)(&lst));
 		}
 
 # endif
