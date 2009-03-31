@@ -1,6 +1,9 @@
 
 #include <ctype.h>
 #include "string.h"
+#ifdef YUNI_OS_MSVC
+#	include "strsafe.h"
+#endif
 
 
 
@@ -357,7 +360,7 @@ namespace Yuni
 		if (NULL == b)
 			return *this;
 		#   ifdef YUNI_OS_MSVC
-		if (vsnprintf_s(b, sizeneeded, sizeneeded, f, parg) < 0)
+		if (S_OK != StringCchVPrintf(b, sizeneeded, f, parg))
 		#   else
 		if (vsnprintf(b, sizeneeded, f, parg) < 0)
 		#   endif
