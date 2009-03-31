@@ -117,7 +117,6 @@ namespace Type
 	//
 	template <> struct IsFundamental<bool> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<signed char> {enum{Yes = 1, No = 0};};
-	template <> struct IsFundamental<unsigned char> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<wchar_t> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<float> {enum{Yes = 1, No = 0};};
 	template <> struct IsFundamental<double> {enum{Yes = 1, No = 0};};
