@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_ANY_VARIANT_H__
-#define __YUNI_TOOLBOX_ANY_VARIANT_H__
+#ifndef __YUNI_TOOLBOX_ANY_ANY_H__
+#define __YUNI_TOOLBOX_ANY_ANY_H__
 
 # include "../../yuni.h"
 # include "../exceptions/badcast.h"
@@ -178,6 +178,6 @@ namespace Yuni
 
 # include "any.hxx"
 
-#endif /* !__YUNI_TOOLBOX_ANY_H__ */
+#endif /* !__YUNI_TOOLBOX_ANY_ANY_H__ */
 
 
