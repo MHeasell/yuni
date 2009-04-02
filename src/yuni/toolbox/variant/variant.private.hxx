@@ -25,7 +25,6 @@ namespace Variant
 	/*!
 	** \brief Specialization for anything to String.
 	*/
-	template<>
 	template<typename W>
 	struct Converter<W, String>
 	{
