@@ -1,33 +1,65 @@
 #ifndef __YUNI_TOOLBOX_VARIANT_VARIANT_HXX__
-#define __YUNI_TOOLBOX_VARIANT_VARIANT_HXX__
+# define __YUNI_TOOLBOX_VARIANT_VARIANT_HXX__
+
+
 
 namespace Yuni
 {
 
-	template <typename T>
-	Variant::Variant(const T& rhs) : pData(NULL)
-	{ assign(rhs); }
+	inline Variant::Variant()
+		:pData(NULL)
+	{}
 
-	template <typename T>
-	void Variant::assign(const T& rhs)
+	inline Variant::Variant(const Variant& rhs)
+		:pData(NULL)
 	{
-		// TODO: We need to suppress any const fom the type T
-		// because we do not want to write converters
-		// for const and non-const base types.
+		assign(rhs);
+	}
 
+
+
+
+	template <typename T>
+	inline Variant::Variant(const T& rhs)
+		:pData(NULL)
+	{
+		assign(rhs);
+	}
+
+	template <typename T>
+	inline void Variant::assign(const T& rhs)
+	{
 		if (pData)
 			delete pData;
-		pData = new Private::Variant::Data<T>(rhs);
+		pData = new Private::Variant::Data<typename Static::Remove::Const<T>::Type>(rhs);
+	}
+
+	template <typename T>
+	T Variant::to() const
+	{
+		return (pData) ? pData->to<T>() : T();
+	}
+
+	inline bool Variant::empty() const
+	{
+		return (NULL == pData);
+	}
+
+
+	inline Variant & Variant::operator = (const Variant& rhs)
+	{
+		assign(rhs);
+		return *this;
 	}
 
 	template <typename T>
 	Variant& Variant::operator = (const T& rhs)
-	{ assign(rhs); return *this; }
+	{
+		assign(rhs); return *this;
+	}
 
-	template <typename T>
-	T Variant::to() const
-	{ return (pData) ? pData->to<T>() : T(); }
 
-}
+
+} // namespace Yuni
 
 #endif /* !__YUNI_TOOLBOX_VARIANT_VARIANT_HXX__ */
