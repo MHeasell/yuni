@@ -13,7 +13,7 @@ namespace Variant
 {
 
 	/*!
-	** \brief Data Converter interface
+	** \brief Data Converter interface (Interface)
 	*/
 	struct IDataConverter
 	{
@@ -23,17 +23,16 @@ namespace Variant
 
 		//! \name From- converters for base types
 		//@{
-
 		virtual bool convertFrom(const bool v) = 0;
 		virtual bool convertFrom(const int v) = 0;
 		virtual bool convertFrom(const float v) = 0;
 		virtual bool convertFrom(const double v) = 0;
 		virtual bool convertFrom(const String& v) = 0;
-
 		//@}
-	};
 
-	
+	}; // class IDataConverter
+
+
 
 	/*!
 	** \brief The real convertor structure.
@@ -43,7 +42,6 @@ namespace Variant
 	{
 		static bool Value(const From& from, To& to)
 		{
-			// Default : cast - should introduce here a bad/good cast via a template policy
 			to = static_cast<To>(from);
 			return true;
 		}
@@ -60,8 +58,6 @@ namespace Variant
 		DataConverter() : result()
 		{}
 
-		TargetType result;
-
 		virtual bool convertFrom(const bool v)
 		{ return Converter<bool,TargetType>::Value(v, result); }
 
@@ -77,17 +73,20 @@ namespace Variant
 		virtual bool convertFrom(const String& v)
 		{ result = v.to<TargetType>(); return true; }
 
-	};
+	public:
+		//! The conversion Result
+		TargetType result;
+
+	}; // class DataConverter
 
 
-	
+
 	/*!
 	** \brief Abstract container for variant data.
 	*/
 	class AData
 	{
 	public:
-
 		//! Constructor
 		AData()
 		{}
@@ -107,7 +106,6 @@ namespace Variant
 		virtual AData* clone() const = 0;
 
 	protected:
-
 		/*!
 		** \brief Runs the conversion using the specified converter.
 		** The result of the conversion can be retrieved from
@@ -116,7 +114,9 @@ namespace Variant
 		*/
 		virtual bool convertUsing(IDataConverter& cvtr) const = 0;
 
-	};
+	}; // class AData
+
+
 
 
 	/*!
@@ -128,9 +128,9 @@ namespace Variant
 	class Data : public AData
 	{
 	public:
-		
 		//! Constructor from the variable type
-		explicit Data(const T& src) : pValue(src)
+		explicit Data(const T& src)
+			:pValue(src)
 		{}
 
 		//! Destructor
@@ -138,19 +138,17 @@ namespace Variant
 		{}
 
 	protected:
-		
 		virtual bool convertUsing(IDataConverter& cvtr) const
 		{ return cvtr.convertFrom(pValue); }
 
 		virtual AData* clone() const
 		{ return new Data<T>(pValue); }
-	
-	private:
 
+	private:
 		//! The real data element.
 		T pValue;
 
-	};
+	}; // class Data
 
 
 
