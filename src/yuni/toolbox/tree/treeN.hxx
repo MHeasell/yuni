@@ -87,7 +87,7 @@ namespace Toolbox
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
-	inline void TreeN<T,TP,ChckP,TrckP,ConvP>::parent(TreeN<T,TP,ChckP,TrckP,ConvP>::Ptr& newParent)
+	inline void TreeN<T,TP,ChckP,TrckP,ConvP>::parent(Ptr& newParent)
 	{
 		detachFromParent();
 		newParent->push_back(this);
@@ -135,7 +135,7 @@ namespace Toolbox
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
-	inline bool TreeN<T,TP,ChckP,TrckP,ConvP>::remove(TreeN<T,TP,ChckP,TrckP,ConvP>::Ptr& node)
+	inline bool TreeN<T,TP,ChckP,TrckP,ConvP>::remove(Ptr& node)
 	{
 		return (node->parent() == *this) ? internalRemoveChild(*node) : false;
 	}
