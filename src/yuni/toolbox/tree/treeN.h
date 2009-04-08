@@ -160,10 +160,10 @@ namespace Toolbox
 		//! The threading policy
 		typedef TP<Node>  ThreadingPolicy;
 
-		//! A thread-safe node type 
-		typedef SmartPtr<Node, Policy::Ownership::ReferenceCountedMT,ChckP,TrckP,ConvP>  PtrThreadSafe;
+		//! A thread-safe node type
+		typedef SmartPtr<Node, Policy::Ownership::ReferenceCountedMT,ChckP,ConvP>  PtrThreadSafe;
 		//! A default node type
-		typedef SmartPtr<Node, Policy::Ownership::ReferenceCounted,ChckP,TrckP,ConvP>    PtrSingleThreaded;
+		typedef SmartPtr<Node, Policy::Ownership::ReferenceCounted,ChckP,ConvP>    PtrSingleThreaded;
 		//! Pointer to a node
 		typedef typename Static::If<ThreadingPolicy::threadSafe, PtrThreadSafe, PtrSingleThreaded>::ResultType Ptr;
 
@@ -177,8 +177,6 @@ namespace Toolbox
 		typedef typename Ptr::CheckingPolicy   CheckingPolicy;
 		//! The Constness policy
 		typedef typename Ptr::ConstnessPolicy  ConstnessPolicy;
-		//! The tracking policy
-		typedef typename Ptr::TrackingPolicy   TrackingPolicy;
 
 		//! A const Pointer
 		typedef typename Ptr::ConstSmartPtrType ConstPtr;

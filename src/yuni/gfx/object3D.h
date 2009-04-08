@@ -60,7 +60,7 @@ namespace Gfx
 		}
 
 		//! Get the id
-		uint32 ID() const {return pID;}
+		uint32 id() const {return pID;}
 
 		//@}
 

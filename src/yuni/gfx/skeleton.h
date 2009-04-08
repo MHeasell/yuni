@@ -1,7 +1,6 @@
 #ifndef __YUNI_GFX_SKELETON_H__
 # define __YUNI_GFX_SKELETON_H__
 
-# include "../toolbox/smartptr.h"
 # include "../toolbox/tree/treeN.h"
 # include "mesh.h"
 

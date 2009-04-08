@@ -9,19 +9,21 @@ namespace Gfx
 
 	namespace
 	{
-		ObjectManager objectManager;
+		SmartPtr<ObjectManager> objectManager;
 	} // Anonymous namespace
 
 
 	SmartPtr<ObjectManager> ObjectManager::Instance()
 	{
-		return SmartPtr<ObjectManager>(objectManager);
+		if (!objectManager)
+			objectManager = new ObjectManager();
+		return objectManager;
 	}
 
 
 	void ObjectManager::registerObject(SmartPtr<Object3D>& obj)
 	{
-		pObjects[obj->ID()] = obj;
+		pObjects[obj->id()] = obj;
 	}
 
 
