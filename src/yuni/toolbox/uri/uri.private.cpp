@@ -22,6 +22,11 @@ namespace Uri
 	{}
 
 
+	Informations::~Informations()
+	{}
+
+
+
 	void Informations::clear()
 	{
 		scheme.clear();

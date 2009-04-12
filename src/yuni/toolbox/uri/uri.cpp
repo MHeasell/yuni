@@ -28,10 +28,12 @@ namespace Yuni
 	{
 	public:
 		BuildSession(Private::Uri::Informations& inf, const String& s)
-			:location(partScheme), infos(inf), tag(0), str(String::Trim(s)),
-			length(str.length()), lastPosition(0), indx(0),
+			:location(partScheme), infos(inf), tag(0), str(s),
+			lastPosition(0), indx(0),
 			pMustRemoveDotSegments(false)
-		{}
+		{
+			str.trim();
+		}
 
 		/*!
 		* \brief Build informations about the URI
@@ -138,13 +140,11 @@ namespace Yuni
 		//! A variable used for several purposes
 		int tag;
 		//! The raw string (trimmed)
-		const String str;
-		//! The length of the string
-		const String::Size length;
+		String str;
 		//! The last outstanding position in the string
-		String::Index lastPosition;
+		String::Size lastPosition;
 		//! The current index in the string
-		String::Index indx;
+		String::Size indx;
 
 		//! Get if there are some dot segments to remove
 		bool pMustRemoveDotSegments;
@@ -159,7 +159,7 @@ namespace Yuni
 
 	inline bool BuildSession::postFlight()
 	{
-		if (lastPosition < length)
+		if (lastPosition < str.length())
 		{
 			// The last outstanding position was inside the string. Thus we
 			// still have some data that remain to be copied.
@@ -173,28 +173,28 @@ namespace Yuni
 					}
 				case partServerForSure:
 					{
-						infos.server.append(str, lastPosition, length);
+						infos.server.append(str, lastPosition, str.length());
 						break;
 					}
 				case partPort:
 					{
-						infos.port = String(str, lastPosition, length).toInt32();
+						infos.port = String(str, lastPosition, str.length()).to<sint32>();
 						break;
 					}
 				case partPath:
 					{
-						infos.path.append(str, lastPosition, length);
+						infos.path.append(str, lastPosition, str.length());
 						break;
 					}
 
 				case partQuery:
 					{
-						infos.query.append(str, lastPosition, length);
+						infos.query.append(str, lastPosition, str.length());
 						break;
 					}
 				case partFragment:
 					{
-						infos.fragment.append(str, lastPosition, length);
+						infos.fragment.append(str, lastPosition, str.length());
 						break;
 					}
 				default: return false;
@@ -211,7 +211,7 @@ namespace Yuni
 				// This solution to detect final dot (eg. `/path/to/file/.`) is not
 				// really satisfying and can lead to unnecessary tests to remove
 				// the dot segments (e.g. `file://filewith_missing_extension.`).
-				pMustRemoveDotSegments = ('.' == infos.path[infos.path.length() - 1]);
+				pMustRemoveDotSegments = ('.' == infos.path.last());
 			}
 			if (pMustRemoveDotSegments)
 				infos.path = Toolbox::Paths::Files::RemoveDotSegmentsFromUnixFilename(infos.path);
@@ -483,7 +483,7 @@ namespace Yuni
 				}
 			case '/': // Begining of a path
 				{
-					infos.port = String(str, lastPosition, indx - lastPosition).toInt32();
+					infos.port = String(str, lastPosition, indx - lastPosition).to<sint32>();
 					if (!infos.port)
 					{
 						// May be a invalid sequence
@@ -496,7 +496,7 @@ namespace Yuni
 				}
 			case '#': // Begining of a fragment
 				{
-					infos.port = String(str, lastPosition, indx - lastPosition).toInt32();
+					infos.port = String(str, lastPosition, indx - lastPosition).to<sint32>();
 					if (!infos.port)
 					{
 						// May be a invalid sequence
@@ -509,7 +509,7 @@ namespace Yuni
 				}
 			case '?': // Begining of a query
 				{
-					infos.port = String(str, lastPosition, indx - lastPosition).toInt32();
+					infos.port = String(str, lastPosition, indx - lastPosition).to<sint32>();
 					if (!infos.port)
 					{
 						// May be a invalid sequence
@@ -581,7 +581,7 @@ namespace Yuni
 		// A fragment is composed by the end of the URI
 		// Directly go to the end of the string, the routine postflight() will
 		// finish the job for us
-		this->indx = this->length;
+		this->indx = this->str.length();
 		return true;
 	}
 
@@ -592,7 +592,7 @@ namespace Yuni
 	void BuildSession::run()
 	{
 		// Foreach char in the string...
-		for (; this->indx < this->length; ++(this->indx))
+		for (; this->indx < this->str.length(); ++(this->indx))
 		{
 			const String::value_type c = str[indx];
 			switch (this->location)
