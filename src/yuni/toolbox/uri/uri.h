@@ -141,7 +141,7 @@ namespace Yuni
 		/*!
 		** \brief Copy constructor
 		*/
-		Uri(const Uri& rhs);
+		explicit Uri(const Uri& rhs);
 
 		//@}
 

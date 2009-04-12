@@ -24,6 +24,7 @@ namespace Uri
 		//! Default constructor
 		Informations();
 		Informations(const Informations& rhs);
+		~Informations();
 		//@}
 
 		void assign(const Informations& rhs);
