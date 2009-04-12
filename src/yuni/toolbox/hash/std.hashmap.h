@@ -1,6 +1,7 @@
 #ifndef __YUNI_HASH_STD_HASH_MAP_H__
 #define __YUNI_HASH_STD_HASH_MAP_H__
 
+# include "../preprocessor/capabilities.h"
 
 
 # if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
@@ -20,8 +21,15 @@ namespace YuniSTLExt = ::stdext;
 
 // Gnu implementation
 
-#   include <ext/hash_fun.h>
-#   include <ext/hash_map>
+#	ifdef YUNI_OS_GCC
+#		if YUNI_OS_GCC_VERSION >= 40300
+#   		include <backward/hash_fun.h>
+#   		include <backward/hash_map>
+#		else
+#   		include <ext/hash_fun.h>
+#   		include <ext/hash_map>
+#		endif
+#	endif
 namespace YuniSTLExt = ::__gnu_cxx;
 
 #   define YUNI_OS_GNU_HASH_MAP
