@@ -524,6 +524,8 @@ namespace Yuni
 		*/
 		uint32 hashValue() const;
 
+		//! The last character
+		char last() const;
 		//@}
 
 

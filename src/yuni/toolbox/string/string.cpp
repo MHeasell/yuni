@@ -43,6 +43,10 @@ namespace Yuni
 	}
 
 
+	char String::last() const
+	{
+		return this->at(this->size() - 1);
+	}
 
 	bool String::toBool() const
 	{
