@@ -29,6 +29,12 @@ Set(SRC_TOOLBOX_EXCEPTIONS
 				toolbox/exceptions/badcast.h )
 source_group(ToolBox\\Exceptions FILES ${SRC_TOOLBOX_EXCEPTIONS})
 
+Set(SRC_TOOLBOX_FUNCTION
+				toolbox/function/function.h toolbox/function/function.hxx
+				toolbox/function.h )
+source_group(ToolBox\\Function FILES ${SRC_TOOLBOX_FUNCTION})
+
+
 
 Set(SRC_TOOLBOX_STRING
 				toolbox/string/string.h toolbox/string/string.cpp
@@ -237,6 +243,7 @@ Add_Library(yuni-static-core STATIC
 			${SRC_TOOLBOX_URI}
 			${SRC_TOOLBOX_UNIT}
 			${SRC_TOOLBOX_EXCEPTIONS}
+			${SRC_TOOLBOX_FUNCTION}
 			${SRC_TOOLBOX_STL}
 			${SRC_TOOLBOX_ANY}
 			${SRC_TOOLBOX_VARIANT}
