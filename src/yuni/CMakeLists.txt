@@ -34,6 +34,14 @@ Set(SRC_TOOLBOX_FUNCTION
 				toolbox/function.h )
 source_group(ToolBox\\Function FILES ${SRC_TOOLBOX_FUNCTION})
 
+Set(SRC_TOOLBOX_DYNAMICLIBRARY
+				toolbox/dynamiclibrary/file.h	toolbox/dynamiclibrary/file.hxx
+				toolbox/dynamiclibrary/file.cpp
+				toolbox/dynamiclibrary/symbol.h toolbox/dynamiclibrary/symbol.hxx
+				toolbox/dynamiclibrary.h )
+source_group(ToolBox\\Function FILES ${SRC_TOOLBOX_FUNCTION})
+
+
 
 
 Set(SRC_TOOLBOX_STRING
@@ -244,6 +252,7 @@ Add_Library(yuni-static-core STATIC
 			${SRC_TOOLBOX_UNIT}
 			${SRC_TOOLBOX_EXCEPTIONS}
 			${SRC_TOOLBOX_FUNCTION}
+			${SRC_TOOLBOX_DYNAMICLIBRARY}
 			${SRC_TOOLBOX_STL}
 			${SRC_TOOLBOX_ANY}
 			${SRC_TOOLBOX_VARIANT}
