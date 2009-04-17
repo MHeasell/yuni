@@ -27,13 +27,13 @@ GENERAL
 
 * Always leave at one space before and after operators
   GOOD
-  if (a == 10 && b == 42)
+  if (10 == a && 42 == b)
   {}
   BAD
   if (a==10&&b==42)
 
   GOOD
-  for (int i = 0; i < 10; ++i)
+  for (int i = 0; i != 10; ++i)
   BAD
   for(int i=0;i<10;++i)
 
@@ -72,7 +72,7 @@ NAMING CONVENTION
 
 * private/protected variables.
   Attributes should be separated only by one space from their type.
-  Private attributes should start with p then use camel case.
+  Private attributes must start with p then use camel case.
   GOOD :
   int pPrivateAttribute;
   float pAccount;
@@ -98,7 +98,7 @@ NAMING CONVENTION
 
 * In any thread-safe class, the methods providing thread-unsafe access
   to the instance (usually methods that are equivalent to thread-safe methods not using
-  locks on purpose) should be suffixed with "WL".
+  locks on purpose) must be suffixed with "WL".
 
 
 COMMENTS
@@ -126,7 +126,7 @@ COMMENTS
   ** \brief An useless routine
   ** \param a The first value
   ** \param b The second value
-  ** \param [out] ret The result of the addition of `a` and `b`
+  ** \param[out] ret The result of the addition of `a` and `b`
   */
   void uselessMethod(const int a, const int b, int& ret)
   {
@@ -164,8 +164,8 @@ BEST PRACTICES
      return;
 
 * Avoid as much as possible pointers. Prefer references. A Pointer indicates
-  that we should expect to get a NULL value and in this case the NULL value
-  has a meaning
+  that we shall expect to get a NULL value and in this case the NULL value
+  has a meaning and must be checked.
 
 * Avoid as much as possible const char* or char*. Use Yuni::String instead
   for strings.
