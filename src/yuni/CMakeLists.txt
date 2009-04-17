@@ -39,7 +39,7 @@ Set(SRC_TOOLBOX_DYNAMICLIBRARY
 				toolbox/dynamiclibrary/file.cpp
 				toolbox/dynamiclibrary/symbol.h toolbox/dynamiclibrary/symbol.hxx
 				toolbox/dynamiclibrary.h )
-source_group(ToolBox\\Function FILES ${SRC_TOOLBOX_FUNCTION})
+source_group(ToolBox\\DynamicLibrary FILES ${SRC_TOOLBOX_DYNAMICLIBRARY})
 
 
 
