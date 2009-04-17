@@ -2,18 +2,11 @@
 How to compile Yuni:
 ====================
 
-1) Install CMake and a Subversion client
 
-2) Checkout the source code:
-  $ svn co http://svn.shikami.org/yuni/trunk
+ - Apple Mac OS X :
+   See docs/developers/compilation.macosx.txt
 
-3) Generate the makefiles / projects:
-  $ cd yuni/src
-  $ cmake -G <your_compiler> -DMODULES=all .
+ - GNU/Linux :
+   See docs/developers/compilation.linux.txt
 
-  You can run "cmake --help" for a list of generators for the -G option
-  You can run "cmake -DMODULES=help" for a list of available Yuni modules
 
-4) To compile, either:
-  - Run make (for Makefile-oriented generators) or
-  - Launch the project file and tell your IDE to build the project (for Visual Studio / XCode / CodeBlocks / ... generators)
