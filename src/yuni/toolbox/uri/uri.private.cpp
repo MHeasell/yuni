@@ -11,7 +11,7 @@ namespace Uri
 
 
 	Informations::Informations()
-		:isValid(false)
+		:port(0), isValid(false)
 	{}
 
 
@@ -33,7 +33,7 @@ namespace Uri
 		server.clear();
 		user.clear();
 		password.clear();
-		port = INT_MIN;
+		port = 0;
 		path.clear();
 		query.clear();
 		fragment.clear();
