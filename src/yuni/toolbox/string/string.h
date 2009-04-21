@@ -76,7 +76,7 @@ namespace Yuni
 	** 	 list.push_back("Ferrari");
 	** 	 list.push_back("9FF");
 	**
-	** 	 std::cout << list << std::endl; // BMW, Audi, Ferrari, 9FF 
+	** 	 std::cout << list << std::endl; // BMW, Audi, Ferrari, 9FF
 	**
 	** 	 String s;
 	** 	 s.append(list, ", ", "`");
@@ -95,15 +95,15 @@ namespace Yuni
 		typedef std::string::size_type Size;
 		//! Index type
 		typedef std::string::size_type Index;
-		
+
 		//! Alias to the type of a char
 		typedef std::string::value_type Char;
-		
+
 		//! iterator
 		typedef std::string::iterator iterator;
 		//! const_iterator
 		typedef std::string::const_iterator  const_iterator;
-		
+
 		//! Char Case
 		enum CharCase
 		{
@@ -196,8 +196,8 @@ namespace Yuni
 		** \param c The char to find in the string
 		*/
 		static Size CountChar(const String& s, const String::Char c) {return s.countChar(c);}
-		
-		
+
+
 		/*!
 		** \brief Extract the key and its value from a string (mainly provided by TDF files)
 		**
@@ -286,7 +286,7 @@ namespace Yuni
 		explicit String(const float v) :std::string() {*this << v;}
 		//! Constructor with a default value from a double
 		explicit String(const double v) :std::string() {*this << v;}
-		//! Constructor with a default value from a list of something 
+		//! Constructor with a default value from a list of something
 		template<template<class,class> class U, class Type, class Alloc>
 		String(const U<Type,Alloc>& v) :std::string() {this->append(v);}
 
@@ -307,7 +307,7 @@ namespace Yuni
 		** \brief Append a CString
 		*/
 		void append(const char* v) {std::string::append(v);}
-		
+
 		/*!
 		** \brief Append a substring
 		*/
@@ -328,7 +328,7 @@ namespace Yuni
 		*/
 		template<template<class,class> class U, class Type, class Alloc>
 		void append(const U<Type,Alloc>& v, const String& sep = ", ", const unsigned int max = UINT_MAX);
-	
+
 		/*!
 		** \brief Append a list of string
 		**
@@ -345,29 +345,29 @@ namespace Yuni
 
 		//! \name Conversions
 		//@{
-		
+
 		//! Convert this string into an int (8 bits)
-		sint8 toInt8(const sint8 def = 0) const {YUNI_WSTR_CAST_OP(sint8);} 
+		sint8 toInt8(const sint8 def = 0) const {YUNI_WSTR_CAST_OP(sint8);}
 		//! Convert this string into an int (16 bits)
-		sint16 toInt16(const sint16 def = 0) const {YUNI_WSTR_CAST_OP(sint16);} 
+		sint16 toInt16(const sint16 def = 0) const {YUNI_WSTR_CAST_OP(sint16);}
 		//! Convert this string into an int (32 bits)
-		sint32 toInt32(const sint32 def = 0) const {YUNI_WSTR_CAST_OP(sint32);} 
+		sint32 toInt32(const sint32 def = 0) const {YUNI_WSTR_CAST_OP(sint32);}
 		//! Convert this string into an int (64 bits)
-		sint64 toInt64(const sint64 def = 0) const {YUNI_WSTR_CAST_OP(sint64);} 
+		sint64 toInt64(const sint64 def = 0) const {YUNI_WSTR_CAST_OP(sint64);}
 		//! Convert this string into an unsigned int (8 bits)
-		uint8 toUInt8(const uint8 def = 0) const {YUNI_WSTR_CAST_OP(uint8);} 
+		uint8 toUInt8(const uint8 def = 0) const {YUNI_WSTR_CAST_OP(uint8);}
 		//! Convert this string into an unsigned int (16 bits)
-		uint16 toUInt16(const uint16 def = 0) const {YUNI_WSTR_CAST_OP(uint16);} 
+		uint16 toUInt16(const uint16 def = 0) const {YUNI_WSTR_CAST_OP(uint16);}
 		//! Convert this string into an unsigned int (32 bits)
-		uint32 toUInt32(const uint32 def = 0) const {YUNI_WSTR_CAST_OP(uint32);} 
+		uint32 toUInt32(const uint32 def = 0) const {YUNI_WSTR_CAST_OP(uint32);}
 		//! Convert this string into an unsigned int (64 bits)
-		uint64 toUInt64(const uint64 def = 0) const {YUNI_WSTR_CAST_OP(uint64);} 
+		uint64 toUInt64(const uint64 def = 0) const {YUNI_WSTR_CAST_OP(uint64);}
 		//! Convert this string into a float
-		float toFloat(const float def = 0.0f) const {YUNI_WSTR_CAST_OP(float);} 
+		float toFloat(const float def = 0.0f) const {YUNI_WSTR_CAST_OP(float);}
 		//! Convert this string into a double
-		double toDouble(const double def = 0.) const {YUNI_WSTR_CAST_OP(double);} 
+		double toDouble(const double def = 0.) const {YUNI_WSTR_CAST_OP(double);}
 		//! Convert this string into a bool (true if the lower case value is equals to "true", "1" or "on")
-		bool toBool() const; 
+		bool toBool() const;
 
 		/*!
 		** \brief Generic conversion
@@ -403,7 +403,7 @@ namespace Yuni
 		//@} Case convertion
 
 
-		
+
 		//! \name Split
 		//@{
 		/*!
@@ -439,7 +439,7 @@ namespace Yuni
 		String& trim(const String& trimChars = YUNI_WSTR_SEPARATORS);
 		//@}
 
-		
+
 
 		//! \name Find & Replace
 		//@{
@@ -472,7 +472,7 @@ namespace Yuni
 		//@{
 
 		/*!
-		** \brief Reset the current value with a formatted string 
+		** \brief Reset the current value with a formatted string
 		**
 		** \param f The format of the new string
 		** \return Always *this
@@ -481,7 +481,7 @@ namespace Yuni
 		String& format(const char* f, ...);
 
 		/*!
-		** \brief Append a formatted string 
+		** \brief Append a formatted string
 		** \param f The format of the new string
 		** \return Always *this
 		*/
@@ -562,7 +562,7 @@ namespace Yuni
 		String& operator << (const double v) {YUNI_WSTR_APPEND;}
 		//! Convert then Append a boolean (will be converted into "true" or "false")
 		String& operator << (const bool v) {YUNI_WSTR_APPEND_BOOL(v);return *this;}
-		//! Append (Concate) a list of something 
+		//! Append (Concate) a list of something
 		template<template<class,class> class U, class Type, class Alloc>
 		String& operator << (const U<Type,Alloc>& v) {this->append(v);return *this;}
 		//@}
