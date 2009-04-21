@@ -1280,6 +1280,428 @@ namespace Function
 
 
 
+	/*!
+	** \brief Pointer-to-function with 13 arguments
+	*/
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	class F13
+	{
+	public:
+		//! Prototype of the function
+		typedef R (*Type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+		//! Prototype of the function
+		typedef R (*value_type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+
+		enum
+		{
+			//! Arguments count
+			argumentsCount = 13
+		};
+		enum
+		{
+			//! Has the function got a return value ?
+			hasReturnValue = 1
+		};
+
+	public:
+		//! \name Constructors & Destructor
+		//@{
+		/*!
+		** \brief Default constructor
+		*/
+		F13();
+		/*!
+		** \brief Copy constructor
+		*/
+		F13(const F13& copy);
+		/*!
+		** \brief Constructor with a given pointer to function
+		*/
+		F13(const Type rhs);
+		/*!
+		** \brief Constructor from a symbol exported by a dynamic library
+		*/
+		F13(const DynamicLibrary::Symbol& symbol);
+		//@}
+
+		//! \name Call
+		//@{
+		/*!
+		** \brief Call the function
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		**
+		** \see operator ()
+		** \param a0 The 1e argument
+		** \param a1 The 2e argument
+		** \param a2 The 3e argument
+		** \param a3 The 4e argument
+		** \param a4 The 5e argument
+		** \param a5 The 6e argument
+		** \param a6 The 7e argument
+		** \param a7 The 8e argument
+		** \param a8 The 9e argument
+		** \param a9 The 10e argument
+		** \param a10 The 11e argument
+		** \param a11 The 12e argument
+		** \param a12 The 13e argument
+		*/
+		R call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
+		//@}
+
+		//! \name Pointer
+		//@{
+		//! Get if the pointer is null
+		bool null() const;
+
+		//! Get if the pointer is valid
+		bool valid() const;
+
+		//! Get the raw pointer
+		Type ptr() const;
+		//@}
+
+		//! \name Operators
+		//@{
+		//! Operator `=` from another Function::F13
+		F13& operator = (const F13& copy);
+		//! Operator `=` from a mere pointer to function
+		F13& operator = (const Type rhs);
+		//! Operator `=` from a symbol exported by a dynamic library
+		F13& operator = (const DynamicLibrary::Symbol& symbol);
+		//! \see call()
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
+		//@}
+
+	public:
+		//! Pointer
+		Type pPtr;
+
+	}; // class F13
+
+
+
+
+	/*!
+	** \brief Pointer-to-function with 14 arguments
+	*/
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	class F14
+	{
+	public:
+		//! Prototype of the function
+		typedef R (*Type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+		//! Prototype of the function
+		typedef R (*value_type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+
+		enum
+		{
+			//! Arguments count
+			argumentsCount = 14
+		};
+		enum
+		{
+			//! Has the function got a return value ?
+			hasReturnValue = 1
+		};
+
+	public:
+		//! \name Constructors & Destructor
+		//@{
+		/*!
+		** \brief Default constructor
+		*/
+		F14();
+		/*!
+		** \brief Copy constructor
+		*/
+		F14(const F14& copy);
+		/*!
+		** \brief Constructor with a given pointer to function
+		*/
+		F14(const Type rhs);
+		/*!
+		** \brief Constructor from a symbol exported by a dynamic library
+		*/
+		F14(const DynamicLibrary::Symbol& symbol);
+		//@}
+
+		//! \name Call
+		//@{
+		/*!
+		** \brief Call the function
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		**
+		** \see operator ()
+		** \param a0 The 1e argument
+		** \param a1 The 2e argument
+		** \param a2 The 3e argument
+		** \param a3 The 4e argument
+		** \param a4 The 5e argument
+		** \param a5 The 6e argument
+		** \param a6 The 7e argument
+		** \param a7 The 8e argument
+		** \param a8 The 9e argument
+		** \param a9 The 10e argument
+		** \param a10 The 11e argument
+		** \param a11 The 12e argument
+		** \param a12 The 13e argument
+		** \param a13 The 14e argument
+		*/
+		R call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
+		//@}
+
+		//! \name Pointer
+		//@{
+		//! Get if the pointer is null
+		bool null() const;
+
+		//! Get if the pointer is valid
+		bool valid() const;
+
+		//! Get the raw pointer
+		Type ptr() const;
+		//@}
+
+		//! \name Operators
+		//@{
+		//! Operator `=` from another Function::F14
+		F14& operator = (const F14& copy);
+		//! Operator `=` from a mere pointer to function
+		F14& operator = (const Type rhs);
+		//! Operator `=` from a symbol exported by a dynamic library
+		F14& operator = (const DynamicLibrary::Symbol& symbol);
+		//! \see call()
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
+		//@}
+
+	public:
+		//! Pointer
+		Type pPtr;
+
+	}; // class F14
+
+
+
+
+	/*!
+	** \brief Pointer-to-function with 15 arguments
+	*/
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	class F15
+	{
+	public:
+		//! Prototype of the function
+		typedef R (*Type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+		//! Prototype of the function
+		typedef R (*value_type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+
+		enum
+		{
+			//! Arguments count
+			argumentsCount = 15
+		};
+		enum
+		{
+			//! Has the function got a return value ?
+			hasReturnValue = 1
+		};
+
+	public:
+		//! \name Constructors & Destructor
+		//@{
+		/*!
+		** \brief Default constructor
+		*/
+		F15();
+		/*!
+		** \brief Copy constructor
+		*/
+		F15(const F15& copy);
+		/*!
+		** \brief Constructor with a given pointer to function
+		*/
+		F15(const Type rhs);
+		/*!
+		** \brief Constructor from a symbol exported by a dynamic library
+		*/
+		F15(const DynamicLibrary::Symbol& symbol);
+		//@}
+
+		//! \name Call
+		//@{
+		/*!
+		** \brief Call the function
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		**
+		** \see operator ()
+		** \param a0 The 1e argument
+		** \param a1 The 2e argument
+		** \param a2 The 3e argument
+		** \param a3 The 4e argument
+		** \param a4 The 5e argument
+		** \param a5 The 6e argument
+		** \param a6 The 7e argument
+		** \param a7 The 8e argument
+		** \param a8 The 9e argument
+		** \param a9 The 10e argument
+		** \param a10 The 11e argument
+		** \param a11 The 12e argument
+		** \param a12 The 13e argument
+		** \param a13 The 14e argument
+		** \param a14 The 15e argument
+		*/
+		R call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
+		//@}
+
+		//! \name Pointer
+		//@{
+		//! Get if the pointer is null
+		bool null() const;
+
+		//! Get if the pointer is valid
+		bool valid() const;
+
+		//! Get the raw pointer
+		Type ptr() const;
+		//@}
+
+		//! \name Operators
+		//@{
+		//! Operator `=` from another Function::F15
+		F15& operator = (const F15& copy);
+		//! Operator `=` from a mere pointer to function
+		F15& operator = (const Type rhs);
+		//! Operator `=` from a symbol exported by a dynamic library
+		F15& operator = (const DynamicLibrary::Symbol& symbol);
+		//! \see call()
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
+		//@}
+
+	public:
+		//! Pointer
+		Type pPtr;
+
+	}; // class F15
+
+
+
+
+	/*!
+	** \brief Pointer-to-function with 16 arguments
+	*/
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	class F16
+	{
+	public:
+		//! Prototype of the function
+		typedef R (*Type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+		//! Prototype of the function
+		typedef R (*value_type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+
+		enum
+		{
+			//! Arguments count
+			argumentsCount = 16
+		};
+		enum
+		{
+			//! Has the function got a return value ?
+			hasReturnValue = 1
+		};
+
+	public:
+		//! \name Constructors & Destructor
+		//@{
+		/*!
+		** \brief Default constructor
+		*/
+		F16();
+		/*!
+		** \brief Copy constructor
+		*/
+		F16(const F16& copy);
+		/*!
+		** \brief Constructor with a given pointer to function
+		*/
+		F16(const Type rhs);
+		/*!
+		** \brief Constructor from a symbol exported by a dynamic library
+		*/
+		F16(const DynamicLibrary::Symbol& symbol);
+		//@}
+
+		//! \name Call
+		//@{
+		/*!
+		** \brief Call the function
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		**
+		** \see operator ()
+		** \param a0 The 1e argument
+		** \param a1 The 2e argument
+		** \param a2 The 3e argument
+		** \param a3 The 4e argument
+		** \param a4 The 5e argument
+		** \param a5 The 6e argument
+		** \param a6 The 7e argument
+		** \param a7 The 8e argument
+		** \param a8 The 9e argument
+		** \param a9 The 10e argument
+		** \param a10 The 11e argument
+		** \param a11 The 12e argument
+		** \param a12 The 13e argument
+		** \param a13 The 14e argument
+		** \param a14 The 15e argument
+		** \param a15 The 16e argument
+		*/
+		R call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
+		//@}
+
+		//! \name Pointer
+		//@{
+		//! Get if the pointer is null
+		bool null() const;
+
+		//! Get if the pointer is valid
+		bool valid() const;
+
+		//! Get the raw pointer
+		Type ptr() const;
+		//@}
+
+		//! \name Operators
+		//@{
+		//! Operator `=` from another Function::F16
+		F16& operator = (const F16& copy);
+		//! Operator `=` from a mere pointer to function
+		F16& operator = (const Type rhs);
+		//! Operator `=` from a symbol exported by a dynamic library
+		F16& operator = (const DynamicLibrary::Symbol& symbol);
+		//! \see call()
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
+		//@}
+
+	public:
+		//! Pointer
+		Type pPtr;
+
+	}; // class F16
+
+
+
+
 
 } // namespace Function
 } // namespace Yuni

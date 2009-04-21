@@ -85,7 +85,7 @@ namespace Function
 
 	template<typename R>
 	inline F0<R>&
-	F0<R>::operator = (const Type rhs)
+	F0<R>::operator = (const typename F0<R>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -256,7 +256,7 @@ namespace Function
 
 	template<typename R, typename A0>
 	inline F1<R, A0>&
-	F1<R, A0>::operator = (const Type rhs)
+	F1<R, A0>::operator = (const typename F1<R, A0>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -427,7 +427,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1>
 	inline F2<R, A0, A1>&
-	F2<R, A0, A1>::operator = (const Type rhs)
+	F2<R, A0, A1>::operator = (const typename F2<R, A0, A1>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -598,7 +598,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2>
 	inline F3<R, A0, A1, A2>&
-	F3<R, A0, A1, A2>::operator = (const Type rhs)
+	F3<R, A0, A1, A2>::operator = (const typename F3<R, A0, A1, A2>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -769,7 +769,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3>
 	inline F4<R, A0, A1, A2, A3>&
-	F4<R, A0, A1, A2, A3>::operator = (const Type rhs)
+	F4<R, A0, A1, A2, A3>::operator = (const typename F4<R, A0, A1, A2, A3>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -940,7 +940,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4>
 	inline F5<R, A0, A1, A2, A3, A4>&
-	F5<R, A0, A1, A2, A3, A4>::operator = (const Type rhs)
+	F5<R, A0, A1, A2, A3, A4>::operator = (const typename F5<R, A0, A1, A2, A3, A4>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1111,7 +1111,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5>
 	inline F6<R, A0, A1, A2, A3, A4, A5>&
-	F6<R, A0, A1, A2, A3, A4, A5>::operator = (const Type rhs)
+	F6<R, A0, A1, A2, A3, A4, A5>::operator = (const typename F6<R, A0, A1, A2, A3, A4, A5>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1282,7 +1282,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
 	inline F7<R, A0, A1, A2, A3, A4, A5, A6>&
-	F7<R, A0, A1, A2, A3, A4, A5, A6>::operator = (const Type rhs)
+	F7<R, A0, A1, A2, A3, A4, A5, A6>::operator = (const typename F7<R, A0, A1, A2, A3, A4, A5, A6>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1453,7 +1453,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7>
 	inline F8<R, A0, A1, A2, A3, A4, A5, A6, A7>&
-	F8<R, A0, A1, A2, A3, A4, A5, A6, A7>::operator = (const Type rhs)
+	F8<R, A0, A1, A2, A3, A4, A5, A6, A7>::operator = (const typename F8<R, A0, A1, A2, A3, A4, A5, A6, A7>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1624,7 +1624,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8>
 	inline F9<R, A0, A1, A2, A3, A4, A5, A6, A7, A8>&
-	F9<R, A0, A1, A2, A3, A4, A5, A6, A7, A8>::operator = (const Type rhs)
+	F9<R, A0, A1, A2, A3, A4, A5, A6, A7, A8>::operator = (const typename F9<R, A0, A1, A2, A3, A4, A5, A6, A7, A8>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1795,7 +1795,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
 	inline F10<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>&
-	F10<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>::operator = (const Type rhs)
+	F10<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>::operator = (const typename F10<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1966,7 +1966,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10>
 	inline F11<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>&
-	F11<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>::operator = (const Type rhs)
+	F11<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>::operator = (const typename F11<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -2137,7 +2137,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11>
 	inline F12<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>&
-	F12<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>::operator = (const Type rhs)
+	F12<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>::operator = (const typename F12<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>::Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -2235,6 +2235,690 @@ namespace Function
 		Type pPtr;
 
 	}; // class F12 - Template specialization
+
+
+
+
+
+
+	/* Implementation class F13 */
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::F13()
+		:pPtr(NULL)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::F13(const typename F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::Type p)
+		:pPtr(p)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::F13(const F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>& copy)
+		:pPtr(copy.pPtr)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::F13(const DynamicLibrary::Symbol& symbol)
+		:pPtr((Type)(symbol.ptr()))
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline R
+	F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+	{
+		return pPtr ? pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12) : R();
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline R
+	F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+	{
+		return pPtr ? pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12) : R();
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline bool
+	F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::null() const
+	{
+		return NULL == pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline bool
+	F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::valid() const
+	{
+		return NULL != pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline typename F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::Type
+	F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::ptr() const
+	{
+		return pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>&
+	F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::operator = (const F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>& copy)
+	{
+		pPtr = copy.pPtr;
+		return *this;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>&
+	F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::operator = (const typename F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::Type rhs)
+	{
+		pPtr = rhs;
+		return *this;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	inline F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>&
+	F13<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>::operator = (const DynamicLibrary::Symbol& symbol)
+	{
+		pPtr = (Type)(symbol.ptr());
+		return *this;
+	}
+
+
+
+
+	/* Implementation class F13 Template specialization */
+
+	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12>
+	class F13 <void, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>
+	{
+	public:
+		//! Prototype of the function
+		typedef void (*Type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+		//! Prototype of the function
+		typedef void (*value_type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+
+		enum
+		{
+			//! Arguments count
+			argumentsCount = 13
+		};
+		enum
+		{
+			//! Has the function got a return value ?
+			hasReturnValue = 0
+		};
+
+	public:
+		F13()
+			:pPtr(NULL)
+		{}
+
+		F13(const F13& copy)
+			:pPtr(copy.pPtr)
+		{}
+
+		F13(const Type rhs)
+			:pPtr(rhs)
+		{}
+
+		F13(const DynamicLibrary::Symbol& symbol)
+			:pPtr((Type)(symbol.ptr()))
+		{}
+
+		void call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+		{
+			if (pPtr)
+				pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+		}
+
+
+		bool null() const {return NULL == pPtr;}
+
+		bool valid() const {return NULL != pPtr;}
+
+		Type ptr() const {return pPtr;}
+
+		F13& operator = (const F13& copy)
+		{
+			pPtr = copy.pPtr;
+			return *this;
+		}
+
+		F13& operator = (const Type rhs)
+		{
+			pPtr = rhs;
+			return *this;
+		}
+
+		F13& operator = (const DynamicLibrary::Symbol& symbol)
+		{
+			pPtr = (Type)(symbol.ptr());
+			return *this;
+		}
+
+		void operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+		{
+			if (pPtr)
+				pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+		}
+
+	public:
+		//! Pointer
+		Type pPtr;
+
+	}; // class F13 - Template specialization
+
+
+
+
+
+
+	/* Implementation class F14 */
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::F14()
+		:pPtr(NULL)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::F14(const typename F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::Type p)
+		:pPtr(p)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::F14(const F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>& copy)
+		:pPtr(copy.pPtr)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::F14(const DynamicLibrary::Symbol& symbol)
+		:pPtr((Type)(symbol.ptr()))
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline R
+	F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+	{
+		return pPtr ? pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13) : R();
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline R
+	F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+	{
+		return pPtr ? pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13) : R();
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline bool
+	F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::null() const
+	{
+		return NULL == pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline bool
+	F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::valid() const
+	{
+		return NULL != pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline typename F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::Type
+	F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::ptr() const
+	{
+		return pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>&
+	F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::operator = (const F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>& copy)
+	{
+		pPtr = copy.pPtr;
+		return *this;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>&
+	F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::operator = (const typename F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::Type rhs)
+	{
+		pPtr = rhs;
+		return *this;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	inline F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>&
+	F14<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>::operator = (const DynamicLibrary::Symbol& symbol)
+	{
+		pPtr = (Type)(symbol.ptr());
+		return *this;
+	}
+
+
+
+
+	/* Implementation class F14 Template specialization */
+
+	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13>
+	class F14 <void, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>
+	{
+	public:
+		//! Prototype of the function
+		typedef void (*Type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+		//! Prototype of the function
+		typedef void (*value_type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+
+		enum
+		{
+			//! Arguments count
+			argumentsCount = 14
+		};
+		enum
+		{
+			//! Has the function got a return value ?
+			hasReturnValue = 0
+		};
+
+	public:
+		F14()
+			:pPtr(NULL)
+		{}
+
+		F14(const F14& copy)
+			:pPtr(copy.pPtr)
+		{}
+
+		F14(const Type rhs)
+			:pPtr(rhs)
+		{}
+
+		F14(const DynamicLibrary::Symbol& symbol)
+			:pPtr((Type)(symbol.ptr()))
+		{}
+
+		void call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+		{
+			if (pPtr)
+				pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+		}
+
+
+		bool null() const {return NULL == pPtr;}
+
+		bool valid() const {return NULL != pPtr;}
+
+		Type ptr() const {return pPtr;}
+
+		F14& operator = (const F14& copy)
+		{
+			pPtr = copy.pPtr;
+			return *this;
+		}
+
+		F14& operator = (const Type rhs)
+		{
+			pPtr = rhs;
+			return *this;
+		}
+
+		F14& operator = (const DynamicLibrary::Symbol& symbol)
+		{
+			pPtr = (Type)(symbol.ptr());
+			return *this;
+		}
+
+		void operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+		{
+			if (pPtr)
+				pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+		}
+
+	public:
+		//! Pointer
+		Type pPtr;
+
+	}; // class F14 - Template specialization
+
+
+
+
+
+
+	/* Implementation class F15 */
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::F15()
+		:pPtr(NULL)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::F15(const typename F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::Type p)
+		:pPtr(p)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::F15(const F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>& copy)
+		:pPtr(copy.pPtr)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::F15(const DynamicLibrary::Symbol& symbol)
+		:pPtr((Type)(symbol.ptr()))
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline R
+	F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+	{
+		return pPtr ? pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14) : R();
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline R
+	F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+	{
+		return pPtr ? pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14) : R();
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline bool
+	F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::null() const
+	{
+		return NULL == pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline bool
+	F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::valid() const
+	{
+		return NULL != pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline typename F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::Type
+	F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::ptr() const
+	{
+		return pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>&
+	F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::operator = (const F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>& copy)
+	{
+		pPtr = copy.pPtr;
+		return *this;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>&
+	F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::operator = (const typename F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::Type rhs)
+	{
+		pPtr = rhs;
+		return *this;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	inline F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>&
+	F15<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>::operator = (const DynamicLibrary::Symbol& symbol)
+	{
+		pPtr = (Type)(symbol.ptr());
+		return *this;
+	}
+
+
+
+
+	/* Implementation class F15 Template specialization */
+
+	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14>
+	class F15 <void, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>
+	{
+	public:
+		//! Prototype of the function
+		typedef void (*Type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+		//! Prototype of the function
+		typedef void (*value_type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+
+		enum
+		{
+			//! Arguments count
+			argumentsCount = 15
+		};
+		enum
+		{
+			//! Has the function got a return value ?
+			hasReturnValue = 0
+		};
+
+	public:
+		F15()
+			:pPtr(NULL)
+		{}
+
+		F15(const F15& copy)
+			:pPtr(copy.pPtr)
+		{}
+
+		F15(const Type rhs)
+			:pPtr(rhs)
+		{}
+
+		F15(const DynamicLibrary::Symbol& symbol)
+			:pPtr((Type)(symbol.ptr()))
+		{}
+
+		void call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+		{
+			if (pPtr)
+				pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+		}
+
+
+		bool null() const {return NULL == pPtr;}
+
+		bool valid() const {return NULL != pPtr;}
+
+		Type ptr() const {return pPtr;}
+
+		F15& operator = (const F15& copy)
+		{
+			pPtr = copy.pPtr;
+			return *this;
+		}
+
+		F15& operator = (const Type rhs)
+		{
+			pPtr = rhs;
+			return *this;
+		}
+
+		F15& operator = (const DynamicLibrary::Symbol& symbol)
+		{
+			pPtr = (Type)(symbol.ptr());
+			return *this;
+		}
+
+		void operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+		{
+			if (pPtr)
+				pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+		}
+
+	public:
+		//! Pointer
+		Type pPtr;
+
+	}; // class F15 - Template specialization
+
+
+
+
+
+
+	/* Implementation class F16 */
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::F16()
+		:pPtr(NULL)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::F16(const typename F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::Type p)
+		:pPtr(p)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::F16(const F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>& copy)
+		:pPtr(copy.pPtr)
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::F16(const DynamicLibrary::Symbol& symbol)
+		:pPtr((Type)(symbol.ptr()))
+	{}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline R
+	F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+	{
+		return pPtr ? pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15) : R();
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline R
+	F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+	{
+		return pPtr ? pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15) : R();
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline bool
+	F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::null() const
+	{
+		return NULL == pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline bool
+	F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::valid() const
+	{
+		return NULL != pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline typename F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::Type
+	F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::ptr() const
+	{
+		return pPtr;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>&
+	F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::operator = (const F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>& copy)
+	{
+		pPtr = copy.pPtr;
+		return *this;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>&
+	F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::operator = (const typename F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::Type rhs)
+	{
+		pPtr = rhs;
+		return *this;
+	}
+
+	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	inline F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>&
+	F16<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>::operator = (const DynamicLibrary::Symbol& symbol)
+	{
+		pPtr = (Type)(symbol.ptr());
+		return *this;
+	}
+
+
+
+
+	/* Implementation class F16 Template specialization */
+
+	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15>
+	class F16 <void, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>
+	{
+	public:
+		//! Prototype of the function
+		typedef void (*Type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+		//! Prototype of the function
+		typedef void (*value_type) (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+
+		enum
+		{
+			//! Arguments count
+			argumentsCount = 16
+		};
+		enum
+		{
+			//! Has the function got a return value ?
+			hasReturnValue = 0
+		};
+
+	public:
+		F16()
+			:pPtr(NULL)
+		{}
+
+		F16(const F16& copy)
+			:pPtr(copy.pPtr)
+		{}
+
+		F16(const Type rhs)
+			:pPtr(rhs)
+		{}
+
+		F16(const DynamicLibrary::Symbol& symbol)
+			:pPtr((Type)(symbol.ptr()))
+		{}
+
+		void call(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+		{
+			if (pPtr)
+				pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
+		}
+
+
+		bool null() const {return NULL == pPtr;}
+
+		bool valid() const {return NULL != pPtr;}
+
+		Type ptr() const {return pPtr;}
+
+		F16& operator = (const F16& copy)
+		{
+			pPtr = copy.pPtr;
+			return *this;
+		}
+
+		F16& operator = (const Type rhs)
+		{
+			pPtr = rhs;
+			return *this;
+		}
+
+		F16& operator = (const DynamicLibrary::Symbol& symbol)
+		{
+			pPtr = (Type)(symbol.ptr());
+			return *this;
+		}
+
+		void operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+		{
+			if (pPtr)
+				pPtr(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
+		}
+
+	public:
+		//! Pointer
+		Type pPtr;
+
+	}; // class F16 - Template specialization
 
 
 

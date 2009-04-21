@@ -124,9 +124,10 @@ function Generate($i, $generic)
 	}
 	else
 	{
-		$l .= cout('template<>');
 		if ($i)
 			$l .= cout('template<'.$tmplParametersArgsOnly.'>');
+		else
+			$l .= cout('template<>');
 		$l .= cout('class F' . $i.' <void'. ($i ? ', '.$proto : '').'>');
 	}
 	$l .= cout('{');
@@ -351,7 +352,7 @@ function Generate($i, $generic)
 		$hxx .= cout('');
 		$hxx .= cout('template<'.$tmplParametersDcl.'>');
 		$hxx .= cout('inline F'.$i.'<'.$tmplImpl.'>&');
-		$hxx .= cout('F'.$i.'<'.$tmplImpl.'>::operator = (const F'.$i.'<'.$tmplImpl.'>::Type rhs)');
+		$hxx .= cout('F'.$i.'<'.$tmplImpl.'>::operator = (const typename F'.$i.'<'.$tmplImpl.'>::Type rhs)');
 		$hxx .= cout('{');
 		$hxx .= cout('	pPtr = rhs;');
 		$hxx .= cout('	return *this;');
@@ -416,7 +417,7 @@ $hxx .= "{\n";
 $hxx .= "\n\n\n";
 
 
-for ($i = 0; $i <= 12; $i++)
+for ($i = 0; $i <= 16; $i++)
 {
 	Generate($i, true);
 	Generate($i, false);
