@@ -85,7 +85,7 @@ namespace Function
 
 	template<typename R>
 	inline F0<R>&
-	F0<R>::operator = (const F0<R>::Type rhs)
+	F0<R>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -256,7 +256,7 @@ namespace Function
 
 	template<typename R, typename A0>
 	inline F1<R, A0>&
-	F1<R, A0>::operator = (const F1<R, A0>::Type rhs)
+	F1<R, A0>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -275,7 +275,6 @@ namespace Function
 
 	/* Implementation class F1 Template specialization */
 
-	template<>
 	template<typename A0>
 	class F1 <void, A0>
 	{
@@ -428,7 +427,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1>
 	inline F2<R, A0, A1>&
-	F2<R, A0, A1>::operator = (const F2<R, A0, A1>::Type rhs)
+	F2<R, A0, A1>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -447,7 +446,6 @@ namespace Function
 
 	/* Implementation class F2 Template specialization */
 
-	template<>
 	template<typename A0, typename A1>
 	class F2 <void, A0, A1>
 	{
@@ -600,7 +598,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2>
 	inline F3<R, A0, A1, A2>&
-	F3<R, A0, A1, A2>::operator = (const F3<R, A0, A1, A2>::Type rhs)
+	F3<R, A0, A1, A2>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -619,7 +617,6 @@ namespace Function
 
 	/* Implementation class F3 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2>
 	class F3 <void, A0, A1, A2>
 	{
@@ -772,7 +769,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3>
 	inline F4<R, A0, A1, A2, A3>&
-	F4<R, A0, A1, A2, A3>::operator = (const F4<R, A0, A1, A2, A3>::Type rhs)
+	F4<R, A0, A1, A2, A3>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -791,7 +788,6 @@ namespace Function
 
 	/* Implementation class F4 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2, typename A3>
 	class F4 <void, A0, A1, A2, A3>
 	{
@@ -944,7 +940,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4>
 	inline F5<R, A0, A1, A2, A3, A4>&
-	F5<R, A0, A1, A2, A3, A4>::operator = (const F5<R, A0, A1, A2, A3, A4>::Type rhs)
+	F5<R, A0, A1, A2, A3, A4>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -963,7 +959,6 @@ namespace Function
 
 	/* Implementation class F5 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2, typename A3, typename A4>
 	class F5 <void, A0, A1, A2, A3, A4>
 	{
@@ -1116,7 +1111,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5>
 	inline F6<R, A0, A1, A2, A3, A4, A5>&
-	F6<R, A0, A1, A2, A3, A4, A5>::operator = (const F6<R, A0, A1, A2, A3, A4, A5>::Type rhs)
+	F6<R, A0, A1, A2, A3, A4, A5>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1135,7 +1130,6 @@ namespace Function
 
 	/* Implementation class F6 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5>
 	class F6 <void, A0, A1, A2, A3, A4, A5>
 	{
@@ -1288,7 +1282,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
 	inline F7<R, A0, A1, A2, A3, A4, A5, A6>&
-	F7<R, A0, A1, A2, A3, A4, A5, A6>::operator = (const F7<R, A0, A1, A2, A3, A4, A5, A6>::Type rhs)
+	F7<R, A0, A1, A2, A3, A4, A5, A6>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1307,7 +1301,6 @@ namespace Function
 
 	/* Implementation class F7 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
 	class F7 <void, A0, A1, A2, A3, A4, A5, A6>
 	{
@@ -1460,7 +1453,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7>
 	inline F8<R, A0, A1, A2, A3, A4, A5, A6, A7>&
-	F8<R, A0, A1, A2, A3, A4, A5, A6, A7>::operator = (const F8<R, A0, A1, A2, A3, A4, A5, A6, A7>::Type rhs)
+	F8<R, A0, A1, A2, A3, A4, A5, A6, A7>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1479,7 +1472,6 @@ namespace Function
 
 	/* Implementation class F8 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7>
 	class F8 <void, A0, A1, A2, A3, A4, A5, A6, A7>
 	{
@@ -1632,7 +1624,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8>
 	inline F9<R, A0, A1, A2, A3, A4, A5, A6, A7, A8>&
-	F9<R, A0, A1, A2, A3, A4, A5, A6, A7, A8>::operator = (const F9<R, A0, A1, A2, A3, A4, A5, A6, A7, A8>::Type rhs)
+	F9<R, A0, A1, A2, A3, A4, A5, A6, A7, A8>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1651,7 +1643,6 @@ namespace Function
 
 	/* Implementation class F9 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8>
 	class F9 <void, A0, A1, A2, A3, A4, A5, A6, A7, A8>
 	{
@@ -1804,7 +1795,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
 	inline F10<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>&
-	F10<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>::operator = (const F10<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>::Type rhs)
+	F10<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1823,7 +1814,6 @@ namespace Function
 
 	/* Implementation class F10 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
 	class F10 <void, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>
 	{
@@ -1976,7 +1966,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10>
 	inline F11<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>&
-	F11<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>::operator = (const F11<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>::Type rhs)
+	F11<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -1995,7 +1985,6 @@ namespace Function
 
 	/* Implementation class F11 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10>
 	class F11 <void, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>
 	{
@@ -2148,7 +2137,7 @@ namespace Function
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11>
 	inline F12<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>&
-	F12<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>::operator = (const F12<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>::Type rhs)
+	F12<R, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>::operator = (const Type rhs)
 	{
 		pPtr = rhs;
 		return *this;
@@ -2167,7 +2156,6 @@ namespace Function
 
 	/* Implementation class F12 Template specialization */
 
-	template<>
 	template<typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11>
 	class F12 <void, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>
 	{

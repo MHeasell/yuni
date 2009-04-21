@@ -1,7 +1,9 @@
 
 #include "../system/windows.hdr.h"
 #include "file.h"
-#include <dlfcn.h>
+#ifndef YUNI_OS_WINDOWS
+# include <dlfcn.h>
+#endif
 #include <stdio.h>
 #include "../fs/paths.h"
 
