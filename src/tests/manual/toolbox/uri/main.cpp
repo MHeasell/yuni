@@ -134,10 +134,7 @@ static void simpleTests()
 
 int main(void)
 {
-	for (int z = 0; z < 10000; ++z)
-	{
 	simpleTests();
 	uriBuildTests();
-	}
 	return 0;
 }
