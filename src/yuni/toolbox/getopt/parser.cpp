@@ -10,7 +10,7 @@
 
 namespace Yuni
 {
-namespace ToolBox
+namespace Toolbox
 {
 namespace GetOpt
 {
@@ -126,7 +126,7 @@ namespace GetOpt
 				o.addValue(argv[index]);
 			else
 				// Need an extra value
-				return error(String("The option `") + o.bestSuitableName() + "` requires an extra value");
+				return error(String("The option `") << o.bestSuitableName() << "` requires an extra value");
 		}
 		else
 			// Toggle the value
@@ -150,7 +150,7 @@ namespace GetOpt
 		LongOptionsNames::iterator o = pLongNames.find(arg);
 		return (o != pLongNames.end())
 			? updateOption(argc, argv, *(o->second), index)
-			: error("Invalid option --" + arg);
+			: error(String("Invalid option --") << arg);
 	}
 
 
@@ -243,8 +243,8 @@ namespace GetOpt
 		}
 		return false;
 	}
-		
-	
+
+
 	void Parser::allowExtraOptions(const bool v)
 	{
 		pAllowExtraOptions = v;
@@ -253,7 +253,7 @@ namespace GetOpt
 
 
 } // namespace GetOpt
-} // namespace ToolBox
+} // namespace Toolbox
 } // namespace Yuni
 
 

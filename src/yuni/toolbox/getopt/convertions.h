@@ -1,12 +1,12 @@
-#ifndef __YUNI_TOOLBOX_GETOPT_CONVERTIONS_H__ 
-# define __YUNI_TOOLBOX_GETOPT_CONVERTIONS_H__ 
+#ifndef __YUNI_TOOLBOX_GETOPT_CONVERTIONS_H__
+# define __YUNI_TOOLBOX_GETOPT_CONVERTIONS_H__
 
 # include "../string.h"
 
 
 namespace Yuni
 {
-namespace ToolBox
+namespace Toolbox
 {
 namespace GetOpt
 {
@@ -23,18 +23,15 @@ namespace GetOpt
 	class DefaultConverterTo
 	{
 	public:
-		static const T FromString(const String& s);
+		static const T FromString(const String& s) {return s.to<T>();}
 	};
 
 
 
-	
+
 
 } // namespace GetOpt
-} // namespace ToolBox
+} // namespace Toolbox
 } // namespace Yuni
 
-
-# include "convertions.hxx"
-
-#endif // __YUNI_TOOLBOX_GETOPT_CONVERTIONS_H__ 
+#endif // __YUNI_TOOLBOX_GETOPT_CONVERTIONS_H__

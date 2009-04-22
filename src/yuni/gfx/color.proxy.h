@@ -4,6 +4,7 @@
 # include <iostream>
 # include "../yuni.h"
 # include "../toolbox/string.h"
+# include "../toolbox/math/math.h"
 
 
 namespace Yuni
@@ -157,6 +158,24 @@ namespace Proxy
 	};
 
 
+	template<typename T>
+	struct Channel
+	{
+		static T Value(const T t) {return t;}
+	};
+
+	template<>
+	struct Channel<unsigned char>
+	{
+		static int Value(const unsigned char t) {return t;}
+	};
+
+	template<>
+	struct Channel<char>
+	{
+		static int Value(const char t) {return t;}
+	};
+
 
 
 	# ifndef YUNI_OS_MSVC // see C2910 (http://msdn.microsoft.com/en-us/library/cx7k7hcf.aspx)
@@ -167,13 +186,21 @@ namespace Proxy
 	{
 		inline static std::ostream& toOStream(std::ostream& out, const Yuni::Gfx::Color::RGBA<S>& th)
 		{
-			out << "r:" << th.red << ",g:" << th.green << ",b:" << th.blue << ",a:" << th.alpha;
+			out << "r:"  << Channel<S>::Value(th.red)
+				<< ",g:" << Channel<S>::Value(th.green)
+				<< ",b:" << Channel<S>::Value(th.blue)
+				<< ",a:" << Channel<S>::Value(th.alpha)
+				;
 			return out;
 		}
 
 		inline static String toString(const Yuni::Gfx::Color::RGBA<S>& th)
 		{
-			return String() << "r:" << th.red << ",g:" << th.green << ",b:" << th.blue << ",a:" << th.alpha;
+			return String() << "r:"  << Channel<S>::Value(th.red)
+				<< ",g:" << Channel<S>::Value(th.green)
+				<< ",b:" << Channel<S>::Value(th.blue)
+				<< ",a:" << Channel<S>::Value(th.alpha)
+				;
 		}
 	};
 
@@ -186,13 +213,20 @@ namespace Proxy
 	{
 		inline static std::ostream& toOStream(std::ostream& out, const Yuni::Gfx::Color::RGB<S>& th)
 		{
-			out << "r:" << th.red << ",g:" << th.green << ",b:" << th.blue;
+			out << "r:"  << Channel<S>::Value(th.red)
+				<< ",g:" << Channel<S>::Value(th.green)
+				<< ",b:" << Channel<S>::Value(th.blue)
+				;
 			return out;
 		}
 
 		inline static String toString(const Yuni::Gfx::Color::RGB<S>& th)
 		{
-			return String() << "r:" << th.red << ",g:" << th.green << ",b:" << th.blue;
+			return String() << "r:"  << Channel<S>::Value(th.red)
+				<< ",g:" << Channel<S>::Value(th.green)
+				<< ",b:" << Channel<S>::Value(th.blue)
+				;
+
 		}
 	};
 
@@ -217,9 +251,9 @@ namespace Proxy
 	struct Compare< Yuni::Gfx::Color::RGBA<V>, Yuni::Gfx::Color::RGBA<V> >
 	{
 		inline static bool equals(const Yuni::Gfx::Color::RGBA<V>& lhs, const Yuni::Gfx::Color::RGBA<V>& rhs)
-		{ return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha; }
+		{ return Math::Equals(lhs.red, rhs.red) && Math::Equals(lhs.green, rhs.green) && Math::Equals(lhs.blue, rhs.blue) && Math::Equals(lhs.alpha, rhs.alpha); }
 	};
-	
+
 	// Compare Yuni::Gfx::Color::RGBA with not the same type
 	template<typename V, typename W>
 	struct Compare< Yuni::Gfx::Color::RGBA<V>, Yuni::Gfx::Color::RGBA<W> >
@@ -234,7 +268,7 @@ namespace Proxy
 	struct Compare< Yuni::Gfx::Color::RGB<V>, Yuni::Gfx::Color::RGB<V> >
 	{
 		inline static bool equals(const Yuni::Gfx::Color::RGB<V>& lhs, const Yuni::Gfx::Color::RGB<V>& rhs)
-		{ return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue; }
+		{ return Math::Equals(lhs.red, rhs.red) && Math::Equals(lhs.green, rhs.green) && Math::Equals(lhs.blue, rhs.blue); }
 	};
 
 	// Compare Yuni::Gfx::Color::RGB with not the same type
@@ -250,7 +284,7 @@ namespace Proxy
 	struct Compare< Yuni::Gfx::Color::RGBA<V>, Yuni::Gfx::Color::RGB<V> >
 	{
 		inline static bool equals(const Yuni::Gfx::Color::RGBA<V>& lhs, const Yuni::Gfx::Color::RGB<V>& rhs)
-		{ return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue; }
+		{ return Math::Equals(lhs.red, rhs.red) && Math::Equals(lhs.green, rhs.green) && Math::Equals(lhs.blue, rhs.blue); }
 	};
 
 	// Compare Yuni::Gfx::Color::RGB - Yuni::Gfx::Color::RGBA
@@ -258,11 +292,12 @@ namespace Proxy
 	struct Compare< Yuni::Gfx::Color::RGB<V>, Yuni::Gfx::Color::RGBA<V> >
 	{
 		inline static bool equals(const Yuni::Gfx::Color::RGB<V>& lhs, const Yuni::Gfx::Color::RGBA<V>& rhs)
-		{ return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue; }
+		{ return Math::Equals(lhs.red, rhs.red) && Math::Equals(lhs.green, rhs.green) && Math::Equals(lhs.blue, rhs.blue); }
 	};
 
 
-	
+
+
 } // namespace Proxy
 } // namespace Color
 } // namespace Gfx

@@ -7,6 +7,7 @@
 # include <stack>
 # include "../static/if.h"
 # include "../smartptr/smartptr.h"
+# include <ostream>
 
 
 

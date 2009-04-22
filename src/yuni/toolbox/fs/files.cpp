@@ -34,29 +34,27 @@ namespace Files
 				return false;
 			file.seekg(0, std::ios_base::beg);
 		}
-		String line;
+		std::string line;
 		while (std::getline(file, line))
 			out.push_back(line);
 		return true;
 	}
-	 
+
 	bool Load(String::List& out, const String& filename, const bool emptyListBefore, const uint32 sizeLimit)
 	{
 		return TmplLoadFromFile< String::List >(out, filename, emptyListBefore, sizeLimit);
 	}
-	 
+
 	bool Load(String::Vector& out, const String& filename, const bool emptyListBefore, const uint32 sizeLimit)
 	{
 		return TmplLoadFromFile< String::Vector >(out, filename, emptyListBefore, sizeLimit);
 	}
-	
 
 
-	
-	bool Size(const String& filename, uint64& size)
+	bool Size(const String::Char* filename, uint64& size)
 	{
 		struct stat results;
-		if (!filename.empty() && stat(filename.c_str(), &results) == 0)
+		if (filename && '\0' != *filename && stat(filename, &results) == 0)
 		{
 			size = results.st_size;
 			return true;
@@ -66,14 +64,26 @@ namespace Files
 	}
 
 
-	
+	bool Size(const String& filename, uint64& size)
+	{
+		struct stat results;
+		if (filename.notEmpty() && stat(filename.c_str(), &results) == 0)
+		{
+			size = results.st_size;
+			return true;
+		}
+		size = 0;
+		return false;
+	}
+
+
+
 	char* LoadContentInMemory(const String& filename, const uint64 hardlimit)
 	{
 		uint64 s;
 		return LoadContentInMemory(filename, s, hardlimit);
 	}
-	
-	
+
 
 	char* LoadContentInMemory(const String& filename, uint64& size, const uint64 hardlimit)
 	{
@@ -102,7 +112,7 @@ namespace Files
 	}
 
 
-	
+
 	bool SaveToFile(const String& filename, const String& content)
 	{
 		std::ofstream dst(filename.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
@@ -114,7 +124,7 @@ namespace Files
 		return false;
 	}
 
-	
+
 
 	String ReplaceExtension(const String& filename, const String& newExt)
 	{
@@ -129,7 +139,7 @@ namespace Files
 		return filename.substr(0, p) + newExt;
 	}
 
-	
+
 
 
 	bool Copy(const String& from, const String& to, const bool overwrite)
@@ -162,21 +172,21 @@ namespace Files
 	{
 		if (filename.empty())
 			return filename;
-		
+
 		const String::Size howManySlashes = filename.countChar('/');
 		if (!howManySlashes)
 			return filename;
 
 		String::Vector stack(2 * (howManySlashes + 1) /* Ex: path/to/somewhere */);
-		
+
 		const String::Size length = filename.length();
-		const bool isAbsolute = ('/' == filename[0]);
-		String::Index lastPosition = 0;
-		String::Index posInStack = 0;
-		String::Index realSegmentsFound = 0;
+		const bool isAbsolute = ('/' == filename.first());
+		String::Size lastPosition = 0;
+		String::Size posInStack = 0;
+		String::Size realSegmentsFound = 0;
 
 		// Index in the sequence
-		String::Index indx = 0;
+		String::Size indx = 0;
 		String::Char c;
 
 		for (; indx < length; ++indx)
@@ -193,7 +203,7 @@ namespace Files
 							if ('.' != filename[lastPosition])
 							{
 								stack[posInStack++].assign(filename, lastPosition, 1);
-								stack[posInStack++] = "/";
+								stack[posInStack++] = '/';
 								++realSegmentsFound;
 							}
 							break;
@@ -216,14 +226,14 @@ namespace Files
 									{
 										// We have to keep the `..`
 										stack[posInStack++] = "..";
-										stack[posInStack++] = "/";
+										stack[posInStack++] = '/';
 									}
 								}
 							}
 							else
 							{
 								stack[posInStack++].assign(filename, lastPosition, 2);
-								stack[posInStack++] = "/";
+								stack[posInStack++] = '/';
 								++realSegmentsFound;
 							}
 							break;
@@ -231,7 +241,7 @@ namespace Files
 					default:
 						{
 							stack[posInStack++].assign(filename, lastPosition, len);
-							stack[posInStack++] = "/";
+							stack[posInStack++] = '/';
 							++realSegmentsFound;
 							break;
 						}
@@ -274,12 +284,12 @@ namespace Files
 		{
 			String ret;
 			if (isAbsolute)
-				ret += "/";
-			for (String::Index i = 0; i < posInStack; ++i)
+				ret += '/';
+			for (String::Size i = 0; i != posInStack; ++i)
 				ret += stack[i];
 			return ret;
 		}
-		return (isAbsolute) ? String("/") : String(".");
+		return (isAbsolute) ? String('/') : String('.');
 	}
 
 

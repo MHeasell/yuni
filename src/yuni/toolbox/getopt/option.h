@@ -1,14 +1,14 @@
 #ifndef __YUNI_TOOLBOX_GETOPT_OPTION_H__
 # define __YUNI_TOOLBOX_GETOPT_OPTION_H__
 
+# include "../../yuni.h"
 # include <list>
-# include "string.h"
-# include "convertions.h"
+# include "../string.h"
 
 
 namespace Yuni
 {
-namespace ToolBox
+namespace Toolbox
 {
 namespace GetOpt
 {
@@ -25,7 +25,7 @@ namespace GetOpt
 		** \param ndValue if an extra value is required
 		** \param comm Comments for the option
 		*/
-		AOption(const char sOpt, const String& lOpt, bool ndValue,
+		AOption(const String::Char sOpt, const String& lOpt, bool ndValue,
 			const String& comm);
 		//! Copy constructor
 		AOption(const AOption&);
@@ -44,7 +44,7 @@ namespace GetOpt
 
 		String fullNameForHelp();
 		String bestSuitableName();
-		
+
 		/*!
 		** \brief Reset the value of the option
 		*/
@@ -55,7 +55,7 @@ namespace GetOpt
 		** \return True if an extra value is required
 		*/
 		bool valueIsRequired() const {return pNeedValue;}
-	
+
 		//! \name Modified
 		//@{
 		/*!
@@ -65,15 +65,15 @@ namespace GetOpt
 		bool modified() const {return pModified;}
 		/*!
 		** \brief Set if the option has been modified
-		** \param value The new value 
+		** \param value The new value
 		*/
 		void modified(const bool value) {pModified = value;}
 		//@}
-	
-		virtual void addValue(const String& v) = 0; 
+
+		virtual void addValue(const String& v) = 0;
 
 		virtual bool empty() const = 0;
-		
+
 	protected:
 		//! The short name of the option
 		const char pShortName;
@@ -98,13 +98,12 @@ namespace GetOpt
 	** \brief Single Option
 	**
 	** This class defines all parameters that an option could have.
-	** 
+	**
 	** \tparam T The type of the option
-	** \tparam ConvTO The class used to convert to the type T a value from a string
 	**
 	** \bug Not fully compliant with the original getopt : -a<value> does not work
 	*/
-	template<typename T, class ConvTO = DefaultConverterTo<T> >
+	template<typename T>
 	class Option : public AOption
 	{
 	public:
@@ -134,7 +133,7 @@ namespace GetOpt
 		/*!
 		** \brief Copy constructor
 		*/
-		Option(const Option<T, ConvTO>&);
+		Option(const Option<T>&);
 		/*!
 		** \brief Destructor
 		*/
@@ -166,13 +165,13 @@ namespace GetOpt
 		** \brief Add a value in the list
 		**
 		** When a new value is added, the option is considered as modified.
-		** 
+		**
 		** \param v The new value to add
 		** \see modified()
 		*/
-		virtual void addValue(const String& v); 
+		virtual void addValue(const String& v);
 		//! \see addValue
-		Option<T, ConvTO>& operator += (const String& v) {this->addValue(v);return *this;}
+		Option<T>& operator += (const String& v) {this->addValue(v);return *this;}
 		//@}
 
 		/*!
@@ -180,7 +179,7 @@ namespace GetOpt
 		** \return True if the list of values is empty, false otherwise
 		*/
 		virtual bool empty() const {return pValues.empty();}
-	
+
 		/*!
 		** \brief Reset the values for this option
 		*/
@@ -196,9 +195,9 @@ namespace GetOpt
 
 
 
-	
+
 } // namespace GetOpt
-} // namespace ToolBox
+} // namespace Toolbox
 } // namespace Yuni
 
 

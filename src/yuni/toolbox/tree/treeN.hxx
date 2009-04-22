@@ -35,7 +35,7 @@ namespace Toolbox
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return (0 == pChildrenCount);
 	}
-	
+
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
@@ -143,7 +143,7 @@ namespace Toolbox
 
 
 
-	
+
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
@@ -181,7 +181,7 @@ namespace Toolbox
 	}
 
 
-	
+
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
@@ -192,7 +192,7 @@ namespace Toolbox
 		return findFromIndexWL(index);
 	}
 
-	
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
 	inline typename TreeN<T,TP,ChckP,TrckP,ConvP>::Ptr
@@ -219,7 +219,7 @@ namespace Toolbox
 	}
 
 
-	
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
 	inline bool
@@ -235,7 +235,7 @@ namespace Toolbox
 	}
 
 
-	
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
 	void
@@ -460,7 +460,7 @@ namespace Toolbox
 	TreeN<T,TP,ChckP,TrckP,ConvP>::depth()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		return (pHaveParent) ? (1 + pParent->depth()) : 0; 
+		return (pHaveParent) ? (1 + pParent->depth()) : 0;
 	}
 
 

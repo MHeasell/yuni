@@ -10,12 +10,8 @@ namespace Application
 {
 
 
-	namespace
-	{
-		//! The global instance of the application
-		AApplication* gApplicationInstance = NULL;
-
-	} // anonymous namespace
+	//! The global instance of the application
+	static AApplication* gApplicationInstance = NULL;
 
 
 
@@ -54,15 +50,19 @@ namespace Application
 			String r;
 			r << Toolbox::Paths::CurrentDirectory() << Toolbox::Paths::Separator << argv[0];
 			if (!r.empty())
-				pRootFolder = Toolbox::Paths::ExtractFilePath(r);
+				pRootFolder = Toolbox::Paths::ExtractFilePath(r, true);
 		}
-  
+
 		// Find The absolution exe name
 		pExeName.clear();
 		if (pRootFolder.empty())
 			pExeName = Toolbox::Paths::ExtractFileName(argv[0]);
 		else
-			pExeName << pRootFolder << Toolbox::Paths::Separator << Toolbox::Paths::ExtractFileName(argv[0]); 
+		{
+			pExeName << pRootFolder
+				<< Toolbox::Paths::Separator
+				<< Toolbox::Paths::ExtractFileName(argv[0]);
+		}
 
 		return false;
 	}

@@ -1,141 +1,1721 @@
-#ifndef __YUNI_TOOLBOX_STRING_STRING_HXX__
-# define __YUNI_TOOLBOX_STRING_STRING_HXX__
+#ifndef __YUNI_TOOLBOX_STRING_HXX__
+# define __YUNI_TOOLBOX_STRING_HXX__
+
+# include <assert.h>
+# include <iostream>
+
+
 
 
 namespace Yuni
 {
 
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>::StringBase()
+		:pSize(0), pCapacity(0), pPtr(NULL)
+	{}
 
-	template<template<class,class> class U, class Type, class Alloc>
-	void String::append(const U<Type,Alloc>& list, const String& sep, const unsigned int max)
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>::StringBase(const StringBase<C,Chunk>& copy)
+		:pSize(copy.pSize)
 	{
-		unsigned int count = 0;
-		typename U<Type,Alloc>::const_iterator end = list.end();
-		for (typename U<Type,Alloc>::const_iterator i = list.begin(); i != end && count < max; ++i)
+		if (pSize)
 		{
-			if (count)
-				this->append(sep);
-			*this << *i;
-			++count;
+			pCapacity = pSize + 1;
+			pPtr = (Char*)::malloc( sizeof(Char) * pCapacity);
+			memcpy(pPtr, copy.pPtr, sizeof(Char) * pSize);
+			pPtr[pSize] = '\0';
+		}
+		else
+		{
+			pPtr = NULL;
+			pCapacity = 0;
+		}
+	}
+
+	template<typename C, int Chunk>
+	template<int Chk1>
+	StringBase<C,Chunk>::StringBase(const StringBase<C,Chk1>& copy)
+		:pSize(copy.pSize)
+	{
+		if (pSize)
+		{
+			pCapacity = pSize + 1;
+			pPtr = (Char*)::malloc( sizeof(Char) * pCapacity);
+			memcpy(pPtr, copy.pPtr, sizeof(Char) * pSize);
+			pPtr[pSize] = '\0';
+		}
+		else
+		{
+			pPtr = NULL;
+			pCapacity = 0;
 		}
 	}
 
 
-	template<template<class,class> class U, class Type, class Alloc>
-	void String::append(const U<Type,Alloc>& list, const String& sep, const String& enclosure, const unsigned int max)
+
+	template<typename C, int Chunk>
+	template<int Chk1>
+	StringBase<C,Chunk>::StringBase(const StringBase<C,Chk1>& rhs, const typename StringBase<C,Chunk>::Size offset,
+		typename StringBase<C,Chunk>::Size len)
+		:pSize(0), pCapacity(0), pPtr(NULL)
 	{
-		unsigned int count = 0;
-		typename U<Type,Alloc>::const_iterator end = list.end();
-		for (typename U<Type,Alloc>::const_iterator i = list.begin(); i != end && count < max; ++i)
+		Private::StringImpl::From< StringBase<C, Chk1> >::Append(*this, rhs, offset, len);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename C1>
+	StringBase<C,Chunk>::StringBase(const std::basic_string<C1>& rhs, const typename StringBase<C,Chunk>::Size offset,
+		typename StringBase<C,Chunk>::Size len)
+		:pSize(0), pCapacity(0), pPtr(NULL)
+	{
+		Private::StringImpl::From<std::basic_string<C1> >::Append(*this, rhs, offset, len);
+	}
+
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>::StringBase(const char* str)
+		:pSize(0), pCapacity(0), pPtr(NULL)
+	{
+		Private::StringImpl::From<typename Static::Remove::Const<char*>::Type>::Append(*this, str);
+	}
+
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>::StringBase(const wchar_t* str)
+		:pSize(0), pCapacity(0), pPtr(NULL)
+	{
+		Private::StringImpl::From<typename Static::Remove::Const<wchar_t*>::Type>::Append(*this, str);
+	}
+
+
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>::StringBase(const Char c)
+		:pSize(1), pCapacity(Chunk)
+	{
+		pPtr = (Char*)::malloc(sizeof(Char) * pCapacity);
+		*pPtr = c;
+		*(pPtr + 1) = '\0';
+	}
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>::StringBase(typename StringBase<C,Chunk>::Size n, const Char c)
+		:pSize(n), pCapacity(0), pPtr(NULL)
+	{
+		if (n)
 		{
-			if (count)
-				this->append(sep);
-			*this << enclosure << *i << enclosure;
-			++count;
-		}
-	}
-
-
-
-
-	template<typename U>
-	U String::to() const
-	{
-		YUNI_STATIC_ASSERT(false, ThisTypeIsNotImplemented);
-	}
-
-	template<typename U>
-	void String::to(U&) const
-	{
-		YUNI_STATIC_ASSERT(false, ThisTypeIsNotImplemented);
-	}
-
-	template<> inline bool String::to<bool>() const {return this->toBool();}
-	template<> inline float String::to<float>() const {return this->toFloat();}
-	template<> inline double String::to<double>() const {return this->toDouble();}
-	template<> inline sint8  String::to<sint8>() const {return this->toInt8();}
-	template<> inline sint16 String::to<sint16>() const {return this->toInt16();}
-	template<> inline sint32 String::to<sint32>() const {return this->toInt32();}
-	template<> inline sint64 String::to<sint64>() const {return this->toInt64();}
-	template<> inline uint8  String::to<uint8>() const {return this->toUInt8();}
-	template<> inline uint16 String::to<uint16>() const {return this->toUInt16();}
-	template<> inline uint32 String::to<uint32>() const {return this->toUInt32();}
-	template<> inline uint64 String::to<uint64>() const {return this->toUInt64();}
-	template<> inline String String::to<String>() const {return *this;}
-
-	template<> inline void String::to<bool>(bool& u) const {u = this->toBool();}
-	template<> inline void String::to<float>(float& u) const {u = this->toFloat();}
-	template<> inline void String::to<double>(double& u) const {u = this->toDouble();}
-	template<> inline void String::to<sint8>(sint8& u) const {u = this->toInt8();}
-	template<> inline void String::to<sint16>(sint16& u) const {u = this->toInt16();}
-	template<> inline void String::to<sint32>(sint32& u) const {u = this->toInt32();}
-	template<> inline void String::to<sint64>(sint64& u) const {u = this->toInt64();}
-	template<> inline void String::to<uint8>(uint8& u) const {u = this->toUInt8();}
-	template<> inline void String::to<uint16>(uint16& u) const {u = this->toUInt16();}
-	template<> inline void String::to<uint32>(uint32& u) const {u = this->toUInt32();}
-	template<> inline void String::to<uint64>(uint64& u) const {u = this->toUInt64();}
-	template<> inline void String::to<String>(String& u) const {u = *this;}
-
-
-
-
-	template<template<class,class> class U, class Type, class Alloc>
-	const String&
-	String::split(U<Type,Alloc>& out, const String& sep, const bool emptyBefore) const
-	{
-		// Empty the container
-		if (emptyBefore)
-			out.clear();
-		// String empty
-		if (!this->empty())
-		{
-			String::Index indx = 0;
-			while (true)
+			do
 			{
-				const String::Index newIndx = this->find_first_of(sep, indx);
-				const String::Size len = newIndx - indx;
-				if (len)
-				{
-					const String segment(*this, indx, len);
-					if (!segment.empty())
-						out.push_back(segment.to<Type>());
-				}
-				if (String::npos == newIndx)
-					return *this;
-				indx = newIndx + 1;
+				pCapacity += Chunk;
+			} while (pCapacity < n);
+			pPtr = (Char*)::malloc(sizeof(Char) * pCapacity);
+			for (typename StringBase<C,Chunk>::Size i = 0; i < n; ++i)
+				pPtr[i] = c;
+			pPtr[pSize] = '\0';
+		}
+	}
+
+
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>::StringBase(const std::basic_string<Char>& str)
+		:pSize(str.size())
+	{
+		if (!str.empty())
+		{
+			pCapacity = pSize + 1;
+			pPtr = (Char*)::malloc(sizeof(Char) * pCapacity);
+			memcpy(pPtr, str.c_str(), sizeof(Char) * pSize);
+			pPtr[pSize] = '\0';
+		}
+		else
+		{
+			pCapacity = 0;
+			pPtr = NULL;
+		}
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline StringBase<C,Chunk>::StringBase(const U& u)
+		:pSize(0), pCapacity(0), pPtr(NULL)
+	{
+		Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+	}
+
+	template<typename C, int Chunk>
+	template<typename C1>
+	inline StringBase<C,Chunk>::StringBase(const C1* str, const typename StringBase<C,Chunk>::Size len)
+		:pSize(0), pCapacity(0), pPtr(NULL)
+	{
+		if (str && len)
+		{
+			Private::StringImpl::From<C1*>::AppendRaw(*this, str,
+				Private::StringImpl::Min(
+					Private::StringImpl::Length<StringBase<C,Chunk>, C1*>::Value(str), len));
+		}
+	}
+
+
+	template<typename C, int Chunk>
+	template<class IteratorClass>
+	inline StringBase<C,Chunk>::StringBase(const IteratorClass& begin, const IteratorClass& end)
+		:pSize(0), pCapacity(0), pPtr(NULL)
+	{
+		if (begin.pStr && begin.pIndx < begin.pStr->pSize && end.pIndx >= begin.pIndx)
+			append(begin.pStr->pPtr + begin.pIndx, end.pIndx - begin.pIndx + 1);
+	}
+
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>::~StringBase()
+	{
+		::free(pPtr);
+	}
+
+
+	template<typename C, int Chunk>
+	inline void StringBase<C,Chunk>::clear()
+	{
+		if (pSize)
+		{
+			pSize = 0;
+			*pPtr = '\0';
+		}
+	}
+
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::empty() const
+	{
+		return !pSize;
+	}
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::notEmpty() const
+	{
+		return pSize;
+	}
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::size() const
+	{
+		return pSize;
+	}
+
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::count() const
+	{
+		return pSize;
+	}
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::length() const
+	{
+		return pSize;
+	}
+
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::capacity() const
+	{
+		return this->pCapacity;
+	}
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::max_size() const
+	{
+		return this->pCapacity;
+	}
+
+
+
+
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::reserve(const Size min)
+	{
+		// Really something to do ?
+		if (this->pCapacity <= min)
+		{
+			// Looking for the good capacity
+			do
+			{
+				this->pCapacity += Chunk;
+			}
+			while (this->pCapacity < min);
+
+			// ReAllocating
+			this->pPtr = (Char*)::realloc(this->pPtr, sizeof(Char) * this->pCapacity);
+			this->pPtr[this->pSize] = '\0';
+		}
+	}
+
+
+
+	template<typename C, int Chunk>
+	void
+	StringBase<C,Chunk>::shrink()
+	{
+		// Have we have a buffer to shrink ?
+		if (pCapacity)
+		{
+			if (!pSize)
+			{
+				// The string is empty.
+				pCapacity = 0;
+				::free(pPtr);
+				pPtr = NULL;
+			}
+			else
+			{
+				// Shrink the string as much as possible
+				pCapacity = pSize + 1;
+				pPtr = (Char*)::realloc(pPtr, sizeof(Char) * pCapacity);
+				// Ensures the string is still zero-terminated
+				pPtr[pSize] = '\0';
 			}
 		}
+	}
+
+
+
+	template<typename C, int Chunk>
+	inline const char*
+	StringBase<C,Chunk>::c_str() const throw()
+	{
+		return pPtr;
+	}
+
+	template<typename C, int Chunk>
+	inline const C*
+	StringBase<C,Chunk>::data() const throw()
+	{
+		return pPtr;
+	}
+
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator = (const StringBase<C,Chunk>& rhs)
+	{
+		assign(rhs);
+		return *this;
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator += (const U& u)
+	{
+		append(u);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator << (const U& u)
+	{
+		Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator = (const U& u)
+	{
+		clear();
+		Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::assignRaw(const char* u, const typename StringBase<C,Chunk>::Size len)
+	{
+		// Resizing the string to zero
+		clear();
+		// Appending the raw string
+		if (u && len)
+			Private::StringImpl::From<char*>::AppendRaw(*this, u, len);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::appendRaw(const char* u, const typename StringBase<C,Chunk>::Size len)
+	{
+		if (u && len)
+			Private::StringImpl::From<char*>::AppendRaw(*this, u, len);
+		return *this;
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline void
+	StringBase<C,Chunk>::assign(const U& u)
+	{
+		clear();
+		Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline void
+	StringBase<C,Chunk>::assign(const U& u, const typename StringBase<C,Chunk>::Size len)
+	{
+		clear();
+		Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u, len);
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline void
+	StringBase<C,Chunk>::assign(const StringBase<C,Chnk1>& s, const Size offset, const Size len)
+	{
+		if (offset < s.pSize && len)
+			assign(s.pPtr + offset, Private::StringImpl::Min(len, pSize - offset));
+		else
+			clear();
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::operator ! () const
+	{
+		return !pSize;
+	}
+
+
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::print(std::ostream& out) const
+	{
+		if (pSize)
+			out.write(pPtr, sizeof(Char) * pSize);
+	}
+
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::iterator
+	StringBase<C,Chunk>::begin()
+	{
+		return iterator(*this);
+	}
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::iterator
+	StringBase<C,Chunk>::end()
+	{
+		return iterator(*this, pSize);
+	}
+
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::reverse_iterator
+	StringBase<C,Chunk>::rbegin()
+	{
+		return reverse_iterator(*this);
+	}
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::reverse_iterator
+	StringBase<C,Chunk>::rend()
+	{
+		return reverse_iterator(*this, Size(-1));
+	}
+
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::countChar(const C c) const
+	{
+		return Private::StringImpl::CountChar<StringBase<C,Chunk>, StringBase<C,Chunk>
+			> :: Value(*this, c);
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	bool
+	StringBase<C,Chunk>::hasChar(const StringBase<C,Chnk1>& str) const
+	{
+		for (Size i = 0; i < pSize; ++i)
+		{
+			if (str.hasChar(pPtr[i]))
+				return true;
+		}
+		return false;
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find_first_of(const U& u) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::Value(*this, u);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find_first_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::Value(*this, u, offset);
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find_last_of(const U& u) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValue(*this, u);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find_last_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValue(*this, u, offset);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find(const U& u) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::Value(*this, u);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find(const U& u, typename StringBase<C,Chunk>::Size offset) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::Value(*this, u, offset);
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::rfind(const U& u) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValue(*this, u);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::rfind(const U& u, typename StringBase<C,Chunk>::Size offset) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValue(*this, u, offset);
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::Length(const U& u)
+	{
+		return Private::StringImpl::Length<
+			StringBase<C,Chunk>,
+			typename Static::Remove::Const<U>::Type> :: Value(u);
+	}
+
+
+
+	template<typename C, int Chunk>
+	inline int
+	StringBase<C,Chunk>::Compare(const Char* a, const Char* b, const typename StringBase<C,Chunk>::Size maxLen)
+	{
+		return (a && b) ? Private::StringImpl::Impl<C,Chunk>::Compare(a, b, maxLen) : -1;
+	}
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline int
+	StringBase<C,Chunk>::Compare(const StringBase<Char,Chnk1>& a, const C* b, const typename StringBase<C,Chunk>::Size maxLen)
+	{
+		return a.pSize && b ? Private::StringImpl::Impl<C,Chunk>::Compare(a.pPtr, b, maxLen > a.pSize ? a.pSize : maxLen) : 1;
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline int
+	StringBase<C,Chunk>::Compare(const C* a, const StringBase<Char,Chnk1>& b, const typename StringBase<C,Chunk>::Size maxLen)
+	{
+		return a && b.pSize ? Private::StringImpl::Impl<C,Chunk>::Compare(a, b.c_str(), maxLen) : -1;
+	}
+
+	template<typename C, int Chunk>
+	template<int Chnk1, int Chnk2>
+	inline int
+	StringBase<C,Chunk>::Compare(const StringBase<Char,Chnk1>& a, const StringBase<Char,Chnk2>& b, const typename StringBase<C,Chunk>::Size maxLen)
+	{
+		return a.pSize && b.pSize ? Private::StringImpl::Impl<C,Chunk>::Compare(a.pPtr, b.c_str(), maxLen > a.pSize ? a.pSize : maxLen) : -1;
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::operator < (const C* rhs) const
+	{
+		return (rhs ? (-1 == Private::StringImpl::Impl<C,Chunk>::Compare(pPtr, rhs, pSize)) : false);
+	}
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline bool
+	StringBase<C,Chunk>::operator < (const StringBase<C,Chnk1>& rhs) const
+	{
+		return Private::StringImpl::Impl<C,Chunk>::Compare(pPtr, rhs.pPtr,
+			Private::StringImpl::Min(pSize, rhs.pSize)) < 0;
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::operator > (const C* rhs) const
+	{
+		return (rhs ? (1 == Private::StringImpl::Impl<C,Chunk>::Compare(pPtr, rhs, pSize)) : true);
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline bool
+	StringBase<C,Chunk>::operator > (const StringBase<C,Chnk1>& rhs) const
+	{
+		return Private::StringImpl::Impl<C,Chunk>::Compare(pPtr, rhs.pPtr,
+			Private::StringImpl::Min(pSize, rhs.pSize)) > 0;
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::operator == (const C* rhs) const
+	{
+		return (rhs ? Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize) : !pSize);
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline bool
+	StringBase<C,Chunk>::operator == (const StringBase<C,Chnk1>& rhs) const
+	{
+		return StringBase<C,Chunk>::Equals(*this, rhs);
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::operator != (const C* rhs) const
+	{
+		return (rhs ? !Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize) : (pSize));
+	}
+
+
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::Equals(const Char* a, const Char* b)
+	{
+		return Private::StringImpl::Impl<C,Chunk>::StrictlyEquals(a, b);
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::Equals(const Char* a, const Char* b, const typename StringBase<C,Chunk>::Size maxLen)
+	{
+		return Private::StringImpl::Impl<C,Chunk>::Equals(a, b, maxLen);
+	}
+
+	template<typename C, int Chunk>
+	template<int Chnk1, int Chnk2>
+	inline bool
+	StringBase<C,Chunk>::Equals(const StringBase<C,Chnk1>& a, const StringBase<C,Chnk2>& b)
+	{
+		return (a.pSize == b.pSize) &&
+			(!a.pSize || Private::StringImpl::Impl<C,Chunk>::StrictlyEquals(a.pPtr, b.pPtr, a.pSize));
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::format(const StringBase<C,Chnk1>& f, ...)
+	{
+		va_list parg;
+		va_start(parg, f);
+		this->clear();
+		StringBase<C,Chunk> s(f);
+		vappendFormat(s.c_str(), parg);
+		va_end(parg);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::format(StringBase<C,Chnk1>& f, ...)
+	{
+		va_list parg;
+		va_start(parg, f);
+		this->clear();
+		vappendFormat(f.c_str(), parg);
+		va_end(parg);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::format(const char* f, ...)
+	{
+		va_list parg;
+		va_start(parg, f);
+		this->clear();
+		vappendFormat(f, parg);
+		va_end(parg);
+		return *this;
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::appendFormat(const StringBase<C,Chnk1>& f, ...)
+	{
+		va_list parg;
+		va_start(parg, f);
+		StringBase<C,Chunk> s(f);
+		vappendFormat(s.c_str(), parg);
+		va_end(parg);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::appendFormat(StringBase<C,Chnk1>& f, ...)
+	{
+		va_list parg;
+		va_start(parg, f);
+		vappendFormat(f.c_str(), parg);
+		va_end(parg);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::appendFormat(const char* f, ...)
+	{
+		va_list parg;
+		va_start(parg, f);
+		vappendFormat(f, parg);
+		va_end(parg);
 		return *this;
 	}
 
 
 
 
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::vappendFormat(const char* f, va_list parg)
+	{
+		Private::StringImpl::vsprintf(*this, f, parg);
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	StringBase<C,Chunk>
+	StringBase<C,Chunk>::Format(const StringBase<C,Chnk1>& f, ...)
+	{
+		va_list parg;
+		va_start(parg, f);
+		String s;
+		s.vappendFormat(f.c_str(), parg);
+		va_end(parg);
+		return s;
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline StringBase<C,Chunk>
+	StringBase<C,Chunk>::Format(StringBase<C,Chnk1>& f, ...)
+	{
+		va_list parg;
+		va_start(parg, f);
+		String s;
+		s.vappendFormat(f.c_str(), parg);
+		va_end(parg);
+		return s;
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>
+	StringBase<C,Chunk>::Format(const char* f, ...)
+	{
+		va_list parg;
+		va_start(parg, f);
+		String s;
+		s.vappendFormat(f, parg);
+		va_end(parg);
+		return s;
+	}
+
+
+	template<typename C, int Chunk>
+	template<class U>
+	inline void
+	StringBase<C,Chunk>::push_back(const U& u)
+	{
+		Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+	}
+
+
+	template<typename C, int Chunk>
+	template<class U>
+	inline void
+	StringBase<C,Chunk>::append(const U& u)
+	{
+		Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+	}
+
+	template<typename C, int Chunk>
+	template<class U>
+	inline void
+	StringBase<C,Chunk>::append(const U& u, const typename StringBase<C,Chunk>::Size len)
+	{
+		Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u, len);
+	}
+
+	template<typename C, int Chunk>
+	template<class U>
+	inline void
+	StringBase<C,Chunk>::append(const U& u, const typename StringBase<C,Chunk>::Size offset, const typename StringBase<C,Chunk>::Size len)
+	{
+		Private::StringImpl::From<typename Static::Remove::Const<U>::Type
+			>::Append(*this, u, offset, len);
+	}
+
+	template<typename C, int Chunk>
+	template<template<class,class> class L, class TypeL, class Alloc>
+	inline void
+	StringBase<C,Chunk>::append(const L<TypeL,Alloc>& list, const unsigned int max)
+	{
+		append(list, ", ", max);
+	}
+
+	template<typename C, int Chunk>
+	template<template<class,class> class L, class TypeL, class Alloc>
+	inline void
+	StringBase<C,Chunk>::append(const L<TypeL,Alloc>& list)
+	{
+		append(list, ", ");
+	}
+
+	template<typename C, int Chunk>
+	template<template<class,class> class L, class TypeL, class Alloc, typename S, typename E>
+	void
+	StringBase<C,Chunk>::append(const L<TypeL,Alloc>& list, const S& separator, const E& enclosure, const unsigned int max)
+	{
+		if (!list.empty() && max)
+		{
+			// Adding the first item
+			typename L<TypeL,Alloc>::const_iterator i = list.begin();
+			append(enclosure);
+			append(*i);
+			append(enclosure);
+			++i;
+
+			// All other items
+			const typename L<TypeL,Alloc>::const_iterator end = list.end();
+			unsigned int pos(1);
+			for (; pos != max && i != end; ++i, ++pos)
+			{
+				append(separator);
+				append(enclosure);
+				append(*i);
+				append(enclosure);
+			}
+		}
+	}
+
+
+	template<typename C, int Chunk>
+	template<template<class,class> class L, class TypeL, class Alloc, typename S, typename E>
+	void
+	StringBase<C,Chunk>::append(const L<TypeL,Alloc>& list, const S& separator, const E& enclosure)
+	{
+		if (!list.empty())
+		{
+			// Adding the first item
+			typename L<TypeL,Alloc>::const_iterator i = list.begin();
+			append(enclosure);
+			append(*i);
+			append(enclosure);
+			++i;
+
+			// All other items
+			const typename L<TypeL,Alloc>::const_iterator end = list.end();
+			for (; i != end; ++i)
+			{
+				append(separator);
+				append(enclosure);
+				append(*i);
+				append(enclosure);
+			}
+		}
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<template<class,class> class L, class TypeL, class Alloc, typename S>
+	void
+	StringBase<C,Chunk>::append(const L<TypeL,Alloc>& list, const S& separator, const unsigned int max)
+	{
+		if (!list.empty() && max)
+		{
+			// Adding the first item
+			typename L<TypeL,Alloc>::const_iterator i = list.begin();
+			append(*i);
+			++i;
+
+			// All other items
+			const typename L<TypeL,Alloc>::const_iterator end = list.end();
+			unsigned int pos(1);
+			for (; pos != max && i != end; ++i, ++pos)
+			{
+				append(separator);
+				append(*i);
+			}
+		}
+	}
+
+	template<typename C, int Chunk>
+	template<template<class,class> class L, class TypeL, class Alloc, typename S>
+	void
+	StringBase<C,Chunk>::append(const L<TypeL,Alloc>& list, const S& separator)
+	{
+		if (!list.empty())
+		{
+			// Adding the first item
+			typename L<TypeL,Alloc>::const_iterator i = list.begin();
+			append(*i);
+			++i;
+
+			// All other items
+			const typename L<TypeL,Alloc>::const_iterator end = list.end();
+			for (; i != end; ++i)
+			{
+				append(separator);
+				append(*i);
+			}
+		}
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<typename C1, class U>
+	inline bool
+	StringBase<C,Chunk>::HasChar(const C1 c, const U& u)
+	{
+		return Private::StringImpl::HasChar<
+			StringBase<C,Chunk>,
+			typename Static::Remove::Const<U>::Type> :: Value(u, c);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename C1, class U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::CountChar(const C1 c, const U& u)
+	{
+		return Private::StringImpl::CountChar<
+			StringBase<C,Chunk>,
+			typename Static::Remove::Const<U>::Type> :: Value(u, c);
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&  StringBase<C,Chunk>::toLower()
+	{
+		for (typename StringBase<C,Chunk>::Size i = 0; i < pSize; ++i)
+			pPtr[i] = (C)tolower(pPtr[i]);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&  StringBase<C,Chunk>::toUpper()
+	{
+		for (typename StringBase<C,Chunk>::Size i = 0; i < pSize; ++i)
+			pPtr[i] = (C)toupper(pPtr[i]);
+		return *this;
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline StringBase<C,Chunk>
+	StringBase<C,Chunk>::ToLower(const U& u)
+	{
+		return StringBase<C,Chunk>(u).toLower();
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline StringBase<C,Chunk>
+	StringBase<C,Chunk>::ToUpper(const U& u)
+	{
+		return StringBase<C,Chunk>(u).toUpper();
+	}
+
+
+	template<typename C, int Chunk>
+	template<template<class,class> class L, class T, class Alloc>
+	unsigned int
+	StringBase<C,Chunk>::FindInList(const L<T,Alloc>& list, const StringBase<Char,Chunk>& str, const unsigned int offset)
+	{
+		if (!list.empty())
+		{
+			unsigned int pos(0);
+			const typename L<T,Alloc>::const_iterator end = list.end();
+			for (typename L<T,Alloc>::const_iterator i = list.begin(); i != end; ++i)
+			{
+				if (pos >= offset && StringBase<C,Chunk>::Equals(str, *i))
+					return pos;
+				++pos;
+			}
+		}
+		return StringBase<C,Chunk>::npos;
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>
+	StringBase<C,Chunk>::ConvertEscapedCharacters(const char str[])
+	{
+		return (str && '\0' != *str)
+			? ConvertEscapedCharacters(StringBase<C,Chunk>(str))
+			: StringBase<C,Chunk>();
+	}
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>
+	StringBase<C,Chunk>::ConvertEscapedCharacters(const wchar_t str[])
+	{
+		return (str && '\0' != *str)
+			? ConvertEscapedCharacters(StringBase<C,Chunk>(str))
+			: StringBase<C,Chunk>();
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline StringBase<C,Chunk>
+	StringBase<C,Chunk>::ConvertEscapedCharacters(const std::basic_string<U>& str)
+	{
+		return str.empty()
+			? StringBase<C,Chunk>()
+			: ConvertEscapedCharacters(StringBase<C,Chunk>(str));
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	StringBase<C,Chunk>
+	StringBase<C,Chunk>::ConvertEscapedCharacters(const StringBase<C,Chnk1>& str)
+	{
+		if (str.empty())
+			return StringBase<C,Chunk>();
+		// Preparing the copy
+		StringBase<C,Chunk> ret;
+		ret.assignFromEscapedCharacters(str);
+		return ret;
+	}
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline void
+	StringBase<C,Chunk>::assignFromEscapedCharacters(const StringBase<C,Chnk1>& str)
+	{
+		assignFromEscapedCharacters(str, str.pSize);
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	void
+	StringBase<C,Chunk>::assignFromEscapedCharacters(const StringBase<C,Chnk1>& str, typename StringBase<C,Chunk>::Size maxLen,
+		const typename StringBase<C,Chunk>::Size offset)
+	{
+		clear();
+		if (!str.pSize || offset > str.pSize || !maxLen)
+			return;
+		if (maxLen == npos)
+		{
+			maxLen = str.pSize - offset;
+		}
+		else
+		{
+			maxLen += offset;
+			if (maxLen > str.pSize)
+				maxLen = str.pSize;
+		}
+		// Preparing the copy
+		pSize = maxLen - offset;
+		reserve(pSize);
+
+		// Browsing all char
+		Size retPos(0);
+		for (Size i = offset; i < maxLen; ++i, ++retPos)
+		{
+			if ('\\' == str.pPtr[i] && i + 1 != maxLen)
+			{
+				switch (str.pPtr[i + 1])
+				{
+					case 'r'  : pPtr[retPos] = '\r'; break;
+					case 'n'  : pPtr[retPos] = '\n'; break;
+					case '\\' : pPtr[retPos] = '\\'; break;
+					case ';'  : pPtr[retPos] = ';'; break;
+					case 'e'  : pPtr[retPos] = '\e'; break;
+					case 'a'  : pPtr[retPos] = '\a'; break;
+					case 'f'  : pPtr[retPos] = '\f'; break;
+					case 't'  : pPtr[retPos] = '\t'; break;
+					case '\'' : pPtr[retPos] = '\''; break;
+					case '"'  : pPtr[retPos] = '"';break;
+					default   : pPtr[retPos] = str.pPtr[i];continue;
+				}
+				--pSize;
+				++i;
+				continue;
+			}
+			pPtr[retPos] = str.pPtr[i];
+		}
+		if (pSize)
+			pPtr[pSize] = '\0';
+	}
+
+
+
+
+
+
+	template<typename C, int Chunk>
+	uint32_t
+	StringBase<C,Chunk>::hashValue() const
+	{
+		if (pSize)
+		{
+			uint32_t hash(0);
+			for (typename StringBase<C,Chunk>::Size i = 0; i != pSize; ++i)
+				hash = (hash << 5) - hash + *(pPtr + i);
+			return hash;
+		}
+		return 0;
+	}
+
+
+	template<typename C, int Chunk>
+	void StringBase<C,Chunk>::convertSlashesIntoBackslashes()
+	{
+		for (typename StringBase<C,Chunk>::Size i = 0; i < pSize; ++i)
+		{
+			if ('/' == pPtr[i])
+				pPtr[i] = '\\';
+		}
+	}
+
+	template<typename C, int Chunk>
+	void StringBase<C,Chunk>::convertBackslashesIntoSlashes()
+	{
+		for (typename StringBase<C,Chunk>::Size i = 0; i < pSize; ++i)
+		{
+			if ('\\' == pPtr[i])
+				pPtr[i] = '/';
+		}
+	}
+
+
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::ExtractKeyValue(const StringBase& s, StringBase& key, StringBase& value,
+		const enum CharCase chcase)
+	{
+		s.extractKeyValue(key, value, chcase);
+	}
+
+
+
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::extractKeyValue(StringBase& key, StringBase& value, const enum CharCase chcase) const
+	{
+		// Empty - Nothing to do
+		if (!pSize)
+		{
+			key.clear();
+			value.clear();
+			return;
+		}
+		unsigned int left(0);
+		while (left != pSize && HasChar(pPtr[left], YUNI_STRING_SEPARATORS))
+			++left;
+		if (left == pSize)
+		{
+			key.clear();
+			value.clear();
+			return;
+		}
+		// Section
+		if ('[' == pPtr[left])
+		{
+			key.assign('[');
+			++left;
+			typename StringBase<C,Chunk>::Size right = find(']', left);
+			value.assign(*this, left, right > left ? right - left : 0);
+			value.trim();
+			return;
+		}
+
+		// Looking for the symbol `=`
+		typename StringBase<C,Chunk>::Size equal = find('=', left);
+		if (equal == npos)
+		{
+			key.clear();
+			value.clear();
+			return;
+		}
+
+		// Getting our key
+		key.assign(*this, left, equal - left);
+		key.trimRight();
+		if (chcase == soIgnoreCase)
+			key.toLower();
+
+		// Looking for the first interresting char
+		unsigned int leftValue(equal + 1);
+		while (leftValue != pSize && HasChar(pPtr[leftValue], YUNI_STRING_SEPARATORS))
+			++leftValue;
+		if (leftValue == pSize)
+		{
+			// Empty value
+			value.clear();
+			return;
+		}
+		switch (pPtr[leftValue])
+		{
+			case ';':
+				// Empty value
+				value.clear();
+				break;
+			case '"':
+			case '\'':
+				{
+					// Value enclosed in a string
+					++leftValue;
+					typename StringBase<C,Chunk>::Size next
+						= FindEndOfSequence(pPtr + leftValue, pPtr[leftValue-1], pSize - leftValue);
+					if (!next)
+						value.clear();
+					else
+						value.assignFromEscapedCharacters(*this, next, leftValue);
+					return;
+				}
+			default:
+				{
+					// Standard value
+					typename StringBase<C,Chunk>::Size semicolon = find(';', leftValue);
+					value.assignFromEscapedCharacters(*this, semicolon - leftValue, leftValue);
+					value.trimRight();
+				}
+		}
+	}
+
+
+
+	template<typename C, int Chunk>
+	inline void StringBase<C,Chunk>::trimRight()
+	{
+		if (pSize)
+		{
+			while (pSize && HasChar(pPtr[pSize-1], YUNI_STRING_SEPARATORS))
+				--pSize;
+			pPtr[pSize] = '\0';
+		}
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline void StringBase<C,Chunk>::trimRight(const U& separators)
+	{
+		if (pSize)
+		{
+			while (pSize && HasChar(pPtr[pSize-1], separators))
+				--pSize;
+			pPtr[pSize] = '\0';
+		}
+	}
+
+
+	template<typename C, int Chunk>
+	void StringBase<C,Chunk>::trimLeft()
+	{
+		if (pSize && HasChar(*pPtr, YUNI_STRING_SEPARATORS))
+		{
+			unsigned int pos(1);
+			while (pos < pSize && HasChar(pPtr[pos], YUNI_STRING_SEPARATORS))
+				++pos;
+			pSize -= pos;
+			for (unsigned int i = 0; i != pSize; ++i)
+				pPtr[i] = pPtr[pos + i];
+			pPtr[pSize] = '\0';
+		}
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	void StringBase<C,Chunk>::trimLeft(const U& separators)
+	{
+		if (pSize && HasChar(*pPtr, separators))
+		{
+			unsigned int pos(1);
+			while (pos < pSize && HasChar(pPtr[pos], separators))
+				++pos;
+			pSize -= pos;
+			for (unsigned int i = 0; i != pSize; ++i)
+				pPtr[i] = pPtr[pos + i];
+			pPtr[pSize] = '\0';
+		}
+	}
+
+
+	template<typename C, int Chunk>
+	inline void StringBase<C,Chunk>::trim()
+	{
+		trimRight();
+		trimLeft();
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	void StringBase<C,Chunk>::trim(const U& separators)
+	{
+		trimRight(separators);
+		trimLeft(separators);
+	}
+
+
+	template<typename C, int Chunk>
+	inline C StringBase<C,Chunk>::first() const
+	{
+		return (pSize) ? *pPtr : '\0';
+	}
+
+	template<typename C, int Chunk>
+	inline C StringBase<C,Chunk>::last() const
+	{
+		return (pSize) ? pPtr[pSize-1] : '\0';
+	}
+
+	template<typename C, int Chunk>
+	inline void StringBase<C,Chunk>::removeLast()
+	{
+		if (pSize)
+		{
+			--pSize;
+			pPtr[pSize] = '\0';
+		}
+	}
+
+	template<typename C, int Chunk>
+	inline void StringBase<C,Chunk>::removeTrailingSlash()
+	{
+		if (pSize && ('/' == pPtr[pSize-1] || '\\' == pPtr[pSize-1]))
+		{
+			--pSize;
+			pPtr[pSize] = '\0';
+		}
+	}
+
+	template<typename C, int Chunk>
+	inline void StringBase<C,Chunk>::truncate(const typename StringBase<C,Chunk>::Size maxLen)
+	{
+		if (pSize > maxLen)
+		{
+			pSize = maxLen;
+			pPtr[pSize] = '\0';
+		}
+	}
+
+
+	template<typename C, int Chunk>
+	inline void StringBase<C,Chunk>::chop(const typename StringBase<C,Chunk>::Size n)
+	{
+		if (pSize && pSize >= n)
+		{
+			pSize -= n;
+			pPtr[pSize] = '\0';
+		}
+	}
+
+
+	template<typename C, int Chunk>
+	typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::FindEndOfSequence(const C* str, const C quote, typename StringBase<C,Chunk>::Size maxLen)
+	{
+		if (str)
+		{
+			bool escape = false;
+			typename StringBase<C,Chunk>::Size pos(0);
+			while (pos != maxLen && '\0' != str[pos])
+			{
+				if (str[pos] == '\\')
+					escape = !escape;
+				else
+				{
+					if (quote == str[pos] && !escape)
+						return pos;
+					escape = false;
+				}
+				++pos;
+			}
+			return maxLen;
+		}
+		return StringBase<C,Chunk>::npos;
+	}
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>
+	StringBase<C,Chunk>::substr(const typename StringBase<C,Chunk>::Size offset) const
+	{
+		return (offset < pSize)
+			// Substring
+			? StringBase<C,Chunk>().appendRaw(pPtr + offset, pSize - offset)
+			// Empty string
+			: StringBase<C,Chunk>();
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>
+	StringBase<C,Chunk>::substr(const typename StringBase<C,Chunk>::Size offset,
+		typename StringBase<C,Chunk>::Size len) const
+	{
+		return (offset < pSize && len)
+			// Substring
+			? StringBase<C,Chunk>().appendRaw(pPtr + offset, Private::StringImpl::Min(pSize - offset, len))
+			// Empty string
+			: StringBase<C,Chunk>();
+	}
+
+
+
+	template<typename C, int Chunk>
+	void StringBase<C,Chunk>::replace(const C from, const C to)
+	{
+		for (Size i = 0; i != pSize; ++i)
+		{
+			if (from == pPtr[i])
+				pPtr[i] = to;
+		}
+	}
+
+	template<typename C, int Chunk>
+	void StringBase<C,Chunk>::replace(const C from, const C to, const typename StringBase<C,Chunk>::Size offset)
+	{
+		for (Size i = offset; i < pSize; ++i)
+		{
+			if (from == pPtr[i])
+				pPtr[i] = to;
+		}
+	}
+
+
+	template<typename C, int Chunk>
+	inline std::allocator<C>
+	StringBase<C,Chunk>::get_allocator()
+	{
+		return std::allocator<C>();
+	}
+
+
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::swap(StringBase<C,Chunk>& s)
+	{
+		std::swap(s.pSize, pSize);
+		std::swap(s.pCapacity, pCapacity);
+		std::swap(s.pPtr, pPtr);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline U
+	StringBase<C,Chunk>::to() const
+	{
+		return Private::StringImpl::To<typename Static::Remove::Const<U>::Type>::Value(*this);
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline bool
+	StringBase<C,Chunk>::to(U& u) const
+	{
+		return Private::StringImpl::To<typename Static::Remove::Const<U>::Type>::Value(*this, u);
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline void
+	StringBase<C,Chunk>::insert(const typename StringBase<C,Chunk>::Size offset, const U& u)
+	{
+		if (offset >= pSize)
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+		else
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Insert(*this, u, offset);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline void
+	StringBase<C,Chunk>::insert(const iterator& it, const U& u)
+	{
+		if (it.pIndx >= pSize)
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+		else
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Insert(*this, u, it.pIndx);
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline void
+	StringBase<C,Chunk>::insert(const const_iterator& it, const U& u)
+	{
+		if (it.pIndx >= pSize)
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+		else
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Insert(*this, u, it.pIndx);
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline void
+	StringBase<C,Chunk>::insert(const reverse_iterator& it, const U& u)
+	{
+		if (it.pIndx >= pSize)
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+		else
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Insert(*this, u, it.pIndx);
+	}
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline void
+	StringBase<C,Chunk>::insert(const const_reverse_iterator& it, const U& u)
+	{
+		if (it.pIndx >= pSize)
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+		else
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Insert(*this, u, it.pIndx);
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline void
+	StringBase<C,Chunk>::prepend(const U& u)
+	{
+		if (!pSize)
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
+		else
+			Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Insert(*this, u, 0);
+	}
+
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>&
+	StringBase<C,Chunk>::erase(const typename StringBase<C,Chunk>::Size offset, const typename StringBase<C,Chunk>::Size len)
+	{
+		if (offset < pSize && len)
+		{
+			if (offset + len > pSize)
+				pSize = offset;
+			else
+			{
+				memmove(pPtr + sizeof(C) * (offset), pPtr + sizeof(C) * (offset + len), sizeof(C) * (pSize-offset));
+				pSize -= len;
+			}
+			pPtr[pSize] = '\0';
+		}
+		return *this;
+	}
+
+
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::erase(const iterator& begin, const iterator& end)
+	{
+		if (end.pIndx > begin.pIndx)
+			erase(begin.pIndx, end.pIndx - begin.pIndx + 1);
+		else
+			erase(end.pIndx, begin.pIndx - end.pIndx + 1);
+	}
+
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::erase(const const_iterator& begin, const const_iterator& end)
+	{
+		if (end.pIndx > begin.pIndx)
+			erase(begin.pIndx, end.pIndx - begin.pIndx + 1);
+		else
+			erase(end.pIndx, begin.pIndx - end.pIndx + 1);
+	}
+
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::erase(const reverse_iterator& begin, const reverse_iterator& end)
+	{
+		if (end.pIndx > begin.pIndx)
+			erase(begin.pIndx, end.pIndx - begin.pIndx + 1);
+		else
+			erase(end.pIndx, begin.pIndx - end.pIndx + 1);
+	}
+
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::erase(const const_reverse_iterator& begin, const const_reverse_iterator& end)
+	{
+		if (end.pIndx > begin.pIndx)
+			erase(begin.pIndx, end.pIndx - begin.pIndx + 1);
+		else
+			erase(end.pIndx, begin.pIndx - end.pIndx + 1);
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::remove(const U& u, typename StringBase<C,Chunk>::Size offset, const typename StringBase<C,Chunk>::Size maxOccurences)
+	{
+		return Private::StringImpl::Remove<
+			StringBase<C,Chunk>,
+			typename Static::Remove::Const<U>::Type> :: Run(*this, u, offset, maxOccurences);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U, typename V>
+	void
+	StringBase<C,Chunk>::replace(const U&, const V&)
+	{
+		// FIXME !
+	}
+
+
+	template<typename C, int Chunk>
+	inline C&
+	StringBase<C,Chunk>::operator [] (const typename StringBase<C,Chunk>::Size indx)
+	{
+		return *(pPtr + indx);
+	}
+
+	template<typename C, int Chunk>
+	inline const C&
+	StringBase<C,Chunk>::operator [] (const typename StringBase<C,Chunk>::Size indx) const
+	{
+		return *(pPtr + indx);
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<template<class,class> class U, class UType, class Alloc, typename S>
+	void
+	StringBase<C,Chunk>::explode(U<UType,Alloc>& out, const S& sep, const bool emptyBefore) const
+	{
+		// Empty the container
+		if (emptyBefore)
+			out.clear();
+		// String empty
+		if (this->notEmpty())
+		{
+			typename StringBase<C,Chunk>::Size indx(0);
+			while (true)
+			{
+				typename StringBase<C,Chunk>::Size newIndx = this->find_first_of(sep, indx);
+				typename StringBase<C,Chunk>::Size len = newIndx - indx;
+				if (len)
+				{
+					const StringBase<C,Chunk> segment(*this, indx, len);
+					if (segment.notEmpty())
+						out.push_back(segment.to<Type>());
+				}
+				if (StringBase<C,Chunk>::npos == newIndx)
+					return;
+				indx = newIndx + 1;
+			}
+		}
+	}
+
+
+	template<typename C, int Chunk>
+		inline C
+		StringBase<C,Chunk>::at(const typename StringBase<C,Chunk>::Size offset) const
+		{
+			return (offset < pSize) ? pPtr[offset] : '\0';
+		}
+
+
+
+
 } // namespace Yuni
 
-
-
-
-//! \name Operator overload for stream printing
-//@{
-
-template<template<class,class> class U, class Type, class Alloc>
-inline std::ostream& operator << (std::ostream& out, const U<Type,Alloc>& list)
-{
-	bool notFirst = false;
-	typename U<Type,Alloc>::const_iterator end = list.end();
-	for (typename U<Type,Alloc>::const_iterator i = list.begin(); i != end; ++i)
-	{
-		if (notFirst)
-			out << ", ";
-		else
-			notFirst = true;
-		out << *i;
-	}
-	return out;
-}
-
-//@}
-
-
-#endif // __YUNI_TOOLBOX_STRING_STRING_HXX__
+#endif // __YUNI_TOOLBOX_STRING_HXX__

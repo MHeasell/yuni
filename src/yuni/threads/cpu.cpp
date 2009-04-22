@@ -52,13 +52,13 @@ namespace Private
 	int AThreadModel::CPUCount()
 	{
 		/*
-		 * It seems there's no better way to get this info on Linux systems.
-		 * If somebody can find it without depending on the location of /proc,
-		 * please patch this function.
-		 */
+		* It seems there's no better way to get this info on Linux systems.
+		* If somebody can find it without depending on the location of /proc,
+		* please patch this function.
+		*/
 		int count = 0;
 		std::ifstream cpuInfo("/proc/cpuinfo", std::ifstream::in);
-		String lineBuffer;
+		std::string lineBuffer;
 
 		std::getline(cpuInfo, lineBuffer);
 		while (cpuInfo.good())

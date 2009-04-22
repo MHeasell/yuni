@@ -38,7 +38,8 @@ namespace Gfx
 			return DefaultType;
 
 		// Some cleanup to the string
-		s.trim().toLower();
+		s.trim();
+		s.toLower();
 
 		// OpenGL
 		if ("opengl" == s || "open gl" == s)

@@ -10,7 +10,7 @@
 
 namespace Yuni
 {
-namespace ToolBox
+namespace Toolbox
 {
 namespace GetOpt
 {
@@ -125,25 +125,9 @@ namespace GetOpt
 		** \see add(AOption*)
 		** \see class Option
 		*/
-		template<typename T, class ConvTO>
-		Option<T, ConvTO>* add(const char sOpt, const String& lOpt = String(),
-				const String& oComments = String(),
-				const bool ndValue = false, const T& defValue = T());
-		
-		/*
-		** see the previous declaration.
-		** C++ does not really allow a default template parameter in function
-		** templates
-		*/
 		template<typename T>
-		Option<T>* add(const char sOpt, const String& lOpt = String(),
-				const String& oComments = String(),
-				const bool ndValue = false, const T& defValue = T())
-		{
-			this->add<T, DefaultConverterTo<T> >(sOpt, lOpt, oComments, ndValue, defValue);
-		}
-
-
+		Option<T>* add(const char sOpt, const String& lOpt = String(), const String& oComments = String(),
+				const bool ndValue = false, const T& defValue = T());
 
 		//! Get if the parser allows extra options (such as filenames for example)
 		bool allowExtraOptions() const {return pAllowExtraOptions;}
@@ -159,15 +143,14 @@ namespace GetOpt
 		** \see execute()
 		*/
 		void resetOptions();
-		
 		//@}
 
-		
+
 		//! \name Execute
 		//@{
 		/*!
 		** \brief Parse the command line arguments
-		** 
+		**
 		** \param argc The count of arguments
 		** \param argv The list of arguments
 		** \return False if the program should stop
@@ -177,7 +160,7 @@ namespace GetOpt
 		bool operator () (int argc, char* argv[]) {return execute(argc, argv);}
 		//@}
 
-		
+
 		//! \name Help
 		//@{
 		/*!
@@ -255,13 +238,13 @@ namespace GetOpt
 		** \param argc The count of arguments
 		** \param argv The list of arguments
 		** \param o The option to update
-		** \param index The current index in the list of arguments 
+		** \param index The current index in the list of arguments
 		** \return True if successful, false otherwise
 		*/
 		bool updateOption(int argc, char* argv[], AOption& o, int& index);
 
 		/*!
-		** \brief Recreate the option `help` 
+		** \brief Recreate the option `help`
 		*/
 		void insertHelpOption();
 
@@ -279,7 +262,7 @@ namespace GetOpt
 		Option<String> pOptionUnknown;
 		//! Allow extra values (like files for example)
 		bool pAllowExtraOptions;
-		
+
 	}; // class Parser
 
 
@@ -287,7 +270,7 @@ namespace GetOpt
 
 
 } // namespace GetOpt
-} // namespace ToolBox
+} // namespace Toolbox
 } // namespace Yuni
 
 

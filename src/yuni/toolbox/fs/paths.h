@@ -18,27 +18,17 @@ namespace Toolbox
 */
 namespace Paths
 {
-   
+
 
 	//! \name System-dependant variables
 	//@{
-
-	//! The path-separator character according to the platform
+	//! The path-separator character according to the platform (ex: `/`)
 	//! \ingroup PathsAndFiles
-	# ifdef YUNI_OS_WINDOWS
-	const char Separator = '\\';
-	# else
-	const char Separator = '/';
-	# endif
+	extern const String::Char Separator;
 
 	//! The path-separator character according to the platform (stored in a string instead of a char)
 	//! \ingroup PathsAndFiles
-	# ifdef YUNI_OS_WINDOWS
-	const String SeparatorAsString = "\\";
-	# else
-	const String SeparatorAsString = "/";
-	# endif
-
+	extern const String::Char* SeparatorAsString;
 	//@}
 
 
@@ -89,13 +79,14 @@ namespace Paths
 	** \return The path part of the original filename
 	**
 	** \code
-	**	  std::cout << Paths::ExtractFilePath("/tmp/foo.txt") std::endl; // write `/tmp/`
-	**	  std::cout << Paths::ExtractFilePath("/tmp/") std::endl; // write `/tmp/`
+	**	  std::cout << Paths::ExtractFilePath("/tmp/foo.txt") std::endl; // write `/tmp`
+	**	  std::cout << Paths::ExtractFilePath("/tmp/") std::endl; // write `/tmp`
 	**	  std::cout << Paths::ExtractFilePath("/tmp") std::endl; // write `/`
 	** \endcode
 	**
 	** \see Paths::Separator
 	*/
+//	void ExtractFilePath(String& out, const String& p, const bool systemDependant = true);
 	String ExtractFilePath(const String& p, const bool systemDependant = true);
 
 

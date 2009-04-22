@@ -1,16 +1,17 @@
+
 #include "option.h"
 
 
 
 namespace Yuni
 {
-namespace ToolBox
+namespace Toolbox
 {
 namespace GetOpt
 {
 
 
-	AOption::AOption(const char sOpt, const String& lOpt, bool ndValue, const String& comm)
+	AOption::AOption(const String::Char sOpt, const String& lOpt, bool ndValue, const String& comm)
 		:pShortName(sOpt), pLongName(lOpt),
 		pModified(false),
 		pNeedValue(ndValue), pComments(comm)
@@ -29,8 +30,8 @@ namespace GetOpt
 	{
 		pModified = false;
 	}
-		
-	
+
+
 	String AOption::fullNameForHelp()
 	{
 		String s;
@@ -60,19 +61,19 @@ namespace GetOpt
 		}
 		return s;
 	}
-	
+
 
 	String AOption::bestSuitableName()
 	{
 		if (!pLongName.empty())
-			return "--" + pLongName;
-		return "-" + pShortName;
+			return String("--") << pLongName;
+		return String('-') << pShortName;
 	}
 
 
 
 } // namespace GetOpt
-} // namespace ToolBox
+} // namespace Toolbox
 } // namespace GetOpt
 
 
