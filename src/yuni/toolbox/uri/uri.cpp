@@ -487,7 +487,7 @@ namespace Yuni
 					if (!infos.port)
 					{
 						// May be a invalid sequence
-						if (indx - lastPosition != 1 || '0' != str[lastPosition])
+						if (indx - lastPosition != 1 || '\0' != str[lastPosition])
 							return false;
 					}
 					lastPosition = indx;
@@ -500,7 +500,7 @@ namespace Yuni
 					if (!infos.port)
 					{
 						// May be a invalid sequence
-						if (indx - lastPosition != 1 || '0' != str[lastPosition])
+						if (indx - lastPosition != 1 || '\0' != str[lastPosition])
 							return false;
 					}
 					lastPosition = indx + 1;
@@ -513,7 +513,7 @@ namespace Yuni
 					if (!infos.port)
 					{
 						// May be a invalid sequence
-						if (indx - lastPosition != 1 || '0' != str[lastPosition])
+						if (indx - lastPosition != 1 || '\0' != str[lastPosition])
 							return false;
 					}
 					lastPosition = indx + 1;
