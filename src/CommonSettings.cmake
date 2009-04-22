@@ -22,8 +22,8 @@ Include(CheckIncludeFile)
 
 #
 # Command line options for G++ (Debug)
-# 
-# Ex: cmake . -DCMAKE_BUILD_TYPE=release 
+#
+# Ex: cmake . -DCMAKE_BUILD_TYPE=release
 #
 IF("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 
@@ -35,7 +35,7 @@ IF("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 	IF(NOT WIN32)
 		String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
 		IF(${VA} EQUAL 0)
-			Set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2 -funroll-loops -Wuninitialized -Wunused-parameter -Winit-self")
+			Set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self")
 		ENDIF(${VA} EQUAL 0)
 		Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 	Else(NOT WIN32)
@@ -53,7 +53,7 @@ IF("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 	ADD_DEFINITIONS("-DNDEBUG") # Remove asserts
 
 Else("${CMAKE_BUILD_TYPE}" STREQUAL "release")
-	
+
 	#
 	# Build Configuration: Debug
 	#
@@ -63,7 +63,7 @@ Else("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 	IF(NOT WIN32)
 		String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
 		IF(${VA} EQUAL 0)
-			Set(CMAKE_CXX_FLAGS "-ggdb2 -Wall -Woverloaded-virtual -Wextra -Wconversion -fstack-check -funroll-loops -Wredundant-decls -Wundef -Wcast-align -Wcast-qual -Wfloat-equal -Wunused-parameter")
+			Set(CMAKE_CXX_FLAGS "-g -ggdb2 -Wall -Woverloaded-virtual -Wextra -Wconversion -Wredundant-decls -Wundef -Wcast-align -Wcast-qual -Wfloat-equal -Wunused-parameter")
 			If(APPLE)
 				Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gfull")
 			ENdif(APPLE)
@@ -71,7 +71,7 @@ Else("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 		Message(STATUS "Default C++ flags set to `${CMAKE_CXX_FLAGS}`")
 	Else(NOT WIN32)
 		IF(MINGW)
-			Set(CMAKE_CXX_OTHER_FLAGS "-g2 -Woverloaded-virtual -Wextra -Wconversion -fstack-check -funroll-loops")
+			Set(CMAKE_CXX_OTHER_FLAGS "-g2 -Woverloaded-virtual -Wextra -Wconversion")
 			Message(STATUS "Added C++ flags `${CMAKE_CXX_OTHER_FLAGS}`")
 			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
 		ENDIF(MINGW)
@@ -87,8 +87,6 @@ EndIF("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 
 
 
-
-
 #
 # PThreads
 #
@@ -97,9 +95,9 @@ If(CMAKE_USE_WIN32_THREADS_INIT)
 	Message(STATUS "Threading Support: PThreads for Windows (via DevPacks)")
 	DEVPACK_IMPORT_PTHREADS()
 Else(CMAKE_USE_WIN32_THREADS_INIT)
-    IF(NOT CMAKE_USE_PTHREADS_INIT)
-	    MESSAGE(FATAL_ERROR "PThreads is required.")
-    ENDIF(NOT CMAKE_USE_PTHREADS_INIT)
+	IF(NOT CMAKE_USE_PTHREADS_INIT)
+		MESSAGE(FATAL_ERROR "PThreads is required.")
+	ENDIF(NOT CMAKE_USE_PTHREADS_INIT)
 	Link_libraries(${CMAKE_THREAD_LIBS_INIT})
 	Message(STATUS "Threading Support: PThreads (${CMAKE_THREAD_LIBS_INIT})")
 EndIF(CMAKE_USE_WIN32_THREADS_INIT)

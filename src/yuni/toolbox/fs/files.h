@@ -38,6 +38,7 @@ namespace Files
     ** \param[out] size The size of the file. 0 if any errors has occured
     ** \return True if the operation succeeded, False otherwise
     */
+    bool Size(const String::Char* filename, uint64& size);
     bool Size(const String& filename, uint64& size);
 
 

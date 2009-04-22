@@ -15,7 +15,7 @@ namespace Color
 
 
 	/*! \class RGB
-	**  \brief 32Bits RGB Color Model (Additive color model) 
+	**  \brief 32Bits RGB Color Model (Additive color model)
 	**  \ingroup ColorModels
 	**
 	** \internal Do not forget to broadcast changes to specialized template as well
@@ -35,7 +35,7 @@ namespace Color
 		*/
 		template<typename U>
 		RGB(const U& c) {Private::Gfx::Color::Proxy::Values< RGB<T> , U >::Assign(*this, c);}
-		
+
 		/*!
 		** \brief Constructor with default color components
 		**
@@ -66,7 +66,7 @@ namespace Color
 		*/
 		bool visible() const {return true;}
 
-		
+
 		//! \name Reset Values
 		//@{
 
@@ -78,7 +78,7 @@ namespace Color
 		*/
 		template<typename U>
 		RGB<T>& assign(const U& rhs)  { return Private::Gfx::Color::Proxy::Values< RGB<T>, U >::Assign(*this, rhs); }
-		
+
 		/*!
 		** \brief Reset all color components
 		**
@@ -133,7 +133,7 @@ namespace Color
 		{ return Private::Gfx::Color::Proxy::Values< RGB<T>, U >::Assign(r, g, b); }
 
 		/*!
-		** \brief Increase all color components 
+		** \brief Increase all color components
 		**
 		** \param rhs Value to add to all colors components
 		** \return Always *this

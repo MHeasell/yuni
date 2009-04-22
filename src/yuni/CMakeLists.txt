@@ -45,7 +45,11 @@ source_group(ToolBox\\DynamicLibrary FILES ${SRC_TOOLBOX_DYNAMICLIBRARY})
 
 
 Set(SRC_TOOLBOX_STRING
-				toolbox/string/string.h toolbox/string/string.cpp
+				toolbox/string/string.h toolbox/string/string.hxx
+				toolbox/string/string.converters.from.hxx toolbox/string/string.converters.to.hxx
+				toolbox/string/string.forward.h
+				toolbox/string/string.private.hxx
+				toolbox/string/string.iterators.hxx
 				toolbox/string.h)
 source_group(ToolBox\\String FILES ${SRC_TOOLBOX_STRING})
 
@@ -133,8 +137,6 @@ source_group(ToolBox\\FileSystem FILES ${SRC_TOOLBOX_FS})
 
 Set(SRC_TOOLBOX_GETOPT
 				toolbox/getopt/getopt.h
-				toolbox/getopt/convertions.h
-				toolbox/getopt/convertions.hxx
 				toolbox/getopt/option.h toolbox/getopt/option.hxx toolbox/getopt/option.cpp
 				toolbox/getopt/parser.h toolbox/getopt/parser.hxx toolbox/getopt/parser.cpp)
 source_group(ToolBox\\GetOpt FILES ${SRC_TOOLBOX_GETOPT})
@@ -160,8 +162,8 @@ source_group(ToolBox\\Hash FILES ${SRC_TOOLBOX_HASH})
 
 # System
 Set(SRC_TOOLBOX_SYSTEM
-                toolbox/system/stdint.h toolbox/system/capabilities.h
-                toolbox/system/sleep.h toolbox/system/sleep.cpp
+				toolbox/system/stdint.h toolbox/system/capabilities.h
+				toolbox/system/sleep.h toolbox/system/sleep.cpp
 				toolbox/system/endian.h)
 source_group(ToolBox\\System FILES ${SRC_TOOLBOX_SYSTEM})
 
@@ -169,7 +171,7 @@ source_group(ToolBox\\System FILES ${SRC_TOOLBOX_SYSTEM})
 # System - Microsoft Windows
 Set(SRC_TOOLBOX_SYSTEM_WINDOWS toolbox/system/windows.hdr.h  toolbox/system/windows/gettimeofday.h)
 If(WIN32 AND MSVC)
-    Set(SRC_TOOLBOX_SYSTEM_WINDOWS ${SRC_TOOLBOX_SYSTEM_WINDOWS} toolbox/system/windows/gettimeofday.cpp)
+	Set(SRC_TOOLBOX_SYSTEM_WINDOWS ${SRC_TOOLBOX_SYSTEM_WINDOWS} toolbox/system/windows/gettimeofday.cpp)
 EndIF(WIN32 AND MSVC)
 source_group(ToolBox\\System\\Windows FILES ${SRC_TOOLBOX_SYSTEM_WINDOWS})
 
@@ -360,7 +362,7 @@ EndIf(YUNI_MODULE_SCRIPT)
 If(YUNI_MODULE_UI)
 
 	Message(STATUS "Module: UI::Core (User Interface)")
-	
+
 	# User Interface
 	Set(SRC_GFX_UI
 				ui/component.h ui/component.cpp
@@ -373,14 +375,14 @@ If(YUNI_MODULE_UI)
 				)
 
 	IF(YUNI_MODULE_UI_DUMMY)
-		
+
 		Message(STATUS "Module: UI::Dummy")
 
 	ENDIF(YUNI_MODULE_UI_DUMMY)
 
 
 	IF(YUNI_MODULE_UI_3D)
-		
+
 		Message(STATUS "Module: UI::Gfx3D")
 
 	ENDIF(YUNI_MODULE_UI_3D)
@@ -396,7 +398,7 @@ EndIf(YUNI_MODULE_UI)
 If(YUNI_MODULE_DATABASEI)
 
 	Message(STATUS "Module: Database::Core")
-	
+
 	# Database
 	Set(SRC_DB
 			sql/driver.h

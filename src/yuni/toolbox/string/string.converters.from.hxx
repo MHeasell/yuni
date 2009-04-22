@@ -1,0 +1,524 @@
+#ifndef __YUNI_TOOLBOX_STRING_STD_CONVERTERS_FROM_HXX__
+# define __YUNI_TOOLBOX_STRING_STD_CONVERTERS_FROM_HXX__
+
+# include <assert.h>
+
+
+namespace Yuni
+{
+namespace Private
+{
+namespace StringImpl
+{
+
+
+
+	template<>
+	struct From<char*>
+	{
+
+		template<typename C, int Chnk>
+		static inline void
+		Append(StringBase<C,Chnk>& s, const char* str)
+		{
+			if (str && '\0' != *str)
+			{
+				AppendRaw(s, str,
+					Private::StringImpl::Length<StringBase<C,Chnk>, char*>::Value(str));
+			}
+		}
+
+		template<typename C, int Chnk>
+		static inline void
+		Append(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len)
+		{
+			if (len && str)
+			{
+				AppendRaw(s, str, Private::StringImpl::Min(
+					Private::StringImpl::Length<StringBase<C,Chnk>, char*>::Value(str), len));
+			}
+		}
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size offset,
+			const typename StringBase<C,Chnk>::Size len)
+		{
+			if (str && len)
+			{
+				const typename StringBase<C,Chnk>::Size realLen =
+					Private::StringImpl::Length<StringBase<C,Chnk>, char*>::Value(str);
+				if (offset < realLen)
+					From<C*>::AppendRaw(s, str + offset, Private::StringImpl::Min(realLen - offset, len));
+			}
+		}
+
+
+		template<typename C, int Chnk>
+		static inline void
+		Insert(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (str && '\0' != *str)
+			{
+				InsertRaw(s, str,
+					Private::StringImpl::Length<StringBase<C,Chnk>, char*>::Value(str),
+					offset);
+			}
+		}
+
+		template<typename C, int Chnk>
+		static inline void
+		Insert(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len,
+			const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (len && str && '\0' != *str)
+			{
+				InsertRaw(s, str, Private::StringImpl::Min(
+					Private::StringImpl::Length<StringBase<C,Chnk>, char*>::Value(str), len));
+			}
+		}
+
+		static void pikocpy(char* dst, const char* src, size_t len)
+		{
+			assert(dst != NULL);
+			assert(src != NULL);
+			assert(len > 0);
+			for (size_t i = 0; i < len; ++i)
+				dst[i] = src[i];
+		}
+
+		template<typename C, int Chnk>
+		static inline void
+		AppendRaw(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len)
+		{
+			s.reserve(s.pSize + len + 1);
+			pikocpy(s.pPtr + sizeof(C) * s.pSize, (const char*)str, sizeof(char) * len);
+			s.pSize += len;
+			*(s.pPtr + s.pSize) = '\0';
+		}
+
+		template<typename C, int Chnk>
+		static inline void
+		InsertRaw(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len,
+			const typename StringBase<C,Chnk>::Size offset)
+		{
+			s.reserve(s.pSize + len + 1);
+			memmove(s.pPtr + sizeof(C) * (offset + len), s.pPtr + sizeof(C) * (offset), sizeof(C) * (s.pSize-offset));
+			pikocpy(s.pPtr + sizeof(C) * (offset), str, sizeof(C) * len);
+			s.pSize += len;
+			*(s.pPtr + s.pSize) = '\0';
+		}
+
+
+	}; // char*
+
+
+	template<>
+	struct From<wchar_t*>
+	{
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const wchar_t* str)
+		{
+			if (str)
+			{
+				const size_t l = wcslen(str);
+				if (!l)
+					return;
+				char* b = new char[l + 1];
+				# if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
+				wcstombs(&b[0], str, l);
+				# else
+				size_t i;
+				wcstombs_s(&i, &b[0], l, str, l);
+				# endif
+				if (0 != *b)
+					From<char*>::AppendRaw(s, b, strlen(b));
+				delete[] b;
+			}
+		}
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const wchar_t* str, const typename StringBase<C,Chnk>::Size len)
+		{
+			if (len && str)
+			{
+				size_t l = wcslen(str);
+				if (!l)
+					return;
+				if (l > len)
+					l = len;
+				char* b = new char[l + 1];
+				# if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
+				wcstombs(&b[0], str, l);
+				# else
+				size_t i;
+				wcstombs_s(&i, &b[0], l, str, l);
+				# endif
+				if (0 != *b)
+					From<char*>::AppendRaw(s, b, strlen(b));
+				delete[] b;
+			}
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const wchar_t* str,
+			const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (str)
+			{
+				const size_t l = wcslen(str);
+				if (!l)
+					return;
+				char* b = new char[l + 1];
+				# if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
+				wcstombs(&b[0], str, l);
+				# else
+				size_t i;
+				wcstombs_s(&i, &b[0], l, str, l);
+				# endif
+				if (0 != *b)
+					From<char*>::InsertRaw(s, b, strlen(b), offset);
+				delete[] b;
+			}
+		}
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const wchar_t* str, const typename StringBase<C,Chnk>::Size len,
+			const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (len && str)
+			{
+				size_t l = wcslen(str);
+				if (!l)
+					return;
+				if (l > len)
+					l = len;
+				char* b = new char[l + 1];
+				# if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
+				wcstombs(&b[0], str, l);
+				# else
+				size_t i;
+				wcstombs_s(&i, &b[0], l, str, l);
+				# endif
+				if (0 != *b)
+					From<char*>::AppendRaw(s, b, strlen(b), offset);
+				delete[] b;
+			}
+		}
+
+
+	}; // wchar_t
+
+
+	template<>
+	struct From<char>
+	{
+		template<typename C, int Chnk>
+		static inline void
+		Append(StringBase<C,Chnk>& s, const char c)
+		{
+			s.reserve(s.pSize + 2);
+			*(s.pPtr + s.pSize) = c;
+			++(s.pSize);
+			*(s.pPtr + s.pSize) = '\0';
+		}
+
+		template<typename C, int Chnk>
+		static inline void
+		Append(StringBase<C,Chnk>& s, const char c, const typename StringBase<C,Chnk>::Size len)
+		{
+			if (len)
+			{
+				s.reserve(s.pSize + 2);
+				*(s.pPtr + s.pSize) = c;
+				++(s.pSize);
+				*(s.pPtr + s.pSize) = '\0';
+			}
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const char str, const typename StringBase<C,Chnk>::Size offset)
+		{
+			From<char*>::InsertRaw<C,Chnk>(s, &str, 1, offset);
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const char str, const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (len)
+				From<char*>::InsertRaw<C,Chnk>(s, &str, 1, offset);
+		}
+
+	}; // char
+
+
+	template<int N>
+	struct From<char[N]>
+	{
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const char* str)
+		{
+			if (N > 1)
+				From<char*>::AppendRaw<C,Chnk>(s, str, N - 1);
+		}
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len)
+		{
+			if (len)
+				From<char*>::AppendRaw<C,Chnk>(s, str, Private::StringImpl::Min(N - 1, len));
+		}
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size offset,
+			const typename StringBase<C,Chnk>::Size len)
+		{
+			if (str && len)
+			{
+				if (offset < N - 1)
+					From<C*>::AppendRaw(s, str + offset, Private::StringImpl::Min(N - 1 - offset, len));
+			}
+		}
+
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (N > 1)
+				From<char*>::InsertRaw<C,Chnk>(s, str, N - 1, offset);
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (len)
+				From<char*>::InsertRaw<C,Chnk>(s, str, Private::StringImpl::Min(N - 1, len), offset);
+		}
+
+	}; // char[N]
+
+	template<int N>
+	struct From<wchar_t[N]>
+	{
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const wchar_t* str)
+		{
+			if (N > 1)
+				From<wchar_t*>::Append<C,Chnk>(s, str, N - 1);
+		}
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const wchar_t* str, const typename StringBase<C,Chnk>::Size len)
+		{
+			if (N > 1)
+				From<wchar_t*>::Append<C,Chnk>(s, str, (len < N - 1) ? len : N - 1);
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const wchar_t* str, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (N > 1)
+				From<wchar_t*>::Insert<C,Chnk>(s, str, N - 1,offset);
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const wchar_t* str, const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (N > 1)
+				From<wchar_t*>::Insert<C,Chnk>(s, str, (len < N - 1) ? len : N - 1, offset);
+		}
+
+	}; // char[N]
+
+
+
+	template<typename U>
+	struct From< std::basic_string<U> >
+	{
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const std::basic_string<U>& str)
+		{
+			if (!str.empty())
+				From<U*>::AppendRaw(s, str.c_str(), str.size());
+		}
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const std::basic_string<U>& str, const typename StringBase<C,Chnk>::Size len)
+		{
+			if (!str.empty() && len)
+				From<U*>::AppendRaw(s, str.c_str(), Private::StringImpl::Min(str.size(), len));
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const std::basic_string<U>& str,
+			const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (!str.empty())
+				From<U*>::InsertRaw(s, str.c_str(), str.size(), offset);
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const std::basic_string<U>& str,
+			const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (!str.empty() && len)
+				From<U*>::InsertRaw(s, str.c_str(), Private::StringImpl::Min(str.size(), len), offset);
+		}
+
+	}; // std::string
+
+
+	template<typename C, int Chnk1>
+	struct From< StringBase<C, Chnk1> >
+	{
+		template<int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str)
+		{
+			if (str.pSize)
+				From<C*>::AppendRaw(s, str.pPtr, str.pSize);
+		}
+
+		template<int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str, const typename StringBase<C,Chnk>::Size len)
+		{
+			if (str.pSize && len)
+				From<C*>::AppendRaw(s, str.pPtr, Private::StringImpl::Min(str.pSize, len));
+		}
+
+		template<int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str, const typename StringBase<C,Chnk>::Size offset,
+			const typename StringBase<C,Chnk>::Size len)
+		{
+			if (offset < str.pSize && len)
+				From<C*>::AppendRaw(s, str.pPtr + offset, Private::StringImpl::Min(str.pSize - offset, len));
+		}
+
+
+		template<int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str,
+			const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (str.pSize)
+				From<C*>::InsertRaw(s, str.pPtr, str.pSize, offset);
+		}
+
+		template<int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str,
+			const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (str.pSize && len)
+				From<C*>::InsertRaw(s, str.pPtr, (str.pSize < len) ? str.pSize : len, offset);
+		}
+
+	}; // std::string
+
+
+
+	template<>
+	struct From<bool>
+	{
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const bool b)
+		{
+			if (b)
+				Private::StringImpl::From<C*>::AppendRaw(s, "true", 4);
+			else
+				Private::StringImpl::From<C*>::AppendRaw(s, "false", 5);
+		}
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const bool b, const typename StringBase<C,Chnk>::Size len)
+		{
+			if (b)
+				Private::StringImpl::From<C*>::AppendRaw(s, "true", Private::StringImpl::Min(4, len));
+			else
+				Private::StringImpl::From<C*>::AppendRaw(s, "false", Private::StringImpl::Min(5, len));
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const bool b, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (b)
+				From<C*>::InsertRaw(s, "true", 4, offset);
+			else
+				From<C*>::InsertRaw(s, "false", 5, offset);
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const bool b, const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
+		{
+			if (b)
+				From<C*>::InsertRaw(s, "true",  Private::StringImpl::Min(4, len), offset);
+			else
+				From<C*>::InsertRaw(s, "false", Private::StringImpl::Min(5, len), offset);
+		}
+
+
+	}; // bool
+
+
+
+
+
+# define YUNI_PRIVATE_STRING_IMPL(BUFSIZE, FORMAT, TYPE) \
+	template<> \
+	struct From<TYPE> \
+	{ \
+		template<typename C, int Chnk> \
+		static inline void Append(StringBase<C,Chnk>& s, const TYPE v) \
+		{ \
+			char buffer[BUFSIZE]; \
+			sprintf(buffer, FORMAT, v); \
+			if (0 != buffer[0]) \
+				From<char*>::AppendRaw(s, buffer, strlen(buffer)); \
+		} \
+		\
+		template<typename C, int Chnk> \
+		static inline void Append(StringBase<C,Chnk>& s, const TYPE v, const typename StringBase<C,Chnk>::Size len) \
+		{ \
+			char buffer[BUFSIZE]; \
+			sprintf(buffer, FORMAT, v); \
+			if (0 != buffer[0]) \
+				From<char*>::AppendRaw(s, buffer, Private::StringImpl::Min(strlen(buffer), len)); \
+		} \
+		\
+		template<typename C, int Chnk> \
+		static inline void Insert(StringBase<C,Chnk>& s, const TYPE v, const typename StringBase<C,Chnk>::Size offset) \
+		{ \
+			char buffer[BUFSIZE]; \
+			sprintf(buffer, FORMAT, v); \
+			if (0 != buffer[0]) \
+				From<char*>::InsertRaw(s, buffer, strlen(buffer), offset); \
+		} \
+		\
+		template<typename C, int Chnk> \
+		static inline void Insert(StringBase<C,Chnk>& s, const TYPE v, const typename StringBase<C,Chnk>::Size len, \
+			const typename StringBase<C,Chnk>::Size offset) \
+		{ \
+			char buffer[BUFSIZE]; \
+			sprintf(buffer, FORMAT, v); \
+			if (0 != buffer[0]) \
+				From<char*>::AppendRaw(s, buffer, Private::StringImpl::Min(len, strlen(buffer)), offset); \
+		} \
+	}
+
+
+	YUNI_PRIVATE_STRING_IMPL( 8, "%i",   sint16);
+	YUNI_PRIVATE_STRING_IMPL(16, "%i",   sint32);
+	YUNI_PRIVATE_STRING_IMPL(24, "%lld", sint64);
+	YUNI_PRIVATE_STRING_IMPL( 8, "%u",   uint16);
+	YUNI_PRIVATE_STRING_IMPL(16, "%u",   uint32);
+	YUNI_PRIVATE_STRING_IMPL(26, "%lld", uint64);
+
+	YUNI_PRIVATE_STRING_IMPL(24, "%lf", float);
+	YUNI_PRIVATE_STRING_IMPL(24, "%lf", double);
+
+
+
+
+} // namespace StringImpl
+} // namespace Private
+} // namespace Yuni
+
+#endif // __YUNI_TOOLBOX_STRING_STD_CONVERTERS_FROM_HXX__
+

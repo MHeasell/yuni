@@ -21,6 +21,11 @@ namespace Remove
 	template <typename T> struct Reference<T*> { typedef T Type; };
 	template <typename T> struct Reference<const T*> { typedef const T Type; };
 	template <typename T> struct Reference<const T&> { typedef const T Type; };
+
+	template <typename T> struct RefOnly { typedef T Type; };
+	template <typename T> struct RefOnly<T&> { typedef T Type; };
+	template <typename T> struct PntOnly { typedef T Type; };
+	template <typename T> struct PntOnly<T*> { typedef T Type; };
 	//@}
 
 	//! \name Const

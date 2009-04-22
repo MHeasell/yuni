@@ -7,7 +7,7 @@
 
 namespace Yuni
 {
-namespace ToolBox
+namespace Toolbox
 {
 namespace STL
 {
@@ -40,7 +40,7 @@ namespace STL
 	** \code
 	** typedef std::vector<int> List;
 	** List list;
-	** Yuni::ToolBox::STL::DeleteAndClear<int, List>(list);
+	** Yuni::Toolbox::STL::DeleteAndClear<int, List>(list);
 	** \endcode
 	*/
 	template <typename T, typename U>
@@ -58,7 +58,7 @@ namespace STL
 
 
 } // namespace STL
-} // namespace ToolBox
+} // namespace Toolbox
 } // namespace Yuni
 
 

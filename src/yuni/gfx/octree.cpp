@@ -74,7 +74,7 @@ namespace Gfx
 				newMin.z -= width;
 			else
 				newMax.z += width;
-			Octree* newRoot = new Octree(newMin, newMax, depth() + 1);
+			Octree* newRoot = new Octree(newMin, newMax, (uint16)(depth() + 1));
 			newRoot->createChild(newRoot->getChildIndex(boundingBox().center()));
 			return newRoot->addPoint(p);
 		}
@@ -130,7 +130,7 @@ namespace Gfx
 			{
 				if (pChildren[i])
 					// Recursive call
-					pChildren[i]->growToDepth(depth - 1);
+					pChildren[i]->growToDepth((uint16)(depth - 1));
 			}
 		}
 	}
@@ -213,7 +213,7 @@ namespace Gfx
 
 	uint16 Octree::getChildIndex(const Point3D<float>& p) const
 	{
-		uint16 index = 0;
+		int index(0);
 		const Point3D<float>& center = boundingBox().center();
 		if (p.x >= center.x)
 			index += 4;
@@ -221,11 +221,11 @@ namespace Gfx
 			index += 2;
 		if (p.z >= center.z)
 			index += 1;
-		return index;
+		return (uint16)index;
 	}
 
 
-	Octree* Octree::createChild(uint16 index)
+	Octree* Octree::createChild(const uint16 index)
 	{
 		if (pChildren[index])
 			return pChildren[index];
@@ -247,7 +247,7 @@ namespace Gfx
 		else
 			newMax.z = center.z;
 		// Create the new tree node
-		pChildren[index] = new Octree(newMin, newMax, depth() - 1);
+		pChildren[index] = new Octree(newMin, newMax, (uint16)(depth() - 1));
 		++pNbChildren;
 		return pChildren[index];
 	}

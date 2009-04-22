@@ -136,7 +136,7 @@ namespace Gfx
 		**
 		** \return The child in any case
 		*/
-		Octree* createChild(uint16 index);
+		Octree* createChild(const uint16 index);
 
 		/*!
 		** \brief Split a leaf into subnodes

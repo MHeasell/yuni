@@ -44,7 +44,7 @@ namespace Checksum
 		** \param s The string
 		** \return The hash value
 		*/
-		const String& fromString(const String& s) {return fromRawData(s.c_str(), s.size());}
+		const String& fromString(const String& s) {return fromRawData(s.data(), s.size());}
 
 		/*!
 		** \brief Compute the hash from raw data

@@ -3,19 +3,18 @@
 
 namespace Yuni
 {
-namespace ToolBox
+namespace Toolbox
 {
 namespace GetOpt
 {
 
 
-	template<typename T, class ConvTO>
-	Option<T, ConvTO>* Parser::add(const char sOpt,
-		const String& lOpt, const String& oComments, const bool ndValue,
+	template<typename T>
+	inline Option<T>*
+	Parser::add(const char sOpt, const String& lOpt, const String& oComments, const bool ndValue,
 		const T& defValue)
 	{
-		typedef Option<T, ConvTO> NewOption;
-		NewOption* opt = new NewOption(sOpt, lOpt, oComments, ndValue, defValue);
+		Option<T>* opt = new Option<T>(sOpt, lOpt, oComments, ndValue, defValue);
 		this->add(opt);
 		return opt;
 	}
@@ -23,7 +22,7 @@ namespace GetOpt
 
 
 } // namespace GetOpt
-} // namespace ToolBox
+} // namespace Toolbox
 } // namespace Yuni
 
 

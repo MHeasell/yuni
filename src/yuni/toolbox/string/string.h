@@ -1,51 +1,48 @@
 #ifndef __YUNI_TOOLBOX_STRING_STRING_H__
 # define __YUNI_TOOLBOX_STRING_STRING_H__
 
-# include <sstream>
-# include <algorithm>
-# include <list>
-# include <vector>
+# include "../../yuni.h"
+# include <stdlib.h>
+# include <string.h>
 # include <string>
 # include <cstdarg>
+# include <vector>
+# include <map>
+# include <list>
 # include <limits.h>
-# include "../../yuni.h"
-# include "../static/assert.h"
+# include <ostream>
+# include <sstream>
+# include "../static/remove.h"
+# include "string.forward.h"
 
 
-//! \name Macros for Yuni::String
-//@{
-
-//! Macro to append some data to the string
-# define YUNI_WSTR_APPEND	  std::stringstream out; \
-								out << v; \
-								static_cast<std::string*>(this)->append(out.str());\
-								return *this
-
-//! Macro to convert the string into a given type
-# define YUNI_WSTR_CAST_OP(X)	if (this->empty()) \
-									return def; \
-								X v; \
-								fromString<X>(v, *this, std::dec); \
-								return v;
-
-//! Macro to append the value of a boolean (true -> "true", false -> "false")
-# define YUNI_WSTR_APPEND_BOOL(X)   static_cast<std::string*>(this)->append(X ? "true" : "false")
-
-//@} // Macros for Yuni::String
-
-
-# define YUNI_WSTR_SEPARATORS  " \t\r\n"
+//! Default separators
+# define YUNI_STRING_SEPARATORS   " \t\r\n"
 
 
 
 namespace Yuni
 {
 
+	// Forward declaration
+	template<typename C = char, int Chunk = 80> class StringBase;
+
 	/*!
-	** \brief A String implementation for the Yuni framework
-	** \ingroup Toolbox
+	** \brief A convenient standard string implementation
+	** \see StringBase<>
+	*/
+	typedef StringBase<> String;
+
+
+
+	/*!
+	** \brief A String implementation
 	**
-	** Examples :
+	** The string class provides a useful way to manipulate and store sequences of
+	** characters.
+	**
+	** This class is a template class, you should prefer the convenient alias
+	** `Yuni::String`.
 	**
 	** \code
 	**	  Yuni::String a("abcd");
@@ -82,27 +79,66 @@ namespace Yuni
 	** 	 s.append(list, ", ", "`");
 	** 	 std::cout << s << std::endl; // `BMW`, `Audi`, `Ferrari`, `9FF`
 	** \endcode
+	**
+	**
+	** To know if a string is empty or not :
+	** \code
+	** Yuni::String myString;
+	** ...
+	**
+	** if (!myString)
+	** 	;
+	** // or
+	** if (myString.empty())
+	** 	;
+	**
+	** // Test if not empty
+	** if (myString.notEmpty())
+	** 	;
+	** \endcode
+	**
+	**
+	** \warning This class is not thread-safe
+	** \warning This class is a final class
+	** \ingroup Toolbox
+	**
+	** \tparam C The type of a single character
+	** \tparam Chunk Size of a chunk
 	*/
-	class String : public std::string
+	template<typename C /* = char */, int Chunk /* = 40 */>
+	class StringBase
 	{
 	public:
 		//! A String list
-		typedef std::list<String> List;
+		typedef std::list< StringBase<C,Chunk> > List;
 		//! A String vector
-		typedef std::vector<String> Vector;
+		typedef std::vector< StringBase<C,Chunk> > Vector;
 
-		//! Alias to the size type
-		typedef std::string::size_type Size;
-		//! Index type
-		typedef std::string::size_type Index;
+		//! The type of object, CharT, stored in the string.
+		typedef C Char;
+		//! The type of object, CharT, stored in the string.
+		typedef C Type;
+		//! Size
+		typedef size_t Size;
 
-		//! Alias to the type of a char
-		typedef std::string::value_type Char;
+		//! The largest possible value of type `Size` or `size_type`. That is, Size(-1)
+		static const Size npos = Size(-1);
 
-		//! iterator
-		typedef std::string::iterator iterator;
-		//! const_iterator
-		typedef std::string::const_iterator  const_iterator;
+		//! \name Compatibility with std::string
+		//@{
+		//! The type of object, CharT, stored in the string
+		typedef C value_type;
+		//! Pointer to Char
+		typedef C* pointer;
+		//! Reference to Char
+		typedef C& reference;
+		//! Const reference to Char
+		typedef const C& const_reference;
+		//! An unsigned integral type
+		typedef size_t size_type;
+		//! A signed integral type
+		typedef ssize_t difference_type;
+		//@}
 
 		//! Char Case
 		enum CharCase
@@ -113,306 +149,911 @@ namespace Yuni
 			soIgnoreCase
 		};
 
+		// Standard iterator
+		class iterator;
+		//! Const iterator
+		class const_iterator;
+		// Reverse iterator
+		class reverse_iterator;
+		//! Const reverse iterator
+		class const_reverse_iterator;
+
+		// Implementation of iterators
+		# include "string.iterators.hxx"
+
 	public:
+		//! \name Case conversions
+		//@{
 		/*!
-		** \brief Copy then Convert the case (lower case) of characters in the string using the UTF8 charset
-		** \param s The string to convert
+		** \brief Copy then Convert the case (lower case) of characters in the string
+		** \param u The string to convert
 		** \return A new string
 		*/
-		static String ToLower(const char* s) {return String(s).toLower();}
-		/*!
-		** \brief Copy then Convert the case (lower case) of characters in the string using the UTF8 charset
-		** \param s The string to convert
-		** \return A new string
-		*/
-		static String ToLower(const wchar_t* s) {return String(s).toLower();}
-		/*!
-		** \brief Copy then Convert the case (lower case) of characters in the string using the UTF8 charset
-		** \param s The string to convert
-		** \return A new string
-		*/
-		static String ToLower(const String& s) {return String(s).toLower();}
+		template<typename U> static StringBase<C,Chunk> ToLower(const U& u);
 
 		/*!
-		** \brief Copy then Convert the case (upper case) of characters in the string using the UTF8 charset
-		** \param s The string to convert
+		** \brief Copy then Convert the case (upper case) of characters in the string
+		** \param u The string to convert
 		** \return A new string
 		*/
-		static String ToUpper(const char* s) {return String(s).toUpper();}
+		template<typename U> static StringBase<C,Chunk> ToUpper(const U& u);
+		//@}
+
+		//! \name Searching
+		//@{
 		/*!
-		** \brief Copy then Convert the case (upper case) of characters in the string using the UTF8 charset
-		** \param s The string to convert
-		** \return A new string
+		** \brief Get if a string has at least one occurence of a given character
+		** \param c The character to find
+		** \param str The String
 		*/
-		static String ToUpper(const wchar_t* s) {return String(s).toUpper();}
-		/*!
-		** \brief Copy then Convert the case (upper case) of characters in the string using the UTF8 charset
-		** \param s The string to convert
-		** \return A new string
-		*/
-		static String ToUpper(const String& s) {return String(s).toUpper();}
+		template<typename C1, class U> static bool HasChar(const C1 c, const U& str);
 
 		/*!
-		** \brief Remove trailing and leading spaces
-		** \param s The string to convert
-		** \param trimChars The chars to remove
-		** \return A new string
+		** \brief Get the number of occurences of a char in various string implementations
+		** \param c The character to find
+		** \param str The String
 		*/
-		static String Trim(const char* s, const String& trimChars = YUNI_WSTR_SEPARATORS) {return String(s).trim(trimChars);}
-		/*!
-		** \brief Remove trailing and leading spaces
-		** \param s The string to convert
-		** \param trimChars The chars to remove
-		** \return A new string
-		*/
-		static String Trim(const wchar_t* s, const String& trimChars = YUNI_WSTR_SEPARATORS) {return String(s).trim(trimChars);}
-		/*!
-		** \brief Remove trailing and leading spaces
-		** \param s The string to convert
-		** \param trimChars The chars to remove
-		** \return A new string
-		*/
-		static String Trim(const String& s, const String& trimChars = YUNI_WSTR_SEPARATORS) {return String(s).trim(trimChars);}
+		template<typename C1, class U> static Size CountChar(const C1 c, const U& str);
+		//@}
 
-		/*!
-		** \brief Convert all backslashes into slashes
-		** \param s The string to convert
-		** \return A new string
-		*/
-		static String ConvertBackSlashesIntoSlashes(const String& s) {return String(s).convertBackSlashesIntoSlashes();}
+		//! \name Comparisons
+		//@{
+		//! Get if two C-String are equivalent
+		static bool Equals(const Char a[], const Char b[]);
+		//! Get if two C-String are equivalent
+		static bool Equals(const Char a[], const Char b[], const Size maxLen);
+		//! Get if two Yuni Strings are equivalent (a == b)
+		template<int Chnk1, int Chnk2>
+		static bool Equals(const StringBase<Char,Chnk1>& a, const StringBase<Char,Chnk2>& b);
 
-		/*!
-		** \brief Convert all slashes into backslashes
-		** \param s The string to convert
-		** \return A new string
-		*/
-		static String ConvertSlashesIntoBackSlashes(const String& s) {return String(s).convertSlashesIntoBackSlashes();}
+		//! Compare two C-String
+		static int Compare(const Char a[], const Char b[], const Size maxLen = npos);
+		//! Compare a Yuni string with a C-String
+		template<int Chnk1>
+		static int Compare(const StringBase<Char,Chnk1>& a, const Char b[], const Size maxLen = npos);
+		//! Compare a C-String with a Yuni String
+		template<int Chnk1>
+		static int Compare(const Char a[], const StringBase<Char,Chnk1>& b, const Size maxLen = npos);
+		//! Compare two yuni Strings
+		template<int Chnk1, int Chnk2>
+		static int Compare(const StringBase<Char,Chnk1>& a, const StringBase<Char,Chnk2>& b, const Size maxLen = npos);
+		//@}
 
+		//! \name Length
+		//@{
+		//! Get the length in character of various string implementations (C-String, std::string, Yuni::String...)
+		template<typename U> static Size Length(const U& u);
+		//@}
 
-		/*!
-		** \brief Get the number of occurences of a char
-		**
-		** \param s The string
-		** \param c The char to find in the string
-		*/
-		static Size CountChar(const String& s, const String::Char c) {return s.countChar(c);}
-
-
-		/*!
-		** \brief Extract the key and its value from a string (mainly provided by TDF files)
-		**
-		** \param s A line (ex: `   category=core vtol ctrl_v level1 weapon  notsub ;`)
-		** \param[out] key The key that has been found
-		** \param[out] value The associated value
-		** \param chcase The key will be converted to lowercase if equals to `soIgnoreCase`
-		**
-		** \code
-		**	String k, v;
-		**
-		**	// -> k='category'
-		**	// -> v='core vtol ctrl_v level1 weapon  notsub'
-		**	String::ToKeyValue("  category=core vtol ctrl_v level1 weapon  notsub ;", k, v)
-		**
-		**	// -> k='foo'
-		**	// -> v='bar'
-		**	String::ToKeyValue("  foo  = bar ; ");
-		**
-		**	// -> k='}'  v=''
-		**	String::ToKeyValue("  } ", k, v);
-		**
-		**	// -> k='['   v='Example of Section'
-		**	String::ToKeyValue(" [Example of Section] ", k, v);
-		**
-		**	// -> k='foo'  v='bar'
-		**	String::ToKeyValue(" foo=bar; // comment", k, v);
-		**
-		**	// -> k='foo'  v='bar'
-		**	String::ToKeyValue(" foo=bar; // comments here; ", k, v);
-		** \endcode
-		*/
-		static void ToKeyValue(const String& s, String& key, String& value, const enum CharCase chcase = soCaseSensitive);
-
-		/*!
-		** \brief Find the index of a string in a vector
-		** \param l The vector
-		** \param s The string to look for
-		** \return The index of the string found, -1 otherwise
-		*/
-		static int FindInList(const String::Vector& l, const char* s);
-		static int FindInList(const String::Vector& l, const String& s);
-
+		//! \name Formatted string
+		//@{
 		/*!
 		** \brief Formatted string
 		**
 		** \param f The format of the new string
 		** \return A new string
 		*/
-		static String Format(const String& f, ...);
-		static String Format(const char* f, ...);
+		template<int Chnk1>
+		static StringBase<Char,Chunk> Format(const StringBase<C,Chnk1>& f, ...);
+		/*!
+		** \brief Formatted string
+		**
+		** \param f The format of the new string
+		** \return A new string
+		*/
+		template<int Chnk1>
+		static StringBase<Char,Chunk> Format(StringBase<C,Chnk1>& f, ...);
+		/*!
+		** \brief Formatted string
+		**
+		** \param f The format of the new string
+		** \return A new string
+		*/
+		static StringBase<Char,Chunk> Format(const char f[], ...);
+		//@}
 
+
+		//! \name Misc
+		//!{
+		/*!
+		** \brief Try to find the first occurence of a string from `offset` in a STL container
+		**
+		** \param list A STL Container
+		** \param str The string to find
+		** \param offset The offset to start from
+		** \return The index of string in the list, npos if not found
+		*/
+		template<template<class,class> class L, class T, class Alloc>
+		static unsigned int FindInList(const L<T,Alloc>& list, const StringBase<Char,Chunk>& str,
+			const unsigned int offset = 0);
+
+		/*!
+		** \brief Extract the key and its value from a string in the INI format
+		**
+		** \code
+		**	String k, v;
+		**
+		**	// -> k='category'
+		**	// -> v='core vtol ctrl_v level1 weapon  notsub'
+		**	String::ExtractKeyValue("  category=core vtol ctrl_v level1 weapon  notsub ;", k, v)
+		**
+		**	// -> k='foo'
+		**	// -> v='bar'
+		**	String::ExtractKeyValue("  foo  = bar  ");
+		**
+		**	// -> k=''  v=''
+		**	String::ExtractKeyValue("  } ", k, v); // used in TDF files
+		**
+		**	// -> k='['   v='Example of Section'
+		**	String::ExtractKeyValue(" [Example of Section] ", k, v);
+		**
+		**	// -> k='foo'  v='bar'
+		**	String::ExtractKeyValue(" foo=bar; // comments here; ", k, v);
+		**
+		**	// -> k='key'  v=' Allow special chars like semicolon `;` and spaces  '
+		**	String::ExtractKeyValue(" key = \" Allow special chars like semicolon `;` and spaces  \"; // comments here; ", k, v);
+		** \endcode
+		**
+		** For compatibility reasons, the parser allows the TDF format :
+		** \code
+		** [section]
+		** {
+		** 		key1 = value1;
+		** 		key2 = value2;
+		** }
+		** \endcode
+		**
+		**
+		** \param s Any line (ex: `   category=core vtol ctrl_v level1 weapon  notsub ;`)
+		** \param[out] key The key that has been found
+		** \param[out] value The associated value
+		** \param chcase The key will be converted to lowercase if equals to `soIgnoreCase`
+		*/
+		static void ExtractKeyValue(const StringBase& s, StringBase& key, StringBase& value,
+			const enum CharCase chcase = soIgnoreCase);
+
+		/*!
+		** \brief Copy the string and convert all escaped characters (O(N))
+		**
+		** \code
+		** std::cout << Yuni::String::ConvertEscapedCharacters("A long string\\nwith two lines") << std::endl;
+		** \endcode
+		**
+		** You should prefer the second form of this method `String::assignFromEscapedCharacters(str)`.
+		**
+		** \see man printf
+		** \bug Not all escaped characters are handled
+		** \see assignFromEscapedCharacters()
+		*/
+		static StringBase<C,Chunk> ConvertEscapedCharacters(const char str[]);
+		//
+		static StringBase<C,Chunk> ConvertEscapedCharacters(const wchar_t str[]);
+		//
+		template<typename U>
+		static StringBase<C,Chunk> ConvertEscapedCharacters(const std::basic_string<U>& str);
+		//
+		template<int Chnk1>
+		static StringBase<C,Chunk> ConvertEscapedCharacters(const StringBase<C,Chnk1>& str);
+
+		/*!
+		** \brief Find the end of a sequence, started and terminated by a given character (usually a quote)
+		**
+		** This method is not a simple find(), because it takes care of escaped
+		** characters
+		**
+		** \param str The sequence
+		** \param quote The character to find, usually a quote
+		*/
+		static Size FindEndOfSequence(const Char* str, const Char quote, Size maxLen = npos);
+		//@} Misc
 
 	public:
-		//! \name Constructors and Destructor
+		//! \name Constructors & Destructor
 		//@{
 		//! Default constructor
-		String() :std::string() {}
-		//! Constructor by copy
-		String(const String& v, size_type pos = 0, size_type n = npos) :std::string(v, pos, n) {}
-		//! Constructor with a default value from a std::string
-		String(const std::string& v) :std::string(v) {}
-		//! Constructor with a default value from a wide string (wchar_t*)
-		String(const wchar_t* v);
-		//! Constructor with a default value from a string (char*)
-		String(const char* v);
-		//! Constructor with a default value from a string (char*) and a length
-		String(const char* v, String::size_type n) :std::string(v, n) {}
-		//! Constructor with a default value from a single char
-		String(const char v) :std::string() {*this += v;}
-		//! Constructor with a default value from an int (16 bits)
-		explicit String(const sint16 v) :std::string() {*this << v;}
-		//! Constructor with a default value from an int (32 bits)
-		explicit String(const sint32 v) :std::string() {*this << v;}
-		//! Constructor with a default value from an int (64 bits)
-		explicit String(const sint64 v) :std::string() {*this << v;}
-		//! Constructor with a default value from an unsigned int (8 bits)
-		explicit String(const uint8 v) :std::string() {*this << v;}
-		//! Constructor with a default value from an unsigned int (16 bits)
-		explicit String(const uint16 v) :std::string() {*this << v;}
-		//! Constructor with a default value from an unsigned int (32 bits)
-		explicit String(const uint32 v) :std::string() {*this << v;}
-		//! Constructor with a default value from an unsigned int (64 bits)
-		explicit String(const uint64 v) :std::string() {*this << v;}
-		//! Constructor with a default value from a float
-		explicit String(const float v) :std::string() {*this << v;}
-		//! Constructor with a default value from a double
-		explicit String(const double v) :std::string() {*this << v;}
-		//! Constructor with a default value from a list of something
-		template<template<class,class> class U, class Type, class Alloc>
-		String(const U<Type,Alloc>& v) :std::string() {this->append(v);}
+		StringBase();
 
-		//! Destructor
-		virtual ~String() {}
+		//! Copy constructor
+		StringBase(const StringBase& copy);
+
+		//! Copy constructor
+		template<int Chnk1> StringBase(const StringBase<Char,Chnk1>& copy);
+
+		/*!
+		** \brief Constructor from a substring
+		**
+		** \param rhs Another string
+		** \param offset Offset where to start from
+		** \param len The maximum number of characters to copy
+		*/
+		template<int Chnk1>
+		StringBase(const StringBase<Char,Chnk1>& rhs, const Size pos, Size len = npos);
+
+		/*!
+		** \brief Constructor from a substring
+		**
+		** \param rhs A std::string
+		** \param offset Offset where to start from
+		** \param len The maximum number of characters to copy
+		*/
+		template<typename C1>
+		StringBase(const std::basic_string<C1>& rhs, const Size pos, Size len = npos);
+
+		/*!
+		** \brief Constructor - From a C-String
+		** \param str A C-String (may be null)
+		*/
+		StringBase(const char str[]);
+
+		/*!
+		** \brief Constructor - From a C-String
+		** \param str A C-String (may be null)
+		*/
+		StringBase(const wchar_t str[]);
+
+		/*!
+		** \brief Constructor - From a single char
+		** \param c The char to copy, even if equals to \0
+		*/
+		StringBase(const Char c);
+
+		/*!
+		** \brief Constructor - From a repetition of chars
+		**
+		** \param n The number of occurences
+		** \param c The char (can be equals to \0)
+		*/
+		StringBase(const Size n, const Char c);
+
+		/*!
+		** \brief Constructor - From a std::string
+		** \param str A std::string
+		*/
+		StringBase(const std::basic_string<Char>& str);
+
+		/*!
+		** \brief Constructor - From any other types
+		** \param u Any value that the method `append(U)` can handle
+		*/
+		template<typename U> explicit StringBase(const U& u);
+
+		/*!
+		** \brief Constructor - From a C-String with a maximum number of chars
+		**
+		** \param str A C-String
+		** \param len The maximum number of characters to copy
+		*/
+		template<typename C1> StringBase(const C1* str, const Size len);
+
+		/*!
+		** \brief Constructor - From iterators
+		**
+		** \code
+		** Yuni::String s("0123456789");
+		** Yuni::String t(s.begin(), s.begin() + 5);
+		** std::cout << t << std::endl;
+		** \endcode
+		**
+		** \param begin Iterator at the begining of the substring
+		** \param end Iterator at the end of the substring
+		*/
+		template<class IteratorClass>
+		StringBase(const IteratorClass& begin, const IteratorClass& end);
+
+		//! \Destructor
+		YUNI_STRING_VIRTUAL_DESTRUCTOR ~StringBase();
+		//@}
+
+
+		//! \name Iterators
+		//@{
+		//! Get an iterator pointing to the beginning of the string
+		iterator begin();
+		const_iterator begin() const;
+		//! Get an iterator pointing to the end of the string
+		iterator end();
+		const_iterator end() const;
+
+		//! Get a reverse iterator to reverse beginning of the string
+		reverse_iterator rbegin();
+		const_reverse_iterator rbegin() const;
+		//! Get reverse iterator to reverse end of the string
+		reverse_iterator rend();
+		const_reverse_iterator rend() const;
+		//@}
+
+
+		//! \name Assign
+		//@{
+		/*!
+		** \brief Clear the string than append a string
+		**
+		** \param u Any value that the method `append(U)` can handle
+		*/
+		template<typename U> void assign(const U& u);
+
+		/*!
+		** \brief Set the value of the string with a maximum length
+		**
+		** \param u Any value that the method `append(U, len)` can handle
+		** \param len The maximum number of chars to copy
+		*/
+		template<typename U> void assign(const U& u, const Size len);
+
+		/*!
+		** \brief Set the value of the string from a substring of another one
+		*/
+		template<int Chnk1>
+		void assign(const StringBase<Char,Chnk1>& s, const Size offset, const Size len);
+
+		/*!
+		** \brief Set the value of the string from a raw buffer
+		**
+		** No checks are performed here.
+		** \param u A buffer (may be null)
+		** \param len Size of the buffer
+		** \return Always this
+		*/
+		StringBase& assignRaw(const char* u, const Size len);
 		//@}
 
 
 		//! \name Append
 		//@{
-
 		/*!
-		** \brief Append a string
-		*/
-		void append(const String& v) {std::string::append(v);}
-
-		/*!
-		** \brief Append a CString
-		*/
-		void append(const char* v) {std::string::append(v);}
-
-		/*!
-		** \brief Append a substring
-		*/
-		void append(const String& v, String::Index& p, const String::Size& n)
-		{std::string::append(v, p, n);}
-
-		/*!
-		** \brief Append a substring
-		*/
-		void append(const String& v, int p, String::Size& n) {std::string::append(v, p, n);}
-
-		/*!
-		** \brief Append a list of string
+		** \brief Append an expression to the end of the string (if the appropriate
+		** converter is available)
 		**
-		** \param v The list of string
-		** \param sep The separator to use when appending an item from the list
-		** \param max The maximum number of items to append
+		** \code
+		** Yuni::String s;
+		** s.append("A C-String;");                  // a C-String
+		** s.append(std::string("A Std-string."));   // A std::string
+		** s.append(42);                             // an int
+		** s.append(12.5);                           // a double
+		** \endcode
+		**
+		** \tparam U Any type
+		** \param u Any value
 		*/
-		template<template<class,class> class U, class Type, class Alloc>
-		void append(const U<Type,Alloc>& v, const String& sep = ", ", const unsigned int max = UINT_MAX);
+		template<typename U> void append(const U& u);
 
 		/*!
-		** \brief Append a list of string
+		** \brief Append an expression with a maximum length to the end of the
+		** string (if the appropriate converter is available)
 		**
-		** \param v The list of string
-		** \param sep The separator to use when appending an item from the list
-		** \param enclosure The string to use as a prefix and a suffix when appending an item from the list
-		** \param max The maximum number of items to append
+		** \code
+		** Yuni::String s;
+		** s.append("123456789", 3); // will only append the C-String "123"
+		** \endcode
+		**
+		** \tparam U Any type
+		** \param u Any value
+		** \param len The maximum length
 		*/
-		template<template<class,class> class U, class Type, class Alloc>
-		void append(const U<Type,Alloc>& v, const String& sep, const String& enclosure, const unsigned int max = UINT_MAX);
+		template<typename U> void append(const U& u, const Size len);
+
+		/*!
+		** \brief Append an expression with a maximum length to the end of the
+		** string (if the appropriate converter is available)
+		**
+		** \code
+		** Yuni::String s;
+		** s.append("123456789", 1, 3); // will only append the C-String "23"
+		** \endcode
+		**
+		** \tparam U Any type
+		** \param u Any value
+		** \param offset The offset where to start from
+		** \param len The maximum length
+		*/
+		template<typename U> void append(const U& u, const Size offset, const Size len);
+
+		/*!
+		** \brief Append a STL container
+		**
+		** \code
+		** Yuni::String s;
+		** std::vector<int> vect;
+		** vect.push_back(10);
+		** vect.push_back(30);
+		** s.append(vect); // will only append the 5 first values
+		** std::cout << s << std::endl; // `10, 30`
+		** \endcode
+		**
+		** \param u Any value
+		** \param len The maximum count of items to append
+		*/
+		template<template<class,class> class L, class TypeL, class Alloc>
+		void append(const L<TypeL,Alloc>& u);
+
+		template<template<class,class> class L, class TypeL, class Alloc>
+		void append(const L<TypeL,Alloc>& u, const unsigned int max);
+
+		template<template<class,class> class L, class TypeL, class Alloc, typename S, typename E>
+		void append(const L<TypeL,Alloc>& u, const S& separator, const E& enclosure,
+			const unsigned int max);
+
+		template<template<class,class> class L, class TypeL, class Alloc, typename S>
+		void append(const L<TypeL,Alloc>& u, const S& separator, const unsigned int max);
+
+		template<template<class,class> class L, class TypeL, class Alloc, typename S, typename E>
+		void append(const L<TypeL,Alloc>& u, const S& separator, const E& enclosure);
+
+		template<template<class,class> class L, class TypeL, class Alloc, typename S>
+		void append(const L<TypeL,Alloc>& u, const S& separator);
+
+		//! This function is provided for STL compatibility. It is equivalent to append(u)
+		template<typename U> void push_back(const U& u);
+
+		/*!
+		** \brief Append a raw buffer to the end of the string
+		**
+		** No checks are performed here.
+		** \param u A buffer (may be null)
+		** \param len Size of the buffer
+		** \return Always this
+		*/
+		StringBase& appendRaw(const char* u, const Size len);
 
 		//@}
 
+
+		//! \name Inserting
+		//@{
+		/*!
+		** \brief Prepend any value at the begining of the string
+		**
+		** This is a convenient method to insert at the begining and is
+		** strictly equivalent to `insert(0, u)`.
+		** \param u Any value that the method `insert(0, u)` can handle
+		*/
+		template<typename U> void prepend(const U& u);
+
+		/*!
+		** \brief Insert a value at a given offset in the string
+		**
+		** If the offset is greater than the size of the string, the value
+		** will be merely appended to the string (equivalent to `append(u)`).
+		**
+		** \param offset The offset in the string
+		** \param u A value
+		*/
+		template<typename U> void insert(const Size offset, const U& u);
+
+		/*!
+		** \brief Insert a value at a given offset (from an iterator) in the string
+		**
+		** If the offset is greater than the size of the string, the value
+		** will be merely appended to the string (equivalent to `append(u)`).
+		**
+		** \param it The offset in the string given by the iterator
+		** \param u A value
+		*/
+		template<typename U> void insert(const iterator& it, const U& u);
+		template<typename U> void insert(const const_iterator& it, const U& u);
+		template<typename U> void insert(const reverse_iterator& it, const U& u);
+		template<typename U> void insert(const const_reverse_iterator& it, const U& u);
+		//@}
+
+		//! \name Removing
+		//@{
+		/*!
+		** \brief Rease a range of characters
+		**
+		** \param offset The offset of the first character
+		** \param len The number of characters to remove
+		** \return Always *this
+		*/
+		StringBase& erase(const Size offset, const Size len = npos);
+
+		/*!
+		** \brief Rease a range of characters
+		**
+		** The iterator `end` may be located before `begin`.
+		** \param begin The begining of the sub string
+		** \param end The end of the substring
+		** \return Always *this
+		*/
+		void erase(const iterator& begin, const iterator& end);
+		void erase(const const_iterator& begin, const const_iterator& end);
+		void erase(const reverse_iterator& begin, const reverse_iterator& end);
+		void erase(const const_reverse_iterator& begin, const const_reverse_iterator& end);
+
+		/*!
+		** \brief Remove the X first occurences in the string
+		**
+		** \param u The substring to remove (any type that `find` and `Length` can handle)
+		** \param maxOccurences The maxinum number of occurences to remove
+		** \param offset The offset where to start from
+		** \return The number of occurences
+		*/
+		template<typename U> Size remove(const U& u, Size offset = 0, const Size maxOccurences = npos);
+
+		/*!
+		** \brief Removes white-space from the left of the string
+		** \see YUNI_STRING_SEPARATORS
+		*/
+		void trimLeft();
+		/*!
+		** \brief Removes white-space from the left of the string
+		**
+		** Any type `U` is allowed, if the overload for the method `HasChar`
+		** if available.
+		** \param separators The list of chars considered as white-spaces
+		** \see HasChar()
+		*/
+		template<typename U> void trimLeft(const U& separators);
+
+		/*!
+		** \brief Removes white-space from the right end of the string
+		** \see YUNI_STRING_SEPARATORS
+		*/
+		void trimRight();
+		/*!
+		** \brief Removes white-space from the right end of the string
+		**
+		** Any type `U` is allowed, if the overload for the method `HasChar`
+		** if available.
+		** \param separators The list of chars considered as white-spaces
+		** \see HasChar()
+		*/
+		template<typename U> void trimRight(const U& separators);
+
+		/*!
+		** \brief Removes white-space from the left and the right end of the string
+		*/
+		void trim();
+		/*!
+		** \brief Removes white-space from the left and the right end of the string
+		**
+		** Any type `U` is allowed, if the overload for the method `HasChar`
+		** if available.
+		** \param separators The list of chars considered as white-spaces
+		** \see HasChar()
+		*/
+		template<typename U> void trim(const U& separators);
+
+		/*!
+		** \brief Remove the last char of the string if not empty
+		** \see last()
+		*/
+		void removeLast();
+
+		/*!
+		** \brief Remove the trailing slash or backslash at the end of the string if any
+		**
+		** This method is nearly equivalent to :
+		** \code
+		** Yuni::String s("/some/path/");
+		** if ('\\' == s.last() || '/' == s.last())
+		** 	s.removeLast();
+		** std::cout << s << std::endl;  // -> /some/path
+		** \endcode
+		*/
+		void removeTrailingSlash();
+
+		/*!
+		** \brief Remove `n` characters from the end of the string
+		*/
+		void chop(const Size n);
+		//@}
+
+
+		//! \name Replace
+		//@{
+		template<typename U> StringBase& replace(const Size offset, const Size len, const U& by);
+		template<typename U, typename V> void replace(const U& u, const V& v);
+		//@}
 
 		//! \name Conversions
 		//@{
-
-		//! Convert this string into an int (8 bits)
-		sint8 toInt8(const sint8 def = 0) const {YUNI_WSTR_CAST_OP(sint8);}
-		//! Convert this string into an int (16 bits)
-		sint16 toInt16(const sint16 def = 0) const {YUNI_WSTR_CAST_OP(sint16);}
-		//! Convert this string into an int (32 bits)
-		sint32 toInt32(const sint32 def = 0) const {YUNI_WSTR_CAST_OP(sint32);}
-		//! Convert this string into an int (64 bits)
-		sint64 toInt64(const sint64 def = 0) const {YUNI_WSTR_CAST_OP(sint64);}
-		//! Convert this string into an unsigned int (8 bits)
-		uint8 toUInt8(const uint8 def = 0) const {YUNI_WSTR_CAST_OP(uint8);}
-		//! Convert this string into an unsigned int (16 bits)
-		uint16 toUInt16(const uint16 def = 0) const {YUNI_WSTR_CAST_OP(uint16);}
-		//! Convert this string into an unsigned int (32 bits)
-		uint32 toUInt32(const uint32 def = 0) const {YUNI_WSTR_CAST_OP(uint32);}
-		//! Convert this string into an unsigned int (64 bits)
-		uint64 toUInt64(const uint64 def = 0) const {YUNI_WSTR_CAST_OP(uint64);}
-		//! Convert this string into a float
-		float toFloat(const float def = 0.0f) const {YUNI_WSTR_CAST_OP(float);}
-		//! Convert this string into a double
-		double toDouble(const double def = 0.) const {YUNI_WSTR_CAST_OP(double);}
-		//! Convert this string into a bool (true if the lower case value is equals to "true", "1" or "on")
-		bool toBool() const;
+		/*!
+		** \brief Convert the string to any type
+		**
+		** \code
+		** Yuni::String s("42");
+		** unsigned int u = s.to<unsigned int>();
+		** bool b = s.to<bool>();
+		** \endcode
+		**
+		** \note For the conversion be valid, the template specialization
+		** of `Private::StringImpl::From` must be available.
+		*/
+		template<typename U> U to() const;
 
 		/*!
-		** \brief Generic conversion
-		** \tparam U The target type
+		** \brief Convert the string to any type, and get if the conversion succeeded
+		**
+		** \code
+		** Yuni::String s("42");
+		** if (s.to<unsigned int>())
+		** {
+		** 	// Do something
+		** }
+		** \endcode
+		**
+		** \note For the conversion be valid, the template specialization
+		** of `Private::StringImpl::From` must be available.
+		**
+		** \param[out] u The variable where to store the result
 		*/
-		template<class U> U to() const;
+		template<typename U> bool to(U& u) const;
+
+
+		//! Get the char at a specific location
+		Char at(const Size offset) const;
+
+		//! Conversion to a C-String
+		const char* c_str() const throw();
 
 		/*!
-		** \brief Generic conversion
-		** \tparam U The target type
-		** \param[in,out] u The variable where to store the result
+		** \brief Return a pointer to the first character in the string
+		**
+		** This method is provided for compatibility with the STL only and
+		** *should* not be used.
+		** \internal There is no guarantee that this buffer is zero-terminated
+		**  but it is guaranteed that there is at least
+		**  `sizeof(Char) * size()` bytes.
 		*/
-		template<class U> void to(U& u) const;
-
+		const Char* data() const throw();
 		//@}
 
 
-
-		//! \name Case convertion
+		//! \name Searching
 		//@{
 		/*!
-		** \brief Convert the case (lower case) of characters in the string using the UTF8 charset
-		** \return Returns *this
+		** \brief Try to find the position of a substring
+		**
+		** \param u The substring to find (can be null)
+		** \return The position of the substring, npos if not found or empty
 		*/
-		String& toLower()
-		{std::transform (this->begin(), this->end(), this->begin(), tolower);return *this;}
+		template<typename U> Size find(const U& u) const;
+
 		/*!
-		** \brief Convert the case (upper case) of characters in the string using the UTF8 charset
-		** \return Returns *this
+		** \brief Try to find the position of a substring starting at a given offset
+		**
+		** \param u The string to find (can be null)
+		** \param offset The index where to start from
+		** \return The position of the char, npos if not found
 		*/
-		String& toUpper()
-		{std::transform (this->begin(), this->end(), this->begin(), toupper);return *this;}
-		//@} Case convertion
+		template<typename U> Size find(const U& u, const Size offset) const;
+
+		//! Alias for find()
+		template<typename U> Size find_first_of(const U& u) const;
+		//! Alias for find()
+		template<typename U> Size find_first_of(const U& u, const Size offset) const;
+
+		/*!
+		** \brief Try to find the last position of a substring from the end of the string
+		**
+		** \param u The substring to find (can be null)
+		** \return The position of the substring, npos if not found or empty
+		*/
+		template<typename U> Size rfind(const U& u) const;
+
+		/*!
+		** \brief Try to find the last position of a substring starting at a given offset
+		**
+		** \param u The string to find (can be null)
+		** \param offset The index where to start from
+		** \return The position of the char, npos if not found
+		*/
+		template<typename U> Size rfind(const U& u, const Size offset) const;
+
+		//! Alias for find()
+		template<typename U> Size find_last_of(const U& u) const;
+		//! Alias for find()
+		template<typename U> Size find_last_of(const U& u, const Size offset) const;
+
+		//! Get if the string contains a char (O(N))
+		bool hasChar(const Char c) const;
+		//! Get if the string contains a char
+		bool hasChar(const Char c[]) const;
+		//! Get if the string contains a char
+		template<int Chnk1> bool hasChar(const StringBase<Char,Chnk1>& str) const;
+
+		/*!
+		** \brief Get the number of occurences of a char (O(N))
+		*/
+		Size countChar(const Char c) const;
+		//@}
 
 
-
-		//! \name Split
+		//! \name Replacing
 		//@{
 		/*!
-		** \brief Split a string into several segments
+		** \brief Replace all occurences of a given char by another one
+		**
+		** \param from The char to find and replace
+		** \param to The replacement
+		*/
+		void replace(const Char from, const Char to);
+
+		/*!
+		** \brief Replace all occurences of a given char by another one starting from an offset
+		**
+		** \param from The char to find and replace
+		** \param to The replacement
+		** \param offset The index where to start from
+		*/
+		void replace(const Char from, const Char to, const Size offset);
+		//@}
+
+		//! \name Extracting
+		//@{
+		/*!
+		** \brief Get the sub-string of the string
+		*/
+		StringBase substr(const Size offset) const;
+		/*!
+		** \brief Get the sub-string of the string
+		*/
+		StringBase substr(const Size offset, const Size len) const;
+		//@}
+
+		//! \name Case conversion
+		//@{
+		/*!
+		** \brief Convert the case (lower case) of characters in the string (O(N))
+		*/
+		StringBase& toLower();
+		/*!
+		** \brief Convert the case (upper case) of characters in the string (O(N))
+		*/
+		StringBase& toUpper();
+		//@}
+
+		//! \name Format
+		//@{
+		/*!
+		** \brief Reset the current value with a formatted string
+		**
+		** \param f The format
+		** \return Always *this
+		*/
+		template<int Chnk1> StringBase& format(const StringBase<Char,Chnk1>& f, ...);
+		/*!
+		** \brief Reset the current value with a formatted string
+		**
+		** \param f The format
+		** \return Always *this
+		*/
+		template<int Chnk1> StringBase& format(StringBase<Char,Chnk1>& f, ...);
+		/*!
+		** \brief Reset the current value with a formatted string
+		**
+		** \param f The format
+		** \return Always *this
+		*/
+		StringBase& format(const char f[], ...);
+
+		/*!
+		** \brief Append formatted string
+		**
+		** \param f The format
+		** \return Always *this
+		*/
+		template<int Chnk1> StringBase& appendFormat(const StringBase<Char,Chnk1>& f, ...);
+		/*!
+		** \brief Append a formatted string
+		**
+		** \param f The format
+		** \return Always *this
+		*/
+		template<int Chnk1> StringBase& appendFormat(StringBase<Char,Chnk1>& f, ...);
+		/*!
+		** \brief Append formatted string
+		**
+		** \param f The format
+		** \return Always *this
+		*/
+		StringBase& appendFormat(const char f[], ...);
+
+		/*!
+		** \brief Append a formatted string to the end of the current string
+		*/
+		void vappendFormat(const char f[], va_list parg);
+		//@}
+
+
+		//! \name Misc
+		//@{
+		/*!
+		** \brief Get the first char of the string
+		** \return The last char of the string if not empty, \0 otherwise
+		*/
+		Char first() const;
+
+		/*!
+		** \brief Get the last char of the string
+		** \return The last char of the string if not empty, \0 otherwise
+		*/
+		Char last() const;
+
+		/*!
+		** \brief Convert all antislashes into slashes
+		** \return Returns *this
+		*/
+		void convertBackslashesIntoSlashes();
+
+		/*!
+		** \brief Convert all slashes into antislashes
+		** \return Returns *this
+		*/
+		void convertSlashesIntoBackslashes();
+
+		/*!
+		** \brief Set the string from a sequence of escaped characters (O(N))
+		**
+		** \code
+		** Yuni::String s;
+		** s.assignFromEscapedCharacters("A long string\\nwith two lines");
+		** std::cout << s << std::endl;
+		** \endcode
+		**
+		** \param str The original string
+		** \see man printf
+		** \bug Not all escaped characters are handled
+		*/
+		void assignFromEscapedCharacters(const char str[]);
+		//
+		void assignFromEscapedCharacters(const wchar_t str[]);
+		//
+		template<typename U>
+		void assignFromEscapedCharacters(const std::basic_string<U>& str);
+		//
+		template<int Chnk1>
+		void assignFromEscapedCharacters(const StringBase<C,Chnk1>& str);
+
+		/*!
+		** \brief Set the string from a sequence of escaped characters (O(N))
+		**
+		** \param str The original string
+		** \param maxLen The maximum length allowed
+		** \param offset The offset where to start from
+		*/
+		template<int Chnk1>
+		void assignFromEscapedCharacters(const StringBase<C,Chnk1>& str, Size maxLen,
+			const Size offset = 0);
+
+
+		/*!
+		** \brief Extract the key and its value from a string (mainly provided by TDF
+		** files or Ini files)
+		**
+		** Simple Ini file structure
+		** \code
+		** [section]
+		** key = value
+		** \endcode
+		**
+		** More complex :
+		** \code
+		** [section]
+		** a = b; // Put your comments here
+		** b =
+		** c = ; // b = c, empty values
+		** return cariage = A long string\non two lines
+		** "key" = "All characters are allowed here, like semicolons; :)"
+		** \endcode
+		**
+		** \param s A line (ex: `   category=core vtol ctrl_v level1 weapon  notsub ;`)
+		** \param[out] key The key that has been found
+		** \param[out] value The associated value
+		** \param chcase The key will be converted to lowercase if equals to `soIgnoreCase`
+		**
+		** \see ExtractKeyvalue()
+		*/
+		void extractKeyValue(StringBase& key, StringBase& value,
+			const enum CharCase chcase = soCaseSensitive) const;
+
+		/*!
+		** \brief Explode a string into several segments
 		**
 		** Here is an example of howto convert a string to a list of int :
 		** \code
 		** std::list<int>  list;
-		** String("22::80::443::993").split(list, ":");
+		** String("22::80::443::993").explode(list, ":");
 		** std::cout << list << std::endl;
 		** \endcode
 		**
@@ -423,241 +1064,180 @@ namespace Yuni
 		**
 		** \warning Do not take care of string representation (with `'` or `"`)
 		*/
-		template<template<class,class> class U, class Type, class Alloc>
-		const String&
-		split(U<Type,Alloc>& out, const String& sep = YUNI_WSTR_SEPARATORS, const bool emptyBefore = true) const;
-		//@}
-
-
-		//! \name Trimming
-		//@{
-		/*!
-		** \brief Remove trailing and leading spaces
-		** \param trimChars The chars to remove
-		** \return Returns *this
-		*/
-		String& trim(const String& trimChars = YUNI_WSTR_SEPARATORS);
-		//@}
-
-
-
-		//! \name Find & Replace
-		//@{
-
-		/*!
-		** \brief Replace a substr by another one
-		** \param toSearch The string to look for
-		** \param replaceWith The string replacement
-		** \param option Option when looking for the string `toSearch`
-		** \return Always *this
-		*/
-		String& findAndReplace(const String& toSearch, const String& replaceWith,
-				const enum String::CharCase option = soCaseSensitive);
-		String& findAndReplace(char toSearch, const char replaceWith,
-				const enum String::CharCase option = soCaseSensitive);
-
-		/*!
-		** \brief Get the number of occurence of a char
-		**
-		** \param s The string
-		** \param c The char to find in the string
-		*/
-		Size countChar(const String::Char c) const;
-
-		//@}
-
-
-
-		//! \name Format
-		//@{
-
-		/*!
-		** \brief Reset the current value with a formatted string
-		**
-		** \param f The format of the new string
-		** \return Always *this
-		*/
-		String& format(const String& f, ...);
-		String& format(const char* f, ...);
-
-		/*!
-		** \brief Append a formatted string
-		** \param f The format of the new string
-		** \return Always *this
-		*/
-		String& appendFormat(const String& f, ...);
-		String& appendFormat(const char* f, ...);
-		String& vappendFormat(const char* f, va_list parg);
-
-		//@}
-
-
-		//! \name Misc
-		//@{
-
-		/*!
-		** \brief Extract the key and its value from a string (mainly provided by TDF files)
-		**
-		** \param[out] key The key that has been found
-		** \param[out] value The associated value
-		** \param chcase Options for the extraction
-		**
-		** \see String::ToKeyValue()
-		*/
-		void toKeyValue(String& key, String& value, const enum CharCase chcase = soCaseSensitive) const
-		{ToKeyValue(*this, key, value, chcase);}
-
-		/*!
-		** \brief Convert all antislashes into slashes
-		** \return Returns *this
-		*/
-		String& convertBackSlashesIntoSlashes();
-
-		/*!
-		** \brief Convert all slashes into antislashes
-		** \return Returns *this
-		*/
-		String& convertSlashesIntoBackSlashes();
+		template<template<class,class> class U, class UType, class Alloc, typename S>
+		void explode(U<UType,Alloc>& out, const S& sep = YUNI_STRING_SEPARATORS, const bool emptyBefore = true) const;
 
 		/*!
 		** \brief Get the hash value of this string
 		*/
-		uint32 hashValue() const;
+		uint32_t hashValue() const;
 
-		//! The last character
-		char last() const;
-		//@}
-
-
-
-		//! \name The operator `<<`
-		//@{
-		//! Append a string (char*)
-		String& operator << (const char* v) {static_cast<std::string*>(this)->append(v);return *this;}
-		//! Append a string (stl)
-		String& operator << (const std::string& v) {static_cast<std::string*>(this)->append(v);return *this;}
-		//! Append a string (Yuni::String)
-		String& operator << (const String& v) {static_cast<std::string*>(this)->append(v);return *this;}
-		//! Append a single char
-		String& operator << (const char v) {*(static_cast<std::string*>(this)) += v; return *this;}
-		//! Append a wide string (wchar_t*)
-		String& operator << (const wchar_t* v);
-		//! Append an unsigned int (8 bits)
-		String& operator << (const uint8 v) {YUNI_WSTR_APPEND;}
-		//! Append an int (16 bits)
-		String& operator << (const sint16 v) {YUNI_WSTR_APPEND;}
-		//! Append an unsigned int (16 bits)
-		String& operator << (const uint16 v) {YUNI_WSTR_APPEND;}
-		//! Append an int (32 bits)
-		String& operator << (const sint32 v) {YUNI_WSTR_APPEND;}
-		//! Append an unsigned int (32 bits)
-		String& operator << (const uint32 v) {YUNI_WSTR_APPEND;}
-		//! Append an int (64 bits)
-		String& operator << (const sint64 v) {YUNI_WSTR_APPEND;}
-		//! Append an unsigned int (64 bits)
-		String& operator << (const uint64 v) {YUNI_WSTR_APPEND;}
-		//! Convert then Append a float
-		String& operator << (const float v) {YUNI_WSTR_APPEND;}
-		//! Convert then Append a double
-		String& operator << (const double v) {YUNI_WSTR_APPEND;}
-		//! Convert then Append a boolean (will be converted into "true" or "false")
-		String& operator << (const bool v) {YUNI_WSTR_APPEND_BOOL(v);return *this;}
-		//! Append (Concate) a list of something
-		template<template<class,class> class U, class Type, class Alloc>
-		String& operator << (const U<Type,Alloc>& v) {this->append(v);return *this;}
-		//@}
-
-
-		//! \name The operator `+=` (with the same abilities than the operator `<<`)
-		//@{
-		//! Append a string (char*)
-		String& operator += (const char* v) {static_cast<std::string*>(this)->append(v); return *this;}
-		//! Append a string (stl)
-		String& operator += (const std::string& v) {static_cast<std::string*>(this)->append(v); return *this;}
-		//! Append a string (Yuni::String)
-		String& operator += (const Yuni::String& v) {static_cast<std::string*>(this)->append(v); return *this; }
-		//! Append a single char
-		String& operator += (const char v) {*(static_cast<std::string*>(this)) += (char)v; return *this;}
-		//! Append a wide string (wchar_t*)
-		String& operator += (const wchar_t* v) {*this << v; return *this;}
-		//! Append an unsigned int (8 bits)
-		String& operator += (const uint8 v) {*this << v; return *this;}
-		//! Append an int (16 bits)
-		String& operator += (const sint16 v) {*this << v; return *this; }
-		//! Append an unsigned int (16 bits)
-		String& operator += (const uint16 v) {*this << v; return *this; }
-		//! Append an int (32 bits)
-		String& operator += (const sint32 v) {*this << v; return *this; }
-		//! Append an unsigned int (32 bits)
-		String& operator += (const uint32 v) {*this << v; return *this; }
-		//! Append an int (64 bits)
-		String& operator += (const sint64 v) {*this << v; return *this; }
-		//! Append an unsigned int (64 bits)
-		String& operator += (const uint64 v) {*this << v; return *this; }
-		//! Convert then Append a float
-		String& operator += (const float v) {*this << v; return *this; }
-		//! Convert then Append a double
-		String& operator += (const double v) {*this << v; return *this; }
-		//! Convert then Append a boolean (will be converted into "true" or "false")
-		String& operator += (const bool v) {YUNI_WSTR_APPEND_BOOL(v); return *this; }
-		//! Append (Concate) a list of string
-		template<template<class,class> class U, class Type, class Alloc>
-		String& operator += (const U<Type,Alloc>& v) {this->append(v); return *this; }
-		//@}
-
-
-		//! \name The operator `+`
-		//@{
-		//! Create a new String from the concatenation of *this and a string
-		const String operator + (const String& rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a char
-		const String operator + (const char rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a widechar
-		const String operator + (const wchar_t rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a const char*
-		const String operator + (const char* rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a wide string
-		const String operator + (const wchar_t* rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a signed int (16 bits)
-		const String operator + (const sint16 rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a signed int (32 bits)
-		const String operator + (const sint32 rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a signed int (64 bits)
-		const String operator + (const sint64 rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and an unsigned int (8 bits)
-		const String operator + (const uint8 rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and an unsigned int (16 bits)
-		const String operator + (const uint16 rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and an unsigned int (32 bits)
-		const String operator + (const uint32 rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and an unsigned int (64 bits)
-		const String operator + (const uint64 rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a float
-		const String operator + (const float rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a double
-		const String operator + (const double rhs) { return String(*this) += rhs; }
-		//! Create a new String from the concatenation of *this and a list of something
-		template<template<class,class> class U, class Type, class Alloc>
-		const String operator + (const U<Type,Alloc>& rhs) { return String(*this) += rhs; }
-		//@}
-
-
-	private:
 		/*!
-		** \brief Convert a string into another type, given by the template parameter `T`
-		** \param[out] t The destination variable
-		** \param s The string to convert
-		** \param f The base to use for the conversion (std::hex, std::dec, ...)
-		** \return True if the operation succeeded, False otherwise
+		** \brief Print the content of the string to an ostream
+		**
+		** \param[in,out] A stream
 		*/
-		template <class T>
-		inline bool fromString(T& t, const String& s, std::ios_base& (*f)(std::ios_base&)) const
-		{
-			std::istringstream iss(s);
-			return !(iss >> f >> t).fail();
-		}
+		void print(std::ostream& out) const;
+		//@}
 
-	}; // class String
+
+		//! \name Memory management
+		//@{
+		/*!
+		** \brief Clear the string
+		*/
+		void clear();
+
+		//! Get if the string is empty
+		bool empty() const;
+		//! Get if the string is not empty
+		bool notEmpty() const;
+
+		//! Get the size (number of caracters) in the string
+		Size size() const;
+		//! Alias for size()
+		Size count() const;
+		//! Alias for size()
+		Size length() const;
+
+		/*!
+		** \brief Ensure that there is enough allocated space for X caracters
+		**
+		** \param min The minimum capacity of the buffer (in caracters)
+		*/
+		void reserve(const Size min);
+
+		//! Get the number of characters that the string can currently hold
+		Size capacity() const;
+		//! Alias for capacity()
+		Size max_size() const;
+
+		/*!
+		** \brief Truncate the string to the given length
+		*/
+		void truncate(const Size maxLen);
+
+		/*!
+		** \brief Releases any memory not required to store the character data
+		**
+		** In general, you will rarely ever need to call this function.
+		*/
+		void shrink();
+
+		/*!
+		** \brief Swap the content with another string
+		** \param s The other string
+		*/
+		void swap(StringBase& s);
+
+		/*!
+		** \brief Get the allocator used
+		**
+		** This method is only provided for compatibility with the STL
+		*/
+		static std::allocator<C> get_allocator();
+		//@}
+
+
+		//! \name Operators
+		//@{
+		/*!
+		** \brief Set the value of the string
+		**
+		** This method is strictly equivalent to the method append()
+		** with one parameter but the string is cleared before.
+		** We also need it to override the default operator =, or bad
+		** things(c) happen.
+		*/
+		StringBase& operator = (const StringBase& rhs);
+
+		/*!
+		** \brief Append a value to the end of the string
+		**
+		** This method is strictly equivalent to the method append()
+		** with one parameter.
+		*/
+		template<typename U> StringBase& operator += (const U& u);
+
+		/*!
+		** \brief Append a value to the end of the string
+		**
+		** This method is strictly equivalent to the method append()
+		** with one parameter.
+		*/
+		template<typename U> StringBase& operator << (const U& u);
+
+		/*!
+		** \brief Set the value of the string
+		**
+		** This method is strictly equivalent to the method append()
+		** with one parameter but the string is cleared before.
+		*/
+		template<typename U> StringBase& operator = (const U& u);
+
+
+		//! Get if the string is less than a C-String (can be null)
+		bool operator < (const Char rhs[]) const;
+		//! Get if the string is less than another String
+		template<int Chnk1> bool operator < (const StringBase<C,Chnk1>& rhs) const;
+
+
+		//! Get if the string is greater than a C-String (can be null)
+		bool operator > (const Char rhs[]) const;
+		//! Get if the string is greater than another String
+		template<int Chnk1> bool operator > (const StringBase<C,Chnk1>& rhs) const;
+
+		//! Get if the string is equivalent to a C-String (can be null)
+		bool operator == (const Char rhs[]) const;
+		//! Get if the string is equivalent to another string
+		template<int Chnk1>
+		bool operator == (const StringBase<Char,Chnk1>& rhs) const;
+
+		//! Get if the string is not equivalent to a C-String (can be null)
+		bool operator != (const Char rhs[]) const;
+
+		/*!
+		** \brief Get an iterator at a specific position
+		**
+		** \param indx The position
+		** \return A reference to the character
+		*/
+		Char& operator [] (const Size indx);
+		const Char& operator [] (const Size indx) const;
+
+		/*!
+		** \brief Get if the string is empty
+		**
+		** \code
+		** Yuni::String s; // here is an empty string
+		** if (!s)
+		**	// make some stuff here
+		** \endcode
+		*/
+		bool operator ! () const;
+		//@}
+
+
+	protected:
+		//! Length of the string
+		Size pSize;
+		//! The largest possible size of the string
+		Size pCapacity;
+		//! Pointer to the inner buffer
+		Char* pPtr;
+
+		// Some friends
+		template<class StrBase1, class T1> friend struct Private::StringImpl::Length;
+		template<class StrBase1, class T1> friend struct Private::StringImpl::HasChar;
+		template<class StrBase1, class T1> friend struct Private::StringImpl::CountChar;
+		template<class StrBase1, class T1> friend struct Private::StringImpl::Find;
+		template<class StrBase1, class T1> friend struct Private::StringImpl::Remove;
+		template<typename T1> friend struct Private::StringImpl::From;
+		template<typename T1> friend struct Private::StringImpl::To;
+
+	}; // class StringBase
+
+
 
 
 
@@ -666,8 +1246,82 @@ namespace Yuni
 } // namespace Yuni
 
 
-
-// Overload operators for template<class, class> class in the .hxx file
+// Specific implementation for string handling
+# include "string.private.hxx"
+// Standard conversions
+# include "string.converters.from.hxx"
+# include "string.converters.to.hxx"
+// Implementation
 # include "string.hxx"
+
+
+//! \name Operator overload for stream printing
+//@{
+
+template<typename C, int Chunk>
+inline std::ostream& operator << (std::ostream& out, const Yuni::StringBase<C,Chunk>& rhs)
+{
+	rhs.print(out);
+	return out;
+}
+
+template<typename C, int Chunk>
+inline bool operator == (const Yuni::StringBase<C,Chunk>& rhs, const C* u)
+{
+	return rhs == u;
+}
+
+template<typename C, int Chunk>
+inline bool operator == (const C* u, const Yuni::StringBase<C,Chunk>& rhs)
+{
+	return rhs == u;
+}
+
+template<typename C, int Chunk>
+inline const Yuni::String operator + (const char* u, const Yuni::StringBase<C,Chunk>& rhs)
+{
+	return Yuni::String(u) += rhs;
+}
+
+template<typename C, int Chunk>
+inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const char* u)
+{
+	return Yuni::String(rhs) += u;
+}
+
+template<typename C, int Chunk>
+inline const Yuni::String operator + (const wchar_t* u, const Yuni::StringBase<C,Chunk>& rhs)
+{
+	return Yuni::String(u) += rhs;
+}
+
+template<typename C, int Chunk>
+inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t* u)
+{
+	return Yuni::String(rhs) += u;
+}
+
+template<typename C, int Chunk, typename U>
+inline const Yuni::String operator + (const std::basic_string<U>& u, const Yuni::StringBase<C,Chunk>& rhs)
+{
+	return Yuni::String(u) += rhs;
+}
+
+template<typename C, int Chunk, typename U>
+inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const std::basic_string<U>& u)
+{
+	return Yuni::String(rhs) += u;
+}
+
+
+template<typename C1, int Chunk1, typename C2, int Chunk2>
+inline Yuni::String operator + (const Yuni::StringBase<C1,Chunk1>& rhs, const Yuni::StringBase<C2,Chunk2>& u)
+{
+	return Yuni::String(rhs) += u;
+}
+
+//@}
+
+
 
 #endif // __YUNI_TOOLBOX_STRING_STRING_H__

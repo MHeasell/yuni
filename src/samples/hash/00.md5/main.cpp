@@ -1,7 +1,7 @@
 
-#include <yuni/yuni.h>			   // The Yuni Global header
+#include <yuni/yuni.h>   // The Yuni Global header
 #include <yuni/toolbox/hash/checksum/md5.h>
-#include <iostream>				  // Only for std::cout
+#include <iostream>      // Only for std::cout
 
 // Our string to compute into a MD5
 #define STR_TO_MD5  "Hello world"
@@ -31,6 +31,6 @@ int main(void)
 
 	// Keep in mind the MD5 hash is stored and the method .value() only gets
 	// the stored value
-	
+
 	return 0;
 }
