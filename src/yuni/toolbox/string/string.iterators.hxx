@@ -17,6 +17,7 @@ public:
 	typedef Char  value_type;
 	typedef Char* pointer;
 	typedef Char& reference;
+	typedef const Char& const_reference;
 	typedef std::bidirectional_iterator_tag iterator_category;
 	typedef ptrdiff_t  difference_type;
 	typedef iterator IteratorType;
@@ -49,10 +50,10 @@ public:
 	}
 
 	reference operator * () {return *(pStr->pPtr + pIndx);}
-	const reference operator * () const {return *(pStr->pPtr + pIndx);}
+	const_reference operator * () const {return *(pStr->pPtr + pIndx);}
 
 	reference operator -> () {return *(pStr->pPtr + pIndx);}
-	const reference operator -> () const {return *(pStr->pPtr + pIndx);}
+	const_reference operator -> () const {return *(pStr->pPtr + pIndx);}
 
 	IteratorType operator -- (int)
 	{
@@ -187,9 +188,9 @@ public:
 		return *this;
 	}
 
-	const reference operator * () const {return *(pStr->pPtr + pIndx);}
+	const_reference operator * () const {return *(pStr->pPtr + pIndx);}
 
-	const reference operator -> () const {return *(pStr->pPtr + pIndx);}
+	const_reference operator -> () const {return *(pStr->pPtr + pIndx);}
 
 	IteratorType operator -- (int)
 	{
@@ -329,10 +330,10 @@ public:
 	}
 
 	reference operator * () {return *(pStr->pPtr + pIndx);}
-	const reference operator * () const {return *(pStr->pPtr + pIndx);}
+	const_reference operator * () const {return *(pStr->pPtr + pIndx);}
 
 	reference operator -> () {return *(pStr->pPtr + pIndx);}
-	const reference operator -> () const {return *(pStr->pPtr + pIndx);}
+	const_reference operator -> () const {return *(pStr->pPtr + pIndx);}
 
 	IteratorType operator -- (int)
 	{
@@ -463,9 +464,9 @@ public:
 		return *this;
 	}
 
-	const reference operator * () const {return *(pStr->pPtr + pIndx);}
+	const_reference operator * () const {return *(pStr->pPtr + pIndx);}
 
-	const reference operator -> () const {return *(pStr->pPtr + pIndx);}
+	const_reference operator -> () const {return *(pStr->pPtr + pIndx);}
 
 	IteratorType operator -- (int)
 	{

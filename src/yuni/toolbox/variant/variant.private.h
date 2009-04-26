@@ -47,6 +47,17 @@ namespace Variant
 		}
 	};
 
+	// Specialization to avoid warning from Visual Studio (C4800)
+	template <typename From>
+	struct Converter<From, bool>
+	{
+		static bool Value(const From& from, bool& to)
+		{
+			to = (From() != from);
+			return true;
+		}
+	};
+
 
 	/*!
 	** \brief Concrete DataConverter implementation

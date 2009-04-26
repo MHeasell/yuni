@@ -11,9 +11,18 @@
 #	include <stdint.h>
 # endif
 
+# ifdef YUNI_OS_MSVC
+#	define YUNI_MSVC_SECURE_VSPRINTF
+# endif
+
+
 
 namespace Yuni
 {
+
+# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
+	typedef int ssize_t;
+# endif
 
 # if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 #	define YUNI_TYPES_INT8_CHAR_ARE_IDENTICAL

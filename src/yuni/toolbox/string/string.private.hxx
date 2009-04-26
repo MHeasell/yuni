@@ -69,7 +69,6 @@ namespace StringImpl
 	};
 
 
-	template<>
 	template<int K1>
 	struct Impl<char,K1>
 	{
@@ -123,7 +122,7 @@ namespace StringImpl
 		static typename StrBase::Size Value(const T& t);
 	};
 
-	template<>
+
 	template<class StrBase1>
 	struct Length<StrBase1, char*>
 	{
@@ -133,7 +132,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1>
 	struct Length<StrBase1, wchar_t*>
 	{
@@ -143,7 +142,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1, class C1, int N>
 	struct Length<StrBase1, C1[N]>
 	{
@@ -154,7 +153,7 @@ namespace StringImpl
 	};
 
 
-	template<>
+
 	template<class StrBase1, class C1,int Chnk1>
 	struct Length<StrBase1, StringBase<C1,Chnk1> >
 	{
@@ -164,7 +163,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1, class C1,int Chnk1>
 	struct Length<StrBase1, StringBase<C1,Chnk1>* >
 	{
@@ -175,7 +174,7 @@ namespace StringImpl
 	};
 
 
-	template<>
+
 	template<class StrBase1, class C1>
 	struct Length<StrBase1, std::basic_string<C1> >
 	{
@@ -185,7 +184,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1, class C1>
 	struct Length<StrBase1, std::basic_string<C1>* >
 	{
@@ -196,7 +195,7 @@ namespace StringImpl
 	};
 
 
-	template<>
+
 	template<class StrBase1>
 	struct Length<StrBase1, char>
 	{
@@ -206,7 +205,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1>
 	struct Length<StrBase1, wchar_t>
 	{
@@ -228,7 +227,7 @@ namespace StringImpl
 	};
 
 
-	template<>
+
 	template<class StrBase1, typename C1>
 	struct CountChar<StrBase1, C1*>
 	{
@@ -248,7 +247,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1, class C1, int N>
 	struct CountChar<StrBase1, C1[N]>
 	{
@@ -265,7 +264,7 @@ namespace StringImpl
 	};
 
 
-	template<>
+
 	template<class StrBase1, class C1,int Chnk1>
 	struct CountChar<StrBase1, StringBase<C1,Chnk1> >
 	{
@@ -285,7 +284,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1, class C1,int Chnk1>
 	struct CountChar<StrBase1, StringBase<C1,Chnk1>* >
 	{
@@ -298,7 +297,7 @@ namespace StringImpl
 	};
 
 
-	template<>
+
 	template<class StrBase1, class C1>
 	struct CountChar<StrBase1, std::basic_string<C1> >
 	{
@@ -319,7 +318,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1, class C1>
 	struct CountChar<StrBase1, std::basic_string<C1>* >
 	{
@@ -332,7 +331,7 @@ namespace StringImpl
 	};
 
 
-	template<>
+
 	template<class StrBase1>
 	struct CountChar<StrBase1, char>
 	{
@@ -342,7 +341,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1>
 	struct CountChar<StrBase1, wchar_t>
 	{
@@ -366,7 +365,6 @@ namespace StringImpl
 	};
 
 
-	template<>
 	template<class StrBase1, typename C1>
 	struct HasChar<StrBase1, C1*>
 	{
@@ -384,7 +382,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1, class C1, int N>
 	struct HasChar<StrBase1, C1[N]>
 	{
@@ -400,7 +398,6 @@ namespace StringImpl
 	};
 
 
-	template<>
 	template<class StrBase1, class C1,int Chnk1>
 	struct HasChar<StrBase1, StringBase<C1,Chnk1> >
 	{
@@ -410,7 +407,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1, class C1,int Chnk1>
 	struct HasChar<StrBase1, StringBase<C1,Chnk1>* >
 	{
@@ -421,7 +418,7 @@ namespace StringImpl
 	};
 
 
-	template<>
+
 	template<class StrBase1, class C1>
 	struct HasChar<StrBase1, std::basic_string<C1> >
 	{
@@ -431,7 +428,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1, class C1>
 	struct HasChar<StrBase1, std::basic_string<C1>* >
 	{
@@ -443,7 +440,7 @@ namespace StringImpl
 
 
 
-	template<>
+
 	template<class StrBase1>
 	struct HasChar<StrBase1, char>
 	{
@@ -453,7 +450,7 @@ namespace StringImpl
 		}
 	};
 
-	template<>
+
 	template<class StrBase1>
 	struct HasChar<StrBase1, wchar_t>
 	{
@@ -476,7 +473,6 @@ namespace StringImpl
 		static typename StrBase::Size ReverseValue(const StrBase& str, const T& t, const typename StrBase::Size offset);
 	};
 
-	template<>
 	template<class StrBase1>
 	struct Find<StrBase1, char>
 	{
@@ -520,7 +516,7 @@ namespace StringImpl
 
 	};
 
-	template<>
+
 	template<class StrBase1>
 	struct Find<StrBase1, wchar_t>
 	{
@@ -564,7 +560,6 @@ namespace StringImpl
 
 	};
 
-	template<>
 	template<class StrBase1, typename W, int N>
 	struct Find<StrBase1, W[N]>
 	{
@@ -607,7 +602,6 @@ namespace StringImpl
 
 	};
 
-	template<>
 	template<class StrBase1, typename W>
 	struct Find<StrBase1, W*>
 	{
@@ -659,7 +653,6 @@ namespace StringImpl
 		}
 	};
 
-	template<>
 	template<class StrBase1, typename W>
 	struct Find<StrBase1, std::basic_string<W> >
 	{
@@ -678,7 +671,6 @@ namespace StringImpl
 
 	};
 
-	template<>
 	template<class StrBase1, typename W>
 	struct Find<StrBase1, std::basic_string<W>* >
 	{
@@ -698,7 +690,6 @@ namespace StringImpl
 	};
 
 
-	template<>
 	template<class StrBase1, typename W, int N>
 	struct Find<StrBase1, Yuni::StringBase<W,N> >
 	{
@@ -717,7 +708,6 @@ namespace StringImpl
 
 	};
 
-	template<>
 	template<class StrBase1, typename W, int N>
 	struct Find<StrBase1, Yuni::StringBase<W,N>* >
 	{
@@ -777,7 +767,6 @@ namespace StringImpl
 	};
 
 
-	template<>
 	template<class StrBase, typename W, int N>
 	struct Remove<StrBase, W[N]>
 	{
@@ -807,7 +796,6 @@ namespace StringImpl
 		}
 	};
 
-	template<>
 	template<class StrBase, typename W>
 	struct Remove<StrBase, std::basic_string<W> >
 	{
@@ -842,7 +830,6 @@ namespace StringImpl
 	};
 
 
-	template<>
 	template<class StrBase, typename W, int Chnk1>
 	struct Remove<StrBase, StringBase<W,Chnk1> >
 	{
@@ -877,7 +864,6 @@ namespace StringImpl
 	};
 
 
-	template<>
 	template<class StrBase, typename W>
 	struct Remove<StrBase, std::basic_string<W>* >
 	{
@@ -912,7 +898,7 @@ namespace StringImpl
 	};
 
 
-	template<>
+
 	template<class StrBase, typename W, int Chnk1>
 	struct Remove<StrBase, StringBase<W,Chnk1>* >
 	{
@@ -961,7 +947,7 @@ namespace StringImpl
 	vnsprintf<char>(char* buffer, size_t bufferSize, const char* format, va_list argptr)
 	{
 		# if defined YUNI_OS_MSVC
-		#	ifdef SECURE_VSPRINTF
+		#	ifdef YUNI_MSVC_SECURE_VSPRINTF
 			return _vsnprintf_s(buffer, bufferSize-1, _TRUNCATE, format, argptr);
 		#	else
 			return _vsnprintf(buffer, bufferSize-1, format, argptr);
@@ -977,7 +963,7 @@ namespace StringImpl
 	vnsprintf<wchar_t>(wchar_t* buffer, size_t bufferSize, const wchar_t* format, va_list argptr)
 	{
 		# if defined YUNI_OS_MSVC
-		#	ifdef SECURE_VSPRINTF
+		#	ifdef YUNI_MSVC_SECURE_VSPRINTF
 			return _vsnwprintf_s(buffer, bufferSize-1, _TRUNCATE, format, argptr);
 		#	else
 			return _vsnwprintf(buffer, bufferSize-1, format, argptr);

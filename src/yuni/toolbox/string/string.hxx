@@ -201,7 +201,7 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::notEmpty() const
 	{
-		return pSize;
+		return (0 != pSize);
 	}
 
 	template<typename C, int Chunk>
@@ -1120,7 +1120,6 @@ namespace Yuni
 					case 'n'  : pPtr[retPos] = '\n'; break;
 					case '\\' : pPtr[retPos] = '\\'; break;
 					case ';'  : pPtr[retPos] = ';'; break;
-					case 'e'  : pPtr[retPos] = '\e'; break;
 					case 'a'  : pPtr[retPos] = '\a'; break;
 					case 'f'  : pPtr[retPos] = '\f'; break;
 					case 't'  : pPtr[retPos] = '\t'; break;
@@ -1144,12 +1143,12 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
-	uint32_t
+	uint32
 	StringBase<C,Chunk>::hashValue() const
 	{
 		if (pSize)
 		{
-			uint32_t hash(0);
+			uint32 hash(0);
 			for (typename StringBase<C,Chunk>::Size i = 0; i != pSize; ++i)
 				hash = (hash << 5) - hash + *(pPtr + i);
 			return hash;
