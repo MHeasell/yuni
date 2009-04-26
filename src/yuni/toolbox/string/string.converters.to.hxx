@@ -81,7 +81,11 @@ namespace StringImpl
 						if (s.pSize > 4)
 							return false;
 						char buffer[5] = {0,0,0,0,0};
+						# ifdef YUNI_OS_MSVC
+						strncpy_s(buffer, 5, s.pPtr, Private::StringImpl::Min((typename StringBase<C,Chnk>::Size)4, s.pSize));
+						# else
 						strncpy(buffer, s.pPtr, Private::StringImpl::Min((typename StringBase<C,Chnk>::Size)4, s.pSize));
+						# endif
 						buffer[0] = (C) tolower(buffer[0]);
 						buffer[1] = (C) tolower(buffer[1]);
 						buffer[2] = (C) tolower(buffer[2]);
@@ -235,7 +239,12 @@ namespace StringImpl
 		static inline float Value(const StringBase<C,Chnk>& s)
 		{
 			char* pend;
+			# ifdef YUNI_OS_MSVC
+			// Visual Studio does not support strtof
+			return (float)strtod(s.pPtr, &pend);
+			# else
 			return (float)strtof(s.pPtr, &pend);
+			# endif
 		}
 
 		template<typename C, int Chnk>

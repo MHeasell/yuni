@@ -458,6 +458,11 @@ namespace StringImpl
 
 
 
+# ifdef YUNI_OS_MSVC
+#	define YUNI_PRIVATE_SPTRINF(BUFFER,SIZE, F, V)  sprintf_s(BUFFER,SIZE,F,V)
+# else
+#	define YUNI_PRIVATE_SPTRINF(BUFFER,SIZE, F, V)  sprintf(BUFFER,F,V)
+# endif
 
 
 # define YUNI_PRIVATE_STRING_IMPL(BUFSIZE, FORMAT, TYPE) \
@@ -468,7 +473,7 @@ namespace StringImpl
 		static inline void Append(StringBase<C,Chnk>& s, const TYPE v) \
 		{ \
 			char buffer[BUFSIZE]; \
-			sprintf(buffer, FORMAT, v); \
+			YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
 			if (0 != buffer[0]) \
 				From<char*>::AppendRaw(s, buffer, strlen(buffer)); \
 		} \
@@ -477,7 +482,7 @@ namespace StringImpl
 		static inline void Append(StringBase<C,Chnk>& s, const TYPE v, const typename StringBase<C,Chnk>::Size len) \
 		{ \
 			char buffer[BUFSIZE]; \
-			sprintf(buffer, FORMAT, v); \
+			YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
 			if (0 != buffer[0]) \
 				From<char*>::AppendRaw(s, buffer, Private::StringImpl::Min(strlen(buffer), len)); \
 		} \
@@ -486,7 +491,7 @@ namespace StringImpl
 		static inline void Insert(StringBase<C,Chnk>& s, const TYPE v, const typename StringBase<C,Chnk>::Size offset) \
 		{ \
 			char buffer[BUFSIZE]; \
-			sprintf(buffer, FORMAT, v); \
+			YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
 			if (0 != buffer[0]) \
 				From<char*>::InsertRaw(s, buffer, strlen(buffer), offset); \
 		} \
@@ -496,7 +501,7 @@ namespace StringImpl
 			const typename StringBase<C,Chnk>::Size offset) \
 		{ \
 			char buffer[BUFSIZE]; \
-			sprintf(buffer, FORMAT, v); \
+			YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
 			if (0 != buffer[0]) \
 				From<char*>::AppendRaw(s, buffer, Private::StringImpl::Min(len, strlen(buffer)), offset); \
 		} \

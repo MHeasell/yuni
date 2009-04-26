@@ -19,22 +19,34 @@ namespace Remove
 	template <typename T> struct Reference { typedef T Type; };
 	template <typename T> struct Reference<T&> { typedef T Type; };
 	template <typename T> struct Reference<T*> { typedef T Type; };
+	template <typename T, int N> struct Reference<T[N]> { typedef T Type; };
 	template <typename T> struct Reference<const T*> { typedef const T Type; };
+	template <typename T, int N> struct Reference<const T[N]> { typedef const T Type; };
 	template <typename T> struct Reference<const T&> { typedef const T Type; };
 
 	template <typename T> struct RefOnly { typedef T Type; };
 	template <typename T> struct RefOnly<T&> { typedef T Type; };
+	template <typename T> struct RefOnly<const T&> { typedef const T Type; };
+	template <typename T> struct RefOnly<T*> { typedef T* Type; };
+	template <typename T> struct RefOnly<const T*> { typedef T* Type; };
 	template <typename T> struct PntOnly { typedef T Type; };
 	template <typename T> struct PntOnly<T*> { typedef T Type; };
+	template <typename T> struct PntOnly<const T*> { typedef const T Type; };
+	template <typename T> struct PntOnly<T&> { typedef T& Type; };
+	template <typename T> struct PntOnly<const T&> { typedef const T& Type; };
 	//@}
 
 	//! \name Const
 	//@{
 	//! Remove the "Const" part of a type
 	template <typename T> struct Const { typedef T Type; };
+	template <typename T> struct Const<T*> { typedef T* Type; };
+	template <typename T> struct Const<T&> { typedef T& Type; };
+	template <typename T, int N> struct Const<T[N]> { typedef T Type[N]; };
 	template <typename T> struct Const<const T>  { typedef T Type; };
 	template <typename T> struct Const<const T*> { typedef T* Type; };
 	template <typename T> struct Const<const T&> { typedef T& Type; };
+	template <typename T, int N> struct Const<const T[N]> { typedef T Type[N]; };
 	//@}
 
 	template <typename T> struct All

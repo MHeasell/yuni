@@ -1070,7 +1070,7 @@ namespace Yuni
 		/*!
 		** \brief Get the hash value of this string
 		*/
-		uint32_t hashValue() const;
+		uint32 hashValue() const;
 
 		/*!
 		** \brief Print the content of the string to an ostream
