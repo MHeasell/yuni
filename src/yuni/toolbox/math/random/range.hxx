@@ -64,7 +64,7 @@ namespace Random
 		{
 			static inline const float Next(D& d)
 			{
-				return float(d.next()) / ((float(d.max()) + 1.) / float(HiValue - LoValue)) + float(LoValue);
+				return float(float(d.next()) / ((float(d.max()) + 1.) / float(HiValue - LoValue)) + float(LoValue));
 			}
 		};
 
