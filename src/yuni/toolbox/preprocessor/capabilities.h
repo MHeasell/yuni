@@ -215,7 +215,11 @@
 # ifdef YUNI_OS_GCC
 #	define ALWAYS_INLINE  __attribute__((always_inline))
 # else
-#	define ALWAYS_INLINE
+#	ifdef YUNI_OS_MSVC
+#		define ALWAYS_INLINE  __forceinline
+#	else
+#		define ALWAYS_INLINE
+# 	endif
 # endif
 
 
@@ -225,6 +229,8 @@
 # else
 #	define YUNI_DEPRECATED
 # endif /* __GNUC__ */
+
+
 
 
 #endif /* __YUNI_PREPROCESSOR_OS_DETECTION_H__ */

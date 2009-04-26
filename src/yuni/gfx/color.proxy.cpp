@@ -309,19 +309,19 @@ namespace Proxy
 	template<> \
 	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3, const T& a4) \
 	{ \
-		th.red   = (O) Math::Max< T >(a1, 255) / 255.0f; \
-		th.green = (O) Math::Max< T >(a2, 255) / 255.0f; \
-		th.blue  = (O) Math::Max< T >(a3, 255) / 255.0f; \
-		th.alpha = (O) Math::Max< T >(a4, 255) / 255.0f; \
+		th.red   = (O) Math::Max< T >(a1, (T)255) / 255.0f; \
+		th.green = (O) Math::Max< T >(a2, (T)255) / 255.0f; \
+		th.blue  = (O) Math::Max< T >(a3, (T)255) / 255.0f; \
+		th.alpha = (O) Math::Max< T >(a4, (T)255) / 255.0f; \
 		return th; \
 	} \
 	\
 	template<> \
 	Yuni::Gfx::Color::RGBA< O >& Values< Yuni::Gfx::Color::RGBA< O >, T >::Assign(Yuni::Gfx::Color::RGBA< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
-		th.red   = (O) Math::Max< T >(a1, 255) / 255.0f; \
-		th.green = (O) Math::Max< T >(a2, 255) / 255.0f; \
-		th.blue  = (O) Math::Max< T >(a3, 255) / 255.0f; \
+		th.red   = (O) Math::Max< T >(a1, (T)255) / 255.0f; \
+		th.green = (O) Math::Max< T >(a2, (T)255) / 255.0f; \
+		th.blue  = (O) Math::Max< T >(a3, (T)255) / 255.0f; \
 		th.alpha = 1.0f; \
 		return th; \
 	} \
@@ -329,18 +329,18 @@ namespace Proxy
 	template<> \
 	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3, const T& /*a4*/) \
 	{ \
-		th.red   = (O) Math::Max< T >(a1, 255) / 255.0f; \
-		th.green = (O) Math::Max< T >(a2, 255) / 255.0f; \
-		th.blue  = (O) Math::Max< T >(a3, 255) / 255.0f; \
+		th.red   = (O) Math::Max< T >(a1, (T)255) / 255.0f; \
+		th.green = (O) Math::Max< T >(a2, (T)255) / 255.0f; \
+		th.blue  = (O) Math::Max< T >(a3, (T)255) / 255.0f; \
 		return th; \
 	} \
 	\
 	template<> \
 	Yuni::Gfx::Color::RGB< O >& Values< Yuni::Gfx::Color::RGB< O >, T >::Assign(Yuni::Gfx::Color::RGB< O >& th, const T& a1, const T& a2, const T& a3) \
 	{ \
-		th.red   = (O) Math::Max< T >(a1, 255) / 255.0f; \
-		th.green = (O) Math::Max< T >(a2, 255) / 255.0f; \
-		th.blue  = (O) Math::Max< T >(a3, 255) / 255.0f; \
+		th.red   = (O) Math::Max< T >(a1, (T)255) / 255.0f; \
+		th.green = (O) Math::Max< T >(a2, (T)255) / 255.0f; \
+		th.blue  = (O) Math::Max< T >(a3, (T)255) / 255.0f; \
 		return th; \
 	}
 
