@@ -126,7 +126,21 @@ Set(SRC_TOOLBOX_URI
 source_group(ToolBox\\Event FILES ${SRC_TOOLBOX_EVENT})
 
 
-Set(SRC_TOOLBOX_MATH	toolbox/math/math.h  toolbox/math.h)
+Set(SRC_TOOLBOX_MATH
+				# Standard functions
+				toolbox/math/math.h 	toolbox/math.h
+				# Log(N)
+				toolbox/math/log.h toolbox/math/log.hxx
+				# Trigonometric functions
+				toolbox/math/trigonometric.h toolbox/math/trigonometric.hxx
+				# Exponential functions
+				toolbox/math/exponential.h toolbox/math/exponential.hxx
+				# Random number generators
+				toolbox/math/random/distribution.h  toolbox/math/random/distribution.hxx
+				toolbox/math/random/default.h  toolbox/math/random/default.hxx
+				toolbox/math/random/range.h  toolbox/math/random/range.hxx
+				toolbox/math/random/constant.h
+)
 source_group(ToolBox\\Math FILES ${SRC_TOOLBOX_MATH})
 
 Set(SRC_TOOLBOX_FS

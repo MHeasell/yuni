@@ -35,7 +35,6 @@ namespace Gfx
 	public:
 		//! \name Constructors
 		//@{
-
 		//! Default constructor
 		Point3D() : x(0), y(0), z(0) {}
 
@@ -59,8 +58,8 @@ namespace Gfx
 		//! Constructor by copy
 		template<typename U>
 		Point3D(const Point3D<U>& p) : x((T)p.x), y((T)p.y), z((T)p.z) {}
-
 		//@} // Constructors
+
 
 		//! Reset the point to origin
 		Point3D<T>& reset() {x = y = z = T(); return *this;}
@@ -221,6 +220,17 @@ namespace Gfx
 		*/
 		template<typename U> bool operator != (const Point3D<U>& rhs) const
 		{ return !(*this == rhs); }
+
+		/*!
+		** \brief Assign new values for all coordinates from another point
+		**
+		** \param p The new coordinates
+		** \return Always *this
+		**
+		** \see move()
+		*/
+		template<typename U>
+		Point3D& operator = (const Point3D& p) { x = p.x; y = p.y; z = p.z; return (*this); }
 
 		/*!
 		** \brief Assign new values for all coordinates from another point
