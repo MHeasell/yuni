@@ -395,7 +395,7 @@ namespace Yuni
 	StringBase<C,Chunk>::assign(const StringBase<C,Chnk1>& s, const Size offset, const Size len)
 	{
 		if (offset < s.pSize && len)
-			assign(s.pPtr + offset, Private::StringImpl::Min(len, pSize - offset));
+			assign(s.pPtr + offset, Private::StringImpl::Min(len, s.pSize - offset));
 		else
 			clear();
 	}
@@ -645,7 +645,13 @@ namespace Yuni
 		return (rhs ? !Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize) : (pSize));
 	}
 
-
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	inline bool
+	StringBase<C,Chunk>::operator != (const StringBase<C,Chnk1>& rhs) const
+	{
+		return !StringBase<C,Chunk>::Equals(*this, rhs);
+	}
 
 
 	template<typename C, int Chunk>
@@ -1234,7 +1240,7 @@ namespace Yuni
 		if (chcase == soIgnoreCase)
 			key.toLower();
 
-		// Looking for the first interresting char
+		// Looking for the first interesting char
 		unsigned int leftValue(equal + 1);
 		while (leftValue != pSize && HasChar(pPtr[leftValue], YUNI_STRING_SEPARATORS))
 			++leftValue;

@@ -189,6 +189,25 @@ namespace StringImpl
 
 	}; // sint32
 
+	template<>
+	struct To<sint64>
+	{
+		template<typename C, int Chnk>
+		static inline sint64 Value(const StringBase<C,Chnk>& s)
+		{
+			char* pend;
+			return (sint64)strtol(s.pPtr, &pend, 10);
+		}
+
+		template<typename C, int Chnk>
+		static inline bool Value(const StringBase<C,Chnk>& s, sint64& v)
+		{
+			char* pend;
+			v = (sint64)strtol(s.pPtr, &pend, 10);
+			return (NULL != pend && '\0' == *pend);
+		}
+
+	}; // sint64
 
 
 	template<>
@@ -230,7 +249,27 @@ namespace StringImpl
 			return (NULL != pend && '\0' == *pend);
 		}
 
-	}; // uint16
+	}; // uint32
+
+	template<>
+	struct To<uint64>
+	{
+		template<typename C, int Chnk>
+		static inline uint64 Value(const StringBase<C,Chnk>& s)
+		{
+			char* pend;
+			return (uint64)strtoul(s.pPtr, &pend, 10);
+		}
+
+		template<typename C, int Chnk>
+		static inline bool Value(const StringBase<C,Chnk>& s, uint64& v)
+		{
+			char* pend;
+			v = (uint64)strtoul(s.pPtr, &pend, 10);
+			return (NULL != pend && '\0' == *pend);
+		}
+
+	}; // uint64
 
 	template<>
 	struct To<float>

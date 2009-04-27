@@ -1195,6 +1195,9 @@ namespace Yuni
 
 		//! Get if the string is not equivalent to a C-String (can be null)
 		bool operator != (const Char rhs[]) const;
+		//! Get if the string is not equivalent to another string
+		template<int Chnk1>
+		bool operator != (const StringBase<Char,Chnk1>& rhs) const;
 
 		/*!
 		** \brief Get an iterator at a specific position
