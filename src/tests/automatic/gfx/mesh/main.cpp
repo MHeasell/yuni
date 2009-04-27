@@ -1,7 +1,6 @@
 
 #include <iostream>
 #include <yuni/yuni.h>
-#include <yuni/misc/sharedptr.h>
 #include <yuni/gfx/mesh.h>
 
 /*!
