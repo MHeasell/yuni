@@ -19,7 +19,7 @@ namespace
 
 int main()
 {
-	
+
 	// Create a Lua script object, to execute a small script.
 	Yuni::Script::AScript* sc = new Yuni::Script::Lua();
 
@@ -61,7 +61,7 @@ int main()
 	{
 		std::cout << "[EE] Error while calling callMeOnly()" << std::endl;
 	}
-	
+
 	// Then call a function with one argument, for example an Int.
 	if (!sc->call(&ret, "callMeWithArg", 42, 15.2))
 		std::cout << "[EE] Error while calling callMeWithArg(42, 15.2)" << std::endl;

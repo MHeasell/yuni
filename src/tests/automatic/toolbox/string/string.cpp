@@ -1,11 +1,10 @@
 
-#include "../misc/string.h"
-#include "../logs/logs.h"
+#include <iostream>
+#include <yuni/yuni.h>
+#include <yuni/toolbox/string/string.h>
 
 
-namespace TA3D
-{
-namespace
+namespace Yuni
 {
 
 	template<typename T>
@@ -13,9 +12,24 @@ namespace
 	{
 		if (t != expected)
 		{
-			LOG_ERROR("* String convertion failed !");
-			LOG_ERROR("	 From `String` to `" << section << "`");
-			LOG_ERROR("	 Expected: `" << expected << "`, got `" << t << "`");
+			std::cerr << "* String conversion failed !" << std::endl
+					  << "	 From `String` to `" << section << "`" << std::endl
+					  << "	 Expected: `" << expected << "`, got `"
+					  << t << "`" << std::endl;
+			return 1;
+		}
+		return 0;
+	}
+
+	template<typename T>
+	int stringCheck(const String& method, const T found, const T expected)
+	{
+		if (found != expected)
+		{
+			std::cerr << "* String conversion failed !" << std::endl
+					  << "	 While checking String::" << method << std::endl
+					  << "	 Expected: `" << expected << "`, got `"
+					  << found << "`" << std::endl;
 			return 1;
 		}
 		return 0;
@@ -25,13 +39,13 @@ namespace
 	{
 		String k;
 		String v;
-		TA3D::String::ToKeyValue(t, k, v);
+		String::ExtractKeyValue(t, k, v);
 		if (k != expectedKey || v != expectedValue)
 		{
-			LOG_ERROR("* String Check failed !");
-			LOG_ERROR("	 On `" << t << "`");
-			LOG_ERROR("	 Expectd: key=`" << expectedKey << "`,  value=`" << expectedValue << "`");
-			LOG_ERROR("	 Found: key=`" << k << "`,  value=`" << v << "`");
+			std::cerr << "* String Check failed !" << std::endl
+					  << "	 On `" << t << "`" << std::endl
+					  << "	 Expected: key=`" << expectedKey << "`,  value=`" << expectedValue << "`" << std::endl
+					  << "	 Found: key=`" << k << "`,  value=`" << v << "`" << std::endl;
 			return 1;
 		}
 		return 0;
@@ -40,12 +54,18 @@ namespace
 
 	int autoTest()
 	{
-		LOG_INFO("* SelfTest: Strings...");
+		std::cout << "* SelfTest: Strings..." << std::endl;
 		int ret = 0;
-		ret += stringConvert("int32", String(10).toInt32(), 10);
-		ret += stringConvert("uint32", String(uint32(-1)).toUInt32(), uint32(-1));
-		ret += stringConvert("int64", String(sint64(33554432 * 30)).toInt64(), sint64(33554432 * 30));
-		ret += stringConvert("hexa", String("0xFF").toInt32(), (sint32)255);
+		ret += stringConvert("int32", String(10).to<sint32>(), 10);
+		ret += stringConvert("uint32", String(uint32(-1)).to<uint32>(), uint32(-1));
+		ret += stringConvert("int64", String(sint64(33554432 * 30)).to<sint64>(), sint64(33554432 * 30));
+		ret += stringConvert("hexa", String("0xFF").to<sint32>(), (sint32)255);
+		ret += stringConvert("int16", String(12).to<sint16>(), sint16(12));
+		ret += stringConvert("uint16", String("65536").to<uint16>(), uint16(0));
+		ret += stringCheck("Append", String("") + "yop\t", String("yop\t"));
+		ret += stringCheck("Append", String("abcdefg") + "", String("abcdefg"));
+		ret += stringCheck("Append", String("abcd", 2) + "sence", String("absence"));
+		//ret += stringCheck("Append", StringBase<char, 1>(StringBase<char, 1>("voit:") + ":ure"), StringBase<char, 1>("voit::ure")); // Does not compile. Shouldn't it?
 		ret += stringCheckKV("a=b;", "a", "b");
 		ret += stringCheckKV(" a=b;", "a", "b");
 		ret += stringCheckKV("a= b;", "a", "b");
@@ -82,18 +102,17 @@ namespace
 		ret += stringCheckKV(" a = semicolon\\; test", "a", "semicolon; test");
 		ret += stringCheckKV(" a = semicolon \\;test", "a", "semicolon ;test");
 		ret += stringCheckKV(" a = semicolon \\;  test", "a", "semicolon ;  test");
+		if (ret > 0)
+			std::cerr << ret << " tests failed." << std::endl;
 		return ret;
 	}
 
 } // unnamed namespace
-} // namespace TA3D
-
 
 
 
 int main(void)
 {
-	return (TA3D::autoTest() ? 1 : 0);
+	return Yuni::autoTest() ? 1 : 0;
 }
-
 
