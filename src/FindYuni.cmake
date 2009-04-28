@@ -8,8 +8,12 @@
 
 LIST(APPEND YUNI_INCLUDE "${PROJECT_SOURCE_DIR}/..")
 
-
-Set(YUNI_STATIC_CORE   yuni-static-core)
+IF(NOT YUNI_STATIC_CORE)
+	Set(YUNI_STATIC_CORE yuni-static-core)
+ELSE(NOT YUNI_STATIC_CORE)
+	LIST(INSERT YUNI_STATIC_CORE 0 yuni-static-core)
+ENDIF(NOT YUNI_STATIC_CORE)
+Message(STATUS "${YUNI_STATIC_CORE}")
 Set(YUNI_STATIC_GFX3D  yuni-static-gfx3d)
 Set(YUNI_STATIC_SCRIPT yuni-static-script)
 Set(YUNI_STATIC_NET    yuni-static-net)

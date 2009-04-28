@@ -170,7 +170,7 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 	# File for informations about the pack
 	SET(DevPackFileInfo "${DevPackFolder}/${DevPackPrefix}-${DevPackShortFilename}")
 	SET(DevPackURL "${DevPackSourceURL}/${DevPackShortFilename}.zip")
-		
+
 	# Title for this pack
 	SET(DevPackTitle "DevPack: ${dpname} (${dpversion}-r${dprelease}, ${dpos}, ${dparch}, ${dpcompiler}, ${dptarget})")
 	# Is this pack already available
@@ -208,7 +208,7 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 					-d "${DevPackFolder}"
 					WORKING_DIRECTORY "${DevPackFolder}" OUTPUT_QUIET)
 		EndIF(DevPackReceiptReady)
-		
+
 		DEVPACK_IS_INSTALLED(DevPackReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}" "${dparch}"
 			"${dpcompiler}" "${dptarget}")
 
