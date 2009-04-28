@@ -23,7 +23,7 @@ namespace Gfx
 
 	void ObjectManager::registerObject(const SmartPtr<Object3D>& obj)
 	{
-		pObjects[obj->name()] = obj;
+		pObjects[obj->id()] = obj;
 	}
 
 

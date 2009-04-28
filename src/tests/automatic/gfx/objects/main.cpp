@@ -1,10 +1,12 @@
 
 #include <yuni/yuni.h>
+#include <yuni/toolbox/smartptr/smartptr.h>
 #include <yuni/gfx/object3D.h>
 
-using Namespace Yuni;
+using namespace Yuni;
+using namespace Yuni::Gfx;
 
-class Car: public Gfx::Object3D
+class Car: public Object3D
 {
 public:
 	Car(const String& name, const SmartPtr<ObjectModel>& model)
@@ -15,8 +17,8 @@ public:
 int main(void)
 {
 	SmartPtr<Mesh> mesh(new Mesh());
-	Skeleton* skeleton = new Skeleton(mesh, Vector3D<float>(); Vector3D<float>());
-	ObjectModel *model = new (SmartPtr<Skeleton>(skeleton));
+	Skeleton* skeleton = new Skeleton(mesh, Vector3D<float>(), Vector3D<float>());
+	ObjectModel *model = new ObjectModel(SmartPtr<Skeleton>(skeleton));
 	Car c("Titine", SmartPtr<ObjectModel>(model));
 	return 0;
 }
