@@ -1,7 +1,7 @@
 #ifndef __YUNI_TOOLBOX_TREE_N_HXX__
 # define __YUNI_TOOLBOX_TREE_N_HXX__
 
-
+# include <iostream>
 
 namespace Yuni
 {

@@ -20,7 +20,7 @@ namespace Gfx
 	class ObjectManager
 	{
 	public:
-		typedef Hash::Table< uint64, SmartPtr<Object3D> > Objects;
+	  typedef Hash::Table< Yuni::String, SmartPtr<Object3D> > Objects;
 
 	public:
 
@@ -40,7 +40,7 @@ namespace Gfx
 		**
 		** \param obj The object to register
 		*/
-		void registerObject(SmartPtr<Object3D>& obj);
+		void registerObject(const SmartPtr<Object3D>& obj);
 
 		//@}
 

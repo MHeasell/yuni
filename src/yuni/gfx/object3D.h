@@ -1,10 +1,12 @@
 #ifndef __YUNI_GFX_OBJECT3D_H__
 # define __YUNI_GFX_OBJECT3D_H__
 
+# include "../toolbox/string/string.h"
 # include "../toolbox/smartptr/smartptr.h"
 # include "../toolbox/tree/treeN.h"
 # include "skeleton.h"
-
+# include "objectmanager.h"
+# include "objectmodel.h"
 
 
 namespace Yuni
@@ -17,6 +19,7 @@ namespace Gfx
 	**
 	** It can contain other objects, and has a skeleton for its mesh
 	** It also has a shared "template" object storing every characteristic common with similar objects
+	** 3D Objects should not be deleted by hand, they will be deleted by the objectmanager.
 	*/
 	class Object3D: public Toolbox::TreeN<Object3D>
 	{
@@ -25,15 +28,26 @@ namespace Gfx
 		//@{
 
 		//! Default Constructor
-		Object3D() : pID(0) {}
+		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model)
+			: pName(name), pModel(model), pSkeleton(NULL)
+		{
+			ObjectManager::Instance()->registerObject(SmartPtr<Object3D>(this));
+		}
 
 		//! Constructor with mesh initialization
-		Object3D(SmartPtr<Skeleton>& skeleton)
-			: pID(0), pSkeleton(skeleton)
-		{}
+		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model, Skeleton* skeleton)
+			: pName(name), pModel(model), pSkeleton(skeleton)
+		{
+			ObjectManager::Instance()->registerObject(SmartPtr<Object3D>(this));
+		}
 
 		//! Default Destructor
-		~Object3D() {}
+		~Object3D()
+		{
+			if (pSkeleton)
+				delete pSkeleton;
+		}
+
 		//@}
 
 
@@ -45,32 +59,36 @@ namespace Gfx
 		**
 		** \return A smart pointer to the object's skeleton, can point to NULL
 		*/
-		const SmartPtr<Skeleton>& skeleton() {return pSkeleton;}
+		const Skeleton* skeleton() {return pSkeleton;}
 
 		/*!
 		** \brief Set the skeleton to use for this object
 		**
 		** \param newSkeleton Skeleton to use
 		*/
-		void setSkeleton(const SmartPtr<Skeleton>& newSkeleton)
+		void setSkeleton(Skeleton* newSkeleton)
 		{
-			// No freeing of the old skeleton is necessary here
-			// Smart pointers should do that for us
+			if (pSkeleton)
+				delete pSkeleton;
 			pSkeleton = newSkeleton;
 		}
 
-		//! Get the id
-		uint32 id() const {return pID;}
+		//! Get the name of the object
+		const Yuni::String& name() const {return pName;}
 
 		//@}
 
 	protected:
-		//! Unique identifier for this object (type can still change)
-		uint32 pID;
-		//! The Skeleton for this object (contains the mesh)
-		SmartPtr<Skeleton> pSkeleton;
+		//! Name of the object
+		Yuni::String pName;
 
-	}; // class Object3D
+		//! The object must use a model (template) for its skeleton / textures
+		SmartPtr<ObjectModel> pModel;
+
+		//! Optional skeleton, overrides the model!
+		Skeleton* pSkeleton;
+
+	}; // Object3D
 
 
 
