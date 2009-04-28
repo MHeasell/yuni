@@ -5,6 +5,7 @@
 # include "../toolbox/smartptr/smartptr.h"
 # include "../toolbox/tree/treeN.h"
 # include "skeleton.h"
+# include "objectmodel.h"
 # include "objectmanager.h"
 # include "objectmodel.h"
 
@@ -19,7 +20,7 @@ namespace Gfx
 	**
 	** It can contain other objects, and has a skeleton for its mesh
 	** It also has a shared "template" object storing every characteristic common with similar objects
-	** 3D Objects should not be deleted by hand, they will be deleted by the objectmanager.
+	** Object3D objects must not be deleted, they are destroyed by the objectmanager.
 	*/
 	class Object3D: public Toolbox::TreeN<Object3D>
 	{
@@ -29,14 +30,14 @@ namespace Gfx
 
 		//! Default Constructor
 		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model)
-			: pName(name), pModel(model), pSkeleton(NULL)
+			: pID(0), pName(name), pModel(model), pSkeleton(NULL)
 		{
 			ObjectManager::Instance()->registerObject(SmartPtr<Object3D>(this));
 		}
 
 		//! Constructor with mesh initialization
 		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model, Skeleton* skeleton)
-			: pName(name), pModel(model), pSkeleton(skeleton)
+			: pID(0), pName(name), pModel(model), pSkeleton(skeleton)
 		{
 			ObjectManager::Instance()->registerObject(SmartPtr<Object3D>(this));
 		}
@@ -74,11 +75,14 @@ namespace Gfx
 		}
 
 		//! Get the name of the object
-		const Yuni::String& name() const {return pName;}
+		const uint32 id() const {return pID;}
 
 		//@}
 
 	protected:
+		//! Unique identifier for this object (type can still change)
+		uint32 pID;
+
 		//! Name of the object
 		Yuni::String pName;
 
