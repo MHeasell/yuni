@@ -21,9 +21,9 @@ namespace Gfx
 	}
 
 
-	void ObjectManager::registerObject(SmartPtr<Object3D>& obj)
+	void ObjectManager::registerObject(const SmartPtr<Object3D>& obj)
 	{
-		// pObjects[obj->id()] = obj;
+		pObjects[obj->name()] = obj;
 	}
 
 

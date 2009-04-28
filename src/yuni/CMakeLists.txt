@@ -234,7 +234,7 @@ source_group(Application FILES ${SRC_APPLICATION_GFX})
 Set(SRC_GFX
 		gfx/device.h gfx/device.cpp
 		gfx/vertex.h gfx/triangle.h gfx/edge.h
-		gfx/object3D.h gfx/objectmanager.h gfx/objectmanager.cpp
+		gfx/object3D.h gfx/objectmanager.h gfx/objectmanager.cpp gfx/objectmodel.h
 		gfx/skeleton.h gfx/mesh.h gfx/mesh.cpp gfx/mesh.proxy.h
 		gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
 		gfx/metaobject.h gfx/metaball.h  gfx/metaball.cpp  gfx/metabox.h
