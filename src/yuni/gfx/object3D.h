@@ -25,19 +25,23 @@ namespace Gfx
 	class Object3D: public Toolbox::TreeN<Object3D>
 	{
 	public:
+		//! Static ID counter (naive version, never reuses old IDs)
+		static uint64 sNextID;
+
+	public:
 		//! \name Constructors & Destructor
 		//@{
 
 		//! Default Constructor
 		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model)
-			: pID(0), pName(name), pModel(model), pSkeleton(NULL)
+			: pID(sNextID++), pName(name), pModel(model), pSkeleton(NULL)
 		{
 			ObjectManager::Instance()->registerObject(SmartPtr<Object3D>(this));
 		}
 
 		//! Constructor with mesh initialization
 		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model, Skeleton* skeleton)
-			: pID(0), pName(name), pModel(model), pSkeleton(skeleton)
+			: pID(sNextID++), pName(name), pModel(model), pSkeleton(skeleton)
 		{
 			ObjectManager::Instance()->registerObject(SmartPtr<Object3D>(this));
 		}
@@ -75,13 +79,13 @@ namespace Gfx
 		}
 
 		//! Get the name of the object
-		const uint32 id() const {return pID;}
+		const uint64 id() const {return pID;}
 
 		//@}
 
 	protected:
 		//! Unique identifier for this object (type can still change)
-		uint32 pID;
+		uint64 pID;
 
 		//! Name of the object
 		Yuni::String pName;
@@ -93,8 +97,6 @@ namespace Gfx
 		Skeleton* pSkeleton;
 
 	}; // Object3D
-
-
 
 
 } // namespace Gfx

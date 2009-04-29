@@ -1,3 +1,3 @@
 
+ADD_SUBDIRECTORY(objects)
 ADD_SUBDIRECTORY(points)
-

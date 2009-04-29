@@ -20,7 +20,7 @@ namespace Gfx
 	class ObjectManager
 	{
 	public:
-	  typedef Hash::Table< Yuni::String, SmartPtr<Object3D> > Objects;
+	  typedef Hash::Table< uint64, SmartPtr<Object3D> > Objects;
 
 	public:
 
@@ -34,6 +34,16 @@ namespace Gfx
 
 		//! \name Instance methods
 		//@{
+
+		/*!
+		** \brief Destructor
+		**
+		** This destructor must not forget to clear the objects table
+		*/
+		~ObjectManager()
+		{
+			pObjects.clear();
+		}
 
 		/*!
 		** \brief Register a 3D object with the manager
