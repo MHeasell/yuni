@@ -6,7 +6,7 @@
 # include "../toolbox/tree/treeN.h"
 # include "skeleton.h"
 # include "objectmodel.h"
-# include "objectmanager.h"
+# include "scene.h"
 # include "objectmodel.h"
 
 
@@ -36,21 +36,19 @@ namespace Gfx
 		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model)
 			: pID(sNextID++), pName(name), pModel(model), pSkeleton(NULL)
 		{
-			ObjectManager::Instance()->registerObject(SmartPtr<Object3D>(this));
+			Scene::Instance()->registerObject(SmartPtr<Object3D>(this));
 		}
 
 		//! Constructor with mesh initialization
 		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model, Skeleton* skeleton)
 			: pID(sNextID++), pName(name), pModel(model), pSkeleton(skeleton)
 		{
-			ObjectManager::Instance()->registerObject(SmartPtr<Object3D>(this));
+			Scene::Instance()->registerObject(SmartPtr<Object3D>(this));
 		}
 
 		//! Default Destructor
-		~Object3D()
+		virtual ~Object3D()
 		{
-			if (pSkeleton)
-				delete pSkeleton;
 		}
 
 		//@}
@@ -64,17 +62,15 @@ namespace Gfx
 		**
 		** \return A smart pointer to the object's skeleton, can point to NULL
 		*/
-		const Skeleton* skeleton() {return pSkeleton;}
+		const SmartPtr<Skeleton> skeleton() {return pSkeleton;}
 
 		/*!
 		** \brief Set the skeleton to use for this object
 		**
 		** \param newSkeleton Skeleton to use
 		*/
-		void setSkeleton(Skeleton* newSkeleton)
+		void skeleton(SmartPtr<Skeleton> newSkeleton)
 		{
-			if (pSkeleton)
-				delete pSkeleton;
 			pSkeleton = newSkeleton;
 		}
 
@@ -94,7 +90,7 @@ namespace Gfx
 		SmartPtr<ObjectModel> pModel;
 
 		//! Optional skeleton, overrides the model!
-		Skeleton* pSkeleton;
+		SmartPtr<Skeleton> pSkeleton;
 
 	}; // Object3D
 

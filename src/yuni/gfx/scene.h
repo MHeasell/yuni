@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_OBJECTMANAGER_H__
-# define __YUNI_GFX_OBJECTMANAGER_H__
+#ifndef __YUNI_GFX_SCENE_H__
+# define __YUNI_GFX_SCENE_H__
 
 # include "../toolbox/hash/table.h"
 # include "../toolbox/smartptr/smartptr.h"
@@ -15,9 +15,9 @@ namespace Gfx
 
 
 	/*!
-	** \brief Manager (singleton) class for 3D Objects management
+	** \brief The 3D scene contains a tree of 3D Objects
 	*/
-	class ObjectManager
+	class Scene
 	{
 	public:
 	  typedef Hash::Table< uint64, SmartPtr<Object3D> > Objects;
@@ -28,7 +28,7 @@ namespace Gfx
 		//@{
 
 		//! Accessor to the singleton instance
-		static SmartPtr<ObjectManager> Instance();
+		static SmartPtr<Scene> Instance();
 
 		//@}
 
@@ -40,7 +40,7 @@ namespace Gfx
 		**
 		** This destructor must not forget to clear the objects table
 		*/
-		~ObjectManager()
+		~Scene()
 		{
 			pObjects.clear();
 		}
