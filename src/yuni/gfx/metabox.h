@@ -35,7 +35,7 @@ namespace Gfx
 		{}
 		//@}
 
-		//! Calculate the value of a point through the metaball's function
+		//! Calculate the value of a point through the metabox's function
 		virtual float operator()(const Point3D<float>& p) const
 		{
 			if (!pBox.contains(p))
