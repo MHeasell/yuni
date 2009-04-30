@@ -179,7 +179,7 @@ namespace Math
 	template<> inline float ATanH<float>(float x)
 	{
 		# if defined(YUNI_OS_MSVC)
-		return ::logf(((1.f / x + 1.f) / (T)(1.f / x - 1.f))) / 2.f;
+		return ::logf(((1.f / x + 1.f) / (1.f / x - 1.f))) / 2.f;
 		# else
 		return ::atanhf(x);
 		# endif
@@ -188,7 +188,7 @@ namespace Math
 	template<> inline long double ATanH<long double>(long double x)
 	{
 		# if defined(YUNI_OS_MSVC)
-		return ::logl(((1. / x + 1.) / (T)(1. / x - 1.))) / 2.;
+		return ::logl(((1. / x + 1.) / (1. / x - 1.))) / 2.;
 		# else
 		return ::atanhl(x);
 		# endif
