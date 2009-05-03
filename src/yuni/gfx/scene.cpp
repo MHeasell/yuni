@@ -1,38 +1,42 @@
 
+#include <cassert>
 #include "object3d.h"
 #include "scene.h"
+
 
 namespace Yuni
 {
 namespace Gfx
 {
-	// Definition of the static ID counter in Object3D
-	uint64 Object3D::sNextID = 0;
 
-	namespace
+
+
+	Scene* Scene::Instance()
 	{
-		SmartPtr<Scene> scene;
-	} // Anonymous namespace
-
-
-	SmartPtr<Scene> Scene::Instance()
-	{
+		static Scene* scene = NULL;
 		if (!scene)
 			scene = new Scene();
 		return scene;
 	}
 
 
-	void Scene::registerObject(const SmartPtr<Object3D>& obj)
+	void Scene::registerObject(Object3D* obj)
 	{
+		/* Assert */
+		assert(NULL != obj && "A registered object cannot be null");
+
+		ThreadingPolicy::MutexLocker locker(*this);
 		if (pObjects.find(obj->id()) == pObjects.end())
 			pObjects[obj->id()] = obj;
 		else
-			std::cerr << "Error in Scene::registerObject(): "
-				<< "inserting existing object with ID "
+		{
+			std::cerr << "Error in Scene::registerObject(): inserting existing object with ID "
 				<< obj->id() << std::endl;
+		}
 	}
 
 
-} //Gfx
-} //Yuni
+
+
+} // namespace Gfx
+} // namespace Yuni

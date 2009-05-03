@@ -132,7 +132,7 @@ namespace Ownership
 		static T clone(const T& rhs)
 		{
 			if (0 != rhs)
-				rhs->AddRef();
+				rhs->addRef();
 			return rhs;
 		}
 
@@ -142,11 +142,11 @@ namespace Ownership
 		static bool release(const T& rhs)
 		{
 			if (0 != rhs)
-				rhs->Release();
+				rhs->release();
 			return false;
 		}
 
-		static void swapPointer(COMReferenceCounted& rhs) {}
+		static void swapPointer(COMReferenceCounted&) {}
 
 	}; // class COMReferenceCounted
 

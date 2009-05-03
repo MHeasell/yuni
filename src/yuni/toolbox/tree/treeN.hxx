@@ -11,7 +11,7 @@ namespace Toolbox
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
 	inline TreeN<T,TP,ChckP,TrckP,ConvP>::TreeN()
-		:pParent(), pHaveParent(false), pChildrenCount(0)
+		:pParent(), pHaveParent(false), pChildrenCount(0), pRefCount(0)
 	{}
 
 
@@ -550,6 +550,29 @@ namespace Toolbox
 	}
 
 
+
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	inline void
+	TreeN<T,TP,ChckP,TrckP,ConvP>::addRef()
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		++pRefCount;
+	}
+
+
+	template<class T, template<class> class TP, template <class> class ChckP,
+		template <class> class TrckP, class ConvP>
+	void
+	TreeN<T,TP,ChckP,TrckP,ConvP>::release()
+	{
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			if (--pRefCount > 0)
+				return;
+		}
+		delete this;
+	}
 
 
 

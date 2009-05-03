@@ -50,6 +50,7 @@ Set(SRC_TOOLBOX_STRING
 				toolbox/string/string.forward.h
 				toolbox/string/string.private.hxx
 				toolbox/string/string.iterators.hxx
+				toolbox/policies/string/dynamic.h
 				toolbox/string.h)
 source_group(ToolBox\\String FILES ${SRC_TOOLBOX_STRING})
 
@@ -234,7 +235,8 @@ source_group(Application FILES ${SRC_APPLICATION_GFX})
 Set(SRC_GFX
 		gfx/device.h gfx/device.cpp
 		gfx/vertex.h gfx/triangle.h gfx/edge.h
-		gfx/object3D.h gfx/objectmodel.h gfx/scene.h gfx/scene.cpp
+		gfx/object3D.h gfx/object3D.cpp
+		gfx/objectmodel.h gfx/scene.h gfx/scene.cpp
 		gfx/skeleton.h gfx/mesh.h gfx/mesh.cpp gfx/mesh.proxy.h
 		gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
 		gfx/metaobject.h gfx/metaball.h  gfx/metaball.cpp  gfx/metabox.h

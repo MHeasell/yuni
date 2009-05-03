@@ -162,9 +162,9 @@ namespace Toolbox
 		typedef TP<Node>  ThreadingPolicy;
 
 		//! A thread-safe node type
-		typedef SmartPtr<Node, Policy::Ownership::ReferenceCountedMT,ChckP,ConvP>  PtrThreadSafe;
+		typedef SmartPtr<Node, Policy::Ownership::COMReferenceCounted,ChckP,ConvP>  PtrThreadSafe;
 		//! A default node type
-		typedef SmartPtr<Node, Policy::Ownership::ReferenceCounted,ChckP,ConvP>    PtrSingleThreaded;
+		typedef SmartPtr<Node, Policy::Ownership::COMReferenceCounted,ChckP,ConvP>    PtrSingleThreaded;
 		//! Pointer to a node
 		typedef typename Static::If<ThreadingPolicy::threadSafe, PtrThreadSafe, PtrSingleThreaded>::ResultType Ptr;
 
@@ -237,7 +237,7 @@ namespace Toolbox
 
 		//! \name Adding
 		//@{
-		
+
 		/*!
 		** \brief Append a child node to the end of the list
 		** \param node The new child node
@@ -303,7 +303,7 @@ namespace Toolbox
 		iterator  end() {return iterator();}
 		const iterator  end() const {return iterator();}
 
-	
+
 		/*!
 		** \brief Find the n-th child of the node
 		**
@@ -316,14 +316,14 @@ namespace Toolbox
 		*/
 		Ptr find(const SizeType index);
 		Ptr find(const SignedSizeType index);
-		
+
 		/*!
 		** \brief Get if the node has children
 		*/
 		bool empty();
-		
+
 		/*!
-		** \brief 
+		** \brief
 		*/
 		SizeType count();
 		//! Alias for count()
@@ -354,8 +354,8 @@ namespace Toolbox
 		const Ptr nextSibling() const {return pNextSibling;}
 
 		//@}
-		
-		
+
+
 		//! \name Extra
 		//@{
 
@@ -382,7 +382,7 @@ namespace Toolbox
 		** The height of a tree is the length of the path from the root to the
 		** deepest node in the tree.
 		** A (rooted) tree with only a node (the root) has a height of zero.
-		** 
+		**
 		** \return The height of the tree
 		*/
 		SizeType treeHeight();
@@ -402,16 +402,16 @@ namespace Toolbox
 
 		//! \name Z-Order
 		//@{
-		
+
 		/*!
-		** \brief Move the node to the end 
+		** \brief Move the node to the end
 		**
 		** This method is especially useful when manipulating items on a layer.
 		** When iterating over all children, the last one can be considered
 		** as the last drawn thus the first visible item for the user.
 		*/
 		void bringToFront();
-		
+
 		/*!
 		** \brief Move the node to the begining
 		**
@@ -420,29 +420,27 @@ namespace Toolbox
 		** as the first drawn thus the last visible item for the user.
 		*/
 		void sendToBack();
-		
+
 		//@}
 
 
-		//! \name  
+		//! \name
 		//@{
-
 		/*!
 		** \brief Schedule an asynchronous update of the item (depending upon the implementation)
 		**
 		** \internal The method invalidateWL() should be overloaded
 		*/
 		void invalidate();
-		
+
 		/*!
 		** \brief Get if the item is invalidated (depending upon the implementation)
 		**
 		** \internal The method isInvalidatedWL() should be overloaded
 		*/
 		bool isInvalidated();
-
 		//@}
-		
+
 
 
 		//! \name Operator =
@@ -501,7 +499,14 @@ namespace Toolbox
 		*/
 		std::ostream& print(std::ostream& out, const bool recursive = true, const unsigned int level = 0);
 
-		
+
+
+		//! \name Pointer management
+		//@{
+		void addRef();
+		void release();
+		//@}
+
 
 	protected:
 		//! Invalidate the item
@@ -509,14 +514,14 @@ namespace Toolbox
 		//! Get if the item is invalidated
 		virtual bool isInvalidatedWL() {return true;}
 
-		//! (only used for debugging) 
+		//! (only used for debugging)
 		virtual void printBeginWL(std::ostream& out, const unsigned int level) const;
-		//! (only used for debugging) 
+		//! (only used for debugging)
 		virtual void printEndWL(std::ostream& out, const unsigned int level) const;
 
 		//! Remove all children
 		void clearWL();
-	
+
 		//! Append a child to the end of the list
 		void pushBackWL(Ptr& node);
 		//! Append a child to the end of the list
@@ -531,7 +536,7 @@ namespace Toolbox
 		//! Find a child node from its index (slow)
 		Ptr findFromIndexWL(const SizeType index);
 
-		
+
 	protected:
 		//! Parent
 		Ptr pParent;
@@ -542,7 +547,7 @@ namespace Toolbox
 		** should avoid unnecessary locks.
 		*/
 		bool pHaveParent;
-		
+
 		//! How many children do we have ?
 		SizeType pChildrenCount;
 		//! The previous sibling
@@ -574,10 +579,13 @@ namespace Toolbox
 
 		//! Detach from the parent without notifying it
 		void internalDetachFromParentWithoutNotify();
-		
+
+	private:
+		typename ThreadingPolicy::template Volatile<int>::Type* pRefCount;
+
 	}; // class TreeN
 
-	
+
 
 
 

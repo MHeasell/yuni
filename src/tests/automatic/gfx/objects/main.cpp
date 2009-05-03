@@ -28,15 +28,13 @@ int main(void)
 	SmartPtr<Gfx::ObjectModel> carModel(new Gfx::ObjectModel(skeleton));
 	// Use the same skeleton. This is a stupid test.
 	SmartPtr<Gfx::ObjectModel> wheelModel(new Gfx::ObjectModel(skeleton));
-	Car c("Titine", carModel);
-	Wheel w1("LeftForwardWheel", wheelModel);
-	Wheel w2("RightForwardWheel", wheelModel);
-	Wheel w3("LeftRearWheel", wheelModel);
-	Wheel w4("RightRearWheel", wheelModel);
 
-	c.append(&w1);
-	c.append(&w2);
-	c += &w3;
-	c << &w4;
+	Car* c = new Car("Titine", carModel);
+
+	c->append(new Wheel("LeftForwardWheel", wheelModel));
+	c->append(new Wheel("RightForwardWheel", wheelModel));
+	*c += new Wheel("LeftRearWheel", wheelModel);
+	*c << new Wheel("RightRearWheel", wheelModel);
+
 	return 0;
 }
