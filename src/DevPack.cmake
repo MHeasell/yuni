@@ -15,7 +15,7 @@ SET(DevPackPrefix           "yndevpack")
 
 # Where is unzip ?
 SET(DevPackSourceZIP)
-Find_Program(DevPackSourceZIP NAMES "unzip" "unzip.exe" PATHS "${CMAKE_SOURCE_DIR}/../bin")
+Find_Program(DevPackSourceZIP NAMES "unzip" "unzip.exe" PATHS "${CMAKE_CURRENT_SOURCE_DIR}/../bin")
 String(COMPARE EQUAL "${DevPackSourceZIP}" "DevPackSourceZIP-NOTFOUND" DevPackUnzipHasNotBeenFound)
 IF(DevPackUnzipHasNotBeenFound)
 	Message(FATAL_ERROR "The program 'unzip' has not been found")

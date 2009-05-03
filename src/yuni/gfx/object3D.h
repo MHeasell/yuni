@@ -6,14 +6,13 @@
 # include "../toolbox/tree/treeN.h"
 # include "skeleton.h"
 # include "objectmodel.h"
-# include "scene.h"
-# include "objectmodel.h"
 
 
 namespace Yuni
 {
 namespace Gfx
 {
+
 
 	/*!
 	** \brief A 3D object is an abstract scene object
@@ -25,35 +24,29 @@ namespace Gfx
 	class Object3D: public Toolbox::TreeN<Object3D>
 	{
 	public:
-		typedef SmartPtr<Object3D> Ptr;
+		//! Pointer
+		typedef Toolbox::TreeN<Object3D>::Ptr Ptr;
+		typedef uint64 ID;
 
 	public:
 		//! Static ID counter (naive version, never reuses old IDs)
-		static uint64 sNextID;
+		static ID NextID();
 
 	public:
 		//! \name Constructors & Destructor
 		//@{
-
-		//! Default Constructor
-		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model)
-			:pID(sNextID++), pName(name), pModel(model), pSkeleton(NULL)
-		{
-			Scene::Instance()->registerObject(Ptr(this));
-		}
-
-		//! Constructor with mesh initialization
-		Object3D(const Yuni::String& name, const ObjectModel::Ptr& model, const Skeleton::Ptr& skeleton)
-			:pID(sNextID++), pName(name), pModel(model), pSkeleton(skeleton)
-		{
-			Scene::Instance()->registerObject(Ptr(this));
-		}
-
+		/*!
+		** \brief Default Constructor
+		*/
+		Object3D(const SmartPtr<ObjectModel>& model);
+		
+		/*!
+		** \brief Default Constructor
+		*/
+		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model);
+		
 		//! Default Destructor
-		virtual ~Object3D()
-		{
-		}
-
+		virtual ~Object3D();
 		//@}
 
 
@@ -72,30 +65,26 @@ namespace Gfx
 		**
 		** \param newSkeleton Skeleton to use
 		*/
-		void skeleton(const Skeleton::Ptr& newSkeleton)
-		{
-			pSkeleton = newSkeleton;
-		}
+		void skeleton(const Skeleton::Ptr& newSkeleton);
 
 		//! Get the name of the object
-		const uint64 id() const {return pID;}
+		const ID id() const {return pID;}
 
 		//@}
 
 	protected:
 		//! Unique identifier for this object (type can still change)
-		uint64 pID;
+		const ID pID;
 
 		//! Name of the object
-		Yuni::String pName;
-
+		String pName;
 		//! The object must use a model (template) for its skeleton / textures
 		ObjectModel::Ptr pModel;
-
 		//! Optional skeleton, overrides the model!
 		Skeleton::Ptr pSkeleton;
 
 	}; // Object3D
+
 
 
 } // namespace Gfx
