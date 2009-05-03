@@ -25,6 +25,9 @@ namespace Gfx
 	class Object3D: public Toolbox::TreeN<Object3D>
 	{
 	public:
+		typedef SmartPtr<Object3D> Ptr;
+
+	public:
 		//! Static ID counter (naive version, never reuses old IDs)
 		static uint64 sNextID;
 
@@ -34,16 +37,16 @@ namespace Gfx
 
 		//! Default Constructor
 		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model)
-			: pID(sNextID++), pName(name), pModel(model), pSkeleton(NULL)
+			:pID(sNextID++), pName(name), pModel(model), pSkeleton(NULL)
 		{
-			Scene::Instance()->registerObject(SmartPtr<Object3D>(this));
+			Scene::Instance()->registerObject(Ptr(this));
 		}
 
 		//! Constructor with mesh initialization
-		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model, Skeleton* skeleton)
-			: pID(sNextID++), pName(name), pModel(model), pSkeleton(skeleton)
+		Object3D(const Yuni::String& name, const ObjectModel::Ptr& model, const Skeleton::Ptr& skeleton)
+			:pID(sNextID++), pName(name), pModel(model), pSkeleton(skeleton)
 		{
-			Scene::Instance()->registerObject(SmartPtr<Object3D>(this));
+			Scene::Instance()->registerObject(Ptr(this));
 		}
 
 		//! Default Destructor
@@ -62,14 +65,14 @@ namespace Gfx
 		**
 		** \return A smart pointer to the object's skeleton, can point to NULL
 		*/
-		const SmartPtr<Skeleton> skeleton() {return pSkeleton;}
+		const Skeleton::Ptr& skeleton() {return pSkeleton;}
 
 		/*!
 		** \brief Set the skeleton to use for this object
 		**
 		** \param newSkeleton Skeleton to use
 		*/
-		void skeleton(SmartPtr<Skeleton> newSkeleton)
+		void skeleton(const Skeleton::Ptr& newSkeleton)
 		{
 			pSkeleton = newSkeleton;
 		}
@@ -87,10 +90,10 @@ namespace Gfx
 		Yuni::String pName;
 
 		//! The object must use a model (template) for its skeleton / textures
-		SmartPtr<ObjectModel> pModel;
+		ObjectModel::Ptr pModel;
 
 		//! Optional skeleton, overrides the model!
-		SmartPtr<Skeleton> pSkeleton;
+		Skeleton::Ptr pSkeleton;
 
 	}; // Object3D
 

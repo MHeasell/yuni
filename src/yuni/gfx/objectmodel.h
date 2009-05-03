@@ -15,6 +15,9 @@ namespace Gfx
 	class ObjectModel
 	{
 	public:
+		typedef SmartPtr<ObjectModel> Ptr;
+
+	public:
 
 		//! \name Constructors
 		//@{
