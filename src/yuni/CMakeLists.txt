@@ -50,7 +50,6 @@ Set(SRC_TOOLBOX_STRING
 				toolbox/string/string.forward.h
 				toolbox/string/string.private.hxx
 				toolbox/string/string.iterators.hxx
-				toolbox/policies/string/dynamic.h
 				toolbox/string.h)
 source_group(ToolBox\\String FILES ${SRC_TOOLBOX_STRING})
 
