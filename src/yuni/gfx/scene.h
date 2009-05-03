@@ -1,6 +1,8 @@
 #ifndef __YUNI_GFX_SCENE_H__
 # define __YUNI_GFX_SCENE_H__
 
+# include <map>
+# include "../yuni.h"
 # include "../toolbox/hash/table.h"
 # include "../toolbox/smartptr/smartptr.h"
 
@@ -20,7 +22,7 @@ namespace Gfx
 	class Scene
 	{
 	public:
-	  typedef Hash::Table< uint64, SmartPtr<Object3D> > Objects;
+		typedef std::map<uint64, SmartPtr<Object3D> > Objects;
 
 	public:
 
@@ -32,6 +34,7 @@ namespace Gfx
 
 		//@}
 
+	public:
 		//! \name Instance methods
 		//@{
 

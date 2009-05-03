@@ -17,6 +17,9 @@ namespace Gfx
 	class Skeleton: public Toolbox::TreeN<Skeleton>
 	{
 	public:
+		typedef SmartPtr<Skeleton> Ptr;
+
+	public:
 		//! \name Constructors & Destructor
 		//@{
 

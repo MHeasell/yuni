@@ -25,7 +25,12 @@ namespace Gfx
 
 	void Scene::registerObject(const SmartPtr<Object3D>& obj)
 	{
-		pObjects[obj->id()] = obj;
+		if (pObjects.find(obj->id()) == pObjects.end())
+			pObjects[obj->id()] = obj;
+		else
+			std::cerr << "Error in Scene::registerObject(): "
+				<< "inserting existing object with ID "
+				<< obj->id() << std::endl;
 	}
 
 
