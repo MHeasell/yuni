@@ -115,6 +115,34 @@ namespace Yuni
 	** \note This smart pointer is thread-safe by default. If you do not need a locking
 	**       mechanism, you should change the ownership policy.
 	**
+	** \warning Do not use SmartPtr with stack variables !
+	** \code
+	** #include <iostream>
+	** #include <yuni/toolbox/smartptr.h>
+	**
+	** struct Foo
+	** {
+	** 		int bar;
+	** };
+	**
+	** void doSomething(SmartPtr<Foo> p)
+	** {
+	** 		std::cout << p->bar << std::endl; // Displays 42
+	**
+	** 		// The pointer owned by `p` will be deleted at the end of the function
+	** }
+	**
+	** int main()
+	** {
+	**		Foo foo;
+	**		foo.bar = 42;
+	**		doSomething(&foo);
+	**
+	**		// Foo will be also deleted here
+	**		return 0;
+	** }
+	** \endcode
+	**
 	**
 	** \tparam T      The type
 	** \tparam OwspP  The ownership policy
