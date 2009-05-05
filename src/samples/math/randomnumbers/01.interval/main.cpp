@@ -19,7 +19,7 @@ struct Test
 		// Initializing the random number generator
 		generator.reset();
 
-		// Informations about the generator
+		// Information about the generator
 		std::cout << " * Distribution    : " << generator.name() << std::endl;
 		std::cout << "   Range           : " << generator.min() << " .. " << generator.max() << std::endl;
 

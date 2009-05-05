@@ -7,7 +7,12 @@
 using namespace Yuni;
 
 
-
+/*!
+** \brief Our own application class
+**
+** To make it a graphical application with 3D support,
+** we have it inherit Yuni::Application::Gfx3D.
+*/
 class HelloWorld : public Application::Gfx3D
 {
 public:
@@ -20,14 +25,14 @@ public:
 
 	virtual ~HelloWorld()
 	{
-		// It is advised to disconnect all events at this stade
+		// It is advised to disconnect all events at this stage
 		destroyingObserver();
 	}
 
 	void onFPSChanged(int fps)
 	{
 		// The FPS count has changed
-		// We will set the application title according the new value
+		// We will set the application title according to the new value
 		this->title(String() << "Hello World ! - " << fps << " fps");
 	}
 };

@@ -18,18 +18,18 @@ Event::E2<void, const Yuni::String&, const Yuni::String&> emailHasBeenReceived;
 
 
 /*!
- * A subscriber class
- *
- * To be able to receive events, the class must inherit from the base class
- * `Yuni::Event::Receiver`
- */
+** \brief A subscriber class
+**
+** To be able to receive events, the class must inherit from the base class
+** `Yuni::Event::Receiver`
+*/
 class Subscriber : public Event::Observer<Subscriber>
 {
 public:
 	//! Constructor
 	Subscriber()
 	{
-		// This class want to be aware when an event is fired
+		// This class wants to be aware when an event is fired
 		emailHasBeenReceived.connect(this, &Subscriber::onMailReceived);
 	}
 
@@ -43,9 +43,11 @@ public:
 	}
 
 	/*!
-	 * This method will be called each time the event `emailHasBeenReceived`
-	 * is fired
-	 */
+	** \brief Event callback
+	**
+	** This method will be called each time the event `emailHasBeenReceived`
+	** is fired
+	*/
 	void onMailReceived(const String& subject, const String& from)
 	{
 		std::cout << "a mail has been received :" << std::endl

@@ -22,7 +22,7 @@ namespace Threads
 	**  \ingroup Threads
 	**
 	** To create your own thread, you only have to implement the methode execute(), as follow:
-	** 
+	**
 	** \code
 	** class MyOwnThread : public Yuni::Threads::AThread
 	** {
@@ -80,7 +80,7 @@ namespace Threads
 		virtual bool onStarting() {return true;}
 
 		/*!
-		** \brief Event: The thread is running 
+		** \brief Event: The thread is running
 		**
 		** The thread has been successfully started (that means `onStarting()` returned true)
 		** As soon as this method exits, the other event `onStopped()` will be called.

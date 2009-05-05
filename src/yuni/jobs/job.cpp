@@ -33,7 +33,7 @@ namespace Jobs
 		pMutex.unlock();
 	}
 
-	
+
 	void AJob::attachToThread(Threads::Private::AThreadModel* t)
 	{
 		pMutex.lock();
@@ -57,7 +57,7 @@ namespace Jobs
 			pState = jsSleeping;
 			pMutex.unlock();
 			bool sRet = t->suspend(delay);
-			
+
 			pMutex.lock();
 			pState = jsRunning;
 			pMutex.unlock();

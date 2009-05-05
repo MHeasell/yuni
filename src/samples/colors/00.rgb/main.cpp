@@ -9,7 +9,7 @@ int main(void)
 {
 	// Only two types should be used : uint8 and float. The other ones are not recommended
 
-	// Standards colors when using an uint8.
+	// Standard colors when using an uint8.
 	// The limits are : 0..255 (`0` means 0%, `255` means 100%).
 	Gfx::Color::RGB<uint8> b_red(   255, 0,   0); // By default, a color is opaque
 	Gfx::Color::RGB<uint8> b_green( 0,   255, 0);

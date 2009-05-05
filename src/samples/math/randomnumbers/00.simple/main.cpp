@@ -12,10 +12,10 @@ int main(void)
 
 	// The random number generator *should* be initialized. Each generator has
 	// its own parameters but most of the time the default configuration should
-	// fit to your needs.
+	// fit your needs.
 	generator.reset();
 
-	// Informations about the generator
+	// Information about the generator
 	std::cout << "Distribution    : " << generator.name() << std::endl;
 	std::cout << "Range           : " << generator.min() << " .. " << generator.max() << std::endl;
 

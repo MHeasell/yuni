@@ -4,11 +4,12 @@
 #include <iostream>
 
 
-//
-// Our own application class
-// To make it a simple console application,
-// we have it inherit Yuni::Application::Gfx3D.
-//
+/*!
+** \brief Our own application class
+**
+** To make it a graphical application with 3D support,
+** we have it inherit Yuni::Application::Gfx3D.
+*/
 class HelloWorld : public Yuni::Application::Gfx3D
 {
 public:
