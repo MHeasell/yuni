@@ -27,14 +27,14 @@ int main()
 	if (!sc->loadFromFile("helloworld.lua"))
 	{
 		// An error has occured.
-		// TODO: We must be able to determinate exactly what prevented the script loading.
+		// TODO: We must be able to determine exactly what prevented the script loading.
 		std::cout << "[EE] Error while loading script." << std::endl;
 	}
 
 	if (!sc->appendFromString("foo();"))
 	{
 		// An error has occured.
-		// TODO: We must be able to determinate exactly what prevented the script loading.
+		// TODO: We must be able to determine exactly what prevented the script loading.
 		std::cout << "[EE] Error while loading string script." << std::endl;
 	}
 
@@ -43,7 +43,7 @@ int main()
 	if (!sc->appendFromString("print(\"Pyo !\");"))
 	{
 		// An error has occured.
-		// TODO: We must be able to determinate exactly what prevented the script loading.
+		// TODO: We must be able to determine exactly what prevented the script loading.
 		std::cout << "[EE] Error while loading string script." << std::endl;
 	}
 

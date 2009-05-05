@@ -109,11 +109,11 @@ namespace Jobs
 		void progression(const float);
 
 		/*!
-		** \brief Suspend the execution of the job of X miliseconds
+		** \brief Suspend the execution of the job during X miliseconds
 		**
 		** This is a convenient method to know if the job should stop as soon as possible
 		**
-		** \param delay The delay in miliseconds. O will only return if the thred should exit
+		** \param delay The delay in miliseconds. 0 will only return if the thread should exit
 		** \return True indicates that the job should stop immediately
 		**
 		** \see AThreadModel::suspend()
