@@ -114,15 +114,15 @@ namespace Gfx
 		return pFullscreen;
 	}
 
-	void Device::monitor(const SharedPtr<System::Devices::Display::Monitor>& m)
+	void Device::monitor(const SmartPtr<System::Devices::Display::Monitor>& m)
 	{
-		if (!pLocked && !m.null())
+		if (!pLocked && NULL != m)
 			pMonitor = m;
 	}
 
-	void Device::resolution(const SharedPtr<System::Devices::Display::Resolution>& r)
+	void Device::resolution(const SmartPtr<System::Devices::Display::Resolution>& r)
 	{
-		if (!pLocked && !r.null())
+		if (!pLocked && NULL != r)
 			pResolution = r;
 	}
 
@@ -149,7 +149,7 @@ namespace Gfx
 	void Device::ensuresSettingsAreValid()
 	{
 		// The monitor must be valid
-		if (pMonitor.null() || !pMonitor->valid())
+		if (!pMonitor)
 		{
 			// The monitor does not seem valid. We'll grab the whole list and we
 			// will pick up the primary display as the default monitor
@@ -177,7 +177,7 @@ namespace Gfx
 	std::ostream& Device::print(std::ostream& out) const
 	{
 		out << TypeToString(pType) << " - ";
-		if (pResolution.null())
+		if (NULL != pResolution)
 			out << "<Invalid Resolution>";
 		else
 			out << *pResolution;

@@ -5,7 +5,7 @@
 # include <list>
 # include "../../yuni.h"
 # include "../../toolbox/string.h"
-# include "../../toolbox/smartptr/sharedptr.h"
+# include "../../toolbox/smartptr/smartptr.h"
 
 
 
@@ -35,9 +35,9 @@ namespace Display
 		static const uint32 MaxHeight;
 
 		//! Vector of resolutions
-		typedef std::vector< SharedPtr<Resolution> >  Vector;
+		typedef std::vector< SmartPtr<Resolution> >  Vector;
 		//! List of resolutions
-		typedef std::list< SharedPtr<Resolution> >  List;
+		typedef std::list< SmartPtr<Resolution> >  List;
 
 	public:
 		//! \name Constructors
@@ -183,7 +183,7 @@ namespace Display
 
 inline std::ostream& operator << (std::ostream& out, const Yuni::System::Devices::Display::Resolution& rhs)
 { return rhs.print(out); }
-inline std::ostream& operator << (std::ostream& out, const Yuni::SharedPtr<Yuni::System::Devices::Display::Resolution>& rhs)
+inline std::ostream& operator << (std::ostream& out, const Yuni::SmartPtr<Yuni::System::Devices::Display::Resolution>& rhs)
 { return rhs->print(out); }
 
 

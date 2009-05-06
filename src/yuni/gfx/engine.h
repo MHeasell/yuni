@@ -3,7 +3,7 @@
 
 # include "../yuni.h"
 # include "device.h"
-# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/smartptr/smartptr.h"
 # include "../toolbox/event/event.proxy.h"
 # include "../threads/mutex.h"
 
@@ -51,7 +51,7 @@ namespace Gfx
 		/*!
 		** \brief Get informations about the device currently being used
 		*/
-		SharedPtr<Device> device() const {return pDevice;}
+		SmartPtr<Device> device() const {return pDevice;}
 
 		//@}
 
@@ -64,7 +64,7 @@ namespace Gfx
 		** \param dc Informations about the device to initialize.
 		** \return True if the operation succeeded, False otherwise
 		*/
-		bool reset(const SharedPtr<Device>& dc);
+		bool reset(const SmartPtr<Device>& dc);
 
 		/*!
 		** \brief Reset the 3D Device with optimal settings
@@ -119,7 +119,7 @@ namespace Gfx
 		//! If the device is initialized
 		bool pDeviceIsInitialized;
 		//! Information about the device
-		SharedPtr<Device> pDevice;
+		SmartPtr<Device> pDevice;
 
 	}; // class Engine
 

@@ -28,7 +28,7 @@ namespace Display
 	{
 
 		typedef std::map<uint32, std::map<uint32, uint8> >  OrderedResolutions;
-		typedef std::pair< SharedPtr<Monitor>, SharedPtr<OrderedResolutions> > SingleMonitorFound;
+		typedef std::pair< SmartPtr<Monitor>, SmartPtr<OrderedResolutions> > SingleMonitorFound;
 		typedef std::vector<SingleMonitorFound> MonitorsFound;
 
 
@@ -73,7 +73,7 @@ namespace Display
 			return value;
 		}
 
-		void cocoaGetAllAvailableModesUseful(CGDirectDisplayID display, SharedPtr<OrderedResolutions>& res)
+		void cocoaGetAllAvailableModesUseful(CGDirectDisplayID display, SmartPtr<OrderedResolutions>& res)
 		{
 			// get a list of all possible display modes for this system.
 			CFArrayRef availableModes = CGDisplayAvailableModes(display);
@@ -132,8 +132,8 @@ namespace Display
 				// uint32_t modelNumber = CGDisplayModelNumber(displayArray[i]);
 				// uint32_t serialNumer = CGDisplaySerialNumber(displayArray[i]);
 
-				SharedPtr<Monitor> newMonitor(new Monitor("", (Monitor::Handle)displayArray[i], mainDisplay, ha, builtin));
-				SharedPtr<OrderedResolutions> res(new OrderedResolutions());
+				SmartPtr<Monitor> newMonitor(new Monitor("", (Monitor::Handle)displayArray[i], mainDisplay, ha, builtin));
+				SmartPtr<OrderedResolutions> res(new OrderedResolutions());
 				cocoaGetAllAvailableModesUseful(displayArray[i], res);
 				// Add it to the list
 				lst.push_back(SingleMonitorFound(newMonitor, res));
@@ -145,7 +145,7 @@ namespace Display
 
 # ifdef YUNI_OS_WINDOWS
 
-		void windowsGetMonitorResolutions(HDC device, SharedPtr<OrderedResolutions>& res)
+		void windowsGetMonitorResolutions(HDC device, SmartPtr<OrderedResolutions>& res)
 		{
 			int width = GetDeviceCaps(device, HORZRES);
 			int height = GetDeviceCaps(device, VERTRES);
@@ -174,13 +174,13 @@ namespace Display
 
 			if (!monitorDC)
 				return false;
-			SharedPtr<OrderedResolutions> res(new OrderedResolutions());
+			SmartPtr<OrderedResolutions> res(new OrderedResolutions());
 			windowsGetMonitorResolutions(monitorDC, res);
 			DeleteDC(monitorDC);
 
 			bool mainDisplay = (info.dwFlags & MONITORINFOF_PRIMARY);
 			// Create the new monitor
-			SharedPtr<Monitor> newMonitor(new Monitor(info.szDevice, (Monitor::Handle)count++, mainDisplay, true, true));
+			SmartPtr<Monitor> newMonitor(new Monitor(info.szDevice, (Monitor::Handle)count++, mainDisplay, true, true));
 			// Add the monitor and its resolutions to the list
 			lst->push_back(SingleMonitorFound(newMonitor, res));
 			return true;
@@ -213,8 +213,8 @@ namespace Display
 		:pNullMonitor(new Monitor("Fail-safe Device"))
 	{
 		// Initializing the null monitor
-		SharedPtr<Resolution> r640x480(new Resolution(640, 480, 32));
-		SharedPtr<Resolution> r800x600(new Resolution(800, 600, 32));
+		SmartPtr<Resolution> r640x480(new Resolution(640, 480, 32));
+		SmartPtr<Resolution> r800x600(new Resolution(800, 600, 32));
 		// The first result must be the highest resolution
 		pNullMonitor->addResolution(r800x600);
 		pNullMonitor->addResolution(r640x480);
@@ -248,13 +248,13 @@ namespace Display
 		{
 			if ((it->second)->empty()) // no available resolutions
 				continue;
-			SharedPtr<Monitor>& monitor = it->first;
+			SmartPtr<Monitor>& monitor = it->first;
 			// Browse all resolutions
 			for (OrderedResolutions::reverse_iterator j = (it->second)->rbegin(); j != (it->second)->rend(); ++j)
 			{
 				for (std::map<uint32, uint8>::reverse_iterator k = j->second.rbegin(); k != j->second.rend(); ++k)
 				{
-					SharedPtr<Resolution> resolution(new Resolution(j->first, k->first, k->second));
+					SmartPtr<Resolution> resolution(new Resolution(j->first, k->first, k->second));
 					monitor->addResolution(resolution);
 				}
 			}
@@ -272,7 +272,7 @@ namespace Display
 	}
 
 
-	SharedPtr<Monitor> List::findByHandle(const Monitor::Handle hwn) const
+	SmartPtr<Monitor> List::findByHandle(const Monitor::Handle hwn) const
 	{
 		for (Monitor::Vector::const_iterator it = pMonitors.begin(); it != pMonitors.end(); ++it)
 		{
@@ -283,7 +283,7 @@ namespace Display
 	}
 
 
-	SharedPtr<Monitor> List::findByGUID(const String& guid) const
+	SmartPtr<Monitor> List::findByGUID(const String& guid) const
 	{
 		for (Monitor::Vector::const_iterator it = pMonitors.begin(); it != pMonitors.end(); ++it)
 		{

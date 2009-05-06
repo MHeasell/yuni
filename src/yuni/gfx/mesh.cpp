@@ -1,6 +1,13 @@
 
 #include "mesh.h"
+
+#ifdef YUNI_EXTERNAL_3D_IRRLICHT
 #include "../private/gfx3d/irrlicht/irr.mesh.h"
+#endif
+#ifdef YUNI_EXTERNAL_3D_OGRE
+//#include "../private/gfx3d/ogre/ogre.mesh.h"
+#endif
+
 
 namespace Yuni
 {
@@ -9,7 +16,12 @@ namespace Gfx
 
 	Mesh::Mesh()
 	{
+		#ifdef YUNI_EXTERNAL_3D_IRRLICHT
 		pProxy = new Yuni::Private::Gfx::Irrlicht::Mesh();
+		#endif
+		#ifdef YUNI_EXTERNAL_3D_OGRE
+		//pProxy = new Yuni::Private::Gfx::Ogre::Mesh();
+		#endif
 	}
 
 	Mesh::~Mesh()

@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include "../yuni.h"
-# include "../toolbox/smartptr/sharedptr.h"
+# include "../toolbox/smartptr/smartptr.h"
 # include "../system/devices/resolution.h"
 # include "../system/devices/monitor.h"
 
@@ -144,12 +144,12 @@ namespace Gfx
 		/*!
 		** \brief Monitor
 		*/
-		SharedPtr<System::Devices::Display::Monitor> monitor() const {return pMonitor;}
+		SmartPtr<System::Devices::Display::Monitor> monitor() const {return pMonitor;}
 
 		/*!
 		** \brief Set the monitor to use
 		*/
-		void monitor(const SharedPtr<System::Devices::Display::Monitor>& m);
+		void monitor(const SmartPtr<System::Devices::Display::Monitor>& m);
 
 		//@}
 
@@ -160,13 +160,13 @@ namespace Gfx
 		/*!
 		** \brief Screen resolution
 		*/
-		SharedPtr<System::Devices::Display::Resolution> resolution() const
+		SmartPtr<System::Devices::Display::Resolution> resolution() const
 		{return pResolution;}
 
 		/*!
 		** \brief Set the screen resolution
 		*/
-		void resolution(const SharedPtr<System::Devices::Display::Resolution>& r);
+		void resolution(const SmartPtr<System::Devices::Display::Resolution>& r);
 
 		/*!
 		** \brief Set the screen resolution
@@ -251,9 +251,9 @@ namespace Gfx
 		//! Type of the device
 		Type pType;
 		//! The monitor
-		SharedPtr<System::Devices::Display::Monitor> pMonitor;
+		SmartPtr<System::Devices::Display::Monitor> pMonitor;
 		//! The resolution
-		SharedPtr<System::Devices::Display::Resolution> pResolution;
+		SmartPtr<System::Devices::Display::Resolution> pResolution;
 		//! Fullscreen
 		bool pFullscreen;
 		//! Stencilbuffer
@@ -277,7 +277,7 @@ namespace Gfx
 
 inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Device& rhs)
 { return rhs.print(out); }
-inline std::ostream& operator << (std::ostream& out, const Yuni::SharedPtr<Yuni::Gfx::Device>& rhs)
+inline std::ostream& operator << (std::ostream& out, const Yuni::SmartPtr<Yuni::Gfx::Device>& rhs)
 { return rhs->print(out); }
 
 

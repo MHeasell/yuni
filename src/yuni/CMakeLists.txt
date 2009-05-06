@@ -252,10 +252,26 @@ Set(SRC_EXTERNAL_3D_IRRLICHT
 		private/gfx3d/irrlicht/irr.mesh.h private/gfx3d/irrlicht/irr.mesh.cpp)
 source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
 
-Set(SRC_EXTERNAL_3D
+# External Lib: Ogre3D
+Set(SRC_EXTERNAL_3D_OGRE
+		private/gfx3d/ogre/ogre.h
+		private/gfx3d/ogre/ogre.engine.h private/gfx3d/ogre/ogre.engine.cpp)
+#		private/gfx3d/ogre/ogre.mesh.h private/gfx3d/ogre/ogre.mesh.cpp)
+source_group("Private\\Gfx3D\\Ogre" FILES ${SRC_EXTERNAL_3D_OGRE})
+
+IF(YUNI_EXTERNAL_3D_IRRLICHT)
+	Set(SRC_EXTERNAL_3D
 		private/gfx3d/abstract.h private/gfx3d/abstract.cpp
 		${YUNI_EXT_IRRLICHT_SRC}  # From DevPack 'irrlicht-headers'
 		${SRC_EXTERNAL_3D_IRRLICHT})
+ENDIF(YUNI_EXTERNAL_3D_IRRLICHT)
+
+IF(YUNI_EXTERNAL_3D_OGRE)
+	Set(SRC_EXTERNAL_3D
+		private/gfx3d/abstract.h private/gfx3d/abstract.cpp
+		${YUNI_EXT_OGRE_SRC}  # From DevPack 'ogre-headers'
+		${SRC_EXTERNAL_3D_OGRE})
+ENDIF(YUNI_EXTERNAL_3D_OGRE)
 
 
 #
@@ -314,7 +330,7 @@ If(YUNI_MODULE_GFX3D)
 
 	Message(STATUS "Module: Gfx3D")
 
-	if(YUNI_EXTERNAL_3D_IRRLICHT)
+	If(YUNI_EXTERNAL_3D_IRRLICHT)
 		Message(STATUS "Module: Gfx3D::Irrlicht")
 		# Headers for Irrlicht
 		DEVPACK_IMPORT_IRRLICHT()
@@ -323,8 +339,18 @@ If(YUNI_MODULE_GFX3D)
 			${SRC_EXTERNAL_3D}
 			${YUNI_EXT_IRRLICHT_SRC}  # From DevPack 'irrlicht-headers'
 			)
-
 	Endif(YUNI_EXTERNAL_3D_IRRLICHT)
+
+	If(YUNI_EXTERNAL_3D_OGRE)
+		Message(STATUS "Module: Gfx3D::Ogre")
+		# Headers for Ogre
+		DEVPACK_IMPORT_OGRE()
+
+		Set(SRC_EXTERNAL_3D
+			${SRC_EXTERNAL_3D}
+			${YUNI_EXT_OGRE_SRC}  # From DevPack 'ogre-headers'
+			)
+	Endif(YUNI_EXTERNAL_3D_OGRE)
 
 	Add_Library(yuni-static-gfx3d STATIC
 				${SRC_DEVICES} ${SRC_APPLICATION_GFX}

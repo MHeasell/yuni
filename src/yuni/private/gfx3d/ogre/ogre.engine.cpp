@@ -1,10 +1,37 @@
 
-#include "irr.h"
-#include "irr.engine.h"
+#include "ogre.h"
+#include "ogre.engine.h"
+#include "../../../toolbox/string.h"
 #include "../../../toolbox/system/sleep.h"
 #include "../../../threads.h"
 #include <iostream>
 
+#ifdef YUNI_OS_DARWIN
+#include <CoreFoundation/CoreFoundation.h>
+
+// This function will locate the path to our application on OS X,
+// unlike windows you can not rely on the current working directory
+// for locating your configuration files and resources.
+static Yuni::String macBundlePath()
+{
+    char path[1024];
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    assert(mainBundle);
+
+    CFURLRef mainBundleURL = CFBundleCopyBundleURL(mainBundle);
+    assert(mainBundleURL);
+
+    CFStringRef cfStringRef = CFURLCopyFileSystemPath( mainBundleURL, kCFURLPOSIXPathStyle);
+    assert(cfStringRef);
+
+    CFStringGetCString(cfStringRef, path, 1024, kCFStringEncodingASCII);
+
+    CFRelease(mainBundleURL);
+    CFRelease(cfStringRef);
+
+    return Yuni::String(path);
+}
+#endif
 
 
 namespace Yuni
@@ -13,39 +40,29 @@ namespace Private
 {
 namespace Gfx
 {
-namespace Irrlicht
+namespace Ogre
 {
 
-
-	irr::video::E_DRIVER_TYPE Engine::YuniDeviceToIrrDevice(const Yuni::Gfx::Device::Type& t)
+	Engine::Engine()
+		:Private::Gfx::EngineAbstract(), pRoot(NULL), pWindow(NULL), pRunnable(false)
 	{
-		switch (t)
-		{
-			// case Yuni::Gfx::Device::ygdtNull     : { return irr::video::EDT_NULL; }
-			# ifndef YUNI_OS_DARWIN
-			case Yuni::Gfx::Device::ygdtSoftware : { return irr::video::EDT_BURNINGSVIDEO; }
-			# endif
-			case Yuni::Gfx::Device::ygdtOpenGL   : { return irr::video::EDT_OPENGL; }
-			# ifdef YUNI_OS_WINDOWS
-			case Yuni::Gfx::Device::ygdtDirectX9 : { return irr::video::EDT_DIRECT3D9; }
-			case Yuni::Gfx::Device::ygdtDirectX8 : { return irr::video::EDT_DIRECT3D8; }
-			# endif
-			// The defaut renderer should be OpenGL
-			default : { return irr::video::EDT_OPENGL; }
-		}
-		return irr::video::EDT_OPENGL;
+		#ifdef YUNI_OS_DARWIN
+		pResourcePath = macBundlePath() + "/Contents/Resources/";
+		#else
+		pResourcePath = "";
+		#endif
 	}
 
-
-	Engine::Engine()
-		:Private::Gfx::EngineAbstract(), pIrrDevice(NULL), pBackgroundColor(0, 0, 0, 0),
-		pRunnable(false)
-	{}
-
 	Engine::Engine(SmartPtr<Yuni::Gfx::Device> dc)
-		:Private::Gfx::EngineAbstract(), pIrrDevice(NULL)
+		:Private::Gfx::EngineAbstract(), pRoot(NULL), pWindow(NULL)
 	{
 		this->initialize(dc);
+
+		#ifdef YUNI_OS_DARWIN
+		pResourcePath = macBundlePath() + "/Contents/Resources/";
+		#else
+		pResourcePath = "";
+		#endif
 	}
 
 
@@ -61,43 +78,47 @@ namespace Irrlicht
 	bool Engine::initialize(SmartPtr<Yuni::Gfx::Device> dc)
 	{
 		// We keep a reference to the yuni device
-		if (dc.null())
+		if (NULL == dc)
 			return false;
 
 		// Ensure that a device is not already initialized
 		release();
 		// Getting a reference to the information about the Device
 		pDevice = dc;
-		// Create the Irrlicht device
-		pIrrDevice = irr::createDevice(YuniDeviceToIrrDevice(dc->type()),
-									   //irr::core::dimension2d<irr::s32>(pDevice->resolution()->width(), pDevice->resolution()->height()),
-									   irr::core::dimension2d<irr::s32>(800, 600),
-									   (int) pDevice->resolution()->bitPerPixel(),
-									   pDevice->fullscreen(), pDevice->stencilbuffer(), pDevice->vsync(), NULL);
+		String pluginsPath = pResourcePath + "plugins.cfg";
+		// Create the Ogre root
+		pRoot = new ::Ogre::Root(pluginsPath.data(), pResourcePath + "ogre.cfg", pResourcePath + "Ogre.log");
 
-		if (pIrrDevice)
-		{
-			// Set the window caption
-			this->applicationTitle(pApplicationTitle);
-			pRunnable = true;
-			return true;
-		}
-		return false;
+		if (!pRoot)
+			return false;
+
+		// Initialise the renderer but do not create a default window
+		pRoot->initialise(false, NULL);
+
+		::Ogre::NameValuePairList params;
+		#ifdef YUNI_OS_WINDOWS
+		params["colourDepth"] = String((uint16)pDevice->resolution()->bitPerPixel()).data();
+		#endif
+		// We create our own custom window with our own settings
+		pWindow = pRoot->createRenderWindow(pApplicationTitle.data(), pDevice->resolution()->width(), pDevice->resolution()->height(), pDevice->fullscreen(), &params);
+
+		// Set the window caption
+		this->applicationTitle(pApplicationTitle);
+		pRunnable = true;
+		return true;
 	}
 
 
 
 	void Engine::run()
 	{
-		if (!pIrrDevice) // No device, aborting
+		if (!pRoot) // No device, aborting
 			return;
 
-		// The Irrlicht Video driver
-		pIrrVideoDriver  = pIrrDevice->getVideoDriver();
-		// The Irrlicht scene manager
-		pIrrSceneManager = pIrrDevice->getSceneManager();
+		// The Ogre scene manager
+		pSceneManager = pRoot->createSceneManager(::Ogre::ST_GENERIC, ::Ogre::String(pApplicationTitle.data()));
 		// Those vars must be valid
-		if (!pIrrVideoDriver || !pIrrSceneManager) // It seems that is not the case
+		if (!pWindow || !pSceneManager) // It seems that is not the case
 			return;
 
 		// Reduces the scheduling priority for some processes
@@ -109,7 +130,7 @@ namespace Irrlicht
 		pIsRunning = true;
 		// Ready to loop
 		pRunnable = true;
-
+/*
 		while (pRunnable && pIrrDevice->run()) // Cycle
 		{
 			// Begin the entire scene
@@ -123,7 +144,7 @@ namespace Irrlicht
 			if (0 == limitCPUConsuming)
 			{
 				// Frames per second
-				int currentFPS = pIrrVideoDriver->getFPS();
+				int currentFPS = pWindow->getLastFPS();
 				if (currentFPS != pFPS)
 				{
 					pFPS = currentFPS;
@@ -134,35 +155,34 @@ namespace Irrlicht
 				// When the window is inactive, there is no need for full-speed
 				if (!pIrrDevice->isWindowActive())
 				{
-					Yuni::SleepMilliSeconds(30 /*ms*/);
+					Yuni::SleepMilliSeconds(30 /*ms*//*);
 				}
 
 				// Next in 10 cycles
 				limitCPUConsuming = 10; 
 			}
 		}
-
+*/
 		// Resetting vars
 		pIsRunning = false;
-		pIrrVideoDriver = NULL;
-		pIrrSceneManager = NULL;
+		pSceneManager = NULL;
 	}
 
 
 	void Engine::release()	
 	{
 		pRunnable = false;
-		if (pIrrDevice)
+		if (pRoot)
 		{
 			// Close the device
 			waitForEngineToStop();
 			// Destroy the Irrlicht device
-			if (pIrrDevice) // double check
-				pIrrDevice->drop();
+			if (pRoot) // double check
+				delete pRoot;
 		}
-		pIrrSceneManager = NULL;
-		pIrrVideoDriver = NULL;
-		pIrrDevice = NULL;
+		pSceneManager = NULL;
+		pWindow = NULL;
+		pRoot = NULL;
 	}
 
 
@@ -200,7 +220,7 @@ namespace Irrlicht
 		// We should stop as soon as possible
 		pRunnable = false;
 
-		if (pIrrDevice && pIsRunning)
+		if (pRoot && pIsRunning)
 		{
 			ThreadWaitForEngineToStop th(*this);
 			th.start();
@@ -209,7 +229,7 @@ namespace Irrlicht
 			th.stop(10);
 
 			// Does not destroy the device, it will only be closed
-			pIrrDevice->closeDevice();
+			pRoot->shutdown();
 		}
 	}
 
@@ -217,12 +237,11 @@ namespace Irrlicht
 	void Engine::applicationTitle(const String& t)
 	{
 		pMutex.lock();
-		if (pIrrDevice)
+		if (pRoot)
 		{
 			pApplicationTitle = t;
-			// Convertion to wchar_t
-			const irr::core::stringw twchar(t.c_str());
-			pIrrDevice->setWindowCaption(twchar.c_str());
+			// TODO: Find a way to do this. Is it even possible?
+			// pRoot->setWindowCaption(t);
 		}
 		pMutex.unlock();
 	}
@@ -230,7 +249,7 @@ namespace Irrlicht
 
 
 
-} // namespace Irrlicht
+} // namespace Ogre
 } // namespace Gfx
 } // namespace Private
 } // namespace Yuni
