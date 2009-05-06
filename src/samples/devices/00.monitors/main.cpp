@@ -13,7 +13,7 @@ void title(const String& t)
 }
 
 
-void printMonitor(SharedPtr<System::Devices::Display::Monitor> monitor)
+void printMonitor(SmartPtr<System::Devices::Display::Monitor> monitor)
 {
 	// The name of the monitor
 	std::cout << "Name: " << (monitor->name().empty() ? "<Unknown>" : monitor->name());
@@ -30,7 +30,7 @@ void printMonitor(SharedPtr<System::Devices::Display::Monitor> monitor)
 	System::Devices::Display::Resolution::Vector::const_iterator it;
 	for (it = monitor->resolutions().begin(); it != monitor->resolutions().end(); ++it)
 	{
-		// SharedPtr<System::Devices::Display::Resolution> resolution(*it);
+		// SmartPtr<System::Devices::Display::Resolution> resolution(*it);
 		std::cout << "  . " << (*it)->toString() << std::endl;
 	}
 }

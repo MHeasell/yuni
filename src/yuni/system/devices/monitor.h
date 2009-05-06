@@ -6,7 +6,7 @@
 # include "../../yuni.h"
 # include "resolution.h"
 # include "../../toolbox/string.h"
-# include "../../toolbox/smartptr/sharedptr.h"
+# include "../../toolbox/smartptr/smartptr.h"
 
 
 
@@ -29,9 +29,9 @@ namespace Display
 	{
 	public:
 		//! List of monitor
-		typedef std::list< SharedPtr<Monitor> >  List;
+		typedef std::list< SmartPtr<Monitor> >  List;
 		//! Vector of monitor
-		typedef std::vector< SharedPtr<Monitor> >  Vector;
+		typedef std::vector< SmartPtr<Monitor> >  Vector;
 
 		/*!
 		** \brief Handle for a single monitor
@@ -128,7 +128,7 @@ namespace Display
 		**
 		** It is merely the highest available resolution
 		*/
-		SharedPtr<Resolution> recommendedResolution() const {return *pResolutions.begin();}
+		SmartPtr<Resolution> recommendedResolution() const {return *pResolutions.begin();}
 
 		/*!
 		** \brief Get if a resolution is valid for this monitor
@@ -136,7 +136,7 @@ namespace Display
 		** \param rhs The resolution to check
 		** \return True if the resolution is valid, merely if this resolution is in the list
 		*/
-		bool resolutionIsValid(const SharedPtr<Resolution>& rhs) const;
+		bool resolutionIsValid(const SmartPtr<Resolution>& rhs) const;
 
 		/*!
 		** \brief Get if this monitor is the primary display
@@ -163,7 +163,7 @@ namespace Display
 		** \param[in] r The resolution to add
 		** \internal It is a sorted descendant list. The first value must be the highest available value
 		*/
-		void addResolution(SharedPtr<Resolution>& r);
+		void addResolution(SmartPtr<Resolution>& r);
 
 	protected:
 		//! The index of the monitor

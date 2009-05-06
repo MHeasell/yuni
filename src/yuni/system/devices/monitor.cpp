@@ -49,21 +49,21 @@ namespace Display
 	}
 
 
-	void Monitor::addResolution(SharedPtr<Resolution>& r)
+	void Monitor::addResolution(SmartPtr<Resolution>& r)
 	{
 		pResolutions.push_back(r);
 	}
 
 	
-	bool Monitor::resolutionIsValid(const SharedPtr<Resolution>& rhs) const
+	bool Monitor::resolutionIsValid(const SmartPtr<Resolution>& rhs) const
 	{
-		if (!rhs.null()) // The pointer must be valid
+		if (NULL != rhs) // The pointer must be valid
 		{
 			// Browse all available resolutions
 			// The lookup should be done in the usual way since it is a sorted descendant list
 			for (Resolution::Vector::const_iterator it = pResolutions.begin(); it != pResolutions.end(); ++it)
 			{
-				if (it->null() && *(*it) == *rhs)
+				if (NULL != (*it) && *(*it) == *rhs)
 					return true;
 			}
 		}

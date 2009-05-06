@@ -42,7 +42,7 @@ namespace Display
 		**
 		** The result is guaranteed to be valid for use.
 		*/
-		const SharedPtr<Monitor>& primary() const {return pPrimary;}
+		const SmartPtr<Monitor>& primary() const {return pPrimary;}
 
 		/*!
 		** \brief All available monitors
@@ -59,7 +59,7 @@ namespace Display
 		**
 		** \see Monitor::valid()
 		*/
-		SharedPtr<Monitor> findByHandle(const Monitor::Handle hwn) const;
+		SmartPtr<Monitor> findByHandle(const Monitor::Handle hwn) const;
 
 		/*!
 		** \brief Find a monitor by its guid
@@ -71,16 +71,16 @@ namespace Display
 		**
 		** \see Monitor::valid()
 		*/
-		SharedPtr<Monitor> findByGUID(const String& guid) const;
+		SmartPtr<Monitor> findByGUID(const String& guid) const;
 
 
 	private:
 		//! All available monitors
 		Monitor::Vector  pMonitors;
 		//! The primary display
-		SharedPtr<Monitor> pPrimary;
+		SmartPtr<Monitor> pPrimary;
 		//! A null monitor
-		SharedPtr<Monitor> pNullMonitor;
+		SmartPtr<Monitor> pNullMonitor;
 
 	}; // class List
 

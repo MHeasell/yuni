@@ -9,6 +9,7 @@ Set(YUNI_MODULE_CORE                      TRUE) # Must be equals to True
 # Gfx3D
 Set(YUNI_MODULE_GFX3D                     FALSE)
 	Set(YUNI_EXTERNAL_3D_IRRLICHT         TRUE)
+	Set(YUNI_EXTERNAL_3D_OGRE             FALSE)
 
 # Scripts
 Set(YUNI_MODULE_SCRIPT                    FALSE)
@@ -78,7 +79,7 @@ IF(MODULES)
 		EndIf("${it}" STREQUAL "all")
 
 
-		# net 
+		# net
 		If("${it}" STREQUAL "net")
 			Set(YUNI_MODULE_NET TRUE)
 			Set(KeywordIsKnown TRUE)
@@ -112,6 +113,17 @@ IF(MODULES)
 			Set(YUNI_EXTERNAL_3D_IRRLICHT FALSE)
 		EndIf("${it}" STREQUAL "-irrlicht")
 
+		# ogre
+		If("${it}" STREQUAL "ogre")
+			Set(KeywordIsKnown TRUE)
+			Set(YUNI_MODULE_GFX3D TRUE)
+			Set(YUNI_EXTERNAL_3D_OGRE TRUE)
+		EndIf("${it}" STREQUAL "ogre")
+		# -ogre
+		If("${it}" STREQUAL "-ogre")
+			Set(KeywordIsKnown TRUE)
+			Set(YUNI_EXTERNAL_3D_OGRE FALSE)
+		EndIf("${it}" STREQUAL "-ogre")
 
 
 
@@ -237,6 +249,7 @@ IF(MODULES)
 		Message(STATUS " The gfx modules :")
 		Message(STATUS "    -/+gfx3d     : The Gfx3D module (default: disabled)")
 		Message(STATUS "    -/+irrlicht  : The Irrlicht extension (default: enabled)")
+		Message(STATUS "    -/+ogre      : The Ogre3D extension (default: disabled)")
 		Message(STATUS " The scripting modules :")
 		Message(STATUS "    -/+script    : The script module (default: disabled)")
 		Message(STATUS "    -/+lua       : The Lua extension (default: enabled)")
@@ -251,10 +264,10 @@ ENDIF(MODULES)
 
 
 IF(YUNI_MODULE_GFX3D)
-	IF(NOT YUNI_EXTERNAL_3D_IRRLICHT)
+	IF(NOT YUNI_EXTERNAL_3D_IRRLICHT AND NOT YUNI_EXTERNAL_3D_OGRE)
 		Message(STATUS "[!!] Warning: No external extension for the `Gfx3D` module. The module has been disabled.")
 		Set(YUNI_MODULE_GFX3D FALSE)
-	ENDIF(NOT YUNI_EXTERNAL_3D_IRRLICHT)
+	ENDIF(NOT YUNI_EXTERNAL_3D_IRRLICHT AND NOT YUNI_EXTERNAL_3D_OGRE)
 ELSE(YUNI_MODULE_GFX3D)
 
 	IF(NOT YUNI_MODULE_UI_3D)

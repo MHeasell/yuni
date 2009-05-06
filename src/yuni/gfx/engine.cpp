@@ -6,6 +6,10 @@
 #  include "../private/gfx3d/irrlicht/irr.engine.h"
 #endif
 
+#ifdef YUNI_EXTERNAL_3D_OGRE
+#  include "../private/gfx3d/ogre/ogre.h"
+#  include "../private/gfx3d/ogre/ogre.engine.h"
+#endif
 
 
 namespace Yuni
@@ -21,7 +25,11 @@ namespace Gfx
 		# ifdef YUNI_EXTERNAL_3D_IRRLICHT
 		Private::Gfx::Irrlicht::Engine external3DEngine;
 		# else
+		# ifdef YUNI_EXTERNAL_3D_OGRE
+		Private::Gfx::Ogre::Engine external3DEngine;
+		# else
 		#	error "The external 3D engine is not defined"
+		# endif
 		# endif
 
 		Engine globalEngine;
@@ -61,7 +69,7 @@ namespace Gfx
 
 
 
-	bool Engine::reset(const SharedPtr<Device>& dc)
+	bool Engine::reset(const SmartPtr<Device>& dc)
 	{
 		// Lock
 		MutexLocker locker(pMutex);
@@ -70,7 +78,7 @@ namespace Gfx
 		external3DEngine.waitForEngineToStop();
 
 		// There is nothing to do if the device is null
-		if (dc.valid())
+		if (!dc)
 		{
 			// Getting a reference to the information about the Device
 			pDevice = dc;
@@ -92,10 +100,10 @@ namespace Gfx
 	bool Engine::resetWithFailSafeSettings(const bool fullscreenMode)
 	{
 		// Informations about the device
-		SharedPtr<Gfx::Device> newDevice(new Gfx::Device());
+		SmartPtr<Gfx::Device> newDevice(new Gfx::Device());
 		newDevice->fullscreen(fullscreenMode);
 		// The fail-safe resolution
-		SharedPtr<System::Devices::Display::Resolution> fsRes(new System::Devices::Display::Resolution(800, 600));
+		SmartPtr<System::Devices::Display::Resolution> fsRes(new System::Devices::Display::Resolution(800, 600));
 		newDevice->resolution(fsRes);
 
 		// Apply the new settings
@@ -107,7 +115,7 @@ namespace Gfx
 	bool Engine::resetWithRecommendedSettings(const bool fullscreenMode)
 	{
 		// Informations about the device
-		SharedPtr<Gfx::Device> newDevice(new Gfx::Device());
+		SmartPtr<Gfx::Device> newDevice(new Gfx::Device());
 		newDevice->fullscreen(fullscreenMode);
 
 		// Apply the new settings

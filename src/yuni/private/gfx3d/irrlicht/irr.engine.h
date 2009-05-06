@@ -25,13 +25,13 @@ namespace Irrlicht
 		//! \name Constructors & Destructor
 		//@{
 		Engine();
-		Engine(SharedPtr<Yuni::Gfx::Device> dc);
+		Engine(SmartPtr<Yuni::Gfx::Device> dc);
 		virtual ~Engine();
 		//@}
 
 		virtual String name() const {return "Irrlicht Engine";}
 
-		virtual bool initialize(SharedPtr<Yuni::Gfx::Device> dc);
+		virtual bool initialize(SmartPtr<Yuni::Gfx::Device> dc);
 		virtual void release();
 		virtual bool ready() const {return (pIrrDevice != NULL);}
 		virtual void run();
@@ -43,7 +43,7 @@ namespace Irrlicht
 
 	private:
 		//! The yuni device
-		SharedPtr<Yuni::Gfx::Device> pDevice;
+		SmartPtr<Yuni::Gfx::Device> pDevice;
 		//! The Irrlicht device
 		irr::IrrlichtDevice* pIrrDevice;
 		//! The Irrlicht Video Device

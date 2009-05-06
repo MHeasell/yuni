@@ -3,7 +3,7 @@
 
 # include "../../yuni.h"
 # include "../../gfx/device.h"
-# include "../../toolbox/smartptr/sharedptr.h"
+# include "../../toolbox/smartptr/smartptr.h"
 # include "../../toolbox/event/event.h"
 # include "../../threads/mutex.h"
 
@@ -21,7 +21,8 @@ namespace Gfx
 	/*!
 	** \brief Base class for back-end 3D engine (abstract)
 	**
-	** \see class Yuni::Private::Gfx::Irrlich::Engine
+	** \see class Yuni::Private::Gfx::Irrlicht::Engine
+	** \see class Yuni::Private::Gfx::Ogre::Engine
 	*/
 	class EngineAbstract
 	{
@@ -66,7 +67,7 @@ namespace Gfx
 		** \param dc Information about the device to initialize. If NULL, nothing will be done
 		** \return True if the operation succeeded, False otherwise
 		*/
-		virtual bool initialize(SharedPtr<Yuni::Gfx::Device> dc) = 0;
+		virtual bool initialize(SmartPtr<Yuni::Gfx::Device> dc) = 0;
 
 		/*!
 		** \brief Release the last initialized 3D Device
