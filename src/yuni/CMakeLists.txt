@@ -43,7 +43,6 @@ source_group(ToolBox\\DynamicLibrary FILES ${SRC_TOOLBOX_DYNAMICLIBRARY})
 
 
 
-
 Set(SRC_TOOLBOX_STRING
 				toolbox/string/string.h toolbox/string/string.hxx
 				toolbox/string/string.converters.from.hxx toolbox/string/string.converters.to.hxx
