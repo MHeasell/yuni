@@ -47,7 +47,7 @@ namespace DynamicLibrary
 
 	Symbol::Handle File::wrapperDlSym(const File::Handle h, const char* name)
 	{
-		return YUNI_DYNLIB_DLSYM(h, name);
+		return (Symbol::Handle)(YUNI_DYNLIB_DLSYM(h, name));
 	}
 
 

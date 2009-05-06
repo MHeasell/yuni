@@ -2,8 +2,8 @@
 #
 # DevPacks Settings
 #
-SET(DevPackSourceFolder     "${CMAKE_SOURCE_DIR}/../devpacks")
-SET(DevPackReceiptsFolder   "${CMAKE_SOURCE_DIR}/../devpacks/receipts")
+SET(DevPackSourceFolder     "${CMAKE_CURRENT_SOURCE_DIR}/../devpacks")
+SET(DevPackReceiptsFolder   "${CMAKE_CURRENT_SOURCE_DIR}/../devpacks/receipts")
 SET(DevPackRepositoryURL    "http://devpacks.libyuni.org/")
 SET(DevPackSourceURL        "http://devpacks.libyuni.org/downloads")
 SET(DevPackPrefix           "yndevpack")
@@ -20,7 +20,9 @@ String(COMPARE EQUAL "${DevPackSourceZIP}" "DevPackSourceZIP-NOTFOUND" DevPackUn
 IF(DevPackUnzipHasNotBeenFound)
 	Message(FATAL_ERROR "The program 'unzip' has not been found")
 EndIF(DevPackUnzipHasNotBeenFound)
-
+IF(WIN32)
+    Message(STATUS "unzip: ${DevPackSourceZIP}")
+ENDIF(WIN32)
 
 
 SET(DEVPACK_OS					) # macos, windows, linux, sun
