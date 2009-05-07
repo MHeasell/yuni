@@ -93,7 +93,7 @@ namespace Ogre
 			return false;
 
 		// Initialise the renderer but do not create a default window
-		pRoot->initialise(false, NULL);
+		pRoot->initialise(false);
 
 		::Ogre::NameValuePairList params;
 		#ifdef YUNI_OS_WINDOWS
@@ -130,39 +130,40 @@ namespace Ogre
 		pIsRunning = true;
 		// Ready to loop
 		pRunnable = true;
-/*
-		while (pRunnable && pIrrDevice->run()) // Cycle
+
+		while (pRunnable) // Cycle
 		{
-			// Begin the entire scene
-			pIrrVideoDriver->beginScene(true, true, pBackgroundColor);
-			// Draw all 3D objects
-			pIrrSceneManager->drawAll();
-			// End
-			pIrrVideoDriver->endScene();
+			pRoot->renderOneFrame();
+			//// Begin the entire scene
+			//pIrrVideoDriver->beginScene(true, true, pBackgroundColor);
+			//// Draw all 3D objects
+			//pIrrSceneManager->drawAll();
+			//// End
+			//pIrrVideoDriver->endScene();
 
-			--limitCPUConsuming;
-			if (0 == limitCPUConsuming)
-			{
-				// Frames per second
-				int currentFPS = pWindow->getLastFPS();
-				if (currentFPS != pFPS)
-				{
-					pFPS = currentFPS;
-					// Call event onFPSChanged here
-					this->onFPSChanged(pFPS);
-				}
+			//--limitCPUConsuming;
+			//if (0 == limitCPUConsuming)
+			//{
+			//	// Frames per second
+			//	int currentFPS = pWindow->getLastFPS();
+			//	if (currentFPS != pFPS)
+			//	{
+			//		pFPS = currentFPS;
+			//		// Call event onFPSChanged here
+			//		this->onFPSChanged(pFPS);
+			//	}
 
-				// When the window is inactive, there is no need for full-speed
-				if (!pIrrDevice->isWindowActive())
-				{
-					Yuni::SleepMilliSeconds(30 /*ms*//*);
-				}
+			//	// When the window is inactive, there is no need for full-speed
+			//	if (!pIrrDevice->isWindowActive())
+			//	{
+			//		Yuni::SleepMilliSeconds(30 /*ms*/);
+			//	}
 
-				// Next in 10 cycles
-				limitCPUConsuming = 10; 
-			}
+			//	// Next in 10 cycles
+			//	limitCPUConsuming = 10; 
+			// }
 		}
-*/
+
 		// Resetting vars
 		pIsRunning = false;
 		pSceneManager = NULL;

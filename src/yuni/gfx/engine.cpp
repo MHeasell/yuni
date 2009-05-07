@@ -78,7 +78,7 @@ namespace Gfx
 		external3DEngine.waitForEngineToStop();
 
 		// There is nothing to do if the device is null
-		if (!dc)
+		if (NULL != dc)
 		{
 			// Getting a reference to the information about the Device
 			pDevice = dc;
