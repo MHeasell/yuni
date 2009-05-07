@@ -581,7 +581,7 @@ namespace Toolbox
 		void internalDetachFromParentWithoutNotify();
 
 	private:
-		typename ThreadingPolicy::template Volatile<int>::Type* pRefCount;
+		typename ThreadingPolicy::template Volatile<int>::Type pRefCount;
 
 	}; // class TreeN
 

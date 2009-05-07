@@ -53,7 +53,7 @@ namespace Toolbox
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return pChildrenCount;
 	}
-		
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
 	inline typename TreeN<T,TP,ChckP,TrckP,ConvP>::SizeType TreeN<T,TP,ChckP,TrckP,ConvP>::size()
@@ -93,8 +93,8 @@ namespace Toolbox
 		newParent->push_back(this);
 	}
 
-	
-	
+
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
 	inline bool TreeN<T,TP,ChckP,TrckP,ConvP>::internalRemoveChild(Node& node)
@@ -102,7 +102,7 @@ namespace Toolbox
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return internalRemoveChildWL(node);
 	}
-	
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		template <class> class TrckP, class ConvP>
 	bool TreeN<T,TP,ChckP,TrckP,ConvP>::internalRemoveChildWL(Node& node)
@@ -501,7 +501,7 @@ namespace Toolbox
 		{
 			// Locking the parent
 			typename ThreadingPolicy::MutexLocker locker(pParent);
-			
+
 			// Ok we have to move
 			detachFromParentWL();
 			pParent->pushBackWL(this);
@@ -522,7 +522,7 @@ namespace Toolbox
 		{
 			// Locking the parent
 			typename ThreadingPolicy::MutexLocker locker(pParent);
-			
+
 			// Ok we have to move
 			detachFromParentWL();
 			pParent->pushFrontWL(this);
