@@ -254,8 +254,8 @@ source_group("Private\\Gfx3D\\Irrlicht" FILES ${SRC_EXTERNAL_3D_IRRLICHT})
 # External Lib: Ogre3D
 Set(SRC_EXTERNAL_3D_OGRE
 		private/gfx3d/ogre/ogre.h
-		private/gfx3d/ogre/ogre.engine.h private/gfx3d/ogre/ogre.engine.cpp)
-#		private/gfx3d/ogre/ogre.mesh.h private/gfx3d/ogre/ogre.mesh.cpp)
+		private/gfx3d/ogre/ogre.engine.h private/gfx3d/ogre/ogre.engine.cpp
+		private/gfx3d/ogre/ogre.mesh.h private/gfx3d/ogre/ogre.mesh.cpp)
 source_group("Private\\Gfx3D\\Ogre" FILES ${SRC_EXTERNAL_3D_OGRE})
 
 IF(YUNI_EXTERNAL_3D_IRRLICHT)
