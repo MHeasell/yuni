@@ -61,7 +61,7 @@ namespace Irrlicht
 	bool Engine::initialize(SmartPtr<Yuni::Gfx::Device> dc)
 	{
 		// We keep a reference to the yuni device
-		if (dc.null())
+		if (NULL == dc)
 			return false;
 
 		// Ensure that a device is not already initialized
