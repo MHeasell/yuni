@@ -52,6 +52,21 @@ Set(SRC_TOOLBOX_STRING
 				toolbox/string.h)
 source_group(ToolBox\\String FILES ${SRC_TOOLBOX_STRING})
 
+
+Set(SRC_TOOLBOX_LOGS
+				toolbox/logs/logs.h toolbox/logs/logs.hxx toolbox/logs/verbosity.h
+				toolbox/logs/null.h	toolbox/logs/stream.h
+				# Handlers
+				toolbox/logs/handlers/stdcout.h
+				# Decorators
+				toolbox/logs/decorators/verbositylevel.h
+				toolbox/logs/decorators/time.h
+				toolbox/logs/decorators/applicationname.h
+				toolbox/logs/decorators/message.h
+				toolbox/logs.h)
+source_group(ToolBox\\Logs FILES ${SRC_TOOLBOX_LOGS})
+
+
 Set(SRC_TOOLBOX_STL
 				toolbox/stl/algorithm.h)
 source_group(ToolBox\\Stl FILES ${SRC_TOOLBOX_STL})
@@ -280,6 +295,7 @@ Add_Library(yuni-static-core STATIC
 			${SRC_TOOLBOX_PREPROCESSOR}
 			${SRC_TOOLBOX_STATIC}
 			${SRC_TOOLBOX_STRING}
+			${SRC_TOOLBOX_LOGS}
 			${SRC_TOOLBOX_URI}
 			${SRC_TOOLBOX_UNIT}
 			${SRC_TOOLBOX_EXCEPTIONS}

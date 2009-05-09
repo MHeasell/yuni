@@ -817,6 +817,13 @@ namespace Yuni
 		Private::StringImpl::From<typename Static::Remove::Const<U>::Type>::Append(*this, u);
 	}
 
+	template<typename C, int Chunk>
+	inline void
+	StringBase<C,Chunk>::put(const C c)
+	{
+		Private::StringImpl::From<C>::Append(*this, c);
+	}
+
 
 	template<typename C, int Chunk>
 	template<class U>
