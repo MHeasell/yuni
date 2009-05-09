@@ -586,6 +586,11 @@ namespace Yuni
 		template<typename U> void push_back(const U& u);
 
 		/*!
+		** \brief Append a single char to the string
+		*/
+		void put(const C c);
+
+		/*!
 		** \brief Append a raw buffer to the end of the string
 		**
 		** No checks are performed here.
