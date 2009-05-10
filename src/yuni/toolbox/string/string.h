@@ -217,6 +217,10 @@ namespace Yuni
 		//! Compare two yuni Strings
 		template<int Chnk1, int Chnk2>
 		static int Compare(const StringBase<Char,Chnk1>& a, const StringBase<Char,Chnk2>& b, const Size maxLen = npos);
+
+		//! Compare two C-String (ignoring the case, as if it were two lowercase strings)
+		static int CompareInsensitive(const Char a[], const Char b[], const Size maxLen = npos);
+
 		//@}
 
 		//! \name Length
@@ -345,6 +349,12 @@ namespace Yuni
 		** \param quote The character to find, usually a quote
 		*/
 		static Size FindEndOfSequence(const Char* str, const Char quote, Size maxLen = npos);
+
+		/*!
+		** \brief Convert an ascii string into UTF8
+		*/
+		static StringBase ToUTF8(const C* s);
+		template<int Chnk1> static StringBase ToUTF8(const StringBase<C,Chnk1>& s);
 		//@} Misc
 
 	public:
@@ -746,9 +756,7 @@ namespace Yuni
 
 		//! \name Replace
 		//@{
-		template<typename U> StringBase& replace(const Size offset, const Size len, const U& by);
-		template<typename U, typename V> void replace(const U& u, const V& v);
-		//@}
+				//@}
 
 		//! \name Conversions
 		//@{
@@ -784,6 +792,10 @@ namespace Yuni
 		*/
 		template<typename U> bool to(U& u) const;
 
+		/*!
+		** \brief Convert the string to UTF8
+		*/
+		StringBase& toUTF8();
 
 		//! Get the char at a specific location
 		Char at(const Size offset) const;
@@ -828,6 +840,10 @@ namespace Yuni
 		//! Alias for find()
 		template<typename U> Size find_first_of(const U& u, const Size offset) const;
 
+		template<typename U> Size find_first_not_of(const U& u) const;
+		template<typename U> Size find_first_not_of(const U& u, const Size offset) const;
+
+
 		/*!
 		** \brief Try to find the last position of a substring from the end of the string
 		**
@@ -850,6 +866,9 @@ namespace Yuni
 		//! Alias for find()
 		template<typename U> Size find_last_of(const U& u, const Size offset) const;
 
+		template<typename U> Size find_last_not_of(const U& u) const;
+		template<typename U> Size find_last_not_of(const U& u, const Size offset) const;
+
 		//! Get if the string contains a char (O(N))
 		bool hasChar(const Char c) const;
 		//! Get if the string contains a char
@@ -861,18 +880,44 @@ namespace Yuni
 		** \brief Get the number of occurences of a char (O(N))
 		*/
 		Size countChar(const Char c) const;
+
+		/*!
+		** \brief Get if a given string can be found at the begining
+		**
+		** \param s The other string.
+		** \param option soIgnoreCase to be case insensitive
+		** \return True if `s` has been found at the begining of the string
+		*/
+		bool startsWith(const Char* s, CharCase option = soIgnoreCase) const;
+		template<int Chnk1> bool startsWith(const StringBase<Char,Chnk1>& s, CharCase option = soIgnoreCase) const;
+
+		/*!
+		** \brief Get if the string matches a simple pattern ('*' only managed)
+		*/
+		bool glob(const C* pattern) const;
+		template<int Chnk1> bool glob(const StringBase<Char,Chnk1>& pattern) const;
 		//@}
 
 
 		//! \name Replacing
 		//@{
 		/*!
+		** \brief Replace a sub part of the string by another one
+		*/
+		template<typename U> StringBase& replace(const Size offset, const Size len, const U& by);
+
+		/*!
+		** \brief Replace a substring by another thing
+		*/
+		template<typename U, typename V> StringBase& replace(const U& u, const V& v);
+
+		/*!
 		** \brief Replace all occurences of a given char by another one
 		**
 		** \param from The char to find and replace
 		** \param to The replacement
 		*/
-		void replace(const Char from, const Char to);
+		StringBase& replace(const Char from, const Char to);
 
 		/*!
 		** \brief Replace all occurences of a given char by another one starting from an offset
@@ -881,7 +926,7 @@ namespace Yuni
 		** \param to The replacement
 		** \param offset The index where to start from
 		*/
-		void replace(const Char from, const Char to, const Size offset);
+		StringBase& replace(const Char from, const Char to, const Size offset);
 		//@}
 
 		//! \name Extracting
@@ -894,6 +939,11 @@ namespace Yuni
 		** \brief Get the sub-string of the string
 		*/
 		StringBase substr(const Size offset, const Size len) const;
+
+		/*!
+		** \brief Get the sub-string of the string assuming it is an UTF8 charset
+		*/
+		StringBase substrUTF8(Size pos, Size len = npos) const;
 		//@}
 
 		//! \name Case conversion
@@ -1105,6 +1155,13 @@ namespace Yuni
 		//! Alias for size()
 		Size length() const;
 
+		//! Get the size (number of caracters) in the string, assuming it is an UTF8 charset
+		Size sizeUTF8() const;
+		//! Alias for sizeUTF8()
+		Size countUTF8() const;
+		//! Alias for sizeUTF8()
+		Size lengthUTF8() const;
+
 		/*!
 		** \brief Ensure that there is enough allocated space for X caracters
 		**
@@ -1274,21 +1331,15 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::StringBase<C,Ch
 }
 
 template<typename C, int Chunk>
-inline bool operator == (const Yuni::StringBase<C,Chunk>& rhs, const C* u)
+inline const bool operator == (const Yuni::StringBase<C,Chunk>& rhs, const C* u)
 {
 	return rhs == u;
 }
 
 template<typename C, int Chunk>
-inline bool operator == (const C* u, const Yuni::StringBase<C,Chunk>& rhs)
+inline const bool operator == (const C* u, const Yuni::StringBase<C,Chunk>& rhs)
 {
 	return rhs == u;
-}
-
-template<typename C, int Chunk>
-inline const Yuni::String operator + (const char* u, const Yuni::StringBase<C,Chunk>& rhs)
-{
-	return Yuni::String(u) += rhs;
 }
 
 template<typename C, int Chunk>
@@ -1298,16 +1349,51 @@ inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, cons
 }
 
 template<typename C, int Chunk>
+inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t* u)
+{
+	return Yuni::String(rhs) += u;
+}
+
+template<typename C, int Chunk>
+inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const char u)
+{
+	return Yuni::String(rhs) += u;
+}
+
+template<typename C, int Chunk>
+inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t u)
+{
+	return Yuni::String(rhs) += u;
+}
+
+
+
+template<typename C, int Chunk>
 inline const Yuni::String operator + (const wchar_t* u, const Yuni::StringBase<C,Chunk>& rhs)
 {
 	return Yuni::String(u) += rhs;
 }
 
 template<typename C, int Chunk>
-inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t* u)
+inline const Yuni::String operator + (const char* u, const Yuni::StringBase<C,Chunk>& rhs)
 {
-	return Yuni::String(rhs) += u;
+	return Yuni::String(u) += rhs;
 }
+
+template<typename C, int Chunk>
+inline const Yuni::String operator + (const char u, const Yuni::StringBase<C,Chunk>& rhs)
+{
+	return Yuni::String(u) += rhs;
+}
+
+template<typename C, int Chunk>
+inline const Yuni::String operator + (const wchar_t u, const Yuni::StringBase<C,Chunk>& rhs)
+{
+	return Yuni::String(u) += rhs;
+}
+
+
+
 
 template<typename C, int Chunk, typename U>
 inline const Yuni::String operator + (const std::basic_string<U>& u, const Yuni::StringBase<C,Chunk>& rhs)
@@ -1315,12 +1401,12 @@ inline const Yuni::String operator + (const std::basic_string<U>& u, const Yuni:
 	return Yuni::String(u) += rhs;
 }
 
+
 template<typename C, int Chunk, typename U>
 inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const std::basic_string<U>& u)
 {
 	return Yuni::String(rhs) += u;
 }
-
 
 template<typename C1, int Chunk1, typename C2, int Chunk2>
 inline Yuni::String operator + (const Yuni::StringBase<C1,Chunk1>& rhs, const Yuni::StringBase<C2,Chunk2>& u)

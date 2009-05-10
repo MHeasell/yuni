@@ -77,21 +77,12 @@ namespace StringImpl
 			}
 		}
 
-		static void pikocpy(char* dst, const char* src, size_t len)
-		{
-			assert(dst != NULL);
-			assert(src != NULL);
-			assert(len > 0);
-			for (size_t i = 0; i < len; ++i)
-				dst[i] = src[i];
-		}
-
 		template<typename C, int Chnk>
 		static inline void
 		AppendRaw(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len)
 		{
 			s.reserve(s.pSize + len + 1);
-			pikocpy(s.pPtr + sizeof(C) * s.pSize, (const char*)str, sizeof(char) * len);
+			memcpy(s.pPtr + sizeof(C) * s.pSize, (const char*)str, sizeof(char) * len);
 			s.pSize += len;
 			*(s.pPtr + s.pSize) = '\0';
 		}
@@ -103,7 +94,7 @@ namespace StringImpl
 		{
 			s.reserve(s.pSize + len + 1);
 			memmove(s.pPtr + sizeof(C) * (offset + len), s.pPtr + sizeof(C) * (offset), sizeof(C) * (s.pSize-offset));
-			pikocpy(s.pPtr + sizeof(C) * (offset), str, sizeof(C) * len);
+			memcpy(s.pPtr + sizeof(C) * (offset), str, sizeof(C) * len);
 			s.pSize += len;
 			*(s.pPtr + s.pSize) = '\0';
 		}
