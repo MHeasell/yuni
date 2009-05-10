@@ -171,8 +171,8 @@ public:
 	const_iterator(const const_reverse_iterator& it) :pStr(it.pStr), pIndx(it.pIndx) {}
 	const_iterator(reverse_iterator& it) :pStr(it.pStr), pIndx(it.pIndx) {}
 	const_iterator(const reverse_iterator& it) :pStr(it.pStr), pIndx(it.pIndx) {}
-	const_iterator(StringBase<Char,Chunk>& str) :pStr(&str), pIndx(0) {}
-	const_iterator(StringBase<Char,Chunk>& str, const Size p) :pStr(&str), pIndx(p) {}
+	const_iterator(const StringBase<Char,Chunk>& str) :pStr(&str), pIndx(0) {}
+	const_iterator(const StringBase<Char,Chunk>& str, const Size p) :pStr(&str), pIndx(p) {}
 
 	IteratorType& operator ++ ()
 	{

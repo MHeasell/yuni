@@ -226,6 +226,36 @@ namespace Yuni
 		return pSize;
 	}
 
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::sizeUTF8() const
+	{
+		typename StringBase<C,Chunk>::Size len(0);
+		for (typename StringBase<C,Chunk>::Size i = 0; i < pSize; ++i)
+		{
+			if (((unsigned char)pPtr[i]) >= 0xC0 || ((unsigned char)pPtr[i]) < 0x80)
+				++len;
+		}
+		return len;
+	}
+
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::countUTF8() const
+	{
+		return sizeUTF8();
+	}
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::lengthUTF8() const
+	{
+		return sizeUTF8();
+	}
+
+
+
 
 	template<typename C, int Chunk>
 	inline typename StringBase<C,Chunk>::Size
@@ -434,6 +464,21 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::const_iterator
+	StringBase<C,Chunk>::begin() const
+	{
+		return const_iterator(*this);
+	}
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::const_iterator
+	StringBase<C,Chunk>::end() const
+	{
+		return const_iterator(*this, pSize);
+	}
+
+
+	template<typename C, int Chunk>
 	inline typename StringBase<C,Chunk>::reverse_iterator
 	StringBase<C,Chunk>::rbegin()
 	{
@@ -445,6 +490,20 @@ namespace Yuni
 	StringBase<C,Chunk>::rend()
 	{
 		return reverse_iterator(*this, Size(-1));
+	}
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::const_reverse_iterator
+	StringBase<C,Chunk>::rbegin() const
+	{
+		return const_reverse_iterator(*this);
+	}
+
+	template<typename C, int Chunk>
+	inline typename StringBase<C,Chunk>::const_reverse_iterator
+	StringBase<C,Chunk>::rend() const
+	{
+		return const_reverse_iterator(*this, Size(-1));
 	}
 
 
@@ -470,6 +529,131 @@ namespace Yuni
 		return false;
 	}
 
+
+
+	template<typename C, int Chunk>
+	bool
+	StringBase<C,Chunk>::startsWith(const Char* s, CharCase option) const
+	{
+		if (s && '\0' != *s)
+		{
+			Size len = Length(s);
+			if (len <= pSize)
+			{
+				return (soIgnoreCase == option) ? !CompareInsensitive(pPtr, s, len)
+					: !Compare(pPtr, s, len);
+			}
+		}
+		return false;
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	bool
+	StringBase<C,Chunk>::startsWith(const StringBase<C,Chnk1>& s, CharCase option) const
+	{
+		if (pSize && s.pSize <= pSize)
+		{
+			return (soIgnoreCase == option) ? !CompareInsensitive(pPtr, s.pPtr, s.pSize)
+				: !Compare(pPtr, s.pPtr, s.pSize);
+		}
+		return false;
+	}
+
+
+	template<typename C, int Chunk>
+	bool
+	StringBase<C,Chunk>::glob(const C* pattern) const
+	{
+		// TODO This method should be completly removed
+		Size len = Length(pattern);
+		if (pattern && len)
+		{
+			if (pSize)
+			{
+				Size e = 0;
+				Size prev = npos;
+				for (Size i = 0 ; i < pSize; ++i)
+				{
+					if ('*' == pattern[e])
+					{
+						if (e + 1 == len)
+							return true;
+						while (pattern[e+1] == '*')
+							++e;
+						if (e + 1 == len)
+							return true;
+
+						prev = e;
+						if (pattern[e + 1] == pPtr[i])
+							e += 2;
+					}
+					else
+					{
+						if (pattern[e] == pPtr[i])
+							++e;
+						else
+							if (prev != npos)
+								e = prev;
+							else
+								return false;
+					}
+				}
+				return (e == len);
+			}
+			return false;
+		}
+		return empty();
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	bool
+	StringBase<C,Chunk>::glob(const StringBase<C,Chnk1>& pattern) const
+	{
+		// TODO This method should be completly removed
+		if (pattern.pSize)
+		{
+			if (pSize)
+			{
+				Size e = 0;
+				Size prev = npos;
+				for (Size i = 0 ; i < pSize; ++i)
+				{
+					if ('*' == pattern.pPtr[e])
+					{
+						if (e + 1 == pattern.pSize)
+							return true;
+						while (pattern.pPtr[e+1] == '*')
+							++e;
+						if (e + 1 == pattern.pSize)
+							return true;
+
+						prev = e;
+						if (pattern.pPtr[e + 1] == pPtr[i])
+							e += 2;
+					}
+					else
+					{
+						if (pattern.pPtr[e] == pPtr[i])
+							++e;
+						else
+							if (prev != npos)
+								e = prev;
+							else
+								return false;
+					}
+				}
+				return (e == pattern.pSize);
+			}
+			return false;
+		}
+		return empty();
+	}
+
+
 	template<typename C, int Chunk>
 	template<typename U>
 	inline typename StringBase<C,Chunk>::Size
@@ -490,6 +674,24 @@ namespace Yuni
 	template<typename C, int Chunk>
 	template<typename U>
 	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find_first_not_of(const U& u) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ValueNotOf(*this, u);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find_first_not_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ValueNotOf(*this, u, offset);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_last_of(const U& u) const
 	{
 		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValue(*this, u);
@@ -502,6 +704,24 @@ namespace Yuni
 	StringBase<C,Chunk>::find_last_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
 	{
 		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValue(*this, u, offset);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find_last_not_of(const U& u) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValueNotOf(*this, u);
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::find_last_not_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
+	{
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValueNotOf(*this, u, offset);
 	}
 
 
@@ -559,6 +779,15 @@ namespace Yuni
 	{
 		return (a && b) ? Private::StringImpl::Impl<C,Chunk>::Compare(a, b, maxLen) : -1;
 	}
+
+
+	template<typename C, int Chunk>
+	inline int
+	StringBase<C,Chunk>::CompareInsensitive(const Char* a, const Char* b, const typename StringBase<C,Chunk>::Size maxLen)
+	{
+		return (a && b) ? Private::StringImpl::Impl<C,Chunk>::CompareInsensitive(a, b, maxLen) : -1;
+	}
+
 
 	template<typename C, int Chunk>
 	template<int Chnk1>
@@ -1467,23 +1696,49 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
-	void StringBase<C,Chunk>::replace(const C from, const C to)
+	template<typename U>
+	StringBase<C,Chunk>&
+	StringBase<C,Chunk>::replace(const typename StringBase<C,Chunk>::Size offset, const typename StringBase<C,Chunk>::Size len, const U& u)
+	{
+		if (offset < pSize && len)
+			erase(offset, len).insert(offset, u);
+		return *this;
+	}
+
+
+	template<typename C, int Chunk>
+	template<typename U, typename V>
+	StringBase<C,Chunk>&
+	StringBase<C,Chunk>::replace(const U& u, const V& v)
+	{
+		typename StringBase<C,Chunk>::Size offset = find(u);
+		if (npos != offset)
+			replace(u, Length(u), v);
+		return *this;
+	}
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>&
+	StringBase<C,Chunk>::replace(const C from, const C to)
 	{
 		for (Size i = 0; i != pSize; ++i)
 		{
 			if (from == pPtr[i])
 				pPtr[i] = to;
 		}
+		return *this;
 	}
 
 	template<typename C, int Chunk>
-	void StringBase<C,Chunk>::replace(const C from, const C to, const typename StringBase<C,Chunk>::Size offset)
+	StringBase<C,Chunk>&
+	StringBase<C,Chunk>::replace(const C from, const C to, const typename StringBase<C,Chunk>::Size offset)
 	{
 		for (Size i = offset; i < pSize; ++i)
 		{
 			if (from == pPtr[i])
 				pPtr[i] = to;
 		}
+		return *this;
 	}
 
 
@@ -1663,14 +1918,6 @@ namespace Yuni
 	}
 
 
-	template<typename C, int Chunk>
-	template<typename U, typename V>
-	void
-	StringBase<C,Chunk>::replace(const U&, const V&)
-	{
-		// FIXME !
-	}
-
 
 	template<typename C, int Chunk>
 	inline C&
@@ -1700,18 +1947,19 @@ namespace Yuni
 		if (this->notEmpty())
 		{
 			typename StringBase<C,Chunk>::Size indx(0);
+			typename StringBase<C,Chunk>::Size len(0);
 			while (true)
 			{
 				typename StringBase<C,Chunk>::Size newIndx = this->find_first_of(sep, indx);
-				typename StringBase<C,Chunk>::Size len = newIndx - indx;
-				if (len)
+				if (StringBase<C,Chunk>::npos == newIndx)
+					return;
+
+				if (newIndx && (len = newIndx - indx))
 				{
 					const StringBase<C,Chunk> segment(*this, indx, len);
 					if (segment.notEmpty())
-						out.push_back(segment.to<Type>());
+						out.push_back(segment.to<UType>());
 				}
-				if (StringBase<C,Chunk>::npos == newIndx)
-					return;
 				indx = newIndx + 1;
 			}
 		}
@@ -1719,13 +1967,134 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
-		inline C
-		StringBase<C,Chunk>::at(const typename StringBase<C,Chunk>::Size offset) const
+	inline C
+	StringBase<C,Chunk>::at(const typename StringBase<C,Chunk>::Size offset) const
+	{
+		return (offset < pSize) ? pPtr[offset] : '\0';
+	}
+
+
+	template<typename C, int Chunk, typename U>
+	static typename StringBase<C,Chunk>::Size ASCIItoUTF8(const U c, U* out)
+	{
+		if (c < 0x80)
 		{
-			return (offset < pSize) ? pPtr[offset] : '\0';
+			*out = c;
+			return 1;
+		}
+		if (c < 0xC0)
+		{
+			out[0] = 0xC2;
+			out[1] = c;
+			return 2;
+		}
+		out[0] = 0xC3;
+		out[1] = c - 0x40;
+		return 2;
+	}
+
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>
+	StringBase<C,Chunk>::ToUTF8(const C* s)
+	{
+		if (!s || '\0' == *s)
+			return String();
+		typedef unsigned char uchar;
+		uchar tmp[4];
+		Size newSize = 1;
+		for (uchar *p = (uchar*)s; *p; ++p)
+			newSize += ASCIItoUTF8<C,Chunk,uchar>(*p, tmp);
+
+		StringBase<C,Chunk> ret;
+		ret.reserve(newSize + 1);
+		ret.pSize = newSize;
+
+		uchar* q = (uchar*)ret.pPtr;
+		for (uchar* p = (uchar*)s; *p; ++p)
+			q += ASCIItoUTF8<C,Chunk,uchar>(*p, q);
+		*q = '\0';
+		return ret;
+	}
+
+
+	template<typename C, int Chunk>
+	template<int Chnk1>
+	StringBase<C,Chunk>
+	StringBase<C,Chunk>::ToUTF8(const StringBase<C,Chnk1>& s)
+	{
+		if (!s.pSize)
+			return String();
+		typedef unsigned char uchar;
+		uchar tmp[4];
+		Size newSize = 1;
+		for (uchar *p = (uchar*)s.pPtr; *p; ++p)
+			newSize += ASCIItoUTF8<C,Chunk,uchar>(*p, tmp);
+
+		StringBase<C,Chunk> ret;
+		ret.reserve(newSize + 1);
+		ret.pSize = newSize;
+
+		uchar* q = (uchar*)ret.pPtr;
+		for (uchar* p = (uchar*)s.pPtr; *p; ++p)
+			q += ASCIItoUTF8<C,Chunk,uchar>(*p, q);
+		*q = '\0';
+		return ret;
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::toUTF8()
+	{
+		String tmp = ToUTF8(*this);
+		clear();
+		append(tmp);
+		return *this;
+	}
+
+
+	template<typename C, int Chunk>
+	StringBase<C,Chunk>
+	StringBase<C,Chunk>::substrUTF8(typename StringBase<C,Chunk>::Size pos, typename StringBase<C,Chunk>::Size len) const
+	{
+		if (len == npos)
+			len = sizeUTF8() - len + 1 - pos;
+		typedef unsigned char uchar;
+		String res;
+		int utf8_pos = 0;
+		for(; pos > 0; --pos)
+		{
+			if (((uchar)pPtr[utf8_pos]) >= 0xC0)
+			{
+				++utf8_pos;
+				while (((uchar)pPtr[utf8_pos]) >= 0x80 && ((uchar)pPtr[utf8_pos]) < 0xC0)
+					++utf8_pos;
+			}
+			else
+				++utf8_pos;
 		}
 
-
+		for(; len > 0; --len)
+		{
+			if (((uchar)pPtr[utf8_pos]) >= 0x80)
+			{
+				res << (char)pPtr[utf8_pos];
+				++utf8_pos;
+				while (((uchar)pPtr[utf8_pos]) >= 0x80 && ((uchar)pPtr[utf8_pos]) < 0xC0)
+				{
+					res << (char)pPtr[utf8_pos];
+					++utf8_pos;
+				}
+			}
+			else
+			{
+				res << ((char)pPtr[utf8_pos]);
+				++utf8_pos;
+			}
+		}
+		return res;
+	}
 
 
 } // namespace Yuni
