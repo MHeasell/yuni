@@ -659,7 +659,7 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_first_of(const U& u) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::Value(*this, u);
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ValueOf(*this, u);
 	}
 
 
@@ -668,7 +668,7 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_first_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::Value(*this, u, offset);
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ValueOf(*this, u, offset);
 	}
 
 	template<typename C, int Chunk>
@@ -694,7 +694,7 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_last_of(const U& u) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValue(*this, u);
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValueOf(*this, u);
 	}
 
 
@@ -703,7 +703,7 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_last_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValue(*this, u, offset);
+		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValueOf(*this, u, offset);
 	}
 
 
@@ -1421,8 +1421,9 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
+	template<int Ck1, int Ck2>
 	inline void
-	StringBase<C,Chunk>::ExtractKeyValue(const StringBase& s, StringBase& key, StringBase& value,
+	StringBase<C,Chunk>::ExtractKeyValue(const StringBase<C,Chunk>& s, StringBase<C,Ck1>& key, StringBase<C,Ck2>& value,
 		const enum CharCase chcase)
 	{
 		s.extractKeyValue(key, value, chcase);
@@ -1431,44 +1432,43 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
+	template<int Ck1, int Ck2>
 	inline void
-	StringBase<C,Chunk>::extractKeyValue(StringBase& key, StringBase& value, const enum CharCase chcase) const
+	StringBase<C,Chunk>::extractKeyValue(StringBase<C,Ck1>& key, StringBase<C,Ck2>& value, const enum CharCase chcase) const
 	{
-		// Empty - Nothing to do
-		if (!pSize)
-		{
-			key.clear();
-			value.clear();
+		// ReInitializing
+		key.clear();
+		value.clear();
+
+		if (!pSize) // The string is empty, Nothing to do
 			return;
-		}
+
 		unsigned int left(0);
 		while (left != pSize && HasChar(pPtr[left], YUNI_STRING_SEPARATORS))
 			++left;
-		if (left == pSize)
-		{
-			key.clear();
-			value.clear();
+
+		if (left == pSize) // The string is actually an empty string (composed only by separators)
 			return;
-		}
+
 		// Section
 		if ('[' == pPtr[left])
 		{
-			key.assign('[');
+			key.append('[');
 			++left;
 			typename StringBase<C,Chunk>::Size right = find(']', left);
-			value.assign(*this, left, right > left ? right - left : 0);
-			value.trim();
+			if (right != npos && right != left)
+			{
+				value.append(*this, left, right - left);
+				value.trim();
+			}
 			return;
 		}
 
+		// If not a section, it should be a key/value
 		// Looking for the symbol `=`
-		typename StringBase<C,Chunk>::Size equal = find('=', left);
-		if (equal == npos)
-		{
-			key.clear();
-			value.clear();
+		typename StringBase<C,Chunk>::Size equal = find_first_of("=/", left);
+		if (equal == npos || equal == left || '/' == pPtr[equal])
 			return;
-		}
 
 		// Getting our key
 		key.assign(*this, left, equal - left);
@@ -1477,40 +1477,37 @@ namespace Yuni
 			key.toLower();
 
 		// Looking for the first interesting char
-		unsigned int leftValue(equal + 1);
-		while (leftValue != pSize && HasChar(pPtr[leftValue], YUNI_STRING_SEPARATORS))
+		typename StringBase<C,Chunk>::Size leftValue(equal);
+		++leftValue; // After the symbol `=`
+		while (leftValue < pSize && HasChar(pPtr[leftValue], YUNI_STRING_SEPARATORS))
 			++leftValue;
-		if (leftValue == pSize)
-		{
-			// Empty value
-			value.clear();
+		if (leftValue >= pSize) // Empty value
 			return;
-		}
+
 		switch (pPtr[leftValue])
 		{
 			case ';':
+			case '/':
 				// Empty value
-				value.clear();
 				break;
 			case '"':
 			case '\'':
 				{
 					// Value enclosed in a string
 					++leftValue;
-					typename StringBase<C,Chunk>::Size next
+					const typename StringBase<C,Chunk>::Size next
 						= FindEndOfSequence(pPtr + leftValue, pPtr[leftValue-1], pSize - leftValue);
-					if (!next)
-						value.clear();
-					else
+					if (next)
 						value.assignFromEscapedCharacters(*this, next, leftValue);
-					return;
+					break;
 				}
 			default:
 				{
 					// Standard value
-					typename StringBase<C,Chunk>::Size semicolon = find(';', leftValue);
-					value.assignFromEscapedCharacters(*this, semicolon - leftValue, leftValue);
+					const typename StringBase<C,Chunk>::Size semicolon = find_first_of(";/", leftValue);
+					value.append(*this, leftValue, semicolon);
 					value.trimRight();
+					break;
 				}
 		}
 	}
