@@ -1,6 +1,6 @@
 
 #include <cassert>
-#include "object3d.h"
+#include "object3D.h"
 #include "scene.h"
 
 
