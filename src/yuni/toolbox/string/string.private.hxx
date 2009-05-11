@@ -510,6 +510,10 @@ namespace StringImpl
 		static typename StrBase::Size Value(const StrBase& str, const T& t, const typename StrBase::Size offset);
 		static typename StrBase::Size ReverseValue(const StrBase& str, const T& t);
 		static typename StrBase::Size ReverseValue(const StrBase& str, const T& t, const typename StrBase::Size offset);
+		static typename StrBase::Size ValueOf(const StrBase& str, const T& t);
+		static typename StrBase::Size ValueOf(const StrBase& str, const T& t, const typename StrBase::Size offset);
+		static typename StrBase::Size ReverseValueOf(const StrBase& str, const T& t);
+		static typename StrBase::Size ReverseValueOf(const StrBase& str, const T& t, const typename StrBase::Size offset);
 		static typename StrBase::Size ValueNotOf(const StrBase& str, const T& t);
 		static typename StrBase::Size ValueNotOf(const StrBase& str, const T& t, const typename StrBase::Size offset);
 		static typename StrBase::Size ReverseValueNotOf(const StrBase& str, const T& t);
@@ -557,6 +561,45 @@ namespace StringImpl
 			}
 			return StrBase1::npos;
 		}
+
+		static typename StrBase1::Size ValueOf(const StrBase1& str, const char t)
+		{
+			for (typename StrBase1::Size i = 0; i != str.pSize; ++i)
+			{
+				if (t == str.pPtr[i])
+					return i;
+			}
+			return StrBase1::npos;
+		}
+		static typename StrBase1::Size ValueOf(const StrBase1& str, const char t, const typename StrBase1::Size offset)
+		{
+			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
+			{
+				if (t == str.pPtr[i])
+					return i;
+			}
+			return StrBase1::npos;
+		}
+		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const char t)
+		{
+			for (typename StrBase1::Size i = str.pSize - 1; i != StrBase1::npos; --i)
+			{
+				if (t == str.pPtr[i])
+					return i;
+			}
+			return StrBase1::npos;
+		}
+		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const char t, const typename StrBase1::Size offset)
+		{
+			for (typename StrBase1::Size i = ((offset != StrBase1::npos) ? offset : str.pSize - 1);
+				i != StrBase1::npos; --i)
+			{
+				if (t != str.pPtr[i])
+					return i;
+			}
+			return StrBase1::npos;
+		}
+
 
 		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const char t)
 		{
@@ -641,6 +684,45 @@ namespace StringImpl
 			return StrBase1::npos;
 		}
 
+		static typename StrBase1::Size ValueOf(const StrBase1& str, const wchar_t t)
+		{
+			for (typename StrBase1::Size i = 0; i != str.pSize; ++i)
+			{
+				if (t == str.pPtr[i])
+					return i;
+			}
+			return StrBase1::npos;
+		}
+		static typename StrBase1::Size ValueOf(const StrBase1& str, const wchar_t t, const typename StrBase1::Size offset)
+		{
+			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
+			{
+				if (t == str.pPtr[i])
+					return i;
+			}
+			return StrBase1::npos;
+		}
+		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const wchar_t t)
+		{
+			for (typename StrBase1::Size i = str.pSize - 1; i != StrBase1::npos; --i)
+			{
+				if (t == str.pPtr[i])
+					return i;
+			}
+			return StrBase1::npos;
+		}
+		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const wchar_t t, const typename StrBase1::Size offset)
+		{
+			for (typename StrBase1::Size i = ((offset != StrBase1::npos) ? offset : str.pSize - 1);
+				i != StrBase1::npos; --i)
+			{
+				if (t == str.pPtr[i])
+					return i;
+			}
+			return StrBase1::npos;
+		}
+
+
 		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const wchar_t t)
 		{
 			for (typename StrBase1::Size i = 0; i != str.pSize; ++i)
@@ -692,7 +774,7 @@ namespace StringImpl
 				while (1)
 				{
 					// Trying to find the next occurenceof the first char
-					offset = str.find(*t, offset);
+					offset = Find<StrBase1,W>::Value(str, *t, offset);
 					if (StrBase1::npos == offset || offset + N - 1 > str.pSize)
 						return StrBase1::npos;
 					if (!memcmp(str.pPtr + offset, t, (N - 1) * sizeof(W)))
@@ -722,39 +804,50 @@ namespace StringImpl
 			return StrBase1::npos;
 		}
 
+		static typename StrBase1::Size ValueOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = 0)
+		{
+			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
+			{
+				if (StrBase1::HasChar(str.pPtr[i], t))
+					return i;
+			}
+			return StrBase1::npos;
+		}
+		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = StrBase1::npos)
+		{
+			if (offset < str.pSize)
+			{
+				typename StrBase1::Size i = str.pSize;
+				do
+				{
+					--i;
+					if (StrBase1::HasChar(str.pPtr[i], t))
+						return i;
+				} while (i != 0);
+			}
+			return StrBase1::npos;
+		}
+
 		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = 0)
 		{
-			if (t && '\0' != *t && offset < str.pSize)
+			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
 			{
-				while (1)
-				{
-					// Trying to find the next occurenceof the first char
-					offset = str.find(*t, offset);
-					if (StrBase1::npos == offset || offset + N - 1 > str.pSize)
-						return StrBase1::npos;
-					if (memcmp(str.pPtr + offset, t, (N - 1) * sizeof(W)))
-						return offset;
-					++offset;
-				}
+				if (!StrBase1::HasChar(str.pPtr[i], t))
+					return i;
 			}
 			return StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = StrBase1::npos)
 		{
-			if (t && '\0' != *t && str.notEmpty())
+			if (offset < str.pSize)
 			{
-				if (offset == StrBase1::npos)
-					offset = str.pSize - 1;
-				while (StrBase1::npos != offset)
+				typename StrBase1::Size i = str.pSize;
+				do
 				{
-					// Trying to find the next occurenceof the first char
-					offset = str.find_last_of(*t, offset);
-					if (StrBase1::npos == offset || offset + N - 1 > str.pSize)
-						return StrBase1::npos;
-					if (memcmp(str.pPtr + offset, t, (N - 1) * sizeof(W)))
-						return offset;
-					--offset;
-				}
+					--i;
+					if (!StrBase1::HasChar(str.pPtr[i], t))
+						return i;
+				} while (i != 0);
 			}
 			return StrBase1::npos;
 		}
@@ -781,18 +874,25 @@ namespace StringImpl
 			return StrBase1::npos;
 		}
 
+		static typename StrBase1::Size RawValueOf(const StrBase1& str, const W* t,
+			const typename StrBase1::Size length, typename StrBase1::Size offset)
+		{
+			for (typename StrBase1::Size i = offset; i < length; ++i)
+			{
+				if (StrBase1::HasChar(str.pPtr[i], t))
+					return i;
+			}
+			return StrBase1::npos;
+		}
+
+
 		static typename StrBase1::Size RawValueNotOf(const StrBase1& str, const W* t,
 			const typename StrBase1::Size length, typename StrBase1::Size offset)
 		{
-			while (1)
+			for (typename StrBase1::Size i = offset; i < length; ++i)
 			{
-				// Trying to find the next occurenceof the first char
-				offset = str.find(*t, offset);
-				if (StrBase1::npos == offset || offset + length > str.pSize)
-					return StrBase1::npos;
-				if (memcmp(str.pPtr + offset, t, length * sizeof(W)))
-					return offset;
-				++offset;
+				if (!StrBase1::HasChar(str.pPtr[i], t))
+					return i;
 			}
 			return StrBase1::npos;
 		}
@@ -826,6 +926,13 @@ namespace StringImpl
 		{
 			return (t && '\0' != *t && str.pSize)
 				? ReverseRawValue(str, t, Length<StrBase1,W*>::Value(t), offset)
+				: StrBase1::npos;
+		}
+
+		static typename StrBase1::Size ValueOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = 0)
+		{
+			return (t && '\0' != *t && offset < str.pSize)
+				? RawValueOf(str, t, Length<StrBase1,W*>::Value(t), offset)
 				: StrBase1::npos;
 		}
 

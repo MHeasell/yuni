@@ -17,7 +17,7 @@
 
 
 //! Default separators
-# define YUNI_STRING_SEPARATORS   " \t\r\n"
+# define YUNI_STRING_SEPARATORS   " \t\n\r"
 
 
 
@@ -313,7 +313,8 @@ namespace Yuni
 		** \param[out] value The associated value
 		** \param chcase The key will be converted to lowercase if equals to `soIgnoreCase`
 		*/
-		static void ExtractKeyValue(const StringBase& s, StringBase& key, StringBase& value,
+		template<int Ck1, int Ck2>
+		static void ExtractKeyValue(const StringBase& s, StringBase<C,Ck1>& key, StringBase<C,Ck2>& value,
 			const enum CharCase chcase = soIgnoreCase);
 
 		/*!
@@ -1099,7 +1100,8 @@ namespace Yuni
 		**
 		** \see ExtractKeyvalue()
 		*/
-		void extractKeyValue(StringBase& key, StringBase& value,
+		template<int Ck1, int Ck2>
+		void extractKeyValue(StringBase<C,Ck1>& key, StringBase<C,Ck2>& value,
 			const enum CharCase chcase = soCaseSensitive) const;
 
 		/*!
