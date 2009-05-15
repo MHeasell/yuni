@@ -18,23 +18,38 @@ namespace Remove
 	//! Remove the reference of a type (* or &)
 	template <typename T> struct Reference { typedef T Type; };
 	template <typename T> struct Reference<T&> { typedef T Type; };
+	template <typename T> struct Reference<volatile T&> { typedef volatile T Type; };
 	template <typename T> struct Reference<T*> { typedef T Type; };
+	template <typename T> struct Reference<volatile T*> { typedef volatile T Type; };
 	template <typename T, int N> struct Reference<T[N]> { typedef T Type; };
 	template <typename T> struct Reference<const T*> { typedef const T Type; };
+	template <typename T> struct Reference<const volatile T*> { typedef const volatile T Type; };
 	template <typename T, int N> struct Reference<const T[N]> { typedef const T Type; };
 	template <typename T> struct Reference<const T&> { typedef const T Type; };
+	template <typename T> struct Reference<const volatile T&> { typedef const volatile T Type; };
 
 	template <typename T> struct RefOnly { typedef T Type; };
 	template <typename T> struct RefOnly<T&> { typedef T Type; };
+	template <typename T> struct RefOnly<volatile T&> { typedef volatile T Type; };
 	template <typename T> struct RefOnly<const T&> { typedef const T Type; };
-	template <typename T> struct RefOnly<T*> { typedef T* Type; };
-	template <typename T> struct RefOnly<const T*> { typedef T* Type; };
+	template <typename T> struct RefOnly<const volatile T&> { typedef const volatile T Type; };
+
 	template <typename T> struct PntOnly { typedef T Type; };
 	template <typename T> struct PntOnly<T*> { typedef T Type; };
+	template <typename T> struct PntOnly<volatile T*> { typedef volatile T Type; };
 	template <typename T> struct PntOnly<const T*> { typedef const T Type; };
-	template <typename T> struct PntOnly<T&> { typedef T& Type; };
-	template <typename T> struct PntOnly<const T&> { typedef const T& Type; };
+	template <typename T> struct PntOnly<const volatile T*> { typedef const volatile T Type; };
 	//@}
+
+	//! \name Volatile
+	//@{
+	template <typename T> struct Volatile { typedef T Type; };
+	template <typename T> struct Volatile<volatile T*> { typedef T* Type; };
+	template <typename T> struct Volatile<const volatile T*> { typedef const T* Type; };
+	template <typename T> struct Volatile<volatile T&> { typedef T& Type; };
+	template <typename T> struct Volatile<const volatile T&> { typedef const T& Type; };
+	//@}
+
 
 	//! \name Const
 	//@{
@@ -51,7 +66,9 @@ namespace Remove
 
 	template <typename T> struct All
 	{
-		typedef typename Remove::Const< typename Remove::Reference<T>::Type >::Type Type;
+		typedef typename Remove::Volatile<
+			typename Remove::Const<
+				typename Remove::Reference<T>::Type >::Type>::Type   Type;
 	};
 
 
