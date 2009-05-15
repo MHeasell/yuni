@@ -1333,37 +1333,37 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::StringBase<C,Ch
 }
 
 template<typename C, int Chunk>
-inline const bool operator == (const Yuni::StringBase<C,Chunk>& rhs, const C* u)
+inline bool operator == (const Yuni::StringBase<C,Chunk>& rhs, const C* u)
 {
 	return rhs == u;
 }
 
 template<typename C, int Chunk>
-inline const bool operator == (const C* u, const Yuni::StringBase<C,Chunk>& rhs)
+inline bool operator == (const C* u, const Yuni::StringBase<C,Chunk>& rhs)
 {
 	return rhs == u;
 }
 
 template<typename C, int Chunk>
-inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const char* u)
+inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const char* u)
 {
 	return Yuni::String(rhs) += u;
 }
 
 template<typename C, int Chunk>
-inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t* u)
+inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t* u)
 {
 	return Yuni::String(rhs) += u;
 }
 
 template<typename C, int Chunk>
-inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const char u)
+inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const char u)
 {
 	return Yuni::String(rhs) += u;
 }
 
 template<typename C, int Chunk>
-inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t u)
+inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t u)
 {
 	return Yuni::String(rhs) += u;
 }
@@ -1371,25 +1371,25 @@ inline const Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, cons
 
 
 template<typename C, int Chunk>
-inline const Yuni::String operator + (const wchar_t* u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::String operator + (const wchar_t* u, const Yuni::StringBase<C,Chunk>& rhs)
 {
 	return Yuni::String(u) += rhs;
 }
 
 template<typename C, int Chunk>
-inline const Yuni::String operator + (const char* u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::String operator + (const char* u, const Yuni::StringBase<C,Chunk>& rhs)
 {
 	return Yuni::String(u) += rhs;
 }
 
 template<typename C, int Chunk>
-inline const Yuni::String operator + (const char u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::String operator + (const char u, const Yuni::StringBase<C,Chunk>& rhs)
 {
 	return Yuni::String(u) += rhs;
 }
 
 template<typename C, int Chunk>
-inline const Yuni::String operator + (const wchar_t u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::String operator + (const wchar_t u, const Yuni::StringBase<C,Chunk>& rhs)
 {
 	return Yuni::String(u) += rhs;
 }
@@ -1398,7 +1398,7 @@ inline const Yuni::String operator + (const wchar_t u, const Yuni::StringBase<C,
 
 
 template<typename C, int Chunk, typename U>
-inline const Yuni::String operator + (const std::basic_string<U>& u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::String operator + (const std::basic_string<U>& u, const Yuni::StringBase<C,Chunk>& rhs)
 {
 	return Yuni::String(u) += rhs;
 }

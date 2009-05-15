@@ -24,17 +24,17 @@ namespace Random
 	}
 
 
-	inline const Default::Value Default::next()
+	inline Default::Value Default::next()
 	{
 		return rand();
 	}
 
-	inline const Default::Value Default::min()
+	inline Default::Value Default::min()
 	{
 		return 0;
 	}
 
-	inline const Default::Value Default::max()
+	inline Default::Value Default::max()
 	{
 		return RAND_MAX;
 	}
