@@ -53,7 +53,7 @@ namespace Checksum
 		** \param s The string
 		** \return The hash value
 		*/
-		static String FromString(const String& s) {return MD5().fromString(s);}
+		static String FromString(const String& s);
 
 		/*!
 		** \brief Compute the hash from raw data
@@ -62,7 +62,7 @@ namespace Checksum
 		** \param size Size of the given buffer.
 		** \return The hash value
 		*/
-		static String FromRawData(const void* rawdata, uint64 size = AutoDetectNullChar) {return MD5().fromRawData(rawdata, size);}
+		static String FromRawData(const void* rawdata, uint64 size = AutoDetectNullChar);
 
 	public:
 		//! \name Constructor & Destructor
@@ -83,5 +83,7 @@ namespace Checksum
 } // namespace Checksum
 } // namespace Hash
 } // namespace Yuni
+
+# include "md5.hxx"
 
 #endif // __YUNI_HASH_MD5_H__
