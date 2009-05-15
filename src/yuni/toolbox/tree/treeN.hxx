@@ -570,6 +570,11 @@ namespace Toolbox
 			typename ThreadingPolicy::MutexLocker locker(*this);
 			if (--pRefCount > 0)
 				return;
+			// Early clean-up
+			if (pHaveParent)
+				detachFromParentWL();
+			if (pChildrenCount)
+				clearWL();
 		}
 		delete this;
 	}
