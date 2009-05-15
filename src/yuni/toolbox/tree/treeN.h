@@ -66,7 +66,7 @@ namespace Toolbox
 	** 		// The operator `+=` and `<<` are equivalent
 	** 		n << new MyNode("SubSubNode 1") << new MyNode("SubSubNode 2")
 	** 			<< new MyNode("SubSubNode 3");
-	** 		
+	**
 	** 		return 0;
 	** }
 	** \endcode

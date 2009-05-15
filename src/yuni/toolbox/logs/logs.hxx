@@ -45,7 +45,7 @@ namespace Logs
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>
 	Logger<TP,Handler,Decorator>::notice()
 	{
 		return StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>(*this);
@@ -53,7 +53,7 @@ namespace Logs
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>
 	Logger<TP,Handler,Decorator>::checkpoint()
 	{
 		return StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>(*this);
@@ -61,7 +61,7 @@ namespace Logs
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>
 	Logger<TP,Handler,Decorator>::warning()
 	{
 		return StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>(*this);
@@ -69,7 +69,7 @@ namespace Logs
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Error, Verbosity::Error::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Error, Verbosity::Error::enabled>
 	Logger<TP,Handler,Decorator>::error()
 	{
 		return StreamWriter<Verbosity::Error, Verbosity::Error::enabled>(*this);
@@ -77,7 +77,7 @@ namespace Logs
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>
 	Logger<TP,Handler,Decorator>::fatal()
 	{
 		return StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>(*this);
@@ -85,7 +85,7 @@ namespace Logs
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>
 	Logger<TP,Handler,Decorator>::debug()
 	{
 		return StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>(*this);
@@ -94,7 +94,7 @@ namespace Logs
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>
+	typename Logger<TP,Handler,Decorator>::template StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>
 	Logger<TP,Handler,Decorator>::notice(const U& u)
 	{
 		return StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>(*this, u);
@@ -103,7 +103,7 @@ namespace Logs
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>
 	Logger<TP,Handler,Decorator>::checkpoint(const U& u)
 	{
 		return StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>(*this, u);
@@ -112,7 +112,7 @@ namespace Logs
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>
 	Logger<TP,Handler,Decorator>::warning(const U& u)
 	{
 		return StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>(*this, u);
@@ -121,7 +121,7 @@ namespace Logs
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Error, Verbosity::Error::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Error, Verbosity::Error::enabled>
 	Logger<TP,Handler,Decorator>::error(const U& u)
 	{
 		return StreamWriter<Verbosity::Error, Verbosity::Error::enabled>(*this, u);
@@ -130,7 +130,7 @@ namespace Logs
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>
 	Logger<TP,Handler,Decorator>::fatal(const U& u)
 	{
 		return StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>(*this, u);
@@ -139,7 +139,7 @@ namespace Logs
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>
 	Logger<TP,Handler,Decorator>::debug(const U& u)
 	{
 		return StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>(*this, u);
@@ -148,7 +148,7 @@ namespace Logs
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<class C>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<C, C::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<C, C::enabled>
 	Logger<TP,Handler,Decorator>::custom()
 	{
 		return StreamWriter<C, C::enabled>(*this);
@@ -157,7 +157,7 @@ namespace Logs
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>::StreamWriter<Verbosity::Unknown, Verbosity::Unknown::enabled>
+	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Unknown, Verbosity::Unknown::enabled>
 	Logger<TP,Handler,Decorator>::operator << (const U& u)
 	{
 		return StreamWriter<Verbosity::Unknown, Verbosity::Unknown::enabled>(*this, u);
