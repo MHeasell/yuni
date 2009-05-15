@@ -73,98 +73,10 @@
 
 
 # if defined(__TOS_WIN__) || defined(__WIN32__) || defined(_WIN64) || defined(_WIN32)
-
-/* Microsoft Windows */
-#	define YUNI_OS_WINDOWS
-/* Windows 64 */
-#	ifdef _WIN64
-#	   define YUNI_OS_WIN64
-#	   define YUNI_OS_64
-#	else
-#	   define YUNI_OS_WIN32
-#	endif
-/* Windows CE */
-#	ifdef _WIN32_WCE
-#	   define YUNI_OS_WINCE
-#	endif
-/* Visual Studio */
-#	ifdef _MSC_VER
-#	   define YUNI_OS_MSVC
-#	endif
-/* Borland Compiler */
-#	ifdef __BORLANDC__
-#	   define YUNI_OS_BORLAND
-#	endif
-/* Cygwin */
-#	ifdef __CYGWIN__
-#	   define YUNI_OS_CYGWIN
-#	endif
-/* MinGW */
-#	ifdef __MINGW32__
-#	   define YUNI_OS_MINGW
-#	endif
-
-
-# else /* if Windows */
-
-/* BeOS */
-# ifdef __BEOS__
-#	define YUNI_OS_BEOS
+#	include "capabilities/windows.h"
 # else
-/* Unix compliant */
-#	define YUNI_OS_UNIX
-/* AIX */
-#	ifdef _AIX
-#		define YUNI_OS_AIX
-#	endif
-/* DragonFly */
-#	ifdef __DragonFly__
-#		define YUNI_OS_DRAGONFLY
-#	endif
-/* Linux */
-#	if defined(__linux) || defined(linux)
-#		define YUNI_OS_LINUX
-#	else
-/* FreeBSD */
-#		ifdef __FreeBSD__
-#			define YUNI_OS_FREEBSD __FreeBSD__
-#		endif
-/* HP-UX */
-#		ifdef _hpux
-#			define YUNI_OS_HPUX
-#		endif
-/* Mac OS */
-#		if defined(__APPLE__) || defined(__MACH__)
-#			define YUNI_OS_MAC
-#			define YUNI_OS_DARWIN
-#		endif
-/* NetBSD */
-#		ifdef __NetBSD__
-#			define YUNI_OS_NETBSD
-#		endif
-/* OpenBSD */
-#		ifdef __OpenBSD__
-#			define YUNI_OS_OPENBSD
-#		endif
-#		if defined(sun) || defined(__sun)
-/* Solaris */
-#			if defined(__SVR4) || defined(__svr4__)
-#				 define YUNI_OS_SOLARIS
-#			else
-/* SunOS */
-#				 define YUNI_OS_SUNOS
-#			endif
-#			if defined(__SUNPRO_C) || defined(__SUNPRO_CC)
-#				 define YUNI_OS_SUNSTUDIO
-#			endif
-#		endif /* Sun/Solaris */
-#	endif /* Linux */
-/* Lynx */
-#	ifdef __Lynx__
-#		define YUNI_OS_LYNX
-#	endif
-# endif /* BEOS */
-# endif /* Microsoft Windows */
+#	include "capabilities/unixes.h"
+# endif
 
 
 

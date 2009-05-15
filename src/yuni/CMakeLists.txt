@@ -13,6 +13,8 @@ Message(STATUS "Module: Core")
 Set(SRC_TOOLBOX_PREPROCESSOR
 				toolbox/preprocessor/std.h
 				toolbox/preprocessor/capabilities.h
+				toolbox/preprocessor/capabilities/unixes.h
+				toolbox/preprocessor/capabilities/windows.h
 				toolbox/preprocessor/enum.h)
 source_group(ToolBox\\Preprocessor FILES ${SRC_TOOLBOX_PREPROCESSOR})
 
@@ -176,6 +178,8 @@ source_group(ToolBox\\Version FILES ${SRC_VERSION})
 
 # Hash - Checksums
 Set(SRC_TOOLBOX_HASH_CHECKSUM
+				toolbox/hash/checksum/checksum.hxx
+				toolbox/hash/checksum/md5.hxx
 				toolbox/hash/checksum/checksum.h toolbox/hash/checksum/checksum.cpp
 				toolbox/hash/checksum/md5.h toolbox/hash/checksum/md5.cpp)
 source_group(ToolBox\\Hash\\Checksum FILES ${SRC_TOOLBOX_HASH_CHECKSUM})
