@@ -1,7 +1,7 @@
 
+#include "md5.h"
 #include <fstream>
 #include <string.h>
-#include "md5.h"
 #include "../../../toolbox/system/windows.hdr.h"
 
 
@@ -154,10 +154,13 @@ namespace Checksum
 					* On little-endian machines, we can process properly aligned
 					* data without copying it.
 					*/
-					if (!((data - (const MD5TypeByte *)0) & 3)) {
+					if (!((data - (const MD5TypeByte *)0) & 3))
+					{
 						/* data are properly aligned */
 						X = (const MD5TypeUInt32 *)data;
-					} else {
+					}
+					else
+					{
 						/* not aligned */
 						memcpy(xbuf, data, 64);
 						X = xbuf;
@@ -165,9 +168,9 @@ namespace Checksum
 				}
 				# endif
 				# if BYTE_ORDER == 0
-				else			/* dynamic big-endian */
+				else                     /* dynamic big-endian */
 				# endif
-				# if BYTE_ORDER >= 0		/* big-endian */
+				# if BYTE_ORDER >= 0     /* big-endian */
 				{
 					/*
 					* On big-endian machines, we must arrange the bytes in the
@@ -187,7 +190,7 @@ namespace Checksum
 				#endif
 			}
 
-			#define ROTATE_LEFT(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
+			# define ROTATE_LEFT(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
 
 			// Round 1
 			// Let [abcd k s i] denote the operation
@@ -306,16 +309,16 @@ namespace Checksum
 		void md5ImplInit(MD5TypeState *pms)
 		{
 			pms->count[0] = pms->count[1] = 0;
-			pms->abcd[0] = 0x67452301;
-			pms->abcd[1] = /*0xefcdab89*/ T_MASK ^ 0x10325476;
-			pms->abcd[2] = /*0x98badcfe*/ T_MASK ^ 0x67452301;
-			pms->abcd[3] = 0x10325476;
+			pms->abcd[0]  = 0x67452301;
+			pms->abcd[1]  = /*0xefcdab89*/ T_MASK ^ 0x10325476;
+			pms->abcd[2]  = /*0x98badcfe*/ T_MASK ^ 0x67452301;
+			pms->abcd[3]  = 0x10325476;
 		}
 
 
 		void md5ImplAppend(MD5TypeState *pms, const MD5TypeByte *data, int nbytes)
 		{
-			const MD5TypeByte *p = data;
+			const MD5TypeByte* p = data;
 			int left = nbytes;
 			int offset = (pms->count[0] >> 3) & 63;
 			MD5TypeUInt32 nbits = (MD5TypeUInt32)(nbytes << 3);
@@ -327,12 +330,12 @@ namespace Checksum
 			pms->count[1] += nbytes >> 29;
 			pms->count[0] += nbits;
 			if (pms->count[0] < nbits)
-				pms->count[1]++;
+				++(pms->count[1]);
 
 			// Process an initial partial block
 			if (offset)
 			{
-				int copy = (offset + nbytes > 64 ? 64 - offset : nbytes);
+				const int copy = (offset + nbytes > 64 ? 64 - offset : nbytes);
 
 				memcpy(pms->buf + offset, p, copy);
 				if (offset + copy < 64)
@@ -437,6 +440,7 @@ namespace Checksum
 		}
 		return pValue;
 	}
+
 
 
 

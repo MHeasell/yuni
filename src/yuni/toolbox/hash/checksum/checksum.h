@@ -22,6 +22,9 @@ namespace Checksum
 
 
 
+	/*!
+	** \brief Checksum Implementation (Abstract)
+	*/
 	class AChecksum
 	{
 	public:
@@ -36,7 +39,7 @@ namespace Checksum
 		/*!
 		** \brief Reset the hash value
 		*/
-		void reset() {pValue.clear();}
+		void reset();
 
 		/*!
 		** \brief Compute the hash from a string
@@ -44,7 +47,7 @@ namespace Checksum
 		** \param s The string
 		** \return The hash value
 		*/
-		const String& fromString(const String& s) {return fromRawData(s.data(), s.size());}
+		const String& fromString(const String& s);
 
 		/*!
 		** \brief Compute the hash from raw data
@@ -66,9 +69,9 @@ namespace Checksum
 		/*!
 		** \brief Get the last hash value
 		*/
-		const String& value() const {return pValue;}
+		const String& value() const;
 		//! Get the hash value
-		const String& operator() () const {return pValue;}
+		const String& operator() () const;
 
 		/*!
 		** \brief Compute the hash value from a string and returns it
@@ -76,7 +79,7 @@ namespace Checksum
 		** \param s The string to compute
 		** \return The hash value
 		*/
-		const String& operator[] (const String& s) {fromString(s);return pValue;}
+		const String& operator[] (const String& s);
 
 	protected:
 		//! The hash value
@@ -86,8 +89,11 @@ namespace Checksum
 
 
 
+
 } // namespace Checksum
 } // namespace Hash
 } // namespace Yuni
+
+# include "checksum.hxx"
 
 #endif // __YUNI_HASH_ACHECKSUM_H__
