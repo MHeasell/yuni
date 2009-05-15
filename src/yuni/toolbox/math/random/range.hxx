@@ -52,7 +52,7 @@ namespace Random
 		template<class D, int LoValue, int HiValue, typename T>
 		struct AlgorithmFromType
 		{
-			static inline const T Next(D& d)
+			static inline T Next(D& d)
 			{
 				// Default algorithm, suitable for Integer types
 				return T((double)d.next() / (double(d.max()) + 1.) * T(HiValue - LoValue)) + LoValue;
@@ -62,7 +62,7 @@ namespace Random
 		template<class D, int LoValue, int HiValue>
 		struct AlgorithmFromType<D, LoValue, HiValue, float>
 		{
-			static inline const float Next(D& d)
+			static inline float Next(D& d)
 			{
 				return float(float(d.next()) / ((float(d.max()) + 1.) / float(HiValue - LoValue)) + float(LoValue));
 			}
@@ -71,7 +71,7 @@ namespace Random
 		template<class D, int LoValue, int HiValue>
 		struct AlgorithmFromType<D, LoValue, HiValue, double>
 		{
-			static inline const double Next(D& d)
+			static inline double Next(D& d)
 			{
 				return double(d.next()) / ((double(d.max()) + 1.) / double(HiValue)) + double(LoValue);
 			}
@@ -80,7 +80,7 @@ namespace Random
 		template<class D, int LoValue, int HiValue>
 		struct AlgorithmFromType<D, LoValue, HiValue, long double>
 		{
-			static inline const long double Next(D& d)
+			static inline long double Next(D& d)
 			{
 				return (long double)(d.next()) / (((long double)(d.max()) + 1.) / (long double)(HiValue)) + (long double)(LoValue);
 			}

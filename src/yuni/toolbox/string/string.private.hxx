@@ -1,6 +1,8 @@
 #ifndef __YUNI_TOOLBOX_STRING_STRING_PRIVATE_HXX__
 # define __YUNI_TOOLBOX_STRING_STRING_PRIVATE_HXX__
 
+# include <stdarg.h>
+# include <stdio.h>
 
 
 namespace Yuni

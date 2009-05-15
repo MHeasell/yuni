@@ -36,10 +36,10 @@ namespace Random
 		void reset();
 		void reset(const unsigned int seed);
 
-		const Value next();
+		Value next();
 
-		static const Value min();
-		static const Value max();
+		static Value min();
+		static Value max();
 
 		template<class U> Default& operator >> (U& u);
 	};

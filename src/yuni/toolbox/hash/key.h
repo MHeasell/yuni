@@ -24,7 +24,7 @@ namespace Hash
 		/*!
 		** \brief Get the unique ID
 		*/
-		const size_t uid() const {return pID;}
+		size_t uid() const {return pID;}
 
 	protected:
 		size_t pID;
