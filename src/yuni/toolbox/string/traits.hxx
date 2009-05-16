@@ -13,14 +13,6 @@ namespace Private
 namespace StringImpl
 {
 
-	/*!
-	** \brief A custom implementation to get the minimum of two values
-	**
-	** This function is present to only avoid to include toolbox/math.h
-	*/
-	template<typename T>
-	inline T Min(const T a, const T b)  {return a < b ? a : b;}
-
 
 
 
@@ -60,16 +52,20 @@ namespace StringImpl
 
 		static bool StrictlyEquals(const C* a, const C* b)
 		{
-			while (1)
+			if (a && b)
 			{
-				if (*a != *b)
-					return false;
-				if ('\0' == *a)
-					return true;
-				++a;
-				++b;
+				while (1)
+				{
+					if (*a != *b)
+						return false;
+					if ('\0' == *a)
+						return true;
+					++a;
+					++b;
+				}
+				return true;
 			}
-			return true;
+			return (b && '\0' == *b && a && '\0' == *a);
 		}
 
 
@@ -80,19 +76,22 @@ namespace StringImpl
 
 		static bool Equals(const C* a, const C* b, const typename StringBase<C,K>::Size maxLen)
 		{
-			typename StringBase<C,K>::Size pos(0);
-			while (pos < maxLen)
+			if (maxLen && a && b)
 			{
-				if (*a != *b)
-					return false;
-				if ('\0' == *a)
-					return true;
-				++a;
-				++b;
+				typename StringBase<C,K>::Size pos(0);
+				while (pos < maxLen)
+				{
+					if (*a != *b)
+						return false;
+					if ('\0' == *a)
+						return true;
+					++a;
+					++b;
+				}
+				return true;
 			}
-			return true;
+			return (b && '\0' == *b && a && '\0' == *a);
 		}
-
 
 	};
 
@@ -125,18 +124,22 @@ namespace StringImpl
 		}
 
 
-		static inline bool StrictlyEquals(const char* a, const char* b)
+		static bool StrictlyEquals(const char* a, const char* b)
 		{
-			while (1)
+			if (a && b)
 			{
-				if (*a != *b)
-					return false;
-				if ('\0' == *a)
-					return true;
-				++a;
-				++b;
+				while (1)
+				{
+					if (*a != *b)
+						return false;
+					if ('\0' == *a)
+						return true;
+					++a;
+					++b;
+				}
+				return true;
 			}
-			return true;
+			return (b && '\0' == *b && a && '\0' == *a);
 		}
 
 		static inline bool StrictlyEquals(const char* a, const char* b, const typename StringBase<char,K1>::Size maxLen)
@@ -146,17 +149,21 @@ namespace StringImpl
 
 		static bool Equals(const char* a, const char* b, const typename StringBase<char,K1>::Size maxLen)
 		{
-			typename StringBase<char,K1>::Size pos(0);
-			while (pos < maxLen)
+			if (maxLen && a && b)
 			{
-				if (*a != *b)
-					return false;
-				if ('\0' == *a)
-					return true;
-				++a;
-				++b;
+				typename StringBase<char,K1>::Size pos(0);
+				while (pos < maxLen)
+				{
+					if (*a != *b)
+						return false;
+					if ('\0' == *a)
+						return true;
+					++a;
+					++b;
+				}
+				return true;
 			}
-			return true;
+			return (b && '\0' == *b && a && '\0' == *a);
 		}
 
 	};
@@ -1085,36 +1092,6 @@ namespace StringImpl
 		static inline bool Value(const A& a, const B& b) { return (a != b); }
 	};
 
-	/*
-
-	template<class StrBase, typename U, bool Equals>
-	struct FindFirstOf
-	{
-		static inline typename StrBase::Size Value(const StrBase& s, const U& toFind)
-		{
-			return ::doNotCompileSpecializationIsMissing(s, toFind);
-		}
-		static inline typename StrBase::Size Value(const StrBase& s, const U& toFind, const typename StrBase::Size offset)
-		{
-			return ::doNotCompileSpecializationIsMissing(s, toFind);
-		}
-	};
-
-
-	template<class StrBase, typename U, bool Equals>
-	struct FindLastOf
-	{
-		static inline typename StrBase::Size Value(const StrBase& s, const U& toFind)
-		{
-			return ::doNotCompileSpecializationIsMissing(s, toFind);
-		}
-		static inline typename StrBase::Size Value(const StrBase& s, const U& toFind, const typename StrBase::Size offset)
-		{
-			return ::doNotCompileSpecializationIsMissing(s, toFind);
-		}
-	};
-
-*/
 
 
 	template<class StrBase1, bool Equals>
@@ -1129,7 +1106,7 @@ namespace StringImpl
 			}
 			return StrBase1::npos;
 		}
-	
+
 		static typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char toFind, const typename StrBase1::Size offset)
 		{
 			for (typename StrBase1::Size i = offset; i < s.pSize; ++i)
@@ -1163,13 +1140,13 @@ namespace StringImpl
 			}
 			return StrBase1::npos;
 		}
-	
+
 
 		static inline typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char* toFind)
 		{
 			return RawValue(s, toFind, 0, StrBase1::Length(toFind));
 		}
-	
+
 		static inline typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char* toFind, const typename StrBase1::Size offset)
 		{
 			return RawValue(s, toFind, offset, StrBase1::Length(toFind));
@@ -1197,13 +1174,13 @@ namespace StringImpl
 			}
 			return StrBase1::npos;
 		}
-	
+
 
 		static inline typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char* toFind)
 		{
 			return RawNValue(s, toFind, 0);
 		}
-	
+
 		static inline typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char* toFind, const typename StrBase1::Size offset)
 		{
 			return RawNValue(s, toFind, offset);
@@ -1218,7 +1195,7 @@ namespace StringImpl
 		{
 			return FindFirstOf<StrBase1, typename StrBase1::Char*, Equals>::RawValue(s, toFind.pPtr, 0, toFind.pSize);
 		}
-	
+
 		static inline typename StrBase1::Size Value(const StrBase1& s, const StringBase<typename StrBase1::Char, Cnk1>& toFind, const typename StrBase1::Size offset)
 		{
 			return FindFirstOf<StrBase1, typename StrBase1::Char*, Equals>::RawValue(s, toFind.pPtr, offset, toFind.pSize);

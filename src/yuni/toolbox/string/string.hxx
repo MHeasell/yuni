@@ -10,6 +10,7 @@
 namespace Yuni
 {
 
+
 	template<typename C, int Chunk>
 	inline StringBase<C,Chunk>::StringBase()
 		:pSize(0), pCapacity(0), pPtr(NULL)
@@ -175,6 +176,9 @@ namespace Yuni
 	inline StringBase<C,Chunk>::~StringBase()
 	{
 		::free(pPtr);
+		# ifndef NDEBUG
+		pPtr = NULL;
+		# endif
 	}
 
 
@@ -184,7 +188,7 @@ namespace Yuni
 		if (pSize)
 		{
 			pSize = 0;
-			*pPtr = '\0';
+			pPtr[0] = '\0';
 		}
 	}
 
@@ -861,8 +865,18 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::operator == (const C* rhs) const
 	{
-		return (rhs ? Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize) : !pSize);
+		return Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize);
 	}
+
+
+	template<typename C, int Chunk>
+	template<int N>
+	inline bool
+	StringBase<C,Chunk>::operator == (const C rhs[N]) const
+	{
+		return (N == pSize) && Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize);
+	}
+
 
 
 	template<typename C, int Chunk>
@@ -878,8 +892,18 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::operator != (const C* rhs) const
 	{
-		return (rhs ? !Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize) : (pSize));
+		return !Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize);
 	}
+
+
+	template<typename C, int Chunk>
+	template<int N>
+	inline bool
+	StringBase<C,Chunk>::operator != (const C rhs[N]) const
+	{
+		return !((N == pSize) && Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize));
+	}
+
 
 	template<typename C, int Chunk>
 	template<int Chnk1>
@@ -894,7 +918,7 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::Equals(const Char* a, const Char* b)
 	{
-		return Private::StringImpl::Impl<C,Chunk>::StrictlyEquals(a, b);
+		return Private::StringImpl::Impl<C,Chunk>::Equals(a, b);
 	}
 
 
@@ -1716,7 +1740,10 @@ namespace Yuni
 	StringBase<C,Chunk>::replace(const typename StringBase<C,Chunk>::Size offset, const typename StringBase<C,Chunk>::Size len, const U& u)
 	{
 		if (offset < pSize && len)
-			erase(offset, len).insert(offset, u);
+		{
+			erase(offset, len);
+			insert(offset, u);
+		}
 		return *this;
 	}
 
@@ -1726,9 +1753,17 @@ namespace Yuni
 	StringBase<C,Chunk>&
 	StringBase<C,Chunk>::replace(const U& u, const V& v)
 	{
-		typename StringBase<C,Chunk>::Size offset = find(u);
-		if (npos != offset)
-			replace(u, Length(u), v);
+		const typename StringBase<C,Chunk>::Size lenU = Length(u);
+		if (lenU)
+		{
+			const typename StringBase<C,Chunk>::Size lenV = Length(v);
+			typename StringBase<C,Chunk>::Size offset = find(u);
+			while (npos != offset)
+			{
+				replace(offset, lenU, v);
+				offset = find(u, offset + lenV);
+			}
+		}
 		return *this;
 	}
 

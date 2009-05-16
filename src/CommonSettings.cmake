@@ -85,6 +85,9 @@ Else("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 EndIF("${CMAKE_BUILD_TYPE}" STREQUAL "release")
 
 
+IF(APPLE)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+ENDIF(APPLE)
 
 
 #
