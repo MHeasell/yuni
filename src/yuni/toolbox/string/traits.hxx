@@ -1,8 +1,9 @@
-#ifndef __YUNI_TOOLBOX_STRING_STRING_PRIVATE_HXX__
-# define __YUNI_TOOLBOX_STRING_STRING_PRIVATE_HXX__
+#ifndef __YUNI_TOOLBOX_STRING_STRING_TRAITS_TRAITS_HXX__
+# define __YUNI_TOOLBOX_STRING_STRING_TRAITS_TRAITS_HXX__
 
 # include <stdarg.h>
 # include <stdio.h>
+# include "../static/assert.h"
 
 
 namespace Yuni
@@ -12,6 +13,11 @@ namespace Private
 namespace StringImpl
 {
 
+	/*!
+	** \brief A custom implementation to get the minimum of two values
+	**
+	** This function is present to only avoid to include toolbox/math.h
+	*/
 	template<typename T>
 	inline T Min(const T a, const T b)  {return a < b ? a : b;}
 
@@ -508,20 +514,15 @@ namespace StringImpl
 	template<class StrBase, class T>
 	struct Find
 	{
+		/* Interface */
 		static typename StrBase::Size Value(const StrBase& str, const T& t);
 		static typename StrBase::Size Value(const StrBase& str, const T& t, const typename StrBase::Size offset);
 		static typename StrBase::Size ReverseValue(const StrBase& str, const T& t);
 		static typename StrBase::Size ReverseValue(const StrBase& str, const T& t, const typename StrBase::Size offset);
-		static typename StrBase::Size ValueOf(const StrBase& str, const T& t);
-		static typename StrBase::Size ValueOf(const StrBase& str, const T& t, const typename StrBase::Size offset);
-		static typename StrBase::Size ReverseValueOf(const StrBase& str, const T& t);
-		static typename StrBase::Size ReverseValueOf(const StrBase& str, const T& t, const typename StrBase::Size offset);
-		static typename StrBase::Size ValueNotOf(const StrBase& str, const T& t);
-		static typename StrBase::Size ValueNotOf(const StrBase& str, const T& t, const typename StrBase::Size offset);
-		static typename StrBase::Size ReverseValueNotOf(const StrBase& str, const T& t);
-		static typename StrBase::Size ReverseValueNotOf(const StrBase& str, const T& t, const typename StrBase::Size offset);
-
 	};
+
+
+
 
 	template<class StrBase1>
 	struct Find<StrBase1, char>
@@ -564,85 +565,9 @@ namespace StringImpl
 			return StrBase1::npos;
 		}
 
-		static typename StrBase1::Size ValueOf(const StrBase1& str, const char t)
-		{
-			for (typename StrBase1::Size i = 0; i != str.pSize; ++i)
-			{
-				if (t == str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ValueOf(const StrBase1& str, const char t, const typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
-			{
-				if (t == str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const char t)
-		{
-			for (typename StrBase1::Size i = str.pSize - 1; i != StrBase1::npos; --i)
-			{
-				if (t == str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const char t, const typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = ((offset != StrBase1::npos) ? offset : str.pSize - 1);
-				i != StrBase1::npos; --i)
-			{
-				if (t != str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
+	}; // specialization on `char`
 
 
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const char t)
-		{
-			for (typename StrBase1::Size i = 0; i != str.pSize; ++i)
-			{
-				if (t != str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const char t, const typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
-			{
-				if (t != str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const char t)
-		{
-			for (typename StrBase1::Size i = str.pSize - 1; i != StrBase1::npos; --i)
-			{
-				if (t != str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const char t, const typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = ((offset != StrBase1::npos) ? offset : str.pSize - 1);
-				i != StrBase1::npos; --i)
-			{
-				if (t != str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-
-
-	};
 
 
 	template<class StrBase1>
@@ -686,84 +611,6 @@ namespace StringImpl
 			return StrBase1::npos;
 		}
 
-		static typename StrBase1::Size ValueOf(const StrBase1& str, const wchar_t t)
-		{
-			for (typename StrBase1::Size i = 0; i != str.pSize; ++i)
-			{
-				if (t == str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ValueOf(const StrBase1& str, const wchar_t t, const typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
-			{
-				if (t == str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const wchar_t t)
-		{
-			for (typename StrBase1::Size i = str.pSize - 1; i != StrBase1::npos; --i)
-			{
-				if (t == str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const wchar_t t, const typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = ((offset != StrBase1::npos) ? offset : str.pSize - 1);
-				i != StrBase1::npos; --i)
-			{
-				if (t == str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-
-
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const wchar_t t)
-		{
-			for (typename StrBase1::Size i = 0; i != str.pSize; ++i)
-			{
-				if (t != str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const wchar_t t, const typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
-			{
-				if (t != str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const wchar_t t)
-		{
-			for (typename StrBase1::Size i = str.pSize - 1; i != StrBase1::npos; --i)
-			{
-				if (t != str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const wchar_t t, const typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = ((offset != StrBase1::npos) ? offset : str.pSize - 1);
-				i != StrBase1::npos; --i)
-			{
-				if (t != str.pPtr[i])
-					return i;
-			}
-			return StrBase1::npos;
-		}
-
-
 	};
 
 	template<class StrBase1, typename W, int N>
@@ -806,55 +653,6 @@ namespace StringImpl
 			return StrBase1::npos;
 		}
 
-		static typename StrBase1::Size ValueOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = 0)
-		{
-			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
-			{
-				if (StrBase1::HasChar(str.pPtr[i], t))
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = StrBase1::npos)
-		{
-			if (offset < str.pSize)
-			{
-				typename StrBase1::Size i = str.pSize;
-				do
-				{
-					--i;
-					if (StrBase1::HasChar(str.pPtr[i], t))
-						return i;
-				} while (i != 0);
-			}
-			return StrBase1::npos;
-		}
-
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = 0)
-		{
-			for (typename StrBase1::Size i = offset; i < str.pSize; ++i)
-			{
-				if (!StrBase1::HasChar(str.pPtr[i], t))
-					return i;
-			}
-			return StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = StrBase1::npos)
-		{
-			if (offset < str.pSize)
-			{
-				typename StrBase1::Size i = str.pSize;
-				do
-				{
-					--i;
-					if (!StrBase1::HasChar(str.pPtr[i], t))
-						return i;
-				} while (i != 0);
-			}
-			return StrBase1::npos;
-		}
-
-
 	};
 
 	template<class StrBase1, typename W>
@@ -875,30 +673,6 @@ namespace StringImpl
 			}
 			return StrBase1::npos;
 		}
-
-		static typename StrBase1::Size RawValueOf(const StrBase1& str, const W* t,
-			const typename StrBase1::Size length, typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = offset; i < length; ++i)
-			{
-				if (StrBase1::HasChar(str.pPtr[i], t))
-					return i;
-			}
-			return StrBase1::npos;
-		}
-
-
-		static typename StrBase1::Size RawValueNotOf(const StrBase1& str, const W* t,
-			const typename StrBase1::Size length, typename StrBase1::Size offset)
-		{
-			for (typename StrBase1::Size i = offset; i < length; ++i)
-			{
-				if (!StrBase1::HasChar(str.pPtr[i], t))
-					return i;
-			}
-			return StrBase1::npos;
-		}
-
 
 		static typename StrBase1::Size Value(const StrBase1& str, const W* t, typename StrBase1::Size offset = 0)
 		{
@@ -931,44 +705,6 @@ namespace StringImpl
 				: StrBase1::npos;
 		}
 
-		static typename StrBase1::Size ValueOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = 0)
-		{
-			return (t && '\0' != *t && offset < str.pSize)
-				? RawValueOf(str, t, Length<StrBase1,W*>::Value(t), offset)
-				: StrBase1::npos;
-		}
-
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = 0)
-		{
-			return (t && '\0' != *t && offset < str.pSize)
-				? RawValueNotOf(str, t, Length<StrBase1,W*>::Value(t), offset)
-				: StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseRawValueNotOf(const StrBase1& str, const W* t,
-			const typename StrBase1::Size length, typename StrBase1::Size offset)
-		{
-			if (offset >= str.pSize)
-				offset = str.pSize - 1;
-			while (1)
-			{
-				// Trying to find the next occurenceof the first char
-				offset = str.find(*t, offset);
-				if (StrBase1::npos == offset || offset + length > str.pSize)
-					return StrBase1::npos;
-				if (memcmp(str.pPtr + offset, t, length * sizeof(W)))
-					return offset;
-				++offset;
-			}
-			return StrBase1::npos;
-		}
-
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const W* t, typename StrBase1::Size offset = StrBase1::npos)
-		{
-			return (t && '\0' != *t && str.pSize)
-				? ReverseRawValueNotOf(str, t, Length<StrBase1,W*>::Value(t), offset)
-				: StrBase1::npos;
-		}
-
 	};
 
 	template<class StrBase1, typename W>
@@ -986,20 +722,6 @@ namespace StringImpl
 				? Find<StrBase1, W*>::ReverseRawValue(str, t.c_str(), t.size(), offset)
 				: StrBase1::npos;
 		}
-
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const std::basic_string<W>& t, typename StrBase1::Size offset = 0)
-		{
-			return (!t.empty() && offset < str.pSize)
-				? Find<StrBase1, W*>::RawValueNotOf(str, t.c_str(), t.size(), offset)
-				: StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const std::basic_string<W>& t, typename StrBase1::Size offset = StrBase1::npos)
-		{
-			return (!t.empty() && str.pSize)
-				? Find<StrBase1, W*>::ReverseRawValueNotOf(str, t.c_str(), t.size(), offset)
-				: StrBase1::npos;
-		}
-
 
 	};
 
@@ -1019,20 +741,6 @@ namespace StringImpl
 				: StrBase1::npos;
 		}
 
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const std::basic_string<W>* t, typename StrBase1::Size offset = 0)
-		{
-			return (t && !t->empty() && offset < str.pSize)
-				? Find<StrBase1, W*>::RawValueNotOf(str, t->c_str(), t->size(), offset)
-				: StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const std::basic_string<W>* t, typename StrBase1::Size offset = StrBase1::npos)
-		{
-			return (t && !t->empty() && str.pSize)
-				? Find<StrBase1, W*>::ReverseRawValueNotOf(str, t->c_str(), t->size(), offset)
-				: StrBase1::npos;
-		}
-
-
 	};
 
 
@@ -1051,21 +759,6 @@ namespace StringImpl
 				? Find<StrBase1, W*>::ReverseRawValue(str, t.pPtr, t.pSize, offset)
 				: StrBase1::npos;
 		}
-
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const Yuni::StringBase<W,N>& t, typename StrBase1::Size offset = 0)
-		{
-			return (t.pSize && offset < str.pSize)
-				? Find<StrBase1, W*>::RawValueNotOf(str, t.pPtr, t.pSize, offset)
-				: StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const Yuni::StringBase<W,N>& t, typename StrBase1::Size offset = StrBase1::npos)
-		{
-			return (t.pSize && str.pSize)
-				? Find<StrBase1, W*>::ReverseRawValueNotOf(str, t.pPtr, t.pSize, offset)
-				: StrBase1::npos;
-		}
-
-
 	};
 
 	template<class StrBase1, typename W, int N>
@@ -1083,21 +776,6 @@ namespace StringImpl
 				? Find<StrBase1, W*>::ReverseRawValue(str, t->pPtr, t->pSize, offset)
 				: StrBase1::npos;
 		}
-
-		static typename StrBase1::Size ValueNotOf(const StrBase1& str, const Yuni::StringBase<W,N>* t, typename StrBase1::Size offset = 0)
-		{
-			return (t && t->pSize && offset < str.pSize)
-				? Find<StrBase1, W*>::RawValueNotOf(str, t->pPtr, t->pSize, offset)
-				: StrBase1::npos;
-		}
-		static typename StrBase1::Size ReverseValueNotOf(const StrBase1& str, const Yuni::StringBase<W,N>* t, typename StrBase1::Size offset = StrBase1::npos)
-		{
-			return (t && t->pSize && str.pSize)
-				? Find<StrBase1, W*>::ReverseRawValueNotOf(str, t->pPtr, t->pSize, offset)
-				: StrBase1::npos;
-		}
-
-
 	};
 
 
@@ -1393,10 +1071,309 @@ namespace StringImpl
 
 
 
+	template<bool E>
+	struct CheckEquality
+	{
+		template<typename A, typename B>
+		static inline bool Value(const A& a, const B& b) { return (a == b);	}
+	};
+
+	template<>
+	struct CheckEquality<false>
+	{
+		template<typename A, typename B>
+		static inline bool Value(const A& a, const B& b) { return (a != b); }
+	};
+
+	/*
+
+	template<class StrBase, typename U, bool Equals>
+	struct FindFirstOf
+	{
+		static inline typename StrBase::Size Value(const StrBase& s, const U& toFind)
+		{
+			return ::doNotCompileSpecializationIsMissing(s, toFind);
+		}
+		static inline typename StrBase::Size Value(const StrBase& s, const U& toFind, const typename StrBase::Size offset)
+		{
+			return ::doNotCompileSpecializationIsMissing(s, toFind);
+		}
+	};
+
+
+	template<class StrBase, typename U, bool Equals>
+	struct FindLastOf
+	{
+		static inline typename StrBase::Size Value(const StrBase& s, const U& toFind)
+		{
+			return ::doNotCompileSpecializationIsMissing(s, toFind);
+		}
+		static inline typename StrBase::Size Value(const StrBase& s, const U& toFind, const typename StrBase::Size offset)
+		{
+			return ::doNotCompileSpecializationIsMissing(s, toFind);
+		}
+	};
+
+*/
+
+
+	template<class StrBase1, bool Equals>
+	struct FindFirstOf<StrBase1, typename StrBase1::Char, Equals>
+	{
+		static typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char toFind)
+		{
+			for (typename StrBase1::Size i = 0; i != s.pSize; ++i)
+			{
+				if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
+					return i;
+			}
+			return StrBase1::npos;
+		}
+	
+		static typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char toFind, const typename StrBase1::Size offset)
+		{
+			for (typename StrBase1::Size i = offset; i < s.pSize; ++i)
+			{
+				if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
+					return i;
+			}
+			return StrBase1::npos;
+		}
+	};
+
+
+	template<class StrBase1, bool Equals>
+	struct FindFirstOf<StrBase1, typename StrBase1::Char*, Equals>
+	{
+		static typename StrBase1::Size RawValue(const StrBase1& s, const typename StrBase1::Char* toFind,
+			typename StrBase1::Size offset, /* offset in `s` */
+			typename StrBase1::Size len     /* Length of `toFind` */)
+		{
+			if (len && toFind && offset < s.pSize)
+			{
+				typename StrBase1::Size j;
+				for (typename StrBase1::Size i = offset; i != s.pSize; ++i)
+				{
+					for (j = 0; j != len; ++j)
+					{
+						if (CheckEquality<Equals>::Value(toFind[j], s.pPtr[i]))
+							return i;
+					}
+				}
+			}
+			return StrBase1::npos;
+		}
+	
+
+		static inline typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char* toFind)
+		{
+			return RawValue(s, toFind, 0, StrBase1::Length(toFind));
+		}
+	
+		static inline typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char* toFind, const typename StrBase1::Size offset)
+		{
+			return RawValue(s, toFind, offset, StrBase1::Length(toFind));
+		}
+	};
+
+
+	template<class StrBase1, bool Equals, int N>
+	struct FindFirstOf<StrBase1, typename StrBase1::Char[N], Equals>
+	{
+		static typename StrBase1::Size RawNValue(const StrBase1& s, const typename StrBase1::Char* toFind,
+			typename StrBase1::Size offset /* offset in `s` */)
+		{
+			if ((N - 1) && toFind && offset < s.pSize)
+			{
+				typename StrBase1::Size j;
+				for (typename StrBase1::Size i = offset; i != s.pSize; ++i)
+				{
+					for (j = 0; j != (N - 1); ++j)
+					{
+						if (CheckEquality<Equals>::Value(toFind[j], s.pPtr[i]))
+							return i;
+					}
+				}
+			}
+			return StrBase1::npos;
+		}
+	
+
+		static inline typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char* toFind)
+		{
+			return RawNValue(s, toFind, 0);
+		}
+	
+		static inline typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char* toFind, const typename StrBase1::Size offset)
+		{
+			return RawNValue(s, toFind, offset);
+		}
+	};
+
+
+	template<class StrBase1, bool Equals, int Cnk1>
+	struct FindFirstOf<StrBase1, StringBase<typename StrBase1::Char, Cnk1>, Equals>
+	{
+		static inline typename StrBase1::Size Value(const StrBase1& s, const StringBase<typename StrBase1::Char, Cnk1>& toFind)
+		{
+			return FindFirstOf<StrBase1, typename StrBase1::Char*, Equals>::RawValue(s, toFind.pPtr, 0, toFind.pSize);
+		}
+	
+		static inline typename StrBase1::Size Value(const StrBase1& s, const StringBase<typename StrBase1::Char, Cnk1>& toFind, const typename StrBase1::Size offset)
+		{
+			return FindFirstOf<StrBase1, typename StrBase1::Char*, Equals>::RawValue(s, toFind.pPtr, offset, toFind.pSize);
+		}
+	};
+
+
+
+	template<class StrBase1, bool Equals>
+	struct FindLastOf<StrBase1, typename StrBase1::Char, Equals>
+	{
+		static typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char toFind)
+		{
+			if (s.pSize)
+			{
+				typename StrBase1::Size i = s.pSize;
+				--i;
+				do
+				{
+					if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
+						return i;
+				}
+				while (--i);
+			}
+			return StrBase1::npos;
+		}
+
+		static typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char toFind, const typename StrBase1::Size offset)
+		{
+			if (offset < s.pSize)
+			{
+				typename StrBase1::Size i = offset;
+				do
+				{
+					if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
+						return i;
+				}
+				while (--i);
+			}
+			return StrBase1::npos;
+		}
+
+	};
+
+	template<class StrBase1, bool Equals>
+	struct FindLastOf<StrBase1, typename StrBase1::Char*, Equals>
+	{
+		static typename StrBase1::Size RawValue(const StrBase1& s, const typename StrBase1::Char* toFind,
+			typename StrBase1::Size offset, /* offset in `s` */
+			typename StrBase1::Size len     /* Length of `toFind` */)
+		{
+			if (len && toFind && offset < s.pSize)
+			{
+				typename StrBase1::Size j;
+				typename StrBase1::Size i = offset;
+				do
+				{
+					for (j = 0; j != len; ++j)
+					{
+						if (CheckEquality<Equals>::Value(toFind[j], s.pPtr[i]))
+							return i;
+					}
+				}
+				while (--i);
+			}
+			return StrBase1::npos;
+		}
+
+
+		static inline typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char* toFind)
+		{
+			return s.pSize
+				? RawValue(s, toFind, s.pSize - 1, StrBase1::Length(toFind))
+				: StrBase1::npos;
+		}
+
+		static typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char toFind, const typename StrBase1::Size offset)
+		{
+			return RawValue(s, toFind, offset, StrBase1::Length(toFind));
+		}
+
+	};
+
+	template<class StrBase1, typename C, bool Equals, int N>
+	struct FindLastOf<StrBase1, C[N], Equals>
+	{
+		static typename StrBase1::Size RawNValue(const StrBase1& s, const C* toFind,
+			typename StrBase1::Size offset /* offset in `s` */)
+		{
+			if ((N - 1) && toFind && offset < s.pSize)
+			{
+				typename StrBase1::Size j;
+				typename StrBase1::Size i = offset;
+				do
+				{
+					for (j = 0; j != (N - 1); ++j)
+					{
+						if (CheckEquality<Equals>::Value(toFind[j], s.pPtr[i]))
+							return i;
+					}
+				}
+				while (--i);
+			}
+			return StrBase1::npos;
+		}
+
+
+		static inline typename StrBase1::Size Value(const StrBase1& s, const C* toFind)
+		{
+			return s.pSize ? RawNValue(s, toFind, s.pSize - 1) : StrBase1::npos;
+		}
+
+		static inline typename StrBase1::Size Value(const StrBase1& s, const C* toFind, const typename StrBase1::Size offset)
+		{
+			return RawNValue(s, toFind, offset);
+		}
+	};
+
+
+	template<class StrBase1, bool Equals, int Cnk1>
+	struct FindLastOf<StrBase1, StringBase<typename StrBase1::Char, Cnk1>, Equals>
+	{
+		static inline typename StrBase1::Size Value(const StrBase1& s, const StringBase<typename StrBase1::Char, Cnk1>& toFind)
+		{
+			return s.pSize
+				? FindLastOf<StrBase1, typename StrBase1::Char*, Equals>::RawValue(s, toFind.pPtr, s.pSize - 1, toFind.pSize)
+				: StrBase1::npos;
+		}
+
+		static typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char toFind, const typename StrBase1::Size offset)
+		{
+			return FindLastOf<StrBase1, typename StrBase1::Char*, Equals>::RawValue(s, toFind.pPtr, offset, toFind.pSize);
+		}
+	};
+
+	template<class StrBase1, bool Equals>
+	struct FindLastOf<StrBase1, std::basic_string<typename StrBase1::Char>, Equals>
+	{
+		static inline typename StrBase1::Size Value(const StrBase1& s, const std::basic_string<typename StrBase1::Char>& toFind)
+		{
+			return s.pSize
+				? FindLastOf<StrBase1, typename StrBase1::Char*, Equals>::RawValue(s, toFind.c_str(), s.pSize - 1, toFind.size())
+				: StrBase1::npos;
+		}
+
+		static typename StrBase1::Size Value(const StrBase1& s, const typename StrBase1::Char toFind, const typename StrBase1::Size offset)
+		{
+			return FindLastOf<StrBase1, typename StrBase1::Char*, Equals>::RawValue(s, toFind.c_str(), offset, toFind.size());
+		}
+	};
+
 
 
 } // namespace StringImpl
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_STRING_STRING_PRIVATE_HXX__
+#endif // __YUNI_TOOLBOX_STRING_STRING_TRAITS_TRAITS_HXX__

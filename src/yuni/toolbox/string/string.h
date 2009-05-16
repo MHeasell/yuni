@@ -13,7 +13,7 @@
 # include <ostream>
 # include <sstream>
 # include "../static/remove.h"
-# include "string.forward.h"
+# include "forward.h"
 
 
 //! Default separators
@@ -159,7 +159,7 @@ namespace Yuni
 		class const_reverse_iterator;
 
 		// Implementation of iterators
-		# include "string.iterators.hxx"
+		# include "iterators.hxx"
 
 	public:
 		//! \name Case conversions
@@ -1293,12 +1293,14 @@ namespace Yuni
 		//! Pointer to the inner buffer
 		Char* pPtr;
 
-		// Some friends
+		// Friends !
 		template<class StrBase1, class T1> friend struct Private::StringImpl::Length;
 		template<class StrBase1, class T1> friend struct Private::StringImpl::HasChar;
 		template<class StrBase1, class T1> friend struct Private::StringImpl::CountChar;
 		template<class StrBase1, class T1> friend struct Private::StringImpl::Find;
 		template<class StrBase1, class T1> friend struct Private::StringImpl::Remove;
+		template<class StrBase1, class T1, bool Equals> friend struct Private::StringImpl::FindFirstOf;
+		template<class StrBase1, class T1, bool Equals> friend struct Private::StringImpl::FindLastOf;
 		template<typename T1> friend struct Private::StringImpl::From;
 		template<typename T1> friend struct Private::StringImpl::To;
 
@@ -1314,10 +1316,10 @@ namespace Yuni
 
 
 // Specific implementation for string handling
-# include "string.private.hxx"
+# include "traits.hxx"
 // Standard conversions
-# include "string.converters.from.hxx"
-# include "string.converters.to.hxx"
+# include "converters.from.hxx"
+# include "converters.to.hxx"
 // Implementation
 # include "string.hxx"
 

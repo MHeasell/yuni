@@ -659,7 +659,8 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_first_of(const U& u) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ValueOf(*this, u);
+		return Private::StringImpl:: template FindFirstOf< StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type, true>
+			::Value(*this, u);
 	}
 
 
@@ -668,7 +669,8 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_first_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ValueOf(*this, u, offset);
+		return Private::StringImpl::FindFirstOf<StringBase<C,Chunk>, U, true>
+			::Value(*this, u, offset);
 	}
 
 	template<typename C, int Chunk>
@@ -676,7 +678,8 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_first_not_of(const U& u) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ValueNotOf(*this, u);
+		return Private::StringImpl:: template FindFirstOf< StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type, false>
+			::Value(*this, u);
 	}
 
 
@@ -685,16 +688,17 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_first_not_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ValueNotOf(*this, u, offset);
+		return Private::StringImpl:: template FindFirstOf< StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type, false>
+			::Value(*this, u, offset);
 	}
-
 
 	template<typename C, int Chunk>
 	template<typename U>
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_last_of(const U& u) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValueOf(*this, u);
+		return Private::StringImpl:: template FindLastOf< StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type, true>
+			::Value(*this, u);
 	}
 
 
@@ -703,16 +707,17 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_last_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValueOf(*this, u, offset);
+		return Private::StringImpl:: template FindLastOf< StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type, true>
+			::Value(*this, u, offset);
 	}
-
 
 	template<typename C, int Chunk>
 	template<typename U>
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_last_not_of(const U& u) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValueNotOf(*this, u);
+		return Private::StringImpl:: template FindLastOf< StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type, false>
+			::Value(*this, u);
 	}
 
 
@@ -721,8 +726,10 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_last_not_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
 	{
-		return Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::ReverseValueNotOf(*this, u, offset);
+		return Private::StringImpl:: template FindLastOf< StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type, false>
+			::Value(*this, u, offset);
 	}
+
 
 
 	template<typename C, int Chunk>
@@ -1366,8 +1373,8 @@ namespace Yuni
 					case 'f'  : pPtr[retPos] = '\f'; break;
 					case 't'  : pPtr[retPos] = '\t'; break;
 					case '\'' : pPtr[retPos] = '\''; break;
-					case '"'  : pPtr[retPos] = '"';break;
-					default   : pPtr[retPos] = str.pPtr[i];continue;
+					case '"'  : pPtr[retPos] = '"'; break;
+					default   : pPtr[retPos] = str.pPtr[i]; continue;
 				}
 				--pSize;
 				++i;
@@ -1451,6 +1458,16 @@ namespace Yuni
 			return;
 
 		// Section
+		if ('{' == pPtr[left])
+		{
+			key.append('{');
+			return ;
+		}
+		if ('}' == pPtr[left])
+		{
+			key.append('}');
+			return ;
+		}
 		if ('[' == pPtr[left])
 		{
 			key.append('[');
@@ -1466,8 +1483,8 @@ namespace Yuni
 
 		// If not a section, it should be a key/value
 		// Looking for the symbol `=`
-		typename StringBase<C,Chunk>::Size equal = find_first_of("=/", left);
-		if (equal == npos || equal == left || '/' == pPtr[equal])
+		typename StringBase<C,Chunk>::Size equal = find_first_of("=/;", left);
+		if (equal == npos || equal == left || '=' != pPtr[equal])
 			return;
 
 		// Getting our key
@@ -1481,34 +1498,36 @@ namespace Yuni
 		++leftValue; // After the symbol `=`
 		while (leftValue < pSize && HasChar(pPtr[leftValue], YUNI_STRING_SEPARATORS))
 			++leftValue;
-		if (leftValue >= pSize) // Empty value
-			return;
-
-		switch (pPtr[leftValue])
+		if (leftValue < pSize) // Empty value
 		{
-			case ';':
-			case '/':
-				// Empty value
-				break;
-			case '"':
-			case '\'':
-				{
-					// Value enclosed in a string
-					++leftValue;
-					const typename StringBase<C,Chunk>::Size next
-						= FindEndOfSequence(pPtr + leftValue, pPtr[leftValue-1], pSize - leftValue);
-					if (next)
-						value.assignFromEscapedCharacters(*this, next, leftValue);
+			switch (pPtr[leftValue])
+			{
+				case ';':
+				case '/':
+					// Empty value
 					break;
-				}
-			default:
-				{
-					// Standard value
-					const typename StringBase<C,Chunk>::Size semicolon = find_first_of(";/", leftValue);
-					value.append(*this, leftValue, semicolon);
-					value.trimRight();
-					break;
-				}
+				case '"':
+				case '\'':
+					{
+						// Value enclosed in a string
+						++leftValue;
+						const typename StringBase<C,Chunk>::Size next
+							= FindEndOfSequence(pPtr + leftValue, pPtr[leftValue-1], pSize - leftValue);
+						if (next != npos)
+							value.assignFromEscapedCharacters(*this, next, leftValue);
+						else
+							value.append(pPtr + leftValue, pSize - leftValue);
+						break;
+					}
+				default:
+					{
+						// Standard value
+						const typename StringBase<C,Chunk>::Size semicolon = find_first_of(';', leftValue);
+						value.append(*this, leftValue, semicolon - leftValue);
+						value.trimRight();
+						break;
+					}
+			}
 		}
 	}
 
@@ -1651,17 +1670,16 @@ namespace Yuni
 			typename StringBase<C,Chunk>::Size pos(0);
 			while (pos != maxLen && '\0' != str[pos])
 			{
-				if (str[pos] == '\\')
+				if ('\\' == str[pos])
 					escape = !escape;
 				else
 				{
-					if (quote == str[pos] && !escape)
+					if (quote == str[pos] && escape)
 						return pos;
 					escape = false;
 				}
 				++pos;
 			}
-			return maxLen;
 		}
 		return StringBase<C,Chunk>::npos;
 	}
