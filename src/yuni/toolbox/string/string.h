@@ -315,7 +315,7 @@ namespace Yuni
 		*/
 		template<int Ck1, int Ck2>
 		static void ExtractKeyValue(const StringBase& s, StringBase<C,Ck1>& key, StringBase<C,Ck2>& value,
-			const enum CharCase chcase = soIgnoreCase);
+			const enum CharCase chcase = soCaseSensitive);
 
 		/*!
 		** \brief Copy the string and convert all escaped characters (O(N))
@@ -1253,12 +1253,14 @@ namespace Yuni
 
 		//! Get if the string is equivalent to a C-String (can be null)
 		bool operator == (const Char rhs[]) const;
+		template<int N> bool operator == (const Char rhs[N]) const;
 		//! Get if the string is equivalent to another string
 		template<int Chnk1>
 		bool operator == (const StringBase<Char,Chnk1>& rhs) const;
 
 		//! Get if the string is not equivalent to a C-String (can be null)
 		bool operator != (const Char rhs[]) const;
+		template<int N> bool operator != (const Char rhs[N]) const;
 		//! Get if the string is not equivalent to another string
 		template<int Chnk1>
 		bool operator != (const StringBase<Char,Chnk1>& rhs) const;

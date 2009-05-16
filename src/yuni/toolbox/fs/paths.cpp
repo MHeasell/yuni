@@ -76,19 +76,12 @@ namespace Paths
 
 	String ExtractFilePath(const String& p, const bool systemDependant)
 	{
-		const String::size_type pos = (systemDependant)
-			? p.find_last_of(Separator)
-			: p.find_last_of("\\/");
-		if (String::npos != pos)
+		if (p.notEmpty())
 		{
-			if (!pos)
-			{
-				String b(p[0]);
-				return b;
-			}
-			String tmp(p, 0, pos - 1);
-			return tmp;
-			//return (!pos) ? String(p[pos]) : String(p, 0, pos - 1);
+			const String::size_type pos = (systemDependant)
+				? p.find_last_of(Separator)
+				: p.find_last_of("\\/");
+			return (String::npos == pos) ? String() : String(p, 0, pos + 1);
 		}
 		return String();
 	}
@@ -97,14 +90,14 @@ namespace Paths
 
 	String ExtractFileName(const String& p, const bool systemDependant)
 	{
-		const String::size_type pos = (systemDependant)
-			? p.find_last_of(Separator)
-			: p.find_last_of("\\/");
-		if (String::npos == pos)
-			return p;
-		String tmp(p.substr(pos + 1));
-		return tmp;
-		//return (String::npos == pos) ? p : p.substr(pos + 1);
+		if (p.notEmpty())
+		{
+			const String::size_type pos = (systemDependant)
+				? p.find_last_of(Separator)
+				: p.find_last_of("\\/");
+			return (String::npos == pos) ? p : String(p, pos + 1);
+		}
+		return String();
 	}
 
 	void ExtractFileName(String::List& p, const bool systemDependant)
@@ -154,7 +147,7 @@ namespace Paths
 		String::size_type n = s.find_last_of(".\\/");
 		if (n == String::npos || '.' != s[n])
 			return String();
-		return String(s, n).toLower();
+		return String(s, n);
 	}
 
 
@@ -168,7 +161,7 @@ namespace Paths
 		if (p.size() == 2 && ':' == p[1])
 			return true;
 		# endif
-		
+
 		# ifdef YUNI_OS_WINDOWS
 		struct _stat s;
 		if ('\\' == p.last())

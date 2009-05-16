@@ -84,7 +84,7 @@ namespace StringImpl
 			s.reserve(s.pSize + len + 1);
 			(void)::memcpy(s.pPtr + sizeof(C) * s.pSize, (const char*)str, sizeof(char) * len);
 			s.pSize += len;
-			*(s.pPtr + s.pSize) = '\0';
+			s.pPtr[s.pSize] = '\0';
 		}
 
 		template<typename C, int Chnk>
@@ -96,7 +96,7 @@ namespace StringImpl
 			(void)::memmove(s.pPtr + sizeof(C) * (offset + len), s.pPtr + sizeof(C) * (offset), sizeof(C) * (s.pSize-offset));
 			(void)::memcpy(s.pPtr + sizeof(C) * (offset), str, sizeof(C) * len);
 			s.pSize += len;
-			*(s.pPtr + s.pSize) = '\0';
+			s.pPtr[s.pSize] = '\0';
 		}
 
 	}; // char*
@@ -262,7 +262,7 @@ namespace StringImpl
 		static inline void Append(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len)
 		{
 			if (len)
-				From<char*>::AppendRaw<C,Chnk>(s, str, Private::StringImpl::Min(N - 1, len));
+				From<char*>::AppendRaw<C,Chnk>(s, str, Private::StringImpl::Min<typename StringBase<C,Chnk>::Size>(N - 1, len));
 		}
 
 		template<typename C, int Chnk>
@@ -270,7 +270,7 @@ namespace StringImpl
 			const typename StringBase<C,Chnk>::Size len)
 		{
 			if (str && len && offset < N - 1)
-				From<C*>::AppendRaw(s, str + offset, Private::StringImpl::Min(N - 1 - offset, len));
+				From<C*>::AppendRaw(s, str + offset, Private::StringImpl::Min<typename StringBase<C,Chnk>::Size>(N - 1 - offset, len));
 		}
 
 
@@ -285,7 +285,7 @@ namespace StringImpl
 		static inline void Insert(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
 		{
 			if (len)
-				From<char*>::InsertRaw<C,Chnk>(s, str, Private::StringImpl::Min(N - 1, len), offset);
+				From<char*>::InsertRaw<C,Chnk>(s, str, Private::StringImpl::Min<typename StringBase<C,Chnk>::Size>(N - 1, len), offset);
 		}
 
 	}; // char[N]
