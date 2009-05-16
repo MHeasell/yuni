@@ -47,10 +47,10 @@ source_group(ToolBox\\DynamicLibrary FILES ${SRC_TOOLBOX_DYNAMICLIBRARY})
 
 Set(SRC_TOOLBOX_STRING
 				toolbox/string/string.h toolbox/string/string.hxx
-				toolbox/string/string.converters.from.hxx toolbox/string/string.converters.to.hxx
-				toolbox/string/string.forward.h
-				toolbox/string/string.private.hxx
-				toolbox/string/string.iterators.hxx
+				toolbox/string/converters.from.hxx toolbox/string/converters.to.hxx
+				toolbox/string/forward.h
+				toolbox/string/traits.hxx
+				toolbox/string/iterators.hxx
 				toolbox/string.h)
 source_group(ToolBox\\String FILES ${SRC_TOOLBOX_STRING})
 

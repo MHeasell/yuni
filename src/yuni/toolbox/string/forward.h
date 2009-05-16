@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STRING_PREFLIGHT_H__
-# define __YUNI_TOOLBOX_STRING_PREFLIGHT_H__
+#ifndef __YUNI_TOOLBOX_STRING_FORWARD_H__
+# define __YUNI_TOOLBOX_STRING_FORWARD_H__
 
 
 
@@ -26,17 +26,18 @@ namespace Private
 namespace StringImpl
 {
 
-	// Forward declaration
+	// Forward declarations
 	template<class StrBase1, class T1> struct Length;
 	template<class StrBase1, class T1> struct CountChar;
 	template<class StrBase1, class T1> struct HasChar;
 	template<class StrBase1, class T1> struct Find;
 	template<class StrBase1, class T1> struct Remove;
-
+	template<class StrBase1, class T1, bool Equals> struct FindFirstOf;
+	template<class StrBase1, class T1, bool Equals> struct FindLastOf;
 
 
 	/*!
-	** \brief Proxy to convert a type to a string
+	** \brief Proxy to append any type to a given string
 	*/
 	template<typename T>
 	struct From
@@ -64,7 +65,7 @@ namespace StringImpl
 
 
 	/*!
-	** \brief Proxy to convert a string to another type
+	** \brief Proxy to convert a string to any type
 	*/
 	template<typename T>
 	struct To
@@ -80,7 +81,7 @@ namespace StringImpl
 
 
 	/*!
-	** \brief Standard C++ converter from a string to another type
+	** \brief The Standard C++ way (STL) to convert a string to any type
 	*/
 	template<class T, typename C, int Chnk>
 	inline bool StdStringConverter(T& t, const StringBase<C,Chnk>& s, std::ios_base& (*f)(std::ios_base&))
@@ -91,8 +92,9 @@ namespace StringImpl
 
 
 
+
 } // namespace StringImpl
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_STRING_PREFLIGHT_H__
+#endif // __YUNI_TOOLBOX_STRING_FORWARD_H__

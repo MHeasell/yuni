@@ -82,7 +82,7 @@ namespace StringImpl
 		AppendRaw(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size len)
 		{
 			s.reserve(s.pSize + len + 1);
-			memcpy(s.pPtr + sizeof(C) * s.pSize, (const char*)str, sizeof(char) * len);
+			(void)::memcpy(s.pPtr + sizeof(C) * s.pSize, (const char*)str, sizeof(char) * len);
 			s.pSize += len;
 			*(s.pPtr + s.pSize) = '\0';
 		}
@@ -93,14 +93,15 @@ namespace StringImpl
 			const typename StringBase<C,Chnk>::Size offset)
 		{
 			s.reserve(s.pSize + len + 1);
-			memmove(s.pPtr + sizeof(C) * (offset + len), s.pPtr + sizeof(C) * (offset), sizeof(C) * (s.pSize-offset));
-			memcpy(s.pPtr + sizeof(C) * (offset), str, sizeof(C) * len);
+			(void)::memmove(s.pPtr + sizeof(C) * (offset + len), s.pPtr + sizeof(C) * (offset), sizeof(C) * (s.pSize-offset));
+			(void)::memcpy(s.pPtr + sizeof(C) * (offset), str, sizeof(C) * len);
 			s.pSize += len;
 			*(s.pPtr + s.pSize) = '\0';
 		}
 
-
 	}; // char*
+
+
 
 
 	template<>
@@ -108,7 +109,7 @@ namespace StringImpl
 	{
 
 		template<typename C, int Chnk>
-		static inline void Append(StringBase<C,Chnk>& s, const wchar_t* str)
+		static void Append(StringBase<C,Chnk>& s, const wchar_t* str)
 		{
 			if (str)
 			{
@@ -117,10 +118,10 @@ namespace StringImpl
 					return;
 				char* b = new char[l + 1];
 				# if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
-				wcstombs(&b[0], str, l);
+				::wcstombs(&b[0], str, l);
 				# else
 				size_t i;
-				wcstombs_s(&i, &b[0], l, str, l);
+				::wcstombs_s(&i, &b[0], l, str, l);
 				# endif
 				if (0 != *b)
 					From<char*>::AppendRaw(s, b, strlen(b));
@@ -129,7 +130,7 @@ namespace StringImpl
 		}
 
 		template<typename C, int Chnk>
-		static inline void Append(StringBase<C,Chnk>& s, const wchar_t* str, const typename StringBase<C,Chnk>::Size len)
+		static void Append(StringBase<C,Chnk>& s, const wchar_t* str, const typename StringBase<C,Chnk>::Size len)
 		{
 			if (len && str)
 			{
@@ -140,10 +141,10 @@ namespace StringImpl
 					l = len;
 				char* b = new char[l + 1];
 				# if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
-				wcstombs(&b[0], str, l);
+				::wcstombs(&b[0], str, l);
 				# else
 				size_t i;
-				wcstombs_s(&i, &b[0], l, str, l);
+				::wcstombs_s(&i, &b[0], l, str, l);
 				# endif
 				if (0 != *b)
 					From<char*>::AppendRaw(s, b, strlen(b));
@@ -152,7 +153,7 @@ namespace StringImpl
 		}
 
 		template<typename C, int Chnk>
-		static inline void Insert(StringBase<C,Chnk>& s, const wchar_t* str,
+		static void Insert(StringBase<C,Chnk>& s, const wchar_t* str,
 			const typename StringBase<C,Chnk>::Size offset)
 		{
 			if (str)
@@ -162,10 +163,10 @@ namespace StringImpl
 					return;
 				char* b = new char[l + 1];
 				# if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
-				wcstombs(&b[0], str, l);
+				::wcstombs(&b[0], str, l);
 				# else
 				size_t i;
-				wcstombs_s(&i, &b[0], l, str, l);
+				::wcstombs_s(&i, &b[0], l, str, l);
 				# endif
 				if (0 != *b)
 					From<char*>::InsertRaw(s, b, strlen(b), offset);
@@ -174,7 +175,7 @@ namespace StringImpl
 		}
 
 		template<typename C, int Chnk>
-		static inline void Append(StringBase<C,Chnk>& s, const wchar_t* str, const typename StringBase<C,Chnk>::Size len,
+		static void Append(StringBase<C,Chnk>& s, const wchar_t* str, const typename StringBase<C,Chnk>::Size len,
 			const typename StringBase<C,Chnk>::Size offset)
 		{
 			if (len && str)
@@ -186,10 +187,10 @@ namespace StringImpl
 					l = len;
 				char* b = new char[l + 1];
 				# if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
-				wcstombs(&b[0], str, l);
+				::wcstombs(&b[0], str, l);
 				# else
 				size_t i;
-				wcstombs_s(&i, &b[0], l, str, l);
+				::wcstombs_s(&i, &b[0], l, str, l);
 				# endif
 				if (0 != *b)
 					From<char*>::AppendRaw(s, b, strlen(b), offset);
@@ -199,6 +200,8 @@ namespace StringImpl
 
 
 	}; // wchar_t
+
+
 
 
 	template<>
@@ -243,6 +246,8 @@ namespace StringImpl
 	}; // char
 
 
+
+
 	template<int N>
 	struct From<char[N]>
 	{
@@ -264,11 +269,8 @@ namespace StringImpl
 		static inline void Append(StringBase<C,Chnk>& s, const char* str, const typename StringBase<C,Chnk>::Size offset,
 			const typename StringBase<C,Chnk>::Size len)
 		{
-			if (str && len)
-			{
-				if (offset < N - 1)
-					From<C*>::AppendRaw(s, str + offset, Private::StringImpl::Min(N - 1 - offset, len));
-			}
+			if (str && len && offset < N - 1)
+				From<C*>::AppendRaw(s, str + offset, Private::StringImpl::Min(N - 1 - offset, len));
 		}
 
 
@@ -287,6 +289,8 @@ namespace StringImpl
 		}
 
 	}; // char[N]
+
+
 
 	template<int N>
 	struct From<wchar_t[N]>
@@ -357,6 +361,7 @@ namespace StringImpl
 		}
 
 	}; // std::string
+
 
 
 	template<typename C, int Chnk1>
@@ -444,15 +449,17 @@ namespace StringImpl
 				From<C*>::InsertRaw(s, "false", Private::StringImpl::Min(5, len), offset);
 		}
 
-
 	}; // bool
 
 
 
+
+
+
 # ifdef YUNI_OS_MSVC
-#	define YUNI_PRIVATE_SPTRINF(BUFFER,SIZE, F, V)  sprintf_s(BUFFER,SIZE,F,V)
+#	define YUNI_PRIVATE_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf_s(BUFFER,SIZE,F,V)
 # else
-#	define YUNI_PRIVATE_SPTRINF(BUFFER,SIZE, F, V)  sprintf(BUFFER,F,V)
+#	define YUNI_PRIVATE_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf(BUFFER,F,V)
 # endif
 
 
@@ -464,7 +471,7 @@ namespace StringImpl
 		static inline void Append(StringBase<C,Chnk>& s, const TYPE v) \
 		{ \
 			char buffer[BUFSIZE]; \
-			YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
+			(void)YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
 			if (0 != buffer[0]) \
 				From<char*>::AppendRaw(s, buffer, strlen(buffer)); \
 		} \
@@ -473,7 +480,7 @@ namespace StringImpl
 		static inline void Append(StringBase<C,Chnk>& s, const TYPE v, const typename StringBase<C,Chnk>::Size len) \
 		{ \
 			char buffer[BUFSIZE]; \
-			YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
+			(void)YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
 			if (0 != buffer[0]) \
 				From<char*>::AppendRaw(s, buffer, Private::StringImpl::Min(strlen(buffer), len)); \
 		} \
@@ -482,7 +489,7 @@ namespace StringImpl
 		static inline void Insert(StringBase<C,Chnk>& s, const TYPE v, const typename StringBase<C,Chnk>::Size offset) \
 		{ \
 			char buffer[BUFSIZE]; \
-			YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
+			(void)YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
 			if (0 != buffer[0]) \
 				From<char*>::InsertRaw(s, buffer, strlen(buffer), offset); \
 		} \
@@ -492,7 +499,7 @@ namespace StringImpl
 			const typename StringBase<C,Chnk>::Size offset) \
 		{ \
 			char buffer[BUFSIZE]; \
-			YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
+			(void)YUNI_PRIVATE_SPTRINF(buffer, BUFSIZE, FORMAT, v); \
 			if (0 != buffer[0]) \
 				From<char*>::AppendRaw(s, buffer, Private::StringImpl::Min(len, strlen(buffer)), offset); \
 		} \

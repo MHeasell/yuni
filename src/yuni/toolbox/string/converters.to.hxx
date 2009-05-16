@@ -67,7 +67,7 @@ namespace StringImpl
 	struct To<bool>
 	{
 		template<typename C, int Chnk>
-		static inline bool Value(const StringBase<C,Chnk>& s)
+		static bool Value(const StringBase<C,Chnk>& s)
 		{
 			switch (s.pSize)
 			{
@@ -137,7 +137,7 @@ namespace StringImpl
 		}
 
 		template<typename C, int Chnk>
-		static inline bool Value(const StringBase<C,Chnk>& s, std::basic_string<U>& v)
+		static bool Value(const StringBase<C,Chnk>& s, std::basic_string<U>& v)
 		{
 			v.clear();
 			if (s.pSize)
