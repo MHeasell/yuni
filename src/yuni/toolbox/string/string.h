@@ -105,7 +105,7 @@ namespace Yuni
 	** \tparam C The type of a single character
 	** \tparam Chunk Size of a chunk
 	*/
-	template<typename C /* = char */, int Chunk /* = 40 */>
+	template<typename C /* = char */, int Chunk /* = 80 */>
 	class StringBase
 	{
 	public:
@@ -1027,13 +1027,13 @@ namespace Yuni
 		Char last() const;
 
 		/*!
-		** \brief Convert all antislashes into slashes
+		** \brief Convert all backslashes into slashes
 		** \return Returns *this
 		*/
 		void convertBackslashesIntoSlashes();
 
 		/*!
-		** \brief Convert all slashes into antislashes
+		** \brief Convert all slashes into backslashes
 		** \return Returns *this
 		*/
 		void convertSlashesIntoBackslashes();
