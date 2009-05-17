@@ -99,7 +99,7 @@ namespace Yuni
 	**
 	**
 	** \warning This class is not thread-safe
-	** \warning This class is a final class
+	** \warning This class is a final class, except if `YUNI_STRING_USE_VIRTUAL_DESTRUCTOR` is defined
 	** \ingroup Toolbox
 	**
 	** \tparam C The type of a single character
