@@ -2002,7 +2002,12 @@ namespace Yuni
 			{
 				typename StringBase<C,Chunk>::Size newIndx = this->find_first_of(sep, indx);
 				if (StringBase<C,Chunk>::npos == newIndx)
+				{
+					const StringBase<C,Chunk> segment(*this, indx, String::npos);
+					if (segment.notEmpty())
+						out.push_back(segment.to<UType>());
 					return;
+				}
 
 				if (newIndx && (len = newIndx - indx))
 				{
