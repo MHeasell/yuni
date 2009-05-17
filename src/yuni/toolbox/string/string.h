@@ -780,7 +780,8 @@ namespace Yuni
 		**
 		** \code
 		** Yuni::String s("42");
-		** if (s.to<unsigned int>())
+		** unsigned int result;
+		** if (s.to<unsigned int>(result))
 		** {
 		** 	// Do something
 		** }
