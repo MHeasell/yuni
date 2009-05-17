@@ -1028,13 +1028,11 @@ namespace Yuni
 
 		/*!
 		** \brief Convert all backslashes into slashes
-		** \return Returns *this
 		*/
 		void convertBackslashesIntoSlashes();
 
 		/*!
 		** \brief Convert all slashes into backslashes
-		** \return Returns *this
 		*/
 		void convertSlashesIntoBackslashes();
 
