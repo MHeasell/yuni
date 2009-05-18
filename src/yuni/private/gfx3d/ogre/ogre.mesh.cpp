@@ -15,8 +15,13 @@ namespace Ogre
 {
 	void Mesh::update(const TriangleList& triangles)
 	{
+		::Ogre::MeshManager* meshManager;
+
+		//createOrRetrieve(const String &name, const String &group, bool isManual=false, ManualResourceLoader *loader=0, const NameValuePairList *params=0, HardwareBuffer::Usage vertexBufferUsage=HardwareBuffer::HBU_STATIC_WRITE_ONLY, HardwareBuffer::Usage indexBufferUsage=HardwareBuffer::HBU_STATIC_WRITE_ONLY, bool vertexBufferShadowed=true, bool indexBufferShadowed=true)
 		if (!pOgreMesh)
-			pOgreMesh = new ::Ogre::Mesh();
+		{
+			::Ogre::ResourceManager::ResourceCreateOrRetrieveResult res(meshManager->createOrRetrieve("", "", true));
+		}
 	}
 
 

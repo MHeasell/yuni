@@ -1,5 +1,6 @@
 
 #include "ogre.h"
+#include <ogrefontmanager.h>
 #include "ogre.engine.h"
 #include "../../../toolbox/string.h"
 #include "../../../toolbox/system/sleep.h"
@@ -73,6 +74,129 @@ namespace Ogre
 		release();
 	}
 
+	/*!
+	** \brief Frame rendering event listener for FPS statistics display
+	*/
+	class FPSFrameListener: public ::Ogre::FrameListener, public ::Ogre::WindowEventListener
+	{
+	public:
+		FPSFrameListener(::Ogre::RenderWindow* window): pWindow(window), pLimitCPUConsuming(1)
+		{
+			try
+			{
+				// Create the overlay
+				::Ogre::OverlayManager& manager = ::Ogre::OverlayManager::getSingleton();
+				::Ogre::Overlay* overlay = manager.create("FPS Stats");
+				// Create a panel in the overlay
+				::Ogre::OverlayContainer* panel = (::Ogre::OverlayContainer*)manager.createOverlayElement("Panel", "FPS Stats Panel");
+				overlay->add2D(panel);
+				// Create the various text areas in the panel
+				panel->addChild(createTextArea("AverageFps"));
+				panel->addChild(createTextArea("CurrFps"));
+				panel->addChild(createTextArea("BestFps"));
+				panel->addChild(createTextArea("WorstFps"));
+				panel->addChild(createTextArea("NumTris"));
+				panel->addChild(createTextArea("NumBatches"));
+
+				overlay->show();
+
+				panel->setDimensions(300, 200);
+			}
+			catch(::Ogre::Exception e)
+			{
+				int a = 0;
+			}
+		}
+
+		//! Called when a frame is about to begin rendering.
+		virtual bool frameStarted(const ::Ogre::FrameEvent& evt)
+		{
+			return true;
+		}
+
+		//! Called after all render targets have had their rendering commands issued, but before render windows have been asked to flip their buffers over. 
+		virtual bool frameRenderingQueued(const ::Ogre::FrameEvent& evt)
+		{
+			return true;
+		}
+
+		//! Called just after a frame has been rendered.
+		virtual bool frameEnded(const ::Ogre::FrameEvent& evt)
+		{
+			updateStats();
+			return true;
+		}
+
+	private:
+
+		//! Update the FPS stats (called after each frame render)
+		void updateStats(void)
+		{
+			static ::Ogre::String currFps = "Current FPS: ";
+			static ::Ogre::String avgFps = "Average FPS: ";
+			static ::Ogre::String bestFps = "Best FPS: ";
+			static ::Ogre::String worstFps = "Worst FPS: ";
+			static ::Ogre::String tris = "Triangle Count: ";
+			static ::Ogre::String batches = "Batch Count: ";
+
+			// Only update data every 10 frames
+			--pLimitCPUConsuming;
+			if (pLimitCPUConsuming > 0)
+				return;
+			// Next in 10 cycles
+			pLimitCPUConsuming = 10; 
+
+			// Update stats when necessary
+			try
+			{
+				::Ogre::OverlayElement* guiAvg = ::Ogre::OverlayManager::getSingleton().getOverlayElement("AverageFps");
+				guiAvg->setColour(::Ogre::ColourValue(1.0, 0.0, 0.0));
+				::Ogre::OverlayElement* guiCurr = ::Ogre::OverlayManager::getSingleton().getOverlayElement("CurrFps");
+				::Ogre::OverlayElement* guiBest = ::Ogre::OverlayManager::getSingleton().getOverlayElement("BestFps");
+				::Ogre::OverlayElement* guiWorst = ::Ogre::OverlayManager::getSingleton().getOverlayElement("WorstFps");
+
+				const ::Ogre::RenderTarget::FrameStats& stats = pWindow->getStatistics();
+				guiAvg->setCaption(avgFps + ::Ogre::StringConverter::toString(stats.avgFPS));
+				guiCurr->setCaption(currFps + ::Ogre::StringConverter::toString(stats.lastFPS));
+				guiBest->setCaption(bestFps + ::Ogre::StringConverter::toString(stats.bestFPS)
+					+ " " + ::Ogre::StringConverter::toString(stats.bestFrameTime) + " ms");
+				guiWorst->setCaption(worstFps + ::Ogre::StringConverter::toString(stats.worstFPS)
+					+ " " + ::Ogre::StringConverter::toString(stats.worstFrameTime) + " ms");
+
+				::Ogre::OverlayElement* guiTris = ::Ogre::OverlayManager::getSingleton().getOverlayElement("NumTris");
+				guiTris->setCaption(tris + ::Ogre::StringConverter::toString(stats.triangleCount));
+
+				::Ogre::OverlayElement* guiBatches = ::Ogre::OverlayManager::getSingleton().getOverlayElement("NumBatches");
+				guiBatches->setCaption(batches + ::Ogre::StringConverter::toString(stats.batchCount));
+			}
+			catch(::Ogre::Exception) { /* ignore */ }
+		}
+
+		//! Create a properly configured text area
+		::Ogre::OverlayElement* createTextArea(const char* name) const
+		{
+			static const ::Ogre::String fontName = "Times New Roman";
+
+			::Ogre::OverlayElement* textArea = ::Ogre::OverlayManager::getSingleton().createOverlayElement("TextArea", name);
+			textArea->setDimensions(0.8, 0.8);
+			textArea->setMetricsMode(::Ogre::GMM_PIXELS);
+			textArea->setPosition(0.1, 0.1);
+			//::Ogre::Font* font = (::Ogre::Font*) ::Ogre::FontManager::getSingleton().getByName(fontName).getPointer();
+			//textArea->setParameter("font_name", fontName);
+			//textArea->setParameter("char_height", font->getParameter("size"));
+			textArea->setParameter("horz_align", "left");
+			textArea->setColour(::Ogre::ColourValue(1.0, 0.0, 0.0));
+			textArea->setCaption("");
+			return textArea;
+		}
+
+	private:
+		//! Rendering window
+		::Ogre::RenderWindow* pWindow;
+		//! Counter to avoid refreshing on each frame.
+		int pLimitCPUConsuming;
+	};
+
 
 
 	bool Engine::initialize(SmartPtr<Yuni::Gfx::Device> dc)
@@ -93,7 +217,17 @@ namespace Ogre
 			return false;
 
 		// Initialise the renderer but do not create a default window
-		pRoot->initialise(false);
+		try
+		{
+			if (!pRoot->showConfigDialog())
+				return false;
+			pRoot->initialise(false);
+		}
+		catch (::Ogre::Exception e)
+		{
+			// TODO: Log the exception?
+			return false;
+		}
 
 		::Ogre::NameValuePairList params;
 		#ifdef YUNI_OS_WINDOWS
@@ -101,14 +235,14 @@ namespace Ogre
 		#endif
 		// We create our own custom window with our own settings
 		pWindow = pRoot->createRenderWindow(pApplicationTitle.data(), pDevice->resolution()->width(), pDevice->resolution()->height(), pDevice->fullscreen(), &params);
+		// Add our FPS statistics listener
+		pRoot->addFrameListener(new FPSFrameListener(pWindow));
 
 		// Set the window caption
 		this->applicationTitle(pApplicationTitle);
 		pRunnable = true;
 		return true;
 	}
-
-
 
 	void Engine::run()
 	{
@@ -131,38 +265,7 @@ namespace Ogre
 		// Ready to loop
 		pRunnable = true;
 
-		while (pRunnable) // Cycle
-		{
-			pRoot->renderOneFrame();
-			//// Begin the entire scene
-			//pIrrVideoDriver->beginScene(true, true, pBackgroundColor);
-			//// Draw all 3D objects
-			//pIrrSceneManager->drawAll();
-			//// End
-			//pIrrVideoDriver->endScene();
-
-			//--limitCPUConsuming;
-			//if (0 == limitCPUConsuming)
-			//{
-			//	// Frames per second
-			//	int currentFPS = pWindow->getLastFPS();
-			//	if (currentFPS != pFPS)
-			//	{
-			//		pFPS = currentFPS;
-			//		// Call event onFPSChanged here
-			//		this->onFPSChanged(pFPS);
-			//	}
-
-			//	// When the window is inactive, there is no need for full-speed
-			//	if (!pIrrDevice->isWindowActive())
-			//	{
-			//		Yuni::SleepMilliSeconds(30 /*ms*/);
-			//	}
-
-			//	// Next in 10 cycles
-			//	limitCPUConsuming = 10; 
-			// }
-		}
+		pRoot->startRendering();
 
 		// Resetting vars
 		pIsRunning = false;
