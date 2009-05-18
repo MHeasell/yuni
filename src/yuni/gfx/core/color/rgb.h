@@ -1,9 +1,7 @@
-#ifndef __YUNI_GFX_RGB_H__
-# define __YUNI_GFX_RGB_H__
+#ifndef __YUNI_GFX_CORE_COLOR_RGB_H__
+# define __YUNI_GFX_CORE_COLOR_RGB_H__
 
-# include "../core/string.h"
-# include "color.proxy.h"
-
+# include "proxy.h"
 
 
 namespace Yuni
@@ -14,11 +12,9 @@ namespace Color
 {
 
 
-	/*! \class RGB
-	**  \brief 32Bits RGB Color Model (Additive color model)
-	**  \ingroup ColorModels
-	**
-	** \internal Do not forget to broadcast changes to specialized template as well
+	/*!
+	** \brief 32Bits RGB Color Model (Additive color model)
+	** \ingroup ColorModels
 	*/
 	template<typename T>
 	class RGB
@@ -26,9 +22,8 @@ namespace Color
 	public:
 		//! \name Constructors
 		//@{
-
 		//! Default Constructor
-		RGB() : red(T()), green(T()), blue(T()) {}
+		RGB() : red(), green(), blue() {}
 
 		/*!
 		** \brief Constructor by copy
@@ -57,8 +52,7 @@ namespace Color
 		template<typename U>
 		RGB(const U& r, const U& g, const U& b, const U& /*a*/)
 		{Private::Gfx::Color::Proxy::Values< RGB<T>, U >::Assign(*this, r, g, b);}
-
-		//@} // Constructors
+		//@}
 
 
 		/*!
@@ -181,6 +175,7 @@ namespace Color
 
 
 
+
 } // namespace Color
 } // namespace Gfx
 } // namespace Yuni
@@ -191,7 +186,6 @@ namespace Color
 
 //! name Operator overload for stream printing
 //@{
-
 template<typename T>
 inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Color::RGB<T>& p)
 { return p.print(out); }
@@ -199,8 +193,7 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Color::RGB
 template<typename T>
 inline const Yuni::Gfx::Color::RGB<T> operator + (const Yuni::Gfx::Color::RGB<T>& lhs, const Yuni::Gfx::Color::RGB<T>& rhs)
 { return Yuni::Gfx::Color::RGB<T>(lhs) += rhs; }
-
 //@}
 
 
-#endif // __YUNI_GFX_RGB_H__
+#endif // __YUNI_GFX_CORE_COLOR_RGB_H__
