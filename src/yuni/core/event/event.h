@@ -58,7 +58,7 @@ namespace Event
 	** A complete example using the threading policies :
 	** \code
 	** #include <iostream>
-	** #include <yuni/toolbox/event.h>
+	** #include <yuni/core/event.h>
 	**
 	**
 	** template<template<class> class TP = Policy::ObjectLevelLockable>

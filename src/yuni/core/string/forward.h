@@ -95,7 +95,7 @@ namespace StringImpl
 	/*!
 	** \brief A custom implementation to get the minimum of two values
 	**
-	** This function is present to only avoid to include toolbox/math.h
+	** This function is present to only avoid to include core/math.h
 	*/
 	template<typename T>
 	inline T Min(const T a, const T b)  {return a < b ? a : b;}

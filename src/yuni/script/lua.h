@@ -2,7 +2,7 @@
 # define __YUNI_SCRIPT_LUA_H__
 
 # include "../yuni.h"
-# include "../toolbox/string.h"
+# include "../core/string.h"
 # include "script.h"
 
 // Macros for call() and bind()

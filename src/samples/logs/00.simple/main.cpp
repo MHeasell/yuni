@@ -1,5 +1,5 @@
 
-#include <yuni/toolbox/logs.h>
+#include <yuni/core/logs.h>
 
 int main(void)
 {

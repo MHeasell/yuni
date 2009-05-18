@@ -1,9 +1,10 @@
-
 #include "../../../yuni.h"
-#include "../../../toolbox/string.h"
-#include "../../../toolbox/hash/dictionary.h"
+#include "../../../core/string.h"
+#include "../../../core/hash/dictionary.h"
 #include "../../../gfx/vertex.h"
 #include "ogre.mesh.h"
+
+
 
 namespace Yuni
 {
@@ -25,7 +26,7 @@ namespace Ogre
 	}
 
 
-} // Ogre
-} // Gfx
-} // Private
-} // Yuni
+} // namespace Ogre
+} // namespace Gfx
+} // namespace Private
+} // namespace Yuni

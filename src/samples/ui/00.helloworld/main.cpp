@@ -2,7 +2,7 @@
 #include <yuni/yuni.h>
 #include <yuni/ui/control.h>
 #include <yuni/ui/window.h>
-#include <yuni/toolbox/smartptr.h>
+#include <yuni/core/smartptr.h>
 
 using namespace Yuni;
 

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <complex>
-#include <yuni/toolbox/string.h>
-#include <yuni/toolbox/variant.h>
+#include <yuni/core/string.h>
+#include <yuni/core/variant.h>
 
 using namespace Yuni;
 using namespace std;

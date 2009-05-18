@@ -3,7 +3,7 @@
 
 # include <map>
 # include "../yuni.h"
-# include "../toolbox/smartptr/smartptr.h"
+# include "../core/smartptr/smartptr.h"
 # include "object3D.h"
 
 
@@ -16,7 +16,7 @@ namespace Gfx
 	/*!
 	** \brief The 3D scene contains a tree of 3D Objects
 	*/
-	class Scene : public Policy::ObjectLevelLockable<Scene> 
+	class Scene : public Policy::ObjectLevelLockable<Scene>
 	{
 	public:
 		//! The threading Policy

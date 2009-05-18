@@ -1,7 +1,7 @@
 #ifndef __YUNI_GFX_RGB_A_H__
 # define __YUNI_GFX_RGB_A_H__
 
-# include "../toolbox/string.h"
+# include "../core/string.h"
 # include "color.proxy.h"
 
 
@@ -35,7 +35,7 @@ namespace Color
 		*/
 		template<typename U>
 		RGBA(const U& c) {Private::Gfx::Color::Proxy::Values< RGBA<T> , U >::Assign(*this, c);}
-		
+
 		/*!
 		** \brief Constructor with default color components
 		**
@@ -67,7 +67,7 @@ namespace Color
 		*/
 		bool visible() const {return alpha != 0;}
 
-		
+
 		//! \name Reset Values
 		//@{
 
@@ -79,7 +79,7 @@ namespace Color
 		*/
 		template<typename U>
 		RGBA<T>& assign(const U& rhs)  { return Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, rhs); }
-		
+
 		/*!
 		** \brief Reset all color components
 		**
@@ -136,7 +136,7 @@ namespace Color
 		{ return Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(r, g, b, a); }
 
 		/*!
-		** \brief Increase all color components 
+		** \brief Increase all color components
 		**
 		** \param rhs Value to add to all colors components
 		** \return Always *this
@@ -186,18 +186,18 @@ namespace Color
 
 
 
+
+
 } // namespace Color
 } // namespace Gfx
 } // namespace Yuni
 
 
 
-//# include <yuni/gfx/rgba.hxx>
 
 
 //! name Operator overload for stream printing
 //@{
-
 template<typename T>
 inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Color::RGBA<T>& p)
 { return p.print(out); }
@@ -205,7 +205,6 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Color::RGB
 template<typename T>
 inline const Yuni::Gfx::Color::RGBA<T> operator + (const Yuni::Gfx::Color::RGBA<T>& lhs, const Yuni::Gfx::Color::RGBA<T>& rhs)
 { return Yuni::Gfx::Color::RGBA<T>(lhs) += rhs; }
-
 //@}
 
 

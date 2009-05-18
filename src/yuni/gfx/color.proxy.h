@@ -3,8 +3,8 @@
 
 # include <iostream>
 # include "../yuni.h"
-# include "../toolbox/string.h"
-# include "../toolbox/math/math.h"
+# include "../core/string.h"
+# include "../core/math/math.h"
 
 
 namespace Yuni
@@ -96,7 +96,7 @@ namespace Proxy
 	template<>
 	# endif
 	template<typename A, typename B>
-	struct Values< Yuni::Gfx::Color::RGB<A>, Yuni::Gfx::Color::RGBA<B> > 
+	struct Values< Yuni::Gfx::Color::RGB<A>, Yuni::Gfx::Color::RGBA<B> >
 	{
 		inline static Yuni::Gfx::Color::RGB<A>& Assign(Yuni::Gfx::Color::RGB<A>& th, const Yuni::Gfx::Color::RGBA<B>& a1)
 		{
@@ -114,7 +114,7 @@ namespace Proxy
 	template<>
 	# endif
 	template<typename A, typename B>
-	struct Values< Yuni::Gfx::Color::RGBA<A>, Yuni::Gfx::Color::RGB<B> > 
+	struct Values< Yuni::Gfx::Color::RGBA<A>, Yuni::Gfx::Color::RGB<B> >
 	{
 		inline static Yuni::Gfx::Color::RGBA<A>& Assign(Yuni::Gfx::Color::RGBA<A>& th, const Yuni::Gfx::Color::RGB<B>& a1)
 		{

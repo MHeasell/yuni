@@ -4,10 +4,10 @@
 # include <list>
 # include <vector>
 # include "../yuni.h"
-# include "../toolbox/policies/threading.h"
-# include "../toolbox/string.h"
-# include "../toolbox/smartptr/sharedptr.h"
-# include "../toolbox/event/event.h"
+# include "../core/policies/threading.h"
+# include "../core/string.h"
+# include "../core/smartptr/sharedptr.h"
+# include "../core/event/event.h"
 
 
 

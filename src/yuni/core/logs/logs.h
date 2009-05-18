@@ -34,7 +34,7 @@ namespace Logs
 	**
 	** A simple hello world :
 	** \code
-	** #include <yuni/toolbox/logs.h>
+	** #include <yuni/core/logs.h>
 	**
 	** int main()
 	** {
@@ -58,9 +58,9 @@ namespace Logs
 	** \tparam Decorator The first decorator in the list
 	*/
 	template<
-		template<class> class TP = Policy::ObjectLevelLockable,                  // The Threading Policy
+		template<class> class TP = Policy::ObjectLevelLockable, // The Threading Policy
 		class Handler = StdCout<>,
-		class Decorator = Time< VerbosityLevel<Message<> > >  // Decorators
+		class Decorator = Time< VerbosityLevel<Message<> > >    // Decorators
 		>
 	class Logger
 		:public TP<Logger<TP,Handler,Decorator> >,   // inherits from the Threading Policy

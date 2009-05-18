@@ -1,9 +1,9 @@
 #ifndef __YUNI_GFX_OBJECT3D_H__
 # define __YUNI_GFX_OBJECT3D_H__
 
-# include "../toolbox/string/string.h"
-# include "../toolbox/smartptr/smartptr.h"
-# include "../toolbox/tree/treeN.h"
+# include "../core/string/string.h"
+# include "../core/smartptr/smartptr.h"
+# include "../core/tree/treeN.h"
 # include "skeleton.h"
 # include "objectmodel.h"
 
@@ -39,12 +39,12 @@ namespace Gfx
 		** \brief Default Constructor
 		*/
 		Object3D(const SmartPtr<ObjectModel>& model);
-		
+
 		/*!
 		** \brief Default Constructor
 		*/
 		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model);
-		
+
 		//! Default Destructor
 		virtual ~Object3D();
 		//@}
@@ -84,6 +84,8 @@ namespace Gfx
 		Skeleton::Ptr pSkeleton;
 
 	}; // Object3D
+
+
 
 
 

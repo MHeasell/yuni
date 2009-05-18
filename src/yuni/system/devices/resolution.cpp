@@ -1,7 +1,7 @@
 
 #include "resolution.h"
-#include "../../toolbox/hash/checksum/md5.h"
-#include "../../toolbox/math.h"
+#include "../../core/hash/checksum/md5.h"
+#include "../../core/math.h"
 
 
 namespace Yuni

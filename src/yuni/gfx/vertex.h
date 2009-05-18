@@ -4,8 +4,8 @@
 # include <vector>
 # include "point3D.h"
 # include "vector3D.h"
-# include "../toolbox/string.h"
-# include "../toolbox/smartptr/smartptr.h"
+# include "../core/string.h"
+# include "../core/smartptr/smartptr.h"
 
 
 

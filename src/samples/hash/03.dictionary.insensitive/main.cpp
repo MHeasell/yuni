@@ -1,7 +1,7 @@
 
 #include <iostream>	                      // std::cout
 #include <yuni/yuni.h>
-#include <yuni/toolbox/hash/dictionary.h> // Yuni::Hash::Dictionary
+#include <yuni/core/hash/dictionary.h> // Yuni::Hash::Dictionary
 
 
 

@@ -2,8 +2,8 @@
 # define __YUNI_GFX_UI_WINDOW_H__
 
 # include "../yuni.h"
-# include "../toolbox/smartptr/sharedptr.h"
-# include "../toolbox/string.h"
+# include "../core/smartptr/sharedptr.h"
+# include "../core/string.h"
 
 
 
@@ -49,7 +49,7 @@ namespace UI
 		//! Set the caption of the window
 		void caption(const String& c);
 		//@}
-	
+
 
 	protected:
 		virtual bool onBeforeDestructionWL();

@@ -26,7 +26,7 @@ namespace Yuni
 	** here is a simple example :
 	** \code
 	** #include <iostream>
-	** #include <yuni/toolbox/smartptr.h>
+	** #include <yuni/core/smartptr.h>
 	**
 	** struct Foo
 	** {
@@ -54,7 +54,7 @@ namespace Yuni
 	** Here is a more complex example, dealing with inheritance :
 	** \code
 	** #include <iostream>
-	** #include <yuni/toolbox/smartptr.h>
+	** #include <yuni/core/smartptr.h>
 	**
 	**
 	** struct Foo
@@ -118,7 +118,7 @@ namespace Yuni
 	** \warning Do not use SmartPtr with stack variables !
 	** \code
 	** #include <iostream>
-	** #include <yuni/toolbox/smartptr.h>
+	** #include <yuni/core/smartptr.h>
 	**
 	** struct Foo
 	** {

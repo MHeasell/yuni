@@ -2,7 +2,7 @@
 # define __YUNI_SYSTEM_DEVICES_DISPLAY_H__
 
 # include "../../yuni.h"
-# include "../../toolbox/string.h"
+# include "../../core/string.h"
 # include "resolution.h"
 # include "monitor.h"
 

@@ -5,8 +5,8 @@
 # include <list>
 # include "../../yuni.h"
 # include "resolution.h"
-# include "../../toolbox/string.h"
-# include "../../toolbox/smartptr/smartptr.h"
+# include "../../core/string.h"
+# include "../../core/smartptr/smartptr.h"
 
 
 

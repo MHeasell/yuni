@@ -1,6 +1,6 @@
 
 #include <yuni/yuni.h>   // The Yuni Global header
-#include <yuni/toolbox/hash/checksum/md5.h>
+#include <yuni/core/hash/checksum/md5.h>
 #include <iostream>      // Only for std::cout
 
 // Our string to compute into a MD5

@@ -3,7 +3,7 @@
 
 # include <vector>
 # include "triangle.h"
-# include "../toolbox/smartptr/smartptr.h"
+# include "../core/smartptr/smartptr.h"
 
 
 
