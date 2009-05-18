@@ -4,8 +4,8 @@
 # include <vector>
 # include <list>
 # include "../../yuni.h"
-# include "../../toolbox/string.h"
-# include "../../toolbox/smartptr/smartptr.h"
+# include "../../core/string.h"
+# include "../../core/smartptr/smartptr.h"
 
 
 
@@ -17,7 +17,7 @@ namespace Devices
 {
 namespace Display
 {
-	
+
 
 	/*!
 	** \brief Screen/Monitor resolution
@@ -42,24 +42,21 @@ namespace Display
 	public:
 		//! \name Constructors
 		//@{
-
 		/*!
 		** \brief Constructor
-		** 
+		**
 		** \param w Width of the monitor/screen
 		** \param h Height of the monitor/screen
 		** \param b Bit per Pixel
 		*/
 		Resolution(const uint32 w, const uint32 h, const uint8 b = 32);
-		
+
 		/*!
 		** \brief Constructor by copy
 		** \param c The instance to copy
 		*/
 		Resolution(const Resolution& c);
-
-		//@} Constructors
-
+		//@}
 
 		/*!
 		** \brief Convert these informations into an human readable string
@@ -180,13 +177,10 @@ namespace Display
 
 //! \name Operator overload for stream printing
 //@{
-
 inline std::ostream& operator << (std::ostream& out, const Yuni::System::Devices::Display::Resolution& rhs)
 { return rhs.print(out); }
 inline std::ostream& operator << (std::ostream& out, const Yuni::SmartPtr<Yuni::System::Devices::Display::Resolution>& rhs)
 { return rhs->print(out); }
-
-
 //@}
 
 

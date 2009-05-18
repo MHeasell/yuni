@@ -10,9 +10,9 @@
 #	include <unistd.h>
 #	include <sys/time.h>
 #else
-#	include "../toolbox/system/windows.hdr.h"
+#	include "../core/system/windows.hdr.h"
 #	include <process.h>
-#	include "../toolbox/system/windows/gettimeofday.h"
+#	include "../core/system/windows/gettimeofday.h"
 #endif
 
 #include "thread.h"
@@ -46,12 +46,12 @@ namespace Private
 	namespace
 	{
 		/*!
-		 * \brief Get a new timespec struct representing X milli seconds in the future 
-		 *
-		 * \param[in,out] The timespec struct
-		 * \param millisecs The count of milli seconds
-		 * \return Always `time` itself
-		 */
+		** \brief Get a new timespec struct representing X milli seconds in the future
+		**
+		** \param[in,out] The timespec struct
+		** \param millisecs The count of milli seconds
+		** \return Always `time` itself
+		*/
 		struct timespec* millisecondsFromNow(struct timespec* time, int millisecs)
 		{
 			# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
@@ -89,8 +89,8 @@ namespace Private
 	extern "C"
 	{
 		/*!
-		 * \brief This procedure will be run in a separate thread and will run AThreadModel::baseExecute()
-		 */
+		** \brief This procedure will be run in a separate thread and will run AThreadModel::baseExecute()
+		*/
 		void* threadMethodForPThread(void* arg)
 		{
 			if (!arg)
@@ -183,7 +183,7 @@ namespace Private
 			struct timespec myts;
 			gettimeofday(&mytime, NULL);
 			myts.tv_sec = mytime.tv_sec + timeout;
-			myts.tv_nsec = mytime.tv_usec * 1000;																		
+			myts.tv_nsec = mytime.tv_usec * 1000;
 
 			// Waiting for the end of the thread
 			int result = pthread_cond_timedwait(&p_threadIsAboutToExit, &pMutexThreadIsAboutToExit.pthreadMutex(), &myts);
@@ -206,21 +206,21 @@ namespace Private
 	bool AThreadModel::suspend(const uint32 delay)
 	{
 		MutexLocker locker(pThreadMustStopMutex);
-	
+
 		// The thread should stop as soon as possible
-		if (pShouldStop) 
+		if (pShouldStop)
 			return true;
 
 		// If we have not started, why bother to wait...
 		if (!pIsRunning)
-			return false; 
+			return false;
 
 		// We should rest for a while...
 		if (delay)
 		{
 			struct timespec ts;
 			pthread_cond_timedwait(&p_threadMustStopCond, &pThreadMustStopMutex.pthreadMutex(),
-								   millisecondsFromNow(&ts, delay));
+				millisecondsFromNow(&ts, delay));
 		}
 		return (pShouldStop || !pIsRunning);
 	}

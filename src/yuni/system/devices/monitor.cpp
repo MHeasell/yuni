@@ -1,6 +1,6 @@
 
 #include "monitor.h"
-#include "../../toolbox/hash/checksum/md5.h"
+#include "../../core/hash/checksum/md5.h"
 
 
 namespace Yuni
@@ -54,7 +54,7 @@ namespace Display
 		pResolutions.push_back(r);
 	}
 
-	
+
 	bool Monitor::resolutionIsValid(const SmartPtr<Resolution>& rhs) const
 	{
 		if (NULL != rhs) // The pointer must be valid

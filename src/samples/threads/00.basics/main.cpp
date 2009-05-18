@@ -1,7 +1,7 @@
 #include <yuni/yuni.h>
 #include <yuni/threads.h>
 #include <iostream>
-#include <yuni/toolbox/system/sleep.h>
+#include <yuni/core/system/sleep.h>
 
 
 
@@ -49,7 +49,7 @@ protected:
 			// - for example a long calculation, for the purpose of this example.
 			//
 			// The bottom line is: DO NOT use sleep() to wait in threads.
-            Yuni::Sleep(1 /* second */);
+			Yuni::Sleep(1 /* second */);
 
 			// After our work, if the task is repetitive, we will want to check
 			// if we have to stop doing it and will eventually pause for some

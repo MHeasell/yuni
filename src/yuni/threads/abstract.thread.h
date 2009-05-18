@@ -4,7 +4,7 @@
 # include <pthread.h>
 # include "../yuni.h"
 # include "mutex.h"
-# include "../toolbox/string.h"
+# include "../core/string.h"
 
 
 

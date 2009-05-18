@@ -11,199 +11,199 @@ Message(STATUS "Module: Core")
 
 
 Set(SRC_TOOLBOX_PREPROCESSOR
-				toolbox/preprocessor/std.h
-				toolbox/preprocessor/capabilities.h
-				toolbox/preprocessor/capabilities/unixes.h
-				toolbox/preprocessor/capabilities/windows.h
-				toolbox/preprocessor/enum.h)
+				core/preprocessor/std.h
+				core/preprocessor/capabilities.h
+				core/preprocessor/capabilities/unixes.h
+				core/preprocessor/capabilities/windows.h
+				core/preprocessor/enum.h)
 source_group(ToolBox\\Preprocessor FILES ${SRC_TOOLBOX_PREPROCESSOR})
 
 Set(SRC_TOOLBOX_STATIC
-				toolbox/static/if.h
-				toolbox/static/remove.h
-				toolbox/static/assert.h
-				toolbox/static/types.h
-				toolbox/static/moveconstructor.h)
+				core/static/if.h
+				core/static/remove.h
+				core/static/assert.h
+				core/static/types.h
+				core/static/moveconstructor.h)
 source_group(ToolBox\\Static FILES ${SRC_TOOLBOX_STATIC})
 
 Set(SRC_TOOLBOX_EXCEPTIONS
-				toolbox/exceptions.h
-				toolbox/exceptions/badcast.h )
+				core/exceptions.h
+				core/exceptions/badcast.h )
 source_group(ToolBox\\Exceptions FILES ${SRC_TOOLBOX_EXCEPTIONS})
 
 Set(SRC_TOOLBOX_FUNCTION
-				toolbox/function/function.h toolbox/function/function.hxx
-				toolbox/function.h )
+				core/function/function.h core/function/function.hxx
+				core/function.h )
 source_group(ToolBox\\Function FILES ${SRC_TOOLBOX_FUNCTION})
 
 Set(SRC_TOOLBOX_DYNAMICLIBRARY
-				toolbox/dynamiclibrary/file.h	toolbox/dynamiclibrary/file.hxx
-				toolbox/dynamiclibrary/file.cpp
-				toolbox/dynamiclibrary/symbol.h toolbox/dynamiclibrary/symbol.hxx
-				toolbox/dynamiclibrary.h )
+				core/dynamiclibrary/file.h	core/dynamiclibrary/file.hxx
+				core/dynamiclibrary/file.cpp
+				core/dynamiclibrary/symbol.h core/dynamiclibrary/symbol.hxx
+				core/dynamiclibrary.h )
 source_group(ToolBox\\DynamicLibrary FILES ${SRC_TOOLBOX_DYNAMICLIBRARY})
 
 
 
 Set(SRC_TOOLBOX_STRING
-				toolbox/string/string.h toolbox/string/string.hxx
-				toolbox/string/converters.from.hxx toolbox/string/converters.to.hxx
-				toolbox/string/forward.h
-				toolbox/string/traits.hxx
-				toolbox/string/iterators.hxx
-				toolbox/string.h)
+				core/string/string.h core/string/string.hxx
+				core/string/converters.from.hxx core/string/converters.to.hxx
+				core/string/forward.h
+				core/string/traits.hxx
+				core/string/iterators.hxx
+				core/string.h)
 source_group(ToolBox\\String FILES ${SRC_TOOLBOX_STRING})
 
 
 Set(SRC_TOOLBOX_LOGS
-				toolbox/logs/logs.h toolbox/logs/logs.hxx toolbox/logs/verbosity.h
-				toolbox/logs/null.h	toolbox/logs/stream.h
+				core/logs/logs.h core/logs/logs.hxx core/logs/verbosity.h
+				core/logs/null.h	core/logs/stream.h
 				# Handlers
-				toolbox/logs/handlers/stdcout.h
+				core/logs/handlers/stdcout.h
 				# Decorators
-				toolbox/logs/decorators/verbositylevel.h
-				toolbox/logs/decorators/time.h
-				toolbox/logs/decorators/applicationname.h
-				toolbox/logs/decorators/message.h
-				toolbox/logs.h)
+				core/logs/decorators/verbositylevel.h
+				core/logs/decorators/time.h
+				core/logs/decorators/applicationname.h
+				core/logs/decorators/message.h
+				core/logs.h)
 source_group(ToolBox\\Logs FILES ${SRC_TOOLBOX_LOGS})
 
 
 Set(SRC_TOOLBOX_STL
-				toolbox/stl/algorithm.h)
+				core/stl/algorithm.h)
 source_group(ToolBox\\Stl FILES ${SRC_TOOLBOX_STL})
 
 Set(SRC_TOOLBOX_ANY
-				toolbox/any.h
-				toolbox/any/any.h
-				toolbox/any/any.private.h
-				toolbox/any/any.hxx
-				toolbox/any/any.cpp)
+				core/any.h
+				core/any/any.h
+				core/any/any.private.h
+				core/any/any.hxx
+				core/any/any.cpp)
 source_group(ToolBox\\Any FILES ${SRC_TOOLBOX_ANY})
 
 Set(SRC_TOOLBOX_VARIANT
-				toolbox/variant.h
-				toolbox/variant/variant.h
-				toolbox/variant/variant.hxx
-				toolbox/variant/variant.cpp
-				toolbox/variant/variant.private.h
-				toolbox/variant/variant.private.hxx)
+				core/variant.h
+				core/variant/variant.h
+				core/variant/variant.hxx
+				core/variant/variant.cpp
+				core/variant/variant.private.h
+				core/variant/variant.private.hxx)
 source_group(ToolBox\\Variant FILES ${SRC_TOOLBOX_VARIANT})
 
 Set(SRC_TOOLBOX_POLICIES
-				toolbox/policies/threading.h
-				toolbox/policies/checking.h
-				toolbox/policies/ownership.h
-				toolbox/policies/storage.h
-				toolbox/policies/constness.h)
+				core/policies/threading.h
+				core/policies/checking.h
+				core/policies/ownership.h
+				core/policies/storage.h
+				core/policies/constness.h)
 source_group(ToolBox\\Policies FILES ${SRC_TOOLBOX_SMARTPTR})
 
 
 Set(SRC_TOOLBOX_SMARTPTR
-				toolbox/smartptr/sharedptr.h toolbox/smartptr/sharedptr.hxx
-				toolbox/smartptr/scopeptr.h
-				toolbox/smartptr/smartptr.h  toolbox/smartptr/smartptr.hxx
+				core/smartptr/sharedptr.h core/smartptr/sharedptr.hxx
+				core/smartptr/scopeptr.h
+				core/smartptr/smartptr.h  core/smartptr/smartptr.hxx
 				)
 source_group(ToolBox\\SmartPtr FILES ${SRC_TOOLBOX_SMARTPTR})
 
 Set(SRC_TOOLBOX_TREE_N
-				toolbox/tree/treeN.h  toolbox/tree/treeN.hxx
-				toolbox/tree/treeN.iterator.def.h  toolbox/tree/treeN.iterator.undef.h
-				toolbox/tree/treeN.iterator.h
+				core/tree/treeN.h  core/tree/treeN.hxx
+				core/tree/treeN.iterator.def.h  core/tree/treeN.iterator.undef.h
+				core/tree/treeN.iterator.h
 				)
 source_group(ToolBox\\Tree FILES ${SRC_TOOLBOX_TREE_N})
 
 
 Set(SRC_TOOLBOX_UNIT
-				toolbox/unit/define.h toolbox/unit/undef.h
-				toolbox/unit/unit.h toolbox/unit/unit.hxx
-				toolbox/unit.h
-				toolbox/unit/angle.h
-				toolbox/unit/length.h
-				toolbox/unit/length/length.h
-				toolbox/unit/length/metric.h
-				toolbox/unit/length/extra.h
-				toolbox/unit/luminance.h
+				core/unit/define.h core/unit/undef.h
+				core/unit/unit.h core/unit/unit.hxx
+				core/unit.h
+				core/unit/angle.h
+				core/unit/length.h
+				core/unit/length/length.h
+				core/unit/length/metric.h
+				core/unit/length/extra.h
+				core/unit/luminance.h
 )
 source_group(ToolBox\\Unit FILES ${SRC_TOOLBOX_UNIT})
 
 
 Set(SRC_TOOLBOX_EVENT
-				toolbox/event/event.h toolbox/event/event.hxx
-				toolbox/event/event.declaration.h
-				toolbox/event/event.defines.h toolbox/event/event.undef.h
-				toolbox/event.h)
+				core/event/event.h core/event/event.hxx
+				core/event/event.declaration.h
+				core/event/event.defines.h core/event/event.undef.h
+				core/event.h)
 source_group(ToolBox\\Event FILES ${SRC_TOOLBOX_EVENT})
 
 Set(SRC_TOOLBOX_URI
-				toolbox/uri/uri.private.h  toolbox/uri/uri.private.cpp
-				toolbox/uri/uri.h  toolbox/uri/uri.cpp
-				toolbox/uri.h)
+				core/uri/uri.private.h  core/uri/uri.private.cpp
+				core/uri/uri.h  core/uri/uri.cpp
+				core/uri.h)
 source_group(ToolBox\\Event FILES ${SRC_TOOLBOX_EVENT})
 
 
 Set(SRC_TOOLBOX_MATH
 				# Standard functions
-				toolbox/math/math.h 	toolbox/math.h
+				core/math/math.h 	core/math.h
 				# Log(N)
-				toolbox/math/log.h toolbox/math/log.hxx
+				core/math/log.h core/math/log.hxx
 				# Trigonometric functions
-				toolbox/math/trigonometric.h toolbox/math/trigonometric.hxx
+				core/math/trigonometric.h core/math/trigonometric.hxx
 				# Exponential functions
-				toolbox/math/exponential.h toolbox/math/exponential.hxx
+				core/math/exponential.h core/math/exponential.hxx
 				# Random number generators
-				toolbox/math/random/distribution.h  toolbox/math/random/distribution.hxx
-				toolbox/math/random/default.h  toolbox/math/random/default.hxx
-				toolbox/math/random/range.h  toolbox/math/random/range.hxx
-				toolbox/math/random/constant.h
+				core/math/random/distribution.h  core/math/random/distribution.hxx
+				core/math/random/default.h  core/math/random/default.hxx
+				core/math/random/range.h  core/math/random/range.hxx
+				core/math/random/constant.h
 )
 source_group(ToolBox\\Math FILES ${SRC_TOOLBOX_MATH})
 
 Set(SRC_TOOLBOX_FS
-				toolbox/fs/paths.h toolbox/fs/paths.cpp  toolbox/paths.h
-				toolbox/fs/files.h toolbox/fs/files.cpp  toolbox/files.h)
+				core/fs/paths.h core/fs/paths.cpp  core/paths.h
+				core/fs/files.h core/fs/files.cpp  core/files.h)
 source_group(ToolBox\\FileSystem FILES ${SRC_TOOLBOX_FS})
 
 
 Set(SRC_TOOLBOX_GETOPT
-				toolbox/getopt/getopt.h
-				toolbox/getopt/option.h toolbox/getopt/option.hxx toolbox/getopt/option.cpp
-				toolbox/getopt/parser.h toolbox/getopt/parser.hxx toolbox/getopt/parser.cpp)
+				core/getopt/getopt.h
+				core/getopt/option.h core/getopt/option.hxx core/getopt/option.cpp
+				core/getopt/parser.h core/getopt/parser.hxx core/getopt/parser.cpp)
 source_group(ToolBox\\GetOpt FILES ${SRC_TOOLBOX_GETOPT})
 
 
-Set(SRC_VERSION	toolbox/version/version.h  toolbox/version/version.cpp)
+Set(SRC_VERSION	core/version/version.h  core/version/version.cpp)
 source_group(ToolBox\\Version FILES ${SRC_VERSION})
 
 
 # Hash - Checksums
 Set(SRC_TOOLBOX_HASH_CHECKSUM
-				toolbox/hash/checksum/checksum.hxx
-				toolbox/hash/checksum/md5.hxx
-				toolbox/hash/checksum/checksum.h toolbox/hash/checksum/checksum.cpp
-				toolbox/hash/checksum/md5.h toolbox/hash/checksum/md5.cpp)
+				core/hash/checksum/checksum.hxx
+				core/hash/checksum/md5.hxx
+				core/hash/checksum/checksum.h core/hash/checksum/checksum.cpp
+				core/hash/checksum/md5.h core/hash/checksum/md5.cpp)
 source_group(ToolBox\\Hash\\Checksum FILES ${SRC_TOOLBOX_HASH_CHECKSUM})
 
 # hash
 Set(SRC_TOOLBOX_HASH
-				toolbox/hash/std.hashmap.h
-				toolbox/hash/key.h
-				toolbox/hash/table.h toolbox/hash/table.hxx
-				toolbox/hash/dictionary.h)
+				core/hash/std.hashmap.h
+				core/hash/key.h
+				core/hash/table.h core/hash/table.hxx
+				core/hash/dictionary.h)
 source_group(ToolBox\\Hash FILES ${SRC_TOOLBOX_HASH})
 
 # System
 Set(SRC_TOOLBOX_SYSTEM
-				toolbox/system/stdint.h toolbox/system/capabilities.h
-				toolbox/system/sleep.h toolbox/system/sleep.cpp
-				toolbox/system/endian.h)
+				core/system/stdint.h core/system/capabilities.h
+				core/system/sleep.h core/system/sleep.cpp
+				core/system/endian.h)
 source_group(ToolBox\\System FILES ${SRC_TOOLBOX_SYSTEM})
 
 
 # System - Microsoft Windows
-Set(SRC_TOOLBOX_SYSTEM_WINDOWS toolbox/system/windows.hdr.h  toolbox/system/windows/gettimeofday.h)
+Set(SRC_TOOLBOX_SYSTEM_WINDOWS core/system/windows.hdr.h  core/system/windows/gettimeofday.h)
 If(WIN32 AND MSVC)
-	Set(SRC_TOOLBOX_SYSTEM_WINDOWS ${SRC_TOOLBOX_SYSTEM_WINDOWS} toolbox/system/windows/gettimeofday.cpp)
+	Set(SRC_TOOLBOX_SYSTEM_WINDOWS ${SRC_TOOLBOX_SYSTEM_WINDOWS} core/system/windows/gettimeofday.cpp)
 EndIF(WIN32 AND MSVC)
 source_group(ToolBox\\System\\Windows FILES ${SRC_TOOLBOX_SYSTEM_WINDOWS})
 

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <complex>
-#include <yuni/toolbox/string.h>
-#include <yuni/toolbox/any.h>
+#include <yuni/core/string.h>
+#include <yuni/core/any.h>
 
 using namespace Yuni;
 using namespace std;
@@ -46,7 +46,7 @@ void simpleTest()
 	Yuni::Any a;
 	cout << "expecting 42    : "; outputAny(a = n, cout);
 	cout << "expecting q     : "; outputAny(a = c, cout);
-	cout << "expecting 3.14  : "; outputAny(a = d, cout);  
+	cout << "expecting 3.14  : "; outputAny(a = d, cout);
 	cout << "expecting (1,2) : "; outputAny(a = x, cout);
 	cout << "expecting 13    : "; outputAny(a = 13, cout);
 	cout << "expecting nyu   : "; outputAny(s = "nyu", cout);
@@ -56,7 +56,7 @@ void simpleTest()
 	a = 0;
 	cout << "expecting false : " << boolalpha << a.empty() << endl;
 	a.reset();
-	cout << "expecting true  : " << boolalpha << a.empty() << endl;  
+	cout << "expecting true  : " << boolalpha << a.empty() << endl;
 
 	try
 	{
@@ -74,6 +74,6 @@ void simpleTest()
 
 int main(void)
 {
-	simpleTest();	
+	simpleTest();
 	return 0;
 }

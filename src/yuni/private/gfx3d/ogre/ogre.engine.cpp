@@ -2,8 +2,8 @@
 #include "ogre.h"
 #include <ogrefontmanager.h>
 #include "ogre.engine.h"
-#include "../../../toolbox/string.h"
-#include "../../../toolbox/system/sleep.h"
+#include "../../../core/string.h"
+#include "../../../core/system/sleep.h"
 #include "../../../threads.h"
 #include <iostream>
 
@@ -15,22 +15,22 @@
 // for locating your configuration files and resources.
 static Yuni::String macBundlePath()
 {
-    char path[1024];
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    assert(mainBundle);
+	char path[1024];
+	CFBundleRef mainBundle = CFBundleGetMainBundle();
+	assert(mainBundle);
 
-    CFURLRef mainBundleURL = CFBundleCopyBundleURL(mainBundle);
-    assert(mainBundleURL);
+	CFURLRef mainBundleURL = CFBundleCopyBundleURL(mainBundle);
+	assert(mainBundleURL);
 
-    CFStringRef cfStringRef = CFURLCopyFileSystemPath( mainBundleURL, kCFURLPOSIXPathStyle);
-    assert(cfStringRef);
+	CFStringRef cfStringRef = CFURLCopyFileSystemPath( mainBundleURL, kCFURLPOSIXPathStyle);
+	assert(cfStringRef);
 
-    CFStringGetCString(cfStringRef, path, 1024, kCFStringEncodingASCII);
+	CFStringGetCString(cfStringRef, path, 1024, kCFStringEncodingASCII);
 
-    CFRelease(mainBundleURL);
-    CFRelease(cfStringRef);
+	CFRelease(mainBundleURL);
+	CFRelease(cfStringRef);
 
-    return Yuni::String(path);
+	return Yuni::String(path);
 }
 #endif
 

@@ -2,8 +2,8 @@
 # define __YUNI_APPLICATION_AAPPLICATION_H__
 
 # include "../yuni.h"
-# include "../toolbox/string.h"
-# include "../toolbox/getopt/getopt.h"
+# include "../core/string.h"
+# include "../core/getopt/getopt.h"
 
 
 namespace Yuni

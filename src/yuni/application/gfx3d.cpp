@@ -1,6 +1,6 @@
 
 #include "gfx3d.h"
-#include "../toolbox/smartptr/sharedptr.h"
+#include "../core/smartptr/sharedptr.h"
 #include "../gfx/device.h"
 
 

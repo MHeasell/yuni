@@ -1,7 +1,7 @@
 
 #include <yuni/yuni.h>
-#include <yuni/toolbox/event/event.h>
-#include <yuni/toolbox/string.h>
+#include <yuni/core/event/event.h>
+#include <yuni/core/string.h>
 #include <iostream>
 
 

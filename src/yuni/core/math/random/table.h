@@ -21,8 +21,8 @@ namespace Random
 	**
 	** \code
 	** #include <iostream>
-	** #include <yuni/toolbox/math/random/default.h>
-	** #include <yuni/toolbox/math/random/table.h>
+	** #include <yuni/core/math/random/default.h>
+	** #include <yuni/core/math/random/table.h>
 	**
 	** using namespace Yuni;
 	**

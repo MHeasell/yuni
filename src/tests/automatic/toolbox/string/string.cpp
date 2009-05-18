@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <yuni/yuni.h>
-#include <yuni/toolbox/string/string.h>
+#include <yuni/core/string/string.h>
 
 
 namespace Yuni
@@ -13,9 +13,9 @@ namespace Yuni
 		if (t != expected)
 		{
 			std::cerr << "* String conversion failed !" << std::endl
-					  << "	 From `String` to `" << section << "`" << std::endl
-					  << "	 Expected: `" << expected << "`, got `"
-					  << t << "`" << std::endl;
+				<< "	 From `String` to `" << section << "`" << std::endl
+				<< "	 Expected: `" << expected << "`, got `"
+				<< t << "`" << std::endl;
 			return 1;
 		}
 		return 0;
@@ -27,9 +27,9 @@ namespace Yuni
 		if (found != expected)
 		{
 			std::cerr << "* String conversion failed !" << std::endl
-					  << "	 While checking String::" << method << std::endl
-					  << "	 Expected: `" << expected << "`, got `"
-					  << found << "`" << std::endl;
+				<< "	 While checking String::" << method << std::endl
+				<< "	 Expected: `" << expected << "`, got `"
+				<< found << "`" << std::endl;
 			return 1;
 		}
 		return 0;
@@ -43,9 +43,9 @@ namespace Yuni
 		if (k != expectedKey || v != expectedValue)
 		{
 			std::cerr << "* String Check failed !" << std::endl
-					  << "	 On `" << t << "`" << std::endl
-					  << "	 Expected: key=`" << expectedKey << "`,  value=`" << expectedValue << "`" << std::endl
-					  << "	 Found: key=`" << k << "`,  value=`" << v << "`" << std::endl;
+				<< "	 On `" << t << "`" << std::endl
+				<< "	 Expected: key=`" << expectedKey << "`,  value=`" << expectedValue << "`" << std::endl
+				<< "	 Found: key=`" << k << "`,  value=`" << v << "`" << std::endl;
 			return 1;
 		}
 		return 0;

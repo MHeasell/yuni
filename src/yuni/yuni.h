@@ -41,11 +41,11 @@
 # endif
 
 /* Standard Preprocessor tools */
-# include "toolbox/preprocessor/std.h"
+# include "core/preprocessor/std.h"
 /* Operating System / Capabilities auto-detection */
-# include "toolbox/system/capabilities.h"
+# include "core/system/capabilities.h"
 /* Standard Types */
-# include "toolbox/system/stdint.h"
+# include "core/system/stdint.h"
 
 
 

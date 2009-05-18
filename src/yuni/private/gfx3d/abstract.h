@@ -3,8 +3,8 @@
 
 # include "../../yuni.h"
 # include "../../gfx/device.h"
-# include "../../toolbox/smartptr/smartptr.h"
-# include "../../toolbox/event/event.h"
+# include "../../core/smartptr/smartptr.h"
+# include "../../core/event/event.h"
 # include "../../threads/mutex.h"
 
 

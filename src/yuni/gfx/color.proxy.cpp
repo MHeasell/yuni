@@ -1,6 +1,6 @@
 
 #include "color.proxy.h"
-#include "../toolbox/math.h"
+#include "../core/math.h"
 #include "rgba.h"
 #include "rgb.h"
 
@@ -19,8 +19,8 @@ namespace Proxy
 
 
 	/*
-	 * --- Streamer ---
-	 */
+	** --- Streamer ---
+	*/
 
 	template<>
 	std::ostream& Streamer< Yuni::Gfx::Color::RGBA<uint8> >::toOStream(std::ostream& out, const Yuni::Gfx::Color::RGBA<uint8>& th)
@@ -59,8 +59,8 @@ namespace Proxy
 
 
 	/*
-	 * --- Assign ---
-	 */
+	** --- Assign ---
+	*/
 
 	template<>
 	Yuni::Gfx::Color::RGBA<uint8>& Values< Yuni::Gfx::Color::RGBA<uint8>, uint8 >::Assign(Yuni::Gfx::Color::RGBA<uint8>& th, const uint8& a1, const uint8& a2, const uint8& a3, const uint8& a4)
@@ -470,8 +470,8 @@ namespace Proxy
 
 
 	/*
-	 * --- Compare ---
-	 */
+	** --- Compare ---
+	*/
 
 	template<>
 	bool Compare< Yuni::Gfx::Color::RGBA<float>, Yuni::Gfx::Color::RGBA<float> >::equals(const Yuni::Gfx::Color::RGBA<float>& lhs, const Yuni::Gfx::Color::RGBA<float>& rhs)

@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include <yuni/toolbox/uri.h>
+#include <yuni/core/uri.h>
 
 
 

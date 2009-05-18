@@ -1,6 +1,6 @@
 
 #include "application.h"
-#include "../toolbox/paths.h"
+#include "../core/paths.h"
 
 
 

@@ -57,7 +57,7 @@ namespace DynamicLibrary
 	** We could safely use it in this way, which is the simplest one :
 	** \code
 	** #include <iostream>
-	** #include <yuni/toolbox/dynamiclibrary.h>
+	** #include <yuni/core/dynamiclibrary.h>
 	**
 	**
 	** int main(void)

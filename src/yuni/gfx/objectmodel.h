@@ -1,7 +1,7 @@
 #ifndef __YUNI_GFX_OBJECTMODEL_H__
 # define __YUNI_GFX_OBJECTMODEL_H__
 
-# include "../toolbox/smartptr/smartptr.h"
+# include "../core/smartptr/smartptr.h"
 
 
 namespace Yuni

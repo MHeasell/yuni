@@ -2,9 +2,9 @@
 # define __YUNI_SCRIPT_SCRIPT_H__
 
 # include "../yuni.h"
-# include "../toolbox/string.h"
-# include "../toolbox/event.h"
-# include "../toolbox/any.h"
+# include "../core/string.h"
+# include "../core/event.h"
+# include "../core/any.h"
 
 // Defines complex macros used to declare call() and bind().
 # include "script.defines.h"

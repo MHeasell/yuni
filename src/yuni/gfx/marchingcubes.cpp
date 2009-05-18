@@ -1,6 +1,6 @@
 # include "marchingcubes.h"
 # include "octree.h"
-# include "../toolbox/math.h"
+# include "../core/math.h"
 
 
 namespace Yuni

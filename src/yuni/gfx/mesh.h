@@ -2,7 +2,7 @@
 #ifndef __YUNI_GFX_MESH_H__
 # define __YUNI_GFX_MESH_H__
 
-# include "../toolbox/smartptr/smartptr.h"
+# include "../core/smartptr/smartptr.h"
 # include "triangle.h"
 # include "mesh.proxy.h"
 

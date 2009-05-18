@@ -1,6 +1,6 @@
 
 #include <yuni/yuni.h>
-#include <yuni/toolbox/smartptr/smartptr.h>
+#include <yuni/core/smartptr/smartptr.h>
 #include <yuni/gfx/object3D.h>
 
 using namespace Yuni;

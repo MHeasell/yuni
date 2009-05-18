@@ -1,8 +1,8 @@
 
 #include <iostream>
 #include <yuni/yuni.h>
-#include <yuni/toolbox/math/random/default.h>
-#include <yuni/toolbox/math/random/range.h>
+#include <yuni/core/math/random/default.h>
+#include <yuni/core/math/random/range.h>
 
 
 

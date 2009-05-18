@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <yuni/yuni.h>
-#include <yuni/toolbox/math/random/default.h>
+#include <yuni/core/math/random/default.h>
 
 
 int main(void)
