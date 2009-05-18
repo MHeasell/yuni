@@ -1,10 +1,10 @@
-#ifndef __YUNI_GFX_COLOR_PROXY_H__
-# define __YUNI_GFX_COLOR_PROXY_H__
+#ifndef __YUNI_GFX_CORE_COLOR_PROXY_H__
+# define __YUNI_GFX_CORE_COLOR_PROXY_H__
 
 # include <iostream>
-# include "../yuni.h"
-# include "../core/string.h"
-# include "../core/math/math.h"
+# include "../../../yuni.h"
+# include "../../../core/string.h"
+# include "../../../core/math/math.h"
 
 
 namespace Yuni
@@ -92,9 +92,6 @@ namespace Proxy
 	}; // class Values
 
 
-	# ifndef YUNI_OS_MSVC // see C2910 (http://msdn.microsoft.com/en-us/library/cx7k7hcf.aspx)
-	template<>
-	# endif
 	template<typename A, typename B>
 	struct Values< Yuni::Gfx::Color::RGB<A>, Yuni::Gfx::Color::RGBA<B> >
 	{
@@ -110,9 +107,6 @@ namespace Proxy
 
 	};
 
-	# ifndef YUNI_OS_MSVC // see C2910 (http://msdn.microsoft.com/en-us/library/cx7k7hcf.aspx)
-	template<>
-	# endif
 	template<typename A, typename B>
 	struct Values< Yuni::Gfx::Color::RGBA<A>, Yuni::Gfx::Color::RGB<B> >
 	{
@@ -178,9 +172,6 @@ namespace Proxy
 
 
 
-	# ifndef YUNI_OS_MSVC // see C2910 (http://msdn.microsoft.com/en-us/library/cx7k7hcf.aspx)
-	template<>
-	# endif
 	template<typename S>
 	struct Streamer< Yuni::Gfx::Color::RGBA<S> >
 	{
@@ -205,9 +196,6 @@ namespace Proxy
 	};
 
 
-	# ifndef YUNI_OS_MSVC // see C2910 (http://msdn.microsoft.com/en-us/library/cx7k7hcf.aspx)
-	template<>
-	# endif
 	template<typename S>
 	struct Streamer< Yuni::Gfx::Color::RGB<S> >
 	{
@@ -298,10 +286,12 @@ namespace Proxy
 
 
 
+
+
 } // namespace Proxy
 } // namespace Color
 } // namespace Gfx
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_GFX_COLOR_PROXY_H__
+#endif // __YUNI_GFX_CORE_COLOR_PROXY_H__

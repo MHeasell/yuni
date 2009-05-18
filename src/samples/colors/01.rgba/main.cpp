@@ -1,5 +1,5 @@
 #include <yuni/yuni.h>
-#include <yuni/gfx/rgba.h>
+#include <yuni/gfx/core/color/rgba.h>
 
 
 using namespace Yuni;

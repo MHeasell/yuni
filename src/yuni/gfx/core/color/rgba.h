@@ -1,9 +1,7 @@
-#ifndef __YUNI_GFX_RGB_A_H__
-# define __YUNI_GFX_RGB_A_H__
+#ifndef __YUNI_GFX_CORE_COLOR_RGBA_H__
+# define __YUNI_GFX_CORE_COLOR_RGBA_H__
 
-# include "../core/string.h"
-# include "color.proxy.h"
-
+# include "proxy.h"
 
 
 namespace Yuni
@@ -14,11 +12,9 @@ namespace Color
 {
 
 
-	/*! \class RGBA
-	**  \brief 32Bits RGB Color Model with alpha channel (Additive color model + transparency) 
-	**  \ingroup ColorModels
-	**
-	** \internal Do not forget to broadcast changes to specialized template as well
+	/*!
+	** \brief 32Bits RGB Color Model with alpha channel (Additive color model + transparency)
+	** \ingroup ColorModels
 	*/
 	template<typename T>
 	class RGBA
@@ -26,9 +22,8 @@ namespace Color
 	public:
 		//! \name Constructors
 		//@{
-
 		//! Default Constructor
-		RGBA() : red(T()), green(T()), blue(T()), alpha(T()) {}
+		RGBA() : red(), green(), blue(), alpha() {}
 
 		/*!
 		** \brief Constructor by copy
@@ -58,8 +53,7 @@ namespace Color
 		template<typename U>
 		RGBA(const U& r, const U& g, const U& b, const U& a)
 		{Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, r, g, b, a);}
-
-		//@} // Constructors
+		//@}
 
 
 		/*!
@@ -208,4 +202,4 @@ inline const Yuni::Gfx::Color::RGBA<T> operator + (const Yuni::Gfx::Color::RGBA<
 //@}
 
 
-#endif // __YUNI_GFX_RGB_A_H__
+#endif // __YUNI_GFX_CORE_COLOR_RGBA_H__

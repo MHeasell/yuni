@@ -231,10 +231,12 @@ Set(SRC_APPLICATION
 source_group(Application FILES ${SRC_APPLICATION})
 
 Set(SRC_GFX_CORE
-		gfx/color.proxy.h gfx/color.proxy.cpp
 		gfx/point2D.h gfx/point3D.h gfx/vector3D.h
 		gfx/octree.h gfx/octree.cpp
-		gfx/rgba.h gfx/rgb.h)
+		# Color
+		gfx/core/color/rgba.h gfx/core/color/rgb.h
+		gfx/core/color/proxy.h gfx/core/color/proxy.cpp
+		)
 source_group(Gfx FILES ${SRC_RGB})
 
 # Devices
