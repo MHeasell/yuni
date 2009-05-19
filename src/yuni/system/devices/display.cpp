@@ -183,12 +183,6 @@ namespace Display
 		*/
 		static void refreshForWindows(MonitorsFound& lst)
 		{
-			// First get the number of monitors we should be expecting
-			const int numMonitors = GetSystemMetrics(SM_CMONITORS);
-			if (numMonitors > YUNI_DEVICE_MAX_DISPLAYS)
-				// TODO: This is quite rough, maybe something prettier could be done
-				return;
-
 			uint16 countMonitors = 0;
 			DISPLAY_DEVICE_FULL displayDevice;
 			displayDevice.cb = sizeof (DISPLAY_DEVICE_FULL);
@@ -196,22 +190,23 @@ namespace Display
 			for (uint16 countDevices = 0; EnumDisplayDevices(NULL, countDevices, (DISPLAY_DEVICE*)&displayDevice, 0); ++countDevices)
 			{
 				// Ignore mirrored displays
-				if (!(displayDevice.StateFlags & DISPLAY_DEVICE_MIRRORING_DRIVER))
+				if (!(displayDevice.StateFlags & DISPLAY_DEVICE_MIRRORING_DRIVER) && (displayDevice.StateFlags & DISPLAY_DEVICE_ATTACHED_TO_DESKTOP))
 				{
-					DISPLAY_DEVICE_FULL namedDisplayDevice;
-					namedDisplayDevice.cb = sizeof (DISPLAY_DEVICE_FULL);
-					// The second call is necessary to get the monitor name associated with the display
-					EnumDisplayDevices(displayDevice.DeviceName, 0, (DISPLAY_DEVICE*)&namedDisplayDevice, 0);
+					DISPLAY_DEVICE_FULL monitorDisplayDevice;
+					monitorDisplayDevice.cb = sizeof (DISPLAY_DEVICE_FULL);
+					// A second call is necessary to get the monitor name associated with the display
+					EnumDisplayDevices(displayDevice.DeviceName, 0, (DISPLAY_DEVICE*)&monitorDisplayDevice, 0);
 					bool mainDisplay = (0 != (displayDevice.StateFlags & DISPLAY_DEVICE_PRIMARY_DEVICE));
 
-					SingleMonitorFound* monitorWithRes = findMonitor(namedDisplayDevice.DeviceString, lst);
+					// Check if we have already stored info on this monitor
+					SingleMonitorFound* monitorWithRes = findMonitor(monitorDisplayDevice.DeviceString, lst);
 					bool newMonitor = (NULL == monitorWithRes);
 					SmartPtr<Monitor> monitor;
 					SmartPtr<OrderedResolutions> res;
 					if (newMonitor)
 					{
 						// Create the new monitor
-						monitor = new Monitor(namedDisplayDevice.DeviceString, (Monitor::Handle)countMonitors++, mainDisplay, true, true);
+						monitor = new Monitor(monitorDisplayDevice.DeviceString, (Monitor::Handle)countMonitors++, mainDisplay, true, true);
 						res = new OrderedResolutions();
 					}
 					else
@@ -219,13 +214,15 @@ namespace Display
 						monitor = monitorWithRes->first;
 						res = monitorWithRes->second;
 					}
-            
-					if (displayDevice.StateFlags & DISPLAY_DEVICE_ATTACHED_TO_DESKTOP)
-						addResolutions(displayDevice, res);
+
+					// Add associated resolutions
+					addResolutions(displayDevice, res);
 
 					// Add the monitor and its resolutions to the list if necessary
 					if (newMonitor)
 						lst.push_back(SingleMonitorFound(monitor, res));
+					if (countDevices > YUNI_DEVICE_MAX_DISPLAYS)
+						break;
 				}
 			}
 		}
