@@ -1,5 +1,6 @@
 
 #include <map>
+#include <cassert>
 #include "../../yuni.h"
 #include "display.h"
 #ifdef YUNI_OS_MAC
@@ -145,59 +146,88 @@ namespace Display
 
 # ifdef YUNI_OS_WINDOWS
 
-		void windowsGetMonitorResolutions(HDC device, SmartPtr<OrderedResolutions>& res)
+		// Use the following structure rather than DISPLAY_DEVICE, since some old 
+		// versions of DISPLAY_DEVICE are missing the last two fields and this can
+		// cause problems with EnumDisplayDevices on Windows 2000.
+		struct DISPLAY_DEVICE_FULL
 		{
-			int width = GetDeviceCaps(device, HORZRES);
-			int height = GetDeviceCaps(device, VERTRES);
-			int colorDepth = GetDeviceCaps(device, BITSPIXEL) * GetDeviceCaps(device, PLANES);
-			(*res)[width][height] = (uint8)colorDepth;
+			DWORD  cb;
+			TCHAR  DeviceName[32];
+			TCHAR  DeviceString[128];
+			DWORD  StateFlags;
+			TCHAR  DeviceID[128];
+			TCHAR  DeviceKey[128];
+		};
+
+
+		static SingleMonitorFound* findMonitor(const Yuni::String& monitorName, MonitorsFound& lst)
+		{
+			uint16 i;
+			for (i = 0; i < lst.size() && lst[i].first->name() != monitorName; ++i)
+				;
+			return (i >= lst.size()) ? NULL : &lst[i];
 		}
 
-		/*!
-		** \brief Callback for the EnumDisplayMonitors call
-		*/
-		BOOL CALLBACK EnumMonitorsCallback(HMONITOR handle, HDC context, LPRECT rect, LPARAM data)
+		static void addResolutions(DISPLAY_DEVICE_FULL& device, SmartPtr<OrderedResolutions> res)
 		{
-			static uint32 count = 0;
+			DEVMODE devMode;
+			devMode.dmSize = sizeof (DEVMODE);
+			devMode.dmDriverExtra = 32;
 
-			MonitorsFound* lst = (MonitorsFound*)data;
-			// Get information about the monitor
-			MONITORINFOEX info;
-			info.cbSize = sizeof(MONITORINFOEX);
-			if (!GetMonitorInfo(handle, &info))
-				// If this failed the rest probably won't work, give up
-				return false;
-
-			HDC monitorDC = CreateDC("DISPLAY", info.szDevice, NULL, NULL);
-			// for Win98:
-			// CreateDC(NULL, info.szDevice, NULL, NULL);
-
-			if (!monitorDC)
-				return false;
-			SmartPtr<OrderedResolutions> res(new OrderedResolutions());
-			windowsGetMonitorResolutions(monitorDC, res);
-			DeleteDC(monitorDC);
-
-			bool mainDisplay = (info.dwFlags & MONITORINFOF_PRIMARY);
-			// Create the new monitor
-			SmartPtr<Monitor> newMonitor(new Monitor(info.szDevice, (Monitor::Handle)count++, mainDisplay, true, true));
-			// Add the monitor and its resolutions to the list
-			lst->push_back(SingleMonitorFound(newMonitor, res));
-			return true;
+			for (uint16 i = 0; EnumDisplaySettings(device.DeviceName, i, &devMode); ++i)
+				(*res)[devMode.dmPelsWidth][devMode.dmPelsHeight] = (uint8)devMode.dmBitsPerPel;
 		}
 
 		/*!
 		** \brief Windows-specific implementation for the monitor / resolution list refresh
 		*/
-		void refreshForWindows(MonitorsFound& lst)
+		static void refreshForWindows(MonitorsFound& lst)
 		{
 			// First get the number of monitors we should be expecting
 			const int numMonitors = GetSystemMetrics(SM_CMONITORS);
 			if (numMonitors > YUNI_DEVICE_MAX_DISPLAYS)
-				// TODO: This is quite rough, something prettier should be done
+				// TODO: This is quite rough, maybe something prettier could be done
 				return;
-			// Enumerate on handles to _all_ the monitors, InfoCallback is called for each handle
-			EnumDisplayMonitors(NULL, NULL, EnumMonitorsCallback, (LPARAM)(&lst));
+
+			uint16 countMonitors = 0;
+			DISPLAY_DEVICE_FULL displayDevice;
+			displayDevice.cb = sizeof (DISPLAY_DEVICE_FULL);
+			// Loop on all display devices
+			for (uint16 countDevices = 0; EnumDisplayDevices(NULL, countDevices, (DISPLAY_DEVICE*)&displayDevice, 0); ++countDevices)
+			{
+				// Ignore mirrored displays
+				if (!(displayDevice.StateFlags & DISPLAY_DEVICE_MIRRORING_DRIVER))
+				{
+					DISPLAY_DEVICE_FULL namedDisplayDevice;
+					namedDisplayDevice.cb = sizeof (DISPLAY_DEVICE_FULL);
+					// The second call is necessary to get the monitor name associated with the display
+					EnumDisplayDevices(displayDevice.DeviceName, 0, (DISPLAY_DEVICE*)&namedDisplayDevice, 0);
+					bool mainDisplay = (0 != (displayDevice.StateFlags & DISPLAY_DEVICE_PRIMARY_DEVICE));
+
+					SingleMonitorFound* monitorWithRes = findMonitor(namedDisplayDevice.DeviceString, lst);
+					bool newMonitor = (NULL == monitorWithRes);
+					SmartPtr<Monitor> monitor;
+					SmartPtr<OrderedResolutions> res;
+					if (newMonitor)
+					{
+						// Create the new monitor
+						monitor = new Monitor(namedDisplayDevice.DeviceString, (Monitor::Handle)countMonitors++, mainDisplay, true, true);
+						res = new OrderedResolutions();
+					}
+					else
+					{
+						monitor = monitorWithRes->first;
+						res = monitorWithRes->second;
+					}
+            
+					if (displayDevice.StateFlags & DISPLAY_DEVICE_ATTACHED_TO_DESKTOP)
+						addResolutions(displayDevice, res);
+
+					// Add the monitor and its resolutions to the list if necessary
+					if (newMonitor)
+						lst.push_back(SingleMonitorFound(monitor, res));
+				}
+			}
 		}
 
 # endif
