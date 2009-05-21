@@ -21,11 +21,11 @@ namespace Gfx
 	** It also has a shared "template" object storing every characteristic common with similar objects
 	** Object3D objects must not be deleted, they are destroyed by the objectmanager.
 	*/
-	class Object3D: public Toolbox::TreeN<Object3D>
+	class Object3D: public Core::TreeN<Object3D>
 	{
 	public:
 		//! Pointer
-		typedef Toolbox::TreeN<Object3D>::Ptr Ptr;
+		typedef Core::TreeN<Object3D>::Ptr Ptr;
 		typedef uint64 ID;
 
 	public:

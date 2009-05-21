@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_TRIGONOMETRIC_H__
-# define __YUNI_TOOLBOX_MATH_TRIGONOMETRIC_H__
+#ifndef __YUNI_CORE_MATH_TRIGONOMETRIC_H__
+# define __YUNI_CORE_MATH_TRIGONOMETRIC_H__
 
 # include "math.h"
 
@@ -68,4 +68,4 @@ namespace Math
 
 # include "trigonometric.hxx"
 
-#endif // __YUNI_TOOLBOX_MATH_TRIGONOMETRIC_H__
+#endif // __YUNI_CORE_MATH_TRIGONOMETRIC_H__

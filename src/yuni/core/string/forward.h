@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STRING_FORWARD_H__
-# define __YUNI_TOOLBOX_STRING_FORWARD_H__
+#ifndef __YUNI_CORE_STRING_FORWARD_H__
+# define __YUNI_CORE_STRING_FORWARD_H__
 
 
 
@@ -107,4 +107,4 @@ namespace StringImpl
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_STRING_FORWARD_H__
+#endif // __YUNI_CORE_STRING_FORWARD_H__

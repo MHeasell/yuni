@@ -72,8 +72,8 @@ namespace DynamicLibrary
 		{
 			# define TEST_THEN_LOAD(EXT) \
 				s.clear(); \
-				s << (*i) << Toolbox::Paths::Separator << prefix << filename << EXT; \
-				if (Toolbox::Paths::Exists(s)) \
+				s << (*i) << Core::Paths::Separator << prefix << filename << EXT; \
+				if (Core::Paths::Exists(s)) \
 					return true
 
 			const String::Vector::const_iterator end = searchPaths.end();
@@ -109,7 +109,7 @@ namespace DynamicLibrary
 		if (!filename.empty())
 		{
 			// If the file name is absolute, there is no need for research
-			if (Toolbox::Paths::IsAbsolute(filename))
+			if (Core::Paths::IsAbsolute(filename))
 				return loadFromRawFilename(filename.c_str(), r, v);
 
 			// A temporary string, where to write the absolute filename

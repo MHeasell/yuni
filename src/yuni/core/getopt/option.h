@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_GETOPT_OPTION_H__
-# define __YUNI_TOOLBOX_GETOPT_OPTION_H__
+#ifndef __YUNI_CORE_GETOPT_OPTION_H__
+# define __YUNI_CORE_GETOPT_OPTION_H__
 
 # include "../../yuni.h"
 # include <list>
@@ -8,7 +8,7 @@
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 namespace GetOpt
 {
@@ -197,11 +197,11 @@ namespace GetOpt
 
 
 } // namespace GetOpt
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 
 
 # include "option.hxx"
 
 
-#endif // __YUNI_TOOLBOX_GETOPT_OPTION_H__
+#endif // __YUNI_CORE_GETOPT_OPTION_H__

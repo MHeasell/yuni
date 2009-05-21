@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_DYNAMICLIBRARY_SYMBOL_HXX__
-# define __YUNI_TOOLBOX_DYNAMICLIBRARY_SYMBOL_HXX__
+#ifndef __YUNI_CORE_DYNAMICLIBRARY_SYMBOL_HXX__
+# define __YUNI_CORE_DYNAMICLIBRARY_SYMBOL_HXX__
 
 
 namespace Yuni
@@ -59,4 +59,4 @@ namespace DynamicLibrary
 } // namespace DynamicLibrary
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_DYNAMICLIBRARY_SYMBOL_HXX__
+#endif // __YUNI_CORE_DYNAMICLIBRARY_SYMBOL_HXX__

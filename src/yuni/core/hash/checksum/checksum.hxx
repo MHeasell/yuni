@@ -1,5 +1,5 @@
-#ifndef __YUNI_HASH_ACHECKSUM_HXX__
-# define __YUNI_HASH_ACHECKSUM_HXX__
+#ifndef __YUNI_CORE_HASH_CHECKSUM_CHECKSUM_HXX__
+# define __YUNI_CORE_HASH_CHECKSUM_CHECKSUM_HXX__
 
 
 namespace Yuni
@@ -46,4 +46,4 @@ namespace Checksum
 } // namespace Hash
 } // namespace Yuni
 
-#endif // __YUNI_HASH_ACHECKSUM_H__
+#endif // __YUNI_CORE_HASH_CHECKSUM_CHECKSUM_HXX__

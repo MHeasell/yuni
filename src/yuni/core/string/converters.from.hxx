@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STRING_STD_CONVERTERS_FROM_HXX__
-# define __YUNI_TOOLBOX_STRING_STD_CONVERTERS_FROM_HXX__
+#ifndef __YUNI_CORE_STRING_STD_CONVERTERS_FROM_HXX__
+# define __YUNI_CORE_STRING_STD_CONVERTERS_FROM_HXX__
 
 # include <assert.h>
 
@@ -523,5 +523,5 @@ namespace StringImpl
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_STRING_STD_CONVERTERS_FROM_HXX__
+#endif // __YUNI_CORE_STRING_STD_CONVERTERS_FROM_HXX__
 

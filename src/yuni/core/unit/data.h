@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_UNIT_DATA_DATA_H__
-# define __YUNI_TOOLBOX_UNIT_DATA_DATA_H__
+#ifndef __YUNI_CORE_UNIT_DATA_DATA_H__
+# define __YUNI_CORE_UNIT_DATA_DATA_H__
 
 # include "unit.h"
 # include "define.h"
@@ -185,4 +185,4 @@ namespace Octet
 
 # include "undef.h"
 
-#endif // __YUNI_TOOLBOX_UNIT_DATA_DATA_H__
+#endif // __YUNI_CORE_UNIT_DATA_DATA_H__

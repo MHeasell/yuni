@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_LOGS_VERBOSITY_H__
-# define __YUNI_TOOLBOX_LOGS_VERBOSITY_H__
+#ifndef __YUNI_CORE_LOGS_VERBOSITY_H__
+# define __YUNI_CORE_LOGS_VERBOSITY_H__
 
 
 
@@ -138,4 +138,4 @@ namespace Verbosity
 } // namespace Yuni
 
 
-#endif // __YUNI_TOOLBOX_LOGS_VERBOSITY_H__
+#endif // __YUNI_CORE_LOGS_VERBOSITY_H__

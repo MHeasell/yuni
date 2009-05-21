@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_LOGS_STREAM_H__
-# define __YUNI_TOOLBOX_LOGS_STREAM_H__
+#ifndef __YUNI_CORE_LOGS_STREAM_H__
+# define __YUNI_CORE_LOGS_STREAM_H__
 
 
 /* !!! Do not use includes here !!! */
@@ -58,4 +58,4 @@ public:
 
 
 
-#endif // __YUNI_TOOLBOX_LOGS_STREAM_H__
+#endif // __YUNI_CORE_LOGS_STREAM_H__

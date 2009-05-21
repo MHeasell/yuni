@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_MATH_HXX__
-# define __YUNI_TOOLBOX_MATH_MATH_HXX__
+#ifndef __YUNI_CORE_MATH_MATH_HXX__
+# define __YUNI_CORE_MATH_MATH_HXX__
 
 
 namespace Yuni
@@ -187,4 +187,4 @@ namespace Math
 } // namespace Yuni
 
 
-#endif // __YUNI_TOOLBOX_MATH_MATH_HXX__
+#endif // __YUNI_CORE_MATH_MATH_HXX__

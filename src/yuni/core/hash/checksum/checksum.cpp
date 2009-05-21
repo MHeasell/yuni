@@ -17,6 +17,7 @@ namespace Checksum
 	{}
 
 
+
 } // namespace Checksum
 } // namespace Hash
 } // namespace Yuni

@@ -1,8 +1,8 @@
 
 #include "md5.h"
+#include "../../../core/system/windows.hdr.h"
 #include <fstream>
 #include <string.h>
-#include "../../../core/system/windows.hdr.h"
 
 
 
@@ -91,14 +91,6 @@ namespace Hash
 {
 namespace Checksum
 {
-
-
-	MD5::MD5()
-		:Hash::Checksum::AChecksum()
-	{}
-
-	MD5::~MD5()
-	{}
 
 
 	namespace
@@ -394,6 +386,12 @@ namespace Checksum
 
 
 
+	MD5::MD5()
+		:Hash::Checksum::AChecksum()
+	{}
+
+
+
 	const String& MD5::fromRawData(const void* rawdata, uint64 size)
 	{
 		pValue.clear();
@@ -440,6 +438,7 @@ namespace Checksum
 		}
 		return pValue;
 	}
+
 
 
 

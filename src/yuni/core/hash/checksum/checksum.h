@@ -1,5 +1,5 @@
-#ifndef __YUNI_HASH_ACHECKSUM_H__
-# define __YUNI_HASH_ACHECKSUM_H__
+#ifndef __YUNI_CORE_HASH_CHECKSUM_CHECKSUM_H__
+# define __YUNI_CORE_HASH_CHECKSUM_CHECKSUM_H__
 
 # include "../../../yuni.h"
 # include "../../string.h"
@@ -96,4 +96,4 @@ namespace Checksum
 
 # include "checksum.hxx"
 
-#endif // __YUNI_HASH_ACHECKSUM_H__
+#endif // __YUNI_CORE_HASH_CHECKSUM_CHECKSUM_H__

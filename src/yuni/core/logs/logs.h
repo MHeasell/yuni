@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_LOGS_LOGS_H__
-# define __YUNI_TOOLBOX_LOGS_LOGS_H__
+#ifndef __YUNI_CORE_LOGS_LOGS_H__
+# define __YUNI_CORE_LOGS_LOGS_H__
 
 # include "../../yuni.h"
 # include "../policies/threading.h"
@@ -171,4 +171,4 @@ namespace Logs
 
 # include "logs.hxx"
 
-#endif // __YUNI_TOOLBOX_LOGS_LOGS_H__
+#endif // __YUNI_CORE_LOGS_LOGS_H__

@@ -9,7 +9,7 @@
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 namespace Paths
 {
@@ -297,6 +297,6 @@ namespace Files
 
 } // namespace Files
 } // namespace Paths
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 

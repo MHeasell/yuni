@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_EVENT_PROXY_H__
-# define __YUNI_TOOLBOX_EVENT_PROXY_H__
+#ifndef __YUNI_CORE_EVENT_PROXY_H__
+# define __YUNI_CORE_EVENT_PROXY_H__
 
 # include "event.h"
 
@@ -299,4 +299,4 @@ namespace Proxy
 } // namespace Yuni
 
 
-#endif // __YUNI_TOOLBOX_EVENT_PROXY_H__
+#endif // __YUNI_CORE_EVENT_PROXY_H__

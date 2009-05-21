@@ -2,5 +2,5 @@
 Message(STATUS "Sample: Colors / RGB")
 include_directories(${YUNI_INCLUDE})
 ADD_EXECUTABLE(color_00_rgb main.cpp)
-target_link_libraries(color_00_rgb ${YUNI_STATIC_CORE})
+target_link_libraries(color_00_rgb ${YUNI_STATIC_CORE} ${YUNI_STATIC_GFX_CORE})
 

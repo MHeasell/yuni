@@ -11,7 +11,7 @@ namespace Yuni
 
 	/*!
 	** \brief Provides version informations
-	** \ingroup Toolbox
+	** \ingroup Core
 	*/
 	class Version
 	{

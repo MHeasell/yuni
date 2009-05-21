@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STATIC_TYPES_H__
-# define __YUNI_TOOLBOX_STATIC_TYPES_H__
+#ifndef __YUNI_CORE_STATIC_TYPES_H__
+# define __YUNI_CORE_STATIC_TYPES_H__
 
 # include "../../yuni.h"
 # include "remove.h"
@@ -248,4 +248,4 @@ namespace Type
 } // namespace Yuni
 
 
-#endif // __YUNI_TOOLBOX_STATIC_TYPES_H__
+#endif // __YUNI_CORE_STATIC_TYPES_H__

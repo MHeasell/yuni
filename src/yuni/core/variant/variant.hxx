@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_VARIANT_VARIANT_HXX__
-# define __YUNI_TOOLBOX_VARIANT_VARIANT_HXX__
+#ifndef __YUNI_CORE_VARIANT_VARIANT_HXX__
+# define __YUNI_CORE_VARIANT_VARIANT_HXX__
 
 
 
@@ -62,4 +62,4 @@ namespace Yuni
 
 } // namespace Yuni
 
-#endif /* !__YUNI_TOOLBOX_VARIANT_VARIANT_HXX__ */
+#endif // __YUNI_CORE_VARIANT_VARIANT_HXX__

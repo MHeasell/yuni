@@ -14,7 +14,7 @@ namespace Gfx
 	/*!
 	** \brief A skeleton contains a mesh and possibly sub-skeletons
 	*/
-	class Skeleton: public Toolbox::TreeN<Skeleton>
+	class Skeleton: public Core::TreeN<Skeleton>
 	{
 	public:
 		typedef SmartPtr<Skeleton> Ptr;

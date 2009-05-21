@@ -1,11 +1,11 @@
-#ifndef __YUNI_TOOLBOX_TREE_N_HXX__
-# define __YUNI_TOOLBOX_TREE_N_HXX__
+#ifndef __YUNI_CORE_TREE_N_HXX__
+# define __YUNI_CORE_TREE_N_HXX__
 
 # include <iostream>
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 
 	template<class T, template<class> class TP, template <class> class ChckP,
@@ -582,8 +582,8 @@ namespace Toolbox
 
 
 
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 
 
-#endif // __YUNI_TOOLBOX_TREE_N_HXX__
+#endif // __YUNI_CORE_TREE_N_HXX__

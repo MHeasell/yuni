@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STATIC_ASSERT_H__
-# define __YUNI_TOOLBOX_STATIC_ASSERT_H__
+#ifndef __YUNI_CORE_STATIC_ASSERT_H__
+# define __YUNI_CORE_STATIC_ASSERT_H__
 
 # include "../preprocessor/std.h"
 
@@ -58,4 +58,4 @@ namespace Static
 
 
 
-#endif // __YUNI_TOOLBOX_STATIC_ASSERT_H__
+#endif // __YUNI_CORE_STATIC_ASSERT_H__

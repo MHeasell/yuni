@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_DYNAMICLIBRARY_FILE_HXX__
-# define __YUNI_TOOLBOX_DYNAMICLIBRARY_FILE_HXX__
+#ifndef __YUNI_CORE_DYNAMICLIBRARY_FILE_HXX__
+# define __YUNI_CORE_DYNAMICLIBRARY_FILE_HXX__
 
 
 
@@ -107,4 +107,4 @@ namespace DynamicLibrary
 } // namespace DyanmicLibrary
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_DYNAMICLIBRARY_FILE_HXX__
+#endif // __YUNI_CORE_DYNAMICLIBRARY_FILE_HXX__

@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_ANY_ANY_H__
-#define __YUNI_TOOLBOX_ANY_ANY_H__
+#ifndef __YUNI_CORE_ANY_ANY_H__
+#define __YUNI_CORE_ANY_ANY_H__
 
 # include "../../yuni.h"
 # include "../exceptions/badcast.h"
@@ -13,7 +13,7 @@ namespace Yuni
 
 	/*!
 	** \brief Classic Any type implementation.
-	** \ingroup Toolbox
+	** \ingroup Core
 	**
 	** This is a relatively classic, yet (i hope) fast implementation of
 	** a Any type.
@@ -178,6 +178,6 @@ namespace Yuni
 
 # include "any.hxx"
 
-#endif /* !__YUNI_TOOLBOX_ANY_ANY_H__ */
+#endif /* !__YUNI_CORE_ANY_ANY_H__ */
 
 

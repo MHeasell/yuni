@@ -5,6 +5,7 @@
 
 # Core
 Set(YUNI_MODULE_CORE                      TRUE) # Must be equals to True
+Set(YUNI_MODULE_GFX_CORE                  TRUE)
 
 # Gfx3D
 Set(YUNI_MODULE_GFX3D                     FALSE)

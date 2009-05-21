@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_RANDOM_DEFAULT_HXX__
-# define __YUNI_TOOLBOX_MATH_RANDOM_DEFAULT_HXX__
+#ifndef __YUNI_CORE_MATH_RANDOM_DEFAULT_HXX__
+# define __YUNI_CORE_MATH_RANDOM_DEFAULT_HXX__
 
 
 namespace Yuni
@@ -56,4 +56,4 @@ namespace Random
 } // namespace Math
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_MATH_RANDOM_DEFAULT_HXX__
+#endif // __YUNI_CORE_MATH_RANDOM_DEFAULT_HXX__

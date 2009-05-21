@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_EXCEPTIONS_H__
-#define __YUNI_TOOLBOX_EXCEPTIONS_H__
+#ifndef __YUNI_CORE_EXCEPTIONS_H__
+#define __YUNI_CORE_EXCEPTIONS_H__
 
 
 
@@ -20,4 +20,4 @@ namespace Exceptions
 } // namespace Yuni
 
 
-#endif // !__YUNI_TOOLBOX_EXCEPTIONS_H__
+#endif // !__YUNI_CORE_EXCEPTIONS_H__

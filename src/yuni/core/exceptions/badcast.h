@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_EXCEPTIONS_BAD_CAST_H__
-# define __YUNI_TOOLBOX_EXCEPTIONS_BAD_CAST_H__
+#ifndef __YUNI_CORE_EXCEPTIONS_BAD_CAST_H__
+# define __YUNI_CORE_EXCEPTIONS_BAD_CAST_H__
 
 # include <stdexcept>
 # include <typeinfo>
@@ -55,4 +55,4 @@ namespace Exceptions
 
 
 
-#endif // __YUNI_TOOLBOX_EXCEPTIONS_BAD_CAST_H__
+#endif // __YUNI_CORE_EXCEPTIONS_BAD_CAST_H__

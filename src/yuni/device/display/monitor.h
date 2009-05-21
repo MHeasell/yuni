@@ -1,20 +1,31 @@
-#ifndef __YUNI_SYSTEM_DEVICES_DISPLAY_ABSTRACT_H__
-# define __YUNI_SYSTEM_DEVICES_DISPLAY_ABSTRACT_H__
+#ifndef __YUNI_DEVICE_DISPLAY_MONITOR_H__
+# define __YUNI_DEVICE_DISPLAY_MONITOR_H__
 
-# include <vector>
-# include <list>
 # include "../../yuni.h"
 # include "resolution.h"
 # include "../../core/string.h"
 # include "../../core/smartptr/smartptr.h"
 
 
+# if defined(YUNI_OS_MACOSX)
+#	define YUNI_DEVICE_DISPLAY_HANDLE         uint32
+#	define YUNI_DEVICE_DISPLAY_INVALIDHANDLE  (uint32(-1))
+# else
+# 	if defined(YUNI_OS_WINDOWS)
+#		define YUNI_DEVICE_DISPLAY_HANDLE         uint32
+#		define YUNI_DEVICE_DISPLAY_INVALIDHANDLE  (uint32(-1))
+# 	else
+/* Unixes - X11 */
+#		define YUNI_DEVICE_DISPLAY_HANDLE         int
+#		define YUNI_DEVICE_DISPLAY_INVALIDHANDLE  (int(-1))
+# 	endif
+# endif
+
+
 
 namespace Yuni
 {
-namespace System
-{
-namespace Devices
+namespace Device
 {
 namespace Display
 {
@@ -28,10 +39,8 @@ namespace Display
 	class Monitor
 	{
 	public:
-		//! List of monitor
-		typedef std::list< SmartPtr<Monitor> >  List;
-		//! Vector of monitor
-		typedef std::vector< SmartPtr<Monitor> >  Vector;
+		//! The most suitable smart pointer to use with the class `Monitor`
+		typedef SmartPtr<Monitor> Ptr;
 
 		/*!
 		** \brief Handle for a single monitor
@@ -41,20 +50,25 @@ namespace Display
 		**    <li>Mac OS : The equivalent is `CGDirectDisplayID`</li>
 		** </ul>
 		*/
-		typedef uint32  Handle;
+		typedef YUNI_DEVICE_DISPLAY_HANDLE  Handle;
 		//! Value for an invalid handle
-		static const Handle InvalidHandle = (Handle)(-1);
+		static const Handle InvalidHandle = YUNI_DEVICE_DISPLAY_INVALIDHANDLE;
 
 
 	public:
 		//! \name Constructors and Destructor
 		//@{
-
-		//! Default constructor
+		/*!
+		** \brief Default constructor
+		**
+		** By default, some safe (assumed) resolutions will be available
+		*/
 		Monitor();
 
 		/*!
 		** \brief Constructor with values
+		**
+		** By default, some safe (assumed) resolutions will be available
 		**
 		** \param nm Name of the monitor
 		** \param hwn Handle of the monitor
@@ -69,36 +83,32 @@ namespace Display
 		Monitor(const Monitor& c);
 
 		//! Destructor
-		virtual ~Monitor();
-
+		~Monitor();
 		//@}
 
 
 		//! \name Handle
 		//@{
-
 		/*!
 		** \brief Get the index of the current selected monitor
 		*/
-		Monitor::Handle handle() const {return pHandle;}
+		Monitor::Handle handle() const;
 
 		/*!
 		** \brief Get if the handle of this monitor is valid
 		*/
-		bool valid() const {return pHandle != Monitor::InvalidHandle;}
-
+		bool valid() const;
 		//@}
 
 
 		//! \name Identifiers
 		//@{
-
 		/*!
 		** \brief Get the human readable name of the monitor, if any
 		**
-		** \return The name of the monitor, or an empty value if not available
+		** \return The name of the monitor (product), or an empty value if not available
 		*/
-		const String& name() const {return pName;}
+		const String& productName() const;
 
 		/*!
 		** \brief Get an unique id for this screen
@@ -109,26 +119,30 @@ namespace Display
 		** \return A md5 string
 		*/
 		const String& guid();
-
 		//@}
 
 		//! \name Informations about the monitor
 		//@{
-
 		/*!
 		** \brief Get all available resolutions for this screen
 		**
 		** The returned value is guaranteed to not be empty and to be
 		** a sorted descendant list.
 		*/
-		const Resolution::Vector& resolutions() const {return pResolutions;}
+		const Resolution::Vector& resolutions() const;
 
 		/*!
 		** \brief Get the recommended resolution for this device
 		**
 		** It is merely the highest available resolution
+		** \return A valid and not null resolution
 		*/
-		SmartPtr<Resolution> recommendedResolution() const {return *pResolutions.begin();}
+		Resolution::Ptr recommendedResolution() const;
+
+		/*!
+		** \brief Remove all resolutions
+		*/
+		void clear();
 
 		/*!
 		** \brief Get if a resolution is valid for this monitor
@@ -136,25 +150,24 @@ namespace Display
 		** \param rhs The resolution to check
 		** \return True if the resolution is valid, merely if this resolution is in the list
 		*/
-		bool resolutionIsValid(const SmartPtr<Resolution>& rhs) const;
+		bool resolutionIsValid(const Resolution::Ptr& rhs) const;
 
 		/*!
 		** \brief Get if this monitor is the primary display
 		*/
-		bool primary() const {return pPrimary;}
+		bool primary() const;
 
 		/*!
 		** \brief Get if the device is hardware accelerated
 		*/
-		bool hardwareAcceleration() const {return pHardwareAcceleration;}
+		bool hardwareAcceleration() const;
 
 		/*!
 		** \brief Get if the monitor is a builtin device
 		**
 		** \note Only available on Mac OS X v10.2 or later
 		*/
-		bool builtin() const {return pBuiltin;}
-
+		bool builtin() const;
 		//@}
 
 		/*!
@@ -163,13 +176,33 @@ namespace Display
 		** \param[in] r The resolution to add
 		** \internal It is a sorted descendant list. The first value must be the highest available value
 		*/
-		void addResolution(SmartPtr<Resolution>& r);
+		void add(const Resolution::Ptr& r);
+
+		/*!
+		** \brief Add some safe resolutions
+		*/
+		void addSafeResolutions();
+
+		//! \name Operators
+		//@{
+		//! Append a resolution
+		Monitor& operator += (Resolution* rhs);
+		//! Append a resolution
+		Monitor& operator += (const Resolution::Ptr& rhs);
+		//! Append a resolution
+		Monitor& operator << (Resolution* rhs);
+		//! Append a resolution
+		Monitor& operator << (const Resolution::Ptr& rhs);
+		//@}
+
+	private:
+		void internalAppendSafeResolutions();
 
 	protected:
 		//! The index of the monitor
 		Monitor::Handle pHandle;
-		//! Name of the current
-		String pName;
+		//! Name of the current monitor
+		String pProductName;
 		/*!
 		** \brief All resolutions
 		** \internal It is a sorted descendant list. The first value must be the highest available value
@@ -191,8 +224,9 @@ namespace Display
 
 
 } // namespace Display
-} // namespace Devices
-} // namespace System
+} // namespace Device
 } // namespace Yuni
 
-#endif // __YUNI_SYSTEM_DEVICES_DISPLAY_ABSTRACT_H__
+# include "monitor.hxx"
+
+#endif // __YUNI_DEVICE_DISPLAY_MONITOR_H__

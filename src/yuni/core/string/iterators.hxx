@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STRING_ITERATORS_HXX__
-# define __YUNI_TOOLBOX_STRING_ITERATORS_HXX__
+#ifndef __YUNI_CORE_STRING_ITERATORS_HXX__
+# define __YUNI_CORE_STRING_ITERATORS_HXX__
 
 /* !!! Do not use includes here *** */
 
@@ -558,4 +558,4 @@ private:
 
 
 
-#endif // __YUNI_TOOLBOX_STRING_ITERATORS_HXX__
+#endif // __YUNI_CORE_STRING_ITERATORS_HXX__

@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_DECORATORS_LOGS_TIME_H__
-# define __YUNI_TOOLBOX_DECORATORS_LOGS_TIME_H__
+#ifndef __YUNI_CORE_DECORATORS_LOGS_TIME_H__
+# define __YUNI_CORE_DECORATORS_LOGS_TIME_H__
 
 # include "../null.h"
 # include <time.h>
@@ -49,4 +49,4 @@ namespace Logs
 } // namespace Logs
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_DECORATORS_LOGS_TIME_H__
+#endif // __YUNI_CORE_DECORATORS_LOGS_TIME_H__

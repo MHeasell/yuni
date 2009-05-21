@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_GETOPT_PARSER_H__
-# define __YUNI_TOOLBOX_GETOPT_PARSER_H__
+#ifndef __YUNI_CORE_GETOPT_PARSER_H__
+# define __YUNI_CORE_GETOPT_PARSER_H__
 
 # include <list>
 # include <map>
@@ -10,7 +10,7 @@
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 namespace GetOpt
 {
@@ -270,10 +270,10 @@ namespace GetOpt
 
 
 } // namespace GetOpt
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 
 
 # include "parser.hxx"
 
-#endif // __YUNI_TOOLBOX_GETOPT_PARSER_H__
+#endif // __YUNI_CORE_GETOPT_PARSER_H__

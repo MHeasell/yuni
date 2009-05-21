@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STATIC_REF_TO_VALUE_H__
-# define __YUNI_TOOLBOX_STATIC_REF_TO_VALUE_H__
+#ifndef __YUNI_CORE_STATIC_REF_TO_VALUE_H__
+# define __YUNI_CORE_STATIC_REF_TO_VALUE_H__
 
 
 
@@ -39,4 +39,4 @@ namespace Static
 } // namespace Static
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_STATIC_REF_TO_VALUE_H__
+#endif // __YUNI_CORE_STATIC_REF_TO_VALUE_H__

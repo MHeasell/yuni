@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_RANDOM_DISTRIBUTION_H__
-# define __YUNI_TOOLBOX_MATH_RANDOM_DISTRIBUTION_H__
+#ifndef __YUNI_CORE_MATH_RANDOM_DISTRIBUTION_H__
+# define __YUNI_CORE_MATH_RANDOM_DISTRIBUTION_H__
 
 
 namespace Yuni
@@ -89,4 +89,4 @@ namespace Random
 
 # include "distribution.hxx"
 
-#endif // __YUNI_TOOLBOX_MATH_RANDOM_RANDOM_H__
+#endif // __YUNI_CORE_MATH_RANDOM_RANDOM_H__

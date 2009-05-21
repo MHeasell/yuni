@@ -1,6 +1,6 @@
 
 #include <yuni/yuni.h>
-#include <yuni/system/devices/display.h>
+#include <yuni/device/display/list.h>
 #include <iostream>
 
 
@@ -13,13 +13,18 @@ void title(const String& t)
 }
 
 
-void printMonitor(SmartPtr<System::Devices::Display::Monitor> monitor)
+void printMonitor(Device::Display::Monitor::Ptr monitor)
 {
+	if (!monitor)
+		return;
+
 	// The name of the monitor
-	std::cout << "Name: " << (monitor->name().empty() ? "<Unknown>" : monitor->name());
+	std::cout << "Product name: `"
+		<< (monitor->productName().empty() ? "<Unknown>" : monitor->productName())
+		<< "`\n";
 
 	// Its GUID
-	std::cout << ", guid:" << monitor->guid();
+	std::cout << "guid:" << monitor->guid();
 	if (monitor->primary())
 		std::cout << ", primary";
 	if (monitor->hardwareAcceleration())
@@ -27,32 +32,44 @@ void printMonitor(SmartPtr<System::Devices::Display::Monitor> monitor)
 	std::cout << std::endl;
 
 	// All resolutions
-	System::Devices::Display::Resolution::Vector::const_iterator it;
+	Device::Display::Resolution::Vector::const_iterator it;
 	for (it = monitor->resolutions().begin(); it != monitor->resolutions().end(); ++it)
 	{
-		// SmartPtr<System::Devices::Display::Resolution> resolution(*it);
-		std::cout << "  . " << (*it)->toString() << std::endl;
+		if (!(*it))
+			std::cout << "ERROR" << std::endl;
+		else
+			std::cout << "  . " << (*it)->toString() << "\n";
 	}
+
+	// Space
+	std::cout << std::endl;
 }
 
 
 
 int main(void)
 {
-	System::Devices::Display::List allDisplays;
+	// A list of monitors
+	Device::Display::List monitors;
 
-	// The primary monitor
-	title("The primary display");
-	printMonitor(allDisplays.primary());
+	// The list must be refreshed according the current Operating System settings
+	// Without any parameters, the resolutions are filtered to be higher than
+	// a minimal resolution (640x480x8 by default)
+	//
+	// To be sure to have exactly all resolutions, call `refresh()` like this :
+	// monitors.refresh(0, 0, 0);
+	//
+	monitors.refresh();
 
-	// All available monitors
+
+	// Displaying informations about all available monitors
 	title("All available displays, the primary display included");
-	System::Devices::Display::Monitor::Vector::const_iterator it;
-	for (it = allDisplays.monitors().begin(); it != allDisplays.monitors().end(); ++it)
+	Device::Display::List::const_iterator it;
+	for (it = monitors.begin(); it != monitors.end(); ++it)
 	{
+		// Print information about a single monitor
 		printMonitor(*it);
 	}
 
-	std::cout << std::endl;
 	return 0;
 }

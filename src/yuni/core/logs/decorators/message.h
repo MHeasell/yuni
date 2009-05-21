@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_LOGS_DECORATORS_MESSAGE_H__
-# define __YUNI_TOOLBOX_LOGS_DECORATORS_MESSAGE_H__
+#ifndef __YUNI_CORE_LOGS_DECORATORS_MESSAGE_H__
+# define __YUNI_CORE_LOGS_DECORATORS_MESSAGE_H__
 
 # include "../null.h"
 
@@ -42,4 +42,4 @@ namespace Logs
 } // namespace Logs
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_LOGS_DECORATORS_MESSAGE_H__
+#endif // __YUNI_CORE_LOGS_DECORATORS_MESSAGE_H__

@@ -4,7 +4,7 @@
 // --- Settings ---
 //
 
-$headerProtect = '__YUNI_TOOLBOX_FUNCTION_FUNCTION';
+$headerProtect = '__YUNI_CORE_FUNCTION_FUNCTION';
 $filename      = 'function'; // .h | .hxx
 
 

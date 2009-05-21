@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_MATH_H__
-# define __YUNI_TOOLBOX_MATH_MATH_H__
+#ifndef __YUNI_CORE_MATH_MATH_H__
+# define __YUNI_CORE_MATH_MATH_H__
 
 # include <stdlib.h>
 # include <math.h>
@@ -276,4 +276,4 @@ namespace Math
 
 # include "math.hxx"
 
-#endif // __YUNI_TOOLBOX_MATH_MATH_H__
+#endif // __YUNI_CORE_MATH_MATH_H__

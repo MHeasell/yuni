@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_UNIT_LUMINANCE_H__
-# define __YUNI_TOOLBOX_UNIT_LUMINANCE_H__
+#ifndef __YUNI_CORE_UNIT_LUMINANCE_H__
+# define __YUNI_CORE_UNIT_LUMINANCE_H__
 
 # include "unit.h"
 # include "define.h"
@@ -44,4 +44,4 @@ namespace Luminance
 
 # include "undef.h"
 
-#endif // __YUNI_TOOLBOX_UNIT_LUMINANCE_H__
+#endif // __YUNI_CORE_UNIT_LUMINANCE_H__
