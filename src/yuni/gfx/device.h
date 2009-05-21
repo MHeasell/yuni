@@ -4,8 +4,8 @@
 # include <iostream>
 # include "../yuni.h"
 # include "../core/smartptr/smartptr.h"
-# include "../system/devices/resolution.h"
-# include "../system/devices/monitor.h"
+# include "../device/display/resolution.h"
+# include "../device/display/monitor.h"
 
 
 
@@ -144,12 +144,12 @@ namespace Gfx
 		/*!
 		** \brief Monitor
 		*/
-		SmartPtr<System::Devices::Display::Monitor> monitor() const {return pMonitor;}
+		SmartPtr<Yuni::Device::Display::Monitor> monitor() const {return pMonitor;}
 
 		/*!
 		** \brief Set the monitor to use
 		*/
-		void monitor(const SmartPtr<System::Devices::Display::Monitor>& m);
+		void monitor(const SmartPtr<Yuni::Device::Display::Monitor>& m);
 
 		//@}
 
@@ -160,13 +160,13 @@ namespace Gfx
 		/*!
 		** \brief Screen resolution
 		*/
-		SmartPtr<System::Devices::Display::Resolution> resolution() const
+		SmartPtr<Yuni::Device::Display::Resolution> resolution() const
 		{return pResolution;}
 
 		/*!
 		** \brief Set the screen resolution
 		*/
-		void resolution(const SmartPtr<System::Devices::Display::Resolution>& r);
+		void resolution(const SmartPtr<Yuni::Device::Display::Resolution>& r);
 
 		/*!
 		** \brief Set the screen resolution
@@ -251,9 +251,9 @@ namespace Gfx
 		//! Type of the device
 		Type pType;
 		//! The monitor
-		SmartPtr<System::Devices::Display::Monitor> pMonitor;
+		SmartPtr<Yuni::Device::Display::Monitor> pMonitor;
 		//! The resolution
-		SmartPtr<System::Devices::Display::Resolution> pResolution;
+		SmartPtr<Yuni::Device::Display::Resolution> pResolution;
 		//! Fullscreen
 		bool pFullscreen;
 		//! Stencilbuffer

@@ -1,7 +1,6 @@
 
 #include "device.h"
-#include "../system/devices/display.h"
-
+#include "../device/display/list.h"
 
 
 namespace Yuni
@@ -114,13 +113,13 @@ namespace Gfx
 		return pFullscreen;
 	}
 
-	void Device::monitor(const SmartPtr<System::Devices::Display::Monitor>& m)
+	void Device::monitor(const SmartPtr<Yuni::Device::Display::Monitor>& m)
 	{
 		if (!pLocked && NULL != m)
 			pMonitor = m;
 	}
 
-	void Device::resolution(const SmartPtr<System::Devices::Display::Resolution>& r)
+	void Device::resolution(const SmartPtr<Yuni::Device::Display::Resolution>& r)
 	{
 		if (!pLocked && NULL != r)
 			pResolution = r;
@@ -129,7 +128,7 @@ namespace Gfx
 	void Device::resolution(const uint32 w, const uint32 h, const uint8 d)
 	{
 		if (!pLocked)
-			pResolution = new System::Devices::Display::Resolution(w, h, d);
+			pResolution = new Yuni::Device::Display::Resolution(w, h, d);
 	}
 
 
@@ -153,7 +152,7 @@ namespace Gfx
 		{
 			// The monitor does not seem valid. We'll grab the whole list and we
 			// will pick up the primary display as the default monitor
-			System::Devices::Display::List allDisplays;
+			Yuni::Device::Display::List allDisplays;
 			pMonitor = allDisplays.primary();
 		}
 		// The resolution must be valid for the given monitor

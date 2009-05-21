@@ -103,7 +103,7 @@ namespace Gfx
 		SmartPtr<Gfx::Device> newDevice(new Gfx::Device());
 		newDevice->fullscreen(fullscreenMode);
 		// The fail-safe resolution
-		SmartPtr<System::Devices::Display::Resolution> fsRes(new System::Devices::Display::Resolution(800, 600));
+		SmartPtr<Yuni::Device::Display::Resolution> fsRes(new Yuni::Device::Display::Resolution(800, 600));
 		newDevice->resolution(fsRes);
 
 		// Apply the new settings
