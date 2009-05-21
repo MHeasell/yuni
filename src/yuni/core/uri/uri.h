@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_URI_URI_H__
-# define __YUNI_TOOLBOX_URI_URI_H__
+#ifndef __YUNI_CORE_URI_URI_H__
+# define __YUNI_CORE_URI_URI_H__
 
 # include "../../yuni.h"
 # include <limits.h>
@@ -314,4 +314,4 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::Uri& u)
 //@}
 
 
-#endif // __YUNI_TOOLBOX_URI_URI_H__
+#endif // __YUNI_CORE_URI_URI_H__

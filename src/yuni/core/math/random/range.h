@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_RANDOM_RANGE_H__
-# define __YUNI_TOOLBOX_MATH_RANDOM_RANGE_H__
+#ifndef __YUNI_CORE_MATH_RANDOM_RANGE_H__
+# define __YUNI_CORE_MATH_RANDOM_RANGE_H__
 
 # include "../math.h"
 
@@ -91,4 +91,4 @@ namespace Random
 
 # include "range.hxx"
 
-#endif // __YUNI_TOOLBOX_MATH_RANDOM_RANGE_H__
+#endif // __YUNI_CORE_MATH_RANDOM_RANGE_H__

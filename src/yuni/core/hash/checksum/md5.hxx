@@ -1,5 +1,5 @@
-#ifndef __YUNI_HASH_MD5_HXX__
-# define __YUNI_HASH_MD5_HXX__
+#ifndef __YUNI_CORE_HASH_CHECKSUM_MD5_HXX__
+# define __YUNI_CORE_HASH_CHECKSUM_MD5_HXX__
 
 
 namespace Yuni
@@ -30,4 +30,4 @@ namespace Checksum
 } // namespace Hash
 } // namespace Yuni
 
-#endif // __YUNI_HASH_MD5_HXX__
+#endif // __YUNI_CORE_HASH_CHECKSUM_MD5_HXX__

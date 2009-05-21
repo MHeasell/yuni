@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_POLICIES_CONSTNESS_H__
-# define __YUNI_TOOLBOX_POLICIES_CONSTNESS_H__
+#ifndef __YUNI_CORE_POLICIES_CONSTNESS_H__
+# define __YUNI_CORE_POLICIES_CONSTNESS_H__
 
 # include "policies.h"
 
@@ -44,4 +44,4 @@ namespace Constness
 } // namespace Policy
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_POLICIES_CONSTNESS_H__
+#endif // __YUNI_CORE_POLICIES_CONSTNESS_H__

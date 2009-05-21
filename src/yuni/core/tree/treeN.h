@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_TREE_N_H__
-# define __YUNI_TOOLBOX_TREE_N_H__
+#ifndef __YUNI_CORE_TREE_N_H__
+# define __YUNI_CORE_TREE_N_H__
 
 # include "../../yuni.h"
 # include <list>
@@ -13,7 +13,7 @@
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 
 
@@ -24,7 +24,7 @@ namespace Toolbox
 	** N-ary trees. It behaves like a STL container class.
 	**
 	** \code
-	** class MyNode : public Toolbox::TreeN<MyNode, Policy::SingleThreaded>
+	** class MyNode : public Core::TreeN<MyNode, Policy::SingleThreaded>
 	** {
 	** public:
 	** 		MyNode()
@@ -74,7 +74,7 @@ namespace Toolbox
 	**
 	** Example of a pseudo XML tree :
 	** \code
-	** class MyXMLNode : public Yuni::Toolbox::TreeN<MyXMLNode>
+	** class MyXMLNode : public Yuni::Core::TreeN<MyXMLNode>
 	** {
 	** public:
 	**		MyXMLNode() :pValue() {}
@@ -590,10 +590,10 @@ namespace Toolbox
 
 
 
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 
 
 # include "treeN.hxx"
 
-#endif // __YUNI_TOOLBOX_TREE_N_H__
+#endif // __YUNI_CORE_TREE_N_H__

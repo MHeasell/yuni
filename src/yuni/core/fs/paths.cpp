@@ -14,7 +14,7 @@
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 namespace Paths
 {
@@ -213,6 +213,6 @@ namespace Paths
 
 
 } // namespace Paths
-} // namespace Toolbox
-} // namespace TA3D
+} // namespace Core
+} // namespace Yuni
 

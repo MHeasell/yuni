@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_H__
-# define __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_H__
+#ifndef __YUNI_CORE_SMARTPTR_SMARTPTR_H__
+# define __YUNI_CORE_SMARTPTR_SMARTPTR_H__
 
 # include "../../yuni.h"
 # include <list>
@@ -381,4 +381,4 @@ namespace Yuni
 
 # include "smartptr.hxx"
 
-#endif // __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_H__
+#endif // __YUNI_CORE_SMARTPTR_SMARTPTR_H__

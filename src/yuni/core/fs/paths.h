@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_FS_PATHS_H__
-# define __YUNI_TOOLBOX_FS_PATHS_H__
+#ifndef __YUNI_CORE_FS_PATHS_H__
+# define __YUNI_CORE_FS_PATHS_H__
 
 # include "../../yuni.h"
 # include "../string.h"
@@ -8,7 +8,7 @@
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 
 
@@ -186,7 +186,7 @@ namespace Paths
 
 
 } // namespace Paths
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_FS_PATHS_H__
+#endif // __YUNI_CORE_FS_PATHS_H__

@@ -1,7 +1,11 @@
 #ifndef __YUNI_COMMONS_H__
 # define __YUNI_COMMONS_H__
 
-/*
+/*!
+** \mainpage The Yuni Framework
+**
+** \section what What is Yuni ?
+**
 ** The Yuni project is a high-level cross-platform framework. This framework
 ** intend to provide the most complete set as possible of coherent API related
 ** to 3D programming, especially game programming. It intends to be a reliable and
@@ -9,17 +13,19 @@
 ** letting the user focus on its real work.
 **
 ** The Yuni project is connected with all those domains :
+** - Simulation
+** - Game development
+** - Artificial Intelligence, mainly on 3D objects
+** - Real-time and multi-user Collaboration
 ** - 3D graphics
 ** - Physics
+** - Threading / Parallel computing
 ** - 2D/3D User Interface in 3D context
 ** - 2D/3D Input devices
+** - Networking
 ** - Sound, playback of 2D/3D sounds
 ** - Scripting languages
-** - Artificial Intelligence, mainly on 3D objects
-** - Threading / Parallel computing
-** - Networking
-** - Real-time and multi-user Collaboration
-** - Any other domain related to multimedia or user interaction.
+** - And Any other domain related to multimedia or user interaction.
 */
 
 

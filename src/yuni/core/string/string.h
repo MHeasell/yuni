@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STRING_STRING_H__
-# define __YUNI_TOOLBOX_STRING_STRING_H__
+#ifndef __YUNI_CORE_STRING_STRING_H__
+# define __YUNI_CORE_STRING_STRING_H__
 
 # include "../../yuni.h"
 # include <stdlib.h>
@@ -100,7 +100,7 @@ namespace Yuni
 	**
 	** \warning This class is not thread-safe
 	** \warning This class is a final class, except if `YUNI_STRING_USE_VIRTUAL_DESTRUCTOR` is defined
-	** \ingroup Toolbox
+	** \ingroup Core
 	**
 	** \tparam C The type of a single character
 	** \tparam Chunk Size of a chunk
@@ -451,7 +451,7 @@ namespace Yuni
 		template<class IteratorClass>
 		StringBase(const IteratorClass& begin, const IteratorClass& end);
 
-		//! \Destructor
+		//! Destructor
 		YUNI_STRING_VIRTUAL_DESTRUCTOR ~StringBase();
 		//@}
 
@@ -1423,4 +1423,4 @@ inline Yuni::String operator + (const Yuni::StringBase<C1,Chunk1>& rhs, const Yu
 
 
 
-#endif // __YUNI_TOOLBOX_STRING_STRING_H__
+#endif // __YUNI_CORE_STRING_STRING_H__

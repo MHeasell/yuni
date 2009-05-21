@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_ANY_ANY_PRIVATE_H__
-#define __YUNI_TOOLBOX_ANY_ANY_PRIVATE_H__
+#ifndef __YUNI_CORE_ANY_ANY_PRIVATE_H__
+#define __YUNI_CORE_ANY_ANY_PRIVATE_H__
 
 #include "../static/types.h"
 
@@ -154,4 +154,4 @@ namespace Any
 } // namespace Yuni
 
 
-#endif /* !__YUNI_TOOLBOX_ANY_ANY_PRIVATE_H__ */
+#endif /* !__YUNI_CORE_ANY_ANY_PRIVATE_H__ */

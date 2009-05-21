@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_UNIT_HXX__
-# define __YUNI_TOOLBOX_UNIT_HXX__
+#ifndef __YUNI_CORE_UNIT_HXX__
+# define __YUNI_CORE_UNIT_HXX__
 
 
 
@@ -481,4 +481,4 @@ YUNI_UNIT_OPERATOR_FOR_ALLSTD_TYPES(*=)
 
 # undef YUNI_UNIT_FORMULA
 
-#endif // __YUNI_TOOLBOX_UNIT_HXX__
+#endif // __YUNI_CORE_UNIT_HXX__

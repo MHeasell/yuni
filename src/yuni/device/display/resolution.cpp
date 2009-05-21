@@ -6,17 +6,19 @@
 
 namespace Yuni
 {
-namespace System
-{
-namespace Devices
+namespace Device
 {
 namespace Display
 {
 
-	const uint32 Resolution::MinWidth  = 640;   // 640x480
-	const uint32 Resolution::MinHeight = 480;
+
+	const uint32 Resolution::MinWidth  = 320;   // 320x200
+	const uint32 Resolution::MinHeight = 200;
 	const uint32 Resolution::MaxWidth  = 2560;  // 2560x2048
 	const uint32 Resolution::MaxHeight = 2048;
+
+
+
 
 
 
@@ -58,6 +60,7 @@ namespace Display
 		return false;
 	}
 
+
 	bool Resolution::operator > (const Resolution& rhs) const
 	{
 		if (pWidth > rhs.pWidth)
@@ -82,10 +85,17 @@ namespace Display
 	}
 
 
+	Resolution& Resolution::operator = (const Resolution& p)
+	{
+		pWidth = p.pWidth;
+		pHeight = p.pHeight;
+		pBitsPerPixel = p.pBitsPerPixel;
+		return (*this);
+	}
+
+
 
 } // namespace Display
-} // namespace Devices
-} // namespace System
+} // namespace Device
 } // namespace Yuni
-
 

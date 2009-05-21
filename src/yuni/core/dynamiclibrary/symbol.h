@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_DYNAMICLIBRARY_SYMBOL_H__
-# define __YUNI_TOOLBOX_DYNAMICLIBRARY_SYMBOL_H__
+#ifndef __YUNI_CORE_DYNAMICLIBRARY_SYMBOL_H__
+# define __YUNI_CORE_DYNAMICLIBRARY_SYMBOL_H__
 
 /*!
 ** Header for Yuni::DynamicLibrary::Symbol, a class for representing an exported
@@ -71,4 +71,4 @@ namespace DynamicLibrary
 
 # include "symbol.hxx"
 
-#endif // __YUNI_TOOLBOX_DYNAMICLIBRARY_SYMBOL_H__
+#endif // __YUNI_CORE_DYNAMICLIBRARY_SYMBOL_H__

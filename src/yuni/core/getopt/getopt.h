@@ -9,7 +9,7 @@
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 
 /*!
@@ -19,7 +19,7 @@ namespace GetOpt
 {
 
 } // namespace GetOpt
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 
 #endif // __GETOPT_H__

@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_HXX__
-# define __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_HXX__
+#ifndef __YUNI_CORE_SMARTPTR_SMARTPTR_HXX__
+# define __YUNI_CORE_SMARTPTR_SMARTPTR_HXX__
 
 
 namespace Yuni
@@ -327,4 +327,4 @@ namespace Yuni
 
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_SMARTPTR_SMARTPTR_HXX__
+#endif // __YUNI_CORE_SMARTPTR_SMARTPTR_HXX__

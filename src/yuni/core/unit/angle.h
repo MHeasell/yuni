@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_UNIT_ANGLE_H__
-# define __YUNI_TOOLBOX_UNIT_ANGLE_H__
+#ifndef __YUNI_CORE_UNIT_ANGLE_H__
+# define __YUNI_CORE_UNIT_ANGLE_H__
 
 # include "unit.h"
 # include "define.h"
@@ -45,4 +45,4 @@ namespace Angle
 
 # include "undef.h"
 
-#endif/// __YUNI_TOOLBOX_UNIT_ANGLE_H__
+#endif/// __YUNI_CORE_UNIT_ANGLE_H__

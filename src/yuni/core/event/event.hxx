@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_EVENT_EVENT_HXX__
-# define __YUNI_TOOLBOX_EVENT_EVENT_HXX__
+#ifndef __YUNI_CORE_EVENT_EVENT_HXX__
+# define __YUNI_CORE_EVENT_EVENT_HXX__
 
 # include <assert.h>
 
@@ -80,4 +80,4 @@ namespace Event
 } // namespace Event
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_EVENT_EVENT_HXX__
+#endif // __YUNI_CORE_EVENT_EVENT_HXX__

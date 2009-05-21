@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STRING_STRING_TRAITS_TRAITS_HXX__
-# define __YUNI_TOOLBOX_STRING_STRING_TRAITS_TRAITS_HXX__
+#ifndef __YUNI_CORE_STRING_STRING_TRAITS_TRAITS_HXX__
+# define __YUNI_CORE_STRING_STRING_TRAITS_TRAITS_HXX__
 
 # include <stdarg.h>
 # include <stdio.h>
@@ -1353,4 +1353,4 @@ namespace StringImpl
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_STRING_STRING_TRAITS_TRAITS_HXX__
+#endif // __YUNI_CORE_STRING_STRING_TRAITS_TRAITS_HXX__

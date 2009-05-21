@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_VARIANT_VARIANT_H__
-# define __YUNI_TOOLBOX_VARIANT_VARIANT_H__
+#ifndef __YUNI_CORE_VARIANT_VARIANT_H__
+# define __YUNI_CORE_VARIANT_VARIANT_H__
 
 # include "../../yuni.h"
 # include "../string.h"
@@ -31,7 +31,7 @@ namespace Yuni
 	** std::cout << v.to<String>() << std::endl;
 	** \endcode
 	**
-	** \ingroup Toolbox
+	** \ingroup Core
 	*/
 	class Variant
 	{
@@ -107,4 +107,4 @@ namespace Yuni
 # include "variant.hxx"
 
 
-#endif // __YUNI_TOOLBOX_VARIANT_VARIANT_H__
+#endif // __YUNI_CORE_VARIANT_VARIANT_H__

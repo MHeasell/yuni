@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_EVENT_DEFINES_H__
-# define __YUNI_TOOLBOX_EVENT_DEFINES_H__
+#ifndef __YUNI_CORE_EVENT_DEFINES_H__
+# define __YUNI_CORE_EVENT_DEFINES_H__
 
 
 
@@ -92,4 +92,4 @@
 
 
 
-#endif // __YUNI_TOOLBOX_EVENT_DEFINES_H__
+#endif // __YUNI_CORE_EVENT_DEFINES_H__

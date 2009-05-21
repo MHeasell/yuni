@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_LOGS_LOGS_HXX__
-# define __YUNI_TOOLBOX_LOGS_LOGS_HXX__
+#ifndef __YUNI_CORE_LOGS_LOGS_HXX__
+# define __YUNI_CORE_LOGS_LOGS_HXX__
 
 # include "../static/assert.h"
 
@@ -171,4 +171,4 @@ namespace Logs
 } // namespace Yuni
 
 
-#endif // __YUNI_TOOLBOX_LOGS_LOGS_HXX__
+#endif // __YUNI_CORE_LOGS_LOGS_HXX__

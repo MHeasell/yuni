@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STRING_HXX__
-# define __YUNI_TOOLBOX_STRING_HXX__
+#ifndef __YUNI_CORE_STRING_HXX__
+# define __YUNI_CORE_STRING_HXX__
 
 # include <assert.h>
 # include <iostream>
@@ -2154,4 +2154,4 @@ namespace Yuni
 
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_STRING_HXX__
+#endif // __YUNI_CORE_STRING_HXX__

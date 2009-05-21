@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_LOG_H__
-# define __YUNI_TOOLBOX_MATH_LOG_H__
+#ifndef __YUNI_CORE_MATH_LOG_H__
+# define __YUNI_CORE_MATH_LOG_H__
 
 # include "math.h"
 # include <assert.h>
@@ -51,4 +51,4 @@ namespace Math
 
 # include "log.hxx"
 
-#endif // __YUNI_TOOLBOX_MATH_LOG_H__
+#endif // __YUNI_CORE_MATH_LOG_H__

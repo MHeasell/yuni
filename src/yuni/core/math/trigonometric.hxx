@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_TRIGONOMETRIC_HXX__
-# define __YUNI_TOOLBOX_MATH_TRIGONOMETRIC_HXX__
+#ifndef __YUNI_CORE_MATH_TRIGONOMETRIC_HXX__
+# define __YUNI_CORE_MATH_TRIGONOMETRIC_HXX__
 
 
 
@@ -201,4 +201,4 @@ namespace Math
 } // namespace Math
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_MATH_TRIGONOMETRIC_HXX__
+#endif // __YUNI_CORE_MATH_TRIGONOMETRIC_HXX__

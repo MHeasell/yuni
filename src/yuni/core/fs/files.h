@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_FS_FILES_H__
-# define __YUNI_TOOLBOX_FS_FILES_H__
+#ifndef __YUNI_CORE_FS_FILES_H__
+# define __YUNI_CORE_FS_FILES_H__
 
 # include "../../yuni.h"
 # include "../string.h"
@@ -9,7 +9,7 @@
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 namespace Paths
 {
@@ -136,7 +136,7 @@ namespace Files
 	** first dot segments (`..` only) can not be removed to preserve the meaning
 	** of the data.
 	** Any final slash will be removed.
-	** 
+	**
 	** \param filename The filename
 	** \return A new string string with dot segments removed
 	*/
@@ -147,7 +147,7 @@ namespace Files
 
 } // namespace Files
 } // namespace Paths
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_FS_FILES_H__
+#endif // __YUNI_CORE_FS_FILES_H__

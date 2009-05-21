@@ -214,7 +214,7 @@ namespace Yuni
 				pMustRemoveDotSegments = ('.' == infos.path.last());
 			}
 			if (pMustRemoveDotSegments)
-				infos.path = Toolbox::Paths::Files::RemoveDotSegmentsFromUnixFilename(infos.path);
+				infos.path = Core::Paths::Files::RemoveDotSegmentsFromUnixFilename(infos.path);
 		}
 		return true;
 	}

@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_LOGS_NULL_H__
-# define __YUNI_TOOLBOX_LOGS_NULL_H__
+#ifndef __YUNI_CORE_LOGS_NULL_H__
+# define __YUNI_CORE_LOGS_NULL_H__
 
 # include "../../yuni.h"
 # include "../string.h"
@@ -51,4 +51,4 @@ namespace Logs
 } // namespace Yuni
 
 
-#endif // __YUNI_TOOLBOX_LOGS_NULL_H__
+#endif // __YUNI_CORE_LOGS_NULL_H__

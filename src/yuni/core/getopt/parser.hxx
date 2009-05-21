@@ -1,9 +1,9 @@
-#ifndef __YUNI_TOOLBOX_GETOPT_PARSER_HXX__
-# define __YUNI_TOOLBOX_GETOPT_PARSER_HXX__
+#ifndef __YUNI_CORE_GETOPT_PARSER_HXX__
+# define __YUNI_CORE_GETOPT_PARSER_HXX__
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 namespace GetOpt
 {
@@ -22,8 +22,8 @@ namespace GetOpt
 
 
 } // namespace GetOpt
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 
 
-#endif // __YUNI_TOOLBOX_GETOPT_PARSER_HXX__
+#endif // __YUNI_CORE_GETOPT_PARSER_HXX__

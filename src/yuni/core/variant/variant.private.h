@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_VARIANT_VARIANT_PRIVATE_H__
-# define __YUNI_TOOLBOX_VARIANT_VARIANT_PRIVATE_H__
+#ifndef __YUNI_CORE_VARIANT_VARIANT_PRIVATE_H__
+# define __YUNI_CORE_VARIANT_VARIANT_PRIVATE_H__
 
 # include <sstream>
 # include "../static/types.h"
@@ -171,4 +171,4 @@ namespace Variant
 
 #include "variant.private.hxx"
 
-#endif /* !__YUNI_TOOLBOX_VARIANT_VARIANT_PRIVATE_H__ */
+#endif /* !__YUNI_CORE_VARIANT_VARIANT_PRIVATE_H__ */

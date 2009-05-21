@@ -27,35 +27,35 @@
 **
 **
 **
-** \defgroup Toolbox Toolbox
+** \defgroup Core Core
 **
 **
 **
 ** \defgroup Units Units of measurement
-** \ingroup Toolbox
+** \ingroup Core
 **
 **
 ** \defgroup Endianness Endianness
-** \ingroup Toolbox
+** \ingroup Core
 **
 ** \defgroup PathsAndFiles  Paths and Files handling
-** \ingroup Toolbox
+** \ingroup Core
 **
 ** \defgroup Exceptions Exceptions handling
-** \ingroup Toolbox
+** \ingroup Core
 **
 ** \defgroup Math Common mathematical operations and transformations
-** \ingroup Toolbox
+** \ingroup Core
 **
 ** \defgroup Threads Threading support
-** \ingroup Toolbox
+** \ingroup Core
 **
 ** \defgroup Policies Policies (policy-based programming)
-** \ingroup Toolbox
+** \ingroup Core
 **
 **
 ** \defgroup Events Events
-** \ingroup Toolbox
+** \ingroup Core
 **
 **
 ** \defgroup ui User Interface

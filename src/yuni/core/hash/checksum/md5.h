@@ -1,5 +1,5 @@
-#ifndef __YUNI_HASH_MD5_H__
-# define __YUNI_HASH_MD5_H__
+#ifndef __YUNI_CORE_HASH_CHECKSUM_MD5_H__
+# define __YUNI_CORE_HASH_CHECKSUM_MD5_H__
 
 # include "../../../yuni.h"
 # include "checksum.h"
@@ -70,7 +70,7 @@ namespace Checksum
 		//! Default constructor
 		MD5();
 		//! Destructor
-		virtual ~MD5();
+		virtual ~MD5() {}
 		//@}
 
 		virtual const String& fromRawData(const void* rawdata, uint64 size = AutoDetectNullChar);
@@ -80,10 +80,11 @@ namespace Checksum
 
 
 
+
 } // namespace Checksum
 } // namespace Hash
 } // namespace Yuni
 
 # include "md5.hxx"
 
-#endif // __YUNI_HASH_MD5_H__
+#endif // __YUNI_CORE_HASH_CHECKSUM_MD5_H__

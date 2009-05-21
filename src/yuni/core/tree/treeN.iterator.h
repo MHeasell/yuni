@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_TREE_N_ITERATOR_H__
-# define __YUNI_TOOLBOX_TREE_N_ITERATOR_H__
+#ifndef __YUNI_CORE_TREE_N_ITERATOR_H__
+# define __YUNI_CORE_TREE_N_ITERATOR_H__
 
 // !!! Do not use includes here  !!!
 
@@ -8,7 +8,7 @@
 class iterator
 {
 public:
-	YUNI_TOOLBOX_TREE_N_ITERATOR_PRE(iterator);
+	YUNI_CORE_TREE_N_ITERATOR_PRE(iterator);
 
 public:
 	//! \name Constructors
@@ -33,14 +33,14 @@ public:
 		return *this;
 	}
 
-	YUNI_TOOLBOX_TREE_N_ITERATOR_COMMON_PUBLIC_METHODS
+	YUNI_CORE_TREE_N_ITERATOR_COMMON_PUBLIC_METHODS
 
 protected:
-	YUNI_TOOLBOX_TREE_N_ITERATOR_PROTECTED;
+	YUNI_CORE_TREE_N_ITERATOR_PROTECTED;
 
 }; // name iterator
 
 
 
 
-#endif // __YUNI_TOOLBOX_TREE_N_ITERATOR_H__
+#endif // __YUNI_CORE_TREE_N_ITERATOR_H__

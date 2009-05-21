@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_ANY_ANY_HXX__
-#define __YUNI_TOOLBOX_ANY_ANY_HXX__
+#ifndef __YUNI_CORE_ANY_ANY_HXX__
+#define __YUNI_CORE_ANY_ANY_HXX__
 
 namespace Yuni
 {
@@ -82,4 +82,4 @@ namespace Yuni
 
 }
 
-#endif /* !__YUNI_TOOLBOX_ANY_ANY_HXX__ */
+#endif /* !__YUNI_CORE_ANY_ANY_HXX__ */

@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_PREPROCESSOR_ENUM_H__
-# define __YUNI_TOOLBOX_PREPROCESSOR_ENUM_H__
+#ifndef __YUNI_CORE_PREPROCESSOR_ENUM_H__
+# define __YUNI_CORE_PREPROCESSOR_ENUM_H__
 
 # include "std.h"
 
@@ -1581,4 +1581,4 @@
 
 
 
-#endif /* __YUNI_TOOLBOX_PREPROCESSOR_ENUM_H__ */
+#endif /* __YUNI_CORE_PREPROCESSOR_ENUM_H__ */

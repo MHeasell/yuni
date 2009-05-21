@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_UNIT_H__
-# define __YUNI_TOOLBOX_UNIT_H__
+#ifndef __YUNI_CORE_UNIT_H__
+# define __YUNI_CORE_UNIT_H__
 
 # include <ostream>
 # include "../../yuni.h"
@@ -497,4 +497,4 @@ inline const Yuni::Unit::Abstract<Q,Child, T,P,N> operator / (const Yuni::Unit::
 
 
 
-#endif // __YUNI_TOOLBOX_UNIT_H__
+#endif // __YUNI_CORE_UNIT_H__

@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_FUNCTION_FUNCTION_HXX__
-# define __YUNI_TOOLBOX_FUNCTION_FUNCTION_HXX__
+#ifndef __YUNI_CORE_FUNCTION_FUNCTION_HXX__
+# define __YUNI_CORE_FUNCTION_FUNCTION_HXX__
 
 
 /*!
@@ -2927,4 +2927,4 @@ namespace Function
 } // namespace Function
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_FUNCTION_FUNCTION_HXX__
+#endif // __YUNI_CORE_FUNCTION_FUNCTION_HXX__

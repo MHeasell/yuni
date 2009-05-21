@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_LOGS_HANDLERS_STD_COUT_H__
-# define __YUNI_TOOLBOX_LOGS_HANDLERS_STD_COUT_H__
+#ifndef __YUNI_CORE_LOGS_HANDLERS_STD_COUT_H__
+# define __YUNI_CORE_LOGS_HANDLERS_STD_COUT_H__
 
 # include "../null.h"
 # include <iostream>
@@ -61,4 +61,4 @@ namespace Logs
 } // namespace Logs
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_LOGS_HANDLERS_STD_COUT_H__
+#endif // __YUNI_CORE_LOGS_HANDLERS_STD_COUT_H__

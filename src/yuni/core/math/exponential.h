@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_EXPONENTIAL_H__
-# define __YUNI_TOOLBOX_MATH_EXPONENTIAL_H__
+#ifndef __YUNI_CORE_MATH_EXPONENTIAL_H__
+# define __YUNI_CORE_MATH_EXPONENTIAL_H__
 
 # include "math.h"
 
@@ -21,4 +21,4 @@ namespace Math
 
 # include "exponential.hxx"
 
-#endif // __YUNI_TOOLBOX_MATH_EXPONENTIAL_H__
+#endif // __YUNI_CORE_MATH_EXPONENTIAL_H__

@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STATIC_REMOVE_H__
-# define __YUNI_TOOLBOX_STATIC_REMOVE_H__
+#ifndef __YUNI_CORE_STATIC_REMOVE_H__
+# define __YUNI_CORE_STATIC_REMOVE_H__
 
 
 namespace Yuni
@@ -72,11 +72,13 @@ namespace Remove
 	};
 
 
-} // namespace Remove
 
+
+
+} // namespace Remove
 } // namespace Static
 } // namespaec Yuni
 
 
 
-#endif // __YUNI_TOOLBOX_STATIC_REMOVE_H__
+#endif // __YUNI_CORE_STATIC_REMOVE_H__

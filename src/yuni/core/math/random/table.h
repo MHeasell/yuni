@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_MATH_RANDOM_TABLE_H__
-# define __YUNI_TOOLBOX_MATH_RANDOM_TABLE_H__
+#ifndef __YUNI_CORE_MATH_RANDOM_TABLE_H__
+# define __YUNI_CORE_MATH_RANDOM_TABLE_H__
 
 # include "../math.h"
 # include "../../policies/threading.h"
@@ -137,4 +137,4 @@ namespace Random
 
 # include "table.hxx"
 
-#endif // __YUNI_TOOLBOX_MATH_RANDOM_TABLE_H__
+#endif // __YUNI_CORE_MATH_RANDOM_TABLE_H__

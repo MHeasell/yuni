@@ -12,7 +12,7 @@ namespace Gfx
 
 	ImplicitSurface::~ImplicitSurface()
 	{
-		Yuni::Toolbox::STL::DeleteAndClear<ImplicitSurface, SubSurfaces>(pSubSurfaces);
+		Yuni::Core::STL::DeleteAndClear<ImplicitSurface, SubSurfaces>(pSubSurfaces);
 	}
 
 

@@ -1,12 +1,12 @@
-#ifndef __YUNI_TOOLBOX_GETOPT_CONVERTIONS_H__
-# define __YUNI_TOOLBOX_GETOPT_CONVERTIONS_H__
+#ifndef __YUNI_CORE_GETOPT_CONVERTIONS_H__
+# define __YUNI_CORE_GETOPT_CONVERTIONS_H__
 
 # include "../string.h"
 
 
 namespace Yuni
 {
-namespace Toolbox
+namespace Core
 {
 namespace GetOpt
 {
@@ -31,7 +31,7 @@ namespace GetOpt
 
 
 } // namespace GetOpt
-} // namespace Toolbox
+} // namespace Core
 } // namespace Yuni
 
-#endif // __YUNI_TOOLBOX_GETOPT_CONVERTIONS_H__
+#endif // __YUNI_CORE_GETOPT_CONVERTIONS_H__

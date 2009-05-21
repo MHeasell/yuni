@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_STATIC_IF_H__
-# define __YUNI_TOOLBOX_STATIC_IF_H__
+#ifndef __YUNI_CORE_STATIC_IF_H__
+# define __YUNI_CORE_STATIC_IF_H__
 
 # include "remove.h"
 
@@ -49,4 +49,4 @@ namespace Static
 
 
 
-#endif // __YUNI_TOOLBOX_STATIC_IF_H__
+#endif // __YUNI_CORE_STATIC_IF_H__

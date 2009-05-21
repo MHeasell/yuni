@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_UNIT_LENGTH_METRIC_H__
-# define __YUNI_TOOLBOX_UNIT_LENGTH_METRIC_H__
+#ifndef __YUNI_CORE_UNIT_LENGTH_METRIC_H__
+# define __YUNI_CORE_UNIT_LENGTH_METRIC_H__
 
 # include "length.h"
 # include "../unit.h"
@@ -89,4 +89,4 @@ namespace Length
 
 # include "../undef.h"
 
-#endif/// __YUNI_TOOLBOX_UNIT_LENGTH_METRIC_H__
+#endif/// __YUNI_CORE_UNIT_LENGTH_METRIC_H__

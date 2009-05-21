@@ -1,5 +1,5 @@
-#ifndef __YUNI_TOOLBOX_TREE_N_ITERATOR_DEF_H__
-# define __YUNI_TOOLBOX_TREE_N_ITERATOR_DEF_H__
+#ifndef __YUNI_CORE_TREE_N_ITERATOR_DEF_H__
+# define __YUNI_CORE_TREE_N_ITERATOR_DEF_H__
 
 
 /*!
@@ -11,7 +11,7 @@
 
 
 
-# define YUNI_TOOLBOX_TREE_N_ITERATOR_PRE(CLASS)     \
+# define YUNI_CORE_TREE_N_ITERATOR_PRE(CLASS)     \
 		\
 		/*! Itself */ \
 		typedef CLASS IteratorType;  \
@@ -35,7 +35,7 @@
 
 
 
-# define YUNI_TOOLBOX_TREE_N_ITERATOR_COMMON_PUBLIC_METHODS  \
+# define YUNI_CORE_TREE_N_ITERATOR_COMMON_PUBLIC_METHODS  \
 		\
 		NodeT& operator * () {return pNode;}  \
 		const NodeT& operator * () const {return pNode;}  \
@@ -120,7 +120,7 @@
 
 
 
-# define YUNI_TOOLBOX_TREE_N_ITERATOR_PROTECTED  \
+# define YUNI_CORE_TREE_N_ITERATOR_PROTECTED  \
 		/*! The current node */ \
 		NodeT  pNode
 
@@ -128,4 +128,4 @@
 
 
 
-#endif // __YUNI_TOOLBOX_TREE_N_ITERATOR_DEF_H__
+#endif // __YUNI_CORE_TREE_N_ITERATOR_DEF_H__
