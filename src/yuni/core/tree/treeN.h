@@ -141,13 +141,11 @@ namespace Core
 	** \tparam T The real type of the tree class
 	** \tparam TP The Threading policy
 	** \tparam ChckP  The Checking policy
-	** \tparam TrckP  The Tracking policy
 	** \tparam ConvP  The Conversion policy
 	*/
 	template<class T,                                                // The original type
 		template<class> class TP     = Policy::ObjectLevelLockable,  // The threading policy
 		template <class> class ChckP = Policy::Checking::None,       // Checking policy
-		template <class> class TrckP = Policy::Tracking::None,       // Tracking policy
 		class ConvP			         = Policy::Conversion::Allow     // Conversion policy
 		>
 	class TreeN : public TP< TreeN<T,TP> >
@@ -156,7 +154,7 @@ namespace Core
 		//! The real type
 		typedef T Type;
 		//! Node
-		typedef TreeN<T,TP,ChckP,TrckP,ConvP> Node;
+		typedef TreeN<T,TP,ChckP,ConvP> Node;
 
 		//! The threading policy
 		typedef TP<Node>  ThreadingPolicy;
