@@ -56,7 +56,12 @@ namespace Math
 	** \brief Get if two values are equal
 	** \ingroup Math
 	*/
-	template<typename U> inline bool Equals(U a, U b);
+	template<typename U> bool Equals(U a, U b);
+
+	/*!
+	** \brief Get if a value is equals to zero
+	*/
+	template<typename U> bool Zero(U a);
 
 
 	/*!

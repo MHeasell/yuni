@@ -88,6 +88,28 @@ namespace Math
 
 
 
+	template <typename U> inline bool Zero(U a)
+	{
+		return (0 == a);
+	}
+
+	template<> inline bool Zero<float>(float a)
+	{
+		return ::fabsf(a) < YUNI_EPSILON;
+	}
+
+	template<> inline bool Zero<double>(double a)
+	{
+		return ::fabs(a) < YUNI_EPSILON;
+	}
+
+	template<> inline bool Zero<long double>(long double a)
+	{
+		return ::fabsl(a) < YUNI_EPSILON;
+	}
+
+
+
 	inline float SquareRoot(const float x)
 	{
 		return ::sqrtf(x);

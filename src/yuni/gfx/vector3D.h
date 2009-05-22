@@ -2,7 +2,7 @@
 # define __YUNI_GFX_VECTOR3D_H__
 
 # include <iostream>
-# include "../core/math.h"
+# include "../core/math/math.h"
 
 
 
@@ -21,30 +21,54 @@ namespace Gfx
 	{
 	public:
 		/*!
-		** \brief Calculate the mean between two points
+		** \brief Compute the mean between two arbitrary vectors
 		**
-		** \param p1 First point
-		** \param p2 Second point
+		** \param p1 The first vector
+		** \param p2 The second vector
 		** \return A new instance of Vector3D
 		*/
-		template<typename U, typename V>
-		static Vector3D<T>& Mean(const Vector3D<U>& p1, const Vector3D<V>& p2)
-		{return Vector3D<T>().mean(p1, p2);}
+		static Vector3D Mean(const Vector3D& p1, const Vector3D& p2);
 
+		/*!
+		** \brief Compute the magnitude of the addition of two arbitrary vectors
+		**
+		** \code
+		** Yuni::Gfx::Vector3D<> a(1.,   2,4, 6.9);
+		** Yuni::Gfx::Vector3D<> b(4.1., 0.2, 3.1);
+		**
+		** // This way is faster
+		** std::cout << "Magnitude : " << Yuni::Gfx::Vector3D<>::Magnitude(a, b) << std::endl;
+		** // than
+		** std::cout << "Magnitude : " << (a + b).magnitude() << std::endl;
+		** \endcode
+		** \param p1 The first vector
+		** \param p2 The second vector
+		** \return The magnitude of the addition of the 2 vectors
+		*/
+		static T Magnitude(const Vector3D& p1, const Vector3D& p2);
+		
+		/*!
+		** \brief Compute the dot product of two arbitrary vectors
+		**
+		** \param p1 The first vector
+		** \param p2 The second vector
+		** \return The magnitude of the addition of the 2 vectors
+		*/
+		static T DotProduct(const Vector3D& p1, const Vector3D& p2);
+
+		/*!
+		** \brief Compute the cross product of two arbitrary vectors
+		**
+		** \param p1 The first vector
+		** \param p2 The second vector
+		*/
+		static Vector3D CrossProduct(const Vector3D& p1, const Vector3D& p2);
+	
 	public:
 		//! \name Constructors
 		//@{
-
 		//! Default constructor
-		Vector3D() : x(0), y(0), z(0) {}
-
-		/*!
-		** \brief Constructor
-		** \param x1 The default X coordinate
-		** \param y1 The default Y coordinate
-		*/
-		template<typename U, typename V>
-		Vector3D(const U x1, const V y1): x((T)x1), y((T)y1), z(T()) {}
+		Vector3D();
 
 		/*!
 		** \brief Constructor
@@ -53,53 +77,30 @@ namespace Gfx
 		** \param z1 The default Z coordinate
 		*/
 		template<typename U, typename V, typename W>
-		Vector3D(const U x1, const V y1, const W z1): x((T)x1), y((T)y1), z((T)z1) {}
+		Vector3D(const U x1, const V y1, const W z1 = W());
 
 		//! Constructor by copy
-		template<typename U>
-		Vector3D(const Vector3D<U>& v) : x((T)v.x), y((T)v.y), z((T)v.z) {}
+		Vector3D(const Vector3D& rhs);
 
-		//@} // Constructors
+		//! Constructor by copy
+		template<typename U> Vector3D(const Vector3D<U>& v);
+		//@}
 
 
 		//! \name Reset the coordinates
 		//@{
 		//! Reset the vector to the null vector
-		Vector3D<T>& reset() {x = y = z = T(); return *this;}
-		//@}
-
-
-		//! \name Add coordinates
-		//@{
-
-		/*!
-		** \brief Add coordinates to a vector
-		**
-		** \param x1 The X coordinate to add
-		** \param y1 The Y coordinate to add
-		** \param z1 The Z coordinate to add
-		*/
-		template<typename U, typename V, typename W>
-		void add(const U x1, const V y1, const W z1) { x += (T)x1; y += (T)y1; z += (T)z1; }
-		/*!
-		** \brief Add two vectors
-		** \param p The new coordinates
-		*/
-		template<typename U>
-		void add(const Vector3D<U>& p) { x += (T)p.x; y += (T)p.y; z += (T)p.z; }
-
+		Vector3D<T>& reset();
 		//@}
 
 
 		//! \name Translation
 		//@{
-
 		/*!
 		** \brief Add the same value for all coordinates to the vector
 		** \param k The value to add to all coordinates
 		*/
-		template<typename U>
-		void translate(const U k) { x += (T)k; y += (T)k; z += (T)k; }
+		template<typename U> void translate(const U k);
 		/*!
 		** \brief Translate the point with relative coordinates
 		** \param x1 The value to add to the X coordinate
@@ -107,20 +108,45 @@ namespace Gfx
 		** \param z1 The value to add to the Z coordinate
 		*/
 		template<typename U, typename V, typename W>
-		void translate(const U x1, const V y1, const W z1) { x += (T)x1; y += (T)y1; z += (T)z1; }
+		void translate(const U x1, const V y1, const W z1);
 		/*!
 		** \brief Translate the point with relative coordinates from another Point
 		** \param p The values to add to the coordinates
 		*/
-		template<typename U>
-		void translate(const Vector3D<U>& p) { x += (T)p.x; y += (T)p.y; z += (T)p.z; }
+		template<typename U> void translate(const Vector3D<U>& p);
+		//@}
 
-		//@} Translation
+
+		//! \name Components 
+		//@{
+		/*!
+		** \brief Get if the vector is null
+		*/
+		bool null() const;
+
+		/*!
+		** \brief Compute the magnitude of the vector
+		*/
+		T magnitude() const;
+
+		/*!
+		** \brief Compute the dot product with another arbitrary vector
+		*/
+		T dotProduct(const Vector3D& rhs) const;
+
+		/*!
+		** \brief Normalize the vector (coefficient = 1.)
+		*/
+		Vector3D& normalize();
+		/*!
+		** \brief Normalize the vector with a different coefficient
+		*/
+		Vector3D& normalize(const T coeff);
+		//@}
 
 
 		//! \name Mean
 		//@{
-
 		/*!
 		** \brief Calculate the mean between two points
 		**
@@ -128,13 +154,7 @@ namespace Gfx
 		**
 		** \param p Point to compute the mean with
 		*/
-		template<typename U>
-		void mean(const Vector3D<U>& p)
-		{
-			x = (T) ((x + p.x) / 2.0f);
-			y = (T) ((y + p.y) / 2.0f);
-			z = (T) ((z + p.z) / 2.0f);
-		}
+		template<typename U> Vector3D& mean(const Vector3D<U>& p);
 
 		/*!
 		** \brief Calculate the mean between two points
@@ -145,21 +165,12 @@ namespace Gfx
 		** \param p2 Second point to compute the mean with
 		** \return Always *this
 		*/
-		template<typename U, typename V>
-		Vector3D<T>& mean(const Vector3D<U>& p1, const Vector3D<V>& p2)
-		{
-			x = (T) ((p1.x + p2.x) / 2.0f);
-			y = (T) ((p1.y + p2.y) / 2.0f);
-			z = (T) ((p1.z + p2.z) / 2.0f);
-			return *this;
-		}
-
+		template<typename U, typename V> Vector3D<T>& mean(const Vector3D<U>& p1, const Vector3D<V>& p2);
 		//@}
 
 
 		//! \name Operators
 		//{
-
 		/*!
 		** \brief Reset all coordinates
 		**
@@ -169,17 +180,13 @@ namespace Gfx
 		** \see move()
 		*/
 		template<typename U, typename V, typename W>
-		void operator () (const U x1, const V y1, const W z1) { x = (T)x1; y = (T)y1; z = (T)z1; }
+		void operator () (const U x1, const V y1, const W z1);
 		/*!
 		** \brief Copy all coordinates from another vector
 		**
 		** \param v The coordinates to copy
-		**
-		** \see ()
 		*/
-		template<typename U>
-		void operator () (const Vector3D<U>& v) { x = (T)v.x; y = (T)v.y; z = (T)v.z; }
-
+		template<typename U> void operator () (const Vector3D<U>& v);
 
 		/*!
 		** \brief Translate the point with the same value for all coordinates
@@ -189,8 +196,7 @@ namespace Gfx
 		**
 		** \see translate()
 		*/
-		template<typename U>
-		Vector3D<T>& operator += (const U k) { x += (T)k; y += (T)k; z += (T)k; return (*this); }
+		Vector3D<T>& operator += (const T k);
 		/*!
 		** \brief Translate the point with relative coordinates
 		**
@@ -199,8 +205,46 @@ namespace Gfx
 		**
 		** \see translate()
 		*/
-		template<typename U>
-		Vector3D<T>& operator += (const Vector3D<U>& p) { x += (T)p.x; y += (T)p.y; z += (T)p.z; return (*this); }
+		template<typename U> Vector3D<T>& operator += (const Vector3D<U>& p);
+
+		/*!
+		** \brief Translate the point with the same value for all coordinates
+		**
+		** \param k The value to add to all coordinates
+		** \return Always *this
+		**
+		** \see translate()
+		*/
+		Vector3D<T>& operator -= (const T k);
+		/*!
+		** \brief Translate the point with relative coordinates
+		**
+		** \param p The values to add to coordinates
+		** \return Always *this
+		**
+		** \see translate()
+		*/
+		template<typename U> Vector3D<T>& operator -= (const Vector3D<U>& p);
+
+		/*!
+		** \brief Uniform scaling
+		*/
+		Vector3D<T>& operator *= (const T k);
+		/*!
+		** \brief Dot product
+		*/
+		template<typename U> Vector3D<T>& operator *= (const Vector3D<U>& p);
+
+		/*!
+		** \brief Uniform scaling
+		*/
+		Vector3D<T>& operator /= (const T k);
+		/*!
+		** \brief Dot product
+		*/
+		template<typename U> Vector3D<T>& operator /= (const Vector3D<U>& p);
+
+
 
 		/*!
 		** \brief Comparison operator (equal with)
@@ -240,11 +284,7 @@ namespace Gfx
 		** \param out An output stream
 		** \return The output stream `out`
 		*/
-		std::ostream& print(std::ostream& out) const
-		{
-			out << "(" << x << "," << y << "," << z << ")";
-			return out;
-		}
+		std::ostream& print(std::ostream& out) const;
 
 
 	public:
@@ -264,6 +304,7 @@ namespace Gfx
 } // namespace Yuni
 
 
+# include "vector3D.hxx"
 
 
 //! \name Operator overload for stream printing
