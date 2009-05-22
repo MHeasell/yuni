@@ -796,6 +796,8 @@ namespace StringImpl
 		Run(StrBase& str, const U& u, typename StrBase::Size offset,
 			const typename StrBase::Size maxOccurences)
 		{
+			assert(&str != &u && "Undefined behavior");
+
 			// The length of the substring to find
 			const typename StrBase::Size len(StrBase::Length(u));
 
@@ -833,6 +835,7 @@ namespace StringImpl
 		Run(StrBase& str, const W* u, typename StrBase::Size offset,
 			const typename StrBase::Size maxOccurences)
 		{
+			assert(str.pPtr != u && "Undefined behavior");
 			// The number of occurences
 			typename StrBase::Size n(0);
 
@@ -896,6 +899,7 @@ namespace StringImpl
 		Run(StrBase& str, const StringBase<W,Chnk1>& u, typename StrBase::Size offset,
 			const typename StrBase::Size maxOccurences)
 		{
+			assert(&str != &u && "Undefined behavior");
 			if (u.pSize)
 			{
 				// The number of occurences
@@ -965,6 +969,7 @@ namespace StringImpl
 		Run(StrBase& str, const StringBase<W,Chnk1>* u, typename StrBase::Size offset,
 			const typename StrBase::Size maxOccurences)
 		{
+			assert(&str != u && "Undefined behavior");
 			if (u && u->pSize)
 			{
 				// The number of occurences
