@@ -2,13 +2,40 @@
 # define __YUNI_CORE_STRING_STD_CONVERTERS_TO_HXX__
 
 
-
 namespace Yuni
 {
 namespace Private
 {
 namespace StringImpl
 {
+
+
+	template<typename C>
+	struct AutoDetectBaseNumber
+	{
+		static const C* Value(const C* s, int& base)
+		{
+			switch (*s)
+			{
+				case '#' :
+					{
+						base = 16;
+						return s + 1;
+					}
+				case '0' :
+					{
+						if (s[1] == 'x' || s[1] == 'X')
+						{
+							base = 16;
+							return s + 2;
+						}
+					}
+			}
+			base = 10;
+			return s;
+		}
+	};
+
 
 
 	template<>
@@ -154,15 +181,19 @@ namespace StringImpl
 		template<typename C, int Chnk>
 		static inline sint16 Value(const StringBase<C,Chnk>& s)
 		{
-			char* pend;
-			return (sint16)strtol(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			return (sint16)strtol(p, &pend, base);
 		}
 
 		template<typename C, int Chnk>
 		static inline bool Value(const StringBase<C,Chnk>& s, sint16& v)
 		{
-			char* pend;
-			v = (sint16)strtol(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			v = (sint16)strtol(p, &pend, base);
 			return (NULL != pend && '\0' == *pend);
 		}
 
@@ -175,15 +206,19 @@ namespace StringImpl
 		template<typename C, int Chnk>
 		static inline sint32 Value(const StringBase<C,Chnk>& s)
 		{
-			char* pend;
-			return (sint32)strtol(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			return (sint32)strtol(p, &pend, base);
 		}
 
 		template<typename C, int Chnk>
 		static inline bool Value(const StringBase<C,Chnk>& s, sint32& v)
 		{
-			char* pend;
-			v = (sint32)strtol(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			v = (sint32)strtol(p, &pend, base);
 			return (NULL != pend && '\0' == *pend);
 		}
 
@@ -195,15 +230,19 @@ namespace StringImpl
 		template<typename C, int Chnk>
 		static inline sint64 Value(const StringBase<C,Chnk>& s)
 		{
-			char* pend;
-			return (sint64)strtol(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			return (sint64)strtol(p, &pend, base);
 		}
 
 		template<typename C, int Chnk>
 		static inline bool Value(const StringBase<C,Chnk>& s, sint64& v)
 		{
-			char* pend;
-			v = (sint64)strtol(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			v = (sint64)strtol(p, &pend, base);
 			return (NULL != pend && '\0' == *pend);
 		}
 
@@ -216,15 +255,19 @@ namespace StringImpl
 		template<typename C, int Chnk>
 		static inline uint16 Value(const StringBase<C,Chnk>& s)
 		{
-			char* pend;
-			return (uint16)strtoul(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			return (uint16)strtoul(p, &pend, base);
 		}
 
 		template<typename C, int Chnk>
 		static inline bool Value(const StringBase<C,Chnk>& s, uint16& v)
 		{
-			char* pend;
-			v = (uint16)strtoul(s.pPtr, &pend, 10);
+			int base;
+			C* pend;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			v = (uint16)strtoul(p, &pend, base);
 			return (NULL != pend && '\0' == *pend);
 		}
 
@@ -237,15 +280,19 @@ namespace StringImpl
 		template<typename C, int Chnk>
 		static inline uint32 Value(const StringBase<C,Chnk>& s)
 		{
-			char* pend;
-			return (uint32)strtoul(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			return (uint32)strtoul(p, &pend, base);
 		}
 
 		template<typename C, int Chnk>
 		static inline bool Value(const StringBase<C,Chnk>& s, uint32& v)
 		{
-			char* pend;
-			v = (uint32)strtoul(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			v = (uint32)strtoul(p, &pend, base);
 			return (NULL != pend && '\0' == *pend);
 		}
 
@@ -257,15 +304,19 @@ namespace StringImpl
 		template<typename C, int Chnk>
 		static inline uint64 Value(const StringBase<C,Chnk>& s)
 		{
-			char* pend;
-			return (uint64)strtoul(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			return (uint64)strtoul(p, &pend, base);
 		}
 
 		template<typename C, int Chnk>
 		static inline bool Value(const StringBase<C,Chnk>& s, uint64& v)
 		{
-			char* pend;
-			v = (uint64)strtoul(s.pPtr, &pend, 10);
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			v = (uint64)strtoul(p, &pend, base);
 			return (NULL != pend && '\0' == *pend);
 		}
 
@@ -277,7 +328,7 @@ namespace StringImpl
 		template<typename C, int Chnk>
 		static inline float Value(const StringBase<C,Chnk>& s)
 		{
-			char* pend;
+			C* pend;
 			# ifdef YUNI_OS_MSVC
 			// Visual Studio does not support strtof
 			return (float)strtod(s.pPtr, &pend);
@@ -289,7 +340,7 @@ namespace StringImpl
 		template<typename C, int Chnk>
 		static inline bool Value(const StringBase<C,Chnk>& s, float& v)
 		{
-			char* pend;
+			C* pend;
 			v = (float)strtof(s.pPtr, &pend);
 			return (NULL != pend && '\0' == *pend);
 		}
@@ -304,14 +355,14 @@ namespace StringImpl
 		template<typename C, int Chnk>
 		static inline double Value(const StringBase<C,Chnk>& s)
 		{
-			char* pend;
+			C* pend;
 			return (float)strtod(s.pPtr, &pend);
 		}
 
 		template<typename C, int Chnk>
 		static inline bool Value(const StringBase<C,Chnk>& s, double& v)
 		{
-			char* pend;
+			C* pend;
 			v = (double)strtod(s.pPtr, &pend);
 			return (NULL != pend && '\0' == *pend);
 		}
