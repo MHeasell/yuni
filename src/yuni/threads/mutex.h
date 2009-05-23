@@ -10,11 +10,11 @@ namespace Yuni
 {
 
 
-	/*! \class Mutex
-	**  \brief  Mechanism to avoid the simultaneous use of a common resource
-	**  \ingroup Threads
+	/*!
+	** \brief  Mechanism to avoid the simultaneous use of a common resource
+	** \ingroup Threads
 	*/
-	class Mutex 
+	class Mutex
 	{
 	public:
 		/*!

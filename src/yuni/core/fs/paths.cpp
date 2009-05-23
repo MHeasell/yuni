@@ -142,12 +142,12 @@ namespace Paths
 
 
 
-	String ExtractFileExt(const String& s)
+	String ExtractFileExt(const String& s, String::CharCase option)
 	{
 		String::size_type n = s.find_last_of(".\\/");
 		if (n == String::npos || '.' != s[n])
 			return String();
-		return String(s, n);
+		return (String::soIgnoreCase == option) ? String(s, n).toLower() : String(s, n);
 	}
 
 
@@ -170,7 +170,6 @@ namespace Paths
 		}
 		return (_stat(p.c_str(), &s) == 0);
 		# else
-		printf("mmmmmmmmmmmmmmmmdddddddddddddddddddddddddddddddd \n");
 		struct stat s;
 		return (stat(p.c_str(), &s) == 0);
 		# endif
