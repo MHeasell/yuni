@@ -161,6 +161,7 @@ namespace Paths
 	** \ingroup PathsAndFiles
 	**
 	** \param s Filename
+	** \param option soIgnoreCase to ensure to have a lowercase string
 	** \return The extenion of the filename (with the leading '.') in lowercase, empty if no extension is present
 	**
 	** \code
@@ -168,11 +169,11 @@ namespace Paths
 	**	 std::cout << Paths::Files::ExtractFileExt("/usr/folder.foo/file") << std::endl; // ''
 	** \endcode
 	*/
-	String ExtractFileExt(const String& s);
+	String ExtractFileExt(const String& s, String::CharCase option = String::soIgnoreCase);
 
 
 	/*!
-	** \brief Get if a path is absolute 
+	** \brief Get if a path is absolute
 	** \ingroup PathsAndFiles
 	**
 	** \param p The path or the filename to test
