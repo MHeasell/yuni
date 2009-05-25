@@ -5,14 +5,14 @@
 
 
 
-Yuni::Hash::Dictionary<Yuni::String, Yuni::Hash::optIgnoreCase | Yuni::Hash::optThreadSafe>  logins;
+Yuni::Hash::Dictionary<Yuni::String, Yuni::Hash::optIgnoreCase>  logins;
 
 
 void displayLogins()
 {
 	// Displaying the values stored in the dictionary, with a default if not exists
 	std::cout << "--- Report --- " << std::endl;
-	std::cout << "Name for `guest`	: " << logins.value("Guest") << std::endl;
+	std::cout << "Name for `guest`    : " << logins.value("Guest") << std::endl;
 	std::cout << "Name for `milipili` : " << logins.value("Milipili") << std::endl;
 	std::cout << "Name for `spammer`  : " << logins.value("Spammer") << std::endl;
 	std::cout << std::endl;

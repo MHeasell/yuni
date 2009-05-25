@@ -189,7 +189,7 @@ Set(SRC_CORE_HASH
 				core/hash/std.hashmap.h
 				core/hash/key.h
 				core/hash/table.h core/hash/table.hxx
-				core/hash/dictionary.h)
+				core/hash/dictionary.h core/hash/dictionary.hxx)
 source_group(ToolBox\\Hash FILES ${SRC_CORE_HASH})
 
 # System
