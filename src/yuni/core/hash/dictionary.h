@@ -128,7 +128,7 @@ namespace Hash
 
 	}; // class Hash::Dictionary
 
-
+# include "dictionary.hxx"
 
 
 } // namespace Hash

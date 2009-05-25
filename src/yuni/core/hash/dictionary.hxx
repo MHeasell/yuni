@@ -11,7 +11,7 @@
 		return (end() == it || it->second.empty()) ? defvalue : it->second. CONV (); \
 	}
 
-# define YUNI_HASH_DICTIONARY_STRIMPL_NUMERIC_CONST(O,K,XT,CONV) \
+# define YUNI_HASH_DICTIONARY_STRIMPL_NUMERIC_CONST(O,K,XT,CONV) //\
 
 	//template<> \
 	//XT Dictionary<String,O>:: CONV (const String& key, const XT defvalue) const \
@@ -28,7 +28,7 @@
 		return (end() == it || it->second.empty()) ? defvalue : it->second; \
 	}
 
-# define YUNI_HASH_DICTIONARY_STRIMPL_STRING_CONST(O,K,XT) \
+# define YUNI_HASH_DICTIONARY_STRIMPL_STRING_CONST(O,K,XT) //\
 
 	//template<> \
 	//String Dictionary<String,O>:: CONV (const String& key, const String& defvalue) const \
@@ -91,7 +91,7 @@ namespace Hash
 
 
 	template<typename V>
-	class Dictionary<V, optIgnoreCase | optThreadSafe> : public TableType
+	class Dictionary<V, optIgnoreCase | optThreadSafe> : public Table<String, V, Policy::ObjectLevelLockable>
 	{
 	public:
 		typedef Table<String, V, Policy::ObjectLevelLockable> TableType;
@@ -132,7 +132,7 @@ namespace Hash
 
 
 	template<typename V>
-	class Dictionary<V, optIgnoreCase> : public TableType
+	class Dictionary<V, optIgnoreCase> : public Table<String, V, Policy::SingleThreaded>
 	{
 	public:
 		typedef Table<String, V, Policy::SingleThreaded> TableType;
@@ -157,7 +157,7 @@ namespace Hash
 		iterator find(String key) {return TableType::find(key.toLower());}
 		const_iterator find(String key) const {return TableType::find(key.toLower());}
 
-		V value(String key, const V& defvalue = V()) const {return TableType::value(key.toLower(), defvalue);}
+		V value(String key, const V& defvalue = V()) {return TableType::value(key.toLower(), defvalue);}
 
 		iterator begin() {return TableType::begin();}
 		const_iterator begin() const {return TableType::begin();}
