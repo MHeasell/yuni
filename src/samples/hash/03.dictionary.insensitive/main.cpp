@@ -4,7 +4,7 @@
 #include <yuni/core/hash/dictionary.h> // Yuni::Hash::Dictionary
 
 
-
+// Use a case-insensitive dictionary, keys ignore case, but not values.
 Yuni::Hash::Dictionary<Yuni::String, Yuni::Hash::optIgnoreCase>  logins;
 
 
@@ -22,13 +22,13 @@ void displayLogins()
 int main(void)
 {
 	// Populating...
-	logins["milipili"] = "DamiEn"; // We've got a mistake
-	logins["MIlipIli"] = "Damien"; // Fix it
-	logins["spammer"]  = "I see dead people...";
+	logins["milipili"] = "DamiEn"; // We introduce a typographic error
+	logins["spammer"]  = "I see dead people..."; // This is a spam entry
 
 	displayLogins();
 
-	logins.erase("spaMMer");
+	logins["MIlipIli"] = "Damien"; // Fix the error
+	logins.erase("spaMMer"); // Erase the "spammer" key
 
 	displayLogins();
 
