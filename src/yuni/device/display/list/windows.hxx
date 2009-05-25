@@ -1,5 +1,5 @@
 
-#include "../../../../core/system/windows.hdr.h"
+#include "../../../core/system/windows.hdr.h"
 
 
 namespace Yuni
@@ -24,10 +24,10 @@ namespace Display
 	};
 
 
-	static SingleMonitorFound* findMonitor(const Yuni::String& monitorName, MonitorsFound& lst)
+	static SingleMonitorFound* findMonitor(const Yuni::String& monitorID, MonitorsFound& lst)
 	{
 		unsigned int i;
-		for (i = 0; i < lst.size() && lst[i].first->name() != monitorName; ++i)
+		for (i = 0; i < lst.size() && lst[i].first->guid() != monitorID; ++i)
 			;
 		return (i >= lst.size()) ? NULL : &lst[i];
 	}
@@ -49,7 +49,6 @@ namespace Display
 	*/
 	static void refreshForWindows(MonitorsFound& lst)
 	{
-		uint16 countMonitors = 0;
 		DISPLAY_DEVICE_FULL displayDevice;
 		displayDevice.cb = sizeof (DISPLAY_DEVICE_FULL);
 		// Loop on all display devices
@@ -65,14 +64,14 @@ namespace Display
 				bool mainDisplay = (0 != (displayDevice.StateFlags & DISPLAY_DEVICE_PRIMARY_DEVICE));
 
 				// Check if we have already stored info on this monitor
-				SingleMonitorFound* monitorWithRes = findMonitor(monitorDisplayDevice.DeviceString, lst);
+				SingleMonitorFound* monitorWithRes = findMonitor(monitorDisplayDevice.DeviceID, lst);
 				bool newMonitor = (NULL == monitorWithRes);
 				Monitor::Ptr monitor;
 				SmartPtr<OrderedResolutions> res;
 				if (newMonitor)
 				{
 					// Create the new monitor
-					monitor = new Monitor(monitorDisplayDevice.DeviceString, (Monitor::Handle)countMonitors++, mainDisplay, true, true);
+					monitor = new Monitor(monitorDisplayDevice.DeviceString, (Monitor::Handle)monitorDisplayDevice.DeviceID, mainDisplay, true, true);
 					res = new OrderedResolutions();
 				}
 				else
@@ -95,7 +94,7 @@ namespace Display
 
 
 
-	static void refreshOSSpecific(MonitorFound& lst)
+	static void refreshOSSpecific(MonitorsFound& lst)
 	{
 		refreshForWindows(lst);
 	}
