@@ -52,9 +52,9 @@ int main(void)
 	// A list of monitors
 	Device::Display::List monitors;
 
-	// The list must be refreshed according the current Operating System settings
+	// The list must be refreshed according the current Operating System settings.
 	// Without any parameters, the resolutions are filtered to be higher than
-	// a minimal resolution (640x480x8 by default)
+	// a minimal resolution (640x480x8 by default).
 	//
 	// To be sure to have exactly all resolutions, call `refresh()` like this :
 	// monitors.refresh(0, 0, 0);
@@ -62,7 +62,7 @@ int main(void)
 	monitors.refresh();
 
 
-	// Displaying informations about all available monitors
+	// Displaying information about all available monitors
 	title("All available displays, the primary display included");
 	Device::Display::List::const_iterator it;
 	for (it = monitors.begin(); it != monitors.end(); ++it)
