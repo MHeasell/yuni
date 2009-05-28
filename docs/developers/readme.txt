@@ -1,4 +1,4 @@
-Notes to developpers - General guidelines
+Notes to developers - General guidelines
 =========================================
 
  - Keep your code as clean and documented as possible, even (especially)
