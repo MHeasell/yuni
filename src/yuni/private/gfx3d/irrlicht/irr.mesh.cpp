@@ -1,7 +1,8 @@
 
+#include <map>
+
 #include "../../../yuni.h"
 #include "../../../core/string.h"
-#include "../../../core/hash/dictionary.h"
 #include "../../../gfx/vertex.h"
 #include "irr.mesh.h"
 
@@ -46,7 +47,7 @@ namespace Irrlicht
 		Yuni::Gfx::Vertex& pVertex;
 	};
 
-	typedef Hash::Dictionary<VertexWithIndex> HashVertex;
+	typedef std::map<String, VertexWithIndex> HashVertex;
 
 	Yuni::Gfx::Vertex VertexWithIndex::nullVertex;
 
@@ -57,7 +58,7 @@ namespace Irrlicht
 			Yuni::Gfx::Vertex vertex, uint16 indices[])
 		{
 			const String key(vertex.toString());
-			Hash::Dictionary<VertexWithIndex>::iterator f = hash.find(key);
+			HashVertex::iterator f = hash.find(key);
 			if (hash.end() == f)
 			{
 				// The vertex does not exist in the list

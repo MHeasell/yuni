@@ -184,14 +184,6 @@ Set(SRC_CORE_HASH_CHECKSUM
 				core/hash/checksum/md5.h core/hash/checksum/md5.cpp)
 source_group(ToolBox\\Hash\\Checksum FILES ${SRC_CORE_HASH_CHECKSUM})
 
-# hash
-Set(SRC_CORE_HASH
-				core/hash/std.hashmap.h
-				core/hash/key.h
-				core/hash/table.h core/hash/table.hxx
-				core/hash/dictionary.h core/hash/dictionary.hxx)
-source_group(ToolBox\\Hash FILES ${SRC_CORE_HASH})
-
 # System
 Set(SRC_CORE_SYSTEM
 				core/system/stdint.h core/system/capabilities.h
