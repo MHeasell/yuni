@@ -189,3 +189,6 @@ BEST PRACTICES
 * Avoid as much as possible Copy constructor for Return Values. Use reference instead.
 
 * Compile time is without incidence. Increasing compile time to reduce execution time (e.g. with templates) is encouraged.
+
+* Code legibility and length is less important than easy and fast end-user experience.
+
