@@ -1988,7 +1988,7 @@ namespace Yuni
 	template<typename C, int Chunk>
 	template<template<class,class> class U, class UType, class Alloc, typename S>
 	void
-	StringBase<C,Chunk>::explode(U<UType,Alloc>& out, const S& sep, const bool emptyBefore) const
+	StringBase<C,Chunk>::explode(U<UType,Alloc>& out, const S& sep, const bool emptyBefore, const bool keepEmptyElements, const bool trimElements) const
 	{
 		// Empty the container
 		if (emptyBefore)
@@ -2003,16 +2003,20 @@ namespace Yuni
 				typename StringBase<C,Chunk>::Size newIndx = this->find_first_of(sep, indx);
 				if (StringBase<C,Chunk>::npos == newIndx)
 				{
-					const StringBase<C,Chunk> segment(*this, indx, String::npos);
-					if (segment.notEmpty())
+					StringBase<C,Chunk> segment(*this, indx, String::npos);
+					if (trimElements)
+						segment.trim();
+					if (segment.notEmpty() || keepEmptyElements)
 						out.push_back(segment.to<UType>());
 					return;
 				}
 
 				if (newIndx && (len = newIndx - indx))
 				{
-					const StringBase<C,Chunk> segment(*this, indx, len);
-					if (segment.notEmpty())
+					StringBase<C,Chunk> segment(*this, indx, len);
+					if (trimElements)
+						segment.trim();
+					if (segment.notEmpty() || keepEmptyElements)
 						out.push_back(segment.to<UType>());
 				}
 				indx = newIndx + 1;
