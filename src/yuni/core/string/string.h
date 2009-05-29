@@ -1124,7 +1124,7 @@ namespace Yuni
 		*/
 		template<template<class,class> class U, class UType, class Alloc, typename S>
 		void explode(U<UType,Alloc>& out, const S& sep = YUNI_STRING_SEPARATORS,
-			const bool emptyBefore = true, const bool keepEmptyElements = false, const bool trimElements = false) const;
+			const bool emptyBefore = true, const bool keepEmptyElements = false, const bool trimElements = true) const;
 
 		/*!
 		** \brief Get the hash value of this string
