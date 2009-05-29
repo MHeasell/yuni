@@ -1116,12 +1116,15 @@ namespace Yuni
 		** \param[out] out All segments that have been found
 		** \param sep Sequence of chars considered as a separator
 		** \param emptyBefore True to clear the vector before fulfill it
+		** \param keepEmptyElements True to keep empty items
+		** \param trimElements Trim each item found
 		** \return Always this
 		**
 		** \warning Do not take care of string representation (with `'` or `"`)
 		*/
 		template<template<class,class> class U, class UType, class Alloc, typename S>
-		void explode(U<UType,Alloc>& out, const S& sep = YUNI_STRING_SEPARATORS, const bool emptyBefore = true) const;
+		void explode(U<UType,Alloc>& out, const S& sep = YUNI_STRING_SEPARATORS,
+			const bool emptyBefore = true, const bool keepEmptyElements = false, const bool trimElements = false) const;
 
 		/*!
 		** \brief Get the hash value of this string
