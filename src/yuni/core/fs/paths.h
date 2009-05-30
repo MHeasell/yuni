@@ -145,14 +145,15 @@ namespace Paths
 	** \ingroup PathsAndFiles
 	**
 	** The file name will be extracted according the last occurence
-	** of the system-dependant path-separator
+	** of the system-dependant path-separator (if systemDependant = true).
 	**
 	** \param p The original file name
+	** \param systemDependant Consider only the system-dependant path-separator
 	** \return The bare file name without its extension
 	**
 	** \see Paths::Separator
 	*/
-	String ExtractFileNameWithoutExtension(const String& p);
+	String ExtractFileNameWithoutExtension(const String& p, const bool systemDependant = true);
 
 
 

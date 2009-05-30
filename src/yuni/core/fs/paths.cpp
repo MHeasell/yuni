@@ -121,9 +121,11 @@ namespace Paths
 	}
 
 
-	String ExtractFileNameWithoutExtension(const String& p)
+	String ExtractFileNameWithoutExtension(const String& p, const bool systemDependant)
 	{
-		String::size_type pos = p.find_last_of(Separator);
+		String::size_type pos = (systemDependant)
+			? p.find_last_of(Separator)
+			: p.find_last_of("\\/");
 		String::size_type n = p.find_last_of('.');
 		if (String::npos == n && String::npos == pos)
 			return p;
