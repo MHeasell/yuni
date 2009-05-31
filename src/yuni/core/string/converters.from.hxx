@@ -372,7 +372,7 @@ namespace StringImpl
 		template<int Chnk>
 		static inline void Append(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str)
 		{
-			assert(&s != &str && "undefined behavior");
+			assert((void*)&s != (void*)&str && "undefined behavior");
 			if (str.pSize)
 				From<C*>::AppendRaw(s, str.pPtr, str.pSize);
 		}
