@@ -1,6 +1,8 @@
 #ifndef __YUNI_CORE_MATH_MATH_HXX__
 # define __YUNI_CORE_MATH_MATH_HXX__
 
+# include <algorithm>
+
 
 namespace Yuni
 {
