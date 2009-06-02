@@ -8,11 +8,11 @@ Notes to developers - General guidelines
  - The public API must not depend on any external library
  - The public API must work on every supported platform. There might be
   a few exceptions but there must be a very good reason for it.
- - Thinking low-level, writing high-level. 
+ - Think low-level, write high-level.
    Keep in mind these important points :
-   . The maintenance of the code
-   . The Speed of execution of the code
-   . The Simplicity of the code
-   . The Portability
-   . The Elegance and the high level of the code
+   . Code maintenance
+   . Code execution speed
+   . Code simplicity
+   . Portability
+   . Code elegance and high-level characteristics
 

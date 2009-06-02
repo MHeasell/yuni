@@ -72,10 +72,10 @@
                     - Rotation Structure [oid]
                       Vecteurs a utiliser pour la rotation relative de chacune des structures entre elles
                       Ces vecteurs sont initialisés a partir de la structure du template
-            
+
             - Algorithms
                 - Shield::Abstract
-                    - 
+                    -
             - Scene
                 - Fog
     - ai
@@ -101,7 +101,7 @@
         - Mouse
         - Keyboard
     - System
-        
+
 
  xml ?
 
