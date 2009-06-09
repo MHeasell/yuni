@@ -15,12 +15,13 @@ int main(int argc, char* argv[])
 	uint8** data = new uint8*[2];
 	data[0] = new uint8[2];
 	data[0][0] = 255;
-	data[0][1] = 255;
+	data[0][1] = 0;
 	data[1] = new uint8[2];
-	data[1][0] = 0;
+	data[1][0] = 255;
 	data[1][1] = 0;
 	// Call the Scale2X scaling algorithm
 	uint8** scaledData = scaler.Scale2X(data, 2, 2);
+	scaledData = scaler.Eagle(data, 2, 2);
 
 	delete[] scaledData[0];
 	delete[] scaledData[1];
