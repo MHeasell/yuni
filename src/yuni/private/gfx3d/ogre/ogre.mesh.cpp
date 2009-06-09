@@ -1,6 +1,5 @@
 #include "../../../yuni.h"
 #include "../../../core/string.h"
-#include "../../../core/hash/dictionary.h"
 #include "../../../gfx/vertex.h"
 #include "ogre.mesh.h"
 
