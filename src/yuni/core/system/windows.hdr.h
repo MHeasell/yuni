@@ -12,7 +12,15 @@
 
 #	include <stdio.h>
 #	include <stdlib.h>
+# endif
 
+
+// On some compiler, the macro min() and max() are defined... (Visual Studio for example...)
+# ifdef min
+#   undef min
+# endif
+# ifdef max
+#   undef max
 # endif
 
 
