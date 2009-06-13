@@ -58,11 +58,15 @@ namespace Yuni
 # endif
 
 
+
+
 	/*!
 	** \brief Constant int64 value to indicate that the size must be autodetected by the location
 	** of the terminating null character
 	*/
 	static const uint64 AutoDetectNullChar = (uint64)(-1);
+
+
 
 
 } // namespace Yuni

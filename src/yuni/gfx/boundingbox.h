@@ -1,6 +1,7 @@
 #ifndef __YUNI_GFX_BOUNDINGBOX_H__
 # define __YUNI_GFX_BOUNDINGBOX_H__
 
+# include "../yuni.h"
 # include "point3D.h"
 # include "triangle.h"
 
