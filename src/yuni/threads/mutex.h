@@ -1,8 +1,8 @@
 #ifndef __YUNI_THREADS_MUTEX_H__
 # define __YUNI_THREADS_MUTEX_H__
 
-# include <pthread.h>
 # include "../yuni.h"
+# include "pthread.h"
 
 
 
@@ -38,7 +38,7 @@ namespace Yuni
 		//! Default constructor
 		Mutex(const bool recursive = true);
 		//! Destructor
-		~Mutex() {pthread_mutex_destroy(&pPthreadLock);}
+		~Mutex();
 		//@}
 
 		//! \name Lock & Unlock
@@ -47,12 +47,12 @@ namespace Yuni
 		/*!
 		** \brief Lock the mutex
 		*/
-		void lock() {pthread_mutex_lock(&pPthreadLock);}
+		void lock();
 
 		/*!
 		** \brief Release the lock
 		*/
-		void unlock() {pthread_mutex_unlock(&pPthreadLock);}
+		void unlock();
 
 		//@}
 
@@ -61,7 +61,7 @@ namespace Yuni
 		/*!
 		** \brief Get the original PThread mutex
 		*/
-		pthread_mutex_t& pthreadMutex() {return pPthreadLock;}
+		pthread_mutex_t& pthreadMutex();
 		//@}
 
 	private:
@@ -73,8 +73,7 @@ namespace Yuni
 
 
 
-
-	/*! \class MutexLocker
+	/*!
 	** \brief Locks a mutex in the constructor and unlocks it in the destructor.
 	**
 	** This class is especially usefull for `get` accessor` and/or returned values
@@ -138,7 +137,8 @@ namespace Yuni
 
 
 
-
 } // namespace Yuni
+
+# include "mutex.hxx"
 
 #endif // __YUNI_THREADS_MUTEX_H__

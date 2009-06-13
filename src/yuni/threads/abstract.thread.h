@@ -1,7 +1,6 @@
 #ifndef __YUNI_THREADS_PRIVATE_ABSTRACT_H__
 # define __YUNI_THREADS_PRIVATE_ABSTRACT_H__
 
-# include <pthread.h>
 # include "../yuni.h"
 # include "mutex.h"
 # include "../core/string.h"
@@ -79,9 +78,7 @@ namespace Private
 		** \param f True to destroy the thread as soon as it has stopped
 		** \return A pointer to the new instance
 		*/
-		template<class T>
-		static T* CreateAndStart(const bool f = false)
-		{T* t = new T(); if (f) t->freeOnTerminate(f); t->start(); return t;}
+		template<class T> static T* CreateAndStart(const bool f = false);
 
 
 	public:
@@ -103,7 +100,7 @@ namespace Private
 		** \internal This method can not be `const` because it might have to lock the
 		** mutex to generate the returned value (in the case of a job for example)
 		*/
-		virtual String name() {return String("<Unknown>");}
+		virtual String name();
 
 
 		//! \name Execution flow
@@ -133,7 +130,7 @@ namespace Private
 		** \see stop()
 		** \see start()
 		*/
-		bool restart(const uint16 timeout = 5) { return stop(timeout) && start();}
+		bool restart(const uint16 timeout = 5);
 
 		/*!
 		** \brief Indicates that the thread should stop as soon as possible
@@ -146,7 +143,7 @@ namespace Private
 		** \brief Get if the thread is currently running
 		** \return True if the thread is running
 		*/
-		bool isRunning() const {return pIsRunning;}
+		bool isRunning() const;
 	
 		/*!
 		** \brief Suspend the execution of the thread of X miliseconds
@@ -231,8 +228,13 @@ namespace Private
 	}; // class Private::AThreadModel
 
 
+
+
+
 } // namespace Private
 } // namespace Threads
 } // namespace Yuni
+
+# include "abstract.thread.hxx"
 
 #endif // __YUNI_THREADS_PRIVATE_ABSTRACT_H__

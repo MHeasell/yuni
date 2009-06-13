@@ -17,9 +17,9 @@ namespace Threads
 {
 
 
-	/*! \class AThread
-	**  \brief Higher-level threading interface (abstract)
-	**  \ingroup Threads
+	/*!
+	** \brief Higher-level threading interface (abstract)
+	** \ingroup Threads
 	**
 	** To create your own thread, you only have to implement the methode execute(), as follow:
 	**

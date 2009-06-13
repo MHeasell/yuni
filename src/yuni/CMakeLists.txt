@@ -18,6 +18,13 @@ Set(SRC_CORE_PREPROCESSOR
 				core/preprocessor/enum.h)
 source_group(ToolBox\\Preprocessor FILES ${SRC_CORE_PREPROCESSOR})
 
+Set(SRC_CORE_ATOMIC
+				core/atomic/int32.h
+				core/atomic/int32.hxx)
+source_group(ToolBox\\Atomic FILES ${SRC_CORE_ATOMIC})
+
+
+
 Set(SRC_CORE_STATIC
 				core/static/if.h
 				core/static/remove.h
@@ -204,6 +211,7 @@ source_group(ToolBox\\System\\Windows FILES ${SRC_CORE_SYSTEM_WINDOWS})
 Set(SRC_THREADS
 				threads/mutex.h threads/mutex.cpp
 				threads/abstract.thread.h threads/abstract.thread.cpp
+				threads/abstract.thread.hxx
 				threads/thread.h threads/thread.cpp
 				threads/timer.h threads/timer.cpp
 				threads/cpu.cpp)
@@ -228,6 +236,9 @@ Set(SRC_GFX_CORE
 		# Color
 		gfx/core/color/rgba.h gfx/core/color/rgb.h
 		gfx/core/color/proxy.h gfx/core/color/proxy.cpp
+
+		gfx/canvas.h  gfx/canvas/canvas.h
+		gfx/canvas/pen.h  gfx/canvas/pen.cpp
 		)
 source_group(Gfx FILES ${SRC_GFX_CORE})
 
@@ -302,6 +313,7 @@ target_link_libraries(yuni-static-gfx-core yuni-static-core)
 #
 Add_Library(yuni-static-core STATIC
 			${SRC_CORE_PREPROCESSOR}
+			${SRC_CORE_ATOMIC}
 			${SRC_CORE_STATIC}
 			${SRC_CORE_STRING}
 			${SRC_CORE_LOGS}
