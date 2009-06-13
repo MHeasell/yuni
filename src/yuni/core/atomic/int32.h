@@ -6,6 +6,7 @@
 # if defined(YUNI_OS_OSX)
 #	include <libkern/OSAtomic.h>
 # endif
+# include "../system/windows.hdr.h"
 
 # if defined(YUNI_OS_WINDOWS)
 #	define YUNI_ATOMIC_INT32_TYPE  volatile long
