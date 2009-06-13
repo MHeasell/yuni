@@ -17,6 +17,8 @@
 # include "policies.h"
 # include "../policies/threading.h"
 # include "../static/assert.h"
+# include "../atomic/int32.h"
+
 
 
 namespace Yuni
@@ -174,7 +176,7 @@ namespace Ownership
 		//@{
 		//! Default constructor
 		ReferenceCountedMT()
-			:pCount(new unsigned int(1))
+			:pCount(new Atomic::Int32(1))
 		{}
 		//! Copy constructor
 		ReferenceCountedMT(const ReferenceCountedMT& c)
@@ -226,7 +228,7 @@ namespace Ownership
 
 	private:
 		//! The reference count
-		typename ThreadingPolicy::template Volatile<unsigned int>::Type* pCount;
+		Atomic::Int32* pCount;
 
 	}; // class ReferenceCountedMT
 

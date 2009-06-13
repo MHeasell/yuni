@@ -247,6 +247,11 @@ namespace Private
 	}
 
 
+	bool AThreadModel::restart(const uint16 timeout)
+	{
+		return stop(timeout) && start();
+	}
+
 
 } // namespace Private
 } // namespace Threads
