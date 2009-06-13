@@ -27,7 +27,7 @@ namespace Atomic
 	inline void Int32::increment()
 	{
 		# if defined(YUNI_OS_WIN32)
-		::InterlockedIncrement(&pValue);
+		::InterlockedIncrement((LPLONG)&pValue);
 		# elif defined(YUNI_OS_OSX)
 		::OSAtomicIncrement32(&pValue);
 		# else
@@ -38,7 +38,7 @@ namespace Atomic
 	inline void Int32::decrement()
 	{
 		# if defined(YUNI_OS_WIN32)
-		::InterlockedDecrement(&pValue);
+		::InterlockedDecrement((LPLONG)&pValue);
 		# elif defined(YUNI_OS_OSX)
 		::OSAtomicDecrement32(&pValue);
 		# else
@@ -62,11 +62,9 @@ namespace Atomic
 	inline void Int32::add(const int x)
 	{
 		# if defined(YUNI_OS_WIN32)
-		return InterlockedExchangeAdd(&pValue, x);
+		::InterlockedExchangeAdd((LPLONG)&pValue, x);
 		# elif defined(YUNI_OS_OSX)
-		int old = pValue;
-		OSAtomicAdd32(x, &pValue);
-		return old;
+		::OSAtomicAdd32(x, &pValue);
 		# else
 		int old;
 		asm volatile ("lock; xaddl %0,%1"
