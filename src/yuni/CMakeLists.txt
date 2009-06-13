@@ -236,9 +236,6 @@ Set(SRC_GFX_CORE
 		# Color
 		gfx/core/color/rgba.h gfx/core/color/rgb.h
 		gfx/core/color/proxy.h gfx/core/color/proxy.cpp
-
-		gfx/canvas.h  gfx/canvas/canvas.h
-		gfx/canvas/pen.h  gfx/canvas/pen.cpp
 		)
 source_group(Gfx FILES ${SRC_GFX_CORE})
 
