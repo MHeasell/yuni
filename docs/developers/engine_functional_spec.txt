@@ -1,0 +1,99 @@
+
+										YUNI GRAPHICS ENGINE
+										FUNCTIONAL SPECIFICATION
+
+Started on:   2006-06-12, by Loom
+Last version: 2006-06-12, by Loom
+
+Scope of this document:
+=======================
+
+Part 1) of this document includes general considerations that apply to
+the entire Yuni project.
+However this document in itself intends to specify all the required
+features FOR THE GRAPHICS ENGINE ONLY.
+
+
+
+1) Introduction: What is Yuni?
+==============================
+
+
+Preamble:
+---------
+
+The Yuni project aims at offering a complete framework for
+developing high-level, complex and fast applications.
+It will be shqped as a C++ library and bindings for some
+scripting languages.
+
+
+Target audience:
+----------------
+
+The Yuni library and tools are meant to be used by developers who
+already know C++, like it and want to use it for writing any kind of
+application without worrying about the low-level aspects of the
+language and the trouble of mixing many kinds of libraries to do all
+the usual things any application requires.
+
+Big applications always end up requiring performance at some point,
+multi-threading at some other, graphics, sound, input, command line
+parsing, ... Yuni will provide all this in a portable way with a
+single, easy-to-use, object-oriented API.
+
+
+Objectives:
+-----------
+- Execution speed:
+  It is crucial, all the code should be optimized to reach speeds
+  well above average when compared to other implementations.
+  This also means each computer's abilities should be used to their
+  maximum (multithreading to use multiple cores in particular)
+
+- Ease of use:
+  It is essential and should be enforced by offering very high-level
+  interfaces, without losing features on the way.
+  This includes having _excellent_ documentation.
+  This is mainly a commercial argument: "Bad API leads to few users".
+
+- Completeness:
+  If a domain is found to be in the scope of the Yuni library, all the
+  features a user could expect in this domain should be provided.
+
+- Portability:
+  Yuni _must_ work seamlessly under Windows, Max OS X and major Unices.
+
+- Code legibility and comments:
+  Yuni should strive to acquire more contributers along the way and
+  keeping the code clean and commented is necessary when working in
+  a team.
+
+
+
+II) 2D User Interface
+=====================
+
+  - Event-based (onClick, onHover, keyboard shortcuts, ...)
+  - Seamless integration in 3D (z-management, rotating and rescaling)
+  - All the necessary controls should be available:
+    * Buttons (normal, push-button, radio-button)
+	* Forms
+	* Combos
+	* Edit (with format, strongly-typed with the data)
+	* CheckBox
+	* Scrollbars
+	* Spreadsheet
+    * Tabs
+	* Docking (?)
+
+
+
+III) 3D graphics
+================
+  - Polygon-based meshes display
+  - Isosurfaces display
+  - Multiple scenes
+  - Light (ambient, static, dynamic, HDR)
+  - Cameras (with strange views)
+  - Effects (particles, ...)

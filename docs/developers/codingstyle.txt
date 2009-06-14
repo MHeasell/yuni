@@ -25,7 +25,7 @@ GENERAL
 	source code for template    .hxx
     Text files                  .txt
 
-* Always leave at one space before and after operators
+* Always leave one space before and after binary and ternary operators
   GOOD
   if (10 == a && 42 == b)
   {}
