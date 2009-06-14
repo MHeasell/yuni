@@ -17,6 +17,8 @@
 # include "policies.h"
 # include "../../../threads/policy.h"
 # include "../../static/assert.h"
+# include "../../atomic/int32.h"
+
 
 
 namespace Yuni
@@ -167,26 +169,21 @@ namespace Ownership
 			destructiveCopy = false
 		};
 
-		typedef typename Policy::ClassLevelLockable< ReferenceCountedMT<T> >  ThreadingPolicy;
-
 	public:
 		//! \name Constructors
 		//@{
 		//! Default constructor
 		ReferenceCountedMT()
-			:pCount(new unsigned int(1))
+			:pCount(new Atomic::Int32(1))
 		{}
 		//! Copy constructor
 		ReferenceCountedMT(const ReferenceCountedMT& c)
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
 			pCount = c.pCount;
 		}
 		//! Copy constructor for any king of template parameter
 		template<typename U> ReferenceCountedMT(const ReferenceCountedMT<U>& c)
 		{
-			typename ThreadingPolicy::MutexLocker locker1(*this);
-			typename Policy::ClassLevelLockable< ReferenceCountedMT<U> >::MutexLocker locker2(*this);
 			pCount = reinterpret_cast<const ReferenceCountedMT<T>&>(c).pCount;
 		}
 		//@}
@@ -197,7 +194,6 @@ namespace Ownership
 		*/
 		T clone(const T& rhs)
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
 			++(*pCount);
 			return rhs;
 		}
@@ -207,7 +203,6 @@ namespace Ownership
 		*/
 		bool release(const T&)
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
 			if (!(--(*pCount)))
 			{
 				delete pCount;
@@ -219,14 +214,12 @@ namespace Ownership
 
 		void swapPointer(ReferenceCountedMT& rhs)
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
-			typename ThreadingPolicy::MutexLocker locker2(rhs);
 			std::swap(pCount, rhs.pCount);
 		}
 
 	private:
 		//! The reference count
-		typename ThreadingPolicy::template Volatile<unsigned int>::Type* pCount;
+		Atomic::Int32* pCount;
 
 	}; // class ReferenceCountedMT
 
