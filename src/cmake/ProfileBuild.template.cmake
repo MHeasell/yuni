@@ -56,12 +56,6 @@ Set(YUNI_PROFILE_NAME "Default")
 # PThread (Yuni Core)
 Set(YUNI_DvP_PTHREAD_MODE     system devpack)
 
-# Irrlicht (+gfx3d,+irrlicht)
-Set(YUNI_DvP_IRRLICHT_MODE    system devpack)
-
-# Ogre (+gfx3d,+ogre)
-Set(YUNI_DvP_OGRE_MODE        system devpack)
-
 # Lua (+script,+lua)
 Set(YUNI_DvP_LUA_MODE         macport system devpack)
 
