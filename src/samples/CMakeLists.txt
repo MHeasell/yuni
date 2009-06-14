@@ -12,18 +12,14 @@ Message(STATUS "Samples")
 Message(STATUS "")
 
 
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../CommonSettings.cmake")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../Modules.cmake")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../FindYuni.cmake")
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/FindYuni.cmake")
 
 
+ADD_SUBDIRECTORY(core)
 ADD_SUBDIRECTORY(application)
-ADD_SUBDIRECTORY(colors)
 ADD_SUBDIRECTORY(devices)
-ADD_SUBDIRECTORY(events)
-ADD_SUBDIRECTORY(hash)
-ADD_SUBDIRECTORY(logs)
-ADD_SUBDIRECTORY(math)
 ADD_SUBDIRECTORY(script)
 ADD_SUBDIRECTORY(threads)
 #ADD_SUBDIRECTORY(ui)

@@ -31,6 +31,18 @@ namespace Yuni
 
 
 
+	inline MutexLocker::MutexLocker(Mutex& m)
+		:pMutex(m)
+	{
+		m.lock();
+	}
+
+
+	inline MutexLocker::~MutexLocker()
+	{
+		pMutex.unlock();
+	}
+
 
 
 } // namespace Yuni
