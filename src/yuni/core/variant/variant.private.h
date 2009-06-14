@@ -3,6 +3,7 @@
 
 # include <sstream>
 # include "../static/types.h"
+# include "../math/math.h"
 
 
 namespace Yuni
@@ -53,7 +54,7 @@ namespace Variant
 	{
 		static bool Value(const From& from, bool& to)
 		{
-			to = (From() != from);
+			to = Math::Equals(From(), from);
 			return true;
 		}
 	};

@@ -6,7 +6,7 @@
 # include "../preprocessor/enum.h"
 # include <vector>
 # include <list>
-# include "../policies/threading.h"
+# include "../../threads/policy.h"
 # include "event.declaration.h"
 # include "event.defines.h"
 

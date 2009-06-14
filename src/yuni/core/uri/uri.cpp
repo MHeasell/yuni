@@ -661,6 +661,46 @@ namespace Yuni
 	}
 
 
+	void Uri::query(const String& s)
+	{
+		pInfos.query = s;
+	}
+
+	void Uri::defaultPathIfEmpty()
+	{
+		if (pInfos.path.empty())
+			pInfos.path = "/";
+	}
+
+	void Uri::path(const String& s)
+	{
+		pInfos.path = s;
+	}
+
+
+	void Uri::user(const String& s)
+	{
+		pInfos.user = s;
+	}
+
+
+	void Uri::port(const int p)
+	{
+		if (p > 0 || p == INT_MIN)
+			pInfos.port = p;
+	}
+
+
+	void Uri::server(const String& s)
+	{
+		pInfos.server = s;
+	}
+
+
+	void Uri::scheme(const String& s)
+	{
+		pInfos.scheme = s;
+	}
 
 
 } // namespace Yuni

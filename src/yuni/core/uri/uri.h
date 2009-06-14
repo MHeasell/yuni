@@ -108,8 +108,8 @@ namespace Yuni
 	**
 	**
 	**
-	** \note <b>IPv6</b> : According to the RFC, IPv6 addresses must be enclosed
-	** in brackets (ex: `http://[2001:db8::7]`)
+	** \note <b>IPv6 addresses</b> : According to the RFC, IPv6 addresses must be
+	** enclosed in brackets (ex: `http://[2001:db8::7]`)
 	**
 	**
 	**
@@ -117,7 +117,8 @@ namespace Yuni
 	** `.` and `..` will be removed (`file:///path/./to/../somewhere` will give
 	** `file:///path/somewhere`). However it can not be done for the begining of
 	** relative paths (`file://../../relative/./path` will give
-	** `file://../../relative/path`).
+	** `file://../../relative/path`). Consequently a path that starts with a
+	** dot is a relative path.
 	**
 	**
 	** \bug This implementation does not handle at all escaped caracters
@@ -127,11 +128,10 @@ namespace Yuni
 	public:
 		//! \name Constructors
 		//@{
-
 		/*!
 		** \brief Default constructor
 		*/
-		Uri() {}
+		Uri();
 
 		/*!
 		** \brief Constructor with a string, to directly construct the URI
@@ -142,60 +142,58 @@ namespace Yuni
 		** \brief Copy constructor
 		*/
 		explicit Uri(const Uri& rhs);
-
 		//@}
 
 
 		//! \name Informations about the URI structure
 		//@{
-
 		/*!
 		** \brief Clear all informations about the URI structure
 		*/
-		void clear() {pInfos.clear();}
+		void clear();
 
 		//! Scheme (lowercase)
-		const String& scheme() const {return pInfos.scheme;}
+		const String& scheme() const;
 		//! Set the scheme
-		void scheme(const String& s) {pInfos.scheme = s;}
-		void scheme(const Net::Protocol::Type& type) {pInfos.scheme = Net::Protocol::ToScheme(type);}
+		void scheme(const String& s);
+		void scheme(const Net::Protocol::Type& type);
 
 		//! Server
-		const String& server() const {return pInfos.server;}
+		const String& server() const;
 		//! Set the server
-		void server(const String& s) {pInfos.server = s;}
+		void server(const String& s);
 
 		//! Port (equals to `INT_MIN` if none)
-		int port() const {return pInfos.port;}
-		//! Set the port value (only if strictly positive or equals to INT_MIN do disable it)
-		void port(const int p) {if (p > 0 || p == INT_MIN) pInfos.port = p;}
+		int port() const;
+		//! Set the port value (only if strictly positive, or equals to INT_MIN do disable it)
+		void port(const int p);
 
 		//! User
-		const String& user() const {return pInfos.user;}
+		const String& user() const;
 		//! Set the user
-		void user(const String& s) {pInfos.user = s;}
+		void user(const String& s);
 
 		//! Password
-		const String& password() const {return pInfos.password;}
+		const String& password() const;
 		//! Set the password
-		void password(const String& s) {pInfos.password = s;}
+		void password(const String& s);
 
 		//! Path
-		const String& path() const {return pInfos.path;}
+		const String& path() const;
 		//! Set the path
-		void path(const String& s) {pInfos.path = s;}
+		void path(const String& s);
 		//! Set a default path (`/`) if there is no path
-		void defaultPathIfEmpty() {if (pInfos.path.empty()) pInfos.path = "/";}
+		void defaultPathIfEmpty();
 
 		//! Query
-		const String& query() const {return pInfos.query;}
+		const String& query() const;
 		//! Set the query
-		void query(const String& s) {pInfos.query = s;}
+		void query(const String& s);
 
 		//! Fragment
-		const String& fragment() const {return pInfos.fragment;}
+		const String& fragment() const;
 		//! Set the fragment
-		void fragment(const String& s) {pInfos.fragment = s;}
+		void fragment(const String& s);
 
 		/*!
 		** \brief Get if the URI was valid during the last extract
@@ -204,57 +202,39 @@ namespace Yuni
 		** value of this method should no longer be used, because this variable is set
 		** when the URI is built from a simple string.
 		*/
-		bool isValid() const {return pInfos.isValid;}
-
+		bool isValid() const;
 		//@}
 
 
 		//! \name Scheme
 		//@{
-
 		/*!
-		** \brief Try to find out the protocol from the scheme
+		** \brief Try to find out the network protocol from the scheme
 		*/
-		Net::Protocol::Type protocol() const
-		{return pInfos.isValid ? Net::Protocol::SchemeToType(pInfos.scheme): Net::Protocol::unknown;}
+		Net::Protocol::Type protocol() const;
 
 
 		/*!
 		** \brief Convenient method to know if the URI is merely a file
 		*/
-		bool schemeIsFile() const
-		{return (pInfos.scheme.empty() && !pInfos.path.empty()) || "file" == pInfos.scheme;}
+		bool schemeIsFile() const;
 
-		/*!
-		** \brief Get if the scheme is `HTTP` or `HTTPS`
-		*/
-		bool schemeIsHTTP() const
-		{return !pInfos.scheme.empty() && ("http" == pInfos.scheme || "https" == pInfos.scheme);}
+		//! Get if the scheme is `HTTP` or `HTTPS`
+		bool schemeIsHTTP() const;
 
-		/*!
-		** \brief Get if the scheme is `FTP`
-		*/
-		bool schemeIsFTP() const
-		{return !pInfos.scheme.empty() && "ftp" == pInfos.scheme;}
+		//! Get if the scheme is `FTP`
+		bool schemeIsFTP() const;
 
-		/*!
-		** \brief Get if the scheme is `SSH`
-		*/
-		bool schemeIsSSH() const
-		{return !pInfos.scheme.empty() && "ssh" == pInfos.scheme;}
+		//! Get if the scheme is `SSH`
+		bool schemeIsSSH() const;
 
-		/*!
-		** \brief Get if the scheme is `LDAP`
-		*/
-		bool schemeIsLDAP() const
-		{return !pInfos.scheme.empty() && "ldap" == pInfos.scheme;}
-
+		//! Get if the scheme is `LDAP`
+		bool schemeIsLDAP() const;
 		//@}
 
 
 		//! \name Conversion
 		//@{
-
 		/*!
 		** \brief Reconstruct the URI to a string
 		*/
@@ -265,23 +245,21 @@ namespace Yuni
 		** \param out The stream output
 		*/
 		std::ostream& print(std::ostream& out) const {out << pInfos.toString();return out;}
-
 		//@}
 
 
 		//! \name Operators
 		//@{
-
 		//! The operator =
-		Uri& operator = (const Uri& rhs)  {pInfos.assign(rhs.pInfos);return *this;}
-		Uri& operator = (const String& rhs)  {extractURIFromString(rhs);return *this;}
+		Uri& operator = (const Uri& rhs);
+		Uri& operator = (const String& rhs);
 
 		//! The operator ==
-		bool operator == (const Uri& rhs) const {return pInfos.isEqualsTo(rhs.pInfos);}
+		bool operator == (const Uri& rhs) const;
 		//! The operator !=
-		bool operator != (const Uri& rhs) const {return !((*this) == rhs);}
+		bool operator != (const Uri& rhs) const;
 		//! The operator ()
-		String operator() () const {return pInfos.toString();}
+		String operator() () const;
 		//@}
 
 
@@ -305,6 +283,7 @@ namespace Yuni
 } // namespace Yuni
 
 
+# include "uri.hxx"
 
 
 //! \name Operator overload for stream printing

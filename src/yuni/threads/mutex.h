@@ -43,7 +43,6 @@ namespace Yuni
 
 		//! \name Lock & Unlock
 		//@{
-
 		/*!
 		** \brief Lock the mutex
 		*/
@@ -53,7 +52,6 @@ namespace Yuni
 		** \brief Release the lock
 		*/
 		void unlock();
-
 		//@}
 
 		//! \name PThread wrapper
@@ -112,15 +110,10 @@ namespace Yuni
 		**
 		** \param m The mutex to lock
 		*/
-		MutexLocker(Mutex& m) : pMutex(m) { m.lock(); }
+		MutexLocker(Mutex& m);
 		//! Destructor
-		~MutexLocker() { pMutex.unlock(); }
+		~MutexLocker();
 		//@}
-
-		/*!
-		** \brief Get the original mutex
-		*/
-		Mutex& mutex() const {return pMutex;}
 
 	private:
 		//! Reference to the real mutex

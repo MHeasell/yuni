@@ -12,9 +12,9 @@ Message(STATUS "Tests")
 Message(STATUS "")
 
 
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../CommonSettings.cmake")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../Modules.cmake")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../FindYuni.cmake")
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/FindYuni.cmake")
 
 
 ADD_SUBDIRECTORY(automatic)

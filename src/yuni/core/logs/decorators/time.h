@@ -2,7 +2,22 @@
 # define __YUNI_CORE_DECORATORS_LOGS_TIME_H__
 
 # include "../null.h"
-# include <time.h>
+
+
+namespace Yuni
+{
+namespace Private
+{
+namespace LogsDecorator
+{
+
+	void WriteCurrentTimestampToBuffer(char* buffer);
+
+} // namespace LogsDecorator
+} // namespace Private
+} // namespace Yuni
+
+
 
 
 namespace Yuni
@@ -20,19 +35,9 @@ namespace Logs
 		void internalDecoratorAddPrefix(O& out, const String& s)
 		{
 			// Write the verbosity to the output
-			time_t rawtime;
 			char asc[26];
-			time (&rawtime);
+			Private::LogsDecorator::WriteCurrentTimestampToBuffer(asc);
 
-			# ifdef YUNI_OS_WINDOWS
-			struct tm timeinfo;
-			localtime_s(&timeinfo, &rawtime);
-			asctime_s(asc, &timeinfo);
-			# else
-			struct tm timeinfo;
-			localtime_r(&rawtime, &timeinfo);
-			asctime_r(&timeinfo, asc);
-			# endif
 			out.put('[');
 			out.write(asc, 23);
 			out.put(']');

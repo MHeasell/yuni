@@ -2,7 +2,7 @@
 # define __YUNI_CORE_LOGS_LOGS_H__
 
 # include "../../yuni.h"
-# include "../policies/threading.h"
+# include "../../threads/policy.h"
 
 # include "null.h"
 # include "verbosity.h"
