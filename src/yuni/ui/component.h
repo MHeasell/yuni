@@ -4,7 +4,6 @@
 # include <list>
 # include <vector>
 # include "../yuni.h"
-# include "../core/policies/threading.h"
 # include "../core/string.h"
 # include "../core/smartptr/sharedptr.h"
 # include "../core/event/event.h"
