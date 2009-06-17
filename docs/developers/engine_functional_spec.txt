@@ -46,7 +46,7 @@ single, easy-to-use, object-oriented API.
 Objectives:
 -----------
 - Execution speed:
-  It is crucial, all the code should be optimized to reach speeds
+  It is crucial that the code be optimized to reach speeds
   well above average when compared to other implementations.
   This also means each computer's abilities should be used to their
   maximum (multithreading to use multiple cores in particular)
@@ -84,16 +84,42 @@ II) 2D User Interface
 	* CheckBox
 	* Scrollbars
 	* Spreadsheet
+	* Slider
     * Tabs
 	* Docking (?)
+	* Advanced controls for multimedia management: audio, video, image
+  - Vector-based graphics when possible, but able to manage raster too
 
 
 
-III) 3D graphics
-================
+III) Graphics capabilities
+==========================
+
   - Polygon-based meshes display
+	* This is still the core of real-time 3D today. It should work properly
+	and efficiently.
+
   - Isosurfaces display
+	* Isosurfaces are an interesting, very light-weight way to represent 3D
+	geometry. Whatever the renderer, there should be a way to view them (either
+	directly with a RT, or through meshing with marching cubes)
+
   - Multiple scenes
-  - Light (ambient, static, dynamic, HDR)
-  - Cameras (with strange views)
-  - Effects (particles, ...)
+
+  - Lights
+
+  - High-level camera management:
+	* Allow attaching a camera somewhere on a unit and having Yuni manage it
+	* Associate cameras with monitors, with devices, with parts of a split
+	screen
+	* Manage several cameras on a scene, or cameras on different scenes
+
+  - 3D Effects:
+	* Particle engine
+	* Mesh explosions (mesh real-time volume decomposition)
+	* Real 3D fog (that reacts to wind, to movements in it. Managed by physics?)
+
+  - 2D Image post-treatment (some of these could be hardware-accelerated)
+	* Distorsions / deformations (panoramic, waves, ...)
+	* Color filters
+	* HDR effects (bloom)
