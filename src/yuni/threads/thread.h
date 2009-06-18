@@ -28,7 +28,7 @@ namespace Threads
 	** {
 	** public:
 	**   MyOwnThread(int p): Yuni::Threads::AThread(), pTag(p)  {}
-	**   virtual ~MyOwnThread() {stop();} // Required
+	**   virtual ~MyOwnThread() {stop();} // Required for Code robustness
 	**
 	** protected:
 	**   virtual void onExecute()

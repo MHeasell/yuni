@@ -1319,13 +1319,17 @@ namespace Yuni
 } // namespace Yuni
 
 
+
 // Specific implementation for string handling
 # include "traits.hxx"
+
 // Standard conversions
 # include "converters.from.hxx"
 # include "converters.to.hxx"
 // Implementation
 # include "string.hxx"
+
+
 
 
 //! \name Operator overload for stream printing

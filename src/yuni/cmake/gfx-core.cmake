@@ -16,8 +16,7 @@ Set(SRC_GFX
 		gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
 		gfx/metaobject.h gfx/metaball.h  gfx/metaball.cpp  gfx/metabox.h
 		gfx/boundingbox.h gfx/boundingbox.hxx
-		gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
-		gfx/engine.h gfx/engine.cpp)
+		gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp)
 source_group(Gfx FILES ${SRC_GFX})
 
 
