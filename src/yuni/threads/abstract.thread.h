@@ -52,7 +52,7 @@ namespace Private
 		** {
 		** public:
 		**   MyOwnThread(int p): Yuni::Threads::AThread(), pTag(p)  {}
-		**   virtual ~MyOwnThread() {stop();} // Required
+		**   virtual ~MyOwnThread() {stop();} // Required for Code robustness
 		**
 		** protected:
 		**   virtual void onExecute()
@@ -112,7 +112,7 @@ namespace Private
 		** \return True if the thread has been started
 		*/
 		bool start();
-		
+
 		/*!
 		** \brief Stop the exeuction of the thread and wait for it, if not already stopped
 		**
@@ -144,7 +144,7 @@ namespace Private
 		** \return True if the thread is running
 		*/
 		bool isRunning() const;
-	
+
 		/*!
 		** \brief Suspend the execution of the thread of X miliseconds
 		**

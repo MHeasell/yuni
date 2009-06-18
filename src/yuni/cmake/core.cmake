@@ -46,6 +46,10 @@ Set(SRC_CORE_STRING
 				core/string/forward.h
 				core/string/traits.hxx
 				core/string/iterators.hxx
+				core/string/traits/countchar.hxx  core/string/traits/find.hxx
+				core/string/traits/haschar.hxx    core/string/traits/length.hxx
+				core/string/traits/remove.hxx     core/string/traits/vsprintf.hxx
+				core/string/traits/findlastof.hxx
 				core/string.h)
 source_group(Core\\String FILES ${SRC_CORE_STRING})
 
@@ -219,6 +223,7 @@ Set(SRC_THREADS
 				threads/abstract.thread.h threads/abstract.thread.cpp
 				threads/thread.h threads/thread.cpp
 				threads/timer.h threads/timer.cpp
+				threads/condition.h threads/condition.cpp threads/condition.hxx
 				threads/cpu.cpp)
 source_group(Threads FILES ${SRC_THREADS})
 

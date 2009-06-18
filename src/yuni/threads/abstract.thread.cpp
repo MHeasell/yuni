@@ -128,8 +128,8 @@ namespace Private
 	{
 		assert(pIsRunning == false);
 
-		pthread_cond_destroy(&p_threadMustStopCond);
-		pthread_cond_destroy(&p_threadIsAboutToExit);
+		::pthread_cond_destroy(&p_threadMustStopCond);
+		::pthread_cond_destroy(&p_threadIsAboutToExit);
 	}
 
 	bool AThreadModel::freeOnTerminate()
@@ -152,7 +152,7 @@ namespace Private
 		if (pIsRunning)
 			return true;
 		pShouldStop = false;
-		pIsRunning = (0 == pthread_create(&pThreadID, NULL, threadMethodForPThread, this));
+		pIsRunning = (0 == ::pthread_create(&pThreadID, NULL, threadMethodForPThread, this));
 		return pIsRunning;
 	}
 
@@ -171,7 +171,7 @@ namespace Private
 		pMutexThreadIsAboutToExit.lock();
 
 		pThreadMustStopMutex.lock();
-		pthread_cond_signal(&p_threadMustStopCond);
+		::pthread_cond_signal(&p_threadMustStopCond);
 		pThreadMustStopMutex.unlock();
 
 		if (pIsRunning)
@@ -181,22 +181,22 @@ namespace Private
 			// Timeout
 			struct timeval mytime;
 			struct timespec myts;
-			gettimeofday(&mytime, NULL);
+			::gettimeofday(&mytime, NULL);
 			myts.tv_sec = mytime.tv_sec + timeout;
 			myts.tv_nsec = mytime.tv_usec * 1000;
 
 			// Waiting for the end of the thread
-			int result = pthread_cond_timedwait(&p_threadIsAboutToExit, &pMutexThreadIsAboutToExit.pthreadMutex(), &myts);
+			int result = ::pthread_cond_timedwait(&p_threadIsAboutToExit, &pMutexThreadIsAboutToExit.pthreadMutex(), &myts);
 			if (result) // A problem occured, or we timed out.
 			{
 				// We are out of time, no choice but to kill our thread
-				pthread_cancel(pThreadID);
+				::pthread_cancel(pThreadID);
 			}
 		}
 
 		pMutexThreadIsAboutToExit.unlock();
 		// Wait for the thread be completely stopped
-		pthread_join(pThreadID, NULL);
+		::pthread_join(pThreadID, NULL);
 		// The thread is no longer running
 		pIsRunning = false;
 		return true;
@@ -219,7 +219,7 @@ namespace Private
 		if (delay)
 		{
 			struct timespec ts;
-			pthread_cond_timedwait(&p_threadMustStopCond, &pThreadMustStopMutex.pthreadMutex(),
+			::pthread_cond_timedwait(&p_threadMustStopCond, &pThreadMustStopMutex.pthreadMutex(),
 				millisecondsFromNow(&ts, delay));
 		}
 		return (pShouldStop || !pIsRunning);
@@ -231,7 +231,7 @@ namespace Private
 		pShouldStop = true;
 		pIsRunning = false;
 		pMutexThreadIsAboutToExit.lock();
-		pthread_cond_signal(&p_threadIsAboutToExit);
+		::pthread_cond_signal(&p_threadIsAboutToExit);
 		pMutexThreadIsAboutToExit.unlock();
 	}
 
@@ -242,7 +242,7 @@ namespace Private
 		pShouldStop = true;
 
 		pThreadMustStopMutex.lock();
-		pthread_cond_signal(&p_threadMustStopCond);
+		::pthread_cond_signal(&p_threadMustStopCond);
 		pThreadMustStopMutex.unlock();
 	}
 
@@ -251,6 +251,8 @@ namespace Private
 	{
 		return stop(timeout) && start();
 	}
+
+
 
 
 } // namespace Private

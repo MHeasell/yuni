@@ -59,12 +59,12 @@ namespace Yuni
 		/*!
 		** \brief Get the original PThread mutex
 		*/
-		pthread_mutex_t& pthreadMutex();
+		::pthread_mutex_t& pthreadMutex();
 		//@}
 
 	private:
 		//! The PThread mutex
-		pthread_mutex_t pPthreadLock;
+		::pthread_mutex_t pPthreadLock;
 
 	}; // class Mutex
 
