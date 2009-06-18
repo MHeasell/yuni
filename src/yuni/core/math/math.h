@@ -226,6 +226,16 @@ namespace Math
 	}; // class SquareRoot
 
 
+	/*!
+	** \brief Fast inverse square root
+	**
+	** Fast inverse square root (sometimes referred to as Fast InvSqrt() or by the
+	** hexadecimal constant 0x5f3759df) is a method of calculating the reciprocal
+	** of a square root for a 32-bit floating point number.
+	** The inverse square root of a floating point number may be used in calculating
+	** a normalized vector.
+	*/
+	inline float FastInvSquareRoot(float f);
 
 	/*!
 	** \brief Get if a value is a power of 2
