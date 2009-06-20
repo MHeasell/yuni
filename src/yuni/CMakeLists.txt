@@ -110,35 +110,35 @@ EndIf(YUNI_MODULE_SCRIPT)
 #
 # Module : User Interface
 #
-If(YUNI_MODULE_UI)
+#If(YUNI_MODULE_UI)
 
-	Message(STATUS "[Module] UI::Core (User Interface)")
+#	Message(STATUS "[Module] UI::Core (User Interface)")
 
 	# User Interface
-	Set(SRC_GFX_UI
-				ui/component.h ui/component.cpp
-				ui/control.h ui/control.cpp ui/anchor.cpp
-				ui/controller.h ui/controller.cpp)
-	source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
+#	Set(SRC_GFX_UI
+#				ui/component.h ui/component.cpp
+#				ui/control.h ui/control.cpp ui/anchor.cpp
+#				ui/controller.h ui/controller.cpp)
+#	source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
 
-	Add_Library(yuni-static-ui-core STATIC
-				${SRC_GFX_UI}
-				)
+#	Add_Library(yuni-static-ui-core STATIC
+#				${SRC_GFX_UI}
+#				)
 
-	IF(YUNI_MODULE_UI_DUMMY)
+#	IF(YUNI_MODULE_UI_DUMMY)
 
-		Message(STATUS "[Module] UI::Dummy")
+#		Message(STATUS "[Module] UI::Dummy")
 
-	ENDIF(YUNI_MODULE_UI_DUMMY)
+#	ENDIF(YUNI_MODULE_UI_DUMMY)
 
 
-	IF(YUNI_MODULE_UI_3D)
+#	IF(YUNI_MODULE_UI_3D)
 
-		Message(STATUS "[Module] UI::Gfx3D")
+#		Message(STATUS "[Module] UI::Gfx3D")
 
-	ENDIF(YUNI_MODULE_UI_3D)
+#	ENDIF(YUNI_MODULE_UI_3D)
 
-EndIf(YUNI_MODULE_UI)
+#EndIf(YUNI_MODULE_UI)
 
 
 
