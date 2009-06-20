@@ -11,7 +11,11 @@ namespace Private
 namespace LogsDecorator
 {
 
+    # if defined(YUNI_OS_MINGW)
+	char* WriteCurrentTimestampToBufferMinGW(void);
+    # else
 	void WriteCurrentTimestampToBuffer(char* buffer);
+    # endif
 
 } // namespace LogsDecorator
 } // namespace Private
@@ -35,11 +39,17 @@ namespace Logs
 		void internalDecoratorAddPrefix(O& out, const String& s)
 		{
 			// Write the verbosity to the output
+            # ifndef YUNI_OS_MINGW
 			char asc[26];
 			Private::LogsDecorator::WriteCurrentTimestampToBuffer(asc);
+            # endif
 
 			out.put('[');
+            # ifndef YUNI_OS_MINGW
 			out.write(asc, 23);
+            # else
+			out += Private::LogsDecorator::WriteCurrentTimestampToBufferMinGW();
+            # endif
 			out.put(']');
 
 			// Transmit the message to the next decorator
