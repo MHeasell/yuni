@@ -7,6 +7,12 @@
 # include "../../../core/math/math.h"
 
 
+// On some compile, a Macro RGB is already defined
+# ifdef RGB
+#   undef RGB
+# endif
+
+
 namespace Yuni
 {
 namespace Gfx
