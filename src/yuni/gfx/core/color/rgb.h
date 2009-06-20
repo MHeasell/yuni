@@ -1,6 +1,7 @@
 #ifndef __YUNI_GFX_CORE_COLOR_RGB_H__
 # define __YUNI_GFX_CORE_COLOR_RGB_H__
 
+# include "../../../yuni.h"
 # include "proxy.h"
 
 
