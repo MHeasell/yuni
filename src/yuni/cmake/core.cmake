@@ -80,8 +80,6 @@ Set(SRC_CORE_SMARTPTR
 				core/smartptr/policies/ownership.h
 				core/smartptr/policies/storage.h
 				core/smartptr/policies/constness.h
-				core/smartptr/sharedptr.h core/smartptr/sharedptr.hxx
-				core/smartptr/scopeptr.h
 				core/smartptr/smartptr.h  core/smartptr/smartptr.hxx
 				)
 source_group(Core\\SmartPtr FILES ${SRC_CORE_SMARTPTR})
