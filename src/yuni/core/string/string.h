@@ -14,6 +14,7 @@
 # include <sstream>
 # include "../static/remove.h"
 # include "forward.h"
+# include "../smartptr/smartptr.h"
 
 
 //! Default separators
@@ -109,6 +110,9 @@ namespace Yuni
 	class StringBase
 	{
 	public:
+        //! Smartptr
+        typedef SmartPtr<StringBase<C,Chunk> > Ptr;
+
 		//! A String list
 		typedef std::list< StringBase<C,Chunk> > List;
 		//! A String vector
