@@ -12,6 +12,11 @@ Set(SRC_DEVICE_DISPLAY
 source_group(Devices\\Display FILES ${SRC_DEVICE_DISPLAY})
 
 
+IF(UNIX)
+	IF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+		Include_directories("/usr/local/include")
+	ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+ENDIF(UNIX)
 
 Add_Library(yuni-static-device-display STATIC
 			yuni.h
