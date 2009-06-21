@@ -166,9 +166,11 @@ namespace Math
 	** \return x**y
 	** \ingroup Math
 	*/
-	inline float Power(const float x, const float y)  {return powf(x, y);}
-	inline double Power(const double x, const double y)  {return pow(x, y);}
-	inline long double Power(const long double x, const long double y)  {return powl(x, y);}
+	inline float Power(const float x, const float y);
+	inline double Power(const double x, const double y);
+	# ifndef YUNI_OS_FREEBSD
+	inline long double Power(const long double x, const long double y);
+	# endif
 
 	/*!
 	** \brief The power function for Integer values
@@ -201,7 +203,9 @@ namespace Math
 	*/
 	inline float SquareRoot(const float x);
 	inline double SquareRoot(const double x);
+	# ifndef YUNI_OS_FREEBSD
 	inline long double SquareRoot(const long double x);
+	# endif
 
 
 	/*!

@@ -29,7 +29,7 @@ namespace Display
 # ifdef YUNI_OS_WINDOWS
 #	include "windows.hxx"
 # endif
-# ifdef YUNI_OS_LINUX
+# ifdef YUNI_OS_UNIX
 #	include "linux.hxx"
 # endif
 

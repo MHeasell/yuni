@@ -122,10 +122,12 @@ namespace Math
 		return ::sqrt(x);
 	}
 
+	# ifndef YUNI_OS_FREEBSD
 	inline long double SquareRoot(const long double x)
 	{
 		return ::sqrtl(x);
 	}
+	# endif
 
 
 
@@ -214,6 +216,27 @@ namespace Math
 		return x * (1.5f - xhalf * x * x);
 	}
 
+
+	
+	inline float Power(const float x, const float y)
+	{
+		return ::powf(x, y);
+	}
+
+	inline double Power(const double x, const double y) 
+	{
+		return ::pow(x, y);
+	}
+
+	# ifndef YUNI_OS_FREEBSD
+	// Those functions are missing for longdouble on FreeBSD
+	// acoshl asinhl atanhl cbrtl coshl erfcl erfl expl expm1l
+	// lgammal log10l log1pl log2l logl powl sinhl tanhl tgammal
+	inline long double Power(const long double x, const long double y)
+	{
+		return powl(x, y);
+	}
+	# endif
 
 } // namespace Math
 } // namespace Yuni
