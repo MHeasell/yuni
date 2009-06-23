@@ -3,6 +3,10 @@
     - Voir http://www.clam.iua.upf.edu/
     - http://www.gnu.org/software/ccaudio/
 
+ - Liens 3D:
+    - http://www.esenthel.com : Esenthel, moteur de jeu très complet
+    - http://www.lightsprint.com : LightSprint, moteur de rendu / post-processing de lumière complexe
+
  - Modules :
     - application
         - Console (Yuni::Application::Console)
@@ -33,7 +37,7 @@
             - Vector
             - Camera
             - Light
-            - Texture
+            - Texture (bump-mapping, parallax mapping)
             - Shader
             - IsoSurface
             - Vertex / typedef VertexList (vector)
@@ -104,4 +108,3 @@
 
 
  xml ?
-
