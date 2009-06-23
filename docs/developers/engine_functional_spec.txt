@@ -104,9 +104,13 @@ III) Graphics capabilities
 	geometry. Whatever the renderer, there should be a way to view them (either
 	directly with a RT, or through meshing with marching cubes)
 
-  - Multiple scenes
+  - Multiple scenes:
+    * Allow real-time portals or "windows" on another scene.
 
-  - Lights
+  - Lights and shadows:
+    * All types of lights should be managed
+	* Shadows (both precomputed and realtime, hard, soft and penumbras)
+	* HDR effects (bloom, color bleeding)
 
   - High-level camera management:
 	* Allow attaching a camera somewhere on a unit and having Yuni manage it
@@ -115,11 +119,14 @@ III) Graphics capabilities
 	* Manage several cameras on a scene, or cameras on different scenes
 
   - 3D Effects:
-	* Particle engine
+	* Particle engine, explosions
 	* Mesh explosions (mesh real-time volume decomposition)
 	* Real 3D fog (that reacts to wind, to movements in it. Managed by physics?)
+	* Bump-mapping, Parallax mapping (or other texture volume techniques)
+	* Ribbon trails
+	* Water (various levels: from simple moving textures to fluid simulation)
 
   - 2D Image post-treatment (some of these could be hardware-accelerated)
-	* Distorsions / deformations (panoramic, waves, ...)
+	* Distortions / deformations (panoramic, waves, ...)
 	* Color filters
-	* HDR effects (bloom)
+	* Blurring, embossing, (thermal view ?)
