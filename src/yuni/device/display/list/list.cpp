@@ -25,12 +25,13 @@ namespace Display
 
 # ifdef YUNI_OS_MAC
 #	include "macosx.hxx"
-# endif
-# ifdef YUNI_OS_WINDOWS
-#	include "windows.hxx"
-# endif
-# ifdef YUNI_OS_UNIX
-#	include "linux.hxx"
+# else
+# 	ifdef YUNI_OS_WINDOWS
+#		include "windows.hxx"
+# 	endif
+# 	ifdef YUNI_OS_UNIX
+#		include "linux.hxx"
+# 	endif
 # endif
 
 
