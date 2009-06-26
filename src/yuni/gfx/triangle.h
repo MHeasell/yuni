@@ -25,16 +25,23 @@ namespace Gfx
 		//! \name Constructors
 		//@{
 		Triangle(const Vertex& v1, const Vertex& v2, const Vertex& v3):
-			pVertex1(v1), pVertex2(v2), pVertex3(v3)
+			pVertex1(v1), pVertex2(v2), pVertex3(v3), pNormal(NULL)
 		{
 			calculateEdges();
 		}
 
 		//! Copy constructor
 		Triangle(const Triangle& t):
-			pVertex1(t.vertex1()), pVertex2(t.vertex2()), pVertex3(t.vertex3())
+			pVertex1(t.vertex1()), pVertex2(t.vertex2()), pVertex3(t.vertex3()), pNormal(NULL)
 		{
 			calculateEdges();
+		}
+
+		//! Destructor
+		~Triangle()
+		{
+			if (pNormal)
+				delete pNormal;
 		}
 
 		//@}
@@ -45,6 +52,22 @@ namespace Gfx
 		const Vertex& vertex1() const { return pVertex1; }
 		const Vertex& vertex2() const { return pVertex2; }
 		const Vertex& vertex3() const { return pVertex3; }
+
+		/*!
+		** \brief Get the normal (unit) vector to this triangle
+		*/
+		const Vector3D<float>& normal()
+		{
+			if (!pNormal)
+			{
+				Vector3D<float> edge1(vertex1().position(), vertex2().position());
+				Vector3D<float> edge2(vertex1().position(), vertex3().position());
+				pNormal = new Vector3D<float>(Vector3D<float>::CrossProduct(edge1, edge2));
+				pNormal->normalize();
+			}
+			return *pNormal;
+		}
+
 		//@}
 
 		/*!
@@ -102,7 +125,7 @@ namespace Gfx
 		EdgeList pEdges;
 
 		//! Surface normal
-		Vector3D<float> pNormal;
+		Vector3D<float>* pNormal;
 
 	}; // class Triangle
 

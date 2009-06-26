@@ -168,39 +168,43 @@ namespace Gfx
 			T** scaled = new T*[width * 2];
 			for (unsigned int line = 0; line < width * 2; ++line)
 				scaled[line] = new T[height * 2];
+			bool leftBorder;
+			bool rightBorder;
+			bool topBorder;
+			bool bottomBorder;
 			// Loop on lines
 			for (unsigned int line = 0; line < width; ++line)
 				// Loop on columns
 				for (unsigned int col = 0; col < height; ++col)
 				{
-					bool LeftBorder = (col <= 0);
-					bool RightBorder = (col >= width - 1);
-					bool TopBorder = (line <= 0);
-					bool BottomBorder = (line >= height - 1);
+					leftBorder = (col <= 0);
+					rightBorder = (col >= width - 1);
+					topBorder = (line <= 0);
+					bottomBorder = (line >= height - 1);
 
 					// T == V && T == S
-					if (!LeftBorder && !TopBorder
+					if (!leftBorder && !topBorder
 						&& image[line - 1][col] == image[line][col - 1]
 						&& image[line - 1][col] == image[line - 1][col - 1])
 						scaled[line * 2    ][col * 2    ] = image[line - 1][col]; // Use T
 					else
 						scaled[line * 2    ][col * 2    ] = image[line][col]; // Nearest neighbour colour
 					// T == W && T == U
-					if (!RightBorder && !TopBorder
+					if (!rightBorder && !topBorder
 						&& image[line - 1][col] == image[line][col + 1]
 						&& image[line - 1][col] == image[line - 1][col + 1])
 						scaled[line * 2    ][col * 2 + 1] = image[line - 1][col]; // Use T
 					else
 						scaled[line * 2    ][col * 2 + 1] = image[line][col]; // Nearest neighbour colour
 					// V == X && V == Y
-					if (!LeftBorder && !BottomBorder
+					if (!leftBorder && !bottomBorder
 						&& image[line][col - 1] == image[line + 1][col - 1]
 						&& image[line][col - 1] == image[line + 1][col])
 						scaled[line * 2 + 1][col * 2    ] = image[line][col - 1]; // Use V
 					else
 						scaled[line * 2 + 1][col * 2    ] = image[line][col]; // Nearest neighbour colour
 					// W == Y && W == Z
-					if (!RightBorder && !BottomBorder
+					if (!rightBorder && !bottomBorder
 						&& image[line][col + 1] == image[line + 1][col]
 						&& image[line][col + 1] == image[line + 1][col + 1])
 						scaled[line * 2 + 1][col * 2    ] = image[line][col + 1]; // Use W

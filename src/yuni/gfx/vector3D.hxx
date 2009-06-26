@@ -40,6 +40,11 @@ namespace Gfx
 		:x((T)x1), y((T)y1), z((T)z1)
 	{}
 
+	template<typename T>
+	template<typename U, typename V>
+	inline Vector3D<T>::Vector3D(const Point3D<U>& origin, const Point3D<V>& end)
+		:x((T)(end.x - origin.x)), y((T)(end.y - origin.y)), z((T)(end.z - origin.z))
+	{}
 
 	template<typename T>
 	inline Vector3D<T>& Vector3D<T>::reset()
@@ -193,7 +198,7 @@ namespace Gfx
 	template<typename T>
 	inline Vector3D<T> Vector3D<T>::CrossProduct(const Vector3D<T>& p1, const Vector3D<T>& p2)
 	{
-		return Vector3d
+		return Vector3D
 			(p1.y * p2.z - p1.z * p2.y,
 			p1.z * p2.x - p1.x * p2.z,
 			p1.x * p2.y - p1.y * p2.x);

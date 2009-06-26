@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include "../core/math/math.h"
-
+# include "point3D.h"
 
 
 namespace Yuni
@@ -46,7 +46,7 @@ namespace Gfx
 		** \return The magnitude of the addition of the 2 vectors
 		*/
 		static T Magnitude(const Vector3D& p1, const Vector3D& p2);
-		
+
 		/*!
 		** \brief Compute the dot product of two arbitrary vectors
 		**
@@ -63,7 +63,7 @@ namespace Gfx
 		** \param p2 The second vector
 		*/
 		static Vector3D CrossProduct(const Vector3D& p1, const Vector3D& p2);
-	
+
 	public:
 		//! \name Constructors
 		//@{
@@ -78,6 +78,15 @@ namespace Gfx
 		*/
 		template<typename U, typename V, typename W>
 		Vector3D(const U x1, const V y1, const W z1 = W());
+
+		/*!
+		** \brief Constructor using two points
+		**
+		** \param origin Origin point of the vector
+		** \param end End point of the vector
+		*/
+		template<typename U, typename V>
+		Vector3D(const Point3D<U>& origin, const Point3D<V>& end);
 
 		//! Constructor by copy
 		Vector3D(const Vector3D& rhs);
@@ -117,7 +126,7 @@ namespace Gfx
 		//@}
 
 
-		//! \name Components 
+		//! \name Components
 		//@{
 		/*!
 		** \brief Get if the vector is null
