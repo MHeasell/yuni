@@ -7,7 +7,7 @@
 using namespace Yuni;
 using namespace Yuni::Gfx;
 
-int main(int argc, char* argv[])
+int main(void)
 {
 	// Instantiate the Scale2X algorithm
 	ImageScaler scaler;
