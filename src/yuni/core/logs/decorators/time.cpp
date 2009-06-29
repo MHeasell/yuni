@@ -38,7 +38,8 @@ namespace LogsDecorator
 		# if defined(YUNI_OS_MSVC)
         /* Microsoft Visual Studio */
 		::localtime_s(&timeinfo, &rawtime);
-		::asctime_s(buffer, &timeinfo);
+		// MSDN specifies that buffer value must be >= 26 for validity.
+		::asctime_s(buffer, 32, &timeinfo);
 		# else
         /* Unixes */
         ::localtime_r(&rawtime, &timeinfo);
