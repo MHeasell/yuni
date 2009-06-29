@@ -38,7 +38,7 @@ namespace StringImpl
 
 		static inline C ToLower(const C a)
 		{
-			return tolower(a);
+			return std::tolower(a);
 		}
 
 
