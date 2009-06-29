@@ -1,9 +1,13 @@
 
-#include "condition.h"
+#include "../yuni.h"
 #include <time.h>
-#include <sys/time.h>
+#if defined(YUNI_OS_MSVC)
+# include <winsock2.h>
+#else
+# include <sys/time.h>
+#endif
 #include <errno.h>
-
+#include "condition.h"
 
 
 namespace Yuni
