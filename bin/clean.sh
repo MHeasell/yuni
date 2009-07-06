@@ -2,11 +2,13 @@
 
 root=`dirname "${0}"`
 
-find "${root}/../src" '(' -name 'cmake*' \
-            -or -name 'CMakeCache*' \
-            -or -name 'CMakeFiles' \
-            -or -name 'Makefile' \
-			-or -name '*.xcodeproj' \
-			-or -name 'CMakeScripts' \
-            -or -name '*.o' \
-            -or -name '.*.swp' ')' -exec echo ' * Removing `' '{}' '`' \; -exec rm -rf '{}' \;
+find "${root}/../src" '(' \
+		-name 'cmake_install.cmake' \
+		-or -name 'CMakeCache.txt' \
+		-or -name 'CMakeFiles' \
+		-or -name 'Makefile' \
+		-or -name '*.xcodeproj' \
+		-or -name 'CMakeScripts' \
+		-or -name '*.o' \
+		-or -name '.*.sw*' \
+	')' -exec echo ' * Removing `' '{}' '`' \; -exec rm -rf '{}' \;
