@@ -8,7 +8,7 @@ namespace Yuni
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline T* SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ExtractPointer(const SmartPtr& p)
+	inline T* SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(const SmartPtr& p)
 	{
 		return storagePointer(p);
 	}
@@ -56,7 +56,10 @@ namespace Yuni
 		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::CopyType& rhs)
-		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs)
+		:StoragePolicy(rhs),
+		OwnershipPolicy(rhs),
+		CheckingPolicy(rhs),
+		ConversionPolicy(rhs)
 	{
 		// Cloning the stored data
 		storageReference(*this) = OwnershipPolicy::clone(storageReference(rhs));
@@ -71,7 +74,10 @@ namespace Yuni
 		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs)
-		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs)
+		:StoragePolicy(rhs),
+		OwnershipPolicy(rhs),
+		CheckingPolicy(rhs),
+		ConversionPolicy(rhs)
 	{
 		// Cloning the stored data
 		storageReference(*this) = OwnershipPolicy::clone(storageReference(rhs));
@@ -86,10 +92,32 @@ namespace Yuni
 		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs)
-		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs)
+		:StoragePolicy(rhs),
+		OwnershipPolicy(rhs),
+		CheckingPolicy(rhs),
+		ConversionPolicy(rhs)
 	{
 		// Cloning the stored data
 		storageReference(*this) = OwnershipPolicy::clone(storageReference(rhs));
+	}
+
+
+	// Copy constructor
+	template<typename T, template <class> class OwspP, template <class> class ChckP,
+		class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+		class ConvP1,
+		template <class> class StorP1, template <class> class ConsP1>
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs,
+		const SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::DynamicCastArg&)
+		:StoragePolicy(rhs),
+		OwnershipPolicy(rhs),
+		CheckingPolicy(rhs),
+		ConversionPolicy(rhs)
+	{
+		// Cloning the stored data
+		storageReference(*this) = OwnershipPolicy::clone(dynamic_cast<typename StoragePolicy::StoredType>(storageReference(rhs)));
 	}
 
 
@@ -99,7 +127,10 @@ namespace Yuni
 		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(Static::MoveConstructor<SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP> > rhs)
-		:StoragePolicy(rhs), OwnershipPolicy(rhs), CheckingPolicy(rhs), ConversionPolicy(rhs)
+		:StoragePolicy(rhs),
+		OwnershipPolicy(rhs),
+		CheckingPolicy(rhs),
+		ConversionPolicy(rhs)
 	{}
 
 
@@ -320,6 +351,18 @@ namespace Yuni
 		return (storagePointer(*this) >= storagePointer(rhs));
 	}
 
+
+	// Operator >
+	template<typename T, template <class> class OwspP, template <class> class ChckP,
+		class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	template<class S1>
+	inline S1
+	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::DynamicCast(SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP> rhs)
+	{
+		typedef typename S1::DynamicCastArg  DA;
+		return S1(rhs, DA());
+	}
 
 
 
