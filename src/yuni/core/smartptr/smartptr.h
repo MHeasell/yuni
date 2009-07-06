@@ -212,14 +212,25 @@ namespace Yuni
 
 	public:
 		/*!
-		** \brief Get the internal stored pointer by the smart pointer
+		** \brief Get the internal stored pointer (weak pointer) by the smart pointer
 		**
 		** \note This methode should be used with care, especially in a multithreaded world
 		** \param p The smart pointer
-		** \return The internal stored pointer (may be null)
+		** \return The internal stored pointer (can be null)
 		*/
-		static T* ExtractPointer(const SmartPtr& p);
+		static T* WeakPointer(const SmartPtr& p);
 
+		/*!
+		** \brief Perform a dynamic_cast on a smartptr
+		**
+		** Assuming the class `B` is a child of the class `A`
+		** \code
+		** A::Ptr a = new B();
+		**
+		** B::Ptr = A::Ptr::DynamicCast<B::Ptr>(a);
+		** \endcode
+		*/
+		template<class S1> static S1 DynamicCast(SmartPtr p);
 
 	private:
 		/*!
@@ -232,42 +243,52 @@ namespace Yuni
 		//! Explicit - Conversions are not allowed
 		typedef typename Static::If<!ConversionPolicy::allow, const StoredType&, NeverMatched>::ResultType ExplicitStoredType;
 
-
 	public:
 		//! \name Constructors & Destructor
 		//@{
-
 		//! Default constructor
 		SmartPtr();
 
-		//! Constructor with a given pointer, when implicit types are not allowed
+		/*!
+		** \brief Constructor with a given pointer, when implicit types are not allowed
+		*/
 		explicit SmartPtr(ExplicitStoredType ptr);
 
-		//! Constructor with a given pointer, when implicit types are allowed
+		/*!
+		** \brief Constructor with a given pointer, when implicit types are allowed
+		*/
 		SmartPtr(ImplicitStoredType ptr);
 
-		//! Copy constructor
+		/*!
+		** \brief Copy constructor
+		*/
 		SmartPtr(CopyType& rhs);
 
-		//! Copy constructor
+		/*!
+		** \brief Copy constructor
+		*/
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
 			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
 		SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs);
 
-		//! Copy constructor
+		/*!
+		** \brief Copy constructor
+		*/
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
 			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
 		SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs);
 
-		//! Move Constructor
+		/*!
+		** \brief Move Constructor
+		*/
 		SmartPtr(Static::MoveConstructor<SmartPtrType> rhs);
 
 		//! Destructor
 		~SmartPtr();
-
 		//@}
+
 
 		//! \name Swap
 		//@{
@@ -301,13 +322,11 @@ namespace Yuni
 			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
 		SmartPtr& operator = (SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs);
-
 		//@}
 
 
 		//! \name Comparisons
 		//@{
-
 		//! Operator `!` (to enable if (!mysmartptr) ...)
 		bool operator ! () const;
 
@@ -346,11 +365,28 @@ namespace Yuni
 			class ConvP1,
 			template <class> class StorP1, template <class> class ConsP1>
 		bool operator >= (const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) const;
-
 		//@}
 
 
-	private:
+	public:
+		struct DynamicCastArg {};
+
+		/*!
+		** \brief Copy constructor with Dynamic casting
+		*/
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs, const DynamicCastArg&);
+
+		/*!
+		** \brief Copy constructor with Dynamic casting
+		*/
+		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
+			class ConvP1,
+			template <class> class StorP1, template <class> class ConsP1>
+		SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs, const DynamicCastArg&);
+
 		//! Empty class to allow  `if (mySmartPtr) ...`
 		struct AutomaticConversion
 		{
@@ -376,8 +412,9 @@ namespace Yuni
 
 
 
-} // namespace Yuni
 
+
+} // namespace Yuni
 
 # include "smartptr.hxx"
 
