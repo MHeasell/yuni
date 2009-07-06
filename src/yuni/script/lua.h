@@ -3,6 +3,7 @@
 
 # include "../yuni.h"
 # include "../core/string.h"
+# include "../core/function.h"
 # include "script.h"
 
 // Macros for call() and bind()
@@ -29,13 +30,13 @@ namespace Script
 namespace Script
 {
 
-
-	/*!
+	/*!	
 	** \brief The class implementing the Lua language scripting.
 	** \ingroup Script
 	*/
 	class Lua : public AScript
 	{
+		template <class> friend class Private::Bind::NthArgument;
 
 	public:
 		//! \name Contructor & Destructor
@@ -80,18 +81,6 @@ namespace Script
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_7_ANYS);
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_8_ANYS);
 
-		// bind()
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback0);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback1);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback2);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback3);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback4);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback5);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback6);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback7);
-		YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(Callback8);
-		//@}
-
 	private:
 
 		/*!
@@ -114,7 +103,14 @@ namespace Script
 		/*!
 		** \brief Callback Proxy
 		*/
-		static int callbackProxy(void *lua_state);
+		static int callbackProxy(void* lua_state);
+
+		/*!
+		** @todo temp
+		*/
+		virtual void internalBindWL(const char* name, Private::Bind::IBinding *func);
+
+		virtual void internalUnbindWL(const char* name);
 
 	private:
 		//! A proxy to the Lua language API.

@@ -19,7 +19,7 @@ namespace Script
 	Lua::Lua()
 		:pEvalPending(0)
 	{
-		this->pProxy = new Private::Script::LuaProxy();
+		this->pProxy = new Yuni::Private::Script::LuaProxy();
 		this->pProxy->pState = luaL_newstate();
 		luaL_openlibs(this->pProxy->pState);
 	}
@@ -146,6 +146,9 @@ namespace Script
 
 	int Lua::popReturnValues(int args, Any* poppedValues)
 	{
+		// For now, return 0.
+		return 0;
+
 		if (0 == args)
 			return 0;
 
@@ -182,40 +185,9 @@ namespace Script
 					std::cerr << "Lua: Return type not implemented." << std::endl;
 			}
 			lua_pop(pProxy->pState, 1);
-			return 1;
 		}
-
-		// We have multiple values, output a vector of these.
-		int popped = 1;
-		MultipleReturn result(args);
-		for (; popped <= args; ++popped)
-		{
-			switch (lua_type(pProxy->pState, lua_gettop(pProxy->pState)))
-			{
-				case LUA_TNIL:
-					result[args - popped] = Any(); /* Empty variant */
-					break;
-				case LUA_TNUMBER:
-					result[args - popped] = lua_tonumber(pProxy->pState, lua_gettop(pProxy->pState));
-					break;
-				case LUA_TBOOLEAN:
-					result[args - popped] = lua_toboolean(pProxy->pState, lua_gettop(pProxy->pState));
-					break;
-				case LUA_TSTRING:
-					result[args - popped] = lua_tostring(pProxy->pState, lua_gettop(pProxy->pState));
-					break;
-				case LUA_TLIGHTUSERDATA:
-					result[args - popped] = lua_tonumber(pProxy->pState, lua_gettop(pProxy->pState));
-					break;
-				default:
-					/* So we did not convert the result. Output an empty Any. */
-					result[args - popped] = Any();
-					std::cerr << "Lua: Return element " << args - popped << " type not implemented." << std::endl;
-			}
-			lua_pop(pProxy->pState, 1);
-		}
-		(*poppedValues) = result;
-		return popped;
+		// FIXME !!!!
+		return 1;
 	}
 
 
@@ -412,78 +384,59 @@ namespace Script
 
 
 	/*
-	* Warning: this function is ugly. Please avoid reading it. Or, if you're brave,
-	* provide a work-around. Or, see it as Abstract Art.
-	*
-	* We have to call the function back with some Anys so that the function doesn't
-	* have to deal with Lua's stack. So, we must push on the lua stack a C closure that
-	* is a proxy to the real callback. We push pointers to the essential data, along with
-	* the number of arguments of the callback, in order to make the correct function call
-	* in the proxy, and pass along any user data we were provided.
+	 * TODO: write updated documentation
 	*
 	* The proxy will in turn extract parameters from the lua stack, and call the bound
 	* function.
 	*
-	* TODO: implement userdata passing.
 	*/
 
-#define YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(cb, argcount) \
-	bool Lua::bind(const String& method, cb callback, void *callbackData) \
-	{ \
-		lua_pushlightuserdata(pProxy->pState, static_cast<void *>(this)); \
-		lua_pushlightuserdata(pProxy->pState, reinterpret_cast<void *>(callback)); \
-		lua_pushlightuserdata(pProxy->pState, static_cast<void *>(callbackData)); \
-		lua_pushinteger(pProxy->pState, argcount); /* argcount variants in the real callback */ \
-		std::cout << "Pushed callback at address: " << reinterpret_cast<void *>(callback) << " with " << argcount << " args" << std::endl; \
-		lua_pushcclosure(pProxy->pState, reinterpret_cast<lua_CFunction>(&(Lua::callbackProxy)), 4); \
-		lua_setfield(pProxy->pState, LUA_GLOBALSINDEX, method.c_str()); \
-		return true; \
-	}
-
-	YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(Callback0, 0);
-	YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(Callback1, 1);
-	YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(Callback2, 2);
-	YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(Callback3, 3);
-	YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(Callback4, 4);
-	YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(Callback5, 5);
-	YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(Callback6, 6);
-	YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(Callback7, 7);
-	YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH(Callback8, 8);
-
-#undef YUNI_SCRIPT_LUA_IMPLEMENT_BIND_WITH
-
-	int Lua::callbackProxy(void *st)
+	int Lua::callbackProxy(void* luaContext)
 	{
-		// Same warning as above.
-		// TODO: please add some ASSERTs in this section.
-		lua_State *state = static_cast<lua_State *>(st);
+		// We got the raw lua context as a void*, because we do not want to
+		// include it when Yuni is used in a program.
+		lua_State *state = static_cast<lua_State*>(luaContext);
 
+		// Start by popping back from the lua stack our pointers.
 		Lua *This = static_cast<Lua *>(lua_touserdata(state, lua_upvalueindex(1)));
+		Private::Bind::IBinding *shell = static_cast<Private::Bind::IBinding *>(lua_touserdata(state, lua_upvalueindex(2)));
 
-		int argCount = lua_tointeger(state, lua_upvalueindex(4)); // Get the original function argument count.
+		// If we're in luck, we now have good pointers.
 
-		switch (argCount)
-		{
-			case 0:
-				{
-					Callback0 call = reinterpret_cast<Callback0>(lua_touserdata(state, lua_upvalueindex(2)));
-					return call(This);
-				}
-				break;
-			case 1:
-				{
-					Callback1 call = reinterpret_cast<Callback1>(lua_touserdata(state, lua_upvalueindex(2)));
-					return call(This, 1);
-				}
-				break;
-			default:
-				lua_pushstring(state, "Yuni::Script::Lua::callbackProxy(): received garbage data.");
-				lua_error(state); // Never returns.
-		};
-
-
-		return 0;
+		// Let the shell we got Call the method and return the result count.
+		// Lua must indeed know how many arguments should be popped.
+		return shell->performFunctionCall(This);
 	}
+
+
+	/*
+	 * @todo Temp
+	 */
+	void Lua::internalBindWL(const char *name, Private::Bind::IBinding *func)
+	{
+		// Push on the stack pointers to us and to the bound function wrapper.
+		// The bound function wrapper will know what and how to call,
+		// but it will need the context data.
+		lua_pushlightuserdata(pProxy->pState, static_cast<void *>(this));
+		lua_pushlightuserdata(pProxy->pState, static_cast<void *>(func));
+
+		// Push the address of our "callback proxy", which will know how
+		// to decode the call, and perform the C++ call.
+		lua_pushcclosure(pProxy->pState, reinterpret_cast<lua_CFunction>(&(Lua::callbackProxy)),
+						 2 /* 2 arguments in the closure */);
+
+		// Finally assign the closure to its name in the script context
+		lua_setfield(pProxy->pState, LUA_GLOBALSINDEX, name);
+
+		// What if we do not succeed ?
+	}
+
+	void Lua::internalUnbindWL(const char *name)
+	{
+		// TODO: Implement this method.
+		std::cout << "Lua internal unbind WL was called for function [" << name << std::endl;
+	}
+
 
 
 

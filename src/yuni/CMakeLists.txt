@@ -77,7 +77,7 @@ If(YUNI_MODULE_SCRIPT)
 	# Scripts
 	Set(SRC_SCRIPT
 				script.h
-				script/script.h script/script.cpp
+				script/script.h script/script.hxx script/script.cpp
 				private/script/script.defines.h private/script/script.undefs.h
 		)
 	source_group("Script\\Script Abstraction" FILES ${SRC_SCRIPT})
@@ -89,7 +89,7 @@ If(YUNI_MODULE_SCRIPT)
 		DEVPACK_IMPORT_LUA()
 		Set(SRC_EXTERNAL_SCRIPT_LUA
 				${YUNI_EXT_LUA_SRC}  # From DevPack 'lua'
-				script/lua.h script/lua.cpp
+				script/lua.h script/lua.cpp script/script.args.lua.cpp
 				private/script/lua.proxy.h private/script/lua.proxy.cpp
 			)
 		source_group("Script\\Script Lua language support" FILES ${SRC_EXTERNAL_SCRIPT_LUA})

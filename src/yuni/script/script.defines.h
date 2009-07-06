@@ -73,9 +73,5 @@
 # define YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(...) \
 	virtual bool call(Any *retValues, const String& method, ## __VA_ARGS__)
 
-# define YUNI_SCRIPT_SCRIPT_DECLARE_BIND_WITH(cb) \
-			virtual bool bind(const String& method, cb, void *callBackData = NULL)
-
-
 #endif /* !__YUNI_SCRIPT_SCRIPT_DEFINES_H__ */
 

@@ -1,23 +1,23 @@
 -- Lua basic program
 
-print "Hello, world. I have been evaluated."
+print "[ Lua] Hello, world. I have been evaluated."
 
 function foo()
-	print "The Lua foo() was called.";
+	print "[ Lua] The Lua foo() was called.";
 	return 1;
 end
 
 function callMeOnly()
-	print "callMeOnly() called, successful.";
+	print "[ Lua] callMeOnly() called, successful.";
 	return 1;
 end
 
 function callMeWithArg(arg, arg2)
-	print ("callMeWithArg() called with arg " .. arg .. " and " .. arg2 .. " successful.");
+	print ("[ Lua] callMeWithArg() called with arg " .. arg .. " and " .. arg2 .. " successful.");
 	return 1, 2, 3;
 end
 
 function callBar()
-	print "Let's call the C++ bar().";
-	bar(2);
+	print "[ Lua] Let's call the C++ bar().";
+	print ("[ Lua] bar(4242, 2.4, 'nyu', 2, nil, nil) returned [" .. bar(4242, 2.4, "nyu", 0, 0, 0) .. "].");
 end
