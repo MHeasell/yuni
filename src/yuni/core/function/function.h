@@ -2205,6 +2205,6 @@ namespace Function
 } // namespace Function
 } // namespace Yuni
 
-# include "/Users/footy/Projects/yuni/trunk/src/yuni/core/function/function.hxx"
+# include "function.hxx"
 
 #endif // __YUNI_CORE_FUNCTION_FUNCTION_H__
