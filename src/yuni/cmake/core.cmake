@@ -115,7 +115,9 @@ source_group(Core\\DynamicLibrary FILES ${SRC_CORE_DYNAMICLIBRARY})
 Set(SRC_CORE_EVENT
 				core/event/event.h core/event/event.hxx
 				core/event/event.declaration.h
-				core/event/event.defines.h core/event/event.undef.h
+				core/event/event.undef.h
+				core/event/observer/observer.h core/event/observer/observer.hxx
+				core/event/ievent.h core/event/ievent.hxx core/event/ievent.cpp
 				core/event.h)
 source_group(Core\\Event FILES ${SRC_CORE_EVENT})
 
