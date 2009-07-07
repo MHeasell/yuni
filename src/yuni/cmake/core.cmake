@@ -229,7 +229,7 @@ source_group(Threads FILES ${SRC_THREADS})
 Set(SRC_JOBS
 				jobs.h
 				jobs/job.h jobs/job.cpp)
-source_group(Jobs FILES ${SRC_THREADS})
+source_group(Jobs FILES ${SRC_JOBS})
 
 
 # Application
