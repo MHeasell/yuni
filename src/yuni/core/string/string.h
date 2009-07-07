@@ -110,8 +110,8 @@ namespace Yuni
 	class StringBase
 	{
 	public:
-        //! Smartptr
-        typedef SmartPtr<StringBase<C,Chunk> > Ptr;
+		//! Smartptr
+		typedef SmartPtr<StringBase<C,Chunk> > Ptr;
 
 		//! A String list
 		typedef std::list< StringBase<C,Chunk> > List;
@@ -360,6 +360,13 @@ namespace Yuni
 		*/
 		static StringBase ToUTF8(const C* s);
 		template<int Chnk1> static StringBase ToUTF8(const StringBase<C,Chnk1>& s);
+
+		/*!
+		** \brief Get the CString part of any string
+		**
+		** \tparam U Any string type (const char*, std::string, String, ...)
+		*/
+		template<typename U> static const Char* CString(const U& u);
 		//@} Misc
 
 	public:

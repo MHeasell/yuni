@@ -216,7 +216,7 @@ source_group(Core\\System\\Windows FILES ${SRC_CORE_SYSTEM_WINDOWS})
 # Threads
 Set(SRC_THREADS
 				threads/policy.h
-				threads/mutex.h threads/mutex.hxx threads/mutex.cpp
+				threads/mutex.h threads/mutex.hxx
 				threads/abstract.thread.hxx
 				threads/abstract.thread.h threads/abstract.thread.cpp
 				threads/thread.h threads/thread.cpp

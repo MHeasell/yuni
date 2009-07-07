@@ -30,6 +30,12 @@ namespace StringImpl
 
 
 
+	template<typename C, typename U>
+	struct CString
+	{
+		static const C* Extractor(const U& u);
+	};
+
 
 
 	template<typename C, int K>
@@ -199,6 +205,7 @@ namespace StringImpl
 # include "traits/find.hxx"
 # include "traits/remove.hxx"
 # include "traits/findlastof.hxx"
+# include "traits/cstring.hxx"
 
 
 #endif // __YUNI_CORE_STRING_STRING_TRAITS_TRAITS_HXX__

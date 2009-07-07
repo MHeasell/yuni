@@ -5,6 +5,5 @@
 # 	define _MULTI_THREADED
 # endif
 # include <pthread.h>
-# include <semaphore.h>
 
 #endif // __YUNI_THREADS_PTHREAD_H__
