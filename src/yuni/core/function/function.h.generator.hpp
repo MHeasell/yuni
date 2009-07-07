@@ -486,7 +486,7 @@ $h .= "\n";
 $h .= "} // namespace Function\n";
 $h .= "} // namespace Yuni";
 $h .= "\n\n";
-$h .= "# include \"${filename}.hxx\"";
+$h .= "# include \"".basename($filename).".hxx\"";
 $h .= "\n\n";
 $h .= "#endif // ${headerProtect}_H__\n";
 
