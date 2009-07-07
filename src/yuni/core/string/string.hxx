@@ -2156,6 +2156,17 @@ namespace Yuni
 	}
 
 
+
+
+	template<typename C, int Chunk>
+	template<typename U>
+	inline const C* StringBase<C,Chunk>::CString(const U& u)
+	{
+		return Private::StringImpl::CString<C, U>::Extractor(u);
+	}
+
+
+
 } // namespace Yuni
 
 #endif // __YUNI_CORE_STRING_HXX__
