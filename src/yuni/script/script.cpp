@@ -1,17 +1,9 @@
-
 #include "script.h"
-#include "lua.h"
 
 namespace Yuni
 {
 namespace Script
 {
-
-
-
-namespace Bind
-{
-}
 
 	AScript::AScript()
 	{
@@ -96,7 +88,6 @@ namespace Bind
 			return true;
 		}
 		return false;
-
 	}
 
 

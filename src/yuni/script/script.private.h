@@ -1,18 +1,10 @@
 #ifndef __YUNI_SCRIPT_SCRIPT_PRIVATE_H__
 # define __YUNI_SCRIPT_SCRIPT_PRIVATE_H__
 
-
 namespace Yuni
 {
 namespace Script
 {
-
-	// Adding a language ?
-	// Insert here the declaration of your language's class.
-	class Lua;
-
-
-
 namespace Private
 {
 namespace Bind
@@ -20,7 +12,6 @@ namespace Bind
 
 	/*!
 	** \brief Base class for Argument getters
-	**
 	** \tparam TScript The script engine type (Lua, ...)
 	** \tparam TArgType The desired type of the argument.
 	**
@@ -35,7 +26,6 @@ namespace Bind
 
 	/*!
 	** \brief Base class for ReturnValue pushers
-	**
 	** \see NthArgument
 	** \tparam TScript The script engine type (Lua, ...)
 	** \tparam TValueType The type of the value to push.
@@ -48,16 +38,16 @@ namespace Bind
 
 	/*!
 	** \brief Abstract proxy for C++ function binding into languages.
-	**
+	** 
 	** \todo document this.
 	*/
 	struct IBinding
 	{
 		//! Dtor
-		virtual ~IBinding() {}
+		virtual ~IBinding();
 
 		//! Returns the contained function's arguement count
-		virtual unsigned int argumentCount() = 0;
+		virtual unsigned int argumentCount() const = 0;
 
 		//! Performs the actual function call for Lua implementation
 		virtual int performFunctionCall(Lua * /* context */) = 0;
@@ -66,12 +56,8 @@ namespace Bind
 		// Insert here more function call overloads for your own script types
 	};
 
-
-
-
 	/*!
 	** \brief Concrete templated binding implementation.
-	**
 	** \tparam Fx The right Yuni::Function for the function pointer passed.
 	** \tparam ReturnType The passed function return type.
 	**
@@ -83,33 +69,13 @@ namespace Bind
 	class Binding : public IBinding
 	{
 	public:
-		//! Ctor
-		Binding(const Fx& fPtr)
-			: pRealFunction(fPtr.ptr())
-		{}
-
-		unsigned int argumentCount()
-		{
-			return Fx::argumentsCount;
-		}
-
-		int performFunctionCall(Lua* luaContext)
-		{
-			/*	Lua::Private::Bind::ReturnValue<typename Fx::ReturnType>
-				::Push(luaContext, callRealFunction<NthArgument>(context, 0));	*/
-
-			pRealFunction. template callWithArgumentGetter<NthArgument, Lua*>(luaContext);
-
-			std::cout << __FILE__ << ": Performing call, with return value." << std::endl;
-			return 1;
-		}
+		Binding(const Fx& fPtr);
+		unsigned int argumentCount() const;
+		int performFunctionCall(Lua* luaContext);
 
 	private:
 		Fx pRealFunction;
-
-	}; // class Binding
-
-
+	};
 
 	/*!
 	** \brief Specialization of Binding for functions returning void.
@@ -118,34 +84,20 @@ namespace Bind
 	class Binding<Fx, void> : public IBinding
 	{
 	public:
-		Binding(const Fx& fPtr)
-			: pRealFunction(fPtr.ptr())
-		{}
-
-		unsigned int argumentCount()
-		{
-			return Fx::argumentsCount;
-		}
-
-		int performFunctionCall(Lua* luaContext)
-		{
-			/*	Lua::Private::Bind::ReturnValue<typename Fx::ReturnType>
-				::Push(luaContext, callRealFunction<NthArgument>(context, 0));	*/
-			pRealFunction. template callWithArgumentGetter<NthArgument, Lua*>(luaContext);
-			std::cout << __FILE__ << ": Performing call WITHOUT return value." << std::endl;
-			return 0;
-		}
+		Binding(const Fx& fPtr);
+		unsigned int argumentCount() const;
+		int performFunctionCall(Lua* luaContext);
 
 	private:
 		Fx pRealFunction;
 	};
 
 
-
-
 } // namespace Bind
 } // namespace Private
 } // namespace Script
 } // namespace Yuni
+
+# include "script.private.hxx"
 
 #endif // __YUNI_SCRIPT_SCRIPT_PRIVATE_H__

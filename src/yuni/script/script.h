@@ -16,18 +16,30 @@
 // Defines complex macros used to declare call() and bind().
 # include "script.defines.h"
 
-// Private
-# include "script.private.h"
-
 
 namespace Yuni
 {
 namespace Script
 {
 
+	// Adding a language ?
+	// Insert here the declaration of your language's class.
+	class Lua;
+
+} // namespace Script
+} // namespace Yuni
+
+// Include Bindings in private namespace
+# include "script.private.h"
+
+namespace Yuni
+{
+namespace Script
+{
 
 	/*!
 	** \brief All the supported languages.
+	**
 	** \todo This enum must be dynamic to account only for the
 	** \todo built-in languages.
 	** \ingroup Script
@@ -39,9 +51,6 @@ namespace Script
 		//! This is the Lua language
 		slLua
 	};
-
-
-
 
 	/*!
 	** \brief Script Interface (abstract)
@@ -182,6 +191,7 @@ namespace Script
 
 		/*!
 		** \brief Returns true if the named function is bound.
+		**
 		** \param[in] functionName The function name
 		*/
 		bool isBound(const char* functionName);
@@ -198,14 +208,6 @@ namespace Script
 		** \brief This family of functions calls the specified function.
 		**
 		** It exists in 9 different versions, from 0 to 8 arguments.
-		**
-		** \param[out] retValues A variant containing the (or a list of) the return
-		**			   values. You may pass NULL there if you do
-		**			   not wish to do anything with the return value.
-		** \param[in] method The method to call in the script namespace
-		** \param[in] arg1 The first argument (and so on.) You can pass an empty Any as a
-		**			  value to mean the same thing as "nil" in Lua.
-		** \return True if the call was made without any runtime fatal error.
 		**
 		** This function supports a restricted set of value types. If a type mean nothing in the
 		** current script language, a default neutral value will be used.
@@ -228,6 +230,14 @@ namespace Script
 		** }
 		**
 		** \endcode
+		**
+		** \param[out] retValues A variant containing the (or a list of) the return
+		**			   values. You may pass NULL there if you do
+		**			   not wish to do anything with the return value.
+		** \param[in] method The method to call in the script namespace
+		** \param[in] arg1 The first argument (and so on.) You can pass an empty Any as a
+		**			  value to mean the same thing as "nil" in Lua.
+		** \return True if the call was made without any runtime fatal error.	
 		*/
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH() = 0;
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_1_ANY) = 0;
