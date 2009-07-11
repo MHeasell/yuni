@@ -142,7 +142,7 @@ for ($i = 0; $i <= ARG_MAX; ++$i)
 		//! \name Constructor & Destructor
 		//@{
 		/*!
-		** \bief Default Constructor
+		** \brief Default Constructor
 		**
 		** \param o Pointer to the object
 		** \param method Pointer to member

@@ -152,6 +152,7 @@ namespace DynamicLibrary
 		/*!
 		** \brief Constructor - Load an dynamic library
 		**
+		** \param filename Filename of the library to load
 		** \param r The relocation mode (no effect on Windows)
 		** \param v The visibility mode (no effect on Windows)
 		*/

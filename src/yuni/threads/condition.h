@@ -101,7 +101,7 @@ namespace Threads
 		//@}
 
 		/*!
-		** \bief Get the inner mutex
+		** \brief Get the inner mutex
 		*/
 		Mutex& mutex() const;
 
