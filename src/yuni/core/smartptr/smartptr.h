@@ -223,7 +223,7 @@ namespace Yuni
 		/*!
 		** \brief Perform a dynamic_cast on a smartptr
 		**
-		** Assuming the class `B` is a child of the class `A`
+		** Assuming the class `B` is a descendant of the class `A`
 		** \code
 		** A::Ptr a = new B();
 		**
