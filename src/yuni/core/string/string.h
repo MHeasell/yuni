@@ -262,7 +262,7 @@ namespace Yuni
 
 
 		//! \name Misc
-		//!{
+		//@{
 		/*!
 		** \brief Try to find the first occurence of a string from `offset` in a STL container
 		**
@@ -942,22 +942,32 @@ namespace Yuni
 		StringBase& replace(const Char from, const Char to, const Size offset);
 		//@}
 
+
 		//! \name Extracting
 		//@{
 		/*!
 		** \brief Get the sub-string of the string
+		**
+		** \param pos The position of the first character
 		*/
 		StringBase substr(const Size offset) const;
 		/*!
 		** \brief Get the sub-string of the string
+		**
+		** \param pos The position of the first character
+		** \param len The length of the substring to extract
 		*/
 		StringBase substr(const Size offset, const Size len) const;
 
 		/*!
 		** \brief Get the sub-string of the string assuming it is an UTF8 charset
+		**
+		** \param pos The position of the first character
+		** \param len The length of the substring to extract
 		*/
 		StringBase substrUTF8(Size pos, Size len = npos) const;
 		//@}
+
 
 		//! \name Case conversion
 		//@{
@@ -970,6 +980,7 @@ namespace Yuni
 		*/
 		StringBase& toUpper();
 		//@}
+
 
 		//! \name Format
 		//@{
