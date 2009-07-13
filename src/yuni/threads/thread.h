@@ -57,6 +57,10 @@ namespace Threads
 	class AThread : public Private::AThreadModel
 	{
 	public:
+		//! Return error status
+		typedef Private::AThreadModel::Error Error;
+
+	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor

@@ -146,22 +146,22 @@ namespace Private
 	}
 
 
-	bool AThreadModel::start()
+	AThreadModel::Error AThreadModel::start()
 	{
 		MutexLocker locker(pMutex);
 		if (pIsRunning)
-			return true;
+			return errNone;
 		pShouldStop = false;
 		pIsRunning = (0 == ::pthread_create(&pThreadID, NULL, threadMethodForPThread, this));
-		return pIsRunning;
+		return pIsRunning ? errNone : errThreadCreation;
 	}
 
 
-	bool AThreadModel::stop(const uint16 timeout)
+	AThreadModel::Error AThreadModel::stop(const uint16 timeout)
 	{
 		MutexLocker locker(pMutex);
 		if (!pIsRunning) // already stopped
-			return true;
+			return errNone;
 
 		// Early indicates that this thread should stop
 		pShouldStop = true;
@@ -173,6 +173,9 @@ namespace Private
 		pThreadMustStopMutex.lock();
 		::pthread_cond_signal(&p_threadMustStopCond);
 		pThreadMustStopMutex.unlock();
+
+		// The return status
+		Error status = errNone;
 
 		if (pIsRunning)
 		{
@@ -191,6 +194,7 @@ namespace Private
 			{
 				// We are out of time, no choice but to kill our thread
 				::pthread_cancel(pThreadID);
+				status = errTimeout;
 			}
 		}
 
@@ -199,7 +203,7 @@ namespace Private
 		::pthread_join(pThreadID, NULL);
 		// The thread is no longer running
 		pIsRunning = false;
-		return true;
+		return status;
 	}
 
 
@@ -247,9 +251,10 @@ namespace Private
 	}
 
 
-	bool AThreadModel::restart(const uint16 timeout)
+	AThreadModel::Error AThreadModel::restart(const uint16 timeout)
 	{
-		return stop(timeout) && start();
+		const Error status = stop(timeout);
+		return (status != errNone) ? status : start();
 	}
 
 

@@ -34,6 +34,20 @@ namespace Private
 	{
 		friend void* threadMethodForPThread(void* arg);
 	public:
+		//! Return error status
+		enum Error
+		{
+			//! The operation failed for an unkown reason
+			errUnkown = 0,
+			//! No error, the operation succeeded
+			errNone = 1,
+			//! A timeout occured
+			errTimeout,
+			//! Impossible to create the new thread
+			errThreadCreation,
+		};
+
+	public:
 		/*!
 		** \brief Get the number of system CPU, 1 if unknown
 		*/
@@ -111,15 +125,15 @@ namespace Private
 		**
 		** \return True if the thread has been started
 		*/
-		bool start();
+		Error start();
 
 		/*!
 		** \brief Stop the exeuction of the thread and wait for it, if not already stopped
 		**
 		** \param timeout The timeout in seconds before killing the thread (default: 5s)
-		** \return True if the thread has been stopped, or was already stopped
+		** \return An error status (`errNone` if succeeded)
 		*/
-		bool stop(const uint16 timeout = 5 /* 5 seconds */);
+		Error stop(const uint16 timeout = 5 /* 5 seconds */);
 
 		/*!
 		** \brief Restart the thread
@@ -130,7 +144,7 @@ namespace Private
 		** \see stop()
 		** \see start()
 		*/
-		bool restart(const uint16 timeout = 5);
+		Error restart(const uint16 timeout = 5);
 
 		/*!
 		** \brief Indicates that the thread should stop as soon as possible
