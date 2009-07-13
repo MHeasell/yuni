@@ -141,7 +141,10 @@ for ($i = 0; $i <= ARG_MAX; ++$i)
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -191,6 +194,7 @@ for ($i = 0; $i <= ARG_MAX; ++$i)
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}

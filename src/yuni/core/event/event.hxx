@@ -54,7 +54,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -104,6 +107,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -167,7 +171,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -217,6 +224,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -280,7 +288,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -330,6 +341,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -393,7 +405,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -443,6 +458,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -506,7 +522,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -556,6 +575,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -619,7 +639,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -669,6 +692,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -732,7 +756,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -782,6 +809,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -845,7 +873,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -895,6 +926,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -958,7 +990,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -1008,6 +1043,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -1071,7 +1107,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -1121,6 +1160,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -1184,7 +1224,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -1234,6 +1277,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -1297,7 +1341,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -1347,6 +1394,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -1410,7 +1458,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -1460,6 +1511,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -1523,7 +1575,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -1573,6 +1628,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -1636,7 +1692,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -1686,6 +1745,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -1749,7 +1809,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -1799,6 +1862,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
@@ -1862,7 +1926,10 @@ namespace Event
 		{
 			const typename ObserverList::iterator end = pObservers.end();
 			for (typename ObserverList::iterator i = pObservers.begin(); i != end; ++i)
+			{
 				((*i)->observer())->internalDetachEvent(this);
+				delete *i;
+			}
 			pObservers.clear();
 		}
 	}
@@ -1912,6 +1979,7 @@ namespace Event
 				if ((*i)->observer() == o)
 				{
 					// Erasing the item
+					delete *i;
 					pObservers.erase(i++);
 					continue;
 				}
