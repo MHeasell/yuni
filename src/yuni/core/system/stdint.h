@@ -67,9 +67,19 @@ namespace Yuni
 	static const uint64 AutoDetectNullChar = (uint64)(-1);
 
 
+	//! A null class
+	class NullPtr;
+
 
 
 } // namespace Yuni
+
+
+
+# ifndef YUNI_CPP_0X
+//! nullptr
+#	define nullptr  ((const Yuni::NullPtr*)0)
+# endif
 
 
 #endif // __YUNI_SYSTEM_STANDARD_INTERFACE_INT_DATA_H__
