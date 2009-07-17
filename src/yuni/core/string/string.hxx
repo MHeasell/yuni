@@ -18,6 +18,13 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>::StringBase(const NullPtr*)
+		:pSize(0), pCapacity(0), pPtr(NULL)
+	{}
+
+
+
+	template<typename C, int Chunk>
 	StringBase<C,Chunk>::StringBase(const StringBase<C,Chunk>& copy)
 		:pSize(copy.pSize)
 	{

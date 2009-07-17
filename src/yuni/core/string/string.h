@@ -420,6 +420,11 @@ namespace Yuni
 		StringBase(const Char c);
 
 		/*!
+		** \brief Constructor with an empty value
+		*/
+		StringBase(const NullPtr*);
+
+		/*!
 		** \brief Constructor - From a repetition of chars
 		**
 		** \param n The number of occurences
