@@ -15,6 +15,9 @@
 #	define YUNI_MSVC_SECURE_VSPRINTF
 # endif
 
+# include <cstddef>
+
+
 
 
 namespace Yuni
