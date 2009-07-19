@@ -359,6 +359,35 @@ namespace Yuni
 	}
 
 
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator = (const NullPtr*)
+	{
+		clear();
+		return *this;
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator += (const NullPtr*)
+	{
+		/* Do nothing */
+		return *this;
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator << (const NullPtr*)
+	{
+		/* Do nothing */
+		return *this;
+	}
+
+
+
+
 
 	template<typename C, int Chunk>
 	template<typename U>
@@ -873,6 +902,22 @@ namespace Yuni
 	StringBase<C,Chunk>::operator == (const C* rhs) const
 	{
 		return Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize);
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::operator == (const NullPtr*) const
+	{
+		return !pSize;
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::operator != (const NullPtr*) const
+	{
+		return (0 != pSize);
 	}
 
 
