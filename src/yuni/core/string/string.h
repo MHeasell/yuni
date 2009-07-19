@@ -1245,12 +1245,35 @@ namespace Yuni
 		StringBase& operator = (const StringBase& rhs);
 
 		/*!
+		** \brief Set the value of the string
+		**
+		** This method is strictly equivalent to the method append()
+		** with one parameter but the string is cleared before.
+		*/
+		template<typename U> StringBase& operator = (const U& u);
+
+		/*!
+		** \brief Empty the string
+		**
+		** This method is strictly equivalent to the method clear()
+		*/
+		StringBase& operator = (const NullPtr*);
+
+		/*!
 		** \brief Append a value to the end of the string
 		**
 		** This method is strictly equivalent to the method append()
 		** with one parameter.
 		*/
 		template<typename U> StringBase& operator += (const U& u);
+
+		/*!
+		** \brief Append a null value to the end of the string (actually do nothinh)
+		**
+		** This method is strictly equivalent to the method append()
+		** with one parameter.
+		*/
+		StringBase& operator += (const NullPtr*);
 
 		/*!
 		** \brief Append a value to the end of the string
@@ -1261,13 +1284,12 @@ namespace Yuni
 		template<typename U> StringBase& operator << (const U& u);
 
 		/*!
-		** \brief Set the value of the string
+		** \brief Append a null value to the end of the string (actually do nothinh)
 		**
 		** This method is strictly equivalent to the method append()
-		** with one parameter but the string is cleared before.
+		** with one parameter.
 		*/
-		template<typename U> StringBase& operator = (const U& u);
-
+		StringBase& operator << (const NullPtr*);
 
 		//! Get if the string is less than a C-String (can be null)
 		bool operator < (const Char rhs[]) const;
@@ -1282,6 +1304,10 @@ namespace Yuni
 
 		//! Get if the string is equivalent to a C-String (can be null)
 		bool operator == (const Char rhs[]) const;
+
+		//! Get if the string is equivalent to a NULL C-String
+		bool operator == (const NullPtr*) const;
+
 		template<int N> bool operator == (const Char rhs[N]) const;
 		//! Get if the string is equivalent to another string
 		template<int Chnk1>
@@ -1293,6 +1319,8 @@ namespace Yuni
 		//! Get if the string is not equivalent to another string
 		template<int Chnk1>
 		bool operator != (const StringBase<Char,Chnk1>& rhs) const;
+		//! Get if the string is equivalent to a NULL C-String
+		bool operator != (const NullPtr*) const;
 
 		/*!
 		** \brief Get an iterator at a specific position
