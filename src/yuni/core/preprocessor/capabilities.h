@@ -68,6 +68,9 @@
 ** 32/64 Bits
 ** YUNI_OS_32 or YUNI_OS_64
 **
+** C++0X
+** YUNI_CPP_0X
+**
 ** All those informations can be found at http://predef.sourceforge.net/
 */
 
@@ -143,6 +146,11 @@
 # endif /* __GNUC__ */
 
 
+
+/* C++0x */
+# if defined(__GXX_EXPERIMENTAL_CPP0X__) || defined(_RWSTD_EXT_CXX_0X)
+#	define YUNI_CPP_0X
+# endif
 
 
 #endif /* __YUNI_PREPROCESSOR_OS_DETECTION_H__ */
