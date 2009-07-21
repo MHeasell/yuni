@@ -1,207 +1,461 @@
 #ifndef __YUNI_CORE_GETOPT_OPTION_H__
 # define __YUNI_CORE_GETOPT_OPTION_H__
 
-# include "../../yuni.h"
-# include <list>
 # include "../string.h"
+
+
+/*!
+** \brief The maximum length for a long name of an option
+*/
+# define YUNI_GETOPT_LONGNAME_MAX_LENGTH  42
+
+
 
 
 namespace Yuni
 {
-namespace Core
+namespace Private
 {
-namespace GetOpt
+namespace GetOptImpl
 {
 
-	class AOption
+	// Forward declaration
+	class Tokenizer;
+
+
+	template<class T>
+	struct Value
+	{
+		static bool Add(T& out, const String::Char* c_str, const String::size_type len)
+		{
+			out = (len) ? String(c_str, len).to<T>() : T();
+			return true;
+		}
+
+	};
+
+
+	template<class C, int Chnk>
+	struct Value<StringBase<C, Chnk> >
+	{
+		static bool Add(StringBase<C,Chnk>& out, const String::Char* c_str, const String::size_type len)
+		{
+			if (len)
+				out.assign(c_str, len);
+			else
+				out.clear();
+			return true;
+		}
+	};
+
+
+	template<class C, class Traits, class Alloc>
+	struct Value<std::basic_string<C, Traits, Alloc> >
+	{
+		static bool Add(std::basic_string<C,Traits,Alloc>& out, const String::Char* c_str, const String::size_type len)
+		{
+			if (len)
+				out += c_str;
+			else
+				out.clear();
+			return true;
+		}
+	};
+
+	template<template<class,class> class L, class T, class Alloc>
+	struct Value<L<T, Alloc> >
+	{
+		static bool Add(L<T,Alloc>& out, const String::Char* c_str, const String::size_type len)
+		{
+			if (len)
+				out.push_back(String(c_str, len).to<T>());
+			else
+				out.push_back(T());
+			return true;
+		}
+	};
+
+
+	template<template<class, class> class L, class C, int Chnk, class Alloc>
+	struct Value<L<StringBase<C,Chnk>, Alloc> >
+	{
+		static bool Add(L<StringBase<C, Chnk>, Alloc>& out, const String::Char* c_str, const String::size_type len)
+		{
+			out.push_back(String(c_str, len));
+			return true;
+		}
+	};
+
+
+	template<template<class, class> class L, class C, class Traits, class AllocS, class Alloc>
+	struct Value<L<std::basic_string<C, Traits, AllocS>, Alloc> >
+	{
+		static bool Add(L<std::basic_string<C, Traits, AllocS>, Alloc>& out, const String::Char* c_str, const String::size_type len)
+		{
+			if (len)
+				out.push_back(std::string(c_str, len));
+			else
+				out.push_back(std::string());
+			return true;
+		}
+	};
+
+
+	template<class T>
+	struct Flag
+	{
+		static void Enabled(T& out)
+		{
+			out = T(1);
+		}
+	};
+
+
+	template<> struct Flag<bool>
+	{
+		static void Enable(bool& out)
+		{
+			out = true;
+		}
+	};
+
+	template<> struct Flag<sint16>
+	{
+		static void Enable(sint16& out)
+		{
+			out = 1;
+		}
+	};
+
+	template<> struct Flag<sint32>
+	{
+		static void Enable(sint32& out)
+		{
+			out = 1;
+		}
+	};
+
+	template<> struct Flag<sint64>
+	{
+		static void Enable(sint64& out)
+		{
+			out = 1;
+		}
+	};
+
+	template<> struct Flag<uint16>
+	{
+		static void Enable(uint16& out)
+		{
+			out = 1;
+		}
+	};
+
+	template<> struct Flag<uint32>
+	{
+		static void Enable(uint32& out)
+		{
+			out = 1;
+		}
+	};
+
+	template<> struct Flag<uint64>
+	{
+		static void Enable(uint64& out)
+		{
+			out = 1;
+		}
+	};
+
+
+
+
+
+	template<class C, int Chnk>
+	struct Flag<StringBase<C, Chnk> >
+	{
+		static void Enable(StringBase<C,Chnk>& out)
+		{
+			out = "true";
+		}
+	};
+
+
+	template<class C, class Traits, class Alloc>
+	struct Flag<std::basic_string<C, Traits, Alloc> >
+	{
+		static void Enable(std::basic_string<C,Traits,Alloc>& out)
+		{
+			out = "true";
+		}
+	};
+
+	template<template<class,class> class L, class T, class Alloc>
+	struct Flag<L<T, Alloc> >
+	{
+		static void Enable(L<T,Alloc>& out, const String::Char* c_str, const String::size_type len)
+		{
+			out.push_back(T(1));
+		}
+	};
+
+
+	template<template<class, class> class L, class C, int Chnk, class Alloc>
+	struct Flag<L<StringBase<C,Chnk>, Alloc> >
+	{
+		static void Enable(L<StringBase<C, Chnk>, Alloc>& out)
+		{
+			out.push_back("true");
+		}
+	};
+
+
+	template<template<class, class> class L, class C, class Traits, class AllocS, class Alloc>
+	struct Flag<L<std::basic_string<C, Traits, AllocS>, Alloc> >
+	{
+		static void Enable(L<std::basic_string<C, Traits, AllocS>, Alloc>& out, const String::Char* c_str, const String::size_type len)
+		{
+			out.push_back("true");
+		}
+	};
+
+
+	/*!
+	** \brief Display the help for an option in particulare, with text formatting
+	**
+	** \param[in,out] out The stream where to write data
+	** \param shortName The short name of the option
+	** \param longName The long name of the option
+	** \param description The description of the option
+	*/
+	void DisplayHelpForOption(std::ostream& out, const String::Char shortName, const String& longName,
+		const String& description, bool requireParameter = false);
+
+	/*!
+	** \brief Display a text paragraph
+	**
+	** \param[in,out] out The stream where to write data
+	** \param text The text
+	*/
+	void DisplayTextParagraph(std::ostream& out, const String& text);
+
+
+
+
+	class IOption
 	{
 	public:
-		//! \name Constructor & Destructor
-		//@{
-		/*!
-		** \brief Constructor
-		** \param sOpt Short name of the option
-		** \param lOpt Long name of the option
-		** \param ndValue if an extra value is required
-		** \param comm Comments for the option
-		*/
-		AOption(const String::Char sOpt, const String& lOpt, bool ndValue,
-			const String& comm);
-		//! Copy constructor
-		AOption(const AOption&);
-		/*!
-		** \brief Destructor
-		*/
-		virtual ~AOption() {}
-		//@}
+		IOption()
+			:pShortName('\0')
+		{}
+		IOption(const IOption& rhs)
+			:pShortName(rhs.pShortName), pLongName(rhs.pLongName),
+			pDescription(rhs.pDescription)
+		{}
 
-		//! Get the short name of the option
-		char shortName() const {return pShortName;}
-		//! Get the long name of the option
+		IOption(const String::Char s)
+			:pShortName(s)
+		{}
+
+		template<class S>
+		IOption(const S& name)
+			:pShortName('\0'), pLongName(name)
+		{
+			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
+				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
+		}
+
+		template<class S>
+		IOption(const String::Char s, const S& name)
+			:pShortName(s), pLongName(name)
+		{
+			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
+				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
+		}
+
+		template<class S1, class S2>
+		IOption(const String::Char s, const S1& name, const S2& description)
+			:pShortName(s), pLongName(name), pDescription(description)
+		{
+			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
+				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
+		}
+
+		virtual ~IOption() {}
+
+		/*!
+		** \brief Add a value
+		**
+		** \param c_str A pointer to the beginining of the CString (must not be null)
+		** \param len Length of the string (can be zero)
+		** \return True if the operation succeded, false otherwise
+		*/
+		virtual bool addValue(const String::Char* c_str, const String::size_type len) = 0;
+
+		virtual void enableFlag() = 0;
+
+		virtual bool requireAdditionalParameter() const = 0;
+
+		/*!
+		** \brief Get the short name of the option
+		*/
+		String::Char shortName() const {return pShortName;}
+
+		/*!
+		** \brief Get the long name of the option
+		*/
 		const String& longName() const {return pLongName;}
 
-		const String& comments() const {return pComments;}
-
-		String fullNameForHelp();
-		String bestSuitableName();
-
-		/*!
-		** \brief Reset the value of the option
-		*/
-		virtual void reset();
-
-		/*!
-		** \brief Get if an extra value is required
-		** \return True if an extra value is required
-		*/
-		bool valueIsRequired() const {return pNeedValue;}
-
-		//! \name Modified
-		//@{
-		/*!
-		** \brief Get if the option has been modified
-		** \return True if the option has been modified, false otherwise
-		*/
-		bool modified() const {return pModified;}
-		/*!
-		** \brief Set if the option has been modified
-		** \param value The new value
-		*/
-		void modified(const bool value) {pModified = value;}
-		//@}
-
-		virtual void addValue(const String& v) = 0;
-
-		virtual bool empty() const = 0;
+		virtual void helpUsage(std::ostream& out) const = 0;
 
 	protected:
 		//! The short name of the option
-		const char pShortName;
-		//! The long name of the option
+		const String::Char pShortName;
+		//! The long name
 		const String pLongName;
-		//! If the option has been modified
-		bool pModified;
-		//! Need extra value
-		bool pNeedValue;
-		//! Comments for this option
-		const String pComments;
+		//! Description
+		const String pDescription;
 
-	}; // class AOption
-
-
+	}; // class IOption
 
 
 
 
 
 	/*!
-	** \brief Single Option
-	**
-	** This class defines all parameters that an option could have.
-	**
-	** \tparam T The type of the option
-	**
-	** \bug Not fully compliant with the original getopt : -a<value> does not work
+	** \brief A single command line option
 	*/
-	template<typename T>
-	class Option : public AOption
+	template<class T, bool Visible, bool AdditionalParam = true>
+	class Option : public IOption
 	{
 	public:
-		//! The original type
-		typedef T Type;
-		//! List of Values
-		typedef typename std::list<T> ValueList;
-
-		//! Typedef for the iterator (const)
-		typedef typename ValueList::const_iterator const_iterator;
+		enum
+		{
+			//! True if the option is hidden from the help usage
+			flagVisible = Visible,
+		};
 
 	public:
-		//! \name Constructor & Destructor
+		//! \name Constructors & Destructor
 		//@{
-		/*!
-		** \brief Constructor
-		**
-		** \param sOpt The short name of the option
-		** \param lOpt The long name of the option
-		** \param oComments The comments for this option
-		** \param ndValue If requires an extra value
-		** \param defValue The default value for the option
-		*/
-		Option(const char sOpt, const String& lOpt = String(),
-			const String& oComments = String(),
-			const bool ndValue = false, const T& defValue = T());
-		/*!
-		** \brief Copy constructor
-		*/
-		Option(const Option<T>&);
-		/*!
-		** \brief Destructor
-		*/
-		virtual ~Option();
+		Option(const Option& rhs)
+			:IOption(rhs), pVariable(rhs.pVariable)
+		{}
+
+		Option(T& var, const String::Char c)
+			:IOption(c), pVariable(var)
+		{}
+
+		template<class S>
+		Option(T& var, const S& name)
+			:IOption(name), pVariable(var)
+		{}
+
+		template<class S>
+		Option(T& var, const String::Char c, const S& name)
+			:IOption(c, name), pVariable(var)
+		{}
+
+		template<class S1, class S2>
+		Option(T& var, const String::Char s, const S1& name, const S2& description)
+			:IOption(s, name, description), pVariable(var)
+		{}
+
+		//! Destructor
+		virtual ~Option() {}
 		//@}
 
-		//! \name Values
-		//@{
+
 		/*!
-		** \brief Get the value of the option
+		** \brief Add a value
 		**
-		** For options with multiple values, the last one will be returned
-		** \return The value of the option
+		** \param c_str A pointer to the beginining of the CString (must not be null)
+		** \param len Length of the string (can be zero)
+		** \return True if the operation succeded, false otherwise
 		*/
-		T value() const;
-		//! \see value()
-		T operator () () const;
+		virtual bool addValue(const String::Char* c_str, const String::size_type len)
+		{
+			return Private::GetOptImpl::Value<T>::Add(pVariable, c_str, len);
+		}
 
-		/*!
-		** \brief Iterator on the begining of the list of values
-		*/
-		const_iterator begin() const {return pValues.begin();}
-		/*!
-		** \brief Iterator on the end of the list of values
-		*/
-		const_iterator end() const {return pValues.end();}
+		virtual void enableFlag()
+		{
+			Private::GetOptImpl::Flag<T>::Enable(pVariable);
+		}
 
-		/*!
-		** \brief Add a value in the list
-		**
-		** When a new value is added, the option is considered as modified.
-		**
-		** \param v The new value to add
-		** \see modified()
-		*/
-		virtual void addValue(const String& v);
-		//! \see addValue
-		Option<T>& operator += (const String& v) {this->addValue(v);return *this;}
-		//@}
+		virtual void helpUsage(std::ostream& out) const
+		{
+			if (Visible)
+				DisplayHelpForOption(out, pShortName, pLongName, pDescription, AdditionalParam);
+		}
 
-		/*!
-		** \brief Get if the list of values is empty
-		** \return True if the list of values is empty, false otherwise
-		*/
-		virtual bool empty() const {return pValues.empty();}
-
-		/*!
-		** \brief Reset the values for this option
-		*/
-		virtual void reset();
+		virtual bool requireAdditionalParameter() const {return AdditionalParam;}
 
 	private:
-		//! Its default value
-		T pDefaultValue;
-		//! The list of values
-		ValueList pValues;
+		//! The destination variable, where to add values
+		T& pVariable;
 
 	}; // class Option
 
 
 
+	/*!
+	** \brief A text paragraph
+	*/
+	class Paragraph : public IOption
+	{
+	public:
+		//! \name Constructors & Destructor
+		//@{
+		Paragraph(const Paragraph& rhs)
+			:IOption(rhs)
+		{}
 
-} // namespace GetOpt
-} // namespace Core
+		template<class S>
+		Paragraph(const S& description)
+			:IOption(' ', nullptr, description)
+		{}
+
+		//! Destructor
+		virtual ~Paragraph() {}
+		//@}
+
+
+		/*!
+		** \brief Add a value
+		**
+		** \param c_str A pointer to the beginining of the CString (must not be null)
+		** \param len Length of the string (can be zero)
+		** \return True if the operation succeded, false otherwise
+		*/
+		virtual bool addValue(const String::Char*, const String::size_type)
+		{
+			/* Do nothing - This is not an option */
+			return false;
+		}
+
+		virtual void helpUsage(std::ostream& out) const
+		{
+			DisplayTextParagraph(out, pDescription);
+		}
+
+		virtual void enableFlag()
+		{
+			// Do nothing
+		}
+
+		virtual bool requireAdditionalParameter() const {return false;}
+
+	}; // class Paragraph
+
+
+
+	// Forward declaration
+	class Context;
+
+
+} // namespace GetOptImpl
+} // namespace Private
 } // namespace Yuni
-
-
-# include "option.hxx"
-
 
 #endif // __YUNI_CORE_GETOPT_OPTION_H__

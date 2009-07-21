@@ -1,81 +1,35 @@
 #ifndef __YUNI_CORE_GETOPT_PARSER_H__
 # define __YUNI_CORE_GETOPT_PARSER_H__
 
-# include <list>
+# include "../../yuni.h"
 # include <map>
-# include "string.h"
 # include "option.h"
+# include <string.h>
+# include "../validator/text/default.h"
 
 
 
 namespace Yuni
-{
-namespace Core
 {
 namespace GetOpt
 {
 
 
 	/*!
-	** \brief Command-line options parser
-	**
-	** \code
-	** // The command-line parser
-	** GetOpt::Parser parser;
-	**
-	** // The option --add
-	** GetOpt::Option<String>* oAdd = parser.add<String>('a', "add", "Add a module", true);
-	** // The option --list
-	** GetOpt::Option<String>* oList = parser.add<String>('l', "list", "List of available modules");
-	** // The option --width
-	** GetOpt::Option<uint16>* oWidth = parser.add<uint16>(' ', "width", "Width", true, 800);
-	** // The option --height
-	** GetOpt::Option<uint16>* oHeight = parser.add<uint16>(' ', "height", "Height", true, 600);
-	**
-	** // Allow extra options such as filenames for example
-	** parser.allowExtraOptions(true);
-	**
-	** // Analyze the command-line arguments
-	** if (!parser(argc, argv))
-	**		return 1;
-	** // The user might have requueted the help
-	** if (parser.displayHelpIfNeeded())
-	**		return 0;
-	**
-	** // --add
-	** if (oAdd->modified())
-	** {
-	**		std::cout << " *** --add ***" << std::endl;
-	**		// The latest given value :
-	**		std::cout << "Add module : the latest given value: `" << oAdd->value() << "`" << std::endl;
-	**		// All values
-	**		std::cout << "All modules :" << std::endl;
-	**		GetOpt::Option<String>::const_iterator end = oAdd->end();
-	**		for (GetOpt::Option<String>::const_iterator i = oAdd->begin(); i != end; ++i)
-	**			std::cout << "  - `" << *i << "`" << std::endl;
-	** }
-	** // --list
-	** if (oList->modified())
-	** {
-	**		std::cout << " *** --list ***" << std::endl;
-	**		std::cout << "Here is the list of all modules :\n" << "  - <none> :)" << std::endl;
-	** }
-	** //--width
-	** std::cout << "Width  : " << (*oWidth)() << std::endl;
-	** //--height
-	** std::cout << "Height : " << (*oHeight)() << std::endl;
-	** \endcode
+	** \brief A command line options parser
 	*/
 	class Parser
 	{
 	public:
-		//! \name Constructors & Destructor
+		//! \name Constructor & Destructor
 		//@{
-		//! Default constructor
+		/*!
+		** \brief Default constructor
+		*/
 		Parser();
-		//! Copy constructor
-		Parser(const Parser&);
-		//! Destructor
+		/*!
+		** \brief Destructor
+		*/
 		~Parser();
 		//@}
 
@@ -84,184 +38,165 @@ namespace GetOpt
 		*/
 		void clear();
 
-		//! \name Options
+
+		//! \name Adding an option
 		//@{
+		/*!
+		** \brief Add an option
+		**
+		** \param[in] var The variable where the value(s) will be written
+		** \param shortName The short name of the option (a single char)
+		** \param visible True if the option is visible from the help usage
+		*/
+		template<class U>
+		void add(U& var, const String::Char shortName, bool visible = true);
+
 
 		/*!
 		** \brief Add an option
 		**
-		** The instance of the class `Parser` takes the ownership
-		** on the given pointer. Consequently the option must not be deleted.
-		** \param A pointer to the option to add
+		** \param[in] var The variable where the value(s) will be written
+		** \param shortName The short name of the option (a single char)
+		** \param longName The long name of the option
+		** \param visible True if the option is visible from the help usage
 		*/
-		void add(AOption* opt);
-		//! \see add(AOption*)
-		Parser& operator += (AOption* opt) {this->add(opt);return *this;}
-
-		/*!
-		** \brief Convenient method to Create then Add an option
-		**
-		** This methode creates first the appropriate object. Then this object is
-		** added to the list of options.
-		** These two code are exactly the same :
-		** \code
-		** GetOpt::Option<int>* optFoo = new GetOpt::Option<int>('f', "foo", "An useless option");
-		** parser += optFoo;
-		** \endcode
-		** \code
-		** parser.add<int>('f', "foo", "An useless option");
-		** \endcode
-		**
-		** The arguments of this method are exactly the same than the constructor
-		** of the class `Option`.
-		**
-		** \param sOpt The short name of the option
-		** \param lOpt The long name of the option
-		** \param oComments The comments for this option
-		** \param ndValue If requires an extra value
-		** \param defValue The default value for the option
-		** \return A pointer to the option
-		**
-		** \see add(AOption*)
-		** \see class Option
-		*/
-		template<typename T>
-		Option<T>* add(const char sOpt, const String& lOpt = String(), const String& oComments = String(),
-				const bool ndValue = false, const T& defValue = T());
-
-		//! Get if the parser allows extra options (such as filenames for example)
-		bool allowExtraOptions() const {return pAllowExtraOptions;}
-		//! Set if the parser allows extra options
-		void allowExtraOptions(const bool v);
+		template<class U, class S>
+		void add(U& var, const String::Char shortName, const S& longName, bool visible = true);
 
 
 		/*!
-		** \brief Reset the values of all options
+		** \brief Add an option
 		**
-		** This methode is automatically used when execute() is called.
-		** This method should not be used except for some special cases.
-		** \see execute()
+		** \param[in] var The variable where the value(s) will be written
+		** \param shortName The short name of the option (a single char)
+		** \param longName The long name of the option
+		** \param description The description of the option (used in the help usage)
+		** \param visible True if the option is visible from the help usage
 		*/
-		void resetOptions();
+		template<class U, class S, class D>
+		void add(U& var, const String::Char shortName, const S& longName, const D& description, bool visible = true);
+
+
+		/*!
+		** \brief Add an option that does not require an additional parameter
+		**
+		** \param[in] var The variable where the value(s) will be written
+		** \param shortName The short name of the option (a single char)
+		** \param visible True if the option is visible from the help usage
+		*/
+		template<class U>
+		void addFlag(U& var, const String::Char shortName, bool visible = true);
+
+
+		/*!
+		** \brief Add an option that does not require an additional parameter
+		**
+		** \param[in] var The variable where the value(s) will be written
+		** \param shortName The short name of the option (a single char)
+		** \param longName The long name of the option
+		** \param visible True if the option is visible from the help usage
+		*/
+		template<class U, class S>
+		void addFlag(U& var, const String::Char shortName, const S& longName, bool visible = true);
+
+
+		/*!
+		** \brief Add an option that does not require an additional parameter
+		**
+		** \param[in] var The variable where the value(s) will be written
+		** \param shortName The short name of the option (a single char)
+		** \param longName The long name of the option
+		** \param description The description of the option (used in the help usage)
+		** \param visible True if the option is visible from the help usage
+		*/
+		template<class U, class S, class D>
+		void addFlag(U& var, const String::Char shortName, const S& longName, const D& description, bool visible = true);
+		//@}
+
+		//! \name Remaining arguments
+		//@{
+		/*!
+		** \brief Set the target variable where remaining arguments will be writtent
+		*/
+		template<class U> void remainingArguments(U& var);
 		//@}
 
 
-		//! \name Execute
+		//! \name Command line parsing
 		//@{
 		/*!
-		** \brief Parse the command line arguments
+		** \brief Parse the command line
 		**
 		** \param argc The count of arguments
 		** \param argv The list of arguments
-		** \return False if the program should stop
+		** \return False if the program should abort
 		*/
-		bool execute(int argc, char* argv[]);
-		//! \see execute()
-		bool operator () (int argc, char* argv[]) {return execute(argc, argv);}
+		bool operator () (int argc, char* argv[]);
 		//@}
 
 
-		//! \name Help
+		//! \name Help usage
 		//@{
 		/*!
-		** \brief Display the help
-		** \return Always 0
-		*/
-		int displayHelp() const;
-		/*!
-		** \brief Display the help if the option --help or -h  has been given
-		** \return True if the help has been displayed, false otherwise
-		*/
-		bool displayHelpIfNeeded() const;
-		//@} // Help
-
-	private:
-		//! Relationship between short option names and the options
-		typedef std::map<char, AOption*> ShortOptionsNames;
-		//! Relationship between long option names and the options
-		typedef std::map<String, AOption*>  LongOptionsNames;
-		//! All available options
-		typedef std::list<AOption*> AllOptions;
-
-	private:
-		/*!
-		** \brief Print the usage
-		** \return Always false (the program should quit)
-		*/
-		bool help() const;
-
-		/*!
-		** \brief Display an error
-		** \return Always false (the program should quit)
-		*/
-		bool error(const String& e) const;
-
-		/*!
-		** \brief Parse a single argument
-		** \param argc The count of arguments
-		** \param argv The list of arguments
-		** \param[in,out] index The current index in the list of arguments
-		** \param[in,out] Options have to be considered
-		** \return True if successful, false otherwise
-		*/
-		bool parseSingleArgument(int argc, char* argv[], int& index, bool& parseOptions);
-
-		/*!
-		** \brief Analyze an argument considered a long option name
+		** \brief Add a text paragraph after the last added option
 		**
-		** \param argc The count of arguments
-		** \param argv The list of arguments
-		** \param[in,out] String of the argument
-		** \param[in,out] index The current index in the list of arguments
-		** \return True if successful, false otherwise
+		** \param text Any text of an arbitrary length
 		*/
-		bool parseLongArgument(int argc, char* argv[], const String& arg, int& index);
+		template<class U> void addParagraph(const U& text);
 
 		/*!
-		** \brief Analyze an argument considered a short option name
+		** \brief Generate and display an help usage
 		**
-		** \param argc The count of arguments
-		** \param argv The list of arguments
-		** \param[in,out] arg String of the argument
-		** \param[in,out] index The current index in the list of arguments
-		** \return True if successful, false otherwise
+		** \note If you want your own help usage, add the option ('h', "help")
+		** to handle yourself the behavior.
 		*/
-		bool parseShortArgument(int argc, char* argv[], const char arg, int& index);
+		void helpUsage(const char* argv0);
+		//@}
 
-		/*!
-		** \brief Update the value of an option
-		**
-		** If the option needs an extra value, this value will be
-		** pick up from the current index. Otherwise, the option is only
-		** marked as `modified`.
-		**
-		** \param argc The count of arguments
-		** \param argv The list of arguments
-		** \param o The option to update
-		** \param index The current index in the list of arguments
-		** \return True if successful, false otherwise
-		*/
-		bool updateOption(int argc, char* argv[], AOption& o, int& index);
 
+		//! \name Errors
+		//@{
 		/*!
-		** \brief Recreate the option `help`
+		** \brief The count of errors that have been encountered
 		*/
-		void insertHelpOption();
+		unsigned int errors() const {return pErrors;}
+		//@}
 
 
 	private:
-		//! All available options
-		AllOptions pAllOptions;
-		//! All options with short names
-		ShortOptionsNames  pShortNames;
-		//! All options with long names
-		LongOptionsNames pLongNames;
-		//! The `help` option
-		Option<bool>* pOptHelp;
-		//! All unknown options
-		Option<String> pOptionUnknown;
-		//! Allow extra values (like files for example)
-		bool pAllowExtraOptions;
+		/*!
+		** \brief Predicate to compare two CString
+		*/
+		struct CStringComparison
+		{
+			bool operator()(const char* s1, const char* s2) const {return ::strcmp(s1, s2) < 0;}
+		};
+
+		//! IOption
+		typedef Private::GetOptImpl::IOption IOption;
+		//! Option list (order given by the user)
+		typedef std::vector<IOption*> OptionList;
+		//! All options ordered by their short name
+		typedef std::map<String::Char, IOption*> OptionsOrderedByShortName;
+		//! All options ordered by their long name
+		typedef std::map<const String::Char*, IOption*, CStringComparison> OptionsOrderedByLongName;
+
+	private:
+		//! All existing options
+		OptionList pAllOptions;
+		//! All options ordered by their short name
+		OptionsOrderedByShortName pShortNames;
+		//! All options ordered by their long name
+		OptionsOrderedByLongName pLongNames;
+
+		//! Options for remaining arguments
+		IOption* pRemains;
+
+		//! Count of error
+		unsigned int pErrors;
+
+		// A friend
+		friend class Private::GetOptImpl::Context;
 
 	}; // class Parser
 
@@ -270,9 +205,7 @@ namespace GetOpt
 
 
 } // namespace GetOpt
-} // namespace Core
 } // namespace Yuni
-
 
 # include "parser.hxx"
 
