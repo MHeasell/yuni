@@ -22,6 +22,9 @@ namespace Gfx
 	class Triangle
 	{
 	public:
+		typedef SmartPtr<Triangle> Ptr;
+
+	public:
 		//! \name Constructors
 		//@{
 		Triangle(const Vertex& v1, const Vertex& v2, const Vertex& v3):

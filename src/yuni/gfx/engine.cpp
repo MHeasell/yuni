@@ -11,6 +11,11 @@
 #  include "../private/gfx3d/ogre/ogre.engine.h"
 #endif
 
+#ifdef YUNI_INTERNAL_3D
+#  include "../private/gfx3d/gl/gl.h"
+#  include "../private/gfx3d/gl/gl.engine.h"
+#endif
+
 
 namespace Yuni
 {
@@ -25,11 +30,15 @@ namespace Gfx
 		# ifdef YUNI_EXTERNAL_3D_IRRLICHT
 		Private::Gfx::Irrlicht::Engine external3DEngine;
 		# else
-		# ifdef YUNI_EXTERNAL_3D_OGRE
+		#  ifdef YUNI_EXTERNAL_3D_OGRE
 		Private::Gfx::Ogre::Engine external3DEngine;
-		# else
-		#	error "The external 3D engine is not defined"
-		# endif
+		#  else
+		#   ifdef YUNI_INTERNAL_3D
+		Private::Gfx::Gl::Engine external3DEngine;
+		#   else
+		#    error "The external 3D engine is not defined"
+		#   endif
+		#  endif
 		# endif
 
 		Engine globalEngine;

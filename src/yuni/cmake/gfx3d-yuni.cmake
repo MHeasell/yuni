@@ -1,0 +1,16 @@
+
+Message(STATUS "[Module] Gfx3D::Yuni")
+
+Add_Definitions("-DYUNI_INTERNAL_3D")
+
+# Internal Yuni 3D Lib
+Set(SRC_INTERNAL_3D
+		private/gfx3d/gl/gl.h
+		private/gfx3d/gl/gl.engine.h private/gfx3d/gl/gl.engine.cpp)
+source_group("Private\\Gfx3D\\GL" FILES ${SRC_INTERNAL_3D})
+
+Set(SRC_EXTERNAL_3D
+		private/gfx3d/abstract.h private/gfx3d/abstract.cpp
+		${SRC_INTERNAL_3D})
+
+Add_Library(yuni-static-gfx3d-yuni STATIC ${SRC_EXTERNAL_3D})

@@ -85,6 +85,11 @@ Set(YUNI_STATIC_SCRIPT yuni-static-script)
 # Module Gfx3D
 #
 IF(YUNI_MODULE_GFX3D)
+	# Yuni internal engine
+	IF(YUNI_INTERNAL_3D)
+		LIST(INSERT YUNI_STATIC_GFX3D 0 yuni-static-gfx3d-yuni)
+	ENDIF(YUNI_INTERNAL_3D)
+
 	# Irrlicht
 	IF(YUNI_EXTERNAL_3D_IRRLICHT)
 		DEVPACK_IMPORT_IRRLICHT()

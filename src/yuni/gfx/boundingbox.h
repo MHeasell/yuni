@@ -18,7 +18,7 @@ namespace Gfx
 	** \brief A bounding box in 3D that grows with what is added inside
 	** \ingroup Gfx
 	*/
-	template <typename T>
+	template <typename T = float>
 	class BoundingBox
 	{
 	public:
@@ -27,12 +27,12 @@ namespace Gfx
 
 		//! Default constructor
 		BoundingBox();
-		
+
 		/*!
 		** \brief Constructor
 		*/
 		BoundingBox(const Point3D<T>& min, const Point3D<T>& max);
-		
+
 		//@}
 
 		/*!
@@ -64,6 +64,14 @@ namespace Gfx
 		** \brief Is the point inside the bounding box?
 		*/
 		bool contains(const Point3D<T>& point) const;
+
+		/*!
+		** \brief Reset the bounding box to 0 size
+		**
+		** \param newCenter Reset the bounding box to a given position
+		*/
+		template<typename U>
+		void reset(Point3D<U> newCenter = Point3D<U>());
 
 	private:
 		//! Minimum X,Y,Z coordinates of the box

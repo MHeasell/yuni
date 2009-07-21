@@ -38,12 +38,12 @@ namespace Gfx
 		/*!
 		** \brief Default Constructor
 		*/
-		Object3D(const SmartPtr<ObjectModel>& model);
+		Object3D(const ObjectModel::Ptr& model);
 
 		/*!
 		** \brief Default Constructor
 		*/
-		Object3D(const Yuni::String& name, const SmartPtr<ObjectModel>& model);
+		Object3D(const Yuni::String& name, const ObjectModel::Ptr& model);
 
 		//! Default Destructor
 		virtual ~Object3D();
@@ -58,7 +58,10 @@ namespace Gfx
 		**
 		** \return A smart pointer to the object's skeleton, can point to NULL
 		*/
-		const Skeleton::Ptr& skeleton() {return pSkeleton;}
+		const Skeleton::Ptr& skeleton()
+		{
+			return pSkeleton;
+		}
 
 		/*!
 		** \brief Set the skeleton to use for this object
