@@ -4,6 +4,7 @@
 # include <vector>
 # include <list>
 # include "../yuni.h"
+# include "../core/smartptr/smartptr.h"
 # include "vertex.h"
 
 
@@ -20,6 +21,7 @@ namespace Gfx
 	class Edge
 	{
 	public:
+		typedef SmartPtr<Edge> Ptr;
 		//! Vector of Edges
 		typedef std::vector< SmartPtr<Edge> >  Vector;
 		//! List of Edges

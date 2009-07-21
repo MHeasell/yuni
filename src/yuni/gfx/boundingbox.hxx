@@ -29,18 +29,18 @@ namespace Gfx
 	{
 		// Update the minimum
 		if (point.x < pMin.x)
-			pMin.x - point.x;
+			pMin.x = point.x;
 		if (point.y < pMin.y)
-			pMin.y - point.y;
+			pMin.y = point.y;
 		if (point.z < pMin.z)
-			pMin.z - point.z;
+			pMin.z = point.z;
 		// Update the maximum
 		if (point.x > pMax.x)
-			pMax.x - point.x;
+			pMax.x = point.x;
 		if (point.y > pMax.y)
-			pMax.y - point.y;
+			pMax.y = point.y;
 		if (point.z > pMax.z)
-			pMax.z - point.z;
+			pMax.z = point.z;
 	}
 
 
@@ -65,6 +65,14 @@ namespace Gfx
 		return true;
 	}
 
+	template<typename T>
+	template<typename U>
+	inline void BoundingBox<T>::reset(Point3D<U> newCenter)
+	{
+		pCenter.move(newCenter);
+		pMin.move(pCenter);
+		pMax.move(pCenter);
+	}
 
 
 } // namespace Gfx

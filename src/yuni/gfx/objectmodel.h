@@ -2,7 +2,7 @@
 # define __YUNI_GFX_OBJECTMODEL_H__
 
 # include "../core/smartptr/smartptr.h"
-
+# include "skeleton.h"
 
 namespace Yuni
 {
@@ -23,7 +23,7 @@ namespace Gfx
 		//@{
 
 		//! Main Constructor
-		ObjectModel(const SmartPtr<Skeleton>& skeleton)
+		ObjectModel(const Skeleton::Ptr& skeleton)
 			: pSkeleton(skeleton)
 		{}
 
@@ -37,14 +37,14 @@ namespace Gfx
 		**
 		** \return A smart pointer to the object's skeleton, can point to NULL
 		*/
-		const SmartPtr<Skeleton>& skeleton() {return pSkeleton;}
+		const Skeleton::Ptr& skeleton() {return pSkeleton;}
 
 		/*!
 		** \brief Change the skeleton used for this model
 		**
 		** \param skeleton Skeleton to use
 		*/
-		void setSkeleton(const SmartPtr<Skeleton>& skeleton)
+		void setSkeleton(const Skeleton::Ptr& skeleton)
 		{
 			pSkeleton = skeleton;
 		}
@@ -53,7 +53,7 @@ namespace Gfx
 
 	private:
 		//! The Skeleton for this model (contains the mesh)
-		SmartPtr<Skeleton> pSkeleton;
+		Skeleton::Ptr pSkeleton;
 
 	}; // ObjectModel
 

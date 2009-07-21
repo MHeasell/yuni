@@ -23,6 +23,7 @@ namespace Gfx
 	class Mesh
 	{
 	public:
+		typedef SmartPtr<Mesh> Ptr;
 		//! Type for Triangle list
 		typedef std::vector<SmartPtr<Triangle> > TriangleList;
 

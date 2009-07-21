@@ -29,7 +29,7 @@ namespace Gfx
 		** \param position Position of the skeleton in space relative to its parent (absolute if no parent)
 		** \param rotation Rotation of the skeleton relative to its parent (absolute if no parent)
 		*/
-		Skeleton(SmartPtr<Mesh>& mesh, const Vector3D<float>& position,
+		Skeleton(Mesh::Ptr& mesh, const Vector3D<float>& position,
 			const Vector3D<float>& rotation)
 			: pMesh(mesh), pPosition(position), pRotation(rotation)
 		{}
@@ -44,13 +44,13 @@ namespace Gfx
 		**
 		** \return A smart pointer to the object's mesh, can point to NULL
 		*/
-		const SmartPtr<Mesh>& mesh() {return pMesh;}
+		const Mesh::Ptr& mesh() {return pMesh;}
 
 		//@}
 
 	private:
 		//! Actual mesh (triangles and vertices) for this skeleton
-		SmartPtr<Mesh> pMesh;
+		Mesh::Ptr pMesh;
 
 		//! Position of the skeleton in space relative to its parent (absolute if no parent)
 		Vector3D<float> pPosition;
