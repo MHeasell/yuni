@@ -36,7 +36,7 @@ namespace Script
 	*/
 	class Lua : public AScript
 	{
-		template <class> friend class Private::Bind::NthArgument;
+		template <class, class> friend struct Private::Bind::NthArgument;
 
 	public:
 		//! \name Contructor & Destructor
