@@ -74,7 +74,7 @@ namespace Threads
 		// Reset of the predicate
 		pPredicate = false;
 
-		::gettimeofday(&now, NULL);
+		gettimeofday(&now, NULL);
 		t.tv_sec = now.tv_sec + timeout;
 		t.tv_nsec = now.tv_usec * 1000;
 		int retcode;

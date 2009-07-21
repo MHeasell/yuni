@@ -182,9 +182,9 @@ namespace Private
 			// The thread is still running
 
 			// Timeout
-			struct ::timeval mytime;
-			struct ::timespec myts;
-			::gettimeofday(&mytime, NULL);
+			struct timeval mytime;
+			struct timespec myts;
+			gettimeofday(&mytime, NULL);
 			myts.tv_sec = mytime.tv_sec + timeout;
 			myts.tv_nsec = mytime.tv_usec * 1000;
 
