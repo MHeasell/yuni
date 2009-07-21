@@ -3,7 +3,7 @@
 
 # include "../yuni.h"
 # include "../core/string.h"
-# include "../core/getopt/getopt.h"
+# include "../core/getopt.h"
 
 
 namespace Yuni

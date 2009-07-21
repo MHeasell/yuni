@@ -3,77 +3,141 @@
 
 
 
+
+# define YUNI_GETOPT_HELPUSAGE_30CHAR  "                             "
+
+
+
 namespace Yuni
 {
-namespace Core
+namespace Private
 {
-namespace GetOpt
+namespace GetOptImpl
 {
 
 
-	AOption::AOption(const String::Char sOpt, const String& lOpt, bool ndValue, const String& comm)
-		:pShortName(sOpt), pLongName(lOpt),
-		pModified(false),
-		pNeedValue(ndValue), pComments(comm)
-	{}
-
-
-	AOption::AOption(const AOption& c)
-		:pShortName(c.pShortName), pLongName(c.pLongName),
-		pModified(c.pModified),
-		pNeedValue(c.pNeedValue), pComments(c.pComments)
-	{}
-
-
-
-	void AOption::reset()
+	namespace
 	{
-		pModified = false;
-	}
 
-
-	String AOption::fullNameForHelp()
-	{
-		String s;
-		if (' ' != pShortName)
+		template<bool Decal, int LengthLimit>
+		void PrintLongDescription(std::ostream& out, const String& description)
 		{
-			s += "-";
-			s += pShortName;
-			if (!pLongName.empty())
-				s += ", ";
-			else
+			String::Size start = 0;
+			String::Size end = 0;
+			String::Size p = 0;
+			do
 			{
-				if (pNeedValue)
-					s += " <VALUE>";
+				// Jump to the next separator
+				p = description.find_first_of(" .\r\n\t", p);
+
+				// No separator, aborting
+				if (p == String::npos)
+					break;
+
+				if (p - start < LengthLimit)
+				{
+					switch (description.at(p))
+					{
+						case '\n':
+							{
+								out.write(description.c_str() + start, p - start);
+								out << "\n";
+								if (Decal)
+									out << YUNI_GETOPT_HELPUSAGE_30CHAR;
+								start = p + 1;
+								end = p + 1;
+								break;
+							}
+						default:
+							end = p;
+					}
+				}
+				else
+				{
+					if (!end)
+						end = p;
+					out.write(description.c_str() + start, end - start);
+					out << "\n";
+					if (Decal)
+						out << YUNI_GETOPT_HELPUSAGE_30CHAR;
+					start = end + 1;
+					end = p + 1;
+				}
+				++p;
+			} while (true);
+
+			// Display the remaining piece of string
+			if (start < description.size())
+				out << (description.c_str() + start);
+		}
+
+	} // anonymous namespace
+
+
+
+
+
+
+	void DisplayHelpForOption(std::ostream& out, const String::Char shortName, const String& longName,
+		const String& description, bool requireParameter)
+	{
+		// Space
+		if ('\0' != shortName && ' ' != shortName)
+		{
+			out << "  -" << shortName;
+			if (longName.empty())
+			{
+				if (requireParameter)
+					out << " VALUE";
 			}
+			else
+				out << ", ";
+		}
+		else
+			out << "      ";
+		// Long name
+		if (longName.empty())
+		{
+			if (requireParameter)
+				out << "              ";
+			else
+				out << "                    ";
 		}
 		else
 		{
-			if (!pLongName.empty())
-				s += "    ";
+			out << "--" << longName;
+			if (requireParameter)
+				out << "=VALUE";
+			if (30 <= longName.size() + 6 /*-o,*/ + 2 /*--*/ + 1 /*space*/ + (requireParameter ? 6 : 0))
+				out << "\n                             ";
+			else
+			{
+				for (int i = 6 + 2 + 1 + longName.size() + (requireParameter ? 6 : 0); i < 30; ++i)
+					out.put(' ');
+			}
 		}
-		if (!pLongName.empty())
-		{
-			s += "--";
-			s += pLongName;
-			if (pNeedValue)
-				s += "=<VALUE>";
-		}
-		return s;
+		// Description
+		if (description.size() <= 50 /* 80 - 30 */)
+			out << description;
+		else
+			PrintLongDescription<true, 50>(out, description);
+		out << "\n";
 	}
 
 
-	String AOption::bestSuitableName()
+	void DisplayTextParagraph(std::ostream& out, const String& text)
 	{
-		if (!pLongName.empty())
-			return String("--") << pLongName;
-		return String('-') << pShortName;
+		if (text.size() <= 80)
+			out << text;
+		else
+			PrintLongDescription<false, 80>(out, text);
+		out << "\n";
 	}
 
 
 
-} // namespace GetOpt
-} // namespace Core
-} // namespace GetOpt
 
+} // namespace GetOptImpl
+} // namespace Private
+} // namespace Yuni
 

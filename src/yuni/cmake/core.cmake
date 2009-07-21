@@ -203,8 +203,8 @@ source_group(Core\\FileSystem FILES ${SRC_CORE_FS})
 
 
 Set(SRC_CORE_GETOPT
-				core/getopt/getopt.h
-				core/getopt/option.h core/getopt/option.hxx core/getopt/option.cpp
+				core/getopt.h
+				core/getopt/option.h core/getopt/option.cpp
 				core/getopt/parser.h core/getopt/parser.hxx core/getopt/parser.cpp)
 source_group(Core\\GetOpt FILES ${SRC_CORE_GETOPT})
 
