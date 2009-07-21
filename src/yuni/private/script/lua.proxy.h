@@ -28,7 +28,7 @@ namespace Script
 	class LuaProxy
 	{
 		friend class Yuni::Script::Lua;
-		template <class, class> friend class Yuni::Script::Private::Bind::NthArgument;
+		template <class, class> friend struct Yuni::Script::Private::Bind::NthArgument;
 	private:
 		//! \name Constructor & Destructor
 		//@{
