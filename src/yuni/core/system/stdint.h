@@ -71,8 +71,14 @@ namespace Yuni
 
 
 	//! A null class
-	class NullPtr;
+	struct NullPtr;
 
+
+	//! Type for a default behavior / policy
+	struct Default;
+
+	//! Absence Option
+	struct None;
 
 
 } // namespace Yuni
