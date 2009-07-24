@@ -23,6 +23,13 @@ namespace Yuni
 	{}
 
 
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>::StringBase(const NullPtr&)
+		:pSize(0), pCapacity(0), pPtr(NULL)
+	{}
+
+
+
 
 	template<typename C, int Chunk>
 	StringBase<C,Chunk>::StringBase(const StringBase<C,Chunk>& copy)
@@ -380,6 +387,33 @@ namespace Yuni
 	template<typename C, int Chunk>
 	inline StringBase<C,Chunk>&
 	StringBase<C,Chunk>::operator << (const NullPtr*)
+	{
+		/* Do nothing */
+		return *this;
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator = (const NullPtr&)
+	{
+		clear();
+		return *this;
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator += (const NullPtr&)
+	{
+		/* Do nothing */
+		return *this;
+	}
+
+
+	template<typename C, int Chunk>
+	inline StringBase<C,Chunk>&
+	StringBase<C,Chunk>::operator << (const NullPtr&)
 	{
 		/* Do nothing */
 		return *this;
@@ -916,6 +950,22 @@ namespace Yuni
 	template<typename C, int Chunk>
 	inline bool
 	StringBase<C,Chunk>::operator != (const NullPtr*) const
+	{
+		return (0 != pSize);
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::operator == (const NullPtr&) const
+	{
+		return !pSize;
+	}
+
+
+	template<typename C, int Chunk>
+	inline bool
+	StringBase<C,Chunk>::operator != (const NullPtr&) const
 	{
 		return (0 != pSize);
 	}
