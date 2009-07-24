@@ -160,7 +160,7 @@ source_group(Core\\Hash\\Checksum FILES ${SRC_CORE_HASH_CHECKSUM})
 
 # System
 Set(SRC_CORE_SYSTEM
-				core/system/stdint.h core/system/capabilities.h
+				core/system/stdint.h core/system/nullptr.h core/system/capabilities.h
 				core/system/sleep.h core/system/sleep.cpp
 				core/sleep.h
 				core/system/endian.h)
