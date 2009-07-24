@@ -6,7 +6,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Gfx
+namespace GfxImpl
 {
 
 	EngineAbstract::EngineAbstract()
@@ -27,7 +27,7 @@ namespace Gfx
 
 
 
-} // namespace Gfx
+} // namespace GfxImpl
 } // namespace Private
 } // namespace Yuni
 

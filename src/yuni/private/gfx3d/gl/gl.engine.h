@@ -9,29 +9,27 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Gfx
+namespace GfxImpl
 {
 namespace Gl
 {
 
 	/*!
-	** \class Engine
 	** \brief Graphics engine specialization for OpenGL
 	*/
-	class Engine : public Private::Gfx::EngineAbstract
+	class Engine : public EngineAbstract
 	{
 	public:
-
 		//! \name Constructors & Destructor
 		//@{
 		Engine();
-		Engine(SmartPtr<Yuni::Gfx::Device> dc);
+		Engine(const Yuni::Gfx::Device::Ptr& dc);
 		virtual ~Engine();
 		//@}
 
 		virtual String name() const {return "Yuni GL Engine";}
 
-		virtual bool initialize(SmartPtr<Yuni::Gfx::Device> dc);
+		virtual bool initialize(const Yuni::Gfx::Device::Ptr& dc);
 		virtual void release();
 		virtual bool ready() const { return pRunnable; }
 		virtual void run();
@@ -39,8 +37,6 @@ namespace Gl
 		virtual void applicationTitle(const String& t);
 
 	private:
-		//! The yuni device
-		SmartPtr<Yuni::Gfx::Device> pDevice;
 		//! Background color
 		Yuni::Gfx::Color::RGBA<float> pBackgroundColor;
 		//! Can the engine be run?
@@ -52,7 +48,7 @@ namespace Gl
 
 
 } // namespace Gl
-} // namespace Gfx
+} // namespace GfxImpl
 } // namespace Private
 } // namespace Yuni
 

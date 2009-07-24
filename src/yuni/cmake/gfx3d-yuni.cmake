@@ -13,4 +13,7 @@ Set(SRC_EXTERNAL_3D
 		private/gfx3d/abstract.h private/gfx3d/abstract.cpp
 		${SRC_INTERNAL_3D})
 
+find_package(OpenGL)
+
 Add_Library(yuni-static-gfx3d-yuni STATIC ${SRC_EXTERNAL_3D})
+target_link_libraries(yuni-static-gfx3d-yuni ${OPENGL_LIBRARY})

@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 	# endif
 
 
-	// Ask to the parser to parse the command line
+	// Ask the parser to parse the command line
 	if (!options(argc, argv))
 	{
 		// The program should not continue here
