@@ -313,6 +313,7 @@ namespace Yuni
 
 		//! Reset
 		SmartPtr& operator = (const NullPtr*);
+		SmartPtr& operator = (const NullPtr&);
 
 		//! Copy from another smartptr
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
@@ -335,8 +336,10 @@ namespace Yuni
 
 		//! operator `==`
 		bool operator == (const NullPtr*) const;
+		bool operator == (const NullPtr&) const;
 		//! operator `!=`
 		bool operator != (const NullPtr*) const;
+		bool operator != (const NullPtr&) const;
 
 		//! operator `==`
 		template<typename T1, template <class> class OwspP1, template <class> class ChckP1,

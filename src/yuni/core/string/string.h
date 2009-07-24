@@ -423,6 +423,7 @@ namespace Yuni
 		** \brief Constructor with an empty value
 		*/
 		StringBase(const NullPtr*);
+		StringBase(const NullPtr&);
 
 		/*!
 		** \brief Constructor - From a repetition of chars
@@ -1258,6 +1259,7 @@ namespace Yuni
 		** This method is strictly equivalent to the method clear()
 		*/
 		StringBase& operator = (const NullPtr*);
+		StringBase& operator = (const NullPtr&);
 
 		/*!
 		** \brief Append a value to the end of the string
@@ -1274,6 +1276,7 @@ namespace Yuni
 		** with one parameter.
 		*/
 		StringBase& operator += (const NullPtr*);
+		StringBase& operator += (const NullPtr&);
 
 		/*!
 		** \brief Append a value to the end of the string
@@ -1290,6 +1293,7 @@ namespace Yuni
 		** with one parameter.
 		*/
 		StringBase& operator << (const NullPtr*);
+		StringBase& operator << (const NullPtr&);
 
 		//! Get if the string is less than a C-String (can be null)
 		bool operator < (const Char rhs[]) const;
@@ -1307,6 +1311,8 @@ namespace Yuni
 
 		//! Get if the string is equivalent to a NULL C-String
 		bool operator == (const NullPtr*) const;
+		//! Get if the string is equivalent to a NULL C-String
+		bool operator == (const NullPtr&) const;
 
 		template<int N> bool operator == (const Char rhs[N]) const;
 		//! Get if the string is equivalent to another string
@@ -1321,6 +1327,7 @@ namespace Yuni
 		bool operator != (const StringBase<Char,Chnk1>& rhs) const;
 		//! Get if the string is equivalent to a NULL C-String
 		bool operator != (const NullPtr*) const;
+		bool operator != (const NullPtr&) const;
 
 		/*!
 		** \brief Get an iterator at a specific position
