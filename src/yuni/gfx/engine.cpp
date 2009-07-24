@@ -28,13 +28,13 @@ namespace Gfx
 		* \brief The external 3D engine
 		*/
 		# ifdef YUNI_EXTERNAL_3D_IRRLICHT
-		Private::Gfx::Irrlicht::Engine external3DEngine;
+		Private::GfxImpl::Irrlicht::Engine external3DEngine;
 		# else
 		#  ifdef YUNI_EXTERNAL_3D_OGRE
-		Private::Gfx::Ogre::Engine external3DEngine;
+		Private::GfxImpl::Ogre::Engine external3DEngine;
 		#  else
 		#   ifdef YUNI_INTERNAL_3D
-		Private::Gfx::Gl::Engine external3DEngine;
+		Private::GfxImpl::Gl::Engine external3DEngine;
 		#   else
 		#    error "The external 3D engine is not defined"
 		#   endif
@@ -171,7 +171,7 @@ namespace Gfx
 
 	String Engine::applicationTitle()
 	{
-		return (dynamic_cast<Private::Gfx::EngineAbstract*>(&external3DEngine))->applicationTitle();
+		return (dynamic_cast<Private::GfxImpl::EngineAbstract*>(&external3DEngine))->applicationTitle();
 	}
 
 

@@ -9,22 +9,15 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Gfx
+namespace GfxImpl
 {
 namespace Gl
 {
 
 	Engine::Engine()
-		:Private::Gfx::EngineAbstract(), pBackgroundColor(0, 0, 0, 0),
+		:pBackgroundColor(0, 0, 0, 0),
 		pRunnable(false)
 	{}
-
-	Engine::Engine(SmartPtr<Yuni::Gfx::Device> dc)
-		:Private::Gfx::EngineAbstract(), pRunnable(false)
-	{
-		this->initialize(dc);
-	}
-
 
 	Engine::~Engine()
 	{
@@ -35,7 +28,7 @@ namespace Gl
 
 
 
-	bool Engine::initialize(SmartPtr<Yuni::Gfx::Device> dc)
+	bool Engine::initialize(const Yuni::Gfx::Device::Ptr& dc)
 	{
 		// We keep a reference to the yuni device
 		if (NULL == dc)
@@ -88,60 +81,12 @@ namespace Gl
 	void Engine::release()
 	{
 		pRunnable = false;
-		if (pDevice)
-		{
-			// Close the device
-			waitForEngineToStop();
-		}
-		pDevice = NULL;
 	}
-
-
-
-	/*!
-	 * \todo Must be removed. Created for debug purposes
-	 */
-	class ThreadWaitForEngineToStop : public Yuni::Threads::AThread
-	{
-	public:
-		ThreadWaitForEngineToStop(Yuni::Private::Gfx::EngineAbstract& engineToWait)
-			:Yuni::Threads::AThread(), pEngineToWait(engineToWait)
-		{}
-
-		~ThreadWaitForEngineToStop() {stop();}
-
-		virtual void onExecute()
-		{
-			while (pEngineToWait.isRunning())
-			{
-				//suspend(1000 /* ms */);
-				SleepMilliSeconds(1000);
-				std::cout << "Wait...\n";
-			}
-		}
-
-	private:
-		Yuni::Private::Gfx::EngineAbstract& pEngineToWait;
-	};
-
 
 
 	void Engine::waitForEngineToStop()
 	{
-		// We should stop as soon as possible
-		pRunnable = false;
-
-		if (pDevice && pIsRunning)
-		{
-			ThreadWaitForEngineToStop th(*this);
-			th.start();
-			// Let the other thread
-			SleepMilliSeconds(100 /* ms */);
-			th.stop(10);
-
-			// Does not destroy the device, it will only be closed
-			//pDevice->closeDevice();
-		}
+		// TODO
 	}
 
 
@@ -159,7 +104,7 @@ namespace Gl
 
 
 } // namespace Irrlicht
-} // namespace Gfx
+} // namespace GfxImpl
 } // namespace Private
 } // namespace Yuni
 

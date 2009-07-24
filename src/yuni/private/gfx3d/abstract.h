@@ -13,7 +13,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Gfx
+namespace GfxImpl
 {
 
 
@@ -21,8 +21,8 @@ namespace Gfx
 	/*!
 	** \brief Base class for back-end 3D engine (abstract)
 	**
-	** \see class Yuni::Private::Gfx::Irrlicht::Engine
-	** \see class Yuni::Private::Gfx::Ogre::Engine
+	** \see class Yuni::Private::GfxImpl::Irrlicht::Engine
+	** \see class Yuni::Private::GfxImpl::Ogre::Engine
 	*/
 	class EngineAbstract
 	{
@@ -67,7 +67,7 @@ namespace Gfx
 		** \param dc Information about the device to initialize. If NULL, nothing will be done
 		** \return True if the operation succeeded, False otherwise
 		*/
-		virtual bool initialize(SmartPtr<Yuni::Gfx::Device> dc) = 0;
+		virtual bool initialize(const Yuni::Gfx::Device::Ptr& dc) = 0;
 
 		/*!
 		** \brief Release the last initialized 3D Device
@@ -113,6 +113,8 @@ namespace Gfx
 		sint32 pFPS;
 		//! Get if the engine is running
 		bool pIsRunning;
+		//! The yuni device
+		Yuni::Gfx::Device::Ptr pDevice;
 		//! Application title
 		String pApplicationTitle;
 
@@ -120,7 +122,7 @@ namespace Gfx
 
 
 
-} // namespace Gfx
+} // namespace GfxImpl
 } // namespace Private
 } // namespace Yuni
 

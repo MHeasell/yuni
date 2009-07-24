@@ -22,6 +22,9 @@ namespace Gfx
 	class Device
 	{
 	public:
+		typedef SmartPtr<Device> Ptr;
+
+	public:
 		enum Type
 		{
 			//! Null Device
@@ -144,12 +147,12 @@ namespace Gfx
 		/*!
 		** \brief Monitor
 		*/
-		SmartPtr<Yuni::Device::Display::Monitor> monitor() const {return pMonitor;}
+		Yuni::Device::Display::Monitor::Ptr monitor() const {return pMonitor;}
 
 		/*!
 		** \brief Set the monitor to use
 		*/
-		void monitor(const SmartPtr<Yuni::Device::Display::Monitor>& m);
+		void monitor(const Yuni::Device::Display::Monitor::Ptr& m);
 
 		//@}
 
@@ -160,13 +163,13 @@ namespace Gfx
 		/*!
 		** \brief Screen resolution
 		*/
-		SmartPtr<Yuni::Device::Display::Resolution> resolution() const
+		Yuni::Device::Display::Resolution::Ptr resolution() const
 		{return pResolution;}
 
 		/*!
 		** \brief Set the screen resolution
 		*/
-		void resolution(const SmartPtr<Yuni::Device::Display::Resolution>& r);
+		void resolution(const Yuni::Device::Display::Resolution::Ptr& r);
 
 		/*!
 		** \brief Set the screen resolution
@@ -251,9 +254,9 @@ namespace Gfx
 		//! Type of the device
 		Type pType;
 		//! The monitor
-		SmartPtr<Yuni::Device::Display::Monitor> pMonitor;
+		Yuni::Device::Display::Monitor::Ptr pMonitor;
 		//! The resolution
-		SmartPtr<Yuni::Device::Display::Resolution> pResolution;
+		Yuni::Device::Display::Resolution::Ptr pResolution;
 		//! Fullscreen
 		bool pFullscreen;
 		//! Stencilbuffer

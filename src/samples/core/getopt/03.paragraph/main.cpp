@@ -69,13 +69,13 @@ int main(int argc, char* argv[])
 
 	// Help
 	options.addParagraph("\nHelp");
-	// Actually, when the option `help` is not overrided (means you did not add an
+	// Actually, when the option `help` is not overridden (means you did not add an
 	// option with a long name `help`), the description of the --help option
 	// is automatically added to the help usage.
 	// If you want to make your own help usage, see the sample `04.customhelpusage`
 
 
-	// Ask to the parser to parse the command line
+	// Ask the parser to parse the command line
 	if (!options(argc, argv))
 	{
 		// The program should not continue here
