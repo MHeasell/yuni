@@ -74,7 +74,8 @@
 # include "core/system/capabilities.h"
 /* Standard Types */
 # include "core/system/stdint.h"
-
+/* nullptr */
+# include "core/system/nullptr.h"
 
 
 /*!
