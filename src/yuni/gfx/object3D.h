@@ -71,7 +71,7 @@ namespace Gfx
 		void skeleton(const Skeleton::Ptr& newSkeleton);
 
 		//! Get the name of the object
-		const ID id() const {return pID;}
+		ID id() const {return pID;}
 
 		//@}
 
