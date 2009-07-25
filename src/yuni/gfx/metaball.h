@@ -58,7 +58,7 @@ namespace Gfx
 		/*!
 		** \brief Accessor to the density of the metaball
 		*/
-		const float density() const  {return pPositive ? pDensity : -pDensity;}
+		float density() const  {return pPositive ? pDensity : -pDensity;}
 
 		/*!
 		** \brief Get points that we know are inside the surface, here we give the center
