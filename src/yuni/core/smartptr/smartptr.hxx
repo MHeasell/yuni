@@ -110,7 +110,7 @@ namespace Yuni
 		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs,
-		const SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::DynamicCastArg&)
+		const typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::DynamicCastArg&)
 		:StoragePolicy(rhs),
 		OwnershipPolicy(rhs),
 		CheckingPolicy(rhs),
