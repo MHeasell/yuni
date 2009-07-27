@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 	// Example: getopt_04_customhelpusage.exe /?
 	# ifdef YUNI_OS_WINDOWS
 	// It is safe to use the same variable `optFlag`
-	optins.addFlag(optHelp, '?');
+	options.addFlag(optHelp, '?');
 	# endif
 
 
