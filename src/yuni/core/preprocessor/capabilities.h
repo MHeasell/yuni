@@ -7,6 +7,10 @@
 /*!
 ** \brief Operating System / Capabilities Auto-Detection
 **
+** General defines :
+** YUNI_OS_NAME: Name of the operating system (without its version which can only be
+**   determined at runtime)
+** YUNI_COMPILER_NAME: Name of the compiler currently used
 **
 ** Usefull defines :
 **
@@ -54,6 +58,9 @@
 ** YUNI_OS_SOLARIS
 ** YUNI_OS_SUNOS
 **
+** - Unknown
+** YUNI_OS_UNKNOWN
+** YUNI_OS_COMPILER
 **
 **
 ** Misc:
@@ -84,17 +91,22 @@
 
 
 
-/* GNU project C and C++ compiler */
+/* GNU C and C++ compiler */
 # ifdef __GNUC__
 #	define YUNI_OS_GCC
 #	define YUNI_OS_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
+#	ifndef YUNI_COMPILER_NAME
+#		define YUNI_COMPILER_NAME "GCC (the GNU Compiler Collection)"
+#	endif
 # else
 #	define YUNI_OS_GCC_VERSION 0
 # endif
 
+
 /* Intel Compiler */
 # ifdef __INTEL_COMPILER
 #	define YUNI_OS_INTELCOMPILER
+#	define YUNI_COMPILER_NAME "ICC (Intel C++ Compiler)"
 # endif
 
 
@@ -119,7 +131,8 @@
 #	else
 #		define YUNI_EXPORT   __declspec(dllimport)
 #	endif
-# else
+# endif
+# ifndef YUNI_EXPORT
 #	define YUNI_EXPORT
 # endif
 
@@ -128,28 +141,48 @@
 
 /* inline */
 # ifdef YUNI_OS_GCC
-#	define ALWAYS_INLINE  __attribute__((always_inline))
+#	define YUNI_ALWAYS_INLINE  __attribute__((always_inline))
 # else
 #	ifdef YUNI_OS_MSVC
-#		define ALWAYS_INLINE  __forceinline
-#	else
-#		define ALWAYS_INLINE
+#		define YUNI_ALWAYS_INLINE  __forceinline
 # 	endif
+# endif
+# ifndef YUNI_ALWAYS_INLINE
+#	define YUNI_ALWAYS_INLINE
 # endif
 
 
 /* Deprecated */
-# if (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
-#	define YUNI_DEPRECATED  __attribute__((__deprecated__))
-# else
+# if defined(YUNI_OS_GCC)
+#	if (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
+#		define YUNI_DEPRECATED  __attribute__((__deprecated__))
+#	endif
+# endif
+# ifndef YUNI_DEPRECATED
 #	define YUNI_DEPRECATED
-# endif /* __GNUC__ */
+# endif
 
 
 
 /* C++0x */
 # if defined(__GXX_EXPERIMENTAL_CPP0X__) || defined(_RWSTD_EXT_CXX_0X)
 #	define YUNI_CPP_0X
+# endif
+
+
+
+/* OS Detection */
+# ifndef YUNI_OS_NAME
+#	define YUNI_OS_NAME "Unknown"
+#	define YUNI_OS_UNKNOWN
+#	warning "OS Detection: Unable to guess the operating system"
+# endif
+
+/* Compiler Detection */
+# ifndef YUNI_OS_NAME
+#	define YUNI_COMPILER_NAME "Unknown"
+#	define YUNI_COMPILER_UNKNOWN
+#	warning "Compiler Detection: Unable to guess the compiler"
 # endif
 
 
