@@ -4,24 +4,28 @@
 
 /* Microsoft Windows */
 #	define YUNI_OS_WINDOWS
+#	define YUNI_OS_NAME "Microsoft Windows"
+
 /* Windows 64 */
 #	ifdef _WIN64
-#	   define YUNI_OS_WIN64
-#	   define YUNI_OS_64
+#		define YUNI_OS_WIN64
+#		define YUNI_OS_64
 #	else
-#	   define YUNI_OS_WIN32
+#		define YUNI_OS_WIN32
 #	endif
 /* Windows CE */
 #	ifdef _WIN32_WCE
-#	   define YUNI_OS_WINCE
+#		define YUNI_OS_WINCE
 #	endif
 /* Visual Studio */
 #	ifdef _MSC_VER
-#	   define YUNI_OS_MSVC
+#		define YUNI_OS_MSVC
+#		define YUNI_COMPILER_NAME "Microsoft Visual C++"
 #	endif
 /* Borland Compiler */
 #	ifdef __BORLANDC__
-#	   define YUNI_OS_BORLAND
+#		define YUNI_OS_BORLAND
+#		define YUNI_COMPILER_NAME "Borland C++ Compiler"
 #	endif
 /* Cygwin */
 #	ifdef __CYGWIN__
@@ -29,7 +33,8 @@
 #	endif
 /* MinGW */
 #	ifdef __MINGW32__
-#	   define YUNI_OS_MINGW
+#		define YUNI_OS_MINGW
+#		define YUNI_COMPILER_NAME "MinGW"
 #	endif
 
 
