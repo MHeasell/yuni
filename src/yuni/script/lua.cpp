@@ -66,8 +66,10 @@ namespace Script
 				break;
 			default:
 				++pEvalPending;
+				// We must move the script that is now on top of the stack behind
+				// other scripts already loaded. (hence the -(int)pEvalPending)
 				if (pEvalPending > 1)
-					lua_insert(pProxy->pState, -pEvalPending);
+					lua_insert(pProxy->pState, -(int)pEvalPending);
 				// Ok
 				break;
 		}
@@ -92,8 +94,10 @@ namespace Script
 				break;
 			default:
 				++pEvalPending;
+				// We must move the script that is now on top of the stack behind
+				// other scripts already loaded. (hence the -(int)pEvalPending)
 				if (pEvalPending > 1)
-					lua_insert(pProxy->pState, -pEvalPending);
+					lua_insert(pProxy->pState, -(int)pEvalPending);
 				// Ok
 				break;
 		}
@@ -118,8 +122,10 @@ namespace Script
 				break;
 			default:
 				++pEvalPending;
+				// We must move the script that is now on top of the stack behind
+				// other scripts already loaded. (hence the -(int)pEvalPending)
 				if (pEvalPending > 1)
-					lua_insert(pProxy->pState, -pEvalPending);
+					lua_insert(pProxy->pState, -(int)pEvalPending);
 				// Ok
 				break;
 		}
