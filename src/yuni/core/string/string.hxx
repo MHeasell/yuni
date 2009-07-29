@@ -743,7 +743,7 @@ namespace Yuni
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find_first_of(const U& u, typename StringBase<C,Chunk>::Size offset) const
 	{
-		return Private::StringImpl::FindFirstOf<StringBase<C,Chunk>, U, true>
+		return Private::StringImpl:: template FindFirstOf<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type, true>
 			::Value(*this, u, offset);
 	}
 
