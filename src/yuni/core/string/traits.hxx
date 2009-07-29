@@ -205,6 +205,7 @@ namespace StringImpl
 # include "traits/find.hxx"
 # include "traits/remove.hxx"
 # include "traits/findlastof.hxx"
+# include "traits/findfirstof.hxx"
 # include "traits/cstring.hxx"
 
 

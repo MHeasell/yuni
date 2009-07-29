@@ -58,7 +58,7 @@ Set(SRC_CORE_STRING
 				core/string/traits/countchar.hxx  core/string/traits/find.hxx
 				core/string/traits/haschar.hxx    core/string/traits/length.hxx
 				core/string/traits/remove.hxx     core/string/traits/vsprintf.hxx
-				core/string/traits/findlastof.hxx
+				core/string/traits/findlastof.hxx core/string/traits/findfirstof.hxx
 				core/string.h)
 source_group(Core\\String FILES ${SRC_CORE_STRING})
 

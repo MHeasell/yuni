@@ -11,19 +11,6 @@ namespace StringImpl
 
 
 
-	template<class StrBase, class T>
-	struct Find
-	{
-		/* Interface */
-		static typename StrBase::Size Value(const StrBase& str, const T& t);
-		static typename StrBase::Size Value(const StrBase& str, const T& t, const typename StrBase::Size offset);
-		static typename StrBase::Size ReverseValue(const StrBase& str, const T& t);
-		static typename StrBase::Size ReverseValue(const StrBase& str, const T& t, const typename StrBase::Size offset);
-	};
-
-
-
-
 	template<class StrBase1>
 	struct Find<StrBase1, char>
 	{

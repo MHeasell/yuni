@@ -11,14 +11,6 @@ namespace StringImpl
 
 
 
-	template<class StrBase, class U>
-	struct CountChar
-	{
-		static typename StrBase::Size Value(const U& u);
-	};
-
-
-
 	template<class StrBase1, typename C1>
 	struct CountChar<StrBase1, C1*>
 	{
