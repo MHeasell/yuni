@@ -8,6 +8,20 @@ namespace Yuni
 {
 
 	template<typename T>
+	int stringCompare(const String& t1, const T t2, bool equal)
+	{
+		if ((t1 == t2) != equal)
+		{
+			std::cerr << "* String comparison failed !" << std::endl
+				<< "	 `" << t1 << "` should be "
+				<< (equal ? "equal to `" : "different from `")
+				<< String(t2) << "`" << std::endl;
+			return 1;
+		}
+		return 0;
+	}
+
+	template<typename T>
 	int stringConvert(const String& section, const T t, const T expected)
 	{
 		if (t != expected)
@@ -56,6 +70,20 @@ namespace Yuni
 	{
 		std::cout << "* SelfTest: Strings..." << std::endl;
 		int ret = 0;
+		ret += stringCompare(String(""), "", true);
+		ret += stringCompare(String(""), "\0\0\0\0", true);
+		ret += stringCompare(String(""), (const char*)0, false);
+		ret += stringCompare(String(""), "abc", false);
+		ret += stringCompare(String("abc"), "", false);
+		const char* test = "test";
+		ret += stringCompare(String(test), test, true);
+		ret += stringCompare(String(test), "test", true);
+		ret += stringCompare(String(test), "test ", false);
+		ret += stringCompare(String(test), "testtest", false);
+		ret += stringCompare(String("abc"), "abc", true);
+		ret += stringCompare(String("abc"), String("abc"), true);
+		ret += stringCompare(String("abc"), "abc_extended", false);
+		ret += stringCompare(String("abc"), String("abc_extended"), false);
 		ret += stringConvert("int32", String(10).to<sint32>(), 10);
 		ret += stringConvert("uint32", String(uint32(-1)).to<uint32>(), uint32(-1));
 		ret += stringConvert("int64", String(sint64(33554432 * 30)).to<sint64>(), sint64(33554432 * 30));
