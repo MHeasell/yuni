@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_STRING_STRING_TRAITS_FIND_LAST_OF_HXX__
-# define __YUNI_CORE_STRING_STRING_TRAITS_FIND_LAST_OF_HXX__
+#ifndef __YUNI_CORE_STRING_STRING_TRAITS_FIND_FIRST_OF_HXX__
+# define __YUNI_CORE_STRING_STRING_TRAITS_FIND_FIRST_OF_HXX__
 
 
 namespace Yuni
@@ -11,43 +11,32 @@ namespace StringImpl
 
 
 	template<typename C, int Chnk, bool Equals>
-	struct FindLastOf<StringBase<C,Chnk>, C, Equals>
+	struct FindFirstOf<StringBase<C,Chnk>, C, Equals>
 	{
 		static typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C toFind)
 		{
-			if (s.pSize)
+			for (typename StringBase<C,Chnk>::Size i = 0; i != s.pSize; ++i)
 			{
-				typename StringBase<C,Chnk>::Size i = s.pSize;
-				--i;
-				do
-				{
-					if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
-						return i;
-				}
-				while (--i);
+				if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
+					return i;
 			}
 			return StringBase<C,Chnk>::npos;
 		}
 
 		static typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C toFind, const typename StringBase<C,Chnk>::Size offset)
 		{
-			if (offset < s.pSize)
+			for (typename StringBase<C,Chnk>::Size i = offset; i < s.pSize; ++i)
 			{
-				typename StringBase<C,Chnk>::Size i = offset;
-				do
-				{
-					if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
-						return i;
-				}
-				while (--i);
+				if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
+					return i;
 			}
 			return StringBase<C,Chnk>::npos;
 		}
-
 	};
 
+
 	template<typename C, int Chnk, bool Equals>
-	struct FindLastOf<StringBase<C,Chnk>, C*, Equals>
+	struct FindFirstOf<StringBase<C,Chnk>, C*, Equals>
 	{
 		static typename StringBase<C,Chnk>::Size RawValue(const StringBase<C,Chnk>& s, const C* toFind,
 			typename StringBase<C,Chnk>::Size offset, /* offset in `s` */
@@ -56,8 +45,7 @@ namespace StringImpl
 			if (len && toFind && offset < s.pSize)
 			{
 				typename StringBase<C,Chnk>::Size j;
-				typename StringBase<C,Chnk>::Size i = offset;
-				do
+				for (typename StringBase<C,Chnk>::Size i = offset; i != s.pSize; ++i)
 				{
 					for (j = 0; j != len; ++j)
 					{
@@ -65,7 +53,6 @@ namespace StringImpl
 							return i;
 					}
 				}
-				while (--i);
 			}
 			return StringBase<C,Chnk>::npos;
 		}
@@ -73,20 +60,18 @@ namespace StringImpl
 
 		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C* toFind)
 		{
-			return s.pSize
-				? RawValue(s, toFind, s.pSize - 1, StringBase<C,Chnk>::Length(toFind))
-				: StringBase<C,Chnk>::npos;
+			return RawValue(s, toFind, 0, StringBase<C,Chnk>::Length(toFind));
 		}
 
-		static typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C toFind, const typename StringBase<C,Chnk>::Size offset)
+		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C* toFind, const typename StringBase<C,Chnk>::Size offset)
 		{
 			return RawValue(s, toFind, offset, StringBase<C,Chnk>::Length(toFind));
 		}
-
 	};
 
+
 	template<typename C, int Chnk, bool Equals, int N>
-	struct FindLastOf<StringBase<C,Chnk>, C[N], Equals>
+	struct FindFirstOf<StringBase<C,Chnk>, C[N], Equals>
 	{
 		static typename StringBase<C,Chnk>::Size RawNValue(const StringBase<C,Chnk>& s, const C* toFind,
 			typename StringBase<C,Chnk>::Size offset /* offset in `s` */)
@@ -94,8 +79,7 @@ namespace StringImpl
 			if ((N - 1) && toFind && offset < s.pSize)
 			{
 				typename StringBase<C,Chnk>::Size j;
-				typename StringBase<C,Chnk>::Size i = offset;
-				do
+				for (typename StringBase<C,Chnk>::Size i = offset; i != s.pSize; ++i)
 				{
 					for (j = 0; j != (N - 1); ++j)
 					{
@@ -103,7 +87,6 @@ namespace StringImpl
 							return i;
 					}
 				}
-				while (--i);
 			}
 			return StringBase<C,Chnk>::npos;
 		}
@@ -111,7 +94,7 @@ namespace StringImpl
 
 		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C* toFind)
 		{
-			return s.pSize ? RawNValue(s, toFind, s.pSize - 1) : StringBase<C,Chnk>::npos;
+			return RawNValue(s, toFind, 0);
 		}
 
 		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C* toFind, const typename StringBase<C,Chnk>::Size offset)
@@ -122,34 +105,31 @@ namespace StringImpl
 
 
 	template<typename C, int Chnk, bool Equals, int Cnk1>
-	struct FindLastOf<StringBase<C,Chnk>, StringBase<C, Cnk1>, Equals>
+	struct FindFirstOf<StringBase<C,Chnk>, StringBase<C,Cnk1>, Equals>
 	{
 		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const StringBase<C,Cnk1>& toFind)
 		{
-			return s.pSize
-				? FindLastOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.pPtr, s.pSize - 1, toFind.pSize)
-				: StringBase<C,Chnk>::npos;
+			return FindFirstOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.pPtr, 0, toFind.pSize);
 		}
 
-		static typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C toFind, const typename StringBase<C,Chnk>::Size offset)
+		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const StringBase<C, Cnk1>& toFind, const typename StringBase<C,Chnk>::Size offset)
 		{
-			return FindLastOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.pPtr, offset, toFind.pSize);
+			return FindFirstOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.pPtr, offset, toFind.pSize);
 		}
 	};
 
+
 	template<typename C, int Chnk, bool Equals>
-	struct FindLastOf<StringBase<C,Chnk>, std::basic_string<C>, Equals>
+	struct FindFirstOf<StringBase<C,Chnk>, std::basic_string<C>, Equals>
 	{
 		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const std::basic_string<C>& toFind)
 		{
-			return s.pSize
-				? FindLastOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.c_str(), s.pSize - 1, toFind.size())
-				: StringBase<C,Chnk>::npos;
+			return FindFirstOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.c_str(), 0, toFind.size());
 		}
 
-		static typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C toFind, const typename StringBase<C,Chnk>::Size offset)
+		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const std::basic_string<C>& toFind, const typename StringBase<C,Chnk>::Size offset)
 		{
-			return FindLastOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.c_str(), offset, toFind.size());
+			return FindFirstOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.c_str(), offset, toFind.size());
 		}
 	};
 
@@ -160,4 +140,4 @@ namespace StringImpl
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_CORE_STRING_STRING_TRAITS_FIND_LAST_OF_HXX__
+#endif // __YUNI_CORE_STRING_STRING_TRAITS_FIND_FIRST_OF_HXX__

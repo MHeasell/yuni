@@ -9,12 +9,6 @@ namespace Private
 namespace StringImpl
 {
 
-	template<class StrBase, class T>
-	struct Length
-	{
-		static typename StrBase::Size Value(const T& t);
-	};
-
 
 	template<class StrBase1>
 	struct Length<StrBase1, char*>

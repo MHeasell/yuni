@@ -27,13 +27,13 @@ namespace StringImpl
 {
 
 	// Forward declarations
-	template<class StrBase1, class T1> struct Length;
-	template<class StrBase1, class T1> struct CountChar;
-	template<class StrBase1, class T1> struct HasChar;
-	template<class StrBase1, class T1> struct Find;
+	template<class StrBase1, class T1> struct Length {};
+	template<class StrBase1, class T1> struct CountChar {};
+	template<class StrBase1, class T1> struct HasChar {};
+	template<class StrBase1, class T1> struct Find {};
 	template<class StrBase1, class T1> struct Remove;
-	template<class StrBase1, class T1, bool Equals> struct FindFirstOf;
-	template<class StrBase1, class T1, bool Equals> struct FindLastOf;
+	template<class StrBase1, class T1, bool Equals> struct FindFirstOf {};
+	template<class StrBase1, class T1, bool Equals> struct FindLastOf {};
 
 
 	/*!
@@ -98,7 +98,10 @@ namespace StringImpl
 	** This function is present to only avoid to include core/math.h
 	*/
 	template<typename T>
-	inline T Min(const T a, const T b)  {return a < b ? a : b;}
+	inline T Min(const T a, const T b)
+	{
+		return (a < b) ? a : b;
+	}
 
 
 

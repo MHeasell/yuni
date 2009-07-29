@@ -10,12 +10,6 @@ namespace StringImpl
 {
 
 
-	template<class StrBase, class U>
-	struct HasChar
-	{
-		static bool Value(const U& u);
-	};
-
 
 	template<class StrBase1, typename C1>
 	struct HasChar<StrBase1, C1*>
