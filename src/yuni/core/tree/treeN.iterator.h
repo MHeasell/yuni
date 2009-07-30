@@ -14,9 +14,7 @@ public:
 	//! \name Constructors
 	//@{
 	iterator() :pNode() {}
-	iterator(iterator& it)  :pNode(it.pNode) {}
 	iterator(const iterator& it)  :pNode(it.pNode)  {}
-	iterator(NodeT& p) :pNode(p) {}
 	iterator(const NodeT& p) :pNode(p) {}
 	//@}
 
