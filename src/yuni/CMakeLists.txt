@@ -46,8 +46,6 @@ ENDIF(YUNI_MODULE_GFX3D)
 
 
 
-
-
 #
 # Module : Network
 #
@@ -104,9 +102,6 @@ If(YUNI_MODULE_SCRIPT)
 				${SRC_SCRIPT}
 				${SRC_EXTERNAL_SCRIPT_LUA}
 				)
-	#TEST_BEGIN("yuni::scripts" "Yuni Framework" "Scripts")
-	#	TEST_ADD_TARGET("yuni-static-scripts")
-	#TEST_END()
 
 EndIf(YUNI_MODULE_SCRIPT)
 
@@ -175,6 +170,12 @@ IF(YUNI_MODULE_ALGORITHMS)
 	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/algorithms.cmake")
 ENDIF(YUNI_MODULE_ALGORITHMS)
 
+
+
+
+IF(YUNI_TESTS)
+	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/test.cmake")
+ENDIF(YUNI_TESTS)
 
 
 #

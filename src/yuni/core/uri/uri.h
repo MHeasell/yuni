@@ -244,7 +244,7 @@ namespace Yuni
 		** \brief Print this URI to a stream output
 		** \param out The stream output
 		*/
-		std::ostream& print(std::ostream& out) const {out << pInfos.toString();return out;}
+		std::ostream& print(std::ostream& out) const {pInfos.print(out);return out;}
 		//@}
 
 

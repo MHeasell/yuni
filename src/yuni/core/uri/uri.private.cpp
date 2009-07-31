@@ -54,6 +54,44 @@ namespace Uri
 	}
 
 
+	namespace
+	{
+		template<class U>
+		void WriteStructInformationsToStream(const Informations& infos, U& s)
+		{
+			if (infos.isValid)
+			{
+				if (!infos.scheme.empty())
+					s << infos.scheme << ":";
+				if (!infos.server.empty())
+				{
+					if (!infos.scheme.empty())
+						s << "//";
+					if (!infos.user.empty())
+					{
+						s << infos.user;
+						if (!infos.password.empty())
+							s << ":" << infos.password;
+						s << "@";
+					}
+					s << infos.server;
+					if (infos.port > 0)
+						s << ":" << infos.port;
+				}
+				else
+				{
+					if (!infos.scheme.empty() && "file" == infos.scheme)
+						s << "//";
+				}
+				s << infos.path;
+				if (!infos.query.empty())
+					s << "?" << infos.query;
+				if (!infos.fragment.empty())
+					s << "#" << infos.fragment;
+			}
+		}
+
+	} // Anonymous namespace
 
 
 	String Informations::toString() const
@@ -61,38 +99,18 @@ namespace Uri
 		if (isValid)
 		{
 			String s;
-			if (!scheme.empty())
-				s << scheme << ":";
-			if (!server.empty())
-			{
-				if (!scheme.empty())
-					s << "//";
-				if (!user.empty())
-				{
-					s << user;
-					if (!password.empty())
-						s << ":" << password;
-					s << "@";
-				}
-				s << server;
-				if (port > 0)
-					s << ":" << port;
-			}
-			else
-			{
-				if (!scheme.empty() && "file" == scheme)
-					s << "//";
-			}
-			s << path;
-			if (!query.empty())
-				s << "?" << query;
-			if (!fragment.empty())
-				s << "#" << fragment;
+			WriteStructInformationsToStream(*this, s);
 			return s;
 		}
 		return String();
 	}
 
+
+	void Informations::print(std::ostream& out) const
+	{
+		if (isValid)
+			WriteStructInformationsToStream(*this, out);
+	}
 
 
 
