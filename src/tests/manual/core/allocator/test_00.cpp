@@ -97,43 +97,59 @@ template<typename T>
 void testAllocator()
 {
 	// Fix a number of allocations to do
-	const unsigned int nbAlloc = 5000000;
+	const unsigned int nbAlloc = 10000000;
 	// List to store our allocated objects
 	list<T*> tab;
 
+	time_t start = time(NULL);
+	time_t old = start;
+
 	// Bulk allocation consists of many allocations at a time
+	std::cout << "Bulk allocation: ";
 	bulkAlloc(nbAlloc, tab);
+	time_t now = time(NULL);
+	std::cout << now - old << " seconds" << std::endl;
+	old = now;
+
 	// Butterfly allocation means many allocations/deallocations in any order
-	butterflyAllocDealloc(500000, tab);
+	std::cout << "Butterfly allocation: ";
+	butterflyAllocDealloc(10000000, tab);
+	now = time(NULL);
+	std::cout << now - old << " seconds" << std::endl;
+	old = now;
+
 	// Deallocation simulating objects being freed in the order
 	// they were allocated
+	std::cout << "Same order deallocation: ";
 	sameOrderDealloc(tab.size() / 2, tab);
+	now = time(NULL);
+	std::cout << now - old << " seconds" << std::endl;
+	old = now;
+
 	// Deallocation simulating objects being freed in the reverse order
 	// to which they were allocated
+	std::cout << "Reverse order deallocation: ";
 	reverseDealloc(tab.size(), tab);
+	now = time(NULL);
+	std::cout << now - old << " seconds" << std::endl;
+
+	std::cout << "Total time: " << now - start << " seconds" << std::endl;
 }
 
 int main(void)
 {
-	time_t start = time(NULL);
-
 	// Initialize random seed
-	srand((unsigned int)start);
+	srand((unsigned int)time(NULL));
 
 	std::cout << "Begin test with default allocator..." << std::endl;
 	// Test the algorithm with default allocator
 	testAllocator<MyObject>();
-
-	time_t end = time(NULL);
-	std::cout << "Finished! Time elapsed: " << end - start << "seconds" << std::endl;
 	
-	start = time(NULL);
+	std::cout << std::endl;
 
 	std::cout << "Begin test with Yuni's allocator..." << std::endl;
 	// Test the algorithm with Yuni's allocator
 	testAllocator<MySmallObject>();
 
-	end = time(NULL);
-	std::cout << "Finished! Time elapsed: " << end - start << "seconds" << std::endl;
 	return 0;
 }
