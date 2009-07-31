@@ -20,14 +20,12 @@ namespace Yuni
 	**
 	** \ingroup Alloc
 	*/
-	template<
-		typename T,
-		template <class> class ThreadingPolicy = Policy::ClassLevelLockable
-		>
-	class SmallObject : public ThreadingPolicy<T>
+	template<typename T, template <class> class TP = Policy::ClassLevelLockable>
+	class SmallObject : public TP<T>
 	{
 	public:
-		typedef ThreadingPolicy<T> ThreadingModel;
+		//! The Threading Policy
+		typedef TP<T> ThreadingPolicy;
 
 	public:
 		// Virtual destructor is essential for delete to perform on the correct type
@@ -56,9 +54,14 @@ namespace Yuni
 	protected:
 		// Disallow small object creation
 		inline SmallObject() {}
-	};
 
-} // Yuni
+	}; // class SmallObject
+
+
+
+
+
+} // namespace Yuni
 
 # include "smallobject.hxx"
 

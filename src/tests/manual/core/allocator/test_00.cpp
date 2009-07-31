@@ -113,7 +113,7 @@ void testAllocator()
 
 	// Butterfly allocation means many allocations/deallocations in any order
 	std::cout << "Butterfly allocation: ";
-	butterflyAllocDealloc(10000000, tab);
+	butterflyAllocDealloc(nbAlloc, tab);
 	now = time(NULL);
 	std::cout << now - old << " seconds" << std::endl;
 	old = now;
@@ -144,7 +144,7 @@ int main(void)
 	std::cout << "Begin test with default allocator..." << std::endl;
 	// Test the algorithm with default allocator
 	testAllocator<MyObject>();
-	
+
 	std::cout << std::endl;
 
 	std::cout << "Begin test with Yuni's allocator..." << std::endl;
