@@ -1,10 +1,12 @@
 
+#include "../yuni.h"
 #include "checkpoint.h"
 #include <iostream>
 #include <string.h>
 #include <time.h>
-#include <sys/time.h>
-#include "../yuni.h"
+#ifndef YUNI_OS_WINDOWS
+#	include <sys/time.h>
+#endif
 #include "../core/system/windows/gettimeofday.h"
 
 
