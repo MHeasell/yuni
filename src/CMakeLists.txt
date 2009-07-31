@@ -90,16 +90,9 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules.cmake")
 Add_SubDirectory(yuni)
 IF(YUNI_TESTS)
 	Add_SubDirectory(tests)
+	Add_SubDirectory(testsuite)
 EndIF(YUNI_TESTS)
 IF(YUNI_SAMPLES)
 	Add_SubDirectory(samples)
 EndIF(YUNI_SAMPLES)
-
-
-#TEST_BEGIN("yuni" "Yuni Testsuite" "Yuni")
-#	TEST_RESET_INFORMATIONS()
-#	TEST_SUBDIRECTORY("yuni")
-#	TEST_SUBDIRECTORY("tests")
-#TEST_END()
-
 
