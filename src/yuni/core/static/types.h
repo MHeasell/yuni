@@ -61,7 +61,6 @@ namespace Type
 
 	//! \name Comparison
 	//@{
-
 	/*!
 	** \brief Determine if two types are stricly identical
 	**
@@ -101,6 +100,11 @@ namespace Type
 		};
 	};
 
+	template<class T>
+	struct DefaultOrNull
+	{
+		enum { Yes = 0, No = 1 };
+	};
 	//@}
 
 
@@ -240,7 +244,28 @@ namespace Type
 		enum { Yes = 1, No = 0 };
 	};
 
+	template<>
+	struct DefaultOrNull<None>
+	{
+		enum { Yes = 1, No = 0 };
+	};
+
+	template<>
+	struct DefaultOrNull<Default>
+	{
+		enum { Yes = 1, No = 0 };
+	};
+	template<>
+	struct DefaultOrNull<NullPtr>
+	{
+		enum { Yes = 1, No = 0 };
+	};
+
 	//@} // Overloads
+
+
+
+
 
 
 } // namespace Type
