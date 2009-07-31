@@ -130,7 +130,7 @@ namespace Policy
 		class MutexLocker
 		{
 		public:
-			template<class C> MutexLocker(C&) {Mutex::ClassLevelLockable<Host>::mutex.lock();}
+			MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.lock();}
 			~MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.unlock();}
 		}; // class MutexLocker
 
