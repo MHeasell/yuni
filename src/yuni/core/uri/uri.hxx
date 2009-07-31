@@ -45,6 +45,7 @@ namespace Yuni
 	inline void Uri::password(const String& s)
 	{
 		pInfos.password = s;
+		pInfos.isValid = true;
 	}
 
 	inline const String& Uri::path() const
@@ -65,6 +66,7 @@ namespace Yuni
 	inline void Uri::fragment(const String& s)
 	{
 		pInfos.fragment = s;
+		pInfos.isValid = true;
 	}
 
 
@@ -144,7 +146,10 @@ namespace Yuni
 	inline void Uri::scheme(const Net::Protocol::Type& type)
 	{
 		pInfos.scheme = Net::Protocol::ToScheme(type);
+		pInfos.isValid = true;
 	}
+
+
 
 
 } // namespace Yuni

@@ -664,6 +664,7 @@ namespace Yuni
 	void Uri::query(const String& s)
 	{
 		pInfos.query = s;
+		pInfos.isValid = true;
 	}
 
 	void Uri::defaultPathIfEmpty()
@@ -675,31 +676,38 @@ namespace Yuni
 	void Uri::path(const String& s)
 	{
 		pInfos.path = s;
+		pInfos.isValid = true;
 	}
 
 
 	void Uri::user(const String& s)
 	{
 		pInfos.user = s;
+		pInfos.isValid = true;
 	}
 
 
 	void Uri::port(const int p)
 	{
 		if (p > 0 || p == INT_MIN)
+		{
 			pInfos.port = p;
+			pInfos.isValid = true;
+		}
 	}
 
 
 	void Uri::server(const String& s)
 	{
 		pInfos.server = s;
+		pInfos.isValid = true;
 	}
 
 
 	void Uri::scheme(const String& s)
 	{
 		pInfos.scheme = s;
+		pInfos.isValid = true;
 	}
 
 
