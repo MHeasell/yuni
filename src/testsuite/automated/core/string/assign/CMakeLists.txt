@@ -1,7 +1,7 @@
 
-YUNITESTCASE_BEGIN(libyuni_core_string_constructor_char
+YUNITESTCASE_BEGIN(libyuni_core_string_assign_char
 	"
-	options.description = 'String instanciation in various ways (StringBase<char>)'
+	options.description = 'String Assignation (StringBase<char>)'
 	options.args = ''
 	options.timeout = 5 # seconds
 	options.compareStdoutWith = 'result.stdout.txt'
@@ -15,9 +15,9 @@ YUNITESTCASE_END()
 
 
 
-YUNITESTCASE_BEGIN(libyuni_core_string_constructor_wchar
+YUNITESTCASE_BEGIN(libyuni_core_string_assign_wchar
 	"
-	options.description = 'String instanciation in various ways (StringBase<wchar_t>)'
+	options.description = 'String assignation (StringBase<wchar_t>)'
 	options.args = ''
 	options.timeout = 5 # seconds
 	options.compareStdoutWith = 'result.stdout.txt'
