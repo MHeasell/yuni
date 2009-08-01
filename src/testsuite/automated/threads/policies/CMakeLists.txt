@@ -27,5 +27,19 @@ YUNITESTCASE_BEGIN(libyuni_threads_policies_objectlevellockable
 YUNITESTCASE_END()
 
 
+YUNITESTCASE_BEGIN(libyuni_threads_policies_classlevellockable
+	"
+	options.description = 'Threading policy: Class Level Lockable'
+	options.args = ''
+	options.timeout = 5 # seconds
+	options.compareStdoutWith = nil
+	options.compareStderrWith = nil
+	options.exitStatus = 0
+	")
+	YUNITESTCASE_SOURCE(main_classlevel.cpp)
+	YUNITESTCASE_LINK(${YUNI_STATIC_CORE})
+YUNITESTCASE_END()
+
+
 
 
