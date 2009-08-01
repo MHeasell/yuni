@@ -9,7 +9,6 @@ YUNITESTCASE_BEGIN(libyuni_core_string_constructor_char
 	options.exitStatus = 0
 	")
 	YUNITESTCASE_SOURCE(main_char.cpp common.hxx)
-	YUNITESTCASE_LINK(${YUNI_STATIC_CORE})
 YUNITESTCASE_END()
 
 
@@ -25,8 +24,6 @@ YUNITESTCASE_BEGIN(libyuni_core_string_constructor_wchar
 	options.exitStatus = 0
 	")
 	YUNITESTCASE_SOURCE(main_wchart.cpp common.hxx)
-	YUNITESTCASE_LINK(${YUNI_STATIC_CORE})
 YUNITESTCASE_END()
-
 
 
