@@ -19,7 +19,7 @@ namespace Policy
 {
 
 	/*!
-	** \name THreading policies
+	** \name Threading policies
 	** \ingroup Policies
 	*/
 	//@{
@@ -131,6 +131,8 @@ namespace Policy
 		{
 		public:
 			MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.lock();}
+			MutexLocker(const MutexLocker&) {}
+			template<class C> MutexLocker(C&) {}
 			~MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.unlock();}
 		}; // class MutexLocker
 
@@ -153,7 +155,7 @@ namespace Policy
 		~ClassLevelLockable() {}
 		//@}
 
-	protected:
+	private:
 		//! Mutex
 		mutable Mutex& pMutex;
 
@@ -161,7 +163,10 @@ namespace Policy
 
 
 
-	//@}
+	//@} // Threading Policies
+
+
+
 
 } // namespace Policy
 } // namespace Yuni
