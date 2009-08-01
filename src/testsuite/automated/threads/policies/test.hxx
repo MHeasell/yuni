@@ -26,10 +26,21 @@ public:
 
 	void runWithLock()
 	{
+		// Assignation
+		pDummyVar = 42;
+
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		std::cout << "Juste do something\n";
+		// Displaying informations to avoid some permissive optimisation of gcc
+		std::cout << "Threading policy Infos\n";
+		std::cout << "Threadsafe : " << ThreadingPolicy::threadSafe << "\n";
+		std::cout << "Dummy var  : " << pDummyVar << "\n";
 	}
-};
+
+private:
+	//! A volatile variable
+	typename ThreadingPolicy:: template Volatile<int>::Type pDummyVar;
+
+}; // class Dummy
 
 
 
