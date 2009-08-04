@@ -40,7 +40,7 @@ namespace Policy
 		class MutexLocker
 		{
 		public:
-			template<class C> MutexLocker(C&) {}
+			template<class C> MutexLocker(const C&) {}
 			~MutexLocker() {}
 		}; // class MutexLocker
 
@@ -82,10 +82,19 @@ namespace Policy
 		class MutexLocker
 		{
 		public:
-			template<class C> MutexLocker(C& h) :pHostToLock(static_cast<Host&>(h)) {pHostToLock.pMutex.lock();}
-			~MutexLocker() {pHostToLock.pMutex.unlock();}
+			template<class C> MutexLocker(const C& h)
+				:pHostToLock(static_cast<const Host&>(h))
+			{
+				pHostToLock.pMutex.lock();
+			}
+
+			~MutexLocker()
+			{
+				pHostToLock.pMutex.unlock();
+			}
+
 		private:
-			Host& pHostToLock;
+			const Host& pHostToLock;
 		}; // class MutexLocker
 
 		/*!
@@ -132,7 +141,7 @@ namespace Policy
 		public:
 			MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.lock();}
 			MutexLocker(const MutexLocker&) {}
-			template<class C> MutexLocker(C&) {}
+			template<class C> MutexLocker(const C&) {}
 			~MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.unlock();}
 		}; // class MutexLocker
 
