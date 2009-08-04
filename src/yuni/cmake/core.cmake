@@ -17,8 +17,9 @@ source_group(Core\\Allocator FILES ${SRC_CORE_ALLOCATOR})
 
 
 Set(SRC_CORE_ATOMIC
-				core/atomic/int32.h
-				core/atomic/int32.hxx)
+				core/atomic/int.h
+				core/atomic/int.hxx
+				core/atomic/traits.h)
 source_group(Core\\Atomic FILES ${SRC_CORE_ATOMIC})
 
 
