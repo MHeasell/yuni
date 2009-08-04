@@ -29,6 +29,11 @@ ENDIF(NOT YUNI_STATIC_CORE)
 # PThreads (required by `Core`)
 DEVPACK_IMPORT_PTHREADS()
 
+# Tests
+IF(YUNI_TESTS)
+	LIST(APPEND YUNI_STATIC_CORE yuni-static-tests)
+ENDIF(YUNI_TESTS)
+
 
 #
 # Algorithms

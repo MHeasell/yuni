@@ -17,7 +17,7 @@
 # include "policies.h"
 # include "../../../threads/policy.h"
 # include "../../static/assert.h"
-# include "../../atomic/int32.h"
+# include "../../atomic/int.h"
 
 
 
@@ -168,13 +168,14 @@ namespace Ownership
 			//! Get if the ownership policy is destructive
 			destructiveCopy = false
 		};
+		typedef Atomic::Int<>  AtomicType;
 
 	public:
 		//! \name Constructors
 		//@{
 		//! Default constructor
 		ReferenceCountedMT()
-			:pCount(new Atomic::Int32(1))
+			:pCount(new AtomicType(1))
 		{}
 		//! Copy constructor
 		ReferenceCountedMT(const ReferenceCountedMT& c)
@@ -219,7 +220,7 @@ namespace Ownership
 
 	private:
 		//! The reference count
-		Atomic::Int32* pCount;
+		AtomicType* pCount;
 
 	}; // class ReferenceCountedMT
 
