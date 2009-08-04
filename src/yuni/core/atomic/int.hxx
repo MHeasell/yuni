@@ -98,7 +98,7 @@ namespace Atomic
 
 
 	template<int Size, template<class> class TP>
-	inline typename Int<Size,TP>::ScalarType Int<Size,TP>::operator = (const ScalarType v)
+	inline Int<Size,TP>& Int<Size,TP>::operator = (const ScalarType v)
 	{
 		pValue = v;
 		return *this;
