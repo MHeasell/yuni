@@ -12,30 +12,26 @@ namespace Window
 	bool OpenGLX11::initialize()
 	{
 		XVisualInfo* vinfo;
-		int attrList[20];
 		int indx = 0;
 
-		if (!(pDisplay = XOpenDisplay (NULL)))
+		// Connect to the X server to open the local display
+		if (!(pDisplay = XOpenDisplay(NULL)))
 			return false;
 
-		attrList[indx++] = GLX_USE_GL;
-		attrList[indx++] = GLX_DEPTH_SIZE;
-		attrList[indx++] = 1;
-		attrList[indx++] = GLX_RGBA;
-		attrList[indx++] = GLX_RED_SIZE;
-		attrList[indx++] = 1;
-		attrList[indx++] = GLX_GREEN_SIZE;
-		attrList[indx++] = 1;
-		attrList[indx++] = GLX_BLUE_SIZE;
-		attrList[indx++] = 1;
-		attrList[indx] = None;
+		int attributes[] =
+			{
+				GLX_RGBA,
+				GLX_DEPTH_SIZE, 24,
+				GLX_STENCIL_SIZE, 8,
+				GLX_ALPHA_SIZE, 8,
+				GLX_DOUBLEBUFFER,
+				None
+			};
 
-		
-
-		vinfo = glXChooseVisual(pDisplay, DefaultScreen(pDisplay), attrList);
-		if (vinfo == NULL)
+		vinfo = glXChooseVisual(pDisplay, DefaultScreen(pDisplay), attributes);
+		if (NULL == vinfo)
 		{
-			std::cerr << "ERROR: Can't open window" << std::endl;
+			std::cerr << "ERROR: Cannot open window" << std::endl;
 			return false;
 		}
 		Window root = DefaultRootWindow(pDisplay);
@@ -43,15 +39,16 @@ namespace Window
 		pAttr.colormap = XCreateColormap(pDisplay, root, vinfo->visual, AllocNone);
 		pAttr.background_pixel = BlackPixel(pDisplay, vinfo->screen);
 		pAttr.border_pixel = BlackPixel(pDisplay, vinfo->screen);
-		pWindow = XCreateWindow(pDisplay, root,
-							30, 30, pWidth, pHeight, 0, vinfo->depth, CopyFromParent,
-							vinfo->visual, CWBackPixel | CWBorderPixel | CWColormap, &pAttr);
+
+		pWindow = XCreateWindow(pDisplay, root, 30, 30, pWidth, pHeight,
+			0, vinfo->depth, CopyFromParent, vinfo->visual,
+			CWBackPixel | CWBorderPixel | CWColormap, &pAttr);
 
 		XMapWindow(pDisplay, pWindow);
 		XStoreName(pDisplay, pWindow, "VERY SIMPLE APPLICATION");
 
 		pContext = glXCreateContext(pDisplay, vinfo, NULL, True);
-		if (pContext == NULL)
+		if (NULL == pContext)
 		{
 			std::cerr << "glXCreateContext failed" << std::endl;
 			return false;
@@ -84,8 +81,8 @@ namespace Window
 		// Switch back to original desktop resolution if we were in fs
 		if (pFullScreen)
 		{
-// 			XF86VidModeSwitchToMode(pDisplay, pScreen, &GLWin.deskMode);
-// 			XF86VidModeSetViewPort(pDisplay, pScreen, 0, 0);
+//			XF86VidModeSwitchToMode(pDisplay, pScreen, &GLWin.deskMode);
+//			XF86VidModeSetViewPort(pDisplay, pScreen, 0, 0);
 		}
 		XCloseDisplay(pDisplay);
 		pDisplay = NULL;
