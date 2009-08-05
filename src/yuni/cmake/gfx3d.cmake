@@ -7,7 +7,8 @@ Set(SRC_GFX3D
 		gfx/window/factory.h gfx/window/factory.cpp
 		gfx/window/opengl.h gfx/window/opengl.cpp
 		gfx/window/openglmsw.h gfx/window/openglmsw.hxx
-		gfx/window/openglx11.h gfx/window/openglx11.hxx
+		gfx/window/openglx11.h gfx/window/openglx11.cpp
+		gfx/window/x11yuni.h
 		)
 source_group(Gfx3D FILES ${SRC_GFX3D})
 

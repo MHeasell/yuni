@@ -1,8 +1,8 @@
-
 #ifndef __YUNI_GFX3D_WINDOW_OPENGL_H__
 # define __YUNI_GFX3D_WINDOW_OPENGL_H__
 
-# include "window.h"
+# include "../window/window.h"
+
 
 namespace Yuni
 {
@@ -11,16 +11,24 @@ namespace Gfx3D
 namespace Window
 {
 
+
 	/*!
 	** \brief Window for OpenGL rendering
 	*/
 	class OpenGL: public AWindow
 	{
 	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Contructor
+		*/
 		OpenGL(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
 			:AWindow(title, width, height, bitDepth, fullScreen)
 		{}
+		//! Destructor
 		virtual ~OpenGL() {}
+		//@}
 
 	protected:
 		/*!
@@ -39,12 +47,19 @@ namespace Window
 		*/
 		virtual void close();
 
-		//! Resize the window
+		/*!
+		** \brief Resize the window
+		*/
 		virtual void resize(unsigned int width, unsigned int height);
-	};
 
-} // Window
-} // Gfx3D
-} // Yuni
+	}; // class OpenGL
+
+
+
+
+
+} // namespace Window
+} // namespace Gfx3D
+} // namespace Yuni
 
 #endif // __YUNI_GFX3D_WINDOW_OPENGL_H__
