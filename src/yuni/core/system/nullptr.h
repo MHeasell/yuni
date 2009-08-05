@@ -1,6 +1,7 @@
 #ifndef __YUNI_CORE_SYSTEM_NULLPTR_H__
 # define __YUNI_CORE_SYSTEM_NULLPTR_H__
 
+# ifdef __cplusplus /* Only with a C++ Compiler */
 
 namespace Yuni
 {
@@ -13,7 +14,7 @@ namespace Yuni
 	const class NullPtr
 	{
 	public:
-		//! Convertible to any type of null non-member
+		/*! Convertible to any type of null non-member */
 		template<class T> operator T*() const
 		{
 			return 0;
@@ -30,7 +31,7 @@ namespace Yuni
 		}
 
 	private:
-		void operator&() const;  // Can't take address of nullptr
+		void operator&() const;  /* Can't take address of nullptr */
 
 	} nullptr = {};
 
@@ -38,15 +39,18 @@ namespace Yuni
 
 
 
-	//! Type for a default behavior / policy
+	/*! Type for a default behavior / policy */
 	struct Default {};
 
-	//! Absence Option
+	/*! Absence Option */
 	struct None {};
 
 
 
 
-} // namespace Yuni
+} /* namespace Yuni */
 
-#endif // __YUNI_CORE_SYSTEM_NULLPTR_H__
+# endif /* C++ Compiler */
+
+
+#endif /* __YUNI_CORE_SYSTEM_NULLPTR_H__ */
