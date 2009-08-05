@@ -60,7 +60,7 @@ namespace Gl
 		glMatrixMode(GL_MODELVIEW);
 
 		// Set the window caption
-		this->applicationTitle(pApplicationTitle);
+		this->applicationTitle("");
 		pRunnable = true;
 		return true;
 	}

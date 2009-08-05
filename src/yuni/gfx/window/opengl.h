@@ -17,7 +17,7 @@ namespace Window
 	class OpenGL: public AWindow
 	{
 	public:
-		OpenGL(const char* title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
+		OpenGL(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
 			:AWindow(title, width, height, bitDepth, fullScreen)
 		{}
 		virtual ~OpenGL() {}

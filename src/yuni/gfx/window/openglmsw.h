@@ -12,7 +12,7 @@ namespace Window
 	class OpenGLMSW: public OpenGL
 	{
 	public:
-		OpenGLMSW(const char* title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
+		OpenGLMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
 			:OpenGL(title, width, height, bitDepth, fullScreen)
 		{}
 

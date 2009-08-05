@@ -10,11 +10,15 @@ namespace Gfx3D
 {
 namespace Window
 {
-
+	/*!
+	** \brief Window factory: manages API-dependent window creation.
+	**
+	** This is not a factory design pattern stricto sensu. It only collects static methods.
+	*/
 	class Factory
 	{
 	public:
-		static AWindow* CreateGLWindow(const char* title, unsigned int width, unsigned int height,
+		static AWindow* CreateGLWindow(const String& title, unsigned int width, unsigned int height,
 			unsigned int bitDepth, bool fullScreen);
 
 	private:
