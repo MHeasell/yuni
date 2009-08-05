@@ -1,8 +1,6 @@
-#ifndef __YUNI_POLICIES_CHECKS_H__
-# define __YUNI_POLICIES_CHECKS_H__
+#ifndef __YUNI_CORE_SMARTPTR_POLICIES_CHECKING_H__
+# define __YUNI_CORE_SMARTPTR_POLICIES_CHECKING_H__
 
-
-# include "policies.h"
 
 
 namespace Yuni
@@ -41,8 +39,9 @@ namespace Checking
 	}; // class None
 
 
+
 } // namespace Checking
 } // namespace Policy
 } // namespace Yuni
 
-#endif // __YUNI_POLICIES_CHECKS_H__
+#endif // __YUNI_CORE_SMARTPTR_POLICIES_CHECKING_H__

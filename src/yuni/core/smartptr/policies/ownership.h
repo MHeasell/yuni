@@ -1,5 +1,6 @@
-#ifndef __YUNI_POLICIES_OWNERSHIP_H__
-# define __YUNI_POLICIES_OWNERSHIP_H__
+#ifndef __YUNI_CORE_SMARTPTR_POLICIES_OWNERSHIP_H__
+# define __YUNI_CORE_SMARTPTR_POLICIES_OWNERSHIP_H__
+
 /*!
 ** \file
 ** \brief Ownership policies
@@ -14,7 +15,6 @@
 */
 
 
-# include "policies.h"
 # include "../../../threads/policy.h"
 # include "../../static/assert.h"
 # include "../../atomic/int.h"
@@ -320,4 +320,4 @@ namespace Ownership
 } // namespace Policy
 } // namespace Yuni
 
-#endif // __YUNI_POLICIES_OWNERSHIP_H__
+#endif // __YUNI_CORE_SMARTPTR_POLICIES_OWNERSHIP_H__
