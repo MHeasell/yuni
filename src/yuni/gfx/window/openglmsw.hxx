@@ -3,6 +3,8 @@ namespace Yuni
 {
 namespace Gfx3D
 {
+namespace Window
+{
 
 	/*!
 	** \brief Callback method for windows events
@@ -68,7 +70,7 @@ namespace Gfx3D
 		// Redraw On Size, And Own DC For Window.
 		wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 		// WndProc Handles Messages
-		wc.lpfnWndProc = (WNDPROC)Yuni::Gfx3D::WndProc;
+		wc.lpfnWndProc = (WNDPROC)WndProc;
 		// No Extra Window Data
 		wc.cbClsExtra = 0;
 		// No Extra Window Data
@@ -118,7 +120,7 @@ namespace Gfx3D
 				// If The Mode Fails, Offer Two Options:
 				// Quit Or Use Windowed Mode.
 				if (MessageBox(NULL, "The requested fullscreen mode is not supported by\nyour video card. Use windowed mode instead?",
-							   pTitle, MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
+					String::CString(pTitle), MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
 					// Set windowed Mode
 					pFullScreen = false;
 				else
@@ -152,7 +154,7 @@ namespace Gfx3D
 		AdjustWindowRectEx(&windowRect, dwStyle, FALSE, dwExStyle);
 
 		// Create The Window
-		if (!(pHWnd = CreateWindowEx(dwExStyle, "OpenGL", pTitle,
+		if (!(pHWnd = CreateWindowEx(dwExStyle, "OpenGL", String::CString(pTitle),
 									dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, 0, 0, // Window Position
 									windowRect.right - windowRect.left, windowRect.bottom - windowRect.top,
 									NULL, NULL, pHInstance, NULL)))
@@ -325,5 +327,6 @@ namespace Gfx3D
 		return wnd;
 	}
 
+} // Window
 } // Gfx3D
 } // Yuni
