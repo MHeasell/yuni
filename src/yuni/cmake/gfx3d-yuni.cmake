@@ -10,9 +10,6 @@ Set(SRC_INTERNAL_3D
 		private/gfx3d/gl/gl.engine.h private/gfx3d/gl/gl.engine.cpp)
 source_group("Private\\Gfx3D\\GL" FILES ${SRC_INTERNAL_3D})
 
-Set(SRC_EXTERNAL_3D
-		private/gfx3d/abstract.h private/gfx3d/abstract.cpp
-		${SRC_INTERNAL_3D})
 
 find_package(OpenGL)
 
