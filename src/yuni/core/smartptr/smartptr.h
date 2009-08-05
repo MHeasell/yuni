@@ -4,10 +4,10 @@
 # include "../../yuni.h"
 # include <list>
 # include <vector>
+# include <functional> // needed for the specialization of std::less
 # include "policies/policies.h"
 # include "../static/if.h"
 # include "../static/moveconstructor.h"
-
 
 
 namespace Yuni
@@ -428,5 +428,26 @@ namespace Yuni
 } // namespace Yuni
 
 # include "smartptr.hxx"
+
+
+// Specialization for std::less
+namespace std
+{
+
+	template< typename T,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	struct less<Yuni::SmartPtr<T, OwspP,ChckP,ConvP,StorP,ConsP> >
+	{
+		//! SmartPtr
+		typedef Yuni::SmartPtr<T, OwspP,ChckP,ConvP,StorP,ConsP>  SmartPtrType;
+
+		bool operator()(const SmartPtrType& lhs, const SmartPtrType& rhs)
+		{
+			return lhs < rhs;
+		}
+	};
+}
+
 
 #endif // __YUNI_CORE_SMARTPTR_SMARTPTR_H__
