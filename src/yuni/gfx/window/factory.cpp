@@ -2,8 +2,7 @@
 #include "factory.h"
 
 # ifdef YUNI_OS_MAC
-#  include "openglx11.h"
-	// TODO: Write window creation for Cocoa instead of X11
+	// TODO: Write window creation for Cocoa. For the moment do nothing
 	//#	include "openglcocoa.hxx"
 # else
 # 	ifdef YUNI_OS_WINDOWS

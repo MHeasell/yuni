@@ -18,7 +18,7 @@ namespace Window
 	class OpenGLX11: public OpenGL
 	{
 	public:
-		OpenGLX11(const char* title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
+		OpenGLX11(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
 			:OpenGL(title, width, height, bitDepth, fullScreen)
 		{}
 

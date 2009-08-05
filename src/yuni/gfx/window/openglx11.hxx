@@ -91,7 +91,7 @@ namespace Window
 	}
 
 
-	AWindow* Factory::CreateGLWindow(const char* title, unsigned int width,
+	AWindow* Factory::CreateGLWindow(const String& title, unsigned int width,
 		unsigned int height, unsigned int bits, bool fullScreen)
 	{
 		AWindow* wnd = new OpenGLX11(title, width, height, bits, fullScreen);

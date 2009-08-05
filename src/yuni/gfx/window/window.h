@@ -58,14 +58,20 @@ namespace Window
 		//! \name Events
 		//@{
 
-		virtual void onMouseDown(unsigned int x, unsigned int y) {}
-		virtual void onMouseClick(unsigned int x, unsigned int y) {}
-		virtual void onMouseUp(unsigned int x, unsigned int y) {}
-		virtual void onMouseWheel(unsigned int x, unsigned int y, float delta) {}
+		/*!
+		** \brief Read the events in queue and launch the various handlers
+		** \return True if events were processed, False otherwise
+		*/
+		virtual bool pollEvents() { return false; }
 
-		virtual void onKeyDown(unsigned int key) {}
-		virtual void onKeyPressed(unsigned int key) {}
-		virtual void onKeyUp(unsigned int key) {}
+		virtual void onMouseDown(float x, float y) {}
+		virtual void onMouseClick(float x, float y) {}
+		virtual void onMouseUp(float x, float y) {}
+		virtual void onMouseWheel(float x, float y, float delta) {}
+
+		virtual void onKeyDown(unsigned char key) {}
+		virtual void onKeyPressed(unsigned char key) {}
+		virtual void onKeyUp(unsigned char key) {}
 
 		//@}
 

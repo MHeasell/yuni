@@ -6,6 +6,11 @@ namespace Gfx3D
 namespace Window
 {
 
+	namespace
+	{
+		AWindow* sWindow = NULL;
+	}
+
 	/*!
 	** \brief Callback method for windows events
 	**
@@ -37,13 +42,15 @@ namespace Window
 
 		case WM_SIZE:								// Resize The OpenGL Window
 		{
-			//ReSizeGLScene(LOWORD(lParam),HIWORD(lParam));  // LoWord=Width, HiWord=Height
+			if (sWindow)
+				// LoWord=Width, HiWord=Height
+				sWindow->resize(LOWORD(lParam), HIWORD(lParam));
 			return 0;
 		}
 		}
 
 		// Pass All Unhandled Messages To DefWindowProc
-		return DefWindowProc(hWnd,uMsg,wParam,lParam);
+		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	}
 
 
@@ -239,7 +246,7 @@ namespace Window
 		}
 
 		// Show the window
-		ShowWindow(pHWnd,SW_SHOW);
+		ShowWindow(pHWnd, SW_SHOW);
 		// Slightly higher priority
 		SetForegroundWindow(pHWnd);
 		// Sets keyboard focus to the window
@@ -314,7 +321,7 @@ namespace Window
 		OpenGL::close();
 	}
 
-	AWindow* Factory::CreateGLWindow(const char* title, unsigned int width,
+	AWindow* Factory::CreateGLWindow(const String& title, unsigned int width,
 		unsigned int height, unsigned int bits, bool fullScreen)
 	{
 		AWindow* wnd = new OpenGLMSW(title, width, height, bits, fullScreen);
@@ -324,6 +331,8 @@ namespace Window
 			delete wnd;
 			return NULL;
 		}
+		if (!sWindow)
+			sWindow = wnd;
 		return wnd;
 	}
 

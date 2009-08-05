@@ -64,7 +64,7 @@ namespace Gfx
 		** \param dc Informations about the device to initialize.
 		** \return True if the operation succeeded, False otherwise
 		*/
-		bool reset(const SmartPtr<Device>& dc);
+		bool reset(const Device::Ptr& dc);
 
 		/*!
 		** \brief Reset the 3D Device with optimal settings
@@ -119,7 +119,7 @@ namespace Gfx
 		//! If the device is initialized
 		bool pDeviceIsInitialized;
 		//! Information about the device
-		SmartPtr<Device> pDevice;
+		Device::Ptr pDevice;
 
 	}; // class Engine
 
