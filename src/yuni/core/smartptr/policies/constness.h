@@ -1,7 +1,5 @@
-#ifndef __YUNI_CORE_POLICIES_CONSTNESS_H__
-# define __YUNI_CORE_POLICIES_CONSTNESS_H__
-
-# include "policies.h"
+#ifndef __YUNI_CORE_SMARTPTR_POLICIES_CONSTNESS_H__
+# define __YUNI_CORE_SMARTPTR_POLICIES_CONSTNESS_H__
 
 
 namespace Yuni
@@ -44,4 +42,4 @@ namespace Constness
 } // namespace Policy
 } // namespace Yuni
 
-#endif // __YUNI_CORE_POLICIES_CONSTNESS_H__
+#endif // __YUNI_CORE_SMARTPTR_POLICIES_CONSTNESS_H__

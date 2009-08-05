@@ -1,5 +1,5 @@
-#ifndef __YUNI_POLICIES_POLICIES_H__
-# define __YUNI_POLICIES_POLICIES_H__
+#ifndef __YUNI_CORE_SMARTPTR_POLICIES_POLICIES_H__
+# define __YUNI_CORE_SMARTPTR_POLICIES_POLICIES_H__
 
 # include "../../../yuni.h"
 
@@ -26,4 +26,4 @@ namespace Policy
 # include "../../../threads/policy.h"
 
 
-#endif // __YUNI_POLICIES_POLICIES_H__
+#endif // __YUNI_CORE_SMARTPTR_POLICIES_POLICIES_H__

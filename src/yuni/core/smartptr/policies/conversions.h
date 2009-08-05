@@ -1,5 +1,5 @@
-#ifndef __YUNI_POLICIES_CONVERSIONS_H__
-# define __YUNI_POLICIES_CONVERSIONS_H__
+#ifndef __YUNIC_CORE_SMARTPTR_POLICIES_CONVERSIONS_H__
+# define __YUNIC_CORE_SMARTPTR_POLICIES_CONVERSIONS_H__
 
 
 
@@ -51,4 +51,4 @@ namespace Conversion
 } // namespace Policy
 } // namespace Yuni
 
-#endif // __YUNI_POLICIES_CONVERSIONS_H__
+#endif // __YUNIC_CORE_SMARTPTR_POLICIES_CONVERSIONS_H__
