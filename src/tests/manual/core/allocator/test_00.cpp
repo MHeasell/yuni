@@ -5,7 +5,7 @@
 #include <yuni/core/smallobject.h>
 
 using namespace Yuni;
-using namespace std;
+
 
 // Define 2 classes generating objects with same size, one who inherits Yuni::SmallObject, and one who does not.
 
@@ -29,18 +29,20 @@ struct MySmallObject: public SmallObject<MySmallObject>
 	double d;
 };
 
+
+
 // Add / Removal functions
 
 template<typename T>
-void add(list<T*>& tab)
+void add(std::list<T*>& tab)
 {
 	tab.push_back(new T(0, '\0', 0.0f));
 }
 
 template<typename T>
-void removeFront(list<T*>& tab)
+void removeFront(std::list<T*>& tab)
 {
-	if (0 == tab.size())
+	if (tab.empty())
 		return;
 	T* obj = tab.front();
 	tab.pop_front();
@@ -48,49 +50,57 @@ void removeFront(list<T*>& tab)
 }
 
 template<typename T>
-void removeBack(list<T*>& tab)
+void removeBack(std::list<T*>& tab)
 {
-	if (0 == tab.size())
+	if (tab.empty())
 		return;
 	T* obj = tab.back();
 	tab.pop_back();
 	delete obj;
 }
 
+
+
+
 // Allocation / Deallocation patterns
 
 template<typename T>
-void bulkAlloc(unsigned int nb, list<T*>& tab)
+void bulkAlloc(unsigned int nb, std::list<T*>& tab)
 {
 	for (unsigned int i = 0; i < nb; ++i)
 		add(tab);
 }
 
 template<typename T>
-void sameOrderDealloc(unsigned int nb, list<T*>& tab)
+void sameOrderDealloc(unsigned int nb, std::list<T*>& tab)
 {
-	while (nb--)
+	while (--nb)
 		removeFront(tab);
 }
 
 template<typename T>
-void reverseDealloc(unsigned int nb, list<T*>& tab)
+void reverseDealloc(unsigned int nb, std::list<T*>& tab)
 {
-	while (nb--)
+	while (--nb)
 		removeBack(tab);
 }
 
 // In this case, nb is the total amount of alloc + dealloc done.
 template<typename T>
-void butterflyAllocDealloc(unsigned int nb, list<T*>& tab)
+void butterflyAllocDealloc(unsigned int nb, std::list<T*>& tab)
 {
-	while (nb--)
+	while (--nb)
+	{
 		if (rand() % 2)
 			add(tab);
-		else if (rand() % 2)
-			removeFront(tab);
 		else
-			removeBack(tab);
+		{
+			if (rand() % 2)
+				removeFront(tab);
+			else
+				removeBack(tab);
+		}
+	}
 }
 
 template<typename T>
@@ -99,7 +109,7 @@ void testAllocator()
 	// Fix a number of allocations to do
 	const unsigned int nbAlloc = 10000000;
 	// List to store our allocated objects
-	list<T*> tab;
+	std::list<T*> tab;
 
 	time_t start = time(NULL);
 	time_t old = start;
@@ -135,6 +145,9 @@ void testAllocator()
 
 	std::cout << "Total time: " << now - start << " seconds" << std::endl;
 }
+
+
+
 
 int main(void)
 {
