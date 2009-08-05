@@ -16,8 +16,6 @@ Set(YUNI_MODULE_DEVICES                   FALSE)
 # Gfx3D
 Set(YUNI_MODULE_GFX3D                     FALSE)
 	Set(YUNI_INTERNAL_3D                  TRUE)
-	Set(YUNI_EXTERNAL_3D_IRRLICHT         FALSE)
-	Set(YUNI_EXTERNAL_3D_OGRE             FALSE)
 
 # Scripts
 Set(YUNI_MODULE_SCRIPT                    FALSE)
@@ -171,32 +169,6 @@ IF(MODULES)
 			Set(YUNI_INTERNAL_3D FALSE)
 		EndIf("${it}" STREQUAL "-gfx3d")
 
-		# irrlicht
-		If("${it}" STREQUAL "irrlicht")
-			Set(KeywordIsKnown TRUE)
-			Set(YUNI_MODULE_GFX3D TRUE)
-			Set(YUNI_EXTERNAL_3D_IRRLICHT TRUE)
-			Set(YUNI_INTERNAL_3D FALSE)
-		EndIf("${it}" STREQUAL "irrlicht")
-		# -irrlicht
-		If("${it}" STREQUAL "-irrlicht")
-			Set(KeywordIsKnown TRUE)
-			Set(YUNI_EXTERNAL_3D_IRRLICHT FALSE)
-		EndIf("${it}" STREQUAL "-irrlicht")
-
-		# ogre
-		If("${it}" STREQUAL "ogre")
-			Set(KeywordIsKnown TRUE)
-			Set(YUNI_MODULE_GFX3D TRUE)
-			Set(YUNI_EXTERNAL_3D_OGRE TRUE)
-			Set(YUNI_INTERNAL_3D FALSE)
-		EndIf("${it}" STREQUAL "ogre")
-		# -ogre
-		If("${it}" STREQUAL "-ogre")
-			Set(KeywordIsKnown TRUE)
-			Set(YUNI_EXTERNAL_3D_OGRE FALSE)
-		EndIf("${it}" STREQUAL "-ogre")
-
 
 
 		# script
@@ -327,8 +299,6 @@ IF(MODULES)
 		Message(STATUS "    -/+mouse       : The Mouse device")
 		Message(STATUS " The gfx modules")
 		Message(STATUS "    -/+gfx3d       : The Gfx3D module (default: disabled)")
-		Message(STATUS "    -/+irrlicht    : The Irrlicht extension (default: disabled)")
-		Message(STATUS "    -/+ogre        : The Ogre3D extension (default: disabled)")
 		Message(STATUS " The scripting modules")
 		Message(STATUS "    -/+script      : The script module (default: disabled)")
 		Message(STATUS "    -/+lua         : The Lua extension (default: enabled)")
@@ -343,10 +313,7 @@ ENDIF(MODULES)
 
 
 IF(YUNI_MODULE_GFX3D)
-	IF(NOT YUNI_EXTERNAL_3D_IRRLICHT AND NOT YUNI_EXTERNAL_3D_OGRE)
-		Message(STATUS "[!!] Warning: No external extension for the `Gfx3D` module. Using internal engine.")
-		SET(YUNI_INTERNAL_3D TRUE)
-	ENDIF(NOT YUNI_EXTERNAL_3D_IRRLICHT AND NOT YUNI_EXTERNAL_3D_OGRE)
+	SET(YUNI_INTERNAL_3D TRUE)
 ELSE(YUNI_MODULE_GFX3D)
 
 	IF(NOT YUNI_MODULE_UI_3D)
