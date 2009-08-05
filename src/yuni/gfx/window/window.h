@@ -65,14 +65,14 @@ namespace Window
 		*/
 		virtual bool pollEvents() { return false; }
 
-		virtual void onMouseDown(float x, float y) {}
-		virtual void onMouseClick(float x, float y) {}
-		virtual void onMouseUp(float x, float y) {}
-		virtual void onMouseWheel(float x, float y, float delta) {}
+		virtual void onMouseDown(float /* x */, float /* y */) {}
+		virtual void onMouseClick(float /* x */, float /* y */) {}
+		virtual void onMouseUp(float /* x */, float /* y */) {}
+		virtual void onMouseWheel(float /* x */, float /* y */, float /* delta */) {}
 
-		virtual void onKeyDown(unsigned char key) {}
-		virtual void onKeyPressed(unsigned char key) {}
-		virtual void onKeyUp(unsigned char key) {}
+		virtual void onKeyDown(unsigned char /* key */) {}
+		virtual void onKeyPressed(unsigned char /* key */) {}
+		virtual void onKeyUp(unsigned char /* key */) {}
 		//@}
 
 	protected:
