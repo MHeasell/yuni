@@ -1,5 +1,9 @@
 
-#include "openglx11.h"
+#include "../../yuni.h"
+
+#ifdef YUNI_WINDOWSYSTEM_X11
+
+# include "openglx11.h"
 
 
 namespace Yuni
@@ -114,6 +118,8 @@ namespace Window
 
 
 
-} // Window
-} // Gfx3D
-} // Yuni
+} // namespace Window
+} // namespace Gfx3D
+} // namespace Yuni
+
+#endif // YUNI_WINDOWSYSTEM_X11

@@ -1,4 +1,8 @@
 
+#include "openglmsw.h"
+
+# ifdef YUNI_WINDOWSYSTEM_MSW
+
 namespace Yuni
 {
 namespace Gfx3D
@@ -6,52 +10,58 @@ namespace Gfx3D
 namespace Window
 {
 
+
 	namespace
 	{
 		AWindow* sWindow = NULL;
-	}
 
-	/*!
-	** \brief Callback method for windows events
-	**
-	** \param hWnd Handle for this window
-	** \param uMsg Message
-	** \param wParam Additional Message Information
-	** \param lParam Additional Message Information
-	*/
-	static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-	{
-		switch (uMsg)									// Check For Windows Messages
+
+		/*!
+		** \brief Callback method for windows events
+		**
+		** \param hWnd Handle for this window
+		** \param uMsg Message
+		** \param wParam Additional Message Information
+		** \param lParam Additional Message Information
+		*/
+		LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
-		case WM_SYSCOMMAND:
-		{
-			switch (wParam)
+			// Check For Windows Messages
+			switch (uMsg)
 			{
-			case SC_SCREENSAVE:
-			case SC_MONITORPOWER:
-				return 0;
+				case WM_SYSCOMMAND:
+					{
+						switch (wParam)
+						{
+							case SC_SCREENSAVE:
+							case SC_MONITORPOWER:
+								return 0;
+						}
+						break;
+					}
+
+				case WM_CLOSE: // Did We Receive A Close Message?
+					{
+						PostQuitMessage(0); // Send A Quit Message
+						return 0;
+					}
+
+				case WM_SIZE: // Resize The OpenGL Window
+					{
+						if (sWindow)
+						{
+							// LoWord=Width, HiWord=Height
+							sWindow->resize(LOWORD(lParam), HIWORD(lParam));
+						}
+						return 0;
+					}
 			}
-			break;
+
+			// Pass All Unhandled Messages To DefWindowProc
+			return DefWindowProc(hWnd, uMsg, wParam, lParam);
 		}
 
-		case WM_CLOSE:								// Did We Receive A Close Message?
-		{
-			PostQuitMessage(0);						// Send A Quit Message
-			return 0;
-		}
-
-		case WM_SIZE:								// Resize The OpenGL Window
-		{
-			if (sWindow)
-				// LoWord=Width, HiWord=Height
-				sWindow->resize(LOWORD(lParam), HIWORD(lParam));
-			return 0;
-		}
-		}
-
-		// Pass All Unhandled Messages To DefWindowProc
-		return DefWindowProc(hWnd, uMsg, wParam, lParam);
-	}
+	} // anonymous namespace
 
 
 	bool OpenGLMSW::initialize()
@@ -68,9 +78,9 @@ namespace Window
 		RECT windowRect;
 
 		windowRect.left = 0;
-		windowRect.right = (long)pWidth;
+		windowRect.right = (long) pWidth;
 		windowRect.top = 0;
-		windowRect.bottom = (long)pHeight;
+		windowRect.bottom = (long) pHeight;
 
 		// Grab An Instance For Our Window
 		pHInstance = GetModuleHandle(NULL);
@@ -98,8 +108,7 @@ namespace Window
 		// Attempt To Register The Window Class
 		if (!RegisterClass(&wc))
 		{
-			MessageBox(NULL, "Failed To Register The Window Class.",
-					   "ERROR", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, "Failed To Register The Window Class.", "ERROR", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -162,14 +171,13 @@ namespace Window
 
 		// Create The Window
 		if (!(pHWnd = CreateWindowEx(dwExStyle, "OpenGL", String::CString(pTitle),
-									dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, 0, 0, // Window Position
-									windowRect.right - windowRect.left, windowRect.bottom - windowRect.top,
-									NULL, NULL, pHInstance, NULL)))
+			dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, 0, 0, // Window Position
+			windowRect.right - windowRect.left, windowRect.bottom - windowRect.top,
+			NULL, NULL, pHInstance, NULL)))
 		{
 			// Reset The Display
 			close();
-			MessageBox(NULL, "Window creation error.",
-					   "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, "Window creation error.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -204,8 +212,7 @@ namespace Window
 		if (!(pHDC = GetDC(pHWnd)))
 		{
 			close();
-			MessageBox(NULL, "Can't create a GL device context.",
-					   "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, "Can't create a GL device context.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -213,8 +220,7 @@ namespace Window
 		if (!(pixelFormat = ChoosePixelFormat(pHDC, &pfd)))
 		{
 			close();
-			MessageBox(NULL, "Can't find a suitable PixelFormat.",
-					   "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, "Can't find a suitable PixelFormat.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -222,8 +228,7 @@ namespace Window
 		if (!SetPixelFormat(pHDC, pixelFormat, &pfd))
 		{
 			close();
-			MessageBox(NULL, "Can't set the PixelFormat.",
-					   "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, "Can't set the PixelFormat.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -231,8 +236,7 @@ namespace Window
 		if (!(pHRC = wglCreateContext(pHDC)))
 		{
 			close();
-			MessageBox(NULL, "Can't create A GL rendering context.",
-					   "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, "Can't create A GL rendering context.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -240,8 +244,7 @@ namespace Window
 		if (!wglMakeCurrent(pHDC, pHRC))
 		{
 			close();
-			MessageBox(NULL, "Can't Activate The GL Rendering Context.",
-					   "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, "Can't Activate The GL Rendering Context.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -259,8 +262,7 @@ namespace Window
 		if (!OpenGL::initialize())
 		{
 			close();
-			MessageBox(NULL, "Initialization Failed.",
-					   "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, "Initialization Failed.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -284,42 +286,40 @@ namespace Window
 		{
 			// Are We Able To Release The DC And RC Contexts?
 			if (!wglMakeCurrent(NULL, NULL))
-				MessageBox(NULL, "Release of DC and RC failed.",
-						   "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+				MessageBox(NULL, "Release of DC and RC failed.", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 
 			// Are We Able To Delete The RC?
 			if (!wglDeleteContext(pHRC))
-				MessageBox(NULL, "Release Rendering Context Failed.",
-						   "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+				MessageBox(NULL, "Release Rendering Context Failed.", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 			pHRC = NULL;
 		}
 
 		// Are We Able To Release The DC?
 		if (pHDC && !ReleaseDC(pHWnd, pHDC))
 		{
-			MessageBox(NULL, "Release Device Context Failed.",
-					   "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+			MessageBox(NULL, "Release Device Context Failed.", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 			pHDC = NULL;
 		}
 
 		// Are We Able To Destroy The Window?
 		if (pHWnd && !DestroyWindow(pHWnd))
 		{
-			MessageBox(NULL, "Could Not Release HWINDOW.",
-					   "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+			MessageBox(NULL, "Could Not Release HWINDOW.", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 			pHWnd = NULL;
 		}
 
 		// Are We Able To Unregister Class
 		if (!UnregisterClass("OpenGL", pHInstance))
 		{
-			MessageBox(NULL, "Could Not Unregister Class.",
-					   "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+			MessageBox(NULL, "Could Not Unregister Class.", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 			pHInstance = NULL;
 		}
 
 		OpenGL::close();
 	}
+
+
+
 
 	AWindow* Factory::CreateGLWindow(const String& title, unsigned int width,
 		unsigned int height, unsigned int bits, bool fullScreen)
@@ -336,6 +336,11 @@ namespace Window
 		return wnd;
 	}
 
-} // Window
-} // Gfx3D
-} // Yuni
+
+
+
+} // namespace Window
+} // namespace Gfx3D
+} // namespace Yuni
+
+# endif // YUNI_WINDOWSYSTEM_MSW

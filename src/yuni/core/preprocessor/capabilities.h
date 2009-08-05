@@ -62,6 +62,13 @@
 ** YUNI_OS_UNKNOWN
 ** YUNI_OS_COMPILER
 **
+** Window systems
+** - X Window System
+** YUNI_WINDOWSYSTEM_X11
+** - MFC (Microsoft Foundation Class) or any Microsoft Windows Window System
+** YUNI_WINDOWSYSTEM_MSW
+** - Mac OS X Cocoa
+** YUNI_WINDOWSYSTEM_COCOA
 **
 ** Misc:
 **
@@ -89,6 +96,17 @@
 # endif
 
 
+
+/* Window System */
+# ifdef YUNI_OS_WINDOWS
+#	define YUNI_WINDOWSYSTEM_MSW
+# else
+#	ifdef YUNI_OS_MAC
+#		define YUNI_WINDOWSYSTEM_COCOA
+#	else
+#		define YUNI_WINDOWSYSTEM_X11
+#	endif
+# endif
 
 
 /* GNU C and C++ compiler */

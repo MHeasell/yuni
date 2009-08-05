@@ -1,6 +1,13 @@
+#ifndef __YUNI_GFX_WINDOW_OPENGL_MSW_H__
+# define __YUNI_GFX_WINDOW_OPENGL_MSW_H__
 
-#include <windows.h>
-#include "opengl.h"
+# include "../../yuni.h"
+
+# ifdef YUNI_WINDOWSYSTEM_MSW
+
+#	include <windows.h>
+#	include "opengl.h"
+
 
 namespace Yuni
 {
@@ -26,10 +33,16 @@ namespace Window
 		HDC pHDC;
 		HGLRC pHRC;
 
-	}; // OpenGLMSW
+	}; // class OpenGLMSW
 
-} // Window
-} // Gfx3D
-} // Yuni
 
-#include "openglmsw.hxx"
+
+
+} // namespace Window
+} // namespace Gfx3D
+} // namespace Yuni
+
+
+# endif // YUNI_WINDOWSYSTEM_MSW
+
+#endif // __YUNI_GFX_WINDOW_OPENGL_MSW_H__

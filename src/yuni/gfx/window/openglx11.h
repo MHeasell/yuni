@@ -1,8 +1,12 @@
 #ifndef __YUNI_GFX3D_WINDOW_OPENGLX11_H__
 # define __YUNI_GFX3D_WINDOW_OPENGLX11_H__
 
-# include "x11yuni.h"
-# include "../window/opengl.h"
+# include "../../yuni.h"
+
+# ifdef YUNI_WINDOWSYSTEM_X11
+
+#	include "x11yuni.h"
+#	include "../window/opengl.h"
 
 
 namespace Yuni
@@ -44,5 +48,7 @@ namespace Window
 } // namespace Window
 } // namespace Gfx3D
 } // namespace Yuni
+
+# endif // YUNI_WINDOWSYSTEM_X11
 
 #endif // __YUNI_GFX3D_WINDOW_OPENGLX11_H__
