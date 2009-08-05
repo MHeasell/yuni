@@ -13,5 +13,5 @@ source_group("Private\\Gfx3D\\GL" FILES ${SRC_INTERNAL_3D})
 
 find_package(OpenGL)
 
-Add_Library(yuni-static-gfx3d-yuni STATIC ${SRC_EXTERNAL_3D})
+Add_Library(yuni-static-gfx3d-yuni STATIC ${SRC_INTERNAL_3D})
 target_link_libraries(yuni-static-gfx3d-yuni ${OPENGL_LIBRARY})
