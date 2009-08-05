@@ -1,9 +1,10 @@
-
-#ifndef __YUNI_GFX3D_WINDOW_AWINDOW__
-# define __YUNI_GFX3D_WINDOW_AWINDOW__
+#ifndef __YUNI_GFX3D_WINDOW_WINDOW__
+# define __YUNI_GFX3D_WINDOW_WINDOW__
 
 # include "../../yuni.h"
 # include "../../core/string.h"
+
+
 
 namespace Yuni
 {
@@ -11,6 +12,7 @@ namespace Gfx3D
 {
 namespace Window
 {
+
 
 	/*!
 	** \brief Abstraction of a window for graphic rendering
@@ -57,7 +59,6 @@ namespace Window
 
 		//! \name Events
 		//@{
-
 		/*!
 		** \brief Read the events in queue and launch the various handlers
 		** \return True if events were processed, False otherwise
@@ -72,7 +73,6 @@ namespace Window
 		virtual void onKeyDown(unsigned char key) {}
 		virtual void onKeyPressed(unsigned char key) {}
 		virtual void onKeyUp(unsigned char key) {}
-
 		//@}
 
 	protected:
@@ -82,10 +82,13 @@ namespace Window
 		unsigned int pBitDepth;
 		bool pFullScreen;
 
-	}; // AWindow
+	}; // class AWindow
 
-} // Window
-} // Gfx3D
-} // Yuni
 
-#endif // __YUNI_GFX3D_WINDOW_AWINDOW__
+
+
+} // namespace Window
+} // namespace Gfx3D
+} // namespace Yuni
+
+#endif // __YUNI_GFX3D_WINDOW_WINDOW__

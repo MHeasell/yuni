@@ -1,6 +1,6 @@
 
-// TODO: We should really do without this (using a better error management)
-#include <iostream>
+#include "openglx11.h"
+
 
 namespace Yuni
 {
@@ -9,15 +9,14 @@ namespace Gfx3D
 namespace Window
 {
 
+
 	bool OpenGLX11::initialize()
 	{
-		XVisualInfo* vinfo;
-		int indx = 0;
-
 		// Connect to the X server to open the local display
 		if (!(pDisplay = XOpenDisplay(NULL)))
 			return false;
 
+		// Attributes
 		int attributes[] =
 			{
 				GLX_RGBA,
@@ -25,16 +24,15 @@ namespace Window
 				GLX_STENCIL_SIZE, 8,
 				GLX_ALPHA_SIZE, 8,
 				GLX_DOUBLEBUFFER,
-				None
+				YUNI_X11LIB_NONE
 			};
-
-		vinfo = glXChooseVisual(pDisplay, DefaultScreen(pDisplay), attributes);
+		XVisualInfo* vinfo = glXChooseVisual(pDisplay, DefaultScreen(pDisplay), attributes);
 		if (NULL == vinfo)
 		{
 			std::cerr << "ERROR: Cannot open window" << std::endl;
 			return false;
 		}
-		Window root = DefaultRootWindow(pDisplay);
+		::Window root = DefaultRootWindow(pDisplay);
 
 		pAttr.colormap = XCreateColormap(pDisplay, root, vinfo->visual, AllocNone);
 		pAttr.background_pixel = BlackPixel(pDisplay, vinfo->screen);
@@ -67,11 +65,12 @@ namespace Window
 		return true;
 	}
 
+
 	void OpenGLX11::close()
 	{
 		if (pContext)
 		{
-			if (!glXMakeCurrent(pDisplay, None, NULL))
+			if (!::glXMakeCurrent(pDisplay, YUNI_X11LIB_NONE, NULL))
 			{
 				printf("Could not release drawing context.\n");
 			}
@@ -91,6 +90,7 @@ namespace Window
 	}
 
 
+	/*
 	AWindow* Factory::CreateGLWindow(const String& title, unsigned int width,
 		unsigned int height, unsigned int bits, bool fullScreen)
 	{
@@ -103,6 +103,7 @@ namespace Window
 		}
 		return wnd;
 	}
+*/
 
 	void OpenGLX11::blit()
 	{
@@ -110,6 +111,7 @@ namespace Window
 		XGetWindowAttributes(pDisplay, pWindow, &pWndAttr);
 		glXSwapBuffers(pDisplay, pWindow);
 	}
+
 
 
 } // Window
