@@ -121,7 +121,7 @@ namespace Atomic
 		InnerType pValue;
 
 		// A friend !
-		template<int Size2, template<class> class TP2> friend class Private::AtomicImpl::Operator;
+		template<int Size2, template<class> class TP2> friend struct Private::AtomicImpl::Operator;
 
 	}; // class Int
 

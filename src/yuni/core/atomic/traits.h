@@ -171,7 +171,7 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<32,TP>::Type Increment(Yuni::Atomic::Int<32,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return ::InterlockedIncrement32((LONG*)&t.pValue);
+			return ::InterlockedIncrement((LONG*)&t.pValue);
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicIncrement32Barrier(&t.pValue);
@@ -189,7 +189,7 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<32,TP>::Type Decrement(Yuni::Atomic::Int<32,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return ::InterlockedDecrement32((SHORT*)&t.pValue);
+			return ::InterlockedDecrement((LONG*)&t.pValue);
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicDecrement32Barrier(&t.pValue);

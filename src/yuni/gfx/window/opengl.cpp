@@ -6,6 +6,8 @@ namespace Yuni
 {
 namespace Gfx3D
 {
+namespace Window
+{
 
 	bool OpenGL::initialize()
 	{
@@ -53,5 +55,6 @@ namespace Gfx3D
 		AWindow::resize(width, height);
 	}
 
+} // Window
 } // Gfx3D
 } // Yuni
