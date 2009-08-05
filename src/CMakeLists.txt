@@ -88,11 +88,14 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules.cmake")
 
 # Sub Directories
 Add_SubDirectory(yuni)
+
+# Samples
+IF(YUNI_SAMPLES)
+	Add_SubDirectory(samples)
+EndIF(YUNI_SAMPLES)
+
 IF(YUNI_TESTS)
 	Add_SubDirectory(tests)
 	Add_SubDirectory(testsuite)
 EndIF(YUNI_TESTS)
-IF(YUNI_SAMPLES)
-	Add_SubDirectory(samples)
-EndIF(YUNI_SAMPLES)
 
