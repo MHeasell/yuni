@@ -3,6 +3,7 @@
 
 # include "../../yuni.h"
 # include "remove.h"
+# include "../smartptr/smartptr.h"
 
 
 namespace Yuni
@@ -24,6 +25,17 @@ namespace Type
 	};
 	//@}
 
+
+	//! \name SmartPtr
+	//@{
+	template<class T>
+	struct IsSmartPtr
+	{
+		enum { Yes = 0, No = 1 };
+	};
+	//@}
+
+
 	//! \name Small types (fits in a pointer size)
 	//@{
 	/*!
@@ -31,8 +43,13 @@ namespace Type
 	*/
 	template <typename T> struct IsSmall
 	{
-		enum { Yes = sizeof(T) <= sizeof(void*), No = sizeof(T) > sizeof(void *) };
+		enum
+		{
+			Yes = ((sizeof(T) <= sizeof(void*)) || IsSmartPtr<T>::Yes),
+			No = !Yes,
+		};
 	};
+
 
 	//! \name Compound types
 	//@{
@@ -257,6 +274,14 @@ namespace Type
 	};
 	template<>
 	struct DefaultOrNull<NullPtr>
+	{
+		enum { Yes = 1, No = 0 };
+	};
+
+	template< typename T,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	struct IsSmartPtr<SmartPtr<T, OwspP,ChckP,ConvP,StorP,ConsP> >
 	{
 		enum { Yes = 1, No = 0 };
 	};
