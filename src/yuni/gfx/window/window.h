@@ -3,7 +3,7 @@
 
 # include "../../yuni.h"
 # include "../../core/string.h"
-
+# include "../../core/event/event.h"
 
 
 namespace Yuni
@@ -17,7 +17,7 @@ namespace Window
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class AWindow
+	class AWindow: public Event::Observer<AWindow>
 	{
 	public:
 		AWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
@@ -62,6 +62,21 @@ namespace Window
 		*/
 		bool closing() { return pClosing; }
 
+
+		//! \name Accessors
+		//@{
+
+		//! Title of the window
+		const String& title() { return pTitle; }
+		void title(const String& newTitle)
+		{
+			pTitle = newTitle;
+			onTitleChanged();
+		}
+
+		//@}
+
+
 		//! \name Events
 		//@{
 		/*!
@@ -69,6 +84,8 @@ namespace Window
 		** \return True if events were processed, False otherwise
 		*/
 		virtual bool pollEvents() { return false; }
+
+		virtual void onClose() { pClosing = true; }
 
 		virtual void onMouseDown(float /* x */, float /* y */) {}
 		virtual void onMouseClick(float /* x */, float /* y */) {}
@@ -79,7 +96,8 @@ namespace Window
 		virtual void onKeyPressed(unsigned char /* key */) {}
 		virtual void onKeyUp(unsigned char /* key */) {}
 
-		virtual void onClose() { pClosing = true; }
+		virtual void onFPSChanged(int FPS) {}
+		virtual void onTitleChanged() {}
 
 		//@}
 

@@ -20,11 +20,6 @@ public:
 
 	virtual ~HelloWorld()
 	{}
-
-	virtual bool onPreExecute()
-	{
-		return true;
-	}
 };
 
 

@@ -1,22 +1,6 @@
 
 #include "engine.h"
-#include "../gfx/window/factory.h"
-
-#ifdef YUNI_EXTERNAL_3D_IRRLICHT
-#  include "../private/gfx3d/irrlicht/irr.h"
-#  include "../private/gfx3d/irrlicht/irr.engine.h"
-#endif
-
-#ifdef YUNI_EXTERNAL_3D_OGRE
-#  include "../private/gfx3d/ogre/ogre.h"
-#  include "../private/gfx3d/ogre/ogre.engine.h"
-#endif
-
-#ifdef YUNI_INTERNAL_3D
-#  include "../private/gfx3d/gl/gl.h"
-#  include "../private/gfx3d/gl/gl.engine.h"
-#endif
-
+#include "../private/gfx3d/gl/gl.h"
 
 namespace Yuni
 {
@@ -24,23 +8,6 @@ namespace Gfx
 {
 	namespace
 	{
-
-		/*!
-		* \brief The external 3D engine
-		*/
-		# ifdef YUNI_EXTERNAL_3D_IRRLICHT
-		Private::GfxImpl::Irrlicht::Engine external3DEngine;
-		# else
-		#  ifdef YUNI_EXTERNAL_3D_OGRE
-		Private::GfxImpl::Ogre::Engine external3DEngine;
-		#  else
-		#   ifdef YUNI_INTERNAL_3D
-		Private::GfxImpl::Gl::Engine external3DEngine;
-		#   else
-		#    error "The external 3D engine is not defined"
-		#   endif
-		#  endif
-		# endif
 
 		Engine globalEngine;
 
@@ -55,37 +22,22 @@ namespace Gfx
 
 
 	Engine::Engine()
-		:pDeviceIsInitialized(false)
+		:pDeviceIsInitialized(false), pMainWindow(NULL)
 	{
-		// Redirect all events
-		onFPSChanged.assign(&external3DEngine.onFPSChanged);
 	}
 
 
 	Engine::~Engine()
 	{
-		// Disconnect all connected events
-		onFPSChanged.disconnectAll();
+		// All connected events to onFPSChanged are automatically disconnected on destroy
 		this->release();
 	}
-
-
-
-	String Engine::name()
-	{
-		MutexLocker locker(pMutex);
-		return external3DEngine.name();
-	}
-
 
 
 	bool Engine::reset(const SmartPtr<Device>& dc)
 	{
 		// Lock
 		MutexLocker locker(pMutex);
-
-		// Ensure that a device is not already initialized
-		external3DEngine.waitForEngineToStop();
 
 		// There is nothing to do if the device is null
 		if (NULL != dc)
@@ -141,13 +93,15 @@ namespace Gfx
 			pMutex.unlock();
 
 			// Window creation and GL init
-			Yuni::Gfx3D::Window::AWindow* window = Yuni::Gfx3D::Window::Factory::CreateGLWindow(applicationTitle(), pDevice->resolution()->width(),
+			pMainWindow = Yuni::Gfx3D::Window::Factory::CreateGLWindow(applicationTitle(), pDevice->resolution()->width(),
 				pDevice->resolution()->height(), pDevice->resolution()->bitPerPixel(), pDevice->fullscreen());
+			onFPSChanged.connect(pMainWindow, &Yuni::Gfx3D::Window::AWindow::onFPSChanged);
+
 			// Main loop
-			while (!window->closing())
+			while (!pMainWindow->closing())
 			{
 				// Manage events on the window
-				window->pollEvents();
+				pMainWindow->pollEvents();
 
 				//renderer->drawFrame();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
@@ -226,10 +180,11 @@ namespace Gfx
 				glEnd();						// Done Drawing The Quad
 
 				// Push the backbuffer to screen
-				window->blit();
+				pMainWindow->blit();
 			}
-			window->close();
-			delete window;
+			pMainWindow->close();
+			delete pMainWindow;
+			pMainWindow = NULL;
 		}
 		pMutex.unlock();
 	}
@@ -240,13 +195,6 @@ namespace Gfx
 		pMutex.lock();
 		if (pDeviceIsInitialized)
 		{
-			pMutex.unlock();
-			// Ensure that a device is not already initialized
-			external3DEngine.waitForEngineToStop();
-			// Releasing...
-			external3DEngine.release();
-
-			pMutex.lock();
 			pDeviceIsInitialized = false;
 		}
 		pMutex.unlock();
@@ -255,13 +203,15 @@ namespace Gfx
 
 	void Engine::applicationTitle(const String& t)
 	{
-		external3DEngine.applicationTitle(t);
+		pTitle = t;
+		if (NULL != pMainWindow)
+			pMainWindow->title(pTitle);
 	}
 
 
 	String Engine::applicationTitle()
 	{
-		return (dynamic_cast<Private::GfxImpl::EngineAbstract*>(&external3DEngine))->applicationTitle();
+		return pTitle;
 	}
 
 

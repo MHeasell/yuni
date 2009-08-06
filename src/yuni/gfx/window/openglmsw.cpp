@@ -348,6 +348,11 @@ namespace Window
 		return msgProcessed;
 	}
 
+	void OpenGLMSW::onTitleChanged()
+	{
+		SetWindowText(pHWnd, String::CString(pTitle));
+	}
+
 } // namespace Window
 } // namespace Gfx3D
 } // namespace Yuni

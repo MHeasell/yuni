@@ -6,6 +6,7 @@
 # include "../core/smartptr/smartptr.h"
 # include "../core/event/event.proxy.h"
 # include "../threads/mutex.h"
+# include "../gfx/window/factory.h"
 
 
 namespace Yuni
@@ -42,11 +43,6 @@ namespace Gfx
 
 		//! \name Information about the 3D Device
 		//@{
-
-		/*!
-		** \brief Get the name of the external 3D engine
-		*/
-		String name();
 
 		/*!
 		** \brief Get informations about the device currently being used
@@ -108,7 +104,7 @@ namespace Gfx
 
 
 	public:
-		//! Event: THe FPS has changed
+		//! Event: The FPS has changed
 		Event::Proxy::P1<void, int> onFPSChanged;
 
 	private:
@@ -120,6 +116,10 @@ namespace Gfx
 		bool pDeviceIsInitialized;
 		//! Information about the device
 		Device::Ptr pDevice;
+		//! Application title
+		String pTitle;
+		//! Main window
+		Yuni::Gfx3D::Window::AWindow* pMainWindow;
 
 	}; // class Engine
 
