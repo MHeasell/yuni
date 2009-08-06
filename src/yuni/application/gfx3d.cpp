@@ -1,6 +1,5 @@
 
 #include "gfx3d.h"
-#include "../gfx/device.h"
 
 namespace Yuni
 {

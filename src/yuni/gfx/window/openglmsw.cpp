@@ -321,25 +321,6 @@ namespace Window
 
 
 
-
-	AWindow* Factory::CreateGLWindow(const String& title, unsigned int width,
-		unsigned int height, unsigned int bits, bool fullScreen)
-	{
-		AWindow* wnd = new OpenGLMSW(title, width, height, bits, fullScreen);
-		if (!wnd->initialize())
-		{
-			wnd->close();
-			delete wnd;
-			return NULL;
-		}
-		if (!sWindow)
-			sWindow = wnd;
-		return wnd;
-	}
-
-
-
-
 } // namespace Window
 } // namespace Gfx3D
 } // namespace Yuni

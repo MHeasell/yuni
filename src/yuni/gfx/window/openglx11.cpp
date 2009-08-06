@@ -93,22 +93,6 @@ namespace Window
 		OpenGL::close();
 	}
 
-
-	/*
-	AWindow* Factory::CreateGLWindow(const String& title, unsigned int width,
-		unsigned int height, unsigned int bits, bool fullScreen)
-	{
-		AWindow* wnd = new OpenGLX11(title, width, height, bits, fullScreen);
-		if (!wnd->initialize())
-		{
-			wnd->close();
-			delete wnd;
-			return NULL;
-		}
-		return wnd;
-	}
-*/
-
 	void OpenGLX11::blit()
 	{
 		//XNextEvent(pDisplay, &xev);

@@ -26,11 +26,11 @@ public:
 
 	void runWithLock()
 	{
-		// Assignation
+		// Assignment
 		pDummyVar = 42;
 
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		// Displaying informations to avoid some permissive optimisation of gcc
+		// Displaying information to avoid some of gcc's permissive optimization 
 		std::cout << "Threading policy Infos\n";
 		std::cout << "Threadsafe : " << ThreadingPolicy::threadSafe << "\n";
 		std::cout << "Dummy var  : " << pDummyVar << "\n";

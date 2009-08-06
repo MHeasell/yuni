@@ -10,10 +10,10 @@
 ** \section what What is Yuni ?
 **
 ** The Yuni project is a high-level cross-platform framework. This framework
-** intend to provide the most complete set as possible of coherent API related
+** intends to provide the most complete set as possible of coherent API related
 ** to 3D programming, especially game programming. It intends to be a reliable and
-** simple bridge between different worlds to make all sort of applications,
-** letting the user focus on its real work.
+** simple bridge between different worlds to create all sorts of applications,
+** letting the user focus on the real work.
 **
 ** The Yuni project is connected with all those domains :
 ** - Simulation
@@ -81,8 +81,9 @@
 /*!
 ** \brief The Yuni Framework
 */
+# ifdef __cplusplus /* Only with a C++ Compiler */
 namespace Yuni
 {}
-
+# endif
 
 #endif /* __YUNI_COMMONS_H__ */
