@@ -92,8 +92,9 @@ namespace AtomicImpl
 	// Int16
 	template<> struct TypeFromSize<16>
 	{
-		# ifdef YUNI_OS_MAC
+		# if defined(YUNI_OS_MAC) || defined(YUNI_OS_MINGW)
 		// On OS X, there are only routines for int32_t and int64_t
+		// With MinGW, it simply does not exist
 		enum { size = 32 };
 		typedef sint32 Type;
 		# else
@@ -101,7 +102,7 @@ namespace AtomicImpl
 		typedef sint16 Type;
 		# endif
 	};
-	
+
 	// Int32
 	template<> struct TypeFromSize<32>
 	{
@@ -129,7 +130,11 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<16,TP>::Type Increment(Yuni::Atomic::Int<16,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
+			#	ifdef YUNI_OS_MINGW
+			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
+			#	else
 			return ::InterlockedIncrement16((SHORT*)&t.pValue);
+			#	endif
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicIncrement32Barrier(&t.pValue);
@@ -147,7 +152,11 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<16,TP>::Type Decrement(Yuni::Atomic::Int<16,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
+			#	ifdef YUNI_OS_MINGW
+			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
+			#	else
 			return ::InterlockedDecrement16((SHORT*)&t.pValue);
+			#	endif
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicDecrement32Barrier(&t.pValue);
@@ -214,7 +223,11 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<64,TP>::Type Increment(Yuni::Atomic::Int<64,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
+			#	ifdef YUNI_OS_MINGW
+			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
+			#	else
 			return ::InterlockedIncrement64((LONGLONG*)&t.pValue);
+			#	endif
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicIncrement64Barrier(&t.pValue);
@@ -232,7 +245,11 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<64,TP>::Type Decrement(Yuni::Atomic::Int<64,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return ::InterlockedDecrement64((SHORT*)&t.pValue);
+			#	ifdef YUNI_OS_MINGW
+			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
+			#	else
+			return ::InterlockedDecrement64((LONGLONG*)&t.pValue);
+			#	endif
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicDecrement64Barrier(&t.pValue);
