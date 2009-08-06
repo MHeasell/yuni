@@ -37,8 +37,6 @@ public:
 	}
 };
 
-
-
 int main(int argc, char* argv[])
 {
 	// Instanciate our app, feeding it the console arguments
@@ -50,3 +48,76 @@ int main(int argc, char* argv[])
 	// Exit the app
 	return app.exitCode();
 }
+
+
+#ifdef YUNI_OS_WINDOWS
+int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, char* cmdLine, int)
+{
+	int argc;
+	char** argv;
+
+	char* arg;
+	int index;
+	int result;
+
+	// Count the arguments
+	argc = 1;
+	arg  = cmdLine;
+	while (arg[0] != 0)
+	{
+		while (arg[0] != 0 && arg[0] == ' ')
+		{
+			arg++;
+		}
+
+		if (arg[0] != 0)
+		{
+			argc++;
+			while (arg[0] != 0 && arg[0] != ' ')
+			{
+				arg++;
+			}
+		}
+	}
+
+	// Tokenize the arguments
+	argv = (char**)malloc(argc * sizeof(char*));
+	arg = cmdLine;
+	index = 1;
+	while (arg[0] != 0)
+	{
+		while (arg[0] != 0 && arg[0] == ' ')
+		{
+			arg++;
+		}
+
+		if (arg[0] != 0)
+		{
+			argv[index] = arg;
+			index++;
+			while (arg[0] != 0 && arg[0] != ' ')
+			{
+				arg++;
+			}
+        
+			if (arg[0] != 0)
+			{
+				arg[0] = 0;    
+				arg++;
+			}
+		}
+	}    
+
+	// Put the program name into argv[0]
+	char filename[_MAX_PATH];
+
+	GetModuleFileName(NULL, filename, _MAX_PATH);
+	argv[0] = filename;
+
+	// Call the user specified main function    
+	result = main(argc, argv);
+
+	free(argv);
+	return result;
+}
+#endif
