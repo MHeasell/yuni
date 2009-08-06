@@ -27,6 +27,8 @@ namespace Window
 		virtual void blit() { SwapBuffers(pHDC); }
 		virtual bool pollEvents();
 
+		virtual void onTitleChanged();
+
 	private:
 		HINSTANCE pHInstance;
 		HWND pHWnd;
