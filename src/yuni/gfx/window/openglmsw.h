@@ -25,6 +25,7 @@ namespace Window
 		virtual bool initialize();
 		virtual void close();
 		virtual void blit() { SwapBuffers(pHDC); }
+		virtual bool pollEvents();
 
 	private:
 		HINSTANCE pHInstance;

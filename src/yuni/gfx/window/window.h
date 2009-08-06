@@ -21,7 +21,7 @@ namespace Window
 	{
 	public:
 		AWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:pTitle(title), pWidth(width), pHeight(height), pBitDepth(bitDepth), pFullScreen(fullScreen)
+			:pTitle(title), pWidth(width), pHeight(height), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false)
 		{}
 		virtual ~AWindow() {}
 
@@ -57,6 +57,11 @@ namespace Window
 		*/
 		virtual void blit() = 0;
 
+		/*!
+		** \brief Get whether the window is in the process of closing
+		*/
+		bool closing() { return pClosing; }
+
 		//! \name Events
 		//@{
 		/*!
@@ -73,6 +78,9 @@ namespace Window
 		virtual void onKeyDown(unsigned char /* key */) {}
 		virtual void onKeyPressed(unsigned char /* key */) {}
 		virtual void onKeyUp(unsigned char /* key */) {}
+
+		virtual void onClose() { pClosing = true; }
+
 		//@}
 
 	protected:
@@ -81,6 +89,7 @@ namespace Window
 		unsigned int pHeight;
 		unsigned int pBitDepth;
 		bool pFullScreen;
+		bool pClosing;
 
 	}; // class AWindow
 

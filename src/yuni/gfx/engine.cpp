@@ -140,14 +140,15 @@ namespace Gfx
 		{
 			pMutex.unlock();
 
-			//external3DEngine.run();
 			// Window creation and GL init
 			Yuni::Gfx3D::Window::AWindow* window = Yuni::Gfx3D::Window::Factory::CreateGLWindow(applicationTitle(), pDevice->resolution()->width(),
 				pDevice->resolution()->height(), pDevice->resolution()->bitPerPixel(), pDevice->fullscreen());
 			// Main loop
-			while (1)
+			while (!window->closing())
 			{
+				// Manage events on the window
 				window->pollEvents();
+
 				//renderer->drawFrame();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
 				glLoadIdentity();					// Reset The View
@@ -224,10 +225,11 @@ namespace Gfx
 					glVertex3f( 1.0f,-1.0f,-1.0f);			// Bottom Right Of The Quad (Right)
 				glEnd();						// Done Drawing The Quad
 
+				// Push the backbuffer to screen
 				window->blit();
 			}
-
-			return;
+			window->close();
+			delete window;
 		}
 		pMutex.unlock();
 	}
