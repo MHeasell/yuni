@@ -44,16 +44,15 @@ namespace Window
 				case WM_CLOSE: // Did We Receive A Close Message?
 					{
 						PostQuitMessage(0); // Send A Quit Message
+						if (sWindow && !sWindow->closing())
+							sWindow->onClose();
 						return 0;
 					}
 
 				case WM_SIZE: // Resize The OpenGL Window
 					{
 						if (sWindow)
-						{
-							// LoWord=Width, HiWord=Height
 							sWindow->resize(LOWORD(lParam), HIWORD(lParam));
-						}
 						return 0;
 					}
 			}
@@ -267,6 +266,10 @@ namespace Window
 			return false;
 		}
 
+		// This is an hideous hack to be able to access the window when in the WndProc callback
+		// This will _not_ work with multiple windows
+		if (NULL == sWindow)
+			sWindow = const_cast<OpenGLMSW*>(this);
 		return true;
 	}
 
@@ -319,7 +322,31 @@ namespace Window
 		OpenGL::close();
 	}
 
+	bool OpenGLMSW::pollEvents()
+	{
+		MSG msg;
+		bool msgProcessed = false;
 
+		// Is there a message waiting?
+		while (!closing() && PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			// Have we received a Quit message?
+			if (msg.message == WM_QUIT)
+			{
+				onClose();
+			}
+			// If not, deal with window messages
+			else
+			{
+				// Translate The Message
+				TranslateMessage(&msg);
+				// Dispatch The Message
+				DispatchMessage(&msg);
+			}
+			msgProcessed = true;
+		}
+		return msgProcessed;
+	}
 
 } // namespace Window
 } // namespace Gfx3D
