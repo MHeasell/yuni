@@ -370,7 +370,7 @@ namespace Yuni
 	// Constructor
 	template<class R, class A0>
 	inline Bind<R (A0)>::Bind(const Bind<R (A0)>& rhs)
-		:pHolder(rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
