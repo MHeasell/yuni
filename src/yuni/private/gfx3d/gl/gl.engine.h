@@ -22,8 +22,15 @@ namespace Gl
 	public:
 		//! \name Constructors & Destructor
 		//@{
+		/*!
+		** \brief Default Constructor
+		*/
 		Engine();
+		/*!
+		** \brief Constructor
+		*/
 		Engine(const Yuni::Gfx::Device::Ptr& dc);
+		//! Destructor
 		virtual ~Engine();
 		//@}
 
@@ -51,7 +58,5 @@ namespace Gl
 } // namespace GfxImpl
 } // namespace Private
 } // namespace Yuni
-
-
 
 #endif // __YUNI_PRIVATE_GFX_OPENGL_ENGINE_H__
