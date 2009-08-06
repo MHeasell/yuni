@@ -29,10 +29,10 @@ ENDIF(YUNI_MODULE_DEVICES)
 
 IF(YUNI_MODULE_GFX3D)
 	Message(STATUS "[Module] Gfx3D")
-	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/gfx3d.cmake")
 	IF(YUNI_INTERNAL_3D)
 		Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/gfx3d-yuni.cmake")
 	ENDIF(YUNI_INTERNAL_3D)
+	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/gfx3d.cmake")
 ENDIF(YUNI_MODULE_GFX3D)
 
 

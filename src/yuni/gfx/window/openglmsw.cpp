@@ -1,5 +1,6 @@
 
 #include "openglmsw.h"
+#include "factory.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
 

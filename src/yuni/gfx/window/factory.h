@@ -1,4 +1,3 @@
-
 #ifndef __YUNI_GFX3D_WINDOW_FACTORY__
 # define __YUNI_GFX3D_WINDOW_FACTORY__
 
@@ -25,10 +24,12 @@ namespace Window
 		Factory() {}
 		Factory(const Factory&) {}
 
-	}; // Factory
+	}; // class Factory
 
-} // Window
-} // Gfx3D
-} // Yuni
+
+
+} // namespace Window
+} // namespace Gfx3D
+} // namespace Yuni
 
 #endif // __YUNI_GFX3D_WINDOW_FACTORY__

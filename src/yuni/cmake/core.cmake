@@ -317,8 +317,3 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_APPLICATION}
 	)
 
-#TEST_BEGIN("yuni::core" "Yuni Framework" "Core")
-#	TEST_ADD_TARGET("yuni-static-core")
-#TEST_END()
-
-

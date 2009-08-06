@@ -79,7 +79,8 @@ ELSE(NOT YUNI_STATIC_GFX_CORE)
 ENDIF(NOT YUNI_STATIC_GFX_CORE)
 
 
-Set(YUNI_STATIC_GFX3D  yuni-static-gfx-core yuni-static-gfx3d-core "${YUNI_STATIC_DEVICE_DISPLAY}")
+Set(YUNI_STATIC_GFX3D  yuni-static-gfx3d-core
+	"${YUNI_STATIC_DEVICE_DISPLAY}")
 
 Set(YUNI_STATIC_SCRIPT yuni-static-script)
 

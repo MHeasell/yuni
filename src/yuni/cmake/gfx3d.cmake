@@ -27,4 +27,3 @@ source_group(Gfx3D FILES ${SRC_GFX3D})
 Add_Library(yuni-static-gfx3d-core STATIC ${SRC_GFX3D})
 
 
-
