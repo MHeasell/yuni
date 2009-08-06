@@ -134,13 +134,22 @@ Set(SRC_CORE_DYNAMICLIBRARY
 source_group(Core\\DynamicLibrary FILES ${SRC_CORE_DYNAMICLIBRARY})
 
 
+Set(SRC_CORE_BIND
+				core/bind/bind.h core/bind/bind.hxx
+				core/bind/traits.h
+				core/bind.h
+				)
+source_group(Core\\Bind FILES ${SRC_CORE_BIND})
+
+
 Set(SRC_CORE_EVENT
 				core/event/event.h core/event/event.hxx
 				core/event/event.declaration.h
 				core/event/event.undef.h
 				core/event/observer/observer.h core/event/observer/observer.hxx
 				core/event/ievent.h core/event/ievent.hxx core/event/ievent.cpp
-				core/event.h)
+				core/event.h
+				)
 source_group(Core\\Event FILES ${SRC_CORE_EVENT})
 
 
@@ -206,7 +215,7 @@ Set(SRC_CORE_URI
 				core/uri/uri.private.h  core/uri/uri.private.cpp
 				core/uri/uri.h core/uri/uri.hxx core/uri/uri.cpp
 				core/uri.h)
-source_group(Core\\Event FILES ${SRC_CORE_EVENT})
+source_group(Core\\URI FILES ${SRC_CORE_URI})
 
 
 Set(SRC_CORE_FS
@@ -292,7 +301,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_ANY}
 		${SRC_CORE_VARIANT}
 		${SRC_CORE_DYNAMICLIBRARY}
-		${SRC_CORE_EVENT}
+		${SRC_CORE_BIND} ${SRC_CORE_EVENT}
 		${SRC_CORE_MATH}
 		${SRC_CORE_HASH_CHECKSUM}
 		${SRC_CORE_TREE_N}
