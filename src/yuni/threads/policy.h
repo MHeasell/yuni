@@ -6,7 +6,7 @@
 */
 
 
-# ifdef YUNI_WINDOWS
+# ifdef YUNI_OS_WINDOWS
 #	include "../core/system/windows.hdr.h"
 # endif
 # include "mutex.h"

@@ -21,6 +21,11 @@ public:
 	virtual ~HelloWorld()
 	{}
 
+	virtual bool onPreExecute()
+	{
+		std::cout << "Pre-execute step" << std::endl;
+		return true;
+	}
 };
 
 

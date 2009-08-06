@@ -4,7 +4,6 @@
 # include "../../yuni.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
-
 #	include "../../core/system/windows.hdr.h"
 #	include "opengl.h"
 
