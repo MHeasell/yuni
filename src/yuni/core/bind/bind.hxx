@@ -291,16 +291,16 @@ namespace Yuni
 
 
 	template<class R>
-	inline R Bind<R ()>::execute() const
+	inline R Bind<R ()>::invoke() const
 	{
-		return pHolder->execute();
+		return pHolder->invoke();
 	}
 
 
 	template<class R>
 	inline R Bind<R ()>::operator () () const
 	{
-		return pHolder->execute();
+		return pHolder->invoke();
 	}
 
 
@@ -370,7 +370,7 @@ namespace Yuni
 	// Constructor
 	template<class R, class A0>
 	inline Bind<R (A0)>::Bind(const Bind<R (A0)>& rhs)
-		:pHolder(rhs.pHolder)
+		:pHolder(rhs)
 	{}
 
 
@@ -636,16 +636,16 @@ namespace Yuni
 
 
 	template<class R, class A0>
-	inline R Bind<R (A0)>::execute(A0 a0) const
+	inline R Bind<R (A0)>::invoke(A0 a0) const
 	{
-		return pHolder->execute(a0);
+		return pHolder->invoke(a0);
 	}
 
 
 	template<class R, class A0>
 	inline R Bind<R (A0)>::operator () (A0 a0) const
 	{
-		return pHolder->execute(a0);
+		return pHolder->invoke(a0);
 	}
 
 
@@ -981,16 +981,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1>
-	inline R Bind<R (A0, A1)>::execute(A0 a0, A1 a1) const
+	inline R Bind<R (A0, A1)>::invoke(A0 a0, A1 a1) const
 	{
-		return pHolder->execute(a0, a1);
+		return pHolder->invoke(a0, a1);
 	}
 
 
 	template<class R, class A0, class A1>
 	inline R Bind<R (A0, A1)>::operator () (A0 a0, A1 a1) const
 	{
-		return pHolder->execute(a0, a1);
+		return pHolder->invoke(a0, a1);
 	}
 
 
@@ -1326,16 +1326,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2>
-	inline R Bind<R (A0, A1, A2)>::execute(A0 a0, A1 a1, A2 a2) const
+	inline R Bind<R (A0, A1, A2)>::invoke(A0 a0, A1 a1, A2 a2) const
 	{
-		return pHolder->execute(a0, a1, a2);
+		return pHolder->invoke(a0, a1, a2);
 	}
 
 
 	template<class R, class A0, class A1, class A2>
 	inline R Bind<R (A0, A1, A2)>::operator () (A0 a0, A1 a1, A2 a2) const
 	{
-		return pHolder->execute(a0, a1, a2);
+		return pHolder->invoke(a0, a1, a2);
 	}
 
 
@@ -1671,16 +1671,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline R Bind<R (A0, A1, A2, A3)>::execute(A0 a0, A1 a1, A2 a2, A3 a3) const
+	inline R Bind<R (A0, A1, A2, A3)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
 	{
-		return pHolder->execute(a0, a1, a2, a3);
+		return pHolder->invoke(a0, a1, a2, a3);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3>
 	inline R Bind<R (A0, A1, A2, A3)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3) const
 	{
-		return pHolder->execute(a0, a1, a2, a3);
+		return pHolder->invoke(a0, a1, a2, a3);
 	}
 
 
@@ -2016,16 +2016,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline R Bind<R (A0, A1, A2, A3, A4)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+	inline R Bind<R (A0, A1, A2, A3, A4)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4);
+		return pHolder->invoke(a0, a1, a2, a3, a4);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	inline R Bind<R (A0, A1, A2, A3, A4)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4);
+		return pHolder->invoke(a0, a1, a2, a3, a4);
 	}
 
 
@@ -2361,16 +2361,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5);
 	}
 
 
@@ -2706,16 +2706,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6);
 	}
 
 
@@ -3051,16 +3051,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7);
 	}
 
 
@@ -3396,16 +3396,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8);
 	}
 
 
@@ -3741,16 +3741,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 	}
 
 
@@ -4086,16 +4086,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 	}
 
 
@@ -4431,16 +4431,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 	}
 
 
@@ -4776,16 +4776,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
 	}
 
 
@@ -5121,16 +5121,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 	}
 
 
@@ -5466,16 +5466,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
 	}
 
 
@@ -5811,16 +5811,16 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
 	{
-		return pHolder->execute(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
 	}
 
 

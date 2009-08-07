@@ -331,7 +331,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute() const;
+		R invoke() const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -605,7 +605,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0) const;
+		R invoke(A0 a0) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -880,7 +880,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1) const;
+		R invoke(A0 a0, A1 a1) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -1156,7 +1156,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2) const;
+		R invoke(A0 a0, A1 a1, A2 a2) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -1433,7 +1433,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -1711,7 +1711,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -1990,7 +1990,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -2270,7 +2270,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -2551,7 +2551,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -2833,7 +2833,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -3116,7 +3116,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -3400,7 +3400,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -3685,7 +3685,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -3971,7 +3971,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -4258,7 +4258,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -4546,7 +4546,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
 
 		/*!
 		** \brief Invoke the delegate
@@ -4835,7 +4835,7 @@ namespace Yuni
 		/*!
 		** \brief Invoke the delegate
 		*/
-		R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
 
 		/*!
 		** \brief Invoke the delegate
