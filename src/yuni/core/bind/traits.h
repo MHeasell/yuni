@@ -624,7 +624,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute() const = 0;
+		virtual R invoke() const = 0;
 	};
 
 	template<class R, class A0>
@@ -632,7 +632,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0) const = 0;
+		virtual R invoke(A0 a0) const = 0;
 	};
 
 	template<class R, class A0, class A1>
@@ -640,7 +640,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1) const = 0;
+		virtual R invoke(A0 a0, A1 a1) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2>
@@ -648,7 +648,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3>
@@ -656,7 +656,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -664,7 +664,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -672,7 +672,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -680,7 +680,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -688,7 +688,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -696,7 +696,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -704,7 +704,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -712,7 +712,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -720,7 +720,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -728,7 +728,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -736,7 +736,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -744,7 +744,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const = 0;
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const = 0;
 	};
 
 
@@ -767,7 +767,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute() const
+		virtual R invoke() const
 		{
 			return (*pPointer)();
 		}
@@ -792,7 +792,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0) const
+		virtual R invoke(A0 a0) const
 		{
 			return (*pPointer)(a0);
 		}
@@ -817,7 +817,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1) const
+		virtual R invoke(A0 a0, A1 a1) const
 		{
 			return (*pPointer)(a0, a1);
 		}
@@ -842,7 +842,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
 			return (*pPointer)(a0, a1, a2);
 		}
@@ -867,7 +867,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
 		{
 			return (*pPointer)(a0, a1, a2, a3);
 		}
@@ -892,7 +892,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4);
 		}
@@ -917,7 +917,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5);
 		}
@@ -942,7 +942,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6);
 		}
@@ -967,7 +967,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7);
 		}
@@ -992,7 +992,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8);
 		}
@@ -1017,7 +1017,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 		}
@@ -1042,7 +1042,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 		}
@@ -1067,7 +1067,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 		}
@@ -1092,7 +1092,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
 		}
@@ -1117,7 +1117,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 		}
@@ -1142,7 +1142,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
 		}
@@ -1172,7 +1172,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute() const
+		virtual R invoke() const
 		{
 			return (*pPointer)(pUserdata);
 		}
@@ -1198,7 +1198,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0) const
+		virtual R invoke(A0 a0) const
 		{
 			return (*pPointer)(a0, pUserdata);
 		}
@@ -1224,7 +1224,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1) const
+		virtual R invoke(A0 a0, A1 a1) const
 		{
 			return (*pPointer)(a0, a1, pUserdata);
 		}
@@ -1250,7 +1250,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
 			return (*pPointer)(a0, a1, a2, pUserdata);
 		}
@@ -1276,7 +1276,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, pUserdata);
 		}
@@ -1302,7 +1302,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, pUserdata);
 		}
@@ -1328,7 +1328,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, pUserdata);
 		}
@@ -1354,7 +1354,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, pUserdata);
 		}
@@ -1380,7 +1380,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, pUserdata);
 		}
@@ -1406,7 +1406,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, pUserdata);
 		}
@@ -1432,7 +1432,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, pUserdata);
 		}
@@ -1458,7 +1458,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, pUserdata);
 		}
@@ -1484,7 +1484,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, pUserdata);
 		}
@@ -1510,7 +1510,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, pUserdata);
 		}
@@ -1536,7 +1536,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, pUserdata);
 		}
@@ -1562,7 +1562,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, pUserdata);
 		}
@@ -1602,7 +1602,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute() const
+		virtual R invoke() const
 		{
 			return (pThis->*pMember)();
 		}
@@ -1630,7 +1630,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0) const
+		virtual R invoke(A0 a0) const
 		{
 			return (pThis->*pMember)(a0);
 		}
@@ -1658,7 +1658,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1) const
+		virtual R invoke(A0 a0, A1 a1) const
 		{
 			return (pThis->*pMember)(a0, a1);
 		}
@@ -1686,7 +1686,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
 			return (pThis->*pMember)(a0, a1, a2);
 		}
@@ -1714,7 +1714,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3);
 		}
@@ -1742,7 +1742,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4);
 		}
@@ -1770,7 +1770,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5);
 		}
@@ -1798,7 +1798,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6);
 		}
@@ -1826,7 +1826,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7);
 		}
@@ -1854,7 +1854,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8);
 		}
@@ -1882,7 +1882,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 		}
@@ -1910,7 +1910,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 		}
@@ -1938,7 +1938,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 		}
@@ -1966,7 +1966,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
 		}
@@ -1994,7 +1994,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 		}
@@ -2022,7 +2022,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
 		}
@@ -2059,7 +2059,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute() const
+		virtual R invoke() const
 		{
 			return (pThis->*pMember)(pUserdata);
 		}
@@ -2088,7 +2088,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0) const
+		virtual R invoke(A0 a0) const
 		{
 			return (pThis->*pMember)(a0, pUserdata);
 		}
@@ -2117,7 +2117,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1) const
+		virtual R invoke(A0 a0, A1 a1) const
 		{
 			return (pThis->*pMember)(a0, a1, pUserdata);
 		}
@@ -2146,7 +2146,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, pUserdata);
 		}
@@ -2175,7 +2175,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, pUserdata);
 		}
@@ -2204,7 +2204,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, pUserdata);
 		}
@@ -2233,7 +2233,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, pUserdata);
 		}
@@ -2262,7 +2262,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, pUserdata);
 		}
@@ -2291,7 +2291,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, pUserdata);
 		}
@@ -2320,7 +2320,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, pUserdata);
 		}
@@ -2349,7 +2349,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, pUserdata);
 		}
@@ -2378,7 +2378,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, pUserdata);
 		}
@@ -2407,7 +2407,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, pUserdata);
 		}
@@ -2436,7 +2436,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, pUserdata);
 		}
@@ -2465,7 +2465,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, pUserdata);
 		}
@@ -2494,7 +2494,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, pUserdata);
 		}

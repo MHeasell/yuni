@@ -2,7 +2,7 @@
 # define __YUNI_CORE_BIND_TRAITS_H__
 
 <%
-require '../../../tools/generators/commons.rb'
+require File.dirname(__FILE__) + '/../../../tools/generators/commons.rb'
 generator = Generator.new()
 %>
 <%=generator.thisHeaderHasBeenGenerated("traits.h.generator.hpp")%>
@@ -173,7 +173,7 @@ namespace BindImpl
 	{
 	public:
 		//! Invoke the delegate
-		virtual R execute(<%=generator.variableList(i)%>) const = 0;
+		virtual R invoke(<%=generator.variableList(i)%>) const = 0;
 	};
 <% end %>
 
@@ -196,7 +196,7 @@ namespace BindImpl
 			:pPointer(pointer)
 		{}
 
-		virtual R execute(<%=generator.variableList(i)%>) const
+		virtual R invoke(<%=generator.variableList(i)%>) const
 		{
 			return (*pPointer)(<%=generator.list(i, 'a')%>);
 		}
@@ -226,7 +226,7 @@ namespace BindImpl
 			:pPointer(pointer), pUserdata(userdata)
 		{}
 
-		virtual R execute(<%=generator.variableList(i-1)%>) const
+		virtual R invoke(<%=generator.variableList(i-1)%>) const
 		{
 			return (*pPointer)(<%=generator.list(i-1, 'a', "", ", ")%>pUserdata);
 		}
@@ -266,7 +266,7 @@ namespace BindImpl
 		{}
 		//@}
 
-		virtual R execute(<%=generator.variableList(i)%>) const
+		virtual R invoke(<%=generator.variableList(i)%>) const
 		{
 			return (pThis->*pMember)(<%=generator.list(i, 'a')%>);
 		}
@@ -303,7 +303,7 @@ namespace BindImpl
 			:pThis(c), pMember(member), pUserdata(userdata)
 		{}
 
-		virtual R execute(<%=generator.variableList(i-1)%>) const
+		virtual R invoke(<%=generator.variableList(i-1)%>) const
 		{
 			return (pThis->*pMember)(<%=generator.list(i-1, 'a', "", ", ")%>pUserdata);
 		}

@@ -2,7 +2,7 @@
 # define __YUNI_CORE_BIND_BIND_HXX__
 
 <%
-require '../../../tools/generators/commons.rb'
+require File.dirname(__FILE__) + '/../../../tools/generators/commons.rb'
 generator = Generator.new()
 %>
 <%=generator.thisHeaderHasBeenGenerated("bind.hxx.generator.hpp")%>
@@ -290,16 +290,16 @@ namespace Yuni
 
 
 	template<class R<%=generator.templateParameterList(i) %>>
-	inline R Bind<R (<%=generator.list(i)%>)>::execute(<%=generator.variableList(i)%>) const
+	inline R Bind<R (<%=generator.list(i)%>)>::invoke(<%=generator.variableList(i)%>) const
 	{
-		return pHolder->execute(<%=generator.list(i,'a')%>);
+		return pHolder->invoke(<%=generator.list(i,'a')%>);
 	}
 
 
 	template<class R<%=generator.templateParameterList(i) %>>
 	inline R Bind<R (<%=generator.list(i)%>)>::operator () (<%=generator.variableList(i)%>) const
 	{
-		return pHolder->execute(<%=generator.list(i,'a')%>);
+		return pHolder->invoke(<%=generator.list(i,'a')%>);
 	}
 
 

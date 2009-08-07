@@ -1,4 +1,8 @@
 
+require 'erb'
+
+
+
 class Generator
 
 	#
@@ -101,4 +105,23 @@ class Generator
 		end
 		ret
 	end
+
+	def include(fname)
+		erb = ERB.new(IO.read(File.dirname(__FILE__) + '/../../' + fname), nil, nil, 'erbout')
+		erb.filename = fname
+		generator = self
+		i = 0
+		return erb.result(binding())
+	end
+
+	def include(fname,i)
+		erb = ERB.new(IO.read(File.dirname(__FILE__) + '/../../' + fname), nil, nil, 'erbout')
+		erb.filename = fname
+		generator = self
+		return erb.result(binding())
+	end
+
+
 end
+
+
