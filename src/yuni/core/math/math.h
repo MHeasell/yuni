@@ -1,6 +1,7 @@
 #ifndef __YUNI_CORE_MATH_MATH_H__
 # define __YUNI_CORE_MATH_MATH_H__
 
+# include "../../yuni.h"
 # include <stdlib.h>
 # include <math.h>
 # include <cstring>
