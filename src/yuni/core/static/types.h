@@ -76,6 +76,15 @@ namespace Type
 	//@}
 
 
+	//! \name Numeric types
+	//@{
+	template<typename T>
+	struct IsDecimal
+	{
+		enum { Yes = 0, No = 1 };
+	};
+	//@}
+
 	//! \name Comparison
 	//@{
 	/*!
@@ -285,6 +294,12 @@ namespace Type
 	{
 		enum { Yes = 1, No = 0 };
 	};
+
+
+
+	template<> struct IsDecimal<float> { enum { Yes = 1, No = 0 }; };
+	template<> struct IsDecimal<double> { enum { Yes = 1, No = 0 }; };
+	template<> struct IsDecimal<long double> { enum { Yes = 1, No = 0 }; };
 
 	//@} // Overloads
 

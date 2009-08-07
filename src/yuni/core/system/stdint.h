@@ -9,7 +9,10 @@
 */
 
 
-# ifndef YUNI_OS_MSVC
+# ifdef YUNI_OS_MSVC
+#	include "windows/msinttypes/stdint.h"
+#	include "windows/msinttypes/inttypes.h"
+# else
 #	include <stdint.h>
 # endif
 

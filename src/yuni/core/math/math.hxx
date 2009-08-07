@@ -4,6 +4,21 @@
 # include <algorithm>
 
 
+#ifdef YUNI_OS_WINDOWS
+/* Those functions are not available on Windows... */
+double rint(double nr);
+long double rintl(long double x);
+float rintf(float x);
+long int lrint(double x);
+long int lrintl(long double x);
+long int lrintf(float x);
+long long int llrint(double x);
+long long int llrintl(long double x);
+long long int llrintf(float x);
+#endif
+
+
+
 namespace Yuni
 {
 namespace Math
@@ -177,17 +192,17 @@ namespace Math
 		return x;
 	}
 
-	template<> inline float Ceil(float x)
+	template<> inline float Ceil(const float x)
 	{
 		return ::ceilf(x);
 	}
 
-	template<> inline double Ceil(double x)
+	template<> inline double Ceil(const double x)
 	{
 		return ::ceil(x);
 	}
 
-	template<> inline long double Ceil<long double>(long double x)
+	template<> inline long double Ceil<long double>(const long double x)
 	{
 		return ::ceill(x);
 	}
@@ -211,20 +226,223 @@ namespace Math
 	}
 
 
-	
+
 	inline float Power(const float x, const float y)
 	{
 		return ::powf(x, y);
 	}
 
-	inline double Power(const double x, const double y) 
+	inline double Power(const double x, const double y)
 	{
 		return ::pow(x, y);
 	}
 
 
+	template<typename T> inline T Round(T x)
+	{
+		return x;
+	}
+
+
+	template<> inline double Round<double>(double x)
+	{
+		# ifdef YUNI_OS_MSVC
+		return ::floor(x + 0.5);
+		# else
+		return ::round(x);
+		# endif
+	}
+
+	template<> inline long double Round<long double>(long double x)
+	{
+		# ifdef YUNI_OS_MSVC
+		return ::floorl(x + 0.5L);
+		# else
+		return ::roundl(x);
+		# endif
+	}
+
+	template<> inline float Round<float>(float x)
+	{
+		# ifdef YUNI_OS_MSVC
+		return ::floorf(x + 0.5f);
+		# else
+		return ::roundf(x);
+		# endif
+	}
+
+
+	template<typename T, typename R>
+	struct RoundToInt
+	{
+		typedef T Type;
+		typedef R ResultType;
+		static inline ResultType Value(Type x)
+		{
+			// Default Behavior
+			return (ResultType)(Round<Type>(x));
+		}
+	};
+
+	template<typename T>
+	struct RoundToInt<T,T>
+	{
+		typedef T Type;
+		typedef T ResultType;
+		static inline ResultType Value(Type x)
+		{
+			// Same type nothing to do
+			return x;
+		}
+	};
+
+
+	template<>
+	struct RoundToInt<float, long int>
+	{
+		typedef float Type;
+		typedef long int ResultType;
+		static inline ResultType Value(Type x)
+		{
+			return ::lrintf(x);
+		}
+	};
+
+	template<>
+	struct RoundToInt<double, long int>
+	{
+		typedef double Type;
+		typedef long int ResultType;
+		static inline ResultType Value(Type x)
+		{
+			return ::lrint(x);
+		}
+	};
+
+	template<>
+	struct RoundToInt<long double, long int>
+	{
+		typedef long double Type;
+		typedef long int ResultType;
+		static inline ResultType Value(Type x)
+		{
+			return ::lrintl(x);
+		}
+	};
+
+
+
+	template<>
+	struct RoundToInt<float, long long int>
+	{
+		typedef float Type;
+		typedef long long int ResultType;
+		static inline ResultType Value(Type x)
+		{
+			return ::llrintf(x);
+		}
+	};
+
+	template<>
+	struct RoundToInt<double, long long int>
+	{
+		typedef double Type;
+		typedef long long int ResultType;
+		static inline ResultType Value(Type x)
+		{
+			return ::llrint(x);
+		}
+	};
+
+	template<>
+	struct RoundToInt<long double, long long int>
+	{
+		typedef long double Type;
+		typedef long long int ResultType;
+		static inline ResultType Value(Type x)
+		{
+			return ::llrintl(x);
+		}
+	};
+
+
+
+
 } // namespace Math
 } // namespace Yuni
+
+
+
+
+
+#ifdef YUNI_OS_WINDOWS
+
+/* Those functions are not available on Windows... */
+
+inline double rint(double nr)
+{
+	const double f = Yuni::Math::Floor(nr);
+	const double c = Yuni::Math::Ceil(nr);
+	return (((c -nr) >= (nr - f)) ? f : c);
+}
+
+inline long double rintl(long double nr)
+{
+	const long double f = Yuni::Math::Floor(nr);
+	const long double c = Yuni::Math::Ceil(nr);
+	return (((c -nr) >= (nr - f)) ? f : c);
+}
+
+inline float rintf(float nr)
+{
+	const float f = Yuni::Math::Floor(nr);
+	const float c = Yuni::Math::Ceil(nr);
+	return (((c -nr) >= (nr - f)) ? f : c);
+}
+
+inline long int lrint(double nr)
+{
+	const double f = Yuni::Math::Floor(nr);
+	const double c = Yuni::Math::Ceil(nr);
+	return (((c -nr) >= (nr - f)) ? (long int)f : (long int)c);
+}
+
+inline long int lrintl(long double nr)
+{
+	const long double f = Yuni::Math::Floor(nr);
+	const long double c = Yuni::Math::Ceil(nr);
+	return (((c -nr) >= (nr - f)) ? (long int)f : (long int)c);
+}
+
+inline long int lrintf(float nr)
+{
+	const float f = Yuni::Math::Floor(nr);
+	const float c = Yuni::Math::Ceil(nr);
+	return (((c -nr) >= (nr - f)) ? (long int)f : (long int)c);
+}
+
+inline long long int llrint(double nr)
+{
+	const double f = Yuni::Math::Floor(nr);
+	const double c = Yuni::Math::Ceil(nr);
+	return (((c -nr) >= (nr - f)) ? (long long int)f : (long long int)c);
+}
+
+inline long long int llrintl(long double nr)
+{
+	const long double f = Yuni::Math::Floor(nr);
+	const long double c = Yuni::Math::Ceil(nr);
+	return (((c -nr) >= (nr - f)) ? (long long int)f : (long long int)c);
+}
+
+inline long long int llrintf(float nr)
+{
+	const float f = Yuni::Math::Floor(nr);
+	const float c = Yuni::Math::Ceil(nr);
+	return (((c -nr) >= (nr - f)) ? (long long int)f : (long long int)c);
+}
+
+#endif /* ifdef WINDOWS */
 
 
 #endif // __YUNI_CORE_MATH_MATH_HXX__

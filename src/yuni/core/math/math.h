@@ -282,6 +282,25 @@ namespace Math
 	template<typename T> inline T Fract(T x);
 
 
+	/*!
+	** \brief Integral value nearest to x
+	**
+	** The function returns the integral value nearest to x rounding
+	** half-way cases away from zero, regardless of the current rounding
+	** direction.
+	*/
+	template<typename T> inline T Round(T x);
+
+
+	/*!
+	** \brief Integral value nearest to x
+	**
+	** Here is the best way to use this class :
+	** \code
+	** int i = RoundToInt<float,int>::Value(10.2f);
+	** \endcode
+	*/
+	template<typename T, typename R> struct RoundToInt;
 
 
 } // namespace Math

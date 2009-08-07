@@ -180,6 +180,17 @@
 #	define YUNI_DEPRECATED
 # endif
 
+/* Noreturn */
+# if defined(YUNI_OS_GCC)
+#	if (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
+#		define YUNI_NORETURN  __attribute__((noreturn))
+#	endif
+# endif
+# ifndef YUNI_NORETURN
+#	define YUNI_NORETURN
+# endif
+
+
 
 
 /* C++0x */
