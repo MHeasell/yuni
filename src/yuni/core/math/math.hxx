@@ -247,7 +247,7 @@ namespace Math
 	template<> inline double Round<double>(double x)
 	{
 		# ifdef YUNI_OS_MSVC
-		return ::floor(x + 0.5);
+		return (x < 0.) ? (::ceil(x - 0.5)) : (::floor(x + 0.5));
 		# else
 		return ::round(x);
 		# endif
@@ -256,7 +256,7 @@ namespace Math
 	template<> inline long double Round<long double>(long double x)
 	{
 		# ifdef YUNI_OS_MSVC
-		return ::floorl(x + 0.5L);
+		return (x < 0.) ? (::ceill(x - 0.5L)) : (::floorl(x + 0.5L));
 		# else
 		return ::roundl(x);
 		# endif
@@ -265,7 +265,7 @@ namespace Math
 	template<> inline float Round<float>(float x)
 	{
 		# ifdef YUNI_OS_MSVC
-		return ::floorf(x + 0.5f);
+		return (x < 0.) ? (::ceilf(x - 0.5f)) : (::floorf(x + 0.5f));
 		# else
 		return ::roundf(x);
 		# endif
