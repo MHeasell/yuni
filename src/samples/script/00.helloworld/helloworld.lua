@@ -20,4 +20,7 @@ end
 function callBar()
 	print "[ Lua] Let's call the C++ bar().";
 	print ("[ Lua] bar(4242, 2.4, 'nyu', 2, nil, nil) returned [" .. bar(4242, 2.4, "nyu", 0, 0, 0) .. "].");
+	classMemberFoo("Hello world");
+	classMemberFoo(42);
+	classMemberFoo(12.4);
 end

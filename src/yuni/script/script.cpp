@@ -1,19 +1,18 @@
+
 #include "script.h"
+
 
 namespace Yuni
 {
 namespace Script
 {
 
-	AScript::AScript()
-	{
-		// Nothing to do here for now.
-	}
 
 	AScript::~AScript()
 	{
 		clearWithoutUnbindWL();
 	}
+
 
 	bool AScript::loadFromFile(const String& file)
 	{
@@ -21,11 +20,13 @@ namespace Script
 		return appendFromFile(file);
 	}
 
+
 	bool AScript::loadFromString(const String& script)
 	{
 		this->reset();
 		return appendFromString(script);
 	}
+
 
 	bool AScript::loadFromBuffer(const char* scriptBuf, const unsigned int scriptSize)
 	{
@@ -33,17 +34,12 @@ namespace Script
 		return appendFromBuffer(scriptBuf, scriptSize);
 	}
 
+
 	bool AScript::run()
 	{
 		return call(NULL, "main");
 	}
 
-	bool AScript::isBound(const char *fName)
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-
-		return pBoundFunctions.end() == pBoundFunctions.find(fName);
-	}
 
 	void AScript::clear()
 	{
@@ -61,6 +57,7 @@ namespace Script
 		}
 	}
 
+
 	void AScript::clearWithoutUnbindWL()
 	{
 		if (!pBoundFunctions.empty())
@@ -75,20 +72,7 @@ namespace Script
         }
 	}
 
-	bool AScript::unbind(const char *fName)
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
 
-		BoundFunctions::iterator i = pBoundFunctions.find(fName);
-		if (i != pBoundFunctions.end())
-		{
-			internalUnbindWL(fName);
-			delete i->second;
-			pBoundFunctions.erase(i);
-			return true;
-		}
-		return false;
-	}
 
 
 } // namespace Script

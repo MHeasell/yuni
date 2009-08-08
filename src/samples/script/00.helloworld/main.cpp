@@ -6,9 +6,10 @@
 #include <iostream>
 #include <yuni/script.h>
 
+
 namespace
 {
-	bool bar(int arg1, double arg2, Yuni::String arg3, void* arg4, int arg5, int arg6)
+	Yuni::String bar(int arg1, double arg2, Yuni::String arg3, void* arg4, int, int)
 	{
 		std::cout << "[ C++] Hi, i'm bar(). Here are 4 integers: "
 			<< arg1 << ", "
@@ -16,9 +17,20 @@ namespace
 			<< arg3 << ", "
 			<< arg4 << "."
 			<< std::endl;
-	 	return true;
+	 	return "Piko";
 	}
 }
+
+
+class Piko
+{
+public:
+	void foo(const Yuni::String& nyu)
+	{
+		std::cout << "[ C++] " << __PRETTY_FUNCTION__ << ": " << nyu << "\n";
+	}
+};
+
 
 int main()
 {
@@ -43,7 +55,7 @@ int main()
 
 	sc->call(NULL, "foo");
 
-	if (!sc->appendFromString("print(\"Pyo !\");"))
+	if (!sc->appendFromString("print(\"[ Lua] Pyo !\");"))
 	{
 		// An error has occured.
 		// TODO: We must be able to determine exactly what prevented the script loading.
@@ -75,7 +87,12 @@ int main()
 
 	std::cout << "[ C++] Got result of type " << ret.type().name() << std::endl;
 
-	if (!sc->bind("bar", &(bar)))
+
+	Piko piko;
+	sc->bind("classMemberFoo", &piko, &Piko::foo);
+
+
+	if (!sc->bind("bar", &bar))
 		std::cout << "[ C++] Error while binding ::bar()" << std::endl;
 	else
 	{
@@ -87,7 +104,7 @@ int main()
 
 	}
 
-	// Destroy the script object to release the resources.
+		// Destroy the script object to release the resources.
 	delete sc;
 
 	// Goodbye !

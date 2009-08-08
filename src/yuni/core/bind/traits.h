@@ -13,7 +13,7 @@ namespace Yuni
 {
 
 	// Forward declaration
-	template<typename P> class Bind;
+	template<typename P, class Dummy> class Bind;
 
 
 } // namespace Yuni
@@ -623,6 +623,8 @@ namespace BindImpl
 	class IPointer<R()>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke() const = 0;
 	};
@@ -631,6 +633,8 @@ namespace BindImpl
 	class IPointer<R(A0)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0) const = 0;
 	};
@@ -639,6 +643,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1) const = 0;
 	};
@@ -647,6 +653,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2) const = 0;
 	};
@@ -655,6 +663,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const = 0;
 	};
@@ -663,6 +673,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const = 0;
 	};
@@ -671,6 +683,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const = 0;
 	};
@@ -679,6 +693,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5, A6)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const = 0;
 	};
@@ -687,6 +703,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const = 0;
 	};
@@ -695,6 +713,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const = 0;
 	};
@@ -703,6 +723,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const = 0;
 	};
@@ -711,6 +733,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const = 0;
 	};
@@ -719,6 +743,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const = 0;
 	};
@@ -727,6 +753,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const = 0;
 	};
@@ -735,6 +763,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const = 0;
 	};
@@ -743,6 +773,8 @@ namespace BindImpl
 	class IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const = 0;
 	};
@@ -763,6 +795,9 @@ namespace BindImpl
 		:public IPointer<R ()>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)())
 			:pPointer(pointer)
 		{}
@@ -788,6 +823,9 @@ namespace BindImpl
 		:public IPointer<R (A0)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0))
 			:pPointer(pointer)
 		{}
@@ -813,6 +851,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1))
 			:pPointer(pointer)
 		{}
@@ -838,6 +879,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2))
 			:pPointer(pointer)
 		{}
@@ -863,6 +907,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3))
 			:pPointer(pointer)
 		{}
@@ -888,6 +935,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4))
 			:pPointer(pointer)
 		{}
@@ -913,6 +963,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5))
 			:pPointer(pointer)
 		{}
@@ -938,6 +991,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5, A6)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5, A6))
 			:pPointer(pointer)
 		{}
@@ -963,6 +1019,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5, A6, A7)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
 			:pPointer(pointer)
 		{}
@@ -988,6 +1047,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
 			:pPointer(pointer)
 		{}
@@ -1013,6 +1075,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
 			:pPointer(pointer)
 		{}
@@ -1038,6 +1103,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
 			:pPointer(pointer)
 		{}
@@ -1063,6 +1131,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
 			:pPointer(pointer)
 		{}
@@ -1088,6 +1159,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
 			:pPointer(pointer)
 		{}
@@ -1113,6 +1187,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
 			:pPointer(pointer)
 		{}
@@ -1138,6 +1215,9 @@ namespace BindImpl
 		:public IPointer<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
 			:pPointer(pointer)
 		{}
