@@ -1,5 +1,3 @@
-		//! The Bind Type
-		typedef Bind<R(<%=generator.list(i)%>)> BindType;
 		//! The most suitable smartptr for the class
 		typedef SmartPtr<BindType> Ptr;
 

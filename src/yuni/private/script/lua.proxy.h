@@ -1,9 +1,10 @@
-#ifndef __YUNI_PRIVATE_SCRIPT_LUA_PROXY__
-#define __YUNI_PRIVATE_SCRIPT_LUA_PROXY__
+#ifndef __YUNI_PRIVATE_SCRIPT_LUA_PROXY_H__
+# define __YUNI_PRIVATE_SCRIPT_LUA_PROXY_H__
 
 # include <lua.hpp>
-# include "../../script/lua.h"
+# include "../../script/lua/lua.h"
 # include "../../yuni.h"
+
 
 namespace Yuni
 {
@@ -12,7 +13,7 @@ namespace Private
 /*!
 ** \brief Contains internal proxy classes for the Script module.
 */
-namespace Script
+namespace ScriptImpl
 {
 
 	/*!
@@ -27,15 +28,15 @@ namespace Script
 	*/
 	class LuaProxy
 	{
-		friend class Yuni::Script::Lua;
-		template <class, class> friend struct Yuni::Script::Private::Bind::NthArgument;
+		friend class Script::Lua;
+		template <class, class> friend struct Bind::Argument;
 	private:
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		LuaProxy();
+		LuaProxy() {}
 		//! Destructor
-		~LuaProxy();
+		~LuaProxy() {}
 		//@}
 
 		//! \name Proxy storages and variables
@@ -46,8 +47,11 @@ namespace Script
 
 	}; // class LuaProxy
 
-} // namespace Script
+
+
+
+} // namespace ScriptImpl
 } // namespace Private
 } // namespace Yuni
 
-#endif
+#endif // __YUNI_PRIVATE_SCRIPT_LUA_PROXY_H__

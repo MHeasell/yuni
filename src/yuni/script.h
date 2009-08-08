@@ -27,7 +27,7 @@ namespace Script
 // class Yuni::Script::AScript
 # include "script/script.h"
 // class Yuni::Script::Lua
-# include "script/lua.h"
+# include "script/lua/lua.h"
 
 
 

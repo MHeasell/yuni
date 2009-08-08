@@ -17,28 +17,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R>
-	inline Bind<R ()>::Bind()
+	inline Bind<R (), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R>
-	inline Bind<R ()>::Bind(const Bind<R ()>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (), void>::Bind(const Bind<R (), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R>
-	inline Bind<R ()>::~Bind()
+	inline Bind<R (), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R>
-	inline void Bind<R ()>::bind(R (*pointer)())
+	inline void Bind<R (), void>::bind(R (*pointer)())
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R ()>(pointer);
 	}
@@ -47,8 +47,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R>
 	template<class U>
-	inline void Bind<R ()>::bind(R (*pointer)(U),
-		typename Bind<R ()>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (), void>::bind(R (*pointer)(U),
+		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (U)>(pointer, userdata);
@@ -59,7 +59,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R>
 	template<class C>
-	void Bind<R ()>::bind(C* c, R (C::*member)())
+	void Bind<R (), void>::bind(C* c, R (C::*member)())
 	{
 		if (c)
 		{
@@ -76,7 +76,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R>
 	template<class C>
-	void Bind<R ()>::bind(const C* c, R (C::*member)() const)
+	void Bind<R (), void>::bind(const C* c, R (C::*member)() const)
 	{
 		if (c)
 		{
@@ -98,7 +98,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R ()>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)())
+	Bind<R (), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)())
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -110,7 +110,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R ()>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const)
+	Bind<R (), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -122,8 +122,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R ()>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(),
-		typename Bind<R ()>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(),
+		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -135,8 +135,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R ()>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const,
-		typename Bind<R ()>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const,
+		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -148,7 +148,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R>
 	template<class C>
-	void Bind<R ()>::bind(C& c, R (C::*member)())
+	void Bind<R (), void>::bind(C& c, R (C::*member)())
 	{
 		if (&c)
 		{
@@ -165,7 +165,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R>
 	template<class C>
-	void Bind<R ()>::bind(const C& c, R (C::*member)() const)
+	void Bind<R (), void>::bind(const C& c, R (C::*member)() const)
 	{
 		if (&c)
 		{
@@ -186,8 +186,8 @@ namespace Yuni
 
 	template<class R>
 	template<class U, class C>
-	void Bind<R ()>::bind(C* c, R (C::*member)(U),
-		typename Bind<R ()>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (), void>::bind(C* c, R (C::*member)(U),
+		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -205,8 +205,8 @@ namespace Yuni
 
 	template<class R>
 	template<class U, class C>
-	void Bind<R ()>::bind(C& c, R (C::*member)(U),
-		typename Bind<R ()>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (), void>::bind(C& c, R (C::*member)(U),
+		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -225,8 +225,8 @@ namespace Yuni
 
 	template<class R>
 	template<class U, class C>
-	void Bind<R ()>::bind(const C* c, R (C::*member)(U) const,
-		typename Bind<R ()>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (), void>::bind(const C* c, R (C::*member)(U) const,
+		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -245,8 +245,8 @@ namespace Yuni
 
 	template<class R>
 	template<class U, class C>
-	void Bind<R ()>::bind(const C& c, R (C::*member)(U) const,
-		typename Bind<R ()>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (), void>::bind(const C& c, R (C::*member)(U) const,
+		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -264,7 +264,7 @@ namespace Yuni
 
 
 	template<class R>
-	inline void Bind<R ()>::bind(const Bind<R ()>& rhs)
+	inline void Bind<R (), void>::bind(const Bind<R (), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -273,7 +273,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R>
-	inline void Bind<R ()>::unbind()
+	inline void Bind<R (), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -281,37 +281,47 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R>
-	inline void Bind<R ()>::clear()
+	inline void Bind<R (), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke();
+	}
+
+
+
 
 
 
 	template<class R>
-	inline R Bind<R ()>::invoke() const
+	inline R Bind<R (), void>::invoke() const
 	{
 		return pHolder->invoke();
 	}
 
 
 	template<class R>
-	inline R Bind<R ()>::operator () () const
+	inline R Bind<R (), void>::operator () () const
 	{
 		return pHolder->invoke();
 	}
 
 
 	template<class R>
-	inline R Bind<R ()>::emptyCallback()
+	inline R Bind<R (), void>::emptyCallback()
 	{
 		return R();
 	}
 
 	template<class R>
-	inline void Bind<R ()>::emptyCallbackReturnsVoid()
+	inline void Bind<R (), void>::emptyCallbackReturnsVoid()
 	{
 		/* Do nothing */
 	}
@@ -322,7 +332,7 @@ namespace Yuni
 
 
 	template<class R>
-	inline Bind<R ()>& Bind<R ()>::operator = (R (*pointer)())
+	inline Bind<R (), void>& Bind<R (), void>::operator = (R (*pointer)())
 	{
 		bind(pointer);
 		return *this;
@@ -330,7 +340,7 @@ namespace Yuni
 
 
 	template<class R>
-	inline Bind<R ()>& Bind<R ()>::operator = (const Bind<R ()>& rhs)
+	inline Bind<R (), void>& Bind<R (), void>::operator = (const Bind<R (), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -339,7 +349,7 @@ namespace Yuni
 
 
 	template<class R>
-	inline Bind<R ()>& Bind<R ()>::operator = (const NullPtr*)
+	inline Bind<R (), void>& Bind<R (), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -348,7 +358,717 @@ namespace Yuni
 
 
 	template<class R>
-	inline Bind<R ()>& Bind<R ()>::operator = (const NullPtr&)
+	inline Bind<R (), void>& Bind<R (), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R>
+	inline Bind<R (*)(), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R>
+	inline Bind<R (*)(), void>::Bind(const Bind<R (*)(), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R>
+	inline Bind<R (*)(), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R>
+	inline void Bind<R (*)(), void>::bind(R (*pointer)())
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R ()>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R>
+	template<class U>
+	inline void Bind<R (*)(), void>::bind(R (*pointer)(U),
+		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R>
+	template<class C>
+	void Bind<R (*)(), void>::bind(C* c, R (C::*member)())
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R()>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R>
+	template<class C>
+	void Bind<R (*)(), void>::bind(const C* c, R (C::*member)() const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)();
+			pHolder = new Private::BindImpl::BoundWithMember<C, R()>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)())
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(),
+		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const,
+		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R>
+	template<class C>
+	void Bind<R (*)(), void>::bind(C& c, R (C::*member)())
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R()>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R>
+	template<class C>
+	void Bind<R (*)(), void>::bind(const C& c, R (C::*member)() const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)();
+			pHolder = new Private::BindImpl::BoundWithMember<C, R()>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R>
+	template<class U, class C>
+	void Bind<R (*)(), void>::bind(C* c, R (C::*member)(U),
+		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R>
+	template<class U, class C>
+	void Bind<R (*)(), void>::bind(C& c, R (C::*member)(U),
+		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R>
+	template<class U, class C>
+	void Bind<R (*)(), void>::bind(const C* c, R (C::*member)(U) const,
+		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R>
+	template<class U, class C>
+	void Bind<R (*)(), void>::bind(const C& c, R (C::*member)(U) const,
+		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R>
+	inline void Bind<R (*)(), void>::bind(const Bind<R (*)(), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R>
+	inline void Bind<R (*)(), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R>
+	inline void Bind<R (*)(), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke();
+	}
+
+
+
+
+
+
+	template<class R>
+	inline R Bind<R (*)(), void>::invoke() const
+	{
+		return pHolder->invoke();
+	}
+
+
+	template<class R>
+	inline R Bind<R (*)(), void>::operator () () const
+	{
+		return pHolder->invoke();
+	}
+
+
+	template<class R>
+	inline R Bind<R (*)(), void>::emptyCallback()
+	{
+		return R();
+	}
+
+	template<class R>
+	inline void Bind<R (*)(), void>::emptyCallbackReturnsVoid()
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R>
+	inline Bind<R (*)(), void>& Bind<R (*)(), void>::operator = (R (*pointer)())
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R>
+	inline Bind<R (*)(), void>& Bind<R (*)(), void>::operator = (const Bind<R (*)(), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R>
+	inline Bind<R (*)(), void>& Bind<R (*)(), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R>
+	inline Bind<R (*)(), void>& Bind<R (*)(), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>::Bind(const Bind<R (ClassT::*)(), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R>
+	inline void Bind<R (ClassT::*)(), ClassT>::bind(R (*pointer)())
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R ()>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R>
+	template<class U>
+	inline void Bind<R (ClassT::*)(), ClassT>::bind(R (*pointer)(U),
+		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R>
+	template<class C>
+	void Bind<R (ClassT::*)(), ClassT>::bind(C* c, R (C::*member)())
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R()>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R>
+	template<class C>
+	void Bind<R (ClassT::*)(), ClassT>::bind(const C* c, R (C::*member)() const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)();
+			pHolder = new Private::BindImpl::BoundWithMember<C, R()>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)())
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(),
+		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const,
+		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R>
+	template<class C>
+	void Bind<R (ClassT::*)(), ClassT>::bind(C& c, R (C::*member)())
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R()>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R>
+	template<class C>
+	void Bind<R (ClassT::*)(), ClassT>::bind(const C& c, R (C::*member)() const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)();
+			pHolder = new Private::BindImpl::BoundWithMember<C, R()>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(), ClassT>::bind(C* c, R (C::*member)(U),
+		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(), ClassT>::bind(C& c, R (C::*member)(U),
+		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(), ClassT>::bind(const C* c, R (C::*member)(U) const,
+		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(), ClassT>::bind(const C& c, R (C::*member)(U) const,
+		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R>
+	inline void Bind<R (ClassT::*)(), ClassT>::bind(const Bind<R (ClassT::*)(), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R>
+	inline void Bind<R (ClassT::*)(), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R>
+	inline void Bind<R (ClassT::*)(), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke();
+	}
+
+
+
+
+
+
+	template<class ClassT, class R>
+	inline R Bind<R (ClassT::*)(), ClassT>::invoke() const
+	{
+		return pHolder->invoke();
+	}
+
+
+	template<class ClassT, class R>
+	inline R Bind<R (ClassT::*)(), ClassT>::operator () () const
+	{
+		return pHolder->invoke();
+	}
+
+
+	template<class ClassT, class R>
+	inline R Bind<R (ClassT::*)(), ClassT>::emptyCallback()
+	{
+		return R();
+	}
+
+	template<class ClassT, class R>
+	inline void Bind<R (ClassT::*)(), ClassT>::emptyCallbackReturnsVoid()
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>& Bind<R (ClassT::*)(), ClassT>::operator = (R (*pointer)())
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>& Bind<R (ClassT::*)(), ClassT>::operator = (const Bind<R (ClassT::*)(), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>& Bind<R (ClassT::*)(), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>& Bind<R (ClassT::*)(), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -362,28 +1082,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0>
-	inline Bind<R (A0)>::Bind()
+	inline Bind<R (A0), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0>
-	inline Bind<R (A0)>::Bind(const Bind<R (A0)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0), void>::Bind(const Bind<R (A0), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0>
-	inline Bind<R (A0)>::~Bind()
+	inline Bind<R (A0), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0>
-	inline void Bind<R (A0)>::bind(R (*pointer)(A0))
+	inline void Bind<R (A0), void>::bind(R (*pointer)(A0))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0)>(pointer);
 	}
@@ -392,8 +1112,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0>
 	template<class U>
-	inline void Bind<R (A0)>::bind(R (*pointer)(A0, U),
-		typename Bind<R (A0)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0), void>::bind(R (*pointer)(A0, U),
+		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, U)>(pointer, userdata);
@@ -404,7 +1124,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0>
 	template<class C>
-	void Bind<R (A0)>::bind(C* c, R (C::*member)(A0))
+	void Bind<R (A0), void>::bind(C* c, R (C::*member)(A0))
 	{
 		if (c)
 		{
@@ -421,7 +1141,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0>
 	template<class C>
-	void Bind<R (A0)>::bind(const C* c, R (C::*member)(A0) const)
+	void Bind<R (A0), void>::bind(const C* c, R (C::*member)(A0) const)
 	{
 		if (c)
 		{
@@ -443,7 +1163,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0))
+	Bind<R (A0), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -455,7 +1175,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const)
+	Bind<R (A0), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -467,8 +1187,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0),
-		typename Bind<R (A0)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0),
+		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -480,8 +1200,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const,
-		typename Bind<R (A0)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const,
+		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -493,7 +1213,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0>
 	template<class C>
-	void Bind<R (A0)>::bind(C& c, R (C::*member)(A0))
+	void Bind<R (A0), void>::bind(C& c, R (C::*member)(A0))
 	{
 		if (&c)
 		{
@@ -510,7 +1230,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0>
 	template<class C>
-	void Bind<R (A0)>::bind(const C& c, R (C::*member)(A0) const)
+	void Bind<R (A0), void>::bind(const C& c, R (C::*member)(A0) const)
 	{
 		if (&c)
 		{
@@ -531,8 +1251,8 @@ namespace Yuni
 
 	template<class R, class A0>
 	template<class U, class C>
-	void Bind<R (A0)>::bind(C* c, R (C::*member)(A0, U),
-		typename Bind<R (A0)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0), void>::bind(C* c, R (C::*member)(A0, U),
+		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -550,8 +1270,8 @@ namespace Yuni
 
 	template<class R, class A0>
 	template<class U, class C>
-	void Bind<R (A0)>::bind(C& c, R (C::*member)(A0, U),
-		typename Bind<R (A0)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0), void>::bind(C& c, R (C::*member)(A0, U),
+		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -570,8 +1290,8 @@ namespace Yuni
 
 	template<class R, class A0>
 	template<class U, class C>
-	void Bind<R (A0)>::bind(const C* c, R (C::*member)(A0, U) const,
-		typename Bind<R (A0)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0), void>::bind(const C* c, R (C::*member)(A0, U) const,
+		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -590,8 +1310,8 @@ namespace Yuni
 
 	template<class R, class A0>
 	template<class U, class C>
-	void Bind<R (A0)>::bind(const C& c, R (C::*member)(A0, U) const,
-		typename Bind<R (A0)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0), void>::bind(const C& c, R (C::*member)(A0, U) const,
+		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -609,7 +1329,7 @@ namespace Yuni
 
 
 	template<class R, class A0>
-	inline void Bind<R (A0)>::bind(const Bind<R (A0)>& rhs)
+	inline void Bind<R (A0), void>::bind(const Bind<R (A0), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -618,7 +1338,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0>
-	inline void Bind<R (A0)>::unbind()
+	inline void Bind<R (A0), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -626,37 +1346,47 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0>
-	inline void Bind<R (A0)>::clear()
+	inline void Bind<R (A0), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0));
+	}
+
+
+
 
 
 
 	template<class R, class A0>
-	inline R Bind<R (A0)>::invoke(A0 a0) const
+	inline R Bind<R (A0), void>::invoke(A0 a0) const
 	{
 		return pHolder->invoke(a0);
 	}
 
 
 	template<class R, class A0>
-	inline R Bind<R (A0)>::operator () (A0 a0) const
+	inline R Bind<R (A0), void>::operator () (A0 a0) const
 	{
 		return pHolder->invoke(a0);
 	}
 
 
 	template<class R, class A0>
-	inline R Bind<R (A0)>::emptyCallback(A0)
+	inline R Bind<R (A0), void>::emptyCallback(A0)
 	{
 		return R();
 	}
 
 	template<class R, class A0>
-	inline void Bind<R (A0)>::emptyCallbackReturnsVoid(A0)
+	inline void Bind<R (A0), void>::emptyCallbackReturnsVoid(A0)
 	{
 		/* Do nothing */
 	}
@@ -667,7 +1397,7 @@ namespace Yuni
 
 
 	template<class R, class A0>
-	inline Bind<R (A0)>& Bind<R (A0)>::operator = (R (*pointer)(A0))
+	inline Bind<R (A0), void>& Bind<R (A0), void>::operator = (R (*pointer)(A0))
 	{
 		bind(pointer);
 		return *this;
@@ -675,7 +1405,7 @@ namespace Yuni
 
 
 	template<class R, class A0>
-	inline Bind<R (A0)>& Bind<R (A0)>::operator = (const Bind<R (A0)>& rhs)
+	inline Bind<R (A0), void>& Bind<R (A0), void>::operator = (const Bind<R (A0), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -684,7 +1414,7 @@ namespace Yuni
 
 
 	template<class R, class A0>
-	inline Bind<R (A0)>& Bind<R (A0)>::operator = (const NullPtr*)
+	inline Bind<R (A0), void>& Bind<R (A0), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -693,7 +1423,717 @@ namespace Yuni
 
 
 	template<class R, class A0>
-	inline Bind<R (A0)>& Bind<R (A0)>::operator = (const NullPtr&)
+	inline Bind<R (A0), void>& Bind<R (A0), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0>
+	inline Bind<R (*)(A0), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0>
+	inline Bind<R (*)(A0), void>::Bind(const Bind<R (*)(A0), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0>
+	inline Bind<R (*)(A0), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0>
+	inline void Bind<R (*)(A0), void>::bind(R (*pointer)(A0))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0>
+	template<class U>
+	inline void Bind<R (*)(A0), void>::bind(R (*pointer)(A0, U),
+		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0>
+	template<class C>
+	void Bind<R (*)(A0), void>::bind(C* c, R (C::*member)(A0))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0>
+	template<class C>
+	void Bind<R (*)(A0), void>::bind(const C* c, R (C::*member)(A0) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0),
+		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const,
+		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0>
+	template<class C>
+	void Bind<R (*)(A0), void>::bind(C& c, R (C::*member)(A0))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0>
+	template<class C>
+	void Bind<R (*)(A0), void>::bind(const C& c, R (C::*member)(A0) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0>
+	template<class U, class C>
+	void Bind<R (*)(A0), void>::bind(C* c, R (C::*member)(A0, U),
+		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0>
+	template<class U, class C>
+	void Bind<R (*)(A0), void>::bind(C& c, R (C::*member)(A0, U),
+		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0>
+	template<class U, class C>
+	void Bind<R (*)(A0), void>::bind(const C* c, R (C::*member)(A0, U) const,
+		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0>
+	template<class U, class C>
+	void Bind<R (*)(A0), void>::bind(const C& c, R (C::*member)(A0, U) const,
+		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0>
+	inline void Bind<R (*)(A0), void>::bind(const Bind<R (*)(A0), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0>
+	inline void Bind<R (*)(A0), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0>
+	inline void Bind<R (*)(A0), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0));
+	}
+
+
+
+
+
+
+	template<class R, class A0>
+	inline R Bind<R (*)(A0), void>::invoke(A0 a0) const
+	{
+		return pHolder->invoke(a0);
+	}
+
+
+	template<class R, class A0>
+	inline R Bind<R (*)(A0), void>::operator () (A0 a0) const
+	{
+		return pHolder->invoke(a0);
+	}
+
+
+	template<class R, class A0>
+	inline R Bind<R (*)(A0), void>::emptyCallback(A0)
+	{
+		return R();
+	}
+
+	template<class R, class A0>
+	inline void Bind<R (*)(A0), void>::emptyCallbackReturnsVoid(A0)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0>
+	inline Bind<R (*)(A0), void>& Bind<R (*)(A0), void>::operator = (R (*pointer)(A0))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0>
+	inline Bind<R (*)(A0), void>& Bind<R (*)(A0), void>::operator = (const Bind<R (*)(A0), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0>
+	inline Bind<R (*)(A0), void>& Bind<R (*)(A0), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0>
+	inline Bind<R (*)(A0), void>& Bind<R (*)(A0), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(const Bind<R (ClassT::*)(A0), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0>
+	inline void Bind<R (ClassT::*)(A0), ClassT>::bind(R (*pointer)(A0))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0), ClassT>::bind(R (*pointer)(A0, U),
+		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0>
+	template<class C>
+	void Bind<R (ClassT::*)(A0), ClassT>::bind(C* c, R (C::*member)(A0))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0>
+	template<class C>
+	void Bind<R (ClassT::*)(A0), ClassT>::bind(const C* c, R (C::*member)(A0) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0),
+		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const,
+		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0>
+	template<class C>
+	void Bind<R (ClassT::*)(A0), ClassT>::bind(C& c, R (C::*member)(A0))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0>
+	template<class C>
+	void Bind<R (ClassT::*)(A0), ClassT>::bind(const C& c, R (C::*member)(A0) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0), ClassT>::bind(C* c, R (C::*member)(A0, U),
+		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0), ClassT>::bind(C& c, R (C::*member)(A0, U),
+		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0), ClassT>::bind(const C* c, R (C::*member)(A0, U) const,
+		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0), ClassT>::bind(const C& c, R (C::*member)(A0, U) const,
+		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0>
+	inline void Bind<R (ClassT::*)(A0), ClassT>::bind(const Bind<R (ClassT::*)(A0), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0>
+	inline void Bind<R (ClassT::*)(A0), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0>
+	inline void Bind<R (ClassT::*)(A0), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0>
+	inline R Bind<R (ClassT::*)(A0), ClassT>::invoke(A0 a0) const
+	{
+		return pHolder->invoke(a0);
+	}
+
+
+	template<class ClassT, class R, class A0>
+	inline R Bind<R (ClassT::*)(A0), ClassT>::operator () (A0 a0) const
+	{
+		return pHolder->invoke(a0);
+	}
+
+
+	template<class ClassT, class R, class A0>
+	inline R Bind<R (ClassT::*)(A0), ClassT>::emptyCallback(A0)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0>
+	inline void Bind<R (ClassT::*)(A0), ClassT>::emptyCallbackReturnsVoid(A0)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>& Bind<R (ClassT::*)(A0), ClassT>::operator = (R (*pointer)(A0))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>& Bind<R (ClassT::*)(A0), ClassT>::operator = (const Bind<R (ClassT::*)(A0), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>& Bind<R (ClassT::*)(A0), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>& Bind<R (ClassT::*)(A0), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -707,28 +2147,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1)>::Bind()
+	inline Bind<R (A0, A1), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1)>::Bind(const Bind<R (A0, A1)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1), void>::Bind(const Bind<R (A0, A1), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1)>::~Bind()
+	inline Bind<R (A0, A1), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1>
-	inline void Bind<R (A0, A1)>::bind(R (*pointer)(A0, A1))
+	inline void Bind<R (A0, A1), void>::bind(R (*pointer)(A0, A1))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1)>(pointer);
 	}
@@ -737,8 +2177,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1>
 	template<class U>
-	inline void Bind<R (A0, A1)>::bind(R (*pointer)(A0, A1, U),
-		typename Bind<R (A0, A1)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1), void>::bind(R (*pointer)(A0, A1, U),
+		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, U)>(pointer, userdata);
@@ -749,7 +2189,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1>
 	template<class C>
-	void Bind<R (A0, A1)>::bind(C* c, R (C::*member)(A0, A1))
+	void Bind<R (A0, A1), void>::bind(C* c, R (C::*member)(A0, A1))
 	{
 		if (c)
 		{
@@ -766,7 +2206,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1>
 	template<class C>
-	void Bind<R (A0, A1)>::bind(const C* c, R (C::*member)(A0, A1) const)
+	void Bind<R (A0, A1), void>::bind(const C* c, R (C::*member)(A0, A1) const)
 	{
 		if (c)
 		{
@@ -788,7 +2228,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1))
+	Bind<R (A0, A1), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -800,7 +2240,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const)
+	Bind<R (A0, A1), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -812,8 +2252,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1),
-		typename Bind<R (A0, A1)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1),
+		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -825,8 +2265,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const,
-		typename Bind<R (A0, A1)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const,
+		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -838,7 +2278,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1>
 	template<class C>
-	void Bind<R (A0, A1)>::bind(C& c, R (C::*member)(A0, A1))
+	void Bind<R (A0, A1), void>::bind(C& c, R (C::*member)(A0, A1))
 	{
 		if (&c)
 		{
@@ -855,7 +2295,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1>
 	template<class C>
-	void Bind<R (A0, A1)>::bind(const C& c, R (C::*member)(A0, A1) const)
+	void Bind<R (A0, A1), void>::bind(const C& c, R (C::*member)(A0, A1) const)
 	{
 		if (&c)
 		{
@@ -876,8 +2316,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1>
 	template<class U, class C>
-	void Bind<R (A0, A1)>::bind(C* c, R (C::*member)(A0, A1, U),
-		typename Bind<R (A0, A1)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1), void>::bind(C* c, R (C::*member)(A0, A1, U),
+		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -895,8 +2335,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1>
 	template<class U, class C>
-	void Bind<R (A0, A1)>::bind(C& c, R (C::*member)(A0, A1, U),
-		typename Bind<R (A0, A1)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1), void>::bind(C& c, R (C::*member)(A0, A1, U),
+		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -915,8 +2355,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1>
 	template<class U, class C>
-	void Bind<R (A0, A1)>::bind(const C* c, R (C::*member)(A0, A1, U) const,
-		typename Bind<R (A0, A1)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1), void>::bind(const C* c, R (C::*member)(A0, A1, U) const,
+		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -935,8 +2375,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1>
 	template<class U, class C>
-	void Bind<R (A0, A1)>::bind(const C& c, R (C::*member)(A0, A1, U) const,
-		typename Bind<R (A0, A1)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1), void>::bind(const C& c, R (C::*member)(A0, A1, U) const,
+		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -954,7 +2394,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1>
-	inline void Bind<R (A0, A1)>::bind(const Bind<R (A0, A1)>& rhs)
+	inline void Bind<R (A0, A1), void>::bind(const Bind<R (A0, A1), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -963,7 +2403,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1>
-	inline void Bind<R (A0, A1)>::unbind()
+	inline void Bind<R (A0, A1), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -971,37 +2411,48 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1>
-	inline void Bind<R (A0, A1)>::clear()
+	inline void Bind<R (A0, A1), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1>
-	inline R Bind<R (A0, A1)>::invoke(A0 a0, A1 a1) const
+	inline R Bind<R (A0, A1), void>::invoke(A0 a0, A1 a1) const
 	{
 		return pHolder->invoke(a0, a1);
 	}
 
 
 	template<class R, class A0, class A1>
-	inline R Bind<R (A0, A1)>::operator () (A0 a0, A1 a1) const
+	inline R Bind<R (A0, A1), void>::operator () (A0 a0, A1 a1) const
 	{
 		return pHolder->invoke(a0, a1);
 	}
 
 
 	template<class R, class A0, class A1>
-	inline R Bind<R (A0, A1)>::emptyCallback(A0, A1)
+	inline R Bind<R (A0, A1), void>::emptyCallback(A0, A1)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1>
-	inline void Bind<R (A0, A1)>::emptyCallbackReturnsVoid(A0, A1)
+	inline void Bind<R (A0, A1), void>::emptyCallbackReturnsVoid(A0, A1)
 	{
 		/* Do nothing */
 	}
@@ -1012,7 +2463,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1)>& Bind<R (A0, A1)>::operator = (R (*pointer)(A0, A1))
+	inline Bind<R (A0, A1), void>& Bind<R (A0, A1), void>::operator = (R (*pointer)(A0, A1))
 	{
 		bind(pointer);
 		return *this;
@@ -1020,7 +2471,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1)>& Bind<R (A0, A1)>::operator = (const Bind<R (A0, A1)>& rhs)
+	inline Bind<R (A0, A1), void>& Bind<R (A0, A1), void>::operator = (const Bind<R (A0, A1), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -1029,7 +2480,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1)>& Bind<R (A0, A1)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1), void>& Bind<R (A0, A1), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -1038,7 +2489,719 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1)>& Bind<R (A0, A1)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1), void>& Bind<R (A0, A1), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>::Bind(const Bind<R (*)(A0, A1), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1>
+	inline void Bind<R (*)(A0, A1), void>::bind(R (*pointer)(A0, A1))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1>
+	template<class U>
+	inline void Bind<R (*)(A0, A1), void>::bind(R (*pointer)(A0, A1, U),
+		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1>
+	template<class C>
+	void Bind<R (*)(A0, A1), void>::bind(C* c, R (C::*member)(A0, A1))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1>
+	template<class C>
+	void Bind<R (*)(A0, A1), void>::bind(const C* c, R (C::*member)(A0, A1) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1),
+		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const,
+		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1>
+	template<class C>
+	void Bind<R (*)(A0, A1), void>::bind(C& c, R (C::*member)(A0, A1))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1>
+	template<class C>
+	void Bind<R (*)(A0, A1), void>::bind(const C& c, R (C::*member)(A0, A1) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1), void>::bind(C* c, R (C::*member)(A0, A1, U),
+		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1), void>::bind(C& c, R (C::*member)(A0, A1, U),
+		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1), void>::bind(const C* c, R (C::*member)(A0, A1, U) const,
+		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1), void>::bind(const C& c, R (C::*member)(A0, A1, U) const,
+		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1>
+	inline void Bind<R (*)(A0, A1), void>::bind(const Bind<R (*)(A0, A1), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1>
+	inline void Bind<R (*)(A0, A1), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1>
+	inline void Bind<R (*)(A0, A1), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1>
+	inline R Bind<R (*)(A0, A1), void>::invoke(A0 a0, A1 a1) const
+	{
+		return pHolder->invoke(a0, a1);
+	}
+
+
+	template<class R, class A0, class A1>
+	inline R Bind<R (*)(A0, A1), void>::operator () (A0 a0, A1 a1) const
+	{
+		return pHolder->invoke(a0, a1);
+	}
+
+
+	template<class R, class A0, class A1>
+	inline R Bind<R (*)(A0, A1), void>::emptyCallback(A0, A1)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1>
+	inline void Bind<R (*)(A0, A1), void>::emptyCallbackReturnsVoid(A0, A1)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>& Bind<R (*)(A0, A1), void>::operator = (R (*pointer)(A0, A1))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>& Bind<R (*)(A0, A1), void>::operator = (const Bind<R (*)(A0, A1), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>& Bind<R (*)(A0, A1), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>& Bind<R (*)(A0, A1), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1>
+	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(R (*pointer)(A0, A1))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(R (*pointer)(A0, A1, U),
+		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(C* c, R (C::*member)(A0, A1))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const C* c, R (C::*member)(A0, A1) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1),
+		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const,
+		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(C& c, R (C::*member)(A0, A1))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const C& c, R (C::*member)(A0, A1) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(C* c, R (C::*member)(A0, A1, U),
+		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(C& c, R (C::*member)(A0, A1, U),
+		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const C* c, R (C::*member)(A0, A1, U) const,
+		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const C& c, R (C::*member)(A0, A1, U) const,
+		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1>
+	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1>
+	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline R Bind<R (ClassT::*)(A0, A1), ClassT>::invoke(A0 a0, A1 a1) const
+	{
+		return pHolder->invoke(a0, a1);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline R Bind<R (ClassT::*)(A0, A1), ClassT>::operator () (A0 a0, A1 a1) const
+	{
+		return pHolder->invoke(a0, a1);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline R Bind<R (ClassT::*)(A0, A1), ClassT>::emptyCallback(A0, A1)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1>
+	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::emptyCallbackReturnsVoid(A0, A1)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>& Bind<R (ClassT::*)(A0, A1), ClassT>::operator = (R (*pointer)(A0, A1))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>& Bind<R (ClassT::*)(A0, A1), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>& Bind<R (ClassT::*)(A0, A1), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>& Bind<R (ClassT::*)(A0, A1), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -1052,28 +3215,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2)>::Bind()
+	inline Bind<R (A0, A1, A2), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2)>::Bind(const Bind<R (A0, A1, A2)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2), void>::Bind(const Bind<R (A0, A1, A2), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2)>::~Bind()
+	inline Bind<R (A0, A1, A2), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2>
-	inline void Bind<R (A0, A1, A2)>::bind(R (*pointer)(A0, A1, A2))
+	inline void Bind<R (A0, A1, A2), void>::bind(R (*pointer)(A0, A1, A2))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2)>(pointer);
 	}
@@ -1082,8 +3245,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2>
 	template<class U>
-	inline void Bind<R (A0, A1, A2)>::bind(R (*pointer)(A0, A1, A2, U),
-		typename Bind<R (A0, A1, A2)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2), void>::bind(R (*pointer)(A0, A1, A2, U),
+		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, U)>(pointer, userdata);
@@ -1094,7 +3257,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2>
 	template<class C>
-	void Bind<R (A0, A1, A2)>::bind(C* c, R (C::*member)(A0, A1, A2))
+	void Bind<R (A0, A1, A2), void>::bind(C* c, R (C::*member)(A0, A1, A2))
 	{
 		if (c)
 		{
@@ -1111,7 +3274,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2>
 	template<class C>
-	void Bind<R (A0, A1, A2)>::bind(const C* c, R (C::*member)(A0, A1, A2) const)
+	void Bind<R (A0, A1, A2), void>::bind(const C* c, R (C::*member)(A0, A1, A2) const)
 	{
 		if (c)
 		{
@@ -1133,7 +3296,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2))
+	Bind<R (A0, A1, A2), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -1145,7 +3308,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const)
+	Bind<R (A0, A1, A2), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -1157,8 +3320,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2),
-		typename Bind<R (A0, A1, A2)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2),
+		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -1170,8 +3333,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const,
-		typename Bind<R (A0, A1, A2)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const,
+		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -1183,7 +3346,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2>
 	template<class C>
-	void Bind<R (A0, A1, A2)>::bind(C& c, R (C::*member)(A0, A1, A2))
+	void Bind<R (A0, A1, A2), void>::bind(C& c, R (C::*member)(A0, A1, A2))
 	{
 		if (&c)
 		{
@@ -1200,7 +3363,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2>
 	template<class C>
-	void Bind<R (A0, A1, A2)>::bind(const C& c, R (C::*member)(A0, A1, A2) const)
+	void Bind<R (A0, A1, A2), void>::bind(const C& c, R (C::*member)(A0, A1, A2) const)
 	{
 		if (&c)
 		{
@@ -1221,8 +3384,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2)>::bind(C* c, R (C::*member)(A0, A1, A2, U),
-		typename Bind<R (A0, A1, A2)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2), void>::bind(C* c, R (C::*member)(A0, A1, A2, U),
+		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -1240,8 +3403,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2)>::bind(C& c, R (C::*member)(A0, A1, A2, U),
-		typename Bind<R (A0, A1, A2)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2), void>::bind(C& c, R (C::*member)(A0, A1, A2, U),
+		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -1260,8 +3423,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2)>::bind(const C* c, R (C::*member)(A0, A1, A2, U) const,
-		typename Bind<R (A0, A1, A2)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2), void>::bind(const C* c, R (C::*member)(A0, A1, A2, U) const,
+		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -1280,8 +3443,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2)>::bind(const C& c, R (C::*member)(A0, A1, A2, U) const,
-		typename Bind<R (A0, A1, A2)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2), void>::bind(const C& c, R (C::*member)(A0, A1, A2, U) const,
+		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -1299,7 +3462,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2>
-	inline void Bind<R (A0, A1, A2)>::bind(const Bind<R (A0, A1, A2)>& rhs)
+	inline void Bind<R (A0, A1, A2), void>::bind(const Bind<R (A0, A1, A2), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -1308,7 +3471,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2>
-	inline void Bind<R (A0, A1, A2)>::unbind()
+	inline void Bind<R (A0, A1, A2), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -1316,37 +3479,48 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2>
-	inline void Bind<R (A0, A1, A2)>::clear()
+	inline void Bind<R (A0, A1, A2), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2>
-	inline R Bind<R (A0, A1, A2)>::invoke(A0 a0, A1 a1, A2 a2) const
+	inline R Bind<R (A0, A1, A2), void>::invoke(A0 a0, A1 a1, A2 a2) const
 	{
 		return pHolder->invoke(a0, a1, a2);
 	}
 
 
 	template<class R, class A0, class A1, class A2>
-	inline R Bind<R (A0, A1, A2)>::operator () (A0 a0, A1 a1, A2 a2) const
+	inline R Bind<R (A0, A1, A2), void>::operator () (A0 a0, A1 a1, A2 a2) const
 	{
 		return pHolder->invoke(a0, a1, a2);
 	}
 
 
 	template<class R, class A0, class A1, class A2>
-	inline R Bind<R (A0, A1, A2)>::emptyCallback(A0, A1, A2)
+	inline R Bind<R (A0, A1, A2), void>::emptyCallback(A0, A1, A2)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2>
-	inline void Bind<R (A0, A1, A2)>::emptyCallbackReturnsVoid(A0, A1, A2)
+	inline void Bind<R (A0, A1, A2), void>::emptyCallbackReturnsVoid(A0, A1, A2)
 	{
 		/* Do nothing */
 	}
@@ -1357,7 +3531,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2)>& Bind<R (A0, A1, A2)>::operator = (R (*pointer)(A0, A1, A2))
+	inline Bind<R (A0, A1, A2), void>& Bind<R (A0, A1, A2), void>::operator = (R (*pointer)(A0, A1, A2))
 	{
 		bind(pointer);
 		return *this;
@@ -1365,7 +3539,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2)>& Bind<R (A0, A1, A2)>::operator = (const Bind<R (A0, A1, A2)>& rhs)
+	inline Bind<R (A0, A1, A2), void>& Bind<R (A0, A1, A2), void>::operator = (const Bind<R (A0, A1, A2), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -1374,7 +3548,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2)>& Bind<R (A0, A1, A2)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2), void>& Bind<R (A0, A1, A2), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -1383,7 +3557,719 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2)>& Bind<R (A0, A1, A2)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2), void>& Bind<R (A0, A1, A2), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>::Bind(const Bind<R (*)(A0, A1, A2), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2>
+	inline void Bind<R (*)(A0, A1, A2), void>::bind(R (*pointer)(A0, A1, A2))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2), void>::bind(R (*pointer)(A0, A1, A2, U),
+		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2), void>::bind(C* c, R (C::*member)(A0, A1, A2))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2), void>::bind(const C* c, R (C::*member)(A0, A1, A2) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2),
+		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const,
+		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2), void>::bind(C& c, R (C::*member)(A0, A1, A2))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2), void>::bind(const C& c, R (C::*member)(A0, A1, A2) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2), void>::bind(C* c, R (C::*member)(A0, A1, A2, U),
+		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2), void>::bind(C& c, R (C::*member)(A0, A1, A2, U),
+		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2), void>::bind(const C* c, R (C::*member)(A0, A1, A2, U) const,
+		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2), void>::bind(const C& c, R (C::*member)(A0, A1, A2, U) const,
+		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline void Bind<R (*)(A0, A1, A2), void>::bind(const Bind<R (*)(A0, A1, A2), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2>
+	inline void Bind<R (*)(A0, A1, A2), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2>
+	inline void Bind<R (*)(A0, A1, A2), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2>
+	inline R Bind<R (*)(A0, A1, A2), void>::invoke(A0 a0, A1 a1, A2 a2) const
+	{
+		return pHolder->invoke(a0, a1, a2);
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline R Bind<R (*)(A0, A1, A2), void>::operator () (A0 a0, A1 a1, A2 a2) const
+	{
+		return pHolder->invoke(a0, a1, a2);
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline R Bind<R (*)(A0, A1, A2), void>::emptyCallback(A0, A1, A2)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2>
+	inline void Bind<R (*)(A0, A1, A2), void>::emptyCallbackReturnsVoid(A0, A1, A2)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>& Bind<R (*)(A0, A1, A2), void>::operator = (R (*pointer)(A0, A1, A2))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>& Bind<R (*)(A0, A1, A2), void>::operator = (const Bind<R (*)(A0, A1, A2), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>& Bind<R (*)(A0, A1, A2), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>& Bind<R (*)(A0, A1, A2), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(R (*pointer)(A0, A1, A2))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(R (*pointer)(A0, A1, A2, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2),
+		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline R Bind<R (ClassT::*)(A0, A1, A2), ClassT>::invoke(A0 a0, A1 a1, A2 a2) const
+	{
+		return pHolder->invoke(a0, a1, a2);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline R Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator () (A0 a0, A1 a1, A2 a2) const
+	{
+		return pHolder->invoke(a0, a1, a2);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline R Bind<R (ClassT::*)(A0, A1, A2), ClassT>::emptyCallback(A0, A1, A2)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>& Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator = (R (*pointer)(A0, A1, A2))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>& Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>& Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>& Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -1397,28 +4283,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3)>::Bind()
+	inline Bind<R (A0, A1, A2, A3), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3)>::Bind(const Bind<R (A0, A1, A2, A3)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3), void>::Bind(const Bind<R (A0, A1, A2, A3), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3>
-	inline void Bind<R (A0, A1, A2, A3)>::bind(R (*pointer)(A0, A1, A2, A3))
+	inline void Bind<R (A0, A1, A2, A3), void>::bind(R (*pointer)(A0, A1, A2, A3))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3)>(pointer);
 	}
@@ -1427,8 +4313,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3)>::bind(R (*pointer)(A0, A1, A2, A3, U),
-		typename Bind<R (A0, A1, A2, A3)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3), void>::bind(R (*pointer)(A0, A1, A2, A3, U),
+		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, U)>(pointer, userdata);
@@ -1439,7 +4325,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3)>::bind(C* c, R (C::*member)(A0, A1, A2, A3))
+	void Bind<R (A0, A1, A2, A3), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3))
 	{
 		if (c)
 		{
@@ -1456,7 +4342,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3) const)
+	void Bind<R (A0, A1, A2, A3), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3) const)
 	{
 		if (c)
 		{
@@ -1478,7 +4364,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3))
+	Bind<R (A0, A1, A2, A3), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -1490,7 +4376,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const)
+	Bind<R (A0, A1, A2, A3), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -1502,8 +4388,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3),
-		typename Bind<R (A0, A1, A2, A3)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3),
+		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -1515,8 +4401,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const,
-		typename Bind<R (A0, A1, A2, A3)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const,
+		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -1528,7 +4414,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3)>::bind(C& c, R (C::*member)(A0, A1, A2, A3))
+	void Bind<R (A0, A1, A2, A3), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3))
 	{
 		if (&c)
 		{
@@ -1545,7 +4431,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3) const)
+	void Bind<R (A0, A1, A2, A3), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3) const)
 	{
 		if (&c)
 		{
@@ -1566,8 +4452,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, U),
-		typename Bind<R (A0, A1, A2, A3)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, U),
+		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -1585,8 +4471,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, U),
-		typename Bind<R (A0, A1, A2, A3)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, U),
+		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -1605,8 +4491,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const,
-		typename Bind<R (A0, A1, A2, A3)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const,
+		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -1625,8 +4511,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const,
-		typename Bind<R (A0, A1, A2, A3)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const,
+		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -1644,7 +4530,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline void Bind<R (A0, A1, A2, A3)>::bind(const Bind<R (A0, A1, A2, A3)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3), void>::bind(const Bind<R (A0, A1, A2, A3), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -1653,7 +4539,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3>
-	inline void Bind<R (A0, A1, A2, A3)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -1661,37 +4547,49 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3>
-	inline void Bind<R (A0, A1, A2, A3)>::clear()
+	inline void Bind<R (A0, A1, A2, A3), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline R Bind<R (A0, A1, A2, A3)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
+	inline R Bind<R (A0, A1, A2, A3), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline R Bind<R (A0, A1, A2, A3)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3) const
+	inline R Bind<R (A0, A1, A2, A3), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline R Bind<R (A0, A1, A2, A3)>::emptyCallback(A0, A1, A2, A3)
+	inline R Bind<R (A0, A1, A2, A3), void>::emptyCallback(A0, A1, A2, A3)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline void Bind<R (A0, A1, A2, A3)>::emptyCallbackReturnsVoid(A0, A1, A2, A3)
+	inline void Bind<R (A0, A1, A2, A3), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3)
 	{
 		/* Do nothing */
 	}
@@ -1702,7 +4600,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3)>& Bind<R (A0, A1, A2, A3)>::operator = (R (*pointer)(A0, A1, A2, A3))
+	inline Bind<R (A0, A1, A2, A3), void>& Bind<R (A0, A1, A2, A3), void>::operator = (R (*pointer)(A0, A1, A2, A3))
 	{
 		bind(pointer);
 		return *this;
@@ -1710,7 +4608,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3)>& Bind<R (A0, A1, A2, A3)>::operator = (const Bind<R (A0, A1, A2, A3)>& rhs)
+	inline Bind<R (A0, A1, A2, A3), void>& Bind<R (A0, A1, A2, A3), void>::operator = (const Bind<R (A0, A1, A2, A3), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -1719,7 +4617,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3)>& Bind<R (A0, A1, A2, A3)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3), void>& Bind<R (A0, A1, A2, A3), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -1728,7 +4626,721 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3)>& Bind<R (A0, A1, A2, A3)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3), void>& Bind<R (A0, A1, A2, A3), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(const Bind<R (*)(A0, A1, A2, A3), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (*)(A0, A1, A2, A3), void>::bind(R (*pointer)(A0, A1, A2, A3))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3), void>::bind(R (*pointer)(A0, A1, A2, A3, U),
+		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3),
+		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const,
+		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, U),
+		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, U),
+		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (*)(A0, A1, A2, A3), void>::bind(const Bind<R (*)(A0, A1, A2, A3), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (*)(A0, A1, A2, A3), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (*)(A0, A1, A2, A3), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline R Bind<R (*)(A0, A1, A2, A3), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline R Bind<R (*)(A0, A1, A2, A3), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline R Bind<R (*)(A0, A1, A2, A3), void>::emptyCallback(A0, A1, A2, A3)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (*)(A0, A1, A2, A3), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>& Bind<R (*)(A0, A1, A2, A3), void>::operator = (R (*pointer)(A0, A1, A2, A3))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>& Bind<R (*)(A0, A1, A2, A3), void>::operator = (const Bind<R (*)(A0, A1, A2, A3), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>& Bind<R (*)(A0, A1, A2, A3), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>& Bind<R (*)(A0, A1, A2, A3), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(R (*pointer)(A0, A1, A2, A3))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::emptyCallback(A0, A1, A2, A3)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -1742,28 +5354,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4)>::Bind(const Bind<R (A0, A1, A2, A3, A4)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(const Bind<R (A0, A1, A2, A3, A4), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline void Bind<R (A0, A1, A2, A3, A4)>::bind(R (*pointer)(A0, A1, A2, A3, A4))
+	inline void Bind<R (A0, A1, A2, A3, A4), void>::bind(R (*pointer)(A0, A1, A2, A3, A4))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4)>(pointer);
 	}
@@ -1772,8 +5384,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4)>::bind(R (*pointer)(A0, A1, A2, A3, A4, U),
-		typename Bind<R (A0, A1, A2, A3, A4)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, U),
+		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, U)>(pointer, userdata);
@@ -1784,7 +5396,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4))
+	void Bind<R (A0, A1, A2, A3, A4), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4))
 	{
 		if (c)
 		{
@@ -1801,7 +5413,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const)
+	void Bind<R (A0, A1, A2, A3, A4), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const)
 	{
 		if (c)
 		{
@@ -1823,7 +5435,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4))
+	Bind<R (A0, A1, A2, A3, A4), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -1835,7 +5447,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const)
+	Bind<R (A0, A1, A2, A3, A4), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -1847,8 +5459,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4),
-		typename Bind<R (A0, A1, A2, A3, A4)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4),
+		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -1860,8 +5472,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const,
-		typename Bind<R (A0, A1, A2, A3, A4)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const,
+		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -1873,7 +5485,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4))
+	void Bind<R (A0, A1, A2, A3, A4), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4))
 	{
 		if (&c)
 		{
@@ -1890,7 +5502,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const)
+	void Bind<R (A0, A1, A2, A3, A4), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const)
 	{
 		if (&c)
 		{
@@ -1911,8 +5523,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U),
-		typename Bind<R (A0, A1, A2, A3, A4)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U),
+		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -1930,8 +5542,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U),
-		typename Bind<R (A0, A1, A2, A3, A4)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U),
+		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -1950,8 +5562,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -1970,8 +5582,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -1989,7 +5601,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline void Bind<R (A0, A1, A2, A3, A4)>::bind(const Bind<R (A0, A1, A2, A3, A4)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4), void>::bind(const Bind<R (A0, A1, A2, A3, A4), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -1998,7 +5610,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline void Bind<R (A0, A1, A2, A3, A4)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -2006,37 +5618,49 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline void Bind<R (A0, A1, A2, A3, A4)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline R Bind<R (A0, A1, A2, A3, A4)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+	inline R Bind<R (A0, A1, A2, A3, A4), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline R Bind<R (A0, A1, A2, A3, A4)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+	inline R Bind<R (A0, A1, A2, A3, A4), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline R Bind<R (A0, A1, A2, A3, A4)>::emptyCallback(A0, A1, A2, A3, A4)
+	inline R Bind<R (A0, A1, A2, A3, A4), void>::emptyCallback(A0, A1, A2, A3, A4)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline void Bind<R (A0, A1, A2, A3, A4)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4)
+	inline void Bind<R (A0, A1, A2, A3, A4), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4)
 	{
 		/* Do nothing */
 	}
@@ -2047,7 +5671,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4)>& Bind<R (A0, A1, A2, A3, A4)>::operator = (R (*pointer)(A0, A1, A2, A3, A4))
+	inline Bind<R (A0, A1, A2, A3, A4), void>& Bind<R (A0, A1, A2, A3, A4), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4))
 	{
 		bind(pointer);
 		return *this;
@@ -2055,7 +5679,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4)>& Bind<R (A0, A1, A2, A3, A4)>::operator = (const Bind<R (A0, A1, A2, A3, A4)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4), void>& Bind<R (A0, A1, A2, A3, A4), void>::operator = (const Bind<R (A0, A1, A2, A3, A4), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -2064,7 +5688,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4)>& Bind<R (A0, A1, A2, A3, A4)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4), void>& Bind<R (A0, A1, A2, A3, A4), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -2073,7 +5697,721 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4)>& Bind<R (A0, A1, A2, A3, A4)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4), void>& Bind<R (A0, A1, A2, A3, A4), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(R (*pointer)(A0, A1, A2, A3, A4))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4),
+		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4), void>::emptyCallback(A0, A1, A2, A3, A4)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>& Bind<R (*)(A0, A1, A2, A3, A4), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>& Bind<R (*)(A0, A1, A2, A3, A4), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>& Bind<R (*)(A0, A1, A2, A3, A4), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>& Bind<R (*)(A0, A1, A2, A3, A4), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::emptyCallback(A0, A1, A2, A3, A4)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -2087,28 +6425,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5)>(pointer);
 	}
@@ -2117,8 +6455,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, U)>(pointer, userdata);
@@ -2129,7 +6467,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5))
 	{
 		if (c)
 		{
@@ -2146,7 +6484,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
 	{
 		if (c)
 		{
@@ -2168,7 +6506,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -2180,7 +6518,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
+	Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -2192,8 +6530,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5),
-		typename Bind<R (A0, A1, A2, A3, A4, A5)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5),
+		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -2205,8 +6543,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -2218,7 +6556,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5))
 	{
 		if (&c)
 		{
@@ -2235,7 +6573,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
 	{
 		if (&c)
 		{
@@ -2256,8 +6594,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -2275,8 +6613,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -2295,8 +6633,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -2315,8 +6653,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -2334,7 +6672,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -2343,7 +6681,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -2351,37 +6689,50 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5)>::emptyCallback(A0, A1, A2, A3, A4, A5)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5), void>::emptyCallback(A0, A1, A2, A3, A4, A5)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5)
 	{
 		/* Do nothing */
 	}
@@ -2392,7 +6743,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5)>& Bind<R (A0, A1, A2, A3, A4, A5)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5))
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>& Bind<R (A0, A1, A2, A3, A4, A5), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5))
 	{
 		bind(pointer);
 		return *this;
@@ -2400,7 +6751,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5)>& Bind<R (A0, A1, A2, A3, A4, A5)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>& Bind<R (A0, A1, A2, A3, A4, A5), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -2409,7 +6760,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5)>& Bind<R (A0, A1, A2, A3, A4, A5)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>& Bind<R (A0, A1, A2, A3, A4, A5), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -2418,7 +6769,723 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5)>& Bind<R (A0, A1, A2, A3, A4, A5)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>& Bind<R (A0, A1, A2, A3, A4, A5), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::emptyCallback(A0, A1, A2, A3, A4, A5)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -2432,28 +7499,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6)>(pointer);
 	}
@@ -2462,8 +7529,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, U)>(pointer, userdata);
@@ -2474,7 +7541,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
 	{
 		if (c)
 		{
@@ -2491,7 +7558,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
 	{
 		if (c)
 		{
@@ -2513,7 +7580,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -2525,7 +7592,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -2537,8 +7604,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -2550,8 +7617,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -2563,7 +7630,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
 	{
 		if (&c)
 		{
@@ -2580,7 +7647,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
 	{
 		if (&c)
 		{
@@ -2601,8 +7668,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -2620,8 +7687,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -2640,8 +7707,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -2660,8 +7727,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -2679,7 +7746,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -2688,7 +7755,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -2696,37 +7763,50 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6)
 	{
 		/* Do nothing */
 	}
@@ -2737,7 +7817,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6)>& Bind<R (A0, A1, A2, A3, A4, A5, A6)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
 	{
 		bind(pointer);
 		return *this;
@@ -2745,7 +7825,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6)>& Bind<R (A0, A1, A2, A3, A4, A5, A6)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -2754,7 +7834,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6)>& Bind<R (A0, A1, A2, A3, A4, A5, A6)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -2763,7 +7843,723 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6)>& Bind<R (A0, A1, A2, A3, A4, A5, A6)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -2777,28 +8573,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7)>(pointer);
 	}
@@ -2807,8 +8603,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, U)>(pointer, userdata);
@@ -2819,7 +8615,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
 	{
 		if (c)
 		{
@@ -2836,7 +8632,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
 	{
 		if (c)
 		{
@@ -2858,7 +8654,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -2870,7 +8666,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -2882,8 +8678,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -2895,8 +8691,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -2908,7 +8704,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
 	{
 		if (&c)
 		{
@@ -2925,7 +8721,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
 	{
 		if (&c)
 		{
@@ -2946,8 +8742,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -2965,8 +8761,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -2985,8 +8781,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -3005,8 +8801,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -3024,7 +8820,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -3033,7 +8829,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -3041,37 +8837,51 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7)
 	{
 		/* Do nothing */
 	}
@@ -3082,7 +8892,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
 	{
 		bind(pointer);
 		return *this;
@@ -3090,7 +8900,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -3099,7 +8909,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -3108,7 +8918,725 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -3122,28 +9650,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(pointer);
 	}
@@ -3152,8 +9680,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>(pointer, userdata);
@@ -3164,7 +9692,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
 	{
 		if (c)
 		{
@@ -3181,7 +9709,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
 	{
 		if (c)
 		{
@@ -3203,7 +9731,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -3215,7 +9743,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -3227,8 +9755,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -3240,8 +9768,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -3253,7 +9781,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
 	{
 		if (&c)
 		{
@@ -3270,7 +9798,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
 	{
 		if (&c)
 		{
@@ -3291,8 +9819,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -3310,8 +9838,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -3330,8 +9858,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -3350,8 +9878,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -3369,7 +9897,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -3378,7 +9906,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -3386,37 +9914,51 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8)
 	{
 		/* Do nothing */
 	}
@@ -3427,7 +9969,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
 	{
 		bind(pointer);
 		return *this;
@@ -3435,7 +9977,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -3444,7 +9986,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -3453,7 +9995,725 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -3467,28 +10727,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(pointer);
 	}
@@ -3497,8 +10757,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>(pointer, userdata);
@@ -3509,7 +10769,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
 	{
 		if (c)
 		{
@@ -3526,7 +10786,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
 	{
 		if (c)
 		{
@@ -3548,7 +10808,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -3560,7 +10820,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -3572,8 +10832,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -3585,8 +10845,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -3598,7 +10858,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
 	{
 		if (&c)
 		{
@@ -3615,7 +10875,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
 	{
 		if (&c)
 		{
@@ -3636,8 +10896,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -3655,8 +10915,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -3675,8 +10935,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -3695,8 +10955,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -3714,7 +10974,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -3723,7 +10983,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -3731,37 +10991,52 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
 	{
 		/* Do nothing */
 	}
@@ -3772,7 +11047,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
 	{
 		bind(pointer);
 		return *this;
@@ -3780,7 +11055,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -3789,7 +11064,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -3798,7 +11073,727 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -3812,28 +11807,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(pointer);
 	}
@@ -3842,8 +11837,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>(pointer, userdata);
@@ -3854,7 +11849,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
 	{
 		if (c)
 		{
@@ -3871,7 +11866,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
 	{
 		if (c)
 		{
@@ -3893,7 +11888,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -3905,7 +11900,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -3917,8 +11912,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -3930,8 +11925,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -3943,7 +11938,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
 	{
 		if (&c)
 		{
@@ -3960,7 +11955,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
 	{
 		if (&c)
 		{
@@ -3981,8 +11976,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -4000,8 +11995,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -4020,8 +12015,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -4040,8 +12035,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -4059,7 +12054,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -4068,7 +12063,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -4076,37 +12071,52 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
 	{
 		/* Do nothing */
 	}
@@ -4117,7 +12127,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
 	{
 		bind(pointer);
 		return *this;
@@ -4125,7 +12135,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -4134,7 +12144,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -4143,7 +12153,727 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -4157,28 +12887,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(pointer);
 	}
@@ -4187,8 +12917,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>(pointer, userdata);
@@ -4199,7 +12929,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
 	{
 		if (c)
 		{
@@ -4216,7 +12946,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
 	{
 		if (c)
 		{
@@ -4238,7 +12968,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -4250,7 +12980,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -4262,8 +12992,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -4275,8 +13005,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -4288,7 +13018,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
 	{
 		if (&c)
 		{
@@ -4305,7 +13035,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
 	{
 		if (&c)
 		{
@@ -4326,8 +13056,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -4345,8 +13075,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -4365,8 +13095,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -4385,8 +13115,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -4404,7 +13134,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -4413,7 +13143,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -4421,37 +13151,53 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
 	{
 		/* Do nothing */
 	}
@@ -4462,7 +13208,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
 	{
 		bind(pointer);
 		return *this;
@@ -4470,7 +13216,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -4479,7 +13225,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -4488,7 +13234,729 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -4502,28 +13970,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(pointer);
 	}
@@ -4532,8 +14000,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>(pointer, userdata);
@@ -4544,7 +14012,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
 	{
 		if (c)
 		{
@@ -4561,7 +14029,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
 	{
 		if (c)
 		{
@@ -4583,7 +14051,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -4595,7 +14063,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -4607,8 +14075,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -4620,8 +14088,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -4633,7 +14101,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
 	{
 		if (&c)
 		{
@@ -4650,7 +14118,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
 	{
 		if (&c)
 		{
@@ -4671,8 +14139,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -4690,8 +14158,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -4710,8 +14178,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -4730,8 +14198,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -4749,7 +14217,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -4758,7 +14226,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -4766,37 +14234,53 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
 	{
 		/* Do nothing */
 	}
@@ -4807,7 +14291,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
 	{
 		bind(pointer);
 		return *this;
@@ -4815,7 +14299,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -4824,7 +14308,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -4833,7 +14317,729 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -4847,28 +15053,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(pointer);
 	}
@@ -4877,8 +15083,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>(pointer, userdata);
@@ -4889,7 +15095,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
 	{
 		if (c)
 		{
@@ -4906,7 +15112,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
 	{
 		if (c)
 		{
@@ -4928,7 +15134,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -4940,7 +15146,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -4952,8 +15158,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -4965,8 +15171,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -4978,7 +15184,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
 	{
 		if (&c)
 		{
@@ -4995,7 +15201,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
 	{
 		if (&c)
 		{
@@ -5016,8 +15222,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -5035,8 +15241,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -5055,8 +15261,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -5075,8 +15281,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -5094,7 +15300,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -5103,7 +15309,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -5111,37 +15317,54 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12), 
+				ArgGetterT<UserTypeT, A13>::Get(userdata, 13));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
 	{
 		/* Do nothing */
 	}
@@ -5152,7 +15375,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
 	{
 		bind(pointer);
 		return *this;
@@ -5160,7 +15383,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -5169,7 +15392,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -5178,7 +15401,731 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12), 
+				ArgGetterT<UserTypeT, A13>::Get(userdata, 13));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12), 
+				ArgGetterT<UserTypeT, A13>::Get(userdata, 13));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -5192,28 +16139,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(pointer);
 	}
@@ -5222,8 +16169,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>(pointer, userdata);
@@ -5234,7 +16181,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
 	{
 		if (c)
 		{
@@ -5251,7 +16198,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
 	{
 		if (c)
 		{
@@ -5273,7 +16220,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -5285,7 +16232,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -5297,8 +16244,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -5310,8 +16257,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -5323,7 +16270,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
 	{
 		if (&c)
 		{
@@ -5340,7 +16287,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
 	{
 		if (&c)
 		{
@@ -5361,8 +16308,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -5380,8 +16327,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -5400,8 +16347,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -5420,8 +16367,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -5439,7 +16386,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -5448,7 +16395,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -5456,37 +16403,54 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12), 
+				ArgGetterT<UserTypeT, A13>::Get(userdata, 13), ArgGetterT<UserTypeT, A14>::Get(userdata, 14));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
 	{
 		/* Do nothing */
 	}
@@ -5497,7 +16461,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
 	{
 		bind(pointer);
 		return *this;
@@ -5505,7 +16469,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -5514,7 +16478,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -5523,7 +16487,731 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12), 
+				ArgGetterT<UserTypeT, A13>::Get(userdata, 13), ArgGetterT<UserTypeT, A14>::Get(userdata, 14));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12), 
+				ArgGetterT<UserTypeT, A13>::Get(userdata, 13), ArgGetterT<UserTypeT, A14>::Get(userdata, 14));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -5537,28 +17225,28 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>& rhs)
-		:pHolder(rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
+		:pHolder(rhs.pHolder)
 	{}
 
 
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::~Bind()
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::~Bind()
 	{}
 
 
 	// Bind: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
 	{
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(pointer);
 	}
@@ -5567,8 +17255,8 @@ namespace Yuni
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::template WithUserData<U>::ParameterType userdata)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
 			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>(pointer, userdata);
@@ -5579,7 +17267,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
 	{
 		if (c)
 		{
@@ -5596,7 +17284,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
 	{
 		if (c)
 		{
@@ -5618,7 +17306,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -5630,7 +17318,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
 	}
@@ -5642,8 +17330,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -5655,8 +17343,8 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::template WithUserData<U>::ParameterType userdata)
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
 	}
@@ -5668,7 +17356,7 @@ namespace Yuni
 	// Bind: pointer-to-member
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
 	{
 		if (&c)
 		{
@@ -5685,7 +17373,7 @@ namespace Yuni
 	// Bind: pointer-to-member const
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
 	{
 		if (&c)
 		{
@@ -5706,8 +17394,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -5725,8 +17413,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -5745,8 +17433,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (c)
 		{
@@ -5765,8 +17453,8 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::template WithUserData<U>::ParameterType userdata)
+	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
+		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
 	{
 		if (&c)
 		{
@@ -5784,7 +17472,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>& rhs)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -5793,7 +17481,7 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::unbind()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::unbind()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
@@ -5801,37 +17489,55 @@ namespace Yuni
 
 	// Bind: unbind
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::clear()
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::clear()
 	{
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 	}
 
 
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12), 
+				ArgGetterT<UserTypeT, A13>::Get(userdata, 13), ArgGetterT<UserTypeT, A14>::Get(userdata, 14), 
+				ArgGetterT<UserTypeT, A15>::Get(userdata, 15));
+	}
+
+
+
 
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
 	{
 		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
 	}
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
+	inline R Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
 	{
 		return R();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
 	{
 		/* Do nothing */
 	}
@@ -5842,7 +17548,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
 	{
 		bind(pointer);
 		return *this;
@@ -5850,7 +17556,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
@@ -5859,7 +17565,7 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::operator = (const NullPtr*)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const NullPtr*)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
@@ -5868,7 +17574,733 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>::operator = (const NullPtr&)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C>
+	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
+		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12), 
+				ArgGetterT<UserTypeT, A13>::Get(userdata, 13), ArgGetterT<UserTypeT, A14>::Get(userdata, 14), 
+				ArgGetterT<UserTypeT, A15>::Get(userdata, 15));
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline R Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
+	{
+		return R();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const NullPtr&)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+
+
+
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& rhs)
+		:pHolder(rhs.pHolder)
+	{}
+
+
+
+	// Destructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::~Bind()
+	{}
+
+
+	// Bind: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(pointer);
+	}
+
+
+	// Bind: Pointer-to-function + user data
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		pHolder = new Private::BindImpl::BoundWithFunctionAndUserData
+			<typename WithUserData<U>::ParameterType, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>(pointer, userdata);
+	}
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline void
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
+	}
+
+
+
+
+
+	// Bind: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(&c, member);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	// Bind: pointer-to-member const
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
+				(c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
+				(&c, member, userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
+				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U, class C>
+	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
+		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
+	{
+		if (&c)
+		{
+			// The object is not null, go ahead
+			// Assigning a new bind
+			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U);
+			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
+				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
+				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
+		}
+		else
+			// The object is null, we should unbind
+			unbind();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::unbind()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	// Bind: unbind
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::clear()
+	{
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+	inline R
+	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
+	{
+		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
+				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
+				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
+				ArgGetterT<UserTypeT, A5>::Get(userdata, 5), ArgGetterT<UserTypeT, A6>::Get(userdata, 6), 
+				ArgGetterT<UserTypeT, A7>::Get(userdata, 7), ArgGetterT<UserTypeT, A8>::Get(userdata, 8), 
+				ArgGetterT<UserTypeT, A9>::Get(userdata, 9), ArgGetterT<UserTypeT, A10>::Get(userdata, 10), 
+				ArgGetterT<UserTypeT, A11>::Get(userdata, 11), ArgGetterT<UserTypeT, A12>::Get(userdata, 12), 
+				ArgGetterT<UserTypeT, A13>::Get(userdata, 13), ArgGetterT<UserTypeT, A14>::Get(userdata, 14), 
+				ArgGetterT<UserTypeT, A15>::Get(userdata, 15));
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const
+	{
+		return pHolder->invoke(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline R Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::emptyCallback(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
+	{
+		return R();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
+	{
+		/* Do nothing */
+	}
+
+
+
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& rhs)
+	{
+		// Inc the reference count
+		pHolder = rhs.pHolder;
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator = (const NullPtr*)
+	{
+		// equivalent to unbind
+		Private::BindImpl::Unbind<R, BindType>::Execute(this);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator = (const NullPtr&)
 	{
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);

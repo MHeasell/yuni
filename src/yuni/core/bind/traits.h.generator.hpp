@@ -12,7 +12,7 @@ namespace Yuni
 {
 
 	// Forward declaration
-	template<typename P> class Bind;
+	template<typename P, class Dummy> class Bind;
 
 
 } // namespace Yuni
@@ -172,6 +172,8 @@ namespace BindImpl
 	class IPointer<R(<%=generator.list(i)%>)>
 	{
 	public:
+		//! Destructor
+		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(<%=generator.variableList(i)%>) const = 0;
 	};
@@ -192,6 +194,9 @@ namespace BindImpl
 		:public IPointer<R (<%=generator.list(i)%>)>
 	{
 	public:
+		//! Destructor
+		virtual ~BoundWithFunction() {}
+
 		BoundWithFunction(R(*pointer)(<%=generator.list(i)%>))
 			:pPointer(pointer)
 		{}

@@ -92,7 +92,7 @@ namespace Yuni
 	**
 	** \tparam P The prototype of the targetted function/member
 	*/
-	template<typename P = void ()>
+	template<typename P = void (), class Dummy = void>
 	class Bind
 	{
 		// We must use one the specialization (see below)
@@ -101,7 +101,12 @@ namespace Yuni
 
 
 
-<% (0..generator.argumentCount).each do |i| %>
+<%
+(0..(generator.argumentCount)).each do |i|
+[ ["class R" + generator.templateParameterList(i), "R ("+generator.list(i) + ")", "void"],
+  ["class R" + generator.templateParameterList(i), "R (*)(" + generator.list(i) + ")", "void"],
+  ["class ClassT, class R" + generator.templateParameterList(i), "R (ClassT::*)(" + generator.list(i) + ")", "ClassT"] ].each do |tmpl|
+%>
 
 	/*!
 	** \brief Bind to a function/member with <%=generator.xArgumentsToStr(i)%> (Specialization)
@@ -111,12 +116,15 @@ namespace Yuni
 	** \tparam R The return Type
 <%= generator.templateParameterListDoxygen(i)%>
 	*/
-	template<class R<%=generator.templateParameterList(i) %>>
-	class Bind<R (<%=generator.list(i)%>)>
+	template<<%=tmpl[0]%>>
+	class Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>
 	{
 	public:
 		//! The Bind Type
-		typedef Bind<R(<%=generator.list(i)%>)> Type;
+		typedef Bind<<%=tmpl[1]%>, <%=tmpl[2]%>> Type;
+		//! The Bind Type
+		typedef Bind<<%=tmpl[1]%>, <%=tmpl[2]%>> BindType;
+
 <%=generator.include("yuni/core/bind/bind.h.generator.commonstypes.hpp", i) %>
 
 	public:
@@ -248,6 +256,18 @@ namespace Yuni
 		void clear();
 		//@}
 
+		
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+
+
 		//! \name Invoke
 		//@{
 		/*!
@@ -298,7 +318,7 @@ namespace Yuni
 
 
 
-<% end %>
+<% end end %>
 
 
 

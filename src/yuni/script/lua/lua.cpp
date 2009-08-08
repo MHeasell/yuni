@@ -1,12 +1,12 @@
 
 #include "lua.h"
-#include "../private/script/lua.proxy.h"
+#include "../../private/script/lua.proxy.h"
 #include <iostream>
 
 
 // Defines for call() and bind()
-#include "script.defines.h"
-#include "../private/script/script.defines.h"
+#include "../script.defines.h"
+#include "../../private/script/script.defines.h"
 
 
 namespace Yuni
@@ -19,7 +19,7 @@ namespace Script
 	Lua::Lua()
 		:pEvalPending(0)
 	{
-		this->pProxy = new Yuni::Private::Script::LuaProxy();
+		this->pProxy = new Private::ScriptImpl::LuaProxy();
 		this->pProxy->pState = luaL_newstate();
 		luaL_openlibs(this->pProxy->pState);
 	}
@@ -137,7 +137,7 @@ namespace Script
 	{
 		while (pEvalPending > 0)
 		{
-			pEvalPending--;
+			--pEvalPending;
 			if (lua_pcall(pProxy->pState, 0, 0, 0) != 0)
 			{
 				size_t len;
@@ -389,13 +389,6 @@ namespace Script
 #undef YUNI_SCRIPT_LUA_DEFINE_CALL_PART2
 
 
-	/*
-	 * TODO: write updated documentation
-	*
-	* The proxy will in turn extract parameters from the lua stack, and call the bound
-	* function.
-	*
-	*/
 
 	int Lua::callbackProxy(void* luaContext)
 	{
@@ -405,7 +398,8 @@ namespace Script
 
 		// Start by popping back from the lua stack our pointers.
 		Lua *This = static_cast<Lua *>(lua_touserdata(state, lua_upvalueindex(1)));
-		Private::Bind::IBinding *shell = static_cast<Private::Bind::IBinding *>(lua_touserdata(state, lua_upvalueindex(2)));
+		Private::ScriptImpl::Bind::IBinding *shell =
+			static_cast<Private::ScriptImpl::Bind::IBinding*>(lua_touserdata(state, lua_upvalueindex(2)));
 
 		// If we're in luck, we now have good pointers.
 
@@ -418,7 +412,7 @@ namespace Script
 	/*
 	 * @todo Temp
 	 */
-	void Lua::internalBindWL(const char *name, Private::Bind::IBinding *func)
+	bool Lua::internalBindWL(const char* name, Private::ScriptImpl::Bind::IBinding* func)
 	{
 		// Push on the stack pointers to us and to the bound function wrapper.
 		// The bound function wrapper will know what and how to call,
@@ -434,10 +428,12 @@ namespace Script
 		// Finally assign the closure to its name in the script context
 		lua_setfield(pProxy->pState, LUA_GLOBALSINDEX, name);
 
-		// What if we do not succeed ?
+		// TODO What if we do not succeed ?
+		return true;
 	}
 
-	void Lua::internalUnbindWL(const char *name)
+
+	void Lua::internalUnbindWL(const char* name)
 	{
 		// TODO: Implement this method.
 		std::cout << "Lua internal unbind WL was called for function [" << name << std::endl;
@@ -449,6 +445,6 @@ namespace Script
 } // namespace Script
 } // namespace Yuni
 
-#include "../private/script/script.undefs.h"
-#include "script.undefs.h"
+#include "../../private/script/script.undefs.h"
+#include "../script.undefs.h"
 

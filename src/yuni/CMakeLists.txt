@@ -35,6 +35,10 @@ IF(YUNI_MODULE_GFX3D)
 	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/gfx3d.cmake")
 ENDIF(YUNI_MODULE_GFX3D)
 
+IF(YUNI_MODULE_SCRIPT)
+	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/script.cmake")
+ENDIF(YUNI_MODULE_GFX3D)
+
 
 
 
@@ -59,45 +63,6 @@ If(YUNI_MODULE_NET)
 
 EndIf(YUNI_MODULE_NET)
 
-
-
-
-#
-# Module : Script
-#
-If(YUNI_MODULE_SCRIPT)
-
-	Message(STATUS "[Module] Script")
-
-	# Scripts
-	Set(SRC_SCRIPT
-				script.h
-				script/script.h script/script.hxx script/script.cpp
-				script/script.private.h script/script.private.hxx script/script.private.cpp
-				private/script/script.defines.h private/script/script.undefs.h
-		)
-	source_group("Script\\Script Abstraction" FILES ${SRC_SCRIPT})
-
-	# External Lib: Lua script
-	if(YUNI_EXTERNAL_SCRIPT_LUA)
-		Message(STATUS "[Module] Script::Lua")
-		# Headers for Lua
-		DEVPACK_IMPORT_LUA()
-		Set(SRC_EXTERNAL_SCRIPT_LUA
-				${YUNI_EXT_LUA_SRC}  # From DevPack 'lua'
-				script/lua.h script/lua.cpp script/script.args.lua.cpp
-				private/script/lua.proxy.h private/script/lua.proxy.cpp
-			)
-		source_group("Script\\Script Lua language support" FILES ${SRC_EXTERNAL_SCRIPT_LUA})
-
-	Endif(YUNI_EXTERNAL_SCRIPT_LUA)
-
-	Add_Library(yuni-static-script STATIC
-				${SRC_SCRIPT}
-				${SRC_EXTERNAL_SCRIPT_LUA}
-				)
-
-EndIf(YUNI_MODULE_SCRIPT)
 
 
 #
