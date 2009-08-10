@@ -2,8 +2,8 @@
 #include "factory.h"
 
 # ifdef YUNI_OS_MAC
-	// TODO: Write window creation for Cocoa. For the moment do nothing
-	//#	include "openglcocoa.h"
+	// TODO: Write window creation for Cocoa. For the moment it does nothing
+	#	include "openglcocoa.h"
 # else
 # 	ifdef YUNI_OS_WINDOWS
 #		include "openglmsw.h"
@@ -32,6 +32,10 @@ namespace Window
 # ifdef YUNI_WINDOWSYSTEM_X11
 		AWindow* wnd = new OpenGLX11(title, width, height, bits, fullScreen);
 # endif
+# ifdef YUNI_OS_MAC
+		AWindow* wnd = new OpenGLCocoa(title, width, height, bits, fullScreen);
+# endif
+
 		if (!wnd->initialize())
 		{
 			wnd->close();

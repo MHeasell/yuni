@@ -8,6 +8,7 @@ Set(SRC_GFX3D
 		gfx/window/opengl.h gfx/window/opengl.cpp
 		gfx/window/openglmsw.h
 		gfx/window/openglx11.h
+		gfx/window/openglcocoa.h
 		gfx/window/x11yuni.h
 		)
 
