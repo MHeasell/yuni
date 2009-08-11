@@ -256,7 +256,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -311,7 +311,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(<%=generator.list(i,'A')%>)>
 
