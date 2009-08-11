@@ -13,6 +13,7 @@
 #	include <stdio.h>
 #	include <stdlib.h>
 #	include <time.h>
+#	define __PRETTY_FUNCTION__ __FUNCDNAME__
 # endif
 
 

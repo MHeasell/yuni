@@ -32,7 +32,7 @@ do
 			shift;;
 		-p)
 			PHP_PATH="$2"
-			shift;	
+			shift;
 			shift;;
 
 		--)
