@@ -7,18 +7,22 @@ namespace Yuni
 {
 namespace Gfx3D
 {
+namespace Render
+{
+
 	/*!
 	** \brief OpenGL implementation of a renderer
 	**
 	** For the moment, this is a naive unoptimized implementation.
 	*/
-	class OpenGL
+	class OpenGL: public ARenderer
 	{
 	public:
-		void drawFrame(const Scene& scene);
+		void drawFrame(const Yuni::Gfx::Scene& scene);
 
 	}; // OpenGL
 
+} // Render
 } // Gfx3D
 } // Yuni
 

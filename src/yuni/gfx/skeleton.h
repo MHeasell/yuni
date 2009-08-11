@@ -44,7 +44,11 @@ namespace Gfx
 		**
 		** \return A smart pointer to the object's mesh, can point to NULL
 		*/
-		const Mesh::Ptr& mesh() {return pMesh;}
+		const Mesh::Ptr& mesh() const { return pMesh; }
+
+		Vector3D<float> position() const { return pPosition; }
+
+		Vector3D<float> rotation() const { return pRotation; }
 
 		//@}
 

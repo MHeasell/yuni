@@ -10,6 +10,8 @@ Set(SRC_GFX3D
 		gfx/window/openglx11.h
 		gfx/window/openglcocoa.h
 		gfx/window/x11yuni.h
+		gfx/render/renderer.h
+		gfx/render/opengl.h gfx/render/opengl.cpp
 		)
 
 IF(WIN32)

@@ -1,5 +1,6 @@
 
 #include <yuni/yuni.h>
+#include <yuni/application/gfx3d.h>
 #include <yuni/core/smartptr/smartptr.h>
 #include <yuni/gfx/object3D.h>
 
@@ -21,20 +22,30 @@ public:
 	{}
 };
 
-int main(void)
+class MyAppWithObjects: public Application::Gfx3D
 {
-	SmartPtr<Gfx::Mesh> mesh(new Gfx::Mesh());
-	SmartPtr<Gfx::Skeleton> skeleton(new Gfx::Skeleton(mesh, Gfx::Vector3D<float>(), Gfx::Vector3D<float>()));
-	SmartPtr<Gfx::ObjectModel> carModel(new Gfx::ObjectModel(skeleton));
-	// Use the same skeleton. This is a stupid test.
-	SmartPtr<Gfx::ObjectModel> wheelModel(new Gfx::ObjectModel(skeleton));
+public:
+	MyAppWithObjects(int argc, char* argv[])
+		:Application::Gfx3D(argc, argv)
+	{
+		SmartPtr<Gfx::Mesh> mesh(new Gfx::Mesh());
+		SmartPtr<Gfx::Skeleton> skeleton(new Gfx::Skeleton(mesh, Gfx::Vector3D<float>(), Gfx::Vector3D<float>()));
+		SmartPtr<Gfx::ObjectModel> carModel(new Gfx::ObjectModel(skeleton));
+		// Use the same skeleton. This is a stupid test.
+		SmartPtr<Gfx::ObjectModel> wheelModel(new Gfx::ObjectModel(skeleton));
 
-	Car* c = new Car("Titine", carModel);
+		Car* c = new Car("Titine", carModel);
 
-	c->append(new Wheel("LeftForwardWheel", wheelModel));
-	c->append(new Wheel("RightForwardWheel", wheelModel));
-	*c += new Wheel("LeftRearWheel", wheelModel);
-	*c << new Wheel("RightRearWheel", wheelModel);
+		c->append(new Wheel("LeftForwardWheel", wheelModel));
+		c->append(new Wheel("RightForwardWheel", wheelModel));
+		*c += new Wheel("LeftRearWheel", wheelModel);
+		*c << new Wheel("RightRearWheel", wheelModel);
+	}
+};
 
-	return 0;
+int main(int argc, char *argv[])
+{
+	MyAppWithObjects app(argc, argv);
+	app.execute();
+	return app.exitCode();
 }

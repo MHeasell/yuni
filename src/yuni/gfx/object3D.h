@@ -25,7 +25,7 @@ namespace Gfx
 	{
 	public:
 		//! Pointer
-		typedef Core::TreeN<Object3D>::Ptr Ptr;
+		typedef SmartPtr<Object3D> Ptr;
 		typedef uint64 ID;
 
 	public:

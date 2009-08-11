@@ -16,7 +16,9 @@ public:
 	// Our constructor
 	HelloWorld(int argc, char* argv[])
 		:Yuni::Application::Gfx3D(argc, argv)
-	{}
+	{
+		title("Yuni Sample: 3D graphics application");
+	}
 
 	virtual ~HelloWorld()
 	{}
