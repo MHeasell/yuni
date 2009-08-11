@@ -20,7 +20,7 @@ namespace Application
 	Gfx3D::Gfx3D(int argc, char* argv[])
 		:AApplication(argc, argv), device()
 	{
-		Gfx::Engine::Instance()->applicationTitle("Loading");
+		Gfx::Engine::Instance()->applicationTitle("Loading...");
 		atexit(&GracefullyStopTheEngine);
 	}
 

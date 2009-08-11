@@ -50,6 +50,9 @@ namespace Gfx
 			pObjects.clear();
 		}
 
+		//! Get the objects in the scene
+		const Objects& objects() const { return pObjects; }
+
 	protected:
 		/*!
 		** \brief Register a 3D object with the manager
@@ -57,6 +60,7 @@ namespace Gfx
 		** \param obj The object to register
 		*/
 		void registerObject(Object3D* obj);
+
 		//@}
 
 	private:

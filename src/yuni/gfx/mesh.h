@@ -25,7 +25,7 @@ namespace Gfx
 	public:
 		typedef SmartPtr<Mesh> Ptr;
 		//! Type for Triangle list
-		typedef std::vector<SmartPtr<Triangle> > TriangleList;
+		typedef std::vector<Triangle::Ptr> TriangleList;
 
 	public:
 		//! Main Constructor
@@ -40,7 +40,7 @@ namespace Gfx
 		**
 		** \param tri Triangle to add
 		*/
-		void addTriangle(const SmartPtr<Triangle>& tri) {pTriangles.push_back(tri);}
+		void addTriangle(const Triangle::Ptr& tri) {pTriangles.push_back(tri);}
 
 		/*!
 		** \brief Print the mesh

@@ -7,7 +7,7 @@
 # include "../core/event/event.proxy.h"
 # include "../threads/mutex.h"
 # include "../gfx/window/factory.h"
-
+# include "../gfx/render/renderer.h"
 
 namespace Yuni
 {
@@ -102,12 +102,15 @@ namespace Gfx
 		void applicationTitle(const String& t);
 		//@}
 
+		//! \name Scene
+		//@{
+		//! Get the main scene
+		Scene& scene() { return pMainScene; }
+		//@}
 
 	public:
 		//! Event: The FPS has changed
 		Event::Proxy::P1<void, int> onFPSChanged;
-
-	private:
 
 	private:
 		//! Mutex
@@ -120,6 +123,10 @@ namespace Gfx
 		String pTitle;
 		//! Main window
 		Yuni::Gfx3D::Window::AWindow* pMainWindow;
+		//! Main renderer
+		Yuni::Gfx3D::Render::ARenderer* pRenderer;
+		//! Main scene
+		Scene pMainScene;
 
 	}; // class Engine
 
