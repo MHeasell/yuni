@@ -3,6 +3,7 @@
 
 # include "../../yuni.h"
 # include "../scene.h"
+# include "fpscounter.h"
 
 namespace Yuni
 {
@@ -20,16 +21,40 @@ namespace Render
 	class ARenderer
 	{
 	public:
-		ARenderer() : pPaused(false)
+		/*!
+		** \brief Main constructor
+		**
+		** Initialize the FPS counter with a one-second interval
+		*/
+		ARenderer()	: pPaused(false)
+		{}
+		//! \brief Virtual destructor
+		virtual ~ARenderer()
 		{}
 
+		//! Render a frame
 		virtual void drawFrame(const Yuni::Gfx::Scene& scene) = 0;
+
+		//! Pause / Unpause rendering
 		virtual void pause(bool inPause) { pPaused = inPause; }
 
-	private:
-		bool pPaused;
+		//! Get the number of frames rendered in the last second
+		unsigned int instantFPS()
+		{
+			return pCounter.instantFPS();
+		}
 
-	}; // Renderer
+		//! Get the mean number of frames per second since start of rendering
+		unsigned int meanFPS()
+		{
+			return pCounter.meanFPS();
+		}
+
+	protected:
+		bool pPaused;
+		FPSCounter pCounter;
+
+	}; // ARenderer
 
 } // Render
 } // Gfx

@@ -29,7 +29,7 @@ public:
 		destroyingObserver();
 	}
 
-	void onFPSChanged(int fps)
+	void onFPSChanged(unsigned int fps)
 	{
 		// The FPS count has changed
 		// We will set the application title according to the new value

@@ -12,6 +12,11 @@ namespace Render
 
 	void OpenGL::drawFrame(const Yuni::Gfx::Scene& scene)
 	{
+		if (pPaused)
+			return;
+
+		pCounter.addFrames(1);
+
 		const Gfx::Scene::Objects& objects = scene.objects();
 		for (Gfx::Scene::Objects::const_iterator it = objects.begin();
 			it != objects.end(); ++it)

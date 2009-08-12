@@ -30,7 +30,7 @@ namespace Gfx
 
 	Engine::~Engine()
 	{
-		// All connected events to onFPSChanged are automatically disconnected on destroy
+		onFPSChanged.disconnectAll();
 		this->release();
 	}
 
@@ -49,8 +49,7 @@ namespace Gfx
 			// e.g. the resolution must be a valid resolution
 			pDevice->ensuresSettingsAreValid();
 
-			// Ask to the back-end engine to initialize itself
-			pDeviceIsInitialized = true;//external3DEngine.initialize(pDevice);
+			pDeviceIsInitialized = true;
 
 			// Lock further modifications to the informations about the device
 			pDevice->lock();
@@ -108,6 +107,11 @@ namespace Gfx
 				pMainWindow->pollEvents();
 
 				pRenderer->drawFrame(*Scene::Instance());
+				if (lastFPS != pRenderer->instantFPS())
+				{
+					lastFPS = pRenderer->instantFPS();
+					onFPSChanged(lastFPS);
+				}
 
 // 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
 // 				glLoadIdentity();					// Reset The View

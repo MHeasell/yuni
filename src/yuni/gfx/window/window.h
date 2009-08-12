@@ -96,7 +96,7 @@ namespace Window
 		virtual void onKeyPressed(unsigned char /* key */) {}
 		virtual void onKeyUp(unsigned char /* key */) {}
 
-		virtual void onFPSChanged(int /* FPS */) {}
+		virtual void onFPSChanged(unsigned int /* FPS */) {}
 		virtual void onTitleChanged() {}
 
 		//@}
