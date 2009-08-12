@@ -6,6 +6,10 @@
 
 using namespace Yuni;
 
+class CubeModel: public Gfx::ObjectModel
+{};
+
+
 class Wheel: public Gfx::Object3D
 {
 public:
@@ -13,6 +17,7 @@ public:
 		: Gfx::Object3D(name, model)
 	{}
 };
+
 
 class Car: public Gfx::Object3D
 {
@@ -22,17 +27,18 @@ public:
 	{}
 };
 
+
 class MyAppWithObjects: public Application::Gfx3D
 {
 public:
 	MyAppWithObjects(int argc, char* argv[])
 		:Application::Gfx3D(argc, argv)
 	{
-		SmartPtr<Gfx::Mesh> mesh(new Gfx::Mesh());
-		SmartPtr<Gfx::Skeleton> skeleton(new Gfx::Skeleton(mesh, Gfx::Vector3D<float>(), Gfx::Vector3D<float>()));
-		SmartPtr<Gfx::ObjectModel> carModel(new Gfx::ObjectModel(skeleton));
+		Gfx::Mesh::Ptr mesh(new Gfx::Mesh());
+		Gfx::Skeleton::Ptr skeleton(new Gfx::Skeleton(mesh, Gfx::Vector3D<float>(), Gfx::Vector3D<float>()));
+		Gfx::ObjectModel::Ptr carModel(new Gfx::ObjectModel(skeleton));
 		// Use the same skeleton. This is a stupid test.
-		SmartPtr<Gfx::ObjectModel> wheelModel(new Gfx::ObjectModel(skeleton));
+		Gfx::ObjectModel::Ptr wheelModel(new Gfx::ObjectModel(skeleton));
 
 		Car* c = new Car("Titine", carModel);
 
@@ -42,6 +48,7 @@ public:
 		*c << new Wheel("RightRearWheel", wheelModel);
 	}
 };
+
 
 int main(int argc, char *argv[])
 {

@@ -67,12 +67,22 @@ namespace Window
 		//@{
 
 		//! Title of the window
-		const String& title() { return pTitle; }
+		const String& title() const { return pTitle; }
 		void title(const String& newTitle)
 		{
 			pTitle = newTitle;
 			onTitleChanged();
 		}
+
+		//! Is vertical synchronization (VSync) currently active?
+		virtual bool verticalSync() const { return true; }
+		/*!
+		** \brief Activate / deactivate vertical synchronization (VSync)
+		**
+		** \param active New value for vertical sync, true for active, false for inactive.
+		** \return False if changing vertical sync failed. Yes, the stupid thing _can_ fail.
+		*/
+		virtual bool verticalSync(bool active) { return false; }
 
 		//@}
 

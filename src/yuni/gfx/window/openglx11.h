@@ -31,6 +31,11 @@ namespace Window
 		virtual void close();
 		virtual void blit();
 
+		//! Is vertical synchronization (VSync) active?
+		virtual bool verticalSync() const;
+		//! Activate / deactivate vertical synchronization (VSync)
+		virtual bool verticalSync(bool activate);
+
 	private:
 		//! Connection to a X11 Server through TCP or DECnet communications protocols
 		Display* pDisplay;
