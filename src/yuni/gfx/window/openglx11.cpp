@@ -100,6 +100,36 @@ namespace Window
 		glXSwapBuffers(pDisplay, pWindow);
 	}
 
+	bool OpenGLX11::verticalSync() const
+	{
+		typedef int (*SwapGetIntervalProto)();
+		SwapGetIntervalProto getSwapIntervalEXT = 0;
+
+		String extensions((const char*)glGetString(GL_EXTENSIONS));
+		if (extensions.find("GLX_MESA_swap_control") != String::npos)
+			getSwapIntervalEXT = (SwapGetIntervalProto)glXGetProcAddress((GLubyte*)"glXGetSwapIntervalMESA");;
+
+		if (getSwapIntervalEXT)
+			return getSwapIntervalEXT();
+		// From what I read, default is false when no extension is present.
+		return false;
+	}
+
+	bool OpenGLX11::verticalSync(bool active)
+	{
+		typedef int (*SwapIntervalProto)(int);
+		SwapIntervalProto swapIntervalEXT = 0;
+
+		String extensions((const char*)glGetString(GL_EXTENSIONS));
+		if (extensions.find("GLX_SGI_swap_control") != String::npos)
+			swapIntervalEXT = (SwapIntervalProto)glXGetProcAddress((GLubyte*)"glXSwapIntervalSGI");
+		else if (extensions.find("GLX_MESA_swap_control") != String::npos)
+			swapIntervalEXT = (SwapIntervalProto)glXGetProcAddress((GLubyte*)"glXSwapIntervalMESA");
+
+		if (swapIntervalEXT)
+			return swapIntervalEXT(active ? 1 : 0);
+		return false;
+	}
 
 
 } // namespace Window

@@ -95,6 +95,7 @@ namespace Gfx
 			// Window creation and GL init
 			pMainWindow = Yuni::Gfx3D::Window::Factory::CreateGLWindow(applicationTitle(), pDevice->resolution()->width(),
 				pDevice->resolution()->height(), pDevice->resolution()->bitPerPixel(), pDevice->fullscreen());
+			pMainWindow->verticalSync(false);
 			onFPSChanged.connect(pMainWindow, &Yuni::Gfx3D::Window::AWindow::onFPSChanged);
 
 			static unsigned int lastFPS = 0;

@@ -1,6 +1,8 @@
 
 #include "openglmsw.h"
 #include "factory.h"
+#include "../../private/gfx3d/gl/gl.h"
+#include "../../core/string.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
 
@@ -320,6 +322,35 @@ namespace Window
 		}
 
 		OpenGL::close();
+	}
+
+	bool OpenGLMSW::verticalSync() const
+	{
+		typedef BOOL (APIENTRY *SwapGetIntervalProto)();
+		SwapGetIntervalProto getSwapIntervalEXT = 0;
+
+		String extensions((const char*)glGetString(GL_EXTENSIONS));
+		if (extensions.find("WGL_EXT_swap_control") != String::npos)
+			getSwapIntervalEXT = (SwapGetIntervalProto)wglGetProcAddress("wglGetSwapIntervalEXT");;
+
+		if (getSwapIntervalEXT)
+			return getSwapIntervalEXT();
+		// From experience, default seems to be true under windows
+		return true;
+	}
+
+	bool OpenGLMSW::verticalSync(bool active)
+	{
+		typedef BOOL (APIENTRY *SwapIntervalProto)(int);
+		SwapIntervalProto swapIntervalEXT = 0;
+
+		String extensions((const char*)glGetString(GL_EXTENSIONS));
+		if (extensions.find("WGL_EXT_swap_control") != String::npos)
+			swapIntervalEXT = (SwapIntervalProto)wglGetProcAddress("wglSwapIntervalEXT");
+
+		if (swapIntervalEXT)
+			return swapIntervalEXT(active ? 1 : 0);
+		return false;
 	}
 
 	bool OpenGLMSW::pollEvents()
