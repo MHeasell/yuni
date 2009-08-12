@@ -110,7 +110,7 @@ namespace Gfx
 
 	public:
 		//! Event: The FPS has changed
-		Event::Proxy::P1<void, int> onFPSChanged;
+		Event::E1<void, unsigned int> onFPSChanged;
 
 	private:
 		//! Mutex

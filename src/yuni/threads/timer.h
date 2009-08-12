@@ -38,7 +38,7 @@ namespace Threads
 	** int main(void)
 	** {
 	**	 Timer timer;
-	**	 timer.timeInterval = 5; // 5 seconds
+	**	 timer.timeInterval(5000); // 5 seconds
 	**	 job2.wait();
 	**	 return 0;
 	** }
@@ -117,10 +117,10 @@ namespace Threads
 		/*!
 		** \brief Event: Execute a new cycle
 		**
-		** There is no really need to use suspend() in this method, it will be already
+		** There is no real need to use suspend() in this method, it will already be
 		** done for you.
 		**
-		** \param cycleCount The current cycle number. Always 0 in the case of an infinite timer
+		** \param cycleCount The current cycle number. 0 in the case of an infinite timer
 		** \return True to continue the execution of the timer, False otherwise
 		*/
 		virtual bool onExecute(const uint32 cycleCount) = 0;
