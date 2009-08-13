@@ -39,7 +39,7 @@ namespace Render
 		**
 		** Overridden from Yuni::Threads::Timer
 		*/
-		virtual bool onExecute(const uint32 cycleCount)
+		virtual bool onExecute(const uint32 /* cycleCount */)
 		{
 			pTotalFrameCount += pFrameCount;
 			pFPS = pFrameCount;

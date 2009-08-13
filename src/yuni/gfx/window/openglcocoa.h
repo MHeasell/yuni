@@ -24,7 +24,7 @@ namespace Window
 		virtual void blit() {}
 		// virtual bool pollEvents();
 
-		virtual void onTitleChanged();
+		virtual void onTitleChanged() {}
 
 	}; // class OpenGLCocoa
 
