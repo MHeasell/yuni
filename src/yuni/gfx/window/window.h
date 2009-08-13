@@ -82,7 +82,7 @@ namespace Window
 		** \param active New value for vertical sync, true for active, false for inactive.
 		** \return False if changing vertical sync failed. Yes, the stupid thing _can_ fail.
 		*/
-		virtual bool verticalSync(bool active) { return false; }
+		virtual bool verticalSync(bool /* active */) { return false; }
 
 		//@}
 
