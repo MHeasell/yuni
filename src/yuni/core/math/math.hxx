@@ -4,7 +4,7 @@
 # include <algorithm>
 
 
-#ifdef YUNI_OS_WINDOWS
+# ifdef YUNI_OS_MSVC
 /* Those functions are not available on Windows... */
 double rint(double nr);
 long double rintl(long double x);
@@ -15,7 +15,7 @@ long int lrintf(float x);
 long long int llrint(double x);
 long long int llrintl(long double x);
 long long int llrintf(float x);
-#endif
+# endif
 
 
 
@@ -375,7 +375,7 @@ namespace Math
 
 
 
-#ifdef YUNI_OS_WINDOWS
+# ifdef YUNI_OS_MSVC
 
 /* Those functions are not available on Windows... */
 
@@ -442,7 +442,7 @@ inline long long int llrintf(float nr)
 	return (((c -nr) >= (nr - f)) ? (long long int)f : (long long int)c);
 }
 
-#endif /* ifdef WINDOWS */
+# endif /* ifdef MSVC */
 
 
 #endif // __YUNI_CORE_MATH_MATH_HXX__
