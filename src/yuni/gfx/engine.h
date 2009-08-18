@@ -22,8 +22,14 @@ namespace Gfx
 	** Singleton class that manages the graphical display,
 	** and the various features that go with it.
 	*/
-	class Engine
+	class Engine : public Policy::ObjectLevelLockable<Engine>
 	{
+	public:
+		//! The Threading Policy
+		typedef Policy::ObjectLevelLockable<Engine> ThreadingPolicy;
+		//! The most suitable smartptr for the class
+		typedef SmartPtr<Engine> Ptr;
+
 	public:
 		/*!
 		** \brief Get the global instance of the engine
@@ -43,12 +49,10 @@ namespace Gfx
 
 		//! \name Information about the 3D Device
 		//@{
-
 		/*!
 		** \brief Get informations about the device currently being used
 		*/
-		SmartPtr<Device> device() const {return pDevice;}
-
+		Device::Ptr device() const {return pDevice;}
 		//@}
 
 		/*!
@@ -97,7 +101,7 @@ namespace Gfx
 		//! \name Application title
 		//@{
 		//! Get the application title
-		String applicationTitle();
+		String applicationTitle() const;
 		//! Set the application title
 		void applicationTitle(const String& t);
 		//@}
@@ -108,13 +112,13 @@ namespace Gfx
 		Scene& scene() { return pMainScene; }
 		//@}
 
+		bool isDeviceInitialized() const;
+
 	public:
 		//! Event: The FPS has changed
 		Event::E1<void, unsigned int> onFPSChanged;
 
 	private:
-		//! Mutex
-		Mutex pMutex;
 		//! If the device is initialized
 		bool pDeviceIsInitialized;
 		//! Information about the device

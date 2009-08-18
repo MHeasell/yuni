@@ -38,7 +38,7 @@ namespace Gfx
 	bool Engine::reset(const SmartPtr<Device>& dc)
 	{
 		// Lock
-		MutexLocker locker(pMutex);
+		ThreadingPolicy::MutexLocker locker(*this);
 
 		// There is nothing to do if the device is null
 		if (NULL != dc)
@@ -85,83 +85,83 @@ namespace Gfx
 	}
 
 
+	bool Engine::isDeviceInitialized() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pDeviceIsInitialized;
+	}
+
+
 	void Engine::run()
 	{
-		pMutex.lock();
-		if (pDeviceIsInitialized)
-		{
-			pMutex.unlock();
-
-			// Window creation and API init
-# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
+		if (!isDeviceInitialized())
+			return;
+		
+		// Window creation and API init
+		# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
 			pMainWindow = Window::Factory::CreateDX9Window(applicationTitle(), pDevice->resolution()->width(),
 				pDevice->resolution()->height(), pDevice->resolution()->bitPerPixel(), pDevice->fullscreen());
-# else
+		# else
 			pMainWindow = Window::Factory::CreateGLWindow(applicationTitle(), pDevice->resolution()->width(),
 				pDevice->resolution()->height(), pDevice->resolution()->bitPerPixel(), pDevice->fullscreen());
-# endif
+		# endif
 			
-			pMainWindow->verticalSync(false);
-			onFPSChanged.connect(pMainWindow, &Window::AWindow::onFPSChanged);
+		pMainWindow->verticalSync(false);
+		onFPSChanged.connect(pMainWindow, &Window::AWindow::onFPSChanged);
 
-			static unsigned int lastFPS = 0;
-			pRenderer = new Render::OpenGL();
+		unsigned int lastFPS = 0;
+		pRenderer = new Render::OpenGL();
 
-			// Main loop
-			while (!pMainWindow->closing())
+		// Main loop
+		while (!pMainWindow->closing())
+		{
+			// Manage events on the window
+			pMainWindow->pollEvents();
+
+			pRenderer->drawFrame(*Scene::Instance());
+			if (lastFPS != pRenderer->instantFPS())
 			{
-				// Manage events on the window
-				pMainWindow->pollEvents();
-
-				pRenderer->drawFrame(*Scene::Instance());
-				if (lastFPS != pRenderer->instantFPS())
-				{
-					lastFPS = pRenderer->instantFPS();
-					onFPSChanged(lastFPS);
-				}
-
-				// Push the backbuffer to screen
-				pMainWindow->blit();
+				lastFPS = pRenderer->instantFPS();
+				onFPSChanged(lastFPS);
 			}
-			pMainWindow->close();
-			delete pMainWindow;
-			pMainWindow = NULL;
-			delete pRenderer;
-			pRenderer = NULL;
+
+			// Push the backbuffer to screen
+			pMainWindow->blit();
 		}
-		pMutex.unlock();
+		pMainWindow->close();
+		delete pMainWindow;
+		pMainWindow = NULL;
+		delete pRenderer;
+		pRenderer = NULL;
 	}
 
 
 	void Engine::release()
 	{
-		pMutex.lock();
-		if (pDeviceIsInitialized)
-		{
-			pDeviceIsInitialized = false;
-		}
-		pMutex.unlock();
+		ThreadingPolicy::MutexLocker locker(*this);
+		pDeviceIsInitialized = false;
 	}
 
 
 	void Engine::applicationTitle(const String& t)
 	{
+		ThreadingPolicy::MutexLocker locker(*this);
 		pTitle = t;
 		if (NULL != pMainWindow)
 			pMainWindow->title(pTitle);
 	}
 
 
-	String Engine::applicationTitle()
+	String Engine::applicationTitle() const
 	{
+		ThreadingPolicy::MutexLocker locker(*this);
 		return pTitle;
 	}
 
 
 	bool Engine::toggleFullscreen()
 	{
-		// Lock
-		MutexLocker locker(pMutex);
+		ThreadingPolicy::MutexLocker locker(*this);
 		// Toggle the flag for the fullscreen mode
 		const bool f = pDevice->toggleFullscreen();
 		// Reset the device
