@@ -38,14 +38,16 @@ IF (WIN32)
 			"$ENV{PROGRAMFILES}/Microsoft DirectX SDK/Lib/x86"
 		DOC "The directory where d3dx9.lib resides")
 
-	SET(DX9_LIBRARIES ${D3D9_LIBRARY} ${D3DX9_LIBRARY})
+	SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw.cpp gfx/window/openglmsw.cpp)
 
-	Set(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw.cpp gfx/window/openglmsw.cpp)
+	IF(D3D9_LIBRARY AND D3DX9_LIBRARY)
+		SET(DX9_LIBRARIES "${D3D9_LIBRARY}" "${D3DX9_LIBRARY}")
 
-	IF(DX9_INCLUDE_PATH)
-		ADD_DEFINITIONS("-DYUNI_USE_DIRECTX")
-		Set(SRC_GFX3D ${SRC_GFX3D} gfx/window/directxmsw.cpp)
-	ENDIF(DX9_INCLUDE_PATH)
+		IF(DX9_INCLUDE_PATH)
+			ADD_DEFINITIONS("-DYUNI_USE_DIRECTX")
+			SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/directxmsw.cpp)
+		ENDIF(DX9_INCLUDE_PATH)
+	ENDIF(D3D9_LIBRARY AND D3DX9_LIBRARY)
 
 ELSE(WIN32)
 	IF(APPLE)
