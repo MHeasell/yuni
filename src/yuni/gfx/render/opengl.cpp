@@ -1,11 +1,11 @@
 
 # include <algorithm>
-# include "../../private/gfx3d/gl/gl.h"
+# include "../api/gl.h"
 # include "opengl.h"
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Render
 {

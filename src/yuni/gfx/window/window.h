@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX3D_WINDOW_WINDOW__
-# define __YUNI_GFX3D_WINDOW_WINDOW__
+#ifndef __YUNI_GFX_WINDOW_WINDOW__
+# define __YUNI_GFX_WINDOW_WINDOW__
 
 # include "../../yuni.h"
 # include "../../core/string.h"
@@ -8,7 +8,7 @@
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Window
 {
@@ -23,7 +23,7 @@ namespace Window
 		AWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
 			:pTitle(title), pWidth(width), pHeight(height), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false)
 		{}
-		virtual ~AWindow() {}
+		virtual ~AWindow() { destroyingObserver(); }
 
 		/*!
 		** \brief Init the window
@@ -125,7 +125,7 @@ namespace Window
 
 
 } // namespace Window
-} // namespace Gfx3D
+} // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX3D_WINDOW_WINDOW__
+#endif // __YUNI_GFX_WINDOW_WINDOW__

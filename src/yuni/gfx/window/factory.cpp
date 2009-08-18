@@ -7,6 +7,7 @@
 # else
 # 	ifdef YUNI_OS_WINDOWS
 #		include "openglmsw.h"
+#		include "directxmsw.h"
 #   else
 #		ifdef YUNI_OS_UNIX
 #			include "openglx11.h"
@@ -18,7 +19,7 @@
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Window
 {
@@ -45,7 +46,21 @@ namespace Window
 		return wnd;
 	}
 
+# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
+	AWindow* Factory::CreateDX9Window(const String& title, unsigned int width,
+		unsigned int height, unsigned int bits, bool fullScreen)
+	{
+		AWindow* wnd = new DirectXMSW(title, width, height, bits, fullScreen);
+		if (!wnd->initialize())
+		{
+			wnd->close();
+			delete wnd;
+			return NULL;
+		}
+		return wnd;
+	}
+# endif
 
 } // Window
-} // Gfx3D
+} // Gfx
 } // Yuni

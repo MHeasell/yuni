@@ -1,12 +1,12 @@
-#ifndef __YUNI_GFX3D_RENDER_FPSCOUNTER_H__
-# define __YUNI_GFX3D_RENDER_FPSCOUNTER_H__
+#ifndef __YUNI_GFX_RENDER_FPSCOUNTER_H__
+# define __YUNI_GFX_RENDER_FPSCOUNTER_H__
 
 # include "../../yuni.h"
 # include "../../threads/timer.h"
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Render
 {
@@ -75,4 +75,4 @@ namespace Render
 } // Gfx
 } // Yuni
 
-#endif // __YUNI_GFX3D_RENDER_FPSCOUNTER_H__
+#endif // __YUNI_GFX_RENDER_FPSCOUNTER_H__

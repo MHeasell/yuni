@@ -1,11 +1,11 @@
-#ifndef __YUNI_GFX3D_WINDOW_FACTORY__
-# define __YUNI_GFX3D_WINDOW_FACTORY__
+#ifndef __YUNI_GFX_WINDOW_FACTORY__
+# define __YUNI_GFX_WINDOW_FACTORY__
 
 # include "window.h"
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Window
 {
@@ -19,6 +19,11 @@ namespace Window
 	public:
 		static AWindow* CreateGLWindow(const String& title, unsigned int width, unsigned int height,
 			unsigned int bitDepth, bool fullScreen);
+# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
+		static AWindow* CreateDX9Window(const String& title, unsigned int width, unsigned int height,
+			unsigned int bits, bool fullScreen);
+# endif
+
 
 	private:
 		Factory() {}
@@ -32,4 +37,4 @@ namespace Window
 } // namespace Gfx3D
 } // namespace Yuni
 
-#endif // __YUNI_GFX3D_WINDOW_FACTORY__
+#endif // __YUNI_GFX_WINDOW_FACTORY__

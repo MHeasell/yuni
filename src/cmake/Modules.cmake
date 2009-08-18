@@ -15,7 +15,6 @@ Set(YUNI_MODULE_DEVICES                   FALSE)
 
 # Gfx3D
 Set(YUNI_MODULE_GFX3D                     FALSE)
-	Set(YUNI_INTERNAL_3D                  TRUE)
 
 # Scripts
 Set(YUNI_MODULE_SCRIPT                    FALSE)
@@ -160,13 +159,11 @@ IF(MODULES)
 		If("${it}" STREQUAL "gfx3d")
 			Set(KeywordIsKnown TRUE)
 			Set(YUNI_MODULE_GFX3D TRUE)
-			Set(YUNI_INTERNAL_3D TRUE)
 		EndIf("${it}" STREQUAL "gfx3d")
 		# -gfx3d
 		If("${it}" STREQUAL "-gfx3d")
 			Set(KeywordIsKnown TRUE)
 			Set(YUNI_MODULE_GFX3D FALSE)
-			Set(YUNI_INTERNAL_3D FALSE)
 		EndIf("${it}" STREQUAL "-gfx3d")
 
 
@@ -312,15 +309,11 @@ IF(MODULES)
 ENDIF(MODULES)
 
 
-IF(YUNI_MODULE_GFX3D)
-	SET(YUNI_INTERNAL_3D TRUE)
-ELSE(YUNI_MODULE_GFX3D)
-
-	IF(NOT YUNI_MODULE_UI_3D)
+IF(NOT YUNI_MODULE_GFX3D)
+	IF(YUNI_MODULE_UI_3D)
 		Message(STATUS "[!!] Warning: The Gfx3D module is disabled. The module `ui3d` can not be enabled.")
 		Set(YUNI_MODULE_UI_3D FALSE)
 	ENDIF(NOT YUNI_MODULE_UI_3D)
-
 ENDIF(YUNI_MODULE_GFX3D)
 
 IF(YUNI_MODULE_GFX3D AND NOT YUNI_MODULE_DEVICE_DISPLAY)

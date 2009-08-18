@@ -1,11 +1,11 @@
-#ifndef __YUNI_GFX3D_RENDER_OPENGL_H__
-# define __YUNI_GFX3D_RENDER_OPENGL_H__
+#ifndef __YUNI_GFX_RENDER_OPENGL_H__
+# define __YUNI_GFX_RENDER_OPENGL_H__
 
 # include "renderer.h"
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Render
 {
@@ -23,7 +23,7 @@ namespace Render
 	}; // OpenGL
 
 } // Render
-} // Gfx3D
+} // Gfx
 } // Yuni
 
-#endif // __YUNI_GFX3D_RENDER_OPENGL_H__
+#endif // __YUNI_GFX_RENDER_OPENGL_H__
