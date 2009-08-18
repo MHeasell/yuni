@@ -8,7 +8,7 @@
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Window
 {
@@ -61,7 +61,7 @@ namespace Window
 			return false;
 		}
 		resize(pWidth, pHeight);
-		if (!OpenGL::initialize())
+		if (!AOpenGL::initialize())
 		{
 			std::cout << "GL initialization failed" << std::endl;
 			return false;
@@ -90,7 +90,7 @@ namespace Window
 		XCloseDisplay(pDisplay);
 		pDisplay = NULL;
 
-		OpenGL::close();
+		AOpenGL::release();
 	}
 
 	void OpenGLX11::blit()
@@ -107,7 +107,7 @@ namespace Window
 
 		String extensions((const char*)glGetString(GL_EXTENSIONS));
 		if (extensions.find("GLX_MESA_swap_control") != String::npos)
-			getSwapIntervalEXT = (SwapGetIntervalProto)glXGetProcAddress((GLubyte*)"glXGetSwapIntervalMESA");;
+			getSwapIntervalEXT = (SwapGetIntervalProto)glXGetProcAddress((GLubyte*)"glXGetSwapIntervalMESA");
 
 		if (getSwapIntervalEXT)
 			return getSwapIntervalEXT();
@@ -133,7 +133,7 @@ namespace Window
 
 
 } // namespace Window
-} // namespace Gfx3D
+} // namespace Gfx
 } // namespace Yuni
 
 #endif // YUNI_WINDOWSYSTEM_X11

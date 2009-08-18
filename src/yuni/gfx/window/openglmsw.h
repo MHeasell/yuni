@@ -5,38 +5,37 @@
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
 #	include "../../core/system/windows.hdr.h"
+#	include "msw.h"
 #	include "opengl.h"
 
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Window
 {
 
-	class OpenGLMSW: public OpenGL
+	class OpenGLMSW: public AMSWindows, public AOpenGL
 	{
 	public:
 		OpenGLMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:OpenGL(title, width, height, bitDepth, fullScreen)
-		{}
+			:AMSWindows(title, width, height, bitDepth, fullScreen)
+		{
+			pWindowClassName = "OpenGL";
+		}
 
 		virtual bool initialize();
 		virtual void close();
 		virtual void blit() { SwapBuffers(pHDC); }
+		virtual void resize(unsigned int width, unsigned int height);
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;
 		//! Activate / deactivate vertical synchronization (VSync)
 		virtual bool verticalSync(bool activate);
 
-		virtual bool pollEvents();
-		virtual void onTitleChanged();
-
 	private:
-		HINSTANCE pHInstance;
-		HWND pHWnd;
 		HDC pHDC;
 		HGLRC pHRC;
 
@@ -46,7 +45,7 @@ namespace Window
 
 
 } // namespace Window
-} // namespace Gfx3D
+} // namespace Gfx
 } // namespace Yuni
 
 

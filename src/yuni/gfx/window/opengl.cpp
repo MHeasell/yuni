@@ -1,15 +1,15 @@
 
-#include "../../private/gfx3d/gl/gl.h"
+#include "../api/gl.h"
 #include "opengl.h"
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Window
 {
 
-	bool OpenGL::initialize()
+	bool AOpenGL::initialize()
 	{
 		// Enable Smooth Shading
 		glShadeModel(GL_SMOOTH);
@@ -26,11 +26,7 @@ namespace Window
 		return true;
 	}
 
-	void OpenGL::close()
-	{
-	}
-
-	void OpenGL::resize(unsigned int width, unsigned int height)
+	void AOpenGL::resize(unsigned int width, unsigned int height)
 	{
 		// Prevent A Divide By Zero
 		if (0 == height)
@@ -51,10 +47,8 @@ namespace Window
 		glMatrixMode(GL_MODELVIEW);
 		// Reset the Modelview Matrix
 		glLoadIdentity();
-
-		AWindow::resize(width, height);
 	}
 
 } // Window
-} // Gfx3D
+} // Gfx
 } // Yuni

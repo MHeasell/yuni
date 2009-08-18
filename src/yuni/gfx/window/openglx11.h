@@ -11,7 +11,7 @@
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Window
 {
@@ -20,16 +20,20 @@ namespace Window
 	/*!
 	** \brief Specialized window implementation for GLX (OpenGL-X11)
 	*/
-	class OpenGLX11: public Yuni::Gfx3D::Window::OpenGL
+	class OpenGLX11: public AWindow, public AOpenGL
 	{
 	public:
 		OpenGLX11(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:OpenGL(title, width, height, bitDepth, fullScreen)
+			:AWindow(title, width, height, bitDepth, fullScreen)
 		{}
 
 		virtual bool initialize();
 		virtual void close();
 		virtual void blit();
+		virtual void resize(unsigned int width, unsigned int height)
+		{
+			AOpenGL::resize(width, height);
+		}
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;
@@ -51,7 +55,7 @@ namespace Window
 
 
 } // namespace Window
-} // namespace Gfx3D
+} // namespace Gfx
 } // namespace Yuni
 
 # endif // YUNI_WINDOWSYSTEM_X11

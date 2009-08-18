@@ -1,12 +1,12 @@
-#ifndef __YUNI_GFX3D_WINDOW_OPENGL_H__
-# define __YUNI_GFX3D_WINDOW_OPENGL_H__
+#ifndef __YUNI_GFX_WINDOW_OPENGL_H__
+# define __YUNI_GFX_WINDOW_OPENGL_H__
 
-# include "../window/window.h"
+# include "../api/api.h"
 
 
 namespace Yuni
 {
-namespace Gfx3D
+namespace Gfx
 {
 namespace Window
 {
@@ -15,7 +15,7 @@ namespace Window
 	/*!
 	** \brief Window for OpenGL rendering
 	*/
-	class OpenGL: public AWindow
+	class AOpenGL: public Api::IGfxAPI
 	{
 	public:
 		//! \name Constructor & Destructor
@@ -23,11 +23,9 @@ namespace Window
 		/*!
 		** \brief Contructor
 		*/
-		OpenGL(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:AWindow(title, width, height, bitDepth, fullScreen)
-		{}
+		AOpenGL() {}
 		//! Destructor
-		virtual ~OpenGL() {}
+		virtual ~AOpenGL() {}
 		//@}
 
 	protected:
@@ -35,7 +33,6 @@ namespace Window
 		** \brief Initalize OpenGL
 		**
 		** This ought to be called from overriden implementations
-		** (i.e. GLWindow::initialize(); )
 		*/
 		virtual bool initialize();
 
@@ -43,9 +40,8 @@ namespace Window
 		** \brief For GL, implementation does nothing
 		**
 		** This ought to be called from overriden implementations
-		** (i.e. GLWindow::close(); )
 		*/
-		virtual void close();
+		virtual void release() {}
 
 		/*!
 		** \brief Resize the window
@@ -57,9 +53,8 @@ namespace Window
 
 
 
-
 } // namespace Window
-} // namespace Gfx3D
+} // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX3D_WINDOW_OPENGL_H__
+#endif // __YUNI_GFX_WINDOW_OPENGL_H__

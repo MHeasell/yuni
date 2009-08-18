@@ -122,9 +122,9 @@ namespace Gfx
 		//! Application title
 		String pTitle;
 		//! Main window
-		Yuni::Gfx3D::Window::AWindow* pMainWindow;
+		Window::AWindow* pMainWindow;
 		//! Main renderer
-		Yuni::Gfx3D::Render::ARenderer* pRenderer;
+		Render::ARenderer* pRenderer;
 		//! Main scene
 		Scene pMainScene;
 
