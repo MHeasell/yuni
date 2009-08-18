@@ -2,12 +2,14 @@
 About the Yuni project
 ======================
 
-Yuni is a high-level cross-platform framework. This framework intends to
-provide the most complete set of coherent API as possible related to 3D
-programming, especially game programming. It intends to be a reliable and
-simple bridge between different worlds to make all sorts of applications,
-letting the user focus on her real work. The Yuni project is connected with
-all those domains :
+Yuni is a high-level cross-platform C++ framework, for developing high-level,
+complex and fast applications. This framework intends to provide the most
+complete set of coherent API as possible related to 3D programming, especially
+3D simulation and game programming. It intends to be a reliable and simple
+bridge between different worlds, allowing to write all sorts of applications,
+while letting the developer focus on her real work.
+
+The Yuni project is connected to all these domains :
  - 3D graphics
  - Physics
  - 2D/3D User Interface in 3D context
@@ -17,22 +19,21 @@ all those domains :
  - Artificial Intelligence, mainly on 3D objects
  - Threading / Parallel computing
  - Networking
- - Real-time and multi-user Collaboration
- - Any other domain related to multimedia or user interaction.
+ - Real-time multi-user Collaboration
+ - And any other domain related to multimedia or user interaction.
 
 
+Target audience
+---------------
 
+The Yuni library and tools are meant to be used by developers who
+already know C++, like it and want to use it for writing any kind of
+application without worrying about the low-level aspects of the
+language and the trouble of mixing many kinds of libraries to do all
+the usual things any application requires.
 
-What the Yuni project is not :
-------------------------------
-
- - It is not a 3D engine. Yuni only provides a common wrapper to external 3D
-  engines (such as Irrlicht or Ogre for example).
- - It is not a physics engine. Yuni only provides a common wrapper to external
-  physics engines (such as ODE for example)
- - It is not a sound engine. Yuni only provides a common wrapper to external
-  sound engines (such as FMod for example)
- - It is not a language, neither a scripting language
- - It does not provide any program. It is a set of libraries only.
-
+Big applications always end up requiring performance at some point,
+multi-threading at some other, graphics, sound, input, command line
+parsing, ... Yuni will provide all this in a portable way with a
+single, easy-to-use, object-oriented API.
 
