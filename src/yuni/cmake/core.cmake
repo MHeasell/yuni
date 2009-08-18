@@ -287,7 +287,7 @@ Set(SRC_PREDICATES_RESULTS
 		core/predicate/result/and.h
 		core/predicate/result/or.h
 		)
-source_group(Core\\Predicate\Result FILES ${SRC_PREDICATES_RESULTS})
+source_group(Core\\Predicate\\Result FILES ${SRC_PREDICATES_RESULTS})
 
 
 
