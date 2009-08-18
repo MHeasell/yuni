@@ -13,11 +13,11 @@ namespace Gfx
 namespace Window
 {
 
-	class OpenGLCocoa: public Window, public AOpenGL
+	class OpenGLCocoa: public AWindow, public AOpenGL
 	{
 	public:
 		OpenGLCocoa(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:OpenGL(title, width, height, bitDepth, fullScreen)
+			:AWindow(title, width, height, bitDepth, fullScreen)
 		{}
 
 		virtual bool initialize() { return AOpenGL::initialize(); }
