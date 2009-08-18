@@ -282,6 +282,13 @@ Set(SRC_GFX_CORE
 		)
 source_group(Gfx FILES ${SRC_GFX_CORE})
 
+Set(SRC_PREDICATES_RESULTS
+		core/predicate/result/sum.h
+		core/predicate/result/and.h
+		core/predicate/result/or.h
+		)
+source_group(Core\\Predicate\Result FILES ${SRC_PREDICATES_RESULTS})
+
 
 
 
@@ -305,6 +312,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_MATH}
 		${SRC_CORE_HASH_CHECKSUM}
 		${SRC_CORE_TREE_N}
+		${SRC_PREDICATES_RESULTS}
 		${SRC_GFX_CORE}
 		${SRC_CORE_UNIT}
 		${SRC_CORE_URI}
