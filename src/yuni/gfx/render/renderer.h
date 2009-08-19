@@ -5,6 +5,7 @@
 # include "../scene.h"
 # include "fpscounter.h"
 
+
 namespace Yuni
 {
 namespace Gfx
@@ -56,8 +57,11 @@ namespace Render
 
 	}; // ARenderer
 
-} // Render
-} // Gfx
-} // Yuni
+
+
+
+} // namespace Render
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_RENDER_RENDERER_H__
