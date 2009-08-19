@@ -17,8 +17,16 @@ Set(SRC_GFX3D
 		gfx/render/opengl.h gfx/render/opengl.cpp
 		)
 
+
+#
+# OpenGL
+#
+Message(STATUS "Added Support for OpenGL")
 find_package(OpenGL)
 
+#
+# DirectX
+#
 # find_package(DirectX)
 IF (WIN32)
 	FIND_PATH(DX9_INCLUDE_PATH d3d9.h
@@ -46,7 +54,11 @@ IF (WIN32)
 
 		IF(DX9_INCLUDE_PATH)
 			ADD_DEFINITIONS("-DYUNI_USE_DIRECTX")
+            Message(STATUS "Added Support for DirectX")
+            Message(STATUS "  DX include: ${DX9_INCLUDE_PATH}")
+            Message(STATUS "  DX libs: ${D3X9_LIBRARY} ${D3DX9_LIBRARY}")
 			SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/directxmsw.cpp)
+            Include_Directories("${DX9_INCLUDE_PATH}")
 		ENDIF(DX9_INCLUDE_PATH)
 	ENDIF(D3D9_LIBRARY AND D3DX9_LIBRARY)
 
@@ -60,7 +72,9 @@ ENDIF(WIN32)
 source_group(Gfx3D FILES ${SRC_GFX3D})
 
 Add_Library(yuni-static-gfx3d-core STATIC ${SRC_GFX3D})
-target_link_libraries(yuni-static-gfx3d-core ${OPENGL_LIBRARY} ${DX9_LIBRARIES}
+target_link_libraries(yuni-static-gfx3d-core
+    # DirectX
+    ${OPENGL_LIBRARY} ${DX9_LIBRARIES}
 	# Required on Linux
 	yuni-static-core yuni-static-device-display yuni-static-gfx-core)
 

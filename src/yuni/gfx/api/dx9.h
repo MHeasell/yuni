@@ -3,7 +3,7 @@
 
 # include "../../yuni.h"
 
-# ifdef YUNI_OS_WINDOWS
+# if defined(YUNI_OS_WINDOWS) && defined(YUNI_USE_DIRECTX)
 #	include "../../core/system/windows.hdr.h"
 #	include <d3d9.h>
 #	include <d3dx9.h>
