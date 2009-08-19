@@ -2,6 +2,7 @@
 # define __YUNI_CORE_LOGS_DECORATORS_VERBOSITY_LEVEL_H__
 
 # include "../null.h"
+# include "../../system/console.h"
 
 
 namespace Yuni
@@ -21,15 +22,17 @@ namespace Logs
 			if (VerbosityType::hasName)
 			{
 				// Unix Color
-				if (Handler::unixColorsAllowed)
-					VerbosityType::AppendUnixColor(out);
+				if (VerbosityType::color != System::Console::none)
+					System::Console::TextColor<VerbosityType::color>::Set(out);
+
 				// The verbosity
 				out.put('[');
 				VerbosityType::AppendName(out);
 				out.put(']');
-				// Resetting the color
-				if (Handler::unixColorsAllowed)
-					out << "[0m";
+
+				// Unix Color
+				if (VerbosityType::color != System::Console::none)
+					System::Console::ResetTextColor(out);
 			}
 			// Transmit the message to the next decorator
 			LeftType:: template internalDecoratorAddPrefix<Handler, VerbosityType,O>(out, s);

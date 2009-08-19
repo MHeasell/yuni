@@ -1,6 +1,6 @@
 
 #include <yuni/yuni.h>
-#include <yuni/core/event/event.h>
+#include <yuni/core/event.h>
 #include <yuni/core/string.h>
 #include <iostream>
 
@@ -8,11 +8,11 @@
 using namespace Yuni;
 
 
-// An event
+// A global event
 //
 // Each template parameter is the type for each argument
 // Here is an event with 2 arguments :
-Event::E2<void, const Yuni::String&, const Yuni::String&> emailHasBeenReceived;
+Event<void (const String&, const String&)> emailHasBeenReceived;
 
 
 
@@ -23,14 +23,16 @@ Event::E2<void, const Yuni::String&, const Yuni::String&> emailHasBeenReceived;
 ** To be able to receive events, the class must inherit from the base class
 ** `Yuni::Event::Receiver`
 */
-class Subscriber : public Event::Observer<Subscriber>
+class Subscriber : public IEventObserver<Subscriber>
 {
 public:
 	//! Constructor
 	Subscriber()
 	{
 		// This class wants to be aware when an event is fired
-		emailHasBeenReceived.connect(this, &Subscriber::onMailReceived);
+		Bind<void (const String&, const String&)> b;
+		b.bind(this, &Subscriber::onMailReceived);
+		emailHasBeenReceived.connect(b);
 	}
 
 	//! Destructor
@@ -39,7 +41,7 @@ public:
 		// It is really encouraged to disconnect all events as soon as possible.
 		// The base class will do it, however the inherited class will already
 		// be removed from the vtable and it might lead to a critical error
-		destroyingObserver();
+		destroyBoundEvents();
 	}
 
 	/*!

@@ -1,7 +1,7 @@
 #ifndef __YUNI_CORE_LOGS_VERBOSITY_H__
 # define __YUNI_CORE_LOGS_VERBOSITY_H__
 
-
+# include "../system/console.h"
 
 
 namespace Yuni
@@ -22,10 +22,14 @@ namespace Verbosity
 			shouldUsesStdCerr = 0,
 			hasName = 0,
 			enabled = 1,
-			checkpoint = 0,
 		};
-		template<class U> static void AppendUnixColor(U&) {}
-	};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::none;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Unknown
+
 
 
 	struct Fatal
@@ -38,10 +42,14 @@ namespace Verbosity
 			shouldUsesStdCerr = 1,
 			hasName = 1,
 			enabled = 1,
-			checkpoint = 0,
 		};
-		template<class U> static void AppendUnixColor(U& u) {u << "[1;31m";}
-	};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::red;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Fatal
+
 
 
 	struct Error
@@ -54,10 +62,14 @@ namespace Verbosity
 			shouldUsesStdCerr = 1,
 			hasName = 1,
 			enabled = 1,
-			checkpoint = 0,
 		};
-		template<class U> static void AppendUnixColor(U& u) {u << "[1;31m";}
-	};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::red;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Error
+
 
 
 	struct Warning
@@ -70,10 +82,14 @@ namespace Verbosity
 			shouldUsesStdCerr = 1,
 			hasName = 1,
 			enabled = 1,
-			checkpoint = 0,
 		};
-		template<class U> static void AppendUnixColor(U& u) {u << "[1;33m";}
-	};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::yellow;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Warning
+
 
 
 	struct Checkpoint
@@ -87,16 +103,20 @@ namespace Verbosity
 			shouldUsesStdCerr = 0,
 			hasName = 1,
 			enabled = 1,
-			checkpoint = 1,
 		};
-		template<class U> static void AppendUnixColor(U& u) {u << "[1;32m";}
-	};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::white;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::white;
+
+	}; // class Checkpoint
+
 
 
 	struct Notice
 	{
 		static const char* Name() {return "notice";}
-		template<class U> static void AppendName(U& u) {u << "infos";}
+		template<class U> static void AppendName(U& u) {u << "notic";}
 
 		enum
 		{
@@ -104,10 +124,35 @@ namespace Verbosity
 			shouldUsesStdCerr = 0,
 			hasName = 1,
 			enabled = 1,
-			checkpoint = 0,
 		};
-		template<class U> static void AppendUnixColor(U& u) {u << "[1;32m";}
-	};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::green;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Notice
+
+
+
+	struct Info
+	{
+		static const char* Name() {return "info";}
+		template<class U> static void AppendName(U& u) {u << "infos";}
+
+		enum
+		{
+			level = 7000,
+			shouldUsesStdCerr = 0,
+			hasName = 1,
+			enabled = 1,
+		};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::none;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Info
+
 
 
 	struct Debug
@@ -125,10 +170,14 @@ namespace Verbosity
 			# else
 			enabled = 1,
 			# endif
-			checkpoint = 0,
 		};
-		template<class U> static void AppendUnixColor(U&) {}
-	};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::none;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Debug
+
 
 
 
@@ -136,6 +185,5 @@ namespace Verbosity
 } // namespace Verbosity
 } // namespace Logs
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_LOGS_VERBOSITY_H__

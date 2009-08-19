@@ -1,9 +1,0 @@
-#ifndef __YUNI_CORE_EVENT_UNDEF_H__
-# define __YUNI_CORE_EVENT_UNDEF_H__
-
-# undef YUNI_EVENT_FRIEND_DECL_E
-# undef YUNI_EVENT_ALLFRIEND_DECL_E
-
-
-#endif // __YUNI_CORE_EVENT_UNDEF_H__
-

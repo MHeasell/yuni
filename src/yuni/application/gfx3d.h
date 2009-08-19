@@ -17,7 +17,7 @@ namespace Application
 	/*!
 	** \brief 3D Application
 	*/
-	class Gfx3D : public Application::AApplication, public Event::Observer<Gfx3D>
+	class Gfx3D : public Application::AApplication, public IEventObserver<Gfx3D>
 	{
 	public:
 		/*!
@@ -77,6 +77,7 @@ namespace Application
 		Gfx::Device device;
 
 	}; // class Application::Gfx3D
+
 
 
 

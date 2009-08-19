@@ -35,19 +35,20 @@ namespace LogsDecorator
 		::time(&rawtime);
 		struct tm timeinfo;
 
-	#	if defined(YUNI_OS_MSVC)
+		# if defined(YUNI_OS_MSVC)
 		/* Microsoft Visual Studio */
 		::localtime_s(&timeinfo, &rawtime);
-		// MSDN specifies that buffer value must be >= 26 for validity.
+		// MSDN specifies that the buffer length value must be >= 26 for validity.
 		::asctime_s(buffer, 32, &timeinfo);
-	#	else
+		# else
 		/* Unixes */
 		::localtime_r(&rawtime, &timeinfo);
 		::asctime_r(&timeinfo, buffer);
-	#	endif
+		# endif
 	}
 
 	# endif
+
 
 
 } // namespace LogsDecorator

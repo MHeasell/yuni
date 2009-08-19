@@ -275,10 +275,13 @@ namespace Window
 		return msgProcessed;
 	}
 
-	void AMSWindows::onTitleChanged()
+
+	void AMSWindows::onInternalTitleChangedWL()
 	{
-		SetWindowText(pHWnd, String::CString(pTitle));
+		SetWindowText(pHWnd, pTitle.c_str());
 	}
+
+
 
 } // namespace Window
 } // namespace Gfx3D

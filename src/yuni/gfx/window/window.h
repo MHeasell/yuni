@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_WINDOW_WINDOW__
-# define __YUNI_GFX_WINDOW_WINDOW__
+#ifndef __YUNI_GFX_WINDOW_WINDOW_H__
+# define __YUNI_GFX_WINDOW_WINDOW_H__
 
 # include "../../yuni.h"
 # include "../../core/string.h"
@@ -10,6 +10,10 @@ namespace Yuni
 {
 namespace Gfx
 {
+
+	// Forward declaration
+	class Engine;
+
 namespace Window
 {
 
@@ -17,13 +21,22 @@ namespace Window
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class AWindow: public Event::Observer<AWindow>
+	class AWindow : public IEventObserver<AWindow>, public Policy::ObjectLevelLockable<AWindow>
 	{
 	public:
-		AWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:pTitle(title), pWidth(width), pHeight(height), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false)
-		{}
-		virtual ~AWindow() { destroyingObserver(); }
+		//! The threading policy
+		typedef Policy::ObjectLevelLockable<AWindow> ThreadingPolicy;
+
+	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Constructor
+		*/
+		AWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen);
+		//! Destructor
+		virtual ~AWindow();
+		//@}
 
 		/*!
 		** \brief Init the window
@@ -50,40 +63,33 @@ namespace Window
 			pHeight = height;
 		}
 
-		/*!
-		** \brief Swap the current buffer with the backbuffer
-		**
-		** This is implementation-dependent
-		*/
-		virtual void blit() = 0;
 
 		/*!
 		** \brief Get whether the window is in the process of closing
 		*/
-		bool closing() { return pClosing; }
+		bool closing() const;
 
 
-		//! \name Accessors
+		//! \name Title of the Window
 		//@{
-
-		//! Title of the window
+		//! Get the Title of the window
 		const String& title() const { return pTitle; }
-		void title(const String& newTitle)
-		{
-			pTitle = newTitle;
-			onTitleChanged();
-		}
+		//! Set the title of the window
+		template<typename C> void title(const C& newTitle);
+		//@}
 
+
+		//! \name Vertical Synchronization (VSync)
+		//@{
 		//! Is vertical synchronization (VSync) currently active?
-		virtual bool verticalSync() const { return true; }
+		virtual bool verticalSync() const;
 		/*!
 		** \brief Activate / deactivate vertical synchronization (VSync)
 		**
 		** \param active New value for vertical sync, true for active, false for inactive.
 		** \return False if changing vertical sync failed. Yes, the stupid thing _can_ fail.
 		*/
-		virtual bool verticalSync(bool /* active */) { return false; }
-
+		virtual bool verticalSync(bool active);
 		//@}
 
 
@@ -107,9 +113,14 @@ namespace Window
 		virtual void onKeyUp(unsigned char /* key */) {}
 
 		virtual void onFPSChanged(unsigned int /* FPS */) {}
-		virtual void onTitleChanged() {}
 
 		//@}
+
+	protected:
+		//! Swap the current buffer with the backbuffer
+		virtual void onBlitWL() = 0;
+		//! Method call when the title of the window has been changed
+		virtual void onInternalTitleChangedWL() = 0;
 
 	protected:
 		String pTitle;
@@ -118,6 +129,9 @@ namespace Window
 		unsigned int pBitDepth;
 		bool pFullScreen;
 		bool pClosing;
+
+		// A friend !
+		friend class Gfx::Engine;
 
 	}; // class AWindow
 
@@ -128,4 +142,6 @@ namespace Window
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_WINDOW_WINDOW__
+# include "window.hxx"
+
+#endif // __YUNI_GFX_WINDOW_WINDOW_H__

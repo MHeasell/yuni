@@ -30,7 +30,7 @@ namespace Gfx
 
 	Engine::~Engine()
 	{
-		onFPSChanged.disconnectAll();
+		onFPSChanged.clear();
 		this->release();
 	}
 
@@ -96,7 +96,7 @@ namespace Gfx
 	{
 		if (!isDeviceInitialized())
 			return;
-		
+
 		// Window creation and API init
 		# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
 			pMainWindow = Window::Factory::CreateDX9Window(applicationTitle(), pDevice->resolution()->width(),
@@ -105,7 +105,11 @@ namespace Gfx
 			pMainWindow = Window::Factory::CreateGLWindow(applicationTitle(), pDevice->resolution()->width(),
 				pDevice->resolution()->height(), pDevice->resolution()->bitPerPixel(), pDevice->fullscreen());
 		# endif
-			
+
+		// The initialization has failed
+		if (!pMainWindow)
+			return;
+
 		pMainWindow->verticalSync(false);
 		onFPSChanged.connect(pMainWindow, &Window::AWindow::onFPSChanged);
 
@@ -118,15 +122,18 @@ namespace Gfx
 			// Manage events on the window
 			pMainWindow->pollEvents();
 
+			// Render the frame
 			pRenderer->drawFrame(*Scene::Instance());
+			// FPS
 			if (lastFPS != pRenderer->instantFPS())
 			{
+				// The FPS has changed, broadcasting the news
 				lastFPS = pRenderer->instantFPS();
 				onFPSChanged(lastFPS);
 			}
 
 			// Push the backbuffer to screen
-			pMainWindow->blit();
+			pMainWindow->onBlitWL();
 		}
 		pMainWindow->close();
 		delete pMainWindow;
@@ -175,4 +182,3 @@ namespace Gfx
 
 } // namespace Gfx
 } // namespace Yuni
-

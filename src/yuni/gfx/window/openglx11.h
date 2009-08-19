@@ -7,7 +7,7 @@
 
 #	include "x11yuni.h"
 #	include "../window/opengl.h"
-
+#	include "../window/window.h"
 
 namespace Yuni
 {
@@ -29,7 +29,6 @@ namespace Window
 
 		virtual bool initialize();
 		virtual void close();
-		virtual void blit();
 		virtual void resize(unsigned int width, unsigned int height)
 		{
 			AOpenGL::resize(width, height);
@@ -40,7 +39,10 @@ namespace Window
 		//! Activate / deactivate vertical synchronization (VSync)
 		virtual bool verticalSync(bool activate);
 
-		virtual void onTitleChanged();
+		bool pollEvents();
+	protected:
+		void onBlitWL();
+		void onInternalTitleChangedWL();
 
 	private:
 		//! Connection to a X11 Server through TCP or DECnet communications protocols
@@ -50,6 +52,7 @@ namespace Window
 		GLXContext pContext;
 		XSetWindowAttributes pAttr;
 		XWindowAttributes pWndAttr;
+		XEvent pXEvent;
 
 	}; // class WindowGLX
 

@@ -304,6 +304,7 @@ namespace Math
 	template<typename T, typename R> struct RoundToInt;
 
 
+
 } // namespace Math
 } // namespace Yuni
 

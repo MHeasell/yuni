@@ -147,48 +147,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<<%=tmpl[0]%>>
-	template<class C>
-	void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(C& c, R (C::*member)(<%=generator.list(i)%>))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(<%=generator.list(i)%>)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<<%=tmpl[0]%>>
-	template<class C>
-	void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(const C& c, R (C::*member)(<%=generator.list(i)%>) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(<%=generator.list(i)%>);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(<%=generator.list(i)%>)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<<%=tmpl[0]%>>
 	template<class U, class C>
 	void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(C* c, R (C::*member)(<%=generator.list(i,"A","",", ")%>U),
@@ -210,26 +168,6 @@ namespace Yuni
 
 	template<<%=tmpl[0]%>>
 	template<class U, class C>
-	void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(C& c, R (C::*member)(<%=generator.list(i,"A","",", ")%>U),
-		typename Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(<%=generator.list(i,"A","",", ")%>U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<<%=tmpl[0]%>>
-	template<class U, class C>
 	void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(const C* c, R (C::*member)(<%=generator.list(i,"A","",", ")%>U) const,
 		typename Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -241,26 +179,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(<%=generator.list(i,"A","",", ")%>U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<<%=tmpl[0]%>>
-	template<class U, class C>
-	void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(const C& c, R (C::*member)(<%=generator.list(i,"A","",", ")%>U) const,
-		typename Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(<%=generator.list(i,"A","",", ")%>U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(<%=generator.list(i,"A","",", ")%>U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind

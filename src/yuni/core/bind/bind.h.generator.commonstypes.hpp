@@ -10,8 +10,12 @@
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(<%=generator.list(i)%>);
+			typedef R (Class::*Type)(<%=generator.list(i)%>);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(<%=generator.list(i)%>) const;
 		};
 		enum
 		{

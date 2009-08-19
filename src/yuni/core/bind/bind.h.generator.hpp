@@ -172,7 +172,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(<%=generator.list(i)%>));
-		template<class C> void bind(C& c, R (C::*member)(<%=generator.list(i)%>));
 
 		/*!
 		** \brief Bind to an object member
@@ -198,7 +197,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(<%=generator.list(i)%>) const);
-		template<class C> void bind(const C& c, R (C::*member)(<%=generator.list(i)%>) const);
 
 
 		/*!
@@ -212,11 +210,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(<%=generator.list(i,'A', "", ", ")%>U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(<%=generator.list(i,'A', "", ", ")%>U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(<%=generator.list(i,'A', "", ", ")%>U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(<%=generator.list(i,'A', "", ", ")%>U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data

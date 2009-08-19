@@ -4,7 +4,6 @@
 # include "../yuni.h"
 # include "device.h"
 # include "../core/smartptr/smartptr.h"
-# include "../core/event/event.proxy.h"
 # include "../threads/mutex.h"
 # include "../gfx/window/factory.h"
 # include "../gfx/render/renderer.h"
@@ -116,7 +115,7 @@ namespace Gfx
 
 	public:
 		//! Event: The FPS has changed
-		Event::E1<void, unsigned int> onFPSChanged;
+		Event<void (unsigned int)> onFPSChanged;
 
 	private:
 		//! If the device is initialized

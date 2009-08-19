@@ -133,8 +133,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)();
+			typedef R (Class::*Type)();
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)() const;
 		};
 		enum
 		{
@@ -243,7 +247,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)());
-		template<class C> void bind(C& c, R (C::*member)());
 
 		/*!
 		** \brief Bind to an object member
@@ -269,7 +272,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)() const);
-		template<class C> void bind(const C& c, R (C::*member)() const);
 
 
 		/*!
@@ -283,11 +285,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -327,7 +325,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -382,7 +380,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R()>
 
@@ -420,8 +418,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)();
+			typedef R (Class::*Type)();
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)() const;
 		};
 		enum
 		{
@@ -530,7 +532,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)());
-		template<class C> void bind(C& c, R (C::*member)());
 
 		/*!
 		** \brief Bind to an object member
@@ -556,7 +557,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)() const);
-		template<class C> void bind(const C& c, R (C::*member)() const);
 
 
 		/*!
@@ -570,11 +570,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -614,7 +610,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -669,7 +665,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R()>
 
@@ -707,8 +703,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)();
+			typedef R (Class::*Type)();
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)() const;
 		};
 		enum
 		{
@@ -817,7 +817,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)());
-		template<class C> void bind(C& c, R (C::*member)());
 
 		/*!
 		** \brief Bind to an object member
@@ -843,7 +842,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)() const);
-		template<class C> void bind(const C& c, R (C::*member)() const);
 
 
 		/*!
@@ -857,11 +855,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -901,7 +895,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -956,7 +950,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R()>
 
@@ -994,8 +988,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0);
+			typedef R (Class::*Type)(A0);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0) const;
 		};
 		enum
 		{
@@ -1104,7 +1102,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0));
-		template<class C> void bind(C& c, R (C::*member)(A0));
 
 		/*!
 		** \brief Bind to an object member
@@ -1130,7 +1127,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0) const);
 
 
 		/*!
@@ -1144,11 +1140,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -1188,7 +1180,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -1243,7 +1235,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0)>
 
@@ -1281,8 +1273,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0);
+			typedef R (Class::*Type)(A0);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0) const;
 		};
 		enum
 		{
@@ -1391,7 +1387,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0));
-		template<class C> void bind(C& c, R (C::*member)(A0));
 
 		/*!
 		** \brief Bind to an object member
@@ -1417,7 +1412,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0) const);
 
 
 		/*!
@@ -1431,11 +1425,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -1475,7 +1465,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -1530,7 +1520,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0)>
 
@@ -1568,8 +1558,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0);
+			typedef R (Class::*Type)(A0);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0) const;
 		};
 		enum
 		{
@@ -1678,7 +1672,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0));
-		template<class C> void bind(C& c, R (C::*member)(A0));
 
 		/*!
 		** \brief Bind to an object member
@@ -1704,7 +1697,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0) const);
 
 
 		/*!
@@ -1718,11 +1710,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -1762,7 +1750,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -1817,7 +1805,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0)>
 
@@ -1856,8 +1844,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1);
+			typedef R (Class::*Type)(A0, A1);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1) const;
 		};
 		enum
 		{
@@ -1966,7 +1958,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1));
 
 		/*!
 		** \brief Bind to an object member
@@ -1992,7 +1983,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1) const);
 
 
 		/*!
@@ -2006,11 +1996,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -2050,7 +2036,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -2105,7 +2091,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1)>
 
@@ -2144,8 +2130,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1);
+			typedef R (Class::*Type)(A0, A1);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1) const;
 		};
 		enum
 		{
@@ -2254,7 +2244,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1));
 
 		/*!
 		** \brief Bind to an object member
@@ -2280,7 +2269,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1) const);
 
 
 		/*!
@@ -2294,11 +2282,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -2338,7 +2322,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -2393,7 +2377,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1)>
 
@@ -2432,8 +2416,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1);
+			typedef R (Class::*Type)(A0, A1);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1) const;
 		};
 		enum
 		{
@@ -2542,7 +2530,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1));
 
 		/*!
 		** \brief Bind to an object member
@@ -2568,7 +2555,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1) const);
 
 
 		/*!
@@ -2582,11 +2568,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -2626,7 +2608,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -2681,7 +2663,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1)>
 
@@ -2721,8 +2703,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2);
+			typedef R (Class::*Type)(A0, A1, A2);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2) const;
 		};
 		enum
 		{
@@ -2831,7 +2817,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2));
 
 		/*!
 		** \brief Bind to an object member
@@ -2857,7 +2842,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2) const);
 
 
 		/*!
@@ -2871,11 +2855,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -2915,7 +2895,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -2970,7 +2950,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2)>
 
@@ -3010,8 +2990,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2);
+			typedef R (Class::*Type)(A0, A1, A2);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2) const;
 		};
 		enum
 		{
@@ -3120,7 +3104,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2));
 
 		/*!
 		** \brief Bind to an object member
@@ -3146,7 +3129,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2) const);
 
 
 		/*!
@@ -3160,11 +3142,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -3204,7 +3182,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -3259,7 +3237,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2)>
 
@@ -3299,8 +3277,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2);
+			typedef R (Class::*Type)(A0, A1, A2);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2) const;
 		};
 		enum
 		{
@@ -3409,7 +3391,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2));
 
 		/*!
 		** \brief Bind to an object member
@@ -3435,7 +3416,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2) const);
 
 
 		/*!
@@ -3449,11 +3429,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -3493,7 +3469,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -3548,7 +3524,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2)>
 
@@ -3589,8 +3565,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3);
+			typedef R (Class::*Type)(A0, A1, A2, A3);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3) const;
 		};
 		enum
 		{
@@ -3699,7 +3679,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3));
 
 		/*!
 		** \brief Bind to an object member
@@ -3725,7 +3704,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3) const);
 
 
 		/*!
@@ -3739,11 +3717,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -3783,7 +3757,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -3838,7 +3812,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3)>
 
@@ -3879,8 +3853,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3);
+			typedef R (Class::*Type)(A0, A1, A2, A3);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3) const;
 		};
 		enum
 		{
@@ -3989,7 +3967,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3));
 
 		/*!
 		** \brief Bind to an object member
@@ -4015,7 +3992,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3) const);
 
 
 		/*!
@@ -4029,11 +4005,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -4073,7 +4045,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -4128,7 +4100,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3)>
 
@@ -4169,8 +4141,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3);
+			typedef R (Class::*Type)(A0, A1, A2, A3);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3) const;
 		};
 		enum
 		{
@@ -4279,7 +4255,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3));
 
 		/*!
 		** \brief Bind to an object member
@@ -4305,7 +4280,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3) const);
 
 
 		/*!
@@ -4319,11 +4293,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -4363,7 +4333,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -4418,7 +4388,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3)>
 
@@ -4460,8 +4430,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4) const;
 		};
 		enum
 		{
@@ -4570,7 +4544,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4));
 
 		/*!
 		** \brief Bind to an object member
@@ -4596,7 +4569,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const);
 
 
 		/*!
@@ -4610,11 +4582,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -4654,7 +4622,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -4709,7 +4677,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4)>
 
@@ -4751,8 +4719,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4) const;
 		};
 		enum
 		{
@@ -4861,7 +4833,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4));
 
 		/*!
 		** \brief Bind to an object member
@@ -4887,7 +4858,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const);
 
 
 		/*!
@@ -4901,11 +4871,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -4945,7 +4911,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -5000,7 +4966,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4)>
 
@@ -5042,8 +5008,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4) const;
 		};
 		enum
 		{
@@ -5152,7 +5122,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4));
 
 		/*!
 		** \brief Bind to an object member
@@ -5178,7 +5147,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const);
 
 
 		/*!
@@ -5192,11 +5160,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -5236,7 +5200,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -5291,7 +5255,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4)>
 
@@ -5334,8 +5298,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5) const;
 		};
 		enum
 		{
@@ -5444,7 +5412,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5));
 
 		/*!
 		** \brief Bind to an object member
@@ -5470,7 +5437,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const);
 
 
 		/*!
@@ -5484,11 +5450,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -5528,7 +5490,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -5583,7 +5545,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5)>
 
@@ -5626,8 +5588,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5) const;
 		};
 		enum
 		{
@@ -5736,7 +5702,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5));
 
 		/*!
 		** \brief Bind to an object member
@@ -5762,7 +5727,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const);
 
 
 		/*!
@@ -5776,11 +5740,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -5820,7 +5780,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -5875,7 +5835,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5)>
 
@@ -5918,8 +5878,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5) const;
 		};
 		enum
 		{
@@ -6028,7 +5992,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5));
 
 		/*!
 		** \brief Bind to an object member
@@ -6054,7 +6017,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const);
 
 
 		/*!
@@ -6068,11 +6030,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -6112,7 +6070,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -6167,7 +6125,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5)>
 
@@ -6211,8 +6169,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6) const;
 		};
 		enum
 		{
@@ -6321,7 +6283,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
 
 		/*!
 		** \brief Bind to an object member
@@ -6347,7 +6308,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const);
 
 
 		/*!
@@ -6361,11 +6321,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -6405,7 +6361,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -6460,7 +6416,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6)>
 
@@ -6504,8 +6460,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6) const;
 		};
 		enum
 		{
@@ -6614,7 +6574,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
 
 		/*!
 		** \brief Bind to an object member
@@ -6640,7 +6599,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const);
 
 
 		/*!
@@ -6654,11 +6612,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -6698,7 +6652,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -6753,7 +6707,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6)>
 
@@ -6797,8 +6751,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6) const;
 		};
 		enum
 		{
@@ -6907,7 +6865,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
 
 		/*!
 		** \brief Bind to an object member
@@ -6933,7 +6890,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const);
 
 
 		/*!
@@ -6947,11 +6903,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -6991,7 +6943,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -7046,7 +6998,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6)>
 
@@ -7091,8 +7043,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7) const;
 		};
 		enum
 		{
@@ -7201,7 +7157,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
 
 		/*!
 		** \brief Bind to an object member
@@ -7227,7 +7182,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const);
 
 
 		/*!
@@ -7241,11 +7195,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -7285,7 +7235,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -7340,7 +7290,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7)>
 
@@ -7385,8 +7335,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7) const;
 		};
 		enum
 		{
@@ -7495,7 +7449,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
 
 		/*!
 		** \brief Bind to an object member
@@ -7521,7 +7474,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const);
 
 
 		/*!
@@ -7535,11 +7487,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -7579,7 +7527,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -7634,7 +7582,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7)>
 
@@ -7679,8 +7627,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7) const;
 		};
 		enum
 		{
@@ -7789,7 +7741,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
 
 		/*!
 		** \brief Bind to an object member
@@ -7815,7 +7766,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const);
 
 
 		/*!
@@ -7829,11 +7779,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -7873,7 +7819,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -7928,7 +7874,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7)>
 
@@ -7974,8 +7920,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const;
 		};
 		enum
 		{
@@ -8084,7 +8034,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 
 		/*!
 		** \brief Bind to an object member
@@ -8110,7 +8059,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const);
 
 
 		/*!
@@ -8124,11 +8072,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -8168,7 +8112,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -8223,7 +8167,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
 
@@ -8269,8 +8213,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const;
 		};
 		enum
 		{
@@ -8379,7 +8327,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 
 		/*!
 		** \brief Bind to an object member
@@ -8405,7 +8352,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const);
 
 
 		/*!
@@ -8419,11 +8365,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -8463,7 +8405,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -8518,7 +8460,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
 
@@ -8564,8 +8506,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const;
 		};
 		enum
 		{
@@ -8674,7 +8620,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 
 		/*!
 		** \brief Bind to an object member
@@ -8700,7 +8645,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const);
 
 
 		/*!
@@ -8714,11 +8658,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -8758,7 +8698,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -8813,7 +8753,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
 
@@ -8860,8 +8800,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const;
 		};
 		enum
 		{
@@ -8970,7 +8914,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 
 		/*!
 		** \brief Bind to an object member
@@ -8996,7 +8939,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const);
 
 
 		/*!
@@ -9010,11 +8952,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -9054,7 +8992,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -9109,7 +9047,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
 
@@ -9156,8 +9094,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const;
 		};
 		enum
 		{
@@ -9266,7 +9208,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 
 		/*!
 		** \brief Bind to an object member
@@ -9292,7 +9233,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const);
 
 
 		/*!
@@ -9306,11 +9246,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -9350,7 +9286,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -9405,7 +9341,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
 
@@ -9452,8 +9388,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const;
 		};
 		enum
 		{
@@ -9562,7 +9502,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 
 		/*!
 		** \brief Bind to an object member
@@ -9588,7 +9527,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const);
 
 
 		/*!
@@ -9602,11 +9540,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -9646,7 +9580,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -9701,7 +9635,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
 
@@ -9749,8 +9683,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const;
 		};
 		enum
 		{
@@ -9859,7 +9797,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 
 		/*!
 		** \brief Bind to an object member
@@ -9885,7 +9822,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const);
 
 
 		/*!
@@ -9899,11 +9835,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -9943,7 +9875,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -9998,7 +9930,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
 
@@ -10046,8 +9978,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const;
 		};
 		enum
 		{
@@ -10156,7 +10092,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 
 		/*!
 		** \brief Bind to an object member
@@ -10182,7 +10117,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const);
 
 
 		/*!
@@ -10196,11 +10130,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -10240,7 +10170,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -10295,7 +10225,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
 
@@ -10343,8 +10273,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const;
 		};
 		enum
 		{
@@ -10453,7 +10387,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 
 		/*!
 		** \brief Bind to an object member
@@ -10479,7 +10412,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const);
 
 
 		/*!
@@ -10493,11 +10425,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -10537,7 +10465,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -10592,7 +10520,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
 
@@ -10641,8 +10569,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const;
 		};
 		enum
 		{
@@ -10751,7 +10683,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 
 		/*!
 		** \brief Bind to an object member
@@ -10777,7 +10708,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const);
 
 
 		/*!
@@ -10791,11 +10721,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -10835,7 +10761,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -10890,7 +10816,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
 
@@ -10939,8 +10865,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const;
 		};
 		enum
 		{
@@ -11049,7 +10979,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 
 		/*!
 		** \brief Bind to an object member
@@ -11075,7 +11004,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const);
 
 
 		/*!
@@ -11089,11 +11017,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -11133,7 +11057,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -11188,7 +11112,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
 
@@ -11237,8 +11161,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const;
 		};
 		enum
 		{
@@ -11347,7 +11275,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 
 		/*!
 		** \brief Bind to an object member
@@ -11373,7 +11300,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const);
 
 
 		/*!
@@ -11387,11 +11313,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -11431,7 +11353,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -11486,7 +11408,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
 
@@ -11536,8 +11458,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const;
 		};
 		enum
 		{
@@ -11646,7 +11572,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 
 		/*!
 		** \brief Bind to an object member
@@ -11672,7 +11597,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const);
 
 
 		/*!
@@ -11686,11 +11610,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -11730,7 +11650,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -11785,7 +11705,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
 
@@ -11835,8 +11755,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const;
 		};
 		enum
 		{
@@ -11945,7 +11869,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 
 		/*!
 		** \brief Bind to an object member
@@ -11971,7 +11894,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const);
 
 
 		/*!
@@ -11985,11 +11907,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -12029,7 +11947,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -12084,7 +12002,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
 
@@ -12134,8 +12052,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const;
 		};
 		enum
 		{
@@ -12244,7 +12166,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 
 		/*!
 		** \brief Bind to an object member
@@ -12270,7 +12191,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const);
 
 
 		/*!
@@ -12284,11 +12204,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -12328,7 +12244,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -12383,7 +12299,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
 
@@ -12434,8 +12350,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const;
 		};
 		enum
 		{
@@ -12544,7 +12464,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 
 		/*!
 		** \brief Bind to an object member
@@ -12570,7 +12489,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const);
 
 
 		/*!
@@ -12584,11 +12502,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -12628,7 +12542,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -12683,7 +12597,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
 
@@ -12734,8 +12648,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const;
 		};
 		enum
 		{
@@ -12844,7 +12762,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 
 		/*!
 		** \brief Bind to an object member
@@ -12870,7 +12787,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const);
 
 
 		/*!
@@ -12884,11 +12800,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -12928,7 +12840,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -12983,7 +12895,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
 
@@ -13034,8 +12946,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const;
 		};
 		enum
 		{
@@ -13144,7 +13060,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 
 		/*!
 		** \brief Bind to an object member
@@ -13170,7 +13085,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const);
 
 
 		/*!
@@ -13184,11 +13098,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -13228,7 +13138,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -13283,7 +13193,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
 
@@ -13335,8 +13245,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const;
 		};
 		enum
 		{
@@ -13445,7 +13359,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 
 		/*!
 		** \brief Bind to an object member
@@ -13471,7 +13384,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const);
 
 
 		/*!
@@ -13485,11 +13397,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -13529,7 +13437,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -13584,7 +13492,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
 
@@ -13636,8 +13544,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const;
 		};
 		enum
 		{
@@ -13746,7 +13658,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 
 		/*!
 		** \brief Bind to an object member
@@ -13772,7 +13683,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const);
 
 
 		/*!
@@ -13786,11 +13696,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -13830,7 +13736,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -13885,7 +13791,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
 
@@ -13937,8 +13843,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const;
 		};
 		enum
 		{
@@ -14047,7 +13957,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 
 		/*!
 		** \brief Bind to an object member
@@ -14073,7 +13982,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const);
 
 
 		/*!
@@ -14087,11 +13995,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -14131,7 +14035,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -14186,7 +14090,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
 
@@ -14239,8 +14143,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const;
 		};
 		enum
 		{
@@ -14349,7 +14257,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 
 		/*!
 		** \brief Bind to an object member
@@ -14375,7 +14282,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const);
 
 
 		/*!
@@ -14389,11 +14295,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -14433,7 +14335,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -14488,7 +14390,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
 
@@ -14541,8 +14443,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const;
 		};
 		enum
 		{
@@ -14651,7 +14557,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 
 		/*!
 		** \brief Bind to an object member
@@ -14677,7 +14582,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const);
 
 
 		/*!
@@ -14691,11 +14595,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -14735,7 +14635,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -14790,7 +14690,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
 
@@ -14843,8 +14743,12 @@ namespace Yuni
 		template<class C>
 		struct PointerToMember
 		{
+			//! Mere type for C
+			typedef typename Static::Remove::All<C>::Type Class;
 			//! Type for a pointer-to-member
-			typedef R (C::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			typedef R (Class::*Type)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+			//! Type for a const pointer-to-member
+			typedef R (Class::*ConstType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const;
 		};
 		enum
 		{
@@ -14953,7 +14857,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
-		template<class C> void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 
 		/*!
 		** \brief Bind to an object member
@@ -14979,7 +14882,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const);
-		template<class C> void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const);
 
 
 		/*!
@@ -14993,11 +14895,7 @@ namespace Yuni
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U), typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C>
-		void bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U), typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
 		void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const, typename WithUserData<U>::ParameterType userdata);
-		template<class U, class C>
-		void bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const, typename WithUserData<U>::ParameterType userdata);
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -15037,7 +14935,7 @@ namespace Yuni
 		void clear();
 		//@}
 
-		
+
 		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
@@ -15092,7 +14990,7 @@ namespace Yuni
 		SmartPtr<IHolder> pHolder;
 
 		// A friend !
-		template<class R1, class B1> friend class Private::BindImpl::Unbind;
+		template<class R1, class B1> friend struct Private::BindImpl::Unbind;
 
 	}; // class Bind<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
 

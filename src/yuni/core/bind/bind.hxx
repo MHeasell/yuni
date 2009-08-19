@@ -142,48 +142,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R>
-	template<class C>
-	void Bind<R (), void>::bind(C& c, R (C::*member)())
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R()>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R>
-	template<class C>
-	void Bind<R (), void>::bind(const C& c, R (C::*member)() const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)();
-			pHolder = new Private::BindImpl::BoundWithMember<C, R()>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R>
 	template<class U, class C>
 	void Bind<R (), void>::bind(C* c, R (C::*member)(U),
@@ -205,26 +163,6 @@ namespace Yuni
 
 	template<class R>
 	template<class U, class C>
-	void Bind<R (), void>::bind(C& c, R (C::*member)(U),
-		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R>
-	template<class U, class C>
 	void Bind<R (), void>::bind(const C* c, R (C::*member)(U) const,
 		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -236,26 +174,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R>
-	template<class U, class C>
-	void Bind<R (), void>::bind(const C& c, R (C::*member)(U) const,
-		typename Bind<R (), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -497,48 +415,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R>
-	template<class C>
-	void Bind<R (*)(), void>::bind(C& c, R (C::*member)())
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R()>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R>
-	template<class C>
-	void Bind<R (*)(), void>::bind(const C& c, R (C::*member)() const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)();
-			pHolder = new Private::BindImpl::BoundWithMember<C, R()>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R>
 	template<class U, class C>
 	void Bind<R (*)(), void>::bind(C* c, R (C::*member)(U),
@@ -560,26 +436,6 @@ namespace Yuni
 
 	template<class R>
 	template<class U, class C>
-	void Bind<R (*)(), void>::bind(C& c, R (C::*member)(U),
-		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R>
-	template<class U, class C>
 	void Bind<R (*)(), void>::bind(const C* c, R (C::*member)(U) const,
 		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -591,26 +447,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R>
-	template<class U, class C>
-	void Bind<R (*)(), void>::bind(const C& c, R (C::*member)(U) const,
-		typename Bind<R (*)(), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -852,48 +688,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R>
-	template<class C>
-	void Bind<R (ClassT::*)(), ClassT>::bind(C& c, R (C::*member)())
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R()>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R>
-	template<class C>
-	void Bind<R (ClassT::*)(), ClassT>::bind(const C& c, R (C::*member)() const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)();
-			pHolder = new Private::BindImpl::BoundWithMember<C, R()>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(), ClassT>::bind(C* c, R (C::*member)(U),
@@ -915,26 +709,6 @@ namespace Yuni
 
 	template<class ClassT, class R>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(), ClassT>::bind(C& c, R (C::*member)(U),
-		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(), ClassT>::bind(const C* c, R (C::*member)(U) const,
 		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -946,26 +720,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(), ClassT>::bind(const C& c, R (C::*member)(U) const,
-		typename Bind<R (ClassT::*)(), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -1207,48 +961,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0>
-	template<class C>
-	void Bind<R (A0), void>::bind(C& c, R (C::*member)(A0))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0>
-	template<class C>
-	void Bind<R (A0), void>::bind(const C& c, R (C::*member)(A0) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0>
 	template<class U, class C>
 	void Bind<R (A0), void>::bind(C* c, R (C::*member)(A0, U),
@@ -1270,26 +982,6 @@ namespace Yuni
 
 	template<class R, class A0>
 	template<class U, class C>
-	void Bind<R (A0), void>::bind(C& c, R (C::*member)(A0, U),
-		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0>
-	template<class U, class C>
 	void Bind<R (A0), void>::bind(const C* c, R (C::*member)(A0, U) const,
 		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -1301,26 +993,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0>
-	template<class U, class C>
-	void Bind<R (A0), void>::bind(const C& c, R (C::*member)(A0, U) const,
-		typename Bind<R (A0), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -1562,48 +1234,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0>
-	template<class C>
-	void Bind<R (*)(A0), void>::bind(C& c, R (C::*member)(A0))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0>
-	template<class C>
-	void Bind<R (*)(A0), void>::bind(const C& c, R (C::*member)(A0) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0>
 	template<class U, class C>
 	void Bind<R (*)(A0), void>::bind(C* c, R (C::*member)(A0, U),
@@ -1625,26 +1255,6 @@ namespace Yuni
 
 	template<class R, class A0>
 	template<class U, class C>
-	void Bind<R (*)(A0), void>::bind(C& c, R (C::*member)(A0, U),
-		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0>
-	template<class U, class C>
 	void Bind<R (*)(A0), void>::bind(const C* c, R (C::*member)(A0, U) const,
 		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -1656,26 +1266,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0>
-	template<class U, class C>
-	void Bind<R (*)(A0), void>::bind(const C& c, R (C::*member)(A0, U) const,
-		typename Bind<R (*)(A0), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -1917,48 +1507,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0>
-	template<class C>
-	void Bind<R (ClassT::*)(A0), ClassT>::bind(C& c, R (C::*member)(A0))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0>
-	template<class C>
-	void Bind<R (ClassT::*)(A0), ClassT>::bind(const C& c, R (C::*member)(A0) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0), ClassT>::bind(C* c, R (C::*member)(A0, U),
@@ -1980,26 +1528,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0), ClassT>::bind(C& c, R (C::*member)(A0, U),
-		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0), ClassT>::bind(const C* c, R (C::*member)(A0, U) const,
 		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -2011,26 +1539,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0), ClassT>::bind(const C& c, R (C::*member)(A0, U) const,
-		typename Bind<R (ClassT::*)(A0), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -2272,48 +1780,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1>
-	template<class C>
-	void Bind<R (A0, A1), void>::bind(C& c, R (C::*member)(A0, A1))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1>
-	template<class C>
-	void Bind<R (A0, A1), void>::bind(const C& c, R (C::*member)(A0, A1) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1>
 	template<class U, class C>
 	void Bind<R (A0, A1), void>::bind(C* c, R (C::*member)(A0, A1, U),
@@ -2335,26 +1801,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1>
 	template<class U, class C>
-	void Bind<R (A0, A1), void>::bind(C& c, R (C::*member)(A0, A1, U),
-		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1>
-	template<class U, class C>
 	void Bind<R (A0, A1), void>::bind(const C* c, R (C::*member)(A0, A1, U) const,
 		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -2366,26 +1812,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1>
-	template<class U, class C>
-	void Bind<R (A0, A1), void>::bind(const C& c, R (C::*member)(A0, A1, U) const,
-		typename Bind<R (A0, A1), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -2628,48 +2054,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1>
-	template<class C>
-	void Bind<R (*)(A0, A1), void>::bind(C& c, R (C::*member)(A0, A1))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1>
-	template<class C>
-	void Bind<R (*)(A0, A1), void>::bind(const C& c, R (C::*member)(A0, A1) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1), void>::bind(C* c, R (C::*member)(A0, A1, U),
@@ -2691,26 +2075,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1), void>::bind(C& c, R (C::*member)(A0, A1, U),
-		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1), void>::bind(const C* c, R (C::*member)(A0, A1, U) const,
 		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -2722,26 +2086,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1), void>::bind(const C& c, R (C::*member)(A0, A1, U) const,
-		typename Bind<R (*)(A0, A1), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -2984,48 +2328,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(C& c, R (C::*member)(A0, A1))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const C& c, R (C::*member)(A0, A1) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(C* c, R (C::*member)(A0, A1, U),
@@ -3047,26 +2349,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(C& c, R (C::*member)(A0, A1, U),
-		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const C* c, R (C::*member)(A0, A1, U) const,
 		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -3078,26 +2360,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const C& c, R (C::*member)(A0, A1, U) const,
-		typename Bind<R (ClassT::*)(A0, A1), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -3340,48 +2602,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2>
-	template<class C>
-	void Bind<R (A0, A1, A2), void>::bind(C& c, R (C::*member)(A0, A1, A2))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2>
-	template<class C>
-	void Bind<R (A0, A1, A2), void>::bind(const C& c, R (C::*member)(A0, A1, A2) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2), void>::bind(C* c, R (C::*member)(A0, A1, A2, U),
@@ -3403,26 +2623,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2), void>::bind(C& c, R (C::*member)(A0, A1, A2, U),
-		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2), void>::bind(const C* c, R (C::*member)(A0, A1, A2, U) const,
 		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -3434,26 +2634,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2), void>::bind(const C& c, R (C::*member)(A0, A1, A2, U) const,
-		typename Bind<R (A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -3696,48 +2876,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2), void>::bind(C& c, R (C::*member)(A0, A1, A2))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2), void>::bind(const C& c, R (C::*member)(A0, A1, A2) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2), void>::bind(C* c, R (C::*member)(A0, A1, A2, U),
@@ -3759,26 +2897,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2), void>::bind(C& c, R (C::*member)(A0, A1, A2, U),
-		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2), void>::bind(const C* c, R (C::*member)(A0, A1, A2, U) const,
 		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -3790,26 +2908,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2), void>::bind(const C& c, R (C::*member)(A0, A1, A2, U) const,
-		typename Bind<R (*)(A0, A1, A2), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -4052,48 +3150,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, U),
@@ -4115,26 +3171,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -4146,26 +3182,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -4408,48 +3424,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, U),
@@ -4471,26 +3445,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, U),
-		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const,
 		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -4502,26 +3456,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const,
-		typename Bind<R (A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -4765,48 +3699,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, U),
@@ -4828,26 +3720,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, U),
-		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -4859,26 +3731,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -5122,48 +3974,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, U),
@@ -5185,26 +3995,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -5216,26 +4006,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -5479,48 +4249,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U),
@@ -5542,26 +4270,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U),
-		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -5573,26 +4281,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -5836,48 +4524,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U),
@@ -5899,26 +4545,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -5930,26 +4556,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -6193,48 +4799,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, U),
@@ -6256,26 +4820,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -6287,26 +4831,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -6550,48 +5074,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
@@ -6613,26 +5095,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -6644,26 +5106,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -6908,48 +5350,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
@@ -6971,26 +5371,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -7002,26 +5382,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -7266,48 +5626,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
@@ -7329,26 +5647,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -7360,26 +5658,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -7624,48 +5902,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
@@ -7687,26 +5923,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -7718,26 +5934,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -7982,48 +6178,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
@@ -8045,26 +6199,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -8076,26 +6210,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -8340,48 +6454,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
@@ -8403,26 +6475,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -8434,26 +6486,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -8698,48 +6730,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
@@ -8761,26 +6751,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -8792,26 +6762,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -9057,48 +7007,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
@@ -9120,26 +7028,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -9151,26 +7039,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -9416,48 +7284,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
@@ -9479,26 +7305,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -9510,26 +7316,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -9775,48 +7561,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
@@ -9838,26 +7582,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -9869,26 +7593,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -10134,48 +7838,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
@@ -10197,26 +7859,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -10228,26 +7870,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -10493,48 +8115,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
@@ -10556,26 +8136,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -10587,26 +8147,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -10852,48 +8392,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
@@ -10915,26 +8413,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -10946,26 +8424,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -11212,48 +8670,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
@@ -11275,26 +8691,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -11306,26 +8702,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -11572,48 +8948,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
@@ -11635,26 +8969,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -11666,26 +8980,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -11932,48 +9226,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
@@ -11995,26 +9247,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -12026,26 +9258,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -12292,48 +9504,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
@@ -12355,26 +9525,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -12386,26 +9536,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -12652,48 +9782,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
@@ -12715,26 +9803,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -12746,26 +9814,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -13012,48 +10060,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
@@ -13075,26 +10081,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -13106,26 +10092,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -13373,48 +10339,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
@@ -13436,26 +10360,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -13467,26 +10371,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -13734,48 +10618,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
@@ -13797,26 +10639,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -13828,26 +10650,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -14095,48 +10897,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
@@ -14158,26 +10918,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -14189,26 +10929,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -14456,48 +11176,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
@@ -14519,26 +11197,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -14550,26 +11208,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -14817,48 +11455,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
@@ -14880,26 +11476,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -14911,26 +11487,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -15178,48 +11734,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
@@ -15241,26 +11755,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -15272,26 +11766,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -15540,48 +12014,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
@@ -15603,26 +12035,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -15634,26 +12046,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -15902,48 +12294,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
@@ -15965,26 +12315,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -15996,26 +12326,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -16264,48 +12574,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
@@ -16327,26 +12595,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -16358,26 +12606,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -16626,48 +12854,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
@@ -16689,26 +12875,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -16720,26 +12886,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -16988,48 +13134,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
@@ -17051,26 +13155,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -17082,26 +13166,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -17350,48 +13414,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
@@ -17413,26 +13435,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class U, class C>
 	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
 		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -17444,26 +13446,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class U, class C>
-	void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
-		typename Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -17713,48 +13695,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
@@ -17776,26 +13716,6 @@ namespace Yuni
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class U, class C>
 	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
 		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -17807,26 +13727,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class U, class C>
-	void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
-		typename Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
@@ -18076,48 +13976,6 @@ namespace Yuni
 	}
 
 
-
-
-
-	// Bind: pointer-to-member
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(&c, member);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	// Bind: pointer-to-member const
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
-			pHolder = new Private::BindImpl::BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member));
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-
-
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
@@ -18139,26 +13997,6 @@ namespace Yuni
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
-				(&c, member, userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class U, class C>
 	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
 		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
 	{
@@ -18170,26 +14008,6 @@ namespace Yuni
 			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
 				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
 				(const_cast<C*>(c), reinterpret_cast<MemberType>(member), userdata);
-		}
-		else
-			// The object is null, we should unbind
-			unbind();
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	template<class U, class C>
-	void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const C& c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
-		typename Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::template WithUserData<U>::ParameterType userdata)
-	{
-		if (&c)
-		{
-			// The object is not null, go ahead
-			// Assigning a new bind
-			typedef R (C::*MemberType)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U);
-			pHolder = new Private::BindImpl::BoundWithMemberAndUserData<
-				typename WithUserData<U>::ParameterType,C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U)>
-				(const_cast<C*>(&c), reinterpret_cast<MemberType>(member), userdata);
 		}
 		else
 			// The object is null, we should unbind
