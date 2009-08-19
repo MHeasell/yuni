@@ -131,6 +131,13 @@ namespace Window
 		return false;
 	}
 
+	void OpenGLX11::onTitleChanged()
+	{
+		XTextProperty text;
+		XStringListToTextProperty(&String::CString(pTitle), 1, &text);
+		XSetWMName(pDisplay, pWindow, &text);
+	}
+
 
 } // namespace Window
 } // namespace Gfx
