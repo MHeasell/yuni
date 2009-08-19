@@ -9,6 +9,8 @@ namespace Gfx
 {
 namespace Window
 {
+
+
 	/*!
 	** \brief Window factory: manages API-dependent window creation.
 	**
@@ -30,6 +32,7 @@ namespace Window
 		Factory(const Factory&) {}
 
 	}; // class Factory
+
 
 
 
