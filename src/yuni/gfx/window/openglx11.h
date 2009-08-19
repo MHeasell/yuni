@@ -40,6 +40,8 @@ namespace Window
 		//! Activate / deactivate vertical synchronization (VSync)
 		virtual bool verticalSync(bool activate);
 
+		virtual void onTitleChanged();
+
 	private:
 		//! Connection to a X11 Server through TCP or DECnet communications protocols
 		Display* pDisplay;
