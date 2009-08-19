@@ -2,6 +2,7 @@
 #include "../api/gl.h"
 #include "opengl.h"
 
+
 namespace Yuni
 {
 namespace Gfx
@@ -14,7 +15,7 @@ namespace Window
 		// Enable Smooth Shading
 		glShadeModel(GL_SMOOTH);
 		// Black Background
-		glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		// Depth Buffer Setup
 		glClearDepth(1.0f);
 		// Enables Depth Testing
@@ -23,8 +24,12 @@ namespace Window
 		glDepthFunc(GL_LEQUAL);
 		// Really nice perspective calculations
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
+		// flush
+		glFlush();
 		return true;
 	}
+
 
 	void AOpenGL::resize(unsigned int width, unsigned int height)
 	{
@@ -49,6 +54,8 @@ namespace Window
 		glLoadIdentity();
 	}
 
-} // Window
-} // Gfx
-} // Yuni
+
+
+} // namespace Window
+} // namespace Gfx
+} // namespace Yuni

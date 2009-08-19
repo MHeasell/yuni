@@ -23,6 +23,10 @@ namespace Window
 	class DirectXMSW: public AMSWindows, public Api::IGfxAPI
 	{
 	public:
+		//! The Threading Policy
+		typedef AMSWindows::ThreadingPolicy ThreadingPolicy;
+
+	public:
 		DirectXMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
 			:AMSWindows(title, width, height, bitDepth, fullScreen),
 			pDXObject(NULL), pDXDevice(NULL), pVSync(false) // Deactivate vsync by default
@@ -32,13 +36,15 @@ namespace Window
 
 		virtual bool initialize();
 		virtual void close();
-		virtual void blit() { pDXDevice->Present(NULL, NULL, NULL, NULL); }
 		virtual void resize(unsigned int width, unsigned int height);
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;
 		//! Activate / deactivate vertical synchronization (VSync)
 		virtual bool verticalSync(bool activate);
+
+	protected:
+		void onBlitWL() { pDXDevice->Present(NULL, NULL, NULL, NULL); }
 
 	private:
 		void release();

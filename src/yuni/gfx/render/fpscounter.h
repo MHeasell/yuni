@@ -24,7 +24,7 @@ namespace Render
 		*/
 		FPSCounter()
 			:Yuni::Threads::Timer(1000), pFrameCount(0), pTotalFrameCount(0),
-			 pFPS(0), pSecondsElapsed(0)
+			pFPS(0), pSecondsElapsed(0)
 		{
 			start();
 		}

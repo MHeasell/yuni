@@ -8,7 +8,7 @@
 ** \brief Our own application class
 **
 ** To make it a graphical application with 3D support,
-** we have it inherit Yuni::Application::Gfx3D.
+** we have to inherit from Yuni::Application::Gfx3D.
 */
 class HelloWorld : public Yuni::Application::Gfx3D
 {
@@ -30,7 +30,6 @@ int main(int argc, char* argv[])
 {
 	// Instanciate our app, feeding it the console arguments
 	HelloWorld app(argc, argv);
-
 	// Run the execute() method to launch the app
 	app.execute();
 
@@ -88,14 +87,14 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, char* cmdLine
 			{
 				arg++;
 			}
-        
+
 			if (arg[0] != 0)
 			{
-				arg[0] = 0;    
-				arg++;
+				arg[0] = 0;
+				++arg;
 			}
 		}
-	}    
+	}
 
 	// Put the program name into argv[0]
 	char filename[_MAX_PATH];
@@ -103,10 +102,11 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, char* cmdLine
 	GetModuleFileName(NULL, filename, _MAX_PATH);
 	argv[0] = filename;
 
-	// Call the user specified main function    
+	// Call the user specified main function
 	result = main(argc, argv);
 
 	free(argv);
 	return result;
 }
 #endif
+

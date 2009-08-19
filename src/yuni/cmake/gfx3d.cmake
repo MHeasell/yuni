@@ -4,6 +4,7 @@ Set(SRC_GFX3D
 		application/gfx3d.h application/gfx3d.cpp
 		gfx/engine.h gfx/engine.cpp
 		gfx/window/window.h
+		gfx/window/window.hxx
 		gfx/window/factory.h gfx/window/factory.cpp
 		gfx/window/opengl.h gfx/window/opengl.cpp
 		gfx/window/msw.h
@@ -59,5 +60,7 @@ ENDIF(WIN32)
 source_group(Gfx3D FILES ${SRC_GFX3D})
 
 Add_Library(yuni-static-gfx3d-core STATIC ${SRC_GFX3D})
-target_link_libraries(yuni-static-gfx3d-core ${OPENGL_LIBRARY} ${DX9_LIBRARIES})
+target_link_libraries(yuni-static-gfx3d-core ${OPENGL_LIBRARY} ${DX9_LIBRARIES}
+	# Required on Linux
+	yuni-static-core yuni-static-device-display yuni-static-gfx-core)
 

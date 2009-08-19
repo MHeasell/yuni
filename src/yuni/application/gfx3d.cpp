@@ -11,7 +11,8 @@ namespace Application
 
 		void GracefullyStopTheEngine(void)
 		{
-			Gfx::Engine::Instance()->release();
+			if (Gfx::Engine::Instance())
+				Gfx::Engine::Instance()->release();
 		}
 
 	} // anonymous namespace
@@ -28,7 +29,7 @@ namespace Application
 	Gfx3D::~Gfx3D()
 	{
 		// Ensures all notifiers are not linked with this class
-		destroyingObserver();
+		destroyBoundEvents();
 	}
 
 

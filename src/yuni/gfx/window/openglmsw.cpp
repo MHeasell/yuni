@@ -134,41 +134,54 @@ namespace Window
 		AOpenGL::release();
 	}
 
+
 	void OpenGLMSW::resize(unsigned int width, unsigned int height)
 	{
 		AOpenGL::resize(width, height);
 		AWindow::resize(width, height);
 	}
 
+
 	bool OpenGLMSW::verticalSync() const
 	{
 		typedef BOOL (APIENTRY *SwapGetIntervalProto)();
 		SwapGetIntervalProto getSwapIntervalEXT = 0;
 
-		String extensions((const char*)glGetString(GL_EXTENSIONS));
+		const String extensions((const char*)glGetString(GL_EXTENSIONS));
 		if (extensions.find("WGL_EXT_swap_control") != String::npos)
+		{
 			getSwapIntervalEXT = (SwapGetIntervalProto)wglGetProcAddress("wglGetSwapIntervalEXT");;
-
-		if (getSwapIntervalEXT)
-			return getSwapIntervalEXT() ? true : false;
+			if (getSwapIntervalEXT)
+				return getSwapIntervalEXT() ? true : false;
+		}
 		// From experience, default seems to be true under windows
 		return true;
 	}
+
 
 	bool OpenGLMSW::verticalSync(bool active)
 	{
 		typedef BOOL (APIENTRY *SwapIntervalProto)(int);
 		SwapIntervalProto swapIntervalEXT = 0;
 
-		String extensions((const char*)glGetString(GL_EXTENSIONS));
+		const String extensions((const char*)glGetString(GL_EXTENSIONS));
 		if (extensions.find("WGL_EXT_swap_control") != String::npos)
+		{
 			swapIntervalEXT = (SwapIntervalProto)wglGetProcAddress("wglSwapIntervalEXT");
-
-		if (swapIntervalEXT)
-			return swapIntervalEXT(active ? 1 : 0) ? true : false;
+			if (swapIntervalEXT)
+				return swapIntervalEXT(active ? 1 : 0) ? true : false;
+		}
 		// Fail
 		return false;
 	}
+
+
+	void OpenGLMSW::onBlitWL()
+	{
+		SwapBuffers(pHDC);
+	}
+
+
 
 } // namespace Window
 } // namespace Gfx

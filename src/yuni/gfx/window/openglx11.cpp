@@ -28,7 +28,7 @@ namespace Window
 				GLX_STENCIL_SIZE, 8,
 				GLX_ALPHA_SIZE, 8,
 				GLX_DOUBLEBUFFER,
-				YUNI_X11LIB_NONE
+				YUNI_X11LIB_NONE // end of list
 			};
 		XVisualInfo* vinfo = glXChooseVisual(pDisplay, DefaultScreen(pDisplay), attributes);
 		if (NULL == vinfo)
@@ -41,31 +41,40 @@ namespace Window
 		pAttr.colormap = XCreateColormap(pDisplay, root, vinfo->visual, AllocNone);
 		pAttr.background_pixel = BlackPixel(pDisplay, vinfo->screen);
 		pAttr.border_pixel = BlackPixel(pDisplay, vinfo->screen);
+		pAttr.event_mask = ExposureMask | KeyPressMask | ButtonPressMask | StructureNotifyMask;
+
+		if (pFullScreen)
+		{
+			pAttr.override_redirect = True;
+		}
 
 		pWindow = XCreateWindow(pDisplay, root, 30, 30, pWidth, pHeight,
 			0, vinfo->depth, CopyFromParent, vinfo->visual,
-			CWBackPixel | CWBorderPixel | CWColormap, &pAttr);
+			CWBackPixel | CWBorderPixel | CWColormap | CWEventMask, &pAttr);
 
 		XMapWindow(pDisplay, pWindow);
-		XStoreName(pDisplay, pWindow, "VERY SIMPLE APPLICATION");
+		XStoreName(pDisplay, pWindow, pTitle.c_str());
 
-		pContext = glXCreateContext(pDisplay, vinfo, NULL, True);
+		pContext = ::glXCreateContext(pDisplay, vinfo, NULL, True);
 		if (NULL == pContext)
 		{
 			std::cerr << "glXCreateContext failed" << std::endl;
 			return false;
 		}
-		if (!glXMakeCurrent(pDisplay, pWindow, pContext))
+
+				if (!glXMakeCurrent(pDisplay, pWindow, pContext))
 		{
-			std::cout << "glXMakeCurrent failed" << std::endl;
+			std::cerr << "DRI not available" << std::endl;
 			return false;
 		}
 		resize(pWidth, pHeight);
 		if (!AOpenGL::initialize())
 		{
-			std::cout << "GL initialization failed" << std::endl;
+			std::cerr << "GL initialization failed" << std::endl;
 			return false;
 		}
+		// Window Attributes
+		XGetWindowAttributes(pDisplay, pWindow, &pWndAttr);
 		return true;
 	}
 
@@ -76,7 +85,7 @@ namespace Window
 		{
 			if (!::glXMakeCurrent(pDisplay, YUNI_X11LIB_NONE, NULL))
 			{
-				printf("Could not release drawing context.\n");
+				std::cerr << "Could not release drawing context.\n";
 			}
 			glXDestroyContext(pDisplay, pContext);
 			pContext = NULL;
@@ -93,50 +102,118 @@ namespace Window
 		AOpenGL::release();
 	}
 
-	void OpenGLX11::blit()
+
+	void OpenGLX11::onBlitWL()
 	{
-		//XNextEvent(pDisplay, &xev);
-		XGetWindowAttributes(pDisplay, pWindow, &pWndAttr);
-		glXSwapBuffers(pDisplay, pWindow);
+	//	XGetWindowAttributes(pDisplay, pWindow, &pWndAttr);
+		// Swap buffer when doublebuffer is enabled
+		::glXSwapBuffers(pDisplay, pWindow);
 	}
+
 
 	bool OpenGLX11::verticalSync() const
 	{
 		typedef int (*SwapGetIntervalProto)();
 		SwapGetIntervalProto getSwapIntervalEXT = 0;
 
-		String extensions((const char*)glGetString(GL_EXTENSIONS));
+		const String extensions((const char*)glGetString(GL_EXTENSIONS));
 		if (extensions.find("GLX_MESA_swap_control") != String::npos)
-			getSwapIntervalEXT = (SwapGetIntervalProto)glXGetProcAddress((GLubyte*)"glXGetSwapIntervalMESA");
-
-		if (getSwapIntervalEXT)
-			return getSwapIntervalEXT();
+		{
+			getSwapIntervalEXT = (SwapGetIntervalProto)glXGetProcAddress((const GLubyte*)"glXGetSwapIntervalMESA");
+			if (getSwapIntervalEXT)
+				return getSwapIntervalEXT();
+		}
 		// From what I read, default is false when no extension is present.
 		return false;
 	}
+
 
 	bool OpenGLX11::verticalSync(bool active)
 	{
 		typedef int (*SwapIntervalProto)(int);
 		SwapIntervalProto swapIntervalEXT = 0;
 
-		String extensions((const char*)glGetString(GL_EXTENSIONS));
+		const String extensions((const char*)glGetString(GL_EXTENSIONS));
 		if (extensions.find("GLX_SGI_swap_control") != String::npos)
-			swapIntervalEXT = (SwapIntervalProto)glXGetProcAddress((GLubyte*)"glXSwapIntervalSGI");
-		else if (extensions.find("GLX_MESA_swap_control") != String::npos)
-			swapIntervalEXT = (SwapIntervalProto)glXGetProcAddress((GLubyte*)"glXSwapIntervalMESA");
-
+			swapIntervalEXT = (SwapIntervalProto)glXGetProcAddress((const GLubyte*)"glXSwapIntervalSGI");
+		else
+		{
+			if (extensions.find("GLX_MESA_swap_control") != String::npos)
+				swapIntervalEXT = (SwapIntervalProto)glXGetProcAddress((const GLubyte*)"glXSwapIntervalMESA");
+		}
 		if (swapIntervalEXT)
 			return swapIntervalEXT(active ? 1 : 0);
 		return false;
 	}
 
-	void OpenGLX11::onTitleChanged()
+
+	void OpenGLX11::onInternalTitleChangedWL()
 	{
+		// The title of the window has been changed - Notifying the XWindow
 		XTextProperty text;
-		XStringListToTextProperty(&String::CString(pTitle), 1, &text);
+		char* t = const_cast<char*>(pTitle.c_str());
+		XStringListToTextProperty(&t, 1, &text);
 		XSetWMName(pDisplay, pWindow, &text);
 	}
+
+
+	bool OpenGLX11::pollEvents()
+	{
+		if (!XPending(pDisplay))
+			return false;
+
+		// Event loop
+		do
+		{
+			XNextEvent(pDisplay, &pXEvent);
+			switch (pXEvent.type)
+			{
+				case Expose:
+					break;
+
+				case ConfigureNotify:
+					{
+						// Resize Only if our window-size changed
+						if ((int)pWidth != pXEvent.xconfigure.width || (int)pHeight != pXEvent.xconfigure.height)
+							resize(pXEvent.xconfigure.width, pXEvent.xconfigure.height);
+						break;
+					}
+
+				case ButtonPress:
+					// KeyPress
+					break;
+
+				case KeyPress:
+					if (0)
+					{/*
+						if (XLookupKeysym(&pXEvent.xkey, 0) == XK_Escape)
+						{
+							done = True;
+						}
+						if (XLookupKeysym(&pXEvent.xkey,0) == XK_F1)
+						{
+							destroyWindow();
+							fullscreen = !fullscreen;
+							createWindow();
+						}*/
+					}
+					break;
+				case ClientMessage:
+					{
+						if (*XGetAtomName(pDisplay, pXEvent.xclient.message_type) == *"WM_PROTOCOLS")
+						{
+							close();
+						}
+						break;
+					}
+				default:
+					break;
+			}
+		} while (XPending(pDisplay) > 0);
+		return true;
+	}
+
+
 
 
 } // namespace Window

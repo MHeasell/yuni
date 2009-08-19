@@ -26,7 +26,7 @@ public:
 	virtual ~HelloWorld()
 	{
 		// It is advised to disconnect all events at this stage
-		destroyingObserver();
+		destroyBoundEvents();
 	}
 
 	void onFPSChanged(unsigned int fps)

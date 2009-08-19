@@ -22,10 +22,12 @@ namespace Window
 
 		virtual bool initialize() { return AOpenGL::initialize(); }
 		virtual void close() { AOpenGL::release(); }
-		virtual void blit() {}
 		// virtual bool pollEvents();
 
-		virtual void onTitleChanged() {}
+
+	protected:
+		void onBlitWL() {}
+		void onInternalTitleChangedWL() {}
 
 	}; // class OpenGLCocoa
 

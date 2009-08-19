@@ -13,6 +13,8 @@
 # include "decorators/verbositylevel.h"
 # include "decorators/time.h"
 # include "decorators/message.h"
+# include "../static/assert.h"
+# include "stream.h"
 
 
 # ifdef NDEBUG
@@ -51,6 +53,7 @@ namespace Logs
 	** \code
 	** [date][color][verbosity level][/color] <msg>
 	** \endcode
+	** The color is only available on Unixes.
 	**
 	**
 	** \tparam TP The Threading Policy
@@ -60,12 +63,12 @@ namespace Logs
 	template<
 		template<class> class TP = Policy::ObjectLevelLockable, // The Threading Policy
 		class Handler = StdCout<>,
-		class Decorator = Time< VerbosityLevel<Message<> > >    // Decorators
+		class Decorator = Time< VerbosityLevel<Message<> > >
 		>
 	class Logger
-		:public TP<Logger<TP,Handler,Decorator> >,   // inherits from the Threading Policy
-		public Decorator,                    // inherits from all decorators
-		public Handler                       // inherits from all handlers
+		:public TP<Logger<TP,Handler,Decorator> >,  // inherits from the Threading Policy
+		public Decorator,                           // inherits from all decorators
+		public Handler                              // inherits from all handlers
 	{
 	public:
 		//! The full prototype of the logger
@@ -82,20 +85,24 @@ namespace Logs
 			defaultVerbosityLevel = YUNI_LOGS_DEFAULT_VERBOSITY,
 		};
 
-	private:
-		/*!
-		** \brief The buffer for the message
-		**
-		** \internal This is an intermediate class that handles a temporary buffer where
-		** the message can be built. The message will be really handled by the static list
-		** of handlers when this class is destroyed. The method `internalFlush()` is called
-		** , which ensures thread-safety (if required) while the message is passing through
-		** the handlers.
-		** \tparam V The verbosity level of the message
-		** \tparam E A non-zero value if the message must be managed
-		*/
-		template<class V, int E> class StreamWriter;
-		# include "stream.h"
+	public:
+		// Aliases (for code clarity)
+		//! Alias for the CheckpointWriter
+		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Checkpoint, Verbosity::Checkpoint::enabled> CheckpointWriter;
+		//! Alias for the NoticeWriter
+		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Notice, Verbosity::Notice::enabled> NoticeWriter;
+		//! Alias for the NoticeWriter
+		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Info, Verbosity::Info::enabled> InfoWriter;
+		//! Alias for the WarningWriter
+		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Warning, Verbosity::Warning::enabled> WarningWriter;
+		//! Alias for the ErrorWriter
+		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Error, Verbosity::Error::enabled> ErrorWriter;
+		//! Alias for the FatalWriter
+		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Fatal, Verbosity::Fatal::enabled> FatalWriter;
+		//! Alias for the DebugWriter
+		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Debug, Verbosity::Debug::enabled> DebugWriter;
+		//! Alias for the UnknownWriter
+		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Unknown, Verbosity::Unknown::enabled> UnknownWriter;
 
 	public:
 		//! \name Constructors & Destructor
@@ -115,38 +122,54 @@ namespace Logs
 		//@}
 
 
-		//! \name Messages
+		//! \name Checkpoint
 		//@{
-		//! Start a `checkpoint` message
-		StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled> checkpoint();
-		template<typename U> StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled> checkpoint(const U& u);
+		CheckpointWriter checkpoint();
+		template<typename U> CheckpointWriter checkpoint(const U& u);
+		//@}
 
-		//! Start a notice message
-		StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled> notice();
-		template<typename U> StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled> notice(const U& u);
+		//! \name Notice
+		//@{
+		NoticeWriter notice();
+		template<typename U> NoticeWriter notice(const U& u);
+		//@}
 
-		//! Start a warning message
-		StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled> warning();
-		template<typename U> StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled> warning(const U& u);
+		//! \name Info
+		//@{
+		InfoWriter info();
+		template<typename U> InfoWriter info(const U& u);
+		//@}
 
-		//! Start an error message
-		StreamWriter<Verbosity::Error, Verbosity::Error::enabled> error();
-		template<typename U> StreamWriter<Verbosity::Error, Verbosity::Error::enabled> error(const U& u);
+		//! \name Warning
+		//@{
+		WarningWriter warning();
+		template<typename U> WarningWriter warning(const U& u);
+		//@}
 
-		//! Start a fatal message
-		StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled> fatal();
-		template<typename U> StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled> fatal(const U& u);
+		//! \name Error
+		//@{
+		ErrorWriter error();
+		template<typename U> ErrorWriter error(const U& u);
+		//@}
 
-		//! Start a debug message (disabled if NDEBUG defined)
-		StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled> debug();
-		template<typename U> StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled> debug(const U& u);
+		//! \name Fatal
+		//@{
+		FatalWriter fatal();
+		template<typename U> FatalWriter fatal(const U& u);
+		//@}
+
+		//! \name Debug (disabled if NDEBUG defined)
+		//@{
+		DebugWriter debug();
+		template<typename U> DebugWriter debug(const U& u);
+		//@}
 
 
 		//! Start a custom verbosity level message
-		template<class C> StreamWriter<C,C::enabled> custom();
+		template<class C> Private::LogImpl::Writer<LoggerType,C,C::enabled> custom();
 
 		//! Start a message with no verbosity level (always displayed)
-		template<typename U> StreamWriter<Verbosity::Unknown, Verbosity::Unknown::enabled> operator << (const U& u);
+		template<typename U> UnknownWriter operator << (const U& u);
 		//@}
 
 	private:
@@ -159,7 +182,8 @@ namespace Logs
 		//! The maximum verbosity level allowed
 		int pMaxLevel;
 
-		template<class, int> friend class StreamWriter;
+		// A friend !
+		template<class, class, int> friend class Private::LogImpl::Writer;
 
 	}; // class Logger
 

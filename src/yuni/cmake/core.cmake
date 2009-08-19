@@ -144,10 +144,9 @@ source_group(Core\\Bind FILES ${SRC_CORE_BIND})
 
 Set(SRC_CORE_EVENT
 				core/event/event.h core/event/event.hxx
-				core/event/event.declaration.h
-				core/event/event.undef.h
+				core/event/interfaces.h core/event/interfaces.hxx
+				core/event/traits.h
 				core/event/observer/observer.h core/event/observer/observer.hxx
-				core/event/ievent.h core/event/ievent.hxx core/event/ievent.cpp
 				core/event.h
 				)
 source_group(Core\\Event FILES ${SRC_CORE_EVENT})
@@ -282,19 +281,26 @@ Set(SRC_GFX_CORE
 		)
 source_group(Gfx FILES ${SRC_GFX_CORE})
 
-Set(SRC_PREDICATES_RESULTS
+Set(SRC_CORE_PREDICATES_RESULTS
 		core/predicate/result/sum.h
 		core/predicate/result/and.h
 		core/predicate/result/or.h
 		)
-source_group(Core\\Predicate\\Result FILES ${SRC_PREDICATES_RESULTS})
+source_group(Core\\Predicate\\Result FILES ${SRC_CORE_PREDICATES_RESULTS})
 
 
+Set(SRC_CORE_SYSTEM_CONSOLE
+		core/system/console.h
+		core/system/console/console.h
+		core/system/console/console.hxx
+		)
+source_group(Core\\System\\Console FILES ${SRC_CORE_SYSTEM_CONSOLE})
 
 
 
 ADD_LIBRARY(yuni-static-core STATIC
 		yuni.h
+		${SRC_CORE_PREDICATES_RESULTS}
 		${SRC_CORE_STATIC}
 		${SRC_CORE_ALLOCATOR}
 		${SRC_CORE_ATOMIC}
@@ -321,6 +327,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_VERSION}
 		${SRC_CORE_SYSTEM}
 		${SRC_CORE_SYSTEM_WINDOWS}
+		${SRC_CORE_SYSTEM_CONSOLE}
 		${SRC_THREADS} ${SRC_JOBS}
 		${SRC_APPLICATION}
 	)

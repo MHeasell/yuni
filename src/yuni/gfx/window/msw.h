@@ -23,6 +23,10 @@ namespace Window
 	class AMSWindows: public AWindow
 	{
 	public:
+		//! The Threading Policy
+		typedef AWindow::ThreadingPolicy ThreadingPolicy;
+
+	public:
 		AMSWindows(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
 			:AWindow(title, width, height, bitDepth, fullScreen)
 		{}
@@ -31,7 +35,9 @@ namespace Window
 		virtual void close();
 
 		virtual bool pollEvents();
-		virtual void onTitleChanged();
+
+	protected:
+		virtual void onInternalTitleChangedWL();
 
 	protected:
 		String pWindowClassName;

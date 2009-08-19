@@ -1,8 +1,6 @@
 #ifndef __YUNI_CORE_LOGS_LOGS_HXX__
 # define __YUNI_CORE_LOGS_LOGS_HXX__
 
-# include "../static/assert.h"
-
 
 namespace Yuni
 {
@@ -11,13 +9,13 @@ namespace Logs
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	Logger<TP,Handler,Decorator>::Logger()
+	inline Logger<TP,Handler,Decorator>::Logger()
 		:pMaxLevel(Logger<TP,Handler,Decorator>::defaultVerbosityLevel)
 	{}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	Logger<TP,Handler,Decorator>::Logger(const Logger&)
+	inline Logger<TP,Handler,Decorator>::Logger(const Logger&)
 	{
 		YUNI_STATIC_ASSERT(false, ThisClassCannotBeCopied);
 	}
@@ -25,14 +23,14 @@ namespace Logs
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	Logger<TP,Handler,Decorator>::~Logger()
+	inline Logger<TP,Handler,Decorator>::~Logger()
 	{}
 
 
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<class VerbosityType>
-	inline void
+	void
 	Logger<TP,Handler,Decorator>::internalFlush(const String& s)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
@@ -45,122 +43,139 @@ namespace Logs
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>
+	inline typename Logger<TP,Handler,Decorator>::NoticeWriter
 	Logger<TP,Handler,Decorator>::notice()
 	{
-		return StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>(*this);
+		return NoticeWriter(*this);
+	}
+
+	template<template<class> class TP, class Handler, class Decorator>
+	inline typename Logger<TP,Handler,Decorator>::InfoWriter
+	Logger<TP,Handler,Decorator>::info()
+	{
+		return InfoWriter(*this);
 	}
 
 
+
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>
+	inline typename Logger<TP,Handler,Decorator>::CheckpointWriter
 	Logger<TP,Handler,Decorator>::checkpoint()
 	{
-		return StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>(*this);
+		return typename Logger<TP,Handler,Decorator>::CheckpointWriter(*this);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>
+	inline typename Logger<TP,Handler,Decorator>::WarningWriter
 	Logger<TP,Handler,Decorator>::warning()
 	{
-		return StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>(*this);
+		return WarningWriter(*this);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Error, Verbosity::Error::enabled>
+	inline typename Logger<TP,Handler,Decorator>::ErrorWriter
 	Logger<TP,Handler,Decorator>::error()
 	{
-		return StreamWriter<Verbosity::Error, Verbosity::Error::enabled>(*this);
+		return ErrorWriter(*this);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>
+	inline typename Logger<TP,Handler,Decorator>::FatalWriter
 	Logger<TP,Handler,Decorator>::fatal()
 	{
-		return StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>(*this);
+		return FatalWriter(*this);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>
+	inline typename Logger<TP,Handler,Decorator>::DebugWriter
 	Logger<TP,Handler,Decorator>::debug()
 	{
-		return StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>(*this);
+		return DebugWriter(*this);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>::template StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>
+	inline typename Logger<TP,Handler,Decorator>::NoticeWriter
 	Logger<TP,Handler,Decorator>::notice(const U& u)
 	{
-		return StreamWriter<Verbosity::Notice, Verbosity::Notice::enabled>(*this, u);
+		return NoticeWriter(*this, u);
 	}
+
+	template<template<class> class TP, class Handler, class Decorator>
+	template<typename U>
+	inline typename Logger<TP,Handler,Decorator>::InfoWriter
+	Logger<TP,Handler,Decorator>::info(const U& u)
+	{
+		return InfoWriter(*this, u);
+	}
+
 
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>
+	inline typename Logger<TP,Handler,Decorator>::CheckpointWriter
 	Logger<TP,Handler,Decorator>::checkpoint(const U& u)
 	{
-		return StreamWriter<Verbosity::Checkpoint, Verbosity::Checkpoint::enabled>(*this, u);
+		return CheckpointWriter(*this, u);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>
+	inline typename Logger<TP,Handler,Decorator>::WarningWriter
 	Logger<TP,Handler,Decorator>::warning(const U& u)
 	{
-		return StreamWriter<Verbosity::Warning, Verbosity::Warning::enabled>(*this, u);
+		return WarningWriter(*this, u);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Error, Verbosity::Error::enabled>
+	inline typename Logger<TP,Handler,Decorator>::ErrorWriter
 	Logger<TP,Handler,Decorator>::error(const U& u)
 	{
-		return StreamWriter<Verbosity::Error, Verbosity::Error::enabled>(*this, u);
+		return ErrorWriter(*this, u);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>
+	inline typename Logger<TP,Handler,Decorator>::FatalWriter
 	Logger<TP,Handler,Decorator>::fatal(const U& u)
 	{
-		return StreamWriter<Verbosity::Fatal, Verbosity::Fatal::enabled>(*this, u);
+		return FatalWriter(*this, u);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>
+	inline typename Logger<TP,Handler,Decorator>::DebugWriter
 	Logger<TP,Handler,Decorator>::debug(const U& u)
 	{
-		return StreamWriter<Verbosity::Debug, Verbosity::Debug::enabled>(*this, u);
+		return DebugWriter(*this, u);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<class C>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<C, C::enabled>
+	inline Private::LogImpl::Writer<Logger<TP,Handler,Decorator>, C, C::enabled>
 	Logger<TP,Handler,Decorator>::custom()
 	{
-		return StreamWriter<C, C::enabled>(*this);
+		return Private::LogImpl::Writer<LoggerType, C, C::enabled>(*this);
 	}
 
 
 	template<template<class> class TP, class Handler, class Decorator>
 	template<typename U>
-	typename Logger<TP,Handler,Decorator>:: template StreamWriter<Verbosity::Unknown, Verbosity::Unknown::enabled>
+	inline typename Logger<TP,Handler,Decorator>::UnknownWriter
 	Logger<TP,Handler,Decorator>::operator << (const U& u)
 	{
-		return StreamWriter<Verbosity::Unknown, Verbosity::Unknown::enabled>(*this, u);
+		return UnknownWriter(*this, u);
 	}
 
 

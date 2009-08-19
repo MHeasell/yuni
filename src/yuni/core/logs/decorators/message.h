@@ -2,6 +2,7 @@
 # define __YUNI_CORE_LOGS_DECORATORS_MESSAGE_H__
 
 # include "../null.h"
+# include "../../system/console.h"
 
 
 namespace Yuni
@@ -21,13 +22,15 @@ namespace Logs
 			out.put(' ');
 
 			// Color
-			if (VerbosityType::checkpoint && Handler::unixColorsAllowed)
-				out << "[1m"; // bold
+			if (VerbosityType::messageColor != System::Console::none)
+				System::Console::TextColor<VerbosityType::messageColor>::Set(out);
+
 			// The message
 			out.write(s.c_str(), s.length());
+
 			// Resetting the color
-			if (VerbosityType::checkpoint && Handler::unixColorsAllowed)
-				out << "[0m";
+			if (VerbosityType::messageColor != System::Console::none)
+				System::Console::ResetTextColor(out);
 
 			// Transmit the message to the next handler
 			LeftType:: template internalDecoratorAddPrefix<Handler, VerbosityType,O>(out, s);
