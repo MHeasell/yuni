@@ -1,0 +1,80 @@
+
+							Computer Graphics Techniques
+
+
+I) Purpose of the document:
+===========================
+
+This document is a technical state of the art on computer graphics. The point
+is to list known techniques, explain quickly how they work, and recognize each
+of them's qualities and drawbacks, with a particular interest on performance,
+memory usage and visual quality.
+
+The second step in this approach is to identify, for each graphics feature,
+which technique should be used depending on a given context. Each technique can
+then be categorized as:
+ A) Best quality is required, whatever the cost (not real-time).
+ B) Good quality is required in real-time.
+ C) Resources are very limited.
+ D) Not interesting in any situation.
+
+
+II) Techniques by feature:
+==========================
+
+  Shadows:
+  --------
+
+	1] Shadow mapping:
+	------------------
+	How it works:
+		Make a first render in Z-Buffer using the light as a camera.
+		Objects failing the Z-test are in shadow
+	Remarks:
+		Not always very precise, creates hard shadows only, requires multiple
+		passes, can induce shadow continuity glitches.
+	Quality:
+		Medium
+	Speed:
+		Fast
+	Memory usage:
+		Medium
+			SCORE: C
+
+	2] Shadow volumes with stencil buffering:
+	-----------------------------------------
+	How it works:
+		Construct all the volumes of the scene that are in shadow.
+		Use stencil buffer and Z-buffer to count the number of light/shadow
+		faces crossed by the ray for each pixel.
+	Remarks:
+		There are adjustments to be made when the eye is in shadow.
+		A technique exists to avoid the problem altogether, but it is patented.
+	Quality:
+		Good
+	Speed:
+		Low
+	Memory Usage:
+		High
+			SCORE: B
+
+  Rendering:
+  ----------
+
+	1] Software rendering on triangle meshes:
+    -----------------------------------------
+	Quality: Low to Good
+	Speed: Slow
+			SCORE: D
+
+	2] Hardware rendering on triangle meshes:
+	-----------------------------------------
+	Quality: Good
+	Speed: Good
+			SCORE: B + C
+
+	3] Ray-tracing on vector-based geometry:
+	----------------------------------------
+	Quality: Best
+	Speed: Very slow (not real-time)
+			SCORE: A
