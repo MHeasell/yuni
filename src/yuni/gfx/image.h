@@ -56,7 +56,7 @@ namespace Gfx
 		/*!
 		** \brief Get the actual data (pixels) of the image
 		*/
-		const T* const * const data() const { return pData; }
+		const T* const * data() const { return pData; }
 		T** data() { return pData; }
 		//@}
 
