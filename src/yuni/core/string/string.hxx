@@ -1629,7 +1629,6 @@ namespace Yuni
 			switch (pPtr[leftValue])
 			{
 				case ';':
-				case '/':
 					// Empty value
 					break;
 				case '"':
@@ -1645,6 +1644,10 @@ namespace Yuni
 							value.append(pPtr + leftValue, pSize - leftValue);
 						break;
 					}
+				case '/':
+					// Empty value if we have a comment otherwise '/' is a valid entry
+					if (leftValue + 1 >= pSize || pPtr[leftValue + 1] == '/')
+						break;
 				default:
 					{
 						// Standard value
