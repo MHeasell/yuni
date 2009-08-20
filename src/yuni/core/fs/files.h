@@ -61,7 +61,6 @@ namespace Files
 
 	//! \name Load the content of a file
 	//@{
-
 	/*!
 	** \brief Open and Read the content of a file and write it into a 1D array
 	** \ingroup PathsAndFiles
@@ -83,7 +82,7 @@ namespace Files
 	** \ingroup PathsAndFiles
 	**
 	** \param filename The filename to open
-	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded 
+	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded
 	** \return The content of the file, null terminated, NULL if size > hardlimit or if any error has occurred.
 	** If not NULL, this value must be deleted with the keyword `delete[]`
 	*/
@@ -110,7 +109,6 @@ namespace Files
 	** \return True if the operation succeeded, false otherwise
 	*/
 	bool SaveToFile(const String& filename, const String& content);
-
 	//@}
 
 

@@ -9,6 +9,23 @@
 #include <sys/stat.h>
 #include <fstream>
 #include "paths.h"
+#include <errno.h>
+#include <dirent.h>
+#include <fcntl.h>
+
+
+
+#ifndef S_ISDIR
+#	define S_ISDIR(mode) ( (mode & S_IFMT) == S_IFDIR)
+#endif
+
+
+/* Make lstat work even with -ansi mode - and under Windows */
+#ifdef ANT_WINDOWS
+#	define YUNI_INTERNAL_LSTAT(path, sb) stat(path, sb)
+#else
+#	define YUNI_INTERNAL_LSTAT(path, sb) stat(path, sb)
+#endif
 
 
 
@@ -177,37 +194,187 @@ namespace Paths
 		# endif
 	}
 
-	bool MakeDir(const String& p)
-	{
-		if (p.empty())
-			return true;
-		String::Vector parts;
-		p.explode(parts, Separator, false);
-		String pth;
-		pth.reserve(p.size());
 
-		for (String::Vector::const_iterator i = parts.begin(); i != parts.end(); ++i)
+	bool MakeDir(const char path[], unsigned int mode)
+	{
+		if (NULL == path || '\0' == *path)
+			return true;
+
+		char buffer[FILENAME_MAX];
+		strncpy(buffer, path, sizeof(buffer));
+		char* pt = buffer;
+		char tmp;
+		while (1)
 		{
-			pth += *i;
-			# ifndef YUNI_OS_WINDOWS
-			pth += Separator;
-			# endif
-			if (!Exists(pth))
+			if ('\\' == *pt || '/' == *pt || '\0' == *pt)
 			{
-				# ifdef YUNI_OS_WINDOWS
-				if (_mkdir(pth.c_str()))
-				# else
-				if (mkdir(pth.c_str(), 01755))
-				# endif
+				tmp = *pt;
+				*pt = '\0';
+				if ('\0' != buffer[0] && '\0' != buffer[1] && '\0' != buffer[2])
 				{
-					// Impossible to create the folder
-					return false;
+					# ifdef YUNI_OS_WINDOWS
+					(void)mode; // to avoid a compiler warning
+					if (mkdir(buffer) < 0 && errno != EEXIST && errno != EISDIR && errno != ENOSYS)
+					# else
+					if (mkdir(buffer, mode) < 0 && errno != EEXIST && errno != EISDIR && errno != ENOSYS)
+					# endif
+					{
+						return false;
+					}
 				}
+				if ('\0' == tmp)
+					break;
+				*pt = tmp;
 			}
-			# ifdef YUNI_OS_WINDOWS
-			pth += Separator;
-			# endif
+			++pt;
 		}
+		return true;
+	}
+
+
+
+	String MakeAbsolute(const String& p)
+	{
+		return MakeAbsolute(p, CurrentDirectory());
+	}
+
+	String MakeAbsolute(const String& p, const String& currentDirectory)
+	{
+		if (Core::Paths::IsAbsolute(p))
+			return p;
+		String ret = currentDirectory;
+		ret << Separator << p;
+		ret.removeTrailingSlash();
+		return ret;
+	}
+
+
+	namespace
+	{
+		bool RmDirInternal(const char path[])
+		{
+			DIR* dp;
+			struct dirent* ep;
+			char buffer[FILENAME_MAX];
+			struct stat st;
+
+			if (NULL != (dp = opendir(path)))
+			{
+				while (NULL != (ep = readdir(dp)))
+				{
+					sprintf(buffer, "%s/%s", path, ep->d_name);
+					if (0 == stat(buffer, &st))
+					{
+						if (S_ISDIR(st.st_mode))
+						{
+							if (strcmp(".", (ep->d_name)) != 0 && strcmp("..", (ep->d_name)) != 0)
+							{
+								if (!RmDirInternal(buffer))
+									return false;
+								if (rmdir(buffer))
+									return false;
+							}
+						}
+						else
+							unlink(buffer);
+					}
+				}
+				(void)closedir(dp);
+			}
+			return (0 == rmdir(path));
+		}
+
+	} // anonymous namespace
+
+
+
+	bool RmDir(const char path[])
+	{
+		return (NULL == path || '\0' == *path)
+			? true : RmDirInternal(path);
+	}
+
+
+	bool RecursiveCopy(const char* src, const char* dst)
+	{
+		DIR *dirp;
+		struct dirent *dp;
+		struct stat sb;
+		char buf[FILENAME_MAX];
+		int fd, fd2;
+		mode_t mode;
+
+		if (YUNI_INTERNAL_LSTAT(src, &sb))
+			return 0;
+
+		/* src is a file */
+		if (!S_ISDIR((mode = sb.st_mode)))
+		{
+			if (!YUNI_INTERNAL_LSTAT(dst, &sb) && S_ISDIR(sb.st_mode))
+			{
+				const char *p = strrchr(src, '/');
+				/* src => dst/src */
+				sprintf(buf, "%s/%s", dst, (p?p+1:src));
+
+				RecursiveCopy(src, buf);
+				return 1;
+			}
+
+			//LogNotice("Copying `%s`", ShortPath(src, buf, 60));
+			/* src => dst */
+			if ((fd = open(src, O_RDONLY)) < 0)
+				return 0;
+
+			if ((fd2 = open(dst, O_CREAT|O_TRUNC|O_WRONLY, mode & 0777)) < 0)
+			{
+				close(fd);
+				return 0;
+			}
+
+			size_t len, len2;
+			while ((len = read(fd, buf, FILENAME_MAX)) > 0)
+			{
+				while (len && (len2 = write(fd2, buf, len)) > 0)
+					len -= len2;
+			}
+			close(fd);
+			close(fd2);
+
+			return 1;
+		}
+
+		/* src is a directory */
+
+		if (YUNI_INTERNAL_LSTAT(dst, &sb))
+		{
+			if (!MakeDir(dst))
+				return 0;
+		}
+		else
+		{
+			/* if dst already exists and it's a file, try to remove it */
+			if (!S_ISDIR(sb.st_mode))
+			{
+				if (remove(dst) || !MakeDir(dst))
+					return false;
+			}
+		}
+
+		if ((dirp = opendir(src)) == NULL)
+			return false;
+
+		char buf2[FILENAME_MAX];
+		while ((dp = readdir(dirp)) != NULL)
+		{
+			/* do not copy hidden files */
+			if (dp->d_name[0] == '.')
+				continue;
+			sprintf(buf, "%s/%s", src, dp->d_name);
+			sprintf(buf2, "%s/%s", dst, dp->d_name);
+			RecursiveCopy(buf, buf2);
+		}
+		closedir(dirp);
+
 		return true;
 	}
 

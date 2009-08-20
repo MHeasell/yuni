@@ -37,7 +37,6 @@ namespace Paths
 
 	//! \name Folders handling
 	//@{
-
 	/*!
 	** \brief Test if a file/folder exists
 	** \ingroup PathsAndFiles
@@ -48,16 +47,17 @@ namespace Paths
 	bool Exists(const String& p);
 
 
-
 	/*!
 	** \brief Create Path Recursively
 	** \ingroup PathsAndFiles
 	**
 	** \param p The path to create if it does not exist
+	** \param mode Access permissions
 	** return True if the operation succeeded, false otherwise
 	*/
-	bool MakeDir(const String& p);
-
+	bool MakeDir(const char* p, unsigned int mode = 0755);
+	// Yuni::String version
+	template<int N> bool MakeDir(const StringBase<char,N>& p, unsigned int mode = 0755);
 
 
 	/*!
@@ -65,7 +65,6 @@ namespace Paths
 	** \ingroup PathsAndFiles
 	*/
 	String CurrentDirectory();
-
 
 
 	/*!
@@ -139,7 +138,6 @@ namespace Paths
 	void ExtractFileName(String::Vector& p, const bool systemDependant = true);
 
 
-
 	/*!
 	** \brief Extract the bare file name without its extension
 	** \ingroup PathsAndFiles
@@ -154,7 +152,6 @@ namespace Paths
 	** \see Paths::Separator
 	*/
 	String ExtractFileNameWithoutExtension(const String& p, const bool systemDependant = true);
-
 
 
 	/*!
@@ -182,6 +179,50 @@ namespace Paths
 	*/
 	bool IsAbsolute(const String& p);
 
+
+	/*!
+	** \brief Make a path absolute
+	**
+	** The current directory is used when the given path is not absolute.
+	**
+	** \param p Any path to make absolute
+	** \return `p` or an absolute path
+	*/
+	String MakeAbsolute(const String& p);
+
+	/*!
+	** \brief Make a path absolute
+	**
+	** The current directory is used when the given path is not absolute.
+	**
+	** \param p Any path to make absolute
+	** \param currentDirectory A custom current directory to use instead of CurrentDirectory()
+	** \return `p` or an absolute path
+	*/
+	String MakeAbsolute(const String& p, const String& currentDirectory);
+
+	/*!
+	** \brief Recursively delete a directory
+	**
+	** \param p The path to delete
+	** \return True if the operation succeeded False otherwise
+	*/
+	bool RmDir(const char* p);
+	// Yuni::String version
+	template<int N> bool RmDir(const StringBase<char,N>& p);
+
+
+	/*!
+	** \brief Make a recursive copy of a folder
+	**
+	** \param src The source folder
+	** \param dst The target folder
+	** \return True if the operation succeeded False otherwise
+	*/
+	bool RecursiveCopy(const char* src, const char* dst);
+	// Yuni::String version
+	template<int N, int M>
+	bool RecursiveCopy(const StringBase<char,N>& src, const StringBase<char,M>& dst);
 	//@}
 
 
@@ -190,5 +231,7 @@ namespace Paths
 } // namespace Paths
 } // namespace Core
 } // namespace Yuni
+
+# include "paths.hxx"
 
 #endif // __YUNI_CORE_FS_PATHS_H__
