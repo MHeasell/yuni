@@ -16,6 +16,8 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/CommonSettings.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/Modules.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/FindYuni.cmake")
 
+Message(STATUS " >>>>>>>>>>>> ${YUNI_STATIC_CORE}")
+
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../..")
 ADD_EXECUTABLE(libyuni-config main.cpp versions.cpp)
 target_link_libraries(libyuni-config ${YUNI_STATIC_CORE})

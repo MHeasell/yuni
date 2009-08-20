@@ -1,5 +1,10 @@
 
 
+#
+# This variable must only be enabled when compiling
+# the yuni library.
+# Otherwise, some files could be created in the wrong place
+#
 IF(LIBYUNI_CONFIG_ENABLED)
 	IF(MSVC90)
 		Set(YUNI_LIBYUNI_CONFIG_COMPILER "vs9")

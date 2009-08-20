@@ -17,7 +17,6 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/FindYuni.cmake")
 
-
 ADD_SUBDIRECTORY(core)
 ADD_SUBDIRECTORY(application)
 ADD_SUBDIRECTORY(devices)
