@@ -23,6 +23,8 @@ Set(SRC_GFX3D
 #
 Message(STATUS "Added Support for OpenGL")
 find_package(OpenGL)
+Set(YUNI_COMPILED_WITH_SUPPORT_FOR_OPENGL  1)
+
 
 #
 # DirectX
@@ -54,11 +56,12 @@ IF (WIN32)
 
 		IF(DX9_INCLUDE_PATH)
 			ADD_DEFINITIONS("-DYUNI_USE_DIRECTX")
-            Message(STATUS "Added Support for DirectX")
-            Message(STATUS "  DX include: ${DX9_INCLUDE_PATH}")
-            Message(STATUS "  DX libs: ${D3X9_LIBRARY} ${D3DX9_LIBRARY}")
+			Message(STATUS "Added Support for DirectX")
+			Message(STATUS "  DX include: ${DX9_INCLUDE_PATH}")
+			Message(STATUS "  DX libs: ${D3X9_LIBRARY} ${D3DX9_LIBRARY}")
+			Set(YUNI_COMPILED_WITH_SUPPORT_FOR_DIRECTX 1)
 			SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/directxmsw.cpp)
-            Include_Directories("${DX9_INCLUDE_PATH}")
+			Include_Directories("${DX9_INCLUDE_PATH}")
 		ENDIF(DX9_INCLUDE_PATH)
 	ENDIF(D3D9_LIBRARY AND D3DX9_LIBRARY)
 

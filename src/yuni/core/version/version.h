@@ -101,4 +101,12 @@ namespace Yuni
 
 } // namespace Yuni
 
+
+inline std::ostream& operator << (std::ostream& out, const Yuni::Version& rhs)
+{
+	out << rhs.toString();
+	return out;
+}
+
+
 #endif // __YUNI_MISC_VERSION_H__

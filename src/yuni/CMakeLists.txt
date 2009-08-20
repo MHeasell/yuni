@@ -3,19 +3,32 @@ Message(STATUS "")
 Message(STATUS "Modules")
 Message(STATUS "")
 
+
+#
+# Preflight
+#
+Set(YUNI_COMPILED_WITH_SUPPORT_FOR_OPENGL  0)
+Set(YUNI_COMPILED_WITH_SUPPORT_FOR_DIRECTX 0)
+
+
+Set(LIBYUNI_CONFIG_ENABLED true)
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/LibYuniConfig.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
 
 
-# Generating yuni.h
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/yuni.h.cmake ${CMAKE_CURRENT_SOURCE_DIR}/yuni.h)
-
+LIBYUNI_CONFIG_INCLUDE_PATH("core" "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 
 IF(YUNI_MODULE_CORE)
+	# The header yuni.h must be available
+	CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/yuni.h.cmake ${CMAKE_CURRENT_SOURCE_DIR}/yuni.h)
+	# Core
 	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/core.cmake")
+	# GfxCore
 	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/gfx-core.cmake")
 ENDIF(YUNI_MODULE_CORE)
+
 
 IF(YUNI_MODULE_DEVICES)
 	IF(YUNI_MODULE_DEVICE_DISPLAY)
@@ -134,11 +147,22 @@ IF(YUNI_TESTS)
 ENDIF(YUNI_TESTS)
 
 
+# Generating yuni.h
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/yuni.h.cmake ${CMAKE_CURRENT_SOURCE_DIR}/yuni.h)
+# Generating version
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.cmake ${CMAKE_CURRENT_SOURCE_DIR}/yuni.version)
+
+
 #
 # Misc
 #
 Add_definitions("-DYUNI_LIBRARY_STATIC")
 Include_directories(${YUNI_INCLUDE})
+
+
+
+Message(STATUS "Gathering about the required settings for compiling a project with yuni")
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/FindYuni.cmake")
 
 
 Message(STATUS "")

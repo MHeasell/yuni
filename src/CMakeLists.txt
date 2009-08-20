@@ -89,6 +89,9 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules.cmake")
 # Sub Directories
 Add_SubDirectory(yuni)
 
+# tools (especially for libyuni-config)
+Add_SubDirectory(tools)
+
 # Samples
 IF(YUNI_SAMPLES)
 	Add_SubDirectory(samples)

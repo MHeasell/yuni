@@ -60,7 +60,18 @@
 # define YUNI_COMPILED_WITH_CXX_FLAGS  "@CMAKE_CXX_FLAGS@"
 /*! The target used to compile Yuni (debug/release) */
 # define YUNI_COMPILED_WITH_TARGET     "@CMAKE_BUILD_TYPE@"
+
+/*! List of all modules */
+# define YUNI_MODULE_LIST              "@YUNI_MODULE_LIST@"
+/*! List of all available modules */
+# define YUNI_COMPILED_WITH_MODULES    "@CMAKE_BUILD_TYPE@"
+
+/*! Is OpenGL available ? */
+# define YUNI_HAS_SUPPORT_FOR_OPENGL   @YUNI_COMPILED_WITH_SUPPORT_FOR_OPENGL@
+/*! Is DirectX available ? */
+# define YUNI_HAS_SUPPORT_FOR_DIRECTX  @YUNI_COMPILED_WITH_SUPPORT_FOR_DIRECTX@
 /*@}*/
+
 
 
 
