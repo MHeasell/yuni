@@ -10,7 +10,11 @@
 #include <fstream>
 #include "paths.h"
 #include <errno.h>
-#include <dirent.h>
+#ifdef YUNI_OS_MSVC
+# include <direct.h>
+#else
+# include <dirent.h>
+#endif
 #include <fcntl.h>
 
 
@@ -214,7 +218,11 @@ namespace Paths
 				{
 					# ifdef YUNI_OS_WINDOWS
 					(void)mode; // to avoid a compiler warning
+					#	ifdef YUNI_OS_MSVC
+					if (_mkdir(buffer) < 0 && errno != EEXIST && errno != EISDIR && errno != ENOSYS)
+					#	else
 					if (mkdir(buffer) < 0 && errno != EEXIST && errno != EISDIR && errno != ENOSYS)
+					#	endif
 					# else
 					if (mkdir(buffer, mode) < 0 && errno != EEXIST && errno != EISDIR && errno != ENOSYS)
 					# endif
@@ -248,6 +256,8 @@ namespace Paths
 		return ret;
 	}
 
+
+	# ifndef YUNI_OS_MSVC // TODO FIXME !
 
 	namespace
 	{
@@ -378,7 +388,7 @@ namespace Paths
 		return true;
 	}
 
-
+	# endif
 
 } // namespace Paths
 } // namespace Core

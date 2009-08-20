@@ -55,9 +55,11 @@ namespace Paths
 	** \param mode Access permissions
 	** return True if the operation succeeded, false otherwise
 	*/
+	# ifndef YUNI_OS_MSVC // TODO FIXME !
 	bool MakeDir(const char* p, unsigned int mode = 0755);
 	// Yuni::String version
 	template<int N> bool MakeDir(const StringBase<char,N>& p, unsigned int mode = 0755);
+	# endif
 
 
 	/*!
@@ -207,6 +209,7 @@ namespace Paths
 	** \param p The path to delete
 	** \return True if the operation succeeded False otherwise
 	*/
+	# ifndef YUNI_OS_MSVC // TODO FIXME !
 	bool RmDir(const char* p);
 	// Yuni::String version
 	template<int N> bool RmDir(const StringBase<char,N>& p);
@@ -225,7 +228,7 @@ namespace Paths
 	bool RecursiveCopy(const StringBase<char,N>& src, const StringBase<char,M>& dst);
 	//@}
 
-
+	#endif
 
 
 } // namespace Paths
