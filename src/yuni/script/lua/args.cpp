@@ -21,7 +21,7 @@ namespace Bind
 
 	bool Argument<Script::Lua*, bool>::Get(Script::Lua* ctx, unsigned int order)
 	{
-		return lua_toboolean(ctx->pProxy->pState, order + 1);
+		return (0 != lua_toboolean(ctx->pProxy->pState, order + 1));
 	}
 
 
