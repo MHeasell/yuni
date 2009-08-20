@@ -218,7 +218,7 @@ source_group(Core\\URI FILES ${SRC_CORE_URI})
 
 
 Set(SRC_CORE_FS
-				core/fs/paths.h core/fs/paths.cpp  core/paths.h
+				core/fs/paths.h core/fs/paths.cpp  core/paths.h  core/fs/paths.hxx
 				core/fs/files.h core/fs/files.cpp  core/files.h)
 source_group(Core\\FileSystem FILES ${SRC_CORE_FS})
 
@@ -230,8 +230,8 @@ Set(SRC_CORE_GETOPT
 source_group(Core\\GetOpt FILES ${SRC_CORE_GETOPT})
 
 
-Set(SRC_VERSION	core/version/version.h  core/version/version.cpp)
-source_group(Core\\Version FILES ${SRC_VERSION})
+Set(SRC_CORE_VERSION	core/version/version.h  core/version/version.cpp)
+source_group(Core\\Version FILES ${SRC_CORE_VERSION})
 
 
 
@@ -318,16 +318,16 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_MATH}
 		${SRC_CORE_HASH_CHECKSUM}
 		${SRC_CORE_TREE_N}
-		${SRC_PREDICATES_RESULTS}
-		${SRC_GFX_CORE}
+		${SRC_CORE_VERSION}
 		${SRC_CORE_UNIT}
 		${SRC_CORE_URI}
 		${SRC_CORE_FS}
 		${SRC_CORE_GETOPT}
-		${SRC_CORE_VERSION}
 		${SRC_CORE_SYSTEM}
 		${SRC_CORE_SYSTEM_WINDOWS}
 		${SRC_CORE_SYSTEM_CONSOLE}
+		${SRC_GFX_CORE}
+		${SRC_PREDICATES_RESULTS}
 		${SRC_THREADS} ${SRC_JOBS}
 		${SRC_APPLICATION}
 	)
