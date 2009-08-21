@@ -20,8 +20,8 @@ namespace Window
 			:AWindow(title, width, height, bitDepth, fullScreen)
 		{}
 
-		virtual bool initialize() { return AOpenGL::initialize(); }
-		virtual void close() { AOpenGL::release(); }
+		virtual bool initialize() { return Render::OpenGL::initialize(); }
+		virtual void close() { Render::OpenGL::release(); }
 		// virtual bool pollEvents();
 
 
