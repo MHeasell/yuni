@@ -110,13 +110,15 @@ namespace Yuni
 	class StringBase
 	{
 	public:
+		//! Complete type for the string
+		typedef StringBase<C,Chunk> StringType;
 		//! Smartptr
-		typedef SmartPtr<StringBase<C,Chunk> > Ptr;
+		typedef SmartPtr<StringType> Ptr;
 
 		//! A String list
-		typedef std::list< StringBase<C,Chunk> > List;
+		typedef std::list<StringType> List;
 		//! A String vector
-		typedef std::vector< StringBase<C,Chunk> > Vector;
+		typedef std::vector<StringType> Vector;
 
 		//! The type of object, CharT, stored in the string.
 		typedef C Char;
@@ -224,14 +226,19 @@ namespace Yuni
 
 		//! Compare two C-String (ignoring the case, as if it were two lowercase strings)
 		static int CompareInsensitive(const Char a[], const Char b[], const Size maxLen = npos);
-
 		//@}
+
 
 		//! \name Length
 		//@{
-		//! Get the length in character of various string implementations (C-String, std::string, Yuni::String...)
+		/*!
+		** \brief Get the length in bytes of any string implementations
+		**
+		** Various string implementations (C-String, std::string, Yuni::String...)
+		*/
 		template<typename U> static Size Length(const U& u);
 		//@}
+
 
 		//! \name Formatted string
 		//@{
@@ -369,6 +376,7 @@ namespace Yuni
 		template<typename U> static const Char* CString(const U& u);
 		//@} Misc
 
+
 	public:
 		//! \name Constructors & Destructor
 		//@{
@@ -437,7 +445,8 @@ namespace Yuni
 		** \brief Constructor - From a std::string
 		** \param str A std::string
 		*/
-		StringBase(const std::basic_string<Char>& str);
+		template<typename C1>
+		StringBase(const std::basic_string<C1>& rhs);
 
 		/*!
 		** \brief Constructor - From any other types

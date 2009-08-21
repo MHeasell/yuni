@@ -86,7 +86,7 @@ namespace StringImpl
 	template<class StrBase1>
 	struct Length<StrBase1, char>
 	{
-		static inline typename StrBase1::Size Value(const char&)
+		static inline typename StrBase1::Size Value(char)
 		{
 			return 1;
 		}
@@ -96,7 +96,7 @@ namespace StringImpl
 	template<class StrBase1>
 	struct Length<StrBase1, wchar_t>
 	{
-		static inline typename StrBase1::Size Value(const wchar_t&)
+		static inline typename StrBase1::Size Value(wchar_t)
 		{
 			return 1;
 		}
