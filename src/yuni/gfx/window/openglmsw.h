@@ -6,7 +6,7 @@
 # ifdef YUNI_WINDOWSYSTEM_MSW
 #	include "../../core/system/windows.hdr.h"
 #	include "msw.h"
-#	include "opengl.h"
+#	include "../render/opengl.h"
 
 
 namespace Yuni
@@ -16,7 +16,7 @@ namespace Gfx
 namespace Window
 {
 
-	class OpenGLMSW: public AMSWindows, public AOpenGL
+	class OpenGLMSW: public AMSWindows, public Render::OpenGL
 	{
 	public:
 		//! The Threading Policy
@@ -32,6 +32,7 @@ namespace Window
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(unsigned int width, unsigned int height);
+		virtual Render::OpenGL* renderer() const { return const_cast<OpenGLMSW*>(this); }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;

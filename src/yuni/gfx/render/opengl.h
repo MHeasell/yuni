@@ -17,13 +17,38 @@ namespace Render
 	*/
 	class OpenGL: public ARenderer
 	{
-	public:
-		void drawFrame(const Yuni::Gfx::Scene& scene);
+	protected:
+		//! Initalize OpenGL
+		virtual bool initialize();
+
+		//! For GL, implementation does nothing
+		virtual void release();
+
+		//! Resize the viewport
+		virtual void resize(unsigned int width, unsigned int height);
+
+		//! Clear the screen to black
+		virtual void clearScreen();
+
+		//! Reset the view matrices
+		virtual void resetView();
+
+		//! Apply view translation
+		virtual void applyTranslation(const Vector3D<float>& translation);
+
+		//! Apply view rotation
+		virtual void applyRotation(const Vector3D<float>& rotation);
+
+		//! Draw some triangles
+		virtual void drawTriangles(const Mesh::TriangleList& triangles);
+
+		//! TEMPORARY
+		virtual void testDraw();
 
 	}; // OpenGL
 
-} // Render
-} // Gfx
-} // Yuni
+} // namespace Render
+} // namespace Gfx
+} // namespace Yuni
 
 #endif // __YUNI_GFX_RENDER_OPENGL_H__

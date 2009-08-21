@@ -114,7 +114,7 @@ namespace Gfx
 		onFPSChanged.connect(pMainWindow, &Window::AWindow::onFPSChanged);
 
 		unsigned int lastFPS = 0;
-		pRenderer = new Render::OpenGL();
+		pRenderer = pMainWindow->renderer();
 
 		// Main loop
 		while (!pMainWindow->closing())
@@ -138,7 +138,6 @@ namespace Gfx
 		pMainWindow->close();
 		delete pMainWindow;
 		pMainWindow = NULL;
-		delete pRenderer;
 		pRenderer = NULL;
 	}
 
