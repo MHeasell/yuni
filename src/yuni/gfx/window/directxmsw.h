@@ -6,7 +6,6 @@
 # if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
 #	include "../../core/system/windows.hdr.h"
 #	include "../api/dx9.h"
-#	include "../api/api.h"
 #	include "msw.h"
 
 
@@ -20,7 +19,7 @@ namespace Window
 	/*!
 	** \brief Implementation of a MFC window that uses DirectX display
 	*/
-	class DirectXMSW: public AMSWindows, public Api::IGfxAPI
+	class DirectXMSW: public AMSWindows, public Render::ARenderer
 	{
 	public:
 		//! The Threading Policy
@@ -37,6 +36,7 @@ namespace Window
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(unsigned int width, unsigned int height);
+		virtual Render::ARenderer* renderer() const { return const_cast<DirectXMSW*>(this); }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;
@@ -44,11 +44,20 @@ namespace Window
 		virtual bool verticalSync(bool activate);
 
 	protected:
-		void onBlitWL() { pDXDevice->Present(NULL, NULL, NULL, NULL); }
+		void onBlitWL() { pDXDevice->Present(NULL, NULL, pHWnd, NULL); }
+
+		//! \name Overridden from ARenderer
+		//@{
+		virtual void clearScreen();
+		virtual void resetView();
+		virtual void applyTranslation(const Vector3D<float>& translation);
+		virtual void applyRotation(const Vector3D<float>& rotation);
+		virtual void drawTriangles(const Mesh::TriangleList& triangles);
+		virtual void testDraw();
+		virtual void release();
+		//@}
 
 	private:
-		void release();
-
 		void resetPresentationParameters();
 
 		bool resetDevice();

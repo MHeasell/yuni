@@ -125,6 +125,88 @@ namespace Window
 		return resetDevice();
 	}
 
+	void DirectXMSW::clearScreen()
+	{
+		pDXDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+	}
+
+	void DirectXMSW::resetView()
+	{}
+
+	void DirectXMSW::applyTranslation(const Vector3D<float>& translation)
+	{}
+
+	void DirectXMSW::applyRotation(const Vector3D<float>& rotation)
+	{}
+
+	void DirectXMSW::drawTriangles(const Mesh::TriangleList& triangles)
+	{}
+
+	void DirectXMSW::testDraw()
+	{
+		struct Vertex
+		{
+			float x;
+			float y;
+			float z;
+			DWORD color;
+		};
+		Vertex vertices[] =
+			{
+				// Top
+				{ 1.0f, 1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 0.0, 1.0, 0.0, 1.0 ) },
+				{-1.0f, 1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 0.0, 1.0, 0.0, 1.0 ) },
+				{-1.0f, 1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 0.0, 1.0, 0.0, 1.0 ) },
+				{ 1.0f, 1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 0.0, 1.0, 0.0, 1.0 ) },
+
+				// Bottom
+				{ 1.0f,-1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.5, 0.0, 1.0 ) },
+				{-1.0f,-1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.5, 0.0, 1.0 ) },
+				{-1.0f,-1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.5, 0.0, 1.0 ) },
+				{ 1.0f,-1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.5, 0.0, 1.0 ) },
+
+				// Front
+				{ 1.0f, 1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.0, 0.0, 1.0 ) },
+				{-1.0f, 1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.0, 0.0, 1.0 ) },
+				{-1.0f,-1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.0, 0.0, 1.0 ) },
+				{ 1.0f,-1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.0, 0.0, 1.0 ) },
+
+				// Back
+				{-1.0f, 1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 1.0, 1.0, 0.0, 1.0 ) },
+				{ 1.0f, 1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 1.0, 1.0, 0.0, 1.0 ) },
+				{ 1.0f,-1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 1.0, 1.0, 0.0, 1.0 ) },
+				{-1.0f,-1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 1.0, 1.0, 0.0, 1.0 ) },
+
+				// Right
+				{ 1.0f, 1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.0, 1.0, 1.0 ) },
+				{ 1.0f, 1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.0, 1.0, 1.0 ) },
+				{ 1.0f,-1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.0, 1.0, 1.0 ) },
+				{ 1.0f,-1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 1.0, 0.0, 1.0, 1.0 ) },
+
+				// Left
+				{-1.0f, 1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 0.0, 1.0, 1.0, 1.0 ) },
+				{-1.0f, 1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 0.0, 1.0, 1.0, 1.0 ) },
+				{-1.0f,-1.0f,-1.0f,  D3DCOLOR_COLORVALUE( 0.0, 1.0, 1.0, 1.0 ) },
+				{-1.0f,-1.0f, 1.0f,  D3DCOLOR_COLORVALUE( 0.0, 1.0, 1.0, 1.0 ) }
+			};
+		static LPDIRECT3DVERTEXBUFFER9 vertexBuffer = NULL;
+		if (NULL == vertexBuffer)
+		{
+			pDXDevice->CreateVertexBuffer(24 * sizeof(Vertex), 0, D3DFVF_XYZ | D3DFVF_DIFFUSE,
+				D3DPOOL_DEFAULT, &vertexBuffer, NULL);
+
+			Vertex* verticesPointer = NULL;
+			vertexBuffer->Lock(0, sizeof(vertices), (void**)&verticesPointer, 0);
+			memcpy(verticesPointer, vertices, sizeof(vertices));
+			vertexBuffer->Unlock();
+		}
+		pDXDevice->BeginScene();
+		pDXDevice->SetStreamSource(0, vertexBuffer, 0, sizeof(Vertex));
+		pDXDevice->SetFVF(D3DFVF_XYZ | D3DFVF_DIFFUSE);
+		pDXDevice->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 24);
+		pDXDevice->EndScene();
+	}
+
 } // namespace Window
 } // namespace Gfx3D
 } // namespace Yuni

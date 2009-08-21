@@ -6,14 +6,14 @@ Set(SRC_GFX3D
 		gfx/window/window.h
 		gfx/window/window.hxx
 		gfx/window/factory.h gfx/window/factory.cpp
-		gfx/window/opengl.h gfx/window/opengl.cpp
 		gfx/window/msw.h
 		gfx/window/directxmsw.h
 		gfx/window/openglmsw.h
 		gfx/window/openglx11.h
 		gfx/window/openglcocoa.h
 		gfx/window/x11yuni.h
-		gfx/render/renderer.h gfx/render/fpscounter.h
+		gfx/render/renderer.h gfx/render/renderer.cpp
+		gfx/render/fpscounter.h
 		gfx/render/opengl.h gfx/render/opengl.cpp
 		)
 

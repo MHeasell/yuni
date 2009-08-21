@@ -4,6 +4,7 @@
 # include "../../yuni.h"
 # include "../../core/string.h"
 # include "../../core/event/event.h"
+# include "../render/renderer.h"
 
 
 namespace Yuni
@@ -63,6 +64,8 @@ namespace Window
 			pHeight = height;
 		}
 
+		//! Get the renderer associated with this window 
+		virtual Render::ARenderer* renderer() const { return NULL; }
 
 		/*!
 		** \brief Get whether the window is in the process of closing

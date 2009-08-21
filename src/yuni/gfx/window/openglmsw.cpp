@@ -97,7 +97,7 @@ namespace Window
 		resize(pWidth, pHeight);
 
 		// Initialize our newly created GL window
-		if (!AOpenGL::initialize())
+		if (!OpenGL::initialize())
 		{
 			close();
 			MessageBox(NULL, "Initialization failed.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
@@ -131,13 +131,13 @@ namespace Window
 		}
 
 		AMSWindows::close();
-		AOpenGL::release();
+		OpenGL::release();
 	}
 
 
 	void OpenGLMSW::resize(unsigned int width, unsigned int height)
 	{
-		AOpenGL::resize(width, height);
+		OpenGL::resize(width, height);
 		AWindow::resize(width, height);
 	}
 

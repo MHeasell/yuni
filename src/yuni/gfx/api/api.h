@@ -21,9 +21,6 @@ namespace Api
 		IGfxAPI(const IGfxAPI&);
 
 	public:
-		virtual bool initialize() = 0;
-		virtual void release() = 0;
-		virtual void resize(unsigned int width, unsigned int height) = 0;
 	};
 
 } // Api
