@@ -216,17 +216,6 @@ namespace Math
 
 
 
-	inline float FastInvSquareRoot(float x)
-	{
-		float xhalf = 0.5f * x;
-		int i = *(int*)&x;
-		i = 0x5f3759df - (i >> 1);
-		x = *(float*)&i;
-		return x * (1.5f - xhalf * x * x);
-	}
-
-
-
 	inline float Power(const float x, const float y)
 	{
 		return ::powf(x, y);
