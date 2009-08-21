@@ -72,7 +72,7 @@ namespace Yuni
 
 	template<typename C, int Chunk>
 	template<int Chk1>
-	StringBase<C,Chunk>::StringBase(const StringBase<C,Chk1>& rhs, const typename StringBase<C,Chunk>::Size offset,
+	inline StringBase<C,Chunk>::StringBase(const StringBase<C,Chk1>& rhs, const typename StringBase<C,Chunk>::Size offset,
 		typename StringBase<C,Chunk>::Size len)
 		:pSize(0), pCapacity(0), pPtr(NULL)
 	{
@@ -82,7 +82,7 @@ namespace Yuni
 
 	template<typename C, int Chunk>
 	template<typename C1>
-	StringBase<C,Chunk>::StringBase(const std::basic_string<C1>& rhs, const typename StringBase<C,Chunk>::Size offset,
+	inline StringBase<C,Chunk>::StringBase(const std::basic_string<C1>& rhs, const typename StringBase<C,Chunk>::Size offset,
 		typename StringBase<C,Chunk>::Size len)
 		:pSize(0), pCapacity(0), pPtr(NULL)
 	{
@@ -91,7 +91,7 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
-	StringBase<C,Chunk>::StringBase(const char* str)
+	inline StringBase<C,Chunk>::StringBase(const char* str)
 		:pSize(0), pCapacity(0), pPtr(NULL)
 	{
 		Private::StringImpl::From<typename Static::Remove::Const<char*>::Type>::Append(*this, str);
@@ -136,21 +136,11 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
-	StringBase<C,Chunk>::StringBase(const std::basic_string<Char>& str)
-		:pSize(str.size())
+	template<typename C1>
+	inline StringBase<C,Chunk>::StringBase(const std::basic_string<C1>& rhs)
+		:pSize(0), pCapacity(0), pPtr(NULL)
 	{
-		if (!str.empty())
-		{
-			pCapacity = pSize + 1;
-			pPtr = (Char*)::malloc(sizeof(Char) * pCapacity);
-			memcpy(pPtr, str.c_str(), sizeof(Char) * pSize);
-			pPtr[pSize] = '\0';
-		}
-		else
-		{
-			pCapacity = 0;
-			pPtr = NULL;
-		}
+		Private::StringImpl::From<std::basic_string<C1> >::Append(*this, rhs);
 	}
 
 	template<typename C, int Chunk>
