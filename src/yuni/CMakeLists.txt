@@ -161,7 +161,7 @@ Include_directories(${YUNI_INCLUDE})
 
 
 
-Message(STATUS "Gathering about the required settings for compiling a project with yuni")
+Message(STATUS "Gathering information about the required settings for compiling a project with yuni")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/FindYuni.cmake")
 
 
