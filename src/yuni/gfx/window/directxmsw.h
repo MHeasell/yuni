@@ -17,7 +17,7 @@ namespace Window
 {
 
 	/*!
-	** \brief Implementation of a MFC window that uses DirectX display
+	** \brief Implementation of an MFC window that uses DirectX display
 	*/
 	class DirectXMSW: public AMSWindows, public Render::ARenderer
 	{

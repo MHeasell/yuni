@@ -16,6 +16,9 @@ namespace Gfx
 namespace Window
 {
 
+	/*!
+	** \brief Microsoft Windows-specific window, using an OpenGL Renderer
+	*/
 	class OpenGLMSW: public AMSWindows, public Render::OpenGL
 	{
 	public:

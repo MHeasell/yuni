@@ -13,6 +13,9 @@ namespace Gfx
 namespace Window
 {
 
+	/*!
+	** \brief Mac OS X, Cocoa-specific window, using an OpenGL Renderer
+	*/
 	class OpenGLCocoa: public AWindow, public Render::OpenGL
 	{
 	public:
@@ -22,6 +25,8 @@ namespace Window
 
 		virtual bool initialize() { return Render::OpenGL::initialize(); }
 		virtual void close() { Render::OpenGL::release(); }
+		virtual Render::OpenGL* renderer() const { return const_cast<OpenGLCocoa*>(this); }
+
 		// virtual bool pollEvents();
 
 
