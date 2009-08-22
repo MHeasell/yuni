@@ -3,4 +3,5 @@ Message(STATUS "Sample: Core / Hash / Simple dictionary management")
 include_directories(${YUNI_INCLUDE})
 ADD_EXECUTABLE(hash_02_dictionary main.cpp)
 target_link_libraries(hash_02_dictionary ${YUNI_STATIC_CORE})
+add_dependencies(samples hash_02_dictionary)
 

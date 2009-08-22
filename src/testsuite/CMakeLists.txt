@@ -20,8 +20,8 @@ IF(WIN32)
 ENDIF(WIN32)
 
 
-add_custom_target(test)
-add_custom_target(test_html DEPENDS test)
+add_custom_target(tests)
+add_custom_target(test_html DEPENDS tests)
 
 
 Set(YuniTestCaseOutput "${CMAKE_CURRENT_SOURCE_DIR}/results/htdocs/${YUNI_VERSION_REV}")
@@ -71,7 +71,7 @@ MACRO(YUNITESTCASE_END)
 		WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
 		)
 	ADD_CUSTOM_TARGET(testcase_${YuniTestCase_LastExe} SOURCES "testcase_${YuniTestCase_LastID}.xml")
-	add_dependencies(test testcase_${YuniTestCase_LastExe})
+	add_dependencies(tests testcase_${YuniTestCase_LastExe})
 	set_property(GLOBAL APPEND PROPERTY YuniTestCaseListCount 1)
 	set_property(GLOBAL APPEND PROPERTY YuniTestCaseList "${CMAKE_CURRENT_SOURCE_DIR}/testcase_${YuniTestCase_LastExe}${YuniTestCase_ExeExtension}.xml")
 ENDMACRO(YUNITESTCASE_END)
