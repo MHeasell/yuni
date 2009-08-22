@@ -7,7 +7,7 @@
 MACRO(DEVPACK_IMPORT_LUA)
 	IF(YUNI_EXTERNAL_SCRIPT_LUA)
 		IF(APPLE)
-			DEVPACK_IMPORT("lua" "5.1.4" "1" "macos" "ub" "${DEVPACK_COMPILER}" "all")
+			DEVPACK_IMPORT("lua" "5.1.4" "2" "macos" "ub" "${DEVPACK_COMPILER}" "all")
 		ENDIF(APPLE)
 		IF(MSVC)
 			DEVPACK_SMART_IMPORT("lua" "5.1.4" "1" "all")
