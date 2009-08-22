@@ -8,5 +8,6 @@ IF(YUNI_MODULE_GFX3D)
 	SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "yunihw")
 	SET(MACOSX_BUNDLE_ICON_FILE "sample.icns")
 	target_link_libraries(appl_01_gfx3d ${YUNI_STATIC_CORE} ${YUNI_STATIC_GFX_CORE} ${YUNI_STATIC_GFX3D})
+	add_dependencies(samples appl_01_gfx3d)
 ENDIF(YUNI_MODULE_GFX3D)
 

@@ -3,4 +3,5 @@ Message(STATUS "Sample: Core / Logs / `Hello World` with several verbosity level
 include_directories(${YUNI_INCLUDE})
 ADD_EXECUTABLE(logs_00_simple main.cpp)
 target_link_libraries(logs_00_simple ${YUNI_STATIC_CORE})
+add_dependencies(samples logs_00_simple)
 
