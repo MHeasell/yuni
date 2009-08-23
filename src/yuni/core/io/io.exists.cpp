@@ -71,9 +71,9 @@ namespace FilesystemImpl
 		return (B == S_ISDIR(s.st_mode));
 	}
 
-	bool IsDirectoryWindowsImpl(const char* p)
+	bool IsDirectoryWindowsImpl(const char* p, const size_t sizeHint)
 	{
-		return IsDirWindowsImpl<true>(p, ::strlen(p));
+		return IsDirWindowsImpl<true>(p, sizeHint);
 	}
 
 	bool IsFileWindowsImpl(const char* p, const size_t sizeHint)
