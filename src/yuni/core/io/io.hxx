@@ -155,8 +155,8 @@ namespace IO
 
 
 
-	template<typename C, int N>
-	void ExtractFileName(typename StringBase<C,N>::List& p, const bool systemDependant)
+	template<typename C, int N, template<class> class Alloc>
+	void ExtractFileName(std::list<StringBase<C,N>, Alloc<StringBase<C, N> > >& p, const bool systemDependant)
 	{
 		typedef StringBase<C,N> StringT;
 		if (!p.empty())
@@ -168,8 +168,8 @@ namespace IO
 	}
 
 
-	template<typename C, int N>
-	void ExtractFileName(typename StringBase<C,N>::Vector& p, const bool systemDependant)
+	template<typename C, int N, template<class> class Alloc>
+	void ExtractFileName(std::vector<StringBase<C,N>, Alloc<StringBase<C, N> > >& p, const bool systemDependant)
 	{
 		typedef StringBase<C,N> StringT;
 		if (!p.empty())
@@ -208,12 +208,14 @@ namespace IO
 
 
 
-	inline String ExtractFileExt(const String& s, String::CharCase option)
+	template<typename C, int N>
+	inline StringBase<C,N> ExtractExtension(const StringBase<C,N>& s, String::CharCase option)
 	{
-		const String::size_type n = s.find_last_of(".\\/");
-		if (n == String::npos || '.' != s[n])
-			return String();
-		return (String::soIgnoreCase == option) ? String(s, n).toLower() : String(s, n);
+		typedef StringBase<C,N> StringT;
+		const typename StringT::size_type n = s.find_last_of(IO::Constant<C>::AllSeparators);
+		if (n == StringT::npos || '.' != s[n])
+			return StringT();
+		return (StringT::soIgnoreCase == option) ? StringT(s, n).toLower() : StringT(s, n);
 	}
 
 

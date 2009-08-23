@@ -134,8 +134,8 @@ namespace IO
 	** \see ExtractFileName(const String&, const bool)
 	** \see Paths::Separator
 	*/
-	template<typename C, int N>
-	void ExtractFileName(typename StringBase<C,N>::List& p, const bool systemDependant = true);
+	template<typename C, int N, template<class> class Alloc>
+	void ExtractFileName(std::list<StringBase<C,N>, Alloc<StringBase<C, N> > >& p, const bool systemDependant = true);
 
 	/*!
 	** \brief Extract bare file name for each entry in a list
@@ -153,8 +153,8 @@ namespace IO
 	** \see ExtractFileName(const String&, const bool)
 	** \see Paths::Separator
 	*/
-	template<typename C, int N>
-	void ExtractFileName(typename StringBase<C,N>::Vector& p, const bool systemDependant = true);
+	template<typename C, int N, template<class> class Alloc>
+	void ExtractFileName(std::vector<StringBase<C,N>, Alloc<StringBase<C, N> > >& p, const bool systemDependant = true);
 
 
 	/*!
@@ -189,7 +189,8 @@ namespace IO
 	**	 std::cout << Paths::Files::ExtractFileExt("/usr/folder.foo/file") << std::endl; // ''
 	** \endcode
 	*/
-	String ExtractExtension(const String& s, String::CharCase option = String::soIgnoreCase);
+	template<typename C, int N>
+	StringBase<C,N> ExtractExtension(const StringBase<C,N>& s, String::CharCase option = String::soIgnoreCase);
 
 
 	/*!
