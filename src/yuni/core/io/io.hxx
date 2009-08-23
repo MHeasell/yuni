@@ -41,7 +41,7 @@ namespace IO
 		//! All path-separator characters, for all platforms
 		static const wchar_t* AllSeparators; // = L"\\/";
 		//! Dot
-		static const wchar_t  Dot = L'/';
+		static const wchar_t  Dot = L'.';
 	};
 
 
@@ -212,7 +212,7 @@ namespace IO
 	inline StringBase<C,N> ExtractExtension(const StringBase<C,N>& s, String::CharCase option)
 	{
 		typedef StringBase<C,N> StringT;
-		const typename StringT::size_type n = s.find_last_of(IO::Constant<C>::AllSeparators);
+		const typename StringT::size_type n = s.find_last_of(StringBase<C,N>(IO::Constant<C>::AllSeparators) << IO::Constant<C>::Dot);
 		if (n == StringT::npos || '.' != s[n])
 			return StringT();
 		return (StringT::soIgnoreCase == option) ? StringT(s, n).toLower() : StringT(s, n);

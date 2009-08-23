@@ -54,7 +54,7 @@ namespace IO
 		static const char* AllSeparators; // "\\/"
 
 		//! Dot
-		static const char  Dot = '/';
+		static const char  Dot = '.';
 
 	}; // class Constant<char>
 	//@}
