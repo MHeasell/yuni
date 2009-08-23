@@ -1,7 +1,9 @@
 
 #include "commons.h"
-
-
+#include "../../system/windows.hdr.h"
+#ifdef YUNI_OS_WINDOWS
+# include <shellapi.h>
+#endif
 
 namespace Yuni
 {
@@ -11,6 +13,25 @@ namespace IO
 {
 namespace Directory
 {
+
+# ifdef YUNI_OS_WINDOWS
+
+
+	bool Copy(const char* src, const char* dst)
+	{
+		SHFILEOPSTRUCT sf;
+	    memset(&sf, 0, sizeof(sf));
+	    sf.hwnd = 0;
+	    sf.wFunc = FO_COPY;
+	    String from;
+	    from << src << "\\*.*";
+	    sf.pFrom = from.c_str();
+	    sf.pTo = dst;
+	    sf.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI;
+		return (!SHFileOperation(&sf));
+    }
+
+# else
 
 
 	bool Copy(const char* src, const char* dst)
@@ -38,7 +59,6 @@ namespace Directory
 				return 1;
 			}
 
-			//LogNotice("Copying `%s`", ShortPath(src, buf, 60));
 			/* src => dst */
 			if ((fd = ::open(src, O_RDONLY)) < 0)
 				return 0;
@@ -95,6 +115,8 @@ namespace Directory
 		return true;
 	}
 
+
+# endif
 
 
 
