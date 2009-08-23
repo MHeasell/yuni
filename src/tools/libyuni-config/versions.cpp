@@ -1,4 +1,5 @@
 
+#define YUNI_NO_THREAD_SAFE // disabling thread-safety
 #include "versions.h"
 #include <yuni/core/io/directory.h>
 #include <yuni/core/io/file.h>

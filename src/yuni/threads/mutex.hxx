@@ -8,6 +8,7 @@ namespace Yuni
 
 	inline Mutex::Mutex(const bool recursive)
 	{
+		# ifndef YUNI_NO_THREAD_SAFE
 		if (recursive)
 		{
 			::pthread_mutexattr_t mutexattr;
@@ -21,34 +22,41 @@ namespace Yuni
 			::pthread_mutexattr_destroy(&mutexattr);
 		}
 		else
-		{
 			::pthread_mutex_init(&pPthreadLock, NULL);
-		}
+		# endif
 	}
 
 
 	inline Mutex::~Mutex()
 	{
+		# ifndef YUNI_NO_THREAD_SAFE
 		pthread_mutex_destroy(&pPthreadLock);
+		# endif
 	}
 
 
 	inline void Mutex::lock()
 	{
+		# ifndef YUNI_NO_THREAD_SAFE
 		pthread_mutex_lock(&pPthreadLock);
+		# endif
 	}
 
 
 	inline void Mutex::unlock()
 	{
+		# ifndef YUNI_NO_THREAD_SAFE
 		pthread_mutex_unlock(&pPthreadLock);
+		# endif
 	}
 
 
+	# ifndef YUNI_NO_THREAD_SAFE
 	inline pthread_mutex_t& Mutex::pthreadMutex()
 	{
 		return pPthreadLock;
 	}
+	# endif
 
 
 
