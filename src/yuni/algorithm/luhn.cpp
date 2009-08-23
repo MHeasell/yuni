@@ -45,7 +45,7 @@ namespace Algorithm
 	}
 
 
-	
+
 } // namespace Algorithm
 } // namespace Yuni
 
