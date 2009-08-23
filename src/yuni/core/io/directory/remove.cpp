@@ -22,7 +22,7 @@ namespace Directory
 {
 
 
-# ifdef YUNI_OS_WINDOWS
+# ifdef YUNI_OS_MSVC
 
 	inline bool IsDot(const char* s)
 	{

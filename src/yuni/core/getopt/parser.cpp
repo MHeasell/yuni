@@ -114,7 +114,7 @@ namespace GetOptImpl
 
 	inline Context::TokenType Context::GetTokenType(const char* argv)
 	{
-		# ifndef YUNI_OS_WINDOWS
+		# ifndef YUNI_OS_MSVC
 		return (*argv == '-')
 			? ((argv[1] == '-') ? ttLongOption : ttShortOption)
 			: ttParameter;
@@ -215,10 +215,10 @@ namespace GetOptImpl
 							size_t size = sub - arg;
 							if (size < sizeof(buffer))
 							{
-								# ifdef YUNI_OS_WINDOWS
+								# ifdef YUNI_OS_MSVC
 								strncpy_s(buffer, sizeof(buffer), arg, size);
 								# else
-								strcpy(buffer, arg, size);
+								strncpy(buffer, arg, size);
 								# endif
 								buffer[size] = '\0';
 								arg += size;
