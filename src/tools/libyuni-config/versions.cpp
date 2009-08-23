@@ -16,7 +16,13 @@ namespace VersionInfo
 	void List::checkRootFolder(const String& root)
 	{
 		if (Core::IO::File::Exists(String() << root << Core::IO::Separator << "mark-for-yuni-sources"))
+        {
+            # ifdef YUNI_OS_WINDOWS
+			loadFromPath(root + "\\..\\..\\..");
+            # else
 			loadFromPath(root + "/../../..");
+            # endif
+        }
 	}
 
 
