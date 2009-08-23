@@ -35,13 +35,13 @@ namespace IO
 	struct Constant<wchar_t>
 	{
 		//! The path-separator character according to the platform (ex: `/`)
-		static const wchar_t  Separator = L'/';
+		static const wchar_t  Separator; // L'/';
 		//! The path-separator character according to the platform (stored in a string instead of a char)
 		static const wchar_t* SeparatorAsString; // = L"/";
 		//! All path-separator characters, for all platforms
 		static const wchar_t* AllSeparators; // = L"\\/";
 		//! Dot
-		static const wchar_t  Dot = L'.';
+		static const wchar_t  Dot; // L'.';
 	};
 
 

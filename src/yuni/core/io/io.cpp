@@ -39,22 +39,22 @@ namespace IO
 
 
 	# ifdef YUNI_OS_WINDOWS
-	const char Constant<char>::Separator;
+	const char Constant<char>::Separator = '\\';
 	# else
-	const char Constant<char>::Separator;
+	const char Constant<char>::Separator = '/';
 	# endif
 
 	# ifdef YUNI_OS_WINDOWS
-	const wchar_t Constant<wchar_t>::Separator;
+	const wchar_t Constant<wchar_t>::Separator = L'\\';
 	# else
-	const wchar_t Constant<wchar_t>::Separator;
+	const wchar_t Constant<wchar_t>::Separator = L'/';
 	# endif
 
 	const wchar_t* Constant<wchar_t>::AllSeparators = L"\\/";
 	const char*    Constant<char>   ::AllSeparators = "\\/";
 
-	const wchar_t Constant<wchar_t>::Dot;
-	const char    Constant<char>   ::Dot;
+	const wchar_t Constant<wchar_t>::Dot = L'.';
+	const char    Constant<char>   ::Dot = '.';
 
 
 
