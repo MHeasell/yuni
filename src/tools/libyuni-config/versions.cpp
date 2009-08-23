@@ -1,7 +1,7 @@
 
 #include "versions.h"
-#include <yuni/core/fs/paths.h>
-#include <yuni/core/fs/files.h>
+#include <yuni/core/io/directory.h>
+#include <yuni/core/io/file.h>
 
 
 namespace Yuni
@@ -14,7 +14,7 @@ namespace VersionInfo
 
 	void List::checkRootFolder(const String& root)
 	{
-		if (Core::Paths::Exists(String() << root << Core::Paths::Separator << "mark-for-yuni-sources"))
+		if (Core::IO::File::Exists(String() << root << Core::IO::Separator << "mark-for-yuni-sources"))
 			loadFromPath(root + "/../../..");
 	}
 
@@ -34,23 +34,23 @@ namespace VersionInfo
 		VersionInfo::Settings info;
 		info.mapping = mappingStandard;
 		String s(path);
-		s << Core::Paths::Separator << "yuni.version";
-		if (!Core::Paths::Exists(s))
+		s << Core::IO::Separator << "yuni.version";
+		if (!Core::IO::File::Exists(s))
 		{
 			s = path;
-			s << Core::Paths::Separator << "include" << Core::Paths::Separator
-				<< "yuni" << Core::Paths::Separator << "yuni.version";
-			if (!Core::Paths::Exists(s))
+			s << Core::IO::Separator << "include" << Core::IO::Separator
+				<< "yuni" << Core::IO::Separator << "yuni.version";
+			if (!Core::IO::File::Exists(s))
 			{
 				info.mapping = mappingSVNSources;
 				s = path;
-				s << Core::Paths::Separator << "src/yuni/yuni.version";
-				if (!Core::Paths::Exists(s))
+				s << Core::IO::Separator << "src/yuni/yuni.version";
+				if (!Core::IO::File::Exists(s))
 					return;
 			}
 		}
 		String::List list;
-		if (Core::Paths::Files::Load(list, s, false) && !list.empty())
+		if (Core::IO::File::Load(list, s, false) && !list.empty())
 		{
 			String key;
 			String value;

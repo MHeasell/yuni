@@ -1,6 +1,6 @@
 
 #include "application.h"
-#include "../core/paths.h"
+#include "../core/io/directory.h"
 
 
 
@@ -42,28 +42,23 @@ namespace Application
 	bool AApplication::parseCommandLine(int /*argc*/, char* argv[])
 	{
 		// Find the absolute folder of the application
-		if (Core::Paths::IsAbsolute(argv[0]))
-			pRootFolder = Core::Paths::ExtractFilePath(argv[0]);
+		if (Core::IO::IsAbsolute(argv[0]))
+			pRootFolder = Core::IO::ExtractFilePath(argv[0]);
 		else
 		{
 			pRootFolder.clear();
 			String r;
-			r << Core::Paths::CurrentDirectory() << Core::Paths::Separator << argv[0];
+			r << Core::IO::Directory::Current() << Core::IO::Separator << argv[0];
 			if (!r.empty())
-				pRootFolder = Core::Paths::ExtractFilePath(r, true);
+				pRootFolder.append(Core::IO::ExtractFilePath(r, true));
 		}
 
 		// Find The absolution exe name
 		pExeName.clear();
 		if (pRootFolder.empty())
-			pExeName = Core::Paths::ExtractFileName(argv[0]);
+			pExeName.append(Core::IO::ExtractFileName(argv[0]));
 		else
-		{
-			pExeName << pRootFolder
-				<< Core::Paths::Separator
-				<< Core::Paths::ExtractFileName(argv[0]);
-		}
-
+			pExeName << pRootFolder	<< Core::IO::Separator << Core::IO::ExtractFileName(argv[0]);
 		return false;
 	}
 

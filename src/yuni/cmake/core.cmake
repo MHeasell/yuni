@@ -130,7 +130,7 @@ Set(SRC_CORE_DYNAMICLIBRARY
 				core/dynamiclibrary/file.h	core/dynamiclibrary/file.hxx
 				core/dynamiclibrary/file.cpp
 				core/dynamiclibrary/symbol.h core/dynamiclibrary/symbol.hxx
-				core/dynamiclibrary.h )
+				core/dynamiclibrary.h)
 source_group(Core\\DynamicLibrary FILES ${SRC_CORE_DYNAMICLIBRARY})
 
 
@@ -217,10 +217,29 @@ Set(SRC_CORE_URI
 source_group(Core\\URI FILES ${SRC_CORE_URI})
 
 
-Set(SRC_CORE_FS
-				core/fs/paths.h core/fs/paths.cpp  core/paths.h  core/fs/paths.hxx
-				core/fs/files.h core/fs/files.cpp  core/files.h)
-source_group(Core\\FileSystem FILES ${SRC_CORE_FS})
+Set(SRC_CORE_IO_FILENAME
+				core/io/io.h core/io/io.cpp core/io/io.exists.cpp
+				core/io/io.hxx core/io/private.h)
+source_group(Core\\IO FILES ${SRC_CORE_IO_FILENAME})
+
+
+
+Set(SRC_CORE_IO_DIRECTORY
+				core/io/directory.h core/io/directory/directory.hxx
+				core/io/directory/commons.h
+				core/io/directory/directory.cpp
+				core/io/directory/remove.cpp
+				core/io/directory/current.cpp
+				core/io/directory/make.cpp
+				)
+source_group(Core\\IO\\Directory FILES ${SRC_CORE_IO_DIRECTORY})
+
+
+Set(SRC_CORE_IO_FILE
+				core/io/file.h core/io/file/file.hxx core/io/file/file.cpp
+				core/io/file/load.cpp
+				)
+source_group(Core\\IO\\File FILES ${SRC_CORE_IO_FILE})
 
 
 Set(SRC_CORE_GETOPT
@@ -303,14 +322,17 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_PREDICATES_RESULTS}
 		${SRC_CORE_STATIC}
 		${SRC_CORE_ALLOCATOR}
-		${SRC_CORE_ATOMIC}
 		${SRC_CORE_PREPROCESSOR}
 		${SRC_CORE_EXCEPTIONS}
-		${SRC_CORE_FUNCTION}
 		${SRC_CORE_STRING}
 		${SRC_CORE_STL} ${SRC_CORE_VALIDATOR}
+		${SRC_CORE_IO_FILENAME}
+		${SRC_CORE_IO_DIRECTORY}
+		${SRC_CORE_IO_FILE}
 		${SRC_CORE_LOGS}
+		${SRC_CORE_ATOMIC}
 		${SRC_CORE_SMARTPTR}
+		${SRC_CORE_FUNCTION}
 		${SRC_CORE_ANY}
 		${SRC_CORE_VARIANT}
 		${SRC_CORE_DYNAMICLIBRARY}
@@ -321,7 +343,6 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_VERSION}
 		${SRC_CORE_UNIT}
 		${SRC_CORE_URI}
-		${SRC_CORE_FS}
 		${SRC_CORE_GETOPT}
 		${SRC_CORE_SYSTEM}
 		${SRC_CORE_SYSTEM_WINDOWS}
