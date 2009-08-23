@@ -215,7 +215,11 @@ namespace GetOptImpl
 							size_t size = sub - arg;
 							if (size < sizeof(buffer))
 							{
-								strncpy(buffer, arg, size);
+								# ifdef YUNI_OS_WINDOWS
+								strncpy_s(buffer, sizeof(buffer), arg, size);
+								# else
+								strcpy(buffer, arg, size);
+								# endif
 								buffer[size] = '\0';
 								arg += size;
 								++arg;
