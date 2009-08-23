@@ -130,6 +130,12 @@ namespace Yuni
 		//! The largest possible value of type `Size` or `size_type`. That is, Size(-1)
 		static const Size npos = Size(-1);
 
+		enum
+		{
+			//! Chunk size
+			chunkSize = Chunk,
+		};
+
 		//! \name Compatibility with std::string
 		//@{
 		//! The type of object, CharT, stored in the string
