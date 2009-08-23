@@ -16,7 +16,7 @@ namespace Directory
 
 	bool Make(const char path[], unsigned int /* mode */)
 	{
-		return CreateDirectory(path, NULL);
+		return (0 != CreateDirectory(path, NULL));
 	}
 
 	# else

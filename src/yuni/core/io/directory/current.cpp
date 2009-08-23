@@ -3,7 +3,11 @@
 #include "../directory.h"
 #include "../../system/windows.hdr.h"
 #ifndef YUNI_OS_WINDOWS
-#	include <unistd.h>
+# include <unistd.h>
+#else
+# include <direct.h>
+# include <stdlib.h>
+# include <stdio.h>
 #endif
 
 

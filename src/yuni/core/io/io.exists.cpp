@@ -27,22 +27,25 @@ namespace FilesystemImpl
 
 	bool ExistsWindowsImpl(const char* p, const size_t len)
 	{
-		// ugly workaround with stat under Windows
-		// FIXME: Find a better way to find driver letters
-		if (':' == *(p + 1))
+		if (len > 0)
 		{
-			if ('\0' == *(p + 2) || ('\\' == *(p + 2) && '\0' == *(p + 3)))
-				return true;
-		}
+			// ugly workaround with stat under Windows
+			// FIXME: Find a better way to find driver letters
+			if (':' == *(p + 1))
+			{
+				if ('\0' == *(p + 2) || ('\\' == *(p + 2) && '\0' == *(p + 3)))
+					return true;
+			}
 
-		struct _stat s;
-		size_t l = ::strlen(p);
-		// On Windows, the trailing backslash must be removed
-		if ('\\' == p.last())
-		{
-			return (_stat(String(p, p.size() - 1).c_str(), &s) == 0);
+			struct _stat s;
+			// On Windows, the trailing backslash must be removed
+			if ('\\' == p[len - 1])
+			{
+				return (_stat(String(p, len - 1).c_str(), &s) == 0);
+			}
+			return (_stat(p, &s) == 0);
 		}
-		return (_stat(p, &s) == 0);
+		return false;
 	}
 
 	template<bool B>
@@ -57,11 +60,10 @@ namespace FilesystemImpl
 		}
 
 		struct _stat s;
-		size_t l = ::strlen(p);
 		// On Windows, the trailing backslash must be removed
-		if ('\\' == p.last())
+		if ('\\' == p[len - 1])
 		{
-			if (_stat(String(p, p.size() - 1).c_str(), &s) != 0)
+			if (_stat(String(p, len - 1).c_str(), &s) != 0)
 				return false;
 		}
 		if (_stat(p, &s) != 0)
@@ -71,12 +73,12 @@ namespace FilesystemImpl
 
 	bool IsDirectoryWindowsImpl(const char* p)
 	{
-		return IsDirWindowImpl<true>(p);
+		return IsDirWindowsImpl<true>(p, ::strlen(p));
 	}
 
 	bool IsFileWindowsImpl(const char* p)
 	{
-		return IsDirWindowsImpl<false>(p);
+		return IsDirWindowsImpl<false>(p, ::strlen(p));
 	}
 
 

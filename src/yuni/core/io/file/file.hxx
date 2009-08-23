@@ -16,7 +16,7 @@ namespace File
 	inline bool Exists(const StringBase<C,N>& p)
 	{
 		# ifdef YUNI_OS_WINDOWS
-		return p.notEmpty() ? Private::IO::FilesystemImpl::IsFileWindowsImpl(p, p.size()) : false;
+		return p.notEmpty() ? Private::IO::FilesystemImpl::IsFileWindowsImpl(p.c_str(), p.size()) : false;
 		# else
 		return p.notEmpty() ? Private::IO::FilesystemImpl::IsFileUnixImpl(p.c_str()) : false;
 		# endif

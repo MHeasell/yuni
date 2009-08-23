@@ -1,6 +1,16 @@
 
 #include "commons.h"
 
+#ifdef YUNI_OS_WINDOWS
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <io.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#endif
+
+
 
 namespace Yuni
 {
@@ -14,30 +24,35 @@ namespace Directory
 
 # ifdef YUNI_OS_WINDOWS
 
+	inline bool IsDot(const char* s)
+	{
+		return (s[0] == '.' && (s[1] == '\0' || (s[1] == '.' && s[2] == '\0')));
+	}
+
 	bool DeleteDirectory(const char* sPath)
 	{
 		char currentDirectoryPath[MAX_PATH];
-		::strcpy(currentDirectoryPath, sPath);
-		::strcat(currentDirectoryPath, "\\*");
+		::strcpy_s(currentDirectoryPath, sizeof(currentDirectoryPath), sPath);
+		::strcat_s(currentDirectoryPath, sizeof(currentDirectoryPath), "\\*");
 
 		char currentFilename[MAX_PATH];
-		::strcpy(currentFilename, sPath);
-		::strcat(currentFilename, "\\");
+		::strcpy_s(currentFilename, sizeof(currentFilename), sPath);
+		::strcat_s(currentFilename, sizeof(currentFilename), "\\");
 
 		WIN32_FIND_DATA FindFileData;
 		HANDLE hFind = FindFirstFile(currentDirectoryPath, &FindFileData);
 		if (hFind == INVALID_HANDLE_VALUE)
 			return false;
-		::strcpy(currentDirectoryPath, currentFilename);
+		::strcpy_s(currentDirectoryPath, sizeof(currentDirectoryPath), currentFilename);
 
 		bool bSearch = true;
 		while (bSearch)
 		{
 			if (FindNextFile(hFind,&FindFileData))
 			{
-				if (IsDots(FindFileData.ccurrentFilename))
+				if (IsDot(FindFileData.cFileName))
 					continue;
-				::strcat(currentFilename, FindFileData.ccurrentFilename);
+				::strcat_s(currentFilename, sizeof(currentFilename), FindFileData.cFileName);
 				if ((FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
 				{
 					if (!DeleteDirectory(currentFilename))
@@ -46,7 +61,7 @@ namespace Directory
 						return false;
 					}
 					RemoveDirectory(currentFilename);
-					::strcpy(currentFilename, currentDirectoryPath);
+					::strcpy_s(currentFilename, sizeof(currentFilename), currentDirectoryPath);
 				}
 				else
 				{
@@ -57,7 +72,7 @@ namespace Directory
 						FindClose(hFind);
 						return false;
 					}
-					strcpy(currentFilename, currentDirectoryPath);
+					::strcpy_s(currentFilename, sizeof(currentFilename), currentDirectoryPath);
 				}
 			}
 			else
@@ -73,12 +88,12 @@ namespace Directory
 		}
 
 		FindClose(hFind);
-		return RemoveDirectory(sPath);
+		return (0 != RemoveDirectory(sPath));
 	}
 
 	bool Remove(const char* path)
 	{
-		return (NULL == path || '\0' == *path) ? true : RmDirUnixImpl(path);
+		return (NULL == path || '\0' == *path) ? true : DeleteDirectory(path);
 	}
 
 
