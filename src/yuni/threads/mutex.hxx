@@ -23,6 +23,8 @@ namespace Yuni
 		}
 		else
 			::pthread_mutex_init(&pPthreadLock, NULL);
+		# else
+		(void)recursive;
 		# endif
 	}
 

@@ -47,14 +47,14 @@ namespace IO
 		// The complete specialization with wchar_t is in directory.hxx
 
 		//! The path-separator character according to the platform (ex: `/`)
-		static const char  Separator = '/';
+		static const char  Separator; // '/';
 		//! The path-separator character according to the platform (stored in a string instead of a char)
 		static const char* SeparatorAsString; // "/"
 		//! All path-separator characters, for all platforms
 		static const char* AllSeparators; // "\\/"
 
 		//! Dot
-		static const char  Dot = '.';
+		static const char  Dot; // '.';
 
 	}; // class Constant<char>
 	//@}
