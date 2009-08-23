@@ -1,4 +1,5 @@
 
+#define YUNI_NO_THREAD_SAFE // disabling thread-safety
 #include <yuni/yuni.h>
 #include <yuni/core/string.h>
 #include <yuni/core/getopt.h>

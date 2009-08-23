@@ -54,6 +54,7 @@ namespace Yuni
 		void unlock();
 		//@}
 
+		# ifndef YUNI_NO_THREAD_SAFE
 		//! \name PThread wrapper
 		//@{
 		/*!
@@ -61,10 +62,13 @@ namespace Yuni
 		*/
 		::pthread_mutex_t& pthreadMutex();
 		//@}
+		# endif
 
 	private:
+		# ifndef YUNI_NO_THREAD_SAFE
 		//! The PThread mutex
 		::pthread_mutex_t pPthreadLock;
+		# endif
 
 	}; // class Mutex
 
