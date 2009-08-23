@@ -5,7 +5,7 @@
 #include <iostream>
 #include <list>
 #include "versions.h"
-#include <yuni/core/fs/paths.h>
+#include <yuni/core/io/directory.h>
 
 using namespace Yuni;
 
@@ -43,12 +43,12 @@ namespace
 		void findRootPath(const char* a0)
 		{
 			const String argv0 = a0;
-			if (Core::Paths::IsAbsolute(argv0))
+			if (Core::IO::IsAbsolute(argv0))
 				pRootPath = argv0;
 			else
 			{
-				pRootPath = Core::Paths::CurrentDirectory();
-				pRootPath << Core::Paths::Separator << Core::Paths::ExtractFilePath(argv0);
+				pRootPath = Core::IO::Directory::Current();
+				pRootPath << Core::IO::Separator << Core::IO::ExtractFilePath(argv0);
 				pRootPath.removeTrailingSlash();
 			}
 		}
@@ -101,10 +101,10 @@ namespace
 		{
 			if (!pOptPrefix.empty())
 			{
-				String pwd = Core::Paths::CurrentDirectory();
+				String pwd = Core::IO::Directory::Current();
 				const String::List::iterator end = pOptPrefix.end();
 				for (String::List::iterator i = pOptPrefix.begin(); i != end; ++i)
-					*i = Core::Paths::MakeAbsolute(*i, pwd);
+					*i = Core::IO::MakeAbsolute(*i, pwd);
 			}
 		}
 

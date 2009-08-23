@@ -1,8 +1,8 @@
 
 #include <fstream>
 #include <sys/stat.h>
-#include "files.h"
-#include "paths.h"
+#include "../file.h"
+#include "../directory.h"
 #include <ctype.h>
 
 
@@ -11,47 +11,14 @@ namespace Yuni
 {
 namespace Core
 {
-namespace Paths
+namespace IO
 {
-namespace Files
+namespace File
 {
 
 
-	template<class T>
-	bool TmplLoadFromFile(T& out, const String& filename, const bool emptyListBefore, const uint32 sizeLimit)
-	{
-		if (emptyListBefore)
-			out.clear();
-		std::ifstream file(filename.c_str());
-		if (!file)
-			return false;
-		if (sizeLimit)
-		{
-			file.seekg(0, std::ios_base::beg);
-			std::ifstream::pos_type begin_pos = file.tellg();
-			file.seekg(0, std::ios_base::end);
-			if ((uint32)(file.tellg() - begin_pos) > sizeLimit)
-				return false;
-			file.seekg(0, std::ios_base::beg);
-		}
-		std::string line;
-		while (std::getline(file, line))
-			out.push_back(line);
-		return true;
-	}
 
-	bool Load(String::List& out, const String& filename, const bool emptyListBefore, const uint32 sizeLimit)
-	{
-		return TmplLoadFromFile< String::List >(out, filename, emptyListBefore, sizeLimit);
-	}
-
-	bool Load(String::Vector& out, const String& filename, const bool emptyListBefore, const uint32 sizeLimit)
-	{
-		return TmplLoadFromFile< String::Vector >(out, filename, emptyListBefore, sizeLimit);
-	}
-
-
-	bool Size(const String::Char* filename, uint64& size)
+	bool Size(const char* filename, uint64& size)
 	{
 		struct stat results;
 		if (filename && '\0' != *filename && stat(filename, &results) == 0)
@@ -130,10 +97,10 @@ namespace Files
 	{
 		if (filename.empty())
 			return String();
-		String::size_type p = filename.find_last_of('.');
+		const String::size_type p = filename.find_last_of('.');
 		if (p == String::npos)
 			return filename + newExt;
-		String::size_type s = filename.find_last_of("\\/");
+		const String::size_type s = filename.find_last_of("\\/");
 		if (s != String::npos && p < s)
 			return filename + newExt;
 		return filename.substr(0, p) + newExt;
@@ -144,9 +111,9 @@ namespace Files
 
 	bool Copy(const String& from, const String& to, const bool overwrite)
 	{
-		if (!Paths::Exists(from))
+		if (!IO::File::Exists(from))
 			return false;
-		if (!overwrite && Paths::Exists(to))
+		if (!overwrite && IO::File::Exists(to))
 			return true;
 		std::ifstream src(from.c_str(), std::ios::in | std::ios::binary);
 		if (src.is_open())
@@ -160,8 +127,6 @@ namespace Files
 		}
 		return false;
 	}
-
-
 
 
 
@@ -295,8 +260,8 @@ namespace Files
 
 
 
-} // namespace Files
-} // namespace Paths
+} // namespace File
+} // namespace IO
 } // namespace Core
 } // namespace Yuni
 

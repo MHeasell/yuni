@@ -5,7 +5,8 @@
 # include <dlfcn.h>
 #endif
 #include <stdio.h>
-#include "../fs/paths.h"
+#include "../io/file.h"
+#include "../io/directory.h"
 
 
 
@@ -72,8 +73,8 @@ namespace DynamicLibrary
 		{
 			# define TEST_THEN_LOAD(EXT) \
 				s.clear(); \
-				s << (*i) << Core::Paths::Separator << prefix << filename << EXT; \
-				if (Core::Paths::Exists(s)) \
+				s << (*i) << Core::IO::Separator << prefix << filename << EXT; \
+				if (Core::IO::File::Exists(s)) \
 					return true
 
 			const String::Vector::const_iterator end = searchPaths.end();
@@ -109,7 +110,7 @@ namespace DynamicLibrary
 		if (!filename.empty())
 		{
 			// If the file name is absolute, there is no need for research
-			if (Core::Paths::IsAbsolute(filename))
+			if (Core::IO::IsAbsolute(filename))
 				return loadFromRawFilename(filename.c_str(), r, v);
 
 			// A temporary string, where to write the absolute filename

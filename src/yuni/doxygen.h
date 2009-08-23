@@ -38,7 +38,15 @@
 ** \defgroup Endianness Endianness
 ** \ingroup Core
 **
-** \defgroup PathsAndFiles  Paths and Files handling
+** \defgroup IO Low-level routines for file and directory support
+** \ingroup Core
+**
+** \defgroup IODirectory  Directory manipulation functions
+** \ingroup IO
+** \ingroup Core
+**
+** \defgroup IOFile  File manipulation functions
+** \ingroup IO
 ** \ingroup Core
 **
 ** \defgroup Exceptions Exceptions handling

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ctype.h>
 #include "uri.h"
-#include "../fs/files.h"
+#include "../io/file.h"
 
 
 
@@ -214,7 +214,7 @@ namespace Yuni
 				pMustRemoveDotSegments = ('.' == infos.path.last());
 			}
 			if (pMustRemoveDotSegments)
-				infos.path = Core::Paths::Files::RemoveDotSegmentsFromUnixFilename(infos.path);
+				infos.path = Core::IO::File::RemoveDotSegmentsFromUnixFilename(infos.path);
 		}
 		return true;
 	}
