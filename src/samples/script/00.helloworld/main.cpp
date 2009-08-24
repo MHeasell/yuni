@@ -1,33 +1,37 @@
-/*!
- * This is a placeholder for the helloworld sample for the script
- * module. It is *not functional* yet, so it returns an error.
- */
 
 #include <iostream>
 #include <yuni/script.h>
 
+/*
+** This sample showcases the Script module.
+**
+** It shows how to use Lua functions from a C++ application, and
+** conversely.
+**/
 
+// We will first define a standard C++ function, to be called from Lua.
 namespace
 {
-	Yuni::String bar(int arg1, double arg2, Yuni::String arg3, void* arg4, int, int)
+	Yuni::String sampleFunction(int arg1, double arg2, Yuni::String arg3, void* arg4)
 	{
-		std::cout << "[ C++] Hi, i'm bar(). Here are 4 integers: "
+		std::cout << "[ C++] Now in sampleFunction(" 
 			<< arg1 << ", "
 			<< arg2 << ", "
 			<< arg3 << ", "
-			<< arg4 << "."
+			<< arg4 << ")"
 			<< std::endl;
-	 	return "Piko";
+	 	return "String from sampleFunction()";
 	}
 }
 
-
-class Piko
+// We also define a custom object, to call a method of this object from Lua.
+class SampleObject
 {
 public:
-	void foo(const Yuni::String& nyu)
+	int sampleMethod(const Yuni::String& argument)
 	{
-		std::cout << "[ C++] " << __PRETTY_FUNCTION__ << ": " << nyu << "\n";
+		std::cout << "[ C++] Now in SampleObject::sampleMethod(" << argument << ")\n";
+		return 42;
 	}
 };
 
@@ -35,76 +39,85 @@ public:
 int main()
 {
 
-	// Create a Lua script object, to execute a small script.
+	// Create a Lua script object, to execute our demo script.
+	// We store it within an abstract script interface, because every standard
+	// function is accessible through it.
+	// This means you can mix script languages in your code without changing types.
 	Yuni::Script::AScript* sc = new Yuni::Script::Lua();
 
-	// Load a hello world script
+	// Load a hello world script from a file
 	if (!sc->loadFromFile("helloworld.lua"))
 	{
 		// An error has occured.
-		// TODO: We must be able to determine exactly what prevented the script loading.
-		std::cout << "[ C++] Error while loading script." << std::endl;
+		std::cout << "[ C++] Error while loading script from file." << std::endl;
+		exit(1);
 	}
 
-	if (!sc->appendFromString("foo();"))
+
+	// Note: at this point, depending on the script engine, the script may or may
+	// not have been processed by the script engine. Still, it is recorded, and every
+	// subsequent action will be executed in order.
+
+
+	// Also load a block of code. This code will be executed as if it was loaded from a file.
+	// You can include dynamically generated code this way, in this case a random array.
+	Yuni::String luaArray("sampleArray = { ");
+	for (int i = 0; i < 15; ++i)
+		luaArray.appendFormat("%f%c", (rand() % 1000) * 0.001, (i < 99 ? ',' : ' '));
+	luaArray += "};";
+	if (!sc->appendFromString(luaArray))
 	{
 		// An error has occured.
-		// TODO: We must be able to determine exactly what prevented the script loading.
 		std::cout << "[ C++] Error while loading string script." << std::endl;
+		exit(1);
 	}
 
-	sc->call(NULL, "foo");
-
-	if (!sc->appendFromString("print(\"[ Lua] Pyo !\");"))
-	{
-		// An error has occured.
-		// TODO: We must be able to determine exactly what prevented the script loading.
-		std::cout << "[ C++] Error while loading string script." << std::endl;
-	}
-
-	// Run it again, just to see ?
+	// We call prepare to ensure that all the code blocks we loaded previously are parsed
+	// and executed, so we are ready to continue.
 	sc->prepare();
 
-	// And again.
-	sc->prepare();
+	// Ask lua to print our random array via a function inside helloworld.lua.
+	sc->call(NULL, "printRandomArray");
 
-	// Declare a variant to store the call results
-	Yuni::Any ret;
-
-	// Then call a function.
-	if (!sc->call(&ret, "callMeOnly"))
+	// Perform a second function call, this time with arguments.
 	{
-		std::cout << "[ C++] Error while calling callMeOnly()" << std::endl;
-	}
+		// Declare a variant to store the call results
+		Yuni::Any ret;
 
-	// Then call a function with one argument, for example an Int.
-	if (!sc->call(&ret, "callMeWithArg", 42, 15.2))
-		std::cout << "[ C++] Error while calling callMeWithArg(42, 15.2)" << std::endl;
-
-	// Then call a function with one argument, for example a String
-	if (!sc->call(&ret, "callMeWithArg", "Hello, World !", 45.22432))
-		std::cout << "[ C++] Error while calling callMeWithArg(\"Hello, World !\", 45.22432)" << std::endl;
-
-	std::cout << "[ C++] Got result of type " << ret.type().name() << std::endl;
-
-
-	Piko piko;
-	sc->bind("classMemberFoo", &piko, &Piko::foo);
-
-
-	if (!sc->bind("bar", &bar))
-		std::cout << "[ C++] Error while binding ::bar()" << std::endl;
-	else
-	{
-		std::cout << "[ C++] Fine, bar was bound. Call it !" << std::endl;
-		if (!sc->call(NULL, "callBar"))
+		// Then call a function with one argument, for example an Int.
+		if (!sc->call(&ret, "sampleLuaFunction", "Hello, world", 15.2))
 		{
-			std::cout << "[ C++] Error while calling callBar()" << std::endl;
+			std::cout << "[ C++] Error while calling sampleLuaFunction(\"Hello, world\", 15.2)" << std::endl;
+			exit(1);
 		}
 
+		std::cout << "[ C++] Got result of type " << ret.type().name() << std::endl;
 	}
 
-		// Destroy the script object to release the resources.
+
+	// Last, we try to bind a method of a C++ object and a C++ function,
+	// then call them from Lua.
+
+	SampleObject sampleInst;
+	if (!sc->bind("SampleObject__sampleMethod", &sampleInst, &SampleObject::sampleMethod))
+	{
+		std::cout << "[ C++] Error while binding SampleObject::sampleMethod()" << std::endl;
+		exit(1);
+	}
+
+	if (!sc->bind("sampleFunction", &sampleFunction))
+	{
+		std::cout << "[ C++] Error while binding sampleFunction()" << std::endl;
+		exit(1);
+	}
+
+	if (!sc->call(NULL, "callBackSampleFunctions"))
+	{
+		std::cout << "[ C++] Error while calling callBackSampleFunctions()" << std::endl;
+		exit(1);
+	}
+
+	// Finally, destroy the script object to release the resources.
 	delete sc;
 
 	// Goodbye !
