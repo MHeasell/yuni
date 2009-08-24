@@ -4,7 +4,6 @@
 # include "../../yuni.h"
 # include <stdlib.h>
 # include <math.h>
-# include <cstring>
 
 
 /*!
@@ -199,8 +198,7 @@ namespace Math
 	** \brief Get the square root value
 	** \ingroup Math
 	*/
-	inline float SquareRoot(const float x);
-	inline double SquareRoot(const double x);
+	template<typename U> U SquareRoot(const U x);
 
 
 	/*!

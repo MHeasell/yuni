@@ -126,13 +126,13 @@ namespace Math
 	}
 
 
-
-	inline float SquareRoot(const float x)
+	template<typename U>
+	inline U SquareRoot(const U x)
 	{
-		return ::sqrtf(x);
+		return (U)::sqrt((double)x);
 	}
 
-	inline double SquareRoot(const double x)
+	template<> inline double SquareRoot(const double x)
 	{
 		return ::sqrt(x);
 	}
@@ -287,14 +287,29 @@ namespace Math
 
 
 	template<>
+	struct RoundToInt<float, double>
+	{
+		typedef float Type;
+		typedef double ResultType;
+		static inline ResultType Value(Type x) { return (ResultType)x; }
+	};
+
+	template<>
+	struct RoundToInt<double, float>
+	{
+		typedef double Type;
+		typedef float ResultType;
+		static inline ResultType Value(Type x) { return (ResultType)x; }
+	};
+
+
+
+	template<>
 	struct RoundToInt<float, long int>
 	{
 		typedef float Type;
 		typedef long int ResultType;
-		static inline ResultType Value(Type x)
-		{
-			return ::lrintf(x);
-		}
+		static inline ResultType Value(Type x) { return ::lrintf(x); }
 	};
 
 	template<>
@@ -302,10 +317,7 @@ namespace Math
 	{
 		typedef double Type;
 		typedef long int ResultType;
-		static inline ResultType Value(Type x)
-		{
-			return ::lrint(x);
-		}
+		static inline ResultType Value(Type x) { return ::lrint(x); }
 	};
 
 	template<>
@@ -313,10 +325,7 @@ namespace Math
 	{
 		typedef long double Type;
 		typedef long int ResultType;
-		static inline ResultType Value(Type x)
-		{
-			return ::lrintl(x);
-		}
+		static inline ResultType Value(Type x) { return ::lrintl(x); }
 	};
 
 
@@ -326,10 +335,7 @@ namespace Math
 	{
 		typedef float Type;
 		typedef long long int ResultType;
-		static inline ResultType Value(Type x)
-		{
-			return ::llrintf(x);
-		}
+		static inline ResultType Value(Type x) { return ::llrintf(x); }
 	};
 
 	template<>
@@ -337,10 +343,7 @@ namespace Math
 	{
 		typedef double Type;
 		typedef long long int ResultType;
-		static inline ResultType Value(Type x)
-		{
-			return ::llrint(x);
-		}
+		static inline ResultType Value(Type x) { return ::llrint(x); }
 	};
 
 	template<>
@@ -348,10 +351,7 @@ namespace Math
 	{
 		typedef long double Type;
 		typedef long long int ResultType;
-		static inline ResultType Value(Type x)
-		{
-			return ::llrintl(x);
-		}
+		static inline ResultType Value(Type x) { return ::llrintl(x); }
 	};
 
 
