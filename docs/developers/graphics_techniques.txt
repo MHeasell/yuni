@@ -25,6 +25,12 @@ II) Techniques by feature:
   Shadows:
   --------
 
+	0] No shadows:
+	--------------
+	How it works:
+		Just don't do it.
+	Quality: Inexistent
+
 	1] Shadow mapping:
 	------------------
 	How it works:
@@ -54,7 +60,7 @@ II) Techniques by feature:
 		Good
 	Speed:
 		Low
-	Memory Usage:
+	Memory usage:
 		High
 			SCORE: B
 
@@ -78,3 +84,70 @@ II) Techniques by feature:
 	Quality: Best
 	Speed: Very slow (not real-time)
 			SCORE: A
+
+  Bump-mapping:
+  -------------
+
+	0] No bump-mapping at all:
+	--------------------------
+	How it works:
+		Just don't do it.
+	Quality: Low
+	Speed: Best
+		   Score: C
+
+	1] Normal mapping (dot3 bump mapping):
+	--------------------------------------
+	How it works:
+		Use a grey-level image of the size same as the texture called a height
+		map. Dot-product the light applied on each point by the modified normal
+		vector at this point.
+	Quality: Medium
+	Speed: Fast
+		   Score: C?
+
+	2] Parallax mapping (virtual displacement mapping):
+	---------------------------------------------------
+	How it works:
+		Displace the texture coordinates at a point by a function of the view
+		angle in tangent space and the value of the height map at that point.
+		At steeper view-angles, the texture coordinates are displaced more,
+		giving the illusion of depth due to parallax effects as the view
+		changes.
+	Remarks:
+		Improvements are required to apply occlusion and shadowing.
+	Quality: Very good
+	Speed: Medium
+			SCORE: B
+
+	3] Relief mapping:
+	------------------
+	How it works:
+		Apply a short-distance raytrace using a pixel shader. Once more, a
+		height map must be used to add depth information to the textures.
+	Remarks:
+		Self-occlusion and self-shadowing are naturally applied.
+	Quality: Very good
+	Speed: Slow
+			SCORE: B
+
+	4] Displacement mapping:
+	------------------------
+	How it works:
+		Also use a height map, but use the normals to really move (displace) the
+		texture's points in space along their normals. This can only be done
+		either with very fine (or automatically refined for this use) meshes,
+		or non-tesselating renderers (RT).
+	Remarks:
+		This can be implemented using vertex shaders.
+		(see http://www.ozone3d.net/tutorials/vertex_displacement_mapping.php)
+	Quality:
+		Best
+	Speed:
+		Not clear, but:
+		Probably very slow if done with a RT
+		Maybe fast enough if done with the GPU using shaders, although it would
+		require remeshing, which could be very costly.
+			SCORE:
+				A with RT
+				A, maybe B with vertex shaders
