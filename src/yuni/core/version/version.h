@@ -1,6 +1,7 @@
-#ifndef __YUNI_MISC_VERSION_H__
-# define __YUNI_MISC_VERSION_H__
+#ifndef __YUNI_CORE_VERSION_H__
+# define __YUNI_CORE_VERSION_H__
 
+# include "../../yuni.h"
 # include "../string.h"
 
 
@@ -10,7 +11,11 @@ namespace Yuni
 
 
 	/*!
-	** \brief Provides version informations
+	** \brief Version number
+	**
+	** A version number is composed by two numbers (major and minor), plus a
+	** revision number for fine-grained level.
+	**
 	** \ingroup Core
 	*/
 	class Version
@@ -19,39 +24,51 @@ namespace Yuni
 		/*!
 		** \brief Get the version of the Yuni Library
 		*/
-		void InternalLib(Version& v);
+		static void InternalLib(Version& v);
 
 	public:
 		//! \name Constructor
 		//@{
 		//! Default constructor
 		Version();
-		//! Constructor with a given version
-		Version(const int h, const int l, const int r = 0);
+
+		/*!
+		** \brief Constructor with a given version
+		**
+		** \param h The major version number
+		** \param l The minor version number
+		*/
+		Version(const int h, const int l);
+
+		/*!
+		** \brief Constructor with a given version
+		**
+		** \param h The major version number
+		** \param l The minor version number
+		** \param r The revision number
+		*/
+		Version(const int h, const int l, const int r);
+
 		//! Copy constructor
 		Version(const Version& c);
 		//@}
 
-		int hi() const {return pHi;}
-		void hi(const int h);
 
-		int lo() const {return pLo;}
-		void lo(const int l);
-
-		int revision() const {return pRevision;}
-		void revision(const int r);
-
-		const String& author() const {return pAuthor;}
-		void author(const String& s);
-
-		const String& webUrl() const {return pWebUrl;}
-		void webUrl(const String& s);
-
+		//! \name Conversions
+		//@{
 		/*!
 		** \brief Get the version in an human-readable string
 		*/
 		String toString() const;
+		//@}
 
+
+		//! \name Comparisons
+		//@{
+		/*!
+		** \brief Get if the version is null
+		*/
+		bool null() const;
 
 		/*!
 		** \brief Check if this version is less than another one
@@ -65,48 +82,61 @@ namespace Yuni
 		** \brief Check if this version is greater than another one
 		*/
 		bool isGreaterThan(const Version& rhs) const;
+		//@}
+
+
+		//! \name ostream
+		//@{
+		/*!
+		** \brief Print the version to a ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
 
 
 		//! \name Operators
 		//@{
 		//! The operator <
-		bool operator <  (const Version& rhs) const {return isLessThan(rhs);}
+		bool operator <  (const Version& rhs) const;
 		//! The operator <=
-		bool operator <= (const Version& rhs) const {return isEqualTo(rhs) || isLessThan(rhs);}
+		bool operator <= (const Version& rhs) const;
 		//! The operator >
-		bool operator >  (const Version& rhs) const {return isGreaterThan(rhs);}
+		bool operator >  (const Version& rhs) const;
 		//! The operator <=
-		bool operator >= (const Version& rhs) const {return isEqualTo(rhs) || isGreaterThan(rhs);}
+		bool operator >= (const Version& rhs) const;
 
 		//! The operator ==
-		bool operator == (const Version& rhs) const {return isEqualTo(rhs);}
+		bool operator == (const Version& rhs) const;
 		//! The operator !=
-		bool operator != (const Version& rhs) const {return !isEqualTo(rhs);}
+		bool operator != (const Version& rhs) const;
+
+		//! The operator =
+		Version& operator = (const Version& rhs);
 		//@}
 
-	private:
-		//! The hi version
-		int pHi;
-		//! The lo version
-		int pLo;
-		//! The revision
-		int pRevision;
-		//! The author
-		String pAuthor;
-		//! The Web address
-		String pWebUrl;
+	public:
+		//! The major version number
+		unsigned int hi;
+		//! The minor version number
+		unsigned int lo;
+		//! Revision
+		unsigned int revision;
 
 	}; // class Version
 
 
+
 } // namespace Yuni
+
+# include "version.hxx"
+
 
 
 inline std::ostream& operator << (std::ostream& out, const Yuni::Version& rhs)
 {
-	out << rhs.toString();
+	rhs.print(out);
 	return out;
 }
 
 
-#endif // __YUNI_MISC_VERSION_H__
+#endif // __YUNI_CORE_VERSION_H__
