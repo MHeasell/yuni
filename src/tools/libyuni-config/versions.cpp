@@ -16,13 +16,13 @@ namespace VersionInfo
 	void List::checkRootFolder(const String& root)
 	{
 		if (Core::IO::File::Exists(String() << root << Core::IO::Separator << "mark-for-yuni-sources"))
-        {
-            # ifdef YUNI_OS_WINDOWS
+		{
+			# ifdef YUNI_OS_WINDOWS
 			loadFromPath(root + "\\..\\..\\..");
-            # else
+			# else
 			loadFromPath(root + "/../../..");
-            # endif
-        }
+			# endif
+		}
 	}
 
 
@@ -70,11 +70,11 @@ namespace VersionInfo
 				if (key.empty() || key == "[")
 					continue;
 				if (key == "version.hi")
-					version.hi(value.to<int>());
+					version.hi = value.to<unsigned int>();
 				if (key == "version.lo")
-					version.lo(value.to<int>());
+					version.lo = value.to<unsigned int>();
 				if (key == "version.rev")
-					version.revision(value.to<int>());
+					version.revision = value.to<unsigned int>();
 				if (key == "version.target")
 					info.compilationMode = value;
 				if (key == "modules.available")
@@ -90,7 +90,7 @@ namespace VersionInfo
 				if (key == "path.lib")
 					info.libPath.push_back(value);
 			}
-			if (version.hi() >= 0 && version.lo() > 0 && !info.modules.empty())
+			if (!version.null() && !info.modules.empty())
 			{
 				info.path = path;
 				info.compiler = pCompiler;
