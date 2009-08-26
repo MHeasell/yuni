@@ -249,7 +249,7 @@ Set(SRC_CORE_GETOPT
 source_group(Core\\GetOpt FILES ${SRC_CORE_GETOPT})
 
 
-Set(SRC_CORE_VERSION	core/version/version.h  core/version/version.cpp)
+Set(SRC_CORE_VERSION	core/version/version.h  core/version/version.cpp core/version/version.hxx)
 source_group(Core\\Version FILES ${SRC_CORE_VERSION})
 
 
