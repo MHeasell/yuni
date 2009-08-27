@@ -15,7 +15,7 @@ namespace Render
 		// Enable Smooth Shading
 		glShadeModel(GL_SMOOTH);
 		// Black Background
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		// Depth Buffer Setup
 		glClearDepth(1.0f);
 		// Enables Depth Testing

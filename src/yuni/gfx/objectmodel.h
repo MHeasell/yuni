@@ -22,6 +22,10 @@ namespace Gfx
 		//! \name Constructors
 		//@{
 
+		//! Empty Constructor
+		ObjectModel()
+		{}
+
 		//! Main Constructor
 		ObjectModel(const Skeleton::Ptr& skeleton)
 			: pSkeleton(skeleton)

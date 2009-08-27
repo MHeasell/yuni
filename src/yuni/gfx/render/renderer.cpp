@@ -20,13 +20,13 @@ namespace Render
 		clearScreen();
 
 		////// Test Draw
-		static float rotQuad = 0.1f;
+		//static float rotQuad = 0.1f;
 
-		resetView();
-		applyTranslation(Vector3D<float>(0.0f, 0.0f, -7.0f));
-		applyRotation(Vector3D<float>(rotQuad * 1.0f, rotQuad * 0.5f, rotQuad * 0.25f));
-		testDraw();
-		rotQuad += 0.1f;
+		//resetView();
+		//applyTranslation(Vector3D<float>(0.0f, 0.0f, -7.0f));
+		//applyRotation(Vector3D<float>(rotQuad * 1.0f, rotQuad * 0.5f, rotQuad * 0.25f));
+		//testDraw();
+		//rotQuad += 0.1f;
 		////// End Test Draw
 
 		// All objects
@@ -37,7 +37,7 @@ namespace Render
 		for (Gfx::Scene::Objects::const_iterator it = objects.begin(); it != endObj; ++it)
 		{
 			// The skeleton
-			const Gfx::Skeleton::Ptr& skel = it->second->skeleton();
+			Gfx::Skeleton::Ptr skel = it->second->skeleton();
 
 			// Reset matrices used for view: translation and rotation
 			resetView();
