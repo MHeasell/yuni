@@ -19,6 +19,9 @@ ENDIF(APPLE)
 
 
 LIBYUNI_CONFIG_LIB("core"       "yuni-static-core")
+IF(APPLE)
+	LIBYUNI_CONFIG_CFLAG("core"	"-fvisibility=hidden")
+ENDIF(APPLE)
 LIBYUNI_CONFIG_LIB("tests"      "yuni-static-tests")
 LIBYUNI_CONFIG_LIB("algorithms" "yuni-static-algorithms")
 
