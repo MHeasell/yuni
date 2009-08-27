@@ -141,6 +141,176 @@ namespace VersionInfo
 	}
 
 
+	VersionInfo::Settings* List::selected()
+	{
+		if (pList.empty())
+			return NULL;
+		InternalList::iterator i = pList.begin();
+		return &i->second;
+	}
+
+
+
+	bool Settings::configFile(String::List& options, bool displayError) const
+	{
+		if (compiler.empty())
+		{
+			if (displayError)
+				std::cout << "Error: unknown compiler\n";
+			return false;
+		}
+		String out;
+		out << this->path << Core::IO::Separator;
+		switch (mapping)
+		{
+			case mappingSVNSources:
+				out << "src" << Core::IO::Separator << "yuni" << Core::IO::Separator;
+				break;
+			case mappingStandard:
+				// Nothing to do
+				break;
+		}
+		out << "yuni.config." << this->compiler;
+
+		if (!Core::IO::File::Exists(out))
+		{
+			if (displayError)
+				std::cout << "Error: impossible to open the config file '" << out << "'\n";
+			return false;
+		}
+		if (!Core::IO::File::Load(options, out))
+		{
+			if (displayError)
+				std::cout << "Error: Impossible to read '" << out << "'\n";
+			return false;
+		}
+		return true;
+	}
+
+
+
+	bool Settings::parserModulesOptions(String::List& options, bool displayError)
+	{
+		// Cleanup if needed
+		moduleSettings.clear();
+		// End of the list
+		const String::List::const_iterator end = options.end();
+		// Key
+		String key;
+		// Value
+		String value;
+		// Module name
+		String modName;
+		// Group
+		String group;
+
+		CompilerCompliant compliant = gcc;
+		if (compiler.at(0) == 'v' && compiler.at(1) == 's') // visual studio
+		{
+			compliant = visualstudio;
+			std::cout << "Please make me compliant with Visual Studio !\n";
+			return false;
+		}
+
+		// For each entry in the ini file
+		for (String::List::const_iterator i = options.begin(); i != end; ++i)
+		{
+			i->extractKeyValue(key, value);
+			if (key.empty() || key.first() == '[')
+				continue;
+
+			// Reset
+			modName.clear();
+			group.clear();
+
+			// Splitting
+			String::Size p = key.find(':');
+			if (p == String::npos)
+				continue;
+			group.assign(key, p);
+			modName.assign(key, p + 1, key.size());
+			if (group.empty() || modName.empty())
+				continue;
+
+			ModuleSettings& s = moduleSettings[modName];
+
+			if (group == "path.include")
+			{
+				switch (compliant)
+				{
+					case gcc          : s.includes[String() << "-I\"" << value << "\""] = true; break;
+					case visualstudio : s.includes[String() << "/I\"" << value << "\""] = true; break;
+				}
+				continue;
+			}
+
+			if (group == "lib,rawcommand")
+			{
+				s.libs[value] = true;
+				continue;
+			}
+
+			if (group == "path.lib")
+			{
+				switch (compliant)
+				{
+					case gcc          : s.libIncludes[String() << "-L\"" << value << "\""] = true; break;
+					case visualstudio : s.libIncludes[String() << "/L\"" << value << "\""] = true; break;
+				}
+				continue;
+			}
+
+			if (group == "lib")
+			{
+				switch (compliant)
+				{
+					case gcc          : s.libs[String() << "-l" << value] = true; break;
+					case visualstudio : s.libs[String() << "/l" << value] = true; break;
+				}
+				continue;
+			}
+
+			if (group == "cxxflag")
+			{
+				s.cxxFlags[value] = true;
+				continue;
+			}
+
+			if (group == "define")
+			{
+				switch (compliant)
+				{
+					case gcc          : s.defines[String() << "-D" << value] = true; break;
+					case visualstudio : s.defines[String() << "/D" << value] = true; break;
+				}
+				continue;
+			}
+			if (group == "dependency")
+			{
+				s.dependencies.push_back(value);
+				continue;
+			}
+
+			if (group == "framework")
+			{
+				s.frameworks[String() << "-framework \"" << value << "\""] = true;
+				continue;
+			}
+
+			if (displayError)
+				std::cout << "Error: unknown key in the config file: '" << key << "'\n";
+			return false;
+		}
+		return true;
+	}
+
+
+	bool Settings::moduleExists(const String& name) const
+	{
+		return (moduleSettings.end() != moduleSettings.find(name));
+	}
+
+
 
 } // namespace VersionInfo
 } // namespace LibConfig

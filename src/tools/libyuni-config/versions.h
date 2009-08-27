@@ -23,31 +23,14 @@ namespace Yuni
 {
 namespace LibConfig
 {
-
-namespace Compiler
-{
-	struct Settings
-	{
-		struct flags
-		{
-			//! Cxx flags
-			String::List cxx;
-			String::List defines;
-			String::List libs;
-		};
-		struct path
-		{
-			String::List include;
-			String::List libs;
-		};
-
-		std::map<String,String> additionalFiles;
-	};
-
-} // namespace Compiler
-
 namespace VersionInfo
 {
+
+	enum CompilerCompliant
+	{
+		gcc,
+		visualstudio,
+	};
 
 	enum Mapping
 	{
@@ -59,10 +42,19 @@ namespace VersionInfo
 	struct Settings
 	{
 	public:
+
+	public:
 		Settings()
 			:supportOpenGL(false), supportDirectX(false)
 		{}
 
+		bool configFile(String::List& options, bool displayError) const;
+
+		bool parserModulesOptions(String::List& options, bool displayError);
+
+		bool moduleExists(const String& name) const;
+
+	public:
 		String compiler;
 		Mapping mapping;
 		String path;
@@ -74,8 +66,20 @@ namespace VersionInfo
 		String::List includePath;
 		String::List libPath;
 
-		//! Compiler options for a given module and a given compiler name
-		std::map<String, std::map<String, Compiler::Settings> > compilation;
+		struct ModuleSettings
+		{
+		public:
+			typedef std::map<String, bool> OptionMap;
+		public:
+			OptionMap cxxFlags;
+			OptionMap includes;
+			OptionMap frameworks;
+			OptionMap libs;
+			OptionMap libIncludes;
+			OptionMap defines;
+			String::List dependencies;
+		};
+		std::map<String, ModuleSettings> moduleSettings;
 	};
 
 
@@ -91,7 +95,7 @@ namespace VersionInfo
 
 		const String& compiler() const {return pCompiler;}
 		void compiler(const String& c) {pCompiler = c;}
-		
+
 		void checkRootFolder(const String& root);
 
 		void findFromPrefixes(const String::List& prefix);
@@ -99,6 +103,8 @@ namespace VersionInfo
 		void print();
 
 		void printWithInfos();
+
+		VersionInfo::Settings* selected();
 
 	private:
 		void loadFromPath(const String& path);
