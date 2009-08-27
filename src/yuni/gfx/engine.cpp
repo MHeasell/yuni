@@ -1,7 +1,5 @@
 
 #include "engine.h"
-#include "api/gl.h"
-#include "render/opengl.h"
 
 namespace Yuni
 {
@@ -98,13 +96,13 @@ namespace Gfx
 			return;
 
 		// Window creation and API init
-		# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
-			pMainWindow = Window::Factory::CreateDX9Window(applicationTitle(), pDevice->resolution()->width(),
-				pDevice->resolution()->height(), pDevice->resolution()->bitPerPixel(), pDevice->fullscreen());
-		# else
+		//# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
+		//	pMainWindow = Window::Factory::CreateDX9Window(applicationTitle(), pDevice->resolution()->width(),
+		//		pDevice->resolution()->height(), pDevice->resolution()->bitPerPixel(), pDevice->fullscreen());
+		//# else
 			pMainWindow = Window::Factory::CreateGLWindow(applicationTitle(), pDevice->resolution()->width(),
 				pDevice->resolution()->height(), pDevice->resolution()->bitPerPixel(), pDevice->fullscreen());
-		# endif
+		//# endif
 
 		// The initialization has failed
 		if (!pMainWindow)

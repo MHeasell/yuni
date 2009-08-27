@@ -24,6 +24,24 @@ namespace Gfx
 		//@{
 
 		/*!
+		** \brief Empty Constructor
+		**
+		** Empty skeleton, empty mesh
+		*/
+		Skeleton()
+			:pMesh(new Mesh())
+		{}
+
+		
+		/*!
+		** \brief Constructor with no transformation
+		** \param Mesh to use for this skeleton
+		*/
+		Skeleton(Mesh::Ptr& mesh)
+			:pMesh(mesh)
+		{}
+
+		/*!
 		** \brief Main Constructor
 		** \param mesh Mesh to use for this skeleton
 		** \param position Position of the skeleton in space relative to its parent (absolute if no parent)
@@ -31,7 +49,7 @@ namespace Gfx
 		*/
 		Skeleton(Mesh::Ptr& mesh, const Vector3D<float>& position,
 			const Vector3D<float>& rotation)
-			: pMesh(mesh), pPosition(position), pRotation(rotation)
+			:pMesh(mesh), pPosition(position), pRotation(rotation)
 		{}
 
 		//@}

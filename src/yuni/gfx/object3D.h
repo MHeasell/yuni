@@ -60,7 +60,9 @@ namespace Gfx
 		*/
 		const Skeleton::Ptr& skeleton()
 		{
-			return pSkeleton;
+			if (pSkeleton)
+				return pSkeleton;
+			return pModel->skeleton();
 		}
 
 		/*!
