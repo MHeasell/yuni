@@ -1,6 +1,7 @@
 #ifndef __LIBYUNI_CONFIG_VERSIONS_H__
 # define __LIBYUNI_CONFIG_VERSIONS_H__
 
+# define YUNI_NO_THREAD_SAFE // disabling thread-safety
 # include <yuni/yuni.h>
 # include <yuni/core/string.h>
 # include <yuni/core/version/version.h>
@@ -71,6 +72,14 @@ namespace VersionInfo
 		public:
 			typedef std::map<String, bool> OptionMap;
 		public:
+			void merge(OptionMap& out, const OptionMap& with) const
+			{
+				const OptionMap::const_iterator end = with.end();
+				for (OptionMap::const_iterator i = with.begin(); i != end; ++i)
+					out[i->first] = true;
+			}
+
+		public:
 			OptionMap cxxFlags;
 			OptionMap includes;
 			OptionMap frameworks;
@@ -81,6 +90,9 @@ namespace VersionInfo
 		};
 		std::map<String, ModuleSettings> moduleSettings;
 	};
+
+
+
 
 
 	class List
@@ -113,6 +125,9 @@ namespace VersionInfo
 		String pCompiler;
 		InternalList pList;
 	};
+
+
+
 
 
 } // namespace VersionInfo
