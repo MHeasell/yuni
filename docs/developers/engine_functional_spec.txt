@@ -159,5 +159,49 @@ Examples of features that could benefit from scaling:
   - Effects
   - Shadows / Lights
   - Textures
-  - Rendering engine (a critical case being RT rendering when quality is MUCH
-  more important than performance)
+  - Rendering engine
+See the document named graphics_techniques.txt for details on what technique
+should be used, why and when.
+
+
+
+V) Resources and Formats
+========================
+
+In order for any 3D engine to become used wiely, it must allow the users to
+reuse the resources they already have, be they images (or textures), meshes,
+fonts or even shaders.
+
+	1] Shaders:
+	-----------
+
+Shaders should not be a problem since only two formats exist and we cannot
+afford to ship without either: HLSL and GLSL (respectively for DirectX and
+OpenGL).
+
+	2] Images:
+	----------
+
+The most frequent image formats should be supported, although no uncompressed
+raster format will be, so as not to encourage people to use 20MB bitmaps for
+their textures. Of course, vector-based formats must be encouraged.
+
+A possible list of formats would be the following (subject to changes):
+ - JPEG?
+ - PNG
+ - SVG
+ - PS / EPS
+
+	3] Meshes:
+	----------
+
+Mesh import is crucial, noone wants to convert all of a project's meshes to a
+given format. We have to completely abstract this and allow people to load
+their favorite mesh format transparently.
+
+A possible list of formats would be the following (subject to changes):
+ - MilkShape3D
+ - DirectX X
+ - Quake3 MD3
+ - 3DSMax
+ - WaveFront OBJ
