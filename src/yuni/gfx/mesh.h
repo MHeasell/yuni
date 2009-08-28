@@ -4,7 +4,6 @@
 
 # include "../core/smartptr/smartptr.h"
 # include "triangle.h"
-# include "mesh.proxy.h"
 
 
 namespace Yuni
@@ -65,20 +64,9 @@ namespace Gfx
 		*/
 		const TriangleList& triangles() const {return pTriangles;}
 
-		/*!
-		** \brief Update the library-specific representation with the new data
-		**
-		** This is not done automatically to avoid doing it uselessly
-		** (for example if more changes will be done).
-		*/
-		void update() {pProxy->update(pTriangles);}
-
 	protected:
 		//! The Mesh knows all the triangles that define it
 		TriangleList pTriangles;
-
-		//! Proxy for the library-specific representation
-		Yuni::Private::Gfx::ProxyMesh* pProxy;
 
 	}; // class Mesh
 

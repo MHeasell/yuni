@@ -16,17 +16,10 @@ namespace Gfx
 
 	Mesh::Mesh()
 	{
-		#ifdef YUNI_EXTERNAL_3D_IRRLICHT
-		pProxy = new Yuni::Private::Gfx::Irrlicht::Mesh();
-		#endif
-		#ifdef YUNI_EXTERNAL_3D_OGRE
-		pProxy = new Yuni::Private::Gfx::Ogre::Mesh();
-		#endif
 	}
 
 	Mesh::~Mesh()
 	{
-		delete pProxy;
 	}
 
 	std::ostream& Mesh::print(std::ostream& out) const
