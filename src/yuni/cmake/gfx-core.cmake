@@ -12,7 +12,7 @@ Set(SRC_GFX
 		gfx/vertex.h gfx/triangle.h gfx/edge.h
 		gfx/object3D.h gfx/object3D.cpp
 		gfx/objectmodel.h gfx/scene.h gfx/scene.cpp
-		gfx/skeleton.h gfx/mesh.h gfx/mesh.cpp gfx/mesh.proxy.h
+		gfx/skeleton.h gfx/mesh.h gfx/mesh.cpp
 		gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
 		gfx/metaobject.h gfx/metaball.h  gfx/metaball.cpp  gfx/metabox.h
 		gfx/boundingbox.h gfx/boundingbox.hxx
