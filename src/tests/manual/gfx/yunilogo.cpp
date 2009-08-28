@@ -14,42 +14,23 @@
 #include <yuni/gfx/metaball.h>
 
 
-#include <irrlicht.h>
-
-
-
 using namespace Yuni;
 using namespace Yuni::Gfx;
-using namespace irr;
 
-/*
- * TODO: Remove this ASAP.
- */
-class IrrMetaballNode : public irr::scene::ISceneNode
+
+class YuniLogo : public Object3D
 {
-private:
-	//! Our vertices
-	std::vector<video::S3DVertex> pVertices;
-	//! Our indexes
-	std::vector<u16> pIndexes;
-	//! Our material
-	video::SMaterial pMaterial;
-	//! Our Bounding box.
-	core::aabbox3d<f32> pBox;
 public:
-	IrrMetaballNode(scene::ISceneNode* parent, scene::ISceneManager* mgr, s32 id)
-		: scene::ISceneNode(parent, mgr, id)
+	YuniLogo(ObjectModel::Ptr model)
+		: Object3D(model)
 	{
-		pMaterial.Wireframe = false;
-		pMaterial.Lighting = false;
-
-		// We use the Metaball algorithm
+		// Create an empty implicit surface
 		ImplicitSurface surf;
 
 		// The following coordinates are meant to resemble the Yuni logo, in 2d, like this:
 		// I don't know if the result can look good or not, but it sounded like a fun idea.
-		/*   
-		                  
+		/*
+
 		                * *
 		    * *      *
 		  *    *   *
@@ -57,13 +38,13 @@ public:
 		       *
 		      *
 		     *
-		 
+
 		 */
 
 		// Here's a scaling factor.
 # define FACT 4.0f
 
-		// And the metaballs.
+		// Add the metaballs to the implicit surface
 		surf.addSubSurface(new MetaBall(Point3D<float>(-3.5631f * FACT, -1.1995f * FACT, 0.0f), 0.1f));
 		surf.addSubSurface(new MetaBall(Point3D<float>(-2.6458f * FACT, -1.6933f * FACT, 0.0f), 0.1f));
 		surf.addSubSurface(new MetaBall(Point3D<float>(-2.0f * FACT, -1.8f * FACT, 0.0f), 0.1f));
@@ -80,82 +61,15 @@ public:
 		surf.addSubSurface(new MetaBall(Point3D<float>(4.7272f * FACT, -2.2931f * FACT, 0.0f), 0.1f));
 
 		// Create a mesh using marchingcubes with an isovalue of 0.05, and a 2.0 mesh size
-		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 0.5f);
-		if (!mesh2)
+		Mesh* mesh = MarchingCubes(surf)(0.05f, 0.5f);
+		if (!mesh)
 			throw std::runtime_error("Polygonization failed.");
 
-		const Mesh::TriangleList& tList = mesh2->triangles();
-
-		int vertexCount = 0;
-		for (Mesh::TriangleList::const_iterator triangle = tList.begin(); triangle != tList.end(); ++triangle)
-		{
-			const Gfx::Vertex &tVertex1 = (*triangle)->vertex1();
-			video::S3DVertex vx1(tVertex1.position().x, tVertex1.position().y, tVertex1.position().z,
-				0, 0, 0, video::SColor(255,255,0,0), 0, 0);
-
-			const Gfx::Vertex &tVertex2 = (*triangle)->vertex2();
-			video::S3DVertex vx2(tVertex2.position().x, tVertex2.position().y, tVertex2.position().z,
-				0, 0, 0, video::SColor(255,0,255,0), 0, 0);
-
-			const Gfx::Vertex &tVertex3 = (*triangle)->vertex3();
-			video::S3DVertex vx3(tVertex3.position().x, tVertex3.position().y, tVertex3.position().z,
-				0, 0, 0, video::SColor(255,0,0,255), 0, 0);
-
-			pVertices.push_back(vx1);
-			if (vertexCount == 0)
-				pBox.reset(vx1.Pos);
-			else
-				pBox.addInternalPoint(vx1.Pos);
-			pIndexes.push_back(vertexCount);
-
-			pVertices.push_back(vx2);
-			pIndexes.push_back(vertexCount + 1);
-			pBox.addInternalPoint(vx2.Pos);
-
-			pVertices.push_back(vx3);
-			pIndexes.push_back(vertexCount + 2);
-			pBox.addInternalPoint(vx3.Pos);
-
-			vertexCount += 3;
-		}
-		delete mesh2;
+		// Create a skeleton that uses this mesh, translate it in Z and rotate the logo properly
+		Skeleton* skel = new Skeleton(Mesh::Ptr(mesh), Vector3D<>(0.0f, 0.0f, -30.0f), Vector3D<>(0.0f, 0.0f, 0.0f));
+		// Set the skeleton in our ObjectModel
+		pModel->setSkeleton(Skeleton::Ptr(skel));
 	}
-
-
-    virtual void OnRegisterSceneNode()
-	{
-		if (IsVisible)
-			SceneManager->registerNodeForRendering(this);
-
-		ISceneNode::OnRegisterSceneNode();
-	}
-
-
-	virtual void render()
-	{
-		video::IVideoDriver* driver = SceneManager->getVideoDriver();
-
-		driver->setMaterial(pMaterial);
-		driver->setTransform(video::ETS_WORLD, AbsoluteTransformation);
-		driver->drawIndexedTriangleList(&(pVertices[0]), pVertices.size(), &(pIndexes[0]), pIndexes.size() / 3);
-	}
-
-	virtual const core::aabbox3d<f32>& getBoundingBox() const
-	{
-		return pBox;
-	}
-
-
-	virtual u32 getMaterialCount() const
-	{
-		return 1;
-	}
-
-	virtual video::SMaterial& getMaterial(u32 i)
-	{
-		return pMaterial;
-	}    
-
 };
 
 
@@ -172,14 +86,14 @@ public:
 	virtual ~MeshTestApplication()
 	{
 		// It is advised to disconnect all events at this stade
-		destroyingObserver();
+		destroyBoundEvents();
 	}
 
-	void onFPSChanged(int fps)
+	void onFPSChanged(unsigned int fps)
 	{
 		// The FPS count has changed
 		// We will set the application title according the new value
-		this->title(String() << "Hello World ! - " << fps << " fps");
+		this->title(String() << "Marchig cubes Yuni Logo - " << fps << " fps");
 	}
 };
 
@@ -188,78 +102,12 @@ public:
 
 int main(int argc, char* argv[])
 {
-	{ /* Bare irrlicht calls. TODO: remove them ASAP. */
-		using namespace irr;
-
-		IrrlichtDevice *device =
-#ifdef _IRR_OSX_PLATFORM_
-			createDevice(video::EDT_OPENGL, core::dimension2d<s32>(640, 480), 16,
-						 false, false, false, 0);
-#else
-			createDevice(video::EDT_DIRECT3D9, core::dimension2d<s32>(640, 480), 16,
-					 false, false, false, 0);
-#endif
-		if (!device)
-			return 1;
-
-		device->setWindowCaption(L"Yuni GFX Hello World!");
-		video::IVideoDriver* driver = device->getVideoDriver();
-		scene::ISceneManager* smgr = device->getSceneManager();
-		gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
-
-		guienv->addStaticText(L"Hello World! (i'm using irrlicht directly, it's bad.)",
-							  core::rect<s32>(10,10,260,22), true);
-
-		smgr->addCameraSceneNode(0, core::vector3df(0, 0, -40), core::vector3df(0, 0, 100));
-
-		IrrMetaballNode *myNode = new IrrMetaballNode(smgr->getRootSceneNode(), smgr, 666);
-
-		scene::ISceneNodeAnimator* anim =
-			smgr->createRotationAnimator(core::vector3df(0.1f, 0, 0.1f));
-
-		if (anim)
-		{
-			myNode->addAnimator(anim);
-			anim->drop();
-			anim = 0;
-		}
-		myNode->drop();
-		myNode = 0; 
-
-		u32 frames=0;
-		while(device->run())
-		{
-			driver->beginScene(true, true, video::SColor(0,0,0,0));
-
-			smgr->drawAll();
-
-			driver->endScene();
-			if (++frames==100)
-			{
-				core::stringw str = L"Irrlicht Engine [";
-				str += driver->getName();
-				str += L"] FPS: ";
-				str += (s32)driver->getFPS();
-
-				device->setWindowCaption(str.c_str());
-				frames=0;
-			}
-		}
-
-		device->drop();
-
-
-
-	}
-
+	YuniLogo logoObject(new ObjectModel());
 
 	/*
-	 * Yuni main loop (disabled)
+	 * Yuni main loop
 	 */
-	/*
-	   MeshTestApplication app(argc, argv);
-	   app.execute();
-	   return app.exitCode();
-	 */
-	return 0;
+	MeshTestApplication app(argc, argv);
+	app.execute();
+	return app.exitCode();
 }
