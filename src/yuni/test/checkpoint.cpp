@@ -36,7 +36,11 @@ namespace Test
 		:pResult(true)
 	{
 		// ID
+		# ifdef YUNI_OS_MSVC
+		strncpy_s(pID, sizeof(pID), id, YUNI_TEST_ID_MAXLENGTH - 1);
+		# else
 		::strncpy(pID, id, YUNI_TEST_ID_MAXLENGTH - 1);
+		# endif
 		// Ensure it is zero-terminated (should not be necessary however)
 		pID[YUNI_TEST_ID_MAXLENGTH - 1] = '\0';
 		// Tag the outputs
@@ -78,7 +82,11 @@ namespace Test
 		:pResult(true)
 	{
 		// ID
+		# ifdef YUNI_OS_MSVC
+		strncpy_s(pID, sizeof(pID), id, YUNI_TEST_ID_MAXLENGTH - 1);
+		# else
 		::strncpy(pID, id, YUNI_TEST_ID_MAXLENGTH - 1);
+		# endif
 		// Ensure it is zero-terminated (should not be necessary however)
 		pID[YUNI_TEST_ID_MAXLENGTH - 1] = '\0';
 		// Tag the outputs
