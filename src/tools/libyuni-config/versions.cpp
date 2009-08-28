@@ -206,11 +206,7 @@ namespace VersionInfo
 
 		CompilerCompliant compliant = gcc;
 		if (compiler.at(0) == 'v' && compiler.at(1) == 's') // visual studio
-		{
 			compliant = visualstudio;
-			std::cout << "Please make me compliant with Visual Studio !\n";
-			return false;
-		}
 
 		// For each entry in the ini file
 		for (String::List::const_iterator i = options.begin(); i != end; ++i)
@@ -239,7 +235,7 @@ namespace VersionInfo
 				switch (compliant)
 				{
 					case gcc          : s.includes[String() << "-I\"" << value << "\""] = true; break;
-					case visualstudio : s.includes[String() << "/I\"" << value << "\""] = true; break;
+					case visualstudio : s.includes[String() << "\"/I" << value << "\""] = true; break;
 				}
 				continue;
 			}
@@ -255,7 +251,7 @@ namespace VersionInfo
 				switch (compliant)
 				{
 					case gcc          : s.libIncludes[String() << "-L\"" << value << "\""] = true; break;
-					case visualstudio : s.libIncludes[String() << "/L\"" << value << "\""] = true; break;
+					case visualstudio : s.libIncludes[String() << "\"/LIBPATH:" << value << "\""] = true; break;
 				}
 				continue;
 			}
@@ -265,7 +261,7 @@ namespace VersionInfo
 				switch (compliant)
 				{
 					case gcc          : s.libs[String() << "-l" << value] = true; break;
-					case visualstudio : s.libs[String() << "/l" << value] = true; break;
+					case visualstudio : s.libs[String() << "" << value] = true; break;
 				}
 				continue;
 			}
@@ -303,6 +299,7 @@ namespace VersionInfo
 		}
 		return true;
 	}
+
 
 
 	bool Settings::moduleExists(const String& name) const
