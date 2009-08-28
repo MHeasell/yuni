@@ -22,7 +22,14 @@ namespace VersionInfo
 			# else
 			loadFromPath(root + "/../../..");
 			# endif
+            return;
 		}
+
+        # ifdef YUNI_OS_WINDOWS
+        // For dealing with the paths like 'Debug/libyuni-config.exe'
+        if (Core::IO::File::Exists(String() << root << "\\..\\mark-for-yuni-sources"))
+			loadFromPath(root + "\\..\\..\\..\\..");
+        # endif
 	}
 
 
