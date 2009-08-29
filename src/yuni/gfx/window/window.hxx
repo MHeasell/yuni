@@ -45,7 +45,7 @@ namespace Window
 	{
 		// Resetting with the new value
 		pTitle = newTitle;
-		// Updating the change according the real implementation
+		// Updating the change according to the real implementation
 		onInternalTitleChangedWL();
 	}
 
