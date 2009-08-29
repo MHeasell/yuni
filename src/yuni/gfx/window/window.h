@@ -64,7 +64,7 @@ namespace Window
 			pHeight = height;
 		}
 
-		//! Get the renderer associated with this window 
+		//! Get the renderer associated with this window
 		virtual Render::ARenderer* renderer() const { return NULL; }
 
 		/*!
@@ -106,15 +106,17 @@ namespace Window
 
 		virtual void onClose() { pClosing = true; }
 
-		virtual void onMouseDown(float /* x */, float /* y */) {}
-		virtual void onMouseClick(float /* x */, float /* y */) {}
-		virtual void onMouseUp(float /* x */, float /* y */) {}
-		virtual void onMouseWheel(float /* x */, float /* y */, float /* delta */) {}
+	public:
+		Event<void (float /* x */, float /* y */)> onMouseDown;
+		Event<void (float /* x */, float /* y */)> onMouseClick;
+		Event<void (float /* x */, float /* y */)> onMouseUp;
+		Event<void (float /* x */, float /* y */, float /* delta */)> onMouseWheel;
 
-		virtual void onKeyDown(unsigned char /* key */) {}
-		virtual void onKeyPressed(unsigned char /* key */) {}
-		virtual void onKeyUp(unsigned char /* key */) {}
+		Event<void (unsigned char /* key */)> onKeyDown;
+		Event<void (unsigned char /* key */)> onKeyPressed;
+		Event<void (unsigned char /* key */)> onKeyUp;
 
+	protected:
 		virtual void onFPSChanged(unsigned int /* FPS */) {}
 
 		//@}
