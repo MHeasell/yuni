@@ -154,7 +154,7 @@ source_group(Core\\Event FILES ${SRC_CORE_EVENT})
 
 Set(SRC_CORE_MATH
 				# Standard functions
-				core/math/math.h 	core/math.h
+				core/math/math.h 	core/math.h  core/math/math.hxx core/math/msvc.hxx
 				# Log(N)
 				core/math/log.h core/math/log.hxx
 				# Trigonometric functions
