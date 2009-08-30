@@ -6,7 +6,9 @@
 #include <sys/types.h>
 #include <assert.h>
 #ifndef YUNI_OS_WINDOWS
-#	include <sys/errno.h>
+#	ifndef YUNI_OS_HAIKU
+#		include <sys/errno.h>
+#	endif
 #	include <unistd.h>
 #	include <sys/time.h>
 #else
