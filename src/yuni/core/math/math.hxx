@@ -384,7 +384,11 @@ namespace Math
 
 	template<> inline long long Abs<long long>(const long long x)
 	{
+	# ifdef YUNI_OS_MSVC
+		return ::_abs64(x);
+	# else
 		return ::llabs(x);
+	# endif
 	}
 
 	template<> inline double Abs<double>(const double x)
