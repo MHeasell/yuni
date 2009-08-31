@@ -28,15 +28,15 @@ namespace Gfx
 		enum Type
 		{
 			//! Null Device
-			ygdtNull = 0,
+			Null = 0,
 			//! Software renderer
-			ygdtSoftware,
+			Software,
 			//! OpenGL
-			ygdtOpenGL,
+			OpenGL,
 			//! Microsoft DirectX device (version 9)
-			ygdtDirectX9,
+			DirectX9,
 			//! Microsoft DirectX device (version 8)
-			ygdtDirectX8
+			DirectX8
 		};
 
 		//! The default type according the plateform
@@ -98,7 +98,7 @@ namespace Gfx
 		/*!
 		** \brief Get the current device type
 		**
-		** \note This type may not be the same than requested
+		** \note This type may not be the same as requested
 		*/
 		Type type() const {return pType;}
 

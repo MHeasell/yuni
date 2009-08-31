@@ -2,6 +2,7 @@
 # define __YUNI_GFX_WINDOW_FACTORY__
 
 # include "window.h"
+# include "../device.h"
 
 namespace Yuni
 {
@@ -19,13 +20,12 @@ namespace Window
 	class Factory
 	{
 	public:
-		static AWindow* CreateGLWindow(const String& title, unsigned int width, unsigned int height,
-			unsigned int bitDepth, bool fullScreen);
-# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
-		static AWindow* CreateDX9Window(const String& title, unsigned int width, unsigned int height,
-			unsigned int bits, bool fullScreen);
-# endif
-
+		/*!
+		** \brief Create a platform-dependent window.
+		**
+		** The characteristics of this window and its associated renderer wil be determined using the device.
+		*/
+		static AWindow* Create(const String& title, const Device::Ptr& device);
 
 	private:
 		Factory() {}

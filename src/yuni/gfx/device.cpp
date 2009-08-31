@@ -8,12 +8,12 @@ namespace Yuni
 namespace Gfx
 {
 
-# ifdef YUNI_OS_WINDOWS
+# if defined(YUNI_OS_WINDOWS) && defined(YUNI_USE_DIRECTX)
 	//! The Default device on Microsoft Windows should be DirectX
-	const Device::Type Device::DefaultType = ygdtDirectX9;
+	const Device::Type Device::DefaultType = DirectX9;
 # else
 	//! The Default device on Unixes should be OpenGL
-	const Device::Type Device::DefaultType = ygdtOpenGL;
+	const Device::Type Device::DefaultType = OpenGL;
 # endif
 
 
@@ -22,11 +22,11 @@ namespace Gfx
 	{
 		switch (t)
 		{
-			case ygdtNull:	   { return "Null"; }
-			case ygdtSoftware: { return "Software"; }
-			case ygdtOpenGL:   { return "OpenGL"; }
-			case ygdtDirectX9: { return "Microsoft DirectX"; } // The latest version of DirectX
-			case ygdtDirectX8: { return "Microsoft DirectX (v8)"; }
+			case Null:	   { return "Null"; }
+			case Software: { return "Software"; }
+			case OpenGL:   { return "OpenGL"; }
+			case DirectX9: { return "Microsoft DirectX 9"; }
+			case DirectX8: { return "Microsoft DirectX 8"; }
 		}
 		return "Null";
 	}
@@ -42,17 +42,17 @@ namespace Gfx
 
 		// OpenGL
 		if ("opengl" == s || "open gl" == s)
-			return ygdtOpenGL;
+			return OpenGL;
 		// Microsoft DirectX
-		if ("directx" == s || "microsoft Directx") // The latest version of DirectX
-			return ygdtDirectX9;
+		if ("directx" == s || "microsoft Directx" == s) // The latest supported version of DirectX
+			return DirectX9;
 		if ("directx8" == s || "directx v8" == s || "directx (v8)" == s || "microsoft directx (v8)" == s)
-			return ygdtDirectX8;
+			return DirectX8;
 		if ("directx9" == s || "directx v9" == s || "directx (v9)" == s || "microsoft directx (v9)" == s)
-			return ygdtDirectX9;
+			return DirectX9;
 		// Software
 		if ("software" == s)
-			return ygdtSoftware;
+			return Software;
 		// Null Device
 		if ("null" == s)
 			return DefaultType;
@@ -79,12 +79,12 @@ namespace Gfx
 
 	bool Device::type(const Type newType)
 	{
-		if (!pLocked && newType != ygdtNull)
+		if (!pLocked && newType != Null)
 		{
 			// On platforms other than Microsoft Windows only the OpenGL and software devices
 			// are available
 			# ifndef YUNI_OS_WINDOWS
-			if (newType == ygdtOpenGL || newType == ygdtSoftware)
+			if (newType == OpenGL || newType == Software)
 			{
 			# endif
 				pType = newType;
