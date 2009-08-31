@@ -1,6 +1,7 @@
 
 #include "../yuni.h"
 #include <time.h>
+#include <assert.h>
 #if defined(YUNI_OS_MSVC)
 # include <winsock2.h>
 #else
@@ -17,7 +18,7 @@ namespace Threads
 {
 
 	Condition::Condition()
-		:pPredicate(false), pOwnMutex(true)
+		:pSignalled(false), pOwnMutex(true)
 	{
 		// Note: The linux implementation currently does not support
 		// any condition attr
@@ -27,7 +28,7 @@ namespace Threads
 
 
 	Condition::Condition(Mutex& mutex)
-		:pMutex(&mutex), pPredicate(false), pOwnMutex(false)
+		:pMutex(&mutex), pSignalled(false), pOwnMutex(false)
 	{
 		// Note: The linux implementation currently does not support
 		// any condition attr
@@ -42,84 +43,63 @@ namespace Threads
 			delete pMutex;
 	}
 
-
-	void Condition::wait()
+	void Condition::waitUnlocked()
 	{
-		// The mutex must be locked for the condition
-		pMutex->lock();
-		// Reset of the predicate
-		pPredicate = false;
+		// The pthread_cond_wait will unlock the mutex and wait for
+		// signalling. 
 
-		// Waiting...
-		do
+		int pthread_cond_wait_error;
+		do 
 		{
-			::pthread_cond_wait(&pCondition, &pMutex->pthreadMutex());
-		} while (!pPredicate);
+			// Spurious wakeups from this function can occur.
+			// Therefore we must check out pSignalled variable to ensure we have
+			// really been signalled.
+			pthread_cond_wait_error = ::pthread_cond_wait(&pCondition, &pMutex->pthreadMutex());
+		} while (pSignalled != true);
 
-		pPredicate = false;
-
-		// The mutex will remain unlocked. It is the responsability of the user
-		// to unlock the mutex
-		// pMutex->unlock();
+		// The condition was signalled: the mutex is now locked again.
 	}
 
 
-	bool Condition::wait(unsigned int timeout)
+	bool Condition::waitUnlocked(const uint32 timeout)
 	{
 		struct timeval now;
 		struct timespec t;
 
-		// The mutex must be locked for the condition
-		pMutex->lock();
-		// Reset of the predicate
-		pPredicate = false;
-
+		// Set the timespec t at [timeout] milliseconds in the future.
 		gettimeofday(&now, NULL);
-		t.tv_sec = now.tv_sec + timeout;
-		t.tv_nsec = now.tv_usec * 1000;
-		int retcode;
+		t.tv_nsec = now.tv_usec * 1000 + ((timeout % 1000) * 1000000);
+		t.tv_sec = now.tv_sec + timeout / 1000 + (t.tv_nsec / 1000000000L);
+		t.tv_nsec %= 1000000000L;
 
-		// Waiting...
+		int pthread_cond_timedwait_error;
 		do
 		{
-			retcode = ::pthread_cond_timedwait(&pCondition, &pMutex->pthreadMutex(), &t);
-		} while (!pPredicate && retcode != ETIMEDOUT);
+			// Avoid spurious wakeups (see waitUnlocked() above for explanations)
+			pthread_cond_timedwait_error = ::pthread_cond_timedwait(&pCondition, &pMutex->pthreadMutex(), &t);
+		} while (pSignalled != true // Condition not verified
+				 && pthread_cond_timedwait_error != ETIMEDOUT // We have not timedout
+				 && pthread_cond_timedwait_error != EINVAL); // When t is in the past, we got EINVAL. We consider this as a timeout.
 
-		pPredicate = false;
-
-		// The mutex will remain unlocked. It is the responsability of the user
-		// to unlock the mutex
-		// pMutex->unlock();
-
-		return (retcode == ETIMEDOUT);
+		// The condition was signalled or has timeoutted:
+		return (pSignalled == false);
 	}
 
-
-	void Condition::unlock()
-	{
-		pMutex->unlock();
-	}
-
-
-	void Condition::notify()
+	void Condition::notifyLocked()
 	{
 		pMutex->lock();
-		pPredicate = true;
+		pSignalled = true;
 		::pthread_cond_signal(&pCondition);
 		pMutex->unlock();
 	}
 
-
-	void Condition::notifyAllThreads()
+	void Condition::notifyAllLocked()
 	{
 		pMutex->lock();
-		pPredicate = true;
+		pSignalled = true;
 		::pthread_cond_broadcast(&pCondition);
 		pMutex->unlock();
 	}
-
-
-
 
 } // namespace Threads
 } // namespace Yuni
