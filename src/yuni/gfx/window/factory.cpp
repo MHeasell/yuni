@@ -26,21 +26,38 @@ namespace Gfx
 namespace Window
 {
 
-
-	AWindow* Factory::CreateGLWindow(const String& title, unsigned int width,
-		unsigned int height, unsigned int bits, bool fullScreen)
+	AWindow* Factory::Create(const String& title, const Device::Ptr& device)
 	{
+		Yuni::Device::Display::Resolution::Ptr res = device->resolution();
+		AWindow* wnd = NULL;
+		switch (device->type())
+		{
+# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
+		// No management of DirectX8 for the moment, use DirectX 9
+		case Device::DirectX8:
+		case Device::DirectX9:
+			wnd = new DirectXMSW(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+			break;
+# endif
+
+		case Device::OpenGL:
 # ifdef YUNI_WINDOWSYSTEM_MSW
-		AWindow* wnd = new OpenGLMSW(title, width, height, bits, fullScreen);
+			wnd = new OpenGLMSW(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
 # endif
 # ifdef YUNI_WINDOWSYSTEM_X11
-		AWindow* wnd = new OpenGLX11(title, width, height, bits, fullScreen);
+			wnd = new OpenGLX11(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
 # endif
 # ifdef YUNI_OS_MAC
-		AWindow* wnd = new OpenGLCocoa(title, width, height, bits, fullScreen);
+			wnd = new OpenGLCocoa(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
 # endif
+			break;
 
-		if (!wnd->initialize())
+		// For the moment, fail if asked for a null renderer or a software renderer
+		default:
+			return NULL;
+		}
+
+		if (wnd && !wnd->initialize())
 		{
 			wnd->close();
 			delete wnd;
@@ -48,22 +65,6 @@ namespace Window
 		}
 		return wnd;
 	}
-
-# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
-	AWindow* Factory::CreateDX9Window(const String& title, unsigned int width,
-		unsigned int height, unsigned int bits, bool fullScreen)
-	{
-		AWindow* wnd = new DirectXMSW(title, width, height, bits, fullScreen);
-		if (!wnd->initialize())
-		{
-			wnd->close();
-			delete wnd;
-			return NULL;
-		}
-		return wnd;
-	}
-# endif
-
 
 } // namespace Window
 } // namespace Gfx
