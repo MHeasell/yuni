@@ -17,7 +17,10 @@ namespace Threads
 	**
 	** A condition variable is a synchronization object used in conjunction with a
 	** mutex. It is a synchronization mechanism that allows a thread to suspend its
-	** execution until some predicate is verified.
+	** execution until the Condition is signalled by another thread.
+	**
+	** This can be used in many ways, from interruptible sleep to signal handlers,
+	** but also as a thread startup synchronization mechanism.
 	**
 	** \see samples/threads/01.condition/main.cpp
 	*/
@@ -34,70 +37,100 @@ namespace Threads
 		** \brief Default constructor
 		*/
 		Condition();
+
 		/*!
 		** \brief Constructor with an external mutex
 		**
 		** In this case, an external mutex will be used
 		*/
 		Condition(Mutex& mutex);
+
 		//! Destructor
 		~Condition();
+
 		//@}
 
-		//! \name Wait for the condition
+		//! \name Wait for a notification
 		//@{
-		/*!
-		** \brief Wait the condition
-		**
-		** This method blocks the calling thread until the condition
-		** is met.
-		** The mutex will remain locked at the end of this method. It is
-		** the responsability of the user to unlock the mutex.
-		** This metod is a cancellation point.
-		**
-		** \see unlock()
-		*/
-		void wait();
 
 		/*!
-		** \brief Wait the condition (with a timeout)
+		** \brief Atomic unlock() and wait for notification
 		**
-		** This method blocks the calling thread until the condition
-		** is met.
-		** The mutex will remain locked at the end of this method. It is
-		** the responsability of the user to unlock the mutex.
-		** This metod is a cancellation point.
+		** This method atomically releases the Condition's mutex and wait for any
+		** notifications sent to this condition. This method will not return without
+		** having received a notification.
 		**
-		** \param timeout The timeout value (in seconds)
-		** return True if the timeout has been reached 
+		** Upon receiving a notification, this method lock()s the internal mutex
+		** and returns.
+		**
+		** IMPORTANT NOTES:
+		**  - It is vital that the mutex shall be locked by the current thread when
+		**	  you enter this method.
+		**	- This method is a cancellation point for Threads.
+		**
+		** \see lock(), unlock()
+		*/
+		void waitUnlocked();
+
+		/*!
+		** \brief Atomic unlock() and wait for notification (with timeout)
+		**
+		** This version of the function accepts a timeout in milliseconds
+		**
+		** \param[in] msTimeout The timeout value (in milliseconds)
+		** \return True if the timeout expired.
 		** \see unlock()
 		*/
-		bool wait(unsigned int timeout);
+		bool waitUnlocked(const uint32 msTimeout);
+		//@}
+
+		//! \name Manipulate the Condition's mutex
+		//@{
+
+		/*!
+		** \brief Lock the inner mutex
+		*/
+		void lock();
 
 		/*!
 		** \brief Unlock the inner mutex
 		*/
 		void unlock();
+
 		//@}
 
-		//! \name Notify that the condition has been met
+		//! \name Signal the condition
 		//@{
 		/*!
-		** \brief Notify at least one thread that the condition has been met
+		** \brief Notify at least one thread
 		**
-		** If more than one thread is waiting for a condition variable, the scheduling
-		** policy determines the order in which threads are notified.
-		** If no threads are currently waiting for the condition, this call has no effect.
+		** If there's more than one thread waiting on the condition, at least
+		** one of these shall be notified. If no threads are waiting, then this call has
+		** no effect.
+		*/
+		void notifyLocked();
+
+		/*!
+		** \brief Notify at least one thread without locking the mutex.
+		**
+		** \see notify()
 		*/
 		void notify();
 
-
 		/*!
-		** \brief Notify all threads that the condition has been met
+		** \brief Notify all the threads
 		**
+		** Awaken all the threads waiting on the condition.
 		** If no threads are currently waiting for the condition, this call has no effect.
 		*/
-		void notifyAllThreads();
+		void notifyAllLocked();
+
+		/*!
+		** \brief Notify all the threads without locking the mutex.
+		**
+		** \see notify(),notifyAllLocked()
+		*/
+		void notifyAll();
 		//@}
 
 		/*!
@@ -108,14 +141,47 @@ namespace Threads
 	private:
 		//! The PThread Condition
 		pthread_cond_t  pCondition;
+
 		//! The mutex
 		Mutex* pMutex;
-		//! Out predicate (bool)
-		bool pPredicate;
+
+		//! Have the condition been really signalled ?
+		volatile bool pSignalled;
+
 		//! True if this class owns the mutex and must destroy it
 		const bool pOwnMutex;
 
 	}; // class Condition
+
+	/*!
+	** \brief Locks a condition's mutex in the constructor and unlocks it in the destructor.
+	**
+	** \see MutexLocker
+	*/
+	class ConditionLocker
+	{
+	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Constructor
+		**
+		** \param c The condition to lock
+		*/
+		ConditionLocker(Condition& c);
+		//! Destructor
+		~ConditionLocker();
+		//@}
+
+	private:
+		//! Reference to the real condition
+		Condition& pCondition;
+
+	}; // ConditionLocker
+
+
+
+
 
 
 } // namespace Threads

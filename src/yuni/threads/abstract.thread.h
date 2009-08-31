@@ -3,6 +3,7 @@
 
 # include "../yuni.h"
 # include "mutex.h"
+# include "condition.h"
 # include "../core/string.h"
 
 
@@ -45,6 +46,8 @@ namespace Private
 			errTimeout,
 			//! Impossible to create the new thread
 			errThreadCreation,
+			//! The onStarting handler returned false.
+			errAborted
 		};
 
 	public:
@@ -130,24 +133,25 @@ namespace Private
 		/*!
 		** \brief Stop the exeuction of the thread and wait for it, if not already stopped
 		**
-		** \param timeout The timeout in seconds before killing the thread (default: 5s)
+		** \param timeout The timeout in milliseconds before killing the thread (default: 5000ms)
 		** \return An error status (`errNone` if succeeded)
 		*/
-		Error stop(const uint16 timeout = 5 /* 5 seconds */);
+		Error stop(const uint32 timeout = 5000 /* 5 seconds */);
 
 		/*!
 		** \brief Restart the thread
 		**
-		** \param timeout The timeout in seconds before killing the thread (default: 5s)
+		** \param timeout The timeout in milliseconds before killing the thread (default: 5000ms)
 		** \return True if the thread has been stopped then started
 		**
 		** \see stop()
 		** \see start()
 		*/
-		Error restart(const uint16 timeout = 5);
+		Error restart(const uint32 timeout = 5000 /* 5 seconds */);
 
 		/*!
 		** \brief Indicates that the thread should stop as soon as possible
+		** FIXME: write better documentation.. ?
 		**
 		** \see suspend()
 		*/
@@ -173,13 +177,12 @@ namespace Private
 
 		//@} Execution flow
 
-
-
+/* FIXME: not safe.
 		//! Get if the thread must be destroyed as soon as it has stopped
 		bool freeOnTerminate();
 		//! Set if the thread must be destroyed as soon as it has stopped
 		void freeOnTerminate(const bool f);
-
+*/
 
 	protected:
 		/*!
@@ -216,28 +219,27 @@ namespace Private
 		virtual void onStopped() = 0;
 
 	protected:
-		//! Mutex
+		//! Mutex to ensure thread-safety
 		Mutex pMutex;
 
 	private:
-		void signalThreadAboutToExit();
+		//! Condition used in the startup process. See start().
+		Condition pStartupCond;
 
-	private:
-		//! Mutex for exiting
-		Mutex pMutexThreadIsAboutToExit;
-		//! Mutex for stopping the thread
-		Mutex pThreadMustStopMutex;
+		//! Condition for exiting
+		Condition pAboutToExitCond;
+
+		//! Condition for stopping
+		Condition pMustStopCond;
+
 		//! ID of the thread
 		pthread_t pThreadID;
-		//! Get if the thread is running
-		bool pIsRunning;
-		//! Release itself when the thread stops
-		bool pFreeOnTerminate;
-		//! Should stop the thread ?
-		bool pShouldStop;
 
-		pthread_cond_t p_threadMustStopCond;
-		pthread_cond_t p_threadIsAboutToExit;
+		//! Get if the thread is running
+		volatile bool pIsRunning;
+
+		//! Should stop the thread ?
+		volatile bool pShouldStop;
 
 	}; // class Private::AThreadModel
 

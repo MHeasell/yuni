@@ -21,7 +21,7 @@ namespace Private
 		return String("<Unknown>");
 	}
 
-
+/*
 	template<class T>
 	T* AThreadModel::CreateAndStart(const bool f)
 	{
@@ -31,7 +31,7 @@ namespace Private
 		t->start();
 		return t;
 	}
-
+*/
 
 
 

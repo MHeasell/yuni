@@ -42,52 +42,6 @@ namespace Private
 		return YUNI_OS_GETPID();
 	}
 
-
-
-
-	namespace
-	{
-		/*!
-		** \brief Get a new timespec struct representing X milli seconds in the future
-		**
-		** \param[in,out] The timespec struct
-		** \param millisecs The count of milli seconds
-		** \return Always `time` itself
-		*/
-		struct timespec* millisecondsFromNow(struct timespec* time, int millisecs)
-		{
-			# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-			struct _timeb currSysTime;
-			# else
-			struct timeb currSysTime;
-			# endif
-			sint64 nanosecs, secs;
-			const sint64 NANOSEC_PER_MILLISEC = 1000000;
-			const sint64 NANOSEC_PER_SEC = 1000000000;
-
-			/* get current system time and add millisecs */
-			# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-			_ftime_s(&currSysTime);
-			# else
-			ftime(&currSysTime);
-			# endif
-
-			nanosecs = ((sint64) (millisecs + currSysTime.millitm)) * NANOSEC_PER_MILLISEC;
-			if (nanosecs >= NANOSEC_PER_SEC)
-			{
-				secs = currSysTime.time + 1;
-				nanosecs %= NANOSEC_PER_SEC;
-			}
-			else
-				secs = currSysTime.time;
-
-			time->tv_nsec = (long)nanosecs;
-			time->tv_sec = (long)secs;
-			return time;
-		}
-	}
-
-
 	extern "C"
 	{
 		/*!
@@ -95,24 +49,57 @@ namespace Private
 		*/
 		void* threadMethodForPThread(void* arg)
 		{
-			if (!arg)
-				return NULL;
-			// PThread stuff
-			pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
-			pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+			assert(NULL != arg);
 
+			// Adjust cancellation behaviors
+			::pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+			::pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+
+			// Get back our object.
 			AThreadModel* t = (AThreadModel *) arg;
-			t->pIsRunning = true;
+
+			assert(false == t->pIsRunning);
+
+			// Aquire the condition, so that start() cannot continue.
+			t->pStartupCond.lock();
+
 			if (t->onStarting())
 			{
+				// onStarting authorized us to continue. So say we are now running.
+				// NOTE: We should not lock pMutex for pIsRunning here.
+				//       The lock on pMutex is held by start(),
+				//       and we hold a condition lock on start(), so all is well.
+				t->pIsRunning = true;
+
+				// signal the start() method in the parent thread, then unlock.
+				t->pStartupCond.notify();
+				t->pStartupCond.unlock();
+
 				// Launch the code
 				t->baseExecute();
-				// The thread has stopped
+
+				// The thread has stopped, execute the user's stop handler.
 				t->onStopped();
+	
+				// We have stopped executing user code, and are exiting.
+				// Signal any threads waiting for our termination.
+				// NOTE: We should not lock pMutex here, since a lock on it MAY be held by stop().
+				//       Instead, we lock pAboutToExitCond. Indeed, stop() will wait for a signal on ExitCond.
+				//       while we hold ExitCond, stop(), which waits on ExitCond, holds pMutex.
+				t->pAboutToExitCond.lock();
+				t->pShouldStop = true;
+				t->pIsRunning = false;
+				t->pAboutToExitCond.notify();
+				t->pAboutToExitCond.unlock();
 			}
-			t->signalThreadAboutToExit();
-			if (t->pFreeOnTerminate)
-				delete t;
+			else
+			{
+				// The startup failed. So, pIsRunning is left to false.
+				// signal the start() method in the parent thread, then unlock.
+				t->pStartupCond.notify();
+				t->pStartupCond.unlock();
+			}
+
 			return NULL;
 		}
 	}
@@ -120,98 +107,104 @@ namespace Private
 
 
 	AThreadModel::AThreadModel()
-		:pMutex(), pThreadID(), pIsRunning(false), pFreeOnTerminate(false), pShouldStop(true)
+		:pIsRunning(false), pShouldStop(true)
 	{
-		pthread_cond_init(&p_threadMustStopCond, NULL);
-		pthread_cond_init(&p_threadIsAboutToExit, NULL);
 	}
 
 	AThreadModel::~AThreadModel()
 	{
 		assert(pIsRunning == false);
-
-		::pthread_cond_destroy(&p_threadMustStopCond);
-		::pthread_cond_destroy(&p_threadIsAboutToExit);
 	}
-
-	bool AThreadModel::freeOnTerminate()
-	{
-		MutexLocker locker(pMutex);
-		return pFreeOnTerminate;
-	}
-
-	void AThreadModel::freeOnTerminate(const bool f)
-	{
-		pMutex.lock();
-		pFreeOnTerminate = f;
-		pMutex.unlock();
-	}
-
 
 	AThreadModel::Error AThreadModel::start()
 	{
 		MutexLocker locker(pMutex);
-		if (pIsRunning)
-			return errNone;
-		pShouldStop = false;
-		pIsRunning = (0 == ::pthread_create(&pThreadID, NULL, threadMethodForPThread, this));
-		return pIsRunning ? errNone : errThreadCreation;
-	}
 
-
-	AThreadModel::Error AThreadModel::stop(const uint16 timeout)
-	{
-		MutexLocker locker(pMutex);
-		if (!pIsRunning) // already stopped
-			return errNone;
-
-		// Early indicates that this thread should stop
-		pShouldStop = true;
-		// As we explicitly ask to stop (external call), this class must not destroy itself
-		pFreeOnTerminate = false;
-
-		pMutexThreadIsAboutToExit.lock();
-
-		pThreadMustStopMutex.lock();
-		::pthread_cond_signal(&p_threadMustStopCond);
-		pThreadMustStopMutex.unlock();
-
-		// The return status
-		Error status = errNone;
+		// Lock the startup conditon.
+		ConditionLocker condLocker(pStartupCond);
 
 		if (pIsRunning)
 		{
-			// The thread is still running
-
-			// Timeout
-			struct timeval mytime;
-			struct timespec myts;
-			gettimeofday(&mytime, NULL);
-			myts.tv_sec = mytime.tv_sec + timeout;
-			myts.tv_nsec = mytime.tv_usec * 1000;
-
-			// Waiting for the end of the thread
-			int result = ::pthread_cond_timedwait(&p_threadIsAboutToExit, &pMutexThreadIsAboutToExit.pthreadMutex(), &myts);
-			if (result) // A problem occured, or we timed out.
-			{
-				// We are out of time, no choice but to kill our thread
-				::pthread_cancel(pThreadID);
-				status = errTimeout;
-			}
+			// The thread is already running, bail out.
+			return errNone;
 		}
 
-		pMutexThreadIsAboutToExit.unlock();
+		// We're starting, so we should not stop too soon :)
+		pShouldStop = false;
+
+		// Lock the startup condition before creating the thread,
+		// then wait for it. The thread will signal the condition when it
+		// successfully have set isRunning _and_ called the triggers.
+		// Then we can check the isRunning status and determine if the startup
+		// was a success or not.
+		if (::pthread_create(&pThreadID, NULL, threadMethodForPThread, this))
+		{
+			// Thread creation failed, abort.
+			return errThreadCreation;
+		}
+
+		// Unlock and wait to be signalled by the new thread.
+		// This MUST happen.
+		pStartupCond.waitUnlocked();
+		// The condition is now locked again, our thread has set pIsRunning according
+		// to the selected course of action.
+
+		if (!pIsRunning)
+		{
+			// The thread has been aborted by a startup handler.
+			return errAborted;
+		}
+		
+		return errNone;
+	}
+
+
+	AThreadModel::Error AThreadModel::stop(const uint32 timeout)
+	{
+		MutexLocker locker(pMutex);
+		Error status = errNone;
+
+		// Our thread will be blocked in pAboutToExitCond.notify() if it crosses it.
+		pAboutToExitCond.lock();
+
+		// Check the thread status
+		if (!pIsRunning) // already stopped, nothing to do.
+		{
+			pAboutToExitCond.unlock();
+			return errNone;
+		}
+
+		// Early indicates that this thread should stop, should it check that value.
+		pShouldStop = true;
+
+		// Notify
+		pMustStopCond.notifyLocked();
+
+			
+		if (pAboutToExitCond.waitUnlocked(timeout)) // We timed out.
+		{
+			// We are out of time, no choice but to kill our thread
+			::pthread_cancel(pThreadID);
+			status = errTimeout;
+		}
+
+		// Release the ExitCondition, so the thread can join us.
+		pAboutToExitCond.unlock();
+
 		// Wait for the thread be completely stopped
 		::pthread_join(pThreadID, NULL);
-		// The thread is no longer running
+
+		// The thread is no longer running, force status to stopped (ie, if we killed it)
+		// It is thread-safe, since the thread is not running anymore AND we hold pMutex.
 		pIsRunning = false;
+
 		return status;
 	}
 
 
 	bool AThreadModel::suspend(const uint32 delay)
 	{
-		MutexLocker locker(pThreadMustStopMutex);
+		ConditionLocker locker(pMustStopCond);
 
 		// The thread should stop as soon as possible
 		if (pShouldStop)
@@ -223,43 +216,25 @@ namespace Private
 
 		// We should rest for a while...
 		if (delay)
-		{
-			struct timespec ts;
-			::pthread_cond_timedwait(&p_threadMustStopCond, &pThreadMustStopMutex.pthreadMutex(),
-				millisecondsFromNow(&ts, delay));
-		}
+			pMustStopCond.waitUnlocked(delay);
+
 		return (pShouldStop || !pIsRunning);
 	}
-
-
-	void AThreadModel::signalThreadAboutToExit()
-	{
-		pShouldStop = true;
-		pIsRunning = false;
-		pMutexThreadIsAboutToExit.lock();
-		::pthread_cond_signal(&p_threadIsAboutToExit);
-		pMutexThreadIsAboutToExit.unlock();
-	}
-
 
 	void AThreadModel::gracefulStop()
 	{
 		MutexLocker locker(pMutex);
-		pShouldStop = true;
 
-		pThreadMustStopMutex.lock();
-		::pthread_cond_signal(&p_threadMustStopCond);
-		pThreadMustStopMutex.unlock();
+		pShouldStop = true;
+		pMustStopCond.notifyLocked();
 	}
 
 
-	AThreadModel::Error AThreadModel::restart(const uint16 timeout)
+	AThreadModel::Error AThreadModel::restart(const uint32 timeout)
 	{
 		const Error status = stop(timeout);
 		return (status != errNone) ? status : start();
 	}
-
-
 
 
 } // namespace Private
