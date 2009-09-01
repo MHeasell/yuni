@@ -35,6 +35,8 @@ namespace Yuni
 
 		void normalizeCompiler();
 
+		void expandModuleNames();
+
 		bool displayInformations();
 
 		void displayInformationAboutYuniVersion();
