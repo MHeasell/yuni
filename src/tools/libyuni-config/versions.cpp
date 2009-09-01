@@ -242,8 +242,8 @@ namespace VersionInfo
 			{
 				switch (compliant)
 				{
-					case gcc          : s.includes[String() << "-I\"" << value << "\""] = true; break;
-					case visualstudio : s.includes[String() << "\"/I" << value << "\""] = true; break;
+					case gcc          : s.includes[String() << "-I" << value] = true; break;
+					case visualstudio : s.includes[String() << "/I" << value] = true; break;
 				}
 				continue;
 			}
@@ -258,8 +258,8 @@ namespace VersionInfo
 			{
 				switch (compliant)
 				{
-					case gcc          : s.libIncludes[String() << "-L\"" << value << "\""] = true; break;
-					case visualstudio : s.libIncludes[String() << "\"/LIBPATH:" << value << "\""] = true; break;
+					case gcc          : s.libIncludes[String() << "-L" << value] = true; break;
+					case visualstudio : s.libIncludes[String() << "/LIBPATH:" << value] = true; break;
 				}
 				continue;
 			}
