@@ -1,6 +1,9 @@
 
 #include "program.h"
 
+#define YUNI_LIBYUNI_CONFIG_SEPARATORS ", ;:\t\n"
+
+
 
 namespace Yuni
 {
@@ -30,6 +33,9 @@ namespace Yuni
 		// Display information if asked
 		if (!displayInformations())
 			return pExitStatus;
+
+		// Expand name for each modules
+		expandModuleNames();
 
 		// Display information
 		displayInformationAboutYuniVersion();
@@ -185,6 +191,64 @@ namespace Yuni
 	}
 
 
+
+	void LibConfigProgram::expandModuleNames()
+	{
+		String item;
+
+		// Lowercase
+		const String::List::iterator end = pOptModules.end();
+		for (String::List::iterator i = pOptModules.begin(); i != end; ++i)
+		{
+			item = *i;
+			*i = item.toLower();
+		}
+
+		bool mustContinue;
+		do
+		{
+			mustContinue = false;
+			const String::List::iterator end = pOptModules.end();
+			for (String::List::iterator i = pOptModules.begin(); i != end; ++i)
+			{
+				if (i->empty())
+				{
+					// We have no interest in empty strings
+					pOptModules.erase(i);
+					mustContinue = true;
+					break;
+				}
+				if (String::npos != i->find_first_of(YUNI_LIBYUNI_CONFIG_SEPARATORS))
+				{
+					// This item seems to be actually a list of several requested modules
+					// We will explode the string to get the real list
+					item = *i;
+					pOptModules.erase(i);
+					item.explode(pOptModules, YUNI_LIBYUNI_CONFIG_SEPARATORS, false, false, true);
+					mustContinue = true;
+					break;
+				}
+				if (i->first() == '+')
+				{
+					// The symbol `+` enables a module, but this is already a default behavior
+					item.assign(*i, 1, i->size() - 1);
+					*i = item;
+					continue;
+				}
+				if (i->first() == '-')
+				{
+					// The symbol `-` disables a module, so we have to remove all existing entries
+					mustContinue = true;
+					item.assign(*i, 1, i->size() - 1);
+					pOptModules.erase(i);
+					pOptModules.remove(item);
+					break;
+				}
+			}
+		} while (mustContinue);
+	}
+
+
 	void LibConfigProgram::displayInformationAboutYuniVersion()
 	{
 		LibConfig::VersionInfo::Settings* version = pVersionList.selected();
@@ -238,13 +302,21 @@ namespace Yuni
 
 	void LibConfigProgram::printModulesDependencies() const
 	{
+		std::map<String, bool> deps;
+		{
+			const String::List::const_iterator end = pOptModules.end();
+			for (String::List::const_iterator i = pOptModules.begin(); i != end; ++i)
+				deps[*i] = true;
+		}
+
+
 		bool first = true;
-		const String::List::const_iterator end = pOptModules.end();
-		for (String::List::const_iterator i = pOptModules.begin(); i != end; ++i)
+		const std::map<String, bool>::const_iterator end = deps.end();
+		for (std::map<String, bool>::const_iterator i = deps.begin(); i != end; ++i)
 		{
 			if (!first)
-				std::cout << " ";
-			std::cout << *i;
+				std::cout << ' ';
+			std::cout << i->first;
 			first = false;
 		}
 		std::cout << "\n";
@@ -323,7 +395,7 @@ namespace Yuni
 		for (LibConfig::VersionInfo::Settings::ModuleSettings::OptionMap::const_iterator i = args.begin(); i != end; ++i)
 		{
 			if (!first)
-				std::cout << " ";
+				std::cout << ' ';
 			first = false;
 			std::cout << i->first;
 		}

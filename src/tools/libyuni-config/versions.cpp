@@ -22,14 +22,14 @@ namespace VersionInfo
 			# else
 			loadFromPath(root + "/../../..");
 			# endif
-            return;
+			return;
 		}
 
-        # ifdef YUNI_OS_WINDOWS
-        // For dealing with the paths like 'Debug/libyuni-config.exe'
-        if (Core::IO::File::Exists(String() << root << "\\..\\mark-for-yuni-sources"))
+		# ifdef YUNI_OS_WINDOWS
+		// For dealing with the paths like 'Debug/libyuni-config.exe'
+		if (Core::IO::File::Exists(String() << root << "\\..\\mark-for-yuni-sources"))
 			loadFromPath(root + "\\..\\..\\..\\..");
-        # endif
+		# endif
 	}
 
 
@@ -134,7 +134,7 @@ namespace VersionInfo
 					std::cout << " (svn-sources)";
 				std::cout << "\n";
 				std::cout << "    path    : " << i->second.path << "\n";
-				std::cout << "    modules :";
+				std::cout << "    modules : [core]";
 				const String::List::const_iterator mend = i->second.modules.end();
 				for (String::List::const_iterator j = i->second.modules.begin(); j != mend; ++j)
 					std::cout << " " << *j;
@@ -146,6 +146,7 @@ namespace VersionInfo
 			}
 		}
 	}
+
 
 
 	VersionInfo::Settings* List::selected()
