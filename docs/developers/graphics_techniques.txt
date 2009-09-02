@@ -28,7 +28,7 @@ II) Techniques by feature:
 	0] No shadows:
 	--------------
 	How it works:
-		Just don't do it.
+		Do nothing.
 	Quality: Inexistent
 
 	1] Shadow mapping:
@@ -91,7 +91,7 @@ II) Techniques by feature:
 	0] No bump-mapping at all:
 	--------------------------
 	How it works:
-		Just don't do it.
+		Do nothing.
 	Quality: Low
 	Speed: Best
 		   Score: C
