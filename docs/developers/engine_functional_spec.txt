@@ -175,9 +175,9 @@ fonts or even shaders.
 	1] Shaders:
 	-----------
 
-Shaders should not be a problem since only two formats exist and we cannot
-afford to ship without either: HLSL and GLSL (respectively for DirectX and
-OpenGL).
+Shaders should not be a problem since few formats exist.
+We cannot afford to ship without either HLSL or GLSL (respectively for DirectX
+and OpenGL). It would also be nice to offer support for NVIDIA's Cg language.
 
 	2] Images:
 	----------
