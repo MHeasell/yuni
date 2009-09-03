@@ -1,11 +1,9 @@
 #ifndef __YUNI_GFX_ENGINE_H__
 # define __YUNI_GFX_ENGINE_H__
 
-# include "../yuni.h"
 # include "device.h"
 # include "../core/smartptr/smartptr.h"
-# include "../threads/mutex.h"
-# include "../gfx/window/factory.h"
+# include "../gfx/window/window.h"
 # include "../gfx/render/renderer.h"
 
 namespace Yuni

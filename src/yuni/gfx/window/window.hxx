@@ -2,7 +2,6 @@
 # define __YUNI_GFX_WINDOW_WINDOW_HXX__
 
 
-
 namespace Yuni
 {
 namespace Gfx
@@ -48,8 +47,6 @@ namespace Window
 		// Updating the change according to the real implementation
 		onInternalTitleChangedWL();
 	}
-
-
 
 } // namespace Window
 } // namespace Gfx

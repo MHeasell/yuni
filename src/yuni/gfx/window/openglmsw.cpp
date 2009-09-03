@@ -1,6 +1,5 @@
 
 #include "openglmsw.h"
-#include "factory.h"
 #include "../api/gl.h"
 #include "../../core/string.h"
 

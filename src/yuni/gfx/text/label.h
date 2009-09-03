@@ -1,4 +1,4 @@
-#ifdef __YUNI_GFX_TEXT_LABEL_H__
+#ifndef __YUNI_GFX_TEXT_LABEL_H__
 # define __YUNI_GFX_TEXT_LABEL_H__
 
 # include "font.h"
@@ -25,8 +25,8 @@ namespace Gfx
 		*/
 		Label(const AFont::Ptr& font, const String& text, unsigned int left,
 			  unsigned int top, unsigned int right = 0, unsigned int bottom = 0)
-			: pFont(font), pLeft(left), pTop(top), pRight(right),
-			  pBottom(bottom)
+			: pFont(font), pText(text), pVisible(true), pLeft(left), pTop(top),
+			  pRight(right), pBottom(bottom)
 		{}
 
 		//! Draw the label

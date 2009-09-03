@@ -98,7 +98,6 @@ namespace Render
 
 	void OpenGL::testDraw()
 	{
-// 			glRotatef(rotQuad, 1.0f, 0.5f, 0.25f);
 		glBegin(GL_QUADS);
 		/* top of cube */
 		glColor3f(0.0f, 1.0f, 0.0f);
