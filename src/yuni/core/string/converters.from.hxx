@@ -122,8 +122,8 @@ namespace StringImpl
 				# if !defined(YUNI_OS_WINDOWS) || defined(YUNI_OS_MINGW)
 				::wcstombs(&b[0], str, l);
 				# else
-				size_t i;
-				::wcstombs_s(&i, &b[0], l, str, l);
+				size_t i = 0;
+				::wcstombs_s(&i, &b[0], l + 1, str, _TRUNCATE);
 				# endif
 				if (0 != *b)
 					From<char*>::AppendRaw(s, b, strlen(b));
@@ -146,7 +146,7 @@ namespace StringImpl
 				::wcstombs(&b[0], str, l);
 				# else
 				size_t i;
-				::wcstombs_s(&i, &b[0], l, str, l);
+				::wcstombs_s(&i, &b[0], l + 1, str, _TRUNCATE);
 				# endif
 				if (0 != *b)
 					From<char*>::AppendRaw(s, b, strlen(b));
