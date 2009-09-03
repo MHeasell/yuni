@@ -1,4 +1,4 @@
-#ifdef __YUNI_GFX_TEXT_FONT_H__
+#ifndef __YUNI_GFX_TEXT_FONT_H__
 # define __YUNI_GFX_TEXT_FONT_H__
 
 # include "../../core/string.h"
@@ -7,8 +7,6 @@
 namespace Yuni
 {
 namespace Gfx
-{
-namespace Text
 {
 
 	/*!
@@ -22,11 +20,12 @@ namespace Text
 	public:
 		AFont(const String& fontFace, unsigned int size, bool bold = false,
 			bool italic = false)
-			: pFace(face), pSize(size), pBold(bold), pItalic(italic)
+			: pFace(fontFace), pSize(size), pBold(bold), pItalic(italic)
 		{}
+		virtual ~AFont() {}
 
 		virtual void drawText(const String& text, unsigned int left, unsigned int top,
-			unsigned int right, unsigned int bottom) const = 0;
+			unsigned int right, unsigned int bottom) = 0;
 
 	protected:
 		String pFace;
@@ -36,7 +35,6 @@ namespace Text
 
 	}; // AFont
 
-} // namespace Text
 } // namespace Gfx
 } // namespace Yuni
 

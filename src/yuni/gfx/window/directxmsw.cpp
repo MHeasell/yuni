@@ -1,6 +1,5 @@
 
 #include "directxmsw.h"
-#include "factory.h"
 #include "../../core/string.h"
 
 #if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)

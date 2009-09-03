@@ -36,7 +36,7 @@ namespace Application
 
 	void Gfx3D::execute()
 	{
-		if (!Gfx::Engine::Instance()->resetWithRecommendedSettings())
+//		if (!Gfx::Engine::Instance()->resetWithRecommendedSettings())
 			if (!Gfx::Engine::Instance()->resetWithFailSafeSettings())
 				return;
 

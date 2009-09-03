@@ -1,11 +1,10 @@
+#include "window.h"
 
-#include "factory.h"
-
-# ifdef YUNI_OS_MAC
+#ifdef YUNI_OS_MAC
 	// TODO: Write window creation for Cocoa. For the moment it does nothing
-	#	include "openglcocoa.h"
-# else
-# 	ifdef YUNI_OS_WINDOWS
+#	include "openglcocoa.h"
+#else
+#	ifdef YUNI_OS_WINDOWS
 #		include "openglmsw.h"
 #		include "directxmsw.h"
 #   else
@@ -14,8 +13,8 @@
 #		else
 #			error No window creation available for your platform!
 #		endif
-# 	endif
-# endif
+#	endif
+#endif
 
 
 
@@ -26,7 +25,7 @@ namespace Gfx
 namespace Window
 {
 
-	AWindow* Factory::Create(const String& title, const Device::Ptr& device)
+	AWindow* Create(const String& title, const Device::Ptr& device)
 	{
 		Yuni::Device::Display::Resolution::Ptr res = device->resolution();
 		AWindow* wnd = NULL;

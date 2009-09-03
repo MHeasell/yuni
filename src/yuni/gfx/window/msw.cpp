@@ -1,7 +1,5 @@
 
 #include "msw.h"
-#include "factory.h"
-#include "../api/gl.h"
 #include "../../core/string.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
@@ -58,7 +56,7 @@ namespace Window
 		LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			AMSWindows* window = GetWindow(hWnd);
-			// Check For Windows Messages
+			// Check for Windows messages
 			switch (uMsg)
 			{
 				case WM_SYSCOMMAND:
@@ -72,16 +70,16 @@ namespace Window
 						break;
 					}
 
-				case WM_CLOSE: // Did We Receive A Close Message?
+				case WM_CLOSE: // Did we receive a Close message?
 					{
 						if (window && !window->closing())
 							window->onClose();
 						if (sWindowList.empty())
-							PostQuitMessage(0); // Send A Quit Message
+							PostQuitMessage(0); // Send a Quit message
 						return 0;
 					}
 
-				case WM_SIZE: // Resize The OpenGL Window
+				case WM_SIZE: // Resize the window
 					{
 						if (window)
 							window->resize(LOWORD(lParam), HIWORD(lParam));
@@ -89,7 +87,7 @@ namespace Window
 					}
 			}
 
-			// Pass All Unhandled Messages To DefWindowProc
+			// Pass all unhandled messages to DefWindowProc
 			return DefWindowProc(hWnd, uMsg, wParam, lParam);
 		}
 
@@ -131,7 +129,7 @@ namespace Window
 		wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 		// Load the small icon
 		wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-		// No Background Required For GL
+		// No Background Required
 		wc.hbrBackground = NULL;
 		// We Don't Want A Menu
 		wc.lpszMenuName = NULL;

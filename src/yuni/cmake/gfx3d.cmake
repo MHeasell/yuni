@@ -5,7 +5,7 @@ Set(SRC_GFX3D
 		gfx/engine.h gfx/engine.cpp
 		gfx/window/window.h
 		gfx/window/window.hxx
-		gfx/window/factory.h gfx/window/factory.cpp
+		gfx/window/window.cpp
 		gfx/window/msw.h
 		gfx/window/directxmsw.h
 		gfx/window/openglmsw.h
@@ -15,6 +15,8 @@ Set(SRC_GFX3D
 		gfx/render/renderer.h gfx/render/renderer.cpp
 		gfx/render/fpscounter.h
 		gfx/render/opengl.h gfx/render/opengl.cpp
+		gfx/text/font.h gfx/text/label.h
+		gfx/text/wgl.h gfx/text/wgl.cpp
 		)
 
 

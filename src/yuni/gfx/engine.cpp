@@ -96,7 +96,7 @@ namespace Gfx
 			return;
 
 		// Window creation and API init
-		pMainWindow = Window::Factory::Create(applicationTitle(), pDevice);
+		pMainWindow = Window::Create(applicationTitle(), pDevice);
 
 		// The initialization has failed
 		if (!pMainWindow)

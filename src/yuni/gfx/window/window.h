@@ -2,6 +2,7 @@
 # define __YUNI_GFX_WINDOW_WINDOW_H__
 
 # include "../../yuni.h"
+# include "../device.h"
 # include "../../core/string.h"
 # include "../../core/event/event.h"
 # include "../render/renderer.h"
@@ -17,7 +18,6 @@ namespace Gfx
 
 namespace Window
 {
-
 
 	/*!
 	** \brief Abstraction of a window for graphic rendering
@@ -140,6 +140,15 @@ namespace Window
 
 	}; // class AWindow
 
+
+
+	/*!
+	** \brief Create a platform-dependent window.
+	**
+	** The characteristics of this window and its associated renderer will
+	** be determined using the device.
+	*/
+	AWindow* Create(const String& title, const Device::Ptr& device);
 
 
 
