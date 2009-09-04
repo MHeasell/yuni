@@ -1,8 +1,10 @@
 
-IF(YUNI_MODULE_GFX_CORE)
+Find_Package(LibYuni COMPONENTS core display)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
+
 	Message(STATUS "Sample: Devices / List all monitors")
-	include_directories(${YUNI_INCLUDE})
 	ADD_EXECUTABLE(devices_00_monitors main.cpp)
-	target_link_libraries(devices_00_monitors ${YUNI_STATIC_CORE} ${YUNI_STATIC_DEVICE_DISPLAY})
-	add_dependencies(samples devices_00_monitors)
-ENDIF(YUNI_MODULE_GFX_CORE)
+ENDIF(LibYuni_FOUND)
+

@@ -14,25 +14,21 @@ Include(CheckIncludeFile)
 
 
 
-
-
-
-
-
-
 #
 # Command line options for G++ (Debug)
 #
 # Ex: cmake . -DYUNI_TARGET=release
 #
 IF("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
-IF("${YUNI_TARGET}" STREQUAL "release")
+IF("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "release")
 
 	#
 	# Build Configuration: Release
 	#
 	Message(STATUS "Build Configuration: Release")
 
+	SET(YUNI_TARGET "release")
+	SET(YUNI_TARGET_RELEASE true)
 	IF(NOT WIN32)
 		String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
 		IF(${VA} EQUAL 0)
@@ -55,7 +51,7 @@ IF("${YUNI_TARGET}" STREQUAL "release")
 	ENDIF(NOT WIN32)
 	ADD_DEFINITIONS("-DNDEBUG") # Remove asserts
 
-Else("${YUNI_TARGET}" STREQUAL "release")
+Else("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "release")
 
 	#
 	# Build Configuration: Debug
@@ -63,6 +59,8 @@ Else("${YUNI_TARGET}" STREQUAL "release")
 	Message(STATUS "Build Configuration: Debug")
 
 
+	SET(YUNI_TARGET "debug")
+	SET(YUNI_TARGET_DEBUG true)
 	IF(NOT WIN32)
 		String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
 		IF(${VA} EQUAL 0)
@@ -84,7 +82,7 @@ Else("${YUNI_TARGET}" STREQUAL "release")
 		ENDIF(MSVC)
 	ENDIF(NOT WIN32)
 
-EndIF("${YUNI_TARGET}" STREQUAL "release")
+EndIF("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "release")
 
 ELSE("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
 
@@ -94,16 +92,11 @@ ELSE("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
 ENDIF("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
 
 
-#
-# PThreads
-#
-DEVPACK_IMPORT_PTHREADS()
-
 
 #
 # Extra - Bundles
 #
-SET(MACOSX_BUNDLE_COPYRIGHT "Yuni - 2008/2009")
+SET(MACOSX_BUNDLE_COPYRIGHT "Yuni Framework - 2008/2009")
 
 IF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD}" STREQUAL "")
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${YUNI_CXX_FLAGS_OVERRIDE_ADD}")
@@ -111,7 +104,7 @@ ENDIF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD}" STREQUAL "")
 
 
 IF(APPLE)
-	Message(STATUS "Enabled universal binaries")
+	Message(STATUS "Enabled universal binaries (i386, x86_64)")
 	Set(CMAKE_OSX_ARCHITECTURES "i386;x86_64") # ppc;i386;ppc64;x86_64
 ENDIF(APPLE)
 

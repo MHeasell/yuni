@@ -1,7 +1,11 @@
 
-Message(STATUS "Sample: Core / Command line Options (GetOpt) / With text paragraph")
-include_directories(${YUNI_INCLUDE})
-ADD_EXECUTABLE(getopt_03_paragraph main.cpp)
-target_link_libraries(getopt_03_paragraph ${YUNI_STATIC_CORE})
-add_dependencies(samples getopt_03_paragraph)
+
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
+
+	Message(STATUS "Sample: Core / Command line Options (GetOpt) / With text paragraph")
+	ADD_EXECUTABLE(getopt_03_paragraph main.cpp)
+ENDIF(LibYuni_FOUND)
 

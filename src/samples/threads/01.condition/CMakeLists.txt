@@ -1,7 +1,11 @@
 
-Message(STATUS "Sample: Multi-Threading / Using Condition Variable for Thread Synchronization")
-include_directories(${YUNI_INCLUDE})
-ADD_EXECUTABLE(threads_01_condition main.cpp)
-target_link_libraries(threads_01_condition ${YUNI_STATIC_CORE} ${YUNI_STATIC_ALGORITHMS})
-add_dependencies(samples threads_01_condition)
+
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
+
+	Message(STATUS "Sample: Multi-Threading / Using Condition Variable for Thread Synchronization")
+	ADD_EXECUTABLE(threads_01_condition main.cpp)
+ENDIF(LibYuni_FOUND)
 

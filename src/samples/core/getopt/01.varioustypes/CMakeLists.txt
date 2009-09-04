@@ -1,7 +1,11 @@
 
-Message(STATUS "Sample: Core / Command line Options (GetOpt) / With various types")
-include_directories(${YUNI_INCLUDE})
-ADD_EXECUTABLE(getopt_01_varioustypes main.cpp)
-target_link_libraries(getopt_01_varioustypes ${YUNI_STATIC_CORE})
-add_dependencies(samples getopt_01_varioustypes)
+
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
+
+	Message(STATUS "Sample: Core / Command line Options (GetOpt) / With various types")
+	ADD_EXECUTABLE(getopt_01_varioustypes main.cpp)
+ENDIF(LibYuni_FOUND)
 

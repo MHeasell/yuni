@@ -1,7 +1,10 @@
 
-Message(STATUS "Sample: Core / Command line Options (GetOpt) / Remaining arguments")
-include_directories(${YUNI_INCLUDE})
-ADD_EXECUTABLE(getopt_02_remainingargs main.cpp)
-target_link_libraries(getopt_02_remainingargs ${YUNI_STATIC_CORE})
-add_dependencies(samples getopt_02_remainingargs)
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
+
+	Message(STATUS "Sample: Core / Command line Options (GetOpt) / Remaining arguments")
+	ADD_EXECUTABLE(getopt_02_remainingargs main.cpp)
+ENDIF(LibYuni_FOUND)
 

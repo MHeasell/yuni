@@ -1,7 +1,10 @@
 
-Message(STATUS "Sample: Core / Hash / Simple dictionary management")
-include_directories(${YUNI_INCLUDE})
-ADD_EXECUTABLE(hash_02_dictionary main.cpp)
-target_link_libraries(hash_02_dictionary ${YUNI_STATIC_CORE})
-add_dependencies(samples hash_02_dictionary)
 
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
+
+	Message(STATUS "Sample: Core / Hash / Simple dictionary management")
+	ADD_EXECUTABLE(hash_02_dictionary main.cpp)
+ENDIF(LibYuni_FOUND)

@@ -1,12 +1,13 @@
 
-IF(YUNI_MODULE_GFX3D)
+Find_Package(LibYuni COMPONENTS core gfx3d)
+IF(LibYuni_FOUND)
 	Message(STATUS "Sample: Application / Gfx3D - FPS Counter")
-	include_directories(${YUNI_INCLUDE})
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
 
 	ADD_EXECUTABLE(appl_02_gfx3d_fps WIN32 MACOSX_BUNDLE main.cpp)
 	SET(MACOSX_BUNDLE_BUNDLE_NAME "Yuni - Sample - HelloWorld with FPS")
 	SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "${YUNI_VERSION_STRING}")
 	SET(MACOSX_BUNDLE_ICON_FILE "sample.icns")
-	target_link_libraries(appl_02_gfx3d_fps ${YUNI_STATIC_CORE} ${YUNI_STATIC_GFX_CORE} ${YUNI_STATIC_GFX3D})
-	add_dependencies(samples appl_02_gfx3d_fps)
-ENDIF(YUNI_MODULE_GFX3D)
+ENDIF(LibYuni_FOUND)
+

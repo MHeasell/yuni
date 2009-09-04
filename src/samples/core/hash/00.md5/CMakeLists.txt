@@ -1,7 +1,11 @@
 
-Message(STATUS "Sample: Core / Hash / Compute a MD5 checksum from a string")
-include_directories(${YUNI_INCLUDE})
-ADD_EXECUTABLE(hash_00_md5 main.cpp)
-target_link_libraries(hash_00_md5 ${YUNI_STATIC_CORE})
-add_dependencies(samples hash_00_md5)
+
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
+
+	Message(STATUS "Sample: Core / Hash / Compute a MD5 checksum from a string")
+	ADD_EXECUTABLE(hash_00_md5 main.cpp)
+ENDIF(LibYuni_FOUND)
 

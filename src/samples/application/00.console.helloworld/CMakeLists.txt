@@ -1,7 +1,10 @@
 
-Message(STATUS "Sample: Application / Console - Hello world")
-include_directories(${YUNI_INCLUDE})
-ADD_EXECUTABLE(appl_00_console main.cpp)
-target_link_libraries(appl_00_console ${YUNI_STATIC_CORE})
-add_dependencies(samples appl_00_console)
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
 
+	Message(STATUS "Sample: Application / Console - Hello world")
+	ADD_EXECUTABLE(appl_00_console main.cpp)
+
+ENDIF(LibYuni_FOUND)

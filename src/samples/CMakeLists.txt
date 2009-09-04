@@ -8,22 +8,28 @@ ENDIF(POLICY CMP0011)
 
 
 Message(STATUS "")
-Message(STATUS "Samples")
+Message(STATUS "Yuni Framework - Samples")
 Message(STATUS "")
 
 # To find 'FindLibYuni.cmake'
 LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../packages/cmake")
 
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/LibYuniConfig.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
 
 add_custom_target(samples)
 
-ADD_SUBDIRECTORY(core)
-ADD_SUBDIRECTORY(application)
-ADD_SUBDIRECTORY(devices)
-ADD_SUBDIRECTORY(script)
-ADD_SUBDIRECTORY(threads)
-#ADD_SUBDIRECTORY(ui)
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+
+	# Infos
+	MESSAGE(STATUS "The Yuni Framework : ${LibYuni_INFOS}")
+
+	ADD_SUBDIRECTORY(core)
+	ADD_SUBDIRECTORY(application)
+	ADD_SUBDIRECTORY(devices)
+	ADD_SUBDIRECTORY(script)
+	ADD_SUBDIRECTORY(threads)
+	#ADD_SUBDIRECTORY(ui)
+
+ENDIF(LibYuni_FOUND)
 

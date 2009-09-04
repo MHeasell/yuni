@@ -107,9 +107,5 @@ get_property(YnList GLOBAL PROPERTY YuniTestCaseListCount)
 List(LENGTH YnList YnListCount)
 
 Message(STATUS "Testcase count: ${YnListCount}")
-
 get_property(YnList GLOBAL PROPERTY YuniTestCaseList)
-#FOREACH(LIB ${YnList})
-#	Message(STATUS "--------- ${LIB}")
-#ENDFOREACH(LIB ${YnList})
 
