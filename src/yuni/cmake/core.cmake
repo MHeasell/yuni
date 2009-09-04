@@ -2,6 +2,17 @@
 
 Message(STATUS "[Module] Core")
 
+
+# yuni-config
+LIBYUNI_CONFIG_INCLUDE_PATH("core" "${CMAKE_CURRENT_SOURCE_DIR}/..")
+LIBYUNI_CONFIG_LIB_PATH("core" "${LIBRARY_OUTPUT_PATH}")
+LIBYUNI_CONFIG_LIB("core"       "yuni-static-core")
+IF(APPLE)
+	LIBYUNI_CONFIG_CFLAG("core"	"-fvisibility=hidden")
+ENDIF(APPLE)
+
+
+
 Set(SRC_CORE_ALLOCATOR
 				core/allocator/chunk.h
 				core/allocator/chunk.cpp

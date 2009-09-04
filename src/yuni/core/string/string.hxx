@@ -925,7 +925,7 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::operator == (const C* rhs) const
 	{
-		return Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize);
+		return Private::StringImpl::Impl<C,Chunk>::StrictlyEquals(pPtr, rhs);
 	}
 
 

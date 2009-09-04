@@ -1,6 +1,9 @@
 
 Message(STATUS "[Module] Algorithms")
 
+LIBYUNI_CONFIG_LIB("algorithms" "yuni-static-algorithms")
+
+
 # Devices
 Set(SRC_ALGORITHMS
 		algorithm/luhn.h algorithm/luhn.cpp algorithm/luhn.hxx

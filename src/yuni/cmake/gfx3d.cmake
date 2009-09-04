@@ -1,8 +1,29 @@
 
 
+LIBYUNI_CONFIG_LIB("gfx3d"      "yuni-static-gfx3d-core")
+
+LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "core") # gfx-core is required
+LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "gfx") # gfx-core is required
+LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "display") # gfx-core is required
+LIBYUNI_CONFIG_LIB("gfx3d"  "yuni-static-device-display")
+
+IF(APPLE)
+	# Frameworks
+	FIND_LIBRARY(FRAMEWORK_COREFOUNDATION NAMES CoreFoundation)
+	FIND_LIBRARY(FRAMEWORK_COCOA NAMES Cocoa)
+	FIND_LIBRARY(FRAMEWORK_IOKIT NAMES IOKit)
+	LIBYUNI_CONFIG_FRAMEWORK("gfx3d" "${FRAMEWORK_COREFOUNDATION}")
+	LIBYUNI_CONFIG_FRAMEWORK("gfx3d" "${FRAMEWORK_COCOA}")
+	LIBYUNI_CONFIG_FRAMEWORK("gfx3d" "${FRAMEWORK_IOKIT}")
+ENDIF(APPLE)
+
+
+
 Set(SRC_GFX3D
 		application/gfx3d.h application/gfx3d.cpp
 		gfx/engine.h gfx/engine.cpp
+
+		# Window
 		gfx/window/window.h
 		gfx/window/window.hxx
 		gfx/window/window.cpp
@@ -12,9 +33,13 @@ Set(SRC_GFX3D
 		gfx/window/openglx11.h
 		gfx/window/openglcocoa.h
 		gfx/window/x11yuni.h
+
+		# Renderer
 		gfx/render/renderer.h gfx/render/renderer.cpp
 		gfx/render/fpscounter.h
 		gfx/render/opengl.h gfx/render/opengl.cpp
+
+		# Font
 		gfx/text/font.h gfx/text/label.h
 		gfx/text/wgl.h gfx/text/wgl.cpp
 		)
@@ -26,6 +51,7 @@ Set(SRC_GFX3D
 Message(STATUS "Added Support for OpenGL")
 find_package(OpenGL)
 Set(YUNI_COMPILED_WITH_SUPPORT_FOR_OPENGL  1)
+LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${OPENGL_INCLUDE_DIR}")
 
 
 #
@@ -64,6 +90,8 @@ IF (WIN32)
 			Set(YUNI_COMPILED_WITH_SUPPORT_FOR_DIRECTX 1)
 			SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/directxmsw.cpp)
 			Include_Directories("${DX9_INCLUDE_PATH}")
+			LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${DX9_INCLUDE_PATH}")
+			LIBYUNI_CONFIG_DEFINITION("gfx3d"  "YUNI_USE_DIRECTX")
 		ENDIF(DX9_INCLUDE_PATH)
 	ENDIF(D3D9_LIBRARY AND D3DX9_LIBRARY)
 
@@ -71,15 +99,18 @@ ELSE(WIN32)
 	IF(APPLE)
 	ELSE(APPLE)
 		Set(SRC_GFX3D ${SRC_GFX3D} gfx/window/openglx11.cpp)
+		LIBYUNI_CONFIG_LIB("gfx3d" "GL")
+		LIBYUNI_CONFIG_LIB("gfx3d" "GLU")
 	ENDIF(APPLE)
 ENDIF(WIN32)
 
 source_group(Gfx3D FILES ${SRC_GFX3D})
 
 Add_Library(yuni-static-gfx3d-core STATIC ${SRC_GFX3D})
+
 target_link_libraries(yuni-static-gfx3d-core
-    # DirectX
-    ${OPENGL_LIBRARY} ${DX9_LIBRARIES}
+	# DirectX
+	${OPENGL_LIBRARY} ${DX9_LIBRARIES}
 	# Required on Linux
 	yuni-static-core yuni-static-device-display yuni-static-gfx-core)
 
