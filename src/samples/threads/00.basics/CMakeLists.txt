@@ -1,7 +1,11 @@
 
-Message(STATUS "Sample: Multi-Threading / A Simple custom thread")
-include_directories(${YUNI_INCLUDE})
-ADD_EXECUTABLE(threads_00_basics main.cpp)
-target_link_libraries(threads_00_basics ${YUNI_STATIC_CORE})
-add_dependencies(samples threads_00_basics)
+
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
+
+	Message(STATUS "Sample: Multi-Threading / A Simple custom thread")
+	ADD_EXECUTABLE(threads_00_basics main.cpp)
+ENDIF(LibYuni_FOUND)
 

@@ -11,6 +11,10 @@ IF(APPLE)
 	LIBYUNI_CONFIG_CFLAG("core"	"-fvisibility=hidden")
 ENDIF(APPLE)
 
+#
+# PThreads
+#
+DEVPACK_IMPORT_PTHREADS()
 
 
 Set(SRC_CORE_ALLOCATOR

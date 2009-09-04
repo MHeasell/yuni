@@ -93,12 +93,12 @@ Add_SubDirectory(yuni)
 Add_SubDirectory(tools)
 
 # Samples
-IF(YUNI_SAMPLES)
-	Add_SubDirectory(samples EXCLUDE_FROM_ALL)
-EndIF(YUNI_SAMPLES)
+#IF(YUNI_SAMPLES)
+#	Add_SubDirectory(samples EXCLUDE_FROM_ALL)
+#EndIF(YUNI_SAMPLES)
 
-IF(YUNI_TESTS)
-	Add_SubDirectory(tests EXCLUDE_FROM_ALL)
-	Add_SubDirectory(testsuite EXCLUDE_FROM_ALL)
-EndIF(YUNI_TESTS)
+#IF(YUNI_TESTS)
+#	Add_SubDirectory(tests EXCLUDE_FROM_ALL)
+#	Add_SubDirectory(testsuite EXCLUDE_FROM_ALL)
+#EndIF(YUNI_TESTS)
 

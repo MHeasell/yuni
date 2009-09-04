@@ -1,7 +1,10 @@
 
-Message(STATUS "Sample: Core / Mathematics / Randomness / Random number table + Range")
-include_directories(${YUNI_INCLUDE})
-ADD_EXECUTABLE(math_rn_03_table_plus_range main.cpp)
-target_link_libraries(math_rn_03_table_plus_range ${YUNI_STATIC_CORE})
-add_dependencies(samples math_rn_03_table_plus_range)
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
+	link_libraries("${LibYuni_LIBS}")
+
+	Message(STATUS "Sample: Core / Mathematics / Randomness / Random number table + Range")
+	ADD_EXECUTABLE(math_rn_03_table_plus_range main.cpp)
+ENDIF(LibYuni_FOUND)
 
