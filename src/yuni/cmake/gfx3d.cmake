@@ -107,7 +107,5 @@ Add_Library(yuni-static-gfx3d-core STATIC ${SRC_GFX3D})
 
 target_link_libraries(yuni-static-gfx3d-core
 	# DirectX
-	${OPENGL_LIBRARY} ${DX9_LIBRARIES}
-	# Required on Linux
-	yuni-static-core yuni-static-device-display yuni-static-gfx-core)
+	${OPENGL_LIBRARY} ${DX9_LIBRARIES})
 
