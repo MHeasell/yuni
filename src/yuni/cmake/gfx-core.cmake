@@ -1,6 +1,7 @@
 
 Message(STATUS "[Module] Gfx::Core")
 
+LIBYUNI_CONFIG_LIB("gfx"        "yuni-static-gfx-core")
 
 Set(SRC_APPLICATION_GFX
 		application/gfx3d.h application/gfx3d.cpp)

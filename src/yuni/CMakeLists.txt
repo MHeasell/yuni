@@ -11,13 +11,17 @@ Set(YUNI_COMPILED_WITH_SUPPORT_FOR_OPENGL  0)
 Set(YUNI_COMPILED_WITH_SUPPORT_FOR_DIRECTX 0)
 
 
+#
+# Informations for libyuni-config
+#
 Set(LIBYUNI_CONFIG_ENABLED true)
+
+
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/LibYuniConfig.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
 
 
-LIBYUNI_CONFIG_INCLUDE_PATH("core" "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 
 IF(YUNI_MODULE_CORE)
@@ -30,7 +34,15 @@ IF(YUNI_MODULE_CORE)
 ENDIF(YUNI_MODULE_CORE)
 
 
+
+
 IF(YUNI_MODULE_DEVICES)
+	LIBYUNI_CONFIG_LIB("display"    "yuni-static-device-display")
+	LIBYUNI_CONFIG_LIB("mouse"      "yuni-static-device-mouse")
+	LIBYUNI_CONFIG_DEPENDENCY("mouse" "devices") # gfx-core is required
+	LIBYUNI_CONFIG_LIB("keyboard"   "yuni-static-device-keyboard")
+	LIBYUNI_CONFIG_DEPENDENCY("keyboard" "devices") # gfx-core is required
+
 	IF(YUNI_MODULE_DEVICE_DISPLAY)
 		Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/device-display.cmake")
 	ENDIF(YUNI_MODULE_DEVICE_DISPLAY)
@@ -58,19 +70,7 @@ ENDIF(YUNI_MODULE_SCRIPT)
 # Module : Network
 #
 If(YUNI_MODULE_NET)
-
-	Message(STATUS "[Module] Network")
-
-	# Scripts
-	Set(SRC_NET
-			net/protocol.h  net/protocol.cpp
-		)
-	source_group("Network\\Protocol" FILES ${SRC_NET})
-
-	Add_Library(yuni-static-net STATIC
-				${SRC_NET}
-				)
-
+	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net.cmake")
 EndIf(YUNI_MODULE_NET)
 
 
@@ -157,12 +157,9 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.cmake ${CMAKE_CURRENT_S
 # Misc
 #
 Add_definitions("-DYUNI_LIBRARY_STATIC")
+LIBYUNI_CONFIG_DEFINITION("core" "YUNI_LIBRARY_STATIC")
 Include_directories(${YUNI_INCLUDE})
 
-
-
-Message(STATUS "Gathering information about the required settings for compiling a project with yuni")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/FindYuni.cmake")
 
 
 Message(STATUS "")

@@ -1,6 +1,8 @@
 
 Message(STATUS "[Module] Script")
 
+LIBYUNI_CONFIG_LIB("script"     "yuni-static-script")
+
 # Scripts
 Set(SRC_SCRIPT
 			script.h
@@ -15,6 +17,7 @@ source_group("Script\\Script Abstraction" FILES ${SRC_SCRIPT})
 # External Lib: Lua script
 if(YUNI_EXTERNAL_SCRIPT_LUA)
 	Message(STATUS "[Module] Script::Lua")
+	LIBYUNI_CONFIG_DEPENDENCY("lua" "script")
 	# Headers for Lua
 	DEVPACK_IMPORT_LUA()
 	Set(SRC_EXTERNAL_SCRIPT_LUA

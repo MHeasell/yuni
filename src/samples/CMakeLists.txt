@@ -11,11 +11,12 @@ Message(STATUS "")
 Message(STATUS "Samples")
 Message(STATUS "")
 
+# To find 'FindLibYuni.cmake'
+LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../packages/cmake")
 
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/LibYuniConfig.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/FindYuni.cmake")
 
 add_custom_target(samples)
 
