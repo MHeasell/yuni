@@ -12,6 +12,7 @@ IF(APPLE)
 	LIBYUNI_CONFIG_FRAMEWORK("gfx3d" CoreFoundation)
 	LIBYUNI_CONFIG_FRAMEWORK("gfx3d" Cocoa)
 	LIBYUNI_CONFIG_FRAMEWORK("gfx3d" IOKit)
+	LIBYUNI_CONFIG_FRAMEWORK("gfx3d" OpenGL)
 ENDIF(APPLE)
 
 
@@ -39,7 +40,7 @@ Set(SRC_GFX3D
 		# Font
 		gfx/text/font.h gfx/text/label.h
 		gfx/text/wgl.h gfx/text/wgl.cpp
-		)
+	)
 
 
 #
