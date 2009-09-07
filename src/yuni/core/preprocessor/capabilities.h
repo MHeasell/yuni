@@ -215,4 +215,21 @@
 # endif
 
 
+
+/*!
+** \brief Thread-local variable
+*/
+/* Usage Example :
+** \code
+** YUNI_THREAD_LOCAL int myThreadLocalVariable = 0;
+** \endcode
+*/
+# if defined(YUNI_OS_MSVC) || defined(__INTEL_COMPILER)
+#	define YUNI_THREAD_LOCAL __declspec(thread)
+# else
+#	define YUNI_THREAD_LOCAL __thread
+# endif
+# endif
+
+
 #endif /* __YUNI_PREPROCESSOR_OS_DETECTION_H__ */
