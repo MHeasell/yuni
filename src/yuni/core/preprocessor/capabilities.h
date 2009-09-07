@@ -229,7 +229,6 @@
 # else
 #	define YUNI_THREAD_LOCAL __thread
 # endif
-# endif
 
 
 #endif /* __YUNI_PREPROCESSOR_OS_DETECTION_H__ */
