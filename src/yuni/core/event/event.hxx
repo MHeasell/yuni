@@ -29,6 +29,7 @@ namespace Yuni
 	inline void Event<P>::clear()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
+		AncestorType::pBindList.clear();
 	}
 
 
@@ -83,6 +84,14 @@ namespace Yuni
 		AncestorType::pBindList.push_back(b);
 	}
 
+	template<typename P>
+	template<typename U>
+	void Event<P>::remove(const U* object)
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		// TODO FixMe
+		(void)object;
+	}
 
 
 	template<typename P>
