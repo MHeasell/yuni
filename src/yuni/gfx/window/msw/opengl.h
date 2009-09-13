@@ -4,9 +4,9 @@
 # include "../../yuni.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
-#	include "../../core/system/windows.hdr.h"
+#	include "../../../core/system/windows.hdr.h"
 #	include "msw.h"
-#	include "../render/opengl.h"
+#	include "../../render/opengl.h"
 
 
 namespace Yuni

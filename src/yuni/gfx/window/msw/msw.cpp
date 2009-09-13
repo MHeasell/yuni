@@ -1,6 +1,8 @@
 
 #include "msw.h"
-#include "../../core/string.h"
+#include "../../../core/string.h"
+
+
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
 
@@ -92,6 +94,8 @@ namespace Window
 		}
 
 	} // anonymous namespace
+
+
 
 
 	bool AMSWindows::initialize()

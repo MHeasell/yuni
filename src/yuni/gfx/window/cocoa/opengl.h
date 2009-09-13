@@ -1,9 +1,9 @@
 #ifndef __YUNI_GFX_WINDOW_OPENGL_COCOA_H__
 # define __YUNI_GFX_WINDOW_OPENGL_COCOA_H__
 
-# include "../../yuni.h"
-# include "window.h"
-# include "../render/opengl.h"
+# include "../../../yuni.h"
+# include "../window.h"
+# include "../../render/opengl.h"
 
 
 namespace Yuni

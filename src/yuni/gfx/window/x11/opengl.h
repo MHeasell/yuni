@@ -1,13 +1,13 @@
 #ifndef __YUNI_GFX3D_WINDOW_OPENGLX11_H__
 # define __YUNI_GFX3D_WINDOW_OPENGLX11_H__
 
-# include "../../yuni.h"
+# include "../../../yuni.h"
 
 # ifdef YUNI_WINDOWSYSTEM_X11
 
 #	include "x11yuni.h"
-#	include "window.h"
-#	include "../render/opengl.h"
+#	include "../window.h"
+#	include "../../render/opengl.h"
 
 
 namespace Yuni

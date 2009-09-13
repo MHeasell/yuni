@@ -19,6 +19,7 @@ namespace Gfx
 namespace Window
 {
 
+
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
@@ -149,6 +150,7 @@ namespace Window
 	** be determined using the device.
 	*/
 	AWindow* Create(const String& title, const Device::Ptr& device);
+
 
 
 

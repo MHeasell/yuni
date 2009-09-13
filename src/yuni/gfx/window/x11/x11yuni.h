@@ -2,7 +2,7 @@
 # define __YUNI_GFX_WINDOW_X11_YUNI_H__
 
 
-# include "../../yuni.h"
+# include "../../../yuni.h"
 # include <GL/glx.h>
 
 // The define None from the X11 headers overlaps with Yuni::None...
