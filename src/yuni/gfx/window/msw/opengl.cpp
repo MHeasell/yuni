@@ -1,7 +1,9 @@
 
-#include "openglmsw.h"
-#include "../api/gl.h"
-#include "../../core/string.h"
+#include "../msw/opengl.h"
+#include "../../api/gl.h"
+#include "../../../core/string.h"
+
+
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
 

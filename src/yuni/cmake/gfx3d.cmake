@@ -25,12 +25,12 @@ Set(SRC_GFX3D
 		gfx/window/window.h
 		gfx/window/window.hxx
 		gfx/window/window.cpp
-		gfx/window/msw.h
-		gfx/window/directxmsw.h
-		gfx/window/openglmsw.h
-		gfx/window/openglx11.h
-		gfx/window/openglcocoa.h
-		gfx/window/x11yuni.h
+		gfx/window/msw/msw.h
+		gfx/window/msw/directx.h
+		gfx/window/msw/opengl.h
+		gfx/window/x11/opengl.h
+		gfx/window/x11/x11yuni.h
+		gfx/window/cocoa/opengl.h
 
 		# Renderer
 		gfx/render/renderer.h gfx/render/renderer.cpp
@@ -75,7 +75,7 @@ IF (WIN32)
 			"$ENV{PROGRAMFILES}/Microsoft DirectX SDK/Lib/x86"
 		DOC "The directory where d3dx9.lib resides")
 
-	SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw.cpp gfx/window/openglmsw.cpp)
+	SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw/msw.cpp gfx/window/msw/opengl.cpp)
 
 	IF(D3D9_LIBRARY AND D3DX9_LIBRARY)
 		SET(DX9_LIBRARIES "${D3D9_LIBRARY}" "${D3DX9_LIBRARY}")
@@ -86,7 +86,7 @@ IF (WIN32)
 			Message(STATUS "  DX include: ${DX9_INCLUDE_PATH}")
 			Message(STATUS "  DX libs: ${D3X9_LIBRARY} ${D3DX9_LIBRARY}")
 			Set(YUNI_COMPILED_WITH_SUPPORT_FOR_DIRECTX 1)
-			SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/directxmsw.cpp)
+			SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw/directx.cpp)
 			Include_Directories("${DX9_INCLUDE_PATH}")
 			LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${DX9_INCLUDE_PATH}")
 			LIBYUNI_CONFIG_DEFINITION("gfx3d"  "YUNI_USE_DIRECTX")
@@ -96,7 +96,7 @@ IF (WIN32)
 ELSE(WIN32)
 	IF(APPLE)
 	ELSE(APPLE)
-		Set(SRC_GFX3D ${SRC_GFX3D} gfx/window/openglx11.cpp)
+		Set(SRC_GFX3D ${SRC_GFX3D} gfx/window/x11/opengl.cpp)
 		LIBYUNI_CONFIG_LIB("gfx3d" "GL")
 		LIBYUNI_CONFIG_LIB("gfx3d" "GLU")
 	ENDIF(APPLE)

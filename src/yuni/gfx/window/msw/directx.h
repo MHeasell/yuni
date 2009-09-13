@@ -1,11 +1,11 @@
 #ifndef __YUNI_GFX_WINDOW_DIRECTX_MSW_H__
 # define __YUNI_GFX_WINDOW_DIRECTX_MSW_H__
 
-# include "../../yuni.h"
+# include "../../../yuni.h"
 
 # if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
-#	include "../../core/system/windows.hdr.h"
-#	include "../api/dx9.h"
+#	include "../../../core/system/windows.hdr.h"
+#	include "../../api/dx9.h"
 #	include "msw.h"
 
 

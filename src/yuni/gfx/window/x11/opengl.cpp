@@ -1,9 +1,9 @@
 
-#include "../../yuni.h"
+#include "../../../yuni.h"
 
 #ifdef YUNI_WINDOWSYSTEM_X11
 
-# include "openglx11.h"
+# include "../x11/opengl.h"
 
 
 namespace Yuni

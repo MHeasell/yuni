@@ -48,6 +48,8 @@ namespace Window
 		onInternalTitleChangedWL();
 	}
 
+
+
 } // namespace Window
 } // namespace Gfx
 } // namespace Yuni

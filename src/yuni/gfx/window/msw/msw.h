@@ -2,11 +2,13 @@
 # define __YUNI_GFX_WINDOW_MSWINDOWS_H__
 
 # include <list>
-# include "../../yuni.h"
+# include "../../../yuni.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
-#	include "../../core/system/windows.hdr.h"
-#	include "window.h"
+#	include "../../../core/system/windows.hdr.h"
+#	include "../window.h"
+
+
 
 namespace Yuni
 {

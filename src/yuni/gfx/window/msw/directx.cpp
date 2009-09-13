@@ -1,6 +1,6 @@
 
-#include "directxmsw.h"
-#include "../../core/string.h"
+#include "../msw/directx.h"
+#include "../../../core/string.h"
 
 #if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
 
