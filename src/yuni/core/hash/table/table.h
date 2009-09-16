@@ -1,5 +1,7 @@
-#ifndef __YUNI_CORE_HASH_TABLE_H__
-# define __YUNI_CORE_HASH_TABLE_H__
+#ifndef __YUNI_HASH_TABLE_TABLE_H__
+# define __YUNI_HASH_TABLE_TABLE_H__
+
+# include <map>
 
 
 namespace Yuni
@@ -8,134 +10,82 @@ namespace Hash
 {
 
 
-
-	template<typename K, typename V, template<typename,typename> class Impl>
-	class Table : protected Impl<K,V>
+	template<class KeyT, class ValueT, class ImplT = std::map<KeyT,ValueT> >
+	class Index : protected ImplT
 	{
 	public:
-		//! Type of any key
-		typedef K KeyType;
-		//! Type of any value
-		typedef V ValueType;
-		//! Type of the implementation
-		typedef Impl<K,V> ImplementationType;
+		//! Type of the key
+		typedef KeyT KeyType;
+		//! Type for a value
+		typedef ValueT ValueType;
 
-		//! Iterator
-		typedef ImplementationType::iterator iterator;
-		typedef ImplementationType::const_iterator const_iterator;
+		//! The real implementation
+		typedef ImplT ImplementationType;
 
-	public:
-		/*!
-		** \brief Get the name of the current implementation
-		*/
-		const char* ImplementationName() {return Impl::ImplementationName();}
+		//! Size
+		typedef typename ImplementationType::size_type size_type;
 
 	public:
-		//! \name Constructor
+		//! \name Constructors & Destructor
 		//@{
-		//! Default constructor
-		Table() {}
+		Table();
 		//! Destructor
-		~Table() {}
+		~Table();
 		//@}
 
-		iterator begin()
+		template<class K> iterator addOrUpdate(const K& key)
 		{
-			return Impl::begin();
+			return ImplementationType::template addOrUpdate<K>(key);
 		}
 
-		const_iterator begin() const
+		template<class K, class V> iterator addOrUpdate(const K& key, const V& value)
 		{
-			return Impl::begin();
+			return ImplementationType::template addOrUpdate<K,V>(key, value);
 		}
 
-
-		iterator end()
-		{
-			return Impl::end();
-		}
-
-		const_iterator end() const
-		{
-			return Impl::end();
-		}
-
-
-
+		/*!
+		** \brief Remove all items
+		*/
 		void clear()
 		{
-			Impl::clear();
+			ImplementationType::clear();
 		}
 
+		/*!
+		** \brief Clear all deleted items (if any)
+		*/
+		void purge()
+		{
+			ImplementationType::purge();
+		}
+
+		template<class K>
 		bool exists(const K& key) const
 		{
-			return Impl::exists(key);
+			return ImplementationType::exists(key);
 		}
 
-		iterator find(const K& key)
+	
+		template<class K> bool remove(const K& key)
 		{
-			return Impl::find(key);
+			return false;
 		}
 
-		const_iterator find(const K& key) const
+		bool empty() const
 		{
-			return Impl::find(key);
+			return ImplementationType::empty();
 		}
 
-
-		bool insert(const K& key, const V& value = V())
+		size_type size() const
 		{
-			return Impl::insert(key, value);
+			return ImplementationType::size();
 		}
 
-		bool update(const K& key, const V& value)
+		template<class K> ValueType& operator [] (const K& key)
 		{
-			return Impl::update(key, value);
 		}
 
-		void insertOrUpdate(const K& key, const V& value)
-		{
-			Impl::insertOrUpdate(key, value);
-		}
-
-		void erase(const iterator& i)
-		{
-			Impl::erase(i);
-		}
-
-		bool remove(const K& key)
-		{
-			Impl::erase(Impl::find(key));
-		}
-
-		unsigned int size() const
-		{
-			return Impl::size();
-		}
-
-		unsigned int capacity() const
-		{
-			return Impl::capacity();
-		}
-
-		void reserve(unsigned int n)
-		{
-			Impl::reserve(n);
-		}
-
-
-		V& operator [] (const K& key)
-		{
-			iterator i = Impl::find(key);
-			if (i == Impl::end())
-			{
-				insert(key);
-				iterator i = Impl::find(key);
-			}
-			return i.second;
-		}
-
-	}; // class Table
+	}; // class Table<>
 
 
 
@@ -144,4 +94,5 @@ namespace Hash
 } // namespace Hash
 } // namespace Yuni
 
-#endif // __YUNI_CORE_HASH_TABLE_H__
+
+#endif // __YUNI_HASH_TABLE_TABLE_H__

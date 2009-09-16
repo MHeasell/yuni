@@ -19,8 +19,8 @@ namespace Logs
 	class NullHandler
 	{
 	public:
-		template<class FirstDecorator, class VerbosityType>
-		static void internalDecoratorWriteWL(const String&)
+		template<class FirstDecorator, class VerbosityType, class StringT>
+		static void internalDecoratorWriteWL(const StringT&)
 		{
 			/* Do nothing */
 		}
@@ -35,8 +35,8 @@ namespace Logs
 	class NullDecorator
 	{
 	public:
-		template<class Handler, class VerbosityType, class O>
-		static void internalDecoratorAddPrefix(O&, const String&)
+		template<class Handler, class VerbosityType, class O, class StringT>
+		static void internalDecoratorAddPrefix(O&, const StringT&)
 		{
 			/* Do nothing */
 		}

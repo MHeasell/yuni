@@ -29,7 +29,7 @@ namespace LogsDecorator
 
 	# else
 
-	void WriteCurrentTimestampToBuffer(char* buffer)
+	void WriteCurrentTimestampToBuffer(char buffer[32])
 	{
 		time_t rawtime;
 		::time(&rawtime);

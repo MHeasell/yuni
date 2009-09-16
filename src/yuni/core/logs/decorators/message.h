@@ -15,25 +15,25 @@ namespace Logs
 	class Message : public LeftType
 	{
 	public:
-		template<class Handler, class VerbosityType, class O>
-		void internalDecoratorAddPrefix(O& out, const String& s)
+		template<class Handler, class VerbosityType, class O, class StringT>
+		void internalDecoratorAddPrefix(O& out, const StringT& s)
 		{
 			// Write the message itself
 			out.put(' ');
 
 			// Color
-			if (VerbosityType::messageColor != System::Console::none)
+			if (VerbosityType::messageColor != System::Console::none && Handler::unixColorsAllowed)
 				System::Console::TextColor<VerbosityType::messageColor>::Set(out);
 
 			// The message
 			out.write(s.c_str(), s.length());
 
 			// Resetting the color
-			if (VerbosityType::messageColor != System::Console::none)
+			if (VerbosityType::messageColor != System::Console::none && Handler::unixColorsAllowed)
 				System::Console::ResetTextColor(out);
 
 			// Transmit the message to the next handler
-			LeftType:: template internalDecoratorAddPrefix<Handler, VerbosityType,O>(out, s);
+			LeftType:: template internalDecoratorAddPrefix<Handler, VerbosityType,O,StringT>(out, s);
 		}
 
 	}; // class VerbosityLevel

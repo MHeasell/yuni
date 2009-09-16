@@ -34,15 +34,15 @@ namespace Logs
 		//@}
 
 
-		template<class Handler, class VerbosityType, class O>
-		void internalDecoratorAddPrefix(O& out, const String& s)
+		template<class Handler, class VerbosityType, class O, class StringT>
+		void internalDecoratorAddPrefix(O& out, const StringT& s)
 		{
 			// Write the verbosity to the output
 			out.put('[');
 			out.write(pApplicationName.c_str(), pApplicationName.size());
 			out.put(']');
 			// Transmit the message to the next handler
-			LeftType:: template internalDecoratorAddPrefix<Handler, VerbosityType,O>(out, s);
+			LeftType:: template internalDecoratorAddPrefix<Handler, VerbosityType,O,StringT>(out, s);
 		}
 
 	private:

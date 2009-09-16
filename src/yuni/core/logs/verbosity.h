@@ -35,7 +35,7 @@ namespace Verbosity
 	struct Fatal
 	{
 		static const char* Name() {return "!!fatal";}
-		template<class U> static void AppendName(U& u) {u << "fatal";}
+		template<class U> static void AppendName(U& u) {u << "[fatal]";}
 		enum
 		{
 			level = 1000,
@@ -55,7 +55,7 @@ namespace Verbosity
 	struct Error
 	{
 		static const char* Name() {return "error";}
-		template<class U> static void AppendName(U& u) {u << "error";}
+		template<class U> static void AppendName(U& u) {u << "[error]";}
 		enum
 		{
 			level = 2000,
@@ -75,7 +75,7 @@ namespace Verbosity
 	struct Warning
 	{
 		static const char* Name() {return "warning";}
-		template<class U> static void AppendName(U& u) {u << "warns";}
+		template<class U> static void AppendName(U& u) {u << "[warns]";}
 		enum
 		{
 			level = 3000,
@@ -95,7 +95,7 @@ namespace Verbosity
 	struct Checkpoint
 	{
 		static const char* Name() {return "checkpoint";}
-		template<class U> static void AppendName(U& u) {u << "check";}
+		template<class U> static void AppendName(U& u) {u << "[check]";}
 
 		enum
 		{
@@ -116,7 +116,7 @@ namespace Verbosity
 	struct Notice
 	{
 		static const char* Name() {return "notice";}
-		template<class U> static void AppendName(U& u) {u << "notic";}
+		template<class U> static void AppendName(U& u) {u << "[notic]";}
 
 		enum
 		{
@@ -137,7 +137,7 @@ namespace Verbosity
 	struct Info
 	{
 		static const char* Name() {return "info";}
-		template<class U> static void AppendName(U& u) {u << "infos";}
+		template<class U> static void AppendName(U& u) {u << "[infos]";}
 
 		enum
 		{
@@ -158,7 +158,7 @@ namespace Verbosity
 	struct Debug
 	{
 		static const char* Name() {return "debug";}
-		template<class U> static void AppendName(U& u) {u << "debug";}
+		template<class U> static void AppendName(U& u) {u << "[debug]";}
 
 		enum
 		{

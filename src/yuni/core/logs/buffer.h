@@ -1,6 +1,9 @@
 #ifndef __YUNI_CORE_LOGS_STREAM_H__
 # define __YUNI_CORE_LOGS_STREAM_H__
 
+# include "../../yuni.h"
+# include "../string.h"
+
 
 namespace Yuni
 {
@@ -9,11 +12,17 @@ namespace Private
 namespace LogImpl
 {
 
+	// Forward declaration
+	template<class LogT, class V, int E = V::enabled> class Buffer;
+
+
+
+
 	/*!
 	** \brief The buffer for the message
 	**
 	** \internal This is an intermediate class that handles a temporary buffer where
-	** the message can be built. The message will be really handled by the static list
+	** the message can be built. The message will be dispatched to the static list
 	** of handlers when this class is destroyed. The method `internalFlush()` is called
 	** , which ensures thread-safety (if required) while the message is passing through
 	** the handlers.
@@ -22,7 +31,7 @@ namespace LogImpl
 	** \tparam E A non-zero value if the message must be managed
 	*/
 	template<class LogT, class V, int E>
-	class Writer
+	class Buffer
 	{
 	public:
 		//! Type of the calling logger
@@ -31,25 +40,28 @@ namespace LogImpl
 	public:
 		//! \name Constructos & Destructor
 		//@{
-		inline Writer(LoggerType& l)
+		inline Buffer(LoggerType& l)
 			:pLogger(l)
 		{}
 
 		template<typename U>
-		inline Writer(LoggerType& l, U u)
+		inline Buffer(LoggerType& l, U u)
 			:pLogger(l)
 		{
 			pBuffer.append(u);
 		}
 
-		~Writer()
+		~Buffer()
 		{
-			pLogger.template internalFlush<V>(pBuffer);
+			// Dispatching the messages to the handlers
+			// For example, the buffer will be written to the output
+			pLogger.template dispatchMessageToHandlers<V>(pBuffer);
 		}
 		//@}
 
-		template<typename U> Writer& operator << (const U& u)
+		template<typename U> Buffer& operator << (const U& u)
 		{
+			// Appending the piece of message to the buffer
 			pBuffer.append(u);
 			return *this;
 		}
@@ -57,39 +69,47 @@ namespace LogImpl
 	private:
 		//! Reference to the original logger
 		LoggerType& pLogger;
-		//! Buffer that contains the message
-		String pBuffer;
 
-	}; // class Writer
+		/*!
+		** \brief Buffer that contains the message
+		**
+		** The chunk size can not be merely the default one; Log entries often
+		** contain path of filename for example.
+		*/
+		StringBase<char, 512> pBuffer;
+
+	}; // class Buffer
+
+
 
 
 
 
 	// Specialization when a verbosty level is disabled
 	template<class LogT, class V>
-	class Writer<LogT,V,0>
+	class Buffer<LogT,V,0>
 	{
 	public:
 		//! Type of the calling logger
 		typedef LogT LoggerType;
 
 	public:
-		Writer(LoggerType&)
-		{}
-		template<typename U>
-		Writer(LoggerType&, U)
+		Buffer(LoggerType&) {}
+
+		template<typename U> Buffer(LoggerType&, U) {}
+
+		~Buffer()
 		{}
 
-		~Writer()
-		{}
-
-		template<typename U> Writer& operator << (const U&)
+		template<typename U> Buffer& operator << (const U&)
 		{
 			// Do nothing - Disabled
 			return *this;
 		}
 
-	}; // class Writer
+	}; // class Buffer
+
+
 
 
 } // namespace LogImpl
