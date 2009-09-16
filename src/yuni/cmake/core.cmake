@@ -98,9 +98,11 @@ source_group(Core\\Stl FILES ${SRC_CORE_STL})
 
 Set(SRC_CORE_LOGS
 				core/logs/logs.h core/logs/logs.hxx core/logs/verbosity.h
-				core/logs/null.h	core/logs/stream.h
+				core/logs/null.h
+				core/logs/buffer.h
 				# Handlers
 				core/logs/handlers/stdcout.h
+				core/logs/handlers/file.h
 				# Decorators
 				core/logs/decorators/verbositylevel.h
 				core/logs/decorators/time.h

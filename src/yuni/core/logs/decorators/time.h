@@ -15,7 +15,7 @@ namespace LogsDecorator
 	# if defined(YUNI_OS_MINGW)
 	char* WriteCurrentTimestampToBufferMinGW(void);
 	# else
-	void WriteCurrentTimestampToBuffer(char* buffer);
+	void WriteCurrentTimestampToBuffer(char buffer[32]);
 	# endif
 
 } // namespace LogsDecorator
@@ -33,25 +33,23 @@ namespace Logs
 	class Time : public LeftType
 	{
 	public:
-		template<class Handler, class VerbosityType, class O>
-		void internalDecoratorAddPrefix(O& out, const String& s)
+		template<class Handler, class VerbosityType, class O, class StringT>
+		void internalDecoratorAddPrefix(O& out, const StringT& s)
 		{
-			// Write the verbosity to the output
+			out.put('[');
+
 			# ifndef YUNI_OS_MINGW
 			char asc[32]; // MSDN specifies that the buffer length value must be >= 26 for validity
 			Private::LogsDecorator::WriteCurrentTimestampToBuffer(asc);
-			# endif
-
-			out.put('[');
-			# ifndef YUNI_OS_MINGW
 			out.write(asc, 23);
 			# else
 			out += Private::LogsDecorator::WriteCurrentTimestampToBufferMinGW();
 			# endif
+
 			out.put(']');
 
 			// Transmit the message to the next decorator
-			LeftType::template internalDecoratorAddPrefix<Handler, VerbosityType,O>(out, s);
+			LeftType::template internalDecoratorAddPrefix<Handler, VerbosityType,O,StringT>(out, s);
 		}
 
 	}; // class Time

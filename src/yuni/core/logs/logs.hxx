@@ -8,174 +8,178 @@ namespace Logs
 {
 
 
-	template<template<class> class TP, class Handler, class Decorator>
-	inline Logger<TP,Handler,Decorator>::Logger()
-		:pMaxLevel(Logger<TP,Handler,Decorator>::defaultVerbosityLevel)
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline Logger<Handlers,Decorators,TP>::Logger()
+		:verbosityLevel(Logger<Handlers,Decorators,TP>::defaultVerbosityLevel)
 	{}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
-	inline Logger<TP,Handler,Decorator>::Logger(const Logger&)
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline Logger<Handlers,Decorators,TP>::Logger(const Logger&)
 	{
 		YUNI_STATIC_ASSERT(false, ThisClassCannotBeCopied);
 	}
 
 
 
-	template<template<class> class TP, class Handler, class Decorator>
-	inline Logger<TP,Handler,Decorator>::~Logger()
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline Logger<Handlers,Decorators,TP>::~Logger()
 	{}
 
 
 
-	template<template<class> class TP, class Handler, class Decorator>
-	template<class VerbosityType>
+	template<class Handlers, class Decorators, template<class> class TP>
+	template<class VerbosityType, class StringT>
 	void
-	Logger<TP,Handler,Decorator>::internalFlush(const String& s)
+	Logger<Handlers,Decorators,TP>::dispatchMessageToHandlers(const StringT& s)
 	{
+		// Locking the operation, according to the threading policy
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		if (VerbosityType::level <= pMaxLevel)
+
+		// Filtering the verbosity level
+		// 'verbosityLevel' is a public variable
+		if (VerbosityType::level <= verbosityLevel)
 		{
 			// Ask to all handlers to internalDecoratorWriteWL the message
-			Handler:: template internalDecoratorWriteWL<Decorator,VerbosityType>(s);
+			Handlers::template internalDecoratorWriteWL<Decorators,VerbosityType, StringT>(s);
 		}
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
-	inline typename Logger<TP,Handler,Decorator>::NoticeWriter
-	Logger<TP,Handler,Decorator>::notice()
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline typename Logger<Handlers,Decorators,TP>::NoticeBuffer
+	Logger<Handlers,Decorators,TP>::notice()
 	{
-		return NoticeWriter(*this);
+		return NoticeBuffer(*this);
 	}
 
-	template<template<class> class TP, class Handler, class Decorator>
-	inline typename Logger<TP,Handler,Decorator>::InfoWriter
-	Logger<TP,Handler,Decorator>::info()
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline typename Logger<Handlers,Decorators,TP>::InfoBuffer
+	Logger<Handlers,Decorators,TP>::info()
 	{
-		return InfoWriter(*this);
-	}
-
-
-
-	template<template<class> class TP, class Handler, class Decorator>
-	inline typename Logger<TP,Handler,Decorator>::CheckpointWriter
-	Logger<TP,Handler,Decorator>::checkpoint()
-	{
-		return typename Logger<TP,Handler,Decorator>::CheckpointWriter(*this);
+		return InfoBuffer(*this);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
-	inline typename Logger<TP,Handler,Decorator>::WarningWriter
-	Logger<TP,Handler,Decorator>::warning()
+
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline typename Logger<Handlers,Decorators,TP>::CheckpointBuffer
+	Logger<Handlers,Decorators,TP>::checkpoint()
 	{
-		return WarningWriter(*this);
+		return typename Logger<Handlers,Decorators,TP>::CheckpointBuffer(*this);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
-	inline typename Logger<TP,Handler,Decorator>::ErrorWriter
-	Logger<TP,Handler,Decorator>::error()
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline typename Logger<Handlers,Decorators,TP>::WarningBuffer
+	Logger<Handlers,Decorators,TP>::warning()
 	{
-		return ErrorWriter(*this);
+		return WarningBuffer(*this);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
-	inline typename Logger<TP,Handler,Decorator>::FatalWriter
-	Logger<TP,Handler,Decorator>::fatal()
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline typename Logger<Handlers,Decorators,TP>::ErrorBuffer
+	Logger<Handlers,Decorators,TP>::error()
 	{
-		return FatalWriter(*this);
+		return ErrorBuffer(*this);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
-	inline typename Logger<TP,Handler,Decorator>::DebugWriter
-	Logger<TP,Handler,Decorator>::debug()
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline typename Logger<Handlers,Decorators,TP>::FatalBuffer
+	Logger<Handlers,Decorators,TP>::fatal()
 	{
-		return DebugWriter(*this);
+		return FatalBuffer(*this);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline typename Logger<Handlers,Decorators,TP>::DebugBuffer
+	Logger<Handlers,Decorators,TP>::debug()
+	{
+		return DebugBuffer(*this);
+	}
+
+
+	template<class Handlers, class Decorators, template<class> class TP>
 	template<typename U>
-	inline typename Logger<TP,Handler,Decorator>::NoticeWriter
-	Logger<TP,Handler,Decorator>::notice(const U& u)
+	inline typename Logger<Handlers,Decorators,TP>::NoticeBuffer
+	Logger<Handlers,Decorators,TP>::notice(const U& u)
 	{
-		return NoticeWriter(*this, u);
+		return NoticeBuffer(*this, u);
 	}
 
-	template<template<class> class TP, class Handler, class Decorator>
+	template<class Handlers, class Decorators, template<class> class TP>
 	template<typename U>
-	inline typename Logger<TP,Handler,Decorator>::InfoWriter
-	Logger<TP,Handler,Decorator>::info(const U& u)
+	inline typename Logger<Handlers,Decorators,TP>::InfoBuffer
+	Logger<Handlers,Decorators,TP>::info(const U& u)
 	{
-		return InfoWriter(*this, u);
+		return InfoBuffer(*this, u);
 	}
 
 
 
-	template<template<class> class TP, class Handler, class Decorator>
+	template<class Handlers, class Decorators, template<class> class TP>
 	template<typename U>
-	inline typename Logger<TP,Handler,Decorator>::CheckpointWriter
-	Logger<TP,Handler,Decorator>::checkpoint(const U& u)
+	inline typename Logger<Handlers,Decorators,TP>::CheckpointBuffer
+	Logger<Handlers,Decorators,TP>::checkpoint(const U& u)
 	{
-		return CheckpointWriter(*this, u);
+		return CheckpointBuffer(*this, u);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
+	template<class Handlers, class Decorators, template<class> class TP>
 	template<typename U>
-	inline typename Logger<TP,Handler,Decorator>::WarningWriter
-	Logger<TP,Handler,Decorator>::warning(const U& u)
+	inline typename Logger<Handlers,Decorators,TP>::WarningBuffer
+	Logger<Handlers,Decorators,TP>::warning(const U& u)
 	{
-		return WarningWriter(*this, u);
+		return WarningBuffer(*this, u);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
+	template<class Handlers, class Decorators, template<class> class TP>
 	template<typename U>
-	inline typename Logger<TP,Handler,Decorator>::ErrorWriter
-	Logger<TP,Handler,Decorator>::error(const U& u)
+	inline typename Logger<Handlers,Decorators,TP>::ErrorBuffer
+	Logger<Handlers,Decorators,TP>::error(const U& u)
 	{
-		return ErrorWriter(*this, u);
+		return ErrorBuffer(*this, u);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
+	template<class Handlers, class Decorators, template<class> class TP>
 	template<typename U>
-	inline typename Logger<TP,Handler,Decorator>::FatalWriter
-	Logger<TP,Handler,Decorator>::fatal(const U& u)
+	inline typename Logger<Handlers,Decorators,TP>::FatalBuffer
+	Logger<Handlers,Decorators,TP>::fatal(const U& u)
 	{
-		return FatalWriter(*this, u);
+		return FatalBuffer(*this, u);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
+	template<class Handlers, class Decorators, template<class> class TP>
 	template<typename U>
-	inline typename Logger<TP,Handler,Decorator>::DebugWriter
-	Logger<TP,Handler,Decorator>::debug(const U& u)
+	inline typename Logger<Handlers,Decorators,TP>::DebugBuffer
+	Logger<Handlers,Decorators,TP>::debug(const U& u)
 	{
-		return DebugWriter(*this, u);
+		return DebugBuffer(*this, u);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
+	template<class Handlers, class Decorators, template<class> class TP>
 	template<class C>
-	inline Private::LogImpl::Writer<Logger<TP,Handler,Decorator>, C, C::enabled>
-	Logger<TP,Handler,Decorator>::custom()
+	inline Private::LogImpl::Buffer<Logger<Handlers,Decorators,TP>, C, C::enabled>
+	Logger<Handlers,Decorators,TP>::custom()
 	{
-		return Private::LogImpl::Writer<LoggerType, C, C::enabled>(*this);
+		return Private::LogImpl::Buffer<LoggerType, C, C::enabled>(*this);
 	}
 
 
-	template<template<class> class TP, class Handler, class Decorator>
+	template<class Handlers, class Decorators, template<class> class TP>
 	template<typename U>
-	inline typename Logger<TP,Handler,Decorator>::UnknownWriter
-	Logger<TP,Handler,Decorator>::operator << (const U& u)
+	inline typename Logger<Handlers,Decorators,TP>::UnknownBuffer
+	Logger<Handlers,Decorators,TP>::operator << (const U& u)
 	{
-		return UnknownWriter(*this, u);
+		return UnknownBuffer(*this, u);
 	}
 
 

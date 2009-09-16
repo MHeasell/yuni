@@ -223,11 +223,15 @@
 ** \code
 ** YUNI_THREAD_LOCAL int myThreadLocalVariable = 0;
 ** \endcode
+**
+** \see Rules and Limitations for TLS on Windows http://msdn.microsoft.com/en-us/library/2s9wt68x.aspx
 */
 # if defined(YUNI_OS_MSVC) || defined(__INTEL_COMPILER)
 #	define YUNI_THREAD_LOCAL __declspec(thread)
+#	define YUNI_HAS_THREAD_LOCAL_STORAGE 1
 # else
 #	define YUNI_THREAD_LOCAL __thread
+#	define YUNI_HAS_THREAD_LOCAL_STORAGE 1
 # endif
 
 

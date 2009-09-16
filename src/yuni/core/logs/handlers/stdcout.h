@@ -32,8 +32,8 @@ namespace Logs
 		};
 
 	public:
-		template<class FirstDecorator, class VerbosityType>
-		void internalDecoratorWriteWL(const String& s)
+		template<class FirstDecorator, class VerbosityType, class StringT>
+		void internalDecoratorWriteWL(const StringT& s)
 		{
 			// Write the message to the std::cout/cerr
 			if (VerbosityType::shouldUsesStdCerr)
@@ -50,7 +50,7 @@ namespace Logs
 			}
 
 			// Transmit the message to the next handler
-			NextHandler:: template internalDecoratorWriteWL<FirstDecorator, VerbosityType>(s);
+			NextHandler:: template internalDecoratorWriteWL<FirstDecorator, VerbosityType, StringT>(s);
 		}
 
 	}; // class StdCout

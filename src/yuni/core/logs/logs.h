@@ -9,14 +9,16 @@
 
 // Default Handler
 # include "handlers/stdcout.h"
+# include "handlers/file.h"
 // Default decorators
 # include "decorators/verbositylevel.h"
 # include "decorators/time.h"
 # include "decorators/message.h"
 # include "../static/assert.h"
-# include "stream.h"
+# include "buffer.h"
 
 
+// The default verbosity level according the target mode (debug/release)
 # ifdef NDEBUG
 #	define YUNI_LOGS_DEFAULT_VERBOSITY  Verbosity::Notice::level
 # else
@@ -53,26 +55,27 @@ namespace Logs
 	** \code
 	** [date][color][verbosity level][/color] <msg>
 	** \endcode
-	** The color is only available on Unixes.
+	** The color output from the shell is available for both Unix (Terminal) and
+	** Windows (cmd.exe).
 	**
 	**
 	** \tparam TP The Threading Policy
-	** \tapram Handler The first handler in the list
-	** \tparam Decorator The first decorator in the list
+	** \tapram Handlers A static list of all message handlers
+	** \tparam Decorators A static list of all decorators
 	*/
 	template<
-		template<class> class TP = Policy::ObjectLevelLockable, // The Threading Policy
-		class Handler = StdCout<>,
-		class Decorator = Time< VerbosityLevel<Message<> > >
+		class Handlers = StdCout<>,                            // List of all static handles
+		class Decorators = Time< VerbosityLevel<Message<> > >, // List of all static decorators
+		template<class> class TP = Policy::ObjectLevelLockable // The Threading Policy
 		>
 	class Logger
-		:public TP<Logger<TP,Handler,Decorator> >,  // inherits from the Threading Policy
-		public Decorator,                           // inherits from all decorators
-		public Handler                              // inherits from all handlers
+		:public TP<Logger<Handlers,Decorators,TP> >, // inherits from the Threading Policy
+		public Decorators,                           // inherits from all decorators
+		public Handlers                              // inherits from all handlers
 	{
 	public:
 		//! The full prototype of the logger
-		typedef Logger<TP, Handler, Decorator>  LoggerType;
+		typedef Logger<Handlers, Decorators, TP>  LoggerType;
 		//! The Threading Policy
 		typedef TP<LoggerType>  ThreadingPolicy;
 
@@ -85,24 +88,26 @@ namespace Logs
 			defaultVerbosityLevel = YUNI_LOGS_DEFAULT_VERBOSITY,
 		};
 
-	public:
+	private:
 		// Aliases (for code clarity)
-		//! Alias for the CheckpointWriter
-		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Checkpoint, Verbosity::Checkpoint::enabled> CheckpointWriter;
-		//! Alias for the NoticeWriter
-		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Notice, Verbosity::Notice::enabled> NoticeWriter;
-		//! Alias for the NoticeWriter
-		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Info, Verbosity::Info::enabled> InfoWriter;
-		//! Alias for the WarningWriter
-		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Warning, Verbosity::Warning::enabled> WarningWriter;
-		//! Alias for the ErrorWriter
-		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Error, Verbosity::Error::enabled> ErrorWriter;
-		//! Alias for the FatalWriter
-		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Fatal, Verbosity::Fatal::enabled> FatalWriter;
-		//! Alias for the DebugWriter
-		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Debug, Verbosity::Debug::enabled> DebugWriter;
-		//! Alias for the UnknownWriter
-		typedef Private::LogImpl::Writer<LoggerType, Verbosity::Unknown, Verbosity::Unknown::enabled> UnknownWriter;
+		//! Alias for the CheckpointBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Checkpoint> CheckpointBuffer;
+		//! Alias for the NoticeBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Notice>     NoticeBuffer;
+		//! Alias for the NoticeBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Info>       InfoBuffer;
+		//! Alias for the WarningBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Warning>    WarningBuffer;
+		//! Alias for the ErrorBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Error>      ErrorBuffer;
+		//! Alias for the FatalBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Fatal>      FatalBuffer;
+		//! Alias for the DebugBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Debug>      DebugBuffer;
+		//! Alias for a dummy writer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Info, 0>    DummyBuffer;
+		//! Alias for the UnknownBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Unknown>    UnknownBuffer;
 
 	public:
 		//! \name Constructors & Destructor
@@ -124,68 +129,87 @@ namespace Logs
 
 		//! \name Checkpoint
 		//@{
-		CheckpointWriter checkpoint();
-		template<typename U> CheckpointWriter checkpoint(const U& u);
+		CheckpointBuffer checkpoint();
+		template<typename U> CheckpointBuffer checkpoint(const U& u);
 		//@}
 
 		//! \name Notice
 		//@{
-		NoticeWriter notice();
-		template<typename U> NoticeWriter notice(const U& u);
+		NoticeBuffer notice();
+		template<typename U> NoticeBuffer notice(const U& u);
 		//@}
 
 		//! \name Info
 		//@{
-		InfoWriter info();
-		template<typename U> InfoWriter info(const U& u);
+		InfoBuffer info();
+		template<typename U> InfoBuffer info(const U& u);
 		//@}
 
 		//! \name Warning
 		//@{
-		WarningWriter warning();
-		template<typename U> WarningWriter warning(const U& u);
+		WarningBuffer warning();
+		template<typename U> WarningBuffer warning(const U& u);
 		//@}
 
 		//! \name Error
 		//@{
-		ErrorWriter error();
-		template<typename U> ErrorWriter error(const U& u);
+		ErrorBuffer error();
+		template<typename U> ErrorBuffer error(const U& u);
 		//@}
 
 		//! \name Fatal
 		//@{
-		FatalWriter fatal();
-		template<typename U> FatalWriter fatal(const U& u);
+		FatalBuffer fatal();
+		template<typename U> FatalBuffer fatal(const U& u);
 		//@}
 
 		//! \name Debug (disabled if NDEBUG defined)
 		//@{
-		DebugWriter debug();
-		template<typename U> DebugWriter debug(const U& u);
+		DebugBuffer debug();
+		template<typename U> DebugBuffer debug(const U& u);
 		//@}
 
 
 		//! Start a custom verbosity level message
-		template<class C> Private::LogImpl::Writer<LoggerType,C,C::enabled> custom();
+		template<class C> Private::LogImpl::Buffer<LoggerType,C,C::enabled> custom();
 
 		//! Start a message with no verbosity level (always displayed)
-		template<typename U> UnknownWriter operator << (const U& u);
+		template<typename U> UnknownBuffer operator << (const U& u);
 		//@}
+
+	public:
+		/*!
+		** \brief The current maximum verbosity level allowed to be displayed
+		**
+		** \code
+		** Logs::Logger<> logs;
+		**
+		** // Starting with default verbosity level
+		** // The following messages will be displayed
+		** logs.error() << "An error";
+		** logs.notice() << "Hello world";
+		**
+		** // Changing the verbosity level
+		** logs.verbosityLevel = Logs::Verbosity::Error::level; 
+		** // Only the 'error' message will be displayed
+		** logs.error() << "An error";
+		** logs.notice() << "Hello world";
+		** \endcode
+		*/
+		int verbosityLevel;
 
 	private:
 		/*!
 		** \brief Transmit a message to all handlers
 		*/
-		template<class VerbosityType> void internalFlush(const String& s);
-
-	private:
-		//! The maximum verbosity level allowed
-		int pMaxLevel;
+		template<class VerbosityType, class StringT>
+		void dispatchMessageToHandlers(const StringT& s);
 
 		// A friend !
-		template<class, class, int> friend class Private::LogImpl::Writer;
+		template<class, class, int> friend class Private::LogImpl::Buffer;
 
 	}; // class Logger
+
 
 
 

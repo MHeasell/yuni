@@ -1375,6 +1375,7 @@ namespace Yuni
 		Char* pPtr;
 
 		// Friends !
+		template<class C1, int Chunk1> friend class StringBase;
 		template<class StrBase1, class T1> friend struct Private::StringImpl::Length;
 		template<class StrBase1, class T1> friend struct Private::StringImpl::HasChar;
 		template<class StrBase1, class T1> friend struct Private::StringImpl::CountChar;
