@@ -15,13 +15,13 @@ namespace Logs
 	{
 	public:
 		ApplicationName()
-			:pApplicationName("noname")
+			:pAppName("noname")
 		{}
 
 
 		//! \name Apllication Name
 		//@{
-		const String& applicationName() const {return pApplicationName;}
+		const String& applicationName() const {return pAppName;}
 
 		/*!
 		** \brief Set the Application name
@@ -29,25 +29,24 @@ namespace Logs
 		** \warning This method is not thread-safe and should only be used after the creation
 		** of the logger
 		*/
-		void applicationName(const char* s) {pApplicationName = s;}
-		void applicationName(const String& s) {pApplicationName = s;}
+		template<class U> void applicationName(const U& s) {pAppName = s;}
 		//@}
 
 
 		template<class Handler, class VerbosityType, class O, class StringT>
-		void internalDecoratorAddPrefix(O& out, const StringT& s)
+		void internalDecoratorAddPrefix(O& out, const StringT& s) const
 		{
 			// Write the verbosity to the output
 			out.put('[');
-			out.write(pApplicationName.c_str(), pApplicationName.size());
+			out.write(pAppName.c_str(), pAppName.size());
 			out.put(']');
 			// Transmit the message to the next handler
-			LeftType:: template internalDecoratorAddPrefix<Handler, VerbosityType,O,StringT>(out, s);
+			LeftType::template internalDecoratorAddPrefix<Handler, VerbosityType,O,StringT>(out, s);
 		}
 
 	private:
 		//! The Application name
-		String pApplicationName;
+		String pAppName;
 
 	}; // class ApplicationName
 

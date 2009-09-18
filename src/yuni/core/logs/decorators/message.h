@@ -16,7 +16,7 @@ namespace Logs
 	{
 	public:
 		template<class Handler, class VerbosityType, class O, class StringT>
-		void internalDecoratorAddPrefix(O& out, const StringT& s)
+		void internalDecoratorAddPrefix(O& out, const StringT& s) const
 		{
 			// Write the message itself
 			out.put(' ');
@@ -33,7 +33,7 @@ namespace Logs
 				System::Console::ResetTextColor(out);
 
 			// Transmit the message to the next handler
-			LeftType:: template internalDecoratorAddPrefix<Handler, VerbosityType,O,StringT>(out, s);
+			LeftType::template internalDecoratorAddPrefix<Handler, VerbosityType,O,StringT>(out, s);
 		}
 
 	}; // class VerbosityLevel

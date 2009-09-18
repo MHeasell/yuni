@@ -133,6 +133,24 @@ namespace Verbosity
 	}; // class Notice
 
 
+	struct Progress
+	{
+		static const char* Name() {return "progress";}
+		template<class U> static void AppendName(U& u) {u << "[progress]";}
+
+		enum
+		{
+			level = 6000,
+			shouldUsesStdCerr = 0,
+			hasName = 1,
+			enabled = 1,
+		};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::none;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Progress
 
 	struct Info
 	{
@@ -148,6 +166,27 @@ namespace Verbosity
 		};
 		//! Text Color for displaying the verbosity
 		static const System::Console::Color color = System::Console::none;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Info
+
+
+
+	struct Compatibility
+	{
+		static const char* Name() {return "Compatibility";}
+		template<class U> static void AppendName(U& u) {u << "[compatibility notice]";}
+
+		enum
+		{
+			level = 8000,
+			shouldUsesStdCerr = 0,
+			hasName = 1,
+			enabled = 1,
+		};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::yellow;
 		//! Message Text Color
 		static const System::Console::Color messageColor = System::Console::none;
 

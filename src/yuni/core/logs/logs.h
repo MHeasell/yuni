@@ -20,7 +20,7 @@
 
 // The default verbosity level according the target mode (debug/release)
 # ifdef NDEBUG
-#	define YUNI_LOGS_DEFAULT_VERBOSITY  Verbosity::Notice::level
+#	define YUNI_LOGS_DEFAULT_VERBOSITY  Verbosity::Compatibility::level
 # else
 #	define YUNI_LOGS_DEFAULT_VERBOSITY  Verbosity::Debug::level
 # endif
@@ -79,6 +79,11 @@ namespace Logs
 		//! The Threading Policy
 		typedef TP<LoggerType>  ThreadingPolicy;
 
+		//! Handlers
+		typedef Handlers HandlersType;
+		//! Decorators
+		typedef Decorators  DecoratorsType;
+
 		/*!
 		** \brief Settings for the logger
 		*/
@@ -91,23 +96,27 @@ namespace Logs
 	private:
 		// Aliases (for code clarity)
 		//! Alias for the CheckpointBuffer
-		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Checkpoint> CheckpointBuffer;
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Checkpoint>    CheckpointBuffer;
 		//! Alias for the NoticeBuffer
-		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Notice>     NoticeBuffer;
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Notice>        NoticeBuffer;
 		//! Alias for the NoticeBuffer
-		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Info>       InfoBuffer;
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Info>          InfoBuffer;
 		//! Alias for the WarningBuffer
-		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Warning>    WarningBuffer;
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Warning>       WarningBuffer;
 		//! Alias for the ErrorBuffer
-		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Error>      ErrorBuffer;
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Error>         ErrorBuffer;
+		//! Alias for the ProgressBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Progress>      ProgressBuffer;
+		//! Alias for the CompatibilityBuffer
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Compatibility> CompatibilityBuffer;
 		//! Alias for the FatalBuffer
-		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Fatal>      FatalBuffer;
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Fatal>         FatalBuffer;
 		//! Alias for the DebugBuffer
-		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Debug>      DebugBuffer;
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Debug>         DebugBuffer;
 		//! Alias for a dummy writer
-		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Info, 0>    DummyBuffer;
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Info, 0>       DummyBuffer;
 		//! Alias for the UnknownBuffer
-		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Unknown>    UnknownBuffer;
+		typedef Private::LogImpl::Buffer<LoggerType, Verbosity::Unknown>       UnknownBuffer;
 
 	public:
 		//! \name Constructors & Destructor
@@ -157,10 +166,22 @@ namespace Logs
 		template<typename U> ErrorBuffer error(const U& u);
 		//@}
 
+		//! \name Progress
+		//@{
+		ProgressBuffer progress();
+		template<typename U> ProgressBuffer progress(const U& u);
+		//@}
+
 		//! \name Fatal
 		//@{
 		FatalBuffer fatal();
 		template<typename U> FatalBuffer fatal(const U& u);
+		//@}
+
+		//! \name Compatibility notice
+		//@{
+		CompatibilityBuffer compatibility();
+		template<typename U> CompatibilityBuffer compatibility(const U& u);
 		//@}
 
 		//! \name Debug (disabled if NDEBUG defined)

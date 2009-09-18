@@ -49,12 +49,13 @@ namespace Logs
 		}
 
 	public:
-		template<class FirstDecorator, class VerbosityType, class StringT>
-		void internalDecoratorWriteWL(const StringT& s)
+		template<class LoggerT, class VerbosityType, class StringT>
+		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s)
 		{
+			typedef typename LoggerT::DecoratorsType DecoratorsType;
 			// Append the message to the file
-			reinterpret_cast<FirstDecorator*>(this)->
-				template internalDecoratorAddPrefix<File, VerbosityType>(pFile, s);
+			logger.DecoratorsType::template internalDecoratorAddPrefix<File, VerbosityType>(pFile, s);
+
 			// Flushing the result
 			# ifdef YUNI_OS_WINDOWS
 			pFile.write("\r\n", 2); // We are in binary mode
@@ -64,7 +65,7 @@ namespace Logs
 			pFile.flush();
 
 			// Transmit the message to the next handler
-			NextHandler:: template internalDecoratorWriteWL<FirstDecorator, VerbosityType, StringT>(s);
+			NextHandler::template internalDecoratorWriteWL<LoggerT, VerbosityType, StringT>(logger, s);
 		}
 
 

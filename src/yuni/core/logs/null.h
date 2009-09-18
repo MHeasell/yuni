@@ -19,8 +19,8 @@ namespace Logs
 	class NullHandler
 	{
 	public:
-		template<class FirstDecorator, class VerbosityType, class StringT>
-		static void internalDecoratorWriteWL(const StringT&)
+		template<class LoggerT, class VerbosityType, class StringT>
+		static void internalDecoratorWriteWL(LoggerT&, const StringT&)
 		{
 			/* Do nothing */
 		}
