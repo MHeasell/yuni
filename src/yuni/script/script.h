@@ -314,8 +314,8 @@ namespace Script
 
 	public:
 		//! Type for script run-time error events
-		typedef Event::E5<void, Language, const String& /* file */, unsigned int /* line */,
-				unsigned int /* position */, const String& /*errorString */> ScriptErrorEvent;
+		typedef Event<void (Language, const String& /* file */, unsigned int /* line */,
+				unsigned int /* position */, const String& /*errorString */)> ScriptErrorEvent;
 
 		/*!
 		** \brief Event for script errors
