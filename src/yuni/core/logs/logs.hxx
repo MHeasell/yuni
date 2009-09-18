@@ -41,7 +41,7 @@ namespace Logs
 		if (VerbosityType::level <= verbosityLevel)
 		{
 			// Ask to all handlers to internalDecoratorWriteWL the message
-			Handlers::template internalDecoratorWriteWL<Decorators,VerbosityType, StringT>(s);
+			Handlers::template internalDecoratorWriteWL<LoggerType,VerbosityType, StringT>(*this, s);
 		}
 	}
 
@@ -58,6 +58,13 @@ namespace Logs
 	Logger<Handlers,Decorators,TP>::info()
 	{
 		return InfoBuffer(*this);
+	}
+
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline typename Logger<Handlers,Decorators,TP>::CompatibilityBuffer
+	Logger<Handlers,Decorators,TP>::compatibility()
+	{
+		return CompatibilityBuffer(*this);
 	}
 
 
@@ -83,6 +90,14 @@ namespace Logs
 	Logger<Handlers,Decorators,TP>::error()
 	{
 		return ErrorBuffer(*this);
+	}
+
+
+	template<class Handlers, class Decorators, template<class> class TP>
+	inline typename Logger<Handlers,Decorators,TP>::ProgressBuffer
+	Logger<Handlers,Decorators,TP>::progress()
+	{
+		return ProgressBuffer(*this);
 	}
 
 
@@ -144,6 +159,24 @@ namespace Logs
 	Logger<Handlers,Decorators,TP>::error(const U& u)
 	{
 		return ErrorBuffer(*this, u);
+	}
+
+
+	template<class Handlers, class Decorators, template<class> class TP>
+	template<typename U>
+	inline typename Logger<Handlers,Decorators,TP>::ProgressBuffer
+	Logger<Handlers,Decorators,TP>::progress(const U& u)
+	{
+		return ProgressBuffer(*this, u);
+	}
+
+
+	template<class Handlers, class Decorators, template<class> class TP>
+	template<typename U>
+	inline typename Logger<Handlers,Decorators,TP>::CompatibilityBuffer
+	Logger<Handlers,Decorators,TP>::compatibility(const U& u)
+	{
+		return CompatibilityBuffer(*this, u);
 	}
 
 

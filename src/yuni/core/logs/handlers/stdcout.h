@@ -32,25 +32,27 @@ namespace Logs
 		};
 
 	public:
-		template<class FirstDecorator, class VerbosityType, class StringT>
-		void internalDecoratorWriteWL(const StringT& s)
+		template<class LoggerT, class VerbosityType, class StringT>
+		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s)
 		{
+			typedef typename LoggerT::DecoratorsType DecoratorsType;
+
 			// Write the message to the std::cout/cerr
 			if (VerbosityType::shouldUsesStdCerr)
 			{
-				reinterpret_cast<FirstDecorator*>(this)-> template internalDecoratorAddPrefix<StdCout, VerbosityType>(std::cerr, s);
+				logger.DecoratorsType::template internalDecoratorAddPrefix<StdCout, VerbosityType>(std::cerr, s);
 				// Flush
 				std::cerr << std::endl;
 			}
 			else
 			{
-				reinterpret_cast<FirstDecorator*>(this)-> template internalDecoratorAddPrefix<StdCout, VerbosityType>(std::cout, s);
+				logger.DecoratorsType::template internalDecoratorAddPrefix<StdCout, VerbosityType>(std::cout, s);
 				// Flush
 				std::cout << std::endl;
 			}
 
 			// Transmit the message to the next handler
-			NextHandler:: template internalDecoratorWriteWL<FirstDecorator, VerbosityType, StringT>(s);
+			NextHandler::template internalDecoratorWriteWL<LoggerT, VerbosityType, StringT>(logger, s);
 		}
 
 	}; // class StdCout

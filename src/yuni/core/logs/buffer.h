@@ -66,6 +66,20 @@ namespace LogImpl
 			return *this;
 		}
 
+		void appendFormat(const char f[], ...)
+		{
+			va_list parg;
+			va_start(parg, f);
+			pBuffer.vappendFormat(f, parg);
+			va_end(parg);
+		}
+
+		void vappendFormat(const char f[], va_list parg)
+		{
+			pBuffer.vappendFormat(f, parg);
+		}
+
+
 	private:
 		//! Reference to the original logger
 		LoggerType& pLogger;

@@ -34,7 +34,7 @@ namespace Logs
 	{
 	public:
 		template<class Handler, class VerbosityType, class O, class StringT>
-		void internalDecoratorAddPrefix(O& out, const StringT& s)
+		void internalDecoratorAddPrefix(O& out, const StringT& s) const
 		{
 			out.put('[');
 
