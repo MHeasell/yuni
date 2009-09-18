@@ -17,8 +17,19 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/Modules.cmake")
 
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../..")
-ADD_EXECUTABLE(libyuni-config main.cpp versions.cpp program.h program.cpp)
-target_link_libraries(libyuni-config yuni-static-core)
+ADD_EXECUTABLE(libyuni-config
+		../../yuni/core/version/version.cpp
+		../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.cpp
+		../../yuni/core/io/io.cpp
+		../../yuni/core/io/file/file.cpp
+		../../yuni/core/io/file/load.cpp
+		../../yuni/core/io/io.exists.cpp
+		../../yuni/core/io/directory/directory.cpp
+		../../yuni/core/io/directory/current.cpp
+		../../yuni/core/io/directory/make.cpp
+		versions.cpp program.h program.cpp
+		main.cpp)
+
 
 #
 # Stripping
