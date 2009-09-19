@@ -2143,7 +2143,7 @@ namespace Yuni
 			return 2;
 		}
 		out[0] = 0xC3;
-		out[1] = c - 0x40;
+		out[1] = (U)(c - 0x40);
 		return 2;
 	}
 
