@@ -31,6 +31,25 @@ namespace Verbosity
 	}; // class Unknown
 
 
+	struct Quiet
+	{
+		static const char* Name() {return "quiet";}
+		template<class U> static void AppendName(U& u) {u << "[quiet]";}
+		enum
+		{
+			level = 100000, // equivalent to infinite
+			shouldUsesStdCerr = 1,
+			hasName = 1,
+			enabled = 1,
+		};
+		//! Text Color for displaying the verbosity
+		static const System::Console::Color color = System::Console::none;
+		//! Message Text Color
+		static const System::Console::Color messageColor = System::Console::none;
+
+	}; // class Quiet
+
+
 
 	struct Fatal
 	{
