@@ -44,7 +44,7 @@ namespace StringImpl
 
 		static inline C ToLower(const C a)
 		{
-			return std::tolower(a);
+			return (C) std::tolower(a);
 		}
 
 
@@ -128,7 +128,7 @@ namespace StringImpl
 
 		static inline char ToLower(const char a)
 		{
-			return tolower(a);
+			return (char) std::tolower(a);
 		}
 
 
