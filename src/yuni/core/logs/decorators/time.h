@@ -43,7 +43,7 @@ namespace Logs
 			Private::LogsDecorator::WriteCurrentTimestampToBuffer(asc);
 			out.write(asc, 23);
 			# else
-			out += Private::LogsDecorator::WriteCurrentTimestampToBufferMinGW();
+			out << Private::LogsDecorator::WriteCurrentTimestampToBufferMinGW();
 			# endif
 
 			out.put(']');
