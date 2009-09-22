@@ -1,7 +1,9 @@
 #ifndef __LIBYUNI_CONFIG_VERSIONS_H__
 # define __LIBYUNI_CONFIG_VERSIONS_H__
 
-# define YUNI_NO_THREAD_SAFE // disabling thread-safety
+# ifndef YUNI_NO_THREAD_SAFE
+#	define YUNI_NO_THREAD_SAFE // disabling thread-safety
+# endif
 # include <yuni/yuni.h>
 # include <yuni/core/string.h>
 # include <yuni/core/version/version.h>

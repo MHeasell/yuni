@@ -32,6 +32,12 @@ ADD_EXECUTABLE(libyuni-config
 
 
 #
+# Disable all code related to thread-safety
+#
+ADD_DEFINITIONS("-DYUNI_NO_THREAD_SAFE")
+
+
+#
 # Stripping
 #
 IF(YUNI_TARGET_RELEASE)
