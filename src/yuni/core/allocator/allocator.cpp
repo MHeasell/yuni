@@ -225,7 +225,8 @@ namespace Private
 	bool Allocator::createChunk()
 	{
 		bool allocated = false;
-		try
+		// Exceptions are disabled
+		//try
 		{
 			std::size_t size = pChunks.size();
 			// Calling pChunks.reserve *before* creating and initializing the new
@@ -242,10 +243,10 @@ namespace Private
 			if (allocated)
 				pChunks.push_back(newChunk);
 		}
-		catch(...)
-		{
-			allocated = false;
-		}
+		//catch(...)
+		//{
+		//	allocated = false;
+		//}
 		if (!allocated)
 			return false;
 
@@ -257,6 +258,6 @@ namespace Private
 	unsigned char Allocator::pMinObjectsPerChunk = 8;
 	unsigned char Allocator::pMaxObjectsPerChunk = UCHAR_MAX;
 
-} // Private
-} // Core
-} // Yuni
+} // namespace Private
+} // namespace Core
+} // namespace Yuni
