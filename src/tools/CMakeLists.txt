@@ -1,2 +1,5 @@
 
-Add_SubDirectory(libyuni-config)
+IF(NOT YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
+	Add_SubDirectory(libyuni-config)
+ENDIF(NOT YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
+

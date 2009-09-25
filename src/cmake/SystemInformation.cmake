@@ -21,6 +21,9 @@ IF(APPLE)
 ELSE(APPLE)
 	Message(STATUS "System: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 ENDIF(APPLE)
+
+Message(STATUS "Generator : ${CMAKE_GENERATOR}")
+
 If(MSVC)
 	Message(STATUS "Compiler: Visual Studio")
 EndIF(MSVC)
