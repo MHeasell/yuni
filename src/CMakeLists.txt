@@ -13,7 +13,7 @@ SET(YUNI_MAILING_LIST            "dev@libyuni.org")
 SET(YUNI_VERSION_HI              0)
 SET(YUNI_VERSION_LO              1)
 SET(YUNI_VERSION_REV             0) # Svn Revision - see below
-SET(YUNI_TARGET                  "debug") # Target : debug/release - see below
+SET(YUNI_TARGET                  "debug") # Target : debug/release - see Target.cmake
 SET(YUNI_URL_DEVPACK_REPOSITORY  "http://devpacks.libyuni.org/")
 SET(YUNI_URL_DEVPACK_SOURCE      "http://devpacks.libyuni.org/downloads")
 
@@ -92,13 +92,18 @@ Add_SubDirectory(yuni)
 # tools (especially for libyuni-config)
 Add_SubDirectory(tools)
 
-# Samples
-#IF(YUNI_SAMPLES)
-#	Add_SubDirectory(samples EXCLUDE_FROM_ALL)
-#EndIF(YUNI_SAMPLES)
 
-#IF(YUNI_TESTS)
-#	Add_SubDirectory(tests EXCLUDE_FROM_ALL)
-#	Add_SubDirectory(testsuite EXCLUDE_FROM_ALL)
-#EndIF(YUNI_TESTS)
 
+
+#
+# Compiling libyuni-config if required
+#
+IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
+	Message(STATUS "[libyuni-config] Bootstraping")
+	# --
+	execute_process(COMMAND "${CMAKE_COMMAND}" . -G "${CMAKE_GENERATOR}" "-DCMAKE_BUILD_TYPE=release"
+			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config")
+	Message(STATUS "Compiling libyuni-config...")
+	execute_process(COMMAND make
+			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config")
+ENDIF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)

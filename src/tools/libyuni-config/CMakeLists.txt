@@ -17,6 +17,7 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/Modules.cmake")
 
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../..")
+
 ADD_EXECUTABLE(libyuni-config
 		../../yuni/core/version/version.cpp
 		../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.cpp

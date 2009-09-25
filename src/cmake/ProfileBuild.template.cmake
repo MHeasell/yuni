@@ -61,6 +61,13 @@ Set(YUNI_DvP_LUA_MODE         macport system devpack)
 
 
 
+#
+# Auto-Compile libyuni-config from CMake
+#
+# Enable this option to automatically compile libyuni-config from CMake
+#
+Set(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG  false)
+
 
 
 #
