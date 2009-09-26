@@ -2,7 +2,6 @@
 # define __YUNI_CORE_MATH_RANDOM_DEFAULT_H__
 
 # include <stdlib.h>
-# include <time.h>
 # include "distribution.h"
 
 

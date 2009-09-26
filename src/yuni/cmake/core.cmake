@@ -180,7 +180,7 @@ Set(SRC_CORE_MATH
 				core/math/exponential.h core/math/exponential.hxx
 				# Random number generators
 				core/math/random/distribution.h  core/math/random/distribution.hxx
-				core/math/random/default.h  core/math/random/default.hxx
+				core/math/random/default.h  core/math/random/default.hxx core/math/random/default.cpp
 				core/math/random/range.h  core/math/random/range.hxx
 				core/math/random/constant.h
 )
