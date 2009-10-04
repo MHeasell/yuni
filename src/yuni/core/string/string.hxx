@@ -2001,7 +2001,7 @@ namespace Yuni
 				pSize = offset;
 			else
 			{
-				memmove(pPtr + sizeof(C) * (offset), pPtr + sizeof(C) * (offset + len), sizeof(C) * (pSize-offset));
+				memmove(pPtr + sizeof(C) * (offset), pPtr + sizeof(C) * (offset + len), sizeof(C) * (pSize-offset-len));
 				pSize -= len;
 			}
 			pPtr[pSize] = '\0';
