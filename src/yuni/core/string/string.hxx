@@ -2213,7 +2213,7 @@ namespace Yuni
 	StringBase<C,Chunk>::substrUTF8(typename StringBase<C,Chunk>::Size pos, typename StringBase<C,Chunk>::Size len) const
 	{
 		if (len == npos)
-			len = sizeUTF8() - len + 1 - pos;
+			len = sizeUTF8() - pos;
 		typedef unsigned char uchar;
 		String res;
 		int utf8_pos = 0;
