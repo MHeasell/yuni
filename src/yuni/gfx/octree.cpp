@@ -187,10 +187,10 @@ namespace Gfx
 	}
 
 
-	uint32 Octree::nodeCount() const
+	size_t Octree::nodeCount() const
 	{
-		uint32 childNodeCount = 0;
-		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+		size_t childNodeCount = 0;
+		for (unsigned int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
 			if (pChildren[i])
 				childNodeCount += pChildren[i]->nodeCount();
@@ -199,10 +199,10 @@ namespace Gfx
 	}
 
 
-	uint32 Octree::pointCount() const
+	size_t Octree::pointCount() const
 	{
-		uint32 childPointCount = 0;
-		for (int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
+		size_t childPointCount = 0;
+		for (unsigned int i = 0; i < YUNI_OCTREE_MAX_CHILDREN; ++i)
 		{
 			if (pChildren[i])
 				childPointCount += pChildren[i]->pointCount();
@@ -213,7 +213,7 @@ namespace Gfx
 
 	uint16 Octree::getChildIndex(const Point3D<float>& p) const
 	{
-		int index(0);
+		uint16 index(0);
 		const Point3D<float>& center = boundingBox().center();
 		if (p.x >= center.x)
 			index += 4;
@@ -221,7 +221,7 @@ namespace Gfx
 			index += 2;
 		if (p.z >= center.z)
 			index += 1;
-		return (uint16)index;
+		return index;
 	}
 
 

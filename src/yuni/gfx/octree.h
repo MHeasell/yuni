@@ -70,9 +70,9 @@ namespace Gfx
 		//! Depth of the tree
 		uint16 depth() const {return pDepth;}
 		//! Number of nodes in the tree
-		uint32 nodeCount() const;
+		size_t nodeCount() const;
 		//! Number of points in the tree
-		uint32 pointCount() const;
+		size_t pointCount() const;
 		//! Get the bounding box for this tree
 		const BoundingBox<float>& boundingBox() const
 		{ return pBoundingBox; }
