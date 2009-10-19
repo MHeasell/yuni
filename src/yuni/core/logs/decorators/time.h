@@ -41,9 +41,9 @@ namespace Logs
 			# ifndef YUNI_OS_MINGW
 			char asc[32]; // MSDN specifies that the buffer length value must be >= 26 for validity
 			Private::LogsDecorator::WriteCurrentTimestampToBuffer(asc);
-			out.write(asc, 23);
+			out.write(asc, 24);
 			# else
-			out << Private::LogsDecorator::WriteCurrentTimestampToBufferMinGW();
+			out.write(Private::LogsDecorator::WriteCurrentTimestampToBufferMinGW(), 24);
 			# endif
 
 			out.put(']');
