@@ -146,6 +146,11 @@ namespace Math
 		return ::sqrt(x);
 	}
 
+	template<> inline float SquareRoot(const float x)
+	{
+		return ::sqrtf(x);
+	}
+
 
 
 
