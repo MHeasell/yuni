@@ -518,12 +518,19 @@ namespace StringImpl
 	YUNI_PRIVATE_STRING_IMPL(24, "%lld", sint64);
 	YUNI_PRIVATE_STRING_IMPL( 8, "%u",   uint16);
 	YUNI_PRIVATE_STRING_IMPL(16, "%u",   uint32);
-	YUNI_PRIVATE_STRING_IMPL(26, "%lld", uint64);
+	# ifdef YUNI_OS_32
+	#	ifdef YUNI_OS_MINGW
+		YUNI_PRIVATE_STRING_IMPL(27, "%I64u", uint64);
+	#	else
+		YUNI_PRIVATE_STRING_IMPL(27, "%llu", uint64);
+	#	endif
+	# else
+		YUNI_PRIVATE_STRING_IMPL(27, "%lu", uint64);
+	# endif
+
 
 	YUNI_PRIVATE_STRING_IMPL(24, "%lf", float);
 	YUNI_PRIVATE_STRING_IMPL(24, "%lf", double);
-
-
 
 
 } // namespace StringImpl
