@@ -1,4 +1,3 @@
-
 #
 # Locate the Yuni Framework
 #
@@ -31,6 +30,10 @@ SET(LibYuni_Config   "")
 
 
 
+
+
+
+
 SET(__LibYuni_Message "Looking for libyuni")
 
 #
@@ -42,7 +45,10 @@ IF(WIN32 OR WIN64)
 	SET(__LibYuni_ProgramSearchPath
 		C:/dev/libyuni
 		C:/libyuni
-		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config" "$ENV{LibYuniPaths}")
+		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config"
+		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config/Release"
+		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config/Debug"
+		"$ENV{LibYuniPaths}")
 ELSE(WIN32 OR WIN64)
 	SET(__LibYuni_ProgramSearchPath
 		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config" "$ENV{LibYuniPaths}")
