@@ -75,6 +75,12 @@ Set(SRC_CORE_VALIDATOR
 				core/validator/validator.h)
 source_group(Core\\Validator FILES ${SRC_CORE_VALIDATOR})
 
+Set(SRC_CORE_SLIST
+				core/slist/iterator.h
+				core/slist/slist.h
+				core/slist/slist.hxx)
+source_group(Core\\LinkedList FILES ${SRC_CORE_SLIST})
+
 
 
 Set(SRC_CORE_STRING
@@ -351,6 +357,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_SMARTPTR}
 		${SRC_CORE_FUNCTION}
 		${SRC_CORE_ANY}
+		${SRC_CORE_SLIST}
 		${SRC_CORE_VARIANT}
 		${SRC_CORE_DYNAMICLIBRARY}
 		${SRC_CORE_BIND} ${SRC_CORE_EVENT}
