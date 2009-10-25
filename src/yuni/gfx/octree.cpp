@@ -213,7 +213,7 @@ namespace Gfx
 
 	uint16 Octree::getChildIndex(const Point3D<float>& p) const
 	{
-		uint16 index(0);
+		unsigned int index(0);
 		const Point3D<float>& center = boundingBox().center();
 		if (p.x >= center.x)
 			index += 4;
@@ -221,7 +221,7 @@ namespace Gfx
 			index += 2;
 		if (p.z >= center.z)
 			index += 1;
-		return index;
+		return (uint16)index;
 	}
 
 
