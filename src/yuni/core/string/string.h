@@ -285,8 +285,7 @@ namespace Yuni
 		** \return The index of string in the list, npos if not found
 		*/
 		template<template<class,class> class L, class T, class Alloc>
-		static unsigned int FindInList(const L<T,Alloc>& list, const StringBase<Char,Chunk>& str,
-			const unsigned int offset = 0);
+		static Size FindInList(const L<T,Alloc>& list, const StringBase<Char,Chunk>& str, const Size offset = 0);
 
 		/*!
 		** \brief Extract the key and its value from a string in the INI format

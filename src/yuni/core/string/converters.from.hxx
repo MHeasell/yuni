@@ -525,12 +525,17 @@ namespace StringImpl
 		YUNI_PRIVATE_STRING_IMPL(27, "%llu", uint64);
 	#	endif
 	# else
-		YUNI_PRIVATE_STRING_IMPL(27, "%lu", uint64);
+		YUNI_PRIVATE_STRING_IMPL(27, "%llu", uint64);
 	# endif
 
 
 	YUNI_PRIVATE_STRING_IMPL(24, "%lf", float);
 	YUNI_PRIVATE_STRING_IMPL(24, "%lf", double);
+
+	YUNI_PRIVATE_STRING_IMPL(16, "%ld",   long);
+	YUNI_PRIVATE_STRING_IMPL(16, "%lu",   unsigned long);
+
+
 
 
 } // namespace StringImpl

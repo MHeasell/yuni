@@ -1380,8 +1380,8 @@ namespace Yuni
 
 	template<typename C, int Chunk>
 	template<template<class,class> class L, class T, class Alloc>
-	unsigned int
-	StringBase<C,Chunk>::FindInList(const L<T,Alloc>& list, const StringBase<Char,Chunk>& str, const unsigned int offset)
+	typename StringBase<C,Chunk>::Size
+	StringBase<C,Chunk>::FindInList(const L<T,Alloc>& list, const StringBase<Char,Chunk>& str, const typename StringBase<C,Chunk>::Size offset)
 	{
 		if (!list.empty())
 		{
