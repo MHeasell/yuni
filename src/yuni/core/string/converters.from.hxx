@@ -532,8 +532,13 @@ namespace StringImpl
 	YUNI_PRIVATE_STRING_IMPL(24, "%lf", float);
 	YUNI_PRIVATE_STRING_IMPL(24, "%lf", double);
 
+	# ifdef YUNI_OS_32
 	YUNI_PRIVATE_STRING_IMPL(16, "%ld",   long);
 	YUNI_PRIVATE_STRING_IMPL(16, "%lu",   unsigned long);
+	# else
+	YUNI_PRIVATE_STRING_IMPL(22, "%ld",   long);
+	YUNI_PRIVATE_STRING_IMPL(22, "%lu",   unsigned long);
+	# endif
 
 
 
