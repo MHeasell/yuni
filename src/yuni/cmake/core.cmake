@@ -192,6 +192,17 @@ Set(SRC_CORE_MATH
 )
 source_group(Core\\Math FILES ${SRC_CORE_MATH})
 
+Set(SRC_CORE_MEMORYBUFFER
+				core/memorybuffer.h
+				core/memorybuffer/memorybuffer.h core/memorybuffer/memorybuffer.hxx
+				core/memorybuffer/traits/append.h
+				core/memorybuffer/traits/assign.h
+				core/memorybuffer/traits/fill.h
+				core/memorybuffer/traits/length.h
+				core/memorybuffer/traits/traits.h
+				core/memorybuffer/traits/traits.hxx )
+source_group("Core\\Memory buffer" FILES ${SRC_CORE_MEMORYBUFFER})
+
 
 # Hash - Checksums
 Set(SRC_CORE_HASH_CHECKSUM
@@ -362,6 +373,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_DYNAMICLIBRARY}
 		${SRC_CORE_BIND} ${SRC_CORE_EVENT}
 		${SRC_CORE_MATH}
+		${SRC_CORE_MEMORYBUFFER}
 		${SRC_CORE_HASH_CHECKSUM}
 		${SRC_CORE_TREE_N}
 		${SRC_CORE_VERSION}
