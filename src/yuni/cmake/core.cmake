@@ -221,6 +221,7 @@ Set(SRC_CORE_SYSTEM
 				core/system/stdint.h core/system/nullptr.h core/system/capabilities.h
 				core/system/sleep.h core/system/sleep.cpp
 				core/sleep.h
+				core/fwd.h
 				core/system/endian.h)
 source_group(Core\\System FILES ${SRC_CORE_SYSTEM})
 

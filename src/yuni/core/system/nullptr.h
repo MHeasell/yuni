@@ -39,15 +39,6 @@ namespace Yuni
 
 
 
-	/*! Type for a default behavior / policy */
-	struct Default {};
-
-	/*! Absence Option */
-	struct None {};
-
-
-
-
 } /* namespace Yuni */
 
 # endif /* C++ Compiler */

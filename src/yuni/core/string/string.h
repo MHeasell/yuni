@@ -25,9 +25,6 @@
 namespace Yuni
 {
 
-	// Forward declaration
-	template<typename C = char, int Chunk = 80> class StringBase;
-
 	/*!
 	** \brief A convenient standard string implementation
 	** \see StringBase<>
