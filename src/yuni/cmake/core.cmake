@@ -55,6 +55,10 @@ Set(SRC_CORE_STATIC
 				core/static/moveconstructor.h)
 source_group(Core\\Static FILES ${SRC_CORE_STATIC})
 
+Set(SRC_CORE_TRAITS
+				core/traits/length.h)
+source_group(Core\\Traits FILES ${SRC_CORE_TRAITS})
+
 
 Set(SRC_CORE_EXCEPTIONS
 				core/exceptions.h
@@ -198,7 +202,6 @@ Set(SRC_CORE_MEMORYBUFFER
 				core/memorybuffer/traits/append.h
 				core/memorybuffer/traits/assign.h
 				core/memorybuffer/traits/fill.h
-				core/memorybuffer/traits/length.h
 				core/memorybuffer/traits/traits.h
 				core/memorybuffer/traits/traits.hxx )
 source_group("Core\\Memory buffer" FILES ${SRC_CORE_MEMORYBUFFER})
@@ -355,6 +358,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		yuni.h
 		${SRC_CORE_PREDICATES_RESULTS}
 		${SRC_CORE_STATIC}
+		${SRC_CORE_TRAITS}
 		${SRC_CORE_ALLOCATOR}
 		${SRC_CORE_PREPROCESSOR}
 		${SRC_CORE_EXCEPTIONS}
