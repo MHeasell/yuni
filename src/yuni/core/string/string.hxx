@@ -2261,6 +2261,19 @@ namespace Yuni
 	}
 
 
+	template<typename C, int Chunk>
+	void StringBase<C,Chunk>::toNChars(const unsigned int newSize, const Char defaultChar)
+	{
+		if (pSize < newSize)
+		{
+			for (unsigned int i = pSize; i != newSize; ++i)
+				append(defaultChar);
+		}
+		else
+			pSize = newSize;
+	}
+
+
 
 } // namespace Yuni
 
