@@ -89,12 +89,19 @@
 # include "core/system/nullptr.h"
 
 
+
+# ifdef __cplusplus /* Only with a C++ Compiler */
+
 /*!
 ** \brief The Yuni Framework
 */
-# ifdef __cplusplus /* Only with a C++ Compiler */
 namespace Yuni
 {}
+
+/* All standard forward declarations */
+# include "core/fwd.h"
+
 # endif
+
 
 #endif /* __YUNI_COMMONS_H__ */
