@@ -1171,6 +1171,17 @@ namespace Yuni
 		uint32 hashValue() const;
 
 		/*!
+		** \brief Ensure that the string length is N
+		**
+		** If the size < N, then N-size chars will be added.
+		** If the size < N, then the string will be truncated to N
+		**
+		** \param newSize The desired new size of the string
+		** \param defaultChar The char to use for all new char
+		*/
+		void toNChars(const unsigned int newSize, const Char defaultChar = ' ');
+
+		/*!
 		** \brief Print the content of the string to an ostream
 		**
 		** \param[in,out] A stream
