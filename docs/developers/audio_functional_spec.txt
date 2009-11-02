@@ -1,0 +1,79 @@
+
+										YUNI SOUND ENGINE
+										FUNCTIONAL SPECIFICATION
+
+Started on:   2009-11-02, by Loom
+Last version: 2009-11-02, by Loom
+
+Scope of this document:
+=======================
+
+This document intends to specify all the required features FOR THE SOUND
+ENGINE ONLY. It will be biased towards what can be done with the current
+mainstream libraries, particularly OpenAL, although this document implies
+in no way that OpenAL will be or should be chosen as a library for Yuni.
+
+I) General observations:
+========================
+3D sound requires all objects that generate sound or interact with sound to
+be placed spatially. This is of course because distance influences sound.
+However, this is not enough: object velocities are required too, for the
+Doppler effect to be taken into account. OpenAL offers ways to control the
+Doppler shift by modifying the speed of sound and Doppler factor, but this
+is not a required feature for Yuni to implement.
+
+It is required that Yuni use hardware acceleration for sound as much as
+possible for obvious performance reasons.
+
+
+I) Entities:
+============
+
+- Listener
+  - Position
+  - Speed vector (direction + velocity)
+- Source
+  - Position
+  - Speed vector (direction + velocity)
+- Sound
+  - Various storage formats (no compression, compression, lossless compression)
+    WAV, MP3? (licence problems...), OGG, FLAC
+  - File-by-file sounds, or sound banks
+  - Specific settings to modify (volume, speed, playing backwards, ...)
+  - Continuous streaming
+
+II) Features:
+=============
+
+In this section, no distinction is done between the data of a sound, and the
+way it is represented in a program. OpenAL distinguishises between sounds and
+the buffers in which they are loaded, but this is too low-level for the scope
+of this document.
+
+Listeners:
+- Always one listener exists
+- Only one active listener at a time (?)
+- Create another listener
+- Destroy a listener that is not active
+- Know how to move a listener, or how to update when a listener moves
+
+Sources:
+- Create a source
+- Destroy a source
+- Know how to move a source, or how to update when a source moves
+
+Sounds:
+- Load a sound
+- Unload a sound
+- Play a sound at a given source
+- Pause a sound
+- Stop a sound
+
+Customization:
+- Change sound volume
+- Change source volume (all sounds playing on a source)
+- Change global volume (listener volume)
+- Apply effects on a sound
+- Apply effects on a source (all sounds playing on a source)
+- Apply effects on a listener (all sounds it hears)
+- Change sound speed?
