@@ -2,8 +2,8 @@
 										YUNI GRAPHICS ENGINE
 										FUNCTIONAL SPECIFICATION
 
-Started on:   2006-06-12, by Loom
-Last version: 2006-06-12, by Loom
+Started on:   2009-06-12, by Loom
+Last version: 2009-09-02, by Loom
 
 Scope of this document:
 =======================
