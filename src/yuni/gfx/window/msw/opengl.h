@@ -1,7 +1,7 @@
 #ifndef __YUNI_GFX_WINDOW_OPENGL_MSW_H__
 # define __YUNI_GFX_WINDOW_OPENGL_MSW_H__
 
-# include "../../yuni.h"
+# include "../../../yuni.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
 #	include "../../../core/system/windows.hdr.h"
