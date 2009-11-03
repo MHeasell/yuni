@@ -106,6 +106,16 @@ IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 	execute_process(COMMAND "${CMAKE_COMMAND}" . -G "${CMAKE_GENERATOR}" "-DCMAKE_BUILD_TYPE=release"
 			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config")
 	Message(STATUS "Compiling libyuni-config...")
-	execute_process(COMMAND make
+    IF(WIN32)
+        IF(MSYS)
+            SET(Y_MAKE_COMMAND "make.exe")
+        ELSE(MSYS)
+            SET(Y_MAKE_COMMAND "mingw32-make.exe")
+        ENDIF(MSYS)
+    ELSE(WIN32)
+        SET(Y_MAKE_COMMAND "make")
+    ENDIF(WIN32)
+	execute_process(COMMAND ${Y_MAKE_COMMAND}
 			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config")
 ENDIF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
+
