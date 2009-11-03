@@ -101,6 +101,8 @@ Add_SubDirectory(tools)
 IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 	Message(STATUS "[libyuni-config] Bootstraping")
 	# --
+	Message(STATUS "Configuring libyuni-config...")
+	Message(STATUS "(in ${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config)")
 	execute_process(COMMAND "${CMAKE_COMMAND}" . -G "${CMAKE_GENERATOR}" "-DCMAKE_BUILD_TYPE=release"
 			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config")
 	Message(STATUS "Compiling libyuni-config...")
