@@ -54,7 +54,8 @@ ELSE(WIN32 OR WIN64)
 		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config" "$ENV{LibYuniPaths}")
 ENDIF(WIN32 OR WIN64)
 
-FIND_PROGRAM(__LibYuni_Config NAMES libyuni-config PATHS ${__LibYuni_ProgramSearchPath})
+FIND_PROGRAM(__LibYuni_Config NAMES libyuni-config libyuni-config.exe
+    PATHS ${__LibYuni_ProgramSearchPath})
 IF("${__LibYuni_Config}" STREQUAL "__LibYuni_Config-NOTFOUND")
 	MESSAGE(STATUS "${__LibYuni_Message} - failed ('libyuni-config' not found)")
 	SET(LibYuni_NOTFOUND TRUE)
@@ -107,6 +108,10 @@ IF(NOT LibYuni_NOTFOUND)
 	#
 	# Checking if the required modules are present
 	#
+    IF(NOT MSYS)
+        # On Windows (not MSys), a patch like this "C:/path/..." is invalid
+        STRING(REPLACE "/" "\\" __LibYuni_Config "${__LibYuni_Config}")
+    ENDIF(NOT MSYS)
 	execute_process(COMMAND "${__LibYuni_Config}" -c "${__LibYuni_Compiler}"
 		-m "${__LibYuni_ModsOpts}" --module-deps
 		OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE __LibYuni_ModsDeps
