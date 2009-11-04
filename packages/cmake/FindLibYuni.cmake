@@ -108,10 +108,12 @@ IF(NOT LibYuni_NOTFOUND)
 	#
 	# Checking if the required modules are present
 	#
-    IF(NOT MSYS)
-        # On Windows (not MSys), a patch like this "C:/path/..." is invalid
-        STRING(REPLACE "/" "\\" __LibYuni_Config "${__LibYuni_Config}")
-    ENDIF(NOT MSYS)
+    IF(WIN32)
+        IF(NOT MSYS)
+            # On Windows (not MSys), a patch like this "C:/path/..." is invalid
+            STRING(REPLACE "/" "\\" __LibYuni_Config "${__LibYuni_Config}")
+        ENDIF(NOT MSYS)
+    ENDIF(WIN32)
 	execute_process(COMMAND "${__LibYuni_Config}" -c "${__LibYuni_Compiler}"
 		-m "${__LibYuni_ModsOpts}" --module-deps
 		OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE __LibYuni_ModsDeps
