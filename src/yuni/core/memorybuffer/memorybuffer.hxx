@@ -167,6 +167,13 @@ namespace Core
 	}
 
 
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	inline C*
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::data()
+	{
+		return AncestorType::data;
+	}
+
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
 	template<class U>

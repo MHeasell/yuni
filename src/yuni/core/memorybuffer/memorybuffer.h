@@ -191,6 +191,7 @@ namespace Core
 		** \brief A pointer to the original buffer (might be NULL)
 		*/
 		const C* data() const;
+		C* data();
 
 
 		//! \name Operators
