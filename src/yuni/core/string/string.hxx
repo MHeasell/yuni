@@ -345,6 +345,13 @@ namespace Yuni
 		return pPtr;
 	}
 
+	template<typename C, int Chunk>
+	inline C*
+	StringBase<C,Chunk>::data() throw()
+	{
+		return pPtr;
+	}
+
 
 
 	template<typename C, int Chunk>

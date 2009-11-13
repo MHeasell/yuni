@@ -843,6 +843,7 @@ namespace Yuni
 		**  `sizeof(Char) * size()` bytes.
 		*/
 		const Char* data() const throw();
+		Char* data() throw();
 		//@}
 
 
