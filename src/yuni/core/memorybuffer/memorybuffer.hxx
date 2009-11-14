@@ -176,6 +176,24 @@ namespace Core
 
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	inline void
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::resize(inline typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size len)
+	{
+		if (AncestorType::expandable)
+		{
+			// Dynamic buffer
+			AncestorType::reserve(len + AncestorType::zeroTerminated);
+			AncestorType::size = len;
+		}
+		else
+		{
+			// Static buffer
+			AncestorType::size = (len <= AncestorType::chunkSize) ? len : AncestorType::chunkSize;
+		}
+	}
+
+
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
 	template<class U>
 	inline bool
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::operator != (const U& rhs) const
