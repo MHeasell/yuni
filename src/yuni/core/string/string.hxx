@@ -297,9 +297,17 @@ namespace Yuni
 			while (this->pCapacity < min);
 
 			// ReAllocating
-			this->pPtr = (Char*)::realloc(this->pPtr, sizeof(Char) * this->pCapacity);
+			this->pPtr = (Char*) ::realloc(this->pPtr, sizeof(Char) * this->pCapacity);
 			this->pPtr[this->pSize] = '\0';
 		}
+	}
+
+
+	template<typename C, int Chunk>
+	inline void StringBase<C,Chunk>::resize(const Size len)
+	{
+		this->reserve(len + 1);
+		this->pSize = len;
 	}
 
 

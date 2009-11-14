@@ -1224,6 +1224,16 @@ namespace Yuni
 		*/
 		void reserve(const Size min);
 
+		/*!
+		** \brief Resize the string to 'len' bytes
+		**
+		** The current content will remain untouched but all extra bytes will not be
+		** initialized.
+		**
+		** \param len The new length of the string
+		*/
+		void resize(const Size len);
+
 		//! Get the number of characters that the string can currently hold
 		Size capacity() const;
 		//! Alias for capacity()

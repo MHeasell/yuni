@@ -164,6 +164,7 @@ namespace Core
 		template<class U> Size find_first_of(const U& u) const;
 		//@}
 
+
 		//! \name Remove / Erase
 		//@{
 		// From the ancestor
@@ -179,12 +180,48 @@ namespace Core
 		** \param len The length (in number of items) to erase
 		*/
 		void erase(const Size offset, const Size len);
+		//@}
 
 
+		//! \name Memory management
+		//@{
+		/*!
+		** \brief Truncate the buffer to the given length
+		**
+		** Nothing will be done if the new size if greater than the current one.
+		** \param newSize The new size of the buffer
+		*/
 		void truncate(const Size newSize);
 
+		// From the ancestor
+		/*[!]
+		** \brief Ensure that there is enough allocated space for X caracters
+		**
+		** \param min The minimum capacity of the buffer (in caracters)
+		*/
+		// void reserve(Size minCapacity);
+
+		/*!
+		** \brief Resize the buffer to 'len' bytes
+		**
+		** The current content will remain untouched but all extra bytes will not be
+		** initialized.
+		** If the buffer can not be expanded, the new size will not greater than 'ChunkSize'.
+		**
+		** \param len The new length of the string
+		*/
+		void resize(const Size len);
+
+		/*!
+		** \brief Get the current size of the buffer (in bytes)
+		**
+		** The returned value is less than or equal to the capacity.
+		*/
 		Size size() const;
 
+		/*!
+		** \brief Get the current capacity of the buffer (in bytes)
+		*/
 		Size capacity() const;
 
 		/*!
@@ -192,6 +229,7 @@ namespace Core
 		*/
 		const C* data() const;
 		C* data();
+		//@}
 
 
 		//! \name Operators

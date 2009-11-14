@@ -10,21 +10,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
-
-	// Forward declaration
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
-	class MemoryBuffer;
-
-
-} // namespace Core
-} // namespace Yuni
-
-
-
-namespace Yuni
-{
 namespace Private
 {
 namespace MemoryBufferImpl
