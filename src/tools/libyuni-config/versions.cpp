@@ -14,8 +14,14 @@ namespace VersionInfo
 
 	void List::checkRootFolder(const String& root)
 	{
-		if (Core::IO::File::Exists(String() << root << Core::IO::Separator << "mark-for-yuni-sources"))
+		String yuniMarker;
+		yuniMarker << root << Core::IO::Separator << "mark-for-yuni-sources";
+
+		if (Core::IO::File::Exists(yuniMarker))
 		{
+			if (pOptDebug)
+				std::cout << "[debug] found special marker `" << yuniMarker << "`" << std::endl;
+
 			# ifdef YUNI_OS_WINDOWS
 			loadFromPath(root + "\\..\\..\\..");
 			# else
@@ -44,6 +50,9 @@ namespace VersionInfo
 
 	void List::loadFromPath(const String& path)
 	{
+		if (pOptDebug)
+			std::cout << "[debug] loading infos from `" << path << "`" << std::endl; 
+
 		VersionInfo::Settings info;
 		info.mapping = mappingStandard;
 		String s(path);
@@ -101,8 +110,17 @@ namespace VersionInfo
 				info.path = path;
 				info.compiler = pCompiler;
 				pList[version] = info;
+
+				if (pOptDebug)
+					std::cout << "[debug]  - found installation `" << path << "` (" << version << ")" << std::endl; 
 			}
 		}
+	}
+
+
+	void List::compiler(const String& c)
+	{
+		pCompiler = c;
 	}
 
 
