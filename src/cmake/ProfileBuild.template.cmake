@@ -69,9 +69,44 @@ Set(YUNI_DvP_LUA_MODE         macport system devpack)
 Set(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG  false)
 
 
+#
+# Special instructions sets
+#
+# Options:
+#  auto  : To auto detect if these sets can be used
+#  no    : To completely disable it
+#  yes   : Try to use it event it may not compile
+#
+# MMX
+Set(YUNI_PROFILE_MMX       "auto")
+# 3D-NOW
+Set(YUNI_PROFILE_3DNOW     "auto")
+# SSE
+Set(YUNI_PROFILE_SSE       "auto")
+# SSE2 (if "SSE" enabled)
+Set(YUNI_PROFILE_SSE2      "auto")
+# SSE3 (if "SSE2" enabled)
+Set(YUNI_PROFILE_SSE3      "auto")
+# SSE4 (if "SSE3" enabled)
+Set(YUNI_PROFILE_SSE4      "auto")
+# SSE4a (if "SSE3" enabled)
+Set(YUNI_PROFILE_SSE4a     "auto")
+# SSE4.1 (if "SSE3" enabled)
+Set(YUNI_PROFILE_SSE4_1    "auto")
+# SSE4.2 (if "SSE3" enabled)
+Set(YUNI_PROFILE_SSE4_2    "auto")
+
+
+
+
+
+
 
 #
 # C++ Flags
+#
+# !! For advanced users only : it may not a good idea to use your own CFlags
+#    for compiling the Yuni library.
 #
 # Uncomment the following line to add some C++ compiler flags
 #Set(YUNI_CXX_FLAGS_OVERRIDE_ADD "-Wextra")
@@ -79,5 +114,6 @@ Set(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG  false)
 # Uncomment the following line to override the C++ compiler flags
 # This is not recommended.
 #Set(YUNI_CXX_FLAGS_OVERRIDE "-g -ggdb -Wall -Wextra")
+
 
 

@@ -10,12 +10,24 @@ IF(NOT CMAKE_MINOR_VERSION EQUAL 4 OR NOT CMAKE_MAJOR_VERSION EQUAL 2 )
 ENDIF(NOT CMAKE_MINOR_VERSION EQUAL 4 OR NOT CMAKE_MAJOR_VERSION EQUAL 2 )
 Include(CheckIncludeFile)
 
+#
+# Getting the folder where this file is located
+#
+SET(CurrentFolder "${CMAKE_CURRENT_LIST_FILE}")
+STRING(REPLACE "\\CommonSettings.cmake" "" CurrentFolder "${CurrentFolder}")
+STRING(REPLACE "/CommonSettings.cmake" "" CurrentFolder "${CurrentFolder}")
+# Current Folder : ${CurrentFolder}
+
+#
+# Detect Special Instructions Set (SSE, MMX...)
+#
+Include("${CurrentFolder}/DetectInstructionsSets.cmake")
 
 
 
 
 #
-# Command line options for G++ (Debug)
+# Command line options for G++ (iDebug/Release)
 #
 # Ex: cmake . -DYUNI_TARGET=release
 #
@@ -28,13 +40,10 @@ IF("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "releas
 	Message(STATUS "Build Configuration: Release")
 
 	IF(NOT WIN32)
-		String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
-		IF(${VA} EQUAL 0)
-			Set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings")
-			If(APPLE)
-				Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
-			ENdif(APPLE)
-		ENDIF(${VA} EQUAL 0)
+		Set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -Wall  -Wextra ${YUNI_PROFILE_CXX_FLAGS_INSTRUCTIONS_SETS} -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings")
+		If(APPLE)
+			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+		ENdif(APPLE)
 	Else(NOT WIN32)
 		IF(MINGW)
 			Set(CMAKE_CXX_OTHER_FLAGS "-O3 -fomit-frame-pointer -Wextra -Wwrite-strings")
@@ -56,13 +65,10 @@ Else("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "rele
 
 
 	IF(NOT WIN32)
-		String(LENGTH "${CMAKE_CXX_FLAGS}" VA)
-		IF(${VA} EQUAL 0)
-			Set(CMAKE_CXX_FLAGS "-g -ggdb2 -Wall -Woverloaded-virtual -Wextra -Wconversion -Wredundant-decls -Wundef -Wcast-align -Wcast-qual -Wfloat-equal -Wunused-parameter -Wwrite-strings")
-			If(APPLE)
-				Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gfull -fvisibility=hidden")
-			ENdif(APPLE)
-		ENDIF(${VA} EQUAL 0)
+		Set(CMAKE_CXX_FLAGS "-g -ggdb2 -Wall -Woverloaded-virtual -Wextra -Wconversion -Wredundant-decls -Wundef -Wcast-align -Wcast-qual -Wfloat-equal -Wunused-parameter -Wwrite-strings")
+		If(APPLE)
+			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gfull -fvisibility=hidden")
+		ENdif(APPLE)
 	Else(NOT WIN32)
 		IF(MINGW)
 			Set(CMAKE_CXX_OTHER_FLAGS "-g2 -Woverloaded-virtual -Wextra -Wconversion -Wwrite-strings")
