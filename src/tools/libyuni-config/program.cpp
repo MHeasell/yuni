@@ -15,6 +15,7 @@ namespace Yuni
 		pOptDefaultPathList(false),
 		pOptCxxFlags(false), pOptLibFlags(false), pOptPrintCompilerByDefault(false),
 		pOptPrintErrors(false), pOptPrintModulesDeps(false),
+		pOptDebug(false),
 		pOptCompiler(YUNI_LIBCONFIG_DEFAULT_COMPILER)
 	{
 		// Default module
@@ -74,12 +75,13 @@ namespace Yuni
 		// Help
 		opts.addParagraph("\nHelp\n  * : Option related to the selected version of libyuni");
 		opts.addFlag(pOptPrintErrors, ' ', "verbose", "Print any error message");
+		opts.addFlag(pOptDebug, ' ', "debug", "Print debug messages");
 		opts.addFlag(pOptVersion, 'v', "version", "Print the version and exit");
 
 		if (!opts(argc, argv))
 		{
 			pExitStatus = opts.errors() ? 1 /*error*/ : 0;
-			if (pOptPrintErrors)
+			if (pOptPrintErrors || pOptDebug)
 				std::cout << "Error when parsing the command line\n";
 			return false;
 		}
@@ -91,6 +93,7 @@ namespace Yuni
 		}
 
 		// Clean the prefix paths (make them absolute)
+		pVersionList.debug(pOptDebug);
 		cleanPrefixPaths();
 		normalizeCompiler();
 
@@ -109,6 +112,8 @@ namespace Yuni
 			pRootPath << Core::IO::Separator << Core::IO::ExtractFilePath(argv0);
 			pRootPath.removeTrailingSlash();
 		}
+		if (pOptDebug)
+			std::cout << "[debug] Root path : " << pRootPath << std::endl; 
 	}
 
 
@@ -149,6 +154,9 @@ namespace Yuni
 			pOptCompiler = "suncc";
 		if (pOptCompiler == "i++")
 			pOptCompiler = "icc";
+
+		if (pOptDebug)
+			std::cout << "[debug] compiler : " << pOptCompiler << std::endl; 
 	}
 
 

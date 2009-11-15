@@ -108,7 +108,7 @@ namespace VersionInfo
 		List() {}
 
 		const String& compiler() const {return pCompiler;}
-		void compiler(const String& c) {pCompiler = c;}
+		void compiler(const String& c);
 
 		void checkRootFolder(const String& root);
 
@@ -120,12 +120,15 @@ namespace VersionInfo
 
 		VersionInfo::Settings* selected();
 
+		void debug(bool mode) {pOptDebug = mode;}
+
 	private:
 		void loadFromPath(const String& path);
 
 	private:
 		String pCompiler;
 		InternalList pList;
+		bool pOptDebug;
 	};
 
 

@@ -26,6 +26,8 @@ namespace Yuni
 
 		int execute(int argc, char** argv);
 
+		bool debug() const {return pOptDebug;}
+
 	private:
 		void findRootPath(const char* a0);
 
@@ -84,6 +86,8 @@ namespace Yuni
 		bool pOptPrintErrors;
 		//! Flag: Print all modules and exit
 		bool pOptPrintModulesDeps;
+		//! Flag: Debug
+		bool pOptDebug;
 
 		//! List of required modules
 		String::List pOptModules;
