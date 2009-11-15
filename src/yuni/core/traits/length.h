@@ -2,6 +2,7 @@
 # define __YUNI_CORE_TRAITS_LENGTH_H__
 
 # include "../../yuni.h"
+# include <string.h>
 
 
 namespace Yuni

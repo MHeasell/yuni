@@ -1,4 +1,5 @@
 
+#include "../directory.h"
 #include "commons.h"
 
 
@@ -18,13 +19,13 @@ namespace Directory
 
 	bool WindowsMake(const char* path)
 	{
-		if (!Core::IO::Exists(path))
+		if (!Yuni::Core::IO::Exists(path))
 		{
 			wchar_t buffer[FILENAME_MAX];
 			MultiByteToWideChar(CP_UTF8, 0, path, -1, buffer, sizeof(buffer));
 
 			wchar_t* t = buffer;
-			while (L'\0' != t)
+			while (0 != t)
 			{
 				if (*t == L'\\' || *t == L'/')
 				{
