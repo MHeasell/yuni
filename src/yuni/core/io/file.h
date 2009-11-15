@@ -2,6 +2,8 @@
 # define __YUNI_CORE_FS_FILES_H__
 
 # include "io.h"
+# include "file/openmode.h"
+
 
 
 namespace Yuni
@@ -20,12 +22,16 @@ namespace File
 
 
 	/*!
-	** \brief The maximum allowed size for a file in memory (Default: 80Mo)
 	**
 	** \ingroup IOFile
 	*/
-	const uint64 SizeHardLimit = 83886080;  // 80Mo = 80 * 1024 * 1024
+	enum
+	{
+		//! The maximum allowed size for a file in memory (Default: 80Mo)
+		sizeHardLimit = 83886080u,  // 80Mo = 80 * 1024 * 1024
+	};
 
+	
 
 	/*!
 	** \brief Test if a node exists and is actually a file
@@ -33,15 +39,13 @@ namespace File
 	** \ingroup IOFile
 	**
 	** To test if a node exists whatever its nature, you should use
-	** Core::IO::Filesystem::Exists() instead.
+	** Core::IO::Exists() instead.
 	**
+	** \tparam Any standard that can be converted into a const char*
 	** \param p The folder/filename to test
 	** \return True if it exists, false otherwise
 	*/
-	bool Exists(const char* p);
-	template<typename C, int N> bool Exists(const StringBase<C,N>& p);
-
-
+	template<class C> bool Exists(const C& p);
 
 
 	/*!
@@ -61,7 +65,7 @@ namespace File
 	//! \name Load the content of a file
 	//@{
 	/*!
-	** \brief Open and Read the content of a file and write it into a 1D array
+	** \brief Open and Read the content of a file and write it into an 1D array
 	**
 	** \ingroup IOFile
 	**
@@ -73,28 +77,29 @@ namespace File
 	*/
 	// const char*
 	bool Load(String::Vector& out, const char* filename, const bool emptyListBefore = true,
-			const uint32 sizeLimit = SizeHardLimit);
+			const uint32 sizeLimit = sizeHardLimit);
 	bool Load(String::List& out, const char* filename, const bool emptyListBefore = true,
-			const uint32 sizeLimit = SizeHardLimit);
+			const uint32 sizeLimit = sizeHardLimit);
 	// Yuni::String
 	template<int N>
 	bool Load(String::Vector& out, const StringBase<char,N>& filename, const bool emptyListBefore = true,
-			const uint32 sizeLimit = SizeHardLimit);
+			const uint32 sizeLimit = sizeHardLimit);
 	template<int N>
 	bool Load(String::List& out, const StringBase<char,N>& filename, const bool emptyListBefore = true,
-			const uint32 sizeLimit = SizeHardLimit);
+			const uint32 sizeLimit = sizeHardLimit);
 
 
 	/*!
 	** \brief Load the entire content of a file into memory
+	**
 	** \ingroup IOFile
 	**
 	** \param filename The filename to open
 	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded
-	** \return The content of the file, null terminated, NULL if size > hardlimit or if any error has occurred.
+	** \return The content of the file, null terminated in any cases, NULL if size > hardlimit or if any error has occurred.
 	** If not NULL, this value must be deleted with the keyword `delete[]`
 	*/
-	char* LoadContentInMemory(const String& filename, const uint64 hardlimit = SizeHardLimit);
+	char* LoadContentInMemory(const String& filename, const uint64 hardlimit = sizeHardLimit);
 
 	/*!
 	** \brief Load the entire content of a file into memory
@@ -103,10 +108,10 @@ namespace File
 	** \param filename The filename to open
 	** \param[out] size The size of the file
 	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded 
-	** \return The content of the file, null terminated , NULL if size > hardlimit or if any error has occurred.
+	** \return The content of the file, null terminated in any cases, NULL if size > hardlimit or if any error has occurred.
 	** If not NULL, this value must be deleted with the keyword `delete[]`
 	*/
-	char* LoadContentInMemory(const String& filename, uint64& size, const uint64 hardlimit = SizeHardLimit);
+	char* LoadContentInMemory(const String& filename, uint64& size, const uint64 hardlimit = sizeHardLimit);
 
 	/*!
 	** \brief Save the content of a string into a file
@@ -149,6 +154,35 @@ namespace File
 	String RemoveDotSegmentsFromUnixFilename(const String& filename);
 
 
+	/*!
+	** \brief Create or erase a file
+	**
+	** \param filename An UTF8 filename
+	*/
+	template<class C> bool CreateEmptyFile(const C& filename);
+
+
+	/*!
+	** \brief Set the content of a file with an arbitrary string
+	**
+	** \code
+	** Core::IO::File::SetContent("/tmp/anyfile.txt", "Hello world !\n");
+	** \endcode
+	*/
+	template<class C1, class C2> bool SetContent(const C1& filename, const C2& content);
+
+	/*!
+	** \brief Append the content of an arbitrary string to a file
+	**
+	** \code
+	** Core::IO::File::AppendContent("/tmp/anyfile.txt", "lorem ipsumi\n");
+	** \endcode
+	*/
+	template<class C1, class C2> bool AppendContent(const C1& filename, const C2& content);
+
+
+
+
 
 
 } // namespace File
@@ -156,7 +190,8 @@ namespace File
 } // namespace Core
 } // namespace Yuni
 
-# include "file/file.hxx"
 # include "io.h"
+# include "file/stream.h"
+# include "file/file.hxx"
 
 #endif // __YUNI_CORE_FS_FILES_H__

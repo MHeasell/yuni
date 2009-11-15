@@ -26,6 +26,7 @@ namespace Core
 	template<class C, unsigned int ChunkSizeT = 80, bool ZeroTerminatedT = false, bool ExpandableT = true>
 	class MemoryBuffer;
 
+
 } // namespace Core
 
 } // namespace Yuni

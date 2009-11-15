@@ -4,6 +4,8 @@
 
 namespace Yuni
 {
+namespace Private
+{
 namespace Core
 {
 namespace IO
@@ -14,48 +16,73 @@ namespace Directory
 
 	# ifdef YUNI_OS_WINDOWS
 
-	bool Make(const char path[], unsigned int /* mode */)
+	bool WindowsMake(const char* path)
 	{
-		return (0 != CreateDirectory(path, NULL));
-	}
-
-	# else
-
-	bool Make(const char path[], unsigned int mode)
-	{
-		if (NULL == path || '\0' == *path)
-			return true;
-
-		char buffer[FILENAME_MAX];
-		strncpy(buffer, path, sizeof(buffer));
-		char* pt = buffer;
-		char tmp;
-		while (1)
+		if (!Core::IO::Exists(path))
 		{
-			if ('\\' == *pt || '/' == *pt || '\0' == *pt)
+			wchar_t buffer[FILENAME_MAX];
+			MultiByteToWideChar(CP_UTF8, 0, path, -1, buffer, sizeof(buffer));
+
+			wchar_t* t = buffer;
+			while (L'\0' != t)
 			{
-				tmp = *pt;
-				*pt = '\0';
-				if ('\0' != buffer[0] && '\0' != buffer[1] && '\0' != buffer[2])
+				if (*t == L'\\' || *t == L'/')
 				{
-					if (::mkdir(buffer, mode) < 0 && errno != EEXIST && errno != EISDIR && errno != ENOSYS)
+					*t = L'\0';
+					if (!CreateDirectoryW(buffer, NULL))
 						return false;
+					*t = L'\\';
 				}
-				if ('\0' == tmp)
-					break;
-				*pt = tmp;
+				++t;
 			}
-			++pt;
+			if (!CreateDirectoryW(buffer, NULL))
+				return false;
 		}
 		return true;
 	}
 
-	# endif
+	# else
+
+	bool UnixMake(const char* path, unsigned int mode)
+	{
+		if (NULL == path || '\0' == *path)
+			return true;
+
+		if (!Yuni::Core::IO::Exists(path))
+		{
+			char buffer[FILENAME_MAX];
+			(void)::strncpy(buffer, path, sizeof(buffer));
+			char* pt = buffer;
+			char tmp;
+
+			while (1)
+			{
+				if ('\\' == *pt || '/' == *pt || '\0' == *pt)
+				{
+					tmp = *pt;
+					*pt = '\0';
+					if ('\0' != buffer[0] && '\0' != buffer[1] && '\0' != buffer[2])
+					{
+						if (mkdir(buffer, mode) < 0 && errno != EEXIST && errno != EISDIR && errno != ENOSYS)
+							return false;
+					}
+					if ('\0' == tmp)
+						break;
+					*pt = tmp;
+				}
+				++pt;
+			}
+		}
+		return true;
+	}
+
+# endif
 
 
 
 } // namespace Directory
 } // namespace IO
 } // namespace Core
+} // namespace Private
 } // namespace Yuni
 

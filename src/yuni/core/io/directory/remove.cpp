@@ -1,18 +1,25 @@
 
-#include "commons.h"
-
-#ifdef YUNI_OS_WINDOWS
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <io.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "../directory.h"
+#include <dirent.h>
+#include <stdint.h>
+#include <string.h>
 #include <errno.h>
+#include <stdlib.h>
+#ifdef YUNI_OS_WINDOWS
+# include "../../core/system/windows.hdr.h"
+# include <ShellApi.h>
 #endif
+#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+#include <stdio.h>
 
 
 
 namespace Yuni
+{
+namespace Private
 {
 namespace Core
 {
@@ -21,110 +28,54 @@ namespace IO
 namespace Directory
 {
 
-
-# ifdef YUNI_OS_MSVC
-
-	inline bool IsDot(const char* s)
-	{
-		return (s[0] == '.' && (s[1] == '\0' || (s[1] == '.' && s[2] == '\0')));
-	}
-
-	bool DeleteDirectory(const char* sPath)
-	{
-		char currentDirectoryPath[MAX_PATH];
-		::strcpy_s(currentDirectoryPath, sizeof(currentDirectoryPath), sPath);
-		::strcat_s(currentDirectoryPath, sizeof(currentDirectoryPath), "\\*");
-
-		char currentFilename[MAX_PATH];
-		::strcpy_s(currentFilename, sizeof(currentFilename), sPath);
-		::strcat_s(currentFilename, sizeof(currentFilename), "\\");
-
-		WIN32_FIND_DATA FindFileData;
-		HANDLE hFind = FindFirstFile(currentDirectoryPath, &FindFileData);
-		if (hFind == INVALID_HANDLE_VALUE)
-			return false;
-		::strcpy_s(currentDirectoryPath, sizeof(currentDirectoryPath), currentFilename);
-
-		bool bSearch = true;
-		while (bSearch)
-		{
-			if (FindNextFile(hFind,&FindFileData))
-			{
-				if (IsDot(FindFileData.cFileName))
-					continue;
-				::strcat_s(currentFilename, sizeof(currentFilename), FindFileData.cFileName);
-				if ((FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
-				{
-					if (!DeleteDirectory(currentFilename))
-					{
-						FindClose(hFind);
-						return false;
-					}
-					RemoveDirectory(currentFilename);
-					::strcpy_s(currentFilename, sizeof(currentFilename), currentDirectoryPath);
-				}
-				else
-				{
-					if (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_READONLY)
-						_chmod(currentFilename, _S_IWRITE);
-					if (!DeleteFile(currentFilename))
-					{
-						FindClose(hFind);
-						return false;
-					}
-					::strcpy_s(currentFilename, sizeof(currentFilename), currentDirectoryPath);
-				}
-			}
-			else
-			{
-				if (GetLastError() == ERROR_NO_MORE_FILES)
-					bSearch = false;
-				else
-				{
-					FindClose(hFind);
-					return false;
-				}
-			}
-		}
-
-		FindClose(hFind);
-		return (0 != RemoveDirectory(sPath));
-	}
+# ifdef YUNI_OS_WINDOWS
 
 	bool Remove(const char* path)
 	{
-		return (NULL == path || '\0' == *path) ? true : DeleteDirectory(path);
-	}
+		wchar_t fsource[MAX_PATH];
+		int cr;
 
+		(void)::memset(fsource, 0, sizeof(fsource));
+		SHFILEOPSTRUCTW shf;
+		shf.hwnd = NULL;
+
+		MultiByteToWideChar(CP_UTF8, 0, path, -1, fsource, sizeof(fsource) - 1);
+
+		shf.wFunc = FO_DELETE;
+		shf.pFrom = fsource;
+		shf.pTo = fsource;
+		shf.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI;
+
+		cr = SHFileOperationW(&shf);
+		return (!cr);
+	}
 
 # else
 
-	namespace
+
+	namespace // Anonymous namespace
 	{
 
-		bool RmDirUnixImpl(const char path[])
+		bool RmDirRecursiveInternal(const char path[])
 		{
 			DIR* dp;
+			struct dirent* ep;
+			char buffer[FILENAME_MAX];
+			struct stat st;
+
 			if (NULL != (dp = ::opendir(path)))
 			{
-				struct dirent* ep;
-				struct stat st;
-				// temp Buffer
-				char buffer[FILENAME_MAX];
-
 				while (NULL != (ep = ::readdir(dp)))
 				{
-					sprintf(buffer, "%s/%s", path, ep->d_name);
+					(void)::sprintf(buffer, "%s/%s", path, ep->d_name);
 					if (0 == ::stat(buffer, &st))
 					{
 						if (S_ISDIR(st.st_mode))
 						{
 							if (strcmp(".", (ep->d_name)) != 0 && strcmp("..", (ep->d_name)) != 0)
 							{
-								if (!RmDirUnixImpl(buffer))
-									return false;
-								if (::rmdir(buffer))
-									return false;
+								RmDirRecursiveInternal(buffer);
+								::rmdir(buffer);
 							}
 						}
 						else
@@ -133,23 +84,29 @@ namespace Directory
 				}
 				(void)::closedir(dp);
 			}
-			return (0 == ::rmdir(path));
+			return (0 == rmdir(path));
 		}
 
 	} // anonymous namespace
 
 
 
-	bool Remove(const char* path)
+
+	bool Remove(const char path[])
 	{
-		return (NULL == path || '\0' == *path) ? true : RmDirUnixImpl(path);
+		if (NULL == path || '\0' == *path)
+			return true;
+		return RmDirRecursiveInternal(path);
 	}
 
 
 # endif
 
+
+
 } // namespace Directory
 } // namespace IO
 } // namespace Core
+} // namespace Private
 } // namespace Yuni
 
