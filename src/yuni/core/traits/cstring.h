@@ -21,14 +21,6 @@ namespace Traits
 	struct CString
 	{
 	public:
-		/*!
-		** \brief The returned type
-		**
-		** The returned type is `const char*` the most of the time but a temporary
-		** class could be used for conversions.
-		*/
-		typedef char* BufferType;
-
 		enum
 		{
 			//! A non-zero value if the specialization is valid
@@ -44,7 +36,7 @@ namespace Traits
 		** \param container A arbitrary container
 		** \return The equivalent of a `const char*` pointer (can be NULL)
 		*/
-		static const BufferType Buffer(const C& /*container*/) { return NULL; /* Default */ }
+		static const char* Buffer(const C& /*container*/) { return NULL; /* Default */ }
 
 	}; // class CString<>
 
@@ -57,7 +49,6 @@ namespace Traits
 	struct CString<char*>
 	{
 	public:
-		typedef char* BufferType;
 		enum { valid = 1, converted = 0, };
 	
 	public:
@@ -73,11 +64,10 @@ namespace Traits
 	struct CString<MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT> >
 	{
 	public:
-		typedef char* BufferType;
 		enum { valid = 1, converted = 0, };
 	
 	public:
-		static const BufferType Buffer(const MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>& container)
+		static const char* Buffer(const MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>& container)
 		{
 			return container.data();
 		}
@@ -88,11 +78,10 @@ namespace Traits
 	struct CString<MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>* >
 	{
 	public:
-		typedef char* BufferType;
 		enum { valid = 1, converted = 0, };
 	
 	public:
-		static const BufferType Buffer(const MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>* container)
+		static const char* Buffer(const MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>* container)
 		{
 			return container ? container->data() : NULL;
 		}
@@ -104,11 +93,10 @@ namespace Traits
 	struct CString<StringBase<char,ChunkSizeT> >
 	{
 	public:
-		typedef char* BufferType;
 		enum { valid = 1, converted = 0, };
 	
 	public:
-		static const BufferType Buffer(const StringBase<char,ChunkSizeT>& container)
+		static const char* Buffer(const StringBase<char,ChunkSizeT>& container)
 		{
 			return container.c_str();
 		}
@@ -120,11 +108,10 @@ namespace Traits
 	struct CString<StringBase<char,ChunkSizeT>* >
 	{
 	public:
-		typedef char* BufferType;
 		enum { valid = 1, converted = 0, };
 	
 	public:
-		static const BufferType Buffer(const StringBase<char,ChunkSizeT>* container)
+		static const char* Buffer(const StringBase<char,ChunkSizeT>* container)
 		{
 			return container ? container->c_str() : NULL;
 		}
@@ -135,11 +122,10 @@ namespace Traits
 	struct CString<std::basic_string<char,T,Alloc> >
 	{
 	public:
-		typedef char* BufferType;
 		enum { valid = 1, converted = 0, };
 	
 	public:
-		static const BufferType Buffer(const std::basic_string<char,T,Alloc>& container)
+		static const char* Buffer(const std::basic_string<char,T,Alloc>& container)
 		{
 			return container.c_str();
 		}
@@ -150,11 +136,10 @@ namespace Traits
 	struct CString<std::basic_string<char,T,Alloc>* >
 	{
 	public:
-		typedef char* BufferType;
 		enum { valid = 1, converted = 0, };
 	
 	public:
-		static const BufferType Buffer(const std::basic_string<char,T,Alloc>* container)
+		static const char* Buffer(const std::basic_string<char,T,Alloc>* container)
 		{
 			return container ? container->c_str() : NULL;
 		}
