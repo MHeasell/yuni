@@ -940,7 +940,7 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::operator == (const C* rhs) const
 	{
-		return Private::StringImpl::Impl<C,Chunk>::StrictlyEquals(pPtr, rhs);
+		return (::strlen(rhs) == pSize) && Private::StringImpl::Impl<C,Chunk>::StrictlyEquals(pPtr, rhs);
 	}
 
 
@@ -981,7 +981,7 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::operator == (const C rhs[N]) const
 	{
-		return (N == pSize) && Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize);
+		return ((N - 1) == pSize) && Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize);
 	}
 
 
@@ -991,7 +991,7 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::operator == (const StringBase<C,Chnk1>& rhs) const
 	{
-		return StringBase<C,Chunk>::Equals(*this, rhs);
+		return (rhs.size() == pSize) && StringBase<C,Chunk>::Equals(*this, rhs);
 	}
 
 
@@ -999,7 +999,7 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::operator != (const C* rhs) const
 	{
-		return !Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize);
+		return (::strlen(rhs) != pSize) || !Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize);
 	}
 
 
@@ -1008,7 +1008,7 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::operator != (const C rhs[N]) const
 	{
-		return !((N == pSize) && Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize));
+		return !(((N - 1) == pSize) && Private::StringImpl::Impl<C,Chunk>::Equals(pPtr, rhs, pSize));
 	}
 
 
@@ -1017,7 +1017,7 @@ namespace Yuni
 	inline bool
 	StringBase<C,Chunk>::operator != (const StringBase<C,Chnk1>& rhs) const
 	{
-		return !StringBase<C,Chunk>::Equals(*this, rhs);
+		return (rhs.size() != pSize) || !StringBase<C,Chunk>::Equals(*this, rhs);
 	}
 
 
