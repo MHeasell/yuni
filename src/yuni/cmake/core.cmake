@@ -265,15 +265,18 @@ source_group(Core\\IO FILES ${SRC_CORE_IO_FILENAME})
 Set(SRC_CORE_IO_DIRECTORY
 				core/io/directory.h core/io/directory/directory.hxx
 				core/io/directory/commons.h
-				core/io/directory/directory.cpp
 				core/io/directory/remove.cpp
 				core/io/directory/current.cpp
 				core/io/directory/make.cpp
+				core/io/directory/copy.cpp
 				)
 source_group(Core\\IO\\Directory FILES ${SRC_CORE_IO_DIRECTORY})
 
 
 Set(SRC_CORE_IO_FILE
+				core/io/file/openmode.h core/io/file/openmode.cpp
+				core/io/file/stream.h core/io/file/stream.hxx
+				core/io/file/stream.cpp
 				core/io/file.h core/io/file/file.hxx core/io/file/file.cpp
 				core/io/file/load.cpp
 				)

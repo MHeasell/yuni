@@ -1,6 +1,39 @@
 #ifndef __YUNI_CORE_IO_DIRECTORY_HXX__
 # define __YUNI_CORE_IO_DIRECTORY_HXX__
 
+# include "../../traits/cstring.h"
+# include "../../traits/length.h"
+# include "../../static/remove.h"
+
+
+namespace Yuni
+{
+namespace Private
+{
+namespace Core
+{
+namespace IO
+{
+namespace Directory
+{
+
+	# ifdef YUNI_OS_WINDOWS
+	bool WindowsMake(const char* path);
+	# else
+	bool UnixMake(const char* path, unsigned int mode = 0755);
+	# endif
+
+	bool Copy(const char* src, const char* dst);
+
+	bool Remove(const char* path);
+
+} // namespace Directory
+} // namespace IO
+} // namespace Core
+} // namespace Private
+} // namespace Yuni
+
+
 
 namespace Yuni
 {
@@ -12,47 +45,49 @@ namespace Directory
 {
 
 
-	template<int N>
-	inline bool MakeDir(const StringBase<char,N>& p, unsigned int mode)
-	{
-		return MakeDir(p.c_str(), mode);
-	}
-
-
-	template<int N, int M>
-	inline bool Copy(const StringBase<char,N>& src, const StringBase<char,M>& dst)
-	{
-		return Copy(src.c_str(), dst.c_str());
-	}
-
-
-	template<int N>
-	inline bool Remove(const StringBase<char,N>& p)
-	{
-		return RmDir(p.c_str());
-	}
-
-
-	template<typename C, int N>
-	inline bool Exists(const StringBase<C,N>& p)
+	template<class C>
+	inline bool Make(const C& path, unsigned int mode)
 	{
 		# ifdef YUNI_OS_WINDOWS
-		return p.notEmpty() ? Private::IO::FilesystemImpl::IsDirectoryWindowsImpl(p, p.size()) : false;
+		(void) mode;
+		return Private::Core::IO::Directory::WindowsMake(
+			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path));
 		# else
-		return p.notEmpty() ? Private::IO::FilesystemImpl::IsDirectoryUnixImpl(p.c_str()) : false;
+		return Private::Core::IO::Directory::UnixMake(
+			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path), mode);
 		# endif
-
 	}
 
 
-	inline bool Exists(const char* p)
+	template<class C, class D> inline bool Copy(const C& src, const D& dst)
+	{
+		return Private::Core::IO::Directory::Copy(
+			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(src),
+			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(dst));
+	}
+
+
+	template<class C>
+	inline bool Remove(const C& path)
+	{
+		return Private::Core::IO::Directory::Remove(
+			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path));
+	}
+
+
+	template<class C>
+	inline bool Exists(const C& path)
 	{
 		# ifdef YUNI_OS_WINDOWS
-		return (p && '\0' != *p) ? Private::IO::FilesystemImpl::IsDirectoryWindowsImpl(p, ::strlen(p)) : false;
+		return Private::IO::FilesystemImpl::IsDirectoryWindowsImpl(
+			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path),
+			Core::Traits::Length<C>::Value(path));
 		# else
-		return (p && '\0' != *p) ? Private::IO::FilesystemImpl::IsDirectoryUnixImpl(p) : false;
+		return Private::IO::FilesystemImpl::IsDirectoryUnixImpl(Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path));
 		# endif
 	}
+
+
 
 
 

@@ -190,6 +190,9 @@ namespace Core
 			// Static buffer
 			AncestorType::size = (len <= AncestorType::chunkSize) ? len : AncestorType::chunkSize;
 		}
+		// Zero-Terminated buffers
+		if (zeroTerminated)
+			AncestorType::data[AncestorType::size] = C();
 	}
 
 

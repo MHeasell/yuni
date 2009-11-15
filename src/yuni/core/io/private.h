@@ -1,6 +1,7 @@
 #ifndef __YUNI_CORE_IO_PRIVATE_H__
 # define __YUNI_CORE_IO_PRIVATE_H__
 
+
 namespace Yuni
 {
 namespace Private
