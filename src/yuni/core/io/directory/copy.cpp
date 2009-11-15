@@ -6,7 +6,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #ifdef YUNI_OS_WINDOWS
-# include "../../core/system/windows.hdr.h"
+# include "../../system/windows.hdr.h"
 # include <ShellApi.h>
 #endif
 #include <sys/stat.h>
