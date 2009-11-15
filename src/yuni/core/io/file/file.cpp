@@ -16,20 +16,6 @@ namespace IO
 namespace File
 {
 
-	bool Stream::close()
-	{
-		if (pFd)
-		{
-			if (0 == ::fclose(pFd))
-			{
-				pFd = NULL;
-				return true;
-			}
-			return false;
-		}
-		return true;
-	}
-
 
 
 	bool Size(const char* filename, uint64& size)
@@ -271,18 +257,6 @@ namespace File
 		return (isAbsolute) ? String('/') : String('.');
 	}
 
-
-
-	bool Stream::seek(ssize_t offset, SeekOrigin origin)
-	{
-		switch (origin)
-		{
-			case seekOriginBegin:   return (0 == ::fseeko(pFd, offset, SEEK_SET));
-			case seekOriginCurrent: return (0 == ::fseeko(pFd, offset, SEEK_CUR));
-			case seekOriginEnd:     return (0 == ::fseeko(pFd, offset, SEEK_END));
-		}
-		return false;
-	}
 
 
 
