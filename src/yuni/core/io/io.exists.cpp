@@ -93,10 +93,14 @@ namespace FilesystemImpl
 	template<bool B>
 	inline bool IsDirUnixImpl(const char* p)
 	{
-		struct stat s;
-		if (stat(p, &s) != 0)
-			return false;
-		return (B == S_ISDIR(s.st_mode));
+		if (p && '\0' != *p)
+		{
+			struct stat s;
+			if (stat(p, &s) != 0)
+				return false;
+			return (B == S_ISDIR(s.st_mode));
+		}
+		return false;
 	}
 
 
