@@ -89,7 +89,7 @@ namespace Traits
 
 
 
-	template<unsigned int ChunkSizeT>
+	template<int ChunkSizeT>
 	struct CString<StringBase<char,ChunkSizeT> >
 	{
 	public:
@@ -104,7 +104,7 @@ namespace Traits
 
 
 
-	template<unsigned int ChunkSizeT>
+	template<int ChunkSizeT>
 	struct CString<StringBase<char,ChunkSizeT>* >
 	{
 	public:
