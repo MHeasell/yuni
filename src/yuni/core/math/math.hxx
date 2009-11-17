@@ -38,7 +38,7 @@ namespace Math
 	}
 
 
-	template<typename T>
+	template<class T>
 	inline const T& Max(const T& a, const T& b, const T& c)
 	{
 		return Max<T,T>(Max<T,T>(a, b), c);
@@ -53,21 +53,21 @@ namespace Math
 
 
 
-	template<typename T>
+	template<class T>
 	inline const T& Min(const T& a, const T& b, const T& c)
 	{
 		return Min<T>(Min<T>(a, b), c);
 	}
 
 
-	template<typename T>
+	template<class T>
 	inline void Swap(T& a, T&b)
 	{
 		std::swap(a, b);
 	}
 
 
-	template<typename T>
+	template<class T>
 	inline const T& MinMax(const T& expr, const T& min, const T& max)
 	{
 		return ((expr < min)
@@ -160,26 +160,26 @@ namespace Math
 	}
 
 
-	template<typename T> inline T DegreeToRadian(const T x)
+	template<class T> inline T DegreeToRadian(const T x)
 	{
 		return (x * 0.017453292);
 	}
 
 
-	template<typename T> inline T RadianToDegree(const T x)
+	template<class T> inline T RadianToDegree(const T x)
 	{
 		return (x * 57.29578122);
 	}
 
 
-	template<typename T> inline bool NaN(const T& x)
+	template<class T> inline bool NaN(const T& x)
 	{
 		return (isnan(x));
 	}
 
 
 
-	template<typename T> inline T Floor(T x)
+	template<class T> inline T Floor(T x)
 	{
 		return x;
 	}
@@ -202,7 +202,7 @@ namespace Math
 	# endif
 
 
-	template<typename T> inline T Ceil(T x)
+	template<class T> inline T Ceil(T x)
 	{
 		return x;
 	}
@@ -225,7 +225,7 @@ namespace Math
 	# endif
 
 
-	template<typename T> inline T Fract(T x)
+	template<class T> inline T Fract(T x)
 	{
 		return x - Floor(x);
 	}
@@ -243,7 +243,7 @@ namespace Math
 	}
 
 
-	template<typename T> inline T Round(T x)
+	template<class T> inline T Round(T x)
 	{
 		return x;
 	}
@@ -279,7 +279,25 @@ namespace Math
 	}
 
 
-	template<typename T, typename R>
+	template<class T> inline T Trunc(T x)
+	{
+		return x;
+	}
+
+	template<> inline double Trunc<double>(double x)
+	{
+		return ::trunc(x);
+	}
+
+	template<> inline float Trunc<float>(float x)
+	{
+		return ::truncf(x);
+	}
+
+
+
+
+	template<class T, class R>
 	struct RoundToInt
 	{
 		typedef T Type;
@@ -291,7 +309,7 @@ namespace Math
 		}
 	};
 
-	template<typename T>
+	template<class T>
 	struct RoundToInt<T,T>
 	{
 		typedef T Type;
@@ -377,7 +395,7 @@ namespace Math
 	};
 	# endif
 
-	template<typename T> inline T Abs(const T x)
+	template<class T> inline T Abs(const T x)
 	{
 		return ::abs(x);
 	}
