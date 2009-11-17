@@ -15,7 +15,7 @@
 **
 ** \ingroup Math
 */
-# define YUNI_EPSILON  1.e-6
+# define YUNI_EPSILON        1.e-6
 
 /*!
 ** \brief Pi, A Mathematical constant (π)
@@ -25,21 +25,21 @@
 ** \see http://en.wikipedia.org/wiki/Pi
 ** \ingroup Math
 */
-# define YUNI_PI               3.14159265358979323846
+# define YUNI_PI             3.14159265358979323846
 
 /*!
 ** \brief The reciprocal value of PI
 **
 ** \ingroup Math
 */
-# define YUNI_RECIPROCAL_PI    0.318309886183791 // = 1. / YUNI_PI
+# define YUNI_RECIPROCAL_PI  0.318309886183791 // = 1. / YUNI_PI
 
 /*!
 ** \brief The half value of PI
 **
 ** \ingroup Math
 */
-# define YUNI_HALF_PI          1.570796326794897 // = YUNI_PI / 2.
+# define YUNI_HALF_PI        1.570796326794897 // = YUNI_PI / 2.
 
 /*!
 ** \brief E, A Mathematical constant
@@ -49,7 +49,7 @@
 ** \see http://en.wikipedia.org/wiki/E_(mathematical_constant)
 ** \ingroup Math
 */
-# define YUNI_NAT_E   2.71828182845904523536
+# define YUNI_NAT_E          2.71828182845904523536
 
 
 
@@ -87,7 +87,7 @@ namespace Math
 	**
 	** \ingroup Math
 	*/
-	template<typename T> T Abs(const T a);
+	template<class T> T Abs(const T a);
 
 	/*!
 	** \brief Get the greater expression
@@ -108,7 +108,7 @@ namespace Math
 	** \param c The third expression
 	** \return The expression considered as the grater
 	*/
-	template<typename T> inline const T& Max(const T& a, const T& b, const T& c);
+	template<class T> inline const T& Max(const T& a, const T& b, const T& c);
 
 	/*!
 	** \brief Get the smallest expression
@@ -129,7 +129,7 @@ namespace Math
 	** \param c The third expression
 	** \return The expression considered as the smaller
 	*/
-	template<typename T> inline const T& Min(const T& a, const T& b, const T& c);
+	template<class T> inline const T& Min(const T& a, const T& b, const T& c);
 
 
 	/*!
@@ -141,7 +141,7 @@ namespace Math
 	** \param max The upper bound limit allowed for the expression `v`
 	** \return The expression itself, or a bound limit
 	*/
-	template<typename T> inline const T& MinMax(const T& expr, const T& min, const T& max);
+	template<class T> inline const T& MinMax(const T& expr, const T& min, const T& max);
 
 
 	/*!
@@ -151,7 +151,7 @@ namespace Math
 	** \param a The first value
 	** \param b the second value
 	*/
-	template<typename T> inline void Swap(T& a, T&b);
+	template<class T> inline void Swap(T& a, T&b);
 
 
 
@@ -256,7 +256,7 @@ namespace Math
 	**       see Yuni::Unit for more functionalities.
 	** \ingroup Math
 	*/
-	template<typename T> inline T DegreeToRadian(const T x);
+	template<class T> inline T DegreeToRadian(const T x);
 
 
 	/*!
@@ -266,7 +266,7 @@ namespace Math
 	**       see Yuni::Unit for more functionalities.
 	** \ingroup Math
 	*/
-	template<typename T> inline T RadianToDegree(const T x);
+	template<class T> inline T RadianToDegree(const T x);
 
 
 
@@ -275,7 +275,7 @@ namespace Math
 	**
 	** \ingroup Math
 	*/
-	template<typename T> inline bool NaN(const T& x);
+	template<class T> inline bool NaN(const T& x);
 
 
 	/*!
@@ -283,14 +283,14 @@ namespace Math
 	**
 	** \ingroup Math
 	*/
-	template<typename T> inline T Floor(T x);
+	template<class T> inline T Floor(T x);
 
 	/*!
 	** \brief Ceil function
 	**
 	** \ingroup Math
 	*/
-	template<typename T> inline T Ceil(T x);
+	template<class T> inline T Ceil(T x);
 
 
 	/*!
@@ -298,7 +298,7 @@ namespace Math
 	**
 	** \ingroup Math
 	*/
-	template<typename T> inline T Fract(T x);
+	template<class T> inline T Fract(T x);
 
 
 	/*!
@@ -309,7 +309,16 @@ namespace Math
 	** half-way cases away from zero, regardless of the current rounding
 	** direction.
 	*/
-	template<typename T> inline T Round(T x);
+	template<class T> inline T Round(T x);
+
+
+	/*!
+	** \brief truncate to integer value
+	**
+	** The function return the integral value nearest to but no larger in magnitude than x.
+	** \ingroup math
+	*/
+	template<class T> inline T Trunc(T x);
 
 
 	/*!
@@ -321,7 +330,7 @@ namespace Math
 	** \endcode
 	** \ingroup Math
 	*/
-	template<typename T, typename R> struct RoundToInt;
+	template<class T, class R> struct RoundToInt;
 
 
 
