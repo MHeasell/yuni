@@ -1,6 +1,7 @@
 #ifndef __YUNI_CORE_MEMORY_BUFFER_TRAITS_FILL_H__
 # define __YUNI_CORE_MEMORY_BUFFER_TRAITS_FILL_H__
 
+# include "../../traits/length.h"
 
 namespace Yuni
 {

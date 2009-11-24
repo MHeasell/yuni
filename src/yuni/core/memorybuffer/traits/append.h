@@ -1,6 +1,7 @@
 #ifndef __YUNI_CORE_MEMORY_BUFFER_TRAITS_APPEND_H__
 # define __YUNI_CORE_MEMORY_BUFFER_TRAITS_APPEND_H__
 
+# include "../../traits/length.h"
 
 # ifdef YUNI_OS_MSVC
 #	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf_s(BUFFER,SIZE,F,V)
