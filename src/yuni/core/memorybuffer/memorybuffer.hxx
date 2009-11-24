@@ -177,7 +177,7 @@ namespace Core
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
 	inline void
-	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::resize(inline typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size len)
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::resize(typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size len)
 	{
 		if (AncestorType::expandable)
 		{
