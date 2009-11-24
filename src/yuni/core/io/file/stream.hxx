@@ -79,11 +79,11 @@ namespace File
 
 	inline bool Stream::purge()
 	{
-        # ifdef YUNI_OS_WINDOWS
-        return false;
-        # else
+		# if defined YUNI_OS_WINDOWS || defined YUNI_OS_LINUX
+		return false;
+		# else
 		return (0 == ::fpurge(pFd));
-        # endif
+		# endif
 	}
 
 
