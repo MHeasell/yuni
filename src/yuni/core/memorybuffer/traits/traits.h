@@ -149,14 +149,19 @@ namespace MemoryBufferImpl
 
 		void reserve(Size minCapacity);
 
-		bool empty() const
+		void insert(Size offset, const C* buffer, const Size len)
 		{
-			return !size;
-		}
-
-		bool notEmpty() const
-		{
-			return size;
+			// Reserving enough space to insert the buffer
+			reserve(len + size + zeroTerminated);
+			// Move the existing block of data
+			(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (size - offset));
+			// Copying the given buffer
+			(void)::memcpy(data + sizeof(C) * (offset), buffer, sizeof(C) * len);
+			// Updating the size
+			size += len;
+			// zero-terminated
+			if (zeroTerminated)
+				data[size] = C();
 		}
 
 	protected:
@@ -230,14 +235,41 @@ namespace MemoryBufferImpl
 			// Do nothing
 		}
 
-		bool empty() const
+		void insert(Size offset, const C* buffer, Size len)
 		{
-			return !size;
-		}
-
-		bool notEmpty() const
-		{
-			return size;
+			if (offset + len >= capacity)
+			{
+				// The new buffer will take the whole space
+				(void)::memcpy(data + sizeof(C) * (offset), buffer, sizeof(C) * (capacity - offset));
+				size = capacity;
+				if (zeroTerminated)
+					data[capacity] = C();
+				return;
+			}
+			if (size + len <= capacity)
+			{
+				// Move the existing block of data
+				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (size - offset));
+				// Copying the given buffer
+				(void)::memcpy(data + sizeof(C) * (offset), buffer, sizeof(C) * len);
+				// Updating the size
+				size += len;
+				// zero-terminated
+				if (zeroTerminated)
+					data[size] = C();
+			}
+			else
+			{
+				// Move the existing block of data
+				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (capacity - offset - len));
+				// Copying the given buffer
+				(void)::memcpy(data + sizeof(C) * (offset), buffer, sizeof(C) * len);
+				// Updating the size
+				size = capacity;
+				// zero-terminated
+				if (zeroTerminated)
+					data[capacity] = C();
+			}
 		}
 
 	protected:
@@ -245,6 +277,8 @@ namespace MemoryBufferImpl
 		C data[capacity + zeroTerminated];
 
 	}; // class Data;
+
+
 
 
 

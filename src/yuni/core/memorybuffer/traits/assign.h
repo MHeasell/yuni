@@ -76,9 +76,14 @@ namespace MemoryBufferImpl
 		typedef typename MemBufT::Type C;
 		static void Do(MemBufT& memoryBuffer, const C rhs[N])
 		{
-			// The calculation with `N` is required to properly handle
-			// both a zero-terminated buffer and a simple array
-			memoryBuffer.assignWithoutChecking(rhs, N - ((rhs[N-1] == C()) ? 1 : 0));
+			if (N > 0)
+			{
+				// The calculation with `N` is required to properly handle
+				// both a zero-terminated buffer and a simple array
+				memoryBuffer.assignWithoutChecking(rhs, N - ((rhs[N-1] == C()) ? 1 : 0));
+			}
+			else
+				memoryBuffer.clear();
 		}
 	};
 
