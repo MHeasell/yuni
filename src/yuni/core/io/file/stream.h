@@ -138,11 +138,6 @@ namespace File
 		** \return True if the operation succeeded, False otherwise
 		*/
 		bool flush();
-
-		/*!
-		** \brief Purge (erases any input or output buffered in the stream)
-		*/
-		bool purge();
 		//@}
 
 

@@ -77,16 +77,6 @@ namespace File
 	}
 
 
-	inline bool Stream::purge()
-	{
-		# if defined YUNI_OS_WINDOWS || defined YUNI_OS_LINUX
-		return false;
-		# else
-		return (0 == ::fpurge(pFd));
-		# endif
-	}
-
-
 	inline char Stream::get()
 	{
 		return (char)::fgetc(pFd);
