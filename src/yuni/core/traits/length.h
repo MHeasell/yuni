@@ -32,6 +32,10 @@ namespace Traits
 		{
 			//! A non-zero value if the specialization is valid
 			valid = 0,
+			//! A non-zero value when the size is known at compile time
+			isFixed = 1,
+			//! The fixed length value when it can be known at compile time (can be 0), 0 otherwise
+			fixedLength = 0,
 		};
 
 	public:
@@ -59,7 +63,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	public:
 		static SizeT Value(const C* container)
@@ -71,17 +75,39 @@ namespace Traits
 		}
 	};
 
+
+	// C{N}
+	template<class C, int N, class SizeT>
+	struct Length<C[N], SizeT>
+	{
+	public:
+		typedef SizeT SizeType;
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
+
+	public:
+		static SizeT Value(const C* container)
+		{
+			// This value can not really be known at compile time
+			// We may encounter literal strings :
+			// "abc" -> N = 4 but the real length is 3
+			// or a static buffer  char v[42] where the real length is 42
+			return (N == 0) ? 0 : (C() == container[N-1] ? N-1 : N);
+		}
+	};
+
+
 	// A mere CString (zero-terminated)
 	template<class SizeT>
 	struct Length<char*, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	public:
 		static SizeT Value(const char* container) {return (SizeT)::strlen(container);}
 	};
+
 
 	// A mere wide string (zero-terminated)
 	template<class SizeT>
@@ -89,7 +115,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	public:
 		static SizeT Value(const wchar_t* container) {return (SizeT)::wcslen(container);}
@@ -104,7 +130,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 1, fixedLength = 1, };
 
 	public:
 		static SizeT Value(const char) {return (SizeT) 1;}
@@ -117,7 +143,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 1, fixedLength = 1, };
 
 	public:
 		static SizeT Value(const wchar_t) {return (SizeT) 1;}
@@ -134,7 +160,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
 		typedef MemoryBuffer<C,ChunkSizeT, ZeroTerminatedT,ExpandableT> MemoryBufferType;
@@ -152,7 +178,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
 		typedef MemoryBuffer<C,ChunkSizeT, ZeroTerminatedT,ExpandableT> MemoryBufferType;
@@ -173,7 +199,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
 		typedef StringBase<C,ChunkSizeT> StringType;
@@ -190,7 +216,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
 		typedef StringBase<C,ChunkSizeT> StringType;
@@ -211,7 +237,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
 		typedef std::basic_string<C,T,Alloc> StringType;
@@ -229,7 +255,7 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
 		typedef std::basic_string<C,T,Alloc> StringType;
@@ -251,10 +277,10 @@ namespace Traits
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, };
+		enum { valid = 1, isFixed = 1, fixedLength = 0, };
 
 	public:
-		static SizeT Value(const Yuni::NullPtr& container)
+		static SizeT Value(const Yuni::NullPtr&)
 		{
 			return 0;
 		}

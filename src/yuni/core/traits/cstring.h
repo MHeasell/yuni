@@ -50,7 +50,21 @@ namespace Traits
 	{
 	public:
 		enum { valid = 1, converted = 0, };
-	
+
+	public:
+		static const char* Buffer(const char* container)
+		{
+			return container; /* identity */
+		}
+	};
+
+
+	template<int N>
+	struct CString<char[N]>
+	{
+	public:
+		enum { valid = 1, converted = 0, };
+
 	public:
 		static const char* Buffer(const char* container)
 		{
@@ -60,12 +74,13 @@ namespace Traits
 
 
 
+
 	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
 	struct CString<MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT> >
 	{
 	public:
 		enum { valid = 1, converted = 0, };
-	
+
 	public:
 		static const char* Buffer(const MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>& container)
 		{
@@ -79,7 +94,7 @@ namespace Traits
 	{
 	public:
 		enum { valid = 1, converted = 0, };
-	
+
 	public:
 		static const char* Buffer(const MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>* container)
 		{
@@ -94,7 +109,7 @@ namespace Traits
 	{
 	public:
 		enum { valid = 1, converted = 0, };
-	
+
 	public:
 		static const char* Buffer(const StringBase<char,ChunkSizeT>& container)
 		{
@@ -109,7 +124,7 @@ namespace Traits
 	{
 	public:
 		enum { valid = 1, converted = 0, };
-	
+
 	public:
 		static const char* Buffer(const StringBase<char,ChunkSizeT>* container)
 		{
@@ -123,7 +138,7 @@ namespace Traits
 	{
 	public:
 		enum { valid = 1, converted = 0, };
-	
+
 	public:
 		static const char* Buffer(const std::basic_string<char,T,Alloc>& container)
 		{
@@ -137,11 +152,25 @@ namespace Traits
 	{
 	public:
 		enum { valid = 1, converted = 0, };
-	
+
 	public:
 		static const char* Buffer(const std::basic_string<char,T,Alloc>* container)
 		{
 			return container ? container->c_str() : NULL;
+		}
+	};
+
+
+	template<>
+	struct CString<NullPtr>
+	{
+	public:
+		enum { valid = 1, converted = 0, };
+
+	public:
+		static const char* Buffer(const Yuni::NullPtr&)
+		{
+			return NULL;
 		}
 	};
 
