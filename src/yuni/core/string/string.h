@@ -124,8 +124,11 @@ namespace Yuni
 		//! Size
 		typedef size_t Size;
 
-		//! The largest possible value of type `Size` or `size_type`. That is, Size(-1)
-		static const Size npos = Size(-1);
+		enum
+		{
+			//! The largest possible value of type `Size` or `size_type`. That is, Size(-1)
+			npos = Size(-1),
+		};
 
 		enum
 		{

@@ -4,6 +4,8 @@
 # include "../../yuni.h"
 # include "../static/remove.h"
 # include "../static/assert.h"
+# include "../traits/cstring.h"
+# include "../traits/length.h"
 
 # include "traits/traits.h"
 # include "traits/append.h"
@@ -28,6 +30,7 @@ namespace Core
 	**  - Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>Base<C>
 	**  - Yuni::Core::MemoryBuffer<C>
 	**
+	**
 	** \tparam C A pod type
 	** \tparam ChunkSizeT The size for a single chunk (>= 2)
 	** \tparam ZeroTerminatedT A non-zero value if the buffer must always be terminated by a zero
@@ -35,7 +38,7 @@ namespace Core
 	**   buffer with a length equals to ChunkSizeT * sizeof(C)
 	*/
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
-	class MemoryBuffer : public Private::MemoryBufferImpl::Data<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>
+	class MemoryBuffer : protected Private::MemoryBufferImpl::Data<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>
 	{
 	public:
 		//! Ancestor
@@ -60,9 +63,11 @@ namespace Core
 			zeroTerminated = AncestorType::zeroTerminated,
 			//! A non-zero value if the buffer can be expanded
 			expandable = AncestorType::expandable,
+
+			//! Invalid offset
+			npos = (Size)(-1),
 		};
 
-		static const Size npos = (Size)(-1);
 
 	public:
 		//! \name Constructors & Destructor
@@ -92,6 +97,7 @@ namespace Core
 		//@}
 
 
+		//! \name Append / Assign
 		/*!
 		** \brief Assign a new value to the buffer
 		**
@@ -102,10 +108,10 @@ namespace Core
 		/*[!]
 		** \brief Copy a raw buffer
 		**
-		** \param block A buffer
-		** \param blockSize Size of the given buffer
+		** \param buffer A buffer
+		** \param size Size of the given buffer
 		*/
-		// void assign(const C* block, const Size blockSize); - from Ancestor
+		void assign(const C* buffer, const Size size);
 
 		/*!
 		** \brief Append to the end of the buffer a new value
@@ -114,27 +120,138 @@ namespace Core
 		*/
 		template<class U> void append(const U& rhs);
 
-		/*[!]
+		/*!
+		** \brief Append to the end of the buffer a new value
+		**
+		** \param rhs Any supported value
+		** \param size Size of the container
+		*/
+		template<class U> void append(const U& u, const Size size);
+
+		/*!
 		** \brief Append a raw buffer
 		**
-		** \param block A buffer
-		** \param blockSize Size of the given buffer
+		** \param buffer A buffer
+		** \param size Size of the given buffer
 		*/
-		// void append(const C* block, const Size blockSize); - from Ancestor
+		void append(const C* buffer, const Size size);
 
-		/*[!]
+
+		/*!
+		** \brief Insert at the begining of the buffer a new value
+		**
+		** This is a convenient replacement for insert(0, u)
+		** \param rhs Any supported value
+		*/
+		template<class U> void prepend(const U& u);
+
+		/*!
+		** \brief Insert at the begining of the buffer a new value
+		**
+		** \param rhs Any supported value
+		** \param size Size of the container
+		*/
+		template<class U> void prepend(const U& u, const Size size);
+
+		/*!
 		** \brief Append a single item (char)
 		**
 		** \param rhs A single item
 		*/
-		// void putc(const C rhs); - from Ancestor
+		void putc(const C c);
 
 		/*!
-		** \brief
+		** \brief Insert a raw buffer at a given position in the buffer
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param buffer A raw buffer
+		** \param size Size of the buffer
+		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
+		*/
+		bool insert(const Size offset, const C* buffer, const Size size);
+
+		/*!
+		** \brief Insert a single item at a given position in the buffer
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param c A single item
+		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
+		*/
+		bool insert(const Size offset, const C c);
+
+		/*!
+		** \brief Insert an arbitrary CString container at a given position in the buffer
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param u Any CString container
+		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
+		*/
+		template<class U> bool insert(const Size offset, const U& u);
+
+		/*!
+		** \brief Insert an arbitrary CString container at a given position in the buffer
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param u Any CString container
+		** \param size The size to use the given container
+		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
+		*/
+		template<class U> bool insert(const Size offset, const U& u, const Size size);
+
+		
+		/*!
+		** \brief Overwrite a region of the buffer
+		**
+		** The size of the buffer will remain untouched in any cases.
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param region A CString container
+		*/
+		template<class U> void overwrite(const Size offset, const U& u);
+
+		/*!
+		** \brief Overwrite a region of the buffer
+		**
+		** The size of the buffer will remain untouched in any cases.
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param region A raw buffer
+		** \param size Size of the given buffer
+		*/
+		void overwrite(const Size offset, const C* region, const Size size);
+
+
+		/*!
+		** \brief Fill the whole buffer with a given pattern
+		**
+		** \code
+		** Core::MemoryBuffer<char>  buffer;
+		** buffer.resize(80);
+		**
+		** // Preface
+		** buffer.fill('.');
+		** buffer.overwrite(0, " Preface ");
+		** buffer.overwrite(78, " 1");
+		** std::cout << buffer << std::endl;
+		**
+		** // Chapter 1
+		** buffer.fill('.');
+		** buffer.overwrite(0, " Chapter 1 ");
+		** buffer.overwrite(78, " 4");
+		** std::cout << buffer << std::endl;
+		** \endcode
 		*/
 		template<class U> void fill(const U& pattern);
 
-		//! \name Search
+		//! Equivalent to append()
+		template<class U> void push_back(const U& u);
+	
+		//! Equivalent to prepend()
+		template<class U> void push_front(const U& u);
+		//@}
+
+
+		//! \name Search / Replace
 		//@{
 		/*!
 		** \brief Find the offset of a sub-string
@@ -145,6 +262,15 @@ namespace Core
 		Size find(const C buffer) const;
 
 		/*!
+		** \brief Find the offset of a sub-string from the left
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param buffer An arbitrary string
+		** \return The offset of the first sub-string found, npos otherwise
+		*/
+		Size indexOf(Size offset, const C buffer) const;
+
+		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes)
 		**
 		** \param buffer An arbitrary string
@@ -152,6 +278,33 @@ namespace Core
 		** \return The offset of the first sub-string found, npos otherwise
 		*/
 		Size find(const C* buffer, const Size len) const;
+
+		/*!
+		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param buffer An arbitrary string
+		** \param len Size of the given buffer
+		** \return The offset of the first sub-string found, npos otherwise
+		*/
+		Size indexOf(Size offset, const C* buffer, const Size len) const;
+
+		/*!
+		** \brief Find the offset of any supported CString
+		**
+		** \param buffer Any supported CString
+		** \return The offset of the first sub-string found, npos otherwise
+		*/
+		template<class U> Size find(const U& u) const;
+
+		/*!
+		** \brief Find the offset of any supported CString from the left
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param buffer Any supported CString
+		** \return The offset of the first sub-string found, npos otherwise
+		*/
+		template<class U> Size indexOf(Size offset, const U& u) const;
 
 		/*!
 		** \brief Find the offset of a sub-string (equivalent to the method `find()`)
@@ -164,13 +317,44 @@ namespace Core
 		//@}
 
 
+		//! \name Trimming
+		//@{
+		/*!
+		** \brief Remove all white-spaces from the begining and the end of the buffer
+		*/
+		void trim(const C c = ' ');
+		/*!
+		** \brief Removes all items equal to one of those in 'u' from the end of the buffer
+		*/
+		template<class U> void trim(const U& u);
+
+		/*!
+		** \brief Removes all items equal to one of those in 'u' from the end of the buffer
+		*/
+		template<class U> void trimRight(const U& u);
+
+		/*!
+		** \brief Remove all items equal to 'c' from the end of the buffer
+		*/
+		void trimRight(const C c = ' ');
+
+		/*!
+		** \brief Removes all items equal to one of those in 'u' from the begining of the buffer
+		*/
+		template<class U> void trimLeft(const U& u);
+		/*!
+		** \brief Remove all items equal to 'c' from the begining of the buffer
+		*/
+		void trimLeft(const C c = ' ');
+		//@}
+
 		//! \name Remove / Erase
 		//@{
 		// From the ancestor
-		/*[!]
+		/*!
 		** \brief Empty the buffer
 		*/
-		// void clear();
+		void clear();
 		
 		/*!
 		** \brief Erase a part of the buffer
@@ -179,11 +363,24 @@ namespace Core
 		** \param len The length (in number of items) to erase
 		*/
 		void erase(const Size offset, const Size len);
+
+		/*!
+		** \brief Remove the 'n' first items
+		*/
+		void consume(const Size n);
 		//@}
 
 
 		//! \name Memory management
 		//@{
+		/*!
+		** \brief Get the item at a given position in a safe way
+		**
+		** Contrary to the operator [], it is safe to use an invalid offset
+		** \return The item at position 'offset', a default value if the offset is out of bound
+		*/
+		C at(const Size offset) const;
+
 		/*!
 		** \brief Truncate the buffer to the given length
 		**
@@ -192,13 +389,12 @@ namespace Core
 		*/
 		void truncate(const Size newSize);
 
-		// From the ancestor
-		/*[!]
+		/*!
 		** \brief Ensure that there is enough allocated space for X caracters
 		**
 		** \param min The minimum capacity of the buffer (in caracters)
 		*/
-		// void reserve(Size minCapacity);
+		void reserve(Size minCapacity);
 
 		/*!
 		** \brief Resize the buffer to 'len' bytes
@@ -218,6 +414,10 @@ namespace Core
 		*/
 		Size size() const;
 
+		bool empty() const;
+
+		bool notEmpty() const;
+
 		/*!
 		** \brief Get the current capacity of the buffer (in bytes)
 		*/
@@ -233,6 +433,9 @@ namespace Core
 
 		//! \name Operators
 		//@{
+		//! The operator `[]` (the offset must be valid)
+		const C& operator [] (const Size offset) const;
+		C& operator [] (const Size offset);
 		//! The operator `+=` (append)
 		template<class U> MemoryBuffer& operator += (const U& rhs);
 		//! The operator `<<` (append)
@@ -287,7 +490,25 @@ namespace Core
 		bool operator ! () const;
 		//@}
 
+
+	protected:
+		//! Assign without checking for pointer validity
+		Size assignWithoutChecking(const C* block, const Size blockSize);
+		//! Append without checking for pointer validity
+		Size appendWithoutChecking(const C* block, const Size blockSize);
+		//! Append without checking for pointer validity
+		Size appendWithoutChecking(const C c);
+		//! Assign without checking for pointer validity
+		Size assignWithoutChecking(const C c);
+
+	private:
+		// our friends !
+		template<class, class> friend class Private::MemoryBufferImpl::Append;
+		template<class, class> friend class Private::MemoryBufferImpl::Assign;
+		template<class, class> friend class Private::MemoryBufferImpl::Fill;
+
 	}; // class MemoryBuffer
+
 
 
 
@@ -296,7 +517,7 @@ namespace Core
 } // namespace Core
 } // namespace Yuni
 
-# include "memoryBuffer.hxx"
+# include "memorybuffer.hxx"
 
 
 
