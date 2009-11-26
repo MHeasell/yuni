@@ -27,6 +27,9 @@
 
 # include <cstddef>
 
+# ifdef YUNI_OS_GCC
+#   include <sys/types.h>
+# endif
 
 namespace Yuni
 {
