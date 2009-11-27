@@ -59,7 +59,7 @@ namespace MemoryBufferImpl
 		static void Do(MemBufT& memoryBuffer, const C* rhs)
 		{
 			if (rhs)
-				memoryBuffer.appendWithoutChecking(rhs, Core::Traits::Length<C*,typename MemBufT::Size>(rhs));
+				memoryBuffer.appendWithoutChecking(rhs, Yuni::Core::Traits::Length<C*,typename MemBufT::Size>(rhs));
 		}
 	};
 
@@ -93,9 +93,9 @@ namespace MemoryBufferImpl
 
 	// Core::MemoryBuffer
 	template<class MemBufT, unsigned int ChunkSizeT, bool ZeroT, bool ExpandT>
-	struct Append<MemBufT, Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
+	struct Append<MemBufT, Yuni::Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
 	{
-		typedef Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
+		typedef Yuni::Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
 		static void Do(MemBufT& memoryBuffer, const C& rhs)
 		{
 			if (rhs.notEmpty())
@@ -137,7 +137,7 @@ namespace MemoryBufferImpl
 			typename MemBufT::Type buffer[BUFSIZE]; \
 			(void) YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, BUFSIZE, FORMAT, rhs); \
 			memoryBuffer.appendWithoutChecking(buffer, \
-				Core::Traits::Length<typename MemBufT::Type*, typename MemBufT::Size>::Value(buffer)); \
+				Yuni::Core::Traits::Length<typename MemBufT::Type*, typename MemBufT::Size>::Value(buffer)); \
 		} \
 	}
 

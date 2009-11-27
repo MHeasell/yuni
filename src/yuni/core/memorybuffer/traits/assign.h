@@ -49,7 +49,7 @@ namespace MemoryBufferImpl
 			if (rhs.notEmpty())
 				memoryBuffer.assignWithoutChecking(rhs.c_str(), rhs.size());
 			else
-				rhs.clear();
+				memoryBuffer.clear();
 		}
 	};
 
@@ -62,7 +62,7 @@ namespace MemoryBufferImpl
 		static void Do(MemBufT& memoryBuffer, const C* rhs)
 		{
 			if (rhs)
-				memoryBuffer.assignWithoutChecking(rhs, Core::Traits::Length<C*, typename MemBufT::Size>(rhs));
+				memoryBuffer.assignWithoutChecking(rhs, Yuni::Core::Traits::Length<C*, typename MemBufT::Size>(rhs));
 			else
 				memoryBuffer.clear();
 		}
@@ -102,9 +102,9 @@ namespace MemoryBufferImpl
 
 	// Core::MemoryBuffer
 	template<class MemBufT, unsigned int ChunkSizeT, bool ZeroT, bool ExpandT>
-	struct Assign<MemBufT, Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
+	struct Assign<MemBufT, Yuni::Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
 	{
-		typedef Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
+		typedef Yuni::Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
 		static void Do(MemBufT& memoryBuffer, const C& rhs)
 		{
 			if (rhs.notEmpty())
@@ -150,7 +150,7 @@ namespace MemoryBufferImpl
 			typename MemBufT::Type buffer[BUFSIZE]; \
 			(void) YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, BUFSIZE, FORMAT, rhs); \
 			memoryBuffer.assignWithoutChecking(buffer, \
-				Core::Traits::Length<typename MemBufT::Type*, typename MemBufT::Size>::Value(buffer)); \
+				Yuni::Core::Traits::Length<typename MemBufT::Type*, typename MemBufT::Size>::Value(buffer)); \
 		} \
 	}
 
