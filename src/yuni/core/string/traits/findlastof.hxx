@@ -26,7 +26,7 @@ namespace StringImpl
 				}
 				while (--i);
 			}
-			return StringBase<C,Chnk>::npos;
+			return (typename StringBase<C,Chnk>::Size) StringBase<C,Chnk>::npos;
 		}
 
 		static typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C toFind, const typename StringBase<C,Chnk>::Size offset)
@@ -41,7 +41,7 @@ namespace StringImpl
 				}
 				while (--i);
 			}
-			return StringBase<C,Chnk>::npos;
+			return (typename StringBase<C,Chnk>::Size) StringBase<C,Chnk>::npos;
 		}
 
 	};
@@ -67,7 +67,7 @@ namespace StringImpl
 				}
 				while (--i);
 			}
-			return StringBase<C,Chnk>::npos;
+			return (typename StringBase<C,Chnk>::Size) StringBase<C,Chnk>::npos;
 		}
 
 
@@ -75,7 +75,7 @@ namespace StringImpl
 		{
 			return s.pSize
 				? RawValue(s, toFind, s.pSize - 1, StringBase<C,Chnk>::Length(toFind))
-				: StringBase<C,Chnk>::npos;
+				: (typename StringBase<C,Chnk>::Size) StringBase<C,Chnk>::npos;
 		}
 
 		static typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C toFind, const typename StringBase<C,Chnk>::Size offset)
@@ -105,7 +105,7 @@ namespace StringImpl
 				}
 				while (--i);
 			}
-			return StringBase<C,Chnk>::npos;
+			return (typename StringBase<C,Chnk>::Size) StringBase<C,Chnk>::npos;
 		}
 
 
@@ -128,7 +128,7 @@ namespace StringImpl
 		{
 			return s.pSize
 				? FindLastOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.pPtr, s.pSize - 1, toFind.pSize)
-				: StringBase<C,Chnk>::npos;
+				: (typename StringBase<C,Chnk>::Size) StringBase<C,Chnk>::npos;
 		}
 
 		static typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C toFind, const typename StringBase<C,Chnk>::Size offset)
@@ -144,7 +144,7 @@ namespace StringImpl
 		{
 			return s.pSize
 				? FindLastOf<StringBase<C,Chnk>, C*, Equals>::RawValue(s, toFind.c_str(), s.pSize - 1, toFind.size())
-				: StringBase<C,Chnk>::npos;
+				: (typename StringBase<C,Chnk>::Size) StringBase<C,Chnk>::npos;
 		}
 
 		static typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C toFind, const typename StringBase<C,Chnk>::Size offset)
