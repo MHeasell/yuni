@@ -252,6 +252,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -275,6 +290,11 @@ namespace Yuni
 		R operator () (<%=generator.variableList(i)%>) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -285,6 +305,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(<%=generator.list(i)%>)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -323,4 +348,43 @@ namespace Yuni
 
 # include "bind.hxx"
 
+
+template<class P, class DummyT>
+inline std::ostream& operator << (std::ostream& out, const Yuni::Bind<P,DummyT>& rhs)
+{
+	rhs.print(out);
+	return out;
+}
+
+
+// Comparison with any pointer-to-object
+template<class U, class P, class DummyT>
+inline bool operator == (const U* object, const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == object);
+}
+
+// Comparison with any pointer-to-object
+template<class U, class P, class DummyT>
+inline bool operator != (const U* object, const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != object);
+}
+
+
+<% (0..(generator.argumentCount)).each do |i| %>
+template<class R, class P, class DummyT<%=generator.templateParameterList(i)%>>
+inline bool operator == (R (*pointer)(<%=generator.list(i)%>), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT<%=generator.templateParameterList(i)%>>
+inline bool operator != (R (*pointer)(<%=generator.list(i)%>), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+<% end %>
 #endif // __YUNI_CORE_BIND_BIND_H__

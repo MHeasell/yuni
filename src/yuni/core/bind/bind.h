@@ -327,6 +327,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -350,6 +365,11 @@ namespace Yuni
 		R operator () () const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -360,6 +380,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)()) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -612,6 +637,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -635,6 +675,11 @@ namespace Yuni
 		R operator () () const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -645,6 +690,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)()) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -897,6 +947,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -920,6 +985,11 @@ namespace Yuni
 		R operator () () const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -930,6 +1000,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)()) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -1182,6 +1257,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -1205,6 +1295,11 @@ namespace Yuni
 		R operator () (A0 a0) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -1215,6 +1310,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -1467,6 +1567,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -1490,6 +1605,11 @@ namespace Yuni
 		R operator () (A0 a0) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -1500,6 +1620,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -1752,6 +1877,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -1775,6 +1915,11 @@ namespace Yuni
 		R operator () (A0 a0) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -1785,6 +1930,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -2038,6 +2188,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -2061,6 +2226,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -2071,6 +2241,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -2324,6 +2499,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -2347,6 +2537,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -2357,6 +2552,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -2610,6 +2810,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -2633,6 +2848,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -2643,6 +2863,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -2897,6 +3122,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -2920,6 +3160,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -2930,6 +3175,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -3184,6 +3434,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -3207,6 +3472,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -3217,6 +3487,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -3471,6 +3746,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -3494,6 +3784,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -3504,6 +3799,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -3759,6 +4059,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -3782,6 +4097,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -3792,6 +4112,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -4047,6 +4372,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -4070,6 +4410,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -4080,6 +4425,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -4335,6 +4685,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -4358,6 +4723,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -4368,6 +4738,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -4624,6 +4999,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -4647,6 +5037,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -4657,6 +5052,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -4913,6 +5313,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -4936,6 +5351,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -4946,6 +5366,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -5202,6 +5627,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -5225,6 +5665,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -5235,6 +5680,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -5492,6 +5942,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -5515,6 +5980,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -5525,6 +5995,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -5782,6 +6257,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -5805,6 +6295,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -5815,6 +6310,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -6072,6 +6572,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -6095,6 +6610,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -6105,6 +6625,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -6363,6 +6888,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -6386,6 +6926,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -6396,6 +6941,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -6654,6 +7204,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -6677,6 +7242,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -6687,6 +7257,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -6945,6 +7520,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -6968,6 +7558,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -6978,6 +7573,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -7237,6 +7837,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -7260,6 +7875,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -7270,6 +7890,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -7529,6 +8154,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -7552,6 +8192,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -7562,6 +8207,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -7821,6 +8471,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -7844,6 +8509,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -7854,6 +8524,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -8114,6 +8789,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -8137,6 +8827,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -8147,6 +8842,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -8407,6 +9107,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -8430,6 +9145,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -8440,6 +9160,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -8700,6 +9425,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -8723,6 +9463,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -8733,6 +9478,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -8994,6 +9744,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -9017,6 +9782,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -9027,6 +9797,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -9288,6 +10063,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -9311,6 +10101,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -9321,6 +10116,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -9582,6 +10382,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -9605,6 +10420,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -9615,6 +10435,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -9877,6 +10702,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -9900,6 +10740,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -9910,6 +10755,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -10172,6 +11022,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -10195,6 +11060,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -10205,6 +11075,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -10467,6 +11342,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -10490,6 +11380,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -10500,6 +11395,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -10763,6 +11663,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -10786,6 +11701,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -10796,6 +11716,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -11059,6 +11984,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -11082,6 +12022,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -11092,6 +12037,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -11355,6 +12305,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -11378,6 +12343,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -11388,6 +12358,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -11652,6 +12627,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -11675,6 +12665,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -11685,6 +12680,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -11949,6 +12949,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -11972,6 +12987,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -11982,6 +13002,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -12246,6 +13271,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -12269,6 +13309,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -12279,6 +13324,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -12544,6 +13594,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -12567,6 +13632,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -12577,6 +13647,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -12842,6 +13917,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -12865,6 +13955,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -12875,6 +13970,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -13140,6 +14240,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -13163,6 +14278,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -13173,6 +14293,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -13439,6 +14564,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -13462,6 +14602,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -13472,6 +14617,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -13738,6 +14888,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -13761,6 +14926,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -13771,6 +14941,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -14037,6 +15212,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -14060,6 +15250,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -14070,6 +15265,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -14337,6 +15537,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -14360,6 +15575,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -14370,6 +15590,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -14637,6 +15862,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -14660,6 +15900,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -14670,6 +15915,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -14937,6 +16187,21 @@ namespace Yuni
 
 
 		/*!
+		** \brief Get the pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null.
+		** There is no way to know statically the type of the object.
+		**
+		** \return A non-null pointer if bound to a class
+		*/
+		const void* object() const;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		bool isDescendantOfIEventObserverBase() const;
+		//! Get if the attached class is a real descendant of 'IEventObserverBase'
+		bool isDescendantOf(const IEventObserverBase* obj) const;
+
+		/*!
 		** \brief Invoke the bind using a getter for the arguments.
 		**
 		** Nothing will happen if the pointer is null
@@ -14960,6 +16225,11 @@ namespace Yuni
 		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
 		//@}
 
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+
 		//! \name Operators
 		//@{
 		//! Assignment with another Bind object
@@ -14970,6 +16240,11 @@ namespace Yuni
 		Bind& operator = (const NullPtr*);
 		//! Assignment with a nullptr (equivalent to unbind)
 		Bind& operator = (const NullPtr&);
+
+		//! Comparison with a pointer-to-function
+		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const;
+		//! Comparison with a pointer-to-object
+		template<class U> bool operator == (const U* object) const;
 		//@}
 
 	private:
@@ -15007,5 +16282,268 @@ namespace Yuni
 } // namespace Yuni
 
 # include "bind.hxx"
+
+
+template<class P, class DummyT>
+inline std::ostream& operator << (std::ostream& out, const Yuni::Bind<P,DummyT>& rhs)
+{
+	rhs.print(out);
+	return out;
+}
+
+
+// Comparison with any pointer-to-object
+template<class U, class P, class DummyT>
+inline bool operator == (const U* object, const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == object);
+}
+
+// Comparison with any pointer-to-object
+template<class U, class P, class DummyT>
+inline bool operator != (const U* object, const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != object);
+}
+
+
+
+template<class R, class P, class DummyT>
+inline bool operator == (R (*pointer)(), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT>
+inline bool operator != (R (*pointer)(), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0>
+inline bool operator == (R (*pointer)(A0), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0>
+inline bool operator != (R (*pointer)(A0), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1>
+inline bool operator == (R (*pointer)(A0, A1), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1>
+inline bool operator != (R (*pointer)(A0, A1), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2>
+inline bool operator == (R (*pointer)(A0, A1, A2), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2>
+inline bool operator != (R (*pointer)(A0, A1, A2), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+inline bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind == pointer);
+}
+
+template<class R, class P, class DummyT, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+inline bool operator != (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), const Yuni::Bind<P,DummyT>& bind)
+{
+	return (bind != pointer);
+}
+
+
 
 #endif // __YUNI_CORE_BIND_BIND_H__

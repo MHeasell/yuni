@@ -9,6 +9,22 @@
 
 namespace Yuni
 {
+namespace Private
+{
+namespace EventImpl
+{
+
+	// Forward declaration
+	template<class U, class BindT> class PredicateRemove;
+	template<class BindT> class PredicateRemoveWithoutChecks;
+
+} // namespace EventImpl
+} // namespace Private
+} // namespace Yuni
+
+
+namespace Yuni
+{
 
 	// Forward declarations
 	template<class P> class Event;
@@ -38,10 +54,10 @@ namespace Yuni
 		**
 		** This method will remove all delegates linked with the pointer to object.
 		** This method should be called by any observer being destroyed.
+		**
 		** \param pointer Pointer-to-object (can be null)
-		** \return True if at least one reference has been removed, False otherwise
 		*/
-		virtual bool unregisterObserver(const IEventObserverBase* pointer) = 0;
+		virtual void unregisterObserver(const IEventObserverBase* pointer) = 0;
 
 		// Friend
 		template<class Derived, template<class> class TP> friend class IEventObserver;
@@ -64,7 +80,7 @@ namespace Yuni
 		**
 		** /param evt An event
 		*/
-		virtual void boundEventIncrementReference(IEvent* evt) = 0;
+		virtual void boundEventIncrementReference(IEvent* evt) const = 0;
 
 		/*!
 		** \brief Decrementing a reference ocunt for a given bound event
@@ -72,7 +88,7 @@ namespace Yuni
 		** If the reference count reaches 0, it will be removed from the table.
 		** /param evt An event
 		*/
-		virtual void boundEventDecrementReference(IEvent* evt) = 0;
+		virtual void boundEventDecrementReference(IEvent* evt) const = 0;
 
 		/*!
 		** \brief Remove an boundEvent from the table
@@ -80,10 +96,11 @@ namespace Yuni
 		** This method is called when the boundEvent is being destroyed.
 		** /param evt An event
 		*/
-		virtual void boundEventRemoveFromTable(IEvent* evt) = 0;
+		virtual void boundEventRemoveFromTable(IEvent* evt) const = 0;
 
 		// Friends
 		template<class P> friend class Event;
+		template<class U, class BindT> friend class Private::EventImpl::PredicateRemove;
 
 	}; // class IEventObserverBase
 
@@ -92,7 +109,7 @@ namespace Yuni
 
 	template<class Derived, template<class> class TP = Policy::ObjectLevelLockable>
 	class IEventObserver
-		:public IEventObserverBase, public TP<IEventObserver<Derived,TP> >
+		: public IEventObserverBase, public TP<IEventObserver<Derived,TP> >
 	{
 	public:
 		//! Type of the Event observer
@@ -118,13 +135,13 @@ namespace Yuni
 
 	private:
 		// \see IEventObserverBase::boundEventIncrementReference()
-		virtual void boundEventIncrementReference(IEvent* evt);
+		virtual void boundEventIncrementReference(IEvent* evt) const;
 
 		// \see IEventObserverBase::boundEventDecrementReference()
-		virtual void boundEventDecrementReference(IEvent* evt);
+		virtual void boundEventDecrementReference(IEvent* evt) const;
 
 		// \see IEventObserverBase::boundEventRemoveFromTable()
-		virtual void boundEventRemoveFromTable(IEvent* evt);
+		virtual void boundEventRemoveFromTable(IEvent* evt) const;
 
 	private:
 		/*!
@@ -134,8 +151,11 @@ namespace Yuni
 		** this pointer remains valid (not null). It is important to set this
 		** variable to NULL when the class is being destroyed to avoid race
 		** conditions with SMP processors.
+		**
+		** \internal The keyword 'mutable' is needed because we may want to bind
+		**    an event to a const object (with a const method)
 		*/
-		IEvent::Map* pBoundEventTable;
+		mutable IEvent::Map* pBoundEventTable;
 
 	}; // class IEventObserver
 

@@ -7,6 +7,9 @@
 ** Please make any modifications you wish to this script instead of
 ** this file, as they will otherwise be lost at the next generation.
 */
+#include "../event/interfaces.h"
+#include "../static/inherit.h"
+#include "../static/dynamiccast.h"
 
 
 namespace Yuni
@@ -627,6 +630,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke() const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)()) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0>
@@ -637,6 +656,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1>
@@ -647,6 +682,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2>
@@ -657,6 +708,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3>
@@ -667,6 +734,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -677,6 +760,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -687,6 +786,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -697,6 +812,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -707,6 +838,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -717,6 +864,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -727,6 +890,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -737,6 +916,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -747,6 +942,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -757,6 +968,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -767,6 +994,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -777,6 +1020,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 
 
@@ -807,6 +1066,36 @@ namespace BindImpl
 			return (*pPointer)();
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)()) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)();
@@ -833,6 +1122,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0) const
 		{
 			return (*pPointer)(a0);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -863,6 +1182,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1);
@@ -889,6 +1238,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
 			return (*pPointer)(a0, a1, a2);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -919,6 +1298,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3);
@@ -945,6 +1354,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -975,6 +1414,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5);
@@ -1001,6 +1470,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1031,6 +1530,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5, A6, A7);
@@ -1057,6 +1586,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1087,6 +1646,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
@@ -1113,6 +1702,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1143,6 +1762,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
@@ -1169,6 +1818,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1199,6 +1878,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
@@ -1225,6 +1934,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1257,6 +1996,36 @@ namespace BindImpl
 			return (*pPointer)(pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0);
@@ -1281,6 +2050,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0) const
 		{
 			return (*pPointer)(a0, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1309,6 +2108,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2);
@@ -1333,6 +2162,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
 			return (*pPointer)(a0, a1, a2, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1361,6 +2220,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4);
@@ -1385,6 +2274,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1413,6 +2332,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5, A6);
@@ -1437,6 +2386,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1465,6 +2444,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
@@ -1489,6 +2498,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1517,6 +2556,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
@@ -1541,6 +2610,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1569,6 +2668,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
@@ -1593,6 +2722,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1621,6 +2780,36 @@ namespace BindImpl
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
@@ -1645,6 +2834,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
 			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -1687,6 +2906,36 @@ namespace BindImpl
 			return (pThis->*pMember)();
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)()) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -1713,6 +2962,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0) const
 		{
 			return (pThis->*pMember)(a0);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -1743,6 +3022,36 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -1769,6 +3078,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
 			return (pThis->*pMember)(a0, a1, a2);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -1799,6 +3138,36 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -1825,6 +3194,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -1855,6 +3254,36 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -1881,6 +3310,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -1911,6 +3370,36 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -1937,6 +3426,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -1967,6 +3486,36 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -1993,6 +3542,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2023,6 +3602,36 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2049,6 +3658,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2079,6 +3718,36 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2105,6 +3774,36 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2144,6 +3843,37 @@ namespace BindImpl
 			return (pThis->*pMember)(pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2171,6 +3901,37 @@ namespace BindImpl
 		virtual R invoke(A0 a0) const
 		{
 			return (pThis->*pMember)(a0, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2202,6 +3963,37 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2229,6 +4021,37 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2260,6 +4083,37 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2287,6 +4141,37 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2318,6 +4203,37 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2345,6 +4261,37 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2376,6 +4323,37 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2403,6 +4381,37 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2434,6 +4443,37 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2461,6 +4501,37 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2492,6 +4563,37 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2519,6 +4621,37 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:
@@ -2550,6 +4683,37 @@ namespace BindImpl
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, pUserdata);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -2577,6 +4741,37 @@ namespace BindImpl
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
 			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:

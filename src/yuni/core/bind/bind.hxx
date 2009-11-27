@@ -239,6 +239,33 @@ namespace Yuni
 	}
 
 	template<class R>
+	inline const void* Bind<R (), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R>
+	inline bool Bind<R (), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R>
+	inline bool Bind<R (), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R>
+	inline void Bind<R (), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R>
 	inline void Bind<R (), void>::emptyCallbackReturnsVoid()
 	{
 		/* Do nothing */
@@ -281,6 +308,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R>
+	inline bool Bind<R (), void>::operator == (R (*pointer)()) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R>
+	template<class U>
+	inline bool Bind<R (), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -512,6 +553,33 @@ namespace Yuni
 	}
 
 	template<class R>
+	inline const void* Bind<R (*)(), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R>
+	inline bool Bind<R (*)(), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R>
+	inline bool Bind<R (*)(), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R>
+	inline void Bind<R (*)(), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R>
 	inline void Bind<R (*)(), void>::emptyCallbackReturnsVoid()
 	{
 		/* Do nothing */
@@ -554,6 +622,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R>
+	inline bool Bind<R (*)(), void>::operator == (R (*pointer)()) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R>
+	template<class U>
+	inline bool Bind<R (*)(), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -785,6 +867,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R>
+	inline const void* Bind<R (ClassT::*)(), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R>
+	inline bool Bind<R (ClassT::*)(), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R>
+	inline bool Bind<R (ClassT::*)(), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R>
+	inline void Bind<R (ClassT::*)(), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R>
 	inline void Bind<R (ClassT::*)(), ClassT>::emptyCallbackReturnsVoid()
 	{
 		/* Do nothing */
@@ -827,6 +936,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R>
+	inline bool Bind<R (ClassT::*)(), ClassT>::operator == (R (*pointer)()) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -1058,6 +1181,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0>
+	inline const void* Bind<R (A0), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0>
+	inline bool Bind<R (A0), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0>
+	inline bool Bind<R (A0), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0>
+	inline void Bind<R (A0), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0>
 	inline void Bind<R (A0), void>::emptyCallbackReturnsVoid(A0)
 	{
 		/* Do nothing */
@@ -1100,6 +1250,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0>
+	inline bool Bind<R (A0), void>::operator == (R (*pointer)(A0)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0>
+	template<class U>
+	inline bool Bind<R (A0), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -1331,6 +1495,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0>
+	inline const void* Bind<R (*)(A0), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0>
+	inline bool Bind<R (*)(A0), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0>
+	inline bool Bind<R (*)(A0), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0>
+	inline void Bind<R (*)(A0), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0>
 	inline void Bind<R (*)(A0), void>::emptyCallbackReturnsVoid(A0)
 	{
 		/* Do nothing */
@@ -1373,6 +1564,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0>
+	inline bool Bind<R (*)(A0), void>::operator == (R (*pointer)(A0)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0>
+	template<class U>
+	inline bool Bind<R (*)(A0), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -1604,6 +1809,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0>
+	inline const void* Bind<R (ClassT::*)(A0), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0>
+	inline bool Bind<R (ClassT::*)(A0), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0>
+	inline bool Bind<R (ClassT::*)(A0), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0>
+	inline void Bind<R (ClassT::*)(A0), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0>
 	inline void Bind<R (ClassT::*)(A0), ClassT>::emptyCallbackReturnsVoid(A0)
 	{
 		/* Do nothing */
@@ -1646,6 +1878,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0>
+	inline bool Bind<R (ClassT::*)(A0), ClassT>::operator == (R (*pointer)(A0)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -1878,6 +2124,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1>
+	inline const void* Bind<R (A0, A1), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1>
+	inline bool Bind<R (A0, A1), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1>
+	inline bool Bind<R (A0, A1), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1>
+	inline void Bind<R (A0, A1), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1>
 	inline void Bind<R (A0, A1), void>::emptyCallbackReturnsVoid(A0, A1)
 	{
 		/* Do nothing */
@@ -1920,6 +2193,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1>
+	inline bool Bind<R (A0, A1), void>::operator == (R (*pointer)(A0, A1)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1>
+	template<class U>
+	inline bool Bind<R (A0, A1), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -2152,6 +2439,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1>
+	inline const void* Bind<R (*)(A0, A1), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1>
+	inline bool Bind<R (*)(A0, A1), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1>
+	inline bool Bind<R (*)(A0, A1), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1>
+	inline void Bind<R (*)(A0, A1), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1>
 	inline void Bind<R (*)(A0, A1), void>::emptyCallbackReturnsVoid(A0, A1)
 	{
 		/* Do nothing */
@@ -2194,6 +2508,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1>
+	inline bool Bind<R (*)(A0, A1), void>::operator == (R (*pointer)(A0, A1)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -2426,6 +2754,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1>
+	inline const void* Bind<R (ClassT::*)(A0, A1), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1>
+	inline bool Bind<R (ClassT::*)(A0, A1), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1>
+	inline bool Bind<R (ClassT::*)(A0, A1), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1>
 	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::emptyCallbackReturnsVoid(A0, A1)
 	{
 		/* Do nothing */
@@ -2468,6 +2823,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
+	inline bool Bind<R (ClassT::*)(A0, A1), ClassT>::operator == (R (*pointer)(A0, A1)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -2700,6 +3069,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2>
+	inline const void* Bind<R (A0, A1, A2), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2>
+	inline bool Bind<R (A0, A1, A2), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2>
+	inline bool Bind<R (A0, A1, A2), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline void Bind<R (A0, A1, A2), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2>
 	inline void Bind<R (A0, A1, A2), void>::emptyCallbackReturnsVoid(A0, A1, A2)
 	{
 		/* Do nothing */
@@ -2742,6 +3138,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline bool Bind<R (A0, A1, A2), void>::operator == (R (*pointer)(A0, A1, A2)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -2974,6 +3384,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2>
+	inline const void* Bind<R (*)(A0, A1, A2), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2>
+	inline bool Bind<R (*)(A0, A1, A2), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2>
+	inline bool Bind<R (*)(A0, A1, A2), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline void Bind<R (*)(A0, A1, A2), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2>
 	inline void Bind<R (*)(A0, A1, A2), void>::emptyCallbackReturnsVoid(A0, A1, A2)
 	{
 		/* Do nothing */
@@ -3016,6 +3453,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2>
+	inline bool Bind<R (*)(A0, A1, A2), void>::operator == (R (*pointer)(A0, A1, A2)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -3248,6 +3699,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
 	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2)
 	{
 		/* Do nothing */
@@ -3290,6 +3768,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator == (R (*pointer)(A0, A1, A2)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -3523,6 +4015,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3>
+	inline const void* Bind<R (A0, A1, A2, A3), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline bool Bind<R (A0, A1, A2, A3), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline bool Bind<R (A0, A1, A2, A3), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (A0, A1, A2, A3), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3>
 	inline void Bind<R (A0, A1, A2, A3), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3)
 	{
 		/* Do nothing */
@@ -3565,6 +4084,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline bool Bind<R (A0, A1, A2, A3), void>::operator == (R (*pointer)(A0, A1, A2, A3)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -3798,6 +4331,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3>
+	inline const void* Bind<R (*)(A0, A1, A2, A3), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline bool Bind<R (*)(A0, A1, A2, A3), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline bool Bind<R (*)(A0, A1, A2, A3), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (*)(A0, A1, A2, A3), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3>
 	inline void Bind<R (*)(A0, A1, A2, A3), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3)
 	{
 		/* Do nothing */
@@ -3840,6 +4400,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline bool Bind<R (*)(A0, A1, A2, A3), void>::operator == (R (*pointer)(A0, A1, A2, A3)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -4073,6 +4647,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3)
 	{
 		/* Do nothing */
@@ -4115,6 +4716,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -4348,6 +4963,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline const void* Bind<R (A0, A1, A2, A3, A4), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline bool Bind<R (A0, A1, A2, A3, A4), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline bool Bind<R (A0, A1, A2, A3, A4), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (A0, A1, A2, A3, A4), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
 	inline void Bind<R (A0, A1, A2, A3, A4), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4)
 	{
 		/* Do nothing */
@@ -4390,6 +5032,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline bool Bind<R (A0, A1, A2, A3, A4), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -4623,6 +5279,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4)
 	{
 		/* Do nothing */
@@ -4665,6 +5348,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -4898,6 +5595,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4)
 	{
 		/* Do nothing */
@@ -4940,6 +5664,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -5174,6 +5912,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5)
 	{
 		/* Do nothing */
@@ -5216,6 +5981,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -5450,6 +6229,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5)
 	{
 		/* Do nothing */
@@ -5492,6 +6298,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -5726,6 +6546,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5)
 	{
 		/* Do nothing */
@@ -5768,6 +6615,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -6002,6 +6863,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6)
 	{
 		/* Do nothing */
@@ -6044,6 +6932,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -6278,6 +7180,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6)
 	{
 		/* Do nothing */
@@ -6320,6 +7249,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -6554,6 +7497,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6)
 	{
 		/* Do nothing */
@@ -6596,6 +7566,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -6831,6 +7815,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7)
 	{
 		/* Do nothing */
@@ -6873,6 +7884,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -7108,6 +8133,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7)
 	{
 		/* Do nothing */
@@ -7150,6 +8202,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -7385,6 +8451,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7)
 	{
 		/* Do nothing */
@@ -7427,6 +8520,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -7662,6 +8769,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8)
 	{
 		/* Do nothing */
@@ -7704,6 +8838,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -7939,6 +9087,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8)
 	{
 		/* Do nothing */
@@ -7981,6 +9156,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -8216,6 +9405,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8)
 	{
 		/* Do nothing */
@@ -8258,6 +9474,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -8494,6 +9724,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
 	{
 		/* Do nothing */
@@ -8536,6 +9793,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -8772,6 +10043,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
 	{
 		/* Do nothing */
@@ -8814,6 +10112,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -9050,6 +10362,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)
 	{
 		/* Do nothing */
@@ -9092,6 +10431,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -9328,6 +10681,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
 	{
 		/* Do nothing */
@@ -9370,6 +10750,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -9606,6 +11000,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
 	{
 		/* Do nothing */
@@ -9648,6 +11069,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -9884,6 +11319,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
 	{
 		/* Do nothing */
@@ -9926,6 +11388,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -10163,6 +11639,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
 	{
 		/* Do nothing */
@@ -10205,6 +11708,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -10442,6 +11959,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
 	{
 		/* Do nothing */
@@ -10484,6 +12028,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -10721,6 +12279,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
 	{
 		/* Do nothing */
@@ -10763,6 +12348,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -11000,6 +12599,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
 	{
 		/* Do nothing */
@@ -11042,6 +12668,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -11279,6 +12919,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
 	{
 		/* Do nothing */
@@ -11321,6 +12988,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -11558,6 +13239,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
 	{
 		/* Do nothing */
@@ -11600,6 +13308,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -11838,6 +13560,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
 	{
 		/* Do nothing */
@@ -11880,6 +13629,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -12118,6 +13881,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
 	{
 		/* Do nothing */
@@ -12160,6 +13950,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -12398,6 +14202,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
 	{
 		/* Do nothing */
@@ -12440,6 +14271,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -12678,6 +14523,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
 	{
 		/* Do nothing */
@@ -12720,6 +14592,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -12958,6 +14844,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
 	{
 		/* Do nothing */
@@ -13000,6 +14913,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -13238,6 +15165,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
 	{
 		/* Do nothing */
@@ -13280,6 +15234,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -13519,6 +15487,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
 	{
 		/* Do nothing */
@@ -13561,6 +15556,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U>
+	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -13800,6 +15809,33 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
 	{
 		/* Do nothing */
@@ -13842,6 +15878,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U>
+	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 
@@ -14081,6 +16131,33 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::emptyCallbackReturnsVoid(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
 	{
 		/* Do nothing */
@@ -14123,6 +16200,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class U>
+	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 

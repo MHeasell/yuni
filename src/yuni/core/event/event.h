@@ -117,32 +117,33 @@ namespace Yuni
 		/*!
 		** \brief Connect to a object member
 		**
-		** \param o An object, with IEventObserverBase as ancestor
+		** \param o An object, with the class IEventObserver as ancestor (can be null)
 		** \param method Pointer-to-member
 		*/
 		template<class C> void connect(C* o, typename PointerToMember<C>::Type method);
-		template<class C> void connect(const C* o, typename PointerToMember<C>::ConstType method);
-
 		/*!
-		** \brief Connect directly with a Bind
+		** \brief Connect to a const object member
 		**
-		** This method might be useful to create a new connection without any check
+		** \param o An object, with the class IEventObserver as ancestor (can be null)
+		** \param method const Pointer-to-member
 		*/
-		void connect(const BindType& custom);
+		template<class C> void connect(const C* o, typename PointerToMember<C>::ConstType method);
 		//@}
 
 
 		//! \name Disconnection
 		//@{
 		/*!
+		** \brief Disconnect all methods of an arbitrary object connected to the event
+		**
+		** \param object The object to find and to disconnect
+		*/
+		template<class U> void remove(const U* object);
+
+		/*!
 		** \brief Disconnect all
 		*/
 		void clear();
-
-		/*!
-		** \brief
-		*/
-		template<class U> void remove(const U* object);
 		//@}
 
 
@@ -163,6 +164,7 @@ namespace Yuni
 		// ReturnType operator () (<parameters>) const;
 		//@}
 
+
 		//! \name Operators
 		//@{
 		//! Assignment with a nullptr (equivalent to clear())
@@ -171,12 +173,28 @@ namespace Yuni
 		Event& operator = (const NullPtr&);
 		//! Copy operator
 		Event& operator = (const Event& rhs);
+
+		/*!
+		** \brief Disconnect all methods of an arbitrary object connected to the event
+		** \see remove()
+		*/
+		template<class U> Event& operator -= (const U* object);
 		//@}
 
 	protected:
-		/*virtual*/ bool unregisterObserver(const IEventObserverBase* pointer);
+		/*!
+		** \brief Unregister an observer
+		**
+		** This method will remove all delegates linked with the pointer to object.
+		** This method should be called by any observer being destroyed.
+		**
+		** \param pointer Pointer-to-object (can be null)
+		*/
+		/* virtual */ void unregisterObserver(const IEventObserverBase* pointer);
 
-	}; // class Event
+	}; // class Event<>
+
+
 
 
 
