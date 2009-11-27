@@ -1,6 +1,8 @@
 #ifndef __YUNI_CORE_IO_FILE_STREAM_HXX__
 # define __YUNI_CORE_IO_FILE_STREAM_HXX__
 
+# include "../../string.h"
+
 
 namespace Yuni
 {
@@ -19,6 +21,26 @@ namespace File
 	}
 
 
+	template<class U>
+	inline Stream::Stream(const U& filename, const int mode)
+	{
+		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			pFd = OpenFileOnWindows(
+				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				mode);
+			# else
+			pFd = ::fopen(
+				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				OpenMode::ToCString(mode));
+			# endif
+		}
+		else
+			pFd = NULL;
+	}
+
+
 	inline Stream::~Stream()
 	{
 		if (pFd)
@@ -26,17 +48,26 @@ namespace File
 	}
 
 
-	template<class C>
-	inline bool Stream::open(const C& filename, const OpenMode::Type mode)
+	template<class U>
+	inline bool Stream::open(const U& filename, const int mode)
 	{
 		// Close the file if already opened
 		if (pFd)
 			(void)::fclose(pFd);
-		# ifdef YUNI_OS_WINDOWS
-		pFd = OpenFileOnWindows(Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(filename), mode);
-		# else
-		pFd = ::fopen(Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(filename), OpenMode::ToCString(mode));
-		# endif
+		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			pFd = OpenFileOnWindows(
+				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				mode);
+			# else
+			pFd = ::fopen(
+				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				OpenMode::ToCString(mode));
+			# endif
+		}
+		else
+			pFd = NULL;
 		return (NULL != pFd);
 	}
 
@@ -85,35 +116,56 @@ namespace File
 
 	inline size_t Stream::read(char* buffer, const size_t size)
 	{
-		return ::fread(buffer, size, 1, pFd);
+		return ::fread(buffer, 1, size, pFd);
 	}
 
 
 	inline bool Stream::put(const char c)
 	{
-		return !::fputc((int) c, pFd);
+		return (0 == ::fputc((int) c, pFd));
 	}
 
 
 	inline size_t Stream::write(const char* buffer, const size_t size)
 	{
-		return ::fwrite(buffer, size, 1, pFd);
+		return ::fwrite(buffer, 1, size, pFd);
 	}
 
 
-	template<class C>
-	inline size_t Stream::write(const C& buffer)
+	template<class U>
+	inline size_t Stream::write(const U& buffer)
 	{
-		return ::fwrite(Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(buffer),
-			Core::Traits::Length<typename Static::Remove::Const<C>::Type>::Value(buffer), 1, pFd);
+		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		{
+			return ::fwrite(
+				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
+				1,
+				Core::Traits::Length<typename Static::Remove::Const<U>::Type>::Value(buffer), pFd);
+		}
+		else
+		{
+			String translator;
+			translator += buffer;
+			return ::fwrite(translator.c_str(), 1, translator.size(), pFd);
+		}
 	}
 
 
-	template<class C>
-	inline size_t Stream::write(const C& buffer, const size_t size)
+	template<class U>
+	inline size_t Stream::write(const U& buffer, const size_t size)
 	{
-		return ::fwrite(Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(buffer),
-			size, 1, pFd);
+		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		{
+			return ::fwrite(
+				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
+				1, size, pFd);
+		}
+		else
+		{
+			String translator;
+			translator += buffer;
+			return ::fwrite(translator.c_str(), 1, size < translator.size() ? size : translator.size(), pFd);
+		}
 	}
 
 
@@ -123,20 +175,56 @@ namespace File
 	}
 
 
-	template<class C>
-	Stream& Stream::operator += (const C& rhs)
+	inline Stream& Stream::operator += (const char c)
 	{
-		(void)::fwrite(Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(rhs),
-			Core::Traits::Length<typename Static::Remove::Const<C>::Type>::Value(rhs), 1, pFd);
+		(void)::fputc((int) c, pFd);
 		return *this;
 	}
 
 
-	template<class C>
-	Stream& Stream::operator << (const C& rhs)
+	inline Stream& Stream::operator << (const char c)
 	{
-		(void)::fwrite(Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(rhs),
-			Core::Traits::Length<typename Static::Remove::Const<C>::Type>::Value(rhs), 1, pFd);
+		(void)::fputc((int) c, pFd);
+		return *this;
+	}
+
+
+	template<class U>
+	inline Stream& Stream::operator += (const U& u)
+	{
+		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		{
+			(void)::fwrite(
+				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u),
+				1,
+				Core::Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
+		}
+		else
+		{
+			String translator;
+			translator += u;
+			(void)::fwrite(translator.c_str(), 1, translator.size(), pFd);
+		}
+		return *this;
+	}
+
+
+	template<class U>
+	inline Stream& Stream::operator << (const U& u)
+	{
+		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		{
+			(void)::fwrite(
+				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u),
+				1,
+				Core::Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
+		}
+		else
+		{
+			String translator;
+			translator << u;
+			(void)::fwrite(translator.c_str(), 1, translator.size(), pFd);
+		}
 		return *this;
 	}
 

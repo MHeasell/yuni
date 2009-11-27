@@ -14,11 +14,18 @@ namespace OpenMode
 {
 
 
-	const char* ToCString(const Type mode)
+	const char* ToCString(const int mode)
 	{
+		if (mode == OpenMode::append)
+			// Shortcut for write|append
+			return "a";
+		if (mode == OpenMode::truncate)
+			// Shortcut for write|append
+			return "w";
+
 		if (mode & OpenMode::write)
 		{
-			if (!(mode & OpenMode::read))
+			if (0 == (mode & OpenMode::read))
 			{
 				if (mode & OpenMode::truncate)
 					return "w";
@@ -39,8 +46,16 @@ namespace OpenMode
 	}
 
 
-	const wchar_t*  ToWCString(const Type mode)
+
+	const wchar_t*  ToWCString(const int mode)
 	{
+		if (mode == OpenMode::append)
+			// Shortcut for write|append
+			return L"a";
+		if (mode == OpenMode::truncate)
+			// Shortcut for write|append
+			return L"w";
+
 		if (mode & OpenMode::write)
 		{
 			if (!(mode & OpenMode::read))

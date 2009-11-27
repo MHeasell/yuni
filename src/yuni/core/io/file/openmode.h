@@ -32,12 +32,14 @@ namespace OpenMode
 	/*!
 	** \brief Convert an open mode into a C-String for 'fopen'
 	*/
-	const char* ToCString(const Type mode);
+	const char* ToCString(const int mode);
 
 	/*!
 	** \brief Convert an open mode into a C-String for 'fwopen'
 	*/
-	const wchar_t*  ToWCString(const Type mode);
+	const wchar_t*  ToWCString(const int mode);
+
+
 
 
 
