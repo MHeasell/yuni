@@ -1199,7 +1199,7 @@ namespace Yuni
 		/*!
 		** \brief Clear the string
 		*/
-		void clear();
+		StringBase& clear();
 
 		//! Get if the string is empty
 		bool empty() const;

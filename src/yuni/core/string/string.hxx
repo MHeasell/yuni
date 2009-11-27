@@ -187,13 +187,14 @@ namespace Yuni
 
 
 	template<typename C, int Chunk>
-	inline void StringBase<C,Chunk>::clear()
+	inline StringBase<C,Chunk>& StringBase<C,Chunk>::clear()
 	{
 		if (pSize)
 		{
 			pSize = 0;
 			pPtr[0] = '\0';
 		}
+		return *this;
 	}
 
 
