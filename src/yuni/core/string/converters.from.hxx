@@ -413,7 +413,59 @@ namespace StringImpl
 				From<C*>::InsertRaw(s, str.pPtr, (str.pSize < len) ? str.pSize : len, offset);
 		}
 
+	}; // yuni::string
+
+
+	template<typename C, unsigned int Chnk1, bool ZeroT, bool ExpT>
+	struct From< Core::MemoryBuffer<C, Chnk1, ZeroT, ExpT> >
+	{
+		typedef Core::MemoryBuffer<C, Chnk1, ZeroT, ExpT> SourceType;
+
+		template<int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const SourceType& str)
+		{
+			if (str.size())
+				From<C*>::AppendRaw(s, str.c_str(), str.size());
+		}
+
+		template<int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const SourceType& str, const typename StringBase<C,Chnk>::Size len)
+		{
+			assert((void*)&s != (const void*)&str && "undefined behavior");
+			if (str.pSize && len)
+				From<C*>::AppendRaw(s, str.ic_str(), Private::StringImpl::Min(str.size(), len));
+		}
+
+		template<int Chnk>
+		static inline void Append(StringBase<C,Chnk>& s, const SourceType& str, const typename StringBase<C,Chnk>::Size offset,
+			const typename StringBase<C,Chnk>::Size len)
+		{
+			assert((void*)&s != (const void*)&str && "undefined behavior");
+			if (offset < str.pSize && len)
+				From<C*>::AppendRaw(s, str.c_str() + offset, Private::StringImpl::Min(str.size() - offset, len));
+		}
+
+
+		template<int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const SourceType& str,
+			const typename StringBase<C,Chnk>::Size offset)
+		{
+			assert((void*)&s != (const void*)&str && "undefined behavior");
+			if (str.pSize)
+				From<C*>::InsertRaw(s, str.c_str(), str.size(), offset);
+		}
+
+		template<int Chnk>
+		static inline void Insert(StringBase<C,Chnk>& s, const SourceType& str,
+			const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
+		{
+			assert((void*)&s != (const void*)&str && "undefined behavior");
+			if (str.pSize && len)
+				From<C*>::InsertRaw(s, str.c_str(), (str.size() < len) ? str.size() : len, offset);
+		}
+
 	}; // std::string
+
 
 
 
