@@ -37,13 +37,13 @@ namespace Static
 	class InheritsFrom
 	{
 	private:
-		typedef sint32 True;
-		typedef sint8  False;
+		typedef int   TrueType;
+		typedef char  FalseType;
 
 		// C obvisouly inherits from BaseT
-		static True CheckIfCInheritsFromBaseT(const BaseT*);
+		static TrueType  CheckIfCInheritsFromBaseT(const BaseT*);
 		// C does not inherits from BaseT
-		static False CheckIfCInheritsFromBaseT(...);
+		static FalseType CheckIfCInheritsFromBaseT(...);
 		// A dummy routine, for returning a type C
 		static C* DummyClassCMaker();
 
@@ -51,9 +51,9 @@ namespace Static
 		enum
 		{
 			//! A non-zero value if C inherits from BaseT
-			Yes = sizeof(CheckIfCInheritsFromBaseT(DummyClassCMaker())) == sizeof(True),
+			Yes = sizeof(CheckIfCInheritsFromBaseT(DummyClassCMaker())) == sizeof(TrueType),
 			//! A non-zero value if C does not inherit from BaseT
-			No = sizeof(CheckIfCInheritsFromBaseT(DummyClassCMaker())) == sizeof(False),
+			No = sizeof(CheckIfCInheritsFromBaseT(DummyClassCMaker())) == sizeof(FalseType),
 		};
 	};
 
