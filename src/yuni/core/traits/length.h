@@ -45,7 +45,7 @@ namespace Traits
 		** \param rhs A arbitrary container
 		** \return The length of the container
 		*/
-		static SizeT Value(const C& rhs) { return (SizeT) 0 /* Default value */; }
+		static SizeT Value(const C&) { return (SizeT) 0 /* Default value */; }
 
 	}; // class Length<>
 
@@ -194,7 +194,7 @@ namespace Traits
 
 	// Yuni::String
 
-	template<class C, unsigned int ChunkSizeT, class SizeT>
+	template<class C, int ChunkSizeT, class SizeT>
 	struct Length<StringBase<C,ChunkSizeT>, SizeT>
 	{
 	public:
@@ -211,7 +211,7 @@ namespace Traits
 		}
 	};
 
-	template<class C, unsigned int ChunkSizeT, class SizeT>
+	template<class C, int ChunkSizeT, class SizeT>
 	struct Length<StringBase<C,ChunkSizeT>*, SizeT>
 	{
 	public:
@@ -224,7 +224,7 @@ namespace Traits
 	public:
 		static SizeT Value(const StringType* container)
 		{
-			return (SizeT) container.size();
+			return container ? (SizeT)container->size() : 0;
 		}
 	};
 
@@ -263,7 +263,7 @@ namespace Traits
 	public:
 		static SizeT Value(const StringType* container)
 		{
-			return container ? container->size() : 0;
+			return container ? (SizeT) container->size() : 0;
 		}
 	};
 
