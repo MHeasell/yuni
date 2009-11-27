@@ -111,7 +111,7 @@ namespace StringImpl
 
 		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C* toFind)
 		{
-			return s.pSize ? RawNValue(s, toFind, s.pSize - 1) : StringBase<C,Chnk>::npos;
+			return s.pSize ? RawNValue(s, toFind, s.pSize - 1) : (typename StringBase<C,Chnk>::Size) StringBase<C,Chnk>::npos;
 		}
 
 		static inline typename StringBase<C,Chnk>::Size Value(const StringBase<C,Chnk>& s, const C* toFind, const typename StringBase<C,Chnk>::Size offset)
