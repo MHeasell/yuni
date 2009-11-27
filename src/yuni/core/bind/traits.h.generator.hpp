@@ -6,6 +6,9 @@ require File.dirname(__FILE__) + '/../../../tools/generators/commons.rb'
 generator = Generator.new()
 %>
 <%=generator.thisHeaderHasBeenGenerated("traits.h.generator.hpp")%>
+#include "../event/interfaces.h"
+#include "../static/inherit.h"
+#include "../static/dynamiccast.h"
 
 
 namespace Yuni
@@ -176,6 +179,22 @@ namespace BindImpl
 		virtual ~IPointer() {}
 		//! Invoke the delegate
 		virtual R invoke(<%=generator.variableList(i)%>) const = 0;
+
+		//! Get the pointer to object
+		virtual const void* object() const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
+
+		//! Get if the attached class is a descendant of 'IEventObserverBase'
+		virtual bool isDescendantOfIEventObserverBase() const = 0;
+
+		//! Compare with a mere pointer-to-function
+		virtual bool compareWithPointerToFunction(R (*pointer)(<%=generator.list(i)%>)) const = 0;
+		//! Compare with a pointer-to-object
+		virtual bool compareWithPointerToObject(const void* object) const = 0;
+
+		virtual void print(std::ostream& out) const = 0;
 	};
 <% end %>
 
@@ -206,6 +225,36 @@ namespace BindImpl
 			return (*pPointer)(<%=generator.list(i, 'a')%>);
 		}
 
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(<%=generator.list(i)%>)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
+		}
+
 	private:
 		//! Pointer-to-function
 		R (*pPointer)(<%=generator.list(i)%>);
@@ -234,6 +283,36 @@ namespace BindImpl
 		virtual R invoke(<%=generator.variableList(i-1)%>) const
 		{
 			return (*pPointer)(<%=generator.list(i-1, 'a', "", ", ")%>pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return false;
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*pointer)(<%=generator.list(i)%>)) const
+		{
+			return (pPointer == pointer);
+		}
+
+		virtual bool compareWithPointerToObject(const void*) const
+		{
+			return false;
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "func:" << (void*)(pPointer);
 		}
 
 	private:
@@ -276,6 +355,36 @@ namespace BindImpl
 			return (pThis->*pMember)(<%=generator.list(i, 'a')%>);
 		}
 
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(<%=generator.list(i)%>)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
+		}
+
 	private:
 		//! Pointer to the object
 		C* pThis;
@@ -311,6 +420,37 @@ namespace BindImpl
 		virtual R invoke(<%=generator.variableList(i-1)%>) const
 		{
 			return (pThis->*pMember)(<%=generator.list(i-1, 'a', "", ", ")%>pUserdata);
+		}
+
+		virtual const void* object() const
+		{
+			return (const void*)(pThis);
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(<%=generator.list(i)%>)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return ((const C*)object == pThis);
+		}
+
+		virtual void print(std::ostream& out) const
+		{
+			out << "obj:" << (void*)(pThis);
 		}
 
 	private:

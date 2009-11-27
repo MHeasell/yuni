@@ -26,10 +26,28 @@ namespace Yuni
 
 
 	template<typename P>
-	inline void Event<P>::clear()
+	void Event<P>::clear()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		AncestorType::pBindList.clear();
+		if (!AncestorType::pBindList.empty())
+		{
+			// We will inform all bound objects that we are no longer linked.
+			IEvent* baseThis = dynamic_cast<IEvent*>(this);
+			const IEventObserverBase* base;
+			const typename AncestorType::BindList::iterator end = AncestorType::pBindList.end();
+			for (typename AncestorType::BindList::iterator i = AncestorType::pBindList.begin(); i != end; ++i)
+			{
+				if ((*i).isDescendantOfIEventObserverBase())
+				{
+					// Getting the object pointer, if any
+					base = (const IEventObserverBase*) ((*i).object());
+					if (base)
+						base->boundEventRemoveFromTable(baseThis);
+				}
+			}
+			// Clear our own list
+			AncestorType::pBindList.clear();
+		}
 	}
 
 
@@ -56,21 +74,18 @@ namespace Yuni
 
 
 	template<typename P>
-	inline void Event<P>::connect(const Bind<P>& custom)
-	{
-		typename ThreadingPolicy::MutexLocker locker(*this);
-		AncestorType::pBindList.push_back(custom);
-	}
-
-
-	template<typename P>
 	template<class C>
 	void Event<P>::connect(C* o, typename Event<P>::template PointerToMember<C>::Type method)
 	{
-		typename ThreadingPolicy::MutexLocker locker(*this);
-		Bind<P> b;
-		b.bind(o, method);
-		AncestorType::pBindList.push_back(b);
+		if (o)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			Bind<P> b;
+			b.bind(o, method);
+			assert(b.isDescendantOfIEventObserverBase() && "Invalid class C");
+			AncestorType::pBindList.push_back(b);
+			(dynamic_cast<const IEventObserverBase*>(o))->boundEventIncrementReference(dynamic_cast<IEvent*>(this));
+		}
 	}
 
 
@@ -78,27 +93,56 @@ namespace Yuni
 	template<class C>
 	void Event<P>::connect(const C* o, typename Event<P>::template PointerToMember<C>::ConstType method)
 	{
-		typename ThreadingPolicy::MutexLocker locker(*this);
-		Bind<P> b;
-		b.bind(o, method);
-		AncestorType::pBindList.push_back(b);
+		if (o)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			Bind<P> b;
+			b.bind(o, method);
+			assert(b.isDescendantOfIEventObserverBase() && "Invalid class C");
+			AncestorType::pBindList.push_back(b);
+			(dynamic_cast<const IEventObserverBase*>(o))->boundEventIncrementReference(dynamic_cast<IEvent*>(this));
+		}
 	}
 
+
 	template<typename P>
-	template<typename U>
+	template<class U>
 	void Event<P>::remove(const U* object)
 	{
-		typename ThreadingPolicy::MutexLocker locker(*this);
-		// TODO FixMe
-		(void)object;
+		if (object)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			if (!AncestorType::pBindList.empty())
+			{
+				typedef Private::EventImpl::template PredicateRemove<U, typename AncestorType::BindType> RemoveType;
+				AncestorType::pBindList.remove(RemoveType(dynamic_cast<IEvent*>(this), object));
+			}
+		}
 	}
 
 
 	template<typename P>
-	bool Event<P>::unregisterObserver(const IEventObserverBase* /*pointer*/)
+	void Event<P>::unregisterObserver(const IEventObserverBase* pointer)
 	{
-		return true;
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		// When unregistering an observer, we have to remove it without any more checks
+		if (!AncestorType::pBindList.empty())
+		{
+			typedef Private::EventImpl::template PredicateRemoveWithoutChecks<typename AncestorType::BindType> RemoveType;
+			AncestorType::pBindList.remove(RemoveType(pointer));
+		}
 	}
+
+
+	template<typename P>
+	template<class U>
+	inline Event<P>& Event<P>::operator -= (const U* object)
+	{
+		remove(object);
+		return *this;
+	}
+
+
 
 
 } // namespace Yuni

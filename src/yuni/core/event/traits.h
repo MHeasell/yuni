@@ -8,6 +8,9 @@
 ** this file, as they will otherwise be lost at the next generation.
 */
 
+# include "../slist/slist.h"
+
+
 
 namespace Yuni
 {
@@ -27,6 +30,48 @@ namespace EventImpl
 	public:
 		inline void operator () (T) {}
 		static void result() {}
+	};
+
+
+	template<class U, class BindT>
+	class PredicateRemove
+	{
+	public:
+		PredicateRemove(IEvent* event, const U* object)
+			:pEvent(event), pObject(object)
+		{}
+
+		bool operator == (const BindT& rhs) const
+		{
+			if (rhs.isDescendantOf(pObject))
+			{
+				const IEventObserverBase* base = (const IEventObserverBase*)(rhs.object());
+				if (base)
+					base->boundEventDecrementReference(pEvent);
+				return true;
+			}
+			return false;
+		}
+	private:
+		IEvent* pEvent;
+		const U* pObject;
+	};
+
+
+	template<class BindT>
+	class PredicateRemoveWithoutChecks
+	{
+	public:
+		PredicateRemoveWithoutChecks(const IEventObserverBase* object)
+			:pObject(object)
+		{}
+
+		inline bool operator == (const BindT& rhs) const
+		{
+			return (rhs.isDescendantOf(pObject));
+		}
+	private:
+		const IEventObserverBase* pObject;
 	};
 
 
@@ -114,7 +159,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -205,7 +252,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -298,7 +347,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -393,7 +444,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -490,7 +543,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -589,7 +644,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -690,7 +747,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -793,7 +852,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -898,7 +959,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -1005,7 +1068,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -1114,7 +1179,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -1225,7 +1292,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -1338,7 +1407,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -1453,7 +1524,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -1570,7 +1643,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -1689,7 +1764,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments
@@ -1810,7 +1887,9 @@ namespace EventImpl
 		//@}
 
 	protected:
-		typedef std::vector<BindType> BindList;
+		//! Binding list (type)
+		typedef LinkedList<BindType> BindList;
+		//! Binding list
 		BindList pBindList;
 
 	}; // class WithNArguments

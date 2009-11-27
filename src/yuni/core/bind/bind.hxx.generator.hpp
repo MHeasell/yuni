@@ -256,6 +256,33 @@ namespace Yuni
 	}
 
 	template<<%=tmpl[0]%>>
+	inline const void* Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::object() const
+	{
+		return pHolder->object();
+	}
+
+	template<<%=tmpl[0]%>>
+	inline bool Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::isDescendantOf(const IEventObserverBase* obj) const
+	{
+		return pHolder->isDescendantOf(obj);
+	}
+
+	template<<%=tmpl[0]%>>
+	inline bool Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::isDescendantOfIEventObserverBase() const
+	{
+		return pHolder->isDescendantOfIEventObserverBase();
+	}
+
+
+	template<<%=tmpl[0]%>>
+	inline void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::print(std::ostream& out) const
+	{
+		return pHolder->print(out);
+	}
+
+
+
+	template<<%=tmpl[0]%>>
 	inline void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::emptyCallbackReturnsVoid(<%=generator.list(i,"A")%>)
 	{
 		/* Do nothing */
@@ -298,6 +325,20 @@ namespace Yuni
 		// equivalent to unbind
 		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
+	}
+
+
+	template<<%=tmpl[0]%>>
+	inline bool Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::operator == (R (*pointer)(<%=generator.list(i)%>)) const
+	{
+		return pHolder->compareWithPointerToFunction(pointer);
+	}
+
+	template<<%=tmpl[0]%>>
+	template<class U>
+	inline bool Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::operator == (const U* object) const
+	{
+		return pHolder->compareWithPointerToObject(static_cast<const void*>(object));
 	}
 
 

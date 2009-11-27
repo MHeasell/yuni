@@ -52,6 +52,8 @@ Set(SRC_CORE_STATIC
 				core/static/remove.h
 				core/static/assert.h
 				core/static/types.h
+				core/static/inherit.h
+				core/static/dynamiccast.h
 				core/static/moveconstructor.h)
 source_group(Core\\Static FILES ${SRC_CORE_STATIC})
 
