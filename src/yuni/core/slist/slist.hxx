@@ -284,15 +284,6 @@ namespace Yuni
 			push_back(*i);
 	}
 
-	template<class T, class Alloc>
-	void LinkedList<T,Alloc>::remove(LinkedList<T,Alloc>::Iterator& i)
-	{
-		if (i.valid())
-		{
-
-		}
-	}
-
 
 	template<class T, class Alloc>
 	template<class U>
