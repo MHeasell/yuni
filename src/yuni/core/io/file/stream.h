@@ -39,6 +39,15 @@ namespace File
 	/*!
 	** \brief A low-level implementation for reading and writing files
 	**
+	** \ingroup IOFile
+	**
+	** The file will be automatically closed (if not already done) at the
+	** destruction of the object.
+	**
+	** When writing a data into a file, the data is written 'as it' if a CString
+	** can be extracted from it (see yuni/core/traits/cstring.h). Otherwise
+	** a 'Yuni::String' will be used to perform the convertion.
+	**
 	** \internal This implementation is most of the time a C++ wrapper over the standard
 	**   routines 'fopen', 'fclose'... The implementation is a bit different on Windows
 	**   because 'fopen' only handles ansi filenames.
@@ -59,7 +68,7 @@ namespace File
 		/*!
 		** \brief Open a file
 		*/
-		template<class C> Stream(const C& filename, const OpenMode::Type mode = OpenMode::read);
+		template<class U> Stream(const U& filename, const int mode = OpenMode::read);
 		/*!
 		** \brief Destructor
 		**
@@ -78,7 +87,7 @@ namespace File
 		** \param mode The open mode to use
 		** \return True if the operation succeeded, false otherwise
 		*/
-		template<class C> bool open(const C& filename, const OpenMode::Type mode = OpenMode::read);
+		template<class U> bool open(const U& filename, const int mode = OpenMode::read);
 
 		/*!
 		** \brief Close the file if opened
@@ -194,7 +203,7 @@ namespace File
 		** \param buffer An arbitrary buffer (const char*, String, MemoryBuffer)
 		** \return The number of bytes that have been written
 		*/
-		template<class C> size_t write(const C& buffer);
+		template<class U> size_t write(const U& buffer);
 
 		/*!
 		** \brief Write any arbitrary buffer
@@ -203,7 +212,7 @@ namespace File
 		** \param size Size of the buffer to write
 		** \return The number of bytes that have been written
 		*/
-		template<class C> size_t write(const C& buffer, const size_t size);
+		template<class U> size_t write(const U& buffer, const size_t size);
 		//@}
 
 
@@ -212,9 +221,14 @@ namespace File
 		//! True if the stream if not opened
 		bool operator ! () const;
 		//! operator += (write)
-		template<class C> Stream& operator += (const C& rhs);
+		template<class U> Stream& operator += (const U& u);
+		//! operator += (write)
+		Stream& operator += (const char c);
+
 		//! operator << (write)
-		template<class C> Stream& operator << (const C& rhs);
+		template<class U> Stream& operator << (const U& u);
+		//! operator << (write)
+		Stream& operator << (const char c);
 
 		//! Operator >> (read)
 		template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
