@@ -354,8 +354,8 @@ namespace Core
 		/*!
 		** \brief Empty the buffer
 		*/
-		void clear();
-		
+		MemoryBuffer& clear();
+
 		/*!
 		** \brief Erase a part of the buffer
 		**
@@ -422,6 +422,11 @@ namespace Core
 		** \brief Get the current capacity of the buffer (in bytes)
 		*/
 		Size capacity() const;
+
+		/*!
+		** \brief A pointer to the original buffer (might be NULL)
+		*/
+		const C* c_str() const;
 
 		/*!
 		** \brief A pointer to the original buffer (might be NULL)

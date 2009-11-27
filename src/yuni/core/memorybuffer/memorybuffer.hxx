@@ -24,9 +24,9 @@ namespace Core
 	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::MemoryBuffer(const U& rhs)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<U>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		Private::MemoryBufferImpl::Assign<MemoryBufferType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
 	}
@@ -45,9 +45,9 @@ namespace Core
 	inline void MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::assign(const U& u)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<U>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		Private::MemoryBufferImpl::Assign<MemoryBuffer, typename Static::Remove::Const<U>::Type>::Do(*this, u);
 		return *this;
@@ -58,9 +58,9 @@ namespace Core
 	inline void MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::append(const U& u)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<U>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		Private::MemoryBufferImpl::Append<MemoryBuffer, typename Static::Remove::Const<U>::Type>::Do(*this, u);
 	}
@@ -72,9 +72,9 @@ namespace Core
 		const typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size size)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 
-		AncestorType::append(Core::Traits::CString<U>::Buffer(u), size);
+		AncestorType::append(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), size);
 	}
 
 
@@ -107,7 +107,7 @@ namespace Core
 	inline void MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::prepend(const U& u,
 		const typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size size)
 	{
-		insert(0, Core::Traits::CString<U>::Buffer(u), size);
+		insert(0, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), size);
 	}
 
 
@@ -133,10 +133,11 @@ namespace Core
 
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
-	inline void
+	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>&
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::clear()
 	{
 		AncestorType::clear();
+		return *this;
 	}
 
 
@@ -164,7 +165,7 @@ namespace Core
 	void MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::fill(const U& pattern)
 	{
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<U>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		if (AncestorType::size)
 		{
@@ -253,9 +254,9 @@ namespace Core
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::find(const U& u) const
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<U>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		// Find the substring
 		if (Core::Traits::Length<U,Size>::isFixed)
@@ -269,12 +270,12 @@ namespace Core
 				return npos;
 			// The string is actually a single POD item
 			if (1 == Core::Traits::Length<U,Size>::fixedLength)
-				return find(Core::Traits::CString<U>::Buffer(u), 1);
+				return find(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return find(Core::Traits::CString<U>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
+			return find(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
 		}
 		// A mere CString, with a known length at runtime only
-		return find(Core::Traits::CString<U>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
+		return find(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
 	}
 
 
@@ -286,9 +287,9 @@ namespace Core
 		const U& u) const
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<U>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		// Find the substring
 		if (Core::Traits::Length<U,Size>::isFixed)
@@ -302,12 +303,12 @@ namespace Core
 				return npos;
 			// The string is actually a single POD item
 			if (1 == Core::Traits::Length<U,Size>::fixedLength)
-				return indexOf(offset, Core::Traits::CString<U>::Buffer(u), 1);
+				return indexOf(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return indexOf(offset, Core::Traits::CString<U>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
+			return indexOf(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
 		}
 		// A mere CString, with a known length at runtime only
-		return indexOf(offset, Core::Traits::CString<U>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
+		return indexOf(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
 	}
 
 
@@ -392,9 +393,9 @@ namespace Core
 		const U& u)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<U>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		if (Core::Traits::Length<U,Size>::isFixed)
 		{
@@ -407,12 +408,12 @@ namespace Core
 				return false;
 			// The string is actually a single POD item
 			if (1 == Core::Traits::Length<U,Size>::fixedLength)
-				return insert(offset, Core::Traits::CString<U>::Buffer(u), 1);
+				return insert(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return insert(offset, Core::Traits::CString<U>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
+			return insert(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
 		}
 
-		return insert(offset, Core::Traits::CString<U>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
+		return insert(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
 	}
 
 
@@ -425,9 +426,9 @@ namespace Core
 		const typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size size)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 
-		return insert(offset, Core::Traits::CString<U>::Buffer(u), size);
+		return insert(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), size);
 	}
 
 
@@ -508,9 +509,9 @@ namespace Core
 		const U& u)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<U>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		// Find the substring
 		if (Core::Traits::Length<U,Size>::isFixed)
@@ -524,12 +525,12 @@ namespace Core
 				return;
 			// The string is actually a single POD item
 			if (1 == Core::Traits::Length<U,Size>::fixedLength)
-				return overwrite(offset, Core::Traits::CString<U>::Buffer(u), 1);
+				return overwrite(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return overwrite(offset, Core::Traits::CString<U>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
+			return overwrite(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
 		}
 
-		return overwrite(offset, Core::Traits::CString<U>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
+		return overwrite(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
 	}
 
 
@@ -571,6 +572,14 @@ namespace Core
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
 	inline C*
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::data()
+	{
+		return AncestorType::data;
+	}
+
+
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	inline const C*
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::c_str() const
 	{
 		return AncestorType::data;
 	}
@@ -650,12 +659,12 @@ namespace Core
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::trimRight(const U& u)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 
 		const C* ptr;
 		while (AncestorType::size > 0)
 		{
-			ptr = Core::Traits::CString<U>::Buffer(u);
+			ptr = Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u);
 			while (C() != *ptr)
 			{
 				if (*ptr == AncestorType::data[AncestorType::size - 1])
@@ -679,13 +688,13 @@ namespace Core
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::trimLeft(const U& u)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 
 		const C* ptr;
 		Size count = 0;
 		while (count < AncestorType::size)
 		{
-			ptr = Core::Traits::CString<U>::Buffer(u);
+			ptr = Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u);
 			while (C() != *ptr)
 			{
 				if (*ptr == AncestorType::data[count])
@@ -721,7 +730,7 @@ namespace Core
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::trim(const U& u)
 	{
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
 
 		// It seems more interesting to trim from the end first, to reduce the size
 		// of the buffer as soon as possible and to reduce the amount of data to move
@@ -792,7 +801,7 @@ namespace Core
 	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>&
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::operator += (const U& rhs)
 	{
-		Private::MemoryBufferImpl::Append<MemoryBuffer, U>::Do(*this, rhs);
+		Private::MemoryBufferImpl::Append<MemoryBuffer, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
 		return *this;
 	}
 
@@ -802,7 +811,7 @@ namespace Core
 	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>&
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::operator << (const U& rhs)
 	{
-		Private::MemoryBufferImpl::Append<MemoryBuffer, U>::Do(*this, rhs);
+		Private::MemoryBufferImpl::Append<MemoryBuffer, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
 		return *this;
 	}
 

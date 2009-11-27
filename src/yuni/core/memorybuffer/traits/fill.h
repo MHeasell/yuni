@@ -47,7 +47,7 @@ namespace MemoryBufferImpl
 			typedef typename MemBufT::Size Size;
 
 			// Getting the size of the pattern
-			const Size patternSize = Core::Traits::Length<C*,Size>::Value(pattern);
+			const Size patternSize = Yuni::Core::Traits::Length<C*,Size>::Value(pattern);
 			// If equals to 1, it is merely a single char
 			if (patternSize == 1)
 			{
