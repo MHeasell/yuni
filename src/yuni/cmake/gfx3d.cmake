@@ -46,6 +46,13 @@ Set(SRC_GFX3D
 
 Include(CheckIncludeFile)
 
+#
+# OpenGL
+#
+Message(STATUS "Added Support for OpenGL")
+find_package(OpenGL)
+Set(YUNI_COMPILED_WITH_SUPPORT_FOR_OPENGL  1)
+LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${OPENGL_INCLUDE_DIR}")
 
 
 
@@ -55,30 +62,35 @@ Include(CheckIncludeFile)
 IF(UNIX AND NOT APPLE)
 	CHECK_INCLUDE_FILE("X11/X.h" YUNI_HAS_X11_HEADER)
 	CHECK_INCLUDE_FILE("X11/Xlib.h" YUNI_HAS_X11_XLIB_HEADER)
-	CHECK_INCLUDE_FILE("X11/extensions/Xrandr.h" YUNI_HAS_X11_EXT_RANDR_HEADER)
-
 	IF(NOT "${YUNI_HAS_X11_HEADER}" GREATER 0 OR NOT "${YUNI_HAS_X11_XLIB_HEADER}" GREATER 0)
-		Message(STATUS     "")
-		Message(STATUS     "Impossible to find X11/X.h or Xlib.h")
+		Set(YUNI_CMAKE_ERROR 1)
+		Message(STATUS     "[!!] Impossible to find X11/X.h or Xlib.h")
 		Message(STATUS     " * Packages needed on Debian: libx11.dev")
-		Message(SEND_ERROR "Aborting now")
 	ENDIF(NOT "${YUNI_HAS_X11_HEADER}" GREATER 0 OR NOT "${YUNI_HAS_X11_XLIB_HEADER}" GREATER 0)
+
+	CHECK_INCLUDE_FILE("X11/extensions/Xrandr.h" YUNI_HAS_X11_EXT_RANDR_HEADER)
 	IF(NOT "${YUNI_HAS_X11_EXT_RANDR_HEADER}" GREATER 0)
-		Message(STATUS     "")
-		Message(STATUS     "Impossible to find X11/extensions/Xrandr.h")
+		Set(YUNI_CMAKE_ERROR 1)
+		Message(STATUS     "[!!] Impossible to find X11/extensions/Xrandr.h")
 		Message(STATUS     " * Packages needed on Debian: libxrandr-dev")
-		Message(SEND_ERROR "Aborting now")
 	ENDIF(NOT "${YUNI_HAS_X11_EXT_RANDR_HEADER}" GREATER 0)
+
+	CHECK_INCLUDE_FILE("GL/glx.h" YUNI_HAS_GLX_HEADER)
+	IF(NOT "${YUNI_HAS_GLX_HEADER}" GREATER 0)
+		Set(YUNI_CMAKE_ERROR 1)
+		Message(STATUS     "[!!] Impossible to find GL/glx.h.h")
+		Message(STATUS     " * Packages needed on Debian: mesa-common-dev")
+	ENDIF(NOT "${YUNI_HAS_GLX_HEADER}" GREATER 0)
+
+	CHECK_INCLUDE_FILE("GL/glu.h" YUNI_HAS_GLU_HEADER)
+	IF(NOT "${YUNI_HAS_GLU_HEADER}" GREATER 0)
+		Set(YUNI_CMAKE_ERROR 1)
+		Message(STATUS     "[!!] Impossible to find GL/glu.h.h")
+		Message(STATUS     " * Packages needed on Debian: libglu-dev")
+	ENDIF(NOT "${YUNI_HAS_GLU_HEADER}" GREATER 0)
+
 ENDIF(UNIX AND NOT APPLE)
 
-
-#
-# OpenGL
-#
-Message(STATUS "Added Support for OpenGL")
-find_package(OpenGL)
-Set(YUNI_COMPILED_WITH_SUPPORT_FOR_OPENGL  1)
-LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${OPENGL_INCLUDE_DIR}")
 
 
 #

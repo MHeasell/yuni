@@ -1,7 +1,9 @@
 
 Message(STATUS "[Module] Script")
 
+Include(CheckIncludeFile)
 LIBYUNI_CONFIG_LIB("script"     "yuni-static-script")
+
 
 # Scripts
 Set(SRC_SCRIPT
@@ -14,9 +16,18 @@ Set(SRC_SCRIPT
 source_group("Script\\Script Abstraction" FILES ${SRC_SCRIPT})
 
 
+
 # External Lib: Lua script
 if(YUNI_EXTERNAL_SCRIPT_LUA)
 	Message(STATUS "[Module] Script::Lua")
+
+	CHECK_INCLUDE_FILE("readline/readline.h" YUNI_HAS_READLINE_HEADER)
+	IF(NOT "${YUNI_HAS_READLINE_HEADER}" GREATER 0)
+		Set(YUNI_CMAKE_ERROR 1)
+		Message(STATUS     "[!!] Impossible to find readline/readline.h")
+		Message(STATUS     " * Packages needed on Debian: libreadline-dev")
+	ENDIF(NOT "${YUNI_HAS_READLINE_HEADER}" GREATER 0)
+
 	LIBYUNI_CONFIG_DEPENDENCY("lua" "script")
 	# Headers for Lua
 	DEVPACK_IMPORT_LUA()
@@ -29,9 +40,10 @@ if(YUNI_EXTERNAL_SCRIPT_LUA)
 
 Endif(YUNI_EXTERNAL_SCRIPT_LUA)
 
+
+
+
 Add_Library(yuni-static-script STATIC
-			${SRC_SCRIPT}
-			${SRC_EXTERNAL_SCRIPT_LUA}
-			)
+	${SRC_SCRIPT} ${SRC_EXTERNAL_SCRIPT_LUA})
 
 

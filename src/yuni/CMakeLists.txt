@@ -9,6 +9,7 @@ Message(STATUS "")
 #
 Set(YUNI_COMPILED_WITH_SUPPORT_FOR_OPENGL  0)
 Set(YUNI_COMPILED_WITH_SUPPORT_FOR_DIRECTX 0)
+Set(YUNI_CMAKE_ERROR 0)
 
 
 #
@@ -164,3 +165,8 @@ Include_directories(${YUNI_INCLUDE})
 
 Message(STATUS "")
 
+IF("${YUNI_CMAKE_ERROR}" GREATER 0)
+	Message(STATUS "")
+	MESSAGE(SEND_ERROR "An error has occured. Aborting.")
+	Message(STATUS "")
+ENDIF("${YUNI_CMAKE_ERROR}" GREATER 0)
