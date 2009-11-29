@@ -1071,7 +1071,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1129,7 +1129,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1187,7 +1187,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1245,7 +1245,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1303,7 +1303,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1361,7 +1361,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1419,7 +1419,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1477,7 +1477,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1535,7 +1535,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1593,7 +1593,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1651,7 +1651,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1709,7 +1709,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1767,7 +1767,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1825,7 +1825,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1883,7 +1883,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -1941,7 +1941,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2001,7 +2001,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2057,7 +2057,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2113,7 +2113,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2169,7 +2169,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2225,7 +2225,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2281,7 +2281,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2337,7 +2337,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2393,7 +2393,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2449,7 +2449,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2505,7 +2505,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2561,7 +2561,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2617,7 +2617,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2673,7 +2673,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2729,7 +2729,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2785,7 +2785,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
@@ -2841,7 +2841,7 @@ namespace BindImpl
 			return NULL;
 		}
 
-		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		virtual bool isDescendantOf(const IEventObserverBase*) const
 		{
 			return false;
 		}
