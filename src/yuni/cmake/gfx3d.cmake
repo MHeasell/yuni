@@ -17,6 +17,7 @@ ENDIF(APPLE)
 
 
 
+
 Set(SRC_GFX3D
 		application/gfx3d.h application/gfx3d.cpp
 		gfx/engine.h gfx/engine.cpp
@@ -41,6 +42,34 @@ Set(SRC_GFX3D
 		gfx/text/font.h gfx/text/label.h
 		gfx/text/wgl.h gfx/text/wgl.cpp
 	)
+
+
+Include(CheckIncludeFile)
+
+
+
+
+#
+# X11
+#
+IF(UNIX AND NOT APPLE)
+	CHECK_INCLUDE_FILE("X11/X.h" YUNI_HAS_X11_HEADER)
+	CHECK_INCLUDE_FILE("X11/Xlib.h" YUNI_HAS_X11_XLIB_HEADER)
+	CHECK_INCLUDE_FILE("X11/extensions/Xrandr.h" YUNI_HAS_X11_EXT_RANDR_HEADER)
+
+	IF(NOT "${YUNI_HAS_X11_HEADER}" GREATER 0 OR NOT "${YUNI_HAS_X11_XLIB_HEADER}" GREATER 0)
+		Message(STATUS     "")
+		Message(STATUS     "Impossible to find X11/X.h or Xlib.h")
+		Message(STATUS     " * Packages needed on Debian: libx11.dev")
+		Message(SEND_ERROR "Aborting now")
+	ENDIF(NOT "${YUNI_HAS_X11_HEADER}" GREATER 0 OR NOT "${YUNI_HAS_X11_XLIB_HEADER}" GREATER 0)
+	IF(NOT "${YUNI_HAS_X11_EXT_RANDR_HEADER}" GREATER 0)
+		Message(STATUS     "")
+		Message(STATUS     "Impossible to find X11/extensions/Xrandr.h")
+		Message(STATUS     " * Packages needed on Debian: libxrandr-dev")
+		Message(SEND_ERROR "Aborting now")
+	ENDIF(NOT "${YUNI_HAS_X11_EXT_RANDR_HEADER}" GREATER 0)
+ENDIF(UNIX AND NOT APPLE)
 
 
 #
