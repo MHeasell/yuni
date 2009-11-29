@@ -430,7 +430,7 @@ namespace Checksum
 			while (stream.good())
 			{
 				stream.read((char*)buffer, 1024); // note that return value of read is unusable.
-				len = stream.gcount();
+				len = (int) stream.gcount();
 				md5ImplAppend(&state, (const MD5TypeByte*)buffer, len);
 			}
 			md5ImplFinish(&state, digest);
