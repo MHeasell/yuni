@@ -314,7 +314,7 @@ namespace Script
 
 	public:
 		//! Type for script run-time error events
-		typedef Event<void (Language, const String& /* file */, unsigned int /* line */,
+		typedef Event<void(Language, const String& /* file */, unsigned int /* line */,
 				unsigned int /* position */, const String& /*errorString */)> ScriptErrorEvent;
 
 		/*!
