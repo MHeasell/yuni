@@ -17,19 +17,6 @@ ENDIF(APPLE)
 DEVPACK_IMPORT_PTHREADS()
 
 
-Set(SRC_CORE_ALLOCATOR
-				core/allocator/chunk.h
-				core/allocator/chunk.cpp
-				core/allocator/allocator.h
-				core/allocator/allocator.cpp
-				core/allocator/smallobjallocator.h
-				core/allocator/smallobjallocator.hxx
-				core/allocator/smallobject.h
-				core/allocator/smallobject.hxx
-				core/allocator/smallobject.cpp
-				core/smallobject.h)
-source_group(Core\\Allocator FILES ${SRC_CORE_ALLOCATOR})
-
 
 Set(SRC_CORE_ATOMIC
 				core/atomic/int.h
@@ -365,7 +352,6 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_PREDICATES_RESULTS}
 		${SRC_CORE_STATIC}
 		${SRC_CORE_TRAITS}
-		${SRC_CORE_ALLOCATOR}
 		${SRC_CORE_PREPROCESSOR}
 		${SRC_CORE_EXCEPTIONS}
 		${SRC_CORE_STRING}
