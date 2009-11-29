@@ -4,8 +4,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
@@ -838,7 +836,6 @@ namespace Core
 
 
 
-} // namespace Core
 } // namespace Yuni
 
 #endif // __YUNI_CORE_MEMORY_BUFFER_MEMORY_BUFFER_HXX__
