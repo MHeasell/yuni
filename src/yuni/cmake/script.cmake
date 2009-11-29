@@ -21,14 +21,14 @@ source_group("Script\\Script Abstraction" FILES ${SRC_SCRIPT})
 if(YUNI_EXTERNAL_SCRIPT_LUA)
 	Message(STATUS "[Module] Script::Lua")
 
-	IF(UNIX)
+	IF(UNIX AND NOT APPLE)
 		CHECK_INCLUDE_FILE("readline/readline.h" YUNI_HAS_READLINE_HEADER)
 		IF(NOT "${YUNI_HAS_READLINE_HEADER}" GREATER 0)
 			Set(YUNI_CMAKE_ERROR 1)
 			Message(STATUS     "[!!] Impossible to find readline/readline.h")
 			Message(STATUS     " * Packages needed on Debian: libreadline-dev")
 		ENDIF(NOT "${YUNI_HAS_READLINE_HEADER}" GREATER 0)
-	ENDIF(UNIX)
+	ENDIF(UNIX AND NOT APPLE)
 
 	LIBYUNI_CONFIG_DEPENDENCY("lua" "script")
 	# Headers for Lua
