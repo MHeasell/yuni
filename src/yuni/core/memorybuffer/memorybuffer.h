@@ -12,6 +12,8 @@
 # include "traits/assign.h"
 # include "traits/fill.h"
 
+# include <iostream>
+
 
 namespace Yuni
 {
@@ -312,6 +314,26 @@ namespace Yuni
 		** \see find()
 		*/
 		template<class U> Size find_first_of(const U& u) const;
+
+		/*!
+		** \brief Get if a given string can be found at the begining of the buffer
+		*/
+		bool startsWith(const C* buffer, const Size len) const;
+
+		/*!
+		** \brief Get if a given string can be found at the begining of the buffer
+		*/
+		template<class U> bool startsWith(const U& u) const;
+
+		/*!
+		** \brief Get if a given string can be found at the end of the buffer
+		*/
+		bool endsWith(const C* buffer, const Size len) const;
+
+		/*!
+		** \brief Get if a given string can be found at the end of the buffer
+		*/
+		template<class U> bool endsWith(const U& u) const;
 		//@}
 
 

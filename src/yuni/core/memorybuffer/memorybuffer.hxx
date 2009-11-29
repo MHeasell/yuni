@@ -21,12 +21,14 @@ namespace Yuni
 	template<class U>
 	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::MemoryBuffer(const U& rhs)
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
-		Private::MemoryBufferImpl::Assign<MemoryBufferType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
+		Private::MemoryBufferImpl::Assign<MemoryBufferType, UType>::Do(*this, rhs);
 	}
 
 
@@ -42,12 +44,14 @@ namespace Yuni
 	template<class U>
 	inline void MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::assign(const U& u)
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
-		Private::MemoryBufferImpl::Assign<MemoryBuffer, typename Static::Remove::Const<U>::Type>::Do(*this, u);
+		Private::MemoryBufferImpl::Assign<MemoryBuffer, UType>::Do(*this, u);
 		return *this;
 	}
 
@@ -55,12 +59,14 @@ namespace Yuni
 	template<class U>
 	inline void MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::append(const U& u)
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
-		Private::MemoryBufferImpl::Append<MemoryBuffer, typename Static::Remove::Const<U>::Type>::Do(*this, u);
+		Private::MemoryBufferImpl::Append<MemoryBuffer, UType>::Do(*this, u);
 	}
 
 
@@ -69,10 +75,12 @@ namespace Yuni
 	inline void MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::append(const U& u,
 		const typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size size)
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 
-		AncestorType::append(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), size);
+		AncestorType::append(Core::Traits::CString<UType>::Buffer(u), size);
 	}
 
 
@@ -105,7 +113,10 @@ namespace Yuni
 	inline void MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::prepend(const U& u,
 		const typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size size)
 	{
-		insert(0, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), size);
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
+
+		insert(0, Core::Traits::CString<UType>::Buffer(u), size);
 	}
 
 
@@ -162,14 +173,13 @@ namespace Yuni
 	template<class U>
 	void MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::fill(const U& pattern)
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		if (AncestorType::size)
-		{
-			Private::MemoryBufferImpl::Fill<MemoryBuffer, typename Static::Remove::Const<U>::Type>
-				::Do(AncestorType::data, AncestorType::size, pattern);
-		}
+			Private::MemoryBufferImpl::Fill<MemoryBuffer, UType>::Do(AncestorType::data, AncestorType::size, pattern);
 	}
 
 
@@ -199,6 +209,62 @@ namespace Yuni
 		}
 		return npos;
 	}
+
+
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	inline bool
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::startsWith(const C* buffer,
+		const typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size len) const
+	{
+		return (buffer && len && len <= AncestorType::size)
+			? (0 == ::memcmp(AncestorType::data, buffer, len))
+			: false;
+	}
+
+
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	template<class U>
+	inline bool
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::startsWith(const U& u) const
+	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
+		// Assert, if a C* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		// Assert, if the length of the container can not be found at compile time
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+
+		return startsWith(Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
+	}
+
+
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	inline bool
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::endsWith(const C* buffer,
+		const typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size len) const
+	{
+		return (buffer && len && len <= AncestorType::size)
+			? (0 == ::memcmp(AncestorType::data + (AncestorType::size - len), buffer, len))
+			: false;
+	}
+
+
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	template<class U>
+	inline bool
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::endsWith(const U& u) const
+	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
+		// Assert, if a C* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		// Assert, if the length of the container can not be found at compile time
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+
+		return endsWith(Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
+	}
+
+
 
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
@@ -251,29 +317,31 @@ namespace Yuni
 	inline typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::find(const U& u) const
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		// Find the substring
-		if (Core::Traits::Length<U,Size>::isFixed)
+		if (Core::Traits::Length<UType,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
 			// prevent against bad uses of the API, like using a C* for looking for a single char.
 
 			// The value to find is actually empty, npos will be the unique answer
-			if (0 == Core::Traits::Length<U,Size>::fixedLength)
+			if (0 == Core::Traits::Length<UType,Size>::fixedLength)
 				return npos;
 			// The string is actually a single POD item
-			if (1 == Core::Traits::Length<U,Size>::fixedLength)
-				return find(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), 1);
+			if (1 == Core::Traits::Length<UType,Size>::fixedLength)
+				return find(Core::Traits::CString<UType>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return find(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
+			return find(Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::fixedLength);
 		}
 		// A mere CString, with a known length at runtime only
-		return find(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
+		return find(Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
 	}
 
 
@@ -284,29 +352,31 @@ namespace Yuni
 		typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size offset,
 		const U& u) const
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		// Find the substring
-		if (Core::Traits::Length<U,Size>::isFixed)
+		if (Core::Traits::Length<UType,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
 			// prevent against bad uses of the API, like using a C* for looking for a single char.
 
 			// The value to find is actually empty, npos will be the unique answer
-			if (0 == Core::Traits::Length<U,Size>::fixedLength)
+			if (0 == Core::Traits::Length<UType,Size>::fixedLength)
 				return npos;
 			// The string is actually a single POD item
-			if (1 == Core::Traits::Length<U,Size>::fixedLength)
-				return indexOf(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), 1);
+			if (1 == Core::Traits::Length<UType,Size>::fixedLength)
+				return indexOf(offset, Core::Traits::CString<UType>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return indexOf(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
+			return indexOf(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::fixedLength);
 		}
 		// A mere CString, with a known length at runtime only
-		return indexOf(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
+		return indexOf(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
 	}
 
 
@@ -390,28 +460,30 @@ namespace Yuni
 		const typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size offset,
 		const U& u)
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
-		if (Core::Traits::Length<U,Size>::isFixed)
+		if (Core::Traits::Length<UType,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
 			// prevent against bad uses of the API, like using a C* for looking for a single char.
 
 			// The value to find is actually empty, false will be the unique answer
-			if (0 == Core::Traits::Length<U,Size>::fixedLength)
+			if (0 == Core::Traits::Length<UType,Size>::fixedLength)
 				return false;
 			// The string is actually a single POD item
-			if (1 == Core::Traits::Length<U,Size>::fixedLength)
-				return insert(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), 1);
+			if (1 == Core::Traits::Length<UType,Size>::fixedLength)
+				return insert(offset, Core::Traits::CString<UType>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return insert(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
+			return insert(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::fixedLength);
 		}
 
-		return insert(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
+		return insert(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
 	}
 
 
@@ -506,29 +578,31 @@ namespace Yuni
 		const typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size offset,
 		const U& u)
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<typename Static::Remove::Const<U>::Type>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
 
 		// Find the substring
-		if (Core::Traits::Length<U,Size>::isFixed)
+		if (Core::Traits::Length<UType,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
 			// prevent against bad uses of the API, like using a C* for looking for a single char.
 
 			// The value to find is actually empty, nothing to do
-			if (0 == Core::Traits::Length<U,Size>::fixedLength)
+			if (0 == Core::Traits::Length<UType,Size>::fixedLength)
 				return;
 			// The string is actually a single POD item
-			if (1 == Core::Traits::Length<U,Size>::fixedLength)
-				return overwrite(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), 1);
+			if (1 == Core::Traits::Length<UType,Size>::fixedLength)
+				return overwrite(offset, Core::Traits::CString<UType>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return overwrite(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::fixedLength);
+			return overwrite(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::fixedLength);
 		}
 
-		return overwrite(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), Core::Traits::Length<U,Size>::Value(u));
+		return overwrite(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
 	}
 
 
@@ -656,13 +730,15 @@ namespace Yuni
 	void
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::trimRight(const U& u)
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 
 		const C* ptr;
 		while (AncestorType::size > 0)
 		{
-			ptr = Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u);
+			ptr = Core::Traits::CString<UType>::Buffer(u);
 			while (C() != *ptr)
 			{
 				if (*ptr == AncestorType::data[AncestorType::size - 1])
@@ -685,14 +761,16 @@ namespace Yuni
 	void
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::trimLeft(const U& u)
 	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
 
 		const C* ptr;
 		Size count = 0;
 		while (count < AncestorType::size)
 		{
-			ptr = Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u);
+			ptr = Core::Traits::CString<UType>::Buffer(u);
 			while (C() != *ptr)
 			{
 				if (*ptr == AncestorType::data[count])
@@ -818,7 +896,7 @@ namespace Yuni
 	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>&
 	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::operator = (const MemoryBuffer& rhs)
 	{
-		Private::MemoryBufferImpl::Assign<MemoryBuffer, typename Static::Remove::Const<C>::Type>::Do(*this, rhs);
+		Private::MemoryBufferImpl::Assign<MemoryBuffer, C>::Do(*this, rhs);
 		return *this;
 	}
 
