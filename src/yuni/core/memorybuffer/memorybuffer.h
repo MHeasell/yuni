@@ -15,8 +15,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 
 
 	/*!
@@ -27,8 +25,8 @@ namespace Core
 	**  - C*
 	**  - C[]
 	**  - std::basic_string<C>
-	**  - Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>Base<C>
-	**  - Yuni::Core::MemoryBuffer<C>
+	**  - Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>Base<C>
+	**  - Yuni::MemoryBuffer<C>
 	**
 	**
 	** \tparam C A pod type
@@ -519,7 +517,6 @@ namespace Core
 
 
 
-} // namespace Core
 } // namespace Yuni
 
 # include "memorybuffer.hxx"
@@ -531,7 +528,7 @@ namespace Core
 //@{
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline std::ostream& operator << (std::ostream& out, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	out.write(rhs.data(), rhs.size());
 	return out;
@@ -539,37 +536,37 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::Core::MemoryBuf
 
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator == (const U& u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator == (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs == u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator != (const U& u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator != (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs != u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator < (const U& u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator < (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs >= u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator > (const U& u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator > (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs <= u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator <= (const U& u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator <= (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs > u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator >= (const U& u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator >= (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs < u);
 }
@@ -579,79 +576,79 @@ inline bool operator >= (const U& u, const Yuni::Core::MemoryBuffer<C,SizeT,Zero
 
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const char* u)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const char* u)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t* u)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t* u)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const char u)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const char u)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t u)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t u)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const wchar_t* u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const wchar_t* u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const char* u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const char* u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const char u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const char u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const wchar_t u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const wchar_t u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 
 
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT, class U>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const std::basic_string<U>& u, const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const std::basic_string<U>& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT, class U>
-inline Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const std::basic_string<U>& u)
+inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const std::basic_string<U>& u)
 {
-	return Yuni::Core::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 //@}

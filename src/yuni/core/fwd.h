@@ -19,15 +19,11 @@ namespace Yuni
 	template<class C = char, int ChunkSizeT = 80> class StringBase;
 
 
-namespace Core
-{
 
 	// Forward declaration for MemoryBuffer
 	template<class C, unsigned int ChunkSizeT = 80, bool ZeroTerminatedT = false, bool ExpandableT = true>
 	class MemoryBuffer;
 
-
-} // namespace Core
 
 } // namespace Yuni
 
