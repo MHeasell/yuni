@@ -211,6 +211,7 @@ Set(SRC_CORE_SYSTEM
 				core/system/sleep.h core/system/sleep.cpp
 				core/sleep.h
 				core/fwd.h
+				core/system/cpu.h core/system/cpu.cpp
 				core/system/endian.h)
 source_group(Core\\System FILES ${SRC_CORE_SYSTEM})
 
@@ -304,7 +305,7 @@ Set(SRC_THREADS
 				threads/thread.h threads/thread.cpp
 				threads/timer.h threads/timer.cpp
 				threads/condition.h threads/condition.cpp threads/condition.hxx
-				threads/cpu.cpp)
+				)
 source_group(Threads FILES ${SRC_THREADS})
 
 # Jobs
@@ -354,6 +355,9 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_TRAITS}
 		${SRC_CORE_PREPROCESSOR}
 		${SRC_CORE_EXCEPTIONS}
+		${SRC_CORE_SYSTEM}
+		${SRC_CORE_SYSTEM_WINDOWS}
+		${SRC_CORE_SYSTEM_CONSOLE}
 		${SRC_CORE_STRING}
 		${SRC_CORE_STL} ${SRC_CORE_VALIDATOR}
 		${SRC_CORE_IO_FILENAME}
@@ -376,9 +380,6 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_UNIT}
 		${SRC_CORE_URI}
 		${SRC_CORE_GETOPT}
-		${SRC_CORE_SYSTEM}
-		${SRC_CORE_SYSTEM_WINDOWS}
-		${SRC_CORE_SYSTEM_CONSOLE}
 		${SRC_GFX_CORE}
 		${SRC_PREDICATES_RESULTS}
 		${SRC_THREADS} ${SRC_JOBS}

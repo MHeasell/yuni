@@ -52,11 +52,6 @@ namespace Private
 
 	public:
 		/*!
-		** \brief Get the number of system CPU, 1 if unknown
-		*/
-		static int CPUCount();
-
-		/*!
 		** \brief Get the current process ID
 		*/
 		static unsigned int ProcessID();
