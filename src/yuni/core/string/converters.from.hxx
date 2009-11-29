@@ -417,9 +417,9 @@ namespace StringImpl
 
 
 	template<typename C, unsigned int Chnk1, bool ZeroT, bool ExpT>
-	struct From< Core::MemoryBuffer<C, Chnk1, ZeroT, ExpT> >
+	struct From< MemoryBuffer<C, Chnk1, ZeroT, ExpT> >
 	{
-		typedef Core::MemoryBuffer<C, Chnk1, ZeroT, ExpT> SourceType;
+		typedef MemoryBuffer<C, Chnk1, ZeroT, ExpT> SourceType;
 
 		template<int Chnk>
 		static inline void Append(StringBase<C,Chnk>& s, const SourceType& str)
