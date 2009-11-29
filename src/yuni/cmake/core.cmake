@@ -177,6 +177,7 @@ Set(SRC_CORE_MATH
 				core/math/trigonometric.h core/math/trigonometric.hxx
 				# Exponential functions
 				core/math/exponential.h core/math/exponential.hxx
+				core/math/complex.h  core/math/complex.hxx
 				# Random number generators
 				core/math/random/distribution.h  core/math/random/distribution.hxx
 				core/math/random/default.h  core/math/random/default.hxx core/math/random/default.cpp
