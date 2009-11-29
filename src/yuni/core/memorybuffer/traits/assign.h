@@ -100,11 +100,11 @@ namespace MemoryBufferImpl
 	};
 
 
-	// Core::MemoryBuffer
+	// MemoryBuffer
 	template<class MemBufT, unsigned int ChunkSizeT, bool ZeroT, bool ExpandT>
-	struct Assign<MemBufT, Yuni::Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
+	struct Assign<MemBufT, Yuni::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
 	{
-		typedef Yuni::Core::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
+		typedef Yuni::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
 		static void Do(MemBufT& memoryBuffer, const C& rhs)
 		{
 			if (rhs.notEmpty())
