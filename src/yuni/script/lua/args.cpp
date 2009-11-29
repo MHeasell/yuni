@@ -15,7 +15,7 @@ namespace Bind
 
 	int Argument<Script::Lua*, int>::Get(Script::Lua* ctx, unsigned int order)
 	{
-		return lua_tointeger(ctx->pProxy->pState, order + 1);
+		return (int) lua_tointeger(ctx->pProxy->pState, order + 1);
 	}
 
 
