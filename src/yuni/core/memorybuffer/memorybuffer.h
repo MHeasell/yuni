@@ -223,7 +223,7 @@ namespace Yuni
 		** \brief Fill the whole buffer with a given pattern
 		**
 		** \code
-		** Core::MemoryBuffer<char>  buffer;
+		** MemoryBuffer<char>  buffer;
 		** buffer.resize(80);
 		**
 		** // Preface
