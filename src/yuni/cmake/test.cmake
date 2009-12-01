@@ -1,5 +1,5 @@
 
-Message(STATUS "[Module] Tests")
+Message(STATUS ":: [Module] Tests")
 
 LIBYUNI_CONFIG_LIB("tests"      "yuni-static-tests")
 

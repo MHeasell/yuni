@@ -1,4 +1,6 @@
 
+Message(STATUS ":: [Module] Gfx3D")
+
 
 LIBYUNI_CONFIG_LIB("gfx3d"      "yuni-static-gfx3d-core")
 
@@ -66,6 +68,7 @@ IF(UNIX AND NOT APPLE)
 		Set(YUNI_CMAKE_ERROR 1)
 		Message(STATUS     "[!!] Impossible to find X11/X.h or Xlib.h")
 		Message(STATUS     " * Packages needed on Debian: libx11.dev")
+		Message(STATUS     " * Packages needed on Fedora: libX11-devel")
 	ENDIF(NOT "${YUNI_HAS_X11_HEADER}" GREATER 0 OR NOT "${YUNI_HAS_X11_XLIB_HEADER}" GREATER 0)
 
 	CHECK_INCLUDE_FILE("X11/extensions/Xrandr.h" YUNI_HAS_X11_EXT_RANDR_HEADER)
@@ -73,6 +76,7 @@ IF(UNIX AND NOT APPLE)
 		Set(YUNI_CMAKE_ERROR 1)
 		Message(STATUS     "[!!] Impossible to find X11/extensions/Xrandr.h")
 		Message(STATUS     " * Packages needed on Debian: libxrandr-dev")
+		Message(STATUS     " * Packages needed on Fedora: libXrandr-devel.i686")
 	ENDIF(NOT "${YUNI_HAS_X11_EXT_RANDR_HEADER}" GREATER 0)
 
 	CHECK_INCLUDE_FILE("GL/glx.h" YUNI_HAS_GLX_HEADER)
@@ -80,13 +84,15 @@ IF(UNIX AND NOT APPLE)
 		Set(YUNI_CMAKE_ERROR 1)
 		Message(STATUS     "[!!] Impossible to find GL/glx.h.h")
 		Message(STATUS     " * Packages needed on Debian: mesa-common-dev")
+		Message(STATUS     " * Packages needed on Debian: mesa-libGLU-devel.i686")
 	ENDIF(NOT "${YUNI_HAS_GLX_HEADER}" GREATER 0)
 
 	CHECK_INCLUDE_FILE("GL/glu.h" YUNI_HAS_GLU_HEADER)
 	IF(NOT "${YUNI_HAS_GLU_HEADER}" GREATER 0)
 		Set(YUNI_CMAKE_ERROR 1)
-		Message(STATUS     "[!!] Impossible to find GL/glu.h.h")
+		Message(STATUS     "[!!] Impossible to find GL/glu.h")
 		Message(STATUS     " * Packages needed on Debian: libglu-dev")
+		Message(STATUS     " * Packages needed on Fedora: mesa-libGLU-devel.i686")
 	ENDIF(NOT "${YUNI_HAS_GLU_HEADER}" GREATER 0)
 
 ENDIF(UNIX AND NOT APPLE)

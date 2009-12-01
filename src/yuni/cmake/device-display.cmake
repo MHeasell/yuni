@@ -1,5 +1,5 @@
 
-Message(STATUS "[Module] Device::Display")
+Message(STATUS ":: [Module] Device::Display")
 
 LIBYUNI_CONFIG_DEPENDENCY("display" "devices") # gfx-core is required
 

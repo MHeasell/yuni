@@ -1,5 +1,5 @@
 
-Message(STATUS "[Module] Gfx::Core")
+Message(STATUS ":: [Module] Gfx::Core")
 
 LIBYUNI_CONFIG_LIB("gfx"        "yuni-static-gfx-core")
 

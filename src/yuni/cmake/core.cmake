@@ -1,6 +1,6 @@
 
 
-Message(STATUS "[Module] Core")
+Message(STATUS ":: [Module] Core")
 
 
 # yuni-config
