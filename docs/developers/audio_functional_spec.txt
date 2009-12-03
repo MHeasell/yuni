@@ -35,12 +35,14 @@ I) Entities:
 - Source
   - Position
   - Speed vector (direction + velocity)
+  - Unique identifier
 - Sound
   - Various storage formats (no compression, compression, lossless compression)
     WAV, MP3, OGG, FLAC, ...
   - File-by-file sounds, or sound banks
   - Specific settings to modify (volume, speed, playing backwards, ...)
   - Continuous streaming
+  - Unique identifier
 
 II) Features:
 =============
@@ -132,3 +134,29 @@ of a car engine that keeps running for some time, or the sound of water falling.
  * It will have its own gain, combined with the main volume for sound effects.
  * It should only be played from a file.
  * It must remain loaded as long as the user does not tell otherwise.
+
+IV) Possible API interfaces:
+============================
+This part is not normative, it only attempts to naively offer possibilities as
+to what the Yuni calls may look like.
+
+int main()
+{
+	// How this will be prototyped will depend on the VFS implementation
+	Yuni::Audio::Music<DisposeTraits::Immediate> myMusic("tralala.mp3");
+
+	// Each sound or music will have a unique ID
+	UID myMusicID = myMusic.UID();
+
+	// Properties might be used to manipulate sound settings
+	myMusic["looping"] = false;
+
+	// A music has no sound gain for itself, it uses the main music volume
+	Yuni::Audio::Music::musicVolume(0.8f);
+
+	// Load the beginning of the music to be ready to play
+	myMusic.prepare();
+
+	// Start playback
+	myMusic.play();
+}
