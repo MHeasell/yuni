@@ -31,13 +31,13 @@ I) Entities:
 
 - Listener
   - Position
-  - Speed vector (direction + velocity)
+  - Speed vector (orientation + velocity)
 - Source
   - Position
   - Speed vector (direction + velocity)
 - Sound
   - Various storage formats (no compression, compression, lossless compression)
-    WAV, MP3? (licence problems...), OGG, FLAC
+    WAV, MP3, OGG, FLAC, ...
   - File-by-file sounds, or sound banks
   - Specific settings to modify (volume, speed, playing backwards, ...)
   - Continuous streaming
@@ -69,11 +69,66 @@ Sounds:
 - Pause a sound
 - Stop a sound
 
+It should be possible to preload a sound (synchronously or asynchronously) at
+a given time, so as to avoid any latency when starting the playback.
+It should be possible to specify whether a sound will loop or not, and how
+the resources should be freed:
+  - as soon as possible
+  - only when the user asks for it
+  - as late as possible (destruction of the source / buffer, program exit, ...)
+
 Customization:
-- Change sound volume
-- Change source volume (all sounds playing on a source)
-- Change global volume (listener volume)
+- Change a sound's volume
+- Change a source's volume (all sounds playing on a source)
+- Change global 3D volume (listener volume)
+- Change music volume
 - Apply effects on a sound
 - Apply effects on a source (all sounds playing on a source)
 - Apply effects on a listener (all sounds it hears)
-- Change sound speed?
+- Change a sound's playing speed?
+
+III) Use cases:
+===============
+
+  1. Play a music:
+  ----------------
+The user wants to play a music to add ambiance to a game for example.
+
+ * It has no 3D position.
+ * It may be either stereo or mono.
+ * It must play at global music volume with no attenuation.
+ * It may be played from a file, a CD, or from a streaming source.
+ * Playing should be continuous with no audible lag.
+
+  2. Play a one-time sound effect:
+  --------------------------------
+The user wants to play a sound effect that will occur only once, for example
+the voice announcing the beginning of a race.
+
+ * It may be either positioned in 3D or not.
+ * It may be either stereo or mono, but must be mono if in 3D.
+ * It will have its own gain, combined with the main volume for sound effects.
+ * It should only be played from a file.
+ * It may be automatically unloaded afterwards.
+
+  3. Play a recurring sound effect:
+  ---------------------------------
+The user wants to play a sound effect that will occur many times, for example
+a sound of gunshot during an FPS game.
+
+ * It may be either positioned in 3D or not.
+ * It may be either stereo or mono, but must be mono if in 3D.
+ * It will have its own gain, combined with the main volume for sound effects.
+ * It should only be played from a file.
+ * It must remain loaded as long as the user does not tell otherwise.
+
+  4. Play a looping sound:
+  ------------------------
+The user wants to play a sound that will loop on itself, for example the sound
+of a car engine that keeps running for some time, or the sound of water falling.
+
+ * It will probably be positioned in 3D, but it should be allowed not to.
+ * It may be either stereo or mono, but must be mono if in 3D.
+ * It will have its own gain, combined with the main volume for sound effects.
+ * It should only be played from a file.
+ * It must remain loaded as long as the user does not tell otherwise.
