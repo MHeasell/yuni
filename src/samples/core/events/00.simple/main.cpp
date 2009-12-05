@@ -10,7 +10,6 @@ using namespace Yuni;
 
 // A global event
 //
-// Each template parameter is the type for each argument
 // Here is an event with 2 arguments :
 Event<void (const String&, const String&)> emailHasBeenReceived;
 

@@ -16,7 +16,44 @@ ENDIF(APPLE)
 #
 DEVPACK_IMPORT_PTHREADS()
 
+INCLUDE(CheckCXXSourceCompiles)
+INCLUDE(CheckIncludeFiles)
+INCLUDE(CheckCXXCompilerFlag)
 
+
+
+# stdio.h
+CHECK_INCLUDE_FILES(stdio.h YUNI_HAS_STDIO_H)
+# String.h
+CHECK_INCLUDE_FILES(string.h YUNI_HAS_STRING_H)
+
+# C++0x
+CHECK_CXX_COMPILER_FLAG("-std=c++0x" YUNI_HAS_CPP0X_SUPPORT)
+
+
+# int64
+CHECK_CXX_SOURCE_COMPILES("#include <stdint.h>
+	int main() {int64_t a; return 0;}" YUNI_HAS_INT64_T)
+# int128
+CHECK_CXX_SOURCE_COMPILES("#include <stdint.h>
+	int main() {int128_t a; return 0;}" YUNI_HAS_INT128_T)
+
+# long
+CHECK_CXX_SOURCE_COMPILES(
+	"#include <iostream>
+	void foo(unsigned int a) {std::cout << a;}
+	void foo(int a) {std::cout << a;}
+	void foo(unsigned long a) {std::cout << a;}
+	void foo(long a) {std::cout << a;}
+	int main() {return 0;}"
+	YUNI_HAS_LONG)
+
+
+
+#
+# Generating informations about the platform
+#
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform.cmake ${CMAKE_CURRENT_SOURCE_DIR}/platform.h)
 
 Set(SRC_CORE_ATOMIC
 				core/atomic/int.h

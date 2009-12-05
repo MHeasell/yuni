@@ -38,25 +38,12 @@ namespace Yuni
 	typedef int ssize_t;
 # endif
 
-# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-#	define YUNI_TYPES_INT8_CHAR_ARE_IDENTICAL
-#   if defined(_INTEGRAL_MAX_BITS) && _INTEGRAL_MAX_BITS >= 64 /* For Visual 6.x and later */
-	/* 64-bit ints, guaranteed to be 8 bytes in size */
-	typedef unsigned __int64  uint64;
-	typedef signed __int64    sint64;
-#   else
-#	   error __int64 type not supported
-#   endif
-	/* 32-bit ints, guaranteed to be 4 bytes in size */
-	typedef unsigned __int32  uint32;
-	typedef signed __int32	  sint32;
-	/* 16-bit ints, guaranteed to be 2 bytes in size */
-	typedef unsigned __int16  uint16;
-	typedef signed __int16	  sint16;
-	/* 8-bit ints, guaranteed to be 1 byte in size */
-	typedef unsigned __int8   uint8;
-	typedef signed __int8	  sint8;
-# else
+	# ifdef YUNI_HAS_INT128_T
+	/* 128-bit ints */
+	typedef uint128_t  uint128;
+	typedef int128_t   sint128;
+	# endif
+
 	/* 64-bit ints, guaranteed to be 8 bytes in size */
 	typedef uint64_t  uint64;
 	typedef int64_t   sint64;
@@ -69,7 +56,6 @@ namespace Yuni
 	/* 8-bit ints, guaranteed to be 1 byte in size */
 	typedef unsigned char  uint8;
 	typedef char           sint8;
-# endif
 
 
 
