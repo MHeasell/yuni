@@ -14,7 +14,7 @@ namespace Console
 
 	# ifdef YUNI_OS_WINDOWS
 
-	inline void ResetTextColor(std::ostream&)
+	template<class U> inline void ResetTextColor(U&)
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
 			FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
@@ -22,7 +22,7 @@ namespace Console
 
 	template<> struct TextColor<black>
 	{
-		static void Set(std::ostream&)
+		template<class U> template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		}
@@ -30,12 +30,12 @@ namespace Console
 
 	template<> struct TextColor<none>
 	{
-		static void Set(std::ostream&) {}
+		template<class U> static void Set(U&) {}
 	};
 
 	template<> struct TextColor<white>
 	{
-		static void Set(std::ostream&)
+		template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
 				FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
@@ -44,7 +44,7 @@ namespace Console
 
 	template<> struct TextColor<red>
 	{
-		static void Set(std::ostream&)
+		template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
 		}
@@ -52,7 +52,7 @@ namespace Console
 
 	template<> struct TextColor<green>
 	{
-		static void Set(std::ostream&)
+		template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
 				FOREGROUND_INTENSITY | FOREGROUND_GREEN);
@@ -61,7 +61,7 @@ namespace Console
 
 	template<> struct TextColor<yellow>
 	{
-		static void Set(std::ostream&)
+		template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
 				FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_RED);
@@ -70,7 +70,7 @@ namespace Console
 
 	template<> struct TextColor<blue>
 	{
-		static void Set(std::ostream&)
+		template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
 				FOREGROUND_INTENSITY | FOREGROUND_BLUE);
@@ -79,7 +79,7 @@ namespace Console
 
 	template<> struct TextColor<purple>
 	{
-		static void Set(std::ostream&)
+		template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
 				FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_RED);
@@ -88,7 +88,7 @@ namespace Console
 
 	template<> struct TextColor<lightblue>
 	{
-		static void Set(std::ostream&)
+		template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
 				FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_GREEN);
@@ -97,7 +97,7 @@ namespace Console
 
 	template<> struct TextColor<gray>
 	{
-		static void Set(std::ostream&)
+		template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
 				FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
@@ -108,38 +108,38 @@ namespace Console
 	# else
 
 
-	template<> struct TextColor<none> { static void Set(std::ostream&) {} };
+	template<> struct TextColor<none> { template<class U> static void Set(U&) {} };
 
 
 	template<> struct TextColor<black>
-	{ static void Set(std::ostream& out) { out << "[1;30m"; } };
+	{ template<class U> static void Set(U& out) { out << "[1;30m"; } };
 
 	template<> struct TextColor<red>
-	{ static void Set(std::ostream& out) { out << "[1;31m"; } };
+	{ template<class U> static void Set(U& out) { out << "[1;31m"; } };
 
 	template<> struct TextColor<green>
-	{ static void Set(std::ostream& out) { out << "[1;32m"; } };
+	{ template<class U> static void Set(U& out) { out << "[1;32m"; } };
 
 	template<> struct TextColor<blue>
-	{ static void Set(std::ostream& out) { out << "[1;34m"; } };
+	{ template<class U> static void Set(U& out) { out << "[1;34m"; } };
 
 	template<> struct TextColor<yellow>
-	{ static void Set(std::ostream& out) { out << "[1;33m"; } };
+	{ template<class U> static void Set(U& out) { out << "[1;33m"; } };
 
 	template<> struct TextColor<purple>
-	{ static void Set(std::ostream& out) { out << "[1;35m"; } };
+	{ template<class U> static void Set(U& out) { out << "[1;35m"; } };
 
 	template<> struct TextColor<lightblue>
-	{ static void Set(std::ostream& out) { out << "[1;36m"; } };
+	{ template<class U> static void Set(U& out) { out << "[1;36m"; } };
 
 	template<> struct TextColor<gray>
-	{ static void Set(std::ostream& out) { out << "[1;37m"; } };
+	{ template<class U> static void Set(U& out) { out << "[1;37m"; } };
 
 	template<> struct TextColor<white>
-	{ static void Set(std::ostream& out) { out << "[1;37m[1m"; } };
+	{ template<class U> static void Set(U& out) { out << "[1;37m[1m"; } };
 
 
-	inline void ResetTextColor(std::ostream& out)
+	template<class U> inline void ResetTextColor(U& out)
 	{
 		out << "[0m";
 	}
@@ -149,7 +149,7 @@ namespace Console
 
 
 
-	inline void SetTextColor(std::ostream& out, const Color color)
+	template<class U> inline void SetTextColor(U& out, const Color color)
 	{
 		switch (color)
 		{
