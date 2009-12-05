@@ -78,7 +78,8 @@
 
 
 
-
+/* Platform checks */
+# include "platform.h"
 /* Standard Preprocessor tools */
 # include "core/preprocessor/std.h"
 /* Operating System / Capabilities auto-detection */

@@ -585,7 +585,10 @@ namespace StringImpl
 	YUNI_PRIVATE_STRING_IMPL(24, "%lf", double);
 
 
-
+	# ifdef YUNI_HAS_LONG
+	YUNI_PRIVATE_STRING_IMPL( 8, "%ld",   long);
+	YUNI_PRIVATE_STRING_IMPL(16, "%lu",    unsigned long);
+	# endif
 
 
 } // namespace StringImpl
