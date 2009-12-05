@@ -238,7 +238,7 @@ namespace File
 	private:
 		# ifdef YUNI_OS_WINDOWS
 		//! UTF8 Implementation as replacement of the routine 'fopen' on Windows
-		static FILE* OpenFileOnWindows(const char* filename, const OpenMode::Type mode);
+		static FILE* OpenFileOnWindows(const char* filename, const int mode);
 		# endif
 
 	private:

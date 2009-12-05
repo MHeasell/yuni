@@ -21,7 +21,7 @@ namespace File
 
 # ifdef YUNI_OS_WINDOWS
 
-	FILE* Stream::OpenFileOnWindows(const char* filename, const OpenMode::Type mode)
+	FILE* Stream::OpenFileOnWindows(const char* filename, const int mode)
 	{
 		wchar_t buffer[FILENAME_MAX];
 		MultiByteToWideChar(CP_UTF8, 0, filename, -1, buffer, sizeof(buffer));
