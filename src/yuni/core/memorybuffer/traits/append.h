@@ -128,6 +128,20 @@ namespace MemoryBufferImpl
 	};
 
 
+	// void*
+	template<class MemBufT>
+	struct Append<MemBufT, void*>
+	{
+		static void Do(MemBufT& memoryBuffer, const void* rhs)
+		{
+			typename MemBufT::Type buffer[20];
+			(void) YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, sizeof(buffer), "%p", rhs);
+			memoryBuffer.appendWithoutChecking(buffer,
+				Yuni::Core::Traits::Length<typename MemBufT::Type*, typename MemBufT::Size>::Value(buffer));
+		}
+	};
+
+
 
 # define YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(BUFSIZE, FORMAT, TYPE) \
 	template<class MemBufT> \
