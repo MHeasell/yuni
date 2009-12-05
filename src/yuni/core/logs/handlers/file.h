@@ -2,7 +2,7 @@
 # define __YUNI_CORE_LOGS_HANDLERS_FILE_H__
 
 # include "../null.h"
-# include <fstream>
+# include "../../io/file.h"
 
 
 
@@ -29,13 +29,11 @@ namespace Logs
 	public:
 		template<typename U> void outputFilename(const U& filename)
 		{
-			// Closing the file if already opened
-			if (pFile.is_open())
-				pFile.close();
 			// Assigning the new filename
 			pOutputFilename = filename;
 			// Opening the log file
-			pFile.open(pOutputFilename.c_str(), std::ios::out|std::ios::app|std::ios::binary);
+			pFile.open(pOutputFilename,
+				Core::IO::File::OpenMode::write | Core::IO::File::OpenMode::append);
 		}
 
 		String outputFilename() const
@@ -45,24 +43,27 @@ namespace Logs
 
 		bool logFileIsOpened()
 		{
-			return (pFile.is_open());
+			return (pFile.opened());
 		}
 
 	public:
 		template<class LoggerT, class VerbosityType, class StringT>
 		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s)
 		{
-			typedef typename LoggerT::DecoratorsType DecoratorsType;
-			// Append the message to the file
-			logger.DecoratorsType::template internalDecoratorAddPrefix<File, VerbosityType>(pFile, s);
+			if (pFile.opened())
+			{
+				typedef typename LoggerT::DecoratorsType DecoratorsType;
+				// Append the message to the file
+				logger.DecoratorsType::template internalDecoratorAddPrefix<File, VerbosityType>(pFile, s);
 
-			// Flushing the result
-			# ifdef YUNI_OS_WINDOWS
-			pFile.write("\r\n", 2); // We are in binary mode
-			# else
-			pFile.write("\n", 1);
-			# endif
-			pFile.flush();
+				// Flushing the result
+				# ifdef YUNI_OS_WINDOWS
+				pFile << "\r\n";
+				# else
+				pFile << '\n';
+				# endif
+				pFile.flush();
+			}
 
 			// Transmit the message to the next handler
 			NextHandler::template internalDecoratorWriteWL<LoggerT, VerbosityType, StringT>(logger, s);
@@ -73,9 +74,9 @@ namespace Logs
 		//! The originale filename
 		String pOutputFilename;
 		//! File
-		std::ofstream pFile;
+		Core::IO::File::Stream pFile;
 
-	}; // class StdCout
+	}; // class File
 
 
 

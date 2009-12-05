@@ -22,14 +22,14 @@ namespace Logs
 			if (VerbosityType::hasName)
 			{
 				// Unix Color
-				if (VerbosityType::color != System::Console::none && Handler::unixColorsAllowed)
+				if (Handler::unixColorsAllowed && VerbosityType::color != System::Console::none)
 					System::Console::TextColor<VerbosityType::color>::Set(out);
 
 				// The verbosity
 				VerbosityType::AppendName(out);
 
 				// Unix Color
-				if (VerbosityType::color != System::Console::none && Handler::unixColorsAllowed)
+				if (Handler::unixColorsAllowed && VerbosityType::color != System::Console::none)
 					System::Console::ResetTextColor(out);
 			}
 			// Transmit the message to the next decorator
