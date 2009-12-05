@@ -102,6 +102,7 @@ Set(SRC_CORE_LOGS
 				# Handlers
 				core/logs/handlers/stdcout.h
 				core/logs/handlers/file.h
+				core/logs/handlers/callback.h
 				# Decorators
 				core/logs/decorators/verbositylevel.h
 				core/logs/decorators/time.h
