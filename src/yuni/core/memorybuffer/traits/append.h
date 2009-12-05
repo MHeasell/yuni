@@ -55,11 +55,12 @@ namespace MemoryBufferImpl
 	template<class MemBufT>
 	struct Append<MemBufT, typename MemBufT::Type*>
 	{
-		typedef typename MemBufT::Type C;
+		typedef typename MemBufT::Type TypeC;
+		typedef typename Static::Remove::Const<TypeC>::Type C;
 		static void Do(MemBufT& memoryBuffer, const C* rhs)
 		{
 			if (rhs)
-				memoryBuffer.appendWithoutChecking(rhs, Yuni::Core::Traits::Length<C*,typename MemBufT::Size>(rhs));
+				memoryBuffer.appendWithoutChecking(rhs, Yuni::Core::Traits::Length<C*,typename MemBufT::Size>::Value(rhs));
 		}
 	};
 
