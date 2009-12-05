@@ -24,10 +24,8 @@ namespace Logs
 				// Unix Color
 				if (Handler::unixColorsAllowed && VerbosityType::color != System::Console::none)
 					System::Console::TextColor<VerbosityType::color>::Set(out);
-
 				// The verbosity
 				VerbosityType::AppendName(out);
-
 				// Unix Color
 				if (Handler::unixColorsAllowed && VerbosityType::color != System::Console::none)
 					System::Console::ResetTextColor(out);
