@@ -1,7 +1,6 @@
 
 #include "../directory.h"
 #include <dirent.h>
-#include <stdint.h>
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>

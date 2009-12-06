@@ -10,6 +10,64 @@
 /* string.h - memcmp, memcmpy... */
 #cmakedefine YUNI_HAS_STRING_H
 
+/* time.h */
+#cmakedefine YUNI_HAS_TIME_H
+
+/* assert.h */
+#cmakedefine YUNI_HAS_ASSERT_H
+
+/* errno.h */
+#cmakedefine YUNI_HAS_ERRNO_H
+
+/* cstddef */
+#cmakedefine YUNI_HAS_CSTDDEF
+
+/* dirent.h */
+#cmakedefine YUNI_HAS_DIRENT_H
+
+/* stdlib.h */
+#cmakedefine YUNI_HAS_STDLIB_H
+
+/* unistd.h */
+#cmakedefine YUNI_HAS_UNISTD_H
+
+/* fcntl.h */
+#cmakedefine YUNI_HAS_FCNTL_H
+
+
+
+
+/* sys/types.h */
+#cmakedefine YUNI_HAS_SYS_TYPES_H
+
+/* winsock2.h */
+#cmakedefine YUNI_HAS_WINSOCK_2
+
+/* ShellApi.h */
+#cmakedefine YUNI_HAS_SHELLAPI_H
+
+/* climits */
+#cmakedefine YUNI_HAS_CLIMITS
+
+/* vector */
+#cmakedefine YUNI_HAS_VECTOR
+
+/* list */
+#cmakedefine YUNI_HAS_LIST
+
+/* map */
+#cmakedefine YUNI_HAS_MAP
+
+/* algorithm */
+#cmakedefine YUNI_HAS_ALGORITHM
+
+/* cassert */
+#cmakedefine YUNI_HAS_CASSERT
+
+
+
+
+
 
 /* C++0x support by gcc (-std=c++0x) */
 #cmakedefine YUNI_HAS_CPP0X_SUPPORT
