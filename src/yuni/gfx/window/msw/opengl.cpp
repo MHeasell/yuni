@@ -31,7 +31,7 @@ namespace Window
 			{
 				sizeof (PIXELFORMATDESCRIPTOR), 1,
 				PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
-				PFD_TYPE_RGBA, pBitDepth, 0, 0, 0, 0, 0, 0,	// Color Bits Ignored
+				PFD_TYPE_RGBA, (BYTE)pBitDepth, 0, 0, 0, 0, 0, 0,	// Color Bits Ignored
 				// No Alpha Buffer
 				0,
 				// Shift Bit Ignored
