@@ -58,4 +58,10 @@ namespace Utils
 } // namespace Core
 } // namespace Yuni
 
+std::ostream& operator<<(std::ostream& outStream, const Yuni::Core::Utils::Hexdump& hexDumper)
+{
+	hexDumper.dump(outStream);
+	return outStream;
+}
+
 
