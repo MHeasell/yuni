@@ -168,7 +168,7 @@ namespace MemoryBufferImpl
 	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(24, "%lf",  double);
 
 
-	# ifndef YUNI_HAS_LONG
+	# ifdef YUNI_HAS_LONG
 	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(26, "%ld",  long);
 	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(26, "%lu",  unsigned long);
 	# endif
