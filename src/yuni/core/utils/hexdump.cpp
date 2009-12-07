@@ -24,9 +24,13 @@ namespace Utils
 
 	void Hexdump::dumpHexadecimal(String& line, const char* buffer, unsigned int size) const
 	{
-		for (unsigned int printed = 0; printed < size; ++printed)
+		for (unsigned int printed = 0; printed < 0x10; ++printed)
 		{
-			line.appendFormat("%02x", (unsigned int)(*(unsigned int8_t *)(buffer + printed)));
+			if (printed < size)
+				line.appendFormat("%02x", (unsigned int)(*(unsigned int8_t *)(buffer + printed)));
+			else
+				line.append("  ");
+			
 			if (0 != printed % 2)
 				line.append(' ');
 		}
