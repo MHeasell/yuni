@@ -158,7 +158,7 @@ namespace Yuni
 		**
 		** \param rhs A single item
 		*/
-		void putc(const C c);
+		void put(const C c);
 
 		/*!
 		** \brief Insert a raw buffer at a given position in the buffer

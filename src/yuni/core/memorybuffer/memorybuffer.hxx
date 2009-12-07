@@ -163,9 +163,9 @@ namespace Yuni
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
 	inline void
-	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::putc(const C c)
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::put(const C c)
 	{
-		AncestorType::putc(c);
+		AncestorType::put(c);
 	}
 
 
