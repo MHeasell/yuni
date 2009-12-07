@@ -342,6 +342,11 @@ Set(SRC_CORE_UNIT
 )
 source_group(Core\\Unit FILES ${SRC_CORE_UNIT})
 
+Set(SRC_CORE_UTILS
+				core/utils/utils.h
+				core/utils/hexdump.h core/utils/hexdump.hxx core/utils/hexdump.cpp
+)
+source_group(Core\\Utils FILES ${SRC_CORE_UTILS})
 
 Set(SRC_CORE_URI
 				core/uri/uri.private.h  core/uri/uri.private.cpp
@@ -483,6 +488,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_TREE_N}
 		${SRC_CORE_VERSION}
 		${SRC_CORE_UNIT}
+		${SRC_CORE_UTILS}
 		${SRC_CORE_URI}
 		${SRC_CORE_GETOPT}
 		${SRC_GFX_CORE}
