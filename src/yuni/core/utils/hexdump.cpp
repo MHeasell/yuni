@@ -43,6 +43,16 @@ namespace Utils
 		}
 	}
 
+	Hexdump& Hexdump::operator=(const Hexdump& rhs)
+	{
+		if (this != &rhs)
+		{
+			this->pBuffer = rhs.pBuffer;
+			this->pSize = rhs.pSize;
+		}
+		return *this;
+	}
+
 
 } // namespace Utils
 } // namespace Core
