@@ -95,17 +95,6 @@ namespace Utils
 		//! \name Stream operators
 		//@{
 
-		/*!
-		 * \brief std::ostring print operator
-		 * \param[in] outStream The stream to output the hexdump on.
-		 * \param[in] hexDumper The Hexdump instance to dump.
-		 */
-		friend std::ostream& operator<<(std::ostream& outStream, const Hexdump& hexDumper)
-		{
-			hexDumper.dump(outStream);
-			return outStream;
-		}
-
 		//@}
 
 		//! \name Operators
@@ -147,10 +136,22 @@ namespace Utils
 	};
 
 
-
 } // namespace Utils
 } // namespace Core
 } // namespace Yuni
+
+//! Operator overloads for printing
+//@{
+
+	/*!
+	 * \brief std::ostring print operator
+	 * \param[in] outStream The stream to output the hexdump on.
+	 * \param[in] hexDumper The Hexdump instance to dump.
+	 */
+	std::ostream& operator<<(std::ostream& outStream, const Yuni::Core::Utils::Hexdump& hexDumper);
+
+//@}
+
 
 # include "hexdump.hxx"
 
