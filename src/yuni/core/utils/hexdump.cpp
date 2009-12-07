@@ -27,7 +27,7 @@ namespace Utils
 		for (unsigned int printed = 0; printed < 0x10; ++printed)
 		{
 			if (printed < size)
-				line.appendFormat("%02x", (unsigned int)(*(unsigned int8_t *)(buffer + printed)));
+				line.appendFormat("%02x", (unsigned int)(*(unsigned char *)(buffer + printed)));
 			else
 				line.append("  ");
 			
@@ -40,7 +40,7 @@ namespace Utils
 	{
 		for (unsigned int printed = 0; printed < size; ++printed)
 		{
-			char c = (*(unsigned int8_t *)(buffer + printed));
+			char c = (*(unsigned char *)(buffer + printed));
 			if (c < 0x20 || c > 0x7E) // c is not printable ASCII, replace it by a dot '.'
 				c = '.';
 			line.append(c);
