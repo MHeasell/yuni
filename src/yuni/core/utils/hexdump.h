@@ -53,7 +53,14 @@ namespace Utils
 			: pBuffer(buffer), pSize(size)
 		{ }
 
-		// This class uses the standard copy ctor & operator =
+		/*!
+		 * \brief Copy ctor.
+		 * \param[in] rhs The original Hexdump instance
+		 */
+		Hexdump(const Hexdump& rhs)
+			: pBuffer(rhs.pBuffer), pSize(rhs.pSize)
+		{ }
+
 
 		/*!
 		 * \brief Construct from a MemoryBuffer (or like) object.
@@ -100,6 +107,17 @@ namespace Utils
 		}
 
 		//@}
+
+		//! \name Operators
+		//@{
+
+		/*!
+		 * \brief Operator =
+		 * \param[in] rhs The source Hexdump instance
+		 */
+		Hexdump& operator=(const Hexdump& rhs);
+
+		//@}	
 
 	private:
 
