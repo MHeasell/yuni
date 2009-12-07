@@ -90,14 +90,29 @@ CHECK_CXX_SOURCE_COMPILES("#include <stdint.h>
 	int main() {int128_t a; return 0;}" YUNI_HAS_INT128_T)
 
 # long
-CHECK_CXX_SOURCE_COMPILES(
-	"#include <iostream>
-	void foo(unsigned int a) {std::cout << a;}
-	void foo(int a) {std::cout << a;}
-	void foo(unsigned long a) {std::cout << a;}
-	void foo(long a) {std::cout << a;}
-	int main() {return 0;}"
-	YUNI_HAS_LONG)
+IF(WIN32 OR WIN64)
+	CHECK_CXX_SOURCE_COMPILES(
+		"#include <iostream>
+		#include <stdio.h>
+		void foo(unsigned int a) {std::cout << a;}
+		void foo(int a) {std::cout << a;}
+		void foo(unsigned long a) {std::cout << a;}
+		void foo(long a) {std::cout << a;}
+		void foo(__int64 a) {std::cout << a;}
+		int main() {return 0;}"
+		YUNI_HAS_LONG)
+ELSE(WIN32 OR WIN64)
+	CHECK_CXX_SOURCE_COMPILES(
+		"#include <iostream>
+		#include <stdio.h>
+		void foo(unsigned int a) {std::cout << a;}
+		void foo(int a) {std::cout << a;}
+		void foo(unsigned long a) {std::cout << a;}
+		void foo(long a) {std::cout << a;}
+		void foo(int64_t a) {std::cout << a;}
+		int main() {return 0;}"
+		YUNI_HAS_LONG)
+ENDIF(WIN32 OR WIN64)
 
 
 
