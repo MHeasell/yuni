@@ -139,7 +139,7 @@ namespace MemoryBufferImpl
 
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT>
-	void Data<C,ChunkSizeT,ZeroTerminatedT,false>::putc(const C rhs)
+	void Data<C,ChunkSizeT,ZeroTerminatedT,false>::put(const C rhs)
 	{
 		// Making sure that we have enough space
 		if (size != capacity)

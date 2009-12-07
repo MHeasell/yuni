@@ -134,7 +134,7 @@ namespace MemoryBufferImpl
 			return (block && blockSize) ? appendWithoutChecking(block, blockSize) : 0;
 		}
 
-		void putc(const C rhs)
+		void put(const C rhs)
 		{
 			// Making sure that we have enough space
 			reserve(size + 1 + zeroTerminated);
@@ -228,7 +228,7 @@ namespace MemoryBufferImpl
 			return (block && blockSize) ? appendWithoutChecking(block, blockSize) : 0;
 		}
 
-		void putc(const C rhs);
+		void put(const C rhs);
 
 		static void reserve(const Size)
 		{
