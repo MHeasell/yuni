@@ -13,19 +13,14 @@ namespace Audio
 	class Music: public Sound
 	{
 	public:
+		typedef SmartPtr<Music> Ptr;
+
+	public:
 		Music() {}
 
 	private:
 		Music(const Music&) {}
 		Music& operator= (Music&) {}
-
-	public:
-		const String& name() { return pName; }
-		void name(const String& name) { pName = name; }
-
-	private:
-		//! String identifier for the sound
-		String pName;
 
 	}; // Music
 

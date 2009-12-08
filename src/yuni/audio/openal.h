@@ -212,6 +212,11 @@ namespace Audio
 			alSourcei(source, AL_BUFFER, buffer);
 		}
 
+		static void unbindBufferFromSource(ALint buffer, ALuint source)
+		{
+			alSourcei(source, AL_BUFFER, 0);
+		}
+
 		static void queueBufferToSource(ALint buffer, ALuint source)
 		{
 			// TODO
