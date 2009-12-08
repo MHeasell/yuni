@@ -158,11 +158,6 @@ Set(SRC_CORE_EXCEPTIONS
 source_group(Core\\Exceptions FILES ${SRC_CORE_EXCEPTIONS})
 
 
-Set(SRC_CORE_FUNCTION
-				core/function/function.h core/function/function.hxx
-				core/function.h )
-source_group(Core\\Function FILES ${SRC_CORE_FUNCTION})
-
 Set(SRC_CORE_VALIDATOR
 				core/validator/text/default.h
 				core/validator/text/default.hxx
@@ -476,7 +471,6 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_LOGS}
 		${SRC_CORE_ATOMIC}
 		${SRC_CORE_SMARTPTR}
-		${SRC_CORE_FUNCTION}
 		${SRC_CORE_ANY}
 		${SRC_CORE_SLIST}
 		${SRC_CORE_VARIANT}
