@@ -4,6 +4,7 @@
 # include "../core/smartptr.h"
 # include "../gfx/point3D.h"
 # include "../gfx/vector3D.h"
+# include "openal.h"
 
 namespace Yuni
 {
@@ -14,23 +15,109 @@ namespace Audio
 	**
 	** Audio sources can be placed in space, and be moved around.
 	*/
-	class Source
+	class Source: public Policy::ObjectLevelLockable<Source>
 	{
 	public:
+		//! \name Typedefs
+		//@{
 		typedef SmartPtr<Source> Ptr;
+
+		typedef Policy::ObjectLevelLockable<Source> ThreadingPolicy;
+		//@}
 
 	public:
 		/*!
-		** \brief Empty constructor
+		** \brief Shortest constructor
 		**
-		** Position and speed default to (0,0,0)
+		** Position, speed and direction default to (0,0,0)
 		*/
-		Source() {}
+		Source(bool loop = false) {}
+
+		/*!
+		** \brief Constructor with 3D position
+		**
+		** Speed and velocity default to (0,0,0)
+		*/
+		Source(const Gfx::Point3D& position, bool loop = false)
+			: pPosition(position)
+		{}
+
+		/*!
+		** \brief Constructor with position, velocity and direction
+		*/
+		Source(const Gfx::Point3D& position, const Gfx::Vector3D& velocity, const Gfx::Vector3D& direction,
+			bool loop = false)
+			: pPosition(position)
+		{}
 
 	private:
+		Source(const Source&) {}
+		Source& operator= (const Source&) {}
+
+	public:
+		//! Start a 3D sound playback on this source
+		bool play(const Sound3D& sound);
+		//! Start a music playback on this source
+		bool play(const Music& sound);
+
+	public:
+		//! \name Accessors
+		//@{
+
+		void position(const Gfx::Point3D& position)
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			pPosition = position;
+		}
+		Gfx::Point3D position() const
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			return pPosition;
+		}
+
+		/*!
+		** \brief Set the volume modifier on the source
+		**
+		** 0.0f for no sound, 1.0f to keep sound as is, > 1.0f to amplify sound
+		*/
+		void gain(float newGain)
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			pGain = newGain;
+		}
+		//! Get the current volume modifier
+		float gain() const
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			return pGain;
+		}
+
+		const String& name()
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			return pName;
+		}
+		void name(const String& name)
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			pName = name;
+		}
+
+		//@}
+
+	private:
+		//! String identifier for the source
+		String pName;
+		//! OpenAL identifier for the source
+		ALuint pID;
+		//! Position of the source in space
 		Gfx::Point3D pPosition;
+		//! Speed of the source
 		Gfx::Vector3D pVelocity;
+		//! Direction of the movement of the source
 		Gfx::Vector3D pDirection;
+		//! Volume modifier, 1.0 means no modification
+		float pGain;
 
 	}; // Source
 

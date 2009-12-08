@@ -1,7 +1,7 @@
 #ifndef __YUNI_AUDIO_MUSIC_H__
 # define __YUNI_AUDIO_MUSIC_H__
 
-# include "../core/string.h"
+# include "sound.h"
 
 namespace Yuni
 {
@@ -20,7 +20,7 @@ namespace Audio
 
 	private:
 		Music(const Music&) {}
-		Music& operator= (Music&) {}
+		Music& operator= (const Music&) {}
 
 	}; // Music
 
