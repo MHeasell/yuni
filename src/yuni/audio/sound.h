@@ -3,6 +3,7 @@
 
 # include "openal.h"
 # include "av.h"
+# include "../core/smartptr.h"
 
 namespace Yuni
 {
@@ -11,12 +12,14 @@ namespace Audio
 	/*!
 	** \brief A sound is any kind of audio content that can be played by Yuni.
 	*/
-	class Sound
+	class Sound: ThreadingPolicy<Sound>
 	{
 	public:
 		//! \name Typedefs
 		//@{
 		typedef SmartPtr<Sound> Ptr;
+
+		typedef Policy::ObjectLevelLockable<Sound> ThreadingPolicy;
 		//@}
 
 	public:
@@ -27,9 +30,9 @@ namespace Audio
 
 	private:
 		//! Forbid default copy constructor
-		Sound(const Music&) {}
+		Sound(const Sound&) {}
 		//! Forbid default operator=
-		Sound& operator= (Music&) {}
+		Sound& operator= (const Sound&) {}
 
 	public:
 		//! \name Accessors
@@ -42,7 +45,7 @@ namespace Audio
 		//! String identifier for the sound
 		String pName;
 
-	};
+	}; // Sound
 
 } // namespace Audio
 } // namespace Yuni

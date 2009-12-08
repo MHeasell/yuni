@@ -18,35 +18,24 @@ namespace Audio
 	public:
 		//! \name Typedefs
 		//@{
-		typedef SmartPtr<Sound> Ptr;
+		typedef SmartPtr<Sound3D> Ptr;
 		//@}
 
 	public:
 		/*!
 		** \brief Empty constructor, use default values.
 		*/
-		Sound() {}
+		Sound3D() {}
 
 	private:
 		//! Forbid default copy constructor
-		Sound(const Music&) {}
+		Sound3D(const Sound3D&) {}
 		//! Forbid default operator=
-		Sound& operator= (Music&) {}
-
-	public:
-		//! \name Accessors
-		//@{
-		const String& name() { return pName; }
-		void name(const String& name) { pName = name; }
-		//@}
-
-	protected:
-		//! String identifier for the sound
-		String pName;
+		Sound3D& operator= (const Sound3D&) {}
 
 	};
 
 } // namespace Audio
 } // namespace Yuni
 
-#endif // __YUNI_AUDIO_SOUND_H__
+#endif // __YUNI_AUDIO_SOUND3D_H__
