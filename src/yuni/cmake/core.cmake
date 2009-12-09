@@ -90,7 +90,7 @@ CHECK_CXX_SOURCE_COMPILES("#include <stdint.h>
 	int main() {int128_t a; return 0;}" YUNI_HAS_INT128_T)
 
 # long
-IF(WIN32 OR WIN64)
+IF(MSVC)
 	CHECK_CXX_SOURCE_COMPILES(
 		"#include <iostream>
 		#include <stdio.h>
