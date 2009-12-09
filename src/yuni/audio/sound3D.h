@@ -29,9 +29,9 @@ namespace Audio
 
 	private:
 		//! Forbid default copy constructor
-		Sound3D(const Sound3D&) {}
+		Sound3D(const Sound3D&);
 		//! Forbid default operator=
-		Sound3D& operator= (const Sound3D&) {}
+		Sound3D& operator= (const Sound3D&);
 
 	};
 

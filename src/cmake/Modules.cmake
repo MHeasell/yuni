@@ -16,6 +16,9 @@ Set(YUNI_MODULE_DEVICES                   FALSE)
 # Gfx3D
 Set(YUNI_MODULE_GFX3D                     FALSE)
 
+# Audio
+Set(YUNI_MODULE_AUDIO					  FALSE)
+
 # Scripts
 Set(YUNI_MODULE_SCRIPT                    FALSE)
 	Set(YUNI_EXTERNAL_SCRIPT_LUA          TRUE)
@@ -47,6 +50,7 @@ Set(YUNI_SAMPLES FALSE)
 # There is no need for `core` and `gfx-core`, which are implicit
 Set(YUNI_MODULE_LIST
 	algorithms
+	audio
 	devices display keyboard mouse
 	gfx3d
 	script lua
@@ -86,6 +90,7 @@ IF(MODULES)
 			Set(YUNI_MODULE_CORE TRUE)
 			Set(YUNI_MODULE_DEVICES TRUE)
 			Set(YUNI_MODULE_GFX3D TRUE)
+			Set(YUNI_MODULE_AUDIO TRUE)
 			Set(YUNI_MODULE_NET TRUE)
 			Set(YUNI_MODULE_SCRIPT TRUE)
 			Set(YUNI_MODULE_UI TRUE)
@@ -177,6 +182,17 @@ IF(MODULES)
 			Set(YUNI_MODULE_GFX3D FALSE)
 		EndIf("${it}" STREQUAL "-gfx3d")
 
+
+		# audio
+		If("${it}" STREQUAL "audio")
+			Set(KeywordIsKnown TRUE)
+			Set(YUNI_MODULE_AUDIO TRUE)
+		EndIf("${it}" STREQUAL "audio")
+		# -audio
+		If("${it}" STREQUAL "-audio")
+			Set(KeywordIsKnown TRUE)
+			Set(YUNI_MODULE_AUDIO FALSE)
+		EndIf("${it}" STREQUAL "-audio")
 
 
 		# script
@@ -307,6 +323,8 @@ IF(MODULES)
 		Message(STATUS "    -/+mouse       : The Mouse device")
 		Message(STATUS " The gfx modules")
 		Message(STATUS "    -/+gfx3d       : The Gfx3D module (default: disabled)")
+		Message(STATUS " The audio modules")
+		Message(STATUS "    -/+audio       : The Audio module (default: disabled)")
 		Message(STATUS " The scripting modules")
 		Message(STATUS "    -/+script      : The script module (default: disabled)")
 		Message(STATUS "    -/+lua         : The Lua extension (default: enabled)")
@@ -337,13 +355,6 @@ IF(YUNI_MODULE_GFX3D AND NOT TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED)
 	SET(YUNI_MODULE_DEVICES TRUE)
 	SET(YUNI_MODULE_DEVICE_DISPLAY TRUE)
 ENDIF(YUNI_MODULE_GFX3D AND NOT TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED)
-
-IF(YUNI_MODULE_SCRIPT)
-	IF(NOT YUNI_EXTERNAL_SCRIPT_LUA)
-		Message(STATUS "[!!] Warning: No external extension for the `script` module. The module has been disabled.")
-		Set(YUNI_MODULE_SCRIPT FALSE)
-	ENDIF(NOT YUNI_EXTERNAL_SCRIPT_LUA)
-ENDIF(YUNI_MODULE_SCRIPT)
 
 IF(YUNI_MODULE_SCRIPT)
 	IF(NOT YUNI_EXTERNAL_SCRIPT_LUA)
@@ -392,6 +403,10 @@ ENDIF(YUNI_MODULE_NET)
 IF(YUNI_MODULE_GFX3D)
 	LIST(APPEND YUNI_MODULE_AVAILABLE gfx3d)
 ENDIF(YUNI_MODULE_GFX3D)
+
+IF(YUNI_MODULE_AUDIO)
+	LIST(APPEND YUNI_MODULE_AVAILABLE audio)
+ENDIF(YUNI_MODULE_AUDIO)
 
 IF(YUNI_MODULE_SCRIPT)
 	LIST(APPEND YUNI_MODULE_AVAILABLE script)

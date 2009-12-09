@@ -1,10 +1,15 @@
 #ifndef __YUNI_AUDIO_SOURCE_H__
 # define __YUNI_AUDIO_SOURCE_H__
 
+# include "../core/string.h"
 # include "../core/smartptr.h"
 # include "../gfx/point3D.h"
 # include "../gfx/vector3D.h"
+
 # include "openal.h"
+
+# include "sound3D.h"
+# include "music.h"
 
 namespace Yuni
 {
@@ -38,15 +43,15 @@ namespace Audio
 		**
 		** Speed and velocity default to (0,0,0)
 		*/
-		Source(const Gfx::Point3D& position, bool loop = false)
+		Source(const Gfx::Point3D<>& position, bool loop = false)
 			: pPosition(position)
 		{}
 
 		/*!
 		** \brief Constructor with position, velocity and direction
 		*/
-		Source(const Gfx::Point3D& position, const Gfx::Vector3D& velocity, const Gfx::Vector3D& direction,
-			bool loop = false)
+		Source(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
+			const Gfx::Vector3D<>& direction, bool loop = false)
 			: pPosition(position)
 		{}
 
@@ -64,12 +69,12 @@ namespace Audio
 		//! \name Accessors
 		//@{
 
-		void position(const Gfx::Point3D& position)
+		void position(const Gfx::Point3D<>& position)
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			pPosition = position;
 		}
-		Gfx::Point3D position() const
+		Gfx::Point3D<> position() const
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			return pPosition;
@@ -111,11 +116,11 @@ namespace Audio
 		//! OpenAL identifier for the source
 		ALuint pID;
 		//! Position of the source in space
-		Gfx::Point3D pPosition;
+		Gfx::Point3D<> pPosition;
 		//! Speed of the source
-		Gfx::Vector3D pVelocity;
+		Gfx::Vector3D<> pVelocity;
 		//! Direction of the movement of the source
-		Gfx::Vector3D pDirection;
+		Gfx::Vector3D<> pDirection;
 		//! Volume modifier, 1.0 means no modification
 		float pGain;
 
