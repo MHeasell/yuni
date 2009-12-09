@@ -23,6 +23,10 @@ Set(SRC_AUDIO
 		audio/music.h
 		audio/source.h
 		audio/source.cpp
+		audio/openal.h
+		audio/openal.cpp
+		audio/av.h
+		audio/av.cpp
 	)
 
 

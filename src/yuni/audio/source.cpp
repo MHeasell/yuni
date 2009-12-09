@@ -7,12 +7,12 @@ namespace Audio
 
 	bool Source::play(const Sound3D& sound)
 	{
-		OpenAL::playSource(pID);
+		return OpenAL::playSource(pID);
 	}
 
 	bool Source::play(const Music& sound)
 	{
-		OpenAL::playSource(pID);
+		return OpenAL::playSource(pID);
 	}
 
 } // namespace Audio
