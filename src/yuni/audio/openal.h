@@ -84,11 +84,11 @@ namespace Audio
 
 		static void bindBufferToSource(ALint buffer, ALuint source);
 
-		static void unbindBufferFromSource(ALint buffer, ALuint source);
+		static void unbindBufferFromSource(ALuint source);
 
-		static void queueBufferToSource(ALint buffer, ALuint source);
+		static void queueBufferToSource(ALuint buffer, ALuint source);
 
-		static ALint unqueueBufferFromSource(ALuint source);
+		static ALuint unqueueBufferFromSource(ALuint source);
 
 	}; // OpenAL
 
