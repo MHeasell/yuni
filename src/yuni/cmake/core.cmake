@@ -101,7 +101,7 @@ IF(MSVC)
 		void foo(__int64 a) {std::cout << a;}
 		int main() {return 0;}"
 		YUNI_HAS_LONG)
-ELSE(WIN32 OR WIN64)
+ELSE(MSVC)
 	CHECK_CXX_SOURCE_COMPILES(
 		"#include <iostream>
 		#include <stdio.h>
@@ -112,7 +112,7 @@ ELSE(WIN32 OR WIN64)
 		void foo(int64_t a) {std::cout << a;}
 		int main() {return 0;}"
 		YUNI_HAS_LONG)
-ENDIF(WIN32 OR WIN64)
+ENDIF(MSVC)
 
 
 
