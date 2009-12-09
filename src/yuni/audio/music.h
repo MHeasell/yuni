@@ -19,8 +19,8 @@ namespace Audio
 		Music() {}
 
 	private:
-		Music(const Music&) {}
-		Music& operator= (const Music&) {}
+		Music(const Music&);
+		Music& operator= (const Music&);
 
 	}; // Music
 

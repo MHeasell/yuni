@@ -12,7 +12,7 @@ namespace Audio
 	/*!
 	** \brief A sound is any kind of audio content that can be played by Yuni.
 	*/
-	class Sound: ThreadingPolicy<Sound>
+	class Sound: Policy::ObjectLevelLockable<Sound>
 	{
 	public:
 		//! \name Typedefs

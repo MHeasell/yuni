@@ -22,17 +22,17 @@ namespace Audio
 	public:
 
 		//! Open a file with ffmpeg and sets up the streams' information
-		static AVFile* openFile(const char* fname);
+		static AudioFile* openFile(const char* fname);
 
 		//! Close an opened file and any of its streams
-		static void closeFile(AVFile* file);
+		static void closeFile(AudioFile* file);
 
 		/*!
 		** \brief Retrieve a handle for the given audio stream number
 		**
 		** The stream number will generally be 0, but some files can have multiple audio streams in one file.
 		*/
-		static AVStream* getAudioStream(AVFile* file, int streamnum);
+		static AudioStream* getAudioStream(AudioFile* file, int streamnum);
 
 		/*!
 		** \brief Get information about the given audio stream
@@ -40,7 +40,7 @@ namespace Audio
 		** Currently, ffmpeg always decodes audio (even 8-bit PCM) to 16-bit PCM
 		** \returns 0 on success
 		*/
-		static int getAudioInfo(AVStream* stream, int *rate, int *channels, int *bits);
+		static int getAudioInfo(AudioStream* stream, int *rate, int *channels, int *bits);
 
 		/*!
 		** \brief Decode audio and write at most length bytes into the provided data buffer
@@ -48,7 +48,7 @@ namespace Audio
 		** Will only return less for end-of-stream or error conditions
 		** \returns The number of bytes written
 		*/
-		static int getAudioData(AVStream* stream, void *data, int length);
+		static int getAudioData(AudioStream* stream, void *data, int length);
 
 	private:
 
@@ -59,7 +59,7 @@ namespace Audio
 		** correct stream. It won't buffer data for streams that the app doesn't have a
 		** handle for.
 		*/
-		static void getNextPacket(AVFile* file, int streamidx);
+		static void getNextPacket(AudioFile* file, int streamidx);
 
 	}; // AV
 
