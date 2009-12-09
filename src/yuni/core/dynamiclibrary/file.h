@@ -10,7 +10,7 @@
 # include <stdlib.h>
 # include "../string.h"
 # include "symbol.h"
-# include "../function.h"
+//# include "../function.h"
 
 
 
