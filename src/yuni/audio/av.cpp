@@ -1,12 +1,13 @@
-
-# include "av.h"
+#include <cstdlib>
+#include <memory.h>
+#include "av.h"
 
 namespace Yuni
 {
 namespace Audio
 {
 
-	AudioFile* AV::openFile(const char* fname)
+	AudioFile* AV::openFile(const String& path)
 	{
 		static bool done = false;
 
@@ -20,7 +21,8 @@ namespace Audio
 		}
 
 		AudioFile* file = (AudioFile*)calloc(1, sizeof(AudioFile));
-		if (file && av_open_input_file(&file->FormatContext, fname, NULL, 0, NULL) == 0)
+		if (file && av_open_input_file(&file->FormatContext, String::CString(path),
+			NULL, 0, NULL) == 0)
 		{
 			// After opening, we must search for the stream information because not
 			// all formats will have it in stream headers (eg. system MPEG streams)
@@ -32,7 +34,7 @@ namespace Audio
 		return NULL;
 	}
 
-	void AV::closeFile(AudioFile* file)
+	void AV::closeFile(AudioFile*& file)
 	{
 		if (!file)
 			return;
@@ -48,6 +50,7 @@ namespace Audio
 
 		av_close_input_file(file->FormatContext);
 		free(file);
+		file = NULL;
 	}
 
 	AudioStream* AV::getAudioStream(AudioFile* file, int streamnum)

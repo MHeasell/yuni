@@ -13,7 +13,7 @@ namespace Audio
 	** Implicitly, it means the sound will be affected by attenuation
 	** relative to distance.
 	*/
-	class Sound3D
+	class Sound3D: public Sound
 	{
 	public:
 		//! \name Typedefs
@@ -26,6 +26,7 @@ namespace Audio
 		** \brief Empty constructor, use default values.
 		*/
 		Sound3D() {}
+		~Sound3D() {}
 
 	private:
 		//! Forbid default copy constructor
@@ -33,6 +34,13 @@ namespace Audio
 		//! Forbid default operator=
 		Sound3D& operator= (const Sound3D&);
 
+	public:
+		virtual bool prepare();
+		virtual unsigned int buffer();
+
+	private:
+		//! OpenAL identifier for the buffer
+		unsigned int pBufferID;
 	};
 
 } // namespace Audio

@@ -8,6 +8,7 @@ extern "C"
 }
 
 # include "types.h"
+# include "../core/string.h"
 
 namespace Yuni
 {
@@ -22,15 +23,16 @@ namespace Audio
 	public:
 
 		//! Open a file with ffmpeg and sets up the streams' information
-		static AudioFile* openFile(const char* fname);
+		static AudioFile* openFile(const String& fname);
 
 		//! Close an opened file and any of its streams
-		static void closeFile(AudioFile* file);
+		static void closeFile(AudioFile*& file);
 
 		/*!
 		** \brief Retrieve a handle for the given audio stream number
 		**
-		** The stream number will generally be 0, but some files can have multiple audio streams in one file.
+		** The stream number will generally be 0, but some files can have
+		** multiple audio streams in one file.
 		*/
 		static AudioStream* getAudioStream(AudioFile* file, int streamnum);
 

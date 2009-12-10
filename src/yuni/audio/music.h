@@ -18,6 +18,13 @@ namespace Audio
 	public:
 		Music() {}
 
+	public:
+		//! \name Methods
+		//@{
+		virtual bool prepare();
+		virtual unsigned int buffer();
+		//@}
+
 	private:
 		Music(const Music&);
 		Music& operator= (const Music&);

@@ -1,4 +1,4 @@
-# include <list>
+# include <cstdlib>
 # include "openal.h"
 
 namespace Yuni
@@ -29,7 +29,7 @@ namespace Audio
 		alcCloseDevice(device);
 	}
 
-	ALenum OpenAL::getFormat(const ALuint bits, const ALuint channels)
+	ALenum OpenAL::getFormat(unsigned int bits, unsigned int channels)
 	{
 		switch (bits)
 		{
@@ -61,14 +61,6 @@ namespace Audio
 			break;
 		}
 		return 0;
-	}
-
-	bool OpenAL::playSource(ALuint source)
-	{
-		alSourcePlay(source);
-		if (alGetError() != AL_NO_ERROR)
-			return false;
-		return true;
 	}
 
 	void OpenAL::setDistanceModel(DistanceModel model)
@@ -104,27 +96,52 @@ namespace Audio
 		alDistanceModel(modelName);
 	}
 
-	ALuint* OpenAL::createBuffers(ALsizei nbBuffers)
+	unsigned int* OpenAL::createBuffers(int nbBuffers)
 	{
-		ALuint* buffers = (ALuint*)calloc(nbBuffers, sizeof(ALuint));
+		unsigned int* buffers = (unsigned int*)calloc(nbBuffers, sizeof(unsigned int));
 		alGenBuffers(nbBuffers, buffers);
 		return buffers;
 	}
 
-	void OpenAL::destroyBuffers(ALsizei nbBuffers, ALuint* buffers)
+	void OpenAL::destroyBuffers(int nbBuffers, unsigned int* buffers)
 	{
 		alDeleteBuffers(nbBuffers, buffers);
 	}
 
-	void OpenAL::setListener(ALfloat position[3], ALfloat velocity[3],
-		ALfloat orientation[6])
+	void OpenAL::setListener(float position[3], float velocity[3], float orientation[6])
 	{
 		alListenerfv(AL_POSITION, position);
 		alListenerfv(AL_VELOCITY, velocity);
 		alListenerfv(AL_ORIENTATION, orientation);
 	}
 
-	void OpenAL::modifySource(ALuint source, float pitch, float gain,
+	unsigned int OpenAL::createSource(Gfx::Point3D<> position, Gfx::Vector3D<> velocity,
+		Gfx::Vector3D<> direction, float pitch, float gain, bool attenuate, bool loop)
+	{
+		unsigned int source;
+		alGenSources(1, &source);
+		if (alGetError() != AL_NO_ERROR)
+			return 0;
+
+		moveSource(source, position, velocity, direction);
+		modifySource(source, pitch, gain, attenuate, loop);
+		return source;
+	}
+
+	void OpenAL::destroySource(unsigned int source)
+	{
+		alDeleteSources(1, &source);
+	}
+
+	bool OpenAL::playSource(ALuint source)
+	{
+		alSourcePlay(source);
+		if (alGetError() != AL_NO_ERROR)
+			return false;
+		return true;
+	}
+
+	void OpenAL::modifySource(unsigned int source, float pitch, float gain,
 		bool attenuate, bool loop)
 	{
 		alSourcef(source, AL_PITCH, pitch);
@@ -135,53 +152,39 @@ namespace Audio
 			alSourcei(source, AL_ROLLOFF_FACTOR, 0);
 	}
 
-	void OpenAL::moveSource(ALuint source, ALfloat position[3],
-		ALfloat velocity[3], ALfloat direction[3])
+	void OpenAL::moveSource(unsigned int source, const Gfx::Point3D<>& position,
+		const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction)
 	{
 		// Uncomment this if you want the position / velocity / cone /
 		// direction properties to be relative to listener position:
 		//alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
-		alSourcefv(source, AL_POSITION, position);
-		alSourcefv(source, AL_VELOCITY, velocity);
-		alSourcefv(source, AL_DIRECTION, direction);
+
+		float pos[3] = { position.x, position.y, position.z};
+		float vel[3] = { velocity.x, velocity.y, velocity.z};
+		float dir[3] = { direction.x, direction.y, direction.z};
+		alSourcefv(source, AL_POSITION, pos);
+		alSourcefv(source, AL_VELOCITY, vel);
+		alSourcefv(source, AL_DIRECTION, dir);
 	}
 
-	ALuint OpenAL::createSource(ALfloat position[3], ALfloat velocity[3], ALfloat direction[3],
-		float pitch, float gain, bool attenuate, bool loop)
+	void OpenAL::bindBufferToSource(unsigned int buffer, unsigned int source)
 	{
-		ALuint source;
-		alGenSources(1, &source);
-		if (alGetError() != AL_NO_ERROR)
-			return 0;
-
-		moveSource(source, position, velocity, direction);
-		modifySource(source, pitch, gain, attenuate, loop);
-		return source;
+		alSourcei(source, AL_BUFFER, (int)buffer);
 	}
 
-	void OpenAL::destroySource(ALuint source)
-	{
-		alDeleteSources(1, &source);
-	}
-
-	void OpenAL::bindBufferToSource(ALint buffer, ALuint source)
-	{
-		alSourcei(source, AL_BUFFER, buffer);
-	}
-
-	void OpenAL::unbindBufferFromSource(ALuint source)
+	void OpenAL::unbindBufferFromSource(unsigned int source)
 	{
 		alSourcei(source, AL_BUFFER, 0);
 	}
 
-	void OpenAL::queueBufferToSource(ALuint buffer, ALuint source)
+	void OpenAL::queueBufferToSource(unsigned int buffer, unsigned int source)
 	{
 		alSourceQueueBuffers(source, 1, &buffer);
 	}
 
-	ALuint OpenAL::unqueueBufferFromSource(ALuint source)
+	unsigned int OpenAL::unqueueBufferFromSource(unsigned int source)
 	{
-		ALuint buf;
+		unsigned int buf;
 		alSourceUnqueueBuffers(source, 1, &buf);
 		return buf;
 	}
