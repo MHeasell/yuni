@@ -1,13 +1,26 @@
+
 #include "sound.h"
 #include "openal.h"
+
 
 namespace Yuni
 {
 namespace Audio
 {
 
-	bool Sound::loadFile()
+
+	ASound::ASound()
+		:pFile(NULL)
 	{
+		// Do nothing
+	}
+
+
+	bool ASound::loadFromFile()
+	{
+		// Locking
+		ThreadingPolicy::MutexLocker locker(*this);
+
 		// Try to open the file
 		AudioFile* file = AV::openFile(pFilePath);
 		if (!file)
@@ -41,6 +54,9 @@ namespace Audio
 
 		return true;
 	}
+
+
+
 
 } // namespace Audio
 } // namespace Yuni

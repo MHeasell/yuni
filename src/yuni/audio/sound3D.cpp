@@ -1,21 +1,27 @@
+
 #include "sound3D.h"
+
 
 namespace Yuni
 {
 namespace Audio
 {
 
+
 	bool Sound3D::prepare()
 	{
-		if (!loadFile())
-			return false;
-		return true;
+		ThreadingPolicy::MutexLocker locker(*this);
+		return loadFromFileWL();
 	}
 
-	unsigned int Sound3D::buffer()
+
+	unsigned int Sound3D::buffer() const
 	{
 		return pBufferID;
 	}
+
+
+
 
 } // namespace Audio
 } // namespace Yuni

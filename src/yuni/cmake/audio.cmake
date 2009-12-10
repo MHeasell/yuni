@@ -17,8 +17,8 @@ ENDIF(APPLE)
 
 
 Set(SRC_AUDIO
-
 		audio/sound.h
+		audio/sound.hxx
 		audio/sound.cpp
 		audio/sound3D.h
 		audio/sound3D.cpp
