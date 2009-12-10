@@ -34,6 +34,10 @@
 /* fcntl.h */
 #cmakedefine YUNI_HAS_FCNTL_H
 
+/* cstdlib */
+#cmakedefine YUNI_HAS_CSTDLIB
+
+
 
 
 
