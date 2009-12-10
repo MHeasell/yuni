@@ -10,7 +10,7 @@ namespace Audio
 		return true;
 	}
 
-	unsigned int Music::buffer()
+	unsigned int Music::buffer() const
 	{
 		return 0;
 	}

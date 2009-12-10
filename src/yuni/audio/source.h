@@ -1,20 +1,23 @@
 #ifndef __YUNI_AUDIO_SOURCE_H__
 # define __YUNI_AUDIO_SOURCE_H__
 
+# include "../yuni.h"
 # include "../core/string.h"
 # include "../core/smartptr.h"
 # include "../gfx/point3D.h"
 # include "../gfx/vector3D.h"
 
 # include "openal.h"
-
 # include "sound3D.h"
 # include "music.h"
+
+
 
 namespace Yuni
 {
 namespace Audio
 {
+
 	/*!
 	** \brief An audio source is an object from which the sound is played
 	**
@@ -23,14 +26,14 @@ namespace Audio
 	class Source: public Policy::ObjectLevelLockable<Source>
 	{
 	public:
-		//! \name Typedefs
-		//@{
+		//! The most suitable smart pointer for the class
 		typedef SmartPtr<Source> Ptr;
-
+		//! Threading Policy
 		typedef Policy::ObjectLevelLockable<Source> ThreadingPolicy;
-		//@}
 
 	public:
+		//! \name Constructors & Destructor
+		//@{
 		/*!
 		** \brief Shortest constructor
 		**
@@ -57,17 +60,15 @@ namespace Audio
 			  pLoop(loop), pReady(false)
 		{}
 
-	private:
-		Source(const Source&);
-		Source& operator= (const Source&);
+		//! Destructor
+		~Source() {}
+		//@}
 
-	public:
 		//! Start a 3D sound playback on this source
-		bool play(Sound3D& sound);
+		bool play(Sound3D::Ptr sound);
 		//! Start a music playback on this source
-		bool play(Music& sound);
+		bool play(Music::Ptr music);
 
-	public:
 		//! \name Methods
 		//@{
 		//! Prepare the source for playing
@@ -105,7 +106,7 @@ namespace Audio
 			return pGain;
 		}
 
-		const String& name()
+		String name() const
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			return pName;
@@ -117,6 +118,11 @@ namespace Audio
 		}
 
 		//@}
+
+
+	private:
+		Source(const Source&);
+		Source& operator= (const Source&);
 
 	private:
 		//! String identifier for the source
@@ -136,7 +142,10 @@ namespace Audio
 		//! Is the source ready for use?
 		bool pReady;
 
-	}; // Source
+	}; // class Source
+
+
+
 
 } // namespace Audio
 } // namespace Yuni

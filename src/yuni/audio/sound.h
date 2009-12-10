@@ -1,6 +1,7 @@
 #ifndef __YUNI_AUDIO_SOUND_H__
 # define __YUNI_AUDIO_SOUND_H__
 
+# include "../yuni.h"
 # include "openal.h"
 # include "av.h"
 # include "../core/smartptr.h"
@@ -10,53 +11,64 @@ namespace Yuni
 {
 namespace Audio
 {
+
+
 	/*!
 	** \brief A sound is any kind of audio content that can be played by Yuni.
 	*/
-	class Sound: Policy::ObjectLevelLockable<Sound>
+	class ASound : public Policy::ObjectLevelLockable<ASound>
 	{
 	public:
-		//! \name Typedefs
-		//@{
-		typedef SmartPtr<Sound> Ptr;
-
-		typedef Policy::ObjectLevelLockable<Sound> ThreadingPolicy;
-		//@}
+		//! The most suitable smart pointer for the class
+		typedef SmartPtr<ASound> Ptr;
+		//! The Threading Policy
+		typedef Policy::ObjectLevelLockable<ASound> ThreadingPolicy;
 
 	public:
+		//! \name Constructor
+		//@{
 		/*!
 		** \brief Empty constructor, use default values.
 		*/
-		Sound(): pFilePath(""), pFile(NULL)
-		{}
+		ASound();
+		//! Destructor
+		virtual ~ASound() {}
+		//@}
 
-	private:
-		//! Forbid default copy constructor
-		Sound(const Sound&);
-		//! Forbid default operator=
-		Sound& operator= (const Sound&);
-
-	public:
 		//! \name Methods
 		//@{
 		virtual bool prepare() = 0;
-		virtual unsigned int buffer() = 0;
+		virtual unsigned int buffer() const = 0;
 		//@}
 
 		//! \name Accessors
 		//@{
-		const String& name() const { return pName; }
-		void name(const String& name) { pName = name; }
+		String name() const;
+		template<class AnyStringT> void name(const AnyStringT& name);
 
 		//! Is the sound ready to play?
-		bool ready() const { return NULL != pFile; }
+		bool valid() const;
 		//@}
+
+		//! \name Operators
+		//@{
+		bool operator ! () const;
+		//@}
+
+	private:
+		//! Forbid default copy constructor
+		ASound(const ASound&);
+		//! Forbid default operator=
+		ASound& operator = (const ASound&);
 
 	protected:
 		//! \name Protected methods
 		//@{
-		//! Load the file
-		bool loadFile();
+		/*!
+		** \brief Load the file
+		*/
+		bool loadFromFile();
+		bool loadFromFileWL();
 		//@}
 
 	protected:
@@ -65,11 +77,16 @@ namespace Audio
 		//! File path or URL
 		String pFilePath;
 		//! A loaded AV file, NULL if not loaded
-		AudioFile* pFile;
+		ThreadingPolicy::Volatile<AudioFile*>::Type pFile;
 
-	}; // Sound
+	}; // class ASound
+
+
+
 
 } // namespace Audio
 } // namespace Yuni
+
+# include "sound.hxx"
 
 #endif // __YUNI_AUDIO_SOUND_H__

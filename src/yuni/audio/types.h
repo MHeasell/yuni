@@ -1,12 +1,15 @@
 #ifndef __YUNI_AUDIO_TYPES_H__
 # define __YUNI_AUDIO_TYPES_H__
 
+
 namespace Yuni
 {
 namespace Audio
 {
 
+
 	struct AudioFile;
+
 
 	struct AudioStream
 	{
@@ -28,6 +31,9 @@ namespace Audio
 		AudioStream** Streams;
 		size_t StreamsSize;
 	};
+
+
+
 
 } // namespace Audio
 } // namespace Yuni
