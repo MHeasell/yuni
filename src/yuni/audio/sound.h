@@ -4,6 +4,7 @@
 # include "openal.h"
 # include "av.h"
 # include "../core/smartptr.h"
+# include "../core/string.h"
 
 namespace Yuni
 {
@@ -26,24 +27,45 @@ namespace Audio
 		/*!
 		** \brief Empty constructor, use default values.
 		*/
-		Sound() {}
+		Sound(): pFilePath(""), pFile(NULL)
+		{}
 
 	private:
 		//! Forbid default copy constructor
-		Sound(const Sound&) {}
+		Sound(const Sound&);
 		//! Forbid default operator=
-		Sound& operator= (const Sound&) {}
+		Sound& operator= (const Sound&);
 
 	public:
+		//! \name Methods
+		//@{
+		virtual bool prepare() = 0;
+		virtual unsigned int buffer() = 0;
+		//@}
+
 		//! \name Accessors
 		//@{
-		const String& name() { return pName; }
+		const String& name() const { return pName; }
 		void name(const String& name) { pName = name; }
+
+		//! Is the sound ready to play?
+		bool ready() const { return NULL != pFile; }
+		//@}
+
+	protected:
+		//! \name Protected methods
+		//@{
+		//! Load the file
+		bool loadFile();
 		//@}
 
 	protected:
 		//! String identifier for the sound
 		String pName;
+		//! File path or URL
+		String pFilePath;
+		//! A loaded AV file, NULL if not loaded
+		AudioFile* pFile;
 
 	}; // Sound
 

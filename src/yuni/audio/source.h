@@ -36,7 +36,8 @@ namespace Audio
 		**
 		** Position, speed and direction default to (0,0,0)
 		*/
-		Source(bool loop = false) {}
+		Source(bool loop = false): pLoop(loop), pReady(false)
+		{}
 
 		/*!
 		** \brief Constructor with 3D position
@@ -44,7 +45,7 @@ namespace Audio
 		** Speed and velocity default to (0,0,0)
 		*/
 		Source(const Gfx::Point3D<>& position, bool loop = false)
-			: pPosition(position)
+			: pPosition(position), pLoop(loop), pReady(false)
 		{}
 
 		/*!
@@ -52,20 +53,27 @@ namespace Audio
 		*/
 		Source(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
 			const Gfx::Vector3D<>& direction, bool loop = false)
-			: pPosition(position)
+			: pPosition(position), pVelocity(velocity), pDirection(direction),
+			  pLoop(loop), pReady(false)
 		{}
 
 	private:
-		Source(const Source&) {}
-		Source& operator= (const Source&) {}
+		Source(const Source&);
+		Source& operator= (const Source&);
 
 	public:
 		//! Start a 3D sound playback on this source
-		bool play(const Sound3D& sound);
+		bool play(Sound3D& sound);
 		//! Start a music playback on this source
-		bool play(const Music& sound);
+		bool play(Music& sound);
 
 	public:
+		//! \name Methods
+		//@{
+		//! Prepare the source for playing
+		bool prepare();
+		//@}
+
 		//! \name Accessors
 		//@{
 
@@ -114,15 +122,19 @@ namespace Audio
 		//! String identifier for the source
 		String pName;
 		//! OpenAL identifier for the source
-		ALuint pID;
+		unsigned int pID;
 		//! Position of the source in space
 		Gfx::Point3D<> pPosition;
 		//! Speed of the source
 		Gfx::Vector3D<> pVelocity;
 		//! Direction of the movement of the source
 		Gfx::Vector3D<> pDirection;
+		//! Should the source loop on itself when finished playing?
+		bool pLoop;
 		//! Volume modifier, 1.0 means no modification
 		float pGain;
+		//! Is the source ready for use?
+		bool pReady;
 
 	}; // Source
 

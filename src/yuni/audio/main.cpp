@@ -11,7 +11,7 @@ const unsigned int NUM_BUFFERS = 3;
 // 16KB to 32KB is a good size per buffer
 const unsigned int BUFFER_SIZE = 32768;
 
-int main(unsigned int argc, const char* argv[])
+int main(int argc, const char* argv[])
 {
 	if (argc < 2)
 	{

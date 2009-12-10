@@ -2,6 +2,8 @@
 # define __YUNI_AUDIO_OPENAL_H__
 
 # include <list>
+# include "../gfx/vector3D.h"
+# include "../gfx/point3D.h"
 # include "al.h"
 # include "alc.h"
 
@@ -48,9 +50,7 @@ namespace Audio
 		** \param channels Number of channels
 		** \returns An ALenum containing the format, 0 if none found
 		*/
-		static ALenum getFormat(const ALuint bits, const ALuint channels);
-
-		static bool playSource(ALuint source);
+		static ALenum getFormat(unsigned int bits, unsigned int channels);
 
 		static void setDistanceModel(DistanceModel model);
 
@@ -59,36 +59,31 @@ namespace Audio
 		** \param nbBuffers Number of buffers to create
 		** \returns An array of IDs of the created buffers
 		*/
-		static ALuint* createBuffers(ALsizei nbBuffers);
+		static unsigned int* createBuffers(int nbBuffers);
 
-		static void destroyBuffers(ALsizei nbBuffers, ALuint* buffers);
+		static void destroyBuffers(int nbBuffers, unsigned int* buffers);
 
-		static void setListener(ALfloat position[3], ALfloat velocity[3],
-			ALfloat orientation[6]);
-
-		static void modifySource(ALuint source, float pitch, float gain,
-			bool attenuate, bool loop);
-
-		static void moveSource(ALuint source, ALfloat position[3],
-			ALfloat velocity[3], ALfloat direction[3]);
+		static void setListener(float position[3], float velocity[3], float orientation[6]);
 
 		/*!
 		** \brief Create an OpenAL source
 		** \returns The source's ID, 0 if an error is encountered.
 		*/
-		static ALuint createSource(ALfloat position[3], ALfloat velocity[3], ALfloat direction[3],
-			float pitch, float gain, bool attenuate, bool loop);
-
+		static unsigned int createSource(Gfx::Point3D<> position, Gfx::Vector3D<> velocity,
+			Gfx::Vector3D<> direction, float pitch, float gain, bool attenuate, bool loop);
 		//! Destroy an OpenAL source
-		static void destroySource(ALuint source);
+		static void destroySource(unsigned int source);
 
-		static void bindBufferToSource(ALint buffer, ALuint source);
+		static bool playSource(unsigned int source);
+		static void modifySource(unsigned int source, float pitch, float gain,
+			bool attenuate, bool loop);
+		static void moveSource(unsigned int source, const Gfx::Point3D<>& position,
+							   const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
 
-		static void unbindBufferFromSource(ALuint source);
-
-		static void queueBufferToSource(ALuint buffer, ALuint source);
-
-		static ALuint unqueueBufferFromSource(ALuint source);
+		static void bindBufferToSource(unsigned int buffer, unsigned int source);
+		static void unbindBufferFromSource(unsigned int source);
+		static void queueBufferToSource(unsigned int buffer, unsigned int source);
+		static unsigned int unqueueBufferFromSource(unsigned int source);
 
 	}; // OpenAL
 
