@@ -17,7 +17,7 @@ namespace StringImpl
 		{
 			for (typename StringBase<C,Chnk>::Size i = 0; i != s.pSize; ++i)
 			{
-				if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
+				if (Equals == (toFind == s.pPtr[i]))
 					return i;
 			}
 			return StringBase<C,Chnk>::npos;
@@ -27,7 +27,7 @@ namespace StringImpl
 		{
 			for (typename StringBase<C,Chnk>::Size i = offset; i < s.pSize; ++i)
 			{
-				if (CheckEquality<Equals>::Value(toFind, s.pPtr[i]))
+				if (Equals == (toFind == s.pPtr[i]))
 					return i;
 			}
 			return StringBase<C,Chnk>::npos;
@@ -49,7 +49,7 @@ namespace StringImpl
 				{
 					for (j = 0; j != len; ++j)
 					{
-						if (CheckEquality<Equals>::Value(toFind[j], s.pPtr[i]))
+						if (Equals == (toFind[j] == s.pPtr[i]))
 							return i;
 					}
 				}
@@ -83,7 +83,7 @@ namespace StringImpl
 				{
 					for (j = 0; j != (N - 1); ++j)
 					{
-						if (CheckEquality<Equals>::Value(toFind[j], s.pPtr[i]))
+						if (Equals == (toFind[j] == s.pPtr[i]))
 							return i;
 					}
 				}

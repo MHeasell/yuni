@@ -14,22 +14,6 @@ namespace StringImpl
 {
 
 
-	template<bool E>
-	struct CheckEquality
-	{
-		template<typename A, typename B>
-		static inline bool Value(const A& a, const B& b) { return (a == b);	}
-	};
-
-	template<>
-	struct CheckEquality<false>
-	{
-		template<typename A, typename B>
-		static inline bool Value(const A& a, const B& b) { return (a != b); }
-	};
-
-
-
 	template<typename C, typename U>
 	struct CString
 	{
