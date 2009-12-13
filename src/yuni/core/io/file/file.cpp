@@ -1,5 +1,4 @@
 
-#include <fstream>
 #include <sys/stat.h>
 #include "../file.h"
 #include "../directory.h"
@@ -18,80 +17,6 @@ namespace File
 
 
 
-	bool Size(const char* filename, uint64& size)
-	{
-		struct stat results;
-		if (filename && '\0' != *filename && stat(filename, &results) == 0)
-		{
-			size = results.st_size;
-			return true;
-		}
-		size = 0;
-		return false;
-	}
-
-
-	bool Size(const String& filename, uint64& size)
-	{
-		struct stat results;
-		if (filename.notEmpty() && stat(filename.c_str(), &results) == 0)
-		{
-			size = results.st_size;
-			return true;
-		}
-		size = 0;
-		return false;
-	}
-
-
-
-	char* LoadContentInMemory(const String& filename, const uint64 hardlimit)
-	{
-		uint64 s;
-		return LoadContentInMemory(filename, s, hardlimit);
-	}
-
-
-	char* LoadContentInMemory(const String& filename, uint64& size, const uint64 hardlimit)
-	{
-		if (Size(filename, size))
-		{
-			if (0 == size)
-			{
-				char* ret = new char[1];
-				*ret = '\0';
-				return ret;
-			}
-			if (size > hardlimit)
-				return NULL;
-			std::ifstream f;
-			f.open(filename.c_str(), std::ios::in | std::ios::binary);
-			if (f.is_open())
-			{
-				char* ret = new char[(int)size + 1];
-				f.read((char*)ret, (std::streamsize)size);
-				f.close();
-				ret[size] = '\0';
-				return ret;
-			}
-		}
-		return NULL;
-	}
-
-
-
-	bool SaveToFile(const String& filename, const String& content)
-	{
-		std::ofstream dst(filename.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
-		if (dst.is_open())
-		{
-			dst << content;
-			return true;
-		}
-		return false;
-	}
-
-
 
 	String ReplaceExtension(const String& filename, const String& newExt)
 	{
@@ -105,31 +30,6 @@ namespace File
 			return filename + newExt;
 		return filename.substr(0, p) + newExt;
 	}
-
-
-
-
-	bool Copy(const String& from, const String& to, const bool overwrite)
-	{
-		if (!IO::File::Exists(from))
-			return false;
-		if (!overwrite && IO::File::Exists(to))
-			return true;
-		std::ifstream src(from.c_str(), std::ios::in | std::ios::binary);
-		if (src.is_open())
-		{
-			std::ofstream dst(to.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
-			if (dst.is_open())
-			{
-				dst << src.rdbuf();
-				return true;
-			}
-		}
-		return false;
-	}
-
-
-
 
 
 
@@ -260,9 +160,70 @@ namespace File
 
 
 
-
 } // namespace File
 } // namespace IO
 } // namespace Core
 } // namespace Yuni
+
+
+
+
+
+namespace Yuni
+{
+namespace Private
+{
+namespace IO
+{
+namespace FilesystemImpl
+{
+
+	bool CopyFile(const char* from, const char* to)
+	{
+		// Open the source file
+		Yuni::Core::IO::File::Stream fromFile(from, Yuni::Core::IO::File::OpenMode::read);
+		if (fromFile.opened())
+		{
+			Yuni::Core::IO::File::Stream toFile(to,
+				Yuni::Core::IO::File::OpenMode::write | Yuni::Core::IO::File::OpenMode::truncate);
+			if (toFile.opened())
+			{
+				char buffer[4096];
+				size_t numRead;
+				while ((numRead = fromFile.read(buffer, sizeof(buffer))))
+					toFile.write(buffer, numRead);
+			}
+		}
+		return false;
+	}
+
+
+	bool Size(const char* filename, uint64& value)
+	{
+		struct stat results;
+		if (filename && '\0' != *filename && stat(filename, &results) == 0)
+		{
+			value = results.st_size;
+			return true;
+		}
+		value = 0;
+		return false;
+	}
+
+
+	uint64 Size(const char* filename)
+	{
+		struct stat results;
+		if (filename && '\0' != *filename && stat(filename, &results) == 0)
+			return results.st_size;
+		return 0;
+	}
+
+
+
+} // namespace FilesystemImpl
+} // namespace IO
+} // namespace Private
+} // namespace Yuni
+
 
