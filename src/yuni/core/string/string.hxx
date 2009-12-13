@@ -309,6 +309,7 @@ namespace Yuni
 	{
 		this->reserve(len + 1);
 		this->pSize = len;
+		this->pPtr[len] = '\0';
 	}
 
 

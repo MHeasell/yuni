@@ -52,13 +52,22 @@ namespace File
 	** \brief Get the size of a file
 	**
 	** \ingroup IOFile
-	**
-	** \param filename The file
-	** \param[out] size The size of the file. 0 if any errors has occured
+	** \param filename The filename
+	** \param[out] size The size (in bytes) of the file. 0 if any errors has occured
 	** \return True if the operation succeeded, False otherwise
 	*/
-	bool Size(const char* filename, uint64& size);
-	bool Size(const String& filename, uint64& size);
+	template<class AnyStringT> bool Size(const AnyStringT& filename, uint64& size);
+
+	/*!
+	** \brief Get the size of a file
+	**
+	** \ingroup IOFile
+	** \param filename The filename
+	** \param[out] size The size (in bytes) of the file. 0 if any errors has occured
+	** \return The size in bytes of the file, 0 when the operation fails
+	*/
+	template<class AnyStringT> uint64 Size(const AnyStringT& filename);
+
 
 
 
@@ -93,35 +102,24 @@ namespace File
 	** \brief Load the entire content of a file into memory
 	**
 	** \ingroup IOFile
-	**
+	** \param[out] out The content of the file
 	** \param filename The filename to open
 	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded
-	** \return The content of the file, null terminated in any cases, NULL if size > hardlimit or if any error has occurred.
-	** If not NULL, this value must be deleted with the keyword `delete[]`
+	** \return True if the operation succeeded.
 	*/
-	char* LoadContentInMemory(const String& filename, const uint64 hardlimit = sizeHardLimit);
+	template<class C, int ChunkT, class AnyStringT>
+	bool LoadContent(const StringBase<C,ChunkT>& out, const AnyStringT& filename, const uint64 hardlimit = sizeHardLimit);
 
-	/*!
-	** \brief Load the entire content of a file into memory
-	** \ingroup IOFile
-	**
-	** \param filename The filename to open
-	** \param[out] size The size of the file
-	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded 
-	** \return The content of the file, null terminated in any cases, NULL if size > hardlimit or if any error has occurred.
-	** If not NULL, this value must be deleted with the keyword `delete[]`
-	*/
-	char* LoadContentInMemory(const String& filename, uint64& size, const uint64 hardlimit = sizeHardLimit);
 
 	/*!
 	** \brief Save the content of a string into a file
-	** \ingroup IOFile
 	**
+	** \ingroup IOFile
 	** \param filename The filename to create/overwrite
 	** \param content The new content of the file
 	** \return True if the operation succeeded, false otherwise
 	*/
-	bool SaveToFile(const String& filename, const String& content);
+	template<class AnyStringT, class U> bool SaveToFile(const AnyStringT& filename, const U& content);
 	//@}
 
 
@@ -158,8 +156,9 @@ namespace File
 	** \brief Create or erase a file
 	**
 	** \param filename An UTF8 filename
+	** \return True if the file has been created or truncated
 	*/
-	template<class C> bool CreateEmptyFile(const C& filename);
+	template<class AnyStringT> bool CreateEmptyFile(const AnyStringT& filename);
 
 
 	/*!
@@ -169,7 +168,7 @@ namespace File
 	** Core::IO::File::SetContent("/tmp/anyfile.txt", "Hello world !\n");
 	** \endcode
 	*/
-	template<class C1, class C2> bool SetContent(const C1& filename, const C2& content);
+	template<class AnyStringT, class U> bool SetContent(const AnyStringT& filename, const U& content);
 
 	/*!
 	** \brief Append the content of an arbitrary string to a file
@@ -178,7 +177,7 @@ namespace File
 	** Core::IO::File::AppendContent("/tmp/anyfile.txt", "lorem ipsumi\n");
 	** \endcode
 	*/
-	template<class C1, class C2> bool AppendContent(const C1& filename, const C2& content);
+	template<class AnyStringT, class U> bool AppendContent(const AnyStringT& filename, const U& content);
 
 
 

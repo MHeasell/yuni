@@ -28,6 +28,12 @@ namespace FilesystemImpl
 	# endif
 
 
+	bool CopyFile(const char* from, const char* to);
+
+
+	bool Size(const char* filename, uint64& value);
+	uint64 Size(const char* filename);
+
 
 } // namespace FilesystemImpl
 } // namespace IO
