@@ -22,7 +22,7 @@ namespace Console
 
 	template<> struct TextColor<black>
 	{
-		template<class U> template<class U> static void Set(U&)
+		template<class U> static void Set(U&)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		}
