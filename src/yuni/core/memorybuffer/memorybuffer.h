@@ -7,6 +7,7 @@
 # include "../traits/cstring.h"
 # include "../traits/length.h"
 
+# include <stdio.h>
 # include "traits/traits.h"
 # include "traits/append.h"
 # include "traits/assign.h"
