@@ -1,9 +1,25 @@
+Project(Yuni-Testsuite)
+CMake_minimum_required(VERSION 2.6)
 
+Message(STATUS "")
+Message(STATUS "Testsuite for the Yuni Framework")
+Message(STATUS "")
 
-Set(YuniTestCase_LastExe "")
-Set(YuniTestCase_LastID  "")
-Set(YuniTestCase_Code  "")
-Set(YuniTestCase_ExeExtension "")
+IF(POLICY CMP0011)
+	CMake_Policy(SET CMP0011 NEW)
+ENDIF(POLICY CMP0011)
+
+Message(STATUS "")
+Message(STATUS "Looking for testcases...")
+Message(STATUS "Path: ${PROJECT_SOURCE_DIR}")
+
+Set(YuniTestCase_LastExe               "")
+Set(YuniTestCase_LastID                "")
+Set(YuniTestCase_Code                  "")
+Set(YuniTestCase_ExeExtension          "")
+Set(YuniTestCase_ModulesHaveBeenFound  "")
+Set(YuniTestCase_CXXFlags              "")
+Set(YuniTestCase_LinkFlags             "")
 
 # TODO For Visual Studio ? MinGW ?
 IF(MSVC)
@@ -24,8 +40,8 @@ add_custom_target(tests)
 add_custom_target(test_html DEPENDS tests)
 
 
-Set(YuniTestCaseOutput "${CMAKE_CURRENT_SOURCE_DIR}/results/htdocs/${YUNI_VERSION_REV}")
-Set(YuniTestCaseRubyInclude "${CMAKE_CURRENT_SOURCE_DIR}/../tools/testsuite")
+Set(YuniTestCaseOutput "${PROJECT_SOURCE_DIR}/results/htdocs/${YUNI_VERSION_REV}")
+Set(YuniTestCaseRubyInclude "${PROJECT_SOURCE_DIR}/../tools/testsuite")
 
 
 MACRO(YUNITESTCASE_BEGIN exe settings)
@@ -33,6 +49,7 @@ MACRO(YUNITESTCASE_BEGIN exe settings)
 	Set(YuniTestCase_LastID "${ID}")
 	Set(YuniTestCase_LastExe "${exe}")
 	Set(YuniTestCase_RubySettings "${CMAKE_CURRENT_SOURCE_DIR}/CMakeFiles/testcase_${ID}.rb")
+	Set(YuniTestCase_ModulesHaveBeenFound "")
 	Set(YuniTestCase_Code "
 	${settings}
 	options.identifier = '${ID}'
@@ -44,60 +61,79 @@ MACRO(YUNITESTCASE_BEGIN exe settings)
 ENDMACRO(YUNITESTCASE_BEGIN)
 
 
+MACRO(YUNITESTCASE_MODULES)
+	Find_Package(LibYuni COMPONENTS ${ARGV})
+	IF(LibYuni_FOUND)
+		Set(YuniTestCase_ModulesHaveBeenFound "1")
+		Set(YuniTestCase_CXXFlags "${LibYuni_CXXFLAGS}")
+		Set(YuniTestCase_LinkFlags "${LibYuni_LIBS}")
+	ENDIF(LibYuni_FOUND)
+ENDMACRO(YUNITESTCASE_MODULES)
+
 
 MACRO(YUNITESTCASE_SOURCE)
-	ADD_EXECUTABLE(test_${YuniTestCase_LastExe} ${ARGV})
-	Set(YuniTestCase_Code "${YuniTestCase_Code} options.program = '${CMAKE_CURRENT_SOURCE_DIR}/test_${YuniTestCase_LastExe}${YuniTestCase_ExeExtension}'\n")
-	Set(YuniTestCase_Code "${YuniTestCase_Code} options.make = '${YuniTestCaseMake} test_${YuniTestCase_LastExe}'\n")
-	target_link_libraries(test_${YuniTestCase_LastExe} yuni-static-tests)
+	IF("${YuniTestCase_ModulesHaveBeenFound}" STREQUAL "1")
+		Set(CMAKE_CXX_FLAGS "${YuniTestCase_CXXFlags}")
+		ADD_EXECUTABLE(test_${YuniTestCase_LastExe} ${ARGV})
+		Set(YuniTestCase_Code "${YuniTestCase_Code} options.program = '${CMAKE_CURRENT_SOURCE_DIR}/test_${YuniTestCase_LastExe}${YuniTestCase_ExeExtension}'\n")
+		Set(YuniTestCase_Code "${YuniTestCase_Code} options.make = '${YuniTestCaseMake} test_${YuniTestCase_LastExe}'\n")
+		target_link_libraries(test_${YuniTestCase_LastExe} yuni-static-tests "${YuniTestCase_LinkFlags}")
+	ENDIF("${YuniTestCase_ModulesHaveBeenFound}" STREQUAL "1")
 ENDMACRO(YUNITESTCASE_SOURCE)
 
 
 
 MACRO(YUNITESTCASE_LINK)
-	target_link_libraries(test_${YuniTestCase_LastExe} ${ARGV})
+	IF("${YuniTestCase_ModulesHaveBeenFound}" STREQUAL "1")
+		target_link_libraries(test_${YuniTestCase_LastExe} ${ARGV})
+	ENDIF("${YuniTestCase_ModulesHaveBeenFound}" STREQUAL "1")
 ENDMACRO(YUNITESTCASE_LINK)
 
 
 MACRO(YUNITESTCASE_END)
-	Set(YuniTestCase_RubySettings "${CMAKE_CURRENT_SOURCE_DIR}/CMakeFiles/testcase_${YuniTestCase_LastID}.rb")
-	FILE(WRITE "${YuniTestCase_RubySettings}" "${YuniTestCase_Code}")
+	IF("${YuniTestCase_ModulesHaveBeenFound}" STREQUAL "1")
+		Set(YuniTestCase_RubySettings "${PROJECT_SOURCE_DIR}/CMakeFiles/testcase_${YuniTestCase_LastID}.rb")
+		FILE(WRITE "${YuniTestCase_RubySettings}" "${YuniTestCase_Code}")
 
-	ADD_CUSTOM_COMMAND(OUTPUT "testcase_${YuniTestCase_LastID}.xml"
-		COMMAND ruby ARGS
-			"-I${YuniTestCaseRubyInclude}"
-			-W0 "${PROJECT_SOURCE_DIR}/tools/testsuite/testcase.rb"
-			"${CMAKE_CURRENT_SOURCE_DIR}/CMakeFiles/testcase_${YuniTestCase_LastID}.rb"
-		WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-		)
-	ADD_CUSTOM_TARGET(testcase_${YuniTestCase_LastExe} SOURCES "testcase_${YuniTestCase_LastID}.xml")
-	add_dependencies(tests testcase_${YuniTestCase_LastExe})
-	set_property(GLOBAL APPEND PROPERTY YuniTestCaseListCount 1)
-	set_property(GLOBAL APPEND PROPERTY YuniTestCaseList "${CMAKE_CURRENT_SOURCE_DIR}/testcase_${YuniTestCase_LastExe}${YuniTestCase_ExeExtension}.xml")
+		ADD_CUSTOM_COMMAND(OUTPUT "testcase_${YuniTestCase_LastID}.xml"
+			COMMAND ruby ARGS
+				"-I${YuniTestCaseRubyInclude}"
+				-W0 "${PROJECT_SOURCE_DIR}/../tools/testsuite/testcase.rb"
+				"${PROJECT_SOURCE_DIR}/CMakeFiles/testcase_${YuniTestCase_LastID}.rb"
+			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+			)
+		ADD_CUSTOM_TARGET(testcase_${YuniTestCase_LastExe} SOURCES "testcase_${YuniTestCase_LastID}.xml")
+		add_dependencies(tests testcase_${YuniTestCase_LastExe})
+		set_property(GLOBAL APPEND PROPERTY YuniTestCaseListCount 1)
+		set_property(GLOBAL APPEND PROPERTY YuniTestCaseList "${CMAKE_CURRENT_SOURCE_DIR}/testcase_${YuniTestCase_LastExe}${YuniTestCase_ExeExtension}.xml")
+	ENDIF("${YuniTestCase_ModulesHaveBeenFound}" STREQUAL "1")
 ENDMACRO(YUNITESTCASE_END)
 
 
 
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/FindYuni.cmake")
+Include("${PROJECT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
+Include("${PROJECT_SOURCE_DIR}/../cmake/Modules.cmake")
+
+# To find 'FindLibYuni.cmake'
+LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../../packages/cmake")
 
 
 
 set_property(GLOBAL PROPERTY YuniTestCaseList) 
 set_property(GLOBAL PROPERTY YuniTestCaseListCount) 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/..")
+include_directories("${PROJECT_SOURCE_DIR}/..")
 
 
 
 
 
-
-
-#
-# Adding Testcases
-#
-Add_SubDirectory(automated)
+Find_Package(LibYuni COMPONENTS core)
+IF(LibYuni_FOUND)
+	#
+	# Adding Testcases
+	#
+	Add_SubDirectory(automated)
+ENDIF(LibYuni_FOUND)
 
 
 
@@ -107,5 +143,6 @@ get_property(YnList GLOBAL PROPERTY YuniTestCaseListCount)
 List(LENGTH YnList YnListCount)
 
 Message(STATUS "Testcase count: ${YnListCount}")
+Message(STATUS "")
 get_property(YnList GLOBAL PROPERTY YuniTestCaseList)
 

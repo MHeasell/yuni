@@ -8,6 +8,7 @@ YUNITESTCASE_BEGIN(libyuni_core_c_header
 	options.compareStderrWith = nil
 	options.exitStatus = 0
 	")
+	YUNITESTCASE_MODULES(core)
 	YUNITESTCASE_SOURCE(main.c)
 YUNITESTCASE_END()
 

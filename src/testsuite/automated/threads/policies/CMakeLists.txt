@@ -8,6 +8,7 @@ YUNITESTCASE_BEGIN(libyuni_threads_policies_singlethreaded
 	options.compareStderrWith = nil
 	options.exitStatus = 0
 	")
+	YUNITESTCASE_MODULES(core)
 	YUNITESTCASE_SOURCE(main_single.cpp)
 	YUNITESTCASE_LINK(${YUNI_STATIC_CORE})
 YUNITESTCASE_END()
@@ -22,6 +23,7 @@ YUNITESTCASE_BEGIN(libyuni_threads_policies_objectlevellockable
 	options.compareStderrWith = nil
 	options.exitStatus = 0
 	")
+	YUNITESTCASE_MODULES(core)
 	YUNITESTCASE_SOURCE(main_objectlevel.cpp)
 	YUNITESTCASE_LINK(${YUNI_STATIC_CORE})
 YUNITESTCASE_END()
@@ -36,6 +38,7 @@ YUNITESTCASE_BEGIN(libyuni_threads_policies_classlevellockable
 	options.compareStderrWith = nil
 	options.exitStatus = 0
 	")
+	YUNITESTCASE_MODULES(core)
 	YUNITESTCASE_SOURCE(main_classlevel.cpp)
 	YUNITESTCASE_LINK(${YUNI_STATIC_CORE})
 YUNITESTCASE_END()
