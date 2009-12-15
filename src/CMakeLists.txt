@@ -94,12 +94,14 @@ Add_SubDirectory(tools)
 
 
 
-
 #
 # Compiling libyuni-config if required
 #
 IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 	Message(STATUS "[libyuni-config] Bootstraping")
+	IF(YUNI_TESTS)
+		Message(STATUS "The bootstrapping is required to compile the testsuite")
+	ENDIF(YUNI_TESTS)
 	# --
 	Message(STATUS "Configuring libyuni-config...")
 	Message(STATUS "(in ${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config)")
@@ -118,4 +120,5 @@ IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 	execute_process(COMMAND ${Y_MAKE_COMMAND}
 			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config")
 ENDIF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
+
 
