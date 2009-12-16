@@ -73,7 +73,7 @@ namespace MemoryBufferImpl
 			// Making sure that we have enough space
 			reserve(blockSize + zeroTerminated);
 			// Raw copy
-			(void)::memcpy(data, block, blockSize);
+			(void)::memcpy(data, block, sizeof(C) * blockSize);
 			// New size
 			size = blockSize;
 			if (zeroTerminated)
@@ -87,7 +87,7 @@ namespace MemoryBufferImpl
 			// Making sure that we have enough space
 			reserve(size + blockSize + zeroTerminated);
 			// Raw copy
-			(void)::memcpy(data + size, block, blockSize);
+			(void)::memcpy(data + size * sizeof(C), block, blockSize * sizeof(C));
 			// New size
 			size += blockSize;
 			if (zeroTerminated)

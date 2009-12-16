@@ -90,7 +90,7 @@ namespace MemoryBufferImpl
 			if (!blockSize)
 				return 0;
 			// Raw copy
-			(void)::memcpy(data + size, block, sizeof(C) * blockSize);
+			(void)::memcpy(data + size * sizeof(C), block, sizeof(C) * blockSize);
 			// New size
 			size = capacity;
 			if (zeroTerminated)
@@ -100,7 +100,7 @@ namespace MemoryBufferImpl
 		// else
 		{
 			// Raw copy
-			(void)::memcpy(data + size, block, sizeof(C) * blockSize);
+			(void)::memcpy(data + size * sizeof(C), block, sizeof(C) * blockSize);
 			// New size
 			size += blockSize;
 			if (zeroTerminated)

@@ -62,7 +62,7 @@ namespace MemoryBufferImpl
 		static void Do(MemBufT& memoryBuffer, const C* rhs)
 		{
 			if (rhs)
-				memoryBuffer.assignWithoutChecking(rhs, Yuni::Core::Traits::Length<C*, typename MemBufT::Size>(rhs));
+				memoryBuffer.assignWithoutChecking(rhs, Yuni::Core::Traits::Length<C*, typename MemBufT::Size>::Value(rhs));
 			else
 				memoryBuffer.clear();
 		}
