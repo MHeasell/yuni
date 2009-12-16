@@ -1,7 +1,9 @@
 #ifndef __YUNI_CORE_UTILS_HEXDUMP_H__
 # define __YUNI_CORE_UTILS_HEXDUMP_H__
 
-#include "../string.h"
+# include "../../yuni.h"
+# include "../string.h"
+
 
 namespace Yuni
 {
@@ -11,7 +13,7 @@ namespace Utils
 {
 
 	/*!
-	** A simple hexadecimal buffer dumper.
+	** \brief A simple hexadecimal buffer dumper.
 	**
 	** This dumper can dump any buffer (with start address and length),
 	** or any class having a data() and size() member function.
@@ -36,120 +38,104 @@ namespace Utils
 	** 0x00604040: 3031 3233 3435 3637 3839 3a3b 3c3d 3e3f |0123456789:;<=>?|
 	** 0x00604050: 4041 4243 4445 4647 4849 4a4b 4c4d 4e4f |@ABCDEFGHIJKLMNO|
 	** \endcode
-	**
 	*/
 	class Hexdump
 	{
 	public:
 		//! \name Constructor & Destructor
 		//@{
+		/*!
+		** \brief Construct from a simple buffer.
+		** \param[in] buffer A pointer to a raw buffer.
+		** \param[in] size The size to dump.
+		*/
+		Hexdump(const char* buffer, unsigned int size);
 
 		/*!
-		 * \brief Construct from a simple buffer.
-		 * \param[in] buffer A pointer to a raw buffer.
-		 * \param[in] size The size to dump.
-		 */
-		Hexdump(const char* buffer, unsigned int size)
-			: pBuffer(buffer), pSize(size)
-		{ }
+		** \brief Copy ctor.
+		** \param[in] rhs The original Hexdump instance
+		*/
+		Hexdump(const Hexdump& rhs);
 
 		/*!
-		 * \brief Copy ctor.
-		 * \param[in] rhs The original Hexdump instance
-		 */
-		Hexdump(const Hexdump& rhs)
-			: pBuffer(rhs.pBuffer), pSize(rhs.pSize)
-		{ }
-
-
-		/*!
-		 * \brief Construct from a MemoryBuffer (or like) object.
-		 * \param[in] os The stream to output the hexdump on.
-		 * \param[in] mp The Hexdump instance to dump.
-		 */
-		template <typename U>
-		Hexdump(const U& buffer)
-			: pBuffer((const char *)buffer.data()), pSize(buffer.sizeInBytes())
-		{ }
-
+		** \brief Construct from a MemoryBuffer (or like) object.
+		** \param[in] os The stream to output the hexdump on.
+		** \param[in] mp The Hexdump instance to dump.
+		*/
+		template<class U> Hexdump(const U& buffer);
 		//@}
+
 
 		//! \name Dump functions
 		//@{
+		/*!
+		** \brief Dumps the current buffer to a stream.
+		** \param[in,out] outStream The buffer will dumped to this stream.
+		*/
+		template<class U> void dump(U& outStream) const;
 
 		/*!
-		 * \brief Dumps the current buffer to a stream.
-		 * \param[in,out] outStream The buffer will dumped to this stream.
-		 */
-		template <typename U>
-		void dump(U& outStream) const;
-
-		/*!
-		 * \brief Dumps the current buffer to a string.
-		 * \return The dump contents.
-		 */
+		** \brief Dumps the current buffer to a string.
+		** \return The dump contents.
+		*/
 		String dump() const;
-
-		//@}
-
-		//! \name Stream operators
-		//@{
-
 		//@}
 
 		//! \name Operators
 		//@{
-
 		/*!
-		 * \brief Operator =
-		 * \param[in] rhs The source Hexdump instance
-		 */
-		Hexdump& operator=(const Hexdump& rhs);
+		** \brief Operator =
+		** \param[in] rhs The source Hexdump instance
+		*/
+		Hexdump& operator = (const Hexdump& rhs);
+		//@}
 
-		//@}	
 
 	private:
-
 		/*!
 		** \brief Dumps the hexadecimal-version of a sub-buffer into a string
+		**
 		** \param[in] line The string to append to.
 		** \param[in] buffer The start address of the sub-buffer.
-		** \param[in] size The size of the sub-buffer 
+		** \param[in] size The size of the sub-buffer
 		*/
 		void dumpHexadecimal(String& line, const char* buffer, unsigned int size) const;
-		
+
 		/*!
 		** \brief Dumps the printable-version of a sub-buffer into a string
+		**
 		** \param[in] line The string to append to.
 		** \param[in] buffer The start address of the sub-buffer.
-		** \param[in] size The size of the sub-buffer 
+		** \param[in] size The size of the sub-buffer
 		*/
 		void dumpPrintable(String& line, const char* buffer, unsigned int size) const;
 
 	private:
-
 		//! Pointer to the current buffer (not owned by Hexdump)
 		char const* pBuffer;
-
 		//! The current dump size.
 		unsigned int pSize;
-	};
+
+	}; // class HexDump
+
+
+
 
 
 } // namespace Utils
 } // namespace Core
 } // namespace Yuni
 
+
+
 //! Operator overloads for printing
 //@{
-
-	/*!
-	 * \brief std::ostring print operator
-	 * \param[in] outStream The stream to output the hexdump on.
-	 * \param[in] hexDumper The Hexdump instance to dump.
-	 */
-	std::ostream& operator<<(std::ostream& outStream, const Yuni::Core::Utils::Hexdump& hexDumper);
-
+/*!
+** \brief std::ostring print operator
+** \param[in] outStream The stream to output the hexdump on.
+** \param[in] hexDumper The Hexdump instance to dump.
+*/
+std::ostream& operator<< (std::ostream& outStream, const Yuni::Core::Utils::Hexdump& hexDumper);
 //@}
 
 

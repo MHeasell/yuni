@@ -7,26 +7,21 @@ namespace Core
 namespace Utils
 {
 
-	String Hexdump::dump() const
-	{
-		String s;
-		dump(s);
-		return s;
-	}
 
 	void Hexdump::dumpHexadecimal(String& line, const char* buffer, unsigned int size) const
 	{
 		for (unsigned int printed = 0; printed < 0x10; ++printed)
 		{
 			if (printed < size)
-				line.appendFormat("%02x", (unsigned int)(*(unsigned char *)(buffer + printed)));
+				line.appendFormat("%02x", (unsigned int) (*(unsigned char *)(buffer + printed)));
 			else
 				line.append("  ");
-			
+
 			if (0 != printed % 2)
 				line.append(' ');
 		}
 	}
+
 
 	void Hexdump::dumpPrintable(String& line, const char* buffer, unsigned int size) const
 	{
@@ -43,10 +38,10 @@ namespace Utils
 		line.append('|');
 		while (printed++ < 0x10)
 			line.append(' ');
-
 	}
 
-	Hexdump& Hexdump::operator=(const Hexdump& rhs)
+
+	Hexdump& Hexdump::operator = (const Hexdump& rhs)
 	{
 		if (this != &rhs)
 		{
@@ -57,14 +52,12 @@ namespace Utils
 	}
 
 
+
+
 } // namespace Utils
 } // namespace Core
 } // namespace Yuni
 
-std::ostream& operator<<(std::ostream& outStream, const Yuni::Core::Utils::Hexdump& hexDumper)
-{
-	hexDumper.dump(outStream);
-	return outStream;
-}
+
 
 
