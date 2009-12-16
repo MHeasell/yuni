@@ -69,7 +69,7 @@ namespace Utils
 		 */
 		template <typename U>
 		Hexdump(const U& buffer)
-			: pBuffer(buffer.data()), pSize(buffer.size())
+			: pBuffer((const char *)buffer.data()), pSize(buffer.sizeInBytes())
 		{ }
 
 		//@}

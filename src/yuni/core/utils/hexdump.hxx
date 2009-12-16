@@ -25,10 +25,11 @@ namespace Utils
 			// Print the next 16 bytes (or less) in hex.
 			dumpHexadecimal(line, pBuffer + printed, remains > 0x10 ? 0x10 : remains);
 
-			line.append('|');
 			// Print the next 16 bytes (or less) in printable chars.
 			dumpPrintable(line, pBuffer + printed, remains > 0x10 ? 0x10 : remains);
-			line.append("|\n");
+
+			// Add the position in the buffer, padded to 2 bytes.
+			line.appendFormat(" %04.4x-%04.4x\n", printed, printed + 0x0f);
 
 			// Put the line in the stream
 			stream << line;
