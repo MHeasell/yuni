@@ -3,6 +3,7 @@
 
 # include "hexdump.h"
 
+
 namespace Yuni
 {
 namespace Core
@@ -18,7 +19,6 @@ namespace Core
 */
 namespace Utils
 {
-
 
 } // namespace Utils
 } // namespace Core
