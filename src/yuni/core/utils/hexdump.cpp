@@ -30,7 +30,7 @@ namespace Utils
 		line.append('|');
 		for (printed = 0; printed < size; ++printed)
 		{
-			char c = (*(unsigned char *)(buffer + printed));
+			char c = *(buffer + printed);
 			if (c < 0x20 || c > 0x7E) // c is not printable ASCII, replace it by a dot '.'
 				c = '.';
 			line.append(c);
