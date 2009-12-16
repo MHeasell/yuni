@@ -14,14 +14,6 @@ namespace Utils
 		return s;
 	}
 
-	/*
-	std::ostream& operator<<(std::ostream& os, const Hexdump& mp)
-	{
-		mp.dump(os);
-		return os;
-	}
-	*/
-
 	void Hexdump::dumpHexadecimal(String& line, const char* buffer, unsigned int size) const
 	{
 		for (unsigned int printed = 0; printed < 0x10; ++printed)
@@ -38,13 +30,20 @@ namespace Utils
 
 	void Hexdump::dumpPrintable(String& line, const char* buffer, unsigned int size) const
 	{
-		for (unsigned int printed = 0; printed < size; ++printed)
+		unsigned int printed;
+
+		line.append('|');
+		for (printed = 0; printed < size; ++printed)
 		{
 			char c = (*(unsigned char *)(buffer + printed));
 			if (c < 0x20 || c > 0x7E) // c is not printable ASCII, replace it by a dot '.'
 				c = '.';
 			line.append(c);
 		}
+		line.append('|');
+		while (printed++ < 0x10)
+			line.append(' ');
+
 	}
 
 	Hexdump& Hexdump::operator=(const Hexdump& rhs)
