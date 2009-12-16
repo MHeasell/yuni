@@ -429,20 +429,36 @@ namespace Yuni
 		void resize(const Size len);
 
 		/*!
-		** \brief Get the current size of the buffer (in bytes)
+		** \brief Get the current size of the buffer (in number of element C)
 		**
 		** The returned value is less than or equal to the capacity.
 		*/
 		Size size() const;
 
+		/*!
+		** \brief Get the current size of the buffer (in bytes)
+		*/
+		uint64 sizeInBytes() const;
+
+		/*!
+		** \brief Get if the buffer is empty
+		*/
 		bool empty() const;
 
+		/*!
+		** \brief Get if the buffer is not empty
+		*/
 		bool notEmpty() const;
+
+		/*!
+		** \brief Get the current capacity of the buffer (in number of element C)
+		*/
+		Size capacity() const;
 
 		/*!
 		** \brief Get the current capacity of the buffer (in bytes)
 		*/
-		Size capacity() const;
+		uint64 capacityInBytes() const;
 
 		/*!
 		** \brief A pointer to the original buffer (might be NULL)

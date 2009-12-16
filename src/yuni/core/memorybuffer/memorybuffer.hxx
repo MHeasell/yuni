@@ -624,6 +624,14 @@ namespace Yuni
 		return AncestorType::size;
 	}
 
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	inline uint64
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::sizeInBytes() const
+	{
+		return AncestorType::size * sizeof(C);
+	}
+
+
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
 	inline typename MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::Size
@@ -631,6 +639,15 @@ namespace Yuni
 	{
 		return AncestorType::capacity;
 	}
+
+
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	inline uint64
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::capacityInBytes() const
+	{
+		return AncestorType::capacity * sizeof(C);
+	}
+
 
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
