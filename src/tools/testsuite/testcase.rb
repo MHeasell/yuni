@@ -30,7 +30,7 @@ def compile(options)
 	status = 0
 	# Timeout for compiling
 	timeout(t) {
-		status = Open4.popen4(options.make) do |pid, stdin, stdout, stderr|
+		status = POpen4.popen4(options.make) do |stdout, stderr, stdin, pid|
 			while (s = stderr.gets) != nil
 				options.compilation.stderr += s
 			end
@@ -78,7 +78,7 @@ def execute(options)
 	status = 0
 	timeout(options.executable.timeout) {
 		start = Time.now.to_f
-		status = Open4.popen4(options.executable.command) do |pid, stdin, stdout, stderr|
+		status = POpen4.popen4(options.executable.command) do |stdout, stderr, stdin, pid|
 			while (s = stderr.gets) != nil
 				options.executable.stderr += s
 			end

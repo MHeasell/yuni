@@ -1,394 +1,100 @@
-# vim: ts=2:sw=2:sts=2:et:fdm=marker
-# Fron http://www.codeforpeople.com/lib/ruby/open4/open4-0.9.6/lib/open4.rb
-require 'fcntl'
-require 'timeout'
-require 'thread'
+require 'rubygems'
+require 'platform'
+#require_gem 'Platform', '>= 0.4.0'
 
-module Open4
-#--{{{
-  VERSION = '0.9.6'
-  def self.version() VERSION end
-
-  class Error < ::StandardError; end
-
-  def popen4(*cmd, &b)
-#--{{{
-    pw, pr, pe, ps = IO.pipe, IO.pipe, IO.pipe, IO.pipe
-
-    verbose = $VERBOSE
-    begin
-      $VERBOSE = nil
-      ps.last.fcntl(Fcntl::F_SETFD, Fcntl::FD_CLOEXEC)
-
-      cid = fork {
-        pw.last.close
-        STDIN.reopen pw.first
-        pw.first.close
-
-        pr.first.close
-        STDOUT.reopen pr.last
-        pr.last.close
-
-        pe.first.close
-        STDERR.reopen pe.last
-        pe.last.close
-
-        STDOUT.sync = STDERR.sync = true
-
-        begin
-          exec(*cmd)
-          raise 'forty-two' 
-        rescue Exception => e
-          Marshal.dump(e, ps.last)
-          ps.last.flush
-        end
-        ps.last.close unless (ps.last.closed?)
-        exit!
-      }
-    ensure
-      $VERBOSE = verbose
-    end
-
-    [pw.first, pr.last, pe.last, ps.last].each{|fd| fd.close}
-
-    begin
-      e = Marshal.load ps.first
-      raise(Exception === e ? e : "unknown failure!")
-    rescue EOFError # If we get an EOF error, then the exec was successful
-      42
-    ensure
-      ps.first.close
-    end
-
-    pw.last.sync = true
-
-    pi = [pw.last, pr.first, pe.first]
-
-    if b 
+case Platform::OS
+  
+# win32/popen4 yields stdin, stdout, stderr and pid, respectively
+when :win32
+  
+  require File.join( File.dirname( __FILE__ ), 'open3')    
+  
+  # POpen4 provides the Rubyist a single API across platforms for executing a 
+  # command in a child process with handles on stdout, stderr, and stdin streams 
+  # as well as access to the process ID and exit status.
+  #
+  # Consider the following example (borrowed from Open4):
+  # 
+  #   require 'rubygems'
+  #   require 'popen4'
+  #   
+  #   status =
+  #     POpen4::popen4("cmd") do |stdout, stderr, stdin, pid|
+  #       stdin.puts "echo hello world!"
+  #       stdin.puts "echo ERROR! 1>&2"
+  #       stdin.puts "exit"
+  #       stdin.close
+  #   
+  #       puts "pid        : #{ pid }"
+  #       puts "stdout     : #{ stdout.read.strip }"
+  #       puts "stderr     : #{ stderr.read.strip }"
+  #     end
+  #   
+  #   puts "status     : #{ status.inspect }"
+  #   puts "exitstatus : #{ status.exitstatus }"
+  #
+  module POpen4    
+    # Starts a new process and hands IO objects representing the subprocess 
+    # stdout, stderr, stdin streams and the pid (respectively) to the block 
+    # supplied. If the command could not be started, return nil.
+    # 
+    # The mode argument may be set to t[ext] or b[inary] and is used only on
+    # Windows platforms.
+    # 
+    # The stdin stream and/or pid may be omitted from the block parameter list
+    # if they are not required.
+    def self.popen4(command, mode = "t") # :yields: stdout, stderr, stdin, pid
+      
+      err_output = nil      
+      status = Open4.popen4(command, mode) do |stdin,stdout,stderr,pid|
+        yield stdout, stderr, stdin, pid
+        
+        # On windows we will always get an exit status of 3 unless
+        # we read to the end of the streams so we do this on all platforms
+        # so that our behavior is always the same.
+        stdout.read unless stdout.eof?
+        
+        # On windows executing a non existent command does not raise an error
+        # (as in unix) so on unix we return nil instead of a status object and
+        # on windows we try to determine if we couldn't start the command and
+        # return nil instead of the Process::Status object.
+        stderr.rewind
+        err_output = stderr.read
+      end
+      
+      if status.exitstatus == 1 && 
+        err_output.match(/is not recognized as an internal or external command/)
+        return nil
+      end
+      
+      return status
+    end # def
+  end # module
+  
+  
+else # unix popen4 yields pid, stdin, stdout and stderr, respectively
+  # :enddoc:
+  require 'open4'
+  module POpen4
+    def self.popen4(command, mode = "t")
       begin
-        b[cid, *pi]
-        Process.waitpid2(cid).last
-      ensure
-        pi.each{|fd| fd.close unless fd.closed?}
-      end
-    else
-      [cid, pw.last, pr.first, pe.first]
-    end
-#--}}}
-  end
-  alias open4 popen4
-  module_function :popen4
-  module_function :open4
-
-  class SpawnError < Error
-#--{{{
-    attr 'cmd'
-    attr 'status'
-    attr 'signals'
-    def exitstatus
-      @status.exitstatus
-    end
-    def initialize cmd, status
-      @cmd, @status = cmd, status
-      @signals = {} 
-      if status.signaled?
-        @signals['termsig'] = status.termsig
-        @signals['stopsig'] = status.stopsig
-      end
-      sigs = @signals.map{|k,v| "#{ k }:#{ v.inspect }"}.join(' ')
-      super "cmd <#{ cmd }> failed with status <#{ exitstatus.inspect }> signals <#{ sigs }>"
-    end
-#--}}}
-  end
-
-  class ThreadEnsemble
-#--{{{
-    attr 'threads'
-
-    def initialize cid
-      @cid, @threads, @argv, @done, @running = cid, [], [], Queue.new, false
-      @killed = false
-    end
-
-    def add_thread *a, &b
-      @running ? raise : (@argv << [a, b])
-    end
-
-#
-# take down process more nicely
-#
-    def killall
-      c = Thread.critical
-      return nil if @killed
-      Thread.critical = true
-      (@threads - [Thread.current]).each{|t| t.kill rescue nil}
-      @killed = true
-    ensure
-      Thread.critical = c
-    end
-
-    def run
-      @running = true
-
-      begin
-        @argv.each do |a, b|
-          @threads << Thread.new(*a) do |*a|
-            begin
-              b[*a]
-            ensure
-              killall rescue nil if $!
-              @done.push Thread.current
-            end
-          end
+        return status = Open4.popen4(command) do |pid,stdin,stdout,stderr|
+          yield stdout, stderr, stdin, pid
+          # On windows we will always get an exit status of 3 unless
+          # we read to the end of the streams so we do this on all platforms
+          # so that our behavior is always the same.
+          stdout.read unless stdout.eof?
+          stderr.read unless stderr.eof?
         end
-      rescue
-        killall
-        raise
-      ensure
-        all_done
+      rescue Errno::ENOENT => e
+        # On windows executing a non existent command does not raise an error
+        # (as in unix) so on unix we return nil instead of a status object and
+        # on windows we try to determine if we couldn't start the command and
+        # return nil instead of the Process::Status object.
+        return nil
       end
+    end #def    
+  end #module
+  
+end 
 
-      @threads.map{|t| t.value}
-    end
-
-    def all_done
-      @threads.size.times{ @done.pop }
-    end
-#--}}}
-  end
-
-  def to timeout = nil
-#--{{{
-    Timeout.timeout(timeout){ yield }
-#--}}}
-  end
-  module_function :to
-
-  def new_thread *a, &b
-#--{{{
-    cur = Thread.current
-    Thread.new(*a) do |*a|
-      begin
-        b[*a]
-      rescue Exception => e
-        cur.raise e
-      end
-    end
-#--}}}
-  end
-  module_function :new_thread
-
-  def getopts opts = {}
-#--{{{
-    lambda do |*args|
-      keys, default, ignored = args
-      catch('opt') do
-        [keys].flatten.each do |key|
-          [key, key.to_s, key.to_s.intern].each do |key|
-            throw 'opt', opts[key] if opts.has_key?(key)
-          end
-        end
-        default
-      end
-    end
-#--}}}
-  end
-  module_function :getopts
-
-  def relay src, dst = nil, t = nil
-#--{{{
-    unless src.nil?
-      if src.respond_to? :gets
-        while buf = to(t){ src.gets }
-          dst << buf if dst
-        end
-
-      elsif src.respond_to? :each
-        q = Queue.new
-        th = nil
-
-        timer_set = lambda do |t|
-          th = new_thread{ to(t){ q.pop } }
-        end
-
-        timer_cancel = lambda do |t|
-          th.kill if th rescue nil
-        end
-
-        timer_set[t]
-        begin
-          src.each do |buf|
-            timer_cancel[t]
-            dst << buf if dst
-            timer_set[t]
-          end
-        ensure
-          timer_cancel[t]
-        end
-
-      elsif src.respond_to? :read
-        buf = to(t){ src.read }
-        dst << buf if dst 
-
-      else
-        buf = to(t){ src.to_s }
-        dst << buf if dst 
-      end
-    end
-#--}}}
-  end
-  module_function :relay
-
-  def spawn arg, *argv 
-#--{{{
-    argv.unshift(arg)
-    opts = ((argv.size > 1 and Hash === argv.last) ? argv.pop : {})
-    argv.flatten!
-    cmd = argv.join(' ')
-
-
-    getopt = getopts opts
-
-    ignore_exit_failure = getopt[ 'ignore_exit_failure', getopt['quiet', false] ]
-    ignore_exec_failure = getopt[ 'ignore_exec_failure', !getopt['raise', true] ]
-    exitstatus = getopt[ %w( exitstatus exit_status status ) ]
-    stdin = getopt[ %w( stdin in i 0 ) << 0 ]
-    stdout = getopt[ %w( stdout out o 1 ) << 1 ]
-    stderr = getopt[ %w( stderr err e 2 ) << 2 ]
-    pid = getopt[ 'pid' ]
-    timeout = getopt[ %w( timeout spawn_timeout ) ]
-    stdin_timeout = getopt[ %w( stdin_timeout ) ]
-    stdout_timeout = getopt[ %w( stdout_timeout io_timeout ) ]
-    stderr_timeout = getopt[ %w( stderr_timeout ) ]
-    status = getopt[ %w( status ) ]
-    cwd = getopt[ %w( cwd dir ) ]
-
-    exitstatus =
-      case exitstatus
-        when TrueClass, FalseClass
-          ignore_exit_failure = true if exitstatus
-          [0]
-        else
-          [*(exitstatus || 0)].map{|i| Integer i}
-      end
-
-    stdin ||= '' if stdin_timeout
-    stdout ||= '' if stdout_timeout
-    stderr ||= '' if stderr_timeout
-
-    started = false
-
-    status =
-      begin
-        chdir(cwd) do
-          Timeout::timeout(timeout) do
-            popen4(*argv) do |c, i, o, e|
-              started = true
-
-              %w( replace pid= << push update ).each do |msg|
-                break(pid.send(msg, c)) if pid.respond_to? msg 
-              end
-
-              te = ThreadEnsemble.new c
-
-              te.add_thread(i, stdin) do |i, stdin|
-                relay stdin, i, stdin_timeout
-                i.close rescue nil
-              end
-
-              te.add_thread(o, stdout) do |o, stdout|
-                relay o, stdout, stdout_timeout
-              end
-
-              te.add_thread(e, stderr) do |o, stderr|
-                relay e, stderr, stderr_timeout
-              end
-
-              te.run
-            end
-          end
-        end
-      rescue
-        raise unless(not started and ignore_exec_failure)
-      end
-
-    raise SpawnError.new(cmd, status) unless
-      (ignore_exit_failure or (status.nil? and ignore_exec_failure) or exitstatus.include?(status.exitstatus))
-
-    status
-#--}}}
-  end
-  module_function :spawn
-
-  def chdir cwd, &block
-    return(block.call Dir.pwd) unless cwd
-    Dir.chdir cwd, &block
-  end
-  module_function :chdir
-
-  def background arg, *argv 
-#--{{{
-    require 'thread'
-    q = Queue.new
-    opts = { 'pid' => q, :pid => q }
-    case argv.last
-      when Hash
-        argv.last.update opts
-      else
-        argv.push opts
-    end
-    thread = Thread.new(arg, argv){|arg, argv| spawn arg, *argv}
-    sc = class << thread; self; end
-    sc.module_eval {
-      define_method(:pid){ @pid ||= q.pop }
-      define_method(:spawn_status){ @spawn_status ||= value }
-      define_method(:exitstatus){ @exitstatus ||= spawn_status.exitstatus }
-    }
-    thread
-#--}}}
-  end
-  alias bg background
-  module_function :background
-  module_function :bg
-
-  def maim pid, opts = {}
-#--{{{
-    getopt = getopts opts
-    sigs = getopt[ 'signals', %w(SIGTERM SIGQUIT SIGKILL) ]
-    suspend = getopt[ 'suspend', 4 ]
-    pid = Integer pid
-    existed = false
-    sigs.each do |sig|
-      begin
-        Process.kill sig, pid
-        existed = true 
-      rescue Errno::ESRCH
-        return(existed ? nil : true)
-      end
-      return true unless alive? pid
-      sleep suspend
-      return true unless alive? pid
-    end
-    return(not alive?(pid)) 
-#--}}}
-  end
-  module_function :maim
-
-  def alive pid
-#--{{{
-    pid = Integer pid
-    begin
-      Process.kill 0, pid
-      true
-    rescue Errno::ESRCH
-      false
-    end
-#--}}}
-  end
-  alias alive? alive
-  module_function :alive
-  module_function :'alive?'
-#--}}}
-end
-
-def open4(*cmd, &b) cmd.size == 0 ? Open4 : Open4::popen4(*cmd, &b) end
