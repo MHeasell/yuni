@@ -7,7 +7,7 @@ case Platform::OS
 # win32/popen4 yields stdin, stdout, stderr and pid, respectively
 when :win32
   
-  require File.join( File.dirname( __FILE__ ), 'open3')    
+  require 'win32/open3'    
   
   # POpen4 provides the Rubyist a single API across platforms for executing a 
   # command in a child process with handles on stdout, stderr, and stdin streams 
@@ -62,10 +62,10 @@ when :win32
         err_output = stderr.read
       end
       
-      if status.exitstatus == 1 && 
-        err_output.match(/is not recognized as an internal or external command/)
-        return nil
-      end
+      #if status.exitstatus == 1 && 
+      #  err_output.match(/is not recognized as an internal or external command/)
+      #  return nil
+      #end
       
       return status
     end # def
