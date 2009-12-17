@@ -2,7 +2,7 @@
 GENERAL
 -------
 
-* Do not use Java coding style
+* Do not use Java-like braces
   GOOD :
   if ()
   {
@@ -15,9 +15,10 @@ GENERAL
 
 * Use UTF-8 in all files
 
-* Use tabs instead of whitespaces (we commonly use 4 whitespace for 1 tab)
+* Use tabs instead of whitespaces (we usually set our editors to 4
+  whitespaces for 1 tab, but the choice is up to you)
 
-* Do not use semicolon for namespaces, nor switch statements
+* Do not end your namespaces or switch statements with a semicolon
 
 * Extensions for files :
     header                      .h
@@ -79,6 +80,7 @@ NAMING CONVENTION
   BAD :
   int       pTest;
   int PTest;
+  int m_test;
 
 * Always prefer a variable name that describes what the variable is used for
   GOOD
@@ -86,19 +88,28 @@ NAMING CONVENTION
   BAD
   if (a < 24 && b < 60 && c < 60)
 
+* Following the same reasoning, template parameters naming should indicate the
+  kind of types expected: (assuming: `Yuni::String pName;`)
+  GOOD:
+  template<class AnyStringT> void name(const AnyStringT& name) { pName = name; }
+  BAD:
+  template<class T> void name(const T& name) { pName = name; }
+  void name(const char* name) { pName = name; }
+
 * Macros and defines are all in uppercase
   All Macros that define an exported header of yuni must have the prefix YUNI_
 
-* The symbol to indicate a pointer or a reference must be sticked to the
-  type because it is part of it
+* The symbol to indicate a pointer or a reference must be attached to the
+  type because it is a part of it:
   GOOD
   void foo(const String& s);
   BAD
   void foo(const String & s);
+  void foo(const String &s);
 
 * In any thread-safe class, the methods providing thread-unsafe access
-  to the instance (usually methods that are equivalent to thread-safe methods not using
-  locks on purpose) must be suffixed with "WL".
+  to the instance (usually methods that are equivalent to thread-safe methods
+  not using locks on purpose) must be suffixed with "WL".
 
 
 COMMENTS
@@ -156,26 +167,26 @@ BEST PRACTICES
     if (i == 42)
 
 * Don't put an else right after a return.
-  Delete the else, it's unnecessary and increases indent level.
+  Delete the else clause, it's unnecessary and increases indent level.
   BAD :
   if (...)
      return;
   else
      return;
 
-* Avoid as much as possible pointers. Prefer references. A Pointer indicates
-  that we shall expect to get a NULL value and in this case the NULL value
-  has a meaning and must be checked.
+* Avoid using pointers. Prefer references. You might need the variable to
+  be assigned a NULL value: in this case the NULL value has semantics and must
+  be checked. Wherever possible, use a SmartPtr instead of old-school pointers.
 
-* Avoid as much as possible const char* or char*. Use Yuni::String instead
-  for strings.
+* Avoid using const char* or char*. Use Yuni::String instead.
 
-* Avoid as much as possible all constructors by copy
+* Header file guards are necessary for all headers and their name should
+  follow the directory structure: e.g. __YUNI_CORE_ATOMIC_INT_H__
 
-* Header file guards : their name should follow the directory structure
+* Avoid using copy constructors.
 
-* If your class is copyable, define both a copy constructor and an assignment
-  operator
+* If your class has copy semantics, define both a copy constructor and an
+  assignment operator.
 
 * Be Const Correct : Use and abuse the const keyword from the start. It is a
   nightmare to add it in later.
@@ -184,9 +195,9 @@ BEST PRACTICES
 
 * Prefer inlines to macros. In C++ macros are not needed for code efficiency
 
-* The system headers should be included before any other include
+* The system headers should be included before any other include,
 
-* Avoid as much as possible Copy constructor for Return Values. Use reference instead.
+* Avoid as much as possible Return By Value. Use Return By Reference instead.
 
 * Compile time is without incidence. Increasing compile time to reduce execution time (e.g. with templates) is encouraged.
 
