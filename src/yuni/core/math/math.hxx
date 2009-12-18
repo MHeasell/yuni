@@ -31,7 +31,7 @@ namespace Math
 {
 
 
-	template<typename U, typename V>
+	template<class U, class V>
 	inline U Max(U a, V b)
 	{
 		return (a < b) ? b : a;
@@ -45,7 +45,7 @@ namespace Math
 	}
 
 
-	template<typename U, typename V>
+	template<class U, class V>
 	inline U Min(U a, V b)
 	{
 		return (a < b) ? a : b;
@@ -88,7 +88,7 @@ namespace Math
 	template<int N> struct SquareRootInt<N,N> { enum { value = N }; };
 
 
-	template <typename U> inline bool Equals(U a, U b)
+	template <class U> inline bool Equals(U a, U b)
 	{
 		return (a == b);
 	}
@@ -112,7 +112,7 @@ namespace Math
 	# endif
 
 
-	template <typename U> inline bool Zero(U a)
+	template <class U> inline bool Zero(U a)
 	{
 		return (0 == a);
 	}
@@ -135,7 +135,7 @@ namespace Math
 	# endif
 
 
-	template<typename U>
+	template<class U>
 	inline U SquareRoot(const U x)
 	{
 		return (U)::sqrt((double)x);
