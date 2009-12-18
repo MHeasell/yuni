@@ -296,6 +296,10 @@ namespace Yuni
 		void swap(SmartPtr& rhs);
 		//@}
 
+		//! Get a pointer to the object, like operator -> would do
+		PointerType pointer();
+		//! Get a pointer to the object, like operator -> would do
+		ConstPointerType pointer() const;
 
 		//! \name Operator * / ->
 		//@{
