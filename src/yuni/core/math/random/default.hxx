@@ -11,9 +11,22 @@ namespace Random
 
 
 
+	inline void Default::reset()
+	{
+		srand((unsigned int)time(NULL));
+		rand();
+	}
+
+	inline void Default::reset(const unsigned int seed)
+	{
+		srand(seed);
+		rand();
+	}
+
+
 	inline Default::Value Default::next()
 	{
-		return ::rand();
+		return rand();
 	}
 
 	inline Default::Value Default::min()
