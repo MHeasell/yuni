@@ -72,14 +72,14 @@ namespace Math
 	**
 	** \ingroup Math
 	*/
-	template<typename U> bool Equals(U a, U b);
+	template<class U> bool Equals(U a, U b);
 
 	/*!
 	** \brief Get if a value is equals to zero
 	**
 	** \ingroup Math
 	*/
-	template<typename U> bool Zero(U a);
+	template<class U> bool Zero(U a);
 
 
 	/*!
@@ -97,7 +97,7 @@ namespace Math
 	** \param b The second expression
 	** \return The expression considered as the grater
 	*/
-	template<typename U, typename V> inline U Max(U a, V b);
+	template<class U, class V> inline U Max(U a, V b);
 
 	/*!
 	** \brief Maximum of three values
@@ -118,7 +118,7 @@ namespace Math
 	** \param b The second expression
 	** \return The expression considered as the smaller
 	*/
-	template<typename U, typename V> inline U Min(U a, V b);
+	template<class U, class V> inline U Min(U a, V b);
 
 	/*!
 	** \brief Minimum of three values
@@ -215,7 +215,7 @@ namespace Math
 	**
 	** \ingroup Math
 	*/
-	template<typename U> U SquareRoot(const U x);
+	template<class U> U SquareRoot(const U x);
 
 
 	/*!
