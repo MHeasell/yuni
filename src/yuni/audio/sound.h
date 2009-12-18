@@ -1,6 +1,7 @@
 #ifndef __YUNI_AUDIO_SOUND_H__
 # define __YUNI_AUDIO_SOUND_H__
 
+# include <vector>
 # include "../yuni.h"
 # include "openal.h"
 # include "av.h"
@@ -21,6 +22,8 @@ namespace Audio
 	public:
 		//! The most suitable smart pointer for the class
 		typedef SmartPtr<ASound> Ptr;
+		//! Vector of sounds
+		typedef std::vector<ASound> Vector;
 		//! The Threading Policy
 		typedef Policy::ObjectLevelLockable<ASound> ThreadingPolicy;
 
