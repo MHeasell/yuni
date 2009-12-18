@@ -119,8 +119,8 @@ LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../../packages/cmake")
 
 
 
-set_property(GLOBAL PROPERTY YuniTestCaseList) 
-set_property(GLOBAL PROPERTY YuniTestCaseListCount) 
+set_property(GLOBAL PROPERTY YuniTestCaseList)
+set_property(GLOBAL PROPERTY YuniTestCaseListCount)
 include_directories("${PROJECT_SOURCE_DIR}/..")
 
 
@@ -133,6 +133,7 @@ IF(LibYuni_FOUND)
 	# Adding Testcases
 	#
 	Add_SubDirectory(automated)
+	Add_SubDirectory(interactive)
 ENDIF(LibYuni_FOUND)
 
 

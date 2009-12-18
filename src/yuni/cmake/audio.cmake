@@ -24,6 +24,7 @@ Set(SRC_AUDIO
 		audio/sound3D.cpp
 		audio/music.h
 		audio/music.cpp
+		audio/playlist.h
 		audio/source.h
 		audio/source.cpp
 		audio/openal.h
