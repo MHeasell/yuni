@@ -1,4 +1,4 @@
-require 'rubygems'
+#require 'rubygems'
 require 'platform'
 #require_gem 'Platform', '>= 0.4.0'
 
