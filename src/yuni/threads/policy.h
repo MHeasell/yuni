@@ -123,6 +123,61 @@ namespace Policy
 	}; // class ObjectLevelLockable
 
 
+	/*!
+	** \brief Implementation of the Threading Model policy in a multi-threaded environnement (one mutex per object, not recursive)
+	** \ingroup Policies
+	*/
+	template<class Host>
+	class ObjectLevelLockableNotRecursive
+	{
+	public:
+		/*!
+		** \brief Locks a mutex in the constructor and unlocks it in the destructor.
+		*/
+		class MutexLocker
+		{
+		public:
+			template<class C> MutexLocker(const C& h)
+				:pHostToLock(static_cast<const Host&>(h))
+			{
+				pHostToLock.pMutex.lock();
+			}
+
+			~MutexLocker()
+			{
+				pHostToLock.pMutex.unlock();
+			}
+
+		private:
+			const Host& pHostToLock;
+		}; // class MutexLocker
+
+		/*!
+		** \brief A volative type
+		*/
+		template<typename U> struct Volatile { typedef volatile U Type; };
+
+		//! Get if this policy is thread-safe
+		enum { threadSafe = true };
+
+	public:
+		//! \name Constructor & Destructor
+		//@{
+		//! Default constructor
+		ObjectLevelLockableNotRecursive() :pMutex(false) {}
+		//! Copy constructor
+		ObjectLevelLockableNotRecursive(const ObjectLevelLockableNotRecursive&) :pMutex(false) {}
+		//! Destructor
+		~ObjectLevelLockableNotRecursive() {}
+		//@}
+
+	protected:
+		//! Mutex
+		mutable Mutex pMutex;
+
+	}; // class ObjectLevelLockableNotRecursive
+
+
 
 
 	/*!
