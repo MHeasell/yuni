@@ -21,7 +21,7 @@ namespace Atomic
 	** without the use of a mutex).
 	**
 	** \tparam Size Size (in bits) of the scalar type (16 or 32 or 64)
-	** \tparam TP A threading policy to guarantee thread-safety or not 
+	** \tparam TP A threading policy to guarantee thread-safety or not
 	*/
 	template<
 		int Size = 8 * sizeof(int), /* 32 or 64Bits */          // Size in Bits of the scalar type
