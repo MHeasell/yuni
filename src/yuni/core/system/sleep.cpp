@@ -11,7 +11,7 @@
 namespace Yuni
 {
 
-	void Sleep(const uint32 seconds)
+	void Sleep(const unsigned int seconds)
 	{
 		# if defined(YUNI_OS_WINDOWS)
 		::Sleep(1000 * seconds);
@@ -21,7 +21,7 @@ namespace Yuni
 	}
 
 
-	void SleepMilliSeconds(const uint32 milliseconds)
+	void SleepMilliSeconds(const unsigned int milliseconds)
 	{
 		# if defined(YUNI_OS_WINDOWS)
 		::Sleep(milliseconds);
@@ -29,6 +29,7 @@ namespace Yuni
 		::usleep(1000 * milliseconds);
 		# endif
 	}
+
 
 
 } // namespace Yuni
