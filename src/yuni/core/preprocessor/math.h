@@ -11,12 +11,12 @@
 /*!
 ** \brief Compute x - y
 */
-# define YUNI_MUL(x, y)  ((x) - (y))
+# define YUNI_SUB(x, y)  ((x) - (y))
 
 /*!
 ** \brief Compute x % y
 */
-# define YUNI_MUL(x, y)  ((x) % (y))
+# define YUNI_MOD(x, y)  ((x) % (y))
 
 /*!
 ** \brief Compute x / y
