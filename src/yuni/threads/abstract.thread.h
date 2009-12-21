@@ -126,7 +126,7 @@ namespace Private
 		Error start();
 
 		/*!
-		** \brief Stop the exeuction of the thread and wait for it, if not already stopped
+		** \brief Stop the execution of the thread and wait for it, if not already stopped
 		**
 		** \param timeout The timeout in milliseconds before killing the thread (default: 5000ms)
 		** \return An error status (`errNone` if succeeded)
