@@ -315,6 +315,7 @@ Set(SRC_CORE_SYSTEM
 				core/sleep.h
 				core/fwd.h
 				core/system/cpu.h core/system/cpu.cpp
+				core/system/memory.h core/system/memory.hxx core/system/memory.cpp
 				core/system/environment.h core/system/environment.hxx
 				core/system/endian.h)
 source_group(Core\\System FILES ${SRC_CORE_SYSTEM})
