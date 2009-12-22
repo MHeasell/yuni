@@ -13,6 +13,7 @@
 #endif
 
 #ifdef YUNI_OS_LINUX
+# include <string.h>
 # include <sys/sysinfo.h> // sysinfo (2)
 #endif
 
@@ -93,7 +94,7 @@ namespace Memory
 		int i = 0;
 		char c;
 
-		while ((c = fgetc(fp)) != EOF)
+		while ((c = (char)fgetc(fp)) != EOF)
 		{
 			if (c == '\n')
 			{
