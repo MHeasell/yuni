@@ -45,7 +45,8 @@ namespace Memory
 		// see http://msdn.microsoft.com/en-us/library/aa366589(VS.85).aspx
 		MEMORYSTATUSEX statex;
 		statex.dwLength = sizeof(statex);
-		return (GlobalMemoryStatusEx(&statex)) ? statex.ullTotalPhys : defaultTotal;
+		return (GlobalMemoryStatusEx(&statex)) ? (size_t)statex.ullTotalPhys
+			: (size_t)defaultTotal;
 	}
 
 	size_t Available()
@@ -53,7 +54,8 @@ namespace Memory
 		// see http://msdn.microsoft.com/en-us/library/aa366589(VS.85).aspx
 		MEMORYSTATUSEX statex;
 		statex.dwLength = sizeof(statex);
-		return (GlobalMemoryStatusEx(&statex)) ? statex.ullAvailPhys : defaultAvailable;
+		return (GlobalMemoryStatusEx(&statex)) ? (size_t)statex.ullAvailPhys
+			: (size_t)defaultAvailable;
 	}
 
 	bool Usage::update()
@@ -64,12 +66,12 @@ namespace Memory
 
 		if (GlobalMemoryStatusEx(&statex))
 		{
-			total     = statex.ullTotalPhys;
-			available = statex.ullAvailPhys;
+			total = (size_t)statex.ullTotalPhys;
+			available = (size_t)statex.ullAvailPhys;
 			return true;
 		}
 		available = defaultAvailable;
-		total     = defaultTotal;
+		total = defaultTotal;
 		return false;
 	}
 
