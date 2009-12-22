@@ -1,11 +1,12 @@
 #ifndef __YUNI_POLICIES_THREADS_H__
 # define __YUNI_POLICIES_THREADS_H__
+
 /*!
 ** \file
 ** \brief Threading policies
 */
 
-
+# include "../yuni.h"
 # ifdef YUNI_OS_WINDOWS
 #	include "../core/system/windows.hdr.h"
 # endif
@@ -68,6 +69,7 @@ namespace Policy
 
 
 
+
 	/*!
 	** \brief Implementation of the Threading Model policy in a multi-threaded environnement (one mutex per object)
 	** \ingroup Policies
@@ -121,6 +123,7 @@ namespace Policy
 		mutable Mutex pMutex;
 
 	}; // class ObjectLevelLockable
+
 
 
 	/*!

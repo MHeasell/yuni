@@ -4,7 +4,7 @@
 # include "../../yuni.h"
 # include <map>
 # include <assert.h>
-# include "../../threads/policy.h"
+# include "../../thread/policy.h"
 
 
 namespace Yuni

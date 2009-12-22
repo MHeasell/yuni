@@ -1,5 +1,5 @@
 #include <yuni/yuni.h>
-#include <yuni/threads.h>
+#include <yuni/thread/thread.h>
 #include <iostream>
 #include <yuni/core/system/sleep.h>
 
@@ -83,7 +83,9 @@ protected:
 private:
 	//! The class can hold the variables of your choice.
 	int x;
-};
+
+}; // class BottleTask
+
 
 
 

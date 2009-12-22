@@ -2,7 +2,7 @@
 # define __YUNI_CORE_BIND_BIND_H__
 
 # include "../../yuni.h"
-# include "../../threads/policy.h"
+# include "../../thread/policy.h"
 # include "../static/types.h"
 # include "../static/assert.h"
 # include "../static/remove.h"

@@ -14,8 +14,9 @@
 
 namespace Yuni
 {
-namespace Threads
+namespace Thread
 {
+
 
 	Condition::Condition()
 		:pSignalled(false), pOwnMutex(true)
@@ -46,10 +47,10 @@ namespace Threads
 	void Condition::waitUnlocked()
 	{
 		// The pthread_cond_wait will unlock the mutex and wait for
-		// signalling. 
+		// signalling.
 
 		int pthread_cond_wait_error;
-		do 
+		do
 		{
 			// Spurious wakeups from this function can occur.
 			// Therefore we must check out pSignalled variable to ensure we have
@@ -78,12 +79,13 @@ namespace Threads
 			// Avoid spurious wakeups (see waitUnlocked() above for explanations)
 			pthread_cond_timedwait_error = ::pthread_cond_timedwait(&pCondition, &pMutex->pthreadMutex(), &t);
 		} while (pSignalled != true // Condition not verified
-				 && pthread_cond_timedwait_error != ETIMEDOUT // We have not timedout
-				 && pthread_cond_timedwait_error != EINVAL); // When t is in the past, we got EINVAL. We consider this as a timeout.
+			&& pthread_cond_timedwait_error != ETIMEDOUT // We have not timedout
+			&& pthread_cond_timedwait_error != EINVAL); // When t is in the past, we got EINVAL. We consider this as a timeout.
 
 		// The condition was signalled or has timeoutted:
 		return (pSignalled == false);
 	}
+
 
 	void Condition::notifyLocked()
 	{
@@ -93,6 +95,7 @@ namespace Threads
 		pMutex->unlock();
 	}
 
+
 	void Condition::notifyAllLocked()
 	{
 		pMutex->lock();
@@ -101,7 +104,10 @@ namespace Threads
 		pMutex->unlock();
 	}
 
-} // namespace Threads
+
+
+
+} // namespace Thread
 } // namespace Yuni
 
 

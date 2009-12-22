@@ -15,7 +15,7 @@
 */
 
 
-# include "../../../threads/policy.h"
+# include "../../../thread/policy.h"
 # include "../../static/assert.h"
 # include "../../atomic/int.h"
 

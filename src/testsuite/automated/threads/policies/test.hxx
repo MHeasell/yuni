@@ -1,6 +1,6 @@
 
 #include <yuni/yuni.h>
-#include <yuni/threads/policy.h>
+#include <yuni/thread/policy.h>
 #include <iostream>
 
 

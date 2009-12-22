@@ -408,20 +408,24 @@ source_group(Core\\System\\Windows FILES ${SRC_CORE_SYSTEM_WINDOWS})
 
 # Threads
 Set(SRC_THREADS
-				threads/policy.h
-				threads/mutex.h threads/mutex.hxx
-				threads/abstract.thread.hxx
-				threads/abstract.thread.h threads/abstract.thread.cpp
-				threads/thread.h threads/thread.cpp
-				threads/timer.h threads/timer.cpp
-				threads/condition.h threads/condition.cpp threads/condition.hxx
+				thread/policy.h
+				thread/pthread.h
+				thread/mutex.h  thread/mutex.hxx
+				thread/thread.h thread/thread.hxx thread/thread.cpp
+				thread/timer.h  thread/timer.hxx  thread/timer.cpp
+				thread/condition.h thread/condition.cpp thread/condition.hxx
 				)
 source_group(Threads FILES ${SRC_THREADS})
 
 # Jobs
 Set(SRC_JOBS
-				jobs.h
-				jobs/job.h jobs/job.cpp)
+				job/job.h job/job.hxx job/job.cpp
+				job/queue.h
+				job/waitingroom.h job/waitingroom.cpp
+				
+				# Scheduler
+				job/scheduler/highestpriorityfirst.h
+				)
 source_group(Jobs FILES ${SRC_JOBS})
 
 

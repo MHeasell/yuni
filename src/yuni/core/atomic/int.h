@@ -2,7 +2,7 @@
 # define __YUNI_CORE_ATOMIC_INT_H__
 
 # include "../../yuni.h"
-# include "../../threads/policy.h"
+# include "../../thread/policy.h"
 # include "../system/windows.hdr.h"
 # include "traits.h"
 

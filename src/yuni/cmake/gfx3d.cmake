@@ -37,7 +37,6 @@ Set(SRC_GFX3D
 
 		# Renderer
 		gfx/render/renderer.h gfx/render/renderer.cpp
-		gfx/render/fpscounter.h
 		gfx/render/opengl.h gfx/render/opengl.cpp
 
 		# Font
