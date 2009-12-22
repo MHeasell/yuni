@@ -2,7 +2,7 @@
 # define __YUNI_CORE_MATH_RANDOM_TABLE_H__
 
 # include "../math.h"
-# include "../../../threads/policy.h"
+# include "../../../thread/policy.h"
 
 
 namespace Yuni

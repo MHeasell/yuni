@@ -5,6 +5,21 @@
 namespace Yuni
 {
 
+	inline Mutex::Mutex()
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		::pthread_mutexattr_t mutexattr;
+		::pthread_mutexattr_init(&mutexattr);
+		# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU)
+		::pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE);
+		# else
+		::pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE_NP);
+		# endif
+		::pthread_mutex_init(&pPthreadLock, &mutexattr);
+		::pthread_mutexattr_destroy(&mutexattr);
+		# endif
+	}
+
 
 	inline Mutex::Mutex(const bool recursive)
 	{

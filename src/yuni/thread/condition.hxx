@@ -2,11 +2,11 @@
 # define __YUNI_THREADS_CONDITION_HXX__
 
 
-
 namespace Yuni
 {
-namespace Threads
+namespace Thread
 {
+
 
 	// Condition
 	inline Mutex& Condition::mutex() const
@@ -48,8 +48,10 @@ namespace Threads
 		pCondition.unlock();
 	}
 
+
+
+
 } // namespace Threads
 } // namespace Yuni
-
 
 #endif // __YUNI_THREADS_CONDITION_HXX__

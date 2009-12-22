@@ -4,7 +4,6 @@
 # include "../../yuni.h"
 # include "../../core/smartptr.h"
 # include "../scene.h"
-# include "fpscounter.h"
 
 
 namespace Yuni
@@ -60,13 +59,15 @@ namespace Render
 		//! Get the number of frames rendered in the last second
 		unsigned int instantFPS()
 		{
-			return pCounter.instantFPS();
+			// TODO FPS counter missing
+			return 0;
 		}
 
 		//! Get the mean number of frames per second since start of rendering
 		unsigned int meanFPS()
 		{
-			return pCounter.meanFPS();
+			// TODO FPS counter missing
+			return 0;
 		}
 
 	private:
@@ -90,7 +91,6 @@ namespace Render
 
 	protected:
 		bool pPaused;
-		FPSCounter pCounter;
 
 	}; // ARenderer
 

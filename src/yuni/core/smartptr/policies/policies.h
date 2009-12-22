@@ -23,7 +23,7 @@ namespace Policy
 # include "storage.h"
 # include "constness.h"
 # include "ownership.h"
-# include "../../../threads/policy.h"
+# include "../../../thread/policy.h"
 
 
 #endif // __YUNI_CORE_SMARTPTR_POLICIES_POLICIES_H__

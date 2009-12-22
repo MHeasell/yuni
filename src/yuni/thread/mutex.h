@@ -12,6 +12,7 @@ namespace Yuni
 
 	/*!
 	** \brief  Mechanism to avoid the simultaneous use of a common resource
+	**
 	** \ingroup Threads
 	*/
 	class Mutex
@@ -35,8 +36,14 @@ namespace Yuni
 	public:
 		//! \name Constructor & Destructor
 		//@{
-		//! Default constructor
-		Mutex(const bool recursive = true);
+		/*!
+		** \brief Default constructor, recursive by default
+		*/
+		Mutex();
+		/*!
+		** \brief Default constructor
+		*/
+		Mutex(const bool recursive);
 		//! Destructor
 		~Mutex();
 		//@}

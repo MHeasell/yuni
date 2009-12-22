@@ -1,7 +1,7 @@
 
 #include <iostream>
-#include <yuni/threads/thread.h>
-#include <yuni/threads/condition.h>
+#include <yuni/thread/thread.h>
+#include <yuni/thread/condition.h>
 #include <yuni/core/system/sleep.h>
 
 
@@ -43,7 +43,6 @@ protected:
 		// Atomically unlock and block until a notification arrive.
 		condition->waitUnlocked();
 		// Here we re-acquired the lock, since we received a notification.
-
 		{
 			// Some stuff here
 			std::cout << "[thread] Doing some stuff" << std::endl;

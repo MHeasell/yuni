@@ -7,12 +7,13 @@
 
 namespace Yuni
 {
-namespace Threads
+namespace Thread
 {
 
 
 	/*!
 	** \brief Condition Variable
+	**
 	** \ingroup Threads
 	**
 	** A condition variable is a synchronization object used in conjunction with a
@@ -47,12 +48,11 @@ namespace Threads
 
 		//! Destructor
 		~Condition();
-
 		//@}
+
 
 		//! \name Wait for a notification
 		//@{
-
 		/*!
 		** \brief Atomic unlock() and wait for notification
 		**
@@ -84,9 +84,9 @@ namespace Threads
 		bool waitUnlocked(const uint32 msTimeout);
 		//@}
 
+
 		//! \name Manipulate the Condition's mutex
 		//@{
-
 		/*!
 		** \brief Lock the inner mutex
 		*/
@@ -96,8 +96,8 @@ namespace Threads
 		** \brief Unlock the inner mutex
 		*/
 		void unlock();
-
 		//@}
+
 
 		//! \name Signal the condition
 		//@{
@@ -133,10 +133,14 @@ namespace Threads
 		void notifyAll();
 		//@}
 
+
+		//! \name Misc
+		//@{
 		/*!
 		** \brief Get the inner mutex
 		*/
 		Mutex& mutex() const;
+		//@}
 
 	private:
 		//! The PThread Condition
@@ -152,6 +156,10 @@ namespace Threads
 		const bool pOwnMutex;
 
 	}; // class Condition
+
+
+
+
 
 	/*!
 	** \brief Locks a condition's mutex in the constructor and unlocks it in the destructor.
@@ -184,7 +192,7 @@ namespace Threads
 
 
 
-} // namespace Threads
+} // namespace Thread
 } // namespace Yuni
 
 # include "condition.hxx"
