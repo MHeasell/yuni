@@ -113,9 +113,9 @@ namespace Thread
 {
 
 
-	unsigned int AThread::ProcessID()
+	unsigned int ProcessID()
 	{
-		return YUNI_OS_GETPID();
+		return (unsigned int) YUNI_OS_GETPID();
 	}
 
 
