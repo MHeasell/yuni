@@ -25,6 +25,13 @@ namespace Yuni
 namespace Thread
 {
 
+
+	/*!
+	** \brief Get the current process ID
+	*/
+	unsigned int ProcessID();
+
+
 	/*!
 	** \brief Convenient method to create, start and return a new instancied thread
 	**
@@ -92,14 +99,6 @@ namespace Thread
 			//! The default timeout for stopping a thread
 			defaultTimeout = 5000, // 5 seconds
 		};
-
-	public:
-		/*!
-		** \brief Get the current process ID
-		*/
-		static unsigned int ProcessID();
-
-
 
 	public:
 		//! \name Constructor & Destructor
