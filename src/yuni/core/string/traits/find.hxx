@@ -21,7 +21,7 @@ namespace StringImpl
 				if (t == str.pPtr[i])
 					return i;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size Value(const StrBase1& str, const char t, const typename StrBase1::Size offset)
 		{
@@ -30,26 +30,26 @@ namespace StringImpl
 				if (t == str.pPtr[i])
 					return i;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const char t)
 		{
-			for (typename StrBase1::Size i = str.pSize - 1; i != StrBase1::npos; --i)
+			for (typename StrBase1::Size i = str.pSize - 1; i != (typename StrBase1::Size) StrBase1::npos; --i)
 			{
 				if (t == str.pPtr[i])
 					return i;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const char t, const typename StrBase1::Size offset)
 		{
-			for (typename StrBase1::Size i = ((offset != StrBase1::npos) ? offset : str.pSize - 1);
-				i != StrBase1::npos; --i)
+			for (typename StrBase1::Size i = ((offset != (typename StrBase1::Size) StrBase1::npos) ? offset : str.pSize - 1);
+				i != (typename StrBase1::Size) StrBase1::npos; --i)
 			{
 				if (t == str.pPtr[i])
 					return i;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 
 	}; // specialization on `char`
@@ -67,7 +67,7 @@ namespace StringImpl
 				if (t == str.pPtr[i])
 					return i;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size Value(const StrBase1& str, const wchar_t t, const typename StrBase1::Size offset)
 		{
@@ -76,26 +76,26 @@ namespace StringImpl
 				if (t == str.pPtr[i])
 					return i;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const wchar_t t)
 		{
-			for (typename StrBase1::Size i = str.pSize - 1; i != StrBase1::npos; --i)
+			for (typename StrBase1::Size i = str.pSize - 1; i != (typename StrBase1::Size) StrBase1::npos; --i)
 			{
 				if (t == str.pPtr[i])
 					return i;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const wchar_t t, const typename StrBase1::Size offset)
 		{
-			for (typename StrBase1::Size i = ((offset != StrBase1::npos) ? offset : str.pSize - 1);
-				i != StrBase1::npos; --i)
+			for (typename StrBase1::Size i = ((offset != (typename StrBase1::Size) StrBase1::npos) ? offset : str.pSize - 1);
+				i != (typename StrBase1::Size) StrBase1::npos; --i)
 			{
 				if (t == str.pPtr[i])
 					return i;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 
 	};
@@ -112,32 +112,32 @@ namespace StringImpl
 					// Trying to find the next occurenceof the first char
 					offset = Find<StrBase1,W>::Value(str, *t, offset);
 					if (StrBase1::npos == offset || offset + N - 1 > str.pSize)
-						return StrBase1::npos;
+						return (typename StrBase1::Size) StrBase1::npos;
 					if (!memcmp(str.pPtr + offset, t, (N - 1) * sizeof(W)))
 						return offset;
 					++offset;
 				}
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const W* t, typename StrBase1::Size offset = StrBase1::npos)
 		{
 			if (t && '\0' != *t && str.notEmpty())
 			{
-				if (offset == StrBase1::npos)
+				if (offset == (typename StrBase1::Size) StrBase1::npos)
 					offset = str.pSize - 1;
-				while (StrBase1::npos != offset)
+				while ((typename StrBase1::Size) StrBase1::npos != offset)
 				{
 					// Trying to find the next occurenceof the first char
 					offset = str.find_last_of(*t, offset);
-					if (StrBase1::npos == offset || offset + N - 1 > str.pSize)
-						return StrBase1::npos;
+					if ((typename StrBase1::Size) StrBase1::npos == offset || offset + N - 1 > str.pSize)
+						return (typename StrBase1::Size) StrBase1::npos;
 					if (!memcmp(str.pPtr + offset, t, (N - 1) * sizeof(W)))
 						return offset;
 					--offset;
 				}
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 
 	};
@@ -152,20 +152,20 @@ namespace StringImpl
 			{
 				// Trying to find the next occurenceof the first char
 				offset = str.find(*t, offset);
-				if (StrBase1::npos == offset || offset + length > str.pSize)
-					return StrBase1::npos;
+				if ((typename StrBase1::Size) StrBase1::npos == offset || offset + length > str.pSize)
+					return (typename StrBase1::Size) StrBase1::npos;
 				if (!memcmp(str.pPtr + offset, t, length * sizeof(W)))
 					return offset;
 				++offset;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 
 		static typename StrBase1::Size Value(const StrBase1& str, const W* t, typename StrBase1::Size offset = 0)
 		{
 			return (t && '\0' != *t && offset < str.pSize)
 				? RawValue(str, t, Length<StrBase1,W*>::Value(t), offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseRawValue(const StrBase1& str, const W* t,
 			const typename StrBase1::Size length, typename StrBase1::Size offset)
@@ -176,20 +176,20 @@ namespace StringImpl
 			{
 				// Trying to find the next occurenceof the first char
 				offset = str.find(*t, offset);
-				if (StrBase1::npos == offset || offset + length > str.pSize)
-					return StrBase1::npos;
+				if ((typename StrBase1::Size) StrBase1::npos == offset || offset + length > str.pSize)
+					return (typename StrBase1::Size) StrBase1::npos;
 				if (!memcmp(str.pPtr + offset, t, length * sizeof(W)))
 					return offset;
 				++offset;
 			}
-			return StrBase1::npos;
+			return (typename StrBase1::Size) StrBase1::npos;
 		}
 
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const W* t, typename StrBase1::Size offset = StrBase1::npos)
 		{
 			return (t && '\0' != *t && str.pSize)
 				? ReverseRawValue(str, t, Length<StrBase1,W*>::Value(t), offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 
 	};
@@ -201,13 +201,13 @@ namespace StringImpl
 		{
 			return (!t.empty() && offset < str.pSize)
 				? Find<StrBase1, W*>::RawValue(str, t.c_str(), t.size(), offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const std::basic_string<W>& t, typename StrBase1::Size offset = StrBase1::npos)
 		{
 			return (!t.empty() && str.pSize)
 				? Find<StrBase1, W*>::ReverseRawValue(str, t.c_str(), t.size(), offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 
 	};
@@ -219,13 +219,13 @@ namespace StringImpl
 		{
 			return (t && !t->empty() && offset < str.pSize)
 				? Find<StrBase1, W*>::RawValue(str, t->c_str(), t->size(), offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const std::basic_string<W>* t, typename StrBase1::Size offset = StrBase1::npos)
 		{
 			return (t && !t->empty() && str.pSize)
 				? Find<StrBase1, W*>::ReverseRawValue(str, t->c_str(), t->size(), offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 
 	};
@@ -238,13 +238,13 @@ namespace StringImpl
 		{
 			return (t.pSize && offset < str.pSize)
 				? Find<StrBase1, W*>::RawValue(str, t.pPtr, t.pSize, offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const Yuni::StringBase<W,N>& t, typename StrBase1::Size offset = StrBase1::npos)
 		{
 			return (t.pSize && str.pSize)
 				? Find<StrBase1, W*>::ReverseRawValue(str, t.pPtr, t.pSize, offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 	};
 
@@ -255,15 +255,18 @@ namespace StringImpl
 		{
 			return (t && t->pSize && offset < str.pSize)
 				? Find<StrBase1, W*>::RawValue(str, t->pPtr, t->pSize, offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 		static typename StrBase1::Size ReverseValue(const StrBase1& str, const Yuni::StringBase<W,N>* t, typename StrBase1::Size offset = StrBase1::npos)
 		{
 			return (t && t->pSize && str.pSize)
 				? Find<StrBase1, W*>::ReverseRawValue(str, t->pPtr, t->pSize, offset)
-				: StrBase1::npos;
+				: (typename StrBase1::Size) StrBase1::npos;
 		}
 	};
+
+
+
 
 
 
