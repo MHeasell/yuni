@@ -911,9 +911,9 @@ namespace Yuni
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
 	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>&
-	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::operator = (const MemoryBuffer& rhs)
+	MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::operator = (const MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>& rhs)
 	{
-		Private::MemoryBufferImpl::Assign<MemoryBuffer, C>::Do(*this, rhs);
+		Private::MemoryBufferImpl::Assign<MemoryBufferType, MemoryBufferType>::Do(*this, rhs);
 		return *this;
 	}
 

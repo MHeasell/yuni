@@ -32,6 +32,9 @@ namespace Yuni
 	**  - Yuni::MemoryBuffer<C>
 	**
 	**
+	** Performance Tip: The class Core::Bit::Array should have better performance than
+	**   a MemoryBuffer<bool> for medium or large buffer, and uses less memory in nearly any cases.
+	**
 	** \tparam C A pod type
 	** \tparam ChunkSizeT The size for a single chunk (>= 2)
 	** \tparam ZeroTerminatedT A non-zero value if the buffer must always be terminated by a zero
