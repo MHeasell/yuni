@@ -64,6 +64,8 @@ namespace Yuni
 			zeroTerminated = AncestorType::zeroTerminated,
 			//! A non-zero value if the buffer can be expanded
 			expandable = AncestorType::expandable,
+			//! Number of bits per element
+			bitCountPerElement = sizeof(C) * 8,
 
 			//! Invalid offset
 			npos = (Size)(-1),
@@ -199,7 +201,7 @@ namespace Yuni
 		*/
 		template<class U> bool insert(const Size offset, const U& u, const Size size);
 
-		
+
 		/*!
 		** \brief Overwrite a region of the buffer
 		**
@@ -246,7 +248,7 @@ namespace Yuni
 
 		//! Equivalent to append()
 		template<class U> void push_back(const U& u);
-	
+
 		//! Equivalent to prepend()
 		template<class U> void push_front(const U& u);
 		//@}
