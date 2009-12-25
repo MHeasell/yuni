@@ -288,6 +288,13 @@ Set(SRC_CORE_MATH
 )
 source_group(Core\\Math FILES ${SRC_CORE_MATH})
 
+Set(SRC_CORE_BIT
+				core/bit.h
+				core/bit/bit.h core/bit/bit.hxx
+				)
+source_group("Core\\Bit" FILES ${SRC_CORE_BIT})
+
+
 Set(SRC_CORE_MEMORYBUFFER
 				core/memorybuffer.h
 				core/memorybuffer/memorybuffer.h core/memorybuffer/memorybuffer.hxx
@@ -468,6 +475,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_STATIC}
 		${SRC_CORE_TRAITS}
 		${SRC_CORE_PREPROCESSOR}
+		${SRC_CORE_BIT}
 		${SRC_CORE_EXCEPTIONS}
 		${SRC_CORE_SYSTEM}
 		${SRC_CORE_SYSTEM_WINDOWS}
