@@ -28,7 +28,7 @@
 ** YUNI_IS_LINUX
 **
 ** - MacOS
-** YUNI_OS_MAC or YUNI_OS_DARWIN
+** YUNI_OS_MACOS or YUNI_OS_MAC or YUNI_OS_DARWIN
 **
 ** - FreeBSD
 ** YUNI_OS_FREEBSD (The value is the version)

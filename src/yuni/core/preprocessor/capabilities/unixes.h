@@ -53,6 +53,7 @@
 /* Mac OS */
 #	if defined(__APPLE__) || defined(__MACH__)
 #		define YUNI_OS_MAC
+#		define YUNI_OS_MACOS
 #		define YUNI_OS_DARWIN
 #		define YUNI_OS_NAME "MacOS"
 #	endif
