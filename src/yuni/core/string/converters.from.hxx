@@ -591,6 +591,8 @@ namespace StringImpl
 	# endif
 
 
+
+
 } // namespace StringImpl
 } // namespace Private
 } // namespace Yuni
