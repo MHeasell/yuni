@@ -113,7 +113,7 @@ namespace Yuni
 			pRootPath.removeTrailingSlash();
 		}
 		if (pOptDebug)
-			std::cout << "[debug] Root path : " << pRootPath << std::endl; 
+			std::cout << "[debug] Root path : `" << pRootPath << '`' << std::endl;
 	}
 
 
@@ -121,7 +121,7 @@ namespace Yuni
 	{
 		if (!pOptPrefix.empty())
 		{
-			String pwd = Core::IO::Directory::Current();
+			const String& pwd = Core::IO::Directory::Current();
 			const String::List::iterator end = pOptPrefix.end();
 			for (String::List::iterator i = pOptPrefix.begin(); i != end; ++i)
 				*i = Core::IO::MakeAbsolute(*i, pwd);
@@ -141,6 +141,9 @@ namespace Yuni
 			pDefaultPathList.push_back("/usr/share/libyuni");
 			pDefaultPathList.push_back("/usr/local/share/libyuni");
 			pDefaultPathList.push_back("/local/opt/usr/local/share/libyuni");
+			# endif
+			# ifdef YUNI_OS_MAC
+			pDefaultPathList.push_back("/opt/local/share/libyuni");
 			# endif
 		}
 	}
