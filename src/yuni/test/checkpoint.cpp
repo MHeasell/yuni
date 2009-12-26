@@ -67,6 +67,7 @@ namespace Test
 		return b;
 	}
 
+
 	bool Checkpoint::operator () (bool b, const char* msg)
 	{
 		if (!b)
@@ -118,6 +119,7 @@ namespace Test
 		return b;
 	}
 
+
 	bool TimedCheckpoint::operator () (bool b, const char* msg)
 	{
 		if (!b)
@@ -126,6 +128,7 @@ namespace Test
 		std::cerr << "[test:cerr] <check," << RESULT_TO_STR(b) << ">" << msg << "\n";
 		return b;
 	}
+
 
 
 
