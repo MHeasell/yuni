@@ -108,4 +108,6 @@ namespace Yuni
 
 } // namespace Yuni
 
+# include "program.hxx"
+
 #endif // __LIBYUNI_CONFIG_PROGRAM_H__

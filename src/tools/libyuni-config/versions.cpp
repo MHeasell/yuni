@@ -229,8 +229,10 @@ namespace VersionInfo
 		// Group
 		String group;
 
+		// The default compiler is gcc
 		CompilerCompliant compliant = gcc;
-		if (compiler.at(0) == 'v' && compiler.at(1) == 's') // visual studio
+		// Checking for Visual Studio
+		if (compiler.notEmpty() && compiler.at(0) == 'v' && compiler.at(1) == 's')
 			compliant = visualstudio;
 
 		// For each entry in the ini file
@@ -245,15 +247,15 @@ namespace VersionInfo
 			group.clear();
 
 			// Splitting
-			String::Size p = key.find(':');
+			const String::Size p = key.find(':');
 			if (p == String::npos)
 				continue;
 			group.assign(key, p);
 			modName.assign(key, p + 1, key.size());
-			if (group.empty() || modName.empty())
+			if (!group || !modName)
 				continue;
 
-			ModuleSettings& s = moduleSettings[modName];
+			SettingsPerModule& s = moduleSettings[modName];
 
 			if (group == "path.include")
 			{
@@ -327,10 +329,14 @@ namespace VersionInfo
 
 
 
-	bool Settings::moduleExists(const String& name) const
+	void Settings::SettingsPerModule::merge(OptionMap& out, const OptionMap& with) const
 	{
-		return (moduleSettings.end() != moduleSettings.find(name));
+		const OptionMap::const_iterator end = with.end();
+		for (OptionMap::const_iterator i = with.begin(); i != end; ++i)
+			out[i->first] = true;
 	}
+
+
 
 
 
