@@ -317,7 +317,6 @@ namespace Yuni
 				deps[*i] = true;
 		}
 
-
 		bool first = true;
 		const std::map<String, bool>::const_iterator end = deps.end();
 		for (std::map<String, bool>::const_iterator i = deps.begin(); i != end; ++i)
@@ -330,11 +329,6 @@ namespace Yuni
 		std::cout << "\n";
 	}
 
-
-	bool LibConfigProgram::isCoreModule(const String& name) const
-	{
-		return (name == "core" || name == "gfx");
-	}
 
 
 	bool LibConfigProgram::checkForDependencies(LibConfig::VersionInfo::Settings& version)
@@ -378,12 +372,12 @@ namespace Yuni
 
 	void LibConfigProgram::createArguments(LibConfig::VersionInfo::Settings& version) const
 	{
-		LibConfig::VersionInfo::Settings::ModuleSettings::OptionMap args;
+		LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap args;
 		{
 			const String::List::const_iterator end = pOptModules.end();
 			for (String::List::const_iterator i = pOptModules.begin(); i != end; ++i)
 			{
-				LibConfig::VersionInfo::Settings::ModuleSettings& modSettings = version.moduleSettings[*i];
+				LibConfig::VersionInfo::Settings::SettingsPerModule& modSettings = version.moduleSettings[*i];
 				if (pOptCxxFlags)
 				{
 					modSettings.merge(args, modSettings.cxxFlags);
@@ -399,8 +393,8 @@ namespace Yuni
 			}
 		}
 		bool first = true;
-		const LibConfig::VersionInfo::Settings::ModuleSettings::OptionMap::const_iterator end = args.end();
-		for (LibConfig::VersionInfo::Settings::ModuleSettings::OptionMap::const_iterator i = args.begin(); i != end; ++i)
+		const LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap::const_iterator end = args.end();
+		for (LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap::const_iterator i = args.begin(); i != end; ++i)
 		{
 			if (!first)
 				std::cout << ' ';

@@ -28,7 +28,8 @@ ADD_EXECUTABLE(libyuni-config
 		../../yuni/core/io/file/stream.cpp
 		../../yuni/core/io/io.exists.cpp
 		../../yuni/core/io/directory/current.cpp
-		versions.cpp program.h program.cpp
+		versions.h versions.hxx versions.cpp
+		program.h program.hxx program.cpp
 		main.cpp)
 
 

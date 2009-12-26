@@ -42,20 +42,22 @@ namespace VersionInfo
 	};
 
 
+
 	struct Settings
 	{
 	public:
-
-	public:
-		Settings()
-			:supportOpenGL(false), supportDirectX(false)
-		{}
+		//! \name Constructor
+		//@{
+		/*!
+		** \brief Default Constructor
+		*/
+		Settings();
+		//@}
 
 		bool configFile(String::List& options, bool displayError) const;
 
 		bool parserModulesOptions(String::List& options, bool displayError);
 
-		bool moduleExists(const String& name) const;
 
 	public:
 		String compiler;
@@ -69,29 +71,36 @@ namespace VersionInfo
 		String::List includePath;
 		String::List libPath;
 
-		struct ModuleSettings
+		/*!
+		** \brief Settings Per Module
+		*/
+		struct SettingsPerModule
 		{
 		public:
 			typedef std::map<String, bool> OptionMap;
-		public:
-			void merge(OptionMap& out, const OptionMap& with) const
-			{
-				const OptionMap::const_iterator end = with.end();
-				for (OptionMap::const_iterator i = with.begin(); i != end; ++i)
-					out[i->first] = true;
-			}
 
 		public:
+			void merge(OptionMap& out, const OptionMap& with) const;
+
+		public:
+			//! Cxx flags for the module
 			OptionMap cxxFlags;
+			//! Includes to use for the module
 			OptionMap includes;
+			//! Frameworks needed by the module
 			OptionMap frameworks;
+			//! Libraries by the module
 			OptionMap libs;
+			//! Includes
 			OptionMap libIncludes;
+			//! Defines for the module
 			OptionMap defines;
+			//! Dependencies
 			String::List dependencies;
 		};
-		std::map<String, ModuleSettings> moduleSettings;
+		std::map<String, SettingsPerModule> moduleSettings;
 	};
+
 
 
 
@@ -138,5 +147,7 @@ namespace VersionInfo
 } // namespace VersionInfo
 } // namespace LibConfig
 } // namespace Yuni
+
+# include "versions.hxx"
 
 #endif // __LIBYUNI_CONFIG_VERSIONS_H__
