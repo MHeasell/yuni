@@ -16,12 +16,12 @@ namespace Yuni
 	struct None {};
 
 
-	template<class C = char, int ChunkSizeT = 80> class StringBase;
+	template<class C = char, int ChunkSizeT = 128> class StringBase;
 
 
 
 	// Forward declaration for MemoryBuffer
-	template<class C, unsigned int ChunkSizeT = 80, bool ZeroTerminatedT = false, bool ExpandableT = true>
+	template<class C, unsigned int ChunkSizeT = 128, bool ZeroTerminatedT = false, bool ExpandableT = true>
 	class MemoryBuffer;
 
 
