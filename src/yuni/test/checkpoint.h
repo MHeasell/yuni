@@ -14,11 +14,21 @@ namespace Test
 	class Checkpoint
 	{
 	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Default Constructor
+		*/
 		explicit Checkpoint(const char* id);
+		//! Destructor
 		~Checkpoint();
+		//@}
 
 		bool operator () (bool b);
 		bool operator () (bool b, const char* msg);
+
+	private:
+		Checkpoint() {}
 
 	private:
 		//! ID
@@ -29,14 +39,27 @@ namespace Test
 	}; // class Checkpoint
 
 
+
+
+
 	class TimedCheckpoint
 	{
 	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Default Constructor
+		*/
 		explicit TimedCheckpoint(const char* id);
+		//! Destructor
 		~TimedCheckpoint();
+		//@}
 
 		bool operator () (bool b);
 		bool operator () (bool b, const char* msg);
+
+	private:
+		TimedCheckpoint() {}
 
 	private:
 		//! ID
@@ -48,6 +71,7 @@ namespace Test
 		bool pResult;
 
 	}; // class Checkpoint
+
 
 
 
