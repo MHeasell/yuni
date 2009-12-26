@@ -7,7 +7,6 @@ LIBYUNI_CONFIG_LIB("script"     "yuni-static-script")
 
 # Scripts
 Set(SRC_SCRIPT
-			script.h
 			script/script.h script/script.hxx script/script.cpp
 			script/private.h script/private.hxx
 			script/args.hxx
