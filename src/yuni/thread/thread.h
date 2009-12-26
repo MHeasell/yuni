@@ -198,7 +198,7 @@ namespace Thread
 		** \return True to continue the execution of the thread, false to abort the
 		** execution right now
 		*/
-		virtual bool onStarting() = 0;
+		virtual bool onStarting() {return true;}
 
 		/*!
 		** \brief Event: The thread is running
@@ -228,7 +228,7 @@ namespace Thread
 		** that this method will be called, especially if the thread has been killed because
 		** it did not stop before the timeout was reached.
 		*/
-		virtual void onStopped() = 0;
+		virtual void onStopped() {}
 
 
 	private:
