@@ -824,6 +824,17 @@ namespace Yuni
 
 	template<typename C, int Chunk>
 	template<typename U>
+	inline bool
+	StringBase<C,Chunk>::contains(const U& u) const
+	{
+		return (npos !=
+			Private::StringImpl::Find<StringBase<C,Chunk>, typename Static::Remove::Const<U>::Type>::Value(*this, u));
+	}
+
+
+
+	template<typename C, int Chunk>
+	template<typename U>
 	inline typename StringBase<C,Chunk>::Size
 	StringBase<C,Chunk>::find(const U& u, typename StringBase<C,Chunk>::Size offset) const
 	{

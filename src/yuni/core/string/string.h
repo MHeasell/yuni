@@ -861,6 +861,14 @@ namespace Yuni
 		template<typename U> Size find(const U& u) const;
 
 		/*!
+		** \brief Get if the string contains a substring
+		**
+		** \param u The substring to find (can be null)
+		** \return True if `u` can be found in the string
+		*/
+		template<typename U> bool contains(const U& u) const;
+
+		/*!
 		** \brief Try to find the position of a substring starting at a given offset
 		**
 		** \param u The string to find (can be null)
