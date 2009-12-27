@@ -16,6 +16,10 @@
 
 namespace Yuni
 {
+
+	// Forward declaration
+	class Mutex;
+
 namespace Policy
 {
 
