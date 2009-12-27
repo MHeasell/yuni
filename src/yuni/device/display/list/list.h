@@ -7,6 +7,9 @@
 # include "../monitor.h"
 
 
+//! Name to use for the fail-safe device
+# define YUNI_DEVICE_DISPLAY_LIST_FAIL_SAFE_NAME   "Fail-safe Device"
+
 
 
 namespace Yuni
@@ -129,6 +132,7 @@ namespace Display
 		//@}
 
 
+		//! Get the number of monitors
 		size_t size() const;
 
 		//! \name Operators

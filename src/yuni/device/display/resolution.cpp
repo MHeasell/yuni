@@ -12,34 +12,18 @@ namespace Display
 {
 
 
-	const uint32 Resolution::MinWidth  = 320;   // 320x200
-	const uint32 Resolution::MinHeight = 200;
-	const uint32 Resolution::MaxWidth  = 2560;  // 2560x2048
-	const uint32 Resolution::MaxHeight = 2048;
-
-
-
-
-
-
 	Resolution::Resolution(const uint32 w, const uint32 h, const uint8 b)
 	{
 		pBitsPerPixel = (32 == b ||  24 == b || 16 == b || 8 == b) ? (uint8)b : (uint8)32;
-		pWidth  = Math::MinMax<uint32>(w, MinWidth,  MaxWidth);
-		pHeight = Math::MinMax<uint32>(h, MinHeight, MaxHeight);
+		pWidth  = Math::MinMax<uint32>(w, minimumWith,  maximumWidth);
+		pHeight = Math::MinMax<uint32>(h, minimumHeight, maximumHeight);
 	}
-
-
-	Resolution::Resolution(const Resolution& c)
-		:pWidth(c.pWidth), pHeight(c.pHeight), pBitsPerPixel(c.pBitsPerPixel)
-	{}
-
 
 
 	String Resolution::toString() const
 	{
 		String ret;
-		ret << pWidth << "x" << pHeight;
+		ret << pWidth << 'x' << pHeight;
 		if (pBitsPerPixel)
 			ret << " (" << (int)pBitsPerPixel << "Bits)";
 		return ret;
@@ -92,6 +76,7 @@ namespace Display
 		pBitsPerPixel = p.pBitsPerPixel;
 		return (*this);
 	}
+
 
 
 

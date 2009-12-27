@@ -16,6 +16,7 @@ namespace Display
 		typedef std::pair<Monitor::Ptr, SmartPtr<OrderedResolutions> > SingleMonitorFound;
 		typedef std::vector<SingleMonitorFound> MonitorsFound;
 
+
 } // namespace Display
 } // namespace Device
 } // namespace Yuni
@@ -47,18 +48,12 @@ namespace Display
 
 
 	List::List()
-		:pNullMonitor(new Monitor("Fail-safe Device"))
+		:pNullMonitor(new Monitor(YUNI_DEVICE_DISPLAY_LIST_FAIL_SAFE_NAME))
 	{
 		// Adding the default monitor
 		pMonitors.push_back(pNullMonitor);
 		pPrimary = pNullMonitor;
 	}
-
-
-	List::List(const List& c)
-		:pMonitors(c.pMonitors), pPrimary(c.pPrimary), pNullMonitor(c.pNullMonitor)
-	{}
-
 
 
 	List& List::operator = (const List& rhs)

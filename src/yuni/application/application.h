@@ -23,7 +23,9 @@ namespace Application
 	public:
 		//! \name Constructor & Destructor
 		//@{
-		//! Constructor
+		/*!
+		** \brief Constructor
+		*/
 		AApplication(int argc, char* argv[]);
 		//! Destructor
 		virtual ~AApplication();

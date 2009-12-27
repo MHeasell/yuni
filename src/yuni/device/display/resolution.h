@@ -1,9 +1,9 @@
 #ifndef __YUNI_DEVICE_DISPLAY_RESOLUTION_H__
 # define __YUNI_DEVICE_DISPLAY_RESOLUTION_H__
 
+# include "../../yuni.h"
 # include <vector>
 # include <list>
-# include "../../yuni.h"
 # include "../../core/string.h"
 # include "../../core/smartptr/smartptr.h"
 
@@ -26,14 +26,18 @@ namespace Display
 		//! The most suitable smart pointer to use with the class `Resolution`
 		typedef SmartPtr<Resolution> Ptr;
 
-		//! The smallest value allowed for the width of the screen
-		static const uint32 MinWidth;
-		//! The highest allowed for the width of the screen
-		static const uint32 MaxWidth;
-		//! The smallest allowed value for the height of the screen
-		static const uint32 MinHeight;
-		//! The highest allowed value for the height of the screen
-		static const uint32 MaxHeight;
+		enum
+		{
+			//! The smallest value allowed for the width of the screen
+			minimumWith   = 320u,
+			//! The smallest allowed value for the height of the screen
+			minimumHeight = 200u,
+
+			//! The highest allowed for the width of the screen
+			maximumWidth  = 2560u,
+			//! The highest allowed value for the height of the screen
+			maximumHeight = 2048u,
+		};
 
 		//! Vector of resolutions
 		typedef std::vector<Ptr>  Vector;

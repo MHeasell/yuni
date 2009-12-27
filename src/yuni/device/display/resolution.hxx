@@ -10,6 +10,10 @@ namespace Device
 namespace Display
 {
 
+	inline Resolution::Resolution(const Resolution& c)
+		:pWidth(c.pWidth), pHeight(c.pHeight), pBitsPerPixel(c.pBitsPerPixel)
+	{}
+
 
 	inline uint32 Resolution::width() const
 	{

@@ -10,6 +10,11 @@ namespace Display
 {
 
 
+	inline List::List(const List& c)
+		:pMonitors(c.pMonitors), pPrimary(c.pPrimary), pNullMonitor(c.pNullMonitor)
+	{}
+
+
 	inline size_t List::size() const
 	{
 		return pMonitors.size();
