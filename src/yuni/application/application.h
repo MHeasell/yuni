@@ -43,7 +43,7 @@ namespace Application
 		virtual ~AApplication();
 		//@}
 
-		
+
 		//! \name Paths & Filenames
 		//@{
 		/*!
@@ -70,15 +70,24 @@ namespace Application
 		**
 		** \param ex The new exit code value
 		*/
-		void terminate(const sint8 ex = 0);
+		void terminate(const int ex = 0);
 
 		/*!
 		** \brief Get the exit code to use
 		*/
-		sint8 exitCode() const;
+		int exitCode() const;
 		//@}
 
-	public:
+
+		//! \name Execute
+		//@{
+		/*!
+		** \brief Execute the application
+		*/
+		void execute();
+		//@}
+
+
 		/*!
 		** \brief Default command line options
 		**
@@ -87,8 +96,9 @@ namespace Application
 		** \param argc The number of arguments
 		** \param argv A null-terminated list of arguments (in UTF8)
 		*/
-		virtual void arguments(GetOpt::Parser& parser, int argc, char** argv);
+		virtual void arguments(int argc, char** argv);
 
+		virtual void onExecute() = 0;
 
 	private:
 		//! The private default constructor
@@ -110,7 +120,7 @@ namespace Application
 		//! The root folder of the application
 		PathType pRootFolder;
 		//! Exit code
-		sint8 pExitCode;
+		int pExitCode;
 
 	}; // class AApplication
 

@@ -17,7 +17,7 @@ namespace Application
 
 
 
-	AApplication::AApplication(int argc, char* argv[])
+	AApplication::AApplication(int, char* argv[])
 		:pTerminated(false), pExitCode(0)
 	{
 		// Initializing the global instance
@@ -41,10 +41,6 @@ namespace Application
 			pExeName += Core::IO::ExtractFileName(argv[0]);
 		else
 			pExeName += pRootFolder	<< Core::IO::Separator << Core::IO::ExtractFileName(argv[0]);
-
-		// Command line options
-		GetOpt::Parser parser;
-		arguments(parser, argc, argv);
 	}
 
 
@@ -55,8 +51,9 @@ namespace Application
 	}
 
 
-	void AApplication::arguments(GetOpt::Parser& parser, int argc, char** argv)
+	void AApplication::arguments(int argc, char** argv)
 	{
+		GetOpt::Parser parser;
 		bool optHelp = false;
 		parser.addFlag(optHelp, 'h', "help", "Print this help and exit");
 
