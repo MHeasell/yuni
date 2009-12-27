@@ -430,7 +430,7 @@ Set(SRC_JOBS
 				job/job.h job/job.hxx job/job.cpp
 				job/queue.h
 				job/waitingroom.h job/waitingroom.cpp
-				
+
 				# Scheduler
 				job/scheduler/highestpriorityfirst.h
 				)
@@ -439,7 +439,8 @@ source_group(Jobs FILES ${SRC_JOBS})
 
 # Application
 Set(SRC_APPLICATION
-				application/application.h application/application.cpp
+				application/application.h
+				application/application.hxx application/application.cpp
 				application/console.h application/console.cpp)
 source_group(Core\\Application FILES ${SRC_APPLICATION})
 

@@ -72,12 +72,12 @@ namespace IO
 	**	  std::cout << result << std::endl; // write `/tmp`
 	** \endcode
 	**
-	** \param[out] out The result of the extraction
+	** \param[out] out Variable where the result will be appended
 	** \param p The original filename
 	** \param systemDependant Consider only the system-dependant path-separator
 	*/
-	template<typename C, int N, int M>
-	void ExtractFilePath(StringBase<C,N>& out, const StringBase<C,M>& p, const bool systemDependant = true);
+	template<class StringT1, class StringT2>
+	void ExtractFilePath(StringT1& out, const StringT2& p, const bool systemDependant = true);
 
 	/*!
 	** \brief Extract the path part of a filename

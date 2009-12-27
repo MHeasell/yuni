@@ -87,16 +87,13 @@ namespace IO
 
 
 
-	template<typename C, int N, int M>
-	void ExtractFilePath(StringBase<C,N>& out, const StringBase<C,M>& p, const bool systemDependant)
+	template<class StringT1, class StringT2>
+	void ExtractFilePath(StringT1& out, const StringT2& p, const bool systemDependant)
 	{
-		typedef StringBase<C,N> StringT;
-		assert(&p != &out && "The behavior can be undefined");
-		out.clear();
-		const typename StringT::size_type pos = (systemDependant)
-			? p.find_last_of(IO::Constant<C>::Separator)
-			: p.find_last_of(IO::Constant<C>::AllSeparators);
-		if (StringT::npos != pos)
+		const typename StringT2::size_type pos = (systemDependant)
+			? p.find_last_of(IO::Constant<char>::Separator)
+			: p.find_last_of(IO::Constant<char>::AllSeparators);
+		if (String::npos != pos)
 		{
 			if (!pos)
 				out.append(p[pos]);

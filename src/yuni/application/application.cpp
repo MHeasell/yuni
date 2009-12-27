@@ -11,57 +11,69 @@ namespace Application
 
 
 	//! The global instance of the application
-	static AApplication* gApplicationInstance = NULL;
+	AApplication::Ptr AApplication::pGlobalInstance = NULL;
 
 
 
-
-
-	AApplication* AApplication::Instance()
-	{
-		return gApplicationInstance;
-	}
 
 
 	AApplication::AApplication(int argc, char* argv[])
-		:pTerminated(false), pExeName(), pRootFolder()
+		:pTerminated(false), pExitCode(0)
 	{
-		if (NULL != gApplicationInstance)
-			delete gApplicationInstance;
-		gApplicationInstance = this;
-		pTerminated = parseCommandLine(argc, argv);
-	}
+		// Initializing the global instance
+		if (NULL != pGlobalInstance)
+			delete pGlobalInstance;
+		pGlobalInstance = this;
 
-
-	AApplication::~AApplication()
-	{
-		gApplicationInstance = NULL;
-	}
-
-
-	bool AApplication::parseCommandLine(int /*argc*/, char* argv[])
-	{
 		// Find the absolute folder of the application
 		if (Core::IO::IsAbsolute(argv[0]))
 			pRootFolder = Core::IO::ExtractFilePath(argv[0]);
 		else
 		{
-			pRootFolder.clear();
-			String r;
+			StringBase<char, 1024> r;
 			r << Core::IO::Directory::Current() << Core::IO::Separator << argv[0];
-			if (!r.empty())
-				pRootFolder.append(Core::IO::ExtractFilePath(r, true));
+			if (r.notEmpty())
+				Core::IO::ExtractFilePath(pRootFolder, r, true);
 		}
 
 		// Find The absolution exe name
-		pExeName.clear();
 		if (pRootFolder.empty())
-			pExeName.append(Core::IO::ExtractFileName(argv[0]));
+			pExeName += Core::IO::ExtractFileName(argv[0]);
 		else
-			pExeName << pRootFolder	<< Core::IO::Separator << Core::IO::ExtractFileName(argv[0]);
-		return false;
+			pExeName += pRootFolder	<< Core::IO::Separator << Core::IO::ExtractFileName(argv[0]);
+
+		// Command line options
+		GetOpt::Parser parser;
+		arguments(parser, argc, argv);
 	}
 
+
+	AApplication::~AApplication()
+	{
+		// Detaching the global instance
+		pGlobalInstance = NULL;
+	}
+
+
+	void AApplication::arguments(GetOpt::Parser& parser, int argc, char** argv)
+	{
+		bool optHelp = false;
+		parser.addFlag(optHelp, 'h', "help", "Print this help and exit");
+
+		if (!parser(argc, argv))
+		{
+			pExitCode = -1;
+			pTerminated = true;
+			return;
+		}
+
+		if (optHelp)
+		{
+			pTerminated = true;
+			parser.helpUsage(argv[0]);
+			return;
+		}
+	}
 
 
 
