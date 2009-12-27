@@ -19,7 +19,7 @@ namespace Application
 	** {
 	** public:
 	**	  HelloWorld(nt argc, char* argv[]) : Yuni::Application::Console(argc, argv) {}
-	**	  ~HelloWorld() {}
+	**	  virtual ~HelloWorld() {}
 	**
 	**	  virtual void execute()
 	**	  {
@@ -38,10 +38,18 @@ namespace Application
 	class Console : public Application::AApplication
 	{
 	public:
+		//! Ancestor type
+		typedef Application::AApplication  AncestorType;
+		//! The Threading Policy
+		typedef AncestorType::ThreadingPolicy ThreadingPolicy;
+		//! Pointer
+		typedef Console* Ptr;
+
+	public:
 		/*!
 		** \brief Get the global instance of the console application
 		*/
-		static Console* Instance() {return dynamic_cast<Console*>(AApplication::Instance());}
+		static Console::Ptr Instance() {return dynamic_cast<Console*>(AApplication::Instance());}
 
 	public:
 		//! \name Constructor & Destructor
@@ -62,6 +70,9 @@ namespace Application
 		virtual void onExecute() = 0;
 
 	}; // class Application::Console
+
+
+
 
 
 
