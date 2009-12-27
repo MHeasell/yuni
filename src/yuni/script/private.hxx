@@ -14,14 +14,14 @@ namespace Bind
 {
 
 	template <class BindT, bool HasReturnType>
-	Binding<BindT,HasReturnType>::Binding(const BindT& bind)
+	inline Binding<BindT,HasReturnType>::Binding(const BindT& bind)
 		:pBind(bind)
 	{}
 
 
 
 	template<class BindT, bool HasReturnType>
-	unsigned int Binding<BindT,HasReturnType>::argumentCount() const
+	inline unsigned int Binding<BindT,HasReturnType>::argumentCount() const
 	{
 		return pBind.argumentCount;
 	}
@@ -39,7 +39,7 @@ namespace Bind
 
 
 	template <class BindT>
-	Binding<BindT,false>::Binding(const BindT& bind)
+	inline Binding<BindT,false>::Binding(const BindT& bind)
 		:pBind(bind)
 	{}
 
@@ -53,7 +53,7 @@ namespace Bind
 
 
 	template<class BindT>
-	int Binding<BindT,false>::performFunctionCall(Script::Lua* luaContext) const
+	inline int Binding<BindT,false>::performFunctionCall(Script::Lua* luaContext) const
 	{
 		pBind. template callWithArgumentGetter<Script::Lua*, Argument>(luaContext);
 		return 0;

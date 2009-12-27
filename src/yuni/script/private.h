@@ -15,7 +15,7 @@ namespace Bind
 
 	/*!
 	** \brief Abstract proxy for C++ function binding into languages.
-	** 
+	**
 	** \todo document this.
 	*/
 	struct IBinding

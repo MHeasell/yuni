@@ -103,7 +103,7 @@ namespace Protocol
 
 
 
-	
+
 
 	/*!
 	** \brief Try to determine the protocol from a scheme (URI)
