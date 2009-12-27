@@ -20,7 +20,7 @@ namespace Application
 	}
 
 
-	inline void AApplication::terminate(const sint8 ex)
+	inline void AApplication::terminate(const int ex)
 	{
 		pExitCode = ex;
 		pTerminated = true;
@@ -39,7 +39,7 @@ namespace Application
 	}
 
 
-	inline sint8 AApplication::exitCode() const
+	inline int AApplication::exitCode() const
 	{
 		return pExitCode;
 	}
@@ -50,12 +50,17 @@ namespace Application
 	{}
 
 
-	AApplication& AApplication::operator = (const AApplication&)
+	inline AApplication& AApplication::operator = (const AApplication&)
 	{
 		return *this;
 	}
 
 
+	inline void AApplication::execute()
+	{
+		if (!pTerminated)
+			this->onExecute();
+	}
 
 
 

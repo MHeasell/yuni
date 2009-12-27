@@ -64,11 +64,6 @@ namespace Application
 		virtual ~Console();
 		//@}
 
-		/*!
-		** \brief The main routine for the console application
-		*/
-		virtual void onExecute() = 0;
-
 	}; // class Application::Console
 
 
