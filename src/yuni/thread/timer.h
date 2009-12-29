@@ -53,11 +53,11 @@ namespace Thread
 	** }
 	** \endcode
 	*/
-	class Timer : public AThread
+	class Timer : public IThread
 	{
 	public:
 		//! The Threading policy
-		typedef AThread::ThreadingPolicy  ThreadingPolicy;
+		typedef IThread::ThreadingPolicy  ThreadingPolicy;
 
 		enum
 		{
@@ -219,9 +219,9 @@ namespace Thread
 		** done for you.
 		**
 		** \param cycleCount The current cycle number. 0 in the case of an infinite timer
-		** \return True to continue the execution of the timer, False otherwise
+		** \return True to stop and to destroy the thread
 		*/
-		virtual void onExecute();
+		virtual bool onExecute();
 
 
 		/*!
@@ -242,6 +242,8 @@ namespace Thread
 		unsigned int pCycleCount;
 		//! A bool value to indicate if the settings should be reloaded
 		Atomic::Int<32> pShouldReload;
+		//! Mutex
+		mutable Mutex pTimerMutex;
 
 	}; // class Thread::Timer
 

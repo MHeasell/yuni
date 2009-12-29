@@ -39,7 +39,7 @@ namespace Thread
 	extern "C"
 	{
 		/*!
-		** \brief This procedure will be run in a separate thread and will run AThread::baseExecute()
+		** \brief This procedure will be run in a separate thread and will run IThread::baseExecute()
 		*/
 		void* threadMethodForPThread(void* arg)
 		{
@@ -50,7 +50,7 @@ namespace Thread
 			::pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
 
 			// Get back our object.
-			Yuni::Thread::AThread* t = (Yuni::Thread::AThread *) arg;
+			Yuni::Thread::IThread* t = (Yuni::Thread::IThread *) arg;
 
 			assert(false == t->pStarted);
 
@@ -70,10 +70,23 @@ namespace Thread
 				t->pStartupCond.unlock();
 
 				// Launch the code
-				t->onExecute();
+				while (t->onExecute())
+				{
+					if (t->pShouldStop || !t->pStarted)
+						break;
+					// Notifying the thread that it has just been paused
+					t->onPause();
+					// Waiting for being waked up
+					Yuni::Thread::ConditionLocker locker(t->pMustStopCond);
+					t->pMustStopCond.waitUnlocked();
+					// We have been waked up ! But perhaps we should abort as soon as
+					//possible...
+					if (t->pShouldStop || !t->pStarted)
+						break;
+				}
 
 				// The thread has stopped, execute the user's stop handler.
-				t->onStopped();
+				t->onStop();
 
 				// We have stopped executing user code, and are exiting.
 				// Signal any threads waiting for our termination.
@@ -119,50 +132,59 @@ namespace Thread
 	}
 
 
-	AThread::Error AThread::start()
+	IThread::Error IThread::start()
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-
-		// Lock the startup conditon.
-		ConditionLocker condLocker(pStartupCond);
-
-		if (pStarted)
+		do
 		{
-			// The thread is already running, bail out.
+			ThreadingPolicy::MutexLocker locker(*this);
+
+			// Lock the startup conditon.
+			ConditionLocker condLocker(pStartupCond);
+
+			if (pStarted)
+			{
+				// The thread is already running, bail out.
+				// We have to wake it up
+				break;
+			}
+
+			// We're starting, so we should not stop too soon :)
+			pShouldStop = false;
+
+			// Lock the startup condition before creating the thread,
+			// then wait for it. The thread will signal the condition when it
+			// successfully have set isRunning _and_ called the triggers.
+			// Then we can check the isRunning status and determine if the startup
+			// was a success or not.
+			if (::pthread_create(&pThreadID, NULL, Yuni::Private::Thread::threadMethodForPThread, this))
+			{
+				// Thread creation failed, abort.
+				return errThreadCreation;
+			}
+
+			// Unlock and wait to be signalled by the new thread.
+			// This MUST happen.
+			pStartupCond.waitUnlocked();
+			// The condition is now locked again, our thread has set pStarted according
+			// to the selected course of action.
+
+			if (!pStarted)
+			{
+				// The thread has been aborted by a startup handler.
+				return errAborted;
+			}
+
 			return errNone;
 		}
+		while (1);
 
-		// We're starting, so we should not stop too soon :)
-		pShouldStop = false;
-
-		// Lock the startup condition before creating the thread,
-		// then wait for it. The thread will signal the condition when it
-		// successfully have set isRunning _and_ called the triggers.
-		// Then we can check the isRunning status and determine if the startup
-		// was a success or not.
-		if (::pthread_create(&pThreadID, NULL, Yuni::Private::Thread::threadMethodForPThread, this))
-		{
-			// Thread creation failed, abort.
-			return errThreadCreation;
-		}
-
-		// Unlock and wait to be signalled by the new thread.
-		// This MUST happen.
-		pStartupCond.waitUnlocked();
-		// The condition is now locked again, our thread has set pStarted according
-		// to the selected course of action.
-
-		if (!pStarted)
-		{
-			// The thread has been aborted by a startup handler.
-			return errAborted;
-		}
-
+		// The thread is already started.
+		wakeUp();
 		return errNone;
 	}
 
 
-	AThread::Error AThread::stop(const uint32 timeout)
+	IThread::Error IThread::stop(const uint32 timeout)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -189,6 +211,8 @@ namespace Thread
 			// We are out of time, no choice but to kill our thread
 			::pthread_cancel(pThreadID);
 			status = errTimeout;
+			// Notify
+			onKill();
 		}
 
 		// Release the ExitCondition, so the thread can join us.
@@ -202,8 +226,38 @@ namespace Thread
 		return status;
 	}
 
+	IThread::Error IThread::wait(const uint32 timeout)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
 
-	void AThread::wakeUp()
+		// Our thread will be blocked in pAboutToExitCond.notify() if it crosses it.
+		pAboutToExitCond.lock();
+
+		// Check the thread status
+		if (!pStarted) // already stopped, nothing to do.
+		{
+			pAboutToExitCond.unlock();
+			return errNone;
+		}
+
+		// Notify
+		pMustStopCond.notifyLocked();
+
+		// Our status
+		Error status = errNone;
+
+		if (pAboutToExitCond.waitUnlocked(timeout)) // We timed out.
+			status = errTimeout;
+
+		// Release the ExitCondition, so the thread can join us.
+		pAboutToExitCond.unlock();
+
+		return status;
+	}
+
+
+
+	void IThread::wakeUp()
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -224,7 +278,7 @@ namespace Thread
 	}
 
 
-	bool AThread::suspend(const unsigned int delay)
+	bool IThread::suspend(const unsigned int delay)
 	{
 		ConditionLocker locker(pMustStopCond);
 
@@ -242,7 +296,7 @@ namespace Thread
 	}
 
 
-	void AThread::gracefulStop()
+	void IThread::gracefulStop()
 	{
 		pMutex.lock();
 		pShouldStop = true;
@@ -251,7 +305,7 @@ namespace Thread
 	}
 
 
-	AThread::Error AThread::restart(const unsigned int timeout)
+	IThread::Error IThread::restart(const unsigned int timeout)
 	{
 		const Error status = stop(timeout);
 		return (status != errNone) ? status : start();

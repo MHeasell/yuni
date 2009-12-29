@@ -1,7 +1,8 @@
-#ifndef __YUNI_JOB_AJOB_H__
-# define __YUNI_JOB_AJOB_H__
+#ifndef __YUNI_JOB_JOB_H__
+# define __YUNI_JOB_JOB_H__
 
 # include "../yuni.h"
+# include "forward.h"
 # include "../thread/thread.h"
 # include "../core/string.h"
 
@@ -17,51 +18,49 @@ namespace Yuni
 namespace Job
 {
 
+
 	/*!
-	** \brief Set of possible states for a single job
+	** \brief Job Interface (time consuming operations)
+	** 
+	** This class is designed to implement a single task executed by
+	** Job::QueueService.
 	**
-	** \ingroup Jobs
-	*/
-	enum State
-	{
-		//! The job does nothing
-		stateIdle = 0,
-		//! The job is currently running
-		stateRunning = 1,
-		//! The job is running but has been suspended
-		stateSleeping = 2,
-	};
-
-
-
-	enum Priority
-	{
-		//! Low priority
-		priorityLow = 0,
-		//! Default priority
-		priorityDefault = 1,
-		//! High priority
-		priorityHigh = 2,
-
-		priorityCount = 3,
-	};
-
-
-
-
-
-
-	/*!
-	** \brief Job Interface (abstract)
+	** You can, for example, use this class to wrap a downloader, an image
+	** processing algorithm, a movie encoder, etc.
+	**
+	** Indeed, doing time-consuming operations like downloads and database
+	** transactions in the main thread can cause your user interface to seem as
+	** though it has stopped responding while they are running. To avoid this
+	** problem, you want to execute your long-running task in an asynchonous
+	** manner (a background task).
+	**
+	** \code
+	**
+	** class MyJob : public Job::IJob
+	** {
+	** public:
+	**   virtual ~MyJob() { }
+	** private:
+	**   virtual void onExecute()
+	**   {
+	**		[... time consuming job ...]
+	**   }
+	** };
+	** 
+	** [... add a MyJob instance to a Job::QueueService ...]
+	**
+	** \endcode
+	**
+	** \see QueueService
 	** \ingroup Jobs
 	*/
 	class IJob : public Policy::ObjectLevelLockable<IJob>
 	{
 	public:
 		//! The most suitable smart pointer for the class
-		typedef SmartPtr<IJob>  Ptr;
+		typedef SmartPtr<IJob> Ptr;
 		//! The threading policy
-		typedef Policy::ObjectLevelLockable<IJob>  ThreadingPolicy;
+		typedef Policy::ObjectLevelLockable<IJob> ThreadingPolicy;
 		//! List of jobs
 		typedef std::list<Ptr> List;
 
@@ -87,16 +86,16 @@ namespace Job
 		//! \name Progression
 		//@{
 		/*!
-		** \brief Get the progression in percent (value between 0.0 and 1.0)
+		** \brief Get the progression in percent (value between 0 and 100)
 		*/
-		float progression() const;
+		int progression() const;
 
 		/*!
 		** \brief Get if the job is finished
 		**
 		** This is a convenient (and faster) replacement for the following code :
 		** \code
-		** (state() == stateIdle && progression() >= 1.f)
+		** (state() == stateIdle && progression() == 100)
 		** \endcode
 		*/
 		bool finished() const;
@@ -106,63 +105,47 @@ namespace Job
 		//! \name States
 		//@{
 		//! Get the current state of the job
-		int state() const;
+		enum Job::State state() const;
 
 		//! Get if the job is idle
 		bool idle() const;
+		//! Get if the job is waiting for being executed
+		bool waiting() const;
 		//! Get if the job is running
 		bool running() const;
-		//! Get if the job is sleeping (the state can be in `running` in the same time)
-		bool sleeping() const;
+		//! Get if the job is canceling its work (and it is currently running)
+		bool canceling() const;
 		//@}
 
 
 		//! \name Execution flow
 		//@{
 		/*!
-		** \brief Execute the job
+		** \brief Ask to the job to cancel its work as soon as possible
+		**
+		** This method has no effect if the job is not currently running.
 		*/
-		void execute();
+		void cancel();
 		//@}
 
 
-		//! \name Relation to a thread
-		//@{
-		/*!
-		** \brief Attach this job to a given thread
-		** \param t The thread which execute this job
-		*/
-		void attachToThread(Thread::AThread* t);
-
-		/*!
-		** \brief Get the attached thread
-		** \return The attached thread. Null if no thread is attached
-		*/
-		Thread::AThread* attachedThread() const;
-
-		/*!
-		** \brief Detach this job from the previously attached thread
-		*/
-		void detachFromThread();
-		//@}
-
+		template<class T> void fillInformation(T& info);
 
 	protected:
 		/*!
-		** \brief Implement this method to define the job
-		** \return True to execute again this job
+		** \brief Implement this method to define your own time-consuming task
 		*/
-		virtual bool onExecute() = 0;
+		virtual void onExecute() = 0;
 
 		/*!
-		** \brief Set the progression in percent (0..1)
+		** \brief Set the progression in percent (0..100)
 		*/
-		void progression(const float);
+		void progression(const int p);
 
 		/*!
 		** \brief Suspend the execution of the job during X miliseconds
 		**
-		** This method is nearly identical to AThread::suspend() in its behavior.
+		** This method is nearly identical to IThread::suspend() in its behavior.
 		** But this method should not have to be called in most of the jobs,
 		** except when polling events or equivalent.
 		** If you only want to know if the job should abort, prefer shouldAbort()
@@ -172,30 +155,46 @@ namespace Job
 		**
 		** \param delay The delay in miliseconds. 0 will only return if the thread should exit
 		** \return True indicates that the job should stop immediately
-		** \see AThread::suspend()
+		** \see IThread::suspend()
 		*/
 		bool suspend(const unsigned int delay = 0);
 
 		/*!
 		** \brief Get if the job should abort as soon as possible
 		**
-		** This is a convenient routine instead of `suspend(0)`, but a bit faster.
+		** This is a convenient replacement of `suspend(0)`, and a bit faster.
 		**
 		** \attention This method must only be called inside the execution of the job
 		** \return True indicates that the thread should stop immediately
 		*/
 		bool shouldAbort();
 
+		template<class AnyStringT> void nameWL(const AnyStringT& s)
+		{
+			pName = s;
+		}
+
+	private:
+		/*!
+		** \brief Execute the job from another thread
+		** \param t The thread which will execute this job
+		*/
+		void execute(Thread::IThread* t);
 
 	private:
 		//! State of the job
 		Atomic::Int<32> pState;
+		//! Progression
+		Atomic::Int<32> pProgression;
+		//! Flag to cancel the work
+		Atomic::Int<32> pCanceling;
+		//! The attached thread to this job, if any
+		ThreadingPolicy::Volatile<Thread::IThread*>::Type pThread;
 		//! Name of the job
 		String pName;
-		//! Progression
-		float pProgression;
-		//! The attached thread to this job, if any
-		Thread::AThread* pThread;
+
+		// our friends !
+		template<class JobT> friend class Yuni::Private::QueueService::JobAccessor;
 
 	}; // class IJob
 
@@ -209,4 +208,4 @@ namespace Job
 
 # include "job.hxx"
 
-#endif // __YUNI_JOB_AJOB_H__
+#endif // __YUNI_JOB_JOB_H__

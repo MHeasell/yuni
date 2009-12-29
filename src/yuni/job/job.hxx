@@ -8,59 +8,43 @@ namespace Job
 {
 
 	inline IJob::IJob()
-		:pProgression(0.0f), pThread(NULL)
+		:pState(stateIdle), pProgression(0), pCanceling(), pThread(NULL)
 	{}
 
 
 	inline IJob::~IJob()
-	{}
-
-
-
-	inline int IJob::state() const
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return pState;
+		assert(this != NULL && "IJob: Destructor: Oo `this' is null !?");
+		assert(pThread == NULL && "A job can not be attached to a thread when destroyed");
+	}
+
+
+
+	inline enum Job::State IJob::state() const
+	{
+		return (enum Job::State) ((sint32) pState);
 	}
 
 
 	inline bool IJob::idle() const
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return pState & stateIdle;
+		return (pState & stateIdle);
+	}
+
+	inline bool IJob::waiting() const
+	{
+		return (pState & stateWaiting);
 	}
 
 	inline bool IJob::running() const
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return pState & stateRunning;
-	}
-
-	inline bool IJob::sleeping() const
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return pState & stateSleeping;
+		return (pState & stateRunning);
 	}
 
 
-	inline void IJob::attachToThread(Thread::AThread* t)
+	inline void IJob::cancel()
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		pThread = t;
-	}
-
-
-	inline void IJob::detachFromThread()
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		pThread = NULL;
-	}
-
-
-	inline Thread::AThread* IJob::attachedThread() const
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return pThread;
+		pCanceling = 1;
 	}
 
 
@@ -70,6 +54,7 @@ namespace Job
 		return pName;
 	}
 
+
 	template<class AnyStringT> inline void IJob::name(const AnyStringT& s)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -77,21 +62,39 @@ namespace Job
 	}
 
 
-	inline void IJob::progression(const float p)
+	inline void IJob::progression(const int p)
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		pProgression = p;
+		pProgression = ((p < 0) ? 0 : (p > 100 ? 100 : p));
 	}
 
 
 	inline bool IJob::finished() const
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return (pState == stateIdle && pProgression >= 1.f);
+		// The state must be at the very end
+		return (pProgression >= 100 && pState == stateIdle);
 	}
 
 
+	inline bool IJob::shouldAbort()
+	{
+		assert(pThread != NULL && "Job: The pointer to the attached thread must not be NULL");
+		return (pCanceling || pThread->shouldAbort());
+	}
 
+
+	template<class T>
+	void IJob::fillInformation(T& info)
+	{
+		// The first important value is the state
+		info.state = (Yuni::Job::State) ((int) (pState));
+		// Then, if the job is canceling its work
+		info.canceling = pCanceling;
+
+		info.progression = pProgression;
+
+		ThreadingPolicy::MutexLocker locker(*this);
+		info.name = pName;
+	}
 
 
 

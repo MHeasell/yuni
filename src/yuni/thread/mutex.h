@@ -144,6 +144,5 @@ namespace Yuni
 } // namespace Yuni
 
 # include "mutex.hxx"
-# include "policy.h"
 
 #endif // __YUNI_THREADS_MUTEX_H__

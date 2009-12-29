@@ -10,24 +10,24 @@ namespace Thread
 {
 
 
-	inline AThread::AThread()
+	inline IThread::IThread()
 		:pStarted(false), pShouldStop(true)
 	{}
 
 
-	inline AThread::~AThread()
+	inline IThread::~IThread()
 	{
 		assert(pStarted == false && "A thread can not be destroyed while being still started");
 	}
 
 
-	inline bool AThread::started() const
+	inline bool IThread::started() const
 	{
 		return pStarted;
 	}
 
 
-	inline bool AThread::shouldAbort()
+	inline bool IThread::shouldAbort()
 	{
 		ConditionLocker locker(pMustStopCond);
 		return (pShouldStop || !pStarted);
