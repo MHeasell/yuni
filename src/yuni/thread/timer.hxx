@@ -9,17 +9,17 @@ namespace Thread
 
 
 	inline Timer::Timer()
-		:AThread(), pTimeInterval(defaultInterval), pCycleCount(infinite)
+		:IThread(), pTimeInterval(defaultInterval), pCycleCount(infinite)
 	{}
 
 
 	inline Timer::Timer(const unsigned int interval)
-		:AThread(), pTimeInterval(interval), pCycleCount(infinite)
+		:IThread(), pTimeInterval(interval), pCycleCount(infinite)
 	{}
 
 
 	inline Timer::Timer(const unsigned int interval, const unsigned int cycles)
-		:AThread(), pTimeInterval(interval), pCycleCount(cycles)
+		:IThread(), pTimeInterval(interval), pCycleCount(cycles)
 	{}
 
 
@@ -31,14 +31,14 @@ namespace Thread
 
 	inline unsigned int Timer::interval() const
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
+		Yuni::MutexLocker locker(pTimerMutex);
 		return pTimeInterval;
 	}
 
 
 	inline unsigned int Timer::cycleCount() const
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
+		Yuni::MutexLocker locker(pTimerMutex);
 		return pCycleCount;
 	}
 
@@ -47,6 +47,9 @@ namespace Thread
 	{
 		pShouldReload = 1;
 	}
+
+
+
 
 
 } // namespace Thread

@@ -12,23 +12,23 @@ namespace Thread
 
 
 	Timer::Timer(const Timer& rhs)
-		:AThread()
+		:IThread()
 	{
-		rhs.pMutex.lock();
+		rhs.pTimerMutex.lock();
 		pTimeInterval = rhs.pTimeInterval;
 		pCycleCount = rhs.pCycleCount;
-		rhs.pMutex.unlock();
+		rhs.pTimerMutex.unlock();
 	}
 
 
 	Timer& Timer::operator = (const Timer& rhs)
 	{
-		pMutex.lock();
-		rhs.pMutex.lock();
+		pTimerMutex.lock();
+		rhs.pTimerMutex.lock();
 		pTimeInterval = rhs.pTimeInterval;
 		pCycleCount = rhs.pCycleCount;
-		pMutex.unlock();
-		rhs.pMutex.unlock();
+		pTimerMutex.unlock();
+		rhs.pTimerMutex.unlock();
 		return *this;
 	}
 
@@ -38,7 +38,7 @@ namespace Thread
 	bool Timer::internalRunInfiniteLoop()
 	{
 		const unsigned int nnTimeInterval(pTimeInterval);
-		pMutex.unlock();
+		pTimerMutex.unlock();
 
 		while (true)
 		{
@@ -55,7 +55,7 @@ namespace Thread
 	{
 		unsigned int cycleIndex = 0;
 		const unsigned int nnTimeInterval = pTimeInterval;
-		pMutex.unlock();
+		pTimerMutex.unlock();
 
 		while (true)
 		{
@@ -71,59 +71,62 @@ namespace Thread
 	}
 
 
-	void Timer::onExecute()
+	bool Timer::onExecute()
 	{
 		pShouldReload = 0;
 		while (true)
 		{
 			// Lock
-			pMutex.lock();
+			pTimerMutex.lock();
 
 			// No cycle to do, aborting now
 			if (!pCycleCount)
 			{
-				pMutex.unlock();
-				return;
+				pTimerMutex.unlock();
+				return true;
 			}
 
 			// infinite loop
 			if (infinite == pCycleCount)
 			{
 				if (internalRunInfiniteLoop())
-					return;
+					// Stopping the thread
+					return false;
 			}
 			else
 			{
 				if (internalRunFixedNumberOfCycles())
-					return;
+					// Stopping the thread
+					return false;
 			}
 		}
+		return false;
 	}
 
 
 
 	void Timer::interval(const unsigned int t)
 	{
-		pMutex.lock();
+		pTimerMutex.lock();
 		pTimeInterval = t;
-		pMutex.unlock();
+		pTimerMutex.unlock();
 	}
 
 
 	void Timer::cycleCount(const unsigned int n)
 	{
-		pMutex.lock();
+		pTimerMutex.lock();
 		pCycleCount = n;
-		pMutex.unlock();
+		pTimerMutex.unlock();
 	}
 
 
 	void Timer::reload(unsigned int interval, unsigned int cycles)
 	{
-		pMutex.lock();
+		pTimerMutex.lock();
 		pTimeInterval = interval;
 		pCycleCount = cycles;
-		pMutex.unlock();
+		pTimerMutex.unlock();
 		pShouldReload = 1;
 	}
 

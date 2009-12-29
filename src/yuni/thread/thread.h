@@ -5,6 +5,7 @@
 # include "mutex.h"
 # include "condition.h"
 # include "../core/string.h"
+# include <vector>
 
 
 namespace Yuni
@@ -25,21 +26,21 @@ namespace Yuni
 namespace Thread
 {
 
-
 	/*!
 	** \brief Get the current process ID
 	*/
 	unsigned int ProcessID();
 
 
+
 	/*!
 	** \brief Convenient method to create, start and return a new instancied thread
 	**
 	** \code
-	** class MyOwnThread : public Yuni::Threads::AThread
+	** class MyOwnThread : public Yuni::Threads::IThread
 	** {
 	** public:
-	**   MyOwnThread(int p): Yuni::Threads::AThread(), pTag(p)  {}
+	**   MyOwnThread(int p): Yuni::Threads::IThread(), pTag(p)  {}
 	**   virtual ~MyOwnThread() {stop();} // Required for Code robustness
 	**
 	** protected:
@@ -62,7 +63,7 @@ namespace Thread
 	** }
 	** \endcode
 	**
-	** \tparam T A descendant of the class Yuni::Private::AThreadModel
+	** \tparam T A descendant of the class Yuni::Private::IThreadModel
 	** \return A pointer to the new instance
 	*/
 	template<class T> T* CreateAndStart();
@@ -72,13 +73,19 @@ namespace Thread
 
 	/*!
 	** \brief Internal Base class interface for Threads (abstract)
+	**
+	** The thread is really created when started (with the method start()), and
+	** destroyed when stopped by the method stop() (or when the object is
+	** destroyed too).
 	*/
-	class AThread : public Policy::ObjectLevelLockable<AThread>
+	class IThread : public Policy::ObjectLevelLockable<IThread>
 	{
 		friend void* Yuni::Private::Thread::threadMethodForPThread(void* arg);
 	public:
 		//! The threading policy
-		typedef Policy::ObjectLevelLockable<AThread>  ThreadingPolicy;
+		typedef Policy::ObjectLevelLockable<IThread>  ThreadingPolicy;
+		//! The most suitable smart pointer for the class
+		typedef SmartPtr<IThread> Ptr;
 
 		//! Return error status
 		enum Error
@@ -100,13 +107,14 @@ namespace Thread
 			defaultTimeout = 5000, // 5 seconds
 		};
 
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		AThread();
+		IThread();
 		//! Destructor
-		virtual ~AThread();
+		virtual ~IThread();
 		//@}
 
 
@@ -115,6 +123,7 @@ namespace Thread
 		/*!
 		** \brief Start the execution of the thread, if not already started
 		**
+		** If already started, the thread will be woke up
 		** \return True if the thread has been started
 		*/
 		Error start();
@@ -128,6 +137,15 @@ namespace Thread
 		Error stop(const uint32 timeout = defaultTimeout);
 
 		/*!
+		** \brief Wait for the end of the thread
+		**
+		** The thread is not stopped during the process.
+		** \param timeout The timeout in milliseconds
+		** \return An error status (`errNone` if succeeded)
+		*/
+		Error wait(const uint32 timeout = defaultTimeout);
+
+		/*!
 		** \brief Restart the thread
 		**
 		** \param timeout The timeout in milliseconds before killing the thread (default: 5000ms)
@@ -139,7 +157,7 @@ namespace Thread
 		Error restart(const unsigned int timeout = defaultTimeout);
 
 		/*!
-		** \brief Stop the execution of the thread but does not wait for it
+		** \brief Ask to Stop the execution of the thread as soon as possible
 		**
 		** After a call to this method, the method suspend() will return true,
 		** which indicates that the thread should stop.
@@ -203,8 +221,13 @@ namespace Thread
 		/*!
 		** \brief Event: The thread is running
 		**
-		** The thread has been successfully started (that means `onStarting()` returned true)
-		** As soon as this method exits, the other event `onStopped()` will be called.
+		** The thread has been successfully started (and `onStarting()` returned true).
+		**
+		** If this method returns false, the thread will be stopped (and the thread
+		** context will be destroyed). The method `onStopped` will be called.
+		** Otherwise, the thread will be paused for an infinite amount of time and the
+		** method onPause() will be called. In this case it will be possible to re-run it
+		** in calling wakeUp() or start().
 		**
 		** \attention This method should check from time to time if the thread has to stop. For that,
 		** a call to `suspend(0)` is recommended.
@@ -213,11 +236,20 @@ namespace Thread
 		**       return;
 		** \endcode
 		**
+		** \return True to pause the thread and wait a `wake up` signal, False to effectively stop it.
 		** \see suspend()
 		** \see onStarting()
 		** \see onStopped()
+		** \see wakeUp()
 		*/
-		virtual void onExecute() = 0;
+		virtual bool onExecute() = 0;
+
+		/*!
+		** \brief Event: The thread has finished its job and is waiting for being re-executed
+		**
+		** This event will be fired if the method onExecute returns false.
+		*/
+		virtual void onPause() {}
 
 		/*!
 		** \brief Event: The thread has been gracefully stopped
@@ -228,14 +260,21 @@ namespace Thread
 		** that this method will be called, especially if the thread has been killed because
 		** it did not stop before the timeout was reached.
 		*/
-		virtual void onStopped() {}
+		virtual void onStop() {}
 
+		/*!
+		** \brief Event: The thread has been killed
+		**
+		** This method may be called from any thread
+		*/
+		virtual void onKill() {}
 
 	private:
 		//! Private copy constructor
-		AThread(const AThread&) :ThreadingPolicy() {/* not copyable */}
+		IThread(const IThread&) :ThreadingPolicy() {/* not copyable */}
 		//! Operator =
-		AThread& operator = (const AThread&) {return *this;}
+		IThread& operator = (const IThread&) {return *this;}
+
 
 	private:
 		//! Condition used in the startup process. See start().
@@ -255,7 +294,7 @@ namespace Thread
 		// our friend
 		friend class Yuni::Job::IJob;
 
-	}; // class AThread
+	}; // class IThread
 
 
 

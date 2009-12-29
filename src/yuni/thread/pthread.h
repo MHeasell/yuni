@@ -20,7 +20,7 @@ namespace Thread
 	{
 		/*!
 		** \brief This procedure will be run in a separate thread and will
-		**   run AThreadModel::baseExecute()
+		**   run IThreadModel::baseExecute()
 		*/
 		void* threadMethodForPThread(void* arg);
 	}

@@ -286,6 +286,20 @@ namespace Yuni
 
 
 	template<class T, class Alloc>
+	void LinkedList<T,Alloc>::pop_front()
+	{
+		if (pHead)
+		{
+			Item* it = pHead;
+			pHead = it->next;
+			delete it;
+			if (!pHead)
+				pLast = NULL;
+		}
+	}
+
+
+	template<class T, class Alloc>
 	template<class U>
 	typename LinkedList<T,Alloc>::Size LinkedList<T,Alloc>::remove(const U& value)
 	{

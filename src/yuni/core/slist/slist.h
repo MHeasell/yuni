@@ -164,6 +164,11 @@ namespace Yuni
 		** \brief Add a list of values at the begining of the list
 		*/
 		template<class U, class A> void push_front(const std::vector<U,A>& rhs);
+
+		/*!
+		** \brief Remove the first element
+		*/
+		void pop_front();
 		//@}
 
 

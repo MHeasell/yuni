@@ -14,57 +14,46 @@ namespace Job
 
 	bool IJob::suspend(const unsigned int delay)
 	{
-		if (stateRunning == pState) // `==` and not `&`
+		// This method must only be called from a thread
+		assert(pThread != NULL && "Job: The pointer to the attached thread must not be NULL");
+
+		// We can suspend the job only if it is running
+		if (pState == stateRunning)
 		{
-			pMutex.lock();
-			if (pThread)
-			{
-				Thread::AThread* t = pThread;
-				pMutex.unlock();
-	
-				// Really suspend the thread
-				pState = stateSleeping | stateRunning;
-				const bool sRet = t->suspend(delay);
-				pState = stateRunning;
-				return sRet;
-			}
-			pMutex.unlock();
+			// It is important (for thread-safety reasons) that this method
+			// does not modify the state.
+			// This may lead to unwanted behaviors.
+			// Sleeping for a while...
+			const bool r = pThread->suspend(delay);
+			// The state may have changed while we were sleeping
+			return (pCanceling || r);
 		}
 		return true;
 	}
 
 
-	bool IJob::shouldAbort()
-	{
-		if (stateRunning & pState)
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			return (pThread) ? pThread->shouldAbort() : true;
-		}
-		return true;
-	}
-
-
-
-	void IJob::execute()
+	void IJob::execute(Thread::IThread* t)
 	{
 		// Reseting data
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			pProgression = 0.f;
-			pState = stateRunning;
-		}
+		// We will keep the state in `waiting` until we have properly set
+		// all other values
+		pThread = t;
+		pCanceling = 0;
+		pProgression = 0;
 
+		// Here we go !
+		pState = stateRunning;
 		// Execute the specific implementation of the job
 		onExecute();
+		// The state must be reset to idle as soon as possible while the
+		// other values are still valid.
+		pState = stateIdle;
 
-		// The job has finished
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			pState = stateIdle;
-			pProgression = 1.f;
-		}
+		// Other values
+		pThread = NULL;
+		pProgression = 100;
 	}
+
 
 
 
