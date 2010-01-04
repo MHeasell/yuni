@@ -16,7 +16,7 @@ namespace Render
 		if (pPaused)
 			return;
 
-		pCounter.addFrames(1);
+		//pCounter.addFrames(1);
 
 		// Clear the screen to a unique color
 		clearScreen();
