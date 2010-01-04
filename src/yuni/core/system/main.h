@@ -7,7 +7,10 @@
 # ifdef YUNI_OS_WINDOWS
 #   include "windows.hdr.h"
 
-#   define YUNI_MAIN()  \
+#	define YUNI_MAIN() \
+	int main(int argc, char** argv)
+
+#   define YUNI_MAIN_CONSOLE()  \
     /* Forward declaration */ \
     int main(int argc, char** argv); \
     \
@@ -76,6 +79,9 @@
     int main(int argc, char* argv[])
 
 #else
+
+#   define YUNI_MAIN_CONSOLE() \
+        int main(int argc, char* argv[])
 
 #   define YUNI_MAIN() \
         int main(int argc, char* argv[])
