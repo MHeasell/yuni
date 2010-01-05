@@ -18,31 +18,31 @@ namespace OpenMode
 	{
 		if (mode == OpenMode::append)
 			// Shortcut for write|append
-			return "a";
+			return "ab";
 		if (mode == OpenMode::truncate)
 			// Shortcut for write|append
-			return "w";
+			return "wb";
 
 		if (mode & OpenMode::write)
 		{
 			if (0 == (mode & OpenMode::read))
 			{
 				if (mode & OpenMode::truncate)
-					return "w";
+					return "wb";
 				if (mode & OpenMode::append)
-					return "a";
+					return "ab";
 			}
 			else
 			{
 				if (mode & OpenMode::truncate)
-					return "w+";
+					return "w+b";
 				if (mode & OpenMode::append)
-					return "a+";
-				return "r+";
+					return "a+b";
+				return "r+b";
 			}
-			return "w";
+			return "wb";
 		}
-		return (mode & OpenMode::read) ? "r" : "";
+		return (mode & OpenMode::read) ? "rb" : "";
 	}
 
 
@@ -51,31 +51,31 @@ namespace OpenMode
 	{
 		if (mode == OpenMode::append)
 			// Shortcut for write|append
-			return L"a";
+			return L"ab";
 		if (mode == OpenMode::truncate)
 			// Shortcut for write|append
-			return L"w";
+			return L"wb";
 
 		if (mode & OpenMode::write)
 		{
 			if (!(mode & OpenMode::read))
 			{
 				if (mode & OpenMode::truncate)
-					return L"w";
+					return L"wb";
 				if (mode & OpenMode::append)
-					return L"a";
+					return L"ab";
 			}
 			else
 			{
 				if (mode & OpenMode::truncate)
-					return L"w+";
+					return L"w+b";
 				if (mode & OpenMode::append)
-					return L"a+";
-				return L"r+";
+					return L"a+b";
+				return L"r+b";
 			}
-			return L"w";
+			return L"wb";
 		}
-		return (mode & OpenMode::read) ? L"r" : L"";
+		return (mode & OpenMode::read) ? L"rb" : L"";
 	}
 
 
