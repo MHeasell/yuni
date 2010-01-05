@@ -433,7 +433,7 @@ namespace StringImpl
 		{
 			assert((void*)&s != (const void*)&str && "undefined behavior");
 			if (str.pSize && len)
-				From<C*>::AppendRaw(s, str.ic_str(), Private::StringImpl::Min(str.size(), len));
+				From<C*>::AppendRaw(s, str.c_str(), Private::StringImpl::Min(str.size(), len));
 		}
 
 		template<int Chnk>
