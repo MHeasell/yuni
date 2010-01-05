@@ -89,6 +89,12 @@ namespace Yuni
 		MemoryBuffer(const MemoryBuffer& rhs);
 
 		/*!
+		** \brief Constructor with a null value
+		*/
+		MemoryBuffer(const NullPtr&);
+		MemoryBuffer(const NullPtr*);
+
+		/*!
 		** \brief Constructor with a default value
 		*/
 		template<class U> explicit MemoryBuffer(const U& rhs);
