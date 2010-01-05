@@ -270,6 +270,9 @@ namespace IO
 	** \brief Normalize a filename
 	**
 	** The input can be a Windows-style or a Unix-style path, with mixed slasles and anti-slashes.
+	** This routine removes dot segments (`.` and `..`) from a given filename (when
+	** possible).
+	** Any final slash or anti-slash will be kept.
 	** \param[in]  in  A path/filename to normalize
 	** \param[out] ou  A string (any class compliant to std::string) where to write the result
 	*/

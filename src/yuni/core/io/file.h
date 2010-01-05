@@ -135,23 +135,6 @@ namespace File
 	bool Copy(const String& from, const String& to, const bool overwrite = true);
 
 
-
-	/*!
-	** \brief Remove dot segments in an unix filename
-	** \ingroup IOFile
-	**
-	** This routine removes dot segments (`.` and `..`) from a given filename.
-	** However, in the case of a relative filename (ex: `../path/to/file`) the
-	** first dot segments (`..` only) can not be removed to preserve the meaning
-	** of the data.
-	** Any final slash will be removed.
-	**
-	** \param filename The filename
-	** \return A new string string with dot segments removed
-	*/
-	String RemoveDotSegmentsFromUnixFilename(const String& filename);
-
-
 	/*!
 	** \brief Create or erase a file
 	**
