@@ -138,18 +138,36 @@ namespace Math
 	template<class U>
 	inline U SquareRoot(const U x)
 	{
-		return (U)::sqrt((double)x);
+		return (x < YUNI_EPSILON) ? U() : (U)::sqrt((double)x);
 	}
 
 	template<> inline double SquareRoot(const double x)
 	{
-		return ::sqrt(x);
+		return (x < YUNI_EPSILON) ? 0. : ::sqrt(x);
 	}
 
 	template<> inline float SquareRoot(const float x)
 	{
+		return (x < YUNI_EPSILON) ? 0.f : ::sqrtf(x);
+	}
+
+	
+	template<class U>
+	inline U SquareRootNoCheck(const U x)
+	{
+		return (U)::sqrt((double)x);
+	}
+
+	template<> inline double SquareRootNoCheck(const double x)
+	{
+		return ::sqrt(x);
+	}
+
+	template<> inline float SquareRootNoCheck(const float x)
+	{
 		return ::sqrtf(x);
 	}
+
 
 
 

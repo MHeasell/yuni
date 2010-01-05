@@ -213,9 +213,18 @@ namespace Math
 	/*!
 	** \brief Get the square root value
 	**
+	** This routine is safe for zero or negative values
 	** \ingroup Math
 	*/
 	template<class U> U SquareRoot(const U x);
+
+	/*!
+	** \brief Get the square root value
+	**
+	** The standard dquare root function, without any check on the input
+	** \ingroup Math
+	*/
+	template<class U> U SquareRootNoCheck(const U x);
 
 
 	/*!
