@@ -266,6 +266,21 @@ namespace IO
 	template<int N> bool Exists(const StringBase<char,N>& p);
 
 
+	/*!
+	** \brief Normalize a filename
+	**
+	** The input can be a Windows-style or a Unix-style path, with mixed slasles and anti-slashes.
+	** \param[in]  in  A path/filename to normalize
+	** \param[out] ou  A string (any class compliant to std::string) where to write the result
+	*/
+	template<class AnyStringT, class StringT> void Normalize(const AnyStringT& in, StringT& out);
+
+
+
+
+
+
+
 
 } // namespace IO
 } // namespace Core
