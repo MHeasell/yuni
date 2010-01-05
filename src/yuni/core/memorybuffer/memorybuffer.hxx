@@ -10,6 +10,16 @@ namespace Yuni
 	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::MemoryBuffer()
 	{}
 
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::MemoryBuffer(const NullPtr&)
+	{}
+
+	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::MemoryBuffer(const NullPtr*)
+	{}
+
+
+
 
 	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
 	inline MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::MemoryBuffer(const MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>& rhs)
