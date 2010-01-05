@@ -3,6 +3,8 @@
 
 # include <assert.h>
 # include "private.h"
+# include <deque>
+# include "../memorybuffer.h"
 
 
 namespace Yuni
@@ -254,6 +256,204 @@ namespace IO
 			return filename + newExt;
 		return filename.substr(0, p) + newExt;
 	}
+
+
+	template<class AnyStringT, class StringT>
+	void Normalize(const AnyStringT& in, StringT& out)
+	{
+		// The given type, with its const identifier
+		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		// Assert, if a C* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, Normalize_InvalidTypeForInput);
+		// Assert, if the length of the container can not be found at compile time
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  Normalize_InvalidTypeForInputSize);
+
+		// Some static checks
+		if (Core::Traits::Length<UType,unsigned int>::isFixed)
+		{
+			// The value to find is actually empty, nothing to do
+			if (0 == Core::Traits::Length<UType,unsigned int>::fixedLength)
+			{
+				out.clear();
+				return;
+			}
+			// The string is actually a single POD item
+			if (1 == Core::Traits::Length<UType,unsigned int>::fixedLength)
+			{
+				out = in;
+				return;
+			}
+		}
+
+		// The length of the input
+		unsigned int inputLength = Core::Traits::Length<UType,unsigned int>::Value(in);
+		if (!inputLength)
+		{
+			out.clear();
+			return;
+		}
+		if (inputLength == 1)
+		{
+			out = in;
+			return;
+		}
+		// From here, we have at least 2 chars
+
+		// The original CString input
+		const char* input = Core::Traits::CString<UType>::Buffer(in);
+
+		// Counting slashes
+		unsigned int slashes = 0;
+		// An index, used at different places
+		unsigned int i = 0;
+		// We will keep the position of the character after the first slash. It improves
+		// a bit performances for relative filenames
+		unsigned int start;
+		for (; i != inputLength; ++i)
+		{
+			if (input[i] == '/' || input[i] == '\\')
+			{
+				slashes = 1;
+				start = ++i;
+				break;
+			}
+		}
+		if (!slashes)
+		{
+			// Nothing to normalize
+			out = in;
+			return;
+		}
+		for (; i < inputLength; ++i)
+		{
+			if (input[i] == '/' || input[i] == '\\')
+				++slashes;
+		}
+
+		// Initializing the output, and reserving the memory to avoid as much as possible calls to realloc
+		// In the most cases, the same size than the input is the most appropriate value
+		out.reserve(inputLength);
+		// Copying the begining of the input
+		out.assign(input, start);
+
+		// Detecting absolute paths.
+		// We only know that we have at least 2 chars, and we can not assume that the input
+		// is zero-terminated.
+		// For performance reasons (to reduce the calls to malloc/free when pushing an element),
+		// we will skip the begining if the path is absolute.
+		bool isAbsolute = false;
+		// Performing checks only if the first slash is near by the begining.
+		if (start < 4)
+		{
+			if (input[1] == ':' && inputLength > 2 && (input[2] == '\\' || input[2] == '/'))
+			{
+				// We have an Windows-style path, and it is absolute
+				isAbsolute = true;
+			}
+			else
+			{
+				// We have an Unix-style path
+				if (input[0] == '/' || input[0] == '\\')
+					isAbsolute = true;
+			}
+		}
+
+		// The last known good position
+		unsigned int cursor = start;
+		// The number of non-relative folders, used when the path is not absolute
+		// This value is used to keep the relative segments at the begining
+		unsigned int realFolderCount = 0;
+
+		// The stack
+		// PreAllocating the stack, to speed up the algoritm by avoiding numerous
+		// calls to malloc/free
+		struct Stack
+		{
+		public:
+			void operator () (unsigned int c, unsigned int l)
+			{
+				cursor = c;
+				length = l;
+			}
+		public:
+			unsigned int cursor;
+			unsigned int length;
+		};
+		Stack* stack = new Stack[slashes + 1]; // Ex: path/to/somewhere/on/my/hdd
+		// Index on the stack
+		unsigned int count = 0;
+
+		for (i = start; i < inputLength; ++i)
+		{
+			// Detecting the end of a segment
+			if (input[i] == '/' || input[i] == '\\')
+			{
+				switch (i - cursor)
+				{
+					case 0:
+						// A single slash. Nothing to do
+						break;
+					case 1:
+						{
+							// not the current folder `./`
+							if (input[cursor] != '.')
+							{
+								stack[count++](cursor, 2);
+								++realFolderCount;
+							}
+							break;
+						}
+					case 2:
+						{
+							// double dot segments
+							if (input[cursor] == '.' && input[cursor + 1] == '.')
+							{
+								if (isAbsolute)
+								{
+									if (count)
+										--count;
+								}
+								else
+								{
+									if (realFolderCount)
+									{
+										--count;
+										--realFolderCount;
+									}
+									else
+										stack[count++](cursor, 3);
+								}
+							}
+							break;
+						}
+					default:
+						{
+							// We have encountered a standard segment
+							stack[count++](cursor, i - cursor + 1);
+							++realFolderCount;
+						}
+				}
+				// Positioning the cursor to the next character
+				cursor = i + 1;
+			}
+		}
+
+		// Pushing all stored segments
+		if (count)
+		{
+			for (unsigned int j = 0; j != count; ++j)
+				out.append(input + stack[j].cursor, stack[j].length);
+		}
+
+		// Releasing the memory
+		delete[] stack;
+
+		// But it may remain a final segment
+		if (cursor != inputLength)
+			out.append(input + cursor, inputLength - cursor);
+	}
+
+
 
 
 
