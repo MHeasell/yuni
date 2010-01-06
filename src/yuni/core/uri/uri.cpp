@@ -214,7 +214,10 @@ namespace Yuni
 				pMustRemoveDotSegments = ('.' == infos.path.last());
 			}
 			if (pMustRemoveDotSegments)
-				infos.path = Core::IO::File::RemoveDotSegmentsFromUnixFilename(infos.path);
+			{
+				String tmp(infos.path);
+				Core::IO::Normalize(tmp, infos.path);
+			}
 		}
 		return true;
 	}

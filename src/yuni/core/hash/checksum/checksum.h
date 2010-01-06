@@ -25,15 +25,15 @@ namespace Checksum
 	/*!
 	** \brief Checksum Implementation (Abstract)
 	*/
-	class AChecksum
+	class IChecksum
 	{
 	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		AChecksum();
+		IChecksum() {}
 		//! Destructor
-		virtual ~AChecksum();
+		virtual ~IChecksum() {}
 		//@}
 
 		/*!
@@ -85,7 +85,7 @@ namespace Checksum
 		//! The hash value
 		String pValue;
 
-	}; // class Hash::AChecksum
+	}; // class Hash::IChecksum
 
 
 

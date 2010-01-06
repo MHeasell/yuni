@@ -33,7 +33,7 @@ namespace Application
 			StringBase<char, 1024> r;
 			r << Core::IO::Directory::Current() << Core::IO::Separator << argv[0];
 			if (r.notEmpty())
-				Core::IO::ExtractFilePath(pRootFolder, r, true);
+				pRootFolder = Core::IO::ExtractFilePath(r, true);
 		}
 
 		// Find The absolution exe name

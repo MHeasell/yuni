@@ -10,32 +10,32 @@ namespace Checksum
 {
 
 
-	inline void AChecksum::reset()
+	inline void IChecksum::reset()
 	{
 		pValue.clear();
 	}
 
 
-	inline const String& AChecksum::fromString(const String& s)
+	inline const String& IChecksum::fromString(const String& s)
 	{
 		return fromRawData(s.data(), s.size());
 	}
 
 
-	inline const String& AChecksum::operator[] (const String& s)
+	inline const String& IChecksum::operator[] (const String& s)
 	{
 		fromString(s);
 		return pValue;
 	}
 
 
-	inline const String& AChecksum::value() const
+	inline const String& IChecksum::value() const
 	{
 		return pValue;
 	}
 
 
-	inline const String& AChecksum::operator() () const
+	inline const String& IChecksum::operator() () const
 	{
 		return pValue;
 	}
