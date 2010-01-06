@@ -309,9 +309,9 @@ source_group("Core\\Memory buffer" FILES ${SRC_CORE_MEMORYBUFFER})
 
 # Hash - Checksums
 Set(SRC_CORE_HASH_CHECKSUM
+				core/hash/checksum/checksum.h
 				core/hash/checksum/checksum.hxx
 				core/hash/checksum/md5.hxx
-				core/hash/checksum/checksum.h core/hash/checksum/checksum.cpp
 				core/hash/checksum/md5.h core/hash/checksum/md5.cpp)
 source_group(Core\\Hash\\Checksum FILES ${SRC_CORE_HASH_CHECKSUM})
 

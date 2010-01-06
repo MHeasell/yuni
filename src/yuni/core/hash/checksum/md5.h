@@ -44,7 +44,7 @@ namespace Checksum
 	** std::cout << md5["Hello world"] << std::endl;
 	** \endcode
 	*/
-	class MD5 : public Hash::Checksum::AChecksum
+	class MD5 : public Hash::Checksum::IChecksum
 	{
 	public:
 		/*!
@@ -68,7 +68,7 @@ namespace Checksum
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		MD5();
+		MD5() {}
 		//! Destructor
 		virtual ~MD5() {}
 		//@}

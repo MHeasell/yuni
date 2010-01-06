@@ -386,11 +386,6 @@ namespace Checksum
 
 
 
-	MD5::MD5()
-		:Hash::Checksum::AChecksum()
-	{}
-
-
 
 	const String& MD5::fromRawData(const void* rawdata, uint64 size)
 	{
