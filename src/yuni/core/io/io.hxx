@@ -89,12 +89,13 @@ namespace IO
 
 
 
+	/*
 	template<class StringT1, class StringT2>
 	void ExtractFilePath(StringT1& out, const StringT2& p, const bool systemDependant)
 	{
-		const typename StringT2::size_type pos = (systemDependant)
+		const typename StringT2::size_type pos = ((systemDependant)
 			? p.find_last_of(IO::Constant<char>::Separator)
-			: p.find_last_of(IO::Constant<char>::AllSeparators);
+			: p.find_last_of(IO::Constant<char>::AllSeparators));
 		if (String::npos != pos)
 		{
 			if (!pos)
@@ -103,6 +104,7 @@ namespace IO
 				out.append(p, 0, pos - 1);
 		}
 	}
+	*/
 
 
 	template<typename C, int N>
@@ -299,7 +301,7 @@ namespace IO
 		}
 		// From here, we have at least 2 chars
 
-		// The original CString input
+		// From now on, we will work on a mere CString
 		const char* input = Core::Traits::CString<UType>::Buffer(in);
 
 		// Counting slashes
@@ -438,6 +440,28 @@ namespace IO
 			}
 		}
 
+		// Special case : The last segment is a double dot segment
+		if (cursor < inputLength && inputLength - cursor == 2)
+		{
+			if (input[cursor] == '.' && input[cursor + 1] == '.')
+			{
+				if (isAbsolute)
+				{
+					if (count)
+						--count;
+				}
+				else
+				{
+					if (realFolderCount)
+						--count;
+					else
+						stack[count++](cursor, 2);
+				}
+
+				cursor = inputLength;
+			}
+		}
+
 		// Pushing all stored segments
 		if (count)
 		{
@@ -449,8 +473,13 @@ namespace IO
 		delete[] stack;
 
 		// But it may remain a final segment
-		if (cursor != inputLength)
+		// We know for sure that it can not be a double dot segment
+		if (cursor < inputLength)
+		{
+			if (inputLength - cursor == 1 && input[cursor] == '.')
+				return;
 			out.append(input + cursor, inputLength - cursor);
+		}
 	}
 
 
