@@ -153,38 +153,38 @@ namespace Traits
 
 
 
-	// MemoryBuffer
+	// IString
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT, class SizeT>
-	struct Length<MemoryBuffer<C,ChunkSizeT, ZeroTerminatedT,ExpandableT>, SizeT>
+	template<class C, unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class SizeT>
+	struct Length<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
-		typedef MemoryBuffer<C,ChunkSizeT, ZeroTerminatedT,ExpandableT> MemoryBufferType;
+		typedef IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C> IStringType;
 
 	public:
-		static SizeT Value(const MemoryBufferType& container)
+		static SizeT Value(const IStringType& container)
 		{
 			return (SizeT) container.size();
 		}
 	};
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT, class SizeT>
-	struct Length<MemoryBuffer<C,ChunkSizeT, ZeroTerminatedT,ExpandableT>*, SizeT>
+	template<class C, unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class SizeT>
+	struct Length<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>*, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
-		typedef MemoryBuffer<C,ChunkSizeT, ZeroTerminatedT,ExpandableT> MemoryBufferType;
+		typedef IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C> IStringType;
 
 	public:
-		static SizeT Value(const MemoryBufferType* container)
+		static SizeT Value(const IStringType* container)
 		{
 			return (container) ? (SizeT) container->size() : 0;
 		}

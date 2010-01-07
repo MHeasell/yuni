@@ -12,7 +12,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace MemoryBufferImpl
+namespace IStringImpl
 {
 
 
@@ -283,7 +283,7 @@ namespace MemoryBufferImpl
 
 
 
-} // namespace MemoryBufferImpl
+} // namespace IStringImpl
 } // namespace Private
 } // namespace Yuni
 

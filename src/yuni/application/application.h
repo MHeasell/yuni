@@ -3,7 +3,6 @@
 
 # include "../yuni.h"
 # include "../thread/policy.h"
-# include "../core/memorybuffer.h"
 # include "../core/getopt.h"
 # include "../core/getopt/parser.h"
 
@@ -22,7 +21,6 @@ namespace Application
 		//! Pointer
 		typedef AApplication* Ptr;
 		//! Path
-		//typedef MemoryBuffer<char, FILENAME_MAX, true, false>  PathType;
 		typedef StringBase<char, 1024> PathType;
 
 	public:

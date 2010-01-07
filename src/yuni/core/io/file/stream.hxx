@@ -229,30 +229,29 @@ namespace File
 	}
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	inline size_t
-	Stream::read(MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>& buffer)
+	Stream::read(IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>& buffer)
 	{
-		typedef MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>  MemoryBufferType;
-		typedef typename MemoryBufferType::Type PODType;
+		typedef IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>  IStringType;
+		typedef typename IStringType::Type PODType;
 
-		if (MemoryBufferType::zeroTerminated)
+		if (IStringType::zeroTerminated)
 		{
 			const size_t result = read(buffer.data(), sizeof(C) * buffer.size());
 			((const PODType*) buffer.data())[result] = PODType();
 			return result;
 		}
-		else
-			return read(buffer.data(), sizeof(PODType) * buffer.size());
+		return read(buffer.data(), sizeof(PODType) * buffer.size());
 	}
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	inline Stream&
-	Stream::operator >> (MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>&  rhs)
+	Stream::operator >> (IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>&  rhs)
 	{
-		typedef MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>  MemoryBufferType;
-		typedef typename MemoryBufferType::Type PODType;
+		typedef IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>  IStringType;
+		typedef typename IStringType::Type PODType;
 
 		(void) this->read(rhs.data(), sizeof(PODType) * rhs.size());
 		return *this;

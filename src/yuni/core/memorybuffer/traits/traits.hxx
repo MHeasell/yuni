@@ -7,7 +7,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace MemoryBufferImpl
+namespace IStringImpl
 {
 
 
@@ -26,7 +26,7 @@ namespace MemoryBufferImpl
 			} while (capacity < minCapacity);
 
 			// Realloc the internal buffer
-			data = (C*) ::realloc(data, sizeof(C) * capacity);
+			data = (C*)::realloc(data, sizeof(C) * capacity);
 			// The variable data might be null before calling this method
 			// We have to make sure that it is really zero-terminated
 			if (ZeroTerminatedT)
@@ -156,7 +156,7 @@ namespace MemoryBufferImpl
 
 
 
-} // namespace MemoryBufferImpl
+} // namespace IStringImpl
 } // namespace Private
 } // namespace Yuni
 

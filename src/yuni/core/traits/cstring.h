@@ -75,28 +75,28 @@ namespace Traits
 
 
 
-	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
-	struct CString<MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT> >
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	struct CString<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char> >
 	{
 	public:
 		enum { valid = 1, converted = 0, };
 
 	public:
-		static const char* Buffer(const MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>& container)
+		static const char* Buffer(const IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char>& container)
 		{
 			return container.data();
 		}
 	};
 
 
-	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
-	struct CString<MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>* >
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	struct CString<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char>* >
 	{
 	public:
 		enum { valid = 1, converted = 0, };
 
 	public:
-		static const char* Buffer(const MemoryBuffer<char,ChunkSizeT, ZeroTerminatedT,ExpandableT>* container)
+		static const char* Buffer(const IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char>* container)
 		{
 			return container ? container->data() : NULL;
 		}

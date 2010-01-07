@@ -167,7 +167,7 @@ namespace File
 		size_t read(char* buffer, const size_t size);
 
 		/*!
-		** \brief Read data into a MemoryBuffer
+		** \brief Read data into a string buffer
 		**
 		** 'buffer.size() * sizeof(C)' bytes will be read from the stream and store
 		** into the given buffer.
@@ -176,8 +176,8 @@ namespace File
 		** \param buffer An arbitrary buffer
 		** \return The number of bytes that have been read
 		*/
-		template<class C, unsigned int CSizeT, bool ZeroT, bool ExpT>
-		size_t read(MemoryBuffer<C,CSizeT,ZeroT,ExpT>&  buffer);
+		template<unsigned int CSizeT, bool ExpT, bool ZeroT, class C>
+		size_t read(IString<CSizeT,ExpT,ZeroT,C>&  buffer);
 		//@}
 
 
@@ -200,7 +200,7 @@ namespace File
 		/*!
 		** \brief Write any arbitrary buffer
 		**
-		** \param buffer An arbitrary buffer (const char*, String, MemoryBuffer)
+		** \param buffer An arbitrary buffer (const char*, String, IString)
 		** \return The number of bytes that have been written
 		*/
 		template<class U> size_t write(const U& buffer);
@@ -208,7 +208,7 @@ namespace File
 		/*!
 		** \brief Write any arbitrary buffer
 		**
-		** \param buffer An arbitrary buffer (const char*, String, MemoryBuffer)
+		** \param buffer An arbitrary buffer (const char*, String, IString)
 		** \param size Size of the buffer to write
 		** \return The number of bytes that have been written
 		*/
@@ -231,9 +231,10 @@ namespace File
 		Stream& operator << (const char c);
 
 		//! Operator >> (read)
-		template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
-		Stream& operator >> (MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>& rhs);
+		template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+		Stream& operator >> (IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>& rhs);
 		//@}
+
 
 	private:
 		# ifdef YUNI_OS_WINDOWS
@@ -242,10 +243,13 @@ namespace File
 		# endif
 
 	private:
+		typedef FILE HandleType;
 		//! A FILE pointer
-		FILE* pFd;
+		HandleType* pFd;
 
 	}; // class Stream
+
+
 
 
 

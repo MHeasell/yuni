@@ -2,6 +2,7 @@
 # define __YUNI_CORE_MEMORY_BUFFER_TRAITS_APPEND_H__
 
 # include "../../traits/length.h"
+# include "integer.h"
 
 # ifdef YUNI_OS_MSVC
 #	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf_s(BUFFER,SIZE,F,V)
@@ -15,14 +16,14 @@ namespace Yuni
 {
 namespace Private
 {
-namespace MemoryBufferImpl
+namespace IStringImpl
 {
 
 	template<class MemBufT, class C>
 	struct Append
 	{
 		// Unknown type
-		YUNI_STATIC_ASSERT(false, MemoryBuffer_AppendUnknownType);
+		YUNI_STATIC_ASSERT(false, IString_AppendUnknownType);
 	};
 
 
@@ -92,11 +93,11 @@ namespace MemoryBufferImpl
 	};
 
 
-	// MemoryBuffer
-	template<class MemBufT, unsigned int ChunkSizeT, bool ZeroT, bool ExpandT>
-	struct Append<MemBufT, Yuni::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
+	// IString
+	template<class MemBufT, unsigned int ChunkSizeT, bool ExpandT, bool ZeroT>
+	struct Append<MemBufT, Yuni::IString<typename MemBufT::Type, ChunkSizeT, ExpandT, ZeroT> >
 	{
-		typedef Yuni::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
+		typedef Yuni::IString<typename MemBufT::Type, ChunkSizeT, ExpandT, ZeroT> C;
 		static void Do(MemBufT& memoryBuffer, const C& rhs)
 		{
 			if (rhs.notEmpty())
@@ -156,27 +157,36 @@ namespace MemoryBufferImpl
 		} \
 	}
 
+# define YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(TYPE) \
+	template<class MemBufT> \
+	struct Append<MemBufT, TYPE> \
+	{ \
+		static void Do(MemBufT& memoryBuffer, const TYPE rhs) \
+		{ \
+			Private::IStringImpl::From<Math::Base::Decimal, TYPE>::AppendTo(memoryBuffer, rhs); \
+		} \
+	}
 
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL( 8, "%i",   sint16);
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(16, "%i",   sint32);
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(24, "%lld", sint64);
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL( 8, "%u",   uint16);
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(16, "%u",   uint32);
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(26, "%lld", uint64);
+
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(sint16);
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(sint32);
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(sint64);
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(uint16);
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(uint32);
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(uint64);
+	# ifdef YUNI_HAS_LONG
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(long);
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(unsigned long);
+	# endif
 
 	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(24, "%lf",  float);
 	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(24, "%lf",  double);
 
 
-	# ifdef YUNI_HAS_LONG
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(26, "%ld",  long);
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(26, "%lu",  unsigned long);
-	# endif
 
 
 
-
-} // namespace MemoryBufferImpl
+} // namespace IStringImpl
 } // namespace Private
 } // namespace Yuni
 

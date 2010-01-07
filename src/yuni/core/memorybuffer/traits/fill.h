@@ -7,7 +7,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace MemoryBufferImpl
+namespace IStringImpl
 {
 
 	template<class MemBufT, class U>
@@ -68,7 +68,7 @@ namespace MemoryBufferImpl
 
 
 
-} // namespace MemoryBufferImpl
+} // namespace IStringImpl
 } // namespace Private
 } // namespace Yuni
 

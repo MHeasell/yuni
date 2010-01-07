@@ -9,10 +9,10 @@ namespace Yuni
 {
 
 
-	/*! Type for a default behavior / policy */
+	//! Type for a default behavior / policy
 	struct Default {};
 
-	/*! Absence Option */
+	//! Absence Option
 	struct None {};
 
 
@@ -20,11 +20,14 @@ namespace Yuni
 
 
 
-	// Forward declaration for MemoryBuffer
-	template<class C, unsigned int ChunkSizeT = 128, bool ZeroTerminatedT = false, bool ExpandableT = true>
-	class MemoryBuffer;
+namespace Core
+{
 
+	// Forward declaration for the base class IString<>
+	template<unsigned int ChunkSizeT = 128, bool ExpandableT = true, bool ZeroTerminatedT = true, class C = char>
+	class IString;
 
+} // namespace Core
 } // namespace Yuni
 
 
