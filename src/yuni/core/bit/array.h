@@ -197,10 +197,12 @@ namespace Bit
 
 
 	private:
-		//! Internal buffer
-		MemoryBuffer<char, 20, false, true> pBuffer;
+		//! Buffer Type
+		typedef IString<20, true, false> BufferType;
 		//! Number of bits into the buffer, requested by the caller
 		unsigned int pCount;
+		//! Internal buffer
+		BufferType pBuffer;
 
 	}; // class Array
 

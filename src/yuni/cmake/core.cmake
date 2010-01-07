@@ -178,6 +178,13 @@ source_group(Core\\LinkedList FILES ${SRC_CORE_SLIST})
 
 
 Set(SRC_CORE_STRING
+				core/memorybuffer/istring.h core/memorybuffer/istring.hxx
+				core/memorybuffer/traits/append.h
+				core/memorybuffer/traits/assign.h
+				core/memorybuffer/traits/fill.h
+				core/memorybuffer/traits/traits.h
+				core/memorybuffer/traits/traits.hxx 
+
 				core/string/string.h core/string/string.hxx
 				core/string/converters.from.hxx core/string/converters.to.hxx
 				core/string/forward.h
@@ -273,6 +280,7 @@ source_group(Core\\Event FILES ${SRC_CORE_EVENT})
 Set(SRC_CORE_MATH
 				# Standard functions
 				core/math/math.h 	core/math.h  core/math/math.hxx core/math/msvc.hxx
+				core/math/base.h
 				# Log(N)
 				core/math/log.h core/math/log.hxx
 				# Trigonometric functions
@@ -296,15 +304,6 @@ Set(SRC_CORE_BIT
 source_group("Core\\Bit" FILES ${SRC_CORE_BIT})
 
 
-Set(SRC_CORE_MEMORYBUFFER
-				core/memorybuffer.h
-				core/memorybuffer/memorybuffer.h core/memorybuffer/memorybuffer.hxx
-				core/memorybuffer/traits/append.h
-				core/memorybuffer/traits/assign.h
-				core/memorybuffer/traits/fill.h
-				core/memorybuffer/traits/traits.h
-				core/memorybuffer/traits/traits.hxx )
-source_group("Core\\Memory buffer" FILES ${SRC_CORE_MEMORYBUFFER})
 
 
 # Hash - Checksums
@@ -500,7 +499,6 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_DYNAMICLIBRARY}
 		${SRC_CORE_BIND} ${SRC_CORE_EVENT}
 		${SRC_CORE_MATH}
-		${SRC_CORE_MEMORYBUFFER}
 		${SRC_CORE_HASH_CHECKSUM}
 		${SRC_CORE_TREE_N}
 		${SRC_CORE_VERSION}

@@ -112,9 +112,9 @@ namespace Bit
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  MemoryBuffer_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  BitArray_InvalidTypeForBufferSize);
 
 		if (Core::Traits::Length<UType,Size>::isFixed)
 		{
@@ -140,7 +140,7 @@ namespace Bit
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, MemoryBuffer_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
 
 		pBuffer.assign(Core::Traits::CString<UType>::Buffer(u), (pCount = size));
 	}

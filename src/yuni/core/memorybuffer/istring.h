@@ -28,12 +28,8 @@ namespace Yuni
 	**  - C*
 	**  - C[]
 	**  - std::basic_string<C>
-	**  - Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>Base<C>
-	**  - Yuni::MemoryBuffer<C>
+	**  - Yuni::IString<...>
 	**
-	**
-	** Performance Tip: The class Core::Bit::Array should have better performance than
-	**   a MemoryBuffer<bool> for medium or large buffer, and uses less memory in nearly any cases.
 	**
 	** \tparam C A pod type
 	** \tparam ChunkSizeT The size for a single chunk (>= 2)
@@ -41,12 +37,12 @@ namespace Yuni
 	** \tparam ExpandableT A non-zero value to make a growable buffer. Otherwise it will be a simple
 	**   buffer with a length equals to ChunkSizeT * sizeof(C)
 	*/
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
-	class MemoryBuffer : protected Private::MemoryBufferImpl::Data<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	class IString : protected Private::IStringImpl::Data<ChunkSizeT,ZeroTerminatedT,ExpandableT,C>
 	{
 	public:
 		//! Ancestor
-		typedef Private::MemoryBufferImpl::Data<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>  AncestorType;
+		typedef Private::IStringImpl::Data<ChunkSizeT,ZeroTerminatedT,ExpandableT,C>  AncestorType;
 		//! Size type
 		typedef typename AncestorType::Size Size;
 		//! Size type (STL Compliant)
@@ -57,7 +53,7 @@ namespace Yuni
 		//! Type for the POD type (STL compliant)
 		typedef C value_type;
 		//! Self
-		typedef MemoryBuffer<C,ChunkSizeT,ZeroTerminatedT, ExpandableT>  MemoryBufferType;
+		typedef IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>  IStringType;
 
 		enum
 		{
@@ -81,31 +77,31 @@ namespace Yuni
 		/*!
 		** \brief Default Constructor
 		*/
-		MemoryBuffer();
+		IString();
 
 		/*!
 		** \brief Copy constructor
 		*/
-		MemoryBuffer(const MemoryBuffer& rhs);
+		IString(const IString& rhs);
 
 		/*!
 		** \brief Constructor with a null value
 		*/
-		MemoryBuffer(const NullPtr&);
-		MemoryBuffer(const NullPtr*);
+		IString(const NullPtr&);
+		IString(const NullPtr*);
 
 		/*!
 		** \brief Constructor with a default value
 		*/
-		template<class U> explicit MemoryBuffer(const U& rhs);
+		template<class U> explicit IString(const U& rhs);
 
 		/*!
 		**
 		*/
-		MemoryBuffer(const C* block, const Size blockSize);
+		IString(const C* block, const Size blockSize);
 
 		//! Destructor
-		~MemoryBuffer() {}
+		~IString() {}
 		//@}
 
 
@@ -140,6 +136,9 @@ namespace Yuni
 		*/
 		template<class U> void append(const U& u, const Size size);
 
+		//! \see append(const U*, const Size)
+		void write(const C* buffer, const Size size);
+
 		/*!
 		** \brief Append a raw buffer
 		**
@@ -147,7 +146,6 @@ namespace Yuni
 		** \param size Size of the given buffer
 		*/
 		void append(const C* buffer, const Size size);
-
 
 		/*!
 		** \brief Insert at the begining of the buffer a new value
@@ -237,7 +235,7 @@ namespace Yuni
 		** \brief Fill the whole buffer with a given pattern
 		**
 		** \code
-		** MemoryBuffer<char>  buffer;
+		** IString<char>  buffer;
 		** buffer.resize(80);
 		**
 		** // Preface
@@ -269,7 +267,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string
 		**
 		** \param buffer An arbitrary string
-		** \return The offset of the first sub-string found, npos otherwise
+		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		Size find(const C buffer) const;
 
@@ -278,7 +276,7 @@ namespace Yuni
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
 		** \param buffer An arbitrary string
-		** \return The offset of the first sub-string found, npos otherwise
+		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		Size indexOf(Size offset, const C buffer) const;
 
@@ -287,7 +285,7 @@ namespace Yuni
 		**
 		** \param buffer An arbitrary string
 		** \param len Size of the given buffer
-		** \return The offset of the first sub-string found, npos otherwise
+		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		Size find(const C* buffer, const Size len) const;
 
@@ -297,7 +295,7 @@ namespace Yuni
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
 		** \param buffer An arbitrary string
 		** \param len Size of the given buffer
-		** \return The offset of the first sub-string found, npos otherwise
+		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		Size indexOf(Size offset, const C* buffer, const Size len) const;
 
@@ -305,7 +303,7 @@ namespace Yuni
 		** \brief Find the offset of any supported CString
 		**
 		** \param buffer Any supported CString
-		** \return The offset of the first sub-string found, npos otherwise
+		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		template<class U> Size find(const U& u) const;
 
@@ -314,7 +312,7 @@ namespace Yuni
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
 		** \param buffer Any supported CString
-		** \return The offset of the first sub-string found, npos otherwise
+		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		template<class U> Size indexOf(Size offset, const U& u) const;
 
@@ -322,7 +320,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string (equivalent to the method `find()`)
 		**
 		** \param buffer An arbitrary string
-		** \return The offset of the first sub-string found, npos otherwise
+		** \return The offset of the first sub-string found, `npos` if not found
 		** \see find()
 		*/
 		template<class U> Size find_first_of(const U& u) const;
@@ -354,30 +352,30 @@ namespace Yuni
 		/*!
 		** \brief Remove all white-spaces from the begining and the end of the buffer
 		*/
-		void trim(const C c = ' ');
+		void trim(const C c /* = ' ' */);
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the end of the buffer
 		*/
-		template<class U> void trim(const U& u);
+		template<class U> void trim(const U& u = " \t");
 
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the end of the buffer
 		*/
-		template<class U> void trimRight(const U& u);
+		template<class U> void trimRight(const U& u = " \t");
 
 		/*!
 		** \brief Remove all items equal to 'c' from the end of the buffer
 		*/
-		void trimRight(const C c = ' ');
+		void trimRight(const C c);
 
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the begining of the buffer
 		*/
-		template<class U> void trimLeft(const U& u);
+		template<class U> void trimLeft(const U& u = " \t");
 		/*!
 		** \brief Remove all items equal to 'c' from the begining of the buffer
 		*/
-		void trimLeft(const C c = ' ');
+		void trimLeft(const C c);
 		//@}
 
 		//! \name Remove / Erase
@@ -385,8 +383,9 @@ namespace Yuni
 		// From the ancestor
 		/*!
 		** \brief Empty the buffer
+		** \return *this
 		*/
-		MemoryBuffer& clear();
+		IString& clear();
 
 		/*!
 		** \brief Erase a part of the buffer
@@ -490,51 +489,29 @@ namespace Yuni
 		const C& operator [] (const Size offset) const;
 		C& operator [] (const Size offset);
 		//! The operator `+=` (append)
-		template<class U> MemoryBuffer& operator += (const U& rhs);
+		template<class U> IString& operator += (const U& rhs);
 		//! The operator `<<` (append)
-		template<class U> MemoryBuffer& operator << (const U& rhs);
+		template<class U> IString& operator << (const U& rhs);
 
 		//! The operator `=` (assign - copy)
-		MemoryBuffer& operator = (const MemoryBuffer& rhs);
+		IString& operator = (const IString& rhs);
 		//! The operator `=` (assign)
-		template<class U> MemoryBuffer& operator = (const U& rhs);
+		template<class U> IString& operator = (const U& rhs);
 
-		bool operator < (const MemoryBuffer& rhs) const
-		{
-			return (!AncestorType::size || (AncestorType::size < rhs.size()
-				&& ::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(C)) <= 0));
-		}
+		//! The operator `<`
+		bool operator < (const IString& rhs) const;
+		//! The operator `>`
+		bool operator > (const IString& rhs) const;
+		//! The operator `<=`
+		bool operator <= (const IString& rhs) const;
+		//! The operator `>=`
+		bool operator >= (const IString& rhs) const;
 
-		bool operator > (const MemoryBuffer& rhs) const
-		{
-			return (AncestorType::size > rhs.size()
-				&& ::memcmp(AncestorType::data, rhs.data(), rhs.size() * sizeof(C)) >= 0);
-		}
-
-		bool operator <= (const MemoryBuffer& rhs) const
-		{
-			return (!AncestorType::size || (AncestorType::size <= rhs.size()
-				&& ::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(C)) <= 0));
-		}
-
-		bool operator >= (const MemoryBuffer& rhs) const
-		{
-			return (AncestorType::size && AncestorType::size >= rhs.size()
-				&& ::memcmp(AncestorType::data, rhs.data(), rhs.size() * sizeof(C)) >= 0);
-		}
-
-		bool operator == (const MemoryBuffer& rhs) const
-		{
-			return (AncestorType::size > 0 && AncestorType::size == rhs.size()
-				&& !::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(C)));
-		}
-
-		template<unsigned int C1, bool Z1, bool E1>
-		bool operator == (const MemoryBuffer<C, C1, Z1, E1>& rhs) const
-		{
-			return (AncestorType::size == rhs.size()
-				&& !::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(C)));
-		}
+		//! The operator `==`
+		bool operator == (const IString& rhs) const;
+		//! The operator `==`
+		template<unsigned int C1, bool E1, bool Z1>
+		bool operator == (const IString<C1, E1, Z1, C>& rhs) const;
 
 		//! The operator `!=`
 		template<class U> bool operator != (const U& rhs) const;
@@ -556,11 +533,12 @@ namespace Yuni
 
 	private:
 		// our friends !
-		template<class, class> friend class Private::MemoryBufferImpl::Append;
-		template<class, class> friend class Private::MemoryBufferImpl::Assign;
-		template<class, class> friend class Private::MemoryBufferImpl::Fill;
+		template<class, class, int> friend class Private::IStringImpl::From;
+		template<class, class> friend class Private::IStringImpl::Append;
+		template<class, class> friend class Private::IStringImpl::Assign;
+		template<class, class> friend class Private::IStringImpl::Fill;
 
-	}; // class MemoryBuffer
+	}; // class IString
 
 
 
@@ -569,7 +547,7 @@ namespace Yuni
 
 } // namespace Yuni
 
-# include "memorybuffer.hxx"
+# include "istring.hxx"
 
 
 
@@ -578,7 +556,7 @@ namespace Yuni
 //@{
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline std::ostream& operator << (std::ostream& out, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline std::ostream& operator << (std::ostream& out, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	out.write(rhs.data(), rhs.size());
 	return out;
@@ -586,37 +564,37 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::MemoryBuffer<C,
 
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator == (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator == (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs == u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator != (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator != (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs != u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator < (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator < (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs >= u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator > (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator > (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs <= u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator <= (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator <= (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs > u);
 }
 
 template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator >= (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline bool operator >= (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
 	return (rhs < u);
 }
@@ -626,79 +604,79 @@ inline bool operator >= (const U& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT
 
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const char* u)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const char* u)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t* u)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t* u)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const char u)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const char u)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t u)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t u)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const wchar_t* u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const wchar_t* u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const char* u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const char* u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const char u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const char u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const wchar_t u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const wchar_t u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 
 
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT, class U>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const std::basic_string<U>& u, const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const std::basic_string<U>& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
 }
 
 
 template<class C, unsigned int SizeT, bool ZeroT, bool ExpT, class U>
-inline Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>& rhs, const std::basic_string<U>& u)
+inline Yuni::IString<C,SizeT,ZeroT,ExpT>
+operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const std::basic_string<U>& u)
 {
-	return Yuni::MemoryBuffer<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
 }
 
 //@}

@@ -17,13 +17,13 @@ namespace Utils
 	**
 	** This dumper can dump any buffer (with start address and length),
 	** or any class having a data() and size() member function.
-	** (for example, MemoryBuffer).
+	** (for example, IString).
 	** The output looks like the following:
 	**
 	** Sample usage:
 	** \code
 	** // Either call it with a memory buffer
-	** std::cout << Core::Utils::Hexdump(myMemoryBuffer);
+	** std::cout << Core::Utils::Hexdump(myBuffer);
 	**
 	** // Or with a plain old char buffer.
 	** char buf[256];
@@ -58,7 +58,7 @@ namespace Utils
 		Hexdump(const Hexdump& rhs);
 
 		/*!
-		** \brief Construct from a MemoryBuffer (or like) object.
+		** \brief Construct from a string (or like) object.
 		** \param[in] os The stream to output the hexdump on.
 		** \param[in] mp The Hexdump instance to dump.
 		*/
@@ -117,6 +117,7 @@ namespace Utils
 		unsigned int pSize;
 
 	}; // class HexDump
+
 
 
 

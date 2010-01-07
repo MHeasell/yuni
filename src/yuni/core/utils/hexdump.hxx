@@ -79,4 +79,3 @@ inline std::ostream& operator<< (std::ostream& outStream, const Yuni::Core::Util
 
 
 #endif // __YUNI_CORE_UTILS_HEXDUMP_HXX__
-

@@ -7,7 +7,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace MemoryBufferImpl
+namespace IStringImpl
 {
 
 	template<class MemBufT, class C>
@@ -100,11 +100,11 @@ namespace MemoryBufferImpl
 	};
 
 
-	// MemoryBuffer
+	// IString
 	template<class MemBufT, unsigned int ChunkSizeT, bool ZeroT, bool ExpandT>
-	struct Assign<MemBufT, Yuni::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
+	struct Assign<MemBufT, Yuni::IString<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
 	{
-		typedef Yuni::MemoryBuffer<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
+		typedef Yuni::IString<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
 		static void Do(MemBufT& memoryBuffer, const C& rhs)
 		{
 			if (rhs.notEmpty())
@@ -155,20 +155,13 @@ namespace MemoryBufferImpl
 	}
 
 
-	YUNI_PRIVATE_MEMORY_BUFFER_ASSIGN_IMPL( 8, "%i",   sint16);
-	YUNI_PRIVATE_MEMORY_BUFFER_ASSIGN_IMPL(16, "%i",   sint32);
-	YUNI_PRIVATE_MEMORY_BUFFER_ASSIGN_IMPL(24, "%lld", sint64);
-	YUNI_PRIVATE_MEMORY_BUFFER_ASSIGN_IMPL( 8, "%u",   uint16);
-	YUNI_PRIVATE_MEMORY_BUFFER_ASSIGN_IMPL(16, "%u",   uint32);
-	YUNI_PRIVATE_MEMORY_BUFFER_ASSIGN_IMPL(26, "%lld", uint64);
-
 	YUNI_PRIVATE_MEMORY_BUFFER_ASSIGN_IMPL(24, "%lf", float);
 	YUNI_PRIVATE_MEMORY_BUFFER_ASSIGN_IMPL(24, "%lf", double);
 
 
 
 
-} // namespace MemoryBufferImpl
+} // namespace IStringImpl
 } // namespace Private
 } // namespace Yuni
 
