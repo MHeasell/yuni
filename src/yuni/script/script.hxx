@@ -16,6 +16,7 @@ namespace Script
 {
 
 
+
 	template<typename T>
 	inline bool AScript::isBound(const T& functionName) const
 	{
@@ -73,6 +74,7 @@ namespace Script
 			return true;
 		}
 		return false;
+
 	}
 
 

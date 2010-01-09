@@ -101,10 +101,10 @@ namespace IStringImpl
 
 
 	// IString
-	template<class MemBufT, unsigned int ChunkSizeT, bool ZeroT, bool ExpandT>
-	struct Assign<MemBufT, Yuni::IString<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> >
+	template<class MemBufT, unsigned int ChunkSizeT, bool ExpandT, bool ZeroT>
+	struct Assign<MemBufT, Yuni::Core::IString<ChunkSizeT, ExpandT, ZeroT, typename MemBufT::Type> >
 	{
-		typedef Yuni::IString<typename MemBufT::Type, ChunkSizeT, ZeroT, ExpandT> C;
+		typedef Yuni::Core::IString<ChunkSizeT, ExpandT, ZeroT, typename MemBufT::Type> C;
 		static void Do(MemBufT& memoryBuffer, const C& rhs)
 		{
 			if (rhs.notEmpty())

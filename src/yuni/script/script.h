@@ -244,7 +244,7 @@ namespace Script
 		** \param[in] method The method to call in the script namespace
 		** \param[in] arg1 The first argument (and so on.) You can pass an empty Any as a
 		**			  value to mean the same thing as "nil" in Lua.
-		** \return True if the call was made without any runtime fatal error.
+		** \return True if the call was made without any runtime fatal error.	
 		*/
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH() = 0;
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_1_ANY) = 0;

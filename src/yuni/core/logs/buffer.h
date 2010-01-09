@@ -2,7 +2,7 @@
 # define __YUNI_CORE_LOGS_STREAM_H__
 
 # include "../../yuni.h"
-# include "../string.h"
+# include "../memorybuffer/istring.h"
 
 
 namespace Yuni
@@ -90,7 +90,7 @@ namespace LogImpl
 		** The chunk size can not be merely the default one; Log entries often
 		** contain path of filename for example.
 		*/
-		StringBase<char, 512> pBuffer;
+		Yuni::Core::IString<FILENAME_MAX, false, false> pBuffer;
 
 	}; // class Buffer
 
@@ -121,7 +121,18 @@ namespace LogImpl
 			return *this;
 		}
 
+		void appendFormat(const char [], ...)
+		{
+			// Do nothing
+		}
+
+		void vappendFormat(const char [], va_list)
+		{
+			// Do nothing
+		}
+
 	}; // class Buffer
+
 
 
 

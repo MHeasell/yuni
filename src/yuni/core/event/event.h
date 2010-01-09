@@ -91,7 +91,7 @@ namespace Yuni
 		*/
 		Event(const Event& rhs);
 		//! Destructor
-		virtual ~Event();
+		~Event();
 		//@}
 
 
@@ -154,8 +154,10 @@ namespace Yuni
 		//! \see size()
 		unsigned int count() const;
 
-		//! Get if the event does not have any single connection
+		//! Get if the event does not have any single callback
 		bool empty() const;
+		//! Get if the event has at least one callback
+		bool notEmpty() const;
 		//@}
 
 		//[!] \name Invoke (documentation imported from the class WithNArguments)
@@ -179,6 +181,9 @@ namespace Yuni
 		** \see remove()
 		*/
 		template<class U> Event& operator -= (const U* object);
+
+		//! Get if the event is empty
+		bool operator ! () const;
 		//@}
 
 	protected:
@@ -191,6 +196,10 @@ namespace Yuni
 		** \param pointer Pointer-to-object (can be null)
 		*/
 		/* virtual */ void unregisterObserver(const IEventObserverBase* pointer);
+
+	private:
+		//! Disconnect all callbacks (without lock)
+		void clearWL();
 
 	}; // class Event<>
 

@@ -27,6 +27,8 @@ namespace Traits
 			valid = 0,
 			//! A non-zero value if the data have been converted
 			converted = 0,
+			//! A non-zero value if the data is zero-terminated
+			zeroTerminated = 0,
 		};
 
 	public:
@@ -49,7 +51,7 @@ namespace Traits
 	struct CString<char*>
 	{
 	public:
-		enum { valid = 1, converted = 0, };
+		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
 		static const char* Buffer(const char* container)
@@ -63,7 +65,7 @@ namespace Traits
 	struct CString<char[N]>
 	{
 	public:
-		enum { valid = 1, converted = 0, };
+		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
 		static const char* Buffer(const char* container)
@@ -79,7 +81,7 @@ namespace Traits
 	struct CString<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char> >
 	{
 	public:
-		enum { valid = 1, converted = 0, };
+		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
 		static const char* Buffer(const IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char>& container)
@@ -93,7 +95,7 @@ namespace Traits
 	struct CString<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char>* >
 	{
 	public:
-		enum { valid = 1, converted = 0, };
+		enum { valid = 1, converted = 0, zeroTerminated = (ZeroTerminatedT), };
 
 	public:
 		static const char* Buffer(const IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char>* container)
@@ -108,7 +110,7 @@ namespace Traits
 	struct CString<StringBase<char,ChunkSizeT> >
 	{
 	public:
-		enum { valid = 1, converted = 0, };
+		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
 		static const char* Buffer(const StringBase<char,ChunkSizeT>& container)
@@ -123,7 +125,7 @@ namespace Traits
 	struct CString<StringBase<char,ChunkSizeT>* >
 	{
 	public:
-		enum { valid = 1, converted = 0, };
+		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
 		static const char* Buffer(const StringBase<char,ChunkSizeT>* container)
@@ -137,7 +139,7 @@ namespace Traits
 	struct CString<std::basic_string<char,T,Alloc> >
 	{
 	public:
-		enum { valid = 1, converted = 0, };
+		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
 		static const char* Buffer(const std::basic_string<char,T,Alloc>& container)
@@ -151,7 +153,7 @@ namespace Traits
 	struct CString<std::basic_string<char,T,Alloc>* >
 	{
 	public:
-		enum { valid = 1, converted = 0, };
+		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
 		static const char* Buffer(const std::basic_string<char,T,Alloc>* container)
@@ -165,7 +167,7 @@ namespace Traits
 	struct CString<NullPtr>
 	{
 	public:
-		enum { valid = 1, converted = 0, };
+		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
 		static const char* Buffer(const Yuni::NullPtr&)

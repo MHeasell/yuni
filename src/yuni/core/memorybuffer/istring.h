@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_MEMORY_BUFFER_MEMORY_BUFFER_H__
-# define __YUNI_CORE_MEMORY_BUFFER_MEMORY_BUFFER_H__
+#ifndef __YUNI_CORE_MEMORY_BUFFER_ISTRING_H__
+# define __YUNI_CORE_MEMORY_BUFFER_ISTRING_H__
 
 # include "../../yuni.h"
 # include "../static/remove.h"
@@ -8,17 +8,20 @@
 # include "../traits/length.h"
 
 # include <stdio.h>
+# include <stdarg.h>
 # include "traits/traits.h"
 # include "traits/append.h"
 # include "traits/assign.h"
 # include "traits/fill.h"
+# include "traits/vnsprintf.h"
 
 # include <iostream>
 
 
 namespace Yuni
 {
-
+namespace Core
+{
 
 	/*!
 	** \brief A dynamic/static memory buffer for POD types
@@ -28,7 +31,7 @@ namespace Yuni
 	**  - C*
 	**  - C[]
 	**  - std::basic_string<C>
-	**  - Yuni::IString<...>
+	**  - Yuni::Core::IString<...>
 	**
 	**
 	** \tparam C A pod type
@@ -38,11 +41,11 @@ namespace Yuni
 	**   buffer with a length equals to ChunkSizeT * sizeof(C)
 	*/
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	class IString : protected Private::IStringImpl::Data<ChunkSizeT,ZeroTerminatedT,ExpandableT,C>
+	class IString : protected Private::IStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, C>
 	{
 	public:
 		//! Ancestor
-		typedef Private::IStringImpl::Data<ChunkSizeT,ZeroTerminatedT,ExpandableT,C>  AncestorType;
+		typedef Private::IStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, C>  AncestorType;
 		//! Size type
 		typedef typename AncestorType::Size Size;
 		//! Size type (STL Compliant)
@@ -136,8 +139,8 @@ namespace Yuni
 		*/
 		template<class U> void append(const U& u, const Size size);
 
-		//! \see append(const U*, const Size)
-		void write(const C* buffer, const Size size);
+		//! \see template<class U> append(const U&, const Size)
+		template<class U> void write(const U& buffer, const Size size);
 
 		/*!
 		** \brief Append a raw buffer
@@ -483,6 +486,36 @@ namespace Yuni
 		//@}
 
 
+		//! \name Formatted buffer
+		//@{
+		/*!
+		** \brief Reset the current value with a formatted string
+		**
+		** The format is the standard printf format.
+		** \param format The format, reprensented by a zero-terminated string
+		** \return Always *this
+		*/
+		template<class AnyStringT> IString& format(const AnyStringT& format, ...);
+
+		/*!
+		** \brief Append formatted string
+		**
+		** The format is the standard printf format.
+		** \param format The format, reprensented by a zero-terminated string
+		** \return Always *this
+		*/
+		template<class AnyStringT> IString& appendFormat(const AnyStringT& format, ...);
+
+		/*!
+		** \brief Append a formatted string to the end of the current string
+		**
+		** The format is the standard printf format.
+		** \param format The format, represented by a zero-terminated C-String
+		*/
+		void vappendFormat(const char* format, va_list args);
+		//@}
+
+
 		//! \name Operators
 		//@{
 		//! The operator `[]` (the offset must be valid)
@@ -502,11 +535,22 @@ namespace Yuni
 		bool operator < (const IString& rhs) const;
 		//! The operator `>`
 		bool operator > (const IString& rhs) const;
+		//! The operator `<`
+		bool operator < (const C* rhs) const;
+		//! The operator `>`
+		bool operator > (const C* rhs) const;
+
 		//! The operator `<=`
 		bool operator <= (const IString& rhs) const;
 		//! The operator `>=`
 		bool operator >= (const IString& rhs) const;
+		//! The operator `<=`
+		bool operator <= (const C* rhs) const;
+		//! The operator `>=`
+		bool operator >= (const C* rhs) const;
 
+		//! The operator `==`
+		bool operator == (const C* rhs) const;
 		//! The operator `==`
 		bool operator == (const IString& rhs) const;
 		//! The operator `==`
@@ -544,7 +588,7 @@ namespace Yuni
 
 
 
-
+} // namespace Core
 } // namespace Yuni
 
 # include "istring.hxx"
@@ -555,46 +599,46 @@ namespace Yuni
 //! \name Operator overload for stream printing
 //@{
 
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline std::ostream& operator << (std::ostream& out, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline std::ostream& operator << (std::ostream& out, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
 {
 	out.write(rhs.data(), rhs.size());
 	return out;
 }
 
 
-template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator == (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline bool operator == (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
 {
 	return (rhs == u);
 }
 
-template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator != (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline bool operator != (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
 {
 	return (rhs != u);
 }
 
-template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator < (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline bool operator < (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
 {
 	return (rhs >= u);
 }
 
-template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator > (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline bool operator > (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
 {
 	return (rhs <= u);
 }
 
-template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator <= (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline bool operator <= (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
 {
 	return (rhs > u);
 }
 
-template<class U, class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline bool operator >= (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline bool operator >= (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
 {
 	return (rhs < u);
 }
@@ -603,83 +647,83 @@ inline bool operator >= (const U& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rh
 
 
 
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const char* u)
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const char* u)
 {
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
 }
 
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t* u)
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const wchar_t* u)
 {
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
 }
 
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const char u)
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const char u)
 {
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
 }
 
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const wchar_t u)
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const wchar_t u)
 {
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
-}
-
-
-
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const wchar_t* u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
-{
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
-}
-
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const char* u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
-{
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
-}
-
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const char u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
-{
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
-}
-
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const wchar_t u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
-{
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
 }
 
 
 
-
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT, class U>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const std::basic_string<U>& u, const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs)
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const wchar_t* u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
 {
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(u) += rhs;
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
+}
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const char* u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+{
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
+}
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const char u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+{
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
+}
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const wchar_t u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+{
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
 }
 
 
-template<class C, unsigned int SizeT, bool ZeroT, bool ExpT, class U>
-inline Yuni::IString<C,SizeT,ZeroT,ExpT>
-operator + (const Yuni::IString<C,SizeT,ZeroT,ExpT>& rhs, const std::basic_string<U>& u)
+
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C, class U>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const std::basic_string<U>& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
 {
-	return Yuni::IString<C,SizeT,ZeroT,ExpT>(rhs) += u;
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
+}
+
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT,class C, class U>
+inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
+operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const std::basic_string<U>& u)
+{
+	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
 }
 
 //@}
 
 
-#endif // __YUNI_CORE_MEMORY_BUFFER_MEMORY_BUFFER_H__
+#endif // __YUNI_CORE_MEMORY_BUFFER_ISTRING_H__

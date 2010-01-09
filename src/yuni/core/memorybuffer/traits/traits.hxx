@@ -11,8 +11,8 @@ namespace IStringImpl
 {
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool ExpandableT>
-	void Data<C,ChunkSizeT,ZeroTerminatedT,ExpandableT>::reserve(Size minCapacity)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::reserve(Size minCapacity)
 	{
 		minCapacity += zeroTerminated;
 		if (capacity < minCapacity)
@@ -30,14 +30,15 @@ namespace IStringImpl
 			// The variable data might be null before calling this method
 			// We have to make sure that it is really zero-terminated
 			if (ZeroTerminatedT)
-				data[size] = C(0);
+				data[size] = C();
 		}
 	}
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT>
-	typename Data<C,ChunkSizeT,ZeroTerminatedT,false>::Size
-	Data<C,ChunkSizeT,ZeroTerminatedT,false>::assignWithoutChecking(const C* block, Size blockSize)
+	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
+	typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size
+	Data<ChunkSizeT,false,ZeroTerminatedT,C>::assignWithoutChecking(const C* block,
+		typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size blockSize)
 	{
 		// We have to trunk the size if we are outer limits
 		// This condition is a little faster than the folowing replacement code :
@@ -55,7 +56,7 @@ namespace IStringImpl
 			// New size
 			size = capacity;
 			if (zeroTerminated)
-				data[capacity] = C(0);
+				data[capacity] = C();
 			return capacity;
 		}
 		// else
@@ -65,15 +66,15 @@ namespace IStringImpl
 			// New size
 			size = blockSize;
 			if (zeroTerminated)
-				data[size] = C(0);
+				data[size] = C();
 			return blockSize;
 		}
 	}
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT>
-	typename Data<C,ChunkSizeT,ZeroTerminatedT,false>::Size
-	Data<C,ChunkSizeT,ZeroTerminatedT,false>::appendWithoutChecking(const C* block, Size blockSize)
+	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
+	typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size
+	Data<ChunkSizeT,false,ZeroTerminatedT,C>::appendWithoutChecking(const C* block, Size blockSize)
 	{
 		// We have to trunk the size if we are outer limits
 		// This condition is a little faster than the folowing replacement code :
@@ -94,7 +95,7 @@ namespace IStringImpl
 			// New size
 			size = capacity;
 			if (zeroTerminated)
-				data[capacity] = C(0);
+				data[capacity] = C();
 			return blockSize;
 		}
 		// else
@@ -104,26 +105,26 @@ namespace IStringImpl
 			// New size
 			size += blockSize;
 			if (zeroTerminated)
-				data[size] = C(0);
+				data[size] = C();
 			return blockSize;
 		}
 	}
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT>
-	inline typename Data<C,ChunkSizeT,ZeroTerminatedT,false>::Size
-	Data<C,ChunkSizeT,ZeroTerminatedT,false>::assignWithoutChecking(const C c)
+	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
+	inline typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size
+	Data<ChunkSizeT,false,ZeroTerminatedT,C>::assignWithoutChecking(const C c)
 	{
 		data[0] = c;
 		size = 1;
 		if (zeroTerminated)
-			data[1] = C(0);
+			data[1] = C();
 		return 1;
 	}
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT>
-	typename Data<C,ChunkSizeT,ZeroTerminatedT,false>::Size
-	Data<C,ChunkSizeT,ZeroTerminatedT,false>::appendWithoutChecking(const C c)
+	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
+	typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size
+	Data<ChunkSizeT,false,ZeroTerminatedT,C>::appendWithoutChecking(const C c)
 	{
 		if (size == capacity)
 			return 0;
@@ -132,14 +133,14 @@ namespace IStringImpl
 			data[size] = c;
 			++size;
 			if (zeroTerminated)
-				data[size] = C(0);
+				data[size] = C();
 			return 1;
 		}
 	}
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT>
-	void Data<C,ChunkSizeT,ZeroTerminatedT,false>::put(const C rhs)
+	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
+	void Data<ChunkSizeT,false,ZeroTerminatedT,C>::put(const C rhs)
 	{
 		// Making sure that we have enough space
 		if (size != capacity)
