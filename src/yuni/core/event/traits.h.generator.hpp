@@ -93,11 +93,16 @@ namespace EventImpl
 		//! \name Constructors
 		//@{
 		//! Default constructor
-		WithNArguments() {}
+		WithNArguments()
+			:pEmpty(true)
+		{}
 		//! Copy constructor
 		WithNArguments(const WithNArguments& rhs)
-			:pBindList(rhs.pBindList)
-		{}
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			pEmpty = rhs.pEmpty;
+			pBindList = rhs.pBindList;
+		}
 		//@}
 
 		//! \name Invoke
@@ -107,9 +112,9 @@ namespace EventImpl
 		*/
 		void invoke(<%=generator.variableList(i)%>) const
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
-			if (!pBindList.empty())
+			if (!pEmpty)
 			{
+				typename ThreadingPolicy::MutexLocker locker(*this);
 				const typename BindList::const_iterator end = pBindList.end();
 				for (typename BindList::const_iterator i = pBindList.begin(); i != end; ++i)
 					(*i).invoke(<%=generator.list(i,'a')%>);
@@ -120,9 +125,9 @@ namespace EventImpl
 		typename PredicateT<R>::ResultType invoke(<%=generator.variableList(i)%>) const
 		{
 			PredicateT<R> predicate;
-			typename ThreadingPolicy::MutexLocker locker(*this);
-			if (!pBindList.empty())
+			if (!pEmpty)
 			{
+				typename ThreadingPolicy::MutexLocker locker(*this);
 				const typename BindList::const_iterator end = pBindList.end();
 				for (typename BindList::const_iterator i = pBindList.begin(); i != end; ++i)
 					predicate((*i).invoke(<%=generator.list(i,'a')%>));
@@ -133,9 +138,9 @@ namespace EventImpl
 		template<template<class> class PredicateT>
 		typename PredicateT<R>::ResultType invoke(PredicateT<R>& predicate<%=generator.variableList(i,"A","a", ", ")%>) const
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
-			if (!pBindList.empty())
+			if (!pEmpty)
 			{
+				typename ThreadingPolicy::MutexLocker locker(*this);
 				const typename BindList::const_iterator end = pBindList.end();
 				for (typename BindList::const_iterator i = pBindList.begin(); i != end; ++i)
 					predicate((*i).invoke(<%=generator.list(i,'a')%>));
@@ -149,9 +154,9 @@ namespace EventImpl
 		*/
 		void operator () (<%=generator.variableList(i)%>) const
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
-			if (!pBindList.empty())
+			if (!pEmpty)
 			{
+				typename ThreadingPolicy::MutexLocker locker(*this);
 				const typename BindList::const_iterator end = pBindList.end();
 				for (typename BindList::const_iterator i = pBindList.begin(); i != end; ++i)
 					(*i).invoke(<%=generator.list(i,'a')%>);
@@ -162,6 +167,9 @@ namespace EventImpl
 	protected:
 		//! Binding list (type)
 		typedef LinkedList<BindType> BindList;
+		//! A flag to know if the event is empty or not
+		// This value must only set when the mutex is locked
+		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
 
@@ -169,6 +177,8 @@ namespace EventImpl
 
 
 <% end %>
+
+
 
 
 } // namespace EventImpl

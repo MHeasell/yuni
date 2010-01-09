@@ -2,7 +2,7 @@
 # define __YUNI_CORE_LOGS_HANDLERS_CALLBACK_H__
 
 # include "../null.h"
-# include "../../bind/bind.h"
+# include "../../event/event.h"
 
 
 
@@ -30,7 +30,8 @@ namespace Logs
 		template<class LoggerT, class VerbosityType, class StringT>
 		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s)
 		{
-			callback(VerbosityType::level, s);
+			if (callback.notEmpty())
+				callback(VerbosityType::level, Yuni::String(s));
 
 			// Transmit the message to the next handler
 			NextHandler::template internalDecoratorWriteWL<LoggerT, VerbosityType, StringT>(logger, s);
@@ -38,7 +39,7 @@ namespace Logs
 
 
 	public:
-		Yuni::Bind<void (int, const String&)> callback;
+		Yuni::Event<void (int, const String&)> callback;
 
 	}; // class Callback
 

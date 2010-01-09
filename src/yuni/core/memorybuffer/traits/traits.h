@@ -17,7 +17,7 @@ namespace IStringImpl
 
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT, bool Expandable>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	struct Data
 	{
 	public:
@@ -63,9 +63,7 @@ namespace IStringImpl
 				}
 			}
 			else
-			{
 				size = 0;
-			}
 		}
 
 		Size assignWithoutChecking(const C* block, const Size blockSize)
@@ -174,8 +172,8 @@ namespace IStringImpl
 
 
 
-	template<class C, unsigned int ChunkSizeT, bool ZeroTerminatedT>
-	struct Data<C, ChunkSizeT, ZeroTerminatedT, false>
+	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
+	struct Data<ChunkSizeT, false, ZeroTerminatedT, C>
 	{
 	public:
 		typedef unsigned int Size;
