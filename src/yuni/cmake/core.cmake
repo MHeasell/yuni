@@ -276,6 +276,13 @@ Set(SRC_CORE_EVENT
 				core/event/traits.h
 				core/event/observer/observer.h core/event/observer/observer.hxx
 				core/event.h
+
+				# Event loop
+				core/event/loop.h core/event/loop.hxx
+				core/event/flow
+				core/event/flow/continuous.h
+				core/event/statistics
+				core/event/statistics/none.h
 				)
 source_group(Core\\Event FILES ${SRC_CORE_EVENT})
 
