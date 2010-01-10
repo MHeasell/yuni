@@ -2,6 +2,7 @@
 # define __YUNI_CORE_MEMORY_BUFFER_TRAITS_INTEGER_APPEND_H__
 
 # include "../../math/base.h"
+# include <math.h>
 
 
 namespace Yuni
@@ -120,6 +121,7 @@ namespace IStringImpl
 	// This specialization should not be used
 	// The conversion may not be what expected since no rounding
 	// is done.
+	/*
 	template<class BaseT, class T>
 	class From<BaseT, T, kindDecimal>
 	{
@@ -129,16 +131,16 @@ namespace IStringImpl
 
 		enum
 		{
-			/*!
+			*!
 			** \brief Minimum Buffer length
-			*/
-			bufferCapacity = (sizeof(Type) * 5 >> 1) + 1 /* sign */,
+			*
+			bufferCapacity = (sizeof(Type) * 5 >> 1) + 1, // sign
 
-			/*!
+			*!
 			** \brief A non-zero value if an arbitrary value T can be negative
 			**
 			** \internal The operator '>' is used to avoid a compiler warning
-			*/
+			*
 			strictlyPositiveByContract = 0,
 		};
 
@@ -204,7 +206,7 @@ namespace IStringImpl
 
 	}; // class From<T>
 
-
+*/
 
 
 
