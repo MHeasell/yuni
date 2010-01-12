@@ -32,7 +32,7 @@ namespace Audio
 	public:
 		//! Empty constructor
 		PlayList()
-			: pCurrentIndex(0)
+			: pCurrentIndex(0), pLoop(false)
 		{}
 
 	public:
@@ -47,7 +47,10 @@ namespace Audio
 		void remove(const AnyStringT& soundID);
 
 		void play() const;
+		void pause(bool paused);
 
+		void previous();
+		void next();
 		void shuffle() const;
 
 	private:
@@ -55,6 +58,8 @@ namespace Audio
 		ASound::Vector pSoundList;
 		//! Index of the current song being played / next to play
 		unsigned int pCurrentIndex;
+		//! Should we loop around the selection?
+		bool pLoop;
 
 	}; // class PlayList
 
