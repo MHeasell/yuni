@@ -133,13 +133,14 @@ namespace File
 					out.clear();
 					return false;
 				}
-				Yuni::Core::IO::File::Stream f(filename, Yuni::Core::IO::File::OpenMode::read);
+				Yuni::Core::IO::File::Stream f(filename);
 				if (f.opened())
 				{
 					out.resize(size);
 					if (size == f.read(out.data, size))
 						return true;
 				}
+				return false;
 			}
 			out.clear();
 			return true;

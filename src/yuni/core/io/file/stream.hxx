@@ -83,6 +83,12 @@ namespace File
 		return ::feof(pFd);
 	}
 
+	inline ssize_t Stream::tell() const
+	{
+		return (ssize_t)::ftell(pFd);
+	}
+
+
 
 	inline bool Stream::seekFromBeginning(ssize_t offset)
 	{
@@ -112,6 +118,22 @@ namespace File
 	{
 		return (char)::fgetc(pFd);
 	}
+
+	inline bool Stream::gets(char* buffer, size_t maxSize)
+	{
+		return (NULL != fgets(buffer, maxSize, pFd));
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline bool
+	Stream::gets(IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>& buffer)
+	{
+		const bool ret = (NULL != ::fgets((char*)buffer.data(),
+			buffer.capacity() - (buffer.zeroTerminated ? 0 : 1), pFd));
+		buffer.resize(::strlen(buffer.c_str()) / sizeof(C));
+		return ret;
+	}
+
 
 
 	inline size_t Stream::read(char* buffer, const size_t size)
@@ -157,14 +179,14 @@ namespace File
 		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			return ::fwrite(
-				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
+				(const void*) Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
 				1, size, pFd);
 		}
 		else
 		{
 			String translator;
 			translator += buffer;
-			return ::fwrite(translator.c_str(), 1, size < translator.size() ? size : translator.size(), pFd);
+			return ::fwrite((const void*) translator.c_str(), 1, ((size < translator.size()) ? size : translator.size()), pFd);
 		}
 	}
 
@@ -233,27 +255,44 @@ namespace File
 	inline size_t
 	Stream::read(IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>& buffer)
 	{
-		typedef IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>  IStringType;
-		typedef typename IStringType::Type PODType;
+		// Assert to prevent SegV
+		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
 
-		if (IStringType::zeroTerminated)
-		{
-			const size_t result = read(buffer.data(), sizeof(C) * buffer.size());
-			((const PODType*) buffer.data())[result] = PODType();
-			return result;
-		}
-		return read(buffer.data(), sizeof(PODType) * buffer.size());
+		// Reading the file
+		const size_t result = ::fread(buffer.data(), 1, sizeof(C) * buffer.size(), pFd);
+		// Setting the good size, because we may have read less than asked
+		if (result < buffer.size())
+			buffer.truncate(result);
+		// Making sure that the buffer is zero-terminated if required
+		if (buffer.zeroTerminated)
+			*((C*)(buffer.data() + buffer.size())) = C();
+		return result;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline Stream&
-	Stream::operator >> (IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>&  rhs)
+	template<class C, int ChunkSizeT>
+	inline size_t
+	Stream::read(StringBase<C, ChunkSizeT>& buffer)
 	{
-		typedef IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>  IStringType;
-		typedef typename IStringType::Type PODType;
+		// Assert to prevent SegV
+		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
 
-		(void) this->read(rhs.data(), sizeof(PODType) * rhs.size());
+		// Reading the file
+		const size_t result = ::fread(buffer.data(), 1, sizeof(C) * buffer.size(), pFd);
+		// Setting the good size, because we may have read less than asked
+		if (result < buffer.size())
+			buffer.truncate(result);
+		// Making sure that the buffer is zero-terminated if required
+		*((C*)(buffer.data() + buffer.size())) = C();
+		return result;
+	}
+
+
+
+	template<class U>
+	inline Stream& Stream::operator >> (U&  rhs)
+	{
+		(void)read(rhs);
 		return *this;
 	}
 

@@ -187,6 +187,7 @@ Set(SRC_CORE_STRING
 				core/memorybuffer/traits/vnsprintf.h
 				core/memorybuffer/traits/traits.h
 				core/memorybuffer/traits/traits.hxx
+				core/memorybuffer/traits/into.h
 
 				core/string/string.h core/string/string.hxx
 				core/string/converters.from.hxx core/string/converters.to.hxx

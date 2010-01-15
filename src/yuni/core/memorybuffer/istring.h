@@ -14,8 +14,10 @@
 # include "traits/assign.h"
 # include "traits/fill.h"
 # include "traits/vnsprintf.h"
+# include "traits/into.h"
 
 # include <iostream>
+# include <string>
 
 
 namespace Yuni
@@ -73,6 +75,8 @@ namespace Core
 			npos = (Size)(-1),
 		};
 
+		// Checking for a minimal chunk size
+		YUNI_STATIC_ASSERT(chunkSize > 3, IString_MinimalChunkSizeRequired);
 
 	public:
 		//! \name Constructors & Destructor
@@ -405,6 +409,28 @@ namespace Core
 		//@}
 
 
+		//! \name Conversions
+		//@{
+		/*!
+		** \brief Convert the buffer into something else
+		**
+		** The supported types (by default) are :
+		** - std::string
+		** - const char* (equivalent to `c_str()`)
+		** - numeric (int, long, unsigned int, double...)
+		** - bool
+		*/
+		template<class U> U to() const;
+
+		/*!
+		** \brief Convert the string into something else
+		**
+		** This method is strictly equivalent to `to()`, except
+		** that we know if the conversion succeeded or not.
+		*/
+		template<class U> bool to(U& out) const;
+		//@}
+
 		//! \name Memory management
 		//@{
 		/*!
@@ -447,6 +473,8 @@ namespace Core
 		** The returned value is less than or equal to the capacity.
 		*/
 		Size size() const;
+		//! \see size()
+		Size length() const;
 
 		/*!
 		** \brief Get the current size of the buffer (in bytes)
@@ -455,31 +483,79 @@ namespace Core
 
 		/*!
 		** \brief Get if the buffer is empty
+		**
+		** \code
+		** IString<> s;
+		** s.empty();          // returns true
+		** s.null();           // returns true
+		**
+		** s = "hello world";  // returns false
+		** s.empty();          // returns false
+		** s.null();           // returns false
+		**
+		** s.clear();
+		** s.empty();          // returns true
+		** s.null();           // returns false
+		**
+		** s.shrink();
+		** s.empty();          // returns true
+		** s.null();           // returns true
+		** \endcode
 		*/
 		bool empty() const;
 
 		/*!
-		** \brief Get if the buffer is not empty
+		** \brief Get if the buffer is null
+		**
+		** A null buffer means that no space is reserved, and that the
+		** method `data()` will return NULL.
+		**
+		** \code
+		** IString<> s;
+		** s.empty();          // returns true
+		** s.null();           // returns true
+		**
+		** s = "hello world";  // returns false
+		** s.empty();          // returns false
+		** s.null();           // returns false
+		**
+		** s.clear();
+		** s.empty();          // returns true
+		** s.null();           // returns false
+		**
+		** s.shrink();
+		** s.empty();          // returns true
+		** s.null();           // returns true
+		** \endcode
+		*/
+		bool null() const;
+
+		/*!
+		** \brief Get if the buffer is not empty (the exact opposite of `empty()`)
 		*/
 		bool notEmpty() const;
 
 		/*!
 		** \brief Get the current capacity of the buffer (in number of element C)
+		** \return A value greater or equal to `size()`
 		*/
 		Size capacity() const;
 
 		/*!
 		** \brief Get the current capacity of the buffer (in bytes)
+		** \return A value greater or equal to `sizeInBytes()`
 		*/
 		uint64 capacityInBytes() const;
 
 		/*!
 		** \brief A pointer to the original buffer (might be NULL)
+		** \see null()
 		*/
 		const C* c_str() const;
 
 		/*!
 		** \brief A pointer to the original buffer (might be NULL)
+		** \see null()
 		*/
 		const C* data() const;
 		C* data();
@@ -521,6 +597,8 @@ namespace Core
 		//! The operator `[]` (the offset must be valid)
 		const C& operator [] (const Size offset) const;
 		C& operator [] (const Size offset);
+		const C& operator [] (const int offset) const;
+		C& operator [] (const int offset);
 		//! The operator `+=` (append)
 		template<class U> IString& operator += (const U& rhs);
 		//! The operator `<<` (append)
