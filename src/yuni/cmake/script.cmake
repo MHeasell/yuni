@@ -33,6 +33,8 @@ if(YUNI_EXTERNAL_SCRIPT_LUA)
 	LIBYUNI_CONFIG_DEPENDENCY("lua" "script")
 	# Headers for Lua
 	DEVPACK_IMPORT_LUA()
+	LIBYUNI_CONFIG_LIB_RAW_COMMAND("lua" "${YUNI_EXT_LUA_LIB}")
+	LIBYUNI_CONFIG_INCLUDE_PATH("lua" "${YUNI_EXT_LUA_INCLUDE}")
 	Set(SRC_EXTERNAL_SCRIPT_LUA
 			${YUNI_EXT_LUA_SRC}  # From DevPack 'lua'
 			script/lua/lua.h script/lua/lua.cpp script/lua/args.cpp
