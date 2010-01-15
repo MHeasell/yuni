@@ -8,7 +8,7 @@ YUNITESTCASE_BEGIN(libyuni_core_audio_loadandplay
 	options.compareStderrWith = nil
 	options.exitStatus = 0
 	")
-	YUNITESTCASE_MODULES(core gfx audio)
+	YUNITESTCASE_MODULES(audio)
 	YUNITESTCASE_SOURCE(loadandplay.cpp)
 YUNITESTCASE_END()
 

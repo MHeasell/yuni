@@ -16,7 +16,7 @@ public:
 	LoadAndPlay(int argc, char* argv[])
 		:Application::Console(argc, argv)
 	{
-		for (int i = 1; i <= argc; ++i)
+		for (int i = 1; i < argc; ++i)
 			pFileNames.push_back(argv[i]);
 	}
 
