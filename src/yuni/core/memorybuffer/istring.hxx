@@ -412,6 +412,24 @@ namespace Core
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<class U>
+	inline U
+	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::to() const
+	{
+		return Yuni::Core::Extension::IString::To<typename Static::Remove::Const<U>::Type>::Perform(*this);
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<class U>
+	inline bool
+	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::to(U& out) const
+	{
+		return Yuni::Core::Extension::IString::To<typename Static::Remove::Const<U>::Type>::Perform(*this, out);
+	}
+
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	void
 	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::erase(
 		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
@@ -463,6 +481,22 @@ namespace Core
 	{
 		return AncestorType::data[offset];
 	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline const C&
+	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator [] (const int offset) const
+	{
+		return AncestorType::data[(unsigned int)offset];
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline C&
+	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator [] (const int offset)
+	{
+		return AncestorType::data[(unsigned int)offset];
+	}
+
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
@@ -637,6 +671,14 @@ namespace Core
 	}
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
+	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::length() const
+	{
+		return AncestorType::size;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	inline uint64
 	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::sizeInBytes() const
 	{
@@ -692,6 +734,14 @@ namespace Core
 	{
 		return (0 == AncestorType::size);
 	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline bool
+	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::null() const
+	{
+		return (NULL == AncestorType::data);
+	}
+
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
@@ -904,9 +954,9 @@ namespace Core
 		va_start(parg, format);
 		vappendFormat(Core::Traits::CString<UType>::Buffer(format), parg);
 		va_end(parg);
-
 		return *this;
 	}
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	template<class AnyStringT>
@@ -925,9 +975,9 @@ namespace Core
 		va_start(parg, format);
 		vappendFormat(Core::Traits::CString<UType>::Buffer(format), parg);
 		va_end(parg);
-
 		return *this;
 	}
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	void
@@ -936,11 +986,12 @@ namespace Core
 		// Nothing to do if the format is empty
 		if (!format || '\0' == *format)
 			return;
+
 		// There is no way to know by advance the size occupied by the formatted
 		// string
 		// Instead of allocating a new temporary buffer, we will directly use
 		// this buffer as much as possible.
-
+		//
 		// The returned size
 		int i;
 
@@ -971,12 +1022,12 @@ namespace Core
 		else
 		{
 			// In this case, the buffer can not be expanded
-			// We only try once
+			// We will only try once
 			if (AncestorType::capacity != AncestorType::size)
 			{
 				i = Private::IStringImpl::vnsprintf<C>(AncestorType::data + AncestorType::size,
 					(AncestorType::capacity - AncestorType::size) * sizeof(C), format, args);
-				if (i > 0)
+				if (i >= 0)
 				{
 					AncestorType::size += (Size) i;
 					if (zeroTerminated)

@@ -1,11 +1,12 @@
 
 #include "io.h"
 #include "../system/windows.hdr.h"
-#include <sys/stat.h>
 #ifndef YUNI_OS_WINDOWS
 #	include <stdlib.h>
 #	include <unistd.h>
+#	include <sys/types.h>
 #endif
+#include <sys/stat.h>
 
 
 #ifndef S_ISDIR
@@ -27,7 +28,7 @@ namespace FilesystemImpl
 
 	bool ExistsWindowsImpl(const char* p, const size_t len)
 	{
-		if (len > 0)
+		if (len)
 		{
 			// ugly workaround with stat under Windows
 			// FIXME: Find a better way to find driver letters
@@ -37,13 +38,11 @@ namespace FilesystemImpl
 					return true;
 			}
 
-			struct _stat s;
+			struct _stati64 s;
+			wchar_t buffer[FILENAME_MAX];
 			// On Windows, the trailing backslash must be removed
-			if ('\\' == p[len - 1])
-			{
-				return (_stat(String(p, len - 1).c_str(), &s) == 0);
-			}
-			return (_stat(p, &s) == 0);
+			MultiByteToWideChar(CP_UTF8, 0, p, len - (('\\' == p[len - 1]) ? 1 : 0), buffer, sizeof(buffer));
+			return (_wstati64(buffer, &s) == 0);
 		}
 		return false;
 	}
@@ -59,14 +58,11 @@ namespace FilesystemImpl
 				return true;
 		}
 
-		struct _stat s;
+		struct _stati64 s;
+		wchar_t buffer[FILENAME_MAX];
 		// On Windows, the trailing backslash must be removed
-		if ('\\' == p[len - 1])
-		{
-			if (_stat(String(p, len - 1).c_str(), &s) != 0)
-				return false;
-		}
-		if (_stat(p, &s) != 0)
+		MultiByteToWideChar(CP_UTF8, 0, p, len - (('\\' == p[len - 1]) ? 1 : 0), buffer, sizeof(buffer));
+		if (_wstati64(buffer, &s) != 0)
 			return false;
 		return (B == S_ISDIR(s.st_mode));
 	}

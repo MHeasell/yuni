@@ -14,7 +14,7 @@ namespace Base
 	struct N
 	{
 		//! Digits
-		static const char* const Digit() {return "0123456789abcdefghijklmnopqrstuvwxyz";}
+		static const char* Digit() {return "0123456789abcdefghijklmnopqrstuvwxyz";}
 		enum
 		{
 			//! the nth power of b
@@ -32,7 +32,7 @@ namespace Base
 	struct HexaLowercase
 	{
 		//! Digits
-		static const char* const Digit() {return "0123456789abcdef";}
+		static const char* Digit() {return "0123456789abcdef";}
 		enum
 		{
 			//! the nth power of b
@@ -44,7 +44,7 @@ namespace Base
 	struct HexaUppercase
 	{
 		//! Digits
-		static const char* const Digit() {return "0123456789ABCDEF";}
+		static const char* Digit() {return "0123456789ABCDEF";}
 		enum
 		{
 			//! the nth power of b

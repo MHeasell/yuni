@@ -371,6 +371,58 @@ namespace StringImpl
 
 
 
+# ifdef YUNI_HAS_LONG
+	template<>
+	struct To<unsigned long>
+	{
+		template<typename C, int Chnk>
+		static inline unsigned long Value(const StringBase<C,Chnk>& s)
+		{
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			return (unsigned long)strtoul(p, &pend, base);
+		}
+
+		template<typename C, int Chnk>
+		static inline bool Value(const StringBase<C,Chnk>& s, unsigned long& v)
+		{
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			v = (unsigned long)strtoul(p, &pend, base);
+			return (NULL != pend && '\0' == *pend);
+		}
+
+	}; // uint32
+
+	template<>
+	struct To<long>
+	{
+		template<typename C, int Chnk>
+		static inline long Value(const StringBase<C,Chnk>& s)
+		{
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			return (long)strtoul(p, &pend, base);
+		}
+
+		template<typename C, int Chnk>
+		static inline bool Value(const StringBase<C,Chnk>& s, long& v)
+		{
+			C* pend;
+			int base;
+			const C* p = AutoDetectBaseNumber<C>::Value(s.pPtr, base);
+			v = (long)strtoul(p, &pend, base);
+			return (NULL != pend && '\0' == *pend);
+		}
+
+	}; // uint32
+
+# endif
+
+
 } // namespace StringImpl
 } // namespace Private
 } // namespace Yuni

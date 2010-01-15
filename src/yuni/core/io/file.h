@@ -31,7 +31,7 @@ namespace File
 		sizeHardLimit = 83886080u,  // 80Mo = 80 * 1024 * 1024
 	};
 
-	
+
 
 	/*!
 	** \brief Test if a node exists and is actually a file

@@ -109,6 +109,11 @@ namespace File
 		bool eof() const;
 
 		/*!
+		** \brief Get the current value of the file position indicator
+		*/
+		ssize_t tell() const;
+
+		/*!
 		** \brief Set the position in the stream
 		**
 		** \param offset A relative offset
@@ -158,6 +163,29 @@ namespace File
 		char get();
 
 		/*!
+		** \brief Read a line from the file
+		**
+		** It reads a line into the buffer pointed to by #s until either a terminating
+		** newline or EOF, which it replaces with ’\0’.
+		** \param buffer The buffer where to write the line
+		** \param size The maximum allowed size for the buffer
+		*/
+		bool gets(char* buffer, size_t maxSize);
+
+		/*!
+		** \brief Read a line from the file
+		**
+		** It reads a line into the buffer pointed to by #s until either a terminating
+		** newline or EOF, which it replaces with ’\0’.
+		** The maximum number of char read is `buffer.capacity()`. So you have to
+		** reserve enough space for your needs before calling this routine.
+		**
+		** \param buffer The buffer where to write the line
+		*/
+		template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+		bool gets(IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>& buffer);
+
+		/*!
 		** \brief Read a buffer
 		**
 		** \param buffer A raw buffer where to store the data which will be read from the file
@@ -178,6 +206,9 @@ namespace File
 		*/
 		template<unsigned int CSizeT, bool ExpT, bool ZeroT, class C>
 		size_t read(IString<CSizeT,ExpT,ZeroT,C>&  buffer);
+
+		template<class C, int CSizeT>
+		size_t read(StringBase<C, CSizeT>&  buffer);
 		//@}
 
 
@@ -231,8 +262,7 @@ namespace File
 		Stream& operator << (const char c);
 
 		//! Operator >> (read)
-		template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-		Stream& operator >> (IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>& rhs);
+		template<class U> Stream& operator >> (U& rhs);
 		//@}
 
 
