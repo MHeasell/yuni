@@ -2,7 +2,7 @@
 # define __YUNI_CORE_MEMORY_BUFFER_TRAITS_INTEGER_APPEND_H__
 
 # include "../../math/base.h"
-# include <math.h>
+# include <cmath>
 
 
 namespace Yuni
@@ -148,7 +148,7 @@ namespace CustomStringImpl
 		static void AppendTo(S& str, Type value, int precision = 3)
 		{
 			// fpclassify: man 3 fpclassify  (macro)
-			switch (fpclassify(value))
+			switch (std::fpclassify(value))
 			{
 				case FP_NAN: str.appendWithoutChecking("nan", 3);return;
 				case FP_INFINITE:
