@@ -20,7 +20,7 @@ namespace File
 	inline bool Size(const AnyStringT& filename, uint64& size)
 	{
 		typedef typename Static::Remove::Const<AnyStringT>::Type TypeT;
-		return Private::IO::FilesystemImpl::Size(Core::Traits::CString<TypeT>::Buffer(filename), size);
+		return Private::IO::FilesystemImpl::Size(Traits::CString<TypeT>::Buffer(filename), size);
 	}
 
 
@@ -28,7 +28,7 @@ namespace File
 	inline uint64 Size(const AnyStringT& filename)
 	{
 		typedef typename Static::Remove::Const<AnyStringT>::Type TypeT;
-		return Private::IO::FilesystemImpl::Size(Core::Traits::CString<TypeT>::Buffer(filename));
+		return Private::IO::FilesystemImpl::Size(Traits::CString<TypeT>::Buffer(filename));
 	}
 
 
@@ -39,10 +39,10 @@ namespace File
 	{
 		# ifdef YUNI_OS_WINDOWS
 		return Private::IO::FilesystemImpl::IsFileWindowsImpl(
-			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(p), Core::Traits::Length<C>::Value(p));
+			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(p), Traits::Length<C>::Value(p));
 		# else
 		return Private::IO::FilesystemImpl::IsFileUnixImpl(
-			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(p));
+			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(p));
 		# endif
 	}
 
@@ -102,8 +102,8 @@ namespace File
 		return (!overwrite && Core::IO::File::Exists(to))
 			? false
 			: Private::IO::FilesystemImpl::CopyFile(
-				Core::Traits::CString<typename Static::Remove::Const<AnyStringT1>::Type>::Buffer(from),
-				Core::Traits::CString<typename Static::Remove::Const<AnyStringT2>::Type>::Buffer(to));
+				Traits::CString<typename Static::Remove::Const<AnyStringT1>::Type>::Buffer(from),
+				Traits::CString<typename Static::Remove::Const<AnyStringT2>::Type>::Buffer(to));
 	}
 
 

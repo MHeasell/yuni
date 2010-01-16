@@ -16,7 +16,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace IStringImpl
+namespace CustomStringImpl
 {
 
 
@@ -33,12 +33,12 @@ namespace IStringImpl
 	{
 		# if defined YUNI_OS_MSVC
 		#	ifdef YUNI_MSVC_SECURE_VSPRINTF
-		return ::_vsnprintf_s(buffer, bufferSize-1, _TRUNCATE, format, argptr);
+		return ::_vsnprintf_s(buffer, bufferSize - 1, _TRUNCATE, format, argptr);
 		#	else
-		return ::_vsnprintf(buffer, bufferSize-1, format, argptr);
+		return ::_vsnprintf(buffer, bufferSize - 1, format, argptr);
 		#	endif
 		# else // YUNI_OS_MSVC
-		return ::vsnprintf(buffer, bufferSize-1, format, argptr);
+		return ::vsnprintf(buffer, bufferSize - 1, format, argptr);
 		# endif
 	}
 
@@ -49,15 +49,15 @@ namespace IStringImpl
 		# ifdef YUNI_OS_WINDOWS
 		# 	if defined YUNI_OS_MSVC
 		#		ifdef YUNI_MSVC_SECURE_VSPRINTF
-		return ::_vsnwprintf_s(buffer, bufferSize-1, _TRUNCATE, format, argptr);
+		return ::_vsnwprintf_s(buffer, bufferSize - 1, _TRUNCATE, format, argptr);
 		#		else
-		return ::_vsnwprintf(buffer, bufferSize-1, format, argptr);
+		return ::_vsnwprintf(buffer, bufferSize - 1, format, argptr);
 		#		endif
 		# 	else // YUNI_OS_MSVC
-		return ::vsnwprintf(buffer, bufferSize-1, format, argptr);
+		return ::vsnwprintf(buffer, bufferSize - 1, format, argptr);
 		# 	endif
 		# else // YUNI_OS_WINDOWS
-		return ::vswprintf(buffer, bufferSize-1, format, argptr);
+		return ::vswprintf(buffer, bufferSize - 1, format, argptr);
 		# endif
 	}
 
@@ -65,7 +65,7 @@ namespace IStringImpl
 
 
 
-} // namespace IStringImpl
+} // namespace CustomStringImpl
 } // namespace Private
 } // namespace Yuni
 

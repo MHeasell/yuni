@@ -6,8 +6,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 namespace Traits
 {
 
@@ -78,13 +76,13 @@ namespace Traits
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	struct CString<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char> >
+	struct CString<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> >
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
-		static const char* Buffer(const IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char>& container)
+		static const char* Buffer(const CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& container)
 		{
 			return container.data();
 		}
@@ -92,13 +90,13 @@ namespace Traits
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	struct CString<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char>* >
+	struct CString<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>* >
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = (ZeroTerminatedT), };
 
 	public:
-		static const char* Buffer(const IString<ChunkSizeT, ExpandableT,ZeroTerminatedT, char>* container)
+		static const char* Buffer(const CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>* container)
 		{
 			return container ? container->data() : NULL;
 		}
@@ -181,7 +179,6 @@ namespace Traits
 
 
 } // namespace Traits
-} // namespace Core
 } // namespace Yuni
 
 #endif // __YUNI_CORE_TRAITS_C_STRING_H__

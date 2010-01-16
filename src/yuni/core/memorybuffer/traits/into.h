@@ -10,7 +10,7 @@ namespace Core
 {
 namespace Extension
 {
-namespace IString
+namespace CustomString
 {
 
 
@@ -18,7 +18,7 @@ namespace IString
 	** \brief Generic implementation
 	*/
 	template<class T>
-	struct To
+	struct Into
 	{
 		enum { valid = 0, };
 
@@ -39,7 +39,7 @@ namespace IString
 	** \brief const char*
 	*/
 	template<>
-	struct To<char*>
+	struct Into<char*>
 	{
 		enum { valid = 1 };
 
@@ -60,12 +60,12 @@ namespace IString
 	
 
 	/*!
-	** \brief IString<>, with the same POD type
+	** \brief CustomString<>, with the same POD type
 	*/
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	struct To<Yuni::Core::IString<ChunkSizeT, ExpandableT, ZeroTerminatedT, C> >
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	struct Into<Yuni::CustomString<ChunkSizeT, ExpandableT, ZeroTerminatedT> >
 	{
-		typedef Yuni::Core::IString<ChunkSizeT, ExpandableT, ZeroTerminatedT, C> TargetType;
+		typedef Yuni::CustomString<ChunkSizeT, ExpandableT, ZeroTerminatedT> TargetType;
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, TargetType& out)
@@ -85,7 +85,7 @@ namespace IString
 	** \brief std::string
 	*/
 	template<class CharT, class TraitsT, class AllocT>
-	struct To<std::basic_string<CharT,TraitsT, AllocT> >
+	struct Into<std::basic_string<CharT,TraitsT, AllocT> >
 	{
 		typedef std::basic_string<CharT,TraitsT, AllocT> TargetType;
 		enum { valid = 1 };
@@ -107,7 +107,7 @@ namespace IString
 	** \brief char
 	*/
 	template<>
-	struct To<char>
+	struct Into<char>
 	{
 		enum { valid = 1 };
 
@@ -128,7 +128,7 @@ namespace IString
 	** \brief unsigned char
 	*/
 	template<>
-	struct To<unsigned char>
+	struct Into<unsigned char>
 	{
 		enum { valid = 1 };
 
@@ -149,7 +149,7 @@ namespace IString
 	** \brief char[]
 	*/
 	template<int N>
-	struct To<char[N]>
+	struct Into<char[N]>
 	{
 		enum { valid = 1 };
 
@@ -176,7 +176,7 @@ namespace IString
 	** \brief bool
 	*/
 	template<>
-	struct To<bool>
+	struct Into<bool>
 	{
 		enum { valid = 1 };
 
@@ -237,34 +237,35 @@ namespace IString
 
 # define YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(TYPE,CONVERT)  \
 	template<> \
-	struct To<TYPE> \
+	struct Into<TYPE> \
 	{ \
+		typedef TYPE IntoType; \
 		enum { valid = 1 }; \
 		\
-		template<class StringT> static bool Perform(const StringT& s, TYPE& out) \
+		template<class StringT> static bool Perform(const StringT& s, IntoType& out) \
 		{ \
 			if (!s) \
 			{ \
-				out = TYPE(); \
+				out = IntoType(); \
 				return true; \
 			} \
 			typedef typename StringT::value_type C; \
 			C* pend; \
 			int base; \
 			const C* p = AutoDetectBaseNumber<C>::Value(s, base); \
-			out = (TYPE)::CONVERT(p, &pend, base); \
+			out = (IntoType)::CONVERT(p, &pend, base); \
 			return (NULL != pend && '\0' == *pend); \
 		} \
 		\
-		template<class StringT> static TYPE Perform(const StringT& s) \
+		template<class StringT> static IntoType Perform(const StringT& s) \
 		{ \
 			if (!s) \
-				return TYPE(); \
+				return IntoType(); \
 			typedef typename StringT::value_type C; \
 			C* pend; \
 			int base; \
 			const C* p = AutoDetectBaseNumber<C>::Value(s, base); \
-			return (TYPE)::CONVERT(p, &pend, base); \
+			return (IntoType)::CONVERT(p, &pend, base); \
 		} \
 	}
 
@@ -294,7 +295,7 @@ namespace IString
 	** \brief float
 	*/
 	template<>
-	struct To<float>
+	struct Into<float>
 	{
 		enum { valid = 1 };
 
@@ -338,7 +339,7 @@ namespace IString
 	** \brief double
 	*/
 	template<>
-	struct To<double>
+	struct Into<double>
 	{
 		enum { valid = 1 };
 
@@ -372,7 +373,7 @@ namespace IString
 	** \brief const void*
 	*/
 	template<>
-	struct To<void*>
+	struct Into<void*>
 	{
 		enum { valid = 1 };
 
@@ -381,7 +382,7 @@ namespace IString
 			if (sizeof(void*) == 4)
 			{
 				uint32 p;
-				if (To<uint32>::Perform(s, p))
+				if (Into<uint32>::Perform(s, p))
 				{
 					out = (void*) p;
 					return true;
@@ -392,7 +393,7 @@ namespace IString
 			else
 			{
 				uint64 p;
-				if (To<uint64>::Perform(s, p))
+				if (Into<uint64>::Perform(s, p))
 				{
 					out = (void*) p;
 					return true;
@@ -405,7 +406,7 @@ namespace IString
 		template<class StringT> static void* Perform(const StringT& s)
 		{
 			return (void*)((sizeof(void*) == 4)
-				? To<uint32>::Perform(s) : To<uint64>::Perform(s));
+				? Into<uint32>::Perform(s) : Into<uint64>::Perform(s));
 		}
 	};
 
@@ -413,7 +414,7 @@ namespace IString
 
 
 
-} // namespace IString
+} // namespace CustomString
 } // namespace Extension
 } // namespace Core
 } // namespace Yuni

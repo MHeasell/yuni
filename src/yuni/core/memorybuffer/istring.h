@@ -22,43 +22,57 @@
 
 namespace Yuni
 {
-namespace Core
-{
+
 
 	/*!
 	** \brief A dynamic/static memory buffer for POD types
 	**
 	** The supported external types are the following :
 	**  - C
-	**  - C*
+	**  - Char*
 	**  - C[]
 	**  - std::basic_string<C>
-	**  - Yuni::Core::IString<...>
+	**  - Yuni::CustomString<...>
 	**
 	**
-	** \tparam C A pod type
+	** \tparam Char A pod type
 	** \tparam ChunkSizeT The size for a single chunk (>= 2)
 	** \tparam ZeroTerminatedT A non-zero value if the buffer must always be terminated by a zero
 	** \tparam ExpandableT A non-zero value to make a growable buffer. Otherwise it will be a simple
-	**   buffer with a length equals to ChunkSizeT * sizeof(C)
+	**   buffer with a length equals to ChunkSizeT * sizeof(Char)
 	*/
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	class IString : protected Private::IStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	class CustomString
+		:protected Private::CustomStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>
 	{
 	public:
+		//! POD type
+		typedef char Char;
+		//! Type for the POD type
+		typedef Char Type;
+
 		//! Ancestor
-		typedef Private::IStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, C>  AncestorType;
+		typedef Private::CustomStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, Char>  AncestorType;
 		//! Size type
 		typedef typename AncestorType::Size Size;
-		//! Size type (STL Compliant)
-		typedef typename AncestorType::Size size_type;
-
-		//! Type for the POD type
-		typedef C Type;
-		//! Type for the POD type (STL compliant)
-		typedef C value_type;
 		//! Self
-		typedef IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>  IStringType;
+		typedef CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>  CustomStringType;
+
+		//! \name Compatibility with std::string
+		//@{
+		//! The type of object, CharT, stored in the string
+		typedef Char value_type;
+		//! Pointer to Char
+		typedef Char* pointer;
+		//! Reference to Char
+		typedef Char& reference;
+		//! Const reference to Char
+		typedef const Char& const_reference;
+		//! An unsigned integral type
+		typedef Size size_type;
+		//! A signed integral type
+		typedef ssize_t difference_type;
+		//@}
 
 		enum
 		{
@@ -69,14 +83,23 @@ namespace Core
 			//! A non-zero value if the buffer can be expanded
 			expandable = AncestorType::expandable,
 			//! Number of bits per element
-			bitCountPerElement = sizeof(C) * 8,
+			bitCountPerElement = sizeof(Char) * 8,
 
 			//! Invalid offset
 			npos = (Size)(-1),
 		};
 
+		//! Char Case
+		enum CharCase
+		{
+			//! The string should remain untouched
+			soCaseSensitive,
+			//! The string should be converted to lowercase
+			soIgnoreCase
+		};
+
 		// Checking for a minimal chunk size
-		YUNI_STATIC_ASSERT(chunkSize > 3, IString_MinimalChunkSizeRequired);
+		YUNI_STATIC_ASSERT(chunkSize > 3, CustomString_MinimalChunkSizeRequired);
 
 	public:
 		//! \name Constructors & Destructor
@@ -84,31 +107,31 @@ namespace Core
 		/*!
 		** \brief Default Constructor
 		*/
-		IString();
+		CustomString();
 
 		/*!
 		** \brief Copy constructor
 		*/
-		IString(const IString& rhs);
+		CustomString(const CustomString& rhs);
 
 		/*!
 		** \brief Constructor with a null value
 		*/
-		IString(const NullPtr&);
-		IString(const NullPtr*);
+		CustomString(const NullPtr&);
+		CustomString(const NullPtr*);
 
 		/*!
 		** \brief Constructor with a default value
 		*/
-		template<class U> explicit IString(const U& rhs);
+		template<class U> explicit CustomString(const U& rhs);
 
 		/*!
 		**
 		*/
-		IString(const C* block, const Size blockSize);
+		CustomString(const Char* block, const Size blockSize);
 
 		//! Destructor
-		~IString() {}
+		~CustomString() {}
 		//@}
 
 
@@ -126,7 +149,7 @@ namespace Core
 		** \param buffer A buffer
 		** \param size Size of the given buffer
 		*/
-		void assign(const C* buffer, const Size size);
+		void assign(const Char* buffer, const Size size);
 
 		/*!
 		** \brief Append to the end of the buffer a new value
@@ -152,7 +175,7 @@ namespace Core
 		** \param buffer A buffer
 		** \param size Size of the given buffer
 		*/
-		void append(const C* buffer, const Size size);
+		void append(const Char* buffer, const Size size);
 
 		/*!
 		** \brief Insert at the begining of the buffer a new value
@@ -175,7 +198,7 @@ namespace Core
 		**
 		** \param rhs A single item
 		*/
-		void put(const C c);
+		void put(const Char c);
 
 		/*!
 		** \brief Insert a raw buffer at a given position in the buffer
@@ -185,7 +208,7 @@ namespace Core
 		** \param size Size of the buffer
 		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
 		*/
-		bool insert(const Size offset, const C* buffer, const Size size);
+		bool insert(const Size offset, const Char* buffer, const Size size);
 
 		/*!
 		** \brief Insert a single item at a given position in the buffer
@@ -194,7 +217,7 @@ namespace Core
 		** \param c A single item
 		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
 		*/
-		bool insert(const Size offset, const C c);
+		bool insert(const Size offset, const Char c);
 
 		/*!
 		** \brief Insert an arbitrary CString container at a given position in the buffer
@@ -235,14 +258,14 @@ namespace Core
 		** \param region A raw buffer
 		** \param size Size of the given buffer
 		*/
-		void overwrite(const Size offset, const C* region, const Size size);
+		void overwrite(const Size offset, const Char* region, const Size size);
 
 
 		/*!
 		** \brief Fill the whole buffer with a given pattern
 		**
 		** \code
-		** IString<char>  buffer;
+		** CustomString<char>  buffer;
 		** buffer.resize(80);
 		**
 		** // Preface
@@ -276,7 +299,7 @@ namespace Core
 		** \param buffer An arbitrary string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size find(const C buffer) const;
+		Size find(const Char buffer) const;
 
 		/*!
 		** \brief Find the offset of a sub-string from the left
@@ -285,7 +308,7 @@ namespace Core
 		** \param buffer An arbitrary string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size indexOf(Size offset, const C buffer) const;
+		Size indexOf(Size offset, const Char buffer) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes)
@@ -294,7 +317,7 @@ namespace Core
 		** \param len Size of the given buffer
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size find(const C* buffer, const Size len) const;
+		Size find(const Char* buffer, const Size len) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
@@ -304,7 +327,7 @@ namespace Core
 		** \param len Size of the given buffer
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size indexOf(Size offset, const C* buffer, const Size len) const;
+		Size indexOf(Size offset, const Char* buffer, const Size len) const;
 
 		/*!
 		** \brief Find the offset of any supported CString
@@ -335,7 +358,7 @@ namespace Core
 		/*!
 		** \brief Get if a given string can be found at the begining of the buffer
 		*/
-		bool startsWith(const C* buffer, const Size len) const;
+		bool startsWith(const Char* buffer, const Size len) const;
 
 		/*!
 		** \brief Get if a given string can be found at the begining of the buffer
@@ -345,7 +368,7 @@ namespace Core
 		/*!
 		** \brief Get if a given string can be found at the end of the buffer
 		*/
-		bool endsWith(const C* buffer, const Size len) const;
+		bool endsWith(const Char* buffer, const Size len) const;
 
 		/*!
 		** \brief Get if a given string can be found at the end of the buffer
@@ -359,7 +382,7 @@ namespace Core
 		/*!
 		** \brief Remove all white-spaces from the begining and the end of the buffer
 		*/
-		void trim(const C c /* = ' ' */);
+		void trim(const Char c /* = ' ' */);
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the end of the buffer
 		*/
@@ -373,7 +396,7 @@ namespace Core
 		/*!
 		** \brief Remove all items equal to 'c' from the end of the buffer
 		*/
-		void trimRight(const C c);
+		void trimRight(const Char c);
 
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the begining of the buffer
@@ -382,7 +405,7 @@ namespace Core
 		/*!
 		** \brief Remove all items equal to 'c' from the begining of the buffer
 		*/
-		void trimLeft(const C c);
+		void trimLeft(const Char c);
 		//@}
 
 		//! \name Remove / Erase
@@ -392,7 +415,7 @@ namespace Core
 		** \brief Empty the buffer
 		** \return *this
 		*/
-		IString& clear();
+		CustomString& clear();
 
 		/*!
 		** \brief Erase a part of the buffer
@@ -406,6 +429,19 @@ namespace Core
 		** \brief Remove the 'n' first items
 		*/
 		void consume(const Size n);
+		//@}
+
+
+		//! \name Case conversion
+		//@{
+		/*!
+		** \brief Convert the case (lower case) of characters in the string (O(N))
+		*/
+		CustomString& toLower();
+		/*!
+		** \brief Convert the case (upper case) of characters in the string (O(N))
+		*/
+		CustomString& toUpper();
 		//@}
 
 
@@ -431,6 +467,7 @@ namespace Core
 		template<class U> bool to(U& out) const;
 		//@}
 
+
 		//! \name Memory management
 		//@{
 		/*!
@@ -439,7 +476,7 @@ namespace Core
 		** Contrary to the operator [], it is safe to use an invalid offset
 		** \return The item at position 'offset', a default value if the offset is out of bound
 		*/
-		C at(const Size offset) const;
+		Char at(const Size offset) const;
 
 		/*!
 		** \brief Truncate the buffer to the given length
@@ -485,7 +522,7 @@ namespace Core
 		** \brief Get if the buffer is empty
 		**
 		** \code
-		** IString<> s;
+		** CustomString<> s;
 		** s.empty();          // returns true
 		** s.null();           // returns true
 		**
@@ -511,7 +548,7 @@ namespace Core
 		** method `data()` will return NULL.
 		**
 		** \code
-		** IString<> s;
+		** CustomString<> s;
 		** s.empty();          // returns true
 		** s.null();           // returns true
 		**
@@ -551,14 +588,14 @@ namespace Core
 		** \brief A pointer to the original buffer (might be NULL)
 		** \see null()
 		*/
-		const C* c_str() const;
+		const Char* c_str() const;
 
 		/*!
 		** \brief A pointer to the original buffer (might be NULL)
 		** \see null()
 		*/
-		const C* data() const;
-		C* data();
+		const Char* data() const;
+		Char* data();
 		//@}
 
 
@@ -571,7 +608,7 @@ namespace Core
 		** \param format The format, reprensented by a zero-terminated string
 		** \return Always *this
 		*/
-		template<class AnyStringT> IString& format(const AnyStringT& format, ...);
+		template<class AnyStringT> CustomString& format(const AnyStringT& format, ...);
 
 		/*!
 		** \brief Append formatted string
@@ -580,7 +617,7 @@ namespace Core
 		** \param format The format, reprensented by a zero-terminated string
 		** \return Always *this
 		*/
-		template<class AnyStringT> IString& appendFormat(const AnyStringT& format, ...);
+		template<class AnyStringT> CustomString& appendFormat(const AnyStringT& format, ...);
 
 		/*!
 		** \brief Append a formatted string to the end of the current string
@@ -595,45 +632,45 @@ namespace Core
 		//! \name Operators
 		//@{
 		//! The operator `[]` (the offset must be valid)
-		const C& operator [] (const Size offset) const;
-		C& operator [] (const Size offset);
-		const C& operator [] (const int offset) const;
-		C& operator [] (const int offset);
+		const Char& operator [] (const Size offset) const;
+		Char& operator [] (const Size offset);
+		const Char& operator [] (const int offset) const;
+		Char& operator [] (const int offset);
 		//! The operator `+=` (append)
-		template<class U> IString& operator += (const U& rhs);
+		template<class U> CustomString& operator += (const U& rhs);
 		//! The operator `<<` (append)
-		template<class U> IString& operator << (const U& rhs);
+		template<class U> CustomString& operator << (const U& rhs);
 
 		//! The operator `=` (assign - copy)
-		IString& operator = (const IString& rhs);
+		CustomString& operator = (const CustomString& rhs);
 		//! The operator `=` (assign)
-		template<class U> IString& operator = (const U& rhs);
+		template<class U> CustomString& operator = (const U& rhs);
 
 		//! The operator `<`
-		bool operator < (const IString& rhs) const;
+		bool operator < (const CustomString& rhs) const;
 		//! The operator `>`
-		bool operator > (const IString& rhs) const;
+		bool operator > (const CustomString& rhs) const;
 		//! The operator `<`
-		bool operator < (const C* rhs) const;
+		bool operator < (const Char* rhs) const;
 		//! The operator `>`
-		bool operator > (const C* rhs) const;
+		bool operator > (const Char* rhs) const;
 
 		//! The operator `<=`
-		bool operator <= (const IString& rhs) const;
+		bool operator <= (const CustomString& rhs) const;
 		//! The operator `>=`
-		bool operator >= (const IString& rhs) const;
+		bool operator >= (const CustomString& rhs) const;
 		//! The operator `<=`
-		bool operator <= (const C* rhs) const;
+		bool operator <= (const Char* rhs) const;
 		//! The operator `>=`
-		bool operator >= (const C* rhs) const;
+		bool operator >= (const Char* rhs) const;
 
 		//! The operator `==`
-		bool operator == (const C* rhs) const;
+		bool operator == (const Char* rhs) const;
 		//! The operator `==`
-		bool operator == (const IString& rhs) const;
+		bool operator == (const CustomString& rhs) const;
 		//! The operator `==`
 		template<unsigned int C1, bool E1, bool Z1>
-		bool operator == (const IString<C1, E1, Z1, C>& rhs) const;
+		bool operator == (const CustomString<C1, E1, Z1>& rhs) const;
 
 		//! The operator `!=`
 		template<class U> bool operator != (const U& rhs) const;
@@ -645,28 +682,27 @@ namespace Core
 
 	protected:
 		//! Assign without checking for pointer validity
-		Size assignWithoutChecking(const C* block, const Size blockSize);
+		Size assignWithoutChecking(const Char* block, const Size blockSize);
 		//! Append without checking for pointer validity
-		Size appendWithoutChecking(const C* block, const Size blockSize);
+		Size appendWithoutChecking(const Char* block, const Size blockSize);
 		//! Append without checking for pointer validity
-		Size appendWithoutChecking(const C c);
+		Size appendWithoutChecking(const Char c);
 		//! Assign without checking for pointer validity
-		Size assignWithoutChecking(const C c);
+		Size assignWithoutChecking(const Char c);
 
 	private:
 		// our friends !
-		template<class, class, int> friend class Private::IStringImpl::From;
-		template<class, class> friend class Private::IStringImpl::Append;
-		template<class, class> friend class Private::IStringImpl::Assign;
-		template<class, class> friend class Private::IStringImpl::Fill;
+		template<class, class, int> friend class Private::CustomStringImpl::From;
+		template<class, class> friend class Yuni::Core::Extension::CustomString::Append;
+		template<class, class> friend class Yuni::Core::Extension::CustomString::Assign;
+		template<class, class> friend class Yuni::Core::Extension::CustomString::Fill;
 
-	}; // class IString
-
-
+	}; // class CustomString
 
 
 
-} // namespace Core
+
+
 } // namespace Yuni
 
 # include "istring.hxx"
@@ -677,46 +713,46 @@ namespace Core
 //! \name Operator overload for stream printing
 //@{
 
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline std::ostream& operator << (std::ostream& out, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	out.write(rhs.data(), rhs.size());
 	return out;
 }
 
 
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline bool operator == (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool operator == (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	return (rhs == u);
 }
 
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline bool operator != (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool operator != (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	return (rhs != u);
 }
 
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline bool operator < (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool operator < (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	return (rhs >= u);
 }
 
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline bool operator > (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool operator > (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	return (rhs <= u);
 }
 
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline bool operator <= (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool operator <= (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	return (rhs > u);
 }
 
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline bool operator >= (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool operator >= (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	return (rhs < u);
 }
@@ -725,80 +761,80 @@ inline bool operator >= (const U& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,
 
 
 
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const char* u)
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const char* u)
 {
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(rhs) += u;
 }
 
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const wchar_t* u)
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const wchar_t* u)
 {
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(rhs) += u;
 }
 
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const char u)
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const char u)
 {
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(rhs) += u;
 }
 
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const wchar_t u)
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const wchar_t u)
 {
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
-}
-
-
-
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const wchar_t* u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
-{
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
-}
-
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const char* u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
-{
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
-}
-
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const char u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
-{
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
-}
-
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const wchar_t u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
-{
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(rhs) += u;
 }
 
 
 
-
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C, class U>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const std::basic_string<U>& u, const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs)
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const wchar_t* u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(u) += rhs;
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(u) += rhs;
+}
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const char* u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+{
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(u) += rhs;
+}
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const char u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+{
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(u) += rhs;
+}
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const wchar_t u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+{
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(u) += rhs;
 }
 
 
-template<unsigned int SizeT, bool ExpT,bool ZeroT,class C, class U>
-inline Yuni::Core::IString<SizeT,ExpT,ZeroT,C>
-operator + (const Yuni::Core::IString<SizeT,ExpT,ZeroT,C>& rhs, const std::basic_string<U>& u)
+
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT, class U>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const std::basic_string<U>& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
-	return Yuni::Core::IString<SizeT,ExpT,ZeroT,C>(rhs) += u;
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(u) += rhs;
+}
+
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT, class U>
+inline Yuni::CustomString<SizeT,ExpT,ZeroT>
+operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const std::basic_string<U>& u)
+{
+	return Yuni::CustomString<SizeT,ExpT,ZeroT>(rhs) += u;
 }
 
 //@}

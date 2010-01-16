@@ -24,15 +24,15 @@ namespace File
 	template<class U>
 	inline Stream::Stream(const U& filename, const int mode)
 	{
-		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			# ifdef YUNI_OS_WINDOWS
 			pFd = OpenFileOnWindows(
-				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
 				mode);
 			# else
 			pFd = ::fopen(
-				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
 				OpenMode::ToCString(mode));
 			# endif
 		}
@@ -54,15 +54,15 @@ namespace File
 		// Close the file if already opened
 		if (pFd)
 			(void)::fclose(pFd);
-		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			# ifdef YUNI_OS_WINDOWS
 			pFd = OpenFileOnWindows(
-				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
 				mode);
 			# else
 			pFd = ::fopen(
-				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
 				OpenMode::ToCString(mode));
 			# endif
 		}
@@ -124,13 +124,13 @@ namespace File
 		return (NULL != fgets(buffer, maxSize, pFd));
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	Stream::gets(IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>& buffer)
+	Stream::gets(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
 	{
 		const bool ret = (NULL != ::fgets((char*)buffer.data(),
 			buffer.capacity() - (buffer.zeroTerminated ? 0 : 1), pFd));
-		buffer.resize(::strlen(buffer.c_str()) / sizeof(C));
+		buffer.resize(::strlen(buffer.c_str()) / sizeof(typename CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>::Char));
 		return ret;
 	}
 
@@ -157,12 +157,12 @@ namespace File
 	template<class U>
 	inline size_t Stream::write(const U& buffer)
 	{
-		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			return ::fwrite(
-				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
 				1,
-				Core::Traits::Length<typename Static::Remove::Const<U>::Type>::Value(buffer), pFd);
+				Traits::Length<typename Static::Remove::Const<U>::Type>::Value(buffer), pFd);
 		}
 		else
 		{
@@ -176,10 +176,10 @@ namespace File
 	template<class U>
 	inline size_t Stream::write(const U& buffer, const size_t size)
 	{
-		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			return ::fwrite(
-				(const void*) Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
+				(const void*) Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
 				1, size, pFd);
 		}
 		else
@@ -214,12 +214,12 @@ namespace File
 	template<class U>
 	inline Stream& Stream::operator += (const U& u)
 	{
-		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			(void)::fwrite(
-				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u),
 				1,
-				Core::Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
+				Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
 		}
 		else
 		{
@@ -234,12 +234,12 @@ namespace File
 	template<class U>
 	inline Stream& Stream::operator << (const U& u)
 	{
-		if (Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
+		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			(void)::fwrite(
-				Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u),
 				1,
-				Core::Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
+				Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
 		}
 		else
 		{
@@ -251,13 +251,14 @@ namespace File
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline size_t
-	Stream::read(IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>& buffer)
+	Stream::read(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
 	{
 		// Assert to prevent SegV
 		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
 
+		typedef typename CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>::Char C;
 		// Reading the file
 		const size_t result = ::fread(buffer.data(), 1, sizeof(C) * buffer.size(), pFd);
 		// Setting the good size, because we may have read less than asked
