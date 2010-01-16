@@ -182,8 +182,8 @@ namespace File
 		**
 		** \param buffer The buffer where to write the line
 		*/
-		template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-		bool gets(IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>& buffer);
+		template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+		bool gets(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer);
 
 		/*!
 		** \brief Read a buffer
@@ -204,8 +204,8 @@ namespace File
 		** \param buffer An arbitrary buffer
 		** \return The number of bytes that have been read
 		*/
-		template<unsigned int CSizeT, bool ExpT, bool ZeroT, class C>
-		size_t read(IString<CSizeT,ExpT,ZeroT,C>&  buffer);
+		template<unsigned int CSizeT, bool ExpT, bool ZeroT>
+		size_t read(CustomString<CSizeT,ExpT,ZeroT>&  buffer);
 
 		template<class C, int CSizeT>
 		size_t read(StringBase<C, CSizeT>&  buffer);
@@ -231,7 +231,7 @@ namespace File
 		/*!
 		** \brief Write any arbitrary buffer
 		**
-		** \param buffer An arbitrary buffer (const char*, String, IString)
+		** \param buffer An arbitrary buffer (const char*, String, CustomString)
 		** \return The number of bytes that have been written
 		*/
 		template<class U> size_t write(const U& buffer);
@@ -239,7 +239,7 @@ namespace File
 		/*!
 		** \brief Write any arbitrary buffer
 		**
-		** \param buffer An arbitrary buffer (const char*, String, IString)
+		** \param buffer An arbitrary buffer (const char*, String, CustomString)
 		** \param size Size of the buffer to write
 		** \return The number of bytes that have been written
 		*/

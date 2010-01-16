@@ -7,8 +7,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 namespace Traits
 {
 
@@ -153,38 +151,38 @@ namespace Traits
 
 
 
-	// IString
+	// CustomString
 
-	template<class C, unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class SizeT>
-	struct Length<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>, SizeT>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class SizeT>
+	struct Length<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
-		typedef IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C> IStringType;
+		typedef CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
 
 	public:
-		static SizeT Value(const IStringType& container)
+		static SizeT Value(const CustomStringType& container)
 		{
 			return (SizeT) container.size();
 		}
 	};
 
 
-	template<class C, unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class SizeT>
-	struct Length<IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C>*, SizeT>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class SizeT>
+	struct Length<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>*, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
-		typedef IString<ChunkSizeT, ExpandableT,ZeroTerminatedT,C> IStringType;
+		typedef CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
 
 	public:
-		static SizeT Value(const IStringType* container)
+		static SizeT Value(const CustomStringType* container)
 		{
 			return (container) ? (SizeT) container->size() : 0;
 		}
@@ -291,7 +289,6 @@ namespace Traits
 
 
 } // namespace Traits
-} // namespace Core
 } // namespace Yuni
 
 #endif // __YUNI_CORE_TRAITS_LENGTH_H__

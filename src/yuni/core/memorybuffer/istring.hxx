@@ -1,160 +1,161 @@
 #ifndef __YUNI_CORE_MEMORY_BUFFER_ISTRING_HXX__
 # define __YUNI_CORE_MEMORY_BUFFER_ISTRING_HXX__
 
+#include <ctype.h>
+
 
 namespace Yuni
 {
-namespace Core
-{
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::IString()
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString()
 	{}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::IString(const NullPtr&)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const NullPtr&)
 	{}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::IString(const NullPtr*)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const NullPtr*)
 	{}
 
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::IString(const IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>& rhs)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>& rhs)
 		:AncestorType(rhs)
 	{}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::IString(const U& rhs)
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const U& rhs)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		Private::IStringImpl::Assign<IStringType, UType>::Do(*this, rhs);
+		Yuni::Core::Extension::CustomString::Assign<CustomStringType, UType>::Do(*this, rhs);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::IString(const C* block, const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size blockSize)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* block,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size blockSize)
 	{
 		AncestorType::assign(block, blockSize);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline void IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::assign(const U& u)
+	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assign(const U& u)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
 
-		Private::IStringImpl::Assign<IString, UType>::Do(*this, u);
+		Yuni::Core::Extension::CustomString::Assign<CustomString, UType>::Do(*this, u);
 		return *this;
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline void IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::append(const U& u)
+	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::append(const U& u)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
 
-		Private::IStringImpl::Append<IString, UType>::Do(*this, u);
+		Core::Extension::CustomString::Append<CustomString, UType>::Do(*this, u);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline void IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::append(const U& u,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size size)
+	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::append(const U& u,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
 
-		AncestorType::append(Core::Traits::CString<UType>::Buffer(u), size);
+		AncestorType::append(Traits::CString<UType>::Buffer(u), size);
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline void IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::write(const U& u,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size size)
+	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::write(const U& u,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
 		append(u, size);
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline void IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::push_back(const U& u)
+	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::push_back(const U& u)
 	{
 		append(u);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline void IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::push_front(const U& u)
+	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::push_front(const U& u)
 	{
 		insert(0, u);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline void IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::prepend(const U& u)
+	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::prepend(const U& u)
 	{
 		insert(0, u);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline void IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::prepend(const U& u,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size size)
+	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::prepend(const U& u,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
 
-		insert(0, Core::Traits::CString<UType>::Buffer(u), size);
+		insert(0, Traits::CString<UType>::Buffer(u), size);
 	}
 
 
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::assign(const C* buffer,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size size)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assign(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* buffer,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
 		AncestorType::assign(buffer, size);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::append(const C* buffer,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size size)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::append(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* buffer,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
 		AncestorType::append(buffer, size);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::clear()
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::clear()
 	{
 		AncestorType::clear();
 		return *this;
@@ -162,41 +163,41 @@ namespace Core
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::reserve(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size minCapacity)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::reserve(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size minCapacity)
 	{
 		AncestorType::reserve(minCapacity);
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::put(const C c)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::put(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char c)
 	{
 		AncestorType::put(c);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	void IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::fill(const U& pattern)
+	void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::fill(const U& pattern)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
 		if (AncestorType::size)
-			Private::IStringImpl::Fill<IString, UType>::Do(AncestorType::data, AncestorType::size, pattern);
+			Yuni::Core::Extension::CustomString::Fill<CustomString, UType>::Do(AncestorType::data, AncestorType::size, pattern);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::find(const C buffer) const
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::find(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char buffer) const
 	{
 		for (Size i = 0; i != AncestorType::size; ++i)
 		{
@@ -207,11 +208,11 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::indexOf(
-		typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
-		const C buffer) const
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::indexOf(
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char buffer) const
 	{
 		for (; offset < AncestorType::size; ++offset)
 		{
@@ -222,10 +223,10 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::startsWith(const C* buffer,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size len) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::startsWith(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* buffer,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
 	{
 		return (buffer && len && len <= AncestorType::size)
 			? (0 == ::memcmp(AncestorType::data, buffer, len))
@@ -233,27 +234,27 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::startsWith(const U& u) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::startsWith(const U& u) const
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		return startsWith(Core::Traits::CString<UType>::Buffer(u),
-			Core::Traits::Length<UType,Size>::Value(u));
+		return startsWith(Traits::CString<UType>::Buffer(u),
+			Traits::Length<UType,Size>::Value(u));
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::endsWith(const C* buffer,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size len) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::endsWith(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* buffer,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
 	{
 		return (buffer && len && len <= AncestorType::size)
 			? (0 == ::memcmp(AncestorType::data + (AncestorType::size - len), buffer, len))
@@ -261,28 +262,28 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::endsWith(const U& u) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::endsWith(const U& u) const
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		return endsWith(Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
+		return endsWith(Traits::CString<UType>::Buffer(u), Traits::Length<UType,Size>::Value(u));
 	}
 
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::find(const C* buffer,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size len) const
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::find(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* buffer,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
 	{
 		if (buffer && len && len <= AncestorType::size)
 		{
@@ -300,12 +301,12 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::indexOf(
-		typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
-		const C* buffer,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size len) const
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::indexOf(
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* buffer,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
 	{
 		if (buffer && len && len <= AncestorType::size)
 		{
@@ -324,116 +325,116 @@ namespace Core
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::find(const U& u) const
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::find(const U& u) const
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
 		// Find the substring
-		if (Core::Traits::Length<UType,Size>::isFixed)
+		if (Traits::Length<UType,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
-			// prevent against bad uses of the API, like using a C* for looking for a single char.
+			// prevent against bad uses of the API, like using a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* for looking for a single char.
 
 			// The value to find is actually empty, npos will be the unique answer
-			if (0 == Core::Traits::Length<UType,Size>::fixedLength)
+			if (0 == Traits::Length<UType,Size>::fixedLength)
 				return npos;
 			// The string is actually a single POD item
-			if (1 == Core::Traits::Length<UType,Size>::fixedLength)
-				return find(Core::Traits::CString<UType>::Buffer(u), 1);
+			if (1 == Traits::Length<UType,Size>::fixedLength)
+				return find(Traits::CString<UType>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return find(Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::fixedLength);
+			return find(Traits::CString<UType>::Buffer(u), Traits::Length<UType,Size>::fixedLength);
 		}
 		// A mere CString, with a known length at runtime only
-		return find(Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
+		return find(Traits::CString<UType>::Buffer(u), Traits::Length<UType,Size>::Value(u));
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::indexOf(
-		typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::indexOf(
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
 		const U& u) const
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
 		// Find the substring
-		if (Core::Traits::Length<UType,Size>::isFixed)
+		if (Traits::Length<UType,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
-			// prevent against bad uses of the API, like using a C* for looking for a single char.
+			// prevent against bad uses of the API, like using a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* for looking for a single char.
 
 			// The value to find is actually empty, npos will be the unique answer
-			if (0 == Core::Traits::Length<UType,Size>::fixedLength)
+			if (0 == Traits::Length<UType,Size>::fixedLength)
 				return npos;
 			// The string is actually a single POD item
-			if (1 == Core::Traits::Length<UType,Size>::fixedLength)
-				return indexOf(offset, Core::Traits::CString<UType>::Buffer(u), 1);
+			if (1 == Traits::Length<UType,Size>::fixedLength)
+				return indexOf(offset, Traits::CString<UType>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return indexOf(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::fixedLength);
+			return indexOf(offset, Traits::CString<UType>::Buffer(u), Traits::Length<UType,Size>::fixedLength);
 		}
 		// A mere CString, with a known length at runtime only
-		return indexOf(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
+		return indexOf(offset, Traits::CString<UType>::Buffer(u), Traits::Length<UType,Size>::Value(u));
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::find_first_of(const U& u) const
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::find_first_of(const U& u) const
 	{
 		// Find the substring
 		return find(u);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::consume(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size n)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::consume(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size n)
 	{
 		erase(0, n);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	inline U
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::to() const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::to() const
 	{
-		return Yuni::Core::Extension::IString::To<typename Static::Remove::Const<U>::Type>::Perform(*this);
+		return Yuni::Core::Extension::CustomString::Into<typename Static::Remove::Const<U>::Type>::Perform(*this);
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::to(U& out) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::to(U& out) const
 	{
-		return Yuni::Core::Extension::IString::To<typename Static::Remove::Const<U>::Type>::Perform(*this, out);
+		return Yuni::Core::Extension::CustomString::Into<typename Static::Remove::Const<U>::Type>::Perform(*this, out);
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::erase(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size len)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::erase(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len)
 	{
 		// Only valid if the offset is strictly less than the current size
 		if (offset < AncestorType::size && len)
@@ -445,115 +446,114 @@ namespace Core
 			else
 			{
 				// Actually we have to erase a part of the buffer
-				(void)::memmove(AncestorType::data + sizeof(C) * (offset),
-								AncestorType::data + sizeof(C) * (offset + len), sizeof(C) * (AncestorType::size - offset));
+				(void)::memmove(AncestorType::data + sizeof(Char) * (offset),
+								AncestorType::data + sizeof(Char) * (offset + len), sizeof(Char) * (AncestorType::size - offset));
 				// Reducing the buffer's size
 				AncestorType::size -= len;
 			}
 			if (zeroTerminated)
-				AncestorType::data[AncestorType::size] = C();
+				AncestorType::data[AncestorType::size] = Char();
 		}
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline C
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::at(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset) const
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::at(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset) const
 	{
-		return (offset < AncestorType::size) ? AncestorType::data[offset] : C();
+		return (offset < AncestorType::size) ? AncestorType::data[offset] : Char();
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline const C&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator [] (
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset) const
-	{
-		return AncestorType::data[offset];
-	}
-
-
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline C&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator [] (
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char &
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset) const
 	{
 		return AncestorType::data[offset];
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline const C&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator [] (const int offset) const
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char &
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset)
+	{
+		return AncestorType::data[offset];
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char &
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (const int offset) const
 	{
 		return AncestorType::data[(unsigned int)offset];
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline C&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator [] (const int offset)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char &
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (const int offset)
 	{
 		return AncestorType::data[(unsigned int)offset];
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::insert(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
-		const U& u)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::insert(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset, const U& u)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		if (Core::Traits::Length<UType,Size>::isFixed)
+		if (Traits::Length<UType,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
-			// prevent against bad uses of the API, like using a C* for looking for a single char.
+			// prevent against bad uses of the API, like using a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* for looking for a single char.
 
 			// The value to find is actually empty, false will be the unique answer
-			if (0 == Core::Traits::Length<UType,Size>::fixedLength)
+			if (0 == Traits::Length<UType,Size>::fixedLength)
 				return false;
 			// The string is actually a single POD item
-			if (1 == Core::Traits::Length<UType,Size>::fixedLength)
-				return insert(offset, Core::Traits::CString<UType>::Buffer(u), 1);
+			if (1 == Traits::Length<UType,Size>::fixedLength)
+				return insert(offset, Traits::CString<UType>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return insert(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::fixedLength);
+			return insert(offset, Traits::CString<UType>::Buffer(u), Traits::Length<UType,Size>::fixedLength);
 		}
 
-		return insert(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
+		return insert(offset, Traits::CString<UType>::Buffer(u), Traits::Length<UType,Size>::Value(u));
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::insert(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::insert(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
 		const U& u,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size size)
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<typename Static::Remove::Const<U>::Type>::valid, CustomString_InvalidTypeForBuffer);
 
-		return insert(offset, Core::Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), size);
+		return insert(offset, Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u), size);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::insert(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
-		const C* buffer,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size size)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::insert(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* buffer,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
 		if (size > 0)
 		{
@@ -576,11 +576,10 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::insert(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
-		const C c)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::insert(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset, const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char c)
 	{
 		if (offset == AncestorType::size)
 		{
@@ -600,163 +599,162 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::overwrite(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
-		const C* region,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size size)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::overwrite(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* region,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
 		if (offset < AncestorType::size && size)
 		{
 			if (offset + size > AncestorType::size)
-				(void)::memcpy(AncestorType::data + offset, region, sizeof(C) * AncestorType::size - offset);
+				(void)::memcpy(AncestorType::data + offset, region, sizeof(Char) * AncestorType::size - offset);
 			else
-				(void)::memcpy(AncestorType::data + offset, region, sizeof(C) * size);
+				(void)::memcpy(AncestorType::data + offset, region, sizeof(Char) * size);
 		}
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::overwrite(
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size offset,
-		const U& u)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::overwrite(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset, const U& u)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
 		// Find the substring
-		if (Core::Traits::Length<UType,Size>::isFixed)
+		if (Traits::Length<UType,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
-			// prevent against bad uses of the API, like using a C* for looking for a single char.
+			// prevent against bad uses of the API, like using a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* for looking for a single char.
 
 			// The value to find is actually empty, nothing to do
-			if (0 == Core::Traits::Length<UType,Size>::fixedLength)
+			if (0 == Traits::Length<UType,Size>::fixedLength)
 				return;
 			// The string is actually a single POD item
-			if (1 == Core::Traits::Length<UType,Size>::fixedLength)
-				return overwrite(offset, Core::Traits::CString<UType>::Buffer(u), 1);
+			if (1 == Traits::Length<UType,Size>::fixedLength)
+				return overwrite(offset, Traits::CString<UType>::Buffer(u), 1);
 			// Researching for the substring with a known length
-			return overwrite(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::fixedLength);
+			return overwrite(offset, Traits::CString<UType>::Buffer(u), Traits::Length<UType,Size>::fixedLength);
 		}
 
-		return overwrite(offset, Core::Traits::CString<UType>::Buffer(u), Core::Traits::Length<UType,Size>::Value(u));
+		return overwrite(offset, Traits::CString<UType>::Buffer(u), Traits::Length<UType,Size>::Value(u));
 	}
 
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::truncate(const Size newSize)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::truncate(const Size newSize)
 	{
 		if (newSize < AncestorType::size)
 			AncestorType::size = newSize;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::size() const
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::size() const
 	{
 		return AncestorType::size;
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::length() const
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::length() const
 	{
 		return AncestorType::size;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline uint64
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::sizeInBytes() const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::sizeInBytes() const
 	{
-		return AncestorType::size * sizeof(C);
+		return AncestorType::size * sizeof(Char);
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::capacity() const
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::capacity() const
 	{
 		return AncestorType::capacity;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline uint64
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::capacityInBytes() const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::capacityInBytes() const
 	{
-		return AncestorType::capacity * sizeof(C);
+		return AncestorType::capacity * sizeof(Char);
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline const C*
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::data() const
-	{
-		return AncestorType::data;
-	}
-
-
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline C*
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::data()
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char*
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::data() const
 	{
 		return AncestorType::data;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline const C*
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::c_str() const
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char*
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::data()
 	{
 		return AncestorType::data;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char*
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::c_str() const
+	{
+		return AncestorType::data;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::empty() const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::empty() const
 	{
 		return (0 == AncestorType::size);
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::null() const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::null() const
 	{
 		return (NULL == AncestorType::data);
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::notEmpty() const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::notEmpty() const
 	{
 		return (0 != AncestorType::size);
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::resize(
-		typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size len)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::resize(
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len)
 	{
 		if (AncestorType::expandable)
 		{
@@ -774,24 +772,24 @@ namespace Core
 		}
 		// Zero-Terminated buffers
 		if (zeroTerminated)
-			AncestorType::data[AncestorType::size] = C();
+			AncestorType::data[AncestorType::size] = Char();
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::trimRight(const C c)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::trimRight(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char c)
 	{
 		while (AncestorType::size > 0 && AncestorType::data[AncestorType::size - 1] == c)
 			--AncestorType::size;
 		if (zeroTerminated)
-			AncestorType::data[AncestorType::size] = C();
+			AncestorType::data[AncestorType::size] = Char();
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::trimLeft(const C c)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::trimLeft(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char c)
 	{
 		if (AncestorType::size > 0)
 		{
@@ -804,21 +802,21 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::trimRight(const U& u)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::trimRight(const U& u)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 
-		const C* ptr;
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* ptr;
 		while (AncestorType::size > 0)
 		{
-			ptr = Core::Traits::CString<UType>::Buffer(u);
-			while (C() != *ptr)
+			ptr = Traits::CString<UType>::Buffer(u);
+			while (Char() != *ptr)
 			{
 				if (*ptr == AncestorType::data[AncestorType::size - 1])
 				{
@@ -827,30 +825,30 @@ namespace Core
 				}
 				++ptr;
 			}
-			if (C() == *ptr)
+			if (Char() == *ptr)
 				break;
 		}
 		if (zeroTerminated)
-			AncestorType::data[AncestorType::size] = C();
+			AncestorType::data[AncestorType::size] = Char();
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::trimLeft(const U& u)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::trimLeft(const U& u)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 
-		const C* ptr;
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* ptr;
 		Size count = 0;
 		while (count < AncestorType::size)
 		{
-			ptr = Core::Traits::CString<UType>::Buffer(u);
-			while (C() != *ptr)
+			ptr = Traits::CString<UType>::Buffer(u);
+			while (Char() != *ptr)
 			{
 				if (*ptr == AncestorType::data[count])
 				{
@@ -859,7 +857,7 @@ namespace Core
 				}
 				++ptr;
 			}
-			if (C() == *ptr)
+			if (Char() == *ptr)
 				break;
 		}
 		if (count != 0)
@@ -867,9 +865,9 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::trim(const C c)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::trim(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char c)
 	{
 		// It seems more interesting to trim from the end first, to reduce the size
 		// of the buffer as soon as possible and to reduce the amount of data to move
@@ -879,13 +877,13 @@ namespace Core
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::trim(const U& u)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::trim(const U& u)
 	{
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<typename Static::Remove::Const<U>::Type>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<typename Static::Remove::Const<U>::Type>::valid, CustomString_InvalidTypeForBuffer);
 
 		// It seems more interesting to trim from the end first, to reduce the size
 		// of the buffer as soon as possible and to reduce the amount of data to move
@@ -896,37 +894,37 @@ namespace Core
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::assignWithoutChecking(
-		const C* block,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size blockSize)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assignWithoutChecking(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* block,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size blockSize)
 	{
 		return AncestorType::assignWithoutChecking(block, blockSize);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::appendWithoutChecking(
-		const C* block,
-		const typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size blockSize)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::appendWithoutChecking(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* block,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size blockSize)
 	{
 		return AncestorType::appendWithoutChecking(block, blockSize);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::assignWithoutChecking(const C c)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assignWithoutChecking(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char c)
 	{
 		return AncestorType::assignWithoutChecking(c);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline typename IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Size
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::appendWithoutChecking(const C c)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::appendWithoutChecking(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char c)
 	{
 		return AncestorType::appendWithoutChecking(c);
 	}
@@ -935,53 +933,53 @@ namespace Core
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class AnyStringT>
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::format(const AnyStringT& format, ...)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::format(const AnyStringT& format, ...)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the container is not zero-terminated
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::zeroTerminated, IString_FormatMustBeZeroTerminated);
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::zeroTerminated, CustomString_FormatMustBeZeroTerminated);
 
 		// Empty the buffer
 		clear();
 		// Dealing with the variadic arguments
 		va_list parg;
 		va_start(parg, format);
-		vappendFormat(Core::Traits::CString<UType>::Buffer(format), parg);
+		vappendFormat(Traits::CString<UType>::Buffer(format), parg);
 		va_end(parg);
 		return *this;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class AnyStringT>
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::appendFormat(const AnyStringT& format, ...)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::appendFormat(const AnyStringT& format, ...)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the container is not zero-terminated
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::zeroTerminated, IString_FormatMustBeZeroTerminated);
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::zeroTerminated, CustomString_FormatMustBeZeroTerminated);
 
 		// Dealing with the variadic arguments
 		va_list parg;
 		va_start(parg, format);
-		vappendFormat(Core::Traits::CString<UType>::Buffer(format), parg);
+		vappendFormat(Traits::CString<UType>::Buffer(format), parg);
 		va_end(parg);
 		return *this;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::vappendFormat(const char* format, va_list args)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::vappendFormat(const char* format, va_list args)
 	{
 		// Nothing to do if the format is empty
 		if (!format || '\0' == *format)
@@ -1002,8 +1000,8 @@ namespace Core
 				AncestorType::reserve(AncestorType::size + chunkSize);
 			while (true)
 			{
-				i = Private::IStringImpl::vnsprintf<C>(AncestorType::data + AncestorType::size,
-					(AncestorType::capacity - AncestorType::size) * sizeof(C), format, args);
+				i = Private::CustomStringImpl::vnsprintf<Char>(AncestorType::data + AncestorType::size,
+					(AncestorType::capacity - AncestorType::size) * sizeof(Char), format, args);
 				if (i == -1)
 				{
 					AncestorType::reserve(AncestorType::capacity + chunkSize);
@@ -1016,7 +1014,7 @@ namespace Core
 				}
 				AncestorType::size += (Size) i;
 				if (zeroTerminated)
-					AncestorType::data[AncestorType::size] = C();
+					AncestorType::data[AncestorType::size] = Char();
 			}
 		}
 		else
@@ -1025,19 +1023,36 @@ namespace Core
 			// We will only try once
 			if (AncestorType::capacity != AncestorType::size)
 			{
-				i = Private::IStringImpl::vnsprintf<C>(AncestorType::data + AncestorType::size,
-					(AncestorType::capacity - AncestorType::size) * sizeof(C), format, args);
+				i = Private::CustomStringImpl::vnsprintf<Char>(AncestorType::data + AncestorType::size,
+					(AncestorType::capacity - AncestorType::size) * sizeof(Char), format, args);
 				if (i >= 0)
 				{
 					AncestorType::size += (Size) i;
 					if (zeroTerminated)
-						AncestorType::data[AncestorType::size] = C();
+						AncestorType::data[AncestorType::size] = Char();
 				}
 			}
 		}
 	}
 
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::toLower()
+	{
+		for (Size i = 0; i < AncestorType::size; ++i)
+			AncestorType::data[i] = (Char) tolower(AncestorType::data[i]);
+		return *this;
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::toUpper()
+	{
+		for (Size i = 0; i < AncestorType::size; ++i)
+			AncestorType::data[i] = (Char) toupper(AncestorType::data[i]);
+		return *this;
+	}
 
 
 
@@ -1046,186 +1061,191 @@ namespace Core
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator != (const U& rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator != (const U& rhs) const
 	{
 		return !(*this == rhs);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator ! () const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator ! () const
 	{
 		return !AncestorType::size;
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator += (const U& rhs)
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator += (const U& rhs)
 	{
-		Private::IStringImpl::Append<IStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
+		Core::Extension::CustomString::Append<CustomStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
 		return *this;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator << (const U& rhs)
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator << (const U& rhs)
 	{
-		Private::IStringImpl::Append<IStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
+		Core::Extension::CustomString::Append<CustomStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
 		return *this;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator = (const IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>& rhs)
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator = (const CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>& rhs)
 	{
-		Private::IStringImpl::Assign<IStringType, IStringType>::Do(*this, rhs);
+		Yuni::Core::Extension::CustomString::Assign<CustomStringType, CustomStringType>::Do(*this, rhs);
 		return *this;
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
-	inline IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>&
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator = (const U& rhs)
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator = (const U& rhs)
 	{
-		Private::IStringImpl::Assign<IStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
+		Yuni::Core::Extension::CustomString::Assign<CustomStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
 		return *this;
 	}
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator < (const IString& rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator < (const CustomString& rhs) const
 	{
 		return (!AncestorType::size || (AncestorType::size < rhs.size()
-			&& ::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(C)) <= 0));
+			&& ::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(Char)) <= 0));
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator > (const IString& rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator > (const CustomString& rhs) const
 	{
 		return (AncestorType::size > rhs.size()
-			&& ::memcmp(AncestorType::data, rhs.data(), rhs.size() * sizeof(C)) >= 0);
+			&& ::memcmp(AncestorType::data, rhs.data(), rhs.size() * sizeof(Char)) >= 0);
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator <= (const IString& rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator <= (const CustomString& rhs) const
 	{
 		return (!AncestorType::size || (AncestorType::size <= rhs.size()
-			&& ::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(C)) <= 0));
+			&& ::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(Char)) <= 0));
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator >= (const IString& rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator >= (const CustomString& rhs) const
 	{
 		return (AncestorType::size && AncestorType::size >= rhs.size()
-			&& ::memcmp(AncestorType::data, rhs.data(), rhs.size() * sizeof(C)) >= 0);
+			&& ::memcmp(AncestorType::data, rhs.data(), rhs.size() * sizeof(Char)) >= 0);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator == (const C* rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator == (
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* rhs) const
 	{
 		// Assert, if the length of the given container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<C>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<Char*>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		const Size cL = (rhs ? Core::Traits::Length<C,Size>::Value(rhs) : 0);
+		const Size cL = (rhs ? Traits::Length<Char*,Size>::Value(rhs) : 0);
 		return (AncestorType::size == cL && AncestorType::size != 0
-			&& !::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(C)));
+			&& !::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(Char)));
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator <= (const C* rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator <= (
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* rhs) const
 	{
 		// Assert, if the length of the given container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<C>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<Char*>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		const Size cL = (rhs ? Core::Traits::Length<C,Size>::Value(rhs) : 0);
+		const Size cL = (rhs ? Traits::Length<Char*,Size>::Value(rhs) : 0);
 		return (AncestorType::size <= cL && AncestorType::size != 0
-			&& ::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(C)) <= 0);
+			&& ::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(Char)) <= 0);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator >= (const C* rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator >= (
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* rhs) const
 	{
 		// Assert, if the length of the given container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<C>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<Char*>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		const Size cL = (rhs ? Core::Traits::Length<C,Size>::Value(rhs) : 0);
+		const Size cL = (rhs ? Traits::Length<Char*,Size>::Value(rhs) : 0);
 		return (AncestorType::size >= cL && AncestorType::size != 0
-			&& ::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(C)) >= 0);
+			&& ::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(Char)) >= 0);
 	}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator < (const C* rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator < (
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* rhs) const
 	{
 		// Assert, if the length of the given container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<C>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<Char*>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		const Size cL = (rhs ? Core::Traits::Length<C,Size>::Value(rhs) : 0);
+		const Size cL = (rhs ? Traits::Length<Char*,Size>::Value(rhs) : 0);
 		return (AncestorType::size < cL && AncestorType::size != 0
-			&& ::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(C)) < 0);
+			&& ::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(Char)) < 0);
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator > (const C* rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator > (
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* rhs) const
 	{
 		// Assert, if the length of the given container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<C>::valid,  IString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<Char*>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		const Size cL = (rhs ? Core::Traits::Length<C,Size>::Value(rhs) : 0);
+		const Size cL = (rhs ? Traits::Length<Char*,Size>::Value(rhs) : 0);
 		return (AncestorType::size > cL && AncestorType::size != 0
-			&& ::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(C)) > 0);
+			&& ::memcmp(AncestorType::data, rhs, AncestorType::size * sizeof(Char)) > 0);
 	}
 
 
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator == (const IString& rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator == (const CustomString& rhs) const
 	{
 		return (AncestorType::size > 0 && AncestorType::size == rhs.size()
-			&& !::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(C)));
+			&& !::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(Char)));
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<unsigned int C1, bool E1, bool Z1>
 	inline bool
-	IString<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::operator == (const IString<C1, E1, Z1, C>& rhs) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator == (const CustomString<C1, E1, Z1>& rhs) const
 	{
 		return (AncestorType::size == rhs.size()
-			&& !::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(C)));
+			&& !::memcmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(Char)));
 	}
 
 
 
 
 
-} // namespace Core
 } // namespace Yuni
 
 #endif // __YUNI_CORE_MEMORY_BUFFER_ISTRING_HXX__

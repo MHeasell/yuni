@@ -416,10 +416,11 @@ namespace StringImpl
 	}; // yuni::string
 
 
-	template<unsigned int Chnk1, bool ExpT, bool ZeroT, class C>
-	struct From< Core::IString<Chnk1, ExpT, ZeroT, C> >
+	template<unsigned int Chnk1, bool ExpT, bool ZeroT>
+	struct From< CustomString<Chnk1, ExpT, ZeroT> >
 	{
-		typedef Core::IString<Chnk1, ExpT, ZeroT, C> SourceType;
+		typedef CustomString<Chnk1, ExpT, ZeroT> SourceType;
+		typedef typename CustomString<Chnk1, ExpT, ZeroT>::Char C;
 
 		template<int Chnk>
 		static inline void Append(StringBase<C,Chnk>& s, const SourceType& str)

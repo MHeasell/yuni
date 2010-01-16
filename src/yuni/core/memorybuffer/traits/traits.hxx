@@ -7,7 +7,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace IStringImpl
+namespace CustomStringImpl
 {
 
 
@@ -17,8 +17,9 @@ namespace IStringImpl
 		minCapacity += zeroTerminated;
 		if (capacity < minCapacity)
 		{
-			// This loop is a little faster than the following replacement code :
+			// This loop may be a little faster than the following replacement code :
 			// capacity = minCapacity + minCapacity % chunkSize;
+			// Especially when chunkSize is not a power of 2
 			do
 			{
 				// Increase the capacity until we have enough space
@@ -157,7 +158,7 @@ namespace IStringImpl
 
 
 
-} // namespace IStringImpl
+} // namespace CustomStringImpl
 } // namespace Private
 } // namespace Yuni
 

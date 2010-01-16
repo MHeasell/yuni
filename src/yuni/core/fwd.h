@@ -16,18 +16,14 @@ namespace Yuni
 	struct None {};
 
 
+	// Will be removed as soon as the class CustomString is ready for use
 	template<class C = char, int ChunkSizeT = 128> class StringBase;
 
+	// Forward declaration for the base class CustomString<>
+	template<unsigned int ChunkSizeT = 128, bool ExpandableT = true, bool ZeroTerminatedT = true>
+	class CustomString;
 
 
-namespace Core
-{
-
-	// Forward declaration for the base class IString<>
-	template<unsigned int ChunkSizeT = 128, bool ExpandableT = true, bool ZeroTerminatedT = true, class C = char>
-	class IString;
-
-} // namespace Core
 } // namespace Yuni
 
 

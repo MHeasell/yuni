@@ -11,159 +11,160 @@
 # endif
 
 
-
 namespace Yuni
 {
-namespace Private
+namespace Core
 {
-namespace IStringImpl
+namespace Extension
+{
+namespace CustomString
 {
 
-	template<class MemBufT, class C>
+	template<class CustomStringT, class C>
 	struct Append
 	{
 		// Unknown type
-		YUNI_STATIC_ASSERT(false, IString_AppendUnknownType);
+		YUNI_STATIC_ASSERT(false, CustomString_AppendUnknownType);
 	};
 
 
 	// std::string
-	template<class MemBufT, class TraitsT, class AllocT>
-	struct Append<MemBufT, std::basic_string<typename MemBufT::Type, TraitsT,AllocT> >
+	template<class CustomStringT, class TraitsT, class AllocT>
+	struct Append<CustomStringT, std::basic_string<typename CustomStringT::Type, TraitsT,AllocT> >
 	{
-		typedef std::basic_string<typename MemBufT::Type, TraitsT,AllocT> S;
-		static void Do(MemBufT& memoryBuffer, const S& rhs)
+		typedef std::basic_string<typename CustomStringT::Type, TraitsT,AllocT> S;
+		static void Do(CustomStringT& s, const S& rhs)
 		{
 			if (!rhs.empty())
-				memoryBuffer.appendWithoutChecking(rhs.c_str(), rhs.size());
+				s.appendWithoutChecking(rhs.c_str(), rhs.size());
 		}
 	};
 
 	// yuni::string
-	template<class MemBufT, int ChunkSizeT>
-	struct Append<MemBufT, StringBase<typename MemBufT::Type, ChunkSizeT> >
+	template<class CustomStringT, int ChunkSizeT>
+	struct Append<CustomStringT, StringBase<typename CustomStringT::Type, ChunkSizeT> >
 	{
-		typedef StringBase<typename MemBufT::Type, ChunkSizeT> S;
-		static void Do(MemBufT& memoryBuffer, const S& rhs)
+		typedef StringBase<typename CustomStringT::Type, ChunkSizeT> S;
+		static void Do(CustomStringT& s, const S& rhs)
 		{
 			if (rhs.notEmpty())
-				memoryBuffer.appendWithoutChecking(rhs.c_str(), rhs.size());
+				s.appendWithoutChecking(rhs.c_str(), rhs.size());
 		}
 	};
 
 
 	// C*
-	template<class MemBufT>
-	struct Append<MemBufT, typename MemBufT::Type*>
+	template<class CustomStringT>
+	struct Append<CustomStringT, typename CustomStringT::Type*>
 	{
-		typedef typename MemBufT::Type TypeC;
+		typedef typename CustomStringT::Type TypeC;
 		typedef typename Static::Remove::Const<TypeC>::Type C;
-		static void Do(MemBufT& memoryBuffer, const C* rhs)
+		static void Do(CustomStringT& s, const C* rhs)
 		{
 			if (rhs)
-				memoryBuffer.appendWithoutChecking(rhs, Yuni::Core::Traits::Length<C*,typename MemBufT::Size>::Value(rhs));
+				s.appendWithoutChecking(rhs, Yuni::Traits::Length<C*,typename CustomStringT::Size>::Value(rhs));
 		}
 	};
 
 	// C[N]
-	template<class MemBufT, int N>
-	struct Append<MemBufT, typename MemBufT::Type[N]>
+	template<class CustomStringT, int N>
+	struct Append<CustomStringT, typename CustomStringT::Type[N]>
 	{
-		typedef typename MemBufT::Type C;
-		static void Do(MemBufT& memoryBuffer, const C rhs[N])
+		typedef typename CustomStringT::Type C;
+		static void Do(CustomStringT& s, const C rhs[N])
 		{
 			if (N > 0)
 			{
 				// The calculation with `N` is required to properly handle
 				// both a zero-terminated buffer and a simple array
-				memoryBuffer.appendWithoutChecking(rhs, N - ((rhs[N-1] == C()) ? 1 : 0));
+				s.appendWithoutChecking(rhs, N - ((rhs[N-1] == C()) ? 1 : 0));
 			}
 		}
 	};
 
 	// C
-	template<class MemBufT>
-	struct Append<MemBufT, typename MemBufT::Type>
+	template<class CustomStringT>
+	struct Append<CustomStringT, typename CustomStringT::Type>
 	{
-		typedef typename MemBufT::Type C;
-		static void Do(MemBufT& memoryBuffer, const C rhs)
+		typedef typename CustomStringT::Type C;
+		static void Do(CustomStringT& s, const C rhs)
 		{
-			memoryBuffer.appendWithoutChecking(rhs);
+			s.appendWithoutChecking(rhs);
 		}
 	};
 
 
-	// IString
-	template<class MemBufT, unsigned int ChunkSizeT, bool ExpandT, bool ZeroT>
-	struct Append<MemBufT, Yuni::Core::IString<ChunkSizeT, ExpandT, ZeroT, typename MemBufT::Type> >
+	// CustomString
+	template<class CustomStringT, unsigned int ChunkSizeT, bool ExpandT, bool ZeroT>
+	struct Append<CustomStringT, Yuni::CustomString<ChunkSizeT, ExpandT, ZeroT> >
 	{
-		typedef Yuni::Core::IString<ChunkSizeT, ExpandT, ZeroT, typename MemBufT::Type> C;
-		static void Do(MemBufT& memoryBuffer, const C& rhs)
+		typedef Yuni::CustomString<ChunkSizeT, ExpandT, ZeroT> C;
+		static void Do(CustomStringT& s, const C& rhs)
 		{
 			if (rhs.notEmpty())
-				memoryBuffer.appendWithoutChecking(rhs.data(), rhs.size());
+				s.appendWithoutChecking(rhs.data(), rhs.size());
 		}
 	};
 
 
 	// nullptr
-	template<class MemBufT>
-	struct Append<MemBufT, Yuni::NullPtr>
+	template<class CustomStringT>
+	struct Append<CustomStringT, Yuni::NullPtr>
 	{
-		static void Do(MemBufT& memoryBuffer, const Yuni::NullPtr&)
+		static void Do(CustomStringT& s, const Yuni::NullPtr&)
 		{ /* Do nothing */ }
 	};
 
 
 	// bool
-	template<class MemBufT>
-	struct Append<MemBufT, bool>
+	template<class CustomStringT>
+	struct Append<CustomStringT, bool>
 	{
-		static void Do(MemBufT& memoryBuffer, const bool rhs)
+		static void Do(CustomStringT& s, const bool rhs)
 		{
 			if (rhs)
-				memoryBuffer.appendWithoutChecking("true", 4);
+				s.appendWithoutChecking("true", 4);
 			else
-				memoryBuffer.appendWithoutChecking("false", 5);
+				s.appendWithoutChecking("false", 5);
 		}
 	};
 
 
 	// void*
-	template<class MemBufT>
-	struct Append<MemBufT, void*>
+	template<class CustomStringT>
+	struct Append<CustomStringT, void*>
 	{
-		static void Do(MemBufT& memoryBuffer, const void* rhs)
+		static void Do(CustomStringT& s, const void* rhs)
 		{
-			typename MemBufT::Type buffer[20];
+			typename CustomStringT::Type buffer[20];
 			(void) YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, sizeof(buffer), "%p", rhs);
-			memoryBuffer.appendWithoutChecking(buffer,
-				Yuni::Core::Traits::Length<typename MemBufT::Type*, typename MemBufT::Size>::Value(buffer));
+			s.appendWithoutChecking(buffer,
+				Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
 		}
 	};
 
 
 
 # define YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(BUFSIZE, FORMAT, TYPE) \
-	template<class MemBufT> \
-	struct Append<MemBufT, TYPE> \
+	template<class CustomStringT> \
+	struct Append<CustomStringT, TYPE> \
 	{ \
-		static void Do(MemBufT& memoryBuffer, const TYPE rhs) \
+		static void Do(CustomStringT& s, const TYPE rhs) \
 		{ \
-			typename MemBufT::Type buffer[BUFSIZE]; \
+			typename CustomStringT::Type buffer[BUFSIZE]; \
 			(void) YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, BUFSIZE, FORMAT, rhs); \
-			memoryBuffer.appendWithoutChecking(buffer, \
-				Yuni::Core::Traits::Length<typename MemBufT::Type*, typename MemBufT::Size>::Value(buffer)); \
+			s.appendWithoutChecking(buffer, \
+				Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer)); \
 		} \
 	}
 
 # define YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(TYPE) \
-	template<class MemBufT> \
-	struct Append<MemBufT, TYPE> \
+	template<class CustomStringT> \
+	struct Append<CustomStringT, TYPE> \
 	{ \
-		static void Do(MemBufT& memoryBuffer, const TYPE rhs) \
+		static void Do(CustomStringT& s, const TYPE rhs) \
 		{ \
-			Private::IStringImpl::From<Math::Base::Decimal, TYPE>::AppendTo(memoryBuffer, rhs); \
+			Yuni::Private::CustomStringImpl::From<Math::Base::Decimal, TYPE>::AppendTo(s, rhs); \
 		} \
 	}
 
@@ -184,11 +185,9 @@ namespace IStringImpl
 
 
 
-
-
-} // namespace IStringImpl
-} // namespace Private
+} // namespace CustomString
+} // namespace Extension
+} // namespace Core
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_MEMORY_BUFFER_TRAITS_APPEND_H__

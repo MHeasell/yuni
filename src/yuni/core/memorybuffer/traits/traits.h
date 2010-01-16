@@ -12,7 +12,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace IStringImpl
+namespace CustomStringImpl
 {
 
 
@@ -29,10 +29,16 @@ namespace IStringImpl
 			expandable = 1,
 		};
 	public:
+		/*!
+		** \brief Default Constructor
+		*/
 		Data()
 			:size(0), capacity(0), data(NULL)
 		{}
 
+		/*!
+		** \brief Copy constructor
+		*/
 		Data(const Data& rhs)
 			:size(rhs.size), capacity(rhs.size), data(NULL)
 		{
@@ -46,6 +52,7 @@ namespace IStringImpl
 			}
 		}
 
+		//! Destructor
 		~Data()
 		{
 			// Release the internal buffer if allocated
@@ -281,7 +288,7 @@ namespace IStringImpl
 
 
 
-} // namespace IStringImpl
+} // namespace CustomStringImpl
 } // namespace Private
 } // namespace Yuni
 

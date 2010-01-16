@@ -17,7 +17,7 @@ namespace Utils
 	**
 	** This dumper can dump any buffer (with start address and length),
 	** or any class having a data() and size() member function.
-	** (for example, IString).
+	** (for example, String).
 	** The output looks like the following:
 	**
 	** Sample usage:

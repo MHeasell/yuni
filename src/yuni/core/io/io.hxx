@@ -266,21 +266,21 @@ namespace IO
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, Normalize_InvalidTypeForInput);
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, Normalize_InvalidTypeForInput);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  Normalize_InvalidTypeForInputSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  Normalize_InvalidTypeForInputSize);
 
 		// Some static checks
-		if (Core::Traits::Length<UType,unsigned int>::isFixed)
+		if (Traits::Length<UType,unsigned int>::isFixed)
 		{
 			// The value to find is actually empty, nothing to do
-			if (0 == Core::Traits::Length<UType,unsigned int>::fixedLength)
+			if (0 == Traits::Length<UType,unsigned int>::fixedLength)
 			{
 				out.clear();
 				return;
 			}
 			// The string is actually a single POD item
-			if (1 == Core::Traits::Length<UType,unsigned int>::fixedLength)
+			if (1 == Traits::Length<UType,unsigned int>::fixedLength)
 			{
 				out = in;
 				return;
@@ -288,7 +288,7 @@ namespace IO
 		}
 
 		// The length of the input
-		unsigned int inputLength = Core::Traits::Length<UType,unsigned int>::Value(in);
+		unsigned int inputLength = Traits::Length<UType,unsigned int>::Value(in);
 		if (!inputLength)
 		{
 			out.clear();
@@ -302,7 +302,7 @@ namespace IO
 		// From here, we have at least 2 chars
 
 		// From now on, we will work on a mere CString
-		const char* input = Core::Traits::CString<UType>::Buffer(in);
+		const char* input = Traits::CString<UType>::Buffer(in);
 
 		// Counting slashes
 		unsigned int slashes = 0;

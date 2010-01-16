@@ -2,13 +2,14 @@
 # define __YUNI_CORE_MEMORY_BUFFER_TRAITS_INTEGER_APPEND_H__
 
 # include "../../math/base.h"
+# include <math.h>
 
 
 namespace Yuni
 {
 namespace Private
 {
-namespace IStringImpl
+namespace CustomStringImpl
 {
 
 
@@ -209,7 +210,7 @@ namespace IStringImpl
 
 
 
-} // namespace IStringImpl
+} // namespace CustomStringImpl
 } // namespace Private
 } // namespace Yuni
 

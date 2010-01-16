@@ -51,10 +51,10 @@ namespace Directory
 		# ifdef YUNI_OS_WINDOWS
 		(void) mode;
 		return Private::Core::IO::Directory::WindowsMake(
-			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path));
+			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path));
 		# else
 		return Private::Core::IO::Directory::UnixMake(
-			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path), mode);
+			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path), mode);
 		# endif
 	}
 
@@ -62,8 +62,8 @@ namespace Directory
 	template<class C, class D> inline bool Copy(const C& src, const D& dst)
 	{
 		return Private::Core::IO::Directory::Copy(
-			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(src),
-			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(dst));
+			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(src),
+			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(dst));
 	}
 
 
@@ -71,7 +71,7 @@ namespace Directory
 	inline bool Remove(const C& path)
 	{
 		return Private::Core::IO::Directory::Remove(
-			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path));
+			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path));
 	}
 
 
@@ -80,10 +80,10 @@ namespace Directory
 	{
 		# ifdef YUNI_OS_WINDOWS
 		return Private::IO::FilesystemImpl::IsDirectoryWindowsImpl(
-			Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path),
-			Core::Traits::Length<C>::Value(path));
+			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path),
+			Traits::Length<C>::Value(path));
 		# else
-		return Private::IO::FilesystemImpl::IsDirectoryUnixImpl(Core::Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path));
+		return Private::IO::FilesystemImpl::IsDirectoryUnixImpl(Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(path));
 		# endif
 	}
 
