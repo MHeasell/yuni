@@ -152,7 +152,7 @@ namespace CustomStringImpl
 			{
 				case FP_NAN: str.appendWithoutChecking("nan", 3);return;
 				case FP_INFINITE:
-					str.appendWithoutChecking(((isinf(value) > 0) ? "+inf" : "-inf"), 4);
+					str.appendWithoutChecking(((std::isinf(value) > 0) ? "+inf" : "-inf"), 4);
 					return;
 				default:
 					{
