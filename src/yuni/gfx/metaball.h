@@ -1,7 +1,8 @@
 #ifndef __YUNI_GFX_METABALL_H__
 # define __YUNI_GFX_METABALL_H__
 
-# include "point3D.h"
+# include "../yuni.h"
+# include "../core/point3D.h"
 # include "metaobject.h"
 
 

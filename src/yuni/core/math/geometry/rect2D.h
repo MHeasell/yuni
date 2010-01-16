@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_RECT_2D_H__
-# define __YUNI_GFX_RECT_2D_H__
+#ifndef __YUNI_CORE_MATH_GEOMETRY_RECT_2D_H__
+# define __YUNI_CORE_MATH_GEOMETRY_RECT_2D_H__
 
 # include <iostream>
 # include "point2D.h"
@@ -25,12 +25,14 @@ namespace Gfx
 		//! Complete type for Rect2D
 		typedef Rect2D<Type> Rect2DType;
 		//! Point2D
-		typedef Point2D<Type> Point2DType;
+		typedef Point2D<Type> PointType;
 
 	public:
 		//! \name Constructors
 		//@{
-		//! Default constructor
+		/*!
+		** \brief Default constructor
+		*/
 		Rect2D();
 
 		/*!
@@ -108,11 +110,11 @@ namespace Gfx
 		/*!
 		** \brief Get the equivalent Point2D for the top left
 		*/
-		Point2DType topLeft() const;
+		PointType topLeft() const;
 		/*!
 		** \brief Get the equivalent Point2D for the bottom right
 		*/
-		Point2DType bottomRight() const;
+		PointType bottomRight() const;
 
 
 		//! \name Measurement
@@ -282,4 +284,4 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Rect2D<T>&
 //@}
 
 
-#endif // __YUNI_GFX_RECT_2D_H__
+#endif // __YUNI_CORE_MATH_GEOMETRY_RECT_2D_H__

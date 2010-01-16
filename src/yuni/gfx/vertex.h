@@ -1,9 +1,10 @@
 #ifndef __YUNI_GFX_VERTEX_H__
 # define __YUNI_GFX_VERTEX_H__
 
+# include "../yuni.h"
 # include <vector>
-# include "point3D.h"
-# include "vector3D.h"
+# include "../core/point3D.h"
+# include "../core/vector3D.h"
 # include "../core/string.h"
 # include "../core/smartptr/smartptr.h"
 

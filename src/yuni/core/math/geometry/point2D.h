@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_POINT2D_H__
-# define __YUNI_GFX_POINT2D_H__
+#ifndef __YUNI_CORE_MATH_GEOMETRY_POINT2D_H__
+# define __YUNI_CORE_MATH_GEOMETRY_POINT2D_H__
 
 # include <iostream>
 # include "../core/math.h"
@@ -34,8 +34,6 @@ namespace Gfx
 		//! Constructor by copy
 		template<typename U>
 		Point2D(const Point2D<U>& p) : x((T)p.x), y((T)p.y) {}
-		//! Destructor
-		virtual ~Point2D() {}
 		//}
 
 		//! Reset the point to origin
@@ -258,4 +256,4 @@ inline const Yuni::Gfx::Point2D<T> operator + (const Yuni::Gfx::Point2D<T>& lhs,
 //@}
 
 
-#endif // __YUNI_GFX_POINT2D_H__
+#endif // __YUNI_CORE_MATH_GEOMETRY_POINT2D_H__

@@ -4,8 +4,8 @@
 # include "../yuni.h"
 # include "../core/string.h"
 # include "../core/smartptr.h"
-# include "../gfx/point3D.h"
-# include "../gfx/vector3D.h"
+# include "../core/point3D.h"
+# include "../core/vector3D.h"
 
 # include "openal.h"
 # include "sound3D.h"

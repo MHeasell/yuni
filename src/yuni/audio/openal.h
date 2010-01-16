@@ -1,9 +1,10 @@
 #ifndef __YUNI_AUDIO_OPENAL_H__
 # define __YUNI_AUDIO_OPENAL_H__
 
+# include "../yuni.h"
 # include <list>
-# include "../gfx/vector3D.h"
-# include "../gfx/point3D.h"
+# include "../core/vector3D.h"
+# include "../core/point3D.h"
 # include "al.h"
 # include "alc.h"
 

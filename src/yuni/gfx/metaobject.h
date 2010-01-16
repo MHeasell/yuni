@@ -1,7 +1,8 @@
 #ifndef __YUNI_GFX_METAOBJECT_H__
 # define __YUNI_GFX_METAOBJECT_H__
 
-# include "point3D.h"
+# include "../yuni.h"
+# include "../core/point3D.h"
 # include "implicitsurface.h"
 
 
