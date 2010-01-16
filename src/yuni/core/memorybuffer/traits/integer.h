@@ -147,6 +147,7 @@ namespace CustomStringImpl
 		template<class S>
 		static void AppendTo(S& str, Type value, int precision = 3)
 		{
+			// fpclassify: man 3 fpclassify  (macro)
 			switch (fpclassify(value))
 			{
 				case FP_NAN: str.appendWithoutChecking("nan", 3);return;
