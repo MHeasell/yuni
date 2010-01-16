@@ -36,6 +36,7 @@ namespace Thread
 	/*!
 	** \brief Convenient method to create, start and return a new instancied thread
 	**
+	** The user is responsible for releasing it.
 	** \code
 	** class MyOwnThread : public Yuni::Threads::IThread
 	** {
@@ -57,7 +58,7 @@ namespace Thread
 	** int main(void)
 	** {
 	**    // Fire-and-forget our new thread
-	**    Yuni::Thread::CreateAndStart<MyOwnThread>(true);
+	**    Yuni::Thread::CreateAndStart<MyOwnThread>();
 	**
 	**    // Do some other stuff here...
 	** }
@@ -80,7 +81,6 @@ namespace Thread
 	*/
 	class IThread : public Policy::ObjectLevelLockable<IThread>
 	{
-		friend void* Yuni::Private::Thread::threadMethodForPThread(void* arg);
 	public:
 		//! The threading policy
 		typedef Policy::ObjectLevelLockable<IThread>  ThreadingPolicy;
@@ -293,6 +293,7 @@ namespace Thread
 
 		// our friend
 		friend class Yuni::Job::IJob;
+		friend void* Yuni::Private::Thread::threadMethodForPThread(void* arg);
 
 	}; // class IThread
 
