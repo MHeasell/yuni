@@ -64,7 +64,7 @@ namespace Thread
 	** }
 	** \endcode
 	**
-	** \tparam T A descendant of the class Yuni::Private::IThreadModel
+	** \tparam T A descendant of the class Yuni::Thread::IThread
 	** \return A pointer to the new instance
 	*/
 	template<class T> T* CreateAndStart();
