@@ -1,8 +1,8 @@
-#ifndef __YUNI_GFX_VECTOR3D_H__
-# define __YUNI_GFX_VECTOR3D_H__
+#ifndef __YUNI_CORE_MATH_GEOMETRY_VECTOR3D_H__
+# define __YUNI_CORE_MATH_GEOMETRY_VECTOR3D_H__
 
 # include <iostream>
-# include "../core/math/math.h"
+# include "../math.h"
 # include "point3D.h"
 
 
@@ -330,4 +330,4 @@ inline const Yuni::Gfx::Vector3D<T> operator + (const Yuni::Gfx::Vector3D<T>& lh
 //@}
 
 
-#endif // __YUNI_GFX_VECTOR3D_H__
+#endif // __YUNI_CORE_MATH_GEOMETRY_VECTOR3D_H__

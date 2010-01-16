@@ -18,7 +18,6 @@ Set(SRC_GFX
 		gfx/metaobject.h gfx/metaball.h  gfx/metaball.cpp  gfx/metabox.h
 		gfx/boundingbox.h gfx/boundingbox.hxx
 		gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
-		gfx/rect2D.h gfx/rect2D.hxx
 		)
 source_group(Gfx FILES ${SRC_GFX})
 

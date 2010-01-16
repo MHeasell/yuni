@@ -1,9 +1,10 @@
 #ifndef __YUNI_GFX_TRIANGLE_H__
 # define __YUNI_GFX_TRIANGLE_H__
 
+# include "../yuni.h"
 # include "../core/smartptr/smartptr.h"
 # include "edge.h"
-# include "vector3D.h"
+# include "../core/vector3D.h"
 
 
 namespace Yuni

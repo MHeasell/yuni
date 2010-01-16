@@ -1,10 +1,11 @@
 #ifndef __YUNI_GFX_OCTREE_H__
 # define __YUNI_GFX_OCTREE_H__
 
+# include "../yuni.h"
 # include <vector>
 # include <iostream>
 # include "../yuni.h"
-# include "point3D.h"
+# include "../core/point3D.h"
 # include "boundingbox.h"
 
 

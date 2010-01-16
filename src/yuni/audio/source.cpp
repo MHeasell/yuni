@@ -44,7 +44,7 @@ namespace Audio
 		if (pReady)
 			return true;
 
-		unsigned int source = OpenAL::createSource(pPosition, pVelocity, pDirection,
+		/*unsigned int source =*/ OpenAL::createSource(pPosition, pVelocity, pDirection,
 			1.0f, pGain, true, pLoop);
 
 		pReady = true;

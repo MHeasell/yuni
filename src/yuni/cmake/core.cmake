@@ -304,6 +304,11 @@ Set(SRC_CORE_MATH
 				core/math/random/default.h  core/math/random/default.hxx
 				core/math/random/range.h  core/math/random/range.hxx
 				core/math/random/constant.h
+
+				core/rect2D.h core/math/geometry/rect2D.h core/math/geometry/rect2D.hxx
+				core/vector3D.h core/math/geometry/vector3D.h core/math/geometry/vector3D.hxx
+				core/point2D.h core/math/geometry/point2D.h
+				core/point3D.h core/math/geometry/point3D.h
 )
 source_group(Core\\Math FILES ${SRC_CORE_MATH})
 
@@ -460,7 +465,6 @@ source_group(Core\\Application FILES ${SRC_APPLICATION})
 
 
 Set(SRC_GFX_CORE
-		gfx/point2D.h gfx/point3D.h gfx/vector3D.h gfx/vector3D.hxx
 		gfx/octree.h gfx/octree.cpp
 		# Color
 		gfx/core/color/rgba.h gfx/core/color/rgb.h

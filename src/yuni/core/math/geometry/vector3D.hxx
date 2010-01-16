@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_VECTOR3D_HXX__
-# define __YUNI_GFX_VECTOR3D_HXX__
+#ifndef __YUNI_CORE_MATH_GEOMETRY_VECTOR3D_HXX__
+# define __YUNI_CORE_MATH_GEOMETRY_VECTOR3D_HXX__
 
 
 namespace Yuni
@@ -295,4 +295,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_VECTOR3D_HXX__
+#endif // __YUNI_CORE_MATH_GEOMETRY_VECTOR3D_HXX__
