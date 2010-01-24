@@ -12,7 +12,7 @@ namespace Random
 
 
 	template<class D, int TableSize, bool Cyclic, template<class> class TP>
-	inline Table<D,TableSize,Cyclic,TP>::Name()
+	inline const char* Table<D,TableSize,Cyclic,TP>::Name()
 	{
 		return D::Name();
 	}
