@@ -3,6 +3,9 @@
 
 # include "../math.h"
 # include "../../../thread/policy.h"
+# include "../../static/assert.h"
+# include "../../static/if.h"
+# include "../../atomic/int.h"
 
 
 namespace Yuni
@@ -72,7 +75,13 @@ namespace Random
 		typedef TP<Table<D,TableSize, Cyclic, TP> > ThreadingPolicy;
 
 		// Assert about the table size
-		YUNI_STATIC_ASSERT(TableSize > 10, MathRandomTable_InvalidTableSize);
+		YUNI_STATIC_ASSERT((TableSize > 10), MathRandomTable_InvalidTableSize);
+
+		enum
+		{
+			//! The table size
+			tableSize = TableSize,
+		};
 
 	public:
 		/*!
