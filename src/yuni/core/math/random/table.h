@@ -57,7 +57,7 @@ namespace Random
 	** \tparam TP The Threading Policy
 	*/
 	template<class D,                                         // The distribution
-		unsigned int TableSize = 200000,                      // Number of pre-cached numbers
+		int TableSize = 200000,                               // Number of pre-cached numbers
 		bool Cyclic = true,                                   // Cycle through the list or regenerate a new set ?
 		template<class> class TP = Policy::SingleThreaded     // The Threading policy
 		>
@@ -71,9 +71,16 @@ namespace Random
 		//! The threading policy
 		typedef TP<Table<D,TableSize, Cyclic, TP> > ThreadingPolicy;
 
+		// Assert about the table size
+		YUNI_STATIC_ASSERT(TableSize > 10, MathRandomTable_InvalidTableSize);
+
 	public:
-		// Name of the distribution
-		static const char* Name() {return D::Name();}
+		/*!
+		** \brief Name of the distribution
+		**
+		** This name is given by the template parameter D.
+		*/
+		static const char* Name();
 
 	public:
 		//! \name Constructor & Destructor
@@ -100,7 +107,7 @@ namespace Random
 		/*!
 		** \brief Get the number of random number in the table
 		*/
-		static unsigned int size();
+		static int size();
 
 		/*!
 		** \brief Get the next random number
@@ -122,12 +129,17 @@ namespace Random
 		void fillWL();
 
 	private:
+		//! Offset
+		typedef Static::If<(!ThreadingPolicy::threadSafe), Atomic::Int<>, int>::Type  OffsetType;
 		//! Position in the cache
-		unsigned int pPos;
+		OffsetType pOffset;
 		//! The cache
 		typename D::Value pCache[TableSize];
 
 	}; // class Table
+
+
+
 
 
 

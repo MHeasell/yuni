@@ -11,18 +11,26 @@ namespace Random
 {
 
 
-	template<class D, unsigned int TableSize, bool Cyclic, template<class> class TP>
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
+	inline Table<D,TableSize,Cyclic,TP>::Name()
+	{
+		return D::Name();
+	}
+
+
+
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
 	inline Table<D,TableSize,Cyclic,TP>::Table()
-		:D(), pPos(0)
+		:D(), pOffset()
 	{}
 
 
-	template<class D, unsigned int TableSize, bool Cyclic, template<class> class TP>
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
 	inline Table<D,TableSize,Cyclic,TP>::~Table()
 	{}
 
 
-	template<class D, unsigned int TableSize, bool Cyclic, template<class> class TP>
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
 	inline void
 	Table<D,TableSize,Cyclic,TP>::reset()
 	{
@@ -32,7 +40,7 @@ namespace Random
 	}
 
 
-	template<class D, unsigned int TableSize, bool Cyclic, template<class> class TP>
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
 	inline void
 	Table<D,TableSize,Cyclic,TP>::fill()
 	{
@@ -40,22 +48,22 @@ namespace Random
 		fillWL();
 	}
 
-	template<class D, unsigned int TableSize, bool Cyclic, template<class> class TP>
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
 	void
 	Table<D,TableSize,Cyclic,TP>::fillWL()
 	{
 		// Regenerate all items in the cache
-		for (unsigned int i = 0; i != TableSize; ++i)
+		for (int i = 0; i != TableSize; ++i)
 			pCache[i] = static_cast<D*>(this)->next();
-		// The index must be reset to `TableSize - 1`, in order to be
-		// equals to the next call to `next()`
+		// The index must be reset to `-1`, in order to use the first random number
+		// to the next call to `next()`.
 		// See `next()` for more informations.
-		pPos = TableSize - 1;
+		pOffset = -1;
 	}
 
 
-	template<class D, unsigned int TableSize, bool Cyclic, template<class> class TP>
-	inline unsigned int
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
+	inline int
 	Table<D,TableSize,Cyclic,TP>::size()
 	{
 		return TableSize;
@@ -64,7 +72,7 @@ namespace Random
 
 
 
-	template<class D, unsigned int TableSize, bool Cyclic, template<class> class TP>
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
 	inline const typename Table<D,TableSize,Cyclic,TP>::Value
 	Table<D,TableSize,Cyclic,TP>::next()
 	{
@@ -75,21 +83,20 @@ namespace Random
 		// and temporary variables.
 		// A way to achieve this is to use a pre-increment and a simple test
 		// for the index, then to directly return the result.
-		// The bad side-effect of this method is that `pPos` must be initialized to
-		// `TableSize - 1` if we want to use the first random number (at index 0).
-		if (TableSize == ++pPos)
+		if (++pOffset == TableSize)
 		{
-			if (Cyclic) // constant-expression
-				pPos = 0;
-			else
+			if (!Cyclic) // The random numbers must be re-generated if not cyclic
 				fillWL();
+			// Restting the offset, which may be equal to `TableSize` or to `-1` (see `fillWL()`)
+			pOffset = 0;
+			return pCache[0];
 		}
-		return pCache[pPos];
+		return pCache[pOffset];
 	}
 
 
 
-	template<class D, unsigned int TableSize, bool Cyclic, template<class> class TP>
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
 	template<class U>
 	inline Table<D,TableSize,Cyclic,TP>&
 	Table<D,TableSize,Cyclic,TP>::operator >> (U& u)
@@ -99,12 +106,14 @@ namespace Random
 	}
 
 
-	template<class D, unsigned int TableSize, bool Cyclic, template<class> class TP>
+	template<class D, int TableSize, bool Cyclic, template<class> class TP>
 	inline const typename Table<D,TableSize,Cyclic,TP>::Value
 	Table<D,TableSize,Cyclic,TP>::operator () ()
 	{
 		return next();
 	}
+
+
 
 
 
