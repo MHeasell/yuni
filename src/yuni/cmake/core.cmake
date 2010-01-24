@@ -270,6 +270,12 @@ Set(SRC_CORE_BIND
 				)
 source_group(Core\\Bind FILES ${SRC_CORE_BIND})
 
+Set(SRC_CORE_CHARSET
+				core/charset/charset.h core/charset/charset.hxx
+				core/charset/charset.cpp
+				)
+source_group(Core\\Charset FILES ${SRC_CORE_CHARSET})
+
 
 Set(SRC_CORE_EVENT
 				core/event/event.h core/event/event.hxx
@@ -512,7 +518,9 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_SLIST}
 		${SRC_CORE_VARIANT}
 		${SRC_CORE_DYNAMICLIBRARY}
-		${SRC_CORE_BIND} ${SRC_CORE_EVENT}
+		${SRC_CORE_BIND}
+		${SRC_CORE_CHARSET}
+		${SRC_CORE_EVENT}
 		${SRC_CORE_MATH}
 		${SRC_CORE_HASH_CHECKSUM}
 		${SRC_CORE_TREE_N}
