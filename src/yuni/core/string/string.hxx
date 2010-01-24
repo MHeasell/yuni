@@ -299,7 +299,6 @@ namespace Yuni
 
 			// ReAllocating
 			this->pPtr = (Char*) ::realloc(this->pPtr, sizeof(Char) * this->pCapacity);
-			this->pPtr[this->pSize] = '\0';
 		}
 	}
 

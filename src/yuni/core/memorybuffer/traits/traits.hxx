@@ -28,10 +28,6 @@ namespace CustomStringImpl
 
 			// Realloc the internal buffer
 			data = (C*)::realloc(data, sizeof(C) * capacity);
-			// The variable data might be null before calling this method
-			// We have to make sure that it is really zero-terminated
-			if (ZeroTerminatedT)
-				data[size] = C();
 		}
 	}
 
