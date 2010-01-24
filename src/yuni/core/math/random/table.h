@@ -130,7 +130,7 @@ namespace Random
 
 	private:
 		//! Offset
-		typedef Static::If<(!ThreadingPolicy::threadSafe), Atomic::Int<>, int>::Type  OffsetType;
+		typedef typename Static::If<(!ThreadingPolicy::threadSafe), Atomic::Int<>, int>::Type  OffsetType;
 		//! Position in the cache
 		OffsetType pOffset;
 		//! The cache
