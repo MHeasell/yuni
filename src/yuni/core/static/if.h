@@ -15,6 +15,7 @@ namespace Static
 	struct If
 	{
 		typedef IfTrue ResultType;
+		typedef IfTrue Type;
 		typedef typename Remove::All<IfTrue>::Type   RetTrue;
 		typedef typename Remove::All<IfFalse>::Type  RetFalse;
 
@@ -32,6 +33,7 @@ namespace Static
 	struct If<false, IfTrue, IfFalse>
 	{
 		typedef IfFalse ResultType;
+		typedef IfFalse Type;
 		typedef typename Remove::All<IfTrue>::Type   RetTrue;
 		typedef typename Remove::All<IfFalse>::Type  RetFalse;
 
