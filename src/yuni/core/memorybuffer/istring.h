@@ -647,35 +647,24 @@ namespace Yuni
 		template<class U> CustomString& operator = (const U& rhs);
 
 		//! The operator `<`
-		bool operator < (const CustomString& rhs) const;
+		template<class AnyStringT> bool operator <  (const AnyStringT& rhs) const;
 		//! The operator `>`
-		bool operator > (const CustomString& rhs) const;
-		//! The operator `<`
-		bool operator < (const Char* rhs) const;
-		//! The operator `>`
-		bool operator > (const Char* rhs) const;
+		template<class AnyStringT> bool operator >  (const AnyStringT& rhs) const;
 
 		//! The operator `<=`
-		bool operator <= (const CustomString& rhs) const;
+		template<class AnyStringT> bool operator <= (const AnyStringT& rhs) const;
 		//! The operator `>=`
-		bool operator >= (const CustomString& rhs) const;
-		//! The operator `<=`
-		bool operator <= (const Char* rhs) const;
-		//! The operator `>=`
-		bool operator >= (const Char* rhs) const;
+		template<class AnyStringT> bool operator >= (const AnyStringT& rhs) const;
 
-		//! The operator `==`
-		bool operator == (const Char* rhs) const;
 		//! The operator `==`
 		bool operator == (const CustomString& rhs) const;
 		//! The operator `==`
-		template<unsigned int C1, bool E1, bool Z1>
-		bool operator == (const CustomString<C1, E1, Z1>& rhs) const;
+		template<class AnyStringT> bool operator == (const AnyStringT& rhs) const;
 
 		//! The operator `!=`
 		template<class U> bool operator != (const U& rhs) const;
 
-		//! The operator `!`  (if (!s) ... - equivalent to if (!s.empty()))
+		//! The operator `!`  (if (!s) ... - equivalent to if (s.empty()))
 		bool operator ! () const;
 		//@}
 
