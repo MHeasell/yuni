@@ -97,7 +97,7 @@ namespace File
 
 
 	template<class AnyStringT1, class AnyStringT2>
-	inline bool Copy(const AnyStringT1& from, const AnyStringT2& to, bool overwrite = true)
+	bool Copy(const AnyStringT1& from, const AnyStringT2& to, bool overwrite = true)
 	{
 		return (!overwrite && Core::IO::File::Exists(to))
 			? false

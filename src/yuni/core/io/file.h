@@ -132,7 +132,8 @@ namespace File
 	** \param overwrite Overwrite the target file if already exists
 	** \return True if the operation succeeded (or if the target file already exists and `overwrite` = false), false otherwise
 	*/
-	bool Copy(const String& from, const String& to, const bool overwrite = true);
+	template<class AnyStringT1, class AnyStringT2>
+	bool Copy(const AnyStringT1& from, const AnyStringT2& to, bool overwrite = true);
 
 
 	/*!
