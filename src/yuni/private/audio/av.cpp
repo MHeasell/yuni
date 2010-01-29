@@ -1,25 +1,27 @@
 #include <cstdlib>
 #include <memory.h>
+
 #include "av.h"
 
 namespace Yuni
 {
+namespace Private
+{
 namespace Audio
 {
 
-	AudioFile* AV::openFile(const String& path)
+	bool AV::init()
 	{
-		static bool done = false;
+		av_register_all();
+ 		// Silence warning output from the lib
+		av_log_set_level(AV_LOG_ERROR);
+		return true;
+	}
 
-		// We need to make sure ffmpeg is initialized. Optionally silence warning
-		// output from the lib
-		if (!done)
-		{
-			av_register_all();
-			av_log_set_level(AV_LOG_ERROR);
-			done = true;
-		}
 
+	template<typename AnyStringT>
+	AudioFile* AV::openFile(const AnyStringT& path)
+	{
 		AudioFile* file = (AudioFile*)calloc(1, sizeof(AudioFile));
 		if (file && av_open_input_file(&file->FormatContext, String::CString(path),
 			NULL, 0, NULL) == 0)
@@ -33,6 +35,7 @@ namespace Audio
 		free(file);
 		return NULL;
 	}
+
 
 	void AV::closeFile(AudioFile*& file)
 	{
@@ -52,6 +55,7 @@ namespace Audio
 		free(file);
 		file = NULL;
 	}
+
 
 	AudioStream* AV::getAudioStream(AudioFile* file, int streamnum)
 	{
@@ -138,6 +142,7 @@ namespace Audio
 		return 0;
 	}
 
+
 	int AV::getAudioData(AudioStream* stream, void *data, int length)
 	{
 		int dec = 0;
@@ -223,6 +228,7 @@ namespace Audio
 		return dec;
 	}
 
+
 	void AV::getNextPacket(AudioFile* file, int streamidx)
 	{
 		AVPacket packet;
@@ -270,4 +276,5 @@ namespace Audio
 	}
 
 } // namespace Audio
+} // namespace Private
 } // namespace Yuni

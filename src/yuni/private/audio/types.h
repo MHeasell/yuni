@@ -1,8 +1,9 @@
 #ifndef __YUNI_AUDIO_TYPES_H__
 # define __YUNI_AUDIO_TYPES_H__
 
-
 namespace Yuni
+{
+namespace Private
 {
 namespace Audio
 {
@@ -36,6 +37,7 @@ namespace Audio
 
 
 } // namespace Audio
+} // namespace Private
 } // namespace Yuni
 
 #endif // __YUNI_AUDIO_TYPES_H__

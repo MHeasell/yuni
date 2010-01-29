@@ -8,7 +8,7 @@ namespace Audio
 {
 
 
-	inline String ASound::name() const
+	inline String ISound::name() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pName;
@@ -16,20 +16,20 @@ namespace Audio
 
 
 	template<class AnyStringT>
-	inline void ASound::name(const AnyStringT& name)
+	inline void ISound::name(const AnyStringT& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		pName = name;
 	}
 
 
-	inline bool ASound::valid() const
+	inline bool ISound::valid() const
 	{
 		return (NULL != pFile);
 	}
 
 
-	inline bool ASound::operator ! () const
+	inline bool ISound::operator ! () const
 	{
 		return (NULL == pFile);
 	}

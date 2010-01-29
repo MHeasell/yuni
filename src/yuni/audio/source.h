@@ -7,7 +7,6 @@
 # include "../core/point3D.h"
 # include "../core/vector3D.h"
 
-# include "openal.h"
 # include "sound3D.h"
 # include "music.h"
 

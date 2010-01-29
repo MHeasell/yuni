@@ -16,13 +16,13 @@ namespace Audio
 	** Implicitly, it means the sound will be affected by attenuation
 	** relative to distance.
 	*/
-	class Sound3D : public ASound
+	class Sound3D : public ISound
 	{
 	public:
 		//! The most suitable smart pointer for the class
-		typedef SmartPtr<Sound3D>  Ptr;
+		typedef SmartPtr<Sound3D> Ptr;
 		//! The Threading Policy
-		typedef ASound::ThreadingPolicy  ThreadingPolicy;
+		typedef ISound::ThreadingPolicy ThreadingPolicy;
 
 	public:
 		//! \name Constructor & Destructor

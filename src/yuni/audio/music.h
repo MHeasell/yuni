@@ -13,13 +13,13 @@ namespace Audio
 	/*!
 	** \brief A music is a sound meant to be played as ambience
 	*/
-	class Music: public ASound
+	class Music: public ISound
 	{
 	public:
 		//! The most suitable smart pointer for the class
-		typedef SmartPtr<Music>  Ptr;
+		typedef SmartPtr<Music> Ptr;
 		//! The Threading Policy
-		typedef ASound::ThreadingPolicy  ThreadingPolicy;
+		typedef ISound::ThreadingPolicy ThreadingPolicy;
 
 	public:
 		//! \name Constructor & Destructor

@@ -3,6 +3,8 @@
 
 namespace Yuni
 {
+namespace Private
+{
 namespace Audio
 {
 
@@ -20,13 +22,14 @@ namespace Audio
 		return true;
 	}
 
-	void OpenAL::close()
+	bool OpenAL::close()
 	{
 		ALCcontext* context = alcGetCurrentContext();
 		ALCdevice* device = alcGetContextsDevice(context);
 		alcMakeContextCurrent(NULL);
 		alcDestroyContext(context);
 		alcCloseDevice(device);
+		return true;
 	}
 
 	ALenum OpenAL::getFormat(unsigned int bits, unsigned int channels)
@@ -190,4 +193,5 @@ namespace Audio
 	}
 
 } // namespace Audio
+} // namespace Private
 } // namespace Yuni
