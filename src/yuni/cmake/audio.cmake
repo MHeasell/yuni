@@ -22,15 +22,19 @@ Set(SRC_AUDIO
 		audio/sound.cpp
 		audio/sound3D.h
 		audio/sound3D.cpp
+		audio/manager.h
+		audio/manager.hxx
+		audio/manager.cpp
+		audio/loop.h
 		audio/music.h
 		audio/music.cpp
 		audio/playlist.h
 		audio/source.h
 		audio/source.cpp
-		audio/openal.h
-		audio/openal.cpp
-		audio/av.h
-		audio/av.cpp
+		private/audio/openal.h
+		private/audio/openal.cpp
+		private/audio/av.h
+		private/audio/av.cpp
 	)
 
 

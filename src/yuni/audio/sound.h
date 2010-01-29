@@ -3,8 +3,8 @@
 
 # include <vector>
 # include "../yuni.h"
-# include "openal.h"
-# include "av.h"
+# include "../private/audio/openal.h"
+# include "../private/audio/av.h"
 # include "../core/smartptr.h"
 # include "../core/string.h"
 
@@ -17,15 +17,15 @@ namespace Audio
 	/*!
 	** \brief A sound is any kind of audio content that can be played by Yuni.
 	*/
-	class ASound : public Policy::ObjectLevelLockable<ASound>
+	class ISound : public Policy::ObjectLevelLockable<ISound>
 	{
 	public:
 		//! The most suitable smart pointer for the class
-		typedef SmartPtr<ASound> Ptr;
+		typedef SmartPtr<ISound> Ptr;
 		//! Vector of sounds
-		typedef std::vector<ASound> Vector;
+		typedef std::vector<ISound> Vector;
 		//! The Threading Policy
-		typedef Policy::ObjectLevelLockable<ASound> ThreadingPolicy;
+		typedef Policy::ObjectLevelLockable<ISound> ThreadingPolicy;
 
 	public:
 		//! \name Constructor
@@ -33,9 +33,9 @@ namespace Audio
 		/*!
 		** \brief Empty constructor, use default values.
 		*/
-		ASound();
+		ISound();
 		//! Destructor
-		virtual ~ASound() {}
+		virtual ~ISound() {}
 		//@}
 
 		//! \name Methods
@@ -60,9 +60,9 @@ namespace Audio
 
 	private:
 		//! Forbid default copy constructor
-		ASound(const ASound&);
+		ISound(const ISound&);
 		//! Forbid default operator=
-		ASound& operator = (const ASound&);
+		ISound& operator = (const ISound&);
 
 	protected:
 		//! \name Protected methods
@@ -80,9 +80,9 @@ namespace Audio
 		//! File path or URL
 		String pFilePath;
 		//! A loaded AV file, NULL if not loaded
-		ThreadingPolicy::Volatile<AudioFile*>::Type pFile;
+		ThreadingPolicy::Volatile<Private::Audio::AudioFile*>::Type pFile;
 
-	}; // class ASound
+	}; // class ISound
 
 
 

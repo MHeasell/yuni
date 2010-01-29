@@ -1,14 +1,16 @@
 #ifndef __YUNI_AUDIO_OPENAL_H__
 # define __YUNI_AUDIO_OPENAL_H__
 
-# include "../yuni.h"
+# include "../../yuni.h"
 # include <list>
-# include "../core/vector3D.h"
-# include "../core/point3D.h"
+# include "../../core/vector3D.h"
+# include "../../core/point3D.h"
 # include "al.h"
 # include "alc.h"
 
 namespace Yuni
+{
+namespace Private
 {
 namespace Audio
 {
@@ -43,7 +45,7 @@ namespace Audio
 		/*!
 		** \brief Close OpenAL context and device
 		*/
-		static void close();
+		static bool close();
 
 		/*!
 		** \brief Convert to an OpenAL format
@@ -89,6 +91,7 @@ namespace Audio
 	}; // OpenAL
 
 } // namespace Audio
+} // namespace Private
 } // namespace Yuni
 
 #endif // __YUNI_AUDIO_OPENAL_H__

@@ -9,7 +9,7 @@ namespace Core
 namespace EventLoop
 {
 
-	
+
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
 	inline IEventLoop<ParentT,FlowT,StatsT,DetachedT>::IEventLoop()
@@ -121,8 +121,7 @@ namespace EventLoop
 
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
-	inline bool IEventLoop<ParentT,FlowT,StatsT,DetachedT>::requestThatWillFailToStopTheRunningEventLoop(
-		typename IEventLoop<ParentT,FlowT,StatsT,DetachedT>::ParentType&)
+	inline bool IEventLoop<ParentT,FlowT,StatsT,DetachedT>::requestThatWillFailToStopTheRunningEventLoop()
 	{
 		// Returning false to stop the event loop
 		return false;
@@ -218,7 +217,7 @@ namespace EventLoop
 			StatisticsPolicy::onProcessRequest(*i);
 
 			// Processing the request
-			if (! (*i)(*(static_cast<ParentType*>(this))))
+			if (! (*i)())
 			{
 				// The request has failed. Aborting now.
 				delete requests;

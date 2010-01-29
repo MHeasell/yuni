@@ -82,10 +82,10 @@ namespace Yuni
 	** }
 	** \endcode
 	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
+	** This class is thread-safe, this is guaranteed by the use of smartptr.
 	**
 	** \note This class does not take care of deleted objects. It is the responsibility
-	** to the user to unbind the delegate before the linked object is delete and/or
+	** of the user to unbind the delegate before the linked object is deleted and/or
 	** to not invoke the delegate when the object does not exist.
 	**
 	** \note It is safe to provide a null pointer when binding the delegate

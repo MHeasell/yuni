@@ -48,7 +48,7 @@
 ** 	dummy0.foo();
 **
 ** 	Dummy<unsigned int> dummy1;
-** 	// But this one will failt
+** 	// But this one will fail
 ** 	dummy1.foo();
 **
 ** 	// Error with gcc 3.x :

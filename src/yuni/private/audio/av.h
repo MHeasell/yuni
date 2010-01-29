@@ -1,6 +1,7 @@
 #ifndef __YUNI_AUDIO_AV_H__
 # define __YUNI_AUDIO_AV_H__
 
+#pragma GCC diagnostic ignored "-Wconversion"
 extern "C"
 {
 # include "libavcodec/avcodec.h"
@@ -8,9 +9,11 @@ extern "C"
 }
 
 # include "types.h"
-# include "../core/string.h"
+# include "../../core/string.h"
 
 namespace Yuni
+{
+namespace Private
 {
 namespace Audio
 {
@@ -22,8 +25,12 @@ namespace Audio
 	{
 	public:
 
+		//! Initialize ffmpeg
+		static bool init();
+
 		//! Open a file with ffmpeg and sets up the streams' information
-		static AudioFile* openFile(const String& fname);
+		template<typename AnyStringT>
+		static AudioFile* openFile(const AnyStringT& fname);
 
 		//! Close an opened file and any of its streams
 		static void closeFile(AudioFile*& file);
@@ -66,6 +73,7 @@ namespace Audio
 	}; // AV
 
 } // namespace Audio
+} // namespace Private
 } // namespace Yuni
 
 #endif // __YUNI_AUDIO_AV_H__

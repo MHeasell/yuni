@@ -69,7 +69,7 @@ namespace EventLoop
 		//! Parent
 		typedef ParentT ParentType;
 		//! A request
-		typedef Bind<bool (ParentType&)>  RequestType;
+		typedef Bind<bool ()>  RequestType;
 		//! List of request
 		typedef LinkedList<RequestType> RequestListType;
 
@@ -157,7 +157,7 @@ namespace EventLoop
 		IEventLoop& operator = (const IEventLoop&) {/* This class is not copyable */}
 
 		//! Empty method only used to stop the running event loop
-		bool requestThatWillFailToStopTheRunningEventLoop(ParentType&);
+		bool requestThatWillFailToStopTheRunningEventLoop();
 
 		//! Run an infinite loop
 		void runInfiniteLoopWL();

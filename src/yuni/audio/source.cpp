@@ -16,10 +16,10 @@ namespace Audio
 		}
 		if (!sound->valid())
 			return false;
-		OpenAL::bindBufferToSource(sound->buffer(), pID);
-		bool started = OpenAL::playSource(pID);
+		Private::Audio::OpenAL::bindBufferToSource(sound->buffer(), pID);
+		bool started = Private::Audio::OpenAL::playSource(pID);
 		if (!started)
-			OpenAL::unbindBufferFromSource(pID);
+			Private::Audio::OpenAL::unbindBufferFromSource(pID);
 		return false;
 	}
 
@@ -31,10 +31,11 @@ namespace Audio
 				return false;
 		if (!music->valid())
 			return false;
-		OpenAL::queueBufferToSource(music->buffer(), pID);
-		bool started = OpenAL::playSource(pID);
+		Private::Audio::OpenAL::queueBufferToSource(music->buffer(), pID);
+		bool started = Private::Audio::OpenAL::playSource(pID);
 		if (!started)
-			OpenAL::unqueueBufferFromSource(pID); // IgnAore return value
+			// Ignore return value
+			Private::Audio::OpenAL::unqueueBufferFromSource(pID);
 		return false;
 	}
 
@@ -44,7 +45,8 @@ namespace Audio
 		if (pReady)
 			return true;
 
-		/*unsigned int source =*/ OpenAL::createSource(pPosition, pVelocity, pDirection,
+		/*unsigned int source =*/
+		Private::Audio::OpenAL::createSource(pPosition, pVelocity, pDirection,
 			1.0f, pGain, true, pLoop);
 
 		pReady = true;

@@ -1,26 +1,54 @@
 
-#include "sound.h"
+#include "../private/audio/av.h"
 #include "../private/audio/openal.h"
-
+#include "manager.h"
 
 namespace Yuni
 {
 namespace Audio
 {
 
+	Manager* Manager::sInstance;
 
-	ISound::ISound()
-		:pFile(NULL)
+	Manager& Manager::Instance()
 	{
-		// Do nothing
+		if (!sInstance)
+			sInstance = new Manager();
+		return *sInstance;
 	}
 
 
-	bool ISound::loadFromFile()
+	void Manager::start()
 	{
-		// Locking
-		ThreadingPolicy::MutexLocker locker(*this);
+		pAudioLoop.start();
+		Yuni::Bind<bool()> callback;
+		callback.bind(&Private::Audio::AV::init);
+		pAudioLoop.dispatch(callback);
+		callback.bind(&Private::Audio::OpenAL::init);
+		pAudioLoop.dispatch(callback);
+	}
 
+	void Manager::stop()
+	{
+		Yuni::Bind<bool()> callback;
+		callback.bind(&Private::Audio::OpenAL::close);
+		pAudioLoop.dispatch(callback);
+		pAudioLoop.stop();
+	}
+
+	template<typename AnyStringT>
+	bool Manager::loadSound(const AnyStringT& filePath)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		Yuni::Bind<bool()> callback;
+		callback.bind(this, &Manager::loadSoundWL);
+		pFilePath = filePath.CStr();
+		pAudioLoop.dispatch(callback);
+		return true;
+	}
+
+	bool Manager::loadSoundWL()
+	{
 		// Try to open the file
 		Private::Audio::AudioFile* file = Private::Audio::AV::openFile(pFilePath);
 		if (!file)
@@ -54,9 +82,6 @@ namespace Audio
 
 		return true;
 	}
-
-
-
 
 } // namespace Audio
 } // namespace Yuni
