@@ -16,11 +16,6 @@ namespace Yuni
 	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const NullPtr&)
 	{}
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const NullPtr*)
-	{}
-
-
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
