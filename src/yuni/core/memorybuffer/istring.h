@@ -118,7 +118,6 @@ namespace Yuni
 		** \brief Constructor with a null value
 		*/
 		CustomString(const NullPtr&);
-		CustomString(const NullPtr*);
 
 		/*!
 		** \brief Constructor with a default value

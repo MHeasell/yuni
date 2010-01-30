@@ -435,7 +435,6 @@ namespace Yuni
 		/*!
 		** \brief Constructor with an empty value
 		*/
-		StringBase(const NullPtr*);
 		StringBase(const NullPtr&);
 
 		/*!
@@ -1302,7 +1301,6 @@ namespace Yuni
 		**
 		** This method is strictly equivalent to the method clear()
 		*/
-		StringBase& operator = (const NullPtr*);
 		StringBase& operator = (const NullPtr&);
 
 		/*!
@@ -1319,7 +1317,6 @@ namespace Yuni
 		** This method is strictly equivalent to the method append()
 		** with one parameter.
 		*/
-		StringBase& operator += (const NullPtr*);
 		StringBase& operator += (const NullPtr&);
 
 		/*!
@@ -1336,7 +1333,6 @@ namespace Yuni
 		** This method is strictly equivalent to the method append()
 		** with one parameter.
 		*/
-		StringBase& operator << (const NullPtr*);
 		StringBase& operator << (const NullPtr&);
 
 		//! Get if the string is less than a C-String (can be null)
@@ -1354,8 +1350,6 @@ namespace Yuni
 		bool operator == (const Char rhs[]) const;
 
 		//! Get if the string is equivalent to a NULL C-String
-		bool operator == (const NullPtr*) const;
-		//! Get if the string is equivalent to a NULL C-String
 		bool operator == (const NullPtr&) const;
 
 		template<int N> bool operator == (const Char rhs[N]) const;
@@ -1370,7 +1364,6 @@ namespace Yuni
 		template<int Chnk1>
 		bool operator != (const StringBase<Char,Chnk1>& rhs) const;
 		//! Get if the string is equivalent to a NULL C-String
-		bool operator != (const NullPtr*) const;
 		bool operator != (const NullPtr&) const;
 
 		/*!
