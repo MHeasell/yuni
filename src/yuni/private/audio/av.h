@@ -2,6 +2,7 @@
 # define __YUNI_AUDIO_AV_H__
 
 #pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wundef"
 extern "C"
 {
 # include "libavcodec/avcodec.h"
