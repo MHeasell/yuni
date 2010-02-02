@@ -7,12 +7,14 @@
 #	include <sys/types.h>
 #endif
 #include <sys/stat.h>
+#include "../utils/hexdump.h"
 
 
 #ifndef S_ISDIR
 #	define S_ISDIR(mode) ( (mode & S_IFMT) == S_IFDIR)
 #endif
 
+#include "../utils/hexdump.cpp"
 
 
 namespace Yuni
@@ -28,44 +30,59 @@ namespace FilesystemImpl
 
 	bool ExistsWindowsImpl(const char* p, const size_t len)
 	{
-		if (len)
-		{
-			// ugly workaround with stat under Windows
-			// FIXME: Find a better way to find driver letters
-			if (':' == *(p + 1))
-			{
-				if ('\0' == *(p + 2) || ('\\' == *(p + 2) && '\0' == *(p + 3)))
-					return true;
-			}
-
-			struct _stati64 s;
-			wchar_t buffer[FILENAME_MAX];
-			// On Windows, the trailing backslash must be removed
-			MultiByteToWideChar(CP_UTF8, 0, p, len - (('\\' == p[len - 1]) ? 1 : 0), buffer, sizeof(buffer));
-			return (_wstati64(buffer, &s) == 0);
-		}
-		return false;
-	}
-
-	template<bool B>
-	bool IsDirWindowsImpl(const char* p, const size_t len)
-	{
+		if (!len)
+			return false;
 		// ugly workaround with stat under Windows
-		// FIXME: Find a better way to find driver letters
+		// FIXME: Find a better way to find drive letters
 		if (':' == *(p + 1))
 		{
 			if ('\0' == *(p + 2) || ('\\' == *(p + 2) && '\0' == *(p + 3)))
 				return true;
 		}
 
-		struct _stati64 s;
+		// Conversion into wchar_t
 		wchar_t buffer[FILENAME_MAX];
-		// On Windows, the trailing backslash must be removed
-		MultiByteToWideChar(CP_UTF8, 0, p, len - (('\\' == p[len - 1]) ? 1 : 0), buffer, sizeof(buffer));
-		if (_wstati64(buffer, &s) != 0)
-			return false;
-		return (B == S_ISDIR(s.st_mode));
+		int n = MultiByteToWideChar(CP_UTF8, 0, p, len - (('\\' == p[len - 1]) ? 1 : 0), buffer, sizeof(buffer));
+		for (int i = 0; i < n; ++i)
+		{
+			if (buffer[i] == '/')
+				buffer[i] = '\\';
+		}
+		buffer[n] = L'\0';
+
+ 		WIN32_FILE_ATTRIBUTE_DATA infoFile; 
+		return (GetFileAttributesExW(buffer, GetFileExInfoStandard, &infoFile));
 	}
+
+	template<bool B>
+	bool IsDirWindowsImpl(const char* p, const size_t len)
+	{
+		if (!len)
+			return false;
+		// ugly workaround with stat under Windows
+		// FIXME: Find a better way to find drive letters
+		if (':' == *(p + 1))
+		{
+			if ('\0' == *(p + 2) || ('\\' == *(p + 2) && '\0' == *(p + 3)))
+				return true;
+		}
+
+		// Conversion into wchar_t
+		wchar_t buffer[FILENAME_MAX];
+		int n = MultiByteToWideChar(CP_UTF8, 0, p, len - (('\\' == p[len - 1]) ? 1 : 0), buffer, sizeof(buffer));
+		for (int i = 0; i < n; ++i)
+		{
+			if (buffer[i] == '/')
+				buffer[i] = '\\';
+		}
+		buffer[n] = L'\0';
+
+ 		WIN32_FILE_ATTRIBUTE_DATA infoFile; 
+		if (!GetFileAttributesExW(buffer, GetFileExInfoStandard, &infoFile))
+			return false;
+		return (B == (infoFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY));
+	}
+
 
 	bool IsDirectoryWindowsImpl(const char* p, const size_t sizeHint)
 	{
