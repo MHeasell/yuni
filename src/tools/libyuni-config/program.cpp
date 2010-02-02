@@ -159,7 +159,7 @@ namespace Yuni
 			pOptCompiler = "icc";
 
 		if (pOptDebug)
-			std::cout << "[debug] compiler : " << pOptCompiler << std::endl; 
+			std::cout << "[debug] compiler : " << pOptCompiler << std::endl;
 	}
 
 
