@@ -179,13 +179,10 @@ namespace IO
 	**
 	** \ingroup IO
 	**
-	** \param p The path or the filename to test
-	** \return True if the path is an absolute path or empty, false otherwise
+	** \param filename The path or the filename to test
+	** \return True if the given filename is an absolute path, false otherwise (or empty)
 	*/
-	bool IsAbsolute(const char* p);
-	bool IsAbsolute(const wchar_t* p);
-	template<int N> bool IsAbsolute(const StringBase<char,N>& p);
-	template<int N> bool IsAbsolute(const StringBase<wchar_t,N>& p);
+	template<class AnyStringT> bool IsAbsolute(const AnyStringT& filename);
 
 
 	/*!
@@ -242,9 +239,7 @@ namespace IO
 	** \return True if it exists, false otherwise
 	*/
 	// const char*
-	bool Exists(const char* p);
-	// Yuni::String
-	template<int N> bool Exists(const StringBase<char,N>& p);
+	template<class AnyStringT> bool Exists(const AnyStringT& filename);
 
 
 	/*!
@@ -254,10 +249,15 @@ namespace IO
 	** This routine removes dot segments (`.` and `..`) from a given filename (when
 	** possible).
 	** Any final slash or anti-slash will be kept.
-	** \param[in]  in  A path/filename to normalize
+	**
+	** \bug The relative filename like C:..\folder1\folder2 are not handled properly
+	**
 	** \param[out] ou  A string (any class compliant to std::string) where to write the result
+	** \param      in  A path/filename to normalize
+	** \param      inLength Length of #in (optional, -1 for autodetection)
 	*/
-	template<class AnyStringT, class StringT> void Normalize(const AnyStringT& in, StringT& out);
+	template<class StringT, class AnyStringT>
+	void Normalize(StringT& out, const AnyStringT& in, unsigned int inLength = -1);
 
 
 

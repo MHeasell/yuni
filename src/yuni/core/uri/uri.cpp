@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include "uri.h"
 #include "../io/file.h"
+#include "../memorybuffer/istring.h"
 
 
 
@@ -29,8 +30,7 @@ namespace Yuni
 	public:
 		BuildSession(Private::Uri::Informations& inf, const String& s)
 			:location(partScheme), infos(inf), tag(0), str(s),
-			lastPosition(0), indx(0),
-			pMustRemoveDotSegments(false)
+			lastPosition(0), indx(0), pMustRemoveDotSegments(false)
 		{
 			str.trim();
 		}
@@ -215,8 +215,16 @@ namespace Yuni
 			}
 			if (pMustRemoveDotSegments)
 			{
-				String tmp(infos.path);
-				Core::IO::Normalize(tmp, infos.path);
+				if (infos.path.size() < 1000)
+				{
+					String tmp(infos.path);
+					Core::IO::Normalize(tmp, infos.path);
+				}
+				else
+				{
+					CustomString<1024, false, false> tmp(infos.path);
+					Core::IO::Normalize(tmp, infos.path);
+				}
 			}
 		}
 		return true;

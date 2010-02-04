@@ -4,6 +4,7 @@
 # include <assert.h>
 # include "private.h"
 # include <deque>
+# include <ctype.h>
 
 
 
@@ -48,63 +49,53 @@ namespace IO
 
 
 
-	template<int N>
-	inline bool IsAbsolute(const StringBase<char,N>& p)
+	template<class AnyStringT> inline bool IsAbsolute(const AnyStringT& filename)
 	{
-		# ifdef YUNI_OS_WINDOWS
-		return (p.empty() || (p.size() > 2 && ':' == p[1] && '\\' == p[2]));
-		# else
-		return (p.empty() || '/' == p.first());
-		# endif
-	}
+		// The given type, without its const identifier
+		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
+		// Assert, if the length of the container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
-	template<int N>
-	inline bool IsAbsolute(const StringBase<wchar_t,N>& p)
-	{
-		# ifdef YUNI_OS_WINDOWS
-		return (p.empty() || (p.size() > 2 && L':' == p[1] && L'\\' == p[2]));
-		# else
-		return (p.empty() || L'/' == p.first());
-		# endif
-	}
-
-
-	inline bool IsAbsolute(const char* p)
-	{
-		# ifdef YUNI_OS_WINDOWS
-		return (!p || (L'\0' != *p && ':' == p[1] && '\\' == p[2]));
-		# else
-		return (!p || '/' == *p);
-		# endif
-	}
-
-	inline bool IsAbsolute(const wchar_t* p)
-	{
-		# ifdef YUNI_OS_WINDOWS
-		return (!p || ('\0' != *p && L':' == p[1] && L'\\' == p[2]));
-		# else
-		return (!p || L'/' == *p);
-		# endif
-	}
-
-
-
-	/*
-	template<class StringT1, class StringT2>
-	void ExtractFilePath(StringT1& out, const StringT2& p, const bool systemDependant)
-	{
-		const typename StringT2::size_type pos = ((systemDependant)
-			? p.find_last_of(IO::Constant<char>::Separator)
-			: p.find_last_of(IO::Constant<char>::AllSeparators));
-		if (String::npos != pos)
+		const char* const p = Traits::CString<UType>::Buffer(filename);
+		// Find the substring
+		if (Traits::Length<UType, unsigned int>::isFixed)
 		{
-			if (!pos)
-				out.append(p[pos]);
-			else
-				out.append(p, 0, pos - 1);
+			// We can make some optimisations when the length is known at compile compile time
+			// This part of the code should not bring better performances but it should
+			// prevent against bad uses of the API, like using a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* for looking for a single char.
+
+			// The value to find is actually empty, npos will be the unique answer
+			if (0 == Traits::Length<UType, unsigned int>::fixedLength)
+				return false;
+			// The string is actually a single POD item
+			if (1 == Traits::Length<UType, unsigned int>::fixedLength)
+				return *p == '/' || *p == '\\';
 		}
+
+		return p && (*p == '/' || *p == '\\' || (isalpha(*p) && p[1] == ':' && (p[2] == '\\' || p[2] == '/')));
 	}
-	*/
+
+
+	template<class AnyStringT> inline bool Exists(const AnyStringT& filename)
+	{
+		// The given type, without its const identifier
+		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, IOExists_InvalidTypeForBuffer);
+		// Assert, if the length of the container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  IOExists_InvalidTypeForBufferSize);
+
+		# ifdef YUNI_OS_WINDOWS
+		return Private::IO::FilesystemImpl::ExistsWindowsImpl(
+			Traits::CString<UType>::Buffer(filename), Traits::Length<UType,size_t>::Value(filename));
+		# else
+		return Private::IO::FilesystemImpl::ExistsUnixImpl(Traits::CString<UType>::Buffer(filename));
+		# endif
+	}
+
+
 
 
 	template<typename C, int N>
@@ -260,8 +251,8 @@ namespace IO
 	}
 
 
-	template<class AnyStringT, class StringT>
-	void Normalize(const AnyStringT& in, StringT& out)
+	template<class StringT, class AnyStringT>
+	void Normalize(StringT& out, const AnyStringT& in, unsigned int inLength)
 	{
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
@@ -288,13 +279,14 @@ namespace IO
 		}
 
 		// The length of the input
-		unsigned int inputLength = Traits::Length<UType,unsigned int>::Value(in);
-		if (!inputLength)
+		if (inLength == (unsigned int)-1)
+			inLength = Traits::Length<UType,unsigned int>::Value(in);
+		if (!inLength)
 		{
 			out.clear();
 			return;
 		}
-		if (inputLength == 1)
+		if (inLength == 1)
 		{
 			out = in;
 			return;
@@ -310,8 +302,8 @@ namespace IO
 		unsigned int i = 0;
 		// We will keep the position of the character after the first slash. It improves
 		// a bit performances for relative filenames
-		unsigned int start;
-		for (; i != inputLength; ++i)
+		unsigned int start = 0;
+		for (; i != inLength; ++i)
 		{
 			if (input[i] == '/' || input[i] == '\\')
 			{
@@ -326,7 +318,7 @@ namespace IO
 			out = in;
 			return;
 		}
-		for (; i < inputLength; ++i)
+		for (; i < inLength; ++i)
 		{
 			if (input[i] == '/' || input[i] == '\\')
 				++slashes;
@@ -334,7 +326,7 @@ namespace IO
 
 		// Initializing the output, and reserving the memory to avoid as much as possible calls to realloc
 		// In the most cases, the same size than the input is the most appropriate value
-		out.reserve(inputLength);
+		out.reserve(inLength);
 		// Copying the begining of the input
 		out.assign(input, start);
 
@@ -347,7 +339,7 @@ namespace IO
 		// Performing checks only if the first slash is near by the begining.
 		if (start < 4)
 		{
-			if (input[1] == ':' && inputLength > 2 && (input[2] == '\\' || input[2] == '/'))
+			if (input[1] == ':' && inLength >= 2 && (input[2] == '\\' || input[2] == '/'))
 			{
 				// We have an Windows-style path, and it is absolute
 				isAbsolute = true;
@@ -385,7 +377,7 @@ namespace IO
 		// Index on the stack
 		unsigned int count = 0;
 
-		for (i = start; i < inputLength; ++i)
+		for (i = start; i < inLength; ++i)
 		{
 			// Detecting the end of a segment
 			if (input[i] == '/' || input[i] == '\\')
@@ -425,8 +417,13 @@ namespace IO
 									else
 										stack[count++](cursor, 3);
 								}
+								break;
 							}
-							break;
+							else
+							{
+								// we have a real folder, so `break` _must_ not
+								// be used here.
+							}
 						}
 					default:
 						{
@@ -441,7 +438,7 @@ namespace IO
 		}
 
 		// Special case : The last segment is a double dot segment
-		if (cursor < inputLength && inputLength - cursor == 2)
+		if (cursor < inLength && inLength - cursor == 2)
 		{
 			if (input[cursor] == '.' && input[cursor + 1] == '.')
 			{
@@ -458,7 +455,7 @@ namespace IO
 						stack[count++](cursor, 2);
 				}
 
-				cursor = inputLength;
+				cursor = inLength;
 			}
 		}
 
@@ -474,11 +471,11 @@ namespace IO
 
 		// But it may remain a final segment
 		// We know for sure that it can not be a double dot segment
-		if (cursor < inputLength)
+		if (cursor < inLength)
 		{
-			if (inputLength - cursor == 1 && input[cursor] == '.')
+			if (inLength - cursor == 1 && input[cursor] == '.')
 				return;
-			out.append(input + cursor, inputLength - cursor);
+			out.append(input + cursor, inLength - cursor);
 		}
 	}
 

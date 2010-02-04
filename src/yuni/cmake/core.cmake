@@ -385,7 +385,7 @@ source_group(Core\\URI FILES ${SRC_CORE_URI})
 
 
 Set(SRC_CORE_IO_FILENAME
-				core/io/io.h core/io/io.cpp core/io/io.exists.cpp
+				core/io/io.h core/io/io.cpp core/io/exists.cpp
 				core/io/io.hxx core/io/private.h)
 source_group(Core\\IO FILES ${SRC_CORE_IO_FILENAME})
 

@@ -45,7 +45,7 @@ namespace File
 	** \param p The folder/filename to test
 	** \return True if it exists, false otherwise
 	*/
-	template<class C> bool Exists(const C& p);
+	template<class AnyStringT> bool Exists(const AnyStringT& p);
 
 
 	/*!

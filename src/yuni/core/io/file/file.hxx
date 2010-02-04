@@ -27,6 +27,11 @@ namespace File
 	template<class AnyStringT>
 	inline uint64 Size(const AnyStringT& filename)
 	{
+		// The given type, without its const identifier
+		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, IOFileExists_InvalidTypeForBuffer);
+
 		typedef typename Static::Remove::Const<AnyStringT>::Type TypeT;
 		return Private::IO::FilesystemImpl::Size(Traits::CString<TypeT>::Buffer(filename));
 	}
@@ -34,15 +39,20 @@ namespace File
 
 
 
-	template<class C>
-	inline bool Exists(const C& p)
+	template<class AnyStringT> inline bool Exists(const AnyStringT& filename)
 	{
+		// The given type, without its const identifier
+		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, IOFileExists_InvalidTypeForBuffer);
+		// Assert, if the length of the container can not be found at compile time
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  IOFileExists_InvalidTypeForBufferSize);
+
 		# ifdef YUNI_OS_WINDOWS
 		return Private::IO::FilesystemImpl::IsFileWindowsImpl(
-			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(p), Traits::Length<C>::Value(p));
+			Traits::CString<UType>::Buffer(filename), Traits::Length<C,size_t>::Value(filename));
 		# else
-		return Private::IO::FilesystemImpl::IsFileUnixImpl(
-			Traits::CString<typename Static::Remove::Const<C>::Type>::Buffer(p));
+		return Private::IO::FilesystemImpl::IsFileUnixImpl(Traits::CString<UType>::Buffer(filename));
 		# endif
 	}
 
