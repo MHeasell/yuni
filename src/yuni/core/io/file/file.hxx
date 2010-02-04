@@ -30,10 +30,9 @@ namespace File
 		// The given type, without its const identifier
 		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
 		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, IOFileExists_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CoreIOFileSize_InvalidTypeForBuffer);
 
-		typedef typename Static::Remove::Const<AnyStringT>::Type TypeT;
-		return Private::IO::FilesystemImpl::Size(Traits::CString<TypeT>::Buffer(filename));
+		return Private::IO::FilesystemImpl::Size(Traits::CString<UType>::Buffer(filename));
 	}
 
 
@@ -50,7 +49,7 @@ namespace File
 
 		# ifdef YUNI_OS_WINDOWS
 		return Private::IO::FilesystemImpl::IsFileWindowsImpl(
-			Traits::CString<UType>::Buffer(filename), Traits::Length<C,size_t>::Value(filename));
+			Traits::CString<UType>::Buffer(filename), Traits::Length<UType,size_t>::Value(filename));
 		# else
 		return Private::IO::FilesystemImpl::IsFileUnixImpl(Traits::CString<UType>::Buffer(filename));
 		# endif
