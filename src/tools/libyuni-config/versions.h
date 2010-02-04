@@ -132,7 +132,7 @@ namespace VersionInfo
 		void debug(bool mode) {pOptDebug = mode;}
 
 	private:
-		void loadFromPath(const String& path);
+		void loadFromPath(const String& folder);
 
 	private:
 		String pCompiler;
