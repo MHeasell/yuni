@@ -4,6 +4,9 @@
 #include <yuni/core/io/file.h>
 
 
+#define SEP Core::IO::Separator
+
+
 namespace Yuni
 {
 namespace LibConfig
@@ -15,7 +18,7 @@ namespace VersionInfo
 	void List::checkRootFolder(const String& root)
 	{
 		String yuniMarker;
-		yuniMarker << root << Core::IO::Separator << "mark-for-yuni-sources";
+		yuniMarker << root << SEP << "mark-for-yuni-sources";
 
 		if (Core::IO::File::Exists(yuniMarker))
 		{
@@ -48,25 +51,25 @@ namespace VersionInfo
 		}
 	}
 
-	void List::loadFromPath(const String& path)
+	void List::loadFromPath(const String& folder)
 	{
+		String path;
+		Core::IO::Normalize(path, folder);
 		if (pOptDebug)
-			std::cout << "[debug] loading infos from `" << path << "`" << std::endl; 
+			std::cout << "[debug] :: reading `" << path << "`" << std::endl;
 
 		VersionInfo::Settings info;
 		info.mapping = mappingStandard;
 		String s(path);
-		s << Core::IO::Separator << "yuni.version";
+		s << SEP << "yuni.version";
 		if (!Core::IO::File::Exists(s))
 		{
 			s = path;
-			s << Core::IO::Separator << "include" << Core::IO::Separator
-				<< "yuni" << Core::IO::Separator << "yuni.version";
+			s << SEP << "include" << SEP << "yuni" << SEP << "yuni.version";
 			if (!Core::IO::File::Exists(s))
 			{
 				info.mapping = mappingSVNSources;
-				s = path;
-				s << Core::IO::Separator << "src/yuni/yuni.version";
+				s.clear() << path << SEP << "src/yuni/yuni.version";
 				if (!Core::IO::File::Exists(s))
 					return;
 			}
@@ -185,11 +188,11 @@ namespace VersionInfo
 			return false;
 		}
 		String out;
-		out << this->path << Core::IO::Separator;
+		out << this->path << SEP;
 		switch (mapping)
 		{
 			case mappingSVNSources:
-				out << "src" << Core::IO::Separator << "yuni" << Core::IO::Separator;
+				out << "src" << SEP << "yuni" << SEP;
 				break;
 			case mappingStandard:
 				// Nothing to do
@@ -228,6 +231,8 @@ namespace VersionInfo
 		String modName;
 		// Group
 		String group;
+		// normalized path
+		String norm;
 
 		// The default compiler is gcc
 		CompilerCompliant compliant = gcc;
@@ -259,10 +264,11 @@ namespace VersionInfo
 
 			if (group == "path.include")
 			{
+				Core::IO::Normalize(norm, value);
 				switch (compliant)
 				{
-					case gcc          : s.includes[String() << "-I" << value] = true; break;
-					case visualstudio : s.includes[String() << "/I" << value] = true; break;
+					case gcc          : s.includes[String() << "-I" << norm] = true; break;
+					case visualstudio : s.includes[String() << "/I" << norm] = true; break;
 				}
 				continue;
 			}
@@ -275,20 +281,22 @@ namespace VersionInfo
 
 			if (group == "path.lib")
 			{
+				Core::IO::Normalize(norm, value);
 				switch (compliant)
 				{
-					case gcc          : s.libIncludes[String() << "-L" << value] = true; break;
-					case visualstudio : s.libIncludes[String() << "/LIBPATH:" << value] = true; break;
+					case gcc          : s.libIncludes[String() << "-L" << norm] = true; break;
+					case visualstudio : s.libIncludes[String() << "/LIBPATH:" << norm] = true; break;
 				}
 				continue;
 			}
 
 			if (group == "lib")
 			{
+				Core::IO::Normalize(norm, value);
 				switch (compliant)
 				{
-					case gcc          : s.libs[String() << "-l" << value] = true; break;
-					case visualstudio : s.libs[String() << "" << value] = true; break;
+					case gcc          : s.libs[String() << "-l" << norm] = true; break;
+					case visualstudio : s.libs[String() << "" << norm] = true; break;
 				}
 				continue;
 			}
