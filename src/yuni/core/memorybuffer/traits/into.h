@@ -2,6 +2,7 @@
 # define __YUNI_CORE_MEMORYBUFFER_ISTRING_TRAITS_INTO_H__
 
 # include <stdlib.h>
+# include <ctype.h>
 
 
 namespace Yuni
