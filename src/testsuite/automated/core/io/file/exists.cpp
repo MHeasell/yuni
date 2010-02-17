@@ -19,6 +19,8 @@ int main(void)
 	values.push_back(FileWithResult("test.txt", true));
 	values.push_back(FileWithResult("./test.txt", true));
 	values.push_back(FileWithResult(".\\test.txt", true));
+	values.push_back(FileWithResult(".", true)); // directory
+	values.push_back(FileWithResult("./..", true)); // directory
 	values.push_back(FileWithResult("../../", true)); // directory
 	values.push_back(FileWithResult("..\\..\\", true)); // directory
 	values.push_back(FileWithResult("completelyImprobableName.none", false));
@@ -32,7 +34,7 @@ int main(void)
 		{
 			std::cout << "Error: Core::IO::File::Exists should find \""
 					  << values[i].Name << "\" as "
-					  << (expected ? " existing!" : " not existing!")
+					  << (expected ? "existing!" : "not existing!")
 					  << std::endl;
 			nbErrors++;
 		}
