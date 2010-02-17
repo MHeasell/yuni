@@ -19,7 +19,8 @@ int main(void)
 	values.push_back(FileWithResult("test.txt", false));
 	values.push_back(FileWithResult("./test.txt", false));
 	values.push_back(FileWithResult(".\\test.txt", false));
-	values.push_back(FileWithResult("./", true));
+	values.push_back(FileWithResult(".", true));
+	values.push_back(FileWithResult("./..", true));
 	values.push_back(FileWithResult("../../", true));
 	values.push_back(FileWithResult("..\\..\\", true));
 	values.push_back(FileWithResult("completelyImprobableName.none", false));
