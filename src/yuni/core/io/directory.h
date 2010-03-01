@@ -35,7 +35,7 @@ namespace Directory
 	** \param path The directory to test
 	** \return True if it exists, false otherwise
 	*/
-	template<class C> bool Exists(const C& path);
+	template<class AnyStringT> bool Exists(const AnyStringT& path);
 	//@}
 
 
@@ -82,7 +82,7 @@ namespace Directory
 	** \param p The path to delete
 	** \return True if the operation succeeded False otherwise
 	*/
-	template<class C> bool Remove(const C& path);
+	template<class AnyStringT> bool Remove(const AnyStringT& path);
 	//@}
 
 
@@ -97,7 +97,8 @@ namespace Directory
 	** \param dst The target folder
 	** \return True if the operation succeeded False otherwise
 	*/
-	template<class C, class D> bool Copy(const C& src, const D& dst);
+	template<class AnyStringT1, class AnyStringT2>
+	bool Copy(const AnyStringT1& src, const AnyStringT2& dst);
 	//@}
 
 
