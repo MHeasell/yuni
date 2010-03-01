@@ -5,6 +5,8 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+#else
+#include <sys/stat.h>
 #endif
 #include "../memorybuffer/istring.h"
 
