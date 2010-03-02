@@ -17,7 +17,9 @@ namespace Audio
 	{
 	public:
 		bool onLoop()
-		{}
+		{
+			return true;
+		}
 
 	}; // class Loop
 

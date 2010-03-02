@@ -27,7 +27,7 @@ namespace Audio
 		static Manager& Instance();
 
 	private:
-		Manager();
+		Manager() {}
 		Manager(const Manager&);
 		Manager& operator = (const Manager&);
 
@@ -37,6 +37,9 @@ namespace Audio
 
 		template<typename AnyStringT>
 		bool loadSound(const AnyStringT&);
+
+		template<typename AnyStringT>
+		bool playSound(const AnyStringT& source, const AnyStringT& sound);
 
 	private:
 		bool loadSoundWL();
@@ -52,7 +55,7 @@ namespace Audio
 		** \brief Temporary storage for the string for file loading dispatch
 		** \note This is ugly, it should be removed and a better use of bind() should be made.
 		*/
-		const char* pFilePath;
+		String pFilePath;
 
 	}; // class Manager
 
@@ -60,5 +63,7 @@ namespace Audio
 
 } // namespace Audio
 } // namespace Yuni
+
+#include "manager.hxx"
 
 #endif // __YUNI_AUDIO_MANAGER_H__

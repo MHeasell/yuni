@@ -4,6 +4,7 @@
 #include <yuni/application/console.h>
 #include <yuni/core/string.h>
 #include <yuni/audio/sound.h>
+#include <yuni/audio/manager.h>
 
 
 using namespace Yuni;
@@ -26,11 +27,15 @@ public:
 
 	virtual void onExecute()
 	{
+		Manager& audioManager = Manager::Instance();
+		audioManager.start();
 		for (std::vector<String>::const_iterator it = pFileNames.begin();
 			 it != pFileNames.end(); ++it)
 		{
 			std::cout << "Loading file: \"" << (*it) << "\"" << std::endl;
+			audioManager.loadSound("test.wav");
 		}
+		audioManager.stop();
 	}
 
 private:

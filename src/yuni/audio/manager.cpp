@@ -36,17 +36,6 @@ namespace Audio
 		pAudioLoop.stop();
 	}
 
-	template<typename AnyStringT>
-	bool Manager::loadSound(const AnyStringT& filePath)
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		Yuni::Bind<bool()> callback;
-		callback.bind(this, &Manager::loadSoundWL);
-		pFilePath = filePath.CStr();
-		pAudioLoop.dispatch(callback);
-		return true;
-	}
-
 	bool Manager::loadSoundWL()
 	{
 		// Try to open the file
