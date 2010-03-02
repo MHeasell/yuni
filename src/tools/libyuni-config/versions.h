@@ -11,7 +11,11 @@
 
 
 # ifdef YUNI_OS_WINDOWS
-#	define YUNI_LIBCONFIG_DEFAULT_COMPILER "vs9"
+#	if defined(YUNI_OS_MINGW)
+#		define YUNI_LIBCONFIG_DEFAULT_COMPILER "mingw"
+#	else
+#		define YUNI_LIBCONFIG_DEFAULT_COMPILER "vs9"
+#	endif
 # else
 #	if defined(YUNI_OS_SUNOS) || defined(YUNI_OS_SOLARIS)
 #		define YUNI_LIBCONFIG_DEFAULT_COMPILER "suncc"

@@ -77,4 +77,6 @@ namespace Audio
 } // namespace Private
 } // namespace Yuni
 
+#include "av.hxx"
+
 #endif // __YUNI_AUDIO_AV_H__
