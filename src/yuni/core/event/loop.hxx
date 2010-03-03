@@ -73,7 +73,7 @@ namespace EventLoop
 			// The object is still locked and we directly inject the request into
 			// the request list.
 			RequestType request;
-			request.bind(this, &EventLoopType::requestThatWillFailToStopTheRunningEventLoop);
+			request.bind(this, &EventLoopType::requestStop);
 			pRequests->push_back(request);
 		}
 		// Informing the event loop that a new request is available
@@ -121,7 +121,7 @@ namespace EventLoop
 
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
-	inline bool IEventLoop<ParentT,FlowT,StatsT,DetachedT>::requestThatWillFailToStopTheRunningEventLoop()
+	bool IEventLoop<ParentT,FlowT,StatsT,DetachedT>::requestStop()
 	{
 		// Returning false to stop the event loop
 		return false;

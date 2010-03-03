@@ -157,7 +157,7 @@ namespace EventLoop
 		IEventLoop& operator = (const IEventLoop&) {/* This class is not copyable */}
 
 		//! Empty method only used to stop the running event loop
-		bool requestThatWillFailToStopTheRunningEventLoop();
+		bool requestStop();
 
 		//! Run an infinite loop
 		void runInfiniteLoopWL();
