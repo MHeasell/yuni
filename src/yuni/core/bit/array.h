@@ -2,7 +2,7 @@
 # define __YUNI_CORE_BIT_BIT_ARRAY_H__
 
 # include "../../yuni.h"
-# include "../memorybuffer.h"
+# include "../memorybuffer/istring.h"
 # include "bit.h"
 # include <iostream>
 
@@ -47,6 +47,10 @@ namespace Bit
 		//! Size
 		typedef unsigned int Size;
 
+		enum
+		{
+			npos = (unsigned int) (-1),
+		};
 	public:
 		//! \name Constructors & Destructor
 		//@{
@@ -112,7 +116,7 @@ namespace Bit
 		/*!
 		** \brief Get if the Ith bit is set
 		*/
-		bool get(unsigned int i);
+		bool get(unsigned int i) const;
 		//@}
 
 
@@ -141,6 +145,11 @@ namespace Bit
 		template<class AnyBufferT> void saveToBuffer(AnyBufferT& u);
 		//@}
 
+
+		//! \name Lookup
+		//@{
+		template<bool ValueT> unsigned int find(unsigned int offset = 0) const;
+		//@}
 
 		//! \name Memory management
 		//@{
@@ -177,6 +186,9 @@ namespace Bit
 		void resize(unsigned int n);
 		//@}
 
+		const char* c_str() const;
+		const char* data() const;
+		char* data();
 
 		//! \name Stream
 		//@{
@@ -197,8 +209,11 @@ namespace Bit
 
 
 	private:
+		template<bool OnOff>
+		unsigned int internalFind(unsigned int offset) const;
+	private:
 		//! Buffer Type
-		typedef IString<20, true, false> BufferType;
+		typedef CustomString<20, true, false> BufferType;
 		//! Number of bits into the buffer, requested by the caller
 		unsigned int pCount;
 		//! Internal buffer
