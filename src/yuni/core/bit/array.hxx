@@ -51,7 +51,7 @@ namespace Bit
 	}
 
 
-	inline bool Array::get(unsigned int i)
+	inline bool Array::get(unsigned int i) const
 	{
 		return YUNI_BIT_GET(pBuffer.data(), i);
 	}
@@ -105,6 +105,21 @@ namespace Bit
 		return pCount;
 	}
 
+	inline const char* Array::c_str() const
+	{
+		return pBuffer.c_str();
+	}
+
+	inline const char* Array::data() const
+	{
+		return pBuffer.data();
+	}
+
+	inline char* Array::data()
+	{
+		return pBuffer.data();
+	}
+
 
 	template<class AnyStringT>
 	inline void Array::loadFromBuffer(const AnyStringT& u)
@@ -112,25 +127,25 @@ namespace Bit
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::Length<UType>::valid,  BitArray_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  BitArray_InvalidTypeForBufferSize);
 
-		if (Core::Traits::Length<UType,Size>::isFixed)
+		if (Traits::Length<UType,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
 			// prevent against bad uses of the API, like using a C* for looking for a single char.
 
 			// The value to find is actually empty, nothing to do
-			if (0 == Core::Traits::Length<UType,Size>::fixedLength)
+			if (0 == Traits::Length<UType,Size>::fixedLength)
 			{
 				pBuffer.clear();
 				pCount = 0;
 				return;
 			}
 		}
-		pBuffer.assign(Core::Traits::CString<UType>::Buffer(u), (pCount = Core::Traits::Length<UType,Size>::Value(u)));
+		pBuffer.assign(Traits::CString<UType>::Buffer(u), (pCount = Traits::Length<UType,Size>::Value(u)));
 	}
 
 
@@ -140,9 +155,9 @@ namespace Bit
 		// The given type, with its const identifier
 		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
 
-		pBuffer.assign(Core::Traits::CString<UType>::Buffer(u), (pCount = size));
+		pBuffer.assign(Traits::CString<UType>::Buffer(u), (pCount = size));
 	}
 
 
@@ -156,7 +171,7 @@ namespace Bit
 	}
 
 
-	Array& Array::operator = (const Array& rhs)
+	inline Array& Array::operator = (const Array& rhs)
 	{
 		pBuffer = rhs.pBuffer;
 		pCount = rhs.pCount;
@@ -164,9 +179,10 @@ namespace Bit
 	}
 
 
-	template<class AnyStringT> Array& Array::operator = (const AnyStringT& rhs)
+	template<class AnyStringT> inline Array& Array::operator = (const AnyStringT& rhs)
 	{
 		loadFromBuffer(rhs);
+		return *this;
 	}
 
 
@@ -174,6 +190,7 @@ namespace Bit
 	{
 		pBuffer.clear();
 		pCount = 0;
+		return *this;
 	}
 
 
@@ -181,6 +198,7 @@ namespace Bit
 	{
 		pBuffer.clear();
 		pCount = 0;
+		return *this;
 	}
 
 
@@ -192,6 +210,22 @@ namespace Bit
 	}
 
 
+	template<bool ValueT>
+	unsigned int Array::find(unsigned int offset) const
+	{
+		for (unsigned int i = (offset >> 3); i < pBuffer.size(); ++i)
+		{
+			if ((unsigned char)(pBuffer[i]) != (ValueT ? 0 : 0xFF))
+			{
+				unsigned char c = pBuffer[i];
+				unsigned int result = 0;
+				while ((bool) (YUNI_BIT_GET(&c, result)) != ValueT)
+					++result;
+				return result + (i << 3);
+			}
+		}
+		return npos;
+	}
 
 
 
