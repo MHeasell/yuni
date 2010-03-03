@@ -8,7 +8,6 @@
 
 
 using namespace Yuni;
-using namespace Yuni::Audio;
 
 
 class LoadAndPlay : public Application::Console
@@ -21,16 +20,16 @@ public:
 			pFileNames.push_back(argv[i]);
 	}
 
-	~LoadAndPlay()
+	virtual ~LoadAndPlay()
 	{
 	}
 
 	virtual void onExecute()
 	{
-		Manager& audioManager = Manager::Instance();
+		Audio::Manager& audioManager = Audio::Manager::Instance();
 		audioManager.start();
-		for (std::vector<String>::const_iterator it = pFileNames.begin();
-			 it != pFileNames.end(); ++it)
+		for (String::Vector::const_iterator it = pFileNames.begin();
+			it != pFileNames.end(); ++it)
 		{
 			std::cout << "Loading file: \"" << (*it) << "\"" << std::endl;
 			audioManager.loadSound("test.wav");
@@ -39,7 +38,7 @@ public:
 	}
 
 private:
-	std::vector<String> pFileNames;
+	String::Vector pFileNames;
 
 }; // class LoadAndPlay
 

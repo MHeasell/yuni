@@ -25,7 +25,7 @@ namespace Audio
 		//! Size type
 		typedef unsigned int Size;
 		//! The Threading Policy
-		typedef Policy::ObjectLevelLockable<ASound> ThreadingPolicy;
+		typedef Policy::ObjectLevelLockable<ISound> ThreadingPolicy;
 
 		//@}
 
@@ -41,7 +41,7 @@ namespace Audio
 		/*!
 		** \brief Add a sound at the end of the playlist
 		*/
-		void append(SmartPtr<ASound>& sound);
+		void append(SmartPtr<ISound>& sound);
 
 		template<typename AnyStringT>
 		void remove(const AnyStringT& soundID);
@@ -51,11 +51,11 @@ namespace Audio
 
 		void previous();
 		void next();
-		void shuffle() const;
+		void shuffle();
 
 	private:
 		//! All the sounds currently in the play list (ordered)
-		ASound::Vector pSoundList;
+		ISound::Vector pSoundList;
 		//! Index of the current song being played / next to play
 		unsigned int pCurrentIndex;
 		//! Should we loop around the selection?

@@ -9,13 +9,6 @@ namespace Audio
 {
 
 
-	ISound::ISound()
-		:pFile(NULL)
-	{
-		// Do nothing
-	}
-
-
 	bool ISound::loadFromFile()
 	{
 		// Locking
@@ -60,3 +53,4 @@ namespace Audio
 
 } // namespace Audio
 } // namespace Yuni
+
