@@ -4,7 +4,7 @@
 #include <yuni/application/console.h>
 #include <yuni/core/string.h>
 #include <yuni/audio/manager.h>
-
+#include <yuni/core/system/sleep.h>
 
 using namespace Yuni;
 
@@ -25,15 +25,18 @@ public:
 
 	virtual void onExecute()
 	{
-		Audio::Manager& audioManager = Audio::Manager::Instance();
-		audioManager.start();
+		Audio::Manager& audio = Audio::Manager::Instance();
+		audio.start();
+		audio.addSource("Source1", false);
 		for (String::Vector::const_iterator it = pFileNames.begin();
 			it != pFileNames.end(); ++it)
 		{
 			std::cout << "Loading file: \"" << (*it) << "\"" << std::endl;
-			audioManager.loadSound("test.wav");
+			audio.loadSound(*it);
+			audio.playSound("Source1", *it);
 		}
-		audioManager.stop();
+		Yuni::Sleep(15);
+		audio.stop();
 	}
 
 private:
