@@ -198,7 +198,7 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 			Message(STATUS "    . Downloading ${DevPackURL}")
 			# Download the Pack
 			File(DOWNLOAD "${DevPackURL}" "${DevPackReceiptsFolder}/${DevPackShortFilename}.zip"
-					STATUS DevPackDwnlStatus TIMEOUT 30)
+					STATUS DevPackDwnlStatus)
 			DEVPACK_IS_IN_RECEIPTS(DevPackReceiptReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}"
 				"${dparch}" "${dpcompiler}" "${dptarget}")
 			IF(NOT DevPackReceiptReady)
