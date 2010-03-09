@@ -5,8 +5,13 @@
 # include <list>
 # include "../../core/vector3D.h"
 # include "../../core/point3D.h"
-# include "al.h"
-# include "alc.h"
+# ifdef YUNI_OS_MACOS
+#	include <OpenAL/al.h>
+#	include <OpenAL/alc.h>
+# else
+#	include <al.h>
+#	include <alc.h>
+# endif
 
 namespace Yuni
 {

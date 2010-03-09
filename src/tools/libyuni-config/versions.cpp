@@ -85,6 +85,7 @@ namespace VersionInfo
 			for (String::List::const_iterator i = list.begin(); i != end; ++i)
 			{
 				i->extractKeyValue(key, value);
+				value.trim();
 				if (key.empty() || key == "[")
 					continue;
 				if (key == "version.hi")
@@ -104,9 +105,15 @@ namespace VersionInfo
 				if (key == "redirect")
 					loadFromPath(value);
 				if (key == "path.include")
-					info.includePath.push_back(value);
+				{
+					if (value.notEmpty())
+						info.includePath.push_back(value);
+				}
 				if (key == "path.lib")
-					info.libPath.push_back(value);
+				{
+					if (value.notEmpty())
+						info.libPath.push_back(value);
+				}
 			}
 			if (!version.null() && !info.modules.empty())
 			{
@@ -246,6 +253,9 @@ namespace VersionInfo
 			i->extractKeyValue(key, value);
 			if (key.empty() || key.first() == '[')
 				continue;
+			value.trim();
+			if (!value)
+				continue;
 
 			// Reset
 			modName.clear();
@@ -296,7 +306,7 @@ namespace VersionInfo
 				switch (compliant)
 				{
 					case gcc          : s.libs[String() << "-l" << norm] = true; break;
-					case visualstudio : s.libs[String() << "" << norm] = true; break;
+					case visualstudio : s.libs[String() << norm] = true; break;
 				}
 				continue;
 			}
