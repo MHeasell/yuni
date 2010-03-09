@@ -3,7 +3,6 @@
 #include <yuni/yuni.h>
 #include <yuni/application/console.h>
 #include <yuni/core/string.h>
-#include <yuni/audio/sound.h>
 #include <yuni/audio/manager.h>
 
 
