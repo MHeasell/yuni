@@ -22,9 +22,9 @@ namespace Audio
 	bool Manager::playSound(const AnyStringT1& source, const AnyStringT2& sound)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
-		Yuni::Bind<bool(Sound::Ptr&)> callback;
+		//Yuni::Bind<bool(Sound::Ptr&)> callback;
 
-		callback.
+		//callback.
 		return true;
 	}
 
