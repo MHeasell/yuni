@@ -1,14 +1,12 @@
 #ifndef __YUNI_AUDIO_SOURCE_H__
 # define __YUNI_AUDIO_SOURCE_H__
 
+# include <map>
 # include "../yuni.h"
 # include "../core/string.h"
 # include "../core/smartptr.h"
 # include "../core/point3D.h"
 # include "../core/vector3D.h"
-
-# include "sound3D.h"
-# include "music.h"
 
 
 
@@ -29,10 +27,13 @@ namespace Audio
 		typedef SmartPtr<Source> Ptr;
 		//! Threading Policy
 		typedef Policy::ObjectLevelLockable<Source> ThreadingPolicy;
+		//! Map
+		typedef std::map<String, Ptr> Map;
 
 	public:
 		//! \name Constructors & Destructor
 		//@{
+
 		/*!
 		** \brief Shortest constructor
 		**
@@ -61,18 +62,18 @@ namespace Audio
 
 		//! Destructor
 		~Source() {}
+
 		//@}
 
-		//! Start a 3D sound playback on this source
-		bool play(Sound3D::Ptr sound);
-		//! Start a music playback on this source
-		bool play(Music::Ptr music);
 
 		//! \name Methods
 		//@{
+
 		//! Prepare the source for playing
 		bool prepare();
+
 		//@}
+
 
 		//! \name Accessors
 		//@{

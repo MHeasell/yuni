@@ -29,8 +29,8 @@ Set(SRC_AUDIO
 #		audio/music.h
 #		audio/music.cpp
 #		audio/playlist.h
-#		audio/source.h
-#		audio/source.cpp
+		audio/source.h
+		audio/source.cpp
 		private/audio/openal.h
 		private/audio/openal.cpp
 		private/audio/av.h
