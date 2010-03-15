@@ -26,14 +26,29 @@ namespace Audio
 		pAudioLoop.dispatch(callback);
 		callback.bind(&Private::Audio::OpenAL::init);
 		pAudioLoop.dispatch(callback);
+		pReady = true;
 	}
 
 	void Manager::stop()
 	{
+		// Close OpenAL buffers properly
+		for (BufferMap::iterator it = pBuffers.begin(); it != pBuffers.end(); ++it)
+		{
+			Private::Audio::OpenAL::destroyBuffers(1, &(it->second));
+		}
+		pBuffers.clear();
+		// Close OpenAL sources properly
+		for (Source::Map::iterator it = pSources.begin(); it != pSources.end(); ++it)
+		{
+			Private::Audio::OpenAL::destroySource(it->second->ID());
+		}
+		pSources.clear();
+		// Close OpenAL
 		Yuni::Bind<bool()> callback;
 		callback.bind(&Private::Audio::OpenAL::close);
 		pAudioLoop.dispatch(callback);
 		pAudioLoop.stop();
+		pReady = false;
 	}
 
 	bool Manager::loadSoundWL()
@@ -68,6 +83,9 @@ namespace Audio
 			Private::Audio::AV::closeFile(file);
 			return false;
 		}
+
+		// Create the buffer, store it in the map
+		pBuffers[pFilePath] = *Private::Audio::OpenAL::createBuffers(1);
 
 		return true;
 	}

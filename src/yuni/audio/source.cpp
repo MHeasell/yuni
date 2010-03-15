@@ -7,6 +7,20 @@ namespace Yuni
 namespace Audio
 {
 
+	bool Source::playSound(unsigned int buffer)
+	{
+		if (!pReady)
+		{
+			if (!prepare())
+				return false;
+		}
+		Private::Audio::OpenAL::bindBufferToSource(buffer, pID);
+		bool started = Private::Audio::OpenAL::playSource(pID);
+		if (!started)
+			Private::Audio::OpenAL::unbindBufferFromSource(pID);
+		return false;
+	}
+
 // 	bool Source::play(Sound3D::Ptr sound)
 // 	{
 // 		if (!pReady)
@@ -48,6 +62,7 @@ namespace Audio
 		unsigned int source = Private::Audio::OpenAL::createSource(pPosition, pVelocity,
 			pDirection, 1.0f, pGain, true, pLoop);
 
+		pID = source;
 		pReady = (source > 0);
 		return pReady;
 	}

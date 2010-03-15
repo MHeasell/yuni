@@ -72,6 +72,10 @@ namespace Audio
 		//! Prepare the source for playing
 		bool prepare();
 
+		//! Play the sound
+		bool playSound(unsigned int buffer);
+
+
 		//@}
 
 
@@ -115,6 +119,11 @@ namespace Audio
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			pName = name;
+		}
+
+		unsigned int ID() const
+		{
+			return pID;
 		}
 
 		//@}

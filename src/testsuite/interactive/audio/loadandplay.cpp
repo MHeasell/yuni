@@ -13,20 +13,22 @@ class LoadAndPlay : public Application::Console
 {
 public:
 	LoadAndPlay(int argc, char* argv[])
-		:Application::Console(argc, argv)
+		:Application::Console(argc, argv), audio(Audio::Manager::Instance())
 	{
 		for (int i = 1; i < argc; ++i)
 			pFileNames.push_back(argv[i]);
+		if (!pFileNames.empty())
+			audio.start();
 	}
 
 	virtual ~LoadAndPlay()
 	{
+		if (!pFileNames.empty())
+			audio.stop();
 	}
 
 	virtual void onExecute()
 	{
-		Audio::Manager& audio = Audio::Manager::Instance();
-		audio.start();
 		audio.addSource("Source1", false);
 		for (String::Vector::const_iterator it = pFileNames.begin();
 			it != pFileNames.end(); ++it)
@@ -35,12 +37,12 @@ public:
 			audio.loadSound(*it);
 			audio.playSound("Source1", *it);
 		}
-		Yuni::Sleep(15);
-		audio.stop();
+		Yuni::Sleep(10);
 	}
 
 private:
 	String::Vector pFileNames;
+	Audio::Manager& audio;
 
 }; // class LoadAndPlay
 

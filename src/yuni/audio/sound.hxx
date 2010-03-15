@@ -15,14 +15,8 @@ namespace Audio
 
 	template<class AnyStringT>
 	inline ISound::ISound(const AnyStringT& fileName)
-		:pFile(NULL)
+		:pName(filename), pFile(NULL)
 	{
-		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
-
-		loadFromFileWL(Traits::CString<UType>::Buffer(fileName));
 	}
 
 
@@ -50,18 +44,6 @@ namespace Audio
 	inline bool ISound::operator ! () const
 	{
 		return (NULL == pFile);
-	}
-
-	template<class AnyStringT>
-	inline bool ISound::loadFromFile(const AnyStringT& fileName)
-	{
-		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, IString_InvalidTypeForBuffer);
-
-		ThreadingPolicy::MutexLocker locker(*this);
-		return loadFromFileWL(Traits::CString<UType>::Buffer(fileName));
 	}
 
 

@@ -177,8 +177,12 @@ namespace Audio
 				// Clear the input padding bits
 				// Decode some data, and check for errors
 				size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
-				while ((len = avcodec_decode_audio2(stream->CodecContext,
-													(int16_t*)stream->DecodedData, &size, (uint8_t*)stream->Data, insize)) == 0)
+				AVPacket pkt;
+				av_init_packet(&pkt);
+				pkt.data = (uint8_t*)stream->Data;
+				pkt.size = insize;
+				while ((len = avcodec_decode_audio3(stream->CodecContext,
+					(int16_t*)stream->DecodedData, &size, &pkt)) == 0)
 				{
 					if (size > 0)
 						break;
@@ -187,6 +191,8 @@ namespace Audio
 						break;
 					insize = stream->DataSize;
 					memset(&stream->Data[insize], 0, FF_INPUT_BUFFER_PADDING_SIZE);
+					pkt.data = (uint8_t*)stream->Data;
+					pkt.size = insize;
 				}
 
 				if (len < 0)
