@@ -30,6 +30,7 @@ namespace Audio
 	public:
 		//! \name Constructor
 		//@{
+
 		/*!
 		** \brief Empty constructor, use default values.
 		*/
@@ -40,39 +41,28 @@ namespace Audio
 
 		//! Destructor
 		virtual ~ISound() {}
+
 		//@}
 
-		//! \name Methods
-		//@{
-		virtual bool prepare() = 0;
-		virtual unsigned int buffer() const = 0;
-		//@}
 
 		//! \name Accessors
 		//@{
+
+		//!
 		String name() const;
 		template<class AnyStringT> void name(const AnyStringT& name);
 
-		//! Is the sound ready to play?
+		//! Is the sound ready to be played ?
 		bool valid() const;
-		//@}
 
-		/*!
-		** \brief Load the file
-		*/
-		template<class AnyStringT>
-		bool loadFromFile(const AnyStringT& fileName);
+		//@}
 
 		//! \name Operators
 		//@{
-		bool operator ! () const;
-		//@}
 
-	protected:
-		/*!
-		** \brief Load the file
-		*/
-		virtual bool loadFromFileWL(const char* fileName);
+		bool operator ! () const;
+
+		//@}
 
 	private:
 		//! Forbid default copy constructor
@@ -80,9 +70,11 @@ namespace Audio
 		//! Forbid default operator=
 		ISound& operator = (const ISound&);
 
+
 	protected:
 		//! String identifier for the sound
 		String pName;
+
 		//! A loaded AV file, NULL if not loaded
 		ThreadingPolicy::Volatile<Private::Audio::AudioFile*>::Type pFile;
 

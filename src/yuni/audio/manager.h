@@ -2,6 +2,7 @@
 #ifndef __YUNI_AUDIO_MANAGER_H__
 # define __YUNI_AUDIO_MANAGER_H__
 
+# include <map>
 # include "../core/point3d.h"
 # include "../core/vector3d.h"
 # include "../core/string.h"
@@ -26,11 +27,13 @@ namespace Audio
 	public:
 		typedef Policy::ObjectLevelLockable<Manager>  ThreadingPolicy;
 
+		typedef std::map<String, unsigned int> BufferMap;
+
 	public:
 		static Manager& Instance();
 
 	private:
-		Manager() {}
+		Manager(): pReady(false) {}
 		Manager(const Manager&);
 		Manager& operator = (const Manager&);
 
@@ -50,7 +53,7 @@ namespace Audio
 		** Position, speed and velocity default to (0,0,0)
 		*/
 		template<typename AnyStringT>
-		void addSource(const AnyStringT& sourceName, bool loop);
+		bool addSource(const AnyStringT& sourceName, bool loop);
 
 		/*!
 		** \brief Create a source with 3D position
@@ -58,23 +61,30 @@ namespace Audio
 		** Speed and velocity default to (0,0,0)
 		*/
 		template<typename AnyStringT>
-		void addSource(const AnyStringT& sourceName, const Gfx::Point3D<>& position,
+		bool addSource(const AnyStringT& sourceName, const Gfx::Point3D<>& position,
 			bool loop);
 
 		/*!
 		** \brief Constructor with position, velocity and direction
 		*/
 		template<typename AnyStringT>
-		void addSource(const AnyStringT& sourceName, const Gfx::Point3D<>& position,
+		bool addSource(const AnyStringT& sourceName, const Gfx::Point3D<>& position,
 			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction, bool loop);
 
 
 	private:
 		bool loadSoundWL();
 
+		bool playSoundWL();
+
+		unsigned int createSource();
+
 	private:
 		//! Singleton instance
 		static Manager* sInstance;
+
+		//! Has the manager been properly started ?
+		bool pReady;
 
 		//! Event loop for audio events
 		Loop pAudioLoop;
@@ -87,6 +97,9 @@ namespace Audio
 
 		//! Map of currently registered sources, with string tags as keys
 		Source::Map pSources;
+
+		//! Map of currently loaded buffers, with string tags as keys
+		BufferMap pBuffers;
 
 	}; // class Manager
 
