@@ -27,8 +27,8 @@ namespace EventLoop
 	** This class handles requests (from any thread or process) from a single
 	** thread. It is designed to run code that can not be thread-safe, like
 	** calls to OpenGL or OpenAL routines.
-	** If those requests must be ran from the main thread (e.g. OpenGL), the
-	** event loop must not be detached (see the template parameter 'DetechedT')
+	** If those requests must be run from the main thread (e.g. OpenGL), the
+	** event loop must not be detached (see the template parameter 'DetachedT')
 	** and the method 'start()' must be executed from the main thread.
 	**
 	** \code
@@ -146,7 +146,9 @@ namespace EventLoop
 
 	protected:
 		/*!
-		** \brief 
+		** \brief On loop event handler
+		**
+		** \warning Has to be redefined by children classes !
 		*/
 		static bool onLoop();
 
