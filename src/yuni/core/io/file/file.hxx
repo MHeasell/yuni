@@ -146,7 +146,7 @@ namespace File
 				if (f.opened())
 				{
 					out.resize(size);
-					if (size == f.read(out.data, size))
+					if (size == f.read(out))
 						return true;
 				}
 				return false;
