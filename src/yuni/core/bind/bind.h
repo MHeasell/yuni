@@ -82,10 +82,10 @@ namespace Yuni
 	** }
 	** \endcode
 	**
-	** This class is thread-safe, this is guaranteed by the use of smartptr.
+	** This class is thread-safe, this is guarantee by the use of smartptr.
 	**
 	** \note This class does not take care of deleted objects. It is the responsibility
-	** of the user to unbind the delegate before the linked object is deleted and/or
+	** to the user to unbind the delegate before the linked object is delete and/or
 	** to not invoke the delegate when the object does not exist.
 	**
 	** \note It is safe to provide a null pointer when binding the delegate
@@ -297,12 +297,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -607,12 +607,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -917,12 +917,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)() const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -1227,12 +1227,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -1537,12 +1537,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -1847,12 +1847,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -2158,12 +2158,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -2469,12 +2469,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -2780,12 +2780,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -3092,12 +3092,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -3404,12 +3404,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -3716,12 +3716,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -4029,12 +4029,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -4342,12 +4342,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -4655,12 +4655,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -4969,12 +4969,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -5283,12 +5283,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -5597,12 +5597,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -5912,12 +5912,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -6227,12 +6227,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -6542,12 +6542,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -6858,12 +6858,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -7174,12 +7174,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -7490,12 +7490,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -7807,12 +7807,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -8124,12 +8124,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -8441,12 +8441,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -8759,12 +8759,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -9077,12 +9077,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -9395,12 +9395,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -9714,12 +9714,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -10033,12 +10033,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -10352,12 +10352,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -10672,12 +10672,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -10992,12 +10992,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -11312,12 +11312,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -11633,12 +11633,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -11954,12 +11954,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -12275,12 +12275,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -12597,12 +12597,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -12919,12 +12919,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -13241,12 +13241,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -13564,12 +13564,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -13887,12 +13887,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -14210,12 +14210,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -14534,12 +14534,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -14858,12 +14858,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -15182,12 +15182,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -15507,12 +15507,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -15832,12 +15832,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
@@ -16157,12 +16157,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
