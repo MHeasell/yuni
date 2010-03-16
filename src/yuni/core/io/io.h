@@ -257,7 +257,8 @@ namespace IO
 	** \param      inLength Length of #in (optional, -1 for autodetection)
 	*/
 	template<class StringT, class AnyStringT>
-	void Normalize(StringT& out, const AnyStringT& in, unsigned int inLength = -1);
+	void Normalize(StringT& out, const AnyStringT& in,
+		unsigned int inLength = (unsigned int)-1);
 
 
 
