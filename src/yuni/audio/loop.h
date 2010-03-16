@@ -13,7 +13,8 @@ namespace Audio
 	/*!
 	** \brief The audio loop is where every audio event is run
 	*/
-	class Loop: public Core::EventLoop::IEventLoop<Loop, Flow::Continuous, Statistics::None, false>
+	class Loop: public Core::EventLoop::IEventLoop<Loop, Core::EventLoop::Flow::Continuous
+		, Core::EventLoop::Statistics::None, false>
 	{
 	public:
 		bool onLoop()
