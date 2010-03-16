@@ -17,6 +17,16 @@ namespace Audio
 		, Core::EventLoop::Statistics::None, false>
 	{
 	public:
+		//! The loop itself
+		typedef Core::EventLoop::IEventLoop<Loop,
+			Core::EventLoop::Flow::Continuous,  // The flow policy
+			Core::EventLoop::Statistics::None,  // The statistics policy
+			false>                              // Use a separate threads or not
+			LoopType; 
+
+		typedef LoopType::RequestType RequestType;
+
+	public:
 		bool onLoop()
 		{
 			return true;
