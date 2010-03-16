@@ -2011,7 +2011,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)()) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2067,7 +2067,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2123,7 +2123,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2179,7 +2179,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2235,7 +2235,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2291,7 +2291,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2347,7 +2347,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2403,7 +2403,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2459,7 +2459,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2515,7 +2515,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2571,7 +2571,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2627,7 +2627,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2683,7 +2683,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2739,7 +2739,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2795,7 +2795,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -2851,7 +2851,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -3859,7 +3859,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0)) const
+		virtual bool compareWithPointerToFunction(R (*)()) const
 		{
 			return false;
 		}
@@ -3919,7 +3919,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0)) const
 		{
 			return false;
 		}
@@ -3979,7 +3979,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1)) const
 		{
 			return false;
 		}
@@ -4039,7 +4039,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2)) const
 		{
 			return false;
 		}
@@ -4099,7 +4099,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3)) const
 		{
 			return false;
 		}
@@ -4159,7 +4159,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4)) const
 		{
 			return false;
 		}
@@ -4219,7 +4219,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5)) const
 		{
 			return false;
 		}
@@ -4279,7 +4279,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6)) const
 		{
 			return false;
 		}
@@ -4339,7 +4339,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7)) const
 		{
 			return false;
 		}
@@ -4399,7 +4399,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
 		{
 			return false;
 		}
@@ -4459,7 +4459,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
 		{
 			return false;
 		}
@@ -4519,7 +4519,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
 		{
 			return false;
 		}
@@ -4579,7 +4579,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
 		{
 			return false;
 		}
@@ -4639,7 +4639,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
 		{
 			return false;
 		}
@@ -4699,7 +4699,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
 		{
 			return false;
 		}
@@ -4759,7 +4759,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
 		{
 			return false;
 		}

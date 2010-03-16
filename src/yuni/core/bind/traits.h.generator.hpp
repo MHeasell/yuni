@@ -300,7 +300,7 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual bool compareWithPointerToFunction(R (*pointer)(<%=generator.list(i)%>)) const
+		virtual bool compareWithPointerToFunction(R (*pointer)(<%=generator.list(i-1)%>)) const
 		{
 			return (pPointer == pointer);
 		}
@@ -438,7 +438,7 @@ namespace BindImpl
 		}
 
 
-		virtual bool compareWithPointerToFunction(R (*)(<%=generator.list(i)%>)) const
+		virtual bool compareWithPointerToFunction(R (*)(<%=generator.list(i-1)%>)) const
 		{
 			return false;
 		}

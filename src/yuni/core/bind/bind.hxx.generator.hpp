@@ -127,7 +127,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(<%=generator.list(i)%>),
+	Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(<%=generator.list(i,"A", "", ", ")%>U),
 		typename Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);
@@ -140,7 +140,7 @@ namespace Yuni
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
 	inline void
-	Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(<%=generator.list(i)%>) const,
+	Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(<%=generator.list(i,"A", "", ", ")%>U) const,
 		typename Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::template WithUserData<U>::ParameterType userdata)
 	{
 		bind(SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP>::WeakPointer(c), member, userdata);

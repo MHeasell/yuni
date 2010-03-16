@@ -222,12 +222,12 @@ namespace Yuni
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(<%=generator.list(i)%>),
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(<%=generator.list(i,'A', "", ", ")%>U),
 			typename WithUserData<U>::ParameterType userdata);
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
 			template <class> class StorP, template <class> class ConsP>
-		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(<%=generator.list(i)%>) const,
+		void bind(const SmartPtr<C, OwspP,ChckP,ConvP,StorP,ConsP> c, R (C::*member)(<%=generator.list(i,'A', "", ", ")%>U) const,
 			typename WithUserData<U>::ParameterType userdata);
 
 
