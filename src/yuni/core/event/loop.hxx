@@ -182,7 +182,7 @@ namespace EventLoop
 		// inner mutex is locked
 		const RequestListType* requests;
 
-		// Locking and retrieve the request list
+		// Lock and retrieve the request list
 		// We will keep a pointer to the request list, and will create a new one
 		// to release the mutex as soon as possible, to allow other threads to
 		// dispatch new requests while the event loop is working.
