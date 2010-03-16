@@ -9,6 +9,7 @@ namespace Audio
 
 	bool Source::playSound(unsigned int buffer)
 	{
+		std::cout << "YESSSSSS ! " << buffer << std::endl;
 		if (!pReady)
 		{
 			if (!prepare())

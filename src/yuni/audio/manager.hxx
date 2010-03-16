@@ -27,14 +27,16 @@ namespace Audio
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pReady)
 			return false;
-		Yuni::Bind<bool()> callback;
 
 		// Here we would like to do as below: a template specialization to avoid the useless
 		// String constructor call when AnyStringT == String.
 		// However, it would require method template partial specialization :/
-// 		callback.bind(pSources[String(source)], &Source::playSound, pBuffers[sound]);
-// 		pAudioLoop.dispatch(callback);
-		pSources[String(source)]->playSound(pBuffers[String(sound)]);
+		Audio::Loop::RequestType callback;
+ 		callback.bind(pSources[String(source)], &Source::playSound, pBuffers[sound]);
+		// Dispatching...
+ 		pAudioLoop.dispatch(callback);
+
+		//pSources[String(source)]->playSound(pBuffers[String(sound)]);
 		return true;
 	}
 
