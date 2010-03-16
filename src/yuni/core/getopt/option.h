@@ -2,6 +2,7 @@
 # define __YUNI_CORE_GETOPT_OPTION_H__
 
 # include "../string.h"
+# include "../memorybuffer/istring.h"
 
 
 /*!
@@ -48,6 +49,17 @@ namespace GetOptImpl
 		}
 	};
 
+	template<unsigned int ChunkT, bool ExpT, bool ZeroT>
+	struct Value<CustomString<ChunkT, ExpT, ZeroT> >
+	{
+		static bool Add(CustomString<ChunkT,ExpT, ZeroT>& out, const String::Char* c_str, const String::size_type len)
+		{
+			out.assign(c_str, len);
+			return true;
+		}
+	};
+
+
 
 	template<class C, class Traits, class Alloc>
 	struct Value<std::basic_string<C, Traits, Alloc> >
@@ -85,6 +97,18 @@ namespace GetOptImpl
 			return true;
 		}
 	};
+
+
+	template<template<class, class> class L, unsigned int ChunkT, bool ExpT, bool ZeroT, class Alloc>
+	struct Value<L<CustomString<ChunkT,ExpT, ZeroT>, Alloc> >
+	{
+		static bool Add(L<CustomString<ChunkT,ExpT,ZeroT>, Alloc>& out, const String::Char* c_str, const String::size_type len)
+		{
+			out.push_back(CustomString<ChunkT,ExpT,ZeroT>(c_str, len));
+			return true;
+		}
+	};
+
 
 
 	template<template<class, class> class L, class C, class Traits, class AllocS, class Alloc>
@@ -181,6 +205,16 @@ namespace GetOptImpl
 	};
 
 
+	template<unsigned int ChunkT, bool ExpT, bool ZeroT>
+	struct Flag<CustomString<ChunkT,ExpT,ZeroT> >
+	{
+		static void Enable(CustomString<ChunkT,ExpT,ZeroT>& out)
+		{
+			out = "true";
+		}
+	};
+
+
 	template<class C, class Traits, class Alloc>
 	struct Flag<std::basic_string<C, Traits, Alloc> >
 	{
@@ -208,6 +242,16 @@ namespace GetOptImpl
 			out.push_back("true");
 		}
 	};
+
+	template<template<class, class> class L, unsigned int ChunkT, bool ExpT, bool ZeroT, class Alloc>
+	struct Flag<L<CustomString<ChunkT,ExpT,ZeroT>, Alloc> >
+	{
+		static void Enable(L<CustomString<ChunkT,ExpT,ZeroT>, Alloc>& out)
+		{
+			out.push_back("true");
+		}
+	};
+
 
 
 	template<template<class, class> class L, class C, class Traits, class AllocS, class Alloc>
