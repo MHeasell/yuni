@@ -122,7 +122,8 @@ namespace VersionInfo
 				pList[version] = info;
 
 				if (pOptDebug)
-					std::cout << "[debug]  - found installation `" << path << "` (" << version << ")" << std::endl; 
+					std::cout << "[debug]  - found installation `" << path
+						<< "` (" << version << ")" << std::endl;
 			}
 		}
 	}
@@ -277,8 +278,13 @@ namespace VersionInfo
 				Core::IO::Normalize(norm, value);
 				switch (compliant)
 				{
-					case gcc          : s.includes[String() << "-I" << norm] = true; break;
-					case visualstudio : s.includes[String() << "/I" << norm] = true; break;
+					case gcc          :
+						s.includes[String() << "-I\"" << norm << "\""] = true;
+						break;
+
+					case visualstudio :
+						s.includes[String() << "/I\"" << norm << "\""] = true;
+						break;
 				}
 				continue;
 			}
@@ -294,8 +300,12 @@ namespace VersionInfo
 				Core::IO::Normalize(norm, value);
 				switch (compliant)
 				{
-					case gcc          : s.libIncludes[String() << "-L" << norm] = true; break;
-					case visualstudio : s.libIncludes[String() << "/LIBPATH:" << norm] = true; break;
+					case gcc          :
+						s.libIncludes[String() << "-L\"" << norm << "\""] = true;
+						break;
+					case visualstudio :
+						s.libIncludes[String() << "/LIBPATH:\"" << norm << "\""] = true;
+						break;
 				}
 				continue;
 			}
