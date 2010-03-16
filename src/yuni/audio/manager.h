@@ -1,4 +1,3 @@
-
 #ifndef __YUNI_AUDIO_MANAGER_H__
 # define __YUNI_AUDIO_MANAGER_H__
 
@@ -9,6 +8,8 @@
 # include "../thread/policy.h"
 # include "source.h"
 # include "loop.h"
+
+
 
 namespace Yuni
 {

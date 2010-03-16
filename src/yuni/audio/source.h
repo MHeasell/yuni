@@ -39,49 +39,40 @@ namespace Audio
 		**
 		** Position, speed and direction default to (0,0,0)
 		*/
-		Source(bool loop = false): pLoop(loop), pReady(false)
-		{}
+		Source(bool loop = false);
 
 		/*!
 		** \brief Constructor with 3D position
 		**
 		** Speed and velocity default to (0,0,0)
 		*/
-		Source(const Gfx::Point3D<>& position, bool loop = false)
-			: pPosition(position), pLoop(loop), pReady(false)
-		{}
+		Source(const Gfx::Point3D<>& position, bool loop = false);
 
 		/*!
 		** \brief Constructor with position, velocity and direction
 		*/
 		Source(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
-			const Gfx::Vector3D<>& direction, bool loop = false)
-			: pPosition(position), pVelocity(velocity), pDirection(direction),
-			  pLoop(loop), pReady(false)
-		{}
+			const Gfx::Vector3D<>& direction, bool loop = false);
 
-		//! Destructor
+		/*!
+		** \brief Destructor
+		*/
 		~Source() {}
-
 		//@}
 
 
 		//! \name Methods
 		//@{
-
 		//! Prepare the source for playing
 		bool prepare();
 
 		//! Play the sound
 		bool playSound(unsigned int buffer);
-
-
 		//@}
 
 
 		//! \name Accessors
 		//@{
-
 		void position(const Gfx::Point3D<>& position)
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
@@ -110,22 +101,10 @@ namespace Audio
 			return pGain;
 		}
 
-		String name() const
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			return pName;
-		}
-		void name(const String& name)
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			pName = name;
-		}
+		String name() const;
+		template<class AnyStringT> void name(const AnyStringT& name);
 
-		unsigned int ID() const
-		{
-			return pID;
-		}
-
+		unsigned int id() const;
 		//@}
 
 
@@ -158,5 +137,7 @@ namespace Audio
 
 } // namespace Audio
 } // namespace Yuni
+
+# include "source.hxx"
 
 #endif // __YUNI_AUDIO_SOURCE_H__
