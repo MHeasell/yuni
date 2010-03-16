@@ -30,6 +30,7 @@ Set(SRC_AUDIO
 #		audio/music.cpp
 #		audio/playlist.h
 		audio/source.h
+		audio/source.hxx
 		audio/source.cpp
 		private/audio/openal.h
 		private/audio/openal.cpp
