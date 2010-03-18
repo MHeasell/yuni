@@ -1,10 +1,3 @@
-/*
- * WARNING: this file uses bare irrlicht calls for now, and until Application::Gfx3D and/or friends implements
- * methods to display something on the devices.
- *
- * This is mainly a sample to enable Loomchild to test his Polygonizers algorithms.
- *
- */
 #include <stdexcept>
 #include <vector>
 #include <yuni/yuni.h>
@@ -13,142 +6,68 @@
 #include <yuni/gfx/marchingcubes.h>
 #include <yuni/gfx/metaball.h>
 
-
-#include <irrlicht.h>
-
-
-
 using namespace Yuni;
 using namespace Yuni::Gfx;
-using namespace irr;
 
-/*
- * TODO: Remove this ASAP.
- */
-class IrrMetaballNode : public irr::scene::ISceneNode
+class MergingMetaballs : public Object3D
 {
 private:
-	//! Our vertices
-	std::vector<video::S3DVertex> pVertices;
-	//! Our indexes
-	std::vector<u16> pIndexes;
-	//! Our material
-	video::SMaterial pMaterial;
-	//! Our Bounding box.
-	core::aabbox3d<f32> pBox;
 	//! First metaball
 	MetaBall* pMetaball1;
 	//! Second metaball
 	MetaBall* pMetaball2;
 
-	const float MAX_DISTANCE;
+	//! Current distance between metaballs centers
+	float pDistance;
+	//! Current direction of the movement: true = closer, false = away
+	bool pDirection;
+
+	//! Maximum allowed distance between the centers of the 2 metaballs
+	static const float MAX_DISTANCE = 14.0f;
 
 public:
-	IrrMetaballNode(scene::ISceneNode* parent, scene::ISceneManager* mgr, s32 id, float &distance, bool& direction)
-		: scene::ISceneNode(parent, mgr, id), MAX_DISTANCE(14.0f)
+	MergingMetaballs(ObjectModel::Ptr model)
+		: Object3D(model), pDistance(MAX_DISTANCE), pDirection(true)
 	{
-		pMaterial.Wireframe = true;
-		pMaterial.Lighting = false;
+		updateMesh();
+	}
 
+	virtual void animate()
+	{
+		// Change direction if we are at maximum or minimum value
 		if (distance >= MAX_DISTANCE)
 			direction = true;
 		if (distance <= 0.0f)
 			direction = false;
-		distance += direction ? -0.5f : 0.5f;
-		pMetaball1 = new MetaBall(Point3D<float>(-distance / 2.0f, 0.0f, 0.0f), 0.2f);
-		pMetaball2 = new MetaBall(Point3D<float>(distance / 2.0f, 0.0f, 0.0f), 0.2f);
-		
-		UpdateMesh();
+		// Modify the distance to have the metaballs come closer or farther
+		pDistance += pDirection ? -0.5f : 0.5f;
+		updateMesh();
 	}
-
-
-    virtual void OnRegisterSceneNode()
-	{
-		if (IsVisible)
-			SceneManager->registerNodeForRendering(this);
-
-		ISceneNode::OnRegisterSceneNode();
-	}
-
-
-	virtual void render()
-	{
-		video::IVideoDriver* driver = SceneManager->getVideoDriver();
-
-		driver->setMaterial(pMaterial);
-		driver->setTransform(video::ETS_WORLD, AbsoluteTransformation);
-		driver->drawIndexedTriangleList(&(pVertices[0]), pVertices.size(), &(pIndexes[0]), pIndexes.size() / 3);
-	}
-
-	virtual const core::aabbox3d<f32>& getBoundingBox() const
-	{
-		return pBox;
-	}
-
-
-	virtual u32 getMaterialCount() const
-	{
-		return 1;
-	}
-
-	virtual video::SMaterial& getMaterial(u32)
-	{
-		return pMaterial;
-	}    
 
 private:
 
-	void UpdateMesh()
+	void updateMesh()
 	{
-		// We use the Metaball algorithm
+		// Actually create the metaballs
+		pMetaball1 = new MetaBall(Point3D<float>(-distance / 2.0f, 0.0f, 0.0f), 0.2f);
+		pMetaball2 = new MetaBall(Point3D<float>(distance / 2.0f, 0.0f, 0.0f), 0.2f);
+
+		// Create an empty implicit surface
 		ImplicitSurface surf;
 
-		// And the metaballs.
+		// Add the metaballs to the surface
 		surf.addSubSurface(pMetaball1);
 		surf.addSubSurface(pMetaball2);
 
-		// Create a mesh using marchingcubes with an isovalue of 0.05, and a 2.0 mesh size
+		// Create a mesh using marchingcubes with an isovalue of 0.05, and a 1.0 mesh size
 		Mesh* mesh2 = MarchingCubes(surf)(0.05f, 1.0f);
 		if (!mesh2)
 			throw std::runtime_error("Polygonization failed.");
 
-		const Mesh::TriangleList& tList = mesh2->triangles();
-
-		int vertexCount = 0;
-		pIndexes.clear();
-		pVertices.clear();
-		for (Mesh::TriangleList::const_iterator triangle = tList.begin(); triangle != tList.end(); ++triangle)
-		{
-			const Gfx::Vertex &tVertex1 = (*triangle)->vertex1();
-			video::S3DVertex vx1(tVertex1.position().x, tVertex1.position().y, tVertex1.position().z,
-				0, 0, 0, video::SColor(255,255,0,0), 0, 0);
-
-			const Gfx::Vertex &tVertex2 = (*triangle)->vertex2();
-			video::S3DVertex vx2(tVertex2.position().x, tVertex2.position().y, tVertex2.position().z,
-				0, 0, 0, video::SColor(255,0,255,0), 0, 0);
-
-			const Gfx::Vertex &tVertex3 = (*triangle)->vertex3();
-			video::S3DVertex vx3(tVertex3.position().x, tVertex3.position().y, tVertex3.position().z,
-				0, 0, 0, video::SColor(255,0,0,255), 0, 0);
-
-			pVertices.push_back(vx1);
-			if (vertexCount == 0)
-				pBox.reset(vx1.Pos);
-			else
-				pBox.addInternalPoint(vx1.Pos);
-			pIndexes.push_back(vertexCount);
-
-			pVertices.push_back(vx2);
-			pIndexes.push_back(vertexCount + 1);
-			pBox.addInternalPoint(vx2.Pos);
-
-			pVertices.push_back(vx3);
-			pIndexes.push_back(vertexCount + 2);
-			pBox.addInternalPoint(vx3.Pos);
-
-			vertexCount += 3;
-		}
-		delete mesh2;
+		// Create a skeleton that uses this mesh, translate it in Z
+		Skeleton* skel = new Skeleton(Mesh::Ptr(mesh), Vector3D<>(0.0f, 0.0f, -30.0f), Vector3D<>(0.0f, 0.0f, 0.0f));
+		// Set the skeleton in our ObjectModel
+		pModel->setSkeleton(Skeleton::Ptr(skel));
 	}
 };
 
@@ -165,99 +84,28 @@ public:
 
 	virtual ~MeshTestApplication()
 	{
-		// It is advised to disconnect all events at this stade
-		destroyingObserver();
+		// It is advised to disconnect all events at this stage
+		destroyBoundEvents();
 	}
 
 	void onFPSChanged(int fps)
 	{
 		// The FPS count has changed
 		// We will set the application title according the new value
-		this->title(String() << "Hello World ! - " << fps << " fps");
+		this->title(String() << "Marching cubes Merging metaballs - " << fps << " fps");
 	}
 };
 
 
 
-
-int main(int, char**)
+int main(int argc, char* argv[])
 {
-	{
-		/* Bare irrlicht calls. TODO: remove them ASAP. */
-		using namespace irr;
-
-		IrrlichtDevice *device =
-#ifdef YUNI_OS_MAC
-			createDevice(video::EDT_OPENGL, core::dimension2d<s32>(640, 480), 16,
-						 false, false, false, 0);
-#else
-			createDevice(video::EDT_DIRECT3D9, core::dimension2d<s32>(640, 480), 16,
-					 false, false, false, 0);
-#endif
-		if (!device)
-			return 1;
-
-		device->setWindowCaption(L"Yuni GFX Hello World!");
-		video::IVideoDriver* driver = device->getVideoDriver();
-		scene::ISceneManager* smgr = device->getSceneManager();
-		gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
-
-		guienv->addStaticText(L"Hello World! (i'm using irrlicht directly, it's bad.)",
-							  core::rect<s32>(10,10,260,22), true);
-
-		smgr->addCameraSceneNode(0, core::vector3df(0, -40, 0), core::vector3df(0,0,0));
-
-		u32 frames=0;
-		// Distance between the 2 metaballs
-		float distance = 0.0f;
-		// Direction of the metaballs movement: true means coming closer, false means away from each other
-		bool direction = false;
-
-		while (device->run())
-		{
-			driver->beginScene(true, true, video::SColor(0,0,0,0));
-
-			smgr->drawAll();
-			irr::scene::ISceneNode* root = smgr->getRootSceneNode();
-			if (root->getChildren().getSize() > 0)
-			{
-				irr::scene::ISceneNode* child = *(root->getChildren().begin());
-				root->removeChild(child);
-			}
-
-			// Create our very metaballs node
-			IrrMetaballNode *myNode = new IrrMetaballNode(smgr->getRootSceneNode(), smgr, 666, distance, direction);
-			myNode->drop();
-			myNode = 0; 
-
-
-			driver->endScene();
-			if (++frames==100)
-			{
-				core::stringw str = L"Irrlicht Engine [";
-				str += driver->getName();
-				str += L"] FPS: ";
-				str += (s32)driver->getFPS();
-
-				device->setWindowCaption(str.c_str());
-				frames=0;
-			}
-		}
-
-		device->drop();
-
-
-
-	}
-
+	MergingMetaballs* metaballsObj = new MergingMetaballs(new ObjectModel());
 
 	/*
-	 * Yuni main loop (disabled)
+	 * Yuni main loop
 	 */
-	/*
-	   MeshTestApplication app(argc, argv);
-	   app.execute();
-	   return app.exitCode();
-	 */
-	return 0;
+	MeshTestApplication app(argc, argv);
+	app.execute();
+	return app.exitCode();
 }

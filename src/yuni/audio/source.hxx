@@ -29,7 +29,7 @@ namespace Audio
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pName;
 	}
-	
+
 	template<class AnyStringT>
 	inline void Source::name(const AnyStringT& name)
 	{

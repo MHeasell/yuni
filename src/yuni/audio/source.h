@@ -46,13 +46,13 @@ namespace Audio
 		**
 		** Speed and velocity default to (0,0,0)
 		*/
-		Source(const Gfx::Point3D<>& position, bool loop = false);
+		Source(const Gfx::Point3D<>& position, bool loop);
 
 		/*!
 		** \brief Constructor with position, velocity and direction
 		*/
 		Source(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
-			const Gfx::Vector3D<>& direction, bool loop = false);
+			const Gfx::Vector3D<>& direction, bool loop);
 
 		/*!
 		** \brief Destructor

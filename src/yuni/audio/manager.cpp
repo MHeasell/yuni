@@ -40,7 +40,7 @@ namespace Audio
 		// Close OpenAL sources properly
 		for (Source::Map::iterator it = pSources.begin(); it != pSources.end(); ++it)
 		{
-			Private::Audio::OpenAL::destroySource(it->second->ID());
+			Private::Audio::OpenAL::destroySource(it->second->id());
 		}
 		pSources.clear();
 		// Close OpenAL
