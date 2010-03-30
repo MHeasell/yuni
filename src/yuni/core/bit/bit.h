@@ -7,19 +7,19 @@
 ** \brief Get if the Nth bit is set in a raw char* buffer
 */
 # define YUNI_BIT_GET(DATA,INDEX)   \
-	(((const char*)DATA)[INDEX >> 3] & (1 << (INDEX & 7)))
+	(((const char*)(DATA))[(INDEX) >> 3] & (1 << ((INDEX) & 7)))
 
 /*!
 ** \brief Set the Nth bit in a raw char* buffer
 */
 # define YUNI_BIT_SET(DATA,INDEX)  \
-	(((char*)DATA)[INDEX >> 3] |= (1 << (INDEX & 7)))
+	(((char*)(DATA))[(INDEX) >> 3] |= (1 << ((INDEX) & 7)))
 
 /*!
 ** \brief Unset the Nth bit in a raw char* buffer
 */
 # define YUNI_BIT_UNSET(DATA,INDEX)  \
-	(((char*)DATA)[INDEX >> 3] &= ~(1 << (INDEX & 7)))
+	(((char*)(DATA))[(INDEX) >> 3] &= ~(1 << ((INDEX) & 7)))
 
 
 
