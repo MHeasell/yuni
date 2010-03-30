@@ -681,9 +681,9 @@ namespace Yuni
 	private:
 		// our friends !
 		template<class, class, int> friend class Private::CustomStringImpl::From;
-		template<class, class> friend class Yuni::Core::Extension::CustomString::Append;
-		template<class, class> friend class Yuni::Core::Extension::CustomString::Assign;
-		template<class, class> friend class Yuni::Core::Extension::CustomString::Fill;
+		template<class, class> friend class Yuni::Extension::CustomString::Append;
+		template<class, class> friend class Yuni::Extension::CustomString::Assign;
+		template<class, class> friend class Yuni::Extension::CustomString::Fill;
 
 	}; // class CustomString
 

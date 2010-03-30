@@ -5,8 +5,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 namespace Extension
 {
 namespace CustomString
@@ -21,7 +19,7 @@ namespace CustomString
 			// By Default, we will clear the buffer and then append the new content
 			// Which is the standard behavior but may not the most efficient way
 			s.clear();
-			Yuni::Core::Extension::CustomString::Append<CustomStringT, C>::Do(s, rhs);
+			Yuni::Extension::CustomString::Append<CustomStringT, C>::Do(s, rhs);
 		}
 	};
 
@@ -166,7 +164,6 @@ namespace CustomString
 
 } // namespace CustomString
 } // namespace Extension
-} // namespace Core
 } // namespace Yuni
 
 #endif // __YUNI_CORE_MEMORY_BUFFER_TRAITS_ASSIGN_H__

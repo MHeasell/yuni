@@ -7,8 +7,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 namespace Extension
 {
 namespace CustomString
@@ -417,7 +415,6 @@ namespace CustomString
 
 } // namespace CustomString
 } // namespace Extension
-} // namespace Core
 } // namespace Yuni
 
 #endif // __YUNI_CORE_MEMORYBUFFER_ISTRING_TRAITS_INTO_H__
