@@ -1,7 +1,8 @@
-#ifndef __YUNI_CORE_MEMORY_BUFFER_ISTRING_HXX__
-# define __YUNI_CORE_MEMORY_BUFFER_ISTRING_HXX__
+#ifndef __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_HXX__
+# define __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_HXX__
 
-#include <ctype.h>
+# include <ctype.h>
+
 
 
 namespace Yuni
@@ -1220,4 +1221,4 @@ namespace Yuni
 
 } // namespace Yuni
 
-#endif // __YUNI_CORE_MEMORY_BUFFER_ISTRING_HXX__
+#endif // __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_HXX__

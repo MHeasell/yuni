@@ -8,7 +8,7 @@
 #else
 #include <sys/stat.h>
 #endif
-#include "../memorybuffer/istring.h"
+#include "../customstring.h"
 
 
 #ifndef S_ISDIR

@@ -178,16 +178,16 @@ source_group(Core\\LinkedList FILES ${SRC_CORE_SLIST})
 
 
 Set(SRC_CORE_STRING
-				core/memorybuffer/istring.h
-				core/memorybuffer/istring.hxx
-				core/memorybuffer/traits/append.h
-				core/memorybuffer/traits/assign.h
-				core/memorybuffer/traits/fill.h
-				core/memorybuffer/traits/integer.h
-				core/memorybuffer/traits/vnsprintf.h
-				core/memorybuffer/traits/traits.h
-				core/memorybuffer/traits/traits.hxx
-				core/memorybuffer/traits/into.h
+				core/customstring/customstring.h
+				core/customstring/customstring.hxx
+				core/customstring/traits/append.h
+				core/customstring/traits/assign.h
+				core/customstring/traits/fill.h
+				core/customstring/traits/integer.h
+				core/customstring/traits/vnsprintf.h
+				core/customstring/traits/traits.h
+				core/customstring/traits/traits.hxx
+				core/customstring/traits/into.h
 
 				core/string/string.h core/string/string.hxx
 				core/string/converters.from.hxx core/string/converters.to.hxx
