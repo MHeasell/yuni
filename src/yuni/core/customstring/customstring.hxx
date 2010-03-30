@@ -36,7 +36,7 @@ namespace Yuni
 		// Assert, if the length of the container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		Yuni::Core::Extension::CustomString::Assign<CustomStringType, UType>::Do(*this, rhs);
+		Yuni::Extension::CustomString::Assign<CustomStringType, UType>::Do(*this, rhs);
 	}
 
 
@@ -56,7 +56,7 @@ namespace Yuni
 		// The given type, without its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
 
-		Yuni::Core::Extension::CustomString::Assign<CustomString, UType>::Do(*this, u);
+		Yuni::Extension::CustomString::Assign<CustomString, UType>::Do(*this, u);
 		return *this;
 	}
 
@@ -67,7 +67,7 @@ namespace Yuni
 		// The given type, without its const identifier
 		typedef typename Static::Remove::Const<U>::Type UType;
 
-		Core::Extension::CustomString::Append<CustomString, UType>::Do(*this, u);
+		Extension::CustomString::Append<CustomString, UType>::Do(*this, u);
 	}
 
 
@@ -187,7 +187,7 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
 		if (AncestorType::size)
-			Yuni::Core::Extension::CustomString::Fill<CustomString, UType>::Do(AncestorType::data, AncestorType::size, pattern);
+			Yuni::Extension::CustomString::Fill<CustomString, UType>::Do(AncestorType::data, AncestorType::size, pattern);
 	}
 
 
@@ -413,7 +413,7 @@ namespace Yuni
 	inline U
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::to() const
 	{
-		return Yuni::Core::Extension::CustomString::Into<typename Static::Remove::Const<U>::Type>::Perform(*this);
+		return Yuni::Extension::CustomString::Into<typename Static::Remove::Const<U>::Type>::Perform(*this);
 	}
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
@@ -421,7 +421,7 @@ namespace Yuni
 	inline bool
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::to(U& out) const
 	{
-		return Yuni::Core::Extension::CustomString::Into<typename Static::Remove::Const<U>::Type>::Perform(*this, out);
+		return Yuni::Extension::CustomString::Into<typename Static::Remove::Const<U>::Type>::Perform(*this, out);
 	}
 
 
@@ -1081,7 +1081,7 @@ namespace Yuni
 	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator += (const U& rhs)
 	{
-		Core::Extension::CustomString::Append<CustomStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
+		Extension::CustomString::Append<CustomStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
 		return *this;
 	}
 
@@ -1091,7 +1091,7 @@ namespace Yuni
 	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator << (const U& rhs)
 	{
-		Core::Extension::CustomString::Append<CustomStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
+		Extension::CustomString::Append<CustomStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
 		return *this;
 	}
 
@@ -1100,7 +1100,7 @@ namespace Yuni
 	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator = (const CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>& rhs)
 	{
-		Yuni::Core::Extension::CustomString::Assign<CustomStringType, CustomStringType>::Do(*this, rhs);
+		Yuni::Extension::CustomString::Assign<CustomStringType, CustomStringType>::Do(*this, rhs);
 		return *this;
 	}
 
@@ -1110,7 +1110,7 @@ namespace Yuni
 	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator = (const U& rhs)
 	{
-		Yuni::Core::Extension::CustomString::Assign<CustomStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
+		Yuni::Extension::CustomString::Assign<CustomStringType, typename Static::Remove::Const<U>::Type>::Do(*this, rhs);
 		return *this;
 	}
 

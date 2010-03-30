@@ -13,8 +13,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 namespace Extension
 {
 namespace CustomString
@@ -187,7 +185,6 @@ namespace CustomString
 
 } // namespace CustomString
 } // namespace Extension
-} // namespace Core
 } // namespace Yuni
 
 #endif // __YUNI_CORE_MEMORY_BUFFER_TRAITS_APPEND_H__
