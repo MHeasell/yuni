@@ -2,7 +2,7 @@
 # define __YUNI_CORE_GETOPT_OPTION_H__
 
 # include "../string.h"
-# include "../memorybuffer/istring.h"
+# include "../customstring.h"
 
 
 /*!

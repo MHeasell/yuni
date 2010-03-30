@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_MEMORY_BUFFER_ISTRING_H__
-# define __YUNI_CORE_MEMORY_BUFFER_ISTRING_H__
+#ifndef __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_H__
+# define __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_H__
 
 # include "../../yuni.h"
 # include "../static/remove.h"
@@ -9,6 +9,9 @@
 
 # include <stdio.h>
 # include <stdarg.h>
+# include <iostream>
+# include <string>
+
 # include "traits/traits.h"
 # include "traits/append.h"
 # include "traits/assign.h"
@@ -16,13 +19,10 @@
 # include "traits/vnsprintf.h"
 # include "traits/into.h"
 
-# include <iostream>
-# include <string>
 
 
 namespace Yuni
 {
-
 
 	/*!
 	** \brief A dynamic/static memory buffer for POD types
@@ -693,7 +693,7 @@ namespace Yuni
 
 } // namespace Yuni
 
-# include "istring.hxx"
+# include "customstring.hxx"
 
 
 
@@ -828,4 +828,4 @@ operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const std::basic_st
 //@}
 
 
-#endif // __YUNI_CORE_MEMORY_BUFFER_ISTRING_H__
+#endif // __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_H__

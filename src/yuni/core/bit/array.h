@@ -2,7 +2,7 @@
 # define __YUNI_CORE_BIT_BIT_ARRAY_H__
 
 # include "../../yuni.h"
-# include "../memorybuffer/istring.h"
+# include "../customstring.h"
 # include "bit.h"
 # include <iostream>
 

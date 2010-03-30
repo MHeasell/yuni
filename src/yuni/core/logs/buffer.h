@@ -2,7 +2,7 @@
 # define __YUNI_CORE_LOGS_STREAM_H__
 
 # include "../../yuni.h"
-# include "../memorybuffer/istring.h"
+# include "../customstring.h"
 
 
 namespace Yuni

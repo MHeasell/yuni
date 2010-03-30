@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "uri.h"
 #include "../io/file.h"
-#include "../memorybuffer/istring.h"
+#include "../customstring.h"
 
 
 
