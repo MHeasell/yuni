@@ -712,37 +712,37 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::CustomString<Si
 template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
 inline bool operator == (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
-	return (rhs == u);
+	return (rhs.operator == (u));
 }
 
 template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
 inline bool operator != (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
-	return (rhs != u);
+	return (rhs.operator != (u));
 }
 
 template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
 inline bool operator < (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
-	return (rhs >= u);
+	return (rhs.operator >= (u));
 }
 
 template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
 inline bool operator > (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
-	return (rhs <= u);
+	return (rhs.operator <= (u));
 }
 
 template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
 inline bool operator <= (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
-	return (rhs > u);
+	return (rhs.operator > (u));
 }
 
 template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
 inline bool operator >= (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
-	return (rhs < u);
+	return (rhs.operator < (u));
 }
 
 
