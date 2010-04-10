@@ -117,6 +117,28 @@ namespace Bit
 		** \brief Get if the Ith bit is set
 		*/
 		bool get(unsigned int i) const;
+
+		/*!
+		** \brief Get if the Ith bit is set
+		**
+		** This routine is provided for STL compatibility.
+		*/
+		bool test(unsigned int i) const;
+
+		/*!
+		** \brief Test if any bit is set
+		*/
+		bool any() const;
+
+		/*!
+		** \brief Test if no bit is set
+		*/
+		bool none() const;
+
+		/*!
+		** \brief Test if all bit are set
+		*/
+		bool all() const;
 		//@}
 
 
@@ -148,6 +170,13 @@ namespace Bit
 
 		//! \name Lookup
 		//@{
+		/*!
+		** \brief Find the first bit set or unset from a given offset
+		**
+		** \param offset The offset where to start from
+		** \return The bit index. npos if not found
+		** \tparam ValueT True to find the first bit set, false for the first unset
+		*/
 		template<bool ValueT> unsigned int find(unsigned int offset = 0) const;
 		//@}
 
