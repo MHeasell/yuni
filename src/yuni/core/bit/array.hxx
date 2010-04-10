@@ -57,6 +57,12 @@ namespace Bit
 	}
 
 
+	inline bool Array::test(unsigned int i) const
+	{
+		return YUNI_BIT_GET(pBuffer.data(), i);
+	}
+
+
 	inline void Array::set(unsigned int i, bool value)
 	{
 		if (value)
@@ -205,7 +211,7 @@ namespace Bit
 	template<class U>
 	inline void Array::print(U& out) const
 	{
-		for (unsigned int i = 0; i < pCount; ++i)
+		for (unsigned int i = 0; i != pCount; ++i)
 			out.put((YUNI_BIT_GET(pBuffer.data(), i)) ? '1' : '0');
 	}
 

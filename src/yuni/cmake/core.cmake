@@ -321,7 +321,9 @@ source_group(Core\\Math FILES ${SRC_CORE_MATH})
 Set(SRC_CORE_BIT
 				core/bit.h
 				core/bit/bit.h core/bit/bit.hxx
-				core/bit/array.h core/bit/array.hxx
+				core/bit/array.h
+				core/bit/array.hxx
+				core/bit/array.cpp
 				)
 source_group("Core\\Bit" FILES ${SRC_CORE_BIT})
 
