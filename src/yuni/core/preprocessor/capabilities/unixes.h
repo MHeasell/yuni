@@ -1,6 +1,13 @@
 #ifndef __YUNI_CORE_PREPROCESSOR_CAPABILITIES_UNIXES_H__
 # define __YUNI_CORE_PREPROCESSOR_CAPABILITIES_UNIXES_H__
 
+/*
+** Information about Unix capabilities
+*/
+
+/* Unix compliant */
+# define YUNI_OS_UNIX
+
 
 # if defined(__HAIKU) || defined(__HAIKU__) || defined(_HAIKU)
 /* Haiku */
@@ -13,10 +20,6 @@
 #		define YUNI_OS_NAME "BeOS"
 #	endif
 # endif
-
-
-/* Unix compliant */
-# define YUNI_OS_UNIX
 
 
 
@@ -38,12 +41,6 @@
 #		define YUNI_OS_NAME "DragonFly"
 # 	endif
 
-/* FreeBSD */
-#	if defined(__FreeBSD__)
-#		define YUNI_OS_FREEBSD __FreeBSD__
-#		define YUNI_OS_NAME "FreeBSD"
-#	endif
-
 /* HP-UX */
 #	if defined(_hpux) || defined(__hpux) || defined(__hpux__)
 #		define YUNI_OS_HPUX
@@ -56,6 +53,12 @@
 #		define YUNI_OS_MACOS
 #		define YUNI_OS_DARWIN
 #		define YUNI_OS_NAME "MacOS"
+#	else
+/* FreeBSD */
+#		if defined(__FreeBSD__)
+#			define YUNI_OS_FREEBSD __FreeBSD__
+#			define YUNI_OS_NAME "FreeBSD"
+#		endif
 #	endif
 
 /* NetBSD */
