@@ -24,6 +24,19 @@ namespace Yuni
 
 
 	template<typename P>
+	inline unsigned int Event<P>::count() const
+	{
+		return AncestorType::pBindList.size();
+	}
+
+	template<typename P>
+	inline unsigned int Event<P>::size() const
+	{
+		return AncestorType::pBindList.size();
+	}
+
+
+	template<typename P>
 	void Event<P>::clearWL()
 	{
 		if (!AncestorType::pBindList.empty())
