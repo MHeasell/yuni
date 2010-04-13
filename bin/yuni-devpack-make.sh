@@ -169,8 +169,8 @@ checkDevPackFolderConsistency()
 	cmakelist="CMakeLists-${pkgName}-${pkgOS}-${pkgCompiler}-${pkgTarget}.cmake"
 	checkSingleFile "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/cmake/${cmakelist}"
 	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/${pkgCompiler}"
-	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/${pkgCompiler}/include"
-	checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/${pkgCompiler}/lib"
+	#checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/${pkgCompiler}/include"
+	#checkSingleFolder "${1}/${pkgVersion}/${pkgRevision}/${pkgArch}/${pkgCompiler}/lib"
 }
 
 
