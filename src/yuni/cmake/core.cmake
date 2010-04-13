@@ -151,6 +151,9 @@ Set(SRC_CORE_STATIC
 source_group(Core\\Static FILES ${SRC_CORE_STATIC})
 
 Set(SRC_CORE_TRAITS
+				core/traits/cstring.h
+				core/traits/extension/into-cstring.h
+				core/traits/extension/length.h
 				core/traits/length.h)
 source_group(Core\\Traits FILES ${SRC_CORE_TRAITS})
 

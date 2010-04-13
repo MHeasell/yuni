@@ -58,7 +58,7 @@ namespace IO
 		// Assert, if the length of the container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		const char* const p = Traits::CString<UType>::Buffer(filename);
+		const char* const p = Traits::CString<UType>::Perform(filename);
 		// Find the substring
 		if (Traits::Length<UType, unsigned int>::isFixed)
 		{
@@ -89,9 +89,9 @@ namespace IO
 
 		# ifdef YUNI_OS_WINDOWS
 		return Private::IO::FilesystemImpl::ExistsWindowsImpl(
-			Traits::CString<UType>::Buffer(filename), Traits::Length<UType,size_t>::Value(filename));
+			Traits::CString<UType>::Perform(filename), Traits::Length<UType,size_t>::Value(filename));
 		# else
-		return Private::IO::FilesystemImpl::ExistsUnixImpl(Traits::CString<UType>::Buffer(filename));
+		return Private::IO::FilesystemImpl::ExistsUnixImpl(Traits::CString<UType>::Perform(filename));
 		# endif
 	}
 
@@ -294,7 +294,7 @@ namespace IO
 		// From here, we have at least 2 chars
 
 		// From now on, we will work on a mere CString
-		const char* input = Traits::CString<UType>::Buffer(in);
+		const char* input = Traits::CString<UType>::Perform(in);
 
 		// Counting slashes
 		unsigned int slashes = 0;

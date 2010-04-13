@@ -20,7 +20,7 @@ namespace File
 	inline bool Size(const AnyStringT& filename, uint64& size)
 	{
 		typedef typename Static::Remove::Const<AnyStringT>::Type TypeT;
-		return Private::IO::FilesystemImpl::Size(Traits::CString<TypeT>::Buffer(filename), size);
+		return Private::IO::FilesystemImpl::Size(Traits::CString<TypeT>::Perform(filename), size);
 	}
 
 
@@ -32,7 +32,7 @@ namespace File
 		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CoreIOFileSize_InvalidTypeForBuffer);
 
-		return Private::IO::FilesystemImpl::Size(Traits::CString<UType>::Buffer(filename));
+		return Private::IO::FilesystemImpl::Size(Traits::CString<UType>::Perform(filename));
 	}
 
 
@@ -49,9 +49,9 @@ namespace File
 
 		# ifdef YUNI_OS_WINDOWS
 		return Private::IO::FilesystemImpl::IsFileWindowsImpl(
-			Traits::CString<UType>::Buffer(filename), Traits::Length<UType,size_t>::Value(filename));
+			Traits::CString<UType>::Perform(filename), Traits::Length<UType,size_t>::Value(filename));
 		# else
-		return Private::IO::FilesystemImpl::IsFileUnixImpl(Traits::CString<UType>::Buffer(filename));
+		return Private::IO::FilesystemImpl::IsFileUnixImpl(Traits::CString<UType>::Perform(filename));
 		# endif
 	}
 
@@ -111,8 +111,8 @@ namespace File
 		return (!overwrite && Core::IO::File::Exists(to))
 			? false
 			: Private::IO::FilesystemImpl::CopyFile(
-				Traits::CString<typename Static::Remove::Const<AnyStringT1>::Type>::Buffer(from),
-				Traits::CString<typename Static::Remove::Const<AnyStringT2>::Type>::Buffer(to));
+				Traits::CString<AnyStringT1>::Perform(from),
+				Traits::CString<AnyStringT2>::Perform(to));
 	}
 
 
