@@ -28,11 +28,11 @@ namespace File
 		{
 			# ifdef YUNI_OS_WINDOWS
 			pFd = OpenFileOnWindows(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(filename),
 				mode);
 			# else
 			pFd = ::fopen(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(filename),
 				OpenMode::ToCString(mode));
 			# endif
 		}
@@ -58,11 +58,11 @@ namespace File
 		{
 			# ifdef YUNI_OS_WINDOWS
 			pFd = OpenFileOnWindows(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(filename),
 				mode);
 			# else
 			pFd = ::fopen(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(filename),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(filename),
 				OpenMode::ToCString(mode));
 			# endif
 		}
@@ -165,7 +165,7 @@ namespace File
 		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			return ::fwrite(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(buffer),
 				1,
 				Traits::Length<typename Static::Remove::Const<U>::Type>::Value(buffer), pFd);
 		}
@@ -184,7 +184,7 @@ namespace File
 		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			return ::fwrite(
-				(const void*) Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(buffer),
+				(const void*) Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(buffer),
 				1, size, pFd);
 		}
 		else
@@ -222,7 +222,7 @@ namespace File
 		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			(void)::fwrite(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(u),
 				1,
 				Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
 		}
@@ -242,7 +242,7 @@ namespace File
 		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
 		{
 			(void)::fwrite(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Buffer(u),
+				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(u),
 				1,
 				Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
 		}
