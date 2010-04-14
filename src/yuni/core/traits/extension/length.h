@@ -2,6 +2,7 @@
 # define __YUNI_CORE_TRAITS_EXTENSION_INTO_LENGTH_H__
 
 # include <string>
+# include <cstring>
 
 
 namespace Yuni

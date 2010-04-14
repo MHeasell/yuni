@@ -13,13 +13,13 @@
 ** \brief Set the Nth bit in a raw char* buffer
 */
 # define YUNI_BIT_SET(DATA,INDEX)  \
-	(((char*)(DATA))[(INDEX) >> 3] |= (1 << ((INDEX) & 7)))
+	(((char*)(DATA))[(INDEX) >> 3] |= (char)(1 << ((INDEX) & 7)))
 
 /*!
 ** \brief Unset the Nth bit in a raw char* buffer
 */
 # define YUNI_BIT_UNSET(DATA,INDEX)  \
-	(((char*)(DATA))[(INDEX) >> 3] &= ~(1 << ((INDEX) & 7)))
+	(((char*)(DATA))[(INDEX) >> 3] &= (char)~(1 << ((INDEX) & 7)))
 
 
 
