@@ -159,22 +159,42 @@ namespace File
 	}
 
 
+	namespace
+	{
+		template<int IsStringT, class U>
+		struct StreamTraitsWrite
+		{
+			static size_t Perform(FILE* pFd, const U& u)
+			{
+				// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+				YUNI_STATIC_ASSERT(Traits::CString<U>::valid, Stream_InvalidTypeForBuffer);
+				// Assert, if the length of the container can not be found at compile time
+				YUNI_STATIC_ASSERT(Traits::Length<U>::valid,  Stream_InvalidTypeForBufferSize);
+
+				return ::fwrite(
+					Traits::CString<U>::Perform(u),  // raw data
+					1,                               // nb items
+					Traits::Length<U>::Value(u),     // length
+					pFd);                            // file descriptor
+			}
+		};
+
+		template<class U>
+		struct StreamTraitsWrite<0,U>
+		{
+			static size_t Perform(FILE* pFd, const U& u)
+			{
+				String translator;
+				translator << u;
+				return ::fwrite(translator.c_str(), 1, translator.size(), pFd);
+			}
+		};
+	}
+
 	template<class U>
 	inline size_t Stream::write(const U& buffer)
 	{
-		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
-		{
-			return ::fwrite(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(buffer),
-				1,
-				Traits::Length<typename Static::Remove::Const<U>::Type>::Value(buffer), pFd);
-		}
-		else
-		{
-			String translator;
-			translator += buffer;
-			return ::fwrite(translator.c_str(), 1, translator.size(), pFd);
-		}
+		return StreamTraitsWrite<Traits::CString<U>::valid, U>::Perform(pFd, buffer);
 	}
 
 
@@ -219,19 +239,7 @@ namespace File
 	template<class U>
 	inline Stream& Stream::operator += (const U& u)
 	{
-		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
-		{
-			(void)::fwrite(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(u),
-				1,
-				Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
-		}
-		else
-		{
-			String translator;
-			translator += u;
-			(void)::fwrite(translator.c_str(), 1, translator.size(), pFd);
-		}
+		write(u);
 		return *this;
 	}
 
@@ -239,19 +247,7 @@ namespace File
 	template<class U>
 	inline Stream& Stream::operator << (const U& u)
 	{
-		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
-		{
-			(void)::fwrite(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(u),
-				1,
-				Traits::Length<typename Static::Remove::Const<U>::Type>::Value(u), pFd);
-		}
-		else
-		{
-			String translator;
-			translator << u;
-			(void)::fwrite(translator.c_str(), 1, translator.size(), pFd);
-		}
+		write(u);
 		return *this;
 	}
 

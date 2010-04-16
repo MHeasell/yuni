@@ -13,7 +13,15 @@ namespace Extension
 	/*!
 	** \brief Extension: Convert any type into a mere C-String
 	*/
-	template<class C> struct IntoCString;
+	template<class C> struct IntoCString
+	{
+	public:
+		enum { valid = 0, converted = 0, zeroTerminated = 0, };
+
+	public:
+		template<class U> static const char* Perform(const U&) {return NULL;}
+
+	};
 
 } // namespace Extension
 } // namespace Yuni

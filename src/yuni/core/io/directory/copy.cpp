@@ -115,7 +115,7 @@ namespace Directory
 		{
 			// 'dst' does not exist yet
 			// We have to create it
-			if (!Private::Core::IO::Directory::UnixMake(dst))
+			if (!Private::Core::IO::Directory::UnixMake(dst, strlen(dst)))
 				return false;
 		}
 		else
@@ -124,7 +124,7 @@ namespace Directory
 			// We have to remove it first (if not a directory) then to recreate it
 			if (!S_ISDIR(sb.st_mode))
 			{
-				if (::remove(dst) || !Private::Core::IO::Directory::UnixMake(dst))
+				if (::remove(dst) || !Private::Core::IO::Directory::UnixMake(dst, strlen(dst)))
 					return false;
 			}
 		}

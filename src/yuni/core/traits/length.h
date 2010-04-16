@@ -13,7 +13,17 @@ namespace Extension
 	/*!
 	** \brief Extension: Get the length of the inner buffer
 	*/
-	template<class C, class SizeT> struct Length;
+	template<class C, class SizeT>
+	struct Length
+	{
+	public:
+		typedef SizeT SizeType;
+		enum { valid = 0, isFixed = 0, fixedLength = 0, };
+
+	public:
+		template<class U> static SizeT Value(const U&) {return 0;}
+	};
+
 
 } // namespace Extension
 } // namespace Yuni

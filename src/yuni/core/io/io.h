@@ -3,7 +3,6 @@
 
 # include "../../yuni.h"
 # include "../string.h"
-# include "directory.h"
 
 
 namespace Yuni
@@ -271,6 +270,7 @@ namespace IO
 } // namespace Core
 } // namespace Yuni
 
+# include "directory.h"
 # include "io.hxx"
 
 #endif // __YUNI_CORE_IO_IO_H__

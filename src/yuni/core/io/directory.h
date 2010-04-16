@@ -70,7 +70,8 @@ namespace Directory
 	** \param mode Access permissions (ignored on the MS Windows platforms)
 	** \return True if the operation succeeded, false otherwise
 	*/
-	template<class C> bool Make(const C& path, unsigned int mode = 0755);
+	template<class AnyStringT>
+	bool Make(const AnyStringT& path, unsigned int mode = 0755);
 	//@}
 
 
