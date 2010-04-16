@@ -29,12 +29,8 @@ namespace Yuni
 	template<class U>
 	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const U& rhs)
 	{
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<U>::valid, CustomString_InvalidTypeForBuffer);
-		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::Length<U>::valid,  CustomString_InvalidTypeForBufferSize);
-
-		Yuni::Extension::CustomString::Assign<CustomStringType, U>::Do(*this, rhs);
+		typedef typename Static::Remove::Const<U>::Type UType;
+		Yuni::Extension::CustomString::Assign<CustomStringType, UType>::Do(*this, rhs);
 	}
 
 
@@ -51,10 +47,8 @@ namespace Yuni
 	template<class U>
 	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assign(const U& u)
 	{
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<U>::valid, CustomString_InvalidTypeForBuffer);
-
-		Yuni::Extension::CustomString::Assign<CustomString, U>::Do(*this, u);
+		typedef typename Static::Remove::Const<U>::Type UType;
+		Yuni::Extension::CustomString::Assign<CustomString, UType>::Do(*this, u);
 		return *this;
 	}
 
@@ -62,10 +56,8 @@ namespace Yuni
 	template<class U>
 	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::append(const U& u)
 	{
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<U>::valid, CustomString_InvalidTypeForBuffer);
-
-		Extension::CustomString::Append<CustomString, U>::Do(*this, u);
+		typedef typename Static::Remove::Const<U>::Type UType;
+		Extension::CustomString::Append<CustomString, UType>::Do(*this, u);
 	}
 
 
@@ -230,15 +222,12 @@ namespace Yuni
 	inline bool
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::startsWith(const U& u) const
 	{
-		// The given type, without its const identifier
-		typedef typename Static::Remove::Const<U>::Type UType;
 		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::CString<U>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<U>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		return startsWith(Traits::CString<UType>::Perform(u),
-			Traits::Length<UType,Size>::Value(u));
+		return startsWith(Traits::CString<U>::Perform(u), Traits::Length<U,Size>::Value(u));
 	}
 
 
