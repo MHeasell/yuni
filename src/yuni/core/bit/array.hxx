@@ -28,20 +28,20 @@ namespace Bit
 
 	inline void Array::unset()
 	{
-		(void)::memset(pBuffer.data(), 0, (unsigned int)pBuffer.sizeInBytes());
+		(void)::memset(pBuffer.data(), 0, (size_t)pBuffer.sizeInBytes());
 	}
 
 
 
 	inline void Array::reset()
 	{
-		(void)::memset(pBuffer.data(), 0, (unsigned int)pBuffer.sizeInBytes());
+		(void)::memset(pBuffer.data(), 0, (size_t)pBuffer.sizeInBytes());
 	}
 
 
 	inline void Array::reset(bool value)
 	{
-		(void)::memset(pBuffer.data(), (value ? 0xFF : 0), (unsigned int)pBuffer.sizeInBytes());
+		(void)::memset(pBuffer.data(), (value ? 0xFF : 0), (size_t)pBuffer.sizeInBytes());
 	}
 
 
