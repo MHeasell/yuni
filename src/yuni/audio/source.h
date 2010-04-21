@@ -73,33 +73,17 @@ namespace Audio
 
 		//! \name Accessors
 		//@{
-		void position(const Gfx::Point3D<>& position)
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			pPosition = position;
-		}
-		Gfx::Point3D<> position() const
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			return pPosition;
-		}
+
+		void position(const Gfx::Point3D<>& position);
+		Gfx::Point3D<> position() const;
 
 		/*!
 		** \brief Set the volume modifier on the source
-		**
-		** 0.0f for no sound, 1.0f to keep sound as is, > 1.0f to amplify sound
+		** \param newGain 0.0f for no sound, 1.0f to keep sound as is, > 1.0f to amplify sound
 		*/
-		void gain(float newGain)
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			pGain = newGain;
-		}
+		void gain(float newGain);
 		//! Get the current volume modifier
-		float gain() const
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			return pGain;
-		}
+		float gain() const;
 
 		String name() const;
 		template<class AnyStringT> void name(const AnyStringT& name);
@@ -129,6 +113,8 @@ namespace Audio
 		float pGain;
 		//! Is the source ready for use?
 		bool pReady;
+		//! Is the source currently playing?
+		bool pPlaying;
 
 	}; // class Source
 

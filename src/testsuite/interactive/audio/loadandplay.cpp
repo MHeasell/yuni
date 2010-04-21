@@ -35,7 +35,6 @@ public:
 		for (String::Vector::const_iterator it = pFileNames.begin();
 			it != pFileNames.end(); ++it)
 		{
-			std::cout << "Loading file: \"" << (*it) << "\"" << std::endl;
 			audio.loadSound(*it);
 			audio.playSound("Source1", *it);
 		}

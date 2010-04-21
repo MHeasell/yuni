@@ -53,7 +53,6 @@ namespace Audio
 
 	bool Manager::loadSoundWL()
 	{
-		std::cout << "File Path: " << pFilePath << std::endl;
 		// Try to open the file
 		Private::Audio::AudioFile* file = Private::Audio::AV::OpenFile(pFilePath);
 		if (!file)

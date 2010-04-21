@@ -32,11 +32,11 @@ namespace Audio
 		// String constructor call when AnyStringT == String.
 		// However, it would require method template partial specialization :/
 		Audio::Loop::RequestType callback;
- 		//callback.bind(pSources[String(source)], &Source::playSound, pBuffers[sound]);
+ 		callback.bind(pSources[String(source)], &Source::playSound, pBuffers[sound]);
 		// Dispatching...
- 		//pAudioLoop.dispatch(callback);
+ 		pAudioLoop.dispatch(callback);
 
-		pSources[String(source)]->playSound(pBuffers[String(sound)]);
+		//pSources[String(source)]->playSound(pBuffers[String(sound)]);
 		return true;
 	}
 

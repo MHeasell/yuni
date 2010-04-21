@@ -4,6 +4,78 @@
 
 namespace Yuni
 {
+namespace Private
+{
+namespace Core
+{
+namespace EventLoop
+{
+
+	template<class EventLoopT>
+	class Thread : public Yuni::Thread::IThread
+	{
+	public:
+		//! The type of the calling event loop
+		typedef EventLoopT EventLoopType;
+
+	public:
+		Thread(EventLoopType& loop)
+			:pEventLoop(loop)
+		{
+		}
+
+		virtual ~Thread()
+		{
+			// Needed for code robustness and to prevent against corruption
+			// of the v-table
+			stop();
+		}
+
+	protected:
+		virtual bool onExecute()
+		{
+			// Starting an infinite loop
+			// We don't have to check for the thread termination, since a request
+			// will be dispatched especially for that. This request will return
+			// `false`, which will abort the loop.
+			pEventLoop.runInfiniteLoopWL();
+			return false;
+		}
+
+		virtual void onStop()
+		{
+			// Notifying the event loop that our work is done
+			typename EventLoopType::ThreadingPolicy::MutexLocker locker(pEventLoop);
+			pEventLoop.pIsRunning = false;
+		}
+
+		virtual void onKill()
+		{
+			// Notifying the event loop that our work is done
+			typename EventLoopType::ThreadingPolicy::MutexLocker locker(pEventLoop);
+			pEventLoop.pIsRunning = false;
+		}
+
+	private:
+		EventLoopType& pEventLoop;
+
+	}; // class Thread<>
+
+
+
+} // namespace EventLoop
+} // namespace Core
+} // namespace Private
+} // namespace Yuni
+
+
+
+
+
+
+
+namespace Yuni
+{
 namespace Core
 {
 namespace EventLoop
@@ -13,16 +85,22 @@ namespace EventLoop
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
 	inline IEventLoop<ParentT,FlowT,StatsT,DetachedT>::IEventLoop()
-		:pRequests(NULL), pIsRunning(false)
-	{}
-
+		:pHasRequests(0), pRequests(NULL), pIsRunning(false), pThread(NULL)
+	{
+		if (detached)
+			pThread = new Private::Core::EventLoop::Thread<EventLoopType>(*this);
+	}
 
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
 	IEventLoop<ParentT,FlowT,StatsT,DetachedT>::~IEventLoop()
 	{
-		if (pIsRunning)
-			stop();
+		// Stopping gracefully the loop if not already done
+		stop();
+		// Destroying the thread
+		if (DetachedT)
+			delete pThread;
+		// Destroying the request list
 		if (pRequests)
 			delete pRequests;
 	}
@@ -49,12 +127,21 @@ namespace EventLoop
 				delete pRequests;
 			pRequests = new RequestListType();
 		}
-		if (!detached)
+		if (detached)
+		{
+			// The loop is launched from another thread
+			pThread->start();
+		}
+		else
 		{
 			// Launching the event loop from the calling thread
 			this->runInfiniteLoopWL();
 			// Resetting internal status
-			pIsRunning = false;
+			{
+				typename ThreadingPolicy::MutexLocker locker(*this);
+				pIsRunning = false;
+				// unlocking the inner mutex
+			}
 		}
 	}
 
@@ -69,32 +156,51 @@ namespace EventLoop
 			// Aborting if the event loop is already stopped
 			if (!pIsRunning || !FlowPolicy::onStop())
 				return;
-			// Post a request that will fail to stop the event loop
+
+			// Posting a request that will fail (return false) in order to stop
+			// the event loop.
 			// The object is still locked and we directly inject the request into
 			// the request list.
 			RequestType request;
 			request.bind(this, &EventLoopType::requestStop);
 			pRequests->push_back(request);
+			// unlocking the inner mutex
 		}
+
 		// Informing the event loop that a new request is available
+		// We perform the reset after that the mutex has been unlocked to
+		// reduce lock contention.
 		pHasRequests = 1;
+
 
 		if (detached)
 		{
 			// The event loop is running is detached mode
 			// Waiting for the end of the execution of the external thread
+			assert(NULL != pThread && "Event loop: Invalid thread pointer");
+			pThread->stop(timeout);
 		}
 		else
 		{
 			// Trying to wait for the end of the event loop
-			// Spinning lock, since we don't have better ways here
+			// Spinning lock, since we don't have better ways here.
 			unsigned int elapsed = 0;
 			do
 			{
-				Yuni::SleepMilliSeconds(80u);
-				elapsed += 80;
+				// Checking for the thread termination
+				// This check is performed first. With luck the loop is already stopped.
+				{
+					typename ThreadingPolicy::MutexLocker locker(*this);
+					if (!pIsRunning)
+						break;
+					// unlocking the inner mutex
+				}
+
+				// Sleeping a bit...
+				Yuni::SleepMilliSeconds(80u); // 50ms
+				elapsed += 80u;
 			}
-			while (pIsRunning && elapsed < timeout);
+			while (elapsed < timeout);
 		}
 	}
 
@@ -106,13 +212,11 @@ namespace EventLoop
 		// Locking for inserting the new request
 		{
 			typename ThreadingPolicy::MutexLocker locker(*this);
-			std::cout << "Before dispatch" << std::endl;
 			// Flow
 			if (!FlowPolicy::onRequestPosted(request))
 				return;
 			// Inserting the new request
 			pRequests->push_back(request);
-			std::cout << "Dispatching" << std::endl;
 			// Statistics
 			StatisticsPolicy::onRequestPosted(request);
 		}
@@ -159,14 +263,11 @@ namespace EventLoop
 		// Performing requests, if any
 		if (pHasRequests)
 		{
-			std::cout << "Yes, has requests" << std::endl;
 			if (!performAllRequestsWL())
 			{
-				std::cout << "Failed request" << std::endl;
 				// At least one request has failed. Aborting
 				return false;
 			}
-			std::cout << "Request OK" << std::endl;
 		}
 		// Execute the parent loop
 		if (static_cast<ParentType*>(this)->onLoop())
@@ -240,7 +341,7 @@ namespace EventLoop
 		bool DetachedT>
 	bool IEventLoop<ParentT,FlowT,StatsT,DetachedT>::onLoop()
 	{
-		// The impossible has happened !
+		// The impossible happened !
 		YUNI_STATIC_ASSERT(false, IEventLoop_TheParentMustImplementTheMethod_onLoop);
 		return false;
 	}
