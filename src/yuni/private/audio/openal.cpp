@@ -8,8 +8,9 @@ namespace Private
 namespace Audio
 {
 
-	bool OpenAL::init()
+	bool OpenAL::Init()
 	{
+	  std::cout << "OpenAL::Init" << std::endl;
 		ALCdevice* device = alcOpenDevice(NULL);
 		if (!device)
 			return false;
@@ -22,7 +23,7 @@ namespace Audio
 		return true;
 	}
 
-	bool OpenAL::close()
+	bool OpenAL::Close()
 	{
 		ALCcontext* context = alcGetCurrentContext();
 		ALCdevice* device = alcGetContextsDevice(context);
@@ -32,7 +33,7 @@ namespace Audio
 		return true;
 	}
 
-	ALenum OpenAL::getFormat(unsigned int bits, unsigned int channels)
+	ALenum OpenAL::GetFormat(unsigned int bits, unsigned int channels)
 	{
 		switch (bits)
 		{
@@ -66,7 +67,7 @@ namespace Audio
 		return 0;
 	}
 
-	void OpenAL::setDistanceModel(DistanceModel model)
+	void OpenAL::SetDistanceModel(DistanceModel model)
 	{
 		ALenum modelName;
 		switch (model)
@@ -99,26 +100,26 @@ namespace Audio
 		alDistanceModel(modelName);
 	}
 
-	unsigned int* OpenAL::createBuffers(int nbBuffers)
+	unsigned int* OpenAL::CreateBuffers(int nbBuffers)
 	{
 		unsigned int* buffers = (unsigned int*)calloc(nbBuffers, sizeof(unsigned int));
 		alGenBuffers(nbBuffers, buffers);
 		return buffers;
 	}
 
-	void OpenAL::destroyBuffers(int nbBuffers, unsigned int* buffers)
+	void OpenAL::DestroyBuffers(int nbBuffers, unsigned int* buffers)
 	{
 		alDeleteBuffers(nbBuffers, buffers);
 	}
 
-	void OpenAL::setListener(float position[3], float velocity[3], float orientation[6])
+	void OpenAL::SetListener(float position[3], float velocity[3], float orientation[6])
 	{
 		alListenerfv(AL_POSITION, position);
 		alListenerfv(AL_VELOCITY, velocity);
 		alListenerfv(AL_ORIENTATION, orientation);
 	}
 
-	unsigned int OpenAL::createSource(Gfx::Point3D<> position, Gfx::Vector3D<> velocity,
+	unsigned int OpenAL::CreateSource(Gfx::Point3D<> position, Gfx::Vector3D<> velocity,
 		Gfx::Vector3D<> direction, float pitch, float gain, bool attenuate, bool loop)
 	{
 		unsigned int source;
@@ -126,17 +127,17 @@ namespace Audio
 		if (alGetError() != AL_NO_ERROR)
 			return 0;
 
-		moveSource(source, position, velocity, direction);
-		modifySource(source, pitch, gain, attenuate, loop);
+		MoveSource(source, position, velocity, direction);
+		ModifySource(source, pitch, gain, attenuate, loop);
 		return source;
 	}
 
-	void OpenAL::destroySource(unsigned int source)
+	void OpenAL::DestroySource(unsigned int source)
 	{
 		alDeleteSources(1, &source);
 	}
 
-	bool OpenAL::playSource(ALuint source)
+	bool OpenAL::PlaySource(ALuint source)
 	{
 		alSourcePlay(source);
 		if (alGetError() != AL_NO_ERROR)
@@ -144,7 +145,7 @@ namespace Audio
 		return true;
 	}
 
-	void OpenAL::modifySource(unsigned int source, float pitch, float gain,
+	void OpenAL::ModifySource(unsigned int source, float pitch, float gain,
 		bool attenuate, bool loop)
 	{
 		alSourcef(source, AL_PITCH, pitch);
@@ -155,7 +156,7 @@ namespace Audio
 			alSourcei(source, AL_ROLLOFF_FACTOR, 0);
 	}
 
-	void OpenAL::moveSource(unsigned int source, const Gfx::Point3D<>& position,
+	void OpenAL::MoveSource(unsigned int source, const Gfx::Point3D<>& position,
 		const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction)
 	{
 		// Uncomment this if you want the position / velocity / cone /
@@ -170,22 +171,22 @@ namespace Audio
 		alSourcefv(source, AL_DIRECTION, dir);
 	}
 
-	void OpenAL::bindBufferToSource(unsigned int buffer, unsigned int source)
+	void OpenAL::BindBufferToSource(unsigned int buffer, unsigned int source)
 	{
 		alSourcei(source, AL_BUFFER, (int)buffer);
 	}
 
-	void OpenAL::unbindBufferFromSource(unsigned int source)
+	void OpenAL::UnbindBufferFromSource(unsigned int source)
 	{
 		alSourcei(source, AL_BUFFER, 0);
 	}
 
-	void OpenAL::queueBufferToSource(unsigned int buffer, unsigned int source)
+	void OpenAL::QueueBufferToSource(unsigned int buffer, unsigned int source)
 	{
 		alSourceQueueBuffers(source, 1, &buffer);
 	}
 
-	unsigned int OpenAL::unqueueBufferFromSource(unsigned int source)
+	unsigned int OpenAL::UnqueueBufferFromSource(unsigned int source)
 	{
 		unsigned int buf;
 		alSourceUnqueueBuffers(source, 1, &buf);

@@ -22,9 +22,9 @@ namespace Audio
 	{
 		pAudioLoop.start();
 		Yuni::Bind<bool()> callback;
-		callback.bind(&Private::Audio::AV::init);
+		callback.bind(&Private::Audio::AV::Init);
 		pAudioLoop.dispatch(callback);
-		callback.bind(&Private::Audio::OpenAL::init);
+		callback.bind(&Private::Audio::OpenAL::Init);
 		pAudioLoop.dispatch(callback);
 		pReady = true;
 	}
@@ -34,18 +34,18 @@ namespace Audio
 		// Close OpenAL buffers properly
 		for (BufferMap::iterator it = pBuffers.begin(); it != pBuffers.end(); ++it)
 		{
-			Private::Audio::OpenAL::destroyBuffers(1, &(it->second));
+			Private::Audio::OpenAL::DestroyBuffers(1, &(it->second));
 		}
 		pBuffers.clear();
 		// Close OpenAL sources properly
 		for (Source::Map::iterator it = pSources.begin(); it != pSources.end(); ++it)
 		{
-			Private::Audio::OpenAL::destroySource(it->second->id());
+			Private::Audio::OpenAL::DestroySource(it->second->id());
 		}
 		pSources.clear();
 		// Close OpenAL
 		Yuni::Bind<bool()> callback;
-		callback.bind(&Private::Audio::OpenAL::close);
+		callback.bind(&Private::Audio::OpenAL::Close);
 		pAudioLoop.dispatch(callback);
 		pAudioLoop.stop();
 		pReady = false;
@@ -53,16 +53,17 @@ namespace Audio
 
 	bool Manager::loadSoundWL()
 	{
+		std::cout << "File Path: " << pFilePath << std::endl;
 		// Try to open the file
-		Private::Audio::AudioFile* file = Private::Audio::AV::openFile(pFilePath);
+		Private::Audio::AudioFile* file = Private::Audio::AV::OpenFile(pFilePath);
 		if (!file)
 			return false;
 
 		// Try to get an audio stream from it
-		Private::Audio::AudioStream* stream = Private::Audio::AV::getAudioStream(file, 0);
+		Private::Audio::AudioStream* stream = Private::Audio::AV::GetAudioStream(file, 0);
 		if (!stream)
 		{
-			Private::Audio::AV::closeFile(file);
+			Private::Audio::AV::CloseFile(file);
 			return false;
 		}
 
@@ -70,25 +71,27 @@ namespace Audio
 		int rate;
 		int channels;
 		int bits;
-		if (0 != Private::Audio::AV::getAudioInfo(stream, &rate, &channels, &bits))
+		if (0 != Private::Audio::AV::GetAudioInfo(stream, &rate, &channels, &bits))
 		{
-			Private::Audio::AV::closeFile(file);
+			Private::Audio::AV::CloseFile(file);
 			return false;
 		}
 
 		// Check the format
-		ALenum format = Private::Audio::OpenAL::getFormat(bits, channels);
+		const ALenum format = Private::Audio::OpenAL::GetFormat(bits, channels);
 		if (0 == format)
 		{
-			Private::Audio::AV::closeFile(file);
+			Private::Audio::AV::CloseFile(file);
 			return false;
 		}
 
 		// Create the buffer, store it in the map
-		pBuffers[pFilePath] = *Private::Audio::OpenAL::createBuffers(1);
+		pBuffers[pFilePath] = *Private::Audio::OpenAL::CreateBuffers(1);
 
 		return true;
 	}
+
+
 
 } // namespace Audio
 } // namespace Yuni

@@ -10,8 +10,67 @@ namespace Private
 namespace Audio
 {
 
-	bool AV::init()
+	namespace // anonymous
 	{
+
+		/*!
+		** \brief Get the next packet of data
+		**
+		** Used by get*Data to search for more compressed data, and buffer it in the
+		** correct stream. It won't buffer data for streams that the app doesn't have a
+		** handle for.
+		*/
+		void GetNextPacket(AudioFile* file, int streamidx)
+		{
+			AVPacket packet;
+			while (av_read_frame(file->FormatContext, &packet) >= 0)
+			{
+				AudioStream** iter = file->Streams;
+				// Check each stream the user has a handle for, looking for the one
+				// this packet belongs to
+				for (size_t i = 0; i < file->StreamsSize; ++i, ++iter)
+				{
+					if ((*iter)->StreamIdx == packet.stream_index)
+					{
+						size_t idx = (*iter)->DataSize;
+
+						// Found the stream. Grow the input data buffer as needed to
+						// hold the new packet's data. Additionally, some ffmpeg codecs
+						// need some padding so they don't overread the allocated
+						// buffer
+						if (idx + packet.size > (*iter)->DataSizeMax)
+						{
+							char* temp = (char*)realloc((*iter)->Data, idx + packet.size +
+														FF_INPUT_BUFFER_PADDING_SIZE);
+							if (!temp)
+								break;
+							(*iter)->Data = temp;
+							(*iter)->DataSizeMax = idx + packet.size;
+						}
+
+						// Copy the packet and free it
+						memcpy(&(*iter)->Data[idx], packet.data, packet.size);
+						(*iter)->DataSize += packet.size;
+
+						// Return if this stream is what we needed a packet for
+						if (streamidx == (*iter)->StreamIdx)
+						{
+							av_free_packet(&packet);
+							return;
+						}
+						break;
+					}
+				}
+				// Free the packet and look for another
+				av_free_packet(&packet);
+			}
+		}
+
+	} // namespace anonymous
+
+	bool AV::Init()
+	{
+	  std::cout << "AV::Init" << std::endl;
 		av_register_all();
  		// Silence warning output from the lib
 		av_log_set_level(AV_LOG_ERROR);
@@ -19,8 +78,9 @@ namespace Audio
 	}
 
 
-	void AV::closeFile(AudioFile*& file)
+	void AV::CloseFile(AudioFile* file)
 	{
+	  std::cout << "AV::CloseFile" << std::endl;
 		if (!file)
 			return;
 
@@ -35,11 +95,10 @@ namespace Audio
 
 		av_close_input_file(file->FormatContext);
 		free(file);
-		file = NULL;
 	}
 
 
-	AudioStream* AV::getAudioStream(AudioFile* file, int streamnum)
+	AudioStream* AV::GetAudioStream(AudioFile* file, int streamnum)
 	{
 		if (!file)
 			return NULL;
@@ -109,7 +168,7 @@ namespace Audio
 	}
 
 
-	int AV::getAudioInfo(AudioStream* stream, int *rate, int *channels, int *bits)
+	int AV::GetAudioInfo(AudioStream* stream, int *rate, int *channels, int *bits)
 	{
 		if (!stream || stream->CodecContext->codec_type != CODEC_TYPE_AUDIO)
 			return 1;
@@ -125,7 +184,7 @@ namespace Audio
 	}
 
 
-	int AV::getAudioData(AudioStream* stream, void *data, int length)
+	int AV::GetAudioData(AudioStream* stream, void *data, int length)
 	{
 		int dec = 0;
 
@@ -166,7 +225,7 @@ namespace Audio
 				insize = stream->DataSize;
 				if (0 == insize)
 				{
-					getNextPacket(stream->parent, stream->StreamIdx);
+					GetNextPacket(stream->parent, stream->StreamIdx);
 					// If there's no more input data, break and return what we have
 					if (insize == stream->DataSize)
 						break;
@@ -186,7 +245,7 @@ namespace Audio
 				{
 					if (size > 0)
 						break;
-					getNextPacket(stream->parent, stream->StreamIdx);
+					GetNextPacket(stream->parent, stream->StreamIdx);
 					if (insize == stream->DataSize)
 						break;
 					insize = stream->DataSize;
@@ -217,51 +276,7 @@ namespace Audio
 	}
 
 
-	void AV::getNextPacket(AudioFile* file, int streamidx)
-	{
-		AVPacket packet;
-		while (av_read_frame(file->FormatContext, &packet) >= 0)
-		{
-			AudioStream** iter = file->Streams;
-			// Check each stream the user has a handle for, looking for the one
-			// this packet belongs to
-			for (size_t i = 0; i < file->StreamsSize; ++i, ++iter)
-			{
-				if ((*iter)->StreamIdx == packet.stream_index)
-				{
-					size_t idx = (*iter)->DataSize;
 
-					// Found the stream. Grow the input data buffer as needed to
-					// hold the new packet's data. Additionally, some ffmpeg codecs
-					// need some padding so they don't overread the allocated
-					// buffer
-					if (idx + packet.size > (*iter)->DataSizeMax)
-					{
-						char* temp = (char*)realloc((*iter)->Data, idx + packet.size +
-							FF_INPUT_BUFFER_PADDING_SIZE);
-						if (!temp)
-							break;
-						(*iter)->Data = temp;
-						(*iter)->DataSizeMax = idx + packet.size;
-					}
-
-					// Copy the packet and free it
-					memcpy(&(*iter)->Data[idx], packet.data, packet.size);
-					(*iter)->DataSize += packet.size;
-
-					// Return if this stream is what we needed a packet for
-					if (streamidx == (*iter)->StreamIdx)
-					{
-						av_free_packet(&packet);
-						return;
-					}
-					break;
-				}
-			}
-			// Free the packet and look for another
-			av_free_packet(&packet);
-		}
-	}
 
 } // namespace Audio
 } // namespace Private

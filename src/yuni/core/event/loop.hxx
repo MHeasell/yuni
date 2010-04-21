@@ -106,11 +106,13 @@ namespace EventLoop
 		// Locking for inserting the new request
 		{
 			typename ThreadingPolicy::MutexLocker locker(*this);
+			std::cout << "Before dispatch" << std::endl;
 			// Flow
 			if (!FlowPolicy::onRequestPosted(request))
 				return;
 			// Inserting the new request
 			pRequests->push_back(request);
+			std::cout << "Dispatching" << std::endl;
 			// Statistics
 			StatisticsPolicy::onRequestPosted(request);
 		}
@@ -157,11 +159,14 @@ namespace EventLoop
 		// Performing requests, if any
 		if (pHasRequests)
 		{
+			std::cout << "Yes, has requests" << std::endl;
 			if (!performAllRequestsWL())
 			{
+				std::cout << "Failed request" << std::endl;
 				// At least one request has failed. Aborting
 				return false;
 			}
+			std::cout << "Request OK" << std::endl;
 		}
 		// Execute the parent loop
 		if (static_cast<ParentType*>(this)->onLoop())

@@ -16,7 +16,9 @@ public:
 		:Application::Console(argc, argv), audio(Audio::Manager::Instance())
 	{
 		for (int i = 1; i < argc; ++i)
+		{
 			pFileNames.push_back(argv[i]);
+		}
 		if (!pFileNames.empty())
 			audio.start();
 	}
