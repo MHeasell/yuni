@@ -1,6 +1,8 @@
 
 Message(STATUS ":: [Module] Audio")
 
+FIND_PACKAGE(zlib)
+FIND_PACKAGE(BZip2)
 
 LIBYUNI_CONFIG_LIB("audio"      "yuni-static-audio-core")
 
