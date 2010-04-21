@@ -8,20 +8,46 @@ namespace Audio
 {
 
 	inline Source::Source(bool loop)
-		: pLoop(loop), pReady(false)
+		: pLoop(loop), pReady(false), pPlaying(false)
 	{}
 
 
 	inline Source::Source(const Gfx::Point3D<>& position, bool loop)
-		: pPosition(position), pLoop(loop), pReady(false)
+		: pPosition(position), pLoop(loop), pReady(false), pPlaying(false)
 	{}
 
 
 	inline Source::Source(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
 		const Gfx::Vector3D<>& direction, bool loop = false)
 		:pPosition(position), pVelocity(velocity), pDirection(direction),
-		 pLoop(loop), pReady(false)
+		 pLoop(loop), pReady(false), pPlaying(false)
 	{}
+
+
+	inline void Source::position(const Gfx::Point3D<>& position)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		pPosition = position;
+	}
+
+	inline Gfx::Point3D<> Source::position() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pPosition;
+	}
+
+
+	inline void Source::gain(float newGain)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		pGain = newGain;
+	}
+
+	inline float Source::gain() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pGain;
+	}
 
 
 	inline String Source::name() const

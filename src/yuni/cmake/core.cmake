@@ -286,6 +286,7 @@ Set(SRC_CORE_EVENT
 
 				# Event loop
 				core/event/loop.h core/event/loop.hxx
+				core/event/loop.fwd.h
 				core/event/flow
 				core/event/flow/continuous.h
 				core/event/statistics

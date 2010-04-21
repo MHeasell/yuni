@@ -12,18 +12,41 @@ namespace Audio
 
 	bool Source::playSound(unsigned int buffer)
 	{
-		std::cout << "YESSSSSS ! " << buffer << std::endl;
 		if (!pReady)
 		{
 			if (!prepare())
 				return false;
 		}
 		Private::Audio::OpenAL::BindBufferToSource(buffer, pID);
-		bool started = Private::Audio::OpenAL::PlaySource(pID);
-		if (!started)
+// 		for (unsigned int i = 0; i < NUM_BUFFERS; ++i)
+// 		{
+// 			// Make sure we get some data to give to the buffer
+// 			int count = AV::GetAudioData(stream, dataBuffer, BUFFER_SIZE);
+// 			if (count <= 0)
+// 				break;
+
+// 			// Buffer the data with OpenAL
+// 			alBufferData(buffers[i], format, dataBuffer, count, rate);
+// 			// Queue the buffer onto the source
+// 			alSourceQueueBuffers(source, 1, &buffers[i]);
+// 		}
+
+		pPlaying = Private::Audio::OpenAL::PlaySource(pID);
+		if (!pPlaying)
+		{
+			std::cerr << "Source " << pID << " failed playing !" << std::endl;
 			Private::Audio::OpenAL::UnbindBufferFromSource(pID);
-		return false;
+			return false;
+		}
+		return true;
 	}
+
+// 	bool Source::updatePlaying()
+// 	{
+// 		if (!pPlaying)
+// 			return false;
+// 		return pPlaying;
+// 	}
 
 // 	bool Source::play(Sound3D::Ptr sound)
 // 	{

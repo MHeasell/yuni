@@ -11,6 +11,14 @@ LIBYUNI_CONFIG_DEPENDENCY("audio" "gfx") # gfx-core is required
 # LIBYUNI_CONFIG_LIB("audio"  "yuni-static-device-audio")
 
 
+#
+# Windows-specific
+#
+IF (WIN32 OR WIN64)
+	LIBYUNI_CONFIG_LIB_RAW_COMMAND("audio" "-lws2_32")
+ENDIF (WIN32 OR WIN64)
+
+
 Set(SRC_AUDIO
 #		audio/sound.h
 #		audio/sound.hxx

@@ -10,7 +10,7 @@ namespace Audio
 
 	bool OpenAL::Init()
 	{
-	  std::cout << "OpenAL::Init" << std::endl;
+		std::cout << "OpenAL::Init" << std::endl;
 		ALCdevice* device = alcOpenDevice(NULL);
 		if (!device)
 			return false;
@@ -18,6 +18,15 @@ namespace Audio
 		if (!context)
 			return false;
 		alcMakeContextCurrent(context);
+
+		// Set the listener at (0,0,0)
+		ALfloat listenerPos[3] = {0.0,0.0,0.0};
+		// Set the listener's velocity to 0
+		ALfloat listenerVel[3] = {0.0,0.0,0.0};
+		// Listener is oriented towards the screen (-Z), with the Up along Y
+		ALfloat listenerOri[6] = {0.0,0.0,-1.0, 0.0,1.0,0.0};
+		SetListener(listenerPos, listenerVel, listenerOri);
+
 		// Clear errors
 		alGetError();
 		return true;
@@ -127,6 +136,7 @@ namespace Audio
 		if (alGetError() != AL_NO_ERROR)
 			return 0;
 
+		UnbindBufferFromSource(source);
 		MoveSource(source, position, velocity, direction);
 		ModifySource(source, pitch, gain, attenuate, loop);
 		return source;
@@ -139,10 +149,9 @@ namespace Audio
 
 	bool OpenAL::PlaySource(ALuint source)
 	{
+		alSourceRewind(source);
 		alSourcePlay(source);
-		if (alGetError() != AL_NO_ERROR)
-			return false;
-		return true;
+		return alGetError() != AL_NO_ERROR;
 	}
 
 	void OpenAL::ModifySource(unsigned int source, float pitch, float gain,

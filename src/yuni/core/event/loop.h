@@ -11,6 +11,8 @@
 # include "../static/assert.h"
 # include "../static/inherit.h"
 # include <assert.h>
+# include "../../thread/thread.h"
+# include "loop.fwd.h"
 
 
 
@@ -31,16 +33,14 @@ namespace EventLoop
 	** event loop must not be detached (see the template parameter 'DetachedT')
 	** and the method 'start()' must be executed from the main thread.
 	**
+	** Here is a sample to create a minimalist event loop
 	** \code
-	** class MyEventLoop : public Core::IEventLoop<MyEventLoop>
+	** class MyEventLoop : public Core::EventLoop::IEventLoop<MyEventLoop>
 	** {
 	** public:
-	** 	MyEventLoop()
-	** 	{
-	** 	}
-	**
 	** 	bool onLoop()
 	** 	{
+	** 		std::cout << "loop !\n";
 	** 	}
 	** };
 	** \endcode
@@ -55,10 +55,10 @@ namespace EventLoop
 	**   In this case, you _have_ to take care about blocking system calls that
 	**   would prevent the loop to stop.
 	*/
-	template<class ParentT,                                      // The parent class (CRTP)
-		template<class> class FlowT = Flow::Continuous,          // The flow policy
-		template<class> class StatsT = Statistics::None,    // The statistics policy
-		bool DetachedT = true                                    // Use a separate thread or not
+	template<class ParentT,                               // The parent class (CRTP)
+		template<class> class FlowT  = Flow::Continuous,  // The flow policy
+		template<class> class StatsT = Statistics::None,  // The statistics policy
+		bool DetachedT = true                             // Use a separate thread or not
 		>
 	class IEventLoop
 		:public Policy::ObjectLevelLockableNotRecursive<IEventLoop<ParentT,FlowT,StatsT,DetachedT> >
@@ -144,11 +144,12 @@ namespace EventLoop
 		IEventLoop& operator << (const RequestType& request);
 		//@}
 
-	protected:
+	public:
 		/*!
 		** \brief On loop event handler
 		**
 		** \warning Has to be redefined by children classes !
+		** \return False to stop the loop
 		*/
 		static bool onLoop();
 
@@ -177,9 +178,12 @@ namespace EventLoop
 		RequestListType* pRequests;
 		//! True if the event loop is running
 		bool pIsRunning;
+		//! External thread when ran in detached mode
+		Thread::IThread* pThread;
 
 		// Our friends
 		friend class FlowT<EventLoopType>;
+		template<class EventLoopT> friend class Yuni::Private::Core::EventLoop::Thread;
 
 	}; // class IEventLoop<>
 
