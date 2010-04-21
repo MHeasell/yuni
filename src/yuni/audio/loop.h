@@ -20,7 +20,7 @@ namespace Audio
 		typedef Core::EventLoop::IEventLoop<Loop,
 			Core::EventLoop::Flow::Continuous,  // The flow policy
 			Core::EventLoop::Statistics::None,  // The statistics policy
-			false>                              // Use a separate threads or not
+			true>                               // Use a separate thread or not
 			LoopType;
 
 		typedef LoopType::RequestType RequestType;
