@@ -102,8 +102,8 @@ ENDIF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD}" STREQUAL "")
 
 
 IF(APPLE)
-#	Message(STATUS "Enabled universal binaries (i386, x86_64)")
-#	Set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
+	Message(STATUS "Enabled universal binaries (i386, x86_64)")
+	Set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
 ENDIF(APPLE)
 
 
