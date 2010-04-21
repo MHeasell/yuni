@@ -1529,5 +1529,7 @@ inline Yuni::String operator + (const Yuni::StringBase<C1,Chunk1>& rhs, const Yu
 //@}
 
 
+# include "../customstring.h"
+
 
 #endif // __YUNI_CORE_STRING_STRING_H__

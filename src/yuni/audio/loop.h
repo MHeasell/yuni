@@ -1,4 +1,3 @@
-
 #ifndef __YUNI_AUDIO_LOOP_H__
 # define __YUNI_AUDIO_LOOP_H__
 
@@ -14,7 +13,7 @@ namespace Audio
 	** \brief The audio loop is where every audio event is run
 	*/
 	class Loop: public Core::EventLoop::IEventLoop<Loop, Core::EventLoop::Flow::Continuous
-		, Core::EventLoop::Statistics::None, false>
+		, Core::EventLoop::Statistics::None, true>
 	{
 	public:
 		//! The loop itself
@@ -22,15 +21,12 @@ namespace Audio
 			Core::EventLoop::Flow::Continuous,  // The flow policy
 			Core::EventLoop::Statistics::None,  // The statistics policy
 			false>                              // Use a separate threads or not
-			LoopType; 
+			LoopType;
 
 		typedef LoopType::RequestType RequestType;
 
 	public:
-		bool onLoop()
-		{
-			return true;
-		}
+		bool onLoop();
 
 	}; // class Loop
 

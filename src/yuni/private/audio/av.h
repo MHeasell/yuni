@@ -1,8 +1,12 @@
 #ifndef __YUNI_AUDIO_AV_H__
 # define __YUNI_AUDIO_AV_H__
 
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wundef"
+# include "../../yuni.h"
+
+# if YUNI_OS_GCC_VERSION >= 41200
+#	pragma GCC diagnostic ignored "-Wconversion"
+#	pragma GCC diagnostic ignored "-Wundef"
+# endif
 extern "C"
 {
 # include "libavcodec/avcodec.h"
@@ -25,16 +29,15 @@ namespace Audio
 	class AV
 	{
 	public:
-
 		//! Initialize ffmpeg
-		static bool init();
+		static bool Init();
 
 		//! Open a file with ffmpeg and sets up the streams' information
 		template<typename AnyStringT>
-		static AudioFile* openFile(const AnyStringT& fname);
+		static AudioFile* OpenFile(const AnyStringT& fname);
 
 		//! Close an opened file and any of its streams
-		static void closeFile(AudioFile*& file);
+		static void CloseFile(AudioFile* file);
 
 		/*!
 		** \brief Retrieve a handle for the given audio stream number
@@ -42,7 +45,7 @@ namespace Audio
 		** The stream number will generally be 0, but some files can have
 		** multiple audio streams in one file.
 		*/
-		static AudioStream* getAudioStream(AudioFile* file, int streamnum);
+		static AudioStream* GetAudioStream(AudioFile* file, int streamnum);
 
 		/*!
 		** \brief Get information about the given audio stream
@@ -50,7 +53,7 @@ namespace Audio
 		** Currently, ffmpeg always decodes audio (even 8-bit PCM) to 16-bit PCM
 		** \returns 0 on success
 		*/
-		static int getAudioInfo(AudioStream* stream, int *rate, int *channels, int *bits);
+		static int GetAudioInfo(AudioStream* stream, int* rate, int* channels, int* bits);
 
 		/*!
 		** \brief Decode audio and write at most length bytes into the provided data buffer
@@ -58,20 +61,11 @@ namespace Audio
 		** Will only return less for end-of-stream or error conditions
 		** \returns The number of bytes written
 		*/
-		static int getAudioData(AudioStream* stream, void *data, int length);
+		static int GetAudioData(AudioStream* stream, void* data, int length);
 
-	private:
+	}; // class AV
 
-		/*!
-		** \brief Get the next packet of data
-		**
-		** Used by get*Data to search for more compressed data, and buffer it in the
-		** correct stream. It won't buffer data for streams that the app doesn't have a
-		** handle for.
-		*/
-		static void getNextPacket(AudioFile* file, int streamidx);
 
-	}; // AV
 
 } // namespace Audio
 } // namespace Private

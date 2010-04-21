@@ -18,10 +18,10 @@ namespace Audio
 			if (!prepare())
 				return false;
 		}
-		Private::Audio::OpenAL::bindBufferToSource(buffer, pID);
-		bool started = Private::Audio::OpenAL::playSource(pID);
+		Private::Audio::OpenAL::BindBufferToSource(buffer, pID);
+		bool started = Private::Audio::OpenAL::PlaySource(pID);
 		if (!started)
-			Private::Audio::OpenAL::unbindBufferFromSource(pID);
+			Private::Audio::OpenAL::UnbindBufferFromSource(pID);
 		return false;
 	}
 
@@ -63,7 +63,7 @@ namespace Audio
 		if (pReady)
 			return true;
 
-		unsigned int source = Private::Audio::OpenAL::createSource(pPosition, pVelocity,
+		unsigned int source = Private::Audio::OpenAL::CreateSource(pPosition, pVelocity,
 			pDirection, 1.0f, pGain, true, pLoop);
 
 		pID = source;

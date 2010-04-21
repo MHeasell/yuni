@@ -19,6 +19,7 @@ Set(SRC_AUDIO
 		audio/manager.hxx
 		audio/manager.cpp
 		audio/loop.h
+		audio/loop.cpp
 #		audio/music.h
 #		audio/music.cpp
 #		audio/playlist.h
