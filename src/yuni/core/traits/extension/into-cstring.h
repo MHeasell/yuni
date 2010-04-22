@@ -42,7 +42,7 @@ namespace Extension
 	struct IntoCString<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> >
 	{
 	public:
-		typedef CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
+		typedef Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
 		enum { valid = 1, converted = 0, zeroTerminated = CustomStringType::zeroTerminated, };
 
 	public:

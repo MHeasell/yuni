@@ -28,17 +28,17 @@ namespace Job
 
 	inline bool IJob::idle() const
 	{
-		return (pState & stateIdle);
+		return ((pState & stateIdle) ? true : false);
 	}
 
 	inline bool IJob::waiting() const
 	{
-		return (pState & stateWaiting);
+		return ((pState & stateWaiting) ? true : false);
 	}
 
 	inline bool IJob::running() const
 	{
-		return (pState & stateRunning);
+		return ((pState & stateRunning) ? true : false);
 	}
 
 

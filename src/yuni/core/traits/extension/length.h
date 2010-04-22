@@ -118,7 +118,7 @@ namespace Extension
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
-		typedef CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
+		typedef Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
 
 	public:
 		static SizeT Value(const CustomStringType& container)
