@@ -23,22 +23,23 @@ namespace File
 				out.clear();
 			if (filename && '\0' != *filename)
 			{
-				std::ifstream file(filename);
-				if (!file)
-					return false;
-				if (sizeLimit)
+				Core::IO::File::Stream file(filename);
+				if (file.opened())
 				{
-					file.seekg(0, std::ios_base::beg);
-					std::ifstream::pos_type begin_pos = file.tellg();
-					file.seekg(0, std::ios_base::end);
-					if ((uint32)(file.tellg() - begin_pos) > sizeLimit)
-						return false;
-					file.seekg(0, std::ios_base::beg);
+					size_t totalSize = 0;
+					String line;
+					line.reserve(4096);
+					while (file.gets(line.data(), 4096))
+					{
+						size_t size = strlen(line.data());
+						totalSize += size;
+						if (totalSize > sizeLimit)
+							return false;
+						line.resize(size);
+						out.push_back(line);
+					}
+					return true;
 				}
-				std::string line;
-				while (std::getline(file, line))
-					out.push_back(line);
-				return true;
 			}
 			return false;
 		}
