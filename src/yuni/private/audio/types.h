@@ -17,6 +17,8 @@ namespace Audio
 		AVCodecContext* CodecContext;
 		int StreamIdx;
 
+		unsigned int Format;
+
 		char* Data;
 		size_t DataSize;
 		size_t DataSizeMax;

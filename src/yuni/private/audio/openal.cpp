@@ -202,6 +202,12 @@ namespace Audio
 		return buf;
 	}
 
+	void OpenAL::SetBufferData(unsigned int buffer, int format, void* data, size_t count, int rate)
+	{
+ 		alBufferData(buffer, format, data, count, rate);
+	}
+
+
 } // namespace Audio
 } // namespace Private
 } // namespace Yuni

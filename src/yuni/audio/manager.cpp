@@ -10,6 +10,7 @@ namespace Audio
 
 	Manager* Manager::sInstance;
 
+
 	Manager& Manager::Instance()
 	{
 		if (!sInstance)
@@ -34,7 +35,7 @@ namespace Audio
 		// Close OpenAL buffers properly
 		for (BufferMap::iterator it = pBuffers.begin(); it != pBuffers.end(); ++it)
 		{
-			Private::Audio::OpenAL::DestroyBuffers(1, &(it->second));
+			delete (it->second); // The Buffer destructor will clean stuff up
 		}
 		pBuffers.clear();
 		// Close OpenAL sources properly
@@ -70,22 +71,23 @@ namespace Audio
 		int rate;
 		int channels;
 		int bits;
-		if (0 != Private::Audio::AV::GetAudioInfo(stream, &rate, &channels, &bits))
+		if (0 != Private::Audio::AV::GetAudioInfo(stream, rate, channels, bits))
 		{
 			Private::Audio::AV::CloseFile(file);
 			return false;
 		}
 
 		// Check the format
-		const ALenum format = Private::Audio::OpenAL::GetFormat(bits, channels);
-		if (0 == format)
+		stream->Format = Private::Audio::OpenAL::GetFormat(bits, channels);
+		if (0 == stream->Format)
 		{
 			Private::Audio::AV::CloseFile(file);
 			return false;
 		}
 
 		// Create the buffer, store it in the map
-		pBuffers[pFilePath] = *Private::Audio::OpenAL::CreateBuffers(1);
+		unsigned int bufferID = *Private::Audio::OpenAL::CreateBuffers(1);
+		pBuffers[pFilePath] = new Private::Audio::Buffer<>(bufferID, stream);
 
 		return true;
 	}

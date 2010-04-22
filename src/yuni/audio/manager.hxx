@@ -1,3 +1,5 @@
+#ifndef __YUNI_AUDIO_MANAGER_HXX__
+# define __YUNI_AUDIO_MANAGER_HXX__
 
 namespace Yuni
 {
@@ -32,7 +34,7 @@ namespace Audio
 		// String constructor call when AnyStringT == String.
 		// However, it would require method template partial specialization :/
 		Audio::Loop::RequestType callback;
- 		callback.bind(pSources[String(source)], &Source::playSound, pBuffers[sound]);
+ 		callback.bind(pSources[String(source)], &Source::playSound, *(pBuffers[sound]));
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
 
@@ -102,3 +104,5 @@ namespace Audio
 
 } // namespace Audio
 } // namespace Yuni
+
+#endif // __YUNI_AUDIO_MANAGER_HXX__

@@ -45,7 +45,7 @@ namespace Audio
 		** The stream number will generally be 0, but some files can have
 		** multiple audio streams in one file.
 		*/
-		static AudioStream* GetAudioStream(AudioFile* file, int streamnum);
+		static AudioStream* GetAudioStream(AudioFile* file, int streamIndex);
 
 		/*!
 		** \brief Get information about the given audio stream
@@ -53,7 +53,7 @@ namespace Audio
 		** Currently, ffmpeg always decodes audio (even 8-bit PCM) to 16-bit PCM
 		** \returns 0 on success
 		*/
-		static int GetAudioInfo(AudioStream* stream, int* rate, int* channels, int* bits);
+		static int GetAudioInfo(AudioStream* stream, int& rate, int& channels, int& bits);
 
 		/*!
 		** \brief Decode audio and write at most length bytes into the provided data buffer
@@ -61,7 +61,7 @@ namespace Audio
 		** Will only return less for end-of-stream or error conditions
 		** \returns The number of bytes written
 		*/
-		static int GetAudioData(AudioStream* stream, void* data, int length);
+		static size_t GetAudioData(AudioStream* stream, void* data, size_t length);
 
 	}; // class AV
 

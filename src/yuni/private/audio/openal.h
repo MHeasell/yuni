@@ -86,12 +86,15 @@ namespace Audio
 		static void ModifySource(unsigned int source, float pitch, float gain,
 			bool attenuate, bool loop);
 		static void MoveSource(unsigned int source, const Gfx::Point3D<>& position,
-							   const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
+			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
 
 		static void BindBufferToSource(unsigned int buffer, unsigned int source);
 		static void UnbindBufferFromSource(unsigned int source);
 		static void QueueBufferToSource(unsigned int buffer, unsigned int source);
 		static unsigned int UnqueueBufferFromSource(unsigned int source);
+
+		static void SetBufferData(unsigned int buffer, int format, void* data,
+			size_t count, int rate);
 
 	}; // OpenAL
 

@@ -7,7 +7,7 @@
 # include "../core/smartptr.h"
 # include "../core/point3D.h"
 # include "../core/vector3D.h"
-
+# include "../private/audio/buffer.h"
 
 
 namespace Yuni
@@ -67,7 +67,7 @@ namespace Audio
 		bool prepare();
 
 		//! Play the sound
-		bool playSound(unsigned int buffer);
+		bool playSound(Private::Audio::Buffer<>& buffer);
 		//@}
 
 
