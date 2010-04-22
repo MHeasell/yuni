@@ -64,11 +64,11 @@ namespace Thread
 
 	bool Condition::waitUnlocked(const uint32 timeout)
 	{
-		struct timeval now;
+		Yuni::timeval now;
 		struct timespec t;
 
 		// Set the timespec t at [timeout] milliseconds in the future.
-		gettimeofday(&now, NULL);
+		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
 		t.tv_nsec = now.tv_usec * 1000 + ((timeout % 1000) * 1000000);
 		t.tv_sec = now.tv_sec + timeout / 1000 + (t.tv_nsec / 1000000000L);
 		t.tv_nsec %= 1000000000L;

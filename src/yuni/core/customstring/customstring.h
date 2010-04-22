@@ -681,9 +681,9 @@ namespace Yuni
 	private:
 		// our friends !
 		template<class, class, int> friend class Private::CustomStringImpl::From;
-		template<class, class> friend class Yuni::Extension::CustomString::Append;
-		template<class, class> friend class Yuni::Extension::CustomString::Assign;
-		template<class, class> friend class Yuni::Extension::CustomString::Fill;
+		template<class, class> friend struct Yuni::Extension::CustomString::Append;
+		template<class, class> friend struct Yuni::Extension::CustomString::Assign;
+		template<class, class> friend struct Yuni::Extension::CustomString::Fill;
 
 	}; // class CustomString
 
@@ -706,43 +706,6 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::CustomString<Si
 {
 	out.write(rhs.data(), rhs.size());
 	return out;
-}
-
-
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
-inline bool operator == (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
-{
-	return (rhs.operator == (u));
-}
-
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
-inline bool operator != (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
-{
-	return (rhs.operator != (u));
-}
-
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
-inline bool operator < (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
-{
-	return (rhs.operator >= (u));
-}
-
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
-inline bool operator > (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
-{
-	return (rhs.operator <= (u));
-}
-
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
-inline bool operator <= (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
-{
-	return (rhs.operator > (u));
-}
-
-template<class U, unsigned int SizeT, bool ExpT,bool ZeroT>
-inline bool operator >= (const U& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
-{
-	return (rhs.operator < (u));
 }
 
 

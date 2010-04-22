@@ -2,7 +2,9 @@
 # define __YUNI_CORE_FWD_H__
 
 # include <iosfwd> // STL
-# include <bits/stringfwd.h>
+# ifndef YUNI_OS_MSVC
+#	include <bits/stringfwd.h>
+# endif
 
 
 namespace Yuni

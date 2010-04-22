@@ -53,7 +53,7 @@ namespace CustomString
 
 	// C*
 	template<class CustomStringT>
-	struct Append<CustomStringT, typename CustomStringT::Type*>
+	struct Append<CustomStringT, char*>
 	{
 		typedef typename CustomStringT::Type TypeC;
 		typedef typename Static::Remove::Const<TypeC>::Type C;
@@ -66,7 +66,7 @@ namespace CustomString
 
 	// C[N]
 	template<class CustomStringT, int N>
-	struct Append<CustomStringT, typename CustomStringT::Type[N]>
+	struct Append<CustomStringT, char[N]>
 	{
 		typedef typename CustomStringT::Type C;
 		static void Do(CustomStringT& s, const C rhs[N])
@@ -82,7 +82,7 @@ namespace CustomString
 
 	// C
 	template<class CustomStringT>
-	struct Append<CustomStringT, typename CustomStringT::Type>
+	struct Append<CustomStringT, char>
 	{
 		typedef typename CustomStringT::Type C;
 		static void Do(CustomStringT& s, const C rhs)

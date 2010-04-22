@@ -1,15 +1,17 @@
 
 #include "../directory.h"
-#include <dirent.h>
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
+#ifndef YUNI_OS_MSVC
+# include <dirent.h>
+# include <unistd.h>
+#endif
 #ifdef YUNI_OS_WINDOWS
 # include "../../system/windows.hdr.h"
 # include <ShellApi.h>
 #endif
 #include <sys/stat.h>
-#include <unistd.h>
 #include <fcntl.h>
 
 #include <stdio.h>
