@@ -1,5 +1,6 @@
 
 #include "source.h"
+#include "../private/audio/av.h"
 #include "../private/audio/openal.h"
 
 
@@ -10,27 +11,16 @@ namespace Audio
 {
 
 
-	bool Source::playSound(unsigned int buffer)
+	bool Source::playSound(Private::Audio::Buffer<>& buffer)
 	{
 		if (!pReady)
 		{
 			if (!prepare())
 				return false;
 		}
-		Private::Audio::OpenAL::BindBufferToSource(buffer, pID);
-// 		for (unsigned int i = 0; i < NUM_BUFFERS; ++i)
-// 		{
-// 			// Make sure we get some data to give to the buffer
-// 			int count = AV::GetAudioData(stream, dataBuffer, BUFFER_SIZE);
-// 			if (count <= 0)
-// 				break;
+		Private::Audio::OpenAL::BindBufferToSource(buffer.ID(), pID);
 
-// 			// Buffer the data with OpenAL
-// 			alBufferData(buffers[i], format, dataBuffer, count, rate);
-// 			// Queue the buffer onto the source
-// 			alSourceQueueBuffers(source, 1, &buffers[i]);
-// 		}
-
+		buffer.prepare(pID);
 		pPlaying = Private::Audio::OpenAL::PlaySource(pID);
 		if (!pPlaying)
 		{

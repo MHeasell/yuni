@@ -68,6 +68,7 @@ namespace Audio
 
 	} // namespace anonymous
 
+
 	bool AV::Init()
 	{
 	  std::cout << "AV::Init" << std::endl;
@@ -98,95 +99,96 @@ namespace Audio
 	}
 
 
-	AudioStream* AV::GetAudioStream(AudioFile* file, int streamnum)
+	AudioStream* AV::GetAudioStream(AudioFile* file, int streamIndex)
 	{
 		if (!file)
 			return NULL;
 
 		for (unsigned int i = 0; i < file->FormatContext->nb_streams; ++i)
 		{
+			// Reject streams that are not AUDIO
 			if (file->FormatContext->streams[i]->codec->codec_type != CODEC_TYPE_AUDIO)
 				continue;
 
-			if (0 == streamnum)
+			// Continue until we find the requested stream
+			if (streamIndex > 0)
 			{
-				// Found the requested stream. Check if a handle to this stream
-				// already exists and return it if it does
-				for (size_t j = 0; j < file->StreamsSize; ++j)
-				{
-					if (file->Streams[j]->StreamIdx == (int)i)
-						return file->Streams[j];
-				}
-
-				// Doesn't yet exist. Now allocate a new stream object and fill in
-				// its info
-				AudioStream* stream = (AudioStream*)calloc(1, sizeof(*stream));
-				if (!stream)
-					return NULL;
-
-				stream->parent = file;
-				stream->CodecContext = file->FormatContext->streams[i]->codec;
-				stream->StreamIdx = i;
-
-				// Try to find the codec for the given codec ID, and open it
-				AVCodec* codec = avcodec_find_decoder(stream->CodecContext->codec_id);
-				if (!codec || avcodec_open(stream->CodecContext, codec) < 0)
-				{
-					free(stream);
-					return NULL;
-				}
-
-				// Allocate space for the decoded data to be stored in before it
-				// gets passed to the app
-				stream->DecodedData = (char*)malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE);
-				if (!stream->DecodedData)
-				{
-					avcodec_close(stream->CodecContext);
-					free(stream);
-					return NULL;
-				}
-
-				// Append the new stream object to the stream list. The original
-				// pointer will remain valid if realloc fails, so we need to use
-				// another pointer to watch for errors and not leak memory
-				AudioStream** temp = (AudioStream**)realloc(file->Streams, (file->StreamsSize + 1) *
-													  sizeof(AudioStream*));
-				if (!temp)
-				{
-					avcodec_close(stream->CodecContext);
-					free(stream->DecodedData);
-					free(stream);
-					return NULL;
-				}
-				file->Streams = temp;
-				file->Streams[file->StreamsSize++] = stream;
-				return stream;
+				streamIndex--;
+				continue;
 			}
-			streamnum--;
+
+			// Check if a handle to this stream already exists
+			// and return it if it does
+			for (size_t j = 0; j < file->StreamsSize; ++j)
+			{
+				if (file->Streams[j]->StreamIdx == (int)i)
+					return file->Streams[j];
+			}
+
+			// Doesn't yet exist. Now allocate a new stream object and fill in
+			// its info
+			AudioStream* stream = (AudioStream*)calloc(1, sizeof(*stream));
+			if (!stream)
+				return NULL;
+
+			stream->parent = file;
+			stream->CodecContext = file->FormatContext->streams[i]->codec;
+			stream->StreamIdx = i;
+
+			// Try to find the codec for the given codec ID, and open it
+			AVCodec* codec = avcodec_find_decoder(stream->CodecContext->codec_id);
+			if (!codec || avcodec_open(stream->CodecContext, codec) < 0)
+			{
+				free(stream);
+				return NULL;
+			}
+
+			// Allocate space for the decoded data to be stored in before it
+			// gets passed to the app
+			stream->DecodedData = (char*)malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE);
+			if (!stream->DecodedData)
+			{
+				avcodec_close(stream->CodecContext);
+				free(stream);
+				return NULL;
+			}
+
+			// Append the new stream object to the stream list. The original
+			// pointer will remain valid if realloc fails, so we need to use
+			// another pointer to watch for errors and not leak memory
+			AudioStream** temp = (AudioStream**)realloc(file->Streams,
+				(file->StreamsSize + 1) * sizeof(AudioStream*));
+			if (!temp)
+			{
+				avcodec_close(stream->CodecContext);
+				free(stream->DecodedData);
+				free(stream);
+				return NULL;
+			}
+			file->Streams = temp;
+			file->Streams[file->StreamsSize++] = stream;
+			return stream;
 		}
 		return NULL;
 	}
 
 
-	int AV::GetAudioInfo(AudioStream* stream, int *rate, int *channels, int *bits)
+	int AV::GetAudioInfo(AudioStream* stream, int& rate, int& channels, int& bits)
 	{
 		if (!stream || stream->CodecContext->codec_type != CODEC_TYPE_AUDIO)
 			return 1;
 
-		if (rate)
-			*rate = stream->CodecContext->sample_rate;
-		if (channels)
-			*channels = stream->CodecContext->channels;
-		if (bits)
-			*bits = 16;
+		rate = stream->CodecContext->sample_rate;
+		channels = stream->CodecContext->channels;
+		bits = 16;
 
 		return 0;
 	}
 
 
-	int AV::GetAudioData(AudioStream* stream, void *data, int length)
+	size_t AV::GetAudioData(AudioStream* stream, void *data, size_t length)
 	{
-		int dec = 0;
+		size_t dec = 0;
 
 		if (!stream || stream->CodecContext->codec_type != CODEC_TYPE_AUDIO)
 			return 0;

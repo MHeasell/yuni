@@ -8,7 +8,7 @@
 # include "../thread/policy.h"
 # include "source.h"
 # include "loop.h"
-
+# include "../private/audio/buffer.h"
 
 
 namespace Yuni
@@ -28,7 +28,7 @@ namespace Audio
 	public:
 		typedef Policy::ObjectLevelLockable<Manager>  ThreadingPolicy;
 
-		typedef std::map<String, unsigned int> BufferMap;
+		typedef std::map<String, Private::Audio::Buffer<>* > BufferMap;
 
 	public:
 		static Manager& Instance();

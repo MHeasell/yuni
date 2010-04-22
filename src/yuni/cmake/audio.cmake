@@ -36,6 +36,9 @@ Set(SRC_AUDIO
 		audio/source.h
 		audio/source.hxx
 		audio/source.cpp
+		private/audio/buffer.h
+		private/audio/buffer.hxx
+		private/audio/types.h
 		private/audio/openal.h
 		private/audio/openal.cpp
 		private/audio/av.h
