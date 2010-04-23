@@ -109,11 +109,9 @@ namespace Audio
 		alDistanceModel(modelName);
 	}
 
-	unsigned int* OpenAL::CreateBuffers(int nbBuffers)
+	void OpenAL::CreateBuffers(int nbBuffers, unsigned int* buffers)
 	{
-		unsigned int* buffers = (unsigned int*)calloc(nbBuffers, sizeof(unsigned int));
 		alGenBuffers(nbBuffers, buffers);
-		return buffers;
 	}
 
 	void OpenAL::DestroyBuffers(int nbBuffers, unsigned int* buffers)
@@ -151,7 +149,14 @@ namespace Audio
 	{
 		alSourceRewind(source);
 		alSourcePlay(source);
-		return alGetError() != AL_NO_ERROR;
+		return alGetError() == AL_NO_ERROR;
+	}
+
+	bool OpenAL::IsSourcePlaying(unsigned int source)
+	{
+		ALint state;
+		alGetSourcei(source, AL_SOURCE_STATE, &state);
+		return state == AL_PLAYING;
 	}
 
 	void OpenAL::ModifySource(unsigned int source, float pitch, float gain,

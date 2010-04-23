@@ -4,7 +4,6 @@
 # include <map>
 # include "../yuni.h"
 # include "../core/string.h"
-# include "../core/smartptr.h"
 # include "../core/point3D.h"
 # include "../core/vector3D.h"
 # include "../private/audio/buffer.h"
@@ -67,7 +66,10 @@ namespace Audio
 		bool prepare();
 
 		//! Play the sound
-		bool playSound(Private::Audio::Buffer<>& buffer);
+		bool playSound(Private::Audio::Buffer<>::Ptr buffer);
+
+		//! Update buffers if necessary
+		bool update();
 		//@}
 
 
@@ -111,6 +113,8 @@ namespace Audio
 		bool pLoop;
 		//! Volume modifier, 1.0 means no modification
 		float pGain;
+		//! Buffer used for playing. NULL if none
+		Private::Audio::Buffer<>::Ptr  pBuffer;
 		//! Is the source ready for use?
 		bool pReady;
 		//! Is the source currently playing?

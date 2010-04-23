@@ -1,4 +1,5 @@
 #include "loop.h"
+#include "manager.h"
 
 namespace Yuni
 {
@@ -7,7 +8,7 @@ namespace Audio
 
 	bool Loop::onLoop()
 	{
-		// TODO: Update.
+		Manager::Instance().updateWL();
 		return true;
 	}
 

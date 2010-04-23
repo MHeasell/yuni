@@ -21,6 +21,7 @@ public:
 		}
 		if (!pFileNames.empty())
 			audio.start();
+		Yuni::Sleep(2);
 	}
 
 	virtual ~LoadAndPlay()
@@ -31,14 +32,19 @@ public:
 
 	virtual void onExecute()
 	{
-		audio.addSource("Source1", false);
-		for (String::Vector::const_iterator it = pFileNames.begin();
-			it != pFileNames.end(); ++it)
+		if (!audio.addSource("Source1", false))
+		{
+			std::cerr << "Source creation failed !" << std::endl;
+			return;
+		}
+		String::Vector::const_iterator end = pFileNames.end();
+		for (String::Vector::const_iterator it = pFileNames.begin(); it != end; ++it)
 		{
 			audio.loadSound(*it);
+			Yuni::Sleep(2);
 			audio.playSound("Source1", *it);
 		}
-		Yuni::Sleep(10);
+		Yuni::Sleep(240);
 	}
 
 private:

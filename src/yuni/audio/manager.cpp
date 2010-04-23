@@ -21,6 +21,12 @@ namespace Audio
 
 	void Manager::start()
 	{
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			// Do not initialize the manager twice
+			if (pReady)
+				return;
+		}
 		pAudioLoop.start();
 		Yuni::Bind<bool()> callback;
 		callback.bind(&Private::Audio::AV::Init);
@@ -32,12 +38,17 @@ namespace Audio
 
 	void Manager::stop()
 	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		// Do not stop the manager if it was not properly started
+		if (!pReady)
+			return;
+
 		// Close OpenAL buffers properly
-		for (BufferMap::iterator it = pBuffers.begin(); it != pBuffers.end(); ++it)
-		{
-			delete (it->second); // The Buffer destructor will clean stuff up
-		}
-		pBuffers.clear();
+// 		for (BufferMap::iterator it = pBuffers.begin(); it != pBuffers.end(); ++it)
+// 		{
+// 			delete (it->second);
+// 		}
+		pBuffers.clear(); // The Buffer destructors will clean stuff up
 		// Close OpenAL sources properly
 		for (Source::Map::iterator it = pSources.begin(); it != pSources.end(); ++it)
 		{
@@ -52,10 +63,12 @@ namespace Audio
 		pReady = false;
 	}
 
-	bool Manager::loadSoundWL()
+	bool Manager::loadSoundWL(const String& filePath)
 	{
+		std::cout << "Loading file \"" << filePath << "\"..." << std::endl;
+
 		// Try to open the file
-		Private::Audio::AudioFile* file = Private::Audio::AV::OpenFile(pFilePath);
+		Private::Audio::AudioFile* file = Private::Audio::AV::OpenFile(filePath);
 		if (!file)
 			return false;
 
@@ -86,10 +99,21 @@ namespace Audio
 		}
 
 		// Create the buffer, store it in the map
-		unsigned int bufferID = *Private::Audio::OpenAL::CreateBuffers(1);
-		pBuffers[pFilePath] = new Private::Audio::Buffer<>(bufferID, stream);
+		pBuffers[filePath] = new Private::Audio::Buffer<>(stream);
 
+		std::cout << "Loading succeeded !" << std::endl;
 		return true;
+	}
+
+
+	bool Manager::updateWL()
+	{
+		Source::Map::iterator end = pSources.end();
+		for (Source::Map::iterator it = pSources.begin(); it != end; ++it)
+		{
+			if (NULL != (it->second))
+				it->second->update();
+		}
 	}
 
 

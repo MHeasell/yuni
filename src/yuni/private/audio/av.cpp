@@ -71,7 +71,7 @@ namespace Audio
 
 	bool AV::Init()
 	{
-	  std::cout << "AV::Init" << std::endl;
+		std::cout << "AV::Init" << std::endl;
 		av_register_all();
  		// Silence warning output from the lib
 		av_log_set_level(AV_LOG_ERROR);

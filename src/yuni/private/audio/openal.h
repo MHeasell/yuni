@@ -64,10 +64,10 @@ namespace Audio
 
 		/*!
 		** \brief Create OpenAL buffers
-		** \param nbBuffers Number of buffers to create
-		** \returns An array of IDs of the created buffers
+		** \param[in] nbBuffers Number of buffers to create
+		** \param[out] An array of IDs of the created buffers
 		*/
-		static unsigned int* CreateBuffers(int nbBuffers);
+		static void CreateBuffers(int nbBuffers, unsigned int* buffers);
 
 		static void DestroyBuffers(int nbBuffers, unsigned int* buffers);
 
@@ -83,6 +83,7 @@ namespace Audio
 		static void DestroySource(unsigned int source);
 
 		static bool PlaySource(unsigned int source);
+		static bool IsSourcePlaying(unsigned int source);
 		static void ModifySource(unsigned int source, float pitch, float gain,
 			bool attenuate, bool loop);
 		static void MoveSource(unsigned int source, const Gfx::Point3D<>& position,

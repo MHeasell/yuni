@@ -11,65 +11,50 @@ namespace Audio
 {
 
 
-	bool Source::playSound(Private::Audio::Buffer<>& buffer)
+	bool Source::playSound(Private::Audio::Buffer<>::Ptr buffer)
 	{
+		std::cout << "Beginning playback on source " << pID << "..." << std::endl;
 		if (!pReady)
 		{
 			if (!prepare())
 				return false;
 		}
-		Private::Audio::OpenAL::BindBufferToSource(buffer.ID(), pID);
 
-		buffer.prepare(pID);
+		if (NULL == buffer)
+		{
+			std::cout << "NULL Buffer !" << std::endl;
+			return false;
+		}
+
+		pBuffer = buffer;
+		if (!pBuffer->prepare(pID))
+		{
+			std::cerr << "Failed loading buffers !" << std::endl;
+			return false;
+		}
+
 		pPlaying = Private::Audio::OpenAL::PlaySource(pID);
 		if (!pPlaying)
 		{
 			std::cerr << "Source " << pID << " failed playing !" << std::endl;
-			Private::Audio::OpenAL::UnbindBufferFromSource(pID);
+			Private::Audio::OpenAL::UnqueueBufferFromSource(pID);
 			return false;
 		}
+		std::cout << "Playback started successfully !" << std::endl;
 		return true;
 	}
 
-// 	bool Source::updatePlaying()
-// 	{
-// 		if (!pPlaying)
-// 			return false;
-// 		return pPlaying;
-// 	}
-
-// 	bool Source::play(Sound3D::Ptr sound)
-// 	{
-// 		if (!pReady)
-// 		{
-// 			if (!prepare())
-// 				return false;
-// 		}
-// 		if (!sound->valid())
-// 			return false;
-// 		Private::Audio::OpenAL::bindBufferToSource(sound->buffer(), pID);
-// 		bool started = Private::Audio::OpenAL::playSource(pID);
-// 		if (!started)
-// 			Private::Audio::OpenAL::unbindBufferFromSource(pID);
-// 		return false;
-// 	}
-
-
-// 	bool Source::play(Music::Ptr music)
-// 	{
-// 		if (!pReady)
-// 			if (!prepare())
-// 				return false;
-// 		if (!music->valid())
-// 			return false;
-// 		Private::Audio::OpenAL::queueBufferToSource(music->buffer(), pID);
-// 		bool started = Private::Audio::OpenAL::playSource(pID);
-// 		if (!started)
-// 			// Ignore return value
-// 			Private::Audio::OpenAL::unqueueBufferFromSource(pID);
-// 		return false;
-// 	}
-
+	bool Source::update()
+	{
+		if (!pReady)
+			return false;
+		pPlaying = Private::Audio::OpenAL::IsSourcePlaying(pID);
+		if (!pPlaying)
+			return false;
+		if (NULL != pBuffer)
+			pBuffer->update(pID);
+		return true;
+	}
 
 	bool Source::prepare()
 	{
