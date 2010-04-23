@@ -112,8 +112,9 @@ namespace Audio
 		for (Source::Map::iterator it = pSources.begin(); it != end; ++it)
 		{
 			if (NULL != (it->second))
-				it->second->update();
+				!it->second->update();
 		}
+		return true;
 	}
 
 
