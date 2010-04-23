@@ -42,8 +42,8 @@ namespace Yuni
 		class Item;
 
 	public:
-		# include "iterator.h"	
-			
+		# include "iterator.h"
+
 	public:
 		//! \name Constructors & Destructor
 		//@{
@@ -178,7 +178,7 @@ namespace Yuni
 		** \brief Remove the item pointed by the iterator
 		*/
 		void erase(iterator& i);
-		
+
 		/*!
 		** \brief Remove any item equals to a given value
 		**

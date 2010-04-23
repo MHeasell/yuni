@@ -8,19 +8,19 @@ namespace Audio
 {
 
 	inline Source::Source(bool loop)
-		: pLoop(loop), pReady(false), pPlaying(false)
+		: pLoop(loop), pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false)
 	{}
 
 
 	inline Source::Source(const Gfx::Point3D<>& position, bool loop)
-		: pPosition(position), pLoop(loop), pReady(false), pPlaying(false)
+		: pPosition(position), pLoop(loop), pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false)
 	{}
 
 
 	inline Source::Source(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
 		const Gfx::Vector3D<>& direction, bool loop = false)
 		:pPosition(position), pVelocity(velocity), pDirection(direction),
-		 pLoop(loop), pReady(false), pPlaying(false)
+		 pLoop(loop), pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false)
 	{}
 
 
@@ -66,6 +66,7 @@ namespace Audio
 
 	inline unsigned int Source::id() const
 	{
+		ThreadingPolicy::MutexLocker locker(*this);
 		return pID;
 	}
 

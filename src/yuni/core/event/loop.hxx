@@ -125,6 +125,7 @@ namespace EventLoop
 			// Initializing the request list
 			if (pRequests)
 				delete pRequests;
+			pHasRequests = 0;
 			pRequests = new RequestListType();
 		}
 		if (detached)

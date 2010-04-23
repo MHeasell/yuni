@@ -16,9 +16,9 @@ namespace Audio
 
 		Yuni::Bind<bool()> callback;
 
-		callback.bind(this, &Manager::loadSoundWL);
-		pFilePath = filePath;
-		pAudioLoop.dispatch(callback);
+		//callback.bind(this, &Manager::loadSoundWL, String(filePath));
+		//pAudioLoop.dispatch(callback);
+		loadSoundWL(filePath);
 		return true;
 	}
 
@@ -30,17 +30,34 @@ namespace Audio
 		if (!pReady)
 			return false;
 
+		Private::Audio::Buffer<>::Ptr buffer(pBuffers[String(sound)]);
+		if (NULL == buffer)
+		{
+			std::cerr << "Manager::playSound : no buffer with name \"" << sound
+					  << "\" could be found !" << std::endl;
+			return false;
+		}
+
+		Source::Ptr sourcePtr(pSources[String(source)]);
+		if (NULL == sourcePtr)
+		{
+			std::cerr << "Manager::playSound : no source with name \"" << source
+					  << "\" could be found !" << std::endl;
+			return false;
+		}
+
 		// Here we would like to do as below: a template specialization to avoid the useless
 		// String constructor call when AnyStringT == String.
 		// However, it would require method template partial specialization :/
 		Audio::Loop::RequestType callback;
- 		callback.bind(pSources[String(source)], &Source::playSound, *(pBuffers[sound]));
+ 		callback.bind(sourcePtr, &Source::playSound, buffer);
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
 
 		//pSources[String(source)]->playSound(pBuffers[String(sound)]);
 		return true;
 	}
+
 
 	template<typename AnyStringT>
 	bool Manager::addSource(const AnyStringT& sourceName, bool loop)
@@ -69,7 +86,6 @@ namespace Audio
 		pSources[sourceName] = newSource;
 		return true;
 	}
-
 
 	template<typename AnyStringT>
 	bool Manager::addSource(const AnyStringT& sourceName, const Gfx::Point3D<>& position,
@@ -100,6 +116,7 @@ namespace Audio
 		pSources[String(sourceName)] = newSource;
 		return true;
 	}
+
 
 
 } // namespace Audio

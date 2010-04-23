@@ -5,6 +5,7 @@
 # include "../core/point3d.h"
 # include "../core/vector3d.h"
 # include "../core/string.h"
+# include "../core/smartptr.h"
 # include "../thread/policy.h"
 # include "source.h"
 # include "loop.h"
@@ -28,7 +29,7 @@ namespace Audio
 	public:
 		typedef Policy::ObjectLevelLockable<Manager>  ThreadingPolicy;
 
-		typedef std::map<String, Private::Audio::Buffer<>* > BufferMap;
+		typedef std::map<String, Private::Audio::Buffer<>::Ptr > BufferMap;
 
 	public:
 		static Manager& Instance();
@@ -74,9 +75,11 @@ namespace Audio
 
 
 	private:
-		bool loadSoundWL();
+		bool loadSoundWL(const String& filePath);
 
 		bool playSoundWL();
+
+		bool updateWL();
 
 		unsigned int createSource();
 
@@ -90,17 +93,14 @@ namespace Audio
 		//! Event loop for audio events
 		Loop pAudioLoop;
 
-		/*!
-		** \brief Temporary storage for the string for file loading dispatch
-		** \note This is ugly, it should be removed and a better use of bind() should be made.
-		*/
-		String pFilePath;
-
 		//! Map of currently registered sources, with string tags as keys
 		Source::Map pSources;
 
 		//! Map of currently loaded buffers, with string tags as keys
 		BufferMap pBuffers;
+
+	private:
+		friend class Loop;
 
 	}; // class Manager
 
