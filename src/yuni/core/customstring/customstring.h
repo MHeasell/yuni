@@ -102,6 +102,17 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(chunkSize > 3, CustomString_MinimalChunkSizeRequired);
 
 	public:
+		/*!
+		** \brief Compare two string like strcmp()
+		*/
+		static int StrCmp(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
+
+		/*!
+		** \brief Compare two string like strcmp() (insensitive)
+		*/
+		static int StrICmp(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
+
+	public:
 		//! \name Constructors & Destructor
 		//@{
 		/*!
