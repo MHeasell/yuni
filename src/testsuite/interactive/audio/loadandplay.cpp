@@ -32,17 +32,20 @@ public:
 
 	virtual void onExecute()
 	{
-		if (!audio.addSource("Source1", false))
-		{
-			std::cerr << "Source creation failed !" << std::endl;
-			return;
-		}
 		String::Vector::const_iterator end = pFileNames.end();
+		unsigned int i = 0;
 		for (String::Vector::const_iterator it = pFileNames.begin(); it != end; ++it)
 		{
+			String sourceName("Source");
+			sourceName << i++;
+			if (!audio.addSource(sourceName, false))
+			{
+				std::cerr << "Source creation failed !" << std::endl;
+				return;
+			}
 			audio.loadSound(*it);
 			Yuni::Sleep(2);
-			audio.playSound("Source1", *it);
+			audio.playSound(sourceName, *it);
 		}
 		Yuni::Sleep(240);
 	}
