@@ -814,6 +814,19 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::trim()
+	{
+		// It seems more interesting to trim from the end first, to reduce the size
+		// of the buffer as soon as possible and to reduce the amount of data to move
+		// if a region must be removed by trimLeft.
+		trimRight(" \t\r\n");
+		trimLeft(" \t\r\n");
+	}
+
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::trim(const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char c)
 	{
@@ -1000,6 +1013,53 @@ namespace Yuni
 		for (Size i = 0; i < AncestorType::size; ++i)
 			AncestorType::data[i] = (Char) toupper(AncestorType::data[i]);
 		return *this;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<template<class,class> class U, class UType, class Alloc, class AnyStringT>
+	void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::explode(U<UType,Alloc>& out, const AnyStringT& sep,
+		bool keepEmptyElements, bool trimElements, bool emptyBefore) const
+	{
+		// Empty the container
+		if (emptyBefore)
+			out.clear();
+		// String empty
+		if (this->notEmpty())
+		{
+			// Indexes
+			Size indx = 0;
+			Size len  = 0;
+			Size newIndx;
+
+			// Temporary buffer
+			CustomStringType segment;
+
+			while (true)
+			{
+				newIndx = this->find_first_of(sep, indx);
+				if (npos == newIndx)
+				{
+					segment.assign(AncestorType::data[indx], AncestorType::size - indx);
+					if (trimElements)
+						segment.trim();
+					if (segment.notEmpty() || keepEmptyElements)
+						out.push_back(segment.to<UType>());
+					return;
+				}
+
+				if ((len = newIndx - indx) || keepEmptyElements)
+				{
+					segment.assign(AncestorType::data[indx], len);
+					if (trimElements)
+						segment.trim();
+					if (segment.notEmpty() || keepEmptyElements)
+						out.push_back(segment.to<UType>());
+				}
+				indx = newIndx + 1;
+			}
+		}
 	}
 
 
