@@ -390,18 +390,22 @@ namespace Yuni
 		//! \name Trimming
 		//@{
 		/*!
+		** \brief Remove all white-spaces (" \t\r\n") from the begining and the end of the buffer
+		*/
+		void trim();
+		/*!
 		** \brief Remove all white-spaces from the begining and the end of the buffer
 		*/
 		void trim(const Char c /* = ' ' */);
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the end of the buffer
 		*/
-		template<class U> void trim(const U& u = " \t");
+		template<class U> void trim(const U& u);
 
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the end of the buffer
 		*/
-		template<class U> void trimRight(const U& u = " \t");
+		template<class U> void trimRight(const U& u);
 
 		/*!
 		** \brief Remove all items equal to 'c' from the end of the buffer
@@ -411,7 +415,7 @@ namespace Yuni
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the begining of the buffer
 		*/
-		template<class U> void trimLeft(const U& u = " \t");
+		template<class U> void trimLeft(const U& u);
 		/*!
 		** \brief Remove all items equal to 'c' from the begining of the buffer
 		*/
@@ -636,6 +640,32 @@ namespace Yuni
 		** \param format The format, represented by a zero-terminated C-String
 		*/
 		void vappendFormat(const char* format, va_list args);
+		//@}
+
+
+		//! \name Misc
+		//@{
+		/*!
+		** \brief Explode a string into several segments
+		**
+		** Here is an example of howto convert a string to a list of int :
+		** \code
+		** std::list<int>  list;
+		** String("22::80::443::993").explode(list, ":");
+		** std::cout << list << std::endl;
+		** \endcode
+		**
+		** \param[out] out All segments that have been found
+		** \param sep Sequence of chars considered as a separator
+		** \param keepEmptyElements True to keep empty items
+		** \param trimElements Trim each item found
+		** \param emptyBefore True to clear the vector before fulfill it
+		**
+		** \warning Do not take care of string representation (with `'` or `"`)
+		*/
+		template<template<class,class> class U, class UType, class Alloc, typename AnyStringT>
+		void explode(U<UType,Alloc>& out, const AnyStringT& sep,
+			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const;
 		//@}
 
 
