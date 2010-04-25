@@ -1,6 +1,7 @@
 #ifndef __YUNI_AUDIO_MANAGER_H__
 # define __YUNI_AUDIO_MANAGER_H__
 
+# include "../yuni.h"
 # include <map>
 # include "../core/point3d.h"
 # include "../core/vector3d.h"
@@ -89,13 +90,10 @@ namespace Audio
 
 		//! Has the manager been properly started ?
 		bool pReady;
-
 		//! Event loop for audio events
 		Loop pAudioLoop;
-
 		//! Map of currently registered sources, with string tags as keys
 		Source::Map pSources;
-
 		//! Map of currently loaded buffers, with string tags as keys
 		BufferMap pBuffers;
 
@@ -103,6 +101,7 @@ namespace Audio
 		friend class Loop;
 
 	}; // class Manager
+
 
 
 

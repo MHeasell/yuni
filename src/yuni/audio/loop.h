@@ -1,6 +1,7 @@
 #ifndef __YUNI_AUDIO_LOOP_H__
 # define __YUNI_AUDIO_LOOP_H__
 
+# include "../yuni.h"
 # include "../core/event/loop.h"
 
 
@@ -20,7 +21,7 @@ namespace Audio
 		typedef Core::EventLoop::IEventLoop<Loop,
 			Core::EventLoop::Flow::Continuous,  // The flow policy
 			Core::EventLoop::Statistics::None,  // The statistics policy
-			true>                               // Use a separate thread or not
+			true>                               // Use a separate thread
 			LoopType;
 
 		typedef LoopType::RequestType RequestType;

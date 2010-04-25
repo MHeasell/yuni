@@ -1,12 +1,13 @@
 #ifndef __YUNI_AUDIO_SOUND_H__
 # define __YUNI_AUDIO_SOUND_H__
 
-# include <vector>
 # include "../yuni.h"
 # include "../private/audio/openal.h"
 # include "../private/audio/av.h"
 # include "../core/smartptr.h"
 # include "../core/string.h"
+# include <vector>
+
 
 namespace Yuni
 {
@@ -30,38 +31,35 @@ namespace Audio
 	public:
 		//! \name Constructor
 		//@{
-
 		/*!
 		** \brief Empty constructor, use default values.
 		*/
 		ISound();
-		//! Template constructor for any string type
-		template<class AnyStringT>
-		ISound::ISound(const AnyStringT& fileName);
-
-		//! Destructor
-		virtual ~ISound() {}
-
+		/*!
+		** \brief Constructor, with a given source name
+		*/
+		template<class AnyStringT> explicit ISound::ISound(const AnyStringT& name);
+		/*!
+		** \brief Destructor
+		*/
+		virtual ~ISound();
 		//@}
 
 
 		//! \name Accessors
 		//@{
-
 		//!
 		String name() const;
 		template<class AnyStringT> void name(const AnyStringT& name);
 
 		//! Is the sound ready to be played ?
 		bool valid() const;
-
 		//@}
 
 		//! \name Operators
 		//@{
-
+		//! The operator !, to know if the source is valid (ex: if (!source)... )
 		bool operator ! () const;
-
 		//@}
 
 	private:
@@ -70,11 +68,9 @@ namespace Audio
 		//! Forbid default operator=
 		ISound& operator = (const ISound&);
 
-
 	protected:
 		//! String identifier for the sound
 		String pName;
-
 		//! A loaded AV file, NULL if not loaded
 		ThreadingPolicy::Volatile<Private::Audio::AudioFile*>::Type pFile;
 
