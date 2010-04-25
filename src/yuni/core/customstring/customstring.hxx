@@ -1062,6 +1062,28 @@ namespace Yuni
 		}
 	}
 
+	
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::convertSlashesIntoBackslashes()
+	{
+		for (unsigned int i = 0; i != AncestorType::size; ++i)
+		{
+			if ('/' == AncestorType::data[i])
+				AncestorType::data[i] = '\\';
+		}
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::convertBackslashesIntoSlashes()
+	{
+		for (unsigned int i = 0; i != AncestorType::size; ++i)
+		{
+			if ('\\' == AncestorType::data[i])
+				AncestorType::data[i] = '/';
+		}
+	}
+
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	int
