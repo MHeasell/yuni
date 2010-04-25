@@ -646,6 +646,16 @@ namespace Yuni
 		//! \name Misc
 		//@{
 		/*!
+		** \brief Convert all backslashes into slashes
+		*/
+		void convertBackslashesIntoSlashes();
+
+		/*!
+		** \brief Convert all slashes into backslashes
+		*/
+		void convertSlashesIntoBackslashes();
+
+		/*!
 		** \brief Explode a string into several segments
 		**
 		** Here is an example of howto convert a string to a list of int :
