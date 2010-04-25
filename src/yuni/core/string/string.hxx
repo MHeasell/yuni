@@ -2084,7 +2084,7 @@ namespace Yuni
 					return;
 				}
 
-				if (newIndx && (len = newIndx - indx))
+				if ((newIndx && (len = newIndx - indx)) || keepEmptyElements)
 				{
 					StringBase<C,Chunk> segment(*this, indx, len);
 					if (trimElements)
