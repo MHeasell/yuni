@@ -3,21 +3,26 @@
 
 # include "../core/traits/cstring.h"
 
+
 namespace Yuni
 {
 namespace Audio
 {
 
+
 	inline ISound::ISound()
 		:pFile(NULL)
-	{
-	}
+	{}
+
 
 	template<class AnyStringT>
 	inline ISound::ISound(const AnyStringT& fileName)
 		:pName(filename), pFile(NULL)
-	{
-	}
+	{}
+
+
+	inline ISound::~ISound()
+	{}
 
 
 	inline String ISound::name() const
