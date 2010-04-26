@@ -29,9 +29,7 @@ public:
 	Subscriber()
 	{
 		// This class wants to be aware when an event is fired
-		Bind<void (const String&, const String&)> b;
-		b.bind(this, &Subscriber::onMailReceived);
-		emailHasBeenReceived.connect(b);
+		emailHasBeenReceived.connect(this, &Subscriber::onMailReceived);
 	}
 
 	//! Destructor
