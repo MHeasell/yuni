@@ -8,7 +8,7 @@
 
 
 
-class MyOwnThread : public Yuni::Threads::AThread
+class MyOwnThread : public Yuni::Thread::IThread
 {
 public:
 	//! \name Constructor & Destructor
@@ -21,7 +21,7 @@ public:
 
 public:
 	//! The condition to wait
-	Yuni::Threads::Condition::Ptr condition;
+	Yuni::Thread::Condition::Ptr condition;
 
 protected:
 
@@ -36,7 +36,7 @@ protected:
 		return true;
 	}
 
-	virtual void onExecute()
+	virtual bool onExecute()
 	{
 		std::cout << "[thread] Started. Waiting for notification." << std::endl;
 
@@ -54,6 +54,7 @@ protected:
 		condition->unlock();
 
 		std::cout << "[thread] Stopped." << std::endl;
+		return false;
 	}
 
 }; // class MyOwnThread
@@ -65,7 +66,7 @@ protected:
 int main(void)
 {
 	// Our condition, which is shared between the two threads
-	Yuni::Threads::Condition::Ptr condition = new Yuni::Threads::Condition();
+	Yuni::Thread::Condition::Ptr condition = new Yuni::Thread::Condition();
 	// A thread, which will wait for our signal
 	MyOwnThread thread;
 	thread.condition = condition;
