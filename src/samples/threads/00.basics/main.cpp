@@ -2,6 +2,7 @@
 #include <yuni/thread/thread.h>
 #include <iostream>
 #include <yuni/core/system/sleep.h>
+#include <yuni/core/system/cpu.h>
 
 
 
@@ -18,7 +19,7 @@ static Yuni::Mutex mutex;
 ** This task is implemented in the onExecute() method, and consists
 ** here of a sample: counting beer bottles.
 */
-class BottleTask : public Yuni::Threads::AThread
+class BottleTask : public Yuni::Thread::IThread
 {
 public:
 	/*!
@@ -26,13 +27,13 @@ public:
 	** \param[in] identifier A thread identifier, used only for display
 	**            purposes
 	*/
-	BottleTask(const int identifier) :Yuni::Threads::AThread(), x(identifier) {}
+	BottleTask(const int identifier) :Yuni::Thread::IThread(), x(identifier) {}
 
 	virtual ~BottleTask() {stop();}
 
 protected:
 	//! The beer-bottle counting implementation itself
-	virtual void onExecute()
+	virtual bool onExecute()
 	{
 		// Count from 99
 		int i = 99;
@@ -64,8 +65,9 @@ protected:
 			// so if possible defer any time-consuming task to the onStopped()
 			// methods.
 			if (suspend(100))
-				return;
+				return false;
 		}
+		return false;
 	}
 
 	/*!
@@ -95,14 +97,14 @@ int main(void)
 	// For thread-planning purposes, Yuni provides an indication of
 	// how many CPUs the system has, so you can plan how you will
 	// manage your resources.
-	std::cout << "[M] Your system has " << Yuni::Threads::AThread::CPUCount()
+	std::cout << "[M] Your system has " << Yuni::System::CPU::Count()
 		<< " logical processor(s)." << std::endl;
 
 	// Here we create a new BottleTask with identifier 0 - keep in
 	// mind that this identifier is specific to our sample class.
 	// We can use it as an abstract or specific class, depending
 	// on the way we want to manage it.
-	Yuni::Threads::AThread* t = new BottleTask(0);
+	Yuni::Thread::IThread* t = new BottleTask(0);
 	std::cout << "[M] Starting bottle counting..." << std::endl;
 
 	// Start counting bottles.

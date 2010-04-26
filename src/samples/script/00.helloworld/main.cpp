@@ -1,6 +1,7 @@
 
 #include <iostream>
-#include <yuni/script.h>
+#include <yuni/script/script.h>
+#include <yuni/script/lua/lua.h>
 
 /*
 ** This sample showcases the Script module.
