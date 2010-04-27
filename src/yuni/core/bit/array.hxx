@@ -130,40 +130,38 @@ namespace Bit
 	template<class StringT>
 	inline void Array::loadFromBuffer(const StringT& u)
 	{
-		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<StringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, BitArray_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  BitArray_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  BitArray_InvalidTypeForBufferSize);
 
-		if (Traits::Length<UType,Size>::isFixed)
+		if (Traits::Length<StringT,Size>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
 			// prevent against bad uses of the API, like using a C* for looking for a single char.
 
 			// The value to find is actually empty, nothing to do
-			if (0 == Traits::Length<UType,Size>::fixedLength)
+			if (0 == Traits::Length<StringT,Size>::fixedLength)
 			{
 				pBuffer.clear();
 				pCount = 0;
 				return;
 			}
 		}
-		pBuffer.assign(Traits::CString<UType>::Buffer(u), (pCount = Traits::Length<UType,Size>::Value(u)));
+		pCount = Traits::Length<StringT,Size>::Value(u);
+		pBuffer.assign(Traits::CString<StringT>::Perform(u), pCount);
 	}
 
 
 	template<class StringT>
 	inline void Array::loadFromBuffer(const StringT& u, unsigned int size)
 	{
-		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<StringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, BitArray_InvalidTypeForBuffer);
 
-		pBuffer.assign(Traits::CString<UType>::Buffer(u), (pCount = size));
+		pCount = size;
+		pBuffer.assign(Traits::CString<StringT>::Perform(u), pCount);
 	}
 
 

@@ -1062,7 +1062,7 @@ namespace Yuni
 		}
 	}
 
-	
+
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::convertSlashesIntoBackslashes()
 	{
