@@ -245,6 +245,12 @@ namespace Yuni
 	}
 
 	template<class R>
+	inline const IEventObserverBase* Bind<R (), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R>
 	inline bool Bind<R (), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -556,6 +562,12 @@ namespace Yuni
 	inline const void* Bind<R (*)(), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R>
+	inline const IEventObserverBase* Bind<R (*)(), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R>
@@ -873,6 +885,12 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class ClassT, class R>
 	inline bool Bind<R (ClassT::*)(), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -1184,6 +1202,12 @@ namespace Yuni
 	inline const void* Bind<R (A0), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0>
+	inline const IEventObserverBase* Bind<R (A0), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0>
@@ -1501,6 +1525,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0>
+	inline const IEventObserverBase* Bind<R (*)(A0), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0>
 	inline bool Bind<R (*)(A0), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -1812,6 +1842,12 @@ namespace Yuni
 	inline const void* Bind<R (ClassT::*)(A0), ClassT>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class ClassT, class R, class A0>
@@ -2130,6 +2166,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1>
+	inline const IEventObserverBase* Bind<R (A0, A1), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1>
 	inline bool Bind<R (A0, A1), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -2442,6 +2484,12 @@ namespace Yuni
 	inline const void* Bind<R (*)(A0, A1), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1>
@@ -2760,6 +2808,12 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class ClassT, class R, class A0, class A1>
 	inline bool Bind<R (ClassT::*)(A0, A1), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -3072,6 +3126,12 @@ namespace Yuni
 	inline const void* Bind<R (A0, A1, A2), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2>
@@ -3390,6 +3450,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2>
 	inline bool Bind<R (*)(A0, A1, A2), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -3702,6 +3768,12 @@ namespace Yuni
 	inline const void* Bind<R (ClassT::*)(A0, A1, A2), ClassT>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2>
@@ -4021,6 +4093,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3>
 	inline bool Bind<R (A0, A1, A2, A3), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -4334,6 +4412,12 @@ namespace Yuni
 	inline const void* Bind<R (*)(A0, A1, A2, A3), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3>
@@ -4653,6 +4737,12 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -4966,6 +5056,12 @@ namespace Yuni
 	inline const void* Bind<R (A0, A1, A2, A3, A4), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -5285,6 +5381,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -5598,6 +5700,12 @@ namespace Yuni
 	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
@@ -5918,6 +6026,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -6232,6 +6346,12 @@ namespace Yuni
 	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -6552,6 +6672,12 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -6866,6 +6992,12 @@ namespace Yuni
 	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -7186,6 +7318,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -7500,6 +7638,12 @@ namespace Yuni
 	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -7821,6 +7965,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -8136,6 +8286,12 @@ namespace Yuni
 	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -8457,6 +8613,12 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -8772,6 +8934,12 @@ namespace Yuni
 	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -9093,6 +9261,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -9408,6 +9582,12 @@ namespace Yuni
 	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -9730,6 +9910,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -10046,6 +10232,12 @@ namespace Yuni
 	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -10368,6 +10560,12 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -10684,6 +10882,12 @@ namespace Yuni
 	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -11006,6 +11210,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -11322,6 +11532,12 @@ namespace Yuni
 	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -11645,6 +11861,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -11962,6 +12184,12 @@ namespace Yuni
 	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -12285,6 +12513,12 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -12602,6 +12836,12 @@ namespace Yuni
 	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -12925,6 +13165,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -13242,6 +13488,12 @@ namespace Yuni
 	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -13566,6 +13818,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -13884,6 +14142,12 @@ namespace Yuni
 	inline const void* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -14208,6 +14472,12 @@ namespace Yuni
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -14526,6 +14796,12 @@ namespace Yuni
 	inline const void* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -14850,6 +15126,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -15168,6 +15450,12 @@ namespace Yuni
 	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -15493,6 +15781,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline const IEventObserverBase* Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -15815,6 +16109,12 @@ namespace Yuni
 	}
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline const IEventObserverBase* Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);
@@ -16134,6 +16434,12 @@ namespace Yuni
 	inline const void* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::object() const
 	{
 		return pHolder->object();
+	}
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline const IEventObserverBase* Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
 	}
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>

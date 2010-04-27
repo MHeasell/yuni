@@ -262,6 +262,12 @@ namespace Yuni
 	}
 
 	template<<%=tmpl[0]%>>
+	inline const IEventObserverBase* Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::observerBaseObject() const
+	{
+		return pHolder->observerBaseObject();
+	}
+
+	template<<%=tmpl[0]%>>
 	inline bool Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::isDescendantOf(const IEventObserverBase* obj) const
 	{
 		return pHolder->isDescendantOf(obj);

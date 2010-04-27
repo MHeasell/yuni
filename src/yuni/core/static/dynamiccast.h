@@ -40,6 +40,19 @@ namespace Static
 		{
 			return ref == dynamic_cast<const U*>(objPointer);
 		}
+
+		template<class U>
+		static BaseT* Perform(U* object)
+		{
+			return dynamic_cast<BaseT*>(object);
+		}
+
+		template<class U>
+		static const BaseT* PerformConst(const U* object)
+		{
+			return dynamic_cast<const BaseT*>(object);
+		}
+
 	};
 
 
@@ -51,10 +64,24 @@ namespace Static
 		template<class U, class V>
 		static bool Equals(const U*, const V*)
 		{
-			std::cout << " !!!!!!!!!! Impossible to dynamic_cast\n";
 			return false;
 		}
+
+		template<class U>
+		static BaseT* Perform(U*)
+		{
+			return NULL;
+		}
+
+		template<class U>
+		static const BaseT* PerformConst(const U*)
+		{
+			return NULL;
+		}
+
 	};
+
+
 
 
 
