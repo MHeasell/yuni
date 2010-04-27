@@ -43,11 +43,10 @@ namespace EventImpl
 
 		bool operator == (const BindT& rhs) const
 		{
-			if (rhs.isDescendantOf(pObject))
+			const IEventObserverBase* base = rhs.observerBaseObject();
+			if (base)
 			{
-				const IEventObserverBase* base = (const IEventObserverBase*)(rhs.object());
-				if (base)
-					base->boundEventDecrementReference(pEvent);
+				base->boundEventDecrementReference(pEvent);
 				return true;
 			}
 			return false;

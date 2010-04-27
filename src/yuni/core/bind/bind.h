@@ -96,21 +96,53 @@ namespace Yuni
 	template<typename P = void (), class Dummy = void>
 	class Bind
 	{
-		// We must use one the specialization (see below)
+	public:
+		// This class can not be used like that. We must use one the specialization
+		// (see below).
+		// All definitions in this class are only here for the documentation
 		YUNI_STATIC_ASSERT(false, Bind_BadFunctionOrMemberSignature);
-	};
+
+	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Default Constructor
+		*/
+		Bind();
+		/*!
+		** \brief Copy constructor
+		*/
+		Bind(const Bind& rhs);
+		/*!
+		** \brief Destructor
+		*/
+		~Bind();
+		//@}
+
+	}; // class Bind<>
 
 
 
 
 
-	/*!
+
+
+
+
+
+
+
+
+
+	//
+	// --- Specializations for Bind<> ---
+	//
+
+
+
+
+	/*
 	** \brief Bind to a function/member with 0 argument (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-
 	*/
 	template<class R>
 	class Bind<R (), void>
@@ -326,11 +358,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke() const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -342,36 +407,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke() const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () () const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () () const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -414,13 +465,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 0 argument (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-
 	*/
 	template<class R>
 	class Bind<R (*)(), void>
@@ -636,11 +682,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke() const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -652,36 +731,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke() const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () () const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () () const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -724,13 +789,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 0 argument (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-
 	*/
 	template<class ClassT, class R>
 	class Bind<R (ClassT::*)(), ClassT>
@@ -946,11 +1006,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke() const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -962,36 +1055,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke() const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () () const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () () const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -1034,13 +1113,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 1 argument (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
 	*/
 	template<class R, class A0>
 	class Bind<R (A0), void>
@@ -1256,11 +1330,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -1272,36 +1379,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -1344,13 +1437,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 1 argument (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
 	*/
 	template<class R, class A0>
 	class Bind<R (*)(A0), void>
@@ -1566,11 +1654,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -1582,36 +1703,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -1654,13 +1761,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 1 argument (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
 	*/
 	template<class ClassT, class R, class A0>
 	class Bind<R (ClassT::*)(A0), ClassT>
@@ -1876,11 +1978,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -1892,36 +2027,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -1964,14 +2085,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 2 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
 	*/
 	template<class R, class A0, class A1>
 	class Bind<R (A0, A1), void>
@@ -2187,11 +2302,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -2203,36 +2351,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -2275,14 +2409,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 2 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
 	*/
 	template<class R, class A0, class A1>
 	class Bind<R (*)(A0, A1), void>
@@ -2498,11 +2626,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -2514,36 +2675,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -2586,14 +2733,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 2 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
 	*/
 	template<class ClassT, class R, class A0, class A1>
 	class Bind<R (ClassT::*)(A0, A1), ClassT>
@@ -2809,11 +2950,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -2825,36 +2999,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -2897,15 +3057,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 3 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
 	*/
 	template<class R, class A0, class A1, class A2>
 	class Bind<R (A0, A1, A2), void>
@@ -3121,11 +3274,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -3137,36 +3323,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -3209,15 +3381,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 3 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
 	*/
 	template<class R, class A0, class A1, class A2>
 	class Bind<R (*)(A0, A1, A2), void>
@@ -3433,11 +3598,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -3449,36 +3647,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -3521,15 +3705,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 3 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2>
 	class Bind<R (ClassT::*)(A0, A1, A2), ClassT>
@@ -3745,11 +3922,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -3761,36 +3971,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -3833,16 +4029,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 4 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3>
 	class Bind<R (A0, A1, A2, A3), void>
@@ -4058,11 +4246,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -4074,36 +4295,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -4146,16 +4353,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 4 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3>
 	class Bind<R (*)(A0, A1, A2, A3), void>
@@ -4371,11 +4570,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -4387,36 +4619,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -4459,16 +4677,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 4 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>
@@ -4684,11 +4894,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -4700,36 +4943,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -4772,17 +5001,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 5 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	class Bind<R (A0, A1, A2, A3, A4), void>
@@ -4998,11 +5218,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -5014,36 +5267,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -5086,17 +5325,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 5 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4>
 	class Bind<R (*)(A0, A1, A2, A3, A4), void>
@@ -5312,11 +5542,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -5328,36 +5591,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -5400,17 +5649,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 5 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>
@@ -5626,11 +5866,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -5642,36 +5915,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -5714,18 +5973,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 6 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	class Bind<R (A0, A1, A2, A3, A4, A5), void>
@@ -5941,11 +6190,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -5957,36 +6239,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -6029,18 +6297,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 6 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5), void>
@@ -6256,11 +6514,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -6272,36 +6563,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -6344,18 +6621,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 6 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>
@@ -6571,11 +6838,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -6587,36 +6887,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -6659,19 +6945,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 7 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6), void>
@@ -6887,11 +7162,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -6903,36 +7211,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -6975,19 +7269,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 7 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>
@@ -7203,11 +7486,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -7219,36 +7535,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -7291,19 +7593,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 7 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>
@@ -7519,11 +7810,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -7535,36 +7859,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -7607,20 +7917,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 8 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>
@@ -7836,11 +8134,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -7852,36 +8183,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -7924,20 +8241,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 8 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>
@@ -8153,11 +8458,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -8169,36 +8507,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -8241,20 +8565,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 8 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>
@@ -8470,11 +8782,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -8486,36 +8831,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -8558,21 +8889,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 9 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>
@@ -8788,11 +9106,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -8804,36 +9155,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -8876,21 +9213,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 9 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>
@@ -9106,11 +9430,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -9122,36 +9479,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -9194,21 +9537,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 9 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>
@@ -9424,11 +9754,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -9440,36 +9803,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -9512,22 +9861,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 10 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>
@@ -9743,11 +10078,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -9759,36 +10127,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -9831,22 +10185,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 10 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>
@@ -10062,11 +10402,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -10078,36 +10451,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -10150,22 +10509,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 10 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>
@@ -10381,11 +10726,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -10397,36 +10775,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -10469,23 +10833,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 11 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>
@@ -10701,11 +11050,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -10717,36 +11099,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -10789,23 +11157,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 11 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>
@@ -11021,11 +11374,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -11037,36 +11423,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -11109,23 +11481,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 11 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>
@@ -11341,11 +11698,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -11357,36 +11747,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -11429,24 +11805,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 12 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>
@@ -11662,11 +12022,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -11678,36 +12071,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -11750,24 +12129,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 12 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>
@@ -11983,11 +12346,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -11999,36 +12395,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -12071,24 +12453,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 12 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>
@@ -12304,11 +12670,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -12320,36 +12719,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -12392,25 +12777,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 13 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>
@@ -12626,11 +12994,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -12642,36 +13043,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -12714,25 +13101,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 13 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>
@@ -12948,11 +13318,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -12964,36 +13367,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -13036,25 +13425,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 13 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>
@@ -13270,11 +13642,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -13286,36 +13691,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -13358,26 +13749,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 14 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
-	** \tparam A13 The type of the 14th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>
@@ -13593,11 +13966,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -13609,36 +14015,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -13681,26 +14073,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 14 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
-	** \tparam A13 The type of the 14th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>
@@ -13916,11 +14290,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -13932,36 +14339,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -14004,26 +14397,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 14 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
-	** \tparam A13 The type of the 14th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>
@@ -14239,11 +14614,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -14255,36 +14663,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -14327,27 +14721,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 15 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
-	** \tparam A13 The type of the 14th argument
-	** \tparam A14 The type of the 15th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>
@@ -14563,11 +14938,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -14579,36 +14987,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -14651,27 +15045,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 15 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
-	** \tparam A13 The type of the 14th argument
-	** \tparam A14 The type of the 15th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>
@@ -14887,11 +15262,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -14903,36 +15311,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -14975,27 +15369,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 15 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
-	** \tparam A13 The type of the 14th argument
-	** \tparam A14 The type of the 15th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>
@@ -15211,11 +15586,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -15227,36 +15635,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -15299,28 +15693,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 16 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
-	** \tparam A13 The type of the 14th argument
-	** \tparam A14 The type of the 15th argument
-	** \tparam A15 The type of the 16th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>
@@ -15536,11 +15910,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -15552,36 +15959,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -15624,28 +16017,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 16 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
-	** \tparam A13 The type of the 14th argument
-	** \tparam A14 The type of the 15th argument
-	** \tparam A15 The type of the 16th argument
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>
@@ -15861,11 +16234,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -15877,36 +16283,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
@@ -15949,28 +16341,8 @@ namespace Yuni
 
 
 
-	/*!
+	/*
 	** \brief Bind to a function/member with 16 arguments (Specialization)
-	**
-	** This class is thread-safe, this is guarantee by the use of smartptr.
-	**
-	** \tparam R The return Type
-	** \tparam A0 The type of the first argument
-	** \tparam A1 The type of the second argument
-	** \tparam A2 The type of the third argument
-	** \tparam A3 The type of the 4th argument
-	** \tparam A4 The type of the 5th argument
-	** \tparam A5 The type of the 6th argument
-	** \tparam A6 The type of the 7th argument
-	** \tparam A7 The type of the 8th argument
-	** \tparam A8 The type of the 9th argument
-	** \tparam A9 The type of the 10th argument
-	** \tparam A10 The type of the 11th argument
-	** \tparam A11 The type of the 12th argument
-	** \tparam A12 The type of the 13th argument
-	** \tparam A13 The type of the 14th argument
-	** \tparam A14 The type of the 15th argument
-	** \tparam A15 The type of the 16th argument
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>
@@ -16186,11 +16558,44 @@ namespace Yuni
 		//@}
 
 
+		//! \name Invoke
+		//@{
 		/*!
-		** \brief Get the pointer to the binded object (if any)
+		** \brief Invoke the delegate
 		**
-		** If bound to a class, the return value will never be null.
-		** There is no way to know statically the type of the object.
+		** The operator () can be used instead.
+		*/
+		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
+
+		/*!
+		** \brief Invoke the bind using a getter for the arguments.
+		**
+		** Nothing will happen if the pointer is null
+		** However, the returned value may not be what we shall expect
+		** (the default constructor of the returned type is used in this case).
+		*/
+		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
+		R callWithArgumentGetter(UserTypeT userdata) const;
+		//@}
+
+
+		//! \name Print
+		//@{
+		/*!
+		** \brief Print the value to the std::ostream
+		*/
+		void print(std::ostream& out) const;
+		//@}
+
+
+		//! \name Inheritance
+		//@{
+		/*!
+		** \brief Get the raw pointer to the binded object (if any)
+		**
+		** If bound to a class, the return value will never be null. There is no way
+		** to know statically the type of the object.
+		** \warning It is the responsability to the user to use this method with care
 		**
 		** \return A non-null pointer if bound to a class
 		*/
@@ -16202,36 +16607,22 @@ namespace Yuni
 		bool isDescendantOf(const IEventObserverBase* obj) const;
 
 		/*!
-		** \brief Invoke the bind using a getter for the arguments.
+		** \brief Get the pointer to the binded object (if any) cast into IEventObserverBase
 		**
-		** Nothing will happen if the pointer is null
-		** However, the returned value may not be what we shall expect
-		** (the default constructor of the returned type is used in this case).
+		** \warning This method should never be used by the user
+		** \return A non-null pointer if bound to a class
 		*/
-		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
-		R callWithArgumentGetter(UserTypeT userdata) const;
-
-
-		//! \name Invoke
-		//@{
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
-
-		/*!
-		** \brief Invoke the delegate
-		*/
-		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
+		const IEventObserverBase* observerBaseObject() const;
 		//@}
 
-		/*!
-		** \brief Print the value to the std::ostream
-		*/
-		void print(std::ostream& out) const;
 
 		//! \name Operators
 		//@{
+		/*!
+		** \brief Invoke the delegate
+		** \see invoke()
+		*/
+		R operator () (A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14, A15 a15) const;
 		//! Assignment with another Bind object
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function

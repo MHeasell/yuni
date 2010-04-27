@@ -183,6 +183,9 @@ namespace BindImpl
 		//! Get the pointer to object
 		virtual const void* object() const = 0;
 
+		//! Get the pointer to object cast into IEventObserverBase
+		virtual const IEventObserverBase* observerBaseObject() const = 0;
+
 		//! Get if the attached class is a descendant of 'IEventObserverBase'
 		virtual bool isDescendantOf(const IEventObserverBase* obj) const = 0;
 
@@ -226,6 +229,11 @@ namespace BindImpl
 		}
 
 		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
 		{
 			return NULL;
 		}
@@ -286,6 +294,11 @@ namespace BindImpl
 		}
 
 		virtual const void* object() const
+		{
+			return NULL;
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
 		{
 			return NULL;
 		}
@@ -360,6 +373,11 @@ namespace BindImpl
 			return (const void*)(pThis);
 		}
 
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis);
+		}
+
 		virtual bool isDescendantOf(const IEventObserverBase* obj) const
 		{
 			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis);
@@ -425,6 +443,11 @@ namespace BindImpl
 		virtual const void* object() const
 		{
 			return (const void*)(pThis);
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis);
 		}
 
 		virtual bool isDescendantOf(const IEventObserverBase* obj) const

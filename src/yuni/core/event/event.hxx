@@ -49,8 +49,8 @@ namespace Yuni
 			{
 				if ((*i).isDescendantOfIEventObserverBase())
 				{
-					// Getting the object pointer, if any
-					base = (const IEventObserverBase*) ((*i).object());
+					// Getting the object pointer, if any, then decrementing the ref counter
+					base = ((*i).observerBaseObject());
 					if (base)
 						base->boundEventRemoveFromTable(baseThis);
 				}
@@ -70,6 +70,7 @@ namespace Yuni
 			// In this case, the flag `empty` must be set first, to avoid concurrent
 			// calls to `invoke()` for nothing.
 			AncestorType::pEmpty = true;
+			// Cleanup !
 			clearWL();
 		}
 	}
@@ -78,9 +79,10 @@ namespace Yuni
 	template<typename P>
 	void Event<P>::connect(typename BindType::FunctionType pointer)
 	{
-		typename ThreadingPolicy::MutexLocker locker(*this);
 		Bind<P> b;
 		b.bind(pointer);
+
+		typename ThreadingPolicy::MutexLocker locker(*this);
 		AncestorType::pBindList.push_back(b);
 		AncestorType::pEmpty = false;
 	}
@@ -91,11 +93,15 @@ namespace Yuni
 	void Event<P>::connect(typename BindType::template WithUserData<U>::FunctionType pointer,
 		typename BindType::template WithUserData<U>::ParameterType userdata)
 	{
-		typename ThreadingPolicy::MutexLocker locker(*this);
 		Bind<P> b;
 		b.bind(pointer, userdata);
+
+		// locking
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		// list
 		AncestorType::pBindList.push_back(b);
 		AncestorType::pEmpty = false;
+		// unlocking
 	}
 
 
@@ -105,13 +111,17 @@ namespace Yuni
 	{
 		if (o)
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
 			Bind<P> b;
 			b.bind(o, method);
 			assert(b.isDescendantOfIEventObserverBase() && "Invalid class C. The calling class must inherit from Event::Observer<CRTP, ThreadingPolicy>");
+
+			// Locking
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			// list + increment ref counter
 			AncestorType::pBindList.push_back(b);
 			(dynamic_cast<const IEventObserverBase*>(o))->boundEventIncrementReference(dynamic_cast<IEvent*>(this));
 			AncestorType::pEmpty = false;
+			// Unlocking
 		}
 	}
 
@@ -122,13 +132,17 @@ namespace Yuni
 	{
 		if (o)
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
 			Bind<P> b;
 			b.bind(o, method);
 			assert(b.isDescendantOfIEventObserverBase() && "Invalid class C");
+
+			// locking
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			// list + increment ref counter
 			AncestorType::pBindList.push_back(b);
 			(dynamic_cast<const IEventObserverBase*>(o))->boundEventIncrementReference(dynamic_cast<IEvent*>(this));
 			AncestorType::pEmpty = false;
+			// unlocking
 		}
 	}
 
@@ -139,11 +153,25 @@ namespace Yuni
 	{
 		if (object)
 		{
+			const IEventObserverBase* base = dynamic_cast<const IEventObserverBase*>(object);
 			typename ThreadingPolicy::MutexLocker locker(*this);
-			if (!AncestorType::pBindList.empty())
+			if (base)
 			{
-				typedef Private::EventImpl::template PredicateRemove<U, typename AncestorType::BindType> RemoveType;
-				AncestorType::pBindList.remove(RemoveType(dynamic_cast<IEvent*>(this), object));
+				if (!AncestorType::pBindList.empty())
+				{
+					typedef Private::EventImpl::template
+						PredicateRemove<IEventObserverBase, typename AncestorType::BindType> RemoveType;
+					AncestorType::pBindList.remove(RemoveType(dynamic_cast<IEvent*>(this), base));
+				}
+			}
+			else
+			{
+				if (!AncestorType::pBindList.empty())
+				{
+					typedef Private::EventImpl::template
+						PredicateRemove<U, typename AncestorType::BindType> RemoveType;
+					AncestorType::pBindList.remove(RemoveType(dynamic_cast<IEvent*>(this), object));
+				}
 			}
 			AncestorType::pEmpty = AncestorType::pBindList.empty();
 		}
@@ -157,7 +185,8 @@ namespace Yuni
 		// When unregistering an observer, we have to remove it without any more checks
 		if (!AncestorType::pBindList.empty())
 		{
-			typedef Private::EventImpl::template PredicateRemoveWithoutChecks<typename AncestorType::BindType> RemoveType;
+			typedef Private::EventImpl::template
+				PredicateRemoveWithoutChecks<typename AncestorType::BindType> RemoveType;
 			AncestorType::pBindList.remove(RemoveType(pointer));
 		}
 		AncestorType::pEmpty = AncestorType::pBindList.empty();
@@ -172,12 +201,6 @@ namespace Yuni
 		return *this;
 	}
 
-
-	template<typename P>
-	inline Event<P>& Event<P>::operator = (const NullPtr*)
-	{
-		clear();
-	}
 
 	template<typename P>
 	inline Event<P>& Event<P>::operator = (const NullPtr&)
@@ -199,11 +222,13 @@ namespace Yuni
 		return (AncestorType::pEmpty);
 	}
 
+
 	template<typename P>
 	inline bool Event<P>::notEmpty() const
 	{
 		return !(AncestorType::pEmpty);
 	}
+
 
 
 
