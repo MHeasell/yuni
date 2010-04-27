@@ -6,9 +6,16 @@ namespace Yuni
 namespace Audio
 {
 
+	Loop::Loop(Manager* audioManager)
+		:pManager(audioManager)
+	{}
+
+
 	bool Loop::onLoop()
 	{
-		Manager::Instance().updateWL();
+		if (!pManager)
+			return false;
+		pManager->updateWL();
 		return true;
 	}
 

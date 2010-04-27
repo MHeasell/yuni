@@ -12,14 +12,14 @@ namespace Audio
 {
 
 	template<unsigned int BufferSizeT>
-	Buffer<BufferSizeT>::Buffer(AudioStream* stream)
+	inline Buffer<BufferSizeT>::Buffer(AudioStream* stream)
 		:pStream(stream)
 	{
 		OpenAL::CreateBuffers(BufferCount, pIDs);
 	}
 
 	template<unsigned int BufferSizeT>
-	Buffer<BufferSizeT>::~Buffer()
+	inline Buffer<BufferSizeT>::~Buffer()
 	{
 		OpenAL::DestroyBuffers(BufferCount, pIDs);
 	}

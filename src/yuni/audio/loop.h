@@ -9,17 +9,20 @@ namespace Yuni
 {
 namespace Audio
 {
+	//! Forward Declaration
+	class Manager;
+
 
 	/*!
 	** \brief The audio loop is where every audio event is run
 	*/
-	class Loop: public Core::EventLoop::IEventLoop<Loop, Core::EventLoop::Flow::Continuous
+	class Loop: public Core::EventLoop::IEventLoop<Loop, Core::EventLoop::Flow::Timer
 		, Core::EventLoop::Statistics::None, true>
 	{
 	public:
 		//! The loop itself
 		typedef Core::EventLoop::IEventLoop<Loop,
-			Core::EventLoop::Flow::Continuous,  // The flow policy
+			Core::EventLoop::Flow::Timer,       // The flow policy
 			Core::EventLoop::Statistics::None,  // The statistics policy
 			true>                               // Use a separate thread
 			LoopType;
@@ -27,7 +30,12 @@ namespace Audio
 		typedef LoopType::RequestType RequestType;
 
 	public:
+		Loop(Manager* audioManager);
+
 		bool onLoop();
+
+	public:
+		Manager* pManager;
 
 	}; // class Loop
 

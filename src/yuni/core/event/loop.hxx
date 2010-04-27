@@ -31,6 +31,11 @@ namespace EventLoop
 			stop();
 		}
 
+		void suspendTheThread(unsigned int timeout)
+		{
+			(void) suspend(timeout);
+		}
+
 	protected:
 		virtual bool onExecute()
 		{
@@ -87,9 +92,15 @@ namespace EventLoop
 	inline IEventLoop<ParentT,FlowT,StatsT,DetachedT>::IEventLoop()
 		:pHasRequests(0), pRequests(NULL), pIsRunning(false), pThread(NULL)
 	{
+		// Note: Visual Studio does not like `this` in the initialization section
+		// Broadcast the pointer of the event loop to the policies
+		FlowPolicy::onInitialize(this);
+
+		// Initialize the thread if in detached mode
 		if (detached)
-			pThread = new Private::Core::EventLoop::Thread<EventLoopType>(*this);
+			pThread = new ThreadType(*this);
 	}
+
 
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
@@ -97,12 +108,16 @@ namespace EventLoop
 	{
 		// Stopping gracefully the loop if not already done
 		stop();
-		// Destroying the thread
-		if (DetachedT)
-			delete pThread;
-		// Destroying the request list
-		if (pRequests)
-			delete pRequests;
+
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		{
+			// Destroying the thread
+			if (DetachedT)
+				delete pThread;
+			// Destroying the request list
+			if (pRequests)
+				delete pRequests;
+		}
 	}
 
 
@@ -125,7 +140,6 @@ namespace EventLoop
 			// Initializing the request list
 			if (pRequests)
 				delete pRequests;
-			pHasRequests = 0;
 			pRequests = new RequestListType();
 		}
 		if (detached)
@@ -164,7 +178,8 @@ namespace EventLoop
 			// the request list.
 			RequestType request;
 			request.bind(this, &EventLoopType::requestStop);
-			pRequests->push_back(request);
+			if (pRequests)
+				pRequests->push_back(request);
 			// unlocking the inner mutex
 		}
 
@@ -345,6 +360,27 @@ namespace EventLoop
 		// The impossible happened !
 		YUNI_STATIC_ASSERT(false, IEventLoop_TheParentMustImplementTheMethod_onLoop);
 		return false;
+	}
+
+
+	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
+		bool DetachedT>
+	inline void
+	IEventLoop<ParentT,FlowT,StatsT,DetachedT>::suspend(unsigned int timeout)
+	{
+		if (detached)
+		{
+			// In detached mode, the thread pointer is valid. We will use the
+			// method suspend which is far better (cancellation point) than a mere
+			// sleep.
+			pThread->suspendTheThread(timeout);
+		}
+		else
+		{
+			// However, when not in detached mode, we don't have any thread instance
+			// to use. The only way to achieve a pause is to use a sleep
+			SleepMilliSeconds(timeout);
+		}
 	}
 
 

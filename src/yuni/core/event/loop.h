@@ -6,6 +6,7 @@
 # include "../atomic/int.h"
 # include "../slist/slist.h"
 # include "flow/continuous.h"
+# include "flow/timer.h"
 # include "statistics/none.h"
 # include "../system/sleep.h"
 # include "../static/assert.h"
@@ -13,6 +14,7 @@
 # include <assert.h>
 # include "../../thread/thread.h"
 # include "loop.fwd.h"
+# include "../system/sleep.h"
 
 
 
@@ -79,6 +81,8 @@ namespace EventLoop
 		typedef SmartPtr<EventLoopType> Ptr;
 		//! The threading policy
 		typedef Policy::ObjectLevelLockableNotRecursive<EventLoopType> ThreadingPolicy;
+		//! The thread used for the inner loop
+		typedef Yuni::Private::Core::EventLoop::Thread<EventLoopType>  ThreadType;
 
 		//! The flow policy
 		typedef FlowT<EventLoopType>  FlowPolicy;
@@ -153,6 +157,10 @@ namespace EventLoop
 		*/
 		static bool onLoop();
 
+	protected:
+		//! Suspend the thread
+		void suspend(unsigned int timeout);
+
 	private:
 		//! Copy constructor
 		IEventLoop(const IEventLoop&) {/* This class is not copyable */}
@@ -179,7 +187,7 @@ namespace EventLoop
 		//! True if the event loop is running
 		bool pIsRunning;
 		//! External thread when ran in detached mode
-		Thread::IThread* pThread;
+		ThreadType* pThread;
 
 		// Our friends
 		friend class FlowT<EventLoopType>;
