@@ -20,7 +20,7 @@ namespace Bit
 	**
 	** This class provides routines for handling an array of bits and is especially
 	** efficient for a medium or large amount of bits.
-	** 
+	**
 	** Performance Tip: For small arrays of bits (for example < 50), a typical
 	**   char[] may be faster, but it will use more memory.
 	**

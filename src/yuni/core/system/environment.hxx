@@ -15,12 +15,10 @@ namespace Environment
 
 	template<class StringT> inline String Read(const StringT& name)
 	{
-		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<StringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, SystemEnvironment_InvalidTypeForString);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, SystemEnvironment_InvalidTypeForString);
 
-		return ::getenv(Traits::CString<UType>::Buffer(name));
+		return ::getenv(Traits::CString<StringT>::Perform(name));
 	}
 
 	template<class StringT, class StringT2>
@@ -33,7 +31,7 @@ namespace Environment
 
 		if (emptyBefore)
 			out.clear();
-		out += ::getenv(Traits::CString<StringT>::Buffer(name));
+		out += ::getenv(Traits::CString<StringT>::Perform(name));
 		return true;
 	}
 
