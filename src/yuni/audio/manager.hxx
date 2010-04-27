@@ -7,8 +7,8 @@ namespace Audio
 {
 
 
-	template<typename AnyStringT>
-	bool Manager::loadSound(const AnyStringT& filePath)
+	template<typename StringT>
+	bool Manager::loadSound(const StringT& filePath)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pReady)
@@ -22,8 +22,8 @@ namespace Audio
 	}
 
 
-	template<typename AnyStringT1, typename AnyStringT2>
-	bool Manager::playSound(const AnyStringT1& source, const AnyStringT2& sound)
+	template<typename StringT1, typename StringT2>
+	bool Manager::playSound(const StringT1& source, const StringT2& sound)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pReady)
@@ -46,7 +46,7 @@ namespace Audio
 		}
 
 		// Here we would like to do as below: a template specialization to avoid the useless
-		// String constructor call when AnyStringT == String.
+		// String constructor call when StringT == String.
 		// However, it would require method template partial specialization :/
 		Audio::Loop::RequestType callback;
  		callback.bind(sourcePtr, &Source::playSound, buffer);
@@ -58,8 +58,8 @@ namespace Audio
 	}
 
 
-	template<typename AnyStringT>
-	bool Manager::addSource(const AnyStringT& sourceName, bool loop)
+	template<typename StringT>
+	bool Manager::addSource(const StringT& sourceName, bool loop)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pReady)
@@ -95,8 +95,8 @@ namespace Audio
 		return true;
 	}
 
-	template<typename AnyStringT>
-	bool Manager::addSource(const AnyStringT& sourceName, const Gfx::Point3D<>& position,
+	template<typename StringT>
+	bool Manager::addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
 		bool loop = false)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -113,8 +113,8 @@ namespace Audio
 		return true;
 	}
 
-	template<typename AnyStringT>
-	bool Manager::addSource(const AnyStringT& sourceName, const Gfx::Point3D<>& position,
+	template<typename StringT>
+	bool Manager::addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
 		const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction, bool loop = false)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);

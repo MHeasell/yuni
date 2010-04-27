@@ -18,7 +18,7 @@ namespace Environment
 	** \param name Name of the variable
 	** \return The value of the variable, empty is an error has occured
 	*/
-	template<class AnyStringT> String Read(const AnyStringT& name);
+	template<class StringT> String Read(const StringT& name);
 
 	/*!
 	** \brief Get a value from the current environment
@@ -30,8 +30,8 @@ namespace Environment
 	**   buffer.
 	** \return True if the operation succeeded, false otherwise
 	*/
-	template<class AnyStringT, class AnyStringT2>
-	bool Read(const AnyStringT& name, AnyStringT2& out, const bool emptyBefore = true);
+	template<class StringT, class StringT2>
+	bool Read(const StringT& name, StringT2& out, const bool emptyBefore = true);
 
 
 

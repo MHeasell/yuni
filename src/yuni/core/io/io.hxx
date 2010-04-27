@@ -49,10 +49,10 @@ namespace IO
 
 
 
-	template<class AnyStringT> inline bool IsAbsolute(const AnyStringT& filename)
+	template<class StringT> inline bool IsAbsolute(const StringT& filename)
 	{
 		// The given type, without its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		typedef typename Static::Remove::Const<StringT>::Type UType;
 		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
@@ -78,10 +78,10 @@ namespace IO
 	}
 
 
-	template<class AnyStringT> inline bool Exists(const AnyStringT& filename)
+	template<class StringT> inline bool Exists(const StringT& filename)
 	{
 		// The given type, without its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		typedef typename Static::Remove::Const<StringT>::Type UType;
 		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, IOExists_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
@@ -251,11 +251,11 @@ namespace IO
 	}
 
 
-	template<class StringT, class AnyStringT>
-	void Normalize(StringT& out, const AnyStringT& in, unsigned int inLength)
+	template<class StringT1, class StringT2>
+	void Normalize(StringT1& out, const StringT2& in, unsigned int inLength)
 	{
 		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		typedef typename Static::Remove::Const<StringT2>::Type UType;
 		// Assert, if a C* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, Normalize_InvalidTypeForInput);
 		// Assert, if the length of the container can not be found at compile time

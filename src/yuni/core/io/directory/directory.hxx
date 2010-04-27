@@ -46,8 +46,8 @@ namespace Directory
 {
 
 
-	template<class AnyStringT>
-	inline bool Make(const AnyStringT& path, unsigned int mode)
+	template<class StringT>
+	inline bool Make(const StringT& path, unsigned int mode)
 	{
 		if (Yuni::Core::IO::Exists(path))
 			return true;
@@ -55,33 +55,33 @@ namespace Directory
 		// `mode` is not used on Windows
 		(void) mode;
 		return Private::Core::IO::Directory::WindowsMake(
-			Traits::CString<AnyStringT>::Perform(path), Traits::Length<AnyStringT>::Value(path)
+			Traits::CString<StringT>::Perform(path), Traits::Length<StringT>::Value(path)
 			);
 		# else
 		return Private::Core::IO::Directory::UnixMake(
-			Traits::CString<AnyStringT>::Perform(path), Traits::Length<AnyStringT>::Value(path),
+			Traits::CString<StringT>::Perform(path), Traits::Length<StringT>::Value(path),
 			mode);
 		# endif
 	}
 
 
-	template<class AnyStringT1, class AnyStringT2>
-	inline bool Copy(const AnyStringT1& src, const AnyStringT2& dst)
+	template<class StringT1, class StringT2>
+	inline bool Copy(const StringT1& src, const StringT2& dst)
 	{
 		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<AnyStringT1>::valid, Copy_InvalidTypeForBuffer1);
-		YUNI_STATIC_ASSERT(Traits::CString<AnyStringT2>::valid, Copy_InvalidTypeForBuffer2);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT1>::valid, Copy_InvalidTypeForBuffer1);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, Copy_InvalidTypeForBuffer2);
 
 		return Private::Core::IO::Directory::Copy(
-			Traits::CString<AnyStringT1>::Perform(src), Traits::CString<AnyStringT2>::Perform(dst));
+			Traits::CString<StringT1>::Perform(src), Traits::CString<StringT2>::Perform(dst));
 	}
 
 
-	template<class AnyStringT>
-	inline bool Remove(const AnyStringT& path)
+	template<class StringT>
+	inline bool Remove(const StringT& path)
 	{
 		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		typedef typename Static::Remove::Const<StringT>::Type UType;
 		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, DirectoryExists_InvalidTypeForBuffer);
 
@@ -89,21 +89,21 @@ namespace Directory
 	}
 
 
-	template<class AnyStringT>
-	inline bool Exists(const AnyStringT& path)
+	template<class StringT>
+	inline bool Exists(const StringT& path)
 	{
 		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<AnyStringT>::valid, DirectoryExists_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, DirectoryExists_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::Length<AnyStringT>::valid,  DirectoryExists_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  DirectoryExists_InvalidTypeForBufferSize);
 
 		# ifdef YUNI_OS_WINDOWS
 		return Private::IO::FilesystemImpl::IsDirectoryWindowsImpl(
-			Traits::CString<AnyStringT>::Perform(path),
-			Traits::Length<AnyStringT, unsigned int>::Value(path));
+			Traits::CString<StringT>::Perform(path),
+			Traits::Length<StringT, unsigned int>::Value(path));
 		# else
 		return Private::IO::FilesystemImpl::IsDirectoryUnixImpl(
-			Traits::CString<AnyStringT>::Perform(path));
+			Traits::CString<StringT>::Perform(path));
 		# endif
 	}
 

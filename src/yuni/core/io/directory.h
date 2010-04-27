@@ -35,7 +35,7 @@ namespace Directory
 	** \param path The directory to test
 	** \return True if it exists, false otherwise
 	*/
-	template<class AnyStringT> bool Exists(const AnyStringT& path);
+	template<class StringT> bool Exists(const StringT& path);
 	//@}
 
 
@@ -70,8 +70,8 @@ namespace Directory
 	** \param mode Access permissions (ignored on the MS Windows platforms)
 	** \return True if the operation succeeded, false otherwise
 	*/
-	template<class AnyStringT>
-	bool Make(const AnyStringT& path, unsigned int mode = 0755);
+	template<class StringT>
+	bool Make(const StringT& path, unsigned int mode = 0755);
 	//@}
 
 
@@ -83,7 +83,7 @@ namespace Directory
 	** \param p The path to delete
 	** \return True if the operation succeeded False otherwise
 	*/
-	template<class AnyStringT> bool Remove(const AnyStringT& path);
+	template<class StringT> bool Remove(const StringT& path);
 	//@}
 
 
@@ -98,8 +98,8 @@ namespace Directory
 	** \param dst The target folder
 	** \return True if the operation succeeded False otherwise
 	*/
-	template<class AnyStringT1, class AnyStringT2>
-	bool Copy(const AnyStringT1& src, const AnyStringT2& dst);
+	template<class StringT1, class StringT2>
+	bool Copy(const StringT1& src, const StringT2& dst);
 	//@}
 
 

@@ -88,7 +88,7 @@ namespace Audio
 		float gain() const;
 
 		String name() const;
-		template<class AnyStringT> void name(const AnyStringT& name);
+		template<class StringT> void name(const StringT& name);
 
 		unsigned int id() const;
 		//@}

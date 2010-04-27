@@ -622,7 +622,7 @@ namespace Yuni
 		** \param format The format, reprensented by a zero-terminated string
 		** \return Always *this
 		*/
-		template<class AnyStringT> CustomString& format(const AnyStringT& format, ...);
+		template<class StringT> CustomString& format(const StringT& format, ...);
 
 		/*!
 		** \brief Append formatted string
@@ -631,7 +631,7 @@ namespace Yuni
 		** \param format The format, reprensented by a zero-terminated string
 		** \return Always *this
 		*/
-		template<class AnyStringT> CustomString& appendFormat(const AnyStringT& format, ...);
+		template<class StringT> CustomString& appendFormat(const StringT& format, ...);
 
 		/*!
 		** \brief Append a formatted string to the end of the current string
@@ -658,7 +658,7 @@ namespace Yuni
 		/*!
 		** \brief Explode a string into several segments
 		**
-		** Here is an example of howto convert a string to a list of int :
+		** Here is an example of how to convert a string to a list of int :
 		** \code
 		** std::list<int>  list;
 		** String("22::80::443::993").explode(list, ":");
@@ -673,8 +673,8 @@ namespace Yuni
 		**
 		** \warning Do not take care of string representation (with `'` or `"`)
 		*/
-		template<template<class,class> class U, class UType, class Alloc, typename AnyStringT>
-		void explode(U<UType,Alloc>& out, const AnyStringT& sep,
+		template<template<class,class> class U, class UType, class Alloc, typename StringT>
+		void explode(U<UType,Alloc>& out, const StringT& sep,
 			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const;
 		//@}
 
@@ -697,19 +697,19 @@ namespace Yuni
 		template<class U> CustomString& operator = (const U& rhs);
 
 		//! The operator `<`
-		template<class AnyStringT> bool operator <  (const AnyStringT& rhs) const;
+		template<class StringT> bool operator <  (const StringT& rhs) const;
 		//! The operator `>`
-		template<class AnyStringT> bool operator >  (const AnyStringT& rhs) const;
+		template<class StringT> bool operator >  (const StringT& rhs) const;
 
 		//! The operator `<=`
-		template<class AnyStringT> bool operator <= (const AnyStringT& rhs) const;
+		template<class StringT> bool operator <= (const StringT& rhs) const;
 		//! The operator `>=`
-		template<class AnyStringT> bool operator >= (const AnyStringT& rhs) const;
+		template<class StringT> bool operator >= (const StringT& rhs) const;
 
 		//! The operator `==`
 		bool operator == (const CustomString& rhs) const;
 		//! The operator `==`
-		template<class AnyStringT> bool operator == (const AnyStringT& rhs) const;
+		template<class StringT> bool operator == (const StringT& rhs) const;
 
 		//! The operator `!=`
 		template<class U> bool operator != (const U& rhs) const;

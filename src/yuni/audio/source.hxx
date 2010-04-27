@@ -56,8 +56,8 @@ namespace Audio
 		return pName;
 	}
 
-	template<class AnyStringT>
-	inline void Source::name(const AnyStringT& name)
+	template<class StringT>
+	inline void Source::name(const StringT& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		pName = name;

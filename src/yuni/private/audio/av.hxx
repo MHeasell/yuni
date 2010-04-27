@@ -10,14 +10,14 @@ namespace Private
 namespace Audio
 {
 
-	template<typename AnyStringT>
-	AudioFile* AV::OpenFile(const AnyStringT& path)
+	template<typename StringT>
+	AudioFile* AV::OpenFile(const StringT& path)
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<AnyStringT>::valid, AV_OpenFile_InvalidFileNameType);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, AV_OpenFile_InvalidFileNameType);
 
 		AudioFile* file = (AudioFile*)calloc(1, sizeof(AudioFile));
 		if (file && 0 == av_open_input_file(&file->FormatContext,
-			Traits::CString<AnyStringT>::Perform(path), NULL, 0, NULL))
+			Traits::CString<StringT>::Perform(path), NULL, 0, NULL))
 		{
 			// After opening, we must search for the stream information because not
 			// all formats will have it in stream headers (eg. system MPEG streams)

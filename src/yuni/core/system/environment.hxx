@@ -13,31 +13,27 @@ namespace System
 namespace Environment
 {
 
-	template<class AnyStringT> inline String Read(const AnyStringT& name)
+	template<class StringT> inline String Read(const StringT& name)
 	{
 		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		typedef typename Static::Remove::Const<StringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, SystemEnvironment_InvalidTypeForString);
 
 		return ::getenv(Traits::CString<UType>::Buffer(name));
 	}
 
-	template<class AnyStringT, class AnyStringT2>
-	inline bool Read(const AnyStringT& name, AnyStringT2& out, const bool emptyBefore)
+	template<class StringT, class StringT2>
+	inline bool Read(const StringT& name, StringT2& out, const bool emptyBefore)
 	{
-		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
-		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<AnyStringT2>::Type UTypeOut;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, SystemEnvironment_InvalidTypeForString);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, SystemEnvironment_InvalidTypeForString);
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UTypeOut>::valid, SystemEnvironment_InvalidTypeForOutString);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, SystemEnvironment_InvalidTypeForOutString);
 
 		if (emptyBefore)
 			out.clear();
-		out += ::getenv(Traits::CString<UType>::Buffer(name));
+		out += ::getenv(Traits::CString<StringT>::Buffer(name));
 		return true;
 	}
 

@@ -33,8 +33,8 @@ namespace Audio
 		static bool Init();
 
 		//! Open a file with ffmpeg and sets up the streams' information
-		template<typename AnyStringT>
-		static AudioFile* OpenFile(const AnyStringT& fname);
+		template<typename StringT>
+		static AudioFile* OpenFile(const StringT& fname);
 
 		//! Close an opened file and any of its streams
 		static void CloseFile(AudioFile* file);
