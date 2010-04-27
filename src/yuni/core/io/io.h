@@ -181,7 +181,7 @@ namespace IO
 	** \param filename The path or the filename to test
 	** \return True if the given filename is an absolute path, false otherwise (or empty)
 	*/
-	template<class AnyStringT> bool IsAbsolute(const AnyStringT& filename);
+	template<class StringT> bool IsAbsolute(const StringT& filename);
 
 
 	/*!
@@ -238,7 +238,7 @@ namespace IO
 	** \return True if it exists, false otherwise
 	*/
 	// const char*
-	template<class AnyStringT> bool Exists(const AnyStringT& filename);
+	template<class StringT> bool Exists(const StringT& filename);
 
 
 	/*!
@@ -255,8 +255,8 @@ namespace IO
 	** \param      in  A path/filename to normalize
 	** \param      inLength Length of #in (optional, -1 for autodetection)
 	*/
-	template<class StringT, class AnyStringT>
-	void Normalize(StringT& out, const AnyStringT& in,
+	template<class StringT1, class StringT2>
+	void Normalize(StringT1& out, const StringT2& in,
 		unsigned int inLength = (unsigned int)-1);
 
 

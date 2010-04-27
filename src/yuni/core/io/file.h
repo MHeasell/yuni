@@ -45,7 +45,7 @@ namespace File
 	** \param p The folder/filename to test
 	** \return True if it exists, false otherwise
 	*/
-	template<class AnyStringT> bool Exists(const AnyStringT& p);
+	template<class StringT> bool Exists(const StringT& p);
 
 
 	/*!
@@ -56,7 +56,7 @@ namespace File
 	** \param[out] size The size (in bytes) of the file. 0 if any errors has occured
 	** \return True if the operation succeeded, False otherwise
 	*/
-	template<class AnyStringT> bool Size(const AnyStringT& filename, uint64& size);
+	template<class StringT> bool Size(const StringT& filename, uint64& size);
 
 	/*!
 	** \brief Get the size of a file
@@ -66,7 +66,7 @@ namespace File
 	** \param[out] size The size (in bytes) of the file. 0 if any errors has occured
 	** \return The size in bytes of the file, 0 when the operation fails
 	*/
-	template<class AnyStringT> uint64 Size(const AnyStringT& filename);
+	template<class StringT> uint64 Size(const StringT& filename);
 
 
 
@@ -107,8 +107,8 @@ namespace File
 	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded
 	** \return True if the operation succeeded.
 	*/
-	template<class C, int ChunkT, class AnyStringT>
-	bool LoadContent(const StringBase<C,ChunkT>& out, const AnyStringT& filename, const uint64 hardlimit = sizeHardLimit);
+	template<class C, int ChunkT, class StringT>
+	bool LoadContent(const StringBase<C,ChunkT>& out, const StringT& filename, const uint64 hardlimit = sizeHardLimit);
 
 
 	/*!
@@ -119,7 +119,7 @@ namespace File
 	** \param content The new content of the file
 	** \return True if the operation succeeded, false otherwise
 	*/
-	template<class AnyStringT, class U> bool SaveToFile(const AnyStringT& filename, const U& content);
+	template<class StringT, class U> bool SaveToFile(const StringT& filename, const U& content);
 	//@}
 
 
@@ -132,8 +132,8 @@ namespace File
 	** \param overwrite Overwrite the target file if already exists
 	** \return True if the operation succeeded (or if the target file already exists and `overwrite` = false), false otherwise
 	*/
-	template<class AnyStringT1, class AnyStringT2>
-	bool Copy(const AnyStringT1& from, const AnyStringT2& to, bool overwrite = true);
+	template<class StringT1, class StringT2>
+	bool Copy(const StringT1& from, const StringT2& to, bool overwrite = true);
 
 
 	/*!
@@ -142,7 +142,7 @@ namespace File
 	** \param filename An UTF8 filename
 	** \return True if the file has been created or truncated
 	*/
-	template<class AnyStringT> bool CreateEmptyFile(const AnyStringT& filename);
+	template<class StringT> bool CreateEmptyFile(const StringT& filename);
 
 
 	/*!
@@ -152,7 +152,7 @@ namespace File
 	** Core::IO::File::SetContent("/tmp/anyfile.txt", "Hello world !\n");
 	** \endcode
 	*/
-	template<class AnyStringT, class U> bool SetContent(const AnyStringT& filename, const U& content);
+	template<class StringT, class U> bool SetContent(const StringT& filename, const U& content);
 
 	/*!
 	** \brief Append the content of an arbitrary string to a file
@@ -161,7 +161,7 @@ namespace File
 	** Core::IO::File::AppendContent("/tmp/anyfile.txt", "lorem ipsumi\n");
 	** \endcode
 	*/
-	template<class AnyStringT, class U> bool AppendContent(const AnyStringT& filename, const U& content);
+	template<class StringT, class U> bool AppendContent(const StringT& filename, const U& content);
 
 
 

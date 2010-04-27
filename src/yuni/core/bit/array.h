@@ -149,7 +149,7 @@ namespace Bit
 		**
 		** \param buffer Any buffer
 		*/
-		template<class AnyStringT> void loadFromBuffer(const AnyStringT& u);
+		template<class StringT> void loadFromBuffer(const StringT& buffer);
 
 		/*!
 		** \brief Load an array of bit from a buffer
@@ -157,7 +157,7 @@ namespace Bit
 		** \param buffer A raw buffer
 		** \param size Size ofthe buffer
 		*/
-		template<class AnyStringT> void loadFromBuffer(const AnyStringT& u, unsigned int size);
+		template<class StringT> void loadFromBuffer(const StringT& buffer, unsigned int size);
 
 		/*!
 		** \brief Save the array of bits into another buffer (which may use any type)
@@ -233,7 +233,7 @@ namespace Bit
 		//! The operator `=`
 		Array& operator = (const Array& rhs);
 		//! The operator `=`
-		template<class AnyStringT> Array& operator = (const AnyStringT& rhs);
+		template<class StringT> Array& operator = (const StringT& rhs);
 		//@}
 
 

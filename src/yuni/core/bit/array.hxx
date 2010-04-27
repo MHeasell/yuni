@@ -127,11 +127,11 @@ namespace Bit
 	}
 
 
-	template<class AnyStringT>
-	inline void Array::loadFromBuffer(const AnyStringT& u)
+	template<class StringT>
+	inline void Array::loadFromBuffer(const StringT& u)
 	{
 		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		typedef typename Static::Remove::Const<StringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
 		// Assert, if the length of the container can not be found at compile time
@@ -155,11 +155,11 @@ namespace Bit
 	}
 
 
-	template<class AnyStringT>
-	inline void Array::loadFromBuffer(const AnyStringT& u, unsigned int size)
+	template<class StringT>
+	inline void Array::loadFromBuffer(const StringT& u, unsigned int size)
 	{
 		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<AnyStringT>::Type UType;
+		typedef typename Static::Remove::Const<StringT>::Type UType;
 		// Assert, if a C* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, BitArray_InvalidTypeForBuffer);
 
@@ -185,7 +185,7 @@ namespace Bit
 	}
 
 
-	template<class AnyStringT> inline Array& Array::operator = (const AnyStringT& rhs)
+	template<class StringT> inline Array& Array::operator = (const StringT& rhs)
 	{
 		loadFromBuffer(rhs);
 		return *this;

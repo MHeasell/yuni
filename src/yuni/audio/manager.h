@@ -42,34 +42,34 @@ namespace Audio
 		void start();
 		void stop();
 
-		template<typename AnyStringT>
-		bool loadSound(const AnyStringT&);
+		template<typename StringT>
+		bool loadSound(const StringT&);
 
-		template<typename AnyStringT1, typename AnyStringT2>
-		bool playSound(const AnyStringT1& source, const AnyStringT2& sound);
+		template<typename StringT1, typename StringT2>
+		bool playSound(const StringT1& source, const StringT2& sound);
 
 		/*!
 		** \brief Create a source with default values
 		**
 		** Position, speed and velocity default to (0,0,0)
 		*/
-		template<typename AnyStringT>
-		bool addSource(const AnyStringT& sourceName, bool loop);
+		template<typename StringT>
+		bool addSource(const StringT& sourceName, bool loop);
 
 		/*!
 		** \brief Create a source with 3D position
 		**
 		** Speed and velocity default to (0,0,0)
 		*/
-		template<typename AnyStringT>
-		bool addSource(const AnyStringT& sourceName, const Gfx::Point3D<>& position,
+		template<typename StringT>
+		bool addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
 			bool loop);
 
 		/*!
 		** \brief Constructor with position, velocity and direction
 		*/
-		template<typename AnyStringT>
-		bool addSource(const AnyStringT& sourceName, const Gfx::Point3D<>& position,
+		template<typename StringT>
+		bool addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
 			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction, bool loop);
 
 
