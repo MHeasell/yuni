@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_EVENT_FLOW_CONTINUOUS_H__
-# define __YUNI_CORE_EVENT_FLOW_CONTINUOUS_H__
+#ifndef __YUNI_CORE_EVENT_FLOW_TIMER_H__
+# define __YUNI_CORE_EVENT_FLOW_TIMER_H__
 
 # include "../../../yuni.h"
 # include "../../../thread/thread.h"
@@ -16,7 +16,7 @@ namespace Flow
 
 
 	template<class EventLoopT>
-	class Continuous
+	class Timer
 	{
 	public:
 		//! Type of the event loop
@@ -28,8 +28,31 @@ namespace Flow
 		/*!
 		** \brief Default constructor
 		*/
-		Continuous() {}
+		Timer() :pTimeout(200), pEventLoop(NULL) {}
 		//@}
+
+		/*!
+		** \brief Set the timeout to wait between each cycle
+		**
+		** \note Due to implementation limitations, the timeout is limited to 10s when
+		** the loop is not in detached mode. There is no restriction in detached mode
+		** (which is the default).
+		*/
+		void timeout(unsigned int t)
+		{
+			if (!EventLoopType::detached)
+			{
+				// Hard limit when not in detached mode.
+				// When not in detached mode, there is no cancellation point
+				// so it is impossible to properly the loop if the timeout is too high
+				if (t > 10000)
+					t = 10000;
+			}
+			// The timeout will be set from the loop to avoid continuous locking
+			Bind<bool ()> b;
+			b.bind(this, &Timer::internalSetLoopTimeout, t);
+			pEventLoop->dispatch(b);
+		}
 
 	protected:
 		//! \name Events triggered by the public interface of the event loop (from any thread)
@@ -67,9 +90,9 @@ namespace Flow
 		** This method is called from the main thread of the event loop.
 		** No lock is provided.
 		*/
-		static bool onNewCycle()
+		bool onNewCycle()
 		{
-			// Do not wait, directly execute the cycle
+			pEventLoop->suspend(pTimeout);
 			return true;
 		}
 		//@}
@@ -78,13 +101,26 @@ namespace Flow
 		** \brief Event triggered from the constructor of the event loop
 		** \param e Pointer to the original event loop
 		*/
-		static void onInitialize(EventLoopType* e)
+		void onInitialize(EventLoopType* e)
 		{
-			(void) e;
-			// Do nothing
+			pEventLoop = e;
 		}
 
-	}; // class Continuous<>
+	private:
+		bool internalSetLoopTimeout(unsigned int t)
+		{
+			// We assume here that `t` is valid.
+			pTimeout = t;
+			return true;
+		}
+
+	private:
+		//! Timeout (ms)
+		unsigned int pTimeout;
+		//! Pointer to the original event loop
+		EventLoopType* pEventLoop;
+
+	}; // class Timer<>
 
 
 
@@ -95,4 +131,4 @@ namespace Flow
 } // namespace Core
 } // namespace Yuni
 
-#endif // __YUNI_CORE_EVENT_FLOW_CONTINUOUS_H__
+#endif // __YUNI_CORE_EVENT_FLOW_TIMER_H__

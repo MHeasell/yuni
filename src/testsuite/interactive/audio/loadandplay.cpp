@@ -13,7 +13,7 @@ class LoadAndPlay : public Application::Console
 {
 public:
 	LoadAndPlay(int argc, char* argv[])
-		:Application::Console(argc, argv), audio(Audio::Manager::Instance())
+		:Application::Console(argc, argv), audio()
 	{
 		for (int i = 1; i < argc; ++i)
 		{
@@ -21,7 +21,6 @@ public:
 		}
 		if (!pFileNames.empty())
 			audio.start();
-		Yuni::Sleep(2);
 	}
 
 	virtual ~LoadAndPlay()
@@ -43,8 +42,9 @@ public:
 				std::cerr << "Source creation failed !" << std::endl;
 				return;
 			}
+			Yuni::Sleep(1);
 			audio.loadSound(*it);
-			Yuni::Sleep(2);
+			Yuni::Sleep(1);
 			audio.playSound(sourceName, *it);
 		}
 		Yuni::Sleep(240);
@@ -52,7 +52,7 @@ public:
 
 private:
 	String::Vector pFileNames;
-	Audio::Manager& audio;
+	Audio::Manager audio;
 
 }; // class LoadAndPlay
 

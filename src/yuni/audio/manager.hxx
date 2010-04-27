@@ -16,9 +16,8 @@ namespace Audio
 
 		Yuni::Bind<bool()> callback;
 
-		//callback.bind(this, &Manager::loadSoundWL, String(filePath));
-		//pAudioLoop.dispatch(callback);
-		loadSoundWL(filePath);
+		callback.bind(this, &Manager::loadSoundWL, String(filePath));
+		pAudioLoop.dispatch(callback);
 		return true;
 	}
 
@@ -67,8 +66,13 @@ namespace Audio
 			return false;
 
 		Source::Ptr newSource(new Source(loop));
-		if (!newSource->prepare())
-			return false;
+
+		Audio::Loop::RequestType callback;
+ 		callback.bind(newSource, &Source::prepare);
+		// Dispatching...
+ 		pAudioLoop.dispatch(callback);
+		// TODO: Find a way to test the return value
+
 		pSources[String(sourceName)] = newSource;
 		return true;
 	}
@@ -81,8 +85,12 @@ namespace Audio
 			return false;
 
 		Source::Ptr newSource(new Source(loop));
-		if (!newSource->prepare())
-			return false;
+		Audio::Loop::RequestType callback;
+ 		callback.bind(newSource, &Source::prepare);
+		// Dispatching...
+ 		pAudioLoop.dispatch(callback);
+		// TODO: Find a way to test the return value
+
 		pSources[sourceName] = newSource;
 		return true;
 	}
@@ -96,8 +104,11 @@ namespace Audio
 			return false;
 
 		Source::Ptr newSource(new Source(position, loop));
-		if (!newSource->prepare())
-			return false;
+		Audio::Loop::RequestType callback;
+ 		callback.bind(newSource, &Source::prepare);
+		// Dispatching...
+ 		pAudioLoop.dispatch(callback);
+
 		pSources[String(sourceName)] = newSource;
 		return true;
 	}
@@ -111,8 +122,11 @@ namespace Audio
 			return false;
 
 		Source::Ptr newSource(new Source(position, velocity, direction, loop));
-		if (!newSource->prepare())
-			return false;
+		Audio::Loop::RequestType callback;
+ 		callback.bind(newSource, &Source::prepare);
+		// Dispatching...
+ 		pAudioLoop.dispatch(callback);
+
 		pSources[String(sourceName)] = newSource;
 		return true;
 	}

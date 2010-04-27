@@ -30,13 +30,11 @@ namespace Audio
 	public:
 		typedef Policy::ObjectLevelLockable<Manager>  ThreadingPolicy;
 
-		typedef std::map<String, Private::Audio::Buffer<>::Ptr > BufferMap;
-
 	public:
-		static Manager& Instance();
+		Manager(): pReady(false), pAudioLoop(this)
+		{}
 
 	private:
-		Manager(): pReady(false) {}
 		Manager(const Manager&);
 		Manager& operator = (const Manager&);
 
@@ -85,8 +83,8 @@ namespace Audio
 		unsigned int createSource();
 
 	private:
-		//! Singleton instance
-		static Manager* sInstance;
+		//! Static to make sure only one manager is started
+		static bool sHasRunningInstance;
 
 		//! Has the manager been properly started ?
 		bool pReady;
@@ -95,7 +93,7 @@ namespace Audio
 		//! Map of currently registered sources, with string tags as keys
 		Source::Map pSources;
 		//! Map of currently loaded buffers, with string tags as keys
-		BufferMap pBuffers;
+		Private::Audio::Buffer<>::Map pBuffers;
 
 	private:
 		friend class Loop;

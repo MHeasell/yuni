@@ -8,31 +8,26 @@ namespace Yuni
 namespace Audio
 {
 
-	Manager* Manager::sInstance;
-
-
-	Manager& Manager::Instance()
-	{
-		if (!sInstance)
-			sInstance = new Manager();
-		return *sInstance;
-	}
+	bool Manager::sHasRunningInstance = false;
 
 
 	void Manager::start()
 	{
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			// Do not initialize the manager twice
-			if (pReady)
-				return;
-		}
+		ThreadingPolicy::MutexLocker locker(*this);
+		// Do not initialize the manager twice
+		if (pReady)
+			return;
+		if (sHasRunningInstance)
+			return;
+
 		pAudioLoop.start();
 		Yuni::Bind<bool()> callback;
 		callback.bind(&Private::Audio::AV::Init);
 		pAudioLoop.dispatch(callback);
 		callback.bind(&Private::Audio::OpenAL::Init);
 		pAudioLoop.dispatch(callback);
+		// TODO: Find a way to test return values
+		sHasRunningInstance = true;
 		pReady = true;
 	}
 
@@ -44,11 +39,8 @@ namespace Audio
 			return;
 
 		// Close OpenAL buffers properly
-// 		for (BufferMap::iterator it = pBuffers.begin(); it != pBuffers.end(); ++it)
-// 		{
-// 			delete (it->second);
-// 		}
 		pBuffers.clear(); // The Buffer destructors will clean stuff up
+
 		// Close OpenAL sources properly
 		for (Source::Map::iterator it = pSources.begin(); it != pSources.end(); ++it)
 		{
@@ -61,6 +53,7 @@ namespace Audio
 		pAudioLoop.dispatch(callback);
 		pAudioLoop.stop();
 		pReady = false;
+		sHasRunningInstance = false;
 	}
 
 	bool Manager::loadSoundWL(const String& filePath)

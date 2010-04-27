@@ -289,6 +289,7 @@ Set(SRC_CORE_EVENT
 				core/event/loop.fwd.h
 				core/event/flow
 				core/event/flow/continuous.h
+				core/event/flow/timer.h
 				core/event/statistics
 				core/event/statistics/none.h
 				)
