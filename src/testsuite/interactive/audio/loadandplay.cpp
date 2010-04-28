@@ -42,12 +42,10 @@ public:
 				std::cerr << "Source creation failed !" << std::endl;
 				return;
 			}
-			Yuni::Sleep(1);
 			audio.loadSound(*it);
-			Yuni::Sleep(1);
 			audio.playSound(sourceName, *it);
 		}
-		Yuni::Sleep(240);
+		Yuni::Sleep(3);
 	}
 
 private:
