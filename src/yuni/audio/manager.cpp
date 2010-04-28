@@ -1,4 +1,5 @@
 
+#include <cassert>
 #include "../private/audio/av.h"
 #include "../private/audio/openal.h"
 #include "manager.h"
@@ -11,24 +12,31 @@ namespace Audio
 	bool Manager::sHasRunningInstance = false;
 
 
-	void Manager::start()
+	bool Manager::start()
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		// Do not initialize the manager twice
-		if (pReady)
-			return;
-		if (sHasRunningInstance)
-			return;
+		if (pReady || sHasRunningInstance)
+			return false;
 
 		pAudioLoop.start();
-		Yuni::Bind<bool()> callback;
-		callback.bind(&Private::Audio::AV::Init);
+		Thread::Condition condition;
+		InitData initData(condition, pReady);
+		Bind<bool()> callback;
+		callback.bind(this, &Manager::initDispatched, initData);
+		condition.lock();
 		pAudioLoop.dispatch(callback);
-		callback.bind(&Private::Audio::OpenAL::Init);
-		pAudioLoop.dispatch(callback);
-		// TODO: Find a way to test return values
-		sHasRunningInstance = true;
-		pReady = true;
+
+		// Wait for the initDispatched to finish
+		condition.waitUnlocked();
+		condition.unlock();
+
+		if (pReady)
+		{
+			sHasRunningInstance = true;
+			return true;
+		}
+		return false;
 	}
 
 	void Manager::stop()
@@ -56,7 +64,19 @@ namespace Audio
 		sHasRunningInstance = false;
 	}
 
-	bool Manager::loadSoundWL(const String& filePath)
+
+	bool Manager::initDispatched(InitData& data)
+	{
+  		data.condition.lock();
+		data.condition.unlock();
+		data.ready = Private::Audio::AV::Init() && Private::Audio::OpenAL::Init();
+
+		data.condition.notify();
+		return data.ready;
+	}
+
+
+	bool Manager::loadSoundDispatched(const String& filePath)
 	{
 		std::cout << "Loading file \"" << filePath << "\"..." << std::endl;
 
@@ -91,22 +111,23 @@ namespace Audio
 			return false;
 		}
 
-		// Create the buffer, store it in the map
-		pBuffers[filePath] = new Private::Audio::Buffer<>(stream);
+		// Associate the buffer with the stream
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			assert(pBuffers.find(filePath) != pBuffers.end());
+			pBuffers[filePath]->stream(stream);
+		}
 
 		std::cout << "Loading succeeded !" << std::endl;
 		return true;
 	}
 
 
-	bool Manager::updateWL()
+	bool Manager::updateDispatched()
 	{
 		Source::Map::iterator end = pSources.end();
 		for (Source::Map::iterator it = pSources.begin(); it != end; ++it)
-		{
-			if (NULL != (it->second))
-				!it->second->update();
-		}
+			it->second->update();
 		return true;
 	}
 

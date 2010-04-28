@@ -8,6 +8,7 @@
 # include "../core/string.h"
 # include "../core/smartptr.h"
 # include "../thread/policy.h"
+# include "../thread/condition.h"
 # include "source.h"
 # include "loop.h"
 # include "../private/audio/buffer.h"
@@ -39,7 +40,7 @@ namespace Audio
 		Manager& operator = (const Manager&);
 
 	public:
-		void start();
+		bool start();
 		void stop();
 
 		template<typename StringT>
@@ -72,15 +73,37 @@ namespace Audio
 		bool addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
 			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction, bool loop);
 
+	private:
+		//! This is meant to aggregate a condition and a boolean for dispatching
+		struct InitData
+		{
+			InitData(Thread::Condition& c, bool& r): condition(c), ready(r) {}
+
+			Thread::Condition& condition;
+			bool& ready;
+		};
 
 	private:
-		bool loadSoundWL(const String& filePath);
+		/*!
+		** \brief Audio initialization
+		**
+		** \note Dispatched in the audio loop
+		*/
+		bool initDispatched(InitData& initData);
 
-		bool playSoundWL();
+		/*!
+		** \brief Sound loading
+		**
+		** \note Dispatched in the audio loop
+		*/
+		bool loadSoundDispatched(const String& filePath);
 
-		bool updateWL();
-
-		unsigned int createSource();
+		/*!
+		** \brief Buffer update
+		**
+		** \note Called in the Audio::Loop::onLoop()
+		*/
+		bool updateDispatched();
 
 	private:
 		//! Static to make sure only one manager is started

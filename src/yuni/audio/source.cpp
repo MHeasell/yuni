@@ -20,9 +20,9 @@ namespace Audio
 				return false;
 		}
 
-		if (NULL == buffer)
+		if (!buffer || !buffer->valid())
 		{
-			std::cout << "NULL Buffer !" << std::endl;
+			std::cout << "Invalid Buffer !" << std::endl;
 			return false;
 		}
 

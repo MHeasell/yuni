@@ -19,7 +19,9 @@ namespace Audio
 	class Buffer
 	{
 	public:
+		//! Pointer type
 		typedef SmartPtr<Buffer<> > Ptr;
+		//! Map from a string to a Buffer::Ptr
 		typedef std::map<String, Ptr> Map;
 
 	public:
@@ -30,6 +32,7 @@ namespace Audio
 		}; // enum anonymous
 
 	public:
+		//! Constructor
 		Buffer(AudioStream* stream);
 		~Buffer();
 
@@ -37,11 +40,18 @@ namespace Audio
 
 		bool update(unsigned int source);
 
+		void stream(AudioStream* stream) { pStream = stream; }
+
+		bool valid() { return NULL != pStream; }
+
 	private:
+		//! The audio stream contains the link to the file and the data
 		AudioStream* pStream;
 
+		//! Identifiers of the OpenAL buffers used
 		unsigned int pIDs[BufferCount];
 
+		//! Buffer for storing raw data
 		CustomString<BufferSize, false, false> pData;
 
 	}; // class Buffer

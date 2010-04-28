@@ -15,7 +15,7 @@ namespace Audio
 	{
 		if (!pManager)
 			return false;
-		pManager->updateWL();
+		pManager->updateDispatched();
 		return true;
 	}
 

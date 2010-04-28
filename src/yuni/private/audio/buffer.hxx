@@ -27,6 +27,8 @@ namespace Audio
 	template<unsigned int BufferSizeT>
 	bool Buffer<BufferSizeT>::prepare(unsigned int source)
 	{
+		if (!pStream)
+			return false;
 		for (unsigned int i = 0; i < BufferCount; ++i)
 		{
 			// Make sure we get some data to give to the buffer
@@ -46,6 +48,9 @@ namespace Audio
 	template<unsigned int BufferSizeT>
 	bool Buffer<BufferSizeT>::update(unsigned int source)
 	{
+		if (!pStream)
+			return false;
+
 		// Check if a buffer has finished playing
 		ALint processed = 0;
 		alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
