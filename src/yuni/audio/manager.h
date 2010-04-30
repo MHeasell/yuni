@@ -73,6 +73,20 @@ namespace Audio
 		bool addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
 			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction, bool loop);
 
+		/*!
+		** \brief Move a source to a given position
+		*/
+		template<typename StringT>
+		bool moveSource(const StringT& sourceName, const Gfx::Point3D<>& position);
+
+		/*!
+		** \brief Move a source to a given position, with velocity and direction
+		*/
+		template<typename StringT>
+		bool moveSource(const StringT& sourceName, const Gfx::Point3D<>& position,
+			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
+
+
 	private:
 		//! This is meant to aggregate a condition and a boolean for dispatching
 		struct InitData

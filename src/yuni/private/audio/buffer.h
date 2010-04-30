@@ -36,9 +36,11 @@ namespace Audio
 		Buffer(AudioStream* stream);
 		~Buffer();
 
-		bool prepare(unsigned int source);
+		bool prepareDispatched(unsigned int source);
 
-		bool update(unsigned int source);
+		bool destroyDispatched();
+
+		bool updateDispatched(unsigned int source);
 
 		void stream(AudioStream* stream) { pStream = stream; }
 

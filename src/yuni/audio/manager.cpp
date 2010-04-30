@@ -47,10 +47,16 @@ namespace Audio
 			return;
 
 		// Close OpenAL buffers properly
-		pBuffers.clear(); // The Buffer destructors will clean stuff up
+		Private::Audio::Buffer<>::Map::iterator bEnd = pBuffers.end();
+		for (Private::Audio::Buffer<>::Map::iterator it = pBuffers.begin(); it != bEnd; ++it)
+		{
+			it->second->destroyDispatched();
+		}
+		pBuffers.clear();
 
 		// Close OpenAL sources properly
-		for (Source::Map::iterator it = pSources.begin(); it != pSources.end(); ++it)
+		Source::Map::iterator sEnd = pSources.end();
+		for (Source::Map::iterator it = pSources.begin(); it != sEnd; ++it)
 		{
 			Private::Audio::OpenAL::DestroySource(it->second->id());
 		}
@@ -110,6 +116,8 @@ namespace Audio
 			Private::Audio::AV::CloseFile(file);
 			return false;
 		}
+		std::cout << "Sound is " << bits << " bits " << (channels > 1 ? "stereo " : "mono ")
+				  << rate << "Hz" << std::endl;
 
 		// Associate the buffer with the stream
 		{
@@ -127,7 +135,7 @@ namespace Audio
 	{
 		Source::Map::iterator end = pSources.end();
 		for (Source::Map::iterator it = pSources.begin(); it != end; ++it)
-			it->second->update();
+			it->second->updateDispatched();
 		return true;
 	}
 

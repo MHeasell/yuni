@@ -15,20 +15,19 @@ namespace Audio
 	inline Buffer<BufferSizeT>::Buffer(AudioStream* stream)
 		:pStream(stream)
 	{
-		OpenAL::CreateBuffers(BufferCount, pIDs);
 	}
 
 	template<unsigned int BufferSizeT>
 	inline Buffer<BufferSizeT>::~Buffer()
 	{
-		OpenAL::DestroyBuffers(BufferCount, pIDs);
 	}
 
 	template<unsigned int BufferSizeT>
-	bool Buffer<BufferSizeT>::prepare(unsigned int source)
+	bool Buffer<BufferSizeT>::prepareDispatched(unsigned int source)
 	{
 		if (!pStream)
 			return false;
+		OpenAL::CreateBuffers(BufferCount, pIDs);
 		for (unsigned int i = 0; i < BufferCount; ++i)
 		{
 			// Make sure we get some data to give to the buffer
@@ -46,7 +45,7 @@ namespace Audio
 	}
 
 	template<unsigned int BufferSizeT>
-	bool Buffer<BufferSizeT>::update(unsigned int source)
+	bool Buffer<BufferSizeT>::updateDispatched(unsigned int source)
 	{
 		if (!pStream)
 			return false;
@@ -71,6 +70,13 @@ namespace Audio
 		return true;
 	}
 
+	template<unsigned int BufferSizeT>
+	bool Buffer<BufferSizeT>::destroyDispatched()
+	{
+		OpenAL::DestroyBuffers(BufferCount, pIDs);
+		AV::CloseFile(pStream->parent);
+		return true;
+	}
 
 } // namespace Audio
 } // namespace Private

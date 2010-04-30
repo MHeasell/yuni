@@ -10,7 +10,6 @@ namespace Audio
 
 	bool OpenAL::Init()
 	{
-		std::cout << "OpenAL::Init" << std::endl;
 		ALCdevice* device = alcOpenDevice(NULL);
 		if (!device)
 			return false;
@@ -135,6 +134,11 @@ namespace Audio
 			return 0;
 
 		UnbindBufferFromSource(source);
+
+		alSourcef(source, AL_MIN_GAIN, 0.0f); // Allow the sound to fade to nothing
+		alSourcef(source, AL_MAX_GAIN, 1.5f); // Max amplification
+		alSourcef(source, AL_MAX_DISTANCE, 10000.0f);
+
 		MoveSource(source, position, velocity, direction);
 		ModifySource(source, pitch, gain, attenuate, loop);
 		return source;
@@ -165,9 +169,7 @@ namespace Audio
 		alSourcef(source, AL_PITCH, pitch);
 		alSourcef(source, AL_GAIN, gain);
 		alSourcei(source, AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
-		if (!attenuate)
-			// Disable distance attenuation
-			alSourcei(source, AL_ROLLOFF_FACTOR, 0);
+		alSourcef(source, AL_ROLLOFF_FACTOR, attenuate ? 1.0f : 0.0f);
 	}
 
 	void OpenAL::MoveSource(unsigned int source, const Gfx::Point3D<>& position,

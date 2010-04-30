@@ -1,4 +1,5 @@
 
+#include "../core/math.h"
 #include "source.h"
 #include "../private/audio/av.h"
 #include "../private/audio/openal.h"
@@ -9,14 +10,18 @@ namespace Yuni
 {
 namespace Audio
 {
+	const float Source::DefaultPitch = 1.0f;
+	const float Source::DefaultGain = 1.0f;
+	const bool Source::DefaultAttenuation = true;
+	const bool Source::DefaultLooping = false;
 
 
-	bool Source::playSound(Private::Audio::Buffer<>::Ptr buffer)
+	bool Source::playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer)
 	{
 		std::cout << "Beginning playback on source " << pID << "..." << std::endl;
 		if (!pReady)
 		{
-			if (!prepare())
+			if (!prepareDispatched())
 				return false;
 		}
 
@@ -27,7 +32,7 @@ namespace Audio
 		}
 
 		pBuffer = buffer;
-		if (!pBuffer->prepare(pID))
+		if (!pBuffer->prepareDispatched(pID))
 		{
 			std::cerr << "Failed loading buffers !" << std::endl;
 			return false;
@@ -44,25 +49,33 @@ namespace Audio
 		return true;
 	}
 
-	bool Source::update()
+
+	bool Source::updateDispatched()
 	{
 		if (!pReady)
 			return false;
 		pPlaying = Private::Audio::OpenAL::IsSourcePlaying(pID);
 		if (!pPlaying)
 			return false;
+		if (pModified)
+		{
+			Private::Audio::OpenAL::MoveSource(pID, pPosition, pVelocity, pDirection);
+			Private::Audio::OpenAL::ModifySource(pID, DefaultPitch, pGain, DefaultAttenuation,
+				pLoop);
+		}
 		if (NULL != pBuffer)
-			pBuffer->update(pID);
+			pBuffer->updateDispatched(pID);
 		return true;
 	}
 
-	bool Source::prepare()
+
+	bool Source::prepareDispatched()
 	{
 		if (pReady)
 			return true;
 
 		unsigned int source = Private::Audio::OpenAL::CreateSource(pPosition, pVelocity,
-			pDirection, 1.0f, pGain, true, pLoop);
+			pDirection, DefaultPitch, pGain, DefaultAttenuation, pLoop);
 
 		pID = source;
 		pReady = (source > 0);

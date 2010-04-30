@@ -30,6 +30,13 @@ namespace Audio
 		typedef std::map<String, Ptr> Map;
 
 	public:
+		//! Default values
+		static const float DefaultPitch;
+		static const float DefaultGain;
+		static const bool DefaultAttenuation;
+		static const bool DefaultLooping;
+
+	public:
 		//! \name Constructors & Destructor
 		//@{
 
@@ -38,7 +45,7 @@ namespace Audio
 		**
 		** Position, speed and direction default to (0,0,0)
 		*/
-		Source(bool loop = false);
+		Source(bool loop = DefaultLooping);
 
 		/*!
 		** \brief Constructor with 3D position
@@ -63,13 +70,14 @@ namespace Audio
 		//! \name Methods
 		//@{
 		//! Prepare the source for playing
-		bool prepare();
+		bool prepareDispatched();
 
 		//! Play the sound
-		bool playSound(Private::Audio::Buffer<>::Ptr buffer);
+		bool playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer);
 
 		//! Update buffers if necessary
-		bool update();
+		bool updateDispatched();
+
 		//@}
 
 
@@ -119,6 +127,8 @@ namespace Audio
 		bool pReady;
 		//! Is the source currently playing?
 		bool pPlaying;
+		//! Has the source's values been modified ?
+		bool pModified;
 
 	}; // class Source
 
