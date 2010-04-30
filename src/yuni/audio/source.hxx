@@ -8,26 +8,32 @@ namespace Audio
 {
 
 	inline Source::Source(bool loop)
-		: pLoop(loop), pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false)
+		: pLoop(loop), pGain(DefaultGain), pBuffer(NULL)
+		, pReady(false), pPlaying(false), pModified(false)
 	{}
 
 
 	inline Source::Source(const Gfx::Point3D<>& position, bool loop)
-		: pPosition(position), pLoop(loop), pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false)
+		: pPosition(position), pLoop(loop), pGain(1.0f), pBuffer(NULL)
+		, pReady(false), pPlaying(false), pModified(false)
 	{}
 
 
 	inline Source::Source(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
 		const Gfx::Vector3D<>& direction, bool loop = false)
-		:pPosition(position), pVelocity(velocity), pDirection(direction),
-		 pLoop(loop), pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false)
+		: pPosition(position), pVelocity(velocity), pDirection(direction), pLoop(loop)
+		, pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false), pModified(false)
 	{}
 
 
 	inline void Source::position(const Gfx::Point3D<>& position)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
-		pPosition = position;
+		if (pPosition != position)
+		{
+			pPosition = position;
+			pModified = true;
+		}
 	}
 
 	inline Gfx::Point3D<> Source::position() const
@@ -40,7 +46,11 @@ namespace Audio
 	inline void Source::gain(float newGain)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
-		pGain = newGain;
+		if (!Math::Equals(pGain, newGain))
+		{
+			pGain = newGain;
+			pModified = true;
+		}
 	}
 
 	inline float Source::gain() const

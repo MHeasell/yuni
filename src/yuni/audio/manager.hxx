@@ -1,6 +1,7 @@
 #ifndef __YUNI_AUDIO_MANAGER_HXX__
 # define __YUNI_AUDIO_MANAGER_HXX__
 
+
 namespace Yuni
 {
 namespace Audio
@@ -53,7 +54,7 @@ namespace Audio
 		// String constructor call when StringT == String.
 		// However, it would require method template partial specialization :/
 		Audio::Loop::RequestType callback;
- 		callback.bind(sourcePtr, &Source::playSound, buffer);
+ 		callback.bind(sourcePtr, &Source::playSoundDispatched, buffer);
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
 
@@ -64,22 +65,7 @@ namespace Audio
 	template<typename StringT>
 	bool Manager::addSource(const StringT& sourceName, bool loop)
 	{
-		Source::Ptr newSource(new Source(loop));
-
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			if (!pReady)
-				return false;
-
-			pSources[String(sourceName)] = newSource;
-		}
-		Audio::Loop::RequestType callback;
- 		callback.bind(newSource, &Source::prepare);
-		// Dispatching...
- 		pAudioLoop.dispatch(callback);
-		// TODO: Find a way to test the return value
-
-		return true;
+		return addSource(String(sourceName), loop);
 	}
 
 	template<>
@@ -95,10 +81,9 @@ namespace Audio
 			pSources[sourceName] = newSource;
 		}
 		Audio::Loop::RequestType callback;
- 		callback.bind(newSource, &Source::prepare);
+ 		callback.bind(newSource, &Source::prepareDispatched);
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
-		// TODO: Find a way to test the return value
 
 		return true;
 	}
@@ -116,7 +101,7 @@ namespace Audio
 			pSources[String(sourceName)] = newSource;
 		}
 		Audio::Loop::RequestType callback;
- 		callback.bind(newSource, &Source::prepare);
+ 		callback.bind(newSource, &Source::prepareDispatched);
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
 
@@ -137,12 +122,31 @@ namespace Audio
 			pSources[String(sourceName)] = newSource;
 		}
 		Audio::Loop::RequestType callback;
- 		callback.bind(newSource, &Source::prepare);
+ 		callback.bind(newSource, &Source::prepareDispatched);
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
 
 		return true;
 	}
+
+
+	template<typename StringT>
+	bool Manager::moveSource(const StringT& sourceName, const Gfx::Point3D<>& position)
+	{
+		String sourceStr = sourceName;
+		return moveSource(sourceStr, position);
+	}
+
+	template<>
+	inline bool Manager::moveSource<String>(const String& sourceStr, const Gfx::Point3D<>& position)
+	{
+		Source::Map::iterator it = pSources.find(sourceStr);
+		if (it == pSources.end())
+			return false;
+ 		it->second->position(position);
+		return true;
+	}
+
 
 
 
