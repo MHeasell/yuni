@@ -4,7 +4,9 @@
 # include "../../yuni.h"
 # include <stdlib.h>
 # include <math.h>
-
+# ifdef YUNI_OS_MSVC
+#	include <float.h>
+# endif
 
 /*!
 ** \note long doube support : YUNI_HAS_LONG_DOUBLE must be defined
