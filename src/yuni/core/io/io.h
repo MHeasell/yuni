@@ -59,6 +59,23 @@ namespace IO
 	//@}
 
 
+
+	/*!
+	** \brief Flow control used in the IO module
+	*/
+	enum Flow
+	{
+		//! Abort the whole process
+		flowAbort = 0,
+		//! Continue
+		flowContinue = 1,
+		//! Skip the current item
+		flowSkip = 2,
+	};
+
+
+
+
 	/*!
 	** \brief Extract the path part of a filename
 	** \ingroup IO

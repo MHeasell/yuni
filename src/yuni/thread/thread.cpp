@@ -226,6 +226,17 @@ namespace Thread
 		return status;
 	}
 
+
+
+	IThread::Error IThread::wait()
+	{
+		while (errTimeout == wait(604800000u)) // one week
+			;
+		return errNone;
+	}
+
+
+
 	IThread::Error IThread::wait(const uint32 timeout)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);

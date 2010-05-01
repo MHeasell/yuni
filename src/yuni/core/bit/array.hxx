@@ -53,13 +53,21 @@ namespace Bit
 
 	inline bool Array::get(unsigned int i) const
 	{
+		# ifdef YUNI_OS_MSVC
+		return (YUNI_BIT_GET(pBuffer.data(), i)) ? true : false;
+		# else
 		return YUNI_BIT_GET(pBuffer.data(), i);
+		# endif
 	}
 
 
 	inline bool Array::test(unsigned int i) const
 	{
+		# ifdef YUNI_OS_MSVC
+		return (YUNI_BIT_GET(pBuffer.data(), i)) ? true : false;
+		# else
 		return YUNI_BIT_GET(pBuffer.data(), i);
+		# endif
 	}
 
 

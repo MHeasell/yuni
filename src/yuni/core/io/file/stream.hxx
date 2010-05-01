@@ -80,7 +80,11 @@ namespace File
 
 	inline bool Stream::eof() const
 	{
+		# ifdef YUNI_OS_MSVC
+		return ::feof(pFd) ? true : false;
+		# else
 		return ::feof(pFd);
+		# endif
 	}
 
 	inline ssize_t Stream::tell() const

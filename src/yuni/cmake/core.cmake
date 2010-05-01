@@ -402,6 +402,11 @@ Set(SRC_CORE_IO_DIRECTORY
 				core/io/directory/current.cpp
 				core/io/directory/make.cpp
 				core/io/directory/copy.cpp
+				core/io/directory/iterator.h
+				core/io/directory/iterator/iterator.cpp
+				core/io/directory/iterator/iterator.h
+				core/io/directory/iterator/iterator.hxx
+				core/io/directory/iterator/detachedthread.h
 				)
 source_group(Core\\IO\\Directory FILES ${SRC_CORE_IO_DIRECTORY})
 

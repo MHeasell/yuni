@@ -114,8 +114,12 @@ namespace Yuni
 
 		//! A String list
 		typedef std::list<StringType> List;
+		//! A string list
+		typedef std::list<typename StringType::Ptr> ListPtr;
 		//! A String vector
 		typedef std::vector<StringType> Vector;
+		//! A String vector
+		typedef std::vector<typename StringType::Ptr> VectorPtr;
 
 		//! The type of object, CharT, stored in the string.
 		typedef C Char;

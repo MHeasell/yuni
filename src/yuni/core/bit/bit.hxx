@@ -25,7 +25,11 @@ namespace Bit
 
 	inline bool Get(const char* data, unsigned int index)
 	{
+		# ifdef YUNI_OS_MSVC
+		return (YUNI_BIT_GET(data, index)) ? true : false;
+		# else
 		return YUNI_BIT_GET(data, index);
+		# endif
 	}
 
 

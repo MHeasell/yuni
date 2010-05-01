@@ -137,13 +137,21 @@ namespace Thread
 		Error stop(const uint32 timeout = defaultTimeout);
 
 		/*!
+		** \brief Wait for an infinite amount of time for the end of the thread
+		**
+		** The thread is not stopped during the process.
+		** \return An error status (`errNone` if succeeded)
+		*/
+		Error wait();
+
+		/*!
 		** \brief Wait for the end of the thread
 		**
 		** The thread is not stopped during the process.
 		** \param timeout The timeout in milliseconds
 		** \return An error status (`errNone` if succeeded)
 		*/
-		Error wait(const uint32 timeout = defaultTimeout);
+		Error wait(const uint32 timeout);
 
 		/*!
 		** \brief Restart the thread

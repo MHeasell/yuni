@@ -112,7 +112,7 @@ namespace StringImpl
 
 		static inline char ToLower(const char a)
 		{
-			return (char) std::tolower(a);
+			return (char) ::tolower(a);
 		}
 
 
