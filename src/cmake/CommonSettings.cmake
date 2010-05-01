@@ -46,7 +46,7 @@ IF("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "releas
 		ENdif(APPLE)
 	Else(NOT WIN32)
 		IF(MINGW)
-			Set(CMAKE_CXX_OTHER_FLAGS "-O3 -fomit-frame-pointer -Wextra -Wwrite-strings")
+			Set(CMAKE_CXX_OTHER_FLAGS "-O3 -fomit-frame-pointer -Wextra -Wwrite-strings -mthreads")
 			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
 		ENDIF(MINGW)
 		IF(MSVC)
@@ -71,7 +71,7 @@ Else("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "rele
 		ENdif(APPLE)
 	Else(NOT WIN32)
 		IF(MINGW)
-			Set(CMAKE_CXX_OTHER_FLAGS "-g2 -Woverloaded-virtual -Wextra -Wconversion -Wwrite-strings")
+			Set(CMAKE_CXX_OTHER_FLAGS "-g2 -Woverloaded-virtual -Wextra -Wconversion -Wwrite-strings -mthreads")
 			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
 		ENDIF(MINGW)
 		IF(MSVC)
@@ -102,8 +102,8 @@ ENDIF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD}" STREQUAL "")
 
 
 IF(APPLE)
-	Message(STATUS "Enabled universal binaries (i386, x86_64)")
-	Set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
+#	Message(STATUS "Enabled universal binaries (i386, x86_64)")
+#	Set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
 ENDIF(APPLE)
 
 
