@@ -80,9 +80,16 @@ namespace FilesystemImpl
 			return false;
 		}
 		delete[] buffer;
+
+		# ifdef YUNI_OS_MSVC
+		return (ExistsOnlyT)
+			? true
+			: ((ResultT == (bool)(infoFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))) ? true : false;
+		# else
 		return (ExistsOnlyT)
 			? true
 			: (ResultT == (bool)(infoFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY));
+		# endif
 	}
 
 

@@ -304,12 +304,20 @@ namespace Math
 
 	template<> inline double Trunc<double>(double x)
 	{
+		# ifndef YUNI_OS_MSVC
 		return ::trunc(x);
+		# else
+		return ((x > 0.) ? ::floor(x) : ::ceil(x));
+		# endif
 	}
 
 	template<> inline float Trunc<float>(float x)
 	{
+		# ifndef YUNI_OS_MSVC
 		return ::truncf(x);
+		# else
+		return ((x > 0.) ? ::floorf(x) : ::ceilf(x));
+		# endif
 	}
 
 
