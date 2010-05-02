@@ -301,6 +301,20 @@ namespace Yuni
 		}
 	}
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	unsigned int
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::countChar(char c) const
+	{
+		unsigned int count = 0;
+		for (Size i = 0; i != AncestorType::size; ++i)
+		{
+			if (AncestorType::data[i] == c)
+				++count;
+		}
+		return count;
+	}
+
+
 
 
 
