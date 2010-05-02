@@ -674,6 +674,17 @@ namespace Yuni
 		unsigned int countChar(char c) const;
 
 		/*!
+		** \brief Get if the string matches a simple pattern ('*' only managed)
+		**
+		** \param pattern A pattern
+		** \warning This method should not be used in a new code and will be removed
+		**   as soon as possible
+		** \internal It is currently still used by the TA3D project. A nice replacement should be found.
+		** \TODO To be removed as soon as possible
+		*/
+		template<class StringT> bool glob(const StringT& pattern) const;
+
+		/*!
 		** \brief Convert all backslashes into slashes
 		*/
 		void convertBackslashesIntoSlashes();
