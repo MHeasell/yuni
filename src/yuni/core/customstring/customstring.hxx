@@ -99,7 +99,7 @@ namespace Yuni
 	template<class U>
 	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assign(const U& u)
 	{
-		TraitsSelectorAssign<Traits::CString<U>::valid | Traits::Length<U>::valid>::
+		TraitsSelectorAssign<Traits::CString<U>::valid && Traits::Length<U>::valid>::
 			template Perform<U, CustomStringType>(u, *this);
 	}
 
@@ -107,7 +107,7 @@ namespace Yuni
 	template<class U>
 	inline void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::append(const U& u)
 	{
-		TraitsSelectorAppend<Traits::CString<U>::valid | Traits::Length<U>::valid>::
+		TraitsSelectorAppend<Traits::CString<U>::valid && Traits::Length<U>::valid>::
 			template Perform<U, CustomStringType>(u, *this);
 	}
 
