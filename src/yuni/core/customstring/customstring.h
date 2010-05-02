@@ -669,6 +669,11 @@ namespace Yuni
 		//! \name Misc
 		//@{
 		/*!
+		** \brief Get the number of occurences of a single char
+		*/
+		unsigned int countChar(char c) const;
+
+		/*!
 		** \brief Convert all backslashes into slashes
 		*/
 		void convertBackslashesIntoSlashes();
