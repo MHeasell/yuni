@@ -315,6 +315,60 @@ namespace Yuni
 	}
 
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::glob(const StringT& pattern) const
+	{
+		// TODO This method should be completly removed
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		const char* cstr = Traits::CString<StringT>::Perform(pattern);
+		Size len = Traits::Length<StringT,Size>::Value(pattern);
+
+		if (len)
+		{
+			if (AncestorType::size)
+			{
+				Size e = 0;
+				Size prev = npos;
+				for (Size i = 0 ; i < AncestorType::size; ++i)
+				{
+					if ('*' == cstr[e])
+					{
+						if (e + 1 == len)
+							return true;
+						while (cstr[e+1] == '*')
+							++e;
+						if (e + 1 == len)
+							return true;
+
+						prev = e;
+						if (cstr[e + 1] == AncestorType::data[i])
+							e += 2;
+					}
+					else
+					{
+						if (cstr[e] == AncestorType::data[i])
+							++e;
+						else
+						{
+							if (prev != npos)
+								e = prev;
+							else
+								return false;
+						}
+					}
+				}
+				return (e == len);
+			}
+			return false;
+		}
+		return empty();
+	}
+
+
 
 
 
