@@ -6,11 +6,14 @@
 # include "../static/assert.h"
 # include "../traits/cstring.h"
 # include "../traits/length.h"
+# include "../smartptr.h"
 
 # include <stdio.h>
 # include <stdarg.h>
 # include <iostream>
 # include <string>
+# include <list>
+# include <vector>
 
 # include "traits/traits.h"
 # include "traits/append.h"
@@ -25,21 +28,29 @@ namespace Yuni
 {
 
 	/*!
-	** \brief A dynamic/static memory buffer for POD types
+	** \brief A string implementation
+	**
+	** The string class provides a useful way to manipulate and store sequences of
+	** characters.
+	**
+	** This class is a template class, you should prefer the convenient alias
+	** `Yuni::String`.
 	**
 	** The supported external types are the following :
 	**  - C
-	**  - Char*
+	**  - char*
 	**  - C[]
-	**  - std::basic_string<C>
+	**  - std::basic_string<cjar>
 	**  - Yuni::CustomString<...>
+	**  - SmartPtr<std::basic_string<char>, ...>
+	**  - SmartPtr<CustomString<...>, ...>
 	**
-	**
-	** \tparam Char A pod type
+	** \warning This class is not thread-safe
+	** \tparam char A pod type
 	** \tparam ChunkSizeT The size for a single chunk (>= 2)
-	** \tparam ZeroTerminatedT A non-zero value if the buffer must always be terminated by a zero
-	** \tparam ExpandableT A non-zero value to make a growable buffer. Otherwise it will be a simple
-	**   buffer with a length equals to ChunkSizeT * sizeof(Char)
+	** \tparam ZeroTerminatedT A non-zero value if the cstr must always be terminated by a zero
+	** \tparam ExpandableT A non-zero value to make a growable cstr. Otherwise it will be a simple
+	**   cstr with a length equals to ChunkSizeT * sizeof(char)
 	*/
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	class CustomString
@@ -49,10 +60,10 @@ namespace Yuni
 		//! POD type
 		typedef char Char;
 		//! Type for the POD type
-		typedef Char Type;
+		typedef char Type;
 
 		//! Ancestor
-		typedef Private::CustomStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, Char>  AncestorType;
+		typedef Private::CustomStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>  AncestorType;
 		//! Size type
 		typedef typename AncestorType::Size Size;
 		//! Self
@@ -60,28 +71,40 @@ namespace Yuni
 
 		//! \name Compatibility with std::string
 		//@{
-		//! The type of object, CharT, stored in the string
-		typedef Char value_type;
-		//! Pointer to Char
-		typedef Char* pointer;
-		//! Reference to Char
-		typedef Char& reference;
-		//! Const reference to Char
-		typedef const Char& const_reference;
+		//! The type of object, charT, stored in the string
+		typedef char value_type;
+		//! Pointer to char
+		typedef char* pointer;
+		//! Reference to char
+		typedef char& reference;
+		//! Const reference to char
+		typedef const char& const_reference;
 		//! An unsigned integral type
 		typedef Size size_type;
 		//! A signed integral type
 		typedef ssize_t difference_type;
 		//@}
 
+		//! Smartptr
+		typedef SmartPtr<CustomStringType> Ptr;
+
+		//! A String list
+		typedef std::list<CustomStringType> List;
+		//! A string list
+		typedef std::list<typename CustomString::Ptr> ListPtr;
+		//! A String vector
+		typedef std::vector<CustomStringType> Vector;
+		//! A String vector
+		typedef std::vector<typename CustomStringType::Ptr> VectorPtr;
+
 		enum
 		{
 			//! Size for a single chunk
-			chunkSize = AncestorType::chunkSize,
-			//! A non-zero value if the buffer must be zero terminated
-			zeroTerminated = AncestorType::zeroTerminated,
-			//! A non-zero value if the buffer can be expanded
-			expandable = AncestorType::expandable,
+			chunkSize          = AncestorType::chunkSize,
+			//! A non-zero value if the cstr must be zero terminated
+			zeroTerminated     = AncestorType::zeroTerminated,
+			//! A non-zero value if the cstr can be expanded
+			expandable         = AncestorType::expandable,
 			//! Number of bits per element
 			bitCountPerElement = sizeof(Char) * 8,
 
@@ -89,8 +112,8 @@ namespace Yuni
 			npos = (Size)(-1),
 		};
 
-		//! Char Case
-		enum CharCase
+		//! char Case
+		enum charCase
 		{
 			//! The string should remain untouched
 			soCaseSensitive,
@@ -105,12 +128,13 @@ namespace Yuni
 		/*!
 		** \brief Compare two string like strcmp()
 		*/
-		static int StrCmp(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
+		static int Compare(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
 
 		/*!
 		** \brief Compare two string like strcmp() (insensitive)
 		*/
-		static int StrICmp(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
+		static int CompareInsensitive(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
+
 
 	public:
 		//! \name Constructors & Destructor
@@ -131,64 +155,56 @@ namespace Yuni
 		CustomString(const NullPtr&);
 
 		/*!
-		** \brief Constructor with a default value
+		** \brief Constructor from a mere CString
 		*/
-		template<class U> explicit CustomString(const U& rhs);
+		CustomString(const char* block, const Size blockSize);
 
 		/*!
-		**
+		** \brief Constructor with a default value
 		*/
-		CustomString(const Char* block, const Size blockSize);
+		template<class U> CustomString(const U& rhs);
 
 		//! Destructor
-		~CustomString() {}
+		~CustomString();
 		//@}
 
 
 		//! \name Append / Assign
 		/*!
-		** \brief Assign a new value to the buffer
+		** \brief Assign a new value to the cstr
 		**
 		** \param rhs Any supported value
 		*/
 		template<class U> void assign(const U& rhs);
 
 		/*[!]
-		** \brief Copy a raw buffer
+		** \brief Copy a raw cstr
 		**
-		** \param buffer A buffer
-		** \param size Size of the given buffer
+		** \param cstr A cstr
+		** \param size Size of the given cstr
 		*/
-		void assign(const Char* buffer, const Size size);
+		void assign(const char* cstr, const Size size);
 
 		/*!
-		** \brief Append to the end of the buffer a new value
+		** \brief Append to the end of the cstr a new value
 		**
 		** \param rhs Any supported value
 		*/
 		template<class U> void append(const U& rhs);
 
 		/*!
-		** \brief Append to the end of the buffer a new value
+		** \brief Append to the end of the cstr a new value
 		**
 		** \param rhs Any supported value
 		** \param size Size of the container
 		*/
-		template<class U> void append(const U& u, const Size size);
+		template<class StringT> void append(const StringT& s, const Size size);
 
 		//! \see template<class U> append(const U&, const Size)
-		template<class U> void write(const U& buffer, const Size size);
+		template<class U> void write(const U& cstr, const Size size);
 
 		/*!
-		** \brief Append a raw buffer
-		**
-		** \param buffer A buffer
-		** \param size Size of the given buffer
-		*/
-		void append(const Char* buffer, const Size size);
-
-		/*!
-		** \brief Insert at the begining of the buffer a new value
+		** \brief Insert at the begining of the cstr a new value
 		**
 		** This is a convenient replacement for insert(0, u)
 		** \param rhs Any supported value
@@ -196,7 +212,7 @@ namespace Yuni
 		template<class U> void prepend(const U& u);
 
 		/*!
-		** \brief Insert at the begining of the buffer a new value
+		** \brief Insert at the begining of the cstr a new value
 		**
 		** \param rhs Any supported value
 		** \param size Size of the container
@@ -208,90 +224,90 @@ namespace Yuni
 		**
 		** \param rhs A single item
 		*/
-		void put(const Char c);
+		void put(const char c);
 
 		/*!
-		** \brief Insert a raw buffer at a given position in the buffer
+		** \brief Insert a raw cstr at a given position in the cstr
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param buffer A raw buffer
-		** \param size Size of the buffer
-		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
+		** \param cstr A raw cstr
+		** \param size Size of the cstr
+		** \return True if the cstr has been inserted, false otherwise (size == 0 or offset out of bounds)
 		*/
-		bool insert(const Size offset, const Char* buffer, const Size size);
+		bool insert(const Size offset, const char* cstr, const Size size);
 
 		/*!
-		** \brief Insert a single item at a given position in the buffer
+		** \brief Insert a single item at a given position in the cstr
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
 		** \param c A single item
-		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
+		** \return True if the cstr has been inserted, false otherwise (size == 0 or offset out of bounds)
 		*/
-		bool insert(const Size offset, const Char c);
+		bool insert(const Size offset, const char c);
 
 		/*!
-		** \brief Insert an arbitrary CString container at a given position in the buffer
+		** \brief Insert an arbitrary CString container at a given position in the cstr
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
 		** \param u Any CString container
-		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
+		** \return True if the cstr has been inserted, false otherwise (size == 0 or offset out of bounds)
 		*/
-		template<class U> bool insert(const Size offset, const U& u);
+		template<class StringT> bool insert(const Size offset, const StringT& s);
 
 		/*!
-		** \brief Insert an arbitrary CString container at a given position in the buffer
+		** \brief Insert an arbitrary CString container at a given position in the cstr
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param u Any CString container
-		** \param size The size to use the given container
-		** \return True if the buffer has been inserted, false otherwise (size == 0 or offset out of bounds)
+		** \param s Any CString container
+		** \param size The size to use for the given container
+		** \return True if the cstr has been inserted, false otherwise (size == 0 or offset out of bounds)
 		*/
-		template<class U> bool insert(const Size offset, const U& u, const Size size);
+		template<class StringT> bool insert(const Size offset, const StringT& u, const Size size);
 
 
 		/*!
-		** \brief Overwrite a region of the buffer
+		** \brief Overwrite a region of the cstr
 		**
-		** The size of the buffer will remain untouched in any cases.
+		** The size of the cstr will remain untouched in any cases.
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
 		** \param region A CString container
 		*/
-		template<class U> void overwrite(const Size offset, const U& u);
+		template<class StringT> void overwrite(const Size offset, const StringT& s);
 
 		/*!
-		** \brief Overwrite a region of the buffer
+		** \brief Overwrite a region of the cstr
 		**
-		** The size of the buffer will remain untouched in any cases.
+		** The size of the cstr will remain untouched in any cases.
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param region A raw buffer
-		** \param size Size of the given buffer
+		** \param region A raw cstr
+		** \param size Size of the given cstr
 		*/
-		void overwrite(const Size offset, const Char* region, const Size size);
+		void overwrite(const Size offset, const char* region, const Size size);
 
 
 		/*!
-		** \brief Fill the whole buffer with a given pattern
+		** \brief Fill the whole cstr with a given pattern
 		**
 		** \code
-		** CustomString<char>  buffer;
-		** buffer.resize(80);
+		** CustomString<char>  cstr;
+		** cstr.resize(80);
 		**
 		** // Preface
-		** buffer.fill('.');
-		** buffer.overwrite(0, " Preface ");
-		** buffer.overwrite(78, " 1");
-		** std::cout << buffer << std::endl;
+		** cstr.fill('.');
+		** cstr.overwrite(0, " Preface ");
+		** cstr.overwrite(78, " 1");
+		** std::cout << cstr << std::endl;
 		**
 		** // Chapter 1
-		** buffer.fill('.');
-		** buffer.overwrite(0, " Chapter 1 ");
-		** buffer.overwrite(78, " 4");
-		** std::cout << buffer << std::endl;
+		** cstr.fill('.');
+		** cstr.overwrite(0, " Chapter 1 ");
+		** cstr.overwrite(78, " 4");
+		** std::cout << cstr << std::endl;
 		** \endcode
 		*/
-		template<class U> void fill(const U& pattern);
+		template<class StringT> void fill(const StringT& pattern);
 
 		//! Equivalent to append()
 		template<class U> void push_back(const U& u);
@@ -306,133 +322,135 @@ namespace Yuni
 		/*!
 		** \brief Find the offset of a sub-string
 		**
-		** \param buffer An arbitrary string
+		** \param cstr An arbitrary string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size find(const Char buffer) const;
+		Size find(const char c) const;
 
 		/*!
 		** \brief Find the offset of a sub-string from the left
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param buffer An arbitrary string
+		** \param cstr An arbitrary string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size indexOf(Size offset, const Char buffer) const;
+		Size indexOf(Size offset, const char cstr) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes)
 		**
-		** \param buffer An arbitrary string
-		** \param len Size of the given buffer
+		** \param cstr An arbitrary string
+		** \param len Size of the given cstr
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size find(const Char* buffer, const Size len) const;
+		Size find(const char* cstr, const Size len) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param buffer An arbitrary string
-		** \param len Size of the given buffer
+		** \param cstr An arbitrary string
+		** \param len Size of the given cstr
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size indexOf(Size offset, const Char* buffer, const Size len) const;
+		Size indexOf(Size offset, const char* cstr, const Size len) const;
 
 		/*!
 		** \brief Find the offset of any supported CString
 		**
-		** \param buffer Any supported CString
+		** \param cstr Any supported CString
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		template<class U> Size find(const U& u) const;
+		template<class StringT> Size find(const StringT& s) const;
 
 		/*!
 		** \brief Find the offset of any supported CString from the left
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param buffer Any supported CString
+		** \param cstr Any supported CString
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		template<class U> Size indexOf(Size offset, const U& u) const;
+		template<class StringT> Size indexOf(Size offset, const StringT& s) const;
 
 		/*!
 		** \brief Find the offset of a sub-string (equivalent to the method `find()`)
 		**
-		** \param buffer An arbitrary string
+		** \param cstr An arbitrary string
 		** \return The offset of the first sub-string found, `npos` if not found
 		** \see find()
 		*/
-		template<class U> Size find_first_of(const U& u) const;
+		template<class StringT> Size find_first_of(const StringT& u) const;
 
 		/*!
-		** \brief Get if a given string can be found at the begining of the buffer
+		** \brief Get if a given string can be found at the begining of the cstr
 		*/
-		bool startsWith(const Char* buffer, const Size len) const;
+		bool startsWith(const char* cstr, const Size len) const;
 
 		/*!
-		** \brief Get if a given string can be found at the begining of the buffer
+		** \brief Get if a given string can be found at the begining of the cstr
 		*/
-		template<class U> bool startsWith(const U& u) const;
+		template<class StringT> bool startsWith(const StringT& s) const;
 
 		/*!
-		** \brief Get if a given string can be found at the end of the buffer
+		** \brief Get if a given string can be found at the end of the cstr
 		*/
-		bool endsWith(const Char* buffer, const Size len) const;
+		bool endsWith(const char* cstr, const Size len) const;
 
 		/*!
-		** \brief Get if a given string can be found at the end of the buffer
+		** \brief Get if a given string can be found at the end of the cstr
+		** \param s Any string
 		*/
-		template<class U> bool endsWith(const U& u) const;
+		template<class StringT> bool endsWith(const StringT& s) const;
 		//@}
 
 
 		//! \name Trimming
 		//@{
 		/*!
-		** \brief Remove all white-spaces (" \t\r\n") from the begining and the end of the buffer
+		** \brief Remove all white-spaces (" \t\r\n") from the begining and the end of the cstr
 		*/
 		void trim();
 		/*!
-		** \brief Remove all white-spaces from the begining and the end of the buffer
+		** \brief Remove all white-spaces from the begining and the end of the cstr
 		*/
-		void trim(const Char c /* = ' ' */);
+		void trim(const char c);
 		/*!
-		** \brief Removes all items equal to one of those in 'u' from the end of the buffer
+		** \brief Removes all items equal to one of those in 'whitespaces' from the end of the cstr
 		*/
-		template<class U> void trim(const U& u);
+		template<class StringT> void trim(const StringT& whitespaces);
 
 		/*!
-		** \brief Removes all items equal to one of those in 'u' from the end of the buffer
+		** \brief Removes all items equal to one of those in 'u' from the end of the cstr
 		*/
-		template<class U> void trimRight(const U& u);
+		template<class StringT> void trimRight(const StringT& whitespaces);
 
 		/*!
-		** \brief Remove all items equal to 'c' from the end of the buffer
+		** \brief Remove all items equal to 'c' from the end of the cstr
 		*/
-		void trimRight(const Char c);
+		void trimRight(const char c);
 
 		/*!
-		** \brief Removes all items equal to one of those in 'u' from the begining of the buffer
+		** \brief Removes all items equal to one of those in 'u' from the begining of the cstr
 		*/
-		template<class U> void trimLeft(const U& u);
+		template<class StringT> void trimLeft(const StringT& whitespaces);
 		/*!
-		** \brief Remove all items equal to 'c' from the begining of the buffer
+		** \brief Remove all items equal to 'c' from the begining of the cstr
 		*/
-		void trimLeft(const Char c);
+		void trimLeft(const char c);
 		//@}
+
 
 		//! \name Remove / Erase
 		//@{
 		// From the ancestor
 		/*!
-		** \brief Empty the buffer
+		** \brief Empty the cstr
 		** \return *this
 		*/
 		CustomString& clear();
 
 		/*!
-		** \brief Erase a part of the buffer
+		** \brief Erase a part of the cstr
 		**
 		** \param offset The offset (zero-based) of the first item to erase
 		** \param len The length (in number of items) to erase
@@ -462,7 +480,7 @@ namespace Yuni
 		//! \name Conversions
 		//@{
 		/*!
-		** \brief Convert the buffer into something else
+		** \brief Convert the cstr into something else
 		**
 		** The supported types (by default) are :
 		** - std::string
@@ -490,36 +508,36 @@ namespace Yuni
 		** Contrary to the operator [], it is safe to use an invalid offset
 		** \return The item at position 'offset', a default value if the offset is out of bound
 		*/
-		Char at(const Size offset) const;
+		char at(const Size offset) const;
 
 		/*!
-		** \brief Truncate the buffer to the given length
+		** \brief Truncate the cstr to the given length
 		**
 		** Nothing will be done if the new size if greater than the current one.
-		** \param newSize The new size of the buffer
+		** \param newSize The new size of the cstr
 		*/
 		void truncate(const Size newSize);
 
 		/*!
 		** \brief Ensure that there is enough allocated space for X caracters
 		**
-		** \param min The minimum capacity of the buffer (in caracters)
+		** \param min The minimum capacity of the cstr (in caracters)
 		*/
 		void reserve(Size minCapacity);
 
 		/*!
-		** \brief Resize the buffer to 'len' bytes
+		** \brief Resize the cstr to 'len' bytes
 		**
 		** The current content will remain untouched but all extra bytes will not be
 		** initialized.
-		** If the buffer can not be expanded, the new size will not greater than 'ChunkSize'.
+		** If the cstr can not be expanded, the new size will not greater than 'ChunkSize'.
 		**
 		** \param len The new length of the string
 		*/
 		void resize(const Size len);
 
 		/*!
-		** \brief Get the current size of the buffer (in number of element C)
+		** \brief Get the current size of the cstr (in number of element C)
 		**
 		** The returned value is less than or equal to the capacity.
 		*/
@@ -528,12 +546,12 @@ namespace Yuni
 		Size length() const;
 
 		/*!
-		** \brief Get the current size of the buffer (in bytes)
+		** \brief Get the current size of the cstr (in bytes)
 		*/
 		uint64 sizeInBytes() const;
 
 		/*!
-		** \brief Get if the buffer is empty
+		** \brief Get if the cstr is empty
 		**
 		** \code
 		** CustomString<> s;
@@ -556,9 +574,9 @@ namespace Yuni
 		bool empty() const;
 
 		/*!
-		** \brief Get if the buffer is null
+		** \brief Get if the cstr is null
 		**
-		** A null buffer means that no space is reserved, and that the
+		** A null cstr means that no space is reserved, and that the
 		** method `data()` will return NULL.
 		**
 		** \code
@@ -582,34 +600,34 @@ namespace Yuni
 		bool null() const;
 
 		/*!
-		** \brief Get if the buffer is not empty (the exact opposite of `empty()`)
+		** \brief Get if the cstr is not empty (the exact opposite of `empty()`)
 		*/
 		bool notEmpty() const;
 
 		/*!
-		** \brief Get the current capacity of the buffer (in number of element C)
+		** \brief Get the current capacity of the cstr (in number of element C)
 		** \return A value greater or equal to `size()`
 		*/
 		Size capacity() const;
 
 		/*!
-		** \brief Get the current capacity of the buffer (in bytes)
+		** \brief Get the current capacity of the cstr (in bytes)
 		** \return A value greater or equal to `sizeInBytes()`
 		*/
 		uint64 capacityInBytes() const;
 
 		/*!
-		** \brief A pointer to the original buffer (might be NULL)
+		** \brief A pointer to the original cstr (might be NULL)
 		** \see null()
 		*/
-		const Char* c_str() const;
+		const char* c_str() const;
 
 		/*!
-		** \brief A pointer to the original buffer (might be NULL)
+		** \brief A pointer to the original cstr (might be NULL)
 		** \see null()
 		*/
-		const Char* data() const;
-		Char* data();
+		const char* data() const;
+		char* data();
 		//@}
 
 
@@ -682,10 +700,10 @@ namespace Yuni
 		//! \name Operators
 		//@{
 		//! The operator `[]` (the offset must be valid)
-		const Char& operator [] (const Size offset) const;
-		Char& operator [] (const Size offset);
-		const Char& operator [] (const int offset) const;
-		Char& operator [] (const int offset);
+		const char& operator [] (const Size offset) const;
+		char& operator [] (const Size offset);
+		const char& operator [] (const int offset) const;
+		char& operator [] (const int offset);
 		//! The operator `+=` (append)
 		template<class U> CustomString& operator += (const U& rhs);
 		//! The operator `<<` (append)
@@ -712,7 +730,7 @@ namespace Yuni
 		template<class StringT> bool operator == (const StringT& rhs) const;
 
 		//! The operator `!=`
-		template<class U> bool operator != (const U& rhs) const;
+		template<class StringT> bool operator != (const StringT& rhs) const;
 
 		//! The operator `!`  (if (!s) ... - equivalent to if (s.empty()))
 		bool operator ! () const;
@@ -721,13 +739,13 @@ namespace Yuni
 
 	protected:
 		//! Assign without checking for pointer validity
-		Size assignWithoutChecking(const Char* block, const Size blockSize);
+		Size assignWithoutChecking(const char* block, const Size blockSize);
 		//! Append without checking for pointer validity
-		Size appendWithoutChecking(const Char* block, const Size blockSize);
+		Size appendWithoutChecking(const char* block, const Size blockSize);
 		//! Append without checking for pointer validity
-		Size appendWithoutChecking(const Char c);
+		Size appendWithoutChecking(const char c);
 		//! Assign without checking for pointer validity
-		Size assignWithoutChecking(const Char c);
+		Size assignWithoutChecking(const char c);
 
 	private:
 		// our friends !
