@@ -169,6 +169,25 @@ namespace CustomStringImpl
 				data[size] = C();
 		}
 
+		void shrink()
+		{
+			if (data)
+			{
+				if (0 == size)
+				{
+					capacity = 0;
+					::free(data);
+					data = NULL;
+				}
+				else
+				{
+					capacity = size + zeroTerminated;
+					data = (char*)realloc(data, capacity);
+				}
+			}
+		}
+
+
 	protected:
 		Size size;
 		Size capacity;
@@ -275,6 +294,11 @@ namespace CustomStringImpl
 				if (zeroTerminated)
 					data[capacity] = C();
 			}
+		}
+
+		static void shrink()
+		{
+			// Do nothing
 		}
 
 	protected:
