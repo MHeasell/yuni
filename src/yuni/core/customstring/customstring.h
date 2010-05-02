@@ -401,6 +401,11 @@ namespace Yuni
 		** \param s Any string
 		*/
 		template<class StringT> bool endsWith(const StringT& s) const;
+
+		/*!
+		** \brief Remove the last char
+		*/
+		void removeLast();
 		//@}
 
 
