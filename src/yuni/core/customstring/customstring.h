@@ -542,6 +542,11 @@ namespace Yuni
 		void resize(const Size len);
 
 		/*!
+		** \brief Releases any memory not required to store the character data
+		*/
+		void shrink();
+
+		/*!
 		** \brief Get the current size of the cstr (in number of element C)
 		**
 		** The returned value is less than or equal to the capacity.

@@ -796,7 +796,14 @@ namespace Yuni
 	}
 
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::shrink()
+	{
+		AncestorType::shrink();
+	}
 
+		
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::resize(
