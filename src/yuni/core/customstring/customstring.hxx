@@ -289,6 +289,18 @@ namespace Yuni
 		return endsWith(Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::Value(s));
 	}
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::removeLast()
+	{
+		if (AncestorType::size != 0)
+		{
+			--(AncestorType::size);
+			if (zeroTerminated)
+				AncestorType::data[AncestorType::size] = Char();
+		}
+	}
+
 
 
 
