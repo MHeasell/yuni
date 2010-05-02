@@ -25,36 +25,6 @@ namespace CustomString
 
 
 
-	// std::string
-	template<class CustomStringT, class TraitsT, class AllocT>
-	struct Assign<CustomStringT, std::basic_string<typename CustomStringT::Type, TraitsT,AllocT> >
-	{
-		typedef std::basic_string<typename CustomStringT::Type, TraitsT,AllocT> S;
-		static void Do(CustomStringT& s, const S& rhs)
-		{
-			if (!rhs.empty())
-				s.assignWithoutChecking(rhs.c_str(), rhs.size());
-			else
-				s.clear();
-		}
-	};
-
-
-	// Yuni::String
-	template<class CustomStringT, int ChunkSizeT>
-	struct Assign<CustomStringT, StringBase<typename CustomStringT::Type, ChunkSizeT> >
-	{
-		typedef StringBase<typename CustomStringT::Type, ChunkSizeT> S;
-		static void Do(CustomStringT& s, const S& rhs)
-		{
-			if (rhs.notEmpty())
-				s.assignWithoutChecking(rhs.c_str(), rhs.size());
-			else
-				s.clear();
-		}
-	};
-
-
 	// C*
 	template<class CustomStringT>
 	struct Assign<CustomStringT, typename CustomStringT::Type*>
@@ -97,21 +67,6 @@ namespace CustomString
 		static void Do(CustomStringT& s, const C rhs)
 		{
 			s.assignWithoutChecking(rhs);
-		}
-	};
-
-
-	// CustomString
-	template<class CustomStringT, unsigned int ChunkSizeT, bool ExpandT, bool ZeroT>
-	struct Assign<CustomStringT, Yuni::CustomString<ChunkSizeT, ExpandT, ZeroT> >
-	{
-		typedef Yuni::CustomString<ChunkSizeT, ExpandT, ZeroT> C;
-		static void Do(CustomStringT& s, const C& rhs)
-		{
-			if (rhs.notEmpty())
-				s.assignWithoutChecking(rhs.data(), rhs.size());
-			else
-				s.clear();
 		}
 	};
 

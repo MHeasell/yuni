@@ -1,8 +1,10 @@
 #ifndef __YUNI_CORE_TRAITS_EXTENSION_INTO_LENGTH_H__
 # define __YUNI_CORE_TRAITS_EXTENSION_INTO_LENGTH_H__
 
+# include "../../../yuni.h"
 # include <string>
 # include <cstring>
+# include "../../smartptr.h"
 
 
 namespace Yuni
@@ -109,7 +111,6 @@ namespace Extension
 
 
 	// CustomString
-
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class SizeT>
 	struct Length<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, SizeT>
 	{
@@ -124,6 +125,27 @@ namespace Extension
 		static SizeT Value(const CustomStringType& container)
 		{
 			return (SizeT) container.size();
+		}
+	};
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP, class SizeT>
+	struct Length<Yuni::SmartPtr<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP>, SizeT>
+	{
+	public:
+		typedef SizeT SizeType;
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
+
+	private:
+		typedef Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
+		typedef Yuni::SmartPtr<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP> CustomStringTypePtr;
+
+	public:
+		static SizeT Value(const CustomStringTypePtr& container)
+		{
+			return (!container) ? 0 : (SizeT) container->size();
 		}
 	};
 
@@ -148,7 +170,6 @@ namespace Extension
 
 
 	// Yuni::String
-
 	template<class C, int ChunkSizeT, class SizeT>
 	struct Length<StringBase<C,ChunkSizeT>, SizeT>
 	{
@@ -163,6 +184,27 @@ namespace Extension
 		static SizeT Value(const StringType& container)
 		{
 			return (SizeT) container.size();
+		}
+	};
+
+
+	template<class C, int ChunkSizeT, class SizeT,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	struct Length<Yuni::SmartPtr<StringBase<C,ChunkSizeT>, OwspP,ChckP,ConvP,StorP,ConsP>, SizeT>
+	{
+	public:
+		typedef SizeT SizeType;
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
+
+	private:
+		typedef StringBase<C,ChunkSizeT> StringType;
+		typedef Yuni::SmartPtr<StringBase<C,ChunkSizeT>,OwspP,ChckP,ConvP,StorP,ConsP> StringTypePtr;
+
+	public:
+		static SizeT Value(const StringTypePtr& container)
+		{
+			return (!container) ? 0 : (SizeT) container->size();
 		}
 	};
 
@@ -186,7 +228,6 @@ namespace Extension
 
 
 	// std::string
-
 	template<class C, class T, class Alloc, class SizeT>
 	struct Length<std::basic_string<C,T,Alloc>, SizeT>
 	{
@@ -201,6 +242,27 @@ namespace Extension
 		static SizeT Value(const StringType& container)
 		{
 			return container.size();
+		}
+	};
+
+
+	template<class C, class T, class Alloc, class SizeT,
+		template <class> class OwspP, template <class> class ChckP, class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	struct Length<Yuni::SmartPtr<std::basic_string<C,T,Alloc>,OwspP,ChckP,ConvP,StorP,ConsP>, SizeT>
+	{
+	public:
+		typedef SizeT SizeType;
+		enum { valid = 1, isFixed = 0, fixedLength = 0, };
+
+	private:
+		typedef std::basic_string<C,T,Alloc> StringType;
+		typedef Yuni::SmartPtr<std::basic_string<C,T,Alloc>,OwspP,ChckP,ConvP,StorP,ConsP> StringTypePtr;
+
+	public:
+		static SizeT Value(const StringTypePtr& container)
+		{
+			return (!container) ? 0 : (SizeT) container->size();
 		}
 	};
 
