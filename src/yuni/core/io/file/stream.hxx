@@ -125,7 +125,7 @@ namespace File
 
 	inline bool Stream::gets(char* buffer, size_t maxSize)
 	{
-		return (NULL != fgets(buffer, maxSize, pFd));
+		return (NULL != fgets(buffer, (int)maxSize, pFd));
 	}
 
 

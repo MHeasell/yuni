@@ -19,9 +19,9 @@ namespace Directory
 {
 
 	# ifdef YUNI_OS_WINDOWS
-	bool WindowsMake(const char* path, unsigned int len);
+	bool WindowsMake(const char* path, size_t len);
 	# else
-	bool UnixMake(const char* path, unsigned int len, unsigned int mode = 0755);
+	bool UnixMake(const char* path, size_t len, unsigned int mode = 0755);
 	# endif
 
 	bool Copy(const char* src, const char* dst);
@@ -55,11 +55,11 @@ namespace Directory
 		// `mode` is not used on Windows
 		(void) mode;
 		return Private::Core::IO::Directory::WindowsMake(
-			Traits::CString<StringT>::Perform(path), Traits::Length<StringT>::Value(path)
+			Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path)
 			);
 		# else
 		return Private::Core::IO::Directory::UnixMake(
-			Traits::CString<StringT>::Perform(path), Traits::Length<StringT>::Value(path),
+			Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path),
 			mode);
 		# endif
 	}

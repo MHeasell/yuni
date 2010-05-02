@@ -18,7 +18,7 @@ namespace Directory
 
 	# ifdef YUNI_OS_WINDOWS
 
-	bool WindowsMake(const char* path, unsigned int len)
+	bool WindowsMake(const char* path, size_t len)
 	{
 		if (len)
 		{
@@ -75,7 +75,7 @@ namespace Directory
 
 	# else
 
-	bool UnixMake(const char* path, unsigned int len, unsigned int mode)
+	bool UnixMake(const char* path, size_t len, unsigned int mode)
 	{
 		if (!len || NULL == path || '\0' == *path)
 			return true;
