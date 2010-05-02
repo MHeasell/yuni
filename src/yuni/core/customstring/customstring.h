@@ -694,6 +694,11 @@ namespace Yuni
 		template<template<class,class> class U, class UType, class Alloc, typename StringT>
 		void explode(U<UType,Alloc>& out, const StringT& sep,
 			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const;
+
+		/*!
+		** \brief Dupplicate N times the content of the string
+		*/
+		void dupplicate(int n);
 		//@}
 
 
@@ -734,6 +739,9 @@ namespace Yuni
 
 		//! The operator `!`  (if (!s) ... - equivalent to if (s.empty()))
 		bool operator ! () const;
+
+		//! The operator *=, to dupplicate N times the content of the string
+		CustomString& operator *= (int n);
 		//@}
 
 

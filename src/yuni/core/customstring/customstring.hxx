@@ -1095,6 +1095,40 @@ namespace Yuni
 	}
 
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::dupplicate(int n)
+	{
+		if (n > 0 && AncestorType::size > 0)
+		{
+			if (AncestorType::size == 1)
+			{
+				// Resize the string
+				resize(AncestorType::size * (n + 1));
+				// Caraceter copy
+				for (unsigned int i = 1; i != AncestorType::size; ++i)
+					AncestorType::data[i] = AncestorType::data[0];
+			}
+			else
+			{
+				const Size seglen = AncestorType::size;
+				Size offset = AncestorType::size;
+				// Resize the string
+				resize(AncestorType::size * (n + 1));
+
+				while (offset < AncestorType::size)
+				{
+					if (seglen + offset > AncestorType::size)
+						(void)::memcpy(AncestorType::data + offset, AncestorType::data, AncestorType::size - offset);
+					else
+						(void)::memcpy(AncestorType::data + offset, AncestorType::data, seglen);
+					offset += seglen;
+				}
+			}
+		}
+	}
+
+
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	int
@@ -1291,6 +1325,17 @@ namespace Yuni
 		return (AncestorType::size && AncestorType::size == rhs.size()
 			&& !::strncmp(AncestorType::data, rhs.data(), AncestorType::size * sizeof(Char)));
 	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator *= (int n)
+	{
+		dupplicate(n);
+		return *this;
+	}
+
+
 
 
 
