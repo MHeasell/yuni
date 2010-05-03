@@ -70,7 +70,7 @@ namespace Thread
 		// Set the timespec t at [timeout] milliseconds in the future.
 		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
 		t.tv_nsec = now.tv_usec * 1000 + ((timeout % 1000) * 1000000);
-		t.tv_sec = now.tv_sec + timeout / 1000 + (t.tv_nsec / 1000000000L);
+		t.tv_sec  = now.tv_sec + timeout / 1000 + (t.tv_nsec / 1000000000L);
 		t.tv_nsec %= 1000000000L;
 
 		int pthread_cond_timedwait_error;
@@ -80,7 +80,7 @@ namespace Thread
 			pthread_cond_timedwait_error = ::pthread_cond_timedwait(&pCondition, &pMutex->pthreadMutex(), &t);
 		} while (pSignalled != true // Condition not verified
 			&& pthread_cond_timedwait_error != ETIMEDOUT // We have not timedout
-			&& pthread_cond_timedwait_error != EINVAL); // When t is in the past, we got EINVAL. We consider this as a timeout.
+			&& pthread_cond_timedwait_error != EINVAL);  // When t is in the past, we got EINVAL. We consider this as a timeout.
 
 		// The condition was signalled or has timeoutted:
 		return (pSignalled == false);

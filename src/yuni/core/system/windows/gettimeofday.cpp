@@ -1,5 +1,11 @@
 
 #include "gettimeofday.h"
+#ifdef YUNI_OS_WINDOWS
+# include <stdio.h>
+# include <sys/timeb.h>
+# include <time.h>
+#endif
+
 
 
 namespace Yuni
@@ -8,27 +14,17 @@ namespace Yuni
 
 	int gettimeofday(struct timeval *tv, struct timezone *tz)
 	{
-		FILETIME ft;
-		unsigned __int64 tmpres = 0;
-		static int tzflag;
-
 		if (NULL != tv)
 		{
-			GetSystemTimeAsFileTime(&ft);
-
-			tmpres |= ft.dwHighDateTime;
-			tmpres <<= 32;
-			tmpres |= ft.dwLowDateTime;
-
-			/*converting file time to unix epoch*/
-			tmpres -= DELTA_EPOCH_IN_MICROSECS;
-			tmpres /= 10;  /*convert into microseconds*/
-			tv->tv_sec = (long)(tmpres / 1000000UL);
-			tv->tv_usec = (long)(tmpres % 1000000UL);
+			struct _timeb timebuffer;
+			_ftime64_s(&timebuffer);
+			tv->tv_sec  = (sint64)(timebuffer.time);
+			tv->tv_usec = (sint64)(timebuffer.millitm * 1000);
 		}
 
 		if (NULL != tz)
 		{
+			static int tzflag = 0;
 			if (!tzflag)
 			{
 				_tzset();

@@ -41,8 +41,8 @@ namespace Yuni
 
 	struct timeval
 	{
-		long tv_sec;
-		long tv_usec;
+		sint64 tv_sec;
+		sint64 tv_usec;
 	};
 
 	int gettimeofday(struct timeval *tv, struct timezone *tz);
