@@ -41,8 +41,11 @@ Set(SRC_GFX3D
 
 		# Font
 		gfx/text/font.h gfx/text/label.h
-		gfx/text/wgl.h gfx/text/wgl.cpp
 	)
+
+IF(WIN32 OR WIN64)
+	LIST(APPEND SRC_GFX3D gfx/text/wgl.h gfx/text/wgl.cpp)
+ENDIF(WIN32 OR WIN64)
 
 
 Include(CheckIncludeFile)
