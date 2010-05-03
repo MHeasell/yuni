@@ -3,7 +3,6 @@
 
 # include <algorithm>
 
-
 # ifdef YUNI_OS_MSVC
 /* Those functions are not available on Windows... */
 double rint(double nr);

@@ -42,8 +42,10 @@ namespace Thread
 
 		while (true)
 		{
-			if (suspend(nnTimeInterval) || !onInterval(0))
-				return true;
+			if (IThread::suspend(nnTimeInterval))
+				break;
+			if (!onInterval(0))
+				break;
 			if (pShouldReload)
 				return false;
 		}
