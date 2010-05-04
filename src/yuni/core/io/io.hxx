@@ -201,17 +201,37 @@ namespace IO
 	}
 
 
-
-	template<typename C, int N>
-	inline StringBase<C,N> ExtractExtension(const StringBase<C,N>& s, String::CharCase option)
+	template<class StringT1, class StringT2>
+	bool ExtractExtension(StringT1& out, const StringT2& filename, bool dot)
 	{
-		typedef StringBase<C,N> StringT;
-		const typename StringT::size_type n = s.find_last_of(StringBase<C,N>(IO::Constant<C>::AllSeparators) << IO::Constant<C>::Dot);
-		if (n == StringT::npos || '.' != s[n])
-			return StringT();
-		return (StringT::soIgnoreCase == option) ? StringT(s, n).toLower() : StringT(s, n);
+		// If the string is empty, the buffer may be invalid (NULL)
+		if (filename.size())
+		{
+			unsigned int i = filename.size();
+			do
+			{
+				--i;
+				switch (filename[i])
+				{
+					case '.':
+						{
+							if (!dot)
+							{
+								if (++i >= (unsigned int) filename.size())
+									return true;
+							}
+							out.append(filename.c_str() + i, filename.size() - i);
+							return true;
+						}
+					case '/':
+					case '\\':
+						return false;
+				}
+			}
+			while (i != 0);
+		}
+		return false;
 	}
-
 
 
 

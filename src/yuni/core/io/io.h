@@ -177,17 +177,13 @@ namespace IO
 	**
 	** \ingroup IO
 	**
-	** \param s Filename
-	** \param option soIgnoreCase to ensure to have a lowercase string
-	** \return The extenion of the filename (with the leading '.') in lowercase, empty if no extension is present
-	**
-	** \code
-	**	 std::cout << Paths::Files::ExtractFileExt("foo.exe") << std::endl; // '.exe'
-	**	 std::cout << Paths::Files::ExtractFileExt("/usr/folder.foo/file") << std::endl; // ''
-	** \endcode
+	** \param out Variable where the result will be appended
+	** \param filename The original filename
+	** \param dot True to include the dot when extracting the extension
+	** \return True if an extension has been found
 	*/
-	template<typename C, int N>
-	StringBase<C,N> ExtractExtension(const StringBase<C,N>& s, String::CharCase option = String::soIgnoreCase);
+	template<class StringT1, class StringT2>
+	bool ExtractExtension(StringT1& out, const StringT2& filename, bool dot = true);
 
 
 	/*!
