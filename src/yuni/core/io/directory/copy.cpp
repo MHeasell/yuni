@@ -33,25 +33,39 @@ namespace Directory
 
 	# ifdef YUNI_OS_WINDOWS
 
-	bool Copy(const char* src, const char* dst)
+	bool Copy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen)
 	{
-		wchar_t fsource[MAX_PATH];
-		wchar_t fcible[MAX_PATH];
-		int cr;
+		// ref: http://msdn.microsoft.com/en-us/library/bb759795(v=VS.85).aspx
+
+		wchar_t* fsource = new wchar_t[srclen + 4];
+		wchar_t* fcible  = new wchar_t[dstlen + 4];
 
 		SHFILEOPSTRUCTW shf;
 		shf.hwnd = NULL;
 
-		MultiByteToWideChar(CP_UTF8, 0, src, -1, fsource, sizeof(fsource) - 1);
-		MultiByteToWideChar(CP_UTF8, 0, dst, -1, fcible, sizeof(fcible) - 1);
+		int n;
+		n = MultiByteToWideChar(CP_UTF8, 0, src, srclen, fsource, srclen);
+		if (n <= 0)
+		{
+			return false;
+		}
+		fsource[n]     = L'\0'; // This string must be double-null terminated
+		fsource[n + 1] = L'\0';
+		n = MultiByteToWideChar(CP_UTF8, 0, dst, dstlen, fcible, dstlen);
+		if (n <= 0)
+		{
+			return false;
+		}
+		fcible[n]     = L'\0'; // This string must be double-null terminated
+		fcible[n + 1] = L'\0';
 
-		shf.wFunc = FO_COPY;
-		shf.pFrom = fsource;
-		shf.pTo = fcible;
+		shf.wFunc  = FO_COPY;
+		shf.pFrom  = fsource;
+		shf.pTo    = fcible;
 		shf.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI;
 
-		cr = SHFileOperationW(&shf);
-		return (!cr);
+		int r = SHFileOperationW(&shf);
+		return (!r);
 	}
 
 

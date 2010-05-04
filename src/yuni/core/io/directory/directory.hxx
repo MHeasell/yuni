@@ -24,7 +24,7 @@ namespace Directory
 	bool UnixMake(const char* path, size_t len, unsigned int mode = 0755);
 	# endif
 
-	bool Copy(const char* src, const char* dst);
+	bool Copy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen);
 
 	bool Remove(const char* path);
 
@@ -73,7 +73,8 @@ namespace Directory
 		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, Copy_InvalidTypeForBuffer2);
 
 		return Private::Core::IO::Directory::Copy(
-			Traits::CString<StringT1>::Perform(src), Traits::CString<StringT2>::Perform(dst));
+			Traits::CString<StringT1>::Perform(src), Traits::Length<StringT1,unsigned int>::Value(src),
+			Traits::CString<StringT2>::Perform(dst), Traits::Length<StringT2,unsigned int>::Value(dst));
 	}
 
 
