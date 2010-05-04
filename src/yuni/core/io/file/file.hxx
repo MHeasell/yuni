@@ -27,12 +27,9 @@ namespace File
 	template<class StringT>
 	inline uint64 Size(const StringT& filename)
 	{
-		// The given type, without its const identifier
-		typedef typename Static::Remove::Const<StringT>::Type UType;
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CoreIOFileSize_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CoreIOFileSize_InvalidTypeForBuffer);
 
-		return Private::IO::FilesystemImpl::Size(Traits::CString<UType>::Perform(filename));
+		return Private::IO::FilesystemImpl::Size(Traits::CString<StringT>::Perform(filename));
 	}
 
 
@@ -40,18 +37,14 @@ namespace File
 
 	template<class StringT> inline bool Exists(const StringT& filename)
 	{
-		// The given type, without its const identifier
-		typedef typename Static::Remove::Const<StringT>::Type UType;
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, IOFileExists_InvalidTypeForBuffer);
-		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  IOFileExists_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOFileExists_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOFileExists_InvalidTypeForBufferSize);
 
 		# ifdef YUNI_OS_WINDOWS
 		return Private::IO::FilesystemImpl::IsFileWindowsImpl(
-			Traits::CString<UType>::Perform(filename), Traits::Length<UType,size_t>::Value(filename));
+			Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename));
 		# else
-		return Private::IO::FilesystemImpl::IsFileUnixImpl(Traits::CString<UType>::Perform(filename));
+		return Private::IO::FilesystemImpl::IsFileUnixImpl(Traits::CString<StringT>::Perform(filename));
 		# endif
 	}
 
@@ -111,8 +104,7 @@ namespace File
 		return (!overwrite && Core::IO::File::Exists(to))
 			? false
 			: Private::IO::FilesystemImpl::CopyFile(
-				Traits::CString<StringT1>::Perform(from),
-				Traits::CString<StringT2>::Perform(to));
+				Traits::CString<StringT1>::Perform(from), Traits::CString<StringT2>::Perform(to));
 	}
 
 
