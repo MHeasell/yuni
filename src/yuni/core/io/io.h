@@ -206,7 +206,7 @@ namespace IO
 	**
 	** \ingroup IO
 	**
-	** The current directory is used when the given path is not absolute.
+	** The current directory will be used when the given path is not absolute.
 	**
 	** \param p Any path to make absolute
 	** \return `p` or an absolute path
@@ -233,18 +233,18 @@ namespace IO
 	** \brief Replace the extension
 	**
 	** \ingroup IO
+	** \code
+	** std::string s = "file.avi";
+	** Yuni::Core::IO::ReplaceExtension(s, ".mpeg");
+	** std::cout << s << std::endl; // file.mpeg
+	** \endcode
 	**
-	** if the extension can not be found, the new extension will be
-	** appended to it
-	** As this function is used when loading OTA or TDF files, the folder
-	** separator is not system-dependent.
-	**
-	** \param filename The original filename
-	** \param newExt The new extension (ex: `.ota`)
-	** \return The filename with the new extension
+	** \param[in,out] filename     The original filename
+	** \param         newExtension The new extension (dot included, ex: `.ota`)
+	** \return True if the extension has been replaced (means `found and replaced`)
 	*/
-	template<typename C, int N, typename U>
-	StringBase<C,N> ReplaceExtension(const StringBase<C,N>& filename, const U& newExt);
+	template<class StringT1, class StringT2>
+	bool ReplaceExtension(StringT1& filename, const StringT2& newExtension);
 
 
 	/*!
@@ -268,8 +268,8 @@ namespace IO
 	**
 	** \bug The relative filename like C:..\folder1\folder2 are not handled properly
 	**
-	** \param[out] ou  A string (any class compliant to std::string) where to write the result
-	** \param      in  A path/filename to normalize
+	** \param[out] out      A string (any class compliant to std::string) where to write the result
+	** \param      in       A path/filename to normalize
 	** \param      inLength Length of #in (optional, -1 for autodetection)
 	*/
 	template<class StringT1, class StringT2>
