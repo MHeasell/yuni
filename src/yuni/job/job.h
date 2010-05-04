@@ -80,7 +80,7 @@ namespace Job
 		//! Get the full human-readable name of this job
 		String name() const;
 		//! Set the name of the job
-		template<class AnyStringT> void name(const AnyStringT& s);
+		template<class StringT> void name(const StringT& s);
 		//@}
 
 		//! \name Progression
@@ -169,10 +169,11 @@ namespace Job
 		*/
 		bool shouldAbort();
 
-		template<class AnyStringT> void nameWL(const AnyStringT& s)
-		{
-			pName = s;
-		}
+		/*!
+		** \brief Set the name of the job without locking
+		** \warning This method should only be used from the constructor
+		*/
+		template<class StringT> void nameWL(const StringT& newName);
 
 	private:
 		/*!

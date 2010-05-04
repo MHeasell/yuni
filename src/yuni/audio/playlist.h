@@ -43,8 +43,8 @@ namespace Audio
 		*/
 		void append(SmartPtr<ISound>& sound);
 
-		template<typename AnyStringT>
-		void remove(const AnyStringT& soundID);
+		template<typename StringT>
+		void remove(const StringT& soundID);
 
 		void play() const;
 		void pause(bool paused);
