@@ -51,30 +51,32 @@ namespace IO
 
 	template<class StringT> inline bool IsAbsolute(const StringT& filename)
 	{
-		// The given type, without its const identifier
-		typedef typename Static::Remove::Const<StringT>::Type UType;
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, CustomString_InvalidTypeForBuffer);
-		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  CustomString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		const char* const p = Traits::CString<UType>::Perform(filename);
+		const char* const p = Traits::CString<StringT>::Perform(filename);
+		if (!p)
+			return false;
 		// Find the substring
-		if (Traits::Length<UType, unsigned int>::isFixed)
+		if (Traits::Length<StringT, unsigned int>::isFixed)
 		{
 			// We can make some optimisations when the length is known at compile compile time
 			// This part of the code should not bring better performances but it should
 			// prevent against bad uses of the API, like using a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* for looking for a single char.
 
 			// The value to find is actually empty, npos will be the unique answer
-			if (0 == Traits::Length<UType, unsigned int>::fixedLength)
+			if (0 == Traits::Length<StringT, unsigned int>::fixedLength)
 				return false;
 			// The string is actually a single POD item
-			if (1 == Traits::Length<UType, unsigned int>::fixedLength)
+			if (1 == Traits::Length<StringT, unsigned int>::fixedLength)
 				return *p == '/' || *p == '\\';
 		}
 
-		return p && (*p == '/' || *p == '\\' || (isalpha(*p) && p[1] == ':' && (p[2] == '\\' || p[2] == '/')));
+		const unsigned int len = Traits::Length<StringT, unsigned int>::Value(filename);
+		return (len != 0 && p)           // The string must not be empty
+			&& (*p == '/' || *p == '\\'  // Unix-style
+				|| (isalpha(*p)          // Windows-style (Drive letter)
+					&& len >= 2 && p[1] == ':' && (len == 2 || (p[2] == '\\' || p[2] == '/'))));
 	}
 
 
@@ -233,45 +235,54 @@ namespace IO
 	}
 
 
-	template<typename C, int N, typename U>
-	inline StringBase<C,N> ReplaceExtension(const StringBase<C,N>& filename, const U& newExt)
+	template<class StringT1, class StringT2>
+	bool ReplaceExtension(StringT1& filename, const StringT2& newExtension)
 	{
-		typedef StringBase<C,N> StringT;
-		// Nothing to do
-		if (filename.empty())
-			return StringT();
-
-		const typename StringT::size_type p = filename.find_last_of('.');
-		if (p == StringT::npos)
-			return filename + newExt;
-		const String::size_type s = filename.find_last_of(IO::Constant<C>::AllSeparators);
-		if (s != StringT::npos && p < s)
-			return filename + newExt;
-		return filename.substr(0, p) + newExt;
+		// If the string is empty, the buffer may be invalid (NULL)
+		if (filename.size())
+		{
+			unsigned int i = filename.size();
+			do
+			{
+				--i;
+				switch (filename[i])
+				{
+					case '.':
+						{
+							filename.resize(i);
+							filename += newExtension;
+							return true;
+						}
+					case '/':
+					case '\\':
+						return false;
+				}
+			}
+			while (i != 0);
+		}
+		return false;
 	}
 
 
 	template<class StringT1, class StringT2>
 	void Normalize(StringT1& out, const StringT2& in, unsigned int inLength)
 	{
-		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<StringT2>::Type UType;
 		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, Normalize_InvalidTypeForInput);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, Normalize_InvalidTypeForInput);
 		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  Normalize_InvalidTypeForInputSize);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  Normalize_InvalidTypeForInputSize);
 
 		// Some static checks
-		if (Traits::Length<UType,unsigned int>::isFixed)
+		if (Traits::Length<StringT2,unsigned int>::isFixed)
 		{
 			// The value to find is actually empty, nothing to do
-			if (0 == Traits::Length<UType,unsigned int>::fixedLength)
+			if (0 == Traits::Length<StringT2,unsigned int>::fixedLength)
 			{
 				out.clear();
 				return;
 			}
 			// The string is actually a single POD item
-			if (1 == Traits::Length<UType,unsigned int>::fixedLength)
+			if (1 == Traits::Length<StringT2,unsigned int>::fixedLength)
 			{
 				out = in;
 				return;
@@ -280,7 +291,7 @@ namespace IO
 
 		// The length of the input
 		if (inLength == (unsigned int)-1)
-			inLength = Traits::Length<UType,unsigned int>::Value(in);
+			inLength = Traits::Length<StringT2,unsigned int>::Value(in);
 		if (!inLength)
 		{
 			out.clear();
@@ -294,7 +305,7 @@ namespace IO
 		// From here, we have at least 2 chars
 
 		// From now on, we will work on a mere CString
-		const char* input = Traits::CString<UType>::Perform(in);
+		const char* input = Traits::CString<StringT2>::Perform(in);
 
 		// Counting slashes
 		unsigned int slashes = 0;
