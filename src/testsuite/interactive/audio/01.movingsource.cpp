@@ -3,7 +3,7 @@
 #include <yuni/yuni.h>
 #include <yuni/application/console.h>
 #include <yuni/core/string.h>
-#include <yuni/audio/manager.h>
+#include <yuni/audio/queueservice.h>
 #include <yuni/core/system/sleep.h>
 
 using namespace Yuni;
@@ -53,7 +53,7 @@ public:
 
 private:
 	String pFileName;
-	Audio::Manager pAudio;
+	Audio::QueueService pAudio;
 
 }; // class MovingSource
 

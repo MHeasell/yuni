@@ -25,9 +25,9 @@ Set(SRC_AUDIO
 #		audio/sound.cpp
 #		audio/sound3D.h
 #		audio/sound3D.cpp
-		audio/manager.h
-		audio/manager.hxx
-		audio/manager.cpp
+		audio/queueservice.h
+		audio/queueservice.hxx
+		audio/queueservice.cpp
 		audio/loop.h
 		audio/loop.cpp
 #		audio/music.h

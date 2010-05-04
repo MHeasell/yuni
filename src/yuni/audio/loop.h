@@ -10,7 +10,7 @@ namespace Yuni
 namespace Audio
 {
 	//! Forward Declaration
-	class Manager;
+	class QueueService;
 
 
 	/*!
@@ -30,12 +30,12 @@ namespace Audio
 		typedef LoopType::RequestType RequestType;
 
 	public:
-		Loop(Manager* audioManager);
+		Loop(QueueService* audioService);
 
 		bool onLoop();
 
 	public:
-		Manager* pManager;
+		QueueService* pAudioService;
 
 	}; // class Loop
 

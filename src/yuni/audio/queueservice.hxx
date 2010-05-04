@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_MANAGER_HXX__
-# define __YUNI_AUDIO_MANAGER_HXX__
+#ifndef __YUNI_AUDIO_QUEUESERVICE_HXX__
+# define __YUNI_AUDIO_QUEUESERVICE_HXX__
 
 
 namespace Yuni
@@ -9,7 +9,7 @@ namespace Audio
 
 
 	template<typename StringT>
-	bool Manager::loadSound(const StringT& filePath)
+	bool QueueService::loadSound(const StringT& filePath)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pReady)
@@ -19,14 +19,14 @@ namespace Audio
 		pBuffers[filePath] = new Private::Audio::Buffer<>(NULL);
 
 		Yuni::Bind<bool()> callback;
-		callback.bind(this, &Manager::loadSoundDispatched, String(filePath));
+		callback.bind(this, &QueueService::loadSoundDispatched, String(filePath));
 		pAudioLoop.dispatch(callback);
 		return true;
 	}
 
 
 	template<typename StringT1, typename StringT2>
-	bool Manager::playSound(const StringT1& source, const StringT2& sound)
+	bool QueueService::playSound(const StringT1& source, const StringT2& sound)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pReady)
@@ -35,7 +35,7 @@ namespace Audio
 		String soundStr(sound);
 		if (pBuffers.find(soundStr) == pBuffers.end())
 		{
-			std::cerr << "Manager::playSound : no buffer with name \"" << sound
+			std::cerr << "QueueService::playSound : no buffer with name \"" << sound
 					  << "\" could be found !" << std::endl;
 			return false;
 		}
@@ -44,7 +44,7 @@ namespace Audio
 		String sourceStr(source);
 		if (pSources.find(sourceStr) == pSources.end())
 		{
-			std::cerr << "Manager::playSound : no source with name \"" << source
+			std::cerr << "QueueService::playSound : no source with name \"" << source
 					  << "\" could be found !" << std::endl;
 			return false;
 		}
@@ -63,13 +63,13 @@ namespace Audio
 
 
 	template<typename StringT>
-	bool Manager::addSource(const StringT& sourceName, bool loop)
+	bool QueueService::addSource(const StringT& sourceName, bool loop)
 	{
 		return addSource(String(sourceName), loop);
 	}
 
 	template<>
-	inline bool Manager::addSource<String>(const String& sourceName, bool loop)
+	inline bool QueueService::addSource<String>(const String& sourceName, bool loop)
 	{
 		Source::Ptr newSource(new Source(loop));
 
@@ -89,7 +89,7 @@ namespace Audio
 	}
 
 	template<typename StringT>
-	bool Manager::addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
+	bool QueueService::addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
 		bool loop = false)
 	{
 		Source::Ptr newSource(new Source(position, loop));
@@ -109,7 +109,7 @@ namespace Audio
 	}
 
 	template<typename StringT>
-	bool Manager::addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
+	bool QueueService::addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
 		const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction, bool loop = false)
 	{
 		Source::Ptr newSource(new Source(position, velocity, direction, loop));
@@ -131,14 +131,14 @@ namespace Audio
 
 
 	template<typename StringT>
-	bool Manager::moveSource(const StringT& sourceName, const Gfx::Point3D<>& position)
+	bool QueueService::moveSource(const StringT& sourceName, const Gfx::Point3D<>& position)
 	{
 		String sourceStr = sourceName;
 		return moveSource(sourceStr, position);
 	}
 
 	template<>
-	inline bool Manager::moveSource<String>(const String& sourceStr, const Gfx::Point3D<>& position)
+	inline bool QueueService::moveSource<String>(const String& sourceStr, const Gfx::Point3D<>& position)
 	{
 		Source::Map::iterator it = pSources.find(sourceStr);
 		if (it == pSources.end())
@@ -153,4 +153,4 @@ namespace Audio
 } // namespace Audio
 } // namespace Yuni
 
-#endif // __YUNI_AUDIO_MANAGER_HXX__
+#endif // __YUNI_AUDIO_QUEUESERVICE_HXX__
