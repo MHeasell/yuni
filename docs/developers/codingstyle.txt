@@ -27,6 +27,7 @@ GENERAL
     Text files                  .txt
 
 * Always leave one space before and after binary and ternary operators
+  Only leave one space after semi-colons in "for" statements
   GOOD
   if (10 == a && 42 == b)
   {}
@@ -37,6 +38,19 @@ GENERAL
   for (int i = 0; i != 10; ++i)
   BAD
   for(int i=0;i<10;++i)
+
+* Use the following indenting for "switch" statements
+  switch (test)
+  {
+    case 1:
+	  {
+	    // Do something
+	    break;
+	  }
+	default:
+	  // Do something else
+  } // No semi-colon here
+
 
 * Avoid magic numbers
   BAD
@@ -110,6 +124,11 @@ NAMING CONVENTION
 * In any thread-safe class, the methods providing thread-unsafe access
   to the instance (usually methods that are equivalent to thread-safe methods
   not using locks on purpose) must be suffixed with "WL".
+
+* When a class acts as a single entry point for a Yuni module, and
+  offers a continuous service during the program's execution, this
+  class should be named Service, e.g. :
+  "Yuni::Audio::QueueService"
 
 
 COMMENTS
