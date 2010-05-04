@@ -55,7 +55,7 @@ namespace Job
 	}
 
 
-	template<class AnyStringT> inline void IJob::name(const AnyStringT& s)
+	template<class StringT> inline void IJob::name(const StringT& s)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		pName = s;
@@ -95,6 +95,15 @@ namespace Job
 		ThreadingPolicy::MutexLocker locker(*this);
 		info.name = pName;
 	}
+
+
+
+	template<class StringT>
+	inline void IJob::nameWL(const StringT& newName)
+	{
+		pName = newName;
+	}
+
 
 
 
