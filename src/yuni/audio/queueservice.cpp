@@ -2,17 +2,17 @@
 #include <cassert>
 #include "../private/audio/av.h"
 #include "../private/audio/openal.h"
-#include "manager.h"
+#include "queueservice.h"
 
 namespace Yuni
 {
 namespace Audio
 {
 
-	bool Manager::sHasRunningInstance = false;
+	bool QueueService::sHasRunningInstance = false;
 
 
-	bool Manager::start()
+	bool QueueService::start()
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		// Do not initialize the manager twice
@@ -23,7 +23,7 @@ namespace Audio
 		Thread::Condition condition;
 		InitData initData(condition, pReady);
 		Bind<bool()> callback;
-		callback.bind(this, &Manager::initDispatched, initData);
+		callback.bind(this, &QueueService::initDispatched, initData);
 		condition.lock();
 		pAudioLoop.dispatch(callback);
 
@@ -39,7 +39,7 @@ namespace Audio
 		return false;
 	}
 
-	void Manager::stop()
+	void QueueService::stop()
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		// Do not stop the manager if it was not properly started
@@ -71,7 +71,7 @@ namespace Audio
 	}
 
 
-	bool Manager::initDispatched(InitData& data)
+	bool QueueService::initDispatched(InitData& data)
 	{
   		data.condition.lock();
 		data.condition.unlock();
@@ -82,7 +82,7 @@ namespace Audio
 	}
 
 
-	bool Manager::loadSoundDispatched(const String& filePath)
+	bool QueueService::loadSoundDispatched(const String& filePath)
 	{
 		std::cout << "Loading file \"" << filePath << "\"..." << std::endl;
 
@@ -131,7 +131,7 @@ namespace Audio
 	}
 
 
-	bool Manager::updateDispatched()
+	bool QueueService::updateDispatched()
 	{
 		Source::Map::iterator end = pSources.end();
 		for (Source::Map::iterator it = pSources.begin(); it != end; ++it)

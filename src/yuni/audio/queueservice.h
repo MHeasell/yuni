@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_MANAGER_H__
-# define __YUNI_AUDIO_MANAGER_H__
+#ifndef __YUNI_AUDIO_QUEUESERVICE_H__
+# define __YUNI_AUDIO_QUEUESERVICE_H__
 
 # include "../yuni.h"
 # include <map>
@@ -21,23 +21,23 @@ namespace Audio
 
 
 	/*!
-	** \brief The audio manager is a singleton that manages everything sound-related
+	** \brief The audio queue service is the service that manages everything sound-related
 	**
 	** It takes care of ffmpeg / openal inits.
 	** It uses an event loop to solve MT problems.
 	*/
-	class Manager: public Policy::ObjectLevelLockable<Manager>
+	class QueueService: public Policy::ObjectLevelLockable<QueueService>
 	{
 	public:
-		typedef Policy::ObjectLevelLockable<Manager>  ThreadingPolicy;
+		typedef Policy::ObjectLevelLockable<QueueService>  ThreadingPolicy;
 
 	public:
-		Manager(): pReady(false), pAudioLoop(this)
+		QueueService(): pReady(false), pAudioLoop(this)
 		{}
 
 	private:
-		Manager(const Manager&);
-		Manager& operator = (const Manager&);
+		QueueService(const QueueService&);
+		QueueService& operator = (const QueueService&);
 
 	public:
 		bool start();
@@ -135,7 +135,7 @@ namespace Audio
 	private:
 		friend class Loop;
 
-	}; // class Manager
+	}; // class QueueService
 
 
 
@@ -143,6 +143,6 @@ namespace Audio
 } // namespace Audio
 } // namespace Yuni
 
-#include "manager.hxx"
+#include "queueservice.hxx"
 
-#endif // __YUNI_AUDIO_MANAGER_H__
+#endif // __YUNI_AUDIO_QUEUESERVICE_H__

@@ -1,21 +1,21 @@
 #include "loop.h"
-#include "manager.h"
+#include "queueservice.h"
 
 namespace Yuni
 {
 namespace Audio
 {
 
-	Loop::Loop(Manager* audioManager)
-		:pManager(audioManager)
+	Loop::Loop(QueueService* audioService)
+		:pAudioService(audioService)
 	{}
 
 
 	bool Loop::onLoop()
 	{
-		if (!pManager)
+		if (!pAudioService)
 			return false;
-		pManager->updateDispatched();
+		pAudioService->updateDispatched();
 		return true;
 	}
 
