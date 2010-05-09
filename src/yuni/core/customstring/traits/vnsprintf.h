@@ -4,12 +4,6 @@
 # include "../../traits/length.h"
 # include "integer.h"
 
-# ifdef YUNI_OS_MSVC
-#	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf_s(BUFFER,SIZE,F,V)
-# else
-#	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf(BUFFER,F,V)
-# endif
-
 
 
 namespace Yuni

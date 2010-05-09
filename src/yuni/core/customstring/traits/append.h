@@ -3,11 +3,12 @@
 
 # include "../../traits/length.h"
 # include "integer.h"
+# include <stdio.h>
 
 # ifdef YUNI_OS_MSVC
 #	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf_s(BUFFER,SIZE,F,V)
 # else
-#	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf(BUFFER,F,V)
+#	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::snprintf(BUFFER,SIZE,F,V)
 # endif
 
 
@@ -96,10 +97,13 @@ namespace CustomString
 	{
 		static void Do(CustomStringT& s, const void* rhs)
 		{
-			typename CustomStringT::Type buffer[20];
-			(void) YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, sizeof(buffer), "%p", rhs);
-			s.appendWithoutChecking(buffer,
-				Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+			typename CustomStringT::Type buffer[32];
+			// On Windows, it may return a negative value
+			if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, sizeof(buffer), "%p", rhs) >= 0)
+			{
+				s.appendWithoutChecking(buffer,
+					Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+			}
 		}
 	};
 
@@ -112,9 +116,12 @@ namespace CustomString
 		static void Do(CustomStringT& s, const TYPE rhs) \
 		{ \
 			typename CustomStringT::Type buffer[BUFSIZE]; \
-			(void) YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, BUFSIZE, FORMAT, rhs); \
-			s.appendWithoutChecking(buffer, \
-				Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer)); \
+			/* On Windows, it may returns a negative value */ \
+			if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, BUFSIZE, FORMAT, rhs) >= 0) \
+			{ \
+				s.appendWithoutChecking(buffer, \
+					Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer)); \
+			} \
 		} \
 	}
 
@@ -140,13 +147,15 @@ namespace CustomString
 	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(unsigned long);
 	# endif
 
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(24, "%lf",  float);
-	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(24, "%lf",  double);
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(256, "%lf",  float);
+	YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(256, "%lf",  double);
 
 
 
 } // namespace CustomString
 } // namespace Extension
 } // namespace Yuni
+
+# undef YUNI_PRIVATE_MEMBUF_SPTRINF
 
 #endif // __YUNI_CORE_MEMORY_BUFFER_TRAITS_APPEND_H__
