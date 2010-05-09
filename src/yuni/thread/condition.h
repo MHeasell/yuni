@@ -81,7 +81,7 @@ namespace Thread
 		** \return True if the timeout expired.
 		** \see unlock()
 		*/
-		bool waitUnlocked(const uint32 msTimeout);
+		bool waitUnlocked(unsigned int msTimeout);
 		//@}
 
 
