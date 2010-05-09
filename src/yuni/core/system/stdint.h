@@ -34,10 +34,6 @@
 namespace Yuni
 {
 
-# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-	typedef int ssize_t;
-# endif
-
 	# ifdef YUNI_HAS_INT128_T
 	/* 128-bit ints */
 	typedef uint128_t  uint128;
@@ -56,6 +52,11 @@ namespace Yuni
 	/* 8-bit ints, guaranteed to be 1 byte in size */
 	typedef unsigned char  uint8;
 	typedef char           sint8;
+
+
+# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
+	typedef sint64 ssize_t;
+# endif
 
 
 
