@@ -43,7 +43,7 @@ namespace Thread
 		*/
 		void* threadMethodForPThread(void* arg)
 		{
-			assert(NULL != arg);
+			assert(NULL != arg && "Yuni Thread Internal: invalid argument (pthread callback)");
 
 			// Adjust cancellation behaviors
 			::pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
@@ -52,7 +52,7 @@ namespace Thread
 			// Get back our object.
 			Yuni::Thread::IThread* t = (Yuni::Thread::IThread *) arg;
 
-			assert(false == t->pStarted);
+			assert(false == t->pStarted && "Yuni Thread: The thread is already started");
 
 			// Aquire the condition, so that start() cannot continue.
 			t->pStartupCond.lock();
@@ -132,6 +132,11 @@ namespace Thread
 	}
 
 
+	inline IThread::IThread()
+		:pStarted(false), pShouldStop(true)
+	{}
+
+
 	IThread::Error IThread::start()
 	{
 		do
@@ -176,7 +181,7 @@ namespace Thread
 
 			return errNone;
 		}
-		while (1);
+		while (true);
 
 		// The thread is already started.
 		wakeUp();
@@ -237,7 +242,7 @@ namespace Thread
 
 
 
-	IThread::Error IThread::wait(const uint32 timeout)
+	IThread::Error IThread::wait(unsigned int timeout)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 

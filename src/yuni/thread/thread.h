@@ -34,48 +34,9 @@ namespace Thread
 
 
 	/*!
-	** \brief Convenient method to create, start and return a new instancied thread
+	** \brief Base class interface for Threads (abstract)
 	**
-	** The user is responsible for releasing it.
-	** \code
-	** class MyOwnThread : public Yuni::Threads::IThread
-	** {
-	** public:
-	**   MyOwnThread(int p): Yuni::Threads::IThread(), pTag(p)  {}
-	**   virtual ~MyOwnThread() {stop();} // Required for Code robustness
-	**
-	** protected:
-	**   virtual void onExecute()
-	**   {
-	**      for (int i = 0; i < 50; ++i)
-	**         std::cout << "Thread " << pTag << ": Do some stuff here" << std::endl;
-	**   }
-	**
-	** private:
-	**   int pTag;
-	** };
-	**
-	** int main(void)
-	** {
-	**    // Fire-and-forget our new thread
-	**    Yuni::Thread::CreateAndStart<MyOwnThread>();
-	**
-	**    // Do some other stuff here...
-	** }
-	** \endcode
-	**
-	** \tparam T A descendant of the class Yuni::Thread::IThread
-	** \return A pointer to the new instance
-	*/
-	template<class T> T* CreateAndStart();
-
-
-
-
-	/*!
-	** \brief Internal Base class interface for Threads (abstract)
-	**
-	** The thread is really created when started (with the method start()), and
+	** \internal The thread is really created when started (with the method start()), and
 	** destroyed when stopped by the method stop() (or when the object is
 	** destroyed too).
 	*/
@@ -111,9 +72,13 @@ namespace Thread
 	public:
 		//! \name Constructor & Destructor
 		//@{
-		//! Default constructor
+		/*!
+		** \brief Default constructor
+		*/
 		IThread();
-		//! Destructor
+		/*!
+		** \brief Destructor
+		*/
 		virtual ~IThread();
 		//@}
 
@@ -151,7 +116,7 @@ namespace Thread
 		** \param timeout The timeout in milliseconds
 		** \return An error status (`errNone` if succeeded)
 		*/
-		Error wait(const uint32 timeout);
+		Error wait(unsigned int timeout);
 
 		/*!
 		** \brief Restart the thread
@@ -188,6 +153,12 @@ namespace Thread
 		void wakeUp();
 		//@}
 
+
+		//! \name Operators
+		//@{
+		//! Get if the thread is currently stopped
+		bool operator ! () const;
+		//@}
 
 	protected:
 		/*!

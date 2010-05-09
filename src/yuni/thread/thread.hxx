@@ -10,10 +10,6 @@ namespace Thread
 {
 
 
-	inline IThread::IThread()
-		:pStarted(false), pShouldStop(true)
-	{}
-
 
 	inline IThread::~IThread()
 	{
@@ -34,12 +30,9 @@ namespace Thread
 	}
 
 
-
-	template<class T> inline T* CreateAndStart()
+	inline bool IThread::operator ! () const
 	{
-		T* thread = new T();
-		thread->start();
-		return thread;
+		return !started();
 	}
 
 
