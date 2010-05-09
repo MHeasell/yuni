@@ -23,6 +23,7 @@ namespace Yuni
 
 		/*!
 		** \brief Any type of null member pointer
+		**
 		** \note In gcc 4.1.1 compiler that does not recognize the comparison of
 		** nullptr with point to member function.
 		*/
