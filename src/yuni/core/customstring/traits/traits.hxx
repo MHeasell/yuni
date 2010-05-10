@@ -20,14 +20,24 @@ namespace CustomStringImpl
 			// This loop may be a little faster than the following replacement code :
 			// capacity = minCapacity + minCapacity % chunkSize;
 			// Especially when chunkSize is not a power of 2
+			Size newcapacity = capacity;
 			do
 			{
 				// Increase the capacity until we have enough space
-				capacity += chunkSize;
-			} while (capacity < minCapacity);
+				newcapacity += chunkSize;
+			} while (newcapacity < minCapacity);
 
 			// Realloc the internal buffer
-			data = (C*)::realloc(data, sizeof(C) * capacity);
+			C* newdata = (C*)::realloc(data, (size_t)(sizeof(C) * newcapacity));
+			// The returned value can be NULL
+			if (!newdata)
+				throw "Yuni::CustomString: Impossible to realloc";
+			{
+				data = newdata;
+				capacity = newcapacity;
+				if (zeroTerminated)
+					data[size] = '\0';
+			}
 		}
 	}
 

@@ -23,9 +23,26 @@ namespace File
 
 	FILE* Stream::OpenFileOnWindows(const char* filename, const int mode)
 	{
-		wchar_t buffer[FILENAME_MAX];
-		MultiByteToWideChar(CP_UTF8, 0, filename, -1, buffer, sizeof(buffer));
-		return _wfopen(buffer, OpenMode::ToWCString(mode));
+		const size_t len = strlen(filename);
+		if (!len)
+			return NULL;
+		wchar_t* buffer = new wchar_t[len + 2];
+		const int n = MultiByteToWideChar(CP_UTF8, 0, filename, len, buffer, len);
+		if (n <= 0)
+		{
+			delete[] buffer;
+			return NULL;
+		}
+		buffer[n] = L'\0';
+		FILE* f;
+		# ifdef YUNI_OS_MSVC
+		if (0 != _wfopen_s(&f, buffer, OpenMode::ToWCString(mode)))
+			f = NULL;
+		# else
+		f = _wfopen(buffer, OpenMode::ToWCString(mode));
+		# endif
+		delete[] buffer;
+		return f;
 	}
 
 

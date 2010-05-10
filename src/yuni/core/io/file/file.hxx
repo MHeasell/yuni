@@ -101,10 +101,25 @@ namespace File
 	template<class StringT1, class StringT2>
 	bool Copy(const StringT1& from, const StringT2& to, bool overwrite)
 	{
-		return (!overwrite && Core::IO::File::Exists(to))
-			? false
-			: Private::IO::FilesystemImpl::CopyFile(
-				Traits::CString<StringT1>::Perform(from), Traits::CString<StringT2>::Perform(to));
+		if (!overwrite && Core::IO::File::Exists(to))
+			return false;
+
+		// Open the source file
+		Yuni::Core::IO::File::Stream fromFile(from, Yuni::Core::IO::File::OpenMode::read);
+		if (fromFile.opened())
+		{
+			Yuni::Core::IO::File::Stream toFile(to,
+				Yuni::Core::IO::File::OpenMode::write | Yuni::Core::IO::File::OpenMode::truncate);
+			if (toFile.opened())
+			{
+				char buffer[4096];
+				size_t numRead;
+				while ((numRead = fromFile.read(buffer, sizeof(buffer))))
+					toFile.write(buffer, numRead);
+				return true;
+			}
+		}
+		return false;
 	}
 
 

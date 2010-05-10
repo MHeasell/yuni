@@ -15,25 +15,6 @@ namespace IO
 namespace FilesystemImpl
 {
 
-	bool CopyFile(const char* from, const char* to)
-	{
-		// Open the source file
-		Yuni::Core::IO::File::Stream fromFile(from, Yuni::Core::IO::File::OpenMode::read);
-		if (fromFile.opened())
-		{
-			Yuni::Core::IO::File::Stream toFile(to,
-				Yuni::Core::IO::File::OpenMode::write | Yuni::Core::IO::File::OpenMode::truncate);
-			if (toFile.opened())
-			{
-				char buffer[4096];
-				size_t numRead;
-				while ((numRead = fromFile.read(buffer, sizeof(buffer))))
-					toFile.write(buffer, numRead);
-			}
-		}
-		return false;
-	}
-
 
 	bool Size(const char* filename, uint64& value)
 	{

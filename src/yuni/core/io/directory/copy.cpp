@@ -98,15 +98,16 @@ namespace Directory
 	}
 
 
-	bool Copy(const char* src, const char* dst)
+	bool Copy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen)
 	{
-		struct stat sb;
+		CustomString<1024> buf;
+		CustomString<1024> buf2;
 
-		if (::stat(src, &sb))
+		buf.assign(src, srclen);
+		struct stat sb;
+		if (::stat(buf.c_str(), &sb))
 			return false;
 
-		char buf[FILENAME_MAX];
-		char buf2[FILENAME_MAX];
 		mode_t mode;
 
 		// src is a file
@@ -116,22 +117,24 @@ namespace Directory
 			{
 				const char *p = strrchr(src, '/');
 				// src => dst/src
-				strncpy(buf, dst, sizeof(buf) - 1);
-				strncat(buf, (p ? p + 1 : src), sizeof(buf) - 1);
-				return Copy(src, buf);
+				buf.assign(dst, dstlen);
+				buf << '/' << (p ? p + 1 : src);
+				return Copy(src, srclen, buf.c_str(), buf.size());
 			}
 
 			// Copy the file
-			return FileCopy(src, dst, mode);
+			buf.assign(src, srclen);
+			buf2.assign(dst, dstlen);
+			return FileCopy(buf.c_str(), buf2.c_str(), mode);
 		}
 
-		/* src is a directory */
-
-		if (::stat(dst, &sb))
+		// src is a directory
+		buf2.assign(dst, dstlen);
+		if (::stat(buf2.c_str(), &sb))
 		{
 			// 'dst' does not exist yet
 			// We have to create it
-			if (!Private::Core::IO::Directory::UnixMake(dst, strlen(dst)))
+			if (!Private::Core::IO::Directory::UnixMake(dst, dstlen))
 				return false;
 		}
 		else
@@ -140,14 +143,15 @@ namespace Directory
 			// We have to remove it first (if not a directory) then to recreate it
 			if (!S_ISDIR(sb.st_mode))
 			{
-				if (::remove(dst) || !Private::Core::IO::Directory::UnixMake(dst, strlen(dst)))
+				if (::remove(buf2.c_str()) || !Private::Core::IO::Directory::UnixMake(dst, dstlen))
 					return false;
 			}
 		}
 
+		buf.assign(src, srclen);
 		DIR *dirp;
 		struct dirent *dp;
-		if ((dirp = ::opendir(src)) == NULL)
+		if ((dirp = ::opendir(buf.c_str())) == NULL)
 			return false;
 		while ((dp = ::readdir(dirp)) != NULL)
 		{
@@ -155,9 +159,11 @@ namespace Directory
 			if ('.' == dp->d_name[0] && ('.' == dp->d_name[1] || '\0' == dp->d_name[1]))
 				continue;
 
-			sprintf(buf, "%s/%s", src, dp->d_name);
-			sprintf(buf2, "%s/%s", dst, dp->d_name);
-			if (!Copy(buf, buf2))
+			buf.assign(src, srclen);
+			buf << '/' << (const char*) dp->d_name;
+			buf2.assign(dst, dstlen);
+			buf2 << '/' << (const char*) dp->d_name;
+			if (!Copy(buf.c_str(), buf.size(), buf2.c_str(), buf2.size()))
 			{
 				::closedir(dirp);
 				return false;

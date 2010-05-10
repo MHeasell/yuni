@@ -433,8 +433,8 @@ namespace StringImpl
 		static inline void Append(StringBase<C,Chnk>& s, const SourceType& str, const typename StringBase<C,Chnk>::Size len)
 		{
 			assert((void*)&s != (const void*)&str && "undefined behavior");
-			if (str.pSize && len)
-				From<C*>::AppendRaw(s, str.c_str(), Private::StringImpl::Min(str.size(), len));
+			if (str.size() && len)
+				From<C*>::AppendRaw(s, str.c_str(), Private::StringImpl::Min<size_t>(str.size(), len));
 		}
 
 		template<int Chnk>
@@ -442,8 +442,8 @@ namespace StringImpl
 			const typename StringBase<C,Chnk>::Size len)
 		{
 			assert((void*)&s != (const void*)&str && "undefined behavior");
-			if (offset < str.pSize && len)
-				From<C*>::AppendRaw(s, str.c_str() + offset, Private::StringImpl::Min(str.size() - offset, len));
+			if (offset < str.size() && len)
+				From<C*>::AppendRaw(s, str.c_str() + offset, Private::StringImpl::Min<size_t>(str.size() - offset, len));
 		}
 
 
@@ -452,7 +452,7 @@ namespace StringImpl
 			const typename StringBase<C,Chnk>::Size offset)
 		{
 			assert((void*)&s != (const void*)&str && "undefined behavior");
-			if (str.pSize)
+			if (str.size())
 				From<C*>::InsertRaw(s, str.c_str(), str.size(), offset);
 		}
 
@@ -461,7 +461,7 @@ namespace StringImpl
 			const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
 		{
 			assert((void*)&s != (const void*)&str && "undefined behavior");
-			if (str.pSize && len)
+			if (str.size() && len)
 				From<C*>::InsertRaw(s, str.c_str(), (str.size() < len) ? str.size() : len, offset);
 		}
 

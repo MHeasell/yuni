@@ -191,10 +191,27 @@ namespace Math
 
 	template<class T> inline bool NaN(const T& x)
 	{
+		# ifdef YUNI_OS_MSVC
+		return (0 != _isnan(x));
+		# else
 		return (isnan(x));
+		# endif
 	}
 
-
+	template<class T> inline int Infinite(const T& x)
+	{
+		# ifdef YUNI_OS_MSVC
+		switch (_fpclass(x))
+		{
+			case _FPCLASS_NINF: return -1; // -inf
+			case _FPCLASS_PINF: return +1; // -inf
+			default: return 0;
+		}
+		return 0;
+		# else
+		return (isinf(x));
+		# endif
+	}
 
 	template<class T> inline T Floor(T x)
 	{
