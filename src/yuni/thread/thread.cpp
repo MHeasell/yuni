@@ -132,7 +132,7 @@ namespace Thread
 	}
 
 
-	inline IThread::IThread()
+	IThread::IThread()
 		:pStarted(false), pShouldStop(true)
 	{}
 

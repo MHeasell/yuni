@@ -326,6 +326,11 @@ namespace IO
 
 		// From now on, we will work on a mere CString
 		const char* input = Traits::CString<StringT2>::Perform(in);
+		if (!input)
+		{
+			out.clear();
+			return;
+		}
 
 		// Counting slashes
 		unsigned int slashes = 0;
@@ -494,7 +499,7 @@ namespace IO
 		if (count)
 		{
 			for (unsigned int j = 0; j != count; ++j)
-				out.append(input + stack[j].cursor, stack[j].length);
+				out.append((const char*)(input + stack[j].cursor), stack[j].length);
 		}
 
 		// Releasing the memory

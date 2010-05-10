@@ -30,8 +30,15 @@ namespace Logs
 		template<class LoggerT, class VerbosityType, class StringT>
 		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s)
 		{
-			if (callback.notEmpty())
-				callback(VerbosityType::level, Yuni::String(s));
+			if ((int)VerbosityType::level != (int)Verbosity::Debug::level)
+			{
+				if (callback.notEmpty() && !s.empty())
+				{
+					// A mutex is already locked
+					pDispatchedMessage = s;
+					callback(VerbosityType::level, pDispatchedMessage);
+				}
+			}
 
 			// Transmit the message to the next handler
 			NextHandler::template internalDecoratorWriteWL<LoggerT, VerbosityType, StringT>(logger, s);
@@ -39,7 +46,8 @@ namespace Logs
 
 
 	public:
-		Yuni::Event<void (int, const String&)> callback;
+		Yuni::Event<void (int, const CustomString<>&)> callback;
+		CustomString<> pDispatchedMessage;
 
 	}; // class Callback
 

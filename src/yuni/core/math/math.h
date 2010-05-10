@@ -288,6 +288,14 @@ namespace Math
 	*/
 	template<class T> inline bool NaN(const T& x);
 
+	/*!
+	** \brief Determine whether the argument value is an infinite value
+	**
+	** \ingroup Math
+	** \return  1 if x is positive infinity, and -1 if x is negative infinity
+	*/
+	template<class T> inline int Infinite(const T& x);
+
 
 	/*!
 	** \brief Floor function

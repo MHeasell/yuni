@@ -31,7 +31,7 @@ namespace Directory
 			buffer[2] = L'?';
 			buffer[3] = L'\\';
 			const int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
-			if (!n)
+			if (n <= 0)
 			{
 				delete[] buffer;
 				return false;
@@ -44,7 +44,7 @@ namespace Directory
 
 			while (*t != L'\0')
 			{
-				if (*t == L'\\' || *t == L'/')
+				if ((*t == L'\\' || *t == L'/') && (*(t-1) != ':'))
 				{
 					*t = L'\0';
 					if (!CreateDirectoryW(buffer, NULL))
