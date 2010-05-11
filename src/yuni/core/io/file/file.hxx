@@ -19,8 +19,11 @@ namespace File
 	template<class StringT>
 	inline bool Size(const StringT& filename, uint64& size)
 	{
-		typedef typename Static::Remove::Const<StringT>::Type TypeT;
-		return Private::IO::FilesystemImpl::Size(Traits::CString<TypeT>::Perform(filename), size);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CoreIOFileSize_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CoreIOFileSize_InvalidTypeForLength);
+
+		return Private::IO::FilesystemImpl::Size(Traits::CString<StringT>::Perform(filename),
+			Traits::Length<StringT>::Value(filename), size);
 	}
 
 
@@ -28,8 +31,12 @@ namespace File
 	inline uint64 Size(const StringT& filename)
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CoreIOFileSize_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CoreIOFileSize_InvalidTypeForLength);
 
-		return Private::IO::FilesystemImpl::Size(Traits::CString<StringT>::Perform(filename));
+		uint64 size;
+		return Private::IO::FilesystemImpl::Size(Traits::CString<StringT>::Perform(filename),
+			Traits::Length<StringT>::Value(filename), size)
+			? size : 0;
 	}
 
 

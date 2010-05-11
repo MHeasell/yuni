@@ -16,16 +16,18 @@ namespace FilesystemImpl
 {
 
 
-	bool Size(const char* filename, uint64& value)
+	# ifdef YUNI_OS_WINDOWS
+
+	bool Size(const char* const filename, unsigned int len, uint64& value)
 	{
-		# ifdef YUNI_OS_WINDOWS
-		const char* const p = filename;
-		size_t len = strlen(filename);
 		if (!len)
 		{
 			value = 0;
 			return false;
 		}
+
+		const char* const p = filename;
+
 		if (p[len - 1] == '\\' || p[len - 1] == '/')
 			--len;
 
@@ -76,7 +78,12 @@ namespace FilesystemImpl
 
 		CloseHandle(hndl);
 		return true;
-		# else
+	}
+
+	# else
+
+	bool Size(const char* const filename, unsigned int len, uint64& value)
+	{
 		struct stat results;
 		if (filename && '\0' != *filename && stat(filename, &results) == 0)
 		{
@@ -85,17 +92,9 @@ namespace FilesystemImpl
 		}
 		value = 0;
 		return false;
-		# endif
 	}
 
-
-	uint64 Size(const char* filename)
-	{
-		struct stat results;
-		if (filename && '\0' != *filename && stat(filename, &results) == 0)
-			return results.st_size;
-		return 0;
-	}
+	# endif
 
 
 

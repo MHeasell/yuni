@@ -41,7 +41,6 @@ namespace File
 	** To test if a node exists whatever its nature, you should use
 	** Core::IO::Exists() instead.
 	**
-	** \tparam Any standard that can be converted into a const char*
 	** \param p The folder/filename to test
 	** \return True if it exists, false otherwise
 	*/
@@ -53,7 +52,7 @@ namespace File
 	**
 	** \ingroup IOFile
 	** \param filename The filename
-	** \param[out] size The size (in bytes) of the file. 0 if any errors has occured
+	** \param[out] size The size (in bytes) of the file. The value is guaranteed to be set (null) is an error has occured
 	** \return True if the operation succeeded, False otherwise
 	*/
 	template<class StringT> bool Size(const StringT& filename, uint64& size);
@@ -63,8 +62,7 @@ namespace File
 	**
 	** \ingroup IOFile
 	** \param filename The filename
-	** \param[out] size The size (in bytes) of the file. 0 if any errors has occured
-	** \return The size in bytes of the file, 0 when the operation fails
+	** \return The size (in bytes) of the file. The returned value is guaranteed to be null is an error has occured
 	*/
 	template<class StringT> uint64 Size(const StringT& filename);
 
