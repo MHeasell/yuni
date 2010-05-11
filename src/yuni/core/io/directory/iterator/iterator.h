@@ -293,7 +293,7 @@ namespace Directory
 		** \param parent The parent folder
 		** \param name The name of the file only
 		** \param size Size in bytes
-		** \return itAbort to abort the whole process, itContinue will be used otherwise.
+		** \return itAbort to abort the whole process, itSkip to skip the current folder and its sub-folders
 		*/
 		virtual Flow onFile(const String& filename, const String& parent,
 			const String& name, size_t size);

@@ -107,8 +107,8 @@ namespace File
 	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded
 	** \return True if the operation succeeded.
 	*/
-	template<class C, int ChunkT, class StringT>
-	bool LoadContent(const StringBase<C,ChunkT>& out, const StringT& filename, const uint64 hardlimit = sizeHardLimit);
+	template<class StringT1, class StringT2>
+	bool LoadContent(StringT1& out, const StringT2& filename, const uint64 hardlimit = sizeHardLimit);
 
 
 	/*!

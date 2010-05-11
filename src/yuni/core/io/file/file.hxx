@@ -137,8 +137,8 @@ namespace File
 
 
 
-	template<class C, int ChunkT, class StringT>
-	bool LoadContent(StringBase<C,ChunkT>& out, const StringT& filename, const uint64 hardlimit = sizeHardLimit)
+	template<class StringT1, class StringT2>
+	bool LoadContent(StringT1& out, const StringT2& filename, const uint64 hardlimit)
 	{
 		uint64 size;
 		if (Core::IO::File::Size(filename, size))
