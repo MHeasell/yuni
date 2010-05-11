@@ -46,11 +46,10 @@ namespace FilesystemImpl
 				# endif
 			}
 		}
-		# ifdef YUNI_OS_WINDOWS
+
 		// Driver letters
 		if (len == 2 && p[1] == ':')
 			return true;
-		# endif
 
 		CustomString<>  norm;
 		Yuni::Core::IO::Normalize(norm, p, len);
@@ -61,7 +60,7 @@ namespace FilesystemImpl
 		buffer[2] = L'?';
 		buffer[3] = L'\\';
 		int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
-		if (!n)
+		if (n <= 0)
 		{
 			delete buffer;
 			return false;

@@ -31,7 +31,7 @@ namespace Directory
 			buffer[2] = L'?';
 			buffer[3] = L'\\';
 			const int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
-			if (n <= 0)
+			if (!n)
 			{
 				delete[] buffer;
 				return false;

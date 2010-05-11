@@ -102,8 +102,18 @@ namespace Iterator
 			else
 			{
 				// The node is a file
-				if (Yuni::Core::IO::flowAbort == opts.self->onFile(newFilename, filename, newName, s.st_size))
-					return Yuni::Core::IO::flowAbort;
+				switch (opts.self->onFile(newFilename, filename, newName, s.st_size))
+				{
+					case Yuni::Core::IO::flowContinue:
+						break;
+					case Yuni::Core::IO::flowAbort:
+						return Yuni::Core::IO::flowAbort;
+					case Yuni::Core::IO::flowSkip:
+						{
+							closedir(pdir);
+							return Yuni::Core::IO::flowContinue;
+						}
+				}
 			}
 		}
 		closedir(pdir);
@@ -193,8 +203,19 @@ namespace Iterator
 			else
 			{
 				// The node is a file
-				if (Yuni::Core::IO::flowAbort == opts.self->onFile(newFilename, filename, newName, (size_t)data.size))
-					return Yuni::Core::IO::flowAbort;
+				switch (opts.self->onFile(newFilename, filename, newName, (size_t)data.size))
+				{
+					case Yuni::Core::IO::flowContinue:
+						break;
+					case Yuni::Core::IO::flowAbort:
+						return Yuni::Core::IO::flowAbort;
+					case Yuni::Core::IO::flowSkip:
+						{
+							_findclose(h);
+							return Yuni::Core::IO::flowContinue;
+						}
+				}
+
 			}
 		} while (_wfindnexti64(h, &data) == 0);
 		_findclose(h);
