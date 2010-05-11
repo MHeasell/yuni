@@ -1,7 +1,7 @@
 
 #include "cpu.h"
 
-#if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD)
+#if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_NETBSD) || defined(YUNI_OS_OPENBSD)
 #	include <sys/param.h>
 #	include <sys/sysctl.h>
 #endif
@@ -20,7 +20,7 @@ namespace CPU
 {
 
 
-#if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD)
+#if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_NETBSD) || defined(YUNI_OS_OPENBSD)
 # define YUNI_CPU_COUNT_HAS_IMPLEMENTATION
 	unsigned int Count()
 	{
