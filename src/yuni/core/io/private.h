@@ -29,8 +29,7 @@ namespace FilesystemImpl
 
 
 
-	bool Size(const char* filename, uint64& value);
-	uint64 Size(const char* filename);
+	bool Size(const char* filename, unsigned int len, uint64& value);
 
 
 

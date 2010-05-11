@@ -82,18 +82,14 @@ namespace IO
 
 	template<class StringT> inline bool Exists(const StringT& filename)
 	{
-		// The given type, without its const identifier
-		typedef typename Static::Remove::Const<StringT>::Type UType;
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, IOExists_InvalidTypeForBuffer);
-		// Assert, if the length of the container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::Length<UType>::valid,  IOExists_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOExists_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOExists_InvalidTypeForBufferSize);
 
 		# ifdef YUNI_OS_WINDOWS
 		return Private::IO::FilesystemImpl::ExistsWindowsImpl(
-			Traits::CString<UType>::Perform(filename), Traits::Length<UType,size_t>::Value(filename));
+			Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename));
 		# else
-		return Private::IO::FilesystemImpl::ExistsUnixImpl(Traits::CString<UType>::Perform(filename));
+		return Private::IO::FilesystemImpl::ExistsUnixImpl(Traits::CString<StringT>::Perform(filename));
 		# endif
 	}
 
