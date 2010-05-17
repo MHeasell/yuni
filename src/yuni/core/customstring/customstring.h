@@ -674,6 +674,18 @@ namespace Yuni
 		//! \name Misc
 		//@{
 		/*!
+		** \brief Get the first char of the string
+		** \return The last char of the string if not empty, \0 otherwise
+		*/
+		int first() const;
+
+		/*!
+		** \brief Get the last char of the string
+		** \return The last char of the string if not empty, \0 otherwise
+		*/
+		int last() const;
+
+		/*!
 		** \brief Get the number of occurences of a single char
 		*/
 		unsigned int countChar(char c) const;

@@ -1162,6 +1162,19 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline int CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::first() const
+	{
+		return (AncestorType::size) ? AncestorType::data[0] : '\0';
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline int CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::last() const
+	{
+		return (AncestorType::size) ? AncestorType::data[AncestorType::size - 1] : '\0';
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::convertSlashesIntoBackslashes()
 	{
 		for (unsigned int i = 0; i != AncestorType::size; ++i)
