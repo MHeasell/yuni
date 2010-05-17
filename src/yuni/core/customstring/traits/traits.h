@@ -21,6 +21,8 @@ namespace CustomStringImpl
 	bool Equals(const char* const s1, const char* const s2, unsigned int len);
 	bool EqualsInsensitive(const char* const s1, const char* const s2, unsigned int len);
 
+	bool Glob(const char* s, unsigned int l1, const char* const pattern, unsigned int patternlen);
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	struct Data
