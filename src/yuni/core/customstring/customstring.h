@@ -127,13 +127,21 @@ namespace Yuni
 	public:
 		/*!
 		** \brief Compare two string like strcmp()
+		**
+		** The comparison is done using unsigned characters.
+		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
+		**   equal to, or less than the given string
 		*/
-		static int Compare(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
+		static int Compare(const char* const s1, unsigned int l1, const char* const s2, unsigned int l2);
 
 		/*!
 		** \brief Compare two string like strcmp() (insensitive)
+		**
+		** The comparison is done using unsigned characters.
+		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
+		**   equal to, or less than the given string
 		*/
-		static int CompareInsensitive(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
+		static int CompareInsensitive(const char* const s1, unsigned int l1, const char* const s2, unsigned int l2);
 
 
 	public:
@@ -157,14 +165,16 @@ namespace Yuni
 		/*!
 		** \brief Constructor from a mere CString
 		*/
-		CustomString(const char* block, const Size blockSize);
+		CustomString(const char* const block, const Size blockSize);
 
 		/*!
 		** \brief Constructor with a default value
 		*/
 		template<class U> CustomString(const U& rhs);
 
-		//! Destructor
+		/*!
+		** \brief Destructor
+		*/
 		~CustomString();
 		//@}
 
@@ -183,7 +193,7 @@ namespace Yuni
 		** \param cstr A cstr
 		** \param size Size of the given cstr
 		*/
-		void assign(const char* cstr, const Size size);
+		void assign(const char* const cstr, const Size size);
 
 		/*!
 		** \brief Append to the end of the cstr a new value
@@ -234,7 +244,7 @@ namespace Yuni
 		** \param size Size of the cstr
 		** \return True if the cstr has been inserted, false otherwise (size == 0 or offset out of bounds)
 		*/
-		bool insert(const Size offset, const char* cstr, const Size size);
+		bool insert(const Size offset, const char* const cstr, const Size size);
 
 		/*!
 		** \brief Insert a single item at a given position in the cstr
@@ -284,7 +294,7 @@ namespace Yuni
 		** \param region A raw cstr
 		** \param size Size of the given cstr
 		*/
-		void overwrite(const Size offset, const char* region, const Size size);
+		void overwrite(const Size offset, const char* const region, const Size size);
 
 
 		/*!
@@ -343,7 +353,7 @@ namespace Yuni
 		** \param len Size of the given cstr
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size find(const char* cstr, const Size len) const;
+		Size find(const char* const cstr, const Size len) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
@@ -353,7 +363,7 @@ namespace Yuni
 		** \param len Size of the given cstr
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size indexOf(Size offset, const char* cstr, const Size len) const;
+		Size indexOf(Size offset, const char* const cstr, const Size len) const;
 
 		/*!
 		** \brief Find the offset of any supported CString
@@ -384,7 +394,7 @@ namespace Yuni
 		/*!
 		** \brief Get if a given string can be found at the begining of the cstr
 		*/
-		bool startsWith(const char* cstr, const Size len) const;
+		bool startsWith(const char* const cstr, const Size len) const;
 
 		/*!
 		** \brief Get if a given string can be found at the begining of the cstr
@@ -394,7 +404,7 @@ namespace Yuni
 		/*!
 		** \brief Get if a given string can be found at the end of the cstr
 		*/
-		bool endsWith(const char* cstr, const Size len) const;
+		bool endsWith(const char* const cstr, const Size len) const;
 
 		/*!
 		** \brief Get if a given string can be found at the end of the cstr
@@ -447,7 +457,6 @@ namespace Yuni
 
 		//! \name Remove / Erase
 		//@{
-		// From the ancestor
 		/*!
 		** \brief Empty the cstr
 		** \return *this
@@ -482,6 +491,42 @@ namespace Yuni
 		//@}
 
 
+		//! \name Comparisons
+		//@{
+		/*!
+		** \brief Get if the string is equals to another one
+		**
+		** This method is equivalent to the operator '=='
+		*/
+		template<class StringT> bool equals(const StringT& rhs) const;
+
+		/*!
+		** \brief Get if the string is equals to another one (ignoring case)
+		**
+		** This method is equivalent to the operator '=='
+		*/
+		template<class StringT> bool equalsInsensitive(const StringT& rhs) const;
+
+		/*!
+		** \brief Compare the string with another one
+		**
+		** The comparison is done using unsigned characters.
+		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
+		**   equal to, or less than the given string
+		*/
+		template<class StringT> int compare(const StringT& rhs) const;
+
+		/*!
+		** \brief Compare the string with another one (ignoring the case)
+		**
+		** The comparison is done using unsigned characters.
+		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
+		**   equal to, or less than the given string
+		*/
+		template<class StringT> int compareInsensitive(const StringT& rhs) const;
+		//@}
+
+
 		//! \name Conversions
 		//@{
 		/*!
@@ -513,7 +558,7 @@ namespace Yuni
 		** Contrary to the operator [], it is safe to use an invalid offset
 		** \return The item at position 'offset', a default value if the offset is out of bound
 		*/
-		char at(const Size offset) const;
+		int at(const Size offset) const;
 
 		/*!
 		** \brief Truncate the cstr to the given length
@@ -558,7 +603,7 @@ namespace Yuni
 		/*!
 		** \brief Get the current size of the cstr (in bytes)
 		*/
-		uint64 sizeInBytes() const;
+		size_t sizeInBytes() const;
 
 		/*!
 		** \brief Get if the cstr is empty
@@ -624,7 +669,7 @@ namespace Yuni
 		** \brief Get the current capacity of the cstr (in bytes)
 		** \return A value greater or equal to `sizeInBytes()`
 		*/
-		uint64 capacityInBytes() const;
+		size_t capacityInBytes() const;
 
 		/*!
 		** \brief A pointer to the original cstr (might be NULL)
@@ -667,7 +712,7 @@ namespace Yuni
 		** The format is the standard printf format.
 		** \param format The format, represented by a zero-terminated C-String
 		*/
-		void vappendFormat(const char* format, va_list args);
+		void vappendFormat(const char* const format, va_list args);
 		//@}
 
 
@@ -696,7 +741,6 @@ namespace Yuni
 		** \param pattern A pattern
 		** \warning This method should not be used in a new code and will be removed
 		**   as soon as possible
-		** \internal It is currently still used by the TA3D project. A nice replacement should be found.
 		** \TODO To be removed as soon as possible
 		*/
 		template<class StringT> bool glob(const StringT& pattern) const;
@@ -785,9 +829,9 @@ namespace Yuni
 
 	protected:
 		//! Assign without checking for pointer validity
-		Size assignWithoutChecking(const char* block, const Size blockSize);
+		Size assignWithoutChecking(const char* const block, const Size blockSize);
 		//! Append without checking for pointer validity
-		Size appendWithoutChecking(const char* block, const Size blockSize);
+		Size appendWithoutChecking(const char* const block, const Size blockSize);
 		//! Append without checking for pointer validity
 		Size appendWithoutChecking(const char c);
 		//! Assign without checking for pointer validity
@@ -829,7 +873,7 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::CustomString<Si
 
 template<unsigned int SizeT, bool ExpT,bool ZeroT>
 inline Yuni::CustomString<SizeT,ExpT,ZeroT>
-operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const char* u)
+operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const char* const u)
 {
 	return Yuni::CustomString<SizeT,ExpT,ZeroT>(rhs) += u;
 }
@@ -866,7 +910,7 @@ operator + (const wchar_t* u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 
 template<unsigned int SizeT, bool ExpT,bool ZeroT>
 inline Yuni::CustomString<SizeT,ExpT,ZeroT>
-operator + (const char* u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+operator + (const char* const u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	return Yuni::CustomString<SizeT,ExpT,ZeroT>(u) += rhs;
 }

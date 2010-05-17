@@ -15,6 +15,11 @@ namespace Private
 namespace CustomStringImpl
 {
 
+	int Compare(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
+	int CompareInsensitive(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
+
+	bool Equals(const char* const s1, const char* const s2, unsigned int len);
+	bool EqualsInsensitive(const char* const s1, const char* const s2, unsigned int len);
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
@@ -73,7 +78,7 @@ namespace CustomStringImpl
 				size = 0;
 		}
 
-		Size assignWithoutChecking(const C* block, const Size blockSize)
+		Size assignWithoutChecking(const C* const block, const Size blockSize)
 		{
 			// Making sure that we have enough space
 			reserve(blockSize + zeroTerminated);
@@ -87,7 +92,7 @@ namespace CustomStringImpl
 		}
 
 
-		Size appendWithoutChecking(const C* block, const Size blockSize)
+		Size appendWithoutChecking(const C* const block, const Size blockSize)
 		{
 			// Making sure that we have enough space
 			reserve(size + blockSize + zeroTerminated);
@@ -128,13 +133,13 @@ namespace CustomStringImpl
 		}
 
 
-		Size assign(const C* block, const Size blockSize)
+		Size assign(const C* const block, const Size blockSize)
 		{
 			return (block && blockSize) ? assignWithoutChecking(block, blockSize) : 0;
 		}
 
 
-		Size append(const C* block, const Size blockSize)
+		Size append(const C* const block, const Size blockSize)
 		{
 			return (block && blockSize) ? appendWithoutChecking(block, blockSize) : 0;
 		}
@@ -154,7 +159,7 @@ namespace CustomStringImpl
 
 		void reserve(Size minCapacity);
 
-		void insert(Size offset, const C* buffer, const Size len)
+		void insert(Size offset, const C* const buffer, const Size len)
 		{
 			// Reserving enough space to insert the buffer
 			reserve(len + size + zeroTerminated);
@@ -233,21 +238,21 @@ namespace CustomStringImpl
 				data[0] = C();
 		}
 
-		Size assignWithoutChecking(const C* block, Size blockSize);
+		Size assignWithoutChecking(const C* const block, Size blockSize);
 
-		Size appendWithoutChecking(const C* block, Size blockSize);
+		Size appendWithoutChecking(const C* const block, Size blockSize);
 
 		Size assignWithoutChecking(const C c);
 
 		Size appendWithoutChecking(const C c);
 
 
-		Size assign(const C* block, const Size blockSize)
+		Size assign(const C* const block, const Size blockSize)
 		{
 			return (block && blockSize) ? assignWithoutChecking(block, blockSize) : 0;
 		}
 
-		Size append(const C* block, const Size blockSize)
+		Size append(const C* const block, const Size blockSize)
 		{
 			return (block && blockSize) ? appendWithoutChecking(block, blockSize) : 0;
 		}
@@ -259,7 +264,7 @@ namespace CustomStringImpl
 			// Do nothing
 		}
 
-		void insert(Size offset, const C* buffer, Size len)
+		void insert(Size offset, const C* const buffer, Size len)
 		{
 			if (offset + len >= capacity)
 			{

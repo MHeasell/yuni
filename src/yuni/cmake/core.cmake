@@ -186,6 +186,7 @@ Set(SRC_CORE_STRING
 				core/customstring/traits/integer.h
 				core/customstring/traits/vnsprintf.h
 				core/customstring/traits/traits.h
+				core/customstring/traits/traits.cpp
 				core/customstring/traits/traits.hxx
 				core/customstring/traits/into.h
 
