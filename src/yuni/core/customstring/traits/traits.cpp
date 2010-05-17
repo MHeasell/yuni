@@ -60,6 +60,50 @@ namespace CustomStringImpl
 	}
 
 
+	bool Glob(const char* s, unsigned int l1, const char* const pattern, unsigned int patternlen)
+	{
+		if (patternlen)
+		{
+			if (l1)
+			{
+				unsigned int e = 0;
+				unsigned int prev = ((unsigned int) -1);
+				for (unsigned int i = 0 ; i < l1; ++i)
+				{
+					if ('*' == pattern[e])
+					{
+						if (e + 1 == patternlen)
+							return true;
+						while (pattern[e+1] == '*')
+							++e;
+						if (e + 1 == patternlen)
+							return true;
+
+						prev = e;
+						if (pattern[e + 1] == s[i])
+							e += 2;
+					}
+					else
+					{
+						if (pattern[e] == s[i])
+							++e;
+						else
+						{
+							if (prev != ((unsigned int) -1))
+								e = prev;
+							else
+								return false;
+						}
+					}
+				}
+				return (e == patternlen);
+			}
+			return false;
+		}
+		return (l1 == 0);
+	}
+
+
 
 } // namespace CustomStringImpl
 } // namespace Private
