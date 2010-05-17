@@ -44,7 +44,7 @@ namespace CustomStringImpl
 
 	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
 	typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size
-	Data<ChunkSizeT,false,ZeroTerminatedT,C>::assignWithoutChecking(const C* block,
+	Data<ChunkSizeT,false,ZeroTerminatedT,C>::assignWithoutChecking(const C* const block,
 		typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size blockSize)
 	{
 		// We have to trunk the size if we are outer limits
@@ -81,7 +81,7 @@ namespace CustomStringImpl
 
 	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
 	typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size
-	Data<ChunkSizeT,false,ZeroTerminatedT,C>::appendWithoutChecking(const C* block, Size blockSize)
+	Data<ChunkSizeT,false,ZeroTerminatedT,C>::appendWithoutChecking(const C* const block, Size blockSize)
 	{
 		// We have to trunk the size if we are outer limits
 		// This condition is a little faster than the folowing replacement code :
