@@ -37,6 +37,65 @@ namespace Yuni
 		assign(rhs);
 	}
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(size_t n, char c)
+	{
+		// Resizing the buffer to `n`
+		resize(n);
+		// Note: the string may have a fixed-length capacity
+		(void)::memset(AncestorType::data, c, AncestorType::size * sizeof(Char));
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<unsigned int SizeT, bool ExpT, bool ZeroT>
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const CustomString<SizeT,ExpT,ZeroT>& s,
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size n)
+	{
+		if (offset < s.size())
+		{
+			Size length = s.size() - offset;
+			if (length > n)
+				length = n;
+			AncestorType::assign((const char*) s.c_str() + offset, length);
+		}
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<unsigned int SizeT, bool ExpT, bool ZeroT>
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const CustomString<SizeT,ExpT,ZeroT>& s,
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset)
+	{
+		if (offset < s.size())
+			AncestorType::assign((const char*) s.c_str() + offset, s.size() - offset);
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class TraitsT, class AllocT>
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const std::basic_string<char,TraitsT,AllocT>& s,
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size n)
+	{
+		if (offset < s.size())
+		{
+			Size length = s.size() - offset;
+			if (length > n)
+				length = n;
+			AncestorType::assign((const char*) s.c_str() + offset, length);
+		}
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class TraitsT, class AllocT>
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString(const std::basic_string<char,TraitsT,AllocT>& s,
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset)
+	{
+		if (offset < s.size())
+			AncestorType::assign((const char*) s.c_str() + offset, s.size() - offset);
+	}
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline
@@ -219,7 +278,7 @@ namespace Yuni
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::find(const char c) const
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::find(char c) const
 	{
 		for (Size i = 0; i != AncestorType::size; ++i)
 		{
@@ -228,6 +287,20 @@ namespace Yuni
 		}
 		return npos;
 	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ifind(char c) const
+	{
+		c = tolower(c);
+		for (Size i = 0; i != AncestorType::size; ++i)
+		{
+			if (c == tolower(AncestorType::data[i]))
+				return i;
+		}
+		return npos;
+	}
+
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
@@ -330,8 +403,6 @@ namespace Yuni
 
 
 
-
-
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::find(const char* const cstr,
@@ -351,6 +422,28 @@ namespace Yuni
 		}
 		return npos;
 	}
+
+	
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ifind(const char* const cstr,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
+	{
+		if (cstr && len && len <= AncestorType::size)
+		{
+			const Size end = AncestorType::size - len + 1;
+			for (Size i = 0; i != end; ++i)
+			{
+				if (tolower(AncestorType::data[i]) == tolower(*cstr))
+				{
+					if (!CompareInsensitive(AncestorType::data + i, len, cstr, len))
+						return i;
+				}
+			}
+		}
+		return npos;
+	}
+
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
@@ -373,7 +466,6 @@ namespace Yuni
 		}
 		return npos;
 	}
-
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
@@ -403,6 +495,36 @@ namespace Yuni
 		// A mere CString, with a known length at runtime only
 		return find(Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::Value(s));
 	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ifind(const StringT& s) const
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		// Find the substring
+		if (Traits::Length<StringT,Size>::isFixed)
+		{
+			// We can make some optimisations when the length is known at compile compile time
+			// This part of the code should not bring better performances but it should
+			// prevent against bad uses of the API, like using a char* for looking for a single char.
+
+			// The value to find is actually empty, npos will be the unique answer
+			if (0 == Traits::Length<StringT,Size>::fixedLength)
+				return npos;
+			// The string is actually a single POD item
+			if (1 == Traits::Length<StringT,Size>::fixedLength)
+				return ifind(Traits::CString<StringT>::Perform(s), 1);
+			// Researching for the substring with a known length
+			return ifind(Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::fixedLength);
+		}
+		// A mere CString, with a known length at runtime only
+		return ifind(Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::Value(s));
+	}
+
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>

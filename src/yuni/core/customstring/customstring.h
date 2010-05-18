@@ -46,11 +46,10 @@ namespace Yuni
 	**  - SmartPtr<CustomString<...>, ...>
 	**
 	** \warning This class is not thread-safe
-	** \tparam char A pod type
-	** \tparam ChunkSizeT The size for a single chunk (>= 2)
-	** \tparam ZeroTerminatedT A non-zero value if the cstr must always be terminated by a zero
-	** \tparam ExpandableT A non-zero value to make a growable cstr. Otherwise it will be a simple
-	**   cstr with a length equals to ChunkSizeT * sizeof(char)
+	** \tparam ChunkSizeT The size for a single chunk (> 3)
+	** \tparam ExpandableT True to make a growable string. Otherwise it will be a
+	**   string with a fixed-length capacity (equals to ChunkSizeT)
+	** \tparam ZeroTerminatedT True to make the string zero-terminated
 	*/
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	class CustomString
@@ -168,9 +167,52 @@ namespace Yuni
 		CustomString(const char* const block, const Size blockSize);
 
 		/*!
+		** \brief Constructor from a copy of a substring of 's'
+		**
+		** The substring is the portion of str that begins at the character position
+		** 'offset'.
+		*/
+		template<unsigned int SizeT, bool ExpT, bool ZeroT>
+		CustomString(const CustomString<SizeT,ExpT,ZeroT>& s, Size offset);
+
+		/*!
+		** \brief Constructor from a copy of a substring of 's'
+		**
+		** The substring is the portion of str that begins at the character position
+		** 'offset' and takes up to 'n' characters (it takes less than n if the end
+		** of 's' is reached before).
+		*/
+		template<unsigned int SizeT, bool ExpT, bool ZeroT>
+		CustomString(const CustomString<SizeT,ExpT,ZeroT>& s, Size offset, Size n = npos);
+
+		/*!
+		** \brief Constructor from a copy of a substring of 's' (std::string)
+		**
+		** The substring is the portion of str that begins at the character position
+		** 'offset'.
+		*/
+		template<class TraitsT, class AllocT>
+		CustomString(const std::basic_string<char,TraitsT,AllocT>& s, Size offset);
+
+		/*!
+		** \brief Constructor from a copy of a substring of 's' (std::string)
+		**
+		** The substring is the portion of str that begins at the character position
+		** 'offset' and takes up to 'n' characters (it takes less than n if the end
+		** of 's' is reached before).
+		*/
+		template<class TraitsT, class AllocT>
+		CustomString(const std::basic_string<char,TraitsT,AllocT>& s, Size offset, Size n = npos);
+
+		/*!
 		** \brief Constructor with a default value
 		*/
 		template<class U> CustomString(const U& rhs);
+
+		/*!
+		** \brief Construct a string formed by a repetition of the character c, n times
+		*/
+		CustomString(size_t n, char c);
 
 		/*!
 		** \brief Destructor
@@ -179,7 +221,8 @@ namespace Yuni
 		//@}
 
 
-		//! \name Append / Assign
+		//! \name Append / Assign / Fill
+		//@{
 		/*!
 		** \brief Assign a new value to the cstr
 		**
@@ -187,7 +230,7 @@ namespace Yuni
 		*/
 		template<class U> void assign(const U& rhs);
 
-		/*[!]
+		/*!
 		** \brief Copy a raw cstr
 		**
 		** \param cstr A cstr
@@ -335,7 +378,15 @@ namespace Yuni
 		** \param cstr An arbitrary string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size find(const char c) const;
+		Size find(char c) const;
+
+		/*!
+		** \brief Find the offset of a sub-string (ignoring the case)
+		**
+		** \param cstr An arbitrary string
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size ifind(char c) const;
 
 		/*!
 		** \brief Find the offset of a sub-string from the left
@@ -356,6 +407,15 @@ namespace Yuni
 		Size find(const char* const cstr, const Size len) const;
 
 		/*!
+		** \brief Find the offset of a raw sub-string with a given length (in bytes) (ignoring the case)
+		**
+		** \param cstr An arbitrary string
+		** \param len Size of the given cstr
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size ifind(const char* const cstr, const Size len) const;
+
+		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
 		**
 		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
@@ -372,6 +432,14 @@ namespace Yuni
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		template<class StringT> Size find(const StringT& s) const;
+
+		/*!
+		** \brief Find the offset of any supported CString (ignoring the case)
+		**
+		** \param cstr Any supported CString
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		template<class StringT> Size ifind(const StringT& s) const;
 
 		/*!
 		** \brief Find the offset of any supported CString from the left
@@ -932,17 +1000,17 @@ operator + (const wchar_t u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 
 
 
-template<unsigned int SizeT, bool ExpT,bool ZeroT, class U>
+template<unsigned int SizeT, bool ExpT,bool ZeroT, class TraitsT, class AllocT>
 inline Yuni::CustomString<SizeT,ExpT,ZeroT>
-operator + (const std::basic_string<U>& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+operator + (const std::basic_string<char,TraitsT,AllocT>& u, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	return Yuni::CustomString<SizeT,ExpT,ZeroT>(u) += rhs;
 }
 
 
-template<unsigned int SizeT, bool ExpT,bool ZeroT, class U>
+template<unsigned int SizeT, bool ExpT,bool ZeroT, class TraitsT, class AllocT>
 inline Yuni::CustomString<SizeT,ExpT,ZeroT>
-operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const std::basic_string<U>& u)
+operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const std::basic_string<char,TraitsT,AllocT>& u)
 {
 	return Yuni::CustomString<SizeT,ExpT,ZeroT>(rhs) += u;
 }
