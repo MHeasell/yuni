@@ -62,7 +62,10 @@ namespace Extension
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	public:
-		static SizeT Value(const char* const container) {return (SizeT)::strlen(container);}
+		static SizeT Value(const char* const container)
+		{
+			return container ? (SizeT)::strlen(container) : 0;
+		}
 	};
 
 
@@ -75,7 +78,10 @@ namespace Extension
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	public:
-		static SizeT Value(const wchar_t* const container) {return (SizeT)::wcslen(container);}
+		static SizeT Value(const wchar_t* const container)
+		{
+			return container ? (SizeT)::wcslen(container) : 0;
+		}
 	};
 
 
