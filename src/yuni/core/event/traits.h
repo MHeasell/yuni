@@ -33,27 +33,43 @@ namespace EventImpl
 	};
 
 
-	template<class U, class BindT>
-	class PredicateRemove
+	template<class BindT>
+	class PredicateRemoveObject
 	{
 	public:
-		PredicateRemove(IEvent* event, const U* object)
+		PredicateRemoveObject(const void* object)
+			:pObject(object)
+		{}
+
+		bool operator == (const BindT& rhs) const
+		{
+			return  (pObject == (const void*)rhs.object());
+		}
+	private:
+		const void* pObject;
+	};
+
+
+	template<class BindT>
+	class PredicateRemoveObserverBase
+	{
+	public:
+		PredicateRemoveObserverBase(IEvent* event, const IEventObserverBase* object)
 			:pEvent(event), pObject(object)
 		{}
 
 		bool operator == (const BindT& rhs) const
 		{
-			const IEventObserverBase* base = rhs.observerBaseObject();
-			if (base)
+			if (pObject == rhs.observerBaseObject())
 			{
-				base->boundEventDecrementReference(pEvent);
+				pObject->boundEventDecrementReference(pEvent);
 				return true;
 			}
 			return false;
 		}
 	private:
 		IEvent* pEvent;
-		const U* pObject;
+		const IEventObserverBase* pObject;
 	};
 
 
