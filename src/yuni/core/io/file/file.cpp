@@ -85,6 +85,7 @@ namespace FilesystemImpl
 	bool Size(const char* const filename, unsigned int len, uint64& value)
 	{
 		struct stat results;
+    #warning The filename length must be used in case it is not null terminated. Fix this.
 		if (filename && '\0' != *filename && stat(filename, &results) == 0)
 		{
 			value = results.st_size;
