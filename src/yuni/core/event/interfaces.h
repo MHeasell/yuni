@@ -15,7 +15,8 @@ namespace EventImpl
 {
 
 	// Forward declaration
-	template<class U, class BindT> class PredicateRemove;
+	template<class BindT> class PredicateRemoveObject;
+	template<class BindT> class PredicateRemoveObserverBase;
 	template<class BindT> class PredicateRemoveWithoutChecks;
 
 } // namespace EventImpl
@@ -100,7 +101,8 @@ namespace Yuni
 
 		// Friends
 		template<class P> friend class Event;
-		template<class U, class BindT> friend class Private::EventImpl::PredicateRemove;
+		template<class BindT> friend class Private::EventImpl::PredicateRemoveObject;
+		template<class BindT> friend class Private::EventImpl::PredicateRemoveObserverBase;
 
 	}; // class IEventObserverBase
 

@@ -174,12 +174,6 @@ namespace Yuni
 		//! Copy operator
 		Event& operator = (const Event& rhs);
 
-		/*!
-		** \brief Disconnect all methods of an arbitrary object connected to the event
-		** \see remove()
-		*/
-		template<class U> Event& operator -= (const U* object);
-
 		//! Get if the event is empty
 		bool operator ! () const;
 		//@}
