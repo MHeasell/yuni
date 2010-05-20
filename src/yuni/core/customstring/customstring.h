@@ -376,6 +376,57 @@ namespace Yuni
 		** \brief Find the offset of a sub-string
 		**
 		** \param cstr An arbitrary string
+		** \return True if sub-string is found, false otherwise
+		*/
+		bool contains(char c) const;
+
+		/*!
+		** \brief Find the offset of a sub-string (ignoring the case)
+		**
+		** \param cstr An arbitrary string
+		** \return True if sub-string is found, false otherwise
+		*/
+		bool icontains(char c) const;
+
+		/*!
+		** \brief Find the offset of a raw sub-string with a given length (in bytes)
+		**
+		** \param cstr An arbitrary string
+		** \param len Size of the given cstr
+		** \return True if sub-string is found, false otherwise
+		*/
+		bool contains(const char* const cstr, const Size len) const;
+
+		/*!
+		** \brief Find the offset of a raw sub-string with a given length (in bytes) (ignoring the case)
+		**
+		** \param cstr An arbitrary string
+		** \param len Size of the given cstr
+		** \return True if sub-string is found, false otherwise
+		*/
+		bool icontains(const char* const cstr, const Size len) const;
+
+		/*!
+		** \brief Find the offset of any supported CString
+		**
+		** \param cstr Any supported CString
+		** \return True if sub-string is found, false otherwise
+		*/
+		template<class StringT> bool contains(const StringT& s) const;
+
+		/*!
+		** \brief Find the offset of any supported CString (ignoring the case)
+		**
+		** \param cstr Any supported CString
+		** \return True if sub-string is found, false otherwise
+		*/
+		template<class StringT> bool icontains(const StringT& s) const;
+
+
+		/*!
+		** \brief Find the offset of a sub-string
+		**
+		** \param cstr An arbitrary string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		Size find(char c) const;
@@ -387,15 +438,6 @@ namespace Yuni
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		Size ifind(char c) const;
-
-		/*!
-		** \brief Find the offset of a sub-string from the left
-		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param cstr An arbitrary string
-		** \return The offset of the first sub-string found, `npos` if not found
-		*/
-		Size indexOf(Size offset, const char cstr) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes)
@@ -416,16 +458,6 @@ namespace Yuni
 		Size ifind(const char* const cstr, const Size len) const;
 
 		/*!
-		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
-		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param cstr An arbitrary string
-		** \param len Size of the given cstr
-		** \return The offset of the first sub-string found, `npos` if not found
-		*/
-		Size indexOf(Size offset, const char* const cstr, const Size len) const;
-
-		/*!
 		** \brief Find the offset of any supported CString
 		**
 		** \param cstr Any supported CString
@@ -440,6 +472,25 @@ namespace Yuni
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		template<class StringT> Size ifind(const StringT& s) const;
+
+		/*!
+		** \brief Find the offset of a sub-string from the left
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param cstr An arbitrary string
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size indexOf(Size offset, const char cstr) const;
+
+		/*!
+		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
+		**
+		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param cstr An arbitrary string
+		** \param len Size of the given cstr
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size indexOf(Size offset, const char* const cstr, const Size len) const;
 
 		/*!
 		** \brief Find the offset of any supported CString from the left
@@ -479,11 +530,33 @@ namespace Yuni
 		** \param s Any string
 		*/
 		template<class StringT> bool endsWith(const StringT& s) const;
+		//@}
+
+
+		//! \brief Erase
+		//@{
+		/*!
+		** \brief Remove iup to `n` characters from the end of the string
+		*/
+		void chop(unsigned int n);
 
 		/*!
 		** \brief Remove the last char
 		*/
 		void removeLast();
+
+		/*!
+		** \brief Remove the trailing slash or backslash at the end of the string (if any)
+		**
+		** Pseudo-code:
+		** \code
+		** Yuni::String s("/some/path/");
+		** if ('\\' == s.last() || '/' == s.last())
+		** 	s.removeLast();
+		** std::cout << s << std::endl;  // -> /some/path
+		** \endcode
+		*/
+		void removeTrailingSlash();
 		//@}
 
 
