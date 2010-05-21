@@ -53,7 +53,7 @@ namespace Yuni
 		opts.addParagraph("\nTypical usage example :\n  $ libyuni-config -c gcc -m script --cxxflags\n\nCompiler settings:");
 		opts.addFlag(pOptCxxFlags, ' ', "cxxflags", "Print the CXX flags (*)");
 		opts.addFlag(pOptLibFlags, ' ', "libs", "Print the Libs flags (*)");
-		opts.add(pOptCompiler, 'c', "compiler", "Set the target compiler (gcc,vs9,mingw,icc,...)");
+		opts.add(pOptCompiler, 'c', "compiler", "Set the target compiler (gcc,msvc,mingw,icc,...)");
 		opts.addFlag(pOptPrintCompilerByDefault, ' ', "compiler-default", "Print the compiler used by default and exit");
 
 		// All required modules

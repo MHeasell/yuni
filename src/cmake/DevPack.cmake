@@ -29,7 +29,7 @@ ENDIF(WIN32)
 
 SET(DEVPACK_OS					) # macos, windows, linux, sun
 SET(DEVPACK_ARCH				) # i386, ppc
-SET(DEVPACK_COMPILER  "unknown"	) # g++, vs8, vs9, mingw
+SET(DEVPACK_COMPILER  "unknown"	) # g++, msvc, mingw
 
 
 
@@ -43,7 +43,7 @@ IF(WIN32)
 	IF(MINGW)
 		SET(DEVPACK_COMPILER "mingw")
 	ELSE(MINGW)
-		SET(DEVPACK_COMPILER "vs.unknown")
+		SET(DEVPACK_COMPILER "msvc")
 		IF(MSVC70)
 			SET(DEVPACK_COMPILER "vs7")
 		ENDIF(MSVC70)
