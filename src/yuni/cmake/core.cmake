@@ -79,7 +79,7 @@ ENDIF(WIN32 OR WIN64)
 
 
 # C++0x
-CHECK_CXX_COMPILER_FLAG("-std=c++0x" YUNI_HAS_CPP0X_SUPPORT)
+CHECK_CXX_COMPILER_FLAG("-std=c++0x" YUNI_HAS_GCC_CPP0X_SUPPORT)
 
 
 # int64
@@ -88,6 +88,10 @@ CHECK_CXX_SOURCE_COMPILES("#include <stdint.h>
 # int128
 CHECK_CXX_SOURCE_COMPILES("#include <stdint.h>
 	int main() {int128_t a; return 0;}" YUNI_HAS_INT128_T)
+
+# C++0x nullptr
+CHECK_CXX_SOURCE_COMPILES("
+	class A {}; int main() {A* a = nullptr;return 0;}" YUNI_HAS_NULLPTR)
 
 # long
 IF(MSVC)
