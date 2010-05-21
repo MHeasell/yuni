@@ -161,7 +161,6 @@ namespace Yuni
 		return *this;
 	}
 
-	# ifndef YUNI_HAS_NULLPTR
 	// Operator =
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
@@ -173,7 +172,6 @@ namespace Yuni
 		tmp.swap(*this);
 		return *this;
 	}
-# endif
 
 
 
@@ -317,7 +315,6 @@ namespace Yuni
 	}
 
 
-	# ifndef YUNI_HAS_NULLPTR
 	// Operator ==
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
@@ -338,7 +335,6 @@ namespace Yuni
 	{
 		return (storagePointer(*this) != NULL);
 	}
-	# endif
 
 
 

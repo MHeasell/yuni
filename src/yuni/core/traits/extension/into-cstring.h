@@ -184,7 +184,6 @@ namespace Extension
 	};
 
 
-# ifndef YUNI_HAS_NULLPTR
 	template<>
 	struct IntoCString<NullPtr>
 	{
@@ -198,7 +197,6 @@ namespace Extension
 		}
 	};
 
-# endif
 
 
 

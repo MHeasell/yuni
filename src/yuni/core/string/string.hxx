@@ -17,12 +17,10 @@ namespace Yuni
 	{}
 
 
-	# ifndef YUNI_HAS_NULLPTR
 	template<typename C, int Chunk>
 	inline StringBase<C,Chunk>::StringBase(const NullPtr&)
 		:pSize(0), pCapacity(0), pPtr(NULL)
 	{}
-	# endif
 
 
 
@@ -367,7 +365,6 @@ namespace Yuni
 	}
 
 
-	# ifndef YUNI_HAS_NULLPTR
 	template<typename C, int Chunk>
 	inline StringBase<C,Chunk>&
 	StringBase<C,Chunk>::operator = (const NullPtr&)
@@ -393,7 +390,6 @@ namespace Yuni
 		/* Do nothing */
 		return *this;
 	}
-	# endif
 
 
 
@@ -925,7 +921,6 @@ namespace Yuni
 	}
 
 
-	# ifndef YUNI_HAS_NULLPTR
 	template<typename C, int Chunk>
 	inline bool
 	StringBase<C,Chunk>::operator == (const NullPtr&) const
@@ -940,7 +935,6 @@ namespace Yuni
 	{
 		return (0 != pSize);
 	}
-	# endif
 
 
 	template<typename C, int Chunk>

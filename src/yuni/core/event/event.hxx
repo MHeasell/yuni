@@ -197,13 +197,11 @@ namespace Yuni
 	}
 
 
-	# ifndef YUNI_HAS_NULLPTR
 	template<typename P>
 	inline Event<P>& Event<P>::operator = (const NullPtr&)
 	{
 		clear();
 	}
-	# endif
 
 
 	template<typename P>
