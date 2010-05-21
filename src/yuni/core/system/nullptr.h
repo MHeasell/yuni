@@ -7,6 +7,8 @@
 namespace Yuni
 {
 
+	# ifndef YUNI_HAS_NULLPTR
+
 	/*!
 	** \brief C++ Idioms/nullptr
 	**
@@ -38,6 +40,7 @@ namespace Yuni
 	} nullptr = {};
 
 
+	# endif // nullptr support
 
 
 

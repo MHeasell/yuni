@@ -198,22 +198,6 @@ namespace Bit
 	}
 
 
-	inline Array& Array::operator = (const NullPtr&)
-	{
-		pBuffer.clear();
-		pCount = 0;
-		return *this;
-	}
-
-
-	inline Array& Array::operator = (const NullPtr*)
-	{
-		pBuffer.clear();
-		pCount = 0;
-		return *this;
-	}
-
-
 	template<class U>
 	inline void Array::print(U& out) const
 	{

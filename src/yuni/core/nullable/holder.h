@@ -68,10 +68,12 @@ namespace NullableImpl
 			pHasData = true;
 		}
 
-		void assign(const NullPtr*)
+		# ifndef YUNI_HAS_NULLPTR
+		void assign(const NullPtr&)
 		{
 			pHasData = false;
 		}
+		# endif
 
 		void assign(const Holder& rhs)
 		{
@@ -127,10 +129,12 @@ namespace NullableImpl
 				*pData = v;
 		}
 
-		void assign(const NullPtr*)
+		# ifndef YUNI_HAS_NULLPTR
+		void assign(const NullPtr&)
 		{
 			pData = nullptr;
 		}
+		# endif
 
 
 		void assign(const Holder& rhs)

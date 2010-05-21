@@ -352,10 +352,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(<%=generator.list(i)%>));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(<%=generator.list(i)%>)) const;

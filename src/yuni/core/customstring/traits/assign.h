@@ -71,6 +71,7 @@ namespace CustomString
 	};
 
 
+	# ifndef YUNI_HAS_NULLPTR
 	// nullptr
 	template<class CustomStringT>
 	struct Assign<CustomStringT, Yuni::NullPtr>
@@ -80,6 +81,7 @@ namespace CustomString
 			s.clear();
 		}
 	};
+	# endif
 
 
 

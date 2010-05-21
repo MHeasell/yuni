@@ -294,6 +294,7 @@ namespace Extension
 
 
 	// nulptr
+# ifndef YUNI_HAS_NULLPTR
 
 	template<class SizeT>
 	struct Length<NullPtr, SizeT>
@@ -309,6 +310,7 @@ namespace Extension
 		}
 	};
 
+# endif
 
 
 

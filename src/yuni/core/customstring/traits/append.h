@@ -68,6 +68,7 @@ namespace CustomString
 	};
 
 
+	# ifndef YUNI_HAS_NULLPTR
 	// nullptr
 	template<class CustomStringT>
 	struct Append<CustomStringT, Yuni::NullPtr>
@@ -75,6 +76,7 @@ namespace CustomString
 		static void Do(CustomStringT& s, const Yuni::NullPtr&)
 		{ /* Do nothing */ }
 	};
+	# endif
 
 
 	// bool

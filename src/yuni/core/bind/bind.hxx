@@ -300,24 +300,6 @@ namespace Yuni
 
 
 	template<class R>
-	inline Bind<R (), void>& Bind<R (), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R>
-	inline Bind<R (), void>& Bind<R (), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R>
 	inline bool Bind<R (), void>::operator == (R (*pointer)()) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -615,24 +597,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R>
-	inline Bind<R (*)(), void>& Bind<R (*)(), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R>
-	inline Bind<R (*)(), void>& Bind<R (*)(), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -940,24 +904,6 @@ namespace Yuni
 
 
 	template<class ClassT, class R>
-	inline Bind<R (ClassT::*)(), ClassT>& Bind<R (ClassT::*)(), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R>
-	inline Bind<R (ClassT::*)(), ClassT>& Bind<R (ClassT::*)(), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R>
 	inline bool Bind<R (ClassT::*)(), ClassT>::operator == (R (*pointer)()) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -1255,24 +1201,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0>
-	inline Bind<R (A0), void>& Bind<R (A0), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0>
-	inline Bind<R (A0), void>& Bind<R (A0), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -1580,24 +1508,6 @@ namespace Yuni
 
 
 	template<class R, class A0>
-	inline Bind<R (*)(A0), void>& Bind<R (*)(A0), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0>
-	inline Bind<R (*)(A0), void>& Bind<R (*)(A0), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0>
 	inline bool Bind<R (*)(A0), void>::operator == (R (*pointer)(A0)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -1895,24 +1805,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0>
-	inline Bind<R (ClassT::*)(A0), ClassT>& Bind<R (ClassT::*)(A0), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0>
-	inline Bind<R (ClassT::*)(A0), ClassT>& Bind<R (ClassT::*)(A0), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -2221,24 +2113,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1), void>& Bind<R (A0, A1), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1), void>& Bind<R (A0, A1), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1>
 	inline bool Bind<R (A0, A1), void>::operator == (R (*pointer)(A0, A1)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -2537,24 +2411,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1>
-	inline Bind<R (*)(A0, A1), void>& Bind<R (*)(A0, A1), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1>
-	inline Bind<R (*)(A0, A1), void>& Bind<R (*)(A0, A1), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -2863,24 +2719,6 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1>
-	inline Bind<R (ClassT::*)(A0, A1), ClassT>& Bind<R (ClassT::*)(A0, A1), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1>
-	inline Bind<R (ClassT::*)(A0, A1), ClassT>& Bind<R (ClassT::*)(A0, A1), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1>
 	inline bool Bind<R (ClassT::*)(A0, A1), ClassT>::operator == (R (*pointer)(A0, A1)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -3179,24 +3017,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2), void>& Bind<R (A0, A1, A2), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2), void>& Bind<R (A0, A1, A2), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -3505,24 +3325,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (*)(A0, A1, A2), void>& Bind<R (*)(A0, A1, A2), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2>
-	inline Bind<R (*)(A0, A1, A2), void>& Bind<R (*)(A0, A1, A2), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2>
 	inline bool Bind<R (*)(A0, A1, A2), void>::operator == (R (*pointer)(A0, A1, A2)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -3821,24 +3623,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2>
-	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>& Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2>
-	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>& Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -4148,24 +3932,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3), void>& Bind<R (A0, A1, A2, A3), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3), void>& Bind<R (A0, A1, A2, A3), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3>
 	inline bool Bind<R (A0, A1, A2, A3), void>::operator == (R (*pointer)(A0, A1, A2, A3)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -4465,24 +4231,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (*)(A0, A1, A2, A3), void>& Bind<R (*)(A0, A1, A2, A3), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (*)(A0, A1, A2, A3), void>& Bind<R (*)(A0, A1, A2, A3), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -4792,24 +4540,6 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -5109,24 +4839,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4), void>& Bind<R (A0, A1, A2, A3, A4), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4), void>& Bind<R (A0, A1, A2, A3, A4), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -5436,24 +5148,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (*)(A0, A1, A2, A3, A4), void>& Bind<R (*)(A0, A1, A2, A3, A4), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (*)(A0, A1, A2, A3, A4), void>& Bind<R (*)(A0, A1, A2, A3, A4), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -5753,24 +5447,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -6081,24 +5757,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5), void>& Bind<R (A0, A1, A2, A3, A4, A5), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5), void>& Bind<R (A0, A1, A2, A3, A4, A5), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -6399,24 +6057,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -6727,24 +6367,6 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -7045,24 +6667,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -7373,24 +6977,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -7691,24 +7277,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -8020,24 +7588,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -8339,24 +7889,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -8668,24 +8200,6 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -8987,24 +8501,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -9316,24 +8812,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -9635,24 +9113,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -9965,24 +9425,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -10285,24 +9727,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -10615,24 +10039,6 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -10935,24 +10341,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -11265,24 +10653,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -11585,24 +10955,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -11916,24 +11268,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -12237,24 +11571,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -12568,24 +11884,6 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -12889,24 +12187,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -13220,24 +12500,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -13541,24 +12803,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -13873,24 +13117,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -14195,24 +13421,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -14527,24 +13735,6 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline bool Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -14849,24 +14039,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -15181,24 +14353,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -15503,24 +14657,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 
@@ -15836,24 +14972,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline bool Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -16164,24 +15282,6 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline bool Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);
@@ -16487,24 +15587,6 @@ namespace Yuni
 	{
 		// Inc the reference count
 		pHolder = rhs.pHolder;
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
 		return *this;
 	}
 

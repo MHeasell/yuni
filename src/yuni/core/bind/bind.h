@@ -427,10 +427,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)());
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)()) const;
@@ -751,10 +747,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)());
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)()) const;
@@ -1075,10 +1067,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)());
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)()) const;
@@ -1399,10 +1387,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0)) const;
@@ -1723,10 +1707,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0)) const;
@@ -2047,10 +2027,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0)) const;
@@ -2371,10 +2347,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1)) const;
@@ -2695,10 +2667,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1)) const;
@@ -3019,10 +2987,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1)) const;
@@ -3343,10 +3307,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2)) const;
@@ -3667,10 +3627,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2)) const;
@@ -3991,10 +3947,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2)) const;
@@ -4315,10 +4267,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3)) const;
@@ -4639,10 +4587,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3)) const;
@@ -4963,10 +4907,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3)) const;
@@ -5287,10 +5227,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4)) const;
@@ -5611,10 +5547,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4)) const;
@@ -5935,10 +5867,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4)) const;
@@ -6259,10 +6187,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const;
@@ -6583,10 +6507,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const;
@@ -6907,10 +6827,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5)) const;
@@ -7231,10 +7147,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const;
@@ -7555,10 +7467,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const;
@@ -7879,10 +7787,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const;
@@ -8203,10 +8107,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const;
@@ -8527,10 +8427,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const;
@@ -8851,10 +8747,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const;
@@ -9175,10 +9067,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const;
@@ -9499,10 +9387,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const;
@@ -9823,10 +9707,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const;
@@ -10147,10 +10027,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const;
@@ -10471,10 +10347,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const;
@@ -10795,10 +10667,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const;
@@ -11119,10 +10987,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const;
@@ -11443,10 +11307,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const;
@@ -11767,10 +11627,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const;
@@ -12091,10 +11947,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const;
@@ -12415,10 +12267,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const;
@@ -12739,10 +12587,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const;
@@ -13063,10 +12907,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const;
@@ -13387,10 +13227,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const;
@@ -13711,10 +13547,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const;
@@ -14035,10 +13867,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const;
@@ -14359,10 +14187,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const;
@@ -14683,10 +14507,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const;
@@ -15007,10 +14827,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const;
@@ -15331,10 +15147,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const;
@@ -15655,10 +15467,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const;
@@ -15979,10 +15787,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const;
@@ -16303,10 +16107,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const;
@@ -16627,10 +16427,6 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr*);
-		//! Assignment with a nullptr (equivalent to unbind)
-		Bind& operator = (const NullPtr&);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)) const;
