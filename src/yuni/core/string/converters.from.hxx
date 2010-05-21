@@ -512,6 +512,30 @@ namespace StringImpl
 	}; // bool
 
 
+    template<>
+	struct From<Yuni::NullPtr>
+	{
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>&, const NullPtr&)
+		{
+		}
+
+		template<typename C, int Chnk>
+		static inline void Append(StringBase<C,Chnk>&, const NullPtr&, const typename StringBase<C,Chnk>::Size)
+		{
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>&, const NullPtr&, const typename StringBase<C,Chnk>::Size)
+		{
+		}
+
+		template<typename C, int Chnk>
+		static inline void Insert(StringBase<C,Chnk>&, const NullPtr&, const typename StringBase<C,Chnk>::Size, const typename StringBase<C,Chnk>::Size)
+		{
+		}
+
+	}; // nullptr
 
 
 
