@@ -348,7 +348,7 @@ namespace CustomString
 			if (s.notEmpty())
 			{
 				C* pend;
-				out = (double)strtof(s.c_str(), &pend);
+				out = (double)strtod(s.c_str(), &pend);
 				return (NULL != pend && '\0' == *pend);
 			}
 			out = 0.;
@@ -361,7 +361,7 @@ namespace CustomString
 			if (s.notEmpty())
 			{
 				C* pend;
-				return (double)strtof(s.c_str(), &pend);
+				return (double)strtod(s.c_str(), &pend);
 			}
 			return 0.;
 		}
