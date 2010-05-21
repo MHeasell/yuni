@@ -14,7 +14,7 @@
 #	if defined(YUNI_OS_MINGW)
 #		define YUNI_LIBCONFIG_DEFAULT_COMPILER "mingw"
 #	else
-#		define YUNI_LIBCONFIG_DEFAULT_COMPILER "vs9"
+#		define YUNI_LIBCONFIG_DEFAULT_COMPILER "msvc"
 #	endif
 # else
 #	if defined(YUNI_OS_SUNOS) || defined(YUNI_OS_SOLARIS)
