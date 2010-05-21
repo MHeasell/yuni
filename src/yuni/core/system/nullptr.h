@@ -7,7 +7,11 @@
 namespace Yuni
 {
 
-	# ifndef YUNI_HAS_NULLPTR
+	# ifdef YUNI_HAS_NULLPTR
+
+	typedef std::nullptr_t NullPtr;
+
+	# else
 
 	/*!
 	** \brief C++ Idioms/nullptr
