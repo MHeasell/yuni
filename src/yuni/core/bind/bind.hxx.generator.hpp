@@ -317,24 +317,6 @@ namespace Yuni
 
 
 	template<<%=tmpl[0]%>>
-	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>& Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::operator = (const NullPtr*)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<<%=tmpl[0]%>>
-	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>& Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::operator = (const NullPtr&)
-	{
-		// equivalent to unbind
-		Private::BindImpl::Unbind<R, BindType>::Execute(this);
-		return *this;
-	}
-
-
-	template<<%=tmpl[0]%>>
 	inline bool Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::operator == (R (*pointer)(<%=generator.list(i)%>)) const
 	{
 		return pHolder->compareWithPointerToFunction(pointer);

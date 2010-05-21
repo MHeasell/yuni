@@ -226,10 +226,6 @@ namespace Bit
 
 		//! \name Operators
 		//@{
-		//! The operator `=` (clear)
-		Array& operator = (const NullPtr&);
-		//! The operator `=` (clear)
-		Array& operator = (const NullPtr*);
 		//! The operator `=`
 		Array& operator = (const Array& rhs);
 		//! The operator `=`

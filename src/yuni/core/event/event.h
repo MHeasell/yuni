@@ -169,8 +169,10 @@ namespace Yuni
 
 		//! \name Operators
 		//@{
+		# ifndef YUNI_HAS_NULLPTR
 		//! Assignment with a nullptr (equivalent to clear())
 		Event& operator = (const NullPtr&);
+		# endif
 		//! Copy operator
 		Event& operator = (const Event& rhs);
 

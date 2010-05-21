@@ -323,8 +323,10 @@ namespace Yuni
 		//! Operator =
 		Nullable& operator = (const Nullable& rhs);
 		template<class Alloc1> Nullable& operator = (const Nullable<T,Alloc1>& rhs);
+		# ifndef YUNI_HAS_NULLPTR
 		//! Operator =
-		Nullable& operator = (const NullPtr*);
+		Nullable& operator = (const NullPtr&);
+		# endif
 		Nullable& operator = (const_pointer rhs);
 		template<class U> Nullable& operator = (const U& rhs);
 
@@ -333,8 +335,10 @@ namespace Yuni
 		//! The comparison operator
 		bool operator == (const Nullable& rhs) const;
 		bool operator != (const Nullable& rhs) const;
-		bool operator == (const NullPtr*) const;
-		bool operator != (const NullPtr*) const;
+		# ifndef YUNI_HAS_NULLPTR
+		bool operator == (const NullPtr&) const;
+		bool operator != (const NullPtr&) const;
+		# endif
 
 		Nullable& operator += (const Nullable& rhs);
 		Nullable& operator -= (const Nullable& rhs);

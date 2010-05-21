@@ -230,17 +230,19 @@ namespace Yuni
 
 
 
+	# ifndef YUNI_HAS_NULLPTR
 	template<class T, class Alloc>
-	inline bool Nullable<T,Alloc>::operator == (const NullPtr*) const
-	{
-		return pHolder.empty();
-	}
-
-	template<class T, class Alloc>
-	inline bool Nullable<T,Alloc>::operator != (const NullPtr*) const
+	inline bool Nullable<T,Alloc>::operator != (const NullPtr&) const
 	{
 		return !pHolder.empty();
 	}
+
+	template<class T, class Alloc>
+	inline bool Nullable<T,Alloc>::operator == (const NullPtr&) const
+	{
+		return pHolder.empty();
+	}
+	# endif
 
 
 
@@ -261,12 +263,14 @@ namespace Yuni
 	}
 
 
+	# ifndef YUNI_HAS_NULLPTR
 	template<class T, class Alloc>
-	inline Nullable<T,Alloc>& Nullable<T,Alloc>::operator = (const NullPtr*)
+	inline Nullable<T,Alloc>& Nullable<T,Alloc>::operator = (const NullPtr&)
 	{
 		pHolder.clear();
 		return *this;
 	}
+	# endif
 
 	template<class T, class Alloc>
 	template<class U>

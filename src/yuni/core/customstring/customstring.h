@@ -157,11 +157,6 @@ namespace Yuni
 		CustomString(const CustomString& rhs);
 
 		/*!
-		** \brief Constructor with a null value
-		*/
-		CustomString(const NullPtr&);
-
-		/*!
 		** \brief Constructor from a mere CString
 		*/
 		CustomString(const char* const block, const Size blockSize);

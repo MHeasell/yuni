@@ -436,10 +436,12 @@ namespace Yuni
 		*/
 		StringBase(const Char c);
 
+		# ifndef YUNI_HAS_NULLPTR
 		/*!
 		** \brief Constructor with an empty value
 		*/
 		StringBase(const NullPtr&);
+		# endif
 
 		/*!
 		** \brief Constructor - From a repetition of chars
@@ -1300,12 +1302,14 @@ namespace Yuni
 		*/
 		template<typename U> StringBase& operator = (const U& u);
 
+		# ifndef YUNI_HAS_NULLPTR
 		/*!
 		** \brief Empty the string
 		**
 		** This method is strictly equivalent to the method clear()
 		*/
 		StringBase& operator = (const NullPtr&);
+		# endif
 
 		/*!
 		** \brief Append a value to the end of the string
@@ -1315,6 +1319,7 @@ namespace Yuni
 		*/
 		template<typename U> StringBase& operator += (const U& u);
 
+		# ifndef YUNI_HAS_NULLPTR
 		/*!
 		** \brief Append a null value to the end of the string (actually do nothinh)
 		**
@@ -1322,6 +1327,7 @@ namespace Yuni
 		** with one parameter.
 		*/
 		StringBase& operator += (const NullPtr&);
+		# endif
 
 		/*!
 		** \brief Append a value to the end of the string
@@ -1331,6 +1337,7 @@ namespace Yuni
 		*/
 		template<typename U> StringBase& operator << (const U& u);
 
+		# ifndef YUNI_HAS_NULLPTR
 		/*!
 		** \brief Append a null value to the end of the string (actually do nothinh)
 		**
@@ -1338,6 +1345,7 @@ namespace Yuni
 		** with one parameter.
 		*/
 		StringBase& operator << (const NullPtr&);
+		# endif
 
 		//! Get if the string is less than a C-String (can be null)
 		bool operator < (const Char rhs[]) const;
@@ -1353,8 +1361,10 @@ namespace Yuni
 		//! Get if the string is equivalent to a C-String (can be null)
 		bool operator == (const Char rhs[]) const;
 
+		# ifndef YUNI_HAS_NULLPTR
 		//! Get if the string is equivalent to a NULL C-String
 		bool operator == (const NullPtr&) const;
+		# endif
 
 		template<int N> bool operator == (const Char rhs[N]) const;
 		//! Get if the string is equivalent to another string
@@ -1367,8 +1377,10 @@ namespace Yuni
 		//! Get if the string is not equivalent to another string
 		template<int Chnk1>
 		bool operator != (const StringBase<Char,Chnk1>& rhs) const;
+		# ifndef YUNI_HAS_NULLPTR
 		//! Get if the string is equivalent to a NULL C-String
 		bool operator != (const NullPtr&) const;
+		# endif
 
 		/*!
 		** \brief Get an iterator at a specific position

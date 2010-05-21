@@ -161,18 +161,7 @@ namespace Yuni
 		return *this;
 	}
 
-	// Operator =
-	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		class ConvP,
-		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>&
-	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator = (const NullPtr*)
-	{
-		SmartPtr tmp;
-		tmp.swap(*this);
-		return *this;
-	}
-
+	# ifndef YUNI_HAS_NULLPTR
 	// Operator =
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
@@ -184,6 +173,7 @@ namespace Yuni
 		tmp.swap(*this);
 		return *this;
 	}
+# endif
 
 
 
@@ -327,29 +317,7 @@ namespace Yuni
 	}
 
 
-	// Operator ==
-	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		class ConvP,
-		template <class> class StorP, template <class> class ConsP>
-	inline bool
-	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator == (const NullPtr*) const
-	{
-		return (storagePointer(*this) == NULL);
-	}
-
-
-	// Operator ==
-	template<typename T, template <class> class OwspP, template <class> class ChckP,
-		class ConvP,
-		template <class> class StorP, template <class> class ConsP>
-	inline bool
-	SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::operator != (const NullPtr*) const
-	{
-		return (storagePointer(*this) != NULL);
-	}
-
-
-
+	# ifndef YUNI_HAS_NULLPTR
 	// Operator ==
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
@@ -370,6 +338,7 @@ namespace Yuni
 	{
 		return (storagePointer(*this) != NULL);
 	}
+	# endif
 
 
 
