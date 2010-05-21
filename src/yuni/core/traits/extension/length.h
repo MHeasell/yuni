@@ -109,7 +109,7 @@ namespace Extension
 		enum { valid = 1, isFixed = 1, fixedLength = 1, };
 
 	public:
-		static SizeT Value(const wchar_t) {return (SizeT) 1;}
+		static SizeT Value(const wchar_t) {return (SizeT) 2;}
 	};
 
 
@@ -294,14 +294,13 @@ namespace Extension
 
 
 	// nulptr
-# ifndef YUNI_HAS_NULLPTR
 
 	template<class SizeT>
 	struct Length<NullPtr, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
-		enum { valid = 1, isFixed = 1, fixedLength = 0, };
+		enum { valid = 1, isFixed = 1, fixedLength = 1, };
 
 	public:
 		static SizeT Value(const Yuni::NullPtr&)
@@ -310,7 +309,6 @@ namespace Extension
 		}
 	};
 
-# endif
 
 
 
