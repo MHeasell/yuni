@@ -14,7 +14,7 @@ namespace GetOpt
 
 
 	template<class U>
-	void Parser::add(U& var, const String::Char shortName, bool visible)
+	void Parser::add(U& var, const char shortName, bool visible)
 	{
 		// The new option
 		IOption* o = (visible)
@@ -35,7 +35,7 @@ namespace GetOpt
 
 
 	template<class U, class S>
-	void Parser::add(U& var, const String::Char shortName, const S& longName, bool visible)
+	void Parser::add(U& var, const char shortName, const S& longName, bool visible)
 	{
 		// The new option
 		IOption* o = (visible)
@@ -58,7 +58,7 @@ namespace GetOpt
 
 
 	template<class U, class S, class D>
-	void Parser::add(U& var, const String::Char shortName, const S& longName, const D& description, bool visible)
+	void Parser::add(U& var, const char shortName, const S& longName, const D& description, bool visible)
 	{
 		// The new option
 		IOption* o = (visible)
@@ -81,7 +81,7 @@ namespace GetOpt
 
 
 	template<class U>
-	void Parser::addFlag(U& var, const String::Char shortName, bool visible)
+	void Parser::addFlag(U& var, const char shortName, bool visible)
 	{
 		// The new option
 		IOption* o = (visible)
@@ -102,7 +102,7 @@ namespace GetOpt
 
 
 	template<class U, class S>
-	void Parser::addFlag(U& var, const String::Char shortName, const S& longName, bool visible)
+	void Parser::addFlag(U& var, const char shortName, const S& longName, bool visible)
 	{
 		// The new option
 		IOption* o = (visible)
@@ -125,7 +125,7 @@ namespace GetOpt
 
 
 	template<class U, class S, class D>
-	void Parser::addFlag(U& var, const String::Char shortName, const S& longName, const D& description, bool visible)
+	void Parser::addFlag(U& var, const char shortName, const S& longName, const D& description, bool visible)
 	{
 		// The new option
 		IOption* o = (visible)

@@ -32,7 +32,7 @@ namespace Directory
 		const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, c, -1, NULL, 0,  NULL, NULL);
 		if (sizeRequired > 0)
 		{
-			ret = new char[sizeRequired * sizeof(char) + 1];
+			ret = (char*)::malloc(sizeRequired * sizeof(char) + 1);
 			if (ret)
 			{
 				if (WideCharToMultiByte(CP_UTF8, 0, c, -1, ret, sizeRequired,  NULL, NULL) > 0)
@@ -41,12 +41,11 @@ namespace Directory
 				}
 				else
 				{
-					delete[] ret;
+                    ::free(ret);
 					ret = NULL;
 				}
 			}
 		}
-		delete[] ret;
 		return ret;
 
 		# else

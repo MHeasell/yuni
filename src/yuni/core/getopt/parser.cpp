@@ -325,14 +325,20 @@ namespace GetOpt
 
 	Parser::~Parser()
 	{
+        if (pRemains)
+			delete pRemains;
+
 		if (!pAllOptions.empty())
 		{
+            // We should clear those maps before `pAllOptions` since they used references
+            // from it
+            pShortNames.clear();
+            pLongNames.clear();
+
 			const OptionList::iterator end = pAllOptions.end();
 			for (OptionList::iterator i = pAllOptions.begin(); i != end; ++i)
 				delete *i;
 		}
-		if (pRemains)
-			delete pRemains;
 	}
 
 	void Parser::clear()
