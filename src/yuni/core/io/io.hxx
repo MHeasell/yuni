@@ -257,7 +257,9 @@ namespace IO
 		if (clearBefore)
 			out.clear();
 		if (IsAbsolute(filename))
+        {
 			out += filename;
+        }
 		else
 		{
 			out += currentPath;

@@ -49,7 +49,7 @@ namespace GetOpt
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void add(U& var, const String::Char shortName, bool visible = true);
+		void add(U& var, const char shortName, bool visible = true);
 
 
 		/*!
@@ -61,7 +61,7 @@ namespace GetOpt
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U, class S>
-		void add(U& var, const String::Char shortName, const S& longName, bool visible = true);
+		void add(U& var, const char shortName, const S& longName, bool visible = true);
 
 
 		/*!
@@ -74,7 +74,7 @@ namespace GetOpt
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U, class S, class D>
-		void add(U& var, const String::Char shortName, const S& longName, const D& description, bool visible = true);
+		void add(U& var, const char shortName, const S& longName, const D& description, bool visible = true);
 
 
 		/*!
@@ -85,7 +85,7 @@ namespace GetOpt
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void addFlag(U& var, const String::Char shortName, bool visible = true);
+		void addFlag(U& var, const char shortName, bool visible = true);
 
 
 		/*!
@@ -97,7 +97,7 @@ namespace GetOpt
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U, class S>
-		void addFlag(U& var, const String::Char shortName, const S& longName, bool visible = true);
+		void addFlag(U& var, const char shortName, const S& longName, bool visible = true);
 
 
 		/*!
@@ -110,7 +110,7 @@ namespace GetOpt
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U, class S, class D>
-		void addFlag(U& var, const String::Char shortName, const S& longName, const D& description, bool visible = true);
+		void addFlag(U& var, const char shortName, const S& longName, const D& description, bool visible = true);
 		//@}
 
 		//! \name Remaining arguments
@@ -177,9 +177,9 @@ namespace GetOpt
 		//! Option list (order given by the user)
 		typedef std::vector<IOption*> OptionList;
 		//! All options ordered by their short name
-		typedef std::map<String::Char, IOption*> OptionsOrderedByShortName;
+		typedef std::map<char, IOption*> OptionsOrderedByShortName;
 		//! All options ordered by their long name
-		typedef std::map<const String::Char*, IOption*, CStringComparison> OptionsOrderedByLongName;
+		typedef std::map<const char*, IOption*, CStringComparison> OptionsOrderedByLongName;
 
 	private:
 		//! All existing options

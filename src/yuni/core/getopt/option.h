@@ -27,7 +27,7 @@ namespace GetOptImpl
 	template<class T>
 	struct Value
 	{
-		static bool Add(T& out, const String::Char* c_str, const String::size_type len)
+		static bool Add(T& out, const char* c_str, const String::size_type len)
 		{
 			out = (len) ? String(c_str, len).to<T>() : T();
 			return true;
@@ -39,7 +39,7 @@ namespace GetOptImpl
 	template<class C, int Chnk>
 	struct Value<StringBase<C, Chnk> >
 	{
-		static bool Add(StringBase<C,Chnk>& out, const String::Char* c_str, const String::size_type len)
+		static bool Add(StringBase<C,Chnk>& out, const char* c_str, const String::size_type len)
 		{
 			if (len)
 				out.assign(c_str, len);
@@ -52,7 +52,7 @@ namespace GetOptImpl
 	template<unsigned int ChunkT, bool ExpT, bool ZeroT>
 	struct Value<CustomString<ChunkT, ExpT, ZeroT> >
 	{
-		static bool Add(CustomString<ChunkT,ExpT, ZeroT>& out, const String::Char* c_str, const String::size_type len)
+		static bool Add(CustomString<ChunkT,ExpT, ZeroT>& out, const char* c_str, const String::size_type len)
 		{
 			out.assign(c_str, len);
 			return true;
@@ -64,7 +64,7 @@ namespace GetOptImpl
 	template<class C, class Traits, class Alloc>
 	struct Value<std::basic_string<C, Traits, Alloc> >
 	{
-		static bool Add(std::basic_string<C,Traits,Alloc>& out, const String::Char* c_str, const String::size_type len)
+		static bool Add(std::basic_string<C,Traits,Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			if (len)
 				out += c_str;
@@ -77,7 +77,7 @@ namespace GetOptImpl
 	template<template<class,class> class L, class T, class Alloc>
 	struct Value<L<T, Alloc> >
 	{
-		static bool Add(L<T,Alloc>& out, const String::Char* c_str, const String::size_type len)
+		static bool Add(L<T,Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			if (len)
 				out.push_back(String(c_str, len).to<T>());
@@ -91,9 +91,11 @@ namespace GetOptImpl
 	template<template<class, class> class L, class C, int Chnk, class Alloc>
 	struct Value<L<StringBase<C,Chnk>, Alloc> >
 	{
-		static bool Add(L<StringBase<C, Chnk>, Alloc>& out, const String::Char* c_str, const String::size_type len)
+		static bool Add(L<StringBase<C, Chnk>, Alloc>& out, const char* c_str, const String::size_type len)
 		{
-			out.push_back(String(c_str, len));
+            StringBase<C,Chnk> s;
+            s.assign(c_str, len);
+			out.push_back(s);
 			return true;
 		}
 	};
@@ -102,7 +104,7 @@ namespace GetOptImpl
 	template<template<class, class> class L, unsigned int ChunkT, bool ExpT, bool ZeroT, class Alloc>
 	struct Value<L<CustomString<ChunkT,ExpT, ZeroT>, Alloc> >
 	{
-		static bool Add(L<CustomString<ChunkT,ExpT,ZeroT>, Alloc>& out, const String::Char* c_str, const String::size_type len)
+		static bool Add(L<CustomString<ChunkT,ExpT,ZeroT>, Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			out.push_back(CustomString<ChunkT,ExpT,ZeroT>(c_str, len));
 			return true;
@@ -114,7 +116,7 @@ namespace GetOptImpl
 	template<template<class, class> class L, class C, class Traits, class AllocS, class Alloc>
 	struct Value<L<std::basic_string<C, Traits, AllocS>, Alloc> >
 	{
-		static bool Add(L<std::basic_string<C, Traits, AllocS>, Alloc>& out, const String::Char* c_str, const String::size_type len)
+		static bool Add(L<std::basic_string<C, Traits, AllocS>, Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			if (len)
 				out.push_back(std::string(c_str, len));
@@ -227,7 +229,7 @@ namespace GetOptImpl
 	template<template<class,class> class L, class T, class Alloc>
 	struct Flag<L<T, Alloc> >
 	{
-		static void Enable(L<T,Alloc>& out, const String::Char* c_str, const String::size_type len)
+		static void Enable(L<T,Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			out.push_back(T(1));
 		}
@@ -257,7 +259,7 @@ namespace GetOptImpl
 	template<template<class, class> class L, class C, class Traits, class AllocS, class Alloc>
 	struct Flag<L<std::basic_string<C, Traits, AllocS>, Alloc> >
 	{
-		static void Enable(L<std::basic_string<C, Traits, AllocS>, Alloc>& out, const String::Char* c_str, const String::size_type len)
+		static void Enable(L<std::basic_string<C, Traits, AllocS>, Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			out.push_back("true");
 		}
@@ -272,7 +274,7 @@ namespace GetOptImpl
 	** \param longName The long name of the option
 	** \param description The description of the option
 	*/
-	void DisplayHelpForOption(std::ostream& out, const String::Char shortName, const String& longName,
+	void DisplayHelpForOption(std::ostream& out, const char shortName, const String& longName,
 		const String& description, bool requireParameter = false);
 
 	/*!
@@ -297,35 +299,29 @@ namespace GetOptImpl
 			pDescription(rhs.pDescription)
 		{}
 
-		IOption(const String::Char s)
+		explicit IOption(const char s)
 			:pShortName(s)
 		{}
 
-		template<class S>
-		IOption(const S& name)
-			:pShortName('\0'), pLongName(name)
-		{
-			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
-				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
-		}
-
-		template<class S>
-		IOption(const String::Char s, const S& name)
+		template<class StringT>
+		IOption(const char s, const StringT& name)
 			:pShortName(s), pLongName(name)
 		{
 			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
 				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
 		}
 
-		template<class S1, class S2>
-		IOption(const String::Char s, const S1& name, const S2& description)
+		template<class StringT1, class StringT2>
+		IOption(const char s, const StringT1& name, const StringT2& description)
 			:pShortName(s), pLongName(name), pDescription(description)
 		{
 			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
 				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
 		}
 
-		virtual ~IOption() {}
+		virtual ~IOption()
+        {
+        }
 
 		/*!
 		** \brief Add a value
@@ -334,7 +330,7 @@ namespace GetOptImpl
 		** \param len Length of the string (can be zero)
 		** \return True if the operation succeded, false otherwise
 		*/
-		virtual bool addValue(const String::Char* c_str, const String::size_type len) = 0;
+		virtual bool addValue(const char* c_str, const String::size_type len) = 0;
 
 		virtual void enableFlag() = 0;
 
@@ -343,7 +339,7 @@ namespace GetOptImpl
 		/*!
 		** \brief Get the short name of the option
 		*/
-		String::Char shortName() const {return pShortName;}
+		char shortName() const {return pShortName;}
 
 		/*!
 		** \brief Get the long name of the option
@@ -354,7 +350,7 @@ namespace GetOptImpl
 
 	protected:
 		//! The short name of the option
-		const String::Char pShortName;
+		const char pShortName;
 		//! The long name
 		const String pLongName;
 		//! Description
@@ -386,22 +382,22 @@ namespace GetOptImpl
 			:IOption(rhs), pVariable(rhs.pVariable)
 		{}
 
-		Option(T& var, const String::Char c)
+		Option(T& var, const char c)
 			:IOption(c), pVariable(var)
 		{}
 
-		template<class S>
-		Option(T& var, const S& name)
+		template<class StringT>
+		Option(T& var, const StringT& name)
 			:IOption(name), pVariable(var)
 		{}
 
-		template<class S>
-		Option(T& var, const String::Char c, const S& name)
+		template<class StringT>
+		Option(T& var, const char c, const StringT& name)
 			:IOption(c, name), pVariable(var)
 		{}
 
 		template<class S1, class S2>
-		Option(T& var, const String::Char s, const S1& name, const S2& description)
+		Option(T& var, const char s, const S1& name, const S2& description)
 			:IOption(s, name, description), pVariable(var)
 		{}
 
@@ -417,7 +413,7 @@ namespace GetOptImpl
 		** \param len Length of the string (can be zero)
 		** \return True if the operation succeded, false otherwise
 		*/
-		virtual bool addValue(const String::Char* c_str, const String::size_type len)
+		virtual bool addValue(const char* c_str, const String::size_type len)
 		{
 			return Private::GetOptImpl::Value<T>::Add(pVariable, c_str, len);
 		}
@@ -472,7 +468,7 @@ namespace GetOptImpl
 		** \param len Length of the string (can be zero)
 		** \return True if the operation succeded, false otherwise
 		*/
-		virtual bool addValue(const String::Char*, const String::size_type)
+		virtual bool addValue(const char*, const String::size_type)
 		{
 			/* Do nothing - This is not an option */
 			return false;
