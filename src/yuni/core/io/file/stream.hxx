@@ -96,19 +96,19 @@ namespace File
 
 	inline bool Stream::seekFromBeginning(ssize_t offset)
 	{
-		return (0 == ::fseek(pFd, offset, SEEK_SET));
+		return (0 == ::fseek(pFd, (long)offset, SEEK_SET));
 	}
 
 
 	inline bool Stream::seekFromEndOfFile(ssize_t offset)
 	{
-		return (0 == ::fseek(pFd, offset, SEEK_END));
+		return (0 == ::fseek(pFd, (long)offset, SEEK_END));
 	}
 
 
 	inline bool Stream::seekMove(ssize_t offset)
 	{
-		return (0 == ::fseek(pFd, offset, SEEK_CUR));
+		return (0 == ::fseek(pFd, (long)offset, SEEK_CUR));
 	}
 
 

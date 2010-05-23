@@ -67,9 +67,9 @@ namespace File
 	{
 		switch (origin)
 		{
-			case seekOriginBegin:   return (0 == ::fseek(pFd, offset, SEEK_SET));
-			case seekOriginCurrent: return (0 == ::fseek(pFd, offset, SEEK_CUR));
-			case seekOriginEnd:     return (0 == ::fseek(pFd, offset, SEEK_END));
+			case seekOriginBegin:   return (0 == ::fseek(pFd, (long)offset, SEEK_SET));
+			case seekOriginCurrent: return (0 == ::fseek(pFd, (long)offset, SEEK_CUR));
+			case seekOriginEnd:     return (0 == ::fseek(pFd, (long)offset, SEEK_END));
 		}
 		return false;
 	}

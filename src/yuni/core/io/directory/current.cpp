@@ -32,7 +32,7 @@ namespace Directory
 		const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, c, -1, NULL, 0,  NULL, NULL);
 		if (sizeRequired > 0)
 		{
-			ret = ::malloc(sizeRequired * sizeof(char) + 1);
+			ret = new char[sizeRequired * sizeof(char) + 1];
 			if (ret)
 			{
 				if (WideCharToMultiByte(CP_UTF8, 0, c, -1, ret, sizeRequired,  NULL, NULL) > 0)
@@ -41,12 +41,12 @@ namespace Directory
 				}
 				else
 				{
-					::free(ret);
+					delete[] ret;
 					ret = NULL;
 				}
 			}
 		}
-		::free(c);
+		delete[] ret;
 		return ret;
 
 		# else
@@ -62,7 +62,7 @@ namespace Directory
 	{
 		# ifdef YUNI_OS_WINDOWS
 		wchar_t* fsource = new wchar_t[srclen + 4];
-		int n = MultiByteToWideChar(CP_UTF8, 0, path, srclen, fsource, srclen);
+		int n = MultiByteToWideChar(CP_UTF8, 0, src, srclen, fsource, srclen);
 		if (n <= 0)
 			return false;
 		fsource[n]     = L'\0'; // This string must be double-null terminated
