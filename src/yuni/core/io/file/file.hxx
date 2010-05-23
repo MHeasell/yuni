@@ -6,6 +6,26 @@
 # include "../../static/remove.h"
 
 
+
+namespace Yuni
+{
+namespace Private
+{
+namespace Core
+{
+namespace IO
+{
+
+	bool Size(const char* filename, unsigned int len, uint64& value);
+	bool SizeNotZeroTerminated(const char* filename, unsigned int len, uint64& value);
+
+} // namespace IO
+} // namespace Core
+} // namespace Private
+} // namespace Yuni
+
+
+
 namespace Yuni
 {
 namespace Core
@@ -22,8 +42,16 @@ namespace File
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CoreIOFileSize_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CoreIOFileSize_InvalidTypeForLength);
 
-		return Private::IO::FilesystemImpl::Size(Traits::CString<StringT>::Perform(filename),
-			Traits::Length<StringT>::Value(filename), size);
+		if (Traits::CString<StringT>::zeroTerminated)
+		{
+			return Yuni::Private::Core::IO::Size(
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename), size);
+		}
+		else
+		{
+			return Yuni::Private::Core::IO::Size(
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename), size);
+		}
 	}
 
 
@@ -34,9 +62,19 @@ namespace File
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CoreIOFileSize_InvalidTypeForLength);
 
 		uint64 size;
-		return Private::IO::FilesystemImpl::Size(Traits::CString<StringT>::Perform(filename),
-			Traits::Length<StringT>::Value(filename), size)
-			? size : 0;
+
+		if (Traits::CString<StringT>::zeroTerminated)
+		{
+			return Yuni::Private::Core::IO::Size(
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename), size)
+				? size : 0;
+		}
+		else
+		{
+			return Yuni::Private::Core::IO::Size(
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename), size)
+				? size : 0;
+		}
 	}
 
 
@@ -47,12 +85,7 @@ namespace File
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOFileExists_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOFileExists_InvalidTypeForBufferSize);
 
-		# ifdef YUNI_OS_WINDOWS
-		return Private::IO::FilesystemImpl::IsFileWindowsImpl(
-			Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename));
-		# else
-		return Private::IO::FilesystemImpl::IsFileUnixImpl(Traits::CString<StringT>::Perform(filename));
-		# endif
+		return ((Yuni::Core::IO::typeFile & Yuni::Core::IO::TypeOf(filename)) != 0);
 	}
 
 

@@ -2,9 +2,25 @@
 # define __YUNI_CORE_IO_IO_HXX__
 
 # include <assert.h>
-# include "private.h"
-# include <deque>
 # include <ctype.h>
+
+namespace Yuni
+{
+namespace Private
+{
+namespace Core
+{
+namespace IO
+{
+	
+	Yuni::Core::IO::NodeType TypeOf(const char* p, size_t length);
+	Yuni::Core::IO::NodeType TypeOfNotZeroTerminated(const char* p, size_t length);
+
+} // namespace IO
+} // namespace Core
+} // namespace Private
+} // namespace Yuni
+
 
 
 
@@ -34,22 +50,9 @@ namespace Core
 namespace IO
 {
 
-	template<>
-	struct Constant<wchar_t>
-	{
-		//! The path-separator character according to the platform (ex: `/`)
-		static const wchar_t  Separator; // L'/';
-		//! The path-separator character according to the platform (stored in a string instead of a char)
-		static const wchar_t* SeparatorAsString; // = L"/";
-		//! All path-separator characters, for all platforms
-		static const wchar_t* AllSeparators; // = L"\\/";
-		//! Dot
-		static const wchar_t  Dot; // L'.';
-	};
 
-
-
-	template<class StringT> inline bool IsAbsolute(const StringT& filename)
+	template<class StringT>
+	inline bool IsAbsolute(const StringT& filename)
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
@@ -80,20 +83,21 @@ namespace IO
 	}
 
 
+	template<class StringT>
+	inline bool IsRelative(const StringT& filename)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+		return !IsAbsolute(filename);
+	}
+
+
 	template<class StringT> inline bool Exists(const StringT& filename)
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOExists_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOExists_InvalidTypeForBufferSize);
-
-		# ifdef YUNI_OS_WINDOWS
-		return Private::IO::FilesystemImpl::ExistsWindowsImpl(
-			Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename));
-		# else
-		return Private::IO::FilesystemImpl::ExistsUnixImpl(Traits::CString<StringT>::Perform(filename));
-		# endif
+		return (Yuni::Core::IO::typeUnknown != Yuni::Core::IO::TypeOf(filename));
 	}
-
-
 
 
 	template<typename C, int N>
@@ -230,24 +234,36 @@ namespace IO
 	}
 
 
-
-	template<typename C, int N>
-	inline StringBase<C,N> MakeAbsolute(const StringBase<C,N>& p)
+	template<class StringT1, class StringT2>
+	void MakeAbsolute(StringT1& out, const StringT2& filename, bool clearBefore)
 	{
-		return MakeAbsolute(p, IO::Directory::Current());
+		if (clearBefore)
+			out.clear();
+		if (IsAbsolute(filename))
+		{
+			out += filename;
+		}
+		else
+		{
+			Core::IO::Directory::Current::Get(out, clearBefore);
+			out << Core::IO::Separator << filename;
+		}
 	}
 
 
-	template<typename C, int N, typename U>
-	StringBase<C,N> MakeAbsolute(const StringBase<C,N>& p, const U& currentDirectory)
+	template<class StringT1, class StringT2, class StringT3>
+	void MakeAbsolute(StringT1& out, const StringT2& filename, const StringT3& currentPath, bool clearBefore)
 	{
-		if (IsAbsolute(p))
-			return p;
-		typedef StringBase<C,N> StringT;
-		StringT ret(currentDirectory);
-		ret << IO::Constant<C>::Separator << p;
-		ret.removeTrailingSlash();
-		return ret;
+		if (clearBefore)
+			out.clear();
+		if (IsAbsolute(filename))
+			out += filename;
+		else
+		{
+			out += currentPath;
+			out += Core::IO::Separator;
+			out += filename;
+		}
 	}
 
 
@@ -283,9 +299,7 @@ namespace IO
 	template<class StringT1, class StringT2>
 	void Normalize(StringT1& out, const StringT2& in, unsigned int inLength)
 	{
-		// Assert, if a C* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, Normalize_InvalidTypeForInput);
-		// Assert, if the length of the container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  Normalize_InvalidTypeForInputSize);
 
 		// Some static checks
@@ -505,14 +519,33 @@ namespace IO
 		// We know for sure that it can not be a double dot segment
 		if (cursor < inLength)
 		{
-			if (inLength - cursor == 1 && input[cursor] == '.')
-				return;
-			out.append(input + cursor, inLength - cursor);
+			if (!(inLength - cursor == 1 && input[cursor] == '.'))
+				out.append(input + cursor, inLength - cursor);
 		}
+		// Removing the trailing slash
+		if (out.size() > 3)
+			out.removeTrailingSlash();
 	}
 
 
 
+	template<class StringT>
+	inline NodeType TypeOf(const StringT& filename)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, TypeOF_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  TypeOF_InvalidTypeForBufferSize);
+
+		if (Traits::CString<StringT>::zeroTerminated)
+		{
+			return Yuni::Private::Core::IO::TypeOf(
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename));
+		}
+		else
+		{
+			return Yuni::Private::Core::IO::TypeOf(
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename));
+		}
+	}
 
 
 

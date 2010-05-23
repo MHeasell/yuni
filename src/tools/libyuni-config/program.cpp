@@ -108,7 +108,7 @@ namespace Yuni
 			pRootPath = Core::IO::ExtractFilePath(argv0);
 		else
 		{
-			pRootPath = Core::IO::Directory::Current();
+			Core::IO::Directory::Current::Get(pRootPath);
 			pRootPath << Core::IO::Separator << Core::IO::ExtractFilePath(argv0);
 			pRootPath.removeTrailingSlash();
 		}
@@ -121,10 +121,17 @@ namespace Yuni
 	{
 		if (!pOptPrefix.empty())
 		{
-			const String& pwd = Core::IO::Directory::Current();
+			// Current Directory
+			String pwd;
+			Core::IO::Directory::Current::Get(pwd);
+
+			String tmp;
 			const String::List::iterator end = pOptPrefix.end();
 			for (String::List::iterator i = pOptPrefix.begin(); i != end; ++i)
-				*i = Core::IO::MakeAbsolute(*i, pwd);
+			{
+				Core::IO::MakeAbsolute(tmp, *i, pwd);
+				*i = tmp;
+			}
 		}
 	}
 

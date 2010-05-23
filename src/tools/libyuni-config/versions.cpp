@@ -23,7 +23,7 @@ namespace VersionInfo
 		if (Core::IO::File::Exists(yuniMarker))
 		{
 			if (pOptDebug)
-				std::cout << "[debug] found special marker `" << yuniMarker << "`" << std::endl;
+				std::cout << "[debug] found special yuni marker `" << yuniMarker << "`" << std::endl;
 
 			# ifdef YUNI_OS_WINDOWS
 			loadFromPath(root + "\\..\\..\\..");
@@ -33,8 +33,8 @@ namespace VersionInfo
 			return;
 		}
 
-		# ifdef YUNI_OS_WINDOWS
-		// For dealing with the paths like 'Debug/libyuni-config.exe'
+		# ifdef YUNI_OS_MSVC //Visual Studio
+		// For dealing with the paths like '{Debug,Release}/libyuni-config.exe'
 		if (Core::IO::File::Exists(String() << root << "\\..\\mark-for-yuni-sources"))
 			loadFromPath(root + "\\..\\..\\..\\..");
 		# endif

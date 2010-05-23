@@ -5,6 +5,7 @@
 # include "../../traits/length.h"
 # include "../../static/remove.h"
 # include "../io.h"
+# include <stdlib.h>
 
 
 namespace Yuni
@@ -27,6 +28,15 @@ namespace Directory
 	bool Copy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen);
 
 	bool Remove(const char* path);
+
+	/*!
+	** \brief Get the current directory which must be freed
+	*/
+	char* CurrentDirectory();
+
+	bool SetCurrentDirectory(const char* src, size_t srclen);
+	bool SetCurrentDirectoryNotZeroTerminated(const char* path, size_t length);
+
 
 } // namespace Directory
 } // namespace IO
@@ -81,33 +91,20 @@ namespace Directory
 	template<class StringT>
 	inline bool Remove(const StringT& path)
 	{
-		// The given type, with its const identifier
-		typedef typename Static::Remove::Const<StringT>::Type UType;
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<UType>::valid, DirectoryExists_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, Remove_InvalidTypeForBuffer);
 
-		return Private::Core::IO::Directory::Remove(Traits::CString<UType>::Perform(path));
+		return Private::Core::IO::Directory::Remove(Traits::CString<StringT>::Perform(path));
 	}
 
 
 	template<class StringT>
 	inline bool Exists(const StringT& path)
 	{
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, DirectoryExists_InvalidTypeForBuffer);
-		// Assert, if the length of the container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  DirectoryExists_InvalidTypeForBufferSize);
 
-		# ifdef YUNI_OS_WINDOWS
-		return Private::IO::FilesystemImpl::IsDirectoryWindowsImpl(
-			Traits::CString<StringT>::Perform(path),
-			Traits::Length<StringT, unsigned int>::Value(path));
-		# else
-		return Private::IO::FilesystemImpl::IsDirectoryUnixImpl(
-			Traits::CString<StringT>::Perform(path));
-		# endif
+		return ((Yuni::Core::IO::typeFolder & Yuni::Core::IO::TypeOf(path)) != 0);
 	}
-
 
 
 
@@ -115,5 +112,57 @@ namespace Directory
 } // namespace IO
 } // namespace Core
 } // namespace Yuni
+
+
+namespace Yuni
+{
+namespace Core
+{
+namespace IO
+{
+namespace Directory
+{
+namespace Current
+{
+
+	template<class StringT>
+	inline void Get(StringT& out, bool clearBefore)
+	{
+		char* c = Yuni::Private::Core::IO::Directory::CurrentDirectory();
+		if (clearBefore)
+			out = c;
+		else
+			out += c;
+		::free(c);
+	}
+
+
+	template<class StringT>
+	inline bool Set(const StringT& path)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, DirectoryExists_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  DirectoryExists_InvalidTypeForBufferSize);
+
+		if (Traits::CString<StringT>::zeroTerminated)
+		{
+			return Yuni::Private::Core::IO::Directory::SetCurrentDirectory(
+				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path));
+		}
+		else
+		{
+			return Yuni::Private::Core::IO::Directory::SetCurrentDirectoryNotZeroTerminated(
+				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path));
+		}
+	}
+
+
+
+} // namespace Current
+} // namespace Directory
+} // namespace IO
+} // namespace Core
+} // namespace Yuni
+
+
 
 #endif // __YUNI_CORE_IO_DIRECTORY_H__

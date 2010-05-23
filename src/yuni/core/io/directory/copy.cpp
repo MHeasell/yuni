@@ -43,19 +43,15 @@ namespace Directory
 		SHFILEOPSTRUCTW shf;
 		shf.hwnd = NULL;
 
-		int n;
-		n = MultiByteToWideChar(CP_UTF8, 0, src, srclen, fsource, srclen);
+		int n = MultiByteToWideChar(CP_UTF8, 0, src, srclen, fsource, srclen);
 		if (n <= 0)
-		{
 			return false;
-		}
 		fsource[n]     = L'\0'; // This string must be double-null terminated
 		fsource[n + 1] = L'\0';
+
 		n = MultiByteToWideChar(CP_UTF8, 0, dst, dstlen, fcible, dstlen);
 		if (n <= 0)
-		{
 			return false;
-		}
 		fcible[n]     = L'\0'; // This string must be double-null terminated
 		fcible[n + 1] = L'\0';
 

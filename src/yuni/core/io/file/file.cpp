@@ -10,9 +10,9 @@ namespace Yuni
 {
 namespace Private
 {
-namespace IO
+namespace Core
 {
-namespace FilesystemImpl
+namespace IO
 {
 
 
@@ -82,10 +82,9 @@ namespace FilesystemImpl
 
 	# else
 
-	bool Size(const char* const filename, unsigned int len, uint64& value)
+	bool Size(const char* const filename, unsigned int, uint64& value)
 	{
 		struct stat results;
-    #warning The filename length must be used in case it is not null terminated. Fix this.
 		if (filename && '\0' != *filename && stat(filename, &results) == 0)
 		{
 			value = results.st_size;
@@ -98,9 +97,34 @@ namespace FilesystemImpl
 	# endif
 
 
+	bool SizeNotZeroTerminated(const char* filename, unsigned int len, uint64& value)
+	{
+		# ifdef YUNI_OS_WINDOWS
+		// on Windows, we already have to use temporary buffers
+		return Yuni::Private::Core::IO::Size(filename, len, value);
+		# else
+		if (len < 1020)
+		{
+			char p [1024];
+			memcpy(p, filename, len * sizeof(char));
+			p[len] = '\0';
+			return Yuni::Private::Core::IO::Size(p, len, value);
+		}
+		else
+		{
+			char* p = new char[len + 1];
+			memcpy(p, filename, len * sizeof(char));
+			p[len] = '\0';
+			bool r = Yuni::Private::Core::IO::Size(p, len, value);
+			delete[] p;
+			return r;
+		}
+		# endif
+	}
 
-} // namespace FilesystemImpl
+
 } // namespace IO
+} // namespace Core
 } // namespace Private
 } // namespace Yuni
 

@@ -23,14 +23,14 @@ namespace IO
 	**
 	** \ingroup IO
 	*/
-	extern const String::Char Separator; // '/'
+	extern const char Separator; // '/'
 
 	/*!
 	** \brief The path-separator character according to the platform (stored in a string instead of a char)
 	**
 	** \ingroup IO
 	*/
-	extern const String::Char* SeparatorAsString; // "/"
+	extern const char* SeparatorAsString; // "/"
 
 	/*!
 	** \brief Constant acoording a type
@@ -40,8 +40,7 @@ namespace IO
 	** \ingroup IO
 	*/
 	template<typename C /* = char*/> struct Constant;
-	template<>
-	struct Constant<char>
+	template<> struct Constant<char>
 	{
 		// The complete specialization with wchar_t is in directory.hxx
 
@@ -56,6 +55,18 @@ namespace IO
 		static const char  Dot; // '.';
 
 	}; // class Constant<char>
+
+	template<> struct Constant<wchar_t>
+	{
+		//! The path-separator character according to the platform (ex: `/`)
+		static const wchar_t  Separator; // L'/';
+		//! The path-separator character according to the platform (stored in a string instead of a char)
+		static const wchar_t* SeparatorAsString; // = L"/";
+		//! All path-separator characters, for all platforms
+		static const wchar_t* AllSeparators; // = L"\\/";
+		//! Dot
+		static const wchar_t  Dot; // L'.';
+	};
 	//@}
 
 
@@ -68,11 +79,24 @@ namespace IO
 		//! Abort the whole process
 		flowAbort = 0,
 		//! Continue
-		flowContinue = 1,
+		flowContinue,
 		//! Skip the current item
-		flowSkip = 2,
+		flowSkip,
 	};
 
+
+	/*!
+	** \brief Type of a single node (bitmask)
+	*/
+	enum NodeType
+	{
+		//! The node doest not exist
+		typeUnknown = 0,
+		//! The node is a folder
+		typeFolder = 1,
+		//! The node is a file
+		typeFile = 2,
+	};
 
 
 
@@ -196,6 +220,17 @@ namespace IO
 	*/
 	template<class StringT> bool IsAbsolute(const StringT& filename);
 
+	
+	/*!
+	** \brief Get if a path is relative
+	**
+	** \ingroup IO
+	**
+	** \param filename The path or the filename to test
+	** \return True if the given filename is an absolute path, false otherwise (or empty)
+	*/
+	template<class StringT> bool IsRelative(const StringT& filename);
+
 
 	/*!
 	** \brief Make a path absolute
@@ -203,26 +238,26 @@ namespace IO
 	** \ingroup IO
 	**
 	** The current directory will be used when the given path is not absolute.
-	**
-	** \param p Any path to make absolute
-	** \return `p` or an absolute path
+	** \param[out] out         The variable where to write the result
+	** \param      filename    The filename to make absolute
+	** \param      clearBefore True to clean @out before
 	*/
-	template<typename C, int N>
-	StringBase<C,N> MakeAbsolute(const StringBase<C,N>& p);
+	template<class StringT1, class StringT2>
+	void MakeAbsolute(StringT1& out, const StringT2& path, bool clearBefore = true);
 
 	/*!
 	** \brief Make a path absolute
 	**
 	** \ingroup IO
 	**
-	** The current directory is used when the given path is not absolute.
-	**
-	** \param p Any path to make absolute
-	** \param currentDirectory A custom current directory to use instead of CurrentDirectory()
-	** \return `p` or an absolute path
+	** The current directory will be used when the given path is not absolute.
+	** \param[out] out         The variable where to write the result
+	** \param      filename    The filename to make absolute
+	** \param      currentPath A custom current path to use if the filename is not absolute
+	** \param      clearBefore True to clean @out before
 	*/
-	template<typename C, int N, typename U>
-	StringBase<C,N> MakeAbsolute(const StringBase<C,N>& p, const U& currentDirectory);
+	template<class StringT1, class StringT2, class StringT3>
+	void MakeAbsolute(StringT1& out, const StringT2& path, const StringT3& currentPath, bool clearBefore = true);
 
 
 	/*!
@@ -244,14 +279,23 @@ namespace IO
 
 
 	/*!
-	** \brief Test if a node exists (whatever its type)
-	** \ingroup IO
+	** \brief Test if a node exists (whatever its type, a folder or a file)
 	**
-	** \param p The file/directory to test
+	** \ingroup IO
+	** \param filename The file/directory to test
 	** \return True if it exists, false otherwise
 	*/
-	// const char*
 	template<class StringT> bool Exists(const StringT& filename);
+
+	/*!
+	** \brief Get the type of a node
+	**
+	** \ingroup IO
+	** \param filename The file/directory to test
+	** \return True if it exists, false otherwise
+	*/
+	template<class StringT> NodeType TypeOf(const StringT& filename);
+
 
 
 	/*!
@@ -260,9 +304,9 @@ namespace IO
 	** The input can be a Windows-style or a Unix-style path, with mixed slasles and anti-slashes.
 	** This routine removes dot segments (`.` and `..`) from a given filename (when
 	** possible).
-	** Any final slash or anti-slash will be kept.
+	** Any final slash will be removed.
 	**
-	** \bug The relative filename like C:..\folder1\folder2 are not handled properly
+	** \bug The relative filenames like C:..\folder1\folder2 are not handled properly
 	**
 	** \param[out] out      A string (any class compliant to std::string) where to write the result
 	** \param      in       A path/filename to normalize

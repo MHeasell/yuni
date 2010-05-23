@@ -166,7 +166,7 @@ namespace Octet
 	template<typename FromType, typename ToType>
 	struct QuantityConversion<Data::Octet::Quantity, FromType, Data::Bit::Quantity, ToType>
 	{
-		static ToType Value(const FromType u) {std::cout << "!!!! " << u << std::endl;return ToType(u * 8);}
+		static ToType Value(const FromType u) {return ToType(u * 8);}
 	};
 
 	/*!

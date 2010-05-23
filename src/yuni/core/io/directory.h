@@ -3,7 +3,6 @@
 
 # include "../../yuni.h"
 # include "../string.h"
-# include "private.h"
 
 
 namespace Yuni
@@ -20,7 +19,6 @@ namespace IO
 */
 namespace Directory
 {
-
 
 	//! \name Exists
 	//@{
@@ -39,24 +37,32 @@ namespace Directory
 	//@}
 
 
-
-	//! \name Current Directory
-	//@{
 	/*!
-	** \brief Retrieve the current directory
-	**
-	** \ingroup IODirectory
+	** \brief Routines about current directories
 	*/
-	String Current();
+	namespace Current
+	{
+		/*!
+		** \brief Get the current directory
+		**
+		** \param clearBefore True to clean @out before
+		*/
+		template<class StringT> void Get(StringT& out, bool clearBefore = true);
 
-	/*!
-	** \brief Retrieve the current directory and write the result in a given string
-	**
-	** \ingroup IODirectory
-	** \param[out] out Var where to write the current directory
-	*/
-	void Current(String& out);
-	//@}
+		/*!
+		** \brief Get the current directory
+		**
+		** Performance Tip: Perfer Get(String&) which avoid several string copy
+		*/
+		String Get();
+
+		/*!
+		** \brief Set the current directory
+		** \return True if the operation succeeded
+		*/
+		template<class StringT> bool Set(const StringT& path);
+
+	} // anonymous Current
 
 
 
@@ -76,6 +82,7 @@ namespace Directory
 
 
 	//! \name Remove a directory
+	//@{
 	/*!
 	** \brief Recursively delete a directory and its content
 	**
@@ -98,11 +105,8 @@ namespace Directory
 	** \param dst The target folder
 	** \return True if the operation succeeded False otherwise
 	*/
-	template<class StringT1, class StringT2>
-	bool Copy(const StringT1& src, const StringT2& dst);
+	template<class StringT1, class StringT2> bool Copy(const StringT1& src, const StringT2& dst);
 	//@}
-
-
 
 
 

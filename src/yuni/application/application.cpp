@@ -30,8 +30,9 @@ namespace Application
 			pRootFolder = Core::IO::ExtractFilePath(argv[0]);
 		else
 		{
-			StringBase<char, 1024> r;
-			r << Core::IO::Directory::Current() << Core::IO::Separator << argv[0];
+			String r;
+			Core::IO::Directory::Current::Get(r);
+			r << Core::IO::Separator << (const char*) argv[0];
 			if (r.notEmpty())
 				pRootFolder = Core::IO::ExtractFilePath(r, true);
 		}
