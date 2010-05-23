@@ -44,7 +44,7 @@ namespace IO
 		// can be safely contained into a static buffer
 		// However, on Windows, we already use temporary buffers
 		# ifdef YUNI_OS_WINDOWS
-		return Yuni::Private::Core::IO::TypeOf(path, len);
+		return Yuni::Private::Core::IO::TypeOf(p, len);
 		# else
 		if (len < 1020)
 		{
