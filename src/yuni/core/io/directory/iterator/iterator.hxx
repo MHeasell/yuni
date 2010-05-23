@@ -78,14 +78,14 @@ namespace Directory
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		// Copy
 		String s;
-		s = folder;
 		// We must have absolute paths
-		if (!Core::IO::IsAbsolute(s))
+		if (Core::IO::IsRelative(s))
 		{
-			String current = Core::IO::Directory::Current();
-			current += Core::IO::Separator;
-			s.insert(0, current);
+			Core::IO::Directory::Current::Get(s);
+			if (!s.empty() && s.last() != '/' && s.last() != '\\')
+				s += Core::IO::Separator;
 		}
+		s += folder;
 
 		# ifdef YUNI_OS_WINDOWS
 		// The Win32 API does not really like `/`

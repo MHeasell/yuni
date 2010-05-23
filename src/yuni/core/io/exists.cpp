@@ -17,39 +17,75 @@
 
 
 
-
 namespace Yuni
 {
 namespace Private
 {
+namespace Core
+{
 namespace IO
 {
-namespace FilesystemImpl
-{
 
-	# ifdef YUNI_OS_WINDOWS
-
-	template<bool ExistsOnlyT, bool ResultT>
-	bool IsDirWindowsImpl(const char* p, size_t len)
+	namespace
 	{
-		if (!len)
-			return false;
+		Yuni::Core::IO::NodeType TypeOfStaticBuffer(const char* p, size_t len)
+		{
+			char path[1024];
+			memcpy(path, p, len * sizeof(char));
+			path[len] = '\0';
+			return Yuni::Private::Core::IO::TypeOf(path, len);
+		}
+	}
+
+	Yuni::Core::IO::NodeType TypeOfNotZeroTerminated(const char* p, size_t len)
+	{
+		// As this routine may be extensively used, we should make it as fast as possible
+		// Consequently we make here a tiny optimisation when the length of the path
+		// can be safely contained into a static buffer
+		// However, on Windows, we already use temporary buffers
+		# ifdef YUNI_OS_WINDOWS
+		return Yuni::Private::Core::IO::TypeOf(path, len);
+		# else
+		if (len < 1020)
+		{
+			return TypeOfStaticBuffer(p, len);
+		}
+		else
+		{
+			char* path = new char[len + 1];
+			memcpy(path, p, len * sizeof(char));
+			path[len] = '\0';
+
+			Yuni::Core::IO::NodeType type = Yuni::Private::Core::IO::TypeOf(path, len);
+			delete[] path;
+			return type;
+		}
+		# endif
+	}
+
+
+	Yuni::Core::IO::NodeType TypeOf(const char* p, size_t len)
+	{
+		if (!p || !len)
+			return Yuni::Core::IO::typeUnknown;
+
+		# ifdef YUNI_OS_WINDOWS
 		if (p[len - 1] == '\\' || p[len - 1] == '/')
 		{
 			if (!--len)
 			{
 				# ifdef YUNI_OS_WINDOWS
-				return false;
+				return Yuni::Core::IO::typeUnknown;
 				# else
 				// On Unixes, `/` is a valid folder
-				return true;
+				return Yuni::Core::IO::typeFolder;
 				# endif
 			}
 		}
 
 		// Driver letters
 		if (len == 2 && p[1] == ':')
-			return true;
+			return Yuni::Core::IO::typeFolder;
 
 		CustomString<>  norm;
 		Yuni::Core::IO::Normalize(norm, p, len);
@@ -62,8 +98,8 @@ namespace FilesystemImpl
 		int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
 		if (n <= 0)
 		{
-			delete buffer;
-			return false;
+			delete[] buffer;
+			return Yuni::Core::IO::typeUnknown;
 		}
 		for (int i = 4; i < n + 4; ++i)
 		{
@@ -76,76 +112,30 @@ namespace FilesystemImpl
 		if (!GetFileAttributesExW(buffer, GetFileExInfoStandard, &infoFile))
 		{
 			delete[] buffer;
-			return false;
+			return Yuni::Core::IO::typeUnknown;
 		}
 		delete[] buffer;
 
-		# ifdef YUNI_OS_MSVC
-		return (ExistsOnlyT)
-			? true
-			: ((ResultT == (bool)(infoFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))) ? true : false;
-		# else
-		return (ExistsOnlyT)
-			? true
-			: (ResultT == (bool)(infoFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY));
+		return ((infoFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
+			? Yuni::Core::IO::typeFolder
+			: Yuni::Core::IO::typeFile;
+
+		# else // WINDOWS
+
+		struct stat s;
+		if (stat(p, &s) != 0)
+			return Yuni::Core::IO::typeUnknown;
+		return (S_ISDIR(s.st_mode))
+			? Yuni::Core::IO::typeFolder
+			: Yuni::Core::IO::typeFile;
+
 		# endif
 	}
 
 
-	bool ExistsWindowsImpl(const char* p, const size_t len)
-	{
-		return IsDirWindowsImpl<true, false>(p, len);
-	}
 
 
-	bool IsDirectoryWindowsImpl(const char* p, const size_t sizeHint)
-	{
-		return IsDirWindowsImpl<false, true>(p, sizeHint);
-	}
-
-	bool IsFileWindowsImpl(const char* p, const size_t sizeHint)
-	{
-		return IsDirWindowsImpl<false, false>(p, sizeHint);
-	}
-
-
-	# else
-
-	bool ExistsUnixImpl(const char* p)
-	{
-		struct stat s;
-		return (stat(p, &s) == 0);
-	}
-
-	template<bool B>
-	inline bool IsDirUnixImpl(const char* p)
-	{
-		if (p && '\0' != *p)
-		{
-			struct stat s;
-			if (stat(p, &s) != 0)
-				return false;
-			return (B == S_ISDIR(s.st_mode));
-		}
-		return false;
-	}
-
-
-	bool IsDirectoryUnixImpl(const char* p)
-	{
-		return IsDirUnixImpl<true>(p);
-	}
-
-	bool IsFileUnixImpl(const char* p)
-	{
-		return IsDirUnixImpl<false>(p);
-	}
-
-	# endif
-
-
-
-} // namespace FilesystemImpl
 } // namespace IO
+} // namespace Core
 } // namespace Private
 } // namespace Yuni

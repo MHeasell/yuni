@@ -48,9 +48,10 @@ namespace File
 
 
 	/*!
-	** \brief Get the size of a file
+	** \brief Get the size (in bytes) of a file
 	**
 	** \ingroup IOFile
+	**
 	** \param filename The filename
 	** \param[out] size The size (in bytes) of the file. The value is guaranteed to be set (null) is an error has occured
 	** \return True if the operation succeeded, False otherwise
@@ -58,9 +59,24 @@ namespace File
 	template<class StringT> bool Size(const StringT& filename, uint64& size);
 
 	/*!
-	** \brief Get the size of a file
+	** \brief Get the size (in bytes) of a file
 	**
 	** \ingroup IOFile
+	** \code
+	** #include <yuni/yuni.h>
+	** #include <yuni/core/unit/data.h>
+	** #include <yuni/core/io/file.h>
+	** #include <iostream>
+	**
+	** using namespace Yuni;
+	** int main()
+	** {
+	**	Unit::Data::Octet::SIBaseUnit<uint64> size = Core::IO::File::Size("/path/to/my/file");
+	**	std::cout << Unit::Data::Octet::Megaoctet<double>(size) << std::endl;
+	**	return 0;
+	** }
+	** \endcode
+	**
 	** \param filename The filename
 	** \return The size (in bytes) of the file. The returned value is guaranteed to be null is an error has occured
 	*/

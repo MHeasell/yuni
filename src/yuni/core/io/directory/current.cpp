@@ -1,16 +1,102 @@
 
-#include "../io.h"
 #include "../directory.h"
-#include "../../system/windows.hdr.h"
 #ifndef YUNI_OS_WINDOWS
 # include <unistd.h>
 #else
+# include "../../system/windows.hdr.h"
 # include <direct.h>
 # include <stdlib.h>
 # include <stdio.h>
 #endif
 
 
+namespace Yuni
+{
+namespace Private
+{
+namespace Core
+{
+namespace IO
+{
+namespace Directory
+{
+
+
+	char* CurrentDirectory()
+	{
+		# ifdef YUNI_OS_WINDOWS
+
+		char* ret = NULL;
+		const wchar_t* c = _wgetcwd(NULL, 0 /* Arbitrary value */);
+
+		const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, c, -1, NULL, 0,  NULL, NULL);
+		if (sizeRequired > 0)
+		{
+			ret = ::malloc(sizeRequired * sizeof(char) + 1);
+			if (ret)
+			{
+				if (WideCharToMultiByte(CP_UTF8, 0, c, -1, ret, sizeRequired,  NULL, NULL) > 0)
+				{
+					ret[sizeRequired] = '\0';
+				}
+				else
+				{
+					::free(ret);
+					ret = NULL;
+				}
+			}
+		}
+		::free(c);
+		return ret;
+
+		# else
+
+		return ::getcwd(NULL, 0 /* arbitrary value */);
+
+		# endif
+	}
+
+
+	
+	bool SetCurrentDirectory(const char* src, size_t srclen)
+	{
+		# ifdef YUNI_OS_WINDOWS
+		wchar_t* fsource = new wchar_t[srclen + 4];
+		int n = MultiByteToWideChar(CP_UTF8, 0, path, srclen, fsource, srclen);
+		if (n <= 0)
+			return false;
+		fsource[n]     = L'\0'; // This string must be double-null terminated
+
+		const bool r = (0 == _wchdir(fsource));
+		delete[] fsource;
+
+		return r;
+
+		# else
+		(void) srclen;
+		return (0 == ::chdir(src));
+		# endif
+	}
+
+
+	bool SetCurrentDirectoryNotZeroTerminated(const char* path, size_t length)
+	{
+		char* p = new char[length * sizeof(char) + 1];
+		memcpy(p, path, length);
+		p[length] = '\0';
+		const bool r = SetCurrentDirectory(p, length);
+		delete[] p;
+		return r;
+	}
+
+
+
+
+} // namespace Directory
+} // namespace IO
+} // namespace Core
+} // namespace Private
+} // namespace Yuni
 
 
 namespace Yuni
@@ -21,39 +107,23 @@ namespace IO
 {
 namespace Directory
 {
+namespace Current
+{
 
-
-
-	String Current()
+	String Get()
 	{
-		char path[FILENAME_MAX];
-		::memset(path, 0, FILENAME_MAX);
-		# ifdef YUNI_OS_WINDOWS
-		const char* p = _getcwd(path, FILENAME_MAX - 2);
-		# else
-		const char* p = ::getcwd(path, FILENAME_MAX - 2);
-		# endif
-		return String(p, ::strlen(p));
+		char* c = Yuni::Private::Core::IO::Directory::CurrentDirectory();
+		String current = c;
+		::free(c);
+		return current;
 	}
 
 
-	void Current(String& out)
-	{
-		char path[FILENAME_MAX];
-		::memset(path, 0, FILENAME_MAX);
-		# ifdef YUNI_OS_WINDOWS
-		const char* p = _getcwd(path, FILENAME_MAX - 2);
-		# else
-		const char* p = ::getcwd(path, FILENAME_MAX - 2);
-		# endif
-		out.clear();
-		out.append(p, ::strlen(p));
-	}
-
-
-
+} // namespace Current
 } // namespace Directory
 } // namespace IO
 } // namespace Core
 } // namespace Yuni
+
+
 
