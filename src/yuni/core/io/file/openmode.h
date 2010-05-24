@@ -8,8 +8,6 @@ namespace Core
 {
 namespace IO
 {
-namespace File
-{
 namespace OpenMode
 {
 
@@ -44,7 +42,6 @@ namespace OpenMode
 
 
 } // namespace OpenMode
-} // namespace File
 } // namespace IO
 } // namespace Core
 } // namespace Yuni

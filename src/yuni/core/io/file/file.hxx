@@ -139,27 +139,26 @@ namespace File
 
 
 	template<class StringT1, class StringT2>
-	bool Copy(const StringT1& from, const StringT2& to, bool overwrite)
+	IOError Copy(const StringT1& from, const StringT2& to, bool overwrite)
 	{
-		if (!overwrite && Core::IO::File::Exists(to))
-			return false;
+		if (!overwrite && Core::IO::Exists(to))
+			return ioErrOverwriteNotAllowed;
 
 		// Open the source file
-		Yuni::Core::IO::File::Stream fromFile(from, Yuni::Core::IO::File::OpenMode::read);
+		Yuni::Core::IO::File::Stream fromFile(from, OpenMode::read);
 		if (fromFile.opened())
 		{
-			Yuni::Core::IO::File::Stream toFile(to,
-				Yuni::Core::IO::File::OpenMode::write | Yuni::Core::IO::File::OpenMode::truncate);
+			Yuni::Core::IO::File::Stream toFile(to, OpenMode::write | OpenMode::truncate);
 			if (toFile.opened())
 			{
 				char buffer[4096];
 				size_t numRead;
-				while ((numRead = fromFile.read(buffer, sizeof(buffer))))
+				while ((numRead = fromFile.read(buffer, sizeof(buffer))) != 0)
 					toFile.write(buffer, numRead);
-				return true;
+				return ioErrNone;
 			}
 		}
-		return false;
+		return ioErrNotFound;
 	}
 
 
@@ -178,32 +177,35 @@ namespace File
 
 
 	template<class StringT1, class StringT2>
-	bool LoadContent(StringT1& out, const StringT2& filename, const uint64 hardlimit)
+	Core::IO::IOError
+	LoadFromFile(StringT1& out, const StringT2& filename, const uint64 hardlimit)
 	{
-		uint64 size;
-		if (Core::IO::File::Size(filename, size))
-		{
-			if (size)
-			{
-				if (size > hardlimit)
-				{
-					out.clear();
-					return false;
-				}
-				Yuni::Core::IO::File::Stream f(filename);
-				if (f.opened())
-				{
-					out.resize(size);
-					if (size == f.read(out))
-						return true;
-				}
-				return false;
-			}
-			out.clear();
-			return true;
-		}
 		out.clear();
-		return false;
+		Yuni::Core::IO::File::Stream f(filename);
+		if (f.opened())
+		{
+			char buffer[2096];
+			size_t numRead = 0;
+			uint64 totalRead = 0;
+			while ((numRead = f.read(buffer, sizeof(buffer))) != 0)
+			{
+				totalRead += numRead;
+				if (totalRead > hardlimit)
+				{
+					const size_t minus = totalRead - hardlimit;
+					if (minus < numRead)
+					{
+						numRead -= (totalRead - hardlimit);
+						out.append((const char*) buffer, numRead);
+					}
+					return ioErrMemoryLimit;
+				}
+				// we use the standard method `append()` to allow the use of std::string
+				out.append((const char*) buffer, numRead);
+			}
+			return ioErrNone;
+		}
+		return ioErrNotFound;
 	}
 
 
