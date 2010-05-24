@@ -1,5 +1,5 @@
 Project(Yuni-Framework)
-CMake_minimum_required(VERSION 2.6)
+CMake_minimum_required(VERSION 2.8)
 
 Message(STATUS "")
 Message(STATUS "The Yuni Framework")
