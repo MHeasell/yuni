@@ -33,7 +33,7 @@ namespace Logs
 			pOutputFilename = filename;
 			// Opening the log file
 			pFile.open(pOutputFilename,
-				Core::IO::File::OpenMode::write | Core::IO::File::OpenMode::append);
+				Core::IO::OpenMode::write | Core::IO::OpenMode::append);
 		}
 
 		String outputFilename() const
