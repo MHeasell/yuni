@@ -1,5 +1,5 @@
 Project(Yuni-Testsuite)
-CMake_minimum_required(VERSION 2.6)
+CMake_minimum_required(VERSION 2.8)
 
 Message(STATUS "")
 Message(STATUS "Testsuite for the Yuni Framework")
