@@ -200,7 +200,7 @@ namespace File
 		**
 		** 'buffer.size() * sizeof(C)' bytes will be read from the stream and store
 		** into the given buffer.
-		** Use the method 'buffer.resize()' to change the buffer size.
+		** Use the method 'buffer.resize()' to change the buffer size before calling this method.
 		**
 		** \param buffer An arbitrary buffer
 		** \return The number of bytes that have been read

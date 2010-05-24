@@ -41,10 +41,10 @@ namespace File
 	** To test if a node exists whatever its nature, you should use
 	** Core::IO::Exists() instead.
 	**
-	** \param p The folder/filename to test
+	** \param filename The folder/filename to test
 	** \return True if it exists, false otherwise
 	*/
-	template<class StringT> bool Exists(const StringT& p);
+	template<class StringT> bool Exists(const StringT& filename);
 
 
 	/*!
@@ -115,14 +115,15 @@ namespace File
 	/*!
 	** \brief Load the entire content of a file into memory
 	**
+	** If the file size is greater than @hardlimit, the content will be truncated (see 'ioErrMemoryLimit').
 	** \ingroup IOFile
 	** \param[out] out The content of the file
 	** \param filename The filename to open
 	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded
-	** \return True if the operation succeeded.
+	** \return ioErrNone if successful
 	*/
 	template<class StringT1, class StringT2>
-	bool LoadContent(StringT1& out, const StringT2& filename, const uint64 hardlimit = sizeHardLimit);
+	IOError LoadFromFile(StringT1& out, const StringT2& filename, const uint64 hardlimit = sizeHardLimit);
 
 
 	/*!
@@ -144,10 +145,10 @@ namespace File
 	** \param from The source file
 	** \param to The target file
 	** \param overwrite Overwrite the target file if already exists
-	** \return True if the operation succeeded (or if the target file already exists and `overwrite` = false), false otherwise
+	** \return ioErrNone if the operation succeeded
 	*/
 	template<class StringT1, class StringT2>
-	bool Copy(const StringT1& from, const StringT2& to, bool overwrite = true);
+	IOError Copy(const StringT1& from, const StringT2& to, bool overwrite = true);
 
 
 	/*!

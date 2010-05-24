@@ -99,6 +99,18 @@ namespace IO
 	};
 
 
+	enum IOError
+	{
+		//! No error
+		ioErrNone = 0,
+		//! The file could not be loaded - not found or permission error
+		ioErrNotFound,
+		//! A hard memory limit has been reached
+		ioErrMemoryLimit,
+		//! It is impossible to overwrite an eisting file
+		ioErrOverwriteNotAllowed,
+	};
+
 
 	/*!
 	** \brief Extract the path part of a filename
