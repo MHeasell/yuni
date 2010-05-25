@@ -165,7 +165,7 @@ namespace Directory
 		{
 			typename ThreadingPolicy::MutexLocker locker(*this);
 			return (pThread)
-				? (Thread::errNone == pThread->stop(timeout))
+				? (Yuni::Thread::IThread::errNone == pThread->stop(timeout))
 				: false;
 		}
 		return true;
