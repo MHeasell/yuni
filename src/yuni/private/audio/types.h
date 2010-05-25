@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_TYPES_H__
-# define __YUNI_AUDIO_TYPES_H__
+#ifndef __YUNI_PRIVATE_AUDIO_TYPES_H__
+# define __YUNI_PRIVATE_AUDIO_TYPES_H__
 
 namespace Yuni
 {
@@ -42,4 +42,4 @@ namespace Audio
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_AUDIO_TYPES_H__
+#endif // __YUNI_PRIVATE_AUDIO_TYPES_H__

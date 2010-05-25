@@ -30,36 +30,36 @@ namespace Audio
 				// this packet belongs to
 				for (size_t i = 0; i < file->StreamsSize; ++i, ++iter)
 				{
-					if ((*iter)->StreamIdx == packet.stream_index)
+					if ((*iter)->StreamIdx != packet.stream_index)
+						continue;
+
+					size_t idx = (*iter)->DataSize;
+
+					// Found the stream. Grow the input data buffer as needed to
+					// hold the new packet's data. Additionally, some ffmpeg codecs
+					// need some padding so they don't overread the allocated
+					// buffer
+					if (idx + packet.size > (*iter)->DataSizeMax)
 					{
-						size_t idx = (*iter)->DataSize;
-
-						// Found the stream. Grow the input data buffer as needed to
-						// hold the new packet's data. Additionally, some ffmpeg codecs
-						// need some padding so they don't overread the allocated
-						// buffer
-						if (idx + packet.size > (*iter)->DataSizeMax)
-						{
-							char* temp = (char*)realloc((*iter)->Data, idx + packet.size +
-														FF_INPUT_BUFFER_PADDING_SIZE);
-							if (!temp)
-								break;
-							(*iter)->Data = temp;
-							(*iter)->DataSizeMax = idx + packet.size;
-						}
-
-						// Copy the packet and free it
-						memcpy(&(*iter)->Data[idx], packet.data, packet.size);
-						(*iter)->DataSize += packet.size;
-
-						// Return if this stream is what we needed a packet for
-						if (streamidx == (*iter)->StreamIdx)
-						{
-							av_free_packet(&packet);
-							return;
-						}
-						break;
+						char* temp = (char*)realloc((*iter)->Data, idx + packet.size +
+							FF_INPUT_BUFFER_PADDING_SIZE);
+						if (!temp)
+							break;
+						(*iter)->Data = temp;
+						(*iter)->DataSizeMax = idx + packet.size;
 					}
+
+					// Copy the packet and free it
+					memcpy(&(*iter)->Data[idx], packet.data, packet.size);
+					(*iter)->DataSize += packet.size;
+
+					// Return if this stream is what we needed a packet for
+					if (streamidx == (*iter)->StreamIdx)
+					{
+						av_free_packet(&packet);
+						return;
+					}
+					break;
 				}
 				// Free the packet and look for another
 				av_free_packet(&packet);

@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_AV_H__
-# define __YUNI_AUDIO_AV_H__
+#ifndef __YUNI_PRIVATE_AUDIO_AV_H__
+# define __YUNI_PRIVATE_AUDIO_AV_H__
 
 # include "../../yuni.h"
 
@@ -73,4 +73,4 @@ namespace Audio
 
 #include "av.hxx"
 
-#endif // __YUNI_AUDIO_AV_H__
+#endif // __YUNI_PRIVATE_AUDIO_AV_H__

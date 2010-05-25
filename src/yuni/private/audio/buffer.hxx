@@ -13,7 +13,7 @@ namespace Audio
 
 	template<unsigned int BufferSizeT>
 	inline Buffer<BufferSizeT>::Buffer(AudioStream* stream)
-		:pStream(stream)
+		:pStream(stream), pBufferCount(0)
 	{
 	}
 
@@ -27,8 +27,10 @@ namespace Audio
 	{
 		if (!pStream)
 			return false;
-		OpenAL::CreateBuffers(BufferCount, pIDs);
-		for (unsigned int i = 0; i < BufferCount; ++i)
+ 		pBufferCount = (pStream->DataSize > (MaxBufferCount - 1) * BufferSize)
+ 			? (size_t)MaxBufferCount : (pStream->DataSize / BufferSize + 1);
+		OpenAL::CreateBuffers(pBufferCount, pIDs);
+		for (unsigned int i = 0; i < pBufferCount; ++i)
 		{
 			// Make sure we get some data to give to the buffer
 			size_t count = AV::GetAudioData(pStream, pData.data(), BufferSize);
@@ -73,7 +75,8 @@ namespace Audio
 	template<unsigned int BufferSizeT>
 	bool Buffer<BufferSizeT>::destroyDispatched()
 	{
-		OpenAL::DestroyBuffers(BufferCount, pIDs);
+		OpenAL::DestroyBuffers(pBufferCount, pIDs);
+		pBufferCount = 0;
 		AV::CloseFile(pStream->parent);
 		return true;
 	}
