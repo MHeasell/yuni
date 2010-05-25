@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_OPENAL_H__
-# define __YUNI_AUDIO_OPENAL_H__
+#ifndef __YUNI_PRIVATE_AUDIO_OPENAL_H__
+# define __YUNI_PRIVATE_AUDIO_OPENAL_H__
 
 # include "../../yuni.h"
 # include <list>
@@ -103,4 +103,4 @@ namespace Audio
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_AUDIO_OPENAL_H__
+#endif // __YUNI_PRIVATE_AUDIO_OPENAL_H__

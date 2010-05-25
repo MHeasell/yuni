@@ -27,7 +27,7 @@ namespace Audio
 	public:
 		enum // anonymous
 		{
-			BufferCount = 4,
+			MaxBufferCount = 4,
 			BufferSize = BufferSizeT
 		}; // enum anonymous
 
@@ -50,8 +50,11 @@ namespace Audio
 		//! The audio stream contains the link to the file and the data
 		AudioStream* pStream;
 
+		//! Actual number of buffers
+		unsigned int pBufferCount;
+
 		//! Identifiers of the OpenAL buffers used
-		unsigned int pIDs[BufferCount];
+		unsigned int pIDs[MaxBufferCount];
 
 		//! Buffer for storing raw data
 		CustomString<BufferSize, false, false> pData;
