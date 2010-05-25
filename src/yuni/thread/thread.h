@@ -51,16 +51,16 @@ namespace Thread
 		//! Return error status
 		enum Error
 		{
-			//! The operation failed for an unkown reason
-			errUnkown = 0,
 			//! No error, the operation succeeded
-			errNone = 1,
+			errNone = 0,
 			//! A timeout occured
 			errTimeout,
 			//! Impossible to create the new thread
 			errThreadCreation,
 			//! The onStarting handler returned false.
-			errAborted
+			errAborted,
+			//! The operation failed for an unkown reason
+			errUnkown
 		};
 		enum
 		{

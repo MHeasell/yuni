@@ -163,11 +163,10 @@ namespace Directory
 	{
 		if (detached)
 		{
-			// Lock
 			typename ThreadingPolicy::MutexLocker locker(*this);
-			if (pThread)
-				return pThread->stop(timeout);
-			return false;
+			return (pThread)
+				? (Thread::errNone == pThread->stop(timeout))
+				: false;
 		}
 		return true;
 	}
