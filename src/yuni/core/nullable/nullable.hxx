@@ -140,7 +140,7 @@ namespace Yuni
 		return pHolder.empty();
 	}
 
-	
+
 	template<class T, class Alloc>
 	inline bool Nullable<T,Alloc>::null() const
 	{
@@ -328,62 +328,10 @@ namespace Yuni
 	}
 
 
-	template<class T, class Alloc>
-	inline Nullable<T,Alloc>& Nullable<T,Alloc>::operator += (const Nullable<T,Alloc>& rhs)
-	{
-		if (!rhs.empty())
-			pHolder.reference() += rhs.pHolder.data();
-		return *this;
-	}
-
-
-	template<class T, class Alloc>
-	inline Nullable<T,Alloc>& Nullable<T,Alloc>::operator -= (const Nullable<T,Alloc>& rhs)
-	{
-		if (!rhs.empty())
-			pHolder.reference() -= rhs.pHolder.data();
-		return *this;
-	}
-
-	template<class T, class Alloc>
-	inline Nullable<T,Alloc>& Nullable<T,Alloc>::operator *= (const Nullable<T,Alloc>& rhs)
-	{
-		if (!rhs.empty())
-			pHolder.reference() *= rhs.pHolder.data();
-		return *this;
-	}
-
-	template<class T, class Alloc>
-	inline Nullable<T,Alloc>& Nullable<T,Alloc>::operator /= (const Nullable<T,Alloc>& rhs)
-	{
-		if (!rhs.empty())
-			pHolder.reference() /= rhs.pHolder.data();
-		return *this;
-	}
-
-	template<class T, class Alloc>
-	inline Nullable<T,Alloc>& Nullable<T,Alloc>::operator |= (const Nullable<T,Alloc>& rhs)
-	{
-		if (!rhs.empty())
-			pHolder.reference() |= rhs.pHolder.data();
-		return *this;
-	}
-
-	template<class T, class Alloc>
-	inline Nullable<T,Alloc>& Nullable<T,Alloc>::operator &= (const Nullable<T,Alloc>& rhs)
-	{
-		if (!rhs.empty())
-			pHolder.reference() &= rhs.pHolder.data();
-		return *this;
-	}
-
-
-
 
 
 
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_NULLABLE_NULLABLE_HXX__
 
