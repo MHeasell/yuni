@@ -1,5 +1,5 @@
 
-#include <yuni/core/string.h>
+#include <yuni/core/customstring.h>
 // Keep <iostream> after any includes of the yuni library
 #include <iostream>
 
@@ -9,6 +9,6 @@
 
 int main(void)
 {
-	StringTest<char>::Run();
+	StringTest::Run();
 	return 0;
 }

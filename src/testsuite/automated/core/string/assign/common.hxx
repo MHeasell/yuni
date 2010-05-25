@@ -3,10 +3,9 @@
 
 
 
-template<typename C>
 struct StringTest
 {
-	typedef Yuni::StringBase<C>  TestString;
+	typedef Yuni::CustomString<>  TestString;
 
 	static void WithCStar()
 	{
@@ -18,7 +17,7 @@ struct StringTest
 		}
 		{
 			Yuni::Test::Checkpoint checkpoint("With a C*");
-			const C* cstr = "Hello world !";
+			const char* cstr = "Hello world !";
 			TestString a;
 			a = cstr;
 			std::cout << a << std::endl;
@@ -37,9 +36,9 @@ struct StringTest
 
 	static void StdString()
 	{
-		Yuni::Test::Checkpoint checkpoint("With a std::string");
+		Yuni::Test::Checkpoint checkpoint("With an std::string");
 		TestString a;
-		std::basic_string<C> b("Dummy text");
+		std::string b("Dummy text");
 		a = b;
 		std::cout << a << std::endl;
 	}
@@ -52,13 +51,30 @@ struct StringTest
 		std::cout << a << std::endl;
 	}
 
+	static void WithUnsignedLong()
+	{
+		Yuni::Test::Checkpoint checkpoint("With an unsigned long");
+		TestString a;
+		a = 42ul;
+		std::cout << a << std::endl;
+	}
 
+	static void WithHexadecimal()
+	{
+		Yuni::Test::Checkpoint checkpoint("With a hexadecimal number");
+		TestString a;
+		a = 0x2A;
+		std::cout << a << std::endl;
+	}
+	
 	static void Run()
 	{
 		WithCStar();
 		AnotherString();
 		StdString();
 		WithInt();
+		WithUnsignedLong();
+		WithHexadecimal();
 	}
 
 }; // class StringTest

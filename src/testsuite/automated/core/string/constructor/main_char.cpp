@@ -9,6 +9,6 @@
 
 int main(void)
 {
-	StringTest<char>::Run();
+	StringTest::Run();
 	return 0;
 }

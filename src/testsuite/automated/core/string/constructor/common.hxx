@@ -6,10 +6,9 @@
 	std::cout << X << " : `" << A << "`" << std::endl
 
 
-template<typename C>
 struct StringTest
 {
-	typedef Yuni::StringBase<C>  TestString;
+	typedef Yuni::CustomString<>  TestString;
 
 	static void Simple()
 	{
@@ -27,12 +26,12 @@ struct StringTest
 		}
 		{
 			Yuni::Test::Checkpoint checkpoint("Constructor with a C*");
-			const C* cstr = "Hello world !";
+			const char* cstr = "Hello world !";
 			TestString b(cstr);
 			PRINT("From C*", b);
 		}
 	}
-
+	
 	static void Copy()
 	{
 		Yuni::Test::Checkpoint checkpoint("Copy Constructor");
@@ -55,6 +54,7 @@ struct StringTest
 		Simple();
 		FromCStar();
 		Copy();
+		From<std::string>("Constructor from std::string", std::string("An STL std::string"));
 		From<int>("Constructor from int", -42);
 		From<unsigned int>("Constructor from unsigned int", 4294967286U);
 		From<float>("Constructor from float", 12.2f);
