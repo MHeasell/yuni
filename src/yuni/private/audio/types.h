@@ -18,6 +18,7 @@ namespace Audio
 		int StreamIdx;
 
 		unsigned int Format;
+		int64_t Size;
 
 		char* Data;
 		size_t DataSize;

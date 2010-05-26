@@ -25,11 +25,12 @@ namespace Audio
 	template<unsigned int BufferSizeT>
 	bool Buffer<BufferSizeT>::prepareDispatched(unsigned int source)
 	{
-		if (!pStream)
+		if (!pStream || !pStream->Size)
 			return false;
- 		pBufferCount = (pStream->DataSize > (MaxBufferCount - 1) * BufferSize)
- 			? (size_t)MaxBufferCount : (pStream->DataSize / BufferSize + 1);
-		OpenAL::CreateBuffers(pBufferCount, pIDs);
+ 		pBufferCount = (pStream->Size > (MaxBufferCount - 1) * BufferSize)
+ 			? (size_t)MaxBufferCount : ((unsigned int)pStream->Size / BufferSize + 1);
+		if (!OpenAL::CreateBuffers(pBufferCount, pIDs))
+			return false;
 		for (unsigned int i = 0; i < pBufferCount; ++i)
 		{
 			// Make sure we get some data to give to the buffer
@@ -38,10 +39,12 @@ namespace Audio
 				return false;
 
 			// Buffer the data with OpenAL
-			OpenAL::SetBufferData(pIDs[i], pStream->Format, pData.data(), count,
-				pStream->CodecContext->sample_rate);
+			if (!OpenAL::SetBufferData(pIDs[i], pStream->Format, pData.data(),
+				count, pStream->CodecContext->sample_rate))
+				return false;
 			// Queue the buffers onto the source
-			OpenAL::QueueBufferToSource(pIDs[i], source);
+			if (!OpenAL::QueueBufferToSource(pIDs[i], source))
+				return false;
 		}
 		return true;
 	}
@@ -66,9 +69,11 @@ namespace Audio
 			return false;
 
 		// Buffer the data with OpenAL and queue the buffer onto the source
-		OpenAL::SetBufferData(buffer, pStream->Format, pData.data(), count,
-			pStream->CodecContext->sample_rate);
-		OpenAL::QueueBufferToSource(buffer, source);
+		if (!OpenAL::SetBufferData(buffer, pStream->Format, pData.data(), count,
+			pStream->CodecContext->sample_rate))
+			return false;
+		if (!OpenAL::QueueBufferToSource(buffer, source))
+			return false;
 		return true;
 	}
 

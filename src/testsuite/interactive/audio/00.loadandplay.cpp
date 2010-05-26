@@ -45,7 +45,7 @@ public:
 			audio.loadSound(*it);
 			audio.playSound(sourceName, *it);
 		}
-		Yuni::Sleep(3);
+		Yuni::Sleep(30);
 	}
 
 private:

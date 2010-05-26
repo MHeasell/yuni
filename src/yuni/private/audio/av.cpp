@@ -141,6 +141,11 @@ namespace Audio
 				return NULL;
 			}
 
+			// Divide by 8 to have bytes instead of bits,
+			// and divide by 1000 to compensate for bit_rate being in the thousands
+			int64_t frameSize = stream->CodecContext->bit_rate * stream->CodecContext->sample_rate / 8000;
+			stream->Size = frameSize * file->FormatContext->duration / AV_TIME_BASE;
+
 			// Allocate space for the decoded data to be stored in before it
 			// gets passed to the app
 			stream->DecodedData = (char*)malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE);
