@@ -67,7 +67,7 @@ namespace Audio
 		** \param[in] nbBuffers Number of buffers to create
 		** \param[out] An array of IDs of the created buffers
 		*/
-		static void CreateBuffers(int nbBuffers, unsigned int* buffers);
+		static bool CreateBuffers(int nbBuffers, unsigned int* buffers);
 
 		static void DestroyBuffers(int nbBuffers, unsigned int* buffers);
 
@@ -84,17 +84,17 @@ namespace Audio
 
 		static bool PlaySource(unsigned int source);
 		static bool IsSourcePlaying(unsigned int source);
-		static void ModifySource(unsigned int source, float pitch, float gain,
+		static bool ModifySource(unsigned int source, float pitch, float gain,
 			bool attenuate, bool loop);
-		static void MoveSource(unsigned int source, const Gfx::Point3D<>& position,
+		static bool MoveSource(unsigned int source, const Gfx::Point3D<>& position,
 			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
 
-		static void BindBufferToSource(unsigned int buffer, unsigned int source);
+		static bool BindBufferToSource(unsigned int buffer, unsigned int source);
 		static void UnbindBufferFromSource(unsigned int source);
-		static void QueueBufferToSource(unsigned int buffer, unsigned int source);
+		static bool QueueBufferToSource(unsigned int buffer, unsigned int source);
 		static unsigned int UnqueueBufferFromSource(unsigned int source);
 
-		static void SetBufferData(unsigned int buffer, int format, void* data,
+		static bool SetBufferData(unsigned int buffer, int format, void* data,
 			size_t count, int rate);
 
 	}; // OpenAL

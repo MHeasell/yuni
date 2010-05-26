@@ -22,12 +22,15 @@ namespace Audio
 		if (!pReady)
 		{
 			if (!prepareDispatched())
+			{
+				std::cerr << "Source preparation failed !" << std::endl;
 				return false;
+			}
 		}
 
 		if (!buffer || !buffer->valid())
 		{
-			std::cout << "Invalid Buffer !" << std::endl;
+			std::cerr << "Invalid Buffer !" << std::endl;
 			return false;
 		}
 
@@ -59,9 +62,16 @@ namespace Audio
 			return false;
 		if (pModified)
 		{
-			Private::Audio::OpenAL::MoveSource(pID, pPosition, pVelocity, pDirection);
-			Private::Audio::OpenAL::ModifySource(pID, DefaultPitch, pGain, DefaultAttenuation,
-				pLoop);
+			if (!Private::Audio::OpenAL::MoveSource(pID, pPosition, pVelocity, pDirection))
+			{
+				std::cerr << "Source position update failed !" << std::endl;
+				return false;
+			}
+			if (!Private::Audio::OpenAL::ModifySource(pID, DefaultPitch, pGain, DefaultAttenuation, pLoop))
+			{
+				std::cerr << "Source characteristics update failed !" << std::endl;
+				return false;
+			}
 		}
 		if (NULL != pBuffer)
 			pBuffer->updateDispatched(pID);

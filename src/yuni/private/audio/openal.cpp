@@ -108,9 +108,11 @@ namespace Audio
 		alDistanceModel(modelName);
 	}
 
-	void OpenAL::CreateBuffers(int nbBuffers, unsigned int* buffers)
+	bool OpenAL::CreateBuffers(int nbBuffers, unsigned int* buffers)
 	{
+		alGetError();
 		alGenBuffers(nbBuffers, buffers);
+		return alGetError() == AL_NO_ERROR;
 	}
 
 	void OpenAL::DestroyBuffers(int nbBuffers, unsigned int* buffers)
@@ -128,6 +130,7 @@ namespace Audio
 	unsigned int OpenAL::CreateSource(Gfx::Point3D<> position, Gfx::Vector3D<> velocity,
 		Gfx::Vector3D<> direction, float pitch, float gain, bool attenuate, bool loop)
 	{
+		alGetError();
 		unsigned int source;
 		alGenSources(1, &source);
 		if (alGetError() != AL_NO_ERROR)
@@ -139,8 +142,16 @@ namespace Audio
 		alSourcef(source, AL_MAX_GAIN, 1.5f); // Max amplification
 		alSourcef(source, AL_MAX_DISTANCE, 10000.0f);
 
-		MoveSource(source, position, velocity, direction);
-		ModifySource(source, pitch, gain, attenuate, loop);
+		if (!MoveSource(source, position, velocity, direction))
+		{
+			DestroySource(source);
+			return 0;
+		}
+		if (!ModifySource(source, pitch, gain, attenuate, loop))
+		{
+			DestroySource(source);
+			return 0;
+		}
 		return source;
 	}
 
@@ -151,6 +162,7 @@ namespace Audio
 
 	bool OpenAL::PlaySource(ALuint source)
 	{
+		alGetError();
 		alSourceRewind(source);
 		alSourcePlay(source);
 		return alGetError() == AL_NO_ERROR;
@@ -163,16 +175,18 @@ namespace Audio
 		return state == AL_PLAYING;
 	}
 
-	void OpenAL::ModifySource(unsigned int source, float pitch, float gain,
+	bool OpenAL::ModifySource(unsigned int source, float pitch, float gain,
 		bool attenuate, bool loop)
 	{
+		alGetError();
 		alSourcef(source, AL_PITCH, pitch);
 		alSourcef(source, AL_GAIN, gain);
 		alSourcei(source, AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
 		alSourcef(source, AL_ROLLOFF_FACTOR, attenuate ? 1.0f : 0.0f);
+		return alGetError() == AL_NO_ERROR;
 	}
 
-	void OpenAL::MoveSource(unsigned int source, const Gfx::Point3D<>& position,
+	bool OpenAL::MoveSource(unsigned int source, const Gfx::Point3D<>& position,
 		const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction)
 	{
 		// Uncomment this if you want the position / velocity / cone /
@@ -182,14 +196,18 @@ namespace Audio
 		float pos[3] = { position.x, position.y, position.z};
 		float vel[3] = { velocity.x, velocity.y, velocity.z};
 		float dir[3] = { direction.x, direction.y, direction.z};
+		alGetError();
 		alSourcefv(source, AL_POSITION, pos);
 		alSourcefv(source, AL_VELOCITY, vel);
 		alSourcefv(source, AL_DIRECTION, dir);
+		return alGetError() == AL_NO_ERROR;
 	}
 
-	void OpenAL::BindBufferToSource(unsigned int buffer, unsigned int source)
+	bool OpenAL::BindBufferToSource(unsigned int buffer, unsigned int source)
 	{
+		alGetError();
 		alSourcei(source, AL_BUFFER, (int)buffer);
+		return alGetError() == AL_NO_ERROR;
 	}
 
 	void OpenAL::UnbindBufferFromSource(unsigned int source)
@@ -197,9 +215,11 @@ namespace Audio
 		alSourcei(source, AL_BUFFER, 0);
 	}
 
-	void OpenAL::QueueBufferToSource(unsigned int buffer, unsigned int source)
+	bool OpenAL::QueueBufferToSource(unsigned int buffer, unsigned int source)
 	{
+		alGetError();
 		alSourceQueueBuffers(source, 1, &buffer);
+		return alGetError() == AL_NO_ERROR;
 	}
 
 	unsigned int OpenAL::UnqueueBufferFromSource(unsigned int source)
@@ -209,9 +229,11 @@ namespace Audio
 		return buf;
 	}
 
-	void OpenAL::SetBufferData(unsigned int buffer, int format, void* data, size_t count, int rate)
+	bool OpenAL::SetBufferData(unsigned int buffer, int format, void* data, size_t count, int rate)
 	{
+		alGetError();
  		alBufferData(buffer, format, data, count, rate);
+		return alGetError() == AL_NO_ERROR;
 	}
 
 
