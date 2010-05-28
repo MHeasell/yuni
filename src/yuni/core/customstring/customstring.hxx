@@ -120,7 +120,7 @@ namespace Yuni
 			static inline void Perform(const U& u, CustomStringT& customstring)
 			{
 				typedef typename Static::Remove::Const<U>::Type UType;
-				Yuni::Extension::CustomString::Assign<CustomStringT, UType>::Do(customstring, u);
+				Yuni::Extension::CustomString::Assign<CustomStringT, UType>::Perform(customstring, u);
 			}
 		};
 
@@ -140,7 +140,7 @@ namespace Yuni
 			static inline void Perform(const U& u, CustomStringT& customstring)
 			{
 				typedef typename Static::Remove::Const<U>::Type UType;
-				Yuni::Extension::CustomString::Append<CustomStringT, UType>::Do(customstring, u);
+				Yuni::Extension::CustomString::Append<CustomStringT, UType>::Perform(customstring, u);
 			}
 		};
 
@@ -266,7 +266,8 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
 
 		if (AncestorType::size)
-			Yuni::Extension::CustomString::Fill<CustomString, UType>::Do(AncestorType::data, AncestorType::size, pattern);
+			Yuni::Extension::CustomString::Fill<CustomString, UType>::Perform(
+				AncestorType::data, AncestorType::size, pattern);
 	}
 
 

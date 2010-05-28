@@ -56,7 +56,6 @@ namespace CustomString
 
 
 
-	
 
 	/*!
 	** \brief CustomString<>, with the same POD type

@@ -21,7 +21,7 @@ namespace CustomString
 	struct Fill<CustomStringT, char>
 	{
 		typedef char S;
-		static void Do(typename CustomStringT::Type* data, typename CustomStringT::Size size, const S rhs)
+		static void Perform(typename CustomStringT::Type* data, typename CustomStringT::Size size, const S rhs)
 		{
 			(void)::memset(data, rhs, size);
 		}
@@ -31,7 +31,7 @@ namespace CustomString
 	struct Fill<CustomStringT, wchar_t>
 	{
 		typedef wchar_t S;
-		static void Do(typename CustomStringT::Type* data, typename CustomStringT::Size size, const S rhs)
+		static void Perform(typename CustomStringT::Type* data, typename CustomStringT::Size size, const S rhs)
 		{
 			(void)::wmemset(data, rhs, size);
 		}
@@ -42,7 +42,7 @@ namespace CustomString
 	struct Fill<CustomStringT, typename CustomStringT::Type*>
 	{
 		typedef typename CustomStringT::Type C;
-		static void Do(typename CustomStringT::Type* data, typename CustomStringT::Size size, const C* pattern)
+		static void Perform(typename CustomStringT::Type* data, typename CustomStringT::Size size, const C* pattern)
 		{
 			// Alias for the size type
 			typedef typename CustomStringT::Size Size;
@@ -52,7 +52,7 @@ namespace CustomString
 			// If equals to 1, it is merely a single char
 			if (patternSize == 1)
 			{
-				Fill<CustomStringT, typename CustomStringT::Type>::Do(data, size, *pattern);
+				Fill<CustomStringT, typename CustomStringT::Type>::Perform(data, size, *pattern);
 				return;
 			}
 			// We have to copy N times the pattern

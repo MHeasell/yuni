@@ -33,7 +33,7 @@ namespace CustomString
 	{
 		typedef typename CustomStringT::Type TypeC;
 		typedef typename Static::Remove::Const<TypeC>::Type C;
-		static void Do(CustomStringT& s, const C* rhs)
+		static void Perform(CustomStringT& s, const C* rhs)
 		{
 			if (rhs)
 				s.appendWithoutChecking(rhs, Yuni::Traits::Length<C*,typename CustomStringT::Size>::Value(rhs));
@@ -45,7 +45,7 @@ namespace CustomString
 	struct Append<CustomStringT, char[N]>
 	{
 		typedef typename CustomStringT::Type C;
-		static void Do(CustomStringT& s, const C rhs[N])
+		static void Perform(CustomStringT& s, const C rhs[N])
 		{
 			if (N > 0)
 			{
@@ -61,7 +61,7 @@ namespace CustomString
 	struct Append<CustomStringT, char>
 	{
 		typedef typename CustomStringT::Type C;
-		static void Do(CustomStringT& s, const C rhs)
+		static void Perform(CustomStringT& s, const C rhs)
 		{
 			s.appendWithoutChecking(rhs);
 		}
@@ -72,7 +72,7 @@ namespace CustomString
 	template<class CustomStringT>
 	struct Append<CustomStringT, Yuni::NullPtr>
 	{
-		static void Do(CustomStringT& s, const Yuni::NullPtr&)
+		static void Perform(CustomStringT& s, const Yuni::NullPtr&)
 		{ /* Do nothing */ }
 	};
 
@@ -81,7 +81,7 @@ namespace CustomString
 	template<class CustomStringT>
 	struct Append<CustomStringT, bool>
 	{
-		static void Do(CustomStringT& s, const bool rhs)
+		static void Perform(CustomStringT& s, const bool rhs)
 		{
 			if (rhs)
 				s.appendWithoutChecking("true", 4);
@@ -95,7 +95,7 @@ namespace CustomString
 	template<class CustomStringT>
 	struct Append<CustomStringT, void*>
 	{
-		static void Do(CustomStringT& s, const void* rhs)
+		static void Perform(CustomStringT& s, const void* rhs)
 		{
 			typename CustomStringT::Type buffer[32];
 			// On Windows, it may return a negative value
@@ -113,7 +113,7 @@ namespace CustomString
 	template<class CustomStringT> \
 	struct Append<CustomStringT, TYPE> \
 	{ \
-		static void Do(CustomStringT& s, const TYPE rhs) \
+		static void Perform(CustomStringT& s, const TYPE rhs) \
 		{ \
 			typename CustomStringT::Type buffer[BUFSIZE]; \
 			/* On Windows, it may returns a negative value */ \
@@ -129,7 +129,7 @@ namespace CustomString
 	template<class CustomStringT> \
 	struct Append<CustomStringT, TYPE> \
 	{ \
-		static void Do(CustomStringT& s, const TYPE rhs) \
+		static void Perform(CustomStringT& s, const TYPE rhs) \
 		{ \
 			Yuni::Private::CustomStringImpl::From<Math::Base::Decimal, TYPE>::AppendTo(s, rhs); \
 		} \
