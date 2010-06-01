@@ -54,13 +54,13 @@ namespace Audio
 		}
 		pBuffers.clear();
 
-		// Close OpenAL sources properly
-		Source::Map::iterator sEnd = pSources.end();
-		for (Source::Map::iterator it = pSources.begin(); it != sEnd; ++it)
+		// Close OpenAL emitters properly
+		Emitter::Map::iterator sEnd = pEmitters.end();
+		for (Emitter::Map::iterator it = pEmitters.begin(); it != sEnd; ++it)
 		{
 			Private::Audio::OpenAL::DestroySource(it->second->id());
 		}
-		pSources.clear();
+		pEmitters.clear();
 		// Close OpenAL
 		Yuni::Bind<bool()> callback;
 		callback.bind(&Private::Audio::OpenAL::Close);
@@ -133,8 +133,8 @@ namespace Audio
 
 	bool QueueService::updateDispatched()
 	{
-		Source::Map::iterator end = pSources.end();
-		for (Source::Map::iterator it = pSources.begin(); it != end; ++it)
+		Emitter::Map::iterator end = pEmitters.end();
+		for (Emitter::Map::iterator it = pEmitters.begin(); it != end; ++it)
 			it->second->updateDispatched();
 		return true;
 	}

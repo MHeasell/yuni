@@ -20,22 +20,15 @@ ENDIF (WIN32 OR WIN64)
 
 
 Set(SRC_AUDIO
-#		audio/sound.h
-#		audio/sound.hxx
-#		audio/sound.cpp
-#		audio/sound3D.h
-#		audio/sound3D.cpp
 		audio/queueservice.h
 		audio/queueservice.hxx
 		audio/queueservice.cpp
 		audio/loop.h
 		audio/loop.cpp
-#		audio/music.h
-#		audio/music.cpp
 #		audio/playlist.h
-		audio/source.h
-		audio/source.hxx
-		audio/source.cpp
+		audio/emitter.h
+		audio/emitter.hxx
+		audio/emitter.cpp
 		private/audio/buffer.h
 		private/audio/buffer.hxx
 		private/audio/types.h

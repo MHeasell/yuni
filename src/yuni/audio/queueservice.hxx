@@ -26,7 +26,7 @@ namespace Audio
 
 
 	template<typename StringT1, typename StringT2>
-	bool QueueService::playSound(const StringT1& source, const StringT2& sound)
+	bool QueueService::playSound(const StringT1& emitter, const StringT2& sound)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pReady)
@@ -41,20 +41,20 @@ namespace Audio
 		}
 		Private::Audio::Buffer<>::Ptr buffer(pBuffers[soundStr]);
 
-		String sourceStr(source);
-		if (pSources.find(sourceStr) == pSources.end())
+		String emitterStr(emitter);
+		if (pEmitters.find(emitterStr) == pEmitters.end())
 		{
-			std::cerr << "QueueService::playSound : no source with name \"" << source
+			std::cerr << "QueueService::playSound : no emitter with name \"" << emitter
 					  << "\" could be found !" << std::endl;
 			return false;
 		}
-		Source::Ptr sourcePtr(pSources[sourceStr]);
+		Emitter::Ptr emitterPtr(pEmitters[emitterStr]);
 
 		// Here we would like to do as below: a template specialization to avoid the useless
 		// String constructor call when StringT == String.
 		// However, it would require method template partial specialization :/
 		Audio::Loop::RequestType callback;
- 		callback.bind(sourcePtr, &Source::playSoundDispatched, buffer);
+ 		callback.bind(emitterPtr, &Emitter::playSoundDispatched, buffer);
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
 
@@ -63,25 +63,25 @@ namespace Audio
 
 
 	template<typename StringT>
-	bool QueueService::addSource(const StringT& sourceName, bool loop)
+	bool QueueService::addEmitter(const StringT& emitterName, bool loop)
 	{
-		return addSource(String(sourceName), loop);
+		return addEmitter(String(emitterName), loop);
 	}
 
 	template<>
-	inline bool QueueService::addSource<String>(const String& sourceName, bool loop)
+	inline bool QueueService::addEmitter<String>(const String& emitterName, bool loop)
 	{
-		Source::Ptr newSource(new Source(loop));
+		Emitter::Ptr newEmitter(new Emitter(loop));
 
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			if (!pReady)
 				return false;
 
-			pSources[sourceName] = newSource;
+			pEmitters[emitterName] = newEmitter;
 		}
 		Audio::Loop::RequestType callback;
- 		callback.bind(newSource, &Source::prepareDispatched);
+ 		callback.bind(newEmitter, &Emitter::prepareDispatched);
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
 
@@ -89,19 +89,19 @@ namespace Audio
 	}
 
 	template<typename StringT>
-	bool QueueService::addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
+	bool QueueService::addEmitter(const StringT& emitterName, const Gfx::Point3D<>& position,
 		bool loop = false)
 	{
-		Source::Ptr newSource(new Source(position, loop));
+		Emitter::Ptr newEmitter(new Emitter(position, loop));
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			if (!pReady)
 				return false;
 
-			pSources[String(sourceName)] = newSource;
+			pEmitters[String(emitterName)] = newEmitter;
 		}
 		Audio::Loop::RequestType callback;
- 		callback.bind(newSource, &Source::prepareDispatched);
+ 		callback.bind(newEmitter, &Emitter::prepareDispatched);
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
 
@@ -109,20 +109,20 @@ namespace Audio
 	}
 
 	template<typename StringT>
-	bool QueueService::addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
+	bool QueueService::addEmitter(const StringT& emitterName, const Gfx::Point3D<>& position,
 		const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction, bool loop = false)
 	{
-		Source::Ptr newSource(new Source(position, velocity, direction, loop));
+		Emitter::Ptr newEmitter(new Emitter(position, velocity, direction, loop));
 
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			if (!pReady)
 				return false;
 
-			pSources[String(sourceName)] = newSource;
+			pEmitters[String(emitterName)] = newEmitter;
 		}
 		Audio::Loop::RequestType callback;
- 		callback.bind(newSource, &Source::prepareDispatched);
+ 		callback.bind(newEmitter, &Emitter::prepareDispatched);
 		// Dispatching...
  		pAudioLoop.dispatch(callback);
 
@@ -131,17 +131,17 @@ namespace Audio
 
 
 	template<typename StringT>
-	bool QueueService::moveSource(const StringT& sourceName, const Gfx::Point3D<>& position)
+	bool QueueService::moveEmitter(const StringT& emitterName, const Gfx::Point3D<>& position)
 	{
-		String sourceStr = sourceName;
-		return moveSource(sourceStr, position);
+		String emitterStr = emitterName;
+		return moveEmitter(emitterStr, position);
 	}
 
 	template<>
-	inline bool QueueService::moveSource<String>(const String& sourceStr, const Gfx::Point3D<>& position)
+	inline bool QueueService::moveEmitter<String>(const String& emitterStr, const Gfx::Point3D<>& position)
 	{
-		Source::Map::iterator it = pSources.find(sourceStr);
-		if (it == pSources.end())
+		Emitter::Map::iterator it = pEmitters.find(emitterStr);
+		if (it == pEmitters.end())
 			return false;
  		it->second->position(position);
 		return true;

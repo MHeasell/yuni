@@ -1,6 +1,6 @@
 
 #include "../core/math.h"
-#include "source.h"
+#include "emitter.h"
 #include "../private/audio/av.h"
 #include "../private/audio/openal.h"
 
@@ -10,22 +10,19 @@ namespace Yuni
 {
 namespace Audio
 {
-	const float Source::DefaultPitch = 1.0f;
-	const float Source::DefaultGain = 1.0f;
-	const bool Source::DefaultAttenuation = true;
-	const bool Source::DefaultLooping = false;
+	const float Emitter::DefaultPitch = 1.0f;
+	const float Emitter::DefaultGain = 1.0f;
+	const bool Emitter::DefaultAttenuation = true;
+	const bool Emitter::DefaultLooping = false;
 
 
-	bool Source::playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer)
+	bool Emitter::playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer)
 	{
-		std::cout << "Beginning playback on source " << pID << "..." << std::endl;
+		std::cout << "Beginning playback on emitter " << pID << "..." << std::endl;
 		if (!pReady)
 		{
 			if (!prepareDispatched())
-			{
-				std::cerr << "Source preparation failed !" << std::endl;
 				return false;
-			}
 		}
 
 		if (!buffer || !buffer->valid())
@@ -44,7 +41,7 @@ namespace Audio
 		pPlaying = Private::Audio::OpenAL::PlaySource(pID);
 		if (!pPlaying)
 		{
-			std::cerr << "Source " << pID << " failed playing !" << std::endl;
+			std::cerr << "Emitter " << pID << " failed playing !" << std::endl;
 			Private::Audio::OpenAL::UnqueueBufferFromSource(pID);
 			return false;
 		}
@@ -53,7 +50,7 @@ namespace Audio
 	}
 
 
-	bool Source::updateDispatched()
+	bool Emitter::updateDispatched()
 	{
 		if (!pReady)
 			return false;
@@ -79,7 +76,7 @@ namespace Audio
 	}
 
 
-	bool Source::prepareDispatched()
+	bool Emitter::prepareDispatched()
 	{
 		if (pReady)
 			return true;
