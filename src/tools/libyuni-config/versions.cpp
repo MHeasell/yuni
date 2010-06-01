@@ -15,6 +15,27 @@ namespace VersionInfo
 {
 
 
+	namespace // anonymous
+	{
+
+		template<class StringT> const String& QuotePath(const StringT& value)
+		{
+			static String s;
+			# ifndef YUNI_OS_WINDOWS
+			s = value;
+			s.replace(" ", "\\ ");
+			# else
+			s.clear();
+			s << '"' << value << '"';
+			# endif
+			return s;
+		}
+
+	} // anonymous namespace
+
+
+
+
 	void List::checkRootFolder(const String& root)
 	{
 		String yuniMarker;
@@ -50,6 +71,7 @@ namespace VersionInfo
 				loadFromPath(*i);
 		}
 	}
+
 
 	void List::loadFromPath(const String& folder)
 	{
@@ -122,8 +144,10 @@ namespace VersionInfo
 				pList[version] = info;
 
 				if (pOptDebug)
+				{
 					std::cout << "[debug]  - found installation `" << path
 						<< "` (" << version << ")" << std::endl;
+				}
 			}
 		}
 	}
@@ -149,6 +173,7 @@ namespace VersionInfo
 			}
 		}
 	}
+
 
 	void List::printWithInfos()
 	{
@@ -279,11 +304,11 @@ namespace VersionInfo
 				switch (compliant)
 				{
 					case gcc          :
-						s.includes[String() << "-I\"" << norm << "\""] = true;
+						s.includes[String() << "-I" << QuotePath(norm)] = true;
 						break;
 
 					case visualstudio :
-						s.includes[String() << "/I\"" << norm << "\""] = true;
+						s.includes[String() << "/I" << QuotePath(norm)] = true;
 						break;
 				}
 				continue;
@@ -301,10 +326,10 @@ namespace VersionInfo
 				switch (compliant)
 				{
 					case gcc          :
-						s.libIncludes[String() << "-L\"" << norm << "\""] = true;
+						s.libIncludes[String() << "-L" << QuotePath(norm)] = true;
 						break;
 					case visualstudio :
-						s.libIncludes[String() << "/LIBPATH:\"" << norm << "\""] = true;
+						s.libIncludes[String() << "/LIBPATH:" << QuotePath(norm)] = true;
 						break;
 				}
 				continue;
@@ -315,8 +340,8 @@ namespace VersionInfo
 				Core::IO::Normalize(norm, value);
 				switch (compliant)
 				{
-					case gcc          : s.libs[String() << "-l" << norm] = true; break;
-					case visualstudio : s.libs[String() << norm] = true; break;
+					case gcc          : s.libs[String() << "-l" << QuotePath(norm)] = true; break;
+					case visualstudio : s.libs[String() << QuotePath(norm)] = true; break;
 				}
 				continue;
 			}
@@ -344,7 +369,7 @@ namespace VersionInfo
 
 			if (group == "framework")
 			{
-				s.frameworks[String() << "-framework \"" << value << "\""] = true;
+				s.frameworks[String() << "-framework " << QuotePath(value)] = true;
 				continue;
 			}
 
