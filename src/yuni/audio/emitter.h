@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_SOURCE_H__
-# define __YUNI_AUDIO_SOURCE_H__
+#ifndef __YUNI_AUDIO_EMITTER_H__
+# define __YUNI_AUDIO_EMITTER_H__
 
 # include <map>
 # include "../yuni.h"
@@ -15,17 +15,17 @@ namespace Audio
 {
 
 	/*!
-	** \brief An audio source is an object from which the sound is played
+	** \brief An audio emitter is an object from which the sound is played
 	**
-	** Audio sources can be placed in space, and be moved around.
+	** Audio emitters can be placed in space, and be moved around.
 	*/
-	class Source: public Policy::ObjectLevelLockable<Source>
+	class Emitter: public Policy::ObjectLevelLockable<Emitter>
 	{
 	public:
 		//! The most suitable smart pointer for the class
-		typedef SmartPtr<Source> Ptr;
+		typedef SmartPtr<Emitter> Ptr;
 		//! Threading Policy
-		typedef Policy::ObjectLevelLockable<Source> ThreadingPolicy;
+		typedef Policy::ObjectLevelLockable<Emitter> ThreadingPolicy;
 		//! Map
 		typedef std::map<String, Ptr> Map;
 
@@ -45,31 +45,31 @@ namespace Audio
 		**
 		** Position, speed and direction default to (0,0,0)
 		*/
-		Source(bool loop = DefaultLooping);
+		Emitter(bool loop = DefaultLooping);
 
 		/*!
 		** \brief Constructor with 3D position
 		**
 		** Speed and velocity default to (0,0,0)
 		*/
-		Source(const Gfx::Point3D<>& position, bool loop);
+		Emitter(const Gfx::Point3D<>& position, bool loop);
 
 		/*!
 		** \brief Constructor with position, velocity and direction
 		*/
-		Source(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
+		Emitter(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
 			const Gfx::Vector3D<>& direction, bool loop);
 
 		/*!
 		** \brief Destructor
 		*/
-		~Source() {}
+		~Emitter() {}
 		//@}
 
 
 		//! \name Methods
 		//@{
-		//! Prepare the source for playing
+		//! Prepare the emitter for playing
 		bool prepareDispatched();
 
 		//! Play the sound
@@ -88,7 +88,7 @@ namespace Audio
 		Gfx::Point3D<> position() const;
 
 		/*!
-		** \brief Set the volume modifier on the source
+		** \brief Set the volume modifier on the emitter
 		** \param newGain 0.0f for no sound, 1.0f to keep sound as is, > 1.0f to amplify sound
 		*/
 		void gain(float newGain);
@@ -103,34 +103,34 @@ namespace Audio
 
 
 	private:
-		Source(const Source&);
-		Source& operator= (const Source&);
+		Emitter(const Emitter&);
+		Emitter& operator= (const Emitter&);
 
 	private:
-		//! String identifier for the source
+		//! String identifier for the emitter
 		String pName;
-		//! OpenAL identifier for the source
+		//! OpenAL identifier for the emitter
 		unsigned int pID;
-		//! Position of the source in space
+		//! Position of the emitter in space
 		Gfx::Point3D<> pPosition;
-		//! Speed of the source
+		//! Speed of the emitter
 		Gfx::Vector3D<> pVelocity;
-		//! Direction of the movement of the source
+		//! Direction of the movement of the emitter
 		Gfx::Vector3D<> pDirection;
-		//! Should the source loop on itself when finished playing?
+		//! Should the emitter loop on itself when finished playing?
 		bool pLoop;
 		//! Volume modifier, 1.0 means no modification
 		float pGain;
 		//! Buffer used for playing. NULL if none
 		Private::Audio::Buffer<>::Ptr  pBuffer;
-		//! Is the source ready for use?
+		//! Is the emitter ready for use?
 		bool pReady;
-		//! Is the source currently playing?
+		//! Is the emitter currently playing?
 		bool pPlaying;
-		//! Has the source's values been modified ?
+		//! Has the emitter's values been modified ?
 		bool pModified;
 
-	}; // class Source
+	}; // class Emitter
 
 
 
@@ -138,6 +138,6 @@ namespace Audio
 } // namespace Audio
 } // namespace Yuni
 
-# include "source.hxx"
+# include "emitter.hxx"
 
-#endif // __YUNI_AUDIO_SOURCE_H__
+#endif // __YUNI_AUDIO_EMITTER_H__

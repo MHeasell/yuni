@@ -9,7 +9,7 @@
 # include "../core/smartptr.h"
 # include "../thread/policy.h"
 # include "../thread/condition.h"
-# include "source.h"
+# include "emitter.h"
 # include "loop.h"
 # include "../private/audio/buffer.h"
 
@@ -18,7 +18,6 @@ namespace Yuni
 {
 namespace Audio
 {
-
 
 	/*!
 	** \brief The audio queue service is the service that manages everything sound-related
@@ -32,12 +31,39 @@ namespace Audio
 		typedef Policy::ObjectLevelLockable<QueueService>  ThreadingPolicy;
 
 	public:
-		QueueService(): pReady(false), pAudioLoop(this)
-		{}
+		class Emitters
+		{
+		private:
+			Emitters()
+			{}
+			Emitters(const Emitters&);
 
-	private:
-		QueueService(const QueueService&);
-		QueueService& operator = (const QueueService&);
+			//! Map of currently registered emitters, with string tags as keys
+			Emitter::Map pEmitters;
+
+		public:
+			bool create(const String& name);
+			bool create(const String& name, const String& attachedBuffer);
+			bool attach(const String& name, const String& attachedBuffer);
+			bool attach(Emitter::Ptr name, const String& attachedBuffer);
+			bool remove(const String& name);
+			bool remove(Emitter::Ptr name);
+
+		private:
+			friend class QueueService;
+
+			QueueService* pQueueService;
+		};
+
+	public:
+		QueueService(): pReady(false), pAudioLoop(this)
+		{
+			emitter.pQueueService = this;
+		}
+
+	public:
+		//! Control block for emitters
+		Emitters emitter;
 
 	public:
 		bool start();
@@ -47,44 +73,48 @@ namespace Audio
 		bool loadSound(const StringT&);
 
 		template<typename StringT1, typename StringT2>
-		bool playSound(const StringT1& source, const StringT2& sound);
+		bool playSound(const StringT1& emitter, const StringT2& sound);
 
 		/*!
-		** \brief Create a source with default values
+		** \brief Create an emitter with default values
 		**
 		** Position, speed and velocity default to (0,0,0)
 		*/
 		template<typename StringT>
-		bool addSource(const StringT& sourceName, bool loop);
+		bool addEmitter(const StringT& emitterName, bool loop);
 
 		/*!
-		** \brief Create a source with 3D position
+		** \brief Create an emitter with 3D position
 		**
 		** Speed and velocity default to (0,0,0)
 		*/
 		template<typename StringT>
-		bool addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
+		bool addEmitter(const StringT& emitterName, const Gfx::Point3D<>& position,
 			bool loop);
 
 		/*!
 		** \brief Constructor with position, velocity and direction
 		*/
 		template<typename StringT>
-		bool addSource(const StringT& sourceName, const Gfx::Point3D<>& position,
+		bool addEmitter(const StringT& emitterName, const Gfx::Point3D<>& position,
 			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction, bool loop);
 
 		/*!
-		** \brief Move a source to a given position
+		** \brief Move an emitter to a given position
 		*/
 		template<typename StringT>
-		bool moveSource(const StringT& sourceName, const Gfx::Point3D<>& position);
+		bool moveEmitter(const StringT& emitterName, const Gfx::Point3D<>& position);
 
 		/*!
-		** \brief Move a source to a given position, with velocity and direction
+		** \brief Move an emitter to a given position, with velocity and direction
 		*/
 		template<typename StringT>
-		bool moveSource(const StringT& sourceName, const Gfx::Point3D<>& position,
+		bool moveEmitter(const StringT& emitterName, const Gfx::Point3D<>& position,
 			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
+
+	private:
+		QueueService(const QueueService&);
+		QueueService& operator = (const QueueService&);
 
 
 	private:
@@ -127,13 +157,14 @@ namespace Audio
 		bool pReady;
 		//! Event loop for audio events
 		Loop pAudioLoop;
-		//! Map of currently registered sources, with string tags as keys
-		Source::Map pSources;
 		//! Map of currently loaded buffers, with string tags as keys
 		Private::Audio::Buffer<>::Map pBuffers;
+		//! Map of currently registered emitters, with string tags as keys
+		Emitter::Map pEmitters;
 
 	private:
 		friend class Loop;
+		friend class Emitters;
 
 	}; // class QueueService
 
