@@ -79,7 +79,7 @@ namespace Directory
 		// Copy
 		String s;
 		// We must have absolute paths
-		if (Core::IO::IsRelative(s))
+		if (Core::IO::IsRelative(folder))
 		{
 			Core::IO::Directory::Current::Get(s);
 			if (!s.empty() && s.last() != '/' && s.last() != '\\')
