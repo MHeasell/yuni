@@ -8,6 +8,7 @@ namespace Yuni
 namespace Core
 {
 
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	inline TreeN<T,TP,ChckP,ConvP>::TreeN()
@@ -103,6 +104,7 @@ namespace Core
 		return internalRemoveChildWL(node);
 	}
 
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	bool TreeN<T,TP,ChckP,ConvP>::internalRemoveChildWL(Node& node)
@@ -142,9 +144,6 @@ namespace Core
 
 
 
-
-
-
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	typename TreeN<T,TP,ChckP,ConvP>::Ptr
@@ -179,7 +178,6 @@ namespace Core
 		}
 		return Ptr();
 	}
-
 
 
 
@@ -582,8 +580,8 @@ namespace Core
 
 
 
+
 } // namespace Core
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_TREE_N_HXX__
