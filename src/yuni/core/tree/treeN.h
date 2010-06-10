@@ -213,7 +213,6 @@ namespace Core
 
 		//! \name Parent of the node
 		//@{
-
 		//! Get the parent of the node
 		Ptr& parent() {return pParent;}
 		//! Get the parent of the node
@@ -228,14 +227,12 @@ namespace Core
 		** \brief Detach the node from its parent
 		*/
 		void detachFromParent();
-
 		//@}
 
 
 
 		//! \name Adding
 		//@{
-
 		/*!
 		** \brief Append a child node to the end of the list
 		** \param node The new child node
@@ -257,13 +254,11 @@ namespace Core
 		*/
 		void push_front(Ptr& node);
 		void push_front(T* node);
-
 		//@}
 
 
 		//! \name Removing
 		//@{
-
 		/*!
 		** \brief Remove all children
 		*/
@@ -287,13 +282,11 @@ namespace Core
 		*/
 		bool remove(const SizeType index);
 		bool remove(const SignedSizeType index);
-
 		//@}
 
 
 		//! \name Searching
 		//@{
-
 		//! Return iterator to the first child of the node
 		iterator  begin() {return iterator(pFirstChild);}
 		const iterator  begin() const {return iterator(pFirstChild);}
@@ -350,13 +343,11 @@ namespace Core
 		*/
 		Ptr nextSibling() {return pNextSibling;}
 		const Ptr nextSibling() const {return pNextSibling;}
-
 		//@}
 
 
 		//! \name Extra
 		//@{
-
 		/*!
 		** \brief Get if the node is a leaf
 		**
@@ -384,7 +375,6 @@ namespace Core
 		** \return The height of the tree
 		*/
 		SizeType treeHeight();
-
 		//@}
 
 
@@ -400,7 +390,6 @@ namespace Core
 
 		//! \name Z-Order
 		//@{
-
 		/*!
 		** \brief Move the node to the end
 		**
@@ -418,7 +407,6 @@ namespace Core
 		** as the first drawn thus the last visible item for the user.
 		*/
 		void sendToBack();
-
 		//@}
 
 
@@ -496,7 +484,6 @@ namespace Core
 		** Should only be used for debugging purposes only
 		*/
 		std::ostream& print(std::ostream& out, const bool recursive = true, const unsigned int level = 0);
-
 
 
 		//! \name Pointer management
