@@ -15,7 +15,7 @@ namespace StringImpl
 	{
 		static inline typename StrBase1::Size Value(const char* t)
 		{
-			return ::strlen(t);
+			return (t) ? ::strlen(t) : 0;
 		}
 	};
 
@@ -25,7 +25,7 @@ namespace StringImpl
 	{
 		static inline typename StrBase1::Size Value(const wchar_t* t)
 		{
-			return ::wcslen(t);
+			return (t) ? ::wcslen(t) : 0;
 		}
 	};
 
@@ -56,7 +56,7 @@ namespace StringImpl
 	{
 		static inline typename StrBase1::Size Value(const StringBase<C1,Chnk1>* t)
 		{
-			return t ? t.pSize : 0;
+			return t ? t->pSize : 0;
 		}
 	};
 
@@ -77,7 +77,7 @@ namespace StringImpl
 	{
 		static inline typename StrBase1::Size Value(const std::basic_string<C1>* t)
 		{
-			return t ? t.size() : 0;
+			return t ? t->size() : 0;
 		}
 	};
 
