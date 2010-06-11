@@ -184,11 +184,17 @@ namespace File
 		Yuni::Core::IO::File::Stream f(filename);
 		if (f.opened())
 		{
-			char buffer[2096];
+			char buffer[2096 + 1];
 			size_t numRead = 0;
 			uint64 totalRead = 0;
-			while ((numRead = f.read(buffer, sizeof(buffer))) != 0)
+			while ((numRead = f.read(buffer, sizeof(buffer) - 1)) != 0)
 			{
+				// This assignment is mandatory to prevent some bad use with
+				// strlen (according to StringT1).
+				// In some string implementation, the class might use strlen
+				// on the buffer even if the length is given
+				buffer[numRead] = '\0';
+
 				totalRead += numRead;
 				if (totalRead > hardlimit)
 				{
