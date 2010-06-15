@@ -137,7 +137,10 @@ namespace CustomStringImpl
 
 		Size assign(const C* const block, const Size blockSize)
 		{
-			return (block && blockSize) ? assignWithoutChecking(block, blockSize) : 0;
+			if (block && blockSize)
+				return assignWithoutChecking(block, blockSize);
+			clear();
+			return 0;
 		}
 
 
@@ -251,7 +254,10 @@ namespace CustomStringImpl
 
 		Size assign(const C* const block, const Size blockSize)
 		{
-			return (block && blockSize) ? assignWithoutChecking(block, blockSize) : 0;
+			if (block && blockSize)
+				return assignWithoutChecking(block, blockSize);
+			clear();
+			return 0;
 		}
 
 		Size append(const C* const block, const Size blockSize)
