@@ -198,10 +198,10 @@ namespace File
 				totalRead += numRead;
 				if (totalRead > hardlimit)
 				{
-					const size_t minus = totalRead - hardlimit;
+					const size_t minus = (size_t)(totalRead - hardlimit);
 					if (minus < numRead)
 					{
-						numRead -= (totalRead - hardlimit);
+						numRead -= minus;
 						out.append((const char*) buffer, numRead);
 					}
 					return ioErrMemoryLimit;
