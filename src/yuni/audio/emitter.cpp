@@ -15,23 +15,9 @@ namespace Audio
 	const bool Emitter::DefaultAttenuation = true;
 	const bool Emitter::DefaultLooping = false;
 
-	bool Emitter::playSoundDispatched()
+	bool Emitter::attachBufferDispatched(Private::Audio::Buffer<>::Ptr buffer)
 	{
-		if (NULL == pBuffer)
-			return false;
-		return playSoundDispatched(pBuffer);
-	}
-
-
-	bool Emitter::playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer)
-	{
-		std::cout << "Beginning playback on emitter " << pID << "..." << std::endl;
-		if (!pReady)
-		{
-			if (!prepareDispatched())
-				return false;
-		}
-
+		// Check buffer validity
 		if (!buffer || !buffer->valid())
 		{
 			std::cerr << "Invalid Buffer !" << std::endl;
@@ -44,6 +30,25 @@ namespace Audio
 			std::cerr << "Failed loading buffers !" << std::endl;
 			return false;
 		}
+	}
+
+
+	bool Emitter::playSoundDispatched()
+	{
+		if (NULL == pBuffer)
+			return false;
+		return playSoundDispatched(pBuffer);
+	}
+
+
+	bool Emitter::playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer)
+	{
+		std::cout << "Beginning playback on emitter " << pID << "..." << std::endl;
+		if (!pReady && !prepareDispatched())
+			return false;
+
+		if (!attachBufferDispatched(buffer))
+			return false;
 
 		pPlaying = Private::Audio::OpenAL::PlaySource(pID);
 		if (!pPlaying)
