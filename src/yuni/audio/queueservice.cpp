@@ -47,20 +47,15 @@ namespace Audio
 			return;
 
 		// Close OpenAL buffers properly
-		Private::Audio::Buffer<>::Map::iterator bEnd = pBuffers.end();
-		for (Private::Audio::Buffer<>::Map::iterator it = pBuffers.begin(); it != bEnd; ++it)
-		{
-			it->second->destroyDispatched();
-		}
-		pBuffers.clear();
+		bank.clear();
 
 		// Close OpenAL emitters properly
-		Emitter::Map::iterator sEnd = pEmitters.end();
-		for (Emitter::Map::iterator it = pEmitters.begin(); it != sEnd; ++it)
+		Emitter::Map::iterator sEnd = emitter.pEmitters.end();
+		for (Emitter::Map::iterator it = emitter.pEmitters.begin(); it != sEnd; ++it)
 		{
 			Private::Audio::OpenAL::DestroySource(it->second->id());
 		}
-		pEmitters.clear();
+		emitter.pEmitters.clear();
 		// Close OpenAL
 		Yuni::Bind<bool()> callback;
 		callback.bind(&Private::Audio::OpenAL::Close);
@@ -122,19 +117,19 @@ namespace Audio
 		// Associate the buffer with the stream
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
-			assert(pBuffers.find(filePath) != pBuffers.end());
-			pBuffers[filePath]->stream(stream);
+			Private::Audio::Buffer<>::Ptr buffer = bank.get(filePath);
+			assert(NULL != buffer);
+			buffer->stream(stream);
 		}
 
-		std::cout << "Loading succeeded !" << std::endl;
 		return true;
 	}
 
 
 	bool QueueService::updateDispatched()
 	{
-		Emitter::Map::iterator end = pEmitters.end();
-		for (Emitter::Map::iterator it = pEmitters.begin(); it != end; ++it)
+		Emitter::Map::iterator end = emitter.pEmitters.end();
+		for (Emitter::Map::iterator it = emitter.pEmitters.begin(); it != end; ++it)
 			it->second->updateDispatched();
 		return true;
 	}

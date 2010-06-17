@@ -73,6 +73,8 @@ namespace Audio
 		bool prepareDispatched();
 
 		//! Play the sound
+		bool playSoundDispatched();
+		//! Play the sound
 		bool playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer);
 
 		//! Update buffers if necessary
@@ -86,6 +88,12 @@ namespace Audio
 
 		void position(const Gfx::Point3D<>& position);
 		Gfx::Point3D<> position() const;
+
+		void velocity(const Gfx::Vector3D<>& position);
+		Gfx::Vector3D<> velocity() const;
+
+		void direction(const Gfx::Vector3D<>& position);
+		Gfx::Vector3D<> direction() const;
 
 		/*!
 		** \brief Set the volume modifier on the emitter

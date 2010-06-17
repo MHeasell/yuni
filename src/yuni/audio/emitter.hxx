@@ -42,6 +42,38 @@ namespace Audio
 		return pPosition;
 	}
 
+	inline void Emitter::velocity(const Gfx::Vector3D<>& velocity)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		if (pVelocity != velocity)
+		{
+			pVelocity = velocity;
+			pModified = true;
+		}
+	}
+
+	inline Gfx::Vector3D<> Emitter::velocity() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pVelocity;
+	}
+
+	inline void Emitter::direction(const Gfx::Vector3D<>& direction)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		if (pDirection != direction)
+		{
+			pDirection = direction;
+			pModified = true;
+		}
+	}
+
+	inline Gfx::Vector3D<> Emitter::direction() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pDirection;
+	}
+
 
 	inline void Emitter::gain(float newGain)
 	{

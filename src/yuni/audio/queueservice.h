@@ -31,8 +31,18 @@ namespace Audio
 		typedef Policy::ObjectLevelLockable<QueueService>  ThreadingPolicy;
 
 	public:
-		class Emitters
+
+		/*!
+		** \brief This is the the access to all the emitters for this queue service
+		**
+		** All the emitters are managed here.
+		** It can be accessed through: queueService.emitter
+		*/
+		class Emitters: public Policy::ObjectLevelLockable<Emitters>
 		{
+		public:
+			typedef Policy::ObjectLevelLockable<Emitters>  ThreadingPolicy;
+
 		private:
 			Emitters()
 			{}
@@ -42,11 +52,42 @@ namespace Audio
 			Emitter::Map pEmitters;
 
 		public:
-			bool create(const String& name);
-			bool create(const String& name, const String& attachedBuffer);
-			bool attach(const String& name, const String& attachedBuffer);
-			bool attach(Emitter::Ptr name, const String& attachedBuffer);
-			bool remove(const String& name);
+			template<typename StringT>
+			Emitter::Ptr get(const StringT& name);
+
+			template<typename StringT>
+			bool add(const StringT& name);
+			template<typename StringT, typename StringT2>
+			bool add(const StringT& name, const StringT2& attachedBuffer);
+
+			template<typename StringT, typename StringT2>
+			bool attach(const StringT& name, const StringT2& attachedBuffer);
+			template<typename StringT>
+			bool attach(Emitter::Ptr name, const StringT& attachedBuffer);
+
+			template<typename StringT>
+			bool modify(const StringT& name, bool loop);
+			bool modify(Emitter::Ptr name, bool loop);
+
+			template<typename StringT>
+			bool move(const StringT& name, const Gfx::Point3D<>& position);
+			bool move(Emitter::Ptr emitter, const Gfx::Point3D<>& position);
+			template<typename StringT>
+			bool move(const StringT& name, const Gfx::Point3D<>& position,
+				const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
+			bool move(Emitter::Ptr emitter, const Gfx::Point3D<>& position,
+				const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
+
+			template<typename StringT>
+			bool play(const StringT& name);
+			bool play(Emitter::Ptr& emitter);
+
+			template<typename StringT>
+			bool stop(const StringT& name);
+			bool stop(Emitter::Ptr& emitter);
+
+			template<typename StringT>
+			bool remove(const StringT& name);
 			bool remove(Emitter::Ptr name);
 
 		private:
@@ -55,15 +96,55 @@ namespace Audio
 			QueueService* pQueueService;
 		};
 
+
+		/*!
+		** \brief The bank contains the audio buffers currently loaded in the queue service
+		**
+		** It can be accessed through: queueService.bank
+		*/
+		class Bank: public Policy::ObjectLevelLockable<Bank>
+		{
+		public:
+			typedef Policy::ObjectLevelLockable<Bank>  ThreadingPolicy;
+
+		private:
+			Bank()
+			{}
+			Bank(const Bank&);
+
+			//! Map of currently loaded buffers, with string tags as keys
+			Private::Audio::Buffer<>::Map pBuffers;
+
+		private:
+			void clear();
+
+			template<typename StringT>
+			Private::Audio::Buffer<>::Ptr get(const StringT& name);
+
+		private:
+			friend class QueueService;
+
+			QueueService* pQueueService;
+		};
+
+
 	public:
 		QueueService(): pReady(false), pAudioLoop(this)
 		{
 			emitter.pQueueService = this;
+			bank.pQueueService = this;
+		}
+		~QueueService()
+		{
+			if (pReady)
+				stop();
 		}
 
 	public:
 		//! Control block for emitters
 		Emitters emitter;
+		//! Control block for audio buffers
+		Bank bank;
 
 	public:
 		bool start();
@@ -157,14 +238,11 @@ namespace Audio
 		bool pReady;
 		//! Event loop for audio events
 		Loop pAudioLoop;
-		//! Map of currently loaded buffers, with string tags as keys
-		Private::Audio::Buffer<>::Map pBuffers;
-		//! Map of currently registered emitters, with string tags as keys
-		Emitter::Map pEmitters;
 
 	private:
 		friend class Loop;
 		friend class Emitters;
+		friend class Bank;
 
 	}; // class QueueService
 

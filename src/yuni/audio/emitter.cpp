@@ -15,6 +15,13 @@ namespace Audio
 	const bool Emitter::DefaultAttenuation = true;
 	const bool Emitter::DefaultLooping = false;
 
+	bool Emitter::playSoundDispatched()
+	{
+		if (NULL == pBuffer)
+			return false;
+		return playSoundDispatched(pBuffer);
+	}
+
 
 	bool Emitter::playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer)
 	{
