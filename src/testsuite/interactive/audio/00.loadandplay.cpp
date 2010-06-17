@@ -35,15 +35,18 @@ public:
 		unsigned int i = 0;
 		for (String::Vector::const_iterator it = pFileNames.begin(); it != end; ++it)
 		{
-			String emitterName("Emitter");
+			String emitterName("Emitter ");
 			emitterName << i++;
-			if (!audio.addEmitter(emitterName, false))
+			if (!audio.emitter.add(emitterName, false))
 			{
 				std::cerr << "Emitter creation failed !" << std::endl;
 				return;
 			}
-			audio.loadSound(*it);
-			audio.playSound(emitterName, *it);
+			if (!audio.bank.load(*it))
+				return;
+			audio.emitter.attach(emitterName, *it);
+			audio.emitter.play(emitterName);
+			//audio.emitter.play(emitterName, *it);
 		}
 		Yuni::Sleep(30);
 	}

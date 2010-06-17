@@ -28,17 +28,18 @@ public:
 		const float LIMIT = 20.0f;
 
 		String emitterName("Emitter");
-		if (!pAudio.addEmitter(emitterName, false))
+		if (!pAudio.emitter.add(emitterName))
 		{
 			std::cerr << "Emitter creation failed !" << std::endl;
 			return;
 		}
-		pAudio.loadSound(pFileName);
-		pAudio.playSound(emitterName, pFileName);
+		pAudio.bank.load(pFileName);
+		pAudio.emitter.attach(emitterName, pFileName);
+		pAudio.emitter.play(emitterName);
 		Gfx::Point3D<> position;
 		bool inverse = false;
 		position.y = -LIMIT;
-		pAudio.moveEmitter(emitterName, position);
+		pAudio.emitter.move(emitterName, position);
 		for (int i = 0; i < 2000; ++i)
 		{
 			Yuni::SleepMilliSeconds(100);
@@ -47,7 +48,7 @@ public:
 				inverse = true;
 			else if (inverse && position.y < -LIMIT)
 				inverse = false;
-			pAudio.moveEmitter(emitterName, position);
+			pAudio.emitter.move(emitterName, position);
 		}
 	}
 

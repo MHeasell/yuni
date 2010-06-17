@@ -26,6 +26,28 @@ namespace Audio
 	}
 
 
+
+
+	template<typename StringT>
+	Private::Audio::Buffer<>::Ptr QueueService::Bank::get(const StringT& name)
+	{
+		return get(String(name));
+	}
+
+	template<>
+	inline Private::Audio::Buffer<>::Ptr QueueService::Bank::get<String>(const String& name)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		Private::Audio::Buffer<>::Map::iterator it = pBuffers.find(name);
+		if (it == pBuffers.end())
+			return Private::Audio::Buffer<>::Ptr(NULL);
+		return it->second;
+	}
+
+
+
+
 	template<typename StringT>
 	bool QueueService::Emitters::add(const StringT& emitterName)
 	{
@@ -79,37 +101,41 @@ namespace Audio
 		return true;
 	}
 
+
 	template<typename StringT, typename StringT2>
 	bool QueueService::Emitters::attach(const StringT& name, const StringT2& attachedBuffer)
 	{
 		return attach(String(name), String(attachedBuffer));
 	}
 
-	template<>
-	inline bool QueueService::Emitters::attach<String, String>(const String& name,
-		const String& attachedBuffer)
-	{
-		Emitter::Ptr newEmitter(new Emitter());
-
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			if (!pQueueService->pReady)
-				return false;
-
-			pEmitters[name] = newEmitter;
-		}
-		Audio::Loop::RequestType callback;
- 		callback.bind(newEmitter, &Emitter::prepareDispatched);
-		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
-
-		return true;
-	}
-
 	template<typename StringT>
 	bool QueueService::Emitters::attach(Emitter::Ptr name, const StringT& attachedBuffer)
 	{
 		return attach(name, String(attachedBuffer));
+	}
+
+	template<>
+	inline bool QueueService::Emitters::attach<String, String>(const String& emitterName,
+		const String& bufferName)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		if (!pQueueService->pReady)
+			return false;
+
+		Emitter::Ptr emitter = get(emitterName);
+		if (!emitter)
+			return false;
+
+		Private::Audio::Buffer<>::Ptr buffer = pBank->get(bufferName);
+		if (!buffer)
+			return false;
+
+		Audio::Loop::RequestType callback;
+ 		callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
+		// Dispatching...
+ 		pQueueService->pAudioLoop.dispatch(callback);
+
+		return true;
 	}
 
 	template<>
@@ -169,7 +195,7 @@ namespace Audio
 	template<typename StringT>
 	inline bool QueueService::Emitters::play(const StringT& name)
 	{
-		return play(String(name));
+		return play(get(String(name)));
 	}
 
 	template<>
@@ -178,7 +204,7 @@ namespace Audio
 		return play(get(name));
 	}
 
-	inline bool QueueService::Emitters::play(Emitter::Ptr& emitter)
+	inline bool QueueService::Emitters::play(Emitter::Ptr emitter)
 	{
 		if (!emitter)
 			return false;
@@ -187,6 +213,7 @@ namespace Audio
 		// Dispatching...
  		pQueueService->pAudioLoop.dispatch(callback);
 	}
+
 
 	template<typename StringT>
 	inline bool QueueService::Emitters::stop(const StringT& name)
@@ -222,83 +249,27 @@ namespace Audio
 		pBuffers.clear();
 	}
 
+
 	template<typename StringT>
-	Private::Audio::Buffer<>::Ptr QueueService::Bank::get(const StringT& name)
+	inline bool QueueService::Bank::load(const StringT& filePath)
 	{
-		return get(String(name));
+		return load(String(filePath));
 	}
 
 	template<>
-	inline Private::Audio::Buffer<>::Ptr QueueService::Bank::get<String>(const String& name)
+	inline bool QueueService::Bank::load<String>(const String& filePath)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		Private::Audio::Buffer<>::Map::iterator it = pBuffers.find(name);
-		if (it == pBuffers.end())
-			return Private::Audio::Buffer<>::Ptr(NULL);
-		return it->second;
-	}
-
-
-
-
-	template<typename StringT>
-	bool QueueService::loadSound(const StringT& filePath)
-	{
-		return loadSound(String(filePath));
-	}
-
-	template<>
-	bool QueueService::loadSound<String>(const String& filePath)
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		if (!pReady)
+		if (!pQueueService->pReady)
 			return false;
 
 		// Create the buffer, store it in the map
-		bank.pBuffers[filePath] = new Private::Audio::Buffer<>(NULL);
+		pBuffers[filePath] = new Private::Audio::Buffer<>(NULL);
 
 		Yuni::Bind<bool()> callback;
-		callback.bind(this, &QueueService::loadSoundDispatched, filePath);
-		pAudioLoop.dispatch(callback);
-		return true;
-	}
-
-
-	template<typename StringT1, typename StringT2>
-	bool QueueService::playSound(const StringT1& emitterName, const StringT2& sound)
-	{
-		return playSound(String(emitterName), String(sound));
-	}
-
-	template<>
-	bool QueueService::playSound<String,String>(const String& emitterName, const String& sound)
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		if (!pReady)
-			return false;
-
-		Private::Audio::Buffer<>::Ptr buffer = bank.get(sound);
-		if (!buffer)
-		{
-			std::cerr << "QueueService::playSound : no buffer with name \"" << sound
-					  << "\" could be found !" << std::endl;
-			return false;
-		}
-
-		Emitter::Ptr emitterPtr = emitter.get(emitterName);
-		if (!emitterPtr)
-		{
-			std::cerr << "QueueService::playSound : no emitter with name \"" << emitterName
-					  << "\" could be found !" << std::endl;
-			return false;
-		}
-
-		Audio::Loop::RequestType callback;
- 		callback.bind(emitterPtr, &Emitter::playSoundDispatched, buffer);
-		// Dispatching...
- 		pAudioLoop.dispatch(callback);
-
+		callback.bind(pQueueService, &QueueService::loadSoundDispatched, filePath);
+		pQueueService->pAudioLoop.dispatch(callback);
 		return true;
 	}
 

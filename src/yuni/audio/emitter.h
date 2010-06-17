@@ -69,6 +69,10 @@ namespace Audio
 
 		//! \name Methods
 		//@{
+
+		//! Attach a buffer to the emitter
+		bool attachBufferDispatched(Private::Audio::Buffer<>::Ptr buffer);
+
 		//! Prepare the emitter for playing
 		bool prepareDispatched();
 

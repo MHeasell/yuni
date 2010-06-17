@@ -32,6 +32,45 @@ namespace Audio
 
 	public:
 
+
+		/*!
+		** \brief The bank contains the audio buffers currently loaded in the queue service
+		**
+		** It can be accessed through: queueService.bank
+		*/
+		class Bank: public Policy::ObjectLevelLockable<Bank>
+		{
+		public:
+			typedef Policy::ObjectLevelLockable<Bank>  ThreadingPolicy;
+
+		private:
+			Bank()
+			{}
+			Bank(const Bank&);
+
+			//! Map of currently loaded buffers, with string tags as keys
+			Private::Audio::Buffer<>::Map pBuffers;
+
+		public:
+			void clear();
+
+			template<typename StringT>
+			bool load(const StringT& name);
+
+
+		private:
+			template<typename StringT>
+			Private::Audio::Buffer<>::Ptr get(const StringT& name);
+
+		private:
+			friend class QueueService;
+
+			QueueService* pQueueService;
+		};
+
+
+
+
 		/*!
 		** \brief This is the the access to all the emitters for this queue service
 		**
@@ -80,7 +119,7 @@ namespace Audio
 
 			template<typename StringT>
 			bool play(const StringT& name);
-			bool play(Emitter::Ptr& emitter);
+			bool play(Emitter::Ptr emitter);
 
 			template<typename StringT>
 			bool stop(const StringT& name);
@@ -92,47 +131,20 @@ namespace Audio
 
 		private:
 			friend class QueueService;
+			friend class QueueService::Bank;
 
 			QueueService* pQueueService;
+			Bank* pBank;
 		};
 
-
-		/*!
-		** \brief The bank contains the audio buffers currently loaded in the queue service
-		**
-		** It can be accessed through: queueService.bank
-		*/
-		class Bank: public Policy::ObjectLevelLockable<Bank>
-		{
-		public:
-			typedef Policy::ObjectLevelLockable<Bank>  ThreadingPolicy;
-
-		private:
-			Bank()
-			{}
-			Bank(const Bank&);
-
-			//! Map of currently loaded buffers, with string tags as keys
-			Private::Audio::Buffer<>::Map pBuffers;
-
-		private:
-			void clear();
-
-			template<typename StringT>
-			Private::Audio::Buffer<>::Ptr get(const StringT& name);
-
-		private:
-			friend class QueueService;
-
-			QueueService* pQueueService;
-		};
 
 
 	public:
 		QueueService(): pReady(false), pAudioLoop(this)
 		{
-			emitter.pQueueService = this;
 			bank.pQueueService = this;
+			emitter.pQueueService = this;
+			emitter.pBank = &bank;
 		}
 		~QueueService()
 		{
@@ -150,48 +162,6 @@ namespace Audio
 		bool start();
 		void stop();
 
-		template<typename StringT>
-		bool loadSound(const StringT&);
-
-		template<typename StringT1, typename StringT2>
-		bool playSound(const StringT1& emitter, const StringT2& sound);
-
-		/*!
-		** \brief Create an emitter with default values
-		**
-		** Position, speed and velocity default to (0,0,0)
-		*/
-		template<typename StringT>
-		bool addEmitter(const StringT& emitterName, bool loop);
-
-		/*!
-		** \brief Create an emitter with 3D position
-		**
-		** Speed and velocity default to (0,0,0)
-		*/
-		template<typename StringT>
-		bool addEmitter(const StringT& emitterName, const Gfx::Point3D<>& position,
-			bool loop);
-
-		/*!
-		** \brief Constructor with position, velocity and direction
-		*/
-		template<typename StringT>
-		bool addEmitter(const StringT& emitterName, const Gfx::Point3D<>& position,
-			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction, bool loop);
-
-		/*!
-		** \brief Move an emitter to a given position
-		*/
-		template<typename StringT>
-		bool moveEmitter(const StringT& emitterName, const Gfx::Point3D<>& position);
-
-		/*!
-		** \brief Move an emitter to a given position, with velocity and direction
-		*/
-		template<typename StringT>
-		bool moveEmitter(const StringT& emitterName, const Gfx::Point3D<>& position,
-			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
 
 	private:
 		QueueService(const QueueService&);
