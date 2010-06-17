@@ -262,7 +262,7 @@ namespace Gfx
 		** \return True if the two points are equal
 		*/
 		template<typename U> bool operator == (const Vector3D<U>& rhs) const
-		{ return (T)rhs.x == x && (T)rhs.y == y && (T)rhs.z == z; }
+		{ return Math::Equals((T)rhs.x, x) && Math::Equals((T)rhs.y, y) && Math::Equals((T)rhs.z, z); }
 
 		/*!
 		** \brief Comparison operator (non equal with)
