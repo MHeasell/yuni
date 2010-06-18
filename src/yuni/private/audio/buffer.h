@@ -15,7 +15,7 @@ namespace Private
 namespace Audio
 {
 
-	template<unsigned int BufferSizeT = 32768>
+	template<unsigned int BufferSizeT = 65536>
 	class Buffer
 	{
 	public:
