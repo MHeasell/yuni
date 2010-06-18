@@ -48,7 +48,7 @@ public:
 			audio.emitter.play(emitterName);
 			//audio.emitter.play(emitterName, *it);
 		}
-		Yuni::Sleep(30);
+		Yuni::Sleep(300);
 	}
 
 private:

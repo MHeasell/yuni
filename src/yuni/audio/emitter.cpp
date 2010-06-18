@@ -30,26 +30,16 @@ namespace Audio
 			std::cerr << "Failed loading buffers !" << std::endl;
 			return false;
 		}
+		return true;
 	}
 
 
 	bool Emitter::playSoundDispatched()
 	{
-		if (NULL == pBuffer)
+		if (!pBuffer)
 			return false;
-		return playSoundDispatched(pBuffer);
-	}
 
-
-	bool Emitter::playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer)
-	{
 		std::cout << "Beginning playback on emitter " << pID << "..." << std::endl;
-		if (!pReady && !prepareDispatched())
-			return false;
-
-		if (!attachBufferDispatched(buffer))
-			return false;
-
 		pPlaying = Private::Audio::OpenAL::PlaySource(pID);
 		if (!pPlaying)
 		{
@@ -59,6 +49,18 @@ namespace Audio
 		}
 		std::cout << "Playback started successfully !" << std::endl;
 		return true;
+	}
+
+
+	bool Emitter::playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer)
+	{
+		if (!pReady && !prepareDispatched())
+			return false;
+
+		if (!attachBufferDispatched(buffer))
+			return false;
+
+		return playSoundDispatched();
 	}
 
 
@@ -82,7 +84,7 @@ namespace Audio
 				return false;
 			}
 		}
-		if (NULL != pBuffer)
+		if (pBuffer)
 			pBuffer->updateDispatched(pID);
 		return true;
 	}
