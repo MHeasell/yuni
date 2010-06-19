@@ -37,7 +37,7 @@ public:
 		{
 			String emitterName("Emitter ");
 			emitterName << i++;
-			if (!audio.emitter.add(emitterName, false))
+			if (!audio.emitter.add(emitterName))
 			{
 				std::cerr << "Emitter creation failed !" << std::endl;
 				return;
@@ -46,7 +46,6 @@ public:
 				return;
 			audio.emitter.attach(emitterName, *it);
 			audio.emitter.play(emitterName);
-			//audio.emitter.play(emitterName, *it);
 		}
 		Yuni::Sleep(300);
 	}
