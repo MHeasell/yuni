@@ -57,42 +57,15 @@ namespace Audio
 	template<>
 	inline bool QueueService::Emitters::add<String>(const String& emitterName)
 	{
+
+		ThreadingPolicy::MutexLocker locker(*this);
+		if (!pQueueService->pReady)
+			return false;
+
+		// Create the emitter and add it
 		Emitter::Ptr newEmitter(new Emitter());
+		pEmitters[emitterName] = newEmitter;
 
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			if (!pQueueService->pReady)
-				return false;
-
-			pEmitters[emitterName] = newEmitter;
-		}
-		Audio::Loop::RequestType callback;
- 		callback.bind(newEmitter, &Emitter::prepareDispatched);
-		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
-
-		return true;
-	}
-
-	template<typename StringT, typename StringT2>
-	bool QueueService::Emitters::add(const StringT& emitterName, const StringT2& attachedBuffer)
-	{
-		return add(String(emitterName), String(attachedBuffer));
-	}
-
-	template<>
-	inline bool QueueService::Emitters::add<String, String>(const String& emitterName,
-		const String& attachedBuffer)
-	{
-		Emitter::Ptr newEmitter(new Emitter());
-
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			if (!pQueueService->pReady)
-				return false;
-
-			pEmitters[String(emitterName)] = newEmitter;
-		}
 		Audio::Loop::RequestType callback;
  		callback.bind(newEmitter, &Emitter::prepareDispatched);
 		// Dispatching...
@@ -139,11 +112,24 @@ namespace Audio
 	}
 
 	template<>
-	inline bool QueueService::Emitters::attach<String>(Emitter::Ptr name, const String& attachedBuffer)
+	inline bool QueueService::Emitters::attach<String>(Emitter::Ptr emitter, const String& bufferName)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
+		if (!pQueueService->pReady)
+			return false;
 
-		// TODO
+		if (!emitter)
+			return false;
+
+		Private::Audio::Buffer<>::Ptr buffer = pBank->get(bufferName);
+		if (!buffer)
+			return false;
+
+		Audio::Loop::RequestType callback;
+ 		callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
+		// Dispatching...
+ 		pQueueService->pAudioLoop.dispatch(callback);
+
 		return true;
 	}
 

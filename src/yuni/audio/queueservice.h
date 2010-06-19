@@ -32,44 +32,8 @@ namespace Audio
 
 	public:
 
-
-		/*!
-		** \brief The bank contains the audio buffers currently loaded in the queue service
-		**
-		** It can be accessed through: queueService.bank
-		*/
-		class Bank: public Policy::ObjectLevelLockable<Bank>
-		{
-		public:
-			typedef Policy::ObjectLevelLockable<Bank>  ThreadingPolicy;
-
-		private:
-			Bank()
-			{}
-			Bank(const Bank&);
-
-			//! Map of currently loaded buffers, with string tags as keys
-			Private::Audio::Buffer<>::Map pBuffers;
-
-		public:
-			void clear();
-
-			template<typename StringT>
-			bool load(const StringT& name);
-
-
-		private:
-			template<typename StringT>
-			Private::Audio::Buffer<>::Ptr get(const StringT& name);
-
-		private:
-			friend class QueueService;
-
-			QueueService* pQueueService;
-		};
-
-
-
+		//! Forward declaration
+		class Bank;
 
 		/*!
 		** \brief This is the the access to all the emitters for this queue service
@@ -96,8 +60,6 @@ namespace Audio
 
 			template<typename StringT>
 			bool add(const StringT& name);
-			template<typename StringT, typename StringT2>
-			bool add(const StringT& name, const StringT2& attachedBuffer);
 
 			template<typename StringT, typename StringT2>
 			bool attach(const StringT& name, const StringT2& attachedBuffer);
@@ -131,11 +93,50 @@ namespace Audio
 
 		private:
 			friend class QueueService;
-			friend class QueueService::Bank;
 
 			QueueService* pQueueService;
 			Bank* pBank;
 		};
+
+
+
+
+		/*!
+		** \brief The bank contains the audio buffers currently loaded in the queue service
+		**
+		** It can be accessed through: queueService.bank
+		*/
+		class Bank: public Policy::ObjectLevelLockable<Bank>
+		{
+		public:
+			typedef Policy::ObjectLevelLockable<Bank>  ThreadingPolicy;
+
+		private:
+			Bank()
+			{}
+			Bank(const Bank&);
+
+			//! Map of currently loaded buffers, with string tags as keys
+			Private::Audio::Buffer<>::Map pBuffers;
+
+		public:
+			void clear();
+
+			template<typename StringT>
+			bool load(const StringT& name);
+
+
+		private:
+			template<typename StringT>
+			Private::Audio::Buffer<>::Ptr get(const StringT& name);
+
+		private:
+			friend class QueueService;
+			friend class QueueService::Emitters;
+
+			QueueService* pQueueService;
+		};
+
 
 
 
