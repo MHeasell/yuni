@@ -3,8 +3,8 @@
 
 # include "../yuni.h"
 # include <map>
-# include "../core/point3d.h"
-# include "../core/vector3d.h"
+# include "../core/point3D.h"
+# include "../core/vector3D.h"
 # include "../core/string.h"
 # include "../core/smartptr.h"
 # include "../thread/policy.h"
