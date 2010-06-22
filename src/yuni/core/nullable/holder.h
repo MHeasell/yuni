@@ -5,7 +5,7 @@
 namespace Yuni
 {
 
-	template<typename T, class Alloc> struct Nullable;
+	template<typename T, class Alloc> class Nullable;
 
 
 namespace Private
