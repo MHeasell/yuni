@@ -37,6 +37,11 @@
 /* cstdlib */
 #cmakedefine YUNI_HAS_CSTDLIB
 
+/* stdarg.h */
+#cmakedefine YUNI_HAS_STDARG_H
+
+/* va_copy */
+#cmakedefine YUNI_HAS_VA_COPY
 
 
 

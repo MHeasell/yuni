@@ -9,11 +9,17 @@
 # include "../smartptr.h"
 
 # include <stdio.h>
-# include <stdarg.h>
+# ifdef YUNI_HAS_STDARG_H
+#	include <stdarg.h>
+# endif
 # include <iostream>
 # include <string>
-# include <list>
-# include <vector>
+# ifdef YUNI_HAS_LIST
+#	include <list>
+# endif
+# ifdef YUNI_HAS_VECTOR
+#	include <vector>
+# endif
 
 # include "traits/traits.h"
 # include "traits/append.h"

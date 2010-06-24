@@ -60,6 +60,11 @@ CHECK_INCLUDE_FILE_CXX(unistd.h YUNI_HAS_UNISTD_H)
 CHECK_INCLUDE_FILE_CXX(fcntl.h YUNI_HAS_FCNTL_H)
 # cstdlib
 CHECK_INCLUDE_FILE_CXX(cstdlib YUNI_HAS_CSTDLIB)
+# stdarg
+CHECK_INCLUDE_FILE_CXX(stdarg.h YUNI_HAS_STDARG_H)
+# Macro va_copy
+CHECK_CXX_SOURCE_COMPILES("#include <stdarg.h>
+	int main() {va_list a, b; va_copy(a, b);}" YUNI_HAS_VA_COPY)
 
 
 

@@ -1,7 +1,10 @@
 #ifndef __YUNI_CORE_MEMORY_BUFFER_TRAITS_TRAITS_H__
 # define __YUNI_CORE_MEMORY_BUFFER_TRAITS_TRAITS_H__
 
-# include <stdlib.h>
+# include "../../../yuni.h"
+# ifdef YUNI_HAS_STDLIB_H
+#	include <stdlib.h>
+# endif
 # include <string.h>
 # include <wchar.h>
 # include "../../math/math.h"
@@ -316,7 +319,13 @@ namespace CustomStringImpl
 
 	protected:
 		Size size;
-		C data[capacity + zeroTerminated];
+		/*!
+		** \brief Static buffer, fixed capacity
+		**
+		** We always add +1 to allow standard routine write a final 0, and we
+		** may need it for zero-terminated strings any way.
+		*/
+		C data[capacity + 1];
 
 	}; // class Data;
 

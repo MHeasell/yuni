@@ -235,4 +235,24 @@
 # endif
 
 
+
+/*!
+** \define YUNI_VA_COPY
+** \brief Copy one variable argument list into another
+**
+** You should use va_end to release the new list
+*/
+# ifdef YUNI_HAS_VA_COPY
+#	define YUNI_VA_COPY(dst, src)  va_copy((dst), (src))
+# else
+#	if (defined(__GNUC__) && defined(__PPC__) && (defined(_CALL_SYSV) || defined(__WIN32__))) || defined(__WATCOMC__)
+#		define YUNI_VA_COPY(dst, src)	  (*(dst) = *(src))
+#	elif defined(YUNI_VA_COPY_AS_ARRAY)
+#		define YUNI_VA_COPY(dst, src)	  memmove((dst), (src), sizeof (va_list))
+#	else // va_list is a pointer
+#		define YUNI_VA_COPY(dst, src)	  ((dst) = (src))
+#	endif
+# endif
+
+
 #endif /* __YUNI_PREPROCESSOR_OS_DETECTION_H__ */

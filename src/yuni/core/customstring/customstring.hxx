@@ -1465,25 +1465,37 @@ namespace Yuni
 		{
 			// Pre-Allocating a minimal amount of free space
 			if (AncestorType::capacity - AncestorType::size < 10)
-				AncestorType::reserve(AncestorType::size + chunkSize);
-			while (true)
 			{
+				// -1 because reserve() always count a final zero
+				AncestorType::reserve(AncestorType::size + chunkSize - 1);
+			}
+			do
+			{
+				// In C99, vnsprintf may modify its parameter arg
+				va_list ag;
+				YUNI_VA_COPY(ag, args);
 				i = Private::CustomStringImpl::vnsprintf<Char>(AncestorType::data + AncestorType::size,
-					(AncestorType::capacity - AncestorType::size) * sizeof(Char), format, args);
-				if (i == -1)
+					(AncestorType::capacity - AncestorType::size), format, ag);
+				va_end(ag);
+
+				if (i < 0)
 				{
-					AncestorType::reserve(AncestorType::capacity + chunkSize);
-					continue;
-				}
-				else
-				{
-					if (i < 0)
-						return;
+					if (i == -1)
+					{
+						// The string was truncated
+						// -1 because reserve() always count a final zero
+						AncestorType::reserve(AncestorType::capacity + chunkSize - 1);
+						continue;
+					}
+					// An error occured
+					return;
 				}
 				AncestorType::size += (Size) i;
 				if (zeroTerminated)
 					AncestorType::data[AncestorType::size] = Char();
+				return;
 			}
+			while (true);
 		}
 		else
 		{
@@ -1492,12 +1504,22 @@ namespace Yuni
 			if (AncestorType::capacity != AncestorType::size)
 			{
 				i = Private::CustomStringImpl::vnsprintf<Char>(AncestorType::data + AncestorType::size,
-					(AncestorType::capacity - AncestorType::size) * sizeof(Char), format, args);
+					(AncestorType::capacity - AncestorType::size), format, args);
 				if (i >= 0)
 				{
 					AncestorType::size += (Size) i;
 					if (zeroTerminated)
 						AncestorType::data[AncestorType::size] = Char();
+				}
+				else
+				{
+					if (i == -1)
+					{
+						// The string was truncated
+						AncestorType::size = AncestorType::capacity;
+						if (zeroTerminated)
+							AncestorType::data[AncestorType::capacity] = Char();
+					}
 				}
 			}
 		}
