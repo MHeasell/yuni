@@ -2,7 +2,9 @@
 #include "../directory.h"
 #include <string.h>
 #include <errno.h>
-#include <stdlib.h>
+#ifdef YUNI_HAS_STDLIB_H
+# include <stdlib.h>
+#endif
 #ifndef YUNI_OS_MSVC
 # include <dirent.h>
 # include <unistd.h>

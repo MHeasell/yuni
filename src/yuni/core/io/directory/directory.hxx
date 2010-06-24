@@ -5,7 +5,9 @@
 # include "../../traits/length.h"
 # include "../../static/remove.h"
 # include "../io.h"
-# include <stdlib.h>
+# ifdef YUNI_HAS_STDLIB_H
+#	include <stdlib.h>
+# endif
 
 
 namespace Yuni

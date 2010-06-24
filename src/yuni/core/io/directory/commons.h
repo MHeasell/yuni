@@ -5,7 +5,9 @@
 #include "../directory.h"
 #include "../../system/windows.hdr.h"
 #ifndef YUNI_OS_WINDOWS
-#	include <stdlib.h>
+#	ifdef YUNI_HAS_STDLIB_H
+#		include <stdlib.h>
+#	endif
 #	include <unistd.h>
 #else
 #	include <direct.h>
