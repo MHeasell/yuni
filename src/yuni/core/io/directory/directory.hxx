@@ -34,8 +34,8 @@ namespace Directory
 	*/
 	char* CurrentDirectory();
 
-	bool SetCurrentDirectory(const char* src, size_t srclen);
-	bool SetCurrentDirectoryNotZeroTerminated(const char* path, size_t length);
+	bool ChangeCurrentDirectory(const char* src, size_t srclen);
+	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, size_t length);
 
 
 } // namespace Directory
@@ -145,12 +145,12 @@ namespace Current
 
 		if (Traits::CString<StringT>::zeroTerminated)
 		{
-			return Yuni::Private::Core::IO::Directory::SetCurrentDirectory(
+			return Yuni::Private::Core::IO::Directory::ChangeCurrentDirectory(
 				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path));
 		}
 		else
 		{
-			return Yuni::Private::Core::IO::Directory::SetCurrentDirectoryNotZeroTerminated(
+			return Yuni::Private::Core::IO::Directory::ChangeCurrentDirectoryNotZeroTerminated(
 				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path));
 		}
 	}

@@ -56,8 +56,8 @@ namespace Directory
 	}
 
 
-	
-	bool SetCurrentDirectory(const char* src, size_t srclen)
+
+	bool ChangeCurrentDirectory(const char* src, size_t srclen)
 	{
 		# ifdef YUNI_OS_WINDOWS
 		wchar_t* fsource = new wchar_t[srclen + 4];
@@ -78,12 +78,12 @@ namespace Directory
 	}
 
 
-	bool SetCurrentDirectoryNotZeroTerminated(const char* path, size_t length)
+	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, size_t length)
 	{
 		char* p = new char[length * sizeof(char) + 1];
 		memcpy(p, path, length);
 		p[length] = '\0';
-		const bool r = SetCurrentDirectory(p, length);
+		const bool r = ChangeCurrentDirectory(p, length);
 		delete[] p;
 		return r;
 	}
