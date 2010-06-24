@@ -28,19 +28,19 @@ namespace Yuni
 {
 
 	/*!
-	** \brief A string implementation
+	** \brief Character string
 	**
-	** The string class provides a useful way to manipulate and store sequences of
+	** The class provides a useful way to manipulate and store sequences of
 	** characters.
 	**
-	** This class is a template class, you should prefer the convenient alias
-	** `Yuni::String`.
+	** The class is a template class, you may prefer the convenient alias
+	** `Yuni::String` most of the time.
 	**
 	** The supported external types are the following :
 	**  - C
 	**  - char*
 	**  - C[]
-	**  - std::basic_string<cjar>
+	**  - std::basic_string<char>
 	**  - Yuni::CustomString<...>
 	**  - SmartPtr<std::basic_string<char>, ...>
 	**  - SmartPtr<CustomString<...>, ...>
@@ -100,9 +100,9 @@ namespace Yuni
 		{
 			//! Size for a single chunk
 			chunkSize          = AncestorType::chunkSize,
-			//! A non-zero value if the cstr must be zero terminated
+			//! A non-zero value if the string must be zero terminated
 			zeroTerminated     = AncestorType::zeroTerminated,
-			//! A non-zero value if the cstr can be expanded
+			//! A non-zero value if the string can be expanded
 			expandable         = AncestorType::expandable,
 			//! Number of bits per element
 			bitCountPerElement = sizeof(Char) * 8,
@@ -219,29 +219,29 @@ namespace Yuni
 		//! \name Append / Assign / Fill
 		//@{
 		/*!
-		** \brief Assign a new value to the cstr
+		** \brief Assign a new value to the string
 		**
 		** \param rhs Any supported value
 		*/
 		template<class U> void assign(const U& rhs);
 
 		/*!
-		** \brief Copy a raw cstr
+		** \brief Copy a raw C-String
 		**
-		** \param cstr A cstr
-		** \param size Size of the given cstr
+		** \param cstr A C-String
+		** \param size Size of the given string
 		*/
 		void assign(const char* const cstr, const Size size);
 
 		/*!
-		** \brief Append to the end of the cstr a new value
+		** \brief Append to the end of the string a new value
 		**
 		** \param rhs Any supported value
 		*/
 		template<class U> void append(const U& rhs);
 
 		/*!
-		** \brief Append to the end of the cstr a new value
+		** \brief Append to the end of the string a new value
 		**
 		** \param rhs Any supported value
 		** \param size Size of the container
@@ -252,7 +252,7 @@ namespace Yuni
 		template<class U> void write(const U& cstr, const Size size);
 
 		/*!
-		** \brief Insert at the begining of the cstr a new value
+		** \brief Insert at the begining of the string a new value
 		**
 		** This is a convenient replacement for insert(0, u)
 		** \param rhs Any supported value
@@ -260,7 +260,7 @@ namespace Yuni
 		template<class U> void prepend(const U& u);
 
 		/*!
-		** \brief Insert at the begining of the cstr a new value
+		** \brief Insert at the begining of the string a new value
 		**
 		** \param rhs Any supported value
 		** \param size Size of the container
@@ -275,87 +275,149 @@ namespace Yuni
 		void put(const char c);
 
 		/*!
-		** \brief Insert a raw cstr at a given position in the cstr
+		** \brief Insert a raw C-String at a given position in the string
 		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param cstr A raw cstr
-		** \param size Size of the cstr
-		** \return True if the cstr has been inserted, false otherwise (size == 0 or offset out of bounds)
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered
+		** \param cstr A C-String
+		** \param size Size of the string
+		** \return True if the given string has been inserted, false otherwise
+		**   (size == 0 or offset out of bounds)
 		*/
 		bool insert(const Size offset, const char* const cstr, const Size size);
 
 		/*!
-		** \brief Insert a single item at a given position in the cstr
+		** \brief Insert a single item at a given position in the string
 		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered
 		** \param c A single item
-		** \return True if the cstr has been inserted, false otherwise (size == 0 or offset out of bounds)
+		** \return True if the string has been inserted, false otherwise
+		**   (size == 0 or offset out of bounds)
 		*/
 		bool insert(const Size offset, const char c);
 
 		/*!
-		** \brief Insert an arbitrary CString container at a given position in the cstr
+		** \brief Insert an arbitrary C-String at a given position in the string
 		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered
 		** \param u Any CString container
-		** \return True if the cstr has been inserted, false otherwise (size == 0 or offset out of bounds)
+		** \return True if the string has been inserted, false otherwise
+		**   (size == 0 or offset out of bounds)
 		*/
 		template<class StringT> bool insert(const Size offset, const StringT& s);
 
 		/*!
-		** \brief Insert an arbitrary CString container at a given position in the cstr
+		** \brief Insert an arbitrary C-String at a given position in the string
 		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered
 		** \param s Any CString container
 		** \param size The size to use for the given container
-		** \return True if the cstr has been inserted, false otherwise (size == 0 or offset out of bounds)
+		** \return True if the string has been inserted, false otherwise
+		**   (size == 0 or offset out of bounds)
 		*/
 		template<class StringT> bool insert(const Size offset, const StringT& u, const Size size);
 
 
 		/*!
-		** \brief Overwrite a region of the cstr
+		** \brief Overwrite a region of the string
 		**
-		** The size of the cstr will remain untouched in any cases.
+		** The size of the string will remain untouched in any cases.
 		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param region A CString container
+		** \param offset Position of the first character of the region in the string
+		** \param s A CString
 		*/
 		template<class StringT> void overwrite(const Size offset, const StringT& s);
 
 		/*!
-		** \brief Overwrite a region of the cstr
+		** \brief Overwrite a region of the string
 		**
-		** The size of the cstr will remain untouched in any cases.
+		** The size of the string will remain untouched in any cases.
 		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
-		** \param region A raw cstr
-		** \param size Size of the given cstr
+		** \param s A CString
 		*/
-		void overwrite(const Size offset, const char* const region, const Size size);
+		template<class StringT> void overwrite(const StringT& s);
+
+		/*!
+		** \brief Overwrite a region of the string
+		**
+		** The size of the string will remain untouched in any cases.
+		**
+		** \param offset Position of the first character of the region in the string
+		** \param cstr A C-String
+		** \param size Size of 'cstr'
+		*/
+		void overwrite(const Size offset, const char* const cstr, const Size size);
+
+		/*!
+		** \brief Overwrite a region of the string from the right of the string
+		**
+		** The size of the string will remain untouched in any cases.
+		**
+		** \param region A CString container
+		*/
+		template<class StringT> void overwriteRight(const StringT& s);
+
+		/*!
+		** \brief Overwrite a region of the string from the right of the string
+		**
+		** The size of the string will remain untouched in any cases.
+		**
+		** \param offset Position of the first character (from the right) of the region
+		**   in the string
+		** \param region A CString container
+		*/
+		template<class StringT> void overwriteRight(const Size offset, const StringT& s);
 
 
 		/*!
-		** \brief Fill the whole cstr with a given pattern
+		** \brief Overwrite a region of the string from the center of the string
+		**
+		** The size of the string will remain untouched in any cases.
+		** \code
+		** String s;
+		** s.resize(13, '-');
+		** s.overwriteCenter(" Title ");
+		** std::cout << s << std::endl; // '--- Title ---'
+		** \endcode
+		**
+		** \param region A CString container
+		*/
+		template<class StringT> void overwriteCenter(const StringT& s);
+
+
+		/*!
+		** \brief Fill the entire string with a given pattern
 		**
 		** \code
-		** CustomString<char>  cstr;
-		** cstr.resize(80);
+		** String s = "some text here";
+		** s.fill('.');
+		** std::cout << s << std::endl; // '..............'
 		**
-		** // Preface
-		** cstr.fill('.');
-		** cstr.overwrite(0, " Preface ");
-		** cstr.overwrite(78, " 1");
-		** std::cout << cstr << std::endl;
-		**
-		** // Chapter 1
-		** cstr.fill('.');
-		** cstr.overwrite(0, " Chapter 1 ");
-		** cstr.overwrite(78, " 4");
-		** std::cout << cstr << std::endl;
+		** s.resize(20);
+		** s.fill('.');
+		** s.overwrite(0,  "Chapter 1 ");
+		** s.overwriteRight(" 4");
+		** std::cout << s << std::endl; // 'Chapter 1  ....... 4'
 		** \endcode
+		**
+		** \param pattern The pattern
 		*/
 		template<class StringT> void fill(const StringT& pattern);
+
+		/*!
+		** \brief Fill the entire string with a given pattern from a given offset
+		**
+		** \param offset Position of the first character where to start from
+		** \param pattern The pattern
+		*/
+		template<class StringT> void fill(Size offset, const StringT& pattern);
 
 		//! Equivalent to append()
 		template<class U> void push_back(const U& u);
@@ -471,7 +533,9 @@ namespace Yuni
 		/*!
 		** \brief Find the offset of a sub-string from the left
 		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered
 		** \param cstr An arbitrary string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
@@ -480,9 +544,11 @@ namespace Yuni
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
 		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered
 		** \param cstr An arbitrary string
-		** \param len Size of the given cstr
+		** \param len Size of the given string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		Size indexOf(Size offset, const char* const cstr, const Size len) const;
@@ -490,7 +556,9 @@ namespace Yuni
 		/*!
 		** \brief Find the offset of any supported CString from the left
 		**
-		** \param offset Position of the first character in the string to be taken into consideration for possible matches. A value of 0 means that the entire string is considered
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered
 		** \param cstr Any supported CString
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
@@ -506,22 +574,22 @@ namespace Yuni
 		template<class StringT> Size find_first_of(const StringT& u) const;
 
 		/*!
-		** \brief Get if a given string can be found at the begining of the cstr
+		** \brief Get if a given string can be found at the begining
 		*/
 		bool startsWith(const char* const cstr, const Size len) const;
 
 		/*!
-		** \brief Get if a given string can be found at the begining of the cstr
+		** \brief Get if a given string can be found at the begining
 		*/
 		template<class StringT> bool startsWith(const StringT& s) const;
 
 		/*!
-		** \brief Get if a given string can be found at the end of the cstr
+		** \brief Get if a given string can be found at the end
 		*/
 		bool endsWith(const char* const cstr, const Size len) const;
 
 		/*!
-		** \brief Get if a given string can be found at the end of the cstr
+		** \brief Get if a given string can be found at the end
 		** \param s Any string
 		*/
 		template<class StringT> bool endsWith(const StringT& s) const;
@@ -558,34 +626,37 @@ namespace Yuni
 		//! \name Trimming
 		//@{
 		/*!
-		** \brief Remove all white-spaces (" \t\r\n") from the begining and the end of the cstr
+		** \brief Remove all white-spaces (" \t\r\n") from the begining and the end
+		**   of the string
 		*/
 		void trim();
 		/*!
-		** \brief Remove all white-spaces from the begining and the end of the cstr
+		** \brief Remove all white-spaces from the begining and the end of the string
 		*/
 		void trim(const char c);
 		/*!
-		** \brief Removes all items equal to one of those in 'whitespaces' from the end of the cstr
+		** \brief Removes all items equal to one of those in 'whitespaces' from the
+		**   end of the string
 		*/
 		template<class StringT> void trim(const StringT& whitespaces);
 
 		/*!
-		** \brief Removes all items equal to one of those in 'u' from the end of the cstr
+		** \brief Removes all items equal to one of those in 'u' from the end of the string
 		*/
 		template<class StringT> void trimRight(const StringT& whitespaces);
 
 		/*!
-		** \brief Remove all items equal to 'c' from the end of the cstr
+		** \brief Remove all items equal to 'c' from the end of the string
 		*/
 		void trimRight(const char c);
 
 		/*!
-		** \brief Removes all items equal to one of those in 'u' from the begining of the cstr
+		** \brief Removes all items equal to one of those in 'u' from the begining
+		**   of the string
 		*/
 		template<class StringT> void trimLeft(const StringT& whitespaces);
 		/*!
-		** \brief Remove all items equal to 'c' from the begining of the cstr
+		** \brief Remove all items equal to 'c' from the begining of the string
 		*/
 		void trimLeft(const char c);
 		//@}
@@ -594,13 +665,19 @@ namespace Yuni
 		//! \name Remove / Erase
 		//@{
 		/*!
-		** \brief Empty the cstr
+		** \brief Empty the string
+		**
+		** The size will be reset to 0 but the internal data will not be freed.
+		** If you want to reduce the memory used by the string, use 'shrink()'
+		** instead.
+		** \see shrink()
+		**
 		** \return *this
 		*/
 		CustomString& clear();
 
 		/*!
-		** \brief Erase a part of the cstr
+		** \brief Erase a part of the string
 		**
 		** \param offset The offset (zero-based) of the first item to erase
 		** \param len The length (in number of items) to erase
@@ -608,7 +685,7 @@ namespace Yuni
 		void erase(const Size offset, const Size len);
 
 		/*!
-		** \brief Remove the 'n' first items
+		** \brief Remove the 'n' first characters
 		*/
 		void consume(const Size n);
 		//@}
@@ -666,7 +743,7 @@ namespace Yuni
 		//! \name Conversions
 		//@{
 		/*!
-		** \brief Convert the cstr into something else
+		** \brief Convert the string into something else
 		**
 		** The supported types (by default) are :
 		** - std::string
@@ -681,6 +758,9 @@ namespace Yuni
 		**
 		** This method is strictly equivalent to `to()`, except
 		** that we know if the conversion succeeded or not.
+		**
+		** \param[out] out The variable where to store the result of the conversion
+		** \return True if the conversion succeeded. False otherwise
 		*/
 		template<class U> bool to(U& out) const;
 		//@}
@@ -697,48 +777,80 @@ namespace Yuni
 		int at(const Size offset) const;
 
 		/*!
-		** \brief Truncate the cstr to the given length
+		** \brief Truncate the string to the given length
 		**
 		** Nothing will be done if the new size if greater than the current one.
-		** \param newSize The new size of the cstr
+		** \param newSize The new size (in bytes)
 		*/
 		void truncate(const Size newSize);
 
 		/*!
 		** \brief Ensure that there is enough allocated space for X caracters
 		**
-		** \param min The minimum capacity of the cstr (in caracters)
+		** \param min The minimum capacity of the string (in bytes)
 		*/
 		void reserve(Size minCapacity);
 
 		/*!
-		** \brief Resize the cstr to 'len' bytes
+		** \brief Resize the string to 'len' bytes
 		**
 		** The current content will remain untouched but all extra bytes will not be
 		** initialized.
-		** If the cstr can not be expanded, the new size will not greater than 'ChunkSize'.
+		** If the string can not be expanded, the new size will not be greater than 'ChunkSize'.
 		**
-		** \param len The new length of the string
+		** \param len The new length (in bytes) of the string
 		*/
 		void resize(const Size len);
 
 		/*!
+		** \brief Resize the string to 'len' bytes and fill the new content (if any)
+		**
+		** The new content (if any) will be filled with 'pattern'.
+		** If the string can not be expanded, the new size will not be greater than 'ChunkSize'.
+		**
+		** \code
+		** String s;
+		** s.resize(6, '.');
+		** std::cout << s << std::endl; // '......'
+		** s.resize(4, "useless pattern");
+		** std::cout << s << std::endl; // '....'
+		** s.resize(8, "-a");
+		** std::cout << s << std::endl; // '....-a-a'
+		**
+		** s = "s: ";
+		** s.resize(14, "\\/");
+		** std::cout << s << std::endl; // 's: \/\/\/\/\/ ', note the space at the end
+		** \endcode
+		**
+		** \param len The new length (in bytes) of the string
+		** \parent pattern The pattern to use to fill the new content
+		** \see fill()
+		*/
+		template<class StringT> void resize(const Size len, const StringT& pattern);
+
+		/*!
 		** \brief Releases any memory not required to store the character data
+		**
+		** If the string is empty, the internal buffer will be freed. Otherwise
+		** the buffer will be reallocated to reduce as much as possible the amount
+		** of memory used by the string.
+		** It does not modify the size of the string, only its capacity.
+		** This method has no effect when the template parameter 'ExpandableT'
+		** is true.
 		*/
 		void shrink();
 
 		/*!
-		** \brief Get the current size of the cstr (in number of element C)
+		** \brief Get the current size of the string (in bytes)
 		**
-		** The returned value is less than or equal to the capacity.
+		** The returned value is less than or equal to the capacity, and
+		** greater or equal to the number of UTF8 characters in the string.
 		*/
 		Size size() const;
 		//! \see size()
 		Size length() const;
 
-		/*!
-		** \brief Get the current size of the cstr (in bytes)
-		*/
+		//! \see size()
 		size_t sizeInBytes() const;
 
 		/*!
@@ -791,20 +903,17 @@ namespace Yuni
 		bool null() const;
 
 		/*!
-		** \brief Get if the cstr is not empty (the exact opposite of `empty()`)
+		** \brief Get if the string is not empty (the exact opposite of `empty()`)
 		*/
 		bool notEmpty() const;
 
 		/*!
-		** \brief Get the current capacity of the cstr (in number of element C)
-		** \return A value greater or equal to `size()`
+		** \brief Get the current capacity of the string (in bytes)
+		** \return The amount of memory used by the string
 		*/
 		Size capacity() const;
 
-		/*!
-		** \brief Get the current capacity of the cstr (in bytes)
-		** \return A value greater or equal to `sizeInBytes()`
-		*/
+		//! \see capacity()
 		size_t capacityInBytes() const;
 
 		/*!

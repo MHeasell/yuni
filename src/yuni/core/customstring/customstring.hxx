@@ -266,9 +266,28 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
 
 		if (AncestorType::size)
-			Yuni::Extension::CustomString::Fill<CustomString, UType>::Perform(
-				AncestorType::data, AncestorType::size, pattern);
+		{
+			Yuni::Extension::CustomString::Fill<CustomString, UType>::
+				Perform(AncestorType::data, AncestorType::size, pattern);
+		}
 	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+ 	template<class StringT>
+	void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::fill(
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
+		const StringT& pattern)
+	{
+		typedef typename Static::Remove::Const<StringT>::Type UType;
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		if (offset < AncestorType::size)
+		{
+			Yuni::Extension::CustomString::Fill<CustomString, UType>::
+				Perform(AncestorType::data + offset, AncestorType::size - offset, pattern);
+		}
+	}
+
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
@@ -901,15 +920,15 @@ namespace Yuni
 	void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::overwrite(
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
-		const char* const region,
+		const char* const cstr,
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
 		if (offset < AncestorType::size && size)
 		{
 			if (offset + size > AncestorType::size)
-				(void)::memcpy(AncestorType::data + offset, region, sizeof(Char) * AncestorType::size - offset);
+				(void)::memcpy(AncestorType::data + offset, cstr, sizeof(Char) * (AncestorType::size - offset));
 			else
-				(void)::memcpy(AncestorType::data + offset, region, sizeof(Char) * size);
+				(void)::memcpy(AncestorType::data + offset, cstr, sizeof(Char) * size);
 		}
 	}
 
@@ -943,6 +962,129 @@ namespace Yuni
 		return overwrite(offset, Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::Value(s));
 	}
 
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::overwrite(const StringT& s)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		// Find the substring
+		if (Traits::Length<StringT,Size>::isFixed)
+		{
+			// We can make some optimisations when the length is known at compile compile time
+			// This part of the code should not bring better performances but it should
+			// prevent against bad uses of the API, like using a char* for looking for a single char.
+
+			// The value to find is actually empty, nothing to do
+			if (0 == Traits::Length<StringT,Size>::fixedLength)
+				return;
+			// The string is actually a single POD item
+			if (1 == Traits::Length<StringT,Size>::fixedLength)
+				return overwrite(0, Traits::CString<StringT>::Perform(s), 1);
+			// Researching for the substring with a known length
+			return overwrite(0, Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::fixedLength);
+		}
+
+		return overwrite(0, Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::Value(s));
+	}
+
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::overwriteRight(
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset, const StringT& s)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		// Find the substring
+		if (Traits::Length<StringT,Size>::isFixed)
+		{
+			// We can make some optimisations when the length is known at compile compile time
+			// This part of the code should not bring better performances but it should
+			// prevent against bad uses of the API, like using a char* for looking for a single char.
+
+			// The value to find is actually empty, nothing to do
+			if (0 == Traits::Length<StringT,Size>::fixedLength)
+				return;
+			// The string is actually a single POD item
+			if (1 == Traits::Length<StringT,Size>::fixedLength)
+				return overwrite(AncestorType::size - offset - 1, Traits::CString<StringT>::Perform(s), 1);
+			// Researching for the substring with a known length
+			return overwrite(AncestorType::size - offset - Traits::Length<StringT,Size>::fixedLength,
+				Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::fixedLength);
+		}
+
+		const Size len = Traits::Length<StringT,Size>::Value(s);
+		return overwrite(AncestorType::size - offset - len, Traits::CString<StringT>::Perform(s), len);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::overwriteRight(const StringT& s)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		// Find the substring
+		if (Traits::Length<StringT,Size>::isFixed)
+		{
+			// We can make some optimisations when the length is known at compile compile time
+			// This part of the code should not bring better performances but it should
+			// prevent against bad uses of the API, like using a char* for looking for a single char.
+
+			// The value to find is actually empty, nothing to do
+			if (0 == Traits::Length<StringT,Size>::fixedLength)
+				return;
+			// The string is actually a single POD item
+			if (1 == Traits::Length<StringT,Size>::fixedLength)
+				return overwrite(AncestorType::size - 1, Traits::CString<StringT>::Perform(s), 1);
+			// Researching for the substring with a known length
+			return overwrite(AncestorType::size - Traits::Length<StringT,Size>::fixedLength,
+				Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::fixedLength);
+		}
+
+		const Size len = Traits::Length<StringT,Size>::Value(s);
+		return overwrite(AncestorType::size - len, Traits::CString<StringT>::Perform(s), len);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::overwriteCenter(const StringT& s)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		// Find the substring
+		if (Traits::Length<StringT,Size>::isFixed)
+		{
+			// We can make some optimisations when the length is known at compile compile time
+			// This part of the code should not bring better performances but it should
+			// prevent against bad uses of the API, like using a char* for looking for a single char.
+
+			// The value to find is actually empty, nothing to do
+			if (0 == Traits::Length<StringT,Size>::fixedLength)
+				return;
+			// The string is actually a single POD item
+			if (1 == Traits::Length<StringT,Size>::fixedLength)
+				return overwrite((AncestorType::size >> 1), Traits::CString<StringT>::Perform(s), 1);
+			// Researching for the substring with a known length
+			return overwrite((AncestorType::size >> 1) - (Traits::Length<StringT,Size>::fixedLength >> 1),
+				Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::fixedLength);
+		}
+
+		const Size len = Traits::Length<StringT,Size>::Value(s);
+		return overwrite((AncestorType::size >> 1) - (len >> 1), Traits::CString<StringT>::Perform(s), len);
+	}
 
 
 
@@ -1051,7 +1193,7 @@ namespace Yuni
 		AncestorType::shrink();
 	}
 
-		
+
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::resize(
@@ -1075,6 +1217,25 @@ namespace Yuni
 		if (zeroTerminated)
 			AncestorType::data[AncestorType::size] = Char();
 	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::resize(
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len,
+		const StringT& pattern)
+	{
+		if (len > AncestorType::size)
+		{
+			const Size previousLength = AncestorType::size;
+			resize(len);
+			fill(previousLength, pattern);
+		}
+		else
+			resize(len);
+	}
+
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
