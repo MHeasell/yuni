@@ -1,7 +1,8 @@
-#ifndef __YUNI_CORE_MEMORY_BUFFER_TRAITS_FILL_H__
-# define __YUNI_CORE_MEMORY_BUFFER_TRAITS_FILL_H__
+#ifndef __YUNI_CORE_CUSTOMSTRING_TRAITS_FILL_H__
+# define __YUNI_CORE_CUSTOMSTRING_TRAITS_FILL_H__
 
 # include "../../traits/length.h"
+
 
 namespace Yuni
 {
@@ -11,60 +12,45 @@ namespace CustomString
 {
 
 
-	template<class CustomStringT, class U>
+	template<class CustomStringT, class StringT>
 	struct Fill
 	{
-		// Unknown type
+		static void Perform(char* data, typename CustomStringT::Size size, const StringT& pattern)
+		{
+			const unsigned int patternSize = Traits::Length<StringT,unsigned int>::Value(pattern);
+			const char* const cstr = Traits::CString<StringT>::Perform(pattern);
+
+			if (patternSize == 0)
+				return;
+			// If equals to 1, it is merely a single char
+			if (patternSize == 1)
+			{
+				for (typename CustomStringT::Size i = 0; i < size; ++i)
+					data[i] = *cstr;
+				return;
+			}
+			// We have to copy N times the pattern
+			typename CustomStringT::Size p = 0;
+			while (p + patternSize <= size)
+			{
+				(void)::memcpy(data + p, cstr, patternSize * sizeof(char));
+				p += patternSize;
+			}
+			for (; p < size; ++p)
+				data[p] = ' ';
+		}
 	};
+
 
 	template<class CustomStringT>
 	struct Fill<CustomStringT, char>
 	{
-		typedef char S;
-		static void Perform(typename CustomStringT::Type* data, typename CustomStringT::Size size, const S rhs)
+		static void Perform(char* data, typename CustomStringT::Size size, const char rhs)
 		{
-			(void)::memset(data, rhs, size);
+			for (typename CustomStringT::Size i = 0; i != size; ++i)
+				data[i] = rhs;
 		}
 	};
-
-	template<class CustomStringT>
-	struct Fill<CustomStringT, wchar_t>
-	{
-		typedef wchar_t S;
-		static void Perform(typename CustomStringT::Type* data, typename CustomStringT::Size size, const S rhs)
-		{
-			(void)::wmemset(data, rhs, size);
-		}
-	};
-
-
-	template<class CustomStringT>
-	struct Fill<CustomStringT, typename CustomStringT::Type*>
-	{
-		typedef typename CustomStringT::Type C;
-		static void Perform(typename CustomStringT::Type* data, typename CustomStringT::Size size, const C* pattern)
-		{
-			// Alias for the size type
-			typedef typename CustomStringT::Size Size;
-
-			// Getting the size of the pattern
-			const Size patternSize = Yuni::Traits::Length<C*,Size>::Value(pattern);
-			// If equals to 1, it is merely a single char
-			if (patternSize == 1)
-			{
-				Fill<CustomStringT, typename CustomStringT::Type>::Perform(data, size, *pattern);
-				return;
-			}
-			// We have to copy N times the pattern
-			Size p(0);
-			while (p + patternSize <= size)
-			{
-				(void)::memcpy(data + p, pattern, patternSize * sizeof(C));
-				p += patternSize;
-			}
-		}
-	};
-
 
 
 
@@ -73,4 +59,4 @@ namespace CustomString
 } // namespace Extension
 } // namespace Yuni
 
-#endif // __YUNI_CORE_MEMORY_BUFFER_TRAITS_FILL_H__
+#endif // __YUNI_CORE_CUSTOMSTRING_TRAITS_FILL_H__
