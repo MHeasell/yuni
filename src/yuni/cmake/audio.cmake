@@ -1,8 +1,11 @@
 
 Message(STATUS ":: [Module] Audio")
 
-FIND_PACKAGE(zlib)
-FIND_PACKAGE(BZip2)
+IF (NOT WIN32 AND NOT WIN64)
+   FIND_PACKAGE(zlib)
+   FIND_PACKAGE(BZip2)
+ENDIF (NOT WIN32 AND NOT WIN64)
+
 
 LIBYUNI_CONFIG_LIB("audio"      "yuni-static-audio-core")
 
@@ -73,6 +76,10 @@ ENDIF (ZLIB_FOUND)
 LIBYUNI_CONFIG_LIB_RAW_COMMAND("audio" "${YUNI_EXT_FFMPEG_LIB}")
 LIBYUNI_CONFIG_INCLUDE_PATH("audio" "${YUNI_EXT_FFMPEG_INCLUDE}")
 
+### WARNING: FFmpeg 0.6 (and other versions) fail to compile with:
+### error: 'UINT64_C' was not declared in this scope
+### This define is required to solve this.
+add_definitions(-D__STDC_CONSTANT_MACROS)
 
 source_group(Audio FILES ${SRC_AUDIO})
 source_group(Audio\\Ffmpeg FILES ${SRC_AUDIO_FFMPEG})
