@@ -232,7 +232,7 @@ namespace Audio
 	bool OpenAL::SetBufferData(unsigned int buffer, int format, void* data, size_t count, int rate)
 	{
 		alGetError();
- 		alBufferData(buffer, format, data, count, rate);
+ 		alBufferData(buffer, format, data, static_cast<ALsizei>(count), rate);
 		return alGetError() == AL_NO_ERROR;
 	}
 
