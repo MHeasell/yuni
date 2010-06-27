@@ -6,20 +6,19 @@ namespace Yuni
 namespace Charset
 {
 
-	template <typename TSrcCustomString, typename TDstCustomString>
-	bool Converter::convert(TSrcCustomString& source, TDstCustomString& destination,
+	template <typename SrcStringT, typename DtsStringT>
+	bool Converter::convert(SrcStringT& source, DtsStringT& destination,
 		bool isLastBuffer)
 	{
 		// Since the source and destination length may not be the same,
 		// and the algorithm to predict the destination size depends on
 		// the conversion performed, and since we want to perform complete
 		// conversions, we require an expandable string as destination.
-		YUNI_STATIC_ASSERT(TDstCustomString::expandable == 1,
-						   CharsetConverterRequiresExpandableBuffers);
+		YUNI_STATIC_ASSERT(DtsStringT::expandable == 1, CharsetConverterRequiresExpandableBuffers);
 		enum
 		{
-			DSTSZ = sizeof(typename TDstCustomString::Type),
-			SRCSZ = sizeof(typename TSrcCustomString::Type),
+			DSTSZ = sizeof(typename DtsStringT::Type),
+			SRCSZ = sizeof(typename SrcStringT::Type),
 		};
 
 		/*
@@ -90,8 +89,7 @@ namespace Charset
 			** We also need to compute the remaining size in the buffer:
 			**  = total capacity - current size
 			*/
-			char* dstData = reinterpret_cast<char *>(destination.data())
-				+ destination.sizeInBytes();
+			char* dstData = reinterpret_cast<char*>(destination.data()) + destination.sizeInBytes();
 			size_t dstSize = destination.capacityInBytes() - destination.sizeInBytes();
 
 			/*
@@ -131,8 +129,6 @@ namespace Charset
 			if ((size_t)-1 == result)
 			{
 				// Now we will treat the common error cases.
-
-
 				switch (errno)
 				{
 					case E2BIG:
@@ -160,7 +156,6 @@ namespace Charset
 						break;
 				}
 			}
-
 		} while (retry);
 
 		/*
@@ -175,15 +170,20 @@ namespace Charset
 		return true;
 	}
 
+
 	inline int Converter::lastError() const
 	{
 		return pLastError;
 	}
 
+
 	inline bool Converter::valid() const
 	{
 		return ((void*)-1 != pContext);
 	}
+
+
+
 
 
 } // namespace Charset

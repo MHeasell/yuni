@@ -1,19 +1,21 @@
 #ifndef __YUNI_CORE_CHARSET_CHARSET_H__
 # define __YUNI_CORE_CHARSET_CHARSET_H__
 
-#include <errno.h>
 #include "../../yuni.h"
 #include "../string.h"
+#include <errno.h>
+
 
 namespace Yuni
 {
-//! Everything related to charset conversions
+//! Everything related to charset conversions (EXPERIMENTAL)
 namespace Charset
 {
+
 	/*!
-	** @brief Enumeration of common charsets
+	** \brief Enumeration of common charsets
 	**
-	** WARNING: The order of this enum matches
+	** \warning The order of this enum matches
 	** the order of the strings in the TypeAsString[] array.
 	** You should only add types to this list, not change its
 	** order in order to preserve the ABI.
@@ -138,14 +140,14 @@ namespace Charset
 		C99,
 		JAVA,
 
-		/* Full Unicode, in terms of uint16_t or uint32_t */
-		/* (with machine dependent endianness and alignment) */
+		// Full Unicode, in terms of uint16_t or uint32_t
+		// (with machine dependent endianness and alignment)
 		UCS_2_INTERNAL,
 		UCS_4_INTERNAL,
 
-		/* Locale dependent, in terms of char or wchar_t */
-		/* (with machine dependent endianness and alignment, and with semantics 
-			depending on the OS and the current LC_CTYPE locale facet) */
+		// Locale dependent, in terms of char or wchar_t
+		// (with machine dependent endianness and alignment, and with semantics 
+		//	depending on the OS and the current LC_CTYPE locale facet)
 		CHAR,
 		WCHAR_T,
 
@@ -159,7 +161,7 @@ namespace Charset
 	** You should only add types to this list, not change its
 	** order in order to preserve the ABI.
 	*/
-	static const char * const TypeAsString[] =
+	static const char* const TypeAsString[] =
 	{
 		/* European Languages */
 		"ASCII",
@@ -293,12 +295,6 @@ namespace Charset
 	}; // static const char * const TypeAsString
 
 
-/* NOTES:
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Core::Traits::CString<U>::valid, CustomString_InvalidTypeForBuffer);
-		use Core::Traits::CString<U>::Buffer(u) as const char * .
-*/
-
 	//! Conversion options
 	enum Unconvertable
 	{
@@ -365,7 +361,7 @@ namespace Charset
 		/*!
 		** Returns the last error encountered (errno-style)
 		** 
-		** \returns the last error encountered by the object.
+		** \return the last error encountered by the object.
 		*/
 		int lastError() const;
 
@@ -380,7 +376,7 @@ namespace Charset
 		**   - The object was constructed using the default constructor and a
 		**     conversion context was not open()ed.
 		**
-		** \returns true if the converter has been properly initialized.
+		** \return true if the converter has been properly initialized.
 		*/
 		bool valid() const;
 
@@ -424,20 +420,20 @@ namespace Charset
 		**  - the destination buffer will be appended the converted
 		**    characters
 		**
-		** \returns True if the conversion was successful, false otherwise.
+		** \return True if the conversion was successful, false otherwise.
 		*/
-		template <typename TSrcCustomString, typename TDstCustomString>
-		bool convert(TSrcCustomString& source, TDstCustomString& destination,
-					 bool isLastBuffer = true);
+		template <typename SrcStringT, typename DstStringT>
+		bool convert(SrcStringT& source, DstStringT& destination,
+				bool isLastBuffer = true);
 
 	public:
 		/*!
 		** Returns the real name of the specified charset.
 		**
-		** \returns Returns a pointer on a static C string containing
+		** \return Returns a pointer on a static C string containing
 		** the name of the specified charset.
 		*/
-		static const char * Name(Charset::Type type);
+		static const char* Name(Charset::Type type);
 
 	private:
 		Converter& operator = (const Converter & /* rhs */);
@@ -468,7 +464,10 @@ namespace Charset
 		//! Last error
 		int pLastError;
 
-	};
+	}; // class Converter
+
+
+
 
 
 } // namespace Charset
