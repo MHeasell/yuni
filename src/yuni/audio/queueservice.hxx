@@ -14,6 +14,7 @@ namespace Audio
 		return get(String(name));
 	}
 
+
 	template<>
 	inline Emitter::Ptr QueueService::Emitters::get<String>(const String& name)
 	{
@@ -24,8 +25,6 @@ namespace Audio
 			return Emitter::Ptr(NULL);
 		return it->second;
 	}
-
-
 
 
 	template<typename StringT>
@@ -110,6 +109,7 @@ namespace Audio
 
 		return true;
 	}
+
 
 	template<>
 	inline bool QueueService::Emitters::attach<String>(Emitter::Ptr emitter, const String& bufferName)

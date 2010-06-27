@@ -39,7 +39,6 @@ namespace Audio
 	public:
 		//! \name Constructors & Destructor
 		//@{
-
 		/*!
 		** \brief Shortest constructor
 		**
@@ -69,7 +68,6 @@ namespace Audio
 
 		//! \name Methods
 		//@{
-
 		//! Attach a buffer to the emitter
 		bool attachBufferDispatched(Private::Audio::Buffer<>::Ptr buffer);
 
@@ -83,13 +81,11 @@ namespace Audio
 
 		//! Update buffers if necessary
 		bool updateDispatched();
-
 		//@}
 
 
 		//! \name Accessors
 		//@{
-
 		void position(const Gfx::Point3D<>& position);
 		Gfx::Point3D<> position() const;
 

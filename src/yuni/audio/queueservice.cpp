@@ -9,7 +9,7 @@ namespace Yuni
 namespace Audio
 {
 
-	bool QueueService::sHasRunningInstance = false;
+	Atomic::Int<32> QueueService::sHasRunningInstance = 0;
 
 
 	bool QueueService::start()
@@ -33,11 +33,12 @@ namespace Audio
 
 		if (pReady)
 		{
-			sHasRunningInstance = true;
+			sHasRunningInstance = 1;
 			return true;
 		}
 		return false;
 	}
+
 
 	void QueueService::stop()
 	{
@@ -62,7 +63,7 @@ namespace Audio
 		pAudioLoop.dispatch(callback);
 		pAudioLoop.stop();
 		pReady = false;
-		sHasRunningInstance = false;
+		sHasRunningInstance = 0;
 	}
 
 
