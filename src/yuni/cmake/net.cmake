@@ -1,5 +1,5 @@
 
-Message(STATUS ":: [Module] Network")
+YMESSAGE(":: [Module] Network")
 
 LIBYUNI_CONFIG_LIB("net"        "yuni-static-net")
 

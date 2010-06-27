@@ -1,9 +1,11 @@
 Project(Yuni-Framework)
 CMake_minimum_required(VERSION 2.8)
+include("cmake/message.cmake")
 
-Message(STATUS "")
-Message(STATUS "The Yuni Framework")
-Message(STATUS "")
+
+YMESSAGE("")
+YMESSAGE("The Yuni Framework")
+YMESSAGE("")
 
 
 # Package informations
@@ -32,6 +34,8 @@ ENDIF(POLICY CMP0011)
 Set(YUNI_INSTALL_CXX_FLAGS   "")
 Set(YUNI_INSTALL_CXX_DEFINES "")
 
+
+
 # Target
 Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake")
 
@@ -49,9 +53,9 @@ Set(TARGET_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/../bin/static/")
 Set(LIBRARY_OUTPUT_PATH "${TARGET_LIBS}")
 Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 
-Message(STATUS "Folders")
-Message(STATUS "   root: `${CMAKE_CURRENT_SOURCE_DIR}`")
-Message(STATUS "   libs: `${TARGET_LIBS}`")
+YMESSAGE("Folders")
+YMESSAGE("   root: `${CMAKE_CURRENT_SOURCE_DIR}`")
+YMESSAGE("   libs: `${TARGET_LIBS}`")
 
 
 # Custom settings
@@ -62,15 +66,15 @@ IF("${PROFILE}" STREQUAL "")
 	ELSE("${ProfileFilename}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/ProfileBuild.cmake")
 		CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/ProfileBuild.template.cmake
 			${CMAKE_CURRENT_SOURCE_DIR}/ProfileBuild.cmake)
-		Message(STATUS "A default profile has been created (`./ProfileBuild.cmake`)")
-		Message(STATUS "Please edit this file to override the default settings")
+		YMESSAGE("A default profile has been created (`./ProfileBuild.cmake`)")
+		YMESSAGE("Please edit this file to override the default settings")
 		Include(${CMAKE_CURRENT_SOURCE_DIR}/ProfileBuild.cmake)
 	ENDIF("${ProfileFilename}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/ProfileBuild.cmake")
 ELSE("${PROFILE}" STREQUAL "")
 	Include("${PROFILE}")
 ENDIF("${PROFILE}" STREQUAL "")
 
-Message(STATUS "[Profile] ${YUNI_PROFILE_NAME}")
+YMESSAGE("[Profile] ${YUNI_PROFILE_NAME}")
 # (Re)Check the target
 Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake")
 
@@ -98,16 +102,16 @@ Add_SubDirectory(tools)
 # Compiling yuni-config if required
 #
 IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
-	Message(STATUS "[yuni-config] Bootstraping")
+	YMESSAGE("[yuni-config] Bootstraping")
 	IF(YUNI_TESTS)
-		Message(STATUS "The bootstrapping is required to compile the testsuite")
+		YMESSAGE("The bootstrapping is required to compile the testsuite")
 	ENDIF(YUNI_TESTS)
 	# --
-	Message(STATUS "Configuring yuni-config...")
-	Message(STATUS "(in ${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config)")
+	YMESSAGE("Configuring yuni-config...")
+	YMESSAGE("(in ${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config)")
 	execute_process(COMMAND "${CMAKE_COMMAND}" . -G "${CMAKE_GENERATOR}" "-DCMAKE_BUILD_TYPE=release"
 			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config")
-	Message(STATUS "Compiling yuni-config...")
+	YMESSAGE("Compiling yuni-config...")
     IF(WIN32)
         IF(MSYS)
             SET(Y_MAKE_COMMAND "make.exe")

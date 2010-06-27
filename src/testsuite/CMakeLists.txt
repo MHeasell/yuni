@@ -1,17 +1,18 @@
 Project(Yuni-Testsuite)
 CMake_minimum_required(VERSION 2.8)
+include("../cmake/message.cmake")
 
-Message(STATUS "")
-Message(STATUS "Testsuite for the Yuni Framework")
-Message(STATUS "")
+YMESSAGE("")
+YMESSAGE("Testsuite for the Yuni Framework")
+YMESSAGE("")
 
 IF(POLICY CMP0011)
 	CMake_Policy(SET CMP0011 NEW)
 ENDIF(POLICY CMP0011)
 
-Message(STATUS "")
-Message(STATUS "Looking for testcases...")
-Message(STATUS "Path: ${PROJECT_SOURCE_DIR}")
+YMESSAGE("")
+YMESSAGE("Looking for testcases...")
+YMESSAGE("Path: ${PROJECT_SOURCE_DIR}")
 
 Set(YuniTestCase_LastExe               "")
 Set(YuniTestCase_LastID                "")
@@ -62,7 +63,7 @@ ENDMACRO(YUNITESTCASE_BEGIN)
 
 
 MACRO(YUNITESTCASE_MODULES)
-	Find_Package(LibYuni COMPONENTS ${ARGV})
+	Find_Package(Yuni COMPONENTS ${ARGV})
 	IF(LibYuni_FOUND)
 		Set(YuniTestCase_ModulesHaveBeenFound "1")
 		Set(YuniTestCase_CXXFlags "${LibYuni_CXXFLAGS}")
@@ -114,7 +115,7 @@ ENDMACRO(YUNITESTCASE_END)
 Include("${PROJECT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
 Include("${PROJECT_SOURCE_DIR}/../cmake/Modules.cmake")
 
-# To find 'FindLibYuni.cmake'
+# To find 'FindYuni.cmake'
 LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../../packages/cmake")
 
 
@@ -127,7 +128,7 @@ include_directories("${PROJECT_SOURCE_DIR}/..")
 
 
 
-Find_Package(LibYuni COMPONENTS core)
+Find_Package(Yuni COMPONENTS core)
 IF(LibYuni_FOUND)
 	#
 	# Adding Testcases
@@ -143,7 +144,7 @@ ENDIF(LibYuni_FOUND)
 get_property(YnList GLOBAL PROPERTY YuniTestCaseListCount)
 List(LENGTH YnList YnListCount)
 
-Message(STATUS "Testcase count: ${YnListCount}")
-Message(STATUS "")
+YMESSAGE("Testcase count: ${YnListCount}")
+YMESSAGE("")
 get_property(YnList GLOBAL PROPERTY YuniTestCaseList)
 

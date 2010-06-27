@@ -1,5 +1,5 @@
 
-Message(STATUS ":: [Module] Audio")
+YMESSAGE(":: [Module] Audio")
 
 
 LIBYUNI_CONFIG_LIB("audio"      "yuni-static-audio-core")
@@ -39,7 +39,7 @@ Include(CheckIncludeFile)
 #
 # OpenAL
 #
-Message(STATUS "Added Support for OpenAL")
+YMESSAGE("Added Support for OpenAL")
 IF(APPLE)
 	# Frameworks
 	LIBYUNI_CONFIG_FRAMEWORK("audio" OpenAL)
@@ -49,9 +49,9 @@ ELSE(APPLE)
 	ELSE(WIN32 OR WIN64)
 		FIND_PACKAGE(OpenAL)
 		IF(NOT OPENAL_FOUND)
-			Message(SEND_ERROR "[!!] Impossible to find OpenAL")
-			Message(STATUS     " * Packages needed on Debian: libopenal-dev")
-			Message(STATUS     " * Packages needed on Fedora: openal-devel")
+			YERROR("[!!] Impossible to find OpenAL")
+			YMESSAGE(    " * Packages needed on Debian: libopenal-dev")
+			YMESSAGE(    " * Packages needed on Fedora: openal-devel")
 		ENDIF(NOT OPENAL_FOUND)
 	ENDIF(WIN32 OR WIN64)
 	LIBYUNI_CONFIG_LIB_RAW_COMMAND("audio" "${OPENAL_LIBRARY}")
@@ -62,7 +62,7 @@ ENDIF(APPLE)
 #
 # FFmpeg
 #
-Message(STATUS "Added Support for FFMpeg")
+YMESSAGE("Added Support for FFMpeg")
 DEVPACK_IMPORT_FFMPEG()
 SET(SRC_AUDIO_FFMPEG ${YUNI_EXT_FFMPEG_HEADERS})
 
@@ -72,9 +72,9 @@ IF (NOT WIN32 AND NOT WIN64)
 	IF (ZLIB_FOUND)
 		LIST(APPEND YUNI_EXT_FFMPEG_LIB ${ZLIB_LIBRARIES})
 	ELSE (ZLIB_FOUND)
-		Message(STATUS     "[!!] Impossible to find ZLib (Audio will not work properly !)")
-		Message(STATUS     " * Packages needed on Debian: libz-dev")
-		Message(STATUS     " * Packages needed on Fedora: zlib-devel")
+		YMESSAGE(    "[!!] Impossible to find ZLib (Audio will not work properly !)")
+		YMESSAGE(    " * Packages needed on Debian: libz-dev")
+		YMESSAGE(    " * Packages needed on Fedora: zlib-devel")
 	ENDIF (ZLIB_FOUND)
 
 	# BZIP2
@@ -82,9 +82,9 @@ IF (NOT WIN32 AND NOT WIN64)
 	IF(BZIP2_FOUND)
 		LIST(APPEND YUNI_EXT_FFMPEG_LIB ${BZIP2_LIBRARIES})
 	ELSE(BZIP2_FOUND)
-		Message(STATUS     "[!!] Impossible to find BZip2 (Audio will not work properly !)")
-		Message(STATUS     " * Packages needed on Debian: libbz2-dev")
-		Message(STATUS     " * Packages needed on Fedora: bzip2-devel")
+		YMESSAGE(    "[!!] Impossible to find BZip2 (Audio will not work properly !)")
+		YMESSAGE(    " * Packages needed on Debian: libbz2-dev")
+		YMESSAGE(    " * Packages needed on Fedora: bzip2-devel")
 	ENDIF(BZIP2_FOUND)
 ENDIF (NOT WIN32 AND NOT WIN64)
 

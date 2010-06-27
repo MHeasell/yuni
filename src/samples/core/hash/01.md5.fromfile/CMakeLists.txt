@@ -1,5 +1,5 @@
 
-Find_Package(LibYuni COMPONENTS core)
+Find_Package(Yuni COMPONENTS core)
 IF(LibYuni_FOUND)
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")
 	link_libraries("${LibYuni_LIBS}")

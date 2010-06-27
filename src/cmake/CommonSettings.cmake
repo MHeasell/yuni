@@ -37,7 +37,7 @@ IF("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "releas
 	#
 	# Build Configuration: Release
 	#
-	Message(STATUS "Build Configuration: Release")
+	YMESSAGE("Build Configuration: Release")
 
 	IF(NOT WIN32)
 		Set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -Wall  -Wextra ${YUNI_PROFILE_CXX_FLAGS_INSTRUCTIONS_SETS} -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings")
@@ -61,7 +61,7 @@ Else("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "rele
 	#
 	# Build Configuration: Debug
 	#
-	Message(STATUS "Build Configuration: Debug")
+	YMESSAGE("Build Configuration: Debug")
 
 
 	IF(NOT WIN32)
@@ -84,7 +84,7 @@ EndIF("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "rel
 
 ELSE("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
 
-	Message(STATUS "C++ flags overriden by settings")
+	YMESSAGE("C++ flags overriden by settings")
 	SET(CMAKE_CXX_FLAGS "${YUNI_CXX_FLAGS_OVERRIDE}")
 
 ENDIF("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
@@ -102,7 +102,7 @@ ENDIF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD}" STREQUAL "")
 
 
 IF(APPLE)
-#	Message(STATUS "Enabled universal binaries (i386, x86_64)")
+#	YMESSAGE("Enabled universal binaries (i386, x86_64)")
 #	Set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
 ENDIF(APPLE)
 
