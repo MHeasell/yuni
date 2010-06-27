@@ -89,25 +89,25 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules.cmake")
 # Sub Directories
 Add_SubDirectory(yuni)
 
-# tools (especially for libyuni-config)
+# tools (especially for yuni-config)
 Add_SubDirectory(tools)
 
 
 
 #
-# Compiling libyuni-config if required
+# Compiling yuni-config if required
 #
 IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
-	Message(STATUS "[libyuni-config] Bootstraping")
+	Message(STATUS "[yuni-config] Bootstraping")
 	IF(YUNI_TESTS)
 		Message(STATUS "The bootstrapping is required to compile the testsuite")
 	ENDIF(YUNI_TESTS)
 	# --
-	Message(STATUS "Configuring libyuni-config...")
-	Message(STATUS "(in ${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config)")
+	Message(STATUS "Configuring yuni-config...")
+	Message(STATUS "(in ${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config)")
 	execute_process(COMMAND "${CMAKE_COMMAND}" . -G "${CMAKE_GENERATOR}" "-DCMAKE_BUILD_TYPE=release"
-			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config")
-	Message(STATUS "Compiling libyuni-config...")
+			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config")
+	Message(STATUS "Compiling yuni-config...")
     IF(WIN32)
         IF(MSYS)
             SET(Y_MAKE_COMMAND "make.exe")
@@ -118,7 +118,7 @@ IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
         SET(Y_MAKE_COMMAND "make")
     ENDIF(WIN32)
 	execute_process(COMMAND ${Y_MAKE_COMMAND}
-			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/libyuni-config")
+			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config")
 ENDIF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 
 

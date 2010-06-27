@@ -50,7 +50,7 @@ namespace Yuni
 		GetOpt::Parser opts;
 
 		// Compiler
-		opts.addParagraph("\nTypical usage example :\n  $ libyuni-config -c gcc -m script --cxxflags\n\nCompiler settings:");
+		opts.addParagraph("\nTypical usage example :\n  $ yuni-config -c gcc -m script --cxxflags\n\nCompiler settings:");
 		opts.addFlag(pOptCxxFlags, ' ', "cxxflags", "Print the CXX flags (*)");
 		opts.addFlag(pOptLibFlags, ' ', "libs", "Print the Libs flags (*)");
 		opts.add(pOptCompiler, 'c', "compiler", "Set the target compiler (gcc,msvc,mingw,icc,...)");

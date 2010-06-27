@@ -1,5 +1,5 @@
 
 IF(NOT YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
-	Add_SubDirectory(libyuni-config)
+	Add_SubDirectory(yuni-config)
 ENDIF(NOT YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 
