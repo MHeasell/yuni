@@ -8,21 +8,21 @@ namespace Audio
 {
 
 	inline Emitter::Emitter(bool loop)
-		: pLoop(loop), pGain(DefaultGain), pBuffer(NULL)
-		, pReady(false), pPlaying(false), pModified(false)
+		: pLoop(loop), pGain(DefaultGain), pBuffer(NULL),
+		pReady(false), pPlaying(false), pModified(false)
 	{}
 
 
 	inline Emitter::Emitter(const Gfx::Point3D<>& position, bool loop)
-		: pPosition(position), pLoop(loop), pGain(1.0f), pBuffer(NULL)
-		, pReady(false), pPlaying(false), pModified(false)
+		: pPosition(position), pLoop(loop), pGain(1.0f), pBuffer(NULL),
+		pReady(false), pPlaying(false), pModified(false)
 	{}
 
 
 	inline Emitter::Emitter(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
 		const Gfx::Vector3D<>& direction, bool loop = false)
-		: pPosition(position), pVelocity(velocity), pDirection(direction), pLoop(loop)
-		, pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false), pModified(false)
+		: pPosition(position), pVelocity(velocity), pDirection(direction), pLoop(loop),
+		pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false), pModified(false)
 	{}
 
 
@@ -36,11 +36,13 @@ namespace Audio
 		}
 	}
 
+
 	inline Gfx::Point3D<> Emitter::position() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pPosition;
 	}
+
 
 	inline void Emitter::velocity(const Gfx::Vector3D<>& velocity)
 	{
@@ -52,11 +54,13 @@ namespace Audio
 		}
 	}
 
+
 	inline Gfx::Vector3D<> Emitter::velocity() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pVelocity;
 	}
+
 
 	inline void Emitter::direction(const Gfx::Vector3D<>& direction)
 	{
@@ -67,6 +71,7 @@ namespace Audio
 			pModified = true;
 		}
 	}
+
 
 	inline Gfx::Vector3D<> Emitter::direction() const
 	{
@@ -85,6 +90,7 @@ namespace Audio
 		}
 	}
 
+
 	inline float Emitter::gain() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -97,6 +103,7 @@ namespace Audio
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pName;
 	}
+
 
 	template<class StringT>
 	inline void Emitter::name(const StringT& name)
@@ -111,6 +118,7 @@ namespace Audio
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pID;
 	}
+
 
 
 

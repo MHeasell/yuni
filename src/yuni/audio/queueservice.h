@@ -12,6 +12,7 @@
 # include "emitter.h"
 # include "loop.h"
 # include "../private/audio/buffer.h"
+# include "../core/atomic/int.h"
 
 
 namespace Yuni
@@ -203,7 +204,7 @@ namespace Audio
 
 	private:
 		//! Static to make sure only one manager is started
-		static bool sHasRunningInstance;
+		static Atomic::Int<32> sHasRunningInstance;
 
 		//! Has the manager been properly started ?
 		bool pReady;
