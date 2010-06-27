@@ -380,36 +380,69 @@ namespace Yuni
 	}
 
 
+	namespace // anonymous
+	{
+		void PrintArgs(const LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap& args)
+		{
+			bool first = true;
+			const LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap::const_iterator end = args.end();
+			for (LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap::const_iterator i = args.begin(); i != end; ++i)
+			{
+				if (!first)
+					std::cout << ' ';
+				first = false;
+				std::cout << i->first;
+			}
+		}
+
+	} // anonymous namespace
+
+
 	void LibConfigProgram::createArguments(LibConfig::VersionInfo::Settings& version) const
 	{
 		LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap args;
+		bool hasCxxFlags = false;
+
+		if (pOptCxxFlags)
 		{
 			const String::List::const_iterator end = pOptModules.end();
 			for (String::List::const_iterator i = pOptModules.begin(); i != end; ++i)
 			{
 				LibConfig::VersionInfo::Settings::SettingsPerModule& modSettings = version.moduleSettings[*i];
-				if (pOptCxxFlags)
-				{
-					modSettings.merge(args, modSettings.cxxFlags);
-					modSettings.merge(args, modSettings.defines);
-					modSettings.merge(args, modSettings.includes);
-				}
-				if (pOptLibFlags)
-				{
-					modSettings.merge(args, modSettings.frameworks);
-					modSettings.merge(args, modSettings.libs);
-					modSettings.merge(args, modSettings.libIncludes);
-				}
+				modSettings.merge(args, modSettings.cxxFlags);
+				modSettings.merge(args, modSettings.defines);
+				modSettings.merge(args, modSettings.includes);
+			}
+			if (!args.empty())
+			{
+				hasCxxFlags = true;
+				PrintArgs(args);
 			}
 		}
-		bool first = true;
-		const LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap::const_iterator end = args.end();
-		for (LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap::const_iterator i = args.begin(); i != end; ++i)
+
+		if (pOptLibFlags)
 		{
-			if (!first)
-				std::cout << ' ';
-			first = false;
-			std::cout << i->first;
+			args.clear();
+			const String::List::const_iterator end = pOptModules.end();
+			for (String::List::const_iterator i = pOptModules.begin(); i != end; ++i)
+			{
+				LibConfig::VersionInfo::Settings::SettingsPerModule& modSettings = version.moduleSettings[*i];
+				modSettings.merge(args, modSettings.frameworks);
+				modSettings.merge(args, modSettings.libs);
+				modSettings.merge(args, modSettings.libIncludes);
+			}
+			if (!args.empty())
+			{
+				# if !defined(YUNI_OS_WINDOWS) && !defined(YUNI_OS_MAC)
+				if (hasCxxFlags)
+					std::cout << ' ';
+				std::cout << "-Wl,--start-group ";
+				# endif
+				PrintArgs(args);
+				# if !defined(YUNI_OS_WINDOWS) && !defined(YUNI_OS_MAC)
+				std::cout << " -Wl,--end-group";
+				# endif
+			}
 		}
 		std::cout << "\n";
 	}
