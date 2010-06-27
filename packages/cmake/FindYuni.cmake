@@ -34,14 +34,14 @@ SET(LibYuni_Config   "")
 
 
 
-SET(__LibYuni_Message "Looking for libyuni")
+SET(__LibYuni_Message "Looking for the Yuni Framework")
 
 #
 # Where is yuni-config ?
 #
 SET(__LibYuni_CurrentFolder "${CMAKE_CURRENT_LIST_FILE}")
-STRING(REPLACE "\\FindLibYuni.cmake" "" __LibYuni_CurrentFolder "${__LibYuni_CurrentFolder}")
-STRING(REPLACE "/FindLibYuni.cmake" "" __LibYuni_CurrentFolder "${__LibYuni_CurrentFolder}")
+STRING(REPLACE "\\FindYuni.cmake" "" __LibYuni_CurrentFolder "${__LibYuni_CurrentFolder}")
+STRING(REPLACE "/FindYuni.cmake" "" __LibYuni_CurrentFolder "${__LibYuni_CurrentFolder}")
 IF(WIN32 OR WIN64)
 	SET(__LibYuni_ProgramSearchPath
 		C:/dev/libyuni
