@@ -6,7 +6,7 @@
 #  - LibYuni_Info     : A string about the selected version of yuni (`Not found` by default)
 #  - LibYuni_CXXFLAGS : The flags to use for compiling a source file
 #  - LibYuni_LIBS     : The flags to use to link against the libyuni libraries
-#  - LibYuni_Config   : Full path to the program 'libyuni-config' (empty if not found)
+#  - LibYuni_Config   : Full path to the program 'yuni-config' (empty if not found)
 #
 # Usage :
 # \code
@@ -37,7 +37,7 @@ SET(LibYuni_Config   "")
 SET(__LibYuni_Message "Looking for libyuni")
 
 #
-# Where is libyuni-config ?
+# Where is yuni-config ?
 #
 SET(__LibYuni_CurrentFolder "${CMAKE_CURRENT_LIST_FILE}")
 STRING(REPLACE "\\FindLibYuni.cmake" "" __LibYuni_CurrentFolder "${__LibYuni_CurrentFolder}")
@@ -46,19 +46,19 @@ IF(WIN32 OR WIN64)
 	SET(__LibYuni_ProgramSearchPath
 		C:/dev/libyuni
 		C:/libyuni
-		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config"
-		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config/Release"
-		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config/Debug"
+		"${__LibYuni_CurrentFolder}/../../src/tools/yuni-config"
+		"${__LibYuni_CurrentFolder}/../../src/tools/yuni-config/Release"
+		"${__LibYuni_CurrentFolder}/../../src/tools/yuni-config/Debug"
 		"$ENV{LibYuniPaths}")
 ELSE(WIN32 OR WIN64)
 	SET(__LibYuni_ProgramSearchPath
-		"${__LibYuni_CurrentFolder}/../../src/tools/libyuni-config" "$ENV{LibYuniPaths}")
+		"${__LibYuni_CurrentFolder}/../../src/tools/yuni-config" "$ENV{LibYuniPaths}")
 ENDIF(WIN32 OR WIN64)
 
-FIND_PROGRAM(__LibYuni_Config NAMES libyuni-config libyuni-config.exe
+FIND_PROGRAM(__LibYuni_Config NAMES yuni-config yuni-config.exe
     PATHS ${__LibYuni_ProgramSearchPath})
 IF("${__LibYuni_Config}" STREQUAL "__LibYuni_Config-NOTFOUND")
-	MESSAGE(STATUS "${__LibYuni_Message} - failed ('libyuni-config' not found)")
+	MESSAGE(STATUS "${__LibYuni_Message} - failed ('yuni-config' not found)")
 	SET(LibYuni_NOTFOUND TRUE)
 ENDIF("${__LibYuni_Config}" STREQUAL "__LibYuni_Config-NOTFOUND")
 

@@ -13,7 +13,7 @@ Set(YUNI_CMAKE_ERROR 0)
 
 
 #
-# Informations for libyuni-config
+# Informations for yuni-config
 #
 Set(LIBYUNI_CONFIG_ENABLED true)
 

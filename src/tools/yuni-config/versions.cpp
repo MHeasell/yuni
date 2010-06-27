@@ -55,7 +55,7 @@ namespace VersionInfo
 		}
 
 		# ifdef YUNI_OS_MSVC //Visual Studio
-		// For dealing with the paths like '{Debug,Release}/libyuni-config.exe'
+		// For dealing with the paths like '{Debug,Release}/yuni-config.exe'
 		if (Core::IO::File::Exists(String() << root << "\\..\\mark-for-yuni-sources"))
 			loadFromPath(root + "\\..\\..\\..\\..");
 		# endif
