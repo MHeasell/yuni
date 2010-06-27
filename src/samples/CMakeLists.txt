@@ -1,27 +1,28 @@
 Project(YUNI-SAMPLES CXX)
 CMake_minimum_required(VERSION 2.8)
+include("../cmake/message.cmake")
 
 IF(POLICY CMP0011)
 	CMake_Policy(SET CMP0011 NEW)
 ENDIF(POLICY CMP0011)
 
 
-Message(STATUS "")
-Message(STATUS "Yuni Framework - Samples")
-Message(STATUS "")
+YMESSAGE("")
+YMESSAGE("Yuni Framework - Samples")
+YMESSAGE("")
 
-# To find 'FindLibYuni.cmake'
+# To find 'FindYuni.cmake'
 LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../packages/cmake")
 
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
 
 add_custom_target(samples)
 
-Find_Package(LibYuni COMPONENTS core)
+Find_Package(Yuni COMPONENTS core)
 IF(LibYuni_FOUND)
 
 	# Infos
-	MESSAGE(STATUS "The Yuni Framework : ${LibYuni_INFOS}")
+	YMESSAGE("The Yuni Framework : ${LibYuni_INFOS}")
 
 	ADD_SUBDIRECTORY(core)
 	ADD_SUBDIRECTORY(application)

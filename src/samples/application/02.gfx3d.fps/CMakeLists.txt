@@ -1,5 +1,5 @@
 
-Find_Package(LibYuni COMPONENTS core gfx3d)
+Find_Package(Yuni COMPONENTS core gfx3d)
 IF(LibYuni_FOUND)
 	Message(STATUS "Sample: Application / Gfx3D - FPS Counter")
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${LibYuni_CXXFLAGS}")

@@ -1,5 +1,5 @@
 
-Message(STATUS ":: [Module] Algorithms")
+YMESSAGE(":: [Module] Algorithms")
 
 LIBYUNI_CONFIG_LIB("algorithms" "yuni-static-algorithms")
 

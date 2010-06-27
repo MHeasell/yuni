@@ -1,0 +1,8 @@
+MACRO(YMESSAGE msg)
+	MESSAGE(STATUS "{yuni} -- ${msg}")
+ENDMACRO(YMESSAGE)
+MACRO(YERROR msg)
+	MESSAGE(SEND_ERROR "{yuni} -- ${msg}")
+ENDMACRO(YERROR)
+
+

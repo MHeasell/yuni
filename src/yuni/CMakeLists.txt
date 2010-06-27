@@ -1,7 +1,7 @@
 
-Message(STATUS "")
-Message(STATUS "Modules")
-Message(STATUS "")
+YMESSAGE("")
+YMESSAGE("Modules")
+YMESSAGE("")
 
 
 #
@@ -81,7 +81,7 @@ EndIf(YUNI_MODULE_NET)
 #
 #If(YUNI_MODULE_UI)
 
-#	Message(STATUS "[Module] UI::Core (User Interface)")
+#	YMESSAGE("[Module] UI::Core (User Interface)")
 
 	# User Interface
 #	Set(SRC_GFX_UI
@@ -96,14 +96,14 @@ EndIf(YUNI_MODULE_NET)
 
 #	IF(YUNI_MODULE_UI_DUMMY)
 
-#		Message(STATUS "[Module] UI::Dummy")
+#		YMESSAGE("[Module] UI::Dummy")
 
 #	ENDIF(YUNI_MODULE_UI_DUMMY)
 
 
 #	IF(YUNI_MODULE_UI_3D)
 
-#		Message(STATUS "[Module] UI::Gfx3D")
+#		YMESSAGE("[Module] UI::Gfx3D")
 
 #	ENDIF(YUNI_MODULE_UI_3D)
 
@@ -117,7 +117,7 @@ EndIf(YUNI_MODULE_NET)
 #
 If(YUNI_MODULE_DATABASEI)
 
-	Message(STATUS "[Module] Database::Core")
+	YMESSAGE("[Module] Database::Core")
 
 	# Database
 	Set(SRC_DB
@@ -130,7 +130,7 @@ If(YUNI_MODULE_DATABASEI)
 	IF(YUNI_MODULE_DB_PSQL)
 		Set(SRC_DB_PSQL	 private/sql/postgresql/driver.h  private/sql/postgresql/driver.cpp)
 		Add_Library(yuni-static-database-postgresql STATIC ${SRC_DB_PSQL})
-		Message(STATUS "[Module] Database::PostgreSQL")
+		YMESSAGE("[Module] Database::PostgreSQL")
 	ENDIF(YUNI_MODULE_DB_PSQL)
 
 EndIf(YUNI_MODULE_DATABASEI)
@@ -163,10 +163,10 @@ Include_directories(${YUNI_INCLUDE})
 
 
 
-Message(STATUS "")
+YMESSAGE("")
 
 IF("${YUNI_CMAKE_ERROR}" GREATER 0)
-	Message(STATUS "")
-	MESSAGE(SEND_ERROR "An error has occured. Aborting.")
-	Message(STATUS "")
+	YMESSAGE("")
+	YERROR("An error has occured. Aborting.")
+	YMESSAGE("")
 ENDIF("${YUNI_CMAKE_ERROR}" GREATER 0)

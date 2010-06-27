@@ -7,9 +7,9 @@ IF(POLICY CMP0011)
 ENDIF(POLICY CMP0011)
 
 
-Message(STATUS "")
-Message(STATUS "yuni-config")
-Message(STATUS "")
+YMESSAGE("")
+YMESSAGE("yuni-config")
+YMESSAGE("")
 
 
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/CommonSettings.cmake")

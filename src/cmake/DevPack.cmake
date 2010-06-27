@@ -21,7 +21,7 @@ IF(DevPackUnzipHasNotBeenFound)
 	Message(FATAL_ERROR "The program 'unzip' has not been found")
 EndIF(DevPackUnzipHasNotBeenFound)
 IF(WIN32)
-	Message(STATUS "unzip: ${DevPackSourceZIP}")
+	YMESSAGE("unzip: ${DevPackSourceZIP}")
 ENDIF(WIN32)
 
 
@@ -187,7 +187,7 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 
 	IF(NOT DevPackReady)
 
-		Message(STATUS "   ${DevPackTitle}: Missing")
+		YMESSAGE("   ${DevPackTitle}: Missing")
 		File(MAKE_DIRECTORY "${DevPackReceiptsFolder}")
 		File(MAKE_DIRECTORY "${DevPackFolder}")
 		Set(DevPackReceiptReady FALSE)
@@ -195,20 +195,20 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 		DEVPACK_IS_IN_RECEIPTS(DevPackReceiptReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}" "${dparch}"
 			"${dpcompiler}" "${dptarget}")
 		IF(NOT DevPackReceiptReady)
-			Message(STATUS "    . Downloading ${DevPackURL}")
+			YMESSAGE("    . Downloading ${DevPackURL}")
 			# Download the Pack
 			File(DOWNLOAD "${DevPackURL}" "${DevPackReceiptsFolder}/${DevPackShortFilename}.zip"
 					STATUS DevPackDwnlStatus)
 			DEVPACK_IS_IN_RECEIPTS(DevPackReceiptReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}"
 				"${dparch}" "${dpcompiler}" "${dptarget}")
 			IF(NOT DevPackReceiptReady)
-				Message(STATUS "    . !! The download has failed")
+				YMESSAGE("    . !! The download has failed")
 			EndIF(NOT DevPackReceiptReady)
 		EndIF(NOT DevPackReceiptReady)
 
 		IF(DevPackReceiptReady)
 			# Execute `unzip`
-			Message(STATUS "    . Extracting the receipt file")
+			YMESSAGE("    . Extracting the receipt file")
 			execute_process(COMMAND "${DevPackSourceZIP}"
 					-u "${DevPackReceiptsFolder}/${DevPackShortFilename}.zip"
 					-d "${DevPackFolder}"
@@ -219,21 +219,21 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 			"${dpcompiler}" "${dptarget}")
 
 	Else(NOT DevPackReady)
-		Message(STATUS "   ${DevPackTitle}")
+		YMESSAGE("   ${DevPackTitle}")
 	EndIf(NOT DevPackReady)
 
 	IF(NOT DevPackReady)
-		Message("")
-		Message("[!!] The installation of the DevPack `${dpname}` has failed.")
-		Message("     You can download the DevPack from this url :")
-		Message("      `${DevPackURL}`")
-		Message("     And put it into the `receipts` folder :")
-		Message("      `${DevPackReceiptsFolder}`")
-		Message("")
-		Message("[!!] If the devpack is already available in the receipts folder and you still have")
-		Message("     issues, please manually remove it and try again.")
-		Message("     Please visit `${DevPackRepositoryURL}` for all devpacks.")
-		Message("")
+		YMESSAGE("")
+		YMESSAGE("[!!] The installation of the DevPack `${dpname}` has failed.")
+		YMESSAGE("     You can download the DevPack from this url :")
+		YMESSAGE("      `${DevPackURL}`")
+		YMESSAGE("     And put it into the `receipts` folder :")
+		YMESSAGE("      `${DevPackReceiptsFolder}`")
+		YMESSAGE("")
+		YMESSAGE("[!!] If the devpack is already available in the receipts folder and you still have")
+		YMESSAGE("     issues, please manually remove it and try again.")
+		YMESSAGE("     Please visit `${DevPackRepositoryURL}` for all devpacks.")
+		YMESSAGE("")
 		Message(FATAL_ERROR "Aborting now.")
 	Else(NOT DevPackReady)
 		SET(YUNI_CURRENT_DEVPACK_SOURCE_DIR "${DevPackFolder}/${dpversion}/r${dprelease}/${dparch}/${dpcompiler}")
