@@ -19,7 +19,7 @@ namespace File
 	}
 
 
-# ifdef YUNI_OS_WINDOWS
+	# ifdef YUNI_OS_WINDOWS
 
 	FILE* Stream::OpenFileOnWindows(const char* filename, const int mode)
 	{
@@ -45,8 +45,10 @@ namespace File
 		return f;
 	}
 
+	# endif
 
-# endif
+
+
 
 	bool Stream::close()
 	{
@@ -67,12 +69,13 @@ namespace File
 	{
 		switch (origin)
 		{
-			case seekOriginBegin:   return (0 == ::fseek(pFd, (long)offset, SEEK_SET));
-			case seekOriginCurrent: return (0 == ::fseek(pFd, (long)offset, SEEK_CUR));
-			case seekOriginEnd:     return (0 == ::fseek(pFd, (long)offset, SEEK_END));
+			case seekOriginBegin:   return (0 == ::fseek(pFd, (long) offset, SEEK_SET));
+			case seekOriginCurrent: return (0 == ::fseek(pFd, (long) offset, SEEK_CUR));
+			case seekOriginEnd:     return (0 == ::fseek(pFd, (long) offset, SEEK_END));
 		}
 		return false;
 	}
+
 
 
 
