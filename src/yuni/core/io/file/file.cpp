@@ -3,6 +3,7 @@
 #include "../file.h"
 #include "../directory.h"
 #include <ctype.h>
+#include <string.h>
 
 
 
@@ -97,6 +98,7 @@ namespace IO
 	# endif
 
 
+
 	bool SizeNotZeroTerminated(const char* filename, unsigned int len, uint64& value)
 	{
 		# ifdef YUNI_OS_WINDOWS
@@ -106,14 +108,14 @@ namespace IO
 		if (len < 1020)
 		{
 			char p [1024];
-			memcpy(p, filename, len * sizeof(char));
+			(void)::memcpy(p, filename, len * sizeof(char));
 			p[len] = '\0';
 			return Yuni::Private::Core::IO::Size(p, len, value);
 		}
 		else
 		{
 			char* p = new char[len + 1];
-			memcpy(p, filename, len * sizeof(char));
+			(void)::memcpy(p, filename, len * sizeof(char));
 			p[len] = '\0';
 			bool r = Yuni::Private::Core::IO::Size(p, len, value);
 			delete[] p;
@@ -121,6 +123,9 @@ namespace IO
 		}
 		# endif
 	}
+
+
+
 
 
 } // namespace IO

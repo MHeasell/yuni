@@ -9,6 +9,9 @@
 #include <sys/stat.h>
 #endif
 #include "../customstring.h"
+#ifdef YUNI_HAS_STRING_H
+# include <string.h>
+#endif
 
 
 #ifndef S_ISDIR
@@ -26,16 +29,18 @@ namespace Core
 namespace IO
 {
 
-	namespace
+	namespace // anonymous
 	{
 		Yuni::Core::IO::NodeType TypeOfStaticBuffer(const char* p, size_t len)
 		{
 			char path[1024];
-			memcpy(path, p, len * sizeof(char));
+			(void)::memcpy(path, p, len * sizeof(char));
 			path[len] = '\0';
 			return Yuni::Private::Core::IO::TypeOf(path, len);
 		}
-	}
+
+	} // anonymous namespace
+
 
 	Yuni::Core::IO::NodeType TypeOfNotZeroTerminated(const char* p, size_t len)
 	{

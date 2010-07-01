@@ -14,8 +14,9 @@ namespace File
 {
 
 
-	namespace
+	namespace // anonymous
 	{
+
 		template<class T>
 		bool TmplLoadFromFile(T& out, const char* filename, const bool emptyListBefore, const uint32 sizeLimit)
 		{
@@ -58,6 +59,7 @@ namespace File
 	{
 		return TmplLoadFromFile< String::Vector >(out, filename, emptyListBefore, sizeLimit);
 	}
+
 
 
 

@@ -81,7 +81,7 @@ namespace Directory
 	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, size_t length)
 	{
 		char* p = new char[length * sizeof(char) + 1];
-		memcpy(p, path, length);
+		(void)::memcpy(p, path, length);
 		p[length] = '\0';
 		const bool r = ChangeCurrentDirectory(p, length);
 		delete[] p;
