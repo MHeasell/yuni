@@ -1,12 +1,11 @@
 #ifndef __YUNI_AUDIO_EMITTER_H__
 # define __YUNI_AUDIO_EMITTER_H__
 
-# include <map>
 # include "../yuni.h"
+# include <map>
 # include "../core/string.h"
 # include "../core/point3D.h"
 # include "../core/vector3D.h"
-# include "../core/system/windows/gettimeofday.h"
 # include "../private/audio/buffer.h"
 
 
@@ -108,7 +107,7 @@ namespace Audio
 		** \brief Get the elapsed playback time (in seconds)
 		** \returns Time elapsed since the emitter started playback. 0 if not playing.
 		*/
-		float elapsedTime() const;
+		sint64 elapsedTime() const;
 
 		String name() const;
 		template<class StringT> void name(const StringT& name);
@@ -137,7 +136,7 @@ namespace Audio
 		//! Volume modifier, 1.0 means no modification
 		float pGain;
 		//! Current playback position
-		Yuni::timeval pStartTime;
+		sint64 pStartTime;
 		//! Buffer used for playing. NULL if none
 		Private::Audio::Buffer<>::Ptr  pBuffer;
 

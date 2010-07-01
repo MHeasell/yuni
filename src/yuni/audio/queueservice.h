@@ -81,8 +81,8 @@ namespace Audio
 				const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
 
 			template<typename StringT>
-			float elapsedTime(const StringT& name);
-			float elapsedTime(Emitter::Ptr emitter);
+			sint64 elapsedTime(const StringT& name);
+			sint64 elapsedTime(Emitter::Ptr emitter);
 
 			template<typename StringT>
 			bool play(const StringT& name);
