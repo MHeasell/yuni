@@ -41,7 +41,6 @@ public:
 		bool inverse = false;
 		position.y = -LIMIT;
 		pAudio.emitter.move(emitterName, position);
-		sint64 elapsed = 0;
 		for (int i = 0; i < 2000; ++i)
 		{
 			Yuni::SleepMilliSeconds(100);
@@ -51,15 +50,6 @@ public:
 			else if (inverse && position.y < -LIMIT)
 				inverse = false;
 			pAudio.emitter.move(emitterName, position);
-			sint64 newTime = pAudio.emitter.elapsedTime(emitterName);
-			if (newTime != elapsed)
-			{
-				elapsed = newTime;
-				std::cout << (elapsed / 60) << ":";
-				if (elapsed % 60 < 10)
-					std::cout << 0;
-				std::cout << (elapsed % 60) << std::endl;
-			}
 		}
 	}
 

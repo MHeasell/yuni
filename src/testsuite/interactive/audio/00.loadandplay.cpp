@@ -57,7 +57,7 @@ public:
 			if (newTime != elapsed)
 			{
 				elapsed = newTime;
-				std::cout << (elapsed / 60) << ":";
+				std::cout << "Elapsed time: " << (elapsed / 60) << ":";
 				if (elapsed % 60 < 10)
 					std::cout << 0;
 				std::cout << (elapsed % 60) << std::endl;
