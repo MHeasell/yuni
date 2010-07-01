@@ -3,6 +3,7 @@
 
 # include "../yuni.h"
 # include <map>
+# include "../core/atomic/int.h"
 # include "../core/point3D.h"
 # include "../core/vector3D.h"
 # include "../core/string.h"
@@ -12,7 +13,6 @@
 # include "emitter.h"
 # include "loop.h"
 # include "../private/audio/buffer.h"
-# include "../core/atomic/int.h"
 
 
 namespace Yuni
@@ -79,6 +79,10 @@ namespace Audio
 				const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
 			bool move(Emitter::Ptr emitter, const Gfx::Point3D<>& position,
 				const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
+
+			template<typename StringT>
+			float elapsedTime(const StringT& name);
+			float elapsedTime(Emitter::Ptr emitter);
 
 			template<typename StringT>
 			bool play(const StringT& name);
@@ -179,6 +183,16 @@ namespace Audio
 			Thread::Condition& condition;
 			bool& ready;
 		};
+
+		//! This is meant to aggregate a condition with the emitter
+		struct EmitterPositionData
+		{
+			EmitterPositionData(Thread::Condition& c, float& f): condition(c), data(f) {}
+
+			Thread::Condition& condition;
+			float& data;
+		};
+
 
 	private:
 		/*!

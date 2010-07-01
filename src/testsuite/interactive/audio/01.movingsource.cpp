@@ -5,6 +5,7 @@
 #include <yuni/core/string.h>
 #include <yuni/audio/queueservice.h>
 #include <yuni/core/system/sleep.h>
+#include <yuni/core/math.h>
 
 using namespace Yuni;
 
@@ -40,6 +41,7 @@ public:
 		bool inverse = false;
 		position.y = -LIMIT;
 		pAudio.emitter.move(emitterName, position);
+		float elapsed = 0.0f;
 		for (int i = 0; i < 2000; ++i)
 		{
 			Yuni::SleepMilliSeconds(100);
@@ -49,6 +51,12 @@ public:
 			else if (inverse && position.y < -LIMIT)
 				inverse = false;
 			pAudio.emitter.move(emitterName, position);
+			float newTime = pAudio.emitter.elapsedTime(emitterName);
+			if (!Math::Equals(newTime, elapsed))
+			{
+				elapsed = newTime;
+				std::cout << elapsed << std::endl;
+			}
 		}
 	}
 

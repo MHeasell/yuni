@@ -179,6 +179,27 @@ namespace Audio
 
 
 	template<typename StringT>
+	inline float QueueService::Emitters::elapsedTime(const StringT& name)
+	{
+		return elapsedTime(get(String(name)));
+	}
+
+	template<>
+	inline float QueueService::Emitters::elapsedTime<String>(const String& name)
+	{
+		return elapsedTime(get(name));
+	}
+
+	inline float QueueService::Emitters::elapsedTime(Emitter::Ptr emitter)
+	{
+		if (!emitter)
+			return 0.0f;
+
+		return emitter->elapsedTime();
+	}
+
+
+	template<typename StringT>
 	inline bool QueueService::Emitters::play(const StringT& name)
 	{
 		return play(get(String(name)));

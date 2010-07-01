@@ -47,6 +47,9 @@ namespace Audio
 			Private::Audio::OpenAL::UnqueueBufferFromSource(pID);
 			return false;
 		}
+		// Store start time
+		YUNI_SYSTEM_GETTIMEOFDAY(&pStartTime, NULL);
+
 		std::cout << "Playback started successfully !" << std::endl;
 		return true;
 	}
