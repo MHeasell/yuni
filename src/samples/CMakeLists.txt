@@ -25,11 +25,9 @@ IF(Yuni_FOUND)
 	YMESSAGE("The Yuni Framework : ${Yuni_INFOS}")
 
 	ADD_SUBDIRECTORY(core)
-	ADD_SUBDIRECTORY(application)
 	ADD_SUBDIRECTORY(devices)
 	ADD_SUBDIRECTORY(script)
 	ADD_SUBDIRECTORY(threads)
-	#ADD_SUBDIRECTORY(ui)
 
 ENDIF(Yuni_FOUND)
 
