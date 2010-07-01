@@ -64,11 +64,12 @@ ENDMACRO(YUNITESTCASE_BEGIN)
 
 MACRO(YUNITESTCASE_MODULES)
 	Find_Package(Yuni COMPONENTS ${ARGV})
-	IF(LibYuni_FOUND)
+	IF(Yuni_FOUND)
 		Set(YuniTestCase_ModulesHaveBeenFound "1")
-		Set(YuniTestCase_CXXFlags "${LibYuni_CXXFLAGS}")
-		Set(YuniTestCase_LinkFlags "${LibYuni_LIBS}")
-	ENDIF(LibYuni_FOUND)
+		Set(YuniTestCase_CXXFlags "${Yuni_CXXFLAGS}")
+		Set(YuniTestCase_LinkFlags "${Yuni_LIBS}")
+		YMESSAGE("piko: ${ARGV} ${Yuni_CXXFLAGS} - - ${Yuni_LIBS}")
+	ENDIF(Yuni_FOUND)
 ENDMACRO(YUNITESTCASE_MODULES)
 
 
@@ -129,13 +130,13 @@ include_directories("${PROJECT_SOURCE_DIR}/..")
 
 
 Find_Package(Yuni COMPONENTS core)
-IF(LibYuni_FOUND)
+IF(Yuni_FOUND)
 	#
 	# Adding Testcases
 	#
 	Add_SubDirectory(automated)
 	Add_SubDirectory(interactive)
-ENDIF(LibYuni_FOUND)
+ENDIF(Yuni_FOUND)
 
 
 
