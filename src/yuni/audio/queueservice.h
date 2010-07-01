@@ -29,6 +29,7 @@ namespace Audio
 	class QueueService: public Policy::ObjectLevelLockable<QueueService>
 	{
 	public:
+		//! The threading policy
 		typedef Policy::ObjectLevelLockable<QueueService>  ThreadingPolicy;
 
 	public:
