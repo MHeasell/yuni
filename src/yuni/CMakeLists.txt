@@ -18,7 +18,7 @@ Set(YUNI_CMAKE_ERROR 0)
 Set(LIBYUNI_CONFIG_ENABLED true)
 
 
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/LibYuniConfig.cmake")
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/YuniConfig.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
 

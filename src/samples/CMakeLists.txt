@@ -19,10 +19,10 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
 add_custom_target(samples)
 
 Find_Package(Yuni COMPONENTS core)
-IF(LibYuni_FOUND)
+IF(Yuni_FOUND)
 
 	# Infos
-	YMESSAGE("The Yuni Framework : ${LibYuni_INFOS}")
+	YMESSAGE("The Yuni Framework : ${Yuni_INFOS}")
 
 	ADD_SUBDIRECTORY(core)
 	ADD_SUBDIRECTORY(application)
@@ -31,5 +31,5 @@ IF(LibYuni_FOUND)
 	ADD_SUBDIRECTORY(threads)
 	#ADD_SUBDIRECTORY(ui)
 
-ENDIF(LibYuni_FOUND)
+ENDIF(Yuni_FOUND)
 
