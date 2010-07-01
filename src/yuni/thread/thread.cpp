@@ -14,7 +14,7 @@
 #else
 #	include "../core/system/windows.hdr.h"
 #	include <process.h>
-#	include "../core/system/windows/gettimeofday.h"
+#	include "../core/system/gettimeofday.h"
 #endif
 
 #include "thread.h"

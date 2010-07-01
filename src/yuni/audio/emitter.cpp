@@ -1,6 +1,6 @@
 
 #include "../core/math.h"
-#include "../core/system/windows/gettimeofday.h"
+#include "../core/system/gettimeofday.h"
 #include "emitter.h"
 #include "../private/audio/av.h"
 #include "../private/audio/openal.h"

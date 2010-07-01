@@ -445,9 +445,9 @@ source_group(Core\\Version FILES ${SRC_CORE_VERSION})
 
 
 # System - Microsoft Windows
-Set(SRC_CORE_SYSTEM_WINDOWS core/system/windows.hdr.h  core/system/windows/gettimeofday.h)
+Set(SRC_CORE_SYSTEM_WINDOWS core/system/windows.hdr.h  core/system/gettimeofday.h)
 If(WIN32 AND MSVC)
-	Set(SRC_CORE_SYSTEM_WINDOWS ${SRC_CORE_SYSTEM_WINDOWS} core/system/windows/gettimeofday.cpp)
+	Set(SRC_CORE_SYSTEM_WINDOWS ${SRC_CORE_SYSTEM_WINDOWS} core/system/gettimeofday.cpp)
 EndIF(WIN32 AND MSVC)
 source_group(Core\\System\\Windows FILES ${SRC_CORE_SYSTEM_WINDOWS})
 

@@ -9,7 +9,7 @@
 #endif
 #include <errno.h>
 #include "condition.h"
-#include "../core/system/windows/gettimeofday.h"
+#include "../core/system/gettimeofday.h"
 
 
 namespace Yuni
