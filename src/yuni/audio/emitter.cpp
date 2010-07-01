@@ -1,5 +1,6 @@
 
 #include "../core/math.h"
+#include "../core/system/windows/gettimeofday.h"
 #include "emitter.h"
 #include "../private/audio/av.h"
 #include "../private/audio/openal.h"
@@ -48,7 +49,9 @@ namespace Audio
 			return false;
 		}
 		// Store start time
-		YUNI_SYSTEM_GETTIMEOFDAY(&pStartTime, NULL);
+		Yuni::timeval now;
+		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
+		pStartTime = now.tv_sec;
 
 		std::cout << "Playback started successfully !" << std::endl;
 		return true;
@@ -107,6 +110,16 @@ namespace Audio
 	}
 
 
+	sint64 Emitter::elapsedTime() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		if (!pPlaying)
+			return 0;
+		Yuni::timeval now;
+		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
+		return now.tv_sec - pStartTime;
+	}
 
 
 } // namespace Audio
