@@ -7,7 +7,7 @@
 #ifndef YUNI_OS_WINDOWS
 #	include <sys/time.h>
 #endif
-#include "../core/system/windows/gettimeofday.h"
+#include "../core/system/gettimeofday.h"
 
 
 #define RESULT_TO_STR(X) ((X) ? "ok" : "failed")
