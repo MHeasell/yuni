@@ -68,7 +68,6 @@ MACRO(YUNITESTCASE_MODULES)
 		Set(YuniTestCase_ModulesHaveBeenFound "1")
 		Set(YuniTestCase_CXXFlags "${Yuni_CXXFLAGS}")
 		Set(YuniTestCase_LinkFlags "${Yuni_LIBS}")
-		YMESSAGE("piko: ${ARGV} ${Yuni_CXXFLAGS} - - ${Yuni_LIBS}")
 	ENDIF(Yuni_FOUND)
 ENDMACRO(YUNITESTCASE_MODULES)
 
