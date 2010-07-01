@@ -10,7 +10,11 @@ namespace Atomic
 
 	template<int Size, template<class> class TP>
 	inline Int<Size,TP>::Int()
+		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
 		:pValue()
+		# else
+		:TP<Int<Size,TP> >, pValue()
+		# endif
 	{}
 
 
