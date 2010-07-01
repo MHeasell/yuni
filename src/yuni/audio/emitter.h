@@ -6,6 +6,7 @@
 # include "../core/string.h"
 # include "../core/point3D.h"
 # include "../core/vector3D.h"
+# include "../core/system/windows/gettimeofday.h"
 # include "../private/audio/buffer.h"
 
 
@@ -103,6 +104,12 @@ namespace Audio
 		//! Get the current volume modifier
 		float gain() const;
 
+		/*!
+		** \brief Get the elapsed playback time (in seconds)
+		** \returns Time elapsed since the emitter started playback. 0 if not playing.
+		*/
+		float elapsedTime() const;
+
 		String name() const;
 		template<class StringT> void name(const StringT& name);
 
@@ -129,8 +136,11 @@ namespace Audio
 		bool pLoop;
 		//! Volume modifier, 1.0 means no modification
 		float pGain;
+		//! Current playback position
+		Yuni::timeval pStartTime;
 		//! Buffer used for playing. NULL if none
 		Private::Audio::Buffer<>::Ptr  pBuffer;
+
 		//! Is the emitter ready for use?
 		bool pReady;
 		//! Is the emitter currently playing?

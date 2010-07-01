@@ -94,6 +94,9 @@ namespace Audio
 		static bool QueueBufferToSource(unsigned int buffer, unsigned int source);
 		static unsigned int UnqueueBufferFromSource(unsigned int source);
 
+		static float SourcePlaybackPosition(unsigned int source);
+		static void SetSourcePlaybackPosition(unsigned int source, float position);
+
 		static bool SetBufferData(unsigned int buffer, int format, void* data,
 			size_t count, int rate);
 

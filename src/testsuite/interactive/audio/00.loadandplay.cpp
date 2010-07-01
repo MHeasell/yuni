@@ -5,6 +5,7 @@
 #include <yuni/core/string.h>
 #include <yuni/audio/queueservice.h>
 #include <yuni/core/system/sleep.h>
+#include <yuni/core/math.h>
 
 using namespace Yuni;
 
@@ -47,7 +48,24 @@ public:
 			audio.emitter.attach(emitterName, *it);
 			audio.emitter.play(emitterName);
 		}
-		Yuni::Sleep(300);
+		float elapsed;
+		for (int i = 0; i < 3000; ++i)
+		{
+			Yuni::SleepMilliSeconds(100);
+
+			float newTime = audio.emitter.elapsedTime("Emitter 0");
+			// Only update if different
+			if (!Math::Equals(newTime, elapsed))
+			{
+				elapsed = newTime;
+				if (elapsed >= 60)
+					std::cout << ((int)elapsed / 60) << ":";
+				if (elapsed < 10)
+					std::cout << 0;
+				std::cout << ((int)elapsed % 60) << std::endl;
+			}
+		}
+//		Yuni::Sleep(300);
 	}
 
 private:

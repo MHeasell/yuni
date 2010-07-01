@@ -1,6 +1,13 @@
 #ifndef __YUNI_AUDIO_EMITTER_HXX__
 # define __YUNI_AUDIO_EMITTER_HXX__
 
+# include "../yuni.h"
+# include <time.h>
+# if defined(YUNI_OS_MSVC)
+#	include <winsock2.h>
+# else
+#	include <sys/time.h>
+# endif
 
 namespace Yuni
 {
@@ -95,6 +102,18 @@ namespace Audio
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pGain;
+	}
+
+
+	inline float Emitter::elapsedTime() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		if (!pPlaying)
+			return 0.0f;
+		Yuni::timeval now;
+		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
+		return now.tv_sec - pStartTime.tv_sec;
 	}
 
 

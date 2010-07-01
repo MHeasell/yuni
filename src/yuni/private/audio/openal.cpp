@@ -229,6 +229,20 @@ namespace Audio
 		return buf;
 	}
 
+	float OpenAL::SourcePlaybackPosition(unsigned int source)
+	{
+		float pos = 0;
+		alGetSourcef(source, AL_SEC_OFFSET, &pos);
+		std::cout << "Getting position at " << pos << std::endl;
+		return pos / 60.0f; // Normalize the time
+	}
+
+	void OpenAL::SetSourcePlaybackPosition(unsigned int source, float position)
+	{
+		alSourcef(source, AL_SEC_OFFSET, position * 60.0f);
+	}
+
+
 	bool OpenAL::SetBufferData(unsigned int buffer, int format, void* data, size_t count, int rate)
 	{
 		alGetError();
