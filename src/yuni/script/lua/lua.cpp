@@ -200,16 +200,40 @@ namespace Script
 	bool Lua::push(const Any& var)
 	{
 		lua_checkstack(pProxy->pState, 1);
-		if (var.is<short>())
+
+		/* 32-bit integers */
+#define YUNI_IMPL_LPI(type) \
+		if (var.is<type>()) \
+		{ \
+			lua_pushinteger(pProxy->pState, static_cast<lua_Integer>(var.to<type>())); \
+			return true; \
+		}
+
+		// Unsigned integers
+		YUNI_IMPL_LPI(uint8)
+		YUNI_IMPL_LPI(uint16)
+		YUNI_IMPL_LPI(uint32)
+		YUNI_IMPL_LPI(uint64)
+
+		// Signed integers
+		YUNI_IMPL_LPI(sint8)
+		YUNI_IMPL_LPI(sint16)
+		YUNI_IMPL_LPI(sint32)
+		YUNI_IMPL_LPI(sint64)
+
+		// Floating point numbers 
+		if (var.is<double>())
 		{
-			lua_pushinteger(pProxy->pState, var.to<short>());
+			lua_pushnumber(pProxy->pState, static_cast<lua_Number>(var.to<double>()));
 			return true;
 		}
-		if (var.is<int>())
+		if (var.is<float>())
 		{
-			lua_pushinteger(pProxy->pState, var.to<int>());
+			lua_pushnumber(pProxy->pState, static_cast<lua_Number>(var.to<float>()));
 			return true;
 		}
+
+		// Strings
 		if (var.is<String>()) /* String type encompasses also C Strings. See Any impl. */
 		{
 			const String &str = var.to<String>();
@@ -222,16 +246,15 @@ namespace Script
 			lua_pushlstring(pProxy->pState, str.c_str(), str.size());
 			return true;
 		}
-		if (var.is<double>())
-		{
-			lua_pushnumber(pProxy->pState, var.to<double>());
-			return true;
-		}
+
+		// Light User data
 		if (var.is<void*>())
 		{
 			lua_pushlightuserdata(pProxy->pState, var.to<void*>());
 			return true;
 		}
+
+		// Nil values
 		if (var.empty())
 		{
 			lua_pushnil(pProxy->pState);
