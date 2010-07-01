@@ -118,6 +118,18 @@ int main()
 		exit(1);
 	}
 
+
+	// Test a few numbers
+	for (int i = 0 ; i < 64; ++i)
+	{
+		Yuni::uint64 u64 = 1UL << i;
+		Yuni::sint64 s64 = ~(1UL << 6);
+
+		std::cout << "[ C++] u64: " << u64 << std::endl;
+		sc->call(NULL, "printNumber", u64);
+	}
+	
+
 	// Finally, destroy the script object to release the resources.
 	delete sc;
 

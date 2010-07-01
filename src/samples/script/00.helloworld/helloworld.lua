@@ -22,5 +22,8 @@ function callBackSampleFunctions()
 	print ("[ Lua] SampleObject__sampleMethod('Hello world !') returned [" .. SampleObject__sampleMethod("Hello world") .. "].");
 end
 
+function printNumber(i)
+	io.write("[ Lua] Number: " .. i .. "\n")
+end
 
 print "[ Lua] helloworld.lua has been parsed and executed."
