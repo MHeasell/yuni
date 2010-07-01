@@ -1,2 +1,0 @@
-
-ADD_SUBDIRECTORY(00.helloworld)
