@@ -20,18 +20,30 @@ namespace Atomic
 
 	template<int Size, template<class> class TP>
 	Int<Size,TP>::Int(const sint16 v)
+		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
 		:pValue((ScalarType)v)
+		# else
+		:TP<Int<Size,TP> >(), pValue((ScalarType)v)
+		# endif
 	{}
 
 	template<int Size, template<class> class TP>
 	inline Int<Size,TP>::Int(const sint32 v)
+		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
 		:pValue((ScalarType)v)
+		# else
+		:TP<Int<Size,TP> >(), pValue((ScalarType)v)
+		# endif
 	{}
 
 
 	template<int Size, template<class> class TP>
 	inline Int<Size,TP>::Int(const sint64 v)
+		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
 		:pValue((ScalarType)v)
+		# else
+		:TP<Int<Size,TP> >(), pValue((ScalarType)v)
+		# endif
 	{}
 
 
@@ -39,8 +51,12 @@ namespace Atomic
 
 	template<int Size, template<class> class TP>
 	inline Int<Size,TP>::Int(const Int<Size,TP>& v)
+		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
+		:pValue((ScalarType)v)
+		# else
+		:TP<Int<Size,TP> >(), pValue((ScalarType)v.pValue)
+		# endif
 	{
-		pValue = v;
 	}
 
 	template<int Size, template<class> class TP>
