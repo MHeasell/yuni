@@ -13,7 +13,7 @@ namespace Atomic
 		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
 		:pValue()
 		# else
-		:TP<Int<Size,TP> >, pValue()
+		:TP<Int<Size,TP> >(), pValue()
 		# endif
 	{}
 
