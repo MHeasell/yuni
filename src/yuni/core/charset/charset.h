@@ -20,8 +20,8 @@ namespace Charset
 	** You should only add types to this list, not change its
 	** order in order to preserve the ABI.
 	*/
-	enum Type {
-		
+	enum Type
+	{	
 		/* European Languages */
 		ASCII,
 		ISO_8859_1,
@@ -321,10 +321,7 @@ namespace Charset
 	*/
 	class Converter
 	{
-
 	public:
-
-
 		//! \name Constructors and destructors
 		//@{
 		Converter(Charset::Type fromCS, Charset::Type toCS,
@@ -355,7 +352,6 @@ namespace Charset
 		** Destructor
 		*/
 		~Converter();
-
 		//@}
 
 		/*!
@@ -423,8 +419,7 @@ namespace Charset
 		** \return True if the conversion was successful, false otherwise.
 		*/
 		template <typename SrcStringT, typename DstStringT>
-		bool convert(SrcStringT& source, DstStringT& destination,
-				bool isLastBuffer = true);
+		bool convert(SrcStringT& source, DstStringT& destination, bool isLastBuffer = true);
 
 	public:
 		/*!
@@ -460,7 +455,6 @@ namespace Charset
 	private:	
 		//! This is really an iconv_t.
 		void* pContext;
-
 		//! Last error
 		int pLastError;
 
