@@ -1023,10 +1023,12 @@ namespace Yuni
 		** \param emptyBefore True to clear the vector before fulfill it
 		**
 		** \warning Do not take care of string representation (with `'` or `"`)
+		** \deprecated Consider `split` instead
 		*/
 		template<template<class,class> class U, class UType, class Alloc, typename StringT>
+		YUNI_DEPRECATED("Consider `split` instead",
 		void explode(U<UType,Alloc>& out, const StringT& sep,
-			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const;
+			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const);
 
 		/*!
 		** \brief Dupplicate N times the content of the string
