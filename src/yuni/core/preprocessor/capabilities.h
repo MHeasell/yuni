@@ -170,14 +170,24 @@
 # endif
 
 
-/* Deprecated */
+/*!
+** \macro YUNI_DEPRECATED
+** \brief Deprecated
+*/
 # if defined(YUNI_OS_GCC)
 #	if (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
-#		define YUNI_DEPRECATED  __attribute__((__deprecated__))
+#		define YUNI_DEPRECATED(text, func...)  func __attribute__((__deprecated__))
+#	endif
+# endif
+# if defined(_MSC_VER) && (_MSC_VER >= 1300)
+#	if (_MSC_FULL_VER >= 140050320)
+#		define YUNI_DEPRECATED(text, func...) __declspec(deprecated(text)) func
+#	else
+#		define YUNI_DEPRECATED(text, func...) __declspec(deprecated) func
 #	endif
 # endif
 # ifndef YUNI_DEPRECATED
-#	define YUNI_DEPRECATED
+#	define YUNI_DEPRECATED(text, func...) func
 # endif
 
 /* Noreturn */
