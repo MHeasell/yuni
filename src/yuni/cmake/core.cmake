@@ -189,6 +189,8 @@ source_group(Core\\LinkedList FILES ${SRC_CORE_SLIST})
 Set(SRC_CORE_STRING
 				core/customstring/customstring.h
 				core/customstring/customstring.hxx
+				core/customstring/utf8char.h
+				core/customstring/utf8char.hxx
 				core/customstring/traits/append.h
 				core/customstring/traits/assign.h
 				core/customstring/traits/fill.h
