@@ -109,11 +109,15 @@ Set(YUNI_PROFILE_SSE4_2    "auto")
 #    for compiling the Yuni library.
 #
 # Uncomment the following line to add some C++ compiler flags
-#Set(YUNI_CXX_FLAGS_OVERRIDE_ADD "-Wextra")
+#Set(YUNI_CXX_FLAGS_OVERRIDE_ADD_DEBUG          "-Wextra")
+#Set(YUNI_CXX_FLAGS_OVERRIDE_ADD_RELEASE        "-Wextra")
+#Set(YUNI_CXX_FLAGS_OVERRIDE_ADD_RELWITHDEBINFO "-Wextra")
 
 # Uncomment the following line to override the C++ compiler flags
 # This is not recommended.
-#Set(YUNI_CXX_FLAGS_OVERRIDE "-g -ggdb -Wall -Wextra")
+#Set(YUNI_CXX_FLAGS_OVERRIDE_DEBUG          "-g -ggdb -Wall -Wextra")
+#Set(YUNI_CXX_FLAGS_OVERRIDE_RELEASE        "-g -ggdb -Wall -Wextra")
+#Set(YUNI_CXX_FLAGS_OVERRIDE_RELWITHDEBINFO "-g -ggdb -Wall -Wextra")
 
 
 
