@@ -1096,6 +1096,164 @@ namespace Yuni
 			AncestorType::size = newSize;
 	}
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::utf8size() const
+	{
+		// this routine is not exactly as fast as strlen, but it should make no
+		// measurable difference
+		unsigned int i = 0;
+		Size r = 0;
+		for (; i != AncestorType::size; ++i)
+		{
+			if ((AncestorType::data[i] & 0xc0) != 0x80)
+				++r;
+		}
+		return r;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::utf8valid() const
+	{
+		unsigned int offset;
+		return (UTF8::errNone == utf8valid(offset));
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	UTF8::Error
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::utf8valid(Size& offset) const
+	{
+		offset = 0;
+		UTF8::Char c;
+		UTF8::Error e;
+		do
+		{
+			e = utf8next(offset, c);
+			if (e != UTF8::errNone)
+				return (e == UTF8::errOutOfBound) ? UTF8::errNone : e;
+		}
+		while (true);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::utf8validFast() const
+	{
+		unsigned int i = 0;
+		unsigned int l;
+		while (i != AncestorType::size)
+		{
+			if (!(l = UTF8::Char::Size(AncestorType::data + i)))
+				return false;
+			i += l;
+			if (i > AncestorType::size)
+				return false;
+		}
+		return true;
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	UTF8::Error
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::utf8next(Size& offset, UTF8::Char& out) const
+	{
+		if (offset >= AncestorType::size)
+		{
+			out.reset();
+			return UTF8::errOutOfBound;
+		}
+
+		// Retrieving the lead character
+		unsigned char lead = UTF8::Char::Mask8Bits(AncestorType::data[offset]);
+
+		// {1}
+		if (lead < 0x80)
+		{
+			++offset;
+			out.pValue = lead;
+			return UTF8::errNone;
+		}
+		// {2}
+		if ((lead >> 5) == 0x6)
+		{
+			out.pValue = lead;
+			if (++offset >= AncestorType::size)
+				return UTF8::errNotEnoughData;
+
+			lead = UTF8::Char::Mask8Bits(AncestorType::data[offset]);
+			if (UTF8::Char::IsTrail(lead))
+			{
+				out.pValue = ((out.pValue << 6) & 0x7ff) + ((lead) & 0x3f);
+				++offset;
+				return UTF8::errNone;
+			}
+			--offset;
+			out.reset();
+			return UTF8::errIncompleteSequence;
+		}
+
+		// {3}
+		if ((lead >> 4) == 0xe)  // 1110 xxxx
+		{
+			out.pValue = lead;
+			if (offset + 2 >= AncestorType::size)
+				return UTF8::errNotEnoughData;
+			lead = UTF8::Char::Mask8Bits(AncestorType::data[++offset]);
+			if (UTF8::Char::IsTrail(lead))
+			{
+				out.pValue = ((out.pValue << 12) & 0xffff) + ((lead << 6) & 0xfff);
+				lead = UTF8::Char::Mask8Bits(AncestorType::data[++offset]);
+				if (UTF8::Char::IsTrail(lead))
+				{
+					out.pValue += (lead) & 0x3f;
+					++offset;
+					return UTF8::errNone;
+				}
+				--offset;
+			}
+			--offset;
+			out.reset();
+			return UTF8::errIncompleteSequence;
+		}
+
+		// {4}
+		if ((lead >> 3) == 0x1e) // 1111 0xxx
+		{
+			out.pValue = lead;
+			if (offset + 3 >= AncestorType::size)
+				return UTF8::errNotEnoughData;
+			lead = UTF8::Char::Mask8Bits(AncestorType::data[++offset]);
+			if (UTF8::Char::IsTrail(lead))
+			{
+				out.pValue = ((out.pValue << 18) & 0x1fffff) + ((lead << 12) & 0x3ffff);
+				lead = UTF8::Char::Mask8Bits(AncestorType::data[++offset]);
+				if (UTF8::Char::IsTrail(lead))
+				{
+					out.pValue += (lead << 6) & 0xfff;
+					lead = UTF8::Char::Mask8Bits(AncestorType::data[++offset]);
+					if (UTF8::Char::IsTrail(lead))
+					{
+						out.pValue += (lead) & 0x3f;
+						++offset;
+						return UTF8::errNone;
+					}
+					--offset;
+				}
+				--offset;
+			}
+			--offset;
+			out.reset();
+			return UTF8::errIncompleteSequence;
+		}
+		out.reset();
+		return UTF8::errInvalidLead;
+	}
+
+
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size

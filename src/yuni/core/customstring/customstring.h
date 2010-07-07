@@ -21,6 +21,7 @@
 #	include <vector>
 # endif
 
+# include "utf8char.h"
 # include "traits/traits.h"
 # include "traits/append.h"
 # include "traits/assign.h"
@@ -772,6 +773,45 @@ namespace Yuni
 		//@}
 
 
+		//! \name Iterating through the string
+		//@{
+		/*!
+		** \brief Get the next UTF-8 character
+		**
+		** \code
+		** String t = "An UTF8 string : こんにちは !";
+		** std::cout << "string            : " << t             << "\n";
+		** std::cout << "valid             : " << t.utf8valid() << "\n";
+		** std::cout << "raw size          : " << t.size()      << "\n";
+		** std::cout << "nb of characters  : " << t.utf8size()  << "\n";
+		**
+		** // Iterating through the string
+		** String::Size offset = 0;
+		** UTF8::Char c;
+		** std::cout << "All chars: ";
+		** do
+		** {
+		** 	if (offset)
+		** 		std::cout << ", ";
+		** 	if (UTF8::errNone != t.utf8next(offset, c))
+		** 	{
+		** 		std::cout << "<EOF>\n";
+		** 		break;
+		** 	}
+		**
+		** 	std::cout << c;
+		** }
+		** while (true);
+		** \endcode
+		**
+		** \param[out] offset Offset in the string
+		** \param[out] out    The UTF-8 char
+		** \return True if an UTF8 char has been found, false otherwise (@offset may become invalid)
+		*/
+		UTF8::Error utf8next(Size& offset, UTF8::Char& out) const;
+		//@}
+
+
 		//! \name Memory management
 		//@{
 		/*!
@@ -845,6 +885,50 @@ namespace Yuni
 		** is true.
 		*/
 		void shrink();
+
+		/*!
+		** \brief Perform a full check about UTF8 validity
+		**
+		** This check will iterate through the whole string to
+		** detect any bad-formed UTF8 character.
+		*/
+		bool utf8valid() const;
+
+		/*!
+		** \brief Perform a full check about UTF8 validity
+		**
+		** This check will iterate through the whole string to
+		** detect any bad-formed UTF8 character.
+		** \param[out] offset The offset in the string of the misformed UTF8 character
+		** \return UTF8::errNone if the string is valid
+		*/
+		UTF8::Error utf8valid(Size& offset) const;
+
+
+		/*!
+		** \brief Perform a fast check about UTF8 validity
+		**
+		** Contrary to `utf8valid()`, this check is only based on the first
+		** code point of an UTF8 sequence. Consequently, it does not perform
+		** a full compliance test and you should prefer `utf8valid()`.
+		** As a consequence it may report that the string is a valid UTF8 string
+		** even if it is not the case, but it may be good enough in some cases.
+		** \see utf8valid()
+		*/
+		bool utf8validFast() const;
+
+		/*!
+		** \brief Compute the number of UTF-8 characters
+		**
+		** \code
+		** String s = "こんにちは";
+		** std::cout << "Size in bytes:    " << s.size() << std::endl; // 15
+		** std::cout << "Nb of UTF8 chars: " << s.utf8size() << std::endl; // 5
+		** \endcode
+		** The returned value is computed at each call to this routine
+		** \return The number of UTF8 character ( <= size )
+		*/
+		Size utf8size() const;
 
 		/*!
 		** \brief Get the current size of the string (in bytes)
@@ -1117,6 +1201,12 @@ template<unsigned int SizeT, bool ExpT,bool ZeroT>
 inline std::ostream& operator << (std::ostream& out, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
 	out.write(rhs.data(), rhs.size());
+	return out;
+}
+
+inline std::ostream& operator << (std::ostream& out, const Yuni::UTF8::Char& rhs)
+{
+	rhs.write(out);
 	return out;
 }
 

@@ -21,7 +21,7 @@ namespace Charset
 	** order in order to preserve the ABI.
 	*/
 	enum Type
-	{	
+	{
 		/* European Languages */
 		ASCII,
 		ISO_8859_1,
@@ -146,7 +146,7 @@ namespace Charset
 		UCS_4_INTERNAL,
 
 		// Locale dependent, in terms of char or wchar_t
-		// (with machine dependent endianness and alignment, and with semantics 
+		// (with machine dependent endianness and alignment, and with semantics
 		//	depending on the OS and the current LC_CTYPE locale facet)
 		CHAR,
 		WCHAR_T,
@@ -154,9 +154,9 @@ namespace Charset
 	}; // enum Type
 
 	/*!
-	** @brief Enumeration of common charsets (as strings)
+	** \brief Enumeration of common charsets (as strings)
 	**
-	** WARNING: The order of this enum matches
+	** \warning The order of this enum matches
 	** the order of the items in the Type enum.
 	** You should only add types to this list, not change its
 	** order in order to preserve the ABI.
@@ -281,14 +281,14 @@ namespace Charset
 		"C99",
 		"JAVA",
 
-		/* Full Unicode, in terms of uint16_t or uint32_t */
-		/* (with machine dependent endianness and alignment) */
+		// Full Unicode, in terms of uint16_t or uint32_t
+		// (with machine dependent endianness and alignment)
 		"UCS_2_INTERNAL",
 		"UCS_4_INTERNAL",
 
-		/* Locale dependent, in terms of char or wchar_t */
-		/* (with machine dependent endianness and alignment, and with semantics 
-			depending on the OS and the current LC_CTYPE locale facet) */
+		// Locale dependent, in terms of char or wchar_t
+		// (with machine dependent endianness and alignment, and with semantics
+		//   depending on the OS and the current LC_CTYPE locale facet)
 		"char",
 		"wchar_t",
 
@@ -308,7 +308,7 @@ namespace Charset
 		uncStop,
 	};
 
-	
+
 	/*!
 	** \brief Charset conversion
 	**
@@ -324,8 +324,15 @@ namespace Charset
 	public:
 		//! \name Constructors and destructors
 		//@{
-		Converter(Charset::Type fromCS, Charset::Type toCS,
-				  Charset::Unconvertable opts = Charset::uncTranslit);
+		/*!
+		** Constructs a converter, but do not set a charset.
+		**
+		** You must use open() before calling anything other than valid().
+		** \see open(), valid()
+		*/
+		Converter();
+
+		Converter(Charset::Type fromCS, Charset::Type toCS, Charset::Unconvertable opts = Charset::uncTranslit);
 
 		/*!
 		** Constructs a converter using real charset names and flags.
@@ -341,14 +348,6 @@ namespace Charset
 		Converter(const char* fromCS, const char* toCS);
 
 		/*!
-		** Constructs a converter, but do not set a charset.
-		**
-		** You must use open() before calling anything other than valid().
-		** \see open(), valid()
-		*/
-		Converter();
-
-		/*!
 		** Destructor
 		*/
 		~Converter();
@@ -356,7 +355,7 @@ namespace Charset
 
 		/*!
 		** Returns the last error encountered (errno-style)
-		** 
+		**
 		** \return the last error encountered by the object.
 		*/
 		int lastError() const;
@@ -452,7 +451,7 @@ namespace Charset
 		size_t IconvWrapper(void* cd, char** inbuf, size_t* inbytesleft,
 			char** outbuf, size_t* outbytesleft);
 
-	private:	
+	private:
 		//! This is really an iconv_t.
 		void* pContext;
 		//! Last error
