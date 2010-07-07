@@ -157,7 +157,7 @@ namespace Job
 	template<class SchedulerT>
 	void QueueService<SchedulerT>::add(IJob* job, Priority priority)
 	{
-		if (job)
+		if (!(!job))
 		{
 			pWaitingRoom.add(job, priority);
 			pScheduler.newJobInWaitingRoom(priority);
