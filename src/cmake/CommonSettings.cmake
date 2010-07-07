@@ -24,70 +24,43 @@ STRING(REPLACE "/CommonSettings.cmake" "" CurrentFolder "${CurrentFolder}")
 Include("${CurrentFolder}/DetectInstructionsSets.cmake")
 
 
+IF(NOT WIN32)
+	Set(CMAKE_CXX_FLAGS_RELEASE         "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings")
+	Set(CMAKE_CXX_FLAGS_DEBUG           "-g -ggdb2 -Wall -Woverloaded-virtual -Wextra -Wconversion -Wredundant-decls -Wundef -Wcast-align -Wcast-qual -Wfloat-equal -Wunused-parameter -Wwrite-strings")
+	Set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings")
+ENDIF(NOT WIN32)
+IF(MINGW)
+	Set(CMAKE_CXX_FLAGS_RELEASE         "-mthreads -Wall -Wextra -Wconversion -O3 -fomit-frame-pointer -Wwrite-strings")
+	Set(CMAKE_CXX_FLAGS_DEBUG           "-mthreads -Wall -Wextra -Wconversion -g2 -Woverloaded-virtual -Wwrite-strings")
+	Set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-mthreads -Wall -Wextra -Wconversion -g2 -Woverloaded-virtual -Wwrite-strings")
+ENDIF(MINGW)
+IF(MSVC)
+	Set(CMAKE_CXX_FLAGS_RELEASE         "/Ox /Ob2 /Ot /O2 /Oy /MD /GS- /Gy /arch:SSE2")
+	Set(CMAKE_CXX_FLAGS_DEBUG           "/GR /Ob1 /Ot /MDd /fp:except /W3")
+	Set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "/Ox /Ob2 /Ot /O2 /Oy /MDd /GS- /Gy")
+ENDIF(MSVC)
+IF(APPLE)
+	Set(CMAKE_CXX_FLAGS_DEBUG           "${CMAKE_CXX_FLAGS_DEBUG} -gfull -fvisibility=hidden")
+	Set(CMAKE_CXX_FLAGS_RELEASE         "${CMAKE_CXX_FLAGS_RELEASE} -fvisibility=hidden")
+	Set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "${CMAKE_CXX_FLAGS_RELEASE} -fvisibility=hidden")
+Endif(APPLE)
+
+Set(CMAKE_CXX_FLAGS_RELEASE       "${CMAKE_CXX_FLAGS_RELEASE} ${YUNI_PROFILE_CXX_FLAGS_INSTRUCTIONS_SETS}")
+Set(CMAKE_CXX_FLAGS_DEBUG         "${CMAKE_CXX_FLAGS_DEBUG} ${YUNI_PROFILE_CXX_FLAGS_INSTRUCTIONS_SETS}")
+Set(CMAKE_CXX_FLAGS_RELWITHDEBUG  "${CMAKE_CXX_FLAGS_RELWITHDEBUG} ${YUNI_PROFILE_CXX_FLAGS_INSTRUCTIONS_SETS}")
+
+IF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD_DEBUG}" STREQUAL "")
+	SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${YUNI_CXX_FLAGS_OVERRIDE_ADD_DEBUG}")
+ENDIF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD_DEBUG}" STREQUAL "")
+IF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD_RELEASE}" STREQUAL "")
+	SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_RELEASE} ${YUNI_CXX_FLAGS_OVERRIDE_ADD_RELEASE}")
+ENDIF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD_RELEASE}" STREQUAL "")
+IF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD_RELWITHDEBINFO}" STREQUAL "")
+	SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${YUNI_CXX_FLAGS_OVERRIDE_ADD_RELWITHDEBINFO}")
+ENDIF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD_RELWITHDEBINFO}" STREQUAL "")
 
 
-#
-# Command line options for G++ (iDebug/Release)
-#
-# Ex: cmake . -DYUNI_TARGET=release
-#
-IF("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
-IF("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "release")
 
-	#
-	# Build Configuration: Release
-	#
-	YMESSAGE("Build Configuration: Release")
-
-	IF(NOT WIN32)
-		Set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -Wall  -Wextra ${YUNI_PROFILE_CXX_FLAGS_INSTRUCTIONS_SETS} -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings")
-		If(APPLE)
-			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
-		ENdif(APPLE)
-	Else(NOT WIN32)
-		IF(MINGW)
-			Set(CMAKE_CXX_OTHER_FLAGS "-O3 -fomit-frame-pointer -Wextra -Wwrite-strings -mthreads")
-			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
-		ENDIF(MINGW)
-		IF(MSVC)
-			Set(CMAKE_CXX_OTHER_FLAGS "/Ob2 /Ot /O2 /MDd /Oy /MT /GS- /arch:SSE2")
-			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
-		ENDIF(MSVC)
-	ENDIF(NOT WIN32)
-	ADD_DEFINITIONS("-DNDEBUG") # Remove asserts
-
-Else("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "release")
-
-	#
-	# Build Configuration: Debug
-	#
-	YMESSAGE("Build Configuration: Debug")
-
-
-	IF(NOT WIN32)
-		Set(CMAKE_CXX_FLAGS "-g -ggdb2 -Wall -Woverloaded-virtual -Wextra -Wconversion -Wredundant-decls -Wundef -Wcast-align -Wcast-qual -Wfloat-equal -Wunused-parameter -Wwrite-strings")
-		If(APPLE)
-			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gfull -fvisibility=hidden")
-		ENdif(APPLE)
-	Else(NOT WIN32)
-		IF(MINGW)
-			Set(CMAKE_CXX_OTHER_FLAGS "-g2 -Woverloaded-virtual -Wextra -Wconversion -Wwrite-strings -mthreads")
-			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
-		ENDIF(MINGW)
-		IF(MSVC)
-			Set(CMAKE_CXX_OTHER_FLAGS "/GR /Ob2 /Ot /MDd /MTd /fp:except /W3")
-			Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_OTHER_FLAGS}")
-		ENDIF(MSVC)
-	ENDIF(NOT WIN32)
-
-EndIF("${YUNI_TARGET}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "release")
-
-ELSE("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
-
-	YMESSAGE("C++ flags overriden by settings")
-	SET(CMAKE_CXX_FLAGS "${YUNI_CXX_FLAGS_OVERRIDE}")
-
-ENDIF("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
 
 
 
@@ -95,10 +68,6 @@ ENDIF("${YUNI_CXX_FLAGS_OVERRIDE}" STREQUAL "")
 # Extra - Bundles
 #
 SET(MACOSX_BUNDLE_COPYRIGHT "Yuni Framework - 2008/2010")
-
-IF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD}" STREQUAL "")
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${YUNI_CXX_FLAGS_OVERRIDE_ADD}")
-ENDIF(NOT "${YUNI_CXX_FLAGS_OVERRIDE_ADD}" STREQUAL "")
 
 
 IF(APPLE)
