@@ -6,6 +6,7 @@ IF(POLICY CMP0011)
 	CMake_Policy(SET CMP0011 NEW)
 ENDIF(POLICY CMP0011)
 
+Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/message.cmake")
 
 YMESSAGE("")
 YMESSAGE("yuni-config")
