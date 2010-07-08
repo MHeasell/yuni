@@ -36,7 +36,7 @@ private:
 		mutex.unlock();
 
 		// Count from 10
-		int i = 10;
+		int i = 5;
 
 		while (i > 0)
 		{
@@ -50,7 +50,7 @@ private:
 			// - for example a long calculation, for the purpose of this example.
 			//
 			// The bottom line is: DO NOT use sleep() to wait in threads.
-			Yuni::SleepMilliSeconds(200 /* second */);
+			Yuni::SleepMilliSeconds(1200 /* second */);
 		}
 		mutex.lock();
 		std::cout << " ["<< x <<"] Finished." << std::endl;
@@ -76,7 +76,7 @@ int main(void)
 
 	Yuni::Job::QueueService<> qs;
 
-	for (int job = 0; job < 50; ++job)
+	for (int job = 1; job <= 5; ++job)
 		qs.add(new MyJob(job));
 
 	std::cout << "[M] Starting bottle counting..." << std::endl;
@@ -86,18 +86,38 @@ int main(void)
 	// bottle counting task is running in background. But, beware,
 	// because of the mutual access to the standard output, we
 	// should lock a mutex before printing anything on it.
-	mutex.lock();
-	std::cout << "[M] Doing some processing here too." << std::endl;
-	mutex.unlock();
+	
+//	mutex.lock();
+//	std::cout << "[M] Doing some processing here too." << std::endl;
+//	mutex.unlock();
 
 	// Simulate a long processing
-	Yuni::Sleep(5 /* seconds */);
+//	Yuni::Sleep(5 /* seconds */);
 
 	// Waiting for our tasks to complete.
+//	mutex.lock();
+//	std::cout << "[M] Main thread processing is over." << std::endl;
+//	std::cout << "[M] Waiting bottle counting tasks..." << std::endl;
+//	mutex.unlock();
+
 	mutex.lock();
-	std::cout << "[M] Waiting bottle counting tasks..." << std::endl;
+	std::cout << "[M] Wait #1" << std::endl;
 	mutex.unlock();
+
 	qs.wait();
+
+	mutex.lock();
+	std::cout << "[M] Wait #2" << std::endl;
+	mutex.unlock();
+
+	qs.wait();
+
+	mutex.lock();
+	std::cout << "[M] Stop #1" << std::endl;
+	mutex.unlock();
+
+	qs.stop();
+
 
 	// We do not have to use mutexes anymore.
 	std::cout << "[M] Thread stopped." << std::endl;
