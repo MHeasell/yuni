@@ -76,16 +76,16 @@ namespace UTF8
 			{
 				if (pValue < 0x10000)
 				{
-					out.put(static_cast<unsigned char>((pValue >> 12)       | 0xe0));
-					out.put(static_cast<unsigned char>((pValue >> 6) & 0x3f | 0x80));
-					out.put(static_cast<unsigned char>((pValue & 0x3f)      | 0x80));
+					out.put(static_cast<unsigned char>((pValue >> 12)         | 0xe0));
+					out.put(static_cast<unsigned char>(((pValue >> 6) & 0x3f) | 0x80));
+					out.put(static_cast<unsigned char>((pValue & 0x3f)        | 0x80));
 				}
 				else
-				{                                // four octets
-					out.put(static_cast<unsigned char>((pValue >> 18)       | 0xf0));
-					out.put(static_cast<unsigned char>((pValue >> 12)& 0x3f | 0x80));
-					out.put(static_cast<unsigned char>((pValue >> 6) & 0x3f | 0x80));
-					out.put(static_cast<unsigned char>((pValue & 0x3f)      | 0x80));
+				{                                // four bytes
+					out.put(static_cast<unsigned char>((pValue >> 18)         | 0xf0));
+					out.put(static_cast<unsigned char>(((pValue >> 12)& 0x3f) | 0x80));
+					out.put(static_cast<unsigned char>(((pValue >> 6) & 0x3f) | 0x80));
+					out.put(static_cast<unsigned char>((pValue & 0x3f)        | 0x80));
 				}
 			}
 		}
