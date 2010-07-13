@@ -10,7 +10,7 @@ LIBYUNI_CONFIG_DEPENDENCY("audio" "core") # yuni-core is required
 # Windows-specific
 #
 IF (WIN32 OR WIN64)
-	LIBYUNI_CONFIG_LIB("audio" "ws2_32")
+	LIBYUNI_CONFIG_LIB("audio" ws2_32)
 ENDIF (WIN32 OR WIN64)
 
 
