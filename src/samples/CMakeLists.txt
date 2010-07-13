@@ -24,6 +24,7 @@ IF(Yuni_FOUND)
 	# Infos
 	YMESSAGE("The Yuni Framework : ${Yuni_INFOS}")
 
+	ADD_SUBDIRECTORY(audio)
 	ADD_SUBDIRECTORY(core)
 	ADD_SUBDIRECTORY(devices)
 	ADD_SUBDIRECTORY(jobs)

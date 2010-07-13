@@ -186,7 +186,12 @@ namespace VersionInfo
 				if (i->second.mapping == mappingSVNSources)
 					std::cout << " (svn-sources)";
 				std::cout << "\n";
-				std::cout << "    path    : " << i->second.path << "\n";
+				String path(i->second.path);
+				# ifdef YUNI_OS_WINDOWS
+				path.convertBackslashesIntoSlashes();
+				# endif
+				std::cout << "    path    : " << path << "\n";
+
 				std::cout << "    modules : [core]";
 				const String::List::const_iterator mend = i->second.modules.end();
 				for (String::List::const_iterator j = i->second.modules.begin(); j != mend; ++j)
