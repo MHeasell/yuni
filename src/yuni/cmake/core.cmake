@@ -113,6 +113,7 @@ IF(MSVC)
 ELSE(MSVC)
 	CHECK_CXX_SOURCE_COMPILES(
 		"#include <iostream>
+		#include <sys/types.h>
 		#include <stdio.h>
 		void foo(unsigned int a) {std::cout << a;}
 		void foo(int a) {std::cout << a;}
