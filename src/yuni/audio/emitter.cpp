@@ -16,7 +16,7 @@ namespace Audio
 	const bool Emitter::DefaultAttenuation = true;
 	const bool Emitter::DefaultLooping = false;
 
-	bool Emitter::attachBufferDispatched(Private::Audio::Buffer<>::Ptr buffer)
+	bool Emitter::attachBufferDispatched(Sound::Ptr& buffer)
 	{
 		// Check buffer validity
 		if (!buffer || !buffer->valid())
@@ -58,7 +58,7 @@ namespace Audio
 	}
 
 
-	bool Emitter::playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer)
+	bool Emitter::playSoundDispatched(Sound::Ptr& buffer)
 	{
 		if (!pReady && !prepareDispatched())
 			return false;

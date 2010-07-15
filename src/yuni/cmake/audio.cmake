@@ -23,8 +23,9 @@ Set(SRC_AUDIO
 		audio/emitter.h
 		audio/emitter.hxx
 		audio/emitter.cpp
-		private/audio/buffer.h
-		private/audio/buffer.hxx
+		audio/sound.h
+		audio/sound.hxx
+		audio/sound.cpp
 		private/audio/types.h
 		private/audio/openal.h
 		private/audio/openal.cpp

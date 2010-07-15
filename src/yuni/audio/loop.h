@@ -30,11 +30,20 @@ namespace Audio
 		typedef LoopType::RequestType RequestType;
 
 	public:
+		/*!
+		** \brief Constructor
+		**
+		** \param audioService Audio queue service corresponding to this loop
+		*/
 		Loop(QueueService* audioService);
 
+		/*!
+		** \brief Redefinition of the onLoop() callback
+		*/
 		bool onLoop();
 
 	public:
+		//! Audio queue service corresponding to this loop
 		QueueService* pAudioService;
 
 	}; // class Loop
