@@ -56,6 +56,14 @@ namespace Audio
 		static int GetAudioInfo(AudioStream* stream, int& rate, int& channels, int& bits);
 
 		/*!
+		** \brief Get the duration of an audio stream
+		**
+		** \param stream Stream to get duration for
+		** \returns The duration of the stream, 0 if null
+		*/
+		static unsigned int GetStreamDuration(const AudioStream* stream);
+
+		/*!
 		** \brief Decode audio and write at most length bytes into the provided data buffer
 		**
 		** Will only return less for end-of-stream or error conditions

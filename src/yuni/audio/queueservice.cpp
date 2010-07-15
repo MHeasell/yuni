@@ -118,7 +118,7 @@ namespace Audio
 		// Associate the buffer with the stream
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
-			Private::Audio::Buffer<>::Ptr buffer = bank.get(filePath);
+			Sound::Ptr buffer = bank.get(filePath);
 			assert(NULL != buffer);
 			buffer->stream(stream);
 		}

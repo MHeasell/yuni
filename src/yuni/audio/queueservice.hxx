@@ -28,19 +28,19 @@ namespace Audio
 
 
 	template<typename StringT>
-	Private::Audio::Buffer<>::Ptr QueueService::Bank::get(const StringT& name)
+	Sound::Ptr QueueService::Bank::get(const StringT& name)
 	{
 		return get(String(name));
 	}
 
 	template<>
-	inline Private::Audio::Buffer<>::Ptr QueueService::Bank::get<String>(const String& name)
+	inline Sound::Ptr QueueService::Bank::get<String>(const String& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		Private::Audio::Buffer<>::Map::iterator it = pBuffers.find(name);
+		Sound::Map::iterator it = pBuffers.find(name);
 		if (it == pBuffers.end())
-			return Private::Audio::Buffer<>::Ptr(NULL);
+			return Sound::Ptr(NULL);
 		return it->second;
 	}
 
@@ -98,7 +98,7 @@ namespace Audio
 		if (!emitter)
 			return false;
 
-		Private::Audio::Buffer<>::Ptr buffer = pBank->get(bufferName);
+		Sound::Ptr buffer = pBank->get(bufferName);
 		if (!buffer)
 			return false;
 
@@ -121,7 +121,7 @@ namespace Audio
 		if (!emitter)
 			return false;
 
-		Private::Audio::Buffer<>::Ptr buffer = pBank->get(bufferName);
+		Sound::Ptr buffer = pBank->get(bufferName);
 		if (!buffer)
 			return false;
 
@@ -248,8 +248,8 @@ namespace Audio
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		Private::Audio::Buffer<>::Map::iterator bEnd = pBuffers.end();
-		for (Private::Audio::Buffer<>::Map::iterator it = pBuffers.begin(); it != bEnd; ++it)
+		Sound::Map::iterator bEnd = pBuffers.end();
+		for (Sound::Map::iterator it = pBuffers.begin(); it != bEnd; ++it)
 		{
 			it->second->destroyDispatched();
 		}
@@ -272,7 +272,7 @@ namespace Audio
 			return false;
 
 		// Create the buffer, store it in the map
-		pBuffers[filePath] = new Private::Audio::Buffer<>(NULL);
+		pBuffers[filePath] = new Sound(NULL);
 
 		Yuni::Bind<bool()> callback;
 		callback.bind(pQueueService, &QueueService::loadSoundDispatched, filePath);
@@ -280,6 +280,21 @@ namespace Audio
 		return true;
 	}
 
+	template<typename StringT>
+	inline unsigned int QueueService::Bank::duration(const StringT& name)
+	{
+		return duration(String(name));
+	}
+
+	template<>
+	inline unsigned int QueueService::Bank::duration(const String& name)
+	{
+		Sound::Ptr buffer = get(name);
+		if (!buffer)
+			return false;
+
+		return buffer->duration();
+	}
 
 
 

@@ -31,39 +31,66 @@ public:
 
 	virtual void onExecute()
 	{
-		String::Vector::const_iterator end = pFileNames.end();
+		String emitterName;
 		unsigned int i = 0;
+
+		String::Vector::const_iterator end = pFileNames.end();
 		for (String::Vector::const_iterator it = pFileNames.begin(); it != end; ++it)
 		{
-			String emitterName("Emitter ");
-			emitterName << i++;
+			// Load sound file
+			if (!audio.bank.load(*it))
+				return;
+
+			// Create emitter
+			emitterName.clear() << "Emitter " << i++;
 			if (!audio.emitter.add(emitterName))
 			{
 				std::cerr << "Emitter creation failed !" << std::endl;
 				return;
 			}
-			if (!audio.bank.load(*it))
-				return;
+
+			// Attach the emitter to the buffer
 			audio.emitter.attach(emitterName, *it);
+			// Start playback on the emitter
 			audio.emitter.play(emitterName);
+
+			Yuni::SleepMilliSeconds(1000);
+			// Get stream duration
+			unsigned int duration = audio.bank.duration(*it);
+			std::cout << "Sound duration: ";
+			writeTime(duration);
+			std::cout << std::endl;
+
 		}
-		sint64 elapsed;
+		sint64 elapsed = 0;
 		for (int i = 0; i < 3000; ++i)
 		{
 			Yuni::SleepMilliSeconds(100);
 
+			// Get elapsed playback time
 			sint64 newTime = audio.emitter.elapsedTime("Emitter 0");
 			// Only update if different
 			if (newTime != elapsed)
 			{
 				elapsed = newTime;
-				std::cout << "Elapsed time: " << (elapsed / 60) << ":";
-				if (elapsed % 60 < 10)
-					std::cout << 0;
-				std::cout << (elapsed % 60) << std::endl;
+				std::cout << "Elapsed time: ";
+				writeTime(elapsed);
+				std::cout << std::endl;
 			}
 		}
 	}
+
+private:
+
+	template<typename T>
+	void writeTime(T timeInSeconds)
+	{
+		std::cout << (timeInSeconds / 60) << ":";
+		if (timeInSeconds % 60 < 10)
+			std::cout << 0;
+		std::cout << (timeInSeconds % 60);
+	}
+
 
 private:
 	String::Vector pFileNames;

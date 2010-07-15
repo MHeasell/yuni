@@ -6,7 +6,7 @@
 # include "../core/string.h"
 # include "../core/point3D.h"
 # include "../core/vector3D.h"
-# include "../private/audio/buffer.h"
+# include "sound.h"
 
 
 namespace Yuni
@@ -30,10 +30,13 @@ namespace Audio
 		typedef std::map<String, Ptr> Map;
 
 	public:
-		//! Default values
+		//! Default value for pitch (1.0)
 		static const float DefaultPitch;
+		//! Default value for gain (1.0)
 		static const float DefaultGain;
+		//! Default value for attenuation (enabled)
 		static const bool DefaultAttenuation;
+		//! Default value for looping (false)
 		static const bool DefaultLooping;
 
 	public:
@@ -69,7 +72,7 @@ namespace Audio
 		//! \name Methods
 		//@{
 		//! Attach a buffer to the emitter
-		bool attachBufferDispatched(Private::Audio::Buffer<>::Ptr buffer);
+		bool attachBufferDispatched(Sound::Ptr& buffer);
 
 		//! Prepare the emitter for playing
 		bool prepareDispatched();
@@ -77,7 +80,7 @@ namespace Audio
 		//! Play the sound
 		bool playSoundDispatched();
 		//! Play the sound
-		bool playSoundDispatched(Private::Audio::Buffer<>::Ptr buffer);
+		bool playSoundDispatched(Sound::Ptr& buffer);
 
 		//! Update buffers if necessary
 		bool updateDispatched();
@@ -86,19 +89,26 @@ namespace Audio
 
 		//! \name Accessors
 		//@{
+		//! Set the 3D position of the emitter
 		void position(const Gfx::Point3D<>& position);
+		//! Get the 3D position of the emitter
 		Gfx::Point3D<> position() const;
 
+		//! Set the velocity of the emitter
 		void velocity(const Gfx::Vector3D<>& position);
+		//! Get the velocity of the emitter
 		Gfx::Vector3D<> velocity() const;
 
+		//! Set the direction of the emitter
 		void direction(const Gfx::Vector3D<>& position);
+		//! Get the direction of the emitter
 		Gfx::Vector3D<> direction() const;
 
 		/*!
 		** \brief Set the volume modifier on the emitter
 		** \param newGain 0.0f for no sound, 1.0f to keep sound as is, > 1.0f to amplify sound
 		*/
+		//! Set the volume modifier
 		void gain(float newGain);
 		//! Get the current volume modifier
 		float gain() const;
@@ -109,9 +119,7 @@ namespace Audio
 		*/
 		sint64 elapsedTime() const;
 
-		String name() const;
-		template<class StringT> void name(const StringT& name);
-
+		//! Get the identifier for the emitter
 		unsigned int id() const;
 		//@}
 
@@ -137,8 +145,8 @@ namespace Audio
 		float pGain;
 		//! Current playback position
 		sint64 pStartTime;
-		//! Buffer used for playing. NULL if none
-		Private::Audio::Buffer<>::Ptr  pBuffer;
+		//! Sound to play. NULL if none
+		Sound::Ptr  pBuffer;
 
 		//! Is the emitter ready for use?
 		bool pReady;

@@ -99,21 +99,6 @@ namespace Audio
 	}
 
 
-	inline String Emitter::name() const
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return pName;
-	}
-
-
-	template<class StringT>
-	inline void Emitter::name(const StringT& name)
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		pName = name;
-	}
-
-
 	inline unsigned int Emitter::id() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);

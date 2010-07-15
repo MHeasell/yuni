@@ -12,7 +12,7 @@
 # include "../thread/condition.h"
 # include "emitter.h"
 # include "loop.h"
-# include "../private/audio/buffer.h"
+# include "sound.h"
 
 
 namespace Yuni
@@ -57,6 +57,7 @@ namespace Audio
 			Emitter::Map pEmitters;
 
 		public:
+			//! Get an emitter
 			template<typename StringT>
 			Emitter::Ptr get(const StringT& name);
 
@@ -123,18 +124,28 @@ namespace Audio
 			Bank(const Bank&);
 
 			//! Map of currently loaded buffers, with string tags as keys
-			Private::Audio::Buffer<>::Map pBuffers;
+			Sound::Map pBuffers;
 
 		public:
+			//! Clear the bank, free the loaded buffers
 			void clear();
 
+			/*!
+			** \brief Load sound file from given path
+			**
+			** \param name Path to file, used from now on as an identifier for the buffer
+			*/
 			template<typename StringT>
 			bool load(const StringT& name);
+
+			//! Get the duration of a loaded buffer
+			template<typename StringT>
+			unsigned int duration(const StringT& name);
 
 
 		private:
 			template<typename StringT>
-			Private::Audio::Buffer<>::Ptr get(const StringT& name);
+			Sound::Ptr get(const StringT& name);
 
 		private:
 			friend class QueueService;

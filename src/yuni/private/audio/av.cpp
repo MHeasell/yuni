@@ -188,6 +188,14 @@ namespace Audio
 	}
 
 
+	unsigned int AV::GetStreamDuration(const AudioStream* stream)
+	{
+		if (!stream)
+			return 0;
+		return stream->parent->FormatContext->duration / AV_TIME_BASE;
+	}
+
+
 	size_t AV::GetAudioData(AudioStream* stream, void *data, size_t length)
 	{
 		size_t dec = 0;
