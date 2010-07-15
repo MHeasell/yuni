@@ -111,17 +111,30 @@ IF(MSVC)
 		int main() {return 0;}"
 		YUNI_HAS_LONG)
 ELSE(MSVC)
-	CHECK_CXX_SOURCE_COMPILES(
-		"#include <iostream>
-		#include <sys/types.h>
-		#include <stdio.h>
-		void foo(unsigned int a) {std::cout << a;}
-		void foo(int a) {std::cout << a;}
-		void foo(unsigned long a) {std::cout << a;}
-		void foo(long a) {std::cout << a;}
-		void foo(int64_t a) {std::cout << a;}
-		int main() {return 0;}"
-		YUNI_HAS_LONG)
+	IF(YUNI_HAS_SYS_TYPES_H)
+		CHECK_CXX_SOURCE_COMPILES(
+			"#include <iostream>
+			#include <sys/types.h>
+			#include <stdio.h>
+			void foo(unsigned int a) {std::cout << a;}
+			void foo(int a) {std::cout << a;}
+			void foo(unsigned long a) {std::cout << a;}
+			void foo(long a) {std::cout << a;}
+			void foo(int64_t a) {std::cout << a;}
+			int main() {return 0;}"
+			YUNI_HAS_LONG)
+	ELSE(YUNI_HAS_SYS_TYPES_H)
+		CHECK_CXX_SOURCE_COMPILES(
+			"#include <iostream>
+			#include <stdio.h>
+			void foo(unsigned int a) {std::cout << a;}
+			void foo(int a) {std::cout << a;}
+			void foo(unsigned long a) {std::cout << a;}
+			void foo(long a) {std::cout << a;}
+			void foo(int64_t a) {std::cout << a;}
+			int main() {return 0;}"
+			YUNI_HAS_LONG)
+	ENDIF(YUNI_HAS_SYS_TYPES_H)
 ENDIF(MSVC)
 
 
