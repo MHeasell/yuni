@@ -27,7 +27,7 @@
 
 # include <cstddef>
 
-# ifdef YUNI_OS_GCC
+# ifdef YUNI_HAS_SYS_TYPES_H
 #   include <sys/types.h>
 # endif
 
