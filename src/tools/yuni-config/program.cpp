@@ -145,8 +145,8 @@ namespace Yuni
 			pDefaultPathList.push_back("${PROGRAMFILES}\\Dev\\libyuni");
 			pDefaultPathList.push_back("C:\\Dev\\libyuni");
 			# else
-			pDefaultPathList.push_back(YUNI_INSTALL_PREFIX "/lib/" YUNI_VERSIONED_INST_PATH);
-			pDefaultPathList.push_back(YUNI_INSTALL_PREFIX "/lib");
+			pDefaultPathList.push_back(String() << YUNI_INSTALL_PREFIX << "/lib/" << YUNI_VERSIONED_INST_PATH);
+			pDefaultPathList.push_back(String() << YUNI_INSTALL_PREFIX << "/lib");
 			pDefaultPathList.push_back("/usr/lib/yuni");
 			pDefaultPathList.push_back("/usr/local/lib/yuni");
 			pDefaultPathList.push_back("/opt/yuni/lib");
