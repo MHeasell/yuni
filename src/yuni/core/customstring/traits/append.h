@@ -108,6 +108,18 @@ namespace CustomString
 	};
 
 
+	// void*
+	template<class CustomStringT>
+	struct Append<CustomStringT, UTF8::Char>
+	{
+		static void Perform(CustomStringT& s, const UTF8::Char& rhs)
+		{
+			rhs.write(s);
+		}
+	};
+
+
+
 
 # define YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(BUFSIZE, FORMAT, TYPE) \
 	template<class CustomStringT> \

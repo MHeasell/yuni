@@ -22,6 +22,7 @@
 # endif
 
 # include "utf8char.h"
+# include "../iterator.h"
 # include "traits/traits.h"
 # include "traits/append.h"
 # include "traits/assign.h"
@@ -33,6 +34,7 @@
 
 namespace Yuni
 {
+
 
 	/*!
 	** \brief Character string
@@ -51,6 +53,14 @@ namespace Yuni
 	**  - Yuni::CustomString<...>
 	**  - SmartPtr<std::basic_string<char>, ...>
 	**  - SmartPtr<CustomString<...>, ...>
+	**
+	** Example for iterating through all character (the recommended way)
+	** \code
+	** String t = "こんにちは";
+	** const String::const_utf8iterator end = t.utf8end();
+	** for (String::const_utf8iterator i = t.utf8begin(); i != end; ++i)
+	** 	std::cout << "char at offset " << i.offset() << ": " << *i << std::endl;
+	** \endcode
 	**
 	** \warning This class is not thread-safe
 	** \tparam ChunkSizeT The size for a single chunk (> 3)
@@ -113,6 +123,8 @@ namespace Yuni
 			expandable         = AncestorType::expandable,
 			//! Number of bits per element
 			bitCountPerElement = sizeof(Char) * 8,
+			//! True if the string is a string adapter (only read-only operations are allowed)
+			isAdapter          = (!chunkSize && expandable && !zeroTerminated),
 
 			//! Invalid offset
 			npos = (Size)(-1),
@@ -128,9 +140,12 @@ namespace Yuni
 		};
 
 		// Checking for a minimal chunk size
-		YUNI_STATIC_ASSERT(chunkSize > 3, CustomString_MinimalChunkSizeRequired);
+		YUNI_STATIC_ASSERT(isAdapter || chunkSize > 3, CustomString_MinimalChunkSizeRequired);
+
 
 	public:
+		//! \name CString comparison
+		//@{
 		/*!
 		** \brief Compare two string like strcmp()
 		**
@@ -148,7 +163,27 @@ namespace Yuni
 		**   equal to, or less than the given string
 		*/
 		static int CompareInsensitive(const char* const s1, unsigned int l1, const char* const s2, unsigned int l2);
+		//@}
 
+
+	private:
+		// Implements the following iterator models for CustomString<>
+		# include "iterator.h"
+
+	public:
+		//! \name Iterators
+		//@{
+		//! Iterator
+		typedef IIterator<typename Model::ByteIterator, false>  iterator;
+		//! Iterator (const)
+		typedef IIterator<typename Model::ByteIterator, true>   const_iterator;
+		//! Iterator for UTF8 characters
+		typedef IIterator<typename Model::UTF8Iterator, false>  utf8iterator;
+		//! Iterator for UTF8 characters (const)
+		typedef IIterator<typename Model::UTF8Iterator, true>   const_utf8iterator;
+		//! Null iterator
+		typedef IIterator<typename Model::NullIterator, true>   null_iterator;
+		//@}
 
 	public:
 		//! \name Constructors & Destructor
@@ -207,6 +242,25 @@ namespace Yuni
 		CustomString(const std::basic_string<char,TraitsT,AllocT>& s, Size offset, Size n = npos);
 
 		/*!
+		** \brief Constructor by copy from iterator
+		**
+		** \param begin An iterator pointing to the begining of a sequence
+		** \param end  An iterator pointing to the end of a sequence
+		*/
+		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2>
+		CustomString(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end);
+
+		/*!
+		** \brief Constructor by copy from iterator
+		**
+		** \param begin An iterator pointing to the begining of a sequence
+		** \param end  An iterator pointing to the end of a sequence
+		** \param separator A string to add between each item
+		*/
+		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT>
+		CustomString(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end, const StringT& separator);
+
+		/*!
 		** \brief Constructor with a default value
 		*/
 		template<class U> CustomString(const U& rhs);
@@ -220,6 +274,30 @@ namespace Yuni
 		** \brief Destructor
 		*/
 		~CustomString();
+		//@}
+
+
+		//! \name Iterators
+		//@{
+		//! Get an iterator on UTF8 characters pointing to the beginning of the string
+		utf8iterator utf8begin();
+		//! Get an iterator on UTF8 characters pointing to the beginning of the string
+		const_utf8iterator utf8begin() const;
+
+		//! Get an iterator on UTF8 characters pointing to the end of the string
+		null_iterator utf8end();
+		//! Get an iterator on UTF8 characters pointing to the end of the string
+		null_iterator utf8end() const;
+
+		//! Get an iterator pointing to the beginning of the string
+		iterator begin();
+		//! Get an iterator pointing to the beginning of the string
+		const_iterator begin() const;
+
+		//! Get an iterator pointing to the end of the string
+		null_iterator end();
+		//! Get an iterator pointing to the end of the string
+		null_iterator end() const;
 		//@}
 
 
@@ -241,11 +319,92 @@ namespace Yuni
 		void assign(const char* const cstr, const Size size);
 
 		/*!
+		** \brief Assign to the string all items within
+		**
+		** The type held by the iterator can be anything as long as the type can
+		** be converted by the string (see specializations in the namespace
+		** `Yuni::Extension::CustomString`).
+		**
+		** \param begin An iterator pointing to the begining of a sequence
+		** \param end  An iterator pointing to the end of a sequence
+		*/
+		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2>
+		void assign(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end);
+
+		/*!
+		** \brief Assign to thestring all items within
+		**
+		** The type held by the iterator can be anything as long as the type can
+		** be converted by the string (see specializations in the namespace
+		** `Yuni::Extension::CustomString`).
+		**
+		** \code
+		** String s = "string: こんにちは";
+		** String::const_utf8iterator a = s.utf8begin() + 9;
+		** String::const_utf8iterator a = s.utf8begin() + 11;
+		** String sub1(a, b);
+		** std::cout << sub1 << std::endl; // んに
+		**
+		** String sub2;
+		** sub2.append(a, b, ", ");
+		** std::cout << sub2 << std::endl; // ん, に
+		** \endcode
+		**
+		** \param begin An iterator pointing to the begining of a sequence
+		** \param end  An iterator pointing to the end of a sequence
+		** \param separator The string separator to use between each item
+		*/
+		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT>
+		void assign(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end,
+			const StringT& separator);
+
+
+		/*!
 		** \brief Append to the end of the string a new value
 		**
 		** \param rhs Any supported value
 		*/
 		template<class U> void append(const U& rhs);
+
+		/*!
+		** \brief Append to the end of the string all items within
+		**
+		** The type held by the iterator can be anything as long as the type can
+		** be converted by the string (see specializations in the namespace
+		** `Yuni::Extension::CustomString`).
+		**
+		** \param begin An iterator pointing to the begining of a sequence
+		** \param end  An iterator pointing to the end of a sequence
+		*/
+		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2>
+		void append(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end);
+
+		/*!
+		** \brief Append to the end of the string all items within
+		**
+		** The type held by the iterator can be anything as long as the type can
+		** be converted by the string (see specializations in the namespace
+		** `Yuni::Extension::CustomString`).
+		**
+		** \code
+		** String s = "string: こんにちは";
+		** String::const_utf8iterator a = s.utf8begin() + 9;
+		** String::const_utf8iterator a = s.utf8begin() + 11;
+		** String sub1(a, b);
+		** std::cout << sub1 << std::endl; // んに
+		**
+		** String sub2;
+		** sub2.append(a, b, ", ");
+		** std::cout << sub2 << std::endl; // ん, に
+		** \endcode
+		**
+		** \param begin An iterator pointing to the begining of a sequence
+		** \param end  An iterator pointing to the end of a sequence
+		** \param separator The string separator to use between each item
+		*/
+		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT>
+		void append(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end,
+			const StringT& separator);
 
 		/*!
 		** \brief Append to the end of the string a new value
@@ -496,12 +655,12 @@ namespace Yuni
 		Size find(char c) const;
 
 		/*!
-		** \brief Find the offset of a sub-string (ignoring the case)
+		** \brief Find the offset of a sub-string
 		**
 		** \param cstr An arbitrary string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size ifind(char c) const;
+		Size find(char c, Size offset) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes)
@@ -510,7 +669,32 @@ namespace Yuni
 		** \param len Size of the given cstr
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size find(const char* const cstr, const Size len) const;
+		Size find(const char* const cstr, Size offset, Size len) const;
+
+		/*!
+		** \brief Find the offset of any supported CString
+		**
+		** \param cstr Any supported CString
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		template<class StringT> Size find(const StringT& s, Size offset = 0) const;
+
+
+		/*!
+		** \brief Find the offset of a sub-string (ignoring the case)
+		**
+		** \param cstr An arbitrary string
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size ifind(char c) const;
+
+		/*!
+		** \brief Find the offset of a sub-string (ignoring the case)
+		**
+		** \param cstr An arbitrary string
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size ifind(char c, Size offset) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) (ignoring the case)
@@ -519,15 +703,7 @@ namespace Yuni
 		** \param len Size of the given cstr
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		Size ifind(const char* const cstr, const Size len) const;
-
-		/*!
-		** \brief Find the offset of any supported CString
-		**
-		** \param cstr Any supported CString
-		** \return The offset of the first sub-string found, `npos` if not found
-		*/
-		template<class StringT> Size find(const StringT& s) const;
+		Size ifind(const char* const cstr, Size offset, Size len) const;
 
 		/*!
 		** \brief Find the offset of any supported CString (ignoring the case)
@@ -535,7 +711,76 @@ namespace Yuni
 		** \param cstr Any supported CString
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
-		template<class StringT> Size ifind(const StringT& s) const;
+		template<class StringT> Size ifind(const StringT& s, Size offset = 0) const;
+
+
+		/*!
+		** \brief Find the offset of a sub-string
+		**
+		** \param cstr An arbitrary string
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size rfind(char c) const;
+
+		/*!
+		** \brief Find the offset of a sub-string
+		**
+		** \param cstr An arbitrary string
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size rfind(char c, Size offset) const;
+
+		/*!
+		** \brief Find the offset of a raw sub-string with a given length (in bytes)
+		**
+		** \param cstr An arbitrary string
+		** \param len Size of the given cstr
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size rfind(const char* const cstr, Size offset, Size len) const;
+
+		/*!
+		** \brief Find the offset of any supported CString
+		**
+		** \param cstr Any supported CString
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		template<class StringT> Size rfind(const StringT& s, Size offset = npos) const;
+
+
+		/*!
+		** \brief Find the offset of a sub-string (ignoring the case)
+		**
+		** \param cstr An arbitrary string
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size irfind(char c) const;
+
+		/*!
+		** \brief Find the offset of a sub-string (ignoring the case)
+		**
+		** \param cstr An arbitrary string
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size irfind(char c, Size offset) const;
+
+		/*!
+		** \brief Find the offset of a raw sub-string with a given length (in bytes) (ignoring the case)
+		**
+		** \param cstr An arbitrary string
+		** \param len Size of the given cstr
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		Size irfind(const char* const cstr, Size offset, Size len) const;
+
+		/*!
+		** \brief Find the offset of any supported CString (ignoring the case)
+		**
+		** \param cstr Any supported CString
+		** \return The offset of the first sub-string found, `npos` if not found
+		*/
+		template<class StringT> Size irfind(const StringT& s, Size offset = npos) const;
+
 
 		/*!
 		** \brief Find the offset of a sub-string from the left
@@ -543,7 +788,7 @@ namespace Yuni
 		** \param offset Position of the first character in the string to be taken
 		**   into consideration for possible matches. A value of 0 means that the
 		**   entire string is considered
-		** \param cstr An arbitrary string
+		** \param cstr An arbitrary string character
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		Size indexOf(Size offset, const char cstr) const;
@@ -554,7 +799,7 @@ namespace Yuni
 		** \param offset Position of the first character in the string to be taken
 		**   into consideration for possible matches. A value of 0 means that the
 		**   entire string is considered
-		** \param cstr An arbitrary string
+		** \param cstr An arbitrary C-string
 		** \param len Size of the given string
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
@@ -566,19 +811,114 @@ namespace Yuni
 		** \param offset Position of the first character in the string to be taken
 		**   into consideration for possible matches. A value of 0 means that the
 		**   entire string is considered
-		** \param cstr Any supported CString
+		** \param cstr Any supported String
 		** \return The offset of the first sub-string found, `npos` if not found
 		*/
 		template<class StringT> Size indexOf(Size offset, const StringT& s) const;
 
 		/*!
-		** \brief Find the offset of a sub-string (equivalent to the method `find()`)
+		** \brief Searches the string for an individual character
 		**
-		** \param cstr An arbitrary string
-		** \return The offset of the first sub-string found, `npos` if not found
-		** \see find()
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
 		*/
-		template<class StringT> Size find_first_of(const StringT& u) const;
+		Size find_first_of(char c) const;
+
+		/*!
+		** \brief Searches the string for an individual character (ignoring the case)
+		**
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		Size ifind_first_of(char c) const;
+
+		/*!
+		** \brief Searches the string for an individual character
+		**
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		Size find_first_of(char c, Size offset) const;
+
+		/*!
+		** \brief Searches the string for any of the characters that are part of @seq
+		**
+		** \param seq An arbitrary string
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		template<class StringT> Size find_first_of(const StringT& seq, Size offset = 0) const;
+
+		/*!
+		** \brief Searches the string for any of the characters that are part of @seq
+		**   (ignoring the case)
+		**
+		** \param seq An arbitrary string
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		template<class StringT> Size ifind_first_of(const StringT& seq, Size offset = 0) const;
+
+		/*!
+		** \brief Searches the string from the end for an individual character
+		**
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		Size find_last_of(char c) const;
+
+		/*!
+		** \brief Searches the string from the end for an individual character (ignoring the case)
+		**
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		Size ifind_last_of(char c) const;
+
+		/*!
+		** \brief Searches the string from the end for an individual character
+		**
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		Size find_last_of(char c, Size offset) const;
+
+		/*!
+		** \brief Searches the string from the end for any of the characters that are part of @seq
+		**
+		** \param seq An arbitrary string
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		template<class StringT> Size find_last_of(const StringT& seq, Size offset = npos) const;
+
+		/*!
+		** \brief Searches the string from the end for any of the characters that are part of @seq
+		**   (ignoring the case)
+		**
+		** \param seq An arbitrary string
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		template<class StringT> Size ifind_last_of(const StringT& seq, Size offset = npos) const;
 
 		/*!
 		** \brief Get if a given string can be found at the begining
@@ -793,7 +1133,7 @@ namespace Yuni
 		** {
 		** 	if (offset)
 		** 		std::cout << ", ";
-		** 	if (UTF8::errNone != t.utf8next(offset, c))
+		** 	if (UTF8::errNone != t.utf8next<false>(offset, c))
 		** 	{
 		** 		std::cout << "<EOF>\n";
 		** 		break;
@@ -804,10 +1144,13 @@ namespace Yuni
 		** while (true);
 		** \endcode
 		**
+		** \tparam InvalidateOffsetIfErrorT True to automatically set the offset
+		**   parameter to `(Size)-1` when the result is not `errNone`
 		** \param[out] offset Offset in the string
 		** \param[out] out    The UTF-8 char
 		** \return True if an UTF8 char has been found, false otherwise (@offset may become invalid)
 		*/
+		template<bool InvalidateOffsetIfErrorT>
 		UTF8::Error utf8next(Size& offset, UTF8::Char& out) const;
 		//@}
 
@@ -942,6 +1285,9 @@ namespace Yuni
 
 		//! \see size()
 		size_t sizeInBytes() const;
+
+		//! the maximum number of characters that the string object can hold (for STL compliance)
+		size_t max_size() const;
 
 		/*!
 		** \brief Get if the cstr is empty
@@ -1107,12 +1453,34 @@ namespace Yuni
 		** \param emptyBefore True to clear the vector before fulfill it
 		**
 		** \warning Do not take care of string representation (with `'` or `"`)
-		** \deprecated Consider `split` instead
+		** \deprecated Consider `split` instead. It will be removed in the next v0.2
 		*/
 		template<template<class,class> class U, class UType, class Alloc, typename StringT>
-		YUNI_DEPRECATED("Consider `split` instead",
+		YUNI_DEPRECATED("Consider `split` instead (will be removed in the next v0.2)",
 		void explode(U<UType,Alloc>& out, const StringT& sep,
-			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const);
+			bool emptyBefore = true, const bool keepEmptyElements = false, const bool trimElements = true) const);
+
+		/*!
+		** \brief Split a string into several segments
+		**
+		** Here is an example of how to convert a string to a list of int :
+		** \code
+		** std::list<int>  list;
+		** String("22::80::443::993").split(list, ":");
+		** std::cout << list << std::endl;
+		** \endcode
+		**
+		** \param[out] out All segments that have been found
+		** \param sep Sequence of chars considered as a separator
+		** \param keepEmptyElements True to keep empty items
+		** \param trimElements Trim each item found
+		** \param emptyBefore True to clear the vector before fulfill it
+		**
+		** \warning This method does not take care of string representation (with `'` or `"`)
+		*/
+		template<template<class,class> class U, class UType, class Alloc, typename StringT>
+		void split(U<UType,Alloc>& out, const StringT& sep,
+			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const;
 
 		/*!
 		** \brief Dupplicate N times the content of the string
@@ -1123,11 +1491,21 @@ namespace Yuni
 
 		//! \name Operators
 		//@{
-		//! The operator `[]` (the offset must be valid)
+		//! The operator `[]`, for accessing to a single char (the offset must be valid)
 		const char& operator [] (const Size offset) const;
+		//! The operator `[]`, for accessing to a single char (the offset must be valid)
 		char& operator [] (const Size offset);
+
+		//! The operator `[]`, for accessing to a single char
+		template<class M, bool C> const char& operator [] (const IIterator<M,C>& iterator) const;
+		//! The operator `[]`, for accessing to a single char
+		template<class M, bool C> char& operator [] (const IIterator<M,C>& iterator);
+
+		//! The operator `[]`, for accessing to a single char (the offset must be valid)
 		const char& operator [] (const int offset) const;
+		//! The operator `[]`, for accessing to a single char (the offset must be valid)
 		char& operator [] (const int offset);
+
 		//! The operator `+=` (append)
 		template<class U> CustomString& operator += (const U& rhs);
 		//! The operator `<<` (append)
@@ -1186,9 +1564,37 @@ namespace Yuni
 
 
 
+	/*!
+	** \brief String adapters
+	**
+	** This is a convenient typedef for declaring a string adapter.
+	** A string adapter allow you to perform all read-only operations
+	** provided by a string to an arbitrary raw buffer, without copying it.
+	** This may be extremly useful to reduce memory consumption and to reduce
+	** some useless memory allocation.
+	**
+	** \code
+	** StringAdaptor s;
+	** s.adapt("Here is a raw C-string");
+	** std::cout << "length     : " << s.size() << std::endl;
+	** std::cout << "find 'raw' : " << s.find("raw") << std::endl;
+	** \endcode
+	**
+	** Using a sub-string as it were a real string :
+	** \code
+	** String s = "abcdefghijklmnopqrst";
+	** StringAdapter adapter (s.begin() + 2, s.begin() + 9);
+	** std::cout << adapter << " (size: " << adapter.size() << ")" << std::endl;
+	** \endcode
+	*/
+	typedef CustomString<0, true, false> StringAdapter;
+
+
+
 
 } // namespace Yuni
 
+# include "iterator.hxx"
 # include "customstring.hxx"
 
 

@@ -98,6 +98,7 @@ namespace CustomString
 
 
 
+
 # ifdef YUNI_OS_MSVC
 # 	define YUNI_PRIVATE_CUSTOMSTR_SPRINTF(BUFFER, BUFSIZE, FORMAT, VALUE)  sprintf_s(BUFFER, BUFSIZE,FORMAT,VALUE)
 # else

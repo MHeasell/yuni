@@ -4,12 +4,14 @@
 #include <ctype.h>
 
 
+
 namespace Yuni
 {
 namespace Private
 {
 namespace CustomStringImpl
 {
+
 
 
 	bool Equals(const char* const s1, const char* const s2, unsigned int len)
@@ -22,7 +24,7 @@ namespace CustomStringImpl
 		return true;
 	}
 
-	
+
 	bool EqualsInsensitive(const char* const s1, const char* const s2, unsigned int len)
 	{
 		for (unsigned int i = 0; i != len; ++i)
@@ -105,8 +107,9 @@ namespace CustomStringImpl
 
 
 
+
+
 } // namespace CustomStringImpl
 } // namespace Private
 } // namespace Yuni
-
 
