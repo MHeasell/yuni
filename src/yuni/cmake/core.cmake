@@ -148,7 +148,7 @@ Set(SRC_CORE_ATOMIC
 				core/atomic/int.h
 				core/atomic/int.hxx
 				core/atomic/traits.h)
-source_group(Core\\Atomic FILES ${SRC_CORE_ATOMIC})
+source_group(Core\\atomic FILES ${SRC_CORE_ATOMIC})
 
 
 Set(SRC_CORE_PREPROCESSOR
@@ -157,7 +157,14 @@ Set(SRC_CORE_PREPROCESSOR
 				core/preprocessor/capabilities/unixes.h
 				core/preprocessor/capabilities/windows.h
 				core/preprocessor/enum.h)
-source_group(Core\\Preprocessor FILES ${SRC_CORE_PREPROCESSOR})
+source_group(Core\\preprocessor FILES ${SRC_CORE_PREPROCESSOR})
+
+Set(SRC_CORE_ITERATOR
+				core/iterator.h
+				core/iterator/iterator.h
+				core/iterator/iterator.hxx
+				)
+source_group(Core\\iterator FILES ${SRC_CORE_ITERATOR})
 
 
 Set(SRC_CORE_STATIC
@@ -168,20 +175,20 @@ Set(SRC_CORE_STATIC
 				core/static/inherit.h
 				core/static/dynamiccast.h
 				core/static/moveconstructor.h)
-source_group(Core\\Static FILES ${SRC_CORE_STATIC})
+source_group(Core\\static FILES ${SRC_CORE_STATIC})
 
 Set(SRC_CORE_TRAITS
 				core/traits/cstring.h
 				core/traits/extension/into-cstring.h
 				core/traits/extension/length.h
 				core/traits/length.h)
-source_group(Core\\Traits FILES ${SRC_CORE_TRAITS})
+source_group(Core\\traits FILES ${SRC_CORE_TRAITS})
 
 
 Set(SRC_CORE_EXCEPTIONS
 				core/exceptions.h
 				core/exceptions/badcast.h )
-source_group(Core\\Exceptions FILES ${SRC_CORE_EXCEPTIONS})
+source_group(Core\\exceptions FILES ${SRC_CORE_EXCEPTIONS})
 
 
 Set(SRC_CORE_VALIDATOR
@@ -190,19 +197,21 @@ Set(SRC_CORE_VALIDATOR
 				core/validator/text/default.private.h
 				core/validator/text/validator.h
 				core/validator/validator.h)
-source_group(Core\\Validator FILES ${SRC_CORE_VALIDATOR})
+source_group(Core\\validator FILES ${SRC_CORE_VALIDATOR})
 
 Set(SRC_CORE_SLIST
 				core/slist/iterator.h
 				core/slist/slist.h
 				core/slist/slist.hxx)
-source_group(Core\\LinkedList FILES ${SRC_CORE_SLIST})
+source_group(Core\\linkedList FILES ${SRC_CORE_SLIST})
 
 
 
 Set(SRC_CORE_STRING
 				core/customstring/customstring.h
 				core/customstring/customstring.hxx
+				core/customstring/iterator.h
+				core/customstring/iterator.hxx
 				core/customstring/utf8char.h
 				core/customstring/utf8char.hxx
 				core/customstring/traits/append.h
@@ -534,6 +543,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		yuni.h
 		${SRC_CORE_PREDICATES_RESULTS}
 		${SRC_CORE_STATIC}
+		${SRC_CORE_ITERATOR}
 		${SRC_CORE_TRAITS}
 		${SRC_CORE_PREPROCESSOR}
 		${SRC_CORE_BIT}

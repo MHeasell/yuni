@@ -20,6 +20,11 @@ namespace Atomic
 	** An atomic scalar value is a value that may be updated atomically (means
 	** without the use of a mutex).
 	**
+	** \code
+	** Atomic::Int<32> i;
+	** ++i;
+	** \endcode
+	**
 	** \tparam Size Size (in bits) of the scalar type (16 or 32 or 64)
 	** \tparam TP A threading policy to guarantee thread-safety or not
 	*/
@@ -103,9 +108,13 @@ namespace Atomic
 
 		//! \name Operators
 		//@{
+		//! Pre increment operator
 		ScalarType operator ++ ();
+		//! Pre decrement operator
 		ScalarType operator -- ();
+		//! Post increment operator
 		ScalarType operator ++ (int);
+		//! Post decrement operator
 		ScalarType operator -- (int);
 
 		Int& operator = (const ScalarType v);
@@ -114,6 +123,7 @@ namespace Atomic
 		//! Cast operator
 		operator ScalarType () const;
 
+		//! not
 		bool operator ! () const;
 		//@}
 

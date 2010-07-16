@@ -18,6 +18,8 @@ namespace Private
 namespace CustomStringImpl
 {
 
+
+
 	int Compare(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
 	int CompareInsensitive(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
 
@@ -54,11 +56,19 @@ namespace CustomStringImpl
 		{
 			if (size)
 			{
-				capacity += zeroTerminated;
-				data = (C*)::malloc(sizeof(C) * capacity);
-				(void)::memcpy(data, rhs.data, sizeof(C) * size);
-				if (zeroTerminated)
-					data[size] = C();
+				if (chunkSize != 0)
+				{
+					capacity += zeroTerminated;
+					data = (C*)::malloc(sizeof(C) * capacity);
+					(void)::memcpy(data, rhs.data, sizeof(C) * size);
+					if (zeroTerminated)
+						data[size] = C();
+				}
+				else
+				{
+					// this string is a string adapter
+					data = rhs.data;
+				}
 			}
 		}
 
@@ -66,8 +76,23 @@ namespace CustomStringImpl
 		~Data()
 		{
 			// Release the internal buffer if allocated
-			::free(data);
+			// only if the string is not a string adapter
+			if (chunkSize != 0)
+				::free(data);
 		}
+
+		void adapt(const char* const cstring)
+		{
+			data = cstring;
+			capacity = size = (data ? ::strlen(data) : 0);
+		}
+
+		void adapt(const char* const cstring, Size length)
+		{
+			data = cstring;
+			capacity = size = length;
+		}
+
 
 		void clear()
 		{
@@ -205,6 +230,9 @@ namespace CustomStringImpl
 		Size size;
 		Size capacity;
 		C* data;
+		// Friend
+		template<unsigned int SizeT, bool ExpT, bool ZeroT> friend class Yuni::CustomString;
+
 	}; // class Data
 
 
@@ -327,7 +355,11 @@ namespace CustomStringImpl
 		*/
 		C data[capacity + 1];
 
+		// Friend
+		template<unsigned int SizeT, bool ExpT, bool ZeroT> friend class Yuni::CustomString;
+
 	}; // class Data;
+
 
 
 
