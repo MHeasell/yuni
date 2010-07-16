@@ -14,6 +14,7 @@ SET(YUNI_MAILING_LIST            "dev@libyuni.org")
 # Version
 SET(YUNI_VERSION_HI              0)
 SET(YUNI_VERSION_LO              1)
+SET(YUNI_VERSION                 "${YUNI_VERSION_HI}.${YUNI_VERSION_LO}")
 SET(YUNI_VERSION_REV             0) # Svn Revision - see below
 SET(YUNI_TARGET                  "debug") # Target : debug/release - see Target.cmake
 SET(YUNI_URL_DEVPACK_REPOSITORY  "http://devpacks.libyuni.org/")
@@ -52,6 +53,7 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SystemInformation.cmake")
 Set(TARGET_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/../bin/static/")
 Set(LIBRARY_OUTPUT_PATH "${TARGET_LIBS}")
 Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
+Set(VERSIONED_INST_PATH "yuni/${YUNI_VERSION}")
 
 YMESSAGE("Folders")
 YMESSAGE("   root: `${CMAKE_CURRENT_SOURCE_DIR}`")

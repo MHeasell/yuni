@@ -579,4 +579,27 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_THREADS} ${SRC_JOBS}
 		${SRC_APPLICATION}
 	)
+INSTALL(TARGETS yuni-static-core ARCHIVE DESTINATION lib/${VERSIONED_INST_PATH})
+
+# Install Core-related headers
+INSTALL(
+	DIRECTORY core
+	DESTINATION include/${VERSIONED_INST_PATH}
+	FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "*.hxx"
+	PATTERN ".svn" EXCLUDE
+	PATTERN "CMakeFiles" EXCLUDE
+	PATTERN "cmake" EXCLUDE
+)
+
+# Install other core-related base files
+INSTALL(FILES
+	Doxygen.txt
+	doxygen.h
+	platform.h
+	yuni.config.gcc
+	yuni.h
+	yuni.version
+		DESTINATION include/${VERSIONED_INST_PATH})
 

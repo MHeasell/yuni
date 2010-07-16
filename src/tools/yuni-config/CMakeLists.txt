@@ -32,12 +32,14 @@ ADD_EXECUTABLE(yuni-config
 		versions.h versions.hxx versions.cpp
 		program.h program.hxx program.cpp
 		main.cpp)
+INSTALL(PROGRAMS yuni-config RENAME yuni-config-${YUNI_VERSION} DESTINATION bin)
 
-
-#
 # Disable all code related to thread-safety
-#
 ADD_DEFINITIONS("-DYUNI_NO_THREAD_SAFE")
+
+# Add definitions to help finding yuni parameters once installed (prefix + versioned path)
+ADD_DEFINITIONS("-DYUNI_VERSIONED_INST_PATH=\"${VERSIONED_INST_PATH}\"")
+ADD_DEFINITIONS("-DYUNI_INSTALL_PREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
 
 
 #
