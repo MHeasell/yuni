@@ -1,23 +1,35 @@
-Project(Libyuni-Config CXX)
 
-CMake_minimum_required(VERSION 2.6)
+IF(NOT YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 
-IF(POLICY CMP0011)
-	CMake_Policy(SET CMP0011 NEW)
-ENDIF(POLICY CMP0011)
+	Project(Libyuni-Config CXX)
+	CMake_minimum_required(VERSION 2.8)
 
-Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/message.cmake")
+	IF(POLICY CMP0005)
+		CMake_Policy(SET CMP0005 NEW)
+	ENDIF(POLICY CMP0005)
+	IF(POLICY CMP0011)
+		CMake_Policy(SET CMP0011 NEW)
+	ENDIF(POLICY CMP0011)
+
+	Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/message.cmake")
+ENDIF(NOT YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 
 YMESSAGE("")
 YMESSAGE("yuni-config")
 YMESSAGE("")
+IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
+	YMESSAGE("(self)")
+ENDIF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 
 
+Set(RUNTIME_OUTPUT_DIRECTORY "../../../build/${YUNI_TARGET}/bin")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/CommonSettings.cmake")
 Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/Modules.cmake")
 
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../..")
+
+
 
 ADD_EXECUTABLE(yuni-config
 		../../yuni/core/version/version.cpp
@@ -47,6 +59,7 @@ ADD_DEFINITIONS("-DYUNI_INSTALL_PREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
 #
 IF(YUNI_TARGET_RELEASE)
 	IF(UNIX)
+		YMESSAGE("Stripping 'yuni-config': yes")
 		ADD_CUSTOM_COMMAND(TARGET yuni-config POST_BUILD COMMAND ${CMAKE_STRIP} yuni-config)
 	ENDIF(UNIX)
 ENDIF(YUNI_TARGET_RELEASE)

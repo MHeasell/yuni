@@ -4,6 +4,12 @@ YMESSAGE("Modules")
 YMESSAGE("")
 
 
+# The target directory for static libs
+Set(LIBRARY_OUTPUT_PATH      "../build/${YUNI_TARGET}/lib")
+Set(ARCHIVE_OUTPUT_DIRECTORY "../build/${YUNI_TARGET}/lib")
+
+
+
 #
 # Preflight
 #
