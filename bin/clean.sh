@@ -12,3 +12,6 @@ find "${root}/../src" '(' \
 		-or -name '*.o' \
 		-or -name '.*.sw*' \
 	')' -exec echo ' * Removing `' '{}' '`' \; -exec rm -rf '{}' \;
+
+# yuni-config
+rm -f "${root}/../src/tools/yuni-config/yuni-config"

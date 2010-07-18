@@ -2,7 +2,6 @@ Project(Yuni-Framework)
 CMake_minimum_required(VERSION 2.8)
 include("cmake/message.cmake")
 
-
 YMESSAGE("")
 YMESSAGE("The Yuni Framework")
 YMESSAGE("")
@@ -27,11 +26,29 @@ SET(YUNI_URL_DEVPACK_SOURCE      "http://devpacks.libyuni.org/downloads")
 
 
 
+#
+# -----------------------------------------------------------------------------
+#
+
+# CMake special variables
+SET(VS_KEYWORD                   "YuniVS${YUNI_VERSION}")
+SET(VERSION                      "${YUNI_VERSION}")
+SET(VS_SCC_PROJECTNAME           "Yuni Framework")
+SET(PROJECT_LABEL                "Yuni Framework")
 
 
+#
+# CMake policies
+#
+# Preprocessor definition values are now escaped automatically
+IF(POLICY CMP0005)
+	CMake_Policy(SET CMP0005 NEW)
+ENDIF(POLICY CMP0005)
 IF(POLICY CMP0011)
 	CMake_Policy(SET CMP0011 NEW)
 ENDIF(POLICY CMP0011)
+
+
 Set(YUNI_INSTALL_CXX_FLAGS   "")
 Set(YUNI_INSTALL_CXX_DEFINES "")
 
@@ -39,10 +56,8 @@ Set(YUNI_INSTALL_CXX_DEFINES "")
 
 # Target
 Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake")
-
 # Getting the latest revision number
 Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SvnRevision.cmake")
-
 # Informations about the system
 Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SystemInformation.cmake")
 
@@ -50,14 +65,10 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SystemInformation.cmake")
 #
 # The target directory for static libs
 #
-Set(TARGET_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/../bin/static/")
-Set(LIBRARY_OUTPUT_PATH "${TARGET_LIBS}")
-Set(ARCHIVE_OUTPUT_DIRECTORY "${TARGET_LIBS}")
 Set(VERSIONED_INST_PATH "yuni/${YUNI_VERSION}")
 
 YMESSAGE("Folders")
 YMESSAGE("   root: `${CMAKE_CURRENT_SOURCE_DIR}`")
-YMESSAGE("   libs: `${TARGET_LIBS}`")
 
 
 # Custom settings
@@ -88,8 +99,6 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/DevPackStandardImports.cmake")
 # Modules
 Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules.cmake")
 
-# Tests
-#Include("${CMAKE_CURRENT_SOURCE_DIR}/Tests.cmake")
 
 
 # Sub Directories
