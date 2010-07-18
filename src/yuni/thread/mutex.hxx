@@ -39,7 +39,7 @@ namespace Yuni
 		else
 			::pthread_mutex_init(&pPthreadLock, NULL);
 		# else
-		(void)recursive;
+		(void) recursive;
 		# endif
 	}
 
@@ -90,7 +90,8 @@ namespace Yuni
 	}
 
 
-} // namespace Yuni
 
+
+} // namespace Yuni
 
 #endif // __YUNI_THREADS_MUTEX_HXX__

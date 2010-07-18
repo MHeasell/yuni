@@ -143,14 +143,18 @@ namespace Thread
 		//@}
 
 	private:
+		# ifndef YUNI_NO_THREAD_SAFE
 		//! The PThread Condition
 		pthread_cond_t  pCondition;
+		# endif
 
 		//! The mutex
 		Mutex* pMutex;
 
+		# ifndef YUNI_NO_THREAD_SAFE
 		//! Have the condition been really signalled ?
 		volatile bool pSignalled;
+		# endif
 
 		//! True if this class owns the mutex and must destroy it
 		const bool pOwnMutex;

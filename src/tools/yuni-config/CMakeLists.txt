@@ -29,6 +29,13 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/Modules.cmake")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../..")
 
+# Disable all code related to thread-safety
+ADD_DEFINITIONS("-DYUNI_NO_THREAD_SAFE")
+
+# Add definitions to help finding yuni parameters once installed (prefix + versioned path)
+ADD_DEFINITIONS("-DYUNI_VERSIONED_INST_PATH=\"${VERSIONED_INST_PATH}\"")
+ADD_DEFINITIONS("-DYUNI_INSTALL_PREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
+
 
 
 ADD_EXECUTABLE(yuni-config
@@ -41,26 +48,16 @@ ADD_EXECUTABLE(yuni-config
 		../../yuni/core/io/file/stream.cpp
 		../../yuni/core/io/exists.cpp
 		../../yuni/core/io/directory/current.cpp
+
+		# iterator
+		../../yuni/core/io/directory/iterator.h
+		../../yuni/core/io/directory/iterator/iterator.h
+		../../yuni/core/io/directory/iterator/iterator.hxx
+		../../yuni/core/io/directory/iterator/iterator.cpp
+		../../yuni/core/io/directory/iterator/detachedthread.h
+
 		versions.h versions.hxx versions.cpp
 		program.h program.hxx program.cpp
 		main.cpp)
 INSTALL(PROGRAMS yuni-config RENAME yuni-config-${YUNI_VERSION} DESTINATION bin)
-
-# Disable all code related to thread-safety
-ADD_DEFINITIONS("-DYUNI_NO_THREAD_SAFE")
-
-# Add definitions to help finding yuni parameters once installed (prefix + versioned path)
-ADD_DEFINITIONS("-DYUNI_VERSIONED_INST_PATH=\"${VERSIONED_INST_PATH}\"")
-ADD_DEFINITIONS("-DYUNI_INSTALL_PREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
-
-
-#
-# Stripping
-#
-IF(YUNI_TARGET_RELEASE)
-	IF(UNIX)
-		YMESSAGE("Stripping 'yuni-config': yes")
-		ADD_CUSTOM_COMMAND(TARGET yuni-config POST_BUILD COMMAND ${CMAKE_STRIP} yuni-config)
-	ENDIF(UNIX)
-ENDIF(YUNI_TARGET_RELEASE)
 

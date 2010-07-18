@@ -53,6 +53,7 @@ namespace Iterator
 		while ((pent = readdir(pdir)))
 		{
 			// Checking from time to time if the thread should stop
+			# ifndef YUNI_NO_THREAD_SAFE
 			if (thread && ++opts.counter == pollingInterval) // arbitrary value
 			{
 				// reset counter
@@ -60,6 +61,7 @@ namespace Iterator
 				if (thread->suspend())
 					return Yuni::Core::IO::flowAbort;
 			}
+			# endif
 
 			// Avoid `.` and `..`
 			if (*(pent->d_name) == '.')
@@ -154,6 +156,7 @@ namespace Iterator
 		do
 		{
 			// Checking from time to time if the thread should stop
+			# ifndef YUNI_NO_THREAD_SAFE
 			if (thread && ++opts.counter == pollingInterval) // arbitrary value
 			{
 				// reset counter
@@ -161,6 +164,7 @@ namespace Iterator
 				if (thread->suspend())
 					return Yuni::Core::IO::flowAbort;
 			}
+			# endif
 
 			// Avoid `.` and `..`
 			if (*(data.name) == L'.')
@@ -179,7 +183,7 @@ namespace Iterator
 			newFilename.clear();
 			newFilename << filename << '\\' << newName;
 
-			if( (data.attrib & _A_SUBDIR) )
+			if ((data.attrib & _A_SUBDIR))
 			{
 				// The node is a folder
 				switch (opts.self->onBeginFolder(newFilename, filename, newName))
@@ -222,6 +226,7 @@ namespace Iterator
 
 		return Yuni::Core::IO::flowContinue;
 	}
+
 # endif // ifndef YUNI_OS_WINDOWS
 
 
@@ -260,7 +265,11 @@ namespace Iterator
 			const Flow result = TraverseUnixFolder(path, options, thread);
 			# endif
 
+			# ifndef YUNI_NO_THREAD_SAFE
 			if ((result == Yuni::Core::IO::flowAbort) || (thread && thread->suspend()))
+			# else
+			if ((result == Yuni::Core::IO::flowAbort))
+			# endif
 			{
 				# ifdef YUNI_OS_WINDOWS
 				delete[] options.wbuffer;
