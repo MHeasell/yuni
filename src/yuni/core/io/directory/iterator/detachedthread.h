@@ -89,6 +89,7 @@ namespace Iterator
 	};
 
 
+	# ifndef YUNI_NO_THREAD_SAFE
 	class IDetachedThread : public Yuni::Thread::IThread
 	{
 	public:
@@ -111,6 +112,10 @@ namespace Iterator
 		}
 
 	}; // class IDetachedThread
+
+	# else
+	class IDetachedThread {};
+	# endif
 
 
 

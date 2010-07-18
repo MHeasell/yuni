@@ -1,5 +1,8 @@
 
 #include "../yuni.h"
+#include "condition.h"
+
+# ifndef YUNI_NO_THREAD_SAFE
 #include <time.h>
 #include <assert.h>
 #if defined(YUNI_OS_MSVC)
@@ -8,7 +11,6 @@
 # include <sys/time.h>
 #endif
 #include <errno.h>
-#include "condition.h"
 #include "../core/system/gettimeofday.h"
 
 
@@ -18,6 +20,8 @@ namespace Thread
 {
 
 
+	// Note: when YUNI_NO_THREAD_SAFE is defined, the constructor and destructor
+	//   are defined in the .hxx file
 	Condition::Condition()
 		:pSignalled(false), pOwnMutex(true)
 	{
@@ -43,6 +47,9 @@ namespace Thread
 		if (pOwnMutex)
 			delete pMutex;
 	}
+
+
+
 
 	void Condition::waitUnlocked()
 	{
@@ -111,4 +118,6 @@ namespace Thread
 } // namespace Thread
 } // namespace Yuni
 
+
+# endif // ifndef YUNI_NO_THREAD_SAFE
 

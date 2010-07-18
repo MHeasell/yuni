@@ -18,7 +18,6 @@ namespace Directory
 {
 
 
-
 	/*!
 	** \brief Iterate through subfolders and files of a given directory
 	**
@@ -115,25 +114,36 @@ namespace Directory
 	**
 	** This class is thread-safe even when not in detached mode.
 	** \tparam DetachedT True to perform the operation into a separate thread
+	**
+	** \internal When yuni is compiled without any threading support, the template
+	**    parameter `DetachedT` is automatically set to false
 	*/
 	template<bool DetachedT = true>
 	class IIterator
+		# ifndef YUNI_NO_THREAD_SAFE
 		:public Policy::ObjectLevelLockable< IIterator<DetachedT> >
+		# else
+		:public Policy::ObjectLevelLockable< IIterator<false> >
+		# endif
 		,public Private::Core::IO::Directory::Iterator::Interface
 	{
 	public:
-		//! Itself
-		typedef IIterator<DetachedT> IteratorType;
-		//! The threading policy
-		typedef Policy::ObjectLevelLockable<IteratorType> ThreadingPolicy;
-
 		enum
 		{
 			//! Detached mode
+			# ifndef YUNI_NO_THREAD_SAFE
 			detached = DetachedT,
+			# else
+			detached = false,
+			# endif
 			//! The default timeout for stopping a thread
 			defaultTimeout = Thread::IThread::defaultTimeout,
 		};
+		//! Itself
+		typedef IIterator<detached> IteratorType;
+		//! The threading policy
+		typedef Policy::ObjectLevelLockable<IteratorType> ThreadingPolicy;
+
 
 	public:
 		//! \name Constructor & Destructor
@@ -322,6 +332,7 @@ namespace Directory
 
 
 	private:
+		# ifndef YUNI_NO_THREAD_SAFE
 		typedef Yuni::Private::Core::IO::Directory::Iterator::IDetachedThread  ThreadType;
 
 		class DetachedThread : public ThreadType
@@ -330,11 +341,15 @@ namespace Directory
 			DetachedThread();
 			virtual ~DetachedThread();
 		};
+		# endif
+
 	private:
 		//! The root folder
 		String::VectorPtr pRootFolder;
+		# ifndef YUNI_NO_THREAD_SAFE
 		//! The de tached thread (only valid if detached != 0)
 		ThreadType* pThread;
+		# endif
 		// Friend !
 		friend void Yuni::Private::Core::IO::Directory::Iterator::Traverse(Options&, IDetachedThread*);
 
