@@ -2,6 +2,13 @@
 # define __YUNI_CORE_MATH_MATH_HXX__
 
 # include <algorithm>
+# include <cmath>
+# include <stdlib.h>
+# include <stdio.h>
+# include <math.h>
+# include <float.h>
+
+
 
 # ifdef YUNI_OS_MSVC
 /* Those functions are not available on Windows... */
@@ -191,26 +198,14 @@ namespace Math
 
 	template<class T> inline bool NaN(const T& x)
 	{
-		# ifdef YUNI_OS_MSVC
-		return (0 != _isnan(x));
-		# else
-		return (isnan(x));
-		# endif
+		// According to the IEEE standard, NaN values have the odd property that
+		// comparisons involving them are always false
+		return x != x;
 	}
 
-	template<class T> inline int Infinite(const T& x)
+	template<class T> inline int Infinite(const volatile T& x)
 	{
-		# ifdef YUNI_OS_MSVC
-		switch (_fpclass(x))
-		{
-			case _FPCLASS_NINF: return -1; // -inf
-			case _FPCLASS_PINF: return +1; // -inf
-			default: return 0;
-		}
-		return 0;
-		# else
-		return (isinf(x));
-		# endif
+		return ((x >= DBL_MAX) ? 1 : ((x <= -DBL_MAX) ? -1 : 0));
 	}
 
 	template<class T> inline T Floor(T x)
