@@ -15,14 +15,18 @@ SET(DevPackPrefix           "yndevpack")
 
 # Where is unzip ?
 SET(DevPackSourceZIP)
-Find_Program(DevPackSourceZIP NAMES "unzip" "unzip.exe" PATHS "${CMAKE_CURRENT_SOURCE_DIR}/../bin")
+IF(WIN32 AND NOT CMAKE_CROSSCOMPILING)
+	Find_Program(DevPackSourceZIP NAMES "unzip.exe" PATHS "${CMAKE_CURRENT_SOURCE_DIR}/../bin")
+ELSE()
+	Find_Program(DevPackSourceZIP NAMES "unzip")
+ENDIF()
 String(COMPARE EQUAL "${DevPackSourceZIP}" "DevPackSourceZIP-NOTFOUND" DevPackUnzipHasNotBeenFound)
 IF(DevPackUnzipHasNotBeenFound)
-	Message(FATAL_ERROR "The program 'unzip' has not been found")
-EndIF(DevPackUnzipHasNotBeenFound)
+	Message(FATAL_ERROR "The program 'unzip' has not been found. It is required to ")
+EndIF()
 IF(WIN32)
 	YMESSAGE("unzip: ${DevPackSourceZIP}")
-ENDIF(WIN32)
+ENDIF()
 
 
 
@@ -218,9 +222,9 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 		DEVPACK_IS_INSTALLED(DevPackReady "${dpname}" "${dpversion}" "${dprelease}" "${dpos}" "${dparch}"
 			"${dpcompiler}" "${dptarget}")
 
-	Else(NOT DevPackReady)
+	Else()
 		YMESSAGE("   ${DevPackTitle}")
-	EndIf(NOT DevPackReady)
+	EndIf()
 
 	IF(NOT DevPackReady)
 		YMESSAGE("")
@@ -235,12 +239,12 @@ MACRO(DEVPACK_IMPORT dpname dpversion dprelease dpos dparch dpcompiler dptarget)
 		YMESSAGE("     Please visit `${DevPackRepositoryURL}` for all devpacks.")
 		YMESSAGE("")
 		Message(FATAL_ERROR "Aborting now.")
-	Else(NOT DevPackReady)
+	Else()
 		SET(YUNI_CURRENT_DEVPACK_SOURCE_DIR "${DevPackFolder}/${dpversion}/r${dprelease}/${dparch}/${dpcompiler}")
 		Include("${DevPackFolder}/${dpversion}/r${dprelease}/${dparch}/cmake/CMakeLists-${dpname}-${dpos}-${dpcompiler}-${dptarget}.cmake")
-	EndIF(NOT DevPackReady)
+	EndIF()
 
-ENDMACRO(DEVPACK_IMPORT)
+ENDMACRO()
 
 
 
