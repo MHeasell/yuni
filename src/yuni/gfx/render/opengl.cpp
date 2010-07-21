@@ -85,11 +85,11 @@ namespace Render
 		for (Gfx::Mesh::TriangleList::const_iterator it = triangles.begin(); it != endtr; ++it)
 		{
 			glBegin(GL_TRIANGLES);
-			Gfx::Point3D<float> v1 = (*it)->vertex1().position();
+			Point3D<float> v1 = (*it)->vertex1().position();
 			glVertex3f(v1.x, v1.y, v1.z);
-			Gfx::Point3D<float> v2 = (*it)->vertex2().position();
+			Point3D<float> v2 = (*it)->vertex2().position();
 			glVertex3f(v2.x, v2.y, v2.z);
-			Gfx::Point3D<float> v3 = (*it)->vertex3().position();
+			Point3D<float> v3 = (*it)->vertex3().position();
 			glVertex3f(v3.x, v3.y, v3.z);
 			glNormal3f((*it)->normal().x, (*it)->normal().y, (*it)->normal().z);
 			glEnd();
