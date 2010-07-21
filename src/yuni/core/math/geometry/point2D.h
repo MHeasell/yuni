@@ -11,7 +11,6 @@ namespace Yuni
 
 	/*!
 	** \brief Represents a 2D-point
-	** \ingroup Gfx
 	*/
 	template<typename T = float>
 	class Point2D

@@ -11,7 +11,7 @@
 #endif
 #ifdef YUNI_OS_WINDOWS
 # include "../../system/windows.hdr.h"
-# include <ShellApi.h>
+# include <shellapi.h>
 #endif
 #include <sys/stat.h>
 #include <fcntl.h>
