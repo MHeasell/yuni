@@ -77,7 +77,7 @@ namespace Extension
 	struct IntoCString<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>* >
 	{
 	public:
-		typedef CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
+		typedef typename Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
 		enum { valid = 1, converted = 0, zeroTerminated = CustomStringType::zeroTerminated, };
 
 	public:
@@ -96,7 +96,7 @@ namespace Extension
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
-		static const char* Perform(const StringBase<char,ChunkSizeT>& container)
+		static const char* Perform(const Yuni::StringBase<char,ChunkSizeT>& container)
 		{
 			return container.c_str();
 		}
@@ -130,7 +130,7 @@ namespace Extension
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
-		static const char* Perform(const StringBase<char,ChunkSizeT>* const container)
+		static const char* Perform(const Yuni::StringBase<char,ChunkSizeT>* const container)
 		{
 			return container ? container->c_str() : NULL;
 		}

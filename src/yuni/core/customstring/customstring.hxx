@@ -2436,47 +2436,12 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	template<class M, bool C>
-	inline const char&
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (const IIterator<M,C>& iterator) const
-	{
-		return AncestorType::data[iterator.offset()];
-	}
-
-
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline char&
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset)
 	{
 		return AncestorType::data[offset];
 	}
-
-
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	template<class M, bool C>
-	inline char&
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (const IIterator<M,C>& iterator)
-	{
-		return AncestorType::data[iterator.offset()];
-	}
-
-
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	inline const char&
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (const int offset) const
-	{
-		return AncestorType::data[(unsigned int)offset];
-	}
-
-
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	inline char&
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (const int offset)
-	{
-		return AncestorType::data[(unsigned int)offset];
-	}
-
 
 
 

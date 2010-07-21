@@ -181,9 +181,9 @@
 # endif
 # if defined(_MSC_VER) && (_MSC_VER >= 1300)
 #	if (_MSC_FULL_VER >= 140050320)
-#		define YUNI_DEPRECATED(text, func...) __declspec(deprecated(text)) func
+#		define YUNI_DEPRECATED(text, func, ...) __declspec(deprecated(text)) func
 #	else
-#		define YUNI_DEPRECATED(text, func...) __declspec(deprecated) func
+#		define YUNI_DEPRECATED(text, func, ...) __declspec(deprecated) func
 #	endif
 # endif
 # ifndef YUNI_DEPRECATED
