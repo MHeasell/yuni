@@ -163,11 +163,8 @@ namespace Extension
 		typedef SizeT SizeType;
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
-	private:
-		typedef CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
-
 	public:
-		static SizeT Value(const CustomStringType* const container)
+		static SizeT Value(const Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>* const container)
 		{
 			return (container) ? (SizeT) container->size() : 0;
 		}
@@ -183,11 +180,8 @@ namespace Extension
 		typedef SizeT SizeType;
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
-	private:
-		typedef StringBase<C,ChunkSizeT> StringType;
-
 	public:
-		static SizeT Value(const StringType& container)
+		static SizeT Value(const Yuni::StringBase<C,ChunkSizeT>& container)
 		{
 			return (SizeT) container.size();
 		}
@@ -222,7 +216,7 @@ namespace Extension
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	private:
-		typedef StringBase<C,ChunkSizeT> StringType;
+		typedef Yuni::StringBase<C,ChunkSizeT> StringType;
 
 	public:
 		static SizeT Value(const StringType* const container)

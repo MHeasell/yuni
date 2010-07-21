@@ -1496,16 +1496,6 @@ namespace Yuni
 		//! The operator `[]`, for accessing to a single char (the offset must be valid)
 		char& operator [] (const Size offset);
 
-		//! The operator `[]`, for accessing to a single char
-		template<class M, bool C> const char& operator [] (const IIterator<M,C>& iterator) const;
-		//! The operator `[]`, for accessing to a single char
-		template<class M, bool C> char& operator [] (const IIterator<M,C>& iterator);
-
-		//! The operator `[]`, for accessing to a single char (the offset must be valid)
-		const char& operator [] (const int offset) const;
-		//! The operator `[]`, for accessing to a single char (the offset must be valid)
-		char& operator [] (const int offset);
-
 		//! The operator `+=` (append)
 		template<class U> CustomString& operator += (const U& rhs);
 		//! The operator `<<` (append)

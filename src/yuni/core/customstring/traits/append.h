@@ -128,9 +128,10 @@ namespace CustomString
 		static void Perform(CustomStringT& s, const TYPE rhs) \
 		{ \
 			typename CustomStringT::Type buffer[BUFSIZE]; \
-			/* On Windows, it may returns a negative value */ \
+			/* On Windows, it may return a negative value */ \
 			if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, BUFSIZE, FORMAT, rhs) >= 0) \
 			{ \
+				buffer[BUFSIZE - 1] = '\0'; /* making sure that it is zero-terminated */ \
 				s.appendWithoutChecking(buffer, \
 					Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer)); \
 			} \

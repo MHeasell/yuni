@@ -99,32 +99,6 @@ namespace CustomString
 
 
 
-# ifdef YUNI_OS_MSVC
-# 	define YUNI_PRIVATE_CUSTOMSTR_SPRINTF(BUFFER, BUFSIZE, FORMAT, VALUE)  sprintf_s(BUFFER, BUFSIZE,FORMAT,VALUE)
-# else
-# 	define YUNI_PRIVATE_CUSTOMSTR_SPRINTF(BUFFER, BUFSIZE, FORMAT, VALUE)  snprintf(BUFFER, BUFSIZE,FORMAT,VALUE)
-# endif
-
-# define YUNI_PRIVATE_CUSTOM_STRING_ASSIGN_IMPL(BUFSIZE, FORMAT, TYPE) \
-	template<class CustomStringT> \
-	struct Assign<CustomStringT, TYPE> \
-	{ \
-		static void Perform(CustomStringT& s, const TYPE rhs) \
-		{ \
-			typename CustomStringT::Type buffer[BUFSIZE]; \
-			(void) YUNI_PRIVATE_CUSTOMSTR_SPRINTF(buffer, BUFSIZE, FORMAT, rhs); \
-			s.assignWithoutChecking(buffer, \
-				Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer)); \
-		} \
-	}
-
-
-	YUNI_PRIVATE_CUSTOM_STRING_ASSIGN_IMPL(24, "%lf", float);
-	YUNI_PRIVATE_CUSTOM_STRING_ASSIGN_IMPL(24, "%lf", double);
-
-
-# undef YUNI_PRIVATE_CUSTOMSTR_SPRINTF
-# undef YUNI_PRIVATE_CUSTOM_STRING_ASSIGN_IMPL
 
 
 } // namespace CustomString
