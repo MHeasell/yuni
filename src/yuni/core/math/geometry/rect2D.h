@@ -7,12 +7,9 @@
 
 namespace Yuni
 {
-namespace Gfx
-{
 
 	/*!
 	** \brief 2D-Rectangle
-	** \ingroup Gfx
 	*/
 	template<class T>
 	class Rect2D
@@ -269,7 +266,6 @@ namespace Gfx
 
 
 
-} // namespace Gfx
 } // namespace Yuni
 
 # include "rect2D.hxx"
@@ -279,7 +275,7 @@ namespace Gfx
 //! name Operator overload for stream printing
 //@{
 template<class T>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Rect2D<T>& p)
+inline std::ostream& operator << (std::ostream& out, const Yuni::Rect2D<T>& p)
 { return p.print(out); }
 //@}
 

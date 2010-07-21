@@ -135,14 +135,14 @@ namespace Audio
 
 
 	template<typename StringT>
-	bool QueueService::Emitters::move(const StringT& emitterName, const Gfx::Point3D<>& position)
+	bool QueueService::Emitters::move(const StringT& emitterName, const Point3D<>& position)
 	{
 		return move(String(emitterName), position);
 	}
 
 	template<>
 	inline bool QueueService::Emitters::move<String>(const String& emitterName,
-		const Gfx::Point3D<>& position)
+		const Point3D<>& position)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -155,15 +155,15 @@ namespace Audio
 
 
 	template<typename StringT>
-	bool QueueService::Emitters::move(const StringT& emitterStr, const Gfx::Point3D<>& position,
-		const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction)
+	bool QueueService::Emitters::move(const StringT& emitterStr, const Point3D<>& position,
+		const Vector3D<>& velocity, const Vector3D<>& direction)
 	{
 		return move(String(emitterStr), position, velocity, direction);
 	}
 
 	template<>
-	inline bool QueueService::Emitters::move<String>(const String& emitterStr, const Gfx::Point3D<>& position,
-		const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction)
+	inline bool QueueService::Emitters::move<String>(const String& emitterStr, const Point3D<>& position,
+		const Vector3D<>& velocity, const Vector3D<>& direction)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 

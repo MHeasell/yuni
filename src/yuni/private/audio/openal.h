@@ -77,8 +77,8 @@ namespace Audio
 		** \brief Create an OpenAL source
 		** \returns The source's ID, 0 if an error is encountered.
 		*/
-		static unsigned int CreateSource(Gfx::Point3D<> position, Gfx::Vector3D<> velocity,
-			Gfx::Vector3D<> direction, float pitch, float gain, bool attenuate, bool loop);
+		static unsigned int CreateSource(Point3D<> position, Vector3D<> velocity,
+			Vector3D<> direction, float pitch, float gain, bool attenuate, bool loop);
 		//! Destroy an OpenAL source
 		static void DestroySource(unsigned int source);
 
@@ -86,8 +86,8 @@ namespace Audio
 		static bool IsSourcePlaying(unsigned int source);
 		static bool ModifySource(unsigned int source, float pitch, float gain,
 			bool attenuate, bool loop);
-		static bool MoveSource(unsigned int source, const Gfx::Point3D<>& position,
-			const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
+		static bool MoveSource(unsigned int source, const Point3D<>& position,
+			const Vector3D<>& velocity, const Vector3D<>& direction);
 
 		static bool BindBufferToSource(unsigned int buffer, unsigned int source);
 		static void UnbindBufferFromSource(unsigned int source);

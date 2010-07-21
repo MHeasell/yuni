@@ -262,8 +262,10 @@ namespace Thread
 		Condition pAboutToExitCond;
 		//! Condition for stopping
 		Condition pMustStopCond;
+		# ifndef YUNI_NO_THREAD_SAFE
 		//! ID of the thread, for pthread
 		pthread_t pThreadID;
+		# endif
 
 		//! Get if the thread is running
 		volatile bool pStarted;

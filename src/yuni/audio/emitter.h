@@ -54,13 +54,13 @@ namespace Audio
 		**
 		** Speed and velocity default to (0,0,0)
 		*/
-		Emitter(const Gfx::Point3D<>& position, bool loop);
+		Emitter(const Point3D<>& position, bool loop);
 
 		/*!
 		** \brief Constructor with position, velocity and direction
 		*/
-		Emitter(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
-			const Gfx::Vector3D<>& direction, bool loop);
+		Emitter(const Point3D<>& position, const Vector3D<>& velocity,
+			const Vector3D<>& direction, bool loop);
 
 		/*!
 		** \brief Destructor
@@ -90,19 +90,19 @@ namespace Audio
 		//! \name Accessors
 		//@{
 		//! Set the 3D position of the emitter
-		void position(const Gfx::Point3D<>& position);
+		void position(const Point3D<>& position);
 		//! Get the 3D position of the emitter
-		Gfx::Point3D<> position() const;
+		Point3D<> position() const;
 
 		//! Set the velocity of the emitter
-		void velocity(const Gfx::Vector3D<>& position);
+		void velocity(const Vector3D<>& position);
 		//! Get the velocity of the emitter
-		Gfx::Vector3D<> velocity() const;
+		Vector3D<> velocity() const;
 
 		//! Set the direction of the emitter
-		void direction(const Gfx::Vector3D<>& position);
+		void direction(const Vector3D<>& position);
 		//! Get the direction of the emitter
-		Gfx::Vector3D<> direction() const;
+		Vector3D<> direction() const;
 
 		/*!
 		** \brief Set the volume modifier on the emitter
@@ -134,11 +134,11 @@ namespace Audio
 		//! OpenAL identifier for the emitter
 		unsigned int pID;
 		//! Position of the emitter in space
-		Gfx::Point3D<> pPosition;
+		Point3D<> pPosition;
 		//! Speed of the emitter
-		Gfx::Vector3D<> pVelocity;
+		Vector3D<> pVelocity;
 		//! Direction of the movement of the emitter
-		Gfx::Vector3D<> pDirection;
+		Vector3D<> pDirection;
 		//! Should the emitter loop on itself when finished playing?
 		bool pLoop;
 		//! Volume modifier, 1.0 means no modification

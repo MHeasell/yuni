@@ -4,8 +4,6 @@
 
 namespace Yuni
 {
-namespace Gfx
-{
 
 
 	template<typename T>
@@ -291,7 +289,6 @@ namespace Gfx
 
 
 
-} // namespace Gfx
 } // namespace Yuni
 
 #endif // __YUNI_CORE_MATH_GEOMETRY_VECTOR3D_HXX__
