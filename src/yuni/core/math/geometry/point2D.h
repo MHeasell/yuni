@@ -241,12 +241,12 @@ namespace Yuni
 //! name Operator overload for stream printing
 //@{
 template<typename T>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Point2D<T>& p)
+inline std::ostream& operator << (std::ostream& out, const Yuni::Point2D<T>& p)
 { return p.print(out); }
 
 template<typename T>
-inline const Yuni::Gfx::Point2D<T> operator + (const Yuni::Gfx::Point2D<T>& lhs, const Yuni::Gfx::Point2D<T>& rhs)
-{ return Yuni::Gfx::Point2D<T>(lhs) += rhs; }
+inline const Yuni::Point2D<T> operator + (const Yuni::Point2D<T>& lhs, const Yuni::Point2D<T>& rhs)
+{ return Yuni::Point2D<T>(lhs) += rhs; }
 //@}
 
 
