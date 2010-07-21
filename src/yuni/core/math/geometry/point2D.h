@@ -1,14 +1,11 @@
 #ifndef __YUNI_CORE_MATH_GEOMETRY_POINT2D_H__
 # define __YUNI_CORE_MATH_GEOMETRY_POINT2D_H__
 
-# include <iostream>
-# include "../core/math.h"
+# include "../math.h"
 
 
 
 namespace Yuni
-{
-namespace Gfx
 {
 
 
@@ -237,14 +234,12 @@ namespace Gfx
 
 
 
-} // namespace Gfx
 } // namespace Yuni
 
 
 
 //! name Operator overload for stream printing
 //@{
-
 template<typename T>
 inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Point2D<T>& p)
 { return p.print(out); }
@@ -252,7 +247,6 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Point2D<T>
 template<typename T>
 inline const Yuni::Gfx::Point2D<T> operator + (const Yuni::Gfx::Point2D<T>& lhs, const Yuni::Gfx::Point2D<T>& rhs)
 { return Yuni::Gfx::Point2D<T>(lhs) += rhs; }
-
 //@}
 
 

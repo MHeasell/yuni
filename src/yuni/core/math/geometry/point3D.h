@@ -1,16 +1,12 @@
 #ifndef __YUNI_CORE_MATH_GEOMETRY_POINT3D_H__
 # define __YUNI_CORE_MATH_GEOMETRY_POINT3D_H__
 
-# include <iostream>
 # include "../math.h"
 
 
 
 namespace Yuni
 {
-namespace Gfx
-{
-
 
 	/*!
 	** \brief Represents a 3D-point
@@ -271,8 +267,7 @@ namespace Gfx
 
 
 
-} // Gfx
-} // Yuni
+} // namespace Yuni
 
 
 
