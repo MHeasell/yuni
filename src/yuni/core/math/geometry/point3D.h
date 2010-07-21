@@ -10,7 +10,6 @@ namespace Yuni
 
 	/*!
 	** \brief Represents a 3D-point
-	** \ingroup Gfx
 	*/
 	template<typename T = float>
 	class Point3D
@@ -280,7 +279,7 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::Point3D<T>& p)
 { return p.print(out); }
 
 template<typename T>
-inline const Yuni::Gfx::Point3D<T> operator + (const Yuni::Point3D<T>& lhs, const Yuni::Point3D<T>& rhs)
+inline const Yuni::Point3D<T> operator + (const Yuni::Point3D<T>& lhs, const Yuni::Point3D<T>& rhs)
 { return Yuni::Point3D<T>(lhs) += rhs; }
 
 //@}
