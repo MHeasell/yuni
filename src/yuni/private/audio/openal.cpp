@@ -127,8 +127,8 @@ namespace Audio
 		alListenerfv(AL_ORIENTATION, orientation);
 	}
 
-	unsigned int OpenAL::CreateSource(Gfx::Point3D<> position, Gfx::Vector3D<> velocity,
-		Gfx::Vector3D<> direction, float pitch, float gain, bool attenuate, bool loop)
+	unsigned int OpenAL::CreateSource(Point3D<> position, Vector3D<> velocity,
+		Vector3D<> direction, float pitch, float gain, bool attenuate, bool loop)
 	{
 		alGetError();
 		unsigned int source;
@@ -186,8 +186,8 @@ namespace Audio
 		return alGetError() == AL_NO_ERROR;
 	}
 
-	bool OpenAL::MoveSource(unsigned int source, const Gfx::Point3D<>& position,
-		const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction)
+	bool OpenAL::MoveSource(unsigned int source, const Point3D<>& position,
+		const Vector3D<>& velocity, const Vector3D<>& direction)
 	{
 		// Uncomment this if you want the position / velocity / cone /
 		// direction properties to be relative to listener position:

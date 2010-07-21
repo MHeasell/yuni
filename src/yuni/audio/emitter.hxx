@@ -14,20 +14,20 @@ namespace Audio
 	{}
 
 
-	inline Emitter::Emitter(const Gfx::Point3D<>& position, bool loop)
+	inline Emitter::Emitter(const Point3D<>& position, bool loop)
 		: pPosition(position), pLoop(loop), pGain(1.0f), pBuffer(NULL),
 		pReady(false), pPlaying(false), pModified(false)
 	{}
 
 
-	inline Emitter::Emitter(const Gfx::Point3D<>& position, const Gfx::Vector3D<>& velocity,
-		const Gfx::Vector3D<>& direction, bool loop = false)
+	inline Emitter::Emitter(const Point3D<>& position, const Vector3D<>& velocity,
+		const Vector3D<>& direction, bool loop = false)
 		: pPosition(position), pVelocity(velocity), pDirection(direction), pLoop(loop),
 		pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false), pModified(false)
 	{}
 
 
-	inline void Emitter::position(const Gfx::Point3D<>& position)
+	inline void Emitter::position(const Point3D<>& position)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (pPosition != position)
@@ -38,14 +38,14 @@ namespace Audio
 	}
 
 
-	inline Gfx::Point3D<> Emitter::position() const
+	inline Point3D<> Emitter::position() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pPosition;
 	}
 
 
-	inline void Emitter::velocity(const Gfx::Vector3D<>& velocity)
+	inline void Emitter::velocity(const Vector3D<>& velocity)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (pVelocity != velocity)
@@ -56,14 +56,14 @@ namespace Audio
 	}
 
 
-	inline Gfx::Vector3D<> Emitter::velocity() const
+	inline Vector3D<> Emitter::velocity() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pVelocity;
 	}
 
 
-	inline void Emitter::direction(const Gfx::Vector3D<>& direction)
+	inline void Emitter::direction(const Vector3D<>& direction)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (pDirection != direction)
@@ -74,7 +74,7 @@ namespace Audio
 	}
 
 
-	inline Gfx::Vector3D<> Emitter::direction() const
+	inline Vector3D<> Emitter::direction() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pDirection;

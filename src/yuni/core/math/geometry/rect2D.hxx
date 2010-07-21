@@ -4,8 +4,6 @@
 
 namespace Yuni
 {
-namespace Gfx
-{
 
 	template<class T>
 	inline Rect2D<T>::Rect2D()
@@ -242,7 +240,6 @@ namespace Gfx
 
 
 
-} // namespace Gfx
 } // namespace Yuni
 
 #endif // __YUNI_CORE_MATH_GEOMETRY_RECT_2D_HXX__

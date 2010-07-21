@@ -1,5 +1,6 @@
 Project(Yuni-Framework)
 CMake_minimum_required(VERSION 2.8)
+MEssage(STATUS "${CMAKE_CXX_FLAGS}")
 include("cmake/message.cmake")
 
 YMESSAGE("")

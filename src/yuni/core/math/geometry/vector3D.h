@@ -8,13 +8,10 @@
 
 namespace Yuni
 {
-namespace Gfx
-{
 
 
 	/*!
 	** \brief Represents a 3D-vector, with generic homogeneous content
-	** \ingroup Gfx
 	*/
 	template<typename T = float>
 	class Vector3D
@@ -33,11 +30,11 @@ namespace Gfx
 		** \brief Compute the magnitude of the addition of two arbitrary vectors
 		**
 		** \code
-		** Yuni::Gfx::Vector3D<> a(1.,   2,4, 6.9);
-		** Yuni::Gfx::Vector3D<> b(4.1., 0.2, 3.1);
+		** Yuni::Vector3D<> a(1.,   2,4, 6.9);
+		** Yuni::Vector3D<> b(4.1., 0.2, 3.1);
 		**
 		** // This way is faster
-		** std::cout << "Magnitude : " << Yuni::Gfx::Vector3D<>::Magnitude(a, b) << std::endl;
+		** std::cout << "Magnitude : " << Yuni::Vector3D<>::Magnitude(a, b) << std::endl;
 		** // than
 		** std::cout << "Magnitude : " << (a + b).magnitude() << std::endl;
 		** \endcode
@@ -309,7 +306,6 @@ namespace Gfx
 
 
 
-} // namespace Gfx
 } // namespace Yuni
 
 
@@ -320,12 +316,12 @@ namespace Gfx
 //@{
 
 template<typename T>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Vector3D<T>& v)
+inline std::ostream& operator << (std::ostream& out, const Yuni::Vector3D<T>& v)
 { return v.print(out); }
 
 template<typename T>
-inline const Yuni::Gfx::Vector3D<T> operator + (const Yuni::Gfx::Vector3D<T>& lhs, const Yuni::Gfx::Vector3D<T>& rhs)
-{ return Yuni::Gfx::Vector3D<T>(lhs) += rhs; }
+inline const Yuni::Vector3D<T> operator + (const Yuni::Vector3D<T>& lhs, const Yuni::Vector3D<T>& rhs)
+{ return Yuni::Vector3D<T>(lhs) += rhs; }
 
 //@}
 

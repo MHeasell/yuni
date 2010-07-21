@@ -74,13 +74,13 @@ namespace Audio
 			bool modify(Emitter::Ptr name, bool loop);
 
 			template<typename StringT>
-			bool move(const StringT& name, const Gfx::Point3D<>& position);
-			bool move(Emitter::Ptr emitter, const Gfx::Point3D<>& position);
+			bool move(const StringT& name, const Point3D<>& position);
+			bool move(Emitter::Ptr emitter, const Point3D<>& position);
 			template<typename StringT>
-			bool move(const StringT& name, const Gfx::Point3D<>& position,
-				const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
-			bool move(Emitter::Ptr emitter, const Gfx::Point3D<>& position,
-				const Gfx::Vector3D<>& velocity, const Gfx::Vector3D<>& direction);
+			bool move(const StringT& name, const Point3D<>& position,
+				const Vector3D<>& velocity, const Vector3D<>& direction);
+			bool move(Emitter::Ptr emitter, const Point3D<>& position,
+				const Vector3D<>& velocity, const Vector3D<>& direction);
 
 			template<typename StringT>
 			sint64 elapsedTime(const StringT& name);
