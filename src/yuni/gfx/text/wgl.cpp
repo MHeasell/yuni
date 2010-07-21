@@ -21,8 +21,8 @@ namespace Gfx
 		}
 	}
 
-	void WGLFont::drawText(const String& text, unsigned int left, unsigned int top,
-		unsigned int right, unsigned int bottom)
+	void WGLFont::drawText(const String& text, unsigned int /*left*/, unsigned int /*top*/,
+		unsigned int /*right*/, unsigned int /*bottom*/)
 	{
 		if (!pInitialized)
 		{
