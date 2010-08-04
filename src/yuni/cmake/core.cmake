@@ -368,6 +368,7 @@ source_group("Core\\Bit" FILES ${SRC_CORE_BIT})
 
 # Singleton
 Set(SRC_CORE_SINGLETON
+				core/singleton.h
 				core/singleton/singleton.h
 				core/singleton/singleton.hxx
 				core/singleton/policies/creation.h
