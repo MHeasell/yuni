@@ -40,10 +40,7 @@ namespace Creation
 
 
 } // namespace Creation
-
-
 } // namespace Policy
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_SINGLETON_POLICIES_CREATION_H__

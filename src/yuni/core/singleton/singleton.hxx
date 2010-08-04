@@ -12,9 +12,9 @@ namespace Yuni
 		template <class> class CreationT,
 		template <class> class LifetimeT,
 		template <class> class ThreadingT>
-	Singleton<T, CreationT, LifetimeT, ThreadingT>::Singleton()
-	{
-	}
+	inline Singleton<T, CreationT, LifetimeT, ThreadingT>::Singleton()
+	{}
+
 
 	template <typename T,
 		template <class> class CreationT,
@@ -115,6 +115,7 @@ namespace Yuni
 		pInstance = NULL;
 		pDestroyed = true;
 	}
+
 
 
 
