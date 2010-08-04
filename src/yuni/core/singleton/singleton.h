@@ -15,6 +15,17 @@ namespace Yuni
 	** \brief Holder for a singleton class
 	**
 	** Manages creation, deletion and access in a MT environment
+	**
+	** For protection, some operations will fail at compile time.
+	** For example, supposing MySingleton inherits Singleton<> :
+	** \code
+	** int main(void)
+	** {
+	**     MySingleton& instance = MySingleton::Instance();
+	**     // Here we viciously try to delete the instance
+	**     delete &instance;
+	**     return 0;
+	** }
 	*/
 	template <class T,
 		template <class> class CreationT = Policy::Creation::EmptyConstructor,
@@ -40,22 +51,35 @@ namespace Yuni
 		*/
 		static InstanceType& Instance();
 
-	protected:
+	public:
 		/*!
-		** \brief Private constructor !
-		*/
-		Singleton();
-
-		/*!
-		** \brief Private copy constructor !
+		** \brief Copy constructor will fail at compile time !
 		*/
 		Singleton(const Singleton&);
 
 		/*!
-		** \brief Private assignment operator !
+		** \brief Assignment operator will fail at compile time !
 		*/
-		Singleton operator = (const Singleton&);
+		Singleton<T, CreationT, LifetimeT, ThreadingT> operator = (const Singleton&);
 
+		/*!
+		** \brief Address-of operator will fail at compile time !
+		*/
+		Singleton<T, CreationT, LifetimeT, ThreadingT>* operator & ();
+
+		/*!
+		** \brief Address-of operator will fail at compile time !
+		*/
+		const Singleton<T, CreationT, LifetimeT, ThreadingT>* operator & () const;
+
+
+	protected:
+		/*!
+		** \brief Protected constructor !
+		*/
+		Singleton();
+
+	private:
 		/*!
 		** Destroy the stored instance
 		*/

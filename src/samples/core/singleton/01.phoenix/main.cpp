@@ -4,21 +4,22 @@
 
 //
 // A log class for logging errors or information
+// It is defined as a phoenix singleton
 //
-class Log: Yuni::Singleton<Log,  Yuni::Policy::Creation::EmptyConstructor, Yuni::Policy::Lifetime::Phoenix>
+class Log: Yuni::Singleton<Log, Yuni::Policy::Creation::EmptyConstructor, Yuni::Policy::Lifetime::Phoenix>
 {
 public:
-	// When using a phoenix singleton, it is rebuilt if used after destruction
 	typedef Yuni::Singleton<Log, Yuni::Policy::Creation::EmptyConstructor, Yuni::Policy::Lifetime::Phoenix> Singleton;
 
 public:
 	void print(std::ostream& out, const char* message)
 	{
+		out << "Log : ";
 		out << message;
 	}
 
 
-private:
+protected:
 	Log()
 	{
 		std::cout << "Log created." << std::endl;
@@ -32,53 +33,55 @@ private:
 	Log(const Log&);
 	Log& operator = (const Log&);
 
-	friend class Yuni::Policy::Creation::EmptyConstructor<Display>;
+	friend class Yuni::Policy::Creation::EmptyConstructor<Log>;
 };
 
 
 //
 // Keyboard writes to the log on creation and destruction
 //
-class Keyboard
+class Keyboard : public Yuni::Singleton<Keyboard>
 {
 public:
 	typedef Yuni::Singleton<Keyboard> Singleton;
 
-private:
+protected:
 	Keyboard()
 	{
-		Log::Singleton::Instance().print(std::cout, "Keyboard created.\n");
+		std::cout << "Keyboard created." << std::endl;
+		Log::Singleton::Instance().print(std::cout, "Keyboard creation.\n");
 	}
 	~Keyboard()
 	{
-		Log::Singleton::Instance().print(std::cout, "Keyboard destroyed.\n");
+		Log::Singleton::Instance().print(std::cout, "Keyboard destruction.\n");
+		std::cout << "Keyboard destroyed." << std::endl;
 	}
 
 	// Hide the rest of the constructors and assignment operators
 	Keyboard(const Keyboard&);
 	Keyboard& operator = (const Keyboard&);
 
-	friend class Yuni::Policy::Creation::EmptyConstructor<Display>;
+	friend class Yuni::Policy::Creation::EmptyConstructor<Keyboard>;
 };
 
 
 //
-// Display also writes to the log on creation and destruction
+// Display only writes to the log on destruction
 //
-class Display
+class Display: public Yuni::Singleton<Display>
 {
 public:
 	typedef Yuni::Singleton<Display> Singleton;
 
-private:
+protected:
 	Display()
 	{
 		std::cout << "Display created." << std::endl;
-		Log::Singleton::Instance().print(std::cout, "Display created.\n");
 	}
 	~Display()
 	{
-		Log::Singleton::Instance().print(std::cout, "Display destroyed.\n");
+		Log::Singleton::Instance().print(std::cout, "Display destruction.\n");
+		std::cout << "Display destroyed." << std::endl;
 	}
 
 private:

@@ -13,14 +13,15 @@ public:
 		std::cout << "Ping" << std::endl;
 	}
 
+	// In the simplest sample, the constructor is public
+	// In more advanced samples, we prove that it can be made private for more safety,
+	// if the correct friend declaration is added.
 	MyManager() {}
 
 private:
 	// Hide the rest of the constructors and assignment operators
 	MyManager(const MyManager&);
 	MyManager& operator = (const MyManager&);
-	size_t operator & () { throw; }
-	size_t operator & () const { throw; }
 };
 
 
