@@ -77,7 +77,7 @@ namespace Directory
 	** \return True if the operation succeeded, false otherwise
 	*/
 	template<class StringT>
-	bool Make(const StringT& path, unsigned int mode = 0755);
+	bool Create(const StringT& path, unsigned int mode = 0755);
 	//@}
 
 

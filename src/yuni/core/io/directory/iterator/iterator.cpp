@@ -52,8 +52,8 @@ namespace Iterator
 		// iterating trough files and folders
 		while ((pent = readdir(pdir)))
 		{
-			// Checking from time to time if the thread should stop
 			# ifndef YUNI_NO_THREAD_SAFE
+			// Checking from time to time if the thread should stop
 			if (thread && ++opts.counter == pollingInterval) // arbitrary value
 			{
 				// reset counter
