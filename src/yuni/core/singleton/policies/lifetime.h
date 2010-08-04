@@ -9,7 +9,6 @@ namespace Yuni
 namespace Policy
 {
 
-
 /*!
 ** \brief Singleton lifetime policies
 **
