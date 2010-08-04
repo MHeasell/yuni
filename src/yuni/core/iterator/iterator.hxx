@@ -5,6 +5,11 @@
 namespace Yuni
 {
 
+	template<class ModelT, bool ConstT>
+	inline IIterator<ModelT,ConstT>::IIterator()
+		:AncestorType()
+	{}
+
 
 	template<class ModelT, bool ConstT>
 	template<class M, bool C>

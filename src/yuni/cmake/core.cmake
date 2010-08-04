@@ -202,7 +202,8 @@ source_group(Core\\validator FILES ${SRC_CORE_VALIDATOR})
 Set(SRC_CORE_SLIST
 				core/slist/iterator.h
 				core/slist/slist.h
-				core/slist/slist.hxx)
+				core/slist/slist.hxx
+				core/slist.h)
 source_group(Core\\linkedList FILES ${SRC_CORE_SLIST})
 
 
@@ -437,6 +438,16 @@ Set(SRC_CORE_IO_DIRECTORY
 				core/io/directory/current.cpp
 				core/io/directory/make.cpp
 				core/io/directory/copy.cpp
+
+				core/io/directory/info.h
+				core/io/directory/info/iterator.cpp
+				core/io/directory/info/iterator.h
+				core/io/directory/info/info.h
+				core/io/directory/info/info.hxx
+				core/io/directory/info/info.cpp
+				core/io/directory/info/platform.cpp
+				core/io/directory/info/platform.h
+
 				core/io/directory/iterator.h
 				core/io/directory/iterator/iterator.cpp
 				core/io/directory/iterator/iterator.h

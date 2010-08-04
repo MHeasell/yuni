@@ -115,8 +115,8 @@ namespace Directory
 	** This class is thread-safe even when not in detached mode.
 	** \tparam DetachedT True to perform the operation into a separate thread
 	**
-	** \internal When yuni is compiled without any threading support, the template
-	**    parameter `DetachedT` is automatically set to false
+	** \internal When yuni is compiled without any threading support
+	**    the detached mode is automatically disabled.
 	*/
 	template<bool DetachedT = true>
 	class IIterator

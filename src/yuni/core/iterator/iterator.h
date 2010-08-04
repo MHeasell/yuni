@@ -54,6 +54,11 @@ namespace Yuni
 		//! \name Constructors & Destructor
 		//@{
 		/*!
+		** \brief Default Constructor
+		*/
+		IIterator();
+
+		/*!
 		** \brief Copy constructor
 		*/
 		IIterator(const IteratorType& rhs);

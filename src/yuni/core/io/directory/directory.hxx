@@ -59,7 +59,7 @@ namespace Directory
 
 
 	template<class StringT>
-	inline bool Make(const StringT& path, unsigned int mode)
+	inline bool Create(const StringT& path, unsigned int mode)
 	{
 		if (Yuni::Core::IO::Exists(path))
 			return true;

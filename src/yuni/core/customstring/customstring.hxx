@@ -406,7 +406,7 @@ namespace Yuni
 	}
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
- 	template<class StringT>
+	template<class StringT>
 	void CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::fill(
 		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
 		const StringT& pattern)
