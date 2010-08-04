@@ -5,8 +5,8 @@ YMESSAGE("")
 
 
 # The target directory for static libs
-Set(LIBRARY_OUTPUT_PATH      "../build/${YUNI_TARGET}/lib")
-Set(ARCHIVE_OUTPUT_DIRECTORY "../build/${YUNI_TARGET}/lib")
+Set(LIBRARY_OUTPUT_PATH      "${CMAKE_CURRENT_SOURCE_DIR}/../build/${YUNI_TARGET}/lib")
+Set(ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../build/${YUNI_TARGET}/lib")
 
 
 

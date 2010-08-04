@@ -1,6 +1,6 @@
 
 
-Find_Package(Yuni COMPONENTS audio)
+Find_Package(Yuni COMPONENTS core audio)
 IF(Yuni_FOUND)
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Yuni_CXXFLAGS}")
 	add_definitions(-D__STDC_CONSTANT_MACROS)

@@ -366,6 +366,15 @@ Set(SRC_CORE_BIT
 source_group("Core\\Bit" FILES ${SRC_CORE_BIT})
 
 
+# Singleton
+Set(SRC_CORE_SINGLETON
+				core/singleton/singleton.h
+				core/singleton/singleton.hxx
+				core/singleton/policies/creation.h
+				core/singleton/policies/lifetime.h
+				)
+source_group(Core\\Singleton FILES ${SRC_CORE_SINGLETON})
+
 
 
 # Hash - Checksums
@@ -578,6 +587,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		#${SRC_CORE_CHARSET}
 		${SRC_CORE_EVENT}
 		${SRC_CORE_MATH}
+		${SRC_CORE_SINGLETON}
 		${SRC_CORE_HASH_CHECKSUM}
 		${SRC_CORE_TREE_N}
 		${SRC_CORE_VERSION}

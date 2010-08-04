@@ -151,15 +151,15 @@ namespace Yuni
 	** \tparam StorP  The Storage policy
 	** \tparam ConsP  The Constness policy
 	*/
-	template< typename T,                                                     // The original type
+	template <class T,                                                        // The original type
 		template <class> class OwspP = Policy::Ownership::ReferenceCountedMT, // Ownership policy
 		template <class> class ChckP = Policy::Checking::None,                // Checking policy
 		class ConvP                  = Policy::Conversion::Allow,             // Conversion policy
 		template <class> class StorP = Policy::Storage::Pointer,              // Storage policy
 		template <class> class ConsP = Policy::Constness::DontPropagateConst  // Constness policy
 		>
-	class SmartPtr
-		:public StorP<T>,                              // inherits from the storage policy
+	class SmartPtr :
+		public StorP<T>,                              // inherits from the storage policy
 		public OwspP<typename StorP<T>::PointerType>, // inherits from the ownership policy
 		public ChckP<typename StorP<T>::StoredType>,  // inherits from the checking policy
 		public ConvP                                  // inherits from the conversion policy
@@ -167,7 +167,6 @@ namespace Yuni
 	public:
 		//! \name Type alias
 		//@{
-
 		//! Original type
 		typedef T  Type;
 		//! The Storage policy

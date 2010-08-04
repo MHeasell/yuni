@@ -40,6 +40,30 @@ namespace Checking
 
 
 
+	/*!
+	** \brief Ensure the pointer can never be null
+	** \ingroup Policies
+	**
+	** The default constructor (which inits at null) is disabled statically
+	** by not defining onDefault.
+	*/
+	template<class T>
+	class NeverNull
+	{
+	public:
+		NeverNull() {}
+		template<class U> NeverNull(const NeverNull<U>&) { }
+
+		static void onInit(const T& ptr) { if (!ptr) throw; }
+
+		static void onDereference(const T&) {}
+
+		static void swapPointer(NeverNull&) {}
+
+	}; // class NotNull
+
+
+
 } // namespace Checking
 } // namespace Policy
 } // namespace Yuni

@@ -40,7 +40,7 @@ namespace Static
 		typedef int   TrueType;
 		typedef char  FalseType;
 
-		// C obvisouly inherits from BaseT
+		// C obviously inherits from BaseT
 		static TrueType  CheckIfCInheritsFromBaseT(const BaseT*);
 		// C does not inherits from BaseT
 		static FalseType CheckIfCInheritsFromBaseT(...);
