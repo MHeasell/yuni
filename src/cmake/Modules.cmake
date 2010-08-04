@@ -17,7 +17,7 @@ Set(YUNI_MODULE_DEVICES                   FALSE)
 Set(YUNI_MODULE_GFX3D                     FALSE)
 
 # Audio
-Set(YUNI_MODULE_AUDIO					  FALSE)
+Set(YUNI_MODULE_AUDIO                     FALSE)
 
 # Scripts
 Set(YUNI_MODULE_SCRIPT                    FALSE)
