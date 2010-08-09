@@ -213,7 +213,9 @@ namespace Bit
 		{
 			if ((unsigned char)(pBuffer[i]) != (ValueT ? 0 : 0xFF))
 			{
-				unsigned char c = pBuffer[i];
+				if (i < offset)
+					continue;
+				const unsigned char c = pBuffer[i];
 				unsigned int result = 0;
 				while ((bool) (YUNI_BIT_GET(&c, result)) != ValueT)
 					++result;
