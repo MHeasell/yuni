@@ -5,8 +5,8 @@ YMESSAGE("")
 
 
 # The target directory for static libs
-Set(LIBRARY_OUTPUT_PATH      "${CMAKE_CURRENT_SOURCE_DIR}/../build/${YUNI_TARGET}/lib")
-Set(ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../build/${YUNI_TARGET}/lib")
+Set(LIBRARY_OUTPUT_PATH      "${CMAKE_CURRENT_BINARY_DIR}/../build/${YUNI_TARGET}/lib")
+Set(ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/../build/${YUNI_TARGET}/lib")
 
 
 
@@ -80,66 +80,6 @@ If(YUNI_MODULE_NET)
 	Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net.cmake")
 EndIf(YUNI_MODULE_NET)
 
-
-
-#
-# Module : User Interface
-#
-#If(YUNI_MODULE_UI)
-
-#	YMESSAGE("[Module] UI::Core (User Interface)")
-
-	# User Interface
-#	Set(SRC_GFX_UI
-#				ui/component.h ui/component.cpp
-#				ui/control.h ui/control.cpp ui/anchor.cpp
-#				ui/controller.h ui/controller.cpp)
-#	source_group("Gfx\\User Interface" FILES ${SRC_GFX_UI})
-
-#	Add_Library(yuni-static-ui-core STATIC
-#				${SRC_GFX_UI}
-#				)
-
-#	IF(YUNI_MODULE_UI_DUMMY)
-
-#		YMESSAGE("[Module] UI::Dummy")
-
-#	ENDIF(YUNI_MODULE_UI_DUMMY)
-
-
-#	IF(YUNI_MODULE_UI_3D)
-
-#		YMESSAGE("[Module] UI::Gfx3D")
-
-#	ENDIF(YUNI_MODULE_UI_3D)
-
-#EndIf(YUNI_MODULE_UI)
-
-
-
-
-#
-# Module : Database
-#
-If(YUNI_MODULE_DATABASEI)
-
-	YMESSAGE("[Module] Database::Core")
-
-	# Database
-	Set(SRC_DB
-			sql/driver.h
-			sql/database.h  sql/database.cpp)
-	source_group("Database" FILES ${SRC_DB})
-
-	Add_Library(yuni-static-database-core STATIC ${SRC_DB})
-
-	IF(YUNI_MODULE_DB_PSQL)
-		Set(SRC_DB_PSQL	 private/sql/postgresql/driver.h  private/sql/postgresql/driver.cpp)
-		Add_Library(yuni-static-database-postgresql STATIC ${SRC_DB_PSQL})
-		YMESSAGE("[Module] Database::PostgreSQL")
-	ENDIF(YUNI_MODULE_DB_PSQL)
-
-EndIf(YUNI_MODULE_DATABASEI)
 
 
 IF(YUNI_MODULE_ALGORITHMS)
