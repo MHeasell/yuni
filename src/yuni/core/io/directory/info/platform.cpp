@@ -67,14 +67,14 @@ namespace Directory
 		# endif
 		{
 			# ifdef YUNI_OS_WINDOWS
-			// Convertir the filename
+			// Convert the filename
 			wbuffer[0] = L'\\';
 			wbuffer[1] = L'\\';
 			wbuffer[2] = L'?';
 			wbuffer[3] = L'\\';
 			int n = MultiByteToWideChar(CP_UTF8, 0, parent.c_str(), parent.size(), wbuffer + 4, wbufferMax - 10);
 			if (!n)
-				return opts.self->onError(filename);
+				return;
 			// Making sure that our string is zero-terminated
 			wbuffer[n + 4] = L'\\';
 			wbuffer[n + 5] = L'*';
