@@ -157,7 +157,7 @@ public:
 					Traits::CString<StringT>::Perform(directory), // c-string
 					Traits::Length<StringT>::Value(directory),    // length of the string
 					FlagsT);                                      // flags
-				// We must forward once to got the first item
+				// We must forward once to get the first item
 				forward();
 			}
 
