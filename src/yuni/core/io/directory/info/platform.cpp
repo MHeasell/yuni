@@ -241,7 +241,7 @@ namespace Directory
 
 		}
 
-		void push(const char* const str, unsigned int length)
+		void push(const char* const str, size_t length)
 		{
 			dirinfo.push_front();
 			dirinfo.front().parent.assign(str, length);
@@ -308,7 +308,7 @@ namespace Directory
 
 
 
-	IteratorData* IteratorDataCreate(const char* folder, unsigned int length, unsigned int flags)
+	IteratorData* IteratorDataCreate(const char* folder, size_t length, unsigned int flags)
 	{
 		if (length)
 		{
