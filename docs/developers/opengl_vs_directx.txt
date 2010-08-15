@@ -20,12 +20,33 @@ vertices we want to display in a buffer, possibly stored in hardware.
 
 						DirectX									OpenGL
 
-Name they use:		Vertex Buffers							Vertex Buffer Objects (VBO)
+Name they use:
+					Vertex Buffers							Vertex Buffer Objects (VBO)
 
-Creation: 			HRESULT CreateVertexBuffer(
-						UINT length,
-						DWORD usage,
-						DWORD FVF,
-						D3DPOOL pool,
+Creation:
+					HRESULT CreateVertexBuffer(				GLvoid glGenBuffers(
+						UINT length,							GLsizei n,
+						DWORD usage, // usage, see below		GLuint* buffers);
+						DWORD FVF, // format
+						D3DPOOL pool, // pool, see below
 						IDirect3DVertexBuffer9** vBuf,
 						HANDLE* handle);
+
+Buffering data:
+					HRESULT Lock(							glBindBuffer();
+	   					unsigned int offsetToLock,			glBufferData();
+						unsigned int sizeToLock,			glMapBuffer();
+						void** data,						memset(...);
+						DWORD flags							glUnmapBuffer();
+						);									glVertexPointer();
+					memset(...);
+					HRESULT Unlock(void);
+
+
+Options:
+					D3DUSAGE_DYNAMIC						GL_STREAM_DRAW
+					D3DUSAGE_WRITEONLY						GL_DYNAMIC_DRAW
+					D3DUSAGE_SOFTWAREPROCESSING				GL_STATIC_DRAW
+					D3DPOOL_DEFAULT	// In hardware mem
+					D3DPOOL_MANAGED // In system mem
+
