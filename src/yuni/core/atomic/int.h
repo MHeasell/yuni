@@ -119,6 +119,10 @@ namespace Atomic
 
 		Int& operator = (const ScalarType v);
 
+		//! Increment
+		Int& operator += (const ScalarType v);
+		//! Decrement
+		Int& operator -= (const ScalarType v);
 
 		//! Cast operator
 		operator ScalarType () const;
@@ -130,7 +134,6 @@ namespace Atomic
 	private:
 		//! The real variable
 		InnerType pValue;
-
 		// A friend !
 		template<int Size2, template<class> class TP2> friend struct Private::AtomicImpl::Operator;
 

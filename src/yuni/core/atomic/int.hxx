@@ -62,7 +62,14 @@ namespace Atomic
 	template<int Size, template<class> class TP>
 	template<int Size2, template<class> class TP2>
 	inline Int<Size,TP>::Int(const Int<Size2,TP2>& v)
+		# if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+		:TP<Int<Size,TP> >()
+		# endif
 	{
+		# if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		typename ThreadingPolicy::MutexLocker locker2(v);
+		# endif
 		pValue = (ScalarType)v.pValue;
 	}
 
@@ -78,7 +85,7 @@ namespace Atomic
 	inline typename Int<Size,TP>::ScalarType Int<Size,TP>::operator ++ ()
 	{
 		return (threadSafe)
-			? Private::AtomicImpl::Operator<Size,TP>::Increment(*this)
+			? Private::AtomicImpl::Operator<size,TP>::Increment(*this)
 			: (++pValue);
 	}
 
@@ -87,7 +94,7 @@ namespace Atomic
 	inline typename Int<Size,TP>::ScalarType Int<Size,TP>::operator -- ()
 	{
 		return (threadSafe)
-			? Private::AtomicImpl::Operator<Size,TP>::Decrement(*this)
+			? Private::AtomicImpl::Operator<size,TP>::Decrement(*this)
 			: (--pValue);
 	}
 
@@ -96,7 +103,7 @@ namespace Atomic
 	inline typename Int<Size,TP>::ScalarType Int<Size,TP>::operator ++ (int)
 	{
 		return (threadSafe)
-			? Private::AtomicImpl::Operator<Size,TP>::Increment(*this) - 1
+			? Private::AtomicImpl::Operator<size,TP>::Increment(*this) - 1
 			: (pValue++);
 	}
 
@@ -105,7 +112,7 @@ namespace Atomic
 	inline typename Int<Size,TP>::ScalarType Int<Size,TP>::operator -- (int)
 	{
 		return (threadSafe)
-			? Private::AtomicImpl::Operator<Size,TP>::Decrement(*this) + 1
+			? Private::AtomicImpl::Operator<size,TP>::Decrement(*this) + 1
 			: (pValue--);
 	}
 
@@ -123,6 +130,29 @@ namespace Atomic
 		pValue = v;
 		return *this;
 	}
+
+
+	template<int Size, template<class> class TP>
+	inline Int<Size,TP>& Int<Size,TP>::operator += (const ScalarType v)
+	{
+		if (threadSafe)
+			Private::AtomicImpl::Operator<size,TP>::Increment(*this, v);
+		else
+			pValue += v;
+		return *this;
+	}
+
+
+	template<int Size, template<class> class TP>
+	inline Int<Size,TP>& Int<Size,TP>::operator -= (const ScalarType v)
+	{
+		if (threadSafe)
+			Private::AtomicImpl::Operator<size,TP>::Decrement(*this, v);
+		else
+			pValue -= v;
+		return *this;
+	}
+
 
 
 

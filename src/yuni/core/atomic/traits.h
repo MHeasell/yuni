@@ -92,15 +92,11 @@ namespace AtomicImpl
 	// Int16
 	template<> struct TypeFromSize<16>
 	{
-		# if defined(YUNI_OS_MAC) || defined(YUNI_OS_MINGW)
 		// On OS X, there are only routines for int32_t and int64_t
 		// With MinGW, it simply does not exist
+		// It seems that the best solution is to use int32 everywhere
 		enum { size = 32 };
 		typedef sint32 Type;
-		# else
-		enum { size = 16 };
-		typedef sint16 Type;
-		# endif
 	};
 
 	// Int32
@@ -124,55 +120,6 @@ namespace AtomicImpl
 	template<int Size, template<class> class TP>
 	struct Operator {};
 
-	template<template<class> class TP>
-	struct Operator<16, TP>
-	{
-		static typename Yuni::Atomic::Int<16,TP>::Type Increment(Yuni::Atomic::Int<16,TP>& t)
-		{
-			# ifdef YUNI_OS_WINDOWS
-			#	ifdef YUNI_OS_MINGW
-			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
-			#	else
-			return ::InterlockedIncrement16((SHORT*)&t.pValue);
-			#	endif
-			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicIncrement32Barrier(&t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
-			typename Yuni::Atomic::Int<16,TP>::ThreadingPolicy::MutexLocker locker(t);
-			++t.pValue;
-			#		else
-			return __sync_add_and_fetch(&t.pValue, 1);
-			#		endif
-			#	endif
-			# endif
-		}
-
-		static typename Yuni::Atomic::Int<16,TP>::Type Decrement(Yuni::Atomic::Int<16,TP>& t)
-		{
-			# ifdef YUNI_OS_WINDOWS
-			#	ifdef YUNI_OS_MINGW
-			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
-			#	else
-			return ::InterlockedDecrement16((SHORT*)&t.pValue);
-			#	endif
-			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicDecrement32Barrier(&t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
-			typename Yuni::Atomic::Int<16,TP>::ThreadingPolicy::MutexLocker locker(t);
-			return (--t.pValue);
-			#		else
-			return __sync_add_and_fetch(&t.pValue, -1);
-			#		endif
-			#	endif
-			# endif
-		}
-
-	}; // class Operator<16, TP>
-
 
 	template<template<class> class TP>
 	struct Operator<32, TP>
@@ -195,6 +142,24 @@ namespace AtomicImpl
 			# endif
 		}
 
+		static typename Yuni::Atomic::Int<32,TP>::Type Increment(Yuni::Atomic::Int<32,TP>& t, typename Yuni::Atomic::Int<32,TP>::ScalarType value)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			return ::InterlockedAdd((LONG*)&t.pValue, (LONG)value);
+			# else
+			#	ifdef YUNI_OS_MAC
+			return ::OSAtomicAdd32Barrier(value, &t.pValue);
+			#	else
+			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
+			return (t.pValue += value);
+			#		else
+			return __sync_add_and_fetch(&t.pValue, value);
+			#		endif
+			#	endif
+			# endif
+		}
+
 		static typename Yuni::Atomic::Int<32,TP>::Type Decrement(Yuni::Atomic::Int<32,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
@@ -208,6 +173,24 @@ namespace AtomicImpl
 			return (--t.pValue);
 			#		else
 			return __sync_add_and_fetch(&t.pValue, -1);
+			#		endif
+			#	endif
+			# endif
+		}
+
+		static typename Yuni::Atomic::Int<32,TP>::Type Decrement(Yuni::Atomic::Int<32,TP>& t, typename Yuni::Atomic::Int<32,TP>::ScalarType value)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			return ::InterlockedAdd((LONG*)&t.pValue, (LONG)(-value));
+			# else
+			#	ifdef YUNI_OS_MAC
+			return ::OSAtomicAdd32Barrier(&t.pValue, -value);
+			#	else
+			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
+			return (t.pValue -= value);
+			#		else
+			return __sync_add_and_fetch(&t.pValue, -value);
 			#		endif
 			#	endif
 			# endif
@@ -242,6 +225,24 @@ namespace AtomicImpl
 			# endif
 		}
 
+		static typename Yuni::Atomic::Int<64,TP>::Type Increment(Yuni::Atomic::Int<64,TP>& t, typename Yuni::Atomic::Int<64,TP>::ScalarType value)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			return ::InterlockedAdd64((LONGLONG*)&t.pValue, (LONGLONG)value);
+			# else
+			#	ifdef YUNI_OS_MAC
+			return ::OSAtomicAdd64Barrier(value, &t.pValue);
+			#	else
+			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
+			return (t.pValue += value);
+			#		else
+			return __sync_add_and_fetch(&t.pValue, value);
+			#		endif
+			#	endif
+			# endif
+		}
+
 		static typename Yuni::Atomic::Int<64,TP>::Type Decrement(Yuni::Atomic::Int<64,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
@@ -264,13 +265,31 @@ namespace AtomicImpl
 			# endif
 		}
 
+		static typename Yuni::Atomic::Int<64,TP>::Type Decrement(Yuni::Atomic::Int<64,TP>& t, typename Yuni::Atomic::Int<64,TP>::ScalarType value)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			return ::InterlockedAdd64((LONGLONG*)&t.pValue, (LONGLONG)(-value));
+			# else
+			#	ifdef YUNI_OS_MAC
+			return ::OSAtomicAdd64Barrier(&t.pValue, -value);
+			#	else
+			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
+			return (t.pValue -= value);
+			#		else
+			return __sync_add_and_fetch(&t.pValue, -value);
+			#		endif
+			#	endif
+			# endif
+		}
+
 	}; // class Operator<32, TP>
+
 
 
 
 } // namespace AtomicImpl
 } // namespace Private
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_ATOMIC_TRAITS_H__
