@@ -30,7 +30,7 @@ class Generator
 		@maxArgumentCount = value
 	end
 
-	def templateParameterList(count, prefix = ', ')
+	def templateParameterList(count, prefix = ', ', name = 'A')
 		ret = ''
 		if count > 0
 			ret += prefix
@@ -39,21 +39,21 @@ class Generator
 			if i != 0
 				ret += ', '
 			end
-			ret += "class A#{i}"
+			ret += "class #{name}#{i}"
 		end
 		ret
 	end
 
-	def list(count, name = 'A', prefix = '', suffix = '')
+	def list(count, name = 'A', prefix = '', suffix = '', separator = ', ', nmprefix = '', nmsuffix = '')
 		ret = ''
 		if count > 0
 			ret += prefix
 		end
 		(0..count - 1).each do |i|
 			if i != 0
-				ret += ', '
+				ret += separator
 			end
-			ret += "#{name}#{i}"
+			ret += "#{nmprefix}#{name}#{i}#{nmsuffix}"
 		end
 		if count > 0
 			ret += suffix
@@ -79,11 +79,7 @@ class Generator
 		if count == 0
 			return "0 argument"
 		else
-			if count == 1
-				return "1 argument"
-			else
-				return "#{count} arguments"
-			end
+			return (count == 1) ? "1 argument" : "#{count} arguments"
 		end
 	end
 
@@ -92,11 +88,11 @@ class Generator
 		(0..count-1).each do |i|
 			ret += "\t** \\tparam A#{i} The type of the "
 			# todo use `when`
-			case i
-				when 0: ret += "first"
-				when 1: ret += "second"
-				when 2: ret += "third"
-				else ret += "#{i+1}th"
+			ret += case i
+				when 0 then "first"
+				when 1 then "second"
+				when 2 then "third"
+				else "#{i+1}th"
 			end
 			ret += " argument"
 			if i != count - 1
