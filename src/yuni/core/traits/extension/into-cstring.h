@@ -4,6 +4,7 @@
 # include "../../../yuni.h"
 # include <string>
 # include "../../smartptr.h"
+# include "../cstring.h"
 
 
 namespace Yuni
@@ -13,7 +14,7 @@ namespace Extension
 
 
 	template<>
-	struct IntoCString<char*>
+	class IntoCString<char*>
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
@@ -27,7 +28,7 @@ namespace Extension
 
 
 	template<int N>
-	struct IntoCString<char[N]>
+	class IntoCString<char[N]>
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
@@ -41,7 +42,7 @@ namespace Extension
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	struct IntoCString<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> >
+	class IntoCString<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> >
 	{
 	public:
 		typedef Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
@@ -57,11 +58,11 @@ namespace Extension
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT,
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	struct IntoCString<Yuni::SmartPtr<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP> >
+	class IntoCString<Yuni::SmartPtr<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP> >
 	{
 	public:
 		typedef Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
-		typedef Yuni::SmartPtr<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP> CustomStringTypePtr;
+		typedef Yuni::SmartPtr<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP> CustomStringTypePtr;
 		enum { valid = 1, converted = 0, zeroTerminated = CustomStringType::zeroTerminated, };
 
 	public:
@@ -74,7 +75,7 @@ namespace Extension
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	struct IntoCString<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>* >
+	class IntoCString<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>* >
 	{
 	public:
 		typedef typename Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
@@ -90,7 +91,7 @@ namespace Extension
 
 
 	template<int ChunkSizeT>
-	struct IntoCString<StringBase<char,ChunkSizeT> >
+	class IntoCString<StringBase<char,ChunkSizeT> >
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
@@ -105,7 +106,7 @@ namespace Extension
 	template<int ChunkSizeT,
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	struct IntoCString<Yuni::SmartPtr<StringBase<char, ChunkSizeT>, OwspP,ChckP,ConvP,StorP,ConsP> >
+	class IntoCString<Yuni::SmartPtr<StringBase<char, ChunkSizeT>, OwspP,ChckP,ConvP,StorP,ConsP> >
 	{
 	public:
 		typedef Yuni::StringBase<char, ChunkSizeT> StringBaseType;
@@ -124,7 +125,7 @@ namespace Extension
 
 
 	template<int ChunkSizeT>
-	struct IntoCString<StringBase<char,ChunkSizeT>* >
+	class IntoCString<StringBase<char,ChunkSizeT>* >
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
@@ -138,7 +139,7 @@ namespace Extension
 
 
 	template<class T, class Alloc>
-	struct IntoCString<std::basic_string<char,T,Alloc> >
+	class IntoCString<std::basic_string<char,T,Alloc> >
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
@@ -154,7 +155,7 @@ namespace Extension
 	template<class T, class Alloc,
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	struct IntoCString<Yuni::SmartPtr<std::basic_string<char, T,Alloc>, OwspP,ChckP,ConvP,StorP,ConsP> >
+	class IntoCString<Yuni::SmartPtr<std::basic_string<char, T,Alloc>, OwspP,ChckP,ConvP,StorP,ConsP> >
 	{
 	public:
 		typedef std::basic_string<char, T,Alloc> StringBaseType;
@@ -171,7 +172,7 @@ namespace Extension
 
 
 	template<class T, class Alloc>
-	struct IntoCString<std::basic_string<char,T,Alloc>* >
+	class IntoCString<std::basic_string<char,T,Alloc>* >
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
@@ -185,7 +186,7 @@ namespace Extension
 
 
 	template<>
-	struct IntoCString<NullPtr>
+	class IntoCString<NullPtr>
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };

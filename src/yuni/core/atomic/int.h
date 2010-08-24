@@ -146,5 +146,6 @@ namespace Atomic
 } // namespace Yuni
 
 # include "int.hxx"
+# include "customstring.hxx"
 
 #endif // __YUNI_CORE_ATOMIC_INT_H__

@@ -147,7 +147,8 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform.cmake ${CMAKE_CURRENT_
 Set(SRC_CORE_ATOMIC
 				core/atomic/int.h
 				core/atomic/int.hxx
-				core/atomic/traits.h)
+				core/atomic/traits.h
+				core/atomic/customstring.hxx)
 source_group(Core\\atomic FILES ${SRC_CORE_ATOMIC})
 
 

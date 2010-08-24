@@ -5,6 +5,7 @@
 # include <string>
 # include <cstring>
 # include "../../smartptr.h"
+# include "../length.h"
 
 
 namespace Yuni
@@ -13,49 +14,29 @@ namespace Extension
 {
 
 
-
-	// A zero-terminated container of any type
-	template<class C, class SizeT>
-	struct Length<C*, SizeT>
-	{
-	public:
-		typedef SizeT SizeType;
-		enum { valid = 1, isFixed = 0, fixedLength = 0, };
-
-	public:
-		static SizeT Value(const C* const container)
-		{
-			SizeT result(0);
-			while (*(++container) != C())
-				++result;
-			return result;
-		}
-	};
-
-
 	// C{N}
-	template<class C, int N, class SizeT>
-	struct Length<C[N], SizeT>
+	template<int N, class SizeT>
+	class Length<char[N], SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
 		enum { valid = 1, isFixed = 0, fixedLength = 0, };
 
 	public:
-		static SizeT Value(const C* const container)
+		static SizeT Value(const char* const container)
 		{
 			// This value can not really be known at compile time
 			// We may encounter literal strings :
 			// "abc" -> N = 4 but the real length is 3
 			// or a static buffer  char v[42] where the real length is 42
-			return (N == 0) ? 0 : (C() == container[N-1] ? N-1 : N);
+			return (N == 0) ? 0 : ('\0' == container[N-1] ? N-1 : N);
 		}
 	};
 
 
 	// A mere CString (zero-terminated)
 	template<class SizeT>
-	struct Length<char*, SizeT>
+	class Length<char*, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -71,7 +52,7 @@ namespace Extension
 
 	// A mere wide string (zero-terminated)
 	template<class SizeT>
-	struct Length<wchar_t*, SizeT>
+	class Length<wchar_t*, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -89,7 +70,7 @@ namespace Extension
 	// single char
 
 	template<class SizeT>
-	struct Length<char, SizeT>
+	class Length<char, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -102,7 +83,7 @@ namespace Extension
 
 	// A single wide char
 	template<class SizeT>
-	struct Length<wchar_t, SizeT>
+	class Length<wchar_t, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -118,7 +99,7 @@ namespace Extension
 
 	// CustomString
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class SizeT>
-	struct Length<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, SizeT>
+	class Length<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -138,7 +119,7 @@ namespace Extension
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT,
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP, class SizeT>
-	struct Length<Yuni::SmartPtr<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP>, SizeT>
+	class Length<Yuni::SmartPtr<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP>, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -157,7 +138,7 @@ namespace Extension
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class SizeT>
-	struct Length<CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>*, SizeT>
+	class Length<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>*, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -174,7 +155,7 @@ namespace Extension
 
 	// Yuni::String
 	template<class C, int ChunkSizeT, class SizeT>
-	struct Length<StringBase<C,ChunkSizeT>, SizeT>
+	class Length<Yuni::StringBase<C,ChunkSizeT>, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -191,7 +172,7 @@ namespace Extension
 	template<class C, int ChunkSizeT, class SizeT,
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	struct Length<Yuni::SmartPtr<StringBase<C,ChunkSizeT>, OwspP,ChckP,ConvP,StorP,ConsP>, SizeT>
+	class Length<Yuni::SmartPtr<Yuni::StringBase<C,ChunkSizeT>, OwspP,ChckP,ConvP,StorP,ConsP>, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -209,7 +190,7 @@ namespace Extension
 	};
 
 	template<class C, int ChunkSizeT, class SizeT>
-	struct Length<StringBase<C,ChunkSizeT>*, SizeT>
+	class Length<StringBase<C,ChunkSizeT>*, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -229,7 +210,7 @@ namespace Extension
 
 	// std::string
 	template<class C, class T, class Alloc, class SizeT>
-	struct Length<std::basic_string<C,T,Alloc>, SizeT>
+	class Length<std::basic_string<C,T,Alloc>, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -249,7 +230,7 @@ namespace Extension
 	template<class C, class T, class Alloc, class SizeT,
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	struct Length<Yuni::SmartPtr<std::basic_string<C,T,Alloc>,OwspP,ChckP,ConvP,StorP,ConsP>, SizeT>
+	class Length<Yuni::SmartPtr<std::basic_string<C,T,Alloc>,OwspP,ChckP,ConvP,StorP,ConsP>, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -268,7 +249,7 @@ namespace Extension
 
 
 	template<class C, class T, class Alloc, class SizeT>
-	struct Length<std::basic_string<C,T,Alloc>*, SizeT>
+	class Length<std::basic_string<C,T,Alloc>*, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
@@ -290,7 +271,7 @@ namespace Extension
 	// nulptr
 
 	template<class SizeT>
-	struct Length<NullPtr, SizeT>
+	class Length<NullPtr, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
