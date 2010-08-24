@@ -229,7 +229,7 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<64,TP>::Type Increment(Yuni::Atomic::Int<64,TP>& t, typename Yuni::Atomic::Int<64,TP>::ScalarType value)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return InterlockedExchange64((LONGLONG*)&t.pValue, (LONGLONG)(p.Value + value));
+			return InterlockedExchange64((LONGLONG*)&t.pValue, (LONGLONG)(t.pValue + value));
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicAdd64Barrier(value, &t.pValue);
@@ -269,7 +269,7 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<64,TP>::Type Decrement(Yuni::Atomic::Int<64,TP>& t, typename Yuni::Atomic::Int<64,TP>::ScalarType value)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return InterlockedExchange64((LONGLONG*)&t.pValue, (LONGLONG)(p.Value - value));
+			return InterlockedExchange64((LONGLONG*)&t.pValue, (LONGLONG)(t.pValue - value));
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicAdd64Barrier(&t.pValue, -value);
