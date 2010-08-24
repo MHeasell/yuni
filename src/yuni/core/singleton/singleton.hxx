@@ -82,7 +82,7 @@ namespace Yuni
 		// Avoids locking on each call, only tests twice on first call
 		if (!pInstance)
 		{
-			typename ThreadingPolicy::MutexLocker lock();
+			typename ThreadingPolicy::MutexLocker lock;
 			if (!pInstance)
 			{
 				// If the instance was destroyed, the lifetime policy
