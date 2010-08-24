@@ -24,6 +24,7 @@
 # endif
 
 
+
 namespace Yuni
 {
 namespace Atomic
@@ -145,7 +146,7 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<32,TP>::Type Increment(Yuni::Atomic::Int<32,TP>& t, typename Yuni::Atomic::Int<32,TP>::ScalarType value)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return ::InterlockedAdd((LONG*)&t.pValue, (LONG)value);
+			return InterlockedExchange((LONG*)&t.pValue, (LONG)(t.pValue + value));
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicAdd32Barrier(value, &t.pValue);
@@ -163,7 +164,7 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<32,TP>::Type Decrement(Yuni::Atomic::Int<32,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return ::InterlockedDecrement((LONG*)&t.pValue);
+			return _InterlockedDecrement((LONG*)&t.pValue);
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicDecrement32Barrier(&t.pValue);
@@ -181,7 +182,7 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<32,TP>::Type Decrement(Yuni::Atomic::Int<32,TP>& t, typename Yuni::Atomic::Int<32,TP>::ScalarType value)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return ::InterlockedAdd((LONG*)&t.pValue, (LONG)(-value));
+			return InterlockedExchange((LONG*)&t.pValue, (LONG)(t.pValue - value));
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicAdd32Barrier(&t.pValue, -value);
@@ -209,7 +210,7 @@ namespace AtomicImpl
 			#	ifdef YUNI_OS_MINGW
 			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
 			#	else
-			return ::InterlockedIncrement64((LONGLONG*)&t.pValue);
+			return _InterlockedIncrement64((LONGLONG*)&t.pValue);
 			#	endif
 			# else
 			#	ifdef YUNI_OS_MAC
@@ -228,7 +229,7 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<64,TP>::Type Increment(Yuni::Atomic::Int<64,TP>& t, typename Yuni::Atomic::Int<64,TP>::ScalarType value)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return ::InterlockedAdd64((LONGLONG*)&t.pValue, (LONGLONG)value);
+			return InterlockedExchange64((LONGLONG*)&t.pValue, (LONGLONG)(p.Value + value));
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicAdd64Barrier(value, &t.pValue);
@@ -249,7 +250,7 @@ namespace AtomicImpl
 			#	ifdef YUNI_OS_MINGW
 			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
 			#	else
-			return ::InterlockedDecrement64((LONGLONG*)&t.pValue);
+			return _InterlockedDecrement64((LONGLONG*)&t.pValue);
 			#	endif
 			# else
 			#	ifdef YUNI_OS_MAC
@@ -268,7 +269,7 @@ namespace AtomicImpl
 		static typename Yuni::Atomic::Int<64,TP>::Type Decrement(Yuni::Atomic::Int<64,TP>& t, typename Yuni::Atomic::Int<64,TP>::ScalarType value)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			return ::InterlockedAdd64((LONGLONG*)&t.pValue, (LONGLONG)(-value));
+			return InterlockedExchange64((LONGLONG*)&t.pValue, (LONGLONG)(p.Value - value));
 			# else
 			#	ifdef YUNI_OS_MAC
 			return ::OSAtomicAdd64Barrier(&t.pValue, -value);
@@ -284,6 +285,7 @@ namespace AtomicImpl
 		}
 
 	}; // class Operator<32, TP>
+
 
 
 
