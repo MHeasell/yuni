@@ -46,12 +46,12 @@ public:
 		return *this;
 	}
 
-	T& operator * ()
+	reference_type operator * ()
 	{
 		return pCurrent->data;
 	}
 
-	const T& operator * () const
+	const_reference_type operator * () const
 	{
 		return pCurrent->data;
 	}
@@ -134,7 +134,7 @@ public:
 		return *this;
 	}
 
-	const T& operator * () const
+	const_reference_type operator * () const
 	{
 		return pCurrent->data;
 	}

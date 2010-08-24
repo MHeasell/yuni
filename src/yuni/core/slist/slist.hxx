@@ -4,6 +4,41 @@
 
 namespace Yuni
 {
+namespace Private
+{
+namespace LinkedListImpl
+{
+
+	template<int ComparePointer>
+	struct Compare
+	{
+		template<class U, class V>
+		static bool Perform(const U& u, const V& v)
+		{
+			return (&u) == (&v);
+		}
+	};
+
+
+	template<>
+	struct Compare<0>
+	{
+		template<class U, class V>
+		static bool Perform(const U& u, const V& v)
+		{
+			return u == v;
+		}
+	};
+
+} // namespace LinkedListImpl
+} // namespace Private
+} // namespace Yuni
+
+
+
+
+namespace Yuni
+{
 
 
 	template<class T, class Alloc>
@@ -57,25 +92,25 @@ namespace Yuni
 
 
 	template<class T, class Alloc>
-	inline T& LinkedList<T,Alloc>::front()
+	inline typename LinkedList<T,Alloc>::reference_type LinkedList<T,Alloc>::front()
 	{
 		return pHead->data;
 	}
 
 	template<class T, class Alloc>
-	inline const T& LinkedList<T,Alloc>::front() const
+	inline typename LinkedList<T,Alloc>::const_reference_type LinkedList<T,Alloc>::front() const
 	{
 		return pHead->data;
 	}
 
 	template<class T, class Alloc>
-	inline T& LinkedList<T,Alloc>::back()
+	inline typename LinkedList<T,Alloc>::reference_type LinkedList<T,Alloc>::back()
 	{
 		return pLast->data;
 	}
 
 	template<class T, class Alloc>
-	inline const T& LinkedList<T,Alloc>::back() const
+	inline typename LinkedList<T,Alloc>::const_reference_type LinkedList<T,Alloc>::back() const
 	{
 		return pLast->data;
 	}
@@ -111,15 +146,14 @@ namespace Yuni
 	}
 
 
-
 	template<class T, class Alloc>
-	template<class U>
-	typename LinkedList<T,Alloc>::iterator LinkedList<T,Alloc>::find(const U& value)
+	typename LinkedList<T,Alloc>::iterator
+	LinkedList<T,Alloc>::find(typename LinkedList<T,Alloc>::const_reference_type value)
 	{
 		Item* it = pHead;
 		while (it)
 		{
-			if (value == it->data)
+			if (Private::LinkedListImpl::Compare<comparePointer>::Perform(value, it->data))
 				return iterator(it);
 			it = it->next;
 		}
@@ -129,12 +163,43 @@ namespace Yuni
 
 	template<class T, class Alloc>
 	template<class U>
-	typename LinkedList<T,Alloc>::const_iterator LinkedList<T,Alloc>::find(const U& value) const
+	typename LinkedList<T,Alloc>::iterator
+	LinkedList<T,Alloc>::find(const U& value)
 	{
 		Item* it = pHead;
 		while (it)
 		{
-			if (value == it->data)
+			if (Private::LinkedListImpl::Compare<comparePointer>::Perform(value, it->data))
+				return iterator(it);
+			it = it->next;
+		}
+		return iterator();
+	}
+
+
+	template<class T, class Alloc>
+	template<class U>
+	typename LinkedList<T,Alloc>::const_iterator
+	LinkedList<T,Alloc>::find(const U& value) const
+	{
+		Item* it = pHead;
+		while (it)
+		{
+			if (Private::LinkedListImpl::Compare<comparePointer>::Perform(value, it->data))
+				return iterator(it);
+			it = it->next;
+		}
+		return iterator();
+	}
+
+	template<class T, class Alloc>
+	typename LinkedList<T,Alloc>::const_iterator
+	LinkedList<T,Alloc>::find(typename LinkedList<T,Alloc>::const_reference_type value) const
+	{
+		Item* it = pHead;
+		while (it)
+		{
+			if (Private::LinkedListImpl::Compare<comparePointer>::Perform(value, it->data))
 				return iterator(it);
 			it = it->next;
 		}
@@ -164,6 +229,24 @@ namespace Yuni
 	template<class T, class Alloc>
 	template<class U>
 	inline void LinkedList<T,Alloc>::push_back(const U& value)
+	{
+		if (pLast)
+		{
+			pLast->next = new Item(value);
+			pLast = pLast->next;
+			++pCount;
+		}
+		else
+		{
+			pHead = new Item(value);
+			pLast = pHead;
+			pCount = 1;
+		}
+	}
+
+
+	template<class T, class Alloc>
+	inline void LinkedList<T,Alloc>::push_back(reference_type value)
 	{
 		if (pLast)
 		{
@@ -249,6 +332,23 @@ namespace Yuni
 		}
 	}
 
+	template<class T, class Alloc>
+	void LinkedList<T,Alloc>::push_front(reference_type value)
+	{
+		if (pHead)
+		{
+			pHead = new Item(pHead, value);
+			++pCount;
+		}
+		else
+		{
+			pHead = new Item(value);
+			pLast = pHead;
+			pCount = 1;
+		}
+	}
+
+
 
 	template<class T, class Alloc>
 	template<class U, class A>
@@ -303,6 +403,8 @@ namespace Yuni
 	template<class U>
 	typename LinkedList<T,Alloc>::Size LinkedList<T,Alloc>::remove(const U& value)
 	{
+		// !!! DO not forget to push changes into remove(reference_type) as well
+
 		// The current position in the list
 		Item* cursor = pHead;
 		// The previous item to 'cursor'
@@ -312,7 +414,7 @@ namespace Yuni
 		// For each item in the list...
 		while (cursor)
 		{
-			if (value == cursor->data)
+			if (Private::LinkedListImpl::Compare<comparePointer>::Perform(value, cursor->data))
 			{
 				// We're keeping a reference to the item to remove
 				Item* itemToDelete = cursor;
@@ -333,7 +435,74 @@ namespace Yuni
 				else
 				{
 					// The item to remove is actually the first item
-					// Two cases : 
+					// Two cases :
+					// The first one we have more than one item in the list
+					if (pLast != pHead)
+					{
+						pHead = pHead->next;
+						--pCount;
+					}
+					else
+					{
+						// The second one is that we have a single item in the list
+						// Equivalent to a clear
+						pHead = NULL;
+						pLast = NULL;
+						pCount = 0;
+					}
+				}
+				// Another victim
+				++removeCount;
+				// Destrying the item
+				delete itemToDelete;
+			}
+			else
+			{
+				// This item does no interest us, let's continue
+				previous = cursor;
+				cursor = cursor->next;
+			}
+		} // while (cursor)
+		return removeCount;
+	}
+
+
+	template<class T, class Alloc>
+	typename LinkedList<T,Alloc>::Size LinkedList<T,Alloc>::remove(reference_type value)
+	{
+		// !!! DO not forget to push changes into remove(const U&) as well
+
+		// The current position in the list
+		Item* cursor = pHead;
+		// The previous item to 'cursor'
+		Item* previous = NULL;
+		Size removeCount = 0;
+
+		// For each item in the list...
+		while (cursor)
+		{
+			if (Private::LinkedListImpl::Compare<comparePointer>::Perform(value, cursor->data))
+			{
+				// We're keeping a reference to the item to remove
+				Item* itemToDelete = cursor;
+				// The previous valid item remains the same
+				cursor = cursor->next;
+
+				// Removing the item from the list
+				if (previous)
+				{
+					// We have to remove the item in the middle of nowhere
+					// We have to update the reference of the previous item
+					previous->next = cursor; // the same than itemToDelete->next
+					// The reference to the previous item may need an update
+					if (pLast == itemToDelete)
+						pLast = previous;
+					--pCount;
+				}
+				else
+				{
+					// The item to remove is actually the first item
+					// Two cases :
 					// The first one we have more than one item in the list
 					if (pLast != pHead)
 					{
@@ -469,16 +638,6 @@ namespace Yuni
 
 	template<class T, class Alloc>
 	inline LinkedList<T,Alloc>& LinkedList<T,Alloc>::operator = (const LinkedList<T,Alloc>& value)
-	{
-		clear();
-		push_back(value);
-		return *this;
-	}
-
-
-	template<class T, class Alloc>
-	template<class U>
-	inline LinkedList<T,Alloc>& LinkedList<T,Alloc>::operator = (const U& value)
 	{
 		clear();
 		push_back(value);

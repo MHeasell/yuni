@@ -4,6 +4,8 @@
 # include "../../yuni.h"
 # include <list>
 # include <vector>
+# include "../static/remove.h"
+# include "../static/types.h"
 
 
 namespace Yuni
@@ -29,6 +31,10 @@ namespace Yuni
 		typedef T ValueType;
 		//! Value type (STL compliant)
 		typedef T value_type;
+		//! Reference
+		typedef typename Static::Remove::Reference<T>::Type& reference_type;
+		//! Reference (const)
+		typedef const typename Static::Remove::Reference<T>::Type& const_reference_type;
 
 		// Forward declaration for iterators
 		class Iterator;
@@ -40,6 +46,16 @@ namespace Yuni
 	protected:
 		// Forward declaration
 		class Item;
+
+		enum
+		{
+			/*!
+			** \brief A non-zero value to base the comparison between values on a deferenced pointer
+			**
+			** \internal This check is used when the type T is a reference
+			*/
+			comparePointer = Static::Type::IsConst<T>::No && Static::Type::Compound<T>::IsReference,
+		};
 
 	public:
 		# include "iterator.h"
@@ -92,12 +108,12 @@ namespace Yuni
 		const_iterator end() const;
 
 		//! Get the front item
-		T& front();
-		const T& front() const;
+		reference_type front();
+		const_reference_type front() const;
 
 		//! Get the last item
-		T& back();
-		const T& back() const;
+		reference_type back();
+		const_reference_type back() const;
 		//@}
 
 
@@ -110,6 +126,7 @@ namespace Yuni
 		** \return An iterator to the item found
 		*/
 		template<class U> iterator find(const U& value);
+		iterator find(const_reference_type value);
 
 		/*!
 		** \brief Get the first item equals to a given value
@@ -118,6 +135,7 @@ namespace Yuni
 		** \return An iterator to the item found
 		*/
 		template<class U> const_iterator find(const U& value) const;
+		const_iterator find(const_reference_type value) const;
 		//@}
 
 
@@ -131,6 +149,7 @@ namespace Yuni
 		** \brief Add a value at the end of the list
 		*/
 		template<class U> void push_back(const U& value);
+		void push_back(reference_type value);
 		/*!
 		** \brief Add a list of values at the end of the list
 		*/
@@ -152,6 +171,8 @@ namespace Yuni
 		** \brief Add a value at the begining of the list
 		*/
 		template<class U> void push_front(const U& value);
+		void push_front(reference_type value);
+
 		/*!
 		** \brief Add a list of values at the begining of the list
 		*/
@@ -210,6 +231,7 @@ namespace Yuni
 		** \return The count of deleted items
 		*/
 		template<class U> Size remove(const U& value);
+		Size remove(reference_type value);
 
 		/*!
 		** \brief Remove any item equals to a value in the given list
@@ -266,10 +288,9 @@ namespace Yuni
 		/*!
 		** \brief Clear then add the value
 		**
-		** \param value The value to copy and add
+		** \param value The value to copy
 		** \return Always *this
 		*/
-		template<class U> LinkedList& operator = (const U& value);
 		LinkedList& operator = (const LinkedList& value);
 
 		/*!
@@ -316,15 +337,22 @@ namespace Yuni
 			Item(const Item& rhs)
 				:next(rhs.next), data(rhs.data)
 			{}
-			inline Item(Item* n)
+			inline explicit Item(Item* n)
 				:next(n), data()
 			{}
-			template<class U> inline Item(const U value)
+			inline explicit Item(reference_type value)
 				:next(NULL), data(value)
+			{}
+			template<class U> inline explicit Item(const U& value)
+				:next(NULL), data(value)
+			{}
+			inline Item(Item* n, reference_type value)
+				:next(n), data(value)
 			{}
 			template<class U> inline Item(Item* n, const U& value)
 				:next(n), data(value)
 			{}
+
 
 		public:
 			//! The next item in the list
