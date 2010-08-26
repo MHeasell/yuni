@@ -7,6 +7,7 @@ Set(SRC_APPLICATION_GFX
 		application/gfx3d.h application/gfx3d.cpp)
 source_group(Application FILES ${SRC_APPLICATION_GFX})
 
+
 # Gfx
 Set(SRC_GFX
 		gfx/device.h gfx/device.cpp

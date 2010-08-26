@@ -50,6 +50,14 @@ ENDIF(WIN32 OR WIN64)
 
 Include(CheckIncludeFile)
 
+
+#
+# Cairo - Pango
+#
+DEVPACK_IMPORT_CAIROPANGO()
+
+
+
 #
 # OpenGL
 #
@@ -94,7 +102,7 @@ IF(UNIX AND NOT APPLE)
 		YMESSAGE(    " * Packages needed on Debian: mesa-common-dev")
 		YMESSAGE(    " * Packages needed on Fedora: mesa-libGLU-devel")
 	ENDIF(NOT "${YUNI_HAS_GLX_HEADER}" GREATER 0)
-	
+
 	IF(OPENGL_GLU_FOUND)
 		Set(YUNI_HAS_GLU_HEADER 1)
 		LIBYUNI_CONFIG_LIB("gfx3d" "GLU")
