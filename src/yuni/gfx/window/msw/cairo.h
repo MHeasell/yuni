@@ -1,12 +1,12 @@
-#ifndef __YUNI_GFX_WINDOW_OPENGL_MSW_H__
-# define __YUNI_GFX_WINDOW_OPENGL_MSW_H__
+#ifndef __YUNI_GFX_WINDOW_CAIRO_MSW_H__
+# define __YUNI_GFX_WINDOW_CAIRO_MSW_H__
 
 # include "../../../yuni.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
 #	include "../../../core/system/windows.hdr.h"
 #	include "msw.h"
-#	include "../../surface/opengl.h"
+#	include "../../surface/cairo.h"
 
 
 namespace Yuni
@@ -17,25 +17,25 @@ namespace Window
 {
 
 	/*!
-	** \brief Microsoft Windows-specific window, using an OpenGL surface
+	** \brief Microsoft Windows-specific window, using a Cairo surface to render
 	*/
-	class OpenGLMSW: public AMSWindows, public Surface::OpenGL
+	class CairoMSW: public AMSWindows, public Surface::Cairo
 	{
 	public:
 		//! The Threading Policy
 		typedef AMSWindows::ThreadingPolicy ThreadingPolicy;
 
 	public:
-		OpenGLMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
+		CairoMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
 			:AMSWindows(title, width, height, bitDepth, fullScreen)
 		{
-			pWindowClassName = "OpenGL";
+			pWindowClassName = "Cairo";
 		}
 
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(unsigned int width, unsigned int height);
-		virtual Surface::OpenGL* surface() const { return const_cast<OpenGLMSW*>(this); }
+		virtual Surface::Cairo* surface() const { return const_cast<CairoMSW*>(this); }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;
@@ -46,16 +46,15 @@ namespace Window
 		/*!
 		** \brief Refresh the window content if necessary
 		**
-		** \returns Always refresh in OpenGL view
+		** \returns True if the window was refreshed, false if it was not necessary
 		*/
 		virtual bool refresh() { return true; }
 		virtual void blitWL();
 
 	private:
 		HDC pHDC;
-		HGLRC pHRC;
 
-	}; // class OpenGLMSW
+	}; // class CairoMSW
 
 
 
@@ -67,4 +66,4 @@ namespace Window
 
 # endif // YUNI_WINDOWSYSTEM_MSW
 
-#endif // __YUNI_GFX_WINDOW_OPENGL_MSW_H__
+#endif // __YUNI_GFX_WINDOW_CAIRO_MSW_H__

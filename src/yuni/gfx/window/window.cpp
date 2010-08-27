@@ -8,6 +8,7 @@
 #	ifdef YUNI_OS_WINDOWS
 #		include "msw/opengl.h"
 #		include "msw/directx.h"
+#		include "msw/cairo.h"
 #   else
 #		ifdef YUNI_OS_UNIX
 #			include "x11/opengl.h"
@@ -52,6 +53,20 @@ namespace Window
 					# endif
 					# ifdef YUNI_OS_MAC
 					wnd = new OpenGLCocoa(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+					# endif
+					break;
+				}
+
+			case Device::Cairo:
+				{
+					# ifdef YUNI_WINDOWSYSTEM_MSW
+					wnd = new CairoMSW(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+					# endif
+					# ifdef YUNI_WINDOWSYSTEM_X11
+					//wnd = new CairoX11(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+					# endif
+					# ifdef YUNI_OS_MAC
+					//wnd = new CairoCocoa(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
 					# endif
 					break;
 				}

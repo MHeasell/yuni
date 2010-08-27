@@ -26,6 +26,7 @@ namespace Yuni
 	**     delete &instance;
 	**     return 0;
 	** }
+	** \endcode
 	*/
 	template <class T,
 		template <class> class CreationT = Policy::Creation::EmptyConstructor,

@@ -21,7 +21,7 @@ namespace Gfx
 
 
 	Engine::Engine()
-		:pDeviceIsInitialized(false), pMainWindow(NULL), pRenderer(NULL)
+		:pDeviceIsInitialized(false), pMainWindow(NULL)
 	{
 	}
 
@@ -106,7 +106,6 @@ namespace Gfx
 		onFPSChanged.connect(pMainWindow, &Window::AWindow::onFPSChanged);
 
 		unsigned int lastFPS = 0;
-		pRenderer = pMainWindow->renderer();
 
 		// Main loop
 		while (!pMainWindow->closing())
@@ -115,22 +114,22 @@ namespace Gfx
 			pMainWindow->pollEvents();
 
 			// Render the frame
-			pRenderer->drawFrame(*Scene::Instance());
+			pMainWindow->refresh();
+
 			// FPS
-			if (lastFPS != pRenderer->instantFPS())
-			{
-				// The FPS has changed, broadcasting the news
-				lastFPS = pRenderer->instantFPS();
-				onFPSChanged(lastFPS);
-			}
+// 			if (lastFPS != pMainSurface->instantFPS())
+// 			{
+// 				// The FPS has changed, broadcasting the news
+// 				lastFPS = pMainSurface->instantFPS();
+// 				onFPSChanged(lastFPS);
+// 			}
 
 			// Push the backbuffer to screen
-			pMainWindow->onBlitWL();
+			pMainWindow->blitWL();
 		}
 		pMainWindow->close();
 		delete pMainWindow;
 		pMainWindow = NULL;
-		pRenderer = NULL;
 	}
 
 

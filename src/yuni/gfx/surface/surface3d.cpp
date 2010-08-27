@@ -1,6 +1,6 @@
 
 #include <algorithm>
-#include "renderer.h"
+#include "surface3d.h"
 #include "../text/label.h"
 #include "../text/wgl.h"
 
@@ -8,10 +8,12 @@ namespace Yuni
 {
 namespace Gfx
 {
-namespace Render
+namespace Surface
 {
 
-	void ARenderer::drawFrame(const Yuni::Gfx::Scene& scene)
+
+
+	void ASurface3D::drawFrame(const Yuni::Gfx::Scene& scene)
 	{
 		if (pPaused)
 			return;
@@ -54,11 +56,11 @@ namespace Render
 		////// End Test Draw
 
 		// All objects
-		const Gfx::Scene::Objects& objects = scene.objects();
+		const Scene::ObjectMap& objects = scene.objects();
 
 		// Foreach object
-		const Gfx::Scene::Objects::const_iterator endObj = objects.end();
-		for (Gfx::Scene::Objects::const_iterator it = objects.begin(); it != endObj; ++it)
+		const Scene::ObjectMap::const_iterator endObj = objects.end();
+		for (Scene::ObjectMap::const_iterator it = objects.begin(); it != endObj; ++it)
 		{
 			// The skeleton
 			Gfx::Skeleton::Ptr skel = it->second->skeleton();
@@ -81,6 +83,6 @@ namespace Render
 
 
 
-} // namespace Render
-} // namespace Gfx3D
+} // namespace Surface
+} // namespace Gfx
 } // namespace Yuni

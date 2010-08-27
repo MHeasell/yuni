@@ -31,13 +31,15 @@ Set(SRC_GFX3D
 		gfx/window/msw/msw.h
 		gfx/window/msw/directx.h
 		gfx/window/msw/opengl.h
+		gfx/window/msw/cairo.h
 		gfx/window/x11/opengl.h
 		gfx/window/x11/x11yuni.h
 		gfx/window/cocoa/opengl.h
 
-		# Renderer
-		gfx/render/renderer.h gfx/render/renderer.cpp
-		gfx/render/opengl.h gfx/render/opengl.cpp
+		# Render surfaces
+		gfx/surface/surface.h
+		gfx/surface/surface3d.h gfx/surface/surface3d.cpp
+		gfx/surface/opengl.h gfx/surface/opengl.cpp
 
 		# Font
 		gfx/text/font.h gfx/text/label.h
@@ -55,7 +57,14 @@ Include(CheckIncludeFile)
 # Cairo - Pango
 #
 DEVPACK_IMPORT_CAIROPANGO()
-
+IF(CAIRO_FOUND)
+	# We Have Cairo
+	LIST(APPEND SRC_GFX3D gfx/surface/cairo.h gfx/surface/cairo.cpp)
+	IF (WIN32 OR WIN64)
+		# Cairo under Windows
+		LIST(APPEND SRC_GFX3D gfx/window/msw/cairo.cpp)
+	ENDIF (WIN32 OR WIN64)
+ENDIF(CAIRO_FOUND)
 
 
 #

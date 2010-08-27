@@ -36,7 +36,9 @@ namespace Gfx
 			//! Microsoft DirectX device (version 9)
 			DirectX9,
 			//! Microsoft DirectX device (version 8)
-			DirectX8
+			DirectX8,
+			//! Cairo vector-based drawing
+			Cairo
 		};
 
 		//! The default type according the plateform

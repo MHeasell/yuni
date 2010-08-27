@@ -3,7 +3,7 @@
 
 # include "../../../yuni.h"
 # include "../window.h"
-# include "../../render/opengl.h"
+# include "../../surface/opengl.h"
 
 
 namespace Yuni
@@ -14,18 +14,18 @@ namespace Window
 {
 
 	/*!
-	** \brief Mac OS X, Cocoa-specific window, using an OpenGL Renderer
+	** \brief Mac OS X, Cocoa-specific window, using an OpenGL surface
 	*/
-	class OpenGLCocoa: public AWindow, public Render::OpenGL
+	class OpenGLCocoa: public AWindow, public Surface::OpenGL
 	{
 	public:
 		OpenGLCocoa(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
 			:AWindow(title, width, height, bitDepth, fullScreen)
 		{}
 
-		virtual bool initialize() { return Render::OpenGL::initialize(); }
-		virtual void close() { Render::OpenGL::release(); }
-		virtual Render::OpenGL* renderer() const { return const_cast<OpenGLCocoa*>(this); }
+		virtual bool initialize() { return Surface::OpenGL::initialize(); }
+		virtual void close() { Surface::OpenGL::release(); }
+		virtual Surface::OpenGL* surface() const { return const_cast<OpenGLCocoa*>(this); }
 
 		// virtual bool pollEvents();
 

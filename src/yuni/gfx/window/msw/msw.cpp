@@ -93,6 +93,7 @@ namespace Window
 			return DefWindowProc(hWnd, uMsg, wParam, lParam);
 		}
 
+
 	} // anonymous namespace
 
 
@@ -110,9 +111,9 @@ namespace Window
 		RECT windowRect;
 
 		windowRect.left = 0;
-		windowRect.right = (long) pWidth;
+		windowRect.right = (long)pWidth;
 		windowRect.top = 0;
-		windowRect.bottom = (long) pHeight;
+		windowRect.bottom = (long)pHeight;
 
 		wc.cbSize = sizeof(WNDCLASSEX);
 		// Grab An Instance For Our Window
@@ -216,8 +217,9 @@ namespace Window
 			return false;
 		}
 
+		ShowWindow(pHWnd, pFullScreen ? SW_MAXIMIZE : SW_SHOWNORMAL);
+
 		AddWindow(pHWnd, this);
-		//const_cast<AMSWindows*>(this)
 
 		return true;
 	}

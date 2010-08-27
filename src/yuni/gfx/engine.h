@@ -4,7 +4,7 @@
 # include "device.h"
 # include "../core/smartptr/smartptr.h"
 # include "../gfx/window/window.h"
-# include "../gfx/render/renderer.h"
+# include "../gfx/surface/surface3d.h"
 
 namespace Yuni
 {
@@ -103,12 +103,6 @@ namespace Gfx
 		void applicationTitle(const String& t);
 		//@}
 
-		//! \name Scene
-		//@{
-		//! Get the main scene
-		Scene& scene() { return pMainScene; }
-		//@}
-
 		bool isDeviceInitialized() const;
 
 	public:
@@ -124,10 +118,6 @@ namespace Gfx
 		String pTitle;
 		//! Main window
 		Window::AWindow* pMainWindow;
-		//! Main renderer
-		Render::ARenderer* pRenderer;
-		//! Main scene
-		Scene pMainScene;
 
 	}; // class Engine
 

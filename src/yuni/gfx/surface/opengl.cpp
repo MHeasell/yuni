@@ -7,8 +7,10 @@ namespace Yuni
 {
 namespace Gfx
 {
-namespace Render
+namespace Surface
 {
+
+
 
 	bool OpenGL::initialize()
 	{

@@ -5,7 +5,7 @@
 # include "../device.h"
 # include "../../core/string.h"
 # include "../../core/event/event.h"
-# include "../render/renderer.h"
+# include "../surface/surface.h"
 
 
 namespace Yuni
@@ -65,8 +65,8 @@ namespace Window
 			pHeight = height;
 		}
 
-		//! Get the renderer associated with this window
-		virtual Render::ARenderer* renderer() const { return NULL; }
+		//! Get the render surface associated with this window
+		virtual Surface::ASurface* surface() const { return NULL; }
 
 		/*!
 		** \brief Get whether the window is in the process of closing
@@ -123,8 +123,16 @@ namespace Window
 		//@}
 
 	protected:
+		/*!
+		** \brief Refresh the window content if necessary
+		**
+		** \returns True if the window was refreshed, false if it was not necessary
+		*/
+		virtual bool refresh() = 0;
+
 		//! Swap the current buffer with the backbuffer
-		virtual void onBlitWL() = 0;
+		virtual void blitWL() = 0;
+
 		//! Method call when the title of the window has been changed
 		virtual void onInternalTitleChangedWL() = 0;
 
@@ -146,8 +154,8 @@ namespace Window
 	/*!
 	** \brief Create a platform-dependent window.
 	**
-	** The characteristics of this window and its associated renderer will
-	** be determined using the device.
+	** The characteristics of this window and its associated rendering surface
+	** will be determined using the device.
 	*/
 	AWindow* Create(const String& title, const Device::Ptr& device);
 

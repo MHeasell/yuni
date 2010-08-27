@@ -13,6 +13,9 @@ namespace Yuni
 namespace Gfx
 {
 
+	//! Forward declaration
+	class Scene;
+
 
 	/*!
 	** \brief A 3D object is an abstract scene object
@@ -38,12 +41,12 @@ namespace Gfx
 		/*!
 		** \brief Default Constructor
 		*/
-		Object3D(const ObjectModel::Ptr& model);
+		Object3D(Scene& scene, const ObjectModel::Ptr& model);
 
 		/*!
 		** \brief Default Constructor
 		*/
-		Object3D(const Yuni::String& name, const ObjectModel::Ptr& model);
+		Object3D(Scene& scene, const Yuni::String& name, const ObjectModel::Ptr& model);
 
 		//! Default Destructor
 		virtual ~Object3D();
