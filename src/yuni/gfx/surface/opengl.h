@@ -1,21 +1,23 @@
-#ifndef __YUNI_GFX_RENDER_OPENGL_H__
-# define __YUNI_GFX_RENDER_OPENGL_H__
+#ifndef __YUNI_GFX_SURFACE_OPENGL_H__
+# define __YUNI_GFX_SURFACE_OPENGL_H__
 
-# include "renderer.h"
+# include "surface3d.h"
 
 namespace Yuni
 {
 namespace Gfx
 {
-namespace Render
+namespace Surface
 {
 
+
+
 	/*!
-	** \brief OpenGL implementation of a renderer
+	** \brief An OpenGL surface
 	**
 	** For the moment, this is a naive unoptimized implementation.
 	*/
-	class OpenGL: public ARenderer
+	class OpenGL: public ASurface3D
 	{
 	protected:
 		//! Initalize OpenGL
@@ -26,6 +28,9 @@ namespace Render
 
 		//! Resize the viewport
 		virtual void resize(unsigned int width, unsigned int height);
+
+		//! Choose a color to clear the screen with
+		virtual void clearColor(Color::RGB<uint8>& newColor);
 
 		//! Clear the screen to black
 		virtual void clearScreen();
@@ -47,8 +52,10 @@ namespace Render
 
 	}; // OpenGL
 
-} // namespace Render
+
+
+} // namespace Surface
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_RENDER_OPENGL_H__
+#endif // __YUNI_GFX_SURFACE_OPENGL_H__

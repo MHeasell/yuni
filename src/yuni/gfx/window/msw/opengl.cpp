@@ -177,7 +177,7 @@ namespace Window
 	}
 
 
-	void OpenGLMSW::onBlitWL()
+	void OpenGLMSW::blitWL()
 	{
 		SwapBuffers(pHDC);
 	}

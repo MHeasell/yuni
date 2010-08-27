@@ -7,7 +7,7 @@
 
 #	include "x11yuni.h"
 #	include "../window.h"
-#	include "../../render/opengl.h"
+#	include "../../surface/opengl.h"
 
 
 namespace Yuni
@@ -21,7 +21,7 @@ namespace Window
 	/*!
 	** \brief Specialized window implementation for GLX (OpenGL-X11)
 	*/
-	class OpenGLX11: public AWindow, public Render::OpenGL
+	class OpenGLX11: public AWindow, public Surface::OpenGL
 	{
 	public:
 		OpenGLX11(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
@@ -32,9 +32,9 @@ namespace Window
 		virtual void close();
 		virtual void resize(unsigned int width, unsigned int height)
 		{
-			Render::OpenGL::resize(width, height);
+			Surface::OpenGL::resize(width, height);
 		}
-		virtual Render::OpenGL* renderer() const { return const_cast<OpenGLX11*>(this); }
+		virtual Surface::OpenGL* surface() const { return const_cast<OpenGLX11*>(this); }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;

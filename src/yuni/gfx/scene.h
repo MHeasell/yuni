@@ -3,7 +3,7 @@
 
 # include <map>
 # include "../yuni.h"
-# include "../core/smartptr/smartptr.h"
+# include "../core/smartptr.h"
 # include "object3D.h"
 
 
@@ -22,20 +22,18 @@ namespace Gfx
 		//! The threading Policy
 		typedef Policy::ObjectLevelLockable<Scene> ThreadingPolicy;
 
-		typedef std::map<uint64, Object3D::Ptr> Objects;
+		//! Smart pointer
+		typedef SmartPtr<Scene> Ptr;
+
+		//! Map of objects
+		typedef std::map<uint64, Object3D::Ptr> ObjectMap;
+
 
 	public:
-		//! \name Class methods
-		//@{
-		//! Accessor to the singleton instance
-		static Scene* Instance();
-		//@}
-
-	public:
-		//! \name Instance methods
-		//@{
+		//! Empty constructor
 		Scene()
 		{}
+		//! Copy constructor. TODO: Implement deep copy !
 		Scene(const Scene& rhs)
 			:ThreadingPolicy(), pObjects(rhs.pObjects)
 		{}
@@ -45,13 +43,16 @@ namespace Gfx
 		**
 		** This destructor must not forget to clear the objects table
 		*/
-		virtual ~Scene()
+		~Scene()
 		{
 			pObjects.clear();
 		}
 
+		//! \name Methods
+		//@{
 		//! Get the objects in the scene
-		const Objects& objects() const { return pObjects; }
+		const ObjectMap& objects() const { return pObjects; }
+
 
 	protected:
 		/*!
@@ -65,13 +66,12 @@ namespace Gfx
 
 	private:
 		//! The 3D objects managed by the ObjectManager
-		Objects pObjects;
+		ObjectMap pObjects;
 
 		// Our friends !
 		friend class Object3D;
 
-	}; // ObjectManager
-
+	}; // Scene
 
 
 
@@ -79,4 +79,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // !__YUNI_GFX_OBJECTMANAGER_H__
+#endif // !__YUNI_GFX_SCENE_H__

@@ -68,7 +68,7 @@ namespace Window
 			return false;
 		}
 		resize(pWidth, pHeight);
-		if (!Render::OpenGL::initialize())
+		if (!Surface::OpenGL::initialize())
 		{
 			std::cerr << "GL initialization failed" << std::endl;
 			return false;
@@ -99,7 +99,7 @@ namespace Window
 		XCloseDisplay(pDisplay);
 		pDisplay = NULL;
 
-		Render::OpenGL::release();
+		Surface::OpenGL::release();
 	}
 
 

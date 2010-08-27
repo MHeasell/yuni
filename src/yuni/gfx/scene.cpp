@@ -11,15 +11,6 @@ namespace Gfx
 
 
 
-	Scene* Scene::Instance()
-	{
-		static Scene* scene = NULL;
-		if (!scene)
-			scene = new Scene();
-		return scene;
-	}
-
-
 	void Scene::registerObject(Object3D* obj)
 	{
 		/* Assert */

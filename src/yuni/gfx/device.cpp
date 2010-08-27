@@ -27,6 +27,7 @@ namespace Gfx
 			case OpenGL:   { return "OpenGL"; }
 			case DirectX9: { return "Microsoft DirectX 9"; }
 			case DirectX8: { return "Microsoft DirectX 8"; }
+			case Cairo:	   { return "Cairo"; }
 		}
 		return "Null";
 	}
@@ -50,6 +51,9 @@ namespace Gfx
 			return DirectX8;
 		if ("directx9" == s || "directx v9" == s || "directx (v9)" == s || "microsoft directx (v9)" == s)
 			return DirectX9;
+		// Cairo
+		if ("cairo" == s)
+			return Cairo;
 		// Software
 		if ("software" == s)
 			return Software;

@@ -3,7 +3,6 @@
 #include "scene.h"
 
 
-
 namespace Yuni
 {
 namespace Gfx
@@ -17,20 +16,20 @@ namespace Gfx
 	}
 
 
-	Object3D::Object3D(const String& name, const SmartPtr<ObjectModel>& model)
+	Object3D::Object3D(Scene& scene, const String& name, const ObjectModel::Ptr& model)
 		:pID(NextID()), pName(name), pModel(model), pSkeleton()
 	{
 		assert(NULL != pModel);
 		pSkeleton = pModel->skeleton();
-		Scene::Instance()->registerObject(this);
+		scene.registerObject(this);
 	}
 
-	Object3D::Object3D(const ObjectModel::Ptr& model)
+	Object3D::Object3D(Scene& scene, const ObjectModel::Ptr& model)
 		:pID(NextID()), pName(), pModel(model), pSkeleton()
 	{
 		assert(NULL != pModel);
 		pSkeleton = pModel->skeleton();
-		Scene::Instance()->registerObject(this);
+		scene.registerObject(this);
 	}
 
 

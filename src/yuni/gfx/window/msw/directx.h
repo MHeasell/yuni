@@ -6,6 +6,7 @@
 # if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
 #	include "../../../core/system/windows.hdr.h"
 #	include "../../api/dx9.h"
+#   include "../../surface/surface3d.h"
 #	include "msw.h"
 
 
@@ -19,7 +20,7 @@ namespace Window
 	/*!
 	** \brief Implementation of an MFC window that uses DirectX display
 	*/
-	class DirectXMSW: public AMSWindows, public Render::ARenderer
+	class DirectXMSW: public AMSWindows, public Surface::ASurface3D
 	{
 	public:
 		//! The Threading Policy
@@ -36,7 +37,7 @@ namespace Window
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(unsigned int width, unsigned int height);
-		virtual Render::ARenderer* renderer() const { return const_cast<DirectXMSW*>(this); }
+		virtual Surface::ASurface3D* renderer() const { return const_cast<DirectXMSW*>(this); }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;
@@ -44,9 +45,15 @@ namespace Window
 		virtual bool verticalSync(bool activate);
 
 	protected:
-		void onBlitWL() { pDXDevice->Present(NULL, NULL, pHWnd, NULL); }
+		/*!
+		** \brief Refresh the window content if necessary
+		**
+		** \returns Always refresh in DirectX view
+		*/
+		virtual bool refresh() { return true; }
+		virtual void blitWL() { pDXDevice->Present(NULL, NULL, pHWnd, NULL); }
 
-		//! \name Overridden from ARenderer
+		//! \name Overridden from ASurface3D
 		//@{
 		virtual void clearScreen();
 		virtual void resetView();
