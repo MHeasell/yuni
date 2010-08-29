@@ -117,6 +117,22 @@ namespace Thread
 		/*!
 		** \brief Modify then Reload the settings
 		**
+		** Modify the settings (time interval only) with a single lock
+		** and ask to reload them if the timer is started.
+		** This method is a convenient and faster replacement for the following code:
+		** (assuming we want one second for the time interval)
+		** \code
+		** timer.interval(1000); // 1 second
+		** timer.reload();
+		** \endcode
+		**
+		** \param interval The new time interval (in milliseconds)
+		*/
+		void reload(unsigned int interval);
+
+		/*!
+		** \brief Modify then Reload the settings
+		**
 		** Modify the settings (time interval and number of cycles) with a single lock
 		** and ask to reload them if the timer is started.
 		** This method is a convenient and faster replacement for the following code:
