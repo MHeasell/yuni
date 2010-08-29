@@ -3,6 +3,9 @@
 
 # include <ctype.h>
 # include <assert.h>
+# ifdef YUNI_HAS_VA_COPY
+#	include <stdarg.h>
+# endif // YUNI_HAS_VA_COPY
 
 
 
@@ -2205,7 +2208,10 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::toLower()
 	{
 		for (Size i = 0; i < AncestorType::size; ++i)
-			AncestorType::data[i] = (Char) tolower(AncestorType::data[i]);
+		{
+			if (UTF8::Char::IsASCII((unsigned char)AncestorType::data[i]))
+				AncestorType::data[i] = (Char) tolower(AncestorType::data[i]);
+		}
 		return *this;
 	}
 
@@ -2215,7 +2221,10 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::toUpper()
 	{
 		for (Size i = 0; i < AncestorType::size; ++i)
-			AncestorType::data[i] = (Char) toupper(AncestorType::data[i]);
+		{
+			if (UTF8::Char::IsASCII((unsigned char)AncestorType::data[i]))
+				AncestorType::data[i] = (Char) toupper(AncestorType::data[i]);
+		}
 		return *this;
 	}
 

@@ -43,6 +43,11 @@ namespace UTF8
 		static unsigned char Mask8Bits(const char p);
 
 		/*!
+		** \brief Is the UTF-8 a simple ascii char ?
+		*/
+		static bool IsASCII(unsigned char c);
+
+		/*!
 		** \brief Check if the two first bits are set
 		*/
 		static bool IsTrail(unsigned char c);
