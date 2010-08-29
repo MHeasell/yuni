@@ -74,7 +74,11 @@ namespace Directory
 			wbuffer[3] = L'\\';
 			int n = MultiByteToWideChar(CP_UTF8, 0, parent.c_str(), parent.size(), wbuffer + 4, wbufferMax - 10);
 			if (!n)
+			{
+				h = -1;
 				return;
+			}
+
 			// Making sure that our string is zero-terminated
 			wbuffer[n + 4] = L'\\';
 			wbuffer[n + 5] = L'*';
