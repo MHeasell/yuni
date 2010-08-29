@@ -35,7 +35,7 @@ namespace Window
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(unsigned int width, unsigned int height);
-		virtual Surface::Cairo* surface() const { return const_cast<CairoMSW*>(this); }
+		virtual Surface::Cairo* surface() { return this; }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;

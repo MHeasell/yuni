@@ -29,21 +29,33 @@ namespace Window
 		{}
 
 		virtual bool initialize();
+
 		virtual void close();
+
 		virtual void resize(unsigned int width, unsigned int height)
 		{
 			Surface::OpenGL::resize(width, height);
 		}
-		virtual Surface::OpenGL* surface() const { return const_cast<OpenGLX11*>(this); }
+		virtual Surface::OpenGL* surface() { return this; }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;
+
 		//! Activate / deactivate vertical synchronization (VSync)
 		virtual bool verticalSync(bool activate);
 
 		bool pollEvents();
 	protected:
-		void onBlitWL();
+
+		/*!
+		** \brief Refresh the window content if necessary
+		**
+		** \returns True if the window was refreshed, false if it was not necessary
+		*/
+		virtual bool refresh() { return true; }
+
+		void blitWL();
+
 		void onInternalTitleChangedWL();
 
 	private:
