@@ -307,6 +307,24 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::append(const StringT& str,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		# ifndef NDEBUG
+		const Size len = Traits::Length<StringT,Size>::Value(str);
+		assert(size + offset <= len && "Buffer overflow in CustomString::append(s, size, offset) !");
+		# endif // NDEBUG
+		AncestorType::append(Traits::CString<StringT>::Perform(str) + offset, size);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	inline void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::write(const U& u,
@@ -356,13 +374,33 @@ namespace Yuni
 
 
 
-
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
 	inline void
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assign(const char* const cstr,
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assign(const StringT& str,
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
 	{
-		AncestorType::assign(cstr, size);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+
+		AncestorType::assign(Traits::CString<StringT>::Perform(str), size);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assign(const StringT& str,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		# ifndef NDEBUG
+		const Size len = Traits::Length<StringT,Size>::Value(str);
+		assert(size + offset <= len && "Buffer overflow in CustomString::assign(s, size, offset) !");
+		# endif // NDEBUG
+		AncestorType::assign(Traits::CString<StringT>::Perform(str) + offset, size);
 	}
 
 
