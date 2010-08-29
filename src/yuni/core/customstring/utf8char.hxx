@@ -54,6 +54,12 @@ namespace UTF8
 	}
 
 
+	inline bool Char::IsASCII(unsigned char c)
+	{
+		return c < 0x80;
+	}
+
+
 	inline bool Char::IsTrail(unsigned char c)
 	{
 		return ((c >> 6) == 0x2);
