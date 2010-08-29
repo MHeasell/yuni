@@ -25,7 +25,7 @@ namespace Window
 
 		virtual bool initialize() { return Surface::OpenGL::initialize(); }
 		virtual void close() { Surface::OpenGL::release(); }
-		virtual Surface::OpenGL* surface() const { return const_cast<OpenGLCocoa*>(this); }
+		virtual Surface::OpenGL* surface() { return this; }
 
 		// virtual bool pollEvents();
 

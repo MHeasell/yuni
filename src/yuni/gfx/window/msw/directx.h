@@ -37,7 +37,7 @@ namespace Window
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(unsigned int width, unsigned int height);
-		virtual Surface::ASurface3D* renderer() const { return const_cast<DirectXMSW*>(this); }
+		virtual Surface::ASurface3D* surface() { return this; }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;

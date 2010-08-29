@@ -66,7 +66,7 @@ namespace Window
 		}
 
 		//! Get the render surface associated with this window
-		virtual Surface::ASurface* surface() const { return NULL; }
+		virtual Surface::ASurface* surface() { return NULL; }
 
 		/*!
 		** \brief Get whether the window is in the process of closing

@@ -103,7 +103,7 @@ namespace Window
 	}
 
 
-	void OpenGLX11::onBlitWL()
+	void OpenGLX11::blitWL()
 	{
 	//	XGetWindowAttributes(pDisplay, pWindow, &pWndAttr);
 		// Swap buffer when doublebuffer is enabled
