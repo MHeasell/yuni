@@ -316,7 +316,18 @@ namespace Yuni
 		** \param cstr A C-String
 		** \param size Size of the given string
 		*/
-		void assign(const char* const cstr, const Size size);
+		template<class StringT>
+		void assign(const StringT& str, const Size size);
+
+		/*!
+		** \brief Copy a raw C-String
+		**
+		** \param cstr A C-String
+		** \param size Size of the given string
+		** \param offset Offset of the first character to copy
+		*/
+		template<class StringT>
+		void assign(const StringT& str, const Size size, const Size offset);
 
 		/*!
 		** \brief Assign to the string all items within
@@ -412,7 +423,19 @@ namespace Yuni
 		** \param rhs Any supported value
 		** \param size Size of the container
 		*/
-		template<class StringT> void append(const StringT& s, const Size size);
+		template<class StringT>
+		void append(const StringT& s, const Size size);
+
+		/*!
+		** \brief Append to the end of the string a new value
+		**
+		** \param rhs Any supported value
+		** \param size Size of the container
+		** \param offset Offset of the first character to append
+		*/
+		template<class StringT>
+		void append(const StringT& s, const Size size, const Size offset);
+
 
 		//! \see template<class U> append(const U&, const Size)
 		template<class U> void write(const U& cstr, const Size size);
