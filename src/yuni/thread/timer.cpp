@@ -123,6 +123,15 @@ namespace Thread
 	}
 
 
+	void Timer::reload(unsigned int interval)
+	{
+		pTimerMutex.lock();
+		pTimeInterval = interval;
+		pTimerMutex.unlock();
+		pShouldReload = 1;
+	}
+
+
 	void Timer::reload(unsigned int interval, unsigned int cycles)
 	{
 		pTimerMutex.lock();
