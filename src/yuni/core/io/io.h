@@ -216,10 +216,11 @@ namespace IO
 	** \param out Variable where the result will be appended
 	** \param filename The original filename
 	** \param dot True to include the dot when extracting the extension
+	** \param clear True to clear `out` before processing
 	** \return True if an extension has been found
 	*/
 	template<class StringT1, class StringT2>
-	bool ExtractExtension(StringT1& out, const StringT2& filename, bool dot = true);
+	bool ExtractExtension(StringT1& out, const StringT2& filename, bool dot = true, bool clear = true);
 
 
 	/*!
@@ -232,7 +233,7 @@ namespace IO
 	*/
 	template<class StringT> bool IsAbsolute(const StringT& filename);
 
-	
+
 	/*!
 	** \brief Get if a path is relative
 	**

@@ -12,7 +12,7 @@ namespace Core
 {
 namespace IO
 {
-	
+
 	Yuni::Core::IO::NodeType TypeOf(const char* p, size_t length);
 	Yuni::Core::IO::NodeType TypeOfNotZeroTerminated(const char* p, size_t length);
 
@@ -202,8 +202,10 @@ namespace IO
 
 
 	template<class StringT1, class StringT2>
-	bool ExtractExtension(StringT1& out, const StringT2& filename, bool dot)
+	bool ExtractExtension(StringT1& out, const StringT2& filename, bool dot, bool clear)
 	{
+		if (clear)
+			out.clear();
 		// If the string is empty, the buffer may be invalid (NULL)
 		if (filename.size())
 		{
