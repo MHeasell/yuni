@@ -35,14 +35,14 @@ namespace Surface
 	void OpenGL::release()
 	{}
 
-	void OpenGL::resize(unsigned int width, unsigned int height)
+	void OpenGL::resize(size_t width, size_t height)
 	{
 		// Prevent A Divide By Zero
 		if (0 == height)
 			height = 1;
 
 		// Reset The Current Viewport
-		glViewport(0, 0, width, height);
+		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
 		// Select the Projection Matrix
 		glMatrixMode(GL_PROJECTION);
