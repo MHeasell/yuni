@@ -161,7 +161,7 @@ public:
 				forward();
 			}
 
-			Iterator(const NullIterator& s)
+			Iterator(const NullIterator&)
 				:pData(NULL)
 			{}
 
