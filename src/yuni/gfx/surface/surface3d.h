@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_SURFACE_ASURFACE3D_H__
-# define __YUNI_GFX_SURFACE_ASURFACE3D_H__
+#ifndef __YUNI_GFX_SURFACE_SURFACE3D_H__
+# define __YUNI_GFX_SURFACE_SURFACE3D_H__
 
 # include "surface.h"
 
@@ -18,31 +18,53 @@ namespace Surface
 	**
 	** This is also a way to define a common interface to OpenGL and DirectX.
 	*/
-	class ASurface3D: public ASurface
+	class ISurface3D: public ISurface
 	{
 	public:
-		typedef SmartPtr<ASurface3D> Ptr;
+		typedef SmartPtr<ISurface3D> Ptr;
 
 	protected:
 		/*!
 		** \brief Main constructor
 		*/
-		ASurface3D() : pPaused(false) {}
+		ISurface3D() : pPaused(false) {}
 
-	public:
-		//! \brief Virtual destructor
-		virtual ~ASurface3D() {}
+		/*!
+		** \brief Virtual destructor
+		*/
+		virtual ~ISurface3D() {}
 
 	private:
-		//! Private copy constructor
-		ASurface3D(const ASurface3D&);
+		/*!
+		** Private copy constructor
+		*/
+		ISurface3D(const ISurface3D&);
 
 	public:
 
 		//! Pause / Unpause rendering
 		virtual void pause(bool inPause) { pPaused = inPause; }
 
+
+		//! \name Vertical Synchronization (VSync)
+		//@{
+		//! Is vertical synchronization (VSync) currently active?
+		virtual bool verticalSync() const;
+		/*!
+		** \brief Activate / deactivate vertical synchronization (VSync)
+		**
+		** \param active New value for vertical sync, true for active, false for inactive.
+		** \return False if changing vertical sync failed. Yes, the stupid thing _can_ fail.
+		*/
+		virtual bool verticalSync(bool active);
+
+		//@}
+
+
 	protected:
+		//! Refresh the view
+		bool refresh();
+
 		//! Draw one frame to backbuffer
 		void drawFrame(const Yuni::Gfx::Scene& scene);
 
@@ -58,6 +80,9 @@ namespace Surface
 		//! Draw some triangles
 		virtual void drawTriangles(const Mesh::TriangleList& triangles) = 0;
 
+		//! Event callback for a change in frames per second. To be overridden.
+		virtual void onFPSChanged(unsigned int /* FPS */) {}
+
 		//! TEMPORARY
 		virtual void testDraw() = 0;
 
@@ -68,7 +93,7 @@ namespace Surface
 		//! 3D scene associated with this surface
 		Scene::Ptr pScene;
 
-	}; // ASurface3D
+	}; // ISurface3D
 
 
 
@@ -77,4 +102,4 @@ namespace Surface
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_SURFACE_ASURFACE3D_H__
+#endif // __YUNI_GFX_SURFACE_SURFACE3D_H__

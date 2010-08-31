@@ -20,15 +20,15 @@ namespace Window
 	/*!
 	** \brief Implementation of an MFC window that uses DirectX display
 	*/
-	class DirectXMSW: public AMSWindows, public Surface::ASurface3D
+	class DirectXMSW: public IMSWindows, public Surface::ISurface3D
 	{
 	public:
 		//! The Threading Policy
-		typedef AMSWindows::ThreadingPolicy ThreadingPolicy;
+		typedef IMSWindows::ThreadingPolicy ThreadingPolicy;
 
 	public:
 		DirectXMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:AMSWindows(title, width, height, bitDepth, fullScreen),
+			:IMSWindows(title, width, height, bitDepth, fullScreen),
 			pDXObject(NULL), pDXDevice(NULL), pVSync(false) // Deactivate vsync by default
 		{
 			pWindowClassName = "DirectX";
@@ -37,7 +37,7 @@ namespace Window
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(unsigned int width, unsigned int height);
-		virtual Surface::ASurface3D* surface() { return this; }
+		virtual Surface::ISurface3D* surface() { return this; }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;
@@ -53,7 +53,7 @@ namespace Window
 		virtual bool refresh() { return true; }
 		virtual void blitWL() { pDXDevice->Present(NULL, NULL, pHWnd, NULL); }
 
-		//! \name Overridden from ASurface3D
+		//! \name Overridden from ISurface3D
 		//@{
 		virtual void clearScreen();
 		virtual void resetView();

@@ -12,8 +12,13 @@ namespace Surface
 {
 
 
+	bool ISurface3D::refresh()
+	{
+		//drawFrame();
+		return true;
+	}
 
-	void ASurface3D::drawFrame(const Yuni::Gfx::Scene& scene)
+	void ISurface3D::drawFrame(const Yuni::Gfx::Scene& scene)
 	{
 		if (pPaused)
 			return;

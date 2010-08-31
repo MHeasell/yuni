@@ -13,7 +13,7 @@ namespace Window
 
 	bool DirectXMSW::initialize()
 	{
-		if (!AMSWindows::initialize())
+		if (!IMSWindows::initialize())
 			return false;
 
 		// Show the window
@@ -87,7 +87,7 @@ namespace Window
 	void DirectXMSW::close()
 	{
 		release();
-		AMSWindows::close();
+		IMSWindows::close();
 	}
 
 	void DirectXMSW::release()
@@ -107,7 +107,7 @@ namespace Window
 	void DirectXMSW::resize(unsigned int width, unsigned int height)
 	{
 		//ADirectX::resizeAPI(width, height);
-		AWindow::resize(width, height);
+		IWindow::resize(width, height);
 	}
 
 

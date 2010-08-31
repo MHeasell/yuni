@@ -16,7 +16,7 @@ namespace Window
 
 	bool OpenGLMSW::initialize()
 	{
-		if (!AMSWindows::initialize())
+		if (!IMSWindows::initialize())
 			return false;
 
 		// Did We Get A Device Context?
@@ -131,7 +131,7 @@ namespace Window
 			pHDC = NULL;
 		}
 
-		AMSWindows::close();
+		IMSWindows::close();
 		OpenGL::release();
 	}
 
@@ -139,7 +139,7 @@ namespace Window
 	void OpenGLMSW::resize(unsigned int width, unsigned int height)
 	{
 		OpenGL::resize(width, height);
-		AWindow::resize(width, height);
+		IWindow::resize(width, height);
 	}
 
 

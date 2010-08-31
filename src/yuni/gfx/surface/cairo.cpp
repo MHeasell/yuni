@@ -10,7 +10,9 @@ namespace Surface
 
 
 	bool Cairo::initialize()
-	{}
+	{
+		return true;
+	}
 
 	void Cairo::release()
 	{}
@@ -18,20 +20,15 @@ namespace Surface
 	void Cairo::resize(unsigned int width, unsigned int height)
 	{}
 
-	template<typename ColorT>
-	virtual void Cairo::clearColor(ColorT& newColor)
+	void Cairo::clearColor(Color::RGB<uint8>& newColor)
 	{}
 
-	virtual void Cairo::clearScreen()
+	void Cairo::clearScreen()
 	{}
 
-
-	}; // Cairo
 
 
 
 } // namespace Surface
 } // namespace Gfx
 } // namespace Yuni
-
-#endif // __YUNI_GFX_SURFACE_CAIRO_H__

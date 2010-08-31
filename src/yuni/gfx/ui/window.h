@@ -1,31 +1,29 @@
-#ifndef __YUNI_GFX_WINDOW_WINDOW_H__
-# define __YUNI_GFX_WINDOW_WINDOW_H__
+#ifndef __YUNI_GFX_UI_WINDOW_H__
+# define __YUNI_GFX_UI_WINDOW_H__
 
 # include "../../yuni.h"
+# include "component.h"
+# include "desktop.h"
 # include "../device.h"
 # include "../../core/string.h"
 # include "../../core/event/event.h"
 # include "../surface/surface.h"
-# include "../ui/component.h"
-# include "../ui/desktop.h"
+
 
 namespace Yuni
 {
-namespace Gfx
-{
 
 	// Forward declaration
-	class Engine;
+	class Gfx::Engine;
 
-
-namespace Window
+namespace UI
 {
 
 
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class IWindow: public UI::IComponent
+	class IWindow: IComponent
 	{
 
 	public:
@@ -60,7 +58,7 @@ namespace Window
 
 
 		//! Get the UI desktop, basis for all UI in this window
-		virtual UI::Desktop::Ptr desktop() { return pUI; }
+		virtual Desktop desktop() { return pUI; }
 
 
 		//! \name Title of the Window
@@ -92,9 +90,6 @@ namespace Window
 		Event<void (unsigned char /* key */)> onKeyPressed;
 		Event<void (unsigned char /* key */)> onKeyUp;
 
-	protected:
-		virtual void onFPSChanged(unsigned int /* FPS */) {}
-
 		//@}
 
 	protected:
@@ -105,23 +100,19 @@ namespace Window
 		*/
 		virtual bool refresh() = 0;
 
-		//! Swap the current buffer with the backbuffer
-		virtual void blitWL() = 0;
-
 		//! Method call when the title of the window has been changed
 		virtual void onInternalTitleChangedWL() = 0;
 
 	protected:
+
+		/*!
+		** \brief Title of the window
+		*/
 		String pTitle;
 		unsigned int pBitDepth;
 		bool pFullScreen;
 		bool pClosing;
 
-		//! UI tree
-		UI::Desktop* pUI;
-
-		// A friend !
-		friend class Gfx::Engine;
 
 	}; // class IWindow
 
@@ -137,9 +128,7 @@ namespace Window
 
 
 
-
-} // namespace Window
-} // namespace Gfx
+} // namespace UI
 } // namespace Yuni
 
 # include "window.hxx"

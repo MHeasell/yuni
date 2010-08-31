@@ -17,12 +17,12 @@ namespace Window
 	namespace
 	{
 
-		typedef std::map<HWND, AMSWindows*> WindowList;
+		typedef std::map<HWND, IMSWindows*> WindowList;
 
 		// This list contains all MFC windows created
 		WindowList sWindowList;
 
-		AMSWindows* GetWindow(HWND handle)
+		IMSWindows* GetWindow(HWND handle)
 		{
 			WindowList::iterator it;
 			for (it = sWindowList.begin(); it != sWindowList.end(); ++it)
@@ -33,7 +33,7 @@ namespace Window
 			return NULL;
 		}
 
-		void AddWindow(HWND handle, AMSWindows* window)
+		void AddWindow(HWND handle, IMSWindows* window)
 		{
 			if (!window)
 				return;
@@ -57,7 +57,7 @@ namespace Window
 		*/
 		LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
-			AMSWindows* window = GetWindow(hWnd);
+			IMSWindows* window = GetWindow(hWnd);
 			// Check for Windows messages
 			switch (uMsg)
 			{
@@ -99,7 +99,7 @@ namespace Window
 
 
 
-	bool AMSWindows::initialize()
+	bool IMSWindows::initialize()
 	{
 		// Windows Class Structure
 		WNDCLASSEX wc;
@@ -225,7 +225,7 @@ namespace Window
 	}
 
 
-	void AMSWindows::close()
+	void IMSWindows::close()
 	{
 		// Are We In Fullscreen Mode?
 		if (pFullScreen)
@@ -253,7 +253,7 @@ namespace Window
 		}
 	}
 
-	bool AMSWindows::pollEvents()
+	bool IMSWindows::pollEvents()
 	{
 		MSG msg;
 		bool msgProcessed = false;
@@ -280,7 +280,7 @@ namespace Window
 	}
 
 
-	void AMSWindows::onInternalTitleChangedWL()
+	void IMSWindows::onInternalTitleChangedWL()
 	{
 		SetWindowText(pHWnd, pTitle.c_str());
 	}

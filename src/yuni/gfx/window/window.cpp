@@ -27,10 +27,10 @@ namespace Gfx
 namespace Window
 {
 
-	AWindow* Create(const String& title, const Device::Ptr& device)
+	IWindow* Create(const String& title, const Device::Ptr& device)
 	{
 		Yuni::Device::Display::Resolution::Ptr res = device->resolution();
-		AWindow* wnd = NULL;
+		IWindow* wnd = NULL;
 		switch (device->type())
 		{
 			# if defined(YUNI_WINDOWSYSTEM_MSW) && defined(YUNI_USE_DIRECTX)
