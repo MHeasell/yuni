@@ -1055,6 +1055,40 @@ namespace Yuni
 		void erase(const Size offset, const Size len);
 
 		/*!
+		** \brief Replace all occurences of a given char by another one
+		**
+		** \param from The character to search
+		** \param to   The replacement
+		*/
+		void replace(char from, char to);
+
+		/*!
+		** \brief Replace all occurences of a given char by another one
+		**
+		** \param offset The offset where to start from
+		** \param from The character to search
+		** \param to   The replacement
+		*/
+		void replace(Size offset, char from, char to);
+
+		/*!
+		** \brief Replace all occurences of a given char by another one (case insensitive)
+		**
+		** \param from The character to search
+		** \param to   The replacement
+		*/
+		void ireplace(char from, char to);
+
+		/*!
+		** \brief Replace all occurences of a given char by another one (case insensitive)
+		**
+		** \param offset The offset where to start from
+		** \param from The character to search
+		** \param to   The replacement
+		*/
+		void ireplace(Size offset, char from, char to);
+
+		/*!
 		** \brief Remove the 'n' first characters
 		*/
 		void consume(const Size n);

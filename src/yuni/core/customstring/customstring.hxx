@@ -1275,6 +1275,56 @@ namespace Yuni
 	}
 
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::replace(char from, char to)
+	{
+		for (Size i = 0; i != AncestorType::size; ++i)
+		{
+			if (from == AncestorType::data[i])
+				AncestorType::data[i] = to;
+		}
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(char from, char to)
+	{
+		from = tolower(from);
+		for (Size i = 0; i != AncestorType::size; ++i)
+		{
+			if (from == AncestorType::data[i])
+				AncestorType::data[i] = to;
+		}
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::replace(Size offset, char from, char to)
+	{
+		for (Size i = offset; i != AncestorType::size; ++i)
+		{
+			if (from == AncestorType::data[i])
+				AncestorType::data[i] = to;
+		}
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(Size offset, char from, char to)
+	{
+		from = tolower(from);
+		for (Size i = offset; i < AncestorType::size; ++i)
+		{
+			if (from == AncestorType::data[i])
+				AncestorType::data[i] = to;
+		}
+	}
+
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
