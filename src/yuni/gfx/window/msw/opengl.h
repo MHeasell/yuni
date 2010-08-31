@@ -19,15 +19,15 @@ namespace Window
 	/*!
 	** \brief Microsoft Windows-specific window, using an OpenGL surface
 	*/
-	class OpenGLMSW: public AMSWindows, public Surface::OpenGL
+	class OpenGLMSW: public IMSWindows, public Surface::OpenGL
 	{
 	public:
 		//! The Threading Policy
-		typedef AMSWindows::ThreadingPolicy ThreadingPolicy;
+		typedef IMSWindows::ThreadingPolicy ThreadingPolicy;
 
 	public:
 		OpenGLMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:AMSWindows(title, width, height, bitDepth, fullScreen)
+			:IMSWindows(title, width, height, bitDepth, fullScreen)
 		{
 			pWindowClassName = "OpenGL";
 		}

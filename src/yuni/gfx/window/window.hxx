@@ -10,37 +10,24 @@ namespace Window
 {
 
 
-	inline AWindow::AWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-		:pTitle(title), pWidth(width), pHeight(height), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false)
+	inline IWindow::IWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
+		: IComponent(width, height), pTitle(title), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false), pUI(NULL)
 	{}
 
 
-	inline AWindow::~AWindow()
+	inline IWindow::~IWindow()
 	{
 		destroyBoundEvents();
 	}
 
 
-	inline bool AWindow::closing() const
+	inline bool IWindow::closing() const
 	{
 		return pClosing;
 	}
 
-
-	inline bool AWindow::verticalSync() const
-	{
-		return true;
-	}
-
-
-	inline bool AWindow::verticalSync(bool)
-	{
-		return false;
-	}
-
-
 	template<typename C>
-	inline void AWindow::title(const C& newTitle)
+	inline void IWindow::title(const C& newTitle)
 	{
 		// Resetting with the new value
 		pTitle = newTitle;

@@ -102,10 +102,10 @@ namespace Gfx
 		if (!pMainWindow)
 			return;
 
-		pMainWindow->verticalSync(false);
-		onFPSChanged.connect(pMainWindow, &Window::AWindow::onFPSChanged);
+		//pMainWindow->verticalSync(false);
+		onFPSChanged.connect(pMainWindow, &Window::IWindow::onFPSChanged);
 
-		unsigned int lastFPS = 0;
+		//unsigned int lastFPS = 0;
 
 		// Main loop
 		while (!pMainWindow->closing())

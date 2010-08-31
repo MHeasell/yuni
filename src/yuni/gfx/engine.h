@@ -117,7 +117,7 @@ namespace Gfx
 		//! Application title
 		String pTitle;
 		//! Main window
-		Window::AWindow* pMainWindow;
+		Window::IWindow* pMainWindow;
 
 	}; // class Engine
 

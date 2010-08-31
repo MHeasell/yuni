@@ -22,15 +22,15 @@ namespace Window
 	**
 	** Inherited classes: OpenGLMSW and DirectXMSW
 	*/
-	class AMSWindows: public AWindow
+	class IMSWindows: public IWindow
 	{
 	public:
 		//! The Threading Policy
-		typedef AWindow::ThreadingPolicy ThreadingPolicy;
+		typedef IWindow::ThreadingPolicy ThreadingPolicy;
 
 	public:
-		AMSWindows(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:AWindow(title, width, height, bitDepth, fullScreen)
+		IMSWindows(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
+			:IWindow(title, width, height, bitDepth, fullScreen)
 		{}
 
 		virtual bool initialize();

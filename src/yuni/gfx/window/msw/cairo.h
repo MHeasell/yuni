@@ -19,15 +19,15 @@ namespace Window
 	/*!
 	** \brief Microsoft Windows-specific window, using a Cairo surface to render
 	*/
-	class CairoMSW: public AMSWindows, public Surface::Cairo
+	class CairoMSW: public IMSWindows, public Surface::Cairo
 	{
 	public:
 		//! The Threading Policy
-		typedef AMSWindows::ThreadingPolicy ThreadingPolicy;
+		typedef IMSWindows::ThreadingPolicy ThreadingPolicy;
 
 	public:
 		CairoMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:AMSWindows(title, width, height, bitDepth, fullScreen)
+			:IMSWindows(title, width, height, bitDepth, fullScreen)
 		{
 			pWindowClassName = "Cairo";
 		}
@@ -35,7 +35,7 @@ namespace Window
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(unsigned int width, unsigned int height);
-		virtual Surface::Cairo* surface() { return this; }
+		virtual Surface::Cairo* surface2D() { return this; }
 
 		//! Is vertical synchronization (VSync) active?
 		virtual bool verticalSync() const;
@@ -49,10 +49,12 @@ namespace Window
 		** \returns True if the window was refreshed, false if it was not necessary
 		*/
 		virtual bool refresh() { return true; }
+
 		virtual void blitWL();
 
-	private:
-		HDC pHDC;
+	protected:
+		//! The Cairo surface
+		cairo_surface_t* pSurface;
 
 	}; // class CairoMSW
 

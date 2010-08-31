@@ -17,7 +17,7 @@ namespace Surface
 	**
 	** For the moment, this is a naive unoptimized implementation.
 	*/
-	class OpenGL: public ASurface3D
+	class OpenGL: public ISurface3D
 	{
 	protected:
 		//! Initalize OpenGL
@@ -50,7 +50,7 @@ namespace Surface
 		//! TEMPORARY
 		virtual void testDraw();
 
-	}; // OpenGL
+	}; // class OpenGL
 
 
 

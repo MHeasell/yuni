@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_SURFACE_ASURFACE_H__
-# define __YUNI_GFX_SURFACE_ASURFACE_H__
+#ifndef __YUNI_GFX_SURFACE_SURFACE_H__
+# define __YUNI_GFX_SURFACE_SURFACE_H__
 
 # include "../../yuni.h"
 # include "../../core/smartptr.h"
@@ -19,25 +19,29 @@ namespace Surface
 	/*!
 	** \brief A drawing surface is where we can draw stuff for display
 	**
-	** This is a common interface to Cairo, OpenGL and DirectX.
+	** This is a common interface to Cairo, OpenGL and DirectX backends.
 	*/
-	class ASurface
+	class ISurface
 	{
 	public:
-		typedef SmartPtr<ASurface> Ptr;
+		typedef SmartPtr<ISurface> Ptr;
 
 	protected:
 		/*!
 		** \brief Main constructor
 		*/
-		ASurface() {}
+		ISurface() {}
 
-	public:
-		//! \brief Virtual destructor
-		virtual ~ASurface() {}
+		/*!
+		** \brief Virtual destructor
+		*/
+		virtual ~ISurface() {}
 
 	private:
-		ASurface(const ASurface&);
+		/*!
+		** \brief Private copy cosntructor
+		*/
+		ISurface(const ISurface&);
 
 	public:
 		//! Initialize the surface
@@ -47,24 +51,10 @@ namespace Surface
 		virtual void release() = 0;
 
 		//! Resize the viewport
-		virtual void resize(unsigned int width, unsigned int height) = 0;
+		virtual void resize(size_t width, size_t height) = 0;
 
-		//! Render a frame
-		virtual void drawFrame(const Yuni::Gfx::Scene& scene);
-
-		//! Get the number of frames rendered in the last second
-		unsigned int instantFPS()
-		{
-			// TODO FPS counter missing
-			return 0;
-		}
-
-		//! Get the mean number of frames per second since start of rendering
-		unsigned int meanFPS()
-		{
-			// TODO FPS counter missing
-			return 0;
-		}
+		//! Refresh view
+		virtual bool refresh() = 0;
 
 		//! Set the default color for clearing the surface
 		virtual void clearColor(Color::RGB<uint8>& newColor);
@@ -76,7 +66,7 @@ namespace Surface
 	protected:
 		bool pPaused;
 
-	}; // ASurface
+	}; // class ISurface
 
 
 
@@ -85,4 +75,4 @@ namespace Surface
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_SURFACE_ASURFACE_H__
+#endif // __YUNI_GFX_SURFACE_SURFACE_H__

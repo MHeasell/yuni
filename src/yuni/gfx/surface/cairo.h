@@ -16,7 +16,7 @@ namespace Surface
 	/*!
 	** \brief A Cairo surface for 2D vector-based drawing
 	*/
-	class Cairo: public ASurface
+	class Cairo: public ISurface
 	{
 	protected:
 		//! Initalize Cairo surface
