@@ -63,7 +63,7 @@ namespace UI
 		**
 		** This is implementation-dependent
 		*/
-		virtual void resize(unsigned int width, unsigned int height)
+		virtual void resize(size_t width, size_t height)
 		{
 			pWidth = width;
 			pHeight = height;

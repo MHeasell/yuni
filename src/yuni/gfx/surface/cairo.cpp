@@ -17,7 +17,7 @@ namespace Surface
 	void Cairo::release()
 	{}
 
-	void Cairo::resize(unsigned int width, unsigned int height)
+	void Cairo::resize(size_t width, size_t height)
 	{}
 
 	void Cairo::clearColor(Color::RGB<uint8>& newColor)

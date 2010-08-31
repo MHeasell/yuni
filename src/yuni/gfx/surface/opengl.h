@@ -27,7 +27,7 @@ namespace Surface
 		virtual void release();
 
 		//! Resize the viewport
-		virtual void resize(unsigned int width, unsigned int height);
+		virtual void resize(size_t width, size_t height);
 
 		//! Choose a color to clear the screen with
 		virtual void clearColor(Color::RGB<uint8>& newColor);

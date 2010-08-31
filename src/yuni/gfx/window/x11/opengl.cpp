@@ -48,8 +48,9 @@ namespace Window
 			pAttr.override_redirect = True;
 		}
 
-		pWindow = XCreateWindow(pDisplay, root, 30, 30, pWidth, pHeight,
-			0, vinfo->depth, CopyFromParent, vinfo->visual,
+		pWindow = XCreateWindow(pDisplay, root, 30, 30,
+			(unsigned int)pWidth, (unsigned int)pHeight, 0,
+			vinfo->depth, CopyFromParent, vinfo->visual,
 			CWBackPixel | CWBorderPixel | CWColormap | CWEventMask, &pAttr);
 
 		XMapWindow(pDisplay, pWindow);

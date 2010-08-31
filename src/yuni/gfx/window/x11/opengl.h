@@ -21,21 +21,23 @@ namespace Window
 	/*!
 	** \brief Specialized window implementation for GLX (OpenGL-X11)
 	*/
-	class OpenGLX11: public AWindow, public Surface::OpenGL
+	class OpenGLX11: public IWindow, public Surface::OpenGL
 	{
 	public:
 		OpenGLX11(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:AWindow(title, width, height, bitDepth, fullScreen)
+			:IWindow(title, width, height, bitDepth, fullScreen)
 		{}
 
 		virtual bool initialize();
 
 		virtual void close();
 
-		virtual void resize(unsigned int width, unsigned int height)
+		virtual void resize(size_t width, size_t height)
 		{
+			IWindow::resize(width, height);
 			Surface::OpenGL::resize(width, height);
 		}
+
 		virtual Surface::OpenGL* surface() { return this; }
 
 		//! Is vertical synchronization (VSync) active?
