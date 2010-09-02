@@ -26,16 +26,6 @@ namespace Window
 		return pClosing;
 	}
 
-	template<typename C>
-	inline void IWindow::title(const C& newTitle)
-	{
-		// Resetting with the new value
-		pTitle = newTitle;
-		// Updating the change according to the real implementation
-		onInternalTitleChangedWL();
-	}
-
-
 
 } // namespace Window
 } // namespace Gfx
