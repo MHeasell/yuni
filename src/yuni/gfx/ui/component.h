@@ -15,11 +15,12 @@ namespace UI
 	** Defines dimension and position of the component,
 	** and various common behaviours.
 	*/
-	class IComponent : public IEventObserver<IComponent>, public Policy::ObjectLevelLockable<IComponent>
+	class IComponent : public IEventObserver<IComponent>,
+		public Core::TreeN<IComponent>
 	{
 	public:
 		//! The threading policy
-		typedef Policy::ObjectLevelLockable<IComponent> ThreadingPolicy;
+		typedef Core::TreeN<IComponent>::ThreadingPolicy ThreadingPolicy;
 
 
 	public:
@@ -35,7 +36,7 @@ namespace UI
 		** \brief Constructor with dimensions
 		*/
 		IComponent(size_t width, size_t height)
-			: pPosition(0, 0), pWidth(width), pHeight(height)
+			: pPosition(0, 0), pWidth(width), pHeight(height), pModified(true)
 		{}
 
 		/*!
@@ -43,7 +44,7 @@ namespace UI
 		*/
 		template<typename T, typename U>
 		IComponent(T x, U y, size_t width, size_t height)
-			: pPosition(x, y), pWidth(width), pHeight(height)
+			: pPosition(x, y), pWidth(width), pHeight(height), pModified(true)
 		{}
 
 		/*!
@@ -51,8 +52,11 @@ namespace UI
 		*/
 		template<typename T>
 		IComponent(Point2D<T> pos, size_t width, size_t height)
-			: pPosition(pos), pWidth(width), pHeight(height)
+			: pPosition(pos), pWidth(width), pHeight(height), pModified(true)
 		{}
+
+		//! Virtual destructor
+		virtual ~IComponent() {}
 		//@}
 
 
@@ -65,8 +69,24 @@ namespace UI
 		*/
 		virtual void resize(size_t width, size_t height)
 		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pWidth = width;
 			pHeight = height;
+		}
+
+		/*!
+		** \brief Inform the component that other representations are up to date
+		**
+		** Once an internal representation of the component has been updated,
+		** the component should not be marked "modified" anymore.
+		**
+		** A clever trick will be required on call to avoid losing modifications
+		** due to multiple threads updating the status.
+		*/
+		virtual void synchronized()
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pModified = false;
 		}
 		//@}
 
@@ -86,6 +106,11 @@ namespace UI
 		** \brief Height of the component
 		*/
 		size_t pHeight;
+
+		/*!
+		** \brief Store if the component has been modified
+		*/
+		bool pModified;
 
 	}; // class IComponent
 

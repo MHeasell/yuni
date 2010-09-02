@@ -23,18 +23,23 @@ namespace UI
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class IWindow: IComponent
+	class Window: public IComponent
 	{
-
 	public:
 		//! \name Constructor & Destructor
 		//@{
 		/*!
+		** \brief Short constructor
+		*/
+		Window(const String& title);
+
+		/*!
 		** \brief Constructor
 		*/
-		IWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen);
-		//! Destructor
-		virtual ~IWindow();
+		Window(const String& title, size_t width, size_t height);
+
+		//! Virtual destructor
+		virtual ~Window();
 		//@}
 
 		/*!
@@ -49,7 +54,7 @@ namespace UI
 		**
 		** This is implementation-dependent
 		*/
-		virtual void close() = 0;
+		virtual void close();
 
 		/*!
 		** \brief Get whether the window is in the process of closing
@@ -57,16 +62,14 @@ namespace UI
 		bool closing() const;
 
 
-		//! Get the UI desktop, basis for all UI in this window
-		virtual Desktop desktop() { return pUI; }
-
-
 		//! \name Title of the Window
 		//@{
 		//! Get the Title of the window
 		const String& title() const { return pTitle; }
+
 		//! Set the title of the window
-		template<typename C> void title(const C& newTitle);
+		template<typename StringT>
+		void title(const StringT& newTitle);
 		//@}
 
 
@@ -93,15 +96,8 @@ namespace UI
 		//@}
 
 	protected:
-		/*!
-		** \brief Refresh the window content if necessary
-		**
-		** \returns True if the window was refreshed, false if it was not necessary
-		*/
-		virtual bool refresh() = 0;
-
-		//! Method call when the title of the window has been changed
-		virtual void onInternalTitleChangedWL() = 0;
+		//! Launch an event when the title has changed
+		void fireInternalTitleChangedWL() { // TODO }
 
 	protected:
 
@@ -109,22 +105,19 @@ namespace UI
 		** \brief Title of the window
 		*/
 		String pTitle;
-		unsigned int pBitDepth;
-		bool pFullScreen;
+
+		/*!
+		** \brief Store if the title has changed
+		*/
+		bool pTitleModified;
+
+		/*!
+		** \brief Is the window currently closing ?
+		*/
 		bool pClosing;
 
 
-	}; // class IWindow
-
-
-
-	/*!
-	** \brief Create a platform-dependent window.
-	**
-	** The characteristics of this window and its associated rendering surface
-	** will be determined using the device.
-	*/
-	IWindow* Create(const String& title, const Device::Ptr& device);
+	}; // class Window
 
 
 
