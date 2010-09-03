@@ -6,8 +6,8 @@
 # include "../../core/string.h"
 # include "../../core/event/event.h"
 # include "../surface/surface.h"
-# include "../ui/component.h"
-# include "../ui/desktop.h"
+# include "../../ui/component.h"
+# include "../../ui/desktop.h"
 
 namespace Yuni
 {

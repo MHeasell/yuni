@@ -17,10 +17,11 @@ namespace Surface
 	void Cairo::release()
 	{}
 
-	void Cairo::resize(size_t width, size_t height)
-	{}
+	void Cairo::resize(size_t, size_t)
+	{
+	}
 
-	void Cairo::clearColor(Color::RGB<uint8>& newColor)
+	void Cairo::clearColor(Color::RGB<uint8>&)
 	{}
 
 	void Cairo::clearScreen()

@@ -1,21 +1,14 @@
-#ifndef __YUNI_GFX_UI_WINDOW_H__
-# define __YUNI_GFX_UI_WINDOW_H__
+#ifndef __YUNI_UI_WINDOW_H__
+# define __YUNI_UI_WINDOW_H__
 
-# include "../../yuni.h"
+# include "../yuni.h"
+# include "../core/string.h"
+# include "../core/event/event.h"
 # include "component.h"
-# include "desktop.h"
-# include "../device.h"
-# include "../../core/string.h"
-# include "../../core/event/event.h"
-# include "../surface/surface.h"
 
 
 namespace Yuni
 {
-
-	// Forward declaration
-	class Gfx::Engine;
-
 namespace UI
 {
 
@@ -26,22 +19,44 @@ namespace UI
 	class Window: public IComponent
 	{
 	public:
+		//! Window vector
+		typedef std::vector<Window> Vector;
+
+
+	public:
 		//! \name Constructor & Destructor
 		//@{
 		/*!
 		** \brief Short constructor
 		*/
-		Window(const String& title);
+		template<typename StringT>
+		Window(const StringT& title);
 
 		/*!
-		** \brief Constructor
+		** \brief Constructor with dimensions
 		*/
-		Window(const String& title, size_t width, size_t height);
+		template<typename StringT>
+		Window(const StringT& title, size_t width, size_t height);
+
+		/*!
+		** \brief Constructor with start position coordinates
+		*/
+		template<typename StringT, typename NumberT, typename NumberT2>
+		Window(const StringT& title, NumberT x, NumberT2 y, size_t width, size_t height);
+
+		/*!
+		** \brief Constructor with start position as a point
+		*/
+		template<typename StringT, typename NumberT>
+		Window(const StringT& title, const Point2D<NumberT>& pos, size_t width, size_t height);
 
 		//! Virtual destructor
 		virtual ~Window();
 		//@}
 
+
+		//! \name Methods
+		//@{
 		/*!
 		** \brief Init the window
 		**
@@ -60,6 +75,23 @@ namespace UI
 		** \brief Get whether the window is in the process of closing
 		*/
 		bool closing() const;
+
+		/*!
+		** \brief Inform the component that other representations are up to date
+		**
+		** Once an internal representation of the component has been updated,
+		** the component should not be marked "modified" anymore.
+		**
+		** A clever trick will be required on call to avoid losing modifications
+		** due to multiple threads updating the status.
+		*/
+		virtual void synchronized()
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pModified = false;
+			pTitleModified = false;
+		}
+		//@}
 
 
 		//! \name Title of the Window
@@ -96,10 +128,6 @@ namespace UI
 		//@}
 
 	protected:
-		//! Launch an event when the title has changed
-		void fireInternalTitleChangedWL() { // TODO }
-
-	protected:
 
 		/*!
 		** \brief Title of the window
@@ -126,4 +154,4 @@ namespace UI
 
 # include "window.hxx"
 
-#endif // __YUNI_GFX_WINDOW_WINDOW_H__
+#endif // __YUNI_UI_WINDOW_H__
