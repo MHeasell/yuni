@@ -42,15 +42,19 @@ Set(SRC_GFX3D
 		gfx/surface/opengl.h gfx/surface/opengl.cpp
 		gfx/surface/cairo.h gfx/surface/cairo.cpp
 
-		# UI
-		gfx/ui/application.h
-		gfx/ui/component.h
-		gfx/ui/desktop.h
-		gfx/ui/window.h
-
 		# Font
 		gfx/text/font.h gfx/text/label.h
 	)
+
+IF (YUNI_MODULE_UI)
+	LIST(APPEND SRC_GFX3D
+		# UI
+		ui/application.h
+		ui/component.h
+		ui/desktop.h
+		ui/window.h ui/window.hxx)
+ENDIF()
+
 
 IF(WIN32 OR WIN64)
 	LIST(APPEND SRC_GFX3D gfx/text/wgl.h gfx/text/wgl.cpp)

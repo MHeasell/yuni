@@ -1,8 +1,9 @@
 #ifndef __YUNI_GFX_UI_COMPONENT_H__
 # define __YUNI_GFX_UI_COMPONENT_H__
 
-# include "../../yuni.h"
-# include "../../core/point2D.h"
+# include "../yuni.h"
+# include "../thread/policy.h"
+# include "../core/point2D.h"
 
 namespace Yuni
 {
@@ -15,13 +16,11 @@ namespace UI
 	** Defines dimension and position of the component,
 	** and various common behaviours.
 	*/
-	class IComponent : public IEventObserver<IComponent>,
-		public Core::TreeN<IComponent>
+	class IComponent : public IEventObserver<IComponent>
 	{
 	public:
-		//! The threading policy
-		typedef Core::TreeN<IComponent>::ThreadingPolicy ThreadingPolicy;
-
+		//! A class name is a string tag representing a type of component
+		typedef CustomString<64, false, false> ClassName;
 
 	public:
 		//! \name Constructor & Destructor
@@ -51,7 +50,7 @@ namespace UI
 		** \brief Full constructor
 		*/
 		template<typename T>
-		IComponent(Point2D<T> pos, size_t width, size_t height)
+		IComponent(Point2D<T>& pos, size_t width, size_t height)
 			: pPosition(pos), pWidth(width), pHeight(height), pModified(true)
 		{}
 
@@ -91,7 +90,29 @@ namespace UI
 		//@}
 
 
+		//! \name Accessors
+		//@{
+		/*!
+		** \brief Get the class name (identifier for the type of component)
+		*/
+		const ClassName& className() const
+		{
+			return pClass;
+		}
+
+		/*!
+		** \brief Get the class name (identifier for the type of component)
+		*/
+		virtual void className(ClassName&)
+		{
+			pClass.clear(); // Invalid
+		}
+		//@}
+
+
 	protected:
+		ClassName pClass;
+
 		/*!
 		** \brief Position of the component relative to its parent
 		*/
