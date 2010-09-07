@@ -259,9 +259,19 @@
 #		define YUNI_VA_COPY(dst, src)	  (*(dst) = *(src))
 #	elif defined(YUNI_VA_COPY_AS_ARRAY)
 #		define YUNI_VA_COPY(dst, src)	  memmove((dst), (src), sizeof (va_list))
-#	else // va_list is a pointer
+#	else /* va_list is a pointer */
 #		define YUNI_VA_COPY(dst, src)	  ((dst) = (src))
 #	endif
+# endif
+
+
+/* YUNI_LIB_EXPORT | YUNI_LIB_IMPORT */
+# ifdef YUNI_OS_MSVC
+#	define YUNI_LIB_EXPORT  __declspec(dllexport)
+#	define YUNI_LIB_IMPORT  __declspec(dllimport)
+# else
+#	define YUNI_LIB_EXPORT
+#	define YUNI_LIB_IMPORT
 # endif
 
 
