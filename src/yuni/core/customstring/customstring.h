@@ -954,6 +954,11 @@ namespace Yuni
 		template<class StringT> bool startsWith(const StringT& s) const;
 
 		/*!
+		** \brief Get if a given char can be found at the begining
+		*/
+		bool startsWith(char c) const;
+
+		/*!
 		** \brief Get if a given string can be found at the end
 		*/
 		bool endsWith(const char* const cstr, const Size len) const;
@@ -963,6 +968,12 @@ namespace Yuni
 		** \param s Any string
 		*/
 		template<class StringT> bool endsWith(const StringT& s) const;
+
+		/*!
+		** \brief Get if a given string can be found at the end
+		** \param c Any char
+		*/
+		bool endsWith(char c) const;
 		//@}
 
 

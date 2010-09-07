@@ -947,6 +947,14 @@ namespace Yuni
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::startsWith(char c) const
+	{
+		return (0 != AncestorType::size) && (AncestorType::data[0] == c);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline bool
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::endsWith(const char* const cstr,
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
 	{
@@ -966,6 +974,15 @@ namespace Yuni
 
 		return endsWith(Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::Value(s));
 	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::endsWith(char c) const
+	{
+		return (0 != AncestorType::size) && (AncestorType::data[AncestorType::size - 1] == c);
+	}
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
