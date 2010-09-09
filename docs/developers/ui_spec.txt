@@ -1,0 +1,86 @@
+
+										YUNI USER INTERFACE
+										FUNCTIONAL AND TECHNICAL SPECIFICATION
+
+Started on:   2010-09-09, by Loom
+Last version: 2010-09-09, by Loom
+
+Scope of this document :
+========================
+
+This document describes the User Interface (UI), both in functional terms
+(what features it should include, what the behaviour should be) and
+technical terms (how the code should be written, how the classes will
+interact).
+
+
+
+I) Definitions :
+================
+
+  User Interface
+  ==============
+UI is a specific term that describes the presentation, interaction and
+behaviour of graphic controls (windows, buttons, panels, etc) that contain
+one another, launch events when they change state, and can be seen and often
+modified by the user directly.
+
+
+  UI tree
+  =======
+A UI tree is an arborescent structure containing graphic controls, where each
+node is a container for its children. In order for this tree to be displayed,
+the root node must be a Desktop, and must be inserted in a context. A UI tree
+may be inserted in several contexts at the same time.
+
+
+  Desktop
+  =======
+A desktop is a component that can contain applications. It is typically the
+root of a UI tree, but does not have to be.
+
+
+  Context
+  =======
+A context defines how a UI tree will be displayed to screen. It is a combination
+of a given window system (which is OS-dependent) and a graphics back-end
+(OpenGL or Cairo under all platforms, DirectX under Windows). The context holds
+internal representations of the UI windows as implemented in this given context.
+
+
+II) Use cases :
+===============
+TODO
+
+
+III) Class hierarchy :
+======================
+
+UI::IComponent
+|
+ -> UI::IControl
+|   |
+|    -> UI::Context3D::IContext3D
+|   |    |
+|   |     -> UI::Context3D::OpenGL
+|   |    |
+|   |     -> UI::Context3D::DirectX
+|   |
+|    -> UI::Button
+|
+ -> UI::IControl, UI::ControlWithItems
+    |
+     -> UI::Window
+    |
+     -> UI::IPanel
+         |
+          -> UI::Panel
+
+IV) Directory structure :
+=========================
+TODO
+
+
+V) Data synchronization :
+=========================
+TODO
