@@ -5,6 +5,10 @@
 #include <ctype.h>
 #include <string.h>
 
+#ifndef YUNI_OS_WINDOWS
+# include <unistd.h>
+#endif
+
 
 
 namespace Yuni
@@ -107,10 +111,9 @@ namespace IO
 		# else
 		if (len < 1020)
 		{
-			char p [1024];
-			(void)::memcpy(p, filename, len * sizeof(char));
-			p[len] = '\0';
-			return Yuni::Private::Core::IO::Size(p, len, value);
+			CustomString<1024, false, true> copy;
+			copy.assign(filename, len);
+			return Yuni::Private::Core::IO::Size(copy.c_str(), copy.size(), value);
 		}
 		else
 		{
@@ -123,6 +126,77 @@ namespace IO
 		}
 		# endif
 	}
+
+
+
+	Yuni::Core::IO::IOError DeleteFile(const char* const filename, unsigned int len)
+	{
+		if (!len)
+			return Yuni::Core::IO::ioErrUnknown;
+
+		# ifndef YUNI_OS_WINDOWS
+		if (unlink(filename))
+			return Yuni::Core::IO::ioErrUnknown;
+		return Yuni::Core::IO::ioErrNone;
+		# else
+
+		const char* const p = filename;
+
+		if (p[len - 1] == '\\' || p[len - 1] == '/')
+			--len;
+
+		// Driver letters
+		if (len == 2 && p[1] == ':')
+			return Yuni::Core::IO::ioErrBadFilename;
+
+		CustomString<>  norm;
+		Yuni::Core::IO::Normalize(norm, p, len);
+		// Conversion into wchar_t
+		wchar_t* buffer = new wchar_t[norm.size() + 10];
+		buffer[0] = L'\\';
+		buffer[1] = L'\\';
+		buffer[2] = L'?';
+		buffer[3] = L'\\';
+		int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
+		if (n <= 0)
+		{
+			delete[] buffer;
+			return Yuni::Core::IO::ioErrUnknown;
+		}
+		for (int i = 4; i < n + 4; ++i)
+		{
+			if (buffer[i] == '/')
+				buffer[i] = '\\';
+		}
+		buffer[n + 4] = L'\0';
+
+		if (DeleteFileW(buffer))
+			return Yuni::Core::IO::ioErrNone;
+		return Yuni::Core::IO::ioErrUnknown;
+		# endif
+	}
+
+
+	Yuni::Core::IO::IOError DeleteFileNotZeroTerminated(const char* const filename, unsigned int len)
+	{
+		# ifndef YUNI_OS_WINDOWS
+		if (len < 1020)
+		{
+			CustomString<1024, false, true> copy;
+			copy.assign(filename, len);
+			return DeleteFile(copy.c_str(), copy.size());
+		}
+		else
+		{
+			CustomString<> copy;
+			copy.assign(filename, len);
+			return DeleteFile(copy.c_str(), copy.size());
+		}
+		# else
+		return DeleteFile(filename, len);
+		# endif
+	}
+
 
 
 
