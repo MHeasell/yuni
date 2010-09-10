@@ -19,6 +19,9 @@ namespace IO
 	bool Size(const char* filename, unsigned int len, uint64& value);
 	bool SizeNotZeroTerminated(const char* filename, unsigned int len, uint64& value);
 
+	Yuni::Core::IO::IOError DeleteFile(const char* const filename, unsigned int len);
+	Yuni::Core::IO::IOError DeleteFileNotZeroTerminated(const char* const filename, unsigned int len);
+
 } // namespace IO
 } // namespace Core
 } // namespace Private
@@ -42,9 +45,9 @@ namespace File
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CoreIOFileSize_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CoreIOFileSize_InvalidTypeForLength);
 
-		if (Traits::CString<StringT>::zeroTerminated)
+		if (0 == Traits::CString<StringT>::zeroTerminated)
 		{
-			return Yuni::Private::Core::IO::Size(
+			return Yuni::Private::Core::IO::SizeNotZeroTerminated(
 				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename), size);
 		}
 		else
@@ -214,6 +217,28 @@ namespace File
 		return ioErrNotFound;
 	}
 
+
+
+
+	template<class StringT>
+	inline IOError Delete(const StringT& filename)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOFileExists_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOFileExists_InvalidTypeForBufferSize);
+
+		if (0 == Traits::CString<StringT>::zeroTerminated)
+		{
+			return Yuni::Private::Core::IO::DeleteFileNotZeroTerminated(
+				Traits::CString<StringT>::Perform(filename),
+				Traits::Length<StringT,unsigned int>::Value(filename));
+		}
+		else
+		{
+			return Yuni::Private::Core::IO::DeleteFile(
+				Traits::CString<StringT>::Perform(filename),
+				Traits::Length<StringT,unsigned int>::Value(filename));
+		}
+	}
 
 
 

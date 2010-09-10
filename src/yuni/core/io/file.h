@@ -152,6 +152,14 @@ namespace File
 
 
 	/*!
+	** \brief Delete a file
+	**
+	** \param filename The file to delete
+	*/
+	template<class StringT> IOError Delete(const StringT& filename);
+
+
+	/*!
 	** \brief Create or erase a file
 	**
 	** \param filename An UTF8 filename

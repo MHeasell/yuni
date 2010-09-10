@@ -103,6 +103,10 @@ namespace IO
 	{
 		//! No error
 		ioErrNone = 0,
+		//! Generic error
+		ioErrUnknown,
+		//! Bad filename
+		ioErrBadFilename,
 		//! The file could not be loaded - not found or permission error
 		ioErrNotFound,
 		//! A hard memory limit has been reached
