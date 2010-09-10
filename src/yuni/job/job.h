@@ -21,7 +21,7 @@ namespace Job
 
 	/*!
 	** \brief Job Interface (time consuming operations)
-	** 
+	**
 	** This class is designed to implement a single task executed by
 	** Job::QueueService.
 	**
@@ -46,7 +46,7 @@ namespace Job
 	**		[... time consuming job ...]
 	**   }
 	** };
-	** 
+	**
 	** [... add a MyJob instance to a Job::QueueService ...]
 	**
 	** \endcode
@@ -82,6 +82,7 @@ namespace Job
 		//! Set the name of the job
 		template<class StringT> void name(const StringT& s);
 		//@}
+
 
 		//! \name Progression
 		//@{

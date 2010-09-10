@@ -13,12 +13,12 @@ namespace Job
 
 	template<class SchedulerT>
 	inline QueueService<SchedulerT>::QueueService()
-		:pWaitingRoom(), pScheduler(pWaitingRoom)
+		:SchedulerPolicy(pWaitingRoom), pWaitingRoom()
 	{}
 
 	template<class SchedulerT>
-	QueueService<SchedulerT>::QueueService(bool autostart)
-		:pWaitingRoom(), pScheduler(pWaitingRoom)
+	inline QueueService<SchedulerT>::QueueService(bool autostart)
+		:SchedulerPolicy(pWaitingRoom), pWaitingRoom()
 	{
 		if (autostart)
 			start();
@@ -46,7 +46,7 @@ namespace Job
 		if (!pStarted)
 		{
 			pStarted = 1;
-			pScheduler.start();
+			SchedulerPolicy::schedulerStart();
 		}
 		return true;
 	}
@@ -58,7 +58,7 @@ namespace Job
 		if (pStarted)
 		{
 			pStarted = 0;
-			pScheduler.stop(timeout);
+			SchedulerPolicy::schedulerStop(timeout);
 		}
 		return true;
 	}
@@ -67,16 +67,19 @@ namespace Job
 	template<class SchedulerT>
 	inline bool QueueService<SchedulerT>::restart(unsigned int timeout)
 	{
-		return (pScheduler.stop(timeout) && pScheduler.start());
+		return (SchedulerPolicy::schedulerStop(timeout) && SchedulerPolicy::schedulerStart());
 	}
 
 
 
+	template<class SchedulerT>
 	class QueueServicePoll : public Thread::Timer
 	{
 	public:
-		QueueServicePoll(Yuni::Private::QueueService::WaitingRoom& room, unsigned int pollInterval)
-			:Thread::Timer(pollInterval), pRoom(room), pStatus(false)
+		QueueServicePoll(SchedulerT& scheduler, Yuni::Private::QueueService::WaitingRoom& room,
+			unsigned int pollInterval)
+			:Thread::Timer(pollInterval), pRoom(room),
+			pScheduler(scheduler), pStatus(false)
 		{}
 		virtual ~QueueServicePoll()
 		{
@@ -90,9 +93,13 @@ namespace Job
 		{
 			if (pRoom.empty())
 			{
-				pStatus = true;
-				// We can stop now
-				return false;
+				// Checking if the scheduler still has workers
+				if (pScheduler.idle())
+				{
+					pStatus = true;
+					// We can stop now
+					return false;
+				}
 			}
 			// Continuing...
 			return true;
@@ -100,6 +107,7 @@ namespace Job
 
 	private:
 		Yuni::Private::QueueService::WaitingRoom& pRoom;
+		SchedulerT& pScheduler;
 		bool pStatus;
 	};
 
@@ -110,7 +118,7 @@ namespace Job
 	{
 		if (pWaitingRoom.notEmpty())
 		{
-			QueueServicePoll wait(pWaitingRoom, pollInterval);
+			QueueServicePoll<SchedulerT> wait(static_cast<SchedulerT&>(*this), pWaitingRoom, pollInterval);
 			wait.start();
 			wait.wait(timeout);
 			return wait.status();
@@ -127,7 +135,7 @@ namespace Job
 		if (job)
 		{
 			pWaitingRoom.add(job);
-			pScheduler.newJobInWaitingRoom(priorityDefault);
+			SchedulerPolicy::schedulerNotifyNewJobInWaitingRoom(priorityDefault);
 		}
 	}
 
@@ -138,7 +146,7 @@ namespace Job
 		if (!(!job))
 		{
 			pWaitingRoom.add(job);
-			pScheduler.newJobInWaitingRoom(priorityDefault);
+			SchedulerPolicy::schedulerNotifyNewJobInWaitingRoom(priorityDefault);
 		}
 	}
 
@@ -149,7 +157,7 @@ namespace Job
 		if (!(!job))
 		{
 			pWaitingRoom.add(job, priority);
-			pScheduler.newJobInWaitingRoom(priority);
+			SchedulerPolicy::schedulerNotifyNewJobInWaitingRoom(priority);
 		}
 	}
 
@@ -160,7 +168,7 @@ namespace Job
 		if (!(!job))
 		{
 			pWaitingRoom.add(job, priority);
-			pScheduler.newJobInWaitingRoom(priority);
+			SchedulerPolicy::schedulerNotifyNewJobInWaitingRoom(priority);
 		}
 	}
 
@@ -214,7 +222,7 @@ namespace Job
 	template<class SchedulerT>
 	inline unsigned int QueueService<SchedulerT>::threadCount() const
 	{
-		return pScheduler.threadCount();
+		return SchedulerPolicy::schedulerThreadCount();
 	}
 
 
@@ -268,7 +276,7 @@ namespace Job
 		typename QueueService<SchedulerT>::ThreadInfo::Vector& out)
 	{
 		ActivityPredicate<SchedulerT> predicate(out);
-		pScheduler.foreachThread(predicate);
+		SchedulerPolicy::schedulerForeachThread(predicate);
 	}
 
 

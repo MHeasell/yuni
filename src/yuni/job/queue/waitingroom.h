@@ -14,6 +14,9 @@ namespace QueueService
 {
 
 
+	/*!
+	** \brief Container for all jobs waiting to be executed
+	*/
 	class WaitingRoom
 	{
 	public:
@@ -39,6 +42,9 @@ namespace QueueService
 		~WaitingRoom();
 		//@}
 
+
+		//! \name Container manipulation
+		//@{
 		/*!
 		** \brief Get if the waiting room is empty
 		*/
@@ -81,6 +87,7 @@ namespace QueueService
 		** \brief Get the number of jobs waiting to be executed
 		*/
 		unsigned int size() const;
+		//@}
 
 
 	public:
