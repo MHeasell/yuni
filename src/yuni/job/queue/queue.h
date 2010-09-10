@@ -24,7 +24,9 @@ namespace Job
 	template<
 		class SchedulerT = Scheduler::HighestPriorityFirst // The Scheduler Policy
 		>
-	class QueueService : public Policy::ObjectLevelLockable<QueueService<SchedulerT> >
+	class QueueService
+		:public Policy::ObjectLevelLockable<QueueService<SchedulerT> >
+		,public SchedulerT
 	{
 	public:
 		//! QueueService
@@ -205,7 +207,6 @@ namespace Job
 		** \brief Get the number of threads
 		*/
 		unsigned int threadCount() const;
-
 		//@}
 
 
@@ -223,12 +224,10 @@ namespace Job
 
 
 	private:
-		//! The list of all remaining jobs
-		Yuni::Private::QueueService::WaitingRoom pWaitingRoom;
-		//! The scheduler
-		SchedulerPolicy pScheduler;
 		//! Flag to know if the service is started
 		Atomic::Int<32> pStarted;
+		//! The list of all remaining jobs
+		Yuni::Private::QueueService::WaitingRoom pWaitingRoom;
 
 	}; // class QueueService
 

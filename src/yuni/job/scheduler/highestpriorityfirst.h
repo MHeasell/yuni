@@ -23,43 +23,56 @@ namespace Scheduler
 	class HighestPriorityFirst
 	{
 	public:
+		//! The scheduler itself
 		typedef HighestPriorityFirst SchedulerType;
 
-		enum
-		{
-			minimumThreadCount = 1,
-			maximumThreadCount = (unsigned int) -1,
-		};
-
-
 	public:
+		//! \name Constructor & Destructor
+		//@{
 		/*!
 		** \brief Constructor
 		**
 		** \param room Reference to the Waiting room
 		*/
-		HighestPriorityFirst(Private::QueueService::WaitingRoom& room)
-			:pWaitingRoom(room), pStarted(0)
-		{
-		}
+		explicit HighestPriorityFirst(Private::QueueService::WaitingRoom& room);
 
 		//! Destructor
-		~HighestPriorityFirst()
+		~HighestPriorityFirst();
+		//@}
+
+		unsigned int minimumThreadCount() const
 		{
-			if (pStarted)
-			{
-				pStarted = 0;
-				pServiceMutex.lock();
-				pThreads.stop();
-				pServiceMutex.unlock();
-			}
+			return pMaximumThreadCount;
 		}
 
+		bool minimumThreadCount(unsigned int)
+		{
+			return false;
+		}
 
+		unsigned int maximumThreadCount() const
+		{
+			return pMaximumThreadCount;
+		}
+
+		bool maximumThreadCount(unsigned int n)
+		{
+			if (n < 1 || n > 512)
+				return false;
+			pMaximumThreadCount = n;
+			return true;
+		}
+
+		/*!
+		** \brief Get if the scheduler is idle
+		*/
+		bool idle() const;
+
+	protected:
 		/*!
 		** \brief Start all threads to execute the jobs
 		*/
-		bool start()
+		bool schedulerStart()
 		{
 			if (!pStarted)
 			{
@@ -68,7 +81,7 @@ namespace Scheduler
 
 				// Creating all threads we need
 				pThreads.clear();
-				for (int i = 0; i < 10; ++i)
+				for (unsigned int i = 0; i != pMaximumThreadCount; ++i)
 					pThreads += new Yuni::Private::Jobs::QueueThread<SchedulerType>(*this);
 
 				// Starting all threads at once
@@ -82,7 +95,7 @@ namespace Scheduler
 		/*!
 		** \brief Stop all working threads
 		*/
-		bool stop(unsigned int timeout)
+		bool schedulerStop(unsigned int timeout)
 		{
 			if (pStarted)
 			{
@@ -101,7 +114,7 @@ namespace Scheduler
 		**
 		** \param priority The priority of this job
 		*/
-		void newJobInWaitingRoom(Yuni::Job::Priority)
+		void schedulerNotifyNewJobInWaitingRoom(Yuni::Job::Priority)
 		{
 			pThreads.wakeUp();
 		}
@@ -140,18 +153,29 @@ namespace Scheduler
 		/*!
 		** \brief Get the number of threads currently in use
 		*/
-		unsigned int threadCount() const
+		unsigned int schedulerThreadCount() const
 		{
 			return pThreads.count();
 		}
 
 		template<class PredicateT>
-		void foreachThread(PredicateT& predicate)
+		void schedulerForeachThread(PredicateT& predicate)
 		{
 			pThreads.foreachThread(predicate);
 		}
 
-	public:
+		void schedulerIncrementWorkerCount()
+		{
+			++pWorkerCount;
+		}
+
+		void schedulerDecrementWorkerCount()
+		{
+			--pWorkerCount;
+		}
+
+
+	private:
 		//! Index of the next thread to wake up
 		Atomic::Int<32> pRunningThreads;
 
@@ -163,6 +187,14 @@ namespace Scheduler
 		Mutex pServiceMutex;
 		//! Flag to know if the scheduler is started
 		Atomic::Int<32> pStarted;
+		//! Total number of workers
+		Atomic::Int<32> pWorkerCount;
+
+		//! The maximum number of thread
+		unsigned int pMaximumThreadCount;
+
+		// friend
+		template<class T> friend class Yuni::Private::Jobs::QueueThread;
 
 	}; // class HighestPriorityFirst
 

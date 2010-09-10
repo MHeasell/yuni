@@ -10,6 +10,32 @@ namespace Scheduler
 {
 
 
+	inline HighestPriorityFirst::HighestPriorityFirst(Private::QueueService::WaitingRoom& room)
+		:pWaitingRoom(room), pStarted(0), pMaximumThreadCount(2)
+	{
+	}
+
+
+	HighestPriorityFirst::~HighestPriorityFirst()
+	{
+		if (pStarted)
+		{
+			pStarted = 0;
+			pServiceMutex.lock();
+			pThreads.stop();
+			pServiceMutex.unlock();
+		}
+	}
+
+
+	inline bool HighestPriorityFirst::idle() const
+	{
+		return (0 == pWorkerCount);
+	}
+
+
+
+
 
 } // namespace Scheduler
 } // namespace Job
