@@ -7,6 +7,25 @@
 namespace Yuni
 {
 
+	template <typename T,
+		template <class> class CreationT,
+		template <class> class LifetimeT,
+		template <class> class ThreadingT>
+	typename Singleton<T, CreationT, LifetimeT, ThreadingT>::VolatilePtr
+	Singleton<T, CreationT, LifetimeT, ThreadingT>::pInstance = NULL;
+
+
+	template <typename T,
+		template <class> class CreationT,
+		template <class> class LifetimeT,
+		template <class> class ThreadingT>
+	bool Singleton<T, CreationT, LifetimeT, ThreadingT>::pDestroyed = false;
+
+
+
+
+
+
 
 	template <typename T,
 		template <class> class CreationT,
@@ -29,7 +48,7 @@ namespace Yuni
 		template <class> class CreationT,
 		template <class> class LifetimeT,
 		template <class> class ThreadingT>
-	Singleton<T, CreationT, LifetimeT, ThreadingT>
+	Singleton<T, CreationT, LifetimeT, ThreadingT>&
 	Singleton<T, CreationT, LifetimeT, ThreadingT>::operator = (const Singleton&)
 	{
 		YUNI_STATIC_ASSERT(false, SINGLETON_ASSIGNMENT_IS_FORBIDDEN);
@@ -60,22 +79,7 @@ namespace Yuni
 		template <class> class CreationT,
 		template <class> class LifetimeT,
 		template <class> class ThreadingT>
-	typename Singleton<T, CreationT, LifetimeT, ThreadingT>::InstanceType*
-	Singleton<T, CreationT, LifetimeT, ThreadingT>::pInstance = NULL;
-
-
-	template <typename T,
-		template <class> class CreationT,
-		template <class> class LifetimeT,
-		template <class> class ThreadingT>
-	bool Singleton<T, CreationT, LifetimeT, ThreadingT>::pDestroyed = false;
-
-
-	template <typename T,
-		template <class> class CreationT,
-		template <class> class LifetimeT,
-		template <class> class ThreadingT>
-	typename Singleton<T, CreationT, LifetimeT, ThreadingT>::InstanceType&
+	typename Singleton<T, CreationT, LifetimeT, ThreadingT>::Reference
 	Singleton<T, CreationT, LifetimeT, ThreadingT>::Instance()
 	{
 		// Double-checked locking pattern
