@@ -1,10 +1,10 @@
-#ifndef __YUNI_GFX_CORE_COLOR_PROXY_H__
-# define __YUNI_GFX_CORE_COLOR_PROXY_H__
+#ifndef __YUNI__CORE_COLOR_PROXY_H__
+# define __YUNI__CORE_COLOR_PROXY_H__
 
 # include <iostream>
-# include "../../../yuni.h"
-# include "../../../core/string.h"
-# include "../../../core/math/math.h"
+# include "../../yuni.h"
+# include "../string.h"
+# include "../math/math.h"
 
 
 // On some compile, a Macro RGB is already defined
@@ -288,4 +288,4 @@ namespace Proxy
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_GFX_CORE_COLOR_PROXY_H__
+#endif // __YUNI__CORE_COLOR_PROXY_H__

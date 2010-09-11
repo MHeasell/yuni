@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_CORE_COLOR_RGBA_H__
-# define __YUNI_GFX_CORE_COLOR_RGBA_H__
+#ifndef __YUNI__CORE_COLOR_RGBA_H__
+# define __YUNI__CORE_COLOR_RGBA_H__
 
 # include "proxy.h"
 
@@ -12,6 +12,7 @@ namespace Color
 
 	/*!
 	** \brief 32Bits RGB Color Model with alpha channel (Additive color model + transparency)
+    **
 	** \ingroup ColorModels
 	*/
 	template<typename T>
@@ -195,4 +196,4 @@ inline const Yuni::Color::RGBA<T> operator + (const Yuni::Color::RGBA<T>& lhs, c
 //@}
 
 
-#endif // __YUNI_GFX_CORE_COLOR_RGBA_H__
+#endif // __YUNI__CORE_COLOR_RGBA_H__

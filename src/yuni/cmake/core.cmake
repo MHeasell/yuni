@@ -503,44 +503,64 @@ source_group(Core\\System\\Windows FILES ${SRC_CORE_SYSTEM_WINDOWS})
 
 # Threads
 Set(SRC_THREADS
-				thread/policy.h
-				thread/pthread.h
-				thread/mutex.h     thread/mutex.hxx
-				thread/thread.h    thread/thread.hxx    thread/thread.cpp
-				thread/timer.h     thread/timer.hxx     thread/timer.cpp
-				thread/condition.h thread/condition.cpp thread/condition.hxx
-				thread/array.h     thread/array.hxx)
+		thread/policy.h
+		thread/pthread.h
+		thread/mutex.h
+        thread/mutex.hxx
+		thread/thread.h
+        thread/thread.hxx
+        thread/thread.cpp
+		thread/timer.h
+        thread/timer.hxx
+        thread/timer.cpp
+		thread/condition.h
+        thread/condition.cpp
+        thread/condition.hxx
+		thread/array.h
+        thread/array.hxx)
 source_group(Threads FILES ${SRC_THREADS})
 
 # Jobs
 Set(SRC_JOBS
-				job/enum.h
-				job/forward.h
-				job/job.h job/job.hxx job/job.cpp
-				job/queue.h job/queue/queue.h job/queue/queue.hxx
-				job/queue/thread.h
-				job/queue/waitingroom.h job/queue/waitingroom.hxx
-				job/queue/waitingroom.cpp
+		job/enum.h
+		job/forward.h
+		job/job.h
+        job/job.hxx
+        job/job.cpp
+		job/queue.h
+        job/queue/queue.h
+        job/queue/queue.hxx
+		job/queue/thread.h
+		job/queue/waitingroom.h
+        job/queue/waitingroom.hxx
+		job/queue/waitingroom.cpp
 
-				# Scheduler
-				job/scheduler/highestpriorityfirst.h job/scheduler/highestpriorityfirst.hxx
-				)
+		# Scheduler
+		job/scheduler/highestpriorityfirst.h job/scheduler/highestpriorityfirst.hxx
+		)
 source_group(Jobs FILES ${SRC_JOBS})
 
 
 # Application
 Set(SRC_APPLICATION
-				application/application.h
-				application/application.hxx application/application.cpp
-				application/console.h application/console.cpp)
+		application/application.h
+		application/application.hxx application/application.cpp
+		application/console.h application/console.cpp)
 source_group(Core\\Application FILES ${SRC_APPLICATION})
+
+
+Set(SRC_CORE_COLOR
+		# Color
+		core/color/rgba.h
+        core/color/rgb.h
+		core/color/proxy.h
+        core/color/proxy.cpp
+		)
+source_group(Core\\Color FILES ${SRC_CORE_COLOR})
 
 
 Set(SRC_GFX_CORE
 		gfx/octree.h gfx/octree.cpp
-		# Color
-		gfx/core/color/rgba.h gfx/core/color/rgb.h
-		gfx/core/color/proxy.h gfx/core/color/proxy.cpp
 		)
 source_group(Gfx FILES ${SRC_GFX_CORE})
 
@@ -582,6 +602,7 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_CORE_ATOMIC}
 		${SRC_CORE_SMARTPTR}
 		${SRC_CORE_ANY}
+        ${SRC_CORE_COLOR}
 		${SRC_CORE_SLIST}
 		${SRC_CORE_VARIANT}
 		${SRC_CORE_DYNAMICLIBRARY}
