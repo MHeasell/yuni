@@ -6,8 +6,6 @@
 
 namespace Yuni
 {
-namespace Gfx
-{
 namespace Color
 {
 
@@ -29,7 +27,7 @@ namespace Color
 		** \brief Constructor by copy
 		*/
 		template<typename U>
-		RGBA(const U& c) {Private::Gfx::Color::Proxy::Values< RGBA<T> , U >::Assign(*this, c);}
+		RGBA(const U& c) {Private::Color::Proxy::Values< RGBA<T> , U >::Assign(*this, c);}
 
 		/*!
 		** \brief Constructor with default color components
@@ -40,7 +38,7 @@ namespace Color
 		*/
 		template<typename U>
 		RGBA(const U& r, const U& g, const U& b)
-		{ Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, r, g, b); }
+		{ Private::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, r, g, b); }
 
 		/*!
 		** \brief Constructor with default color components
@@ -52,7 +50,7 @@ namespace Color
 		*/
 		template<typename U>
 		RGBA(const U& r, const U& g, const U& b, const U& a)
-		{Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, r, g, b, a);}
+		{Private::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, r, g, b, a);}
 		//@}
 
 
@@ -64,7 +62,6 @@ namespace Color
 
 		//! \name Reset Values
 		//@{
-
 		/*!
 		** \brief Reset all color components
 		**
@@ -72,7 +69,7 @@ namespace Color
 		** \return Always `*this`
 		*/
 		template<typename U>
-		RGBA<T>& assign(const U& rhs)  { return Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, rhs); }
+		RGBA<T>& assign(const U& rhs)  { return Private::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, rhs); }
 
 		/*!
 		** \brief Reset all color components
@@ -84,7 +81,7 @@ namespace Color
 		*/
 		template<typename U>
 		RGBA<T>& assign(const U& r, const U& g, const U& b)
-		{ return Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, r, g, b); }
+		{ return Private::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, r, g, b); }
 
 		/*!
 		** \brief Reset all color components
@@ -97,14 +94,12 @@ namespace Color
 		*/
 		template<typename U>
 		RGBA<T>& assign(const U& r, const U& g, const U& b, const U& a)
-		{ return Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, r, g, b, a); }
-
+		{ return Private::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, r, g, b, a); }
 		//@}
 
 
 		//! \name Operators
 		//@{
-
 		/*!
 		** \brief Reset all color components
 		**
@@ -113,7 +108,7 @@ namespace Color
 		*/
 		template<typename U>
 		RGBA<T>& operator () (const U& rhs)
-		{ return Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, rhs); }
+		{ return Private::Color::Proxy::Values< RGBA<T>, U >::Assign(*this, rhs); }
 
 
 		/*!
@@ -127,7 +122,7 @@ namespace Color
 		*/
 		template<typename U>
 		RGBA<T>& operator () (const U& r, const U& g, const U& b, const U& a)
-		{ return Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Assign(r, g, b, a); }
+		{ return Private::Color::Proxy::Values< RGBA<T>, U >::Assign(r, g, b, a); }
 
 		/*!
 		** \brief Increase all color components
@@ -136,11 +131,11 @@ namespace Color
 		** \return Always *this
 		*/
 		template<typename U>
-		RGBA<T>& operator += (const U& rhs) { return Private::Gfx::Color::Proxy::Values< RGBA<T>, U >::Inc(*this, rhs);}
+		RGBA<T>& operator += (const U& rhs) { return Private::Color::Proxy::Values< RGBA<T>, U >::Inc(*this, rhs);}
 
 
 		template<typename U>
-		bool operator == (const U& rhs) const {return Private::Gfx::Color::Proxy::Compare< RGBA<T> , U >::equals(*this, rhs);}
+		bool operator == (const U& rhs) const {return Private::Color::Proxy::Compare< RGBA<T> , U >::equals(*this, rhs);}
 
 		bool operator != (const RGBA<T>& rhs) const
 		{ return !(*this == rhs); }
@@ -151,20 +146,19 @@ namespace Color
 		** \return Always *this
 		*/
 		template<typename U> RGBA<T>& operator = (const U& rhs)
-		{ return Private::Gfx::Color::Proxy::Values< RGBA<T> , U >::Assign(*this, rhs); }
-
+		{ return Private::Color::Proxy::Values< RGBA<T> , U >::Assign(*this, rhs); }
 		//@}
 
 
 		/*!
 		** \brief Print the RGBA Value
 		*/
-		std::ostream& print(std::ostream& out) const { return Private::Gfx::Color::Proxy::Streamer< RGBA<T> >::toOStream(out, *this); }
+		std::ostream& print(std::ostream& out) const { return Private::Color::Proxy::Streamer< RGBA<T> >::toOStream(out, *this); }
 
 		/*!
 		** \brief Convert the RGBA value into a human readable string
 		*/
-		String toString() const { return Private::Gfx::Color::Proxy::Streamer< RGBA<T> >::toString(*this); }
+		String toString() const { return Private::Color::Proxy::Streamer< RGBA<T> >::toString(*this); }
 
 	public:
 		//! The red channel
@@ -183,7 +177,6 @@ namespace Color
 
 
 } // namespace Color
-} // namespace Gfx
 } // namespace Yuni
 
 
@@ -193,12 +186,12 @@ namespace Color
 //! name Operator overload for stream printing
 //@{
 template<typename T>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Gfx::Color::RGBA<T>& p)
+inline std::ostream& operator << (std::ostream& out, const Yuni::Color::RGBA<T>& p)
 { return p.print(out); }
 
 template<typename T>
-inline const Yuni::Gfx::Color::RGBA<T> operator + (const Yuni::Gfx::Color::RGBA<T>& lhs, const Yuni::Gfx::Color::RGBA<T>& rhs)
-{ return Yuni::Gfx::Color::RGBA<T>(lhs) += rhs; }
+inline const Yuni::Color::RGBA<T> operator + (const Yuni::Color::RGBA<T>& lhs, const Yuni::Color::RGBA<T>& rhs)
+{ return Yuni::Color::RGBA<T>(lhs) += rhs; }
 //@}
 
 
