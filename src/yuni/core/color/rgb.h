@@ -1,7 +1,7 @@
-#ifndef __YUNI_GFX_CORE_COLOR_RGB_H__
-# define __YUNI_GFX_CORE_COLOR_RGB_H__
+#ifndef __YUNI__CORE_COLOR_RGB_H__
+# define __YUNI__CORE_COLOR_RGB_H__
 
-# include "../../../yuni.h"
+# include "../../yuni.h"
 # include "proxy.h"
 
 
@@ -13,6 +13,7 @@ namespace Color
 
 	/*!
 	** \brief 32Bits RGB Color Model (Additive color model)
+    **
 	** \ingroup ColorModels
 	*/
 	template<typename T>
@@ -190,4 +191,4 @@ inline const Yuni::Color::RGB<T> operator + (const Yuni::Color::RGB<T>& lhs, con
 //@}
 
 
-#endif // __YUNI_GFX_CORE_COLOR_RGB_H__
+#endif // __YUNI__CORE_COLOR_RGB_H__

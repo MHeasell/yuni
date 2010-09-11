@@ -1,7 +1,7 @@
 
 #include <yuni/yuni.h>
-#include <yuni/gfx/core/color/rgb.h>
-#include <yuni/gfx/core/color/rgba.h>
+#include <yuni/core/color/rgb.h>
+#include <yuni/core/color/rgba.h>
 
 
 using namespace Yuni;

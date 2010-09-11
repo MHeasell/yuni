@@ -4,8 +4,9 @@
 # include "../../yuni.h"
 # include "../../core/smartptr.h"
 # include "../scene.h"
-# include "../core/color/rgb.h"
-# include "../core/color/rgba.h"
+# include "../../core/color/rgb.h"
+# include "../../core/color/rgba.h"
+
 
 namespace Yuni
 {
