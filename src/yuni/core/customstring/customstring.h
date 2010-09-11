@@ -382,10 +382,11 @@ namespace Yuni
 		**
 		** The type held by the iterator can be anything as long as the type can
 		** be converted by the string (see specializations in the namespace
-		** `Yuni::Extension::CustomString`).
+		** Yuni::Extension::CustomString).
 		**
-		** \param begin An iterator pointing to the begining of a sequence
-		** \param end  An iterator pointing to the end of a sequence
+		** \see namespace Yuni::Extension::CustomString
+		** \param begin  An iterator pointing to the begining of a sequence
+		** \param end    An iterator pointing to the end of a sequence
 		*/
 		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2>
 		void append(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end);
@@ -395,7 +396,7 @@ namespace Yuni
 		**
 		** The type held by the iterator can be anything as long as the type can
 		** be converted by the string (see specializations in the namespace
-		** `Yuni::Extension::CustomString`).
+		** Yuni::Extension::CustomString).
 		**
 		** \code
 		** String s = "string: こんにちは";
@@ -409,8 +410,10 @@ namespace Yuni
 		** std::cout << sub2 << std::endl; // ん, に
 		** \endcode
 		**
-		** \param begin An iterator pointing to the begining of a sequence
-		** \param end  An iterator pointing to the end of a sequence
+		** \see namespace Yuni::Extension::CustomString
+		**
+		** \param begin     An iterator pointing to the begining of a sequence
+		** \param end       An iterator pointing to the end of a sequence
 		** \param separator The string separator to use between each item
 		*/
 		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT>
@@ -420,7 +423,7 @@ namespace Yuni
 		/*!
 		** \brief Append to the end of the string a new value
 		**
-		** \param rhs Any supported value
+		** \param rhs  Any supported value
 		** \param size Size of the container
 		*/
 		template<class StringT>
@@ -429,8 +432,8 @@ namespace Yuni
 		/*!
 		** \brief Append to the end of the string a new value
 		**
-		** \param rhs Any supported value
-		** \param size Size of the container
+		** \param s      Any supported value
+		** \param size   Size of the container
 		** \param offset Offset of the first character to append
 		*/
 		template<class StringT>
@@ -444,14 +447,14 @@ namespace Yuni
 		** \brief Insert at the begining of the string a new value
 		**
 		** This is a convenient replacement for insert(0, u)
-		** \param rhs Any supported value
+		** \param u Any supported value
 		*/
 		template<class U> void prepend(const U& u);
 
 		/*!
 		** \brief Insert at the begining of the string a new value
 		**
-		** \param rhs Any supported value
+		** \param u    Any supported value
 		** \param size Size of the container
 		*/
 		template<class U> void prepend(const U& u, const Size size);
@@ -459,7 +462,7 @@ namespace Yuni
 		/*!
 		** \brief Append a single item (char)
 		**
-		** \param rhs A single item
+		** \param c A single char
 		*/
 		void put(const char c);
 
@@ -867,7 +870,7 @@ namespace Yuni
 		Size find_first_of(char c, Size offset) const;
 
 		/*!
-		** \brief Searches the string for any of the characters that are part of @seq
+		** \brief Searches the string for any of the characters that are part of `seq`
 		**
 		** \param seq An arbitrary string
 		** \param offset Position of the first character in the string to be taken
@@ -879,7 +882,7 @@ namespace Yuni
 		template<class StringT> Size find_first_of(const StringT& seq, Size offset = 0) const;
 
 		/*!
-		** \brief Searches the string for any of the characters that are part of @seq
+		** \brief Searches the string for any of the characters that are part of `seq`
 		**   (ignoring the case)
 		**
 		** \param seq An arbitrary string
@@ -919,7 +922,7 @@ namespace Yuni
 		Size find_last_of(char c, Size offset) const;
 
 		/*!
-		** \brief Searches the string from the end for any of the characters that are part of @seq
+		** \brief Searches the string from the end for any of the characters that are part of `seq`
 		**
 		** \param seq An arbitrary string
 		** \param offset Position of the first character in the string to be taken
@@ -931,7 +934,7 @@ namespace Yuni
 		template<class StringT> Size find_last_of(const StringT& seq, Size offset = npos) const;
 
 		/*!
-		** \brief Searches the string from the end for any of the characters that are part of @seq
+		** \brief Searches the string from the end for any of the characters that are part of `seq`
 		**   (ignoring the case)
 		**
 		** \param seq An arbitrary string
