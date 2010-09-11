@@ -34,7 +34,7 @@ namespace Creation
 		static T* Create() { return new T(); }
 
 		//! Destruction of the data
-		static void Destroy(T* data) { delete data; }
+		template<class U> static void Destroy(U* data) { delete data; }
 	};
 
 

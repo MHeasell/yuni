@@ -44,13 +44,15 @@ namespace Yuni
 		//! Threading policy
 		typedef ThreadingT<Singleton<T, CreationT, LifetimeT, ThreadingT> > ThreadingPolicy;
 		//! Type as stored in the singleton (volatile if necessary)
-		typedef typename ThreadingPolicy::template Volatile<T>::Type InstanceType;
+		typedef T& Reference;
+		//! Volatile pointer
+		typedef typename ThreadingPolicy::template Volatile<T*>::Type VolatilePtr;
 
 	public:
 		/*!
 		** \brief Get the instance of this singleton
 		*/
-		static InstanceType& Instance();
+		static Reference Instance();
 
 	public:
 		/*!
@@ -61,7 +63,7 @@ namespace Yuni
 		/*!
 		** \brief Assignment operator will fail at compile time !
 		*/
-		Singleton<T, CreationT, LifetimeT, ThreadingT> operator = (const Singleton&);
+		Singleton& operator = (const Singleton&);
 
 		/*!
 		** \brief Address-of operator will fail at compile time !
@@ -71,7 +73,7 @@ namespace Yuni
 		/*!
 		** \brief Address-of operator will fail at compile time !
 		*/
-		const Singleton<T, CreationT, LifetimeT, ThreadingT>* operator & () const;
+		const Singleton* operator & () const;
 
 
 	protected:
@@ -86,11 +88,12 @@ namespace Yuni
 		*/
 		static void DestroyInstance();
 
+
 	private:
 		/*!
 		** \brief Unique instance of the class
 		*/
-		static InstanceType* pInstance;
+		static VolatilePtr pInstance;
 
 		/*!
 		** \brief Has the instance already been destroyed once ?
