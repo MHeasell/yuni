@@ -15,8 +15,6 @@
 
 namespace Yuni
 {
-namespace Gfx
-{
 namespace Color
 {
 
@@ -24,7 +22,6 @@ namespace Color
 	template<typename T> class RGBA;
 	template<typename T> class RGB;
 
-} // namespace Gfx
 } // namespace Color
 } // namespace Yuni
 
@@ -33,8 +30,6 @@ namespace Color
 namespace Yuni
 {
 namespace Private
-{
-namespace Gfx
 {
 namespace Color
 {
@@ -51,7 +46,7 @@ namespace Proxy
 	struct Values
 	{
 		/*!
-		** \brief Assign the values between Yuni::Gfx::Color::RGB Color Models from a single argument
+		** \brief Assign the values between Yuni::Color::RGB Color Models from a single argument
 		**
 		** \param th The instance where assignation will be done
 		** \param a1 The value
@@ -60,7 +55,7 @@ namespace Proxy
 		static T& Assign(T& th, const U& a1);
 
 		/*!
-		** \brief Assign the values between Yuni::Gfx::Color::RGB Color Models from 2 arguments
+		** \brief Assign the values between Yuni::Color::RGB Color Models from 2 arguments
 		**
 		** \param th The instance where assignation will be done
 		** \param a1 The value
@@ -70,7 +65,7 @@ namespace Proxy
 		static T& Assign(T& th, const U& a1, const U& a2);
 
 		/*!
-		** \brief Assign the values between Yuni::Gfx::Color::RGB Color Models from 3 arguments
+		** \brief Assign the values between Yuni::Color::RGB Color Models from 3 arguments
 		**
 		** \param th The instance where assignation will be done
 		** \param a1 The first value
@@ -81,7 +76,7 @@ namespace Proxy
 		static T& Assign(T& th, const U& a1, const U& a2, const U&a3);
 
 		/*!
-		** \brief Assign the values between Yuni::Gfx::Color::RGB Color Models from 4 arguments
+		** \brief Assign the values between Yuni::Color::RGB Color Models from 4 arguments
 		**
 		** \param th The instance where assignation will be done
 		** \param a1 The first value
@@ -99,31 +94,31 @@ namespace Proxy
 
 
 	template<typename A, typename B>
-	struct Values< Yuni::Gfx::Color::RGB<A>, Yuni::Gfx::Color::RGBA<B> >
+	struct Values< Yuni::Color::RGB<A>, Yuni::Color::RGBA<B> >
 	{
-		inline static Yuni::Gfx::Color::RGB<A>& Assign(Yuni::Gfx::Color::RGB<A>& th, const Yuni::Gfx::Color::RGBA<B>& a1)
+		inline static Yuni::Color::RGB<A>& Assign(Yuni::Color::RGB<A>& th, const Yuni::Color::RGBA<B>& a1)
 		{
 			return th.assign(a1.red, a1.green, a1.blue);
 		}
 
-		inline static Yuni::Gfx::Color::RGB<A>& Inc(Yuni::Gfx::Color::RGB<A>& to, const Yuni::Gfx::Color::RGBA<B>& inc)
+		inline static Yuni::Color::RGB<A>& Inc(Yuni::Color::RGB<A>& to, const Yuni::Color::RGBA<B>& inc)
 		{
-			return (to += Yuni::Gfx::Color::RGB<A>(inc));
+			return (to += Yuni::Color::RGB<A>(inc));
 		}
 
 	};
 
 	template<typename A, typename B>
-	struct Values< Yuni::Gfx::Color::RGBA<A>, Yuni::Gfx::Color::RGB<B> >
+	struct Values< Yuni::Color::RGBA<A>, Yuni::Color::RGB<B> >
 	{
-		inline static Yuni::Gfx::Color::RGBA<A>& Assign(Yuni::Gfx::Color::RGBA<A>& th, const Yuni::Gfx::Color::RGB<B>& a1)
+		inline static Yuni::Color::RGBA<A>& Assign(Yuni::Color::RGBA<A>& th, const Yuni::Color::RGB<B>& a1)
 		{
 			return th.assign(a1.red, a1.green, a1.blue);
 		}
 
-		inline static Yuni::Gfx::Color::RGBA<A>& Inc(Yuni::Gfx::Color::RGBA<A>& to, const Yuni::Gfx::Color::RGB<B>& inc)
+		inline static Yuni::Color::RGBA<A>& Inc(Yuni::Color::RGBA<A>& to, const Yuni::Color::RGB<B>& inc)
 		{
-			return (to += Yuni::Gfx::Color::RGBA<A>(inc));
+			return (to += Yuni::Color::RGBA<A>(inc));
 		}
 
 	}; // class Values
@@ -158,71 +153,65 @@ namespace Proxy
 	};
 
 
-	template<typename T>
-	struct Channel
-	{
-		static T Value(const T t) {return t;}
-	};
 
-	template<>
-	struct Channel<unsigned char>
-	{
-		static int Value(const unsigned char t) {return t;}
-	};
 
-	template<>
-	struct Channel<char>
-	{
-		static int Value(const char t) {return t;}
-	};
+    // When sent into a stream, char and unsigned char must be cast into int
+    template<class T>
+    struct Cast { typedef T Type; };
+    template<>
+    struct Cast<sint8> { typedef int Type; };
+    template<>
+    struct Cast<uint8> { typedef unsigned int Type; };
 
 
 
 	template<typename S>
-	struct Streamer< Yuni::Gfx::Color::RGBA<S> >
+	struct Streamer< Yuni::Color::RGBA<S> >
 	{
-		inline static std::ostream& toOStream(std::ostream& out, const Yuni::Gfx::Color::RGBA<S>& th)
+		inline static std::ostream& toOStream(std::ostream& out, const Yuni::Color::RGBA<S>& th)
 		{
-			out << "r:"  << Channel<S>::Value(th.red)
-				<< ",g:" << Channel<S>::Value(th.green)
-				<< ",b:" << Channel<S>::Value(th.blue)
-				<< ",a:" << Channel<S>::Value(th.alpha)
+			out <<  "r:" << (typename Cast<S>::Type) (th.red)
+				<< ",g:" << (typename Cast<S>::Type) (th.green)
+				<< ",b:" << (typename Cast<S>::Type) (th.blue)
+				<< ",a:" << (typename Cast<S>::Type) (th.alpha)
 				;
 			return out;
 		}
 
-		inline static String toString(const Yuni::Gfx::Color::RGBA<S>& th)
+		inline static String toString(const Yuni::Color::RGBA<S>& th)
 		{
-			return String() << "r:"  << Channel<S>::Value(th.red)
-				<< ",g:" << Channel<S>::Value(th.green)
-				<< ",b:" << Channel<S>::Value(th.blue)
-				<< ",a:" << Channel<S>::Value(th.alpha)
+			return String()
+                <<  "r:" << (typename Cast<S>::Type) (th.red)
+				<< ",g:" << (typename Cast<S>::Type) (th.green)
+				<< ",b:" << (typename Cast<S>::Type) (th.blue)
+				<< ",a:" << (typename Cast<S>::Type) (th.alpha)
 				;
 		}
 	};
 
 
 	template<typename S>
-	struct Streamer< Yuni::Gfx::Color::RGB<S> >
+	struct Streamer< Yuni::Color::RGB<S> >
 	{
-		inline static std::ostream& toOStream(std::ostream& out, const Yuni::Gfx::Color::RGB<S>& th)
+		inline static std::ostream& toOStream(std::ostream& out, const Yuni::Color::RGB<S>& th)
 		{
-			out << "r:"  << Channel<S>::Value(th.red)
-				<< ",g:" << Channel<S>::Value(th.green)
-				<< ",b:" << Channel<S>::Value(th.blue)
+			out <<  "r:" << (typename Cast<S>::Type) (th.red)
+				<< ",g:" << (typename Cast<S>::Type) (th.green)
+				<< ",b:" << (typename Cast<S>::Type) (th.blue)
 				;
 			return out;
 		}
 
-		inline static String toString(const Yuni::Gfx::Color::RGB<S>& th)
+		inline static String toString(const Yuni::Color::RGB<S>& th)
 		{
-			return String() << "r:"  << Channel<S>::Value(th.red)
-				<< ",g:" << Channel<S>::Value(th.green)
-				<< ",b:" << Channel<S>::Value(th.blue)
+			return String()
+                <<  "r:" << (typename Cast<S>::Type) (th.red)
+				<< ",g:" << (typename Cast<S>::Type) (th.green)
+				<< ",b:" << (typename Cast<S>::Type) (th.blue)
 				;
 
 		}
-	};
+	}; // class Streamer
 
 
 
@@ -240,52 +229,52 @@ namespace Proxy
 		static bool equals(const T& lhs, const U& rhs);
 	};
 
-	// Compare Yuni::Gfx::Color::RGBA with the same type
+	// Compare Yuni::Color::RGBA with the same type
 	template<typename V>
-	struct Compare< Yuni::Gfx::Color::RGBA<V>, Yuni::Gfx::Color::RGBA<V> >
+	struct Compare< Yuni::Color::RGBA<V>, Yuni::Color::RGBA<V> >
 	{
-		inline static bool equals(const Yuni::Gfx::Color::RGBA<V>& lhs, const Yuni::Gfx::Color::RGBA<V>& rhs)
+		inline static bool equals(const Yuni::Color::RGBA<V>& lhs, const Yuni::Color::RGBA<V>& rhs)
 		{ return Math::Equals(lhs.red, rhs.red) && Math::Equals(lhs.green, rhs.green) && Math::Equals(lhs.blue, rhs.blue) && Math::Equals(lhs.alpha, rhs.alpha); }
 	};
 
-	// Compare Yuni::Gfx::Color::RGBA with not the same type
+	// Compare Yuni::Color::RGBA with not the same type
 	template<typename V, typename W>
-	struct Compare< Yuni::Gfx::Color::RGBA<V>, Yuni::Gfx::Color::RGBA<W> >
+	struct Compare< Yuni::Color::RGBA<V>, Yuni::Color::RGBA<W> >
 	{
-		inline static bool equals(const Yuni::Gfx::Color::RGBA<V>& lhs, const Yuni::Gfx::Color::RGBA<W>& rhs)
-		{ return Compare< Yuni::Gfx::Color::RGBA<V>, Yuni::Gfx::Color::RGBA<V> >::equals(lhs, Yuni::Gfx::Color::RGBA<V>(rhs)); }
+		inline static bool equals(const Yuni::Color::RGBA<V>& lhs, const Yuni::Color::RGBA<W>& rhs)
+		{ return Compare< Yuni::Color::RGBA<V>, Yuni::Color::RGBA<V> >::equals(lhs, Yuni::Color::RGBA<V>(rhs)); }
 	};
 
 
-	// Compare Yuni::Gfx::Color::RGB with the same type
+	// Compare Yuni::Color::RGB with the same type
 	template<typename V>
-	struct Compare< Yuni::Gfx::Color::RGB<V>, Yuni::Gfx::Color::RGB<V> >
+	struct Compare< Yuni::Color::RGB<V>, Yuni::Color::RGB<V> >
 	{
-		inline static bool equals(const Yuni::Gfx::Color::RGB<V>& lhs, const Yuni::Gfx::Color::RGB<V>& rhs)
+		inline static bool equals(const Yuni::Color::RGB<V>& lhs, const Yuni::Color::RGB<V>& rhs)
 		{ return Math::Equals(lhs.red, rhs.red) && Math::Equals(lhs.green, rhs.green) && Math::Equals(lhs.blue, rhs.blue); }
 	};
 
-	// Compare Yuni::Gfx::Color::RGB with not the same type
+	// Compare Yuni::Color::RGB with not the same type
 	template<typename V, typename W>
-	struct Compare< Yuni::Gfx::Color::RGB<V>, Yuni::Gfx::Color::RGB<W> >
+	struct Compare< Yuni::Color::RGB<V>, Yuni::Color::RGB<W> >
 	{
-		inline static bool equals(const Yuni::Gfx::Color::RGB<V>& lhs, const Yuni::Gfx::Color::RGB<W>& rhs)
-		{ return Compare< Yuni::Gfx::Color::RGB<V>, Yuni::Gfx::Color::RGB<V> >::equals(lhs.red, Yuni::Gfx::Color::RGB<V>(rhs)); }
+		inline static bool equals(const Yuni::Color::RGB<V>& lhs, const Yuni::Color::RGB<W>& rhs)
+		{ return Compare< Yuni::Color::RGB<V>, Yuni::Color::RGB<V> >::equals(lhs.red, Yuni::Color::RGB<V>(rhs)); }
 	};
 
-	// Compare Yuni::Gfx::Color::RGBA - Yuni::Gfx::Color::RGB
+	// Compare Yuni::Color::RGBA - Yuni::Color::RGB
 	template<typename V>
-	struct Compare< Yuni::Gfx::Color::RGBA<V>, Yuni::Gfx::Color::RGB<V> >
+	struct Compare< Yuni::Color::RGBA<V>, Yuni::Color::RGB<V> >
 	{
-		inline static bool equals(const Yuni::Gfx::Color::RGBA<V>& lhs, const Yuni::Gfx::Color::RGB<V>& rhs)
+		inline static bool equals(const Yuni::Color::RGBA<V>& lhs, const Yuni::Color::RGB<V>& rhs)
 		{ return Math::Equals(lhs.red, rhs.red) && Math::Equals(lhs.green, rhs.green) && Math::Equals(lhs.blue, rhs.blue); }
 	};
 
-	// Compare Yuni::Gfx::Color::RGB - Yuni::Gfx::Color::RGBA
+	// Compare Yuni::Color::RGB - Yuni::Color::RGBA
 	template<typename V>
-	struct Compare< Yuni::Gfx::Color::RGB<V>, Yuni::Gfx::Color::RGBA<V> >
+	struct Compare< Yuni::Color::RGB<V>, Yuni::Color::RGBA<V> >
 	{
-		inline static bool equals(const Yuni::Gfx::Color::RGB<V>& lhs, const Yuni::Gfx::Color::RGBA<V>& rhs)
+		inline static bool equals(const Yuni::Color::RGB<V>& lhs, const Yuni::Color::RGBA<V>& rhs)
 		{ return Math::Equals(lhs.red, rhs.red) && Math::Equals(lhs.green, rhs.green) && Math::Equals(lhs.blue, rhs.blue); }
 	};
 
@@ -296,7 +285,6 @@ namespace Proxy
 
 } // namespace Proxy
 } // namespace Color
-} // namespace Gfx
 } // namespace Private
 } // namespace Yuni
 
