@@ -196,17 +196,14 @@ namespace Yuni
 
 
 		//! Returns the n'th element
-		reference operator[] (size_type n) {return pHolder.reference();}
+		reference operator[] (size_type n);
+		//! Returns the n'th element
+		const_reference operator[] (size_type n) const;
 
-		//! \name Front
-		//@{
-		reference front() {return pHolder.reference();}
-		//@}
-
-		//! \name Back
-		//@{
-		reference back() {return pHolder.reference();}
-		//@}
+		reference front();
+		reference back();
+		const_reference front() const;
+		const_reference back() const;
 
 		/*!
 		** \brief Reserve N elements
@@ -322,18 +319,25 @@ namespace Yuni
 
 		//! Operator =
 		Nullable& operator = (const Nullable& rhs);
+		//! Operator =
 		template<class Alloc1> Nullable& operator = (const Nullable<T,Alloc1>& rhs);
 		//! Operator =
 		Nullable& operator = (const NullPtr&);
+		//! Operator =
 		Nullable& operator = (const_pointer rhs);
+		//! Operator =
 		template<class U> Nullable& operator = (const U& rhs);
 
+		//! Operator =
 		Nullable& operator = (void* const);
 
 		//! The comparison operator
 		bool operator == (const Nullable& rhs) const;
+		//! The comparison operator
 		bool operator != (const Nullable& rhs) const;
+		//! The comparison operator
 		bool operator == (const NullPtr&) const;
+		//! The comparison operator
 		bool operator != (const NullPtr&) const;
 
 		bool operator < (const Nullable& rhs) const

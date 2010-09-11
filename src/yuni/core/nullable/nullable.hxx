@@ -328,6 +328,45 @@ namespace Yuni
 	}
 
 
+	template<class T, class Alloc>
+	inline typename Nullable<T,Alloc>::reference Nullable<T,Alloc>::operator[] (size_type n)
+	{
+		return pHolder.reference();
+	}
+
+
+	template<class T, class Alloc>
+	inline typename Nullable<T,Alloc>::const_reference Nullable<T,Alloc>::operator[] (size_type n) const
+	{
+		return pHolder.reference();
+	}
+
+
+	template<class T, class Alloc>
+	inline typename Nullable<T,Alloc>::reference Nullable<T,Alloc>::front()
+	{
+		return pHolder.reference();
+	}
+
+	template<class T, class Alloc>
+	inline typename Nullable<T,Alloc>::reference Nullable<T,Alloc>::back()
+	{
+		return pHolder.reference();
+	}
+
+	template<class T, class Alloc>
+	inline typename Nullable<T,Alloc>::const_reference Nullable<T,Alloc>::front() const
+	{
+		return pHolder.reference();
+	}
+
+	template<class T, class Alloc>
+	inline typename Nullable<T,Alloc>::const_reference Nullable<T,Alloc>::back() const
+	{
+		return pHolder.reference();
+	}
+
+
 
 
 
