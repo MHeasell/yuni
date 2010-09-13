@@ -17,8 +17,9 @@ namespace CustomString
 	** \brief Generic implementation
 	*/
 	template<class T>
-	struct Into
+	class Into
 	{
+	public:
 		enum { valid = 0, };
 
 		template<class StringT> static bool Perform(const StringT&, T& out)
@@ -38,8 +39,9 @@ namespace CustomString
 	** \brief const char*
 	*/
 	template<>
-	struct Into<char*>
+	class Into<char*>
 	{
+	public:
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, const char*& out)
@@ -61,8 +63,9 @@ namespace CustomString
 	** \brief CustomString<>, with the same POD type
 	*/
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	struct Into<Yuni::CustomString<ChunkSizeT, ExpandableT, ZeroTerminatedT> >
+	class Into<Yuni::CustomString<ChunkSizeT, ExpandableT, ZeroTerminatedT> >
 	{
+	public:
 		typedef Yuni::CustomString<ChunkSizeT, ExpandableT, ZeroTerminatedT> TargetType;
 		enum { valid = 1 };
 
@@ -83,8 +86,9 @@ namespace CustomString
 	** \brief std::string
 	*/
 	template<class CharT, class TraitsT, class AllocT>
-	struct Into<std::basic_string<CharT,TraitsT, AllocT> >
+	class Into<std::basic_string<CharT,TraitsT, AllocT> >
 	{
+	public:
 		typedef std::basic_string<CharT,TraitsT, AllocT> TargetType;
 		enum { valid = 1 };
 
@@ -105,8 +109,9 @@ namespace CustomString
 	** \brief char
 	*/
 	template<>
-	struct Into<char>
+	class Into<char>
 	{
+	public:
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, char& out)
@@ -126,8 +131,9 @@ namespace CustomString
 	** \brief unsigned char
 	*/
 	template<>
-	struct Into<unsigned char>
+	class Into<unsigned char>
 	{
+	public:
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, unsigned char& out)
@@ -147,8 +153,9 @@ namespace CustomString
 	** \brief char[]
 	*/
 	template<int N>
-	struct Into<char[N]>
+	class Into<char[N]>
 	{
+	public:
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, char*& out)
@@ -174,8 +181,9 @@ namespace CustomString
 	** \brief bool
 	*/
 	template<>
-	struct Into<bool>
+	class Into<bool>
 	{
+	public:
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, bool& out)
@@ -235,8 +243,9 @@ namespace CustomString
 
 # define YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(TYPE,CONVERT)  \
 	template<> \
-	struct Into<TYPE> \
+	class Into<TYPE> \
 	{ \
+	public: \
 		typedef TYPE IntoType; \
 		enum { valid = 1 }; \
 		\
@@ -293,8 +302,9 @@ namespace CustomString
 	** \brief float
 	*/
 	template<>
-	struct Into<float>
+	class Into<float>
 	{
+	public:
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, float& out)
@@ -337,8 +347,9 @@ namespace CustomString
 	** \brief double
 	*/
 	template<>
-	struct Into<double>
+	class Into<double>
 	{
+	public:
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, double& out)
@@ -371,8 +382,9 @@ namespace CustomString
 	** \brief const void*
 	*/
 	template<>
-	struct Into<void*>
+	class Into<void*>
 	{
+	public:
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, const void*& out)
