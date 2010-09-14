@@ -16,8 +16,16 @@ Prerequisites:
   $ cd yuni/src
   $ cmake . -DMODULES=all
 
-  Tips : You can run "cmake --help" for a list of generators for the -G option
-         You can run "cmake -DMODULES=help" for a list of available Yuni modules
+  Tips :
+	You can run "cmake --help" for a list of generators for the -G option
+	You can run "cmake ." to activate the default modules in Yuni
+	You can run "cmake . -DMODULES=help" for a list of available Yuni modules
+
+  Other examples:
+	Activate all modules except 3D graphics:
+		$ cmake . -DMODULES="all -gfx3d"
+	Activate the default modules, plus the audio and script modules
+		$ cmake . -DMODULES="+audio +script"
 
 4) To compile, run make :
   $ make
