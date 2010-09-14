@@ -38,26 +38,33 @@ ADD_DEFINITIONS("-DYUNI_INSTALL_PREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
 
 
 
-ADD_EXECUTABLE(yuni-config
-		../../yuni/core/version/version.cpp
-		../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.cpp
-		../../yuni/core/io/io.cpp
-		../../yuni/core/io/file/file.cpp
-		../../yuni/core/io/file/load.cpp
-		../../yuni/core/io/file/openmode.cpp
-		../../yuni/core/io/file/stream.cpp
-		../../yuni/core/io/exists.cpp
-		../../yuni/core/io/directory/current.cpp
+SET(src
+	../../yuni/core/version/version.cpp
+	../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.cpp
+	../../yuni/core/io/io.cpp
+	../../yuni/core/io/file/file.cpp
+	../../yuni/core/io/file/load.cpp
+	../../yuni/core/io/file/openmode.cpp
+	../../yuni/core/io/file/stream.cpp
+	../../yuni/core/io/exists.cpp
+	../../yuni/core/io/directory/current.cpp
 
-		# iterator
-		../../yuni/core/io/directory/iterator.h
-		../../yuni/core/io/directory/iterator/iterator.h
-		../../yuni/core/io/directory/iterator/iterator.hxx
-		../../yuni/core/io/directory/iterator/iterator.cpp
-		../../yuni/core/io/directory/iterator/detachedthread.h
+	# iterator
+	../../yuni/core/io/directory/iterator.h
+	../../yuni/core/io/directory/iterator/iterator.h
+	../../yuni/core/io/directory/iterator/iterator.hxx
+	../../yuni/core/io/directory/iterator/iterator.cpp
+	../../yuni/core/io/directory/iterator/detachedthread.h
 
-		versions.h versions.hxx versions.cpp
-		program.h program.hxx program.cpp
-		main.cpp)
-INSTALL(PROGRAMS yuni-config RENAME yuni-config-${YUNI_VERSION} DESTINATION bin)
+	versions.h versions.hxx versions.cpp
+	program.h program.hxx program.cpp
+	main.cpp)
+
+
+ADD_EXECUTABLE(yuni-config                  ${src})
+
+ADD_EXECUTABLE(yuni-config-${YUNI_VERSION}  ${src})
+
+# Install
+INSTALL(PROGRAMS yuni-config-${YUNI_VERSION} DESTINATION bin)
 
