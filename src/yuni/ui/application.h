@@ -21,8 +21,11 @@ namespace UI
 		//! Smart pointer
 		typedef SmartPtr<Application> Ptr;
 
+		//! String identifier type
+		typedef CustomString<40, false, false> StaticString;
+
 		//! Map from a unique ID
-		typedef std::map<String, Application::Ptr> Map;
+		typedef std::map<StaticString, Application::Ptr> Map;
 
 
 	public:
@@ -37,15 +40,20 @@ namespace UI
 		/*!
 		** \brief Get the identifier for this application
 		*/
-		const String& ID() { return pID; }
+		const StaticString& ID() { return pID; }
+
+		/*!
+		** \brief Get the name of this application
+		*/
+		const StaticString& Name() { return pName; }
 
 
 	private:
 		//! Application string identifier
-		String pID;
+		StaticString pID;
 
 		//! Application name, used for display
-		String pName;
+		StaticString pName;
 
 		//! Application windows
 		Window::Vector pWindows;
