@@ -449,7 +449,6 @@ Set(SRC_CORE_IO_DIRECTORY
 				core/io/directory/current.cpp
 				core/io/directory/make.cpp
 				core/io/directory/copy.cpp
-
 				core/io/directory/info.h
 				core/io/directory/info/iterator.cpp
 				core/io/directory/info/iterator.h
@@ -458,7 +457,6 @@ Set(SRC_CORE_IO_DIRECTORY
 				core/io/directory/info/info.cpp
 				core/io/directory/info/platform.cpp
 				core/io/directory/info/platform.h
-
 				core/io/directory/iterator.h
 				core/io/directory/iterator/iterator.cpp
 				core/io/directory/iterator/iterator.h
@@ -625,12 +623,18 @@ ADD_LIBRARY(yuni-static-core STATIC
 		${SRC_THREADS} ${SRC_JOBS}
 		${SRC_APPLICATION}
 	)
-INSTALL(TARGETS yuni-static-core ARCHIVE DESTINATION lib/${VERSIONED_INST_PATH})
+
+# Setting output path
+SET_TARGET_PROPERTIES(yuni-static-core PROPERTIES 
+		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
+
+# Installation
+INSTALL(TARGETS yuni-static-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 # Install Core-related headers
 INSTALL(
-	DIRECTORY core
-	DESTINATION include/${VERSIONED_INST_PATH}
+	DIRECTORY application core job thread
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
 	FILES_MATCHING
 		PATTERN "*.h"
 		PATTERN "*.hxx"
@@ -638,7 +642,6 @@ INSTALL(
 	PATTERN "CMakeFiles" EXCLUDE
 	PATTERN "cmake" EXCLUDE
 )
-
 # Install other core-related base files
 INSTALL(FILES
 	Doxygen.txt
@@ -647,5 +650,5 @@ INSTALL(FILES
 	yuni.config.gcc
 	yuni.h
 	yuni.version
-		DESTINATION include/${VERSIONED_INST_PATH})
+		DESTINATION include/${YUNI_VERSIONED_INST_PATH})
 

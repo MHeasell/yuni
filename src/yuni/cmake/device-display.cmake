@@ -50,6 +50,26 @@ Add_Library(yuni-static-device-display STATIC
 			yuni.h
 			${SRC_DEVICE_DISPLAY}
 )
+
+# Setting output path
+SET_TARGET_PROPERTIES(yuni-static-device-display PROPERTIES 
+		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
+
+# Installation
+INSTALL(TARGETS yuni-static-device-display ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+
+# Install Device-related headers
+INSTALL(
+	DIRECTORY device
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "*.hxx"
+	PATTERN ".svn" EXCLUDE
+	PATTERN "CMakeFiles" EXCLUDE
+	PATTERN "cmake" EXCLUDE
+)
+
 target_link_libraries(yuni-static-device-display yuni-static-core)
 
 

@@ -1,11 +1,13 @@
-Project(Yuni-Framework)
+
+# Minimum CMake version check
 CMake_minimum_required(VERSION 2.8)
-MEssage(STATUS "${CMAKE_CXX_FLAGS}")
+Message(STATUS "${CMAKE_CXX_FLAGS}")
 include("cmake/message.cmake")
 
 YMESSAGE("")
 YMESSAGE("The Yuni Framework")
 YMESSAGE("")
+Project(Yuni-Framework) 
 
 
 # Package informations
@@ -65,11 +67,15 @@ Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SystemInformation.cmake")
 
 #
 # The target directory for static libs
+# Various output directories
 #
-Set(VERSIONED_INST_PATH "yuni/${YUNI_VERSION}")
+Set(YUNI_VERSIONED_INST_PATH "yuni/${YUNI_VERSION}")
+Set(YUNI_OUTPUT_DIRECTORY    "${CMAKE_CURRENT_BINARY_DIR}/build/${YUNI_TARGET}/")
+Set(YUNI_SOURCE_TREE         "${CMAKE_CURRENT_SOURCE_DIR}/yuni/")
 
 YMESSAGE("Folders")
-YMESSAGE("   root: `${CMAKE_CURRENT_SOURCE_DIR}`")
+YMESSAGE("       Source: ${CMAKE_CURRENT_SOURCE_DIR}")
+YMESSAGE("   Build into: ${CMAKE_CURRENT_BINARY_DIR}")
 
 
 # Custom settings

@@ -30,6 +30,26 @@ Add_Library(yuni-static-gfx-core STATIC
 			${SRC_GFX}
 			${SRC_APPLICATION_GFX}
 )
+
+# Setting output path
+SET_TARGET_PROPERTIES(yuni-static-gfx-core PROPERTIES 
+		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
+
+# Installation
+INSTALL(TARGETS yuni-static-gfx-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+
+# Install gfx-related headers
+INSTALL(
+	DIRECTORY gfx
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "*.hxx"
+	PATTERN ".svn" EXCLUDE
+	PATTERN "CMakeFiles" EXCLUDE
+	PATTERN "cmake" EXCLUDE
+)
+
 target_link_libraries(yuni-static-gfx-core yuni-static-core)
 
 

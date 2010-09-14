@@ -46,17 +46,18 @@ IF(WIN32 OR WIN64)
 	SET(__Yuni_ProgramSearchPath
 		C:/dev/libyuni
 		C:/libyuni
-		"${__Yuni_CurrentFolder}/../../src/tools/yuni-config"
-		"${__Yuni_CurrentFolder}/../../src/tools/yuni-config/Release"
-		"${__Yuni_CurrentFolder}/../../src/tools/yuni-config/Debug"
+		"${__Yuni_CurrentFolder}/../../src/build/release/bin/"
+		"${__Yuni_CurrentFolder}/../../src/build/debug/bin/"
 		"$ENV{YuniPaths}")
 ELSE(WIN32 OR WIN64)
 	SET(__Yuni_ProgramSearchPath
-		"${__Yuni_CurrentFolder}/../../src/tools/yuni-config" "$ENV{YuniPaths}")
+		"${__Yuni_CurrentFolder}/../../src/build/release/bin"
+		"${__Yuni_CurrentFolder}/../../src/build/debug/bin"
+		"$ENV{YuniPaths}")
 ENDIF(WIN32 OR WIN64)
 
-FIND_PROGRAM(__Yuni_Config NAMES yuni-config yuni-config.exe
-    PATHS ${__Yuni_ProgramSearchPath})
+FIND_PROGRAM(__Yuni_Config NAMES yuni-config yuni-config.exe PATHS ${__Yuni_ProgramSearchPath})
+
 IF("${__Yuni_Config}" STREQUAL "__Yuni_Config-NOTFOUND")
 	MESSAGE(STATUS "${__Yuni_Message} - failed ('yuni-config' not found)")
 	SET(Yuni_NOTFOUND TRUE)

@@ -102,4 +102,23 @@ source_group(Audio\\Ffmpeg FILES ${SRC_AUDIO_FFMPEG})
 
 Add_Library(yuni-static-audio-core STATIC ${SRC_AUDIO_FFMPEG} ${SRC_AUDIO})
 
+# Setting output path
+SET_TARGET_PROPERTIES(yuni-static-audio-core PROPERTIES 
+		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
+
+# Installation
+INSTALL(TARGETS yuni-static-audio-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+
+# Install Audio-related headers
+INSTALL(
+	DIRECTORY audio
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "*.hxx"
+	PATTERN ".svn" EXCLUDE
+	PATTERN "CMakeFiles" EXCLUDE
+	PATTERN "cmake" EXCLUDE
+)
+
 target_link_libraries(yuni-static-audio-core ${OPENAL_LIBRARY})

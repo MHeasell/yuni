@@ -46,9 +46,27 @@ if(YUNI_EXTERNAL_SCRIPT_LUA)
 Endif(YUNI_EXTERNAL_SCRIPT_LUA)
 
 
-
-
 Add_Library(yuni-static-script STATIC
 	${SRC_SCRIPT} ${SRC_EXTERNAL_SCRIPT_LUA})
 
+# Setting output path
+SET_TARGET_PROPERTIES(yuni-static-script PROPERTIES 
+		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
+# Installation
+INSTALL(TARGETS yuni-static-script ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+
+# Install Script-related headers
+INSTALL(
+	DIRECTORY script
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "*.hxx"
+	PATTERN ".svn" EXCLUDE
+	PATTERN "CMakeFiles" EXCLUDE
+	PATTERN "cmake" EXCLUDE
+)
+
+# Link
+target_link_libraries(yuni-static-script yuni-static-core)
