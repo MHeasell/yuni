@@ -21,6 +21,8 @@ namespace UI
 	public:
 		//! A class name is a string tag representing a type of component
 		typedef CustomString<64, false, false> ClassName;
+		//! Unique local identifier
+		typedef sint64 ID;
 
 	public:
 		//! \name Constructor & Destructor
@@ -28,14 +30,14 @@ namespace UI
 		/*!
 		** \brief Empty constructor
 		*/
-		IComponent() : pPosition(500, 500), pWidth(800), pHeight(600)
+		IComponent() : pPosition(50, 50), pWidth(50), pHeight(50)
 		{}
 
 		/*!
 		** \brief Constructor with dimensions
 		*/
 		IComponent(size_t width, size_t height)
-			: pPosition(0, 0), pWidth(width), pHeight(height), pModified(true)
+			: pPosition(50, 50), pWidth(width), pHeight(height), pModified(true)
 		{}
 
 		/*!
@@ -111,6 +113,14 @@ namespace UI
 
 
 	protected:
+		/*!
+		** \brief Unique local identifier
+		*/
+	    ID pID;
+
+		/*!
+		** \brief Class name for this component (type of component)
+		*/
 		ClassName pClass;
 
 		/*!
