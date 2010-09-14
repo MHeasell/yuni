@@ -531,12 +531,14 @@ Set(SRC_JOBS
         job/queue/queue.h
         job/queue/queue.hxx
 		job/queue/thread.h
+		job/queue/thread.hxx
 		job/queue/waitingroom.h
         job/queue/waitingroom.hxx
 		job/queue/waitingroom.cpp
 
 		# Scheduler
-		job/scheduler/highestpriorityfirst.h job/scheduler/highestpriorityfirst.hxx
+		job/scheduler/highestpriorityfirst.h
+		job/scheduler/highestpriorityfirst.hxx
 		)
 source_group(Jobs FILES ${SRC_JOBS})
 
