@@ -103,6 +103,11 @@ namespace Yuni
 
 	void LibConfigProgram::findRootPath(const char* a0)
 	{
+		# ifdef YUNI_YUNICONFIG_IN_TREE
+		(void) a0;
+		pRootPath = YUNI_YUNICONFIG_IN_TREE;
+		# else
+
 		const String argv0 = a0;
 		if (Core::IO::IsAbsolute(argv0))
 			pRootPath = Core::IO::ExtractFilePath(argv0);
@@ -112,6 +117,8 @@ namespace Yuni
 			pRootPath << Core::IO::Separator << Core::IO::ExtractFilePath(argv0);
 			pRootPath.removeTrailingSlash();
 		}
+		# endif
+
 		if (pOptDebug)
 			std::cout << "[debug] Root path : `" << pRootPath << '`' << std::endl;
 	}
@@ -145,14 +152,14 @@ namespace Yuni
 			pDefaultPathList.push_back("${PROGRAMFILES}\\Dev\\libyuni");
 			pDefaultPathList.push_back("C:\\Dev\\libyuni");
 			# else
-			pDefaultPathList.push_back(String() << YUNI_INSTALL_PREFIX << "/lib/" << YUNI_VERSIONED_INST_PATH);
-			pDefaultPathList.push_back(String() << YUNI_INSTALL_PREFIX << "/lib");
-			pDefaultPathList.push_back("/usr/lib/yuni");
-			pDefaultPathList.push_back("/usr/local/lib/yuni");
-			pDefaultPathList.push_back("/opt/yuni/lib");
+			pDefaultPathList.push_back(String() << YUNI_INSTALL_PREFIX << "/include/" << YUNI_VERSIONED_INST_PATH);
+			pDefaultPathList.push_back(String() << YUNI_INSTALL_PREFIX << "/include"); 
+			pDefaultPathList.push_back("/usr/include/yuni"); 
+			pDefaultPathList.push_back("/usr/local/include/yuni"); 
+			pDefaultPathList.push_back("/opt/yuni/include"); 
 			# endif
 			# ifdef YUNI_OS_MAC
-			pDefaultPathList.push_back("/opt/local/lib/yuni");
+			pDefaultPathList.push_back("/opt/local/include/yuni");
 			# endif
 		}
 	}

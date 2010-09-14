@@ -12,3 +12,7 @@ source_group(Tests FILES ${SRC_TESTS})
 
 Add_Library(yuni-static-tests STATIC  yuni.h ${SRC_TESTS})
 
+# Setting output path
+SET_TARGET_PROPERTIES(yuni-static-tests PROPERTIES 
+		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
+

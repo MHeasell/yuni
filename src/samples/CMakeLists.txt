@@ -1,15 +1,16 @@
-Project(YUNI-SAMPLES CXX)
 CMake_minimum_required(VERSION 2.8)
 include("../cmake/message.cmake")
-
-IF(POLICY CMP0011)
-	CMake_Policy(SET CMP0011 NEW)
-ENDIF(POLICY CMP0011)
 
 
 YMESSAGE("")
 YMESSAGE("Yuni Framework - Samples")
 YMESSAGE("")
+Project(YUNI-SAMPLES CXX)
+
+IF(POLICY CMP0011)
+	CMake_Policy(SET CMP0011 NEW)
+ENDIF(POLICY CMP0011)
+
 
 # To find 'FindYuni.cmake'
 LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../packages/cmake")
