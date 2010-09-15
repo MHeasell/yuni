@@ -26,39 +26,39 @@ targetFolder=`dirname "$0"`
 # \param $1 A relative or absolute path
 # \return (echo) The absolute path
 #
-rel2abs() 
+rel2abs()
 {
-	# make sure file is specified 
-	if [ -z "$1" ] 
-	then 
-		echo "$1" 
+	# make sure file is specified
+	if [ -z "$1" ]
+	then
+		echo "$1"
 		return 1
 	fi
-	# already absolute case 
-	if [ "${1:0:1}" = "/" ] || [ "$PWD" = "/" ] 
-	then 
-		ABS="" 
-	else 
-		ABS="$PWD" 
-	fi 
-	# loop thru path 
-	IFS="/" 
-	for DIR in $1 
-	do 
-		if [ -n "$DIR" ] 
-		then 
-			if [ "$DIR" = ".." ] 
-			then 
-				ABS="${ABS%/*}" 
-			elif [ "$DIR" != "." ] 
-			then 
-				ABS="$ABS/$DIR" 
+	# already absolute case
+	if [ "${1:0:1}" = "/" ] || [ "$PWD" = "/" ]
+	then
+		ABS=""
+	else
+		ABS="$PWD"
+	fi
+	# loop thru path
+	IFS="/"
+	for DIR in $1
+	do
+		if [ -n "$DIR" ]
+		then
+			if [ "$DIR" = ".." ]
+			then
+				ABS="${ABS%/*}"
+			elif [ "$DIR" != "." ]
+			then
+				ABS="$ABS/$DIR"
 			fi
 		fi
-	done 
-	IFS=":" 
-	echo "$ABS" 
-	return 0 
+	done
+	IFS=":"
+	echo "$ABS"
+	return 0
 }
 
 
@@ -182,7 +182,7 @@ checkDevPackFolderConsistency()
 #
 help()
 {
-	echo "Yuni - Package maker for externals dependencies"
+	echo "Yuni - Package maker for external dependencies"
 	echo "Usage: `basename "$0"` [<options>] <sourcedir>"
 	echo "Options:"
 	echo "   -n  : Name of the package (ex: '-n irrlicht', '-n lua')"
@@ -197,7 +197,7 @@ help()
 	echo "   -h  : This help"
 	echo
 	echo "Example:"
-	echo "  ./makepackage.sh -n irrlicht -v1.4.1 -r3 ~/somewhere/on/my/disks/my-devpacks/irrlicht"
+	echo "  ./makepackage.sh -n lua -v5.1.4 -r3 ~/somewhere/on/my/disks/my-devpacks/lua"
 	echo
 	echo "Note: The source directory should be like this :"
 	echo "  + <the source dir>"
@@ -298,7 +298,7 @@ checkEnv
 #
 # --- Start the packaging ---
 #
-echo "Yuni - Package maker for externals dependencies"
+echo "Yuni - Package maker for external dependencies"
 printPkgSettings
 
 
@@ -364,7 +364,7 @@ checkDevPackFolderConsistency "${pkgSource}"
 
 
 
-# The `yndevpack-*` file 
+# The `yndevpack-*` file
 devpackfile="yndevpack-${pkgName}-${pkgVersion}-${pkgRevision}-${pkgOS}-${pkgArch}-${pkgCompiler}-${pkgTarget}"
 devpack="${pkgSource}/${devpackfile}"
 if [ ! -f "${devpack}" ]; then
