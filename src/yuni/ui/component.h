@@ -36,7 +36,7 @@ namespace UI
 		/*!
 		** \brief Constructor with dimensions
 		*/
-		IComponent(size_t width, size_t height)
+		IComponent(unsigned int width, unsigned int height)
 			: pPosition(50, 50), pWidth(width), pHeight(height), pModified(true)
 		{}
 
@@ -44,7 +44,7 @@ namespace UI
 		** \brief Full constructor
 		*/
 		template<typename T, typename U>
-		IComponent(T x, U y, size_t width, size_t height)
+		IComponent(T x, U y, unsigned int width, unsigned int height)
 			: pPosition(x, y), pWidth(width), pHeight(height), pModified(true)
 		{}
 
@@ -52,7 +52,7 @@ namespace UI
 		** \brief Full constructor
 		*/
 		template<typename T>
-		IComponent(Point2D<T>& pos, size_t width, size_t height)
+		IComponent(Point2D<T>& pos, unsigned int width, unsigned int height)
 			: pPosition(pos), pWidth(width), pHeight(height), pModified(true)
 		{}
 
@@ -68,7 +68,7 @@ namespace UI
 		**
 		** This is implementation-dependent
 		*/
-		virtual void resize(size_t width, size_t height)
+		virtual void resize(unsigned int width, unsigned int height)
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pWidth = width;
@@ -126,17 +126,17 @@ namespace UI
 		/*!
 		** \brief Position of the component relative to its parent
 		*/
-		Point2D<size_t> pPosition;
+		Point2D<unsigned int> pPosition;
 
 		/*!
 		** \brief Width of the component
 		*/
-		size_t pWidth;
+		unsigned int pWidth;
 
 		/*!
 		** \brief Height of the component
 		*/
-		size_t pHeight;
+		unsigned int pHeight;
 
 		/*!
 		** \brief Store if the component has been modified

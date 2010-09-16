@@ -35,7 +35,7 @@ namespace Surface
 	void OpenGL::release()
 	{}
 
-	void OpenGL::resize(size_t width, size_t height)
+	void OpenGL::resize(unsigned int width, unsigned int height)
 	{
 		// Prevent A Divide By Zero
 		if (0 == height)
@@ -75,14 +75,15 @@ namespace Surface
 
 	void OpenGL::applyRotation(const Vector3D<float>& rotation)
 	{
-		glRotatef(rotation.x,1.0,0.0,0.0); // Rotate on x
-		glRotatef(rotation.y,0.0,1.0,0.0); // Rotate on y
-		glRotatef(rotation.z,0.0,0.0,1.0); // Rotate on z
+		// glRotatef(1.0f, rotation.x, rotation.y, rotation.z); ?
+		glRotatef(rotation.x, 1.0f, 0.0f, 0.0f); // Rotate on x
+		glRotatef(rotation.y, 0.0f, 1.0f, 0.0f); // Rotate on y
+		glRotatef(rotation.z, 0.0f, 0.0f, 1.0f); // Rotate on z
 	}
 
 	void OpenGL::drawTriangles(const Mesh::TriangleList& triangles)
 	{
-		// Foreach triangle
+		// For each triangle
 		const Gfx::Mesh::TriangleList::const_iterator endtr = triangles.end();
 		for (Gfx::Mesh::TriangleList::const_iterator it = triangles.begin(); it != endtr; ++it)
 		{

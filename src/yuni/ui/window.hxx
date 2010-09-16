@@ -16,21 +16,23 @@ namespace UI
 	}
 
 	template<typename StringT>
-	inline Window::Window(const StringT& newTitle, size_t width, size_t height)
+	inline Window::Window(const StringT& newTitle, unsigned int width, unsigned int height)
 		: IComponent(width, height), pClosing(false)
 	{
 		title(newTitle);
 	}
 
 	template<typename StringT, typename NumberT, typename NumberT2>
-	inline Window::Window(const StringT& newTitle, NumberT x, NumberT2 y, size_t width, size_t height)
+	inline Window::Window(const StringT& newTitle, NumberT x, NumberT2 y, unsigned int width,
+		unsigned int height)
 		: IComponent(x, y, width, height), pClosing(false)
 	{
 		title(newTitle);
 	}
 
 	template<typename StringT, typename NumberT>
-	inline Window::Window(const StringT& newTitle, const Point2D<NumberT>& pos, size_t width, size_t height)
+	inline Window::Window(const StringT& newTitle, const Point2D<NumberT>& pos, unsigned int width,
+		unsigned int height)
 		: IComponent(pos, width, height), pClosing(false)
 	{
 		title(newTitle);
