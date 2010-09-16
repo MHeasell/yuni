@@ -1,6 +1,7 @@
 #ifndef __YUNI_GFX_WINDOW_WINDOW_H__
 # define __YUNI_GFX_WINDOW_WINDOW_H__
 
+# include <map>
 # include "../../yuni.h"
 # include "../device.h"
 # include "../../core/string.h"
@@ -27,6 +28,8 @@ namespace Window
 	*/
 	class IWindow: public UI::IComponent
 	{
+	public:
+		typedef std::map<sint64, IWindow> Map;
 
 	public:
 		//! \name Constructor & Destructor

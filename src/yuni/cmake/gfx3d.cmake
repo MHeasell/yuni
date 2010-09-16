@@ -46,14 +46,30 @@ Set(SRC_GFX3D
 		gfx/text/font.h gfx/text/label.h
 	)
 
+
 IF (YUNI_MODULE_UI)
+
 	LIST(APPEND SRC_GFX3D
 		# UI
 		ui/application.h
 		ui/component.h
 		ui/desktop.h
 		ui/window.h ui/window.hxx)
-ENDIF()
+
+	#
+	# Cairo - Pango
+	#
+	DEVPACK_IMPORT_CAIROPANGO()
+	IF(CAIRO_FOUND)
+		# We Have Cairo
+		LIST(APPEND SRC_GFX3D gfx/surface/cairo.h gfx/surface/cairo.cpp)
+		IF (WIN32 OR WIN64)
+			# Cairo under Windows
+			LIST(APPEND SRC_GFX3D gfx/window/msw/cairo.cpp)
+		ENDIF (WIN32 OR WIN64)
+	ENDIF(CAIRO_FOUND)
+
+ENDIF(YUNI_MODULE_UI)
 
 
 IF(WIN32 OR WIN64)
@@ -62,20 +78,6 @@ ENDIF(WIN32 OR WIN64)
 
 
 Include(CheckIncludeFile)
-
-
-#
-# Cairo - Pango
-#
-DEVPACK_IMPORT_CAIROPANGO()
-IF(CAIRO_FOUND)
-	# We Have Cairo
-	LIST(APPEND SRC_GFX3D gfx/surface/cairo.h gfx/surface/cairo.cpp)
-	IF (WIN32 OR WIN64)
-		# Cairo under Windows
-		LIST(APPEND SRC_GFX3D gfx/window/msw/cairo.cpp)
-	ENDIF (WIN32 OR WIN64)
-ENDIF(CAIRO_FOUND)
 
 
 #

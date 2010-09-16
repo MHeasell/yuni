@@ -16,9 +16,9 @@ namespace Context
 	*/
 	class OpenGL3D: public Context
 	{
-
 	public:
-
+		bool update()
+		{}
 	};
 
 } // namespace Context

@@ -36,19 +36,21 @@ namespace UI
 		** \brief Constructor with dimensions
 		*/
 		template<typename StringT>
-		Window(const StringT& title, size_t width, size_t height);
+		Window(const StringT& title, unsigned int width, unsigned int height);
 
 		/*!
 		** \brief Constructor with start position coordinates
 		*/
 		template<typename StringT, typename NumberT, typename NumberT2>
-		Window(const StringT& title, NumberT x, NumberT2 y, size_t width, size_t height);
+		Window(const StringT& title, NumberT x, NumberT2 y, unsigned int width,
+			unsigned int height);
 
 		/*!
 		** \brief Constructor with start position as a point
 		*/
 		template<typename StringT, typename NumberT>
-		Window(const StringT& title, const Point2D<NumberT>& pos, size_t width, size_t height);
+		Window(const StringT& title, const Point2D<NumberT>& pos, unsigned int width,
+			unsigned int height);
 
 		//! Virtual destructor
 		virtual ~Window();

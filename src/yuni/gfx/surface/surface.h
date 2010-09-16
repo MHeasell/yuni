@@ -52,7 +52,7 @@ namespace Surface
 		virtual void release() = 0;
 
 		//! Resize the viewport
-		virtual void resize(size_t width, size_t height) = 0;
+		virtual void resize(unsigned int width, unsigned int height) = 0;
 
 		//! Refresh view
 		virtual bool refresh() = 0;
