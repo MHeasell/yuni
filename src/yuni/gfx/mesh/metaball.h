@@ -1,8 +1,8 @@
-#ifndef __YUNI_GFX_METABALL_H__
-# define __YUNI_GFX_METABALL_H__
+#ifndef __YUNI_GFX_MESH_METABALL_H__
+# define __YUNI_GFX_MESH_METABALL_H__
 
-# include "../yuni.h"
-# include "../core/point3D.h"
+# include "../../yuni.h"
+# include "../../core/point3D.h"
 # include "metaobject.h"
 
 
@@ -122,4 +122,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_METABALL_H__
+#endif // __YUNI_GFX_MESH_METABALL_H__

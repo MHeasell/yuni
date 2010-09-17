@@ -11,14 +11,16 @@ source_group(Application FILES ${SRC_APPLICATION_GFX})
 # Gfx
 Set(SRC_GFX
 		gfx/device.h gfx/device.cpp
-		gfx/vertex.h gfx/triangle.h gfx/edge.h
+		gfx/mesh/vertex.h gfx/mesh/triangle.h gfx/mesh/edge.h
 		gfx/object3D.h gfx/object3D.cpp
 		gfx/objectmodel.h gfx/scene.h gfx/scene.cpp
-		gfx/skeleton.h gfx/mesh.h gfx/mesh.cpp
-		gfx/implicitsurface.h gfx/implicitsurface.cpp gfx/implicitsurfmanager.h
-		gfx/metaobject.h gfx/metaball.h  gfx/metaball.cpp  gfx/metabox.h
+		gfx/mesh/skeleton.h gfx/mesh/mesh.h gfx/mesh/mesh.cpp
+		gfx/mesh/implicitsurface.h gfx/mesh/implicitsurface.cpp
+		gfx/mesh/implicitsurfmanager.h
+		gfx/mesh/metaobject.h gfx/mesh/metaball.h
+		gfx/mesh/metaball.cpp gfx/mesh/metabox.h
 		gfx/boundingbox.h gfx/boundingbox.hxx
-		gfx/polygonizer.h gfx/marchingcubes.h gfx/marchingcubes.cpp
+		gfx/mesh/polygonizer.h gfx/mesh/marchingcubes.h gfx/mesh/marchingcubes.cpp
 		)
 source_group(Gfx FILES ${SRC_GFX})
 
@@ -32,7 +34,7 @@ Add_Library(yuni-static-gfx-core STATIC
 )
 
 # Setting output path
-SET_TARGET_PROPERTIES(yuni-static-gfx-core PROPERTIES 
+SET_TARGET_PROPERTIES(yuni-static-gfx-core PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation

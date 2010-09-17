@@ -1,8 +1,8 @@
 
-#ifndef __YUNI_GFX_MESH_H__
-# define __YUNI_GFX_MESH_H__
+#ifndef __YUNI_GFX_MESH_MESH_H__
+# define __YUNI_GFX_MESH_MESH_H__
 
-# include "../core/smartptr/smartptr.h"
+# include "../../core/smartptr/smartptr.h"
 # include "triangle.h"
 
 
@@ -76,4 +76,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_MESH_H__
+#endif // __YUNI_GFX_MESH_MESH_H__

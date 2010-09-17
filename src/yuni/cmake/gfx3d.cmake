@@ -40,7 +40,6 @@ Set(SRC_GFX3D
 		gfx/surface/surface.h
 		gfx/surface/surface3d.h gfx/surface/surface3d.cpp
 		gfx/surface/opengl.h gfx/surface/opengl.cpp
-		gfx/surface/cairo.h gfx/surface/cairo.cpp
 
 		# Font
 		gfx/text/font.h gfx/text/label.h
@@ -195,13 +194,12 @@ source_group(Gfx3D FILES ${SRC_GFX3D})
 Add_Library(yuni-static-gfx3d-core STATIC ${SRC_GFX3D})
 
 # Setting output path
-SET_TARGET_PROPERTIES(yuni-static-gfx3d-core PROPERTIES 
+SET_TARGET_PROPERTIES(yuni-static-gfx3d-core PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
 INSTALL(TARGETS yuni-static-gfx3d-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 target_link_libraries(yuni-static-gfx3d-core
-	# DirectX
 	${OPENGL_LIBRARY} ${DX9_LIBRARIES})
 

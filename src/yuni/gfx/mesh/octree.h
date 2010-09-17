@@ -1,12 +1,11 @@
 #ifndef __YUNI_GFX_OCTREE_H__
 # define __YUNI_GFX_OCTREE_H__
 
-# include "../yuni.h"
+# include "../../yuni.h"
 # include <vector>
 # include <iostream>
-# include "../yuni.h"
-# include "../core/point3D.h"
-# include "boundingbox.h"
+# include "../../core/point3D.h"
+# include "../boundingbox.h"
 
 
 # define YUNI_OCTREE_MAX_CHILDREN  8

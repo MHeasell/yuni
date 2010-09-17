@@ -1,7 +1,7 @@
-#ifndef __YUNI_GFX_SKELETON_H__
-# define __YUNI_GFX_SKELETON_H__
+#ifndef __YUNI_GFX_MESH_SKELETON_H__
+# define __YUNI_GFX_MESH_SKELETON_H__
 
-# include "../core/tree/treeN.h"
+# include "../../core/tree/treeN.h"
 # include "mesh.h"
 
 
@@ -32,7 +32,7 @@ namespace Gfx
 			:pMesh(new Mesh())
 		{}
 
-		
+
 		/*!
 		** \brief Constructor with no transformation
 		** \param Mesh to use for this skeleton
@@ -88,4 +88,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_SKELETON_H__
+#endif // __YUNI_GFX_MESH_SKELETON_H__

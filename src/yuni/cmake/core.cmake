@@ -560,7 +560,7 @@ source_group(Core\\Color FILES ${SRC_CORE_COLOR})
 
 
 Set(SRC_GFX_CORE
-		gfx/octree.h gfx/octree.cpp
+		gfx/mesh/octree.h gfx/mesh/octree.cpp
 		)
 source_group(Gfx FILES ${SRC_GFX_CORE})
 

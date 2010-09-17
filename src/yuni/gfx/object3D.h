@@ -4,7 +4,7 @@
 # include "../core/string/string.h"
 # include "../core/smartptr/smartptr.h"
 # include "../core/tree/treeN.h"
-# include "skeleton.h"
+# include "mesh/skeleton.h"
 # include "objectmodel.h"
 
 

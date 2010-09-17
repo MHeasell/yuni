@@ -1,6 +1,6 @@
 
 #include "metaball.h"
-#include "../core/math.h"
+#include "../../core/math.h"
 
 
 

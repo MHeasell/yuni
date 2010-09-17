@@ -1,7 +1,7 @@
-#ifndef __YUNI_GFX_POLYGONIZER_H__
-# define __YUNI_GFX_POLYGONIZER_H__
+#ifndef __YUNI_GFX_MESH_POLYGONIZER_H__
+# define __YUNI_GFX_MESH_POLYGONIZER_H__
 
-# include "../yuni.h"
+# include "../../yuni.h"
 # include "implicitsurface.h"
 # include "mesh.h"
 
@@ -66,4 +66,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_POLYGONIZER_H__
+#endif // __YUNI_GFX_MESH_POLYGONIZER_H__
