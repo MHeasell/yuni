@@ -1,6 +1,6 @@
 
 #include <algorithm>
-#include "../core/stl/algorithm.h"
+#include "../../core/stl/algorithm.h"
 #include "implicitsurface.h"
 
 

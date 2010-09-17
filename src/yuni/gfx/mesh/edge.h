@@ -1,10 +1,10 @@
 #ifndef __YUNI_GFX_EDGE_H__
 # define __YUNI_GFX_EDGE_H__
 
+# include "../../yuni.h"
 # include <vector>
 # include <list>
-# include "../yuni.h"
-# include "../core/smartptr/smartptr.h"
+# include "../../core/smartptr/smartptr.h"
 # include "vertex.h"
 
 

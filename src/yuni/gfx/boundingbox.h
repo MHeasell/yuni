@@ -3,7 +3,7 @@
 
 # include "../yuni.h"
 # include "../core/point3D.h"
-# include "triangle.h"
+# include "mesh/triangle.h"
 
 
 

@@ -2,7 +2,7 @@
 # define __YUNI_GFX_OBJECTMODEL_H__
 
 # include "../core/smartptr/smartptr.h"
-# include "skeleton.h"
+# include "mesh/skeleton.h"
 
 namespace Yuni
 {

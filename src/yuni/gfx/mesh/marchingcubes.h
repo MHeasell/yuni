@@ -3,7 +3,7 @@
 
 # include <vector>
 # include <queue>
-# include "../yuni.h"
+# include "../../yuni.h"
 # include "polygonizer.h"
 # include "implicitsurface.h"
 
@@ -118,4 +118,4 @@ namespace Gfx
 } // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_MARCHINGCUBES_H__
+#endif // __LIB_3D_MARCHINGCUBES_H__
