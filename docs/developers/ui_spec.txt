@@ -79,25 +79,7 @@ inline bool closing() const {return pState & csClosing;}  // UI::Window
 III) Class hierarchy :
 ======================
 
-UI::IComponent
-|
- -> UI::IControl
-|   |
-|    -> UI::Context3D::IContext3D
-|   |    |
-|   |     -> UI::Context3D::OpenGL
-|   |    |
-|   |     -> UI::Context3D::DirectX
-|   |
-|    -> UI::Button
-|
- -> UI::IControl, UI::ControlWithItems
-    |
-     -> UI::Window
-    |
-     -> UI::IPanel
-         |
-          -> UI::Panel
+See ui_hierarchy.dot
 
 
 IV) Directory structure :
