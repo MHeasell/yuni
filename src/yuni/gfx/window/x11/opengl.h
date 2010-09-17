@@ -32,7 +32,7 @@ namespace Window
 
 		virtual void close();
 
-		virtual void resize(size_t width, size_t height)
+		virtual void resize(unsigned int width, unsigned int height)
 		{
 			IWindow::resize(width, height);
 			Surface::OpenGL::resize(width, height);
