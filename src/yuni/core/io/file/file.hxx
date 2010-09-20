@@ -19,7 +19,9 @@ namespace IO
 	bool Size(const char* filename, unsigned int len, uint64& value);
 	bool SizeNotZeroTerminated(const char* filename, unsigned int len, uint64& value);
 
-	Yuni::Core::IO::IOError DeleteFile(const char* const filename, unsigned int len);
+	// DeleteFile is actually a macro and will be replaced by DeleteFileW
+	// with Visual Studio. Consequently we can not use the word DeleteFile.....
+	Yuni::Core::IO::IOError YnDeleteFile(const char* const filename, unsigned int len);
 	Yuni::Core::IO::IOError DeleteFileNotZeroTerminated(const char* const filename, unsigned int len);
 
 } // namespace IO
@@ -234,7 +236,7 @@ namespace File
 		}
 		else
 		{
-			return Yuni::Private::Core::IO::DeleteFile(
+			return Yuni::Private::Core::IO::YnDeleteFile(
 				Traits::CString<StringT>::Perform(filename),
 				Traits::Length<StringT,unsigned int>::Value(filename));
 		}

@@ -129,7 +129,7 @@ namespace IO
 
 
 
-	Yuni::Core::IO::IOError DeleteFile(const char* const filename, unsigned int len)
+	Yuni::Core::IO::IOError YnDeleteFile(const char* const filename, unsigned int len)
 	{
 		if (!len)
 			return Yuni::Core::IO::ioErrUnknown;
@@ -184,16 +184,16 @@ namespace IO
 		{
 			CustomString<1024, false, true> copy;
 			copy.assign(filename, len);
-			return DeleteFile(copy.c_str(), copy.size());
+			return YnDeleteFile(copy.c_str(), copy.size());
 		}
 		else
 		{
 			CustomString<> copy;
 			copy.assign(filename, len);
-			return DeleteFile(copy.c_str(), copy.size());
+			return YnDeleteFile(copy.c_str(), copy.size());
 		}
 		# else
-		return DeleteFile(filename, len);
+		return YnDeleteFile(filename, len);
 		# endif
 	}
 
@@ -206,5 +206,4 @@ namespace IO
 } // namespace Core
 } // namespace Private
 } // namespace Yuni
-
 
