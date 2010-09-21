@@ -26,7 +26,7 @@ Include("${CurrentFolder}/DetectInstructionsSets.cmake")
 
 IF(NOT WIN32)
 	Set(CMAKE_CXX_FLAGS_RELEASE         "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings")
-	Set(CMAKE_CXX_FLAGS_DEBUG           "-g -ggdb2 -Wall -Woverloaded-virtual -Wextra -Wconversion -Wredundant-decls -Wundef -Wcast-align -Wcast-qual -Wfloat-equal -Wunused-parameter -Wwrite-strings")
+	Set(CMAKE_CXX_FLAGS_DEBUG           "-g -ggdb3 -Wall -Woverloaded-virtual -Wextra -Wconversion -Wredundant-decls -Wundef -Wcast-align -Wcast-qual -Wfloat-equal -Wunused-parameter -Wwrite-strings")
 	Set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings")
 ENDIF(NOT WIN32)
 IF(MINGW)
