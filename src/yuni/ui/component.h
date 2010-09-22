@@ -1,7 +1,9 @@
-#ifndef __YUNI_GFX_UI_COMPONENT_H__
-# define __YUNI_GFX_UI_COMPONENT_H__
+#ifndef __YUNI_UI_COMPONENT_H__
+# define __YUNI_UI_COMPONENT_H__
 
 # include "../yuni.h"
+# include "../core/smartptr.h"
+# include "../core/event.h"
 # include "../thread/policy.h"
 # include "../core/point2D.h"
 
@@ -16,9 +18,14 @@ namespace UI
 	** Defines dimension and position of the component,
 	** and various common behaviours.
 	*/
-	class IComponent : public IEventObserver<IComponent>
+	template<class T,                                                // The original type
+		template<class> class TP     = Policy::ObjectLevelLockable,  // The threading policy
+		>
+	class IComponent : public IEventObserver<IComponent, TP>
 	{
 	public:
+		//! Smart pointer
+		typedef SmartPtr<IComponent> Ptr;
 		//! A class name is a string tag representing a type of component
 		typedef CustomString<64, false, false> ClassName;
 		//! Unique local identifier

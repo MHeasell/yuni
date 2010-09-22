@@ -4,7 +4,7 @@
 # include "../yuni.h"
 # include "../core/string.h"
 # include "../core/event/event.h"
-# include "component.h"
+# include "controlcontainer.h"
 
 
 namespace Yuni
@@ -16,9 +16,11 @@ namespace UI
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class Window: public IComponent
+	class Window: public IControlContainer<Window>
 	{
 	public:
+		//! Threading policy
+		typedef ObjectLevelLockable<Window> ThreadingPolicy;
 		//! Window vector
 		typedef std::vector<Window> Vector;
 

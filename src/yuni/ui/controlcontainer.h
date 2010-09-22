@@ -1,0 +1,93 @@
+#ifndef __YUNI_UI_CONTROL_CONTAINER_H__
+# define __YUNI_UI_CONTROL_CONTAINER_H__
+
+# include "../yuni.h"
+# include "../core/smartptr.h"
+# include "../thread/policy.h"
+# include "control.h"
+
+namespace Yuni
+{
+namespace UI
+{
+
+	/*!
+	** \brief Base class for UI controls that can contain other controls
+	**
+	** Works as a tree, using COM reference counted policy for smart pointers.
+	*/
+	template<class T,                                                // The original type
+		template<class> class TP     = Policy::ObjectLevelLockable,  // The threading policy
+		template <class> class ChckP = Policy::Checking::None,       // Checking policy
+		class ConvP			         = Policy::Conversion::Allow     // Conversion policy
+		>
+	class IControlContainer
+		: public TP<IControlContainer<T,TP> >,
+		public IControl<IControlContainer<T,TP>, TP>
+	{
+	public:
+		//! Smart pointer
+		typedef SmartPtr<IComponent, Policy::Ownership::COMReferenceCounted, ChckP, ConvP> Ptr;
+
+	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Empty constructor
+		*/
+		IControlContainer()
+		{}
+
+		/*!
+		** \brief Constructor with dimensions
+		*/
+		IControlContainer(unsigned int width, unsigned int height)
+			: IControl(width, height)
+		{}
+
+		/*!
+		** \brief Full constructor
+		*/
+		template<typename T, typename U>
+		IControlContainer(T x, U y, unsigned int width, unsigned int height)
+			: IControl(x, y, width, height)
+		{}
+
+		/*!
+		** \brief Full constructor
+		*/
+		template<typename T>
+		IControlContainer(Point2D<T>& pos, unsigned int width, unsigned int height)
+			: IControl(pos, width, height)
+		{}
+
+		//! Virtual destructor
+		virtual ~IControlContainer() {}
+		//@}
+
+
+		//! \name Methods
+		//@{
+		/*!
+		** \brief Resize the window
+		**
+		** This is implementation-dependent
+		*/
+		virtual void resize(unsigned int, unsigned int)
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			// TODO: Resize children to fit in the parent's new dimensions
+		}
+		//@}
+
+	private:
+		IControl::Vector pChildren;
+
+	}; // class IComponent
+
+
+} // namespace UI
+} // namespace Yuni
+
+
+#endif // __YUNI_UI_CONTROL_CONTAINER_H__
