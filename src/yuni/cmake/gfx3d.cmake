@@ -51,9 +51,13 @@ IF (YUNI_MODULE_UI)
 	LIST(APPEND SRC_GFX3D
 		# UI
 		ui/application.h
+		ui/button.h ui/button.cpp
 		ui/component.h
+		ui/control.h
+		ui/controlcontainer.h
 		ui/desktop.h
-		ui/window.h ui/window.hxx)
+		ui/window.h ui/window.hxx ui/window.cpp
+	)
 
 	#
 	# Cairo - Pango

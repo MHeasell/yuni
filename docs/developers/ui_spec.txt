@@ -127,7 +127,7 @@ Window_1
      -> Button_2
 
 Supposing components with * are modified, the algorithm will process
-as follows :
+them as follows :
 
 * Step 1:
   modified : [ [ 2 , [ Panel_2 ] ] , [ 3, [ Button_1 , CheckBox_1 ] ] ]

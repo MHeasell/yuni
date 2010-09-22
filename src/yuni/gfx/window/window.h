@@ -26,7 +26,7 @@ namespace Window
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class IWindow: public UI::IComponent
+	class IWindow
 	{
 	public:
 		typedef std::map<sint64, IWindow> Map;
