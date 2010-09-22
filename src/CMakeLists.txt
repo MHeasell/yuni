@@ -119,7 +119,7 @@ Add_SubDirectory(tools)
 #
 # Compiling yuni-config if required
 #
-IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
+IF(YUNI_AUTO_COMPILE_YUNI_CONFIG)
 	YMESSAGE("[yuni-config] Bootstraping")
 	IF(YUNI_TESTS)
 		YMESSAGE("The bootstrapping is required to compile the testsuite")
@@ -127,20 +127,22 @@ IF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
 	# --
 	YMESSAGE("Configuring yuni-config...")
 	YMESSAGE("(in ${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config)")
-	execute_process(COMMAND "${CMAKE_COMMAND}" . -G "${CMAKE_GENERATOR}" "-DCMAKE_BUILD_TYPE=release"
-			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config")
+	# Create the yuni-config bootstrap directory.
+	execute_process(COMMAND "${CMAKE_COMMAND}" -E make_directory
+		"${CMAKE_CURRENT_BINARY_DIR}/tools/yuni-config-bootstrap"
+		WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+	# Configure yuni-config like us.
+	execute_process(COMMAND "${CMAKE_COMMAND}"
+			${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config
+			"-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
+			"-DYUNI_OUTPUT_DIRECTORY=${YUNI_OUTPUT_DIRECTORY}"
+			"-DYUNI_BOOTSTRAP_YUNI_CONFIG=1}"
+			-G "${CMAKE_GENERATOR}"
+			WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tools/yuni-config-bootstrap")
+	# Compile it.
 	YMESSAGE("Compiling yuni-config...")
-    IF(WIN32)
-        IF(MSYS)
-            SET(Y_MAKE_COMMAND "make.exe")
-        ELSE(MSYS)
-            SET(Y_MAKE_COMMAND "mingw32-make.exe")
-        ENDIF(MSYS)
-    ELSE(WIN32)
-        SET(Y_MAKE_COMMAND "make")
-    ENDIF(WIN32)
-	execute_process(COMMAND ${Y_MAKE_COMMAND}
-			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config")
-ENDIF(YUNI_AUTO_COMPILE_LIBYUNI_CONFIG)
-
+	execute_process(COMMAND "${CMAKE_COMMAND}" --build
+                              "${CMAKE_CURRENT_BINARY_DIR}/tools/yuni-config-bootstrap"
+            WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tools/yuni-config-bootstrap")
+ENDIF(YUNI_AUTO_COMPILE_YUNI_CONFIG)
 
