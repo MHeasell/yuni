@@ -6,6 +6,7 @@
 # include "../thread/policy.h"
 # include "control.h"
 
+
 namespace Yuni
 {
 namespace UI
@@ -16,18 +17,16 @@ namespace UI
 	**
 	** Works as a tree, using COM reference counted policy for smart pointers.
 	*/
-	template<class T,                                                // The original type
-		template<class> class TP     = Policy::ObjectLevelLockable,  // The threading policy
-		template <class> class ChckP = Policy::Checking::None,       // Checking policy
-		class ConvP			         = Policy::Conversion::Allow     // Conversion policy
-		>
-	class IControlContainer
-		: public TP<IControlContainer<T,TP> >,
-		public IControl<IControlContainer<T,TP>, TP>
+	class IControlContainer : public IControl
 	{
 	public:
 		//! Smart pointer
-		typedef SmartPtr<IComponent, Policy::Ownership::COMReferenceCounted, ChckP, ConvP> Ptr;
+		typedef IComponent::SmartPtrInfo<IControlContainer>::Type Ptr;
+		//! Vector of controls
+		typedef std::vector<Ptr> Vector;
+
+		//! Threading Policy
+		typedef IComponent::ThreadingPolicy ThreadingPolicy;
 
 	public:
 		//! \name Constructor & Destructor
@@ -48,8 +47,7 @@ namespace UI
 		/*!
 		** \brief Full constructor
 		*/
-		template<typename T, typename U>
-		IControlContainer(T x, U y, unsigned int width, unsigned int height)
+		IControlContainer(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
 			: IControl(x, y, width, height)
 		{}
 
@@ -81,13 +79,16 @@ namespace UI
 		//@}
 
 	private:
+		//! Children controls
 		IControl::Vector pChildren;
 
 	}; // class IComponent
 
 
+
+
+
 } // namespace UI
 } // namespace Yuni
-
 
 #endif // __YUNI_UI_CONTROL_CONTAINER_H__
