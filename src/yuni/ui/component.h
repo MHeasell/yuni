@@ -6,6 +6,7 @@
 # include "../core/event.h"
 # include "../thread/policy.h"
 # include "../core/point2D.h"
+# include "../core/customstring.h"
 
 namespace Yuni
 {
@@ -18,14 +19,23 @@ namespace UI
 	** Defines dimension and position of the component,
 	** and various common behaviours.
 	*/
-	template<class T,                                                // The original type
-		template<class> class TP     = Policy::ObjectLevelLockable,  // The threading policy
-		>
-	class IComponent : public IEventObserver<IComponent, TP>
+	class IComponent
+		: public IEventObserver<IComponent, Policy::ObjectLevelLockable>
 	{
 	public:
-		//! Smart pointer
-		typedef SmartPtr<IComponent> Ptr;
+		template <class T>
+		struct SmartPtrInfo
+		{
+			typedef SmartPtr<T> Type;
+		};
+
+		typedef SmartPtrInfo<IComponent>::Type  Ptr;
+
+		//! Ancestor type
+		typedef IEventObserver<IComponent, Policy::ObjectLevelLockable> EventObserverType;
+		//! Threading policy
+		typedef EventObserverType::ThreadingPolicy ThreadingPolicy;
+
 		//! A class name is a string tag representing a type of component
 		typedef CustomString<64, false, false> ClassName;
 		//! Unique local identifier
@@ -44,15 +54,14 @@ namespace UI
 		** \brief Constructor with dimensions
 		*/
 		IComponent(unsigned int width, unsigned int height)
-			: pPosition(50, 50), pWidth(width), pHeight(height), pModified(true)
+			: pPosition(50, 50), pWidth(width), pHeight(height)
 		{}
 
 		/*!
 		** \brief Full constructor
 		*/
-		template<typename T, typename U>
-		IComponent(T x, U y, unsigned int width, unsigned int height)
-			: pPosition(x, y), pWidth(width), pHeight(height), pModified(true)
+		IComponent(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+			: pPosition(x, y), pWidth(width), pHeight(height)
 		{}
 
 		/*!
@@ -60,7 +69,7 @@ namespace UI
 		*/
 		template<typename T>
 		IComponent(Point2D<T>& pos, unsigned int width, unsigned int height)
-			: pPosition(pos), pWidth(width), pHeight(height), pModified(true)
+			: pPosition(pos), pWidth(width), pHeight(height)
 		{}
 
 		//! Virtual destructor
@@ -80,21 +89,6 @@ namespace UI
 			ThreadingPolicy::MutexLocker lock(*this);
 			pWidth = width;
 			pHeight = height;
-		}
-
-		/*!
-		** \brief Inform the component that other representations are up to date
-		**
-		** Once an internal representation of the component has been updated,
-		** the component should not be marked "modified" anymore.
-		**
-		** A clever trick will be required on call to avoid losing modifications
-		** due to multiple threads updating the status.
-		*/
-		virtual void synchronized()
-		{
-			ThreadingPolicy::MutexLocker lock(*this);
-			pModified = false;
 		}
 		//@}
 
@@ -145,12 +139,10 @@ namespace UI
 		*/
 		unsigned int pHeight;
 
-		/*!
-		** \brief Store if the component has been modified
-		*/
-		bool pModified;
-
 	}; // class IComponent
+
+
+
 
 
 } // namespace UI

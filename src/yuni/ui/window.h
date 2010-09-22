@@ -4,6 +4,7 @@
 # include "../yuni.h"
 # include "../core/string.h"
 # include "../core/event/event.h"
+# include "../thread/policy.h"
 # include "controlcontainer.h"
 
 
@@ -16,14 +17,16 @@ namespace UI
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class Window: public IControlContainer<Window>
+	class Window: public IControlContainer
 	{
 	public:
-		//! Threading policy
-		typedef ObjectLevelLockable<Window> ThreadingPolicy;
-		//! Window vector
-		typedef std::vector<Window> Vector;
+		//! Smart pointer
+		typedef IComponent::SmartPtrInfo<Window>::Type Ptr;
+		//! Vector of controls
+		typedef std::vector<Ptr> Vector;
 
+		//! Threading Policy
+		typedef IComponent::ThreadingPolicy ThreadingPolicy;
 
 	public:
 		//! \name Constructor & Destructor
@@ -32,7 +35,7 @@ namespace UI
 		** \brief Short constructor
 		*/
 		template<typename StringT>
-		Window(const StringT& title);
+		explicit Window(const StringT& title);
 
 		/*!
 		** \brief Constructor with dimensions
@@ -43,8 +46,8 @@ namespace UI
 		/*!
 		** \brief Constructor with start position coordinates
 		*/
-		template<typename StringT, typename NumberT, typename NumberT2>
-		Window(const StringT& title, NumberT x, NumberT2 y, unsigned int width,
+		template<typename StringT>
+		Window(const StringT& title, unsigned int x, unsigned int y, unsigned int width,
 			unsigned int height);
 
 		/*!
@@ -79,22 +82,6 @@ namespace UI
 		** \brief Get whether the window is in the process of closing
 		*/
 		bool closing() const;
-
-		/*!
-		** \brief Inform the component that other representations are up to date
-		**
-		** Once an internal representation of the component has been updated,
-		** the component should not be marked "modified" anymore.
-		**
-		** A clever trick will be required on call to avoid losing modifications
-		** due to multiple threads updating the status.
-		*/
-		virtual void synchronized()
-		{
-			ThreadingPolicy::MutexLocker lock(*this);
-			pModified = false;
-			pTitleModified = false;
-		}
 		//@}
 
 
@@ -139,17 +126,15 @@ namespace UI
 		String pTitle;
 
 		/*!
-		** \brief Store if the title has changed
-		*/
-		bool pTitleModified;
-
-		/*!
 		** \brief Is the window currently closing ?
 		*/
 		bool pClosing;
 
 
 	}; // class Window
+
+
+
 
 
 

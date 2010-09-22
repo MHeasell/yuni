@@ -15,16 +15,17 @@ namespace UI
 	/*!
 	** \brief Base class for all UI controls (viewable components)
 	*/
-	template<class T,                                                // The original type
-		template<class> class TP     = Policy::ObjectLevelLockable,  // The threading policy
-		>
-	class IControl : public IComponent<T, TP>
+	class IControl : public IComponent
 	{
 	public:
 		//! Smart pointer
-		typedef SmartPtr<IControl> Ptr;
+		typedef IComponent::SmartPtrInfo<IControl>::Type Ptr;
 		//! Vector of controls
-		typedef std::vector<IControl> Vector;
+		typedef std::vector<Ptr> Vector;
+
+		//! Threading Policy
+		typedef IComponent::ThreadingPolicy ThreadingPolicy;
+
 
 	public:
 		//! \name Constructor & Destructor
@@ -32,7 +33,7 @@ namespace UI
 		/*!
 		** \brief Empty constructor
 		*/
-		IControl() : IComponent()
+		IControl()
 		{}
 
 		/*!
@@ -45,8 +46,7 @@ namespace UI
 		/*!
 		** \brief Full constructor
 		*/
-		template<typename T, typename U>
-		IControl(T x, U y, unsigned int width, unsigned int height)
+		IControl(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
 			: IComponent(x, y, width, height)
 		{}
 
@@ -66,8 +66,11 @@ namespace UI
 	}; // class IControl
 
 
+
+
+
+
 } // namespace UI
 } // namespace Yuni
-
 
 #endif // __YUNI_UI_CONTROL_H__

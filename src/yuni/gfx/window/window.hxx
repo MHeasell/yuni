@@ -11,12 +11,12 @@ namespace Window
 
 
 	inline IWindow::IWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-	{}
+	{
+	}
 
 
 	inline IWindow::~IWindow()
 	{
-		//destroyBoundEvents();
 	}
 
 

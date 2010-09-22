@@ -15,17 +15,21 @@ namespace UI
 		title(title);
 	}
 
+
 	template<typename StringT>
 	inline Window::Window(const StringT& newTitle, unsigned int width, unsigned int height)
-		: IControlContainer(width, height), pClosing(false)
+		:IControlContainer(width, height),
+		pClosing(false)
 	{
 		title(newTitle);
 	}
 
-	template<typename StringT, typename NumberT, typename NumberT2>
-	inline Window::Window(const StringT& newTitle, NumberT x, NumberT2 y, unsigned int width,
+
+	template<typename StringT>
+	inline Window::Window(const StringT& newTitle, unsigned int x, unsigned int y, unsigned int width,
 		unsigned int height)
-		: IControlContainer(x, y, width, height), pClosing(false)
+		:IControlContainer(x, y, width, height),
+		pClosing(false)
 	{
 		title(newTitle);
 	}
@@ -33,7 +37,8 @@ namespace UI
 	template<typename StringT, typename NumberT>
 	inline Window::Window(const StringT& newTitle, const Point2D<NumberT>& pos, unsigned int width,
 		unsigned int height)
-		: IControlContainer(pos, width, height), pClosing(false)
+		:IControlContainer(pos, width, height),
+		pClosing(false)
 	{
 		title(newTitle);
 	}
@@ -49,7 +54,6 @@ namespace UI
 	{
 		// Resetting with the new value
 		pTitle = newTitle;
-		pTitleModified = true;
 	}
 
 
