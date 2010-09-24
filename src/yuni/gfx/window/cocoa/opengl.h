@@ -19,8 +19,8 @@ namespace Window
 	class OpenGLCocoa: public IWindow, public Surface::OpenGL
 	{
 	public:
-		OpenGLCocoa(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:IWindow(title, width, height, bitDepth, fullScreen)
+		OpenGLCocoa(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
+			:IWindow(source, bitDepth, fullScreen)
 		{}
 
 		virtual bool initialize() { return Surface::OpenGL::initialize(); }

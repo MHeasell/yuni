@@ -47,7 +47,7 @@ namespace UI
 		** \brief Constructor with dimensions
 		*/
 		template<class StringT>
-		Button(const StringT& label, unsigned int width, unsigned int height)
+		Button(const StringT& label, float width, float height)
 			: IControl(width, height)
 		{}
 
@@ -55,7 +55,7 @@ namespace UI
 		** \brief Full constructor
 		*/
 		template<class StringT>
-		Button(const StringT& label, unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+		Button(const StringT& label, float x, float y, float width, float height)
 			: IControl(x, y, width, height)
 		{}
 
@@ -63,7 +63,7 @@ namespace UI
 		** \brief Full constructor
 		*/
 		template<class StringT, class T>
-		Button(const StringT& label, Point2D<T>& pos, unsigned int width, unsigned int height)
+		Button(const StringT& label, Point2D<T>& pos, float width, float height)
 			: IControl(pos, width, height)
 		{}
 

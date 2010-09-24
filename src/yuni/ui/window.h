@@ -41,21 +41,21 @@ namespace UI
 		** \brief Constructor with dimensions
 		*/
 		template<typename StringT>
-		Window(const StringT& title, unsigned int width, unsigned int height);
+		Window(const StringT& title, float width, float height);
 
 		/*!
 		** \brief Constructor with start position coordinates
 		*/
 		template<typename StringT>
-		Window(const StringT& title, unsigned int x, unsigned int y, unsigned int width,
-			unsigned int height);
+		Window(const StringT& title, float x, float y, float width,
+			float height);
 
 		/*!
 		** \brief Constructor with start position as a point
 		*/
 		template<typename StringT, typename NumberT>
-		Window(const StringT& title, const Point2D<NumberT>& pos, unsigned int width,
-			unsigned int height);
+		Window(const StringT& title, const Point2D<NumberT>& pos, float width,
+			float height);
 
 		//! Virtual destructor
 		virtual ~Window();
@@ -65,18 +65,9 @@ namespace UI
 		//! \name Methods
 		//@{
 		/*!
-		** \brief Init the window
-		**
-		** This is implementation-dependent.
-		*/
-		virtual bool initialize() = 0;
-
-		/*!
 		** \brief Close the window, release everything
-		**
-		** This is implementation-dependent
 		*/
-		virtual void close();
+		void close();
 
 		/*!
 		** \brief Get whether the window is in the process of closing
@@ -141,6 +132,8 @@ namespace UI
 } // namespace UI
 } // namespace Yuni
 
+
 # include "window.hxx"
+
 
 #endif // __YUNI_UI_WINDOW_H__

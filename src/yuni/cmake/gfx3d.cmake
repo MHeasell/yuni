@@ -50,12 +50,12 @@ IF (YUNI_MODULE_UI)
 
 	LIST(APPEND SRC_GFX3D
 		# UI
-		ui/application.h
+		ui/application.h ui/application.hxx ui/application.cpp
 		ui/button.h ui/button.cpp
-		ui/component.h
+		ui/component.h ui/component.hxx
 		ui/control.h
 		ui/controlcontainer.h
-		ui/desktop.h
+		ui/desktop.h ui/desktop.hxx ui/desktop.cpp
 		ui/window.h ui/window.hxx ui/window.cpp
 	)
 

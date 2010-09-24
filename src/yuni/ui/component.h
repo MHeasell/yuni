@@ -53,14 +53,14 @@ namespace UI
 		/*!
 		** \brief Constructor with dimensions
 		*/
-		IComponent(unsigned int width, unsigned int height)
+		IComponent(float width, float height)
 			: pPosition(50, 50), pWidth(width), pHeight(height)
 		{}
 
 		/*!
 		** \brief Full constructor
 		*/
-		IComponent(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+		IComponent(float x, float y, float width, float height)
 			: pPosition(x, y), pWidth(width), pHeight(height)
 		{}
 
@@ -68,7 +68,7 @@ namespace UI
 		** \brief Full constructor
 		*/
 		template<typename T>
-		IComponent(Point2D<T>& pos, unsigned int width, unsigned int height)
+		IComponent(Point2D<T>& pos, float width, float height)
 			: pPosition(pos), pWidth(width), pHeight(height)
 		{}
 
@@ -80,11 +80,9 @@ namespace UI
 		//! \name Methods
 		//@{
 		/*!
-		** \brief Resize the window
-		**
-		** This is implementation-dependent
+		** \brief Resize the component
 		*/
-		virtual void resize(unsigned int width, unsigned int height)
+		virtual void resize(float width, float height)
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pWidth = width;
@@ -110,6 +108,31 @@ namespace UI
 		{
 			pClass.clear(); // Invalid
 		}
+
+		/*!
+		** \brief Get the width of the component
+		*/
+		float width() const;
+
+		/*!
+		** \brief Get the height of the component
+		*/
+		float height() const;
+
+		/*!
+		** \brief Get the position of the component
+		*/
+		Point2D<float> position() const;
+
+		/*!
+		** \brief Get the X position of the component
+		*/
+		float y() const;
+
+		/*!
+		** \brief Get the Y position of the component
+		*/
+		float x() const;
 		//@}
 
 
@@ -127,17 +150,17 @@ namespace UI
 		/*!
 		** \brief Position of the component relative to its parent
 		*/
-		Point2D<unsigned int> pPosition;
+		Point2D<float> pPosition;
 
 		/*!
 		** \brief Width of the component
 		*/
-		unsigned int pWidth;
+		float pWidth;
 
 		/*!
 		** \brief Height of the component
 		*/
-		unsigned int pHeight;
+		float pHeight;
 
 	}; // class IComponent
 
@@ -147,6 +170,9 @@ namespace UI
 
 } // namespace UI
 } // namespace Yuni
+
+
+# include "component.hxx"
 
 
 #endif // __YUNI_GFX_UI_COMPONENT_H__

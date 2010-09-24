@@ -35,7 +35,7 @@ namespace Surface
 	void OpenGL::release()
 	{}
 
-	void OpenGL::resize(unsigned int width, unsigned int height)
+	void OpenGL::resize(float width, float height)
 	{
 		// Prevent A Divide By Zero
 		if (0 == height)

@@ -21,7 +21,7 @@ namespace Gfx
 
 
 	Engine::Engine()
-		:pDeviceIsInitialized(false), pMainWindow(NULL)
+		: pDeviceIsInitialized(false), pUI(NULL)
 	{
 	}
 
@@ -96,25 +96,26 @@ namespace Gfx
 			return;
 
 		// Window creation and API init
-		pMainWindow = Window::Create(applicationTitle(), pDevice);
+		UI::Window::Ptr newWindow(new UI::Window("Test"));
+		Gfx::Window::IWindow::Ptr mainWindow = Window::Create(newWindow, pDevice);
 
 		// The initialization has failed
-		if (!pMainWindow)
+		if (!mainWindow)
 			return;
 
 		//pMainWindow->verticalSync(false);
-		onFPSChanged.connect(pMainWindow, &Window::IWindow::onFPSChanged);
+		onFPSChanged.connect(*mainWindow, &Window::IWindow::onFPSChanged);
 
 		//unsigned int lastFPS = 0;
 
 		// Main loop
-		while (!pMainWindow->closing())
+		while (!mainWindow->closing())
 		{
 			// Manage events on the window
-			pMainWindow->pollEvents();
+			mainWindow->pollEvents();
 
 			// Render the frame
-			pMainWindow->refresh();
+			mainWindow->refresh();
 
 			// FPS
 // 			if (lastFPS != pMainSurface->instantFPS())
@@ -125,11 +126,11 @@ namespace Gfx
 // 			}
 
 			// Push the backbuffer to screen
-			pMainWindow->blitWL();
+			mainWindow->blitWL();
 		}
-		pMainWindow->close();
-		delete pMainWindow;
-		pMainWindow = NULL;
+		mainWindow->close();
+		pUI->close();
+		pUI = NULL;
 	}
 
 
@@ -144,8 +145,6 @@ namespace Gfx
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		pTitle = t;
-		if (NULL != pMainWindow)
-			pMainWindow->title(pTitle);
 	}
 
 

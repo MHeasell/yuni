@@ -33,19 +33,22 @@ namespace UI
 		** \brief Constructor
 		*/
 		template<typename StringT, typename StringT2>
-		Application(const StringT& id, const StringT2& name): pID(id), pName(name)
-		{}
+		Application(const StringT& id, const StringT2& name);
 
+		/*!
+		** \brief Close the application
+		*/
+		void close();
 
 		/*!
 		** \brief Get the identifier for this application
 		*/
-		const StaticString& ID() { return pID; }
+		const StaticString& ID();
 
 		/*!
 		** \brief Get the name of this application
 		*/
-		const StaticString& Name() { return pName; }
+		const StaticString& Name();
 
 
 	private:
@@ -58,11 +61,16 @@ namespace UI
 		//! Application windows
 		Window::Vector pWindows;
 
+
 	}; // class Application
 
 
 
 } // namespace UI
 } // namespace Yuni
+
+
+# include "application.hxx"
+
 
 #endif // __YUNI_UI_APPLICATION_H__

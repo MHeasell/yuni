@@ -39,14 +39,14 @@ namespace UI
 		/*!
 		** \brief Constructor with dimensions
 		*/
-		IControl(unsigned int width, unsigned int height)
+		IControl(float width, float height)
 			: IComponent(width, height)
 		{}
 
 		/*!
 		** \brief Full constructor
 		*/
-		IControl(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+		IControl(float x, float y, float width, float height)
 			: IComponent(x, y, width, height)
 		{}
 
@@ -54,7 +54,7 @@ namespace UI
 		** \brief Full constructor
 		*/
 		template<typename T>
-		IControl(Point2D<T>& pos, unsigned int width, unsigned int height)
+		IControl(Point2D<T>& pos, float width, float height)
 			: IComponent(pos, width, height)
 		{}
 

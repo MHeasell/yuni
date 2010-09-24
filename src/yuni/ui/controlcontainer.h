@@ -40,14 +40,14 @@ namespace UI
 		/*!
 		** \brief Constructor with dimensions
 		*/
-		IControlContainer(unsigned int width, unsigned int height)
+		IControlContainer(float width, float height)
 			: IControl(width, height)
 		{}
 
 		/*!
 		** \brief Full constructor
 		*/
-		IControlContainer(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+		IControlContainer(float x, float y, float width, float height)
 			: IControl(x, y, width, height)
 		{}
 
@@ -55,7 +55,7 @@ namespace UI
 		** \brief Full constructor
 		*/
 		template<typename T>
-		IControlContainer(Point2D<T>& pos, unsigned int width, unsigned int height)
+		IControlContainer(Point2D<T>& pos, float width, float height)
 			: IControl(pos, width, height)
 		{}
 
@@ -71,7 +71,7 @@ namespace UI
 		**
 		** This is implementation-dependent
 		*/
-		virtual void resize(unsigned int, unsigned int)
+		virtual void resize(float, float)
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			// TODO: Resize children to fit in the parent's new dimensions
