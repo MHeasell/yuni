@@ -1,23 +1,8 @@
 
 #include "../directory.h"
-#include <string.h>
-#include <errno.h>
-#ifdef YUNI_HAS_STDLIB_H
-# include <stdlib.h>
-#endif
-#ifndef YUNI_OS_MSVC
-# include <dirent.h>
-# include <unistd.h>
-#endif
-#ifdef YUNI_OS_WINDOWS
-# include "../../system/windows.hdr.h"
-# include <shellapi.h>
-#endif
-#include <sys/stat.h>
-#include <fcntl.h>
-
-#include <stdio.h>
-
+#include "../../slist.h"
+#include "info.h"
+#include "../file.h"
 
 
 
@@ -33,145 +18,160 @@ namespace Directory
 {
 
 
-	# ifdef YUNI_OS_WINDOWS
-
-	bool Copy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen)
+	bool DummyCopyUpdateEvent(Yuni::Core::IO::Directory::CopyState, const String&, const String&, uint64, uint64)
 	{
-		// ref: http://msdn.microsoft.com/en-us/library/bb759795(v=VS.85).aspx
-
-		wchar_t* fsource = new wchar_t[srclen + 4];
-		wchar_t* fcible  = new wchar_t[dstlen + 4];
-
-		SHFILEOPSTRUCTW shf;
-		shf.hwnd = NULL;
-
-		int n = MultiByteToWideChar(CP_UTF8, 0, src, srclen, fsource, srclen);
-		if (n <= 0)
-			return false;
-		fsource[n]     = L'\0'; // This string must be double-null terminated
-		fsource[n + 1] = L'\0';
-
-		n = MultiByteToWideChar(CP_UTF8, 0, dst, dstlen, fcible, dstlen);
-		if (n <= 0)
-			return false;
-		fcible[n]     = L'\0'; // This string must be double-null terminated
-		fcible[n + 1] = L'\0';
-
-		shf.wFunc  = FO_COPY;
-		shf.pFrom  = fsource;
-		shf.pTo    = fcible;
-		shf.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI;
-
-		int r = SHFileOperationW(&shf);
-		return (!r);
-	}
-
-
-# else
-
-	bool FileCopy(const char* src, const char* dst, unsigned int mode)
-	{
-		int fd, fd2;
-		if ((fd = ::open(src, O_RDONLY)) < 0)
-			return false;
-
-		if ((fd2 = ::open(dst, O_CREAT|O_TRUNC|O_WRONLY, mode & 0777)) < 0)
-		{
-			(void)::close(fd);
-			return false;
-		}
-
-		char buf[FILENAME_MAX];
-		ssize_t len, len2;
-		while ((len = ::read(fd, buf, sizeof(buf))) > 0)
-		{
-			while (len && (len2 = write(fd2, buf, (size_t)len)) > 0)
-				len -= len2;
-		}
-
-		(void)::close(fd);
-		(void)::close(fd2);
-
 		return true;
 	}
 
 
-	bool Copy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen)
+	struct InfoItem
 	{
-		CustomString<1024> buf;
-		CustomString<1024> buf2;
+		bool isFile;
+		uint64  size;
+		String filename;
+	};
+	typedef LinkedList<InfoItem> List;
 
-		buf.assign(src, srclen);
-		struct stat sb;
-		if (::stat(buf.c_str(), &sb))
-			return false;
 
-		mode_t mode;
 
-		// src is a file
-		if (!S_ISDIR((mode = sb.st_mode)))
+	bool RecursiveCopy(const char* src, size_t srclen, const char* dst, size_t dstlen, bool recursive,
+		bool overwrite, const Yuni::Core::IO::Directory::CopyOnUpdateBind& onUpdate)
+	{
+		// normalize paths
+		String fsrc(src, srclen);
+		Yuni::Core::IO::Normalize(fsrc, src, srclen);
+		String fdst(dst, dstlen);
+		Yuni::Core::IO::Normalize(fdst, dst, dstlen);
+
+		// The list of files to copy
+		List list;
+		uint64 totalSize = 0;
+
+		// Adding the target folder, to create it if required
 		{
-			if (!::stat(dst, &sb) && S_ISDIR(sb.st_mode))
+			list.push_back();
+			InfoItem& info = list.back();
+			info.filename = fdst;
+			info.isFile   = false;
+		}
+
+		{
+			Yuni::Core::IO::Directory::Info info(fsrc);
+			unsigned int count = 0;
+			if (recursive)
 			{
-				const char *p = strrchr(src, '/');
-				// src => dst/src
-				buf.assign(dst, dstlen);
-				buf << '/' << (p ? p + 1 : src);
-				return Copy(src, srclen, buf.c_str(), buf.size());
+				const Yuni::Core::IO::Directory::Info::recursive_iterator end = info.recursive_end();
+				for (Yuni::Core::IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != end; ++i)
+				{
+					list.push_back();
+					InfoItem& info = list.back();
+					info.filename = i.filename();
+					info.isFile   = i.isFile();
+					totalSize += i.size();
+					if (++count >> 5)
+					{
+						if (!onUpdate(Yuni::Core::IO::Directory::cpsGatheringInformation, *i, *i, 0, list.size()))
+							return false;
+						count = 0;
+					}
+				}
 			}
-
-			// Copy the file
-			buf.assign(src, srclen);
-			buf2.assign(dst, dstlen);
-			return FileCopy(buf.c_str(), buf2.c_str(), mode);
-		}
-
-		// src is a directory
-		buf2.assign(dst, dstlen);
-		if (::stat(buf2.c_str(), &sb))
-		{
-			// 'dst' does not exist yet
-			// We have to create it
-			if (!Private::Core::IO::Directory::UnixMake(dst, dstlen))
-				return false;
-		}
-		else
-		{
-			// 'dst' already exists
-			// We have to remove it first (if not a directory) then to recreate it
-			if (!S_ISDIR(sb.st_mode))
+			else
 			{
-				if (::remove(buf2.c_str()) || !Private::Core::IO::Directory::UnixMake(dst, dstlen))
+				const Yuni::Core::IO::Directory::Info::recursive_iterator end = info.recursive_end();
+				for (Yuni::Core::IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != end; ++i)
+				{
+					list.push_back();
+					InfoItem& info = list.back();
+					info.filename = i.filename();
+					info.isFile   = i.isFile();
+					totalSize += i.size();
+
+					if (++count >> 5)
+					{
+						if (!onUpdate(Yuni::Core::IO::Directory::cpsGatheringInformation, *i, *i, 0, list.size()))
+							return false;
+						count = 0;
+					}
+				}
+			}
+		}
+
+		uint64 current = 0;
+		// A temporary string
+		String tmp;
+
+		Yuni::Core::IO::File::Stream fromFile;
+		Yuni::Core::IO::File::Stream toFile;
+		enum { bufferSize = 8192 };
+		char* buffer = new char[bufferSize];
+		size_t numRead;
+
+		unsigned int count = 0;
+		const List::const_iterator end = list.end();
+		for (List::const_iterator i = list.begin(); i != end; ++i)
+		{
+			const InfoItem& info = *i;
+			tmp.clear() << fdst << Yuni::Core::IO::Separator;
+			tmp.append(info.filename.c_str() + fsrc.size() + 1, info.filename.size() - fsrc.size() - 1);
+
+			if (!info.isFile)
+			{
+				if (++count >> 5)
+				{
+					if (!onUpdate(Yuni::Core::IO::Directory::cpsCopying, info.filename, tmp, current, totalSize))
+					{
+						delete[] buffer;
+						return false;
+					}
+				}
+				count = 0;
+
+				if (!Yuni::Core::IO::Directory::Create(tmp))
+				{
+					delete[] buffer;
 					return false;
+				}
 			}
-		}
-
-		buf.assign(src, srclen);
-		DIR *dirp;
-		struct dirent *dp;
-		if ((dirp = ::opendir(buf.c_str())) == NULL)
-			return false;
-		while ((dp = ::readdir(dirp)) != NULL)
-		{
-			// Do not copy '.' or '..' but can copy hidden directories
-			if ('.' == dp->d_name[0] && ('.' == dp->d_name[1] || '\0' == dp->d_name[1]))
-				continue;
-
-			buf.assign(src, srclen);
-			buf << '/' << (const char*) dp->d_name;
-			buf2.assign(dst, dstlen);
-			buf2 << '/' << (const char*) dp->d_name;
-			if (!Copy(buf.c_str(), buf.size(), buf2.c_str(), buf2.size()))
+			else
 			{
-				::closedir(dirp);
-				return false;
+				if (!overwrite && Yuni::Core::IO::Exists(tmp))
+					continue;
+
+				// Open the source file
+				if (fromFile.open(info.filename, Yuni::Core::IO::OpenMode::read))
+				{
+					if (toFile.open(tmp, Yuni::Core::IO::OpenMode::write | Yuni::Core::IO::OpenMode::truncate))
+					{
+						while ((numRead = fromFile.read(buffer, bufferSize)) != 0)
+						{
+							current += numRead;
+							if (numRead != toFile.write((const char*)buffer, numRead))
+							{
+								delete[] buffer;
+								return false;
+							}
+
+							if (++count >> 7)
+							{
+								if (!onUpdate(Yuni::Core::IO::Directory::cpsCopying, info.filename, tmp, current, totalSize))
+								{
+									delete[] buffer;
+									return false;
+								}
+
+								count = 0;
+							}
+						}
+					}
+				}
 			}
 		}
-		::closedir(dirp);
+
+		delete[] buffer;
+
 		return true;
 	}
-
-# endif
 
 
 

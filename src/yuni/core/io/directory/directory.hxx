@@ -27,8 +27,6 @@ namespace Directory
 	bool UnixMake(const char* path, size_t len, unsigned int mode = 0755);
 	# endif
 
-	bool Copy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen);
-
 	bool Remove(const char* path);
 
 	/*!
@@ -38,6 +36,12 @@ namespace Directory
 
 	bool ChangeCurrentDirectory(const char* src, size_t srclen);
 	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, size_t length);
+
+
+	bool RecursiveCopy(const char* src, size_t srclen, const char* dst, size_t dstlen, bool recursive,
+		bool overwrite, const Yuni::Core::IO::Directory::CopyOnUpdateBind& onUpdate);
+
+	bool DummyCopyUpdateEvent(Yuni::Core::IO::Directory::CopyState, const String&, const String&, uint64, uint64);
 
 
 } // namespace Directory
@@ -77,19 +81,6 @@ namespace Directory
 	}
 
 
-	template<class StringT1, class StringT2>
-	inline bool Copy(const StringT1& src, const StringT2& dst)
-	{
-		// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<StringT1>::valid, Copy_InvalidTypeForBuffer1);
-		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, Copy_InvalidTypeForBuffer2);
-
-		return Private::Core::IO::Directory::Copy(
-			Traits::CString<StringT1>::Perform(src), Traits::Length<StringT1,unsigned int>::Value(src),
-			Traits::CString<StringT2>::Perform(dst), Traits::Length<StringT2,unsigned int>::Value(dst));
-	}
-
-
 	template<class StringT>
 	inline bool Remove(const StringT& path)
 	{
@@ -110,10 +101,48 @@ namespace Directory
 
 
 
+	template<class StringT1, class StringT2>
+	inline bool Copy(const StringT1& source, const StringT2& destination, bool recursive, bool overwrite)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT1>::valid, CustomString_InvalidTypeForBuffer1);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, CustomString_InvalidTypeForBuffer2);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT1>::valid,  CustomString_InvalidTypeForBufferSize1);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  CustomString_InvalidTypeForBufferSize2);
+
+		CopyOnUpdateBind e;
+		e.bind(&Private::Core::IO::Directory::DummyCopyUpdateEvent);
+		return Private::Core::IO::Directory::RecursiveCopy(
+			Traits::CString<StringT1>::Perform(source),      Traits::Length<StringT1,size_t>::Value(source),
+			Traits::CString<StringT2>::Perform(destination), Traits::Length<StringT1,size_t>::Value(destination),
+			recursive, overwrite, e);
+	}
+
+	template<class StringT1, class StringT2>
+	inline bool Copy(const StringT1& source, const StringT2& destination, bool recursive,
+		bool overwrite, const CopyOnUpdateBind& onUpdate)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT1>::valid, CustomString_InvalidTypeForBuffer1);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, CustomString_InvalidTypeForBuffer2);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT1>::valid,  CustomString_InvalidTypeForBufferSize1);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  CustomString_InvalidTypeForBufferSize2);
+
+		return Private::Core::IO::Directory::RecursiveCopy(
+			Traits::CString<StringT1>::Perform(source),      Traits::Length<StringT1,size_t>::Value(source),
+			Traits::CString<StringT2>::Perform(destination), Traits::Length<StringT1,size_t>::Value(destination),
+			recursive, overwrite, onUpdate);
+	}
+
+
+
 } // namespace Directory
 } // namespace IO
 } // namespace Core
 } // namespace Yuni
+
+
+
+
+
 
 
 namespace Yuni
@@ -164,7 +193,6 @@ namespace Current
 } // namespace IO
 } // namespace Core
 } // namespace Yuni
-
 
 
 #endif // __YUNI_CORE_IO_DIRECTORY_H__

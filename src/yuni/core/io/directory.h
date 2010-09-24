@@ -3,6 +3,7 @@
 
 # include "../../yuni.h"
 # include "../string.h"
+# include "../bind.h"
 
 
 namespace Yuni
@@ -94,20 +95,43 @@ namespace Directory
 	//@}
 
 
-	//! \name Copy a Directory
-	//@{
-	/*!
-	** \brief Copy a directory and its content to another location
-	**
-	** \ingroup IODirectory
-	**
-	** \param src The source folder
-	** \param dst The target folder
-	** \return True if the operation succeeded False otherwise
-	*/
-	template<class StringT1, class StringT2> bool Copy(const StringT1& src, const StringT2& dst);
-	//@}
 
+	//! \name Copy a directory
+	//@{
+	enum CopyState
+	{
+		cpsGatheringInformation,
+		cpsCopying
+	};
+	typedef Yuni::Bind<bool (CopyState, const String&, const String&, uint64, uint64)>  CopyOnUpdateBind;
+
+
+	/*!
+	** \brief Copy a directory
+	**
+	** \param source The source folder
+	** \param destination The destination folder
+	** \param recursive True to copy recursively
+	** \param overwrite True to overwrite the files even if they already exists
+	** \return True if the operation succeeded, false otherwise
+	*/
+	template<class StringT1, class StringT2>
+	bool Copy(const StringT1& source, const StringT2& destination, bool recursive = true, bool overwrite = true);
+
+	/*!
+	** \brief Copy a directory
+	**
+	** \param source The source folder
+	** \param destination The destination folder
+	** \param recursive True to copy recursively
+	** \param overwrite True to overwrite the files even if they already exists
+	** \param onUpdate Event
+	** \return True if the operation succeeded, false otherwise
+	*/
+	template<class StringT1, class StringT2>
+	bool Copy(const StringT1& source, const StringT2& destination, bool recursive,
+		bool overwrite, const CopyOnUpdateBind& onUpdate);
+	//@}
 
 
 
