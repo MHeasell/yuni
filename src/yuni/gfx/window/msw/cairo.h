@@ -26,15 +26,15 @@ namespace Window
 		typedef IMSWindows::ThreadingPolicy ThreadingPolicy;
 
 	public:
-		CairoMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:IMSWindows(title, width, height, bitDepth, fullScreen)
+		CairoMSW(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
+			:IMSWindows(source, bitDepth, fullScreen)
 		{
 			pWindowClassName = "Cairo";
 		}
 
 		virtual bool initialize();
 		virtual void close();
-		virtual void resize(unsigned int width, unsigned int height);
+		virtual void resize(float width, float height);
 		virtual Surface::Cairo* surface2D() { return this; }
 
 		//! Is vertical synchronization (VSync) active?

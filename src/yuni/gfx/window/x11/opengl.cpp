@@ -54,7 +54,7 @@ namespace Window
 			CWBackPixel | CWBorderPixel | CWColormap | CWEventMask, &pAttr);
 
 		XMapWindow(pDisplay, pWindow);
-		XStoreName(pDisplay, pWindow, pTitle.c_str());
+		XStoreName(pDisplay, pWindow, String::CString(pWindow->title()));
 
 		pContext = ::glXCreateContext(pDisplay, vinfo, NULL, True);
 		if (NULL == pContext)
@@ -152,7 +152,7 @@ namespace Window
 	{
 		// The title of the window has been changed - Notifying the XWindow
 		XTextProperty text;
-		char* t = const_cast<char*>(pTitle.c_str());
+		char* t = const_cast<char*>(String::CString(pWindow->title()));
 		XStringListToTextProperty(&t, 1, &text);
 		XSetWMName(pDisplay, pWindow, &text);
 	}

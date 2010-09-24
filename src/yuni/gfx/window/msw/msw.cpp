@@ -110,10 +110,10 @@ namespace Window
 		// Grabs Rectangle Upper Left / Lower Right Values
 		RECT windowRect;
 
-		windowRect.left = 0;
-		windowRect.right = (long)pWidth;
-		windowRect.top = 0;
-		windowRect.bottom = (long)pHeight;
+		windowRect.left = (long)pWindow->x();
+		windowRect.right = (long)pWindow->width();
+		windowRect.top = (long)pWindow->y();
+		windowRect.bottom = (long)pWindow->height();
 
 		wc.cbSize = sizeof(WNDCLASSEX);
 		// Grab An Instance For Our Window
@@ -158,9 +158,9 @@ namespace Window
 			// Size Of The Devmode Structure
 			dmScreenSettings.dmSize = sizeof(dmScreenSettings);
 			// Selected Screen Width
-			dmScreenSettings.dmPelsWidth = pWidth;
+			dmScreenSettings.dmPelsWidth = (DWORD)pWindow->width();
 			// Selected Screen Height
-			dmScreenSettings.dmPelsHeight = pHeight;
+			dmScreenSettings.dmPelsHeight = (DWORD)pWindow->height();
 			// Selected Bits Per Pixel
 			dmScreenSettings.dmBitsPerPel = pBitDepth;
 			dmScreenSettings.dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
@@ -172,7 +172,7 @@ namespace Window
 				// If The Mode Fails, Offer Two Options:
 				// Quit Or Use Windowed Mode.
 				if (MessageBox(NULL, "The requested fullscreen mode is not supported by\nyour video card. Use windowed mode instead?",
-					String::CString(pTitle), MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
+					String::CString(pWindow->title()), MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
 					// Set windowed Mode
 					pFullScreen = false;
 				else
@@ -206,8 +206,11 @@ namespace Window
 		AdjustWindowRectEx(&windowRect, dwStyle, FALSE, dwExStyle);
 
 		// Create The Window
-		if (!(pHWnd = CreateWindowEx(dwExStyle, String::CString(pWindowClassName), String::CString(pTitle),
-			dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, 0, 0, // Window Position
+		if (!(pHWnd = CreateWindowEx(dwExStyle,
+			String::CString(pWindowClassName), // Class name
+			String::CString(pWindow->title()), // Title
+			dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // Style
+			(int)pWindow->x(), (int)pWindow->y(), // Window Position
 			windowRect.right - windowRect.left, windowRect.bottom - windowRect.top,
 			NULL, NULL, pHInstance, NULL)))
 		{
@@ -282,7 +285,7 @@ namespace Window
 
 	void IMSWindows::onInternalTitleChangedWL()
 	{
-		SetWindowText(pHWnd, pTitle.c_str());
+		SetWindowText(pHWnd, String::CString(pWindow->title()));
 	}
 
 

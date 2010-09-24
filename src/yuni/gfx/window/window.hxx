@@ -10,7 +10,8 @@ namespace Window
 {
 
 
-	inline IWindow::IWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
+	inline IWindow::IWindow(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
+		: pWindow(source), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false)
 	{
 	}
 
@@ -23,6 +24,11 @@ namespace Window
 	inline bool IWindow::closing() const
 	{
 		return pClosing;
+	}
+
+	inline void IWindow::resize(float width, float height)
+	{
+		pWindow->resize(width, height);
 	}
 
 

@@ -116,8 +116,8 @@ namespace Gfx
 		Device::Ptr pDevice;
 		//! Application title
 		String pTitle;
-		//! Main window
-		Window::IWindow* pMainWindow;
+		//! UI root
+		UI::Desktop::Ptr pUI;
 
 	}; // class Engine
 

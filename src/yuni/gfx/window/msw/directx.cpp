@@ -23,9 +23,6 @@ namespace Window
 		// Sets keyboard focus to the window
 		SetFocus(pHWnd);
 
-		// TODO: This might very well be useless, check it
-		resize(pWidth, pHeight);
-
 		// Initialize our newly created DirectX window
 		pDXObject = Direct3DCreate9(D3D_SDK_VERSION);
 		if (pDXObject == NULL)
@@ -63,8 +60,8 @@ namespace Window
 		pDXPresentParams.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 		pDXPresentParams.hDeviceWindow = pHWnd;
 		pDXPresentParams.BackBufferCount = 1;
-		pDXPresentParams.BackBufferWidth = pWidth;
-		pDXPresentParams.BackBufferHeight = pHeight;
+		pDXPresentParams.BackBufferWidth = (unsigned int)pWindow->width();
+		pDXPresentParams.BackBufferHeight = (unsigned int)pWindow->height();
 		pDXPresentParams.BackBufferFormat = D3DFMT_X8R8G8B8;
 		// Antialias: D3DMULTISAMPLE_NONMASKABLE, D3DMULTISAMPLE_2_SAMPLES, ...
 		pDXPresentParams.MultiSampleType = D3DMULTISAMPLE_NONE;
@@ -104,9 +101,10 @@ namespace Window
 		}
 	}
 
-	void DirectXMSW::resize(unsigned int width, unsigned int height)
+	void DirectXMSW::resize(float width, float height)
 	{
-		//ADirectX::resizeAPI(width, height);
+		resetPresentationParameters();
+		resetDevice();
 		IWindow::resize(width, height);
 	}
 

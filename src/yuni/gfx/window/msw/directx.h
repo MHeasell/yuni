@@ -27,8 +27,8 @@ namespace Window
 		typedef IMSWindows::ThreadingPolicy ThreadingPolicy;
 
 	public:
-		DirectXMSW(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:IMSWindows(title, width, height, bitDepth, fullScreen),
+		DirectXMSW(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
+			:IMSWindows(source, bitDepth, fullScreen),
 			pDXObject(NULL), pDXDevice(NULL), pVSync(false) // Deactivate vsync by default
 		{
 			pWindowClassName = "DirectX";
@@ -36,7 +36,7 @@ namespace Window
 
 		virtual bool initialize();
 		virtual void close();
-		virtual void resize(unsigned int width, unsigned int height);
+		virtual void resize(float width, float height);
 		virtual Surface::ISurface3D* surface() { return this; }
 
 		//! Is vertical synchronization (VSync) active?

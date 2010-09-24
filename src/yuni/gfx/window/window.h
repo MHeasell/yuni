@@ -6,6 +6,7 @@
 # include "../device.h"
 # include "../../core/string.h"
 # include "../../core/event/event.h"
+# include "../../thread/policy.h"
 # include "../surface/surface.h"
 # include "../../ui/component.h"
 # include "../../ui/desktop.h"
@@ -26,10 +27,15 @@ namespace Window
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class IWindow
+	class IWindow: public Policy::ObjectLevelLockable<IWindow>
 	{
 	public:
+		//! Threading policy
+		typedef Policy::ObjectLevelLockable<IWindow> ThreadingPolicy;
+		//! Window map
 		typedef std::map<sint64, IWindow> Map;
+		//! Smart pointer
+		typedef SmartPtr<IWindow> Ptr;
 
 	public:
 		//! \name Constructor & Destructor
@@ -37,7 +43,7 @@ namespace Window
 		/*!
 		** \brief Constructor
 		*/
-		IWindow(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen);
+		IWindow(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen);
 		//! Destructor
 		virtual ~IWindow();
 		//@}
@@ -61,18 +67,13 @@ namespace Window
 		*/
 		bool closing() const;
 
+		/*!
+		** \brief Resize the component
+		*/
+		virtual void resize(float width, float height);
 
-		//! Get the UI desktop, basis for all UI in this window
-		virtual UI::Desktop::Ptr desktop() { return pUI; }
-
-
-		//! \name Title of the Window
-		//@{
-		//! Get the Title of the window
-		const String& title() const { return pTitle; }
-		//! Set the title of the window
-		template<typename C> void title(const C& newTitle);
-		//@}
+		//! Get the UI window that corresponds to this internal representation
+		virtual UI::Window::Ptr window() { return pWindow; }
 
 
 		//! \name Events
@@ -115,13 +116,12 @@ namespace Window
 		virtual void onInternalTitleChangedWL() = 0;
 
 	protected:
-		String pTitle;
+		//! Corresponding UI window
+		UI::Window::Ptr pWindow;
+
 		unsigned int pBitDepth;
 		bool pFullScreen;
 		bool pClosing;
-
-		//! UI tree
-		UI::Desktop* pUI;
 
 		// A friend !
 		friend class Gfx::Engine;
@@ -136,7 +136,7 @@ namespace Window
 	** The characteristics of this window and its associated rendering surface
 	** will be determined using the device.
 	*/
-	IWindow* Create(const String& title, const Device::Ptr& device);
+	IWindow* Create(UI::Window::Ptr& source, const Device::Ptr& device);
 
 
 

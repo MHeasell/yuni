@@ -24,15 +24,15 @@ namespace Window
 	class OpenGLX11: public IWindow, public Surface::OpenGL
 	{
 	public:
-		OpenGLX11(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:IWindow(title, width, height, bitDepth, fullScreen)
+		OpenGLX11(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
+			:IWindow(source, bitDepth, fullScreen)
 		{}
 
 		virtual bool initialize();
 
 		virtual void close();
 
-		virtual void resize(unsigned int width, unsigned int height)
+		virtual void resize(float width, float height)
 		{
 			IWindow::resize(width, height);
 			Surface::OpenGL::resize(width, height);

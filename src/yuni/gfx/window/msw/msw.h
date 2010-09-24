@@ -29,8 +29,8 @@ namespace Window
 		typedef IWindow::ThreadingPolicy ThreadingPolicy;
 
 	public:
-		IMSWindows(const String& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen)
-			:IWindow(title, width, height, bitDepth, fullScreen)
+		IMSWindows(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
+			:IWindow(source, bitDepth, fullScreen)
 		{}
 
 		virtual bool initialize();
@@ -46,12 +46,12 @@ namespace Window
 		HINSTANCE pHInstance;
 		HWND pHWnd;
 
-	}; // class AMSWindows
+	}; // class IMSWindows
 
 
 
 } // namespace Window
-} // namespace Gfx3D
+} // namespace Gfx
 } // namespace Yuni
 
 

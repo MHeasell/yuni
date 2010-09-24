@@ -27,7 +27,7 @@ namespace Gfx
 namespace Window
 {
 
-	IWindow* Create(const String& title, const Device::Ptr& device)
+	IWindow* Create(UI::Window::Ptr& source, const Device::Ptr& device)
 	{
 		Yuni::Device::Display::Resolution::Ptr res = device->resolution();
 		IWindow* wnd = NULL;
@@ -38,7 +38,7 @@ namespace Window
 			case Device::DirectX8:
 			case Device::DirectX9:
 				{
-					wnd = new DirectXMSW(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+					wnd = new DirectXMSW(source, res->bitPerPixel(), device->fullscreen());
 					break;
 				}
 			# endif
@@ -46,13 +46,13 @@ namespace Window
 			case Device::OpenGL:
 				{
 					# ifdef YUNI_WINDOWSYSTEM_MSW
-					wnd = new OpenGLMSW(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+					wnd = new OpenGLMSW(source, res->bitPerPixel(), device->fullscreen());
 					# endif
 					# ifdef YUNI_WINDOWSYSTEM_X11
-					wnd = new OpenGLX11(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+					wnd = new OpenGLX11(source, res->bitPerPixel(), device->fullscreen());
 					# endif
 					# ifdef YUNI_OS_MAC
-					wnd = new OpenGLCocoa(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+					wnd = new OpenGLCocoa(source, res->bitPerPixel(), device->fullscreen());
 					# endif
 					break;
 				}
@@ -60,10 +60,10 @@ namespace Window
 			case Device::Cairo:
 				{
 					# ifdef YUNI_WINDOWSYSTEM_MSW
-					wnd = new CairoMSW(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+					wnd = new CairoMSW(source, res->bitPerPixel(), device->fullscreen());
 					# endif
 					# ifdef YUNI_WINDOWSYSTEM_X11
-					//wnd = new CairoX11(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());
+					//wnd = new CairoX11(source, res->bitPerPixel(), device->fullscreen());
 					# endif
 					# ifdef YUNI_OS_MAC
 					//wnd = new CairoCocoa(title, res->width(), res->height(), res->bitPerPixel(), device->fullscreen());

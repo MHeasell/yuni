@@ -17,7 +17,7 @@ namespace Surface
 	void Cairo::release()
 	{}
 
-	void Cairo::resize(unsigned int, unsigned int)
+	void Cairo::resize(float, float)
 	{
 	}
 

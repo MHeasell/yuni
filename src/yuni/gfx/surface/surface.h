@@ -52,13 +52,13 @@ namespace Surface
 		virtual void release() = 0;
 
 		//! Resize the viewport
-		virtual void resize(unsigned int width, unsigned int height) = 0;
+		virtual void resize(float width, float height) = 0;
 
 		//! Refresh view
 		virtual bool refresh() = 0;
 
 		//! Set the default color for clearing the surface
-		virtual void clearColor(Color::RGB<uint8>& newColor);
+		virtual void clearColor(Color::RGB<uint8>& newColor) = 0;
 
 	protected:
 		//! Clear the surface to clear color, default color depends on back-end

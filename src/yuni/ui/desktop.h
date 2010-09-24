@@ -37,6 +37,11 @@ namespace UI
 		void remove(Application::Ptr& app) { pApps.erase(app->ID()); }
 		Desktop& operator -= (Application::Ptr& app) { pApps.erase(app->ID()); return *this; }
 
+		/*!
+		** \brief Close the desktop and all its applications
+		*/
+		void close();
+
 	private:
 		Application::Map pApps;
 
