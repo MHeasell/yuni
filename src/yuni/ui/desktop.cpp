@@ -12,7 +12,7 @@ namespace UI
 		Application::Map::iterator end = pApps.end();
 		for (Application::Map::iterator it = pApps.begin(); it != end; ++it)
 		{
-			it->close();
+			it->second->close();
 		}
 	}
 

@@ -104,7 +104,7 @@ namespace Gfx
 			return;
 
 		//pMainWindow->verticalSync(false);
-		onFPSChanged.connect(*mainWindow, &Window::IWindow::onFPSChanged);
+		onFPSChanged.connect(mainWindow.pointer(), &Window::IWindow::onFPSChanged);
 
 		//unsigned int lastFPS = 0;
 

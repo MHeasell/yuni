@@ -12,7 +12,7 @@ namespace UI
 		Window::Vector::iterator end = pWindows.end();
 		for (Window::Vector::iterator it = pWindows.begin(); it != end; ++it)
 		{
-			it->close();
+			(*it)->close();
 		}
 	}
 

@@ -1,7 +1,6 @@
 #ifndef __YUNI_GFX_WINDOW_MSWINDOWS_H__
 # define __YUNI_GFX_WINDOW_MSWINDOWS_H__
 
-# include <list>
 # include "../../../yuni.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
@@ -34,6 +33,7 @@ namespace Window
 		{}
 
 		virtual bool initialize();
+
 		virtual void close();
 
 		virtual bool pollEvents();

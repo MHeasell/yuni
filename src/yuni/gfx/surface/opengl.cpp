@@ -1,5 +1,6 @@
 
 # include <algorithm>
+# include "../../core/math.h"
 # include "../api/gl.h"
 # include "opengl.h"
 
@@ -38,8 +39,8 @@ namespace Surface
 	void OpenGL::resize(float width, float height)
 	{
 		// Prevent A Divide By Zero
-		if (0 == height)
-			height = 1;
+		if (Math::Equals(0.0f, height))
+			height = 1.0f;
 
 		// Reset The Current Viewport
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);

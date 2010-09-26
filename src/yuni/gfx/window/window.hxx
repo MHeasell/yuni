@@ -11,7 +11,7 @@ namespace Window
 
 
 	inline IWindow::IWindow(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
-		: pWindow(source), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false)
+		: pUIWnd(source), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false)
 	{
 	}
 
@@ -28,7 +28,7 @@ namespace Window
 
 	inline void IWindow::resize(float width, float height)
 	{
-		pWindow->resize(width, height);
+		pUIWnd->resize(width, height);
 	}
 
 

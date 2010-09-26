@@ -95,7 +95,7 @@ namespace Window
 		SetFocus(pHWnd);
 
 		// Set up our perspective GL screen
-		OpenGL::resize(pWindow->width(), pWindow->height());
+		OpenGL::resize(pUIWnd->width(), pUIWnd->height());
 
 		// Initialize our newly created GL window
 		if (!OpenGL::initialize())
