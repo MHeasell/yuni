@@ -60,8 +60,8 @@ namespace Window
 		pDXPresentParams.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 		pDXPresentParams.hDeviceWindow = pHWnd;
 		pDXPresentParams.BackBufferCount = 1;
-		pDXPresentParams.BackBufferWidth = (unsigned int)pWindow->width();
-		pDXPresentParams.BackBufferHeight = (unsigned int)pWindow->height();
+		pDXPresentParams.BackBufferWidth = (unsigned int)pUIWnd->width();
+		pDXPresentParams.BackBufferHeight = (unsigned int)pUIWnd->height();
 		pDXPresentParams.BackBufferFormat = D3DFMT_X8R8G8B8;
 		// Antialias: D3DMULTISAMPLE_NONMASKABLE, D3DMULTISAMPLE_2_SAMPLES, ...
 		pDXPresentParams.MultiSampleType = D3DMULTISAMPLE_NONE;

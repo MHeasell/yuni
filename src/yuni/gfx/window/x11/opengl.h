@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX3D_WINDOW_OPENGLX11_H__
-# define __YUNI_GFX3D_WINDOW_OPENGLX11_H__
+#ifndef __YUNI_GFX_WINDOW_OPENGLX11_H__
+# define __YUNI_GFX_WINDOW_OPENGLX11_H__
 
 # include "../../../yuni.h"
 
@@ -46,9 +46,9 @@ namespace Window
 		//! Activate / deactivate vertical synchronization (VSync)
 		virtual bool verticalSync(bool activate);
 
-		bool pollEvents();
-	protected:
+		virtual bool pollEvents();
 
+	protected:
 		/*!
 		** \brief Refresh the window content if necessary
 		**
@@ -56,9 +56,12 @@ namespace Window
 		*/
 		virtual bool refresh() { return true; }
 
-		void blitWL();
+		/*!
+		** \brief Swap the backbuffer to screen
+		*/
+		virtual void blitWL();
 
-		void onInternalTitleChangedWL();
+		virtual void onInternalTitleChangedWL();
 
 	private:
 		//! Connection to a X11 Server through TCP or DECnet communications protocols
@@ -70,7 +73,7 @@ namespace Window
 		XWindowAttributes pWndAttr;
 		XEvent pXEvent;
 
-	}; // class WindowGLX
+	}; // class OpenGLX11
 
 
 
@@ -81,4 +84,4 @@ namespace Window
 
 # endif // YUNI_WINDOWSYSTEM_X11
 
-#endif // __YUNI_GFX3D_WINDOW_OPENGLX11_H__
+#endif // __YUNI_GFX_WINDOW_OPENGLX11_H__

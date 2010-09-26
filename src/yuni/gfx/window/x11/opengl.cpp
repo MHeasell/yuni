@@ -49,12 +49,12 @@ namespace Window
 		}
 
 		pWindow = XCreateWindow(pDisplay, root, 30, 30,
-			(unsigned int)pWidth, (unsigned int)pHeight, 0,
+			(unsigned int)pUIWnd->width(), (unsigned int)pUIWnd->height(), 0,
 			vinfo->depth, CopyFromParent, vinfo->visual,
 			CWBackPixel | CWBorderPixel | CWColormap | CWEventMask, &pAttr);
 
 		XMapWindow(pDisplay, pWindow);
-		XStoreName(pDisplay, pWindow, String::CString(pWindow->title()));
+		XStoreName(pDisplay, pWindow, String::CString(pUIWnd->title()));
 
 		pContext = ::glXCreateContext(pDisplay, vinfo, NULL, True);
 		if (NULL == pContext)
@@ -68,7 +68,7 @@ namespace Window
 			std::cerr << "DRI not available" << std::endl;
 			return false;
 		}
-		resize(pWidth, pHeight);
+		resize(pUIWnd->width(), pUIWnd->height());
 		if (!Surface::OpenGL::initialize())
 		{
 			std::cerr << "GL initialization failed" << std::endl;
@@ -152,7 +152,7 @@ namespace Window
 	{
 		// The title of the window has been changed - Notifying the XWindow
 		XTextProperty text;
-		char* t = const_cast<char*>(String::CString(pWindow->title()));
+		char* t = const_cast<char*>(String::CString(pUIWnd->title()));
 		XStringListToTextProperty(&t, 1, &text);
 		XSetWMName(pDisplay, pWindow, &text);
 	}
@@ -175,8 +175,9 @@ namespace Window
 				case ConfigureNotify:
 					{
 						// Resize Only if our window-size changed
-						if ((int)pWidth != pXEvent.xconfigure.width || (int)pHeight != pXEvent.xconfigure.height)
-							resize(pXEvent.xconfigure.width, pXEvent.xconfigure.height);
+						if ((int)pUIWnd->width() != pXEvent.xconfigure.width
+							|| (int)pUIWnd->height() != pXEvent.xconfigure.height)
+							resize((float)pXEvent.xconfigure.width, (float)pXEvent.xconfigure.height);
 						break;
 					}
 

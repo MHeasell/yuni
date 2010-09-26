@@ -73,7 +73,7 @@ namespace Window
 		virtual void resize(float width, float height);
 
 		//! Get the UI window that corresponds to this internal representation
-		virtual UI::Window::Ptr window() { return pWindow; }
+		virtual UI::Window::Ptr window() { return pUIWnd; }
 
 
 		//! \name Events
@@ -117,7 +117,7 @@ namespace Window
 
 	protected:
 		//! Corresponding UI window
-		UI::Window::Ptr pWindow;
+		UI::Window::Ptr pUIWnd;
 
 		unsigned int pBitDepth;
 		bool pFullScreen;

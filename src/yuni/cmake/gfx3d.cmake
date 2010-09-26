@@ -21,7 +21,6 @@ ENDIF(APPLE)
 
 
 Set(SRC_GFX3D
-		application/gfx3d.h application/gfx3d.cpp
 		gfx/engine.h gfx/engine.cpp
 
 		# Window
@@ -70,8 +69,12 @@ IF (YUNI_MODULE_UI)
 			# Cairo under Windows
 			LIST(APPEND SRC_GFX3D gfx/window/msw/cairo.cpp)
 		ENDIF (WIN32 OR WIN64)
+	ELSE(CAIRO_FOUND)
+		YMESSAGE("ERROR: Cairo could not be found !")
 	ENDIF(CAIRO_FOUND)
-
+	IF(NOT PANGO_FOUND)
+		YMESSAGE("ERROR: Pango could not be found !")
+	ENDIF(NOT PANGO_FOUND)
 ENDIF(YUNI_MODULE_UI)
 
 
@@ -82,6 +85,8 @@ ENDIF(WIN32 OR WIN64)
 
 Include(CheckIncludeFile)
 
+#  	target_link_libraries("${YUNI_EXT_CAIROPANGO_LIB}")
+#Include_Directories("${YUNI_EXT_CAIROPANGO_INCLUDE}")
 
 #
 # OpenGL
