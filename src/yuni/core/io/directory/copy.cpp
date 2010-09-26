@@ -39,9 +39,9 @@ namespace Directory
 	{
 		// normalize paths
 		String fsrc(src, srclen);
-		Yuni::Core::IO::Normalize(fsrc, src, srclen);
+		Yuni::Core::IO::Normalize(fsrc, src, (unsigned int)srclen);
 		String fdst(dst, dstlen);
-		Yuni::Core::IO::Normalize(fdst, dst, dstlen);
+		Yuni::Core::IO::Normalize(fdst, dst, (unsigned int)dstlen);
 
 		// The list of files to copy
 		List list;
