@@ -4,6 +4,7 @@
 #include "../text/label.h"
 #include "../text/wgl.h"
 
+
 namespace Yuni
 {
 namespace Gfx
@@ -17,6 +18,7 @@ namespace Surface
 		//drawFrame();
 		return true;
 	}
+
 
 	void ISurface3D::drawFrame(const Yuni::Gfx::Scene& scene)
 	{
@@ -37,7 +39,8 @@ namespace Surface
 		testDraw();
 		resetView();
 		applyTranslation(Vector3D<float>(0.0f, 0.0f, -4.0f));
-		#ifdef YUNI_WINDOWSYSTEM_MSW
+
+		# ifdef YUNI_WINDOWSYSTEM_MSW
 		wchar_t* wideText = _wcsdup(L"Font display test: kanji XX, kana XXXX!");
 		// FIXME: This code fails on wcstombs_s, special characters are not managed properly. What to do?
 		// TEN
@@ -56,7 +59,8 @@ namespace Surface
 		Label label(AFont::Ptr(new WGLFont("Arial", 45)), wideText, 50, 50);
 		label.draw();
 		delete[] wideText;
-		#endif // YUNI_WINDOWSYSTEM_MSW
+		# endif // YUNI_WINDOWSYSTEM_MSW
+
 		rotQuad += 0.1f;
 		////// End Test Draw
 
@@ -84,6 +88,7 @@ namespace Surface
 
 		} // foreach object
 	}
+
 
 
 
