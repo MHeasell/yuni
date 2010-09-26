@@ -1,8 +1,8 @@
 
+# include "opengl.h"
 # include <algorithm>
 # include "../../core/math.h"
 # include "../api/gl.h"
-# include "opengl.h"
 
 namespace Yuni
 {
@@ -33,14 +33,18 @@ namespace Surface
 		return true;
 	}
 
+
 	void OpenGL::release()
 	{}
+
 
 	void OpenGL::resize(float width, float height)
 	{
 		// Prevent A Divide By Zero
-		if (Math::Equals(0.0f, height))
+		if (height < 1.f)
 			height = 1.0f;
+		if (width < 1.f)
+			width = 1.f;
 
 		// Reset The Current Viewport
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
@@ -59,20 +63,24 @@ namespace Surface
 		glLoadIdentity();
 	}
 
+
 	void OpenGL::clearScreen()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
+
 
 	void OpenGL::resetView()
 	{
 		glLoadIdentity();
 	}
 
+
 	void OpenGL::applyTranslation(const Vector3D<float>& translation)
 	{
 		glTranslatef(translation.x, translation.y, translation.z);
 	}
+
 
 	void OpenGL::applyRotation(const Vector3D<float>& rotation)
 	{
@@ -81,6 +89,7 @@ namespace Surface
 		glRotatef(rotation.y, 0.0f, 1.0f, 0.0f); // Rotate on y
 		glRotatef(rotation.z, 0.0f, 0.0f, 1.0f); // Rotate on z
 	}
+
 
 	void OpenGL::drawTriangles(const Mesh::TriangleList& triangles)
 	{
@@ -99,6 +108,7 @@ namespace Surface
 			glEnd();
 		}
 	}
+
 
 	void OpenGL::testDraw()
 	{
@@ -141,6 +151,8 @@ namespace Surface
 		glVertex3f(-1.0f, -1.0f, 1.0f);
 		glEnd();
 	}
+
+
 
 
 

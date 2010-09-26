@@ -3,13 +3,14 @@
 
 # include "surface3d.h"
 
+
+
 namespace Yuni
 {
 namespace Gfx
 {
 namespace Surface
 {
-
 
 
 	/*!
@@ -51,6 +52,9 @@ namespace Surface
 		virtual void testDraw();
 
 	}; // class OpenGL
+
+
+
 
 
 

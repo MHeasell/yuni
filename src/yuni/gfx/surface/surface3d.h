@@ -3,6 +3,7 @@
 
 # include "surface.h"
 
+
 namespace Yuni
 {
 namespace Gfx
@@ -21,27 +22,10 @@ namespace Surface
 	class ISurface3D: public ISurface
 	{
 	public:
+		//! The most suitable smart pointer for the class
 		typedef SmartPtr<ISurface3D> Ptr;
 
-	protected:
-		/*!
-		** \brief Main constructor
-		*/
-		ISurface3D() : pPaused(false) {}
-
-		/*!
-		** \brief Virtual destructor
-		*/
-		virtual ~ISurface3D() {}
-
-	private:
-		/*!
-		** Private copy constructor
-		*/
-		ISurface3D(const ISurface3D&);
-
 	public:
-
 		//! Pause / Unpause rendering
 		virtual void pause(bool inPause) { pPaused = inPause; }
 
@@ -57,11 +41,23 @@ namespace Surface
 		** \return False if changing vertical sync failed. Yes, the stupid thing _can_ fail.
 		*/
 		virtual bool verticalSync(bool active);
-
 		//@}
 
 
 	protected:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Main constructor
+		*/
+		ISurface3D() : pPaused(false) {}
+
+		/*!
+		** \brief Virtual destructor
+		*/
+		virtual ~ISurface3D() {}
+		//@}
+
 		//! Refresh the view
 		bool refresh();
 
@@ -89,11 +85,17 @@ namespace Surface
 	protected:
 		//! Is the rendering paused ?
 		bool pPaused;
-
 		//! 3D scene associated with this surface
 		Scene::Ptr pScene;
 
+	private:
+		/*!
+		** Private copy constructor
+		*/
+		ISurface3D(const ISurface3D&);
+
 	}; // ISurface3D
+
 
 
 
