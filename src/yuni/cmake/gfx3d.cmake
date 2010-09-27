@@ -4,9 +4,10 @@ YMESSAGE(":: [Module] Gfx3D")
 
 LIBYUNI_CONFIG_LIB("gfx3d"      "yuni-static-gfx3d-core")
 
-LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "core") # gfx-core is required
+LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "core") # core is required
 LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "gfx") # gfx-core is required
-LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "display") # gfx-core is required
+LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "ui") # ui is required
+LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "display") # display is required
 LIBYUNI_CONFIG_LIB("gfx3d"  "yuni-static-device-display")
 
 IF(APPLE)
@@ -45,39 +46,6 @@ Set(SRC_GFX3D
 	)
 
 
-IF (YUNI_MODULE_UI)
-
-	LIST(APPEND SRC_GFX3D
-		# UI
-		ui/application.h ui/application.hxx ui/application.cpp
-		ui/button.h ui/button.cpp
-		ui/component.h ui/component.hxx
-		ui/control.h
-		ui/controlcontainer.h
-		ui/desktop.h ui/desktop.hxx ui/desktop.cpp
-		ui/window.h ui/window.hxx ui/window.cpp
-	)
-
-	#
-	# Cairo - Pango
-	#
-	DEVPACK_IMPORT_CAIROPANGO()
-	IF(CAIRO_FOUND)
-		# We Have Cairo
-		LIST(APPEND SRC_GFX3D gfx/surface/cairo.h gfx/surface/cairo.cpp)
-		IF (WIN32 OR WIN64)
-			# Cairo under Windows
-			LIST(APPEND SRC_GFX3D gfx/window/msw/cairo.cpp)
-		ENDIF (WIN32 OR WIN64)
-	ELSE(CAIRO_FOUND)
-		YMESSAGE("ERROR: Cairo could not be found !")
-	ENDIF(CAIRO_FOUND)
-	IF(NOT PANGO_FOUND)
-		YMESSAGE("ERROR: Pango could not be found !")
-	ENDIF(NOT PANGO_FOUND)
-ENDIF(YUNI_MODULE_UI)
-
-
 IF(WIN32 OR WIN64)
 	LIST(APPEND SRC_GFX3D gfx/text/wgl.h gfx/text/wgl.cpp)
 ENDIF(WIN32 OR WIN64)
@@ -85,8 +53,6 @@ ENDIF(WIN32 OR WIN64)
 
 Include(CheckIncludeFile)
 
-#  	target_link_libraries("${YUNI_EXT_CAIROPANGO_LIB}")
-#Include_Directories("${YUNI_EXT_CAIROPANGO_INCLUDE}")
 
 #
 # OpenGL

@@ -30,7 +30,6 @@ Set(YUNI_MODULE_NET                       TRUE)
 Set(YUNI_MODULE_UI                        FALSE)
 	Set(YUNI_EXTERNAL_GFX_CAIROPANGO	  TRUE)
 	Set(YUNI_MODULE_UI_DUMMY              TRUE)
-	Set(YUNI_MODULE_UI_3D                 TRUE)
 
 # Database
 Set(YUNI_MODULE_DATABASE                  FALSE)
@@ -55,7 +54,7 @@ Set(YUNI_MODULE_LIST
 	devices display keyboard mouse
 	gfx3d
 	script lua
-	ui uidummy ui3d
+	ui uidummy
 	db psql
 	net
 	)
@@ -96,7 +95,6 @@ IF(MODULES)
 			Set(YUNI_MODULE_SCRIPT TRUE)
 			Set(YUNI_MODULE_UI TRUE)
 			Set(YUNI_MODULE_UI_DUMMY TRUE)
-			Set(YUNI_MODULE_UI_3D TRUE)
 			Set(YUNI_MODULE_DATABASE TRUE)
 			Set(YUNI_MODULE_ALGORITHMS TRUE)
 			Set(YUNI_SAMPLES TRUE)
@@ -264,18 +262,6 @@ IF(MODULES)
 			Set(YUNI_MODULE_UI_DUMMY FALSE)
 		EndIf("${it}" STREQUAL "-uidummy")
 
-		# ui3d (User Interface)
-		If("${it}" STREQUAL "ui3d")
-			Set(KeywordIsKnown TRUE)
-			Set(YUNI_MODULE_UI_3D TRUE)
-		EndIf("${it}" STREQUAL "ui3d")
-		# -ui3d
-		If("${it}" STREQUAL "-ui3d")
-			Set(KeywordIsKnown TRUE)
-			Set(YUNI_MODULE_UI_3D FALSE)
-		EndIf("${it}" STREQUAL "-ui3d")
-
-
 		# db (Database)
 		If("${it}" STREQUAL "db")
 			Set(KeywordIsKnown TRUE)
@@ -332,19 +318,11 @@ IF(MODULES)
 		YMESSAGE(" The ui modules")
 		YMESSAGE("    -/+ui          : The ui module (default: disabled)")
 		YMESSAGE("    -/+uidummy     : The dummy ui manager (default: enabled)")
-		YMESSAGE("    -/+ui3d        : The 3D ui manager (default: enabled)")
 		YMESSAGE("")
 		Message(FATAL_ERROR "Errors on module names")
 	EndIF(KeywordError)
 ENDIF(MODULES)
 
-
-IF(NOT YUNI_MODULE_GFX3D)
-	IF(YUNI_MODULE_UI_3D)
-		YMESSAGE("[!!] Warning: The Gfx3D module is disabled. The module `ui3d` can not be enabled.")
-		Set(YUNI_MODULE_UI_3D FALSE)
-	ENDIF(YUNI_MODULE_UI_3D)
-ENDIF(NOT YUNI_MODULE_GFX3D)
 
 IF(YUNI_MODULE_DEVICE_DISPLAY AND YUNI_MODULE_DEVICES)
 	SET(TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED TRUE)
@@ -430,9 +408,6 @@ IF(YUNI_MODULE_UI)
 	IF(YUNI_MODULE_UI_DUMMY)
 		LIST(APPEND YUNI_MODULE_AVAILABLE uidummy)
 	ENDIF(YUNI_MODULE_UI_DUMMY)
-	IF(YUNI_MODULE_UI_3D)
-		LIST(APPEND YUNI_MODULE_AVAILABLE ui3d)
-	ENDIF(YUNI_MODULE_UI_3D)
 ENDIF(YUNI_MODULE_UI)
 
 IF(YUNI_MODULE_DB)
