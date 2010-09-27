@@ -35,7 +35,6 @@
 namespace Yuni
 {
 
-
 	/*!
 	** \brief Character string
 	**
@@ -516,6 +515,44 @@ namespace Yuni
 		*/
 		template<class StringT> bool insert(const Size offset, const StringT& u, const Size size);
 
+
+		/*!
+		** \brief Insert a raw C-String at the begining of in the string
+		**
+		** \param cstr A C-String
+		** \param size Size of the string
+		** \return True if the given string has been inserted, false otherwise
+		**   (size == 0 or offset out of bounds)
+		*/
+		bool prepend(const char* const cstr, const Size size);
+
+		/*!
+		** \brief Insert a single item at the begining of the string
+		**
+		** \param c A single item
+		** \return True if the string has been inserted, false otherwise
+		**   (size == 0 or offset out of bounds)
+		*/
+		bool prepend(const char c);
+
+		/*!
+		** \brief Insert an arbitrary C-String at the begining of the string
+		**
+		** \param u Any CString container
+		** \return True if the string has been inserted, false otherwise
+		**   (size == 0 or offset out of bounds)
+		*/
+		template<class StringT> bool prepend(const StringT& s);
+
+		/*!
+		** \brief Insert an arbitrary C-String at the begining the string
+		**
+		** \param s Any CString container
+		** \param size The size to use for the given container
+		** \return True if the string has been inserted, false otherwise
+		**   (size == 0 or offset out of bounds)
+		*/
+		template<class StringT> bool prepend(const StringT& u, const Size size);
 
 		/*!
 		** \brief Overwrite a region of the string

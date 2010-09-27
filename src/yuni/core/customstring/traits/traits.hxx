@@ -10,6 +10,127 @@ namespace Private
 namespace CustomStringImpl
 {
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Data()
+		:size(0), capacity(0), data(NULL)
+	{}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::Data(const Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>& rhs)
+		:size(rhs.size), capacity(rhs.size), data(NULL)
+	{
+		if (size)
+		{
+			if (chunkSize != 0)
+			{
+				capacity += zeroTerminated;
+				data = (C*)::malloc(sizeof(C) * capacity);
+				(void)::memcpy(data, rhs.data, sizeof(C) * size);
+				if (zeroTerminated)
+					data[size] = C();
+			}
+			else
+			{
+				// this string is a string adapter
+				data = rhs.data;
+			}
+		}
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::~Data()
+	{
+		// Release the internal buffer if allocated
+		// The string is a string adapter only if the chunk size if null
+		if (chunkSize != 0)
+			::free(data);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::adapt(const char* const cstring)
+	{
+		data = cstring;
+		capacity = size = (data ? ::strlen(data) : 0);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::adapt(const char* const cstring, Size length)
+	{
+		data = cstring;
+		capacity = size = length;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::clear()
+	{
+		if (zeroTerminated)
+		{
+			if (size)
+			{
+				size = 0;
+				data[0] = C();
+			}
+		}
+		else
+			size = 0;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::shrink()
+	{
+		if (data)
+		{
+			if (size)
+			{
+				capacity = size + zeroTerminated;
+				data = (char*)realloc(data, capacity);
+			}
+			else
+			{
+				capacity = 0;
+				::free(data);
+				data = NULL;
+			}
+		}
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::insert(Size offset, const C* const buffer, const Size len)
+	{
+		// Reserving enough space to insert the buffer
+		reserve(len + size + zeroTerminated);
+		// Move the existing block of data
+		(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (size - offset));
+		// Copying the given buffer
+		(void)::memcpy (data + sizeof(C) * (offset), buffer, sizeof(C) * len);
+		// Updating the size
+		size += len;
+		// zero-terminated
+		if (zeroTerminated)
+			data[size] = C();
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
+	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::put(const C rhs)
+	{
+		// Making sure that we have enough space
+		reserve(size + 1 + zeroTerminated);
+		// Raw copy
+		data[size] = rhs;
+		// New size
+		++size;
+		if (zeroTerminated)
+			data[size] = C();
+	}
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::reserve(Size minCapacity)

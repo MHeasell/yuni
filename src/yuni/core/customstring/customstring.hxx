@@ -1462,20 +1462,13 @@ namespace Yuni
 	{
 		if (size > 0)
 		{
-			if (offset == AncestorType::size)
+			if (offset >= AncestorType::size)
 			{
 				append(cstr, size);
 				return true;
 			}
-			else
-			{
-				// Checking the offset and the size of the given cstr
-				if (offset < AncestorType::size)
-				{
-					AncestorType::insert(offset, cstr, size);
-					return true;
-				}
-			}
+			AncestorType::insert(offset, cstr, size);
+			return true;
 		}
 		return false;
 	}
@@ -1486,21 +1479,55 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::insert(
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset, const char c)
 	{
-		if (offset == AncestorType::size)
+		if (offset >= AncestorType::size)
 		{
 			append(&c, 1);
 			return true;
 		}
-		else
-		{
-			// Checking the offset and the size of the given cstr
-			if (offset < AncestorType::size)
-			{
-				AncestorType::insert(offset, &c, 1);
-				return true;
-			}
-		}
-		return false;
+		AncestorType::insert(offset, &c, 1);
+		return true;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::prepend(const StringT& s)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		return insert(0, s);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::prepend(const StringT& s,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+
+		return insert(0, Traits::CString<StringT>::Perform(s), size);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::prepend(
+		const char* const cstr,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
+	{
+		return insert(0, cstr, size);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::prepend(const char c)
+	{
+		return insert(0, c);
 	}
 
 

@@ -40,73 +40,30 @@ namespace CustomStringImpl
 			zeroTerminated = (ZeroTerminatedT ? 1 : 0),
 			expandable = 1,
 		};
+
 	public:
+		//! \name Constructors & Destructors
+		//@{
 		/*!
 		** \brief Default Constructor
 		*/
-		Data()
-			:size(0), capacity(0), data(NULL)
-		{}
+		Data();
 
 		/*!
 		** \brief Copy constructor
 		*/
-		Data(const Data& rhs)
-			:size(rhs.size), capacity(rhs.size), data(NULL)
-		{
-			if (size)
-			{
-				if (chunkSize != 0)
-				{
-					capacity += zeroTerminated;
-					data = (C*)::malloc(sizeof(C) * capacity);
-					(void)::memcpy(data, rhs.data, sizeof(C) * size);
-					if (zeroTerminated)
-						data[size] = C();
-				}
-				else
-				{
-					// this string is a string adapter
-					data = rhs.data;
-				}
-			}
-		}
+		Data(const Data& rhs);
 
 		//! Destructor
-		~Data()
-		{
-			// Release the internal buffer if allocated
-			// only if the string is not a string adapter
-			if (chunkSize != 0)
-				::free(data);
-		}
+		~Data();
+		//@}
 
-		void adapt(const char* const cstring)
-		{
-			data = cstring;
-			capacity = size = (data ? ::strlen(data) : 0);
-		}
+		void adapt(const char* const cstring);
 
-		void adapt(const char* const cstring, Size length)
-		{
-			data = cstring;
-			capacity = size = length;
-		}
+		void adapt(const char* const cstring, Size length);
 
+		void clear();
 
-		void clear()
-		{
-			if (zeroTerminated)
-			{
-				if (size)
-				{
-					size = 0;
-					data[0] = C();
-				}
-			}
-			else
-				size = 0;
-		}
 
 		Size assignWithoutChecking(const C* const block, const Size blockSize)
 		{
@@ -177,53 +134,13 @@ namespace CustomStringImpl
 			return (block && blockSize) ? appendWithoutChecking(block, blockSize) : 0;
 		}
 
-		void put(const C rhs)
-		{
-			// Making sure that we have enough space
-			reserve(size + 1 + zeroTerminated);
-			// Raw copy
-			data[size] = rhs;
-			// New size
-			++size;
-			if (zeroTerminated)
-				data[size] = C();
-		}
-
+		void put(const C rhs);
 
 		void reserve(Size minCapacity);
 
-		void insert(Size offset, const C* const buffer, const Size len)
-		{
-			// Reserving enough space to insert the buffer
-			reserve(len + size + zeroTerminated);
-			// Move the existing block of data
-			(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (size - offset));
-			// Copying the given buffer
-			(void)::memcpy(data + sizeof(C) * (offset), buffer, sizeof(C) * len);
-			// Updating the size
-			size += len;
-			// zero-terminated
-			if (zeroTerminated)
-				data[size] = C();
-		}
+		void insert(Size offset, const C* const buffer, const Size len);
 
-		void shrink()
-		{
-			if (data)
-			{
-				if (0 == size)
-				{
-					capacity = 0;
-					::free(data);
-					data = NULL;
-				}
-				else
-				{
-					capacity = size + zeroTerminated;
-					data = (char*)realloc(data, capacity);
-				}
-			}
-		}
+		void shrink();
 
 
 	protected:
@@ -303,6 +220,7 @@ namespace CustomStringImpl
 			// Do nothing
 		}
 
+
 		void insert(Size offset, const C* const buffer, Size len)
 		{
 			if (offset + len >= capacity)
@@ -319,7 +237,7 @@ namespace CustomStringImpl
 				// Move the existing block of data
 				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (size - offset));
 				// Copying the given buffer
-				(void)::memcpy(data + sizeof(C) * (offset), buffer, sizeof(C) * len);
+				(void)::memcpy (data + sizeof(C) * (offset), buffer, sizeof(C) * len);
 				// Updating the size
 				size += len;
 				// zero-terminated
@@ -331,7 +249,7 @@ namespace CustomStringImpl
 				// Move the existing block of data
 				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (capacity - offset - len));
 				// Copying the given buffer
-				(void)::memcpy(data + sizeof(C) * (offset), buffer, sizeof(C) * len);
+				(void)::memcpy (data + sizeof(C) * (offset), buffer, sizeof(C) * len);
 				// Updating the size
 				size = capacity;
 				// zero-terminated
