@@ -11,6 +11,10 @@ IF(APPLE)
 	LIBYUNI_CONFIG_CFLAG("core"	"-fvisibility=hidden")
 ENDIF(APPLE)
 
+if (NOT WIN32 AND NOT WIN64)
+	LIBYUNI_CONFIG_DEFINITION("core" "_FILE_OFFSET_BITS=64")
+endif()
+
 #
 # PThreads
 #
