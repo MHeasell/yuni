@@ -29,7 +29,7 @@ namespace Surface
 		virtual void resize(float width, float height);
 
 		//! Choose a color to clear the screen with
-		virtual void clearColor(Color::RGB<uint8>& newColor);
+		virtual void clearColor(const Color::RGB<uint8>& newColor);
 
 		//! Clear the screen to black
 		virtual void clearScreen();

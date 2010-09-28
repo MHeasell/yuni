@@ -122,6 +122,11 @@ namespace Window
 		return resetDevice();
 	}
 
+	void DirectXMSW::clearColor(const Color::RGB<uint8>& newColor)
+	{
+		pClearColor = newColor;
+	}
+
 	void DirectXMSW::clearScreen()
 	{
 		pDXDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);

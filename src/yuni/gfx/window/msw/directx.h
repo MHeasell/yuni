@@ -55,6 +55,8 @@ namespace Window
 
 		//! \name Overridden from ISurface3D
 		//@{
+		//! Set the default color for clearing the surface
+		virtual void clearColor(const Color::RGB<uint8>& newColor);
 		virtual void clearScreen();
 		virtual void resetView();
 		virtual void applyTranslation(const Vector3D<float>& translation);
@@ -81,6 +83,9 @@ namespace Window
 
 		//! Current status of the VSync
 		bool pVSync;
+
+		//! Clear color
+		Color::RGB<uint8> pClearColor;
 
 	}; // class DirectxMSW
 

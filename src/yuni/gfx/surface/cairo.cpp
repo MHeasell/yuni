@@ -21,7 +21,7 @@ namespace Surface
 	{
 	}
 
-	void Cairo::clearColor(Color::RGB<uint8>&)
+	void Cairo::clearColor(const Color::RGB<uint8>&)
 	{}
 
 	void Cairo::clearScreen()
