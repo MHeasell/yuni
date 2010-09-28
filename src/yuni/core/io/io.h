@@ -325,12 +325,15 @@ namespace IO
 	**
 	** \bug The relative filenames like C:..\folder1\folder2 are not handled properly
 	**
-	** \param[out] out      A string (any class compliant to std::string) where to write the result
-	** \param      in       A path/filename to normalize
-	** \param      inLength Length of #in (optional, -1 for autodetection)
+	** \param[out] out            A string (any class compliant to std::string) where to write the result
+	** \param      in             A path/filename to normalize
+	** \param      inLength       Length of #in (optional, -1 for autodetection)
+	** \param      replaceSlashes True to replace slashes according the local OS conventions. False to keep
+	**                            as it.
 	*/
 	template<class StringT1, class StringT2>
-	void Normalize(StringT1& out, const StringT2& in, unsigned int inLength = (unsigned int)-1);
+	void Normalize(StringT1& out, const StringT2& in, unsigned int inLength = (unsigned int)-1,
+		bool replaceSlashes);
 
 
 
