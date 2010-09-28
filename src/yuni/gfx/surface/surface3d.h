@@ -33,14 +33,15 @@ namespace Surface
 		//! \name Vertical Synchronization (VSync)
 		//@{
 		//! Is vertical synchronization (VSync) currently active?
-		virtual bool verticalSync() const;
+		virtual bool verticalSync() const = 0;
+
 		/*!
 		** \brief Activate / deactivate vertical synchronization (VSync)
 		**
 		** \param active New value for vertical sync, true for active, false for inactive.
 		** \return False if changing vertical sync failed. Yes, the stupid thing _can_ fail.
 		*/
-		virtual bool verticalSync(bool active);
+		virtual bool verticalSync(bool active) = 0;
 		//@}
 
 

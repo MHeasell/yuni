@@ -1,7 +1,7 @@
 
 YMESSAGE(":: [Module] Device::Display")
 
-LIBYUNI_CONFIG_DEPENDENCY("display" "devices") # gfx-core is required
+LIBYUNI_CONFIG_DEPENDENCY("display" "devices") # devices is required
 
 
 IF(UNIX AND NOT APPLE AND NOT HAIKU AND NOT BEOS)
