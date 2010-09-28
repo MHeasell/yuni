@@ -63,10 +63,12 @@ namespace Surface
 		glLoadIdentity();
 	}
 
+
 	void OpenGL::clearColor(const Color::RGB<uint8>& color)
 	{
 		glClearColor(color.red / 255.f, color.green / 255.f, color.red / 255.f, 1.0f);
 	}
+
 
 	void OpenGL::clearScreen()
 	{

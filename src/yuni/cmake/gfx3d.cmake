@@ -55,7 +55,7 @@ Include(CheckIncludeFile)
 
 
 #
-# OpenGL
+# OpenGL common stuff
 #
 YMESSAGE("Added Support for OpenGL")
 find_package(OpenGL)
@@ -115,43 +115,44 @@ ENDIF(UNIX AND NOT APPLE)
 
 
 #
-# DirectX
+# DirectX and OpenGL
 #
-# find_package(DirectX)
 IF (WIN32)
+	# Search for DirectX
 	FIND_PATH(DX9_INCLUDE_PATH d3d9.h
 		PATHS
 			"$ENV{DXSDK_DIR}/Include"
 			"$ENV{PROGRAMFILES}/Microsoft DirectX SDK/Include"
-		DOC "The directory where D3D9.h resides")
+		DOC "The directory where d3d9.h resides")
 
 	FIND_LIBRARY(D3D9_LIBRARY d3d9.lib
 		PATHS
 			"$ENV{DXSDK_DIR}/Lib/x86"
 			"$ENV{PROGRAMFILES}/Microsoft DirectX SDK/Lib/x86"
-		DOC "The directory where d3d9.lib resides")
+		DOC "The path to where d3d9.lib resides")
 
 	FIND_LIBRARY(D3DX9_LIBRARY d3dx9.lib
 		PATHS
 			"$ENV{DXSDK_DIR}/Lib/x86"
 			"$ENV{PROGRAMFILES}/Microsoft DirectX SDK/Lib/x86"
-		DOC "The directory where d3dx9.lib resides")
+		DOC "The path to where d3dx9.lib resides")
 
 	SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw/msw.cpp gfx/window/msw/opengl.cpp)
+	LIBYUNI_CONFIG_LIB_RAW_COMMAND("gfx3d"  "${OPENGL_LIBRARY}")
 
 	IF(D3D9_LIBRARY AND D3DX9_LIBRARY)
-		SET(DX9_LIBRARIES "${D3D9_LIBRARY}" "${D3DX9_LIBRARY}")
-
 		IF(DX9_INCLUDE_PATH)
 			ADD_DEFINITIONS("-DYUNI_USE_DIRECTX")
 			YMESSAGE("Added Support for DirectX")
 			YMESSAGE("  DX include: ${DX9_INCLUDE_PATH}")
-			YMESSAGE("  DX libs: ${D3X9_LIBRARY} ${D3DX9_LIBRARY}")
+			YMESSAGE("  DX libs: ${D3D9_LIBRARY}")
 			Set(YUNI_COMPILED_WITH_SUPPORT_FOR_DIRECTX 1)
 			SET(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw/directx.cpp)
 			Include_Directories("${DX9_INCLUDE_PATH}")
-			LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${DX9_INCLUDE_PATH}")
 			LIBYUNI_CONFIG_DEFINITION("gfx3d"  "YUNI_USE_DIRECTX")
+			LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${DX9_INCLUDE_PATH}")
+			LIBYUNI_CONFIG_LIB_RAW_COMMAND("gfx3d"  "${D3D9_LIBRARY}")
+			LIBYUNI_CONFIG_LIB_RAW_COMMAND("gfx3d"  "${D3DX9_LIBRARY}")
 		ENDIF(DX9_INCLUDE_PATH)
 	ENDIF(D3D9_LIBRARY AND D3DX9_LIBRARY)
 
