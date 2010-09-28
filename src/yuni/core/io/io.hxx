@@ -301,7 +301,7 @@ namespace IO
 
 
 	template<class StringT1, class StringT2>
-	void Normalize(StringT1& out, const StringT2& in, unsigned int inLength)
+	void Normalize(StringT1& out, const StringT2& in, unsigned int inLength, bool replaceSlashes)
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, Normalize_InvalidTypeForInput);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  Normalize_InvalidTypeForInputSize);
@@ -319,6 +319,14 @@ namespace IO
 			if (1 == Traits::Length<StringT2,unsigned int>::fixedLength)
 			{
 				out = in;
+				if (replaceSlashes)
+				{
+					# ifdef YUNI_OS_WINDOWS
+					out.replace('/', '\\');
+					# else
+					out.replace('\\', '/');
+					# endif
+				}
 				return;
 			}
 		}
@@ -334,6 +342,14 @@ namespace IO
 		if (inLength == 1)
 		{
 			out = in;
+			if (replaceSlashes)
+			{
+				# ifdef YUNI_OS_WINDOWS
+				out.replace('/', '\\');
+				# else
+				out.replace('\\', '/');
+				# endif
+			}
 			return;
 		}
 		// From here, we have at least 2 chars
@@ -366,6 +382,14 @@ namespace IO
 		{
 			// Nothing to normalize
 			out = in;
+			if (replaceSlashes)
+			{
+				# ifdef YUNI_OS_WINDOWS
+				out.replace('/', '\\');
+				# else
+				out.replace('\\', '/');
+				# endif
+			}
 			return;
 		}
 		for (; i < inLength; ++i)
@@ -529,6 +553,15 @@ namespace IO
 		// Removing the trailing slash
 		if (out.size() > 3)
 			out.removeTrailingSlash();
+
+		if (replaceSlashes)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			out.replace('/', '\\');
+			# else
+			out.replace('\\', '/');
+			# endif
+		}
 	}
 
 
