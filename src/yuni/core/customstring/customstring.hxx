@@ -1330,6 +1330,82 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT1, class StringT2>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::replace(const StringT1& from, const StringT2& to)
+	{
+		replace<StringT1, StringT2>(0, from, to);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT1, class StringT2>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(const StringT1& from, const StringT2& to)
+	{
+		ireplace<StringT1, StringT2>(0, from, to);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT1, class StringT2>
+	void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::replace(Size offset, const StringT1& from, const StringT2& to)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT1>::valid, CustomString_InvalidTypeForBuffer1);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, CustomString_InvalidTypeForBuffer2);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT1>::valid,  CustomString_InvalidTypeForBufferSize1);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  CustomString_InvalidTypeForBufferSize2);
+
+		const Size lenfrom = Traits::Length<StringT1,Size>::Value(from);
+		if (lenfrom && offset < AncestorType::size)
+		{
+			const Size lento = Traits::Length<StringT2,Size>::Value(to);
+			Size pos;
+			do
+			{
+				pos = find(from, offset);
+				if (pos == npos)
+					return;
+				erase(pos, lenfrom);
+				insert(pos, to);
+				offset = pos + lento;
+			}
+			while (offset < AncestorType::size);
+		}
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT1, class StringT2>
+	void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(Size offset, const StringT1& from, const StringT2& to)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT1>::valid, CustomString_InvalidTypeForBuffer1);
+		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, CustomString_InvalidTypeForBuffer2);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT1>::valid,  CustomString_InvalidTypeForBufferSize1);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  CustomString_InvalidTypeForBufferSize2);
+
+		const Size lenfrom = Traits::Length<StringT1,Size>::Value(from);
+		if (lenfrom && offset < AncestorType::size)
+		{
+			const Size lento = Traits::Length<StringT2,Size>::Value(to);
+			Size pos;
+			do
+			{
+				pos = ifind(from, offset);
+				if (pos == npos)
+					return;
+				erase(pos, lenfrom);
+				insert(pos, to);
+				offset = pos + lento;
+			}
+			while (offset < AncestorType::size);
+		}
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(Size offset, char from, char to)
 	{

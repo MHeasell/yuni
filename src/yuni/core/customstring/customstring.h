@@ -1106,6 +1106,25 @@ namespace Yuni
 		void erase(const Size offset, const Size len);
 
 		/*!
+		** \brief Replace all occurences of a string by another one
+		**
+		** \param from The string to find
+		** \param to   The string to replace with
+		*/
+		template<class StringT1, class StringT2>
+		void replace(const StringT1& from, const StringT2& to);
+
+		/*!
+		** \brief Replace all occurences of a string by another one
+		**
+		** \param offset The offset where to start from
+		** \param from The string to find
+		** \param to   The string to replace with
+		*/
+		template<class StringT1, class StringT2>
+		void replace(Size offset, const StringT1& from, const StringT2& to);
+
+		/*!
 		** \brief Replace all occurences of a given char by another one
 		**
 		** \param from The character to search
@@ -1138,6 +1157,25 @@ namespace Yuni
 		** \param to   The replacement
 		*/
 		void ireplace(Size offset, char from, char to);
+
+		/*!
+		** \brief Replace all occurences of a string by another one (case insensitive)
+		**
+		** \param from The string to find
+		** \param to   The string to replace with
+		*/
+		template<class StringT1, class StringT2>
+		void ireplace(const StringT1& from, const StringT2& to);
+
+		/*!
+		** \brief Replace all occurences of a string by another one (case insensitive)
+		**
+		** \param offset The offset where to start from
+		** \param from The string to find
+		** \param to   The string to replace with
+		*/
+		template<class StringT1, class StringT2>
+		void ireplace(Size offset, const StringT1& from, const StringT2& to);
 
 		/*!
 		** \brief Remove the 'n' first characters
