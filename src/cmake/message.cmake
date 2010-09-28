@@ -1,8 +1,13 @@
-MACRO(YMESSAGE msg)
-	MESSAGE(STATUS "{yuni} -- ${msg}")
-ENDMACRO(YMESSAGE)
-MACRO(YERROR msg)
-	MESSAGE(SEND_ERROR "{yuni} -- ${msg}")
-ENDMACRO(YERROR)
+macro(YMESSAGE msg)
+	message(STATUS "{yuni} -- ${msg}")
+endmacro()
+macro(YERROR msg)
+	message(SEND_ERROR "{yuni} -- ${msg}")
+endmacro()
+macro(YFATAL msg)
+	message(FATAL "{yuni} -- ${msg}")
+endmacro()
+
+
 
 

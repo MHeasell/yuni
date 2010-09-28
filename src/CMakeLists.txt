@@ -95,11 +95,13 @@ else()
 	if(NOT EXISTS "${PROFILE}")
 		YERROR("Could not find the specified profile file: (`${PROFILE}`)")
 	endif()
+
 	set(YUNI_PROFILE_PATH "${PROFILE}")
 
 endif()
 
 YMESSAGE("  Using profile: ${YUNI_PROFILE_PATH}")
+include("${YUNI_PROFILE_PATH}")
 
 # (Re)Check the target
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake")
