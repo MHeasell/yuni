@@ -48,16 +48,16 @@ Set(YUNI_PROFILE_NAME "Default")
 #              This is the recommended way when the package is not available on the system
 #
 # Example :
-# Use `lua` compiled by hand, installed in `/local/opt` (/local/opt/include and `/local/opt/lib`) :
+# Use `lua` compiled by hand, installed in `/opt/lua` (/opt/lua/include and `/opt/lua/lib`) :
 #   Set(YUNI_DvP_LUA_MODE custom)
-#   Set(YUNI_DvP_LUA_PREFIX "/local/opt")
+#   Set(YUNI_DvP_LUA_PREFIX "/opt/lua")
 #
 
-# PThread (Yuni Core)
-Set(YUNI_DvP_PTHREAD_MODE     system devpack)
+# PThread (Yuni Core) [NOT IMPLEMENTED]
+Set(YUNI_DvP_PTHREAD_MODE     system)
 
 # Lua (+script,+lua)
-Set(YUNI_DvP_LUA_MODE         macport system devpack)
+Set(YUNI_DvP_LUA_MODE         devpack)
 
 
 
