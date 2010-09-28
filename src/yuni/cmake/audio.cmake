@@ -9,12 +9,12 @@ LIBYUNI_CONFIG_DEPENDENCY("audio" "core") # yuni-core is required
 #
 # Windows-specific
 #
-IF (WIN32 OR WIN64)
+if (WIN32 OR WIN64)
 	LIBYUNI_CONFIG_LIB("audio" ws2_32)
-ENDIF (WIN32 OR WIN64)
+endif (WIN32 OR WIN64)
 
 
-Set(SRC_AUDIO
+set(SRC_AUDIO
 		audio/queueservice.h
 		audio/queueservice.hxx
 		audio/queueservice.cpp
@@ -34,60 +34,59 @@ Set(SRC_AUDIO
 		private/audio/av.cpp
 	)
 
-
-Include(CheckIncludeFile)
+include(CheckIncludeFile)
 
 #
 # OpenAL
 #
 YMESSAGE("Added Support for OpenAL")
-IF(APPLE)
+if(APPLE)
 	# Frameworks
 	LIBYUNI_CONFIG_FRAMEWORK("audio" OpenAL)
-ELSE(APPLE)
-	IF(WIN32 OR WIN64)
+else(APPLE)
+	if(WIN32 OR WIN64)
 		DEVPACK_IMPORT_OPENAL()
-	ELSE(WIN32 OR WIN64)
-		FIND_PACKAGE(OpenAL)
-		IF(NOT OPENAL_FOUND)
+	else(WIN32 OR WIN64)
+		find_package(OpenAL)
+		if(NOT OPENAL_FOUND)
 			YERROR("[!!] Impossible to find OpenAL")
 			YMESSAGE(    " * Packages needed on Debian: libopenal-dev")
 			YMESSAGE(    " * Packages needed on Fedora: openal-devel")
-		ENDIF(NOT OPENAL_FOUND)
-	ENDIF(WIN32 OR WIN64)
+		endif(NOT OPENAL_FOUND)
+	endif(WIN32 OR WIN64)
 	LIBYUNI_CONFIG_LIB_RAW_COMMAND("audio" "${OPENAL_LIBRARY}")
 	LIBYUNI_CONFIG_INCLUDE_PATH("audio" "${OPENAL_INCLUDE_DIR}")
-	Include_directories(${OPENAL_INCLUDE_DIR})
-ENDIF(APPLE)
+	include_directories(${OPENAL_INCLUDE_DIR})
+endif(APPLE)
 
 #
 # FFmpeg
 #
 YMESSAGE("Added Support for FFMpeg")
 DEVPACK_IMPORT_FFMPEG()
-SET(SRC_AUDIO_FFMPEG ${YUNI_EXT_FFMPEG_HEADERS})
+set(SRC_AUDIO_FFMPEG ${YUNI_EXT_FFMPEG_HEADERS})
 
-IF (NOT WIN32 AND NOT WIN64)
+if (NOT WIN32 AND NOT WIN64)
 	# ZLIB
-	FIND_PACKAGE(ZLIB)
-	IF (ZLIB_FOUND)
-		LIST(APPEND YUNI_EXT_FFMPEG_LIB ${ZLIB_LIBRARIES})
-	ELSE (ZLIB_FOUND)
+	find_package(ZLIB)
+	if (ZLIB_FOUND)
+		list(APPEND YUNI_EXT_FFMPEG_LIB ${ZLIB_LIBRARIES})
+	else (ZLIB_FOUND)
 		YMESSAGE(    "[!!] Impossible to find ZLib (Audio will not work properly !)")
 		YMESSAGE(    " * Packages needed on Debian: libz-dev")
 		YMESSAGE(    " * Packages needed on Fedora: zlib-devel")
-	ENDIF (ZLIB_FOUND)
+	endif (ZLIB_FOUND)
 
 	# BZIP2
 	FIND_PACKAGE(BZip2)
-	IF(BZIP2_FOUND)
-		LIST(APPEND YUNI_EXT_FFMPEG_LIB ${BZIP2_LIBRARIES})
-	ELSE(BZIP2_FOUND)
+	if(BZIP2_FOUND)
+		list(APPEND YUNI_EXT_FFMPEG_LIB ${BZIP2_LIBRARIES})
+	else(BZIP2_FOUND)
 		YMESSAGE(    "[!!] Impossible to find BZip2 (Audio will not work properly !)")
 		YMESSAGE(    " * Packages needed on Debian: libbz2-dev")
 		YMESSAGE(    " * Packages needed on Fedora: bzip2-devel")
-	ENDIF(BZIP2_FOUND)
-ENDIF (NOT WIN32 AND NOT WIN64)
+	endif(BZIP2_FOUND)
+endif (NOT WIN32 AND NOT WIN64)
 
 LIBYUNI_CONFIG_LIB_RAW_COMMAND("audio" "${YUNI_EXT_FFMPEG_LIB}")
 LIBYUNI_CONFIG_INCLUDE_PATH("audio" "${YUNI_EXT_FFMPEG_INCLUDE}")
@@ -100,17 +99,17 @@ add_definitions(-D__STDC_CONSTANT_MACROS)
 source_group(Audio FILES ${SRC_AUDIO})
 source_group(Audio\\Ffmpeg FILES ${SRC_AUDIO_FFMPEG})
 
-Add_Library(yuni-static-audio-core STATIC ${SRC_AUDIO_FFMPEG} ${SRC_AUDIO})
+add_library(yuni-static-audio-core STATIC ${SRC_AUDIO_FFMPEG} ${SRC_AUDIO})
 
 # Setting output path
-SET_TARGET_PROPERTIES(yuni-static-audio-core PROPERTIES 
+set_target_properties(yuni-static-audio-core PROPERTIES 
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
-INSTALL(TARGETS yuni-static-audio-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+install(TARGETS yuni-static-audio-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 # Install Audio-related headers
-INSTALL(
+install(
 	DIRECTORY audio
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
 	FILES_MATCHING

@@ -3,13 +3,13 @@ YMESSAGE(":: [Module] Gfx::Core")
 
 LIBYUNI_CONFIG_LIB("gfx"        "yuni-static-gfx-core")
 
-Set(SRC_APPLICATION_GFX
+set(SRC_APPLICATION_GFX
 		application/gfx3d.h application/gfx3d.cpp)
 source_group(Application FILES ${SRC_APPLICATION_GFX})
 
 
 # Gfx
-Set(SRC_GFX
+set(SRC_GFX
 		gfx/device.h gfx/device.cpp
 		gfx/mesh/vertex.h gfx/mesh/triangle.h gfx/mesh/edge.h
 		gfx/object3D.h gfx/object3D.cpp
@@ -27,21 +27,21 @@ source_group(Gfx FILES ${SRC_GFX})
 
 
 
-Add_Library(yuni-static-gfx-core STATIC
+add_library(yuni-static-gfx-core STATIC
 			yuni.h
 			${SRC_GFX}
 			${SRC_APPLICATION_GFX}
 )
 
 # Setting output path
-SET_TARGET_PROPERTIES(yuni-static-gfx-core PROPERTIES
+set_target_properties(yuni-static-gfx-core PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
-INSTALL(TARGETS yuni-static-gfx-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+install(TARGETS yuni-static-gfx-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 # Install gfx-related headers
-INSTALL(
+install(
 	DIRECTORY gfx
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
 	FILES_MATCHING
