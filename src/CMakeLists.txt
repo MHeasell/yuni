@@ -1,26 +1,26 @@
 
 # Minimum CMake version check
-CMake_minimum_required(VERSION 2.8)
-Message(STATUS "${CMAKE_CXX_FLAGS}")
+cmake_minimum_required(VERSION 2.8)
+message(STATUS "${CMAKE_CXX_FLAGS}")
 include("cmake/message.cmake")
 
 YMESSAGE("")
 YMESSAGE("The Yuni Framework")
 YMESSAGE("")
-Project(Yuni-Framework) 
+project(Yuni-Framework) 
 
 
 # Package informations
-SET(YUNI_URL_WEBSITE             "http://www.libyuni.org")
-SET(YUNI_MAILING_LIST            "dev@libyuni.org")
+set(YUNI_URL_WEBSITE             "http://www.libyuni.org")
+set(YUNI_MAILING_LIST            "dev@libyuni.org")
 # Version
-SET(YUNI_VERSION_HI              0)
-SET(YUNI_VERSION_LO              1)
-SET(YUNI_VERSION                 "${YUNI_VERSION_HI}.${YUNI_VERSION_LO}")
-SET(YUNI_VERSION_REV             0) # Svn Revision - see below
-SET(YUNI_TARGET                  "debug") # Target : debug/release - see Target.cmake
-SET(YUNI_URL_DEVPACK_REPOSITORY  "http://devpacks.libyuni.org/")
-SET(YUNI_URL_DEVPACK_SOURCE      "http://devpacks.libyuni.org/downloads")
+set(YUNI_VERSION_HI              0)
+set(YUNI_VERSION_LO              1)
+set(YUNI_VERSION                 "${YUNI_VERSION_HI}.${YUNI_VERSION_LO}")
+set(YUNI_VERSION_REV             0) # Svn Revision - see below
+set(YUNI_TARGET                  "debug") # Target : debug/release - see Target.cmake
+set(YUNI_URL_DEVPACK_REPOSITORY  "http://devpacks.libyuni.org/")
+set(YUNI_URL_DEVPACK_SOURCE      "http://devpacks.libyuni.org/downloads")
 
 
 
@@ -34,96 +34,102 @@ SET(YUNI_URL_DEVPACK_SOURCE      "http://devpacks.libyuni.org/downloads")
 #
 
 # CMake special variables
-SET(VS_KEYWORD                   "YuniVS${YUNI_VERSION}")
-SET(VERSION                      "${YUNI_VERSION}")
-SET(VS_SCC_PROJECTNAME           "Yuni Framework")
-SET(PROJECT_LABEL                "Yuni Framework")
+set(VS_KEYWORD                   "YuniVS${YUNI_VERSION}")
+set(VERSION                      "${YUNI_VERSION}")
+set(VS_SCC_PROJECTNAME           "Yuni Framework")
+set(PROJECT_LABEL                "Yuni Framework")
 
 
 #
 # CMake policies
 #
 # Preprocessor definition values are now escaped automatically
-IF(POLICY CMP0005)
+if(POLICY CMP0005)
 	CMake_Policy(SET CMP0005 NEW)
-ENDIF(POLICY CMP0005)
-IF(POLICY CMP0011)
+endif()
+if(POLICY CMP0011)
 	CMake_Policy(SET CMP0011 NEW)
-ENDIF(POLICY CMP0011)
+endif()
 
 
-Set(YUNI_INSTALL_CXX_FLAGS   "")
-Set(YUNI_INSTALL_CXX_DEFINES "")
+set(YUNI_INSTALL_CXX_FLAGS   "")
+set(YUNI_INSTALL_CXX_DEFINES "")
 
 
 
 # Target
-Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake")
 # Getting the latest revision number
-Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SvnRevision.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SvnRevision.cmake")
 # Informations about the system
-Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SystemInformation.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SystemInformation.cmake")
 
 
 #
 # The target directory for static libs
 # Various output directories
 #
-Set(YUNI_VERSIONED_INST_PATH "yuni/${YUNI_VERSION}")
-Set(YUNI_OUTPUT_DIRECTORY    "${CMAKE_CURRENT_BINARY_DIR}/build/${YUNI_TARGET}/")
-Set(YUNI_SOURCE_TREE         "${CMAKE_CURRENT_SOURCE_DIR}/yuni/")
+set(YUNI_VERSIONED_INST_PATH "yuni/${YUNI_VERSION}")
+set(YUNI_OUTPUT_DIRECTORY    "${CMAKE_CURRENT_BINARY_DIR}/build/${YUNI_TARGET}/")
+set(YUNI_SOURCE_TREE         "${CMAKE_CURRENT_SOURCE_DIR}/yuni/")
 
 YMESSAGE("Folders")
-YMESSAGE("       Source: ${CMAKE_CURRENT_SOURCE_DIR}")
-YMESSAGE("   Build into: ${CMAKE_CURRENT_BINARY_DIR}")
+YMESSAGE("         Source: ${CMAKE_CURRENT_SOURCE_DIR}")
+YMESSAGE("     Build into: ${CMAKE_CURRENT_BINARY_DIR}")
 
 
 # Custom settings
-IF("${PROFILE}" STREQUAL "")
-	FILE(GLOB ProfileFilename "ProfileBuild.*")
-	IF("${ProfileFilename}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/ProfileBuild.cmake")
-		Include("${ProfileFilename}")
-	ELSE("${ProfileFilename}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/ProfileBuild.cmake")
-		CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/ProfileBuild.template.cmake
-			${CMAKE_CURRENT_SOURCE_DIR}/ProfileBuild.cmake)
-		YMESSAGE("A default profile has been created (`./ProfileBuild.cmake`)")
-		YMESSAGE("Please edit this file to override the default settings")
-		Include(${CMAKE_CURRENT_SOURCE_DIR}/ProfileBuild.cmake)
-	ENDIF("${ProfileFilename}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/ProfileBuild.cmake")
-ELSE("${PROFILE}" STREQUAL "")
-	Include("${PROFILE}")
-ENDIF("${PROFILE}" STREQUAL "")
+if("${PROFILE}" STREQUAL "")
 
-YMESSAGE("[Profile] ${YUNI_PROFILE_NAME}")
+	if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/ProfileBuild.cmake")
+		configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/ProfileBuild.template.cmake
+			${CMAKE_CURRENT_BINARY_DIR}/ProfileBuild.cmake)
+		YMESSAGE("A default profile has been created (`<build_directory>/ProfileBuild.cmake`)")
+		YMESSAGE("Please edit this file to override the default settings")
+	endif()
+
+	set(YUNI_PROFILE_PATH "${CMAKE_CURRENT_BINARY_DIR}/ProfileBuild.cmake")
+
+else()
+
+	if(NOT EXISTS "${PROFILE}")
+		YERROR("Could not find the specified profile file: (`${PROFILE}`)")
+	endif()
+	set(YUNI_PROFILE_PATH "${PROFILE}")
+
+endif()
+
+YMESSAGE("  Using profile: ${YUNI_PROFILE_PATH}")
+
 # (Re)Check the target
-Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake")
 
 
 # DevPacks utilities
-Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/DevPack.cmake")
-Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/DevPackStandardImports.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/DevPack.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/DevPackStandardImports.cmake")
 
 # Modules
-Include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules.cmake")
 
 
 
 # Sub Directories
-Add_SubDirectory(yuni)
+add_subdirectory(yuni)
 
 # tools (especially for yuni-config)
-Add_SubDirectory(tools)
+add_subdirectory(tools)
 
 
 
 #
 # Compiling yuni-config if required
 #
-IF(YUNI_AUTO_COMPILE_YUNI_CONFIG)
+if(YUNI_AUTO_COMPILE_YUNI_CONFIG)
 	YMESSAGE("[yuni-config] Bootstraping")
-	IF(YUNI_TESTS)
+	if(YUNI_TESTS)
 		YMESSAGE("The bootstrapping is required to compile the testsuite")
-	ENDIF(YUNI_TESTS)
+	endif()
 	# --
 	YMESSAGE("Configuring yuni-config...")
 	YMESSAGE("(in ${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config)")
@@ -136,7 +142,7 @@ IF(YUNI_AUTO_COMPILE_YUNI_CONFIG)
 			${CMAKE_CURRENT_SOURCE_DIR}/tools/yuni-config
 			"-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
 			"-DYUNI_OUTPUT_DIRECTORY=${YUNI_OUTPUT_DIRECTORY}"
-			"-DYUNI_BOOTSTRAP_YUNI_CONFIG=1}"
+			"-DYUNI_BOOTSTRAP_YUNI_CONFIG=1"
 			-G "${CMAKE_GENERATOR}"
 			WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tools/yuni-config-bootstrap")
 	# Compile it.
@@ -144,5 +150,5 @@ IF(YUNI_AUTO_COMPILE_YUNI_CONFIG)
 	execute_process(COMMAND "${CMAKE_COMMAND}" --build
                               "${CMAKE_CURRENT_BINARY_DIR}/tools/yuni-config-bootstrap"
             WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tools/yuni-config-bootstrap")
-ENDIF(YUNI_AUTO_COMPILE_YUNI_CONFIG)
+endif()
 
