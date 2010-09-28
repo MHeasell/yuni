@@ -7,9 +7,9 @@ YMESSAGE(":: [Module] Core")
 LIBYUNI_CONFIG_INCLUDE_PATH("core" "${CMAKE_CURRENT_SOURCE_DIR}/..")
 LIBYUNI_CONFIG_LIB_PATH("core" "${LIBRARY_OUTPUT_PATH}")
 LIBYUNI_CONFIG_LIB("core"       "yuni-static-core")
-IF(APPLE)
+if(APPLE)
 	LIBYUNI_CONFIG_CFLAG("core"	"-fvisibility=hidden")
-ENDIF(APPLE)
+endif(APPLE)
 
 if (NOT WIN32 AND NOT WIN64)
 	LIBYUNI_CONFIG_DEFINITION("core" "_FILE_OFFSET_BITS=64")
@@ -20,91 +20,91 @@ endif()
 #
 DEVPACK_IMPORT_PTHREADS()
 
-INCLUDE(CheckCXXSourceCompiles)
-INCLUDE(CheckIncludeFiles)
-INCLUDE(CheckIncludeFileCXX)
-INCLUDE(CheckCXXCompilerFlag)
+include(CheckCXXSourceCompiles)
+include(CheckIncludeFiles)
+include(CheckIncludeFileCXX)
+include(CheckCXXCompilerFlag)
 
 
 
 # stdio.h
-CHECK_INCLUDE_FILE_CXX(stdio.h YUNI_HAS_STDIO_H)
+check_include_file_cxx(stdio.h YUNI_HAS_STDIO_H)
 # String.h
-CHECK_INCLUDE_FILE_CXX(string.h YUNI_HAS_STRING_H)
+check_include_file_cxx(string.h YUNI_HAS_STRING_H)
 # time.h
-CHECK_INCLUDE_FILE_CXX(time.h YUNI_HAS_TIME_H)
+check_include_file_cxx(time.h YUNI_HAS_TIME_H)
 # assert.h
-CHECK_INCLUDE_FILE_CXX(assert.h YUNI_HAS_ASSERT_H)
+check_include_file_cxx(assert.h YUNI_HAS_ASSERT_H)
 # errno.h
-CHECK_INCLUDE_FILE_CXX(errno.h YUNI_HAS_ERRNO_H)
+check_include_file_cxx(errno.h YUNI_HAS_ERRNO_H)
 # cstddef
-CHECK_INCLUDE_FILE_CXX(cstddef YUNI_HAS_CSTDDEF)
+check_include_file_cxx(cstddef YUNI_HAS_CSTDDEF)
 
 # climits
-CHECK_INCLUDE_FILE_CXX(climits YUNI_HAS_CLIMITS)
+check_include_file_cxx(climits YUNI_HAS_CLIMITS)
 # vector
-CHECK_INCLUDE_FILE_CXX(vector YUNI_HAS_VECTOR)
+check_include_file_cxx(vector YUNI_HAS_VECTOR)
 # list
-CHECK_INCLUDE_FILE_CXX(list YUNI_HAS_LIST)
+check_include_file_cxx(list YUNI_HAS_LIST)
 # map
-CHECK_INCLUDE_FILE_CXX(map YUNI_HAS_MAP)
+check_include_file_cxx(map YUNI_HAS_MAP)
 # algorithm
-CHECK_INCLUDE_FILE_CXX(algorithm YUNI_HAS_ALGORITHM)
+check_include_file_cxx(algorithm YUNI_HAS_ALGORITHM)
 # iostream
-CHECK_INCLUDE_FILE_CXX(iostream YUNI_HAS_IOSTREAM)
+check_include_file_cxx(iostream YUNI_HAS_IOSTREAM)
 # cassert
-CHECK_INCLUDE_FILE_CXX(cassert YUNI_HAS_CASSERT)
+check_include_file_cxx(cassert YUNI_HAS_CASSERT)
 # dirent.h
-CHECK_INCLUDE_FILE_CXX(dirent.h YUNI_HAS_DIRENT_H)
+check_include_file_cxx(dirent.h YUNI_HAS_DIRENT_H)
 # stdlib.h
-CHECK_INCLUDE_FILE_CXX(stdlib.h YUNI_HAS_STDLIB_H)
+check_include_file_cxx(stdlib.h YUNI_HAS_STDLIB_H)
 # unistd.h
-CHECK_INCLUDE_FILE_CXX(unistd.h YUNI_HAS_UNISTD_H)
+check_include_file_cxx(unistd.h YUNI_HAS_UNISTD_H)
 # fcntl.h
-CHECK_INCLUDE_FILE_CXX(fcntl.h YUNI_HAS_FCNTL_H)
+check_include_file_cxx(fcntl.h YUNI_HAS_FCNTL_H)
 # cstdlib
-CHECK_INCLUDE_FILE_CXX(cstdlib YUNI_HAS_CSTDLIB)
+check_include_file_cxx(cstdlib YUNI_HAS_CSTDLIB)
 # stdarg
-CHECK_INCLUDE_FILE_CXX(stdarg.h YUNI_HAS_STDARG_H)
+check_include_file_cxx(stdarg.h YUNI_HAS_STDARG_H)
 # Macro va_copy
-CHECK_CXX_SOURCE_COMPILES("#include <stdarg.h>
+check_cxx_source_compiles("#include <stdarg.h>
 	int main() {va_list a, b; va_copy(a, b);}" YUNI_HAS_VA_COPY)
 
 
 
 
-IF(NOT MSVC)
+if(NOT MSVC)
 	# sys/types.h
-	CHECK_INCLUDE_FILE_CXX("sys/types.h" YUNI_HAS_SYS_TYPES_H)
-ENDIF(NOT MSVC)
-IF(WIN32 OR WIN64)
+	check_include_file_cxx("sys/types.h" YUNI_HAS_SYS_TYPES_H)
+endif(NOT MSVC)
+if(WIN32 OR WIN64)
 	# cstddef
-	CHECK_INCLUDE_FILE_CXX(winsock2.h YUNI_HAS_WINSOCK_2)
+	check_include_file_cxx(winsock2.h YUNI_HAS_WINSOCK_2)
 	# ShellApi.h
-	CHECK_INCLUDE_FILE_CXX(shellapi.h YUNI_HAS_SHELLAPI_H)
-ENDIF(WIN32 OR WIN64)
+	check_include_file_cxx(shellapi.h YUNI_HAS_SHELLAPI_H)
+endif(WIN32 OR WIN64)
 
 
 
 
 # C++0x
-CHECK_CXX_COMPILER_FLAG("-std=c++0x" YUNI_HAS_GCC_CPP0X_SUPPORT)
+check_cxx_compiler_flag("-std=c++0x" YUNI_HAS_GCC_CPP0X_SUPPORT)
 
 
 # int64
-CHECK_CXX_SOURCE_COMPILES("#include <stdint.h>
+check_cxx_source_compiles("#include <stdint.h>
 	int main() {int64_t a; return 0;}" YUNI_HAS_INT64_T)
 # int128
-CHECK_CXX_SOURCE_COMPILES("#include <stdint.h>
+check_cxx_source_compiles("#include <stdint.h>
 	int main() {int128_t a; return 0;}" YUNI_HAS_INT128_T)
 
 # C++0x nullptr
-CHECK_CXX_SOURCE_COMPILES("
+check_cxx_source_compiles("
 	class A {}; int main() {A* a = nullptr;return 0;}" YUNI_HAS_NULLPTR)
 
 # long
-IF(MSVC)
-	CHECK_CXX_SOURCE_COMPILES(
+if(MSVC)
+	check_cxx_source_compiles(
 		"#include <iostream>
 		#include <stdio.h>
 		void foo(unsigned int a) {std::cout << a;}
@@ -114,8 +114,8 @@ IF(MSVC)
 		void foo(__int64 a) {std::cout << a;}
 		int main() {return 0;}"
 		YUNI_HAS_LONG)
-ELSE(MSVC)
-	IF(YUNI_HAS_SYS_TYPES_H)
+else(MSVC)
+	if(YUNI_HAS_SYS_TYPES_H)
 		CHECK_CXX_SOURCE_COMPILES(
 			"#include <iostream>
 			#include <sys/types.h>
@@ -127,7 +127,7 @@ ELSE(MSVC)
 			void foo(int64_t a) {std::cout << a;}
 			int main() {return 0;}"
 			YUNI_HAS_LONG)
-	ELSE(YUNI_HAS_SYS_TYPES_H)
+	else(YUNI_HAS_SYS_TYPES_H)
 		CHECK_CXX_SOURCE_COMPILES(
 			"#include <iostream>
 			#include <stdio.h>
@@ -138,17 +138,17 @@ ELSE(MSVC)
 			void foo(int64_t a) {std::cout << a;}
 			int main() {return 0;}"
 			YUNI_HAS_LONG)
-	ENDIF(YUNI_HAS_SYS_TYPES_H)
-ENDIF(MSVC)
+	endif(YUNI_HAS_SYS_TYPES_H)
+endif(MSVC)
 
 
 
 #
 # Generating informations about the platform
 #
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform.cmake ${CMAKE_CURRENT_SOURCE_DIR}/platform.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform.cmake ${CMAKE_CURRENT_SOURCE_DIR}/platform.h)
 
-Set(SRC_CORE_ATOMIC
+set(SRC_CORE_ATOMIC
 				core/atomic/int.h
 				core/atomic/int.hxx
 				core/atomic/traits.h
@@ -156,7 +156,7 @@ Set(SRC_CORE_ATOMIC
 source_group(Core\\atomic FILES ${SRC_CORE_ATOMIC})
 
 
-Set(SRC_CORE_PREPROCESSOR
+set(SRC_CORE_PREPROCESSOR
 				core/preprocessor/std.h
 				core/preprocessor/capabilities.h
 				core/preprocessor/capabilities/unixes.h
@@ -164,7 +164,7 @@ Set(SRC_CORE_PREPROCESSOR
 				core/preprocessor/enum.h)
 source_group(Core\\preprocessor FILES ${SRC_CORE_PREPROCESSOR})
 
-Set(SRC_CORE_ITERATOR
+set(SRC_CORE_ITERATOR
 				core/iterator.h
 				core/iterator/iterator.h
 				core/iterator/iterator.hxx
@@ -172,7 +172,7 @@ Set(SRC_CORE_ITERATOR
 source_group(Core\\iterator FILES ${SRC_CORE_ITERATOR})
 
 
-Set(SRC_CORE_STATIC
+set(SRC_CORE_STATIC
 				core/static/if.h
 				core/static/remove.h
 				core/static/assert.h
@@ -182,7 +182,7 @@ Set(SRC_CORE_STATIC
 				core/static/moveconstructor.h)
 source_group(Core\\static FILES ${SRC_CORE_STATIC})
 
-Set(SRC_CORE_TRAITS
+set(SRC_CORE_TRAITS
 				core/traits/cstring.h
 				core/traits/extension/into-cstring.h
 				core/traits/extension/length.h
@@ -190,13 +190,13 @@ Set(SRC_CORE_TRAITS
 source_group(Core\\traits FILES ${SRC_CORE_TRAITS})
 
 
-Set(SRC_CORE_EXCEPTIONS
+set(SRC_CORE_EXCEPTIONS
 				core/exceptions.h
 				core/exceptions/badcast.h )
 source_group(Core\\exceptions FILES ${SRC_CORE_EXCEPTIONS})
 
 
-Set(SRC_CORE_VALIDATOR
+set(SRC_CORE_VALIDATOR
 				core/validator/text/default.h
 				core/validator/text/default.hxx
 				core/validator/text/default.private.h
@@ -204,7 +204,7 @@ Set(SRC_CORE_VALIDATOR
 				core/validator/validator.h)
 source_group(Core\\validator FILES ${SRC_CORE_VALIDATOR})
 
-Set(SRC_CORE_SLIST
+set(SRC_CORE_SLIST
 				core/slist/iterator.h
 				core/slist/slist.h
 				core/slist/slist.hxx
@@ -213,7 +213,7 @@ source_group(Core\\linkedList FILES ${SRC_CORE_SLIST})
 
 
 
-Set(SRC_CORE_STRING
+set(SRC_CORE_STRING
 				core/customstring/customstring.h
 				core/customstring/customstring.hxx
 				core/customstring/iterator.h
@@ -243,12 +243,12 @@ Set(SRC_CORE_STRING
 source_group(Core\\String FILES ${SRC_CORE_STRING})
 
 
-Set(SRC_CORE_STL
+set(SRC_CORE_STL
 				core/stl/algorithm.h)
 source_group(Core\\Stl FILES ${SRC_CORE_STL})
 
 
-Set(SRC_CORE_LOGS
+set(SRC_CORE_LOGS
 				core/logs/logs.h core/logs/logs.hxx core/logs/verbosity.h
 				core/logs/null.h
 				core/logs/buffer.h
@@ -267,7 +267,7 @@ source_group(Core\\Logs FILES ${SRC_CORE_LOGS})
 
 
 
-Set(SRC_CORE_SMARTPTR
+set(SRC_CORE_SMARTPTR
 				core/smartptr/policies/checking.h
 				core/smartptr/policies/ownership.h
 				core/smartptr/policies/storage.h
@@ -277,7 +277,7 @@ Set(SRC_CORE_SMARTPTR
 source_group(Core\\SmartPtr FILES ${SRC_CORE_SMARTPTR})
 
 
-Set(SRC_CORE_ANY
+set(SRC_CORE_ANY
 				core/any.h
 				core/any/any.h
 				core/any/any.private.h
@@ -285,7 +285,7 @@ Set(SRC_CORE_ANY
 				core/any/any.cpp)
 source_group(Core\\Any FILES ${SRC_CORE_ANY})
 
-Set(SRC_CORE_VARIANT
+set(SRC_CORE_VARIANT
 				core/variant.h
 				core/variant/variant.h
 				core/variant/variant.hxx
@@ -296,7 +296,7 @@ source_group(Core\\Variant FILES ${SRC_CORE_VARIANT})
 
 
 
-Set(SRC_CORE_DYNAMICLIBRARY
+set(SRC_CORE_DYNAMICLIBRARY
 				core/dynamiclibrary/file.h	core/dynamiclibrary/file.hxx
 				core/dynamiclibrary/file.cpp
 				core/dynamiclibrary/symbol.h core/dynamiclibrary/symbol.hxx
@@ -304,21 +304,21 @@ Set(SRC_CORE_DYNAMICLIBRARY
 source_group(Core\\DynamicLibrary FILES ${SRC_CORE_DYNAMICLIBRARY})
 
 
-Set(SRC_CORE_BIND
+set(SRC_CORE_BIND
 				core/bind/bind.h core/bind/bind.hxx
 				core/bind/traits.h
 				core/bind.h
 				)
 source_group(Core\\Bind FILES ${SRC_CORE_BIND})
 
-Set(SRC_CORE_CHARSET
+set(SRC_CORE_CHARSET
 				core/charset/charset.h core/charset/charset.hxx
 				core/charset/charset.cpp
 				)
 source_group(Core\\Charset FILES ${SRC_CORE_CHARSET})
 
 
-Set(SRC_CORE_EVENT
+set(SRC_CORE_EVENT
 				core/event/event.h core/event/event.hxx
 				core/event/interfaces.h core/event/interfaces.hxx
 				core/event/traits.h
@@ -337,7 +337,7 @@ Set(SRC_CORE_EVENT
 source_group(Core\\Event FILES ${SRC_CORE_EVENT})
 
 
-Set(SRC_CORE_MATH
+set(SRC_CORE_MATH
 				# Standard functions
 				core/math/math.h 	core/math.h  core/math/math.hxx core/math/msvc.hxx
 				core/math/base.h
@@ -361,7 +361,7 @@ Set(SRC_CORE_MATH
 )
 source_group(Core\\Math FILES ${SRC_CORE_MATH})
 
-Set(SRC_CORE_BIT
+set(SRC_CORE_BIT
 				core/bit.h
 				core/bit/bit.h core/bit/bit.hxx
 				core/bit/array.h
@@ -372,7 +372,7 @@ source_group("Core\\Bit" FILES ${SRC_CORE_BIT})
 
 
 # Singleton
-Set(SRC_CORE_SINGLETON
+set(SRC_CORE_SINGLETON
 				core/singleton.h
 				core/singleton/singleton.h
 				core/singleton/singleton.hxx
@@ -384,7 +384,7 @@ source_group(Core\\Singleton FILES ${SRC_CORE_SINGLETON})
 
 
 # Hash - Checksums
-Set(SRC_CORE_HASH_CHECKSUM
+set(SRC_CORE_HASH_CHECKSUM
 				core/hash/checksum/checksum.h
 				core/hash/checksum/checksum.hxx
 				core/hash/checksum/md5.hxx
@@ -393,7 +393,7 @@ source_group(Core\\Hash\\Checksum FILES ${SRC_CORE_HASH_CHECKSUM})
 
 
 # System
-Set(SRC_CORE_SYSTEM
+set(SRC_CORE_SYSTEM
 				core/system/stdint.h core/system/nullptr.h core/system/capabilities.h
 				core/system/sleep.h core/system/sleep.cpp
 				core/sleep.h
@@ -405,7 +405,7 @@ Set(SRC_CORE_SYSTEM
 source_group(Core\\System FILES ${SRC_CORE_SYSTEM})
 
 
-Set(SRC_CORE_TREE_N
+set(SRC_CORE_TREE_N
 				core/tree/treeN.h  core/tree/treeN.hxx
 				core/tree/treeN.iterator.def.h  core/tree/treeN.iterator.undef.h
 				core/tree/treeN.iterator.h
@@ -413,7 +413,7 @@ Set(SRC_CORE_TREE_N
 source_group(Core\\Tree FILES ${SRC_CORE_TREE_N})
 
 
-Set(SRC_CORE_UNIT
+set(SRC_CORE_UNIT
 				core/unit/define.h core/unit/undef.h
 				core/unit/unit.h core/unit/unit.hxx
 				core/unit.h
@@ -426,27 +426,27 @@ Set(SRC_CORE_UNIT
 )
 source_group(Core\\Unit FILES ${SRC_CORE_UNIT})
 
-Set(SRC_CORE_UTILS
+set(SRC_CORE_UTILS
 				core/utils/utils.h
 				core/utils/hexdump.h core/utils/hexdump.hxx core/utils/hexdump.cpp
 )
 source_group(Core\\Utils FILES ${SRC_CORE_UTILS})
 
-Set(SRC_CORE_URI
+set(SRC_CORE_URI
 				core/uri/uri.private.h  core/uri/uri.private.cpp
 				core/uri/uri.h core/uri/uri.hxx core/uri/uri.cpp
 				core/uri.h)
 source_group(Core\\URI FILES ${SRC_CORE_URI})
 
 
-Set(SRC_CORE_IO_FILENAME
+set(SRC_CORE_IO_FILENAME
 				core/io/io.h core/io/io.cpp core/io/exists.cpp
 				core/io/io.hxx)
 source_group(Core\\IO FILES ${SRC_CORE_IO_FILENAME})
 
 
 
-Set(SRC_CORE_IO_DIRECTORY
+set(SRC_CORE_IO_DIRECTORY
 				core/io/directory.h core/io/directory/directory.hxx
 				core/io/directory/commons.h
 				core/io/directory/remove.cpp
@@ -470,7 +470,7 @@ Set(SRC_CORE_IO_DIRECTORY
 source_group(Core\\IO\\Directory FILES ${SRC_CORE_IO_DIRECTORY})
 
 
-Set(SRC_CORE_IO_FILE
+set(SRC_CORE_IO_FILE
 				core/io/file/openmode.h core/io/file/openmode.cpp
 				core/io/file/stream.h core/io/file/stream.hxx
 				core/io/file/stream.cpp
@@ -480,31 +480,31 @@ Set(SRC_CORE_IO_FILE
 source_group(Core\\IO\\File FILES ${SRC_CORE_IO_FILE})
 
 
-Set(SRC_CORE_GETOPT
+set(SRC_CORE_GETOPT
 				core/getopt.h
 				core/getopt/option.h core/getopt/option.cpp
 				core/getopt/parser.h core/getopt/parser.hxx core/getopt/parser.cpp)
 source_group(Core\\GetOpt FILES ${SRC_CORE_GETOPT})
 
 
-Set(SRC_CORE_VERSION	core/version/version.h  core/version/version.cpp core/version/version.hxx)
+set(SRC_CORE_VERSION	core/version/version.h  core/version/version.cpp core/version/version.hxx)
 source_group(Core\\Version FILES ${SRC_CORE_VERSION})
 
 
 
 
 # System - Microsoft Windows
-Set(SRC_CORE_SYSTEM_WINDOWS core/system/windows.hdr.h  core/system/gettimeofday.h)
-If(WIN32 AND MSVC)
-	Set(SRC_CORE_SYSTEM_WINDOWS ${SRC_CORE_SYSTEM_WINDOWS} core/system/gettimeofday.cpp)
-EndIF(WIN32 AND MSVC)
+set(SRC_CORE_SYSTEM_WINDOWS core/system/windows.hdr.h  core/system/gettimeofday.h)
+if(WIN32 AND MSVC)
+	set(SRC_CORE_SYSTEM_WINDOWS ${SRC_CORE_SYSTEM_WINDOWS} core/system/gettimeofday.cpp)
+endif(WIN32 AND MSVC)
 source_group(Core\\System\\Windows FILES ${SRC_CORE_SYSTEM_WINDOWS})
 
 
 
 
 # Threads
-Set(SRC_THREADS
+set(SRC_THREADS
 		thread/policy.h
 		thread/pthread.h
 		thread/mutex.h
@@ -523,7 +523,7 @@ Set(SRC_THREADS
 source_group(Threads FILES ${SRC_THREADS})
 
 # Jobs
-Set(SRC_JOBS
+set(SRC_JOBS
 		job/enum.h
 		job/forward.h
 		job/job.h
@@ -546,14 +546,14 @@ source_group(Jobs FILES ${SRC_JOBS})
 
 
 # Application
-Set(SRC_APPLICATION
+set(SRC_APPLICATION
 		application/application.h
 		application/application.hxx application/application.cpp
 		application/console.h application/console.cpp)
 source_group(Core\\Application FILES ${SRC_APPLICATION})
 
 
-Set(SRC_CORE_COLOR
+set(SRC_CORE_COLOR
 		# Color
 		core/color/rgba.h
         core/color/rgb.h
@@ -563,12 +563,12 @@ Set(SRC_CORE_COLOR
 source_group(Core\\Color FILES ${SRC_CORE_COLOR})
 
 
-Set(SRC_GFX_CORE
+set(SRC_GFX_CORE
 		gfx/mesh/octree.h gfx/mesh/octree.cpp
 		)
 source_group(Gfx FILES ${SRC_GFX_CORE})
 
-Set(SRC_CORE_PREDICATES_RESULTS
+set(SRC_CORE_PREDICATES_RESULTS
 		core/predicate/result/sum.h
 		core/predicate/result/and.h
 		core/predicate/result/or.h
@@ -576,7 +576,7 @@ Set(SRC_CORE_PREDICATES_RESULTS
 source_group(Core\\Predicate\\Result FILES ${SRC_CORE_PREDICATES_RESULTS})
 
 
-Set(SRC_CORE_SYSTEM_CONSOLE
+set(SRC_CORE_SYSTEM_CONSOLE
 		core/system/console.h
 		core/system/console/console.h
 		core/system/console/console.hxx
@@ -585,7 +585,7 @@ source_group(Core\\System\\Console FILES ${SRC_CORE_SYSTEM_CONSOLE})
 
 
 
-ADD_LIBRARY(yuni-static-core STATIC
+add_library(yuni-static-core STATIC
 		yuni.h
 		${SRC_CORE_PREDICATES_RESULTS}
 		${SRC_CORE_STATIC}
@@ -629,14 +629,14 @@ ADD_LIBRARY(yuni-static-core STATIC
 	)
 
 # Setting output path
-SET_TARGET_PROPERTIES(yuni-static-core PROPERTIES 
+set_target_properties(yuni-static-core PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
-INSTALL(TARGETS yuni-static-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+install(TARGETS yuni-static-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 # Install Core-related headers
-INSTALL(
+install(
 	DIRECTORY application core job thread
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
 	FILES_MATCHING
@@ -647,12 +647,14 @@ INSTALL(
 	PATTERN "cmake" EXCLUDE
 )
 # Install other core-related base files
-INSTALL(FILES
+install(FILES
 	Doxygen.txt
 	doxygen.h
 	platform.h
 	yuni.config.gcc
 	yuni.h
 	yuni.version
-		DESTINATION include/${YUNI_VERSIONED_INST_PATH})
+		DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+)
+
 
