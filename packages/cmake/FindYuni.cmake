@@ -1,36 +1,42 @@
 #
 # Locate the Yuni Framework
 #
+# This module reads the following variables :
+#
+#  - Yuni_YUNICONFIG_PATH   : Path to the program 'yuni-config' (optional if you're building
+#                             in the source tree)
+#
 # This module defines :
-#  - Yuni_FOUND    : If the libraries has been found
-#  - Yuni_Info     : A string about the selected version of yuni (`Not found` by default)
-#  - Yuni_CXXFLAGS : The flags to use for compiling a source file
-#  - Yuni_LIBS     : The flags to use to link against the libyuni libraries
-#  - Yuni_Config   : Full path to the program 'yuni-config' (empty if not found)
+#  - Yuni_FOUND             : If the libraries has been found
+#  - Yuni_CXXFLAGS          : The flags to use for compiling a source file
+#  - Yuni_LIBS              : The flags to use to link against the libyuni libraries
+#  - Yuni_INFOS             : A string about the selected version of yuni (`Not found` by default)
+#  - Yuni_YUNICONFIG_PATH   : Path to the program 'yuni-config' (empty if not found)
 #
 # Usage :
 # \code
 # find_package(Yuni COMPONENTS core gfx3d lua)
-# if(Yuni_NOTFOUND)
+# if(NOT Yuni_FOUND)
 #	message(ERROR "The yuni framework could not been found.")
-# endif(Yuni_NOTFOUND)
+# endif()
 # \endcode
 #
 
 
 #
-# Init
+# External variables
 #
-SET(Yuni_CXXFLAGS "")
-SET(Yuni_LIBS     "")
-SET(Yuni_INFOS    "Not found.")
-SET(Yuni_Config   "")
+set(Yuni_CXXFLAGS "")
+set(Yuni_LIBS     "")
+set(Yuni_INFOS    "Not found")
+set(Yuni_FOUND    FALSE)
+# Yuni_YUNICONFIG_PATH is also an input variable.
 
-
-
-
-
-SET(__Yuni_Message "Looking for the Yuni Framework")
+#
+# Internal variables
+#
+set(__Yuni_Message "Looking for the Yuni Framework")
+set(__Yuni_ConfigNotFound FALSE)
 
 #
 # Where is yuni-config ?
@@ -42,7 +48,7 @@ if(Yuni_YUNICONFIG_PATH AND EXISTS "${Yuni_YUNICONFIG_PATH}")
 elseif(Yuni_YUNICONFIG_PATH AND NOT EXISTS "${Yuni_YUNICONFIG_PATH}")
 	# If the specified yuni-config cannot be found, we should not try harder.
 	message(STATUS "${__Yuni_Message} - The specified yuni-config (`${Yuni_YUNICONFIG_PATH}`) could not be found.")
-	set(Yuni_NOTFOUND TRUE)
+	set(__Yuni_ConfigNotFound TRUE)
 else()
 	# Try to find it in _reasonable_ places.
 	set(__Yuni_CurrentFolder "${CMAKE_CURRENT_LIST_FILE}")
@@ -59,7 +65,7 @@ else()
 
 	if("${__Yuni_Config}" STREQUAL "__Yuni_Config-NOTFOUND")
 		message(STATUS "${__Yuni_Message} - failed ('yuni-config' not found)")
-		set(Yuni_NOTFOUND TRUE)
+		set(__Yuni_ConfigNotFound  TRUE)
 	endif()
 endif()
 
@@ -67,10 +73,10 @@ endif()
 # FIXME: we should check if yuni-config has any versions configured here, to avoid problems.
 # FIXME: we also should give a choice of options to pass to yuni-config (like a secondary version, or so).
 
-if(NOT Yuni_NOTFOUND)
+if(NOT __Yuni_ConfigNotFound)
 
 	# Store the config path.
-	set(Yuni_Config   "${__Yuni_Config}")
+	set(Yuni_YUNICONFIG_PATH   "${__Yuni_Config}")
 
 	#
 	# Compiler
@@ -104,15 +110,16 @@ if(NOT Yuni_NOTFOUND)
 		set(__Yuni_ModsOpts "${__Yuni_ModsOpts} ${COMPONENT}")
 	endforeach()
 
-	#
-	# Checking if the required modules are present
-	#
-    if(WIN32)
+	# Converting eventual slashes in yuni-config path on Windows
+    if(WIN32 OR WIN64)
         if(NOT MSYS)
-            # On Windows (not MSys), a patch like this "C:/path/..." is invalid
+            # On Windows (not MSys), a path with slashes is invalid.
+			# "C:/path/..." needs to be changed into "C:\path\..."
             string(REPLACE "/" "\\" __Yuni_Config "${__Yuni_Config}")
         endif()
     endif()
+
+	# Check if the required modules, and their dependencies are compiled in.
 	execute_process(COMMAND "${__Yuni_Config}" -c "${__Yuni_Compiler}"
 		-m "${__Yuni_ModsOpts}" --module-deps
 		OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE __Yuni_ModsDeps
@@ -120,10 +127,13 @@ if(NOT Yuni_NOTFOUND)
 	if(NOT "${__Yuni_Config_DepsResult}" EQUAL 0 OR "${__Yuni_ModsDeps}" STREQUAL "")
 		message(STATUS "${__Yuni_Message} - Requires: ${Yuni_FIND_COMPONENTS}")
 		message(STATUS "${__Yuni_Message} - failed - the required modules could not be found")
-		set(Yuni_NOTFOUND TRUE)
+		set(__Yuni_ConfigNotFound TRUE)
 	endif()
 
-	if(NOT Yuni_NOTFOUND)
+	# If we encountered no problems, get the framework info, and fill
+	# the detection variables.
+	if(NOT __Yuni_ConfigNotFound)
+
 		# Infos
 		execute_process(COMMAND "${__Yuni_Config}" -c "${__Yuni_Compiler}"
 			-m "${__Yuni_ModsOpts}" -l
@@ -132,15 +142,16 @@ if(NOT Yuni_NOTFOUND)
 		# CXX
 		execute_process(COMMAND "${__Yuni_Config}" -c "${__Yuni_Compiler}"
 			-m "${__Yuni_ModsOpts}" --cxxflags
-			OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE Yuni_CXXFLAGS
-			RESULT_VARIABLE __Yuni_Config_DepsResult)
+			OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE Yuni_CXXFLAGS)
+
 		# LIBS
 		execute_process(COMMAND "${__Yuni_Config}" -c "${__Yuni_Compiler}"
 			-m "${__Yuni_ModsOpts}" --libs
-			OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE Yuni_LIBS
-			RESULT_VARIABLE __Yuni_Config_DepsResult)
+			OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE Yuni_LIBS)
 
-		SET(Yuni_FOUND true)
+		# Framework found
+		set(Yuni_FOUND true)
+
 	endif()
 
 endif()
