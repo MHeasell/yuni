@@ -29,7 +29,7 @@ namespace Display
 		enum
 		{
 			//! The smallest value allowed for the width of the screen
-			minimumWith   = 320u,
+			minimumWidth  = 320u,
 			//! The smallest allowed value for the height of the screen
 			minimumHeight = 200u,
 

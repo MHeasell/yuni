@@ -37,18 +37,13 @@ namespace Window
 		virtual void resize(float width, float height);
 		virtual Surface::Cairo* surface2D() { return this; }
 
-		//! Is vertical synchronization (VSync) active?
-		virtual bool verticalSync() const;
-		//! Activate / deactivate vertical synchronization (VSync)
-		virtual bool verticalSync(bool activate);
-
 	protected:
 		/*!
 		** \brief Refresh the window content if necessary
 		**
 		** \returns True if the window was refreshed, false if it was not necessary
 		*/
-		virtual bool refresh() { return true; }
+		virtual bool refresh();
 
 		virtual void blitWL();
 

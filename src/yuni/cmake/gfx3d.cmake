@@ -40,6 +40,7 @@ set(SRC_GFX3D
 		gfx/surface/surface.h
 		gfx/surface/surface3d.h gfx/surface/surface3d.cpp
 		gfx/surface/opengl.h gfx/surface/opengl.cpp
+		gfx/surface/cairo.h gfx/surface/cairo.cpp
 
 		# Font
 		gfx/text/font.h gfx/text/label.h
