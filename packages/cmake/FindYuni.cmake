@@ -30,97 +30,100 @@ SET(Yuni_Config   "")
 
 
 
-
-
-
-
 SET(__Yuni_Message "Looking for the Yuni Framework")
 
 #
 # Where is yuni-config ?
 #
-SET(__Yuni_CurrentFolder "${CMAKE_CURRENT_LIST_FILE}")
-STRING(REPLACE "\\FindYuni.cmake" "" __Yuni_CurrentFolder "${__Yuni_CurrentFolder}")
-STRING(REPLACE "/FindYuni.cmake" "" __Yuni_CurrentFolder "${__Yuni_CurrentFolder}")
-IF(WIN32 OR WIN64)
+# - It might be specified.
+if(Yuni_YUNICONFIG_PATH AND EXISTS "${Yuni_YUNICONFIG_PATH}")
+	# Nothing to do, the binary is there, we'll blindly use it.
+	set(__Yuni_Config "${Yuni_YUNICONFIG_PATH}")
+elseif(Yuni_YUNICONFIG_PATH AND NOT EXISTS "${Yuni_YUNICONFIG_PATH}")
+	# If the specified yuni-config cannot be found, we should not try harder.
+	message(STATUS "${__Yuni_Message} - The specified yuni-config (`${Yuni_YUNICONFIG_PATH}`) could not be found.")
+	set(Yuni_NOTFOUND TRUE)
+else()
+	# Try to find it in _reasonable_ places.
+	set(__Yuni_CurrentFolder "${CMAKE_CURRENT_LIST_FILE}")
+	string(REPLACE "\\FindYuni.cmake" "" __Yuni_CurrentFolder "${__Yuni_CurrentFolder}")
+	string(REPLACE "/FindYuni.cmake" "" __Yuni_CurrentFolder "${__Yuni_CurrentFolder}")
+
 	SET(__Yuni_ProgramSearchPath
-		C:/dev/libyuni
-		C:/libyuni
+		# Search in the source tree (if we have a trunk-like tree).
 		"${__Yuni_CurrentFolder}/../../src/build/release/bin/"
 		"${__Yuni_CurrentFolder}/../../src/build/debug/bin/"
 		"$ENV{YuniPaths}")
-ELSE(WIN32 OR WIN64)
-	SET(__Yuni_ProgramSearchPath
-		"${__Yuni_CurrentFolder}/../../src/build/release/bin"
-		"${__Yuni_CurrentFolder}/../../src/build/debug/bin"
-		"$ENV{YuniPaths}")
-ENDIF(WIN32 OR WIN64)
 
-FIND_PROGRAM(__Yuni_Config NAMES yuni-config yuni-config.exe PATHS ${__Yuni_ProgramSearchPath})
+	find_program(__Yuni_Config NAMES yuni-config yuni-config.exe PATHS ${__Yuni_ProgramSearchPath})
 
-IF("${__Yuni_Config}" STREQUAL "__Yuni_Config-NOTFOUND")
-	MESSAGE(STATUS "${__Yuni_Message} - failed ('yuni-config' not found)")
-	SET(Yuni_NOTFOUND TRUE)
-ENDIF("${__Yuni_Config}" STREQUAL "__Yuni_Config-NOTFOUND")
+	if("${__Yuni_Config}" STREQUAL "__Yuni_Config-NOTFOUND")
+		message(STATUS "${__Yuni_Message} - failed ('yuni-config' not found)")
+		set(Yuni_NOTFOUND TRUE)
+	endif()
+endif()
 
 
-IF(NOT Yuni_NOTFOUND)
+# FIXME: we should check if yuni-config has any versions configured here, to avoid problems.
+# FIXME: we also should give a choice of options to pass to yuni-config (like a secondary version, or so).
 
-	# gotcha !
-	SET(Yuni_Config   "${__Yuni_Config}")
+if(NOT Yuni_NOTFOUND)
+
+	# Store the config path.
+	set(Yuni_Config   "${__Yuni_Config}")
 
 	#
 	# Compiler
 	#
-	SET(__Yuni_Compiler "gcc")
-	IF(MINGW)
-		SET(__Yuni_Compiler "mingw")
-	ENDIF(MINGW)
-	IF(MSVC)
-		SET(__Yuni_Compiler "msvc")
-	ENDIF(MSVC)
-	IF(WATCOM)
-		SET(__Yuni_Compiler "watcom")
-	ENDIF(WATCOM)
-	IF(BORLAND)
-		SET(__Yuni_Compiler "borland")
-	ENDIF(BORLAND)
-	IF(MSYS)
-		SET(__Yuni_Compiler "mingw")
-	ENDIF(MSYS)
-	IF(CYGWIN)
-		SET(__Yuni_Compiler "mingw")
-	ENDIF(CYGWIN)
+	set(__Yuni_Compiler "gcc")
+	if(MINGW)
+		set(__Yuni_Compiler "mingw")
+	endif()
+	if(MSVC)
+		set(__Yuni_Compiler "msvc")
+	endif()
+	if(WATCOM)
+		set(__Yuni_Compiler "watcom")
+	endif()
+	if(BORLAND)
+		set(__Yuni_Compiler "borland")
+	endif()
+	if(MSYS)
+		set(__Yuni_Compiler "mingw")
+	endif(MSYS)
+	if(CYGWIN)
+		set(__Yuni_Compiler "mingw")
+	endif(CYGWIN)
 
 	#
 	# Building the command line options for the list of components
 	#
-	SET(__Yuni_ModsMods "")
-	FOREACH(COMPONENT ${Yuni_FIND_COMPONENTS})
-		STRING(TOLOWER ${COMPONENT} COMPONENT)
-		SET(__Yuni_ModsOpts "${__Yuni_ModsOpts} ${COMPONENT}")
-	ENDFOREACH(COMPONENT)
+	set(__Yuni_ModsMods "")
+	foreach(COMPONENT ${Yuni_FIND_COMPONENTS})
+		string(TOLOWER ${COMPONENT} COMPONENT)
+		set(__Yuni_ModsOpts "${__Yuni_ModsOpts} ${COMPONENT}")
+	endforeach()
 
 	#
 	# Checking if the required modules are present
 	#
-    IF(WIN32)
-        IF(NOT MSYS)
+    if(WIN32)
+        if(NOT MSYS)
             # On Windows (not MSys), a patch like this "C:/path/..." is invalid
-            STRING(REPLACE "/" "\\" __Yuni_Config "${__Yuni_Config}")
-        ENDIF(NOT MSYS)
-    ENDIF(WIN32)
+            string(REPLACE "/" "\\" __Yuni_Config "${__Yuni_Config}")
+        endif()
+    endif()
 	execute_process(COMMAND "${__Yuni_Config}" -c "${__Yuni_Compiler}"
 		-m "${__Yuni_ModsOpts}" --module-deps
 		OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE __Yuni_ModsDeps
 		RESULT_VARIABLE __Yuni_Config_DepsResult)
-	IF(NOT "${__Yuni_Config_DepsResult}" EQUAL 0 OR "${__Yuni_ModsDeps}" STREQUAL "")
-		MESSAGE(STATUS "${__Yuni_Message} - Requires: ${Yuni_FIND_COMPONENTS}")
-		MESSAGE(STATUS "${__Yuni_Message} - failed - the required modules could not be found")
-		SET(Yuni_NOTFOUND TRUE)
-	ENDIF(NOT "${__Yuni_Config_DepsResult}" EQUAL 0 OR "${__Yuni_ModsDeps}" STREQUAL "")
+	if(NOT "${__Yuni_Config_DepsResult}" EQUAL 0 OR "${__Yuni_ModsDeps}" STREQUAL "")
+		message(STATUS "${__Yuni_Message} - Requires: ${Yuni_FIND_COMPONENTS}")
+		message(STATUS "${__Yuni_Message} - failed - the required modules could not be found")
+		set(Yuni_NOTFOUND TRUE)
+	endif()
 
-	IF(NOT Yuni_NOTFOUND)
+	if(NOT Yuni_NOTFOUND)
 		# Infos
 		execute_process(COMMAND "${__Yuni_Config}" -c "${__Yuni_Compiler}"
 			-m "${__Yuni_ModsOpts}" -l
@@ -138,7 +141,7 @@ IF(NOT Yuni_NOTFOUND)
 			RESULT_VARIABLE __Yuni_Config_DepsResult)
 
 		SET(Yuni_FOUND true)
-	ENDIF(NOT Yuni_NOTFOUND)
+	endif()
 
-ENDIF(NOT Yuni_NOTFOUND)
+endif()
 
