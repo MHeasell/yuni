@@ -1,4 +1,4 @@
 
-ADD_SUBDIRECTORY(00.iterator)
-ADD_SUBDIRECTORY(01.threadediterator)
+add_subdirectory(00.iterator)
+add_subdirectory(01.threadediterator)
 

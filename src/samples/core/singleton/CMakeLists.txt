@@ -1,3 +1,3 @@
 
-ADD_SUBDIRECTORY(00.simple)
-ADD_SUBDIRECTORY(01.phoenix)
+add_subdirectory(00.simple)
+add_subdirectory(01.phoenix)
