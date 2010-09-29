@@ -6,7 +6,7 @@ LIBYUNI_CONFIG_LIB("script"     "yuni-static-script")
 
 
 # Scripts
-Set(SRC_SCRIPT
+set(SRC_SCRIPT
 			script/script.h script/script.hxx script/script.cpp
 			script/private.h script/private.hxx
 			script/args.hxx
@@ -21,7 +21,7 @@ if(YUNI_EXTERNAL_SCRIPT_LUA)
 	YMESSAGE(":: [Module] Script::Lua")
 
 	if(UNIX AND NOT APPLE)
-		CHECK_INCLUDE_FILES("stdio.h;readline/readline.h" YUNI_HAS_READLINE_HEADER)
+		check_include_files("stdio.h;readline/readline.h" YUNI_HAS_READLINE_HEADER)
 		if(NOT "${YUNI_HAS_READLINE_HEADER}" GREATER 0)
 			set(YUNI_CMAKE_ERROR 1)
 			YMESSAGE(    "[!!] Impossible to find readline/readline.h")
@@ -49,9 +49,9 @@ if(YUNI_EXTERNAL_SCRIPT_LUA)
 
 	# Check if we really have a lua.h
 	set(CMAKE_REQUIRED_INCLUDES "${YUNI_EXT_LUA_INCLUDE}")
-	CHECK_INCLUDE_FILES("lua.h" YUNI_HAS_LUA_H)
+	check_include_files("lua.h" YUNI_HAS_LUA_H)
 
-	if(NOT "${YUNI_HAS_LUA_H}" GREATER 0)
+	if (YUNI_HAS_LUA_H)
 		set(YUNI_CMAKE_ERROR 1)
 		YMESSAGE(    "[!!] Impossible to find lua.h. Please check your profile.")
 		YMESSAGE(    " * Packages needed on Debian: liblua5.1-dev")
@@ -73,7 +73,7 @@ add_library(yuni-static-script STATIC
 	${SRC_SCRIPT} ${SRC_EXTERNAL_SCRIPT_LUA})
 
 # Setting output path
-set_target_properties(yuni-static-script PROPERTIES 
+set_target_properties(yuni-static-script PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
