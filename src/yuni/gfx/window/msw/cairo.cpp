@@ -16,6 +16,15 @@ namespace Window
 			(unsigned int)pHeight);
 	}
 
+	inline void close()
+	{}
+
+	inline void resize(float, float)
+	{}
+
+	inline bool refresh() { return true; }
+
+	inline void blitWL() {}
 
 
 
