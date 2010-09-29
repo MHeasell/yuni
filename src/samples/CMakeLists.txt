@@ -19,6 +19,7 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CommonSettings.cmake")
 
 add_custom_target(samples)
 
+set(Yuni_YUNICONFIG_PATH ${YUNI_CONFIG})
 find_package(Yuni COMPONENTS core)
 if(Yuni_FOUND)
 
@@ -32,6 +33,13 @@ if(Yuni_FOUND)
 	add_subdirectory(jobs)
 	add_subdirectory(script)
 	add_subdirectory(threads)
+else()
+		
+	YMESSAGE("A working Yuni Framework was not found (could not locate yuni-config).")
+	YMESSAGE("If you are not building from within the source tree, you should define")
+	YMESSAGE("YUNI_CONFIG to the path to the yuni-config binary, e.g.:")
+	YMESSAGE(" $ cmake -DYUNI_CONFIG=path/to/yuni-config <samples_path>")
+	YERROR("Aborting.")
 
-endif(Yuni_FOUND)
+endif()
 
