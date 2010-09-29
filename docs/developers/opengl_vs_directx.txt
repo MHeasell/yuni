@@ -10,11 +10,12 @@ both frameworks and will allow us to recognize which parts absolutely
 have to be framework-dependent. Also, it will be a support for abstraction
 of concepts.
 
+
 Mesh display:
 -------------
 
 Mesh display is very similar in both APIs, so we will be mainly interested
-in where they diverge. The principal behind vertex buffers is to store the
+in where they diverge. The principle behind vertex buffers is to store the
 vertices we want to display in a buffer, possibly stored in hardware.
 
 
@@ -43,6 +44,9 @@ Buffering data:
 					HRESULT Unlock(void);
 
 
+Displaying:
+		TODO
+
 Options:
 					D3DUSAGE_DYNAMIC						GL_STREAM_DRAW
 					D3DUSAGE_WRITEONLY						GL_DYNAMIC_DRAW
@@ -50,3 +54,8 @@ Options:
 					D3DPOOL_DEFAULT	// In hardware mem
 					D3DPOOL_MANAGED // In system mem
 
+
+Summary of interesting points :
+-------------------------------
+ * DirectX requires the device pointer for its API calls; OpenGL requires for the context to be active.
+ * There are various scenarii for vertex buffer use, namely : software or hardware storage, static or dynamic usage, and read-only, write-only, or read-write.
