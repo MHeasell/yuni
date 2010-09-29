@@ -119,7 +119,7 @@ endif(UNIX AND NOT APPLE)
 #
 if (WIN32)
 	# Search for DirectX
-	find_pqth(DX9_INCLUDE_PATH d3d9.h
+	find_path(DX9_INCLUDE_PATH d3d9.h
 		PATHS
 			"$ENV{DXSDK_DIR}/Include"
 			"$ENV{PROGRAMFILES}/Microsoft DirectX SDK/Include"
