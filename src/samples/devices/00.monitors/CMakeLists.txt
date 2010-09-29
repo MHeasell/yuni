@@ -1,10 +1,10 @@
 
-Find_Package(Yuni COMPONENTS core)
-IF(Yuni_FOUND)
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Yuni_CXXFLAGS}")
+find_package(Yuni COMPONENTS core)
+if(Yuni_FOUND)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Yuni_CXXFLAGS}")
 	link_libraries("${Yuni_LIBS}")
 
-	Message(STATUS "Sample: Devices / List all monitors")
-	ADD_EXECUTABLE(devices_00_monitors main.cpp)
-ENDIF(Yuni_FOUND)
+	message(STATUS "Sample: Devices / List all monitors")
+	add_executable(devices_00_monitors main.cpp)
+endif(Yuni_FOUND)
 

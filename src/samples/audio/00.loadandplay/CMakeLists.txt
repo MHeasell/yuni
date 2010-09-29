@@ -1,12 +1,12 @@
 
 
-Find_Package(Yuni COMPONENTS core audio)
-IF(Yuni_FOUND)
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Yuni_CXXFLAGS}")
+find_package(Yuni COMPONENTS core audio)
+if(Yuni_FOUND)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Yuni_CXXFLAGS}")
 	add_definitions(-D__STDC_CONSTANT_MACROS)
 	link_libraries("${Yuni_LIBS}")
 
-	Message(STATUS "Sample: Audio / Load sounds and play them")
-	ADD_EXECUTABLE(audio_00_loadandplay 00.loadandplay.cpp)
-ENDIF(Yuni_FOUND)
+	message(STATUS "Sample: Audio / Load sounds and play them")
+	add_executable(audio_00_loadandplay 00.loadandplay.cpp)
+endif(Yuni_FOUND)
 

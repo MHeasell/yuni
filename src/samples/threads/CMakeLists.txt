@@ -1,4 +1,4 @@
 
-ADD_SUBDIRECTORY(00.basics)
-ADD_SUBDIRECTORY(01.condition)
+add_subdirectory(00.basics)
+add_subdirectory(01.condition)
 

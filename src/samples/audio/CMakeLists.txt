@@ -1,3 +1,3 @@
 
-ADD_SUBDIRECTORY(00.loadandplay)
-ADD_SUBDIRECTORY(01.movingemitter)
+add_subdirectory(00.loadandplay)
+add_subdirectory(01.movingemitter)

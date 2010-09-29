@@ -1,3 +1,3 @@
 
-ADD_SUBDIRECTORY(00.monitors)
+add_subdirectory(00.monitors)
 

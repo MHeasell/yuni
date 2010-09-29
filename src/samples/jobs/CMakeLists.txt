@@ -1,3 +1,3 @@
 
-ADD_SUBDIRECTORY(00.basics)
+add_subdirectory(00.basics)
 

@@ -1,3 +1,3 @@
 
-ADD_SUBDIRECTORY(randomnumbers)
+add_subdirectory(randomnumbers)
 

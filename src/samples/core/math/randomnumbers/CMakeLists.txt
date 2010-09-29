@@ -1,6 +1,6 @@
 
-ADD_SUBDIRECTORY(00.simple)
-ADD_SUBDIRECTORY(01.interval)
-ADD_SUBDIRECTORY(02.table)
-ADD_SUBDIRECTORY(03.tableplusrange)
+add_subdirectory(00.simple)
+add_subdirectory(01.interval)
+add_subdirectory(02.table)
+add_subdirectory(03.tableplusrange)
 
