@@ -31,6 +31,7 @@ namespace Window
 		IMSWindows(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
 			:IWindow(source, bitDepth, fullScreen)
 		{}
+		virtual ~IMSWindows() {}
 
 		virtual bool initialize();
 

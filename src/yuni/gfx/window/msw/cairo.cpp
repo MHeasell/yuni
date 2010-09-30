@@ -1,4 +1,5 @@
 
+#include "../../api/cairo.h"
 #include "cairo.h"
 
 namespace Yuni
@@ -9,22 +10,31 @@ namespace Window
 {
 
 
-	inline bool Cairo::initialize()
+	bool CairoMSW::initialize()
 	{
-		pSurface = cairo_win32_surface_create_with_ddb(GetDC(pHWND),
-			cairo_format_t.CAIRO_FORMAT_ARGB32, (unsigned int)pWidth,
-			(unsigned int)pHeight);
+		IMSWindows::initialize();
+		pSurface = cairo_win32_surface_create_with_ddb(GetDC(pHWnd),
+			CAIRO_FORMAT_ARGB32, (unsigned int)pUIWnd->width(),
+			(unsigned int)pUIWnd->height());
+		Surface::Cairo::initialize();
+		return true;
 	}
 
-	inline void close()
+
+	inline void CairoMSW::close()
 	{}
 
-	inline void resize(float, float)
-	{}
 
-	inline bool refresh() { return true; }
-
-	inline void blitWL() {}
+	void CairoMSW::resize(float width, float height)
+	{
+		IMSWindows::resize(width, height);
+		release();
+		pSurface = cairo_win32_surface_create_with_ddb(GetDC(pHWnd),
+			CAIRO_FORMAT_ARGB32, (unsigned int)width,
+			(unsigned int)height);
+		pContext = cairo_create(pSurface);
+		Surface::Cairo::resize(width, height);
+	}
 
 
 
