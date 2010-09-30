@@ -34,36 +34,30 @@ namespace UI
 		/*!
 		** \brief Empty constructor
 		*/
-		IControlContainer()
-		{}
+		IControlContainer();
 
 		/*!
 		** \brief Constructor with dimensions
 		*/
-		IControlContainer(float width, float height)
-			: IControl(width, height)
-		{}
+		IControlContainer(float width, float height);
 
 		/*!
 		** \brief Full constructor
 		*/
-		IControlContainer(float x, float y, float width, float height)
-			: IControl(x, y, width, height)
-		{}
+		IControlContainer(float x, float y, float width, float height);
 
 		/*!
 		** \brief Full constructor
 		*/
-		template<typename T>
-		IControlContainer(Point2D<T>& pos, float width, float height)
-			: IControl(pos, width, height)
-		{}
+		template<class T>
+		IControlContainer(const Point2D<T>& pos, float width, float height);
 
 		//! Virtual destructor
-		virtual ~IControlContainer() {}
+		virtual ~IControlContainer();
 		//@}
 
 
+	protected:
 		//! \name Methods
 		//@{
 		/*!
@@ -71,18 +65,14 @@ namespace UI
 		**
 		** This is implementation-dependent
 		*/
-		virtual void resize(float, float)
-		{
-			ThreadingPolicy::MutexLocker lock(*this);
-			// TODO: Resize children to fit in the parent's new dimensions
-		}
+		virtual void resizeWL(float& newWidth, float& newHeight);
 		//@}
 
 	private:
 		//! Children controls
 		IControl::Vector pChildren;
 
-	}; // class IComponent
+	}; // class IControlContainer
 
 
 
@@ -90,5 +80,7 @@ namespace UI
 
 } // namespace UI
 } // namespace Yuni
+
+# include "controlcontainer.hxx"
 
 #endif // __YUNI_UI_CONTROL_CONTAINER_H__

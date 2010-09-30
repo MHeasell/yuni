@@ -1093,7 +1093,7 @@ namespace Yuni
 		** instead.
 		** \see shrink()
 		**
-		** \return *this
+		** \return Always *this
 		*/
 		CustomString& clear();
 
