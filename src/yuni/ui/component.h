@@ -47,33 +47,26 @@ namespace UI
 		/*!
 		** \brief Empty constructor
 		*/
-		IComponent() : pPosition(50, 50), pWidth(50), pHeight(50)
-		{}
+		IComponent();
 
 		/*!
 		** \brief Constructor with dimensions
 		*/
-		IComponent(float width, float height)
-			: pPosition(50, 50), pWidth(width), pHeight(height)
-		{}
+		IComponent(float width, float height);
 
 		/*!
 		** \brief Full constructor
 		*/
-		IComponent(float x, float y, float width, float height)
-			: pPosition(x, y), pWidth(width), pHeight(height)
-		{}
+		IComponent(float x, float y, float width, float height);
 
 		/*!
 		** \brief Full constructor
 		*/
-		template<typename T>
-		IComponent(Point2D<T>& pos, float width, float height)
-			: pPosition(pos), pWidth(width), pHeight(height)
-		{}
+		template<class T>
+		IComponent(const Point2D<T>& pos, float width, float height);
 
 		//! Virtual destructor
-		virtual ~IComponent() {}
+		virtual ~IComponent();
 		//@}
 
 
@@ -82,12 +75,7 @@ namespace UI
 		/*!
 		** \brief Resize the component
 		*/
-		virtual void resize(float width, float height)
-		{
-			ThreadingPolicy::MutexLocker lock(*this);
-			pWidth = width;
-			pHeight = height;
-		}
+		void resize(float width, float height);
 		//@}
 
 
@@ -125,6 +113,11 @@ namespace UI
 		Point2D<float> position() const;
 
 		/*!
+		** \brief Get the size of the component
+		*/
+		void size(float& width, float& height) const;
+
+		/*!
 		** \brief Get the X position of the component
 		*/
 		float y() const;
@@ -135,6 +128,9 @@ namespace UI
 		float x() const;
 		//@}
 
+
+	protected:
+		virtual void resizeWL(float& newWidth, float& newHeight);
 
 	protected:
 		/*!
@@ -171,8 +167,6 @@ namespace UI
 } // namespace UI
 } // namespace Yuni
 
-
 # include "component.hxx"
-
 
 #endif // __YUNI_GFX_UI_COMPONENT_H__

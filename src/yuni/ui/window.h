@@ -20,7 +20,7 @@ namespace UI
 	class Window: public IControlContainer
 	{
 	public:
-		//! Smart pointer
+		//! Smart pointer, inherited from the ancestor
 		typedef IComponent::SmartPtrInfo<Window>::Type Ptr;
 		//! Vector of controls
 		typedef std::vector<Ptr> Vector;
@@ -34,28 +34,26 @@ namespace UI
 		/*!
 		** \brief Short constructor
 		*/
-		template<typename StringT>
+		template<class StringT>
 		explicit Window(const StringT& title);
 
 		/*!
 		** \brief Constructor with dimensions
 		*/
-		template<typename StringT>
+		template<class StringT>
 		Window(const StringT& title, float width, float height);
 
 		/*!
 		** \brief Constructor with start position coordinates
 		*/
-		template<typename StringT>
-		Window(const StringT& title, float x, float y, float width,
-			float height);
+		template<class StringT>
+		Window(const StringT& title, float x, float y, float width, float height);
 
 		/*!
 		** \brief Constructor with start position as a point
 		*/
-		template<typename StringT, typename NumberT>
-		Window(const StringT& title, const Point2D<NumberT>& pos, float width,
-			float height);
+		template<class StringT, class T>
+		Window(const StringT& title, const Point2D<T>& pos, float width, float height);
 
 		//! Virtual destructor
 		virtual ~Window();
@@ -79,11 +77,9 @@ namespace UI
 		//! \name Title of the Window
 		//@{
 		//! Get the Title of the window
-		const String& title() const { return pTitle; }
-
+		String title() const;
 		//! Set the title of the window
-		template<typename StringT>
-		void title(const StringT& newTitle);
+		template<class StringT> void title(const StringT& newTitle);
 		//@}
 
 
@@ -91,13 +87,18 @@ namespace UI
 		//@{
 		/*!
 		** \brief Read the events in queue and launch the various handlers
+		**
 		** \return True if events were processed, False otherwise
 		*/
-		virtual bool pollEvents() { return false; }
+		virtual bool pollEvents();
 
-		virtual void onClose() { pClosing = true; }
+		virtual void onClose();
+		//@}
+
 
 	public:
+		//! \name Events
+		//@{
 		Event<void (float /* x */, float /* y */)> onMouseDown;
 		Event<void (float /* x */, float /* y */)> onMouseClick;
 		Event<void (float /* x */, float /* y */)> onMouseUp;
@@ -106,21 +107,17 @@ namespace UI
 		Event<void (unsigned char /* key */)> onKeyDown;
 		Event<void (unsigned char /* key */)> onKeyPressed;
 		Event<void (unsigned char /* key */)> onKeyUp;
-
 		//@}
 
 	protected:
+		//! Set the title of the window (without lock)
+		template<class StringT> void titleWL(const StringT& newTitle);
 
-		/*!
-		** \brief Title of the window
-		*/
+	private:
+		//! Title of the window
 		String pTitle;
-
-		/*!
-		** \brief Is the window currently closing ?
-		*/
+		//! Is the window currently closing ?
 		bool pClosing;
-
 
 	}; // class Window
 

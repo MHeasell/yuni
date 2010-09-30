@@ -84,8 +84,10 @@ if("${PROFILE}" STREQUAL "")
 	if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/ProfileBuild.cmake")
 		configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/ProfileBuild.template.cmake
 			${CMAKE_CURRENT_BINARY_DIR}/ProfileBuild.cmake)
+		YMESSAGE("")
 		YMESSAGE("A default profile has been created (`<build_directory>/ProfileBuild.cmake`)")
 		YMESSAGE("Please edit this file to override the default settings")
+		YMESSAGE("")
 	endif()
 
 	set(YUNI_PROFILE_PATH "${CMAKE_CURRENT_BINARY_DIR}/ProfileBuild.cmake")
