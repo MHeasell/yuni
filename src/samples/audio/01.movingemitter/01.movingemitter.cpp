@@ -37,7 +37,7 @@ public:
 		pAudio.bank.load(pFileName);
 		pAudio.emitter.attach(emitterName, pFileName);
 		pAudio.emitter.play(emitterName);
-		Gfx::Point3D<> position;
+		Point3D<> position;
 		bool inverse = false;
 		position.y = -LIMIT;
 		pAudio.emitter.move(emitterName, position);
