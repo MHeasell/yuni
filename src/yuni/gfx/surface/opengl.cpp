@@ -18,7 +18,7 @@ namespace Surface
 		// Enable Smooth Shading
 		glShadeModel(GL_SMOOTH);
 		// Background Clear Color
-		clearColor(Color::RGB<uint8>(0, 0, 0));
+		clearColor(Color::RGB<float>(0.f, 0.f, 0.f));
 		// Depth Buffer Setup
 		glClearDepth(1.0f);
 		// Enables Depth Testing
@@ -64,9 +64,14 @@ namespace Surface
 	}
 
 
-	void OpenGL::clearColor(const Color::RGB<uint8>& color)
+	void OpenGL::clearColor(const Color::RGB<float>& color)
 	{
-		glClearColor(color.red / 255.f, color.green / 255.f, color.red / 255.f, 1.0f);
+		glClearColor(color.red, color.green, color.red, 1.0f);
+	}
+
+	void OpenGL::clearColor(const Color::RGBA<float>& color)
+	{
+		glClearColor(color.red, color.green, color.red, color.alpha);
 	}
 
 

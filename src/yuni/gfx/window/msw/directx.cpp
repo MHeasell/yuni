@@ -11,6 +11,7 @@ namespace Gfx
 namespace Window
 {
 
+
 	bool DirectXMSW::initialize()
 	{
 		if (!IMSWindows::initialize())
@@ -49,6 +50,7 @@ namespace Window
 		return true;
 	}
 
+
 	void DirectXMSW::resetPresentationParameters()
 	{
 		ZeroMemory(&pDXPresentParams, sizeof(pDXPresentParams));
@@ -67,6 +69,7 @@ namespace Window
 		pDXPresentParams.MultiSampleType = D3DMULTISAMPLE_NONE;
 
 	}
+
 
 	bool DirectXMSW::resetDevice()
 	{
@@ -87,6 +90,7 @@ namespace Window
 		IMSWindows::close();
 	}
 
+
 	void DirectXMSW::release()
 	{
 		if (pDXDevice)
@@ -101,6 +105,7 @@ namespace Window
 		}
 	}
 
+
 	void DirectXMSW::resize(float width, float height)
 	{
 		resetPresentationParameters();
@@ -114,6 +119,7 @@ namespace Window
 		return pVSync;
 	}
 
+
 	bool DirectXMSW::verticalSync(bool active)
 	{
 		if (active == pVSync)
@@ -122,27 +128,47 @@ namespace Window
 		return resetDevice();
 	}
 
-	void DirectXMSW::clearColor(const Color::RGB<uint8>& newColor)
+
+	void DirectXMSW::clearColor(const Color::RGB<float>& newColor)
 	{
-		pClearColor = newColor;
+		pClearColor.red = (unsigned int)(newColor.red * 255);
+		pClearColor.green = (unsigned int)(newColor.green * 255);
+		pClearColor.blue = (unsigned int)(newColor.blue * 255);
+		pClearColor.alpha = 255u; // Opaque
 	}
+
+
+	void DirectXMSW::clearColor(const Color::RGBA<float>& newColor)
+	{
+		pClearColor.red = (unsigned int)(newColor.red * 255);
+		pClearColor.green = (unsigned int)(newColor.green * 255);
+		pClearColor.blue = (unsigned int)(newColor.blue * 255);
+		pClearColor.alpha = (unsigned int)(newColor.alpha * 255);
+	}
+
 
 	void DirectXMSW::clearScreen()
 	{
-		pDXDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+		pDXDevice->Clear(0, NULL, D3DCLEAR_TARGET,  D3DCOLOR_RGBA(pClearColor.red,
+			pClearColor.green, pClearColor.blue, pClearColor.alpha), 1.0f, 0);
 	}
+
 
 	void DirectXMSW::resetView()
 	{}
 
+
 	void DirectXMSW::applyTranslation(const Vector3D<float>& translation)
 	{}
+
 
 	void DirectXMSW::applyRotation(const Vector3D<float>& rotation)
 	{}
 
+
 	void DirectXMSW::drawTriangles(const Mesh::TriangleList& triangles)
 	{}
+
 
 	void DirectXMSW::testDraw()
 	{
@@ -208,6 +234,8 @@ namespace Window
 		pDXDevice->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 24);
 		pDXDevice->EndScene();
 	}
+
+
 
 } // namespace Window
 } // namespace Gfx3D

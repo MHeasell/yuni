@@ -19,7 +19,9 @@ namespace Surface
 	class Cairo: public ISurface
 	{
 	public:
+		//! Empty constructor
 		Cairo();
+		//! Virtual destructor
 		virtual ~Cairo();
 
 	public:
@@ -36,7 +38,10 @@ namespace Surface
 		virtual bool refresh();
 
 		//! Choose a color to clear the screen with
-		virtual void clearColor(const Color::RGB<uint8>& newColor);
+		virtual void clearColor(const Color::RGB<float>& newColor);
+
+		//! Choose a color with alpha to clear the screen with
+		virtual void clearColor(const Color::RGBA<float>& newColor);
 
 
 	protected:
@@ -59,6 +64,9 @@ namespace Surface
 } // namespace Surface
 } // namespace Gfx
 } // namespace Yuni
+
+
+# include "cairo.hxx"
 
 
 #endif // __YUNI_GFX_SURFACE_CAIRO_H__

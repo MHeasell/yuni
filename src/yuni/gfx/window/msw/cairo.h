@@ -16,6 +16,7 @@ namespace Gfx
 namespace Window
 {
 
+
 	/*!
 	** \brief Microsoft Windows-specific window, using a Cairo surface to render
 	*/
@@ -31,6 +32,7 @@ namespace Window
 		{
 			pWindowClassName = "Cairo";
 		}
+		virtual ~CairoMSW() {}
 
 		virtual bool initialize();
 		virtual void close();
@@ -47,10 +49,6 @@ namespace Window
 
 		virtual void blitWL();
 
-	protected:
-		//! The Cairo surface
-		cairo_surface_t* pSurface;
-
 	}; // class CairoMSW
 
 
@@ -59,6 +57,9 @@ namespace Window
 } // namespace Window
 } // namespace Gfx
 } // namespace Yuni
+
+
+# include "cairo.hxx"
 
 
 # endif // YUNI_WINDOWSYSTEM_MSW

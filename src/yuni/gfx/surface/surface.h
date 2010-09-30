@@ -58,7 +58,10 @@ namespace Surface
 		virtual bool refresh() = 0;
 
 		//! Set the default color for clearing the surface
-		virtual void clearColor(const Color::RGB<uint8>& newColor) = 0;
+		virtual void clearColor(const Color::RGB<float>& newColor) = 0;
+
+		//! Set the default color with alpha for clearing the surface
+		virtual void clearColor(const Color::RGBA<float>& newColor) = 0;
 
 	protected:
 		//! Clear the surface to clear color, default color depends on back-end

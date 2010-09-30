@@ -283,7 +283,7 @@ namespace Window
 	}
 
 
-	void IMSWindows::onInternalTitleChangedWL()
+	inline void IMSWindows::onInternalTitleChangedWL()
 	{
 		SetWindowText(pHWnd, String::CString(pUIWnd->title()));
 	}
