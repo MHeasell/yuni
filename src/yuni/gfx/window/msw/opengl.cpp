@@ -111,6 +111,8 @@ namespace Window
 
 	void OpenGLMSW::close()
 	{
+		destroyBoundEvents();
+
 		// Do We Have A Rendering Context?
 		if (pHRC)
 		{
