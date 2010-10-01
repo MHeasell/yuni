@@ -64,6 +64,7 @@ namespace UI
 	template<class StringT>
 	inline void Window::titleWL(const StringT& newTitle)
 	{
+		ThreadingPolicy::MutexLocker lock(*this);
 		// Resetting with the new value (without lock)
 		pTitle = newTitle;
 	}
@@ -76,16 +77,21 @@ namespace UI
 		return pClosing;
 	}
 
-	
+
 	inline bool Window::pollEvents()
 	{
 		return false;
 	}
 
 
-	inline void Window::onClose()
+	inline void Window::close()
 	{
-		pClosing = true;
+		ThreadingPolicy::MutexLocker lock(*this);
+		if (!pClosing)
+		{
+			pClosing = true;
+			onClose();
+		}
 	}
 
 

@@ -92,13 +92,14 @@ namespace UI
 		*/
 		virtual bool pollEvents();
 
-		virtual void onClose();
 		//@}
 
 
 	public:
 		//! \name Events
 		//@{
+		Event<void ()> onClose;
+
 		Event<void (float /* x */, float /* y */)> onMouseDown;
 		Event<void (float /* x */, float /* y */)> onMouseClick;
 		Event<void (float /* x */, float /* y */)> onMouseUp;
