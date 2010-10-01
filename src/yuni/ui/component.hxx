@@ -37,6 +37,13 @@ namespace UI
 	{}
 
 
+	inline IComponent::ID IComponent::id() const
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		return pID;
+	}
+
+
 	inline float IComponent::width() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);

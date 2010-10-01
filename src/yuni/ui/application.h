@@ -51,6 +51,19 @@ namespace UI
 		const StaticString& Name();
 
 
+		//! \name Add or remove windows
+		//@{
+		void add(Window::Ptr& wnd);
+		Application& operator += (Window::Ptr& wnd);
+		Application& operator << (Window::Ptr& wnd);
+
+		void remove(IComponent::ID id);
+		void remove(Window::Ptr& app);
+		Application& operator -= (IComponent::ID id);
+		Application& operator -= (Window::Ptr& app);
+
+		//@}
+
 	private:
 		//! Application string identifier
 		StaticString pID;
@@ -59,7 +72,7 @@ namespace UI
 		StaticString pName;
 
 		//! Application windows
-		Window::Vector pWindows;
+		Window::Map pWindows;
 
 
 	}; // class Application

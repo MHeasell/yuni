@@ -158,6 +158,22 @@ namespace Gfx
 	}
 
 
+	UI::Desktop::Ptr Engine::desktop()
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pUI;
+	}
+
+
+	void Engine::desktop(UI::Desktop::Ptr& ui)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		if (pUI)
+			pUI->close();
+		pUI = ui;
+	}
+
+
 	bool Engine::toggleFullscreen()
 	{
 		ThreadingPolicy::MutexLocker locker(*this);

@@ -9,10 +9,10 @@ namespace UI
 
 	void Application::close()
 	{
-		Window::Vector::iterator end = pWindows.end();
-		for (Window::Vector::iterator it = pWindows.begin(); it != end; ++it)
+		Window::Map::iterator end = pWindows.end();
+		for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)
 		{
-			(*it)->close();
+			it->second->close();
 		}
 	}
 

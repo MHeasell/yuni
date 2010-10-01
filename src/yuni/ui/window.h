@@ -24,6 +24,8 @@ namespace UI
 		typedef IComponent::SmartPtrInfo<Window>::Type Ptr;
 		//! Vector of controls
 		typedef std::vector<Ptr> Vector;
+		//! Map of controls
+		typedef std::map<IComponent::ID, Ptr> Map;
 
 		//! Threading Policy
 		typedef IComponent::ThreadingPolicy ThreadingPolicy;

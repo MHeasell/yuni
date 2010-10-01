@@ -38,6 +38,7 @@ namespace UI
 
 		//! A class name is a string tag representing a type of component
 		typedef CustomString<64, false, false> ClassName;
+
 		//! Unique local identifier
 		typedef sint64 ID;
 
@@ -96,6 +97,9 @@ namespace UI
 		{
 			pClass.clear(); // Invalid
 		}
+
+		//! Get the unique Identifier for this component
+		ID id() const;
 
 		/*!
 		** \brief Get the width of the component
