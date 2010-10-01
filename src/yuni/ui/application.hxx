@@ -26,6 +26,53 @@ namespace UI
 	}
 
 
+	inline void Application::add(Window::Ptr& wnd)
+	{
+		pWindows[wnd->id()] = wnd;
+	}
+
+
+	inline Application& Application::operator += (Window::Ptr& wnd)
+	{
+		pWindows[wnd->id()] = wnd;
+		return *this;
+	}
+
+
+	inline Application& Application::operator << (Window::Ptr& wnd)
+	{
+		pWindows[wnd->id()] = wnd;
+		return *this;
+	}
+
+
+	inline void Application::remove(IComponent::ID id)
+	{
+		pWindows.erase(id);
+	}
+
+
+	inline void Application::remove(Window::Ptr& app)
+	{
+		pWindows.erase(app->id());
+	}
+
+
+	inline Application& Application::operator -= (IComponent::ID id)
+	{
+		pWindows.erase(id);
+		return *this;
+	}
+
+
+	inline Application& Application::operator -= (Window::Ptr& app)
+	{
+		pWindows.erase(app->id());
+		return *this;
+	}
+
+
+
 } // namespace UI
 } // namespace Yuni
 

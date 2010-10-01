@@ -103,6 +103,12 @@ namespace Gfx
 		void applicationTitle(const String& t);
 		//@}
 
+		//! Get the desktop
+		UI::Desktop::Ptr desktop();
+		//! Set the desktop
+		void desktop(UI::Desktop::Ptr& ui);
+
+		//! Was the device properly initialized ?
 		bool isDeviceInitialized() const;
 
 	public:
