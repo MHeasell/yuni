@@ -129,8 +129,11 @@ namespace Gfx
 			mainWindow->blitWL();
 		}
 		mainWindow->close();
-		pUI->close();
-		pUI = NULL;
+		if (pUI)
+		{
+			pUI->close();
+			pUI = NULL;
+		}
 	}
 
 

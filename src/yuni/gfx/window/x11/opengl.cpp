@@ -82,6 +82,8 @@ namespace Window
 
 	void OpenGLX11::close()
 	{
+		destroyBoundEvents();
+
 		if (pContext)
 		{
 			if (!::glXMakeCurrent(pDisplay, YUNI_X11LIB_NONE, NULL))

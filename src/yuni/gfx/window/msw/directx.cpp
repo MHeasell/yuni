@@ -86,6 +86,7 @@ namespace Window
 
 	void DirectXMSW::close()
 	{
+		destroyBoundEvents();
 		release();
 		IMSWindows::close();
 	}

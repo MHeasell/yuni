@@ -22,7 +22,9 @@ namespace Window
 
 
 	inline void CairoMSW::close()
-	{}
+	{
+		destroyBoundEvents();
+	}
 
 
 	void CairoMSW::resize(float width, float height)

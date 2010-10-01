@@ -230,6 +230,8 @@ namespace Window
 
 	void IMSWindows::close()
 	{
+		destroyBoundEvents();
+
 		// Are We In Fullscreen Mode?
 		if (pFullScreen)
 		{
