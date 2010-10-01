@@ -13,8 +13,8 @@ public:
 	SampleApp(int argc, char* argv[])
 		: Application::Gfx3D(argc, argv)
 	{
-		Gfx::Engine::Ptr engine = Gfx::Engine::Instance();
-		Gfx::Device::Ptr dev = engine->device();
+		Gfx::Engine* engine = Gfx::Engine::Instance();
+		Gfx::Device::Ptr dev = new Gfx::Device();
 		dev->type(Gfx::Device::Cairo);
 		engine->applicationTitle("Sample application");
 		engine->reset(dev);

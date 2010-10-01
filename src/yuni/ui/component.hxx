@@ -17,7 +17,7 @@ namespace UI
 		pHeight((height > 0.f) ? height : 0.f)
 	{}
 
-	
+
 	inline IComponent::IComponent(float x, float y, float width, float height)
 		:pPosition(x, y),
 		pWidth((width > 0.f) ? width : 0.f),

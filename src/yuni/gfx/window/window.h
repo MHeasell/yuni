@@ -5,7 +5,7 @@
 # include "../../yuni.h"
 # include "../device.h"
 # include "../../core/string.h"
-# include "../../core/event/event.h"
+# include "../../core/event.h"
 # include "../../thread/policy.h"
 # include "../surface/surface.h"
 # include "../../ui/component.h"
@@ -27,11 +27,11 @@ namespace Window
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class IWindow: public Policy::ObjectLevelLockable<IWindow>
+	class IWindow: public IEventObserver<IWindow>
 	{
 	public:
 		//! Threading policy
-		typedef Policy::ObjectLevelLockable<IWindow> ThreadingPolicy;
+		typedef IEventObserver<IWindow>::ThreadingPolicy ThreadingPolicy;
 		//! Window map
 		typedef std::map<sint64, IWindow> Map;
 		//! Smart pointer
