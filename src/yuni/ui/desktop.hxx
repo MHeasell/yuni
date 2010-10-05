@@ -10,20 +10,20 @@ namespace UI
 
 	inline void Desktop::add(Application::Ptr& app)
 	{
-		pApps[app->ID()] = app;
+		pApps[app->id()] = app;
 	}
 
 
 	inline Desktop& Desktop::operator += (Application::Ptr& app)
 	{
-		pApps[app->ID()] = app;
+		pApps[app->id()] = app;
 		return *this;
 	}
 
 
 	inline Desktop& Desktop::operator << (Application::Ptr& app)
 	{
-		pApps[app->ID()] = app;
+		pApps[app->id()] = app;
 		return *this;
 	}
 
@@ -36,13 +36,20 @@ namespace UI
 
 	inline void Desktop::remove(Application::Ptr& app)
 	{
-		pApps.erase(app->ID());
+		pApps.erase(app->id());
+	}
+
+
+	inline Desktop& Desktop::operator -= (const String& id)
+	{
+		pApps.erase(id);
+		return *this;
 	}
 
 
 	inline Desktop& Desktop::operator -= (Application::Ptr& app)
 	{
-		pApps.erase(app->ID());
+		pApps.erase(app->id());
 		return *this;
 	}
 

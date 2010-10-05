@@ -43,12 +43,12 @@ namespace UI
 		/*!
 		** \brief Get the identifier for this application
 		*/
-		const StaticString& ID();
+		const StaticString& id();
 
 		/*!
 		** \brief Get the name of this application
 		*/
-		const StaticString& Name();
+		const StaticString& name();
 
 
 		//! \name Add or remove windows

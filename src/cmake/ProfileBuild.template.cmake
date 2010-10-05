@@ -33,8 +33,8 @@ Set(YUNI_PROFILE_NAME "Default")
 # It is not always the case (Windows for example), so some pre-built packages (DevPacks)
 # are available on http://devpacks.libyuni.org and can be automatically downloaded.
 #
-# Several modes can be given in the prefered order to find and use the appropriate package.
-# If nothing suits to your needs, it is possible to use the `custom` mode and to set
+# Several modes can be given in the preferred order to find and use the appropriate package.
+# If nothing suits your needs, it is possible to use the `custom` mode and to set
 # the prefix path where the package can be found.
 #
 # Modes :

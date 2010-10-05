@@ -8,8 +8,8 @@
 # include "../../core/event.h"
 # include "../../thread/policy.h"
 # include "../surface/surface.h"
-# include "../../ui/component.h"
-# include "../../ui/desktop.h"
+# include "../../ui/ui.h"
+
 
 namespace Yuni
 {

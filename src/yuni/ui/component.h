@@ -13,6 +13,7 @@ namespace Yuni
 namespace UI
 {
 
+
 	/*!
 	** \brief Base class for all UI components
 	**
@@ -66,6 +67,7 @@ namespace UI
 		template<class T>
 		IComponent(const Point2D<T>& pos, float width, float height);
 
+
 		//! Virtual destructor
 		virtual ~IComponent();
 		//@}
@@ -91,7 +93,7 @@ namespace UI
 		}
 
 		/*!
-		** \brief Get the class name (identifier for the type of component)
+		** \brief Set the class name (identifier for the type of component)
 		*/
 		virtual void className(ClassName&)
 		{
@@ -134,7 +136,9 @@ namespace UI
 
 
 	protected:
+		//! Protected resize, without locks
 		virtual void resizeWL(float& newWidth, float& newHeight);
+
 
 	protected:
 		/*!

@@ -32,6 +32,51 @@ namespace UI
 	{}
 
 
+	inline void IControlContainer::add(IControl::Ptr& child)
+	{
+		pChildren[child->id()] = child;
+	}
+
+
+	inline IControlContainer& IControlContainer::operator += (IControl::Ptr& child)
+	{
+		pChildren[child->id()] = child;
+		return *this;
+	}
+
+
+	inline IControlContainer& IControlContainer::operator << (IControl::Ptr& child)
+	{
+		pChildren[child->id()] = child;
+		return *this;
+	}
+
+
+	inline void IControlContainer::remove(IComponent::ID id)
+	{
+		pChildren.erase(id);
+	}
+
+
+	inline void IControlContainer::remove(IControl::Ptr& child)
+	{
+		pChildren.erase(child->id());
+	}
+
+
+	inline IControlContainer& IControlContainer::operator -= (IComponent::ID id)
+	{
+		pChildren.erase(id);
+		return *this;
+	}
+
+
+	inline IControlContainer& IControlContainer::operator -= (IControl::Ptr& child)
+	{
+		pChildren.erase(child->id());
+		return *this;
+	}
+
 
 
 } // namespace UI
