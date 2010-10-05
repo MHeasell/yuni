@@ -28,19 +28,21 @@ set(SRC_GFX3D
 		gfx/window/window.h
 		gfx/window/window.hxx
 		gfx/window/window.cpp
-		gfx/window/msw/msw.h
-		gfx/window/msw/directx.h
-		gfx/window/msw/opengl.h
+		gfx/window/cocoa/opengl.h
 		gfx/window/msw/cairo.h
+		gfx/window/msw/cairo.hxx
+		gfx/window/msw/directx.h
+		gfx/window/msw/msw.h
+		gfx/window/msw/opengl.h
+		gfx/window/x11/cairo.h
 		gfx/window/x11/opengl.h
 		gfx/window/x11/x11yuni.h
-		gfx/window/cocoa/opengl.h
 
 		# Render surfaces
 		gfx/surface/surface.h
 		gfx/surface/surface3d.h gfx/surface/surface3d.cpp
 		gfx/surface/opengl.h gfx/surface/opengl.cpp
-		gfx/surface/cairo.h gfx/surface/cairo.hxx gfx/surface/cairo.cpp
+		gfx/surface/cairo.h gfx/surface/cairo.hxx
 
 		# Font
 		gfx/text/font.h gfx/text/label.h
@@ -67,7 +69,14 @@ LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${OPENGL_INCLUDE_DIR}")
 # Cairo
 #
 if (CAIRO_FOUND)
-	list(APPEND SRC_GFX3D gfx/window/msw/cairo.hxx gfx/window/msw/cairo.cpp)
+	list(APPEND SRC_GFX3D gfx/surface/cairo.cpp)
+	if (WIN32 OR WIN64)
+		list(APPEND SRC_GFX3D gfx/window/msw/cairo.cpp)
+	elseif(APPLE)
+		# TODO
+	else()
+		list(APPEND SRC_GFX3D gfx/window/x11/cairo.cpp)
+	endif()
 endif()
 
 
