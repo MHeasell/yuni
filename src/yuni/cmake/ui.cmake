@@ -6,27 +6,33 @@ LIBYUNI_CONFIG_LIB("ui"      "yuni-static-ui-core")
 LIBYUNI_CONFIG_DEPENDENCY("ui" "core") # core is required
 LIBYUNI_CONFIG_DEPENDENCY("ui" "gfx") # gfx-core is required
 
+add_definitions("-DYUNI_MODULE_UI")
+
+
 list(APPEND SRC_UI
+
 	ui/application.h
 	ui/application.hxx
 	ui/application.cpp
-
 	ui/component.h
 	ui/component.hxx
 	ui/component.cpp
 	ui/control.h
+	ui/control.hxx
+	ui/control.cpp
 	ui/controlcontainer.h
 	ui/controlcontainer.hxx
 	ui/controlcontainer.cpp
 	ui/desktop.h
 	ui/desktop.hxx
 	ui/desktop.cpp
+	ui/ui.h
 
 	# Window
 	ui/window.h ui/window.hxx ui/window.cpp
 
 	# Standard Components
-	ui/button.h ui/button.cpp
+	ui/button.h ui/button.hxx ui/button.cpp
 )
 
 

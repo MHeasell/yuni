@@ -1,4 +1,4 @@
-#ifdef __YUNI_UI_APPLICATION_HXX__
+#ifndef __YUNI_UI_APPLICATION_HXX__
 # define __YUNI_UI_APPLICATION_HXX__
 
 
@@ -14,13 +14,13 @@ namespace UI
 	{}
 
 
-	inline const StaticString& Application::ID()
+	inline const Application::StaticString& Application::id()
 	{
 		return pID;
 	}
 
 
-	inline const StaticString& Application::Name()
+	inline const Application::StaticString& Application::name()
 	{
 		return pName;
 	}

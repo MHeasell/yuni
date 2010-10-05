@@ -33,42 +33,66 @@ namespace UI
 		/*!
 		** \brief Empty constructor
 		*/
-		Button()
-		{}
+		Button();
+
+		/*!
+		** \brief Constructor with parent
+		*/
+		Button(IControlContainer* parent);
 
 		/*!
 		** \brief Constructor with label
 		*/
 		template<class StringT>
-		explicit Button(const StringT& label) : pLabel(label)
-		{}
+		explicit Button(const StringT& label);
+
+		/*!
+		** \brief Constructor with parent and label
+		*/
+		template<class StringT>
+		Button(IControlContainer* parent, const StringT& label);
 
 		/*!
 		** \brief Constructor with dimensions
 		*/
 		template<class StringT>
-		Button(const StringT& label, float width, float height)
-			: IControl(width, height)
-		{}
+		Button(const StringT& label, float width, float height);
+
+		/*!
+		** \brief Constructor with parent and dimensions
+		*/
+		template<class StringT>
+		Button(IControlContainer* parent, const StringT& label, float width, float height);
 
 		/*!
 		** \brief Full constructor
 		*/
 		template<class StringT>
-		Button(const StringT& label, float x, float y, float width, float height)
-			: IControl(x, y, width, height)
-		{}
+		Button(const StringT& label, float x, float y, float width, float height);
+
+		/*!
+		** \brief Full constructor with parent
+		*/
+		template<class StringT>
+		Button(IControlContainer* parent, const StringT& label, float x, float y,
+			float width, float height);
 
 		/*!
 		** \brief Full constructor
 		*/
 		template<class StringT, class T>
-		Button(const StringT& label, Point2D<T>& pos, float width, float height)
-			: IControl(pos, width, height)
-		{}
+		Button(const StringT& label, Point2D<T>& pos, float width, float height);
+
+		/*!
+		** \brief Full constructor with parent
+		*/
+		template<class StringT, class T>
+		Button(IControlContainer* parent, const StringT& label, Point2D<T>& pos,
+			float width, float height);
+
 
 		//! Virtual destructor
-		virtual ~Button() {}
+		virtual ~Button();
 		//@}
 
 	protected:
@@ -83,5 +107,7 @@ namespace UI
 
 } // namespace UI
 } // namespace Yuni
+
+# include "button.hxx"
 
 #endif // __YUNI_UI_BUTTON_H__

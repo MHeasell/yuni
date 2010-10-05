@@ -57,6 +57,19 @@ namespace UI
 		//@}
 
 
+		//! \name Add / remove children
+		//@{
+		void add(IControl::Ptr& child);
+		IControlContainer& operator += (IControl::Ptr& child);
+		IControlContainer& operator << (IControl::Ptr& child);
+
+		void remove(IControl::ID child);
+		void remove(IControl::Ptr& child);
+		IControlContainer& operator -= (IComponent::ID id);
+		IControlContainer& operator -= (IControl::Ptr& child);
+		//@}
+
+
 	protected:
 		//! \name Methods
 		//@{
@@ -70,7 +83,7 @@ namespace UI
 
 	private:
 		//! Children controls
-		IControl::Vector pChildren;
+		IControl::Map pChildren;
 
 	}; // class IControlContainer
 

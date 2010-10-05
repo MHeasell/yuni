@@ -1,14 +1,13 @@
 
 #include "component.h"
 
-
 namespace Yuni
 {
 namespace UI
 {
 
 
-	inline void IComponent::resize(float width, float height)
+	void IComponent::resize(float width, float height)
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 

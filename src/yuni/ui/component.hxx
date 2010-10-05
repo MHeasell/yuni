@@ -1,3 +1,6 @@
+#ifndef __YUNI_UI_COMPONENT_HXX__
+# define __YUNI_UI_COMPONENT_HXX__
+
 
 namespace Yuni
 {
@@ -97,3 +100,6 @@ namespace UI
 
 } // namespace UI
 } // namespace Yuni
+
+
+#endif // __YUNI_UI_COMPONENT_HXX__
