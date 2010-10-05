@@ -132,19 +132,19 @@ namespace Window
 
 	void DirectXMSW::clearColor(const Color::RGB<float>& newColor)
 	{
-		pClearColor.red = (unsigned int)(newColor.red * 255);
-		pClearColor.green = (unsigned int)(newColor.green * 255);
-		pClearColor.blue = (unsigned int)(newColor.blue * 255);
+		pClearColor.red = (uint8)(newColor.red * 255);
+		pClearColor.green = (uint8)(newColor.green * 255);
+		pClearColor.blue = (uint8)(newColor.blue * 255);
 		pClearColor.alpha = 255u; // Opaque
 	}
 
 
 	void DirectXMSW::clearColor(const Color::RGBA<float>& newColor)
 	{
-		pClearColor.red = (unsigned int)(newColor.red * 255);
-		pClearColor.green = (unsigned int)(newColor.green * 255);
-		pClearColor.blue = (unsigned int)(newColor.blue * 255);
-		pClearColor.alpha = (unsigned int)(newColor.alpha * 255);
+		pClearColor.red = (uint8)(newColor.red * 255);
+		pClearColor.green = (uint8)(newColor.green * 255);
+		pClearColor.blue = (uint8)(newColor.blue * 255);
+		pClearColor.alpha = (uint8)(newColor.alpha * 255);
 	}
 
 
@@ -159,15 +159,15 @@ namespace Window
 	{}
 
 
-	void DirectXMSW::applyTranslation(const Vector3D<float>& translation)
+	void DirectXMSW::applyTranslation(const Vector3D<float>& /*translation*/)
 	{}
 
 
-	void DirectXMSW::applyRotation(const Vector3D<float>& rotation)
+	void DirectXMSW::applyRotation(const Vector3D<float>&/*rotation*/)
 	{}
 
 
-	void DirectXMSW::drawTriangles(const Mesh::TriangleList& triangles)
+	void DirectXMSW::drawTriangles(const Mesh::TriangleList& /*triangles*/)
 	{}
 
 
