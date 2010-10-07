@@ -127,6 +127,14 @@ namespace Job
 		** This method has no effect if the job is not currently running.
 		*/
 		void cancel();
+
+		/*!
+		** \brief Execute the job
+		**
+		** In standard uses, 't' must not be NULL.
+		** \param t The thread which will execute this job
+		*/
+		void execute(Thread::IThread* t);
 		//@}
 
 
@@ -176,12 +184,6 @@ namespace Job
 		*/
 		template<class StringT> void nameWL(const StringT& newName);
 
-	private:
-		/*!
-		** \brief Execute the job from another thread
-		** \param t The thread which will execute this job
-		*/
-		void execute(Thread::IThread* t);
 
 	private:
 		//! State of the job
