@@ -76,8 +76,8 @@ namespace Thread
 
 		// Set the timespec t at [timeout] milliseconds in the future.
 		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
-		t.tv_nsec  =  now.tv_usec * 1000 + ((timeout % 1000) * 1000000);
-		t.tv_sec   =  now.tv_sec + timeout / 1000 + (t.tv_nsec / 1000000000L);
+		t.tv_nsec  =  (long)   (now.tv_usec * 1000 + ((timeout % 1000) * 1000000));
+		t.tv_sec   =  (time_t) (now.tv_sec + timeout / 1000 + (t.tv_nsec / 1000000000L));
 		t.tv_nsec  %= 1000000000L;
 
 		int pthread_cond_timedwait_error;
@@ -117,7 +117,6 @@ namespace Thread
 
 } // namespace Thread
 } // namespace Yuni
-
 
 # endif // ifndef YUNI_NO_THREAD_SAFE
 
