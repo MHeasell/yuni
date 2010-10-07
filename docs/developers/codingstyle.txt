@@ -54,14 +54,15 @@ GENERAL
 
 * Avoid magic numbers
   BAD
-  if (42 == foo)
+  if (foo < 42.7)
      startThermoNuclearWar();
   GOOD
-  if (YUNI_I_CAN_PUSH_ON_THE_RED_BUTTON == foo)
+  if (foo < YUNI_I_CAN_PUSH_ON_THE_RED_BUTTON)
      startThermoNuclearWar();
 
-* Use the keyword `NULL` instead of `0` for pointers
+* Use the keyword `nullptr` instead of `0` for pointers
 
+* Prefer enums for integer constants
 
 NAMING CONVENTION
 -----------------
@@ -105,7 +106,7 @@ NAMING CONVENTION
 * Following the same reasoning, template parameters naming should indicate the
   kind of types expected: (assuming: `Yuni::String pName;`)
   GOOD:
-  template<class AnyStringT> void name(const AnyStringT& name) { pName = name; }
+  template<class StringT> void name(const StringT& name) { pName = name; }
   BAD:
   template<class T> void name(const T& name) { pName = name; }
   void name(const char* name) { pName = name; }
@@ -123,7 +124,8 @@ NAMING CONVENTION
 
 * In any thread-safe class, the methods providing thread-unsafe access
   to the instance (usually methods that are equivalent to thread-safe methods
-  not using locks on purpose) must be suffixed with "WL".
+  not using locks on purpose) must be suffixed with "WL" (stands for
+  "without lock").
 
 * When a class acts as a single entry point for a Yuni module, and
   offers a continuous service during the program's execution, this
@@ -176,7 +178,8 @@ BEST PRACTICES
       ++i
    to
       i++
-   (Note: It does not change anything for builtin types)
+   (It does not change anything for builtin types but it would bring
+   consistency)
 
 * Use and abuse LOG_ASSERT tests.
 
@@ -197,10 +200,13 @@ BEST PRACTICES
   be assigned a NULL value: in this case the NULL value has semantics and must
   be checked. Wherever possible, use a SmartPtr instead of old-school pointers.
 
-* Avoid using const char* or char*. Use Yuni::String instead.
+* Avoid using const char* or char*. Use Yuni::String instead (or better the good
+  template parameter when possible).
 
 * Header file guards are necessary for all headers and their name should
   follow the directory structure: e.g. __YUNI_CORE_ATOMIC_INT_H__
+  For  Visual Studio users: Do not rely on the pragma 'once' because it is not
+  portable.
 
 * Avoid using copy constructors.
 
@@ -210,15 +216,18 @@ BEST PRACTICES
 * Be Const Correct : Use and abuse the const keyword from the start. It is a
   nightmare to add it in later.
 
-* Don't place "using namespace" directives in headers
+* Don't place any "using namespace" directives in headers
 
 * Prefer inlines to macros. In C++ macros are not needed for code efficiency
 
-* The system headers should be included before any other include,
+* In cpp files, the system headers should be included before any other include.
+* In header files, always include "yuni.h" first
 
-* Avoid as much as possible Return By Value. Use Return By Reference instead.
+* Avoid as much as possible Return By Value for compound types. Use Return By
+  Reference instead.
 
-* Compile time is without incidence. Increasing compile time to reduce execution time (e.g. with templates) is encouraged.
+* Compile time is without incidence. Increasing compile time to reduce execution
+  time (e.g. with templates) is encouraged.
 
 * Code legibility and length is less important than easy and fast end-user experience.
 
