@@ -205,7 +205,7 @@ namespace Thread
 		//! Copy operator
 		Array& operator = (const Array& rhs);
 		//! Copy operator
-		Array& operator = (const Array::Ptr& rhs);
+		Array& operator = (const Ptr& rhs);
 		//! Aggregate
 		Array& operator += (const Array& rhs);
 		//! Aggregate
@@ -213,11 +213,11 @@ namespace Thread
 		//! Aggregate
 		Array& operator += (const typename T::Ptr& rhs);
 		//! Aggregate
-		Array& operator += (const Array::Ptr& rhs);
+		Array& operator += (const Ptr& rhs);
 		//! Aggregate
 		Array& operator << (const Array& rhs);
 		//! Aggregate
-		Array& operator << (const Array::Ptr& rhs);
+		Array& operator << (const Ptr& rhs);
 		//! Aggregate
 		Array& operator << (T* rhs);
 		//! Aggregate
