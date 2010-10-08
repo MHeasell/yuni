@@ -32,10 +32,10 @@ namespace Window
 	public:
 		//! Threading policy
 		typedef IEventObserver<IWindow>::ThreadingPolicy ThreadingPolicy;
-		//! Window map
-		typedef std::map<sint64, IWindow> Map;
 		//! Smart pointer
 		typedef SmartPtr<IWindow> Ptr;
+		//! Window map
+		typedef std::map<UI::IComponent::ID, IWindow::Ptr> Map;
 
 	public:
 		//! \name Constructor & Destructor

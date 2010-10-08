@@ -1,5 +1,5 @@
-#ifndef __YUNI_APPLICATION_AAPPLICATION_HXX__
-# define __YUNI_APPLICATION_AAPPLICATION_HXX__
+#ifndef __YUNI_APPLICATION_APPLICATION_HXX__
+# define __YUNI_APPLICATION_APPLICATION_HXX__
 
 
 namespace Yuni
@@ -8,55 +8,49 @@ namespace Application
 {
 
 
-	inline AApplication::Ptr AApplication::Instance()
-	{
-		return pGlobalInstance;
-	}
-
-
-	inline bool AApplication::terminated() const
+	inline bool IApplication::terminated() const
 	{
 		return pTerminated;
 	}
 
 
-	inline void AApplication::terminate(const int ex)
+	inline void IApplication::terminate(const int ex)
 	{
 		pExitCode = ex;
 		pTerminated = true;
 	}
 
 
-	inline const AApplication::PathType& AApplication::exeName() const
+	inline const IApplication::PathType& IApplication::exeName() const
 	{
 		return pExeName;
 	}
 
 
-	inline const AApplication::PathType& AApplication::rootFolder() const
+	inline const IApplication::PathType& IApplication::rootFolder() const
 	{
 		return pRootFolder;
 	}
 
 
-	inline int AApplication::exitCode() const
+	inline int IApplication::exitCode() const
 	{
 		return pExitCode;
 	}
 
 
-	inline AApplication::AApplication(const AApplication&)
+	inline IApplication::IApplication(const IApplication&)
 		:ThreadingPolicy()
 	{}
 
 
-	inline AApplication& AApplication::operator = (const AApplication&)
+	inline IApplication& IApplication::operator = (const IApplication&)
 	{
 		return *this;
 	}
 
 
-	inline void AApplication::execute()
+	inline void IApplication::execute()
 	{
 		if (!pTerminated)
 			this->onExecute();
@@ -67,6 +61,6 @@ namespace Application
 } // namespace Application
 } // namespace Yuni
 
-#endif // __YUNI_APPLICATION_AAPPLICATION_HXX__
+#endif // __YUNI_APPLICATION_APPLICATION_HXX__
 
 

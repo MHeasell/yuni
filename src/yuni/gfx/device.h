@@ -212,7 +212,7 @@ namespace Gfx
 		/*!
 		** \brief Ensures settings are valid
 		*/
-		void ensuresSettingsAreValid();
+		void ensureSettingsAreValid();
 		//@}
 
 		//! \name Locks
