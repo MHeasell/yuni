@@ -69,18 +69,18 @@ namespace EventLoop
 	{
 	public:
 		//! Parent
-		typedef ParentT ParentType;
+		typedef ParentT  ParentType;
 		//! A request
 		typedef Bind<bool ()>  RequestType;
-		//! List of request
-		typedef LinkedList<RequestType> RequestListType;
+		//! List of requests
+		typedef LinkedList<RequestType>  RequestListType;
 
 		//! The Event loop
-		typedef IEventLoop<ParentType,FlowT,StatsT,DetachedT> EventLoopType;
+		typedef IEventLoop<ParentType,FlowT,StatsT,DetachedT>  EventLoopType;
 		//! The most suitable smart pointer for the class
-		typedef SmartPtr<EventLoopType> Ptr;
+		typedef SmartPtr<EventLoopType>  Ptr;
 		//! The threading policy
-		typedef Policy::ObjectLevelLockableNotRecursive<EventLoopType> ThreadingPolicy;
+		typedef Policy::ObjectLevelLockableNotRecursive<EventLoopType>  ThreadingPolicy;
 		//! The thread used for the inner loop
 		typedef Yuni::Private::Core::EventLoop::Thread<EventLoopType>  ThreadType;
 

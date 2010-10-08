@@ -1,7 +1,7 @@
 
 #include <yuni/yuni.h>
+#include <yuni/ui/ui.h>
 #include <yuni/application/gfx3d.h>
-#include <yuni/gfx/device.h>
 
 
 using namespace Yuni;
@@ -11,23 +11,43 @@ class SampleApp : public Application::Gfx3D
 {
 public:
 	SampleApp(int argc, char* argv[])
+		// Propagate the command line arguments to the application
 		: Application::Gfx3D(argc, argv)
+	{}
+
+
+private:
+	// Overridden from Application::Gfx3D
+	virtual void onBeforeCreateDevice()
 	{
-		// Get the engine
-		Gfx::Engine* engine = Gfx::Engine::Instance();
 		// Set the application title
-		engine->applicationTitle("Sample application");
+		title("Sample application");
+
 		// Set the UI
-		UI::Desktop::Ptr ui = CreateUI();
-		engine->desktop(ui);
+		UI::Desktop::Ptr ui = createUI();
+		desktop = ui;
+
 		// Create a device that uses Cairo rendering
-		Gfx::Device::Ptr dev = new Gfx::Device();
-		dev->type(Gfx::Device::Cairo);
-		// Reset engine with our new device
-		engine->reset(dev);
+		Gfx::Device::Ptr newDevice = new Gfx::Device();
+		newDevice->type(Gfx::Device::Cairo);
+		reset(newDevice);
 	}
 
-	UI::Desktop::Ptr CreateUI() const
+
+	// Overridden from Application::Gfx3D
+	virtual void onAfterCreateDevice(const bool success)
+	{
+		// Check for success
+		if (!success)
+		{
+			// Complain
+			std::cerr << "Oh my god, device creation failed !" << std::endl;
+		}
+		// No need to force application termination here, the program will exit on its own
+	}
+
+
+	UI::Desktop::Ptr createUI() const
 	{
 		UI::Application::Ptr editor = new
 			UI::Application("com.example.my.3d.editor", "3D Editor");
@@ -46,11 +66,11 @@ public:
 		// lbl->align = UI::alClient;
 		//(*mygame) += wndGame;
 
-		UI::Desktop::Ptr desktop = new UI::Desktop();
-		(*desktop) += editor;
-		//(*desktop) += mygame;
+		UI::Desktop::Ptr newDesktop = new UI::Desktop();
+		(*newDesktop) += editor;
+		//(*newDesktop) += mygame;
 
-		return desktop;
+		return newDesktop;
 	}
 
 };

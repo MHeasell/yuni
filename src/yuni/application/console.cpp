@@ -8,7 +8,7 @@ namespace Application
 {
 
 	Console::Console(int argc, char* argv[])
-		:AApplication(argc, argv)
+		:IApplication(argc, argv)
 	{}
 
 	Console::~Console()

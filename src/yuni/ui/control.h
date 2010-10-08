@@ -30,6 +30,8 @@ namespace UI
 		typedef std::vector<Ptr> Vector;
 		//! Map of controls
 		typedef std::map<IComponent::ID, Ptr> Map;
+		//! Sorted (by depth in UI tree) map of controls
+		typedef std::map<size_t, Map> DepthSortedMap;
 
 		//! Threading Policy
 		typedef IComponent::ThreadingPolicy ThreadingPolicy;
@@ -95,6 +97,10 @@ namespace UI
 		//! Is there a parent ?
 		bool hasParent() const;
 
+		//! Depth in the UI tree, 0 if root.
+		size_t depth() const;
+
+
 	protected:
 		/*!
 		** \brief Parent component. Null by default
@@ -105,6 +111,11 @@ namespace UI
 		** pointer will not be dangling.
 		*/
 		IControlContainer* pParent;
+
+		/*!
+		** \brief Depth in the UI tree : 0 if no parent, parent level + 1 otherwise
+		*/
+		size_t pDepth;
 
 
 	}; // class IControl

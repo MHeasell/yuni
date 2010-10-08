@@ -11,7 +11,9 @@ namespace UI
 	template<class StringT>
 	inline Window::Window(const StringT& title)
 		:pTitle(title), pClosing(false)
-	{}
+	{
+		pClass = "window";
+	}
 
 
 	template<class StringT>
@@ -19,7 +21,9 @@ namespace UI
 		:IControlContainer(width, height),
 		pTitle(title),
 		pClosing(false)
-	{}
+	{
+		pClass = "window";
+	}
 
 
 	template<class StringT>
@@ -28,7 +32,9 @@ namespace UI
 		:IControlContainer(x, y, width, height),
 		pTitle(title),
 		pClosing(false)
-	{}
+	{
+		pClass = "window";
+	}
 
 
 	template<class StringT, class T>
@@ -36,7 +42,9 @@ namespace UI
 		:IControlContainer(pos, width, height),
 		pTitle(title),
 		pClosing(false)
-	{}
+	{
+		pClass = "window";
+	}
 
 
 	inline Window::~Window()

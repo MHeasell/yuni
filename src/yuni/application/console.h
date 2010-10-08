@@ -35,21 +35,15 @@ namespace Application
 	** }
 	** \endcode
 	*/
-	class Console : public Application::AApplication
+	class Console : public Application::IApplication
 	{
 	public:
 		//! Ancestor type
-		typedef Application::AApplication  AncestorType;
+		typedef Application::IApplication  AncestorType;
 		//! The Threading Policy
 		typedef AncestorType::ThreadingPolicy ThreadingPolicy;
 		//! Pointer
 		typedef Console* Ptr;
-
-	public:
-		/*!
-		** \brief Get the global instance of the console application
-		*/
-		static Console::Ptr Instance() {return dynamic_cast<Console*>(AApplication::Instance());}
 
 	public:
 		//! \name Constructor & Destructor

@@ -10,6 +10,7 @@ namespace UI
 
 	IControl::~IControl()
 	{
+		ThreadingPolicy::MutexLocker lock(*this);
 		// We are dying, tell the parent we cannot be his child anymore
 		if (pParent)
 			(*pParent) -= pID;
@@ -18,10 +19,15 @@ namespace UI
 
 	void IControl::parent(IControlContainer* newParent)
 	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		if (pParent == newParent)
+			return;
+
 		// If we already had a parent, tell him we do not want to be his child anymore
 		if (pParent)
 			(*pParent) -= pID;
 		pParent = newParent;
+		pDepth = (pParent) ? 1 + pParent->depth() : 0;
 	}
 
 

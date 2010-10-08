@@ -149,7 +149,7 @@ namespace Gfx
 			pVSync = v;
 	}
 
-	void Device::ensuresSettingsAreValid()
+	void Device::ensureSettingsAreValid()
 	{
 		// The monitor must be valid
 		if (!pMonitor)

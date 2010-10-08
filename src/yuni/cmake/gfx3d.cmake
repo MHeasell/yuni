@@ -20,9 +20,14 @@ endif(APPLE)
 
 
 
+set(SRC_APPLICATION_GFX
+		application/gfx3d.h application/gfx3d.hxx application/gfx3d.cpp)
+source_group(Application FILES ${SRC_APPLICATION_GFX})
+
 
 set(SRC_GFX3D
-		gfx/engine.h gfx/engine.cpp
+#		gfx/engine.h gfx/engine.cpp
+		gfx/loop.h gfx/loop.hxx gfx/loop.cpp
 
 		# Window
 		gfx/window/window.h
@@ -184,7 +189,7 @@ endif(WIN32)
 
 source_group(Gfx3D FILES ${SRC_GFX3D})
 
-add_library(yuni-static-gfx3d-core STATIC ${SRC_GFX3D})
+add_library(yuni-static-gfx3d-core STATIC ${SRC_GFX3D} ${SRC_APPLICATION_GFX})
 
 # Setting output path
 set_target_properties(yuni-static-gfx3d-core PROPERTIES

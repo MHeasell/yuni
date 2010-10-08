@@ -3,10 +3,6 @@ YMESSAGE(":: [Module] Gfx::Core")
 
 LIBYUNI_CONFIG_LIB("gfx"        "yuni-static-gfx-core")
 
-set(SRC_APPLICATION_GFX
-		application/gfx3d.h application/gfx3d.cpp)
-source_group(Application FILES ${SRC_APPLICATION_GFX})
-
 
 # Gfx
 set(SRC_GFX
@@ -30,7 +26,6 @@ source_group(Gfx FILES ${SRC_GFX})
 add_library(yuni-static-gfx-core STATIC
 			yuni.h
 			${SRC_GFX}
-			${SRC_APPLICATION_GFX}
 )
 
 # Setting output path

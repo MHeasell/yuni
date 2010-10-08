@@ -166,6 +166,7 @@ namespace UI
 		*/
 		float pHeight;
 
+
 	}; // class IComponent
 
 

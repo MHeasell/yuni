@@ -10,21 +10,9 @@ namespace Application
 {
 
 
-	//! The global instance of the application
-	AApplication::Ptr AApplication::pGlobalInstance = NULL;
-
-
-
-
-
-	AApplication::AApplication(int, char* argv[])
+	IApplication::IApplication(int, char* argv[])
 		:pTerminated(false), pExitCode(0)
 	{
-		// Initializing the global instance
-		if (NULL != pGlobalInstance)
-			delete pGlobalInstance;
-		pGlobalInstance = this;
-
 		// Find the absolute folder of the application
 		if (Core::IO::IsAbsolute(argv[0]))
 			pRootFolder = Core::IO::ExtractFilePath(argv[0]);
@@ -45,14 +33,12 @@ namespace Application
 	}
 
 
-	AApplication::~AApplication()
+	IApplication::~IApplication()
 	{
-		// Detaching the global instance
-		pGlobalInstance = NULL;
 	}
 
 
-	void AApplication::arguments(int argc, char** argv)
+	void IApplication::arguments(int argc, char** argv)
 	{
 		GetOpt::Parser parser;
 		bool optHelp = false;

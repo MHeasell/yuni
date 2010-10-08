@@ -1,5 +1,5 @@
-#ifndef __YUNI_APPLICATION_AAPPLICATION_H__
-# define __YUNI_APPLICATION_AAPPLICATION_H__
+#ifndef __YUNI_APPLICATION_APPLICATION_H__
+# define __YUNI_APPLICATION_APPLICATION_H__
 
 # include "../yuni.h"
 # include "../thread/policy.h"
@@ -13,21 +13,15 @@ namespace Application
 {
 
 
-	class AApplication : public Policy::ObjectLevelLockable<AApplication>
+	class IApplication : public Policy::ObjectLevelLockable<IApplication>
 	{
 	public:
 		//! The Threading Policy
-		typedef Policy::ObjectLevelLockable<AApplication>  ThreadingPolicy;
+		typedef Policy::ObjectLevelLockable<IApplication>  ThreadingPolicy;
 		//! Pointer
-		typedef AApplication* Ptr;
+		typedef IApplication* Ptr;
 		//! Path
 		typedef StringBase<char, 1024> PathType;
-
-	public:
-		/*!
-		** \brief Get the global instance of the application
-		*/
-		static AApplication::Ptr Instance();
 
 
 	public:
@@ -36,9 +30,9 @@ namespace Application
 		/*!
 		** \brief Constructor
 		*/
-		AApplication(int argc, char* argv[]);
+		IApplication(int argc, char* argv[]);
 		//! Destructor
-		virtual ~AApplication();
+		virtual ~IApplication();
 		//@}
 
 
@@ -100,15 +94,11 @@ namespace Application
 
 	private:
 		//! The private default constructor
-		AApplication() {}
+		IApplication();
 		//! The private copy constructor
-		AApplication(const AApplication&);
+		IApplication(const IApplication&);
 		//! The private copy operator
-		AApplication& operator = (const AApplication&);
-
-	private:
-		//! The global instance
-		static AApplication::Ptr pGlobalInstance;
+		IApplication& operator = (const IApplication&);
 
 	private:
 		//! Indicates if the application should stop as soon as possible
@@ -132,4 +122,4 @@ namespace Application
 
 # include "application.hxx"
 
-#endif // __YUNI_APPLICATION_AAPPLICATION_H__
+#endif // __YUNI_APPLICATION_APPLICATION_H__
