@@ -17,9 +17,8 @@ namespace UI
 	}
 
 
-	void IControl::parent(IControlContainer* newParent)
+	void IControl::parentWL(IControlContainer* newParent)
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
 		if (pParent == newParent)
 			return;
 
@@ -27,7 +26,7 @@ namespace UI
 		if (pParent)
 			(*pParent) -= pID;
 		pParent = newParent;
-		pDepth = (pParent) ? 1 + pParent->depth() : 0;
+		pDepth  = (pParent) ? 1 + pParent->depth() : 0;
 	}
 
 

@@ -33,12 +33,12 @@ namespace Application
 
 	bool Gfx3D::reset(const Gfx::Device::Ptr& newDevice)
 	{
+		// There is nothing to do if the device is null
+		if (!newDevice)
+			return false;
+
 		// Lock
 		ThreadingPolicy::MutexLocker locker(*this);
-
-		// There is nothing to do if the device is null
-		if (newDevice == nullptr)
-			return false;
 
 		// Getting a reference to the information about the Device
 		pLoop.device = newDevice;
@@ -56,32 +56,33 @@ namespace Application
 	}
 
 
-	bool Gfx3D::resetWithFailSafeSettings(const bool fullscreenMode)
+	bool Gfx3D::resetWithFailSafeSettings(bool fullscreenMode)
 	{
 		// Informations about the device
-		Gfx::Device::Ptr newDevice(new Gfx::Device());
+		Gfx::Device* newDevice = new Gfx::Device();
 		newDevice->fullscreen(fullscreenMode);
 		// The fail-safe resolution
-		Device::Display::Resolution::Ptr fsRes(new Device::Display::Resolution(800, 600));
-		newDevice->resolution(fsRes);
+		Device::Display::Resolution* defaultResolution = new Device::Display::Resolution(800, 600);
+		newDevice->resolution(defaultResolution);
 
 		// Apply the new settings
 		return reset(newDevice);
 	}
 
 
-	bool Gfx3D::resetWithDefaultSettings(const bool fullscreenMode)
+	bool Gfx3D::resetWithDefaultSettings(bool fullscreenMode)
 	{
 		// Informations about the device
-		Gfx::Device::Ptr newDevice(new Gfx::Device());
+		Gfx::Device* newDevice = new Gfx::Device();
 		newDevice->fullscreen(fullscreenMode);
 
 		// Apply the new settings
 		return reset(newDevice);
 	}
+
+
 
 
 } // namespace Application
 } // namespace Yuni
-
 

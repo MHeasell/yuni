@@ -8,15 +8,16 @@ namespace Application
 {
 
 	inline Gfx3D::Gfx3D(int argc, char* argv[])
-		: IApplication(argc, argv), pDeviceIsInitialized(false)
+		:IApplication(argc, argv),
+		pTitle("Loading..."),
+		pDeviceIsInitialized(false)
 	{
-		title("Loading...");
 	}
 
 
 	inline Gfx3D::~Gfx3D()
 	{
-		// Ensures all notifiers are not linked with this class
+		// Ensures all notifiers are no longer linked with this class
 		destroyBoundEvents();
 	}
 
@@ -29,10 +30,10 @@ namespace Application
 
 
 	template<class StringT>
-	inline void Gfx3D::title(const StringT& t)
+	inline void Gfx3D::title(const StringT& newTitle)
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-		pTitle = t;
+		pTitle = newTitle;
 	}
 
 
@@ -52,7 +53,7 @@ namespace Application
 	{}
 
 
-	inline void Gfx3D::onAfterCreateDevice(const bool /* success */)
+	inline void Gfx3D::onAfterCreateDevice(bool /* success */)
 	{}
 
 
