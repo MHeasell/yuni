@@ -48,6 +48,7 @@ namespace UI
 		/*!
 		** \brief Constructor with parent
 		*/
+		// TODO use a smart pointer here to avoid race conditions
 		IControl(IControlContainer* parent);
 
 		/*!
@@ -68,6 +69,7 @@ namespace UI
 		/*!
 		** \brief Full constructor with parent
 		*/
+		// TODO use a smart pointer here to avoid race conditions
 		IControl(IControlContainer* parent, float x, float y, float width, float height);
 
 		/*!
@@ -80,6 +82,7 @@ namespace UI
 		** \brief Full constructor with parent
 		*/
 		template<class T>
+		// TODO use a smart pointer here to avoid race conditions
 		IControl(IControlContainer* parent, const Point2D<T>& pos, float width, float height);
 
 
@@ -89,6 +92,7 @@ namespace UI
 
 
 		//! Get the parent
+		// TODO returns a smart pointer here to avoid race conditions
 		IControlContainer* parent();
 
 		//! Set the parent
@@ -102,21 +106,22 @@ namespace UI
 
 
 	protected:
+		//! Set the parent (without locking)
+		// TODO use a smart pointer here to avoid race conditions
+		void parentWL(IControlContainer* newParent);
+
+	protected:
 		/*!
 		** \brief Parent component. Null by default
 		**
-		** A normal pointer is used here, because we do not have the full
-		** class implementation. This is not a problem, because if the
-		** parent is destroyed, the child will be destroyed too so the
-		** pointer will not be dangling.
+		** A normal pointer is used here, because the reference count is held by the
+		** object itself and it would bring a circular reference if the smart pointer
+		** were used.
 		*/
 		IControlContainer* pParent;
 
-		/*!
-		** \brief Depth in the UI tree : 0 if no parent, parent level + 1 otherwise
-		*/
+		//! Depth in the UI tree : 0 if no parent, parent level + 1 otherwise
 		size_t pDepth;
-
 
 	}; // class IControl
 

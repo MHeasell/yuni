@@ -8,6 +8,10 @@ namespace Application
 {
 
 
+	inline IApplication::~IApplication()
+	{}
+
+
 	inline bool IApplication::terminated() const
 	{
 		return pTerminated;
@@ -21,14 +25,18 @@ namespace Application
 	}
 
 
-	inline const IApplication::PathType& IApplication::exeName() const
+	inline const String& IApplication::exeName() const
 	{
+		// As this variable is only modified by the constructor, it is safe to
+		// return it without any lock
 		return pExeName;
 	}
 
 
-	inline const IApplication::PathType& IApplication::rootFolder() const
+	inline const String& IApplication::rootFolder() const
 	{
+		// As this variable is only modified by the constructor, it is safe to
+		// return it without any lock
 		return pRootFolder;
 	}
 

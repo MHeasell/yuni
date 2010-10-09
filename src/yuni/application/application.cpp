@@ -33,10 +33,6 @@ namespace Application
 	}
 
 
-	IApplication::~IApplication()
-	{
-	}
-
 
 	void IApplication::arguments(int argc, char** argv)
 	{

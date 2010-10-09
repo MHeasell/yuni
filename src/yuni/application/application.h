@@ -20,8 +20,6 @@ namespace Application
 		typedef Policy::ObjectLevelLockable<IApplication>  ThreadingPolicy;
 		//! Pointer
 		typedef IApplication* Ptr;
-		//! Path
-		typedef StringBase<char, 1024> PathType;
 
 
 	public:
@@ -41,12 +39,12 @@ namespace Application
 		/*!
 		** \brief The absolute filename of the application
 		*/
-		const PathType& exeName() const;
+		const String& exeName() const;
 
 		/*!
 		** \brief The absolute root folder of the application
 		*/
-		const PathType& rootFolder() const;
+		const String& rootFolder() const;
 		//@}
 
 
@@ -104,9 +102,11 @@ namespace Application
 		//! Indicates if the application should stop as soon as possible
 		ThreadingPolicy::Volatile<bool>::Type pTerminated;
 		//! The full filename of the application
-		PathType pExeName;
+		// This variable won't be modified after the constructor
+		String pExeName;
 		//! The root folder of the application
-		PathType pRootFolder;
+		// This variable won't be modified after the constructor
+		String pRootFolder;
 		//! Exit code
 		int pExitCode;
 

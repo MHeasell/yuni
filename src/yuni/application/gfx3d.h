@@ -7,11 +7,12 @@
 # include "../gfx/loop.h"
 # include "../ui/desktop.h"
 
+
+
 namespace Yuni
 {
 namespace Application
 {
-
 
 	/*!
 	** \brief 3D Application
@@ -22,11 +23,9 @@ namespace Application
 		//! Threading policy
 		typedef IEventObserver<Gfx3D>::ThreadingPolicy  ThreadingPolicy;
 
-
 	public:
 		//! \name Constructor & Destructor
 		//@{
-
 		/*!
 		** \brief Constructor
 		** \param argc The number of arguments
@@ -36,8 +35,8 @@ namespace Application
 
 		//! Destructor
 		virtual ~Gfx3D();
-
 		//@}
+
 
 		//! \name Application title
 		//@{
@@ -45,14 +44,12 @@ namespace Application
 		String title() const;
 
 		//! Set the application title
-		template<class StringT>
-		void title(const StringT& t);
+		template<class StringT> void title(const StringT& newTitle);
 		//@}
 
 
 		//! \name Events
 		//@{
-
 		/*!
 		** \brief Event: Before the 3D Device is created
 		*/
@@ -63,7 +60,7 @@ namespace Application
 		**
 		** \param bool True if the creation of the 3D device has succeeded
 		*/
-		virtual void onAfterCreateDevice(const bool /* success */);
+		virtual void onAfterCreateDevice(bool /* success */);
 
 
 		/*!
@@ -77,7 +74,6 @@ namespace Application
 		** \brief What to do on execute.
 		*/
 		virtual void onExecute();
-
 		//@}
 
 
@@ -106,7 +102,7 @@ namespace Application
 		** \param fullscreenMode True to enable the fullscreen mode
 		** \return True if the operation succeeded, False otherwise
 		*/
-		bool resetWithDefaultSettings(const bool fullscreenMode = true);
+		bool resetWithDefaultSettings(bool fullscreenMode = true);
 
 		/*!
 		** \brief Reset the 3D Device with safe settings
@@ -114,7 +110,7 @@ namespace Application
 		** \param fullscreenMode True to enable the fullscreen mode
 		** \return True if the operation succeeded, False otherwise
 		*/
-		bool resetWithFailSafeSettings(const bool fullscreenMode = false);
+		bool resetWithFailSafeSettings(bool fullscreenMode = false);
 
 		/*!
 		** \brief Toggle the fullscreen mode
@@ -140,6 +136,7 @@ namespace Application
 		bool pDeviceIsInitialized;
 
 	}; // class Application::Gfx3D
+
 
 
 
