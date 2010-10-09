@@ -29,6 +29,9 @@ namespace Window
 
 		// virtual bool pollEvents();
 
+		virtual bool verticalSync() const { return false; }
+		virtual bool verticalSync(bool) { return true; }
+
 
 	protected:
 		virtual bool refresh() { return true; }
