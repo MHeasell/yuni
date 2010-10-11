@@ -44,6 +44,13 @@ namespace Gfx
 		//! Override from IEventLoop, run on each loop turn.
 		bool onLoop();
 
+		/*!
+		** \brief Mark a control as modified
+		**
+		** When a UI control has undergone changes, it must be marked here
+		** so that its internal representation will be updated on next loop.
+		*/
+		void markControlAsModified(UI::IControl::Ptr control);
 
 	public:
 		//! Informations about the 3D device

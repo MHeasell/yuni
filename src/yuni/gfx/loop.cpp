@@ -47,7 +47,29 @@ namespace Gfx
 				}
 			}
 		}
+		pModifiedControls.clear();
 		return true;
+	}
+
+
+	void Loop::markControlAsModified(UI::IControl::Ptr control)
+	{
+		// TODO : Manage children for containers, use an iterator on IControlContainer ?
+
+		size_t depth = control->depth();
+		UI::IControl::DepthSortedMap::iterator depthIt = pModifiedControls.find(depth);
+
+		bool found = (depthIt == pModifiedControls.end());
+		if (found)
+			pModifiedControls[depth];
+
+		UI::IControl::Map& depthCategory = found ? (depthIt->second) : pModifiedControls[depth];
+
+		UI::IControl::Map::iterator controlIt = depthCategory.find(control->id());
+		if (controlIt != depthCategory.end())
+			return;
+
+		depthCategory[control->id()] = control;
 	}
 
 
