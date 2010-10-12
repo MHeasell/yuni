@@ -84,7 +84,11 @@ See ui_hierarchy.dot
 
 IV) Directory structure :
 =========================
-TODO
+All classes relevant to a UI tree are stored in :
+  "yuni/src/yuni/ui/"
+
+Internal representations of UI windows are located in :
+  "yuni/src/yuni/gfx/window/"
 
 
 V) UI modification :
@@ -126,18 +130,22 @@ Window_1
     |
      -> Button_2
 
+
 Supposing components with * are modified, the algorithm will process
 them as follows :
 
 * Step 1:
   modified : [ [ 2 , [ Panel_2 ] ] , [ 3, [ Button_1 , CheckBox_1 ] ] ]
   update Panel_2
+    apply modifications
 	remove it from "modified"
     update Panel_2's children:
       update CheckBox_1
+        apply modifications
 	    remove it from "modified"
 	    it has no child
 	  update Button_2
+        apply possible inherited modifications
 	    it is not in "modified"
 	    it has no child
 

@@ -1,17 +1,14 @@
-#ifndef __YUNI_GFX_BOUNDINGBOX_H__
-# define __YUNI_GFX_BOUNDINGBOX_H__
+#ifndef __YUNI_CORE_MATH_GEOMETRY_BOUNDINGBOX_H__
+# define __YUNI_CORE_MATH_GEOMETRY_BOUNDINGBOX_H__
 
-# include "../yuni.h"
-# include "../core/point3D.h"
-# include "mesh/triangle.h"
+# include "../../../yuni.h"
+# include "point3D.h"
+# include "triangle.h"
 
 
 
 namespace Yuni
 {
-namespace Gfx
-{
-
 
 
 	/*!
@@ -84,11 +81,9 @@ namespace Gfx
 	}; // class BoundingBox
 
 
-
-} // namespace Gfx
 } // namespace Yuni
 
 
 # include "boundingbox.hxx"
 
-#endif // __YUNI_GFX_BOUNDINGBOX_H__
+#endif // __YUNI_CORE_MATH_GEOMETRY_BOUNDINGBOX_H__

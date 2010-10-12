@@ -98,6 +98,9 @@ namespace UI
 		//! Set the parent
 		void parent(IControlContainer* newParent);
 
+		//! Get the children
+		const IControl::Map& children() const;
+
 		//! Is there a parent ?
 		bool hasParent() const;
 
@@ -112,13 +115,20 @@ namespace UI
 
 	protected:
 		/*!
-		** \brief Parent component. Null by default
+		** \brief Parent control. Null by default
 		**
 		** A normal pointer is used here, because the reference count is held by the
 		** object itself and it would bring a circular reference if the smart pointer
 		** were used.
 		*/
 		IControlContainer* pParent;
+
+		/*!
+		** \brief Children controls
+		**
+		** Always empty for controls that are not control containers.
+		*/
+		IControl::Map pChildren;
 
 		//! Depth in the UI tree : 0 if no parent, parent level + 1 otherwise
 		size_t pDepth;

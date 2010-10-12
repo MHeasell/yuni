@@ -358,7 +358,10 @@ set(SRC_CORE_MATH
 				core/vector3D.h core/math/geometry/vector3D.h core/math/geometry/vector3D.hxx
 				core/point2D.h core/math/geometry/point2D.h
 				core/point3D.h core/math/geometry/point3D.h
-)
+				core/boundingbox.h
+				core/math/geometry/boundingbox.h core/math/geometry/boundingbox.hxx
+				)
+
 source_group(Core\\Math FILES ${SRC_CORE_MATH})
 
 set(SRC_CORE_BIT

@@ -5,7 +5,6 @@ YMESSAGE(":: [Module] Gfx3D")
 LIBYUNI_CONFIG_LIB("gfx3d"      "yuni-static-gfx3d-core")
 
 LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "core") # core is required
-LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "gfx") # gfx-core is required
 LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "ui") # ui is required
 LIBYUNI_CONFIG_DEPENDENCY("gfx3d" "display") # display is required
 LIBYUNI_CONFIG_LIB("gfx3d"  "yuni-static-device-display")
@@ -26,7 +25,7 @@ source_group(Application FILES ${SRC_APPLICATION_GFX})
 
 
 set(SRC_GFX3D
-#		gfx/engine.h gfx/engine.cpp
+		gfx/device.h gfx/device.cpp
 		gfx/loop.h gfx/loop.hxx gfx/loop.cpp
 
 		# Window
@@ -48,6 +47,25 @@ set(SRC_GFX3D
 		gfx/surface/surface3d.h gfx/surface/surface3d.cpp
 		gfx/surface/opengl.h gfx/surface/opengl.cpp
 		gfx/surface/cairo.h gfx/surface/cairo.hxx
+
+		# Mesh
+		gfx/mesh/edge.h
+		gfx/mesh/implicitsurface.h gfx/mesh/implicitsurface.cpp
+		gfx/mesh/implicitsurfmanager.h
+		gfx/mesh/marchingcubes.h gfx/mesh/marchingcubes.cpp
+		gfx/mesh/mesh.h gfx/mesh/mesh.cpp
+		gfx/mesh/metaball.h gfx/mesh/metaball.cpp
+		gfx/mesh/metabox.h
+		gfx/mesh/metaobject.h
+		gfx/mesh/polygonizer.h
+		gfx/mesh/skeleton.h
+		gfx/mesh/triangle.h
+		gfx/mesh/vertex.h
+
+		# Scene tree
+		gfx/object3D.h gfx/object3D.cpp
+		gfx/objectmodel.h
+		gfx/scene.h gfx/scene.cpp
 
 		# Font
 		gfx/text/font.h gfx/text/label.h
@@ -197,6 +215,18 @@ set_target_properties(yuni-static-gfx3d-core PROPERTIES
 
 # Installation
 install(TARGETS yuni-static-gfx3d-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+
+# Install gfx-related headers
+install(
+	DIRECTORY gfx
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "*.hxx"
+	PATTERN ".svn" EXCLUDE
+	PATTERN "CMakeFiles" EXCLUDE
+	PATTERN "cmake" EXCLUDE
+)
 
 target_link_libraries(yuni-static-gfx3d-core
 	${OPENGL_LIBRARY} ${DX9_LIBRARIES})

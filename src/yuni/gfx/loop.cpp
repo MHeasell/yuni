@@ -24,27 +24,9 @@ namespace Gfx
 				// Special treatment for windows
 				// TODO: do not use a string comparison !
 				if (ctrl->className() == "window")
-				{
-					Window::IWindow::Map::iterator windowIterator = pWindows.find(ctrl->id());
-
-					Window::IWindow::Ptr window;
-					// Check if the window is newly created
-					if (windowIterator == pWindows.end())
-					{
-						UI::Window::Ptr uiWindowPtr = UI::IControl::Ptr::DynamicCast<UI::Window::Ptr>(ctrl);
-						// It is not referenced yet, create an internal representation
-						Window::IWindow::Ptr window = Window::Create(uiWindowPtr, device);
-						if (!window)
-							// TODO: do not fail silently ! Stop here ?
-							continue;
-						else
-							// Reference it
-							pWindows[ctrl->id()] = window;
-					}
-					else
-						// Found
-						window = windowIterator->second;
-				}
+					if (updateWindow(ctrl))
+						// TODO: do not fail silently ! Stop here ?
+						continue;
 			}
 		}
 		pModifiedControls.clear();
@@ -54,8 +36,6 @@ namespace Gfx
 
 	void Loop::markControlAsModified(UI::IControl::Ptr control)
 	{
-		// TODO : Manage children for containers, use an iterator on IControlContainer ?
-
 		size_t depth = control->depth();
 		UI::IControl::DepthSortedMap::iterator depthIt = pModifiedControls.find(depth);
 
@@ -70,6 +50,30 @@ namespace Gfx
 			return;
 
 		depthCategory[control->id()] = control;
+	}
+
+
+	bool Loop::updateWindow(UI::IControl::Ptr ctrl)
+	{
+		Window::IWindow::Map::iterator windowIterator = pWindows.find(ctrl->id());
+
+		Window::IWindow::Ptr window;
+		// Check if the window is newly created
+		if (windowIterator == pWindows.end())
+		{
+			UI::Window::Ptr uiWindowPtr = UI::IControl::Ptr::DynamicCast<UI::Window::Ptr>(ctrl);
+			// It is not referenced yet, create an internal representation
+			Window::IWindow::Ptr window = Window::Create(uiWindowPtr, device);
+			if (!window)
+				return false;
+			else
+				// Reference it
+				pWindows[ctrl->id()] = window;
+		}
+		else
+			// Found
+			window = windowIterator->second;
+		return true;
 	}
 
 

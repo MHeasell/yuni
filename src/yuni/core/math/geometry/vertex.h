@@ -1,18 +1,16 @@
-#ifndef __YUNI_GFX_VERTEX_H__
-# define __YUNI_GFX_VERTEX_H__
+#ifndef __YUNI_CORE_MATH_GEOMETRY_VERTEX_H__
+# define __YUNI_CORE_MATH_GEOMETRY_VERTEX_H__
 
-# include "../../yuni.h"
+# include "../../../yuni.h"
 # include <vector>
-# include "../../core/point3D.h"
-# include "../../core/vector3D.h"
-# include "../../core/string.h"
-# include "../../core/smartptr/smartptr.h"
+# include "point3D.h"
+# include "vector3D.h"
+# include "../../string.h"
+# include "../../smartptr.h"
 
 
 
 namespace Yuni
-{
-namespace Gfx
 {
 
 	// Forward declaration
@@ -106,7 +104,6 @@ namespace Gfx
 
 
 
-} // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_VERTEX_H__
+#endif // __YUNI_CORE_MATH_GEOMETRY_VERTEX_H__

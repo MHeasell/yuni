@@ -1,15 +1,13 @@
-#ifndef __YUNI_GFX_TRIANGLE_H__
-# define __YUNI_GFX_TRIANGLE_H__
+#ifndef __YUNI_CORE_MATH_GEOMETRY_TRIANGLE_H__
+# define __YUNI_CORE_MATH_GEOMETRY_TRIANGLE_H__
 
-# include "../../yuni.h"
-# include "../../core/smartptr/smartptr.h"
+# include "../../../yuni.h"
+# include "../../smartptr.h"
 # include "edge.h"
-# include "../../core/vector3D.h"
+# include "vector3D.h"
 
 
 namespace Yuni
-{
-namespace Gfx
 {
 
 
@@ -136,7 +134,6 @@ namespace Gfx
 
 
 
-} // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_TRIANGLE_H__
+#endif // __YUNI_CORE_MATH_GEOMETRY_TRIANGLE_H__

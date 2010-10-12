@@ -78,6 +78,12 @@ namespace UI
 	}
 
 
+	const IControl::Map& IControl::children() const
+	{
+		return pChildren;
+	}
+
+
 	inline bool IControl::hasParent() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
@@ -97,7 +103,6 @@ namespace UI
 		ThreadingPolicy::MutexLocker lock(*this);
 		parentWL(newParent);
 	}
-
 
 
 

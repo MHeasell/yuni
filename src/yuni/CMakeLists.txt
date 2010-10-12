@@ -36,8 +36,6 @@ if(YUNI_MODULE_CORE)
 	CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/yuni.h.cmake ${CMAKE_CURRENT_SOURCE_DIR}/yuni.h)
 	# Core
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/core.cmake")
-	# GfxCore
-	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/gfx-core.cmake")
 endif()
 
 
@@ -46,9 +44,9 @@ endif()
 if(YUNI_MODULE_DEVICES)
 	LIBYUNI_CONFIG_LIB("display"    "yuni-static-device-display")
 	LIBYUNI_CONFIG_LIB("mouse"      "yuni-static-device-mouse")
-	LIBYUNI_CONFIG_DEPENDENCY("mouse" "devices") # gfx-core is required
+	LIBYUNI_CONFIG_DEPENDENCY("mouse" "devices")
 	LIBYUNI_CONFIG_LIB("keyboard"   "yuni-static-device-keyboard")
-	LIBYUNI_CONFIG_DEPENDENCY("keyboard" "devices") # gfx-core is required
+	LIBYUNI_CONFIG_DEPENDENCY("keyboard" "devices")
 
 	if(YUNI_MODULE_DEVICE_DISPLAY)
 		include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/device-display.cmake")
