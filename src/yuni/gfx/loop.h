@@ -58,6 +58,14 @@ namespace Gfx
 
 
 	private:
+		/*!
+		** \brief Special update treatment for windows
+		**
+		** \returns false if window creation failed
+		*/
+		bool updateWindow(UI::IControl::Ptr ctrl);
+
+	private:
 		//! All modified controls sorted by depth in the UI tree
 		UI::IControl::DepthSortedMap pModifiedControls;
 

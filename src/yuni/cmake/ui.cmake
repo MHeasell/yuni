@@ -4,7 +4,6 @@ YMESSAGE(":: [Module] UI")
 LIBYUNI_CONFIG_LIB("ui"      "yuni-static-ui-core")
 
 LIBYUNI_CONFIG_DEPENDENCY("ui" "core") # core is required
-LIBYUNI_CONFIG_DEPENDENCY("ui" "gfx") # gfx-core is required
 
 add_definitions("-DYUNI_MODULE_UI")
 

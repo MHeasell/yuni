@@ -81,9 +81,6 @@ namespace UI
 		virtual void resizeWL(float& newWidth, float& newHeight);
 		//@}
 
-	private:
-		//! Children controls
-		IControl::Map pChildren;
 
 	}; // class IControlContainer
 

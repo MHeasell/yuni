@@ -5,7 +5,6 @@
 
 # Core
 set(YUNI_MODULE_CORE                      TRUE) # Must be True
-set(YUNI_MODULE_GFX_CORE                  TRUE)
 
 # Devices
 set(YUNI_MODULE_DEVICES                   FALSE)
@@ -300,7 +299,7 @@ if(MODULES)
 		YMESSAGE("    +core          : The core module (needed)")
 		YMESSAGE("    -/+tests       : Atomic Tests for the yuni framework")
 		YMESSAGE("    -/+samples     : Samples for the yuni framework")
-		YMESSAGE("    +all           : Enable all main modules (gfx,script,tests,samples)")
+		YMESSAGE("    +all           : Enable all main modules (gfx3d,script,tests,samples)")
 		YMESSAGE(" The algorithms")
 		YMESSAGE("    -/+algorithms  : Standard algorithms")
 		YMESSAGE(" The device modules")

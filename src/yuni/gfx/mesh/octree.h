@@ -5,7 +5,7 @@
 # include <vector>
 # include <iostream>
 # include "../../core/point3D.h"
-# include "../boundingbox.h"
+# include "../../core/boundingbox.h"
 
 
 # define YUNI_OCTREE_MAX_CHILDREN  8

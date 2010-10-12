@@ -1,16 +1,14 @@
-#ifndef __YUNI_GFX_EDGE_H__
-# define __YUNI_GFX_EDGE_H__
+#ifndef __YUNI_CORE_MATH_GEOMETRY_EDGE_H__
+# define __YUNI_CORE_MATH_GEOMETRY_EDGE_H__
 
-# include "../../yuni.h"
+# include "../../../yuni.h"
 # include <vector>
 # include <list>
-# include "../../core/smartptr/smartptr.h"
+# include "../../smartptr.h"
 # include "vertex.h"
 
 
 namespace Yuni
-{
-namespace Gfx
 {
 
 
@@ -73,7 +71,6 @@ namespace Gfx
 
 
 
-} // namespace Gfx
 } // namespace Yuni
 
-#endif // __YUNI_GFX_EDGE_H__
+#endif // __YUNI_CORE_MATH_GEOMETRY_EDGE_H__

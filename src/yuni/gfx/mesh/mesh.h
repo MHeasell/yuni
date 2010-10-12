@@ -2,8 +2,8 @@
 #ifndef __YUNI_GFX_MESH_MESH_H__
 # define __YUNI_GFX_MESH_MESH_H__
 
-# include "../../core/smartptr/smartptr.h"
-# include "triangle.h"
+# include "../../core/smartptr.h"
+# include "../../core/math/geometry/triangle.h"
 
 
 namespace Yuni
