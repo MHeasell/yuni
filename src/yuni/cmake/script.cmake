@@ -33,35 +33,51 @@ if(YUNI_EXTERNAL_SCRIPT_LUA)
 	if (YUNI_DvP_LUA_MODE STREQUAL "devpack")
 		# Headers for Lua
 		DEVPACK_IMPORT_LUA()
+		# We get YUNI_EXT_LUA_INCLUDE from here.
+		# We get YUNI_EXT_LUA_LIB from here.
 		LIBYUNI_CONFIG_LIB_RAW_COMMAND("lua" "${YUNI_EXT_LUA_LIB}")
-		LIBYUNI_CONFIG_INCLUDE_PATH("lua" "${YUNI_EXT_LUA_INCLUDE}")
+
 	elseif(YUNI_DvP_LUA_MODE STREQUAL "custom")
 		set(YUNI_EXT_LUA_INCLUDE "${YUNI_DvP_LUA_PREFIX}/include")
 		set(YUNI_EXT_LUA_LIB "-L${YUNI_DvP_LUA_PREFIX}/lib -llua")
 		LIBYUNI_CONFIG_LIB_RAW_COMMAND("lua" "${YUNI_EXT_LUA_LIB}")
-		LIBYUNI_CONFIG_INCLUDE_PATH("lua" "${YUNI_EXT_LUA_INCLUDE}")
+
+	elseif(YUNI_DvP_LUA_MODE STREQUAL "macports")
+		set(YUNI_EXT_LUA_INCLUDE "${YUNI_MACPORTS_PREFIX}/include")
+		set(YUNI_EXT_LUA_LIB "-L${YUNI_MACPORTS_PREFIX}/lib -llua")
+		LIBYUNI_CONFIG_LIB_RAW_COMMAND("lua" "${YUNI_EXT_LUA_LIB}")
+
 	elseif(YUNI_DvP_LUA_MODE STREQUAL "system")
 		# Nothing to do, since the system does it.
 		LIBYUNI_CONFIG_LIB_RAW_COMMAND("lua" "-llua")
+
 	else()
-		set(YUNI_CMAKE_ERROR 1)
 		YFATAL(    "[!!] Invalid YUNI_DvP_LUA_MODE: ${YUNI_DvP_LUA_MODE}")
+
 	endif()
 
 	# Check if we really have a lua.h
 	set(CMAKE_REQUIRED_INCLUDES "${YUNI_EXT_LUA_INCLUDE}")
 	check_include_files("lua.h" YUNI_HAS_LUA_H)
 
-	if (NOT YUNI_HAS_LUA_H)
+	if(NOT YUNI_HAS_LUA_H)
 		set(YUNI_CMAKE_ERROR 1)
 		YMESSAGE(    "[!!] Impossible to find lua.h. Please check your profile.")
 		YMESSAGE(    " * Packages needed on Debian: liblua5.1-dev")
 	endif()
 
-	LIBYUNI_CONFIG_DEPENDENCY("lua" "script")
+	# Add any detected extra header path
+	# We do not expose Lua, so there's nothing to add to yuni-config
+	if(YUNI_EXT_LUA_INCLUDE)
+		include_directories(${YUNI_EXT_LUA_INCLUDE})
+	endif()
 
+	# Lua is dependent on Script module
+	LIBYUNI_CONFIG_DEPENDENCY("lua" "script")
+	
 	set(SRC_EXTERNAL_SCRIPT_LUA
-			${YUNI_EXT_LUA_SRC}  # From DevPack 'lua'
+			# We can build the devpack source files here.
+			${YUNI_EXT_LUA_SRC}
 			script/lua/lua.h script/lua/lua.cpp script/lua/args.cpp
 			private/script/lua.proxy.h
 		)
