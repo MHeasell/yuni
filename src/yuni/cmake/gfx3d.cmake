@@ -26,7 +26,6 @@ source_group(Application FILES ${SRC_APPLICATION_GFX})
 
 set(SRC_GFX3D
 		gfx/device.h gfx/device.cpp
-		gfx/loop.h gfx/loop.hxx gfx/loop.cpp
 
 		# Window
 		gfx/window/window.h
@@ -49,7 +48,6 @@ set(SRC_GFX3D
 		gfx/surface/cairo.h gfx/surface/cairo.hxx
 
 		# Mesh
-		gfx/mesh/edge.h
 		gfx/mesh/implicitsurface.h gfx/mesh/implicitsurface.cpp
 		gfx/mesh/implicitsurfmanager.h
 		gfx/mesh/marchingcubes.h gfx/mesh/marchingcubes.cpp
@@ -59,8 +57,6 @@ set(SRC_GFX3D
 		gfx/mesh/metaobject.h
 		gfx/mesh/polygonizer.h
 		gfx/mesh/skeleton.h
-		gfx/mesh/triangle.h
-		gfx/mesh/vertex.h
 
 		# Scene tree
 		gfx/object3D.h gfx/object3D.cpp

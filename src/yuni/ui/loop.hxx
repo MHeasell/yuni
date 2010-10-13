@@ -1,9 +1,9 @@
-#ifndef __YUNI_GFX_LOOP_HXX__
-# define __YUNI_GFX_LOOP_HXX__
+#ifndef __YUNI_UI_LOOP_HXX__
+# define __YUNI_UI_LOOP_HXX__
 
 namespace Yuni
 {
-namespace Gfx
+namespace UI
 {
 
 
@@ -22,7 +22,7 @@ namespace Gfx
 
 
 
-} // namespace Gfx
+} // namespace UI
 } // namespace Yuni
 
-#endif // __YUNI_GFX_LOOP_HXX__
+#endif // __YUNI_UI_LOOP_HXX__
