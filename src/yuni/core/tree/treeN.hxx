@@ -88,7 +88,7 @@ namespace Core
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
-	inline void TreeN<T,TP,ChckP,ConvP>::parent(Ptr& newParent)
+	inline void TreeN<T,TP,ChckP,ConvP>::parent(Ptr newParent)
 	{
 		detachFromParent();
 		newParent->push_back(this);
