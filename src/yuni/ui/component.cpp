@@ -23,6 +23,18 @@ namespace UI
 	}
 
 
+	void IComponent::release()
+	{
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			if (--pRefCount > 0)
+				return;
+			detachWL();
+		}
+		delete this;
+	}
+
+
 
 } // namespace UI
 } // namespace Yuni

@@ -27,7 +27,8 @@ namespace UI
 		template <class T>
 		struct SmartPtrInfo
 		{
-			typedef SmartPtr<T> Type;
+			//! A thread-safe node type
+			typedef SmartPtr<T, Policy::Ownership::COMReferenceCounted>  Type;
 		};
 
 		typedef SmartPtrInfo<IComponent>::Type  Ptr;
@@ -81,7 +82,6 @@ namespace UI
 		void resize(float width, float height);
 		//@}
 
-
 		//! \name Accessors
 		//@{
 		/*!
@@ -134,11 +134,19 @@ namespace UI
 		float x() const;
 		//@}
 
+		//! \name Pointer management
+		//@{
+		void addRef();
+		void release();
+		//@}
+
 
 	protected:
 		//! Protected resize, without locks
 		virtual void resizeWL(float& newWidth, float& newHeight);
 
+		//! Detach the component from the tree
+		virtual void detachWL();
 
 	protected:
 		/*!
@@ -166,6 +174,8 @@ namespace UI
 		*/
 		float pHeight;
 
+	private:
+		ThreadingPolicy::Volatile<int>::Type pRefCount;
 
 	}; // class IComponent
 

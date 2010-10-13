@@ -17,7 +17,7 @@ namespace UI
 	}
 
 
-	void IControl::parentWL(IControlContainer* newParent)
+	void IControl::parentWL(IControl::Ptr newParent)
 	{
 		if (pParent == newParent)
 			return;
@@ -25,8 +25,17 @@ namespace UI
 		// If we already had a parent, tell him we do not want to be his child anymore
 		if (pParent)
 			(*pParent) -= pID;
-		pParent = newParent;
-		pDepth  = (pParent) ? 1 + pParent->depth() : 0;
+		if (!newParent)
+		{
+			pParent = nullptr;
+			pDepth = 0;
+		}
+		else
+		{
+			pParent = newParent;
+			pDepth  = 1 + pParent->depth();
+			(*pParent) += this;
+		}
 	}
 
 

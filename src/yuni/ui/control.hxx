@@ -14,7 +14,7 @@ namespace UI
 	{}
 
 
-	inline IControl::IControl(IControlContainer* newParent)
+	inline IControl::IControl(IControl::Ptr newParent)
 		:pParent(nullptr)
 	{
 		parentWL(newParent);
@@ -28,7 +28,7 @@ namespace UI
 	{}
 
 
-	inline IControl::IControl(IControlContainer* newParent, float width, float height)
+	inline IControl::IControl(IControl::Ptr newParent, float width, float height)
 		:IComponent(width, height),
 		pParent(nullptr),
 		pDepth(0)
@@ -44,7 +44,7 @@ namespace UI
 	{}
 
 
-	inline IControl::IControl(IControlContainer* newParent, float x, float y,
+	inline IControl::IControl(IControl::Ptr newParent, float x, float y,
 		float width, float height)
 		:IComponent(x, y, width, height),
 		pParent(nullptr)
@@ -62,7 +62,7 @@ namespace UI
 
 
 	template<class T>
-	inline IControl::IControl(IControlContainer* newParent, const Point2D<T>& pos,
+	inline IControl::IControl(IControl::Ptr newParent, const Point2D<T>& pos,
 		float width, float height)
 		:IComponent(pos, width, height),
 		pParent(nullptr)
@@ -71,15 +71,21 @@ namespace UI
 	}
 
 
-	inline IControlContainer* IControl::parent()
+	inline IControlContainer::Ptr IControl::parent()
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
+		return pParent;
+	}
+
+
+	inline const IControlContainer::Ptr& IControl::parent() const
+	{
 		return pParent;
 	}
 
 
 	const IControl::Map& IControl::children() const
 	{
+		ThreadingPolicy::MutexLocker lock(*this);
 		return pChildren;
 	}
 
@@ -87,21 +93,36 @@ namespace UI
 	inline bool IControl::hasParent() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-		return NULL != pParent;
+		return nullptr != pParent;
 	}
 
 
-	inline size_t IControl::depth() const
+	inline unsigned int IControl::depth() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		return pDepth;
 	}
 
 
-	inline void IControl::parent(IControlContainer* newParent)
+	inline void IControl::parent(IControl::Ptr newParent)
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		parentWL(newParent);
+	}
+
+
+	inline void IControl::detachWL()
+	{
+		parentWL(nullptr);
+	}
+
+	inline void IControl::addChildWL(const IControl::Ptr&)
+	{}
+
+
+	inline bool IControl::removeChildWL(const IControl::Ptr&)
+	{
+		return false;
 	}
 
 

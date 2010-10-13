@@ -7,7 +7,7 @@ namespace UI
 {
 
 
-	void QueueService::onExecute()
+	bool QueueService::start()
 	{
 		// Event: OnBeforeCreateDevice()
 		onBeforeCreateDevice();
@@ -17,7 +17,7 @@ namespace UI
 		// Event: OnAfterCreateDevice()
 		onAfterCreateDevice(deviceOK);
 		if (!deviceOK)
-			return;
+			return false;
 
 		// Event: OnBeforeLoop()
 		if (onBeforeLoop())
@@ -28,6 +28,7 @@ namespace UI
 
 		// Releasing the Engine
 		pLoop.stop();
+		return true;
 	}
 
 

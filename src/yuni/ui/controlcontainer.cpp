@@ -17,6 +17,18 @@ namespace UI
 	}
 
 
+	void IControlContainer::addChildWL(const IControl::Ptr&)
+	{
+		pChildren[child->id()] = child;
+	}
+
+
+	bool IControlContainer::removeChildWL(const IControl::Ptr&)
+	{
+		pChildren.erase(child->id());
+		return false;
+	}
+
 
 } // namespace UI
 } // namespace Yuni
