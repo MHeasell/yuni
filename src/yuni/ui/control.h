@@ -48,8 +48,7 @@ namespace UI
 		/*!
 		** \brief Constructor with parent
 		*/
-		// TODO use a smart pointer here to avoid race conditions
-		IControl(IControlContainer* parent);
+		IControl(IControlContainer::Ptr parent);
 
 		/*!
 		** \brief Constructor with dimensions
@@ -59,7 +58,7 @@ namespace UI
 		/*!
 		** \brief Constructor with dimensions and parent
 		*/
-		IControl(IControlContainer* parent, float width, float height);
+		IControl(IControlContainer::Ptr parent, float width, float height);
 
 		/*!
 		** \brief Full constructor
@@ -69,8 +68,7 @@ namespace UI
 		/*!
 		** \brief Full constructor with parent
 		*/
-		// TODO use a smart pointer here to avoid race conditions
-		IControl(IControlContainer* parent, float x, float y, float width, float height);
+		IControl(IControlContainer::Ptr parent, float x, float y, float width, float height);
 
 		/*!
 		** \brief Full constructor
@@ -82,8 +80,7 @@ namespace UI
 		** \brief Full constructor with parent
 		*/
 		template<class T>
-		// TODO use a smart pointer here to avoid race conditions
-		IControl(IControlContainer* parent, const Point2D<T>& pos, float width, float height);
+		IControl(IControlContainer::Ptr parent, const Point2D<T>& pos, float width, float height);
 
 
 		//! Virtual destructor
@@ -92,11 +89,11 @@ namespace UI
 
 
 		//! Get the parent
-		// TODO returns a smart pointer here to avoid race conditions
-		IControlContainer* parent();
+		IControlContainer::Ptr parent();
+		const IControlContainer::Ptr& parent() const;
 
 		//! Set the parent
-		void parent(IControlContainer* newParent);
+		void parent(IControlContainer::Ptr newParent);
 
 		//! Get the children
 		const IControl::Map& children() const;
@@ -105,13 +102,31 @@ namespace UI
 		bool hasParent() const;
 
 		//! Depth in the UI tree, 0 if root.
-		size_t depth() const;
+		unsigned int depth() const;
 
+		//! Catch the focus
+		virtual void focus();
+
+		//! Enable / disable the control
+		void enabled(bool e);
+		bool enabled() const;
+
+		// Set visibility of the control
+		void visible(bool e);
+		bool visible() const;
 
 	protected:
 		//! Set the parent (without locking)
-		// TODO use a smart pointer here to avoid race conditions
-		void parentWL(IControlContainer* newParent);
+		virtual void parentWL(IControl::Ptr newParent);
+
+		//! Detach from the tree
+		virtual void detachWL();
+
+		//! Add a child
+		virtual void addChildWL(const IControl::Ptr& child);
+		//! Remove a child
+		virtual bool removeChildWL(const IControl::Ptr& child);
+
 
 	protected:
 		/*!
@@ -121,7 +136,7 @@ namespace UI
 		** object itself and it would bring a circular reference if the smart pointer
 		** were used.
 		*/
-		IControlContainer* pParent;
+		IControl* pParent;
 
 		/*!
 		** \brief Children controls
@@ -131,7 +146,7 @@ namespace UI
 		IControl::Map pChildren;
 
 		//! Depth in the UI tree : 0 if no parent, parent level + 1 otherwise
-		size_t pDepth;
+		unsigned int pDepth;
 
 	}; // class IControl
 

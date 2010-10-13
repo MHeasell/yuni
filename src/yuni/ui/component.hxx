@@ -1,6 +1,8 @@
 #ifndef __YUNI_UI_COMPONENT_HXX__
 # define __YUNI_UI_COMPONENT_HXX__
 
+# include <cassert>
+
 
 namespace Yuni
 {
@@ -10,21 +12,24 @@ namespace UI
 	inline IComponent::IComponent()
 		:pPosition(50, 50),
 		pWidth(50),
-		pHeight(50)
+		pHeight(50),
+		pRefCount(0)
 	{}
 
 
 	inline IComponent::IComponent(float width, float height)
 		:pPosition(50, 50),
 		pWidth((width > 0.f) ? width : 0.f),
-		pHeight((height > 0.f) ? height : 0.f)
+		pHeight((height > 0.f) ? height : 0.f),
+		pRefCount(0)
 	{}
 
 
 	inline IComponent::IComponent(float x, float y, float width, float height)
 		:pPosition(x, y),
 		pWidth((width > 0.f) ? width : 0.f),
-		pHeight((height > 0.f) ? height : 0.f)
+		pHeight((height > 0.f) ? height : 0.f),
+		pRefCount(0)
 	{}
 
 
@@ -32,12 +37,15 @@ namespace UI
 	inline IComponent::IComponent(const Point2D<T>& pos, float width, float height)
 		:pPosition(pos),
 		pWidth((width > 0.f) ? width : 0.f),
-		pHeight((height > 0.f) ? height : 0.f)
+		pHeight((height > 0.f) ? height : 0.f),
+		pRefCount(0)
 	{}
 
 
 	inline IComponent::~IComponent()
-	{}
+	{
+		assert(0 == pRefCount);
+	}
 
 
 	inline IComponent::ID IComponent::id() const
@@ -95,6 +103,16 @@ namespace UI
 		// do nothing
 	}
 
+
+	inline void IComponent::addRef()
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		++pRefCount;
+	}
+
+
+	inline void IComponent::detachWL()
+	{}
 
 
 

@@ -22,10 +22,10 @@ namespace UI
 		typedef SmartPtr<Application> Ptr;
 
 		//! String identifier type
-		typedef CustomString<40, false, false> StaticString;
+		typedef CustomString<40, false, false> GUID;
 
 		//! Map from a unique ID
-		typedef std::map<StaticString, Application::Ptr> Map;
+		typedef std::map<GUID, Application::Ptr> Map;
 
 
 	public:
@@ -36,40 +36,40 @@ namespace UI
 		Application(const StringT& id, const StringT2& name);
 
 		/*!
-		** \brief Close the application
-		*/
-		void close();
-
-		/*!
 		** \brief Get the identifier for this application
 		*/
-		const StaticString& id();
+		const GUID& guid() const;
 
 		/*!
 		** \brief Get the name of this application
 		*/
-		const StaticString& name();
+		const String& name() const;
 
 
 		//! \name Add or remove windows
 		//@{
-		void add(Window::Ptr& wnd);
-		Application& operator += (Window::Ptr& wnd);
-		Application& operator << (Window::Ptr& wnd);
+		void add(const Window::Ptr& wnd);
 
 		void remove(IComponent::ID id);
-		void remove(Window::Ptr& app);
-		Application& operator -= (IComponent::ID id);
-		Application& operator -= (Window::Ptr& app);
 
+		void remove(const Window::Ptr& wnd);
+
+		Application& operator += (Window* wnd);
+		Application& operator += (const Window::Ptr& wnd);
+		Application& operator << (Window* wnd);
+		Application& operator << (const Window::Ptr& wnd);
+
+		Application& operator -= (IComponent::ID id);
+		Application& operator -= (Window* wnd);
+		Application& operator -= (const Window::Ptr& wnd);
 		//@}
 
 	private:
 		//! Application string identifier
-		StaticString pID;
+		GUID pGUID;
 
 		//! Application name, used for display
-		StaticString pName;
+		String pName;
 
 		//! Application windows
 		Window::Map pWindows;

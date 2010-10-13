@@ -4,22 +4,22 @@
 
 namespace Yuni
 {
-namespace Gfx
+namespace UI
 {
 
 
 	bool Loop::onLoop()
 	{
 		// Loop on all depth groups, starting with the lower depths (nearest to the root)
-		UI::IControl::DepthSortedMap::iterator depthEnd = pModifiedControls.end();
-		for (UI::IControl::DepthSortedMap::iterator depthIt = pModifiedControls.begin();
+		IControl::DepthSortedMap::iterator depthEnd = pModifiedControls.end();
+		for (IControl::DepthSortedMap::iterator depthIt = pModifiedControls.begin();
 			 depthIt != depthEnd; ++depthIt)
 		{
-			UI::IControl::Map::iterator ctrlEnd = depthIt->second.end();
-			for (UI::IControl::Map::iterator ctrlIt = depthIt->second.begin();
+			IControl::Map::iterator ctrlEnd = depthIt->second.end();
+			for (IControl::Map::iterator ctrlIt = depthIt->second.begin();
 				 ctrlIt != ctrlEnd; ++ctrlIt)
 			{
-				UI::IControl::Ptr ctrl = ctrlIt->second;
+				IControl::Ptr ctrl = ctrlIt->second;
 
 				// Special treatment for windows
 				// TODO: do not use a string comparison !
@@ -34,18 +34,18 @@ namespace Gfx
 	}
 
 
-	void Loop::markControlAsModified(UI::IControl::Ptr control)
+	void Loop::markControlAsModified(IControl::Ptr control)
 	{
 		size_t depth = control->depth();
-		UI::IControl::DepthSortedMap::iterator depthIt = pModifiedControls.find(depth);
+		IControl::DepthSortedMap::iterator depthIt = pModifiedControls.find(depth);
 
 		bool found = (depthIt == pModifiedControls.end());
 		if (found)
 			pModifiedControls[depth];
 
-		UI::IControl::Map& depthCategory = found ? (depthIt->second) : pModifiedControls[depth];
+		IControl::Map& depthCategory = found ? (depthIt->second) : pModifiedControls[depth];
 
-		UI::IControl::Map::iterator controlIt = depthCategory.find(control->id());
+		IControl::Map::iterator controlIt = depthCategory.find(control->id());
 		if (controlIt != depthCategory.end())
 			return;
 
@@ -53,17 +53,17 @@ namespace Gfx
 	}
 
 
-	bool Loop::updateWindow(UI::IControl::Ptr ctrl)
+	bool Loop::updateWindow(IControl::Ptr ctrl)
 	{
-		Window::IWindow::Map::iterator windowIterator = pWindows.find(ctrl->id());
+		Gfx::Window::IWindow::Map::iterator windowIterator = pWindows.find(ctrl->id());
 
-		Window::IWindow::Ptr window;
+		Gfx::Window::IWindow::Ptr window;
 		// Check if the window is newly created
 		if (windowIterator == pWindows.end())
 		{
-			UI::Window::Ptr uiWindowPtr = UI::IControl::Ptr::DynamicCast<UI::Window::Ptr>(ctrl);
+			Window::Ptr uiWindowPtr = IControl::Ptr::DynamicCast<Window::Ptr>(ctrl);
 			// It is not referenced yet, create an internal representation
-			Window::IWindow::Ptr window = Window::Create(uiWindowPtr, device);
+			Gfx::Window::IWindow::Ptr window = Gfx::Window::Create(uiWindowPtr, device);
 			if (!window)
 				return false;
 			else
@@ -78,5 +78,5 @@ namespace Gfx
 
 
 
-} // namespace Gfx
+} // namespace UI
 } // namespace Yuni

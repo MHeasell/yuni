@@ -9,39 +9,58 @@ namespace UI
 
 
 	template<typename StringT, typename StringT2>
-	inline Application::Application(const StringT& id, const StringT2& name)
-		: pID(id), pName(name)
+	inline Application::Application(const StringT& guid, const StringT2& name)
+		: pGUID(guid), pName(name)
 	{}
 
 
-	inline const Application::StaticString& Application::id()
+	inline const Application::GUID& Application::guid() const
 	{
-		return pID;
+		return pGUID;
 	}
 
 
-	inline const Application::StaticString& Application::name()
+	inline const String& Application::name() const
 	{
 		return pName;
 	}
 
 
-	inline void Application::add(Window::Ptr& wnd)
+	inline void Application::add(const Window::Ptr& wnd)
 	{
-		pWindows[wnd->id()] = wnd;
+		if (!(!wnd))
+			pWindows[wnd->id()] = wnd;
 	}
 
 
-	inline Application& Application::operator += (Window::Ptr& wnd)
+	inline Application& Application::operator += (const Window::Ptr& wnd)
 	{
-		pWindows[wnd->id()] = wnd;
+		if (!(!wnd))
+			pWindows[wnd->id()] = wnd;
 		return *this;
 	}
 
 
-	inline Application& Application::operator << (Window::Ptr& wnd)
+	inline Application& Application::operator += (Window* wnd)
 	{
-		pWindows[wnd->id()] = wnd;
+		if (wnd)
+			pWindows[wnd->id()] = wnd;
+		return *this;
+	}
+
+
+	inline Application& Application::operator << (const Window::Ptr& wnd)
+	{
+		if (!(!wnd))
+			pWindows[wnd->id()] = wnd;
+		return *this;
+	}
+
+
+	inline Application& Application::operator << (Window* wnd)
+	{
+		if (wnd)
+			pWindows[wnd->id()] = wnd;
 		return *this;
 	}
 
@@ -52,9 +71,10 @@ namespace UI
 	}
 
 
-	inline void Application::remove(Window::Ptr& app)
+	inline void Application::remove(const Window::Ptr& wnd)
 	{
-		pWindows.erase(app->id());
+		if (!(!wnd))
+			pWindows.erase(wnd->id());
 	}
 
 
@@ -65,9 +85,18 @@ namespace UI
 	}
 
 
-	inline Application& Application::operator -= (Window::Ptr& app)
+	inline Application& Application::operator -= (Window* app)
 	{
-		pWindows.erase(app->id());
+		if (wnd)
+			pWindows.erase(app->id());
+		return *this;
+	}
+
+
+	inline Application& Application::operator -= (const Window::Ptr& app)
+	{
+		if (!(!wnd))
+			pWindows.erase(app->id());
 		return *this;
 	}
 

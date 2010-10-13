@@ -60,13 +60,13 @@ namespace UI
 		//! \name Add / remove children
 		//@{
 		void add(IControl::Ptr& child);
-		IControlContainer& operator += (IControl::Ptr& child);
-		IControlContainer& operator << (IControl::Ptr& child);
+		IControlContainer& operator += (const IControl::Ptr& child);
+		IControlContainer& operator << (const IControl::Ptr& child);
 
 		void remove(IControl::ID child);
 		void remove(IControl::Ptr& child);
 		IControlContainer& operator -= (IComponent::ID id);
-		IControlContainer& operator -= (IControl::Ptr& child);
+		IControlContainer& operator -= (const IControl::Ptr& child);
 		//@}
 
 
@@ -79,6 +79,11 @@ namespace UI
 		** This is implementation-dependent
 		*/
 		virtual void resizeWL(float& newWidth, float& newHeight);
+
+		//! Add a child
+		virtual void addChildWL(const IControl::Ptr& child);
+		//! Remove a child
+		virtual bool removeChildWL(const IControl::Ptr& child);
 		//@}
 
 
