@@ -1,14 +1,14 @@
-#ifndef __YUNI_GFX_LOOP_H__
-# define __YUNI_GFX_LOOP_H__
+#ifndef __YUNI_UI_LOOP_H__
+# define __YUNI_UI_LOOP_H__
 
-# include "../ui/control.h"
+# include "control.h"
 # include "../core/smartptr.h"
 # include "../core/event/loop.h"
 # include "../gfx/window/window.h"
 
 namespace Yuni
 {
-namespace Gfx
+namespace UI
 {
 
 	/*!
@@ -67,7 +67,7 @@ namespace Gfx
 
 	private:
 		//! All modified controls sorted by depth in the UI tree
-		UI::IControl::DepthSortedMap pModifiedControls;
+		IControl::DepthSortedMap pModifiedControls;
 
 		//! All windows
 		Gfx::Window::IWindow::Map pWindows;
@@ -77,9 +77,9 @@ namespace Gfx
 
 
 
-} // namespace Gfx
+} // namespace UI
 } // namespace Yuni
 
 # include "loop.hxx"
 
-#endif // __YUNI_GFX_LOOP_H__
+#endif // __YUNI_UI_LOOP_H__

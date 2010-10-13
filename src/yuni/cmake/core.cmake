@@ -360,6 +360,10 @@ set(SRC_CORE_MATH
 				core/point3D.h core/math/geometry/point3D.h
 				core/boundingbox.h
 				core/math/geometry/boundingbox.h core/math/geometry/boundingbox.hxx
+				core/math/geometry/edge.h
+				core/math/geometry/triangle.h
+				core/math/geometry/vertex.h
+
 				)
 
 source_group(Core\\Math FILES ${SRC_CORE_MATH})
