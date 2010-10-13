@@ -221,7 +221,7 @@ namespace Core
 		/*!
 		** \brief ReAttach to another parent
 		*/
-		void parent(Ptr& newParent);
+		void parent(Ptr newParent);
 
 		/*!
 		** \brief Detach the node from its parent
