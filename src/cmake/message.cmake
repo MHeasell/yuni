@@ -7,7 +7,7 @@ macro(YERROR msg)
 endmacro()
 
 macro(YFATAL msg)
-	message(FATAL "{yuni} -- ${msg}")
+	message(FATAL_ERROR "{yuni} -- ${msg}")
 endmacro()
 
 
