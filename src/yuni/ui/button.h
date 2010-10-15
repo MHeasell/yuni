@@ -38,7 +38,7 @@ namespace UI
 		/*!
 		** \brief Constructor with parent
 		*/
-		Button(IControlContainer* parent);
+		Button(const IControl::Ptr& parent);
 
 		/*!
 		** \brief Constructor with label
@@ -50,7 +50,7 @@ namespace UI
 		** \brief Constructor with parent and label
 		*/
 		template<class StringT>
-		Button(IControlContainer* parent, const StringT& label);
+		Button(const IControl::Ptr& parent, const StringT& label);
 
 		/*!
 		** \brief Constructor with dimensions
@@ -62,7 +62,7 @@ namespace UI
 		** \brief Constructor with parent and dimensions
 		*/
 		template<class StringT>
-		Button(IControlContainer* parent, const StringT& label, float width, float height);
+		Button(const IControl::Ptr& parent, const StringT& label, float width, float height);
 
 		/*!
 		** \brief Full constructor
@@ -74,7 +74,7 @@ namespace UI
 		** \brief Full constructor with parent
 		*/
 		template<class StringT>
-		Button(IControlContainer* parent, const StringT& label, float x, float y,
+		Button(const IControl::Ptr& parent, const StringT& label, float x, float y,
 			float width, float height);
 
 		/*!
@@ -87,7 +87,7 @@ namespace UI
 		** \brief Full constructor with parent
 		*/
 		template<class StringT, class T>
-		Button(IControlContainer* parent, const StringT& label, Point2D<T>& pos,
+		Button(const IControl::Ptr& parent, const StringT& label, Point2D<T>& pos,
 			float width, float height);
 
 

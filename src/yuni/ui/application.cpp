@@ -7,7 +7,7 @@ namespace UI
 {
 
 
-	void Application::close()
+	void Application::quit()
 	{
 		Window::Map::iterator end = pWindows.end();
 		for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)

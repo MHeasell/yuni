@@ -19,6 +19,13 @@ list(APPEND SRC_UI
 	ui/queueservice.h ui/queueservice.hxx ui/queueservice.cpp
 	ui/ui.h
 
+	# Window Systems
+	ui/windowsystem.h
+	ui/windowsystem/windows.h
+	ui/windowsystem/x11.h
+	ui/windowsystem/cocoa.h
+	ui/windowsystem/native.h
+
 	# Window
 	ui/window.h ui/window.hxx ui/window.cpp
 

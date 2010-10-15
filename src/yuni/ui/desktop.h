@@ -33,15 +33,17 @@ namespace UI
 		Desktop& operator += (Application::Ptr& app);
 		Desktop& operator << (Application::Ptr& app);
 
-		void remove(const String& id);
+		template<typename StringT>
+		void remove(const StringT& id);
 		void remove(Application::Ptr& app);
-		Desktop& operator -= (const String& id);
+		template<typename StringT>
+		Desktop& operator -= (const StringT& id);
 		Desktop& operator -= (Application::Ptr& app);
 
 		/*!
-		** \brief Close the desktop and all its applications
+		** \brief Quit the desktop and all its applications
 		*/
-		void close();
+		void quit();
 
 	private:
 		Application::Map pApps;

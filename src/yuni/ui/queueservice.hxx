@@ -8,34 +8,15 @@ namespace UI
 {
 
 
-	inline QueueService::QueueService()
-		: pDeviceIsInitialized(false)
+	inline IQueueService::IQueueService()
 	{
 	}
 
 
-	inline QueueService::~QueueService()
+	inline IQueueService::~IQueueService()
 	{
 		// Ensures all notifiers are no longer linked with this class
 		destroyBoundEvents();
-	}
-
-
-	inline Gfx::Device::Ptr QueueService::device() const
-	{
-		return pLoop.device;
-	}
-
-
-	inline bool QueueService::isDeviceInitialized() const
-	{
-		return pDeviceIsInitialized;
-	}
-
-
-	inline bool QueueService::toggleFullscreen()
-	{
-		return pLoop.device->toggleFullscreen();
 	}
 
 

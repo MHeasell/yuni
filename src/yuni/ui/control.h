@@ -17,7 +17,6 @@ namespace UI
 	class IControlContainer;
 
 
-
 	/*!
 	** \brief Base class for all UI controls (viewable components)
 	*/
@@ -48,7 +47,7 @@ namespace UI
 		/*!
 		** \brief Constructor with parent
 		*/
-		IControl(IControlContainer::Ptr parent);
+		IControl(IControl::Ptr parent);
 
 		/*!
 		** \brief Constructor with dimensions
@@ -58,7 +57,7 @@ namespace UI
 		/*!
 		** \brief Constructor with dimensions and parent
 		*/
-		IControl(IControlContainer::Ptr parent, float width, float height);
+		IControl(IControl::Ptr parent, float width, float height);
 
 		/*!
 		** \brief Full constructor
@@ -68,7 +67,7 @@ namespace UI
 		/*!
 		** \brief Full constructor with parent
 		*/
-		IControl(IControlContainer::Ptr parent, float x, float y, float width, float height);
+		IControl(IControl::Ptr parent, float x, float y, float width, float height);
 
 		/*!
 		** \brief Full constructor
@@ -80,7 +79,7 @@ namespace UI
 		** \brief Full constructor with parent
 		*/
 		template<class T>
-		IControl(IControlContainer::Ptr parent, const Point2D<T>& pos, float width, float height);
+		IControl(IControl::Ptr parent, const Point2D<T>& pos, float width, float height);
 
 
 		//! Virtual destructor
@@ -89,11 +88,10 @@ namespace UI
 
 
 		//! Get the parent
-		IControlContainer::Ptr parent();
-		const IControlContainer::Ptr& parent() const;
+		IControl::Ptr parent() const;
 
 		//! Set the parent
-		void parent(IControlContainer::Ptr newParent);
+		void parent(IControl::Ptr newParent);
 
 		//! Get the children
 		const IControl::Map& children() const;
@@ -105,7 +103,7 @@ namespace UI
 		unsigned int depth() const;
 
 		//! Catch the focus
-		virtual void focus();
+		virtual void focus() {}
 
 		//! Enable / disable the control
 		void enabled(bool e);
@@ -117,7 +115,7 @@ namespace UI
 
 	protected:
 		//! Set the parent (without locking)
-		virtual void parentWL(IControl::Ptr newParent);
+		virtual void parentWL(const IControl::Ptr& newParent);
 
 		//! Detach from the tree
 		virtual void detachWL();
@@ -136,7 +134,7 @@ namespace UI
 		** object itself and it would bring a circular reference if the smart pointer
 		** were used.
 		*/
-		IControl* pParent;
+		IControlContainer* pParent;
 
 		/*!
 		** \brief Children controls

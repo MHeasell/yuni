@@ -71,19 +71,13 @@ namespace UI
 	}
 
 
-	inline IControlContainer::Ptr IControl::parent()
+	inline IControl::Ptr IControl::parent() const
 	{
-		return pParent;
+		return (IControl*)pParent;
 	}
 
 
-	inline const IControlContainer::Ptr& IControl::parent() const
-	{
-		return pParent;
-	}
-
-
-	const IControl::Map& IControl::children() const
+	inline const IControl::Map& IControl::children() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		return pChildren;
@@ -93,7 +87,7 @@ namespace UI
 	inline bool IControl::hasParent() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-		return nullptr != pParent;
+		return NULL != pParent;
 	}
 
 

@@ -6,6 +6,7 @@
 # include "button.h"
 # include "window.h"
 # include "queueservice.h"
+# include "windowsystem.h"
 
 
 #endif // __YUNI_UI_UI_H__

@@ -7,7 +7,7 @@
 using namespace Yuni;
 
 
-UI::Desktop::Ptr createUI() const
+UI::Desktop::Ptr createUI()
 {
 	UI::Application::Ptr editor = new
 		UI::Application("com.example.my.3d.editor", "3D Editor");

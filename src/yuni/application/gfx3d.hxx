@@ -9,8 +9,7 @@ namespace Application
 
 	inline Gfx3D::Gfx3D(int argc, char* argv[])
 		:IApplication(argc, argv),
-		pTitle("Loading..."),
-		pDeviceIsInitialized(false)
+		pTitle("Loading...")
 	{
 	}
 
@@ -34,32 +33,6 @@ namespace Application
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		pTitle = newTitle;
-	}
-
-
-	inline Gfx::Device::Ptr Gfx3D::device() const
-	{
-		return pLoop.device;
-	}
-
-
-	inline bool Gfx3D::isDeviceInitialized() const
-	{
-		return pDeviceIsInitialized;
-	}
-
-
-	inline void Gfx3D::onBeforeCreateDevice()
-	{}
-
-
-	inline void Gfx3D::onAfterCreateDevice(bool /* success */)
-	{}
-
-
-	inline bool Gfx3D::onBeforeLoop()
-	{
-		return true;
 	}
 
 
