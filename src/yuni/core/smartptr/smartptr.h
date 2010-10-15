@@ -259,6 +259,11 @@ namespace Yuni
 		SmartPtr(ImplicitStoredType ptr);
 
 		/*!
+		** \brief Constructor with a null pointer
+		*/
+		SmartPtr(const NullPtr& ptr);
+
+		/*!
 		** \brief Copy constructor
 		*/
 		SmartPtr(CopyType& rhs);

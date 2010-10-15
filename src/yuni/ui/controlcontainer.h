@@ -59,12 +59,12 @@ namespace UI
 
 		//! \name Add / remove children
 		//@{
-		void add(IControl::Ptr& child);
+		void add(const IControl::Ptr& child);
 		IControlContainer& operator += (const IControl::Ptr& child);
 		IControlContainer& operator << (const IControl::Ptr& child);
 
 		void remove(IControl::ID child);
-		void remove(IControl::Ptr& child);
+		void remove(const IControl::Ptr& child);
 		IControlContainer& operator -= (IComponent::ID id);
 		IControlContainer& operator -= (const IControl::Ptr& child);
 		//@}

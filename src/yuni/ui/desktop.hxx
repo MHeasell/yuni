@@ -10,46 +10,48 @@ namespace UI
 
 	inline void Desktop::add(Application::Ptr& app)
 	{
-		pApps[app->id()] = app;
+		pApps[app->guid()] = app;
 	}
 
 
 	inline Desktop& Desktop::operator += (Application::Ptr& app)
 	{
-		pApps[app->id()] = app;
+		pApps[app->guid()] = app;
 		return *this;
 	}
 
 
 	inline Desktop& Desktop::operator << (Application::Ptr& app)
 	{
-		pApps[app->id()] = app;
+		pApps[app->guid()] = app;
 		return *this;
 	}
 
 
-	inline void Desktop::remove(const String& id)
+	template<typename StringT>
+	inline void Desktop::remove(const StringT& guid)
 	{
-		pApps.erase(id);
+		pApps.erase(guid);
 	}
 
 
 	inline void Desktop::remove(Application::Ptr& app)
 	{
-		pApps.erase(app->id());
+		pApps.erase(app->guid());
 	}
 
 
-	inline Desktop& Desktop::operator -= (const String& id)
+	template<typename StringT>
+	inline Desktop& Desktop::operator -= (const StringT& guid)
 	{
-		pApps.erase(id);
+		pApps.erase(guid);
 		return *this;
 	}
 
 
 	inline Desktop& Desktop::operator -= (Application::Ptr& app)
 	{
-		pApps.erase(app->id());
+		pApps.erase(app->guid());
 		return *this;
 	}
 

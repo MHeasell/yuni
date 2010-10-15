@@ -17,9 +17,11 @@ namespace UI
 	}
 
 
-	void IControl::parentWL(IControl::Ptr newParent)
+	void IControl::parentWL(const IControl::Ptr& newParent)
 	{
-		if (pParent == newParent)
+		IControl* newParentAsControl = Ptr::WeakPointer(newParent);
+		IControlContainer* newParentAsContainer = dynamic_cast<IControlContainer*>(newParentAsControl);
+		if (newParentAsContainer != newParentAsControl || pParent == newParentAsContainer)
 			return;
 
 		// If we already had a parent, tell him we do not want to be his child anymore
@@ -32,7 +34,7 @@ namespace UI
 		}
 		else
 		{
-			pParent = newParent;
+			pParent = newParentAsContainer;
 			pDepth  = 1 + pParent->depth();
 			(*pParent) += this;
 		}

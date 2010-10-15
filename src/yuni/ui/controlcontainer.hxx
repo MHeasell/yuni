@@ -32,20 +32,20 @@ namespace UI
 	{}
 
 
-	inline void IControlContainer::add(IControl::Ptr& child)
+	inline void IControlContainer::add(const IControl::Ptr& child)
 	{
 		pChildren[child->id()] = child;
 	}
 
 
-	inline IControlContainer& IControlContainer::operator += (IControl::Ptr& child)
+	inline IControlContainer& IControlContainer::operator += (const IControl::Ptr& child)
 	{
 		pChildren[child->id()] = child;
 		return *this;
 	}
 
 
-	inline IControlContainer& IControlContainer::operator << (IControl::Ptr& child)
+	inline IControlContainer& IControlContainer::operator << (const IControl::Ptr& child)
 	{
 		pChildren[child->id()] = child;
 		return *this;
@@ -58,7 +58,7 @@ namespace UI
 	}
 
 
-	inline void IControlContainer::remove(IControl::Ptr& child)
+	inline void IControlContainer::remove(const IControl::Ptr& child)
 	{
 		pChildren.erase(child->id());
 	}
@@ -71,7 +71,7 @@ namespace UI
 	}
 
 
-	inline IControlContainer& IControlContainer::operator -= (IControl::Ptr& child)
+	inline IControlContainer& IControlContainer::operator -= (const IControl::Ptr& child)
 	{
 		pChildren.erase(child->id());
 		return *this;

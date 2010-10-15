@@ -14,6 +14,12 @@ namespace UI
 	{}
 
 
+	inline Application::~Application()
+	{
+		quit();
+	}
+
+
 	inline const Application::GUID& Application::guid() const
 	{
 		return pGUID;
@@ -85,18 +91,18 @@ namespace UI
 	}
 
 
-	inline Application& Application::operator -= (Window* app)
+	inline Application& Application::operator -= (Window* wnd)
 	{
 		if (wnd)
-			pWindows.erase(app->id());
+			pWindows.erase(wnd->id());
 		return *this;
 	}
 
 
-	inline Application& Application::operator -= (const Window::Ptr& app)
+	inline Application& Application::operator -= (const Window::Ptr& wnd)
 	{
 		if (!(!wnd))
-			pWindows.erase(app->id());
+			pWindows.erase(wnd->id());
 		return *this;
 	}
 

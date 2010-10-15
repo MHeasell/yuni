@@ -4,7 +4,7 @@
 # include "application.h"
 # include "../gfx/device.h"
 # include "../core/event/event.h"
-# include "loop.h"
+# include "../core/event/loop.h"
 # include "desktop.h"
 
 
@@ -18,21 +18,22 @@ namespace UI
 	** \brief UI queue service
 	*/
 	class IQueueService
-		: public Core::EventLoop::IEventLoop<QueueService, Core::EventLoop::Flow::Continuous,
+		: public Core::EventLoop::IEventLoop<IQueueService, Core::EventLoop::Flow::Continuous,
 		Core::EventLoop::Statistics::None, false>
+		, public IEventObserver<IQueueService>
 	{
 	public:
 		//! Event loop type
-		typedef Core::EventLoop::IEventLoop<Loop,
+		typedef Core::EventLoop::IEventLoop<IQueueService,
 			Core::EventLoop::Flow::Continuous, // The flow policy
 			Core::EventLoop::Statistics::None, // The statistics policy
 			false>                             // Run in the main thread
-			LoopType;
+			Type;
 
 		//! Threading policy
-		typedef LoopType::ThreadingPolicy  ThreadingPolicy;
+		typedef Type::ThreadingPolicy  ThreadingPolicy;
 		//! Smart pointer
-		typedef SmartPtr<Loop> Ptr;
+		typedef SmartPtr<IQueueService> Ptr;
 
 
 	public:
@@ -50,7 +51,7 @@ namespace UI
 		Desktop::Ptr desktop;
 
 
-	protected:
+	public:
 		//! Run on each loop turn.
 		virtual bool onLoop() = 0;
 

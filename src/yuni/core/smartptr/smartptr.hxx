@@ -51,6 +51,17 @@ namespace Yuni
 	}
 
 
+	// Null
+	template<typename T, template <class> class OwspP, template <class> class ChckP,
+		class ConvP,
+		template <class> class StorP, template <class> class ConsP>
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(const NullPtr&)
+		:StoragePolicy(NULL)
+	{
+		CheckingPolicy::onInit(storagePointer(*this));
+	}
+
+
 	// Copy constructor
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,

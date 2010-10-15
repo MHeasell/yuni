@@ -14,7 +14,7 @@ namespace UI
 	}
 
 
-	inline Button::Button(IControlContainer* parent)
+	inline Button::Button(const IControl::Ptr& parent)
 			: IControl(parent)
 	{
 		pClass = "button";
@@ -30,7 +30,7 @@ namespace UI
 
 
 	template<class StringT>
-	inline Button::Button(IControlContainer* parent, const StringT& label)
+	inline Button::Button(const IControl::Ptr& parent, const StringT& label)
 		: IControl(parent), pLabel(label)
 	{
 		pClass = "button";
@@ -46,7 +46,7 @@ namespace UI
 
 
 	template<class StringT>
-	inline Button::Button(IControlContainer* parent, const StringT& label, float width,
+	inline Button::Button(const IControl::Ptr& parent, const StringT& label, float width,
 		float height)
 		: IControl(parent, width, height), pLabel(label)
 	{
@@ -63,7 +63,7 @@ namespace UI
 
 
 	template<class StringT>
-	inline Button::Button(IControlContainer* parent, const StringT& label, float x, float y,
+	inline Button::Button(const IControl::Ptr& parent, const StringT& label, float x, float y,
 		float width, float height)
 		: IControl(parent, x, y, width, height), pLabel(label)
 	{
@@ -80,7 +80,7 @@ namespace UI
 
 
 	template<class StringT, class T>
-	inline Button::Button(IControlContainer* parent, const StringT& label, Point2D<T>& pos,
+	inline Button::Button(const IControl::Ptr& parent, const StringT& label, Point2D<T>& pos,
 		float width, float height)
 		: IControl(parent, pos, width, height), pLabel(label)
 	{

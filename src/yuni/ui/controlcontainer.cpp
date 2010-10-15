@@ -17,13 +17,13 @@ namespace UI
 	}
 
 
-	void IControlContainer::addChildWL(const IControl::Ptr&)
+	void IControlContainer::addChildWL(const IControl::Ptr& child)
 	{
 		pChildren[child->id()] = child;
 	}
 
 
-	bool IControlContainer::removeChildWL(const IControl::Ptr&)
+	bool IControlContainer::removeChildWL(const IControl::Ptr& child)
 	{
 		pChildren.erase(child->id());
 		return false;

@@ -35,6 +35,13 @@ namespace UI
 		template<typename StringT, typename StringT2>
 		Application(const StringT& id, const StringT2& name);
 
+		//! Destructor
+		~Application();
+
+
+		//! Quit the application
+		void quit();
+
 		/*!
 		** \brief Get the identifier for this application
 		*/
