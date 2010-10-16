@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_TREE_N_HXX__
-# define __YUNI_CORE_TREE_N_HXX__
+#ifndef __YUNI_CORE_TREE_TREE_N_HXX__
+# define __YUNI_CORE_TREE_TREE_N_HXX__
 
 # include <iostream>
 
@@ -584,4 +584,4 @@ namespace Core
 } // namespace Core
 } // namespace Yuni
 
-#endif // __YUNI_CORE_TREE_N_HXX__
+#endif // __YUNI_CORE_TREE_TREE_N_HXX__

@@ -413,9 +413,12 @@ source_group(Core\\System FILES ${SRC_CORE_SYSTEM})
 
 
 set(SRC_CORE_TREE_N
-				core/tree/treeN.h  core/tree/treeN.hxx
-				core/tree/treeN.iterator.def.h  core/tree/treeN.iterator.undef.h
-				core/tree/treeN.iterator.h
+				core/tree/treeN.h
+				core/tree/n/treeN.h
+				core/tree/n/treeN.hxx
+				core/tree/n/treeN.iterator.def.h
+				core/tree/n/treeN.iterator.undef.h
+				core/tree/n/treeN.iterator.h
 				)
 source_group(Core\\Tree FILES ${SRC_CORE_TREE_N})
 
