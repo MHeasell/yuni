@@ -261,7 +261,7 @@ namespace Yuni
 		/*!
 		** \brief Constructor with a null pointer
 		*/
-		SmartPtr(const NullPtr& ptr);
+		SmartPtr(const NullPtr&);
 
 		/*!
 		** \brief Copy constructor
