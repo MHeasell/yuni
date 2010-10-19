@@ -6,7 +6,8 @@
 # include "../core/event.h"
 # include "../thread/policy.h"
 # include "../core/point2D.h"
-# include "../core/customstring.h"
+# include "../core/string.h"
+# include "id.h"
 
 namespace Yuni
 {
@@ -42,12 +43,8 @@ namespace UI
 		typedef CustomString<64, false, false> ClassName;
 
 		//! Unique local identifier
-		typedef sint64 ID;
+		typedef Yuni::Private::UI::ID::Type ID;
 
-		enum
-		{
-			InvalidID = -1
-		};
 
 	public:
 		//! \name Constructor & Destructor
@@ -85,9 +82,6 @@ namespace UI
 		** \brief Resize the component
 		*/
 		void resize(float width, float height);
-
-		//! Create a new locally unique ID, abstract.
-		virtual ID createIdentifierWL() const = 0;
 		//@}
 
 
@@ -161,7 +155,7 @@ namespace UI
 		/*!
 		** \brief Unique local identifier
 		*/
-	    ID pID;
+		const ID pLocalID;
 
 		/*!
 		** \brief Class name for this component (type of component)

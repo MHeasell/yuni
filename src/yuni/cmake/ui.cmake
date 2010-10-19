@@ -15,6 +15,7 @@ list(APPEND SRC_UI
 	ui/control.h ui/control.hxx ui/control.cpp
 	ui/controlcontainer.h ui/controlcontainer.hxx ui/controlcontainer.cpp
 	ui/desktop.h ui/desktop.hxx ui/desktop.cpp
+	ui/id.h ui/id.cpp
 	ui/loop.h ui/loop.hxx ui/loop.cpp
 	ui/queueservice.h ui/queueservice.hxx ui/queueservice.cpp
 	ui/ui.h

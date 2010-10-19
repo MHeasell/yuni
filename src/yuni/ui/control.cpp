@@ -13,7 +13,7 @@ namespace UI
 		ThreadingPolicy::MutexLocker lock(*this);
 		// We are dying, tell the parent we cannot be his child anymore
 		if (pParent)
-			(*pParent) -= pID;
+			(*pParent) -= pLocalID;
 	}
 
 
@@ -26,7 +26,7 @@ namespace UI
 
 		// If we already had a parent, tell him we do not want to be his child anymore
 		if (pParent)
-			(*pParent) -= pID;
+			(*pParent) -= pLocalID;
 		if (!newParent)
 		{
 			pParent = nullptr;
