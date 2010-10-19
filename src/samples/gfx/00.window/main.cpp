@@ -37,8 +37,8 @@ UI::Desktop::Ptr createUI()
 
 int main(int argc, char* argv[])
 {
-	UI::WindowSystem::Native windowSystem;
-	windowSystem.desktop = createUI();
-	windowSystem.start();
+	UI::IQueueService* ws = new UI::WindowSystem::Native();
+	ws->desktop = createUI();
+	ws->start();
 	return 0;
 }
