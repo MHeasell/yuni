@@ -71,6 +71,14 @@ namespace UI
 	}
 
 
+	inline IComponent::ID IControl::createIdentifierWL() const
+	{
+		if (NULL == pParent)
+			return IComponent::InvalidID;
+		return ((IControl*)pParent)->createIdentifierWL();
+	}
+
+
 	inline IControl::Ptr IControl::parent() const
 	{
 		return (IControl*)pParent;

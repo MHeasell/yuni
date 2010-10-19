@@ -34,46 +34,53 @@ namespace UI
 
 	inline void IControlContainer::add(const IControl::Ptr& child)
 	{
-		pChildren[child->id()] = child;
+		ThreadingPolicy::MutexLocker lock(*this);
+		addChildWL(child);
 	}
 
 
 	inline IControlContainer& IControlContainer::operator += (const IControl::Ptr& child)
 	{
-		pChildren[child->id()] = child;
+		ThreadingPolicy::MutexLocker lock(*this);
+		addChildWL(child);
 		return *this;
 	}
 
 
 	inline IControlContainer& IControlContainer::operator << (const IControl::Ptr& child)
 	{
-		pChildren[child->id()] = child;
+		ThreadingPolicy::MutexLocker lock(*this);
+		addChildWL(child);
 		return *this;
 	}
 
 
-	inline void IControlContainer::remove(IComponent::ID id)
+	inline bool IControlContainer::remove(IComponent::ID id)
 	{
-		pChildren.erase(id);
+		ThreadingPolicy::MutexLocker lock(*this);
+		return removeChildWL(id);
 	}
 
 
-	inline void IControlContainer::remove(const IControl::Ptr& child)
+	inline bool IControlContainer::remove(const IControl::Ptr& child)
 	{
-		pChildren.erase(child->id());
+		ThreadingPolicy::MutexLocker lock(*this);
+		return removeChildWL(child);
 	}
 
 
 	inline IControlContainer& IControlContainer::operator -= (IComponent::ID id)
 	{
-		pChildren.erase(id);
+		ThreadingPolicy::MutexLocker lock(*this);
+		removeChildWL(id);
 		return *this;
 	}
 
 
 	inline IControlContainer& IControlContainer::operator -= (const IControl::Ptr& child)
 	{
-		pChildren.erase(child->id());
+		ThreadingPolicy::MutexLocker lock(*this);
+		removeChildWL(child);
 		return *this;
 	}
 

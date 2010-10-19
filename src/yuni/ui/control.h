@@ -87,6 +87,9 @@ namespace UI
 		//@}
 
 
+		//! Create a new locally unique ID, asking the parent for it.
+		virtual IComponent::ID createIdentifierWL() const;
+
 		//! Get the parent
 		IControl::Ptr parent() const;
 

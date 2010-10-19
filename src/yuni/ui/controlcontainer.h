@@ -63,8 +63,8 @@ namespace UI
 		IControlContainer& operator += (const IControl::Ptr& child);
 		IControlContainer& operator << (const IControl::Ptr& child);
 
-		void remove(IControl::ID child);
-		void remove(const IControl::Ptr& child);
+		bool remove(IControl::ID child);
+		bool remove(const IControl::Ptr& child);
 		IControlContainer& operator -= (IComponent::ID id);
 		IControlContainer& operator -= (const IControl::Ptr& child);
 		//@}
@@ -83,6 +83,7 @@ namespace UI
 		//! Add a child
 		virtual void addChildWL(const IControl::Ptr& child);
 		//! Remove a child
+		virtual bool removeChildWL(IComponent::ID childID);
 		virtual bool removeChildWL(const IControl::Ptr& child);
 		//@}
 

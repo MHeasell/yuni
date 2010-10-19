@@ -44,6 +44,11 @@ namespace UI
 		//! Unique local identifier
 		typedef sint64 ID;
 
+		enum
+		{
+			InvalidID = -1
+		};
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -80,7 +85,11 @@ namespace UI
 		** \brief Resize the component
 		*/
 		void resize(float width, float height);
+
+		//! Create a new locally unique ID, abstract.
+		virtual ID createIdentifierWL() const = 0;
 		//@}
+
 
 		//! \name Accessors
 		//@{
@@ -101,7 +110,7 @@ namespace UI
 		}
 
 		//! Get the unique Identifier for this component
-		ID id() const;
+		ID id();
 
 		/*!
 		** \brief Get the width of the component

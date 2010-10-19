@@ -5,6 +5,18 @@ namespace Yuni
 {
 namespace UI
 {
+	namespace // Anonymous
+	{
+
+		IComponent::ID NextID = 0;
+
+	} // namespace Anonymous
+
+
+	IComponent::ID Application::createID() const
+	{
+		return NextID++;
+	}
 
 
 	void Application::quit()
