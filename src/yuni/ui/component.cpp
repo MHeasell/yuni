@@ -26,6 +26,7 @@ namespace UI
 	void IComponent::release()
 	{
 		{
+			std::cout << "PONG : " << pClass << std::endl;
 			ThreadingPolicy::MutexLocker locker(*this);
 			if (--pRefCount > 0)
 				return;

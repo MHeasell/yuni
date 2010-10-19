@@ -52,6 +52,9 @@ namespace UI
 		*/
 		const String& name() const;
 
+		//! Generate a locally unique ID
+		IComponent::ID createID() const;
+
 
 		//! \name Add or remove windows
 		//@{

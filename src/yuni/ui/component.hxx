@@ -10,7 +10,8 @@ namespace UI
 {
 
 	inline IComponent::IComponent()
-		:pPosition(50, 50),
+		: pID(InvalidID),
+		pPosition(50, 50),
 		pWidth(50),
 		pHeight(50),
 		pRefCount(0)
@@ -18,7 +19,8 @@ namespace UI
 
 
 	inline IComponent::IComponent(float width, float height)
-		:pPosition(50, 50),
+		:pID(InvalidID),
+		pPosition(50, 50),
 		pWidth((width > 0.f) ? width : 0.f),
 		pHeight((height > 0.f) ? height : 0.f),
 		pRefCount(0)
@@ -26,7 +28,8 @@ namespace UI
 
 
 	inline IComponent::IComponent(float x, float y, float width, float height)
-		:pPosition(x, y),
+		:pID(InvalidID),
+		pPosition(x, y),
 		pWidth((width > 0.f) ? width : 0.f),
 		pHeight((height > 0.f) ? height : 0.f),
 		pRefCount(0)
@@ -35,7 +38,8 @@ namespace UI
 
 	template<class T>
 	inline IComponent::IComponent(const Point2D<T>& pos, float width, float height)
-		:pPosition(pos),
+		:pID(InvalidID),
+		pPosition(pos),
 		pWidth((width > 0.f) ? width : 0.f),
 		pHeight((height > 0.f) ? height : 0.f),
 		pRefCount(0)
@@ -48,10 +52,10 @@ namespace UI
 	}
 
 
-	inline IComponent::ID IComponent::id() const
+	inline IComponent::ID IComponent::id()
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-		return pID;
+		return IComponent::InvalidID == pID ? createIdentifierWL() : pID;
 	}
 
 
@@ -108,11 +112,13 @@ namespace UI
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		++pRefCount;
+		std::cout << "PING : " << pClass << std::endl;
 	}
 
 
 	inline void IComponent::detachWL()
-	{}
+	{
+	}
 
 
 

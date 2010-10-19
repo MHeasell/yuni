@@ -17,7 +17,7 @@ namespace WindowSystem
 	{
 	public:
 		//! Override for onLoop, called on each loop turn
-		bool onLoop();
+		bool onLoop() { return true; }
 	};
 
 

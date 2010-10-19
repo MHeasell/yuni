@@ -15,7 +15,7 @@ namespace UI
 
 
 	inline Button::Button(const IControl::Ptr& parent)
-			: IControl(parent)
+		: IControl(parent)
 	{
 		pClass = "button";
 	}

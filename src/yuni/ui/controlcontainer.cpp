@@ -25,9 +25,19 @@ namespace UI
 
 	bool IControlContainer::removeChildWL(const IControl::Ptr& child)
 	{
-		pChildren.erase(child->id());
-		return false;
+		return removeChildWL(child->id());
 	}
+
+
+	bool IControlContainer::removeChildWL(IComponent::ID childID)
+	{
+		IControl::Map::iterator it = pChildren.find(childID);
+		bool exists = (it != pChildren.end());
+		if (exists)
+			pChildren.erase(it);
+		return exists;
+	}
+
 
 
 } // namespace UI
