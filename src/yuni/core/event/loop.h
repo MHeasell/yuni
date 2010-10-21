@@ -11,7 +11,7 @@
 # include "../system/sleep.h"
 # include "../static/assert.h"
 # include "../static/inherit.h"
-# include <assert.h>
+# include <cassert>
 # include "../../thread/thread.h"
 # include "loop.fwd.h"
 # include "../system/sleep.h"

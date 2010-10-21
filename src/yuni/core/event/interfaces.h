@@ -3,7 +3,7 @@
 
 # include "../../yuni.h"
 # include <map>
-# include <assert.h>
+# include <cassert>
 # include "../../thread/policy.h"
 
 

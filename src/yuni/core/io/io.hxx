@@ -1,7 +1,7 @@
 #ifndef __YUNI_CORE_IO_IO_HXX__
 # define __YUNI_CORE_IO_IO_HXX__
 
-# include <assert.h>
+# include <cassert>
 # include <ctype.h>
 
 namespace Yuni

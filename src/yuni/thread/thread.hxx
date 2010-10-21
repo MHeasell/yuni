@@ -1,7 +1,7 @@
 #ifndef __YUNI_THREAD_THREAD_HXX__
 # define __YUNI_THREAD_THREAD_HXX__
 
-# include <assert.h>
+# include <cassert>
 
 
 namespace Yuni

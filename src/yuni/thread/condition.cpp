@@ -4,7 +4,7 @@
 
 # ifndef YUNI_NO_THREAD_SAFE
 #include <time.h>
-#include <assert.h>
+#include <cassert>
 #if defined(YUNI_OS_MSVC)
 # include <winsock2.h>
 #else

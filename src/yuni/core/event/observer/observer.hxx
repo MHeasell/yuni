@@ -1,7 +1,7 @@
 #ifndef __YUNI_CORE_EVENT_OBSERVER_HXX__
 # define __YUNI_CORE_EVENT_OBSERVER_HXX__
 
-# include <assert.h>
+# include <cassert>
 
 
 namespace Yuni

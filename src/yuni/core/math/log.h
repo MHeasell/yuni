@@ -2,7 +2,6 @@
 # define __YUNI_CORE_MATH_LOG_H__
 
 # include "math.h"
-# include <assert.h>
 
 
 
