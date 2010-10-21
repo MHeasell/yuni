@@ -37,8 +37,8 @@ namespace Yuni
 	// \todo Fix support for int128 on Visual Studio 10
 	# if defined(YUNI_HAS_INT128_T) && defined(__DISABLED_SUPPORT_FOR_INT128)
 	/* 128-bit ints */
-	typedef uint128_t  uint128;
-	typedef int128_t   sint128;
+	typedef unsigned __int128  uint128;
+	typedef __int128           sint128;
 	# endif
 
 	/* 64-bit ints, guaranteed to be 8 bytes in size */
