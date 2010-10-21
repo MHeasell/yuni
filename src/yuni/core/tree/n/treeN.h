@@ -8,6 +8,7 @@
 # include "../../static/if.h"
 # include "../../smartptr/smartptr.h"
 # include <ostream>
+# include <cassert>
 
 
 
@@ -145,19 +146,21 @@ namespace Core
 	*/
 	template<class T,                                                // The original type
 		template<class> class TP     = Policy::ObjectLevelLockable,  // The threading policy
-		template <class> class ChckP = Policy::Checking::None,       // Checking policy
+		template<class> class ChckP  = Policy::Checking::None,       // Checking policy
 		class ConvP			         = Policy::Conversion::Allow     // Conversion policy
 		>
-	class TreeN : public TP< TreeN<T,TP> >
+	class TreeN : public TP< TreeN<T,TP,ChckP,ConvP> >
 	{
 	public:
 		//! The real type
 		typedef T Type;
 		//! Node
-		typedef TreeN<T,TP,ChckP,ConvP> Node;
+		typedef T Node;
 
+		//! The template class tree node
+		typedef TreeN<T,TP,ChckP,ConvP>  TreeNNode;
 		//! The threading policy
-		typedef TP<Node>  ThreadingPolicy;
+		typedef TP<TreeNNode>  ThreadingPolicy;
 
 		//! A thread-safe node type
 		typedef SmartPtr<Node, Policy::Ownership::COMReferenceCounted,ChckP,ConvP>  PtrThreadSafe;
@@ -214,9 +217,9 @@ namespace Core
 		//! \name Parent of the node
 		//@{
 		//! Get the parent of the node
-		Ptr& parent() {return pParent;}
+		Ptr parent() {return pParent;}
 		//! Get the parent of the node
-		const Ptr& parent() const {return pParent;}
+		Ptr parent() const {return pParent;}
 
 		/*!
 		** \brief ReAttach to another parent
@@ -311,14 +314,14 @@ namespace Core
 		/*!
 		** \brief Get if the node has children
 		*/
-		bool empty();
+		bool empty() const;
 
 		/*!
 		** \brief
 		*/
-		SizeType count();
+		SizeType count() const;
 		//! Alias for count()
-		SizeType size();
+		SizeType size() const;
 
 		/*!
 		** \brief Get the first child
@@ -354,7 +357,7 @@ namespace Core
 		** A leaf is merely a node without any children
 		** \return True if this node is a leaf, False otherwise
 		*/
-		bool leaf();
+		bool leaf() const;
 
 		/*!
 		** \brief Computes the depth of this node
@@ -363,7 +366,7 @@ namespace Core
 		** the node. The set of all nodes at a given depth is sometimes called
 		** a level of the tree. The root node is at depth zero.
 		*/
-		SizeType depth();
+		SizeType depth() const;
 
 		/*!
 		** \brief Computes the height from this node
@@ -434,17 +437,17 @@ namespace Core
 		//Node& operator = (Ptr& rhs);
 
 		//! Append a child at the end
-		Node& operator += (Ptr& node) {push_back(node);return *this;}
+		Node& operator += (Ptr& node) {push_back(node);return *static_cast<Node*>(this);}
 		//! Append a child at the end
-		Node& operator += (T* node) {push_back(node);return *this;}
+		Node& operator += (T* node) {push_back(node);return *static_cast<Node*>(this);}
 
 		//! Remove a child node
-		Node& operator -= (Ptr& node) {remove(node);return *this;}
+		Node& operator -= (Ptr& node) {remove(node);return *static_cast<Node*>(this);}
 
 		//! Append a child at the end
-		Node& operator << (Ptr& node) {push_back(node);return *this;}
+		Node& operator << (Ptr& node) {push_back(node);return *static_cast<Node*>(this);}
 		//! Append a child at the end
-		Node& operator << (T* node) {push_back(node);return *this;}
+		Node& operator << (T* node) {push_back(node);return *static_cast<Node*>(this);}
 
 		//! Comparison with another node
 		Node& operator == (const Ptr& node) const {return equals(node);}
@@ -510,7 +513,7 @@ namespace Core
 
 	protected:
 		//! Parent
-		Ptr pParent;
+		Node* pParent;
 		/*!
 		** \brief Get if this node has a parent
 		**

@@ -12,7 +12,7 @@ namespace Core
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	inline TreeN<T,TP,ChckP,ConvP>::TreeN()
-		:pParent(), pHaveParent(false), pChildrenCount(0), pRefCount(0)
+		:pParent(nullptr), pHaveParent(false), pChildrenCount(0), pRefCount(0)
 	{}
 
 
@@ -31,7 +31,7 @@ namespace Core
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
-	inline bool TreeN<T,TP,ChckP,ConvP>::empty()
+	inline bool TreeN<T,TP,ChckP,ConvP>::empty() const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return (0 == pChildrenCount);
@@ -40,7 +40,7 @@ namespace Core
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
-	inline bool TreeN<T,TP,ChckP,ConvP>::leaf()
+	inline bool TreeN<T,TP,ChckP,ConvP>::leaf() const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return (0 == pChildrenCount);
@@ -49,7 +49,7 @@ namespace Core
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
-	inline typename TreeN<T,TP,ChckP,ConvP>::SizeType TreeN<T,TP,ChckP,ConvP>::count()
+	inline typename TreeN<T,TP,ChckP,ConvP>::SizeType TreeN<T,TP,ChckP,ConvP>::count() const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return pChildrenCount;
@@ -57,7 +57,7 @@ namespace Core
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
-	inline typename TreeN<T,TP,ChckP,ConvP>::SizeType TreeN<T,TP,ChckP,ConvP>::size()
+	inline typename TreeN<T,TP,ChckP,ConvP>::SizeType TreeN<T,TP,ChckP,ConvP>::size() const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return pChildrenCount;
@@ -76,13 +76,14 @@ namespace Core
 		class ConvP>
 	inline void TreeN<T,TP,ChckP,ConvP>::detachFromParentWL()
 	{
+		assert(pParent != NULL);
 		// Remove the reference from the parent
-		pParent->internalRemoveChild(*this);
+		pParent->internalRemoveChild(*(static_cast<Node*>(this)));
 		// Removing our references to the parent
-		pHaveParent = false;
-		pParent = NULL;
-		pPreviousSibling = NULL;
-		pNextSibling = NULL;
+		pHaveParent      = false;
+		pParent          = nullptr;
+		pPreviousSibling = nullptr;
+		pNextSibling     = nullptr;
 	}
 
 
@@ -243,10 +244,10 @@ namespace Core
 		// Removing all our children before
 		clearWL();
 		// Removing our references to the parent
-		pHaveParent = false;
-		pParent = NULL;
-		pPreviousSibling = NULL;
-		pNextSibling = NULL;
+		pHaveParent      = false;
+		pParent          = nullptr;
+		pPreviousSibling = nullptr;
+		pNextSibling     = nullptr;
 	}
 
 
@@ -282,8 +283,8 @@ namespace Core
 			}
 		}
 
-		pLastChild = NULL;
-		pFirstChild = NULL;
+		pLastChild  = nullptr;
+		pFirstChild = nullptr;
 		pChildrenCount = 0;
 	}
 
@@ -349,18 +350,19 @@ namespace Core
 		{
 			pFirstChild = node;
 			pLastChild = pFirstChild;
-			pFirstChild->pPreviousSibling = NULL;
-			pFirstChild->pNextSibling = NULL;
+			pFirstChild->pPreviousSibling = nullptr;
+			pFirstChild->pNextSibling = nullptr;
 			pChildrenCount = 1;
 		}
 		else
 		{
 			pLastChild->pNextSibling = node;
 			node->pPreviousSibling = pLastChild;
-			node->pNextSibling = NULL;
+			node->pNextSibling = nullptr;
 			pLastChild = node;
 			++pChildrenCount;
 		}
+		node->pParent = static_cast<Node*>(this);
 	}
 
 
@@ -385,18 +387,19 @@ namespace Core
 		{
 			pFirstChild = node;
 			pLastChild = pFirstChild;
-			pFirstChild->pPreviousSibling = NULL;
-			pFirstChild->pNextSibling = NULL;
+			pFirstChild->pPreviousSibling = nullptr;
+			pFirstChild->pNextSibling = nullptr;
 			pChildrenCount = 1;
 		}
 		else
 		{
 			node->pNextSibling = pFirstChild;
-			node->pPreviousSibling = NULL;
+			node->pPreviousSibling = nullptr;
 			pFirstChild->pPreviousSibling = node;
 			pFirstChild = node;
 			++pChildrenCount;
 		}
+		node->pParent = static_cast<Node*>(this);
 	}
 
 
@@ -455,7 +458,7 @@ namespace Core
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	typename TreeN<T,TP,ChckP,ConvP>::SizeType
-	TreeN<T,TP,ChckP,ConvP>::depth()
+	TreeN<T,TP,ChckP,ConvP>::depth() const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return (pHaveParent) ? (1 + pParent->depth()) : 0;
@@ -566,7 +569,8 @@ namespace Core
 	{
 		{
 			typename ThreadingPolicy::MutexLocker locker(*this);
-			if (--pRefCount > 0)
+			assert(pRefCount > 0);
+			if (--pRefCount != 0)
 				return;
 			// Early clean-up
 			if (pHaveParent)
