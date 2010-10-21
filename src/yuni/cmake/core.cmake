@@ -35,6 +35,8 @@ check_include_file_cxx(string.h YUNI_HAS_STRING_H)
 check_include_file_cxx(time.h YUNI_HAS_TIME_H)
 # assert.h
 check_include_file_cxx(assert.h YUNI_HAS_ASSERT_H)
+# cassert
+check_include_file_cxx(cassert YUNI_HAS_CASSERT)
 # errno.h
 check_include_file_cxx(errno.h YUNI_HAS_ERRNO_H)
 # cstddef

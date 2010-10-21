@@ -1,6 +1,8 @@
 #ifndef __YUNI_CORE_MATH_LOG_HXX__
 # define __YUNI_CORE_MATH_LOG_HXX__
 
+# include <cassert>
+
 
 namespace Yuni
 {

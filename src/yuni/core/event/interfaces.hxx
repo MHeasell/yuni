@@ -3,7 +3,7 @@
 
 # include "../../yuni.h"
 # include <list>
-# include <assert.h>
+# include <cassert>
 # include <iostream>
 
 

@@ -1,6 +1,6 @@
 
 #include "timer.h"
-#include <assert.h>
+#include <cassert>
 
 
 

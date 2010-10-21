@@ -1,7 +1,7 @@
 
 #include "platform.h"
 #include "../../../slist.h"
-#include <assert.h>
+#include <cassert>
 #include "../../directory.h"
 #include "../info.h"
 

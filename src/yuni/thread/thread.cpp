@@ -4,7 +4,7 @@
 #include <time.h>
 #include <sys/timeb.h>
 #include <sys/types.h>
-#include <assert.h>
+#include <cassert>
 #ifndef YUNI_OS_WINDOWS
 #	ifndef YUNI_OS_HAIKU
 #		include <sys/errno.h>

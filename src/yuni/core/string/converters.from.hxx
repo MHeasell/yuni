@@ -1,7 +1,7 @@
 #ifndef __YUNI_CORE_STRING_STD_CONVERTERS_FROM_HXX__
 # define __YUNI_CORE_STRING_STD_CONVERTERS_FROM_HXX__
 
-# include <assert.h>
+# include <cassert>
 
 
 namespace Yuni
