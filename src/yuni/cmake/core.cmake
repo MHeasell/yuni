@@ -98,7 +98,7 @@ check_cxx_source_compiles("#include <stdint.h>
 	int main() {int64_t a; return 0;}" YUNI_HAS_INT64_T)
 # int128
 check_cxx_source_compiles("#include <stdint.h>
-	int main() {int128_t a; return 0;}" YUNI_HAS_INT128_T)
+	int main() {__int128 a; unsigned __int128 b; return 0;}" YUNI_HAS_INT128_T)
 
 # C++0x nullptr
 check_cxx_source_compiles("
