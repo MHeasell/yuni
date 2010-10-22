@@ -6,7 +6,7 @@
 # ifdef YUNI_WINDOWSYSTEM_X11
 #	include "x11yuni.h"
 #	include "../window.h"
-#	include "../../surface/cairo.h"
+#	include "../../../gfx/surface/cairo.h"
 
 
 namespace Yuni
