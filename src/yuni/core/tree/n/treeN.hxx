@@ -12,7 +12,7 @@ namespace Core
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	inline TreeN<T,TP,ChckP,ConvP>::TreeN()
-		:pParent(nullptr), pHaveParent(false), pChildrenCount(0), pRefCount(0)
+		:pParent(nullptr), pChildrenCount(0), pRefCount(0)
 	{}
 
 
@@ -68,7 +68,7 @@ namespace Core
 	inline void TreeN<T,TP,ChckP,ConvP>::detachFromParent()
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		if (pHaveParent)
+		if (pParent)
 			detachFromParentWL();
 	}
 
@@ -80,7 +80,6 @@ namespace Core
 		// Remove the reference from the parent
 		pParent->internalRemoveChild(*(static_cast<Node*>(this)));
 		// Removing our references to the parent
-		pHaveParent      = false;
 		pParent          = nullptr;
 		pPreviousSibling = nullptr;
 		pNextSibling     = nullptr;
@@ -244,7 +243,6 @@ namespace Core
 		// Removing all our children before
 		clearWL();
 		// Removing our references to the parent
-		pHaveParent      = false;
 		pParent          = nullptr;
 		pPreviousSibling = nullptr;
 		pNextSibling     = nullptr;
@@ -461,7 +459,7 @@ namespace Core
 	TreeN<T,TP,ChckP,ConvP>::depth() const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		return (pHaveParent) ? (1 + pParent->depth()) : 0;
+		return (pParent) ? (1 + pParent->depth()) : 0;
 	}
 
 
@@ -498,7 +496,7 @@ namespace Core
 		typename ThreadingPolicy::MutexLocker locker(*this);
 
 		// We check in a first time if we are not already at the end
-		if (pHaveParent && pNextSibling)
+		if (pParent && pNextSibling)
 		{
 			// Locking the parent
 			typename ThreadingPolicy::MutexLocker locker(pParent);
@@ -519,7 +517,7 @@ namespace Core
 		typename ThreadingPolicy::MutexLocker locker(*this);
 
 		// We check in a first time if we are not already at the end
-		if (pHaveParent && pPreviousSibling)
+		if (pParent && pPreviousSibling)
 		{
 			// Locking the parent
 			typename ThreadingPolicy::MutexLocker locker(pParent);
@@ -573,7 +571,7 @@ namespace Core
 			if (--pRefCount != 0)
 				return;
 			// Early clean-up
-			if (pHaveParent)
+			if (pParent)
 				detachFromParentWL();
 			if (pChildrenCount)
 				clearWL();
