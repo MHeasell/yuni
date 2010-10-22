@@ -1,5 +1,5 @@
 
-#include "msw.h"
+#include "wingdiwindow.h"
 #include "../../../core/string.h"
 
 
@@ -8,21 +8,23 @@
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
 {
-namespace Window
+namespace UI
+{
+namespace Local
 {
 
 
 	namespace
 	{
 
-		typedef std::map<HWND, IMSWindows*> WindowList;
+		typedef std::map<HWND, IWinGDIWindow*> WindowList;
 
 		// This list contains all MFC windows created
 		WindowList sWindowList;
 
-		IMSWindows* GetWindow(HWND handle)
+		IWinGDIWindow* GetWindow(HWND handle)
 		{
 			WindowList::iterator it;
 			for (it = sWindowList.begin(); it != sWindowList.end(); ++it)
@@ -33,7 +35,7 @@ namespace Window
 			return NULL;
 		}
 
-		void AddWindow(HWND handle, IMSWindows* window)
+		void AddWindow(HWND handle, IWinGDIWindow* window)
 		{
 			if (!window)
 				return;
@@ -57,7 +59,7 @@ namespace Window
 		*/
 		LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
-			IMSWindows* window = GetWindow(hWnd);
+			IWinGDIWindow* window = GetWindow(hWnd);
 			// Check for Windows messages
 			switch (uMsg)
 			{
@@ -75,7 +77,7 @@ namespace Window
 				case WM_CLOSE: // Did we receive a Close message?
 					{
 						if (window && !window->closing())
-							window->onClose();
+							window->close();
 						if (sWindowList.empty())
 							PostQuitMessage(0); // Send a Quit message
 						return 0;
@@ -99,7 +101,7 @@ namespace Window
 
 
 
-	bool IMSWindows::initialize()
+	bool IWinGDIWindow::initialize()
 	{
 		// Windows Class Structure
 		WNDCLASSEX wc;
@@ -228,7 +230,7 @@ namespace Window
 	}
 
 
-	void IMSWindows::close()
+	void IWinGDIWindow::close()
 	{
 		destroyBoundEvents();
 
@@ -258,7 +260,7 @@ namespace Window
 		}
 	}
 
-	bool IMSWindows::pollEvents()
+	bool IWinGDIWindow::pollEvents()
 	{
 		MSG msg;
 		bool msgProcessed = false;
@@ -269,7 +271,7 @@ namespace Window
 			// Have we received a Quit message?
 			if (msg.message == WM_QUIT)
 			{
-				onClose();
+				close();
 			}
 			// If not, deal with window messages
 			else
@@ -285,15 +287,10 @@ namespace Window
 	}
 
 
-	inline void IMSWindows::onInternalTitleChangedWL()
-	{
-		SetWindowText(pHWnd, String::CString(pUIWnd->title()));
-	}
 
-
-
-} // namespace Window
-} // namespace Gfx3D
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
 
 # endif // YUNI_WINDOWSYSTEM_MSW

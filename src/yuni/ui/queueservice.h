@@ -1,8 +1,8 @@
 #ifndef __YUNI_UI_QUEUESERVICE_H__
 # define __YUNI_UI_QUEUESERVICE_H__
 
-# include "application.h"
-# include "../gfx/device.h"
+# include <map>
+# include "../yuni.h"
 # include "../core/event/event.h"
 # include "../core/event/loop.h"
 # include "desktop.h"
@@ -34,6 +34,10 @@ namespace UI
 		typedef Type::ThreadingPolicy  ThreadingPolicy;
 		//! Smart pointer
 		typedef SmartPtr<IQueueService> Ptr;
+		//! Window association map
+		typedef std::map<Application::GUID, std::map<IComponent::ID, Window*> >  WindowMap;
+		//! Component storage with unique identifiers to access them
+		typedef std::map<Application::GUID, std::map<IComponent::ID, IComponent*> >  Components;
 
 
 	public:
@@ -54,6 +58,14 @@ namespace UI
 	public:
 		//! Run on each loop turn.
 		virtual bool onLoop() = 0;
+
+
+	protected:
+		//! Store windows that have been modified
+		WindowMap pModifiedWindows;
+
+		//! Store components that have been modified
+		Components pModifiedComponents;
 
 	}; // class QueueService
 

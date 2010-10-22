@@ -27,26 +27,6 @@ source_group(Application FILES ${SRC_APPLICATION_GFX})
 set(SRC_GFX3D
 		gfx/device.h gfx/device.cpp
 
-		# Window
-		gfx/window/window.h
-		gfx/window/window.hxx
-		gfx/window/window.cpp
-		gfx/window/cocoa/opengl.h
-		gfx/window/msw/cairo.h
-		gfx/window/msw/cairo.hxx
-		gfx/window/msw/directx.h
-		gfx/window/msw/msw.h
-		gfx/window/msw/opengl.h
-		gfx/window/x11/cairo.h
-		gfx/window/x11/opengl.h
-		gfx/window/x11/x11yuni.h
-
-		# Render surfaces
-		gfx/surface/surface.h
-		gfx/surface/surface3d.h gfx/surface/surface3d.cpp
-		gfx/surface/opengl.h gfx/surface/opengl.cpp
-		gfx/surface/cairo.h gfx/surface/cairo.hxx
-
 		# Mesh
 		gfx/mesh/implicitsurface.h gfx/mesh/implicitsurface.cpp
 		gfx/mesh/implicitsurfmanager.h
@@ -83,20 +63,6 @@ YMESSAGE("Added Support for OpenGL")
 find_package(OpenGL)
 set(YUNI_COMPILED_WITH_SUPPORT_FOR_OPENGL  1)
 LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${OPENGL_INCLUDE_DIR}")
-
-#
-# Cairo
-#
-if (CAIRO_FOUND)
-	list(APPEND SRC_GFX3D gfx/surface/cairo.cpp)
-	if (WIN32 OR WIN64)
-		list(APPEND SRC_GFX3D gfx/window/msw/cairo.cpp)
-	elseif(APPLE)
-		# TODO
-	else()
-		list(APPEND SRC_GFX3D gfx/window/x11/cairo.cpp)
-	endif()
-endif()
 
 
 #
@@ -172,7 +138,7 @@ if (WIN32)
 			"$ENV{PROGRAMFILES}/Microsoft DirectX SDK/Lib/x86"
 		DOC "The path to where d3dx9.lib resides")
 
-	set(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw/msw.cpp gfx/window/msw/opengl.cpp)
+#	set(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw/msw.cpp gfx/window/msw/opengl.cpp)
 	LIBYUNI_CONFIG_LIB_RAW_COMMAND("gfx3d"  "${OPENGL_LIBRARY}")
 
 	if(D3D9_LIBRARY AND D3DX9_LIBRARY)
@@ -182,7 +148,7 @@ if (WIN32)
 			YMESSAGE("  DX include: ${DX9_INCLUDE_PATH}")
 			YMESSAGE("  DX libs: ${D3D9_LIBRARY}")
 			set(YUNI_COMPILED_WITH_SUPPORT_FOR_DIRECTX 1)
-			set(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw/directx.cpp)
+#			set(SRC_GFX3D ${SRC_GFX3D} gfx/window/msw/directx.cpp)
 			include_directories("${DX9_INCLUDE_PATH}")
 			LIBYUNI_CONFIG_DEFINITION("gfx3d"  "YUNI_USE_DIRECTX")
 			LIBYUNI_CONFIG_INCLUDE_PATH("gfx3d"  "${DX9_INCLUDE_PATH}")

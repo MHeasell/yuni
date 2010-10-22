@@ -1,5 +1,5 @@
-#ifndef __YUNI_GFX_WINDOW_MSWINDOWS_H__
-# define __YUNI_GFX_WINDOW_MSWINDOWS_H__
+#ifndef __YUNI_PRIVATE_UI_LOCAL_WINDOWS_WINGDIWINDOW_H__
+# define __YUNI_PRIVATE_UI_LOCAL_WINDOWS_WINGDIWINDOW_H__
 
 # include "../../../yuni.h"
 
@@ -11,27 +11,28 @@
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
 {
-namespace Window
+namespace UI
+{
+namespace Local
 {
 
+
 	/*!
-	** \brief Abstract implementation of a window for Microsoft Windows
-	**
-	** Inherited classes: OpenGLMSW and DirectXMSW
+	** \brief Abstract implementation of a window for Microsoft Windows GDI+
 	*/
-	class IMSWindows: public IWindow
+	class IWinGDIWindow: public IWindow
 	{
 	public:
 		//! The Threading Policy
 		typedef IWindow::ThreadingPolicy ThreadingPolicy;
 
 	public:
-		IMSWindows(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
+		IWinGDIWindow(Yuni::UI::Window* source, unsigned int bitDepth, bool fullScreen)
 			:IWindow(source, bitDepth, fullScreen)
 		{}
-		virtual ~IMSWindows() {}
+		virtual ~IWinGDIWindow() {}
 
 		virtual bool initialize();
 
@@ -47,15 +48,16 @@ namespace Window
 		HINSTANCE pHInstance;
 		HWND pHWnd;
 
-	}; // class IMSWindows
+	}; // class IWinGDIWindow
 
 
 
-} // namespace Window
-} // namespace Gfx
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
 
 
 # endif // YUNI_WINDOWSYSTEM_MSW
 
-#endif // __YUNI_GFX_WINDOW_MSWINDOWS_H__
+#endif // __YUNI_PRIVATE_UI_LOCAL_WINDOWS_WINGDIWINDOW_H__

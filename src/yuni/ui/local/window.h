@@ -1,26 +1,22 @@
-#ifndef __YUNI_GFX_WINDOW_WINDOW_H__
-# define __YUNI_GFX_WINDOW_WINDOW_H__
+#ifndef __YUNI_PRIVATE_UI_LOCAL_WINDOW_H__
+# define __YUNI_PRIVATE_UI_LOCAL_WINDOW_H__
 
 # include <map>
 # include "../../yuni.h"
-# include "../device.h"
 # include "../../core/string.h"
 # include "../../core/event.h"
 # include "../../thread/policy.h"
-# include "../surface/surface.h"
-# include "../../ui/window.h"
+# include "../window.h"
+# include "../../gfx/device.h"
 
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
 {
-
-	// Forward declaration
-	class Engine;
-
-
-namespace Window
+namespace UI
+{
+namespace Local
 {
 
 
@@ -34,8 +30,6 @@ namespace Window
 		typedef IEventObserver<IWindow>::ThreadingPolicy ThreadingPolicy;
 		//! Smart pointer
 		typedef SmartPtr<IWindow> Ptr;
-		//! Window map
-		typedef std::map<UI::IComponent::ID, IWindow::Ptr> Map;
 
 	public:
 		//! \name Constructor & Destructor
@@ -43,7 +37,7 @@ namespace Window
 		/*!
 		** \brief Constructor
 		*/
-		IWindow(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen);
+		IWindow(Yuni::UI::Window* source, unsigned int bitDepth, bool fullScreen);
 		//! Destructor
 		virtual ~IWindow();
 		//@}
@@ -73,7 +67,7 @@ namespace Window
 		virtual void resize(float width, float height);
 
 		//! Get the UI window that corresponds to this internal representation
-		virtual UI::Window::Ptr window() { return pUIWnd; }
+		virtual Yuni::UI::Window* window() { return pUIWnd; }
 
 
 		//! \name Events
@@ -84,8 +78,6 @@ namespace Window
 		*/
 		virtual bool pollEvents() { return false; }
 
-		virtual void onClose() { pClosing = true; }
-
 	public:
 		Event<void (float /* x */, float /* y */)> onMouseDown;
 		Event<void (float /* x */, float /* y */)> onMouseClick;
@@ -95,10 +87,6 @@ namespace Window
 		Event<void (unsigned char /* key */)> onKeyDown;
 		Event<void (unsigned char /* key */)> onKeyPressed;
 		Event<void (unsigned char /* key */)> onKeyUp;
-
-	protected:
-		virtual void onFPSChanged(unsigned int /* FPS */) {}
-
 		//@}
 
 	protected:
@@ -109,22 +97,14 @@ namespace Window
 		*/
 		virtual bool refresh() = 0;
 
-		//! Swap the current buffer with the backbuffer
-		virtual void blitWL() = 0;
-
-		//! Method call when the title of the window has been changed
-		virtual void onInternalTitleChangedWL() = 0;
 
 	protected:
 		//! Corresponding UI window
-		UI::Window::Ptr pUIWnd;
+		Yuni::UI::Window* pUIWnd;
 
 		unsigned int pBitDepth;
 		bool pFullScreen;
 		bool pClosing;
-
-		// A friend !
-		friend class Gfx::Engine;
 
 	}; // class IWindow
 
@@ -136,15 +116,16 @@ namespace Window
 	** The characteristics of this window and its associated rendering surface
 	** will be determined using the device.
 	*/
-	IWindow* Create(UI::Window::Ptr& source, const Device::Ptr& device);
+	IWindow::Ptr Create(Yuni::UI::Window* source, const Yuni::Gfx::Device::Ptr& device);
 
 
 
 
-} // namespace Window
-} // namespace Gfx
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
 
 # include "window.hxx"
 
-#endif // __YUNI_GFX_WINDOW_WINDOW_H__
+#endif // __YUNI_PRIVATE_UI_LOCAL_WINDOW_H__
