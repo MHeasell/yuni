@@ -514,14 +514,6 @@ namespace Core
 	protected:
 		//! Parent
 		Node* pParent;
-		/*!
-		** \brief Get if this node has a parent
-		**
-		** \internal Due to the threading policy, this node may require to be
-		** thread-safe, the same goes for the smart pointer. Using this variable
-		** should avoid unnecessary locks.
-		*/
-		bool pHaveParent;
 
 		//! How many children do we have ?
 		SizeType pChildrenCount;
