@@ -1,6 +1,5 @@
 
 #include "../yuni.h"
-#include <iostream>
 #include <time.h>
 #include <sys/timeb.h>
 #include <sys/types.h>

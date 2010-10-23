@@ -77,8 +77,19 @@ namespace Math
 	inline const T& MinMax(const T& expr, const T& min, const T& max)
 	{
 		return ((expr < min)
-				? min : ((expr > max)
-					? max : expr));
+			? min
+			: ((expr > max) ? max : expr));
+	}
+
+
+	template<class T, class Expr, class MinT, class MaxT>
+	inline T MinMaxEx(const Expr& expr, const MinT& min, const MaxT& max)
+	{
+		return ((expr < min)
+			? static_cast<T>(min)
+			: ((expr > max)
+				? static_cast<T>(max)
+				: static_cast<T>(expr)));
 	}
 
 

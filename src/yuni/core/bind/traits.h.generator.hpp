@@ -197,7 +197,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 <% end %>
 
@@ -258,10 +257,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -323,10 +318,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -398,10 +389,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -471,10 +458,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object

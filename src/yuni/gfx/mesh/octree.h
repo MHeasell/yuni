@@ -3,7 +3,6 @@
 
 # include "../../yuni.h"
 # include <vector>
-# include <iostream>
 # include "../../core/point3D.h"
 # include "../../core/boundingbox.h"
 

@@ -1,7 +1,6 @@
 #ifndef __YUNI_CORE_TREE_TREE_N_HXX__
 # define __YUNI_CORE_TREE_TREE_N_HXX__
 
-# include <iostream>
 
 namespace Yuni
 {

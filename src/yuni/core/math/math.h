@@ -132,6 +132,32 @@ namespace Math
 
 
 	/*!
+	** \brief Ensure that an expression is contained in a range of values (with custom types)
+	**
+	** Most of the time, `MinMax` will produce the wanted result. But in some
+	** cases, it may be ineficient, due to type matching and would produce strange
+	** results (such as integer overflow).
+	** This method is thus a variant from `MinMax` to allow the user to use custom
+	** input types.
+	** \code
+	** // This code will give '56', instead of 255
+	** std::cout << Yuni::Math::MinMax<uint8>(312, 0, 255) << std::endl;
+	** // This code will give the wanted result '255' :
+	** std::cout << Yuni::Math::MinMaxEx<uint8>(312, 0, 255) << std::endl;
+	** \endcode
+	**
+	** The inconvenient of this method is that the user must always give the
+	** return type.
+	**
+	** \param expr An expression
+	** \param min The lower bound limit allowed for the expression `v`
+	** \param max The upper bound limit allowed for the expression `v`
+	** \return The expression itself, or a bound limit
+	*/
+	template<class T, class Expr, class MinT, class MaxT>
+	inline T MinMaxEx(const Expr& expr, const MinT& min, const MaxT& max);
+
+	/*!
 	** \brief Swap two values
 	**
 	** \param a The first value

@@ -6,7 +6,6 @@
 # include "../static/remove.h"
 # include "../static/moveconstructor.h"
 # include "holder.h"
-# include <iostream>
 
 
 namespace Yuni

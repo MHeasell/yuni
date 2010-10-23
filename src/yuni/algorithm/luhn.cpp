@@ -1,7 +1,6 @@
 
 #include "luhn.h"
 #include <ctype.h>
-#include <iostream>
 
 
 namespace Yuni
