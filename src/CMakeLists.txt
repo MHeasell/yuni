@@ -104,7 +104,7 @@ endif()
 
 include("${YUNI_PROFILE_PATH}")
 YMESSAGE("  Using profile: ${YUNI_PROFILE_NAME}")
-YMESSAGE("                 found in ${YUNI_PROFILE_PATH}")
+YMESSAGE("       found in: ${YUNI_PROFILE_PATH}")
 
 # (Re)Check the target
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake")
