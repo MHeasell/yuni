@@ -11,32 +11,33 @@
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
 {
-namespace Window
+namespace UI
+{
+namespace Local
+{
+namespace X11
 {
 
 
 	/*!
 	** \brief X11-specific window, using a Cairo surface to render
 	*/
-	class CairoX11: public IWindow, public Surface::Cairo
+	class CairoWindow: public IWindow, public Yuni::Gfx::Surface::Cairo
 	{
 	public:
 		//! The Threading Policy
 		typedef IWindow::ThreadingPolicy ThreadingPolicy;
 
 	public:
-		CairoX11(UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
-			:IWindow(source, bitDepth, fullScreen)
-		{}
-
-		virtual ~CairoX11() {}
+		CairoWindow(Yuni::UI::Window* source, unsigned int bitDepth, bool fullScreen);
+		virtual ~CairoWindow();
 
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(float width, float height);
-		virtual Surface::Cairo* surface2D() { return this; }
+		virtual Yuni::Gfx::Surface::Cairo* surface2D() { return this; }
 
 	protected:
 		/*!
@@ -46,21 +47,20 @@ namespace Window
 		*/
 		virtual bool refresh();
 
-		virtual void blitWL();
-
-	}; // class CairoX11
+	}; // class CairoWindow
 
 
 
-
-} // namespace Window
-} // namespace Gfx
+} // namespace X11
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
 
 
-# include "cairo.hxx"
+# include "cairowindow.hxx"
 
 
 # endif // YUNI_WINDOWSYSTEM_X11
 
-#endif // __YUNI_GFX_WINDOW_CAIRO_X11_H__
+#endif // __YUNI_PRIVATE_UI_LOCAL_CAIROWINDOW_H__

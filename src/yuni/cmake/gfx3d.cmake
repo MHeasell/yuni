@@ -161,7 +161,7 @@ else(WIN32)
 	if(APPLE)
 		# TODO
 	else(APPLE)
-		set(SRC_GFX3D ${SRC_GFX3D} gfx/window/x11/opengl.cpp)
+#		set(SRC_GFX3D ${SRC_GFX3D} gfx/window/x11/opengl.cpp)
 		LIBYUNI_CONFIG_LIB("gfx3d" "GL")
 		LIBYUNI_CONFIG_LIB("gfx3d" "GLU")
 	endif(APPLE)

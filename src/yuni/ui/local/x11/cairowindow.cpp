@@ -1,15 +1,19 @@
 
-#include "cairo.h"
+#include "cairowindow.h"
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
 {
-namespace Window
+namespace UI
+{
+namespace Local
+{
+namespace X11
 {
 
 
-	bool CairoX11::initialize()
+	bool CairoWindow::initialize()
 	{
 		IWindow::initialize();
 		/*
@@ -17,18 +21,12 @@ namespace Window
 			CAIRO_FORMAT_ARGB32, (unsigned int)pUIWnd->width(),
 			(unsigned int)pUIWnd->height());
 		*/
-		Surface::Cairo::initialize();
+		Yuni::Gfx::Surface::Cairo::initialize();
 		return true;
 	}
 
 
-	inline void CairoX11::close()
-	{
-		destroyBoundEvents();
-	}
-
-
-	void CairoX11::resize(float width, float height)
+	void CairoWindow::resize(float width, float height)
 	{
 		IWindow::resize(width, height);
 		release();
@@ -38,11 +36,13 @@ namespace Window
 			(unsigned int)height);
 		pContext = cairo_create(pSurface);
 		*/
-		Surface::Cairo::resize(width, height);
+		Yuni::Gfx::Surface::Cairo::resize(width, height);
 	}
 
 
 
-} // namespace Window
-} // namespace Gfx
+} // namespace X11
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni

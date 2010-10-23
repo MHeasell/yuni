@@ -23,13 +23,8 @@ namespace Windows
 
 	inline bool CairoWindow::refresh()
 	{
-		return true;
-	}
-
-
-	inline void CairoWindow::blitWL()
-	{
 		cairo_paint(pContext);
+		return true;
 	}
 
 

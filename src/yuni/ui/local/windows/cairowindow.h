@@ -47,8 +47,6 @@ namespace Windows
 		*/
 		virtual bool refresh();
 
-		virtual void blitWL();
-
 	}; // class CairoWindow
 
 
