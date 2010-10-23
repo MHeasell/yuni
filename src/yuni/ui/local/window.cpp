@@ -87,25 +87,25 @@ namespace Local
 // 	}
 
 
-	IWindow::Ptr Create(Yuni::UI::Window* source)
+	IWindow::Ptr Create(const Yuni::UI::Window::Ptr& source)
 	{
-		IWindow* wnd = NULL;
 		# ifdef YUNI_WINDOWSYSTEM_MSW
-		wnd = new Windows::CairoWindow(source, 32, false);
+		IWindow* wnd = new Windows::CairoWindow(source, 32, false);
 		# endif
 		# ifdef YUNI_WINDOWSYSTEM_X11
-		wnd = new X11::CairoWindow(source, 32, false);
+		IWindow* wnd = new X11::CairoWindow(source, 32, false);
 		# endif
 		# ifdef YUNI_OS_MAC
-		//wnd = new Cocoa::CairoWindow(source, 32, false);
+		(void) source;
+		IWindow* wnd = nullptr; // new Cocoa::CairoWindow(source, 32, false);
 		# endif
 
 		// Try to initialize
-		if (wnd && !wnd->initialize())
+		if (!wnd || !wnd->initialize())
 		{
 			wnd->close();
 			delete wnd;
-			return NULL;
+			return nullptr;
 		}
 		return wnd;
 	}

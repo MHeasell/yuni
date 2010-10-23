@@ -23,8 +23,12 @@ namespace Surface
 	inline bool Cairo::initialize()
 	{
 		pContext = cairo_create(pSurface);
-		clearColor(Color::RGB<float>(0, 0, 0));
-		return true;
+		if (pContext)
+		{
+			cairo_set_source_rgb(pContext, 0, 0, 0);
+			return true;
+		}
+		return false;
 	}
 
 

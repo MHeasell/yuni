@@ -18,7 +18,7 @@ namespace Surface
 		// Enable Smooth Shading
 		glShadeModel(GL_SMOOTH);
 		// Background Clear Color
-		clearColor(Color::RGB<float>(0.f, 0.f, 0.f));
+		glClearColor(0.f, 0.f, 0.f, 0.0f);
 		// Depth Buffer Setup
 		glClearDepth(1.0f);
 		// Enables Depth Testing
