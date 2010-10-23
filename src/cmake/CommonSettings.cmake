@@ -67,7 +67,7 @@ endif()
 #
 # Extra - Bundles
 #
-set(MACOSX_BUNDLE_COPYRIGHT "Yuni Framework - 2008/2010")
+SET(MACOSX_BUNDLE_COPYRIGHT "Yuni Framework - 2010")
 
 
 if(APPLE)
