@@ -39,6 +39,9 @@ if(YUNI_MODULE_CORE)
 endif()
 
 
+if(YUNI_MODULE_VFS)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/vfs.cmake")
+endif(YUNI_MODULE_VFS)
 
 
 if(YUNI_MODULE_DEVICES)
@@ -118,3 +121,4 @@ if("${YUNI_CMAKE_ERROR}" GREATER 0)
 	YERROR("An error has occured. Aborting.")
 	YMESSAGE("")
 endif()
+
