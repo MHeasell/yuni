@@ -116,7 +116,7 @@ namespace Local
 	** The characteristics of this window and its associated rendering surface
 	** will be determined using the device.
 	*/
-	IWindow::Ptr Create(Yuni::UI::Window* source, const Yuni::Gfx::Device::Ptr& device);
+	IWindow::Ptr Create(const Yuni::UI::Window::Ptr& source, const Yuni::Gfx::Device::Ptr& device);
 
 
 
