@@ -1,18 +1,41 @@
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
 {
-namespace Window
+namespace UI
+{
+namespace Local
+{
+namespace X11
 {
 
+	inline CairoWindow::CairoWindow(Yuni::UI::Window* source, unsigned int bitDepth,
+		bool fullScreen)
+		: IWindow(source, bitDepth, fullScreen)
+	{}
 
-	inline bool CairoX11::refresh() { return true; }
 
-	inline void CairoX11::blitWL() { cairo_paint(pContext); }
+	inline CairoWindow::~CairoWindow()
+	{}
+
+
+	inline void CairoWindow::close()
+	{
+		destroyBoundEvents();
+	}
+
+
+	inline bool CairoWindow::refresh()
+	{
+		cairo_paint(pContext);
+		return true;
+	}
 
 
 
-} // namespace Window
-} // namespace Gfx
+} // namespace X11
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
