@@ -1,8 +1,8 @@
-#ifndef __YUNI__CORE_COLOR_RGB_H__
-# define __YUNI__CORE_COLOR_RGB_H__
+#ifndef __YUNI_CORE_COLOR_RGB_H__
+# define __YUNI_CORE_COLOR_RGB_H__
 
 # include "../../yuni.h"
-# include "proxy.h"
+# include "fwd.h"
 
 
 namespace Yuni
@@ -10,164 +10,133 @@ namespace Yuni
 namespace Color
 {
 
-
 	/*!
-	** \brief 32Bits RGB Color Model (Additive color model)
-    **
-	** \ingroup ColorModels
+	** \brief 32Bits RGB Color Model (additive color model + transparency)
 	*/
-	template<typename T>
+	template<class T = uint8>
 	class RGB
 	{
 	public:
+		//! Type used for channels
+		typedef T Type;
+		//! The most appropriate type for printing
+		typedef typename Yuni::Private::Color::Print<T>::Type  PrintType;
+		//! The most appropriate type for calculations
+		template<class V>
+		struct Calculation
+		{
+			typedef typename Yuni::Private::Color::Calculation<T, V>::Type  Type;
+		};
+		enum
+		{
+			//! A non-zero value if the class has a transparency channel
+			hasTransparency = 0,
+			//! The upper bound for this color model
+			upperBound = Yuni::Private::Color::DefaultValues<T>::upperBound,
+			//! The lower bound for this color model
+			lowerBound = Yuni::Private::Color::DefaultValues<T>::lowerBound,
+		};
+
+	public:
 		//! \name Constructors
 		//@{
-		//! Default Constructor
-		RGB() : red(), green(), blue() {}
-
 		/*!
-		** \brief Constructor by copy
+		** \brief Default constructor
 		*/
-		template<typename U>
-		RGB(const U& c) {Private::Color::Proxy::Values< RGB<T> , U >::Assign(*this, c);}
-
+		RGB();
 		/*!
-		** \brief Constructor with default color components
-		**
-		** \param r The default value for the `red` channel
-		** \param g The default value for the `green` channel
-		** \param b The default value for the `blue` channel
+		** \brief Copy constructor
 		*/
-		template<typename U>
-		RGB(const U& r, const U& g, const U& b)
-		{ Private::Color::Proxy::Values< RGB<T>, U >::Assign(*this, r, g, b); }
-
+		RGB(const RGB& rhs);
 		/*!
-		** \brief Constructor with default color components
-		**
-		** \param r The default value for the `red` channel
-		** \param g The default value for the `green` channel
-		** \param b The default value for the `blue` channel
+		** \brief Constructor with default values
 		*/
-		template<typename U>
-		RGB(const U& r, const U& g, const U& b, const U& /*a*/)
-		{Private::Color::Proxy::Values< RGB<T>, U >::Assign(*this, r, g, b);}
+		template<class R, class G, class B, class A> RGB(R r, G g, B b, A a);
+		/*!
+		** \brief Constructor with default values
+		*/
+		template<class R, class G, class B> RGB(R r, G g, B b);
+		/*!
+		** \brief Constructor with default values
+		*/
+		template<class U> RGB(const U& value);
 		//@}
 
 
-		/*!
-		** \brief Get if the color is visible (merely if the color is completely transparent)
-		*/
-		bool visible() const {return true;}
-
-
-		//! \name Reset Values
+		//! \name Assign
 		//@{
 		/*!
-		** \brief Reset all color components
-		**
-		** \param rhs The new values
-		** \return Always `*this`
+		** \brief Assign all channels at once
 		*/
-		template<typename U>
-		RGB<T>& assign(const U& rhs)  { return Private::Color::Proxy::Values< RGB<T>, U >::Assign(*this, rhs); }
+		template<class R, class G, class B, class A> void assign(R r, G g, B b, A a);
+		/*!
+		** \brief Reset all channels at once
+		**
+		** The alpha channel will have a default value (opaque)
+		*/
+		template<class R, class G, class B> void assign(R r, G g, B b);
+		/*!
+		** \brief Reset all channels at once from a single value
+		*/
+		template<class U> void assign(const U& value);
+		//@}
+
+
+		//! \name Misc
+		//@{
+		/*!
+		** \brief Get if the color will be visible
+		**
+		** This method is equivalent to manually check the alpha channel
+		** with the lower bound
+		*/
+		bool visible() const;
 
 		/*!
-		** \brief Reset all color components
+		** \brief Check if all channels are valid
 		**
-		** \param r The new color component `red`
-		** \param g The new color component `green`
-		** \param b The new color component `blue`
-		** \return Always `*this`
+		** This method is only useful when the channels are modified manually.
 		*/
-		template<typename U>
-		RGB<T>& assign(const U& r, const U& g, const U& b)
-		{ return Private::Color::Proxy::Values< RGB<T>, U >::Assign(*this, r, g, b); }
+		bool valid() const;
+		//@}
 
-		/*!
-		** \brief Reset all color components
-		**
-		** \param r The new color component `red`
-		** \param g The new color component `green`
-		** \param b The new color component `blue`
-		** \return Always `*this`
-		*/
-		template<typename U>
-		RGB<T>& assign(const U& r, const U& g, const U& b, const U& /*a*/)
-		{ return Private::Color::Proxy::Values< RGB<T>, U >::Assign(*this, r, g, b); }
+
+		//! \name Stream printing
+		//@{
+		template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroT>
+		void print(CustomString<ChunkSizeT, ExpandableT, ZeroT>& string) const;
+		//! Print the color value
+		template<class StreamT> void print(StreamT& out) const;
 		//@}
 
 
 		//! \name Operators
 		//@{
-		/*!
-		** \brief Reset all color components
-		**
-		** \param rhs The new values
-		** \return Always `*this`
-		*/
-		template<typename U>
-		RGB<T>& operator () (const U& rhs)
-		{ return Private::Color::Proxy::Values< RGB<T>, U >::Assign(*this, rhs); }
-
-
-		/*!
-		** \brief Reset all color components
-		**
-		** \param r The new color component `red`
-		** \param g The new color component `green`
-		** \param b The new color component `blue`
-		** \return Always `*this`
-		*/
-		template<typename U>
-		RGB<T>& operator () (const U& r, const U& g, const U& b, const U& /*a*/)
-		{ return Private::Color::Proxy::Values< RGB<T>, U >::Assign(r, g, b); }
-
-		/*!
-		** \brief Increase all color components
-		**
-		** \param rhs Value to add to all colors components
-		** \return Always *this
-		*/
-		template<typename U>
-		RGB<T>& operator += (const U& rhs) { return Private::Color::Proxy::Values< RGB<T>, U >::Inc(*this, rhs);}
-
-
-		template<typename U>
-		bool operator == (const U& rhs) const {return Private::Color::Proxy::Compare< RGB<T> , U >::equals(*this, rhs);}
-
-		bool operator != (const RGB<T>& rhs) const
-		{ return !(*this == rhs); }
-
-		/*!
-		** \brief Assign new values from an another RGBA class
-		** \param rhs The new values
-		** \return Always *this
-		*/
-		template<typename U> RGB<T>& operator = (const U& rhs)
-		{ return Private::Color::Proxy::Values< RGB<T> , U >::Assign(*this, rhs); }
+		//! Increase or decrease all channels
+		template<class U> RGB& operator += (const U& value);
+		//! Increase or decrease all channels
+		template<class U> RGB& operator -= (const U& value);
+		//! Assignment
+		RGB& operator = (const RGB& rhs);
+		//! Assignment
+		template<class U> RGB& operator = (const U& rhs);
+		//! Comparison
+		template<class U> bool operator == (const U& rhs) const;
+		//! Comparison
+		template<class U> bool operator != (const U& rhs) const;
 		//@}
 
 
-		/*!
-		** \brief Print the RGBA Value
-		*/
-		std::ostream& print(std::ostream& out) const { return Private::Color::Proxy::Streamer< RGB<T> >::toOStream(out, *this); }
-
-		/*!
-		** \brief Convert the RGBA value into a human readable string
-		*/
-		String toString() const { return Private::Color::Proxy::Streamer< RGB<T> >::toString(*this); }
-
 	public:
 		//! The red channel
-		T red;
+		Type red;
 		//! The green channel
-		T green;
+		Type green;
 		//! The blue channel
-		T blue;
+		Type blue;
 
 	}; // class RGB
+
 
 
 
@@ -175,20 +144,6 @@ namespace Color
 } // namespace Color
 } // namespace Yuni
 
+# include "rgb.hxx"
 
-
-
-
-//! name Operator overload for stream printing
-//@{
-template<typename T>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Color::RGB<T>& p)
-{ return p.print(out); }
-
-template<typename T>
-inline const Yuni::Color::RGB<T> operator + (const Yuni::Color::RGB<T>& lhs, const Yuni::Color::RGB<T>& rhs)
-{ return Yuni::Color::RGB<T>(lhs) += rhs; }
-//@}
-
-
-#endif // __YUNI__CORE_COLOR_RGB_H__
+#endif // __YUNI_CORE_COLOR_RGB_H__

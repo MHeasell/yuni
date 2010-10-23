@@ -12,7 +12,6 @@
 # ifdef YUNI_HAS_STDARG_H
 #	include <stdarg.h>
 # endif
-# include <iostream>
 # include <string>
 # ifdef YUNI_HAS_LIST
 #	include <list>

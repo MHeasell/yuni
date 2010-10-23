@@ -1,7 +1,7 @@
 #ifndef __YUNI_CORE_MATH_GEOMETRY_VECTOR3D_H__
 # define __YUNI_CORE_MATH_GEOMETRY_VECTOR3D_H__
 
-# include <iostream>
+# include "../../../yuni.h"
 # include "../math.h"
 # include "point3D.h"
 

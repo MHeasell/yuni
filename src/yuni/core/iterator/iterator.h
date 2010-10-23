@@ -186,7 +186,6 @@ template<class ModelT, bool ConstT>
 inline Yuni::IIterator<ModelT,ConstT>
 operator + (const Yuni::IIterator<ModelT,ConstT>& it, typename Yuni::IIterator<ModelT,ConstT>::difference_type n)
 {
-	std::cout << n << std::endl;
 	return (Yuni::IIterator<ModelT,ConstT>(it) += n);
 }
 

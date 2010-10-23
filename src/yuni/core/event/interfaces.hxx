@@ -4,7 +4,6 @@
 # include "../../yuni.h"
 # include <list>
 # include <cassert>
-# include <iostream>
 
 
 namespace Yuni
@@ -82,7 +81,7 @@ namespace Yuni
 			else
 			{
 				# ifndef NDEBUG
-				std::cout << " -- Impossible to find the IEvent " << (void*)evt << "\n";
+				assert(0 && " -- Impossible to find the IEvent ");
 				# endif
 			}
 		}

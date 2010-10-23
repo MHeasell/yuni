@@ -648,7 +648,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0>
@@ -677,7 +676,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1>
@@ -706,7 +704,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2>
@@ -735,7 +732,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3>
@@ -764,7 +760,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -793,7 +788,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -822,7 +816,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -851,7 +844,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -880,7 +872,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -909,7 +900,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -938,7 +928,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -967,7 +956,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -996,7 +984,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -1025,7 +1012,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -1054,7 +1040,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -1083,7 +1068,6 @@ namespace BindImpl
 		//! Compare with a pointer-to-object
 		virtual bool compareWithPointerToObject(const void* object) const = 0;
 
-		virtual void print(std::ostream& out) const = 0;
 	};
 
 
@@ -1144,10 +1128,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1207,10 +1187,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1270,10 +1246,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1333,10 +1305,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1396,10 +1364,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1459,10 +1423,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1522,10 +1482,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1585,10 +1541,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1648,10 +1600,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1711,10 +1659,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1774,10 +1718,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1837,10 +1777,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1900,10 +1836,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -1963,10 +1895,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2026,10 +1954,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2089,10 +2013,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2154,10 +2074,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2215,10 +2131,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2276,10 +2188,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2337,10 +2245,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2398,10 +2302,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2459,10 +2359,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2520,10 +2416,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2581,10 +2473,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2642,10 +2530,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2703,10 +2587,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2764,10 +2644,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2825,10 +2701,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2886,10 +2758,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -2947,10 +2815,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -3008,10 +2872,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -3069,10 +2929,6 @@ namespace BindImpl
 			return false;
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "func:" << (void*)(pPointer);
-		}
 
 	private:
 		//! Pointer-to-function
@@ -3144,10 +3000,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3207,10 +3059,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3270,10 +3118,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3333,10 +3177,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3396,10 +3236,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3459,10 +3295,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3522,10 +3354,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3585,10 +3413,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3648,10 +3472,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3711,10 +3531,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3774,10 +3590,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3837,10 +3649,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3900,10 +3708,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -3963,10 +3767,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4026,10 +3826,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4089,10 +3885,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4162,10 +3954,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4227,10 +4015,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4292,10 +4076,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4357,10 +4137,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4422,10 +4198,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4487,10 +4259,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4552,10 +4320,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4617,10 +4381,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4682,10 +4442,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4747,10 +4503,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4812,10 +4564,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4877,10 +4625,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -4942,10 +4686,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -5007,10 +4747,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -5072,10 +4808,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object
@@ -5137,10 +4869,6 @@ namespace BindImpl
 			return ((const C*)object == pThis);
 		}
 
-		virtual void print(std::ostream& out) const
-		{
-			out << "obj:" << (void*)(pThis);
-		}
 
 	private:
 		//! Pointer to the object

@@ -299,7 +299,9 @@ namespace Type
 
 	template<> struct IsDecimal<float> { enum { Yes = 1, No = 0 }; };
 	template<> struct IsDecimal<double> { enum { Yes = 1, No = 0 }; };
+	# ifdef YUNI_HAS_LONG_DOUBLE
 	template<> struct IsDecimal<long double> { enum { Yes = 1, No = 0 }; };
+	# endif
 
 	//@} // Overloads
 

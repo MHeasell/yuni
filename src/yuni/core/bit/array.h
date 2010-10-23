@@ -4,7 +4,6 @@
 # include "../../yuni.h"
 # include "../customstring.h"
 # include "bit.h"
-# include <iostream>
 
 
 namespace Yuni

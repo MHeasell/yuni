@@ -568,9 +568,10 @@ source_group(Core\\Application FILES ${SRC_APPLICATION})
 set(SRC_CORE_COLOR
 		# Color
 		core/color/rgba.h
+		core/color/rgba.hxx
         core/color/rgb.h
-		core/color/proxy.h
-        core/color/proxy.cpp
+        core/color/rgb.hxx
+		core/color/fwd.h
 		)
 source_group(Core\\Color FILES ${SRC_CORE_COLOR})
 
