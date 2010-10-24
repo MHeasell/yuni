@@ -29,7 +29,6 @@ namespace UI
 
 		//! Threading policy
 		typedef LoopType::ThreadingPolicy  ThreadingPolicy;
-
 		//! Smart pointer
 		typedef SmartPtr<Loop> Ptr;
 
@@ -68,12 +67,11 @@ namespace UI
 	private:
 		//! All modified controls sorted by depth in the UI tree
 		IControl::DepthSortedMap pModifiedControls;
-
 		//! All windows
 		Gfx::Window::IWindow::Map pWindows;
 
-
 	}; // class Loop
+
 
 
 
