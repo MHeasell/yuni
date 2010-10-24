@@ -1,12 +1,11 @@
 #ifndef __YUNI_UI_QUEUESERVICE_H__
 # define __YUNI_UI_QUEUESERVICE_H__
 
-# include <map>
 # include "../yuni.h"
 # include "../core/event/event.h"
 # include "../core/event/loop.h"
 # include "desktop.h"
-
+# include <map>
 
 
 namespace Yuni
@@ -49,21 +48,17 @@ namespace UI
 		virtual ~IQueueService();
 		//@}
 
+		//! Run on each loop turn.
+		virtual bool onLoop() = 0;
 
 	public:
 		//! UI tree root
 		Desktop::Ptr desktop;
 
 
-	public:
-		//! Run on each loop turn.
-		virtual bool onLoop() = 0;
-
-
 	protected:
 		//! Store windows that have been modified
 		WindowMap pModifiedWindows;
-
 		//! Store components that have been modified
 		Components pModifiedComponents;
 

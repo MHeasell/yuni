@@ -29,14 +29,21 @@ namespace UI
 
 
 	public:
+		//! \name Constructor & Destructor
+		//@{
 		/*!
-		** \brief Constructor
+		** \brief Default application
 		*/
-		template<typename StringT, typename StringT2>
-		Application(const StringT& id, const StringT2& name);
-
-		//! Destructor
+		Application();
+		/*!
+		** \brief Constructor with a given name
+		*/
+		template<class StringT> explicit Application(const StringT& name);
+		/*!
+		** \brief Destructor
+		*/
 		~Application();
+		//@}
 
 
 		//! Quit the application
@@ -56,14 +63,18 @@ namespace UI
 		IComponent::ID createID() const;
 
 
-		//! \name Add or remove windows
+		//! \name Windows
 		//@{
 		void add(const Window::Ptr& wnd);
 
 		void remove(IComponent::ID id);
 
 		void remove(const Window::Ptr& wnd);
+		//@}
 
+
+		//! \name Operators
+		//@{
 		Application& operator += (Window* wnd);
 		Application& operator += (const Window::Ptr& wnd);
 		Application& operator << (Window* wnd);
@@ -74,26 +85,33 @@ namespace UI
 		Application& operator -= (const Window::Ptr& wnd);
 		//@}
 
-	private:
-		//! Application string identifier
-		GUID pGUID;
 
+	protected:
+		//! Application string identifier
+		const GUID pGUID;
 		//! Application name, used for display
 		String pName;
-
 		//! Application windows
 		Window::Map pWindows;
+
+	private:
+		/*!
+		** \brief Generate a GUID (Globally unique identifier) for an application
+		*/
+		static void GenerateGUID(GUID& guid);
+
+		//! Initialize all internal stuff
+		void initialize();
 
 
 	}; // class Application
 
 
 
+
 } // namespace UI
 } // namespace Yuni
 
-
 # include "application.hxx"
-
 
 #endif // __YUNI_UI_APPLICATION_H__

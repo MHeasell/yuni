@@ -8,10 +8,18 @@ namespace UI
 {
 
 
-	template<typename StringT, typename StringT2>
-	inline Application::Application(const StringT& guid, const StringT2& name)
-		: pGUID(guid), pName(name)
-	{}
+	template<class StringT>
+	inline Application::Application(const StringT& name)
+		:pName(name)
+	{
+		initialize();
+	}
+
+
+	inline Application::Application()
+	{
+		initialize();
+	}
 
 
 	inline Application::~Application()

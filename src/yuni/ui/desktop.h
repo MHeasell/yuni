@@ -5,11 +5,11 @@
 # include "../core/smartptr.h"
 # include "application.h"
 
+
 namespace Yuni
 {
 namespace UI
 {
-
 
 	/*!
 	** \brief Virtual desktop meant to receive one or several applications
@@ -21,29 +21,54 @@ namespace UI
 		typedef SmartPtr<Desktop> Ptr;
 
 	public:
+		//! \name Constructor & Destructor
+		//@{
 		/*!
-		** \brief Main constructor
+		** \brief Default constructor
 		*/
-		Desktop() {}
+		Desktop();
+		//! Destructor
+		~Desktop();
+		//@}
 
+
+		//! \name Applications
+		//@{
 		/*!
 		** \brief Add an application to this desktop
 		*/
 		void add(Application::Ptr& app);
-		Desktop& operator += (Application::Ptr& app);
-		Desktop& operator << (Application::Ptr& app);
 
-		template<typename StringT>
-		void remove(const StringT& id);
+		/*!
+		** \brief
+		*/
+		template<typename StringT> void remove(const StringT& id);
+		//!
 		void remove(Application::Ptr& app);
-		template<typename StringT>
-		Desktop& operator -= (const StringT& id);
-		Desktop& operator -= (Application::Ptr& app);
-
+		//@}
+	
 		/*!
 		** \brief Quit the desktop and all its applications
 		*/
 		void quit();
+
+
+		//! \name Operators
+		//@{
+		//! Register a new application
+		//! \see add()
+		Desktop& operator += (Application::Ptr& app);
+		//! Register a new application
+		//! \see add()
+		Desktop& operator << (Application::Ptr& app);
+
+		//! Remove an application from its guid
+		//! \see remove()
+		template<typename StringT> Desktop& operator -= (const StringT& id);
+		//! Remove an application from its pointer
+		//! \see remove()
+		Desktop& operator -= (Application::Ptr& app);
+		//@}
 
 	private:
 		Application::Map pApps;

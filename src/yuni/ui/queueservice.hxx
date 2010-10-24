@@ -13,16 +13,8 @@ namespace UI
 	}
 
 
-	inline IQueueService::~IQueueService()
-	{
-		// Ensures all notifiers are no longer linked with this class
-		destroyBoundEvents();
-	}
-
-
 
 } // namespace UI
 } // namespace Yuni
-
 
 #endif // __YUNI_UI_QUEUESERVICE_HXX__
