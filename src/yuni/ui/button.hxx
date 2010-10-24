@@ -7,96 +7,91 @@ namespace Yuni
 namespace UI
 {
 
-
-	inline Button::Button()
-	{
-		pClass = "button";
-	}
-
-
-	inline Button::Button(const IControl::Ptr& parent)
-		: IControl(parent)
+	
+	template<class StringT>
+	inline Button::Button(const StringT& caption)
+		: pCaption(caption)
 	{
 		pClass = "button";
 	}
 
 
 	template<class StringT>
-	inline Button::Button(const StringT& label)
-		: pLabel(label)
+	inline Button::Button(const IControl::Ptr& parent, const StringT& caption)
+		: IControl(parent), pCaption(caption)
 	{
 		pClass = "button";
 	}
 
 
 	template<class StringT>
-	inline Button::Button(const IControl::Ptr& parent, const StringT& label)
-		: IControl(parent), pLabel(label)
+	inline Button::Button(const StringT& caption, float width, float height)
+		: IControl(width, height), pCaption(caption)
 	{
 		pClass = "button";
 	}
 
 
 	template<class StringT>
-	inline Button::Button(const StringT& label, float width, float height)
-		: IControl(width, height), pLabel(label)
-	{
-		pClass = "button";
-	}
-
-
-	template<class StringT>
-	inline Button::Button(const IControl::Ptr& parent, const StringT& label, float width,
+	inline Button::Button(const IControl::Ptr& parent, const StringT& caption, float width,
 		float height)
-		: IControl(parent, width, height), pLabel(label)
+		: IControl(parent, width, height), pCaption(caption)
 	{
 		pClass = "button";
 	}
 
 
 	template<class StringT>
-	inline Button::Button(const StringT& label, float x, float y, float width, float height)
-		: IControl(x, y, width, height), pLabel(label)
+	inline Button::Button(const StringT& caption, float x, float y, float width, float height)
+		: IControl(x, y, width, height), pCaption(caption)
 	{
 		pClass = "button";
 	}
 
 
 	template<class StringT>
-	inline Button::Button(const IControl::Ptr& parent, const StringT& label, float x, float y,
+	inline Button::Button(const IControl::Ptr& parent, const StringT& caption, float x, float y,
 		float width, float height)
-		: IControl(parent, x, y, width, height), pLabel(label)
+		: IControl(parent, x, y, width, height), pCaption(caption)
 	{
 		pClass = "button";
 	}
 
 
 	template<class StringT, class T>
-	inline Button::Button(const StringT& label, Point2D<T>& pos, float width, float height)
-		: IControl(pos, width, height), pLabel(label)
+	inline Button::Button(const StringT& caption, Point2D<T>& pos, float width, float height)
+		: IControl(pos, width, height), pCaption(caption)
 	{
 		pClass = "button";
 	}
 
 
 	template<class StringT, class T>
-	inline Button::Button(const IControl::Ptr& parent, const StringT& label, Point2D<T>& pos,
+	inline Button::Button(const IControl::Ptr& parent, const StringT& caption, Point2D<T>& pos,
 		float width, float height)
-		: IControl(parent, pos, width, height), pLabel(label)
+		: IControl(parent, pos, width, height), pCaption(caption)
 	{
 		pClass = "button";
 	}
 
 
-	inline Button::~Button()
+	inline String Button::caption() const
 	{
-		destroyBoundEvents();
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pCaption;
+	}
+
+
+	template<class StringT>
+	inline void Button::caption(const StringT& value)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		pCaption = value;
 	}
 
 
 
 } // namespace UI
 } // namespace Yuni
-
 
 #endif // __YUNI_UI_BUTTON_HXX__
