@@ -1,4 +1,5 @@
 # include <cstdlib>
+# include <iostream>
 # include "openal.h"
 
 namespace Yuni
