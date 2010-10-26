@@ -37,7 +37,7 @@ namespace Local
 		/*!
 		** \brief Constructor
 		*/
-		IWindow(Yuni::UI::Window* source, unsigned int bitDepth, bool fullScreen);
+		IWindow(const Yuni::UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen);
 		//! Destructor
 		virtual ~IWindow();
 		//@}
@@ -67,7 +67,7 @@ namespace Local
 		virtual void resize(float width, float height);
 
 		//! Get the UI window that corresponds to this internal representation
-		virtual Yuni::UI::Window* window() { return pUIWnd; }
+		virtual Yuni::UI::Window::Ptr window() const { return pUIWnd; }
 
 
 		//! \name Events
@@ -100,7 +100,7 @@ namespace Local
 
 	protected:
 		//! Corresponding UI window
-		Yuni::UI::Window* pUIWnd;
+		Yuni::UI::Window::Ptr pUIWnd;
 
 		unsigned int pBitDepth;
 		bool pFullScreen;
