@@ -177,6 +177,7 @@ namespace UI
 } // namespace UI
 } // namespace Yuni
 
+# include "controlcontainer.h"
 # include "control.hxx"
 
 #endif // __YUNI_UI_CONTROL_H__

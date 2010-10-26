@@ -16,14 +16,15 @@ namespace UI
 	/*!
 	** \brief UI queue service
 	*/
+	template<class ChildT>
 	class IQueueService
-		: public Core::EventLoop::IEventLoop<IQueueService, Core::EventLoop::Flow::Continuous,
-		Core::EventLoop::Statistics::None, false>
-		, public IEventObserver<IQueueService>
+		: public Core::EventLoop::IEventLoop<IQueueService<ChildT>,
+		Core::EventLoop::Flow::Continuous, Core::EventLoop::Statistics::None, false>,
+		public IEventObserver<IQueueService<ChildT> >
 	{
 	public:
 		//! Event loop type
-		typedef Core::EventLoop::IEventLoop<IQueueService,
+		typedef typename Core::EventLoop::template IEventLoop<IQueueService<ChildT>,
 			Core::EventLoop::Flow::Continuous, // The flow policy
 			Core::EventLoop::Statistics::None, // The statistics policy
 			false>                             // Run in the main thread
@@ -32,7 +33,10 @@ namespace UI
 		//! Threading policy
 		typedef Type::ThreadingPolicy  ThreadingPolicy;
 		//! Smart pointer
-		typedef SmartPtr<IQueueService> Ptr;
+		typedef SmartPtr<IQueueService<ChildT> > Ptr;
+		//! Child type
+		typedef ChildT ChildType;
+
 		//! Window association map
 		typedef std::map<Application::GUID, std::map<IComponent::ID, Window*> >  WindowMap;
 		//! Component storage with unique identifiers to access them
@@ -49,12 +53,11 @@ namespace UI
 		//@}
 
 		//! Run on each loop turn.
-		virtual bool onLoop() = 0;
+		bool onLoop();
 
 	public:
 		//! UI tree root
 		Desktop::Ptr desktop;
-
 
 	protected:
 		//! Store windows that have been modified
