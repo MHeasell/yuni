@@ -356,27 +356,6 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	template<class U>
-	inline void
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::prepend(const U& u)
-	{
-		insert(0, u);
-	}
-
-
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	template<class U>
-	inline void
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::prepend(const U& u,
-		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
-	{
-		insert(0, Traits::CString<U>::Perform(u), size);
-	}
-
-
-
-
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class StringT>
 	inline void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assign(const StringT& str,
