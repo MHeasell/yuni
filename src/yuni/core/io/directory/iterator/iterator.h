@@ -71,7 +71,7 @@ namespace Directory
 	**		--pCounter;
 	**	}
 	**
-	** 	virtual Flow onFile(const String&, const String&, const String& name, size_t size)
+	** 	virtual Flow onFile(const String&, const String&, const String& name, uint64 size)
 	** 	{
 	** 		printSpaces();
 	** 		std::cout << "  -  " << name << " (" << size << " bytes)" << std::endl;
@@ -98,7 +98,7 @@ namespace Directory
 	** 	unsigned int pCounter;
 	** 	unsigned int pFolderCount;
 	** 	unsigned int pFileCount;
-	** 	size_t pTotalSize;
+	** 	uint64 pTotalSize;
 	** };
 	**
 	**
@@ -306,7 +306,7 @@ namespace Directory
 		** \return itAbort to abort the whole process, itSkip to skip the current folder and its sub-folders
 		*/
 		virtual Flow onFile(const String& filename, const String& parent,
-			const String& name, size_t size);
+			const String& name, uint64 size);
 
 		/*!
 		** \brief Event: It was impossible to open a folder

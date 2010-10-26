@@ -31,7 +31,7 @@ namespace IO
 
 	namespace // anonymous
 	{
-		Yuni::Core::IO::NodeType TypeOfStaticBuffer(const char* p, size_t len)
+		Yuni::Core::IO::NodeType TypeOfStaticBuffer(const char* p, unsigned int len)
 		{
 			char path[1024];
 			(void)::memcpy(path, p, len * sizeof(char));
@@ -42,7 +42,7 @@ namespace IO
 	} // anonymous namespace
 
 
-	Yuni::Core::IO::NodeType TypeOfNotZeroTerminated(const char* p, size_t len)
+	Yuni::Core::IO::NodeType TypeOfNotZeroTerminated(const char* p, unsigned int len)
 	{
 		// As this routine may be extensively used, we should make it as fast as possible
 		// Consequently we make here a tiny optimisation when the length of the path
@@ -69,7 +69,7 @@ namespace IO
 	}
 
 
-	Yuni::Core::IO::NodeType TypeOf(const char* p, size_t len)
+	Yuni::Core::IO::NodeType TypeOf(const char* p, unsigned int len)
 	{
 		if (!p || !len)
 			return Yuni::Core::IO::typeUnknown;

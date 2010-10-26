@@ -52,7 +52,7 @@ namespace Iterator
 		virtual void onEndFolder(const String& filename, const String& parent, const String& name) = 0;
 
 		virtual Flow onFile(const String& filename, const String& parent,
-			const String& name, size_t size) = 0;
+			const String& name, uint64 size) = 0;
 
 		virtual Flow onError(const String& filename) = 0;
 
@@ -126,6 +126,5 @@ namespace Iterator
 } // namespace Core
 } // namespace Private
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_IO_DIRECTORY_ITERATOR_DETACHED_THREAD_H__

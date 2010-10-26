@@ -100,16 +100,16 @@ namespace File
 	*/
 	// const char*
 	bool Load(String::Vector& out, const char* filename, const bool emptyListBefore = true,
-			const uint32 sizeLimit = sizeHardLimit);
+			const uint64 sizeLimit = sizeHardLimit);
 	bool Load(String::List& out, const char* filename, const bool emptyListBefore = true,
-			const uint32 sizeLimit = sizeHardLimit);
+			const uint64 sizeLimit = sizeHardLimit);
 	// Yuni::String
 	template<int N>
 	bool Load(String::Vector& out, const StringBase<char,N>& filename, const bool emptyListBefore = true,
-			const uint32 sizeLimit = sizeHardLimit);
+			const uint64 sizeLimit = sizeHardLimit);
 	template<int N>
 	bool Load(String::List& out, const StringBase<char,N>& filename, const bool emptyListBefore = true,
-			const uint32 sizeLimit = sizeHardLimit);
+			const uint64 sizeLimit = sizeHardLimit);
 
 
 	/*!

@@ -20,9 +20,9 @@ public:
 			//! The type of the orignal object
 			typedef String value_type;
 			//! An unsigned integral type
-			typedef size_t  size_type;
+			typedef uint64  uint64ype;
 			//! A signed integral type
-			typedef ssize_t  difference_type;
+			typedef sint64  difference_type;
 
 			enum
 			{
@@ -95,9 +95,9 @@ public:
 			//! The type of the orignal object
 			typedef String value_type;
 			//! An unsigned integral type
-			typedef size_t size_type;
+			typedef uint64 uint64ype;
 			//! A signed integral type
-			typedef ssize_t difference_type;
+			typedef sint64 difference_type;
 
 			enum
 			{
@@ -128,7 +128,7 @@ public:
 				return Private::Core::IO::Directory::IteratorDataParentName(pData);
 			}
 
-			size_t size() const
+			uint64 size() const
 			{
 				return Private::Core::IO::Directory::IteratorDataSize(pData);
 			}

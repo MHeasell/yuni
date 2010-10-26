@@ -96,14 +96,14 @@ namespace File
 
 	template<int N>
 	inline bool Load(String::Vector& out, const StringBase<char,N>& filename, const bool emptyListBefore,
-		const uint32 sizeLimit)
+		const uint64 sizeLimit)
 	{
 		return Load(out, filename.c_str(), emptyListBefore, sizeLimit);
 	}
 
 	template<int N>
 	inline bool Load(String::List& out, const StringBase<char,N>& filename, const bool emptyListBefore,
-		const uint32 sizeLimit)
+		const uint64 sizeLimit)
 	{
 		return Load(out, filename.c_str(), emptyListBefore, sizeLimit);
 	}
