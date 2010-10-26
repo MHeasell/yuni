@@ -35,12 +35,8 @@ set(YUNI_MODULE_UI                        FALSE)
 	set(YUNI_EXTERNAL_GFX_CAIROPANGO	  TRUE)
 	set(YUNI_MODULE_UI_DUMMY              TRUE)
 
-# Database
-set(YUNI_MODULE_DATABASE                  FALSE)
-	set(YUNI_MODULE_DB_PSQL               TRUE)
-
 # Algorithms
-set(YUNI_MODULE_ALGORITHMS                TRUE)
+set(YUNI_MODULE_ALGORITHMS                FALSE)
 
 
 # Tests
@@ -66,7 +62,6 @@ set(YUNI_MODULE_LIST
 	ui
 		uidummy
 		ui3d
-	db psql
 	net
 	)
 
@@ -434,10 +429,4 @@ if(YUNI_MODULE_UI)
 	endif(YUNI_MODULE_UI_DUMMY)
 endif(YUNI_MODULE_UI)
 
-if(YUNI_MODULE_DB)
-	list(APPEND YUNI_MODULE_AVAILABLE db)
-	if(YUNI_MODULE_DB_PSQL)
-		list(APPEND YUNI_MODULE_AVAILABLE psql)
-	endif(YUNI_MODULE_DB_PSQL)
-endif(YUNI_MODULE_DB)
 
