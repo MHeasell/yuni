@@ -53,13 +53,6 @@ namespace UI
 	}
 
 
-	inline void Window::updateComponentWL(const IComponent::ID& componentID) const
-	{
-		if (pApplication)
-			pApplication->updateComponentWL(componentID);
-	}
-
-
 	inline String Window::title() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
@@ -98,16 +91,6 @@ namespace UI
 		return false;
 	}
 
-
-	inline void Window::close()
-	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		if (!pClosing)
-		{
-			pClosing = true;
-			onClose();
-		}
-	}
 
 
 

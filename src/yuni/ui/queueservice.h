@@ -31,11 +31,12 @@ namespace UI
 			Type;
 
 		//! Threading policy
-		typedef Type::ThreadingPolicy  ThreadingPolicy;
+		typedef typename Type::ThreadingPolicy  ThreadingPolicy;
 		//! Smart pointer
 		typedef SmartPtr<IQueueService<ChildT> > Ptr;
 		//! Child type
 		typedef ChildT ChildType;
+		typedef IEventObserver<IQueueService<ChildT> >  EventObserverType;
 
 		//! Window association map
 		typedef std::map<Application::GUID, std::map<IComponent::ID, Window*> >  WindowMap;
@@ -49,11 +50,8 @@ namespace UI
 		//! Constructor
 		IQueueService();
 		//! Destructor
-		virtual ~IQueueService();
+		~IQueueService();
 		//@}
-
-		//! Run on each loop turn.
-		bool onLoop();
 
 	public:
 		//! UI tree root

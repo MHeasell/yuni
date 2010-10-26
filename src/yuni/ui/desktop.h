@@ -3,6 +3,7 @@
 
 # include "../yuni.h"
 # include "../core/smartptr.h"
+# include "fwd.h"
 # include "application.h"
 
 
@@ -10,9 +11,6 @@ namespace Yuni
 {
 namespace UI
 {
-
-	//! Forward declaration
-	class QueueService;
 
 
 	/*!
@@ -41,14 +39,14 @@ namespace UI
 		/*!
 		** \brief Add an application to this desktop
 		*/
-		void add(Application::Ptr& app);
+		void add(const Application::Ptr& app);
 
 		/*!
 		** \brief
 		*/
 		template<typename StringT> void remove(const StringT& id);
 		//!
-		void remove(Application::Ptr& app);
+		void remove(const Application::Ptr& app);
 		//@}
 
 		//! Update a component's local representation
@@ -64,17 +62,17 @@ namespace UI
 		//@{
 		//! Register a new application
 		//! \see add()
-		Desktop& operator += (Application::Ptr& app);
+		Desktop& operator += (const Application::Ptr& app);
 		//! Register a new application
 		//! \see add()
-		Desktop& operator << (Application::Ptr& app);
+		Desktop& operator << (const Application::Ptr& app);
 
 		//! Remove an application from its guid
 		//! \see remove()
 		template<typename StringT> Desktop& operator -= (const StringT& id);
 		//! Remove an application from its pointer
 		//! \see remove()
-		Desktop& operator -= (Application::Ptr& app);
+		Desktop& operator -= (const Application::Ptr& app);
 		//@}
 
 	private:

@@ -70,19 +70,11 @@ namespace UI
 		parentWL(newParent);
 	}
 
+
 	inline void IControl::update() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		updateComponentWL(pLocalID);
-	}
-
-
-	inline void IControl::updateComponentWL(const IComponent::ID& componentID) const
-	{
-		// If the tree is not rooted in a window / application
-		// there is no local representation to update, so give up.
-		if (pParent)
-			pParent->updateComponentWL(componentID);
 	}
 
 

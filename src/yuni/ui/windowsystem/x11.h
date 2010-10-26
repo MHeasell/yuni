@@ -1,6 +1,7 @@
 #ifndef __YUNI_UI_WINDOWSYSTEM_X11_H__
 # define __YUNI_UI_WINDOWSYSTEM_X11_H__
 
+# include "../windowsystem.h"
 # include "../queueservice.h"
 
 namespace Yuni

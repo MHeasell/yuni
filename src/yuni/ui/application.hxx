@@ -117,8 +117,8 @@ namespace UI
 
 	inline void Application::updateComponentWL(const IComponent::ID& componentID) const
 	{
-		if (pDesktop)
-			pDesktop->updateComponentWL(componentID);
+	//	if (pDesktop)
+	//		pDesktop->updateComponentWL(componentID);
 	}
 
 
