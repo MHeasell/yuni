@@ -19,6 +19,7 @@ list(APPEND SRC_UI
 	ui/queueservice.h
 	ui/queueservice.hxx
 	ui/ui.h
+	ui/fwd.h
 
 	# Window Systems
 	ui/windowsystem.h
