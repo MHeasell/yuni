@@ -11,6 +11,9 @@ namespace Yuni
 namespace UI
 {
 
+	//! Forward declaration
+	class Desktop;
+
 
 	/*!
 	** \brief Virtual application. Can contain one or several windows.
@@ -93,6 +96,8 @@ namespace UI
 		String pName;
 		//! Application windows
 		Window::Map pWindows;
+		//! Parent desktop
+		Desktop* pDesktop;
 
 	private:
 		/*!
@@ -103,6 +108,11 @@ namespace UI
 		//! Initialize all internal stuff
 		void initialize();
 
+		/*!
+		** \brief Update the given component's local representation
+		*/
+		void updateComponentWL(const IComponent::ID& componentID) const;
+
 
 	}; // class Application
 
@@ -112,6 +122,7 @@ namespace UI
 } // namespace UI
 } // namespace Yuni
 
+# include "desktop.h"
 # include "application.hxx"
 
 #endif // __YUNI_UI_APPLICATION_H__

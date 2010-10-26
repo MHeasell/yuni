@@ -115,6 +115,13 @@ namespace UI
 	}
 
 
+	inline void Application::updateComponentWL(const IComponent::ID& componentID) const
+	{
+		if (pDesktop)
+			pDesktop->updateComponentWL(componentID);
+	}
+
+
 
 } // namespace UI
 } // namespace Yuni

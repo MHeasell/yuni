@@ -42,6 +42,7 @@ namespace UI
 		// The const_cast is quite ugly but after this point, the guid _must_ not be
 		// modified
 		GenerateGUID(const_cast<GUID&>(pGUID));
+		pDesktop = nullptr;
 	}
 
 

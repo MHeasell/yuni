@@ -87,6 +87,23 @@ namespace UI
 		//@}
 
 
+		/*!
+		** \brief Ask the control to update its local representation
+		**
+		** A control will notify its representation to update itself using the latest
+		** modifications made to the control.
+		** This method should be used as follows :
+		** \code
+		** void modifyButton(Yuni::UI::Button::Ptr btn, const Yuni::String& text, bool visible)
+		** {
+		**		btn->caption = text;
+		**		btn->visible = visible;
+		**		btn->update();
+		** }
+		** \endcode
+		*/
+		void update() const;
+
 		//! Get the parent
 		IControl::Ptr parent() const;
 
@@ -125,6 +142,12 @@ namespace UI
 		//! Remove a child
 		virtual bool removeChildWL(const IControl::Ptr& child);
 
+		/*!
+		** \brief Update the given component's local representation
+		**
+		** The process will propagate the update notification to the UI root.
+		*/
+		virtual void updateComponentWL(const IComponent::ID& componentID) const;
 
 	protected:
 		/*!

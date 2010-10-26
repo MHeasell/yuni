@@ -46,7 +46,10 @@ namespace UI
 		//!
 		void remove(Application::Ptr& app);
 		//@}
-	
+
+		//! Update a component's local representation
+		void updateComponentWL(const IComponent::ID& componentID) const;
+
 		/*!
 		** \brief Quit the desktop and all its applications
 		*/
