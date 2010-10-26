@@ -13,9 +13,6 @@
 #	include <stdarg.h>
 # endif
 # include <string>
-# ifdef YUNI_HAS_LIST
-#	include <list>
-# endif
 # ifdef YUNI_HAS_VECTOR
 #	include <vector>
 # endif
@@ -28,7 +25,6 @@
 # include "traits/fill.h"
 # include "traits/vnsprintf.h"
 # include "traits/into.h"
-
 
 
 namespace Yuni
@@ -101,33 +97,23 @@ namespace Yuni
 
 		//! Smartptr
 		typedef SmartPtr<CustomStringType> Ptr;
-
-		//! A String list
-		typedef std::list<CustomStringType> List;
-		//! A string list
-		typedef std::list<typename CustomString::Ptr> ListPtr;
 		//! A String vector
 		typedef std::vector<CustomStringType> Vector;
 		//! A String vector
 		typedef std::vector<typename CustomStringType::Ptr> VectorPtr;
-
 		enum
 		{
 			//! Size for a single chunk
-			chunkSize          = AncestorType::chunkSize,
-			//! A non-zero value if the string must be zero terminated
-			zeroTerminated     = AncestorType::zeroTerminated,
-			//! A non-zero value if the string can be expanded
-			expandable         = AncestorType::expandable,
-			//! Number of bits per element
-			bitCountPerElement = sizeof(Char) * 8,
-			//! True if the string is a string adapter (only read-only operations are allowed)
-			isAdapter          = (!chunkSize && expandable && !zeroTerminated),
-
+			chunkSize  = AncestorType::chunkSize,
 			//! Invalid offset
-			npos = (Size)(-1),
+			npos       = (Size)(-1),
+			//! A non-zero value if the string must be zero terminated
+			zeroTerminated = AncestorType::zeroTerminated,
+			//! A non-zero value if the string can be expanded
+			expandable = AncestorType::expandable,
+			//! True if the string is a string adapter (only read-only operations are allowed)
+			isAdapter  = (!chunkSize && expandable && !zeroTerminated),
 		};
-
 		//! char Case
 		enum charCase
 		{
@@ -139,7 +125,6 @@ namespace Yuni
 
 		// Checking for a minimal chunk size
 		YUNI_STATIC_ASSERT(isAdapter || chunkSize > 3, CustomString_MinimalChunkSizeRequired);
-
 
 	public:
 		//! \name CString comparison
@@ -440,22 +425,6 @@ namespace Yuni
 
 		//! \see template<class U> append(const U&, const Size)
 		template<class U> void write(const U& cstr, const Size size);
-
-		/*!
-		** \brief Insert at the begining of the string a new value
-		**
-		** This is a convenient replacement for insert(0, u)
-		** \param u Any supported value
-		*/
-		template<class U> void prepend(const U& u);
-
-		/*!
-		** \brief Insert at the begining of the string a new value
-		**
-		** \param u    Any supported value
-		** \param size Size of the container
-		*/
-		template<class U> void prepend(const U& u, const Size size);
 
 		/*!
 		** \brief Append a single item (char)
