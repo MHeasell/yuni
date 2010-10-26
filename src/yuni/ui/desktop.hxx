@@ -15,6 +15,11 @@ namespace UI
 	{}
 
 
+	inline void updateComponentWL(const IComponent::ID& componentID) const
+	{
+	}
+
+
 	inline void Desktop::add(Application::Ptr& app)
 	{
 		if (!(!app))

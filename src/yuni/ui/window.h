@@ -13,6 +13,9 @@ namespace Yuni
 namespace UI
 {
 
+	//! Forward declaration
+	class Application;
+
 
 	/*!
 	** \brief Abstraction of a window for graphic rendering
@@ -116,11 +119,22 @@ namespace UI
 		//! Set the title of the window (without lock)
 		template<class StringT> void titleWL(const StringT& newTitle);
 
+		/*!
+		** \brief Update the given component's local representation
+		**
+		** When updating a component, reaching a window means we got to the top of the UI tree.
+		** The process will now propagate the update notification to the application.
+		*/
+		virtual void updateComponentWL(const IComponent::ID& componentID) const;
+
+
 	private:
 		//! Title of the window
 		String pTitle;
 		//! Is the window currently closing ?
 		bool pClosing;
+		//! Parent application
+		Application* pApplication;
 
 	}; // class Window
 
@@ -133,6 +147,7 @@ namespace UI
 } // namespace Yuni
 
 
+# include "application.h"
 # include "window.hxx"
 
 
