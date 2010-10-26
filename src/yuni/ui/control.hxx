@@ -81,7 +81,7 @@ namespace UI
 	{
 		// If the tree is not rooted in a window / application
 		// there is no local representation to update, so give up.
-		if (!pParent)
+		if (pParent)
 			pParent->updateComponentWL(componentID);
 	}
 

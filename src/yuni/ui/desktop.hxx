@@ -15,8 +15,9 @@ namespace UI
 	{}
 
 
-	inline void updateComponentWL(const IComponent::ID& componentID) const
+	inline void Desktop::updateComponentWL(const IComponent::ID& componentID) const
 	{
+		pQueueService->updateComponent(componentID);
 	}
 
 

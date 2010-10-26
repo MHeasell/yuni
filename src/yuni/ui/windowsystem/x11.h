@@ -13,11 +13,11 @@ namespace WindowSystem
 	/*!
 	** \brief X11 implementation for a window system main loop
 	*/
-	class X11: public IQueueService
+	class X11: public IQueueService<X11>
 	{
 	public:
-		//! Override for onLoop, called on each loop turn
-		bool onLoop() { return true; }
+		//! Static override for onLoop, called on each loop turn
+		bool onLoop();
 	};
 
 

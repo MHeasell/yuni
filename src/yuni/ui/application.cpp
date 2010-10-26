@@ -22,7 +22,7 @@ namespace UI
 
 	void Application::GenerateGUID(Application::GUID& guid)
 	{
-		assert(guid.size() == 0 && "The GUID can not be possibly contain something at this point");
+		assert(guid.size() == 0 && "The GUID must be empty at this point");
 
 		// FIXME : Use real GUID and not this stupid one (and the mutex must be removed too)
 		static int I = 0;

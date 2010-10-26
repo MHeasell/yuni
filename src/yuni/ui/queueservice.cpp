@@ -12,7 +12,6 @@ namespace UI
 		destroyBoundEvents();
 	}
 
-
-} // namespace Application
+} // namespace UI
 } // namespace Yuni
 

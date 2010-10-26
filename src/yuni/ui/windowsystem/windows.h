@@ -13,11 +13,11 @@ namespace WindowSystem
 	/*!
 	** \brief Microsoft Windows implementation for a window system main loop
 	*/
-	class Windows: public IQueueService
+	class Windows: public IQueueService<Windows>
 	{
 	public:
-		//! Override for onLoop, called on each loop turn
-		virtual bool onLoop() { return true;}
+		//! Static override for onLoop, called on each loop turn
+		bool onLoop();
 	};
 
 

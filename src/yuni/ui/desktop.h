@@ -11,6 +11,10 @@ namespace Yuni
 namespace UI
 {
 
+	//! Forward declaration
+	class QueueService;
+
+
 	/*!
 	** \brief Virtual desktop meant to receive one or several applications
 	*/
@@ -83,6 +87,7 @@ namespace UI
 } // namespace UI
 } // namespace Yuni
 
+# include "queueservice.h"
 # include "desktop.hxx"
 
 #endif // __YUNI_UI_DESKTOP_H__

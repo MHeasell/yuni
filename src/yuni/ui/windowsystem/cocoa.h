@@ -13,10 +13,10 @@ namespace WindowSystem
 	/*!
 	** \brief Mac OS X Cocoa implementation for a window system main loop
 	*/
-	class Cocoa: public IQueueService
+	class Cocoa: public IQueueService<Cocoa>
 	{
 	public:
-		//! Override for onLoop, called on each loop turn
+		//! Static override for onLoop, called on each loop turn
 		bool onLoop() { return true; }
 	};
 
