@@ -4,18 +4,16 @@
 # include "../yuni.h"
 # include <vector>
 # include <map>
+# include "fwd.h"
 # include "../thread/policy.h"
 # include "../core/smartptr.h"
 # include "component.h"
+
 
 namespace Yuni
 {
 namespace UI
 {
-
-	//! Forward declaration
-	class IControlContainer;
-
 
 	/*!
 	** \brief Base class for all UI controls (viewable components)
@@ -80,7 +78,6 @@ namespace UI
 		*/
 		template<class T>
 		IControl(IControl::Ptr parent, const Point2D<T>& pos, float width, float height);
-
 
 		//! Virtual destructor
 		virtual ~IControl();

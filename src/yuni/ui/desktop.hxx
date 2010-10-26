@@ -17,18 +17,18 @@ namespace UI
 
 	inline void Desktop::updateComponentWL(const IComponent::ID& componentID) const
 	{
-		pQueueService->updateComponent(componentID);
+		// pQueueService->updateComponent(componentID);
 	}
 
 
-	inline void Desktop::add(Application::Ptr& app)
+	inline void Desktop::add(const Application::Ptr& app)
 	{
 		if (!(!app))
 			pApps[app->guid()] = app;
 	}
 
 
-	inline Desktop& Desktop::operator += (Application::Ptr& app)
+	inline Desktop& Desktop::operator += (const Application::Ptr& app)
 	{
 		if (!(!app))
 			pApps[app->guid()] = app;
@@ -36,7 +36,7 @@ namespace UI
 	}
 
 
-	inline Desktop& Desktop::operator << (Application::Ptr& app)
+	inline Desktop& Desktop::operator << (const Application::Ptr& app)
 	{
 		if (!(!app))
 			pApps[app->guid()] = app;
@@ -54,7 +54,7 @@ namespace UI
 	}
 
 
-	inline void Desktop::remove(Application::Ptr& app)
+	inline void Desktop::remove(const Application::Ptr& app)
 	{
 		if (!(!app))
 			pApps.erase(app->guid());
@@ -72,7 +72,7 @@ namespace UI
 	}
 
 
-	inline Desktop& Desktop::operator -= (Application::Ptr& app)
+	inline Desktop& Desktop::operator -= (const Application::Ptr& app)
 	{
 		if (!(!app))
 			pApps.erase(app->guid());

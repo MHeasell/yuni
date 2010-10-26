@@ -113,7 +113,6 @@ namespace UI
 		*/
 		void updateComponentWL(const IComponent::ID& componentID) const;
 
-
 	}; // class Application
 
 

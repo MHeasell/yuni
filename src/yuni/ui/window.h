@@ -5,6 +5,7 @@
 # include "../core/string.h"
 # include "../core/event/event.h"
 # include "../thread/policy.h"
+# include "fwd.h"
 # include "controlcontainer.h"
 
 
@@ -12,10 +13,6 @@ namespace Yuni
 {
 namespace UI
 {
-
-	//! Forward declaration
-	class Application;
-
 
 	/*!
 	** \brief Abstraction of a window for graphic rendering

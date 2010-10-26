@@ -16,7 +16,8 @@ list(APPEND SRC_UI
 	ui/controlcontainer.h ui/controlcontainer.hxx ui/controlcontainer.cpp
 	ui/desktop.h ui/desktop.hxx ui/desktop.cpp
 	ui/id.h ui/id.cpp
-	ui/queueservice.h ui/queueservice.hxx ui/queueservice.cpp
+	ui/queueservice.h
+	ui/queueservice.hxx
 	ui/ui.h
 
 	# Window Systems
