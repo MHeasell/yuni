@@ -13,8 +13,8 @@ namespace Core
 namespace IO
 {
 
-	Yuni::Core::IO::NodeType TypeOf(const char* p, size_t length);
-	Yuni::Core::IO::NodeType TypeOfNotZeroTerminated(const char* p, size_t length);
+	Yuni::Core::IO::NodeType TypeOf(const char* p, unsigned int length);
+	Yuni::Core::IO::NodeType TypeOfNotZeroTerminated(const char* p, unsigned int length);
 
 } // namespace IO
 } // namespace Core
@@ -572,17 +572,20 @@ namespace IO
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, TypeOF_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  TypeOF_InvalidTypeForBufferSize);
 
-		if (Traits::CString<StringT>::zeroTerminated)
+		if (Traits::CString<StringT>::zeroTerminated) // static check
 		{
 			return Yuni::Private::Core::IO::TypeOf(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename));
+				Traits::CString<StringT>::Perform(filename),
+				Traits::Length<StringT, unsigned int>::Value(filename));
 		}
 		else
 		{
 			return Yuni::Private::Core::IO::TypeOf(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename));
+				Traits::CString<StringT>::Perform(filename),
+				Traits::Length<StringT, unsigned int>::Value(filename));
 		}
 	}
+
 
 
 

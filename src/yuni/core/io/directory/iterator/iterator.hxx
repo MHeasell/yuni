@@ -234,7 +234,7 @@ namespace Directory
 
 	template<bool DetachedT>
 	inline Flow
-	IIterator<DetachedT>::onFile(const String&, const String&, const String&, size_t)
+	IIterator<DetachedT>::onFile(const String&, const String&, const String&, uint64)
 	{
 		// Do nothing
 		return flowContinue;

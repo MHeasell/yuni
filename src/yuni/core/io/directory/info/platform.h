@@ -20,7 +20,7 @@ namespace Directory
 
 
 
-	IteratorData* IteratorDataCreate(const char* folder, size_t length, unsigned int flags);
+	IteratorData* IteratorDataCreate(const char* folder, uint64 length, unsigned int flags);
 
 	IteratorData* IteratorDataCopy(const IteratorData*);
 
@@ -36,7 +36,7 @@ namespace Directory
 
 	const String& IteratorDataName(const IteratorData*);
 
-	size_t IteratorDataSize(const IteratorData*);
+	uint64 IteratorDataSize(const IteratorData*);
 
 	bool IteratorDataIsFolder(const IteratorData*);
 

@@ -143,8 +143,6 @@ namespace Directory
 
 
 
-
-
 namespace Yuni
 {
 namespace Core
@@ -193,6 +191,5 @@ namespace Current
 } // namespace IO
 } // namespace Core
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_IO_DIRECTORY_H__

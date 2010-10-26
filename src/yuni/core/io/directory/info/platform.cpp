@@ -185,7 +185,7 @@ namespace Directory
 					if (0 != (flags & Yuni::Core::IO::Directory::Info::itFile))
 					{
 						isFolder = false;
-						size = (size_t) data.size;
+						size = (uint64) data.size;
 						return true;
 					}
 				}
@@ -203,7 +203,7 @@ namespace Directory
 		String name;
 		//! The complete filename of the current node
 		String filename;
-		size_t size;
+		uint64 size;
 		bool isFolder;
 
 
@@ -245,7 +245,7 @@ namespace Directory
 
 		}
 
-		void push(const char* const str, size_t length)
+		void push(const char* const str, uint64 length)
 		{
 			dirinfo.push_front();
 			dirinfo.front().parent.assign(str, length);
@@ -312,7 +312,7 @@ namespace Directory
 
 
 
-	IteratorData* IteratorDataCreate(const char* folder, size_t length, unsigned int flags)
+	IteratorData* IteratorDataCreate(const char* folder, uint64 length, unsigned int flags)
 	{
 		if (length)
 		{
@@ -367,7 +367,7 @@ namespace Directory
 	}
 
 
-	size_t IteratorDataSize(const IteratorData* data)
+	uint64 IteratorDataSize(const IteratorData* data)
 	{
 		assert(data != NULL);
 		return data->dirinfo.front().size;

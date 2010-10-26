@@ -18,7 +18,7 @@ namespace File
 	{
 
 		template<class T>
-		bool TmplLoadFromFile(T& out, const char* filename, const bool emptyListBefore, const uint32 sizeLimit)
+		bool TmplLoadFromFile(T& out, const char* filename, const bool emptyListBefore, const uint64 sizeLimit)
 		{
 			if (emptyListBefore)
 				out.clear();
@@ -27,7 +27,7 @@ namespace File
 				Core::IO::File::Stream file(filename);
 				if (file.opened())
 				{
-					size_t totalSize = 0;
+					uint64 totalSize = 0;
 					String line;
 					line.reserve(4096);
 					while (file.gets(line.data(), 4096))
@@ -50,12 +50,12 @@ namespace File
 
 
 
-	bool Load(String::List& out, const char* filename, const bool emptyListBefore, const uint32 sizeLimit)
+	bool Load(String::List& out, const char* filename, const bool emptyListBefore, const uint64 sizeLimit)
 	{
 		return TmplLoadFromFile< String::List >(out, filename, emptyListBefore, sizeLimit);
 	}
 
-	bool Load(String::Vector& out, const char* filename, const bool emptyListBefore, const uint32 sizeLimit)
+	bool Load(String::Vector& out, const char* filename, const bool emptyListBefore, const uint64 sizeLimit)
 	{
 		return TmplLoadFromFile< String::Vector >(out, filename, emptyListBefore, sizeLimit);
 	}
