@@ -31,7 +31,7 @@ namespace X11
 		typedef IWindow::ThreadingPolicy ThreadingPolicy;
 
 	public:
-		CairoWindow(Yuni::UI::Window* source, unsigned int bitDepth, bool fullScreen);
+		CairoWindow(const Yuni::UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen);
 		virtual ~CairoWindow();
 
 		virtual bool initialize();

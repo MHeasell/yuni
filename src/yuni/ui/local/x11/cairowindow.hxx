@@ -10,7 +10,7 @@ namespace Local
 namespace X11
 {
 
-	inline CairoWindow::CairoWindow(Yuni::UI::Window* source, unsigned int bitDepth,
+	inline CairoWindow::CairoWindow(const Yuni::UI::Window::Ptr& source, unsigned int bitDepth,
 		bool fullScreen)
 		: IWindow(source, bitDepth, fullScreen)
 	{}

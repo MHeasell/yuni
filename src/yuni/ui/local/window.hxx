@@ -12,7 +12,7 @@ namespace Local
 {
 
 
-	inline IWindow::IWindow(Yuni::UI::Window* source, unsigned int bitDepth, bool fullScreen)
+	inline IWindow::IWindow(const Yuni::UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
 		: pUIWnd(source), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false)
 	{
 	}

@@ -10,7 +10,7 @@ namespace Local
 namespace Windows
 {
 
-	inline CairoWindow::CairoWindow(Yuni::UI::Window* source, unsigned int bitDepth, bool fullScreen)
+	inline CairoWindow::CairoWindow(const Yuni::UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
 		: IWinGDIWindow(source, bitDepth, fullScreen)
 	{
 		pWindowClassName = "Cairo";

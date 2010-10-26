@@ -29,8 +29,8 @@ namespace Local
 		typedef IWindow::ThreadingPolicy ThreadingPolicy;
 
 	public:
-		IWinGDIWindow(Yuni::UI::Window* source, unsigned int bitDepth, bool fullScreen)
-			:IWindow(source, bitDepth, fullScreen)
+		IWinGDIWindow(const Yuni::UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
+			: IWindow(source, bitDepth, fullScreen)
 		{}
 		virtual ~IWinGDIWindow() {}
 
