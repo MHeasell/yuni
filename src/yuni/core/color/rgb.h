@@ -4,6 +4,10 @@
 # include "../../yuni.h"
 # include "fwd.h"
 
+# ifdef RGB
+#	undef RGB
+# endif // RGB
+
 
 namespace Yuni
 {
