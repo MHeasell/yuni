@@ -41,7 +41,7 @@ struct Model
 		/*!
 		** \brief Get the current offset in the string
 		*/
-		Size offset() const {return pString.size();}
+		Size offset() const {return StringType::npos;}
 
 		/*!
 		** \brief Get a reference to the original string
@@ -54,7 +54,7 @@ struct Model
 		** This method should not be directly used and is only useful
 		** for other external iterators
 		*/
-		Size rawOffset() const {return pString.size();}
+		Size rawOffset() const {return StringType::npos;}
 
 	protected:
 		NullIterator(const StringType& s)
@@ -82,9 +82,9 @@ struct Model
 		}
 
 		template<class ModelT>
-		bool equals(const ModelT& model)
+		static bool equals(const ModelT& model)
 		{
-			return (pString.size() == model.rawOffset());
+			return (StringType::npos == model.rawOffset());
 		}
 
 		template<class ModelT>
@@ -131,7 +131,11 @@ struct Model
 		/*!
 		** \brief Get the current offset in the string
 		*/
-		Size offset() const {return (pOffset >= pString.size()) ? (pString.size() - pChar.size()) : (pOffset - pChar.size());}
+		Size offset() const
+		{
+			return (pOffset >= pString.size())
+				? (pString.size() - pChar.size())
+				: (pOffset - pChar.size());}
 
 		/*!
 		** \brief Get a reference to the original string
@@ -203,7 +207,17 @@ struct Model
 			return pChar;
 		}
 
+		const UTF8::Char& operator * () const
+		{
+			return pChar;
+		}
+
 		UTF8::Char* operator -> ()
+		{
+			return &pChar;
+		}
+
+		const UTF8::Char* operator -> () const
 		{
 			return &pChar;
 		}
@@ -285,7 +299,8 @@ struct Model
 
 		void forward()
 		{
-			++pOffset;
+			if (pOffset != StringType::npos && ++pOffset >= pString.size())
+				pOffset = StringType::npos;
 		}
 
 		void forward(difference_type n)
@@ -313,11 +328,25 @@ struct Model
 
 		char& operator * ()
 		{
+			//assert(pOffset < pString.size());
+			return pString[pOffset];
+		}
+
+		const char& operator * () const
+		{
+			//assert(pOffset < pString.size());
 			return pString[pOffset];
 		}
 
 		char* operator -> ()
 		{
+			//assert(pOffset < pString.size());
+			return &(pString[pOffset]);
+		}
+
+		const char* operator -> () const
+		{
+			//assert(pOffset < pString.size());
 			return &(pString[pOffset]);
 		}
 
