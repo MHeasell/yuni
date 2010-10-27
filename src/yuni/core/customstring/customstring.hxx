@@ -211,42 +211,31 @@ namespace Yuni
 		template<class StringT, class IteratorT, class IteratorT2, class SeparatorT>
 		static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end, const SeparatorT& separator)
 		{
-			bool first = true;
-			for (IteratorT i = begin; i != end; ++i)
+			if (begin != end)
 			{
-				if (!first)
-					s << separator;
-				else
-					first = false;
-				s << *i;
-			}
-		}
-	};
-
-	template<>
-	struct AppendIterator<char>
-	{
-		template<class StringT, class IteratorT, class IteratorT2>
-		static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end)
-		{
-			s.append((begin.string().c_str() + begin.offset()), end.distance(begin));
-		}
-
-		template<class StringT, class IteratorT, class IteratorT2, class SeparatorT>
-		static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end, const SeparatorT& separator)
-		{
-			bool first = true;
-			for (IteratorT i = begin; i != end; ++i)
-			{
-				if (!first)
-					s << separator;
-				else
-					first = false;
-				s << *i;
+				s << *begin;
+				IteratorT i = begin;
+				++i;
+				for (; i != end; ++i)
+					s << separator << *i;
 			}
 		}
 
-	};
+		template<class StringT, class IteratorT, class IteratorT2, class SeparatorT, class EnclosureT>
+		static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end, const SeparatorT& separator,
+			const EnclosureT& enclosure)
+		{
+			if (begin != end)
+			{
+				s << enclosure << *begin << enclosure;
+				IteratorT i = begin;
+				++i;
+				for (; i != end; ++i)
+					s << separator << enclosure << *i << enclosure;
+			}
+		}
+
+	}; // class AppendIterator
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
@@ -273,6 +262,17 @@ namespace Yuni
 		AppendIterator<HeldType>::Perform(*this, begin, end, separator);
 	}
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT, class EnclosureT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assign(const IIterator<ModelT,ConstT>& begin,
+		const IIterator<ModelT2,ConstT2>& end, const StringT& separator, const EnclosureT& enclosure)
+	{
+		YUNI_STATIC_ASSERT(!isAdapter, CustomString_Adapter_ReadOnly);
+		typedef typename IIterator<ModelT,ConstT>::value_type  HeldType;
+		clear();
+		AppendIterator<HeldType>::Perform(*this, begin, end, separator, enclosure);
+	}
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class ModelT, bool ConstT, class ModelT2, bool ConstT2>
@@ -292,6 +292,16 @@ namespace Yuni
 	{
 		typedef typename IIterator<ModelT,ConstT>::value_type  HeldType;
 		AppendIterator<HeldType>::Perform(*this, begin, end, separator);
+	}
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT, class EnclosureT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::append(const IIterator<ModelT,ConstT>& begin,
+		const IIterator<ModelT2,ConstT2>& end, const StringT& separator, const EnclosureT& enclosure)
+	{
+		typedef typename IIterator<ModelT,ConstT>::value_type  HeldType;
+		AppendIterator<HeldType>::Perform(*this, begin, end, separator, enclosure);
 	}
 
 
@@ -1446,7 +1456,7 @@ namespace Yuni
 			{
 				// Actually we have to erase a part of the cstr
 				(void)::memmove(AncestorType::data + sizeof(Char) * (offset),
-								AncestorType::data + sizeof(Char) * (offset + len), sizeof(Char) * (AncestorType::size - offset));
+					AncestorType::data + sizeof(Char) * (offset + len), sizeof(Char) * (AncestorType::size - offset));
 				// Reducing the cstr's size
 				AncestorType::size -= len;
 			}
@@ -1837,7 +1847,7 @@ namespace Yuni
 		{
 			out.reset();
 			if (InvalidateOffsetIfErrorT)
-				offset = AncestorType::size;
+				offset = npos;
 			return UTF8::errOutOfBound;
 		}
 

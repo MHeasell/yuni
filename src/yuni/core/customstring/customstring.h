@@ -8,7 +8,7 @@
 # include "../traits/length.h"
 # include "../smartptr.h"
 
-# include <stdio.h>
+# include <cstdio>
 # ifdef YUNI_HAS_STDARG_H
 #	include <stdarg.h>
 # endif
@@ -326,7 +326,7 @@ namespace Yuni
 		void assign(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end);
 
 		/*!
-		** \brief Assign to thestring all items within
+		** \brief Assign to the string all items within
 		**
 		** The type held by the iterator can be anything as long as the type can
 		** be converted by the string (see specializations in the namespace
@@ -352,6 +352,34 @@ namespace Yuni
 		void assign(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end,
 			const StringT& separator);
 
+		/*!
+		** \brief Assign to thestring all items within
+		**
+		** The type held by the iterator can be anything as long as the type can
+		** be converted by the string (see specializations in the namespace
+		** `Yuni::Extension::CustomString`).
+		**
+		** \code
+		** String s = "string: こんにちは";
+		** String::const_utf8iterator a = s.utf8begin() + 9;
+		** String::const_utf8iterator a = s.utf8begin() + 11;
+		** String sub1(a, b);
+		** std::cout << sub1 << std::endl; // んに
+		**
+		** String sub2;
+		** sub2.append(a, b, ", ");
+		** std::cout << sub2 << std::endl; // ん, に
+		** \endcode
+		**
+		** \param begin An iterator pointing to the begining of a sequence
+		** \param end  An iterator pointing to the end of a sequence
+		** \param separator The string separator to use between each item
+		** \param enclosure The enclosure string
+		*/
+		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT, class EnclosureT>
+		void assign(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end,
+			const StringT& separator, const EnclosureT& enclosure);
+
 
 		/*!
 		** \brief Append to the end of the string a new value
@@ -363,7 +391,7 @@ namespace Yuni
 		/*!
 		** \brief Append to the end of the string all items within
 		**
-		** The type held by the iterator can be anything as long as the type can
+		** The type held by the iterator can be anything as long as it can
 		** be converted by the string (see specializations in the namespace
 		** Yuni::Extension::CustomString).
 		**
@@ -377,7 +405,7 @@ namespace Yuni
 		/*!
 		** \brief Append to the end of the string all items within
 		**
-		** The type held by the iterator can be anything as long as the type can
+		** The type held by the iterator can be anything as long as it can
 		** be converted by the string (see specializations in the namespace
 		** Yuni::Extension::CustomString).
 		**
@@ -404,6 +432,36 @@ namespace Yuni
 			const StringT& separator);
 
 		/*!
+		** \brief Append to the end of the string all items within a range
+		**
+		** The type held by the iterator can be anything as long as it can
+		** be converted by the string (see specializations in the namespace
+		** Yuni::Extension::CustomString).
+		**
+		** \code
+		** String s = "string: こんにちは";
+		** String::const_utf8iterator a = s.utf8begin() + 9;
+		** String::const_utf8iterator a = s.utf8begin() + 11;
+		** String sub1(a, b);
+		** std::cout << sub1 << std::endl; // んに
+		**
+		** String sub2;
+		** sub2.append(a, b, ", ", '"');
+		** std::cout << sub2 << std::endl; // "ん", "に"
+		** \endcode
+		**
+		** \see namespace Yuni::Extension::CustomString
+		**
+		** \param begin     An iterator pointing to the begining of a sequence
+		** \param end       An iterator pointing to the end of a sequence
+		** \param separator The string separator to use between each item
+		** \param enclosure The enclosure string
+		*/
+		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT, class EnclosureT>
+		void append(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end,
+			const StringT& separator, const EnclosureT& enclosure);
+
+		/*!
 		** \brief Append to the end of the string a new value
 		**
 		** \param rhs  Any supported value
@@ -423,6 +481,8 @@ namespace Yuni
 		void append(const StringT& s, const Size size, const Size offset);
 
 
+		// Equivalent to append, provided for compatibility issues with other
+		// Yuni containers
 		//! \see template<class U> append(const U&, const Size)
 		template<class U> void write(const U& cstr, const Size size);
 
