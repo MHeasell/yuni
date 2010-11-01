@@ -543,6 +543,14 @@ namespace Yuni
 		*/
 		template<class StringT> bool insert(const Size offset, const StringT& u, const Size size);
 
+		/*!
+		** \brief Insert any arbitrary string at a given offset provided by an iterator
+		**
+		** If the offset is greater than the size of the string, the value
+		** will be merely appended to the string.
+		*/
+		template<class ModelT, bool ConstT, class StringT>
+		void insert(const IIterator<ModelT,ConstT>& it, const StringT& string);
 
 		/*!
 		** \brief Insert a raw C-String at the begining of in the string
@@ -1132,6 +1140,15 @@ namespace Yuni
 		** \param len The length (in number of items) to erase
 		*/
 		void erase(const Size offset, const Size len);
+
+		/*!
+		** \brief Erase a part of the string
+		**
+		** \param offset The offset (zero-based) of the first item to erase
+		** \param len The length (in number of items) to erase
+		*/
+		template<class ModelT, bool ConstT>
+		void erase(const IIterator<ModelT,ConstT>& offset, const Size len);
 
 		/*!
 		** \brief Replace all occurences of a string by another one
