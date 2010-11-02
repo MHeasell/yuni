@@ -30,6 +30,8 @@ namespace UI
 		//! Map from a unique ID
 		typedef std::map<GUID, Application::Ptr> Map;
 
+	public:
+		static const GUID InvalidGUID;
 
 	public:
 		//! \name Constructor & Destructor
