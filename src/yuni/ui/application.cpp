@@ -6,6 +6,11 @@ namespace Yuni
 {
 namespace UI
 {
+
+	// An empty string represents an invalid GUID
+	const Application::GUID Application::InvalidGUID = "";
+
+
 	namespace // Anonymous
 	{
 

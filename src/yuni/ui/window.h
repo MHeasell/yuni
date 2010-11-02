@@ -130,8 +130,7 @@ namespace UI
 		String pTitle;
 		//! Is the window currently closing ?
 		bool pClosing;
-		//! Parent application
-		Application* pApplication;
+
 
 	}; // class Window
 

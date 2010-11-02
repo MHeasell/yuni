@@ -54,6 +54,22 @@ namespace UI
 		//@}
 
 	public:
+		//! "Show window" event
+		Event<void (const IComponent::ID&, const Window::Ptr&)> OnShowWindow;
+		//! "Hide window" event
+		Event<void (const IComponent::ID&)> OnHideWindow;
+		//! "Close window" event
+		Event<void (const IComponent::ID&)> OnCloseWindow;
+
+		//! "Show component" event
+		Event<void (const IComponent::ID&, const IComponent::Ptr&)> OnShowComponent;
+		//! "Hide component" event
+		Event<void (const IComponent::ID&)> OnHideComponent;
+		//! "Update component" event
+		Event<void (const IComponent::ID&)> OnUpdateComponent;
+
+
+	public:
 		//! UI tree root
 		Desktop::Ptr desktop;
 
