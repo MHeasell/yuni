@@ -207,22 +207,37 @@ namespace Bit
 
 
 	template<bool ValueT>
-	unsigned int Array::find(unsigned int offset) const
+	unsigned int Array::findN(unsigned int count, unsigned int offset) const
 	{
-		for (unsigned int i = (offset >> 3); i < pBuffer.size(); ++i)
+		while (npos != (offset = find<ValueT>(offset)))
 		{
-			if ((unsigned char)(pBuffer[i]) != (ValueT ? 0 : 0xFF))
+			if (offset + count > pCount)
+				return npos;
+
+			bool ok = true;
+
+			// Checking if the block is large enough for our needs
+			// The first block is already valid
+			for (unsigned int j = 1; j < count; ++j)
 			{
-				if (i < offset)
-					continue;
-				const unsigned char c = pBuffer[i];
-				unsigned int result = 0;
-				while ((bool) (YUNI_BIT_GET(&c, result)) != ValueT)
-					++result;
-				return result + (i << 3);
+				if (ValueT != get(offset + j))
+				{
+					ok = false;
+					break;
+				}
 			}
+			if (ok)
+				return offset;
+			++offset;
 		}
 		return npos;
+	}
+
+
+	template<bool ValueT>
+	inline unsigned int Array::find(unsigned int offset) const
+	{
+		return ValueT ? findFirstSet(offset) : findFirstUnset(offset);
 	}
 
 

@@ -4,6 +4,7 @@
 # include "../../yuni.h"
 # include "../customstring.h"
 # include "bit.h"
+# include <iostream>
 
 
 namespace Yuni
@@ -177,6 +178,16 @@ namespace Bit
 		** \tparam ValueT True to find the first bit set, false for the first unset
 		*/
 		template<bool ValueT> unsigned int find(unsigned int offset = 0) const;
+
+		/*!
+		** \brief Find the first N bit set or unset from a given offset
+		**
+		** \param count  The number of consecutive bits
+		** \param offset The offset where to start from
+		** \return The bit index. npos if not found
+		** \tparam ValueT True to find the first bit set, false for the first unset
+		*/
+		template<bool ValueT> unsigned int findN(unsigned int count, unsigned int offset = 0) const;
 		//@}
 
 		//! \name Memory management
@@ -233,8 +244,9 @@ namespace Bit
 
 
 	private:
-		template<bool OnOff>
-		unsigned int internalFind(unsigned int offset) const;
+		unsigned int findFirstSet(unsigned int offset) const;
+		unsigned int findFirstUnset(unsigned int offset) const;
+
 	private:
 		//! Buffer Type
 		typedef CustomString<20, true, false> BufferType;
