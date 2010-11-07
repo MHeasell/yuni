@@ -59,7 +59,7 @@ else()
 		# Search in the source tree (if we have a trunk-like tree).
 		"${__Yuni_CurrentFolder}/../../src/build/release/bin/"
 		"${__Yuni_CurrentFolder}/../../src/build/debug/bin/"
-		"$ENV{YuniPaths}")
+		"$ENV{YUNI_PATH}")
 
 	find_program(__Yuni_Config NAMES yuni-config yuni-config.exe PATHS ${__Yuni_ProgramSearchPath})
 
