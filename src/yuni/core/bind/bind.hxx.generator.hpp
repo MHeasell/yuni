@@ -34,6 +34,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<<%=tmpl[0]%>>
+	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<<%=tmpl[0]%>>
@@ -48,6 +56,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (<%=generator.list(i)%>)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<<%=tmpl[0]%>>
+	inline void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (<%=generator.list(i)%>)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<<%=tmpl[0]%>>
@@ -303,6 +324,14 @@ namespace Yuni
 	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>& Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::operator = (R (*pointer)(<%=generator.list(i)%>))
 	{
 		bind(pointer);
+		return *this;
+	}
+
+
+	template<<%=tmpl[0]%>>
+	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>& Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
 		return *this;
 	}
 

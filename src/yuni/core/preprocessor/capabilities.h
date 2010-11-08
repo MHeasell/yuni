@@ -270,8 +270,13 @@
 #	define YUNI_LIB_EXPORT  __declspec(dllexport)
 #	define YUNI_LIB_IMPORT  __declspec(dllimport)
 # else
-#	define YUNI_LIB_EXPORT
-#	define YUNI_LIB_IMPORT
+#	ifdef YUNI_OS_MACOS
+#		define YUNI_LIB_EXPORT __attribute__((visibility("default")))
+#		define YUNI_LIB_IMPORT
+#	else
+#		define YUNI_LIB_EXPORT
+#		define YUNI_LIB_IMPORT
+#	endif
 # endif
 
 

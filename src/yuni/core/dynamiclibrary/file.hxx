@@ -1,29 +1,16 @@
 #ifndef __YUNI_CORE_DYNAMICLIBRARY_FILE_HXX__
 # define __YUNI_CORE_DYNAMICLIBRARY_FILE_HXX__
 
-
-
 namespace Yuni
 {
 namespace DynamicLibrary
 {
 
 
-
-
-	inline File::File(const char* filename, const Relocation r,
-			const Visibility v)
+	inline File::File(const String& filename, const Relocation r, const Visibility v)
 		:pHandle(NullHandle)
 	{
-		(void)load(filename, r, v);
-	}
-
-
-	inline File::File(const String& filename, const Relocation r,
-			const Visibility v)
-		:pHandle(NullHandle)
-	{
-		(void)load(filename.c_str(), r, v);
+		(void)loadFromFile(filename.c_str(), r, v);
 	}
 
 
@@ -54,29 +41,18 @@ namespace DynamicLibrary
 	}
 
 
-	inline bool File::hasSymbol(const char* name) const
-	{
-		return (name && NullHandle != pHandle) && NULL != wrapperDlSym(pHandle, name);
-	}
-
-
-	inline Symbol
-	File::resolve(const String& name) const
+	inline Symbol File::resolve(const String& name) const
 	{
 		return NullHandle != pHandle ? wrapperDlSym(pHandle, name.c_str()) : NULL;
 	}
 
-	inline Symbol
-	File::resolve(const char* name) const
-	{
-		return (name && NullHandle != pHandle) ? wrapperDlSym(pHandle, name) : NULL;
-	}
 
 
 	inline bool File::loaded() const
 	{
 		return (pHandle != NullHandle);
 	}
+
 
 	inline const String& File::filename() const
 	{
@@ -89,14 +65,8 @@ namespace DynamicLibrary
 		return pHandle;
 	}
 
-	inline Symbol
-	File::operator [] (const char* name) const
-	{
-		return (name && NullHandle != pHandle) ? wrapperDlSym(pHandle, name) : NULL;
-	}
 
-	inline Symbol
-	File::operator [] (const String& name) const
+	inline Symbol File::operator [] (const String& name) const
 	{
 		return (NullHandle != pHandle) ? wrapperDlSym(pHandle, name.c_str()) : NULL;
 	}

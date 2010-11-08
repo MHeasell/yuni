@@ -53,58 +53,75 @@ namespace DynamicLibrary
 
 
 
-	namespace /* Anonymous namespace */
+	namespace // Anonymous namespace
 	{
 		/*!
-		** \brief Try to find a file from a list of paths, a filename and a prefix
+		** \brief Try to find a file from a single path, a filename and a prefix
 		**
-		** \internal The template parameter is only here to preserve compile-time type
-		**  informations (it prevents against recomputing the length of the string
-		**  or to allocate data if using a String). The class String has special
-		**  template specializations for this kind of type (char[N])
+		** \param path List of paths where to look for the library
+		** \param[out] s A temporary string, where to write the absolute filename
+		** \param prefix The prefix to use for the filename
+		** \return True if the filename in `s` exists and should be loaded, False otherwise
+		**/
+		template<class StringT1, class StringT2, class StringT3>
+		inline bool FindLibraryFile(StringT1& out, const StringT2& path, const String& filename, const StringT3& prefix)
+		{
+			# define TEST_THEN_LOAD(EXT) \
+				out.clear(); \
+				if (!path.empty()) \
+					out << path << Core::IO::Separator; \
+				out << prefix << filename << EXT; \
+				std::cout << "-- checks for " << out << std::endl; \
+				if (Core::IO::File::Exists(out)) \
+					return true
+
+			# ifdef YUNI_OS_DARWIN
+			TEST_THEN_LOAD(".dylib");
+			TEST_THEN_LOAD(".bundle");
+			# endif
+
+			# ifdef YUNI_OS_AIX
+			TEST_THEN_LOAD(".a");
+			# endif
+			# ifdef YUNI_OS_HPUX
+			TEST_THEN_LOAD(".sl");
+			# endif
+
+			# ifdef YUNI_OS_WINDOWS
+			TEST_THEN_LOAD(".dll");
+			# else
+			TEST_THEN_LOAD(".so");
+			# endif
+
+			return false;
+			# undef TEST_THEN_LOAD
+		}
+
+
+		/*!
+		** \brief Try to find a file from a list of paths, a filename and a prefix
 		**
 		** \param searchPaths List of paths where to look for the library
 		** \param[out] s A temporary string, where to write the absolute filename
 		** \param prefix The prefix to use for the filename
 		** \return True if the filename in `s` exists and should be loaded, False otherwise
 		**/
-		template<typename P>
-		inline bool FindExistingLibrary(const String::Vector& searchPaths, String& s, const String& filename, P prefix)
+		bool FindLibrary(String& out, const String::Vector& searchPaths, const String& filename)
 		{
-			# define TEST_THEN_LOAD(EXT) \
-				s.clear(); \
-				s << (*i) << Core::IO::Separator << prefix << filename << EXT; \
-				if (Core::IO::File::Exists(s)) \
-					return true
-
 			const String::Vector::const_iterator end = searchPaths.end();
 			for (String::Vector::const_iterator i = searchPaths.begin(); i != end; ++i)
 			{
-				# ifdef YUNI_OS_DARWIN
-				TEST_THEN_LOAD(".dylib");
-				TEST_THEN_LOAD(".bundle");
-				# endif
-
-				# ifdef YUNI_OS_AIX
-				TEST_THEN_LOAD(".a");
-				# endif
-				# ifdef YUNI_OS_HPUX
-				TEST_THEN_LOAD(".sl");
-				# endif
-
-				# ifdef YUNI_OS_WINDOWS
-				TEST_THEN_LOAD(".dll");
-				# else
-				TEST_THEN_LOAD(".so");
-				# endif
+				if (FindLibraryFile(out, *i, filename, "lib") || FindLibraryFile(out, *i, filename, ""))
+					return true;
 			}
 			return false;
-			# undef TEST_THEN_LOAD
 		}
+
 	} // Anonymous namespace
 
 
-	bool File::load(const String& filename, const File::Relocation r, const File::Visibility v)
+
+	bool File::loadFromFile(const String& filename, const File::Relocation r, const File::Visibility v)
 	{
 		// No filename
 		if (!filename.empty())
@@ -115,19 +132,13 @@ namespace DynamicLibrary
 
 			// A temporary string, where to write the absolute filename
 			String s;
-			// Avoid multiple memory allocations
-			s.reserve(FILENAME_MAX);
+			s.reserve(512);
 
 			// Search paths
+			// TODO : find a far more efficient way for doing this
 			String::Vector searchPaths;
-
-			// On the most OS, libraries have the prefix `lib`
-			# ifndef YUNI_OS_WINDOWS
-			if (FindExistingLibrary(searchPaths, s, filename, "lib"))
-				return loadFromRawFilename(s.c_str(), r, v);
-			# endif
-			// But sometimes not
-			if (FindExistingLibrary(searchPaths, s, filename, ""))
+			searchPaths.push_back("");
+			if (FindLibrary(s, searchPaths, filename))
 				return loadFromRawFilename(s.c_str(), r, v);
 		}
 		// Make sure the library has been unloaded
@@ -166,12 +177,14 @@ namespace DynamicLibrary
 		if (filename)
 		{
 			// Loading
+			std::cout << "try " << filename << "\n";
 			pHandle = YUNI_DYNLIB_DLOPEN(filename);
 			if (NullHandle != pHandle)
 			{
 				pFilename = filename;
 				return true;
 			}
+			std::cout << "FAILED\n";
 		}
 		return false;
 	}
@@ -179,9 +192,7 @@ namespace DynamicLibrary
 	# else
 
 	// Specific implementation for the Unix platforms
-	bool File::loadFromRawFilename(const char* filename,
-		const File::Relocation r,
-		const File::Visibility v)
+	bool File::loadFromRawFilename(const char* filename, const File::Relocation r, const File::Visibility v)
 	{
 		// Unload the library if already loaded
 		unload();
@@ -204,8 +215,6 @@ namespace DynamicLibrary
 	}
 
 	# endif
-
-
 
 
 
