@@ -46,9 +46,11 @@ namespace Bit
 	public:
 		//! Size
 		typedef unsigned int Size;
-
+		//! Buffer Type
+		typedef CustomString<20, true, false> BufferType;
 		enum
 		{
+			//! Invalide offset
 			npos = (unsigned int) (-1),
 		};
 	public:
@@ -248,8 +250,6 @@ namespace Bit
 		unsigned int findFirstUnset(unsigned int offset) const;
 
 	private:
-		//! Buffer Type
-		typedef CustomString<20, true, false> BufferType;
 		//! Number of bits into the buffer, requested by the caller
 		unsigned int pCount;
 		//! Internal buffer
