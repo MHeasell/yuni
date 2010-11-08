@@ -29,6 +29,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R>
+	inline Bind<R (), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R>
@@ -43,6 +51,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R ()>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R>
+	inline void Bind<R (), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R ()>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R>
@@ -291,6 +312,14 @@ namespace Yuni
 
 
 	template<class R>
+	inline Bind<R (), void>& Bind<R (), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R>
 	inline Bind<R (), void>& Bind<R (), void>::operator = (const Bind<R (), void>& rhs)
 	{
 		// Inc the reference count
@@ -331,6 +360,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R>
+	inline Bind<R (*)(), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R>
@@ -345,6 +382,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R ()>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R>
+	inline void Bind<R (*)(), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R ()>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R>
@@ -593,6 +643,14 @@ namespace Yuni
 
 
 	template<class R>
+	inline Bind<R (*)(), void>& Bind<R (*)(), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R>
 	inline Bind<R (*)(), void>& Bind<R (*)(), void>::operator = (const Bind<R (*)(), void>& rhs)
 	{
 		// Inc the reference count
@@ -633,6 +691,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R>
@@ -647,6 +713,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R ()>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R>
+	inline void Bind<R (ClassT::*)(), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R ()>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R>
@@ -895,6 +974,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>& Bind<R (ClassT::*)(), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R>
 	inline Bind<R (ClassT::*)(), ClassT>& Bind<R (ClassT::*)(), ClassT>::operator = (const Bind<R (ClassT::*)(), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -935,6 +1022,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0>
+	inline Bind<R (A0), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0>
@@ -949,6 +1044,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0>
+	inline void Bind<R (A0), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0>
@@ -1197,6 +1305,14 @@ namespace Yuni
 
 
 	template<class R, class A0>
+	inline Bind<R (A0), void>& Bind<R (A0), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0>
 	inline Bind<R (A0), void>& Bind<R (A0), void>::operator = (const Bind<R (A0), void>& rhs)
 	{
 		// Inc the reference count
@@ -1237,6 +1353,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0>
+	inline Bind<R (*)(A0), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0>
@@ -1251,6 +1375,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0>
+	inline void Bind<R (*)(A0), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0>
@@ -1499,6 +1636,14 @@ namespace Yuni
 
 
 	template<class R, class A0>
+	inline Bind<R (*)(A0), void>& Bind<R (*)(A0), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0>
 	inline Bind<R (*)(A0), void>& Bind<R (*)(A0), void>::operator = (const Bind<R (*)(A0), void>& rhs)
 	{
 		// Inc the reference count
@@ -1539,6 +1684,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0>
@@ -1553,6 +1706,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0>
+	inline void Bind<R (ClassT::*)(A0), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0>
@@ -1801,6 +1967,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>& Bind<R (ClassT::*)(A0), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0>
 	inline Bind<R (ClassT::*)(A0), ClassT>& Bind<R (ClassT::*)(A0), ClassT>::operator = (const Bind<R (ClassT::*)(A0), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -1841,6 +2015,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1>
+	inline Bind<R (A0, A1), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1>
@@ -1855,6 +2037,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1>
+	inline void Bind<R (A0, A1), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1>
@@ -2104,6 +2299,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1>
+	inline Bind<R (A0, A1), void>& Bind<R (A0, A1), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1>
 	inline Bind<R (A0, A1), void>& Bind<R (A0, A1), void>::operator = (const Bind<R (A0, A1), void>& rhs)
 	{
 		// Inc the reference count
@@ -2144,6 +2347,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1>
@@ -2158,6 +2369,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1>
+	inline void Bind<R (*)(A0, A1), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1>
@@ -2407,6 +2631,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>& Bind<R (*)(A0, A1), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1>
 	inline Bind<R (*)(A0, A1), void>& Bind<R (*)(A0, A1), void>::operator = (const Bind<R (*)(A0, A1), void>& rhs)
 	{
 		// Inc the reference count
@@ -2447,6 +2679,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1>
@@ -2461,6 +2701,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1>
+	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1>
@@ -2710,6 +2963,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>& Bind<R (ClassT::*)(A0, A1), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1>
 	inline Bind<R (ClassT::*)(A0, A1), ClassT>& Bind<R (ClassT::*)(A0, A1), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -2750,6 +3011,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (A0, A1, A2), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2>
@@ -2764,6 +3033,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2>
+	inline void Bind<R (A0, A1, A2), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2>
@@ -3013,6 +3295,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2>
+	inline Bind<R (A0, A1, A2), void>& Bind<R (A0, A1, A2), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2>
 	inline Bind<R (A0, A1, A2), void>& Bind<R (A0, A1, A2), void>::operator = (const Bind<R (A0, A1, A2), void>& rhs)
 	{
 		// Inc the reference count
@@ -3053,6 +3343,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2>
@@ -3067,6 +3365,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2>
+	inline void Bind<R (*)(A0, A1, A2), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2>
@@ -3316,6 +3627,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>& Bind<R (*)(A0, A1, A2), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2>
 	inline Bind<R (*)(A0, A1, A2), void>& Bind<R (*)(A0, A1, A2), void>::operator = (const Bind<R (*)(A0, A1, A2), void>& rhs)
 	{
 		// Inc the reference count
@@ -3356,6 +3675,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2>
@@ -3370,6 +3697,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2>
@@ -3619,6 +3959,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>& Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2>
 	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>& Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -3659,6 +4007,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (A0, A1, A2, A3), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3>
@@ -3673,6 +4029,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (A0, A1, A2, A3), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3>
@@ -3923,6 +4292,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (A0, A1, A2, A3), void>& Bind<R (A0, A1, A2, A3), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
 	inline Bind<R (A0, A1, A2, A3), void>& Bind<R (A0, A1, A2, A3), void>::operator = (const Bind<R (A0, A1, A2, A3), void>& rhs)
 	{
 		// Inc the reference count
@@ -3963,6 +4340,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3>
@@ -3977,6 +4362,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (*)(A0, A1, A2, A3), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3>
@@ -4227,6 +4625,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>& Bind<R (*)(A0, A1, A2, A3), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3>
 	inline Bind<R (*)(A0, A1, A2, A3), void>& Bind<R (*)(A0, A1, A2, A3), void>::operator = (const Bind<R (*)(A0, A1, A2, A3), void>& rhs)
 	{
 		// Inc the reference count
@@ -4267,6 +4673,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
@@ -4281,6 +4695,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
@@ -4531,6 +4958,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -4571,6 +5006,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -4585,6 +5028,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (A0, A1, A2, A3, A4), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -4835,6 +5291,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (A0, A1, A2, A3, A4), void>& Bind<R (A0, A1, A2, A3, A4), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
 	inline Bind<R (A0, A1, A2, A3, A4), void>& Bind<R (A0, A1, A2, A3, A4), void>::operator = (const Bind<R (A0, A1, A2, A3, A4), void>& rhs)
 	{
 		// Inc the reference count
@@ -4875,6 +5339,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -4889,6 +5361,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -5139,6 +5624,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>& Bind<R (*)(A0, A1, A2, A3, A4), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4>
 	inline Bind<R (*)(A0, A1, A2, A3, A4), void>& Bind<R (*)(A0, A1, A2, A3, A4), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4), void>& rhs)
 	{
 		// Inc the reference count
@@ -5179,6 +5672,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
@@ -5193,6 +5694,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
@@ -5443,6 +5957,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -5483,6 +6005,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -5497,6 +6027,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -5748,6 +6291,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>& Bind<R (A0, A1, A2, A3, A4, A5), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline Bind<R (A0, A1, A2, A3, A4, A5), void>& Bind<R (A0, A1, A2, A3, A4, A5), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5), void>& rhs)
 	{
 		// Inc the reference count
@@ -5788,6 +6339,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -5802,6 +6361,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -6053,6 +6625,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& rhs)
 	{
 		// Inc the reference count
@@ -6093,6 +6673,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -6107,6 +6695,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -6358,6 +6959,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -6398,6 +7007,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -6412,6 +7029,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -6663,6 +7293,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& rhs)
 	{
 		// Inc the reference count
@@ -6703,6 +7341,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -6717,6 +7363,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -6968,6 +7627,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& rhs)
 	{
 		// Inc the reference count
@@ -7008,6 +7675,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -7022,6 +7697,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -7273,6 +7961,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -7313,6 +8009,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -7327,6 +8031,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -7579,6 +8296,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
 	{
 		// Inc the reference count
@@ -7619,6 +8344,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -7633,6 +8366,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -7885,6 +8631,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
 	{
 		// Inc the reference count
@@ -7925,6 +8679,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -7939,6 +8701,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -8191,6 +8966,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -8231,6 +9014,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -8245,6 +9036,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -8497,6 +9301,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
 	{
 		// Inc the reference count
@@ -8537,6 +9349,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -8551,6 +9371,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -8803,6 +9636,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
 	{
 		// Inc the reference count
@@ -8843,6 +9684,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -8857,6 +9706,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -9109,6 +9971,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -9149,6 +10019,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -9163,6 +10041,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -9416,6 +10307,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
 	{
 		// Inc the reference count
@@ -9456,6 +10355,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -9470,6 +10377,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -9723,6 +10643,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
 	{
 		// Inc the reference count
@@ -9763,6 +10691,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -9777,6 +10713,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -10030,6 +10979,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -10070,6 +11027,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -10084,6 +11049,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -10337,6 +11315,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
 	{
 		// Inc the reference count
@@ -10377,6 +11363,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -10391,6 +11385,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -10644,6 +11651,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
 	{
 		// Inc the reference count
@@ -10684,6 +11699,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -10698,6 +11721,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -10951,6 +11987,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -10991,6 +12035,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -11005,6 +12057,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -11259,6 +12324,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
 	{
 		// Inc the reference count
@@ -11299,6 +12372,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -11313,6 +12394,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -11567,6 +12661,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
 	{
 		// Inc the reference count
@@ -11607,6 +12709,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -11621,6 +12731,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -11875,6 +12998,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -11915,6 +13046,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -11929,6 +13068,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -12183,6 +13335,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
 	{
 		// Inc the reference count
@@ -12223,6 +13383,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -12237,6 +13405,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -12491,6 +13672,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
 	{
 		// Inc the reference count
@@ -12531,6 +13720,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -12545,6 +13742,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -12799,6 +14009,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -12839,6 +14057,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -12853,6 +14079,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -13108,6 +14347,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
 	{
 		// Inc the reference count
@@ -13148,6 +14395,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -13162,6 +14417,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -13417,6 +14685,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
 	{
 		// Inc the reference count
@@ -13457,6 +14733,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -13471,6 +14755,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -13726,6 +15023,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -13766,6 +15071,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -13780,6 +15093,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -14035,6 +15361,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
 	{
 		// Inc the reference count
@@ -14075,6 +15409,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -14089,6 +15431,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -14344,6 +15699,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
 	{
 		// Inc the reference count
@@ -14384,6 +15747,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -14398,6 +15769,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -14653,6 +16037,14 @@ namespace Yuni
 
 
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator = (const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& rhs)
 	{
 		// Inc the reference count
@@ -14693,6 +16085,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
@@ -14707,6 +16107,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
@@ -14963,6 +16376,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
 	{
 		// Inc the reference count
@@ -15003,6 +16424,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
@@ -15017,6 +16446,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
@@ -15273,6 +16715,14 @@ namespace Yuni
 
 
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
+		return *this;
+	}
+
+
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
 	{
 		// Inc the reference count
@@ -15313,6 +16763,14 @@ namespace Yuni
 	{}
 
 
+	// Constructor
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	{
+		bind(symbol);
+	}
+
+
 
 	// Destructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
@@ -15327,6 +16785,19 @@ namespace Yuni
 		pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(pointer);
 	}
 
+
+	// Bind: Pointer-to-function (from a library symbol)
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		if (symbol.valid())
+		{
+			pHolder = new Private::BindImpl::BoundWithFunction<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(
+				reinterpret_cast<FunctionType>(symbol.ptr()));
+		}
+		else
+			unbind();
+	}
 
 	// Bind: Pointer-to-function + user data
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
@@ -15578,6 +17049,14 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator = (R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
 	{
 		bind(pointer);
+		return *this;
+	}
+
+
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator = (const Yuni::DynamicLibrary::Symbol& symbol)
+	{
+		bind(symbol);
 		return *this;
 	}
 

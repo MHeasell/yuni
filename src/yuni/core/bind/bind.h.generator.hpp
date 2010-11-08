@@ -8,6 +8,7 @@
 # include "../static/remove.h"
 # include "../smartptr.h"
 # include "traits.h"
+# include "../dynamiclibrary/symbol.h"
 
 <%
 require File.dirname(__FILE__) + '/../../../tools/generators/commons.rb'
@@ -113,6 +114,10 @@ namespace Yuni
 		*/
 		Bind(const Bind& rhs);
 		/*!
+		** \brief Copy constructor
+		*/
+		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
@@ -170,6 +175,10 @@ namespace Yuni
 		** \brief Copy constructor
 		*/
 		Bind(const Bind& rhs);
+		/*!
+		** \brief Constructor from a library symbol
+		*/
+		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
 		** \brief Destructor
 		*/
@@ -267,7 +276,13 @@ namespace Yuni
 		** \brief Bind from another Bind object
 		*/
 		void bind(const Bind& rhs);
+
+		/*!
+		** \brief Bind from a library symbol
+		*/
+		void bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		//@} // Bind
+
 
 		//! \name Unbind
 		//@{
@@ -352,6 +367,8 @@ namespace Yuni
 		Bind& operator = (const Bind& rhs);
 		//! Assignment with a pointer-to-function
 		Bind& operator = (R (*pointer)(<%=generator.list(i)%>));
+		//! Assignment with a library symbol
+		Bind& operator = (const Yuni::DynamicLibrary::Symbol& symbol);
 
 		//! Comparison with a pointer-to-function
 		bool operator == (R (*pointer)(<%=generator.list(i)%>)) const;

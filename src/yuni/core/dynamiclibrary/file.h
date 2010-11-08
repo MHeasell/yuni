@@ -1,6 +1,5 @@
 #ifndef __YUNI_CORE_DYNAMICLIBRARY_FILE_H__
 # define __YUNI_CORE_DYNAMICLIBRARY_FILE_H__
-
 /*!
 ** \file file.h
 ** Header for Yuni::DynamicLibrary::File, a class for manipulating Executable Object Files
@@ -10,8 +9,6 @@
 # include <stdlib.h>
 # include "../string.h"
 # include "symbol.h"
-//# include "../function.h"
-
 
 
 // Determining the handle type for the current Operating system
@@ -23,7 +20,6 @@
 
 
 
-
 namespace Yuni
 {
 
@@ -32,7 +28,6 @@ namespace Yuni
 */
 namespace DynamicLibrary
 {
-
 
 	/*!
 	** \brief An Executable Object file
@@ -56,20 +51,23 @@ namespace DynamicLibrary
 	**
 	** We could safely use it in this way, which is the simplest one :
 	** \code
-	** #include <iostream>
+	** #include <yuni/yuni.h>
 	** #include <yuni/core/dynamiclibrary.h>
+	** #include <iostream>
 	**
+	**
+	** using namespace Yuni;
 	**
 	** int main(void)
 	** {
 	** 		// Our dynamic library
 	** 		// (might be `mylib.so` on Unix, `my.dynlib` on Darwin, or `my.dll` on Windows)
 	** 		// The current path (`./`) is by default in the search paths
-	** 		Yuni::DynamicLibrary::File lib("my");
+	** 		DynamicLibrary::File lib("my");
 	**
 	** 		// Binding with a C function, which has only one argument and an `int`
 	** 		// as its returned type
-	** 		Yuni::Function::F1<int, const char*> f = lib["mylength"];
+	** 		Bind<int (const char*)> f = lib["mylength"];
 	**
 	** 		// Calling the exported function
 	** 		// It is safe to directly call the function like this.
@@ -81,7 +79,7 @@ namespace DynamicLibrary
 	** 		std::cout << "Returned Value : " << result << std::endl;
 	**
 	**		// Extra: Displaying the name of our library
-	** 		Yuni::Function::F0<const char*> libname = lib["myname"];
+	** 		Bind<const char* ()> libname = lib["myname"];
 	**		const char* s = libname();
 	**		std::cout << "Library name: " << (s ? s : "(null)") << std::endl;
 	** }
@@ -116,7 +114,7 @@ namespace DynamicLibrary
 			** brief All necessary relocations shall be performed when the object
 			** is first loaded (see RTLD_NOW, Unix only)
 			*/
-			relocationNow
+			relocationNow,
 		};
 
 		/*!
@@ -137,9 +135,8 @@ namespace DynamicLibrary
 			** \brief The object’s symbols shall not be made available for the
 			** relocation processing of any other object (Unix only)
 			*/
-			visibilityLocal
+			visibilityLocal,
 		};
-
 
 	public:
 		//! \name Constructor & DEstructor
@@ -156,10 +153,7 @@ namespace DynamicLibrary
 		** \param r The relocation mode (no effect on Windows)
 		** \param v The visibility mode (no effect on Windows)
 		*/
-		File(const char* filename, const Relocation r = relocationLazy,
-			const Visibility v = visibilityDefault);
-		File(const String& filename, const Relocation r = relocationLazy,
-			const Visibility v = visibilityDefault);
+		explicit File(const String& filename, const Relocation r = relocationLazy, const Visibility v = visibilityDefault);
 
 		/*!
 		** \brief Destructor
@@ -197,8 +191,7 @@ namespace DynamicLibrary
 		** \param v The visibility mode (no effect on Windows)
 		** \return True if the library has been loaded
 		*/
-		bool load(const String& filename, const Relocation r = relocationLazy,
-			const Visibility v = visibilityDefault);
+		bool loadFromFile(const String& filename, const Relocation r = relocationLazy, const Visibility v = visibilityDefault);
 
 		/*!
 		** \brief Load a dynamic library from its filename
@@ -237,6 +230,7 @@ namespace DynamicLibrary
 		const String& filename() const;
 		//@}
 
+
 		//! \name Symbols
 		//@{
 		/*!
@@ -246,7 +240,6 @@ namespace DynamicLibrary
 		** \return True if the library is loaded and the symbol exists, False otherwise
 		*/
 		bool hasSymbol(const String& name) const;
-		bool hasSymbol(const char* name) const;
 
 		/*!
 		** \brief Try to resolve the address of an exported symbol by the library
@@ -274,7 +267,6 @@ namespace DynamicLibrary
 		** \return The Symbol. Use Symbol::valid() or Symbol::null() to know if
 		** the result is valid
 		*/
-		Symbol resolve(const char* name) const;
 		Symbol resolve(const String& name) const;
 		//@}
 
@@ -288,11 +280,6 @@ namespace DynamicLibrary
 
 		//! \name Operators
 		//@{
-		/*!
-		** \brief The operator []
-		** \see resolve()
-		*/
-		Symbol operator [] (const char* name) const;
 		/*!
 		** \brief The operator []
 		** \see resolve()
@@ -315,6 +302,7 @@ namespace DynamicLibrary
 		String pFilename;
 
 	}; // class DynamicLibrary
+
 
 
 
