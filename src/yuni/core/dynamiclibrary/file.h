@@ -53,6 +53,7 @@ namespace DynamicLibrary
 	** \code
 	** #include <yuni/yuni.h>
 	** #include <yuni/core/dynamiclibrary.h>
+	** #include <yuni/core/bind.h>
 	** #include <iostream>
 	**
 	**
@@ -67,6 +68,9 @@ namespace DynamicLibrary
 	**
 	** 		// Binding with a C function, which has only one argument and an `int`
 	** 		// as its returned type
+	** 		// warning: This binding will be only valid for the lifetime of the
+	** 		// variable `lib`. After that, you should encounter some crash if you
+	** 		// try to use it.
 	** 		Bind<int (const char*)> f = lib["mylength"];
 	**
 	** 		// Calling the exported function
