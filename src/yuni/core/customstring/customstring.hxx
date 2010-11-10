@@ -14,7 +14,6 @@
 namespace Yuni
 {
 
-
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::CustomString()
 	{}
@@ -339,10 +338,18 @@ namespace Yuni
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class U>
 	inline void
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::write(const U& u,
-		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size size)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::write(const U& u, const Size size)
 	{
 		append(u, size);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class U>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::write(const U& u)
+	{
+		append(u);
 	}
 
 
@@ -420,6 +427,15 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::put(const char c)
 	{
 		AncestorType::put(c);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class U>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::put(const U& rhs)
+	{
+		append(rhs);
 	}
 
 
