@@ -28,16 +28,12 @@ namespace File
 				if (file.opened())
 				{
 					uint64 totalSize = 0;
-					String line;
-					line.reserve(4096);
-					while (file.gets(line.data(), 4096))
+					CustomString<4096> line;
+					while (file.readline(line))
 					{
-						size_t size = strlen(line.data());
-						totalSize += size;
-						if (totalSize > sizeLimit)
+						if ((totalSize += line.size()) > sizeLimit)
 							return false;
-						line.resize(size);
-						out.push_back(line);
+						out.push_back(line.c_str());
 					}
 					return true;
 				}
