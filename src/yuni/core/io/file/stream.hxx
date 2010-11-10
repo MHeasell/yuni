@@ -123,7 +123,8 @@ namespace File
 		return (char)::fgetc(pFd);
 	}
 
-	inline bool Stream::gets(char* buffer, size_t maxSize)
+
+	inline bool Stream::readline(char* buffer, size_t maxSize)
 	{
 		return (NULL != fgets(buffer, (int)maxSize, pFd));
 	}
@@ -131,7 +132,7 @@ namespace File
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
-	Stream::gets(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
+	Stream::readline(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
 	{
 		// The buffer must be reserved to its full capacity just before
 		// Assuming we have a mere Yuni::String, the internal may be null.
@@ -294,15 +295,12 @@ namespace File
 	}
 
 
-
 	template<class U>
 	inline Stream& Stream::operator >> (U&  rhs)
 	{
 		(void)read(rhs);
 		return *this;
 	}
-
-
 
 
 
