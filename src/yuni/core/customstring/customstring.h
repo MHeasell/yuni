@@ -484,6 +484,8 @@ namespace Yuni
 		// Equivalent to append, provided for compatibility issues with other
 		// Yuni containers
 		//! \see template<class U> append(const U&, const Size)
+		template<class U> void write(const U& cstr);
+		//! \see template<class U> append(const U&, const Size)
 		template<class U> void write(const U& cstr, const Size size);
 
 		/*!
@@ -492,6 +494,8 @@ namespace Yuni
 		** \param c A single char
 		*/
 		void put(const char c);
+		// equivalent to append, provided for compatibility with other containers
+		template<class U> void put(const U& rhs);
 
 		/*!
 		** \brief Insert a raw C-String at a given position in the string
