@@ -170,7 +170,7 @@ namespace File
 		** \param buffer The buffer where to write the line
 		** \param size The maximum allowed size for the buffer
 		*/
-		bool gets(char* buffer, size_t maxSize);
+		bool readline(char* buffer, size_t maxSize);
 
 		/*!
 		** \brief Read a line from the file
@@ -184,7 +184,7 @@ namespace File
 		** \param buffer The buffer where to write the line
 		*/
 		template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-		bool gets(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer);
+		bool readline(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer);
 
 		/*!
 		** \brief Read a buffer
