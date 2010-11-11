@@ -32,11 +32,12 @@ int main(void)
 	Color::RGBA<uint8> f_convert2 (Color::RGBA<float>(0.1f, 0.9f, 0.24f, 0.3f));
 	std::cout << "Convert 2 : " << f_convert2 << std::endl;
 	Color::RGBA<uint8> f_convert3 (Color::RGBA<float>(0.1f, 0.9f, 0.24f, 0.3f));
-	std::cout << "Convert 3 : " << f_convert3.toString() << std::endl;
+	std::cout << "Convert 3 : " << f_convert3 << std::endl;
 
 	// Compare 2 color models
-	std::cout << (f_red == f_green) << std::endl;
-	std::cout << (f_convert2 == f_convert) << std::endl;
+//	std::cout << (f_red == f_green) << std::endl;
+#warning Fix RGB<uint8> <> RGB<float> comparisons
+	//std::cout << (f_convert2 == f_convert) << std::endl;
 
 	return 0;
 }
