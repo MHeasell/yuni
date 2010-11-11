@@ -35,7 +35,7 @@ int main(void)
 	Color::RGB<uint8> f_convert2 (Color::RGB<float>(0.1f, 0.9f, 0.24f, 0.9f));
 	std::cout << "Convert 2 : " << f_convert2 << std::endl;
 	Color::RGB<uint8> f_convert3 (Color::RGBA<float>(0.1f, 0.9f, 0.24f, 0.3f));
-	std::cout << "Convert 3 : " << f_convert3.toString() << std::endl;
+	std::cout << "Convert 3 : " << f_convert3 << std::endl;
 
 	Color::RGB<float> f_convert4 (200, 10, 255);
 	std::cout << "Convert 4 : " << f_convert4 << std::endl;
