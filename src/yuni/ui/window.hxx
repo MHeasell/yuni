@@ -78,19 +78,11 @@ namespace UI
 	}
 
 
-
 	inline bool Window::closing() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		return pClosing;
 	}
-
-
-	inline bool Window::pollEvents()
-	{
-		return false;
-	}
-
 
 
 

@@ -3,6 +3,7 @@
 
 # include "../yuni.h"
 # include "../core/smartptr.h"
+# include "../core/event/event.h"
 # include "fwd.h"
 # include "application.h"
 
@@ -16,11 +17,15 @@ namespace UI
 	/*!
 	** \brief Virtual desktop meant to receive one or several applications
 	*/
-	class Desktop
+	class Desktop: public IEventObserver<Desktop>
 	{
 	public:
 		//! Smart pointer
 		typedef SmartPtr<Desktop> Ptr;
+		//! Threading policy
+		typedef IEventObserver<Desktop> EventObserverType;
+		//! Threading policy
+		typedef EventObserverType::ThreadingPolicy ThreadingPolicy;
 
 	public:
 		//! \name Constructor & Destructor
@@ -49,8 +54,10 @@ namespace UI
 		void remove(const Application::Ptr& app);
 		//@}
 
-		//! Update a component's local representation
-		void updateComponentWL(const IComponent::ID& componentID) const;
+		/*!
+		** \brief Show all applications and windows in this desktop
+		*/
+		void show();
 
 		/*!
 		** \brief Quit the desktop and all its applications
@@ -76,7 +83,33 @@ namespace UI
 		//@}
 
 	private:
+		//! Reconnect events on contained applications
+		void reconnect();
+		void reconnectWL();
+		void reconnectOneApplicationWL(Application::Ptr app);
+
+		//! Disconnect all events, and propagate to applications
+		void disconnect();
+		void disconnectWL();
+
+
+	private:
+		//! \name Events
+		//@{
+		Event<void (const Application::GUID&, Window::Ptr)>* onShowWindow;
+		Event<void (const Application::GUID&, const IComponent::ID&)>* onHideWindow;
+		Event<void (const Application::GUID&, const IComponent::ID&)>* onCloseWindow;
+		Event<void (const Application::GUID&, IComponent::Ptr)>* onShowComponent;
+		Event<void (const Application::GUID&, const IComponent::ID&)>* onHideComponent;
+		Event<void (const Application::GUID&, const IComponent::ID&)>* onUpdateComponent;
+		//@}
+
+	private:
+		//! Applications stored in this desktop
 		Application::Map pApps;
+
+		//! Friend: required for access to events
+		template<class> friend class IQueueService;
 
 	}; // class Desktop
 

@@ -87,7 +87,7 @@ namespace Local
 // 	}
 
 
-	IWindow::Ptr Create(const Yuni::UI::Window::Ptr& source)
+	IWindow* IWindow::Create(const Yuni::UI::Window::Ptr& source)
 	{
 		# ifdef YUNI_WINDOWSYSTEM_MSW
 		IWindow* wnd = new Windows::CairoWindow(source, 32, false);

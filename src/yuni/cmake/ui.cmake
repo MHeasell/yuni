@@ -16,8 +16,7 @@ list(APPEND SRC_UI
 	ui/controlcontainer.h ui/controlcontainer.hxx ui/controlcontainer.cpp
 	ui/desktop.h ui/desktop.hxx ui/desktop.cpp
 	ui/id.h ui/id.cpp
-	ui/queueservice.h
-	ui/queueservice.hxx
+	ui/queueservice.h ui/queueservice.hxx ui/queueservice.cpp
 	ui/ui.h
 	ui/fwd.h
 
@@ -89,7 +88,11 @@ endif (PANGO_FOUND)
 # Platform-dependent
 #
 if (WIN32 OR WIN64)
-   	list(APPEND SRC_UI ui/local/windows/wingdiwindow.cpp)
+	list(APPEND SRC_UI ui/local/windows/wingdiwindow.cpp ui/windowsystem/windows.cpp)
+else()
+	if (UNIX AND NOT APPLE)
+		list(APPEND SRC_UI ui/windowsystem/x11.cpp)
+	endif ()
 endif ()
 
 

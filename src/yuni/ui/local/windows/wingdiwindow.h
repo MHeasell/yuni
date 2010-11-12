@@ -41,9 +41,6 @@ namespace Local
 		virtual bool pollEvents();
 
 	protected:
-		virtual void onInternalTitleChangedWL();
-
-	protected:
 		String pWindowClassName;
 		HINSTANCE pHInstance;
 		HWND pHWnd;

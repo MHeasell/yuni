@@ -30,12 +30,14 @@ namespace UI
 
 	inline const Application::GUID& Application::guid() const
 	{
+		ThreadingPolicy::MutexLocker lock(*this);
 		return pGUID;
 	}
 
 
 	inline const String& Application::name() const
 	{
+		ThreadingPolicy::MutexLocker lock(*this);
 		return pName;
 	}
 
@@ -43,14 +45,22 @@ namespace UI
 	inline void Application::add(const Window::Ptr& wnd)
 	{
 		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
+			reconnectOneWindowWL(wnd);
+		}
 	}
 
 
 	inline Application& Application::operator += (const Window::Ptr& wnd)
 	{
 		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
+			reconnectOneWindowWL(wnd);
+		}
 		return *this;
 	}
 
@@ -58,7 +68,11 @@ namespace UI
 	inline Application& Application::operator += (Window* wnd)
 	{
 		if (wnd)
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
+			reconnectOneWindowWL(wnd);
+		}
 		return *this;
 	}
 
@@ -66,7 +80,11 @@ namespace UI
 	inline Application& Application::operator << (const Window::Ptr& wnd)
 	{
 		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
+			reconnectOneWindowWL(wnd);
+		}
 		return *this;
 	}
 
@@ -74,13 +92,18 @@ namespace UI
 	inline Application& Application::operator << (Window* wnd)
 	{
 		if (wnd)
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
+			reconnectOneWindowWL(wnd);
+		}
 		return *this;
 	}
 
 
 	inline void Application::remove(IComponent::ID id)
 	{
+		ThreadingPolicy::MutexLocker lock(*this);
 		pWindows.erase(id);
 	}
 
@@ -88,12 +111,16 @@ namespace UI
 	inline void Application::remove(const Window::Ptr& wnd)
 	{
 		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows.erase(wnd->id());
+		}
 	}
 
 
 	inline Application& Application::operator -= (IComponent::ID id)
 	{
+		ThreadingPolicy::MutexLocker lock(*this);
 		pWindows.erase(id);
 		return *this;
 	}
@@ -102,7 +129,10 @@ namespace UI
 	inline Application& Application::operator -= (Window* wnd)
 	{
 		if (wnd)
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows.erase(wnd->id());
+		}
 		return *this;
 	}
 
@@ -110,15 +140,69 @@ namespace UI
 	inline Application& Application::operator -= (const Window::Ptr& wnd)
 	{
 		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows.erase(wnd->id());
+		}
 		return *this;
 	}
 
 
-	inline void Application::updateComponentWL(const IComponent::ID& componentID) const
+	inline void Application::reconnect()
 	{
-	//	if (pDesktop)
-	//		pDesktop->updateComponentWL(componentID);
+		ThreadingPolicy::MutexLocker lock(*this);
+		reconnectWL();
+	}
+
+
+	inline void Application::disconnect()
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		disconnectWL();
+	}
+
+
+	inline void Application::showWindow(Window::Ptr window)
+	{
+		if (onApplicationShowWindow)
+		{
+			(*onApplicationShowWindow)(pGUID, window);
+		}
+	}
+
+
+	inline void Application::hideWindow(const IComponent::ID& windowID)
+	{
+		if (onApplicationHideWindow)
+			(*onApplicationHideWindow)(pGUID, windowID);
+	}
+
+
+	inline void Application::closeWindow(const IComponent::ID& windowID)
+	{
+		if (onApplicationCloseWindow)
+			(*onApplicationCloseWindow)(pGUID, windowID);
+	}
+
+
+	inline void Application::showComponent(IComponent::Ptr component)
+	{
+		if (onApplicationShowComponent)
+			(*onApplicationShowComponent)(pGUID, component);
+	}
+
+
+	inline void Application::hideComponent(const IComponent::ID& componentID)
+	{
+		if (onApplicationHideComponent)
+			(*onApplicationHideComponent)(pGUID, componentID);
+	}
+
+
+	inline void Application::updateComponent(const IComponent::ID& componentID)
+	{
+		if (onApplicationUpdateComponent)
+			(*onApplicationUpdateComponent)(pGUID, componentID);
 	}
 
 

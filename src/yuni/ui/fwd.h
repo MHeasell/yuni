@@ -11,9 +11,24 @@ namespace UI
 	template<class ChildT> class IQueueService;
 	class IControlContainer;
 	class Application;
+	class Desktop;
+	class Window;
 
 
 } // namespace UI
+
+namespace Private
+{
+namespace UI
+{
+namespace Local
+{
+
+	class IWindow;
+
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
 
 

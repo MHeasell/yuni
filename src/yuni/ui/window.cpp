@@ -9,18 +9,34 @@ namespace UI
 
 	void Window::updateComponentWL(const IComponent::ID& componentID) const
 	{
-		//if (pApplication)
-		//	pApplication->updateComponentWL(componentID);
+		(*onUpdateComponent)(componentID);
+	}
+
+	void Window::show()
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		if (!pClosing && onShowWindow)
+		{
+			(*onShowWindow)(this);
+		}
+	}
+
+
+	void Window::hide()
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		if (!pClosing && onHideWindow)
+			(*onHideWindow)(pLocalID);
 	}
 
 
 	void Window::close()
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-		if (!pClosing)
+		if (!pClosing && onCloseWindow)
 		{
 			pClosing = true;
-			onClose();
+			(*onCloseWindow)(pLocalID);
 		}
 	}
 

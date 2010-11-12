@@ -47,17 +47,70 @@ namespace UI
 		// The const_cast is quite ugly but after this point, the guid _must_ not be
 		// modified
 		GenerateGUID(const_cast<GUID&>(pGUID));
-		pDesktop = nullptr;
+		onShowWindow.connect(this, &Application::showWindow);
+		onHideWindow.connect(this, &Application::hideWindow);
+		onCloseWindow.connect(this, &Application::closeWindow);
+		onShowComponent.connect(this, &Application::showComponent);
+		onHideComponent.connect(this, &Application::hideComponent);
+		onUpdateComponent.connect(this, &Application::updateComponent);
+		disconnectWL();
 	}
 
 
 	void Application::quit()
 	{
+		ThreadingPolicy::MutexLocker lock(*this);
+
 		Window::Map::iterator end = pWindows.end();
 		for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)
 		{
 			it->second->close();
 		}
+		destroyBoundEvents();
+	}
+
+
+	void Application::show()
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+
+		Window::Map::iterator end = pWindows.end();
+		for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)
+			it->second->show();
+	}
+
+
+	void Application::reconnectWL()
+	{
+		Window::Map::iterator end = pWindows.end();
+		for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)
+		{
+			reconnectOneWindowWL(it->second);
+		}
+	}
+
+
+	void Application::reconnectOneWindowWL(Window::Ptr window)
+	{
+		window->onShowWindow = &onShowWindow;
+		window->onHideWindow = &onHideWindow;
+		window->onCloseWindow = &onCloseWindow;
+		window->onShowComponent = &onShowComponent;
+		window->onHideComponent = &onHideComponent;
+		window->onUpdateComponent = &onUpdateComponent;
+	}
+
+
+	void Application::disconnectWL()
+	{
+		onApplicationShowWindow = nullptr;
+		onApplicationHideWindow = nullptr;
+		onApplicationCloseWindow = nullptr;
+		onApplicationShowComponent = nullptr;
+		onApplicationHideComponent = nullptr;
+		onApplicationUpdateComponent = nullptr;
+		// Reconnect will only propagate the null pointers to children windows
+		reconnectWL();
 	}
 
 
