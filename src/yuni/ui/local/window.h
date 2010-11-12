@@ -31,6 +31,17 @@ namespace Local
 		//! Smart pointer
 		typedef SmartPtr<IWindow> Ptr;
 
+
+	public:
+		/*!
+		** \brief Create a platform-dependent window.
+		**
+		** The characteristics of this window and its associated rendering surface
+		** will be determined using the device.
+		*/
+		static IWindow* Create(const Yuni::UI::Window::Ptr& source);
+
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -107,17 +118,6 @@ namespace Local
 		bool pClosing;
 
 	}; // class IWindow
-
-
-
-	/*!
-	** \brief Create a platform-dependent window.
-	**
-	** The characteristics of this window and its associated rendering surface
-	** will be determined using the device.
-	*/
-	IWindow::Ptr Create(const Yuni::UI::Window::Ptr& source, const Yuni::Gfx::Device::Ptr& device);
-
 
 
 

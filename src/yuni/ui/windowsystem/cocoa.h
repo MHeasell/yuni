@@ -1,7 +1,7 @@
 #ifndef __YUNI_UI_WINDOWSYSTEM_COCOA_H__
 # define __YUNI_UI_WINDOWSYSTEM_COCOA_H__
 
-# include "../windowsystem.h"
+# include "../../yuni.h"
 # include "../queueservice.h"
 
 namespace Yuni

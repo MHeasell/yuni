@@ -65,6 +65,16 @@ namespace UI
 		//! \name Methods
 		//@{
 		/*!
+		** \brief Show the window
+		*/
+		void show();
+
+		/*!
+		** \brief Hide the window
+		*/
+		void hide();
+
+		/*!
 		** \brief Close the window, release everything
 		*/
 		void close();
@@ -85,23 +95,9 @@ namespace UI
 		//@}
 
 
+	protected:
 		//! \name Events
 		//@{
-		/*!
-		** \brief Read the events in queue and launch the various handlers
-		**
-		** \return True if events were processed, False otherwise
-		*/
-		virtual bool pollEvents();
-
-		//@}
-
-
-	public:
-		//! \name Events
-		//@{
-		Event<void ()> onClose;
-
 		Event<void (float /* x */, float /* y */)> onMouseDown;
 		Event<void (float /* x */, float /* y */)> onMouseClick;
 		Event<void (float /* x */, float /* y */)> onMouseUp;
@@ -110,6 +106,13 @@ namespace UI
 		Event<void (unsigned char /* key */)> onKeyDown;
 		Event<void (unsigned char /* key */)> onKeyPressed;
 		Event<void (unsigned char /* key */)> onKeyUp;
+
+		Event<void (Window::Ptr)>* onShowWindow;
+		Event<void (const IComponent::ID&)>* onHideWindow;
+		Event<void (const IComponent::ID&)>* onCloseWindow;
+		Event<void (IComponent::Ptr)>* onShowComponent;
+		Event<void (const IComponent::ID&)>* onHideComponent;
+		Event<void (const IComponent::ID&)>* onUpdateComponent;
 		//@}
 
 	protected:
@@ -130,6 +133,9 @@ namespace UI
 		String pTitle;
 		//! Is the window currently closing ?
 		bool pClosing;
+
+		//! Friend: required for access to events
+		friend class Application;
 
 
 	}; // class Window

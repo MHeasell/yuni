@@ -9,8 +9,7 @@ using namespace Yuni;
 
 UI::Desktop::Ptr createUI()
 {
-	UI::Application::Ptr editor = new
-		UI::Application("com.example.my.3d.editor", "3D Editor");
+	UI::Application::Ptr editor = new UI::Application();
 	//UI::Application::Ptr mygame = new
 	//	UI::Application("com.example.my.appl.id", "My Game");
 
@@ -37,8 +36,9 @@ UI::Desktop::Ptr createUI()
 
 int main(int argc, char* argv[])
 {
-	UI::IQueueService* ws = new UI::WindowSystem::Native();
-	ws->desktop = createUI();
+	UI::WindowSystem::Native::Ptr ws = new UI::WindowSystem::Native();
+	ws->desktop(createUI());
+	ws->desktop()->show();
 	ws->start();
 	return 0;
 }

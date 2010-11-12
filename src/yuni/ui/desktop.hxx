@@ -7,31 +7,45 @@ namespace Yuni
 namespace UI
 {
 
-	inline Desktop::Desktop()
-	{}
-
-
 	inline Desktop::~Desktop()
-	{}
-
-
-	inline void Desktop::updateComponentWL(const IComponent::ID& componentID) const
 	{
-		// pQueueService->updateComponent(componentID);
+		destroyBoundEvents();
+	}
+
+
+	inline void Desktop::reconnect()
+	{
+		typename ThreadingPolicy::MutexLocker lock(*this);
+		reconnectWL();
+	}
+
+
+	inline void Desktop::disconnect()
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		disconnectWL();
 	}
 
 
 	inline void Desktop::add(const Application::Ptr& app)
 	{
 		if (!(!app))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pApps[app->guid()] = app;
+			reconnectOneApplicationWL(app);
+		}
 	}
 
 
 	inline Desktop& Desktop::operator += (const Application::Ptr& app)
 	{
 		if (!(!app))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pApps[app->guid()] = app;
+			reconnectOneApplicationWL(app);
+		}
 		return *this;
 	}
 
@@ -39,7 +53,11 @@ namespace UI
 	inline Desktop& Desktop::operator << (const Application::Ptr& app)
 	{
 		if (!(!app))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pApps[app->guid()] = app;
+			reconnectOneApplicationWL(app);
+		}
 		return *this;
 	}
 
@@ -50,6 +68,7 @@ namespace UI
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  InvalidTypeForBufferSize);
 
+		ThreadingPolicy::MutexLocker lock(*this);
 		pApps.erase(guid);
 	}
 
@@ -57,7 +76,10 @@ namespace UI
 	inline void Desktop::remove(const Application::Ptr& app)
 	{
 		if (!(!app))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pApps.erase(app->guid());
+		}
 	}
 
 
@@ -67,6 +89,7 @@ namespace UI
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  InvalidTypeForBufferSize);
 
+		ThreadingPolicy::MutexLocker lock(*this);
 		pApps.erase(guid);
 		return *this;
 	}
@@ -75,7 +98,10 @@ namespace UI
 	inline Desktop& Desktop::operator -= (const Application::Ptr& app)
 	{
 		if (!(!app))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
 			pApps.erase(app->guid());
+		}
 		return *this;
 	}
 
