@@ -96,17 +96,23 @@ namespace VersionInfo
 					return;
 			}
 		}
-		String::List list;
-		if (Core::IO::File::Load(list, s, false) && !list.empty())
+		Core::IO::File::Stream file;
+		if (file.open(s))
 		{
 			String key;
 			String value;
 
 			Version version;
-			const String::List::const_iterator end = list.end();
-			for (String::List::const_iterator i = list.begin(); i != end; ++i)
+
+	 		// A buffer. The given capacity will be the maximum length for a single line
+	 		CustomString<8192> buffer;
+			buffer.reserve(8000);
+			String iniReader;
+	 		while (file.readline(buffer))
 			{
-				i->extractKeyValue(key, value);
+# warning replace the deprecated StringBase<> currently needed for reading the INI structure
+				iniReader.assign(buffer.c_str(), buffer.size());
+				iniReader.extractKeyValue(key, value);
 				value.trim();
 				if (key.empty() || key == "[")
 					continue;
@@ -244,7 +250,21 @@ namespace VersionInfo
 				std::cout << "Error: impossible to open the config file '" << out << "'\n";
 			return false;
 		}
-		if (!Core::IO::File::Load(options, out))
+
+		options.clear();
+		Core::IO::File::Stream file;
+		if (file.open(out))
+		{
+			#warning Remove this variable as soon as StringBase<> is replaced by CustomString<>
+			StringBase<> tmp;
+			CustomString<8192> buffer;
+			while (file.readline(buffer))
+			{
+				tmp.assign(buffer.c_str(), buffer.size());
+				options.push_back(tmp);
+			}
+		}
+		else
 		{
 			if (displayError)
 				std::cout << "Error: Impossible to read '" << out << "'\n";
