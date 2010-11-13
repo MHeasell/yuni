@@ -37,6 +37,8 @@ namespace Directory
 	bool RecursiveCopy(const char* src, size_t srclen, const char* dst, size_t dstlen, bool recursive,
 		bool overwrite, const Yuni::Core::IO::Directory::CopyOnUpdateBind& onUpdate)
 	{
+		using namespace Yuni::Core::IO::Directory;
+
 		// normalize paths
 		String fsrc(src, srclen);
 		Yuni::Core::IO::Normalize(fsrc, src, srclen);
@@ -56,7 +58,7 @@ namespace Directory
 			InfoItem& info = list.back();
 			info.filename = fdst;
 			info.isFile   = false;
-			if (!onUpdate(Yuni::Core::IO::Directory::cpsGatheringInformation, fdst, fdst, 0, list.size()))
+			if (!onUpdate(cpsGatheringInformation, fdst, fdst, 0, list.size()))
 				return false;
 		}
 
@@ -72,7 +74,7 @@ namespace Directory
 					info.filename = i.filename();
 					info.isFile   = i.isFile();
 					totalSize += i.size();
-					if (!onUpdate(Yuni::Core::IO::Directory::cpsGatheringInformation, *i, *i, 0, list.size()))
+					if (!onUpdate(cpsGatheringInformation, *i, *i, 0, list.size()))
 						return false;
 				}
 			}
@@ -87,7 +89,7 @@ namespace Directory
 					info.isFile   = i.isFile();
 					totalSize += i.size();
 
-					if (!onUpdate(Yuni::Core::IO::Directory::cpsGatheringInformation, i.filename(), i.filename(), 0, list.size()))
+					if (!onUpdate(cpsGatheringInformation, i.filename(), i.filename(), 0, list.size()))
 						return false;
 				}
 			}
@@ -107,8 +109,11 @@ namespace Directory
 		// A temporary buffer for copying files' contents
 		// 16k seems to be a good choice (better than smaller block size with used
 		// in Virtual Machines)
-		enum { bufferSize = 16384 };
+		enum { bufferSize = 8192 };
 		char* buffer = new char[bufferSize];
+
+		// reduce overhead brought by `onUpdate`
+		unsigned int skip = 8;
 
 		const List::const_iterator end = list.end();
 		for (List::const_iterator i = list.begin(); i != end; ++i)
@@ -125,7 +130,7 @@ namespace Directory
 			{
 				// The target file is actually a folder
 				// We have to create it before copying its content
-				if (!onUpdate(Yuni::Core::IO::Directory::cpsCopying, info.filename, tmp, current, totalSize)
+				if (!onUpdate(cpsCopying, info.filename, tmp, current, totalSize)
 					|| !Yuni::Core::IO::Directory::Create(tmp))
 				{
 					delete[] buffer;
@@ -155,11 +160,21 @@ namespace Directory
 							current += numRead;
 
 							// Trying to copy the block which has just been read
-							if (numRead != toFile.write((const char*)buffer, numRead)
-								|| !onUpdate(Yuni::Core::IO::Directory::cpsCopying, info.filename, tmp, current, totalSize))
+							if (numRead != toFile.write((const char*)buffer, numRead))
 							{
 								delete[] buffer;
 								return false;
+							}
+
+							// Notify the user from time to time about the progression
+							if (!--skip)
+							{
+								if (!onUpdate(cpsCopying, info.filename, tmp, current, totalSize))
+								{
+									delete[] buffer;
+									return false;
+								}
+								skip = 8;
 							}
 						} // read
 					}

@@ -56,6 +56,35 @@ namespace Yuni
 	** 	std::cout << "char at offset " << i.offset() << ": " << *i << std::endl;
 	** \endcode
 	**
+	** Example for convertions :
+	** \code
+	** String s;
+	** s << "example for double = " << 42.6;
+	** std::cout << s << std::endl;
+	**
+	** s = "42";
+	** int i = s.to<int>();
+	** std::cout << "Convertion without check for int: " << i << std::endl;
+	** if (s.to(i))
+	** {
+	** 	std::cout << "Convertion with check for int: " << i << std::endl;
+	** }
+	** else
+	** 	std::cout << "Convertion failed for int " << std::endl;
+	**
+	** Color::RGB<> rgb(142, 230, 12);
+	** s.clear() << "example for rgb = " << rgb;
+	** std::cout << s << std::endl;
+	**
+	** Color::RGBA<> rgba;
+	** s = " rgb( 42, 58, 234)";
+	** s.to(rgba);
+	** std::cout << "Convertion from string to rgba : " << rgba << std::endl;
+	** s = " rgba( 42, 58, 234, 67)";
+	** s.to(rgba);
+	** std::cout << "Convertion from string to rgba : " << rgba << std::endl;
+	** \endcode
+	**
 	** \warning This class is not thread-safe
 	** \tparam ChunkSizeT The size for a single chunk (> 3)
 	** \tparam ExpandableT True to make a growable string. Otherwise it will be a
@@ -112,7 +141,7 @@ namespace Yuni
 			//! A non-zero value if the string can be expanded
 			expandable = AncestorType::expandable,
 			//! True if the string is a string adapter (only read-only operations are allowed)
-			isAdapter  = (!chunkSize && expandable && !zeroTerminated),
+			adapter  = (!chunkSize && expandable && !zeroTerminated),
 		};
 		//! char Case
 		enum charCase
@@ -124,7 +153,7 @@ namespace Yuni
 		};
 
 		// Checking for a minimal chunk size
-		YUNI_STATIC_ASSERT(isAdapter || chunkSize > 3, CustomString_MinimalChunkSizeRequired);
+		YUNI_STATIC_ASSERT(adapter || chunkSize > 3, CustomString_MinimalChunkSizeRequired);
 
 	public:
 		//! \name CString comparison
@@ -203,7 +232,7 @@ namespace Yuni
 		** of 's' is reached before).
 		*/
 		template<unsigned int SizeT, bool ExpT, bool ZeroT>
-		CustomString(const CustomString<SizeT,ExpT,ZeroT>& s, Size offset, Size n = npos);
+		CustomString(const CustomString<SizeT,ExpT,ZeroT>& s, Size offset, Size n /*= npos*/);
 
 		/*!
 		** \brief Constructor from a copy of a substring of 's' (std::string)
@@ -222,7 +251,7 @@ namespace Yuni
 		** of 's' is reached before).
 		*/
 		template<class TraitsT, class AllocT>
-		CustomString(const std::basic_string<char,TraitsT,AllocT>& s, Size offset, Size n = npos);
+		CustomString(const std::basic_string<char,TraitsT,AllocT>& s, Size offset, Size n /*= npos*/);
 
 		/*!
 		** \brief Constructor by copy from iterator
@@ -252,6 +281,11 @@ namespace Yuni
 		** \brief Construct a string formed by a repetition of the character c, n times
 		*/
 		CustomString(size_t n, char c);
+
+		/*!
+		** \brief Construct a string formed by a repetition of the character c, n times
+		*/
+		CustomString(size_t n, unsigned char c);
 
 		/*!
 		** \brief Destructor
@@ -489,11 +523,13 @@ namespace Yuni
 		template<class U> void write(const U& cstr, const Size size);
 
 		/*!
-		** \brief Append a single item (char)
-		**
-		** \param c A single char
+		** \brief Append a single signed char
 		*/
 		void put(const char c);
+		/*!
+		** \brief Append a single unsigned char
+		*/
+		void put(const unsigned char c);
 		// equivalent to append, provided for compatibility with other containers
 		template<class U> void put(const U& rhs);
 
@@ -884,6 +920,25 @@ namespace Yuni
 		*/
 		template<class StringT> Size irfind(const StringT& s, Size offset = npos) const;
 
+		/*!
+		** \brief Get if the string contains at least one occurence of a given char
+		*/
+		bool hasChar(char c) const;
+
+		/*!
+		** \brief Get if the string contains at least one occurence of a given unsigned char
+		*/
+		bool hasChar(unsigned char c) const;
+
+		/*!
+		** \brief Get the number of occurrences of a single char
+		*/
+		unsigned int countChar(char c) const;
+
+		/*!
+		** \brief Get the number of occurrences of a single unsigned char
+		*/
+		unsigned int countChar(unsigned char c) const;
 
 		/*!
 		** \brief Find the offset of a sub-string from the left
@@ -922,21 +977,16 @@ namespace Yuni
 		/*!
 		** \brief Searches the string for an individual character
 		**
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
 		** \return The position of the first occurrence in the string (zero-based)
 		**   npos if not found
 		*/
-		Size find_first_of(char c) const;
+		Size find_first_of(char c, Size offset = 0) const;
 
 		/*!
-		** \brief Searches the string for an individual character (ignoring the case)
-		**
-		** \return The position of the first occurrence in the string (zero-based)
-		**   npos if not found
-		*/
-		Size ifind_first_of(char c) const;
-
-		/*!
-		** \brief Searches the string for an individual character
+		** \brief Searches the string for an individual character (case insensitive)
 		**
 		** \param offset Position of the first character in the string to be taken
 		**   into consideration for possible matches. A value of 0 means that the
@@ -944,7 +994,7 @@ namespace Yuni
 		** \return The position of the first occurrence in the string (zero-based)
 		**   npos if not found
 		*/
-		Size find_first_of(char c, Size offset) const;
+		Size ifind_first_of(char c, Size offset = 0) const;
 
 		/*!
 		** \brief Searches the string for any of the characters that are part of `seq`
@@ -970,6 +1020,56 @@ namespace Yuni
 		**   npos if not found
 		*/
 		template<class StringT> Size ifind_first_of(const StringT& seq, Size offset = 0) const;
+
+		/*!
+		** \brief Searches the string for the first character that is not `c`
+		**
+		** \param seq An arbitrary string
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		Size find_first_not_of(char c, Size offset = 0) const;
+
+		/*!
+		** \brief Searches the string for the first character that is not `c` (case insensitive)
+		**
+		** \param seq An arbitrary string
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		Size ifind_first_not_of(char c, Size offset = 0) const;
+
+		/*!
+		** \brief Searches the string for any of the characters that are not part of `seq`
+		**
+		** \param seq An arbitrary string
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		template<class StringT> Size find_first_not_of(const StringT& seq, Size offset = 0) const;
+
+		/*!
+		** \brief Searches the string for any of the characters that are not part of `seq` (case insensitive)
+		**
+		** \param seq An arbitrary string
+		** \param offset Position of the first character in the string to be taken
+		**   into consideration for possible matches. A value of 0 means that the
+		**   entire string is considered.
+		** \return The position of the first occurrence in the string (zero-based)
+		**   npos if not found
+		*/
+		template<class StringT> Size ifind_first_not_of(const StringT& seq, Size offset = 0) const;
+
+
 
 		/*!
 		** \brief Searches the string from the end for an individual character
@@ -1598,18 +1698,14 @@ namespace Yuni
 		** \brief Get the first char of the string
 		** \return The last char of the string if not empty, \0 otherwise
 		*/
-		int first() const;
+		char first() const;
 
 		/*!
 		** \brief Get the last char of the string
 		** \return The last char of the string if not empty, \0 otherwise
 		*/
-		int last() const;
+		char last() const;
 
-		/*!
-		** \brief Get the number of occurences of a single char
-		*/
-		unsigned int countChar(char c) const;
 
 		/*!
 		** \brief Get if the string matches a simple pattern ('*' only managed)
@@ -1684,6 +1780,20 @@ namespace Yuni
 		//@}
 
 
+		//! \name Adaptor only
+		//@{
+		/*!
+		** \brief Adapt from a mere C-String
+		*/
+		void adapt(const char* cstring, Size length);
+
+		/*!
+		** \brief Adapt from any known string
+		*/
+		template<class StringT> void adapt(const StringT& string);
+		//@}
+
+
 		//! \name Operators
 		//@{
 		//! The operator `[]`, for accessing to a single char (the offset must be valid)
@@ -1743,6 +1853,7 @@ namespace Yuni
 		template<class, class> friend struct Yuni::Extension::CustomString::Append;
 		template<class, class> friend struct Yuni::Extension::CustomString::Assign;
 		template<class, class> friend struct Yuni::Extension::CustomString::Fill;
+		template<class, bool>  friend struct Private::CustomStringImpl::AdapterAssign;
 
 	}; // class CustomString
 

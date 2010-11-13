@@ -13,7 +13,7 @@ IF(NOT YUNI_AUTO_COMPILE_YUNI_CONFIG)
 	Include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/message.cmake")
 
 ENDIF(NOT YUNI_AUTO_COMPILE_YUNI_CONFIG)
-	
+
 YMESSAGE("")
 YMESSAGE("yuni-config")
 YMESSAGE("")
@@ -43,7 +43,6 @@ SET(src
 	../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.cpp
 	../../yuni/core/io/io.cpp
 	../../yuni/core/io/file/file.cpp
-	../../yuni/core/io/file/load.cpp
 	../../yuni/core/io/file/openmode.cpp
 	../../yuni/core/io/file/stream.cpp
 	../../yuni/core/io/exists.cpp
@@ -65,14 +64,14 @@ ADD_EXECUTABLE(yuni-config ${src})
 SET_TARGET_PROPERTIES(yuni-config PROPERTIES
 	COMPILE_FLAGS "-DYUNI_YUNICONFIG_IN_TREE=\\\"${CMAKE_CURRENT_SOURCE_DIR}\\\""
 	RUNTIME_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/bin"
-) 
+)
 
 # If we are not bootstrapping, also build the "installable" yuni-config.
 IF(NOT YUNI_BOOTSTRAP_YUNI_CONFIG)
 
 	ADD_EXECUTABLE(yuni-config-${YUNI_VERSION} ${src})
 	SET_TARGET_PROPERTIES(yuni-config-${YUNI_VERSION} PROPERTIES
-		RUNTIME_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/bin") 
+		RUNTIME_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/bin")
 	INSTALL(TARGETS yuni-config-${YUNI_VERSION} RUNTIME DESTINATION bin)
 
 ENDIF(NOT YUNI_BOOTSTRAP_YUNI_CONFIG)

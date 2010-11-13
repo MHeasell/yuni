@@ -26,9 +26,9 @@ namespace CustomStringImpl
 			{
 				capacity += zeroTerminated;
 				data = (C*)::malloc(sizeof(C) * capacity);
-				(void)::memcpy(data, rhs.data, sizeof(C) * size);
+				(void)::memcpy(const_cast<void*>(static_cast<const void*>(data)), rhs.data, sizeof(C) * size);
 				if (zeroTerminated)
-					data[size] = C();
+					(const_cast<char*>(data))[size] = C();
 			}
 			else
 			{
@@ -44,8 +44,9 @@ namespace CustomStringImpl
 	{
 		// Release the internal buffer if allocated
 		// The string is a string adapter only if the chunk size if null
+		// When the string is an adapter, the variable is const
 		if (chunkSize != 0)
-			::free(data);
+			::free(const_cast<void*>(static_cast<const void*>(data)));
 	}
 
 
@@ -73,7 +74,7 @@ namespace CustomStringImpl
 			if (size)
 			{
 				size = 0;
-				data[0] = C();
+				*(const_cast<char*>(data)) = C();
 			}
 		}
 		else
@@ -94,7 +95,7 @@ namespace CustomStringImpl
 			else
 			{
 				capacity = 0;
-				::free(data);
+				::free(const_cast<void*>(static_cast<const void*>(data)));
 				data = NULL;
 			}
 		}
@@ -107,14 +108,14 @@ namespace CustomStringImpl
 		// Reserving enough space to insert the buffer
 		reserve(len + size + zeroTerminated);
 		// Move the existing block of data
-		(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (size - offset));
+		(void)::memmove(const_cast<char*>(data) + sizeof(C) * (offset + len), const_cast<char*>(data) + sizeof(C) * (offset), sizeof(C) * (size - offset));
 		// Copying the given buffer
-		(void)::memcpy (data + sizeof(C) * (offset), buffer, sizeof(C) * len);
+		(void)::memcpy (const_cast<char*>(data) + sizeof(C) * (offset), buffer, sizeof(C) * len);
 		// Updating the size
 		size += len;
 		// zero-terminated
 		if (zeroTerminated)
-			data[size] = C();
+			(const_cast<char*>(data))[size] = C();
 	}
 
 
@@ -124,17 +125,19 @@ namespace CustomStringImpl
 		// Making sure that we have enough space
 		reserve(size + 1 + zeroTerminated);
 		// Raw copy
-		data[size] = rhs;
+		(const_cast<char*>(data))[size] = rhs;
 		// New size
 		++size;
 		if (zeroTerminated)
-			data[size] = C();
+			(const_cast<char*>(data))[size] = C();
 	}
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::reserve(Size minCapacity)
 	{
+		if (adapter)
+			return;
 		minCapacity += zeroTerminated;
 		if (capacity < minCapacity)
 		{
@@ -149,7 +152,7 @@ namespace CustomStringImpl
 			} while (newcapacity < minCapacity);
 
 			// Realloc the internal buffer
-			C* newdata = (C*)::realloc(data, (size_t)(sizeof(C) * newcapacity));
+			C* newdata = (C*)::realloc(const_cast<char*>(data), (size_t)(sizeof(C) * newcapacity));
 			// The returned value can be NULL
 			if (!newdata)
 				throw "Yuni::CustomString: Impossible to realloc";
@@ -157,7 +160,7 @@ namespace CustomStringImpl
 				data = newdata;
 				capacity = newcapacity;
 				if (zeroTerminated)
-					data[size] = '\0';
+					(const_cast<char*>(data))[size] = C();
 			}
 		}
 	}
@@ -180,21 +183,21 @@ namespace CustomStringImpl
 			// The new blocksize is actually the capacity itself
 			// The capacity can not be null
 			// Raw copy
-			(void)::memcpy(data, block, sizeof(C) * capacity);
+			(void)::memcpy(const_cast<char*>(data), block, sizeof(C) * capacity);
 			// New size
 			size = capacity;
 			if (zeroTerminated)
-				data[capacity] = C();
+				(const_cast<char*>(data))[capacity] = C();
 			return capacity;
 		}
 		// else
 		{
 			// Raw copy
-			(void)::memcpy(data, block, sizeof(C) * blockSize);
+			(void)::memcpy(const_cast<char*>(data), block, sizeof(C) * blockSize);
 			// New size
 			size = blockSize;
 			if (zeroTerminated)
-				data[size] = C();
+				(const_cast<char*>(data))[size] = C();
 			return blockSize;
 		}
 	}
@@ -223,7 +226,7 @@ namespace CustomStringImpl
 			// New size
 			size = capacity;
 			if (zeroTerminated)
-				data[capacity] = C();
+				(const_cast<char*>(data))[capacity] = C();
 			return blockSize;
 		}
 		// else
@@ -233,7 +236,7 @@ namespace CustomStringImpl
 			// New size
 			size += blockSize;
 			if (zeroTerminated)
-				data[size] = C();
+				(const_cast<char*>(data))[size] = C();
 			return blockSize;
 		}
 	}
@@ -245,7 +248,7 @@ namespace CustomStringImpl
 		data[0] = c;
 		size = 1;
 		if (zeroTerminated)
-			data[1] = C();
+			(const_cast<char*>(data))[1] = C();
 		return 1;
 	}
 
@@ -261,7 +264,7 @@ namespace CustomStringImpl
 			data[size] = c;
 			++size;
 			if (zeroTerminated)
-				data[size] = C();
+				(const_cast<char*>(data))[size] = C();
 			return 1;
 		}
 	}
@@ -278,7 +281,7 @@ namespace CustomStringImpl
 			// New size
 			++size;
 			if (zeroTerminated)
-				data[size] = C();
+				(const_cast<char*>(data))[size] = C();
 		}
 	}
 

@@ -39,14 +39,38 @@ namespace File
 	/*!
 	** \brief A low-level implementation for reading and writing files
 	**
-	** \ingroup IOFile
-	**
 	** The file will be automatically closed (if not already done) at the
 	** destruction of the object.
 	**
-	** When writing a data into a file, the data is written 'as it' if a CString
-	** can be extracted from it (see yuni/core/traits/cstring.h). Otherwise
-	** a 'Yuni::String' will be used to perform the convertion.
+	** Here is a simple example for reading a file, line by line :
+	** \code
+	** Core::IO::File::Stream file;
+	** // opening out file
+	** if (file.open("myfile.txt"))
+	** {
+	** 		// A buffer. The given capacity will be the maximum length for a single line
+	** 		CustomString<4096> buffer;
+	** 		while (file.readline(buffer))
+	** 		{
+	** 			// do something with the buffer
+	** 			// here we will merely dump it to the std::cout
+	** 			std::cout << buffer << std::endl;
+	** 		}
+	** }
+	** // the file will be implicitely closed here
+	** \endcode
+	**
+	** When writing a data into a file, the data will be written 'as it' if it can
+	** be represented by a mere c-string. Otherwise a 'Yuni::String' will be used
+	** to perform the convertion.
+	** \code
+	** Core::IO::File::Stream file;
+	** if (file.open("out.txt", Core::IO::OpenMode::write | Core::IO::OpenMode::truncate))
+	** {
+	** 		file << "Without implicit convertion: Hello world !\n";
+	** 		file << "With implicit convertion   : " << 42 << '\n';
+	** }
+	** \endcode
 	**
 	** \internal This implementation is most of the time a C++ wrapper over the standard
 	**   routines 'fopen', 'fclose'... The implementation is a bit different on Windows
@@ -54,6 +78,10 @@ namespace File
 	*/
 	class Stream
 	{
+	public:
+		//! The native handle type
+		typedef FILE* HandleType;
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -248,6 +276,13 @@ namespace File
 		//@}
 
 
+		//! \name Native
+		//@{
+		//! Get the OS Dependant handle
+		HandleType nativeHandle() const;
+		//@}
+
+
 		//! \name Operators
 		//@{
 		//! True if the stream if not opened
@@ -270,13 +305,12 @@ namespace File
 	private:
 		# ifdef YUNI_OS_WINDOWS
 		//! UTF8 Implementation as replacement of the routine 'fopen' on Windows
-		static FILE* OpenFileOnWindows(const char* filename, const int mode);
+		static HandleType OpenFileOnWindows(const char* filename, const int mode);
 		# endif
 
 	private:
-		typedef FILE HandleType;
 		//! A FILE pointer
-		HandleType* pFd;
+		HandleType pFd;
 
 	}; // class Stream
 

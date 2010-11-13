@@ -101,6 +101,31 @@ namespace UTF8
 			return *this;
 		}
 
+		bool operator == (const char c) const
+		{
+			return (pValue < 0x80 && static_cast<char>(pValue) == c);
+		}
+
+		bool operator != (const char c) const
+		{
+			return !(*this == c);
+		}
+
+		bool operator == (const unsigned char c) const
+		{
+			return (pValue < 0x80 && static_cast<unsigned char>(pValue) == c);
+		}
+
+		bool operator != (const unsigned char c) const
+		{
+			return !(*this == c);
+		}
+
+		operator char () const
+		{
+			return (pValue < 0x80) ? static_cast<char>(pValue) : '\0';
+		}
+
 	private:
 		//! The UTF-8 character
 		uint32 pValue;

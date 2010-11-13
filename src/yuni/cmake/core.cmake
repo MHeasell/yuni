@@ -68,6 +68,10 @@ check_include_file_cxx(fcntl.h YUNI_HAS_FCNTL_H)
 check_include_file_cxx(cstdlib YUNI_HAS_CSTDLIB)
 # stdarg
 check_include_file_cxx(stdarg.h YUNI_HAS_STDARG_H)
+if(NOT APPLE AND NOT WIN32 AND NOT WIN64)
+	# sys/sendfile.h
+	check_include_file_cxx("sys/sendfile.h" YUNI_HAS_SYS_SENDFILE_H)
+endif()
 # Macro va_copy
 check_cxx_source_compiles("#include <stdarg.h>
 	int main() {va_list a, b; va_copy(a, b);}" YUNI_HAS_VA_COPY)
@@ -487,7 +491,6 @@ set(SRC_CORE_IO_FILE
 				core/io/file/stream.h core/io/file/stream.hxx
 				core/io/file/stream.cpp
 				core/io/file.h core/io/file/file.hxx core/io/file/file.cpp
-				core/io/file/load.cpp
 				)
 source_group(Core\\IO\\File FILES ${SRC_CORE_IO_FILE})
 
@@ -520,18 +523,18 @@ set(SRC_THREADS
 		thread/policy.h
 		thread/pthread.h
 		thread/mutex.h
-        thread/mutex.hxx
+		thread/mutex.hxx
 		thread/thread.h
-        thread/thread.hxx
-        thread/thread.cpp
+		thread/thread.hxx
+		thread/thread.cpp
 		thread/timer.h
-        thread/timer.hxx
-        thread/timer.cpp
+		thread/timer.hxx
+		thread/timer.cpp
 		thread/condition.h
-        thread/condition.cpp
-        thread/condition.hxx
+		thread/condition.cpp
+		thread/condition.hxx
 		thread/array.h
-        thread/array.hxx)
+		thread/array.hxx)
 source_group(Threads FILES ${SRC_THREADS})
 
 # Jobs
@@ -539,18 +542,18 @@ set(SRC_JOBS
 		job/enum.h
 		job/forward.h
 		job/job.h
-        job/job.hxx
-        job/job.cpp
+		job/job.hxx
+		job/job.cpp
 		job/queue.h
-        job/queue/queue.h
-        job/queue/queue.hxx
+		job/queue/queue.h
+		job/queue/queue.hxx
 		job/queue/thread.h
 		job/queue/thread.hxx
 		job/queue/waitingroom.h
-        job/queue/waitingroom.hxx
+		job/queue/waitingroom.hxx
 		job/queue/waitingroom.cpp
 
-		# Scheduler
+# Scheduler
 		job/scheduler/highestpriorityfirst.h
 		job/scheduler/highestpriorityfirst.hxx
 		)
@@ -569,10 +572,10 @@ set(SRC_CORE_COLOR
 		# Color
 		core/color/rgba.h
 		core/color/rgba.hxx
-        core/color/rgb.h
-        core/color/rgb.hxx
+		core/color/rgb.h
+		core/color/rgb.hxx
 		core/color/fwd.h
-		)
+	)
 source_group(Core\\Color FILES ${SRC_CORE_COLOR})
 
 
@@ -619,7 +622,7 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_ATOMIC}
 		${SRC_CORE_SMARTPTR}
 		${SRC_CORE_ANY}
-        ${SRC_CORE_COLOR}
+		${SRC_CORE_COLOR}
 		${SRC_CORE_SLIST}
 		${SRC_CORE_VARIANT}
 		${SRC_CORE_DYNAMICLIBRARY}

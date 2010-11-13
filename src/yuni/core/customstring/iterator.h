@@ -151,6 +151,42 @@ struct Model
 		*/
 		Size rawOffset() const {return pOffset;}
 
+
+		bool findFirstNonSpace(const Size end)
+		{
+			do
+			{
+				if (pChar == ' ' || pChar == '\t' || pChar == '\n' || pChar == '\r')
+				{
+					forward();
+					if (pOffset >= end)
+						return false;
+				}
+				else
+					return true;
+			}
+			while (true);
+			return true;
+		}
+
+		bool find(const char c, const Size endOffset)
+		{
+			do
+			{
+				if (pChar != c)
+				{
+					forward();
+					if (pOffset > endOffset)
+						return false;
+				}
+				else
+					return true;
+			}
+			while (true);
+			return true;
+		}
+
+
 	protected:
 		UTF8Iterator(const StringType& s, size_type offset)
 			:pOffset(offset), pString(const_cast<StringType&>(s))
@@ -165,6 +201,7 @@ struct Model
 		explicit UTF8Iterator(const StringType& s)
 			:pOffset(0), pString(s)
 		{}
+
 		UTF8Iterator(const UTF8Iterator& copy)
 			:pChar(copy.pChar), pOffset(copy.rawOffset()),
 			pString(const_cast<StringType&>(copy.pString))
@@ -188,6 +225,13 @@ struct Model
 		void reset(const ModelT& model)
 		{
 			pOffset = model.rawOffset();
+			if (!pOffset)
+				forward();
+			else
+			{
+				--pOffset;
+				forward();
+			}
 		}
 
 		template<class ModelT>
@@ -201,6 +245,7 @@ struct Model
 		{
 			return (pOffset == model.rawOffset());
 		}
+
 
 		UTF8::Char& operator * ()
 		{
@@ -274,6 +319,41 @@ struct Model
 		** for other external iterators
 		*/
 		Size rawOffset() const {return pOffset;}
+
+
+		bool findFirstNonSpace(const Size end)
+		{
+			do
+			{
+				if (pString[pOffset] == ' ' || pString[pOffset] == '\t' || pString[pOffset] == '\n' || pString[pOffset] == '\r')
+				{
+					forward();
+					if (pOffset >= end)
+						return false;
+				}
+				else
+					return true;
+			}
+			while (true);
+			return true;
+		}
+
+		bool find(const char c, const Size endOffset)
+		{
+			do
+			{
+				if (pString[pOffset] != c)
+				{
+					forward();
+					if (pOffset > endOffset)
+						return false;
+				}
+				else
+					return true;
+			}
+			while (true);
+			return true;
+		}
 
 
 	protected:

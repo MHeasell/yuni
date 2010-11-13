@@ -18,6 +18,30 @@ namespace Private
 namespace CustomStringImpl
 {
 
+	template<class StringT, bool Adapter>
+	struct AdapterAssign
+	{
+		static void Perform(StringT& out, const char* const cstring, typename StringT::Size size)
+		{
+			out.data = cstring;
+			out.size = size;
+		}
+	};
+
+	template<class StringT>
+	struct AdapterAssign<StringT, false>
+	{
+		static void Perform(StringT& out, const char* const cstring, typename StringT::Size size)
+		{
+			// fallback
+			out.assign(cstring, size);
+		}
+	};
+
+
+	// Const qualifier from the adapter mode
+	template<bool AdapterT, class C> struct QualifierFromAdapterMode { typedef C* Type; };
+	template<class C> struct QualifierFromAdapterMode<true, C> { typedef const C* Type; };
 
 
 	int Compare(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
@@ -39,6 +63,7 @@ namespace CustomStringImpl
 			chunkSize = ChunkSizeT,
 			zeroTerminated = (ZeroTerminatedT ? 1 : 0),
 			expandable = 1,
+			adapter  = (!chunkSize && expandable && !zeroTerminated),
 		};
 
 	public:
@@ -70,11 +95,11 @@ namespace CustomStringImpl
 			// Making sure that we have enough space
 			reserve(blockSize + zeroTerminated);
 			// Raw copy
-			(void)::memcpy(data, block, sizeof(C) * blockSize);
+			(void)::memcpy(const_cast<char*>(data), block, sizeof(C) * blockSize);
 			// New size
 			size = blockSize;
 			if (zeroTerminated)
-				data[size] = C();
+				(const_cast<char*>(data))[size] = C();
 			return blockSize;
 		}
 
@@ -84,11 +109,11 @@ namespace CustomStringImpl
 			// Making sure that we have enough space
 			reserve(size + blockSize + zeroTerminated);
 			// Raw copy
-			(void)::memcpy(data + size * sizeof(C), block, blockSize * sizeof(C));
+			(void)::memcpy(const_cast<char*>(data) + size * sizeof(C), block, blockSize * sizeof(C));
 			// New size
 			size += blockSize;
 			if (zeroTerminated)
-				data[size] = C();
+				(const_cast<char*>(data))[size] = C();
 			return blockSize;
 		}
 
@@ -97,11 +122,11 @@ namespace CustomStringImpl
 			// Making sure that we have enough space
 			reserve(1 + zeroTerminated);
 			// Raw copy
-			data[0] = c;
+			(const_cast<char*>(data))[0] = c;
 			// New size
 			size = 1;
 			if (zeroTerminated)
-				data[1] = C();
+				(const_cast<char*>(data))[1] = C();
 			return 1;
 		}
 
@@ -111,11 +136,11 @@ namespace CustomStringImpl
 			// Making sure that we have enough space
 			reserve(size + 1 + zeroTerminated);
 			// Raw copy
-			data[size] = c;
+			(const_cast<char*>(data))[size] = c;
 			// New size
 			++size;
 			if (zeroTerminated)
-				data[size] = C();
+				(const_cast<char*>(data))[size] = C();
 			return 1;
 		}
 
@@ -146,7 +171,8 @@ namespace CustomStringImpl
 	protected:
 		Size size;
 		Size capacity;
-		C* data;
+		//! Our buffer
+		typename QualifierFromAdapterMode<(0 != adapter), C>::Type data;
 		// Friend
 		template<unsigned int SizeT, bool ExpT, bool ZeroT> friend class Yuni::CustomString;
 

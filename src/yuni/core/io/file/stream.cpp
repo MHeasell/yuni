@@ -26,7 +26,7 @@ namespace File
 
 	# ifdef YUNI_OS_WINDOWS
 
-	FILE* Stream::OpenFileOnWindows(const char* filename, const int mode)
+	Stream::HandleType Stream::OpenFileOnWindows(const char* filename, const int mode)
 	{
 		const size_t len = strlen(filename);
 		if (!len)
