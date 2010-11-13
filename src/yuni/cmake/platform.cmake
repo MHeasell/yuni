@@ -43,6 +43,9 @@
 /* va_copy */
 #cmakedefine YUNI_HAS_VA_COPY
 
+/* sys/sendfile.h */
+#cmakedefine YUNI_HAS_SYS_SENDFILE_H
+
 
 
 

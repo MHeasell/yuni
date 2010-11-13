@@ -283,13 +283,13 @@ namespace Color
 	inline RGB<T>::RGB()
 		:red(), green(), blue()
 	{}
-	
+
 
 	template<class T>
 	inline RGB<T>::RGB(const RGB<T>& rhs)
 		:red(rhs.red), green(rhs.green), blue(rhs.blue)
 	{}
-	
+
 
 	template<class T>
 	template<class U>
@@ -297,7 +297,7 @@ namespace Color
 	{
 		Yuni::Extension::Color::RGB<RGB<T>, U>::Assign(*this, value);
 	}
-	
+
 
 	template<class T>
 	template<class R, class G, class B, class A>
@@ -361,6 +361,15 @@ namespace Color
 		return true;
 	}
 
+
+	template<class T>
+	inline RGB<T>& RGB<T>::operator = (const Yuni::NullPtr&)
+	{
+		red   = T();
+		green = T();
+		blue  = T();
+		return *this;
+	}
 
 
 	template<class T>
@@ -441,6 +450,148 @@ namespace Color
 
 } // namespace Color
 } // namespace Yuni
+
+
+
+namespace Yuni
+{
+namespace Extension
+{
+namespace CustomString
+{
+
+	template<class CustomStringT, class T>
+	struct Append<CustomStringT, Yuni::Color::RGB<T> >
+	{
+		static void Perform(CustomStringT& s, const Yuni::Color::RGB<T>& rhs)
+		{
+			rhs.print(s);
+		}
+	};
+
+
+	template<class T>
+	class Into<Yuni::Color::RGB<T> >
+	{
+	public:
+		typedef Yuni::Color::RGB<T> TargetType;
+		enum { valid = 1 };
+
+		template<class StringT> static bool Perform(const StringT& s, TargetType& out)
+		{
+			if (s.empty())
+			{
+				out = nullptr;
+				return true;
+			}
+			if (!InternalPerform(s, out))
+			{
+				out = nullptr;
+				return false;
+			}
+			return true;
+		}
+
+		template<class StringT> static TargetType Perform(const StringT& s)
+		{
+			return TargetType(s.c_str(), s.size());
+		}
+
+	private:
+		template<class StringT>
+		static bool InternalPerform(const StringT& s, TargetType& out)
+		{
+			enum
+			{
+				upperBound = Yuni::Private::Color::DefaultValues<T>::upperBound,
+				lowerBound = Yuni::Private::Color::DefaultValues<T>::lowerBound,
+			};
+
+			const typename StringT::const_utf8iterator end = s.utf8end();
+			typename StringT::const_utf8iterator i = s.utf8begin();
+
+			if (!i.findFirstNonSpace(end.offset()))
+			{
+				out = nullptr; // empty string
+				return true;
+			}
+			// trimming
+			if (*i != 'r' || ++i == end || *i != 'g' || ++i == end || *i != 'b' || ++i == end)
+				return false;
+			bool hasAlpha = (*i == 'a');
+			if (hasAlpha && ++i == end)
+				return false;
+			if (*i != '(')
+			{
+				if (!i.findFirstNonSpace(end.offset()) || *i != '(')
+					return false;
+			}
+			if (++i == end || !i.findFirstNonSpace(end.offset()))
+			{
+				out = nullptr; // empty string
+				return true;
+			}
+
+			// A temporary string buffer for convertion
+			Yuni::CustomString<30, false> tmp;
+			// A copy of the offset
+			typename StringT::const_utf8iterator j = i;
+			// A temporary value for calculations
+			typename Yuni::Color::RGB<T>::template Calculation<T>::Type channel;
+
+			// RED CHANNEL
+			if (!i.find(',', end.offset()))
+				return false;
+			tmp.assign(j, i);
+			if (!tmp.to(channel) || ++i == end || !i.findFirstNonSpace(end.offset()))
+				return false;
+			out.red = Math::MinMaxEx<T>(channel, static_cast<T>(lowerBound), static_cast<T>(upperBound));
+
+			// GREEN CHANNEL
+			j = i;
+			if (!i.find(',', end.offset()))
+				return false;
+			tmp.assign(j, i);
+			if (!tmp.to(channel) || ++i == end || !i.findFirstNonSpace(end.offset()))
+				return false;
+			out.green = Math::MinMaxEx<T>(channel, static_cast<T>(lowerBound), static_cast<T>(upperBound));
+
+			if (hasAlpha)
+			{
+				// BLUE CHANNEL
+				j = i;
+				if (!i.find(',', end.offset()))
+					return false;
+				tmp.assign(j, i);
+				if (!tmp.to(channel) || ++i == end || !i.findFirstNonSpace(end.offset()))
+					return false;
+				out.blue = Math::MinMaxEx<T>(channel, static_cast<T>(lowerBound), static_cast<T>(upperBound));
+
+				// skipping alpha channel
+			}
+			else
+			{
+				// BLUE CHANNEL
+				j = i;
+				if (!i.find(')', end.rawOffset()))
+					return false;
+				tmp.assign(j, i);
+				if (!tmp.to(channel))
+					return false;
+				out.blue = static_cast<T>(channel);
+			}
+
+			return true;
+
+		}
+	};
+
+
+} // namespace CustomString
+} // namespace Extension
+} // namespace Yuni
+
+
 
 
 

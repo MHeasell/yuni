@@ -110,9 +110,9 @@ namespace CustomString
 
 	// void*
 	template<class CustomStringT>
-	struct Append<CustomStringT, UTF8::Char>
+	struct Append<CustomStringT, Yuni::UTF8::Char>
 	{
-		static void Perform(CustomStringT& s, const UTF8::Char& rhs)
+		static void Perform(CustomStringT& s, const Yuni::UTF8::Char& rhs)
 		{
 			rhs.write(s);
 		}

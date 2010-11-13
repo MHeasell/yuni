@@ -8,6 +8,9 @@
 #ifndef YUNI_OS_WINDOWS
 # include <unistd.h>
 #endif
+#if defined(YUNI_OS_LINUX) && defined(YUNI_HAS_SYS_SENDFILE_H)
+# include <sys/sendfile.h>
+#endif
 
 
 
@@ -198,6 +201,47 @@ namespace IO
 	}
 
 
+	Yuni::Core::IO::IOError Copy(Yuni::Core::IO::File::Stream& in, Yuni::Core::IO::File::Stream& out)
+	{
+		enum { size = 8192 };
+
+		# if defined(YUNI_OS_LINUX) && defined(YUNI_HAS_SYS_SENDFILE_H)
+		{
+			const int fdIN  = fileno(in. nativeHandle());
+			const int fdOUT = fileno(out.nativeHandle());
+
+			// Trying sendfile first
+			struct stat st;
+			if (!fstat(fdIN, &st))
+			{
+				off_t offset = 0;
+				if (-1 != sendfile(fdOUT, fdIN, &offset, st.st_size))
+					return Yuni::Core::IO::ioErrNone;
+			}
+
+			// fallback to the standard copy
+			char* buffer = new char[size];
+			size_t numRead;
+
+			while((numRead = read(fdIN, buffer, size)) > 0)
+				write(fdOUT, buffer, numRead);
+
+			delete[] buffer;
+			return Yuni::Core::IO::ioErrNone;
+		}
+
+		# else
+
+		// Generic implementation
+		char* buffer = new char[size];
+		size_t numRead;
+		while ((numRead = in.read(buffer, size)) != 0)
+			out.write(buffer, numRead);
+		delete[] buffer;
+		return Yuni::Core::IO::ioErrNone;
+
+		# endif
+	}
 
 
 

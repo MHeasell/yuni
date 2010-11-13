@@ -308,6 +308,11 @@ namespace File
 	}
 
 
+	inline Stream::HandleType Stream::nativeHandle() const
+	{
+		return pFd;
+	}
+
 
 
 } // namespace File

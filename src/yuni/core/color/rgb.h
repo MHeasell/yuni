@@ -123,6 +123,8 @@ namespace Color
 		//! Assignment
 		RGB& operator = (const RGB& rhs);
 		//! Assignment
+		RGB& operator = (const Yuni::NullPtr&);
+		//! Assignment
 		template<class U> RGB& operator = (const U& rhs);
 		//! Comparison
 		template<class U> bool operator == (const U& rhs) const;

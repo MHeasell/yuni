@@ -24,6 +24,8 @@ namespace IO
 	Yuni::Core::IO::IOError YnDeleteFile(const char* const filename, unsigned int len);
 	Yuni::Core::IO::IOError DeleteFileNotZeroTerminated(const char* const filename, unsigned int len);
 
+	Yuni::Core::IO::IOError Copy(Yuni::Core::IO::File::Stream& in, Yuni::Core::IO::File::Stream& out);
+
 } // namespace IO
 } // namespace Core
 } // namespace Private
@@ -94,20 +96,6 @@ namespace File
 	}
 
 
-	template<int N>
-	inline bool Load(String::Vector& out, const StringBase<char,N>& filename, const bool emptyListBefore,
-		const uint64 sizeLimit)
-	{
-		return Load(out, filename.c_str(), emptyListBefore, sizeLimit);
-	}
-
-	template<int N>
-	inline bool Load(String::List& out, const StringBase<char,N>& filename, const bool emptyListBefore,
-		const uint64 sizeLimit)
-	{
-		return Load(out, filename.c_str(), emptyListBefore, sizeLimit);
-	}
-
 
 	template<class StringT>
 	inline bool CreateEmptyFile(const StringT& filename)
@@ -155,13 +143,7 @@ namespace File
 		{
 			Yuni::Core::IO::File::Stream toFile(to, OpenMode::write | OpenMode::truncate);
 			if (toFile.opened())
-			{
-				char buffer[4096];
-				size_t numRead;
-				while ((numRead = fromFile.read(buffer, sizeof(buffer))) != 0)
-					toFile.write(buffer, numRead);
-				return ioErrNone;
-			}
+				return Yuni::Private::Core::IO::Copy(fromFile, toFile);
 		}
 		return ioErrNotFound;
 	}

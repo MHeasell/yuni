@@ -789,10 +789,6 @@ namespace Yuni
 		//@}
 
 
-		//! \name Replace
-		//@{
-				//@}
-
 		//! \name Conversions
 		//@{
 		/*!
