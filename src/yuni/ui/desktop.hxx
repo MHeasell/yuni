@@ -15,7 +15,7 @@ namespace UI
 
 	inline void Desktop::reconnect()
 	{
-		typename ThreadingPolicy::MutexLocker lock(*this);
+		ThreadingPolicy::MutexLocker lock(*this);
 		reconnectWL();
 	}
 
