@@ -2,12 +2,12 @@
 About the Yuni project
 ======================
 
-Yuni is a high-level cross-platform C++ framework, for developing high-level,
-complex and fast applications. This framework intends to provide the most
-complete set of coherent API as possible related to 3D programming, especially
-3D simulation and game programming. It intends to be a reliable and simple
-bridge between different worlds, allowing to write all sorts of applications,
-while letting the developer focus on her real work.
+Yuni is a cross-platform C++ framework for developing high-level, complex and
+fast applications. This framework intends to provide the most complete set of
+coherent API as possible related to 3D programming, especially 3D simulation
+and game programming. It intends to be a reliable and simple bridge between
+different worlds, allowing to write all sorts of applications, while letting
+the developer focus on her real work.
 
 The Yuni project is connected to all these domains :
  - 3D graphics
