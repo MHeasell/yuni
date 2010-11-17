@@ -1,0 +1,57 @@
+
+Philosophy
+==========
+
+Values
+------
+
+The Yuni team believes it is important to be clear as to what is important to
+us. Stating clearly the values we believe in helps to be consistent in
+technical and philosophical choices for Yuni.
+
+* Efficiency :
+  We want Yuni to be fast. At least as fast as alternatives, and faster
+  whenever possible.
+* Portability :
+  The code must be portable and work seamlessly on every supported platform.
+  The only exception is UI, where windows and controls must follow the visual
+  codes of the host OS. Yuni also provides defines to help you manage your own
+  non-portable code.
+* Elegance :
+  We want Yuni to be elegant both in how it is written and in the interfaces it
+  offers to users. Beautiful code is more easily debugged and maintained. Nice
+  API encourages use. For example, we always provide default values for
+  optional arguments or template parameters.
+* Abstraction :
+  Most of the time, you do not care how a feature is implemented behind the
+  curtains. You want an interface that matches your mental representation of
+  the concepts you handle. The API has to use the correct vocabulary and
+  structure to help you understand what it does (not how it does it).
+* Modularity :
+  Features in Yuni are mostly independent. You can choose to use only what you
+  need by including and linking with a strict minimum instead of the whole
+  thing. This means you do not have to pay for anything you do not use (which
+  is a very important asset allowed by C++). When some features rely on other
+  features, the fact should be clearly documented.
+* Completeness :
+  When dealing with a topic in Yuni, the whole topic should be covered. If any
+  hole is left in the code (temporarily or permanentlY), a clear reason to why
+  must be provided.
+* Versatility :
+  Yuni must be able to adapt to your needs. We do that by offering statically
+  configurable classes (using templates, and particularly policies),
+  dynamically configurable behaviours (using method arguments), and by
+  providing	an extension mechanism that you can use to add features to some
+  Yuni objects. Also, Yuni adapts to your level by offering good default values
+  for beginners who want basic functionality, and complete configurable
+  behaviour for advanced users who want to access all the power inside.
+
+
+Structure
+---------
+
+Yuni's structure is a direct consequence of the values we believe in. Yuni is
+a set of libraries because it allows for modularity. Yuni hides useless classes
+into Private namespaces to avoid cluttering the API for more elegance. Yuni has
+compiled libraries in some cases, and static libraries that have to be included
+in your code when the need for versatility and / or efficiency arises.
