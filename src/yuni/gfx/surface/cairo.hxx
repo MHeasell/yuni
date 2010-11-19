@@ -20,18 +20,6 @@ namespace Surface
 	}
 
 
-	inline bool Cairo::initialize()
-	{
-		pContext = cairo_create(pSurface);
-		if (pContext)
-		{
-			cairo_set_source_rgb(pContext, 0, 0, 0);
-			return true;
-		}
-		return false;
-	}
-
-
 	inline void Cairo::resize(float, float)
 	{
 	}
@@ -39,7 +27,7 @@ namespace Surface
 
 	inline bool Cairo::refresh()
 	{
-		cairo_paint(pContext);
+		clearScreen();
 		return true;
 	}
 
@@ -58,7 +46,10 @@ namespace Surface
 
 	inline void Cairo::clearScreen()
 	{
+		cairo_set_source_rgb(pContext, 0.3, 0.6, 0);
 		cairo_fill(pContext);
+		cairo_rectangle(pContext, 0.0, 0.0, 1.0, 1.0);
+		cairo_paint(pContext);
 	}
 
 

@@ -80,6 +80,12 @@ namespace Local
 		//! Get the UI window that corresponds to this internal representation
 		virtual Yuni::UI::Window::Ptr window() const { return pUIWnd; }
 
+		/*!
+		** \brief Refresh the window content if necessary
+		**
+		** \returns True if the window was refreshed, false if it was not necessary
+		*/
+		virtual bool refresh() = 0;
 
 		//! \name Events
 		//@{
@@ -88,6 +94,7 @@ namespace Local
 		** \return True if events were processed, False otherwise
 		*/
 		virtual bool pollEvents() { return false; }
+
 
 	public:
 		Event<void (float /* x */, float /* y */)> onMouseDown;
@@ -99,14 +106,6 @@ namespace Local
 		Event<void (unsigned char /* key */)> onKeyPressed;
 		Event<void (unsigned char /* key */)> onKeyUp;
 		//@}
-
-	protected:
-		/*!
-		** \brief Refresh the window content if necessary
-		**
-		** \returns True if the window was refreshed, false if it was not necessary
-		*/
-		virtual bool refresh() = 0;
 
 
 	protected:

@@ -26,7 +26,13 @@ namespace WindowSystem
 				winIt->second.second->pollEvents();
 				// Close dying windows
 				if (winIt->second.first->closing())
+				{
+					winIt->second.second->close();
 					appIt->second.erase(winIt);
+					continue;
+				}
+				// For the moment, always draw the surfaces
+				winIt->second.second->refresh();
 			}
 		}
 
@@ -58,6 +64,7 @@ namespace WindowSystem
 			pair.first = Window::Ptr::WeakPointer(window);
 			// Create the local representation
 			pair.second = Private::UI::Local::IWindow::Create(window);
+			pair.second->resize(window->x(), window->y());
 		}
 
 		// TODO : Inform the queue service to update the window on next onLoop()

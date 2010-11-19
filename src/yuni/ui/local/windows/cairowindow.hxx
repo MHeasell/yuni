@@ -23,14 +23,15 @@ namespace Windows
 
 	inline bool CairoWindow::refresh()
 	{
-		cairo_paint(pContext);
-		return true;
+		return Yuni::Gfx::Surface::Cairo::refresh();
 	}
 
 
 	inline void CairoWindow::close()
 	{
+		release();
 		destroyBoundEvents();
+		IWinGDIWindow::close();
 	}
 
 
