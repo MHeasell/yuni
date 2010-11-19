@@ -138,9 +138,11 @@ namespace EventLoop
 				pIsRunning = true;
 			}
 			// Initializing the request list
-			if (pRequests)
-				delete pRequests;
-			pRequests = new RequestListType();
+// 			if (pRequests)
+// 				delete pRequests;
+// 			pRequests = new RequestListType();
+			if (!pRequests)
+				pRequests = new RequestListType();
 		}
 		if (detached)
 		{
@@ -228,6 +230,9 @@ namespace EventLoop
 		// Locking for inserting the new request
 		{
 			typename ThreadingPolicy::MutexLocker locker(*this);
+			// Initializing pRequests allows for dispatching a request before calling start()
+			if (!pRequests)
+				pRequests = new RequestListType();
 			// Flow
 			if (!FlowPolicy::onRequestPosted(request))
 				return;

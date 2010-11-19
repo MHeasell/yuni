@@ -20,7 +20,7 @@ namespace WindowSystem
 		//! Static override for onLoop, called on each loop turn
 		bool onLoop();
 
-		bool showWindowDispatched(ShowWindowParams::Ptr& params);
+		bool showWindowDispatched(ShowWindowParams::Ptr params);
 	};
 
 

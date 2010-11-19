@@ -47,12 +47,6 @@ namespace UI
 		// The const_cast is quite ugly but after this point, the guid _must_ not be
 		// modified
 		GenerateGUID(const_cast<GUID&>(pGUID));
-		onShowWindow.connect(this, &Application::showWindow);
-		onHideWindow.connect(this, &Application::hideWindow);
-		onCloseWindow.connect(this, &Application::closeWindow);
-		onShowComponent.connect(this, &Application::showComponent);
-		onHideComponent.connect(this, &Application::hideComponent);
-		onUpdateComponent.connect(this, &Application::updateComponent);
 		disconnectWL();
 	}
 
@@ -92,12 +86,12 @@ namespace UI
 
 	void Application::reconnectOneWindowWL(Window::Ptr window)
 	{
-		window->onShowWindow = &onShowWindow;
-		window->onHideWindow = &onHideWindow;
-		window->onCloseWindow = &onCloseWindow;
-		window->onShowComponent = &onShowComponent;
-		window->onHideComponent = &onHideComponent;
-		window->onUpdateComponent = &onUpdateComponent;
+		window->onShowWindow.connect(this, &Application::showWindow);
+		window->onHideWindow.connect(this, &Application::hideWindow);
+		window->onCloseWindow.connect(this, &Application::closeWindow);
+		window->onShowComponent.connect(this, &Application::showComponent);
+		window->onHideComponent.connect(this, &Application::hideComponent);
+		window->onUpdateComponent.connect(this, &Application::updateComponent);
 	}
 
 
@@ -109,8 +103,6 @@ namespace UI
 		onApplicationShowComponent = nullptr;
 		onApplicationHideComponent = nullptr;
 		onApplicationUpdateComponent = nullptr;
-		// Reconnect will only propagate the null pointers to children windows
-		reconnectWL();
 	}
 
 

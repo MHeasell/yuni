@@ -37,14 +37,12 @@ namespace UI
 
 	void Desktop::disconnectWL()
 	{
-		onShowWindow = nullptr;
-		onHideWindow = nullptr;
-		onCloseWindow = nullptr;
-		onShowComponent = nullptr;
-		onHideComponent = nullptr;
-		onUpdateComponent = nullptr;
-		// Reconnecting will simply propagate the null pointers to the applications
-		reconnectWL();
+		onShowWindow.clear();
+		onHideWindow.clear();
+		onCloseWindow.clear();
+		onShowComponent.clear();
+		onHideComponent.clear();
+		onUpdateComponent.clear();
 	}
 
 
@@ -61,13 +59,13 @@ namespace UI
 
 	void Desktop::reconnectOneApplicationWL(Application::Ptr app)
 	{
-		app->onApplicationShowWindow = onShowWindow;
-		app->onApplicationHideWindow = onHideWindow;
-		app->onApplicationCloseWindow = onCloseWindow;
-		app->onApplicationShowComponent = onShowComponent;
-		app->onApplicationHideComponent = onHideComponent;
-		app->onApplicationUpdateComponent = onUpdateComponent;
-		app->disconnect();
+		app->onApplicationShowWindow = &onShowWindow;
+		app->onApplicationHideWindow = &onHideWindow;
+		app->onApplicationCloseWindow = &onCloseWindow;
+		app->onApplicationShowComponent = &onShowComponent;
+		app->onApplicationHideComponent = &onHideComponent;
+		app->onApplicationUpdateComponent = &onUpdateComponent;
+		app->reconnect();
 	}
 
 

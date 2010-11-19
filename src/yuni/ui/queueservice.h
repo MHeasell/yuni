@@ -84,21 +84,6 @@ namespace UI
 		void desktop(Desktop::Ptr newDesktop);
 
 	protected:
-		//! "Show window" event
-		Event<void (const Application::GUID& appID, Window::Ptr)> onShowWindow;
-		//! "Hide window" event
-		Event<void (const Application::GUID& appID, const IComponent::ID&)> onHideWindow;
-		//! "Close window" event
-		Event<void (const Application::GUID& appID, const IComponent::ID&)> onCloseWindow;
-
-		//! "Show component" event
-		Event<void (const Application::GUID& appID, IComponent::Ptr)> onShowComponent;
-		//! "Hide component" event
-		Event<void (const Application::GUID& appID, const IComponent::ID&)> onHideComponent;
-		//! "Update component" event
-		Event<void (const Application::GUID& appID, const IComponent::ID&)> onUpdateComponent;
-
-	protected:
 		void showWindow(const Application::GUID& appID, Window::Ptr window);
 		void hideWindow(const Application::GUID& appID, const IComponent::ID& windowID);
 		void closeWindow(const Application::GUID& appID, const IComponent::ID& windowID);
@@ -111,9 +96,9 @@ namespace UI
 	protected:
 		//! UI tree root
 		Desktop::Ptr pDesktop;
-		//! Store windows that have been modified
+		//! Store visible windows
 		ApplicationWindowMap pVisibleWindows;
-		//! Store components that have been modified
+		//! Store visible components
 		Components pVisibleComponents;
 
 		//! Friend: required for access to events

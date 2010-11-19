@@ -7,7 +7,7 @@
 using namespace Yuni;
 
 
-UI::Desktop::Ptr createUI()
+static UI::Desktop::Ptr createUI()
 {
 	UI::Application::Ptr editor = new UI::Application();
 	//UI::Application::Ptr mygame = new

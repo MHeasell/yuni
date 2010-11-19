@@ -17,6 +17,8 @@ namespace UI
 {
 namespace Local
 {
+namespace Windows
+{
 
 
 	/*!
@@ -41,14 +43,20 @@ namespace Local
 		virtual bool pollEvents();
 
 	protected:
+		//! Windows sorts its windows by "class"
 		String pWindowClassName;
+
+		//! Instance handle
 		HINSTANCE pHInstance;
+
+		//! Window handle
 		HWND pHWnd;
 
 	}; // class IWinGDIWindow
 
 
 
+} // namespace Windows
 } // namespace Local
 } // namespace UI
 } // namespace Private
