@@ -165,9 +165,7 @@ namespace UI
 	inline void Application::showWindow(Window::Ptr window)
 	{
 		if (onApplicationShowWindow)
-		{
 			(*onApplicationShowWindow)(pGUID, window);
-		}
 	}
 
 

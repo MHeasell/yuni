@@ -49,13 +49,15 @@ namespace UI
 
 	inline Window::~Window()
 	{
+		std::cout << "Scrounch !" << std::endl;
 		destroyBoundEvents();
 	}
 
 
-	inline String Window::title() const
+	inline const String& Window::title() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
+		std::cout << "Title: \"" << pTitle << "\"";
 		return pTitle;
 	}
 
@@ -65,14 +67,13 @@ namespace UI
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		// Resetting with the new value
-		pTitle = newTitle;
+		titleWL(newTitle);
 	}
 
 
 	template<class StringT>
 	inline void Window::titleWL(const StringT& newTitle)
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
 		// Resetting with the new value (without lock)
 		pTitle = newTitle;
 	}

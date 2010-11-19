@@ -14,6 +14,8 @@ namespace UI
 {
 namespace Local
 {
+namespace Windows
+{
 
 
 	namespace
@@ -258,6 +260,8 @@ namespace Local
 			MessageBox(NULL, "Could Not Unregister Class.", "Shutdown Error", MB_OK | MB_ICONINFORMATION);
 			pHInstance = NULL;
 		}
+
+		pUIWnd->close();
 	}
 
 	bool IWinGDIWindow::pollEvents()
@@ -288,6 +292,7 @@ namespace Local
 
 
 
+} // namespace Windows
 } // namespace Local
 } // namespace UI
 } // namespace Private

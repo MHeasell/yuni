@@ -104,13 +104,6 @@ namespace UI
 	protected:
 		//! \name Events
 		//@{
-		Event<void (Window::Ptr)> onShowWindow;
-		Event<void (const IComponent::ID&)> onHideWindow;
-		Event<void (const IComponent::ID&)> onCloseWindow;
-		Event<void (IComponent::Ptr)> onShowComponent;
-		Event<void (const IComponent::ID&)> onHideComponent;
-		Event<void (const IComponent::ID&)> onUpdateComponent;
-
 		Event<void (const Application::GUID&, Window::Ptr)>* onApplicationShowWindow;
 		Event<void (const Application::GUID&, const IComponent::ID&)>* onApplicationHideWindow;
 		Event<void (const Application::GUID&, const IComponent::ID&)>* onApplicationCloseWindow;
@@ -132,7 +125,7 @@ namespace UI
 		void reconnectWL();
 		void reconnectOneWindowWL(Window::Ptr window);
 
-		//! Disconnect events and propagate to contained windows
+		//! Disconnect events
 		void disconnect();
 		void disconnectWL();
 

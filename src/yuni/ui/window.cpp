@@ -9,15 +9,15 @@ namespace UI
 
 	void Window::updateComponentWL(const IComponent::ID& componentID) const
 	{
-		(*onUpdateComponent)(componentID);
+		onUpdateComponent(componentID);
 	}
 
 	void Window::show()
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-		if (!pClosing && onShowWindow)
+		if (!pClosing)
 		{
-			(*onShowWindow)(this);
+			onShowWindow(this);
 		}
 	}
 
@@ -25,18 +25,18 @@ namespace UI
 	void Window::hide()
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-		if (!pClosing && onHideWindow)
-			(*onHideWindow)(pLocalID);
+		if (!pClosing)
+			onHideWindow(pLocalID);
 	}
 
 
 	void Window::close()
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-		if (!pClosing && onCloseWindow)
+		if (!pClosing)
 		{
 			pClosing = true;
-			(*onCloseWindow)(pLocalID);
+			onCloseWindow(pLocalID);
 		}
 	}
 

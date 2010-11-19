@@ -21,7 +21,8 @@ namespace UI
 	{
 	public:
 		//! Smart pointer, inherited from the ancestor
-		typedef IComponent::SmartPtrInfo<Window>::Type Ptr;
+		typedef SmartPtr<Window> Ptr;
+		//typedef IComponent::SmartPtrInfo<Window>::Type Ptr;
 		//! Vector of controls
 		typedef std::vector<Ptr> Vector;
 		//! Map of controls
@@ -89,7 +90,7 @@ namespace UI
 		//! \name Title of the Window
 		//@{
 		//! Get the Title of the window
-		String title() const;
+		const String& title() const;
 		//! Set the title of the window
 		template<class StringT> void title(const StringT& newTitle);
 		//@}
@@ -107,12 +108,12 @@ namespace UI
 		Event<void (unsigned char /* key */)> onKeyPressed;
 		Event<void (unsigned char /* key */)> onKeyUp;
 
-		Event<void (Window::Ptr)>* onShowWindow;
-		Event<void (const IComponent::ID&)>* onHideWindow;
-		Event<void (const IComponent::ID&)>* onCloseWindow;
-		Event<void (IComponent::Ptr)>* onShowComponent;
-		Event<void (const IComponent::ID&)>* onHideComponent;
-		Event<void (const IComponent::ID&)>* onUpdateComponent;
+		Event<void (Window::Ptr)> onShowWindow;
+		Event<void (const IComponent::ID&)> onHideWindow;
+		Event<void (const IComponent::ID&)> onCloseWindow;
+		Event<void (IComponent::Ptr)> onShowComponent;
+		Event<void (const IComponent::ID&)> onHideComponent;
+		Event<void (const IComponent::ID&)> onUpdateComponent;
 		//@}
 
 	protected:

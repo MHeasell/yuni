@@ -96,12 +96,12 @@ namespace UI
 	private:
 		//! \name Events
 		//@{
-		Event<void (const Application::GUID&, Window::Ptr)>* onShowWindow;
-		Event<void (const Application::GUID&, const IComponent::ID&)>* onHideWindow;
-		Event<void (const Application::GUID&, const IComponent::ID&)>* onCloseWindow;
-		Event<void (const Application::GUID&, IComponent::Ptr)>* onShowComponent;
-		Event<void (const Application::GUID&, const IComponent::ID&)>* onHideComponent;
-		Event<void (const Application::GUID&, const IComponent::ID&)>* onUpdateComponent;
+		Event<void (const Application::GUID&, Window::Ptr)> onShowWindow;
+		Event<void (const Application::GUID&, const IComponent::ID&)> onHideWindow;
+		Event<void (const Application::GUID&, const IComponent::ID&)> onCloseWindow;
+		Event<void (const Application::GUID&, IComponent::Ptr)> onShowComponent;
+		Event<void (const Application::GUID&, const IComponent::ID&)> onHideComponent;
+		Event<void (const Application::GUID&, const IComponent::ID&)> onUpdateComponent;
 		//@}
 
 	private:

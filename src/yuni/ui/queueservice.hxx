@@ -1,6 +1,7 @@
 #ifndef __YUNI_UI_QUEUESERVICE_HXX__
 # define __YUNI_UI_QUEUESERVICE_HXX__
 
+#include <iostream>
 
 namespace Yuni
 {
@@ -11,13 +12,6 @@ namespace UI
 	template<class ChildT>
 	inline IQueueService<ChildT>::IQueueService()
 	{
-		onShowWindow.connect(this, &IQueueService<ChildT>::showWindow);
-		onHideWindow.connect(this, &IQueueService<ChildT>::hideWindow);
-		onCloseWindow.connect(this, &IQueueService<ChildT>::closeWindow);
-
-		onShowComponent.connect(this, &IQueueService<ChildT>::showComponent);
-		onHideComponent.connect(this, &IQueueService<ChildT>::hideComponent);
-		onUpdateComponent.connect(this, &IQueueService<ChildT>::updateComponent);
 	}
 
 
@@ -32,12 +26,14 @@ namespace UI
 		EventObserverType::destroyBoundEvents();
 	}
 
+
 	template<class ChildT>
 	inline Desktop::Ptr IQueueService<ChildT>::desktop() const
 	{
 		typename ThreadingPolicy::MutexLocker lock(*this);
 		return pDesktop;
 	}
+
 
 	template<class ChildT>
 	inline void IQueueService<ChildT>::desktop(Desktop::Ptr newDesktop)
@@ -47,12 +43,13 @@ namespace UI
 			pDesktop->disconnect();
 		pDesktop = newDesktop;
 		// Reconnect desktop events
-		pDesktop->onShowWindow = &onShowWindow;
-		pDesktop->onHideWindow = &onHideWindow;
-		pDesktop->onCloseWindow = &onCloseWindow;
-		pDesktop->onShowComponent = &onShowComponent;
-		pDesktop->onHideComponent = &onHideComponent;
-		pDesktop->onUpdateComponent = &onUpdateComponent;
+		pDesktop->onShowWindow.connect(this, &IQueueService<ChildT>::showWindow);
+		pDesktop->onHideWindow.connect(this, &IQueueService<ChildT>::hideWindow);
+		pDesktop->onCloseWindow.connect(this, &IQueueService<ChildT>::closeWindow);
+		pDesktop->onShowComponent.connect(this, &IQueueService<ChildT>::showComponent);
+		pDesktop->onHideComponent.connect(this, &IQueueService<ChildT>::hideComponent);
+		pDesktop->onUpdateComponent.connect(this, &IQueueService<ChildT>::updateComponent);
+
 		// Also tell it to reconnect its applications
 		pDesktop->reconnect();
 	}
@@ -61,11 +58,10 @@ namespace UI
 	template<class ChildT>
 	inline void IQueueService<ChildT>::showWindow(const Application::GUID& appID, Window::Ptr window)
 	{
-		typename ThreadingPolicy::MutexLocker lock(*this);
-
 		RequestType delegate;
 		typename ShowWindowParams::Ptr params = new ShowWindowParams(appID, window);
 		ChildType* thisAsChild = static_cast<ChildType*>(this);
+
 		delegate.bind(thisAsChild, &ChildType::showWindowDispatched, params);
 		dynamic_cast<EventLoopType*>(this)->dispatch(delegate);
 	}
