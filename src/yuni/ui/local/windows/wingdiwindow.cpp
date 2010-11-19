@@ -219,7 +219,7 @@ namespace Windows
 			NULL, NULL, pHInstance, NULL)))
 		{
 			// Reset The Display
-			close();
+			pUIWnd->close();
 			MessageBox(NULL, "CreateWindowEx call failed.", "Window Creation Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
@@ -234,6 +234,15 @@ namespace Windows
 
 	void IWinGDIWindow::close()
 	{
+		if (!pUIWnd)
+			// Already destroyed
+			return;
+
+		// Inform the UI::Window. It might already know but it won't hurt.
+		pUIWnd->close();
+		// Break the link to UI::Window
+		pUIWnd = nullptr;
+
 		destroyBoundEvents();
 
 		// Are We In Fullscreen Mode?
@@ -260,8 +269,6 @@ namespace Windows
 			MessageBox(NULL, "Could Not Unregister Class.", "Shutdown Error", MB_OK | MB_ICONINFORMATION);
 			pHInstance = NULL;
 		}
-
-		pUIWnd->close();
 	}
 
 	bool IWinGDIWindow::pollEvents()
@@ -275,7 +282,7 @@ namespace Windows
 			// Have we received a Quit message?
 			if (msg.message == WM_QUIT)
 			{
-				close();
+				pUIWnd->close();
 			}
 			// If not, deal with window messages
 			else

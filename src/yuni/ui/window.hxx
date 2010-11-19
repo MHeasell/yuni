@@ -49,7 +49,6 @@ namespace UI
 
 	inline Window::~Window()
 	{
-		std::cout << "Scrounch !" << std::endl;
 		destroyBoundEvents();
 	}
 
@@ -57,7 +56,6 @@ namespace UI
 	inline const String& Window::title() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-		std::cout << "Title: \"" << pTitle << "\"";
 		return pTitle;
 	}
 

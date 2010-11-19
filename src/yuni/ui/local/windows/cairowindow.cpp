@@ -17,10 +17,13 @@ namespace Windows
 	bool CairoWindow::initialize()
 	{
 		IWinGDIWindow::initialize();
+		std::cout << "HWnd : " << pHWnd << std::endl;
 		pSurface = cairo_win32_surface_create_with_ddb(GetDC(pHWnd),
 			CAIRO_FORMAT_ARGB32, (unsigned int)pUIWnd->width(),
 			(unsigned int)pUIWnd->height());
+		std::cout << "Cairo Surface : " << pSurface << std::endl;
 		Yuni::Gfx::Surface::Cairo::initialize();
+		std::cout << "Cairo Context : " << pContext << std::endl;
 		return true;
 	}
 
