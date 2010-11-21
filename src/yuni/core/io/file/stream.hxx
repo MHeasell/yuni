@@ -143,7 +143,7 @@ namespace File
 			// We may have read less than expected. So we have to resize the string
 			// to perform maintenance (about the internal size and the final zero)
 			typedef typename CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>::Char  Char;
-			buffer.resize(::strlen(buffer.c_str()) / sizeof(Char));
+			buffer.resize(static_cast<unsigned int>(::strlen(buffer.c_str()) / sizeof(Char)));
 			return true;
 		}
 		buffer.clear();
