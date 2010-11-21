@@ -15,7 +15,7 @@ namespace Yuni
 	/*!
 	** \brief Event
 	*/
-	template<typename P = void ()>
+	template<class P = void ()>
 	class Event :
 		public IEvent,                                  // base class IEvent
 		public Private::EventImpl::WithNArguments<Bind<P>::argumentCount, Bind<P> >

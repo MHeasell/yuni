@@ -201,6 +201,15 @@ namespace Yuni
 	inline Event<P>& Event<P>::operator = (const NullPtr&)
 	{
 		clear();
+		return *this;
+	}
+
+
+	template<typename P>
+	inline Event<P>& Event<P>::operator = (const Event<P>& rhs)
+	{
+		AncestorType::assign(rhs);
+		return *this;
 	}
 
 
