@@ -163,6 +163,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -186,6 +194,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -264,6 +275,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -287,6 +306,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -367,6 +389,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -390,6 +420,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -472,6 +505,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -495,6 +536,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -579,6 +623,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -602,6 +654,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -688,6 +743,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -711,6 +774,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -799,6 +865,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -822,6 +896,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -912,6 +989,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -935,6 +1020,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -1027,6 +1115,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -1050,6 +1146,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -1144,6 +1243,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -1167,6 +1274,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -1263,6 +1373,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -1286,6 +1404,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -1384,6 +1505,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -1407,6 +1536,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -1507,6 +1639,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -1530,6 +1670,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -1632,6 +1775,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -1655,6 +1806,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -1759,6 +1913,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -1782,6 +1944,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -1888,6 +2053,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -1911,6 +2084,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
@@ -2019,6 +2195,14 @@ namespace EventImpl
 		}
 
 
+		template<class EventT> void assign(EventT& rhs)
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			typename ThreadingPolicy::MutexLocker lockerRHS(rhs);
+			pBindList = rhs.pBindList;
+			pEmpty = pBindList.empty();
+		}
+
 		/*!
 		** \brief Invoke the delegate
 		*/
@@ -2042,6 +2226,9 @@ namespace EventImpl
 		volatile bool pEmpty;
 		//! Binding list
 		BindList pBindList;
+
+		// friend !
+		template<class P> friend class Event;
 
 	}; // class WithNArguments
 
