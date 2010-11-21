@@ -13,6 +13,10 @@ namespace UI
 	class Application;
 	class Desktop;
 	class Window;
+	class LocalUIEvents;
+
+	//! String identifier type
+	typedef CustomString<40, false, false> GUID;
 
 
 } // namespace UI

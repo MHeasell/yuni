@@ -28,7 +28,7 @@ namespace UI
 	}
 
 
-	inline const Application::GUID& Application::guid() const
+	inline const GUID& Application::guid() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		return pGUID;
@@ -164,43 +164,37 @@ namespace UI
 
 	inline void Application::showWindow(Window::Ptr window)
 	{
-		if (onApplicationShowWindow)
-			(*onApplicationShowWindow)(pGUID, window);
+		pLocalEvents.onShowWindow(pGUID, Window::Ptr::WeakPointer(window));
 	}
 
 
 	inline void Application::hideWindow(const IComponent::ID& windowID)
 	{
-		if (onApplicationHideWindow)
-			(*onApplicationHideWindow)(pGUID, windowID);
+		pLocalEvents.onHideWindow(pGUID, windowID);
 	}
 
 
 	inline void Application::closeWindow(const IComponent::ID& windowID)
 	{
-		if (onApplicationCloseWindow)
-			(*onApplicationCloseWindow)(pGUID, windowID);
+		pLocalEvents.onCloseWindow(pGUID, windowID);
 	}
 
 
 	inline void Application::showComponent(IComponent::Ptr component)
 	{
-		if (onApplicationShowComponent)
-			(*onApplicationShowComponent)(pGUID, component);
+		pLocalEvents.onShowComponent(pGUID, component);
 	}
 
 
 	inline void Application::hideComponent(const IComponent::ID& componentID)
 	{
-		if (onApplicationHideComponent)
-			(*onApplicationHideComponent)(pGUID, componentID);
+		pLocalEvents.onHideComponent(pGUID, componentID);
 	}
 
 
 	inline void Application::updateComponent(const IComponent::ID& componentID)
 	{
-		if (onApplicationUpdateComponent)
-			(*onApplicationUpdateComponent)(pGUID, componentID);
+		pLocalEvents.onUpdateComponent(pGUID, componentID);
 	}
 
 

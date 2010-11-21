@@ -7,9 +7,6 @@ namespace Yuni
 namespace UI
 {
 
-	// An empty string represents an invalid GUID
-	const Application::GUID Application::InvalidGUID = "";
-
 
 	namespace // Anonymous
 	{
@@ -25,7 +22,7 @@ namespace UI
 	}
 
 
-	void Application::GenerateGUID(Application::GUID& guid)
+	void Application::GenerateGUID(GUID& guid)
 	{
 		assert(guid.size() == 0 && "The GUID must be empty at this point");
 
@@ -76,33 +73,23 @@ namespace UI
 
 	void Application::reconnectWL()
 	{
-		Window::Map::iterator end = pWindows.end();
+		reconnectLocalEvents(pLocalEvents);
+		const Window::Map::iterator end = pWindows.end();
 		for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)
-		{
 			reconnectOneWindowWL(it->second);
-		}
 	}
 
 
 	void Application::reconnectOneWindowWL(Window::Ptr window)
 	{
-		window->onShowWindow.connect(this, &Application::showWindow);
-		window->onHideWindow.connect(this, &Application::hideWindow);
-		window->onCloseWindow.connect(this, &Application::closeWindow);
-		window->onShowComponent.connect(this, &Application::showComponent);
-		window->onHideComponent.connect(this, &Application::hideComponent);
-		window->onUpdateComponent.connect(this, &Application::updateComponent);
+		window->reconnectLocalEvents = reconnectLocalEvents;
+		window->reconnect();
 	}
 
 
 	void Application::disconnectWL()
 	{
-		onApplicationShowWindow = nullptr;
-		onApplicationHideWindow = nullptr;
-		onApplicationCloseWindow = nullptr;
-		onApplicationShowComponent = nullptr;
-		onApplicationHideComponent = nullptr;
-		onApplicationUpdateComponent = nullptr;
+		pLocalEvents.clear();
 	}
 
 

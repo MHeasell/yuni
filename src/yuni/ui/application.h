@@ -21,22 +21,13 @@ namespace UI
 	public:
 		//! Smart pointer
 		typedef SmartPtr<Application> Ptr;
-
-		//! String identifier type
-		typedef CustomString<40, false, false> GUID;
-
 		//! Map from a unique ID
 		typedef std::map<GUID, Application::Ptr> Map;
-
 		//! Event observer type
 		typedef IEventObserver<Application> EventObserverType;
-
 		//! Threading policy
 		typedef EventObserverType::ThreadingPolicy ThreadingPolicy;
 
-
-	public:
-		static const GUID InvalidGUID;
 
 	public:
 		//! \name Constructor & Destructor
@@ -52,7 +43,7 @@ namespace UI
 		/*!
 		** \brief Destructor
 		*/
-		~Application();
+		virtual ~Application();
 		//@}
 
 		//! Show all the application's windows
@@ -100,16 +91,13 @@ namespace UI
 		Application& operator -= (const Window::Ptr& wnd);
 		//@}
 
+	public:
+		Event<void (LocalUIEvents&)> reconnectLocalEvents;
 
 	protected:
 		//! \name Events
 		//@{
-		Event<void (const Application::GUID&, Window::Ptr)>* onApplicationShowWindow;
-		Event<void (const Application::GUID&, const IComponent::ID&)>* onApplicationHideWindow;
-		Event<void (const Application::GUID&, const IComponent::ID&)>* onApplicationCloseWindow;
-		Event<void (const Application::GUID&, IComponent::Ptr)>* onApplicationShowComponent;
-		Event<void (const Application::GUID&, const IComponent::ID&)>* onApplicationHideComponent;
-		Event<void (const Application::GUID&, const IComponent::ID&)>* onApplicationUpdateComponent;
+		LocalUIEvents pLocalEvents;
 		//@}
 
 		void showWindow(Window::Ptr window);

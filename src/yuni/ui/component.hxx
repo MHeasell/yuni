@@ -112,7 +112,7 @@ namespace UI
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		//++pRefCount;
-		pRefCount += 30;
+		pRefCount += 50;
 	}
 
 

@@ -9,16 +9,15 @@ namespace UI
 
 	void Window::updateComponentWL(const IComponent::ID& componentID) const
 	{
-		onUpdateComponent(componentID);
+		pLocalEvents.onUpdateComponent(pApplicationGUID, componentID);
 	}
+
 
 	void Window::show()
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		if (!pClosing)
-		{
-			onShowWindow(this);
-		}
+			pLocalEvents.onShowWindow(pApplicationGUID, this);
 	}
 
 
@@ -26,7 +25,7 @@ namespace UI
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		if (!pClosing)
-			onHideWindow(pLocalID);
+			pLocalEvents.onHideWindow(pApplicationGUID, pLocalID);
 	}
 
 
@@ -36,9 +35,16 @@ namespace UI
 		if (!pClosing)
 		{
 			pClosing = true;
-			onCloseWindow(pLocalID);
+			pLocalEvents.onCloseWindow(pApplicationGUID, pLocalID);
 		}
 	}
+
+	
+	void Window::reconnect()
+	{
+		reconnectLocalEvents(pLocalEvents);
+	}
+
 
 
 } // namespace UI

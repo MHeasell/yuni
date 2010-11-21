@@ -15,7 +15,7 @@ namespace X11
 
 	bool CairoWindow::initialize()
 	{
-		IWindow::initialize();
+		// IWindow::initialize();
 		/*
 		pSurface = cairo_win32_surface_create_with_ddb(GetDC(pHWnd),
 			CAIRO_FORMAT_ARGB32, (unsigned int)pUIWnd->width(),
