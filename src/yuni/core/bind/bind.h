@@ -86,7 +86,7 @@ namespace Yuni
 	** This class is thread-safe, this is guaranteed by the use of smartptr.
 	**
 	** \note This class does not take care of deleted objects. It is the responsibility
-	** of the user to unbind the delegate before the linked object is deleted and/or
+	** of the user to unbind the delegate before the linked object is delete and/or
 	** to not invoke the delegate when the object does not exist.
 	**
 	** \note It is safe to provide a null pointer when binding the delegate
@@ -94,7 +94,7 @@ namespace Yuni
 	**
 	** \tparam P The prototype of the targetted function/member
 	*/
-	template<typename P = void (), class Dummy = void>
+	template<class P = void (), class Dummy = void>
 	class Bind
 	{
 	public:
