@@ -31,7 +31,7 @@ namespace Yuni
 
 	// Constructor
 	template<class R>
-	inline Bind<R (), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)
+	inline Bind<R (), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
 	}
