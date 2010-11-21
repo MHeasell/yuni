@@ -41,12 +41,12 @@ namespace Directory
 
 		// normalize paths
 		String fsrc(src, srclen);
-		Yuni::Core::IO::Normalize(fsrc, src, srclen);
+		Yuni::Core::IO::Normalize(fsrc, src, static_cast<unsigned int>(srclen));
 		if (fsrc.empty())
 			return false;
 
 		String fdst(dst, dstlen);
-		Yuni::Core::IO::Normalize(fdst, dst, dstlen);
+		Yuni::Core::IO::Normalize(fdst, dst, static_cast<unsigned int>(dstlen));
 
 		// The list of files to copy
 		List list;
