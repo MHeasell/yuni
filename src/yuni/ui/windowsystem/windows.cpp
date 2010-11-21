@@ -46,7 +46,7 @@ namespace WindowSystem
 			return true;
 
 		// Get parameters
-		Application::GUID appID = params->applicationGUID;
+		const GUID& appID = params->applicationGUID;
 		Window::Ptr window = params->window;
 
 		if (!window || window->closing())

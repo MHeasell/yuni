@@ -47,9 +47,9 @@ namespace UI
 
 		//! Window association map
 		typedef std::map<IComponent::ID, std::pair<Window*, Private::UI::Local::IWindow*> > WindowMap;
-		typedef std::map<Application::GUID, WindowMap>  ApplicationWindowMap;
+		typedef std::map<GUID, WindowMap>  ApplicationWindowMap;
 		//! Component storage with unique identifiers to access them
-		typedef std::map<Application::GUID, std::map<IComponent::ID, IComponent*> >  Components;
+		typedef std::map<GUID, std::map<IComponent::ID, IComponent*> >  Components;
 
 
 	public:
@@ -59,11 +59,11 @@ namespace UI
 		{
 			typedef SmartPtr<ShowWindowParams> Ptr;
 
-			Application::GUID applicationGUID;
+			GUID applicationGUID;
 
 			Window::Ptr window;
 
-			ShowWindowParams(Application::GUID appID, const Window::Ptr& windowPtr)
+			ShowWindowParams(GUID appID, const Window::Ptr& windowPtr)
 				: applicationGUID(appID), window(windowPtr)
 			{}
 		};
@@ -84,13 +84,13 @@ namespace UI
 		void desktop(Desktop::Ptr newDesktop);
 
 	protected:
-		void showWindow(const Application::GUID& appID, Window::Ptr window);
-		void hideWindow(const Application::GUID& appID, const IComponent::ID& windowID);
-		void closeWindow(const Application::GUID& appID, const IComponent::ID& windowID);
+		void showWindow(const GUID& appID, Window* window);
+		void hideWindow(const GUID& appID, const IComponent::ID& windowID);
+		void closeWindow(const GUID& appID, const IComponent::ID& windowID);
 
-		void showComponent(const Application::GUID& appID, IComponent::Ptr component);
-		void hideComponent(const Application::GUID& appID, const IComponent::ID& componentID);
-		void updateComponent(const Application::GUID& appID, const IComponent::ID& componentID);
+		void showComponent(const GUID& appID, IComponent::Ptr component);
+		void hideComponent(const GUID& appID, const IComponent::ID& componentID);
+		void updateComponent(const GUID& appID, const IComponent::ID& componentID);
 
 
 	protected:

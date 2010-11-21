@@ -7,6 +7,7 @@
 # include "../thread/policy.h"
 # include "fwd.h"
 # include "controlcontainer.h"
+# include "local-events.h"
 
 
 namespace Yuni
@@ -21,8 +22,7 @@ namespace UI
 	{
 	public:
 		//! Smart pointer, inherited from the ancestor
-		typedef SmartPtr<Window> Ptr;
-		//typedef IComponent::SmartPtrInfo<Window>::Type Ptr;
+		typedef IComponent::SmartPtrInfo<Window>::Type Ptr;
 		//! Vector of controls
 		typedef std::vector<Ptr> Vector;
 		//! Map of controls
@@ -96,6 +96,11 @@ namespace UI
 		//@}
 
 
+		void reconnect();
+
+	public:
+		Event<void (LocalUIEvents&)> reconnectLocalEvents;
+
 	protected:
 		//! \name Events
 		//@{
@@ -108,12 +113,7 @@ namespace UI
 		Event<void (unsigned char /* key */)> onKeyPressed;
 		Event<void (unsigned char /* key */)> onKeyUp;
 
-		Event<void (Window::Ptr)> onShowWindow;
-		Event<void (const IComponent::ID&)> onHideWindow;
-		Event<void (const IComponent::ID&)> onCloseWindow;
-		Event<void (IComponent::Ptr)> onShowComponent;
-		Event<void (const IComponent::ID&)> onHideComponent;
-		Event<void (const IComponent::ID&)> onUpdateComponent;
+		LocalUIEvents pLocalEvents;
 		//@}
 
 	protected:
@@ -134,10 +134,11 @@ namespace UI
 		String pTitle;
 		//! Is the window currently closing ?
 		bool pClosing;
+		//! GUID of the associated application
+		GUID pApplicationGUID;
 
 		//! Friend: required for access to events
 		friend class Application;
-
 
 	}; // class Window
 

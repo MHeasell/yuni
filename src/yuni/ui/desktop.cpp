@@ -8,28 +8,22 @@ namespace UI
 
 	Desktop::Desktop()
 	{
-		// Initialize event pointers to null
-		disconnectWL();
 	}
 
 
 	void Desktop::quit()
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-
-		Application::Map::iterator end = pApps.end();
+		const Application::Map::iterator end = pApps.end();
 		for (Application::Map::iterator it = pApps.begin(); it != end; ++it)
-		{
 			it->second->quit();
-		}
 	}
 
 
 	void Desktop::show()
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-
-		Application::Map::iterator end = pApps.end();
+		const Application::Map::iterator end = pApps.end();
 		for (Application::Map::iterator it = pApps.begin(); it != end; ++it)
 			it->second->show();
 	}
@@ -37,35 +31,29 @@ namespace UI
 
 	void Desktop::disconnectWL()
 	{
-		onShowWindow.clear();
-		onHideWindow.clear();
-		onCloseWindow.clear();
-		onShowComponent.clear();
-		onHideComponent.clear();
-		onUpdateComponent.clear();
+		pLocalEvents.clear();
 	}
 
 
 	void Desktop::reconnectWL()
 	{
-		Application::Map::iterator end = pApps.end();
+		const Application::Map::iterator end = pApps.end();
 		for (Application::Map::iterator it = pApps.begin(); it != end; ++it)
-		{
-			// Reconnect application events
 			reconnectOneApplicationWL(it->second);
-		}
 	}
 
 
-	void Desktop::reconnectOneApplicationWL(Application::Ptr app)
+	void Desktop::reconnectOneApplicationWL(const Application::Ptr& application)
 	{
-		app->onApplicationShowWindow = &onShowWindow;
-		app->onApplicationHideWindow = &onHideWindow;
-		app->onApplicationCloseWindow = &onCloseWindow;
-		app->onApplicationShowComponent = &onShowComponent;
-		app->onApplicationHideComponent = &onHideComponent;
-		app->onApplicationUpdateComponent = &onUpdateComponent;
-		app->reconnect();
+		application->reconnectLocalEvents.clear();
+		application->reconnectLocalEvents.connect(this, &Desktop::reconnectLocalEvents);
+		application->reconnect();
+	}
+
+
+	void Desktop::reconnectLocalEvents(LocalUIEvents& events)
+	{
+		events = pLocalEvents;
 	}
 
 

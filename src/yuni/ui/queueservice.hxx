@@ -43,12 +43,12 @@ namespace UI
 			pDesktop->disconnect();
 		pDesktop = newDesktop;
 		// Reconnect desktop events
-		pDesktop->onShowWindow.connect(this, &IQueueService<ChildT>::showWindow);
-		pDesktop->onHideWindow.connect(this, &IQueueService<ChildT>::hideWindow);
-		pDesktop->onCloseWindow.connect(this, &IQueueService<ChildT>::closeWindow);
-		pDesktop->onShowComponent.connect(this, &IQueueService<ChildT>::showComponent);
-		pDesktop->onHideComponent.connect(this, &IQueueService<ChildT>::hideComponent);
-		pDesktop->onUpdateComponent.connect(this, &IQueueService<ChildT>::updateComponent);
+		pDesktop->pLocalEvents.onShowWindow.connect(this, &IQueueService<ChildT>::showWindow);
+		pDesktop->pLocalEvents.onHideWindow.connect(this, &IQueueService<ChildT>::hideWindow);
+		pDesktop->pLocalEvents.onCloseWindow.connect(this, &IQueueService<ChildT>::closeWindow);
+		pDesktop->pLocalEvents.onShowComponent.connect(this, &IQueueService<ChildT>::showComponent);
+		pDesktop->pLocalEvents.onHideComponent.connect(this, &IQueueService<ChildT>::hideComponent);
+		pDesktop->pLocalEvents.onUpdateComponent.connect(this, &IQueueService<ChildT>::updateComponent);
 
 		// Also tell it to reconnect its applications
 		pDesktop->reconnect();
@@ -56,7 +56,7 @@ namespace UI
 
 
 	template<class ChildT>
-	inline void IQueueService<ChildT>::showWindow(const Application::GUID& appID, Window::Ptr window)
+	inline void IQueueService<ChildT>::showWindow(const GUID& appID, Window* window)
 	{
 		RequestType delegate;
 		typename ShowWindowParams::Ptr params = new ShowWindowParams(appID, window);
@@ -67,27 +67,27 @@ namespace UI
 	}
 
 	template<class ChildT>
-	inline void IQueueService<ChildT>::hideWindow(const Application::GUID& appID, const IComponent::ID& windowID)
+	inline void IQueueService<ChildT>::hideWindow(const GUID& appID, const IComponent::ID& windowID)
 	{
 		hideWindow(appID, windowID);
 	}
 
 	template<class ChildT>
-	inline void IQueueService<ChildT>::closeWindow(const Application::GUID& appID, const IComponent::ID& windowID)
+	inline void IQueueService<ChildT>::closeWindow(const GUID& appID, const IComponent::ID& windowID)
 	{
 		// TODO
 	}
 
 	template<class ChildT>
-	inline void IQueueService<ChildT>::showComponent(const Application::GUID& appID, IComponent::Ptr component)
+	inline void IQueueService<ChildT>::showComponent(const GUID& appID, IComponent::Ptr component)
 	{}
 
 	template<class ChildT>
-	inline void IQueueService<ChildT>::hideComponent(const Application::GUID& appID, const IComponent::ID& componentID)
+	inline void IQueueService<ChildT>::hideComponent(const GUID& appID, const IComponent::ID& componentID)
 	{}
 
 	template<class ChildT>
-	inline void IQueueService<ChildT>::updateComponent(const Application::GUID& appID, const IComponent::ID& componentID)
+	inline void IQueueService<ChildT>::updateComponent(const GUID& appID, const IComponent::ID& componentID)
 	{}
 
 
