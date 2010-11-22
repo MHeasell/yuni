@@ -22,6 +22,9 @@ namespace WindowSystem
 
 		//! Show a window asynchronously
 		bool showWindowDispatched(ShowWindowParams::Ptr params);
+
+		//! Close a window asynchronously
+		bool closeWindowDispatched(ModifyWindowParams::Ptr params);
 	};
 
 
