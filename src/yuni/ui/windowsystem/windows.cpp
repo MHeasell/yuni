@@ -47,7 +47,7 @@ namespace WindowSystem
 
 		// Get parameters
 		const GUID& appID = params->applicationGUID;
-		Window::Ptr window = params->window;
+		Window::Ptr& window = params->window;
 
 		if (!window || window->closing())
 			return true;
@@ -72,6 +72,33 @@ namespace WindowSystem
 		return true;
 	}
 
+	bool Windows::closeWindowDispatched(ModifyWindowParams::Ptr params)
+	{
+		if (!params)
+			return true;
+
+		// Get parameters
+		const GUID& appID = params->applicationGUID;
+		IComponent::ID& windowID = params->windowID;
+
+		// Make sure the application is known
+		ApplicationWindowMap::iterator appWindowIterator = pVisibleWindows.find(appID);
+		if (appWindowIterator == pVisibleWindows.end())
+			return true;
+
+		WindowMap& applicationWindows = appWindowIterator->second;
+		// Make sure that the window was already known as visible
+		WindowMap::iterator windowIterator = applicationWindows.find(windowID);
+		if (windowIterator == applicationWindows.end())
+			return true;
+
+		// Close the local window
+		windowIterator->second.second->close();
+		// Remove the pair
+		applicationWindows.erase(windowIterator);
+
+		return true;
+	}
 
 
 } // namespace WindowSystem

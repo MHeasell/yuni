@@ -69,13 +69,20 @@ namespace UI
 	template<class ChildT>
 	inline void IQueueService<ChildT>::hideWindow(const GUID& appID, const IComponent::ID& windowID)
 	{
-		hideWindow(appID, windowID);
+		// For the moment, hiding the window amounts to closing it
+		closeWindow(appID, windowID);
 	}
 
 	template<class ChildT>
 	inline void IQueueService<ChildT>::closeWindow(const GUID& appID, const IComponent::ID& windowID)
 	{
-		// TODO
+		std::cout << "Closing window " << windowID << std::endl;
+		RequestType delegate;
+		typename ModifyWindowParams::Ptr params = new ModifyWindowParams(appID, windowID);
+		ChildType* thisAsChild = static_cast<ChildType*>(this);
+
+		delegate.bind(thisAsChild, &ChildType::closeWindowDispatched, params);
+		dynamic_cast<EventLoopType*>(this)->dispatch(delegate);
 	}
 
 	template<class ChildT>

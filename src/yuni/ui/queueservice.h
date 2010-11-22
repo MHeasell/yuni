@@ -67,6 +67,19 @@ namespace UI
 				: applicationGUID(appID), window(windowPtr)
 			{}
 		};
+
+		struct ModifyWindowParams
+		{
+			typedef SmartPtr<ModifyWindowParams> Ptr;
+
+			GUID applicationGUID;
+
+			IComponent::ID windowID;
+
+			ModifyWindowParams(GUID appID, const IComponent::ID& window)
+				: applicationGUID(appID), windowID(window)
+			{}
+		};
 		//@}
 
 	public:

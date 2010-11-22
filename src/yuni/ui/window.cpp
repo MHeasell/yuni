@@ -39,7 +39,7 @@ namespace UI
 		}
 	}
 
-	
+
 	void Window::reconnect()
 	{
 		reconnectLocalEvents(pLocalEvents);

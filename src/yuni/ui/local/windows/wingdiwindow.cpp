@@ -79,7 +79,7 @@ namespace Windows
 				case WM_CLOSE: // Did we receive a Close message?
 					{
 						if (window && !window->closing())
-							window->close();
+							window->window()->close();
 						if (sWindowList.empty())
 							PostQuitMessage(0); // Send a Quit message
 						return 0;
