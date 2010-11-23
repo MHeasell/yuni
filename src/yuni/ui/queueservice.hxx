@@ -76,7 +76,6 @@ namespace UI
 	template<class ChildT>
 	inline void IQueueService<ChildT>::closeWindow(const GUID& appID, const IComponent::ID& windowID)
 	{
-		std::cout << "Closing window " << windowID << std::endl;
 		RequestType delegate;
 		typename ModifyWindowParams::Ptr params = new ModifyWindowParams(appID, windowID);
 		ChildType* thisAsChild = static_cast<ChildType*>(this);

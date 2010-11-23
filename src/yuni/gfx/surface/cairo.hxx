@@ -22,11 +22,15 @@ namespace Surface
 
 	inline void Cairo::resize(float, float)
 	{
+		pContext = cairo_create(pSurface);
+		assert(cairo_status(pContext) == CAIRO_STATUS_SUCCESS && "Cairo context creation failed !");
 	}
 
 
 	inline bool Cairo::refresh()
 	{
+		pContext = cairo_create(pSurface);
+		assert(cairo_status(pContext) == CAIRO_STATUS_SUCCESS && "Cairo context creation failed !");
 		clearScreen();
 		return true;
 	}

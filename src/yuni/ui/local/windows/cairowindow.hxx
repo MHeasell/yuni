@@ -23,6 +23,12 @@ namespace Windows
 
 	inline bool CairoWindow::refresh()
 	{
+		release();
+		pSurface = cairo_win32_printing_surface_create(GetDC(pHWnd));
+// 		pSurface = cairo_win32_surface_create_with_ddb(GetDC(pHWnd),
+// 			CAIRO_FORMAT_RGB24, (unsigned int)pUIWnd->width(),
+// 			(unsigned int)pUIWnd->height());
+		assert(cairo_surface_status(pSurface) == CAIRO_STATUS_SUCCESS && "Cairo surface creation failed !");
 		return Yuni::Gfx::Surface::Cairo::refresh();
 	}
 
