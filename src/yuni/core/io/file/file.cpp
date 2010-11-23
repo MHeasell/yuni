@@ -215,7 +215,7 @@ namespace IO
 			if (!fstat(fdIN, &st))
 			{
 				off_t offset = 0;
-				if (-1 != sendfile(fdOUT, fdIN, &offset, st.st_size))
+				if (-1 != sendfile(fdOUT, fdIN, &offset, (size_t) st.st_size))
 					return Yuni::Core::IO::ioErrNone;
 			}
 
