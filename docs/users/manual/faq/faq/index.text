@@ -31,6 +31,13 @@ What is Yuni ?
 	Yuni's 3D engine has the particularity of using these LDOs to offer
 	seamlessly distributed 3D.
 
+ Q: You offer "bind"s, threading, static asserts, smart pointers.
+ 	Are you competing with Boost and / or Loki ?
+ A: With Boost, definitely, and on many points. Not so much with Loki, first
+	because M. Alexandrescu's work is an inspiration to us, and second because
+	Loki and Yuni's scope are not comparable. We tend to offer only the
+	features we deem useful to our much larger context.
+
  Q: Seems like you also offer cross-platform window / controls management.
 	Are you competing with QT and wxWidgets then ?
  A: On those points, yes. Our Yuni::UI module is a possible replacement for
