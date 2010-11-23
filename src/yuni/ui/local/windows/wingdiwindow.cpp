@@ -201,7 +201,7 @@ namespace Windows
 		else
 		{
 			// Window Extended Style
-			dwExStyle = WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;
+			dwExStyle = WS_EX_APPWINDOW; // | WS_EX_WINDOWEDGE;
 			// Windows Style
 			dwStyle = WS_OVERLAPPEDWINDOW;
 		}

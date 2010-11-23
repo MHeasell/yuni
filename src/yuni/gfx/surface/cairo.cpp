@@ -23,11 +23,8 @@ namespace Surface
 	bool Cairo::initialize()
 	{
 		pContext = cairo_create(pSurface);
-		if (pContext)
-		{
-			cairo_set_source_rgb(pContext, 0, 0, 0);
-			return true;
-		}
+		assert(cairo_status(pContext) == CAIRO_STATUS_SUCCESS && "Cairo context creation failed !");
+		cairo_set_source_rgb(pContext, 0, 0, 0);
 		return false;
 	}
 
