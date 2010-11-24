@@ -35,8 +35,8 @@ technical and philosophical choices for Yuni.
   features, the fact should be clearly documented.
 * Completeness :
   When dealing with a topic in Yuni, the whole topic should be covered. If any
-  hole is left in the code (temporarily or permanentlY), a clear reason to why
-  must be provided.
+  hole is left in the code (temporarily or permanently), a clear reason must be
+  provided.
 * Versatility :
   Yuni must be able to adapt to your needs. We do that by offering statically
   configurable classes (using templates, and particularly policies),
@@ -141,9 +141,9 @@ for these drawbacks :
   abstractly : delegates, events, singletons, jobs. Also it encapsulates
   low-level routines with OO interfaces : math, string, getopt, io, ...
 5 C++ has no native MT support in the language, and there is not much we can do
-  about that. However, it is a clear fact that noone wants to write cross-
-  platform threading support since it is a hassle and implicates very
-  error-prone code. So Yuni does it for you.
-6 It is a known fact that the STL implementations are not very fast, so in some
-  cases, Yuni offers its own faster implementations using more readable
-  prototypes, in accordance with the Yuni coding style.
+  about that. Also, few people are willing to write cross-platform threading
+  support since it is a hassle and implicates very error-prone code. So Yuni
+  does it for you.
+6 Some STL implementations are known to be slow, so in some cases Yuni offers
+  its own faster implementations using more readable prototypes, in accordance
+  with the Yuni coding style.
