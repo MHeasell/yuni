@@ -85,6 +85,17 @@ namespace UI
 	}
 
 	template<class ChildT>
+	inline void IQueueService<ChildT>::resizeWindow(const GUID& appID, const IComponent::ID& windowID)
+	{
+		RequestType delegate;
+		typename ResizeWindowParams::Ptr params = new ResizeWindowParams(appID, windowID);
+		ChildType* thisAsChild = static_cast<ChildType*>(this);
+
+		delegate.bind(thisAsChild, &ChildType::resizeWindowDispatched, params);
+		dynamic_cast<EventLoopType*>(this)->dispatch(delegate);
+	}
+
+	template<class ChildT>
 	inline void IQueueService<ChildT>::showComponent(const GUID& appID, IComponent::Ptr component)
 	{}
 

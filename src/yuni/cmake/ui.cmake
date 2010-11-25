@@ -65,7 +65,7 @@ if (CAIRO_FOUND)
 	YMESSAGE("Added Support for Cairo")
 	add_definitions("-DYUNI_USE_CAIRO")
 	target_link_libraries("${YUNI_EXT_CAIROPANGO_LIB}")
-	list(APPEND SRC_UI gfx/surface/cairo.h gfx/surface/cairo.cpp)
+	list(APPEND SRC_UI ui/local/surface/cairo.h ui/local/surface/cairo.cpp)
 
 	if (WIN32 OR WIN64)
 		# Cairo under Windows

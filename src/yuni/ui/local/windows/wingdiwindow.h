@@ -38,6 +38,8 @@ namespace Windows
 
 		virtual bool initialize();
 
+		virtual void resize(float width, float height);
+
 		virtual void close();
 
 		virtual bool pollEvents();

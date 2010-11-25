@@ -1,8 +1,7 @@
 #ifndef __YUNI_GFX_SURFACE_OPENGL_H__
 # define __YUNI_GFX_SURFACE_OPENGL_H__
 
-# include "surface3d.h"
-
+# include "../../ui/surface/surface3d.h"
 
 
 namespace Yuni

@@ -1,12 +1,16 @@
-#ifndef __YUNI_GFX_SURFACE_SURFACE3D_H__
-# define __YUNI_GFX_SURFACE_SURFACE3D_H__
+#ifndef __YUNI_PRIVATE_UI_LOCAL_SURFACE_SURFACE3D_H__
+# define __YUNI_PRIVATE_UI_LOCAL_SURFACE_SURFACE3D_H__
 
 # include "surface.h"
-
+# include "../../../gfx/scene.h"
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
+{
+namespace UI
+{
+namespace Local
 {
 namespace Surface
 {
@@ -102,7 +106,9 @@ namespace Surface
 
 
 } // namespace Surface
-} // namespace Gfx
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_GFX_SURFACE_SURFACE3D_H__
+#endif // __YUNI_PRIVATE_UI_LOCAL_SURFACE_SURFACE3D_H__

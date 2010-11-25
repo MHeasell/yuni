@@ -1,12 +1,16 @@
-#ifndef __YUNI_GFX_SURFACE_CAIRO_H__
-# define __YUNI_GFX_SURFACE_CAIRO_H__
+#ifndef __YUNI_PRIVATE_UI_LOCAL_SURFACE_CAIRO_H__
+# define __YUNI_PRIVATE_UI_LOCAL_SURFACE_CAIRO_H__
 
-# include "../api/cairo.h"
+# include "../../../gfx/api/cairo.h"
 # include "surface.h"
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
+{
+namespace UI
+{
+namespace Local
 {
 namespace Surface
 {
@@ -38,14 +42,14 @@ namespace Surface
 		virtual bool refresh();
 
 		//! Choose a color to clear the screen with
-		virtual void clearColor(const Color::RGB<float>& newColor);
+		virtual void clearColor(const Yuni::Color::RGB<float>& newColor);
 
 		//! Choose a color with alpha to clear the screen with
-		virtual void clearColor(const Color::RGBA<float>& newColor);
+		virtual void clearColor(const Yuni::Color::RGBA<float>& newColor);
 
 
 	protected:
-		//! Clear the screen to black
+		//! Clear the screen to a given color
 		virtual void clearScreen();
 
 
@@ -57,16 +61,18 @@ namespace Surface
 		cairo_surface_t* pSurface;
 
 
-	}; // Cairo
+	}; // class Cairo
 
 
 
 } // namespace Surface
-} // namespace Gfx
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
 
 
 # include "cairo.hxx"
 
 
-#endif // __YUNI_GFX_SURFACE_CAIRO_H__
+#endif // __YUNI_PRIVATE_UI_LOCAL_SURFACE_CAIRO_H__

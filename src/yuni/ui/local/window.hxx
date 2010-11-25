@@ -29,10 +29,6 @@ namespace Local
 		return pClosing;
 	}
 
-	inline void IWindow::resize(float width, float height)
-	{
-		pUIWnd->resize(width, height);
-	}
 
 
 } // namespace Local

@@ -25,6 +25,9 @@ namespace WindowSystem
 
 		//! Close a window asynchronously
 		bool closeWindowDispatched(ModifyWindowParams::Ptr params);
+
+		//! Resize a window asynchronously
+		bool resizeWindowDispatched(ResizeWindowParams::Ptr params);
 	};
 
 
