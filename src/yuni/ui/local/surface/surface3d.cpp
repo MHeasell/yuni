@@ -1,13 +1,17 @@
 
 #include <algorithm>
 #include "surface3d.h"
-#include "../text/label.h"
-#include "../text/wgl.h"
+#include "../../../gfx/text/label.h"
+#include "../../../gfx/text/wgl.h"
 
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
+{
+namespace UI
+{
+namespace Local
 {
 namespace Surface
 {
@@ -91,8 +95,8 @@ namespace Surface
 
 
 
-
-
 } // namespace Surface
-} // namespace Gfx
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni

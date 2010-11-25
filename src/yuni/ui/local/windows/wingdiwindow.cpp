@@ -1,7 +1,7 @@
 
 #include "wingdiwindow.h"
 #include "../../../core/string.h"
-
+#include "../../../core/math.h"
 
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
@@ -88,7 +88,14 @@ namespace Windows
 				case WM_SIZE: // Resize the window
 					{
 						if (window)
-							window->resize(LOWORD(lParam), HIWORD(lParam));
+						{
+							RECT clientRect;
+							GetClientRect(hWnd, &clientRect);
+							window->window()->resize(
+								static_cast<float>(clientRect.right - clientRect.left),
+								static_cast<float>(clientRect.top - clientRect.bottom));
+// 							window->window()->resize(LOWORD(lParam), HIWORD(lParam));
+						}
 						return 0;
 					}
 			}
@@ -229,6 +236,26 @@ namespace Windows
 		AddWindow(pHWnd, this);
 
 		return true;
+	}
+
+
+	void IWinGDIWindow::resize(float width, float height)
+	{
+		RECT clientRect;
+		GetClientRect(pHWnd, &clientRect);
+		// Do nothing if sizes did not change
+		if (Yuni::Math::Equals(width, (float)(clientRect.right - clientRect.left)) &&
+			Yuni::Math::Equals(height, (float)(clientRect.top - clientRect.bottom)))
+			return;
+
+		RECT fullRect;
+		GetWindowRect(pHWnd, &fullRect);
+		// The size modifications are only applied to the client size, so take into account
+		// the size of the whole window (with title bar, status bar, scrollbars, ...)
+		POINT ptDiff;
+		ptDiff.x = (fullRect.right - fullRect.left) - clientRect.right;
+		ptDiff.y = (fullRect.bottom - fullRect.top) - clientRect.bottom;
+		MoveWindow(pHWnd, fullRect.left, fullRect.top, (long)width + ptDiff.x, (long)height + ptDiff.y, TRUE);
 	}
 
 

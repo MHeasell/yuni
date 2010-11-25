@@ -1,7 +1,11 @@
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
+{
+namespace UI
+{
+namespace Local
 {
 namespace Surface
 {
@@ -36,13 +40,13 @@ namespace Surface
 	}
 
 
-	inline void Cairo::clearColor(const Color::RGB<float>& c)
+	inline void Cairo::clearColor(const Yuni::Color::RGB<float>& c)
 	{
 		cairo_set_source_rgb(pContext, c.red, c.green, c.blue);
 	}
 
 
-	inline void Cairo::clearColor(const Color::RGBA<float>& c)
+	inline void Cairo::clearColor(const Yuni::Color::RGBA<float>& c)
 	{
 		cairo_set_source_rgba(pContext, c.red, c.green, c.blue, c.alpha);
 	}
@@ -50,14 +54,15 @@ namespace Surface
 
 	inline void Cairo::clearScreen()
 	{
-		cairo_set_source_rgb(pContext, 0.3, 0.6, 0);
+		cairo_set_source_rgb(pContext, 1.0, 0.0, 0.0);
+		cairo_rectangle(pContext, 0, 0, 255, 255);
 		cairo_fill(pContext);
-		cairo_rectangle(pContext, 0.0, 0.0, 1.0, 1.0);
-		cairo_paint(pContext);
 	}
 
 
 
 } // namespace Surface
-} // namespace Gfx
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni

@@ -22,7 +22,7 @@ namespace Windows
 // 			CAIRO_FORMAT_ARGB32, (unsigned int)pUIWnd->width(),
 // 			(unsigned int)pUIWnd->height());
 		assert(cairo_surface_status(pSurface) == CAIRO_STATUS_SUCCESS && "Cairo surface creation failed !");
-		Yuni::Gfx::Surface::Cairo::initialize();
+		Surface::Cairo::initialize();
 		return true;
 	}
 
@@ -36,7 +36,7 @@ namespace Windows
 // 			CAIRO_FORMAT_ARGB32, (unsigned int)width,
 // 			(unsigned int)height);
 		assert(cairo_surface_status(pSurface) == CAIRO_STATUS_SUCCESS && "Cairo surface creation failed !");
-		Yuni::Gfx::Surface::Cairo::resize(width, height);
+		Surface::Cairo::resize(width, height);
 	}
 
 

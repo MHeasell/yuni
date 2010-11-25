@@ -22,6 +22,7 @@ namespace UI
 		Event<void (const GUID&, Window*)> onShowWindow;
 		Event<void (const GUID&, const IComponent::ID&)> onHideWindow;
 		Event<void (const GUID&, const IComponent::ID&)> onCloseWindow;
+		Event<void (const GUID&, const IComponent::ID&)> onResizeWindow;
 		Event<void (const GUID&, IComponent::Ptr)> onShowComponent;
 		Event<void (const GUID&, const IComponent::ID&)> onHideComponent;
 		Event<void (const GUID&, const IComponent::ID&)> onUpdateComponent;

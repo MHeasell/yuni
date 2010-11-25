@@ -80,6 +80,23 @@ namespace UI
 				: applicationGUID(appID), windowID(window)
 			{}
 		};
+
+		struct ResizeWindowParams
+		{
+			typedef SmartPtr<ResizeWindowParams> Ptr;
+
+			GUID applicationGUID;
+
+			IComponent::ID windowID;
+
+			float width;
+
+			float height;
+
+			ResizeWindowParams(GUID appID, const IComponent::ID& window, float w, float h)
+				: applicationGUID(appID), windowID(window)
+			{}
+		};
 		//@}
 
 	public:
@@ -100,6 +117,7 @@ namespace UI
 		void showWindow(const GUID& appID, Window* window);
 		void hideWindow(const GUID& appID, const IComponent::ID& windowID);
 		void closeWindow(const GUID& appID, const IComponent::ID& windowID);
+		void resizeWindow(const GUID& appID, const IComponent::ID& windowID);
 
 		void showComponent(const GUID& appID, IComponent::Ptr component);
 		void hideComponent(const GUID& appID, const IComponent::ID& componentID);

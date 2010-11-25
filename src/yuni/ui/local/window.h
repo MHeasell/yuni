@@ -73,9 +73,9 @@ namespace Local
 		bool closing() const;
 
 		/*!
-		** \brief Resize the component
+		** \brief Resize the local window
 		*/
-		virtual void resize(float width, float height);
+		virtual void resize(float width, float height) = 0;
 
 		//! Get the UI window that corresponds to this internal representation
 		virtual Yuni::UI::Window::Ptr window() const { return pUIWnd; }

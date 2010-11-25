@@ -121,6 +121,11 @@ namespace UI
 		template<class StringT> void titleWL(const StringT& newTitle);
 
 		/*!
+		** \brief Resize the window
+		*/
+		virtual void resizeWL(float& width, float& height);
+
+		/*!
 		** \brief Update the given component's local representation
 		**
 		** When updating a component, reaching a window means we got to the top of the UI tree.

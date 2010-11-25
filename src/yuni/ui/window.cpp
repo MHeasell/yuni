@@ -40,6 +40,14 @@ namespace UI
 	}
 
 
+	void Window::resizeWL(float& width, float& height)
+	{
+		IControlContainer::resizeWL(width, height);
+		if (!pClosing)
+			pLocalEvents.onResizeWindow(pApplicationGUID, pLocalID);
+	}
+
+
 	void Window::reconnect()
 	{
 		reconnectLocalEvents(pLocalEvents);

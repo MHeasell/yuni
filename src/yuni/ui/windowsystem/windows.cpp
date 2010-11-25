@@ -101,6 +101,34 @@ namespace WindowSystem
 	}
 
 
+	bool Windows::resizeWindowDispatched(ResizeWindowParams::Ptr params)
+	{
+		if (!params)
+			return true;
+
+		// Get parameters
+		const GUID& appID = params->applicationGUID;
+		IComponent::ID& windowID = params->windowID;
+		float width = params->width;
+		float height = params->height;
+
+		// Make sure the application is known
+		ApplicationWindowMap::iterator appWindowIterator = pVisibleWindows.find(appID);
+		if (appWindowIterator == pVisibleWindows.end())
+			return true;
+
+		WindowMap& applicationWindows = appWindowIterator->second;
+		// Make sure that the window was already known as visible
+		WindowMap::iterator windowIterator = applicationWindows.find(windowID);
+		if (windowIterator == applicationWindows.end())
+			return true;
+
+		// Resize the local window
+		windowIterator->second.second->resize(width, height);
+		return true;
+	}
+
+
 } // namespace WindowSystem
 } // namespace UI
 } // namespace Yuni

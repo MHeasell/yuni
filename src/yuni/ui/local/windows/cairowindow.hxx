@@ -29,7 +29,7 @@ namespace Windows
 // 			CAIRO_FORMAT_RGB24, (unsigned int)pUIWnd->width(),
 // 			(unsigned int)pUIWnd->height());
 		assert(cairo_surface_status(pSurface) == CAIRO_STATUS_SUCCESS && "Cairo surface creation failed !");
-		return Yuni::Gfx::Surface::Cairo::refresh();
+		return Surface::Cairo::refresh();
 	}
 
 

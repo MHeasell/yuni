@@ -1,16 +1,19 @@
-#ifndef __YUNI_GFX_SURFACE_SURFACE_H__
-# define __YUNI_GFX_SURFACE_SURFACE_H__
+#ifndef __YUNI_PRIVATE_UI_LOCAL_SURFACE_SURFACE_H__
+# define __YUNI_PRIVATE_UI_LOCAL_SURFACE_SURFACE_H__
 
-# include "../../yuni.h"
-# include "../../core/smartptr.h"
-# include "../scene.h"
-# include "../../core/color/rgb.h"
-# include "../../core/color/rgba.h"
+# include "../../../yuni.h"
+# include "../../../core/color/rgb.h"
+# include "../../../core/color/rgba.h"
+# include "../../../core/smartptr.h"
 
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
+{
+namespace UI
+{
+namespace Local
 {
 namespace Surface
 {
@@ -58,10 +61,10 @@ namespace Surface
 		virtual bool refresh() = 0;
 
 		//! Set the default color for clearing the surface
-		virtual void clearColor(const Color::RGB<float>& newColor) = 0;
+		virtual void clearColor(const Yuni::Color::RGB<float>& newColor) = 0;
 
 		//! Set the default color with alpha for clearing the surface
-		virtual void clearColor(const Color::RGBA<float>& newColor) = 0;
+		virtual void clearColor(const Yuni::Color::RGBA<float>& newColor) = 0;
 
 	protected:
 		//! Clear the surface to clear color, default color depends on back-end
@@ -76,7 +79,9 @@ namespace Surface
 
 
 } // namespace Surface
-} // namespace Gfx
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_GFX_SURFACE_SURFACE_H__
+#endif // __YUNI_PRIVATE_UI_LOCAL_SURFACE_SURFACE_H__

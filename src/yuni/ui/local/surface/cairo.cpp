@@ -3,7 +3,11 @@
 
 namespace Yuni
 {
-namespace Gfx
+namespace Private
+{
+namespace UI
+{
+namespace Local
 {
 namespace Surface
 {
@@ -24,12 +28,14 @@ namespace Surface
 	{
 		pContext = cairo_create(pSurface);
 		assert(cairo_status(pContext) == CAIRO_STATUS_SUCCESS && "Cairo context creation failed !");
-		cairo_set_source_rgb(pContext, 0, 0, 0);
+		cairo_set_source_rgb(pContext, 1, 0, 0);
 		return false;
 	}
 
 
 
 } // namespace Surface
-} // namespace Gfx
+} // namespace Local
+} // namespace UI
+} // namespace Private
 } // namespace Yuni
