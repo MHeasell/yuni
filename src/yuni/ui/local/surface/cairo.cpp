@@ -26,10 +26,23 @@ namespace Surface
 
 	bool Cairo::initialize()
 	{
-		pContext = cairo_create(pSurface);
-		assert(cairo_status(pContext) == CAIRO_STATUS_SUCCESS && "Cairo context creation failed !");
-		cairo_set_source_rgb(pContext, 1, 0, 0);
+		// Default color is red
+		pClearColor.assign(1.0f, 0.0f, 0.0f);
 		return false;
+	}
+
+
+	bool Cairo::refresh()
+	{
+		pContext = cairo_create(pSurface);
+		if (cairo_status(pContext) != CAIRO_STATUS_SUCCESS)
+		{
+			std::cout << cairo_status_to_string(cairo_status(pContext)) << std::endl;
+			assert(false && "Cairo context creation failed !");
+		}
+		clearScreen();
+		release();
+		return true;
 	}
 
 
