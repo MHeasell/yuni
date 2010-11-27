@@ -15,6 +15,7 @@
 # include <unistd.h>
 #endif
 
+
 namespace Yuni
 {
 namespace Private
@@ -127,7 +128,7 @@ namespace Iterator
 
 	Flow TraverseWindowsFolder(const String& filename, Options& opts, IDetachedThread* thread)
 	{
-		struct _wfinddatai64_t data;
+		
 
 		// Convertir the filename
 		opts.wbuffer[0] = L'\\';
@@ -140,17 +141,20 @@ namespace Iterator
 		// Making sure that our string is zero-terminated
 		opts.wbuffer[n + 4] = L'\\';
 		opts.wbuffer[n + 5] = L'*';
-		opts.wbuffer[n + 6] = L'.';
-		opts.wbuffer[n + 7] = L'*';
+		opts.wbuffer[n + 6] = L'\0';
+		opts.wbuffer[n + 7] = L'\0';
 		opts.wbuffer[n + 8] = L'\0';
 
 		// Opening the folder
-		long h = _wfindfirsti64(opts.wbuffer, &data);
-		if (h < 0)
+		WIN32_FIND_DATAW data;
+		HANDLE hFind = INVALID_HANDLE_VALUE;		
+		hFind = FindFirstFileW(opts.wbuffer, &data);
+		if (INVALID_HANDLE_VALUE == hFind) 
 			return Yuni::Core::IO::flowContinue;
 
 		String newName;
 		String newFilename;
+		LARGE_INTEGER filesize;
 
 		// iterating trough files and folders
 		do
@@ -167,23 +171,23 @@ namespace Iterator
 			# endif
 
 			// Avoid `.` and `..`
-			if (*(data.name) == L'.')
+			if (data.cFileName[0] == L'.')
 			{
-				if ((data.name[1] == L'.' && data.name[2] == L'\0') || (data.name[1] == L'\0'))
+				if ((data.cFileName[1] == L'.' && data.cFileName[2] == L'\0') || (data.cFileName[1] == L'\0'))
 					continue;
 			}
 
-			const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, data.name, -1, NULL, 0,  NULL, NULL);
+			const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, data.cFileName, -1, NULL, 0,  NULL, NULL);
 			if (sizeRequired <= 0)
 				continue;
 			newName.reserve((unsigned int) sizeRequired);
-			WideCharToMultiByte(CP_UTF8, 0, data.name, -1, (char*)newName.data(), sizeRequired,  NULL, NULL);
+			WideCharToMultiByte(CP_UTF8, 0, data.cFileName, -1, (char*)newName.data(), sizeRequired,  NULL, NULL);
 			newName.resize(((unsigned int) sizeRequired) - 1);
 
 			newFilename.clear();
 			newFilename << filename << '\\' << newName;
 
-			if ((data.attrib & _A_SUBDIR))
+			if (0 != (data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
 			{
 				// The node is a folder
 				switch (opts.self->onBeginFolder(newFilename, filename, newName))
@@ -207,7 +211,9 @@ namespace Iterator
 			else
 			{
 				// The node is a file
-				switch (opts.self->onFile(newFilename, filename, newName, (uint64)data.size))
+				filesize.LowPart  = data.nFileSizeLow;
+				filesize.HighPart = data.nFileSizeHigh;
+				switch (opts.self->onFile(newFilename, filename, newName, (uint64)(filesize.QuadPart)))
 				{
 					case Yuni::Core::IO::flowContinue:
 						break;
@@ -215,14 +221,15 @@ namespace Iterator
 						return Yuni::Core::IO::flowAbort;
 					case Yuni::Core::IO::flowSkip:
 						{
-							_findclose(h);
+							FindClose(hFind);
 							return Yuni::Core::IO::flowContinue;
 						}
 				}
 
 			}
-		} while (_wfindnexti64(h, &data) == 0);
-		_findclose(h);
+		}
+		while (FindNextFileW(hFind, &data) != 0);		
+		FindClose(hFind);
 
 		return Yuni::Core::IO::flowContinue;
 	}

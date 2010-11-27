@@ -154,355 +154,441 @@ endif(MSVC)
 #
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform.cmake ${CMAKE_CURRENT_SOURCE_DIR}/platform.h)
 
+
+
 set(SRC_CORE_ATOMIC
-				core/atomic/int.h
-				core/atomic/int.hxx
-				core/atomic/traits.h
-				core/atomic/customstring.hxx)
+		core/atomic/int.h
+		core/atomic/int.hxx
+		core/atomic/traits.h
+		core/atomic/customstring.hxx
+)
 source_group(Core\\atomic FILES ${SRC_CORE_ATOMIC})
 
 
 set(SRC_CORE_PREPROCESSOR
-				core/preprocessor/std.h
-				core/preprocessor/capabilities.h
-				core/preprocessor/capabilities/unixes.h
-				core/preprocessor/capabilities/windows.h
-				core/preprocessor/enum.h)
+		core/preprocessor/std.h
+		core/preprocessor/capabilities.h
+		core/preprocessor/capabilities/unixes.h
+		core/preprocessor/capabilities/windows.h
+		core/preprocessor/enum.h
+)
 source_group(Core\\preprocessor FILES ${SRC_CORE_PREPROCESSOR})
 
 set(SRC_CORE_ITERATOR
-				core/iterator.h
-				core/iterator/iterator.h
-				core/iterator/iterator.hxx
-				)
+		core/iterator.h
+		core/iterator/iterator.h
+		core/iterator/iterator.hxx
+)
 source_group(Core\\iterator FILES ${SRC_CORE_ITERATOR})
 
 
 set(SRC_CORE_STATIC
-				core/static/if.h
-				core/static/remove.h
-				core/static/assert.h
-				core/static/types.h
-				core/static/inherit.h
-				core/static/dynamiccast.h
-				core/static/moveconstructor.h)
+		core/static/if.h
+		core/static/remove.h
+		core/static/assert.h
+		core/static/types.h
+		core/static/inherit.h
+		core/static/dynamiccast.h
+		core/static/moveconstructor.h
+)
 source_group(Core\\static FILES ${SRC_CORE_STATIC})
 
 set(SRC_CORE_TRAITS
-				core/traits/cstring.h
-				core/traits/extension/into-cstring.h
-				core/traits/extension/length.h
-				core/traits/length.h)
+		core/traits/cstring.h
+		core/traits/extension/into-cstring.h
+		core/traits/extension/length.h
+		core/traits/length.h
+)
 source_group(Core\\traits FILES ${SRC_CORE_TRAITS})
 
 
 set(SRC_CORE_EXCEPTIONS
-				core/exceptions.h
-				core/exceptions/badcast.h )
+		core/exceptions.h
+		core/exceptions/badcast.h
+)
 source_group(Core\\exceptions FILES ${SRC_CORE_EXCEPTIONS})
 
 
 set(SRC_CORE_VALIDATOR
-				core/validator/text/default.h
-				core/validator/text/default.hxx
-				core/validator/text/default.private.h
-				core/validator/text/validator.h
-				core/validator/validator.h)
+		core/validator/text/default.h
+		core/validator/text/default.hxx
+		core/validator/text/default.private.h
+		core/validator/text/validator.h
+		core/validator/validator.h
+)
 source_group(Core\\validator FILES ${SRC_CORE_VALIDATOR})
 
 set(SRC_CORE_SLIST
-				core/slist/iterator.h
-				core/slist/slist.h
-				core/slist/slist.hxx
-				core/slist.h)
+		core/slist/iterator.h
+		core/slist/slist.h
+		core/slist/slist.hxx
+		core/slist.h
+)
 source_group(Core\\linkedList FILES ${SRC_CORE_SLIST})
 
 
 
 set(SRC_CORE_STRING
-				core/customstring/customstring.h
-				core/customstring/customstring.hxx
-				core/customstring/iterator.h
-				core/customstring/iterator.hxx
-				core/customstring/utf8char.h
-				core/customstring/utf8char.hxx
-				core/customstring/traits/append.h
-				core/customstring/traits/assign.h
-				core/customstring/traits/fill.h
-				core/customstring/traits/integer.h
-				core/customstring/traits/vnsprintf.h
-				core/customstring/traits/traits.h
-				core/customstring/traits/traits.cpp
-				core/customstring/traits/traits.hxx
-				core/customstring/traits/into.h
+		core/customstring/customstring.h
+		core/customstring/customstring.hxx
+		core/customstring/iterator.h
+		core/customstring/iterator.hxx
+		core/customstring/utf8char.h
+		core/customstring/utf8char.hxx
+		core/customstring/traits/append.h
+		core/customstring/traits/assign.h
+		core/customstring/traits/fill.h
+		core/customstring/traits/integer.h
+		core/customstring/traits/vnsprintf.h
+		core/customstring/traits/traits.h
+		core/customstring/traits/traits.cpp
+		core/customstring/traits/traits.hxx
+		core/customstring/traits/into.h
 
-				core/string/string.h core/string/string.hxx
-				core/string/converters.from.hxx core/string/converters.to.hxx
-				core/string/forward.h
-				core/string/traits.hxx
-				core/string/iterators.hxx
-				core/string/traits/countchar.hxx  core/string/traits/find.hxx
-				core/string/traits/haschar.hxx    core/string/traits/length.hxx
-				core/string/traits/remove.hxx     core/string/traits/vsprintf.hxx
-				core/string/traits/findlastof.hxx core/string/traits/findfirstof.hxx
-				core/string.h)
+		# deprecated
+		core/string/string.h
+		core/string/string.hxx
+		core/string/converters.from.hxx
+		core/string/converters.to.hxx
+		core/string/forward.h
+		core/string/traits.hxx
+		core/string/iterators.hxx
+		core/string/traits/countchar.hxx
+		core/string/traits/find.hxx
+		core/string/traits/haschar.hxx
+		core/string/traits/length.hxx
+		core/string/traits/remove.hxx
+		core/string/traits/vsprintf.hxx
+		core/string/traits/findlastof.hxx
+		core/string/traits/findfirstof.hxx
+		core/string.h
+)
 source_group(Core\\String FILES ${SRC_CORE_STRING})
 
 
 set(SRC_CORE_STL
-				core/stl/algorithm.h)
+		core/stl/algorithm.h
+)
 source_group(Core\\Stl FILES ${SRC_CORE_STL})
 
 
 set(SRC_CORE_LOGS
-				core/logs/logs.h core/logs/logs.hxx core/logs/verbosity.h
-				core/logs/null.h
-				core/logs/buffer.h
-				# Handlers
-				core/logs/handlers/stdcout.h
-				core/logs/handlers/file.h
-				core/logs/handlers/callback.h
-				# Decorators
-				core/logs/decorators/verbositylevel.h
-				core/logs/decorators/time.h
-				core/logs/decorators/time.cpp
-				core/logs/decorators/applicationname.h
-				core/logs/decorators/message.h
-				core/logs.h)
+		core/logs/logs.h
+		core/logs/logs.hxx
+		core/logs/verbosity.h
+		core/logs/null.h
+		core/logs/buffer.h
+		# Handlers
+		core/logs/handlers/stdcout.h
+		core/logs/handlers/file.h
+		core/logs/handlers/callback.h
+		# Decorators
+		core/logs/decorators/verbositylevel.h
+		core/logs/decorators/time.h
+		core/logs/decorators/time.cpp
+		core/logs/decorators/applicationname.h
+		core/logs/decorators/message.h
+		core/logs.h
+)
 source_group(Core\\Logs FILES ${SRC_CORE_LOGS})
 
 
 
 set(SRC_CORE_SMARTPTR
-				core/smartptr/policies/checking.h
-				core/smartptr/policies/ownership.h
-				core/smartptr/policies/storage.h
-				core/smartptr/policies/constness.h
-				core/smartptr/smartptr.h  core/smartptr/smartptr.hxx
-				)
+		core/smartptr/policies/checking.h
+		core/smartptr/policies/ownership.h
+		core/smartptr/policies/storage.h
+		core/smartptr/policies/constness.h
+		core/smartptr/smartptr.h
+		core/smartptr/smartptr.hxx
+)
 source_group(Core\\SmartPtr FILES ${SRC_CORE_SMARTPTR})
 
 
 set(SRC_CORE_ANY
-				core/any.h
-				core/any/any.h
-				core/any/any.private.h
-				core/any/any.hxx
-				core/any/any.cpp)
+		core/any.h
+		core/any/any.h
+		core/any/any.private.h
+		core/any/any.hxx
+		core/any/any.cpp
+)
 source_group(Core\\Any FILES ${SRC_CORE_ANY})
 
 set(SRC_CORE_VARIANT
-				core/variant.h
-				core/variant/variant.h
-				core/variant/variant.hxx
-				core/variant/variant.cpp
-				core/variant/variant.private.h
-				core/variant/variant.private.hxx)
+		core/variant.h
+		core/variant/variant.h
+		core/variant/variant.hxx
+		core/variant/variant.cpp
+		core/variant/variant.private.h
+		core/variant/variant.private.hxx
+)
 source_group(Core\\Variant FILES ${SRC_CORE_VARIANT})
 
 
 
 set(SRC_CORE_DYNAMICLIBRARY
-				core/dynamiclibrary/file.h	core/dynamiclibrary/file.hxx
-				core/dynamiclibrary/file.cpp
-				core/dynamiclibrary/symbol.h core/dynamiclibrary/symbol.hxx
-				core/dynamiclibrary.h)
+		core/dynamiclibrary/file.h
+		core/dynamiclibrary/file.hxx
+		core/dynamiclibrary/file.cpp
+		core/dynamiclibrary/symbol.h
+		core/dynamiclibrary/symbol.hxx
+		core/dynamiclibrary.h
+)
 source_group(Core\\DynamicLibrary FILES ${SRC_CORE_DYNAMICLIBRARY})
 
 
 set(SRC_CORE_BIND
-				core/bind/bind.h core/bind/bind.hxx
-				core/bind/traits.h
-				core/bind.h
-				)
+		core/bind/bind.h
+		core/bind/bind.hxx
+		core/bind/traits.h
+		core/bind.h
+)
 source_group(Core\\Bind FILES ${SRC_CORE_BIND})
 
 set(SRC_CORE_CHARSET
-				core/charset/charset.h core/charset/charset.hxx
-				core/charset/charset.cpp
-				)
+		core/charset/charset.h
+		core/charset/charset.hxx
+		core/charset/charset.cpp
+)
 source_group(Core\\Charset FILES ${SRC_CORE_CHARSET})
 
 
 set(SRC_CORE_EVENT
-				core/event/event.h core/event/event.hxx
-				core/event/interfaces.h core/event/interfaces.hxx
-				core/event/traits.h
-				core/event/observer/observer.h core/event/observer/observer.hxx
-				core/event.h
+		core/event/event.h
+		core/event/event.hxx
+		core/event/interfaces.h
+		core/event/interfaces.hxx
+		core/event/traits.h
+		core/event/observer/observer.h
+		core/event/observer/observer.hxx
+		core/event.h
 
-				# Event loop
-				core/event/loop.h core/event/loop.hxx
-				core/event/loop.fwd.h
-				core/event/flow
-				core/event/flow/continuous.h
-				core/event/flow/timer.h
-				core/event/statistics
-				core/event/statistics/none.h
-				)
+		# Event loop
+		core/event/loop.h
+		core/event/loop.hxx
+		core/event/loop.fwd.h
+		core/event/flow
+		core/event/flow/continuous.h
+		core/event/flow/timer.h
+		core/event/statistics
+		core/event/statistics/none.h
+)
 source_group(Core\\Event FILES ${SRC_CORE_EVENT})
 
 
 set(SRC_CORE_MATH
-				# Standard functions
-				core/math/math.h 	core/math.h  core/math/math.hxx core/math/msvc.hxx
-				core/math/base.h
-				# Log(N)
-				core/math/log.h core/math/log.hxx
-				# Trigonometric functions
-				core/math/trigonometric.h core/math/trigonometric.hxx
-				# Exponential functions
-				core/math/exponential.h core/math/exponential.hxx
-				core/math/complex.h  core/math/complex.hxx
-				# Random number generators
-				core/math/random/distribution.h  core/math/random/distribution.hxx
-				core/math/random/default.h  core/math/random/default.hxx
-				core/math/random/range.h  core/math/random/range.hxx
-				core/math/random/constant.h
+		# Standard functions
+		core/math/math.h
+		core/math.h
+		core/math/math.hxx
+		core/math/msvc.hxx
+		core/math/base.h
+		# Log(N)
+		core/math/log.h
+		core/math/log.hxx
+		# Trigonometric functions
+		core/math/trigonometric.h
+		core/math/trigonometric.hxx
+		# Exponential functions
+		core/math/exponential.h
+		core/math/exponential.hxx
+		core/math/complex.h
+		core/math/complex.hxx
+		# Random number generators
+		core/math/random/distribution.h
+		core/math/random/distribution.hxx
+		core/math/random/default.h
+		core/math/random/default.hxx
+		core/math/random/range.h
+		core/math/random/range.hxx
+		core/math/random/constant.h
 
-				core/rect2D.h core/math/geometry/rect2D.h core/math/geometry/rect2D.hxx
-				core/vector3D.h core/math/geometry/vector3D.h core/math/geometry/vector3D.hxx
-				core/point2D.h core/math/geometry/point2D.h
-				core/point3D.h core/math/geometry/point3D.h
-				core/boundingbox.h
-				core/math/geometry/boundingbox.h core/math/geometry/boundingbox.hxx
-				core/math/geometry/edge.h
-				core/math/geometry/triangle.h
-				core/math/geometry/vertex.h
-
-				)
-
+		core/rect2D.h
+		core/math/geometry/rect2D.h
+		core/math/geometry/rect2D.hxx
+		core/vector3D.h
+		core/math/geometry/vector3D.h
+		core/math/geometry/vector3D.hxx
+		core/point2D.h
+		core/math/geometry/point2D.h
+		core/point3D.h
+		core/math/geometry/point3D.h
+		core/boundingbox.h
+		core/math/geometry/boundingbox.h
+		core/math/geometry/boundingbox.hxx
+		core/math/geometry/edge.h
+		core/math/geometry/triangle.h
+		core/math/geometry/vertex.h
+)
 source_group(Core\\Math FILES ${SRC_CORE_MATH})
 
 set(SRC_CORE_BIT
-				core/bit.h
-				core/bit/bit.h core/bit/bit.hxx
-				core/bit/array.h
-				core/bit/array.hxx
-				core/bit/array.cpp
-				)
+		core/bit.h
+		core/bit/bit.h core/bit/bit.hxx
+		core/bit/array.h
+		core/bit/array.hxx
+		core/bit/array.cpp
+)
 source_group("Core\\Bit" FILES ${SRC_CORE_BIT})
 
 
 # Singleton
 set(SRC_CORE_SINGLETON
-				core/singleton.h
-				core/singleton/singleton.h
-				core/singleton/singleton.hxx
-				core/singleton/policies/creation.h
-				core/singleton/policies/lifetime.h
-				)
+		core/singleton.h
+		core/singleton/singleton.h
+		core/singleton/singleton.hxx
+		core/singleton/policies/creation.h
+		core/singleton/policies/lifetime.h
+)
 source_group(Core\\Singleton FILES ${SRC_CORE_SINGLETON})
 
 
 
 # Hash - Checksums
 set(SRC_CORE_HASH_CHECKSUM
-				core/hash/checksum/checksum.h
-				core/hash/checksum/checksum.hxx
-				core/hash/checksum/md5.hxx
-				core/hash/checksum/md5.h core/hash/checksum/md5.cpp)
+		core/hash/checksum/checksum.h
+		core/hash/checksum/checksum.hxx
+		core/hash/checksum/md5.hxx
+		core/hash/checksum/md5.h
+		core/hash/checksum/md5.cpp
+)
 source_group(Core\\Hash\\Checksum FILES ${SRC_CORE_HASH_CHECKSUM})
 
 
 # System
 set(SRC_CORE_SYSTEM
-				core/system/stdint.h core/system/nullptr.h core/system/capabilities.h
-				core/system/sleep.h core/system/sleep.cpp
-				core/sleep.h
-				core/fwd.h
-				core/system/cpu.h core/system/cpu.cpp
-				core/system/memory.h core/system/memory.hxx core/system/memory.cpp
-				core/system/environment.h core/system/environment.hxx
-				core/system/endian.h)
+		core/system/stdint.h
+		core/system/nullptr.h
+		core/system/capabilities.h
+		core/system/sleep.h
+		core/system/sleep.cpp
+		core/sleep.h
+		core/fwd.h
+		core/system/cpu.h
+		core/system/cpu.cpp
+		core/system/memory.h
+		core/system/memory.hxx
+		core/system/memory.cpp
+		core/system/environment.h
+		core/system/environment.hxx
+		core/system/endian.h
+)
 source_group(Core\\System FILES ${SRC_CORE_SYSTEM})
 
 
 set(SRC_CORE_TREE_N
-				core/tree/treeN.h
-				core/tree/n/treeN.h
-				core/tree/n/treeN.hxx
-				core/tree/n/treeN.iterator.def.h
-				core/tree/n/treeN.iterator.undef.h
-				core/tree/n/treeN.iterator.h
-				)
+		core/tree/treeN.h
+		core/tree/n/treeN.h
+		core/tree/n/treeN.hxx
+		core/tree/n/treeN.iterator.def.h
+		core/tree/n/treeN.iterator.undef.h
+		core/tree/n/treeN.iterator.h
+)
 source_group(Core\\Tree FILES ${SRC_CORE_TREE_N})
 
 
 set(SRC_CORE_UNIT
-				core/unit/define.h core/unit/undef.h
-				core/unit/unit.h core/unit/unit.hxx
-				core/unit.h
-				core/unit/angle.h
-				core/unit/length.h
-				core/unit/length/length.h
-				core/unit/length/metric.h
-				core/unit/length/extra.h
-				core/unit/luminance.h
+		core/unit/define.h
+		core/unit/undef.h
+		core/unit/unit.h
+		core/unit/unit.hxx
+		core/unit.h
+		core/unit/angle.h
+		core/unit/length.h
+		core/unit/length/length.h
+		core/unit/length/metric.h
+		core/unit/length/extra.h
+		core/unit/luminance.h
 )
 source_group(Core\\Unit FILES ${SRC_CORE_UNIT})
 
 set(SRC_CORE_UTILS
-				core/utils/utils.h
-				core/utils/hexdump.h core/utils/hexdump.hxx core/utils/hexdump.cpp
+		core/utils/utils.h
+		core/utils/hexdump.h core/utils/hexdump.hxx core/utils/hexdump.cpp
 )
 source_group(Core\\Utils FILES ${SRC_CORE_UTILS})
 
 set(SRC_CORE_URI
-				core/uri/uri.private.h  core/uri/uri.private.cpp
-				core/uri/uri.h core/uri/uri.hxx core/uri/uri.cpp
-				core/uri.h)
+		core/uri/uri.private.h  core/uri/uri.private.cpp
+		core/uri/uri.h core/uri/uri.hxx core/uri/uri.cpp
+		core/uri.h
+)
 source_group(Core\\URI FILES ${SRC_CORE_URI})
 
 
 set(SRC_CORE_IO_FILENAME
-				core/io/io.h core/io/io.cpp core/io/exists.cpp
-				core/io/io.hxx)
+		core/io/io.h
+		core/io/io.cpp
+		core/io/exists.cpp
+		core/io/io.hxx
+)
 source_group(Core\\IO FILES ${SRC_CORE_IO_FILENAME})
 
 
 
 set(SRC_CORE_IO_DIRECTORY
-				core/io/directory.h core/io/directory/directory.hxx
-				core/io/directory/commons.h
-				core/io/directory/remove.cpp
-				core/io/directory/current.cpp
-				core/io/directory/make.cpp
-				core/io/directory/copy.cpp
-				core/io/directory/info.h
-				core/io/directory/info/iterator.cpp
-				core/io/directory/info/iterator.h
-				core/io/directory/info/info.h
-				core/io/directory/info/info.hxx
-				core/io/directory/info/info.cpp
-				core/io/directory/info/platform.cpp
-				core/io/directory/info/platform.h
-				core/io/directory/iterator.h
-				core/io/directory/iterator/iterator.cpp
-				core/io/directory/iterator/iterator.h
-				core/io/directory/iterator/iterator.hxx
-				core/io/directory/iterator/detachedthread.h
-				)
+		core/io/directory.h
+		core/io/directory/directory.hxx
+		core/io/directory/commons.h
+		core/io/directory/remove.cpp
+		core/io/directory/current.cpp
+		core/io/directory/make.cpp
+		core/io/directory/copy.cpp
+		core/io/directory/info.h
+		core/io/directory/iterator.h
+)
 source_group(Core\\IO\\Directory FILES ${SRC_CORE_IO_DIRECTORY})
+
+set(SRC_CORE_IO_DIRECTORY_ITERATOR
+		core/io/directory/iterator/iterator.cpp
+		core/io/directory/iterator/iterator.h
+		core/io/directory/iterator/iterator.hxx
+		core/io/directory/iterator/detachedthread.h
+)
+source_group(Core\\IO\\Directory\\Iterator FILES ${SRC_CORE_IO_DIRECTORY_ITERATOR})
+
+
+set(SRC_CORE_IO_DIRECTORY_INFO
+		core/io/directory/info/iterator.h
+		core/io/directory/info/info.h
+		core/io/directory/info/info.hxx
+		core/io/directory/info/info.cpp
+		core/io/directory/info/platform.cpp
+		core/io/directory/info/platform.h
+)
+source_group(Core\\IO\\Directory\\Info FILES ${SRC_CORE_IO_DIRECTORY_INFO})
+
 
 
 set(SRC_CORE_IO_FILE
-				core/io/file/openmode.h core/io/file/openmode.cpp
-				core/io/file/stream.h core/io/file/stream.hxx
-				core/io/file/stream.cpp
-				core/io/file.h core/io/file/file.hxx core/io/file/file.cpp
-				)
+		core/io/file/openmode.h
+		core/io/file/openmode.cpp
+		core/io/file/stream.h
+		core/io/file/stream.hxx
+		core/io/file/stream.cpp
+		core/io/file.h
+		core/io/file/file.hxx
+		core/io/file/file.cpp
+)
 source_group(Core\\IO\\File FILES ${SRC_CORE_IO_FILE})
 
 
 set(SRC_CORE_GETOPT
-				core/getopt.h
-				core/getopt/option.h core/getopt/option.cpp
-				core/getopt/parser.h core/getopt/parser.hxx core/getopt/parser.cpp)
+		core/getopt.h
+		core/getopt/option.h
+		core/getopt/option.cpp
+		core/getopt/parser.h
+		core/getopt/parser.hxx
+		core/getopt/parser.cpp
+)
 source_group(Core\\GetOpt FILES ${SRC_CORE_GETOPT})
 
 
-set(SRC_CORE_VERSION	core/version/version.h  core/version/version.cpp core/version/version.hxx)
+set(SRC_CORE_VERSION
+		core/version/version.h
+		core/version/version.cpp
+		core/version/version.hxx
+)
 source_group(Core\\Version FILES ${SRC_CORE_VERSION})
 
 
@@ -617,6 +703,8 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_STL} ${SRC_CORE_VALIDATOR}
 		${SRC_CORE_IO_FILENAME}
 		${SRC_CORE_IO_DIRECTORY}
+		${SRC_CORE_IO_DIRECTORY_INFO}
+		${SRC_CORE_IO_DIRECTORY_ITERATOR}
 		${SRC_CORE_IO_FILE}
 		${SRC_CORE_LOGS}
 		${SRC_CORE_ATOMIC}

@@ -60,7 +60,7 @@ namespace Surface
 		// I
 		//wideText[37] = ('\x30' << 8) | '\x44';
 
-		Label label(AFont::Ptr(new WGLFont("Arial", 45)), wideText, 50, 50);
+		Label label(new WGLFont("Arial", 45), wideText, 50, 50);
 		label.draw();
 		delete[] wideText;
 		# endif // YUNI_WINDOWSYSTEM_MSW
