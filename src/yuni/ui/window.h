@@ -90,7 +90,7 @@ namespace UI
 		//! \name Title of the Window
 		//@{
 		//! Get the Title of the window
-		const String& title() const;
+		String title() const;
 		//! Set the title of the window
 		template<class StringT> void title(const StringT& newTitle);
 		//@}

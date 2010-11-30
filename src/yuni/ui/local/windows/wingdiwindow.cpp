@@ -85,7 +85,12 @@ namespace Windows
 						return 0;
 					}
 
+				case WM_ERASEBKGND:
+				 	return 0;
+
+				case WM_PAINT:
 				case WM_SIZE: // Resize the window
+				case WM_SIZING: // Resize the window
 					{
 						if (window)
 						{
