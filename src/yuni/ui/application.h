@@ -54,11 +54,15 @@ namespace UI
 
 		/*!
 		** \brief Get the identifier for this application
+		**
+		** \internal Thread-safe because the GUID never changes
 		*/
 		const GUID& guid() const;
 
 		/*!
 		** \brief Get the name of this application
+		**
+		** \internal Thread-safe because the name never changes
 		*/
 		const String& name() const;
 

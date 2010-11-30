@@ -53,7 +53,7 @@ namespace UI
 	}
 
 
-	inline const String& Window::title() const
+	inline String Window::title() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		return pTitle;
