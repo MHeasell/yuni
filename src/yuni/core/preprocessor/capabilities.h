@@ -114,7 +114,7 @@
 #	define YUNI_OS_GCC
 #	define YUNI_OS_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
 #	ifndef YUNI_COMPILER_NAME
-#		define YUNI_COMPILER_NAME "GCC (the GNU Compiler Collection)"
+#		define YUNI_COMPILER_NAME "GCC (GNU Compiler Collection)"
 #	endif
 # else
 #	define YUNI_OS_GCC_VERSION 0
@@ -124,6 +124,9 @@
 /* Intel Compiler */
 # ifdef __INTEL_COMPILER
 #	define YUNI_OS_INTELCOMPILER
+#	ifdef YUNI_COMPILER_NAME /* in some cases, the compiler may already have been detected as Visual Studio */
+#		undef YUNI_COMPILER_NAME
+#	endif
 #	define YUNI_COMPILER_NAME "ICC (Intel C++ Compiler)"
 # endif
 
@@ -219,7 +222,9 @@
 
 /* Compiler Detection */
 # ifndef YUNI_OS_NAME
-#	define YUNI_COMPILER_NAME "Unknown"
+#	ifndef YUNI_COMPILER_NAME
+#		define YUNI_COMPILER_NAME "Unknown"
+#	endif
 #	define YUNI_COMPILER_UNKNOWN
 #	warning "Compiler Detection: Unable to guess the compiler"
 # endif
