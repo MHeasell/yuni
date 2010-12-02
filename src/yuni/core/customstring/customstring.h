@@ -1992,6 +1992,50 @@ operator + (const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs, const std::basic_st
 	return Yuni::CustomString<SizeT,ExpT,ZeroT>(rhs) += u;
 }
 
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool
+operator == (const char* lhs, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+{
+	return rhs == lhs;
+}
+
+template<unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool
+operator != (const char* lhs, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+{
+	return rhs != lhs;
+}
+
+template<int N, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool
+operator == (const char lhs[N], const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+{
+	return rhs == lhs;
+}
+
+template<int N, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool
+operator != (const char lhs[N], const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+{
+	return rhs != lhs;
+}
+
+template<class TraitsT, class AllocT, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool
+operator == (const std::basic_string<char,TraitsT,AllocT>& lhs, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+{
+	return rhs == lhs;
+}
+
+template<class TraitsT, class AllocT, unsigned int SizeT, bool ExpT,bool ZeroT>
+inline bool
+operator != (const std::basic_string<char,TraitsT,AllocT>& lhs, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
+{
+	return rhs != lhs;
+}
+
+
 //@}
 
 
