@@ -55,6 +55,15 @@ endif()
 set(YUNI_INSTALL_CXX_FLAGS   "")
 set(YUNI_INSTALL_CXX_DEFINES "")
 
+# ICC Detection
+# CMake does not handle ICC at all, mainly because ICC behaves like Visual Studio and
+# it seems there is no reliable way to make the distinction
+if (WIN32 OR WIN64)
+	if (NOT MSVC AND NOT MINGW AND NOT CYGWIN)
+		# Should behaves like Visual Studio, like ICC
+		set(MSVC 1)
+	endif()
+endif()
 
 
 # Target
