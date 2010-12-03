@@ -1846,6 +1846,10 @@ namespace Yuni
 		Size appendWithoutChecking(const char c);
 		//! Assign without checking for pointer validity
 		Size assignWithoutChecking(const char c);
+		//! Adapt without any check
+		void adaptWithoutChecking(const char* const cstring, Size size);
+		//! Decal the inner data pointer (must only be used when the class is an adaptor)
+		void decalOffset(Size count);
 
 	private:
 		// our friends !
@@ -1854,6 +1858,7 @@ namespace Yuni
 		template<class, class> friend struct Yuni::Extension::CustomString::Assign;
 		template<class, class> friend struct Yuni::Extension::CustomString::Fill;
 		template<class, bool>  friend struct Private::CustomStringImpl::AdapterAssign;
+		template<class, bool>  friend struct Private::CustomStringImpl::Consume;
 
 	}; // class CustomString
 
