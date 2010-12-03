@@ -225,7 +225,7 @@ namespace Policy
 
 	private:
 		//! Mutex
-		mutable Mutex& pMutex;
+		Mutex& pMutex;
 
 	}; // class ClassLevelLockable
 

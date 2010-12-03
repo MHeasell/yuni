@@ -11,7 +11,7 @@
 
 
 #ifdef YUNI_OS_WINDOWS
-# define YUNI_DYNLIB_DLOPEN(X)      ::LoadLibrary(TEXT(X))
+# define YUNI_DYNLIB_DLOPEN(X)      ::LoadLibraryW(X)
 #else
 # define YUNI_DYNLIB_DLOPEN(X,M)    ::dlopen(X,M)
 #endif
@@ -177,19 +177,34 @@ namespace DynamicLibrary
 		if (filename)
 		{
 			// Loading
-			std::cout << "try " << filename << "\n";
-			pHandle = YUNI_DYNLIB_DLOPEN(filename);
+			const unsigned int length = strlen(filename);
+			if (!length)
+				return false;
+			wchar_t* buffer = new wchar_t[length + 10];
+			buffer[0] = L'\\';
+			buffer[1] = L'\\';
+			buffer[2] = L'?';
+			buffer[3] = L'\\';
+			int n = MultiByteToWideChar(CP_UTF8, 0, filename, length, buffer + 4, length);
+			if (n <= 0)
+			{
+				delete[] buffer;
+				return false;
+			}
+			buffer[n] = L'\0';
+
+			pHandle = YUNI_DYNLIB_DLOPEN(buffer);
+			delete[] buffer;
 			if (NullHandle != pHandle)
 			{
 				pFilename = filename;
 				return true;
 			}
-			std::cout << "FAILED\n";
 		}
 		return false;
 	}
 
-	# else
+# else
 
 	// Specific implementation for the Unix platforms
 	bool File::loadFromRawFilename(const char* filename, const File::Relocation r, const File::Visibility v)
@@ -214,9 +229,7 @@ namespace DynamicLibrary
 		return false;
 	}
 
-	# endif
-
-
+# endif
 
 
 
