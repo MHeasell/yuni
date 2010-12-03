@@ -23,8 +23,7 @@ namespace CustomStringImpl
 	{
 		static void Perform(StringT& out, const char* const cstring, typename StringT::Size size)
 		{
-			out.data = cstring;
-			out.size = size;
+			out.adaptWithoutChecking(cstring, size);
 		}
 	};
 
@@ -39,9 +38,33 @@ namespace CustomStringImpl
 	};
 
 
+	template<class StringT, bool Adapter>
+	struct Consume
+	{
+		static void Perform(StringT& out, typename StringT::Size count)
+		{
+			out.decalOffset(count);
+		}
+	};
+
+	template<class StringT>
+	struct Consume<StringT, false>
+	{
+		static void Perform(StringT& out, typename StringT::Size count)
+		{
+			out.erase(0, count);
+		}
+	};
+
+
+
+
+
 	// Const qualifier from the adapter mode
 	template<bool AdapterT, class C> struct QualifierFromAdapterMode { typedef C* Type; };
 	template<class C> struct QualifierFromAdapterMode<true, C> { typedef const C* Type; };
+
+
 
 
 	int Compare(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
@@ -51,6 +74,9 @@ namespace CustomStringImpl
 	bool EqualsInsensitive(const char* const s1, const char* const s2, unsigned int len);
 
 	bool Glob(const char* s, unsigned int l1, const char* const pattern, unsigned int patternlen);
+
+
+
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>

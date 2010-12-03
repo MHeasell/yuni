@@ -563,9 +563,9 @@ namespace Yuni
 		for (Size i = 0; i != AncestorType::size; ++i)
 		{
 			if (c == AncestorType::data[i])
-				++c;
+				++r;
 		}
-		return c;
+		return r;
 	}
 
 
@@ -1647,7 +1647,8 @@ namespace Yuni
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size n)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CustomString_Adapter_ReadOnly);
-		erase(0, n);
+		if (n)
+			Yuni::Private::CustomStringImpl::Consume<CustomStringType, adapter>::Perform(*this, n);
 	}
 
 
@@ -1676,7 +1677,7 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::erase(const IIterator<ModelT,ConstT>& it, const Size len)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CustomString_Adapter_ReadOnly);
-		insert(it.offset(), len);
+		erase(it.offset(), len);
 	}
 
 
@@ -2472,16 +2473,17 @@ namespace Yuni
 			if (ptrlen == i) // nothing has been found. Aborting
 				break;
 		}
-		if (count != 0)
-		{
-			if (!adapter)
-				erase(0, count);
-			else
-			{
-				AncestorType::data += count;
-				AncestorType::size -= count;
-			}
-		}
+		// Remove the first 'count' characters
+		consume(count);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::decalOffset(Size count)
+	{
+		AncestorType::data += count;
+		AncestorType::size -= count;
 	}
 
 
@@ -3080,7 +3082,7 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	void
+	inline void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::adapt(const char* cstring, Size length)
 	{
 		Yuni::Private::CustomStringImpl::AdapterAssign<CustomStringType, adapter>::Perform(*this,
@@ -3090,7 +3092,7 @@ namespace Yuni
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class StringT>
-	void
+	inline void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::adapt(const StringT& string)
 	{
 		Yuni::Private::CustomStringImpl::AdapterAssign<CustomStringType, adapter>::Perform(*this,
@@ -3099,6 +3101,13 @@ namespace Yuni
 	}
 
 
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::adaptWithoutChecking(const char* const cstring, Size length)
+	{
+		AncestorType::data = const_cast<char*>(cstring);
+		AncestorType::size = length;
+	}
 
 
 
