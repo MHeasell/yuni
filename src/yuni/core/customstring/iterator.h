@@ -58,7 +58,7 @@ struct Model
 
 	protected:
 		NullIterator(const StringType& s)
-			:pString(const_cast<StringType&>(s))
+			:pString(s)
 		{}
 
 		NullIterator(const NullIterator& copy)
@@ -67,7 +67,7 @@ struct Model
 
 		template<class ModelT>
 		NullIterator(const ModelT& copy)
-			:pString(const_cast<StringType&>(copy.string()))
+			:pString(copy.string())
 		{}
 
 		static void forward(difference_type)
@@ -99,7 +99,7 @@ struct Model
 
 	private:
 		//! Reference to the original string
-		mutable StringType& pString;
+		const StringType& pString;
 
 	}; // class NullIterator
 
@@ -199,7 +199,7 @@ struct Model
 		{}
 
 		explicit UTF8Iterator(const StringType& s)
-			:pOffset(0), pString(s)
+			:pOffset(0), pString(const_cast<StringType&>(s))
 		{}
 
 		UTF8Iterator(const UTF8Iterator& copy)
@@ -272,7 +272,7 @@ struct Model
 		//! Offset in the string
 		Size pOffset;
 		//! Reference to the original
-		mutable StringType& pString;
+		StringType& pString;
 
 	}; // class UTF8Iterator
 
@@ -366,7 +366,7 @@ struct Model
 		{}
 
 		explicit ByteIterator(const StringType& s)
-			:pOffset(0), pString(s)
+			:pOffset(0), pString(const_cast<StringType&>(s))
 		{}
 		ByteIterator(const ByteIterator& copy)
 			:pOffset(copy.rawOffset()),
@@ -434,9 +434,10 @@ struct Model
 		//! Offset in the string
 		size_type pOffset;
 		//! Reference to the original
-		mutable StringType& pString;
+		StringType& pString;
 
 	}; // class ByteIterator
+
 
 
 
