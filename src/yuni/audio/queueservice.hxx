@@ -219,6 +219,7 @@ namespace Audio
  		callback.bind(emitter, &Emitter::playSoundDispatched);
 		// Dispatching...
  		pQueueService->pAudioLoop.dispatch(callback);
+		return true;
 	}
 
 
