@@ -6,6 +6,7 @@
 # include <vector>
 # include "../static/remove.h"
 # include "../static/types.h"
+# include "../iterator.h"
 
 
 namespace Yuni
@@ -40,8 +41,8 @@ namespace Yuni
 		class Iterator;
 		class ConstIterator;
 		//! Iterator (STL compliant)
-		typedef Iterator iterator;
-		typedef ConstIterator const_iterator;
+		typedef IIterator<Iterator, false> iterator;
+		typedef IIterator<ConstIterator, true> const_iterator;
 
 	protected:
 		// Forward declaration
