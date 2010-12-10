@@ -135,7 +135,9 @@ public:
 
 private:
 	Item* pCurrent;
+
 	friend class ConstIterator;
+	friend class LinkedList<T,Alloc>;
 };
 
 
