@@ -395,6 +395,37 @@ namespace Yuni
 			delete it;
 			if (!pHead)
 				pLast = NULL;
+			--pCount;
+		}
+	}
+
+
+	template<class T, class Alloc>
+	void LinkedList<T,Alloc>::erase(iterator& i)
+	{
+		// Make sure the list is not empty
+		if (!pHead)
+			return;
+		// If we are erasing the first item
+		if (pHead == i.pCurrent)
+		{
+			pHead = pHead->next;
+			delete i.pCurrent;
+			--pCount;
+		}
+		// Otherwise, search for the item to delete
+		else
+		{
+			for (Item* it = pHead; it->next; ++it)
+				// Is it the correct item ?
+				if (it->next == i)
+				{
+					// Remove from the list and delete
+					it->next = it->next->next;
+					delete it->next;
+					--pCount;
+					break;
+				}
 		}
 	}
 
