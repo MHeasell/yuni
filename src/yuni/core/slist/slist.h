@@ -36,13 +36,16 @@ namespace Yuni
 		typedef typename Static::Remove::Reference<T>::Type& reference_type;
 		//! Reference (const)
 		typedef const typename Static::Remove::Reference<T>::Type& const_reference_type;
+		//! Pointer
+		typedef typename Static::Remove::Reference<T>::Type* pointer_type;
+		//! Pointer (const)
+		typedef const typename Static::Remove::Reference<T>::Type* const_pointer_type;
 
 		// Forward declaration for iterators
 		class Iterator;
-		class ConstIterator;
 		//! Iterator (STL compliant)
 		typedef IIterator<Iterator, false> iterator;
-		typedef IIterator<ConstIterator, true> const_iterator;
+		typedef IIterator<Iterator, true> const_iterator;
 
 	protected:
 		// Forward declaration
