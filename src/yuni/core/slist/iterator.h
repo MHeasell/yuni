@@ -8,6 +8,16 @@
 class Iterator
 {
 public:
+	enum
+	{
+		canGoForward = true,
+		canGoBackward = false
+	};
+
+	typedef int difference_type;
+	typedef T value_type;
+
+public:
 	Iterator()
 		:pCurrent(NULL)
 	{}
@@ -23,6 +33,41 @@ public:
 		return pCurrent;
 	}
 
+	/*!
+	** \brief Increment the iterator by the distance 1
+	*/
+	void forward()
+	{
+		pCurrent = ((pCurrent) ? pCurrent->next : NULL);
+	}
+
+	/*!
+	** \brief Increment the iterator by the distance n
+	*/
+	void forward(difference_type n)
+	{
+		while (n-- > 0 && pCurrent)
+			pCurrent = pCurrent->next;
+	}
+
+	/*!
+	** \brief Get the distance between this iterator and another one
+	*/
+	int distance(const Iterator& rhs) const
+	{
+		Item* iter1 = pCurrent;
+		Item* iter2 = rhs.pCurrent;
+		int distance = 0;
+		while (iter2 != pCurrent && iter1 != rhs.pCurrent)
+		{
+			++iter1;
+			++iter2;
+			++distance;
+		}
+		return distance;
+	}
+
+
 	Iterator& operator ++ ()
 	{
 		pCurrent = ((pCurrent) ? pCurrent->next : NULL);
@@ -36,13 +81,10 @@ public:
 		return copy;
 	}
 
-	ConstIterator& operator += (int n)
+	ConstIterator& operator += (difference_type n)
 	{
-		while (n > 0)
-		{
-			pCurrent = ((pCurrent) ? pCurrent->next : NULL);
-			--n;
-		}
+		while (n-- > 0 && pCurrent)
+			pCurrent = pCurrent->next;
 		return *this;
 	}
 
@@ -54,6 +96,16 @@ public:
 	const_reference_type operator * () const
 	{
 		return pCurrent->data;
+	}
+
+	bool equals(const Iterator& rhs) const
+	{
+		return (pCurrent == rhs.pCurrent);
+	}
+
+	bool equals(const ConstIterator& rhs) const
+	{
+		return (pCurrent == rhs.pCurrent);
 	}
 
 	bool operator == (const Iterator& rhs) const
@@ -93,6 +145,16 @@ private:
 class ConstIterator
 {
 public:
+	enum
+	{
+		canGoForward = true,
+		canGoBackward = false
+	};
+
+	typedef int difference_type;
+	typedef T value_type;
+
+public:
 	ConstIterator()
 		:pCurrent(NULL)
 	{}
@@ -111,6 +173,23 @@ public:
 		return pCurrent;
 	}
 
+	/*!
+	** \brief Increment the iterator by the distance 1
+	*/
+	void forward()
+	{
+		pCurrent = ((pCurrent) ? pCurrent->next : NULL);
+	}
+
+	/*!
+	** \brief Increment the iterator by the distance n
+	*/
+	void forward(difference_type n)
+	{
+		while (n-- > 0 && pCurrent)
+			pCurrent = pCurrent->next;
+	}
+
 	ConstIterator& operator ++ ()
 	{
 		pCurrent = ((pCurrent) ? pCurrent->next : NULL);
@@ -124,19 +203,26 @@ public:
 		return copy;
 	}
 
-	ConstIterator& operator += (int n)
+	ConstIterator& operator += (difference_type n)
 	{
-		while (n > 0)
-		{
-			pCurrent = ((pCurrent) ? pCurrent->next : NULL);
-			--n;
-		}
+		while (n-- > 0 && pCurrent)
+			pCurrent = pCurrent->next;
 		return *this;
 	}
 
 	const_reference_type operator * () const
 	{
 		return pCurrent->data;
+	}
+
+	bool equals(const Iterator& rhs) const
+	{
+		return (pCurrent == rhs.pCurrent);
+	}
+
+	bool equals(const ConstIterator& rhs) const
+	{
+		return (pCurrent == rhs.pCurrent);
 	}
 
 	bool operator == (const Iterator& rhs) const
