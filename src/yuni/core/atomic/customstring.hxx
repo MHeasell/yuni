@@ -9,14 +9,15 @@ namespace Extension
 namespace CustomString
 {
 
-	template<class CustomStringT, class C> struct Append;
+	template<class CustomStringT, class C> class Append;
 	template<class T> class Into;
 
 
 	// Atomic<>
 	template<class CustomStringT, int SizeT, template<class> class TP>
-	struct Append<CustomStringT, Yuni::Atomic::Int<SizeT,TP> >
+	class Append<CustomStringT, Yuni::Atomic::Int<SizeT,TP> >
 	{
+	public:
 		typedef typename CustomStringT::Type TypeC;
 		typedef typename Static::Remove::Const<TypeC>::Type C;
 		static void Perform(CustomStringT& s, const Yuni::Atomic::Int<SizeT, TP>& rhs)
@@ -27,8 +28,9 @@ namespace CustomString
 
 
 	template<int SizeT, template<class> class TP>
-	struct Into<Yuni::Atomic::Int<SizeT,TP> >
+	class Into<Yuni::Atomic::Int<SizeT,TP> >
 	{
+	public:
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, Yuni::Atomic::Int<SizeT, TP>& out)

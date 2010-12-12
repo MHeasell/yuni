@@ -351,7 +351,7 @@ namespace Directory
 		ThreadType* pThread;
 		# endif
 		// Friend !
-		friend void Yuni::Private::Core::IO::Directory::Iterator::Traverse(Options&, IDetachedThread*);
+		friend void Yuni::Private::Core::IO::Directory::Iterator::Traverse(Yuni::Private::Core::IO::Directory::Iterator::Options&, Yuni::Private::Core::IO::Directory::Iterator::IDetachedThread*);
 
 	}; // class Iterator
 

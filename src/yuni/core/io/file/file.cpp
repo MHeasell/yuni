@@ -30,7 +30,7 @@ namespace IO
 	{
 		if (!len)
 		{
-			value = 0;
+			value = 0u;
 			return false;
 		}
 
@@ -42,7 +42,7 @@ namespace IO
 		// Driver letters
 		if (len == 2 && p[1] == ':')
 		{
-			value = 0;
+			value = 0u;
 			return true;
 		}
 
@@ -57,7 +57,7 @@ namespace IO
 		int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
 		if (n <= 0)
 		{
-			value = 0;
+			value = 0u;
 			delete[] buffer;
 			return false;
 		}
@@ -72,14 +72,14 @@ namespace IO
 		delete[] buffer;
 		if (hndl == INVALID_HANDLE_VALUE)
 		{
-			value = 0;
+			value = 0u;
 			return false;
 		}
 		LARGE_INTEGER v;
 		if (!GetFileSizeEx(hndl, &v))
 		{
 			CloseHandle(hndl);
-			value = 0;
+			value = 0u;
 			return false;
 		}
 		value = (uint64) v.QuadPart;
@@ -95,10 +95,10 @@ namespace IO
 		struct stat results;
 		if (filename && '\0' != *filename && stat(filename, &results) == 0)
 		{
-			value = results.st_size;
+			value = static_cast<uint64>(results.st_size);
 			return true;
 		}
-		value = 0;
+		value = 0u;
 		return false;
 	}
 

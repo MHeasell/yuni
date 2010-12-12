@@ -138,7 +138,7 @@ namespace File
 		// Assuming we have a mere Yuni::String, the internal may be null.
 		buffer.reserve(buffer.capacity());
 		// Read data from the file
-		if ((NULL != ::fgets((char*)buffer.data(), buffer.capacity(), pFd)))
+		if ((NULL != ::fgets((char*)buffer.data(), static_cast<int>(buffer.capacity()), pFd)))
 		{
 			// We may have read less than expected. So we have to resize the string
 			// to perform maintenance (about the internal size and the final zero)

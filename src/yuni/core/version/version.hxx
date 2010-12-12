@@ -6,16 +6,21 @@ namespace Yuni
 {
 
 	inline Version::Version()
-		:hi(0), lo(0), revision(0)
+		:hi(0u), lo(0u), revision(0u)
 	{}
 
 
-	inline Version::Version(const int h, const int l)
+	inline Version::Version(unsigned int h)
+		:hi(h), lo(0u), revision(0u)
+	{}
+
+
+	inline Version::Version(unsigned int h, unsigned int l)
 		:hi(h), lo(l), revision(0)
 	{}
 
 
-	inline Version::Version(const int h, const int l, const int r)
+	inline Version::Version(unsigned int h, unsigned int l, unsigned int r)
 		:hi(h), lo(l), revision(r)
 	{}
 
@@ -59,5 +64,13 @@ namespace Yuni
 
 
 } // namespace Yuni
+
+
+inline std::ostream& operator << (std::ostream& out, const Yuni::Version& rhs)
+{
+	rhs.print(out);
+	return out;
+}
+
 
 #endif // __YUNI_CORE_VERSION_HXX__

@@ -236,6 +236,7 @@ namespace Yuni
 	inline R
 	Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(<%=
 			ret = ''
 			(0..i-1).each do |j|

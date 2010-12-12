@@ -72,8 +72,9 @@ namespace StringImpl
 		{
 			if (len && str && '\0' != *str)
 			{
-				InsertRaw(s, str, Private::StringImpl::Min(
-					Private::StringImpl::Length<StringBase<C,Chnk>, char*>::Value(str), len));
+				InsertRaw(s, str,
+					Private::StringImpl::Min(Private::StringImpl::Length<StringBase<C,Chnk>, char*>::Value(str), len),
+					offset);
 			}
 		}
 

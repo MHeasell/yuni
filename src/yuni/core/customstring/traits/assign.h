@@ -12,8 +12,9 @@ namespace CustomString
 
 
 	template<class CustomStringT, class C>
-	struct Assign
+	class Assign
 	{
+	public:
 		static void Perform(CustomStringT& s, const C& rhs)
 		{
 			// By Default, we will clear the buffer and then append the new content
@@ -27,8 +28,9 @@ namespace CustomString
 
 	// C*
 	template<class CustomStringT>
-	struct Assign<CustomStringT, typename CustomStringT::Type*>
+	class Assign<CustomStringT, typename CustomStringT::Type*>
 	{
+	public:
 		typedef typename CustomStringT::Type C;
 		static void Perform(CustomStringT& s, const C* rhs)
 		{
@@ -42,8 +44,9 @@ namespace CustomString
 
 	// C[N]
 	template<class CustomStringT, int N>
-	struct Assign<CustomStringT, typename CustomStringT::Type[N]>
+	class Assign<CustomStringT, typename CustomStringT::Type[N]>
 	{
+	public:
 		typedef typename CustomStringT::Type C;
 		static void Perform(CustomStringT& s, const C rhs[N])
 		{
@@ -61,8 +64,9 @@ namespace CustomString
 
 	// C
 	template<class CustomStringT>
-	struct Assign<CustomStringT, typename CustomStringT::Type>
+	class Assign<CustomStringT, typename CustomStringT::Type>
 	{
+	public:
 		typedef typename CustomStringT::Type C;
 		static void Perform(CustomStringT& s, const C rhs)
 		{
@@ -73,8 +77,9 @@ namespace CustomString
 
 	// nullptr
 	template<class CustomStringT>
-	struct Assign<CustomStringT, Yuni::NullPtr>
+	class Assign<CustomStringT, Yuni::NullPtr>
 	{
+	public:
 		static void Perform(CustomStringT& s, const Yuni::NullPtr&)
 		{
 			s.clear();
@@ -85,8 +90,9 @@ namespace CustomString
 
 	// bool
 	template<class CustomStringT>
-	struct Assign<CustomStringT, bool>
+	class Assign<CustomStringT, bool>
 	{
+	public:
 		static void Perform(CustomStringT& s, const bool rhs)
 		{
 			if (rhs)

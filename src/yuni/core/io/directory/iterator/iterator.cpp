@@ -105,7 +105,7 @@ namespace Iterator
 			else
 			{
 				// The node is a file
-				switch (opts.self->onFile(newFilename, filename, newName, s.st_size))
+				switch (opts.self->onFile(newFilename, filename, newName, static_cast<uint64>(s.st_size)))
 				{
 					case Yuni::Core::IO::flowContinue:
 						break;

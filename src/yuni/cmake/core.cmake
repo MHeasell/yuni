@@ -231,6 +231,7 @@ source_group(Core\\linkedList FILES ${SRC_CORE_SLIST})
 set(SRC_CORE_STRING
 		core/customstring/customstring.h
 		core/customstring/customstring.hxx
+		core/customstring/operators.hxx
 		core/customstring/iterator.h
 		core/customstring/iterator.hxx
 		core/customstring/utf8char.h

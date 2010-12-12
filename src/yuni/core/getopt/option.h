@@ -25,8 +25,9 @@ namespace GetOptImpl
 
 
 	template<class T>
-	struct Value
+	class Value
 	{
+	public:
 		static bool Add(T& out, const char* c_str, const String::size_type len)
 		{
 			out = (len) ? String(c_str, len).to<T>() : T();
@@ -37,8 +38,9 @@ namespace GetOptImpl
 
 
 	template<class C, int Chnk>
-	struct Value<StringBase<C, Chnk> >
+	class Value<StringBase<C, Chnk> >
 	{
+	public:
 		static bool Add(StringBase<C,Chnk>& out, const char* c_str, const String::size_type len)
 		{
 			if (len)
@@ -50,8 +52,9 @@ namespace GetOptImpl
 	};
 
 	template<unsigned int ChunkT, bool ExpT, bool ZeroT>
-	struct Value<CustomString<ChunkT, ExpT, ZeroT> >
+	class Value<CustomString<ChunkT, ExpT, ZeroT> >
 	{
+	public:
 		static bool Add(CustomString<ChunkT,ExpT, ZeroT>& out, const char* c_str, const String::size_type len)
 		{
 			out.assign(c_str, len);
@@ -62,8 +65,9 @@ namespace GetOptImpl
 
 
 	template<class C, class Traits, class Alloc>
-	struct Value<std::basic_string<C, Traits, Alloc> >
+	class Value<std::basic_string<C, Traits, Alloc> >
 	{
+	public:
 		static bool Add(std::basic_string<C,Traits,Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			if (len)
@@ -75,8 +79,9 @@ namespace GetOptImpl
 	};
 
 	template<template<class,class> class L, class T, class Alloc>
-	struct Value<L<T, Alloc> >
+	class Value<L<T, Alloc> >
 	{
+	public:
 		static bool Add(L<T,Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			if (len)
@@ -89,8 +94,9 @@ namespace GetOptImpl
 
 
 	template<template<class, class> class L, class C, int Chnk, class Alloc>
-	struct Value<L<StringBase<C,Chnk>, Alloc> >
+	class Value<L<StringBase<C,Chnk>, Alloc> >
 	{
+	public:
 		static bool Add(L<StringBase<C, Chnk>, Alloc>& out, const char* c_str, const String::size_type len)
 		{
             StringBase<C,Chnk> s;
@@ -102,8 +108,9 @@ namespace GetOptImpl
 
 
 	template<template<class, class> class L, unsigned int ChunkT, bool ExpT, bool ZeroT, class Alloc>
-	struct Value<L<CustomString<ChunkT,ExpT, ZeroT>, Alloc> >
+	class Value<L<CustomString<ChunkT,ExpT, ZeroT>, Alloc> >
 	{
+	public:
 		static bool Add(L<CustomString<ChunkT,ExpT,ZeroT>, Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			out.push_back(CustomString<ChunkT,ExpT,ZeroT>(c_str, len));
@@ -114,8 +121,9 @@ namespace GetOptImpl
 
 
 	template<template<class, class> class L, class C, class Traits, class AllocS, class Alloc>
-	struct Value<L<std::basic_string<C, Traits, AllocS>, Alloc> >
+	class Value<L<std::basic_string<C, Traits, AllocS>, Alloc> >
 	{
+	public:
 		static bool Add(L<std::basic_string<C, Traits, AllocS>, Alloc>& out, const char* c_str, const String::size_type len)
 		{
 			if (len)
@@ -128,8 +136,9 @@ namespace GetOptImpl
 
 
 	template<class T>
-	struct Flag
+	class Flag
 	{
+	public:
 		static void Enabled(T& out)
 		{
 			out = T(1);
@@ -137,59 +146,66 @@ namespace GetOptImpl
 	};
 
 
-	template<> struct Flag<bool>
+	template<> class Flag<bool>
 	{
+	public:
 		static void Enable(bool& out)
 		{
 			out = true;
 		}
 	};
 
-	template<> struct Flag<sint16>
+	template<> class Flag<sint16>
 	{
+	public:
 		static void Enable(sint16& out)
 		{
 			out = 1;
 		}
 	};
 
-	template<> struct Flag<sint32>
+	template<> class Flag<sint32>
 	{
+	public:
 		static void Enable(sint32& out)
 		{
 			out = 1;
 		}
 	};
 
-	template<> struct Flag<sint64>
+	template<> class Flag<sint64>
 	{
+	public:
 		static void Enable(sint64& out)
 		{
 			out = 1;
 		}
 	};
 
-	template<> struct Flag<uint16>
+	template<> class Flag<uint16>
 	{
+	public:
 		static void Enable(uint16& out)
 		{
-			out = 1;
+			out = 1u;
 		}
 	};
 
-	template<> struct Flag<uint32>
+	template<> class Flag<uint32>
 	{
+	public:
 		static void Enable(uint32& out)
 		{
-			out = 1;
+			out = 1u;
 		}
 	};
 
-	template<> struct Flag<uint64>
+	template<> class Flag<uint64>
 	{
+	public:
 		static void Enable(uint64& out)
 		{
-			out = 1;
+			out = 1u;
 		}
 	};
 
@@ -198,8 +214,9 @@ namespace GetOptImpl
 
 
 	template<class C, int Chnk>
-	struct Flag<StringBase<C, Chnk> >
+	class Flag<StringBase<C, Chnk> >
 	{
+	public:
 		static void Enable(StringBase<C,Chnk>& out)
 		{
 			out = "true";
@@ -208,8 +225,9 @@ namespace GetOptImpl
 
 
 	template<unsigned int ChunkT, bool ExpT, bool ZeroT>
-	struct Flag<CustomString<ChunkT,ExpT,ZeroT> >
+	class Flag<CustomString<ChunkT,ExpT,ZeroT> >
 	{
+	public:
 		static void Enable(CustomString<ChunkT,ExpT,ZeroT>& out)
 		{
 			out = "true";
@@ -218,8 +236,9 @@ namespace GetOptImpl
 
 
 	template<class C, class Traits, class Alloc>
-	struct Flag<std::basic_string<C, Traits, Alloc> >
+	class Flag<std::basic_string<C, Traits, Alloc> >
 	{
+	public:
 		static void Enable(std::basic_string<C,Traits,Alloc>& out)
 		{
 			out = "true";
@@ -227,9 +246,10 @@ namespace GetOptImpl
 	};
 
 	template<template<class,class> class L, class T, class Alloc>
-	struct Flag<L<T, Alloc> >
+	class Flag<L<T, Alloc> >
 	{
-		static void Enable(L<T,Alloc>& out, const char* c_str, const String::size_type len)
+	public:
+		static void Enable(L<T,Alloc>& out)
 		{
 			out.push_back(T(1));
 		}
@@ -237,8 +257,9 @@ namespace GetOptImpl
 
 
 	template<template<class, class> class L, class C, int Chnk, class Alloc>
-	struct Flag<L<StringBase<C,Chnk>, Alloc> >
+	class Flag<L<StringBase<C,Chnk>, Alloc> >
 	{
+	public:
 		static void Enable(L<StringBase<C, Chnk>, Alloc>& out)
 		{
 			out.push_back("true");
@@ -246,8 +267,9 @@ namespace GetOptImpl
 	};
 
 	template<template<class, class> class L, unsigned int ChunkT, bool ExpT, bool ZeroT, class Alloc>
-	struct Flag<L<CustomString<ChunkT,ExpT,ZeroT>, Alloc> >
+	class Flag<L<CustomString<ChunkT,ExpT,ZeroT>, Alloc> >
 	{
+	public:
 		static void Enable(L<CustomString<ChunkT,ExpT,ZeroT>, Alloc>& out)
 		{
 			out.push_back("true");
@@ -257,9 +279,10 @@ namespace GetOptImpl
 
 
 	template<template<class, class> class L, class C, class Traits, class AllocS, class Alloc>
-	struct Flag<L<std::basic_string<C, Traits, AllocS>, Alloc> >
+	class Flag<L<std::basic_string<C, Traits, AllocS>, Alloc> >
 	{
-		static void Enable(L<std::basic_string<C, Traits, AllocS>, Alloc>& out, const char* c_str, const String::size_type len)
+	public:
+		static void Enable(L<std::basic_string<C, Traits, AllocS>, Alloc>& out)
 		{
 			out.push_back("true");
 		}

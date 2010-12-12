@@ -2,7 +2,7 @@
 #include "md5.h"
 #include "../../../core/system/windows.hdr.h"
 #include <fstream>
-#include <string.h>
+#include "../../io/file/stream.h"
 
 
 
@@ -96,8 +96,9 @@ namespace Checksum
 	namespace
 	{
 
-		typedef unsigned char MD5TypeByte; /* 8-bit byte */
-		typedef uint32 MD5TypeUInt32; /* 32-bit word */
+		typedef unsigned char MD5TypeByte; // 8-bit byte
+		typedef uint32 MD5TypeUInt32;      // 32-bit word
+
 
 		/*!
 		* \brief Define the state of the MD5 Algorithm
@@ -121,63 +122,56 @@ namespace Checksum
 				c = pms->abcd[2], d = pms->abcd[3];
 			MD5TypeUInt32 t;
 			# if BYTE_ORDER > 0
-			/* Define storage only for big-endian CPUs. */
+			// Define storage only for big-endian CPUs
 			MD5TypeUInt32 X[16];
 			# else
-			/* Define storage for little-endian or both types of CPUs. */
+			// Define storage for little-endian or both types of CPUs
 			MD5TypeUInt32 xbuf[16];
 			const MD5TypeUInt32 *X;
 			# endif
 
 			{
 				# if BYTE_ORDER == 0
-				/*
-				* Determine dynamically whether this is a big-endian or
-				* little-endian machine, since we can use a more efficient
-				* algorithm on the latter.
-				*/
+				// Determine dynamically whether this is a big-endian or
+				// little-endian machine, since we can use a more efficient
+				// algorithm on the latter.
 				static const int w = 1;
 
 				if (*((const MD5TypeByte *)&w)) /* dynamic little-endian */
 				# endif
 				# if BYTE_ORDER <= 0		/* little-endian */
 				{
-					/*
-					* On little-endian machines, we can process properly aligned
-					* data without copying it.
-					*/
+					// On little-endian machines, we can process properly aligned
+					// data without copying it.
 					if (!((data - (const MD5TypeByte *)0) & 3))
 					{
-						/* data are properly aligned */
-						X = (const MD5TypeUInt32 *)data;
+						// data are properly aligned
+						X = reinterpret_cast<const MD5TypeUInt32 *>(data);
 					}
 					else
 					{
-						/* not aligned */
+						// not aligned
 						memcpy(xbuf, data, 64);
 						X = xbuf;
 					}
 				}
 				# endif
 				# if BYTE_ORDER == 0
-				else                     /* dynamic big-endian */
+				else                   // dynamic big-endian
 				# endif
-				# if BYTE_ORDER >= 0     /* big-endian */
+				# if BYTE_ORDER >= 0   // big-endian
 				{
-					/*
-					* On big-endian machines, we must arrange the bytes in the
-					* right order.
-					*/
+					// On big-endian machines, we must arrange the bytes in the
+					// right order.
 					const MD5TypeByte *xp = data;
-					int i;
 
 				#  if BYTE_ORDER == 0
-					X = xbuf;		/* (dynamic only) */
+					X = xbuf;       // (dynamic only)
 				#  else
-				#	define xbuf X		/* (static only) */
+				#	define xbuf X   // (static only)
 				#  endif
-					for (i = 0; i < 16; ++i, xp += 4)
-						xbuf[i] = xp[0] + (xp[1] << 8) + (xp[2] << 16) + (xp[3] << 24);
+					for (unsigned int i = 0; i != 16; ++i, xp += 4)
+						xbuf[i] = static_cast<MD5TypeUInt32>(xp[0] + (xp[1] << 8) + (xp[2] << 16) + (xp[3] << 24));
 				}
 				#endif
 			}
@@ -308,11 +302,11 @@ namespace Checksum
 		}
 
 
-		void md5ImplAppend(MD5TypeState *pms, const MD5TypeByte *data, int nbytes)
+		void md5ImplAppend(MD5TypeState *pms, const MD5TypeByte *data, unsigned int nbytes)
 		{
 			const MD5TypeByte* p = data;
-			int left = nbytes;
-			int offset = (pms->count[0] >> 3) & 63;
+			unsigned int left = nbytes;
+			unsigned int offset = (pms->count[0] >> 3) & 63;
 			MD5TypeUInt32 nbits = (MD5TypeUInt32)(nbytes << 3);
 
 			if (nbytes <= 0)
@@ -327,9 +321,9 @@ namespace Checksum
 			// Process an initial partial block
 			if (offset)
 			{
-				const int copy = (offset + nbytes > 64 ? 64 - offset : nbytes);
+				const unsigned int copy = (offset + nbytes > 64 ? 64 - offset : nbytes);
 
-				memcpy(pms->buf + offset, p, copy);
+				memcpy(pms->buf + offset, p, static_cast<size_t>(copy));
 				if (offset + copy < 64)
 					return;
 				p += copy;
@@ -343,7 +337,7 @@ namespace Checksum
 
 			// Process a final partial block
 			if (left)
-				memcpy(pms->buf, p, left);
+				memcpy(pms->buf, p, static_cast<size_t>(left));
 		}
 
 
@@ -390,18 +384,18 @@ namespace Checksum
 	const String& MD5::fromRawData(const void* rawdata, uint64 size)
 	{
 		pValue.clear();
-		if (NULL == rawdata)
+		if (!rawdata)
 			return pValue;
 		if (AutoDetectNullChar == size)
 			size = strlen((const char*) rawdata);
-		if (0 == size)
+		if (!size)
 			return pValue;
 
 		MD5TypeState state;
 		MD5TypeByte digest[16];
 
 		md5ImplInit(&state);
-		md5ImplAppend(&state, (const MD5TypeByte*)rawdata, (int)size);
+		md5ImplAppend(&state, static_cast<const MD5TypeByte*>(rawdata), static_cast<unsigned int>(size));
 		md5ImplFinish(&state, digest);
 		md5DigestToString(pValue, digest);
 		return pValue;
@@ -411,23 +405,20 @@ namespace Checksum
 	const String& MD5::fromFile(const String& filename)
 	{
 		pValue.clear();
-		std::ifstream stream(filename.c_str(), std::ifstream::binary | std::fstream::in);
-		if (stream.is_open())
+		Core::IO::File::Stream stream;
+		if (stream.open(filename))
 		{
 			MD5TypeState state;
 			MD5TypeByte digest[16];
 
 			md5ImplInit(&state);
 
-			unsigned char buffer[1024];
-			int len(0);
+			char buffer[1024];
+			size_t len = 0u;
 
-			while (stream.good())
-			{
-				stream.read((char*)buffer, 1024); // note that return value of read is unusable.
-				len = (int) stream.gcount();
-				md5ImplAppend(&state, (const MD5TypeByte*)buffer, len);
-			}
+			while (0 != (len = stream.read(buffer, static_cast<size_t>(1024u))))
+				md5ImplAppend(&state, reinterpret_cast<const MD5TypeByte*>(buffer), static_cast<unsigned int>(len));
+
 			md5ImplFinish(&state, digest);
 			md5DigestToString(pValue, digest);
 		}
@@ -441,5 +432,4 @@ namespace Checksum
 } // namespace Checksum
 } // namespace Hash
 } // namespace Yuni
-
 

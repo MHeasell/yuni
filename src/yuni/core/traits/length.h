@@ -14,7 +14,7 @@ namespace Extension
 	** \brief Extension: Get the length of the inner buffer
 	*/
 	template<class C, class SizeT>
-	struct Length
+	class Length
 	{
 	public:
 		typedef SizeT SizeType;
@@ -43,7 +43,7 @@ namespace Traits
 	** \tparam SizeT The type to use for the returned length
 	*/
 	template<class U, class SizeT = size_t>
-	struct Length
+	class Length
 	{
 	public:
 		//! The original type without its const qualifier

@@ -136,7 +136,7 @@ namespace Directory
 					if (0 != (flags & Yuni::Core::IO::Directory::Info::itFile))
 					{
 						isFolder = false;
-						size = s.st_size;
+						size = static_cast<uint64>(s.st_size);
 						return true;
 					}
 				}

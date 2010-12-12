@@ -69,7 +69,7 @@ public:
 			}
 
 			template<class ModelT>
-			difference_type distance(const ModelT& model) const
+			difference_type distance(const ModelT&) const
 			{
 				return 0;
 			}
@@ -197,7 +197,7 @@ public:
 			}
 
 			template<class ModelT>
-			difference_type distance(const ModelT& model) const
+			difference_type distance(const ModelT&) const
 			{
 				return 0;
 			}

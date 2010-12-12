@@ -266,7 +266,7 @@ namespace Ownership
 
 		static bool release(const T&) {return true;}
 
-		static void swapPointer(DestructiveCopy& rhs) {}
+		static void swapPointer(DestructiveCopy&) {}
 
 	}; // class DestructiveCopy
 
@@ -309,7 +309,7 @@ namespace Ownership
 
 		static bool release(const T&) {return true;}
 
-		static void swapPointer(NoCopy& rhs) {}
+		static void swapPointer(NoCopy&) {}
 
 	}; // class NoCopy
 

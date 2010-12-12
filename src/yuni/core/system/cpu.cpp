@@ -29,7 +29,7 @@ namespace CPU
 
 		if (sysctlbyname("hw.ncpu", &count, &size, NULL, 0))
 			return 1;
-		return count;
+		return (count <= 0) ? 1 : static_cast<unsigned int>(count);
 	}
 #endif
 

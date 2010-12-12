@@ -112,7 +112,7 @@ namespace Storage
 		//@}
 
 		//! Swap the data
-		void swapPointer(PointerType& rhs) {std::swap(pData, rhs.pData);}
+		void swapPointer(Array& rhs) {std::swap(pData, rhs.pData);}
 
 		//! \name Get the data
 		//@{
