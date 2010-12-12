@@ -70,28 +70,28 @@ namespace UTF8
 	void Char::write(StreamT& out) const
 	{
 		if (pValue < 0x80)
-			out.put(static_cast<unsigned char>(pValue));
+			out.put(static_cast<char>(static_cast<unsigned char>(pValue)));
 		else
 		{
 			if (pValue < 0x800)
 			{
-				out.put(static_cast<unsigned char>((pValue >> 6)   | 0xc0));
-				out.put(static_cast<unsigned char>((pValue & 0x3f) | 0x80));
+				out.put(static_cast<char>(static_cast<unsigned char>((pValue >> 6)   | 0xc0)));
+				out.put(static_cast<char>(static_cast<unsigned char>((pValue & 0x3f) | 0x80)));
 			}
 			else
 			{
 				if (pValue < 0x10000)
 				{
-					out.put(static_cast<unsigned char>((pValue >> 12)         | 0xe0));
-					out.put(static_cast<unsigned char>(((pValue >> 6) & 0x3f) | 0x80));
-					out.put(static_cast<unsigned char>((pValue & 0x3f)        | 0x80));
+					out.put(static_cast<char>(static_cast<unsigned char>((pValue >> 12)         | 0xe0)));
+					out.put(static_cast<char>(static_cast<unsigned char>(((pValue >> 6) & 0x3f) | 0x80)));
+					out.put(static_cast<char>(static_cast<unsigned char>((pValue & 0x3f)        | 0x80)));
 				}
 				else
 				{                                // four bytes
-					out.put(static_cast<unsigned char>((pValue >> 18)         | 0xf0));
-					out.put(static_cast<unsigned char>(((pValue >> 12)& 0x3f) | 0x80));
-					out.put(static_cast<unsigned char>(((pValue >> 6) & 0x3f) | 0x80));
-					out.put(static_cast<unsigned char>((pValue & 0x3f)        | 0x80));
+					out.put(static_cast<char>(static_cast<unsigned char>((pValue >> 18)         | 0xf0)));
+					out.put(static_cast<char>(static_cast<unsigned char>(((pValue >> 12)& 0x3f) | 0x80)));
+					out.put(static_cast<char>(static_cast<unsigned char>(((pValue >> 6) & 0x3f) | 0x80)));
+					out.put(static_cast<char>(static_cast<unsigned char>((pValue & 0x3f)        | 0x80)));
 				}
 			}
 		}

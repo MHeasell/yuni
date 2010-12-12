@@ -664,10 +664,10 @@ namespace Yuni
 	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ifind(char c) const
 	{
-		c = tolower(c);
+		c = static_cast<char>(tolower(c));
 		for (Size i = 0; i != AncestorType::size; ++i)
 		{
-			if (c == tolower(AncestorType::data[i]))
+			if (c == static_cast<char>(tolower(AncestorType::data[i])))
 				return i;
 		}
 		return npos;
@@ -678,10 +678,10 @@ namespace Yuni
 	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ifind(char c, Size offset) const
 	{
-		c = tolower(c);
+		c = static_cast<char>(tolower(c));
 		for (Size i = offset; i < AncestorType::size; ++i)
 		{
-			if (c == tolower(AncestorType::data[i]))
+			if (c == static_cast<char>(tolower(AncestorType::data[i])))
 				return i;
 		}
 		return npos;
@@ -821,11 +821,11 @@ namespace Yuni
 	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::irfind(char c) const
 	{
-		c = tolower(c);
+		c = static_cast<char>(tolower(c));
 		Size i = AncestorType::size;
 		while (i--)
 		{
-			if (c == tolower(AncestorType::data[i]))
+			if (c == static_cast<char>(tolower(AncestorType::data[i])))
 				return i;
 		}
 		return npos;
@@ -836,11 +836,11 @@ namespace Yuni
 	typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::irfind(char c, Size offset) const
 	{
-		c = tolower(c);
+		c = static_cast<char>(tolower(c));
 		Size i = (offset >= AncestorType::size) ? AncestorType::size : 1+offset;
 		while (i--)
 		{
-			if (c == tolower(AncestorType::data[i]))
+			if (c == static_cast<char>(tolower(AncestorType::data[i])))
 				return i;
 		}
 		return npos;
@@ -966,10 +966,10 @@ namespace Yuni
 	bool
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::icontains(char c) const
 	{
-		c = tolower(c);
+		c = static_cast<char>(tolower(c));
 		for (Size i = 0; i != AncestorType::size; ++i)
 		{
-			if (c == tolower(AncestorType::data[i]))
+			if (c == static_cast<char>(tolower(AncestorType::data[i])))
 				return true;
 		}
 		return false;
@@ -1240,11 +1240,11 @@ namespace Yuni
 	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ifind_first_of(char c, Size offset) const
 	{
-		c = tolower(c);
+		c = static_cast<char>(tolower(c));
 		for (Size i = offset; i < AncestorType::size; ++i)
 		{
 			// alias to the current character
-			if (c == tolower(AncestorType::data[i]))
+			if (c == static_cast<char>(tolower(AncestorType::data[i])))
 				return i;
 		}
 		return npos;
@@ -1299,11 +1299,11 @@ namespace Yuni
 	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ifind_first_not_of(char c, Size offset) const
 	{
-		c = tolower(c);
+		c = static_cast<char>(tolower(c));
 		for (Size i = offset; i < AncestorType::size; ++i)
 		{
 			// alias to the current character
-			if (c == tolower(AncestorType::data[i]))
+			if (c == static_cast<char>(tolower(AncestorType::data[i])))
 				continue;
 			else
 				return i;
@@ -1363,10 +1363,10 @@ namespace Yuni
 		for (Size i = offset; i < AncestorType::size; ++i)
 		{
 			// alias to the current character
-			const char c = tolower(AncestorType::data[i]);
+			const char c = static_cast<char>(tolower(AncestorType::data[i]));
 			for (j = 0; j != len; ++j)
 			{
-				if (tolower(s[j]) == c)
+				if (static_cast<char>(tolower(s[j])) == c)
 					return i;
 			}
 		}
@@ -1391,10 +1391,10 @@ namespace Yuni
 		{
 			bool stop = true;
 			// alias to the current character
-			const char c = tolower(AncestorType::data[i]);
+			const char c = static_cast<char>(tolower(AncestorType::data[i]));
 			for (j = 0; j != len; ++j)
 			{
-				if (tolower(s[j]) == c)
+				if (static_cast<char>(tolower(s[j])) == c)
 				{
 					stop = false;
 					break;
@@ -1425,11 +1425,11 @@ namespace Yuni
 	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ifind_last_of(char c) const
 	{
-		c = tolower(c);
+		c = static_cast<char>(tolower(c));
 		Size i = AncestorType::size;
 		while (i--)
 		{
-			if (c == tolower(AncestorType::data[i]))
+			if (c == static_cast<char>(tolower(AncestorType::data[i])))
 				return i;
 		}
 		return npos;
@@ -1439,11 +1439,11 @@ namespace Yuni
 	inline typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::find_last_of(char c, Size offset) const
 	{
-		c = tolower(c);
+		c = static_cast<char>(tolower(c));
 		Size i = ((offset >= AncestorType::size) ? AncestorType::size : 1+offset);
 		while (i--)
 		{
-			if (c == tolower(AncestorType::data[i]))
+			if (c == static_cast<char>(tolower(AncestorType::data[i])))
 				return i;
 		}
 		return npos;
@@ -1495,10 +1495,10 @@ namespace Yuni
 		while (i--)
 		{
 			// alias to the current character
-			const char c = tolower(AncestorType::data[i]);
+			const char c = static_cast<char>(tolower(AncestorType::data[i]));
 			for (j = 0; j != len; ++j)
 			{
-				if (tolower(s[j]) == c)
+				if (static_cast<char>(tolower(s[j])) == c)
 					return i;
 			}
 		}
@@ -1524,7 +1524,7 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(char from, char to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CustomString_Adapter_ReadOnly);
-		from = tolower(from);
+		from = static_cast<char>(tolower(from));
 		for (Size i = 0; i != AncestorType::size; ++i)
 		{
 			if (from == AncestorType::data[i])
@@ -1631,7 +1631,7 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(Size offset, char from, char to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CustomString_Adapter_ReadOnly);
-		from = tolower(from);
+		from = static_cast<char>(tolower(from));
 		for (Size i = offset; i < AncestorType::size; ++i)
 		{
 			if (from == AncestorType::data[i])
@@ -2700,7 +2700,7 @@ namespace Yuni
 		for (Size i = 0; i < AncestorType::size; ++i)
 		{
 			if (UTF8::Char::IsASCII((unsigned char)AncestorType::data[i]))
-				AncestorType::data[i] = (Char) tolower(AncestorType::data[i]);
+				AncestorType::data[i] = static_cast<Char>(tolower(AncestorType::data[i]));
 		}
 		return *this;
 	}

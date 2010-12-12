@@ -231,6 +231,7 @@ namespace Yuni
 	inline R
 	Bind<R (), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke();
 	}
 
@@ -562,6 +563,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke();
 	}
 
@@ -893,6 +895,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke();
 	}
 
@@ -1224,6 +1227,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0));
 	}
 
@@ -1555,6 +1559,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0));
 	}
 
@@ -1886,6 +1891,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0));
 	}
 
@@ -2217,6 +2223,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1));
 	}
@@ -2549,6 +2556,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1));
 	}
@@ -2881,6 +2889,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1));
 	}
@@ -3213,6 +3222,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2));
 	}
@@ -3545,6 +3555,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2));
 	}
@@ -3877,6 +3888,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2));
 	}
@@ -4209,6 +4221,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3));
@@ -4542,6 +4555,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3));
@@ -4875,6 +4889,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3));
@@ -5208,6 +5223,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4));
@@ -5541,6 +5557,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4));
@@ -5874,6 +5891,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4));
@@ -6207,6 +6225,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -6541,6 +6560,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -6875,6 +6895,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -7209,6 +7230,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -7543,6 +7565,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -7877,6 +7900,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -8211,6 +8235,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -8546,6 +8571,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -8881,6 +8907,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -9216,6 +9243,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -9551,6 +9579,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -9886,6 +9915,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -10221,6 +10251,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -10557,6 +10588,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -10893,6 +10925,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -11229,6 +11262,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -11565,6 +11599,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -11901,6 +11936,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -12237,6 +12273,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -12574,6 +12611,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -12911,6 +12949,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -13248,6 +13287,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -13585,6 +13625,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -13922,6 +13963,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -14259,6 +14301,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -14597,6 +14640,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -14935,6 +14979,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -15273,6 +15318,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -15611,6 +15657,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -15949,6 +15996,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -16287,6 +16335,7 @@ namespace Yuni
 	inline R
 	Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -16626,6 +16675,7 @@ namespace Yuni
 	inline R
 	Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 
@@ -16965,6 +17015,7 @@ namespace Yuni
 	inline R
 	Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::callWithArgumentGetter(UserTypeT userdata) const
 	{
+		(void) userdata;
 		return invoke(ArgGetterT<UserTypeT, A0>::Get(userdata, 0), 
 				ArgGetterT<UserTypeT, A1>::Get(userdata, 1), ArgGetterT<UserTypeT, A2>::Get(userdata, 2), 
 				ArgGetterT<UserTypeT, A3>::Get(userdata, 3), ArgGetterT<UserTypeT, A4>::Get(userdata, 4), 

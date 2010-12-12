@@ -40,8 +40,8 @@ namespace GetOptImpl
 					{
 						case '\n':
 							{
-								out.write(description.c_str() + start, p - start);
-								out << "\n";
+								out.write(description.c_str() + start, static_cast<std::streamsize>(p - start));
+								out << '\n';
 								if (Decal)
 									out << YUNI_GETOPT_HELPUSAGE_30CHAR;
 								start = p + 1;
@@ -56,15 +56,16 @@ namespace GetOptImpl
 				{
 					if (!end)
 						end = p;
-					out.write(description.c_str() + start, end - start);
-					out << "\n";
+					out.write(description.c_str() + start, static_cast<std::streamsize>(end - start));
+					out << '\n';
 					if (Decal)
 						out << YUNI_GETOPT_HELPUSAGE_30CHAR;
 					start = end + 1;
 					end = p + 1;
 				}
 				++p;
-			} while (true);
+			}
+			while (true);
 
 			// Display the remaining piece of string
 			if (start < description.size())

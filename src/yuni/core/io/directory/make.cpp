@@ -94,7 +94,7 @@ namespace Directory
 				*pt = '\0';
 				if ('\0' != buffer[0] && '\0' != buffer[1] && '\0' != buffer[2])
 				{
-					if (mkdir(buffer, mode) < 0 && errno != EEXIST && errno != EISDIR && errno != ENOSYS)
+					if (mkdir(buffer, static_cast<mode_t>(mode)) < 0 && errno != EEXIST && errno != EISDIR && errno != ENOSYS)
 					{
 						delete[] buffer;
 						return false;

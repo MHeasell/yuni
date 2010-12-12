@@ -36,9 +36,16 @@ namespace Yuni
 		** \brief Constructor with a given version
 		**
 		** \param h The major version number
+		*/
+		explicit Version(unsigned int h);
+
+		/*!
+		** \brief Constructor with a given version
+		**
+		** \param h The major version number
 		** \param l The minor version number
 		*/
-		Version(const int h, const int l);
+		Version(unsigned int h, unsigned int l);
 
 		/*!
 		** \brief Constructor with a given version
@@ -47,7 +54,7 @@ namespace Yuni
 		** \param l The minor version number
 		** \param r The revision number
 		*/
-		Version(const int h, const int l, const int r);
+		Version(unsigned int h, unsigned int l, unsigned int r);
 
 		//! Copy constructor
 		Version(const Version& c);
@@ -114,6 +121,7 @@ namespace Yuni
 		Version& operator = (const Version& rhs);
 		//@}
 
+
 	public:
 		//! The major version number
 		unsigned int hi;
@@ -126,17 +134,9 @@ namespace Yuni
 
 
 
+
 } // namespace Yuni
 
 # include "version.hxx"
-
-
-
-inline std::ostream& operator << (std::ostream& out, const Yuni::Version& rhs)
-{
-	rhs.print(out);
-	return out;
-}
-
 
 #endif // __YUNI_CORE_VERSION_H__

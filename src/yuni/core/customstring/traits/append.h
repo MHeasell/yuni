@@ -20,8 +20,9 @@ namespace CustomString
 {
 
 	template<class CustomStringT, class C>
-	struct Append
+	class Append
 	{
+	public:
 		// Unknown type
 		YUNI_STATIC_ASSERT(false, CustomString_AppendUnknownType);
 	};
@@ -29,8 +30,9 @@ namespace CustomString
 
 	// C*
 	template<class CustomStringT>
-	struct Append<CustomStringT, char*>
+	class Append<CustomStringT, char*>
 	{
+	public:
 		typedef typename CustomStringT::Type TypeC;
 		typedef typename Static::Remove::Const<TypeC>::Type C;
 		static void Perform(CustomStringT& s, const C* rhs)
@@ -42,8 +44,9 @@ namespace CustomString
 
 	// C[N]
 	template<class CustomStringT, int N>
-	struct Append<CustomStringT, char[N]>
+	class Append<CustomStringT, char[N]>
 	{
+	public:
 		typedef typename CustomStringT::Type C;
 		static void Perform(CustomStringT& s, const C rhs[N])
 		{
@@ -58,9 +61,10 @@ namespace CustomString
 
 	// C
 	template<class CustomStringT>
-	struct Append<CustomStringT, char>
+	class Append<CustomStringT, char>
 	{
-		typedef typename CustomStringT::Type C;
+	public:
+		typedef char C;
 		static void Perform(CustomStringT& s, const C rhs)
 		{
 			s.appendWithoutChecking(rhs);
@@ -68,19 +72,33 @@ namespace CustomString
 	};
 
 
+	// C
+	template<class CustomStringT>
+	class Append<CustomStringT, unsigned char>
+	{
+	public:
+		typedef unsigned char C;
+		static void Perform(CustomStringT& s, const C rhs)
+		{
+			s.appendWithoutChecking(static_cast<char>(rhs));
+		}
+	};
+
 	// nullptr
 	template<class CustomStringT>
-	struct Append<CustomStringT, Yuni::NullPtr>
+	class Append<CustomStringT, Yuni::NullPtr>
 	{
-		static void Perform(CustomStringT& s, const Yuni::NullPtr&)
+	public:
+		static void Perform(CustomStringT&, const Yuni::NullPtr&)
 		{ /* Do nothing */ }
 	};
 
 
 	// bool
 	template<class CustomStringT>
-	struct Append<CustomStringT, bool>
+	class Append<CustomStringT, bool>
 	{
+	public:
 		static void Perform(CustomStringT& s, const bool rhs)
 		{
 			if (rhs)
@@ -93,8 +111,9 @@ namespace CustomString
 
 	// void*
 	template<class CustomStringT>
-	struct Append<CustomStringT, void*>
+	class Append<CustomStringT, void*>
 	{
+	public:
 		static void Perform(CustomStringT& s, const void* rhs)
 		{
 			typename CustomStringT::Type buffer[32];
@@ -110,8 +129,9 @@ namespace CustomString
 
 	// void*
 	template<class CustomStringT>
-	struct Append<CustomStringT, Yuni::UTF8::Char>
+	class Append<CustomStringT, Yuni::UTF8::Char>
 	{
+	public:
 		static void Perform(CustomStringT& s, const Yuni::UTF8::Char& rhs)
 		{
 			rhs.write(s);
@@ -123,8 +143,9 @@ namespace CustomString
 
 # define YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(BUFSIZE, FORMAT, TYPE) \
 	template<class CustomStringT> \
-	struct Append<CustomStringT, TYPE> \
+	class Append<CustomStringT, TYPE> \
 	{ \
+	public: \
 		static void Perform(CustomStringT& s, const TYPE rhs) \
 		{ \
 			typename CustomStringT::Type buffer[BUFSIZE]; \
@@ -140,8 +161,9 @@ namespace CustomString
 
 # define YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(TYPE) \
 	template<class CustomStringT> \
-	struct Append<CustomStringT, TYPE> \
+	class Append<CustomStringT, TYPE> \
 	{ \
+	public: \
 		static void Perform(CustomStringT& s, const TYPE rhs) \
 		{ \
 			Yuni::Private::CustomStringImpl::From<Math::Base::Decimal, TYPE>::AppendTo(s, rhs); \

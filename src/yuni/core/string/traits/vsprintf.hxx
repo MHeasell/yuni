@@ -88,7 +88,7 @@ namespace StringImpl
 				}
 			}
 
-			out.append(buffer, i);
+			out.append(buffer, static_cast<typename StringBase<C,Chunk>::Size>(i));
 			delete[] buffer;
 			return i;
 		}

@@ -212,7 +212,7 @@ namespace GetOptImpl
 							return (!pParser.pErrors);
 						if ((sub = strchr(arg, '=')))
 						{
-							size_t size = sub - arg;
+							const size_t size = static_cast<size_t>(sub - arg);
 							if (size < sizeof(buffer))
 							{
 								# ifdef YUNI_OS_MSVC

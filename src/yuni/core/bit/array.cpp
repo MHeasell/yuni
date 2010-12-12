@@ -25,7 +25,7 @@ namespace Bit
 			{
 				if ((unsigned char)(pBuffer[i]) != (ValueT ? (unsigned char)0 : (unsigned char)0xFF))
 				{
-					const unsigned char c = pBuffer[i];
+					const unsigned char c = static_cast<unsigned char>(pBuffer[i]);
 
 					// trivial cases
 					if (ValueT && c == 0xFF)

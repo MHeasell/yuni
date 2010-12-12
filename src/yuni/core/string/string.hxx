@@ -489,7 +489,7 @@ namespace Yuni
 	StringBase<C,Chunk>::print(std::ostream& out) const
 	{
 		if (pSize)
-			out.write(pPtr, sizeof(Char) * pSize);
+			out.write(pPtr, static_cast<std::streamsize>(sizeof(Char) * pSize));
 	}
 
 
@@ -499,6 +499,7 @@ namespace Yuni
 	{
 		return iterator(*this);
 	}
+
 
 	template<typename C, int Chunk>
 	inline typename StringBase<C,Chunk>::iterator
