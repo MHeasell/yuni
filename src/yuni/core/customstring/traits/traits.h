@@ -1,12 +1,11 @@
-#ifndef __YUNI_CORE_MEMORY_BUFFER_TRAITS_TRAITS_H__
-# define __YUNI_CORE_MEMORY_BUFFER_TRAITS_TRAITS_H__
+#ifndef __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_H__
+# define __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_H__
 
 # include "../../../yuni.h"
 # ifdef YUNI_HAS_STDLIB_H
 #	include <stdlib.h>
 # endif
 # include <string.h>
-# include <wchar.h>
 # include "../../math/math.h"
 
 
@@ -17,6 +16,23 @@ namespace Private
 {
 namespace CustomStringImpl
 {
+
+	// Const qualifier from the adapter mode
+	template<bool AdapterT, class C> struct QualifierFromAdapterMode { typedef C* Type; };
+	template<class C> struct QualifierFromAdapterMode<true, C> { typedef const C* Type; };
+
+
+
+	int Compare(const char* const s1, unsigned int l1, const char* const s2, unsigned int l2);
+	int CompareInsensitive(const char* const s1, unsigned int l1, const char* const s2, unsigned int l2);
+
+	bool Equals(const char* const s1, const char* const s2, unsigned int len);
+	bool EqualsInsensitive(const char* const s1, const char* const s2, unsigned int len);
+
+	bool Glob(const char* const s, unsigned int l1, const char* const pattern, unsigned int patternlen);
+
+
+
 
 	template<class StringT, bool Adapter>
 	struct AdapterAssign
@@ -60,24 +76,7 @@ namespace CustomStringImpl
 
 
 
-	// Const qualifier from the adapter mode
-	template<bool AdapterT, class C> struct QualifierFromAdapterMode { typedef C* Type; };
-	template<class C> struct QualifierFromAdapterMode<true, C> { typedef const C* Type; };
-
-
-
-
-	int Compare(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
-	int CompareInsensitive(const char* s1, unsigned int l1, const char* s2, unsigned int l2);
-
-	bool Equals(const char* const s1, const char* const s2, unsigned int len);
-	bool EqualsInsensitive(const char* const s1, const char* const s2, unsigned int len);
-
-	bool Glob(const char* s, unsigned int l1, const char* const pattern, unsigned int patternlen);
-
-
-
-
+	
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	struct Data
@@ -342,4 +341,4 @@ namespace CustomStringImpl
 
 # include "traits.hxx"
 
-#endif // __YUNI_CORE_MEMORY_BUFFER_TRAITS_TRAITS_H__
+#endif // __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_H__

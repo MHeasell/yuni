@@ -25,11 +25,12 @@ namespace Yuni
 
 	int LibConfigProgram::execute(int argc, char** argv)
 	{
-		// Find the root path
-		findRootPath(argv[0]);
 		// Parse the command line
 		if (!parseCommandLine(argc, argv))
 			return pExitStatus;
+
+		// Find the root path
+		findRootPath(argv[0]);
 
 		// Display information if asked
 		if (!displayInformations())
@@ -110,17 +111,22 @@ namespace Yuni
 
 		const String argv0 = a0;
 		if (Core::IO::IsAbsolute(argv0))
-			pRootPath = Core::IO::ExtractFilePath(argv0);
+		{
+			Core::IO::ExtractFilePath(pRootPath, argv0);
+		}
 		else
 		{
 			Core::IO::Directory::Current::Get(pRootPath);
-			pRootPath << Core::IO::Separator << Core::IO::ExtractFilePath(argv0);
+			pRootPath << Core::IO::Separator;
+			String t;
+			Core::IO::ExtractFilePath(t, argv0);
+			pRootPath += t;
 			pRootPath.removeTrailingSlash();
 		}
 		# endif
 
 		if (pOptDebug)
-			std::cout << "[debug] Root path : `" << pRootPath << '`' << std::endl;
+			std::cout << "[yuni-config][debug] Root path : `" << pRootPath << '`' << std::endl;
 	}
 
 
@@ -175,7 +181,7 @@ namespace Yuni
 			pOptCompiler = "icc";
 
 		if (pOptDebug)
-			std::cout << "[debug] compiler : " << pOptCompiler << std::endl;
+			std::cout << "[yuni-config][debug] compiler : " << pOptCompiler << std::endl;
 	}
 
 

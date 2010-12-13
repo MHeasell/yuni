@@ -196,7 +196,7 @@ namespace CustomString
 		{
 			if (s.notEmpty())
 			{
-				const unsigned int count = s.sizeInBytes();
+				const unsigned int count = static_cast<unsigned int>(s.sizeInBytes());
 				if (count < 5)
 				{
 					if (count == 1)
@@ -204,7 +204,7 @@ namespace CustomString
 
 					char buffer[5] = {0,0,0,0,0};
 					for (unsigned int i = 0; i < count; ++i)
-						buffer[i] = ::tolower(s[i]);
+						buffer[i] = static_cast<char>(::tolower(s[i]));
 					return (!strcmp("true", buffer) || !strcmp("on", buffer) || !strcmp("yes", buffer));
 				}
 			}

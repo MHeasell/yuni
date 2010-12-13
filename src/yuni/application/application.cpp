@@ -13,23 +13,33 @@ namespace Application
 	IApplication::IApplication(int, char* argv[])
 		:pTerminated(false), pExitCode(0)
 	{
+		String argv0 = argv[0];
 		// Find the absolute folder of the application
 		if (Core::IO::IsAbsolute(argv[0]))
-			pRootFolder = Core::IO::ExtractFilePath(argv[0]);
+			Core::IO::ExtractFilePath(pRootFolder, argv0);
 		else
 		{
 			String r;
 			Core::IO::Directory::Current::Get(r);
-			r << Core::IO::Separator << (const char*) argv[0];
+			r << Core::IO::Separator << argv0;
 			if (r.notEmpty())
-				pRootFolder = Core::IO::ExtractFilePath(r, true);
+				Core::IO::ExtractFilePath(pRootFolder, r, true);
 		}
 
 		// Find The absolution exe name
 		if (pRootFolder.empty())
-			pExeName += Core::IO::ExtractFileName(argv[0]);
+		{
+			String r;
+			Core::IO::ExtractFileName(r, argv0);
+			pExeName += r;
+		}
 		else
-			pExeName += pRootFolder	<< Core::IO::Separator << Core::IO::ExtractFileName(argv[0]);
+		{
+			pExeName << pRootFolder	<< Core::IO::Separator;
+			CustomString<20, false> t;
+			Core::IO::ExtractFileName(t, argv0);
+			pExeName << t;
+		}
 	}
 
 

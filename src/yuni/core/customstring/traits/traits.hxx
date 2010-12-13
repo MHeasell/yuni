@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_MEMORY_BUFFER_TRAITS_HXX__
-# define __YUNI_CORE_MEMORY_BUFFER_TRAITS_HXX__
+#ifndef __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_HXX__
+# define __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_HXX__
 
 
 
@@ -292,4 +292,4 @@ namespace CustomStringImpl
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_CORE_MEMORY_BUFFER_TRAITS_HXX__
+#endif // __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_HXX__

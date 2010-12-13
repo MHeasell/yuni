@@ -146,7 +146,7 @@ namespace GetOptImpl
 			if (ttParameter == GetTokenType(argv[pParameterIndex]))
 			{
 				// Adding the argument to the list of value of the option
-				option->addValue(argv[pParameterIndex], ::strlen(argv[pParameterIndex]));
+				option->addValue(argv[pParameterIndex], static_cast<String::size_type>(::strlen(argv[pParameterIndex])));
 				// This argument must not be used again as a parameter
 				++pParameterIndex;
 				return true;
@@ -226,7 +226,7 @@ namespace GetOptImpl
 
 								OptionsOrderedByLongName::iterator i = pParser.pLongNames.find(buffer);
 								if (i != pParser.pLongNames.end())
-									i->second->addValue(arg, ::strlen(arg));
+									i->second->addValue(arg, static_cast<String::size_type>(::strlen(arg)));
 								else
 								{
 									if (!::strcmp(arg, "help"))
@@ -271,7 +271,7 @@ namespace GetOptImpl
 						{
 							pParameterIndex = pTokenIndex;
 							if (pParser.pRemains)
-								pParser.pRemains->addValue(arg, ::strlen(arg));
+								pParser.pRemains->addValue(arg, static_cast<String::size_type>(::strlen(arg)));
 						}
 						break;
 					}

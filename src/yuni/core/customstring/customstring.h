@@ -16,6 +16,7 @@
 # ifdef YUNI_HAS_VECTOR
 #	include <vector>
 # endif
+# include <list>
 
 # include "utf8char.h"
 # include "../iterator.h"
@@ -26,9 +27,18 @@
 # include "traits/vnsprintf.h"
 # include "traits/into.h"
 
+//! Default separators
+# define YUNI_SEPARATORS   " \t\n\r"
+
+
 
 namespace Yuni
 {
+
+	//! A convenient standard string implementation
+	typedef CustomString<> String;
+
+
 
 	/*!
 	** \brief Character string
@@ -130,6 +140,11 @@ namespace Yuni
 		typedef std::vector<CustomStringType> Vector;
 		//! A String vector
 		typedef std::vector<typename CustomStringType::Ptr> VectorPtr;
+		//! A String list
+		typedef std::list<CustomStringType> List;
+		//! A string list
+		typedef std::list<typename CustomStringType::Ptr> ListPtr;
+
 		enum
 		{
 			//! Size for a single chunk
@@ -1777,6 +1792,38 @@ namespace Yuni
 		** \brief Dupplicate N times the content of the string
 		*/
 		void dupplicate(int n);
+
+
+		/*!
+		** \brief Extract the key and its value from a string (mainly provided by TDF
+		** files or Ini files)
+		**
+		** Simple Ini file structure
+		** \code
+		** [section]
+		** key = value
+		** \endcode
+		**
+		** More complex :
+		** \code
+		** [section]
+		** a = b; // Put your comments here
+		** b =
+		** c = ; // b = c, empty values
+		** return cariage = A long string\non two lines
+		** "key" = "All characters are allowed here, like semicolons; :)"
+		** \endcode
+		**
+		** \param s A line (ex: `   category=core vtol ctrl_v level1 weapon  notsub ;`)
+		** \param[out] key The key that has been found
+		** \param[out] value The associated value
+		** \param chcase The key will be converted to lowercase if equals to `soIgnoreCase`
+		**
+		** \see ExtractKeyvalue()
+		*/
+		template<class StringT1, class StringT2>
+		void extractKeyValue(StringT1& key, StringT2& value, bool ignoreCase = false) const;
+
 		//@}
 
 
@@ -1889,6 +1936,7 @@ namespace Yuni
 	** \endcode
 	*/
 	typedef CustomString<0, true, false> StringAdapter;
+
 
 
 

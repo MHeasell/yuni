@@ -66,6 +66,7 @@ namespace Yuni
 } // namespace Yuni
 
 
+
 inline std::ostream& operator << (std::ostream& out, const Yuni::Version& rhs)
 {
 	rhs.print(out);

@@ -18,23 +18,22 @@
 
 
 //! Default separators
-# define YUNI_STRING_SEPARATORS   " \t\n\r"
+# ifndef YUNI_STRING_SEPARATORS
+#	define YUNI_STRING_SEPARATORS   " \t\n\r"
+# endif
 
 
 
 namespace Yuni
 {
 
-	/*!
-	** \brief A convenient standard string implementation
-	** \see StringBase<>
-	*/
-	typedef StringBase<> String;
-
+	
 
 
 	/*!
 	** \brief A String implementation
+	**
+	** \deprecated This class is deprecated. You should consider CustomString instead
 	**
 	** The string class provides a useful way to manipulate and store sequences of
 	** characters.
@@ -43,21 +42,21 @@ namespace Yuni
 	** `Yuni::String`.
 	**
 	** \code
-	**	  Yuni::String a("abcd");
+	**	  Yuni::StringBase<> a("abcd");
 	**	  std::cout << a << std::endl;  // display: `abcd`
-	**	  Yuni::String b(10 + 2);
+	**	  Yuni::StringBase<> b(10 + 2);
 	**	  std::cout << b << std::endl;  // display: `12`
-	**	  Yuni::String c(10.3);
+	**	  Yuni::StringBase<> c(10.3);
 	**	  std::cout << c << std::endl;  // display: `10.3`
 	**
 	**	  // The same with the operator `<<`
-	**	  Yuni::String d;
+	**	  Yuni::StringBase<> d;
 	**	  d << "Value : " << 42;
 	**	  std::cout << d << std::endl;  // display: `Value : 42`
 	** \endcode
 	**
 	** \code
-	**	  Yuni::String s = "HelLo wOrLd";
+	**	  Yuni::StringBase<> s = "HelLo wOrLd";
 	**	  std::cout << Yuni::String::ToLower(s) << std::endl;  // `hello world`
 	**	  std::cout << s << std::endl;  // `HelLo wOrLd`
 	**	  std::cout << s.toLower() << std::endl;  // `hello world`
@@ -81,7 +80,7 @@ namespace Yuni
 	**
 	** To know if a string is empty or not :
 	** \code
-	** Yuni::String myString;
+	** Yuni::StringBase<> myString;
 	** ...
 	**
 	** if (!myString)
@@ -474,8 +473,8 @@ namespace Yuni
 		** \brief Constructor - From iterators
 		**
 		** \code
-		** Yuni::String s("0123456789");
-		** Yuni::String t(s.begin(), s.begin() + 5);
+		** Yuni::StringBase<> s("0123456789");
+		** Yuni::StringBase<> t(s.begin(), s.begin() + 5);
 		** std::cout << t << std::endl;
 		** \endcode
 		**
@@ -550,7 +549,7 @@ namespace Yuni
 		** converter is available)
 		**
 		** \code
-		** Yuni::String s;
+		** Yuni::StringBase<> s;
 		** s.append("A C-String;");                  // a C-String
 		** s.append(std::string("A Std-string."));   // A std::string
 		** s.append(42);                             // an int
@@ -567,7 +566,7 @@ namespace Yuni
 		** string (if the appropriate converter is available)
 		**
 		** \code
-		** Yuni::String s;
+		** Yuni::StringBase<> s;
 		** s.append("123456789", 3); // will only append the C-String "123"
 		** \endcode
 		**
@@ -582,7 +581,7 @@ namespace Yuni
 		** string (if the appropriate converter is available)
 		**
 		** \code
-		** Yuni::String s;
+		** Yuni::StringBase<> s;
 		** s.append("123456789", 1, 3); // will only append the C-String "23"
 		** \endcode
 		**
@@ -597,7 +596,7 @@ namespace Yuni
 		** \brief Append a STL container
 		**
 		** \code
-		** Yuni::String s;
+		** Yuni::StringBase<> s;
 		** std::vector<int> vect;
 		** vect.push_back(10);
 		** vect.push_back(30);
@@ -774,7 +773,7 @@ namespace Yuni
 		**
 		** This method is nearly equivalent to :
 		** \code
-		** Yuni::String s("/some/path/");
+		** Yuni::StringBase<> s("/some/path/");
 		** if ('\\' == s.last() || '/' == s.last())
 		** 	s.removeLast();
 		** std::cout << s << std::endl;  // -> /some/path
@@ -795,7 +794,7 @@ namespace Yuni
 		** \brief Convert the string to any type
 		**
 		** \code
-		** Yuni::String s("42");
+		** Yuni::StringBase<> s("42");
 		** unsigned int u = s.to<unsigned int>();
 		** bool b = s.to<bool>();
 		** \endcode
@@ -809,7 +808,7 @@ namespace Yuni
 		** \brief Convert the string to any type, and get if the conversion succeeded
 		**
 		** \code
-		** Yuni::String s("42");
+		** Yuni::StringBase<> s("42");
 		** unsigned int result;
 		** if (s.to<unsigned int>(result))
 		** {
@@ -1091,7 +1090,7 @@ namespace Yuni
 		** \brief Set the string from a sequence of escaped characters (O(N))
 		**
 		** \code
-		** Yuni::String s;
+		** Yuni::StringBase<> s;
 		** s.assignFromEscapedCharacters("A long string\\nwith two lines");
 		** std::cout << s << std::endl;
 		** \endcode
@@ -1379,7 +1378,7 @@ namespace Yuni
 		** \brief Get if the string is empty
 		**
 		** \code
-		** Yuni::String s; // here is an empty string
+		** Yuni::StringBase<> s; // here is an empty string
 		** if (!s)
 		**	// make some stuff here
 		** \endcode
@@ -1455,75 +1454,75 @@ inline bool operator == (const C* u, const Yuni::StringBase<C,Chunk>& rhs)
 }
 
 template<typename C, int Chunk>
-inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const char* u)
+inline Yuni::StringBase<> operator + (const Yuni::StringBase<C,Chunk>& rhs, const char* u)
 {
-	return Yuni::String(rhs) += u;
+	return Yuni::StringBase<>(rhs) += u;
 }
 
 template<typename C, int Chunk>
-inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t* u)
+inline Yuni::StringBase<> operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t* u)
 {
-	return Yuni::String(rhs) += u;
+	return Yuni::StringBase<>(rhs) += u;
 }
 
 template<typename C, int Chunk>
-inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const char u)
+inline Yuni::StringBase<> operator + (const Yuni::StringBase<C,Chunk>& rhs, const char u)
 {
-	return Yuni::String(rhs) += u;
+	return Yuni::StringBase<>(rhs) += u;
 }
 
 template<typename C, int Chunk>
-inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t u)
+inline Yuni::StringBase<> operator + (const Yuni::StringBase<C,Chunk>& rhs, const wchar_t u)
 {
-	return Yuni::String(rhs) += u;
+	return Yuni::StringBase<>(rhs) += u;
 }
 
 
 
 template<typename C, int Chunk>
-inline Yuni::String operator + (const wchar_t* u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::StringBase<> operator + (const wchar_t* u, const Yuni::StringBase<C,Chunk>& rhs)
 {
-	return Yuni::String(u) += rhs;
+	return Yuni::StringBase<>(u) += rhs;
 }
 
 template<typename C, int Chunk>
-inline Yuni::String operator + (const char* u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::StringBase<> operator + (const char* u, const Yuni::StringBase<C,Chunk>& rhs)
 {
-	return Yuni::String(u) += rhs;
+	return Yuni::StringBase<>(u) += rhs;
 }
 
 template<typename C, int Chunk>
-inline Yuni::String operator + (const char u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::StringBase<> operator + (const char u, const Yuni::StringBase<C,Chunk>& rhs)
 {
-	return Yuni::String(u) += rhs;
+	return Yuni::StringBase<>(u) += rhs;
 }
 
 template<typename C, int Chunk>
-inline Yuni::String operator + (const wchar_t u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::StringBase<> operator + (const wchar_t u, const Yuni::StringBase<C,Chunk>& rhs)
 {
-	return Yuni::String(u) += rhs;
+	return Yuni::StringBase<>(u) += rhs;
 }
 
 
 
 
 template<typename C, int Chunk, typename U>
-inline Yuni::String operator + (const std::basic_string<U>& u, const Yuni::StringBase<C,Chunk>& rhs)
+inline Yuni::StringBase<> operator + (const std::basic_string<U>& u, const Yuni::StringBase<C,Chunk>& rhs)
 {
-	return Yuni::String(u) += rhs;
+	return Yuni::StringBase<>(u) += rhs;
 }
 
 
 template<typename C, int Chunk, typename U>
-inline Yuni::String operator + (const Yuni::StringBase<C,Chunk>& rhs, const std::basic_string<U>& u)
+inline Yuni::StringBase<> operator + (const Yuni::StringBase<C,Chunk>& rhs, const std::basic_string<U>& u)
 {
-	return Yuni::String(rhs) += u;
+	return Yuni::StringBase<>(rhs) += u;
 }
 
 template<typename C1, int Chunk1, typename C2, int Chunk2>
-inline Yuni::String operator + (const Yuni::StringBase<C1,Chunk1>& rhs, const Yuni::StringBase<C2,Chunk2>& u)
+inline Yuni::StringBase<> operator + (const Yuni::StringBase<C1,Chunk1>& rhs, const Yuni::StringBase<C2,Chunk2>& u)
 {
-	return Yuni::String(rhs) += u;
+	return Yuni::StringBase<>(rhs) += u;
 }
 
 //@}

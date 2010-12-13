@@ -130,10 +130,10 @@ namespace IO
 		struct stat s;
 		if (stat(p, &s) != 0)
 			return Yuni::Core::IO::typeUnknown;
+
 		return (S_ISDIR(s.st_mode))
 			? Yuni::Core::IO::typeFolder
 			: Yuni::Core::IO::typeFile;
-
 		# endif
 	}
 

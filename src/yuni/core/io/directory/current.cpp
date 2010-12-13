@@ -57,7 +57,7 @@ namespace Directory
 
 
 
-	bool ChangeCurrentDirectory(const char* src, size_t srclen)
+	bool ChangeCurrentDirectory(const char* src, unsigned int srclen)
 	{
 		# ifdef YUNI_OS_WINDOWS
 		wchar_t* fsource = new wchar_t[srclen + 4];
@@ -78,7 +78,7 @@ namespace Directory
 	}
 
 
-	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, size_t length)
+	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, unsigned int length)
 	{
 		char* p = new char[length * sizeof(char) + 1];
 		(void)::memcpy(p, path, length);

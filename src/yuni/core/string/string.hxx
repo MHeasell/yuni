@@ -1104,7 +1104,7 @@ namespace Yuni
 	{
 		va_list parg;
 		va_start(parg, f);
-		String s;
+		StringBase<> s;
 		s.vappendFormat(f.c_str(), parg);
 		va_end(parg);
 		return s;
@@ -1118,7 +1118,7 @@ namespace Yuni
 	{
 		va_list parg;
 		va_start(parg, f);
-		String s;
+		StringBase<> s;
 		s.vappendFormat(f.c_str(), parg);
 		va_end(parg);
 		return s;
@@ -1131,7 +1131,7 @@ namespace Yuni
 	{
 		va_list parg;
 		va_start(parg, f);
-		String s;
+		StringBase<> s;
 		s.vappendFormat(f, parg);
 		va_end(parg);
 		return s;
@@ -2075,7 +2075,7 @@ namespace Yuni
 				typename StringBase<C,Chunk>::Size newIndx = this->find_first_of(sep, indx);
 				if (StringBase<C,Chunk>::npos == newIndx)
 				{
-					StringBase<C,Chunk> segment(*this, indx, String::npos);
+					StringBase<C,Chunk> segment(*this, indx, StringBase<>::npos);
 					if (trimElements)
 						segment.trim();
 					if (segment.notEmpty() || keepEmptyElements)
@@ -2130,7 +2130,7 @@ namespace Yuni
 	StringBase<C,Chunk>::ToUTF8(const C* s)
 	{
 		if (!s || '\0' == *s)
-			return String();
+			return StringBase<>();
 		typedef unsigned char uchar;
 		uchar tmp[4];
 		Size newSize = 1;
@@ -2155,7 +2155,7 @@ namespace Yuni
 	StringBase<C,Chunk>::ToUTF8(const StringBase<C,Chnk1>& s)
 	{
 		if (!s.pSize)
-			return String();
+			return StringBase<>();
 		typedef unsigned char uchar;
 		uchar tmp[4];
 		Size newSize = 1;
@@ -2178,7 +2178,7 @@ namespace Yuni
 	inline StringBase<C,Chunk>&
 	StringBase<C,Chunk>::toUTF8()
 	{
-		String tmp = ToUTF8(*this);
+		const StringBase<> tmp = ToUTF8(*this);
 		clear();
 		append(tmp);
 		return *this;
@@ -2192,7 +2192,7 @@ namespace Yuni
 		if (len == npos)
 			len = sizeUTF8() - pos;
 		typedef unsigned char uchar;
-		String res;
+		StringBase<> res;
 		int utf8_pos = 0;
 		for(; pos > 0; --pos)
 		{

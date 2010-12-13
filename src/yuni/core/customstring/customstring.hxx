@@ -378,7 +378,7 @@ namespace Yuni
 
 		# ifndef NDEBUG
 		const Size len = Traits::Length<StringT,Size>::Value(str);
-		assert(size + offset <= len && "Buffer overflow in CustomString::append(s, size, offset) !");
+		assert(size + offset <= len && "Bound check error in CustomString::append(s, size, offset) !");
 		# endif // NDEBUG
 		AncestorType::append(Traits::CString<StringT>::Perform(str) + offset, size);
 	}
@@ -3107,6 +3107,90 @@ namespace Yuni
 	{
 		AncestorType::data = const_cast<char*>(cstring);
 		AncestorType::size = length;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT1, class StringT2>
+	inline void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::extractKeyValue(StringT1& key, StringT2& value, bool ignoreCase) const
+	{
+		// ReInitializing
+		key.clear();
+		value.clear();
+
+		if (empty()) // The string is empty, Nothing to do
+			return;
+
+		Size left = find_first_not_of(YUNI_SEPARATORS);
+		if (left == npos)
+			return;
+
+		// Section
+		if ('{' == AncestorType::data[left])
+		{
+			key.append('{');
+			return;
+		}
+		if ('}' == AncestorType::data[left])
+		{
+			key.append('}');
+			return;
+		}
+		if ('[' == AncestorType::data[left])
+		{
+			key.append('[');
+			++left;
+			Size right = find(']', left);
+			if (right != npos && right != left)
+			{
+				value.append(*this, right - left, left);
+				value.trim();
+			}
+			return;
+		}
+
+		// If not a section, it should be a key/value
+		// Looking for the symbol `=`
+		Size equal = find_first_of("=/;", left);
+		if (equal == npos || equal == left || '=' != AncestorType::data[equal])
+			return;
+
+		// Getting our key
+		key.assign(*this, equal - left, left);
+		key.trimRight(YUNI_SEPARATORS);
+		if (ignoreCase)
+			key.toLower();
+
+		// Looking for the first interesting char
+		Size leftValue(equal);
+		++leftValue; // After the symbol `=`
+		while (leftValue < AncestorType::size && (AncestorType::data[leftValue] == ' ' || AncestorType::data[leftValue] == '\t' ||AncestorType::data[leftValue] == '\r' ||AncestorType::data[leftValue] == '\n'))
+			++leftValue;
+		if (leftValue < AncestorType::size) // Empty value
+		{
+			switch (AncestorType::data[leftValue])
+			{
+				case ';':
+					// Empty value
+					break;
+				case '/':
+					// Empty value if we have a comment otherwise '/' is a valid entry
+					if (leftValue + 1 >= AncestorType::size || AncestorType::data[leftValue + 1] == '/')
+						break;
+				default:
+					{
+						// Standard value
+						const Size semicolon = find_first_of(';', leftValue);
+						if (npos != semicolon)
+							value.append(*this, semicolon - leftValue, leftValue);
+						else
+							value.append(*this, AncestorType::size - leftValue, leftValue);
+						value.trimRight(YUNI_SEPARATORS);
+						break;
+					}
+			}
+		}
 	}
 
 
