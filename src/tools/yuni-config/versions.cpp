@@ -44,7 +44,7 @@ namespace VersionInfo
 		if (Core::IO::File::Exists(yuniMarker))
 		{
 			if (pOptDebug)
-				std::cout << "[debug] found special yuni marker `" << yuniMarker << "`" << std::endl;
+				std::cout << "[yuni-config][debug] found special yuni marker `" << yuniMarker << "`" << std::endl;
 
 			# ifdef YUNI_OS_WINDOWS
 			loadFromPath(root + "\\..\\..\\..");
@@ -78,7 +78,7 @@ namespace VersionInfo
 		String path;
 		Core::IO::Normalize(path, folder);
 		if (pOptDebug)
-			std::cout << "[debug] :: reading `" << path << "`" << std::endl;
+			std::cout << "[yuni-config][debug] :: reading `" << path << "`" << std::endl;
 
 		VersionInfo::Settings info;
 		info.mapping = mappingStandard;
@@ -86,12 +86,11 @@ namespace VersionInfo
 		s << SEP << "yuni.version";
 		if (!Core::IO::File::Exists(s))
 		{
-			s = path;
-			s << SEP << "include" << SEP << "yuni" << SEP << "yuni.version";
+			s.clear() << path << SEP << "include" << SEP << "yuni" << SEP << "yuni.version";
 			if (!Core::IO::File::Exists(s))
 			{
 				info.mapping = mappingSVNSources;
-				s.clear() << path << SEP << "src/yuni/yuni.version";
+				s.clear() << path << SEP << "src" << SEP << "yuni" << SEP << "yuni.version";
 				if (!Core::IO::File::Exists(s))
 					return;
 			}
@@ -107,13 +106,10 @@ namespace VersionInfo
 	 		// A buffer. The given capacity will be the maximum length for a single line
 	 		CustomString<8192> buffer;
 			buffer.reserve(8000);
-			String iniReader;
 	 		while (file.readline(buffer))
 			{
-# warning replace the deprecated StringBase<> currently needed for reading the INI structure
-				iniReader.assign(buffer.c_str(), buffer.size());
-				iniReader.extractKeyValue(key, value);
-				value.trim();
+				buffer.extractKeyValue(key, value);
+
 				if (key.empty() || key == "[")
 					continue;
 				if (key == "version.hi")
@@ -151,7 +147,7 @@ namespace VersionInfo
 
 				if (pOptDebug)
 				{
-					std::cout << "[debug]  - found installation `" << path
+					std::cout << "[yuni-config][debug]  - found installation `" << path
 						<< "` (" << version << ")" << std::endl;
 				}
 			}
@@ -255,14 +251,9 @@ namespace VersionInfo
 		Core::IO::File::Stream file;
 		if (file.open(out))
 		{
-			#warning Remove this variable as soon as StringBase<> is replaced by CustomString<>
-			StringBase<> tmp;
 			CustomString<8192> buffer;
 			while (file.readline(buffer))
-			{
-				tmp.assign(buffer.c_str(), buffer.size());
-				options.push_back(tmp);
-			}
+				options.push_back(buffer);
 		}
 		else
 		{

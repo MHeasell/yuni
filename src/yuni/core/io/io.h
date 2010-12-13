@@ -129,10 +129,8 @@ namespace IO
 	** \param systemDependant Consider only the system-dependant path-separator
 	** \return The path part of the original filename
 	*/
-	template<typename C, int N>
-	StringBase<C,N> ExtractFilePath(const StringBase<C,N>& p, const bool systemDependant = true);
-	template<typename C>
-	StringBase<C> ExtractFilePath(const C* p, const bool systemDependant = true);
+	template<class StringT1, class StringT2>
+	void ExtractFilePath(StringT1& out, const StringT2& p, const bool systemDependant = true);
 
 
 
@@ -150,48 +148,8 @@ namespace IO
 	**
 	** \see Paths::Separator
 	*/
-	template<typename C, int N>
-	StringBase<C,N> ExtractFileName(const StringBase<C,N>& p, const bool systemDependant = true);
-	template<typename C>
-	StringBase<C> ExtractFileName(const C* p, const bool systemDependant = true);
-
-	/*!
-	** \brief Extract bare file name for each entry in a list
-	**
-	** \ingroup IO
-	**
-	** The file name will be extracted according the last occurence
-	** of the system-dependant path-separator (if systemDependant = true).
-	**
-	** Each entry in the list will be replaced by the new value according `ExtractFileName(const String&, const bool)`.
-	**
-	** \param[in,out] p The list to process
-	** \param systemDependant Consider only the system-dependant path-separator
-	**
-	** \see ExtractFileName(const String&, const bool)
-	** \see Paths::Separator
-	*/
-	template<typename C, int N, template<class> class Alloc>
-	void ExtractFileName(std::list<StringBase<C,N>, Alloc<StringBase<C, N> > >& p, const bool systemDependant = true);
-
-	/*!
-	** \brief Extract bare file name for each entry in a list
-	**
-	** \ingroup IO
-	**
-	** The file name will be extracted according the last occurence
-	** of the system-dependant path-separator (if systemDependant = true).
-	**
-	** Each entry in the list will be replaced by the new value according `ExtractFileName(const String&, const bool)`.
-	**
-	** \param[in,out] p The list to process
-	** \param systemDependant Consider only the system-dependant path-separator
-	**
-	** \see ExtractFileName(const String&, const bool)
-	** \see Paths::Separator
-	*/
-	template<typename C, int N, template<class> class Alloc>
-	void ExtractFileName(std::vector<StringBase<C,N>, Alloc<StringBase<C, N> > >& p, const bool systemDependant = true);
+	template<class StringT1, class StringT2>
+	void ExtractFileName(StringT1& out, const StringT2& p, const bool systemDependant = true);
 
 
 	/*!
@@ -208,8 +166,8 @@ namespace IO
 	**
 	** \see Paths::Separator
 	*/
-	template<typename C, int N>
-	StringBase<C,N> ExtractFileNameWithoutExtension(const StringBase<C,N>& p, const bool systemDependant = true);
+	template<class StringT1, class StringT2>
+	void ExtractFileNameWithoutExtension(StringT1& out, const StringT2& p, const bool systemDependant = true);
 
 
 	/*!

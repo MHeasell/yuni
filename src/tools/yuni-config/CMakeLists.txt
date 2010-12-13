@@ -47,6 +47,7 @@ SET(src
 	../../yuni/core/io/file/stream.cpp
 	../../yuni/core/io/exists.cpp
 	../../yuni/core/io/directory/current.cpp
+	../../yuni/core/customstring/traits/traits.cpp
 
 	# iterator
 	../../yuni/core/io/directory/iterator.h

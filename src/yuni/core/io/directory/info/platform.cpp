@@ -248,7 +248,7 @@ namespace Directory
 		void push(const char* const str, uint64 length)
 		{
 			dirinfo.push_front();
-			dirinfo.front().parent.assign(str, length);
+			dirinfo.front().parent.assign(str, static_cast<String::Size>(length));
 			# ifdef YUNI_OS_WINDOWS
 			dirinfo.front().open(wbuffer);
 			# else

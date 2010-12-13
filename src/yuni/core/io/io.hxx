@@ -100,104 +100,78 @@ namespace IO
 	}
 
 
-	template<typename C, int N>
-	StringBase<C,N> ExtractFilePath(const StringBase<C,N>& p, const bool systemDependant)
+	template<class StringT1, class StringT2>
+	void ExtractFilePath(StringT1& out, const StringT2& p, const bool systemDependant)
 	{
-		typedef StringBase<C,N> StringT;
+		if (p.empty())
+			out.clear();
+		else
+		{
+			const typename StringT2::size_type pos = (systemDependant)
+				? p.find_last_of(IO::Constant<char>::Separator)
+				: p.find_last_of(IO::Constant<char>::AllSeparators);
+			if (StringT2::npos == pos)
+				out.clear();
+			else
+				out.assign(p, pos);
+		}
+	}
+
+
+
+	template<class StringT1, class StringT2>
+	void ExtractFileName(StringT1& out, const StringT2& p, const bool systemDependant)
+	{
 		if (p.notEmpty())
+			out.clear();
+		else
 		{
-			const typename StringT::size_type pos = (systemDependant)
-				? p.find_last_of(IO::Constant<C>::Separator)
-				: p.find_last_of(IO::Constant<C>::AllSeparators);
-			return (StringT::npos == pos) ? StringT() : StringT(p, 0, pos + 1);
-		}
-		return StringT();
-	}
-
-
-	template<typename C>
-	inline StringBase<C> ExtractFilePath(const C* p, const bool systemDependant)
-	{
-		return (p && 0 != *p)
-			? ExtractFilePath(StringBase<C>(p), systemDependant)
-			: StringBase<C>();
-	}
-
-
-
-	template<typename C, int N>
-	StringBase<C,N> ExtractFileName(const StringBase<C,N>& p, const bool systemDependant)
-	{
-		typedef StringBase<C,N> StringT;
-		if (p.notEmpty())
-		{
-			const typename StringT::size_type pos = (systemDependant)
-				? p.find_last_of(IO::Constant<C>::Separator)
-				: p.find_last_of(IO::Constant<C>::AllSeparators);
-			return (StringT::npos == pos) ? p : StringT(p, pos + 1);
-		}
-		return StringT();
-	}
-
-	template<typename C>
-	StringBase<C> ExtractFileName(const C* p, const bool systemDependant)
-	{
-		return (p && 0 != *p)
-			? ExtractFileName(StringBase<C>(p), systemDependant)
-			: StringBase<C>();
-	}
-
-
-
-	template<typename C, int N, template<class> class Alloc>
-	void ExtractFileName(std::list<StringBase<C,N>, Alloc<StringBase<C, N> > >& p, const bool systemDependant)
-	{
-		typedef StringBase<C,N> StringT;
-		if (!p.empty())
-		{
-			const typename StringT::List::iterator end = p.end();
-			for (typename StringT::List::iterator i = p.begin(); i != end; ++i)
-				*i = ExtractFileName(*i, systemDependant);
+			const typename StringT2::size_type pos = (systemDependant)
+				? p.find_last_of(IO::Constant<char>::Separator)
+				: p.find_last_of(IO::Constant<char>::AllSeparators);
+			if (StringT2::npos == pos)
+				out.clear();
+			else
+				out.assign(p.c_str() +  pos + 1);
 		}
 	}
 
 
-	template<typename C, int N, template<class> class Alloc>
-	void ExtractFileName(std::vector<StringBase<C,N>, Alloc<StringBase<C, N> > >& p, const bool systemDependant)
+
+	template<class StringT1, class StringT2>
+	void ExtractFileNameWithoutExtension(StringT1& out, const StringT2& p, const bool systemDependant)
 	{
-		typedef StringBase<C,N> StringT;
-		if (!p.empty())
+		const typename StringT2::size_type pos = (systemDependant)
+			? p.find_last_of(IO::Constant<char>::Separator)
+			: p.find_last_of(IO::Constant<char>::AllSeparators);
+		const typename StringT2::size_type n = p.find_last_of('.');
+
+		if (StringT2::npos == n && StringT2::npos == pos)
 		{
-			const typename StringT::Vector::iterator end = p.end();
-			for (typename StringT::Vector::iterator i = p.begin(); i != end; ++i)
-				*i = ExtractFileName(*i, systemDependant);
+			out = p;
+			return;
 		}
-	}
-
-
-	template<typename C, int N>
-	StringBase<C,N> ExtractFileNameWithoutExtension(const StringBase<C,N>& p, const bool systemDependant)
-	{
-		typedef StringBase<C,N> StringT;
-
-		const typename StringT::size_type pos = (systemDependant)
-			? p.find_last_of(IO::Constant<C>::Separator)
-			: p.find_last_of(IO::Constant<C>::AllSeparators);
-		const typename StringT::size_type n = p.find_last_of('.');
-
-		if (StringT::npos == n && StringT::npos == pos)
-			return p;
 		if (n == pos)
-			return StringT();
-		if (n == StringT::npos && n > pos + 1)
 		{
-			if (StringT::npos == pos)
-				return p;
-			return p.substr(pos + 1);
+			out.clear();
+			return;
 		}
-		if (pos == StringT::npos)
-			return p.substr(0, n);
-		return p.substr(pos + 1, n - pos - 1);
+		if (n == StringT2::npos && n > pos + 1)
+		{
+			if (StringT2::npos == pos)
+			{
+				out = p;
+				return;
+			}
+			out.assign(p.c_str() + pos + 1);
+			return;
+		}
+		if (pos == StringT2::npos)
+		{
+			out.assign(p, n);
+			return;
+		}
+		out.assign(p.c_str() + pos + 1, n - pos - 1);
 	}
 
 

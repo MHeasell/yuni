@@ -50,16 +50,8 @@ namespace Yuni
 		Any(const char* source)
 		{ initFromCString(source); }
 
-		//! Copy of an existing const C wide string
-		Any(const wchar_t* source)
-		{ initFromCString(source); }
-
 		//! Copy of an existing const C string
 		Any(char* source)
-		{ initFromCString(source); }
-
-		//! Copy of an existing const C wide string
-		Any(wchar_t* source)
 		{ initFromCString(source); }
 
 		//! Empty constructor
@@ -96,12 +88,6 @@ namespace Yuni
 		** \brief Specialized assign for C Strings.
 		*/
 		Any& assign(const char* rhs)
-		{ return assign<String>(rhs); }
-
-		/*!
-		** \brief Specialized assign for C Wide Strings.
-		*/
-		Any& assign(const wchar_t* rhs)
 		{ return assign<String>(rhs); }
 
 		/*!

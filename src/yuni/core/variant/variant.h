@@ -63,10 +63,6 @@ namespace Yuni
 		void assign(const char* rhs)
 		{ assign(String(rhs)); }
 
-		//! Specific assignment from wide C strings
-		void assign(const wchar_t* rhs)
-		{ assign(String(rhs)); }
-
 		//! Resets the Variant to an empty one.
 		void clear();
 		//@}

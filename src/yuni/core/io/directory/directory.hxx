@@ -22,9 +22,9 @@ namespace Directory
 {
 
 	# ifdef YUNI_OS_WINDOWS
-	bool WindowsMake(const char* path, size_t len);
+	bool WindowsMake(const char* path, unsigned int len);
 	# else
-	bool UnixMake(const char* path, size_t len, unsigned int mode = 0755);
+	bool UnixMake(const char* path, unsigned int len, unsigned int mode = 0755);
 	# endif
 
 	bool Remove(const char* path);
@@ -34,11 +34,11 @@ namespace Directory
 	*/
 	char* CurrentDirectory();
 
-	bool ChangeCurrentDirectory(const char* src, size_t srclen);
-	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, size_t length);
+	bool ChangeCurrentDirectory(const char* src, unsigned int srclen);
+	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, unsigned int length);
 
 
-	bool RecursiveCopy(const char* src, size_t srclen, const char* dst, size_t dstlen, bool recursive,
+	bool RecursiveCopy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen, bool recursive,
 		bool overwrite, const Yuni::Core::IO::Directory::CopyOnUpdateBind& onUpdate);
 
 	bool DummyCopyUpdateEvent(Yuni::Core::IO::Directory::CopyState, const String&, const String&, uint64, uint64);
@@ -71,11 +71,11 @@ namespace Directory
 		// `mode` is not used on Windows
 		(void) mode;
 		return Private::Core::IO::Directory::WindowsMake(
-			Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path)
+			Traits::CString<StringT>::Perform(path), Traits::Length<StringT,unsigned int>::Value(path)
 			);
 		# else
 		return Private::Core::IO::Directory::UnixMake(
-			Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path),
+			Traits::CString<StringT>::Perform(path), Traits::Length<StringT,unsigned int>::Value(path),
 			mode);
 		# endif
 	}
@@ -112,8 +112,8 @@ namespace Directory
 		CopyOnUpdateBind e;
 		e.bind(&Private::Core::IO::Directory::DummyCopyUpdateEvent);
 		return Private::Core::IO::Directory::RecursiveCopy(
-			Traits::CString<StringT1>::Perform(source),      Traits::Length<StringT1,size_t>::Value(source),
-			Traits::CString<StringT2>::Perform(destination), Traits::Length<StringT1,size_t>::Value(destination),
+			Traits::CString<StringT1>::Perform(source),      Traits::Length<StringT1,unsigned int>::Value(source),
+			Traits::CString<StringT2>::Perform(destination), Traits::Length<StringT1,unsigned int>::Value(destination),
 			recursive, overwrite, e);
 	}
 
@@ -127,8 +127,8 @@ namespace Directory
 		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  CustomString_InvalidTypeForBufferSize2);
 
 		return Private::Core::IO::Directory::RecursiveCopy(
-			Traits::CString<StringT1>::Perform(source),      Traits::Length<StringT1,size_t>::Value(source),
-			Traits::CString<StringT2>::Perform(destination), Traits::Length<StringT1,size_t>::Value(destination),
+			Traits::CString<StringT1>::Perform(source),      Traits::Length<StringT1,unsigned int>::Value(source),
+			Traits::CString<StringT2>::Perform(destination), Traits::Length<StringT1,unsigned int>::Value(destination),
 			recursive, overwrite, onUpdate);
 	}
 
@@ -175,12 +175,12 @@ namespace Current
 		if (Traits::CString<StringT>::zeroTerminated)
 		{
 			return Yuni::Private::Core::IO::Directory::ChangeCurrentDirectory(
-				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path));
+				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,unsigned int>::Value(path));
 		}
 		else
 		{
 			return Yuni::Private::Core::IO::Directory::ChangeCurrentDirectoryNotZeroTerminated(
-				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,size_t>::Value(path));
+				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,unsigned int>::Value(path));
 		}
 	}
 

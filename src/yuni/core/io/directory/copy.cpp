@@ -34,7 +34,7 @@ namespace Directory
 
 
 
-	bool RecursiveCopy(const char* src, size_t srclen, const char* dst, size_t dstlen, bool recursive,
+	bool RecursiveCopy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen, bool recursive,
 		bool overwrite, const Yuni::Core::IO::Directory::CopyOnUpdateBind& onUpdate)
 	{
 		using namespace Yuni::Core::IO::Directory;

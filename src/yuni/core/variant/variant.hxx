@@ -2,7 +2,6 @@
 # define __YUNI_CORE_VARIANT_VARIANT_HXX__
 
 
-
 namespace Yuni
 {
 
@@ -15,8 +14,6 @@ namespace Yuni
 	{
 		assign(rhs);
 	}
-
-
 
 
 	template <typename T>
@@ -57,6 +54,7 @@ namespace Yuni
 	{
 		assign(rhs); return *this;
 	}
+
 
 
 

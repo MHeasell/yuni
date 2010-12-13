@@ -13,7 +13,6 @@ namespace CustomStringImpl
 {
 
 
-
 	bool Equals(const char* const s1, const char* const s2, unsigned int len)
 	{
 		for (unsigned int i = 0; i != len; ++i)
@@ -62,7 +61,7 @@ namespace CustomStringImpl
 	}
 
 
-	bool Glob(const char* s, unsigned int l1, const char* const pattern, unsigned int patternlen)
+	bool Glob(const char* const s, unsigned int l1, const char* const pattern, unsigned int patternlen)
 	{
 		if (patternlen)
 		{
