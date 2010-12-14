@@ -25,9 +25,13 @@ namespace Script
 	}
 
 
-	template <class FunctionT, typename U>
-	bool AScript::bind(const U& functionName, FunctionT funcPtr)
+	template <class StringT, class FunctionT>
+	bool AScript::bind(const StringT& functionName, FunctionT funcPtr)
 	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(!Extension::IntoCString<StringT>::zeroTerminated,  CustomString_MustBeZeroTerminated);
+
 		ThreadingPolicy::MutexLocker locker(*this);
 
 		if (pBoundFunctions.end() == pBoundFunctions.find(functionName))
@@ -39,7 +43,7 @@ namespace Script
 			Private::ScriptImpl::Bind::IBinding* intF = new Private::ScriptImpl::Bind::Binding<BindTypeT>(b);
 
 			// TODO: check return value
-			if (!internalBindWL(String::CString(functionName), intF))
+			if (!internalBindWL(Traits::CString<StringT>::Perform(functionName), intF))
 			{
 				delete intF;
 				return false;
@@ -51,9 +55,13 @@ namespace Script
 	}
 
 
-	template <class ClassT, class MemberT, typename U>
-	bool AScript::bind(const U& functionName, ClassT* object, MemberT member)
+	template <class StringT, class ClassT, class MemberT>
+	bool AScript::bind(const StringT& functionName, ClassT* object, MemberT member)
 	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(!Extension::IntoCString<StringT>::zeroTerminated,  CustomString_MustBeZeroTerminated);
+
 		ThreadingPolicy::MutexLocker locker(*this);
 
 		if (pBoundFunctions.end() == pBoundFunctions.find(functionName))
@@ -65,7 +73,7 @@ namespace Script
 			Private::ScriptImpl::Bind::IBinding* intF = new Private::ScriptImpl::Bind::Binding<BindTypeT>(b);
 
 			// TODO: check return value
-			if (!internalBindWL(String::CString(functionName), intF))
+			if (!internalBindWL(Traits::CString<StringT>::Perform(functionName), intF))
 			{
 				delete intF;
 				return false;
