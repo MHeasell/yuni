@@ -23,10 +23,6 @@ string(REPLACE "/CommonSettings.cmake" "" CurrentFolder "${CurrentFolder}")
 #
 Include("${CurrentFolder}/DetectInstructionsSets.cmake")
 
-# Profile
-Include("${CurrentFolder}/../ProfileBuild.cmake")
-
-
 if(NOT WIN32)
 	set(CMAKE_CXX_FLAGS_RELEASE         "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings -D_FILE_OFFSET_BITS=64")
 	set(CMAKE_CXX_FLAGS_DEBUG           "-g -ggdb3 -Wall -Woverloaded-virtual -Wextra -Wconversion -Wredundant-decls -Wundef -Wcast-align -Wcast-qual -Wfloat-equal -Wunused-parameter -Wwrite-strings -D_FILE_OFFSET_BITS=64")

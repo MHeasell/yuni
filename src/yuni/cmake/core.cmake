@@ -2,17 +2,23 @@
 
 YMESSAGE(":: [Module] Core")
 
+# Paths for yuni-config, embedded version.
+LIBYUNI_CONFIG_INCLUDE_PATH("intree" "core" "${CMAKE_CURRENT_SOURCE_DIR}/..")
+LIBYUNI_CONFIG_LIB_PATH("intree" "core" "${LIBRARY_OUTPUT_PATH}")
 
-# yuni-config
-LIBYUNI_CONFIG_INCLUDE_PATH("core" "${CMAKE_CURRENT_SOURCE_DIR}/..")
-LIBYUNI_CONFIG_LIB_PATH("core" "${LIBRARY_OUTPUT_PATH}")
-LIBYUNI_CONFIG_LIB("core"       "yuni-static-core")
+# Paths for yuni-config, installed version.
+LIBYUNI_CONFIG_INCLUDE_PATH("target" "core" "${CMAKE_INSTALL_PREFIX}/include/${YUNI_VERSIONED_INST_PATH}/")
+LIBYUNI_CONFIG_LIB_PATH("target" "core" "${CMAKE_INSTALL_PREFIX}/lib/${YUNI_VERSIONED_INST_PATH}/")
+
+LIBYUNI_CONFIG_LIB("both" "core"       "yuni-static-core")
+
+
 if(APPLE)
-	LIBYUNI_CONFIG_CFLAG("core"	"-fvisibility=hidden")
+	LIBYUNI_CONFIG_CFLAG("both" "core"	"-fvisibility=hidden")
 endif(APPLE)
 
 if (NOT WIN32 AND NOT WIN64)
-	LIBYUNI_CONFIG_DEFINITION("core" "_FILE_OFFSET_BITS=64")
+	LIBYUNI_CONFIG_DEFINITION("both" "core" "_FILE_OFFSET_BITS=64")
 endif()
 
 #
@@ -743,7 +749,7 @@ install(TARGETS yuni-static-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_P
 # Install Core-related headers
 install(
 	DIRECTORY application core job thread
-	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 	FILES_MATCHING
 		PATTERN "*.h"
 		PATTERN "*.hxx"
@@ -756,10 +762,10 @@ install(FILES
 	Doxygen.txt
 	doxygen.h
 	platform.h
-	yuni.config.gcc
 	yuni.h
-	yuni.version
-		DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 )
 
+install(FILES yuni.version DESTINATION include/${YUNI_VERSIONED_INST_PATH}/ RENAME "yuni.version")
+install(FILES "${YUNI_LIBYUNI_CONFIG_TARGET_INIFILE}" DESTINATION include/${YUNI_VERSIONED_INST_PATH}/ RENAME "yuni.config.${YUNI_LIBYUNI_CONFIG_COMPILER}")
 

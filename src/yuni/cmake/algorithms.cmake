@@ -1,7 +1,7 @@
 
 YMESSAGE(":: [Module] Algorithms")
 
-LIBYUNI_CONFIG_LIB("algorithms" "yuni-static-algorithms")
+LIBYUNI_CONFIG_LIB("both" "algorithms" "yuni-static-algorithms")
 
 
 # Devices
