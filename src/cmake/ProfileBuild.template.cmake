@@ -20,7 +20,7 @@ Set(YUNI_PROFILE_NAME "Default")
 # Default: Prefix of the first «port» program found in PATH.
 # Should be /opt/local in the most common case.
 # 
-#set(YUNI_MACPORTS_PREFIX "/my/twisted/macports/prefix")
+#Set(YUNI_MACPORTS_PREFIX "/my/twisted/macports/prefix")
 set(YUNI_MACPORTS_PREFIX "/opt/local/")
 
 
@@ -28,6 +28,14 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 # Target
 #  What is produced, and everything related to it.
 ###############################################################################
+
+# Embedding mode
+# The embedding mode is a choice between the two main usages of the library:
+# - Either you want to compile the library along your project, and distribute
+#   the yuni sources along with your source code: Select << embedded >>
+# - Or you want to install it on your system (make install):
+#   Select << install >>
+Set(YUNI_EMBED_MODE "Install")
 
 # YUNI_TARGET
 # Specifies the compilation profile. Accepted values are:
@@ -102,6 +110,12 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 
 
 ## Audio
+
+# ZLIB
+# Provides: GZip compression support
+# Modes: system, custom
+# Required for Audio module.
+
 
 # OpenAL [NOT IMPLEMENTED]
 # Provides: Audio abstraction layer.

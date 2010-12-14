@@ -308,7 +308,7 @@ namespace VersionInfo
 			if (p == String::npos)
 				continue;
 			group.assign(key, p);
-			modName.assign(key, p + 1, key.size());
+			modName.assign(key, key.size() - p - 1, p + 1);
 			if (!group || !modName)
 				continue;
 

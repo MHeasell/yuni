@@ -2,7 +2,7 @@
 YMESSAGE(":: [Module] Script")
 
 Include(CheckIncludeFile)
-LIBYUNI_CONFIG_LIB("script"     "yuni-static-script")
+LIBYUNI_CONFIG_LIB("both" "script"     "yuni-static-script")
 
 
 # Scripts
@@ -20,40 +20,10 @@ source_group("Script\\Script Abstraction" FILES ${SRC_SCRIPT})
 if(YUNI_EXTERNAL_SCRIPT_LUA)
 	YMESSAGE(":: [Module] Script::Lua")
 
-	if(UNIX AND NOT APPLE)
-		check_include_files("stdio.h;readline/readline.h" YUNI_HAS_READLINE_H)
-		if(NOT YUNI_HAS_READLINE_H)
-			set(YUNI_CMAKE_ERROR 1)
-			YMESSAGE(    "[!!] Impossible to find readline/readline.h")
-			YMESSAGE(    " * Packages needed on Debian: libreadline-dev")
-			YMESSAGE(    " * Packages needed on Fedora: readline-devel.i686")
-		endif()
-	endif()
-
-	if (YUNI_DvP_LUA_MODE STREQUAL "devpack")
-		# Headers for Lua
-		DEVPACK_IMPORT_LUA()
-		# We get YUNI_EXT_LUA_INCLUDE from here.
-		# We get YUNI_EXT_LUA_LIB from here.
-		LIBYUNI_CONFIG_LIB_RAW_COMMAND("lua" "${YUNI_EXT_LUA_LIB}")
-
-	elseif(YUNI_DvP_LUA_MODE STREQUAL "custom")
-		set(YUNI_EXT_LUA_INCLUDE "${YUNI_DvP_LUA_PREFIX}/include")
-		set(YUNI_EXT_LUA_LIB "-L${YUNI_DvP_LUA_PREFIX}/lib -llua")
-		LIBYUNI_CONFIG_LIB_RAW_COMMAND("lua" "${YUNI_EXT_LUA_LIB}")
-
-	elseif(YUNI_DvP_LUA_MODE STREQUAL "macports")
-		set(YUNI_EXT_LUA_INCLUDE "${YUNI_MACPORTS_PREFIX}/include")
-		set(YUNI_EXT_LUA_LIB "-L${YUNI_MACPORTS_PREFIX}/lib -llua")
-		LIBYUNI_CONFIG_LIB_RAW_COMMAND("lua" "${YUNI_EXT_LUA_LIB}")
-
-	elseif(YUNI_DvP_LUA_MODE STREQUAL "system")
-		# Nothing to do, since the system does it.
-		LIBYUNI_CONFIG_LIB_RAW_COMMAND("lua" "-llua")
-
+	if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps/lua-${YUNI_DvP_LUA_MODE}.cmake)
+		include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps/lua-${YUNI_DvP_LUA_MODE}.cmake)
 	else()
-		YFATAL(    "[!!] Invalid YUNI_DvP_LUA_MODE: ${YUNI_DvP_LUA_MODE}")
-
+		YFATAL("[!!] Invalid YUNI_DvP_LUA_MODE: ${YUNI_DvP_LUA_MODE}")
 	endif()
 
 	# Check if we really have a lua.h
@@ -99,7 +69,7 @@ install(TARGETS yuni-static-script ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST
 # Install Script-related headers
 install(
 	DIRECTORY script
-	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 	FILES_MATCHING
 		PATTERN "*.h"
 		PATTERN "*.hxx"

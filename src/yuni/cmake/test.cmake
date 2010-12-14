@@ -1,7 +1,7 @@
 
 YMESSAGE(":: [Module] Tests")
 
-LIBYUNI_CONFIG_LIB("tests"      "yuni-static-tests")
+LIBYUNI_CONFIG_LIB("both" "tests"      "yuni-static-tests")
 
 
 set(SRC_TESTS

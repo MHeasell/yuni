@@ -45,10 +45,10 @@ endif(YUNI_MODULE_VFS)
 
 
 if(YUNI_MODULE_DEVICES)
-	LIBYUNI_CONFIG_LIB("display"    "yuni-static-device-display")
-	LIBYUNI_CONFIG_LIB("mouse"      "yuni-static-device-mouse")
+	LIBYUNI_CONFIG_LIB("both" "display"    "yuni-static-device-display")
+	LIBYUNI_CONFIG_LIB("both" "mouse"      "yuni-static-device-mouse")
 	LIBYUNI_CONFIG_DEPENDENCY("mouse" "devices")
-	LIBYUNI_CONFIG_LIB("keyboard"   "yuni-static-device-keyboard")
+	LIBYUNI_CONFIG_LIB("both" "keyboard"   "yuni-static-device-keyboard")
 	LIBYUNI_CONFIG_DEPENDENCY("keyboard" "devices")
 
 	if(YUNI_MODULE_DEVICE_DISPLAY)
@@ -109,7 +109,7 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.cmake ${CMAKE_CURRENT_S
 # Misc
 #
 add_definitions("-DYUNI_LIBRARY_STATIC")
-LIBYUNI_CONFIG_DEFINITION("core" "YUNI_LIBRARY_STATIC")
+LIBYUNI_CONFIG_DEFINITION("both" "core" "YUNI_LIBRARY_STATIC")
 include_directories(${YUNI_INCLUDE})
 
 

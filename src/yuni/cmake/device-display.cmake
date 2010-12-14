@@ -6,24 +6,24 @@ LIBYUNI_CONFIG_DEPENDENCY("display" "devices") # devices is required
 
 if(UNIX AND NOT APPLE AND NOT HAIKU AND NOT BEOS)
 	find_package(X11)
-	LIBYUNI_CONFIG_LIB("display" "X11")
-	LIBYUNI_CONFIG_LIB("display" "Xext")
-	LIBYUNI_CONFIG_LIB("display" "Xrandr")
-	LIBYUNI_CONFIG_LIB_PATH("display" "${X11_LIBRARY_DIR}")
+	LIBYUNI_CONFIG_LIB("both" "display" "X11")
+	LIBYUNI_CONFIG_LIB("both" "display" "Xext")
+	LIBYUNI_CONFIG_LIB("both" "display" "Xrandr")
+	LIBYUNI_CONFIG_LIB_PATH("both" "display" "${X11_LIBRARY_DIR}")
 endif(UNIX AND NOT APPLE AND NOT HAIKU AND NOT BEOS)
 
 if(UNIX)
 	if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
 		include_directories("/usr/local/include")
-		LIBYUNI_CONFIG_LIB_PATH("display" "/usr/local/include")
+		LIBYUNI_CONFIG_LIB_PATH("both" "display" "/usr/local/include")
 	endif(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
 endif(UNIX)
 
 
 if(APPLE)
-	LIBYUNI_CONFIG_FRAMEWORK("display" CoreFoundation)
-	LIBYUNI_CONFIG_FRAMEWORK("display" Cocoa)
-	LIBYUNI_CONFIG_FRAMEWORK("display" IOKit)
+	LIBYUNI_CONFIG_FRAMEWORK("both" "display" CoreFoundation)
+	LIBYUNI_CONFIG_FRAMEWORK("both" "display" Cocoa)
+	LIBYUNI_CONFIG_FRAMEWORK("both" "display" IOKit)
 endif(APPLE)
 
 
@@ -63,7 +63,7 @@ install(TARGETS yuni-static-device-display ARCHIVE DESTINATION lib/${YUNI_VERSIO
 # Install Device-related headers
 install(
 	DIRECTORY device
-	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 	FILES_MATCHING
 		PATTERN "*.h"
 		PATTERN "*.hxx"

@@ -2,7 +2,7 @@
 YMESSAGE(":: [Module] Audio")
 
 
-LIBYUNI_CONFIG_LIB("audio"      "yuni-static-audio-core")
+LIBYUNI_CONFIG_LIB("both" "audio"      "yuni-static-audio-core")
 LIBYUNI_CONFIG_DEPENDENCY("audio" "core") # yuni-core is required
 
 
@@ -10,7 +10,7 @@ LIBYUNI_CONFIG_DEPENDENCY("audio" "core") # yuni-core is required
 # Windows-specific
 #
 if (WIN32 OR WIN64)
-	LIBYUNI_CONFIG_LIB("audio" ws2_32)
+	LIBYUNI_CONFIG_LIB("both" "audio" ws2_32)
 endif (WIN32 OR WIN64)
 
 
@@ -39,25 +39,101 @@ include(CheckIncludeFile)
 #
 # OpenAL
 #
-YMESSAGE("Added Support for OpenAL")
-if(APPLE)
-	# Frameworks
-	LIBYUNI_CONFIG_FRAMEWORK("audio" OpenAL)
-else(APPLE)
+
+# Select default OpenAL mode
+if(NOT YUNI_DvP_OPENAL_MODE)
 	if(WIN32 OR WIN64)
-		DEVPACK_IMPORT_OPENAL()
-	else(WIN32 OR WIN64)
-		find_package(OpenAL)
-		if(NOT OPENAL_FOUND)
-			YERROR("[!!] Impossible to find OpenAL")
+		set(YUNI_DvP_OPENAL_MODE devpack)
+	else()
+		set(YUNI_DvP_OPENAL_MODE system)
+	endif()
+endif()
+
+YMESSAGE("      -> OpenAL Libraries: ${YUNI_DvP_OPENAL_MODE}")
+
+
+if(YUNI_DvP_OPENAL_MODE STREQUAL "devpack")
+	# FIXME: untested.
+	# Unconditionnally use devpack
+	DEVPACK_IMPORT_OPENAL()
+	# We get OPENAL_INCLUDE_DIR from here.
+	# We get OPENAL_LIBRARY from here.
+elseif(YUNI_DvP_OPENAL_MODE STREQUAL "system")
+	if(APPLE)
+		# FIXME: untested.
+		# Frameworks
+		LIBYUNI_CONFIG_FRAMEWORK("both" "audio" OpenAL)
+	else()
+		# Just check the al.h header and library in standard includes paths.
+		find_path(OPENAL_INCLUDE_DIR al.h 
+			PATH_SUFFIXES include/AL include/OpenAL include
+			PATHS
+				/usr/local
+				/usr
+				[HKEY_LOCAL_MACHINE\\SOFTWARE\\Creative\ Labs\\OpenAL\ 1.1\ Software\ Development\ Kit\\1.00.0000;InstallDir]
+		)
+		find_library(OPENAL_LIBRARY 
+			NAMES OpenAL al openal OpenAL32
+			PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
+			PATHS
+				/usr/local
+				/usr
+				[HKEY_LOCAL_MACHINE\\SOFTWARE\\Creative\ Labs\\OpenAL\ 1.1\ Software\ Development\ Kit\\1.00.0000;InstallDir]
+		)
+
+		if(NOT OPENAL_INCLUDE_DIR OR NOT OPENAL_LIBRARY)
+			set(YUNI_CMAKE_ERROR 1)
+			YMESSAGE(    "[!!] Impossible to find OpenAL")
 			YMESSAGE(    " * Packages needed on Debian: libopenal-dev")
 			YMESSAGE(    " * Packages needed on Fedora: openal-devel")
-		endif(NOT OPENAL_FOUND)
-	endif(WIN32 OR WIN64)
-	LIBYUNI_CONFIG_LIB_RAW_COMMAND("audio" "${OPENAL_LIBRARY}")
-	LIBYUNI_CONFIG_INCLUDE_PATH("audio" "${OPENAL_INCLUDE_DIR}")
+		endif()
+
+		LIBYUNI_CONFIG_INCLUDE_PATH("both" "audio" "${OPENAL_INCLUDE_DIR}")
+		LIBYUNI_CONFIG_LIB("both" "audio" "${OPENAL_LIBRARY}")
+		include_directories(${OPENAL_INCLUDE_DIR})
+	endif()
+
+elseif(YUNI_DvP_OPENAL_MODE STREQUAL "custom")
+	if (NOT YUNI_DvP_OPENAL_PREFIX)
+		YFATAL(    "[!!] Error: custom mode requires a prefix specification.")
+	endif()
+	find_path(OPENAL_INCLUDE_DIR al.h
+		PATH_SUFFIXES include/AL include/OpenAL include
+		PATHS ${YUNI_DvP_OPENAL_PREFIX})
+	find_library(OPENAL_LIBRARY 
+		NAMES OpenAL al openal OpenAL32
+		PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
+		PATHS ${YUNI_DvP_OPENAL_PREFIX})
+	if(NOT OPENAL_INCLUDE_DIR OR NOT OPENAL_LIBRARY)
+		set(YUNI_CMAKE_ERROR 1)
+		YMESSAGE(    "[!!] Impossible to find OpenAL in ${YUNI_DvP_OPENAL_PREFIX}")
+	endif()
+		
+	LIBYUNI_CONFIG_INCLUDE_PATH("both" "audio" "${OPENAL_INCLUDE_DIR}")
+	LIBYUNI_CONFIG_LIB("both" "audio" "${OPENAL_LIBRARY}")
 	include_directories(${OPENAL_INCLUDE_DIR})
-endif(APPLE)
+
+elseif(YUNI_DvP_OPENAL_MODE STREQUAL "macports")
+	find_path(OPENAL_INCLUDE_DIR al.h
+		PATH_SUFFIXES include/AL include/OpenAL include
+		PATHS ${YUNI_MACPORTS_PREFIX})
+	find_library(OPENAL_LIBRARY 
+		NAMES OpenAL al openal OpenAL32
+		PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
+		PATHS ${YUNI_MACPORTS_PREFIX})
+	if(NOT OPENAL_INCLUDE_DIR OR NOT OPENAL_LIBRARY)
+		set(YUNI_CMAKE_ERROR 1)
+		YMESSAGE(    "[!!] Impossible to find OpenAL in macports.")
+	endif()
+		
+	LIBYUNI_CONFIG_INCLUDE_PATH("both" "audio" "${OPENAL_INCLUDE_DIR}")
+	LIBYUNI_CONFIG_LIB("both" "audio" "${OPENAL_LIBRARY}")
+	include_directories(${OPENAL_INCLUDE_DIR})
+
+else()
+	YFATAL(    "[!!] Invalid YUNI_DvP_OPENAL_MODE: ${YUNI_DvP_OPENAL_MODE}")
+
+endif()
 
 #
 # FFmpeg
@@ -88,8 +164,8 @@ if (NOT WIN32 AND NOT WIN64)
 	endif(BZIP2_FOUND)
 endif (NOT WIN32 AND NOT WIN64)
 
-LIBYUNI_CONFIG_LIB_RAW_COMMAND("audio" "${YUNI_EXT_FFMPEG_LIB}")
-LIBYUNI_CONFIG_INCLUDE_PATH("audio" "${YUNI_EXT_FFMPEG_INCLUDE}")
+LIBYUNI_CONFIG_LIB_RAW_COMMAND("both" "audio" "${YUNI_EXT_FFMPEG_LIB}")
+LIBYUNI_CONFIG_INCLUDE_PATH("both" "audio" "${YUNI_EXT_FFMPEG_INCLUDE}")
 
 ### WARNING: FFmpeg 0.6 (and other versions) fail to compile with:
 ### error: 'UINT64_C' was not declared in this scope
@@ -111,7 +187,7 @@ install(TARGETS yuni-static-audio-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_
 # Install Audio-related headers
 install(
 	DIRECTORY audio
-	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 	FILES_MATCHING
 		PATTERN "*.h"
 		PATTERN "*.hxx"

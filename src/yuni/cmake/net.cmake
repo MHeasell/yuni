@@ -1,7 +1,7 @@
 
 YMESSAGE(":: [Module] Network")
 
-LIBYUNI_CONFIG_LIB("net"        "yuni-static-net")
+LIBYUNI_CONFIG_LIB("both" "net"        "yuni-static-net")
 
 
 
@@ -20,7 +20,7 @@ INSTALL(TARGETS yuni-static-net ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PA
 # Install net-related headers
 INSTALL(
 	DIRECTORY net
-	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
+	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 	FILES_MATCHING
 		PATTERN "*.h"
 		PATTERN "*.hxx"

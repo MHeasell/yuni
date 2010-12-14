@@ -1,7 +1,7 @@
 
 YMESSAGE(":: [Module] UI")
 
-LIBYUNI_CONFIG_LIB("ui"      "yuni-static-ui-core")
+LIBYUNI_CONFIG_LIB("both" "ui"      "yuni-static-ui-core")
 
 LIBYUNI_CONFIG_DEPENDENCY("ui" "core") # core is required
 
@@ -77,9 +77,9 @@ if (CAIRO_FOUND)
 	endif (WIN32 OR WIN64)
 
 	# yuni-config
-	LIBYUNI_CONFIG_DEFINITION("ui"  "YUNI_USE_CAIRO")
-	LIBYUNI_CONFIG_INCLUDE_PATH("ui"  "${YUNI_EXT_CAIROPANGO_INCLUDE}")
-	LIBYUNI_CONFIG_LIB_RAW_COMMAND("ui"  "${YUNI_EXT_CAIROPANGO_LIB}")
+	LIBYUNI_CONFIG_DEFINITION("both" "ui"  "YUNI_USE_CAIRO")
+	LIBYUNI_CONFIG_INCLUDE_PATH("both" "ui"  "${YUNI_EXT_CAIROPANGO_INCLUDE}")
+	LIBYUNI_CONFIG_LIB_RAW_COMMAND("both" "ui"  "${YUNI_EXT_CAIROPANGO_LIB}")
 
 else (CAIRO_FOUND)
 	YERROR("[!!] Impossible to find Cairo")
@@ -92,7 +92,7 @@ endif (CAIRO_FOUND)
 if (PANGO_FOUND)
 	YMESSAGE("Added Support for Pango")
 	add_definitions("-DYUNI_USE_PANGO")
-	LIBYUNI_CONFIG_DEFINITION("ui"  "YUNI_USE_PANGO")
+	LIBYUNI_CONFIG_DEFINITION("both" "ui"  "YUNI_USE_PANGO")
 else (PANGO_FOUND)
 	YERROR("[!!] Impossible to find Pango")
 endif (PANGO_FOUND)
