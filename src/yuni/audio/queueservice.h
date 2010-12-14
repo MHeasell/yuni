@@ -107,7 +107,7 @@ namespace Audio
 			template<typename StringT>
 			bool stop(const StringT& name);
 			//! Stop playback on an emitter
-			bool stop(Emitter::Ptr& emitter);
+			bool stop(const Emitter::Ptr& emitter);
 
 			//! Remove an emitter
 			template<typename StringT>

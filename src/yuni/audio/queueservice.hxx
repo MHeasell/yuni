@@ -9,7 +9,7 @@ namespace Audio
 
 
 	template<typename StringT>
-	Emitter::Ptr QueueService::Emitters::get(const StringT& name)
+	inline Emitter::Ptr QueueService::Emitters::get(const StringT& name)
 	{
 		return get(String(name));
 	}
@@ -22,16 +22,17 @@ namespace Audio
 
 		Emitter::Map::iterator it = pEmitters.find(name);
 		if (it == pEmitters.end())
-			return Emitter::Ptr(NULL);
+			return nullptr;
 		return it->second;
 	}
 
 
 	template<typename StringT>
-	Sound::Ptr QueueService::Bank::get(const StringT& name)
+	inline Sound::Ptr QueueService::Bank::get(const StringT& name)
 	{
 		return get(String(name));
 	}
+
 
 	template<>
 	inline Sound::Ptr QueueService::Bank::get<String>(const String& name)
@@ -40,7 +41,7 @@ namespace Audio
 
 		Sound::Map::iterator it = pBuffers.find(name);
 		if (it == pBuffers.end())
-			return Sound::Ptr(NULL);
+			return nullptr;
 		return it->second;
 	}
 
@@ -226,7 +227,7 @@ namespace Audio
 	template<typename StringT>
 	inline bool QueueService::Emitters::stop(const StringT& name)
 	{
-		return stop(String(name));
+		return stop<String>(String(name));
 	}
 
 	template<>
@@ -235,11 +236,13 @@ namespace Audio
 		return stop(get(name));
 	}
 
-	inline bool QueueService::Emitters::stop(Emitter::Ptr& emitter)
+
+	inline bool QueueService::Emitters::stop(const Emitter::Ptr& emitter)
 	{
 		if (!emitter)
 			return false;
 		// TODO
+		return false;
 	}
 
 
