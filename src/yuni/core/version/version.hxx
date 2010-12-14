@@ -16,7 +16,7 @@ namespace Yuni
 
 
 	inline Version::Version(unsigned int h, unsigned int l)
-		:hi(h), lo(l), revision(0)
+		:hi(h), lo(l), revision(0u)
 	{}
 
 
