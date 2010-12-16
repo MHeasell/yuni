@@ -35,7 +35,7 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 #   the yuni sources along with your source code: Select << embedded >>
 # - Or you want to install it on your system (make install):
 #   Select << install >>
-Set(YUNI_EMBED_MODE "Install")
+Set(YUNI_EMBED_MODE "install")
 
 # YUNI_TARGET
 # Specifies the compilation profile. Accepted values are:
