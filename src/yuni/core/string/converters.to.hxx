@@ -102,7 +102,7 @@ namespace StringImpl
 					return false;
 				case 1:
 					return ('1' == *(s.pPtr) || 'Y' == *(s.pPtr) || 'y' == *(s.pPtr)
-							|| 'O' == *(s.pPtr) || 'o' == *(s.pPtr));
+							|| 'O' == *(s.pPtr) || 'o' == *(s.pPtr) || 't' == *(s.pPtr) || 'T' == *(s.pPtr));
 				default:
 					{
 						if (s.pSize > 4)

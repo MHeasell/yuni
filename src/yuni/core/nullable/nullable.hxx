@@ -217,7 +217,7 @@ namespace Yuni
 	{
 		return pHolder.empty()
 			? rhs.empty()
-			: (rhs.data() == pHolder.data());
+			: (rhs.pHolder.data() == pHolder.data());
 	}
 
 	template<class T, class Alloc>
@@ -225,7 +225,7 @@ namespace Yuni
 	{
 		return pHolder.empty()
 			? !rhs.empty()
-			: (rhs.data() != pHolder.data());
+			: (rhs.pHolder.data() != pHolder.data());
 	}
 
 
@@ -372,6 +372,51 @@ namespace Yuni
 
 } // namespace Yuni
 
+
+namespace Yuni
+{
+namespace Extension
+{
+namespace CustomString
+{
+
+	template<class CustomStringT, class T, class Alloc>
+	struct Append<CustomStringT, Yuni::Nullable<T, Alloc> >
+	{
+		static void Perform(CustomStringT& s, const Yuni::Nullable<T,Alloc>& rhs)
+		{
+			if (!rhs.null())
+				s << rhs.value();
+		}
+	};
+
+
+	template<class T, class Alloc>
+	class Into<Yuni::Nullable<T,Alloc> >
+	{
+	public:
+		typedef Yuni::Nullable<T,Alloc> TargetType;
+		enum { valid = 1 };
+
+		template<class StringT> static bool Perform(const StringT& s, TargetType& out)
+		{
+			T tmp;
+			if (s.to(tmp))
+				out = tmp;
+			else
+				out = nullptr;
+		}
+
+		template<class StringT> static TargetType Perform(const StringT& s)
+		{
+			return s.template to<T>();
+		}
+
+	};
+
+
+} // namespace CustomString
+} // namespace Extension
+} // namespace Yuni
+
 #endif // __YUNI_CORE_NULLABLE_NULLABLE_HXX__
-
-

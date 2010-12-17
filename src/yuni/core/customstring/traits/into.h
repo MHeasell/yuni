@@ -200,7 +200,7 @@ namespace CustomString
 				if (count < 5)
 				{
 					if (count == 1)
-						return ('1' == s[0] || 'Y' == s[0] || 'y' == s[0] || 'O' == s[0] || 'o' == s[0]);
+						return ('1' == s[0] || 'Y' == s[0] || 'y' == s[0] || 'O' == s[0] || 'o' == s[0] || 't' == s[0] || 'T' == s[0]);
 
 					char buffer[5] = {0,0,0,0,0};
 					for (unsigned int i = 0; i < count; ++i)
