@@ -6,12 +6,10 @@
 # include "../core/atomic/int.h"
 
 
-
 namespace Yuni
 {
 namespace Thread
 {
-
 
 	/*!
 	** \brief A thread that executes a method every X milliseconds
@@ -58,7 +56,6 @@ namespace Thread
 	public:
 		//! The Threading policy
 		typedef IThread::ThreadingPolicy  ThreadingPolicy;
-
 		enum
 		{
 			//! Special value to use for an infinite loop
@@ -239,7 +236,6 @@ namespace Thread
 		*/
 		virtual bool onExecute();
 
-
 		/*!
 		** \brief Run an infinite loop
 		** \return True to stop the loop, False to reload the settings
@@ -262,7 +258,6 @@ namespace Thread
 		mutable Mutex pTimerMutex;
 
 	}; // class Thread::Timer
-
 
 
 

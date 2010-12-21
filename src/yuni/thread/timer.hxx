@@ -7,7 +7,6 @@ namespace Yuni
 namespace Thread
 {
 
-
 	inline Timer::Timer()
 		:IThread(), pTimeInterval(defaultInterval), pCycleCount(infinite)
 	{}
@@ -47,7 +46,6 @@ namespace Thread
 	{
 		pShouldReload = 1;
 	}
-
 
 
 

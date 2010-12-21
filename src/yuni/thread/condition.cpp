@@ -50,7 +50,6 @@ namespace Thread
 
 
 
-
 	void Condition::waitUnlocked()
 	{
 		// The pthread_cond_wait will unlock the mutex and wait for

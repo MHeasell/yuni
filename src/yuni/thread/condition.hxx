@@ -7,7 +7,6 @@ namespace Yuni
 namespace Thread
 {
 
-
 	# ifndef YUNI_NO_THREAD_SAFE
 	# else
 	inline Condition::Condition()
@@ -36,6 +35,7 @@ namespace Thread
 		return *pMutex;
 	}
 
+
 	inline void Condition::lock()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
@@ -43,12 +43,14 @@ namespace Thread
 		# endif
 	}
 
+
 	inline void Condition::unlock()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		pMutex->unlock();
 		# endif
 	}
+
 
 	inline void Condition::notify()
 	{
@@ -58,6 +60,7 @@ namespace Thread
 		# endif
 	}
 
+
 	inline void Condition::notifyAll()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
@@ -65,6 +68,7 @@ namespace Thread
 		::pthread_cond_broadcast(&pCondition);
 		# endif
 	}
+
 
 	// ConditionLocker
 	inline ConditionLocker::ConditionLocker(Condition& c)

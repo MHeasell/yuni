@@ -3,8 +3,6 @@
 #include <cassert>
 
 
-
-
 namespace Yuni
 {
 namespace Thread
@@ -31,8 +29,6 @@ namespace Thread
 		rhs.pTimerMutex.unlock();
 		return *this;
 	}
-
-
 
 
 	bool Timer::internalRunInfiniteLoop()
@@ -104,7 +100,6 @@ namespace Thread
 		}
 		return false;
 	}
-
 
 
 	void Timer::interval(const unsigned int t)
