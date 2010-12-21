@@ -13,8 +13,9 @@ namespace CustomString
 
 
 	template<class CustomStringT, class StringT>
-	struct Fill
+	class Fill
 	{
+	public:
 		static void Perform(char* data, typename CustomStringT::Size size, const StringT& pattern)
 		{
 			const unsigned int patternSize = Traits::Length<StringT,unsigned int>::Value(pattern);
@@ -43,8 +44,9 @@ namespace CustomString
 
 
 	template<class CustomStringT>
-	struct Fill<CustomStringT, char>
+	class Fill<CustomStringT, char>
 	{
+	public:
 		static void Perform(char* data, typename CustomStringT::Size size, const char rhs)
 		{
 			for (typename CustomStringT::Size i = 0; i != size; ++i)
