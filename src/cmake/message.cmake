@@ -1,3 +1,4 @@
+
 macro(YMESSAGE msg)
 	message(STATUS "{yuni} -- ${msg}")
 endmacro()
