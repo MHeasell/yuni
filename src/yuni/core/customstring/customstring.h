@@ -1901,9 +1901,9 @@ namespace Yuni
 	private:
 		// our friends !
 		template<class, class, int> friend class Private::CustomStringImpl::From;
-		template<class, class> friend struct Yuni::Extension::CustomString::Append;
-		template<class, class> friend struct Yuni::Extension::CustomString::Assign;
-		template<class, class> friend struct Yuni::Extension::CustomString::Fill;
+		template<class, class> friend class Yuni::Extension::CustomString::Append;
+		template<class, class> friend class Yuni::Extension::CustomString::Assign;
+		template<class, class> friend class Yuni::Extension::CustomString::Fill;
 		template<class, bool>  friend struct Private::CustomStringImpl::AdapterAssign;
 		template<class, bool>  friend struct Private::CustomStringImpl::Consume;
 
