@@ -10,7 +10,6 @@ namespace Yuni
 namespace Thread
 {
 
-
 	/*!
 	** \brief Condition Variable
 	**
@@ -38,14 +37,12 @@ namespace Thread
 		** \brief Default constructor
 		*/
 		Condition();
-
 		/*!
 		** \brief Constructor with an external mutex
 		**
 		** In this case, an external mutex will be used
 		*/
 		Condition(Mutex& mutex);
-
 		//! Destructor
 		~Condition();
 		//@}
@@ -147,15 +144,12 @@ namespace Thread
 		//! The PThread Condition
 		pthread_cond_t  pCondition;
 		# endif
-
 		//! The mutex
 		Mutex* pMutex;
-
 		# ifndef YUNI_NO_THREAD_SAFE
 		//! Have the condition been really signalled ?
 		volatile bool pSignalled;
 		# endif
-
 		//! True if this class owns the mutex and must destroy it
 		const bool pOwnMutex;
 
@@ -190,7 +184,6 @@ namespace Thread
 		Condition& pCondition;
 
 	}; // ConditionLocker
-
 
 
 

@@ -2,7 +2,6 @@
 # define __YUNI_THREAD_ARRAY_HXX__
 
 
-
 namespace Yuni
 {
 namespace Thread
@@ -108,9 +107,8 @@ namespace Thread
 	}
 
 
-
 	template<class T>
-	void Array<T>::push_back(typename T::Ptr thread)
+	inline void Array<T>::push_back(typename T::Ptr thread)
 	{
 		// Locking
 		typename ThreadingPolicy::MutexLocker locker(*this);
@@ -356,12 +354,14 @@ namespace Thread
 		return *this;
 	}
 
+
 	template<class T>
 	inline Array<T>& Array<T>::operator << (const typename T::Ptr& thread)
 	{
 		add(thread);
 		return *this;
 	}
+
 
 	template<class T>
 	inline Array<T>& Array<T>::operator += (T* thread)
@@ -370,13 +370,13 @@ namespace Thread
 		return *this;
 	}
 
+
 	template<class T>
 	inline Array<T>& Array<T>::operator += (const typename T::Ptr& thread)
 	{
 		add(thread);
 		return *this;
 	}
-
 
 
 
@@ -415,6 +415,7 @@ namespace Thread
 		return pList.size();
 	}
 
+
 	template<class T>
 	inline unsigned int Array<T>::count() const
 	{
@@ -435,7 +436,6 @@ namespace Thread
 				return;
 		}
 	}
-
 
 
 
