@@ -29,14 +29,6 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 #  What is produced, and everything related to it.
 ###############################################################################
 
-# Embedding mode
-# The embedding mode is a choice between the two main usages of the library:
-# - Either you want to compile the library along your project, and distribute
-#   the yuni sources along with your source code: Select << embedded >>
-# - Or you want to install it on your system (make install):
-#   Select << install >>
-set(YUNI_EMBED_MODE "install")
-
 # YUNI_TARGET
 # Specifies the compilation profile. Accepted values are:
 # - debug: No optimization, debug info, very slow.
@@ -111,15 +103,15 @@ set(YUNI_EMBED_MODE "install")
 
 ## Audio
 
-# ZLIB
+# ZLIB [FIXME: NOT IMPLEMENTED]
 # Provides: GZip compression support
 # Modes: system, custom
 # Required for Audio module.
 
 
-# OpenAL [NOT IMPLEMENTED]
+# OpenAL
 # Provides: Audio abstraction layer.
-# Modes: system, custom
+# Modes: system, devpack, custom
 # Required for Audio module.
 set(YUNI_DvP_OPENAL_MODE      system)
 

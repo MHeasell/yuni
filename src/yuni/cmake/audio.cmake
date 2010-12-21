@@ -49,91 +49,30 @@ if(NOT YUNI_DvP_OPENAL_MODE)
 	endif()
 endif()
 
+
 YMESSAGE("      -> OpenAL Libraries: ${YUNI_DvP_OPENAL_MODE}")
 
-
-if(YUNI_DvP_OPENAL_MODE STREQUAL "devpack")
-	# FIXME: untested.
-	# Unconditionnally use devpack
-	DEVPACK_IMPORT_OPENAL()
-	# We get OPENAL_INCLUDE_DIR from here.
-	# We get OPENAL_LIBRARY from here.
-elseif(YUNI_DvP_OPENAL_MODE STREQUAL "system")
-	if(APPLE)
-		# FIXME: untested.
-		# Frameworks
-		LIBYUNI_CONFIG_FRAMEWORK("both" "audio" OpenAL)
-	else()
-		# Just check the al.h header and library in standard includes paths.
-		find_path(OPENAL_INCLUDE_DIR al.h 
-			PATH_SUFFIXES include/AL include/OpenAL include
-			PATHS
-				/usr/local
-				/usr
-				[HKEY_LOCAL_MACHINE\\SOFTWARE\\Creative\ Labs\\OpenAL\ 1.1\ Software\ Development\ Kit\\1.00.0000;InstallDir]
-		)
-		find_library(OPENAL_LIBRARY 
-			NAMES OpenAL al openal OpenAL32
-			PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
-			PATHS
-				/usr/local
-				/usr
-				[HKEY_LOCAL_MACHINE\\SOFTWARE\\Creative\ Labs\\OpenAL\ 1.1\ Software\ Development\ Kit\\1.00.0000;InstallDir]
-		)
-
-		if(NOT OPENAL_INCLUDE_DIR OR NOT OPENAL_LIBRARY)
-			set(YUNI_CMAKE_ERROR 1)
-			YMESSAGE(    "[!!] Impossible to find OpenAL")
-			YMESSAGE(    " * Packages needed on Debian: libopenal-dev")
-			YMESSAGE(    " * Packages needed on Fedora: openal-devel")
-		endif()
-
-		LIBYUNI_CONFIG_INCLUDE_PATH("both" "audio" "${OPENAL_INCLUDE_DIR}")
-		LIBYUNI_CONFIG_LIB("both" "audio" "${OPENAL_LIBRARY}")
-		include_directories(${OPENAL_INCLUDE_DIR})
-	endif()
-
-elseif(YUNI_DvP_OPENAL_MODE STREQUAL "custom")
-	if (NOT YUNI_DvP_OPENAL_PREFIX)
-		YFATAL(    "[!!] Error: custom mode requires a prefix specification.")
-	endif()
-	find_path(OPENAL_INCLUDE_DIR al.h
-		PATH_SUFFIXES include/AL include/OpenAL include
-		PATHS ${YUNI_DvP_OPENAL_PREFIX})
-	find_library(OPENAL_LIBRARY 
-		NAMES OpenAL al openal OpenAL32
-		PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
-		PATHS ${YUNI_DvP_OPENAL_PREFIX})
-	if(NOT OPENAL_INCLUDE_DIR OR NOT OPENAL_LIBRARY)
-		set(YUNI_CMAKE_ERROR 1)
-		YMESSAGE(    "[!!] Impossible to find OpenAL in ${YUNI_DvP_OPENAL_PREFIX}")
-	endif()
-		
-	LIBYUNI_CONFIG_INCLUDE_PATH("both" "audio" "${OPENAL_INCLUDE_DIR}")
-	LIBYUNI_CONFIG_LIB("both" "audio" "${OPENAL_LIBRARY}")
-	include_directories(${OPENAL_INCLUDE_DIR})
-
-elseif(YUNI_DvP_OPENAL_MODE STREQUAL "macports")
-	find_path(OPENAL_INCLUDE_DIR al.h
-		PATH_SUFFIXES include/AL include/OpenAL include
-		PATHS ${YUNI_MACPORTS_PREFIX})
-	find_library(OPENAL_LIBRARY 
-		NAMES OpenAL al openal OpenAL32
-		PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
-		PATHS ${YUNI_MACPORTS_PREFIX})
-	if(NOT OPENAL_INCLUDE_DIR OR NOT OPENAL_LIBRARY)
-		set(YUNI_CMAKE_ERROR 1)
-		YMESSAGE(    "[!!] Impossible to find OpenAL in macports.")
-	endif()
-		
-	LIBYUNI_CONFIG_INCLUDE_PATH("both" "audio" "${OPENAL_INCLUDE_DIR}")
-	LIBYUNI_CONFIG_LIB("both" "audio" "${OPENAL_LIBRARY}")
-	include_directories(${OPENAL_INCLUDE_DIR})
-
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps/openal-${YUNI_DvP_OPENAL_MODE}.cmake)
+	include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps/openal-${YUNI_DvP_OPENAL_MODE}.cmake)
 else()
-	YFATAL(    "[!!] Invalid YUNI_DvP_OPENAL_MODE: ${YUNI_DvP_OPENAL_MODE}")
-
+	YFATAL("[!!] Invalid YUNI_DvP_OPENAL_MODE: ${YUNI_DvP_OPENAL_MODE}")
 endif()
+
+
+YMESSAGE("      -> OpenAL Libraries: ${OPENAL_INCLUDE_DIR}")
+# Check if we really have a al.h
+set(CMAKE_REQUIRED_INCLUDES "${OPENAL_INCLUDE_DIR}")
+check_include_files("al.h" YUNI_HAS_AL_AL_H)
+check_include_files("AL/al.h" YUNI_HAS_AL_AL_H)
+check_include_files("OpenAL/al.h" YUNI_HAS_AL_AL_H)
+
+if(NOT YUNI_HAS_AL_AL_H)
+	set(YUNI_CMAKE_ERROR 1)
+	YMESSAGE(    "[!!] Impossible to find al.h. Please check your profile.")
+	YMESSAGE(    " * Packages needed on Debian: libopenal-dev")
+	YMESSAGE(    " * Packages needed on Fedora: openal-devel")
+endif()
+
 
 #
 # FFmpeg
