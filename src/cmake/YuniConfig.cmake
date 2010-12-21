@@ -63,7 +63,7 @@ macro(LIBYUNI_CONFIG_LIB_RAW_COMMAND mode module pth)
 			if("${mode}" STREQUAL "intree" OR "${mode}" STREQUAL "both")
 				file(APPEND "${YUNI_LIBYUNI_CONFIG_INTREE_INIFILE}" "lib,rawcommand:${module} = ${I}\n")
 			endif()
-		endforeach(I ${pth})
+		endforeach()
 	endif()
 endmacro()
 
@@ -119,6 +119,7 @@ macro(LIBYUNI_CONFIG_INCLUDE_PATH mode module pth)
 		endforeach()
 	endif()
 endmacro()
+
 
 macro(LIBYUNI_CONFIG_LIB_PATH mode module pth)
 	if(LIBYUNI_CONFIG_ENABLED)
