@@ -155,7 +155,7 @@ namespace Windows
 		// We Don't Want A Menu
 		wc.lpszMenuName = NULL;
 		// Set The Class Name
-		wc.lpszClassName = String::CString(pWindowClassName);
+		wc.lpszClassName = Traits::CString<String>::Perform(pWindowClassName);
 
 		// Attempt To Register The Window Class
 		if (!RegisterClassEx(&wc))
@@ -188,7 +188,7 @@ namespace Windows
 				// If The Mode Fails, Offer Two Options:
 				// Quit Or Use Windowed Mode.
 				if (MessageBox(NULL, "The requested fullscreen mode is not supported by\nyour video card. Use windowed mode instead?",
-					String::CString(pUIWnd->title()), MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
+					Traits::CString<String>::Perform(pUIWnd->title()), MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
 					// Set windowed Mode
 					pFullScreen = false;
 				else
@@ -223,8 +223,8 @@ namespace Windows
 
 		// Create The Window
 		if (!(pHWnd = CreateWindowEx(dwExStyle,
-			String::CString(pWindowClassName), // Class name
-			String::CString(pUIWnd->title()), // Title
+			Traits::CString<String>::Perform(pWindowClassName), // Class name
+			Traits::CString<String>::Perform(pUIWnd->title()), // Title
 			dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // Style
 			(int)pUIWnd->x(), (int)pUIWnd->y(), // Window Position
 			windowRect.right - windowRect.left, windowRect.bottom - windowRect.top,
@@ -296,7 +296,7 @@ namespace Windows
 		}
 
 		// Are We Able To Unregister Class
-		if (!UnregisterClass(String::CString(pWindowClassName), pHInstance))
+		if (!UnregisterClass(Traits::CString<String>::Perform(pWindowClassName), pHInstance))
 		{
 			MessageBox(NULL, "Could Not Unregister Class.", "Shutdown Error", MB_OK | MB_ICONINFORMATION);
 			pHInstance = NULL;
