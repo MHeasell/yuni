@@ -1,4 +1,5 @@
 
+#include "../../core/string.h"
 #include "wgl.h"
 
 #ifdef YUNI_WINDOWSYSTEM_MSW
@@ -40,7 +41,7 @@ namespace Gfx
 		// Prevent our display list from affecting other display lists
 		glPushAttrib(GL_LIST_BIT);
 		glListBase(pDisplayList - 32);
-		glCallLists(text.lengthUTF8(), GL_UNSIGNED_BYTE, String::CString(text));
+		glCallLists(text.length(), GL_UNSIGNED_BYTE, Traits::CString<String>::Perform(text));
 		glPopAttrib();
 	}
 
@@ -52,7 +53,7 @@ namespace Gfx
 		pFont = CreateFont(-(int)pSize, 0, 0, 0, pBold ? FW_BOLD : FW_NORMAL,
 			pItalic, false, false, DEFAULT_CHARSET, OUT_TT_PRECIS,
 			CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, FF_DONTCARE | DEFAULT_PITCH,
-			String::CString(pFace));
+			Traits::CString<String>::Perform(pFace));
 
 		HDC hDC = wglGetCurrentDC();
 		SelectObject(hDC, pFont);
