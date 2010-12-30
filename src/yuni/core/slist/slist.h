@@ -33,13 +33,13 @@ namespace Yuni
 		//! Value type (STL compliant)
 		typedef T value_type;
 		//! Reference
-		typedef typename Static::Remove::Reference<T>::Type& reference_type;
+		typedef T& reference_type;
 		//! Reference (const)
-		typedef const typename Static::Remove::Reference<T>::Type& const_reference_type;
+		typedef const T& const_reference_type;
 		//! Pointer
-		typedef typename Static::Remove::Reference<T>::Type* pointer_type;
+		typedef T* pointer_type;
 		//! Pointer (const)
-		typedef const typename Static::Remove::Reference<T>::Type* const_pointer_type;
+		typedef const T* const_pointer_type;
 
 		// Forward declaration for iterators
 		class Iterator;
