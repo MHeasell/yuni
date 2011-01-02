@@ -2,7 +2,7 @@
 #include "../directory.h"
 #include "commons.h"
 #include "../../customstring.h"
-
+#include "../file.h"
 
 namespace Yuni
 {
@@ -22,7 +22,7 @@ namespace Directory
 	{
 		if (len)
 		{
-			CustomString<>  norm;
+			String norm;
 			Yuni::Core::IO::Normalize(norm, path, len);
 
 			wchar_t* buffer = new wchar_t[norm.size() + 10];
@@ -111,6 +111,7 @@ namespace Directory
 	}
 
 # endif
+
 
 
 
