@@ -40,27 +40,22 @@ namespace Directory
 		using namespace Yuni::Core::IO::Directory;
 
 		// normalize paths
-		String fsrc(src, srclen);
-		Yuni::Core::IO::Normalize(fsrc, src, static_cast<unsigned int>(srclen));
+		String fsrc;
+		Yuni::Core::IO::Normalize(fsrc, src, srclen);
 		if (fsrc.empty())
 			return false;
 
-		String fdst(dst, dstlen);
-		Yuni::Core::IO::Normalize(fdst, dst, static_cast<unsigned int>(dstlen));
+		String fdst;
+		Yuni::Core::IO::Normalize(fdst, dst, dstlen);
 
 		// The list of files to copy
 		List list;
 		uint64 totalSize = 0;
 
 		// Adding the target folder, to create it if required
-		{
-			list.push_back();
-			InfoItem& info = list.back();
-			info.filename = fdst;
-			info.isFile   = false;
-			if (!onUpdate(cpsGatheringInformation, fdst, fdst, 0, list.size()))
-				return false;
-		}
+		if (!onUpdate(cpsGatheringInformation, fdst, fdst, 0, 1))
+			return false;
+		Yuni::Core::IO::Directory::Create(fdst);
 
 		{
 			Yuni::Core::IO::Directory::Info info(fsrc);
@@ -107,7 +102,7 @@ namespace Directory
 		Yuni::Core::IO::File::Stream toFile;
 
 		// A temporary buffer for copying files' contents
-		// 16k seems to be a good choice (better than smaller block size with used
+		// 16k seems to be a good choice (better than smaller block size when used
 		// in Virtual Machines)
 		enum { bufferSize = 8192 };
 		char* buffer = new char[bufferSize];
