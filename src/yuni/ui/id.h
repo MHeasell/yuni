@@ -1,17 +1,10 @@
-#ifndef __YUNI_PRIVATE_UI_ID_H__
-# define __YUNI_PRIVATE_UI_ID_H__
+#ifndef __YUNI_UI_ID_H__
+# define __YUNI_UI_ID_H__
 
 # include "../yuni.h"
 
 
-# define YUNI_UI_INVALID_ID  -9223372036854775807
-# define YUNI_UI_MIN_ID      -9223372036854775806
-# define YUNI_UI_MAX_ID      +9223372036854775808
-
-
 namespace Yuni
-{
-namespace Private
 {
 namespace UI
 {
@@ -22,7 +15,15 @@ namespace UI
 	class ID
 	{
 	public:
+		enum IDValues
+		{
+			InvalidID = -1,
+			MinID = 0
+		};
+
+	public:
 		typedef sint64  Type;
+		static const Type MaxID = sizeof (Type) - 1;
 
 	public:
 		//! Get a new free identifier
@@ -37,7 +38,6 @@ namespace UI
 
 
 } // namespace UI
-} // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_PRIVATE_UI_ID_H__
+#endif // __YUNI_UI_ID_H__

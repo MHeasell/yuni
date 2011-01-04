@@ -10,7 +10,7 @@ namespace UI
 {
 
 	inline IComponent::IComponent()
-		: pLocalID(Yuni::Private::UI::ID::New()),
+		: pLocalID(Yuni::UI::ID::New()),
 		pPosition(50, 50),
 		pWidth(50),
 		pHeight(50),
@@ -19,7 +19,7 @@ namespace UI
 
 
 	inline IComponent::IComponent(float width, float height)
-		: pLocalID(Yuni::Private::UI::ID::New()),
+		: pLocalID(Yuni::UI::ID::New()),
 		pPosition(50, 50),
 		pWidth((width > 0.f) ? width : 0.f),
 		pHeight((height > 0.f) ? height : 0.f),
@@ -28,7 +28,7 @@ namespace UI
 
 
 	inline IComponent::IComponent(float x, float y, float width, float height)
-		: pLocalID(Yuni::Private::UI::ID::New()),
+		: pLocalID(Yuni::UI::ID::New()),
 		pPosition(x, y),
 		pWidth((width > 0.f) ? width : 0.f),
 		pHeight((height > 0.f) ? height : 0.f),
@@ -38,7 +38,7 @@ namespace UI
 
 	template<class T>
 	inline IComponent::IComponent(const Point2D<T>& pos, float width, float height)
-		: pLocalID(Yuni::Private::UI::ID::New()),
+		: pLocalID(Yuni::UI::ID::New()),
 		pPosition(pos),
 		pWidth((width > 0.f) ? width : 0.f),
 		pHeight((height > 0.f) ? height : 0.f),
