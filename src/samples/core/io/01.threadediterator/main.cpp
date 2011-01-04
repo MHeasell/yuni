@@ -46,7 +46,7 @@ protected:
 		--pCounter;
 	}
 
-	virtual Flow onFile(const String&, const String&, const String& name, size_t size)
+	virtual Flow onFile(const String&, const String&, const String& name, uint64 size)
 	{
 		printSpaces();
 		std::cout << "  -  " << name << " (" << size << " bytes)" << std::endl;
