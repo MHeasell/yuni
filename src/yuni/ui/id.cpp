@@ -4,15 +4,13 @@
 
 namespace Yuni
 {
-namespace Private
-{
 namespace UI
 {
 
 	namespace // Anonymous
 	{
 
-		ID::Type NextID = YUNI_UI_MIN_ID;
+		ID::Type NextID = ID::MinID;
 
 		std::set<ID::Type> UsedIDs;
 
@@ -28,7 +26,7 @@ namespace UI
 		do
 		{
 			++NextID;
-			if (YUNI_UI_INVALID_ID == NextID)
+			if (InvalidID == NextID)
 			{
 				if (2 == ++count)
 					throw "All UI IDs are taken !";
@@ -46,5 +44,4 @@ namespace UI
 
 
 } // namespace UI
-} // namespace Private
 } // namespace Yuni

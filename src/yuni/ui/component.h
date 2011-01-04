@@ -43,7 +43,7 @@ namespace UI
 		typedef CustomString<64, false, false> ClassName;
 
 		//! Unique local identifier
-		typedef Yuni::Private::UI::ID::Type ID;
+		typedef Yuni::UI::ID::Type ID;
 
 
 	public:
