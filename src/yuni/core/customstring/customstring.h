@@ -139,24 +139,24 @@ namespace Yuni
 		//! A String vector
 		typedef std::vector<CustomStringType> Vector;
 		//! A String vector
-		typedef std::vector<typename CustomStringType::Ptr> VectorPtr;
+		typedef std::vector<Ptr> VectorPtr;
 		//! A String list
 		typedef std::list<CustomStringType> List;
 		//! A string list
-		typedef std::list<typename CustomStringType::Ptr> ListPtr;
+		typedef std::list<Ptr> ListPtr;
 
 		enum
 		{
 			//! Size for a single chunk
-			chunkSize  = AncestorType::chunkSize,
+			chunkSize      = AncestorType::chunkSize,
 			//! Invalid offset
-			npos       = (Size)(-1),
+			npos           = (Size)(-1),
 			//! A non-zero value if the string must be zero terminated
 			zeroTerminated = AncestorType::zeroTerminated,
 			//! A non-zero value if the string can be expanded
-			expandable = AncestorType::expandable,
+			expandable     = AncestorType::expandable,
 			//! True if the string is a string adapter (only read-only operations are allowed)
-			adapter  = (!chunkSize && expandable && !zeroTerminated),
+			adapter        = (!chunkSize && expandable && !zeroTerminated),
 		};
 		//! char Case
 		enum charCase

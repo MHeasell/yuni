@@ -200,10 +200,13 @@ namespace CustomString
 				if (count < 5)
 				{
 					if (count == 1)
-						return ('1' == s[0] || 'Y' == s[0] || 'y' == s[0] || 'O' == s[0] || 'o' == s[0] || 't' == s[0] || 'T' == s[0]);
+					{
+						return ('1' == s[0] || 'Y' == s[0] || 'y' == s[0] || 'O' == s[0]
+							||  'o' == s[0] || 't' == s[0] || 'T' == s[0]);
+					}
 
 					char buffer[5] = {0,0,0,0,0};
-					for (unsigned int i = 0; i < count; ++i)
+					for (unsigned int i = 0; i != count; ++i)
 						buffer[i] = static_cast<char>(::tolower(s[i]));
 					return (!strcmp("true", buffer) || !strcmp("on", buffer) || !strcmp("yes", buffer));
 				}
@@ -213,32 +216,36 @@ namespace CustomString
 	};
 
 
-	template<typename C>
-	struct AutoDetectBaseNumber
+
+
+	class AutoDetectBaseNumber
 	{
-		template<class U>
-		static const C* Value(const U& s, int& base)
+	public:
+		static const char* Value(const char* const s, unsigned int length, int& base)
 		{
 			switch (s[0])
 			{
 				case '#' :
 					{
 						base = 16;
-						return s.data() + 1;
+						return s + 1;
 					}
 				case '0' :
 					{
-						if (s.size() > 2 && (s[1] == 'x' || s[1] == 'X'))
+						if (length > 2 && (s[1] == 'x' || s[1] == 'X'))
 						{
 							base = 16;
-							return s.data() + 2;
+							return s + 2;
 						}
 					}
 			}
 			base = 10;
-			return s.data();
+			return s;
 		}
-	};
+
+	}; // class AutoDetectBaseNumber
+
+
 
 
 # define YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(TYPE,CONVERT)  \
@@ -248,6 +255,7 @@ namespace CustomString
 	public: \
 		typedef TYPE IntoType; \
 		enum { valid = 1 }; \
+		enum { bufferSize = 256u }; \
 		\
 		template<class StringT> static bool Perform(const StringT& s, IntoType& out) \
 		{ \
@@ -256,23 +264,60 @@ namespace CustomString
 				out = IntoType(); \
 				return true; \
 			} \
-			typedef typename StringT::value_type C; \
-			C* pend; \
+			char* pend; \
 			int base; \
-			const C* p = AutoDetectBaseNumber<C>::Value(s, base); \
-			out = (IntoType)::CONVERT(p, &pend, base); \
-			return (NULL != pend && '\0' == *pend); \
+			char buffer[bufferSize]; \
+			if (!StringT::zeroTerminated) \
+			{ \
+				if (s.size() < bufferSize) \
+				{ \
+					memcpy(buffer, s.data(), s.size()); \
+					buffer[s.size()] = '\0'; \
+				} \
+				else \
+				{ \
+					memcpy(buffer, s.data(), bufferSize - 1); \
+					buffer[bufferSize - 1] = '\0'; \
+				} \
+				const char* p = AutoDetectBaseNumber::Value(buffer, s.size(), base); \
+				out = (IntoType)::CONVERT(p, &pend, base); \
+				return (NULL != pend && '\0' == *pend); \
+			} \
+			else \
+			{ \
+				const char* p = AutoDetectBaseNumber::Value(s.c_str(), s.size(), base); \
+				out = (IntoType)::CONVERT(p, &pend, base); \
+				return (NULL != pend && '\0' == *pend); \
+			} \
 		} \
 		\
 		template<class StringT> static IntoType Perform(const StringT& s) \
 		{ \
 			if (!s) \
 				return IntoType(); \
-			typedef typename StringT::value_type C; \
-			C* pend; \
+			char* pend; \
 			int base; \
-			const C* p = AutoDetectBaseNumber<C>::Value(s, base); \
-			return (IntoType)::CONVERT(p, &pend, base); \
+			char buffer[bufferSize]; \
+			if (!StringT::zeroTerminated) \
+			{ \
+				if (s.size() < bufferSize) \
+				{ \
+					memcpy(buffer, s.data(), s.size()); \
+					buffer[s.size()] = '\0'; \
+				} \
+				else \
+				{ \
+					memcpy(buffer, s.data(), bufferSize - 1); \
+					buffer[bufferSize - 1] = '\0'; \
+				} \
+				const char* p = AutoDetectBaseNumber::Value(buffer, s.size(), base); \
+				return (IntoType)::CONVERT(p, &pend, base); \
+			} \
+			else \
+			{ \
+				const char* p = AutoDetectBaseNumber::Value(s.c_str(), s.size(), base); \
+				return (IntoType)::CONVERT(p, &pend, base); \
+			} \
 		} \
 	}
 
@@ -280,11 +325,11 @@ namespace CustomString
 
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint16, strtol);
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint32, strtol);
-	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint64, strtol);
+	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint64, strtoll);
 
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint16, strtoul);
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint32, strtoul);
-	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint64, strtoul);
+	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint64, strtoull);
 
 
 	# ifdef YUNI_HAS_LONG
@@ -306,20 +351,39 @@ namespace CustomString
 	{
 	public:
 		enum { valid = 1 };
+		enum { bufferSize = 256u };
 
 		template<class StringT> static bool Perform(const StringT& s, float& out)
 		{
-			typedef typename StringT::value_type C;
 			if (s.notEmpty())
 			{
-				C* pend;
+				char* pend;
+				const char* cstr;
+				char buffer[bufferSize];
+				if (!StringT::zeroTerminated)
+				{
+					if (s.size() < bufferSize)
+					{
+						memcpy(buffer, s.data(), s.size());
+						buffer[s.size()] = '\0';
+					}
+					else
+					{
+						memcpy(buffer, s.data(), bufferSize - 1);
+						buffer[bufferSize - 1] = '\0';
+					}
+					cstr = buffer;
+				}
+				else
+					cstr = s.c_str();
+
 				# ifdef YUNI_OS_MSVC
 				// Visual Studio does not support strtof
-				out = (float)strtod(s.c_str(), &pend);
+				out = (float)strtod(cstr, &pend);
 				# else
-				out = (float)strtof(s.c_str(), &pend);
+				out = (float)strtof(cstr, &pend);
 				# endif
-				return (NULL != pend && '\0' == *pend);
+				return (nullptr != pend && '\0' == *pend);
 			}
 			out = 0.f;
 			return true;
@@ -327,15 +391,33 @@ namespace CustomString
 
 		template<class StringT> static float Perform(const StringT& s)
 		{
-			typedef typename StringT::value_type C;
 			if (s.notEmpty())
 			{
-				C* pend;
+				char* pend;
+				const char* cstr;
+				char buffer[bufferSize];
+				if (!StringT::zeroTerminated)
+				{
+					if (s.size() < bufferSize)
+					{
+						memcpy(buffer, s.data(), s.size());
+						buffer[s.size()] = '\0';
+					}
+					else
+					{
+						memcpy(buffer, s.data(), bufferSize - 1);
+						buffer[bufferSize - 1] = '\0';
+					}
+					cstr = buffer;
+				}
+				else
+					cstr = s.c_str();
+
 				# ifdef YUNI_OS_MSVC
 				// Visual Studio does not support strtof
-				return (float)strtod(s.c_str(), &pend);
+				return (float)::strtod(cstr, &pend);
 				# else
-				return (float)strtof(s.c_str(), &pend);
+				return (float)::strtof(cstr, &pend);
 				# endif
 			}
 			return 0.f;
@@ -351,14 +433,33 @@ namespace CustomString
 	{
 	public:
 		enum { valid = 1 };
+		enum { bufferSize = 256u };
 
 		template<class StringT> static bool Perform(const StringT& s, double& out)
 		{
-			typedef typename StringT::value_type C;
 			if (s.notEmpty())
 			{
-				C* pend;
-				out = (double)strtod(s.c_str(), &pend);
+				char* pend;
+				const char* cstr;
+				char buffer[bufferSize];
+				if (!StringT::zeroTerminated)
+				{
+					if (s.size() < bufferSize)
+					{
+						memcpy(buffer, s.data(), s.size());
+						buffer[s.size()] = '\0';
+					}
+					else
+					{
+						memcpy(buffer, s.data(), bufferSize - 1);
+						buffer[bufferSize - 1] = '\0';
+					}
+					cstr = buffer;
+				}
+				else
+					cstr = s.c_str();
+
+				out = (double)::strtod(cstr, &pend);
 				return (NULL != pend && '\0' == *pend);
 			}
 			out = 0.;
@@ -367,11 +468,29 @@ namespace CustomString
 
 		template<class StringT> static double Perform(const StringT& s)
 		{
-			typedef typename StringT::value_type C;
 			if (s.notEmpty())
 			{
-				C* pend;
-				return (double)strtod(s.c_str(), &pend);
+				char* pend;
+				const char* cstr;
+				char buffer[bufferSize];
+				if (!StringT::zeroTerminated)
+				{
+					if (s.size() < bufferSize)
+					{
+						memcpy(buffer, s.data(), s.size());
+						buffer[s.size()] = '\0';
+					}
+					else
+					{
+						memcpy(buffer, s.data(), bufferSize - 1);
+						buffer[bufferSize - 1] = '\0';
+					}
+					cstr = buffer;
+				}
+				else
+					cstr = s.c_str();
+
+				return (double)::strtod(cstr, &pend);
 			}
 			return 0.;
 		}
