@@ -301,7 +301,7 @@ namespace Color
 
 	template<class T>
 	template<class R, class G, class B, class A>
-	inline RGB<T>::RGB(R r, G g, B b, A a)
+	inline RGB<T>::RGB(R r, G g, B b, A /* a */)
 		:red( Math::MinMaxEx<T>(r, static_cast<R>(lowerBound), static_cast<R>(upperBound))),
 		green(Math::MinMaxEx<T>(g, static_cast<G>(lowerBound), static_cast<G>(upperBound))),
 		blue( Math::MinMaxEx<T>(b, static_cast<B>(lowerBound), static_cast<B>(upperBound)))
@@ -319,7 +319,7 @@ namespace Color
 
 	template<class T>
 	template<class R, class G, class B, class A>
-	inline void RGB<T>::assign(R r, G g, B b, A a)
+	inline void RGB<T>::assign(R r, G g, B b, A /* a */)
 	{
 		red   = Math::MinMaxEx<T>(r, static_cast<R>(lowerBound), static_cast<R>(upperBound));
 		green = Math::MinMaxEx<T>(g, static_cast<G>(lowerBound), static_cast<G>(upperBound));
