@@ -105,16 +105,13 @@ namespace IO
 	{
 		if (p.empty())
 			out.clear();
+		const typename StringT2::size_type pos = (systemDependant)
+			? p.find_last_of(IO::Constant<char>::Separator)
+			: p.find_last_of(IO::Constant<char>::AllSeparators);
+		if (StringT2::npos == pos)
+			out.clear();
 		else
-		{
-			const typename StringT2::size_type pos = (systemDependant)
-				? p.find_last_of(IO::Constant<char>::Separator)
-				: p.find_last_of(IO::Constant<char>::AllSeparators);
-			if (StringT2::npos == pos)
-				out.clear();
-			else
-				out.assign(p, pos);
-		}
+			out.assign(p, pos);
 	}
 
 
@@ -124,16 +121,13 @@ namespace IO
 	{
 		if (p.notEmpty())
 			out.clear();
+		const typename StringT2::size_type pos = (systemDependant)
+			? p.find_last_of(IO::Constant<char>::Separator)
+			: p.find_last_of(IO::Constant<char>::AllSeparators);
+		if (StringT2::npos == pos)
+			out.clear();
 		else
-		{
-			const typename StringT2::size_type pos = (systemDependant)
-				? p.find_last_of(IO::Constant<char>::Separator)
-				: p.find_last_of(IO::Constant<char>::AllSeparators);
-			if (StringT2::npos == pos)
-				out.clear();
-			else
-				out.assign(p.c_str() +  pos + 1);
-		}
+			out.assign(p.c_str() +  pos + 1);
 	}
 
 
