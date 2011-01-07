@@ -13,7 +13,7 @@ namespace Local
 
 
 	inline IWindow::IWindow(const Yuni::UI::Window::Ptr& source, unsigned int bitDepth, bool fullScreen)
-		: pUIWnd(source), pBitDepth(bitDepth), pFullScreen(fullScreen), pClosing(false)
+		: pUIWnd(source), pBitDepth(bitDepth), pFullScreen(fullScreen)
 	{
 	}
 
@@ -26,7 +26,7 @@ namespace Local
 
 	inline bool IWindow::closing() const
 	{
-		return pClosing;
+		return pUIWnd->closing();
 	}
 
 
