@@ -59,7 +59,7 @@ namespace Windows
 		** \param wParam Additional Message Information
 		** \param lParam Additional Message Information
 		*/
-		LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+		LRESULT CALLBACK WindowMessageCallback(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			IWinGDIWindow* window = GetWindow(hWnd);
 			// Check for Windows messages
@@ -80,8 +80,6 @@ namespace Windows
 					{
 						if (window && !window->closing())
 							window->window()->close();
-						if (sWindowList.empty())
-							PostQuitMessage(0); // Send a Quit message
 						return 0;
 					}
 
@@ -137,7 +135,7 @@ namespace Windows
 		// Redraw On Size, And Own DC For Window.
 		wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 		// WndProc Handles Messages
-		wc.lpfnWndProc = (WNDPROC)WndProc;
+		wc.lpfnWndProc = (WNDPROC)WindowMessageCallback;
 		// No Extra Window Data
 		wc.cbClsExtra = 0;
 		// No Extra Window Data
@@ -286,7 +284,10 @@ namespace Windows
 			ShowCursor(true);
 		}
 
+		// Remove the window from the static list
 		RemoveWindow(pHWnd);
+		if (sWindowList.empty())
+			PostQuitMessage(0); // Send a Quit message
 
 		// Are We Able To Destroy The Window?
 		if (pHWnd && !DestroyWindow(pHWnd))
@@ -314,7 +315,8 @@ namespace Windows
 			// Have we received a Quit message?
 			if (msg.message == WM_QUIT)
 			{
-				pUIWnd->close();
+				if (!closing())
+					pUIWnd->close();
 			}
 			// If not, deal with window messages
 			else

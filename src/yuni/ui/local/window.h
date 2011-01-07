@@ -114,7 +114,6 @@ namespace Local
 
 		unsigned int pBitDepth;
 		bool pFullScreen;
-		bool pClosing;
 
 	}; // class IWindow
 
