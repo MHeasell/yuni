@@ -2,11 +2,12 @@
 # define __YUNI_UI_BUTTON_H__
 
 # include "../yuni.h"
-# include <map>
 # include "../thread/policy.h"
 # include "../core/smartptr.h"
 # include "../core/string.h"
 # include "control.h"
+
+
 
 namespace Yuni
 {
