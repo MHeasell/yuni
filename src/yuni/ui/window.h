@@ -155,9 +155,7 @@ namespace UI
 } // namespace UI
 } // namespace Yuni
 
-
 # include "application.h"
 # include "window.hxx"
-
 
 #endif // __YUNI_UI_WINDOW_H__
