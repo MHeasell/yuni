@@ -2880,9 +2880,9 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		return (AncestorType::size && AncestorType::size == Traits::Length<StringT,Size>::Value(rhs))
-			? Yuni::Private::CustomStringImpl::Equals(AncestorType::data, Traits::CString<StringT>::Perform(rhs), AncestorType::size)
-			: false;
+		return ((AncestorType::size == Traits::Length<StringT,Size>::Value(rhs))
+			&& (!AncestorType::size
+				|| Yuni::Private::CustomStringImpl::Equals(AncestorType::data, Traits::CString<StringT>::Perform(rhs), AncestorType::size)));
 	}
 
 
@@ -2894,10 +2894,9 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
 
-		return (AncestorType::size && AncestorType::size == Traits::Length<StringT,Size>::Value(rhs))
-			? Yuni::Private::CustomStringImpl::EqualsInsensitive(AncestorType::data, Traits::CString<StringT>::Perform(rhs),
-				AncestorType::size)
-			: false;
+		return ((AncestorType::size == Traits::Length<StringT,Size>::Value(rhs))
+			&& (!AncestorType::size
+				|| Yuni::Private::CustomStringImpl::EqualsInsensitive(AncestorType::data, Traits::CString<StringT>::Perform(rhs), AncestorType::size)));
 	}
 
 
