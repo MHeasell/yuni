@@ -21,7 +21,7 @@ namespace UI
 	** Defines dimension and position of the component,
 	** and various common behaviours.
 	*/
-	class IComponent
+	class YUNI_EXPORT IComponent
 		: public IEventObserver<IComponent, Policy::ObjectLevelLockable>
 	{
 	public:

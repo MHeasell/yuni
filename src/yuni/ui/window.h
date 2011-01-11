@@ -18,7 +18,7 @@ namespace UI
 	/*!
 	** \brief Abstraction of a window for graphic rendering
 	*/
-	class Window: public IControlContainer
+	class YUNI_EXPORT Window: public IControlContainer
 	{
 	public:
 		//! Smart pointer, inherited from the ancestor

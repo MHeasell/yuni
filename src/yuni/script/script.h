@@ -244,7 +244,7 @@ namespace Script
 		** \param[in] method The method to call in the script namespace
 		** \param[in] arg1 The first argument (and so on.) You can pass an empty Any as a
 		**			  value to mean the same thing as "nil" in Lua.
-		** \return True if the call was made without any runtime fatal error.
+		** \return True if the call was made without any runtime fatal error.	
 		*/
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH() = 0;
 		YUNI_SCRIPT_SCRIPT_DECLARE_CALL_WITH(YUNI_SCRIPT_SCRIPT_1_ANY) = 0;
@@ -296,12 +296,12 @@ namespace Script
 		** \param[in] callback A pointer to the C++ function to bind in the script.
 		** \return True if the function was successfully bound.
 		*/
-		template <class StringT, class FunctionT>
-		bool bind(const StringT& functionName, FunctionT funcPtr);
+		template <class FunctionT, typename U>
+		bool bind(const U& functionName, FunctionT funcPtr);
 
 
-		template <class StringT, class ClassT, class MemberT>
-		bool bind(const StringT& functionName, ClassT* object, MemberT member);
+		template <class ClassT, class MemberT, typename U>
+		bool bind(const U& functionName, ClassT* object, MemberT member);
 
 
 		/*!

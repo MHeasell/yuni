@@ -16,7 +16,7 @@ namespace UI
 	/*!
 	** \brief Virtual application. Can contain one or several windows.
 	*/
-	class Application: public IEventObserver<Application>
+	class YUNI_EXPORT Application: public IEventObserver<Application>
 	{
 	public:
 		//! Smart pointer

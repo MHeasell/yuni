@@ -54,7 +54,7 @@ namespace Job
 	** \see QueueService
 	** \ingroup Jobs
 	*/
-	class IJob : public Policy::ObjectLevelLockable<IJob>
+	class YUNI_EXPORT IJob : public Policy::ObjectLevelLockable<IJob>
 	{
 	public:
 		//! The most suitable smart pointer for the class

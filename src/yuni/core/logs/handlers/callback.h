@@ -17,7 +17,7 @@ namespace Logs
 	** \brief Log Handler: The standard output (cout & cerr)
 	*/
 	template<class NextHandler = NullHandler>
-	class Callback : public NextHandler
+	class YUNI_EXPORT Callback : public NextHandler
 	{
 	public:
 		enum Settings

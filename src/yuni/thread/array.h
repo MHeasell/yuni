@@ -25,7 +25,7 @@ namespace Thread
 	**   lot of time.
 	*/
 	template<class T>
-	class Array : public Policy::ObjectLevelLockable<Array<T> >
+	class YUNI_EXPORT Array : public Policy::ObjectLevelLockable<Array<T> >
 	{
 	public:
 		//! Itself
