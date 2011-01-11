@@ -17,7 +17,7 @@ namespace QueueService
 	/*!
 	** \brief Container for all jobs waiting to be executed
 	*/
-	class WaitingRoom
+	class YUNI_EXPORT WaitingRoom
 	{
 	public:
 		//! Type used for atomic flags

@@ -94,7 +94,7 @@ namespace Yuni
 	** \tparam P The prototype of the targetted function/member
 	*/
 	template<class P = void (), class Dummy = void>
-	class Bind
+	class YUNI_EXPORT Bind
 	{
 	public:
 		// This class can not be used like that. We must use one the specialization
@@ -154,7 +154,7 @@ namespace Yuni
 	** \brief Bind to a function/member with <%=generator.xArgumentsToStr(i)%> (Specialization)
 	*/
 	template<<%=tmpl[0]%>>
-	class Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>
+	class YUNI_EXPORT Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>
 	{
 	public:
 		//! The Bind Type

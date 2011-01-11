@@ -14,7 +14,7 @@ namespace WindowSystem
 	/*!
 	** \brief Mac OS X Cocoa implementation for a window system main loop
 	*/
-	class Cocoa: public IQueueService<Cocoa>
+	class YUNI_EXPORT Cocoa: public IQueueService<Cocoa>
 	{
 	public:
 		//! Static override for onLoop, called on each loop turn

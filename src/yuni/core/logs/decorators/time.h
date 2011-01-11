@@ -30,7 +30,7 @@ namespace Logs
 
 
 	template<class LeftType = NullDecorator>
-	class Time : public LeftType
+	class YUNI_EXPORT Time : public LeftType
 	{
 	public:
 		template<class Handler, class VerbosityType, class O, class StringT>

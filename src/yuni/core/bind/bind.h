@@ -95,7 +95,7 @@ namespace Yuni
 	** \tparam P The prototype of the targetted function/member
 	*/
 	template<class P = void (), class Dummy = void>
-	class Bind
+	class YUNI_EXPORT Bind
 	{
 	public:
 		// This class can not be used like that. We must use one the specialization
@@ -150,7 +150,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 0 argument (Specialization)
 	*/
 	template<class R>
-	class Bind<R (), void>
+	class YUNI_EXPORT Bind<R (), void>
 	{
 	public:
 		//! The Bind Type
@@ -482,7 +482,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 0 argument (Specialization)
 	*/
 	template<class R>
-	class Bind<R (*)(), void>
+	class YUNI_EXPORT Bind<R (*)(), void>
 	{
 	public:
 		//! The Bind Type
@@ -814,7 +814,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 0 argument (Specialization)
 	*/
 	template<class ClassT, class R>
-	class Bind<R (ClassT::*)(), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -1146,7 +1146,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 1 argument (Specialization)
 	*/
 	template<class R, class A0>
-	class Bind<R (A0), void>
+	class YUNI_EXPORT Bind<R (A0), void>
 	{
 	public:
 		//! The Bind Type
@@ -1478,7 +1478,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 1 argument (Specialization)
 	*/
 	template<class R, class A0>
-	class Bind<R (*)(A0), void>
+	class YUNI_EXPORT Bind<R (*)(A0), void>
 	{
 	public:
 		//! The Bind Type
@@ -1810,7 +1810,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 1 argument (Specialization)
 	*/
 	template<class ClassT, class R, class A0>
-	class Bind<R (ClassT::*)(A0), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -2142,7 +2142,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 2 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1>
-	class Bind<R (A0, A1), void>
+	class YUNI_EXPORT Bind<R (A0, A1), void>
 	{
 	public:
 		//! The Bind Type
@@ -2474,7 +2474,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 2 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1>
-	class Bind<R (*)(A0, A1), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1), void>
 	{
 	public:
 		//! The Bind Type
@@ -2806,7 +2806,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 2 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1>
-	class Bind<R (ClassT::*)(A0, A1), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -3138,7 +3138,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 3 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2>
-	class Bind<R (A0, A1, A2), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2), void>
 	{
 	public:
 		//! The Bind Type
@@ -3470,7 +3470,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 3 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2>
-	class Bind<R (*)(A0, A1, A2), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2), void>
 	{
 	public:
 		//! The Bind Type
@@ -3802,7 +3802,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 3 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2>
-	class Bind<R (ClassT::*)(A0, A1, A2), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -4134,7 +4134,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 4 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3>
-	class Bind<R (A0, A1, A2, A3), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3), void>
 	{
 	public:
 		//! The Bind Type
@@ -4466,7 +4466,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 4 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3>
-	class Bind<R (*)(A0, A1, A2, A3), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3), void>
 	{
 	public:
 		//! The Bind Type
@@ -4798,7 +4798,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 4 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -5130,7 +5130,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 5 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	class Bind<R (A0, A1, A2, A3, A4), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4), void>
 	{
 	public:
 		//! The Bind Type
@@ -5462,7 +5462,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 5 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	class Bind<R (*)(A0, A1, A2, A3, A4), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4), void>
 	{
 	public:
 		//! The Bind Type
@@ -5794,7 +5794,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 5 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -6126,7 +6126,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 6 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	class Bind<R (A0, A1, A2, A3, A4, A5), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5), void>
 	{
 	public:
 		//! The Bind Type
@@ -6458,7 +6458,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 6 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5), void>
 	{
 	public:
 		//! The Bind Type
@@ -6790,7 +6790,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 6 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -7122,7 +7122,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 7 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6), void>
 	{
 	public:
 		//! The Bind Type
@@ -7454,7 +7454,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 7 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>
 	{
 	public:
 		//! The Bind Type
@@ -7786,7 +7786,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 7 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -8118,7 +8118,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 8 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>
 	{
 	public:
 		//! The Bind Type
@@ -8450,7 +8450,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 8 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>
 	{
 	public:
 		//! The Bind Type
@@ -8782,7 +8782,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 8 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -9114,7 +9114,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 9 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>
 	{
 	public:
 		//! The Bind Type
@@ -9446,7 +9446,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 9 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>
 	{
 	public:
 		//! The Bind Type
@@ -9778,7 +9778,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 9 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -10110,7 +10110,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 10 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>
 	{
 	public:
 		//! The Bind Type
@@ -10442,7 +10442,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 10 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>
 	{
 	public:
 		//! The Bind Type
@@ -10774,7 +10774,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 10 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -11106,7 +11106,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 11 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>
 	{
 	public:
 		//! The Bind Type
@@ -11438,7 +11438,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 11 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>
 	{
 	public:
 		//! The Bind Type
@@ -11770,7 +11770,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 11 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -12102,7 +12102,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 12 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>
 	{
 	public:
 		//! The Bind Type
@@ -12434,7 +12434,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 12 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>
 	{
 	public:
 		//! The Bind Type
@@ -12766,7 +12766,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 12 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -13098,7 +13098,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 13 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>
 	{
 	public:
 		//! The Bind Type
@@ -13430,7 +13430,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 13 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>
 	{
 	public:
 		//! The Bind Type
@@ -13762,7 +13762,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 13 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -14094,7 +14094,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 14 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>
 	{
 	public:
 		//! The Bind Type
@@ -14426,7 +14426,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 14 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>
 	{
 	public:
 		//! The Bind Type
@@ -14758,7 +14758,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 14 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -15090,7 +15090,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 15 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>
 	{
 	public:
 		//! The Bind Type
@@ -15422,7 +15422,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 15 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>
 	{
 	public:
 		//! The Bind Type
@@ -15754,7 +15754,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 15 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>
 	{
 	public:
 		//! The Bind Type
@@ -16086,7 +16086,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 16 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>
+	class YUNI_EXPORT Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>
 	{
 	public:
 		//! The Bind Type
@@ -16418,7 +16418,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 16 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>
+	class YUNI_EXPORT Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>
 	{
 	public:
 		//! The Bind Type
@@ -16750,7 +16750,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 16 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>
+	class YUNI_EXPORT Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>
 	{
 	public:
 		//! The Bind Type

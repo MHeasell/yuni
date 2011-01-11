@@ -18,7 +18,7 @@ namespace Yuni
 	** \brief A linked list
 	*/
 	template<class T, class Alloc = None>
-	class LinkedList
+	class YUNI_EXPORT LinkedList
 	{
 	public:
 		//! Size type

@@ -103,7 +103,7 @@ namespace Yuni
 	** \tparam Chunk Size of a chunk
 	*/
 	template<typename C /* = char */, int Chunk /* = 80 */>
-	class StringBase
+	class YUNI_EXPORT StringBase
 	{
 	public:
 		//! Complete type for the string

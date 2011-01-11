@@ -23,7 +23,7 @@ namespace Logs
 	** \brief Log Handler: The standard output (cout & cerr)
 	*/
 	template<class NextHandler = NullHandler>
-	class StdCout : public NextHandler
+	class YUNI_EXPORT StdCout : public NextHandler
 	{
 	public:
 		enum Settings

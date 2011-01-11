@@ -18,7 +18,7 @@ namespace UI
 	/*!
 	** \brief Base class for all UI controls (viewable components)
 	*/
-	class IControl : public IComponent
+	class YUNI_EXPORT IControl : public IComponent
 	{
 	public:
 		//! Smart pointer

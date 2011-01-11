@@ -24,7 +24,7 @@ namespace Thread
 	**
 	** \see samples/threads/01.condition/main.cpp
 	*/
-	class Condition
+	class YUNI_EXPORT Condition
 	{
 	public:
 		//! The most suitable SmartPtr
