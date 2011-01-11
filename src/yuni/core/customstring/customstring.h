@@ -27,8 +27,6 @@
 # include "traits/vnsprintf.h"
 # include "traits/into.h"
 
-//! Default separators
-# define YUNI_SEPARATORS   " \t\n\r"
 
 
 

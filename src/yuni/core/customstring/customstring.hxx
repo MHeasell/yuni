@@ -3121,7 +3121,7 @@ namespace Yuni
 		if (empty()) // The string is empty, Nothing to do
 			return;
 
-		Size left = find_first_not_of(YUNI_SEPARATORS);
+		Size left = find_first_not_of(" \t\n\r");
 		if (left == npos)
 			return;
 
@@ -3157,7 +3157,7 @@ namespace Yuni
 
 		// Getting our key
 		key.assign(*this, equal - left, left);
-		key.trimRight(YUNI_SEPARATORS);
+		key.trimRight(" \t\n\r");
 		if (ignoreCase)
 			key.toLower();
 
@@ -3185,7 +3185,7 @@ namespace Yuni
 							value.append(*this, semicolon - leftValue, leftValue);
 						else
 							value.append(*this, AncestorType::size - leftValue, leftValue);
-						value.trimRight(YUNI_SEPARATORS);
+						value.trimRight(" \t\n\r");
 						break;
 					}
 			}
