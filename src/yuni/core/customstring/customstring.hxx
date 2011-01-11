@@ -457,6 +457,89 @@ namespace Yuni
 	}
 
 
+
+
+	namespace
+	{
+		/*!
+		** \brief Find the end of a sequence, started and terminated by a given character (usually a quote)
+		**
+		** This method is not a simple find(), because it takes care of escaped
+		** characters
+		**
+		** \param str The sequence
+		** \param quote The character to find, usually a quote
+		*/
+		template <class StringT>
+		typename StringT::Size
+		FindEndOfSequence(const char* str, const char quote, typename StringT::Size maxLen)
+		{
+			if (str)
+			{
+				bool escape = false;
+				typename StringT::Size pos(0);
+				while (pos < maxLen)
+				{
+					if ('\\' == str[pos])
+						escape = !escape;
+					else
+					{
+						if (quote == str[pos] && escape)
+							return pos;
+						escape = false;
+					}
+					++pos;
+				}
+			}
+			return StringT::npos;
+		}
+
+	} // anonymous namespace
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	void
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::assignFromEscapedCharacters(const char* const str,
+		Size maxLen, const Size offset)
+	{
+		clear();
+		if (!maxLen || offset >= maxLen)
+			return;
+
+		// Preparing the copy
+		AncestorType::size = maxLen - offset;
+		AncestorType::reserve(AncestorType::size);
+
+		// Browsing all char
+		Size retPos(0);
+		for (Size i = offset; i < maxLen; ++i, ++retPos)
+		{
+			if ('\\' == str[i] && i + 1 != maxLen)
+			{
+				switch (str[i + 1])
+				{
+					case 'r'  : AncestorType::data[retPos] = '\r'; break;
+					case 'n'  : AncestorType::data[retPos] = '\n'; break;
+					case '\\' : AncestorType::data[retPos] = '\\'; break;
+					case ';'  : AncestorType::data[retPos] = ';'; break;
+					case 'a'  : AncestorType::data[retPos] = '\a'; break;
+					case 'f'  : AncestorType::data[retPos] = '\f'; break;
+					case 't'  : AncestorType::data[retPos] = '\t'; break;
+					case '\'' : AncestorType::data[retPos] = '\''; break;
+					case '"'  : AncestorType::data[retPos] = '"'; break;
+					default   : AncestorType::data[retPos] = str[i]; continue;
+				}
+				--(AncestorType::size);
+				++i;
+				continue;
+			}
+			AncestorType::data[retPos] = str[i];
+		}
+		if (zeroTerminated)
+			AncestorType::data[AncestorType::size] = '\0';
+	}
+
+
+
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::clear()
@@ -3173,6 +3256,22 @@ namespace Yuni
 				case ';':
 					// Empty value
 					break;
+				case '"':
+				case '\'':
+					{
+						// Value enclosed in a string
+						++leftValue;
+						const typename AncestorType::Size next
+							= FindEndOfSequence<CustomStringType>(AncestorType::data + leftValue,
+												AncestorType::data[leftValue - 1],
+												AncestorType::size - leftValue);
+						if (next != npos)
+							value.assignFromEscapedCharacters(AncestorType::data, next, leftValue);
+						else
+							value.append(AncestorType::data + leftValue,
+										 AncestorType::size - leftValue);
+						break;
+					}
 				case '/':
 					// Empty value if we have a comment otherwise '/' is a valid entry
 					if (leftValue + 1 >= AncestorType::size || AncestorType::data[leftValue + 1] == '/')

@@ -528,6 +528,7 @@ namespace Yuni
 		void append(const StringT& s, const Size size, const Size offset);
 
 
+
 		// Equivalent to append, provided for compatibility issues with other
 		// Yuni containers
 		//! \see template<class U> append(const U&, const Size)
@@ -1897,6 +1898,18 @@ namespace Yuni
 		void decalOffset(Size count);
 
 	private:
+
+		/*!
+		** \brief Set the string from a sequence of escaped characters (O(N))
+		**
+		** \param str The original string
+		** \param maxLen The maximum length allowed
+		** \param offset The offset where to start from
+		*/
+		void assignFromEscapedCharacters(const char* const str, Size maxLen, const Size offset);
+
+
+	private:
 		// our friends !
 		template<class, class, int> friend class Private::CustomStringImpl::From;
 		template<class, class> friend class Yuni::Extension::CustomString::Append;
@@ -1904,6 +1917,7 @@ namespace Yuni
 		template<class, class> friend class Yuni::Extension::CustomString::Fill;
 		template<class, bool>  friend struct Private::CustomStringImpl::AdapterAssign;
 		template<class, bool>  friend struct Private::CustomStringImpl::Consume;
+		template<unsigned int, bool, bool> friend class CustomString;
 
 	}; // class CustomString
 
