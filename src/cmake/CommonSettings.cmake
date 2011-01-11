@@ -21,7 +21,7 @@ string(REPLACE "/CommonSettings.cmake" "" CurrentFolder "${CurrentFolder}")
 #
 # Detect Special Instructions Set (SSE, MMX...)
 #
-Include("${CurrentFolder}/DetectInstructionsSets.cmake")
+include("${CurrentFolder}/DetectInstructionsSets.cmake")
 
 if(NOT WIN32)
 	set(CMAKE_CXX_FLAGS_RELEASE         "-O3 -fomit-frame-pointer -Wall  -Wextra -mfpmath=sse -msse -msse2 -Wuninitialized -Wunused-parameter -Winit-self -Wwrite-strings -D_FILE_OFFSET_BITS=64")
@@ -34,9 +34,9 @@ if(MINGW)
 	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-mthreads -Wall -Wextra -Wconversion -g2 -Woverloaded-virtual -Wwrite-strings")
 endif()
 if(MSVC)
-	set(CMAKE_CXX_FLAGS_RELEASE         "/Ox /Ob2 /Ot /O2 /Oy /MD /GS- /Gy /arch:SSE2")
-	set(CMAKE_CXX_FLAGS_DEBUG           "/GR /Ob1 /Ot /MDd /fp:except /W3")
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "/Ox /Ob2 /Ot /O2 /Oy /MDd /GS- /Gy")
+	set(CMAKE_CXX_FLAGS_RELEASE         "/EHsc /Ox /Ob2 /Ot /O2 /Oy /MD /GS- /Gy /arch:SSE2")
+	set(CMAKE_CXX_FLAGS_DEBUG           "/EHsc /GR /Ob1 /Ot /MDd /fp:except /W3")
+	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "/EHsc /Ox /Ob2 /Ot /O2 /Oy /MDd /GS- /Gy")
 endif()
 if(APPLE)
 	set(CMAKE_CXX_FLAGS_DEBUG           "${CMAKE_CXX_FLAGS_DEBUG} -gfull -fvisibility=hidden")
@@ -76,7 +76,7 @@ endif()
 #
 # Extra - Bundles
 #
-SET(MACOSX_BUNDLE_COPYRIGHT "Yuni Framework - 2010")
+set(MACOSX_BUNDLE_COPYRIGHT "Yuni Framework - 2011")
 
 
 if(APPLE)
