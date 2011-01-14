@@ -311,12 +311,12 @@ namespace CustomString
 					buffer[bufferSize - 1] = '\0'; \
 				} \
 				const char* p = AutoDetectBaseNumber::Value(buffer, s.size(), base); \
-				return (IntoType)::CONVERT(p, &pend, base); \
+				return static_cast<IntoType>(::CONVERT(p, &pend, base)); \
 			} \
 			else \
 			{ \
 				const char* p = AutoDetectBaseNumber::Value(s.c_str(), s.size(), base); \
-				return (IntoType)::CONVERT(p, &pend, base); \
+				return static_cast<IntoType>(::CONVERT(p, &pend, base)); \
 			} \
 		} \
 	}
@@ -325,11 +325,19 @@ namespace CustomString
 
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint16, strtol);
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint32, strtol);
+	# ifdef YUNI_OS_WINDOWS
+	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint64, _strtoi64);
+	# else
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint64, strtoll);
+	# endif
 
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint16, strtoul);
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint32, strtoul);
+	# ifdef YUNI_OS_WINDOWS
+	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint64, _strtoui64);
+	# else
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint64, strtoull);
+	# endif
 
 
 	# ifdef YUNI_HAS_LONG
