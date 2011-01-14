@@ -38,23 +38,6 @@ namespace Yuni
 			return 0;
 		}
 
-		/*!
-		** \brief Equality comparison with any type of pointer
-		*/
-		template<class T>
-		bool operator == (const T* ptr) const
-		{
-			return !ptr;
-		}
-
-		/*!
-		** \brief Difference comparison with any type of pointer
-		*/
-		template<class T>
-		bool operator != (const T* ptr) const
-		{
-			return !(!ptr);
-		}
 
 	private:
 		void operator&() const;  /* Can't take address of nullptr */
