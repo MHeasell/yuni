@@ -40,7 +40,7 @@ namespace Thread
 	** destroyed when stopped by the method stop() (or when the object is
 	** destroyed too).
 	*/
-	class YUNI_EXPORT IThread : public Policy::ObjectLevelLockable<IThread>
+	class IThread : public Policy::ObjectLevelLockable<IThread>
 	{
 	public:
 		//! The threading policy

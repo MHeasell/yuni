@@ -24,7 +24,7 @@ namespace UTF8
 	};
 
 
-	class YUNI_EXPORT Char
+	class Char
 	{
 	public:
 		/*!

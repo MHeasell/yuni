@@ -14,7 +14,7 @@ namespace WindowSystem
 	/*!
 	** \brief X11 implementation for a window system main loop
 	*/
-	class YUNI_EXPORT  X11: public IQueueService<X11>
+	class  X11: public IQueueService<X11>
 	{
 	public:
 		//! Static override for onLoop, called on each loop turn

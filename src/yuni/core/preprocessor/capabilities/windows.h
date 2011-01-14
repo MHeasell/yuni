@@ -20,6 +20,7 @@
 /* Visual Studio */
 #	ifdef _MSC_VER
 #		define YUNI_OS_MSVC
+#		define YUNI_MSVC
 #		define YUNI_COMPILER_NAME "Microsoft Visual C++"
 #	endif
 /* Borland Compiler */

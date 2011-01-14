@@ -15,7 +15,7 @@ namespace Yuni
 	**
 	** \ingroup Threads
 	*/
-	class YUNI_EXPORT Mutex
+	class Mutex
 	{
 	public:
 		/*!

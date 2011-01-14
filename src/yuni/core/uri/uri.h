@@ -123,7 +123,7 @@ namespace Yuni
 	**
 	** \bug This implementation does not handle at all escaped caracters
 	*/
-	class YUNI_EXPORT Uri
+	class Uri
 	{
 	public:
 		//! \name Constructors

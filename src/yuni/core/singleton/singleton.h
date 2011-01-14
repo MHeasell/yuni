@@ -32,7 +32,7 @@ namespace Yuni
 		template <class> class CreationT = Policy::Creation::EmptyConstructor,
 		template <class> class LifetimeT = Policy::Lifetime::Normal,
 		template <class> class ThreadingT = Policy::ClassLevelLockable>
-	class YUNI_EXPORT Singleton : public ThreadingT<Singleton<T, CreationT, LifetimeT, ThreadingT> >
+	class Singleton : public ThreadingT<Singleton<T, CreationT, LifetimeT, ThreadingT> >
 	{
 	public:
 		//! Stored singleton type

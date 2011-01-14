@@ -17,7 +17,7 @@ namespace UI
 	/*!
 	** \brief Virtual desktop meant to receive one or several applications
 	*/
-	class YUNI_EXPORT Desktop: public IEventObserver<Desktop>
+	class Desktop: public IEventObserver<Desktop>
 	{
 	public:
 		//! Smart pointer
