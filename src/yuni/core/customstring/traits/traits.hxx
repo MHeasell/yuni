@@ -53,7 +53,7 @@ namespace CustomStringImpl
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::adapt(const char* const cstring)
 	{
-		data = cstring;
+		data = const_cast<char*>(cstring);
 		capacity = size = (data ? ::strlen(data) : 0);
 	}
 
@@ -61,7 +61,7 @@ namespace CustomStringImpl
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::adapt(const char* const cstring, Size length)
 	{
-		data = cstring;
+		data = const_cast<char*>(cstring);
 		capacity = size = length;
 	}
 
