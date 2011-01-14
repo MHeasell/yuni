@@ -405,6 +405,7 @@ namespace CustomString
 				out = tmp;
 			else
 				out = nullptr;
+			return true;
 		}
 
 		template<class StringT> static TargetType Perform(const StringT& s)
