@@ -143,14 +143,6 @@
 
 
 
-/* export */
-# if defined(_MSC_VER)
-#	define YUNI_EXPORT   __declspec(dllexport)
-# endif
-# ifndef YUNI_EXPORT
-#	define YUNI_EXPORT
-# endif
-
 
 
 
@@ -264,19 +256,31 @@
 # endif
 
 
-/* YUNI_LIB_EXPORT | YUNI_LIB_IMPORT */
-# ifdef YUNI_OS_MSVC
-#	define YUNI_LIB_EXPORT  __declspec(dllexport)
-#	define YUNI_LIB_IMPORT  __declspec(dllimport)
-# else
-#	ifdef YUNI_OS_MACOS
-#		define YUNI_LIB_EXPORT __attribute__((visibility("default")))
-#		define YUNI_LIB_IMPORT
-#	else
-#		define YUNI_LIB_EXPORT
-#		define YUNI_LIB_IMPORT
+/* Force the define YUNI_DYNAMIC_LIBRARY (Visual Studio) */
+# if !defined(YUNI_DYNAMIC_LIBRARY) && defined(_WINDLL)
+#	define YUNI_DYNAMIC_LIBRARY
+#	define YUNI_DYNAMIC_LIBRARY_EXPORT
+# endif
+
+# ifdef YUNI_DYNAMIC_LIBRARY
+#	ifdef YUNI_OS_MSVC
+#		ifdef YUNI_DYNAMIC_LIBRARY_EXPORT
+#			define YUNI_DECL             __declspec(dllexport)
+#			define YUNI_EXPIMP_TEMPLATE
+#		else
+#			define YUNI_DECL             __declspec(dllimport)
+#			define YUNI_EXPIMP_TEMPLATE  extern
+#		endif
 #	endif
 # endif
+/* Fallback to empty */
+# ifndef YUNI_DECL
+#	define YUNI_DECL
+# endif
+# ifndef YUNI_EXPIMP_TEMPLATE
+#	define YUNI_EXPIMP_TEMPLATE
+# endif
+
 
 
 #endif /* __YUNI_PREPROCESSOR_OS_DETECTION_H__ */

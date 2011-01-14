@@ -18,7 +18,7 @@ namespace Yuni
 	**
 	** \ingroup Core
 	*/
-	class YUNI_EXPORT Version
+	class Version
 	{
 	public:
 		/*!

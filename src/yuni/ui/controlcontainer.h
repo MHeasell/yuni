@@ -17,7 +17,7 @@ namespace UI
 	**
 	** Works as a tree, using COM reference counted policy for smart pointers.
 	*/
-	class YUNI_EXPORT IControlContainer : public IControl
+	class IControlContainer : public IControl
 	{
 	public:
 		//! Smart pointer

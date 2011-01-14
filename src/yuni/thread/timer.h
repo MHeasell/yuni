@@ -51,7 +51,7 @@ namespace Thread
 	** }
 	** \endcode
 	*/
-	class YUNI_EXPORT Timer : public IThread
+	class Timer : public IThread
 	{
 	public:
 		//! The Threading policy

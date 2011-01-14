@@ -149,7 +149,7 @@ namespace Core
 		template<class> class ChckP  = Policy::Checking::None,       // Checking policy
 		class ConvP			         = Policy::Conversion::Allow     // Conversion policy
 		>
-	class YUNI_EXPORT TreeN : public TP< TreeN<T,TP,ChckP,ConvP> >
+	class TreeN : public TP< TreeN<T,TP,ChckP,ConvP> >
 	{
 	public:
 		//! The real type

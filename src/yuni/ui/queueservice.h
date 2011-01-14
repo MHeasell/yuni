@@ -18,7 +18,7 @@ namespace UI
 	** \brief UI queue service
 	*/
 	template<class ChildT>
-	class YUNI_EXPORT IQueueService
+	class IQueueService
 		: public Core::EventLoop::IEventLoop<ChildT,
 		Core::EventLoop::Flow::Continuous, Core::EventLoop::Statistics::None, false>,
 		public IEventObserver<IQueueService<ChildT> >

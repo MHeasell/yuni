@@ -33,7 +33,7 @@ namespace Yuni
 	**
 	** \ingroup Core
 	*/
-	class YUNI_EXPORT Variant
+	class Variant
 	{
 	public:
 		//! \name Constructors

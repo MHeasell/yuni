@@ -17,7 +17,7 @@ namespace Jobs
 	** \brief A single thread for a queue service
 	*/
 	template<class SchedulerT>
-	class YUNI_EXPORT QueueThread : public Yuni::Thread::IThread
+	class QueueThread : public Yuni::Thread::IThread
 	{
 	public:
 		//! QueueThread

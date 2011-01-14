@@ -14,7 +14,7 @@ struct Model
 	class ByteIterator;
 
 
-	class YUNI_EXPORT NullIterator
+	class NullIterator
 	{
 	public:
 		//! Type of the original string
@@ -105,7 +105,7 @@ struct Model
 
 
 
-	class YUNI_EXPORT UTF8Iterator
+	class UTF8Iterator
 	{
 	public:
 		//! Type of the original string
@@ -278,7 +278,7 @@ struct Model
 
 
 
-	class YUNI_EXPORT ByteIterator
+	class ByteIterator
 	{
 	public:
 		//! Type of the original string

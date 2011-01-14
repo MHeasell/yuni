@@ -65,7 +65,7 @@ namespace Yuni
 	** \tparam Alloc An allocator. Actually not used but here for compatibility with the STL
 	*/
 	template<typename T, class Alloc = std::allocator<typename Static::Remove::Const<T>::Type> >
-	class YUNI_EXPORT Nullable
+	class Nullable
 	{
 	public:
 		//! The type of object, T, stored in the container
