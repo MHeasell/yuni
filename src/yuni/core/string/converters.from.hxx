@@ -373,7 +373,7 @@ namespace StringImpl
 		template<int Chnk>
 		static inline void Append(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str)
 		{
-			assert((void*)&s != (const void*)&str && "undefined behavior");
+			assert(reinterpret_cast<const void*>(&s) != reinterpret_cast<const void*>(&str) && "undefined behavior");
 			if (str.pSize)
 				From<C*>::AppendRaw(s, str.pPtr, str.pSize);
 		}
@@ -381,7 +381,7 @@ namespace StringImpl
 		template<int Chnk>
 		static inline void Append(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str, const typename StringBase<C,Chnk>::Size len)
 		{
-			assert((void*)&s != (const void*)&str && "undefined behavior");
+			assert(reinterpret_cast<const void*>(&s) != reinterpret_cast<const void*>(&str) && "undefined behavior");
 			if (str.pSize && len)
 				From<C*>::AppendRaw(s, str.pPtr, Private::StringImpl::Min(str.pSize, len));
 		}
@@ -390,7 +390,7 @@ namespace StringImpl
 		static inline void Append(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str, const typename StringBase<C,Chnk>::Size offset,
 			const typename StringBase<C,Chnk>::Size len)
 		{
-			assert((void*)&s != (const void*)&str && "undefined behavior");
+			assert(reinterpret_cast<const void*>(&s) != reinterpret_cast<const void*>(&str) && "undefined behavior");
 			if (offset < str.pSize && len)
 				From<C*>::AppendRaw(s, str.pPtr + offset, Private::StringImpl::Min(str.pSize - offset, len));
 		}
@@ -400,7 +400,7 @@ namespace StringImpl
 		static inline void Insert(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str,
 			const typename StringBase<C,Chnk>::Size offset)
 		{
-			assert((void*)&s != (const void*)&str && "undefined behavior");
+			assert(reinterpret_cast<const void*>(&s) != reinterpret_cast<const void*>(&str) && "undefined behavior");
 			if (str.pSize)
 				From<C*>::InsertRaw(s, str.pPtr, str.pSize, offset);
 		}
@@ -409,7 +409,7 @@ namespace StringImpl
 		static inline void Insert(StringBase<C,Chnk>& s, const StringBase<C,Chnk1>& str,
 			const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
 		{
-			assert((void*)&s != (const void*)&str && "undefined behavior");
+			assert(reinterpret_cast<const void*>(&s) != reinterpret_cast<const void*>(&str) && "undefined behavior");
 			if (str.pSize && len)
 				From<C*>::InsertRaw(s, str.pPtr, (str.pSize < len) ? str.pSize : len, offset);
 		}
@@ -433,7 +433,7 @@ namespace StringImpl
 		template<int Chnk>
 		static inline void Append(StringBase<C,Chnk>& s, const SourceType& str, const typename StringBase<C,Chnk>::Size len)
 		{
-			assert((void*)&s != (const void*)&str && "undefined behavior");
+			assert(reinterpret_cast<const void*>(&s) != reinterpret_cast<const void*>(&str) && "undefined behavior");
 			if (str.size() && len)
 				From<C*>::AppendRaw(s, str.c_str(), Private::StringImpl::Min<size_t>(str.size(), len));
 		}
@@ -442,7 +442,7 @@ namespace StringImpl
 		static inline void Append(StringBase<C,Chnk>& s, const SourceType& str, const typename StringBase<C,Chnk>::Size offset,
 			const typename StringBase<C,Chnk>::Size len)
 		{
-			assert((void*)&s != (const void*)&str && "undefined behavior");
+			assert(reinterpret_cast<const void*>(&s) != reinterpret_cast<const void*>(&str) && "undefined behavior");
 			if (offset < str.size() && len)
 				From<C*>::AppendRaw(s, str.c_str() + offset, Private::StringImpl::Min<size_t>(str.size() - offset, len));
 		}
@@ -452,7 +452,7 @@ namespace StringImpl
 		static inline void Insert(StringBase<C,Chnk>& s, const SourceType& str,
 			const typename StringBase<C,Chnk>::Size offset)
 		{
-			assert((void*)&s != (const void*)&str && "undefined behavior");
+			assert(reinterpret_cast<const void*>(&s) != reinterpret_cast<const void*>(&str) && "undefined behavior");
 			if (str.size())
 				From<C*>::InsertRaw(s, str.c_str(), str.size(), offset);
 		}
@@ -461,7 +461,7 @@ namespace StringImpl
 		static inline void Insert(StringBase<C,Chnk>& s, const SourceType& str,
 			const typename StringBase<C,Chnk>::Size len, const typename StringBase<C,Chnk>::Size offset)
 		{
-			assert((void*)&s != (const void*)&str && "undefined behavior");
+			assert(reinterpret_cast<void*>(&s) != reinterpret_cast<const void*>(&str) && "undefined behavior");
 			if (str.size() && len)
 				From<C*>::InsertRaw(s, str.c_str(), (str.size() < len) ? str.size() : len, offset);
 		}

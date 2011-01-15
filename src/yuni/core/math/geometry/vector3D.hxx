@@ -28,26 +28,34 @@ namespace Yuni
 	template<typename T>
 	template<typename U>
 	inline Vector3D<T>::Vector3D(const Vector3D<U>& rhs)
-		:x((T)rhs.x), y((T)rhs.y), z((T)rhs.z)
+		:x(static_cast<T>(rhs.x)),
+		y(static_cast<T>(rhs.y)),
+		z(static_cast<T>(rhs.z))
 	{}
 
 
 	template<typename T>
 	template<typename U, typename V, typename W>
 	inline Vector3D<T>::Vector3D(const U x1, const V y1, const W z1)
-		:x((T)x1), y((T)y1), z((T)z1)
+		:x(static_cast<T>(x1)),
+		y(static_cast<T>(y1)),
+		z(static_cast<T>(z1))
 	{}
 
 	template<typename T>
 	template<typename U, typename V>
 	inline Vector3D<T>::Vector3D(const Point3D<U>& origin, const Point3D<V>& end)
-		:x((T)(end.x - origin.x)), y((T)(end.y - origin.y)), z((T)(end.z - origin.z))
+		:x(static_cast<T>((end.x - origin.x))),
+		y(static_cast<T>((end.y - origin.y))),
+		z(static_cast<T>((end.z - origin.z)))
 	{}
 
 	template<typename T>
 	inline Vector3D<T>& Vector3D<T>::reset()
 	{
-		x = y = z = T();
+		x = T();
+		y = T();
+		z = T();
 		return *this;
 	}
 
@@ -56,9 +64,9 @@ namespace Yuni
 	template<typename U>
 	inline void Vector3D<T>::translate(const U v)
 	{
-		x += (T)v;
-		y += (T)v;
-		z += (T)v;
+		x += static_cast<T>(v);
+		y += static_cast<T>(v);
+		z += static_cast<T>(v);
 	}
 
 
@@ -66,18 +74,18 @@ namespace Yuni
 	template<typename U, typename V, typename W>
 	inline void Vector3D<T>::translate(const U x1, const V y1, const W z1)
 	{
-		x += (T)x1;
-		y += (T)y1;
-		z += (T)z1;
+		x += static_cast<T>(x1);
+		y += static_cast<T>(y1);
+		z += static_cast<T>(z1);
 	}
 
 	template<typename T>
 	template<typename U>
 	inline void Vector3D<T>::translate(const Vector3D<U>& v)
 	{
-		x += (T)v.x;
-		y += (T)v.y;
-		z += (T)v.z;
+		x += static_cast<T>(v.x);
+		y += static_cast<T>(v.y);
+		z += static_cast<T>(v.z);
 	}
 
 
@@ -85,9 +93,9 @@ namespace Yuni
 	template<typename U>
 	inline Vector3D<T>& Vector3D<T>::mean(const Vector3D<U>& p)
 	{
-		x = (T) ((x + (T)p.x) / 2.);
-		y = (T) ((y + (T)p.y) / 2.);
-		z = (T) ((z + (T)p.z) / 2.);
+		x = static_cast<T>((x + static_cast<T>(p.x)) / 2.);
+		y = static_cast<T>((y + static_cast<T>(p.y)) / 2.);
+		z = static_cast<T>((z + static_cast<T>(p.z)) / 2.);
 		return *this;
 	}
 
@@ -96,9 +104,9 @@ namespace Yuni
 	template<typename U, typename V>
 	inline Vector3D<T>& Vector3D<T>::mean(const Vector3D<U>& p1, const Vector3D<V>& p2)
 	{
-		x = (T) ((p1.x + p2.x) / 2.0f);
-		y = (T) ((p1.y + p2.y) / 2.0f);
-		z = (T) ((p1.z + p2.z) / 2.0f);
+		x = static_cast<T>(((p1.x + p2.x) / 2.0f));
+		y = static_cast<T>(((p1.y + p2.y) / 2.0f));
+		z = static_cast<T>(((p1.z + p2.z) / 2.0f));
 		return *this;
 	}
 
@@ -108,9 +116,9 @@ namespace Yuni
 	template<typename U, typename V, typename W>
 	inline void Vector3D<T>::operator () (const U x1, const V y1, const W z1)
 	{
-		x = (T)x1;
-		y = (T)y1;
-		z = (T)z1;
+		x = static_cast<T>(x1);
+		y = static_cast<T>(y1);
+		z = static_cast<T>(z1);
 	}
 
 
@@ -118,9 +126,9 @@ namespace Yuni
 	template<typename U>
 	inline void Vector3D<T>::operator () (const Vector3D<U>& v)
 	{
-		x = (T)v.x;
-		y = (T)v.y;
-		z = (T)v.z;
+		x = static_cast<T>(v.x);
+		y = static_cast<T>(v.y);
+		z = static_cast<T>(v.z);
 	}
 
 
@@ -219,9 +227,9 @@ namespace Yuni
 	template<typename U>
 	inline Vector3D<T>& Vector3D<T>::operator += (const Vector3D<U>& p)
 	{
-		x += (T)p.x;
-		y += (T)p.y;
-		z += (T)p.z;
+		x += static_cast<T>(p.x);
+		y += static_cast<T>(p.y);
+		z += static_cast<T>(p.z);
 		return (*this);
 	}
 
@@ -238,9 +246,9 @@ namespace Yuni
 	template<typename U>
 	inline Vector3D<T>& Vector3D<T>::operator -= (const Vector3D<U>& p)
 	{
-		x -= (T)p.x;
-		y -= (T)p.y;
-		z -= (T)p.z;
+		x -= static_cast<T>(p.x);
+		y -= static_cast<T>(p.y);
+		z -= static_cast<T>(p.z);
 		return (*this);
 	}
 
@@ -271,9 +279,9 @@ namespace Yuni
 	template<typename U>
 	inline Vector3D<T>& Vector3D<T>::operator *= (const Vector3D<U>& p)
 	{
-		x -= (T)p.x;
-		y -= (T)p.y;
-		z -= (T)p.z;
+		x -= static_cast<T>(p.x);
+		y -= static_cast<T>(p.y);
+		z -= static_cast<T>(p.z);
 		return (*this);
 	}
 
@@ -281,11 +289,13 @@ namespace Yuni
 	template<typename U>
 	inline Vector3D<T>& Vector3D<T>::operator /= (const Vector3D<U>& p)
 	{
-		x -= (T)p.x;
-		y -= (T)p.y;
-		z -= (T)p.z;
+		x -= static_cast<T>(p.x);
+		y -= static_cast<T>(p.y);
+		z -= static_cast<T>(p.z);
 		return (*this);
 	}
+
+
 
 
 

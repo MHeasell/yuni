@@ -300,7 +300,7 @@ namespace IO
 		}
 
 		// The length of the input
-		if (inLength == (unsigned int)-1)
+		if (inLength == static_cast<unsigned int>(-1))
 			inLength = Traits::Length<StringT2,unsigned int>::Value(in);
 		if (!inLength)
 		{
@@ -505,7 +505,7 @@ namespace IO
 		if (count)
 		{
 			for (unsigned int j = 0; j != count; ++j)
-				out.append((const char*)(input + stack[j].cursor), stack[j].length);
+				out.append(input + stack[j].cursor, stack[j].length);
 		}
 
 		// Releasing the memory

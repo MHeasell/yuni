@@ -39,7 +39,7 @@ namespace Script
 			Private::ScriptImpl::Bind::IBinding* intF = new Private::ScriptImpl::Bind::Binding<BindTypeT>(b);
 
 			// TODO: check return value
-			if (!internalBindWL(functionName, intF))
+			if (!internalBindWL(String::CString(functionName), intF))
 			{
 				delete intF;
 				return false;
@@ -65,7 +65,7 @@ namespace Script
 			Private::ScriptImpl::Bind::IBinding* intF = new Private::ScriptImpl::Bind::Binding<BindTypeT>(b);
 
 			// TODO: check return value
-			if (!internalBindWL(functionName, intF))
+			if (!internalBindWL(String::CString(functionName), intF))
 			{
 				delete intF;
 				return false;

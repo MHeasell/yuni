@@ -61,7 +61,7 @@ namespace Directory
 			Yuni::Core::IO::Directory::Info info(fsrc);
 			if (recursive)
 			{
-				const Yuni::Core::IO::Directory::Info::recursive_iterator end = info.recursive_end();
+				const Yuni::Core::IO::Directory::Info::recursive_iterator& end = info.recursive_end();
 				for (Yuni::Core::IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != end; ++i)
 				{
 					list.push_back();
@@ -75,7 +75,7 @@ namespace Directory
 			}
 			else
 			{
-				const Yuni::Core::IO::Directory::Info::recursive_iterator end = info.recursive_end();
+				const Yuni::Core::IO::Directory::Info::recursive_iterator& end = info.recursive_end();
 				for (Yuni::Core::IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != end; ++i)
 				{
 					list.push_back();

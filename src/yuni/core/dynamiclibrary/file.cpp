@@ -108,7 +108,7 @@ namespace DynamicLibrary
 		**/
 		bool FindLibrary(String& out, const String::Vector& searchPaths, const String& filename)
 		{
-			const String::Vector::const_iterator end = searchPaths.end();
+			const String::Vector::const_iterator& end = searchPaths.end();
 			for (String::Vector::const_iterator i = searchPaths.begin(); i != end; ++i)
 			{
 				if (FindLibraryFile(out, *i, filename, "lib") || FindLibraryFile(out, *i, filename, ""))
