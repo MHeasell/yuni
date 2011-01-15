@@ -2972,7 +2972,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -2997,7 +2997,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3031,7 +3031,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3056,7 +3056,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3090,7 +3090,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3115,7 +3115,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3149,7 +3149,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3174,7 +3174,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3208,7 +3208,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3233,7 +3233,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3267,7 +3267,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3292,7 +3292,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3326,7 +3326,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3351,7 +3351,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3385,7 +3385,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3410,7 +3410,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3444,7 +3444,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3469,7 +3469,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3503,7 +3503,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3528,7 +3528,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3562,7 +3562,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3587,7 +3587,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3621,7 +3621,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3646,7 +3646,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3680,7 +3680,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3705,7 +3705,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3739,7 +3739,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3764,7 +3764,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3798,7 +3798,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3823,7 +3823,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3857,7 +3857,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3882,7 +3882,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3925,7 +3925,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -3951,7 +3951,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -3986,7 +3986,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4012,7 +4012,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4047,7 +4047,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4073,7 +4073,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4108,7 +4108,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4134,7 +4134,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4169,7 +4169,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4195,7 +4195,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4230,7 +4230,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4256,7 +4256,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4291,7 +4291,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4317,7 +4317,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4352,7 +4352,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4378,7 +4378,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4413,7 +4413,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4439,7 +4439,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4474,7 +4474,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4500,7 +4500,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4535,7 +4535,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4561,7 +4561,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4596,7 +4596,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4622,7 +4622,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4657,7 +4657,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4683,7 +4683,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4718,7 +4718,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4744,7 +4744,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4779,7 +4779,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4805,7 +4805,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 
@@ -4840,7 +4840,7 @@ namespace BindImpl
 
 		virtual const void* object() const
 		{
-			return (const void*)(pThis);
+			return reinterpret_cast<void*>(pThis);
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const
@@ -4866,7 +4866,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToObject(const void* object) const
 		{
-			return ((const C*)object == pThis);
+			return (reinterpret_cast<const C*>(object) == pThis);
 		}
 
 

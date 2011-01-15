@@ -48,8 +48,8 @@ namespace Display
 
 
 	List::List()
-		:pNullMonitor(new Monitor(YUNI_DEVICE_DISPLAY_LIST_FAIL_SAFE_NAME))
 	{
+		pNullMonitor = new Monitor(YUNI_DEVICE_DISPLAY_LIST_FAIL_SAFE_NAME);
 		// Adding the default monitor
 		pMonitors.push_back(pNullMonitor);
 		pPrimary = pNullMonitor;
@@ -58,8 +58,8 @@ namespace Display
 
 	List& List::operator = (const List& rhs)
 	{
-		pMonitors = rhs.pMonitors;
-		pPrimary = rhs.pPrimary;
+		pMonitors    = rhs.pMonitors;
+		pPrimary     = rhs.pPrimary;
 		pNullMonitor = pNullMonitor;
 		return *this;
 	}
@@ -79,10 +79,13 @@ namespace Display
 
 		// We will browse each monitor found to see if it is suitable for our needs
 		// In this case, it will be added to the result list
-		for (MonitorsFound::iterator it = lst.begin(); it != lst.end(); ++it)
+		const MonitorsFound::iterator& itEnd = lst.end();
+		for (MonitorsFound::iterator it = lst.begin(); it != itEnd; ++it)
 		{
+			OrderedResolutions& resolutions = *(it->second);
+
 			// A monitor without any resolution is useless
-			if ((it->second)->empty()) // no available resolutions
+			if (resolutions.empty()) // no available resolutions
 				continue;
 
 			// Keeping a reference to our monitor for code clarity
@@ -93,29 +96,33 @@ namespace Display
 			// Browsing all resolutions, in the reverse order
 			// It is important since we must have the higher resolution at the
 			// beginning
-			for (OrderedResolutions::reverse_iterator j = (it->second)->rbegin(); j != (it->second)->rend(); ++j)
 			{
-				// j->first  : width
-				// k->first  : height
-				// k->second : color depth
-
-				// Do not accept resolution with a width below minWidth
-				if (j->first < minWidth)
-					continue;
-
-				for (std::map<uint32, std::map<uint8,bool> >::reverse_iterator k = j->second.rbegin(); k != j->second.rend(); ++k)
+				const OrderedResolutions::reverse_iterator& jEnd = resolutions.rend();
+				for (OrderedResolutions::reverse_iterator j = resolutions.rbegin(); j != jEnd; ++j)
 				{
-					// Do not accept resolutions with a height below minHeight
-					if (k->first < minHeight)
+					// j->first  : width
+					// k->first  : height
+					// k->second : color depth
+
+					// Do not accept resolution with a width below minWidth
+					if (j->first < minWidth)
 						continue;
 
-					for (std::map<uint8,bool>::reverse_iterator l = k->second.rbegin(); l != k->second.rend(); ++l)
+					for (std::map<uint32, std::map<uint8,bool> >::reverse_iterator k = j->second.rbegin(); k != j->second.rend(); ++k)
 					{
-						if (l->first >= minDepth)
-							*monitor << new Resolution(j->first, k->first, l->first);
+						// Do not accept resolutions with a height below minHeight
+						if (k->first < minHeight)
+							continue;
+
+						for (std::map<uint8,bool>::reverse_iterator l = k->second.rbegin(); l != k->second.rend(); ++l)
+						{
+							if (l->first >= minDepth)
+								*monitor << new Resolution(j->first, k->first, l->first);
+						}
 					}
 				}
 			}
+
 			if (!monitor->resolutions().empty()) // at least one resolution
 			{
 				pMonitors.push_back(monitor);
@@ -141,7 +148,7 @@ namespace Display
 
 	Monitor::Ptr List::findByHandle(const Monitor::Handle hwn) const
 	{
-		const MonitorVector::const_iterator end = pMonitors.end();
+		const MonitorVector::const_iterator& end = pMonitors.end();
 		for (MonitorVector::const_iterator it = pMonitors.begin(); it != end; ++it)
 		{
 			if (hwn == (*it)->handle())
@@ -153,7 +160,7 @@ namespace Display
 
 	Monitor::Ptr List::findByGUID(const String& guid) const
 	{
-		const MonitorVector::const_iterator end = pMonitors.end();
+		const MonitorVector::const_iterator& end = pMonitors.end();
 		for (MonitorVector::const_iterator it = pMonitors.begin(); it != end; ++it)
 		{
 			if (guid == (*it)->guid())
@@ -161,6 +168,7 @@ namespace Display
 		}
 		return pNullMonitor;
 	}
+
 
 
 

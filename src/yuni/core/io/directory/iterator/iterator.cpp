@@ -254,35 +254,37 @@ namespace Iterator
 		options.wbuffer = new wchar_t[4096];
 		# endif
 
-		String::VectorPtr::const_iterator end = options.rootFolder.end();
-		for (String::VectorPtr::const_iterator i = options.rootFolder.begin(); i != end; ++i)
 		{
-			const String& path = *(*i);
-
-			// This routine can only be called if the parameter is not empty
-			if (path.empty() || !options.self->onStart(path))
-				continue;
-
-			// Making sure that the counter is properly initialized
-			options.counter = 0;
-
-			# ifdef YUNI_OS_WINDOWS
-			const Flow result = TraverseWindowsFolder(path, options, thread);
-			# else
-			const Flow result = TraverseUnixFolder(path, options, thread);
-			# endif
-
-			# ifndef YUNI_NO_THREAD_SAFE
-			if ((result == Yuni::Core::IO::flowAbort) || (thread && thread->suspend()))
-			# else
-			if ((result == Yuni::Core::IO::flowAbort))
-			# endif
+			const String::VectorPtr::const_iterator& end = options.rootFolder.end();
+			for (String::VectorPtr::const_iterator i = options.rootFolder.begin(); i != end; ++i)
 			{
+				const String& path = *(*i);
+
+				// This routine can only be called if the parameter is not empty
+				if (path.empty() || !options.self->onStart(path))
+					continue;
+
+				// Making sure that the counter is properly initialized
+				options.counter = 0;
+
 				# ifdef YUNI_OS_WINDOWS
-				delete[] options.wbuffer;
+				const Flow result = TraverseWindowsFolder(path, options, thread);
+				# else
+				const Flow result = TraverseUnixFolder(path, options, thread);
 				# endif
-				options.self->onAbort();
-				return;
+
+				# ifndef YUNI_NO_THREAD_SAFE
+				if ((result == Yuni::Core::IO::flowAbort) || (thread && thread->suspend()))
+				# else
+				if ((result == Yuni::Core::IO::flowAbort))
+				# endif
+				{
+					# ifdef YUNI_OS_WINDOWS
+					delete[] options.wbuffer;
+					# endif
+					options.self->onAbort();
+					return;
+				}
 			}
 		}
 
