@@ -168,7 +168,7 @@ set(SRC_CORE_ATOMIC
 		core/atomic/traits.h
 		core/atomic/customstring.hxx
 )
-source_group(Core\\atomic FILES ${SRC_CORE_ATOMIC})
+source_group(core\\atomic FILES ${SRC_CORE_ATOMIC})
 
 
 set(SRC_CORE_PREPROCESSOR
@@ -178,14 +178,14 @@ set(SRC_CORE_PREPROCESSOR
 		core/preprocessor/capabilities/windows.h
 		core/preprocessor/enum.h
 )
-source_group(Core\\preprocessor FILES ${SRC_CORE_PREPROCESSOR})
+source_group(core\\preprocessor FILES ${SRC_CORE_PREPROCESSOR})
 
 set(SRC_CORE_ITERATOR
 		core/iterator.h
 		core/iterator/iterator.h
 		core/iterator/iterator.hxx
 )
-source_group(Core\\iterator FILES ${SRC_CORE_ITERATOR})
+source_group(core\\iterator FILES ${SRC_CORE_ITERATOR})
 
 
 set(SRC_CORE_STATIC
@@ -197,7 +197,7 @@ set(SRC_CORE_STATIC
 		core/static/dynamiccast.h
 		core/static/moveconstructor.h
 )
-source_group(Core\\static FILES ${SRC_CORE_STATIC})
+source_group(core\\static FILES ${SRC_CORE_STATIC})
 
 set(SRC_CORE_TRAITS
 		core/traits/cstring.h
@@ -205,14 +205,14 @@ set(SRC_CORE_TRAITS
 		core/traits/extension/length.h
 		core/traits/length.h
 )
-source_group(Core\\traits FILES ${SRC_CORE_TRAITS})
+source_group(core\\traits FILES ${SRC_CORE_TRAITS})
 
 
 set(SRC_CORE_EXCEPTIONS
 		core/exceptions.h
 		core/exceptions/badcast.h
 )
-source_group(Core\\exceptions FILES ${SRC_CORE_EXCEPTIONS})
+source_group(core\\exceptions FILES ${SRC_CORE_EXCEPTIONS})
 
 
 set(SRC_CORE_VALIDATOR
@@ -222,7 +222,7 @@ set(SRC_CORE_VALIDATOR
 		core/validator/text/validator.h
 		core/validator/validator.h
 )
-source_group(Core\\validator FILES ${SRC_CORE_VALIDATOR})
+source_group(core\\validator FILES ${SRC_CORE_VALIDATOR})
 
 set(SRC_CORE_SLIST
 		core/slist/iterator.h
@@ -230,7 +230,7 @@ set(SRC_CORE_SLIST
 		core/slist/slist.hxx
 		core/slist.h
 )
-source_group(Core\\linkedList FILES ${SRC_CORE_SLIST})
+source_group(core\\linkedlist FILES ${SRC_CORE_SLIST})
 
 
 
@@ -270,13 +270,34 @@ set(SRC_CORE_STRING
 		core/string/traits/findfirstof.hxx
 		core/string.h
 )
-source_group(Core\\String FILES ${SRC_CORE_STRING})
+source_group(core\\string FILES ${SRC_CORE_STRING})
 
+
+set(SRC_CORE_STRING_DEPRECATED
+		# deprecated
+		core/string/string.h
+		core/string/string.hxx
+		core/string/converters.from.hxx
+		core/string/converters.to.hxx
+		core/string/forward.h
+		core/string/traits.hxx
+		core/string/iterators.hxx
+		core/string/traits/countchar.hxx
+		core/string/traits/find.hxx
+		core/string/traits/haschar.hxx
+		core/string/traits/length.hxx
+		core/string/traits/remove.hxx
+		core/string/traits/vsprintf.hxx
+		core/string/traits/findlastof.hxx
+		core/string/traits/findfirstof.hxx
+		core/string.h
+)
+source_group(core\\string\\deprecated FILES ${SRC_CORE_STRING_DEPRECATED})
 
 set(SRC_CORE_STL
 		core/stl/algorithm.h
 )
-source_group(Core\\Stl FILES ${SRC_CORE_STL})
+source_group(core\\Stl FILES ${SRC_CORE_STL})
 
 
 set(SRC_CORE_LOGS
@@ -297,7 +318,7 @@ set(SRC_CORE_LOGS
 		core/logs/decorators/message.h
 		core/logs.h
 )
-source_group(Core\\Logs FILES ${SRC_CORE_LOGS})
+source_group(core\\logs FILES ${SRC_CORE_LOGS})
 
 
 
@@ -309,7 +330,7 @@ set(SRC_CORE_SMARTPTR
 		core/smartptr/smartptr.h
 		core/smartptr/smartptr.hxx
 )
-source_group(Core\\SmartPtr FILES ${SRC_CORE_SMARTPTR})
+source_group(core\\smartptr FILES ${SRC_CORE_SMARTPTR})
 
 
 set(SRC_CORE_ANY
@@ -319,7 +340,7 @@ set(SRC_CORE_ANY
 		core/any/any.hxx
 		core/any/any.cpp
 )
-source_group(Core\\Any FILES ${SRC_CORE_ANY})
+source_group(core\\any FILES ${SRC_CORE_ANY})
 
 set(SRC_CORE_VARIANT
 		core/variant.h
@@ -329,7 +350,7 @@ set(SRC_CORE_VARIANT
 		core/variant/variant.private.h
 		core/variant/variant.private.hxx
 )
-source_group(Core\\Variant FILES ${SRC_CORE_VARIANT})
+source_group(core\\variant FILES ${SRC_CORE_VARIANT})
 
 
 
@@ -341,7 +362,7 @@ set(SRC_CORE_DYNAMICLIBRARY
 		core/dynamiclibrary/symbol.hxx
 		core/dynamiclibrary.h
 )
-source_group(Core\\DynamicLibrary FILES ${SRC_CORE_DYNAMICLIBRARY})
+source_group(core\\dynamiclibrary FILES ${SRC_CORE_DYNAMICLIBRARY})
 
 
 set(SRC_CORE_BIND
@@ -350,14 +371,14 @@ set(SRC_CORE_BIND
 		core/bind/traits.h
 		core/bind.h
 )
-source_group(Core\\Bind FILES ${SRC_CORE_BIND})
+source_group(core\\bind FILES ${SRC_CORE_BIND})
 
 set(SRC_CORE_CHARSET
 		core/charset/charset.h
 		core/charset/charset.hxx
 		core/charset/charset.cpp
 )
-source_group(Core\\Charset FILES ${SRC_CORE_CHARSET})
+source_group(core\\charset FILES ${SRC_CORE_CHARSET})
 
 
 set(SRC_CORE_EVENT
@@ -380,7 +401,7 @@ set(SRC_CORE_EVENT
 		core/event/statistics
 		core/event/statistics/none.h
 )
-source_group(Core\\Event FILES ${SRC_CORE_EVENT})
+source_group(core\\event FILES ${SRC_CORE_EVENT})
 
 
 set(SRC_CORE_MATH
@@ -427,7 +448,7 @@ set(SRC_CORE_MATH
 		core/math/geometry/triangle.h
 		core/math/geometry/vertex.h
 )
-source_group(Core\\Math FILES ${SRC_CORE_MATH})
+source_group(core\\math FILES ${SRC_CORE_MATH})
 
 set(SRC_CORE_BIT
 		core/bit.h
@@ -436,7 +457,7 @@ set(SRC_CORE_BIT
 		core/bit/array.hxx
 		core/bit/array.cpp
 )
-source_group("Core\\Bit" FILES ${SRC_CORE_BIT})
+source_group("core\\bit" FILES ${SRC_CORE_BIT})
 
 
 # Singleton
@@ -447,7 +468,7 @@ set(SRC_CORE_SINGLETON
 		core/singleton/policies/creation.h
 		core/singleton/policies/lifetime.h
 )
-source_group(Core\\Singleton FILES ${SRC_CORE_SINGLETON})
+source_group(core\\singleton FILES ${SRC_CORE_SINGLETON})
 
 
 
@@ -459,7 +480,7 @@ set(SRC_CORE_HASH_CHECKSUM
 		core/hash/checksum/md5.h
 		core/hash/checksum/md5.cpp
 )
-source_group(Core\\Hash\\Checksum FILES ${SRC_CORE_HASH_CHECKSUM})
+source_group(core\\hash\\checksum FILES ${SRC_CORE_HASH_CHECKSUM})
 
 
 # System
@@ -480,7 +501,7 @@ set(SRC_CORE_SYSTEM
 		core/system/environment.hxx
 		core/system/endian.h
 )
-source_group(Core\\System FILES ${SRC_CORE_SYSTEM})
+source_group(core\\system FILES ${SRC_CORE_SYSTEM})
 
 
 set(SRC_CORE_TREE_N
@@ -491,7 +512,7 @@ set(SRC_CORE_TREE_N
 		core/tree/n/treeN.iterator.undef.h
 		core/tree/n/treeN.iterator.h
 )
-source_group(Core\\Tree FILES ${SRC_CORE_TREE_N})
+source_group(core\\tree FILES ${SRC_CORE_TREE_N})
 
 
 set(SRC_CORE_UNIT
@@ -507,20 +528,20 @@ set(SRC_CORE_UNIT
 		core/unit/length/extra.h
 		core/unit/luminance.h
 )
-source_group(Core\\Unit FILES ${SRC_CORE_UNIT})
+source_group(core\\unit FILES ${SRC_CORE_UNIT})
 
 set(SRC_CORE_UTILS
 		core/utils/utils.h
 		core/utils/hexdump.h core/utils/hexdump.hxx core/utils/hexdump.cpp
 )
-source_group(Core\\Utils FILES ${SRC_CORE_UTILS})
+source_group(core\\utils FILES ${SRC_CORE_UTILS})
 
 set(SRC_CORE_URI
 		core/uri/uri.private.h  core/uri/uri.private.cpp
 		core/uri/uri.h core/uri/uri.hxx core/uri/uri.cpp
 		core/uri.h
 )
-source_group(Core\\URI FILES ${SRC_CORE_URI})
+source_group(core\\uri FILES ${SRC_CORE_URI})
 
 
 set(SRC_CORE_IO_FILENAME
@@ -529,7 +550,7 @@ set(SRC_CORE_IO_FILENAME
 		core/io/exists.cpp
 		core/io/io.hxx
 )
-source_group(Core\\IO FILES ${SRC_CORE_IO_FILENAME})
+source_group(core\\io FILES ${SRC_CORE_IO_FILENAME})
 
 
 
@@ -544,7 +565,7 @@ set(SRC_CORE_IO_DIRECTORY
 		core/io/directory/info.h
 		core/io/directory/iterator.h
 )
-source_group(Core\\IO\\Directory FILES ${SRC_CORE_IO_DIRECTORY})
+source_group(core\\io\\directory FILES ${SRC_CORE_IO_DIRECTORY})
 
 set(SRC_CORE_IO_DIRECTORY_ITERATOR
 		core/io/directory/iterator/iterator.cpp
@@ -552,7 +573,7 @@ set(SRC_CORE_IO_DIRECTORY_ITERATOR
 		core/io/directory/iterator/iterator.hxx
 		core/io/directory/iterator/detachedthread.h
 )
-source_group(Core\\IO\\Directory\\Iterator FILES ${SRC_CORE_IO_DIRECTORY_ITERATOR})
+source_group(core\\io\\directory\\iterator FILES ${SRC_CORE_IO_DIRECTORY_ITERATOR})
 
 
 set(SRC_CORE_IO_DIRECTORY_INFO
@@ -563,7 +584,7 @@ set(SRC_CORE_IO_DIRECTORY_INFO
 		core/io/directory/info/platform.cpp
 		core/io/directory/info/platform.h
 )
-source_group(Core\\IO\\Directory\\Info FILES ${SRC_CORE_IO_DIRECTORY_INFO})
+source_group(core\\io\\directory\\Info FILES ${SRC_CORE_IO_DIRECTORY_INFO})
 
 
 
@@ -577,7 +598,7 @@ set(SRC_CORE_IO_FILE
 		core/io/file/file.hxx
 		core/io/file/file.cpp
 )
-source_group(Core\\IO\\File FILES ${SRC_CORE_IO_FILE})
+source_group(core\\io\\file FILES ${SRC_CORE_IO_FILE})
 
 
 set(SRC_CORE_GETOPT
@@ -588,7 +609,7 @@ set(SRC_CORE_GETOPT
 		core/getopt/parser.hxx
 		core/getopt/parser.cpp
 )
-source_group(Core\\GetOpt FILES ${SRC_CORE_GETOPT})
+source_group(core\\getopt FILES ${SRC_CORE_GETOPT})
 
 
 set(SRC_CORE_VERSION
@@ -596,7 +617,7 @@ set(SRC_CORE_VERSION
 		core/version/version.cpp
 		core/version/version.hxx
 )
-source_group(Core\\Version FILES ${SRC_CORE_VERSION})
+source_group(core\\version FILES ${SRC_CORE_VERSION})
 
 
 
@@ -606,7 +627,7 @@ set(SRC_CORE_SYSTEM_WINDOWS core/system/windows.hdr.h  core/system/gettimeofday.
 if(WIN32 AND MSVC)
 	set(SRC_CORE_SYSTEM_WINDOWS ${SRC_CORE_SYSTEM_WINDOWS} core/system/gettimeofday.cpp)
 endif(WIN32 AND MSVC)
-source_group(Core\\System\\Windows FILES ${SRC_CORE_SYSTEM_WINDOWS})
+source_group(core\\system\\windows FILES ${SRC_CORE_SYSTEM_WINDOWS})
 
 
 
@@ -628,7 +649,7 @@ set(SRC_THREADS
 		thread/condition.hxx
 		thread/array.h
 		thread/array.hxx)
-source_group(Threads FILES ${SRC_THREADS})
+source_group(threads FILES ${SRC_THREADS})
 
 # Jobs
 set(SRC_JOBS
@@ -650,7 +671,7 @@ set(SRC_JOBS
 		job/scheduler/highestpriorityfirst.h
 		job/scheduler/highestpriorityfirst.hxx
 		)
-source_group(Jobs FILES ${SRC_JOBS})
+source_group(jobs FILES ${SRC_JOBS})
 
 
 # Application
@@ -658,7 +679,7 @@ set(SRC_APPLICATION
 		application/application.h
 		application/application.hxx application/application.cpp
 		application/console.h application/console.cpp)
-source_group(Core\\Application FILES ${SRC_APPLICATION})
+source_group(core\\application FILES ${SRC_APPLICATION})
 
 
 set(SRC_CORE_COLOR
@@ -669,7 +690,7 @@ set(SRC_CORE_COLOR
 		core/color/rgb.hxx
 		core/color/fwd.h
 	)
-source_group(Core\\Color FILES ${SRC_CORE_COLOR})
+source_group(core\\color FILES ${SRC_CORE_COLOR})
 
 
 set(SRC_GFX_CORE
@@ -682,7 +703,7 @@ set(SRC_CORE_PREDICATES_RESULTS
 		core/predicate/result/and.h
 		core/predicate/result/or.h
 		)
-source_group(Core\\Predicate\\Result FILES ${SRC_CORE_PREDICATES_RESULTS})
+source_group(core\\predicate\\Result FILES ${SRC_CORE_PREDICATES_RESULTS})
 
 
 set(SRC_CORE_SYSTEM_CONSOLE
@@ -690,7 +711,7 @@ set(SRC_CORE_SYSTEM_CONSOLE
 		core/system/console/console.h
 		core/system/console/console.hxx
 		)
-source_group(Core\\System\\Console FILES ${SRC_CORE_SYSTEM_CONSOLE})
+source_group(core\\system\\Console FILES ${SRC_CORE_SYSTEM_CONSOLE})
 
 
 
@@ -707,6 +728,7 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_SYSTEM_WINDOWS}
 		${SRC_CORE_SYSTEM_CONSOLE}
 		${SRC_CORE_STRING}
+		${SRC_CORE_STRING_DEPRECATED}
 		${SRC_CORE_STL} ${SRC_CORE_VALIDATOR}
 		${SRC_CORE_IO_FILENAME}
 		${SRC_CORE_IO_DIRECTORY}

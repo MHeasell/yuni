@@ -10,6 +10,8 @@ set(YUNI_MODULE_CORE                      TRUE) # Must be True
 #set(YUNI_MODULE_VFS                       FALSE)
 #	set(YUNI_MODULE_VFS_FILE              TRUE)
 
+# VM
+set(YUNI_MODULE_VM                        FALSE)
 
 # Devices
 set(YUNI_MODULE_DEVICES                   FALSE)
@@ -50,6 +52,7 @@ set(YUNI_SAMPLES FALSE)
 # There is no need for `core` and `gfx-core`, which are implicit
 set(YUNI_MODULE_LIST
 	algorithms
+	vm
 	vfs
 		vfs-local
 	audio
@@ -97,6 +100,7 @@ if(MODULES)
 			set(YUNI_MODULE_CORE TRUE)
 			#set(YUNI_MODULE_VFS TRUE)
 			set(YUNI_MODULE_DEVICES TRUE)
+			set(YUNI_MODULE_VM TRUE)
 			set(YUNI_MODULE_GFX3D TRUE)
 			set(YUNI_MODULE_AUDIO TRUE)
 			set(YUNI_MODULE_NET TRUE)
@@ -133,6 +137,18 @@ if(MODULES)
 		#	set(KeywordIsKnown TRUE)
 		#endif()
 
+		# vm
+		if("${it}" STREQUAL "vm")
+			set(YUNI_MODULE_VM TRUE)
+			set(KeywordIsKnown TRUE)
+		endif()
+		# -vm
+		if("${it}" STREQUAL "-vm")
+			set(YUNI_MODULE_VM FALSE)
+			set(KeywordIsKnown TRUE)
+		endif()
+
+
 		# algorithms
 		if("${it}" STREQUAL "algorithms")
 			set(YUNI_MODULE_ALGORITHMS TRUE)
@@ -140,7 +156,7 @@ if(MODULES)
 		endif()
 		# -algorithms
 		if("${it}" STREQUAL "-algorithms")
-			set(YUNI_MODULE_ALGORITHMS TRUE)
+			set(YUNI_MODULE_ALGORITHMS FALSE)
 			set(KeywordIsKnown TRUE)
 		endif()
 
@@ -312,6 +328,8 @@ if(MODULES)
 		#YMESSAGE(" The VFS module")
 		#YMESSAGE("    -/+vfs         : The Virtual filesystem")
 		#YMESSAGE("    -/+vfs-local   : Support for the local filesystems")
+		YMESSAGE(" The virtual machine module")
+		YMESSAGE("    -/+vm          : The Virtual machine")
 		YMESSAGE(" The algorithms")
 		YMESSAGE("    -/+algorithms  : Standard algorithms")
 		YMESSAGE(" The device modules")
@@ -400,6 +418,11 @@ if(YUNI_MODULE_VFS)
 		LIST(APPEND YUNI_MODULE_AVAILABLE vfs-local)
 	endif()
 endif()
+
+if(YUNI_MODULE_VM)
+	list(APPEND YUNI_MODULE_AVAILABLE vm)
+endif()
+
 
 
 if(YUNI_MODULE_NET)

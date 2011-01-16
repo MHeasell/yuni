@@ -38,6 +38,10 @@ if(YUNI_MODULE_CORE)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/core.cmake")
 endif()
 
+if(YUNI_MODULE_VM)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/vm.cmake")
+endif()
+
 
 if(YUNI_MODULE_VFS)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/vfs.cmake")

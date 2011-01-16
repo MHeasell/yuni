@@ -136,3 +136,4 @@ install(
 )
 
 target_link_libraries(yuni-static-audio-core ${OPENAL_LIBRARY})
+
