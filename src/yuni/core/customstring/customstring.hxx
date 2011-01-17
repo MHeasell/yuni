@@ -2821,9 +2821,9 @@ namespace Yuni
 			Size newIndx;
 
 			// Temporary buffer
-			CustomStringType segment;
+			WritableType segment;
 
-			while (true)
+			do
 			{
 				newIndx = this->find_first_of(sep, indx);
 				if (npos == newIndx)
@@ -2846,6 +2846,7 @@ namespace Yuni
 				}
 				indx = newIndx + 1;
 			}
+			while (true);
 		}
 	}
 

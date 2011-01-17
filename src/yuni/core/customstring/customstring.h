@@ -165,6 +165,9 @@ namespace Yuni
 			soIgnoreCase
 		};
 
+		//! Self, which can be written
+		typedef typename Static::If<adapter, CustomString<>, CustomStringType>::RetTrue  WritableType;
+
 		// Checking for a minimal chunk size
 		YUNI_STATIC_ASSERT(adapter || chunkSize > 3, CustomString_MinimalChunkSizeRequired);
 
