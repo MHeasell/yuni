@@ -135,7 +135,7 @@ public:
 
 			bool valid() const
 			{
-				return pData;
+				return nullptr != pData;
 			}
 
 			bool operator ! () const
