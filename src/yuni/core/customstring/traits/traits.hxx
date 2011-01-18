@@ -90,13 +90,13 @@ namespace CustomStringImpl
 			if (size)
 			{
 				capacity = size + zeroTerminated;
-				data = (char*)realloc(data, capacity);
+				data = (char*)::realloc(const_cast<char*>(data), capacity);
 			}
 			else
 			{
 				capacity = 0;
 				::free(const_cast<void*>(static_cast<const void*>(data)));
-				data = NULL;
+				data = nullptr;
 			}
 		}
 	}
