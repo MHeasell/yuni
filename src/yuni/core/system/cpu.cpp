@@ -5,7 +5,7 @@
 #	include <sys/param.h>
 #	include <sys/sysctl.h>
 #endif
-#ifdef YUNI_OS_LINUX
+#if defined(YUNI_OS_LINUX) || defined(YUNI_OS_CYGWIN)
 #	include <fstream>
 #	include "../string.h"
 #endif
@@ -45,7 +45,7 @@ namespace CPU
 #endif
 
 
-#ifdef YUNI_OS_LINUX
+#if defined(YUNI_OS_LINUX) || defined(YUNI_OS_CYGWIN)
 # define YUNI_CPU_COUNT_HAS_IMPLEMENTATION
 	unsigned int Count()
 	{

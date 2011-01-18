@@ -12,7 +12,7 @@
 # include "windows.hdr.h"
 #endif
 
-#ifdef YUNI_OS_LINUX
+#if defined(YUNI_OS_LINUX) || defined(YUNI_OS_CYGWIN)
 # include <string.h>
 # include <sys/sysinfo.h> // sysinfo (2)
 #endif
@@ -83,7 +83,7 @@ namespace Memory
 
 
 
-#ifdef YUNI_OS_LINUX
+#if defined(YUNI_OS_LINUX) || defined(YUNI_OS_CYGWIN)
 #define SYSTEM_MEMORY_IS_IMPLEMENTED
 
 	/*!
@@ -241,9 +241,13 @@ namespace Memory
 
 	size_t Total()
 	{
+#ifdef YUNI_OS_LINUX		
 		// Directly using sysinfo (2), which should be faster than parsing /proc/meminfo
 		struct sysinfo s;
 		return (!sysinfo(&s)) ? (s.mem_unit * s.totalram) : (size_t) defaultTotal;
+#else
+		return Usage().total;
+#endif
 	}
 
 #endif // YUNI_OS_LINUX

@@ -10,7 +10,7 @@ namespace Yuni
 		# ifndef YUNI_NO_THREAD_SAFE
 		::pthread_mutexattr_t mutexattr;
 		::pthread_mutexattr_init(&mutexattr);
-		# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU)
+		# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU) || defined(YUNI_OS_CYGWIN)
 		::pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE);
 		# else
 		::pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE_NP);
@@ -28,7 +28,7 @@ namespace Yuni
 		{
 			::pthread_mutexattr_t mutexattr;
 			::pthread_mutexattr_init(&mutexattr);
-			# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU)
+			# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU) || defined(YUNI_OS_CYGWIN)
 			::pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE);
 			# else
 			::pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE_NP);

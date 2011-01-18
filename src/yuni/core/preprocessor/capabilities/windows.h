@@ -28,10 +28,6 @@
 #		define YUNI_OS_BORLAND
 #		define YUNI_COMPILER_NAME "Borland C++ Compiler"
 #	endif
-/* Cygwin */
-#	ifdef __CYGWIN__
-#	   define YUNI_OS_CYGWIN
-#	endif
 /* MinGW */
 #	ifdef __MINGW32__
 #		define YUNI_OS_MINGW
