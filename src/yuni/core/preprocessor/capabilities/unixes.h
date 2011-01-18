@@ -93,6 +93,12 @@
 #		define YUNI_OS_LYNX
 #		define YUNI_OS_NAME "Lynx"
 # 	endif
+/* Cygwin */
+#	ifdef __CYGWIN__
+#	   define YUNI_OS_CYGWIN
+#	   define YUNI_OS_NAME "Windows Cygwin"
+#	endif
+
 
 # endif /* Linux */
 

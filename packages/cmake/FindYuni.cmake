@@ -42,6 +42,7 @@ set(__Yuni_ConfigNotFound FALSE)
 # Where is yuni-config ?
 #
 # - It might be specified.
+
 if(Yuni_YUNICONFIG_PATH AND EXISTS "${Yuni_YUNICONFIG_PATH}")
 	# Nothing to do, the binary is there, we'll blindly use it.
 	set(__Yuni_Config "${Yuni_YUNICONFIG_PATH}")
@@ -97,9 +98,6 @@ if(NOT __Yuni_ConfigNotFound)
 	if(MSYS)
 		set(__Yuni_Compiler "mingw")
 	endif(MSYS)
-	if(CYGWIN)
-		set(__Yuni_Compiler "mingw")
-	endif(CYGWIN)
 
 	#
 	# Building the command line options for the list of components
@@ -112,7 +110,7 @@ if(NOT __Yuni_ConfigNotFound)
 
 	# Converting eventual slashes in yuni-config path on Windows
     if(WIN32 OR WIN64)
-        if(NOT MSYS)
+        if(NOT MSYS AND NOT CYGWIN)
             # On Windows (not MSys), a path with slashes is invalid.
 			# "C:/path/..." needs to be changed into "C:\path\..."
             string(REPLACE "/" "\\" __Yuni_Config "${__Yuni_Config}")
