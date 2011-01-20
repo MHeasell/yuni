@@ -318,17 +318,28 @@ namespace Math
 	** The function returns the integral value nearest to x rounding
 	** half-way cases away from zero, regardless of the current rounding
 	** direction.
+	**
+	** \param x A number
+	** \param place The place of the decimal number to round
 	*/
-	template<class T> inline T Round(T x);
+	template<class T> inline T Round(T x, unsigned int place = 0);
 
 
 	/*!
 	** \brief truncate to integer value
 	**
 	** The function return the integral value nearest to but no larger in magnitude than x.
+	**
+	** \param x A number
+	** \param place The place of the decimal number to round
 	*/
-	template<class T> inline T Trunc(T x);
+	template<class T> inline T Trunc(T x, unsigned int place = 0);
 
+
+	/*!
+	** \brief Trunc decimal places
+	*/
+	inline double Trunc(double x, unsigned int places);
 
 	/*!
 	** \brief Integral value nearest to x
