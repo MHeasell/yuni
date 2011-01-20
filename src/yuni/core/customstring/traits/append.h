@@ -29,6 +29,18 @@ namespace CustomString
 
 
 	// C*
+	template<class CustomStringT, class T>
+	class Append<CustomStringT, T*>
+	{
+	public:
+		static void Perform(CustomStringT& s, const T* rhs)
+		{
+			s += (void*) rhs;
+		}
+	};
+
+
+	// char*
 	template<class CustomStringT>
 	class Append<CustomStringT, char*>
 	{

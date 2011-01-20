@@ -25,17 +25,27 @@ namespace CustomString
 	};
 
 
-
-	// C*
-	template<class CustomStringT>
-	class Assign<CustomStringT, typename CustomStringT::Type*>
+	// T*
+	template<class CustomStringT, class T>
+	class Assign<CustomStringT, T*>
 	{
 	public:
-		typedef typename CustomStringT::Type C;
-		static void Perform(CustomStringT& s, const C* rhs)
+		static void Perform(CustomStringT& s, const T* rhs)
+		{
+			s = (void*) rhs;
+		}
+	};
+
+
+	// cha*
+	template<class CustomStringT>
+	class Assign<CustomStringT, char*>
+	{
+	public:
+		static void Perform(CustomStringT& s, const char* rhs)
 		{
 			if (rhs)
-				s.assignWithoutChecking(rhs, Yuni::Traits::Length<C*, typename CustomStringT::Size>::Value(rhs));
+				s.assignWithoutChecking(rhs, Yuni::Traits::Length<char*, typename CustomStringT::Size>::Value(rhs));
 			else
 				s.clear();
 		}
@@ -44,10 +54,10 @@ namespace CustomString
 
 	// C[N]
 	template<class CustomStringT, int N>
-	class Assign<CustomStringT, typename CustomStringT::Type[N]>
+	class Assign<CustomStringT, char[N]>
 	{
 	public:
-		typedef typename CustomStringT::Type C;
+		typedef char C;
 		static void Perform(CustomStringT& s, const C rhs[N])
 		{
 			if (N > 0)
@@ -64,11 +74,10 @@ namespace CustomString
 
 	// C
 	template<class CustomStringT>
-	class Assign<CustomStringT, typename CustomStringT::Type>
+	class Assign<CustomStringT, char>
 	{
 	public:
-		typedef typename CustomStringT::Type C;
-		static void Perform(CustomStringT& s, const C rhs)
+		static void Perform(CustomStringT& s, const char rhs)
 		{
 			s.assignWithoutChecking(rhs);
 		}
