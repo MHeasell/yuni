@@ -283,64 +283,144 @@ namespace Math
 	}
 
 
-	template<class T> inline T Round(T x)
+	template<class T> inline T Round(T x, unsigned int)
 	{
 		return x;
 	}
 
 
-	template<> inline double Round<double>(double x)
+	template<> inline double Round<double>(double x, unsigned int place)
 	{
-		# ifdef YUNI_OS_MSVC
-		return (x < 0.) ? (::ceil(x - 0.5)) : (::floor(x + 0.5));
-		# else
-		return ::round(x);
-		# endif
+		if (place)
+		{
+			double temp, mult;
+			mult = Power(10., place);
+			temp = Floor(x * mult + 0.5);
+			temp = temp / mult;
+			return temp;
+		}
+		else
+		{
+			# ifdef YUNI_OS_MSVC
+			return (x < 0.) ? (::ceil(x - 0.5)) : (::floor(x + 0.5));
+			# else
+			return ::round(x);
+			# endif
+		}
 	}
 
 	# ifdef YUNI_HAS_LONG_DOUBLE
-	template<> inline long double Round<long double>(long double x)
+	template<> inline long double Round<long double>(long double x, unsigned int place)
 	{
-		# ifdef YUNI_OS_MSVC
-		return (x < 0.) ? (::ceill(x - 0.5L)) : (::floorl(x + 0.5L));
-		# else
-		return ::roundl(x);
-		# endif
+		if (place)
+		{
+			long double temp, mult;
+			mult = Power(static_cast<long double>(10.), place);
+			temp = Floor(x * mult + 0.5);
+			temp = temp / mult;
+			return temp;
+		}
+		else
+		{
+			# ifdef YUNI_OS_MSVC
+			return (x < 0.) ? (::ceill(x - 0.5L)) : (::floorl(x + 0.5L));
+			# else
+			return ::roundl(x);
+			# endif
+		}
 	}
 	# endif
 
-	template<> inline float Round<float>(float x)
+	template<> inline float Round<float>(float x, unsigned int place)
 	{
-		# ifdef YUNI_OS_MSVC
-		return (x < 0.) ? (::ceilf(x - 0.5f)) : (::floorf(x + 0.5f));
-		# else
-		return ::roundf(x);
-		# endif
+		if (place)
+		{
+			float temp, mult;
+			mult = Power(10.f, place);
+			temp = Floor(x * mult + 0.5f);
+			temp = temp / mult;
+			return temp;
+		}
+		else
+		{
+			# ifdef YUNI_OS_MSVC
+			return (x < 0.) ? (::ceilf(x - 0.5f)) : (::floorf(x + 0.5f));
+			# else
+			return ::roundf(x);
+			# endif
+		}
 	}
 
 
-	template<class T> inline T Trunc(T x)
+
+
+	template<class T> inline T Trunc(T x, unsigned int)
 	{
 		return x;
 	}
 
-	template<> inline double Trunc<double>(double x)
+	template<> inline double Trunc<double>(double x, unsigned int place)
 	{
-		# ifndef YUNI_OS_MSVC
-		return ::trunc(x);
-		# else
-		return ((x > 0.) ? ::floor(x) : ::ceil(x));
-		# endif
+		if (place)
+		{
+			double temp, mult;
+			mult = Power(10.0, place);
+			temp = Floor(x * mult);
+			temp = temp / mult;
+			return temp;
+		}
+		else
+		{
+			# ifndef YUNI_OS_MSVC
+			return ::trunc(x);
+			# else
+			return ((x > 0.) ? ::floor(x) : ::ceil(x));
+			# endif
+		}
 	}
 
-	template<> inline float Trunc<float>(float x)
+	template<> inline float Trunc<float>(float x, unsigned int place)
 	{
-		# ifndef YUNI_OS_MSVC
-		return ::truncf(x);
-		# else
-		return ((x > 0.) ? ::floorf(x) : ::ceilf(x));
-		# endif
+		if (place)
+		{
+			float temp, mult;
+			mult = Power(10.f, place);
+			temp = Floor(x * mult);
+			temp = temp / mult;
+			return temp;
+		}
+		else
+		{
+			# ifndef YUNI_OS_MSVC
+			return ::truncf(x);
+			# else
+			return ((x > 0.) ? ::floorf(x) : ::ceilf(x));
+			# endif
+		}
 	}
+
+
+	# ifdef YUNI_HAS_LONG_DOUBLE
+	template<> inline long double Trunc<long double>(long double x, unsigned int place)
+	{
+		if (place)
+		{
+			long double temp, mult;
+			mult = Power(10.0, place);
+			temp = Floor(x * mult);
+			temp = temp / mult;
+			return temp;
+		}
+		else
+		{
+			# ifndef YUNI_OS_MSVC
+			return ::trunc(x);
+			# else
+			return ((x > 0.) ? ::floor(x) : ::ceil(x));
+			# endif
+		}
+	}
+	# endif
 
 
 
