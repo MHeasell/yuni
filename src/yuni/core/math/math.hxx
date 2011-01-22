@@ -271,7 +271,6 @@ namespace Math
 	}
 
 
-
 	inline float Power(const float x, const float y)
 	{
 		return ::powf(x, y);
@@ -336,7 +335,7 @@ namespace Math
 		if (place)
 		{
 			float temp, mult;
-			mult = Power(10.f, place);
+			mult = Power(10.f, static_cast<float>(place));
 			temp = Floor(x * mult + 0.5f);
 			temp = temp / mult;
 			return temp;
@@ -384,7 +383,7 @@ namespace Math
 		if (place)
 		{
 			float temp, mult;
-			mult = Power(10.f, place);
+			mult = Power(10.f, static_cast<float>(place));
 			temp = Floor(x * mult);
 			temp = temp / mult;
 			return temp;
