@@ -156,7 +156,8 @@ namespace CustomStringImpl
 			{
 				// Increase the capacity until we have enough space
 				newcapacity += chunkSize;
-			} while (newcapacity < minCapacity);
+			}
+			while (newcapacity < minCapacity);
 
 			// Realloc the internal buffer
 			C* newdata = (C*)::realloc(const_cast<char*>(data), (size_t)(sizeof(C) * newcapacity));
