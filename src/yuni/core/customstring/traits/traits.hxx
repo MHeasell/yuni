@@ -51,7 +51,8 @@ namespace CustomStringImpl
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::adapt(const char* const cstring)
+	inline void
+	Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::adapt(const char* const cstring)
 	{
 		data = const_cast<char*>(cstring);
 		capacity = size = (data ? ::strlen(data) : 0);
@@ -59,7 +60,8 @@ namespace CustomStringImpl
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::adapt(const char* const cstring, Size length)
+	inline void
+	Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::adapt(const char* const cstring, Size length)
 	{
 		data = const_cast<char*>(cstring);
 		capacity = size = length;
@@ -67,7 +69,8 @@ namespace CustomStringImpl
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::clear()
+	inline void
+	Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::clear()
 	{
 		if (zeroTerminated)
 		{
@@ -83,7 +86,8 @@ namespace CustomStringImpl
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::shrink()
+	inline void
+	Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::shrink()
 	{
 		if (data)
 		{
@@ -103,7 +107,8 @@ namespace CustomStringImpl
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::insert(Size offset, const C* const buffer, const Size len)
+	inline void
+	Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::insert(Size offset, const C* const buffer, const Size len)
 	{
 		// Reserving enough space to insert the buffer
 		reserve(len + size + zeroTerminated);
@@ -120,7 +125,8 @@ namespace CustomStringImpl
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	inline void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::put(const C rhs)
+	inline void
+	Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::put(const C rhs)
 	{
 		// Making sure that we have enough space
 		reserve(size + 1 + zeroTerminated);
@@ -134,7 +140,8 @@ namespace CustomStringImpl
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
-	void Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::reserve(Size minCapacity)
+	void
+	Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::reserve(Size minCapacity)
 	{
 		if (adapter)
 			return;
@@ -241,6 +248,7 @@ namespace CustomStringImpl
 		}
 	}
 
+
 	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
 	inline typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size
 	Data<ChunkSizeT,false,ZeroTerminatedT,C>::assignWithoutChecking(const C c)
@@ -271,7 +279,8 @@ namespace CustomStringImpl
 
 
 	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
-	void Data<ChunkSizeT,false,ZeroTerminatedT,C>::put(const C rhs)
+	void
+	Data<ChunkSizeT,false,ZeroTerminatedT,C>::put(const C rhs)
 	{
 		// Making sure that we have enough space
 		if (size != capacity)
@@ -284,6 +293,7 @@ namespace CustomStringImpl
 				(const_cast<char*>(data))[size] = C();
 		}
 	}
+
 
 
 

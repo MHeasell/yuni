@@ -32,7 +32,7 @@ namespace File
 		if (!len)
 			return NULL;
 		wchar_t* buffer = new wchar_t[len + 2];
-		const int n = MultiByteToWideChar(CP_UTF8, 0, filename, len, buffer, len);
+		const int n = MultiByteToWideChar(CP_UTF8, 0, filename, static_cast<int>(len), buffer, static_cast<int>(len));
 		if (n <= 0)
 		{
 			delete[] buffer;
