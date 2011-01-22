@@ -162,10 +162,10 @@ namespace CustomString
 		{
 			if (StringT::zeroTerminated)
 				// We have to copy the final zero in the same time
-				memcpy(out, s.data(), (N-1) < s.sizeInBytes() ? N : s.sizeInBytes() + 1);
+				(void)::memcpy(out, s.data(), (N-1) < s.sizeInBytes() ? N : s.sizeInBytes() + 1);
 			else
 				// The N char can be used
-				memcpy(out, s.data(), (N) < s.sizeInBytes() ? N : s.sizeInBytes());
+				(void)::memcpy(out, s.data(), (N) < s.sizeInBytes() ? N : s.sizeInBytes());
 			return true;
 		}
 
@@ -208,7 +208,7 @@ namespace CustomString
 					char buffer[5] = {0,0,0,0,0};
 					for (unsigned int i = 0; i != count; ++i)
 						buffer[i] = static_cast<char>(::tolower(s[i]));
-					return (!strcmp("true", buffer) || !strcmp("on", buffer) || !strcmp("yes", buffer));
+					return (!::strcmp("true", buffer) || !::strcmp("on", buffer) || !::strcmp("yes", buffer));
 				}
 			}
 			return false;
@@ -271,12 +271,12 @@ namespace CustomString
 			{ \
 				if (s.size() < bufferSize) \
 				{ \
-					memcpy(buffer, s.data(), s.size()); \
+					(void)::memcpy(buffer, s.data(), s.size()); \
 					buffer[s.size()] = '\0'; \
 				} \
 				else \
 				{ \
-					memcpy(buffer, s.data(), bufferSize - 1); \
+					(void)::memcpy(buffer, s.data(), bufferSize - 1); \
 					buffer[bufferSize - 1] = '\0'; \
 				} \
 				const char* p = AutoDetectBaseNumber::Value(buffer, s.size(), base); \
@@ -302,12 +302,12 @@ namespace CustomString
 			{ \
 				if (s.size() < bufferSize) \
 				{ \
-					memcpy(buffer, s.data(), s.size()); \
+					(void)::memcpy(buffer, s.data(), s.size()); \
 					buffer[s.size()] = '\0'; \
 				} \
 				else \
 				{ \
-					memcpy(buffer, s.data(), bufferSize - 1); \
+					(void)::memcpy(buffer, s.data(), bufferSize - 1); \
 					buffer[bufferSize - 1] = '\0'; \
 				} \
 				const char* p = AutoDetectBaseNumber::Value(buffer, s.size(), base); \
@@ -325,7 +325,7 @@ namespace CustomString
 
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint16, strtol);
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint32, strtol);
-	# ifdef YUNI_OS_WINDOWS
+	# ifdef YUNI_OS_MSVC
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint64, _strtoi64);
 	# else
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(sint64, strtoll);
@@ -333,7 +333,7 @@ namespace CustomString
 
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint16, strtoul);
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint32, strtoul);
-	# ifdef YUNI_OS_WINDOWS
+	# ifdef YUNI_OS_MSVC
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint64, _strtoui64);
 	# else
 	YUNI_CORE_EXTENSION_ISTRING_TO_NUMERIC(uint64, strtoull);
