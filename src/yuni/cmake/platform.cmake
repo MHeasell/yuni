@@ -96,6 +96,8 @@
 /* C++0x support: nullptr */
 #cmakedefine YUNI_HAS_NULLPTR
 
+/* gcc __sync_add_and_fetch */
+#cmakedefine YUNI_HAS_SYNC_ADD_AND_FETCH
 
 
 

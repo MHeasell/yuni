@@ -12,7 +12,11 @@
 
 // Determine if we must use a mutex or not
 # if defined(YUNI_OS_WINDOWS) || YUNI_OS_GCC_VERSION >= 40102
-#	define YUNI_ATOMIC_MUST_USE_MUTEX 0
+#	if !defined(YUNI_OS_WINDOWS) && !defined(YUNI_HAS_SYNC_ADD_AND_FETCH)
+#		define YUNI_ATOMIC_MUST_USE_MUTEX 1
+#	else
+#		define YUNI_ATOMIC_MUST_USE_MUTEX 0
+#	endif
 # else
 #	define YUNI_ATOMIC_MUST_USE_MUTEX 1
 # endif
