@@ -114,6 +114,13 @@ check_cxx_source_compiles("#include <stdint.h>
 check_cxx_source_compiles("
 	class A {}; int main() {A* a = nullptr;return 0;}" YUNI_HAS_NULLPTR)
 
+# GCC
+if (NOT MSVC)
+	check_cxx_source_compiles("
+		int main() {   int i = 3;   int j = __sync_add_and_fetch(&i, 1);   return 0; } " YUNI_HAS_SYNC_ADD_AND_FETCH)
+endif()
+
+
 # long
 if(MSVC)
 	check_cxx_source_compiles(
