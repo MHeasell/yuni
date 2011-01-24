@@ -1,4 +1,5 @@
 
+#include "../core/math/math.h"
 #include "window.h"
 
 
@@ -42,9 +43,13 @@ namespace UI
 
 	void Window::resizeWL(float& width, float& height)
 	{
+		// If nothing has changed, do nothing
+		if (Math::Equals(pWidth, width) && Math::Equals(pHeight, height))
+			return;
+
 		IControlContainer::resizeWL(width, height);
 		if (!pClosing)
-			pLocalEvents.onResizeWindow(pApplicationGUID, pLocalID);
+			pLocalEvents.onResizeWindow(pApplicationGUID, pLocalID, width, height);
 	}
 
 

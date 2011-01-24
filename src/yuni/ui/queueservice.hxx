@@ -46,6 +46,7 @@ namespace UI
 		pDesktop->pLocalEvents.onShowWindow.connect(this, &IQueueService<ChildT>::showWindow);
 		pDesktop->pLocalEvents.onHideWindow.connect(this, &IQueueService<ChildT>::hideWindow);
 		pDesktop->pLocalEvents.onCloseWindow.connect(this, &IQueueService<ChildT>::closeWindow);
+		pDesktop->pLocalEvents.onResizeWindow.connect(this, &IQueueService<ChildT>::resizeWindow);
 		pDesktop->pLocalEvents.onShowComponent.connect(this, &IQueueService<ChildT>::showComponent);
 		pDesktop->pLocalEvents.onHideComponent.connect(this, &IQueueService<ChildT>::hideComponent);
 		pDesktop->pLocalEvents.onUpdateComponent.connect(this, &IQueueService<ChildT>::updateComponent);
@@ -85,10 +86,10 @@ namespace UI
 	}
 
 	template<class ChildT>
-	inline void IQueueService<ChildT>::resizeWindow(const GUID& appID, const IComponent::ID& windowID)
+	inline void IQueueService<ChildT>::resizeWindow(const GUID& appID, const IComponent::ID& windowID, float width, float height)
 	{
 		RequestType delegate;
-		typename ResizeWindowParams::Ptr params = new ResizeWindowParams(appID, windowID);
+		typename ResizeWindowParams::Ptr params = new ResizeWindowParams(appID, windowID, width, height);
 		ChildType* thisAsChild = static_cast<ChildType*>(this);
 
 		delegate.bind(thisAsChild, &ChildType::resizeWindowDispatched, params);

@@ -13,6 +13,7 @@ namespace UI
 		onShowWindow = nullptr;
 		onHideWindow = nullptr;
 		onCloseWindow = nullptr;
+		onResizeWindow = nullptr;
 		onShowComponent = nullptr;
 		onHideComponent = nullptr;
 		onUpdateComponent = nullptr;
@@ -24,6 +25,7 @@ namespace UI
 		onShowWindow = rhs.onShowWindow;
 		onHideWindow = rhs.onHideWindow;
 		onCloseWindow = rhs.onCloseWindow;
+		onResizeWindow = rhs.onResizeWindow;
 		onShowComponent = rhs.onShowComponent;
 		onHideComponent = rhs.onHideComponent;
 		onUpdateComponent = rhs.onUpdateComponent;
