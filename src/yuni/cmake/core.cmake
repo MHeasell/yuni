@@ -181,8 +181,8 @@ source_group(core\\atomic FILES ${SRC_CORE_ATOMIC})
 set(SRC_CORE_PREPROCESSOR
 		core/preprocessor/std.h
 		core/preprocessor/capabilities.h
-		core/preprocessor/capabilities/unixes.h
-		core/preprocessor/capabilities/windows.h
+		core/preprocessor/unixes.h
+		core/preprocessor/windows.h
 		core/preprocessor/enum.h
 )
 source_group(core\\preprocessor FILES ${SRC_CORE_PREPROCESSOR})
