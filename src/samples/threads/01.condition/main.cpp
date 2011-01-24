@@ -83,7 +83,7 @@ int main(void)
 
 	// Performing a very long operation... (the thread still awaits our notification)
 	std::cout << "[main] Performing a long operation (3 seconds)..." << std::endl;
-	Yuni::Sleep(3); // seconds
+	Yuni::Suspend(3); // seconds
 	std::cout << "[main] Done" << std::endl;
 
 	// Notifying our thread that it should do its work

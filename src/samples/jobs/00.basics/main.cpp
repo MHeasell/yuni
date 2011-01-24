@@ -23,11 +23,13 @@ static Yuni::Mutex mutex;
 class MyJob : public Yuni::Job::IJob
 {
 public:
-	MyJob(const int identifier) : x(identifier)
+	MyJob(const int identifier)
+		:x(identifier)
 	{
 		nameWL("Bottle counting");
 	}
 	virtual ~MyJob() { }
+
 private:
 	virtual void onExecute()
 	{
@@ -50,7 +52,7 @@ private:
 			// - for example a long calculation, for the purpose of this example.
 			//
 			// The bottom line is: DO NOT use sleep() to wait in threads.
-			Yuni::SleepMilliSeconds(1200 /* second */);
+			Yuni::SuspendMilliSeconds(1200); // seconds
 		}
 		mutex.lock();
 		std::cout << " ["<< x <<"] Finished." << std::endl;
@@ -60,7 +62,8 @@ private:
 private:
 	//! The class can hold the variables of your choice.
 	int x;
-};
+
+}; // class MyJob
  
 
 
@@ -92,7 +95,7 @@ int main(void)
 //	mutex.unlock();
 
 	// Simulate a long processing
-//	Yuni::Sleep(5 /* seconds */);
+//	Yuni::Suspend(5 /* seconds */);
 
 	// Waiting for our tasks to complete.
 //	mutex.lock();

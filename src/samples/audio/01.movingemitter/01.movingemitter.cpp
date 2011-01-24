@@ -14,7 +14,8 @@ class MovingSource : public Application::Console
 {
 public:
 	MovingSource(int argc, char* argv[])
-		:Application::Console(argc, argv), pFileName(argv[1])
+		:Application::Console(argc, argv),
+		pFileName(argv[1])
 	{
 		pAudio.start();
 	}
@@ -40,15 +41,22 @@ public:
 		Point3D<> position;
 		bool inverse = false;
 		position.y = -LIMIT;
+
 		pAudio.emitter.move(emitterName, position);
-		for (int i = 0; i < 2000; ++i)
+
+		for (unsigned int i = 0; i < 2000; ++i)
 		{
-			Yuni::SleepMilliSeconds(100);
+			Yuni::SuspendMilliSeconds(100);
+
 			position.y += 1.0f * (inverse ? -1.0f : 1.0f);
+
 			if (!inverse && position.y > LIMIT)
 				inverse = true;
-			else if (inverse && position.y < -LIMIT)
-				inverse = false;
+			else
+			{
+				if (inverse && position.y < -LIMIT)
+					inverse = false;
+			}
 			pAudio.emitter.move(emitterName, position);
 		}
 	}
@@ -67,10 +75,9 @@ int main(int argc, char* argv[])
 	if (argc < 2)
 		return false;
 
-	/*
-	 * Yuni main loop
-	 */
+	// Yuni main loop
 	MovingSource app(argc, argv);
 	app.onExecute();
 	return app.exitCode();
 }
+

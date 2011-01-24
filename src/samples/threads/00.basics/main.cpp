@@ -50,7 +50,7 @@ protected:
 			// - for example a long calculation, for the purpose of this example.
 			//
 			// The bottom line is: DO NOT use sleep() to wait in threads.
-			Yuni::Sleep(1 /* second */);
+			Yuni::Suspend(1 /* second */);
 
 			// After our work, if the task is repetitive, we will want to check
 			// if we have to stop doing it and will eventually pause for some
@@ -119,7 +119,7 @@ int main(void)
 	mutex.unlock();
 
 	// Simulate a long processing
-	Yuni::Sleep(5 /* seconds */);
+	Yuni::Suspend(5); // 5 seconds
 
 	mutex.lock();
 	std::cout << "[M] Stopping bottle counting..." << std::endl;

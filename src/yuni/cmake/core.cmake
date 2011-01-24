@@ -495,9 +495,9 @@ set(SRC_CORE_SYSTEM
 		core/system/stdint.h
 		core/system/nullptr.h
 		core/system/capabilities.h
-		core/system/sleep.h
-		core/system/sleep.cpp
-		core/sleep.h
+		core/system/suspend.h
+		core/system/suspend.cpp
+		core/suspend.h
 		core/fwd.h
 		core/system/cpu.h
 		core/system/cpu.cpp

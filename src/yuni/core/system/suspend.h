@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_SYSTEM_WINDOWS_SLEEP_H__
-# define __YUNI_CORE_SYSTEM_WINDOWS_SLEEP_H__
+#ifndef __YUNI_CORE_SYSTEM_WINDOWS_SUSPEND_H__
+# define __YUNI_CORE_SYSTEM_WINDOWS_SUSPEND_H__
 
 # include "../../yuni.h"
 
@@ -19,7 +19,7 @@ namespace Yuni
 	**
 	** \see Yuni::Threads::AThread::suspend()
 	*/
-	void Sleep(const unsigned int seconds);
+	void Suspend(unsigned int seconds);
 
 
 	/*!
@@ -32,10 +32,10 @@ namespace Yuni
 	** You should not use this routine when using the thread facility provided
 	** by the Yuni library and you should prefer the method `suspend()` instead.
 	*/
-	void SleepMilliSeconds(const unsigned int milliseconds);
+	void SuspendMilliSeconds(unsigned int milliseconds);
 
 
 
 } // namespace Yuni
 
-#endif // __YUNI_CORE_SYSTEM_WINDOWS_SLEEP_H__
+#endif // __YUNI_CORE_SYSTEM_WINDOWS_SUSPEND_H__
