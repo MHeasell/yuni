@@ -215,7 +215,7 @@ namespace EventLoop
 				}
 
 				// Sleeping a bit...
-				Yuni::SleepMilliSeconds(80u); // 50ms
+				Yuni::SuspendMilliSeconds(80u); // 50ms
 				elapsed += 80u;
 			}
 			while (elapsed < timeout);
@@ -384,7 +384,7 @@ namespace EventLoop
 		{
 			// However, when not in detached mode, we don't have any thread instance
 			// to use. The only way to achieve a pause is to use a sleep
-			SleepMilliSeconds(timeout);
+			SuspendMilliSeconds(timeout);
 		}
 	}
 

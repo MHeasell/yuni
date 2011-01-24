@@ -1,6 +1,6 @@
 
-#include "sleep.h"
-#if defined(YUNI_OS_WINDOWS)
+#include "suspend.h"
+#ifdef YUNI_OS_WINDOWS
 # include "windows.hdr.h"
 #else
 # include <unistd.h>
@@ -11,20 +11,20 @@
 namespace Yuni
 {
 
-	void Sleep(const unsigned int seconds)
+	void Suspend(unsigned int seconds)
 	{
 		# if defined(YUNI_OS_WINDOWS)
-		::Sleep(1000 * seconds);
+		Sleep(1000 * seconds);
 		# else
 		::sleep(seconds);
 		# endif
 	}
 
 
-	void SleepMilliSeconds(const unsigned int milliseconds)
+	void SuspendMilliSeconds(unsigned int milliseconds)
 	{
 		# if defined(YUNI_OS_WINDOWS)
-		::Sleep(milliseconds);
+		Sleep(milliseconds);
 		# else
 		::usleep(1000 * milliseconds);
 		# endif

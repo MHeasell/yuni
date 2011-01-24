@@ -17,25 +17,24 @@ public:
 	{
 		for (int i = 1; i < argc; ++i)
 		{
-			pFileNames.push_back(argv[i]);
+			pFilenames.push_back(argv[i]);
 		}
-		if (!pFileNames.empty())
+		if (!pFilenames.empty())
 			audio.start();
 	}
 
 	virtual ~LoadAndPlay()
 	{
-		if (!pFileNames.empty())
+		if (!pFilenames.empty())
 			audio.stop();
 	}
 
 	virtual void onExecute()
 	{
 		String emitterName;
-		unsigned int i = 0;
 
-		String::Vector::const_iterator end = pFileNames.end();
-		for (String::Vector::const_iterator it = pFileNames.begin(); it != end; ++it)
+		const String::Vector::const_iterator end = pFilenames.end();
+		for (String::Vector::const_iterator it = pFilenames.begin(); it != end; ++it)
 		{
 			// Load sound file
 			if (!audio.bank.load(*it))
@@ -54,7 +53,7 @@ public:
 			// Start playback on the emitter
 			audio.emitter.play(emitterName);
 
-			Yuni::SleepMilliSeconds(1000);
+			Yuni::SuspendMilliSeconds(1000);
 			// Get stream duration
 			unsigned int duration = audio.bank.duration(*it);
 			std::cout << "Sound duration: ";
@@ -63,9 +62,9 @@ public:
 
 		}
 		sint64 elapsed = 0;
-		for (int i = 0; i < 3000; ++i)
+		for (unsigned int i = 0; i < 3000; ++i)
 		{
-			Yuni::SleepMilliSeconds(100);
+			Yuni::SuspendMilliSeconds(100);
 
 			// Get elapsed playback time
 			sint64 newTime = audio.emitter.elapsedTime("Emitter 0");
@@ -93,7 +92,7 @@ private:
 
 
 private:
-	String::Vector pFileNames;
+	String::Vector pFilenames;
 	Audio::QueueService audio;
 
 }; // class LoadAndPlay
@@ -103,10 +102,9 @@ private:
 
 int main(int argc, char* argv[])
 {
-	/*
-	 * Yuni main loop
-	 */
+	// Yuni main loop
 	LoadAndPlay app(argc, argv);
 	app.onExecute();
 	return app.exitCode();
 }
+
