@@ -11,6 +11,9 @@ namespace WindowSystem
 
 	bool Windows::onLoop()
 	{
+		// Prime the message structure
+		MSG msg;
+		PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE);
 
 		// Loop on applications
 		ApplicationWindowMap::iterator appEnd = pVisibleWindows.end();
@@ -67,8 +70,6 @@ namespace WindowSystem
 			pair.second->resize(window->x(), window->y());
 		}
 
-		// TODO : Inform the queue service to update the window on next onLoop()
-
 		return true;
 	}
 
@@ -103,6 +104,10 @@ namespace WindowSystem
 
 	bool Windows::resizeWindowDispatched(ResizeWindowParams::Ptr params)
 	{
+		std::cout << "width: " << params->width
+				  << ", height: " << params->height
+				  << std::endl;
+
 		if (!params)
 			return true;
 
@@ -125,6 +130,7 @@ namespace WindowSystem
 
 		// Resize the local window
 		windowIterator->second.second->resize(width, height);
+		windowIterator->second.second->refresh();
 		return true;
 	}
 

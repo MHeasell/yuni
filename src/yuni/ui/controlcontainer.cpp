@@ -14,6 +14,8 @@ namespace UI
 		// TODO: Resize children to fit in the parent's new dimensions
 		(void) newWidth;
 		(void) newHeight;
+		pWidth = newWidth;
+		pHeight = newHeight;
 	}
 
 

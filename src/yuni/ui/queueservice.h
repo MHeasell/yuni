@@ -46,7 +46,8 @@ namespace UI
 		typedef typename EventLoopType::RequestType  RequestType;
 
 		//! Window association map
-		typedef std::map<IComponent::ID, std::pair<Window*, Private::UI::Local::IWindow*> > WindowMap;
+		typedef std::pair<Window*, Private::UI::Local::IWindow*>  WindowPair;
+		typedef std::map<IComponent::ID, WindowPair>  WindowMap;
 		typedef std::map<GUID, WindowMap>  ApplicationWindowMap;
 		//! Component storage with unique identifiers to access them
 		typedef std::map<GUID, std::map<IComponent::ID, IComponent*> >  Components;
@@ -94,7 +95,7 @@ namespace UI
 			float height;
 
 			ResizeWindowParams(GUID appID, const IComponent::ID& window, float w, float h)
-				: applicationGUID(appID), windowID(window)
+				: applicationGUID(appID), windowID(window), width(w), height(h)
 			{}
 		};
 		//@}
@@ -117,7 +118,7 @@ namespace UI
 		void showWindow(const GUID& appID, Window* window);
 		void hideWindow(const GUID& appID, const IComponent::ID& windowID);
 		void closeWindow(const GUID& appID, const IComponent::ID& windowID);
-		void resizeWindow(const GUID& appID, const IComponent::ID& windowID);
+		void resizeWindow(const GUID& appID, const IComponent::ID& windowID, float width, float height);
 
 		void showComponent(const GUID& appID, IComponent::Ptr component);
 		void hideComponent(const GUID& appID, const IComponent::ID& componentID);

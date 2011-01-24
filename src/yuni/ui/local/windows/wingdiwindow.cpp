@@ -79,7 +79,10 @@ namespace Windows
 				case WM_CLOSE: // Did we receive a Close message?
 					{
 						if (window && !window->closing())
+						{
+							DestroyWindow(hWnd);
 							window->window()->close();
+						}
 						return 0;
 					}
 
@@ -87,8 +90,12 @@ namespace Windows
 				 	return 0;
 
 				case WM_PAINT:
+					{
+						window->refresh();
+						return 0;
+					}
 				case WM_SIZE: // Resize the window
-				case WM_SIZING: // Resize the window
+				case WM_SIZING: // Resizing the window
 					{
 						if (window)
 						{
@@ -96,7 +103,7 @@ namespace Windows
 							GetClientRect(hWnd, &clientRect);
 							window->window()->resize(
 								static_cast<float>(clientRect.right - clientRect.left),
-								static_cast<float>(clientRect.top - clientRect.bottom));
+								static_cast<float>(clientRect.bottom - clientRect.top));
 // 							window->window()->resize(LOWORD(lParam), HIWORD(lParam));
 						}
 						return 0;
@@ -306,11 +313,21 @@ namespace Windows
 
 	bool IWinGDIWindow::pollEvents()
 	{
+		const int THRESHOLD = 100;
+		static int current = 0;
 		MSG msg;
 		bool msgProcessed = false;
 
+		if (current > THRESHOLD)
+			current = 0;
+		else
+		{
+			current++;
+			return false;
+		}
+
 		// Is there a message waiting?
-		while (!closing() && PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		if (!closing() && PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			// Have we received a Quit message?
 			if (msg.message == WM_QUIT)
