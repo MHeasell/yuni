@@ -108,7 +108,7 @@ namespace UI
 		void parent(IControl::Ptr newParent);
 
 		//! Get the children
-		const IControl::Map& children() const;
+		IControl::Map children() const;
 
 		//! Is there a parent ?
 		bool hasParent() const;
@@ -121,19 +121,19 @@ namespace UI
 
 		//! Enable / disable the control
 		void enabled(bool e);
+		//! Get if the control is enabled
 		bool enabled() const;
 
 		// Set visibility of the control
 		void visible(bool e);
+		//! Get if the control is visible
 		bool visible() const;
 
 	protected:
 		//! Set the parent (without locking)
 		virtual void parentWL(const IControl::Ptr& newParent);
-
 		//! Detach from the tree
 		virtual void detachWL();
-
 		//! Add a child
 		virtual void addChildWL(const IControl::Ptr& child);
 		//! Remove a child

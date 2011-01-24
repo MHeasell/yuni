@@ -84,7 +84,7 @@ namespace UI
 	}
 
 
-	inline const IControl::Map& IControl::children() const
+	inline IControl::Map IControl::children() const
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		return pChildren;
