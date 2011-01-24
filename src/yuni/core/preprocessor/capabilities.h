@@ -90,9 +90,9 @@
 
 
 # if defined(__TOS_WIN__) || defined(__WIN32__) || defined(_WIN64) || defined(_WIN32)
-#	include "capabilities/windows.h"
+#	include "windows.h"
 # else
-#	include "capabilities/unixes.h"
+#	include "unixes.h"
 # endif
 
 
