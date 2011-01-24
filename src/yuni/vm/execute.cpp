@@ -1,7 +1,8 @@
 
 #include "program.h"
 #include "instructions.h"
-#include <stdlib.h>
+#include <cstdlib>
+#include <cstring>
 
 
 namespace Yuni
