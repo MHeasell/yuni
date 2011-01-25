@@ -8,13 +8,12 @@
 # include "flow/continuous.h"
 # include "flow/timer.h"
 # include "statistics/none.h"
-# include "../system/sleep.h"
+# include "../system/suspend.h"
 # include "../static/assert.h"
 # include "../static/inherit.h"
 # include <cassert>
 # include "../../thread/thread.h"
 # include "loop.fwd.h"
-# include "../system/sleep.h"
 
 
 
