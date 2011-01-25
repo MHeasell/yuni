@@ -33,12 +33,17 @@ namespace Windows
 
 	bool CairoWindow::refresh()
 	{
-		pSurface = cairo_win32_printing_surface_create(GetDC(pHWnd));
+		PAINTSTRUCT paint;
+
+		HDC hdc = BeginPaint(pHWnd, &paint);
+		pSurface = cairo_win32_surface_create(hdc);
 // 		pSurface = cairo_win32_surface_create_with_ddb(GetDC(pHWnd),
 // 			CAIRO_FORMAT_ARGB32, (unsigned int)pUIWnd->width(),
 // 			(unsigned int)pUIWnd->height());
 		assert(cairo_surface_status(pSurface) == CAIRO_STATUS_SUCCESS && "Cairo surface creation failed !");
-		return Surface::Cairo::refresh();
+		bool result = Surface::Cairo::refresh();
+		EndPaint(pHWnd, &paint);
+		return result;
 	}
 
 
