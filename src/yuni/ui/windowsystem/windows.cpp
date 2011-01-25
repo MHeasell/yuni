@@ -34,8 +34,6 @@ namespace WindowSystem
 					appIt->second.erase(winIt);
 					continue;
 				}
-				// For the moment, always draw the surfaces
-				winIt->second.second->refresh();
 			}
 		}
 
@@ -104,10 +102,6 @@ namespace WindowSystem
 
 	bool Windows::resizeWindowDispatched(ResizeWindowParams::Ptr params)
 	{
-		std::cout << "width: " << params->width
-				  << ", height: " << params->height
-				  << std::endl;
-
 		if (!params)
 			return true;
 

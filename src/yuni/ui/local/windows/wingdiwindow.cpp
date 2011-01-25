@@ -327,7 +327,7 @@ namespace Windows
 		}
 
 		// Is there a message waiting?
-		if (!closing() && PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		while (!closing() && PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			// Have we received a Quit message?
 			if (msg.message == WM_QUIT)
