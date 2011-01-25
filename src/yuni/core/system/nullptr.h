@@ -38,6 +38,7 @@ namespace Yuni
 			return 0;
 		}
 
+		# if YUNI_OS_GCC_VERSION > 40300
 		template<class T> bool operator == (const T* rhs) const
 		{
 			return !rhs;
@@ -47,6 +48,7 @@ namespace Yuni
 		{
 			return (NULL != rhs);
 		}
+		# endif
 
 	private:
 		void operator&() const;  /* Can't take address of nullptr */
@@ -62,17 +64,19 @@ namespace Yuni
 
 
 
+# if YUNI_OS_GCC_VERSION > 40400
 template<class T>
-inline bool operator == (const T* rhs, const Yuni::NullPtr& null)
+inline bool operator == (const T* rhs, const Yuni::NullPtr&)
 {
 	return !rhs;
 }
 
 template<class T>
-inline bool operator != (const T* rhs, const Yuni::NullPtr& null)
+inline bool operator != (const T* rhs, const Yuni::NullPtr&)
 {
-	return NULL != rhs;
+	return static_cast<const T*>(NULL) != rhs;
 }
+# endif
 
 
 # endif /* C++ Compiler */
