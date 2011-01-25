@@ -38,7 +38,7 @@ namespace Yuni
 			return 0;
 		}
 
-		# if YUNI_OS_GCC_VERSION > 40300
+		# if YUNI_OS_GCC_VERSION >= 40400
 		template<class T> bool operator == (const T* rhs) const
 		{
 			return !rhs;
@@ -64,7 +64,7 @@ namespace Yuni
 
 
 
-# if YUNI_OS_GCC_VERSION > 40400
+# if YUNI_OS_GCC_VERSION >= 40400
 template<class T>
 inline bool operator == (const T* rhs, const Yuni::NullPtr&)
 {
