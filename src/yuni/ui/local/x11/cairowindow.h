@@ -6,7 +6,7 @@
 # ifdef YUNI_WINDOWSYSTEM_X11
 #	include "x11yuni.h"
 #	include "../window.h"
-#	include "../../../gfx/surface/cairo.h"
+#	include "../surface/cairo.h"
 
 
 namespace Yuni
@@ -24,7 +24,7 @@ namespace X11
 	/*!
 	** \brief X11-specific window, using a Cairo surface to render
 	*/
-	class CairoWindow: public IWindow, public Yuni::Gfx::Surface::Cairo
+	class CairoWindow: public IWindow, public Surface::Cairo
 	{
 	public:
 		//! The Threading Policy
@@ -37,7 +37,7 @@ namespace X11
 		virtual bool initialize();
 		virtual void close();
 		virtual void resize(float width, float height);
-		virtual Yuni::Gfx::Surface::Cairo* surface2D() { return this; }
+		virtual Surface::Cairo* surface2D() { return this; }
 
 	protected:
 		/*!

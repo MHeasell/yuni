@@ -46,6 +46,7 @@ list(APPEND SRC_UI
 	ui/local/windows/wingdiwindow.h
 	ui/local/windows/cairowindow.h ui/local/windows/cairowindow.hxx
 	ui/local/x11/x11yuni.h
+	ui/local/x11/x11window.h
 	ui/local/x11/cairowindow.h ui/local/x11/cairowindow.hxx
 
 	# Window
@@ -105,7 +106,7 @@ if (WIN32 OR WIN64)
 	list(APPEND SRC_UI ui/local/windows/wingdiwindow.cpp ui/windowsystem/windows.cpp)
 else()
 	if (UNIX AND NOT APPLE)
-		list(APPEND SRC_UI ui/windowsystem/x11.cpp)
+		list(APPEND SRC_UI ui/local/x11/x11window.cpp ui/windowsystem/x11.cpp)
 	endif ()
 endif ()
 

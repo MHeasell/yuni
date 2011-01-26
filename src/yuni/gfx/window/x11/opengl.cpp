@@ -160,65 +160,6 @@ namespace Window
 	}
 
 
-	bool OpenGLX11::pollEvents()
-	{
-		if (!XPending(pDisplay))
-			return false;
-
-		// Event loop
-		do
-		{
-			XNextEvent(pDisplay, &pXEvent);
-			switch (pXEvent.type)
-			{
-				case Expose:
-					break;
-
-				case ConfigureNotify:
-					{
-						// Resize Only if our window-size changed
-						if ((int)pUIWnd->width() != pXEvent.xconfigure.width
-							|| (int)pUIWnd->height() != pXEvent.xconfigure.height)
-							resize((float)pXEvent.xconfigure.width, (float)pXEvent.xconfigure.height);
-						break;
-					}
-
-				case ButtonPress:
-					// KeyPress
-					break;
-
-				case KeyPress:
-					if (0)
-					{/*
-						if (XLookupKeysym(&pXEvent.xkey, 0) == XK_Escape)
-						{
-							done = True;
-						}
-						if (XLookupKeysym(&pXEvent.xkey,0) == XK_F1)
-						{
-							destroyWindow();
-							fullscreen = !fullscreen;
-							createWindow();
-						}*/
-					}
-					break;
-				case ClientMessage:
-					{
-						if (*XGetAtomName(pDisplay, pXEvent.xclient.message_type) == *"WM_PROTOCOLS")
-						{
-							close();
-						}
-						break;
-					}
-				default:
-					break;
-			}
-		} while (XPending(pDisplay) > 0);
-		return true;
-	}
-
-
-
 
 } // namespace Window
 } // namespace Gfx

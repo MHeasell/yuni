@@ -4,6 +4,7 @@
 
 # include "../../../yuni.h"
 # include <GL/glx.h>
+# include <X11/extensions/Xrender.h>
 
 // The define None from the X11 headers overlaps with Yuni::None...
 # ifdef None
