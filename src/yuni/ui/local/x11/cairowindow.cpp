@@ -21,7 +21,7 @@ namespace X11
 			CAIRO_FORMAT_ARGB32, (unsigned int)pUIWnd->width(),
 			(unsigned int)pUIWnd->height());
 		*/
-		Yuni::Gfx::Surface::Cairo::initialize();
+		Surface::Cairo::initialize();
 		return true;
 	}
 
@@ -36,7 +36,7 @@ namespace X11
 			(unsigned int)height);
 		pContext = cairo_create(pSurface);
 		*/
-		Yuni::Gfx::Surface::Cairo::resize(width, height);
+		Surface::Cairo::resize(width, height);
 	}
 
 
