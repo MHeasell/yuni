@@ -4,47 +4,50 @@
 #
 
 # Core
-set(YUNI_MODULE_CORE                      TRUE) # Must be True
+set(YUNI_MODULE_CORE                      true) # Must be True
 
 # VFS
-#set(YUNI_MODULE_VFS                       FALSE)
-#	set(YUNI_MODULE_VFS_FILE              TRUE)
+#set(YUNI_MODULE_VFS                       false)
+#	set(YUNI_MODULE_VFS_FILE              true)
 
 # VM
-set(YUNI_MODULE_VM                        FALSE)
+set(YUNI_MODULE_VM                        false)
 
 # Devices
-set(YUNI_MODULE_DEVICES                   FALSE)
-	set(YUNI_MODULE_DEVICE_DISPLAY        TRUE)
-	set(YUNI_MODULE_DEVICE_KEYBOARD       TRUE)
-	set(YUNI_MODULE_DEVICE_MOUSE          TRUE)
+set(YUNI_MODULE_DEVICES                   false)
+	set(YUNI_MODULE_DEVICE_DISPLAY        true)
+	set(YUNI_MODULE_DEVICE_KEYBOARD       true)
+	set(YUNI_MODULE_DEVICE_MOUSE          true)
 
 # Gfx3D
-set(YUNI_MODULE_GFX3D                     FALSE)
+set(YUNI_MODULE_GFX3D                     false)
 
 # Audio
-set(YUNI_MODULE_AUDIO                     FALSE)
+set(YUNI_MODULE_AUDIO                     false)
 
 # Scripts
-set(YUNI_MODULE_SCRIPT                    FALSE)
-	set(YUNI_EXTERNAL_SCRIPT_LUA          TRUE)
+set(YUNI_MODULE_SCRIPT                    false)
+	set(YUNI_EXTERNAL_SCRIPT_LUA          true)
 
 # Network
-set(YUNI_MODULE_NET                       TRUE)
+set(YUNI_MODULE_NET                       true)
 
 # UI (User Interface)
-set(YUNI_MODULE_UI                        FALSE)
-	set(YUNI_EXTERNAL_GFX_CAIROPANGO	  TRUE)
-	set(YUNI_MODULE_UI_DUMMY              TRUE)
+set(YUNI_MODULE_UI                        false)
+	set(YUNI_EXTERNAL_GFX_CAIROPANGO	  true)
+	set(YUNI_MODULE_UI_DUMMY              true)
 
 # Algorithms
-set(YUNI_MODULE_ALGORITHMS                FALSE)
+set(YUNI_MODULE_ALGORITHMS                false)
+
+# Markdown
+set(YUNI_MODULE_EXTRA_MARKDOWN            false)
 
 
 # Tests
-set(YUNI_TESTS   FALSE)
+set(YUNI_TESTS   false)
 # Samples
-set(YUNI_SAMPLES FALSE)
+set(YUNI_SAMPLES false)
 
 
 
@@ -66,6 +69,8 @@ set(YUNI_MODULE_LIST
 		uidummy
 		ui3d
 	net
+	# extra
+		markdown
 	)
 
 
@@ -75,243 +80,255 @@ set(YUNI_MODULE_LIST
 # --- Command lines options ---
 #
 if(MODULES)
-	set(KeywordError FALSE)
+	set(KeywordError false)
 	string(REPLACE "," ";" MODULES "${MODULES}")
 	string(REPLACE " " ";" MODULES "${MODULES}")
 	string(REPLACE "+" "" MODULES "${MODULES}")
 
 	foreach(it ${MODULES})
-		set(KeywordIsKnown FALSE)
+		set(KeywordIsKnown false)
 
 		# core
 		if("${it}" STREQUAL "core")
-			set(YUNI_MODULE_CORE TRUE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_CORE true)
+			set(KeywordIsKnown true)
 		endif()
 		# -core
 		if("${it}" STREQUAL "-core")
-			set(KeywordIsKnown TRUE)
+			set(KeywordIsKnown true)
 			YMESSAGE("[!!] Module: Impossible to disable the core module")
-			set(KeywordError TRUE)
+			set(KeywordError true)
 		endif()
 
 		# all
 		if("${it}" STREQUAL "all")
-			set(YUNI_MODULE_CORE TRUE)
-			#set(YUNI_MODULE_VFS TRUE)
-			set(YUNI_MODULE_DEVICES TRUE)
-			set(YUNI_MODULE_VM TRUE)
-			set(YUNI_MODULE_GFX3D TRUE)
-			set(YUNI_MODULE_AUDIO TRUE)
-			set(YUNI_MODULE_NET TRUE)
-			set(YUNI_MODULE_SCRIPT TRUE)
-			set(YUNI_MODULE_UI TRUE)
-			set(YUNI_MODULE_UI_DUMMY TRUE)
-			set(YUNI_MODULE_DATABASE TRUE)
-			set(YUNI_MODULE_ALGORITHMS TRUE)
-			set(YUNI_SAMPLES TRUE)
-			set(YUNI_TESTS TRUE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_CORE true)
+			#set(YUNI_MODULE_VFS true)
+			set(YUNI_MODULE_DEVICES true)
+			set(YUNI_MODULE_VM true)
+			set(YUNI_MODULE_GFX3D true)
+			set(YUNI_MODULE_AUDIO true)
+			set(YUNI_MODULE_NET true)
+			set(YUNI_MODULE_SCRIPT true)
+			set(YUNI_MODULE_UI true)
+			set(YUNI_MODULE_UI_DUMMY true)
+			set(YUNI_MODULE_DATABASE true)
+			set(YUNI_MODULE_ALGORITHMS true)
+			set(YUNI_MODULE_EXTRA_MARKDOWN true)
+			set(YUNI_SAMPLES true)
+			set(YUNI_TESTS true)
+			set(KeywordIsKnown true)
 		endif()
 
 		# vfs
 		#if("${it}" STREQUAL "vfs")
-		#	set(YUNI_MODULE_VFS TRUE)
-		#	set(KeywordIsKnown TRUE)
+		#	set(YUNI_MODULE_VFS true)
+		#	set(KeywordIsKnown true)
 		#endif()
 		# -vfs
 		#if("${it}" STREQUAL "-vfs")
-		#	set(YUNI_MODULE_VFS FALSE)
-		#	set(KeywordIsKnown TRUE)
+		#	set(YUNI_MODULE_VFS false)
+		#	set(KeywordIsKnown true)
 		#endif()
 
 		# vfs-local
 		#if("${it}" STREQUAL "vfs-local")
-		#	set(YUNI_MODULE_VFS TRUE)
-		#	set(YUNI_MODULE_VFS_LOCAL TRUE)
-		#	set(KeywordIsKnown TRUE)
+		#	set(YUNI_MODULE_VFS true)
+		#	set(YUNI_MODULE_VFS_LOCAL true)
+		#	set(KeywordIsKnown true)
 		#endif()
 		# -vfs
 		#if("${it}" STREQUAL "-vfs-local")
-		#	set(YUNI_MODULE_VFS_LOCAL FALSE)
-		#	set(KeywordIsKnown TRUE)
+		#	set(YUNI_MODULE_VFS_LOCAL false)
+		#	set(KeywordIsKnown true)
 		#endif()
 
 		# vm
 		if("${it}" STREQUAL "vm")
-			set(YUNI_MODULE_VM TRUE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_VM true)
+			set(KeywordIsKnown true)
 		endif()
 		# -vm
 		if("${it}" STREQUAL "-vm")
-			set(YUNI_MODULE_VM FALSE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_VM false)
+			set(KeywordIsKnown true)
 		endif()
 
 
 		# algorithms
 		if("${it}" STREQUAL "algorithms")
-			set(YUNI_MODULE_ALGORITHMS TRUE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_ALGORITHMS true)
+			set(KeywordIsKnown true)
 		endif()
 		# -algorithms
 		if("${it}" STREQUAL "-algorithms")
-			set(YUNI_MODULE_ALGORITHMS FALSE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_ALGORITHMS false)
+			set(KeywordIsKnown true)
 		endif()
 
 
 		# display
 		if("${it}" STREQUAL "display")
-			set(YUNI_MODULE_DEVICE_DISPLAY TRUE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_DEVICE_DISPLAY true)
+			set(KeywordIsKnown true)
 		endif()
 		# -display
 		if("${it}" STREQUAL "-display")
-			set(YUNI_MODULE_DEVICE_DISPLAY FALSE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_DEVICE_DISPLAY false)
+			set(KeywordIsKnown true)
 		endif()
 
 		# keyboard
 		if("${it}" STREQUAL "keyboard")
-			set(YUNI_MODULE_DEVICE_KEYBOARD TRUE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_DEVICE_KEYBOARD true)
+			set(KeywordIsKnown true)
 		endif()
 		# -keyboard
 		if("${it}" STREQUAL "-keyboard")
-			set(YUNI_MODULE_DEVICE_KEYBOARD FALSE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_DEVICE_KEYBOARD false)
+			set(KeywordIsKnown true)
 		endif()
 
 		# mouse
 		if("${it}" STREQUAL "mouse")
-			set(YUNI_MODULE_DEVICE_MOUSE TRUE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_DEVICE_MOUSE true)
+			set(KeywordIsKnown true)
 		endif()
 		# -mouse
 		if("${it}" STREQUAL "-mouse")
-			set(YUNI_MODULE_DEVICE_MOUSE FALSE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_DEVICE_MOUSE false)
+			set(KeywordIsKnown true)
 		endif()
 
 		# devices
 		if("${it}" STREQUAL "devices")
-			set(YUNI_MODULE_DEVICES TRUE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_DEVICES true)
+			set(KeywordIsKnown true)
 		endif()
 		# -devices
 		if("${it}" STREQUAL "-devices")
-			set(YUNI_MODULE_DEVICES FALSE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_DEVICES false)
+			set(KeywordIsKnown true)
 		endif()
 
 
 		# net
 		if("${it}" STREQUAL "net")
-			set(YUNI_MODULE_NET TRUE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_NET true)
+			set(KeywordIsKnown true)
 		endif()
 		# -net
 		if("${it}" STREQUAL "-net")
-			set(YUNI_MODULE_NET FALSE)
-			set(KeywordIsKnown TRUE)
+			set(YUNI_MODULE_NET false)
+			set(KeywordIsKnown true)
 		endif()
 
 		# gfx3d
 		if("${it}" STREQUAL "gfx3d")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_GFX3D TRUE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_GFX3D true)
 		endif()
 		# -gfx3d
 		if("${it}" STREQUAL "-gfx3d")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_GFX3D FALSE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_GFX3D false)
 		endif()
 
 
 		# audio
 		if("${it}" STREQUAL "audio")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_AUDIO TRUE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_AUDIO true)
 		endif()
 		# -audio
 		if("${it}" STREQUAL "-audio")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_AUDIO FALSE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_AUDIO false)
 		endif()
 
 
 		# script
 		if("${it}" STREQUAL "script")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_SCRIPT TRUE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_SCRIPT true)
 		endif()
 		# -lua
 		if("${it}" STREQUAL "-script")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_SCRIPT FALSE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_SCRIPT false)
 		endif()
 
 		# lua
 		if("${it}" STREQUAL "lua")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_SCRIPT TRUE)
-			set(YUNI_EXTERNAL_SCRIPT_LUA TRUE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_SCRIPT true)
+			set(YUNI_EXTERNAL_SCRIPT_LUA true)
 		endif()
 		# -lua
 		if("${it}" STREQUAL "-lua")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_EXTERNAL_SCRIPT_LUA FALSE)
+			set(KeywordIsKnown true)
+			set(YUNI_EXTERNAL_SCRIPT_LUA false)
 		endif()
 
 
 		# Tests
 		if("${it}" STREQUAL "tests")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_TESTS TRUE)
+			set(KeywordIsKnown true)
+			set(YUNI_TESTS true)
 		endif()
 		# -tests
 		if("${it}" STREQUAL "-tests")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_TESTS FALSE)
+			set(KeywordIsKnown true)
+			set(YUNI_TESTS false)
 		endif()
 
 		# samples
 		if("${it}" STREQUAL "samples")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_SAMPLES TRUE)
+			set(KeywordIsKnown true)
+			set(YUNI_SAMPLES true)
 		endif()
 		# -samples
 		if("${it}" STREQUAL "-samples")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_SAMPLES FALSE)
+			set(KeywordIsKnown true)
+			set(YUNI_SAMPLES false)
 		endif()
 
 		# ui (User Interface)
 		if("${it}" STREQUAL "ui")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_UI TRUE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_UI true)
 		endif()
 		# -ui
 		if("${it}" STREQUAL "-ui")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_UI FALSE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_UI false)
 		endif()
 
 		# uidummy (User Interface)
 		if("${it}" STREQUAL "uidummy")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_UI_DUMMY TRUE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_UI_DUMMY true)
 		endif()
 		# -ui
 		if("${it}" STREQUAL "-uidummy")
-			set(KeywordIsKnown TRUE)
-			set(YUNI_MODULE_UI_DUMMY FALSE)
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_UI_DUMMY false)
+		endif()
+
+		# markdown
+		if("${it}" STREQUAL "markdown")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_EXTRA_MARKDOWN true)
+		endif()
+		# -markdown
+		if("${it}" STREQUAL "-markdown")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_EXTRA_MARKDOWN false)
 		endif()
 
 		if(NOT KeywordIsKnown)
 			YMESSAGE("[!!] Unknown module from command line: `${it}` (ignored)")
-			set(KeywordError TRUE)
+			set(KeywordError true)
 		endif()
 
 	endforeach()
@@ -344,6 +361,8 @@ if(MODULES)
 		YMESSAGE(" The scripting modules")
 		YMESSAGE("    -/+script      : The script module (default: disabled)")
 		YMESSAGE("    -/+lua         : The Lua extension (default: enabled)")
+		YMESSAGE(" The extra modules")
+		YMESSAGE("    -/+markdown    : Markdown (default: disabled)")
 		YMESSAGE(" The ui modules")
 		YMESSAGE("    -/+ui          : The ui module (default: disabled)")
 		YMESSAGE("    -/+uidummy     : The dummy ui manager (default: enabled)")
@@ -354,35 +373,35 @@ endif()
 
 
 if(YUNI_MODULE_DEVICE_DISPLAY AND YUNI_MODULE_DEVICES)
-	SET(TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED TRUE)
+	SET(TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED true)
 else()
-	SET(TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED FALSE)
+	SET(TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED false)
 endif()
 
 if(YUNI_MODULE_GFX3D AND NOT TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED)
-	SET(YUNI_MODULE_DEVICES TRUE)
-	SET(YUNI_MODULE_DEVICE_DISPLAY TRUE)
+	SET(YUNI_MODULE_DEVICES true)
+	SET(YUNI_MODULE_DEVICE_DISPLAY true)
 endif()
 
 if(YUNI_MODULE_UI)
 	if(NOT YUNI_EXTERNAL_GFX_CAIROPANGO)
 		YMESSAGE("[!!] Warning: Cairo and Pango are required for the `ui` module. The module has been disabled.")
-		set(YUNI_MODULE_UI FALSE)
-		set(YUNI_MODULE_UI_3D FALSE)
+		set(YUNI_MODULE_UI false)
+		set(YUNI_MODULE_UI_3D false)
 	endif()
 endif()
 
 if(YUNI_MODULE_SCRIPT)
 	if(NOT YUNI_EXTERNAL_SCRIPT_LUA)
 		YMESSAGE("[!!] Warning: No external extension for the `script` module. The module has been disabled.")
-		set(YUNI_MODULE_SCRIPT FALSE)
+		set(YUNI_MODULE_SCRIPT false)
 	endif()
 endif()
 
 if(YUNI_MODULE_DATABASE)
 	if(NOT YUNI_MODULE_DB_PSQL)
 		YMESSAGE("[!!] Warning: No external extension for the `database` module. The module has been disabled.")
-		set(YUNI_MODULE_DATABASE FALSE)
+		set(YUNI_MODULE_DATABASE false)
 	endif()
 endif()
 
@@ -450,6 +469,10 @@ if(YUNI_MODULE_UI)
 	if(YUNI_MODULE_UI_DUMMY)
 		list(APPEND YUNI_MODULE_AVAILABLE uidummy)
 	endif()
+endif()
+
+if(YUNI_MODULE_EXTRA_MARKDOWN)
+	LIST(APPEND YUNI_MODULE_AVAILABLE markdown)
 endif()
 
 
