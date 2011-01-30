@@ -33,6 +33,7 @@ if(Yuni_FOUND)
 	add_subdirectory(jobs)
 	add_subdirectory(script)
 	add_subdirectory(threads)
+	add_subdirectory(extra)
 else()
 		
 	YMESSAGE("A working Yuni Framework was not found (could not locate yuni-config).")

@@ -138,7 +138,10 @@ namespace Core
 		class ConvP>
 	inline bool TreeN<T,TP,ChckP,ConvP>::remove(Ptr& node)
 	{
-		return (node->parent() == *this) ? internalRemoveChild(*node) : false;
+		// only the real parent can remove a node
+		return (Ptr::WeakPointer(node->parent()) == this)
+			? internalRemoveChild(*node)
+			: false;
 	}
 
 
@@ -439,7 +442,7 @@ namespace Core
 		for (unsigned int i = 0; i < level; ++i)
 			out << "    ";
 		printEndWL(out, level);
-		out << std::endl;
+		out << '\n';
 		return out;
 	}
 

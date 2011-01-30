@@ -96,6 +96,10 @@ EndIf()
 #endif(YUNI_MODULE_ALGORITHMS)
 
 
+if(YUNI_MODULE_EXTRA_MARKDOWN)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/extra-markdown.cmake")
+endif()
+
 
 
 if(YUNI_TESTS)
