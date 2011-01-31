@@ -8,22 +8,22 @@ namespace Yuni
 namespace Math
 {
 
-	template<typename T> ALWAYS_INLINE inline T Exp(T x)
+	template<typename T> inline T Exp(T x)
 	{
 		return (T)::exp((T)x);
 	}
 
-	template<> ALWAYS_INLINE inline float Exp(float x)
+	template<> inline float Exp(float x)
 	{
 		return ::expf(x);
 	}
 
-	template<> ALWAYS_INLINE inline double Exp(double x)
+	template<> inline double Exp(double x)
 	{
 		return ::exp(x);
 	}
 
-	template<> ALWAYS_INLINE inline long double Exp<long double>(long double x)
+	template<> inline long double Exp<long double>(long double x)
 	{
 		return ::expl(x);
 	}
