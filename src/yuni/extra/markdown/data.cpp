@@ -149,7 +149,7 @@ namespace Markdown
 			else
 			{
 				// adding the text to the last node within the stack
-				nodeText += text;
+				nodeText << ' ' << text;
 			}
 		}
 
@@ -224,7 +224,7 @@ namespace Markdown
 							signature.pop();
 							return i - 1;
 						}
-						signature.add(Node::list, i);
+						signature.add(Node::list, i, true);
 						break;
 					}
 				case '>':
@@ -283,6 +283,16 @@ namespace Markdown
 				continue;
 			}
 			// Maybe we are still in the same block
+			const unsigned int newCurI = curI + 1;
+			if (newCurI < cur.size)
+			{
+				if (cur.nodes[newCurI] == old.nodes[oldI] && cur.offsets[newCurI] == old.offsets[oldI])
+				{
+					++oldI;
+					curI += 2;
+					continue;
+				}
+			}
 		}
 
 		// pop the stack
@@ -340,5 +350,4 @@ namespace Markdown
 } // namespace Markdown
 } // namespace Private
 } // namespace Yuni
-
 

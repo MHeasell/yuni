@@ -46,13 +46,14 @@ namespace Markdown
 			nodes[0]   = Node::document;
 		}
 
-		void add(const Node::Type node, unsigned int offset)
+		void add(const Node::Type node, unsigned int offset, bool force = false)
 		{
 			assert(size != hardLimit - 1 && "Two many indentation levels");
 			assert(size != 0 && "A signature must at least contain the document node");
 
-			nodes[size]  = node;
-			offsets[size] = offset;
+			nodes[size]     = node;
+			offsets[size]   = offset;
+			forcePush[size] = force;
 			++size;
 		}
 
@@ -116,6 +117,7 @@ namespace Markdown
 		unsigned int size;
 		char nodes[hardLimit];
 		unsigned int offsets[hardLimit];
+		bool forcePush[hardLimit];
 
 	}; // class Signature
 

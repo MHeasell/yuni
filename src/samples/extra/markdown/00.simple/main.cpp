@@ -1,29 +1,36 @@
 
 #include <yuni/yuni.h>
 #include <yuni/extra/markdown/reader.h>
+#include <yuni/core/io/file.h>
 
 
-int main()
+int main(int argc, char** argv)
 {
+	if (argc < 2)
+		return 0;
+
 	using namespace Yuni;
 
 	Markdown::Reader  reader;
-	reader.beginDocument("<memory>");
+	CustomString<4096> buffer;
 
-	reader += "# Introduction\n";
-	reader += "Here is a proposal...\n";
-	reader += "\n";
-	reader += "\n";
-	reader += "> Quoting level...\n";
-	reader += "> > *  Another quote\n";
-	reader += "> >    Another quote\n";
-	reader += "> >    Another quote\n";
-	reader += "> > * > Another quote\n";
-	reader += "> > * > ## Subtitle > \n";
-	reader += "\n";
-	reader += "\n";
+	for (int i = 1; i < argc; ++i)
+	{
+		// filename
+		const char* const filename = argv[i];
 
-	reader.endDocument();
+		Core::IO::File::Stream file;
+		// opening out file
+		if (file.open(filename))
+		{
+			reader.beginDocument(argv[i]);
+			// A buffer. The given capacity will be the maximum length for a single line
+			while (file.readline(buffer))
+				reader += buffer;
+		
+			reader.endDocument();
+		}
+	}
 
 	return 0;
 }
