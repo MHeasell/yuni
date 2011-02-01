@@ -22,10 +22,10 @@ namespace Markdown
 
 		enum
 		{
-			defaultLinePosition = 1,
+			defaultLinePosition   = 1,
 			defaultColumnPosition = 0,
-			debug = Yuni::Markdown::markdownDebug,
-			stackLimit = Yuni::Markdown::stackLimit,
+			debug                 = Yuni::Markdown::markdownDebug,
+			stackLimit            = Yuni::Markdown::stackLimit,
 		};
 
 	public:
@@ -35,12 +35,9 @@ namespace Markdown
 		~ReaderData()
 		{}
 
-
 		void reset();
 
-
 		void parse(const StringAdapter& text);
-
 
 		void flush();
 
