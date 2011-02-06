@@ -1727,11 +1727,25 @@ namespace Yuni
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::consume(
-		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size n)
+		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size n)
 	{
-		YUNI_STATIC_ASSERT(!adapter, CustomString_Adapter_ReadOnly);
 		if (n)
-			Yuni::Private::CustomStringImpl::Consume<CustomStringType, adapter>::Perform(*this, n);
+		{
+			if (!adapter)
+				Yuni::Private::CustomStringImpl::Consume<CustomStringType, adapter>::Perform(*this, n);
+			else
+			{
+				if (n >= AncestorType::size)
+				{
+					AncestorType::size = 0;
+				}
+				else
+				{
+					AncestorType::data += n;
+					AncestorType::size -= n;
+				}
+			}
+		}
 	}
 
 
