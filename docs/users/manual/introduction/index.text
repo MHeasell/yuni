@@ -31,7 +31,7 @@ The Yuni project is connected to all these domains :
 Misconceptions
 --------------
 
-Yuni is not a 3D engine nor a game engine.
+Yuni is not a 3D engine nor a game engine.  
 It offers a 3D engine as part of a wide-range library interested in multimedia
 and virtual worlds. Yuni is not a contender for Ogre or Irrlicht. These
 projects are high-end game engines working locally with complete data of the
