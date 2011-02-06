@@ -90,7 +90,7 @@ namespace Core
 	inline void TreeN<T,TP,ChckP,ConvP>::parent(Ptr newParent)
 	{
 		detachFromParent();
-		newParent->push_back(this);
+		newParent->push_back(static_cast<Node*>(this));
 	}
 
 
