@@ -83,10 +83,11 @@ namespace Yuni
 
 
 	/*!
-	** \brief Locks a mutex in the constructor and unlocks it in the destructor.
+	** \brief Locks a mutex in the constructor and unlocks it in the destructor (RAII).
 	**
 	** This class is especially usefull for `get` accessor` and/or returned values
 	** which have to be thread-safe.
+	** This is a very common C++ idiom, known as "Resource Acquisition Is Initialization" (RAII).
 	**
 	** \code
 	**	  class Foo
