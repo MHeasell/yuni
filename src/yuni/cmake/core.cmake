@@ -722,8 +722,16 @@ source_group(core\\system\\Console FILES ${SRC_CORE_SYSTEM_CONSOLE})
 
 
 
+set(SRC_CORE_MISC
+		core/noncopyable.h
+)
+source_group(core\\any FILES ${SRC_CORE_ANY})
+
+
+
 add_library(yuni-static-core STATIC
 		yuni.h
+		${SRC_CORE_MISC}
 		${SRC_CORE_PREDICATES_RESULTS}
 		${SRC_CORE_STATIC}
 		${SRC_CORE_ITERATOR}
