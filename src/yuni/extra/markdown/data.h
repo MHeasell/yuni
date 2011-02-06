@@ -52,6 +52,8 @@ namespace Markdown
 		unsigned int signatureForTheCurrentLine();
 		bool executePragma();
 		void updateStack();
+		void pushNewNode();
+		void appendParagraphText(const StringAdapter& text);
 
 	private:
 		CustomString<4096> pLine;

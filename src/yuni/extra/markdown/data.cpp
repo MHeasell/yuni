@@ -13,6 +13,17 @@ namespace Markdown
 {
 
 
+	namespace // anonymouse
+	{
+
+		inline bool IsSpace(const char c)
+		{
+			return c == ' ' || c == '\t';
+		}
+
+	} // anonymous namespace
+
+
 	void ReaderData::reset()
 	{
 		filename.clear();
@@ -75,7 +86,7 @@ namespace Markdown
 
 	void ReaderData::parseLine()
 	{
-		// removing any \r
+		// removing any final and unwanted \r
 		if (pLine.notEmpty() && pLine.last() == '\r')
 			pLine.removeLast();
 
@@ -85,7 +96,7 @@ namespace Markdown
 		{
 			const unsigned int oldSize = pLine.size();
 			pLine.trimRight(" \t");
-			pHasLineBreak = (pLine.size() + 3) > oldSize;
+			pHasLineBreak = pLine.size() + 1 < oldSize;
 		}
 	
 		// Getting the signature of the current line
@@ -125,37 +136,108 @@ namespace Markdown
 		{
 			StringAdapter text;
 			if (x < pLine.size())
+			{
 				text.adapt(pLine.c_str() + x, pLine.size() - x);
-
-			// asserts
-			assert(pStackSize > 1);
-			// alias to the last node in the stack
-			const Node::Ptr& lastNode = pStack[pStackSize - 1];
-			// alias to the text of the last available node
-			String& nodeText = lastNode->innerText;
-
-			if (!text)
-			{
-				// Empty line. We may have to start a new paragraph
-				// (only if innerText is empty however - to reduce useless memory allocation)
-				if (pCurrentLineSignature.lastType() == Node::paragraph && nodeText.notEmpty())
-				{
-					const Node::Ptr& beforeLastNode = pStack[pStackSize - 2];
-					Node::Ptr newParagraph = new Node(Node::paragraph);
-					*beforeLastNode += newParagraph;
-					pStack[pStackSize - 1] = newParagraph;
-				}
+				text.trimLeft(" \t");
 			}
-			else
-			{
-				// adding the text to the last node within the stack
-				nodeText << ' ' << text;
-			}
+
+			appendParagraphText(text);
 		}
 
 		// We have done with the current line
 		// Keeping some data for the next one
 		pLastSignature = pCurrentLineSignature;
+	}
+
+
+	void ReaderData::appendParagraphText(const StringAdapter& text)
+	{
+		assert(pStackSize > 1);
+
+		// Reference to the last node
+		const Node::Ptr& lastNode = pStack[pStackSize - 1];
+
+		if (!text)
+		{
+			// Empty line. We may have to start a new paragraph
+			// (only if innerText is empty however - to reduce useless memory allocation)
+			if (pCurrentLineSignature.lastType() == Node::paragraph && !lastNode->empty())
+				pushNewNode();
+		}
+		else
+		{
+			// At this point, we may have to promote the node to a header
+			const char c = text.first();
+			if ((c == '-' || c == '=') && String::npos == text.find_first_not_of(c, 1))
+			{
+				if (lastNode->type == Node::paragraph)
+				{
+					if (lastNode->size() == 1)
+					{
+						// Simple promotion. No need to node manipulation
+						lastNode->type = (c == '-') ? Node::header2 : Node::header1;
+					}
+					else
+					{
+						Node::Ptr lastChild = lastNode->lastChild();
+						if (lastChild->type == Node::text)
+						{
+							// Promotion to header ! Moving this child to the parent of the
+							// last node
+							const Node::Ptr& beforeLastNode = pStack[pStackSize - 2];
+							assert(!(!beforeLastNode));
+							Node::Ptr newParagraph = new Node(Node::paragraph);
+							*beforeLastNode += newParagraph;
+							lastChild->type = (c == '-') ? Node::header2 : Node::header1;
+							lastChild->parent(newParagraph);
+						}
+					}
+					// Adding a new node
+					pushNewNode();
+					return;
+				}
+				// TODO Throw a warning here
+				return;
+			}
+
+			// Pushing the new text
+			if (!lastNode->empty())
+			{
+				const Node::Ptr& sub = lastNode->lastChild();
+				if (sub->type == Node::text)
+				{
+					String& innerText = sub->innerText;
+					if (!innerText)
+						innerText = text;
+					else
+						innerText << ' ' << text;
+				}
+				else
+					*lastNode += new Node(Node::text, text);
+			}
+			else
+				*lastNode += new Node(Node::text, text);
+
+			// Adding a line break if asked
+			if (pHasLineBreak)
+			{
+				if (debug)
+					std::cout << "[markdown:debug] " << filename << ":" << line << "  added line break\n";
+				*lastNode += new Node(Node::linebreak);
+			}
+		}
+	}
+
+
+	void ReaderData::pushNewNode()
+	{
+		assert(pStackSize > 1);
+
+		const Node::Ptr& beforeLastNode = pStack[pStackSize - 2];
+		assert(!(!beforeLastNode));
+		Node::Ptr newParagraph = new Node(Node::paragraph);
+		*beforeLastNode += newParagraph;
+		pStack[pStackSize - 1] = newParagraph;
 	}
 
 
@@ -172,7 +254,6 @@ namespace Markdown
 		// *   dsfsd
 		for (unsigned int i = 0; i != pLine.size(); ++i)
 		{
-			const char c = pLine[i];
 			switch (pLine[i])
 			{
 				case ' ':
@@ -191,7 +272,7 @@ namespace Markdown
 							level = 6;
 						static const Node::Type types[] =
 						{
-							Node::header1, // useless
+							Node::header1, // unused
 							Node::header1,
 							Node::header2,
 							Node::header3,
@@ -206,26 +287,23 @@ namespace Markdown
 				case '-':
 				case '*':
 					{
-						if (signature.checkLast(Node::list, i - 1))
+						// The next ID
+						const unsigned int next = i + 1;
+						if (next < pLine.size() && IsSpace(pLine[next]))
 						{
-							// can be **something**, or *** or --- or...
-							if (pLine[i + 1] == c)
+							// OK It should be a list
+							if (signature.checkLast(Node::unorderedList, i - 1))
 							{
-								// found *** or --- or +++
-								// maybe this is a fake horizontal line
-								if (pLine[i + 2] != c)
-								{
-									signature.promote(Node::hzLine);
-									return i + 2;
-								}
+								// we previously got a bad token, something like **word**
+								// reverting
+								signature.pop();
+								return i - 1;
 							}
-							// we previously got a bad token, something like **word**
-							// reverting
-							signature.pop();
-							return i - 1;
+							signature.add(Node::unorderedList, i);
+							signature.add(Node::listItem, i, true);
+							break;
 						}
-						signature.add(Node::list, i, true);
-						break;
+						return i;
 					}
 				case '>':
 					{
@@ -234,7 +312,7 @@ namespace Markdown
 					}
 				case '_':
 					{
-						// can be **something**, or *** or --- or...
+						// Checking for horizontal line
 						if (pLine[i + 1] == '_' && pLine[i + 2] == '_' && pLine[i + 3] != '_')
 						{
 							signature.promote(Node::hzLine);
@@ -275,6 +353,8 @@ namespace Markdown
 
 		for (unsigned int i = 1; i < maxOffset; ++i)
 		{
+			if (cur.forcePush[curI])
+				break;
 			if (cur.nodes[curI] == old.nodes[oldI] && cur.offsets[curI] == old.offsets[oldI])
 			{
 				// Oh ! Exactly the sames !
@@ -293,6 +373,7 @@ namespace Markdown
 					continue;
 				}
 			}
+			break;
 		}
 
 		// pop the stack
@@ -313,7 +394,7 @@ namespace Markdown
 						<< "   (stack size: " << newStackSize << ")\n";
 				}
 				// our algorithm may keep some unsed paragraph nodes
-				if (node->type == Node::paragraph && !node->innerText)
+				if (node->type == Node::paragraph && node->empty())
 					(node->parent())->remove(node);
 			}
 			pStackSize = oldI;
