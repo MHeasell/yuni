@@ -1347,7 +1347,7 @@ namespace Yuni
 		/*!
 		** \brief Remove the 'n' first characters
 		*/
-		void consume(const Size n);
+		void consume(Size n);
 		//@}
 
 
