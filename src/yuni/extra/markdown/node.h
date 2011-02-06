@@ -36,8 +36,10 @@ namespace Markdown
 			emphasis,
 			bold,
 			hzLine,
-			list,
+			unorderedList,
 			orderedList,
+			listItem,
+			linebreak,
 			pragma,
 			maxType,
 		};
@@ -62,8 +64,10 @@ namespace Markdown
 				"emphasis",
 				"bold",
 				"hzLine",
-				"list",
+				"unorderedList",
 				"orderedList",
+				"listItem",
+				"linebreak",
 				"pragma",
 			};
 			assert(static_cast<unsigned int>(t) < static_cast<unsigned int>(maxType));
@@ -89,8 +93,10 @@ namespace Markdown
 				false, // "emphasis",
 				false, // "bold",
 				false, // "hzLine",
-				true,  // "list",
-				true,  // "orderedList",
+				false, // "unorderedList",
+				false, // "orderedList",
+				true,  // "listItem",
+				false, // "linebreak"
 				false, // "pragma",
 			};
 			assert(static_cast<unsigned int>(t) < static_cast<unsigned int>(maxType));
@@ -115,6 +121,15 @@ namespace Markdown
 				addRef();
 		}
 
+		template<class StringT> Node(const Type t, const StringT& text)
+			:type(t), innerText(text), tag(0)
+		{
+			// FIXME (#302) artificially increase the reference counter - memory leak
+			for (unsigned int i = 0; i != 50; ++i)
+				addRef();
+		}
+
+
 
 		~Node()
 		{
@@ -127,27 +142,36 @@ namespace Markdown
 		{
 			const char* const id = TypeToCString(type);
 
-			for (unsigned int i = 0; i < level; ++i)
+			for (unsigned int i = 1; i < level; ++i)
 				out << "    ";
-			out << "<markdown:" << id << ">\n";
+			out << "<" << id << '>';
 
-			if (innerText.notEmpty())
+			if (type == Node::text)
 			{
-				for (unsigned int i = 0; i <= level; ++i)
+				if (innerText.notEmpty())
+					out << "<![CDATA[" << innerText << "]]>";
+			}
+			else
+			{
+				out << '\n';
+				if (innerText.notEmpty())
+				{
+					for (unsigned int i = 1; i < level; ++i)
+						out << "    ";
+					out << "    <![CDATA[" << innerText << "]]>\n";
+				}
+
+				if (pChildrenCount)
+				{
+					const iterator end;
+					for (iterator i = begin(); i != end; ++i)
+						i->dump(out, level + 1);
+				}
+
+				for (unsigned int i = 1; i < level; ++i)
 					out << "    ";
-				out << "<text>" << innerText << "</text>\n";
 			}
-
-			if (pChildrenCount)
-			{
-				const iterator end;
-				for (iterator i = begin(); i != end; ++i)
-					i->dump(out, level + 1);
-			}
-
-			for (unsigned int i = 0; i < level; ++i)
-				out << "    ";
-			out << "</markdown:" << id << ">\n";
+			out << "</" << id << ">\n";
 		}
 
 	public:
@@ -157,6 +181,7 @@ namespace Markdown
 		int tag;
 
 	}; // class Node
+
 
 
 
