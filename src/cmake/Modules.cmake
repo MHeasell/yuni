@@ -30,7 +30,7 @@ set(YUNI_MODULE_SCRIPT                    false)
 	set(YUNI_EXTERNAL_SCRIPT_LUA          true)
 
 # Network
-set(YUNI_MODULE_NET                       true)
+set(YUNI_MODULE_NET                       false)
 
 # UI (User Interface)
 set(YUNI_MODULE_UI                        false)

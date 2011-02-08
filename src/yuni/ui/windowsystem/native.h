@@ -25,9 +25,9 @@ namespace WindowSystem
 # endif // YUNI_OS_MAC
 
 
+
 } // namespace WindowSystem
 } // namespace UI
 } // namespace Yuni
-
 
 #endif // __YUNI_UI_WINDOWSYSTEM_NATIVE_H__
