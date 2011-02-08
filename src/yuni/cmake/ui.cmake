@@ -1,5 +1,5 @@
 
-YMESSAGE(":: [Module] UI")
+YMESSAGE(":: [Module] UI  (EXPERIMENTAL, FOR ADVANCED USERS ONLY)")
 
 LIBYUNI_CONFIG_LIB("both" "ui"      "yuni-static-ui-core")
 

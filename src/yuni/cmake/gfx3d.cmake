@@ -1,5 +1,5 @@
 
-YMESSAGE(":: [Module] Gfx3D")
+YMESSAGE(":: [Module] Gfx3D  (EXPERIMENTAL, FOR ADVANCED USERS ONLY)")
 
 
 LIBYUNI_CONFIG_LIB("both" "gfx3d"      "yuni-static-gfx3d-core")
