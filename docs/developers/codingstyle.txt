@@ -80,8 +80,8 @@ GENERAL
       startThermoNuclearWar();
 
 * Use the following indenting for constructor definitions:
-  inline MyClass::MyClass(bool test)
-      : pTest(test),
+  inline MyClass::MyClass(bool test) :
+      pTest(test),
       pValue(0),
 	  pName("Default name")
   {}
