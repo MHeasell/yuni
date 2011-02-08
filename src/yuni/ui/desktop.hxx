@@ -13,27 +13,12 @@ namespace UI
 	}
 
 
-	inline void Desktop::reconnect()
-	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		reconnectWL();
-	}
-
-
-	inline void Desktop::disconnect()
-	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		disconnectWL();
-	}
-
-
 	inline void Desktop::add(const Application::Ptr& app)
 	{
 		if (!(!app))
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pApps[app->guid()] = app;
-			reconnectOneApplicationWL(app);
 		}
 	}
 
@@ -44,7 +29,6 @@ namespace UI
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pApps[app->guid()] = app;
-			reconnectOneApplicationWL(app);
 		}
 		return *this;
 	}
@@ -56,7 +40,6 @@ namespace UI
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pApps[app->guid()] = app;
-			reconnectOneApplicationWL(app);
 		}
 		return *this;
 	}

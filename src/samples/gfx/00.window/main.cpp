@@ -34,7 +34,7 @@ static UI::Desktop::Ptr createUI()
 
 
 
-int main(int argc, char* argv[])
+int main()
 {
 	UI::WindowSystem::Native::Ptr ws = new UI::WindowSystem::Native();
 	ws->desktop(createUI());

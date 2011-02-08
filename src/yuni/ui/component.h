@@ -126,16 +126,13 @@ namespace UI
 		*/
 		void size(float& width, float& height) const;
 
-		/*!
-		** \brief Get the X position of the component
-		*/
-		float y() const;
-
-		/*!
-		** \brief Get the Y position of the component
-		*/
+		//! Get the X position of the component
 		float x() const;
+
+		//! Get the Y position of the component
+		float y() const;
 		//@}
+
 
 		//! \name Pointer management
 		//@{
@@ -147,7 +144,6 @@ namespace UI
 	protected:
 		//! Protected resize, without locks
 		virtual void resizeWL(float& newWidth, float& newHeight);
-
 		//! Detach the component from the tree
 		virtual void detachWL();
 

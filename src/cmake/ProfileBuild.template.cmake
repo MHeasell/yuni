@@ -42,9 +42,9 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 # MODULES
 # Specifies which Yuni components should be build.
 # Uncomment the following line to override the module list
-# Example : `gfx3d,scripts,-net`
+# Example : `ui,scripts,-net`
 # Note : `cmake -DMODULES=help` to have a list of all available modules
-#set(MODULES "gfx3d,scripts")
+#set(MODULES "ui,scripts")
 
 
 ###############################################################################

@@ -112,6 +112,7 @@ namespace UI
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		//++pRefCount;
+		// FIXME This value is artificially increased due to a design flaw in smartptr
 		pRefCount += 50;
 	}
 
@@ -122,8 +123,8 @@ namespace UI
 
 
 
+
 } // namespace UI
 } // namespace Yuni
-
 
 #endif // __YUNI_UI_COMPONENT_HXX__

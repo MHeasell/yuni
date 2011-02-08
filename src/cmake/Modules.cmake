@@ -19,9 +19,6 @@ set(YUNI_MODULE_DEVICES                   false)
 	set(YUNI_MODULE_DEVICE_KEYBOARD       true)
 	set(YUNI_MODULE_DEVICE_MOUSE          true)
 
-# Gfx3D
-set(YUNI_MODULE_GFX3D                     false)
-
 # Audio
 set(YUNI_MODULE_AUDIO                     false)
 
@@ -34,8 +31,6 @@ set(YUNI_MODULE_NET                       false)
 
 # UI (User Interface)
 set(YUNI_MODULE_UI                        false)
-	set(YUNI_EXTERNAL_GFX_CAIROPANGO	  true)
-	set(YUNI_MODULE_UI_DUMMY              true)
 
 # Algorithms
 set(YUNI_MODULE_ALGORITHMS                false)
@@ -52,7 +47,7 @@ set(YUNI_SAMPLES false)
 
 
 # The list of all available modules
-# There is no need for `core` and `gfx-core`, which are implicit
+# There is no need for `core`, which are implicit
 set(YUNI_MODULE_LIST
 	algorithms
 	vm
@@ -63,11 +58,9 @@ set(YUNI_MODULE_LIST
 		display
 		keyboard
 		mouse
-	gfx3d
-	script lua
+	script
+		lua
 	ui
-		uidummy
-		ui3d
 	net
 	# extra
 		markdown
@@ -106,12 +99,10 @@ if(MODULES)
 			#set(YUNI_MODULE_VFS true)
 			set(YUNI_MODULE_DEVICES true)
 			set(YUNI_MODULE_VM true)
-			set(YUNI_MODULE_GFX3D true)
 			set(YUNI_MODULE_AUDIO true)
 			set(YUNI_MODULE_NET true)
 			set(YUNI_MODULE_SCRIPT true)
 			set(YUNI_MODULE_UI true)
-			set(YUNI_MODULE_UI_DUMMY true)
 			set(YUNI_MODULE_DATABASE true)
 			set(YUNI_MODULE_ALGORITHMS true)
 			set(YUNI_MODULE_EXTRA_MARKDOWN true)
@@ -223,18 +214,6 @@ if(MODULES)
 			set(KeywordIsKnown true)
 		endif()
 
-		# gfx3d
-		if("${it}" STREQUAL "gfx3d")
-			set(KeywordIsKnown true)
-			set(YUNI_MODULE_GFX3D true)
-		endif()
-		# -gfx3d
-		if("${it}" STREQUAL "-gfx3d")
-			set(KeywordIsKnown true)
-			set(YUNI_MODULE_GFX3D false)
-		endif()
-
-
 		# audio
 		if("${it}" STREQUAL "audio")
 			set(KeywordIsKnown true)
@@ -282,17 +261,6 @@ if(MODULES)
 			set(YUNI_TESTS false)
 		endif()
 
-		# samples
-		if("${it}" STREQUAL "samples")
-			set(KeywordIsKnown true)
-			set(YUNI_SAMPLES true)
-		endif()
-		# -samples
-		if("${it}" STREQUAL "-samples")
-			set(KeywordIsKnown true)
-			set(YUNI_SAMPLES false)
-		endif()
-
 		# ui (User Interface)
 		if("${it}" STREQUAL "ui")
 			set(KeywordIsKnown true)
@@ -302,17 +270,6 @@ if(MODULES)
 		if("${it}" STREQUAL "-ui")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_UI false)
-		endif()
-
-		# uidummy (User Interface)
-		if("${it}" STREQUAL "uidummy")
-			set(KeywordIsKnown true)
-			set(YUNI_MODULE_UI_DUMMY true)
-		endif()
-		# -ui
-		if("${it}" STREQUAL "-uidummy")
-			set(KeywordIsKnown true)
-			set(YUNI_MODULE_UI_DUMMY false)
 		endif()
 
 		# markdown
@@ -340,55 +297,37 @@ if(MODULES)
 		YMESSAGE(" Main and virtual modules")
 		YMESSAGE("    +core          : The core module (needed)")
 		YMESSAGE("    -/+tests       : Atomic Tests for the yuni framework")
-		YMESSAGE("    -/+samples     : Samples for the yuni framework")
-		YMESSAGE("    +all           : Enable all main modules (gfx3d,script,tests,samples)")
+		YMESSAGE("    +all           : Enable all main modules (ui,script,tests,...)")
 		#YMESSAGE(" The VFS module")
 		#YMESSAGE("    -/+vfs         : The Virtual filesystem")
 		#YMESSAGE("    -/+vfs-local   : Support for the local filesystems")
-		YMESSAGE(" The virtual machine module")
-		YMESSAGE("    -/+vm          : The Virtual machine")
-		YMESSAGE(" The algorithms")
-		YMESSAGE("    -/+algorithms  : Standard algorithms")
 		YMESSAGE(" The device modules")
 		YMESSAGE("    -/+devices     : All devices (display,keyboard,mouse...)")
 		YMESSAGE("    -/+display     : The Display device")
 		YMESSAGE("    -/+keyboard    : The Keyboard device")
 		YMESSAGE("    -/+mouse       : The Mouse device")
-		YMESSAGE(" The gfx modules")
-		YMESSAGE("    -/+gfx3d       : The Gfx3D module (default: disabled)")
 		YMESSAGE(" The audio modules")
 		YMESSAGE("    -/+audio       : The Audio module (default: disabled)")
 		YMESSAGE(" The scripting modules")
 		YMESSAGE("    -/+script      : The script module (default: disabled)")
 		YMESSAGE("    -/+lua         : The Lua extension (default: enabled)")
-		YMESSAGE(" The extra modules")
-		YMESSAGE("    -/+markdown    : Markdown (default: disabled)")
 		YMESSAGE(" The ui modules")
 		YMESSAGE("    -/+ui          : The ui module (default: disabled)")
-		YMESSAGE("    -/+uidummy     : The dummy ui manager (default: enabled)")
+		YMESSAGE(" The virtual machine module")
+		YMESSAGE("    -/+vm          : The Virtual machine")
+		YMESSAGE(" The extra modules")
+		YMESSAGE("    -/+markdown    : Markdown (default: disabled)")
+		YMESSAGE(" The algorithms")
+		YMESSAGE("    -/+algorithms  : Standard algorithms")
 		YMESSAGE("")
 		message(FATAL_ERROR "Errors on module names")
 	endif()
 endif()
 
 
-if(YUNI_MODULE_DEVICE_DISPLAY AND YUNI_MODULE_DEVICES)
-	SET(TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED true)
-else()
-	SET(TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED false)
-endif()
-
-if(YUNI_MODULE_GFX3D AND NOT TMP_DISPLAY_DEV_FOR_GFX3D_IS_ENABLED)
-	SET(YUNI_MODULE_DEVICES true)
-	SET(YUNI_MODULE_DEVICE_DISPLAY true)
-endif()
-
 if(YUNI_MODULE_UI)
-	if(NOT YUNI_EXTERNAL_GFX_CAIROPANGO)
-		YMESSAGE("[!!] Warning: Cairo and Pango are required for the `ui` module. The module has been disabled.")
-		set(YUNI_MODULE_UI false)
-		set(YUNI_MODULE_UI_3D false)
-	endif()
+	set(YUNI_MODULE_DEVICES true)
+	set(YUNI_MODULE_DEVICE_DISPLAY true)
 endif()
 
 if(YUNI_MODULE_SCRIPT)
@@ -448,10 +387,6 @@ if(YUNI_MODULE_NET)
 	LIST(APPEND YUNI_MODULE_AVAILABLE net)
 endif()
 
-if(YUNI_MODULE_GFX3D)
-	list(APPEND YUNI_MODULE_AVAILABLE gfx3d)
-endif(YUNI_MODULE_GFX3D)
-
 if(YUNI_MODULE_AUDIO)
 	LIST(APPEND YUNI_MODULE_AVAILABLE audio)
 endif()
@@ -463,12 +398,8 @@ if(YUNI_MODULE_SCRIPT)
 	endif()
 endif()
 
-
 if(YUNI_MODULE_UI)
 	list(APPEND YUNI_MODULE_AVAILABLE ui)
-	if(YUNI_MODULE_UI_DUMMY)
-		list(APPEND YUNI_MODULE_AVAILABLE uidummy)
-	endif()
 endif()
 
 if(YUNI_MODULE_EXTRA_MARKDOWN)

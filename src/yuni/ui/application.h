@@ -95,32 +95,6 @@ namespace UI
 		Application& operator -= (const Window::Ptr& wnd);
 		//@}
 
-	public:
-		Event<void (LocalUIEvents&)> reconnectLocalEvents;
-
-	protected:
-		//! \name Events
-		//@{
-		LocalUIEvents pLocalEvents;
-		//@}
-
-		void showWindow(Window::Ptr window);
-		void hideWindow(const IComponent::ID& windowID);
-		void closeWindow(const IComponent::ID& windowID);
-
-		void showComponent(IComponent::Ptr component);
-		void hideComponent(const IComponent::ID& componentID);
-		void updateComponent(const IComponent::ID& componentID);
-
-		//! Connect children windows to events
-		void reconnect();
-		void reconnectWL();
-		void reconnectOneWindowWL(Window::Ptr window);
-
-		//! Disconnect events
-		void disconnect();
-		void disconnectWL();
-
 
 	protected:
 		//! Application string identifier

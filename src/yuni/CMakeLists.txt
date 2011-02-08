@@ -68,10 +68,6 @@ if(YUNI_MODULE_UI)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/ui.cmake")
 endif()
 
-if(YUNI_MODULE_GFX3D)
-	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/gfx3d.cmake")
-endif()
-
 if(YUNI_MODULE_AUDIO)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/audio.cmake")
 endif()

@@ -700,11 +700,6 @@ set(SRC_CORE_COLOR
 source_group(core\\color FILES ${SRC_CORE_COLOR})
 
 
-set(SRC_GFX_CORE
-		gfx/mesh/octree.h gfx/mesh/octree.cpp
-		)
-source_group(Gfx FILES ${SRC_GFX_CORE})
-
 set(SRC_CORE_PREDICATES_RESULTS
 		core/predicate/result/sum.h
 		core/predicate/result/and.h
@@ -770,7 +765,6 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_UTILS}
 		${SRC_CORE_URI}
 		${SRC_CORE_GETOPT}
-		${SRC_GFX_CORE}
 		${SRC_PREDICATES_RESULTS}
 		${SRC_THREADS} ${SRC_JOBS}
 		${SRC_APPLICATION}

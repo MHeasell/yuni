@@ -37,8 +37,7 @@ namespace UI
 		/*!
 		** \brief Short constructor
 		*/
-		template<class StringT>
-		explicit Window(const StringT& title);
+		template<class StringT> explicit Window(const StringT& title);
 
 		/*!
 		** \brief Constructor with dimensions
@@ -96,26 +95,6 @@ namespace UI
 		//@}
 
 
-		void reconnect();
-
-	public:
-		Event<void (LocalUIEvents&)> reconnectLocalEvents;
-
-	protected:
-		//! \name Events
-		//@{
-		Event<void (float /* x */, float /* y */)> onMouseDown;
-		Event<void (float /* x */, float /* y */)> onMouseClick;
-		Event<void (float /* x */, float /* y */)> onMouseUp;
-		Event<void (float /* x */, float /* y */, float /* delta */)> onMouseWheel;
-
-		Event<void (unsigned char /* key */)> onKeyDown;
-		Event<void (unsigned char /* key */)> onKeyPressed;
-		Event<void (unsigned char /* key */)> onKeyUp;
-
-		LocalUIEvents pLocalEvents;
-		//@}
-
 	protected:
 		//! Set the title of the window (without lock)
 		template<class StringT> void titleWL(const StringT& newTitle);
@@ -132,7 +111,6 @@ namespace UI
 		** The process will now propagate the update notification to the application.
 		*/
 		virtual void updateComponentWL(const IComponent::ID& componentID) const;
-
 
 	private:
 		//! Title of the window
