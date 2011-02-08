@@ -65,9 +65,6 @@ namespace UI
 		void quit();
 
 
-		void reconnectLocalEvents(LocalUIEvents& events);
-
-
 		//! \name Operators
 		//@{
 		//! Register a new application
@@ -86,31 +83,16 @@ namespace UI
 		//@}
 
 
-	public:
-		//!
-		Event<void ()> onDisconnectLocalEvents;
-
-	private:
-		//! Reconnect events on contained applications
-		void reconnect();
-		void reconnectWL();
-		void reconnectOneApplicationWL(const Application::Ptr& app);
-
-		//! Disconnect all events, and propagate to applications
-		void disconnect();
-		void disconnectWL();
-
-
 	private:
 		//! Applications stored in this desktop
 		Application::Map pApps;
-
-		LocalUIEvents pLocalEvents;
 
 		//! Friend: required for access to events
 		template<class> friend class IQueueService;
 
 	}; // class Desktop
+
+
 
 
 

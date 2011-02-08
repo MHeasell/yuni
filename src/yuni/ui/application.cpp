@@ -44,18 +44,17 @@ namespace UI
 		// The const_cast is quite ugly but after this point, the guid _must_ not be
 		// modified
 		GenerateGUID(const_cast<GUID&>(pGUID));
-		disconnectWL();
 	}
 
 
 	void Application::quit()
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
-
-		Window::Map::iterator end = pWindows.end();
-		for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)
 		{
-			it->second->close();
+			ThreadingPolicy::MutexLocker lock(*this);
+
+			const Window::Map::iterator end = pWindows.end();
+			for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)
+				it->second->close();
 		}
 		destroyBoundEvents();
 	}
@@ -64,33 +63,12 @@ namespace UI
 	void Application::show()
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
-
-		Window::Map::iterator end = pWindows.end();
+		const Window::Map::iterator end = pWindows.end();
 		for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)
 			it->second->show();
 	}
 
 
-	void Application::reconnectWL()
-	{
-		reconnectLocalEvents(pLocalEvents);
-		const Window::Map::iterator end = pWindows.end();
-		for (Window::Map::iterator it = pWindows.begin(); it != end; ++it)
-			reconnectOneWindowWL(it->second);
-	}
-
-
-	void Application::reconnectOneWindowWL(Window::Ptr window)
-	{
-		window->reconnectLocalEvents = reconnectLocalEvents;
-		window->reconnect();
-	}
-
-
-	void Application::disconnectWL()
-	{
-		pLocalEvents.clear();
-	}
 
 
 

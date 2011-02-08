@@ -6,7 +6,8 @@ namespace Yuni
 namespace UI
 {
 
-	inline Button::Button()
+
+	Button::Button()
 	{
 		pClass = "button";
 	}
@@ -19,7 +20,7 @@ namespace UI
 	}
 
 
-	inline Button::~Button()
+	Button::~Button()
 	{
 		destroyBoundEvents();
 	}

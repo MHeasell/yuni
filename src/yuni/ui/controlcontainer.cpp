@@ -12,8 +12,6 @@ namespace UI
 	{
 		ThreadingPolicy::MutexLocker lock(*this);
 		// TODO: Resize children to fit in the parent's new dimensions
-		(void) newWidth;
-		(void) newHeight;
 		pWidth = newWidth;
 		pHeight = newHeight;
 	}
@@ -33,8 +31,8 @@ namespace UI
 
 	bool IControlContainer::removeChildWL(IComponent::ID childID)
 	{
-		IControl::Map::iterator it = pChildren.find(childID);
-		bool exists = (it != pChildren.end());
+		const IControl::Map::iterator it = pChildren.find(childID);
+		const bool exists = (it != pChildren.end());
 		if (exists)
 			pChildren.erase(it);
 		return exists;

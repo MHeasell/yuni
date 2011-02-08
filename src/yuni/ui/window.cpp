@@ -53,11 +53,6 @@ namespace UI
 	}
 
 
-	void Window::reconnect()
-	{
-		reconnectLocalEvents(pLocalEvents);
-	}
-
 
 
 } // namespace UI

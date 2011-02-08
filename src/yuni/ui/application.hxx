@@ -148,55 +148,6 @@ namespace UI
 	}
 
 
-	inline void Application::reconnect()
-	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		reconnectWL();
-	}
-
-
-	inline void Application::disconnect()
-	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		disconnectWL();
-	}
-
-
-	inline void Application::showWindow(Window::Ptr window)
-	{
-		pLocalEvents.onShowWindow(pGUID, Window::Ptr::WeakPointer(window));
-	}
-
-
-	inline void Application::hideWindow(const IComponent::ID& windowID)
-	{
-		pLocalEvents.onHideWindow(pGUID, windowID);
-	}
-
-
-	inline void Application::closeWindow(const IComponent::ID& windowID)
-	{
-		pLocalEvents.onCloseWindow(pGUID, windowID);
-	}
-
-
-	inline void Application::showComponent(IComponent::Ptr component)
-	{
-		pLocalEvents.onShowComponent(pGUID, component);
-	}
-
-
-	inline void Application::hideComponent(const IComponent::ID& componentID)
-	{
-		pLocalEvents.onHideComponent(pGUID, componentID);
-	}
-
-
-	inline void Application::updateComponent(const IComponent::ID& componentID)
-	{
-		pLocalEvents.onUpdateComponent(pGUID, componentID);
-	}
-
 
 
 } // namespace UI
