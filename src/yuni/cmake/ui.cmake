@@ -9,6 +9,11 @@ add_definitions("-DYUNI_MODULE_UI")
 
 
 list(APPEND SRC_UI
+	ui/local/queueservice.h
+	ui/local/window
+	ui/local/window/types.h
+	ui/local/window/window.h
+	ui/local/window.h
 
 	ui/application.h
 	ui/application.hxx
