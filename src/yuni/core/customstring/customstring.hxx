@@ -1730,22 +1730,7 @@ namespace Yuni
 		typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size n)
 	{
 		if (n)
-		{
-			if (!adapter)
-				Yuni::Private::CustomStringImpl::Consume<CustomStringType, adapter>::Perform(*this, n);
-			else
-			{
-				if (n >= AncestorType::size)
-				{
-					AncestorType::size = 0;
-				}
-				else
-				{
-					AncestorType::data += n;
-					AncestorType::size -= n;
-				}
-			}
-		}
+			Yuni::Private::CustomStringImpl::Consume<CustomStringType, adapter>::Perform(*this, n);
 	}
 
 

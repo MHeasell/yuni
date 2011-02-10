@@ -59,7 +59,10 @@ namespace CustomStringImpl
 	{
 		static void Perform(StringT& out, typename StringT::Size count)
 		{
-			out.decalOffset(count);
+			if (count >= out.size())
+				out.clear();
+			else
+				out.decalOffset(count);
 		}
 	};
 
@@ -76,7 +79,7 @@ namespace CustomStringImpl
 
 
 
-	
+
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
 	struct Data
