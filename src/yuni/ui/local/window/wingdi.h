@@ -1,5 +1,5 @@
-#ifndef __YUNI_UI_LOCAL_WINDOW_WINGDIWINDOW_H__
-# define __YUNI_UI_LOCAL_WINDOW_WINGDIWINDOW_H__
+#ifndef __YUNI_UI_LOCAL_WINDOW_WINGDI_H__
+# define __YUNI_UI_LOCAL_WINDOW_WINGDI_H__
 
 # include "../../../yuni.h"
 
@@ -24,15 +24,15 @@ namespace Window
 	/*!
 	** \brief Implementation of a window for Microsoft Windows GDI+
 	*/
-	class WinGDIWindow: public IWindow
+	class WinGDI: public IWindow
 	{
 	public:
 		//! \name Constructor & Destructor
 		//@{
-		WinGDIWindow()
+		WinGDI()
 		{}
 		//! Destructor
-		virtual ~WinGDIWindow() {}
+		virtual ~WinGDI() {}
 		//@}
 
 		virtual bool initialize();
@@ -52,34 +52,25 @@ namespace Window
 
 		virtual void restore();
 
+		virtual void bringToFront();
+
+		virtual void sendToBack();
+
 		virtual bool pollEvents();
 
-		virtual void refresh();
 
-		//! \name Caption
-		//@{
-		template<class StringT> void caption(const StringT& newstring);
-		const String& caption() const;
-		//@}
+	protected:
+		//! Do the actual modification of the caption, virtual, called from base
+		virtual void doUpdateCaption();
 
-		//! \name Window Style
-		//@{
-		void style(unsigned int flags);
-		unsigned int style() const {return pStyleSet;}
-		//@}
+		//! Do the actual modification of the style, virtual, called from base
+		virtual void doUpdateStyle();
 
-		//! \name Stay on Top
-		//@{
-		virtual void stayOnTop(bool alwaysOnTop);
-		bool stayOnTop() const {return pStayOnTop;}
-		//@}
+		//! Do the actual modification of the stay on top option, virtual, called from base
+		virtual void doUpdateStayOnTop();
 
-		//! \name Colors
-		//@{
-		void backgroundColor(const Color& color);
-		void backgroundColor(float r, float g, float b);
-		const Color& backgroundColor() const {return pBackgroundColor;}
-		//@}
+		//! Do the actual refresh of the window
+		virtual void doRefresh();
 
 
 	protected:
@@ -92,7 +83,7 @@ namespace Window
 		//! Window handle
 		HWND pHWnd;
 
-	}; // class WinGDIWindow
+	}; // class WinGDI
 
 
 
@@ -106,4 +97,4 @@ namespace Window
 
 # endif // YUNI_WINDOWSYSTEM_MSW
 
-#endif // __YUNI_UI_LOCAL_WINDOW_WINGDIWINDOW_H__
+#endif // __YUNI_UI_LOCAL_WINDOW_WINGDI_H__

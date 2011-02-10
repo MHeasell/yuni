@@ -1,5 +1,5 @@
 
-#include "wingdiwindow.h"
+#include "wingdi.h"
 #include "../../../core/math.h"
 
 #ifdef YUNI_WINDOWSYSTEM_MSW
@@ -16,7 +16,7 @@ namespace Window
 {
 
 
-	bool WinGDIWindow::initialize()
+	bool WinGDI::initialize()
 	{
 		// Windows Class Structure
 		WNDCLASSEX wc;
@@ -121,31 +121,29 @@ namespace Window
 			NULL, NULL, pHInstance, NULL)))
 			return false;
 
-		ShowWindow(pHWnd, pFullScreen ? SW_MAXIMIZE : SW_SHOWNORMAL);
-
 		AddWindow(pHWnd, this);
 
 		return true;
 	}
 
 
-	void WinGDIWindow::move(float left, float top)
+	void WinGDI::move(float left, float top)
 	{
 		pLeft = left;
 		pTop = top;
-		// Do not force the repaint
-		MoveWindow(pHWnd, pLeft, pTop, pWidth, pHeight, false);
+		SetWindowPos(pHWnd, 0, pLeft, pTop, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
 	}
 
-	void WinGDIWindow::moveRelative(float left, float top)
+
+	void WinGDI::moveRelative(float left, float top)
 	{
 		pLeft += left;
 		pTop += top;
-		// Do not force the repaint
-		MoveWindow(pHWnd, pLeft, pTop, pWidth, pHeight, false);
+		SetWindowPos(pHWnd, 0, pLeft, pTop, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
 	}
 
-	void WinGDIWindow::resize(float width, float height)
+
+	void WinGDI::resize(float width, float height)
 	{
 		RECT clientRect;
 		GetClientRect(pHWnd, &clientRect);
@@ -164,8 +162,79 @@ namespace Window
 
 		pWidth = width;
 		pHeight = height;
-		// Do not force the repaint
-		MoveWindow(pHWnd, fullRect.left, fullRect.top, (long)pWidth + ptDiff.x, (long)pHeight + ptDiff.y, false);
+		SetWindowPos(pHWnd, 0, pLeft, pTop, (long)pWidth + ptDiff.x, (long)pHeight + ptDiff.y, SWP_NOZORDER);
+	}
+
+
+	void WinGDI::show()
+	{
+		// When showing a window for the first time, SHOWNORMAL must be used !
+		ShowWindow(pHWnd, SW_SHOWNORMAL);
+	}
+
+	void WinGDI::hide()
+	{
+		ShowWindow(pHWnd, SW_HIDE);
+	}
+
+
+	void WinGDI::minimize()
+	{
+		ShowWindow(pHWnd, SW_MINIMIZE);
+	}
+
+
+	void WinGDI::maximize()
+	{
+		ShowWindow(pHWnd, SW_MAXIMIZE);
+	}
+
+
+	void WinGDI::restore()
+	{
+		ShowWindow(pHWnd, SW_SHOW);
+	}
+
+
+	void WinGDI::bringToFront()
+	{
+		SetWindowPos(pHWnd, pStayOnTop ? HWND_TOPMOST : HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+	}
+
+
+	void WinGDI::sendToBack()
+	{
+		SetWindowPos(pHWnd, pStayOnTop ? HWND_NOTOPMOST : HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+	}
+
+
+	bool WinGDI::pollEvents()
+	{
+		// TODO
+	}
+
+
+	void WinGDI::doRefresh()
+	{
+		// TODO
+	}
+
+
+	void WinGDI::doUpdateCaption()
+	{
+		SetWindowText(pHWnd, pCaption);
+	}
+
+
+	void WinGDI::doUpdateStyle()
+	{
+		// TODO
+	}
+
+
+	void WinGDI::doUpdateStayOnTop()
+	{
+		SetWindowPos(pHWnd, pStayOnTop ? HWND_TOPMOST : HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 	}
 
 

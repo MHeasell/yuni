@@ -58,15 +58,29 @@ namespace Window
 
 		virtual void restore() = 0;
 
+		virtual void bringToFront() = 0;
+
+		virtual void sendToBack() = 0;
+
 		virtual bool pollEvents() = 0;
 
-		virtual void refresh() = 0;
+		//! Refresh the window when possible
+		void refresh();
+
+		//! Refresh the window immediately. This method should be used with care
+		void forceRefresh();
+
+		//! \name User update management
+		//@{
+		void beginUpdate();
+		boid endUpdate();
+		//@}
 
 
 		//! \name Caption
 		//@{
 		template<class StringT> void caption(const StringT& newstring);
-		const String& caption() const;
+		const String& caption() const {return pCaption; }
 		//@}
 
 		//! \name Window Style
@@ -99,16 +113,45 @@ namespace Window
 		void onCloseQuery(bool& canClose);
 		void onClose();
 
+		//! Do the actual modification of the caption, abstract
+		virtual void doUpdateCaption() = 0;
+
+		//! Do the actual modification of the style, abstract
+		virtual void doUpdateStyle() = 0;
+
+		//! Do the actual modification of the stay on top option, abstract
+		virtual void doUpdateStayOnTop() = 0;
+
+		//! Do the actual refresh of the window
+		virtual void doRefresh() = 0;
+
 	protected:
 		//! Caption of the window
 		String pCaption;
+
+		//! Window visual style
 		unsigned int pStyleSet;
+
+		//! Left-mots coordinate
 		float pLeft;
+
+		//! Top-most coordinate
 		float pTop;
+
+		//! Width of the window
 		float pWidth;
+
+		//! Height of the window
 		float pHeight;
+
+		//! Should the window always stay on top ?
 		bool pStayOnTop;
+
+		//! Background color
 		Color pBackgroundColor;
+
+		//! Count the number of updates happening, wait until it reaches 0 to refresh
+		unsigned int pRefreshRefCount;
 
 	}; // class IWindow
 
@@ -127,5 +170,9 @@ namespace Window
 } // namespace UI
 } // namespace Private
 } // namespace Yuni
+
+
+# include "window.hxx"
+
 
 #endif // __YUNI_UI_LOCAL_WINDOW_WINDOW_H__
