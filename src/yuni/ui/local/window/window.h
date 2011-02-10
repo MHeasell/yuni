@@ -41,11 +41,12 @@ namespace Window
 		virtual ~IWindow();
 		//@}
 
-		template<class StringT> void caption(const StringT& newstring);
-		const String& caption() const;
+		virtual bool initialize() = 0;
 
-		void move(float x, float y);
-		void moveRelative(float x, float y);
+		virtual void move(float x, float y) = 0;
+		virtual void moveRelative(float x, float y) = 0;
+
+		virtual void resize(float width, float height) = 0;
 
 		virtual void show() = 0;
 
@@ -57,6 +58,16 @@ namespace Window
 
 		virtual void restore() = 0;
 
+		virtual bool pollEvents() = 0;
+
+		virtual void refresh() = 0;
+
+
+		//! \name Caption
+		//@{
+		template<class StringT> void caption(const StringT& newstring);
+		const String& caption() const;
+		//@}
 
 		//! \name Window Style
 		//@{
@@ -64,18 +75,18 @@ namespace Window
 		unsigned int style() const {return pStyleSet;}
 		//@}
 
-
 		//! \name Stay on Top
 		//@{
 		virtual void stayOnTop(bool alwaysOnTop);
 		bool stayOnTop() const {return pStayOnTop;}
 		//@}
 
+		//! \name Colors
+		//@{
 		void backgroundColor(const Color& color);
 		void backgroundColor(float r, float g, float b);
 		const Color& backgroundColor() const {return pBackgroundColor;}
-
-		virtual void refresh() = 0;
+		//@}
 
 
 	protected:
