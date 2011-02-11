@@ -16,6 +16,10 @@ list(APPEND SRC_MARKDOWN
 	extra/markdown/data.cpp
 	extra/markdown/node.h
 	extra/markdown/signature.h
+
+	# HTML
+	extra/markdown/renderer/html.h
+	extra/markdown/renderer/html.cpp
 )
 
 

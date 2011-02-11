@@ -35,10 +35,19 @@ namespace Markdown
 		if (pLine.capacity() > 4096)
 			pLine.shrink();
 
+		pMapID.clear();
 		pLastSignature.clear();
-		pStackSize = 1;
+		pStackSize = 2;
 		// creating the root node
-		pStack[0] = new Node(Node::document);
+		Node::Ptr newDocument = new Node(Node::document);
+		Node::Ptr newBody     = new Node(Node::body);
+		pTOC                  = new Node(Node::toc);
+		Node::Ptr newHead     = new Node(Node::head);
+		*newBody += pTOC;
+		*newDocument += newHead;
+		*newDocument += newBody;
+		pStack[0] = newDocument;
+		pStack[1] = newBody;
 	}
 
 
@@ -57,7 +66,6 @@ namespace Markdown
 			}
 
 			pLine.append(text, p - offset, offset);
-
 			parseLine();
 
 			// go to the next line
@@ -74,6 +82,8 @@ namespace Markdown
 		if (pLine.notEmpty())
 			parseLine();
 
+		// clear the map ID
+		pMapID.clear();
 		// releasing the stack
 		// (however the first node must not be released yet)
 		for (unsigned int i = 1; i != stackLimit; ++i)
@@ -98,7 +108,7 @@ namespace Markdown
 			pLine.trimRight(" \t");
 			pHasLineBreak = pLine.size() + 1 < oldSize;
 		}
-	
+
 		// Getting the signature of the current line
 		// This signature will help us to build the parse tree
 		// In the same time, the position of the first usefull character will be
