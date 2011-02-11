@@ -199,6 +199,56 @@ namespace CustomString
 
 
 
+	// std::vector<>
+	template<class CustomStringT, class T>
+	class Append<CustomStringT, std::vector<T> >
+	{
+	public:
+		typedef std::vector<T> ListType;
+		static void Perform(CustomStringT& s, const ListType& rhs)
+		{
+			s += '[';
+			if (!rhs.empty())
+			{
+				const typename ListType::const_iterator end = rhs.end();
+				typename ListType::const_iterator i = rhs.begin();
+				s += *i;
+				++i;
+				for (; i != end; ++i)
+					s << ", " << *i;
+			}
+			s += ']';
+		}
+	};
+
+
+	// std::vector<>
+	template<class CustomStringT, class T>
+	class Append<CustomStringT, std::list<T> >
+	{
+	public:
+		typedef std::list<T> ListType;
+		static void Perform(CustomStringT& s, const ListType& rhs)
+		{
+			s += '[';
+			if (!rhs.empty())
+			{
+				const typename ListType::const_iterator end = rhs.end();
+				typename ListType::const_iterator i = rhs.begin();
+				s += *i;
+				++i;
+				for (; i != end; ++i)
+					s << ", " << *i;
+			}
+			s += ']';
+		}
+	};
+
+
+
+
+
+
 } // namespace CustomString
 } // namespace Extension
 } // namespace Yuni
