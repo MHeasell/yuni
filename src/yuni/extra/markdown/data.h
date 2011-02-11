@@ -56,13 +56,21 @@ namespace Markdown
 		void appendParagraphText(const StringAdapter& text);
 
 	private:
+		//! Map ID
+		typedef std::map<String, Node::Ptr> MapID;
+
+	private:
 		CustomString<4096> pLine;
 		bool pHasLineBreak;
 		unsigned int pQuoteLevel;
 		Signature pCurrentLineSignature;
 		Signature pLastSignature;
 		unsigned int pStackSize;
-		Node::Ptr  pStack[stackLimit];
+		Node::Ptr pStack[stackLimit];
+		//! Reference to the TOC (Table Of Content)
+		Node::Ptr pTOC;
+		//!
+		MapID pMapID;
 
 	}; // ReaderData
 

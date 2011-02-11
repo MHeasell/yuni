@@ -17,7 +17,7 @@ namespace Markdown
 	class Signature
 	{
 	public:
-		//! Node	
+		//! Node
 		typedef Yuni::Markdown::Node  Node;
 		enum
 		{
@@ -41,9 +41,12 @@ namespace Markdown
 
 		void clear()
 		{
-			size       = 1;
+			size       = 2;
 			offsets[0] = 0;
 			nodes[0]   = Node::document;
+			offsets[1] = 0;
+			nodes[1]   = Node::body;
+
 		}
 
 		void add(const Node::Type node, unsigned int offset, bool force = false)

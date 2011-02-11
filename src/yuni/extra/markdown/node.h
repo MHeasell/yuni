@@ -24,6 +24,9 @@ namespace Markdown
 		{
 			unknown = 0,
 			document,
+			head,
+			toc,
+			body,
 			text,
 			paragraph,
 			quote,
@@ -52,6 +55,9 @@ namespace Markdown
 			{
 				"unknown",
 				"document",
+				"head",
+				"toc",
+				"body",
 				"text",
 				"paragraph",
 				"quote",
@@ -80,7 +86,10 @@ namespace Markdown
 			static const bool values[maxType] =
 			{
 				false, // "unknown",
-				true,  // "document",
+				false, // "document",
+				false, // "head"
+				false, // "toc"
+				true,  // "body"
 				false, // "text",
 				false, // "paragraph",
 				true,  // "quote",
@@ -106,7 +115,7 @@ namespace Markdown
 
 	public:
 		Node()
-			:type(unknown), tag(0)
+			:type(unknown)
 		{
 			// FIXME (#302) artificially increase the reference counter - memory leak
 			for (unsigned int i = 0; i != 50; ++i)
@@ -114,7 +123,7 @@ namespace Markdown
 		}
 
 		explicit Node(const Type t)
-			:type(t), tag(0)
+			:type(t)
 		{
 			// FIXME (#302) artificially increase the reference counter - memory leak
 			for (unsigned int i = 0; i != 50; ++i)
@@ -122,7 +131,7 @@ namespace Markdown
 		}
 
 		template<class StringT> Node(const Type t, const StringT& text)
-			:type(t), innerText(text), tag(0)
+			:type(t), innerText(text)
 		{
 			// FIXME (#302) artificially increase the reference counter - memory leak
 			for (unsigned int i = 0; i != 50; ++i)
@@ -178,7 +187,8 @@ namespace Markdown
 		Type type;
 		//! Text of the node
 		String innerText;
-		int tag;
+		//! ID of the node
+		String id;
 
 	}; // class Node
 
