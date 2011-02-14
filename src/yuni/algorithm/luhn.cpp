@@ -1,6 +1,6 @@
 
 #include "luhn.h"
-#include <ctype.h>
+#include "../core/string.h"
 
 
 namespace Yuni
@@ -31,7 +31,7 @@ namespace Algorithm
 			for (const String::Char* c = s.c_str(); *c != '\0'; ++c)
 			{
 				// Each char in the string must be a digit
-				if (!::isdigit(*c))
+				if (!String::IsDigit(*c))
 					return false;
 				// The `real` digit
 				n = *c - '0';

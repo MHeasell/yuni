@@ -195,6 +195,23 @@ namespace Yuni
 		//@}
 
 
+		//! \name Faster implementation of some commons routines
+		//@{
+		//! Upper case to lower case letter conversion (man 3 tolower)
+		static int ToLower(int c);
+		//! Lower case to upper case letter conversion (man 3 toupper)
+		static int ToUpper(int c);
+		//! White-space character test
+		static bool IsSpace(int c);
+		//! decimal-digit character test
+		static bool IsDigit(int c);
+		//! decimal-digit character test (without zero)
+		static bool IsDigitNonZero(int c);
+		//! alphabetic character test
+		static bool IsAlpha(int c);
+		//@}
+
+
 	private:
 		// Implements the following iterator models for CustomString<>
 		# include "iterator.h"
