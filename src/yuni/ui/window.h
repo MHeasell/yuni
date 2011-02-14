@@ -7,7 +7,6 @@
 # include "../thread/policy.h"
 # include "fwd.h"
 # include "controlcontainer.h"
-# include "local-events.h"
 
 
 namespace Yuni

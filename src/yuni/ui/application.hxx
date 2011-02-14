@@ -48,7 +48,6 @@ namespace UI
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
-			reconnectOneWindowWL(wnd);
 		}
 	}
 
@@ -59,7 +58,6 @@ namespace UI
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
-			reconnectOneWindowWL(wnd);
 		}
 		return *this;
 	}
@@ -71,7 +69,6 @@ namespace UI
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
-			reconnectOneWindowWL(wnd);
 		}
 		return *this;
 	}
@@ -83,7 +80,6 @@ namespace UI
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
-			reconnectOneWindowWL(wnd);
 		}
 		return *this;
 	}
@@ -95,7 +91,6 @@ namespace UI
 		{
 			ThreadingPolicy::MutexLocker lock(*this);
 			pWindows[wnd->id()] = wnd;
-			reconnectOneWindowWL(wnd);
 		}
 		return *this;
 	}

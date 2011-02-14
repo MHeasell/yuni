@@ -87,9 +87,6 @@ namespace UI
 		//! Applications stored in this desktop
 		Application::Map pApps;
 
-		//! Friend: required for access to events
-		template<class> friend class IQueueService;
-
 	}; // class Desktop
 
 
@@ -99,7 +96,6 @@ namespace UI
 } // namespace UI
 } // namespace Yuni
 
-# include "queueservice.h"
 # include "desktop.hxx"
 
 #endif // __YUNI_UI_DESKTOP_H__
