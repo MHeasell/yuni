@@ -10,34 +10,38 @@ namespace UI
 
 	void Window::updateComponentWL(const IComponent::ID& componentID) const
 	{
-		pLocalEvents.onUpdateComponent(pApplicationGUID, componentID);
+		// FIXME
+		//pLocalEvents.onUpdateComponent(pApplicationGUID, componentID);
 	}
 
 
 	void Window::show()
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		if (!pClosing)
-			pLocalEvents.onShowWindow(pApplicationGUID, this);
+		// FIXME
+// 		ThreadingPolicy::MutexLocker lock(*this);
+// 		if (!pClosing)
+// 			pLocalEvents.onShowWindow(pApplicationGUID, this);
 	}
 
 
 	void Window::hide()
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		if (!pClosing)
-			pLocalEvents.onHideWindow(pApplicationGUID, pLocalID);
+		// FIXME
+// 		ThreadingPolicy::MutexLocker lock(*this);
+// 		if (!pClosing)
+// 			pLocalEvents.onHideWindow(pApplicationGUID, pLocalID);
 	}
 
 
 	void Window::close()
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		if (!pClosing)
-		{
-			pClosing = true;
-			pLocalEvents.onCloseWindow(pApplicationGUID, pLocalID);
-		}
+		// FIXME
+// 		ThreadingPolicy::MutexLocker lock(*this);
+// 		if (!pClosing)
+// 		{
+// 			pClosing = true;
+// 			pLocalEvents.onCloseWindow(pApplicationGUID, pLocalID);
+// 		}
 	}
 
 
@@ -48,8 +52,9 @@ namespace UI
 			return;
 
 		IControlContainer::resizeWL(width, height);
-		if (!pClosing)
-			pLocalEvents.onResizeWindow(pApplicationGUID, pLocalID, width, height);
+		// FIXME
+// 		if (!pClosing)
+// 			pLocalEvents.onResizeWindow(pApplicationGUID, pLocalID, width, height);
 	}
 
 

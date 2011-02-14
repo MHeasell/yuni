@@ -27,8 +27,17 @@ namespace Window
 	class IWindow
 	{
 	public:
+		//! Default visual style
+		enum
+		{
+			DefaultStyleSet = wsResizeable | wsMinimizable | wsMaximizable;
+		}
+
+
+	public:
 		//! The most suitable smartptr for the class
 		typedef SmartPtr<IWindow, Policy::Ownership::ReferenceCounted>  Ptr;
+
 
 	public:
 		//! \name Constructor & Destructor
@@ -104,14 +113,23 @@ namespace Window
 
 
 	protected:
+		//! Called when the local window caught a minimize event
 		void onMinimize();
+
+		//! Called when the local window caught a maximize event
 		void onMaximize();
+
+		//! Called when the local window caught a show event
 		void onShow();
+
 		/*!
+		** \brief Called when the local window caught a close event
+		**
 		** \internal canClose is true by default. The window will really be closed if equals to true
 		*/
 		void onCloseQuery(bool& canClose);
 		void onClose();
+
 
 		//! Do the actual modification of the caption, abstract
 		virtual void doUpdateCaption() = 0;
@@ -124,6 +142,7 @@ namespace Window
 
 		//! Do the actual refresh of the window
 		virtual void doRefresh() = 0;
+
 
 	protected:
 		//! Caption of the window

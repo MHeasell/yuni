@@ -15,6 +15,19 @@ namespace Local
 namespace Window
 {
 
+	inline IWindow::IWindow():
+		pStyleSet(DefaultStyleSet),
+		pStayOnTop(false),
+		pBackgroundColor(0.0f, 0.0f, 1.0f),
+		pRefreshRefCount(0)
+	{
+	}
+
+
+	inline IWindow::~IWindow()
+	{
+	}
+
 
 	inline void IWindow::refresh()
 	{

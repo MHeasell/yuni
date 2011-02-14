@@ -15,6 +15,110 @@ namespace Local
 namespace Window
 {
 
+	namespace // anonymous
+	{
+
+		typedef std::map<HWND, IWinGDIWindow*> WindowList;
+
+		// This list contains all MFC windows created
+		WindowList sWindowList;
+
+		//! Find a window given its handle
+		IWinGDIWindow* FindWindow(HWND handle)
+		{
+			WindowList::iterator it;
+			for (it = sWindowList.begin(); it != sWindowList.end(); ++it)
+			{
+				if (handle == it->first)
+					return it->second;
+			}
+			return NULL;
+		}
+
+		//! Register a window with its handle as a key
+		void RegisterWindow(HWND handle, IWinGDIWindow* window)
+		{
+			if (!window)
+				return;
+			// If handle is already in the list, it will be overwritten
+			sWindowList[handle] = window;
+		}
+
+		//! Unregister the window, happens when closing it
+		void UnregisterWindow(HWND handle)
+		{
+			sWindowList.erase(handle);
+		}
+
+
+		/*!
+		** \brief Callback method for windows events
+		**
+		** \param hWnd Handle for this window
+		** \param uMsg Message
+		** \param wParam Additional Message Information
+		** \param lParam Additional Message Information
+		*/
+		LRESULT CALLBACK WindowMessageCallback(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+		{
+			IWinGDIWindow* window = FindWindow(hWnd);
+			assert(window != NULL && "Window was not properly registered !");
+			// Check for Windows messages
+			switch (uMsg)
+			{
+				case WM_SYSCOMMAND:
+					{
+						switch (wParam)
+						{
+							case SC_SCREENSAVE:
+							case SC_MONITORPOWER:
+								return 0;
+						}
+						break;
+					}
+
+				case WM_CLOSE: // Did we receive a Close message?
+					{
+						UnregisterWindow(hWnd);
+						DestroyWindow(hWnd);
+						window->onClose();
+						return 0;
+					}
+
+				case WM_QUIT: // Did we receive a Quit message?
+					{
+						return 0;
+					}
+
+				case WM_ERASEBKGND:
+				 	return 0;
+
+				case WM_PAINT:
+					{
+						window->refresh();
+						return 0;
+					}
+
+				case WM_SIZE: // Resize the window
+				case WM_SIZING: // Resizing the window
+					{
+						RECT clientRect;
+						GetClientRect(hWnd, &clientRect);
+						window->window()->resize(
+							static_cast<float>(clientRect.right - clientRect.left),
+							static_cast<float>(clientRect.bottom - clientRect.top));
+						return 0;
+					}
+			}
+
+			// Pass all unhandled messages to DefWindowProc
+			return DefWindowProc(hWnd, uMsg, wParam, lParam);
+		}
+
+
+	} // anonymous namespace
+
+
 
 	bool WinGDI::initialize()
 	{
@@ -216,7 +320,8 @@ namespace Window
 
 	void WinGDI::doRefresh()
 	{
-		// TODO
+		// Ask for refresh by invalidating the client area
+		InvalidateRect(pHWnd, NULL, true);
 	}
 
 
