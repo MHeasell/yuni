@@ -1,6 +1,7 @@
 #ifndef __YUNI_ALGORITHM_LUHN_H__
 # define __YUNI_ALGORITHM_LUHN_H__
 
+# include "../yuni.h"
 # include "../core/string/string.h"
 
 
