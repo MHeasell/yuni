@@ -122,15 +122,17 @@ namespace IO
 	**
 	** The path part will be extracted according the system-(un)dependant path-separator
 	** \code
-	**	  std::cout << Core::IO::Filename::ExtractFilePath("/tmp/foo.txt") std::endl; // write `/tmp`
+	**    String outputString;
+	**	  Core::IO::Filename::ExtractFilePath(outputString, "/tmp/foo.txt");
+	**    std::cout << outputString << std::endl; // writes `/tmp`
 	** \endcode
 	**
-	** \param p The original filename
-	** \param systemDependant Consider only the system-dependant path-separator
-	** \return The path part of the original filename
+	** \param[out] out The output string
+	** \param[in] p The filename
+	** \param[in] systemDependant Consider only the system-dependant path-separator
 	*/
 	template<class StringT1, class StringT2>
-	void ExtractFilePath(StringT1& out, const StringT2& p, const bool systemDependant = true);
+	void ExtractFilePath(StringT1& out, const StringT2& p, const bool systemDependant = false);
 
 
 
