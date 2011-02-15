@@ -108,9 +108,21 @@ namespace Window
 	}
 
 
+	inline void IWindow::onRestore()
+	{
+		std::cout << "Caught Restore event !" << std::endl;
+	}
+
+
 	inline void IWindow::onShow()
 	{
 		std::cout << "Caught Show event !" << std::endl;
+	}
+
+
+	inline void IWindow::onHide()
+	{
+		std::cout << "Caught Hide event !" << std::endl;
 	}
 
 

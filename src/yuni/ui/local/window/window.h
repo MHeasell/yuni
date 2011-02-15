@@ -153,8 +153,12 @@ namespace Window
 		void onMinimize();
 		//! Called when the local window caught a maximize event
 		void onMaximize();
+		//! Called when the local window caught a restore event
+		void onRestore();
 		//! Called when the local window caught a show event
 		void onShow();
+		//! Called when the local window caught a hide event
+		void onHide();
 		//! Called when the local window caught a resize event
 		void onResize(float width, float height);
 
