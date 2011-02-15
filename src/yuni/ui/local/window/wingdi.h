@@ -103,19 +103,16 @@ namespace Window
 		//! Static list of registered GDI windows
 		static WindowList sWindowList;
 
-
 	protected:
 		//! MS Windows sorts its windows by "class"
 		String pWindowClassName;
-
 		//! Instance handle
 		HINSTANCE pHInstance;
-
 		//! Window handle
 		HWND pHWnd;
 
-
 	}; // class WinGDI
+
 
 
 
@@ -125,7 +122,6 @@ namespace Window
 } // namespace UI
 } // namespace Private
 } // namespace Yuni
-
 
 # endif // YUNI_WINDOWSYSTEM_MSW
 

@@ -18,8 +18,8 @@ namespace Window
 
 	WinGDI* WinGDI::FindWindow(HWND handle)
 	{
-		WindowList::iterator it;
-		for (it = sWindowList.begin(); it != sWindowList.end(); ++it)
+		const WindowList::iterator end = sWindowList.end();
+		for (WindowList::iterator it = sWindowList.begin(); it != end; ++it)
 		{
 			if (handle == it->first)
 				return it->second;
