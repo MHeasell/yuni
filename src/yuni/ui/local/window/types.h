@@ -1,6 +1,8 @@
 #ifndef __YUNI_UI_LOCAL_STYLE_H__
 # define __YUNI_UI_LOCAL_STYLE_H__
 
+# include "../../../core/color/rgb.h"
+
 namespace Yuni
 {
 namespace Private
@@ -27,7 +29,7 @@ namespace Local
 
 
 
-	typedef RGB<float>  Color;
+	typedef Yuni::Color::RGB<float>  Color;
 
 
 } // namespace Local
