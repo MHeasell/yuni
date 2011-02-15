@@ -13,17 +13,6 @@ namespace Markdown
 {
 
 
-	namespace // anonymouse
-	{
-
-		inline bool IsSpace(const char c)
-		{
-			return c == ' ' || c == '\t';
-		}
-
-	} // anonymous namespace
-
-
 	void ReaderData::reset()
 	{
 		filename.clear();
@@ -299,7 +288,7 @@ namespace Markdown
 					{
 						// The next ID
 						const unsigned int next = i + 1;
-						if (next < pLine.size() && IsSpace(pLine[next]))
+						if (next < pLine.size() && String::IsSpace((char)pLine[next]))
 						{
 							// OK It should be a list
 							if (signature.checkLast(Node::unorderedList, i - 1))
