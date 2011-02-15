@@ -5,7 +5,7 @@
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
 #	include "../../../core/system/windows.hdr.h"
-#	include "../window.h"
+#	include "window.h"
 
 
 
@@ -26,6 +26,11 @@ namespace Window
 	*/
 	class WinGDI: public IWindow
 	{
+	public:
+		//! List of local GDI windows, by HWND
+		typedef std::map<HWND, WinGDI*> WindowList;
+
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -74,6 +79,32 @@ namespace Window
 
 
 	protected:
+		/*!
+		** \brief Callback for window message handling
+		**
+		** \param handle Handle for this window
+		** \param uMsg Message
+		** \param wParam Additional Message Information
+		** \param lParam Additional Message Information
+		*/
+		static LRESULT messageCallback(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+		//! Find a window given its handle
+		static WinGDI* findWindow(HWND handle);
+
+		//! Register a window with its handle as a key
+		static void registerWindow(HWND handle, WinGDI* window);
+
+		//! Unregister the window, happens when closing it
+		static void unregisterWindow(HWND handle);
+
+
+	protected:
+		//! Static list of registered GDI windows
+		static WindowList sWindowList;
+
+
+	protected:
 		//! MS Windows sorts its windows by "class"
 		String pWindowClassName;
 
@@ -82,6 +113,7 @@ namespace Window
 
 		//! Window handle
 		HWND pHWnd;
+
 
 	}; // class WinGDI
 

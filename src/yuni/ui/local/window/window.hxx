@@ -18,6 +18,7 @@ namespace Window
 	inline IWindow::IWindow():
 		pStyleSet(DefaultStyleSet),
 		pStayOnTop(false),
+		pFullScreen(false),
 		pBackgroundColor(0.0f, 0.0f, 1.0f),
 		pRefreshRefCount(0)
 	{
@@ -36,7 +37,7 @@ namespace Window
 	}
 
 
-	inline void forceRefresh()
+	inline void IWindow::forceRefresh()
 	{
 		doRefresh();
 	}
@@ -67,7 +68,7 @@ namespace Window
 
 	inline void IWindow::style(unsigned int flags)
 	{
-		pStyle = style;
+		pStyleSet = flags;
 		doUpdateStyle();
 	}
 
@@ -88,11 +89,48 @@ namespace Window
 
 	inline void IWindow::backgroundColor(float r, float g, float b)
 	{
-		pBackgroundColor.r = r;
-		pBackgroundColor.g = g;
-		pBackgroundColor.b = b;
+		pBackgroundColor.red = r;
+		pBackgroundColor.green = g;
+		pBackgroundColor.blue = b;
 		refresh();
 	}
+
+
+	inline void IWindow::onMinimize()
+	{
+		std::cout << "Caught Minimize event !" << std::endl;
+	}
+
+
+	inline void IWindow::onMaximize()
+	{
+		std::cout << "Caught Maximize event !" << std::endl;
+	}
+
+
+	inline void IWindow::onShow()
+	{
+		std::cout << "Caught Show event !" << std::endl;
+	}
+
+
+	inline void IWindow::onResize(float width, float height)
+	{
+		std::cout << "Caught Resize event to (" << width << "," << height << ") !" << std::endl;
+	}
+
+
+	inline void IWindow::onCloseQuery(bool& /*canClose*/)
+	{
+		std::cout << "Caught Close event !" << std::endl;
+	}
+
+
+	inline void IWindow::onClose()
+	{
+		std::cout << "Caught Close event !" << std::endl;
+	}
+
 
 
 

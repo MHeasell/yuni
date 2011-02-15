@@ -14,6 +14,9 @@ namespace UI
 namespace Local
 {
 
+	/*!
+	** \brief Main loop for UI
+	*/
 	template<class ChildT>
     class IQueueService :
 		public Core::EventLoop::IEventLoop<ChildT,
@@ -32,13 +35,13 @@ namespace Local
 		//@}
 
 
-		Window::Ptr createWindow();
-		void removeWindow(Window::Ptr& window);
+		IWindow::Ptr createWindow();
+		void removeWindow(IWindow::Ptr& window);
 
 	protected:
 		//! Map of all local windows
-		Window::Map  pWindows;
-		
+		IWindow::Map  pWindows;
+
 	}; // class IQueueService<>
 
 

@@ -15,108 +15,85 @@ namespace Local
 namespace Window
 {
 
-	namespace // anonymous
+
+	WinGDI* WinGDI::findWindow(HWND handle)
 	{
-
-		typedef std::map<HWND, IWinGDIWindow*> WindowList;
-
-		// This list contains all MFC windows created
-		WindowList sWindowList;
-
-		//! Find a window given its handle
-		IWinGDIWindow* FindWindow(HWND handle)
+		WindowList::iterator it;
+		for (it = sWindowList.begin(); it != sWindowList.end(); ++it)
 		{
-			WindowList::iterator it;
-			for (it = sWindowList.begin(); it != sWindowList.end(); ++it)
+			if (handle == it->first)
+				return it->second;
+		}
+		return NULL;
+	}
+
+
+	void WinGDI::registerWindow(HWND handle, WinGDI* window)
+	{
+		if (!window)
+			return;
+		// If handle is already in the list, it will be overwritten
+		sWindowList[handle] = window;
+	}
+
+
+	void WinGDI::unregisterWindow(HWND handle)
+	{
+		sWindowList.erase(handle);
+	}
+
+
+	LRESULT CALLBACK WinGDI::messageCallback(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam)
+	{
+		WinGDI* window = findWindow(handle);
+		assert(window != NULL && "Window was not properly registered !");
+		// Check for Windows messages
+		switch (uMsg)
+		{
+			case WM_SYSCOMMAND:
 			{
-				if (handle == it->first)
-					return it->second;
-			}
-			return NULL;
-		}
-
-		//! Register a window with its handle as a key
-		void RegisterWindow(HWND handle, IWinGDIWindow* window)
-		{
-			if (!window)
-				return;
-			// If handle is already in the list, it will be overwritten
-			sWindowList[handle] = window;
-		}
-
-		//! Unregister the window, happens when closing it
-		void UnregisterWindow(HWND handle)
-		{
-			sWindowList.erase(handle);
-		}
-
-
-		/*!
-		** \brief Callback method for windows events
-		**
-		** \param hWnd Handle for this window
-		** \param uMsg Message
-		** \param wParam Additional Message Information
-		** \param lParam Additional Message Information
-		*/
-		LRESULT CALLBACK WindowMessageCallback(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-		{
-			IWinGDIWindow* window = FindWindow(hWnd);
-			assert(window != NULL && "Window was not properly registered !");
-			// Check for Windows messages
-			switch (uMsg)
-			{
-				case WM_SYSCOMMAND:
-					{
-						switch (wParam)
-						{
-							case SC_SCREENSAVE:
-							case SC_MONITORPOWER:
-								return 0;
-						}
-						break;
-					}
-
-				case WM_CLOSE: // Did we receive a Close message?
-					{
-						UnregisterWindow(hWnd);
-						DestroyWindow(hWnd);
-						window->onClose();
-						return 0;
-					}
-
-				case WM_QUIT: // Did we receive a Quit message?
-					{
-						return 0;
-					}
-
-				case WM_ERASEBKGND:
-				 	return 0;
-
-				case WM_PAINT:
-					{
-						window->refresh();
-						return 0;
-					}
-
-				case WM_SIZE: // Resize the window
-				case WM_SIZING: // Resizing the window
-					{
-						RECT clientRect;
-						GetClientRect(hWnd, &clientRect);
-						window->window()->resize(
-							static_cast<float>(clientRect.right - clientRect.left),
-							static_cast<float>(clientRect.bottom - clientRect.top));
-						return 0;
-					}
+				switch (wParam)
+				{
+				case SC_SCREENSAVE:
+				case SC_MONITORPOWER:
+					return 0;
+				}
+				break;
 			}
 
-			// Pass all unhandled messages to DefWindowProc
-			return DefWindowProc(hWnd, uMsg, wParam, lParam);
+			case WM_CLOSE: // Did we receive a Close message?
+			case WM_QUIT: // Did we receive a Quit message?
+			{
+				unregisterWindow(handle);
+				DestroyWindow(handle);
+				window->onClose();
+				return 0;
+			}
+
+			case WM_ERASEBKGND:
+				return 0;
+
+			case WM_PAINT:
+			{
+				window->refresh();
+				return 0;
+			}
+
+			case WM_SIZE: // Resize the window
+			case WM_SIZING: // Resizing the window
+			{
+				RECT clientRect;
+				GetClientRect(handle, &clientRect);
+				window->onResize(
+					static_cast<float>(clientRect.right - clientRect.left),
+					static_cast<float>(clientRect.bottom - clientRect.top));
+				return 0;
+			}
 		}
 
-
-	} // anonymous namespace
+		// Pass all unhandled messages to DefWindowProc
+		return DefWindowProc(handle, uMsg, wParam, lParam);
+	}
 
 
 
@@ -142,7 +119,7 @@ namespace Window
 		// Redraw On Size, And Own DC For Window.
 		wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 		// WndProc Handles Messages
-		wc.lpfnWndProc = (WNDPROC)WindowMessageCallback;
+		wc.lpfnWndProc = &WinGDI::messageCallback;
 		// No Extra Window Data
 		wc.cbClsExtra = 0;
 		// No Extra Window Data
@@ -225,7 +202,7 @@ namespace Window
 			NULL, NULL, pHInstance, NULL)))
 			return false;
 
-		AddWindow(pHWnd, this);
+		registerWindow(pHWnd, this);
 
 		return true;
 	}
@@ -235,7 +212,7 @@ namespace Window
 	{
 		pLeft = left;
 		pTop = top;
-		SetWindowPos(pHWnd, 0, pLeft, pTop, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+		SetWindowPos(pHWnd, 0, (long)pLeft, (long)pTop, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
 	}
 
 
@@ -243,7 +220,7 @@ namespace Window
 	{
 		pLeft += left;
 		pTop += top;
-		SetWindowPos(pHWnd, 0, pLeft, pTop, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+		SetWindowPos(pHWnd, 0, (long)pLeft, (long)pTop, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
 	}
 
 
@@ -266,7 +243,7 @@ namespace Window
 
 		pWidth = width;
 		pHeight = height;
-		SetWindowPos(pHWnd, 0, pLeft, pTop, (long)pWidth + ptDiff.x, (long)pHeight + ptDiff.y, SWP_NOZORDER);
+		SetWindowPos(pHWnd, 0, 0, 0, (long)pWidth + ptDiff.x, (long)pHeight + ptDiff.y, SWP_NOMOVE | SWP_NOZORDER);
 	}
 
 
@@ -314,7 +291,15 @@ namespace Window
 
 	bool WinGDI::pollEvents()
 	{
-		// TODO
+		MSG message;
+		// Loop until there is no message left in the queue
+		while (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&message);
+			// Dispatch the message to the callback
+			DispatchMessage(&message);
+		}
+		return true;
 	}
 
 
@@ -327,7 +312,7 @@ namespace Window
 
 	void WinGDI::doUpdateCaption()
 	{
-		SetWindowText(pHWnd, pCaption);
+		SetWindowText(pHWnd, Traits::CString<String>::Perform(pCaption));
 	}
 
 

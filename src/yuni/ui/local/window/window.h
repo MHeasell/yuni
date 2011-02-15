@@ -15,6 +15,7 @@ namespace Local
 {
 namespace Window
 {
+
 	//! Unique numeric Identifier
 	typedef unsigned int ID;
 
@@ -28,15 +29,14 @@ namespace Window
 	{
 	public:
 		//! Default visual style
-		enum
-		{
-			DefaultStyleSet = wsResizeable | wsMinimizable | wsMaximizable;
-		}
+		static const unsigned int DefaultStyleSet = wsResizeable | wsMinimizable | wsMaximizable;
 
 
 	public:
 		//! The most suitable smartptr for the class
 		typedef SmartPtr<IWindow, Policy::Ownership::ReferenceCounted>  Ptr;
+		//! Map of windows, by ID
+		typedef std::map<ID, IWindow::Ptr>  Map;
 
 
 	public:
@@ -50,27 +50,63 @@ namespace Window
 		virtual ~IWindow();
 		//@}
 
+		/*!
+		** \brief Initialize the window
+		**
+		** \returns False if the initialization failed, true if it worked
+		*/
 		virtual bool initialize() = 0;
 
-		virtual void move(float x, float y) = 0;
-		virtual void moveRelative(float x, float y) = 0;
+		/*!
+		** \brief Move the window to a new position
+		**
+		** \param left New coordinate of the left of the window
+		** \param top New coordinate of the top of the window
+		*/
+		virtual void move(float left, float top) = 0;
 
+		/*!
+		** \brief Move the window relatively to its old position
+		**
+		** \param left How much to add to the left of the window
+		** \param top How much to add to the top of the window
+		*/
+		virtual void moveRelative(float left, float top) = 0;
+
+		/*!
+		** \brief Resize the window to new dimensions
+		**
+		** \param width New width of the window
+		** \param height New height of the window
+		*/
 		virtual void resize(float width, float height) = 0;
 
+		//! Show the window
 		virtual void show() = 0;
 
+		//! Hide the window
 		virtual void hide() = 0;
 
+		//! Minimize the window
 		virtual void minimize() = 0;
 
+		//! Maximize the window
 		virtual void maximize() = 0;
 
+		//! Restore the window (from minimization or maximization)
 		virtual void restore() = 0;
 
+		//! Bring the window to front
 		virtual void bringToFront() = 0;
 
+		//! Send the window to back
 		virtual void sendToBack() = 0;
 
+		/*!
+		** \brief Poll events for this window
+		**
+		** \returns True to continue, false if a quit event was caught
+		*/
 		virtual bool pollEvents() = 0;
 
 		//! Refresh the window when possible
@@ -82,7 +118,7 @@ namespace Window
 		//! \name User update management
 		//@{
 		void beginUpdate();
-		boid endUpdate();
+		void endUpdate();
 		//@}
 
 
@@ -121,6 +157,9 @@ namespace Window
 
 		//! Called when the local window caught a show event
 		void onShow();
+
+		//! Called when the local window caught a resize event
+		void onResize(float width, float height);
 
 		/*!
 		** \brief Called when the local window caught a close event
@@ -165,6 +204,9 @@ namespace Window
 
 		//! Should the window always stay on top ?
 		bool pStayOnTop;
+
+		//! Should the window be displayed in full screen ?
+		bool pFullScreen;
 
 		//! Background color
 		Color pBackgroundColor;
