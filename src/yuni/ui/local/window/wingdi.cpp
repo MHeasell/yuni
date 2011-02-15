@@ -16,7 +16,7 @@ namespace Window
 {
 
 
-	WinGDI* WinGDI::findWindow(HWND handle)
+	WinGDI* WinGDI::FindWindow(HWND handle)
 	{
 		WindowList::iterator it;
 		for (it = sWindowList.begin(); it != sWindowList.end(); ++it)
@@ -24,11 +24,11 @@ namespace Window
 			if (handle == it->first)
 				return it->second;
 		}
-		return NULL;
+		return nullptr;
 	}
 
 
-	void WinGDI::registerWindow(HWND handle, WinGDI* window)
+	void WinGDI::RegisterWindow(HWND handle, WinGDI* window)
 	{
 		if (!window)
 			return;
@@ -37,7 +37,7 @@ namespace Window
 	}
 
 
-	void WinGDI::unregisterWindow(HWND handle)
+	void WinGDI::UnregisterWindow(HWND handle)
 	{
 		sWindowList.erase(handle);
 	}
@@ -45,50 +45,51 @@ namespace Window
 
 	LRESULT CALLBACK WinGDI::messageCallback(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
-		WinGDI* window = findWindow(handle);
-		assert(window != NULL && "Window was not properly registered !");
+		WinGDI* window = FindWindow(handle);
+		assert(window != nullptr && "Window was not properly registered !");
+
 		// Check for Windows messages
 		switch (uMsg)
 		{
 			case WM_SYSCOMMAND:
-			{
-				switch (wParam)
 				{
-				case SC_SCREENSAVE:
-				case SC_MONITORPOWER:
+					switch (wParam)
+					{
+						case SC_SCREENSAVE:
+						case SC_MONITORPOWER:
+							return 0;
+					}
+					break;
+				}
+			case WM_CLOSE: // Did we receive a Close message?
+			case WM_QUIT:  // Did we receive a Quit message?
+				{
+					// The event 'onClose' must be dispatched before destroying the window
+					window->onClose();
+					// Destroying the window
+					UnregisterWindow(handle);
+					DestroyWindow(handle);
 					return 0;
 				}
-				break;
-			}
-
-			case WM_CLOSE: // Did we receive a Close message?
-			case WM_QUIT: // Did we receive a Quit message?
-			{
-				unregisterWindow(handle);
-				DestroyWindow(handle);
-				window->onClose();
-				return 0;
-			}
-
 			case WM_ERASEBKGND:
-				return 0;
-
+				{
+					return 0;
+				}
 			case WM_PAINT:
-			{
-				window->refresh();
-				return 0;
-			}
-
+				{
+					window->refresh();
+					return 0;
+				}
 			case WM_SIZE: // Resize the window
 			case WM_SIZING: // Resizing the window
-			{
-				RECT clientRect;
-				GetClientRect(handle, &clientRect);
-				window->onResize(
-					static_cast<float>(clientRect.right - clientRect.left),
-					static_cast<float>(clientRect.bottom - clientRect.top));
-				return 0;
-			}
+				{
+					RECT clientRect;
+					GetClientRect(handle, &clientRect);
+					window->onResize(
+							static_cast<float>(clientRect.right - clientRect.left),
+							static_cast<float>(clientRect.bottom - clientRect.top));
+					return 0;
+				}
 		}
 
 		// Pass all unhandled messages to DefWindowProc
@@ -108,14 +109,14 @@ namespace Window
 		// Grabs Rectangle Upper Left / Lower Right Values
 		RECT windowRect;
 
-		windowRect.left = (long)pLeft;
-		windowRect.right = (long)pWidth;
-		windowRect.top = (long)pTop;
-		windowRect.bottom = (long)pHeight;
+		windowRect.left   = (long) pLeft;
+		windowRect.right  = (long) pWidth;
+		windowRect.top    = (long) pTop;
+		windowRect.bottom = (long) pHeight;
 
 		wc.cbSize = sizeof(WNDCLASSEX);
 		// Grab An Instance For Our Window
-		pHInstance = GetModuleHandle(NULL);
+		pHInstance = GetModuleHandle(nullptr);
 		// Redraw On Size, And Own DC For Window.
 		wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 		// WndProc Handles Messages
@@ -127,23 +128,21 @@ namespace Window
 		// Set The Instance
 		wc.hInstance = pHInstance;
 		// Load The Default Icon
-		wc.hIcon = LoadIcon(NULL, IDI_WINLOGO);
+		wc.hIcon = LoadIcon(nullptr, IDI_WINLOGO);
 		// Load The Arrow Pointer
-		wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+		wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
 		// Load the small icon
-		wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+		wc.hIconSm = LoadIcon(nullptr, IDI_APPLICATION);
 		// No Background Required
-		wc.hbrBackground = NULL;
+		wc.hbrBackground = nullptr;
 		// We Don't Want A Menu
-		wc.lpszMenuName = NULL;
+		wc.lpszMenuName = nullptr;
 		// Set The Class Name
 		wc.lpszClassName = Traits::CString<String>::Perform(pWindowClassName);
 
 		// Attempt To Register The Window Class
 		if (!RegisterClassEx(&wc))
-		{
 			return false;
-		}
 
 		// Attempt Fullscreen Mode?
 		if (pFullScreen)
@@ -194,13 +193,15 @@ namespace Window
 
 		// Create The Window
 		if (!(pHWnd = CreateWindowEx(dwExStyle,
-			Traits::CString<String>::Perform(pWindowClassName), // Class name
-			Traits::CString<String>::Perform(pCaption), // Title
-			dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // Style
-			(int)pLeft, (int)pTop, // Window Position
-			windowRect.right - windowRect.left, windowRect.bottom - windowRect.top,
-			NULL, NULL, pHInstance, NULL)))
+				Traits::CString<String>::Perform(pWindowClassName), // Class name
+				Traits::CString<String>::Perform(pCaption), // Title
+				dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // Style
+				(int)pLeft, (int)pTop, // Window Position
+				windowRect.right - windowRect.left, windowRect.bottom - windowRect.top,
+				nullptr, nullptr, pHInstance, nullptr)))
+		{
 			return false;
+		}
 
 		registerWindow(pHWnd, this);
 
@@ -253,6 +254,7 @@ namespace Window
 		ShowWindow(pHWnd, SW_SHOWNORMAL);
 	}
 
+
 	void WinGDI::hide()
 	{
 		ShowWindow(pHWnd, SW_HIDE);
@@ -293,7 +295,7 @@ namespace Window
 	{
 		MSG message;
 		// Loop until there is no message left in the queue
-		while (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
+		while (PeekMessage(&message, nullptr, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&message);
 			// Dispatch the message to the callback
@@ -306,7 +308,7 @@ namespace Window
 	void WinGDI::doRefresh()
 	{
 		// Ask for refresh by invalidating the client area
-		InvalidateRect(pHWnd, NULL, true);
+		InvalidateRect(pHWnd, nullptr, true);
 	}
 
 
@@ -326,6 +328,7 @@ namespace Window
 	{
 		SetWindowPos(pHWnd, pStayOnTop ? HWND_TOPMOST : HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 	}
+
 
 
 

@@ -90,13 +90,13 @@ namespace Window
 		static LRESULT messageCallback(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 		//! Find a window given its handle
-		static WinGDI* findWindow(HWND handle);
+		static WinGDI* FindWindow(HWND handle);
 
 		//! Register a window with its handle as a key
-		static void registerWindow(HWND handle, WinGDI* window);
+		static void RegisterWindow(HWND handle, WinGDI* window);
 
 		//! Unregister the window, happens when closing it
-		static void unregisterWindow(HWND handle);
+		static void UnregisterWindow(HWND handle);
 
 
 	protected:
