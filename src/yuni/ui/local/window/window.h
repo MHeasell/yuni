@@ -151,13 +151,10 @@ namespace Window
 	protected:
 		//! Called when the local window caught a minimize event
 		void onMinimize();
-
 		//! Called when the local window caught a maximize event
 		void onMaximize();
-
 		//! Called when the local window caught a show event
 		void onShow();
-
 		//! Called when the local window caught a resize event
 		void onResize(float width, float height);
 
@@ -169,45 +166,32 @@ namespace Window
 		void onCloseQuery(bool& canClose);
 		void onClose();
 
-
 		//! Do the actual modification of the caption, abstract
 		virtual void doUpdateCaption() = 0;
-
 		//! Do the actual modification of the style, abstract
 		virtual void doUpdateStyle() = 0;
-
 		//! Do the actual modification of the stay on top option, abstract
 		virtual void doUpdateStayOnTop() = 0;
-
 		//! Do the actual refresh of the window
 		virtual void doRefresh() = 0;
-
 
 	protected:
 		//! Caption of the window
 		String pCaption;
-
 		//! Window visual style
 		unsigned int pStyleSet;
-
 		//! Left-mots coordinate
 		float pLeft;
-
 		//! Top-most coordinate
 		float pTop;
-
 		//! Width of the window
 		float pWidth;
-
 		//! Height of the window
 		float pHeight;
-
 		//! Should the window always stay on top ?
 		bool pStayOnTop;
-
 		//! Should the window be displayed in full screen ?
 		bool pFullScreen;
-
 		//! Background color
 		Color pBackgroundColor;
 

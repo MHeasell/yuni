@@ -59,11 +59,11 @@ namespace Window
 
 
 
+
 } // namespace Window
 } // namespace Local
 } // namespace UI
 } // namespace Private
 } // namespace Yuni
-
 
 #endif // __YUNI_UI_LOCAL_WINDOW_LOCKER_H__
