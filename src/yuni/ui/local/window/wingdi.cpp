@@ -45,7 +45,7 @@ namespace Window
 	}
 
 
-	LRESULT CALLBACK WinGDI::messageCallback(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam)
+	LRESULT CALLBACK WinGDI::MessageCallback(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		assert(INVALID_HANDLE != handle && "Invalid window handle");
 		WinGDI* window = FindWindow(handle);
@@ -61,11 +61,17 @@ namespace Window
 						case SC_SCREENSAVE:
 						case SC_MONITORPOWER:
 							return 0;
+						case SC_MINIMIZE:
+							window->onMinimize();
+						case SC_MAXIMIZE:
+							window->onMaximize();
+						case SC_RESTORE:
+							window->onRestore();
+						break;
 					}
 					break;
 				}
 			case WM_CLOSE: // Did we receive a Close message?
-			case WM_QUIT:  // Did we receive a Quit message?
 				{
 					// The event 'onClose' must be dispatched before destroying the window
 					window->onClose();
@@ -81,7 +87,7 @@ namespace Window
 			case WM_PAINT:
 				{
 					window->refresh();
-					return 0;
+					break;
 				}
 			case WM_SIZE: // Resize the window
 			case WM_SIZING: // Resizing the window
@@ -91,7 +97,15 @@ namespace Window
 					window->onResize(
 							static_cast<float>(clientRect.right - clientRect.left),
 							static_cast<float>(clientRect.bottom - clientRect.top));
-					return 0;
+					break;
+				}
+			case WM_SHOWWINDOW: // Show / hide window
+				{
+					if (wParam)
+						window->onShow();
+					else
+						window->onHide();
+					break;
 				}
 		}
 
@@ -300,6 +314,10 @@ namespace Window
 		// Loop until there is no message left in the queue
 		while (PeekMessage(&message, nullptr, 0, 0, PM_REMOVE))
 		{
+			// Did we receive a Quit message ?
+			if (WM_QUIT == message.message)
+				return false;
+
 			TranslateMessage(&message);
 			// Dispatch the message to the callback
 			DispatchMessage(&message);

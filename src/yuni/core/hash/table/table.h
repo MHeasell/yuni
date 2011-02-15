@@ -11,7 +11,7 @@ namespace Hash
 
 
 	template<class KeyT, class ValueT, class ImplT = std::map<KeyT,ValueT> >
-	class Index : protected ImplT
+	class Index : protected ImplT
 	{
 	public:
 		//! Type of the key
@@ -65,7 +65,6 @@ namespace Hash
 			return ImplementationType::exists(key);
 		}
 
-	
 		template<class K> bool remove(const K& key)
 		{
 			return false;
