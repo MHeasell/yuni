@@ -18,11 +18,14 @@ namespace Window
 
 	WinGDI* WinGDI::FindWindow(HWND handle)
 	{
-		const WindowList::iterator end = sWindowList.end();
-		for (WindowList::iterator it = sWindowList.begin(); it != end; ++it)
+		if (INVALID_HANDLE != handle)
 		{
-			if (handle == it->first)
-				return it->second;
+			const WindowList::iterator end = sWindowList.end();
+			for (WindowList::iterator it = sWindowList.begin(); it != end; ++it)
+			{
+				if (handle == it->first)
+					return it->second;
+			}
 		}
 		return nullptr;
 	}
@@ -30,10 +33,9 @@ namespace Window
 
 	void WinGDI::RegisterWindow(HWND handle, WinGDI* window)
 	{
-		if (!window)
-			return;
 		// If handle is already in the list, it will be overwritten
-		sWindowList[handle] = window;
+		if (handle != INVALID_HANDLE && window)
+			sWindowList[handle] = window;
 	}
 
 
@@ -45,6 +47,7 @@ namespace Window
 
 	LRESULT CALLBACK WinGDI::messageCallback(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
+		assert(INVALID_HANDLE != handle && "Invalid window handle");
 		WinGDI* window = FindWindow(handle);
 		assert(window != nullptr && "Window was not properly registered !");
 
@@ -212,7 +215,7 @@ namespace Window
 	void WinGDI::move(float left, float top)
 	{
 		pLeft = left;
-		pTop = top;
+		pTop  = top;
 		SetWindowPos(pHWnd, 0, (long)pLeft, (long)pTop, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
 	}
 
@@ -220,7 +223,7 @@ namespace Window
 	void WinGDI::moveRelative(float left, float top)
 	{
 		pLeft += left;
-		pTop += top;
+		pTop  += top;
 		SetWindowPos(pHWnd, 0, (long)pLeft, (long)pTop, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
 	}
 
@@ -242,7 +245,7 @@ namespace Window
 		ptDiff.x = (fullRect.right - fullRect.left) - clientRect.right;
 		ptDiff.y = (fullRect.bottom - fullRect.top) - clientRect.bottom;
 
-		pWidth = width;
+		pWidth  = width;
 		pHeight = height;
 		SetWindowPos(pHWnd, 0, 0, 0, (long)pWidth + ptDiff.x, (long)pHeight + ptDiff.y, SWP_NOMOVE | SWP_NOZORDER);
 	}
@@ -281,13 +284,13 @@ namespace Window
 
 	void WinGDI::bringToFront()
 	{
-		SetWindowPos(pHWnd, pStayOnTop ? HWND_TOPMOST : HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+		SetWindowPos(pHWnd, (pStayOnTop ? HWND_TOPMOST : HWND_TOP), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 	}
 
 
 	void WinGDI::sendToBack()
 	{
-		SetWindowPos(pHWnd, pStayOnTop ? HWND_NOTOPMOST : HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+		SetWindowPos(pHWnd, (pStayOnTop ? HWND_NOTOPMOST : HWND_BOTTOM), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 	}
 
 
