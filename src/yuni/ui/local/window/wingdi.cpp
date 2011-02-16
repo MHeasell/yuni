@@ -18,7 +18,7 @@ namespace Window
 
 	WinGDI* WinGDI::FindWindow(HWND handle)
 	{
-		if (INVALID_HANDLE != handle)
+		if (nullptr != handle)
 		{
 			const WindowList::iterator end = sWindowList.end();
 			for (WindowList::iterator it = sWindowList.begin(); it != end; ++it)
@@ -34,7 +34,7 @@ namespace Window
 	void WinGDI::RegisterWindow(HWND handle, WinGDI* window)
 	{
 		// If handle is already in the list, it will be overwritten
-		if (handle != INVALID_HANDLE && window)
+		if (nullptr != handle && window)
 			sWindowList[handle] = window;
 	}
 
@@ -47,9 +47,9 @@ namespace Window
 
 	LRESULT CALLBACK WinGDI::MessageCallback(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
-		assert(INVALID_HANDLE != handle && "Invalid window handle");
+		assert(nullptr != handle && "Invalid window handle");
 		WinGDI* window = FindWindow(handle);
-		assert(window != nullptr && "Window was not properly registered !");
+		assert(nullptr != window && "Window was not properly registered !");
 
 		// Check for Windows messages
 		switch (uMsg)
@@ -140,7 +140,7 @@ namespace Window
 		// Redraw On Size, And Own DC For Window.
 		wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 		// WndProc Handles Messages
-		wc.lpfnWndProc = &WinGDI::messageCallback;
+		wc.lpfnWndProc = &WinGDI::MessageCallback;
 		// No Extra Window Data
 		wc.cbClsExtra = 0;
 		// No Extra Window Data
@@ -223,7 +223,7 @@ namespace Window
 			return false;
 		}
 
-		registerWindow(pHWnd, this);
+		RegisterWindow(pHWnd, this);
 
 		return true;
 	}
