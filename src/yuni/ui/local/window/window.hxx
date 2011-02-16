@@ -16,7 +16,7 @@ namespace Window
 {
 
 	inline IWindow::IWindow():
-		pStyleSet(DefaultStyleSet),
+		pStyleSet(defaultStyleSet),
 		pStayOnTop(false),
 		pFullScreen(false),
 		pBackgroundColor(0.0f, 0.0f, 1.0f),
@@ -144,6 +144,30 @@ namespace Window
 	}
 
 
+	inline const String& IWindow::caption() const
+	{
+		return pCaption;
+	}
+
+
+	inline unsigned int IWindow::style() const
+	{
+		return pStyleSet;
+	}
+
+
+	inline bool IWindow::stayOnTop() const
+	{
+		return pStayOnTop;
+	}
+
+
+	inline const Color& IWindow::backgroundColor() const
+	{
+		return pBackgroundColor;
+	}
+
+
 
 
 
@@ -152,6 +176,5 @@ namespace Window
 } // namespace UI
 } // namespace Private
 } // namespace Yuni
-
 
 #endif // __YUNI_UI_LOCAL_WINDOW_WINDOW_HXX__

@@ -16,11 +16,9 @@ namespace Local
 namespace Window
 {
 
-	//! Unique numeric Identifier
-	typedef unsigned int ID;
-
 
 	/*!
+	** \brief Local Window Interface
 	**
 	** \internal All those methods are **not** thread-safe, because called from
 	**   the main thread (see QueueService)
@@ -28,16 +26,15 @@ namespace Window
 	class IWindow
 	{
 	public:
-		//! Default visual style
-		static const unsigned int DefaultStyleSet = wsResizeable | wsMinimizable | wsMaximizable;
-
-
-	public:
 		//! The most suitable smartptr for the class
 		typedef SmartPtr<IWindow, Policy::Ownership::ReferenceCounted>  Ptr;
 		//! Map of windows, by ID
 		typedef std::map<ID, IWindow::Ptr>  Map;
-
+		enum
+		{
+			//! Default visual style
+			defaultStyleSet = wsResizeable | wsMinimizable | wsMaximizable,
+		};
 
 	public:
 		//! \name Constructor & Destructor
@@ -109,42 +106,60 @@ namespace Window
 		*/
 		virtual bool pollEvents() = 0;
 
+
+		//! \name Refresh
+		//@{
 		//! Refresh the window when possible
 		void refresh();
 
 		//! Refresh the window immediately. This method should be used with care
 		void forceRefresh();
 
-		//! \name User update management
-		//@{
+		/*!
+		** \brief Mark the beginning of an update batch.
+		**
+		** The method increases the update count by one.
+		** `endUpdate` should be called to mark the end of the operation.
+		** \see endUpdate()
+		*/
 		void beginUpdate();
+		/*!
+		** \brief Mark the end of an update batch and refresh the component
+		**
+		** The method decreases the update count and the refresh will be performed as
+		** soon as it is equals to zero.
+		** \see beginUpdate()
+		** \see refresh()
+		*/
 		void endUpdate();
 		//@}
 
 
 		//! \name Caption
 		//@{
+		//! Set the caption for the Window
 		template<class StringT> void caption(const StringT& newstring);
-		const String& caption() const {return pCaption; }
+		//! Get the current caption of the window
+		const String& caption() const;
 		//@}
 
 		//! \name Window Style
 		//@{
 		void style(unsigned int flags);
-		unsigned int style() const {return pStyleSet;}
+		unsigned int style() const;
 		//@}
 
 		//! \name Stay on Top
 		//@{
 		virtual void stayOnTop(bool alwaysOnTop);
-		bool stayOnTop() const {return pStayOnTop;}
+		bool stayOnTop() const;
 		//@}
 
 		//! \name Colors
 		//@{
 		void backgroundColor(const Color& color);
 		void backgroundColor(float r, float g, float b);
-		const Color& backgroundColor() const {return pBackgroundColor;}
+		const Color& backgroundColor() const;
 		//@}
 
 

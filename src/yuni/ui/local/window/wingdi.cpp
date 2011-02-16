@@ -54,40 +54,14 @@ namespace Window
 		// Check for Windows messages
 		switch (uMsg)
 		{
-			case WM_SYSCOMMAND:
-				{
-					switch (wParam)
-					{
-						case SC_SCREENSAVE:
-						case SC_MONITORPOWER:
-							return 0;
-						case SC_MINIMIZE:
-							window->onMinimize();
-						case SC_MAXIMIZE:
-							window->onMaximize();
-						case SC_RESTORE:
-							window->onRestore();
-						break;
-					}
-					break;
-				}
-			case WM_CLOSE: // Did we receive a Close message?
-				{
-					// The event 'onClose' must be dispatched before destroying the window
-					window->onClose();
-					// Destroying the window
-					UnregisterWindow(handle);
-					DestroyWindow(handle);
-					return 0;
-				}
-			case WM_ERASEBKGND:
-				{
-					return 0;
-				}
 			case WM_PAINT:
 				{
 					window->refresh();
 					break;
+				}
+			case WM_ERASEBKGND:
+				{
+					return 0;
 				}
 			case WM_SIZE: // Resize the window
 			case WM_SIZING: // Resizing the window
@@ -107,7 +81,36 @@ namespace Window
 						window->onHide();
 					break;
 				}
-		}
+			case WM_SYSCOMMAND:
+				{
+					switch (wParam)
+					{
+						case SC_MINIMIZE:
+							window->onMinimize();
+							break;
+						case SC_RESTORE:
+							window->onRestore();
+							break;
+						case SC_MAXIMIZE:
+							window->onMaximize();
+							break;
+						case SC_SCREENSAVE:
+							break;
+						case SC_MONITORPOWER:
+							return 0;
+					}
+					break;
+				}
+			case WM_CLOSE: // Did we receive a Close message?
+				{
+					// The event 'onClose' must be dispatched before destroying the window
+					window->onClose();
+					// Destroying the window
+					UnregisterWindow(handle);
+					DestroyWindow(handle);
+					return 0;
+				}
+			}
 
 		// Pass all unhandled messages to DefWindowProc
 		return DefWindowProc(handle, uMsg, wParam, lParam);
@@ -335,7 +338,8 @@ namespace Window
 
 	void WinGDI::doUpdateCaption()
 	{
-		SetWindowText(pHWnd, Traits::CString<String>::Perform(pCaption));
+		// FIXME The method SetWindowTextW must be used instead
+		SetWindowTextA(pHWnd, pCaption.c_str());
 	}
 
 
@@ -347,7 +351,7 @@ namespace Window
 
 	void WinGDI::doUpdateStayOnTop()
 	{
-		SetWindowPos(pHWnd, pStayOnTop ? HWND_TOPMOST : HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+		SetWindowPos(pHWnd, (pStayOnTop ? HWND_TOPMOST : HWND_TOP), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 	}
 
 
