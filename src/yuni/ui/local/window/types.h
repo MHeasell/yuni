@@ -12,7 +12,11 @@ namespace UI
 namespace Local
 {
 
+	//! Unique numeric Identifier
+	typedef unsigned int ID;
 
+
+	//! Window Styles
 	enum WindowStyle
 	{
 		wsNone = 0,
@@ -28,8 +32,9 @@ namespace Local
 	};
 
 
-
+	//! Foreground/Background Color
 	typedef Yuni::Color::RGB<float>  Color;
+
 
 
 } // namespace Local
