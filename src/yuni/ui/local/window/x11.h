@@ -1,10 +1,10 @@
-#ifndef __YUNI_UI_LOCAL_WINDOW_WINGDI_H__
-# define __YUNI_UI_LOCAL_WINDOW_WINGDI_H__
+#ifndef __YUNI_UI_LOCAL_WINDOW_X11_H__
+# define __YUNI_UI_LOCAL_WINDOW_X11_H__
 
 # include "../../../yuni.h"
 
-# ifdef YUNI_WINDOWSYSTEM_MSW
-#	include "../../../core/system/windows.hdr.h"
+# ifdef YUNI_WINDOWSYSTEM_X11
+#	include "../../../core/system/x11.hdr.h"
 #	include "window.h"
 
 
@@ -22,23 +22,18 @@ namespace Window
 
 
 	/*!
-	** \brief Implementation of a window for Microsoft Windows GDI+
+	** \brief Implementation of a window for the X Window System
 	*/
-	class WinGDI: public IWindow
+	class X11: public IWindow
 	{
-	public:
-		//! List of local GDI windows, by HWND
-		typedef std::map<HWND, WinGDI*> WindowList;
-
-
 	public:
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		WinGDI()
+		X11()
 		{}
 		//! Destructor
-		virtual ~WinGDI() {}
+		virtual ~X11() {}
 		//@}
 
 		/*!
@@ -117,41 +112,20 @@ namespace Window
 		//! Do the actual refresh of a rectangle in the window
 		virtual void doRefreshRect(float left, float top, float width, float height);
 
-
 	protected:
-		/*!
-		** \brief Callback for window message handling
-		**
-		** \param handle Handle for this window
-		** \param uMsg Message
-		** \param wParam Additional Message Information
-		** \param lParam Additional Message Information
-		*/
-		static LRESULT MessageCallback(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
-		//! Find a window given its handle
-		static WinGDI* FindWindow(HWND handle);
-
-		//! Register a window with its handle as a key
-		static void RegisterWindow(HWND handle, WinGDI* window);
-
-		//! Unregister the window, happens when closing it
-		static void UnregisterWindow(HWND handle);
+		//! Find a visual with the proper parameters
+		static Visual* FindARGBVisual(Display* dpy, int screen, int& depth);
 
 
 	protected:
-		//! Static list of registered GDI windows
-		static WindowList sWindowList;
+		//! Connection to a X11 Server through TCP or DECnet communications protocols
+		Display* pDisplay;
+		//! X11 Screen
+		int pScreen;
+		//! X11 Window
+		::Window pWindow;
 
-	protected:
-		//! MS Windows sorts its windows by "class"
-		String pWindowClassName;
-		//! Instance handle
-		HINSTANCE pHInstance;
-		//! Window handle
-		HWND pHWnd;
-
-	}; // class WinGDI
+	}; // class X11
 
 
 
@@ -163,6 +137,6 @@ namespace Window
 } // namespace Private
 } // namespace Yuni
 
-# endif // YUNI_WINDOWSYSTEM_MSW
+# endif // YUNI_WINDOWSYSTEM_X11
 
-#endif // __YUNI_UI_LOCAL_WINDOW_WINGDI_H__
+#endif // __YUNI_UI_LOCAL_WINDOW_X11_H__

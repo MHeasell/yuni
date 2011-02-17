@@ -13,6 +13,7 @@ list(APPEND SRC_UI
 	ui/local/window
 	ui/local/window/types.h
 	ui/local/window/window.h
+	ui/local/window/window.hxx
 	ui/local/window.h
 
 	ui/application.h
@@ -46,6 +47,17 @@ list(APPEND SRC_UI
 	ui/button.cpp
 )
 
+if (WIN32 OR WIN64)
+	list(APPEND SRC_UI ui/local/window/wingdi.h ui/local/window/wingdi.cpp)
+else ()
+	if (APPLE)
+		list(APPEND SRC_UI ui/local/window/cocoa.h ui/local/window/cocoa.cpp)
+	else ()
+		if (UNIX)
+			list(APPEND SRC_UI ui/local/window/x11.h ui/local/window/x11.cpp)
+		endif ()
+	endif ()
+endif ()
 
 add_library(yuni-static-ui-core STATIC ${SRC_UI})
 
