@@ -174,8 +174,14 @@ namespace Window
 		void onShow();
 		//! Called when the local window caught a hide event
 		void onHide();
-		//! Called when the local window caught a resize event
+		/*!
+		** \brief Called when the local window caught a resize event
+		**
+		** \warning Given sizes must be for the <b>client</b> area, not the whole window
+		*/
 		void onResize(float width, float height);
+		//! Called when the local window caught a move event
+		void onMove(float left, float top);
 
 		/*!
 		** \brief Called when the local window caught a close event
@@ -193,6 +199,8 @@ namespace Window
 		virtual void doUpdateStayOnTop() = 0;
 		//! Do the actual refresh of the window
 		virtual void doRefresh() = 0;
+		//! Do the actual refresh of a rectangle in the window
+		virtual void doRefreshRect(float left, float top, float width, float height) = 0;
 
 	protected:
 		//! Caption of the window

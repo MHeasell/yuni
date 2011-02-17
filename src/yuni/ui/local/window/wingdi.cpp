@@ -15,6 +15,9 @@ namespace Local
 namespace Window
 {
 
+	// Define the static list of windows
+	WinGDI::WindowList WinGDI::sWindowList;
+
 
 	WinGDI* WinGDI::FindWindow(HWND handle)
 	{
@@ -69,8 +72,16 @@ namespace Window
 					RECT clientRect;
 					GetClientRect(handle, &clientRect);
 					window->onResize(
-							static_cast<float>(clientRect.right - clientRect.left),
-							static_cast<float>(clientRect.bottom - clientRect.top));
+						static_cast<float>(clientRect.right - clientRect.left),
+						static_cast<float>(clientRect.bottom - clientRect.top));
+					break;
+				}
+			case WM_WINDOWPOSCHANGED:
+				{
+					WINDOWPOS* position = (WINDOWPOS*)lParam;
+					window->onMove(
+						static_cast<float>(position->x),
+						static_cast<float>(position->y));
 					break;
 				}
 			case WM_SHOWWINDOW: // Show / hide window
@@ -331,8 +342,20 @@ namespace Window
 
 	void WinGDI::doRefresh()
 	{
-		// Ask for refresh by invalidating the client area
-		InvalidateRect(pHWnd, nullptr, true);
+		// Ask for refresh by invalidating the whole client area
+		InvalidateRect(pHWnd, nullptr, false); // false means we do not erase the background
+	}
+
+
+	void WinGDI::doRefreshRect(float left, float top, float width, float height)
+	{
+		// Ask for refresh by invalidating a rectangle in the client area
+		RECT area;
+		area.left = static_cast<long>(left);
+		area.top = static_cast<long>(top);
+		area.right = area.left + static_cast<long>(width) - 1;
+		area.bottom = area.top + static_cast<long>(height) - 1;
+		InvalidateRect(pHWnd, &area, false); // false means we do not erase the background
 	}
 
 

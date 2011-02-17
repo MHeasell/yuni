@@ -132,6 +132,12 @@ namespace Window
 	}
 
 
+	inline void onMove(float left, float top)
+	{
+		std::cout << "Caught Move event to (" << left << "," << top << ") !" << std::endl;
+	}
+
+
 	inline void IWindow::onCloseQuery(bool& /*canClose*/)
 	{
 		std::cout << "Caught Close event !" << std::endl;
