@@ -4,6 +4,7 @@
 
 #ifdef YUNI_WINDOWSYSTEM_X11
 
+
 namespace Yuni
 {
 namespace Private
@@ -38,7 +39,7 @@ namespace Window
 			attributes.override_redirect = True;
 		}
 
-		pWindow = XCreateWindow(pDisplay, root, pLeft, pTop,
+		pWindow = XCreateWindow(pDisplay, root, (int)pLeft, (int)pTop,
 			(unsigned int)pWidth, (unsigned int)pHeight, 0,
 			depth, CopyFromParent, visual,
 			CWBackPixel | CWBorderPixel | CWColormap | CWEventMask, &attributes);
@@ -105,8 +106,8 @@ namespace Window
 	void X11::resize(float width, float height)
 	{
 		pWidth = width;
-		pTop = width;
-		XResizeWindow(pDisplay, pWindow, (unsigned int)left, (unsigned int)top);
+		pTop = height;
+		XResizeWindow(pDisplay, pWindow, (unsigned int)width, (unsigned int)height);
 	}
 
 
@@ -152,7 +153,7 @@ namespace Window
 	}
 
 
-	bool X11Window::pollEvents()
+	bool X11::pollEvents()
 	{
 		XEvent event;
 
@@ -205,7 +206,8 @@ namespace Window
 
 	void X11::doRefreshRect(float left, float top, float width, float height)
 	{
-		XClearArea(pDisplay, pWindow, left, top, width, height, false);
+		// Last argument as "false" means no Expose event will be generated
+		XClearArea(pDisplay, pWindow, (int)left, (int)top, (unsigned int)width, (unsigned int)height, false);
 	}
 
 
@@ -215,7 +217,7 @@ namespace Window
 		unsigned long valueMask;
 		XSetWindowAttributes attributes;
 
-		XChangeWindowAttributes(pDisplay, pWindow, valuemask, &attributes);
+		XChangeWindowAttributes(pDisplay, pWindow, valueMask, &attributes);
 	}
 
 
@@ -223,10 +225,20 @@ namespace Window
 	{
 		// This code uses EWMH (Extended Window Manager Hints)
 		// We add a _NET_WM_STATE_ABOVE state to the window
-		int tweak = pStayOnTop ? _NET_WM_STATE_ADD : _NET_WM_STATE_REMOVE;
-		netwm_set_state(pDisplay, pWindow, tweak, _NET_WM_STATE_ABOVE);
+		Atom _NET_WM_STATE_ABOVE = XInternAtom(pDisplay, "_NET_WM_STATE_ABOVE", false);
+		int op = pStayOnTop ? _NET_WM_STATE_ADD : _NET_WM_STATE_REMOVE;
+		netwm_set_state(pDisplay, pWindow, op, _NET_WM_STATE_ABOVE);
 	}
 
+
+	void X11::doUpdateFullScreen()
+	{
+		// This code uses EWMH (Extended Window Manager Hints)
+		// We add a _NET_WM_STATE_FULLSCREEN state to the window
+		Atom _NET_WM_STATE_FULLSCREEN = XInternAtom(pDisplay, "_NET_WM_STATE_FULLSCREEN", false);
+		int op = pFullScreen ? _NET_WM_STATE_ADD : _NET_WM_STATE_REMOVE;
+		netwm_set_state(pDisplay, pWindow, op,_NET_WM_STATE_FULLSCREEN);
+	}
 
 
 
