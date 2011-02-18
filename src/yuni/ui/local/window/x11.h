@@ -106,6 +106,9 @@ namespace Window
 		//! Do the actual modification of the stay on top option, virtual, called from base
 		virtual void doUpdateStayOnTop();
 
+		//! Do the actual modification of the full screen option, virtual, called from base
+		virtual void doUpdateFullScreen();
+
 		//! Do the actual refresh of the window
 		virtual void doRefresh();
 

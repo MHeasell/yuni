@@ -197,6 +197,8 @@ namespace Window
 		virtual void doUpdateStyle() = 0;
 		//! Do the actual modification of the stay on top option, abstract
 		virtual void doUpdateStayOnTop() = 0;
+		//! Do the actual modification of the full screen option, abstract
+		virtual void doUpdateFullScreen() = 0;
 		//! Do the actual refresh of the window
 		virtual void doRefresh() = 0;
 		//! Do the actual refresh of a rectangle in the window

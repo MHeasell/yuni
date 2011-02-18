@@ -378,6 +378,10 @@ namespace Window
 	}
 
 
+	void WinGDI::doUpdateFullScreen()
+	{
+		// TODO
+	}
 
 
 
