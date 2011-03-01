@@ -1,12 +1,8 @@
- - Trouver une lib audio
-    - Voir http://osalp.sourceforge.net/
-    - Voir http://www.clam.iua.upf.edu/
-    - http://www.gnu.org/software/ccaudio/
-
  - Liens 3D:
     - http://www.esenthel.com : Esenthel, moteur de jeu très complet
     - http://www.lightsprint.com : LightSprint, moteur de rendu / post-processing de lumière complexe
 	- http://www.cafu.de : Cafu, Moteur de jeu libre orienté multiplayer action
+	- http://sauerbraten.org : Cube 2 Sauerbraten, un jeu gratuit avec un moteur libre
 
  - Modules :
     - application
