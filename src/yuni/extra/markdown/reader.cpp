@@ -1,6 +1,6 @@
 
 #include "reader.h"
-#include "data.h"
+#include "private/data.h"
 #include <cassert>
 
 
@@ -19,6 +19,13 @@ namespace Markdown
 	Reader::~Reader()
 	{
 		delete pData;
+	}
+
+
+	Node::Ptr  Reader::root() const
+	{
+		assert(pData != nullptr);
+		return pData->root();
 	}
 
 

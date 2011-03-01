@@ -9,8 +9,17 @@ namespace Markdown
 namespace Renderer
 {
 
+	Html::Html()
+	{
+		resetDefaultValues();
+	}
+
+
 	void Html::resetDefaultValues()
 	{
+		// Enable all nodes
+		enableAllNodes();
+
 		// reset all
 		for (unsigned int t = 0; t != static_cast<unsigned int>(Node::maxType); ++t)
 		{
@@ -22,7 +31,7 @@ namespace Renderer
 		composition[Node::document][partBegin]
 			<< "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
 			<< "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
-			<< "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"fr\" lang=\"fr\">\n";
+			<< "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n";
 		composition[Node::document][partEnd] = "</html>\n";
 
 		composition[Node::body][partBegin] = "<body>\n\n\n";
@@ -31,11 +40,16 @@ namespace Renderer
 
 		// Paragraph
 		composition[Node::paragraph][partBegin] = "<p>\n";
-		composition[Node::paragraph][partEnd] = "</p>\n";
+		composition[Node::paragraph][partEnd]   = "\n</p>\n";
 		// Quote
-		composition[Node::quote][partBegin] = "<quote>\n";
+		composition[Node::quote][partBegin]   = "<quote>\n";
 		composition[Node::quote][partNewLine] = '\t';
-		composition[Node::quote][partEnd] = "</quote>\n";
+		composition[Node::quote][partEnd]     = "</quote>\n";
+
+		// TOC
+		composition[Node::toc][partBegin]   = "<div class=\"toc\">\n";
+		composition[Node::toc][partNewLine] = '\t';
+		composition[Node::toc][partEnd]     = "</div>\n";
 
 		composition[Node::header1][partBegin] = "<h1>";
 		composition[Node::header1][partEnd]   = "</h1>\n";
@@ -65,7 +79,42 @@ namespace Renderer
 		composition[Node::listItem][partEnd]     = "</li>\n";
 
 		// Line break
-		composition[Node::linebreak][partBegin]     = "\n<br />";
+		composition[Node::linebreak][partBegin] = "\n<br />";
+	}
+
+
+
+	bool Html::render(const Reader& reader)
+	{
+		// Retrieve the root node
+		Node::Ptr root = reader.root();
+		if (!root)
+			return false;
+		renderNode(root);
+		return true;
+	}
+
+
+	void Html::renderNode(const Node::Ptr& node)
+	{
+		assert(!(!node));
+
+		const Node& rawNode = *node;
+		const Node::Type type = rawNode.type;
+		assert(static_cast<unsigned int>(type) < nodeCount);
+		if (!enable[type])
+			return;
+
+		std::cout << composition[type][partBegin] << rawNode.innerText;
+
+		if (!rawNode.empty())
+		{
+			const Node::iterator end = rawNode.end();
+			for (Node::iterator i = rawNode.begin(); i != end; ++i)
+				renderNode(*i);
+		}
+
+		std::cout << composition[type][partEnd];
 	}
 
 

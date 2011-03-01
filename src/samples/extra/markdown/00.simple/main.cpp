@@ -1,6 +1,7 @@
 
 #include <yuni/yuni.h>
 #include <yuni/extra/markdown/reader.h>
+#include <yuni/extra/markdown/renderer/html.h>
 #include <yuni/core/io/file.h>
 
 
@@ -12,6 +13,7 @@ int main(int argc, char** argv)
 	using namespace Yuni;
 
 	Markdown::Reader  reader;
+	Markdown::Renderer::Html html;
 	CustomString<4096> buffer;
 
 	for (int i = 1; i < argc; ++i)
@@ -29,6 +31,8 @@ int main(int argc, char** argv)
 				reader += buffer;
 		
 			reader.endDocument();
+
+			html.render(reader);
 		}
 	}
 

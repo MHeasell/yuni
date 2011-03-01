@@ -1,8 +1,8 @@
 #ifndef __YUNI_EXTRA_MARKDOWN_SIGNATURE_H__
 # define __YUNI_EXTRA_MARKDOWN_SIGNATURE_H__
 
-# include "node.h"
-# include "fwd.h"
+# include "../node.h"
+# include "../fwd.h"
 
 
 namespace Yuni

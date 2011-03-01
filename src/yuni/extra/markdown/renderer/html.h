@@ -4,6 +4,8 @@
 # include "../../../yuni.h"
 # include "../node.h"
 # include "../../../core/string.h"
+# include "../reader.h"
+# include <cassert>
 
 
 namespace Yuni
@@ -24,24 +26,63 @@ namespace Renderer
 			partNewLine,
 			partCount
 		};
+		enum
+		{
+			nodeCount = Node::maxType,
+		};
 
 	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Default constructor
+		*/
+		Html();
+		//! Destructor
+		~Html() {}
+		//@}
+
+
 		//! Reset all default values
 		void resetDefaultValues();
 
-		void render(const Node::Ptr& document);
+
+
+		//! \name Enable / Disable nodes
+		//@{
+		/*!
+		** \brief Ignore a type of node
+		*/
+		void discard(Node::Type ndtype);
+		//! Consider all types of node
+		void enableAllNodes();
+		//@}
+
+
+		//! \name Rendering
+		//@{
+		bool render(const Reader& reader);
+		//@}
 
 	public:
 		//! Tags composition
-		String composition[Node::maxType][partCount];
+		String composition[nodeCount][partCount];
+		//! Flag to enable/disable each type of node
+		bool enable[nodeCount];
 
 	private:
+		void renderNode(const Node::Ptr& node);
 
-	};
+	}; // class Html
+
+
+
 
 
 } // namespace Renderer
 } // namespace Markdown
 } // namespace Yuni
+
+# include "html.hxx"
 
 #endif // __YUNI_EXTRA_MARKDOWN_RENDERER_HTML_H__

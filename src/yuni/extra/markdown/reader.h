@@ -54,6 +54,13 @@ namespace Markdown
 		//@}
 
 
+		//! \name Root node
+		//@{
+		//! Get the root node
+		Node::Ptr  root() const;
+		//@}
+
+
 		//! \name Operators
 		//@{
 		//! Append
