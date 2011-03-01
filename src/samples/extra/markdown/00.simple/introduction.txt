@@ -61,3 +61,9 @@ Big applications always end up requiring performance at some point,
 multi-threading at some other, graphics, sound, input, command line parsing,
 etc. Yuni will provide all this and more in a portable way with a single,
 easy-to-use, object-oriented API.
+
+Here is a code block :
+    for i from 0 to 10 do
+        something;
+Cool no ? :)
+

@@ -11,6 +11,9 @@ namespace Yuni
 namespace Markdown
 {
 
+	/*!
+	** \brief A node for a markdown parse tree
+	*/
 	class Node : public Core::TreeN<Node, Policy::SingleThreaded>
 	{
 	public:
@@ -23,27 +26,49 @@ namespace Markdown
 		enum Type
 		{
 			unknown = 0,
+			//! A markdown document
 			document,
+			//! A document header
 			head,
+			//! TOC (Table Of Content)
 			toc,
+			//! Body for a document
 			body,
+			//! Raw text
 			text,
+			//! Paragraph
 			paragraph,
+			//! Quote
 			quote,
+			//! Header (level 1, block)
 			header1,
+			//! Header (level 2, block)
 			header2,
+			//! Header (level 3, block)
 			header3,
+			//! Header (level 4, block)
 			header4,
+			//! Header (level 5, block)
 			header5,
+			//! Header (level 6, block)
 			header6,
+			//! Emphasis
 			emphasis,
+			//! Bold (inline)
 			bold,
+			//! Horizontal line
 			hzLine,
+			//! Unordered list
 			unorderedList,
+			//! Ordered list
 			orderedList,
+			//! List item (ordered or unordered)
 			listItem,
+			//! Line break (br)
 			linebreak,
+			//! Pragma directive
 			pragma,
+			//! Number of items
 			maxType,
 		};
 

@@ -1,8 +1,8 @@
 
 #include "data.h"
-#include "node.h"
-#include "fwd.h"
-#include "../../core/math.h"
+#include "../node.h"
+#include "../fwd.h"
+#include "../../../core/math.h"
 
 
 namespace Yuni
@@ -79,7 +79,7 @@ namespace Markdown
 			pStack[i] = nullptr;
 
 		// printing the root node
-		pStack[0]->dump(std::cout);
+		//pStack[0]->dump(std::cout);
 	}
 
 

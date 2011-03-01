@@ -1,10 +1,10 @@
 #ifndef __YUNI_EXTRA_MARKDOWN_DATA_H__
 # define __YUNI_EXTRA_MARKDOWN_DATA_H__
 
-# include "../../yuni.h"
-# include "../../core/string.h"
+# include "../../../yuni.h"
+# include "../../../core/string.h"
 # include "signature.h"
-# include "fwd.h"
+# include "../fwd.h"
 
 
 namespace Yuni
@@ -41,6 +41,7 @@ namespace Markdown
 
 		void flush();
 
+		const Node::Ptr& root() const {return pStack[0];}
 
 	public:
 		unsigned int column;

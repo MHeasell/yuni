@@ -12,13 +12,14 @@ list(APPEND SRC_MARKDOWN
 	extra/markdown/reader.h
 	extra/markdown/reader.hxx
 	extra/markdown/reader.cpp
-	extra/markdown/data.h
-	extra/markdown/data.cpp
 	extra/markdown/node.h
-	extra/markdown/signature.h
+	extra/markdown/private/data.h
+	extra/markdown/private/data.cpp
+	extra/markdown/private/signature.h
 
 	# HTML
 	extra/markdown/renderer/html.h
+	extra/markdown/renderer/html.hxx
 	extra/markdown/renderer/html.cpp
 )
 
