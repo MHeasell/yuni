@@ -1,7 +1,7 @@
-#ifndef __YUNI_COMMONS_H__
-# define __YUNI_COMMONS_H__
+#ifndef __YUNI_CONFIG_H__
+# define __YUNI_CONFIG_H__
 
-/* Generate from yuni.h.cmake */
+/* Generate from config.h.cmake */
 
 
 /*!
@@ -76,33 +76,4 @@
 
 
 
-
-
-/* Platform checks */
-# include "platform.h"
-/* Standard Preprocessor tools */
-# include "core/preprocessor/std.h"
-/* Operating System / Capabilities auto-detection */
-# include "core/system/capabilities.h"
-/* Standard Types */
-# include "core/system/stdint.h"
-/* nullptr */
-# include "core/system/nullptr.h"
-
-
-
-# ifdef __cplusplus /* Only with a C++ Compiler */
-
-/*!
-** \brief The Yuni Framework
-*/
-namespace Yuni
-{}
-
-/* All standard forward declarations */
-# include "core/fwd.h"
-
-# endif
-
-
-#endif /* __YUNI_COMMONS_H__ */
+#endif /* __YUNI_CONFIG_H__ */
