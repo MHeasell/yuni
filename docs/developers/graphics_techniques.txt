@@ -51,6 +51,8 @@ II) Techniques by feature:
 		Do nothing.
 	Quality:
 		Very low
+	Memory usage:
+		Very low
 			SCORE: D
 
 	1] Shadow mapping:
@@ -191,6 +193,8 @@ II) Techniques by feature:
 			SCORE: B
 
 	6] Photon mapping:
+	------------------
+		TODO
 
 
   Rendering:
@@ -232,15 +236,31 @@ II) Techniques by feature:
 	How it works:
 		Do nothing.
 	Quality:
-		Low
+		Very low
 	Speed:
 		Very fast
 			SCORE: C
 
-	1] Normal mapping (dot3 bump mapping):
+	1] Emboss bump mapping:
+	-----------------------
+	How it works:
+		This process duplicates the first texture image, shifts it over to the
+		desired amount of bump, darkens the texture underneath, cuts out the
+		appropriate shape from the texture on top, and blends the two textures
+		into one.
+	Remarks:
+		Usually run on CPU. Only affects diffuse lighting. Illusion may be
+		broken depending on the angle of light.
+	Quality:
+		Average
+	Speed:
+		Fast
+	SCORE: D
+
+	2] Normal mapping (dot3 bump mapping):
 	--------------------------------------
 	How it works:
-		Use a grey-level image of the size same as the texture called a height
+		Use a grey-level image of the same size as the texture called a height
 		map. Dot-product the light applied on each point by the modified normal
 		vector at this point.
 	Quality:
@@ -249,7 +269,7 @@ II) Techniques by feature:
 		Fast
 			SCORE: C?
 
-	2] Parallax mapping (virtual displacement mapping):
+	3] Parallax mapping (virtual displacement mapping):
 	---------------------------------------------------
 	How it works:
 		Displace the texture coordinates at a point by a function of the view
@@ -265,7 +285,7 @@ II) Techniques by feature:
 		Medium
 			SCORE: B
 
-	3] Relief mapping:
+	4] Relief mapping:
 	------------------
 	How it works:
 		Apply a short-distance raytrace using a pixel shader. Once more, a
@@ -278,7 +298,7 @@ II) Techniques by feature:
 		Slow
 			SCORE: B
 
-	4] Displacement mapping:
+	5] Displacement mapping:
 	------------------------
 	How it works:
 		Also use a height map, but use the normals to really move (displace) the
