@@ -33,7 +33,8 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
 
 if(YUNI_MODULE_CORE)
 	# The header yuni.h must be available
-	CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/yuni.h.cmake ${CMAKE_CURRENT_SOURCE_DIR}/yuni.h)
+	CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/cmake/config.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config.h")
+	add_definitions("-DYUNI_CONFIG_H_LOCATION=\"${CMAKE_CURRENT_BINARY_DIR}/config.h\"")
 	# Core
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/core.cmake")
 endif()
@@ -103,8 +104,8 @@ if(YUNI_TESTS)
 endif()
 
 
-# Generating yuni.h
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/yuni.h.cmake ${CMAKE_CURRENT_SOURCE_DIR}/yuni.h)
+# Generating config.h
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/config.h.cmake ${CMAKE_CURRENT_SOURCE_DIR}/config.h)
 # Generating version
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.cmake ${CMAKE_CURRENT_SOURCE_DIR}/yuni.version)
 
