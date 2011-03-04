@@ -5,7 +5,6 @@
 # include "../math.h"
 # include "point3D.h"
 
-
 namespace Yuni
 {
 
@@ -60,6 +59,7 @@ namespace Yuni
 		** \param p2 The second vector
 		*/
 		static Vector3D CrossProduct(const Vector3D& p1, const Vector3D& p2);
+
 
 	public:
 		//! \name Constructors
@@ -134,6 +134,11 @@ namespace Yuni
 		** \brief Compute the magnitude of the vector
 		*/
 		T magnitude() const;
+
+		/*!
+		** \brief Compute the square magnitude of the vector
+		*/
+		T squareMagnitude() const;
 
 		/*!
 		** \brief Compute the dot product with another arbitrary vector
