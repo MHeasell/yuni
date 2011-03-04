@@ -184,6 +184,12 @@ namespace Yuni
 	}
 
 	template<typename T>
+	inline T Vector3D<T>::squareMagnitude() const
+	{
+		return x*x + y*y + z*z;
+	}
+
+	template<typename T>
 	inline T Vector3D<T>::Magnitude(const Vector3D& p1, const Vector3D& p2)
 	{
 		return Math::SquareRoot(p1.x*p2.x + p1.y*p2.y + p1.z*p2.z /* dot product */);
