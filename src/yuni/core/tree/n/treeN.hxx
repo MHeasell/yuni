@@ -54,6 +54,7 @@ namespace Core
 		return pChildrenCount;
 	}
 
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	inline typename TreeN<T,TP,ChckP,ConvP>::SizeType TreeN<T,TP,ChckP,ConvP>::size() const
@@ -61,6 +62,7 @@ namespace Core
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		return pChildrenCount;
 	}
+
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
@@ -70,6 +72,7 @@ namespace Core
 		if (pParent)
 			detachFromParentWL();
 	}
+
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
@@ -320,6 +323,7 @@ namespace Core
 		pushBackWL(tmp);
 	}
 
+
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	inline void
@@ -411,6 +415,7 @@ namespace Core
 	{
 		out << "<node>";
 	}
+
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>

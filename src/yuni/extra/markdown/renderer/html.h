@@ -46,8 +46,6 @@ namespace Renderer
 		//! Reset all default values
 		void resetDefaultValues();
 
-
-
 		//! \name Enable / Disable nodes
 		//@{
 		/*!
@@ -69,6 +67,7 @@ namespace Renderer
 		String composition[nodeCount][partCount];
 		//! Flag to enable/disable each type of node
 		bool enable[nodeCount];
+		bool paragraphSkipIfAlone[nodeCount];
 
 	private:
 		void renderNode(const Node::Ptr& node);
