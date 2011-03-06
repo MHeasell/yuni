@@ -8,7 +8,7 @@ namespace Markdown
 
 	enum
 	{
-		markdownDebug = 1,
+		markdownDebug = 0,
 		stackLimit = 256,
 	};
 

@@ -27,6 +27,7 @@ namespace Markdown
 		pMapID.clear();
 		pLastSignature.clear();
 		pStackSize = 2;
+
 		// creating the root node
 		Node::Ptr newDocument = new Node(Node::document);
 		Node::Ptr newBody     = new Node(Node::body);
@@ -78,6 +79,13 @@ namespace Markdown
 		for (unsigned int i = 1; i != stackLimit; ++i)
 			pStack[i] = nullptr;
 
+		postParseTree(pStack[0]);
+
+		if (pTOC->empty())
+		{
+			pTOC->detachFromParent();
+			pTOC = nullptr;
+		}
 		// printing the root node
 		//pStack[0]->dump(std::cout);
 	}
@@ -419,6 +427,90 @@ namespace Markdown
 				// adding it to the stack
 				pStack[pStackSize] = node;
 				++pStackSize;
+			}
+		}
+	}
+
+
+	void ReaderData::appendTOCEntry(const Node& node, unsigned int level)
+	{
+		// Trying to find the location of the parent node for the entry
+		Node::Ptr it = pTOC;
+		do
+		{
+			if (!level)
+			{
+				if (it->empty())
+				{
+					Node::Ptr ol = new Node(Node::orderedList);
+					*it += ol;
+					it = ol;
+				}
+				else
+				{
+					it = it->lastChild();
+					assert(!(!it));
+					assert(it->type != Node::listItem);
+				}
+				break;
+			}
+			if (it->empty())
+			{
+				Node::Ptr ol = new Node(Node::orderedList);
+				Node::Ptr li = new Node(Node::listItem);
+				*ol += li;
+				*it += ol;
+				it = li;
+			}
+			else
+			{
+				it = it->lastChild();
+				assert(!(!it));
+				assert(it->type != Node::listItem);
+				it = it->lastChild();
+				assert(!(!it));
+				assert(it->type == Node::listItem);
+			}
+			--level;
+		}
+		while (true);
+
+		// A few last checks
+		assert(!(!it));
+		assert(it->type != Node::listItem);
+
+		// Adding the new entry
+		Node* li = new Node(Node::listItem);
+		node.flattenText(li->innerText);
+		*it += li;
+	}
+
+
+	void ReaderData::postParseTree(const Node::Ptr& node)
+	{
+		assert(!(!node));
+		const Node& rawNode = *node;
+
+		// Type of the node
+		const Node::Type type = rawNode.type;
+		assert(static_cast<unsigned int>(type) < static_cast<unsigned int>(Node::maxType));
+
+		if (type <= Node::header6 && type >= Node::header1)
+		{
+			// This node must be referenced into the TOC
+			// Determining its header level
+			unsigned int level = static_cast<unsigned int>(type) - static_cast<unsigned int>(Node::header1);
+			// Append a new entry into the TOC
+			appendTOCEntry(rawNode, level);
+		}
+		else
+		{
+			// children
+			if (!rawNode.empty())
+			{
+				const Node::iterator end = rawNode.end();
+				for (Node::iterator i = rawNode.begin(); i != end; ++i)
+					postParseTree(*i);
 			}
 		}
 	}

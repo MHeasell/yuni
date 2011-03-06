@@ -20,6 +20,10 @@ namespace Renderer
 		// Enable all nodes
 		enableAllNodes();
 
+		// Skip if alone
+		memset(&paragraphSkipIfAlone, 0, sizeof(paragraphSkipIfAlone));
+		paragraphSkipIfAlone[Node::listItem] = true;
+
 		// reset all
 		for (unsigned int t = 0; t != static_cast<unsigned int>(Node::maxType); ++t)
 		{
@@ -28,14 +32,8 @@ namespace Renderer
 		}
 
 		// Document
-		composition[Node::document][partBegin]
-			<< "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-			<< "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
-			<< "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n";
-		composition[Node::document][partEnd] = "</html>\n";
-
-		composition[Node::body][partBegin] = "<body>\n\n\n";
-		composition[Node::body][partEnd] = "\n\n\n\n</body>\n";
+		composition[Node::body][partBegin] = "<div class=\"content\" id=\"content\">\n\n\n";
+		composition[Node::body][partEnd] = "\n\n\n\n</div>\n";
 
 
 		// Paragraph
@@ -74,8 +72,7 @@ namespace Renderer
 		composition[Node::orderedList][partBegin]   = "<ol>\n";
 		composition[Node::orderedList][partNewLine] = '\t';
 		composition[Node::orderedList][partEnd]     = "</ol>\n";
-		composition[Node::listItem][partBegin]   = "<li>\n";
-		composition[Node::listItem][partNewLine] = '\t';
+		composition[Node::listItem][partBegin]   = "<li>";
 		composition[Node::listItem][partEnd]     = "</li>\n";
 
 		// Line break
@@ -106,12 +103,31 @@ namespace Renderer
 			return;
 
 		std::cout << composition[type][partBegin] << rawNode.innerText;
-
-		if (!rawNode.empty())
+		
+		switch (rawNode.size())
 		{
-			const Node::iterator end = rawNode.end();
-			for (Node::iterator i = rawNode.begin(); i != end; ++i)
-				renderNode(*i);
+			case 0:
+				break;
+			case 1:
+				{
+					const Node::Ptr& child = rawNode.firstChild();
+					const Node& rawChild = *child;
+					if (paragraphSkipIfAlone[type] && rawChild.type == Node::paragraph)
+					{
+						const Node::iterator end = rawChild.end();
+						for (Node::iterator i = rawChild.begin(); i != end; ++i)
+							renderNode(*i);
+					}
+					else
+						renderNode(child);
+					break;
+				}
+			default:
+				{
+					const Node::iterator end = rawNode.end();
+					for (Node::iterator i = rawNode.begin(); i != end; ++i)
+						renderNode(*i);
+				}
 		}
 
 		std::cout << composition[type][partEnd];

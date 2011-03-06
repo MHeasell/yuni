@@ -34,12 +34,6 @@ namespace Markdown
 			toc,
 			//! Body for a document
 			body,
-			//! Raw text
-			text,
-			//! Paragraph
-			paragraph,
-			//! Quote
-			quote,
 			//! Header (level 1, block)
 			header1,
 			//! Header (level 2, block)
@@ -52,6 +46,12 @@ namespace Markdown
 			header5,
 			//! Header (level 6, block)
 			header6,
+			//! Raw text
+			text,
+			//! Paragraph
+			paragraph,
+			//! Quote
+			quote,
 			//! Emphasis
 			emphasis,
 			//! Bold (inline)
@@ -83,15 +83,15 @@ namespace Markdown
 				"head",
 				"toc",
 				"body",
-				"text",
-				"paragraph",
-				"quote",
 				"header1",
 				"header2",
 				"header3",
 				"header4",
 				"header5",
 				"header6",
+				"text",
+				"paragraph",
+				"quote",
 				"emphasis",
 				"bold",
 				"hzLine",
@@ -115,15 +115,15 @@ namespace Markdown
 				false, // "head"
 				false, // "toc"
 				true,  // "body"
-				false, // "text",
-				false, // "paragraph",
-				true,  // "quote",
 				false, // "header1",
 				false, // "header2",
 				false, // "header3",
 				false, // "header4",
 				false, // "header5",
 				false, // "header6",
+				false, // "text",
+				false, // "paragraph",
+				true,  // "quote",
 				false, // "emphasis",
 				false, // "bold",
 				false, // "hzLine",
@@ -207,6 +207,9 @@ namespace Markdown
 			}
 			out << "</" << id << ">\n";
 		}
+
+
+		void flattenText(String& out) const;
 
 	public:
 		Type type;

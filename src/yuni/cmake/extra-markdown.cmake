@@ -13,6 +13,7 @@ list(APPEND SRC_MARKDOWN
 	extra/markdown/reader.hxx
 	extra/markdown/reader.cpp
 	extra/markdown/node.h
+	extra/markdown/node.cpp
 	extra/markdown/private/data.h
 	extra/markdown/private/data.cpp
 	extra/markdown/private/signature.h

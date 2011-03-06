@@ -16,7 +16,7 @@ namespace Scheduler
 	}
 
 
-	HighestPriorityFirst::~HighestPriorityFirst()
+	inline HighestPriorityFirst::~HighestPriorityFirst()
 	{
 		if (pStarted)
 		{
