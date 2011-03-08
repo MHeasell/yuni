@@ -133,6 +133,16 @@ namespace Yuni
 
 
 	template<typename T>
+	template<typename U, typename V>
+	inline void Vector3D<T>::operator () (const Point3D<U>& origin, const Point3D<V>& end)
+	{
+		x = static_cast<T>((end.x - origin.x));
+		y = static_cast<T>((end.y - origin.y));
+		z = static_cast<T>((end.z - origin.z));
+	}
+
+
+	template<typename T>
 	inline std::ostream& Vector3D<T>::print(std::ostream& out) const
 	{
 		out << x << "," << y << "," << z;
