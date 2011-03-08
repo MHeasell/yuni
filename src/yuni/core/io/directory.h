@@ -112,7 +112,7 @@ namespace Directory
 	** \param source The source folder
 	** \param destination The destination folder
 	** \param recursive True to copy recursively
-	** \param overwrite True to overwrite the files even if they already exists
+	** \param overwrite True to overwrite the files even if they already exist
 	** \return True if the operation succeeded, false otherwise
 	*/
 	template<class StringT1, class StringT2>
@@ -124,7 +124,7 @@ namespace Directory
 	** \param source The source folder
 	** \param destination The destination folder
 	** \param recursive True to copy recursively
-	** \param overwrite True to overwrite the files even if they already exists
+	** \param overwrite True to overwrite the files even if they already exist
 	** \param onUpdate Event
 	** \return True if the operation succeeded, false otherwise
 	*/

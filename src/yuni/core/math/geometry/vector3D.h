@@ -198,6 +198,14 @@ namespace Yuni
 		** \param v The coordinates to copy
 		*/
 		template<typename U> void operator () (const Vector3D<U>& v);
+		/*!
+		** \brief Reset a vector using two points
+		**
+		** \param origin Start point of the vector
+		** \param end End point of the vector
+		*/
+		template<typename U, typename V>
+		void operator () (const Point3D<U>& origin, const Point3D<V>& end);
 
 		/*!
 		** \brief Translate the point with the same value for all coordinates
