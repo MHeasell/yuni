@@ -30,7 +30,7 @@ namespace Math
 	template<typename T> inline T Log2(T x)
 	{
 		# if defined(YUNI_OS_MSVC)
-		return log(x) / YUNI_LOG_2;
+		return static_cast<T>(log(x) / YUNI_LOG_2);
 		# else
 		return ::log2(x);
 		# endif
@@ -39,7 +39,7 @@ namespace Math
 	template<> inline float Log2<float>(float x)
 	{
 		# if defined(YUNI_OS_MSVC)
-		return logf(x) / YUNI_LOG_2;
+		return static_cast<float>(logf(x) / YUNI_LOG_2);
 		# else
 		return ::log2f(x);
 		# endif
@@ -49,7 +49,7 @@ namespace Math
 	template<> inline long double Log2<long double>(long double x)
 	{
 		# if defined(YUNI_OS_MSVC)
-		return logl(x) / YUNI_LOG_2;
+		return static_cast<long double>(logl(x) / YUNI_LOG_2);
 		# else
 		return ::log2l(x);
 		# endif
