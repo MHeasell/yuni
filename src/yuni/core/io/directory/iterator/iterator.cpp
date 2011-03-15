@@ -38,7 +38,7 @@ namespace Iterator
 
 # ifndef YUNI_OS_WINDOWS
 
-	Flow TraverseUnixFolder(const String& filename, Options& opts, IDetachedThread* thread)
+	Flow TraverseUnixFolder(const String& filename, Options& opts, IDetachedThread* thread, bool files)
 	{
 		// Opening the folder
 		DIR* pdir = opendir(filename.c_str());
@@ -83,53 +83,60 @@ namespace Iterator
 
 			if (S_ISDIR(s.st_mode))
 			{
-				// The node is a folder
-				switch (opts.self->onBeginFolder(newFilename, filename, newName))
+				if (!files)
 				{
-					case Yuni::Core::IO::flowContinue:
-						{
-							if (Yuni::Core::IO::flowAbort == TraverseUnixFolder(newFilename, opts, thread))
+					// The node is a folder
+					switch (opts.self->onBeginFolder(newFilename, filename, newName))
+					{
+						case Yuni::Core::IO::flowContinue:
 							{
+								if (Yuni::Core::IO::flowAbort == TraverseUnixFolder(newFilename, opts, thread, true))
+								{
+									opts.self->onEndFolder(newFilename, filename, newName);
+									return Yuni::Core::IO::flowAbort;
+								}
 								opts.self->onEndFolder(newFilename, filename, newName);
-								return Yuni::Core::IO::flowAbort;
+								break;
 							}
-							opts.self->onEndFolder(newFilename, filename, newName);
+						case Yuni::Core::IO::flowAbort:
+							return Yuni::Core::IO::flowAbort;
+						case Yuni::Core::IO::flowSkip:
 							break;
-						}
-					case Yuni::Core::IO::flowAbort:
-						return Yuni::Core::IO::flowAbort;
-					case Yuni::Core::IO::flowSkip:
-						break;
+					}
 				}
 			}
 			else
 			{
-				// The node is a file
-				switch (opts.self->onFile(newFilename, filename, newName, static_cast<uint64>(s.st_size)))
+				if (files)
 				{
-					case Yuni::Core::IO::flowContinue:
-						break;
-					case Yuni::Core::IO::flowAbort:
-						return Yuni::Core::IO::flowAbort;
-					case Yuni::Core::IO::flowSkip:
-						{
-							closedir(pdir);
-							return Yuni::Core::IO::flowContinue;
-						}
+					// The node is a file
+					switch (opts.self->onFile(newFilename, filename, newName, static_cast<uint64>(s.st_size)))
+					{
+						case Yuni::Core::IO::flowContinue:
+							break;
+						case Yuni::Core::IO::flowAbort:
+							return Yuni::Core::IO::flowAbort;
+						case Yuni::Core::IO::flowSkip:
+							{
+								closedir(pdir);
+								return Yuni::Core::IO::flowContinue;
+							}
+					}
 				}
 			}
 		}
 		closedir(pdir);
+
+		if (files)
+			return TraverseUnixFolder(filename, opts, thread, false);
 		return Yuni::Core::IO::flowContinue;
 	}
 
 
 # else
 
-	Flow TraverseWindowsFolder(const String& filename, Options& opts, IDetachedThread* thread)
+	Flow TraverseWindowsFolder(const String& filename, Options& opts, IDetachedThread* thread, bool files)
 	{
-		
-
 		// Convertir the filename
 		opts.wbuffer[0] = L'\\';
 		opts.wbuffer[1] = L'\\';
@@ -147,9 +154,9 @@ namespace Iterator
 
 		// Opening the folder
 		WIN32_FIND_DATAW data;
-		HANDLE hFind = INVALID_HANDLE_VALUE;		
+		HANDLE hFind = INVALID_HANDLE_VALUE;
 		hFind = FindFirstFileW(opts.wbuffer, &data);
-		if (INVALID_HANDLE_VALUE == hFind) 
+		if (INVALID_HANDLE_VALUE == hFind)
 			return Yuni::Core::IO::flowContinue;
 
 		String newName;
@@ -189,48 +196,55 @@ namespace Iterator
 
 			if (0 != (data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
 			{
-				// The node is a folder
-				switch (opts.self->onBeginFolder(newFilename, filename, newName))
+				if (!files)
 				{
-					case Yuni::Core::IO::flowContinue:
-						{
-							if (Yuni::Core::IO::flowAbort == TraverseWindowsFolder(newFilename, opts, thread))
+					// The node is a folder
+					switch (opts.self->onBeginFolder(newFilename, filename, newName))
+					{
+						case Yuni::Core::IO::flowContinue:
 							{
+								if (Yuni::Core::IO::flowAbort == TraverseWindowsFolder(newFilename, opts, thread, true))
+								{
+									opts.self->onEndFolder(newFilename, filename, newName);
+									return Yuni::Core::IO::flowAbort;
+								}
 								opts.self->onEndFolder(newFilename, filename, newName);
-								return Yuni::Core::IO::flowAbort;
+								break;
 							}
-							opts.self->onEndFolder(newFilename, filename, newName);
+						case Yuni::Core::IO::flowAbort:
+							return Yuni::Core::IO::flowAbort;
+						case Yuni::Core::IO::flowSkip:
 							break;
-						}
-					case Yuni::Core::IO::flowAbort:
-						return Yuni::Core::IO::flowAbort;
-					case Yuni::Core::IO::flowSkip:
-						break;
+					}
 				}
 			}
 			else
 			{
-				// The node is a file
-				filesize.LowPart  = data.nFileSizeLow;
-				filesize.HighPart = data.nFileSizeHigh;
-				switch (opts.self->onFile(newFilename, filename, newName, (uint64)(filesize.QuadPart)))
+				if (files)
 				{
-					case Yuni::Core::IO::flowContinue:
-						break;
-					case Yuni::Core::IO::flowAbort:
-						return Yuni::Core::IO::flowAbort;
-					case Yuni::Core::IO::flowSkip:
-						{
-							FindClose(hFind);
-							return Yuni::Core::IO::flowContinue;
-						}
+					// The node is a file
+					filesize.LowPart  = data.nFileSizeLow;
+					filesize.HighPart = data.nFileSizeHigh;
+					switch (opts.self->onFile(newFilename, filename, newName, (uint64)(filesize.QuadPart)))
+					{
+						case Yuni::Core::IO::flowContinue:
+							break;
+						case Yuni::Core::IO::flowAbort:
+							return Yuni::Core::IO::flowAbort;
+						case Yuni::Core::IO::flowSkip:
+							{
+								FindClose(hFind);
+								return Yuni::Core::IO::flowContinue;
+							}
+					}
 				}
-
 			}
 		}
-		while (FindNextFileW(hFind, &data) != 0);		
+		while (FindNextFileW(hFind, &data) != 0);
 		FindClose(hFind);
 
+		if (files)
+			return TraverseWindowsFolder(filename, opts, thread, false);
 		return Yuni::Core::IO::flowContinue;
 	}
 
@@ -268,9 +282,9 @@ namespace Iterator
 				options.counter = 0;
 
 				# ifdef YUNI_OS_WINDOWS
-				const Flow result = TraverseWindowsFolder(path, options, thread);
+				const Flow result = TraverseWindowsFolder(path, options, thread, true);
 				# else
-				const Flow result = TraverseUnixFolder(path, options, thread);
+				const Flow result = TraverseUnixFolder(path, options, thread, true);
 				# endif
 
 				# ifndef YUNI_NO_THREAD_SAFE

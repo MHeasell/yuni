@@ -29,8 +29,8 @@ namespace Iterator
 	*/
 	void Traverse(Options& options, IDetachedThread* thread);
 
-	Flow TraverseUnixFolder(const String&, Options& options, IDetachedThread* thread);
-	Flow TraverseWindowsFolder(const String&, Options& options, IDetachedThread* thread);
+	Flow TraverseUnixFolder(const String&, Options& options, IDetachedThread* thread, bool files);
+	Flow TraverseWindowsFolder(const String&, Options& options, IDetachedThread* thread, bool files);
 
 
 
@@ -60,8 +60,8 @@ namespace Iterator
 
 	public:
 		friend void Traverse(Options&, IDetachedThread*);
-		friend Flow TraverseUnixFolder(const String&, Options&, IDetachedThread*);
-		friend Flow TraverseWindowsFolder(const String&, Options&, IDetachedThread*);
+		friend Flow TraverseUnixFolder(const String&, Options&, IDetachedThread*, bool);
+		friend Flow TraverseWindowsFolder(const String&, Options&, IDetachedThread*, bool);
 	}; // class Interface
 
 
