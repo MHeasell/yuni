@@ -259,6 +259,10 @@ set(SRC_CORE_STRING
 		core/customstring/traits/traits.hxx
 		core/customstring/traits/into.h
 
+		# Wide String
+		core/customstring/wstring.h
+		core/customstring/wstring.hxx
+
 		# deprecated
 		core/string/string.h
 		core/string/string.hxx
