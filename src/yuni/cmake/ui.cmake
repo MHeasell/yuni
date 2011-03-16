@@ -45,6 +45,16 @@ list(APPEND SRC_UI
 	ui/button.h
 	ui/button.hxx
 	ui/button.cpp
+
+	# Adapter stuff
+	ui/local/adapter/forrepresentation.h
+	ui/local/adapter/forrepresentation.cpp
+	ui/local/adapter/localforrepresentation.h
+	ui/local/adapter/localforrepresentation.cpp
+	ui/adapter/forvirtual.h
+	ui/adapter/forvirtual.cpp
+	ui/adapter/localforvirtual.h
+	ui/adapter/localforvirtual.cpp
 )
 
 if (WIN32 OR WIN64)
