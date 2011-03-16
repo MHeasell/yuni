@@ -47,7 +47,7 @@ namespace Directory
 				if ((*t == L'\\' || *t == L'/') && (*(t-1) != ':'))
 				{
 					*t = L'\0';
-					if (!CreateDirectoryW(buffer, NULL))
+					if (!CreateDirectoryW(buffer, nullptr))
 					{
 						if (GetLastError() != ERROR_ALREADY_EXISTS)
 						{
@@ -60,7 +60,7 @@ namespace Directory
 				++t;
 			}
 
-			if (!CreateDirectoryW(buffer, NULL))
+			if (!CreateDirectoryW(buffer, nullptr))
 			{
 				if (GetLastError() != ERROR_ALREADY_EXISTS)
 				{
@@ -77,7 +77,7 @@ namespace Directory
 
 	bool UnixMake(const char* path, unsigned int len, unsigned int mode)
 	{
-		if (!len || NULL == path || '\0' == *path)
+		if (!len || !path || '\0' == *path)
 			return true;
 
 		char* buffer = new char[len + 1];
