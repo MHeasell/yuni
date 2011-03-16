@@ -50,6 +50,14 @@ namespace Private
 		*/
 		wchar_t* c_str();
 
+
+		//! \name Operators
+		//@{
+		//! Cast to wchar_t*
+		operator const wchar_t* () const;
+		//@}
+
+
 	private:
 		//! Convert a C-String into a Wide String
 		void prepareWString(const char* const cstring, unsigned int size);

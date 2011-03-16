@@ -52,6 +52,13 @@ namespace Private
 
 
 	template<bool UNCPrefix>
+	inline WString<UNCPrefix>::operator const wchar_t* () const
+	{
+		return pWString;
+	}
+
+
+	template<bool UNCPrefix>
 	void WString<UNCPrefix>::prepareWString(const char* const cstring, unsigned int size)
 	{
 		if (!size)
