@@ -38,6 +38,10 @@ set(YUNI_MODULE_ALGORITHMS                false)
 # Markdown
 set(YUNI_MODULE_EXTRA_MARKDOWN            false)
 
+# Doc
+set(YUNI_MODULE_DOCS                      false)
+
+
 
 # Tests
 set(YUNI_TESTS   false)
@@ -64,6 +68,7 @@ set(YUNI_MODULE_LIST
 	net
 	# extra
 		markdown
+	docs
 	)
 
 
@@ -283,6 +288,17 @@ if(MODULES)
 			set(YUNI_MODULE_EXTRA_MARKDOWN false)
 		endif()
 
+		# docs
+		if("${it}" STREQUAL "docs" OR "${it}" STREQUAL "doc")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_DOCS true)
+		endif()
+		# -docs
+		if("${it}" STREQUAL "-markdown")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_EXTRA_MARKDOWN false)
+		endif()
+
 		if(NOT KeywordIsKnown)
 			YMESSAGE("[!!] Unknown module from command line: `${it}` (ignored)")
 			set(KeywordError true)
@@ -325,10 +341,17 @@ if(MODULES)
 endif()
 
 
+#
+# Dependancies
+#
 if(YUNI_MODULE_UI)
 	set(YUNI_MODULE_DEVICES true)
 	set(YUNI_MODULE_DEVICE_DISPLAY true)
 endif()
+if(YUNI_MODULE_DOCS)
+	set(YUNI_MODULE_EXTRA_MARKDOWN true)
+endif()
+
 
 if(YUNI_MODULE_SCRIPT)
 	if(NOT YUNI_EXTERNAL_SCRIPT_LUA)
@@ -373,7 +396,7 @@ endif()
 if(YUNI_MODULE_VFS)
 	list(APPEND YUNI_MODULE_AVAILABLE vfs)
 	if(YUNI_MODULE_VFS_FILE)
-		LIST(APPEND YUNI_MODULE_AVAILABLE vfs-local)
+		list(APPEND YUNI_MODULE_AVAILABLE vfs-local)
 	endif()
 endif()
 
@@ -384,11 +407,11 @@ endif()
 
 
 if(YUNI_MODULE_NET)
-	LIST(APPEND YUNI_MODULE_AVAILABLE net)
+	list(APPEND YUNI_MODULE_AVAILABLE net)
 endif()
 
 if(YUNI_MODULE_AUDIO)
-	LIST(APPEND YUNI_MODULE_AVAILABLE audio)
+	list(APPEND YUNI_MODULE_AVAILABLE audio)
 endif()
 
 if(YUNI_MODULE_SCRIPT)
@@ -404,6 +427,10 @@ endif()
 
 if(YUNI_MODULE_EXTRA_MARKDOWN)
 	LIST(APPEND YUNI_MODULE_AVAILABLE markdown)
+endif()
+
+if(YUNI_MODULE_DOCS)
+	LIST(APPEND YUNI_MODULE_AVAILABLE docs)
 endif()
 
 
