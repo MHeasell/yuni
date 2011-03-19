@@ -294,7 +294,7 @@ namespace GetOptImpl
 
 
 
-namespace
+namespace // anonymous
 {
 
 	const char* ExtractFilenameOnly(const char* argv)
@@ -400,6 +400,8 @@ namespace GetOpt
 
 		std::cout << "\n";
 	}
+
+
 
 
 
