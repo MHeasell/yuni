@@ -3,6 +3,7 @@
 
 # include "../../../yuni.h"
 # include "../math.h"
+# include "../trigonometric.h"
 # include "point3D.h"
 
 namespace Yuni
@@ -60,6 +61,13 @@ namespace Yuni
 		*/
 		static Vector3D CrossProduct(const Vector3D& p1, const Vector3D& p2);
 
+		/*!
+		** \brief Compute the angle between two arbitrary vectors
+		**
+		** \param p1 The first vector
+		** \param p2 The second vector
+		*/
+		static T Angle(const Vector3D& p1, const Vector3D& p2);
 
 	public:
 		//! \name Constructors
