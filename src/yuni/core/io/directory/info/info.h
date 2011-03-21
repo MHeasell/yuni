@@ -55,7 +55,7 @@ namespace Directory
 			itFolder     = 2,
 			//! Perform a recursive iteration
 			itRecursive  = 4,
-			//! All itions
+			//! All options
 			itAll        = itFile | itFolder | itRecursive,
 		};
 
