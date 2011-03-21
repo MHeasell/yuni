@@ -226,6 +226,13 @@ namespace Yuni
 			p1.x * p2.y - p1.y * p2.x);
 	}
 
+	template<typename T>
+	inline T Vector3D<T>::Angle(const Vector3D<T>& p1, const Vector3D<T>& p2)
+	{
+		// By definition: cos(alpha) = (p1.p2)/(|p1|.|p2|)
+		return Math::ACos(DotProduct(p1, p2) / p1.magnitude() / p2.magnitude());
+	}
+
 
 
 
