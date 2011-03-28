@@ -235,7 +235,7 @@ namespace Yuni
 
 	template<class T>
 	template<class R>
-	void Vector3D<T>::Angle(R& out, const Vector3D<T>& p1, const Vector3D<T>& p2);
+	inline void Vector3D<T>::Angle(R& out, const Vector3D<T>& p1, const Vector3D<T>& p2)
 	{
 		// By definition: cos(alpha) = (p1.p2)/(|p1|.|p2|)
 		out = static_cast<R>(Math::ACos(DotProduct(p1, p2) / (p1.magnitude() * p2.magnitude())));
