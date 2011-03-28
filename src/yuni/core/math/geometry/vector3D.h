@@ -69,6 +69,17 @@ namespace Yuni
 		*/
 		static T Angle(const Vector3D& p1, const Vector3D& p2);
 
+		/*!
+		** \brief Compute the angle between two vectors, with a specific return type
+		**
+		** \param out Where to store the result
+		** \param p1 The first vector
+		** \param p2 The second vector
+		*/
+		template<class R>
+		void Angle(R& out, const Vector3D<T>& p1, const Vector3D<T>& p2);
+
+
 	public:
 		//! \name Constructors
 		//@{
