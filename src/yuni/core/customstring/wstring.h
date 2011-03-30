@@ -41,6 +41,11 @@ namespace Private
 		unsigned int size() const;
 
 		/*!
+		** \brief Get if the string is empty
+		*/
+		bool empty() const;
+
+		/*!
 		** \brief Get the wide string
 		*/
 		const wchar_t* c_str() const;

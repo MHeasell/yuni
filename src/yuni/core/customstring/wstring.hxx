@@ -38,6 +38,13 @@ namespace Private
 
 
 	template<bool UNCPrefix>
+	inline bool WString<UNCPrefix>::empty() const
+	{
+		return !pSize;
+	}
+
+
+	template<bool UNCPrefix>
 	inline const wchar_t* WString<UNCPrefix>::c_str() const
 	{
 		return pWString;

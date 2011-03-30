@@ -4,6 +4,7 @@
 #include "../directory.h"
 #include <ctype.h>
 #include <string.h>
+#include "../../customstring/wstring.h"
 
 #ifndef YUNI_OS_WINDOWS
 # include <unistd.h>
@@ -46,30 +47,17 @@ namespace IO
 			return true;
 		}
 
-		CustomString<>  norm;
+		String  norm;
 		Yuni::Core::IO::Normalize(norm, p, len);
 		// Conversion into wchar_t
-		wchar_t* buffer = new wchar_t[norm.size() + 10];
-		buffer[0] = L'\\';
-		buffer[1] = L'\\';
-		buffer[2] = L'?';
-		buffer[3] = L'\\';
-		int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
-		if (n <= 0)
+		WString<true> wstr(norm);
+		if (wstr.empty())
 		{
 			value = 0u;
-			delete[] buffer;
 			return false;
 		}
-		for (int i = 4; i < n + 4; ++i)
-		{
-			if (buffer[i] == '/')
-				buffer[i] = '\\';
-		}
-		buffer[n + 4] = L'\0';
 
-		HANDLE hndl = CreateFileW(buffer, 0, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-		delete[] buffer;
+		HANDLE hndl = CreateFileW(wstr.c_str(), 0, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hndl == INVALID_HANDLE_VALUE)
 		{
 			value = 0u;

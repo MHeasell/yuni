@@ -1,5 +1,6 @@
 #include "io.h"
 #include "../system/windows.hdr.h"
+#include "../customstring/wstring.h"
 #ifndef YUNI_OS_WINDOWS
 # include <stdlib.h>
 # include <unistd.h>
@@ -40,6 +41,7 @@ namespace IO
 		}
 
 	} // anonymous namespace
+
 
 
 	Yuni::Core::IO::NodeType TypeOfNotZeroTerminated(const char* p, unsigned int len)
@@ -92,34 +94,16 @@ namespace IO
 		if (len == 2 && p[1] == ':')
 			return Yuni::Core::IO::typeFolder;
 
-		CustomString<>  norm;
+		String  norm;
 		Yuni::Core::IO::Normalize(norm, p, len);
 		// Conversion into wchar_t
-		wchar_t* buffer = new wchar_t[norm.size() + 10];
-		buffer[0] = L'\\';
-		buffer[1] = L'\\';
-		buffer[2] = L'?';
-		buffer[3] = L'\\';
-		int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
-		if (n <= 0)
-		{
-			delete[] buffer;
+		WString<true> wstr(norm);
+		if (wstr.empty())
 			return Yuni::Core::IO::typeUnknown;
-		}
-		for (int i = 4; i < n + 4; ++i)
-		{
-			if (buffer[i] == '/')
-				buffer[i] = '\\';
-		}
-		buffer[n + 4] = L'\0';
 
 		WIN32_FILE_ATTRIBUTE_DATA infoFile;
-		if (!GetFileAttributesExW(buffer, GetFileExInfoStandard, &infoFile))
-		{
-			delete[] buffer;
+		if (!GetFileAttributesExW(wstr.c_str(), GetFileExInfoStandard, &infoFile))
 			return Yuni::Core::IO::typeUnknown;
-		}
-		delete[] buffer;
 
 		return ((infoFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
 			? Yuni::Core::IO::typeFolder
