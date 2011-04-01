@@ -1,0 +1,116 @@
+
+unit Worlds;
+
+uses Worlds.Player;
+uses Worlds.Units;
+uses Worlds.Workflow;
+
+
+class Game
+{
+published
+	property status: Status;
+	property FPS := 60;
+
+public
+	#! \brief Initialize the game
+	#  \return True if the operation succeeded, false otherwise
+	const method init(age: ref Age): bool;
+
+	#! \brief Run the game
+	#  \return True if the operation succeeded, false otherwise
+	method run: bool;
+
+	#! \brief Think !
+	method ai;
+
+	#! \brief Check the data integrity
+	#  \return True if the operation succeeded, false otherwise
+	stable threadunsafe method check;
+
+} # class Game
+
+
+
+
+implementation
+
+uses Predicate;
+uses Math;
+
+
+#! Age
+type Age : any // reflect.has(max) and 0 <= self < self.max;
+
+method Game.init(age: ref Age): bool
+{
+	age = 250; # Dynamic constraint violation
+	player.age = age.max;
+}
+check player.age < 200,
+check player.name.notEmpty,
+catch e: ConstraintViolation
+{
+	print e.message << "\n";
+},
+catch e
+{
+	print e.message;
+}
+
+
+
+method Game.check
+{
+	# Local behaviours
+	checkFPS := notify (FPS < 10)
+	{
+		logs.error << "Game is slow, lower graphics settings";
+	}
+	notify (Signal.USR1)
+	{
+		logs.reload;
+	}
+	notify (LDO.newObject // typeof Opponent)
+	{
+		logs.debug << "A new opponent has arrived";
+	}
+	notify (LDO.newObject // (typeof UI.IComponent and host != Host.local))
+	{
+		# Do something
+	}
+
+	# Global behaviour
+	notify (LDO.All // (reflect.has("flying") and flying and Math.Distance(self, p1) < 30.0))
+	{
+	}
+}
+
+
+
+method Game.init: bool
+{
+}
+
+
+method Game.run: bool
+{
+	sync loadResources;
+	sync draw, ai, sound, events; # Parallel execution
+	return true;
+}
+
+
+method Game.ai
+{
+	async messageBox("Ready to fight !");
+	every(20s)
+	{
+		new shared Opponent;
+	}
+	while (sleep(200ms) and Job.current.alive)
+	{
+		foreach (o in LDO.All // typeof(Opponent))
+			o.think;
+	}
+}

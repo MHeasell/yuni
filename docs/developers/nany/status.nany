@@ -1,0 +1,18 @@
+unit Worlds.Workflow;
+
+workflow Status
+{
+   #! Introduction
+   state Intro default : onIntro => onStopIntro // init;
+   state Menu : onStartMenuMusic => nil;
+   state Options;
+   state Playing : run;
+   state Paused;
+   state Quitting;
+    default forbid;
+   allow Intro => Menu : onStartMenu // init;
+   allow *, -Intro => Quitting;
+   forbid Intro => Quitting;
+   allow Menu <=> Options, Playing, Quitting;
+   allow Playing <=> Paused;
+}
