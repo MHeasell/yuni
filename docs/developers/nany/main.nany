@@ -1,0 +1,31 @@
+
+program Worlds;
+
+function main(argc, argv) : int
+{
+	logs := new Logs.DefaultLogger;
+	logs.applicationName := "nany-sample";
+	logs.checkpoint << "Starting Nany Sample";
+
+	type ItemWithFoo: any // reflect.hasMethod(foo);
+	l: [ItemWithFoo] := [new B, new A];
+   total := Predicate.Sum on l=>foo; # total has type `int`
+   foreach (i in [1..10]) # This should be created lazily and optimized properly
+	print(i);
+
+   g := new Game;
+   # result; This statement must not compile.
+   # Valid : result := <value>;	 or result: <type>;
+   # It is a method invocation otherwise and won't be found.
+   result := 0;
+   with g
+   {
+	   if (!init)
+		  return false;
+	   result := Predicate.And on sync run, runServer; # Run in parallel, wait for both
+   }
+   logs.info << "done.";
+   return result;
+}
+
+ret
