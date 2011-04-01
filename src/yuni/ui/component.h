@@ -14,6 +14,13 @@ namespace Yuni
 namespace UI
 {
 
+namespace Adapter
+{
+	//! Forward declaration
+	class ForVirtual;
+
+} // namespace Adapter
+
 
 	/*!
 	** \brief Base class for all UI components
@@ -159,6 +166,11 @@ namespace UI
 		ClassName pClass;
 
 		/*!
+		** \brief Adapter for Virtual UI <-> UI Representation communication
+		*/
+		Adapter::ForVirtual* pAdapter;
+
+		/*!
 		** \brief Position of the component relative to its parent
 		*/
 		Point2D<float> pPosition;
@@ -174,6 +186,7 @@ namespace UI
 		float pHeight;
 
 	private:
+		//! Intrusive reference count
 		ThreadingPolicy::Volatile<int>::Type pRefCount;
 
 	}; // class IComponent

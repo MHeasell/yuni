@@ -1,6 +1,7 @@
 
 #include "../core/math/math.h"
 #include "window.h"
+#include "adapter/forvirtual.h"
 
 
 namespace Yuni
@@ -17,31 +18,29 @@ namespace UI
 
 	void Window::show()
 	{
-		// FIXME
-// 		ThreadingPolicy::MutexLocker lock(*this);
-// 		if (!pClosing)
-// 			pLocalEvents.onShowWindow(pApplicationGUID, this);
+ 		ThreadingPolicy::MutexLocker lock(*this);
+		if (!pClosing && pAdapter)
+			pAdapter->sendShowWindow(pApplicationGUID, pLocalID);
 	}
 
 
 	void Window::hide()
 	{
-		// FIXME
-// 		ThreadingPolicy::MutexLocker lock(*this);
-// 		if (!pClosing)
-// 			pLocalEvents.onHideWindow(pApplicationGUID, pLocalID);
+ 		ThreadingPolicy::MutexLocker lock(*this);
+		if (!pClosing && pAdapter)
+			pAdapter->sendHideWindow(pApplicationGUID, pLocalID);
 	}
 
 
 	void Window::close()
 	{
-		// FIXME
-// 		ThreadingPolicy::MutexLocker lock(*this);
-// 		if (!pClosing)
-// 		{
-// 			pClosing = true;
-// 			pLocalEvents.onCloseWindow(pApplicationGUID, pLocalID);
-// 		}
+ 		ThreadingPolicy::MutexLocker lock(*this);
+		if (!pClosing)
+		{
+			pClosing = true;
+			if (pAdapter)
+				pAdapter->sendHideWindow(pApplicationGUID, pLocalID);
+ 		}
 	}
 
 

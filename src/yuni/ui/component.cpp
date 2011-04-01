@@ -1,5 +1,6 @@
 
 #include "component.h"
+#include "adapter/localforvirtual.h"
 
 namespace Yuni
 {

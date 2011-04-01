@@ -15,6 +15,7 @@ namespace Local
 namespace Window
 {
 
+
 	// Define the static list of windows
 	WinGDI::WindowList WinGDI::sWindowList;
 

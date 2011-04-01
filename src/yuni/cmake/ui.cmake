@@ -46,6 +46,10 @@ list(APPEND SRC_UI
 	ui/button.hxx
 	ui/button.cpp
 
+	# Local components
+	surface.h
+	glsurface.h glsurface.cpp
+
 	# Adapter stuff
 	ui/local/adapter/forrepresentation.h
 	ui/local/adapter/forrepresentation.cpp
@@ -57,14 +61,32 @@ list(APPEND SRC_UI
 	ui/adapter/localforvirtual.cpp
 )
 
+
+#
+# OpenGL
+#
+find_package(OpenGL)
+set(YUNI_HAS_OPENGL  1)
+LIBYUNI_CONFIG_INCLUDE_PATH("both" "ui" "${OPENGL_INCLUDE_DIR}"
+
+
+#
+# System-dependent
+#
 if (WIN32 OR WIN64)
 	list(APPEND SRC_UI ui/local/window/wingdi.h ui/local/window/wingdi.cpp)
+	if (YUNI_HAS_OPENGL)
+		list(APPEND SRC_UI ui/local/controls/wglsurface.h ui/local/controls/wglsurface.cpp)
+	endif ()
 else ()
 	if (APPLE)
 		list(APPEND SRC_UI ui/local/window/cocoa.h ui/local/window/cocoa.cpp)
 	else ()
 		if (UNIX)
 			list(APPEND SRC_UI ui/local/window/x11.h ui/local/window/x11.cpp)
+			if (YUNI_HAS_OPENGL)
+			   list (APPEND SRC_UI ui/local/controls/glxsurface.h ui/local/controls/glxsurface.cpp)
+			endif ()
 		endif ()
 	endif ()
 endif ()

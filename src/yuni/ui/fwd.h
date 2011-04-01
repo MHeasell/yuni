@@ -4,6 +4,7 @@
 
 namespace Yuni
 {
+
 namespace UI
 {
 
@@ -17,7 +18,37 @@ namespace UI
 	typedef CustomString<40, false, false> GUID;
 
 
+namespace Adapter
+{
+
+	//! Forward declaration
+	class ForVirtual;
+	class LocalForVirtual;
+
+} // namespace Adapter
+
 } // namespace UI
+
+
+namespace Private
+{
+namespace UI
+{
+namespace Local
+{
+namespace Adapter
+{
+
+	// Forward declaration
+	class ForRepresentation;
+	class LocalForRepresentation;
+
+} // namespace Adapter
+} // namespace Local
+} // namespace UI
+} // namespace Private
+
+
 } // namespace Yuni
 
 #endif // __YUNI_UI_FWD_H__
