@@ -36,9 +36,12 @@ namespace Adapter
 	public:
 		LocalForRepresentation();
 		LocalForRepresentation(Yuni::UI::Adapter::LocalForVirtual* forVirtual);
+		virtual ~LocalForRepresentation();
 
 	public:
-		virtual void receiveShowWindow(Yuni::UI::IComponent::ID id) const;
+		virtual void receiveShowWindow(const Yuni::UI::GUID& applicationID, Yuni::UI::IComponent::ID id) const;
+		virtual void receiveHideWindow(const Yuni::UI::GUID& applicationID, Yuni::UI::IComponent::ID id) const;
+		virtual void receiveCloseWindow(const Yuni::UI::GUID& applicationID, Yuni::UI::IComponent::ID id) const;
 	};
 
 

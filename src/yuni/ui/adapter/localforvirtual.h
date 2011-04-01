@@ -40,7 +40,9 @@ namespace Adapter
 		LocalForVirtual();
 		LocalForVirtual(Private::UI::Local::Adapter::LocalForRepresentation* forRepresentation);
 
-		virtual void sendShowWindow(IComponent::ID id) const;
+		virtual void sendShowWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const;
+		virtual void sendHideWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const;
+		virtual void sendCloseWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const;
 	};
 
 

@@ -3,6 +3,7 @@
 
 # include "../../yuni.h"
 # include "window.h"
+# include "adapter/forrepresentation.h"
 
 
 namespace Yuni
@@ -35,12 +36,17 @@ namespace Local
 		//@}
 
 
+		//! Create a local system-dependent window for UI
 		IWindow::Ptr createWindow();
-		void removeWindow(IWindow::Ptr& window);
+
+
+		//! Destroy a local system-dependent window
+		void destroyWindow(IWindow::Ptr& window);
 
 	protected:
 		//! Map of all local windows
 		IWindow::Map  pWindows;
+
 
 	}; // class IQueueService<>
 

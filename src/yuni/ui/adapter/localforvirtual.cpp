@@ -1,5 +1,6 @@
 
 #include "localforvirtual.h"
+#include "../local/adapter/forrepresentation.h"
 #include "../local/adapter/localforrepresentation.h"
 
 namespace Yuni
@@ -18,12 +19,23 @@ namespace Adapter
 	{}
 
 
-	void LocalForVirtual::sendShowWindow(IComponent::ID id) const
+	void LocalForVirtual::sendShowWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const
 	{
 		if (pDestination)
-			pDestination->receiveShowWindow(id);
+			pDestination->receiveShowWindow(applicationID, id);
 	}
 
+	void LocalForVirtual::sendHideWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const
+	{
+		if (pDestination)
+			pDestination->receiveHideWindow(applicationID, id);
+	}
+
+	void LocalForVirtual::sendCloseWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const
+	{
+		if (pDestination)
+			pDestination->receiveCloseWindow(applicationID, id);
+	}
 
 
 } // namespace Adapter

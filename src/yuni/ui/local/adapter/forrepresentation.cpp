@@ -21,6 +21,10 @@ namespace Adapter
 		pDestination(forVirtual)
 	{}
 
+	ForRepresentation::~ForRepresentation()
+	{}
+
+
 
 } // namespace Adapter
 } // namespace Local

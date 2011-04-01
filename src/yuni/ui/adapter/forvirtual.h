@@ -3,27 +3,10 @@
 
 # include "../../yuni.h"
 # include "../component.h"
+# include "../fwd.h"
 
 namespace Yuni
 {
-
-namespace Private
-{
-namespace UI
-{
-namespace Local
-{
-namespace Adapter
-{
-
-	// Forward declaration
-	class ForRepresentation;
-
-} // namespace Adapter
-} // namespace Local
-} // namespace UI
-} // namespace Private
-
 namespace UI
 {
 namespace Adapter
@@ -40,7 +23,9 @@ namespace Adapter
 		ForVirtual(Private::UI::Local::Adapter::ForRepresentation* forRepresentation);
 
 	public:
-		virtual void sendShowWindow(Yuni::UI::IComponent::ID id) const = 0;
+		virtual void sendShowWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const = 0;
+		virtual void sendHideWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const = 0;
+		virtual void sendCloseWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const = 0;
 
 	protected:
 		Private::UI::Local::Adapter::ForRepresentation* pDestination;

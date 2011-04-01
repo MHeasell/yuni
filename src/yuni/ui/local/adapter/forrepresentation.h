@@ -3,6 +3,7 @@
 
 # include "../../../yuni.h"
 # include "../../component.h"
+# include "../../fwd.h"
 
 namespace Yuni
 {
@@ -37,9 +38,12 @@ namespace Adapter
 	public:
 		ForRepresentation();
 		ForRepresentation(Yuni::UI::Adapter::ForVirtual* forVirtual);
+		virtual ~ForRepresentation();
 
 	public:
-		virtual void receiveShowWindow(Yuni::UI::IComponent::ID id) const = 0;
+		virtual void receiveShowWindow(const Yuni::UI::GUID& applicationID, Yuni::UI::IComponent::ID id) const = 0;
+		virtual void receiveHideWindow(const Yuni::UI::GUID& applicationID, Yuni::UI::IComponent::ID id) const = 0;
+		virtual void receiveCloseWindow(const Yuni::UI::GUID& applicationID, Yuni::UI::IComponent::ID id) const = 0;
 
 	protected:
 		Yuni::UI::Adapter::ForVirtual* pDestination;
