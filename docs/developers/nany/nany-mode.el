@@ -222,8 +222,8 @@
   (let ((map (make-keymap)))
     (define-key map "\C-j" 'newline-and-indent)
     (define-key map [remap comment-dwim] 'nany-comment-dwim)
-    (define-key map (kbd "C-c C-c") 'nany-comment-dwim)
-    (define-key map (kbd "C-c \t") 'nany-complete-symbol)
+    (define-key map (kbd "C-c C-c") 'comment-region)
+    (define-key map (kbd "C-c c") 'nany-complete-symbol)
     map
   )
   "Keymap for Nany major mode"
