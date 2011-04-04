@@ -2570,8 +2570,10 @@ namespace Yuni
 				break;
 		}
 		// Making sure that the string is zero-terminated if required
+		// The const_cast is only here to make it compile when the customstring
+		// is an adapter
 		if (!adapter && zeroTerminated)
-			AncestorType::data[AncestorType::size] = Char();
+			const_cast<char*>(AncestorType::data)[AncestorType::size] = Char();
 	}
 
 
@@ -3072,7 +3074,6 @@ namespace Yuni
 	{
 		return AncestorType::data[offset];
 	}
-
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
