@@ -1,6 +1,7 @@
 #ifndef __YUNI_CORE_CUSTOMSTRING_WSTRING_HXX__
 # define __YUNI_CORE_CUSTOMSTRING_WSTRING_HXX__
 
+# ifdef YUNI_OS_WINDOWS
 
 namespace Yuni
 {
@@ -12,7 +13,7 @@ namespace Private
 	inline WString<UNCPrefix>::WString(const StringT& string)
 	{
 		prepareWString(Traits::CString<StringT>::Perform(string),
-			Traits::Length<StringT, unsigned int>::Value(size));
+			Traits::Length<StringT, unsigned int>::Value(string));
 	}
 
 
