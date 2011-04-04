@@ -18,7 +18,7 @@ namespace Private
 	** \brief Convert a C-String into a Wide String (Windows Only)
 	*/
 	template<bool UNCPrefix = false>
-	class WString : private NonCopyable<WString<INCPrefix> >
+	class WString : private NonCopyable<WString<UNCPrefix> >
 	{
 	public:
 		//! \name Constructor & Destructor
