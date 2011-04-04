@@ -62,20 +62,23 @@ namespace Directory
 		// implementation
 		# include "iterator.h"
 
+		// \internal We must specify the full namespace (`Yuni::...`) to avoid conflict
+		//   with  Yuni::Core::IO::Directory::IIterator.
+
 		//! The default iterator, for iterating through all files and folders within a directory
-		typedef IIterator<Model::Iterator<itFile|itFolder>, true>  iterator;
+		typedef Yuni::IIterator<Model::Iterator<itFile|itFolder>, true>  iterator;
 		//! The default iterator, for iterating through all files within a directory
-		typedef IIterator<Model::Iterator<itFile>, true>    file_iterator;
+		typedef Yuni::IIterator<Model::Iterator<itFile>, true>    file_iterator;
 		//! The default iterator, for iterating through all folders within a directory
-		typedef IIterator<Model::Iterator<itFolder>, true>  folder_iterator;
+		typedef Yuni::IIterator<Model::Iterator<itFolder>, true>  folder_iterator;
 		//! The default iterator, for recursively iterating through all files and folders within a directory
-		typedef IIterator<Model::Iterator<itAll>, true>     recursive_iterator;
+		typedef Yuni::IIterator<Model::Iterator<itAll>, true>     recursive_iterator;
 		//! The default iterator, for iterating through all files within a directory
-		typedef IIterator<Model::Iterator<itFile|itRecursive>, true>    recursive_file_iterator;
+		typedef Yuni::IIterator<Model::Iterator<itFile|itRecursive>, true>    recursive_file_iterator;
 		//! The default iterator, for iterating through all folders within a directory
-		typedef IIterator<Model::Iterator<itFolder|itRecursive>, true>  recursive_folder_iterator;
+		typedef Yuni::IIterator<Model::Iterator<itFolder|itRecursive>, true>  recursive_folder_iterator;
 		//! A generic null iterator
-		typedef IIterator<Model::NullIterator, true>  null_iterator;
+		typedef Yuni::IIterator<Model::NullIterator, true>  null_iterator;
 		//@}
 
 	public:
