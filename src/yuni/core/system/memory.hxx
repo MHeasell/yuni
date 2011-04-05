@@ -1,5 +1,5 @@
 #ifndef __YUNI_CORE_SYSTEM_MEMORY_HXX__
-# define _YUNI_CORE_SYSTEM_MEMORY_HXX__
+# define __YUNI_CORE_SYSTEM_MEMORY_HXX__
 
 
 namespace Yuni
