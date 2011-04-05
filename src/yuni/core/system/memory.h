@@ -1,5 +1,5 @@
 #ifndef __YUNI_CORE_SYSTEM_MEMORY_H__
-# define _YUNI_CORE_SYSTEM_MEMORY_H__
+# define __YUNI_CORE_SYSTEM_MEMORY_H__
 
 # include "../../yuni.h"
 
