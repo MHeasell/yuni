@@ -3,7 +3,7 @@
 
 # include "../null.h"
 # include "../../io/file.h"
-
+# include <cassert>
 
 
 namespace Yuni
@@ -11,10 +11,8 @@ namespace Yuni
 namespace Logs
 {
 
-
-
 	/*!
-	** \brief Log Handler: The standard output (cout & cerr)
+	** \brief Log Handler: Single Log file
 	*/
 	template<class NextHandler = NullHandler>
 	class File : public NextHandler
@@ -27,48 +25,47 @@ namespace Logs
 		};
 
 	public:
-		template<typename U> void outputFilename(const U& filename)
-		{
-			// Assigning the new filename
-			pOutputFilename = filename;
-			// Opening the log file
-			pFile.open(pOutputFilename,
-				Core::IO::OpenMode::write | Core::IO::OpenMode::append);
-		}
+		/*!
+		** \brief Try to (re)open a target log file
+		**
+		** You should use an absolute filename to be able to safely reopen it.
+		** If a log file was already opened, it will be closed before anything else.
+		** If the given filename is empty, true will be returned.
+		**
+		** \param filename A relative or absolute filename
+		** \return True if the operation succeeded, false otherwise
+		*/
+		template<typename U> bool logfile(const U& filename);
 
-		String outputFilename() const
-		{
-			return pOutputFilename;
-		}
+		/*!
+		** \brief Get the last opened log file
+		** \see outputFilename(filename)
+		*/
+		String logfile() const;
 
-		bool logFileIsOpened()
-		{
-			return (pFile.opened());
-		}
+		/*!
+		** \brief Reopen the log file
+		**
+		** It is safe to call several times this routine.
+		** True will be returned if the log filename is empty.
+		*/
+		bool reopenLogfile();
+
+		/*!
+		** \brief Close the log file
+		**
+		** It is safe to call several times this routine.
+		*/
+		void closeLogfile();
+
+		/*!
+		** \brief Get if a log file is opened
+		*/
+		bool logFileIsOpened();
 
 	public:
 		template<class LoggerT, class VerbosityType, class StringT>
-		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s)
-		{
-			if (pFile.opened())
-			{
-				typedef typename LoggerT::DecoratorsType DecoratorsType;
-				// Append the message to the file
-				logger.DecoratorsType::template internalDecoratorAddPrefix<File, VerbosityType>(pFile, s);
-
-				// Flushing the result
-				# ifdef YUNI_OS_WINDOWS
-				pFile << "\r\n";
-				# else
-				pFile << '\n';
-				# endif
-				pFile.flush();
-			}
-
-			// Transmit the message to the next handler
-			NextHandler::template internalDecoratorWriteWL<LoggerT, VerbosityType, StringT>(logger, s);
-		}
-
+		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s);
 
 	private:
 		//! The originale filename
@@ -81,7 +78,11 @@ namespace Logs
 
 
 
+
+
 } // namespace Logs
 } // namespace Yuni
+
+# include "file.hxx"
 
 #endif // __YUNI_CORE_LOGS_HANDLERS_FILE_H__
