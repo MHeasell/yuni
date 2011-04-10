@@ -8,8 +8,8 @@
 # include "verbosity.h"
 
 // Default Handler
-# include "handlers/stdcout.h"
-# include "handlers/file.h"
+# include "handler/stdcout.h"
+# include "handler/file.h"
 // Default decorators
 # include "decorators/verbositylevel.h"
 # include "decorators/time.h"
