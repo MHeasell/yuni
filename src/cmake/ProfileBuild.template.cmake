@@ -8,6 +8,9 @@
 # FIXME: Document usage.
 set(YUNI_PROFILE_NAME "Default")
 
+
+
+
 ###############################################################################
 # Environment
 #  Compilers, program search paths, everything about your system.
@@ -20,8 +23,9 @@ set(YUNI_PROFILE_NAME "Default")
 # Default: Prefix of the first «port» program found in PATH.
 # Should be /opt/local in the most common case.
 # 
-#Set(YUNI_MACPORTS_PREFIX "/my/twisted/macports/prefix")
+#set(YUNI_MACPORTS_PREFIX "/my/twisted/macports/prefix")
 set(YUNI_MACPORTS_PREFIX "/opt/local/")
+
 
 
 ###############################################################################
@@ -45,6 +49,7 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 # Example : `ui,scripts,-net`
 # Note : `cmake -DMODULES=help` to have a list of all available modules
 #set(MODULES "ui,scripts")
+
 
 
 ###############################################################################
@@ -100,14 +105,12 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 # Required for Core module.
 #set(YUNI_DvP_PTHREAD_MODE     system)
 
-
 ## Audio
 
 # ZLIB [FIXME: NOT IMPLEMENTED]
 # Provides: GZip compression support
 # Modes: system, custom
 # Required for Audio module.
-
 
 # OpenAL
 # Provides: Audio abstraction layer.
@@ -123,6 +126,16 @@ set(YUNI_DvP_OPENAL_MODE      system)
 # Modes: devpack, system, macports, custom
 # Optional.
 set(YUNI_DvP_LUA_MODE         system)
+
+
+
+###############################################################################
+# Platform-specific options
+###############################################################################
+
+# For building universal binaries on OS X
+# Value by default : i686;x86_64
+#set(YUNI_MACOX_UNIVERSAL_BINARIES  "ppc;ppc64;i386;x86_64")
 
 
 ###############################################################################
@@ -145,7 +158,6 @@ set(YUNI_DvP_LUA_MODE         system)
 #  no    : Completely disable it
 #  yes   : Try to use it anyways (it may not even compile, though)
 #
-
 set(YUNI_PROFILE_MMX       "auto")    # MMX
 set(YUNI_PROFILE_3DNOW     "auto")    # 3DNow!
 set(YUNI_PROFILE_SSE       "auto")    # SSE

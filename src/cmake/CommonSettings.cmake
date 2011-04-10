@@ -77,14 +77,17 @@ endif()
 
 
 #
-# Extra - Bundles
+# Extra - Mac OS X Bundles
 #
-set(MACOSX_BUNDLE_COPYRIGHT "Yuni Framework - 2011")
-
-
 if(APPLE)
-	YMESSAGE("Enabled universal binaries (i386, x86_64)")
-	set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
+	set(MACOSX_BUNDLE_COPYRIGHT "Yuni Framework - 2011")
+	if(YUNI_MACOX_UNIVERSAL_BINARIES)
+		YMESSAGE("Enabled universal binaries (custom : ${YUNI_MACOX_UNIVERSAL_BINARIES})")
+		set(CMAKE_OSX_ARCHITECTURES "${YUNI_MACOX_UNIVERSAL_BINARIES}") # ppc;i386;ppc64;x86_64
+	else()
+		YMESSAGE("Enabled universal binaries (i386, x86_64)")
+		set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
+	endif()
 endif()
 
 
