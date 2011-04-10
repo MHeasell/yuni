@@ -318,10 +318,10 @@ set(SRC_CORE_LOGS
 		core/logs/null.h
 		core/logs/buffer.h
 		# Handlers
-		core/logs/handlers/stdcout.h
-		core/logs/handlers/file.h
-		core/logs/handlers/file.hxx
-		core/logs/handlers/callback.h
+		core/logs/handler/stdcout.h
+		core/logs/handler/file.h
+		core/logs/handler/file.hxx
+		core/logs/handler/callback.h
 		# Decorators
 		core/logs/decorators/verbositylevel.h
 		core/logs/decorators/time.h
