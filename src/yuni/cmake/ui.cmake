@@ -4,6 +4,9 @@ YMESSAGE(":: [Module] UI  (EXPERIMENTAL, FOR ADVANCED USERS ONLY)")
 LIBYUNI_CONFIG_LIB("both" "ui"      "yuni-static-ui-core")
 
 LIBYUNI_CONFIG_DEPENDENCY("ui" "core") # core is required
+LIBYUNI_CONFIG_DEPENDENCY("ui" "ldo")
+LIBYUNI_CONFIG_DEPENDENCY("ui" "net-server")
+LIBYUNI_CONFIG_DEPENDENCY("ui" "net")
 
 add_definitions("-DYUNI_MODULE_UI")
 
@@ -67,7 +70,7 @@ list(APPEND SRC_UI
 #
 find_package(OpenGL)
 set(YUNI_HAS_OPENGL  1)
-LIBYUNI_CONFIG_INCLUDE_PATH("both" "ui" "${OPENGL_INCLUDE_DIR}"
+LIBYUNI_CONFIG_INCLUDE_PATH("both" "ui" "${OPENGL_INCLUDE_DIR}")
 
 
 #

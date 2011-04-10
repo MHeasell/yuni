@@ -5,14 +5,14 @@ LIBYUNI_CONFIG_LIB("both" "algorithms" "yuni-static-algorithms")
 
 
 # Devices
-Set(SRC_ALGORITHMS
+set(SRC_ALGORITHMS
 		algorithm/luhn.h algorithm/luhn.cpp algorithm/luhn.hxx
 		)
 source_group(Algorithms FILES ${SRC_ALGORITHMS})
 
 
 
-Add_Library(yuni-static-algorithms STATIC
+add_library(yuni-static-algorithms STATIC
 			yuni.h
 			${SRC_ALGORITHMS}
 )
