@@ -65,9 +65,31 @@ if(YUNI_MODULE_DEVICES)
 	endif()
 endif()
 
+
+
+#
+# Module : Network
+#
+If(YUNI_MODULE_NET)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net.cmake")
+
+	if(YUNI_MODULE_NET_SERVER)
+		include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net-server.cmake")
+	endif()
+	if(YUNI_MODULE_NET_CLIENT)
+		include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net-client.cmake")
+	endif()
+endif()
+
+if(YUNI_MODULE_LDO)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/ldo.cmake")
+endif()
+
 if(YUNI_MODULE_UI)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/ui.cmake")
 endif()
+
+
 
 if(YUNI_MODULE_AUDIO)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/audio.cmake")
@@ -76,16 +98,6 @@ endif()
 if(YUNI_MODULE_SCRIPT)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/script.cmake")
 endif()
-
-
-
-#
-# Module : Network
-#
-If(YUNI_MODULE_NET)
-	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net.cmake")
-EndIf()
-
 
 
 #if(YUNI_MODULE_ALGORITHMS)

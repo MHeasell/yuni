@@ -28,6 +28,11 @@ set(YUNI_MODULE_SCRIPT                    false)
 
 # Network
 set(YUNI_MODULE_NET                       false)
+set(YUNI_MODULE_NET_SERVER                false)
+set(YUNI_MODULE_NET_CLIENT                false)
+
+# LDO
+set(YUNI_MODULE_LDO                       false)
 
 # UI (User Interface)
 set(YUNI_MODULE_UI                        false)
@@ -66,6 +71,9 @@ set(YUNI_MODULE_LIST
 		lua
 	ui
 	net
+		netserver
+		netclient
+	ldo
 	# extra
 		markdown
 	docs
@@ -106,11 +114,14 @@ if(MODULES)
 			set(YUNI_MODULE_VM true)
 			set(YUNI_MODULE_AUDIO true)
 			set(YUNI_MODULE_NET true)
+			set(YUNI_MODULE_NET_SERVER true)
+			set(YUNI_MODULE_NET_CLIENT true)
 			set(YUNI_MODULE_SCRIPT true)
 			set(YUNI_MODULE_UI true)
 			set(YUNI_MODULE_DATABASE true)
 			set(YUNI_MODULE_ALGORITHMS true)
 			set(YUNI_MODULE_EXTRA_MARKDOWN true)
+			set(YUNI_MODULE_LDO true)
 			set(YUNI_SAMPLES true)
 			set(YUNI_TESTS true)
 			set(KeywordIsKnown true)
@@ -150,6 +161,16 @@ if(MODULES)
 			set(KeywordIsKnown true)
 		endif()
 
+		# ldo
+		if("${it}" STREQUAL "ldo")
+			set(YUNI_MODULE_LDO true)
+			set(KeywordIsKnown true)
+		endif()
+		# -ldo
+		if("${it}" STREQUAL "-ldo")
+			set(YUNI_MODULE_LDO false)
+			set(KeywordIsKnown true)
+		endif()
 
 		# algorithms
 		if("${it}" STREQUAL "algorithms")
@@ -216,6 +237,28 @@ if(MODULES)
 		# -net
 		if("${it}" STREQUAL "-net")
 			set(YUNI_MODULE_NET false)
+			set(KeywordIsKnown true)
+		endif()
+
+		# net-server
+		if("${it}" STREQUAL "net-server")
+			set(YUNI_MODULE_NET_SERVER true)
+			set(KeywordIsKnown true)
+		endif()
+		# -net-server
+		if("${it}" STREQUAL "-net-server")
+			set(YUNI_MODULE_NET_SERVER false)
+			set(KeywordIsKnown true)
+		endif()
+
+		# net-client
+		if("${it}" STREQUAL "net-client")
+			set(YUNI_MODULE_NET_CLIENT true)
+			set(KeywordIsKnown true)
+		endif()
+		# -net-client
+		if("${it}" STREQUAL "-net-client")
+			set(YUNI_MODULE_NET_CLIENT false)
 			set(KeywordIsKnown true)
 		endif()
 
@@ -351,6 +394,18 @@ endif()
 if(YUNI_MODULE_DOCS)
 	set(YUNI_MODULE_EXTRA_MARKDOWN true)
 endif()
+if(YUNI_MODULE_LDO)
+	set(YUNI_MODULE_NET_SERVER true)
+	set(YUNI_MODULE_NET_CLIENT true)
+endif()
+if(YUNI_MODULE_NET_SERVER)
+	set(YUNI_MODULE_NET true)
+endif()
+if(YUNI_MODULE_NET_CLIENT)
+	set(YUNI_MODULE_NET true)
+endif()
+
+
 
 
 if(YUNI_MODULE_SCRIPT)
@@ -370,10 +425,10 @@ endif()
 
 
 
+#
+# List of all available modules
+#
 
-#
-# We have to keep a list of all available modules
-#
 set(YUNI_MODULE_AVAILABLE)
 
 if(YUNI_MODULE_ALGORITHMS)
@@ -408,7 +463,18 @@ endif()
 
 if(YUNI_MODULE_NET)
 	list(APPEND YUNI_MODULE_AVAILABLE net)
+	if(YUNI_MODULE_NET_SERVER)
+		list(APPEND YUNI_MODULE_AVAILABLE net-server)
+	endif()
+	if(YUNI_MODULE_NET_CLIENT)
+		list(APPEND YUNI_MODULE_AVAILABLE net-client)
+	endif()
 endif()
+
+if(YUNI_MODULE_LDO)
+	list(APPEND YUNI_MODULE_AVAILABLE ldo)
+endif()
+
 
 if(YUNI_MODULE_AUDIO)
 	list(APPEND YUNI_MODULE_AVAILABLE audio)
