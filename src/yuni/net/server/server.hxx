@@ -1,6 +1,5 @@
-
-#include "server.h"
-
+#ifndef __YUNI_NET_SERVER_SERVER_HXX__
+# define __YUNI_NET_SERVER_SERVER_HXX__
 
 
 namespace Yuni
@@ -11,6 +10,25 @@ namespace Server
 {
 
 
+	template<class ImplT>
+	inline unsigned int IServerTmpl<ImplT>::messageMaxSize() const
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		return pMessageMaxSize;
+	}
+
+
+	template<class ImplT>
+	inline bool IServerTmpl<ImplT>::messageMaxSize(unsigned int size)
+	{
+		if (!size)
+			return false;
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			pMessageMaxSize = size;
+		}
+		return true;
+	}
 
 
 	template<class ImplT>
@@ -124,4 +142,3 @@ namespace Server
 } // namespace Yuni
 
 #endif // __YUNI_NET_SERVER_SERVER_HXX__
-
