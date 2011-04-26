@@ -5,13 +5,22 @@ LIBYUNI_CONFIG_LIB("both" "net"        "yuni-static-net")
 
 
 
-Set(SRC_NET  net/protocol.h  net/protocol.cpp)
+Set(SRC_NET
+		net/net.h
+		net/errors.h
+		net/port.h
+		net/port.hxx
+		net/hostaddressport.h
+		net/hostaddressport.hxx
+		net/protocol.h
+		net/protocol.cpp
+		)
 source_group("Network\\Protocol" FILES ${SRC_NET})
 
 Add_Library(yuni-static-net STATIC ${SRC_NET})
 
 # Setting output path
-SET_TARGET_PROPERTIES(yuni-static-net PROPERTIES 
+SET_TARGET_PROPERTIES(yuni-static-net PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
