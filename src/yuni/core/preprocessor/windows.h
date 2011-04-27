@@ -3,8 +3,12 @@
 
 
 /* Microsoft Windows */
-#	define YUNI_OS_WINDOWS
-#	define YUNI_OS_NAME "Microsoft Windows"
+# define YUNI_OS_WINDOWS
+# define YUNI_OS_NAME "Microsoft Windows"
+
+# undef  YUNI_OS_FLAG_WINDOWS
+# define YUNI_OS_FLAG_WINDOWS 1
+
 
 /* Windows 64 */
 #	ifdef _WIN64

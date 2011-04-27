@@ -8,6 +8,9 @@
 /* Unix compliant */
 # define YUNI_OS_UNIX
 
+# undef  YUNI_OS_FLAG_UNIX
+# define YUNI_OS_FLAG_UNIX 1
+
 
 # if defined(__HAIKU) || defined(__HAIKU__) || defined(_HAIKU)
 /* Haiku */
@@ -27,6 +30,8 @@
 # if defined(__linux) || defined(linux) || defined(__linux__)
 #	define YUNI_OS_LINUX
 #	define YUNI_OS_NAME "GNU/Linux"
+#	undef  YUNI_OS_FLAG_LINUX
+#	define YUNI_OS_FLAG_LINUX 1
 # else
 
 /* AIX */
@@ -53,6 +58,8 @@
 #		define YUNI_OS_MACOS
 #		define YUNI_OS_DARWIN
 #		define YUNI_OS_NAME "MacOS X"
+#		undef  YUNI_OS_FLAG_MACOS
+#		define YUNI_OS_FLAG_MACOS 1
 #	else
 /* FreeBSD */
 #		if defined(__FreeBSD__)

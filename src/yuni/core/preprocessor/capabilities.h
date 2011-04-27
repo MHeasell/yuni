@@ -24,9 +24,6 @@
 ** - Unixes
 ** YUNI_OS_UNIX
 **
-** - GNU/Linux
-** YUNI_IS_LINUX
-**
 ** - MacOS
 ** YUNI_OS_MACOS or YUNI_OS_MAC or YUNI_OS_DARWIN
 **
@@ -87,6 +84,12 @@
 **
 ** All those informations can be found at http://predef.sourceforge.net/
 */
+
+
+# define YUNI_OS_FLAG_WINDOWS  0
+# define YUNI_OS_FLAG_UNIX     0
+# define YUNI_OS_FLAG_LINUX    0
+# define YUNI_OS_FLAG_MACOS    0
 
 
 # if defined(__TOS_WIN__) || defined(__WIN32__) || defined(_WIN64) || defined(_WIN32)
@@ -279,6 +282,38 @@
 # endif
 # ifndef YUNI_EXPIMP_TEMPLATE
 #	define YUNI_EXPIMP_TEMPLATE
+# endif
+
+
+
+
+
+
+# ifdef __cplusplus /* Only with a C++ Compiler */
+
+namespace Yuni
+{
+namespace System
+{
+
+	// Operating systems
+	enum
+	{
+		//! Flag to indicate if the current operating system is Microsoft Windows
+		windows = YUNI_OS_FLAG_WINDOWS,
+		//! Flag to indicate if the current operating system is Unix based
+		unix    = YUNI_OS_FLAG_UNIX,
+		//! Flag to indicate if the current operating system is Linux based
+		linux   = YUNI_OS_FLAG_LINUX,
+		//! Flag to indicate if the current operating system is Mac OS
+		macos   = YUNI_OS_FLAG_MACOS,
+	};
+
+
+
+} // namespace System
+} // namespace Yuni
+
 # endif
 
 
