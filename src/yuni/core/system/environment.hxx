@@ -13,13 +13,15 @@ namespace System
 namespace Environment
 {
 
-	template<class StringT> inline String Read(const StringT& name)
+	template<class StringT>
+	inline String Read(const StringT& name)
 	{
 		// Assert, if a C* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, SystemEnvironment_InvalidTypeForString);
 
 		return ::getenv(Traits::CString<StringT>::Perform(name));
 	}
+
 
 	template<class StringT, class StringT2>
 	inline bool Read(const StringT& name, StringT2& out, const bool emptyBefore)
@@ -34,6 +36,7 @@ namespace Environment
 		out += ::getenv(Traits::CString<StringT>::Perform(name));
 		return true;
 	}
+
 
 
 

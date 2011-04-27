@@ -511,8 +511,13 @@ set(SRC_CORE_SYSTEM
 		core/system/memory.cpp
 		core/system/environment.h
 		core/system/environment.hxx
+		core/system/username.h
+		core/system/username.hxx
 		core/system/endian.h
 )
+if(WIN32 OR WIN64)
+	set(SRC_CORE_SYSTEM ${SRC_CORE_SYSTEM} core/system/username.cpp)
+endif()
 source_group(core\\system FILES ${SRC_CORE_SYSTEM})
 
 
