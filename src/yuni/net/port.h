@@ -68,6 +68,11 @@ namespace Net
 		bool operator != (unsigned int rhs) const;
 		bool operator != (const Port& rhs) const;
 		bool operator ! () const;
+		//! Inequality
+		bool operator < (const Port& rhs) const;
+		bool operator > (const Port& rhs) const;
+		bool operator <= (const Port& rhs) const;
+		bool operator >= (const Port& rhs) const;
 		//@}
 
 	private:
