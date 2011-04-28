@@ -7,7 +7,7 @@ LIBYUNI_CONFIG_LIB("both" "net-client"        "yuni-static-net-client")
 
 Set(SRC_NET 
 		net/client/client.h
-		net/client/client.cpp
+#		net/client/client.cpp
 	)
 source_group("Network\\Server" FILES ${SRC_NET})
 
