@@ -50,8 +50,8 @@ list(APPEND SRC_UI
 	ui/button.cpp
 
 	# Local components
-	surface.h
-	glsurface.h glsurface.cpp
+	ui/local/controls/surface.h
+	ui/local/controls/glsurface.h ui/local/controls/glsurface.cpp
 
 	# Adapter stuff
 	ui/local/adapter/forrepresentation.h

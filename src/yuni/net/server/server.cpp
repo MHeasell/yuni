@@ -122,6 +122,3 @@ namespace Server
 } // namespace Server
 } // namespace Net
 } // namespace Yuni
-
-#endif // __YUNI_NET_SERVER_SERVER_HXX__
-

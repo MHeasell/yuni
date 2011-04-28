@@ -128,6 +128,30 @@ namespace Net
 	}
 
 
+	inline bool Port::operator < (const Port& rhs) const
+	{
+		return pValue < rhs.pValue;
+	}
+
+
+	inline bool Port::operator > (const Port& rhs) const
+	{
+		return pValue > rhs.pValue;
+	}
+
+
+	inline bool Port::operator <= (const Port& rhs) const
+	{
+		return pValue <= rhs.pValue;
+	}
+
+
+	inline bool Port::operator >= (const Port& rhs) const
+	{
+		return pValue >= rhs.pValue;
+	}
+
+
 
 
 
