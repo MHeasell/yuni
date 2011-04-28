@@ -41,8 +41,6 @@ namespace System
 	{
 		// Assert, if a C* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, SystemUsername_InvalidTypeForString);
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, SystemUsername_InvalidTypeForOutString);
 
 		# ifdef YUNI_OS_WINDOWS
 		if (emptyBefore)
