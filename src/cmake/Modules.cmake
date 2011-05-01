@@ -240,12 +240,12 @@ if(MODULES)
 
 		# net-messages
 		if("${it}" STREQUAL "net-messages")
-			set(YUNI_MODULE_NET_MESSAGE true)
+			set(YUNI_MODULE_NET_MESSAGES true)
 			set(KeywordIsKnown true)
 		endif()
 		# -net-messages
 		if("${it}" STREQUAL "-net-messages")
-			set(YUNI_MODULE_NET_SERVER false)
+			set(YUNI_MODULE_NET_MESSAGES false)
 			set(KeywordIsKnown true)
 		endif()
 
