@@ -102,14 +102,14 @@ namespace Yuni
 
 
 	template<class T>
-	inline class Rect2D<T>::Point2DType Rect2D<T>::topLeft() const
+	inline typename Rect2D<T>::PointType Rect2D<T>::topLeft() const
 	{
 		return Point2DType(x1, y1);
 	}
 
 
 	template<class T>
-	inline class Rect2D<T>::Point2DType Rect2D<T>::bottomRight() const
+	inline typename Rect2D<T>::PointType Rect2D<T>::bottomRight() const
 	{
 		return Point2DType(x2, y2);
 	}
@@ -134,7 +134,7 @@ namespace Yuni
 
 	template<class T>
 	template<class U>
-	void Rect2D<T>::move(const U ax1, const U ay1)
+	inline void Rect2D<T>::move(const U ax1, const U ay1)
 	{
 		x2 = (T)ax1 + (x2 - x1);
 		y2 = (T)ay1 + (y2 - y1);
@@ -145,7 +145,7 @@ namespace Yuni
 
 	template<class T>
 	template<class U>
-	void Rect2D<T>::move(const Point2D<U>& p)
+	inline void Rect2D<T>::move(const Point2D<U>& p)
 	{
 		x2 = (T)p.x + (x2 - x1);
 		y2 = (T)p.y + (y2 - y1);
@@ -237,6 +237,7 @@ namespace Yuni
 		y2 = (T)p.y2;
 		return *this;
 	}
+
 
 
 
