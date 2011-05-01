@@ -73,11 +73,8 @@ endif()
 If(YUNI_MODULE_NET)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net.cmake")
 
-	if(YUNI_MODULE_NET_SERVER)
-		include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net-server.cmake")
-	endif()
-	if(YUNI_MODULE_NET_CLIENT)
-		include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net-client.cmake")
+	if(YUNI_MODULE_NET_MESSAGES)
+		include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net-messages.cmake")
 	endif()
 endif()
 

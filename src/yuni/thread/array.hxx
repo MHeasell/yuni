@@ -425,6 +425,15 @@ namespace Thread
 
 
 	template<class T>
+	inline bool Array<T>::empty() const
+	{
+		typename ThreadingPolicy::MutexLocker locker(*this);
+		return pList.empty();
+	}
+
+
+
+	template<class T>
 	template<class PredicateT>
 	void Array<T>::foreachThread(PredicateT& predicate) const
 	{

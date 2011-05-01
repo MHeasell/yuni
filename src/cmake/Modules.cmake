@@ -28,8 +28,7 @@ set(YUNI_MODULE_SCRIPT                    false)
 
 # Network
 set(YUNI_MODULE_NET                       false)
-set(YUNI_MODULE_NET_SERVER                false)
-set(YUNI_MODULE_NET_CLIENT                false)
+set(YUNI_MODULE_NET_MESSAGES              false)
 
 # LDO
 set(YUNI_MODULE_LDO                       false)
@@ -114,8 +113,7 @@ if(MODULES)
 			set(YUNI_MODULE_VM true)
 			set(YUNI_MODULE_AUDIO true)
 			set(YUNI_MODULE_NET true)
-			set(YUNI_MODULE_NET_SERVER true)
-			set(YUNI_MODULE_NET_CLIENT true)
+			set(YUNI_MODULE_NET_MESSAGES true)
 			set(YUNI_MODULE_SCRIPT true)
 			set(YUNI_MODULE_UI true)
 			set(YUNI_MODULE_DATABASE true)
@@ -240,25 +238,14 @@ if(MODULES)
 			set(KeywordIsKnown true)
 		endif()
 
-		# net-server
-		if("${it}" STREQUAL "net-server")
-			set(YUNI_MODULE_NET_SERVER true)
+		# net-messages
+		if("${it}" STREQUAL "net-messages")
+			set(YUNI_MODULE_NET_MESSAGE true)
 			set(KeywordIsKnown true)
 		endif()
-		# -net-server
-		if("${it}" STREQUAL "-net-server")
+		# -net-messages
+		if("${it}" STREQUAL "-net-messages")
 			set(YUNI_MODULE_NET_SERVER false)
-			set(KeywordIsKnown true)
-		endif()
-
-		# net-client
-		if("${it}" STREQUAL "net-client")
-			set(YUNI_MODULE_NET_CLIENT true)
-			set(KeywordIsKnown true)
-		endif()
-		# -net-client
-		if("${it}" STREQUAL "-net-client")
-			set(YUNI_MODULE_NET_CLIENT false)
 			set(KeywordIsKnown true)
 		endif()
 
@@ -395,13 +382,9 @@ if(YUNI_MODULE_DOCS)
 	set(YUNI_MODULE_EXTRA_MARKDOWN true)
 endif()
 if(YUNI_MODULE_LDO)
-	set(YUNI_MODULE_NET_SERVER true)
-	set(YUNI_MODULE_NET_CLIENT true)
+	set(YUNI_MODULE_NET_MESSAGES true)
 endif()
-if(YUNI_MODULE_NET_SERVER)
-	set(YUNI_MODULE_NET true)
-endif()
-if(YUNI_MODULE_NET_CLIENT)
+if(YUNI_MODULE_NET_MESSAGES)
 	set(YUNI_MODULE_NET true)
 endif()
 
@@ -463,11 +446,8 @@ endif()
 
 if(YUNI_MODULE_NET)
 	list(APPEND YUNI_MODULE_AVAILABLE net)
-	if(YUNI_MODULE_NET_SERVER)
-		list(APPEND YUNI_MODULE_AVAILABLE net-server)
-	endif()
-	if(YUNI_MODULE_NET_CLIENT)
-		list(APPEND YUNI_MODULE_AVAILABLE net-client)
+	if(YUNI_MODULE_NET_MESSAGES)
+		list(APPEND YUNI_MODULE_AVAILABLE net-messages)
 	endif()
 endif()
 
