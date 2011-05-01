@@ -1,5 +1,5 @@
-#ifndef __YUNI_NET_ERROR_H__
-# define __YUNI_NET_ERROR_H__
+#ifndef __YUNI_NET_ERRORS_H__
+# define __YUNI_NET_ERRORS_H__
 
 # include "../yuni.h"
 
@@ -16,6 +16,10 @@ namespace Net
 	{
 		//! No error
 		errNone = 0,
+		//! Unknown error
+		errUnknown,
+		//! User
+		errUser,
 		//! The port is invalid (range [1..65535])
 		errInvalidPort,
 		//! The address is invalid
@@ -24,6 +28,8 @@ namespace Net
 		errDupplicatedAddress,
 		//! The message is over the dynamic value `messageMaxSize`
 		errMessageMaxSize,
+		//! Invalid transport layer
+		errInvalidTransport,
 		//! The maximum number of errors
 		errMax
 	};
@@ -34,4 +40,4 @@ namespace Net
 } // namespace Net
 } // namespace Yuni
 
-#endif // __YUNI_NET_NET_H__
+#endif // __YUNI_NET_ERRORS_H__

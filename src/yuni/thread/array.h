@@ -12,7 +12,6 @@ namespace Yuni
 namespace Thread
 {
 
-
 	/*!
 	** \brief Container for thread
 	**
@@ -43,7 +42,6 @@ namespace Thread
 		YUNI_STATIC_ASSERT((Static::InheritsFrom<T, IThread>::Yes), ThreadArray_T_MustInheritFrom_IThread);
 		//! Thread list
 		typedef std::vector<typename T::Ptr> ThreadList;
-
 		enum
 		{
 			//! A hard limit value for the number of threads in the pool
@@ -180,6 +178,9 @@ namespace Thread
 
 		//! \see size()
 		unsigned int count() const;
+
+		//! Get if the array is empty
+		bool empty() const;
 
 		/*!
 		** \brief Execute a predicate for each thread in pool
