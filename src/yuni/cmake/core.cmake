@@ -111,6 +111,9 @@ check_cxx_source_compiles("#include <stdint.h>
 	int main() {__int128 a; unsigned __int128 b; return 0;}" YUNI_HAS_INT128_T)
 
 # C++0x nullptr
+if(YUNI_HAS_GCC_CPP0X_SUPPORT)
+	set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
+endif()
 check_cxx_source_compiles("
 	class A {}; int main() {A* a = nullptr;return 0;}" YUNI_HAS_NULLPTR)
 
@@ -135,7 +138,7 @@ if(MSVC)
 		YUNI_HAS_LONG)
 else(MSVC)
 	if(YUNI_HAS_SYS_TYPES_H)
-		CHECK_CXX_SOURCE_COMPILES(
+		check_cxx_source_compiles(
 			"#include <iostream>
 			#include <sys/types.h>
 			#include <stdio.h>
@@ -147,7 +150,7 @@ else(MSVC)
 			int main() {return 0;}"
 			YUNI_HAS_LONG)
 	else(YUNI_HAS_SYS_TYPES_H)
-		CHECK_CXX_SOURCE_COMPILES(
+		check_cxx_source_compiles(
 			"#include <iostream>
 			#include <stdio.h>
 			void foo(unsigned int a) {std::cout << a;}

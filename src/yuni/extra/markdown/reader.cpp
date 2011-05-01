@@ -9,6 +9,7 @@ namespace Yuni
 namespace Markdown
 {
 
+
 	Reader::Reader()
 		:pDocumentStarted(false)
 	{
@@ -24,21 +25,21 @@ namespace Markdown
 
 	Node::Ptr  Reader::root() const
 	{
-		assert(pData != nullptr);
+		assert(pData);
 		return pData->root();
 	}
 
 
 	const String& Reader::hintFilename() const
 	{
-		assert(pData != nullptr && "The internal state engine must be initialized at this point");
+		assert(pData && "The internal state engine must be initialized at this point");
 		return pData->filename;
 	}
 
 
 	void Reader::internalHintFilename(const StringAdapter& filename)
 	{
-		assert(pData != nullptr && "The internal state engine must be initialized at this point");
+		assert(pData && "The internal state engine must be initialized at this point");
 		String& s = pData->filename;
 
 		s             = filename;
@@ -56,7 +57,7 @@ namespace Markdown
 
 		pDocumentStarted = true;
 
-		assert(pData != nullptr && "The internal state engine must be initialized at this point");
+		assert(pData && "The internal state engine must be initialized at this point");
 		pData->reset();
 
 		// event
@@ -69,7 +70,7 @@ namespace Markdown
 		if (pDocumentStarted)
 		{
 			// assert
-			assert(pData != nullptr && "The internal state engine must be initialized at this point");
+			assert(pData && "The internal state engine must be initialized at this point");
 
 			// Flush any remaining buffer
 			pData->flush();
@@ -83,7 +84,7 @@ namespace Markdown
 
 	void Reader::parse(const StringAdapter& text)
 	{
-		assert(pData != nullptr && "The internal state engine must be initialized at this point");
+		assert(pData && "The internal state engine must be initialized at this point");
 
 		// A document must be started
 		if (!pDocumentStarted)
