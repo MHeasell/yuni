@@ -1,5 +1,7 @@
 
-# ifdef YUNI_OS_WINDOWS
+#include "../../yuni.h"
+
+#ifdef YUNI_OS_WINDOWS
 # include "username.h"
 # include "windows.hdr.h"
 
@@ -28,10 +30,10 @@ namespace System
 				// The variable `unwsize` contains the final zero
 				--unwsize;
 				// Getting the size of the buffer into UTF8
-				const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, unw, unwsize, NULL, 0,  NULL, NULL);
+				int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, unw, unwsize, NULL, 0,  NULL, NULL);
 				if (sizeRequired > 0)
 				{
-					if (sizeRequired > size)
+					if (static_cast<unsigned int>(sizeRequired) > size)
 						sizeRequired = size;
 					WideCharToMultiByte(CP_UTF8, 0, unw, unwsize, cstring, sizeRequired,  NULL, NULL);
 					return static_cast<unsigned int>(sizeRequired);
@@ -48,4 +50,4 @@ namespace System
 } // namespace Private
 } // namespace Yuni
 
-# endif
+#endif

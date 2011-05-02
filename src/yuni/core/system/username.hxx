@@ -37,7 +37,7 @@ namespace System
 	# ifndef YUNI_OS_WINDOWS
 	inline
 	# endif
-	bool Username(StringT& out, bool emptyBefore = true)
+	bool Username(StringT& out, bool emptyBefore)
 	{
 		// Assert, if a C* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, SystemUsername_InvalidTypeForString);
@@ -58,7 +58,7 @@ namespace System
 			return false; // not enough rooms
 		// Appending the username to our buffer and retrieving the size of
 		// the username
-		const unsigned int written = Yuni::Private::System::Username(target, size);
+		const unsigned int written = Yuni::Private::System::WindowsUsername(target, size);
 		if (written)
 		{
 			// The username has been written, we have to properly resize the string
