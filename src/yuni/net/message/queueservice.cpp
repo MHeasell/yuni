@@ -1,5 +1,6 @@
 
 #include "queueservice.h"
+#include "transport/tcp.h"
 
 
 namespace Yuni
@@ -31,10 +32,11 @@ namespace Message
 
 	Error  QueueService::listen(const StringAdapter& address, const Port& port, TransportLayer transport)
 	{
+		using namespace Yuni::Net::Message::Transport;
 		switch (transport)
 		{
 			case tlTCP:
-				return listen(address, port, nullptr);
+				return listen(address, port, new Transport::TCP(tmServer));
 			case tlUDP:
 				return listen(address, port, nullptr);
 			default:
@@ -49,21 +51,19 @@ namespace Message
 	{
 		if (!port.valid())
 			return errInvalidPort;
-		if (!transport)
+		if (!transport || transport->mode != Transport::tmServer)
 			return errInvalidTransport;
 
 		// The address
-		ListenInfo::Ptr infos = new ListenInfo();
-		infos->address = address;
-		if (!infos->address)
+		transport->address = address;
+		transport->port    = port;
+		if (!transport->address)
 			return errInvalidHostAddress;
-		infos->port      = port;
-		infos->transport = transport;
 
 		// Adding the new address
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
-			if (!pListenInfos.insert(infos).second)
+			if (!pListenInfos.insert(transport).second)
 				return errDupplicatedAddress;
 		}
 		return errNone;
@@ -134,14 +134,10 @@ namespace Message
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			// Ok, attempt to start the server from the real implementation
-			ListenInfo::Set::iterator end = pListenInfos.end();
-			for (ListenInfo::Set::iterator i = pListenInfos.begin(); i != end; ++i)
-			{
-				// The current listen info
-				ListenInfo& info = *(*i);
-				Worker* worker = new Worker(info.transport);
-				pWorkers += worker;
-			}
+			Transport::ITransport::Set::iterator end = pListenInfos.end();
+			for (Transport::ITransport::Set::iterator i = pListenInfos.begin(); i != end; ++i)
+				pWorkers += new Worker(*this, *i);
+
 			// The new state
 			pState = (err == errNone) ? stRunning : stStopped;
 		}
