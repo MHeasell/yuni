@@ -5,6 +5,7 @@
 # include "../net.h"
 # include "../../thread/policy.h"
 # include "../../core/event.h"
+# include "fwd.h"
 # include "connection.h"
 # include "transport.h"
 # include "worker.h"
@@ -161,22 +162,6 @@ namespace Message
 
 
 	protected:
-		class ListenInfo
-		{
-		public:
-			//! Smart pointer (not thread-safe)
-			typedef SmartPtr<ListenInfo, Policy::Ownership::ReferenceCounted> Ptr;
-			//! Set
-			typedef std::set<Ptr>  Set;
-
-		public:
-			//! Address to listen
-			HostAddress  address;
-			//! Port
-			Port port;
-			//! The transport layer to use
-			Transport::ITransport::Ptr  transport;
-		};
 		//! A single worker
 		typedef Yuni::Private::Net::Message::Worker  Worker;
 
@@ -184,11 +169,14 @@ namespace Message
 		//! All workers
 		Thread::Array<Worker> pWorkers;
 		//! All addresses to listen
-		ListenInfo::Set  pListenInfos;
+		Transport::ITransport::Set  pListenInfos;
 		//! The maximum size (in bytes) of a message
 		unsigned int pMessageMaxSize;
 		//! Flag to know the state of the server
 		State pState;
+
+		// Friends
+		friend class Yuni::Private::Net::Message::Worker;
 
 	}; // class QueueService
 
