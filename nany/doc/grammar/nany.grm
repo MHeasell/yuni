@@ -46,7 +46,7 @@ Comment End = '*#'
 ! The grammar starts below
 <Program> ::= <Unit Declaration> <Dependencies> <Declaration Block> <Implementation Block>
 
-<Dependencies> ::= 'uses' <Qualified Identifier> ';'
+<Dependencies> ::= 'uses' <Qualified Identifier> ';' <Dependencies>
                | ! Empty
 
 <Unit Declaration> ::= 'unit' Identifier ';'
