@@ -35,9 +35,9 @@ BuiltInType    = 'any' | 'int' | 'unsigned int' | 'int8' | 'uint8' | 'int16' | '
 ! Comments
 ! -------------------------------------------------
 
-Comment Line = '#'
-Comment Start = '#*'
-Comment End = '*#'
+Comment Line = '#' | '//'
+Comment Start = '#*' | '/*'
+Comment End = '*#' | '*/'
 
 ! -------------------------------------------------
 ! Rules
@@ -210,7 +210,7 @@ Comment End = '*#'
 
 <Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
                |  <Mult Exp> '/' <Negate Exp> 
-               |  <Negate Exp>
+                                                                                                                                                                    |  <Negate Exp>
 
 <Negate Exp>  ::= '-' <Value> 
                |  <Value>

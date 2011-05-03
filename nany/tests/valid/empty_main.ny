@@ -1,9 +1,7 @@
 
 program Test;
 
-implementation
-
-function main(argc, argv) : int
+function main
 {
    return 0;
 }
