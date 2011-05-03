@@ -1,0 +1,274 @@
+"Name"     = 'Nany'
+"Author"   = 'Bruno BORRI, Damien GERARD'
+"Version"  = '0.1'
+"About"    = 'Grammar for the Nany scripting language, from the Yuni project team'
+
+"Start Symbol" = <Program>
+
+! -------------------------------------------------
+! Character Sets
+! -------------------------------------------------
+
+{ID Head}      = {Letter} + {Letter Extended}
+{ID Tail}      = {Alphanumeric} + [_]
+{String Chars} = {Printable} + {HT} - ["\]
+{Char Chars}   = {Printable} - ['']
+{Hex Digit}    = {Digit} + [abcdef] + [ABCDEF]
+
+! -------------------------------------------------
+! Terminals
+! -------------------------------------------------
+
+Identifier    = {ID Head}{ID Tail}*
+BooleanLiteral= 'true' | 'false'
+StringLiteral = '"' ( {String Chars} | '\' {Printable} )* '"'
+DecLiteral     = {Digit}+            ( [UuLl] | [Uu][Ll] | [Ll][Uu] )?
+HexLiteral     = '0'[xX]{Hex Digit}+ ( [UuLl] | [Uu][Ll] | [Ll][Uu] )?
+RealLiteral    = {Digit}*'.'{Digit}+ ( [FfDd] )?
+CharLiteral    = '' ( {Char Chars} | '\'{Printable} )''
+ConstQualifier = 'const'
+VisibilityQualifier = 'public' | 'protected' | 'private' | 'published'
+Qualifier      = 'immutable' | 'stable' | 'threadunsafe' | ConstQualifier | VisibilityQualifier
+BuiltInType    = 'any' | 'int' | 'unsigned int' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'int64' | 'uint64' | 'char' | 'float' | 'double' | 'bool'
+
+! -------------------------------------------------
+! Comments
+! -------------------------------------------------
+
+Comment Line = '#'
+Comment Start = '#*'
+Comment End = '*#'
+
+! -------------------------------------------------
+! Rules
+! -------------------------------------------------
+
+! The grammar starts below
+<Program> ::= <Unit Declaration> <Dependencies> <Declaration Block> <Implementation Block>
+
+<Dependencies> ::= 'uses' <Qualified Identifier> ';'
+               | ! Empty
+
+<Unit Declaration> ::= 'unit' Identifier ';'
+               | 'program' Identifier ';'
+
+<Qualified Identifier> ::= Identifier '.' <Qualified Identifier>
+               | Identifier
+
+<Declaration Block> ::= <Function Declaration> <Declaration Block>
+               | <Optional Visibility Qualifier> <Class Declaration> <Declaration Block>
+               | <Optional Visibility Qualifier> <Workflow Declaration> <Declaration Block>
+               | <Optional Visibility Qualifier> <Enum Declaration> <Declaration Block>
+               | ! Empty
+
+<Implementation Block> ::= 'implementation' <Implementation Block Continued>
+               | ! Empty
+
+<Implementation Block Continued> ::= <Function Definition> <Implementation Block Continued>
+               | <Method Definition> <Implementation Block Continued>
+               | ! Empty
+
+! -------------------------------------------------
+! Enums
+! -------------------------------------------------
+
+<Enum Declaration> ::= 'enum' Identifier ';' ! Forward declaration
+               | 'enum' Identifier '{' <Enum Content> '}'
+
+<Enum Content> ::= Identifier ',' <Enum Content>
+               | Identifier
+               | ! Empty
+
+! -------------------------------------------------
+! Classes
+! -------------------------------------------------
+
+<Class Declaration> ::=  'class' Identifier <Optional Type Parameters> ';' ! Forward declaration
+               | 'class' Identifier <Optional Type Parameters> <In Block> <Out Block> '{' <Class Content> '}'
+
+! TODO
+<Class Content> ::= VisibilityQualifier <Class Content>
+               | <Method Declaration> <Class Content>
+               | <Optional Const Qualifier> <Attribute Declaration> <Class Content>
+               | <Class Declaration> <Class Content>
+               | ! Empty
+
+<Attribute Declaration> ::= Identifier ';'
+               | Identifier ':' <Type> ';'
+               | Identifier ':=' <Expression> ';'
+               | Identifier ':' <Type> ':=' <Expression> ';'
+
+! -------------------------------------------------
+! Workflows
+! -------------------------------------------------
+
+<Workflow Declaration> ::= 'workflow' Identifier ';' ! Forward declaration
+               | 'workflow' Identifier '{' <Workflow Content> '}'
+
+! TODO
+<Workflow Content> ::=
+
+! -------------------------------------------------
+! Functions and methods
+! -------------------------------------------------
+
+<Function Declaration> ::= <Qualifier List> 'function' Identifier <Optional Parameters> <Return Type Declaration> ';'
+
+<Function Definition> ::= <Qualifier List> 'function' Identifier <Optional Parameters> <Return Type Declaration> <Function Content>
+
+<Method Declaration> ::= <Qualifier List> 'method' Identifier <Optional Parameters> <Return Type Declaration> ';'
+
+<Method Definition> ::= <Qualifier List> 'method' <Qualified Identifier> <Optional Parameters> <Return Type Declaration> <Function Content>
+
+<Function Content> ::= <In Block> <Out Block> '{' <Statements> '}'
+
+<Return Type Declaration> ::= ':' <Type>
+               | ! Empty
+
+<Optional Parameters> ::= '(' <Parameter List> ')'
+               | ! Empty
+
+<Parameter List> ::= Identifier ':' <Type> <Parameter List Continued>
+               | Identifier <Parameter List Continued> ! Type is optional, due to type inference
+               | ! Empty
+
+<Parameter List Continued> ::= ',' <Parameter List>
+               | ! Empty
+
+<Argument List> ::= <Expression> <Argument List Continued>
+
+<Argument List Continued> ::= ',' <Expression>
+               | ! Empty
+
+<Optional Const Qualifier> ::= ConstQualifier
+               | ! Empty
+
+<Optional Visibility Qualifier> ::= VisibilityQualifier
+               | ! Empty
+
+<Qualifier List> ::= Qualifier <Qualifier List>
+               | ! Empty
+
+<Function Calls> ::= <Function Call> <Function Calls>
+               | ',' <Function Calls>
+               | ! Empty
+
+! WARNING : We do not define a function call with no parentheses here,
+! WARNING : it would conflict as reduce-reduce with a simple identifier
+! WARNING : since there is no way to distinguish them before type-checking.
+<Function Call> ::= <Qualified Identifier> '(' <Argument List> ')' ! Function / Method call
+
+! -------------------------------------------------
+! Constraint
+! -------------------------------------------------
+
+<In Block> ::= 'in' <Constraint List>
+               | ! Empty
+
+<Out Block> ::= 'out' <Constraint List>
+               | ! Empty
+
+<Constraint List> ::= <Constraint> <Constraint List>
+               | ! Empty
+
+<Constraint> ::= <Qualified Identifier> '//' <Expression>
+               | Identifier '//' <Type> ! For type parameter static type-checking
+               | <Expression>
+
+! -------------------------------------------------
+! Types
+! -------------------------------------------------
+
+<Type> ::= Identifier
+               | 'typeof' Identifier
+               | BuiltInType
+
+<Optional Type Parameters> ::= '<' <Type Parameters> '>'
+               | ! Empty
+
+<Type Parameters> ::= Identifier <Type Parameters Continued>
+               | Identifier ':=' <Type> <Type Parameters Continued>
+
+<Type Parameters Continued> ::= ',' <Type Parameters>
+               | ! Empty
+
+! -------------------------------------------------
+! Expressions
+! -------------------------------------------------
+
+<Expression>  ::= <Expression> '>'  <Add Exp> 
+               |  <Expression> '<'  <Add Exp> 
+               |  <Expression> '<=' <Add Exp> 
+               |  <Expression> '>=' <Add Exp>
+               |  <Expression> '=' <Add Exp>     !Equal
+               |  <Expression> '!=' <Add Exp>    !Not equal
+               |  <Add Exp>
+
+<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
+               |  <Add Exp> '-' <Mult Exp>
+               |  <Mult Exp> 
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
+               |  <Mult Exp> '/' <Negate Exp> 
+               |  <Negate Exp>
+
+<Negate Exp>  ::= '-' <Value> 
+               |  <Value>
+
+! -------------------------------------------------
+! Statements
+! -------------------------------------------------
+
+<Statements>  ::= <Statement> <Statements>
+               | 
+
+<Statement>   ::= <Optional Const Qualifier> <Attribute Declaration>
+               | <Function Call> ';'
+               | 'sync' <Function Calls> ';'
+               | 'async' <Function Calls> ';'
+               | <L Value> ':=' <Expression> ';'
+               | 'if' '(' <Expression> ')' <Statement>
+               | 'if' '(' <Expression> ')' <Then Statement> 'else' <Statement>
+               | 'while' '(' <Expression> ')' <Statement>
+               | 'for' '(' <For Argument> ';' <For Argument> ';' <For Argument> ')' <Then Statement>
+               | <Normal Statement>
+
+<Then Statement>   ::= 'if' '(' <Expression> ')' <Then Statement> 'else' <Then Statement>
+               | 'while' '(' <Expression> ')' <Then Statement>
+               | 'for' '(' <For Argument> ';' <For Argument> ';' <For Argument> ')' <Then Statement>
+               | <Normal Statement>
+
+<Normal Statement> ::= 'do' <Statement> 'while' '(' <Expression> ')'
+               | 'do' '{' <Statements> '}' 'while' '(' <Expression> ')'
+               | '{' <Statements> '}'
+! Allow?       | switch '(' <Expr> ')' '{' <Case Stms> '}'
+               | 'break' ';'
+               | 'continue' ';'
+               | 'return' <Expression> ';'
+
+<For Argument> ::= <Expression>
+              | ! Empty
+
+! -------------------------------------------------
+! Literals and Values
+! -------------------------------------------------
+
+<Literal> ::= BooleanLiteral
+               |  DecLiteral
+               |  HexLiteral
+               |  RealLiteral
+               |  CharLiteral
+               |  StringLiteral
+               |  'nil'
+
+! For use in arithmetic, requires parentheses around expressions to have proper priorities
+! e.g. : weight := - car.weight + passengers.weight
+<Value> ::= <Literal>
+               | '(' <Expression> ')'
+               | <Qualified Identifier> ! Property or attribute or function call with no argument
+               | <Function Call> ! Function call with arguments
+
+! Anything that can be on the left part of an assignment
+! TODO : Set manipulation: (o in DO.All // o.reflect.has("color")).color = Color.Blue
+<L Value> ::= <Qualified Identifier>
+
