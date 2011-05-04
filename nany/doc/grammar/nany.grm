@@ -28,7 +28,7 @@ RealLiteral    = {Digit}*'.'{Digit}+ ( [FfDd] )?
 CharLiteral    = '' ( {Char Chars} | '\'{Printable} )''
 ConstQualifier = 'const'
 VisibilityQualifier = 'public' | 'protected' | 'private' | 'published'
-Qualifier      = 'immutable' | 'stable' | 'threadunsafe' | ConstQualifier | VisibilityQualifier
+OptimQualifier = 'immutable' | 'stable' | 'threadunsafe'
 BuiltInType    = 'any' | 'int' | 'unsigned int' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'int64' | 'uint64' | 'char' | 'float' | 'double' | 'bool'
 
 ! -------------------------------------------------
@@ -40,58 +40,61 @@ Comment Start = '#*' | '/*'
 Comment End = '*#' | '*/'
 
 ! -------------------------------------------------
-! Rules
+! Program / Unit
 ! -------------------------------------------------
 
 ! The grammar starts below
-<Program> ::= <Unit Declaration> <Dependencies> <Declaration Block> <Implementation Block>
+<Program> ::= <Unit Declaration> <Dependencies> <Implementation Block>
+
+<Unit Declaration> ::= <Optional Visibility Qualifier> 'unit' Identifier ';'
+               | 'program' Identifier ';'
 
 <Dependencies> ::= 'uses' <Qualified Identifier> ';' <Dependencies>
                | ! Empty
 
-<Unit Declaration> ::= 'unit' Identifier ';'
-               | 'program' Identifier ';'
+<Implementation Block> ::= <Function Declaration> <Implementation Block>
+               | <Optional Visibility Qualifier> <Class Declaration> <Implementation Block>
+               | <Optional Visibility Qualifier> <Workflow Declaration> <Implementation Block>
+               | <Optional Visibility Qualifier> <Enum Declaration> <Implementation Block>
+               | ! Empty
+
+! -------------------------------------------------
+! Qualified Identifier
+! -------------------------------------------------
 
 <Qualified Identifier> ::= Identifier '.' <Qualified Identifier>
                | Identifier
 
-<Declaration Block> ::= <Function Declaration> <Declaration Block>
-               | <Optional Visibility Qualifier> <Class Declaration> <Declaration Block>
-               | <Optional Visibility Qualifier> <Workflow Declaration> <Declaration Block>
-               | <Optional Visibility Qualifier> <Enum Declaration> <Declaration Block>
-               | ! Empty
-
-<Implementation Block> ::= 'implementation' <Implementation Block Continued>
-               | ! Empty
-
-<Implementation Block Continued> ::= <Function Definition> <Implementation Block Continued>
-               | <Method Definition> <Implementation Block Continued>
-               | ! Empty
 
 ! -------------------------------------------------
-! Enums
+! Literals
 ! -------------------------------------------------
 
-<Enum Declaration> ::= 'enum' Identifier ';' ! Forward declaration
-               | 'enum' Identifier '{' <Enum Content> '}'
-
-<Enum Content> ::= Identifier ',' <Enum Content>
-               | Identifier
-               | ! Empty
+<Literal> ::= BooleanLiteral
+               |  DecLiteral
+               |  HexLiteral
+               |  RealLiteral
+               |  CharLiteral
+               |  StringLiteral
+               |  'nil'
 
 ! -------------------------------------------------
 ! Classes
 ! -------------------------------------------------
 
-<Class Declaration> ::=  'class' Identifier <Optional Type Parameters> ';' ! Forward declaration
-               | 'class' Identifier <Optional Type Parameters> <In Block> <Out Block> '{' <Class Content> '}'
+<Class Declaration> ::= 'class' Identifier <Optional Type Parameters> <In Block> <Out Block> '{' <Class Content> '}'
 
 ! TODO
 <Class Content> ::= VisibilityQualifier <Class Content>
                | <Method Declaration> <Class Content>
                | <Optional Const Qualifier> <Attribute Declaration> <Class Content>
-               | <Class Declaration> <Class Content>
+               | <Property Declaration> <Class Content>
+               | <Class Declaration> <Class Content> ! Nested class
                | ! Empty
+
+<Property Declaration> ::= 'property' Identifier 'read' <Qualified Identifier> ';'
+               | 'property' Identifier 'write' <Qualified Identifier> ';'
+               | 'property' Identifier 'read' <Qualified Identifier> 'write' <Qualified Identifier> ';'
 
 <Attribute Declaration> ::= Identifier ';'
                | Identifier ':' <Type> ';'
@@ -102,25 +105,31 @@ Comment End = '*#' | '*/'
 ! Workflows
 ! -------------------------------------------------
 
-<Workflow Declaration> ::= 'workflow' Identifier ';' ! Forward declaration
-               | 'workflow' Identifier '{' <Workflow Content> '}'
+<Workflow Declaration> ::= 'workflow' Identifier '{' <Workflow Content> '}'
 
 ! TODO
 <Workflow Content> ::=
 
 ! -------------------------------------------------
+! Enums
+! -------------------------------------------------
+
+<Enum Declaration> ::= 'enum' Identifier '{' <Enum Content> '}'
+
+<Enum Content> ::= Identifier ',' <Enum Content>
+               | Identifier
+               | ! Empty
+
+
+! -------------------------------------------------
 ! Functions and methods
 ! -------------------------------------------------
 
-<Function Declaration> ::= <Qualifier List> 'function' Identifier <Optional Parameters> <Return Type Declaration> ';'
+<Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Content>
 
-<Function Definition> ::= <Qualifier List> 'function' Identifier <Optional Parameters> <Return Type Declaration> <Function Content>
+<Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Content>
 
-<Method Declaration> ::= <Qualifier List> 'method' Identifier <Optional Parameters> <Return Type Declaration> ';'
-
-<Method Definition> ::= <Qualifier List> 'method' <Qualified Identifier> <Optional Parameters> <Return Type Declaration> <Function Content>
-
-<Function Content> ::= <In Block> <Out Block> '{' <Statements> '}'
+<Function Content> ::= <In Block> <Out Block> <Expression>
 
 <Return Type Declaration> ::= ':' <Type>
                | ! Empty
@@ -128,25 +137,22 @@ Comment End = '*#' | '*/'
 <Optional Parameters> ::= '(' <Parameter List> ')'
                | ! Empty
 
-<Parameter List> ::= Identifier ':' <Type> <Parameter List Continued>
-               | Identifier <Parameter List Continued> ! Type is optional, due to type inference
+<Parameter List> ::= Identifier ':' <Type> <Parameter List Continued> ! With a forced type
+               | Identifier <Parameter List Continued> ! With type inferred
+               | Identifier ':' <Type> ':=' <Expression> <Parameter List Continued> ! With a default value
+               | Identifier ':=' <Expression> <Parameter List Continued> ! With type inferred and a default value
                | ! Empty
 
 <Parameter List Continued> ::= ',' <Parameter List>
                | ! Empty
 
-<Argument List> ::= <Expression> <Argument List Continued>
-
-<Argument List Continued> ::= ',' <Expression>
-               | ! Empty
-
 <Optional Const Qualifier> ::= ConstQualifier
                | ! Empty
 
-<Optional Visibility Qualifier> ::= VisibilityQualifier
+<Optional Optim Qualifier> ::= OptimQualifier
                | ! Empty
 
-<Qualifier List> ::= Qualifier <Qualifier List>
+<Optional Visibility Qualifier> ::= VisibilityQualifier
                | ! Empty
 
 <Function Calls> ::= <Function Call> <Function Calls>
@@ -158,28 +164,26 @@ Comment End = '*#' | '*/'
 ! WARNING : since there is no way to distinguish them before type-checking.
 <Function Call> ::= <Qualified Identifier> '(' <Argument List> ')' ! Function / Method call
 
+<Argument List> ::= <Expression> <Argument List Continued>
+
+<Argument List Continued> ::= ',' <Expression>
+               | ! Empty
+
 ! -------------------------------------------------
 ! Constraint
 ! -------------------------------------------------
 
-<In Block> ::= 'in' <Constraint List>
+<In Block> ::= 'in' <Expression>
                | ! Empty
 
-<Out Block> ::= 'out' <Constraint List>
+<Out Block> ::= 'out' <Expression>
                | ! Empty
-
-<Constraint List> ::= <Constraint> <Constraint List>
-               | ! Empty
-
-<Constraint> ::= <Qualified Identifier> '//' <Expression>
-               | Identifier '//' <Type> ! For type parameter static type-checking
-               | <Expression>
 
 ! -------------------------------------------------
 ! Types
 ! -------------------------------------------------
 
-<Type> ::= Identifier
+<Type> ::= <Qualified Identifier>
                | 'typeof' Identifier
                | BuiltInType
 
@@ -196,12 +200,29 @@ Comment End = '*#' | '*/'
 ! Expressions
 ! -------------------------------------------------
 
-<Expression>  ::= <Expression> '>'  <Add Exp> 
-               |  <Expression> '<'  <Add Exp> 
-               |  <Expression> '<=' <Add Exp> 
-               |  <Expression> '>=' <Add Exp>
-               |  <Expression> '=' <Add Exp>     !Equal
-               |  <Expression> '!=' <Add Exp>    !Not equal
+<Expressions> ::= <Expression> <Expressions Continued>
+               | ! Empty
+
+<Expressions Continued> ::= ';' <Expressions Continued>
+               | ! Empty
+
+<Expression>  ::= <Expression> '|' <Or Exp> ! Constraint
+               |  <Or Exp>
+               |  <Void Exp>
+
+<Or Exp>      ::= <Or Exp> 'or' <And Exp> ! Boolean Or
+               |  <And Exp>
+
+
+<And Exp>  ::= <And Exp> 'and' <Compare Exp> ! Boolean And
+               | <Compare Exp>
+
+<Compare Exp> ::= <Compare Exp> '>'  <Add Exp> 
+               |  <Compare Exp> '<'  <Add Exp> 
+               |  <Compare Exp> '<=' <Add Exp> 
+               |  <Compare Exp> '>=' <Add Exp>
+               |  <Compare Exp> '=' <Add Exp>     !Equal
+               |  <Compare Exp> '!=' <Add Exp>    !Not equal
                |  <Add Exp>
 
 <Add Exp>     ::= <Add Exp> '+' <Mult Exp>
@@ -210,65 +231,29 @@ Comment End = '*#' | '*/'
 
 <Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
                |  <Mult Exp> '/' <Negate Exp> 
-                                                                                                                                                                    |  <Negate Exp>
+               |  <Negate Exp>
 
 <Negate Exp>  ::= '-' <Value> 
                |  <Value>
 
-! -------------------------------------------------
-! Statements
-! -------------------------------------------------
-
-<Statements>  ::= <Statement> <Statements>
-               | 
-
-<Statement>   ::= <Optional Const Qualifier> <Attribute Declaration>
-               | <Function Call> ';'
-               | 'sync' <Function Calls> ';'
-               | 'async' <Function Calls> ';'
-               | <L Value> ':=' <Expression> ';'
-               | 'if' '(' <Expression> ')' <Statement>
-               | 'if' '(' <Expression> ')' <Then Statement> 'else' <Statement>
-               | 'while' '(' <Expression> ')' <Statement>
-               | 'for' '(' <For Argument> ';' <For Argument> ';' <For Argument> ')' <Then Statement>
-               | <Normal Statement>
-
-<Then Statement>   ::= 'if' '(' <Expression> ')' <Then Statement> 'else' <Then Statement>
-               | 'while' '(' <Expression> ')' <Then Statement>
-               | 'for' '(' <For Argument> ';' <For Argument> ';' <For Argument> ')' <Then Statement>
-               | <Normal Statement>
-
-<Normal Statement> ::= 'do' <Statement> 'while' '(' <Expression> ')'
-               | 'do' '{' <Statements> '}' 'while' '(' <Expression> ')'
-               | '{' <Statements> '}'
-! Allow?       | switch '(' <Expr> ')' '{' <Case Stms> '}'
-               | 'break' ';'
-               | 'continue' ';'
-               | 'return' <Expression> ';'
-
-<For Argument> ::= <Expression>
-              | ! Empty
-
-! -------------------------------------------------
-! Literals and Values
-! -------------------------------------------------
-
-<Literal> ::= BooleanLiteral
-               |  DecLiteral
-               |  HexLiteral
-               |  RealLiteral
-               |  CharLiteral
-               |  StringLiteral
-               |  'nil'
+<Void Exp>    ::= <Optional Const Qualifier> <Qualified Identifier> <Return Type Declaration> ':=' <Expression> ! Variable Declaration / Assignment
+               | 'while' <Expression> 'do' <Expression>
+               | 'for' Identifier ':=' <Expression> 'to' <Expression> 'do' <Expression>
+               | 'foreach' <Qualified Identifier> 'in' <Expression> 'do' <Expression>
+               | 'foreach' <Qualified Identifier> 'in' <Expression> 'order' 'do' <Expression>
 
 ! For use in arithmetic, requires parentheses around expressions to have proper priorities
 ! e.g. : weight := - car.weight + passengers.weight
 <Value> ::= <Literal>
                | '(' <Expression> ')'
+               | '{' <Expressions> '}'
                | <Qualified Identifier> ! Property or attribute or function call with no argument
                | <Function Call> ! Function call with arguments
-
-! Anything that can be on the left part of an assignment
-! TODO : Set manipulation: (o in DO.All // o.reflect.has("color")).color = Color.Blue
-<L Value> ::= <Qualified Identifier>
+               | 'sync' <Function Calls>
+               | 'async' <Function Calls>
+               | 'new' <Qualified Identifier> ! Empty constructor
+               | 'new' <Function Call> ! Constructor
+               | 'if' <Expression> 'then' <Expression>
+               | 'if' <Expression> 'then' <Expression> 'else' <Expression>
+               | 'return' <Expression>
 
