@@ -6,7 +6,7 @@ implementation
 #! \brief Fibonacci (recursive way)
 immutable function Fibonacci(n) : typeof n
 {
-   if (n < 2)
+   if n < 2 then
        return n;
    return Fibonacci(n - 1) + Fibonacci(n - 2);
 }

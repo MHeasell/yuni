@@ -1,12 +1,10 @@
 # This test checks for complex nested if-else situations
 program NestedIf;
 
-implementation
-
 function main: int
 {
-	if (true)
-		if (4 > 0)
+	if true then
+		if 4 > 0 then
 		{
 			n := 0;
 			if (32 != 21)

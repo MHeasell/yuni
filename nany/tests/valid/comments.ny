@@ -1,8 +1,6 @@
 # This test checks for comment recognition
 program Comments;
 
-implementation
-
 # Simple comment
 function main: int
 {

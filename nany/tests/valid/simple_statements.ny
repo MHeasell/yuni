@@ -6,20 +6,18 @@ uses Dummy.Stupid;
 uses Dummy.Stupid.Clever;
 uses Dummy.Clever;
 
-implementation
-
-function main: int
+function main
 {
 	a: uint16 := 42;
 	{
 		err := 1;
-		if (false)
+		if false then
 			return err;
 	}
-	while (a > 0)
+	while a > 0 do
 	{
 		--a;
-		if (a = 0)
+		if a = 0 then
 			break;
 		else
 			continue;

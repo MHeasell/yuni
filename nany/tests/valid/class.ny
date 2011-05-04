@@ -14,8 +14,8 @@ private
 
 public
     #! A method declaration
-    method name: string;
+    method name: string { "Baka!" }
 
     #! A complete method declaration
-    threadunsafe method boom(t, s: string, k := 0): int;
+    threadunsafe method boom(t, s: string, k := 0) { 0 }
 }
