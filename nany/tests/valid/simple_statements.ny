@@ -13,7 +13,7 @@ function main
 		err := 1;
 		if false then
 			return err;
-	}
+	};
 	while a > 0 do
 	{
 		--a;
