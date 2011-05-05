@@ -203,7 +203,8 @@ Comment End = '*#' | '*/'
 <Expressions> ::= <Expression> <Expressions Continued>
                | ! Empty
 
-<Expressions Continued> ::= ';' <Expressions Continued>
+<Expressions Continued> ::= ';' <Expression> <Expressions Continued>
+               | ';'
                | ! Empty
 
 <Expression>  ::= <Expression> '|' <Or Exp> ! Constraint
@@ -217,12 +218,16 @@ Comment End = '*#' | '*/'
 <And Exp>  ::= <And Exp> 'and' <Compare Exp> ! Boolean And
                | <Compare Exp>
 
-<Compare Exp> ::= <Compare Exp> '>'  <Add Exp> 
-               |  <Compare Exp> '<'  <Add Exp> 
-               |  <Compare Exp> '<=' <Add Exp> 
-               |  <Compare Exp> '>=' <Add Exp>
-               |  <Compare Exp> '=' <Add Exp>     !Equal
-               |  <Compare Exp> '!=' <Add Exp>    !Not equal
+<Compare Exp> ::= <Compare Exp> '>'  <Regexp Exp> 
+               |  <Compare Exp> '<'  <Regexp Exp> 
+               |  <Compare Exp> '<=' <Regexp Exp> 
+               |  <Compare Exp> '>=' <Regexp Exp>
+               |  <Compare Exp> '='  <Regexp Exp>     !Equal
+               |  <Compare Exp> '!=' <Regexp Exp>    !Not equal
+               |  <Regexp Exp>
+
+! Is the priority correct ?
+<Regexp Exp>  ::= <Regexp Exp> '~' <Add Exp>
                |  <Add Exp>
 
 <Add Exp>     ::= <Add Exp> '+' <Mult Exp>
@@ -234,9 +239,14 @@ Comment End = '*#' | '*/'
                |  <Negate Exp>
 
 <Negate Exp>  ::= '-' <Value> 
+               |  '--' <Value>
+               |  '++' <Value>
+               |  <Value> '--'
+               |  <Value> '++'
                |  <Value>
 
-<Void Exp>    ::= <Optional Const Qualifier> <Qualified Identifier> <Return Type Declaration> ':=' <Expression> ! Variable Declaration / Assignment
+<Void Exp>    ::= ConstQualifier <Qualified Identifier> <Return Type Declaration> ':=' <Expression> ! Const Declaration / Assignment
+               | <Qualified Identifier> <Return Type Declaration> ':=' <Expression> ! Variable Declaration / Assignment
                | 'while' <Expression> 'do' <Expression>
                | 'for' Identifier ':=' <Expression> 'to' <Expression> 'do' <Expression>
                | 'foreach' <Qualified Identifier> 'in' <Expression> 'do' <Expression>
@@ -249,8 +259,9 @@ Comment End = '*#' | '*/'
                | '{' <Expressions> '}'
                | <Qualified Identifier> ! Property or attribute or function call with no argument
                | <Function Call> ! Function call with arguments
-               | 'sync' <Function Calls>
-               | 'async' <Function Calls>
+               | 'sync' <Expression>
+               | 'async' <Expression>
+               | '&' <Expression>
                | 'new' <Qualified Identifier> ! Empty constructor
                | 'new' <Function Call> ! Constructor
                | 'if' <Expression> 'then' <Expression>

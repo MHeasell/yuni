@@ -3,5 +3,5 @@ program Test;
 
 function main
 {
-   return 0;
+	0
 }
