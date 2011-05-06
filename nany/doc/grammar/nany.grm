@@ -2,7 +2,8 @@
 "Author"   = 'Bruno BORRI, Damien GERARD'
 "Version"  = '0.1'
 "About"    = 'Grammar for the Nany scripting language, from the Yuni project team'
-
+"Character Mapping" = 'Unicode'
+"Case Sensitive" = 'True'
 "Start Symbol" = <Program>
 
 ! -------------------------------------------------
@@ -125,11 +126,9 @@ Comment End = '*#' | '*/'
 ! Functions and methods
 ! -------------------------------------------------
 
-<Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Content>
+<Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Expression>
 
-<Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Content>
-
-<Function Content> ::= <In Block> <Out Block> <Expression>
+<Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Expression>
 
 <Return Type Declaration> ::= ':' <Type>
                | ! Empty
@@ -155,10 +154,6 @@ Comment End = '*#' | '*/'
 <Optional Visibility Qualifier> ::= VisibilityQualifier
                | ! Empty
 
-<Function Calls> ::= <Function Call> <Function Calls>
-               | ',' <Function Calls>
-               | ! Empty
-
 ! WARNING : We do not define a function call with no parentheses here,
 ! WARNING : it would conflict as reduce-reduce with a simple identifier
 ! WARNING : since there is no way to distinguish them before type-checking.
@@ -170,7 +165,7 @@ Comment End = '*#' | '*/'
                | ! Empty
 
 ! -------------------------------------------------
-! Constraint
+! Constraint blocks
 ! -------------------------------------------------
 
 <In Block> ::= 'in' <Expression>
@@ -204,10 +199,10 @@ Comment End = '*#' | '*/'
                | ! Empty
 
 <Expressions Continued> ::= ';' <Expression> <Expressions Continued>
-               | ';'
                | ! Empty
 
 <Expression>  ::= <Expression> '|' <Or Exp> ! Constraint
+               |  <Expression> ';'
                |  <Or Exp>
                |  <Void Exp>
 
@@ -248,7 +243,8 @@ Comment End = '*#' | '*/'
 <Void Exp>    ::= ConstQualifier <Qualified Identifier> <Return Type Declaration> ':=' <Expression> ! Const Declaration / Assignment
                | <Qualified Identifier> <Return Type Declaration> ':=' <Expression> ! Variable Declaration / Assignment
                | 'while' <Expression> 'do' <Expression>
-               | 'for' Identifier ':=' <Expression> 'to' <Expression> 'do' <Expression>
+               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'do' <Expression>
+               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'inc' <Expression> 'do' <Expression>
                | 'foreach' <Qualified Identifier> 'in' <Expression> 'do' <Expression>
                | 'foreach' <Qualified Identifier> 'in' <Expression> 'order' 'do' <Expression>
 
