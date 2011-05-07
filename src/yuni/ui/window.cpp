@@ -1,5 +1,5 @@
 
-#include "../core/math/math.h"
+#include "../yuni.h"
 #include "window.h"
 #include "adapter/forvirtual.h"
 
