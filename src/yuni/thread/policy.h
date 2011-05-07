@@ -198,10 +198,19 @@ namespace Policy
 		class MutexLocker
 		{
 		public:
-			MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.lock();}
+			MutexLocker()
+			{
+				Mutex::ClassLevelLockable<Host>::mutex.lock();
+			}
 			MutexLocker(const MutexLocker&) {}
-			template<class C> MutexLocker(const C&) {}
-			~MutexLocker() {Mutex::ClassLevelLockable<Host>::mutex.unlock();}
+			template<class C> MutexLocker(const C&)
+			{
+				Mutex::ClassLevelLockable<Host>::mutex.lock();
+			}
+			~MutexLocker()
+			{
+				Mutex::ClassLevelLockable<Host>::mutex.unlock();
+			}
 		}; // class MutexLocker
 
 		/*!
