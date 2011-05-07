@@ -30,7 +30,6 @@ list(APPEND SRC_UI
 	ui/desktop.cpp
 	ui/id.h
 	ui/id.cpp
-	ui/ui.h
 	ui/fwd.h
 
 	# Window

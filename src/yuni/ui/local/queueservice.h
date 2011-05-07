@@ -47,8 +47,8 @@ namespace Local
 		//! Map of all local windows
 		IWindow::Map  pWindows;
 
-
 	}; // class IQueueService<>
+
 
 
 

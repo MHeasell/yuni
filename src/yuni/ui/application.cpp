@@ -2,6 +2,7 @@
 #include "application.h"
 #include <cassert>
 
+
 namespace Yuni
 {
 namespace UI
@@ -14,6 +15,10 @@ namespace UI
 		IComponent::ID NextID = 0;
 
 	} // namespace Anonymous
+
+
+
+
 
 
 	IComponent::ID Application::createID() const
