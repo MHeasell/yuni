@@ -29,7 +29,7 @@ namespace UI
 	}
 
 
-	void Window::updateComponentWL(const IComponent::ID& componentID) const
+	void Window::updateComponentWL(const IComponent::ID& /*componentID*/) const
 	{
 		// FIXME
 		//pLocalEvents.onUpdateComponent(pApplicationGUID, componentID);

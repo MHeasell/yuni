@@ -1,9 +1,9 @@
-#ifndef __YUNI_UI_CONTROL_CONTAINER_H__
-# define __YUNI_UI_CONTROL_CONTAINER_H__
+#ifndef __YUNI_UI_CONTROL_CONTROL_CONTAINER_H__
+# define __YUNI_UI_CONTROL_CONTROL_CONTAINER_H__
 
-# include "../yuni.h"
-# include "../core/smartptr.h"
-# include "../thread/policy.h"
+# include "../../yuni.h"
+# include "../../core/smartptr.h"
+# include "../../thread/policy.h"
 # include "control.h"
 
 
@@ -99,4 +99,4 @@ namespace UI
 
 # include "controlcontainer.hxx"
 
-#endif // __YUNI_UI_CONTROL_CONTAINER_H__
+#endif // __YUNI_UI_CONTROL_CONTROL_CONTAINER_H__

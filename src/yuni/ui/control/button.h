@@ -1,10 +1,9 @@
-#ifndef __YUNI_UI_BUTTON_H__
-# define __YUNI_UI_BUTTON_H__
+#ifndef __YUNI_UI_CONTROL_BUTTON_H__
+# define __YUNI_UI_CONTROL_BUTTON_H__
 
-# include "../yuni.h"
-# include "../thread/policy.h"
-# include "../core/smartptr.h"
-# include "../core/string.h"
+# include "../../yuni.h"
+# include "../../thread/policy.h"
+# include "../../core/string.h"
 # include "control.h"
 
 
@@ -114,9 +113,10 @@ namespace UI
 
 
 
+
 } // namespace UI
 } // namespace Yuni
 
 # include "button.hxx"
 
-#endif // __YUNI_UI_BUTTON_H__
+#endif // __YUNI_UI_CONTROL_BUTTON_H__

@@ -1,6 +1,7 @@
 
 #include "button.h"
 
+
 namespace Yuni
 {
 namespace UI
@@ -24,6 +25,14 @@ namespace UI
 	{
 		destroyBoundEvents();
 	}
+
+
+	String Button::caption() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pCaption;
+	}
+
 
 
 

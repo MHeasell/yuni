@@ -25,12 +25,6 @@ list(APPEND SRC_UI
 	ui/component.h
 	ui/component.hxx
 	ui/component.cpp
-	ui/control.h
-	ui/control.hxx
-	ui/control.cpp
-	ui/controlcontainer.h
-	ui/controlcontainer.hxx
-	ui/controlcontainer.cpp
 	ui/desktop.h
 	ui/desktop.hxx
 	ui/desktop.cpp
@@ -45,9 +39,17 @@ list(APPEND SRC_UI
 	ui/window.cpp
 
 	# Standard Components
-	ui/button.h
-	ui/button.hxx
-	ui/button.cpp
+	ui/control.h
+	ui/control/control.h
+	ui/control/control.hxx
+	ui/control/control.cpp
+	ui/control/controlcontainer.h
+	ui/control/controlcontainer.hxx
+	ui/control/controlcontainer.cpp
+	# Button
+	ui/control/button.h
+	ui/control/button.hxx
+	ui/control/button.cpp
 
 	# Local components
 	ui/local/controls/surface.h

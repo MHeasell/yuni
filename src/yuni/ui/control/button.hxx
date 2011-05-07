@@ -1,5 +1,5 @@
-#ifndef __YUNI_UI_BUTTON_HXX__
-# define __YUNI_UI_BUTTON_HXX__
+#ifndef __YUNI_UI_CONTROL_BUTTON_HXX__
+# define __YUNI_UI_CONTROL_BUTTON_HXX__
 
 
 namespace Yuni
@@ -75,12 +75,6 @@ namespace UI
 	}
 
 
-	inline String Button::caption() const
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return pCaption;
-	}
-
 
 	template<class StringT>
 	inline void Button::caption(const StringT& value)
@@ -95,4 +89,4 @@ namespace UI
 } // namespace UI
 } // namespace Yuni
 
-#endif // __YUNI_UI_BUTTON_HXX__
+#endif // __YUNI_UI_CONTROL_BUTTON_HXX__
