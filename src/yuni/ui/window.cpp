@@ -9,6 +9,26 @@ namespace Yuni
 namespace UI
 {
 
+	Window::~Window()
+	{
+		destroyBoundEvents();
+	}
+
+
+	String Window::title() const
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		return pTitle;
+	}
+
+
+	bool Window::closing() const
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		return pClosing;
+	}
+
+
 	void Window::updateComponentWL(const IComponent::ID& componentID) const
 	{
 		// FIXME

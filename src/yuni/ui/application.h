@@ -8,6 +8,7 @@
 # include "fwd.h"
 # include "window.h"
 
+
 namespace Yuni
 {
 namespace UI
@@ -27,7 +28,6 @@ namespace UI
 		typedef IEventObserver<Application> EventObserverType;
 		//! Threading policy
 		typedef EventObserverType::ThreadingPolicy ThreadingPolicy;
-
 
 	public:
 		//! \name Constructor & Destructor
@@ -70,7 +70,7 @@ namespace UI
 		IComponent::ID createID() const;
 
 
-		//! \name Windows
+		//! \name Windows managmenet
 		//@{
 		//! Add a window to the application
 		void add(const Window::Ptr& wnd);
@@ -100,10 +100,9 @@ namespace UI
 		//! Application string identifier
 		const GUID pGUID;
 		//! Application name, used for display
-		String pName;
+		const String pName;
 		//! Application windows
 		Window::Map pWindows;
-
 
 	private:
 		/*!
@@ -124,6 +123,7 @@ namespace UI
 		friend class Desktop;
 
 	}; // class Application
+
 
 
 

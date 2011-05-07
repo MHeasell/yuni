@@ -17,7 +17,7 @@ namespace Local
 	/*!
 	** \brief Surface for OpenGL Rendering
 	*/
-    class GLSurfac: public Surface
+    class GLSurface: public Surface
 	{
 	public:
 		//! \name Constructor & Destructor
@@ -35,7 +35,7 @@ namespace Local
 
 	protected:
 		//! Make this GL context the current one
-		void makeCurrent() = 0;
+		virtual void makeCurrent() = 0;
 
 	}; // class GLSurface
 

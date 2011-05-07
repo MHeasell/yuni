@@ -7,43 +7,6 @@ namespace Yuni
 namespace UI
 {
 
-	inline Desktop::~Desktop()
-	{
-		destroyBoundEvents();
-	}
-
-
-	inline void Desktop::add(const Application::Ptr& app)
-	{
-		if (!(!app))
-		{
-			ThreadingPolicy::MutexLocker lock(*this);
-			pApps[app->guid()] = app;
-		}
-	}
-
-
-	inline Desktop& Desktop::operator += (const Application::Ptr& app)
-	{
-		if (!(!app))
-		{
-			ThreadingPolicy::MutexLocker lock(*this);
-			pApps[app->guid()] = app;
-		}
-		return *this;
-	}
-
-
-	inline Desktop& Desktop::operator << (const Application::Ptr& app)
-	{
-		if (!(!app))
-		{
-			ThreadingPolicy::MutexLocker lock(*this);
-			pApps[app->guid()] = app;
-		}
-		return *this;
-	}
-
 
 	template<typename StringT>
 	inline void Desktop::remove(const StringT& guid)
@@ -56,16 +19,6 @@ namespace UI
 	}
 
 
-	inline void Desktop::remove(const Application::Ptr& app)
-	{
-		if (!(!app))
-		{
-			ThreadingPolicy::MutexLocker lock(*this);
-			pApps.erase(app->guid());
-		}
-	}
-
-
 	template<typename StringT>
 	inline Desktop& Desktop::operator -= (const StringT& guid)
 	{
@@ -74,17 +27,6 @@ namespace UI
 
 		ThreadingPolicy::MutexLocker lock(*this);
 		pApps.erase(guid);
-		return *this;
-	}
-
-
-	inline Desktop& Desktop::operator -= (const Application::Ptr& app)
-	{
-		if (!(!app))
-		{
-			ThreadingPolicy::MutexLocker lock(*this);
-			pApps.erase(app->guid());
-		}
 		return *this;
 	}
 
