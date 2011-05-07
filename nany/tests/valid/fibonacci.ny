@@ -9,6 +9,13 @@ immutable function Fibonacci(n) : typeof n
    return Fibonacci(n - 1) + Fibonacci(n - 2);
 }
 
+#! \brief Fibonacci (recursive way)
+immutable function Fibonacci2(n)
+{
+   if n < 2 then n else Fibonacci(n - 1) + Fibonacci(n - 2)
+}
+
+
 
 function main(argc, argv) : int
 {
