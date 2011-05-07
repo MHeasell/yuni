@@ -30,10 +30,21 @@ namespace UI
 		static Type New();
 
 	private:
+		//! \name Constructors
+		//@{
+		/*!
+		** \brief Default constructor
+		*/
 		ID();
+		/*!
+		** \brief Copy constructor
+		*/
 		ID(const ID&);
+		//@}
 
-	};
+	}; // class ID
+
+
 
 
 
