@@ -26,7 +26,6 @@ namespace UI
 		typedef std::vector<Ptr> Vector;
 		//! Map of controls
 		typedef std::map<IComponent::ID, Ptr> Map;
-
 		//! Threading Policy
 		typedef IComponent::ThreadingPolicy ThreadingPolicy;
 

@@ -47,19 +47,6 @@ namespace UI
 	}
 
 
-	inline Window::~Window()
-	{
-		destroyBoundEvents();
-	}
-
-
-	inline String Window::title() const
-	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		return pTitle;
-	}
-
-
 	template<class StringT>
 	inline void Window::title(const StringT& newTitle)
 	{
@@ -76,12 +63,6 @@ namespace UI
 		pTitle = newTitle;
 	}
 
-
-	inline bool Window::closing() const
-	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		return pClosing;
-	}
 
 
 

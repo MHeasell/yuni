@@ -69,6 +69,132 @@ namespace UI
 	}
 
 
+	void Application::add(const Window::Ptr& wnd)
+	{
+		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pWindows[wnd->id()] = wnd;
+		}
+	}
+
+
+	Application& Application::operator += (const Window::Ptr& wnd)
+	{
+		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pWindows[wnd->id()] = wnd;
+		}
+		return *this;
+	}
+
+
+	Application& Application::operator += (Window* wnd)
+	{
+		if (wnd)
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pWindows[wnd->id()] = wnd;
+		}
+		return *this;
+	}
+
+
+	Application& Application::operator << (const Window::Ptr& wnd)
+	{
+		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pWindows[wnd->id()] = wnd;
+		}
+		return *this;
+	}
+
+
+	Application& Application::operator << (Window* wnd)
+	{
+		if (wnd)
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pWindows[wnd->id()] = wnd;
+		}
+		return *this;
+	}
+
+
+	void Application::remove(IComponent::ID id)
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		pWindows.erase(id);
+	}
+
+
+	void Application::remove(const Window::Ptr& wnd)
+	{
+		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pWindows.erase(wnd->id());
+		}
+	}
+
+
+	Application& Application::operator -= (IComponent::ID id)
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		pWindows.erase(id);
+		return *this;
+	}
+
+
+	Application& Application::operator -= (Window* wnd)
+	{
+		if (wnd)
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pWindows.erase(wnd->id());
+		}
+		return *this;
+	}
+
+
+	Application& Application::operator -= (const Window::Ptr& wnd)
+	{
+		if (!(!wnd))
+		{
+			ThreadingPolicy::MutexLocker lock(*this);
+			pWindows.erase(wnd->id());
+		}
+		return *this;
+	}
+
+
+	Application::Application()
+	{
+		initialize();
+	}
+
+
+	Application::~Application()
+	{
+		quit();
+	}
+
+
+	const GUID& Application::guid() const
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		return pGUID;
+	}
+
+
+	const String& Application::name() const
+	{
+		ThreadingPolicy::MutexLocker lock(*this);
+		return pName;
+	}
+
 
 
 
