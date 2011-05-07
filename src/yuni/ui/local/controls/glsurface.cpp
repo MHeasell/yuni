@@ -1,6 +1,8 @@
 
 # include "glsurface.h"
-# include <GLUT/glut.h>
+# ifdef YUNI_OS_MACOS
+#	include <GLUT/glut.h>
+# endif
 
 
 namespace Yuni
