@@ -1915,7 +1915,7 @@ namespace Yuni
 		Size assignWithoutChecking(const char c);
 		//! Adapt without any check
 		void adaptWithoutChecking(const char* const cstring, Size size);
-		//! Decal the inner data pointer (must only be used when the class is an adaptor)
+		//! Decal the inner data pointer (must only be used when the class is an adapter)
 		void decalOffset(Size count);
 
 	private:
@@ -1955,7 +1955,7 @@ namespace Yuni
 	** some useless memory allocation.
 	**
 	** \code
-	** StringAdaptor s;
+	** StringAdapter s;
 	** s.adapt("Here is a raw C-string");
 	** std::cout << "length     : " << s.size() << std::endl;
 	** std::cout << "find 'raw' : " << s.find("raw") << std::endl;
@@ -1968,7 +1968,7 @@ namespace Yuni
 	** std::cout << adapter << " (size: " << adapter.size() << ")" << std::endl;
 	** \endcode
 	*/
-	typedef CustomString<0, true, false> StringAdapter;
+	typedef CustomString<0, true, false>  StringAdapter;
 
 
 
