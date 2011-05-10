@@ -122,8 +122,8 @@ Comment End = '*#' | '*/'
 
 <Workflow Transitions> ::= 'default' 'allow' ';' <Workflow Transitions>
                | 'default' 'forbid' ';' <Workflow Transitions>
-               | 'allow' <Workflow Permissions> '=>' Identifier ';' <Workflow Transitions>
-               | 'forbid' <Workflow Permissions> '=>' Identifier ';' <Workflow Transitions>
+               | 'allow' <Workflow Permissions> '=>' <Workflow Permissions> ';' <Workflow Transitions>
+               | 'forbid' <Workflow Permissions> '=>' <Workflow Permissions> ';' <Workflow Transitions>
 
 <Workflow Permission> ::= '*'
                | Identifier
@@ -201,7 +201,7 @@ Comment End = '*#' | '*/'
 ! -------------------------------------------------
 
 <Type> ::= <Qualified Identifier>
-               | 'typeof' Identifier
+               | <Expression>
                | BuiltInType
 
 <Optional Type Parameters> ::= '<' <Type Parameters> '>'
