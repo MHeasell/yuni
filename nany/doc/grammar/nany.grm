@@ -108,8 +108,30 @@ Comment End = '*#' | '*/'
 
 <Workflow Declaration> ::= 'workflow' Identifier '{' <Workflow Content> '}'
 
-! TODO
-<Workflow Content> ::=
+<Workflow Content> ::= <State Block> <Transition Block>
+
+<State Block> ::= 'states' <Workflow States>
+               | ! Empty
+
+<Workflow States> ::= 'default' Identifier ';' <Workflow States>
+               | 'state' Identifier ';' <Workflow States>
+               | ! Empty
+
+<Transition Block> ::= 'transitions' <Workflow Transitions>
+               | ! Empty
+
+<Workflow Transitions> ::= 'default' 'allow' ';' <Workflow Transitions>
+               | 'default' 'forbid' ';' <Workflow Transitions>
+               | 'allow' <Workflow Permissions> '=>' Identifier ';' <Workflow Transitions>
+               | 'forbid' <Workflow Permissions> '=>' Identifier ';' <Workflow Transitions>
+
+<Workflow Permission> ::= '*'
+               | Identifier
+               | '+' Identifier
+               | '-' Identifier
+
+<Workflow Permissions> ::= <Workflow Permission> ',' <Workflow Permissions>
+               | <Workflow Permission>
 
 ! -------------------------------------------------
 ! Enums
