@@ -277,8 +277,6 @@ Comment End = '*#' | '*/'
                | '{' <Expressions> '}'
                | <Qualified Identifier> ! Property or attribute or function call with no argument
                | <Function Call> ! Function call with arguments
-               | 'sync' <Expression>
-               | 'async' <Expression>
                | '&' <Expression>
                | 'new' <Qualified Identifier> ! Empty constructor
                | 'new' <Function Call> ! Constructor

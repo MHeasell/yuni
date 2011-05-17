@@ -1,0 +1,106 @@
+
+
+The Nany Language
+=================
+
+
+Introduction
+------------
+
+
+Expressions
+-----------
+
+In Nany, many things are expressions. There is no actual statement
+that is not an expression. Possible expressions in Nany are as
+follows.
+
+### Literals
+
+* <integer>
+* <string>
+* <real>
+* <boolean>
+
+### Structured types
+
+* <expression> . <identifier>
+* <identifier> [ <expression> ]
+* (<expression>, <expression>, ...)
+* [<expression>..<expression>]
+* [<expression> => <expression>, <expression> => <expression>, ...]
+
+### Function calls
+
+* <identifier>
+* <expression> ( <expression> , <expression>, ...)
+
+### Operators
+
+* - <expression>
+* -- <expression>
+* ++ <expression>
+* <expression> --
+* <expression> ++
+* <expression> + <expression>
+* <expression> - <expression>
+* <expression> * <expression>
+* <expression> / <expression>
+* <expression> % <expression>
+* <expression> < <expression>
+* <expression> > <expression>
+* <expression> <= <expression>
+* <expression> >= <expression>
+* ! <expression>
+* not <expression>
+* <expression> = <expression>
+* <expression> != <expression>
+* <expression> or <expression>
+* <expression> and <expression>
+* <expression> xor <expression>
+* <expression> | <expression>
+* <expression> ~ <expression>
+* <identifier> __in__ <expression>
+* __in__ <expression>
+* <expression> __on__ <expression>
+* <expression> __is__ <expression>
+* <expression> __as__ <expression>
+* & <expression>
+
+### Assignment
+
+Assignments are void expressions.
+
+* <expression> := <expression>
+
+### Allocation
+
+* new <expression>
+* new <expression> ( <expression> , <expression> , ... )
+* new <expression> [ <expression> ]
+* new <expression> [ <expression> ] ( <expression> )
+n := new bool[count];
+foreach i in n do i := false
+"string".size
+
+### Multiple expressions
+
+* <expression> ; <expression>
+* <expression> ; <expression> ;
+* { }
+* { <expression> }
+
+### Conditionals
+
+* __if__ <expression> __then__ <expression>
+* __if__ <expression> __then__ <expression> else <expression>
+
+
+### Loops
+
+Loops are void expressions.
+
+* __for__ <expression>, __order__ <expression> __asc__, step
+  <expression> __do__ <expression>
+* __while__ <expression> __do__ <expression>
+* __do__ <expression> __while__ <expression>
