@@ -17,6 +17,7 @@ list(APPEND SRC_UI
 	ui/local/window/types.h
 	ui/local/window/window.h
 	ui/local/window/window.hxx
+	ui/local/window/window.cpp
 	ui/local/window.h
 
 	ui/application.h

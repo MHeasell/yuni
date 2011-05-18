@@ -1,8 +1,7 @@
 
 # include "glsurface.h"
-# ifdef YUNI_OS_MACOS
-#	include <GLUT/glut.h>
-# endif
+# include <GL/gl.h>
+# include <GL/glu.h>
 
 
 namespace Yuni
@@ -32,6 +31,30 @@ namespace Local
 		// Flush
 		glFlush();
 		return true;
+	}
+
+
+	void GLSurface::resize(float width, float height)
+	{
+		// Prevent A Divide By Zero
+		if (height < 1.f)
+			height = 1.0f;
+
+		if (width < 1.f)
+			width = 1.f;
+
+		// Reset The Current Viewport
+		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+		// Select the Projection Matrix
+		glMatrixMode(GL_PROJECTION);
+		// Reset the Projection Matrix
+		glLoadIdentity();
+		// Calculate the Aspect Ratio of the window
+		gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f);
+		// Select the Modelview Matrix
+		glMatrixMode(GL_MODELVIEW);
+		// Reset the Modelview Matrix
+		glLoadIdentity();
 	}
 
 

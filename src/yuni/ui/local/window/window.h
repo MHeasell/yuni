@@ -2,6 +2,7 @@
 # define __YUNI_UI_LOCAL_WINDOW_WINDOW_H__
 
 # include "../../../yuni.h"
+# include "../../window.h"
 # include "types.h"
 
 
@@ -15,6 +16,11 @@ namespace Local
 {
 namespace Window
 {
+
+	class IWindow;
+
+	//! Temporary window creation routine, TODO : delete me when UI works properly !
+	IWindow* Create();
 
 
 	/*!

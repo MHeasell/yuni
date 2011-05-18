@@ -28,13 +28,10 @@ namespace Local
 
 	bool WGLSurface::initialize()
 	{
-		if (!IMSWindows::initialize())
-			return false;
-
 		// Did We Get A Device Context?
 		if (!(pDC = GetDC(pHWnd)))
 		{
-			close();
+			destroy();
 			MessageBox(NULL, "Can't create a GL device context.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
@@ -70,14 +67,14 @@ namespace Local
 		// Did Windows find a matching pixel format?
 		if (!pixelFormat)
 		{
-			close();
+			destroy();
 			MessageBox(NULL, "Can't find a suitable PixelFormat.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 		// Are We Able To Set The Pixel Format?
 		if (!SetPixelFormat(pDC, pixelFormat, &pfd))
 		{
-			close();
+			destroy();
 			MessageBox(NULL, "Can't set the PixelFormat.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
@@ -85,7 +82,7 @@ namespace Local
 		// Are We Able To Get A Rendering Context?
 		if (!(pRC = wglCreateContext(pDC)))
 		{
-			close();
+			destroy();
 			MessageBox(NULL, "Can't create a GL rendering context.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
@@ -93,7 +90,7 @@ namespace Local
 		// Try To Activate The Rendering Context
 		if (!wglMakeCurrent(pDC, pRC))
 		{
-			close();
+			destroy();
 			MessageBox(NULL, "Can't activate the GL Rendering Context.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
@@ -106,12 +103,12 @@ namespace Local
 		SetFocus(pHWnd);
 
 		// Set up our perspective GL screen
-		OpenGL::resize(pUIWnd->width(), pUIWnd->height());
+		GLSurface::resize(pRect.width(), pRect.height());
 
 		// Initialize our newly created GL window
-		if (!OpenGL::initialize())
+		if (!GLSurface::initialize())
 		{
-			close();
+			destroy();
 			MessageBox(NULL, "Initialization failed.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
