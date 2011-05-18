@@ -7,6 +7,38 @@ The Nany Language
 Introduction
 ------------
 
+Nany (/na.ni/) is meant to be a modern language, created for fast,
+safe, efficient programming in multi-threaded distributed
+environments. It is a very high-level language which offers various
+features to help you write programs :
+* Object orientation
+* Type inference
+* Garbage collection
+* Comprehension lists
+* Parallel and event-driven programming
+* Closures
+* Live Distributed Objects
+* Workflows
+* Duck typing through static constraints
+* Contracts through dynamic constraints
+* Generics
+* Predicates
+* Support for Doxygen comments
+This list is non-exhaustive.
+
+### Hello, World !
+
+It is traditional to offer a "Hello, World !" program to demonstrate
+the overall syntax flavour of the language. Here it is in Nany :
+
+    function main
+    {
+        system.io.println("Hello, World !");
+    }
+
+As you can see, it is very concise, and does not require an object
+for the main function. Also, you can see that the function's return
+type is inferred.
 
 Expressions
 -----------
@@ -94,7 +126,6 @@ foreach i in n do i := false
 
 * __if__ <expression> __then__ <expression>
 * __if__ <expression> __then__ <expression> else <expression>
-
 
 ### Loops
 
