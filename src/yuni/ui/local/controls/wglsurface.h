@@ -38,7 +38,7 @@ namespace Local
 		virtual void destroy();
 
 		//! Refresh the surface
-		virtual void refresh() = 0;
+		virtual void refresh();
 
 	protected:
 		//! Make this GL context the current one

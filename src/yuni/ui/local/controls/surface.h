@@ -25,9 +25,22 @@ namespace Local
 		/*!
 		** \brief Default constructor
 		*/
-		Surface() {}
+		Surface():
+			pRect(0, 0, 1024, 768),
+			pBitDepth(32)
+		{}
+
+		/*!
+		** \brief Constructor with dimensions
+		*/
+		Surface(float width, float height):
+			pRect(0, 0, width, height),
+			pBitDepth(32)
+		{}
+
 		//! Destructor
-		virtual ~Surface() {}
+		virtual ~Surface()
+		{}
 		//@}
 
 		//! Initialize the surface
@@ -39,6 +52,7 @@ namespace Local
 		//! Refresh the surface
 		virtual void refresh() = 0;
 
+
 	protected:
 		/*!
 		** \brief Rectangle in which the surface is drawn
@@ -46,6 +60,14 @@ namespace Local
 		** \note Position is relative to parent
 		*/
 		Rect2D<float> pRect;
+
+		/*!
+		** \brief Color depth
+		**
+		** Unsigned, in bits
+		*/
+		uint32 pBitDepth;
+
 
 	}; // class Surface
 

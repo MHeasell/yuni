@@ -35,7 +35,6 @@ if(Yuni_FOUND)
 	add_subdirectory(threads)
 	add_subdirectory(extra)
 else()
-		
 	YMESSAGE("A working Yuni Framework was not found (could not locate yuni-config).")
 	YMESSAGE("If you are not building from within the source tree, you should define")
 	YMESSAGE("YUNI_CONFIG to the path to the yuni-config binary, e.g.:")

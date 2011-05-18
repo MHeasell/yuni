@@ -15,7 +15,7 @@ namespace Local
 {
 
 	/*!
-	** \brief Surface for OpenGL Rendering
+	** \brief Abstract surface for OpenGL Rendering
 	*/
     class GLSurface: public Surface
 	{
@@ -32,6 +32,10 @@ namespace Local
 
 		//! Initialize the surface
 		bool initialize();
+
+		//! Resize the surface
+		void resize(float width, float height);
+
 
 	protected:
 		//! Make this GL context the current one
