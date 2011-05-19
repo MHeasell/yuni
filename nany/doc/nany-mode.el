@@ -85,14 +85,12 @@
 
 ;; Syntax highlighting
 (defvar nany-font-lock-keywords-1
-  (list
-	'(,nany-keywords-regexp . font-lock-keyword-face)
-	'(,nany-file-keywords-regexp . font-lock-preprocessor-face)
+  `(
+	(,nany-keywords-regexp . font-lock-keyword-face)
+	(,nany-file-keywords-regexp . font-lock-preprocessor-face)
     ;; Method prototype
-    '("^[ \t]*\\(const\\|stable\\|immutable\\)?[ \t]+\\(threadunsafe\\)?[ \t]+\\(method\\|function\\)\\>[ \t]*\\([A-Za-z][A-Za-z0-9_]*\\)"
+    ("^[ \t]*\\(const\\|stable\\|immutable\\)?[ \t]+\\(threadunsafe\\)?[ \t]+\\(method\\|function\\)\\>[ \t]*\\([A-Za-z][A-Za-z0-9_]*\\)"
      (1 font-lock-keyword-face) (5 font-lock-function-name-face))
-	;; Function calls
-	'("\\.*\\([A-Za-z][A-Za-z0-9_]*\\)[ \t]*(" 1 font-lock-function-name-face)
   )
   "Level-1 (subdued) syntax highlighting in Nany mode"
 )
@@ -100,10 +98,10 @@
 (defvar nany-font-lock-keywords-2
   (append
     nany-font-lock-keywords-1
-    (list
-      '(,nany-builtin-types-regexp . font-lock-type-face)
-      '(,nany-operators-regexp . font-lock-symbol-face)
-      '(,nany-constants-regexp . font-lock-constant-face)
+    `(
+      (,nany-builtin-types-regexp . font-lock-type-face)
+      (,nany-operators-regexp . font-lock-symbol-face)
+      (,nany-constants-regexp . font-lock-constant-face)
      )
   )
   "Level-2 (medium) syntax highlighting in Nany mode"
@@ -112,13 +110,18 @@
 (defvar nany-font-lock-keywords-3
   (append
     nany-font-lock-keywords-2
-	(list
-	  '("[A-Za-z][A-Za-z0-9_]*" . font-lock-variable-name-face)
-      '("[0-9]+" . font-lock-constant-face)
+	`(
+	  ;; Function calls
+	  ("\\.*\\([A-Za-z][A-Za-z0-9_]*\\)[ \t]*(" 1 font-lock-function-name-face)
+	  ;; Class names
+	  ("\\.*class[ \t]*\\([A-Za-z][A-Za-z0-9_]*\\)" 1 font-lock-type-face)
     )
   )
   "Level-3 (gaudy) syntax highlighting in Nany mode"
 )
+
+(defvar nany-font-lock-keywords (append nany-font-lock-keywords-1 nany-font-lock-keywords-2 nany-font-lock-keywords-3))
+
 
 (defcustom nany-indent-level 4
   "Indentation of Nany statements with respect to containing block."
@@ -268,16 +271,8 @@
   ;; Use tab indents
   (set (make-local-variable 'indent-tabs-mode) t)
   ;; Font lock
-  (if (string-match "Xemacs" emacs-version)
-    (progn
-	  (make-local-variable 'font-lock-keywords)
-	  (setq font-lock-keywords-1 nany-font-lock-keywords-2 nany-font-lock-keywords-3)
-    )
-    ;; Emacs
-    (make-local-variable 'font-lock-defaults)
-    (setq font-lock-defaults
-	  '((nany-font-lock-keywords-1 nany-font-lock-keywords-2 nany-font-lock-keywords-3) nil t))
-  )
+  (make-local-variable 'font-lock-defaults)
+  (setq font-lock-defaults '(nany-font-lock-keywords t))
   ;; Indentation
   (set (make-local-variable 'indent-line-function) 'nany-indent-line)
   ;; Hooks
