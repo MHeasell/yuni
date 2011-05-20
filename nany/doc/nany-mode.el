@@ -33,10 +33,9 @@
     (modify-syntax-entry ?\] ")[" table)
     (modify-syntax-entry ?\{ "(}" table)
     (modify-syntax-entry ?\} "){" table)
-    (modify-syntax-entry ?# "<" table)
-    (modify-syntax-entry ?\n ">" table)
-    (modify-syntax-entry ?' "'" table)
-    (modify-syntax-entry ?\" "\"" table)
+    (modify-syntax-entry ?/ ".124b" table)
+    (modify-syntax-entry ?* ".23" table)
+    (modify-syntax-entry ?\n "> b" table)
     table
   )
 )
@@ -44,7 +43,7 @@
 
 ;; Keywords
 (defconst nany-keywords
-  '("and" "as" "async" "catch" "check" "class" "clone" "const" "distributed" "do" "else" "every" "for" "foreach" "function" "if" "in" "immutable" "is" "method" "new" "not" "notify" "operator" "on" "or" "persistent" "predicate" "property" "read" "ref" "return" "self" "shared" "stable" "sync" "then" "threadunsafe" "type" "typeof" "variadic" "while" "write" "xor")
+  '("allow" "and" "as" "async" "catch" "check" "class" "clone" "const" "default" "distributed" "do" "else" "every" "for" "forbid" "foreach" "function" "if" "in" "immutable" "is" "method" "new" "not" "notify" "operator" "on" "or" "persistent" "predicate" "private" "property" "protected" "public" "published" "read" "ref" "return" "self" "shared" "stable" "sync" "then" "threadunsafe" "state" "states" "transitions" "type" "typeof" "variadic" "while" "workflow" "write" "xor" "yield")
   "Nany keywords"
 )
 ;; Regexped version
@@ -68,11 +67,21 @@
 
 ;; Operators
 (defconst nany-operators
-  '(":" "\\=\\>" "\\>" "\\-\\>" "\\<" "\\<\\=" ":\\=" "\\=" "\\>\\=")
+  '(":" "\\=\\>" "\\>" "\\-\\>" "\\<" "\\<\\=" ":\\=" "\\=" "\\>\\=" "\\|")
   "Nany operators"
 )
+
 ;; Regexped version
 (defvar nany-operators-regexp (regexp-opt nany-operators 'words))
+
+;; Special operators for Multi-threading need to appear clearly
+(defconst nany-special-operators
+  '("[|&]")
+  "Nany special operators"
+)
+
+;; Regexped version
+(defvar nany-special-operators-regexp (regexp-opt nany-special-operators 'words))
 
 ;; Constants
 (defvar nany-constants
@@ -86,11 +95,22 @@
 ;; Syntax highlighting
 (defvar nany-font-lock-keywords-1
   `(
+	;; All sorts of comments :
+	;; //!
+	("\\(//!\\)\\(.*\\)$"  (1 font-lock-comment-delimiter-face) (2 font-lock-doc-face))
+	;; /* */
+;	("/\\*" ".*\\*/" 0 font-lock-comment-face)
+	;; //
+	("//.*$"  . font-lock-comment-face)
+	;; #!
+	("\\(#!\\)\\(.*\\)$"  (1 font-lock-comment-delimiter-face) (2 font-lock-doc-face))
+	;; #* *#
+;	("#\\*" ".*\\*#" 0 font-lock-comment-face)
+	;; #
+	("#.*$" . font-lock-comment-face)
 	(,nany-keywords-regexp . font-lock-keyword-face)
 	(,nany-file-keywords-regexp . font-lock-preprocessor-face)
-    ;; Method prototype
-    ("^[ \t]*\\(const\\|stable\\|immutable\\)?[ \t]+\\(threadunsafe\\)?[ \t]+\\(method\\|function\\)\\>[ \t]*\\([A-Za-z][A-Za-z0-9_]*\\)"
-     (1 font-lock-keyword-face) (5 font-lock-function-name-face))
+	(,nany-constants-regexp . font-lock-constant-face)
   )
   "Level-1 (subdued) syntax highlighting in Nany mode"
 )
@@ -100,8 +120,10 @@
     nany-font-lock-keywords-1
     `(
       (,nany-builtin-types-regexp . font-lock-type-face)
-      (,nany-operators-regexp . font-lock-symbol-face)
-      (,nany-constants-regexp . font-lock-constant-face)
+      (,nany-operators-regexp . font-lock-reference-face)
+	  (,nany-special-operators . font-lock-warning-face)
+	  ("\"" ".*\"" 0 font-lock-string-face)
+	  ("\'.\'" 0 font-lock-string-face)
      )
   )
   "Level-2 (medium) syntax highlighting in Nany mode"
@@ -111,10 +133,14 @@
   (append
     nany-font-lock-keywords-2
 	`(
+	  ;; Method prototype
+	  ("[^ \t]*\\(method\\|function\\)[ \t]+\\([A-Za-z][A-Za-z0-9_]*\\)" (2 font-lock-function-name-face))
 	  ;; Function calls
-	  ("\\.*\\([A-Za-z][A-Za-z0-9_]*\\)[ \t]*(" 1 font-lock-function-name-face)
+	  ("\\.*\\([A-Za-z][A-Za-z0-9_]*\\)[ \t]*(" (1 font-lock-function-name-face))
 	  ;; Class names
-	  ("\\.*class[ \t]*\\([A-Za-z][A-Za-z0-9_]*\\)" 1 font-lock-type-face)
+	  ("\\.*\\(new\\|class\\|workflow\\|predicate\\)[ \t]*\\([A-Za-z][A-Za-z0-9_]*\\)" 2 font-lock-type-face)
+	  ;; Variables and attributes
+	  ("\\.*\\([A-Za-z][A-Za-z0-9_]*\\)[ \t]*:=" (1 font-lock-variable-name-face))
     )
   )
   "Level-3 (gaudy) syntax highlighting in Nany mode"
@@ -266,8 +292,8 @@
   ;; Syntax table
   (set-syntax-table nany-mode-syntax-table)
   ;; Comments
-;  (set (make-local-variable 'comment-start) "#")
-;  (set (make-local-variable 'comment-end) "")
+  (set (make-local-variable 'comment-start) "#")
+  (set (make-local-variable 'comment-end) "")
   ;; Use tab indents
   (set (make-local-variable 'indent-tabs-mode) t)
   ;; Font lock

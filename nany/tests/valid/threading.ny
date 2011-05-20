@@ -19,5 +19,5 @@ function main
    // Wait for the result of a and b, then compute a+b
    c := a + b;
    // Print the result
-   println("a"+ b = ", c);
+   println("a+ b = ", c);
 }
