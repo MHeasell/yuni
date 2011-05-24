@@ -31,14 +31,109 @@ This list is non-exhaustive.
 It is traditional to offer a "Hello, World !" program to demonstrate
 the overall syntax flavour of the language. Here it is in Nany :
 
+    program HelloWorld;
+
     function main
     {
         system.io.println("Hello, World !");
     }
 
-As you can see, it is very concise, and does not require an object
-for the main function. Also, you can see that the function's return
-type is inferred.
+As you can see, it is very concise, and does not require a class to
+encapsulate the main function (as is the case in Java and C#). Also,
+you can see that the function's return type is inferred.
+
+
+Typing
+------
+
+### Built-in types
+
+Nany offers several built-in types :
+* uint
+* uint8
+* uint16
+* uint32
+* uint64
+* uint128
+* int
+* int8
+* int16
+* int32
+* int64
+* int128
+* float
+* double
+* double128
+* bool
+* any
+
+Any represents any one type. Depending on circumstances, the
+corresponding type may be known at compile time or not.
+
+### Type inference
+
+Nany uses type inference, which means explicit typing of variables,
+function parameters, and function return types is optional. Type
+inference forbids overload with the same number of parameters. For
+example :
+
+    public function foo(i) { system.io.println("" << i); }
+
+    public function foo(s: string) { system.io.println(s); }
+
+would generate a compile error, because a call to `foo` with a
+string argument would be ambiguous. However, if the number of
+arguments is different, the call is not ambiguous and the program is
+valid :
+
+    public function foo(i) { system.io.println("" << i); i }
+
+    public function foo(i, j) { system.io.println("" << i); j }
+
+
+### Type constraints
+
+It is possible to provide explicit and implicit constraints on types,
+which will be evaluated statically when possible, dynamically when
+not.
+
+Duck typing example (implicit constraint on type) :
+
+    public function foo(a): int
+    {
+        a.bar(42)
+    }
+
+Implicitly, this code requires that variable `a` be of a type that
+defines a method with the following prototype :
+
+    public method bar(x: int): int
+
+Conversely, it is possible to specify the constraint explicitly :
+
+    public function foo(a): int
+    in
+        typeof(a).hasMethod("bar", int, int);
+    {
+        a.bar(42)
+    }
+
+The two samples are equivalent.
+
+They will be evaluated statically (at compile time) on all calls
+where the type is known at compilation. If the constraint is
+violated, the compiler will produce an error.
+
+If the type is not known at compile time, the constraint will be
+evaluated dynamically (during execution). If the constraint is
+violated, the program will throw an exception (this is the default,
+but the behaviour can be modified).
+
+__Compiler implementation tip: we advise to implement duck typing
+using hidden constraints for coherency. For example, if the developer
+wrote the first sample, the compiler would automatically generate the
+constraint from the second sample.__
+
 
 Expressions
 -----------
@@ -49,10 +144,11 @@ follows.
 
 ### Literals
 
-* <integer>
-* <string>
-* <real>
-* <boolean>
+* <integer literal>
+* <real literal>
+* <string literal>
+* <boolean literal>
+* <nil>
 
 ### Structured types
 
