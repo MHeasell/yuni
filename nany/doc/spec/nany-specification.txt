@@ -32,7 +32,7 @@ It is traditional to offer a "Hello, World !" program to demonstrate
 the overall syntax flavour of the language. Here it is in Nany :
 
     program HelloWorld;
-
+    
     function main
     {
         system.io.println("Hello, World !");
@@ -41,6 +41,109 @@ the overall syntax flavour of the language. Here it is in Nany :
 As you can see, it is very concise, and does not require a class to
 encapsulate the main function (as is the case in Java and C#). Also,
 you can see that the function's return type is inferred.
+
+
+Basics
+------
+
+### Comments
+
+Nany allows for several types of comments and several syntaxes for
+each type.
+
+#### In-line comments
+
+In-line comments can be written either with `#` or with `//` :
+
+    doSomething(a, b); // This will call the doSomething function on a and b
+    doNothing;         # This does not do much actually
+
+#### Multi-line comments
+
+Multi-line comments can be written either with `#* *#` or with `/* */` :
+
+    doSomething; /* This is a multi-line
+    comment that can spread
+    quite far */ doSomethingElse; #* This is another
+    comment *#
+
+#### Doxygen comments
+
+It is possible to write Doxygen-style comments for automatic code
+documentation :
+
+    #*!
+    ** \brief Get the length of an object
+    *#
+    function length(s): int { s.length }
+
+### Variables
+
+The syntax for variable declaration is as follows :
+
+    <identifier> : <type> := <expression>;
+
+Variable declaration in Nany requires initialization. If there is no
+initialization, the default value for the specified type will be used.
+Since types are inferred, it is not mandatory to specify the type.
+However, it is not allowed to write neither the type nor the
+initialization, since the identifier would then be interpreted as a
+return value instead of a declaration.
+
+Some examples of variable declaration
+
+    program VariableDeclarations;
+    
+    class A { create() {} }
+    
+    function main
+    {
+        i := 0;        // integer
+        j := 42u;      // unsigned integer
+        s : string;    // string, will be initialized to ""
+        a: A := new A; // class A
+        aa: A;         // class A, will be initialized to nil
+        b              // ERROR : unknown identifier used as return value
+    }
+
+### Functions
+
+In Nany, it is not possible to declare a function without defining it
+(there is no forward declaration). The full syntax for defining a
+function is as follows :
+
+    function <identifier>(<identifier>: <type>, <identifier>: <type>): <type>
+    {
+        <expression>
+    }
+
+Since types are inferred, all types in the declaration are optional.
+Also, in Nany, parentheses are optional on function declarations and
+function calls if there is no argument. For example :
+
+    program Test;
+    
+    function doSomething
+    {
+        // snip
+    }
+    
+    function main
+    {
+        doSomething;
+        0
+    }
+
+Following these principles, these two functions are exactly
+equivalent :
+
+    function main { 0 }
+
+    function main() : int { 0 }
+
+
+### Classes
+
 
 
 Typing
@@ -70,7 +173,44 @@ Nany offers several built-in types :
 Any represents any one type. Depending on circumstances, the
 corresponding type may be known at compile time or not.
 
-### Type inference
+
+### Type manipulation
+
+#### typeof
+
+    typeof(Expression)
+
+The `typeof` function evaluates the type of an expression and
+returns it.
+
+#### is
+
+    Expression is Type
+
+The `is` binary operator evaluates whether the left-hand operand
+has or inherits a given type. It will return a boolean with the
+answer.
+
+#### as
+
+    Expression as Type
+
+The `as` binary operator tries to cast the left-hand operand into
+the right-hand operand (which must be a type). If the cast fails,
+it returns `nil`;
+
+#### Combining it all
+
+    function foo(s, t)
+    {
+        s := getValue;
+        t := getOtherValue;
+        if s is typeof(t) then
+	        return s as typeof(t);
+    }
+
+
+### Type inference and overloading
 
 Nany uses type inference, which means explicit typing of variables,
 function parameters, and function return types is optional. Type
@@ -78,17 +218,29 @@ inference forbids overload with the same number of parameters. For
 example :
 
     public function foo(i) { system.io.println("" << i); }
-
+    
     public function foo(s: string) { system.io.println(s); }
 
 would generate a compile error, because a call to `foo` with a
-string argument would be ambiguous. However, if the number of
-arguments is different, the call is not ambiguous and the program is
-valid :
+string argument would be ambiguous.
+
+If the number of arguments is different, the call is not ambiguous
+and the program is valid :
 
     public function foo(i) { system.io.println("" << i); i }
-
+    
     public function foo(i, j) { system.io.println("" << i); j }
+
+Considering the following :
+
+    public function foo(i: int) { system.io.println("" << i); }
+    
+    public function foo(s: string) { system.io.println(s); }
+
+it would seem that the call is not ambiguous, since both types were
+explicitly given. However, Nany does not allow this, and offers a
+different way to express the same idea using specializations (see
+function specializations).
 
 
 ### Type constraints
