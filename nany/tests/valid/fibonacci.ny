@@ -16,8 +16,7 @@ immutable function Fibonacci2(n)
 }
 
 
-
-function main(argc, argv) : int
+function main : int
 {
    print(Fibonacci(10));
    return 0;
