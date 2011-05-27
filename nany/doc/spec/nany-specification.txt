@@ -77,11 +77,16 @@ documentation :
     *#
     function length(s): int { s.length }
 
+    /*!
+    ** \brief Get the number of items in a container
+    */
+    function count(c): int { c.count }
+
 ### Variables
 
 The syntax for variable declaration is as follows :
 
-    <identifier> : <type> := <expression>;
+    <identifier> : <type> := <expression> ;
 
 Variable declaration in Nany requires initialization. If there is no
 initialization, the default value for the specified type will be used.
@@ -112,7 +117,7 @@ In Nany, it is not possible to declare a function without defining it
 (there is no forward declaration). The full syntax for defining a
 function is as follows :
 
-    function <identifier>(<identifier>: <type>, <identifier>: <type>): <type>
+    <qualifier> function <identifier>(<identifier>: <type>, <identifier>: <type>, ...): <type>
     {
         <expression>
     }
@@ -144,6 +149,151 @@ equivalent :
 
 ### Classes
 
+Since Nany offers object orientation, there are classes. This is the
+syntax for class definitions :
+
+    class <identifier>
+    {
+    }
+
+Note there is no required `;` (semi-comma) after the `}` (right curly
+brace).
+
+#### Attributes
+
+The syntax for class attributes is similar to simple variable
+definitions :
+
+    class <identifier>
+    {
+        <qualifier> <identifier> : <type> := <expression> ;
+    }
+
+Once again, you need to provide either typing or an initialization
+value.
+
+#### Methods
+
+The syntax for class methods uses a `method` keyword similarly to the
+way functions are defined :
+
+    class <identifier>
+    {
+        <qualifier> method <identifier> (<identifier> : <type>, <identifier> : <type>, ...) : <type>
+        {
+            # Method body here
+        }
+    }
+
+Just as functions can not be forward-declared, methods must be
+defined directly in the class, as it is done in Java or C#. It is up
+to the tools to extract a clean public interface for external use.
+
+#### Visibility
+
+There are four visibilities available inside classes :
+* `published` : `public` and accessible in the tools' interface designer
+* `public` : Accessible by any code that uses the containing module
+* `protected` : Accessible by the class itself and its inheritors
+* `private` : Only accessible by the class itself
+
+__Default visibility for classes, methods and attributes is `public`__
+
+Syntax for visibility in classes is as follows :
+
+    published class A
+    {
+    private
+        myPrivateInt := 0;
+        myPrivateString := "";
+    public
+        method myPublicMethod { return myPrivateString.length + myPrivateInt }
+    }
+
+#### Operator overloading
+
+It is possible to overload most operators using the `operator` keyword.
+
+    class MyInteger
+    {
+    private
+        value: int;
+
+    public
+        operator + (x) { value + x }
+
+        operator * (x) { value * x }
+    }
+
+#### Generics
+
+Nany offers C#-like generics for classes. They are useful for generic
+static typing of attributes. They do not offer the same expressivity
+as C++ templates, because type inference, constraints and
+specializations already cater to all these needs (see related
+chapters).
+
+The syntax is a lot like C# generics too :
+
+    class Pair<K, V>
+    {
+    private
+        key: K;
+        value: V;
+
+    public
+        operator [k] { value }
+    }
+
+To apply explicit constraints on generic types, see the specific
+chapter on type constraints.
+
+
+#### Sample
+
+This sample class illustrates what a class would look like in Nany :
+
+    /*!
+    ** \brief Naive vector implementation
+    */
+    class Vector<T>
+    {
+    private
+        const MaxSize := 65536u;
+        pData := new T[MaxSize];
+		pSize := 0u;
+
+    public
+        method get(i)
+        {
+            pData[i]
+        }
+
+        method set(i, value)
+        {
+            pData[pSize++] := value
+        }
+
+		operator [i](value)
+        {
+            set(i, value)
+        }
+
+		operator [i]
+        {
+            get(i)
+        }
+
+        method add(value)
+        {
+            pData[i]
+        }
+
+		method size
+        {
+            pSize
+        }
+    }
 
 
 Typing
