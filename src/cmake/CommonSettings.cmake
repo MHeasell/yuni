@@ -23,7 +23,7 @@ string(REPLACE "/CommonSettings.cmake" "" CurrentFolder "${CurrentFolder}")
 #
 include("${CurrentFolder}/DetectInstructionsSets.cmake")
 
-set(YUNI_COMMON_GCC_OPTIONS  "-D_FILE_OFFSET_BITS=64 -Woverloaded-virtual -Wall -Wextra -Wunused-parameter -Wconversion")
+set(YUNI_COMMON_GCC_OPTIONS  "-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Woverloaded-virtual -Wall -Wextra -Wunused-parameter -Wconversion")
 set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -Wmissing-noreturn -Wcast-align  -Wfloat-equal -Wundef")
 
 if(NOT WIN32)
