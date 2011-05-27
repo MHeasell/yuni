@@ -43,7 +43,7 @@
 
 ;; Keywords
 (defconst nany-keywords
-  '("allow" "and" "as" "async" "catch" "check" "class" "clone" "const" "default" "distributed" "do" "else" "every" "for" "forbid" "foreach" "function" "if" "in" "immutable" "is" "method" "new" "not" "notify" "operator" "on" "or" "persistent" "predicate" "private" "property" "protected" "public" "published" "read" "ref" "return" "self" "shared" "stable" "sync" "then" "threadunsafe" "state" "states" "transitions" "type" "typeof" "variadic" "while" "workflow" "write" "xor" "yield")
+  '("allow" "and" "as" "async" "catch" "check" "class" "clone" "const" "default" "distributed" "do" "else" "every" "for" "forbid" "foreach" "function" "if" "in" "immutable" "is" "method" "new" "not" "notify" "operator" "on" "or" "persistent" "predicate" "private" "property" "protected" "public" "published" "read" "ref" "return" "self" "shared" "stable" "sync" "then" "threadunsafe" "state" "states" "transitions" "type" "typeof" "variadic" "when" "while" "workflow" "write" "xor" "yield")
   "Nany keywords"
 )
 ;; Regexped version
@@ -72,7 +72,7 @@
 )
 
 ;; Regexped version
-(defvar nany-operators-regexp (regexp-opt nany-operators 'words))
+(defvar nany-operators-regexp (regexp-opt nany-operators))
 
 ;; Special operators for Multi-threading need to appear clearly
 (defconst nany-special-operators
@@ -81,7 +81,7 @@
 )
 
 ;; Regexped version
-(defvar nany-special-operators-regexp (regexp-opt nany-special-operators 'words))
+(defvar nany-special-operators-regexp (regexp-opt nany-special-operators))
 
 ;; Constants
 (defvar nany-constants
