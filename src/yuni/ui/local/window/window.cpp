@@ -45,7 +45,7 @@ namespace Window
 		// Try to initialize
 		if (!wnd || !wnd->initialize())
 		{
-			wnd->onClose();
+			wnd->close();
 			delete wnd;
 			return nullptr;
 		}

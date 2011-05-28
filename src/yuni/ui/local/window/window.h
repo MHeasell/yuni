@@ -90,6 +90,9 @@ namespace Window
 		//! Hide the window
 		virtual void hide() = 0;
 
+		//! Close the window
+		virtual void close();
+
 		//! Minimize the window
 		virtual void minimize() = 0;
 
