@@ -1,4 +1,6 @@
 
+#include <iostream>
+#include "../../../core/string.h"
 #include "glxsurface.h"
 
 namespace Yuni
@@ -12,7 +14,7 @@ namespace Local
 
 
 	GLXSurface::GLXSurface(::Display* display):
-		pDisplay(pDisplay)
+		pDisplay(display)
 	{}
 
 
@@ -49,18 +51,12 @@ namespace Local
 		pAttr.border_pixel = BlackPixel(pDisplay, vinfo->screen);
 		pAttr.event_mask = ExposureMask | KeyPressMask | ButtonPressMask | StructureNotifyMask;
 
-		if (pFullScreen)
-		{
-			pAttr.override_redirect = True;
-		}
-
 		pWindow = XCreateWindow(pDisplay, root, 30, 30,
-			(unsigned int)pUIWnd->width(), (unsigned int)pUIWnd->height(), 0,
+			(unsigned int)pRect.width(), (unsigned int)pRect.height(), 0,
 			vinfo->depth, CopyFromParent, vinfo->visual,
 			CWBackPixel | CWBorderPixel | CWColormap | CWEventMask, &pAttr);
 
 		XMapWindow(pDisplay, pWindow);
-		XStoreName(pDisplay, pWindow, String::CString(pUIWnd->title()));
 
 		pContext = ::glXCreateContext(pDisplay, vinfo, NULL, True);
 		if (NULL == pContext)
@@ -74,8 +70,8 @@ namespace Local
 			std::cerr << "DRI not available" << std::endl;
 			return false;
 		}
-		resize(pUIWnd->width(), pUIWnd->height());
-		if (!Surface::OpenGL::initialize())
+		resize(pRect.width(), pRect.height());
+		if (!GLSurface::initialize())
 		{
 			std::cerr << "GL initialization failed" << std::endl;
 			return false;
@@ -86,13 +82,21 @@ namespace Local
 	}
 
 
+	void GLXSurface::fullScreen(bool isFullScreen)
+	{
+		isFullScreen = isFullScreen;
+		// TODO
+	}
+
+
 	void GLXSurface::destroy()
-	{}
+	{
+	}
 
 
 	void GLXSurface::makeCurrent()
 	{
-		glxMakeCurrent(pDisplay, pWindow, pContext);
+		glXMakeCurrent(pDisplay, pWindow, pContext);
 	}
 
 

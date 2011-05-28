@@ -37,6 +37,9 @@ namespace Local
 		//! Destroy the surface
 		virtual void destroy();
 
+		//! Set whether the surface must be shown in full screen
+		virtual void fullScreen(bool isFullScreen);
+
 	protected:
 		//! Make this GL context the current one
 		void makeCurrent();

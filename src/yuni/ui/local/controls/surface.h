@@ -52,6 +52,9 @@ namespace Local
 		//! Refresh the surface
 		virtual void refresh() = 0;
 
+		//! Set whether the surface must be shown in full screen
+		virtual void fullScreen(bool isFullScreen) = 0;
+
 
 	protected:
 		/*!

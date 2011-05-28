@@ -138,6 +138,12 @@ namespace Window
 	}
 
 
+	inline void IWindow::close()
+	{
+		onClose();
+	}
+
+
 	inline void IWindow::onCloseQuery(bool& /*canClose*/)
 	{
 		std::cout << "Caught Close event !" << std::endl;
