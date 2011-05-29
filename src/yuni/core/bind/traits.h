@@ -2081,7 +2081,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A0>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0)>
 
@@ -2138,7 +2138,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A1>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1)>
 
@@ -2195,7 +2195,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A2>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2)>
 
@@ -2252,7 +2252,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A3>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3)>
 
@@ -2309,7 +2309,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A4>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4)>
 
@@ -2366,7 +2366,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A5>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5)>
 
@@ -2423,7 +2423,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A6>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6)>
 
@@ -2480,7 +2480,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A7>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6, A7)>
 
@@ -2537,7 +2537,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A8>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
 
@@ -2594,7 +2594,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A9>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
 
@@ -2651,7 +2651,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A10>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
 
@@ -2708,7 +2708,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A11>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
 
@@ -2765,7 +2765,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A12>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
 
@@ -2822,7 +2822,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A13>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
 
@@ -2879,7 +2879,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A14>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
 
@@ -2936,7 +2936,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A15>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
 
@@ -3961,7 +3961,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0)>
 
@@ -4022,7 +4022,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1)>
 
@@ -4083,7 +4083,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2)>
 
@@ -4144,7 +4144,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3)>
 
@@ -4205,7 +4205,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4)>
 
@@ -4266,7 +4266,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5)>
 
@@ -4327,7 +4327,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6)>
 
@@ -4388,7 +4388,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
 
@@ -4449,7 +4449,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
 
@@ -4510,7 +4510,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
 
@@ -4571,7 +4571,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
 
@@ -4632,7 +4632,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
 
@@ -4693,7 +4693,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
 
@@ -4754,7 +4754,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
 
@@ -4815,7 +4815,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
 
@@ -4876,7 +4876,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
 
