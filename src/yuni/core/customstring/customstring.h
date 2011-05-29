@@ -1174,6 +1174,21 @@ namespace Yuni
 		bool startsWith(char c) const;
 
 		/*!
+		** \brief Get if a given string can be found at the begining (case insensitive)
+		*/
+		bool istartsWith(const char* const cstr, const Size len) const;
+
+		/*!
+		** \brief Get if a given string can be found at the begining (case insensitive)
+		*/
+		template<class StringT> bool istartsWith(const StringT& s) const;
+
+		/*!
+		** \brief Get if a given char can be found at the begining (case insensitive)
+		*/
+		bool istartsWith(char c) const;
+
+		/*!
 		** \brief Get if a given string can be found at the end
 		*/
 		bool endsWith(const char* const cstr, const Size len) const;
@@ -1189,6 +1204,23 @@ namespace Yuni
 		** \param c Any char
 		*/
 		bool endsWith(char c) const;
+
+		/*!
+		** \brief Get if a given string can be found at the end (case insensitive)
+		*/
+		bool iendsWith(const char* const cstr, const Size len) const;
+
+		/*!
+		** \brief Get if a given string can be found at the end (case insensitive)
+		** \param s Any string
+		*/
+		template<class StringT> bool iendsWith(const StringT& s) const;
+
+		/*!
+		** \brief Get if a given string can be found at the end (case insensitive)
+		** \param c Any char
+		*/
+		bool iendsWith(char c) const;
 		//@}
 
 

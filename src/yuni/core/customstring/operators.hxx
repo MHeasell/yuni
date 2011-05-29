@@ -10,7 +10,7 @@
 template<unsigned int SizeT, bool ExpT,bool ZeroT>
 inline std::ostream& operator << (std::ostream& out, const Yuni::CustomString<SizeT,ExpT,ZeroT>& rhs)
 {
-	out.write(rhs.data(), rhs.size());
+	out.write(rhs.data(), static_cast<std::streamsize>(rhs.size()));
 	return out;
 }
 

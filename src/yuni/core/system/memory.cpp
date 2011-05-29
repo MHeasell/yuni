@@ -257,15 +257,16 @@ namespace Memory
 #ifdef YUNI_OS_MAC
 #define SYSTEM_MEMORY_IS_IMPLEMENTED
 
-	size_t Total()
+	uint64 Total()
 	{
 		int mib[2] = {CTL_HW, HW_MEMSIZE};
 		uint64 memory;
 		size_t len = sizeof(uint64);
-		return (!sysctl(mib, 2, &memory, &len, NULL, 0)) ? memory : (size_t) defaultTotal;
+		return (!sysctl(mib, 2, &memory, &len, NULL, 0)) ? memory : (uint64) defaultTotal;
 	}
 
-	size_t Available()
+
+	uint64 Available()
 	{
 		// Good readings :)
 		// http://www.booktou.com/node/148/0321278542/ch06lev1sec3.html
@@ -280,8 +281,9 @@ namespace Memory
 		vm_size_t  page_size;
 		host_page_size(host, &page_size);
 
-		return (size_t) (vm_stat.free_count) * (size_t) page_size;
+		return (uint64) (vm_stat.free_count) * (uint64) page_size;
 	}
+
 
 	bool Usage::update()
 	{
@@ -291,11 +293,13 @@ namespace Memory
 		// Total
 		int mib[2] = {CTL_HW, HW_MEMSIZE};
 		size_t len = sizeof(uint64);
-		if (sysctl(mib, 2, &total, &len, NULL, 0))
+		size_t sttotal;
+		if (sysctl(mib, 2, &sttotal, &len, NULL, 0))
 		{
-			total = (size_t) defaultTotal;
+			total = (uint64) defaultTotal;
 			return false;
 		}
+		total = (uint64) sttotal;
 		return true;
 	}
 
