@@ -19,7 +19,7 @@ namespace Memory
 	** value will be used. (see defaultAvailable)
 	** \return A value in bytes
 	*/
-	size_t Total();
+	uint64 Total();
 
 
 	/*!
@@ -29,7 +29,7 @@ namespace Memory
 	** value will be used. (see defaultAvailable)
 	** \return A value in bytes
 	*/
-	size_t Available();
+	uint64 Available();
 
 
 
@@ -71,9 +71,9 @@ namespace Memory
 
 	public:
 		//! The amount of the available physical memory (in bytes)
-		size_t available;
+		uint64 available;
 		//! The amount of the total physical memory (in bytes)
-		size_t total;
+		uint64 total;
 
 	}; // class Usage
 

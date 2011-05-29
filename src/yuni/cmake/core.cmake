@@ -115,6 +115,8 @@ if(YUNI_HAS_GCC_CPP0X_SUPPORT)
 	set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
 endif()
 check_cxx_source_compiles("
+    #include <cstddef>
+	typedef std::nullptr_t NullPtr;
 	class A {}; int main() {A* a = nullptr;return 0;}" YUNI_HAS_NULLPTR)
 
 # GCC
@@ -563,6 +565,15 @@ set(SRC_CORE_URI
 )
 source_group(core\\uri FILES ${SRC_CORE_URI})
 
+set(SRC_CORE_PROCESS
+		core/process.h
+		core/process/fwd.h
+		core/process/process.h
+		core/process/process.hxx
+		core/process/process.cpp
+)
+source_group(core\\process FILES ${SRC_CORE_PROCESS})
+
 
 set(SRC_CORE_IO_FILENAME
 		core/io/io.h
@@ -758,6 +769,7 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_IO_DIRECTORY_INFO}
 		${SRC_CORE_IO_DIRECTORY_ITERATOR}
 		${SRC_CORE_IO_FILE}
+		${SRC_CORE_PROCESS}
 		${SRC_CORE_LOGS}
 		${SRC_CORE_ATOMIC}
 		${SRC_CORE_SMARTPTR}

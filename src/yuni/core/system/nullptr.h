@@ -3,6 +3,11 @@
 
 # ifdef __cplusplus /* Only with a C++ Compiler */
 
+# ifdef YUNI_HAS_NULLPTR
+#	include <cstddef>
+# endif
+
+
 
 namespace Yuni
 {

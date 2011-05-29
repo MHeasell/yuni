@@ -67,7 +67,7 @@ namespace Audio
 	}
 
 
-	bool QueueService::initDispatched(InitData& data)
+	bool QueueService::initDispatched(const InitData& data)
 	{
   		data.condition.lock();
 		data.condition.unlock();

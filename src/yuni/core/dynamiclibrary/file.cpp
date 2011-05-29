@@ -71,7 +71,6 @@ namespace DynamicLibrary
 				if (!path.empty()) \
 					out << path << Core::IO::Separator; \
 				out << prefix << filename << EXT; \
-				std::cout << "-- checks for " << out << std::endl; \
 				if (Core::IO::File::Exists(out)) \
 					return true
 

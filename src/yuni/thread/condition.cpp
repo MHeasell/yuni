@@ -75,8 +75,9 @@ namespace Thread
 
 		// Set the timespec t at [timeout] milliseconds in the future.
 		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
-		t.tv_nsec  =  static_cast<long>  (now.tv_usec * 1000 + ((static_cast<int>(timeout) % 1000) * 1000000));
-		t.tv_sec   =  static_cast<time_t>(now.tv_sec + timeout / 1000 + (t.tv_nsec / 1000000000L));
+		time_t timeout_long = static_cast<time_t>(timeout);
+		t.tv_nsec  =  static_cast<long>  (now.tv_usec * 1000 + ((static_cast<int>(timeout_long) % 1000) * 1000000));
+		t.tv_sec   =  static_cast<time_t>(now.tv_sec + timeout_long / 1000 + (t.tv_nsec / 1000000000L));
 		t.tv_nsec  %= 1000000000L;
 
 		int pthread_cond_timedwait_error;

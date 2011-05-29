@@ -263,7 +263,7 @@ namespace Audio
 		**
 		** \note Dispatched in the audio loop
 		*/
-		bool initDispatched(InitData& initData);
+		bool initDispatched(const InitData& initData);
 
 		/*!
 		** \brief Sound loading

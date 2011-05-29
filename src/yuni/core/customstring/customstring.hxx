@@ -1206,6 +1206,45 @@ namespace Yuni
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::istartsWith(const char* const cstr,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
+	{
+		if (cstr && len && len <= AncestorType::size)
+		{
+			for (unsigned int i = 0; i != len; ++i)
+			{
+				if (ToLower(cstr[i]) != ToLower(AncestorType::data[i]))
+					return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::istartsWith(const StringT& s) const
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		return startsWith(Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::Value(s));
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::istartsWith(char c) const
+	{
+		return (0 != AncestorType::size) && (ToLower(AncestorType::data[0]) == ToLower(c));
+	}
+
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline bool
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::endsWith(const char* const cstr,
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
 	{
@@ -1232,6 +1271,45 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::endsWith(char c) const
 	{
 		return (0 != AncestorType::size) && (AncestorType::data[AncestorType::size - 1] == c);
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::iendsWith(const char* const cstr,
+		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
+	{
+		if (cstr && len && len <= AncestorType::size)
+		{
+			unsigned int offset = 0;
+			for (unsigned int i = AncestorType::size - len; i != AncestorType::size; ++i, ++offset)
+			{
+				if (ToLower(cstr[offset]) != ToLower(AncestorType::data[i]))
+					return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::iendsWith(const StringT& s) const
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CustomString_InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CustomString_InvalidTypeForBufferSize);
+
+		return endsWith(Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::Value(s));
+	}
+
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	inline bool
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::iendsWith(char c) const
+	{
+		return (0 != AncestorType::size) && (ToLower(AncestorType::data[AncestorType::size - 1]) == ToLower(c));
 	}
 
 
