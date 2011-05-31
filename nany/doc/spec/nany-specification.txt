@@ -75,12 +75,18 @@ documentation :
     #*!
     ** \brief Get the length of an object
     *#
-    function length(s): int { s.length }
+    function length(s): uint
+    {
+        return s.length
+    }
 
     /*!
     ** \brief Get the number of items in a container
     */
-    function count(c): int { c.count }
+    function count(c): uint
+    {
+        return c.count
+    }
 
 ### Variables
 
@@ -92,23 +98,27 @@ Variable declaration in Nany requires initialization. If there is no
 initialization, the default value for the specified type will be used.
 Since types are inferred, it is not mandatory to specify the type.
 However, it is not allowed to write neither the type nor the
-initialization, since the identifier would then be interpreted as a
-return value instead of a declaration.
+initialization, since the identifier would then have no understandable
+type.
 
 Some examples of variable declaration
 
     program VariableDeclarations;
     
-    class A { create() {} }
+    class A
+    {
+        class method create
+        {}
+    }
     
     function main
     {
-        i := 0;        // integer
-        j := 42u;      // unsigned integer
-        s : string;    // string, will be initialized to ""
-        a: A := new A; // class A
-        aa: A;         // class A, will be initialized to nil
-        b              // ERROR : unknown identifier used as return value
+        i := 0;           // integer
+        j := 42u;         // unsigned integer
+        s : string;       // string, will be initialized to ""
+        a: A := A.create; // class A
+        aa: A;            // class A, will be initialized to nil
+        b                 // ERROR : unknown identifier
     }
 
 ### Functions
@@ -136,15 +146,15 @@ function calls if there is no argument. For example :
     function main
     {
         doSomething;
-        0
+        return 0
     }
 
 Following these principles, these two functions are exactly
 equivalent :
 
-    function main { 0 }
+    function main { return 0 }
 
-    function main() : int { 0 }
+    function main() : int { return 0 }
 
 
 ### Classes
@@ -156,8 +166,8 @@ syntax for class definitions :
     {
     }
 
-Note there is no required `;` (semi-comma) after the `}` (right curly
-brace).
+Note for C++ developers :
+No `;` (semi-colon) required after the `}` (right curly brace).
 
 #### Attributes
 
@@ -181,13 +191,30 @@ way functions are defined :
     {
         <qualifier> method <identifier> (<identifier> : <type>, <identifier> : <type>, ...) : <type>
         {
-            # Method body here
+            // Method body here
         }
     }
 
 Just as functions can not be forward-declared, methods must be
 defined directly in the class, as it is done in Java or C#. It is up
 to the tools to extract a clean public interface for external use.
+
+#### Constructors and destructors
+
+There is no particular syntax for construction and destruction of
+objects. Constructors and destructors are defined using reserved
+method names. All the following are reserved :
+
+    class A
+    {
+        // Standard constructor
+        method create {}
+        // Copy constructor
+        method clone {}
+        // Destructor
+        method destroy {}
+    }
+
 
 #### Visibility
 
@@ -216,33 +243,38 @@ It is possible to overload most operators using the `operator` keyword.
 
     class MyInteger
     {
+    public
+        operator + (x)
+        {
+            return value + x
+        }
+
+        operator * (x)
+        {
+            return value * x
+        }
+
     private
         value: int;
-
-    public
-        operator + (x) { value + x }
-
-        operator * (x) { value * x }
     }
 
-#### Generics
+#### Meta-programming
 
-Nany offers C#-like generics for classes. They are useful for generic
-static typing of attributes. They do not offer the same expressivity
-as C++ templates, because type inference, constraints and
-specializations already cater to all these needs (see related
+Nany offers meta-programming for classes. Type inference, constraints
+and specializations also cater to a lot of these needs (see related
 chapters).
 
-The syntax is a lot like C# generics too :
+The syntax is a lot like C# generics :
 
     class Pair<K, V>
+    in K is IType
     {
+    public
+        operator [x, y, z] (value) { return self }
+
     private
         key: K;
         value: V;
-
-    public
-        operator [k] { value }
     }
 
 To apply explicit constraints on generic types, see the specific
@@ -258,15 +290,10 @@ This sample class illustrates what a class would look like in Nany :
     */
     class Vector<T>
     {
-    private
-        const MaxSize := 65536u;
-        pData := new T[MaxSize];
-		pSize := 0u;
-
     public
-        method get(i)
+        const method get(i)
         {
-            pData[i]
+            return pData[i]
         }
 
         method set(i, value)
@@ -274,25 +301,30 @@ This sample class illustrates what a class would look like in Nany :
             pData[pSize++] := value
         }
 
-		operator [i](value)
+        operator [i](value)
         {
             set(i, value)
         }
 
-		operator [i]
+        const operator [i]
         {
-            get(i)
+            return get(i)
         }
 
         method add(value)
         {
-            pData[i]
+            pData[i] += value
         }
 
-		method size
+        const method size
         {
-            pSize
+            return pSize
         }
+
+    private
+        const MaxSize := 65536u;
+        pData := T[MaxSize].create;
+        pSize := 0u;
     }
 
 
@@ -328,14 +360,14 @@ corresponding type may be known at compile time or not.
 
 #### typeof
 
-    typeof(Expression)
+    typeof(<expression>)
 
 The `typeof` function evaluates the type of an expression and
 returns it.
 
 #### is
 
-    Expression is Type
+    <expression> is <type>
 
 The `is` binary operator evaluates whether the left-hand operand
 has or inherits a given type. It will return a boolean with the
@@ -343,7 +375,7 @@ answer.
 
 #### as
 
-    Expression as Type
+    <expression> as <type>
 
 The `as` binary operator tries to cast the left-hand operand into
 the right-hand operand (which must be a type). If the cast fails,
@@ -356,7 +388,7 @@ it returns `nil`;
         s := getValue;
         t := getOtherValue;
         if s is typeof(t) then
-	        return s as typeof(t);
+	    return s as typeof(t);
     }
 
 
@@ -415,7 +447,7 @@ Conversely, it is possible to specify the constraint explicitly :
 
     public function foo(a): int
     in
-        typeof(a).hasMethod("bar", int, int);
+        a.reflect.method(bar) is (function(int): int));
     {
         a.bar(42)
     }
