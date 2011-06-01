@@ -79,7 +79,7 @@ documentation :
     {
         return s.length
     }
-
+    
     /*!
     ** \brief Get the number of items in a container
     */
@@ -230,11 +230,15 @@ Syntax for visibility in classes is as follows :
 
     published class A
     {
+    public
+        method myPublicMethod
+        {
+            return myPrivateString.length + myPrivateInt
+        }
+    
     private
         myPrivateInt := 0;
         myPrivateString := "";
-    public
-        method myPublicMethod { return myPrivateString.length + myPrivateInt }
     }
 
 #### Operator overloading
@@ -246,17 +250,35 @@ It is possible to overload most operators using the `operator` keyword.
     public
         operator + (x)
         {
-            return value + x
+            return pValue + x
         }
 
         operator * (x)
         {
-            return value * x
+            return pValue * x
         }
 
     private
-        value: int;
+        pValue: int;
     }
+
+It is not possible to overload the `()` (parentheses) operator.
+The `[]` (brackets) operator can be overloaded as follows :
+
+    class MyStringArray
+    {
+        // Get
+        operator [i] { return data[i] }
+        operator [i, j] { return data[i + j] }
+        // Set
+        operator [i] (v) { data[i] := v }
+        operator [i, j] (v) { data[i + j] := v }
+
+    private
+        data := new string[1024];
+    }
+
+As shown above, it is possible to give a list of keys to operator[].
 
 #### Meta-programming
 
@@ -267,11 +289,14 @@ chapters).
 The syntax is a lot like C# generics :
 
     class Pair<K, V>
-    in K is IType
     {
     public
-        operator [x, y, z] (value) { return self }
-
+        method create(k, v)
+        {
+            key := k;
+            value := v
+        }
+    
     private
         key: K;
         value: V;
@@ -295,32 +320,32 @@ This sample class illustrates what a class would look like in Nany :
         {
             return pData[i]
         }
-
+        
         method set(i, value)
         {
             pData[pSize++] := value
         }
-
+        
         operator [i](value)
         {
             set(i, value)
         }
-
+        
         const operator [i]
         {
             return get(i)
         }
-
+        
         method add(value)
         {
             pData[i] += value
         }
-
+        
         const method size
         {
             return pSize
         }
-
+        
     private
         const MaxSize := 65536u;
         pData := T[MaxSize].create;
