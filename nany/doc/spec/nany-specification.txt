@@ -157,7 +157,8 @@ equivalent :
     function main() : int { return 0 }
 
 
-### Classes
+Classes
+-------
 
 Since Nany offers object orientation, there are classes. This is the
 syntax for class definitions :
@@ -169,7 +170,7 @@ syntax for class definitions :
 Note for C++ developers :
 No `;` (semi-colon) required after the `}` (right curly brace).
 
-#### Attributes
+### Attributes
 
 The syntax for class attributes is similar to simple variable
 definitions :
@@ -182,7 +183,7 @@ definitions :
 Once again, you need to provide either typing or an initialization
 value.
 
-#### Methods
+### Methods
 
 The syntax for class methods uses a `method` keyword similarly to the
 way functions are defined :
@@ -199,7 +200,7 @@ Just as functions can not be forward-declared, methods must be
 defined directly in the class, as it is done in Java or C#. It is up
 to the tools to extract a clean public interface for external use.
 
-#### Constructors and destructors
+### Constructors and destructors
 
 There is no particular syntax for construction and destruction of
 objects. Constructors and destructors are defined using reserved
@@ -216,7 +217,7 @@ method names. All the following are reserved :
     }
 
 
-#### Visibility
+### Visibility
 
 There are four visibilities available inside classes :
 * `published` : `public` and accessible in the tools' interface designer
@@ -241,7 +242,7 @@ Syntax for visibility in classes is as follows :
         myPrivateString := "";
     }
 
-#### Operator overloading
+### Operator overloading
 
 It is possible to overload most operators using the `operator` keyword.
 
@@ -280,11 +281,11 @@ The `[]` (brackets) operator can be overloaded as follows :
 
 As shown above, it is possible to give a list of keys to operator[].
 
-#### Meta-programming
+### Genericity
 
-Nany offers meta-programming for classes. Type inference, constraints
-and specializations also cater to a lot of these needs (see related
-chapters).
+Nany offers genericity in classes. This is one of the tools allowing
+for meta-programming. Type inference, constraints and specializations
+also cater to many meta-programming needs (see related chapters).
 
 The syntax is a lot like C# generics :
 
@@ -306,7 +307,7 @@ To apply explicit constraints on generic types, see the specific
 chapter on type constraints.
 
 
-#### Sample
+### Sample
 
 This sample class illustrates what a class would look like in Nany :
 
@@ -351,6 +352,104 @@ This sample class illustrates what a class would look like in Nany :
         pData := T[MaxSize].create;
         pSize := 0u;
     }
+
+
+Expressions
+-----------
+
+In Nany, many things are expressions. There is no actual statement
+that is not an expression. Possible expressions in Nany are as
+follows.
+
+### Literals
+
+* <integer literal>
+* <real literal>
+* <string literal>
+* <boolean literal>
+* <nil>
+
+### Structured types
+
+* <expression> . <identifier>
+* <identifier> [ <expression> ]
+* (<expression>, <expression>, ...)
+* [<expression>..<expression>]
+* [<expression> => <expression>, <expression> => <expression>, ...]
+
+### Function calls
+
+* <identifier>
+* <expression> ( <expression> , <expression>, ...)
+
+### Operators
+
+* - <expression>
+* -- <expression>
+* ++ <expression>
+* <expression> --
+* <expression> ++
+* <expression> + <expression>
+* <expression> - <expression>
+* <expression> * <expression>
+* <expression> / <expression>
+* <expression> % <expression>
+* <expression> < <expression>
+* <expression> > <expression>
+* <expression> <= <expression>
+* <expression> >= <expression>
+* ! <expression>
+* not <expression>
+* <expression> = <expression>
+* <expression> != <expression>
+* <expression> or <expression>
+* <expression> and <expression>
+* <expression> xor <expression>
+* <expression> | <expression>
+* <expression> ~ <expression>
+* <identifier> __in__ <expression>
+* __in__ <expression>
+* <expression> __on__ <expression>
+* <expression> __is__ <expression>
+* <expression> __as__ <expression>
+* & <expression>
+
+### Assignment
+
+Assignments are void expressions.
+
+* <expression> := <expression>
+
+### Allocation
+
+* new <expression>
+* new <expression> ( <expression> , <expression> , ... )
+* new <expression> [ <expression> ]
+* new <expression> [ <expression> ] ( <expression> )
+n := new bool[count];
+foreach i in n do i := false
+"string".size
+
+### Multiple expressions
+
+* <expression> ; <expression>
+* <expression> ; <expression> ;
+* { }
+* { <expression> }
+
+### Conditionals
+
+* __if__ <expression> __then__ <expression>
+* __if__ <expression> __then__ <expression> else <expression>
+
+### Loops
+
+Loops are void expressions.
+
+* __for__ <expression>, __order__ <expression> __asc__, step
+  <expression> __do__ <expression>
+* __while__ <expression> __do__ <expression>
+* __do__ <expression> __while__ <expression>
 
 
 Typing
@@ -494,99 +593,73 @@ wrote the first sample, the compiler would automatically generate the
 constraint from the second sample.__
 
 
-Expressions
------------
+Meta-programming
+----------------
 
-In Nany, many things are expressions. There is no actual statement
-that is not an expression. Possible expressions in Nany are as
-follows.
+Meta-programming is a very powerful way to write reusable code and
+express high-level ideas without little code redundancy. Nany offers
+several features to help you write meta-code.
 
-### Literals
+### Function specializations
 
-* <integer literal>
-* <real literal>
-* <string literal>
-* <boolean literal>
-* <nil>
+Many languages offer overloading for functions, which means several
+prototypes may be provided for the same function or method name.
+However, languages with type inference often do not provide
+overloading in order to avoid problems such as the following :
 
-### Structured types
+    // `param1`'s type is inferred. There is a constraint regarding `operator <<`
+    function foo(param1) { System.cout << param1; }
+    
+    // `param2`'s type is integer.
+    function foo(param2: int) { System.cout << "Integer : " << param1; }
+    
+    function main
+    {
+        // Call `foo` with an integer argument
+        foo(23)
+    }
 
-* <expression> . <identifier>
-* <identifier> [ <expression> ]
-* (<expression>, <expression>, ...)
-* [<expression>..<expression>]
-* [<expression> => <expression>, <expression> => <expression>, ...]
+In this example, it might not be clear to the compiler which of the
+two prototypes to call. In Nany, however, this is valid, and the
+compiler will apply pattern-matching to the argument to find the best
+match for the provided type. This is similar to the way C++ templates
+are resolved by the compiler :
 
-### Function calls
+    // Class template
+    template<class T>
+    class A
+    {
+    public:
+        enum { Specialized = 0 };
+    };
+    
+    // Class template specialization
+    template<>
+    class A<int>
+    {
+    public:
+        enum { Specialized = 1 };
+    };
+    
+    int main()
+    {
+        // Instanciate the specialized version of A
+        return A<int>::Specialized;
+    }
 
-* <identifier>
-* <expression> ( <expression> , <expression>, ...)
+The ordering rules for the matching are also similar to C++ templates,
+in decreasing order of priority:
+* Exact type
+* Parent type
+* Type with available conversion
+* Most constrained type
+* Least constrained type
+If several conversions with the same priority are available, the
+compiler will generate an ambiguous call error.
 
-### Operators
-
-* - <expression>
-* -- <expression>
-* ++ <expression>
-* <expression> --
-* <expression> ++
-* <expression> + <expression>
-* <expression> - <expression>
-* <expression> * <expression>
-* <expression> / <expression>
-* <expression> % <expression>
-* <expression> < <expression>
-* <expression> > <expression>
-* <expression> <= <expression>
-* <expression> >= <expression>
-* ! <expression>
-* not <expression>
-* <expression> = <expression>
-* <expression> != <expression>
-* <expression> or <expression>
-* <expression> and <expression>
-* <expression> xor <expression>
-* <expression> | <expression>
-* <expression> ~ <expression>
-* <identifier> __in__ <expression>
-* __in__ <expression>
-* <expression> __on__ <expression>
-* <expression> __is__ <expression>
-* <expression> __as__ <expression>
-* & <expression>
-
-### Assignment
-
-Assignments are void expressions.
-
-* <expression> := <expression>
-
-### Allocation
-
-* new <expression>
-* new <expression> ( <expression> , <expression> , ... )
-* new <expression> [ <expression> ]
-* new <expression> [ <expression> ] ( <expression> )
-n := new bool[count];
-foreach i in n do i := false
-"string".size
-
-### Multiple expressions
-
-* <expression> ; <expression>
-* <expression> ; <expression> ;
-* { }
-* { <expression> }
-
-### Conditionals
-
-* __if__ <expression> __then__ <expression>
-* __if__ <expression> __then__ <expression> else <expression>
-
-### Loops
-
-Loops are void expressions.
-
-* __for__ <expression>, __order__ <expression> __asc__, step
-  <expression> __do__ <expression>
-* __while__ <expression> __do__ <expression>
-* __do__ <expression> __while__ <expression>
+A main difference with C++ templates is that Nany specializations are
+simply written with an overloading syntax, and the compiler will
+automatically apply pattern-matching when needed. Also, C++ does not
+provide partial template specialization on class methods, whereas
+Nany applies pattern-matching on function prototypes, method
+prototypes, and class generic parameters.
