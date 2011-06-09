@@ -56,20 +56,20 @@ function main
 	timeout 1s do
 	{
 		// we wait here for the asynchronous result of x
-		println(“Fibonacci(50) ^ Fibonacci(10) = ”, x);
+		println("Fibonacci(50) ^ Fibonacci(10) = ", x);
 	}
 	else
 	{
 		if --countdown then
 		{
-			system.cout << countdown << ‘\n’;
+			system.cout << countdown << '\n';
 			// continue the execution of the expression and wait for 1s again
 			continue;
 		}
 		else
 		{
 			abort(x);
-			system.cout << “Operation timeout\n”;
+			system.cout << "Operation timeout\n";
 			return -1;
 		}
 	}

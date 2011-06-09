@@ -27,6 +27,7 @@ DecLiteral     = {Digit}+            ( [UuLl] | [Uu][Ll] | [Ll][Uu] )?
 HexLiteral     = '0'[xX]{Hex Digit}+ ( [UuLl] | [Uu][Ll] | [Ll][Uu] )?
 RealLiteral    = {Digit}*'.'{Digit}+ ( [FfDd] )?
 CharLiteral    = '' ( {Char Chars} | '\'{Printable} )''
+TimeLiteral    = ( {Digit}+ | {Digit}*'.'{Digit}+ ) ( 'ms' | 's' | 'm' | 'h' )
 ConstQualifier = 'const'
 VisibilityQualifier = 'public' | 'protected' | 'private' | 'published'
 OptimQualifier = 'immutable' | 'stable' | 'threadunsafe'
@@ -75,9 +76,11 @@ Comment End = '*#' | '*/'
                |  DecLiteral
                |  HexLiteral
                |  RealLiteral
+               |  TimeLiteral
                |  CharLiteral
                |  StringLiteral
                |  'nil'
+               |  'self'
 
 ! -------------------------------------------------
 ! Classes
@@ -88,19 +91,20 @@ Comment End = '*#' | '*/'
 ! TODO
 <Class Content> ::= VisibilityQualifier <Class Content>
                | <Method Declaration> <Class Content>
-               | <Optional Const Qualifier> <Attribute Declaration> <Class Content>
-               | <Property Declaration> <Class Content>
+               | <Optional Const Qualifier> <Attribute Declaration> ';' <Class Content>
+               | <Property Declaration> ';' <Class Content>
                | <Class Declaration> <Class Content> ! Nested class
                | ! Empty
 
-<Property Declaration> ::= 'property' Identifier 'read' <Qualified Identifier> ';'
-               | 'property' Identifier 'write' <Qualified Identifier> ';'
-               | 'property' Identifier 'read' <Qualified Identifier> 'write' <Qualified Identifier> ';'
+<Property Declaration> ::= 'property' <Attribute Declaration>
+               | 'property' <Attribute Declaration> 'read' <Qualified Identifier>
+               | 'property' <Attribute Declaration> 'write' <Qualified Identifier>
+               | 'property' <Attribute Declaration> 'read' <Qualified Identifier> 'write' <Qualified Identifier>
 
-<Attribute Declaration> ::= Identifier ';'
-               | Identifier ':' <Type> ';'
-               | Identifier ':=' <Expression> ';'
-               | Identifier ':' <Type> ':=' <Expression> ';'
+<Attribute Declaration> ::= Identifier
+               | Identifier ':' <Type>
+               | Identifier ':=' <Expression>
+               | Identifier ':' <Type> ':=' <Expression>
 
 ! -------------------------------------------------
 ! Workflows
@@ -124,6 +128,7 @@ Comment End = '*#' | '*/'
                | 'default' 'forbid' ';' <Workflow Transitions>
                | 'allow' <Workflow Permissions> '=>' <Workflow Permissions> ';' <Workflow Transitions>
                | 'forbid' <Workflow Permissions> '=>' <Workflow Permissions> ';' <Workflow Transitions>
+               | ! Empty
 
 <Workflow Permission> ::= '*'
                | Identifier
@@ -200,8 +205,7 @@ Comment End = '*#' | '*/'
 ! Types
 ! -------------------------------------------------
 
-<Type> ::= <Qualified Identifier>
-               | <Expression>
+<Type> ::= <Expression>
                | BuiltInType
 
 <Optional Type Parameters> ::= '<' <Type Parameters> '>'
@@ -221,30 +225,39 @@ Comment End = '*#' | '*/'
                | ! Empty
 
 <Expressions Continued> ::= ';' <Expression> <Expressions Continued>
+               | ';' ! Useful to end a list of expressions with an optional semi-colon
                | ! Empty
 
-<Expression>  ::= <Expression> '|' <Or Exp> ! Constraint
-               |  <Expression> ';'
-               |  <Or Exp>
+<Expression>  ::= <Expression> '|' <Xor Exp> ! Constraint
+               | '{' <Expressions> '}'
+               |  <Xor Exp>
                |  <Void Exp>
+
+<Xor Exp>      ::= <Xor Exp> '^' <Or Exp> ! Boolean XOR
+               |  <Or Exp>
 
 <Or Exp>      ::= <Or Exp> 'or' <And Exp> ! Boolean Or
                |  <And Exp>
 
+<And Exp>     ::= <And Exp> 'and' <Compare Exp> ! Boolean And
+               |  <Equal Exp>
 
-<And Exp>  ::= <And Exp> 'and' <Compare Exp> ! Boolean And
+<Equal Exp>   ::= <Equal Exp> '='  <Compare Exp>     !Equal
+               |  <Equal Exp> '!=' <Compare Exp>    !Not equal
                | <Compare Exp>
 
 <Compare Exp> ::= <Compare Exp> '>'  <Regexp Exp> 
                |  <Compare Exp> '<'  <Regexp Exp> 
                |  <Compare Exp> '<=' <Regexp Exp> 
                |  <Compare Exp> '>=' <Regexp Exp>
-               |  <Compare Exp> '='  <Regexp Exp>     !Equal
-               |  <Compare Exp> '!=' <Regexp Exp>    !Not equal
                |  <Regexp Exp>
 
 ! Is the priority correct ?
-<Regexp Exp>  ::= <Regexp Exp> '~' <Add Exp>
+<Regexp Exp>  ::= <Regexp Exp> '~' <Shift Exp>
+               |  <Shift Exp>
+
+<Shift Exp>   ::= <Shift Exp> '<<' <Add Exp>
+               |  <Shift Exp> '>>' <Add Exp>
                |  <Add Exp>
 
 <Add Exp>     ::= <Add Exp> '+' <Mult Exp>
@@ -262,25 +275,30 @@ Comment End = '*#' | '*/'
                |  <Value> '++'
                |  <Value>
 
-<Void Exp>    ::= ConstQualifier <Qualified Identifier> <Return Type Declaration> ':=' <Expression> ! Const Declaration / Assignment
-               | <Qualified Identifier> <Return Type Declaration> ':=' <Expression> ! Variable Declaration / Assignment
+<Void Exp>    ::= ConstQualifier <Qualified Identifier> ':' <Type> ':=' <Expression> ! Const Declaration / Assignment
+               | ConstQualifier <Qualified Identifier> ':=' <Expression> ! Const Declaration / Assignment
+               | <Qualified Identifier> ':' <Type> ':=' <Expression> ! Variable Declaration / Assignment
+               | <Qualified Identifier> ':=' <Expression> ! Variable Declaration / Assignment
                | 'while' <Expression> 'do' <Expression>
                | 'for' Identifier ':=' <Expression> 'until' <Expression> 'do' <Expression>
                | 'for' Identifier ':=' <Expression> 'until' <Expression> 'inc' <Expression> 'do' <Expression>
                | 'foreach' <Qualified Identifier> 'in' <Expression> 'do' <Expression>
                | 'foreach' <Qualified Identifier> 'in' <Expression> 'order' 'do' <Expression>
+               | 'timeout' <Expression> 'do' <Expression>
+               | 'timeout' <Expression> 'do' <Expression> 'else' <Expression>
 
 ! For use in arithmetic, requires parentheses around expressions to have proper priorities
 ! e.g. : weight := - car.weight + passengers.weight
 <Value> ::= <Literal>
                | '(' <Expression> ')'
-               | '{' <Expressions> '}'
                | <Qualified Identifier> ! Property or attribute or function call with no argument
                | <Function Call> ! Function call with arguments
                | '&' <Expression>
-               | 'new' <Qualified Identifier> ! Empty constructor
-               | 'new' <Function Call> ! Constructor
+!               | 'new' <Qualified Identifier> ! Empty constructor
+!               | 'new' <Function Call> ! Constructor
                | 'if' <Expression> 'then' <Expression>
                | 'if' <Expression> 'then' <Expression> 'else' <Expression>
+               | 'break'
+               | 'continue'
                | 'return' <Expression>
 
