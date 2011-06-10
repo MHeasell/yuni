@@ -51,7 +51,12 @@ Comment End = '*#' | '*/'
 <Unit Declaration> ::= <Optional Visibility Qualifier> 'unit' Identifier ';'
                | 'program' Identifier ';'
 
-<Dependencies> ::= 'uses' <Qualified Identifier> ';' <Dependencies>
+<Dependencies> ::= <Dependency> <Dependencies>
+               | ! Empty
+
+<Dependency>   ::= 'uses' Identifier <Dependency Continued> ';'
+
+<Dependency Continued> ::= '.' Identifier <Dependency Continued>
                | ! Empty
 
 <Implementation Block> ::= <Function Declaration> <Implementation Block>
@@ -59,14 +64,6 @@ Comment End = '*#' | '*/'
                | <Optional Visibility Qualifier> <Workflow Declaration> <Implementation Block>
                | <Optional Visibility Qualifier> <Enum Declaration> <Implementation Block>
                | ! Empty
-
-! -------------------------------------------------
-! Qualified Identifier
-! -------------------------------------------------
-
-<Qualified Identifier> ::= Identifier '.' <Qualified Identifier>
-               | Identifier
-
 
 ! -------------------------------------------------
 ! Literals
@@ -79,6 +76,7 @@ Comment End = '*#' | '*/'
                |  TimeLiteral
                |  CharLiteral
                |  StringLiteral
+               |  BuiltInType
                |  'nil'
                |  'self'
 
@@ -96,15 +94,14 @@ Comment End = '*#' | '*/'
                | <Class Declaration> <Class Content> ! Nested class
                | ! Empty
 
-<Property Declaration> ::= 'property' <Attribute Declaration>
-               | 'property' <Attribute Declaration> 'read' <Qualified Identifier>
-               | 'property' <Attribute Declaration> 'write' <Qualified Identifier>
-               | 'property' <Attribute Declaration> 'read' <Qualified Identifier> 'write' <Qualified Identifier>
+<Property Declaration> ::= 'property' Identifier
+               | 'property' <Attribute Declaration> 'read' <Expression>
+               | 'property' <Attribute Declaration> 'write' <Expression>
+               | 'property' <Attribute Declaration> 'read' <Expression> 'write' <Expression>
 
-<Attribute Declaration> ::= Identifier
-               | Identifier ':' <Type>
-               | Identifier ':=' <Expression>
-               | Identifier ':' <Type> ':=' <Expression>
+<Attribute Declaration> ::= Identifier ':' <Expression>
+               | Identifier ':' <Assignment Exp>
+               | <Assignment Exp>
 
 ! -------------------------------------------------
 ! Workflows
@@ -157,16 +154,14 @@ Comment End = '*#' | '*/'
 
 <Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Expression>
 
-<Return Type Declaration> ::= ':' <Type>
+<Return Type Declaration> ::= ':' <Expression>
                | ! Empty
 
 <Optional Parameters> ::= '(' <Parameter List> ')'
                | ! Empty
 
-<Parameter List> ::= Identifier ':' <Type> <Parameter List Continued> ! With a forced type
-               | Identifier <Parameter List Continued> ! With type inferred
-               | Identifier ':' <Type> ':=' <Expression> <Parameter List Continued> ! With a default value
-               | Identifier ':=' <Expression> <Parameter List Continued> ! With type inferred and a default value
+<Parameter List> ::= <Attribute Declaration> <Parameter List Continued>
+               | Identifier <Parameter List Continued>
                | ! Empty
 
 <Parameter List Continued> ::= ',' <Parameter List>
@@ -181,12 +176,8 @@ Comment End = '*#' | '*/'
 <Optional Visibility Qualifier> ::= VisibilityQualifier
                | ! Empty
 
-! WARNING : We do not define a function call with no parentheses here,
-! WARNING : it would conflict as reduce-reduce with a simple identifier
-! WARNING : since there is no way to distinguish them before type-checking.
-<Function Call> ::= <Qualified Identifier> '(' <Argument List> ')' ! Function / Method call
-
 <Argument List> ::= <Expression> <Argument List Continued>
+               | ! Empty
 
 <Argument List Continued> ::= ',' <Expression>
                | ! Empty
@@ -205,16 +196,21 @@ Comment End = '*#' | '*/'
 ! Types
 ! -------------------------------------------------
 
-<Type> ::= <Expression>
-               | BuiltInType
-
-<Optional Type Parameters> ::= '<' <Type Parameters> '>'
+<Optional Type Parameters> ::= '<' <Type Parameters>
                | ! Empty
 
-<Type Parameters> ::= Identifier <Type Parameters Continued>
-               | Identifier ':=' <Type> <Type Parameters Continued>
+! This is for generics declarations
+<Type Parameters> ::= Identifier <Type Parameters Continued> '>'
+               | Identifier ':=' <Expression> <Type Parameters Continued> '>'
 
-<Type Parameters Continued> ::= ',' <Type Parameters>
+<Type Parameters Continued> ::= ',' Identifier <Type Parameters Continued>
+               | ',' Identifier ':=' <Expression> <Type Parameters Continued>
+               | ! Empty
+
+! This is for generics instanciations
+<Type Arguments> ::= <Expression> <Type Arguments Continued> '>'
+
+<Type Arguments Continued> ::= ',' <Expression> <Type Parameters Continued>
                | ! Empty
 
 ! -------------------------------------------------
@@ -230,8 +226,20 @@ Comment End = '*#' | '*/'
 
 <Expression>  ::= <Expression> '|' <Xor Exp> ! Constraint
                | '{' <Expressions> '}'
+               | '&' <Expression>
                |  <Xor Exp>
                |  <Void Exp>
+
+<Void Exp>    ::= <Optional Const Qualifier> <Attribute Declaration>
+               | 'while' <Expression> 'do' <Expression>
+               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'do' <Expression>
+               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'inc' <Expression> 'do' <Expression>
+               | 'foreach' Identifier 'in' <Expression> 'do' <Expression>
+               | 'foreach' Identifier 'in' <Expression> 'order' 'do' <Expression>
+               | 'timeout' <Expression> 'do' <Expression>
+               | 'timeout' <Expression> 'do' <Expression> 'else' <Expression>
+
+<Assignment Exp> ::= <Expression> ':=' <Value>
 
 <Xor Exp>      ::= <Xor Exp> '^' <Or Exp> ! Boolean XOR
                |  <Or Exp>
@@ -242,15 +250,17 @@ Comment End = '*#' | '*/'
 <And Exp>     ::= <And Exp> 'and' <Compare Exp> ! Boolean And
                |  <Equal Exp>
 
-<Equal Exp>   ::= <Equal Exp> '='  <Compare Exp>     !Equal
-               |  <Equal Exp> '!=' <Compare Exp>    !Not equal
-               | <Compare Exp>
+<Equal Exp>   ::= <Equal Exp> '='  <Compare Exp>    ! Equal
+               |  <Equal Exp> '!=' <Compare Exp>    ! Not equal
+               |  <Compare Exp>
 
 <Compare Exp> ::= <Compare Exp> '>'  <Regexp Exp> 
-               |  <Compare Exp> '<'  <Regexp Exp> 
                |  <Compare Exp> '<=' <Regexp Exp> 
                |  <Compare Exp> '>=' <Regexp Exp>
+               |  <Inferior Exp>
                |  <Regexp Exp>
+
+<Inferior Exp> ::= <Compare Exp> '<' <Regexp Exp>
 
 ! Is the priority correct ?
 <Regexp Exp>  ::= <Regexp Exp> '~' <Shift Exp>
@@ -275,30 +285,20 @@ Comment End = '*#' | '*/'
                |  <Value> '++'
                |  <Value>
 
-<Void Exp>    ::= ConstQualifier <Qualified Identifier> ':' <Type> ':=' <Expression> ! Const Declaration / Assignment
-               | ConstQualifier <Qualified Identifier> ':=' <Expression> ! Const Declaration / Assignment
-               | <Qualified Identifier> ':' <Type> ':=' <Expression> ! Variable Declaration / Assignment
-               | <Qualified Identifier> ':=' <Expression> ! Variable Declaration / Assignment
-               | 'while' <Expression> 'do' <Expression>
-               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'do' <Expression>
-               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'inc' <Expression> 'do' <Expression>
-               | 'foreach' <Qualified Identifier> 'in' <Expression> 'do' <Expression>
-               | 'foreach' <Qualified Identifier> 'in' <Expression> 'order' 'do' <Expression>
-               | 'timeout' <Expression> 'do' <Expression>
-               | 'timeout' <Expression> 'do' <Expression> 'else' <Expression>
-
 ! For use in arithmetic, requires parentheses around expressions to have proper priorities
-! e.g. : weight := - car.weight + passengers.weight
+! e.g. : weight := - (car.weight + passengers.weight)
 <Value> ::= <Literal>
                | '(' <Expression> ')'
-               | <Qualified Identifier> ! Property or attribute or function call with no argument
-               | <Function Call> ! Function call with arguments
-               | '&' <Expression>
-!               | 'new' <Qualified Identifier> ! Empty constructor
+               | Identifier
+               | <Value> '.' <Expression> ! Property or attribute or function call with no argument
+               | Identifier '(' <Argument List> ')' ! Function / Method call with arguments
+!               | <Inferior Exp> <Type Arguments> ! Trick to avoid ambiguity between operator < and generics
+!               | 'new' <Expression> ! Empty constructor
 !               | 'new' <Function Call> ! Constructor
                | 'if' <Expression> 'then' <Expression>
                | 'if' <Expression> 'then' <Expression> 'else' <Expression>
                | 'break'
                | 'continue'
                | 'return' <Expression>
+               | 'typeof' <Expression>
 
