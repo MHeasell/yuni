@@ -5,9 +5,9 @@ program threading;
 immutable function Fibonacci(n) : typeof n
 {
    if n < 2 then
-       n;
+       n
    else
-       Fibonacci(n - 1) + Fibonacci(n - 2);
+       Fibonacci(n - 1) + Fibonacci(n - 2)
 }
 
 function main
@@ -19,5 +19,5 @@ function main
    // Wait for the result of a and b, then compute a+b
    c := a + b;
    // Print the result
-   println("a+ b = ", c);
+   println("a + b = ", c)
 }
