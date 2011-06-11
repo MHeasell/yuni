@@ -276,6 +276,30 @@ namespace File
 		//@}
 
 
+		//! \name Locking
+		//@{
+		/*!
+		** \brief Lock the file for a shared access
+		**
+		** \warning The implementation is missing on Windows (#346)
+		*/
+		bool lockShared();
+		/*!
+		** \brief Lock the file for an exclusive access
+		**
+		** \warning The implementation is missing on Windows (#346)
+		*/
+		bool lockExclusive();
+
+		/*!
+		** \brief Unlock the file
+		**
+		** \warning The implementation is missing on Windows (#346)
+		*/
+		void unlock();
+		//@}
+
+
 		//! \name Native
 		//@{
 		//! Get the OS Dependant handle

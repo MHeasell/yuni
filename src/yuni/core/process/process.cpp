@@ -238,6 +238,7 @@ namespace Yuni
 
 	bool Process::execute(unsigned int timeout)
 	{
+		(void) timeout;
 		if (pRunning)
 			return false;
 
