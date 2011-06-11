@@ -7,6 +7,11 @@
 #include "stream.h"
 #include "../../system/windows.hdr.h"
 
+#ifndef YUNI_OS_WINDOWS
+// lock
+# include <sys/file.h>
+#endif
+
 
 namespace Yuni
 {
@@ -79,6 +84,40 @@ namespace File
 			case seekOriginEnd:     return (0 == ::fseek(pFd, (long) offset, SEEK_END));
 		}
 		return false;
+	}
+
+
+
+	bool Stream::lockShared()
+	{
+		# ifndef YUNI_OS_WINDOWS
+		return pFd ? (0 == flock(fileno(pFd), LOCK_SH)) : false;
+		# else
+		// warning The implementation is missing on Windows (#346)
+		return false;
+		# endif
+	}
+
+
+	bool Stream::lockExclusive()
+	{
+		# ifndef YUNI_OS_WINDOWS
+		return pFd ? (0 == flock(fileno(pFd), LOCK_EX)) : false;
+		# else
+		// warning The implementation is missing on Windows (#346)
+		return false;
+		# endif
+	}
+
+
+	void Stream::unlock()
+	{
+		# ifndef YUNI_OS_WINDOWS
+		if (pFd)
+			flock(fileno(pFd), LOCK_UN);
+		# else
+		// warning The implementation is missing on Windows (#346)
+		# endif
 	}
 
 
