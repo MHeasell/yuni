@@ -476,9 +476,9 @@ namespace Core
 		//! \name Pointer management
 		//@{
 		//! Increment the internal reference counter
-		void addRef();
+		void addRef() const;
 		//! Decrement the internal reference counter
-		void release();
+		void release() const;
 		//@}
 
 
@@ -548,7 +548,8 @@ namespace Core
 		void internalDetachFromParentWithoutNotify();
 
 	private:
-		typename ThreadingPolicy::template Volatile<int>::Type pRefCount;
+		typedef typename ThreadingPolicy::template Volatile<int>::Type  ReferenceCounterType;
+		mutable ReferenceCounterType pRefCount;
 
 	}; // class TreeN
 

@@ -47,6 +47,7 @@ namespace Ownership
 			//! Get if the ownership policy is destructive
 			destructiveCopy = false
 		};
+
 	public:
 		//! \name Constructors
 		//@{
@@ -65,6 +66,13 @@ namespace Ownership
 			:pCount(reinterpret_cast<const ReferenceCounted&>(c).pCount)
 		{}
 		//@}
+
+		/*!
+		** \brief Initialization from a raw pointer
+		*/
+		void initFromRawPointer(const T&)
+		{
+		}
 
 		/*!
 		** \brief Clone this object
@@ -90,7 +98,10 @@ namespace Ownership
 			return false;
 		}
 
-		void swapPointer(ReferenceCounted& rhs) {std::swap(pCount, rhs.pCount);}
+		void swapPointer(ReferenceCounted& rhs)
+		{
+			std::swap(pCount, rhs.pCount);
+		}
 
 	private:
 		//! The reference count
@@ -126,6 +137,14 @@ namespace Ownership
 		template<typename U> COMReferenceCounted(const COMReferenceCounted<U>&)
 		{}
 		//@}
+
+		/*!
+		** \brief Initialization from a raw pointer
+		*/
+		static void initFromRawPointer(const T& rhs)
+		{
+			clone(rhs);
+		}
 
 		/*!
 		** \brief Clone this object
@@ -188,6 +207,13 @@ namespace Ownership
 			pCount = reinterpret_cast<const ReferenceCountedMT<T>&>(c).pCount;
 		}
 		//@}
+
+		/*!
+		** \brief Initialization from a raw pointer
+		*/
+		void initFromRawPointer(const T&)
+		{
+		}
 
 		/*!
 		** \brief Clone this object
@@ -254,6 +280,13 @@ namespace Ownership
 		//@}
 
 		/*!
+		** \brief Initialization from a raw pointer
+		*/
+		void initFromRawPointer(const T&)
+		{
+		}
+
+		/*!
 		** \brief Clone this object
 		** \param rhs The original object
 		*/
@@ -296,6 +329,13 @@ namespace Ownership
 		//! Copy constructor
 		template <class U> NoCopy(const NoCopy<U>&) {}
 		//@}
+
+		/*!
+		** \brief Initialization from a raw pointer
+		*/
+		void initFromRawPointer(const T&)
+		{
+		}
 
 		/*!
 		** \brief Clone this object

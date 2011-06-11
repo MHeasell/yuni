@@ -36,6 +36,7 @@ namespace Yuni
 	{
 		// Check if the checking policy allows the given value
 		CheckingPolicy::onInit(storagePointer(*this));
+		OwnershipPolicy::initFromRawPointer(ptr);
 	}
 
 
@@ -48,6 +49,7 @@ namespace Yuni
 	{
 		// Check if the checking policy allows the given value
 		CheckingPolicy::onInit(storagePointer(*this));
+		OwnershipPolicy::initFromRawPointer(ptr);
 	}
 
 
@@ -66,8 +68,8 @@ namespace Yuni
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::CopyType& rhs)
-		:StoragePolicy(rhs),
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::CopyType& rhs) :
+		StoragePolicy(rhs),
 		OwnershipPolicy(rhs),
 		CheckingPolicy(rhs),
 		ConversionPolicy(rhs)

@@ -560,7 +560,7 @@ namespace Core
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	inline void
-	TreeN<T,TP,ChckP,ConvP>::addRef()
+	TreeN<T,TP,ChckP,ConvP>::addRef() const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		++pRefCount;
@@ -570,7 +570,7 @@ namespace Core
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
 	void
-	TreeN<T,TP,ChckP,ConvP>::release()
+	TreeN<T,TP,ChckP,ConvP>::release() const
 	{
 		{
 			typename ThreadingPolicy::MutexLocker locker(*this);
