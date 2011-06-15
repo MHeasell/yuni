@@ -140,28 +140,15 @@ namespace IO
 		if (len == 2 && p[1] == ':')
 			return Yuni::Core::IO::ioErrBadFilename;
 
-		CustomString<>  norm;
+		String  norm;
 		Yuni::Core::IO::Normalize(norm, p, len);
 		// Conversion into wchar_t
-		wchar_t* buffer = new wchar_t[norm.size() + 10];
-		buffer[0] = L'\\';
-		buffer[1] = L'\\';
-		buffer[2] = L'?';
-		buffer[3] = L'\\';
-		int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
-		if (n <= 0)
-		{
-			delete[] buffer;
+		WString<true> wstr(norm);
+		if (wstr.empty())
 			return Yuni::Core::IO::ioErrUnknown;
-		}
-		for (int i = 4; i < n + 4; ++i)
-		{
-			if (buffer[i] == '/')
-				buffer[i] = '\\';
-		}
-		buffer[n + 4] = L'\0';
+		wstr.replace('/', '\\');
 
-		if (DeleteFileW(buffer))
+		if (DeleteFileW(wstr.c_str()))
 			return Yuni::Core::IO::ioErrNone;
 		return Yuni::Core::IO::ioErrUnknown;
 		# endif

@@ -55,6 +55,10 @@ namespace Private
 		*/
 		wchar_t* c_str();
 
+		/*!
+		** \brief Replace all occurences of a single char
+		*/ 
+		bool replace(char from, char to);
 
 		//! \name Operators
 		//@{
