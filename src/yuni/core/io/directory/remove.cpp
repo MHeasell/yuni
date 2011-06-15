@@ -36,32 +36,20 @@ namespace Directory
 
 	bool Remove(const char* path)
 	{
-		wchar_t* fsource = new wchar_t[FILENAME_MAX];
+		WString<true> fsource(path);
+		if (fsource.empty())
+			return false;
 		int cr;
 
-		(void)::memset(fsource, 0, sizeof(fsource));
 		SHFILEOPSTRUCTW shf;
 		shf.hwnd = NULL;
 
-		fsource[0] = L'\\';
-		fsource[1] = L'\\';
-		fsource[2] = L'?';
-		fsource[3] = L'\\';
-		int n = MultiByteToWideChar(CP_UTF8, 0, path, -1, fsource + 4, FILENAME_MAX - 10);
-		if (!n)
-		{
-			delete fsource;
-			return false;
-		}
-		fsource[n + 4] = L'\0';
-
 		shf.wFunc = FO_DELETE;
-		shf.pFrom = fsource;
-		shf.pTo = fsource;
+		shf.pFrom = fsource.c_str();
+		shf.pTo = fsource.c_str();
 		shf.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI;
 
 		cr = SHFileOperationW(&shf);
-		delete fsource;
 		return (!cr);
 	}
 

@@ -39,6 +39,17 @@ namespace Private
 
 
 	template<bool UNCPrefix>
+	inline void WString<UNCPrefix>::ireplace(char from, char to)
+	{
+		for (unsigned int i = 0; i != pSize; ++i)
+		{
+			if (pWString[i] == from)
+				pWString[i] = to;
+		}
+	}
+
+
+	template<bool UNCPrefix>
 	inline bool WString<UNCPrefix>::empty() const
 	{
 		return !pSize;
