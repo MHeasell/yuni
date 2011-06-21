@@ -232,10 +232,14 @@ Comment End = '*#' | '*/'
 <Statements Continued> ::= <Statement> <Statements Continued>
                | ! Empty
 
-<Statement>   ::= <Expression> ';'
-               | '&' <Expression> ';'
+<Statement>   ::= <Statement Expression> ';'
+               | '&' <Statement Expression> ';'
                | 'return' <Expression> ';'
+               | 'break' ';'
+               | 'continue' ';'
                | <Attribute Declaration> ';'
+               | 'if' <Expression> 'then' <Statement>
+               | 'if' <Expression> 'then' <Statement> 'else' <Statement>
                | 'while' <Expression> 'do' <Statement>
                | 'for' Identifier ':=' <Expression> 'until' <Expression> 'do' <Statement>
                | 'for' Identifier ':=' <Expression> 'until' <Expression> 'step' <Expression> 'do' <Statement>
@@ -245,10 +249,13 @@ Comment End = '*#' | '*/'
                | 'timeout' <Expression> 'do' <Statement> 'else' <Statement>
                | '{' <Statements> '}'
 
-<Expression>  ::= <Expression> '|' <Xor Exp> ! Constraint
-               |  <Xor Exp>
+<Assignment Exp> ::= <Expression> ':=' <Expression>
 
-<Assignment Exp> ::= <Expression> ':=' <Value>
+<Expression>  ::= 'if' <Expression> 'then' <Expression> 'else' <Expression>
+               | <Statement Expression>
+
+<Statement Expression> ::= <Expression> '|' <Xor Exp> ! Constraint
+               |  <Xor Exp>
 
 <Xor Exp>      ::= <Xor Exp> 'xor' <Or Exp> ! Boolean XOR
                |  <Or Exp>
@@ -297,18 +304,17 @@ Comment End = '*#' | '*/'
                |  <Value> '++'
                |  <Value>
 
+
 ! For use in arithmetic, requires parentheses around expressions to have proper priorities
 ! e.g. : weight := - (car.weight + passengers.weight)
-<Value> ::= <Literal>
+<Value>  ::= <Simple Value>
+               | <Simple Value> '.' <Subscript>
+
+<Simple Value> ::= <Literal>
                | '(' <Expression> ')'
                | Identifier
-               | <Value> '.' <Value> ! Property or attribute or function call with no argument
+
+<Subscript> ::= Identifier
+               | Identifier '.' <Subscript> ! Property or attribute or function call with no argument
                | Identifier '(' <Argument List> ')' ! Function / Method call with arguments
-!               | <Inferior Exp> <Type Arguments> ! Trick to avoid ambiguity between operator < and generics
-!               | 'new' <Expression> ! Empty constructor
-!               | 'new' <Function Call> ! Constructor
-               | 'if' <Expression> 'then' <Statement>
-               | 'if' <Expression> 'then' <Statement> 'else' <Statement>
-               | 'break'
-               | 'continue'
 
