@@ -15,7 +15,7 @@ function main
     {
         err := 1;
         if false then
-            return err;
+            return if err < 1 then 10 else ++a.beta.foo;
     }
     while a > 0 do
     {
