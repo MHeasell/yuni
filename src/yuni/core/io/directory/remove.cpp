@@ -1,6 +1,5 @@
 
 #include "../directory.h"
-#include <string.h>
 #include <errno.h>
 #ifdef YUNI_HAS_STDLIB_H
 # include <stdlib.h>
@@ -15,8 +14,8 @@
 #endif
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <string.h>
-
+#include "../../string.h"
+#include "../../customstring/wstring.h"
 #include <stdio.h>
 
 

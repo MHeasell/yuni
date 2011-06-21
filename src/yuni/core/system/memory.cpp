@@ -41,22 +41,22 @@ namespace Memory
 #ifdef YUNI_OS_WINDOWS
 #define SYSTEM_MEMORY_IS_IMPLEMENTED
 
-	size_t Total()
+	uint64 Total()
 	{
 		// see http://msdn.microsoft.com/en-us/library/aa366589(VS.85).aspx
 		MEMORYSTATUSEX statex;
 		statex.dwLength = sizeof(statex);
-		return (GlobalMemoryStatusEx(&statex)) ? (size_t)statex.ullTotalPhys
-			: (size_t)defaultTotal;
+		return (GlobalMemoryStatusEx(&statex)) ? (uint64)statex.ullTotalPhys
+			: (uint64)defaultTotal;
 	}
 
-	size_t Available()
+	uint64 Available()
 	{
 		// see http://msdn.microsoft.com/en-us/library/aa366589(VS.85).aspx
 		MEMORYSTATUSEX statex;
 		statex.dwLength = sizeof(statex);
-		return (GlobalMemoryStatusEx(&statex)) ? (size_t)statex.ullAvailPhys
-			: (size_t)defaultAvailable;
+		return (GlobalMemoryStatusEx(&statex)) ? (uint64)statex.ullAvailPhys
+			: (uint64)defaultAvailable;
 	}
 
 	bool Usage::update()
@@ -67,8 +67,8 @@ namespace Memory
 
 		if (GlobalMemoryStatusEx(&statex))
 		{
-			total = (size_t)statex.ullTotalPhys;
-			available = (size_t)statex.ullAvailPhys;
+			total = (uint64)statex.ullTotalPhys;
+			available = (uint64)statex.ullAvailPhys;
 			return true;
 		}
 		available = defaultAvailable;
@@ -222,29 +222,29 @@ namespace Memory
 			// Checking the amount of the total physical memory, which can not be equal to 0
 			if (!total)
 			{
-				total = (size_t) defaultTotal;
+				total = (uint64) defaultTotal;
 				return false;
 			}
 			return true;
 		}
 
 		// Error, using default values
-		total     = (size_t) defaultTotal;
-		available = (size_t) defaultAvailable;
+		total     = (uint64) defaultTotal;
+		available = (uint64) defaultAvailable;
 		return false;
 	}
 
-	size_t Available()
+	uint64 Available()
 	{
 		return Usage().available;
 	}
 
-	size_t Total()
+	uint64 Total()
 	{
 #ifdef YUNI_OS_LINUX		
 		// Directly using sysinfo (2), which should be faster than parsing /proc/meminfo
 		struct sysinfo s;
-		return (!sysinfo(&s)) ? (s.mem_unit * s.totalram) : (size_t) defaultTotal;
+		return (!sysinfo(&s)) ? (s.mem_unit * s.totalram) : (uint64) defaultTotal;
 #else
 		return Usage().total;
 #endif
@@ -315,12 +315,12 @@ namespace Memory
 #ifndef SYSTEM_MEMORY_IS_IMPLEMENTED
 #warning Yuni::System::Memory: The implementation is missing for this operating system
 
-	size_t Total()
+	uint64 Total()
 	{
 		return defaultTotal;
 	}
 
-	size_t Available()
+	uint64 Available()
 	{
 		return defaultAvailable;
 	}

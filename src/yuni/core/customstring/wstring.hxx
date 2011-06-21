@@ -39,7 +39,7 @@ namespace Private
 
 
 	template<bool UNCPrefix>
-	inline void WString<UNCPrefix>::ireplace(char from, char to)
+	inline void WString<UNCPrefix>::replace(char from, char to)
 	{
 		for (unsigned int i = 0; i != pSize; ++i)
 		{
