@@ -25,7 +25,9 @@
 
 # ifdef __cplusplus /* Only with a C++ Compiler */
 
-# include <cstddef>
+# ifndef YUNI_OS_CLANG
+#	include <cstddef>
+# endif
 
 # ifdef YUNI_HAS_SYS_TYPES_H
 #   include <sys/types.h>

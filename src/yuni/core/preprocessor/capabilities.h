@@ -71,6 +71,7 @@
 **
 ** - Borland C++ : YUNI_OS_BORLAND
 ** - MinGW: YUNI_OS_MINGW
+** - CLang: YUNI_OS_CLANG
 ** - Cygwin : YUNI_OS_CYGWIN
 ** - Gcc/G++ : YUNI_OS_GCC, YUNI_OS_GCC_VERSION : if YUNI_OS_GCC_VERSION > 30200  (> 3.2.0)
 ** - Intel Compiler: YUNI_OS_INTELCOMPILER
@@ -112,15 +113,19 @@
 # endif
 
 
-/* GNU C and C++ compiler */
-# ifdef __GNUC__
-#	define YUNI_OS_GCC
-#	define YUNI_OS_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
-#	ifndef YUNI_COMPILER_NAME
-#		define YUNI_COMPILER_NAME "GCC (GNU Compiler Collection)"
-#	endif
+# ifdef __clang__
+#	define YUNI_OS_CLANG
 # else
-#	define YUNI_OS_GCC_VERSION 0
+/* GNU C and C++ compiler */
+#	ifdef __GNUC__
+#		define YUNI_OS_GCC
+#		define YUNI_OS_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
+#		ifndef YUNI_COMPILER_NAME
+#			define YUNI_COMPILER_NAME "GCC (GNU Compiler Collection)"
+#		endif
+#	else
+#		define YUNI_OS_GCC_VERSION 0
+#	endif
 # endif
 
 
@@ -292,6 +297,11 @@
 # endif
 # ifdef linux
 #	undef linux
+# endif
+
+
+# ifndef YUNI_OS_GCC_VERSION
+#	define YUNI_OS_GCC_VERSION 0
 # endif
 
 

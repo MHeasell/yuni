@@ -23,8 +23,19 @@ string(REPLACE "/CommonSettings.cmake" "" CurrentFolder "${CurrentFolder}")
 #
 include("${CurrentFolder}/DetectInstructionsSets.cmake")
 
+
+
 set(YUNI_COMMON_GCC_OPTIONS  "-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Woverloaded-virtual -Wall -Wextra -Wunused-parameter -Wconversion")
 set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -Wmissing-noreturn -Wcast-align  -Wfloat-equal -Wundef")
+
+include(CheckCXXCompilerFlag)
+if(MINGW OR (NOT WIN32 AND NOT WIN64))
+	check_cxx_compiler_flag("-std=c++0x" YUNI_HAS_GCC_CPP0X_SUPPORT)
+	if(YUNI_HAS_GCC_CPP0X_SUPPORT)
+		set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -std=c++0x")
+	endif()
+endif()
+
 
 if(NOT WIN32)
 	set(CMAKE_CXX_FLAGS_RELEASE         "${YUNI_COMMON_GCC_OPTIONS} -O3 -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mfpmath=sse -msse -msse2 -Wuninitialized")
