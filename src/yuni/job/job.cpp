@@ -4,15 +4,13 @@
 
 
 
-
 namespace Yuni
 {
 namespace Job
 {
 
 
-
-	bool IJob::suspend(const unsigned int delay)
+	bool IJob::suspend(const unsigned int delay) const
 	{
 		// This method must only be called from a thread
 		assert(pThread != NULL && "Job: The pointer to the attached thread must not be NULL");
@@ -60,4 +58,3 @@ namespace Job
 
 } // namespace Job
 } // namespace Yuni
-
