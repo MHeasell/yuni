@@ -173,7 +173,7 @@ namespace Thread
 		** \param delay The delay in miliseconds. O will only return if the thread should exit
 		** \return True indicates that the thread should stop immediately
 		*/
-		bool suspend(const unsigned int delay = 0);
+		bool suspend(const unsigned int delay = 0) const;
 
 		/*!
 		** \brief Get if the thread should abort as soon as possible
@@ -182,7 +182,7 @@ namespace Thread
 		** \attention This method must only be called inside the execution of the thread
 		** \return True indicates that the thread should stop immediately
 		*/
-		bool shouldAbort();
+		bool shouldAbort() const;
 
 		/*!
 		** \brief Event: The thread has just been started
@@ -261,7 +261,7 @@ namespace Thread
 		//! Condition for exiting
 		Condition pAboutToExitCond;
 		//! Condition for stopping
-		Condition pMustStopCond;
+		mutable Condition pMustStopCond;
 		# ifndef YUNI_NO_THREAD_SAFE
 		//! ID of the thread, for pthread
 		pthread_t pThreadID;

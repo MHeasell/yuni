@@ -293,7 +293,7 @@ namespace Thread
 	}
 
 
-	bool IThread::suspend(const unsigned int delay)
+	bool IThread::suspend(const unsigned int delay) const
 	{
 		ConditionLocker locker(pMustStopCond);
 

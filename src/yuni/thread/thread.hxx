@@ -23,7 +23,7 @@ namespace Thread
 	}
 
 
-	inline bool IThread::shouldAbort()
+	inline bool IThread::shouldAbort() const
 	{
 		ConditionLocker locker(pMustStopCond);
 		return (pShouldStop || !pStarted);

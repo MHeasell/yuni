@@ -166,7 +166,7 @@ namespace Job
 		** \return True indicates that the job should stop immediately
 		** \see IThread::suspend()
 		*/
-		bool suspend(const unsigned int delay = 0);
+		bool suspend(const unsigned int delay = 0) const;
 
 		/*!
 		** \brief Get if the job should abort as soon as possible
@@ -176,7 +176,7 @@ namespace Job
 		** \attention This method must only be called inside the execution of the job
 		** \return True indicates that the thread should stop immediately
 		*/
-		bool shouldAbort();
+		bool shouldAbort() const;
 
 		/*!
 		** \brief Set the name of the job without locking

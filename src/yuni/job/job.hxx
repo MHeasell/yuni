@@ -75,7 +75,7 @@ namespace Job
 	}
 
 
-	inline bool IJob::shouldAbort()
+	inline bool IJob::shouldAbort() const
 	{
 		assert(pThread != NULL && "Job: The pointer to the attached thread must not be NULL");
 		return (pCanceling || pThread->shouldAbort());
