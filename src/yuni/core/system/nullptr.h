@@ -69,6 +69,7 @@ namespace Yuni
 
 
 
+# ifndef YUNI_HAS_NULLPTR
 # if YUNI_OS_GCC_VERSION >= 40400
 template<class T>
 inline bool operator == (const T* rhs, const Yuni::NullPtr&)
@@ -82,7 +83,7 @@ inline bool operator != (const T* rhs, const Yuni::NullPtr&)
 	return static_cast<const T*>(NULL) != rhs;
 }
 # endif
-
+# endif
 
 # endif /* C++ Compiler */
 

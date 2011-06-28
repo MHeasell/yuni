@@ -101,6 +101,9 @@ endif(WIN32 OR WIN64)
 
 # C++0x
 check_cxx_compiler_flag("-std=c++0x" YUNI_HAS_GCC_CPP0X_SUPPORT)
+if(YUNI_HAS_GCC_CPP0X_SUPPORT)
+	LIBYUNI_CONFIG_CFLAG("both" "core"	"-std=c++0x")
+endif()
 
 
 # int64
