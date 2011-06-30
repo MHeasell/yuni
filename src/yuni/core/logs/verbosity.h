@@ -53,7 +53,7 @@ namespace Verbosity
 
 	struct Fatal
 	{
-		static const char* Name() {return "!!fatal";}
+		static const char* Name() {return "fatal";}
 		template<class U> static void AppendName(U& u) {u << "[fatal]";}
 		enum
 		{
