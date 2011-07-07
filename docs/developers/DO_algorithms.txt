@@ -27,3 +27,34 @@ Problem 3 : How to detect node failures and what to do.
 Problem 4 : How to promote a replica as the new DObject when a node fails.
 Problem 5 : How to give weight to a node and update this weight.
 Problem 6 : How to group DObjects and update group contents.
+
+
+Key programming concepts :
+--------------------------
+* Identity : what is this DObject, and how to identify it uniquely
+* Replicas : how many, where and how to reach them
+* Behavior : what messages the replicas can send and receive to other DObjects
+* State : actual data, either fully in one place or as the sum of data in the replicas
+* Interfaces (endpoints) : how to interact locally with a replica (events, UI, ...)
+* Reference : a reference to a DObject contains all the info required to build a replica of it
+* Types : Object typing determines the interfaces, state and behavior of the DObject
+
+
+Question 1 :
+------------
+We have been discussing a paradigm where every DObject always has an existing physical representation on one node. This representation would be the original and the replicas would be either full or partial copies.
+
+[DObject1] -> [OriginalFull]
+           -> [Replica1Partial]
+           -> [Replica2Full]
+           -> [Replica3Partial]
+
+However, another paradigm would be to make sure that all the data in a DObject exists physically among all the replicas, meaning there would be a single master original.
+
+[DObject1] -> [Replica1Partial]
+           -> [Replica2Partial]
+           -> [Replica3Partial]
+(supposing the 3 replicas together contain all the data for the DObject)
+
+Is this second paradigm acceptable in terms of node failure recovery ?
+Is it acceptable in terms of data syncing ?
