@@ -16,6 +16,10 @@ body,html {
 	width					:11%;
 	min-width				:10px;
 }
+.leftspace {
+	width					:240px;
+	min-width				:10px;
+}
 .title {
 	font-size				:12pt;
 	padding-left			:0.7em;
@@ -36,10 +40,16 @@ body,html {
 .path span {
 	padding					:0;
 }
-.logo {
-	background-image		:url('logo.png');
+#parent {
+	background-image		:url('arrow.png');
+	background-position		:center left;
 	background-repeat		:no-repeat;
-	background-position		:center center;
+	padding-left			:20px;
+}
+.logo {
+	/*background-image		:url('logo.png');
+	background-repeat		:no-repeat;
+	background-position		:center center;*/
 	width					:85px;
 	height					:96px;
 	min-width				:85px;
@@ -47,6 +57,10 @@ body,html {
 }
 .unbreakable {
 	white-space				:nowrap;
+	color:#933;
+}
+.unbreakable strong {
+	color:black;
 }
 .links {
 	padding					:0 1em 0 1em;
@@ -70,32 +84,47 @@ body,html {
 	border-bottom-style		:none;
 	margin-right			:0.3em;
 }
+.leftmenu {
+	min-width:6em;
+	vertical-align:top;
+	padding					:4em 1em 2em 2em;
+	font-family				:helvetica, tahoma, arial, sans-serif;
+	font-size				:8pt;
+}
+.leftmenu a {
+	text-decoration			:none;
+	color					:#337;
+	padding					:0.2em 0.8em 0.2em 0.5em;
+	display					:block;
+	color					:#697286;
+}
+.leftmenu .selected {
+	font-weight				:bold;
+	color					:#444;
+	color					:#4c556b;
+}
+.leftmenu a:hover {
+	background-color		:black;
+	color					:white;
+}
+.leftmenu ol {
+	padding					:0 0em 2em 1.8em;
+	color:#A88;
+}
+.leftmenu ol li {
+	padding					:0.1em 0em;
+	margin:0;
+}
 .laycontent {
 	padding-left			:1em;
 }
 .laycontent h1 {
 	font-size				:15pt;
 	color					:#000;
+	text-shadow				:2px 2px 2px #999;
 }
 .vspace {
 	height					:22pt;
-}
-.content h1 {
-	font-size				:12pt;
-	margin					:45pt 0 0 0;
-}
-.content h2 {
-	font-size				:10pt;
-	color					:#245079;
-	padding-left			:2em;
-	margin					:25pt 0 0 0;
-}
-.content p {
-	font-size				:8pt;
-	text-align				:justify;
-	text-justify			:distribute;
-	font-family				:verdana, tahoma, arial, sans-serif;
-	text-indent				:1.4em;
 }
 .toc {
 	float					:right;
@@ -105,14 +134,40 @@ body,html {
 	padding					:0.5em 1em 0 1em;
 	margin					:2em 1.5em 0.7em 1.2em;
 	font-family				:helvetica, tahoma, arial, sans-serif;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;
+}
+.toc div {
+	padding-bottom			:0.5em;
+}
+.toc div #toclink {
+	color					:#E99;
+	padding-left			:0.7em;
+	padding-right			:0.7em;
+	display					:inline !important;
+}
+.toc div #toclist {
+	padding-top				:1em;
+	padding-bottom			:0;
 }
 .toc ol {
-	padding					:0.2em 1em 0.5em 2em;
+	padding					:0.2em 1em 0.2em 2em;
 	margin					:0;
+	color					:#933;
+}
+.toc ol li ol {
+	color					:#A99;
 }
 .toc a {
 	text-decoration			:none;
 	color					:#222;
+	display					:block;
+	padding					:0.1em 0.2em;
+}
+.toc a:hover {
+	background-color		:black;
+	color					:white;
 }
 .modified {
 	padding-top				:130pt;
@@ -139,4 +194,80 @@ body,html {
 	min-height				:36px;
 	height					:36px;
 	margin-top				:30pt;
+}
+.content {
+	font-family				:'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font-size				:8pt;
+}
+.content h1 {
+	font-size				:12pt;
+	margin					:45pt 0 0 0;
+	text-shadow				:2px 2px 2px #999;
+}
+.content h2 {
+	font-size				:10pt;
+	color					:#245079;
+	padding-left			:2em;
+	margin					:25pt 0 0 0;
+}
+.content p {
+	font-size				:8pt;
+	text-align				:justify;
+	text-justify			:distribute;
+	text-indent				:1.4em;
+}
+.content .class_name_pre {
+	padding					:0.5em 1em 0.5em 1em;
+	margin-left				:3em !important;
+	border					:5px solid #ddd;
+	border-top-style		:none;
+	border-bottom-style		:none;
+	border-right-style		:none;
+}
+.content .class_name_pre table {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.content code {
+	color					:#33A;
+}
+.content ul {
+}
+.content table {
+	border-collapse			:collapse;
+	border					:1px solid #99adbc;
+	margin					:0.5em;
+	-moz-box-shadow: 0 0 5px #999;
+	-webkit-box-shadow: 0 0 5px #999;
+	box-shadow: 0 0 5px #999;
+
+}
+.content table tr:hover {
+	background-color		:#eee;
+}
+.content table tr th {
+	background-color		:#c9d5de;
+	color					:black;
+	font-weight				:normal;
+	padding					:0.2em 0.9em;
+	border					:1px solid #99adbc;
+}
+.content table tr td {
+	padding					:0.2em 0.9em;
+	border					:1px solid #99adbc;
+}
+.content a {
+	text-decoration			:none;
+	color					:#c24913;
+	padding					:0.1em 0.2em;
+	border					:1px solid #e9936d;
+	border-left-style		:none;
+	border-right-style		:none;
+	border-top-style		:none;
+}
+.content a:hover {
+	background-color		:black;
+	color					:white;
+	border-color			:black;
 }
