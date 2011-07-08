@@ -2,6 +2,7 @@
 #include "versions.h"
 #include <yuni/core/io/directory.h>
 #include <yuni/core/io/file.h>
+#include <iostream>
 
 
 #define SEP Core::IO::Separator

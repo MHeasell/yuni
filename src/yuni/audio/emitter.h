@@ -34,10 +34,13 @@ namespace Audio
 		static const float DefaultPitch;
 		//! Default value for gain (1.0)
 		static const float DefaultGain;
-		//! Default value for attenuation (enabled)
-		static const bool DefaultAttenuation;
-		//! Default value for looping (false)
-		static const bool DefaultLooping;
+		enum
+		{
+			//! Default value for attenuation (enabled)
+			DefaultAttenuation = true,
+			//! Default value for looping (false)
+			DefaultLooping = false
+		};
 
 	public:
 		//! \name Constructors & Destructor

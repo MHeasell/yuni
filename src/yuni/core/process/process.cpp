@@ -132,11 +132,11 @@ namespace Process
 					const ssize_t size = read(infd[0], buffer, 4095);
 					if (size <= 0)
 					{
-						std::cout << "FAILED\n";
+						// std::cout << "FAILED\n";
 						break;
 					}
 					buffer[size] = '\0';
-					std::cout << "--" << size << "-- " << buffer;
+					// std::cout << "--" << size << "-- " << buffer;
 				}
 				while (true);
 				delete[] buffer;
@@ -151,12 +151,12 @@ namespace Process
 
 		virtual void onPause()
 		{
-			std::cout << "PAUSE\n";
+			// std::cout << "PAUSE\n";
 		}
 
 		virtual void onStop()
 		{
-			std::cout << "STOP\n";
+			// std::cout << "STOP\n";
 		}
 
 		virtual void onKill()
@@ -214,7 +214,7 @@ namespace Yuni
 	{
 		if (pRunning)
 		{
-			std::cout << "Destroying : running == true\n";
+			// std::cout << "Destroying : running == true\n";
 			cancel();
 			wait();
 		}
@@ -243,7 +243,7 @@ namespace Yuni
 			return false;
 
 		// The mutex will be unlocked by the new thread
-		std::cout << "locking\n";
+		// std::cout << "locking\n";
 		pMutex.lock();
 		pRunning = true;
 		pProcessID = 0u;
@@ -259,7 +259,7 @@ namespace Yuni
 		pArguments.push_back("-q");
 		pThread->arguments(pArguments);
 
-		std::cout << "starting................\n";
+		// std::cout << "starting................\n";
 		pThread->start();
 
 		return false;
@@ -271,7 +271,7 @@ namespace Yuni
 		if (pRunning)
 		{
 			pMutex.lock();
-			std::cout << "Waiting...\n";
+			// std::cout << "Waiting...\n";
 			ThreadPtr thread = pThread;
 			pMutex.unlock();
 			if (!(!thread))

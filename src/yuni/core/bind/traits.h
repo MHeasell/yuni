@@ -3003,9 +3003,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)();
+		mutable R (C::*pMember)();
 
 	}; // class BoundWithMember<C, R()>
 
@@ -3062,9 +3062,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0);
+		mutable R (C::*pMember)(A0);
 
 	}; // class BoundWithMember<C, R(A0)>
 
@@ -3121,9 +3121,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1);
+		mutable R (C::*pMember)(A0, A1);
 
 	}; // class BoundWithMember<C, R(A0, A1)>
 
@@ -3180,9 +3180,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2);
+		mutable R (C::*pMember)(A0, A1, A2);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2)>
 
@@ -3239,9 +3239,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3);
+		mutable R (C::*pMember)(A0, A1, A2, A3);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3)>
 
@@ -3298,9 +3298,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4)>
 
@@ -3357,9 +3357,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5)>
 
@@ -3416,9 +3416,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6)>
 
@@ -3475,9 +3475,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
 
@@ -3534,9 +3534,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
 
@@ -3593,9 +3593,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
 
@@ -3652,9 +3652,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
 
@@ -3711,9 +3711,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
 
@@ -3770,9 +3770,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
 
@@ -3829,9 +3829,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
 
@@ -3888,9 +3888,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
 
 	}; // class BoundWithMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
 
@@ -3957,11 +3957,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0);
+		mutable R (C::*pMember)(A0);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0)>
 
@@ -4018,11 +4018,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1);
+		mutable R (C::*pMember)(A0, A1);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1)>
 
@@ -4079,11 +4079,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2);
+		mutable R (C::*pMember)(A0, A1, A2);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2)>
 
@@ -4140,11 +4140,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3);
+		mutable R (C::*pMember)(A0, A1, A2, A3);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3)>
 
@@ -4201,11 +4201,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4)>
 
@@ -4262,11 +4262,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5)>
 
@@ -4323,11 +4323,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6)>
 
@@ -4384,11 +4384,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
 
@@ -4445,11 +4445,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
 
@@ -4506,11 +4506,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
 
@@ -4567,11 +4567,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
 
@@ -4628,11 +4628,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
 
@@ -4689,11 +4689,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
 
@@ -4750,11 +4750,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
 
@@ -4811,11 +4811,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
 
@@ -4872,11 +4872,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
 

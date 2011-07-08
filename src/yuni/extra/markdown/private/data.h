@@ -5,6 +5,7 @@
 # include "../../../core/string.h"
 # include "signature.h"
 # include "../fwd.h"
+# include <map>
 
 
 namespace Yuni

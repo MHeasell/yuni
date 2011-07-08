@@ -2,7 +2,7 @@
 # define __YUNI_NET_PROTOCOLS_H__
 
 # include "../yuni.h"
-# include "../core/string/string.h"
+# include "../core/string.h"
 
 
 

@@ -392,9 +392,9 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(<%=generator.list(i)%>);
+		mutable R (C::*pMember)(<%=generator.list(i)%>);
 
 	}; // class BoundWithMember<C, R(<%=generator.list(i)%>)>
 
@@ -461,11 +461,11 @@ namespace BindImpl
 
 	private:
 		//! Pointer to the object
-		C* pThis;
+		mutable C* pThis;
 		//! Pointer-to-member
-		R (C::*pMember)(<%=generator.list(i)%>);
+		mutable R (C::*pMember)(<%=generator.list(i)%>);
 		//! Userdata
-		UserDataTypeByCopy pUserdata;
+		mutable UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(<%=generator.list(i)%>)>
 

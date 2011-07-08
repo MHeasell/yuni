@@ -168,9 +168,9 @@ namespace Policy
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		ObjectLevelLockableNotRecursive() :pMutex(false) {}
+		ObjectLevelLockableNotRecursive() {}
 		//! Copy constructor
-		ObjectLevelLockableNotRecursive(const ObjectLevelLockableNotRecursive&) :pMutex(false) {}
+		ObjectLevelLockableNotRecursive(const ObjectLevelLockableNotRecursive&) {}
 		//! Destructor
 		~ObjectLevelLockableNotRecursive() {}
 		//@}

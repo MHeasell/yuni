@@ -99,10 +99,6 @@ if(YUNI_MODULE_AUDIO)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/audio.cmake")
 endif()
 
-if(YUNI_MODULE_SCRIPT)
-	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/script.cmake")
-endif()
-
 
 #if(YUNI_MODULE_ALGORITHMS)
 #	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/algorithms.cmake")
