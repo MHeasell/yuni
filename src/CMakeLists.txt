@@ -15,7 +15,7 @@ set(YUNI_URL_WEBSITE             "http://www.libyuni.org")
 set(YUNI_MAILING_LIST            "dev@libyuni.org")
 # Version
 set(YUNI_VERSION_HI              0)
-set(YUNI_VERSION_LO              1)
+set(YUNI_VERSION_LO              2)
 set(YUNI_VERSION                 "${YUNI_VERSION_HI}.${YUNI_VERSION_LO}")
 set(YUNI_VERSION_REV             0) # Svn Revision - see below
 set(YUNI_TARGET                  "debug") # Target : debug/release - see Target.cmake
