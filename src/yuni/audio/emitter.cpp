@@ -4,17 +4,19 @@
 #include "emitter.h"
 #include "../private/audio/av.h"
 #include "../private/audio/openal.h"
-
+#include <iostream>
 
 
 namespace Yuni
 {
 namespace Audio
 {
+
 	const float Emitter::DefaultPitch = 1.0f;
-	const float Emitter::DefaultGain = 1.0f;
-	const bool Emitter::DefaultAttenuation = true;
-	const bool Emitter::DefaultLooping = false;
+	const float Emitter::DefaultGain  = 1.0f;
+
+
+
 
 	bool Emitter::attachBufferDispatched(Sound::Ptr& buffer)
 	{

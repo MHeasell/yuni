@@ -267,47 +267,10 @@ set(SRC_CORE_STRING
 		core/customstring/wstring.h
 		core/customstring/wstring.hxx
 
-		# deprecated
-		core/string/string.h
-		core/string/string.hxx
-		core/string/converters.from.hxx
-		core/string/converters.to.hxx
-		core/string/forward.h
-		core/string/traits.hxx
-		core/string/iterators.hxx
-		core/string/traits/countchar.hxx
-		core/string/traits/find.hxx
-		core/string/traits/haschar.hxx
-		core/string/traits/length.hxx
-		core/string/traits/remove.hxx
-		core/string/traits/vsprintf.hxx
-		core/string/traits/findlastof.hxx
-		core/string/traits/findfirstof.hxx
 		core/string.h
 )
 source_group(core\\string FILES ${SRC_CORE_STRING})
 
-
-set(SRC_CORE_STRING_DEPRECATED
-		# deprecated
-		core/string/string.h
-		core/string/string.hxx
-		core/string/converters.from.hxx
-		core/string/converters.to.hxx
-		core/string/forward.h
-		core/string/traits.hxx
-		core/string/iterators.hxx
-		core/string/traits/countchar.hxx
-		core/string/traits/find.hxx
-		core/string/traits/haschar.hxx
-		core/string/traits/length.hxx
-		core/string/traits/remove.hxx
-		core/string/traits/vsprintf.hxx
-		core/string/traits/findlastof.hxx
-		core/string/traits/findfirstof.hxx
-		core/string.h
-)
-source_group(core\\string\\deprecated FILES ${SRC_CORE_STRING_DEPRECATED})
 
 set(SRC_CORE_STL
 		core/stl/algorithm.h
@@ -762,7 +725,6 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_SYSTEM_WINDOWS}
 		${SRC_CORE_SYSTEM_CONSOLE}
 		${SRC_CORE_STRING}
-		${SRC_CORE_STRING_DEPRECATED}
 		${SRC_CORE_STL} ${SRC_CORE_VALIDATOR}
 		${SRC_CORE_IO_FILENAME}
 		${SRC_CORE_IO_DIRECTORY}

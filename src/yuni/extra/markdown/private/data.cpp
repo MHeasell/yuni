@@ -3,6 +3,7 @@
 #include "../node.h"
 #include "../fwd.h"
 #include "../../../core/math.h"
+#include <iostream>
 
 
 namespace Yuni

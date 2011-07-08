@@ -20,17 +20,19 @@ namespace Audio
 			return false;
 
 		pAudioLoop.start();
-		Thread::Condition condition;
-		InitData initData(condition, pReady);
-		Bind<bool()> callback;
-		callback.bind(this, &QueueService::initDispatched, initData);
-		condition.lock();
-		pAudioLoop.dispatch(callback);
 
-		// Wait for the initDispatched to finish
-		condition.waitUnlocked();
-		condition.unlock();
+		// Init audio from the audio loop
+		{
+			Thread::Signal signal;
+			InitData initData(signal, pReady);
+			Bind<bool()> callback;
+			callback.bind(this, &QueueService::initDispatched, (InitData&)initData);
+			pAudioLoop.dispatch(callback);
+			// Wait for the initDispatched to finish
+			signal.wait();
+		}
 
+		
 		if (pReady)
 		{
 			sHasRunningInstance = 1;
@@ -51,10 +53,12 @@ namespace Audio
 		bank.clear();
 
 		// Close OpenAL emitters properly
-		Emitter::Map::iterator sEnd = emitter.pEmitters.end();
-		for (Emitter::Map::iterator it = emitter.pEmitters.begin(); it != sEnd; ++it)
 		{
-			Private::Audio::OpenAL::DestroySource(it->second->id());
+			Emitter::Map::iterator sEnd = emitter.pEmitters.end();
+			for (Emitter::Map::iterator it = emitter.pEmitters.begin(); it != sEnd; ++it)
+			{
+				Private::Audio::OpenAL::DestroySource(it->second->id());
+			}
 		}
 		emitter.pEmitters.clear();
 		// Close OpenAL
@@ -67,20 +71,20 @@ namespace Audio
 	}
 
 
-	bool QueueService::initDispatched(const InitData& data)
+	bool QueueService::initDispatched(InitData& data)
 	{
-  		data.condition.lock();
-		data.condition.unlock();
 		data.ready = Private::Audio::AV::Init() && Private::Audio::OpenAL::Init();
-
-		data.condition.notify();
-		return data.ready;
+		// The variable must be considered as destroyed as soon as the method
+		// 'notify()' is called
+		const bool ready = data.ready;
+		data.signal.notify();
+		return ready;
 	}
 
 
 	bool QueueService::loadSoundDispatched(const String& filePath)
 	{
-		std::cout << "Loading file \"" << filePath << "\"..." << std::endl;
+		// std::cout << "Loading file \"" << filePath << "\"..." << std::endl;
 
 		// Try to open the file
 		Private::Audio::AudioFile* file = Private::Audio::AV::OpenFile(filePath);
@@ -112,8 +116,8 @@ namespace Audio
 			Private::Audio::AV::CloseFile(file);
 			return false;
 		}
-		std::cout << "Sound is " << bits << " bits " << (channels > 1 ? "stereo " : "mono ")
-				  << rate << "Hz" << std::endl;
+		//std::cout << "Sound is " << bits << " bits " << (channels > 1 ? "stereo " : "mono ")
+		//	  << rate << "Hz" << std::endl;
 
 		// Associate the buffer with the stream
 		{
@@ -129,9 +133,9 @@ namespace Audio
 
 	bool QueueService::updateDispatched()
 	{
-		Emitter::Map::iterator end = emitter.pEmitters.end();
+		const Emitter::Map::iterator end = emitter.pEmitters.end();
 		for (Emitter::Map::iterator it = emitter.pEmitters.begin(); it != end; ++it)
-			it->second->updateDispatched();
+			(it->second)->updateDispatched();
 		return true;
 	}
 
@@ -140,3 +144,4 @@ namespace Audio
 
 } // namespace Audio
 } // namespace Yuni
+

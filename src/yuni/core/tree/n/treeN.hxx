@@ -578,10 +578,13 @@ namespace Core
 			if (--pRefCount != 0)
 				return;
 			// Early clean-up
+			// The method 'release' must be const for good code design. But
+			// we have to be properly detached from the parent node.
+			TreeNNode& ref = *(const_cast<TreeNNode*>(this));
 			if (pParent)
-				detachFromParentWL();
+				ref.detachFromParentWL();
 			if (pChildrenCount)
-				clearWL();
+				ref.clearWL();
 		}
 		delete this;
 	}

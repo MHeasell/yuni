@@ -22,10 +22,6 @@ set(YUNI_MODULE_DEVICES                   false)
 # Audio
 set(YUNI_MODULE_AUDIO                     false)
 
-# Scripts
-set(YUNI_MODULE_SCRIPT                    false)
-	set(YUNI_EXTERNAL_SCRIPT_LUA          true)
-
 # Network
 set(YUNI_MODULE_NET                       false)
 set(YUNI_MODULE_NET_MESSAGES              false)
@@ -114,7 +110,6 @@ if(MODULES)
 			set(YUNI_MODULE_AUDIO true)
 			set(YUNI_MODULE_NET true)
 			set(YUNI_MODULE_NET_MESSAGES true)
-			set(YUNI_MODULE_SCRIPT true)
 			set(YUNI_MODULE_UI true)
 			set(YUNI_MODULE_DATABASE true)
 			set(YUNI_MODULE_ALGORITHMS true)
@@ -261,30 +256,6 @@ if(MODULES)
 		endif()
 
 
-		# script
-		if("${it}" STREQUAL "script")
-			set(KeywordIsKnown true)
-			set(YUNI_MODULE_SCRIPT true)
-		endif()
-		# -lua
-		if("${it}" STREQUAL "-script")
-			set(KeywordIsKnown true)
-			set(YUNI_MODULE_SCRIPT false)
-		endif()
-
-		# lua
-		if("${it}" STREQUAL "lua")
-			set(KeywordIsKnown true)
-			set(YUNI_MODULE_SCRIPT true)
-			set(YUNI_EXTERNAL_SCRIPT_LUA true)
-		endif()
-		# -lua
-		if("${it}" STREQUAL "-lua")
-			set(KeywordIsKnown true)
-			set(YUNI_EXTERNAL_SCRIPT_LUA false)
-		endif()
-
-
 		# Tests
 		if("${it}" STREQUAL "tests")
 			set(KeywordIsKnown true)
@@ -391,13 +362,6 @@ endif()
 
 
 
-if(YUNI_MODULE_SCRIPT)
-	if(NOT YUNI_EXTERNAL_SCRIPT_LUA)
-		YMESSAGE("[!!] Warning: No external extension for the `script` module. The module has been disabled.")
-		set(YUNI_MODULE_SCRIPT false)
-	endif()
-endif()
-
 if(YUNI_MODULE_DATABASE)
 	if(NOT YUNI_MODULE_DB_PSQL)
 		YMESSAGE("[!!] Warning: No external extension for the `database` module. The module has been disabled.")
@@ -458,13 +422,6 @@ endif()
 
 if(YUNI_MODULE_AUDIO)
 	list(APPEND YUNI_MODULE_AVAILABLE audio)
-endif()
-
-if(YUNI_MODULE_SCRIPT)
-	list(APPEND YUNI_MODULE_AVAILABLE script)
-	if(YUNI_EXTERNAL_SCRIPT_LUA)
-		list(APPEND YUNI_MODULE_AVAILABLE lua)
-	endif()
 endif()
 
 if(YUNI_MODULE_UI)

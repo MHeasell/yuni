@@ -9,7 +9,7 @@
 # include "../core/string.h"
 # include "../core/smartptr.h"
 # include "../thread/policy.h"
-# include "../thread/condition.h"
+# include "../thread/signal.h"
 # include "emitter.h"
 # include "loop.h"
 # include "sound.h"
@@ -241,18 +241,18 @@ namespace Audio
 		//! This is meant to aggregate a condition and a boolean for dispatching
 		struct InitData
 		{
-			InitData(Thread::Condition& c, bool& r): condition(c), ready(r) {}
+			InitData(Thread::Signal& s, bool& r): signal(s), ready(r) {}
 
-			Thread::Condition& condition;
+			Thread::Signal& signal;
 			bool& ready;
 		};
 
 		//! This is meant to aggregate a condition with the emitter
 		struct EmitterPositionData
 		{
-			EmitterPositionData(Thread::Condition& c, float& f): condition(c), data(f) {}
+			EmitterPositionData(Thread::Signal& s, float& f): signal(s), data(f) {}
 
-			Thread::Condition& condition;
+			Thread::Signal& signal;
 			float& data;
 		};
 
@@ -263,7 +263,7 @@ namespace Audio
 		**
 		** \note Dispatched in the audio loop
 		*/
-		bool initDispatched(const InitData& initData);
+		bool initDispatched(InitData& initData);
 
 		/*!
 		** \brief Sound loading

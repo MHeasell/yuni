@@ -1,5 +1,6 @@
 
 #include "parser.h"
+#include <iostream>
 
 
 // The standard error output is not displayed on Windows

@@ -98,6 +98,7 @@ namespace Message
 
 	Error QueueService::sendAll(const char* const buffer, unsigned int length)
 	{
+		(void) buffer;
 		if (!length)
 			return errNone;
 		if (length < pMessageMaxSize)

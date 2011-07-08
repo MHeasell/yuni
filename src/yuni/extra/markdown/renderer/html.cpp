@@ -1,5 +1,6 @@
 
 #include "html.h"
+#include <iostream>
 
 
 namespace Yuni
