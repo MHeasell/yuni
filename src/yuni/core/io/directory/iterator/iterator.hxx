@@ -142,7 +142,7 @@ namespace Directory
 			pThread->options.rootFolder = pRootFolder;
 
 			// Starting the thread
-			return (Thread::IThread::errNone == pThread->start());
+			return (Thread::errNone == pThread->start());
 		}
 		else
 		# endif
@@ -177,7 +177,7 @@ namespace Directory
 		{
 			typename ThreadingPolicy::MutexLocker locker(*this);
 			return (pThread)
-				? (Yuni::Thread::IThread::errNone == pThread->stop(timeout))
+				? (Yuni::Thread::errNone == pThread->stop(timeout))
 				: false;
 		}
 		# endif

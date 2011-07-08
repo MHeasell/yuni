@@ -3,9 +3,10 @@
 
 # include "../yuni.h"
 # include "mutex.h"
-# include "condition.h"
+# include "signal.h"
 # include "../core/string.h"
 # include <vector>
+# include "fwd.h"
 
 
 namespace Yuni
@@ -48,27 +49,6 @@ namespace Thread
 		//! The most suitable smart pointer for the class
 		typedef SmartPtr<IThread> Ptr;
 
-		//! Return error status
-		enum Error
-		{
-			//! No error, the operation succeeded
-			errNone = 0,
-			//! A timeout occured
-			errTimeout,
-			//! Impossible to create the new thread
-			errThreadCreation,
-			//! The onStarting handler returned false.
-			errAborted,
-			//! The operation failed for an unkown reason
-			errUnkown
-		};
-		enum
-		{
-			//! The default timeout for stopping a thread
-			defaultTimeout = 5000, // 5 seconds
-		};
-
-
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -99,7 +79,7 @@ namespace Thread
 		** \param timeout The timeout in milliseconds before killing the thread (default: 5000ms)
 		** \return An error status (`errNone` if succeeded)
 		*/
-		Error stop(const uint32 timeout = defaultTimeout);
+		Error stop(unsigned int timeout = defaultTimeout);
 
 		/*!
 		** \brief Wait for an infinite amount of time for the end of the thread
@@ -127,7 +107,7 @@ namespace Thread
 		** \see stop()
 		** \see start()
 		*/
-		Error restart(const unsigned int timeout = defaultTimeout);
+		Error restart(unsigned int timeout = defaultTimeout);
 
 		/*!
 		** \brief Ask to Stop the execution of the thread as soon as possible
@@ -173,7 +153,7 @@ namespace Thread
 		** \param delay The delay in miliseconds. O will only return if the thread should exit
 		** \return True indicates that the thread should stop immediately
 		*/
-		bool suspend(const unsigned int delay = 0) const;
+		bool suspend(const unsigned int delay = 0);
 
 		/*!
 		** \brief Get if the thread should abort as soon as possible
@@ -182,7 +162,7 @@ namespace Thread
 		** \attention This method must only be called inside the execution of the thread
 		** \return True indicates that the thread should stop immediately
 		*/
-		bool shouldAbort() const;
+		bool shouldAbort();
 
 		/*!
 		** \brief Event: The thread has just been started
@@ -256,25 +236,42 @@ namespace Thread
 
 
 	private:
-		//! Condition used in the startup process. See start().
-		Condition pStartupCond;
-		//! Condition for exiting
-		Condition pAboutToExitCond;
-		//! Condition for stopping
-		mutable Condition pMustStopCond;
 		# ifndef YUNI_NO_THREAD_SAFE
+		//! Mutex for starting up, see start()
+		Signal pSignalStartup;
+		//! Signal for stopping
+		Signal pSignalHaveStopped;
+		//! Signal
+		Signal pSignalHavePaused;
+		//! The thread must stop as soon as possible
+		Signal pSignalMustStop;
+		//! The thread can wake up
+		Signal pSignalWakeUp;
+		//! Mutex for protecting pShouldStop and pStarted
+		Mutex pInnerFlagMutex;
+
+		# ifdef YUNI_OS_WINDOWS
+		void* pThreadHandle;
+		# else
 		//! ID of the thread, for pthread
 		pthread_t pThreadID;
-		# endif
+		# endif // YUNI_OS_WINDOWS
+		# endif // YUNI_NO_THREAD_SAFE
 
 		//! Get if the thread is running
 		volatile bool pStarted;
 		//! Should stop the thread ?
 		volatile bool pShouldStop;
 
+		# ifndef YUNI_NO_THREAD_SAFE
 		// our friend
 		friend class Yuni::Job::IJob;
-		friend void* Yuni::Private::Thread::threadMethodForPThread(void* arg);
+		# ifdef YUNI_OS_WINDOWS
+		friend DWORD WINAPI Yuni::Private::Thread::threadCallbackExecute(void* arg);
+		# else
+		friend void* Yuni::Private::Thread::threadCallbackExecute(void* arg);
+		# endif
+		# endif
 
 	}; // class IThread
 

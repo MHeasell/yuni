@@ -2,13 +2,17 @@
 # define __YUNI_THREADS_MUTEX_H__
 
 # include "../yuni.h"
-# include "pthread.h"
+# ifndef YUNI_NO_THREAD_SAFE
+#	include "pthread.h"
+#	ifdef YUNI_OS_WINDOWS
+#		include "../core/system/windows.hdr.h"
+# 	endif
+# endif
 
 
 
 namespace Yuni
 {
-
 
 	/*!
 	** \brief  Mechanism to avoid the simultaneous use of a common resource
@@ -37,14 +41,23 @@ namespace Yuni
 		//! \name Constructor & Destructor
 		//@{
 		/*!
-		** \brief Default constructor, recursive by default
+		** \brief Default constructor, non recursive by default
 		*/
 		Mutex();
 		/*!
 		** \brief Default constructor
 		*/
-		Mutex(const bool recursive);
-		//! Destructor
+		//explicit Mutex(const bool recursive);
+		/*!
+		** \brief Copy constructor
+		**
+		** This constructor does actually nothing but it allows the compilation
+		** of other classes which would implement a copy constructor
+		*/
+		Mutex(const Mutex&);
+		/*!
+		** \brief Destructor
+		*/
 		~Mutex();
 		//@}
 
@@ -62,6 +75,7 @@ namespace Yuni
 		//@}
 
 		# ifndef YUNI_NO_THREAD_SAFE
+		# ifndef YUNI_OS_WINDOWS
 		//! \name PThread wrapper
 		//@{
 		/*!
@@ -70,11 +84,25 @@ namespace Yuni
 		::pthread_mutex_t& pthreadMutex();
 		//@}
 		# endif
+		# endif
+
+
+		//! \name Operators
+		//@{
+		//! Operator = (do nothing)
+		Mutex& operator = (const Mutex&);
+		//@}
+
 
 	private:
 		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		//! The critical section
+		CRITICAL_SECTION pSection;
+		# else
 		//! The PThread mutex
 		::pthread_mutex_t pPthreadLock;
+		# endif
 		# endif
 
 	}; // class Mutex

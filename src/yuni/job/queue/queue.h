@@ -42,7 +42,7 @@ namespace Job
 		enum
 		{
 			//! A default timeout
-			defaultTimeout = Yuni::Thread::IThread::defaultTimeout,
+			defaultTimeout = Yuni::Thread::defaultTimeout,
 		};
 
 		/*!

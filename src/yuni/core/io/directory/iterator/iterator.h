@@ -137,7 +137,7 @@ namespace Directory
 			detached = false,
 			# endif
 			//! The default timeout for stopping a thread
-			defaultTimeout = Thread::IThread::defaultTimeout,
+			defaultTimeout = Thread::defaultTimeout,
 		};
 		//! Itself
 		typedef IIterator<detached> IteratorType;
