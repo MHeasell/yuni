@@ -21,10 +21,6 @@ if (NOT WIN32 AND NOT WIN64)
 	LIBYUNI_CONFIG_DEFINITION("both" "core" "_FILE_OFFSET_BITS=64")
 endif()
 
-#
-# PThreads
-#
-DEVPACK_IMPORT_PTHREADS()
 
 include(CheckCXXSourceCompiles)
 include(CheckIncludeFiles)
@@ -669,18 +665,19 @@ source_group(core\\system\\windows FILES ${SRC_CORE_SYSTEM_WINDOWS})
 # Threads
 set(SRC_THREADS
 		thread/policy.h
+		thread/fwd.h
 		thread/pthread.h
 		thread/mutex.h
 		thread/mutex.hxx
 		thread/thread.h
 		thread/thread.hxx
 		thread/thread.cpp
+		thread/signal.h
+		thread/signal.hxx
+		thread/signal.cpp
 		thread/timer.h
 		thread/timer.hxx
 		thread/timer.cpp
-		thread/condition.h
-		thread/condition.cpp
-		thread/condition.hxx
 		thread/array.h
 		thread/array.hxx)
 source_group(threads FILES ${SRC_THREADS})
@@ -701,7 +698,7 @@ set(SRC_JOBS
 		job/queue/waitingroom.hxx
 		job/queue/waitingroom.cpp
 
-# Scheduler
+		# Scheduler
 		job/scheduler/highestpriorityfirst.h
 		job/scheduler/highestpriorityfirst.hxx
 		)

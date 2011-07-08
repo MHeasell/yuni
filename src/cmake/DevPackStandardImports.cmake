@@ -63,32 +63,6 @@ endmacro()
 
 
 #
-# PThreads
-#
-macro(DEVPACK_IMPORT_PTHREADS)
-	include(FindThreads)
-	if(CMAKE_USE_WIN32_THREADS_INIT)
-		YMESSAGE("Threading Support: PThreads for Windows (via DevPacks)")
-		if(WIN32)
-			DEVPACK_SMART_IMPORT("pthreads" "2.8.0" "3" "all")
-			list(APPEND YUNI_STATIC_CORE "${YUNI_EXT_PTHREADS_LIB}")
-			list(APPEND YUNI_INCLUDE   "${YUNI_EXT_PTHREADS_INCLUDE}")
-			LIBYUNI_CONFIG_INCLUDE_PATH("both" "core" "${YUNI_EXT_PTHREADS_INCLUDE}")
-			LIBYUNI_CONFIG_LIB_RAW_COMMAND("both" "core" "${YUNI_EXT_PTHREADS_LIB}")
-		endif()
-	else()
-		if(NOT CMAKE_USE_PTHREADS_INIT)
-			YFATAL("PThreads is required.")
-		endif()
-		link_libraries(${CMAKE_THREAD_LIBS_INIT})
-		LIBYUNI_CONFIG_LIB_RAW_COMMAND("both" "core" "${CMAKE_THREAD_LIBS_INIT}")
-		YMESSAGE("Threading Support: PThreads (${CMAKE_THREAD_LIBS_INIT})")
-	endif()
-endmacro()
-
-
-
-#
 # Cairo - Pango
 #
 macro(DEVPACK_IMPORT_CAIROPANGO)

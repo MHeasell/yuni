@@ -10,23 +10,20 @@ namespace Thread
 {
 
 
-
-	inline IThread::~IThread()
-	{
-		assert(pStarted == false && "A thread can not be destroyed while being still started");
-	}
-
-
 	inline bool IThread::started() const
 	{
 		return pStarted;
 	}
 
 
-	inline bool IThread::shouldAbort() const
+	inline bool IThread::shouldAbort()
 	{
-		ConditionLocker locker(pMustStopCond);
+		# ifndef YUNI_NO_THREAD_SAFE
+		Yuni::MutexLocker locker(pInnerFlagMutex);
 		return (pShouldStop || !pStarted);
+		# else
+		return false;
+		# endif
 	}
 
 

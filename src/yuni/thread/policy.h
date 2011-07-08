@@ -112,9 +112,9 @@ namespace Policy
 		//! \name Constructor & Destructor
 		//@{
 		//! Default constructor
-		ObjectLevelLockable() :pMutex(true) {}
+		ObjectLevelLockable() {}
 		//! Copy constructor
-		ObjectLevelLockable(const ObjectLevelLockable&) :pMutex(true) {}
+		ObjectLevelLockable(const ObjectLevelLockable&) {}
 		//! Destructor
 		~ObjectLevelLockable() {}
 		//@}

@@ -152,7 +152,7 @@ namespace Thread
 		**   (and stopped) if they are not used any longer.
 		** \param timeout A timeout for waiting a thread to stop (in milliseconds)
 		*/
-		void stop(unsigned int timeout = IThread::defaultTimeout);
+		void stop(unsigned int timeout = defaultTimeout);
 
 		/*!
 		** \brief Restart all threads
@@ -161,7 +161,7 @@ namespace Thread
 		**   (and stopped) if they are not used any longer.
 		** \param timeout A timeout for waiting a thread to stop (in milliseconds)
 		*/
-		void restart(unsigned int timeout = IThread::defaultTimeout);
+		void restart(unsigned int timeout = defaultTimeout);
 
 		/*!
 		** \brief Wake up all threads

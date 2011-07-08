@@ -22,7 +22,7 @@
 #if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 #	define YUNI_OS_GETPID  _getpid
 #else
-#	define YUNI_OS_GETPID  getpid
+#	define YUNI_OS_GETPID   getpid
 #endif
 
 
@@ -34,81 +34,96 @@ namespace Private
 namespace Thread
 {
 
+	# ifndef YUNI_NO_THREAD_SAFE
 
-	extern "C"
+	/*!
+	** \brief This procedure will be run in a separate thread and will run IThread::onExecute()
+	*/
+	extern "C"  YUNI_THREAD_FNC_RETURN  threadCallbackExecute(void* arg)
 	{
-		/*!
-		** \brief This procedure will be run in a separate thread and will run IThread::baseExecute()
-		*/
-		void* threadMethodForPThread(void* arg)
+		// assert, for the debugger
+		assert(arg && "Yuni Thread Internal: invalid argument (pthread callback)");
+		if (!arg)
+			return 0;
+			
+		// Get back our object.
+		Yuni::Thread::IThread& thread = *((Yuni::Thread::IThread *) arg);
+		assert(!thread.pStarted && "Yuni Thread: The thread is already started");
+
+		# ifndef YUNI_OS_WINDOWS
+		// pthread - Adjust cancellation behaviors
+		::pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+		::pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+		# endif
+
+		if (thread.onStarting())
 		{
-			assert(NULL != arg && "Yuni Thread Internal: invalid argument (pthread callback)");
+			// onStarting authorized us to continue. So say we are now running.
+			// NOTE: We should not lock pMutex for pStarted here.
+			//       The lock on pMutex is held by start(),
+			//       and we hold a condition lock on start(), so all is well.
+			thread.pStarted = true;
 
-			// Adjust cancellation behaviors
-			::pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
-			::pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+			// signal the start() method in the parent thread
+			thread.pSignalStartup.notify();
 
-			// Get back our object.
-			Yuni::Thread::IThread* t = (Yuni::Thread::IThread *) arg;
-
-			assert(false == t->pStarted && "Yuni Thread: The thread is already started");
-
-			// Aquire the condition, so that start() cannot continue.
-			t->pStartupCond.lock();
-
-			if (t->onStarting())
+			// Launch the code
+			do
 			{
-				// onStarting authorized us to continue. So say we are now running.
-				// NOTE: We should not lock pMutex for pStarted here.
-				//       The lock on pMutex is held by start(),
-				//       and we hold a condition lock on start(), so all is well.
-				t->pStarted = true;
-
-				// signal the start() method in the parent thread, then unlock.
-				t->pStartupCond.notify();
-				t->pStartupCond.unlock();
-
-				// Launch the code
-				while (t->onExecute())
+				thread.pSignalHavePaused.reset();
+				if (!thread.onExecute())
 				{
-					if (t->pShouldStop || !t->pStarted)
-						break;
-					// Notifying the thread that it has just been paused
-					t->onPause();
-					// Waiting for being waked up
-					Yuni::Thread::ConditionLocker locker(t->pMustStopCond);
-					t->pMustStopCond.waitUnlocked();
-					// We have been waked up ! But perhaps we should abort as soon as
-					//possible...
-					if (t->pShouldStop || !t->pStarted)
-						break;
+					thread.pSignalHavePaused.notify();
+					break;
 				}
+				if (thread.pShouldStop || !thread.pStarted)
+				{
+					thread.pSignalHavePaused.notify();
+					break;
+				}
+				// Notifying the thread that it has just been paused
+				thread.onPause();
+				thread.pSignalHavePaused.notify();
+				// Waiting for being waked up
+				thread.pSignalWakeUp.wait();
 
-				// The thread has stopped, execute the user's stop handler.
-				t->onStop();
-
-				// We have stopped executing user code, and are exiting.
-				// Signal any threads waiting for our termination.
-				// NOTE: We should not lock pMutex here, since a lock on it MAY be held by stop().
-				//       Instead, we lock pAboutToExitCond. Indeed, stop() will wait for a signal on ExitCond.
-				//       while we hold ExitCond, stop(), which waits on ExitCond, holds pMutex.
-				t->pAboutToExitCond.lock();
-				t->pShouldStop = true;
-				t->pStarted = false;
-				t->pAboutToExitCond.notify();
-				t->pAboutToExitCond.unlock();
+				// We have been waked up ! But perhaps we should abort as soon as
+				//possible...
+				Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
+				if (thread.pShouldStop || !thread.pStarted)
+				{
+					thread.pSignalHavePaused.notify();
+					break;
+				}
 			}
-			else
-			{
-				// The startup failed. So, pStarted is left to false.
-				// signal the start() method in the parent thread, then unlock.
-				t->pStartupCond.notify();
-				t->pStartupCond.unlock();
-			}
+			while (true);
 
-			return NULL;
+			// The thread has stopped, execute the user's stop handler.
+			thread.onStop();
+
+			// We have stopped executing user code, and are exiting.
+			// Signal any threads waiting for our termination.
+			thread.pInnerFlagMutex.lock();
+			thread.pShouldStop = true;
+			thread.pStarted = false;
+			thread.pInnerFlagMutex.unlock();
 		}
+		else
+		{
+			// The startup failed. So, pStarted is left to false.
+			// signal the start() method in the parent thread
+			thread.pStarted = false;
+			thread.pSignalStartup.notify();
+			thread.pSignalHavePaused.notify();
+		}
+
+		thread.pSignalHaveStopped.notify();
+		return 0;
 	}
+
+
+	# endif // ifndef YUNI_NO_THREAD_SAFE
+
 
 
 } // namespace Yuni
@@ -131,197 +146,254 @@ namespace Thread
 	}
 
 
+
+
 	IThread::IThread()
 		:pStarted(false), pShouldStop(true)
-	{}
-
-
-	IThread::Error IThread::start()
 	{
-		do
+		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		pThreadHandle = NULL;
+		# endif
+		# endif
+	}
+
+
+	IThread::~IThread()
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		assert(pStarted == false && "A thread can not be destroyed while being still started");
+		# endif
+		# endif
+		if (pStarted)
 		{
-			ThreadingPolicy::MutexLocker locker(*this);
+			// It is dangerous to call this method here. The VTable might be corrupted
+			// and it may produce strange results
+			stop(); 
+		}
+	}
 
-			// Lock the startup conditon.
-			ConditionLocker condLocker(pStartupCond);
 
+	Error IThread::start()
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		ThreadingPolicy::MutexLocker locker(*this);
+		{
+			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
 			if (pStarted)
 			{
 				// The thread is already running, bail out.
 				// We have to wake it up
-				break;
+				pSignalWakeUp.notify();
+				return errNone;
 			}
-
 			// We're starting, so we should not stop too soon :)
 			pShouldStop = false;
-
-			// Lock the startup condition before creating the thread,
-			// then wait for it. The thread will signal the condition when it
-			// successfully have set isRunning _and_ called the triggers.
-			// Then we can check the isRunning status and determine if the startup
-			// was a success or not.
-			if (::pthread_create(&pThreadID, NULL, Yuni::Private::Thread::threadMethodForPThread, this))
-			{
-				// Thread creation failed, abort.
-				return errThreadCreation;
-			}
-
-			// Unlock and wait to be signalled by the new thread.
-			// This MUST happen.
-			pStartupCond.waitUnlocked();
-			// The condition is now locked again, our thread has set pStarted according
-			// to the selected course of action.
-
-			if (!pStarted)
-			{
-				// The thread has been aborted by a startup handler.
-				return errAborted;
-			}
-
-			return errNone;
 		}
-		while (true);
 
-		// The thread is already started.
-		wakeUp();
+		// Reset the signal
+		pSignalStartup.reset();
+		pSignalHaveStopped.reset();
+		pSignalHavePaused.reset();
+		pSignalMustStop.reset();
+		pSignalWakeUp.reset();
+
+		# ifdef YUNI_OS_WINDOWS
+		pThreadHandle = CreateThread(NULL, 0, Yuni::Private::Thread::threadCallbackExecute,
+			this, 0, NULL);
+		if (!pThreadHandle)
+			return errThreadCreation;
+		# else
+		// Lock the startup condition before creating the thread,
+		// then wait for it. The thread will signal the condition when it
+		// successfully have set isRunning _and_ called the triggers.
+		// Then we can check the isRunning status and determine if the startup
+		// was a success or not.
+		if (::pthread_create(&pThreadID, NULL, Yuni::Private::Thread::threadCallbackExecute, this))
+			return errThreadCreation;
+		# endif
+
+		// Unlock and wait to be signalled by the new thread.
+		// This MUST happen.
+		pSignalStartup.wait();
+
+		// Checking if the thread has really started
+		{
+			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
+			// The thread may have been aborted by the startup handler.
+			if (!pStarted)
+				return errAborted;
+		}
 		return errNone;
+
+		# else // YUNI_NO_THREAD_SAFE
+		if (onStarting())
+		{
+			onExecute();
+			onStop();
+		}
+		return errNone;
+		# endif
 	}
 
 
-	IThread::Error IThread::stop(const uint32 timeout)
+	Error IThread::stop(unsigned int timeout)
 	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		assert(timeout < 2147483648u && "Invalid range for timeout (IThread::stop(timeout))");
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		// Our thread will be blocked in pAboutToExitCond.notify() if it crosses it.
-		pAboutToExitCond.lock();
-
-		// Check the thread status
-		if (!pStarted) // already stopped, nothing to do.
 		{
-			pAboutToExitCond.unlock();
-			return errNone;
+			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
+			// Check the thread status
+			if (!pStarted) // already stopped, nothing to do.
+				return errNone;
+
+			// Early indicates that this thread should stop, should it check that value.
+			pShouldStop = true;
 		}
 
-		// Early indicates that this thread should stop, should it check that value.
-		pShouldStop = true;
-		// Notify
-		pMustStopCond.notifyLocked();
-
+		pSignalWakeUp.notify();
+		pSignalMustStop.notify();
 		// Our status
 		Error status = errNone;
 
-		if (pAboutToExitCond.waitUnlocked(timeout)) // We timed out.
+		if (!pSignalHaveStopped.wait(timeout)) // We timed out.
 		{
 			// We are out of time, no choice but to kill our thread
+			# ifdef YUNI_OS_WINDOWS
+			TerminateThread(pThreadHandle, 0);
+			# else
 			::pthread_cancel(pThreadID);
+			# endif
+
 			status = errTimeout;
 			// Notify
 			onKill();
 		}
 
-		// Release the ExitCondition, so the thread can join us.
-		pAboutToExitCond.unlock();
 		// Wait for the thread be completely stopped
+		# ifdef YUNI_OS_WINDOWS
+		WaitForSingleObject(pThreadHandle, INFINITE);
+		pThreadHandle = NULL;
+		# else
 		::pthread_join(pThreadID, NULL);
+		# endif
+
 		// The thread is no longer running, force status to stopped (ie, if we killed it)
 		// It is thread-safe, since the thread is not running anymore AND we hold pMutex.
+		pInnerFlagMutex.lock();
 		pStarted = false;
+		pInnerFlagMutex.unlock();
+
 
 		return status;
-	}
 
-
-
-	IThread::Error IThread::wait()
-	{
-		while (errTimeout == wait(604800000u)) // one week
-			;
+		# else // YUNI_NO_THREAD_SAFE
 		return errNone;
+		# endif
 	}
 
 
 
-	IThread::Error IThread::wait(unsigned int timeout)
+	Error IThread::wait()
 	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		while (errTimeout == wait(604800000u))
+			; // infinite wait
+		return errNone;
+
+		# else // YUNI_NO_THREAD_SAFE
+		return errNone;
+		# endif
+	}
+
+
+
+	Error IThread::wait(unsigned int timeout)
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		assert(timeout < 2147483648u && "Invalid range for timeout (IThread::wait(timeout))");
 		ThreadingPolicy::MutexLocker locker(*this);
-
-		// Our thread will be blocked in pAboutToExitCond.notify() if it crosses it.
-		pAboutToExitCond.lock();
-
-		// Check the thread status
-		if (!pStarted) // already stopped, nothing to do.
 		{
-			pAboutToExitCond.unlock();
-			return errNone;
+			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
+			if (!pStarted) // already stopped, nothing to do.
+				return errNone;
 		}
 
-		// Notify
-		pMustStopCond.notifyLocked();
+		if (!pSignalHavePaused.wait(timeout)) // We timed out.
+			return errTimeout;
 
-		// Our status
-		Error status = errNone;
+		return errNone;
 
-		if (pAboutToExitCond.waitUnlocked(timeout)) // We timed out.
-			status = errTimeout;
-
-		// Release the ExitCondition, so the thread can join us.
-		pAboutToExitCond.unlock();
-
-		return status;
+		# else // YUNI_NO_THREAD_SAFE
+		(void) timeout;
+		return errNone;
+		# endif
 	}
 
 
 
 	void IThread::wakeUp()
 	{
+		# ifndef YUNI_NO_THREAD_SAFE
 		ThreadingPolicy::MutexLocker locker(*this);
+		Yuni::MutexLocker flagLocker(pInnerFlagMutex);
+		if (pStarted)
+			pSignalWakeUp.notify();
 
-		// Our thread will be blocked in pAboutToExitCond.notify() if it crosses it.
-		pAboutToExitCond.lock();
-
-		// Check the thread status
-		if (!pStarted) // already stopped, nothing to do.
-		{
-			pAboutToExitCond.unlock();
-			return;
-		}
-
-		// Notify
-		pMustStopCond.notifyLocked();
-		// Release the ExitCondition, so the thread can join us.
-		pAboutToExitCond.unlock();
+		# else // YUNI_NO_THREAD_SAFE
+		# endif
 	}
 
 
-	bool IThread::suspend(const unsigned int delay) const
+	bool IThread::suspend(const unsigned int delay)
 	{
-		ConditionLocker locker(pMustStopCond);
+		# ifndef YUNI_NO_THREAD_SAFE
+		// The thread may have to stop
+		{
+			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
+			if (pShouldStop || !pStarted)
+				return true;
+		}
 
-		// The thread should stop as soon as possible
-		if (pShouldStop)
-			return true;
-		// If we have not started, why bother to wait...
-		if (!pStarted)
-			return true;
 		// We should rest for a while...
 		if (delay)
-			pMustStopCond.waitUnlocked((uint32) delay);
+		{
+			// If the timeout has been reached, the thread can continue
+			if (!pSignalMustStop.wait(delay))
+				return false;
+		}
 
+		Yuni::MutexLocker flagLocker(pInnerFlagMutex);
 		return (pShouldStop || !pStarted);
+
+		# else // YUNI_NO_THREAD_SAFE
+		(void) delay;
+		return false;
+		# endif
 	}
 
 
 	void IThread::gracefulStop()
 	{
+		# ifndef YUNI_NO_THREAD_SAFE
 		pMutex.lock();
+		pInnerFlagMutex.lock();
 		pShouldStop = true;
-		pMustStopCond.notifyLocked();
+		pInnerFlagMutex.unlock();
+		pSignalWakeUp.notify();
+		pSignalMustStop.notify();
 		pMutex.unlock();
+		# else // YUNI_NO_THREAD_SAFE
+		# endif
 	}
 
 
-	IThread::Error IThread::restart(const unsigned int timeout)
+	Error IThread::restart(unsigned int timeout)
 	{
+		assert(timeout < 2147483648u && "Invalid range for timeout (IThread::restart(timeout))");
 		const Error status = stop(timeout);
 		return (status != errNone) ? status : start();
 	}
