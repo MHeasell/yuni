@@ -27,7 +27,7 @@ void Make::findAllSourceFiles()
 		const String& name = *i;
 		const String& filename = i.filename();
 
-		if (!i.isFile() || name != "index.text")
+		if (!i.isFile() || name != "article.xml")
 			continue;
 		assert(filename.size() > input.size());
 		assert(slotIndex < jobs.size());
@@ -40,7 +40,7 @@ void Make::findAllSourceFiles()
 
 	if (count)
 	{
-		logs.info() << count << (count > 1 ? " pages to build, " : "page to build, ") << nbJobs << (nbJobs > 1 ? " threads" : " thread");
+		logs.info() << count << (count > 1 ? " articles to build, " : "article to build, ") << nbJobs << (nbJobs > 1 ? " threads" : " thread");
 		for (unsigned int i = 0; i != jobs.size(); ++i)
 			queueService += jobs[i];
 	}

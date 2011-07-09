@@ -13,7 +13,8 @@ int main(int argc, char** argv)
 {
 	logs.applicationName("yunidoc-make");
 	Make make;
-	make.parseCommandLine(argc, argv);
+	if (!make.parseCommandLine(argc, argv))
+		return EXIT_FAILURE;
 	queueService.start();
 	make.findAllSourceFiles();
 	queueService.wait(60 * 60);

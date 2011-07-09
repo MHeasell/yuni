@@ -11,8 +11,8 @@ using namespace Yuni;
 
 
 
-Make::Make()
-	:printVersion(false),
+Make::Make() :
+	printVersion(false),
 	debug(false),
 	verbose(false),
 	clean(false)
@@ -20,7 +20,7 @@ Make::Make()
 }
 
 
-void Make::parseCommandLine(int argc, char** argv)
+bool Make::parseCommandLine(int argc, char** argv)
 {
 	unsigned int cpuCount = System::CPU::Count();
 	nbJobs = cpuCount;
@@ -48,20 +48,19 @@ void Make::parseCommandLine(int argc, char** argv)
 		if (verbose || debug)
 			logs.error() << "Error when parsing the command line";
 		exit(status);
-		return;
+		return false;
 	}
 
 	if (!input)
 	{
 		logs.error() << "Please specify an input folder (--input, see --help for more informations)";
-		exit(EXIT_FAILURE);
+		return false;
 	}
 	if (!htdocs)
 	{
 		logs.error() << "Please specify a htdocs folder (--htdocs, see --help for more informations)";
-		exit(EXIT_FAILURE);
+		return false;
 	}
-
 	{
 		String tmp;
 		Core::IO::MakeAbsolute(tmp, input);
@@ -69,19 +68,19 @@ void Make::parseCommandLine(int argc, char** argv)
 		Core::IO::MakeAbsolute(tmp, htdocs);
 		Core::IO::Normalize(htdocs, tmp);
 	}
-
 	if (!Core::IO::Directory::Exists(input))
 	{
 		logs.error() << "IO Error: Directory does not exist: " << input;
-		exit(EXIT_FAILURE);
+		return false;
 	}
 	if (!Core::IO::Directory::Exists(htdocs))
 	{
 		logs.error() << "IO Error: Directory does not exist: " << htdocs;
-		exit(EXIT_FAILURE);
+		return false;
 	}
 
 	nbJobs = Math::MinMax<unsigned int>(nbJobs, 1, cpuCount);
+	return true;
 }
 
 

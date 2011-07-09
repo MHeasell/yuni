@@ -8,6 +8,7 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/Modules.cmake")
 
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../..")
+include_directories(tinyxml)
 
 # Add definitions to help finding yuni parameters once installed (prefix + versioned path)
 add_definitions("-DYUNI_VERSIONED_INST_PATH=\"${YUNI_VERSIONED_INST_PATH}\"")
@@ -28,6 +29,13 @@ set(src
 	logs.cpp
 	find-all-source-files.cpp
 	main.cpp
+
+	tinyxml/tinystr.cpp
+	tinyxml/tinystr.h
+	tinyxml/tinyxml.cpp
+	tinyxml/tinyxml.h
+	tinyxml/tinyxmlerror.cpp
+	tinyxml/tinyxmlparser.cpp
 	)
 
 # Build the in-tree version of yuni-config.

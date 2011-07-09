@@ -14,7 +14,7 @@ public:
 	*/
 	Make();
 
-	void parseCommandLine(int argc, char** argv);
+	bool parseCommandLine(int argc, char** argv);
 
 	void findAllSourceFiles();
 
