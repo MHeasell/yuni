@@ -39,7 +39,7 @@ namespace // anonymous
 			return true;
 		}
 
-		virtual bool VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attr)
+		virtual bool VisitEnter(const TiXmlElement& element, const TiXmlAttribute* /*attr*/)
 		{
 			const TIXML_STRING& name = element.ValueTStr();
 			if (name == "h1")
@@ -76,7 +76,7 @@ namespace // anonymous
 			return true;
 		}
 
-		virtual bool VisitExit(const TiXmlElement& element)
+		virtual bool VisitExit(const TiXmlElement& /*element*/)
 		{
 			popCoeff();
 			return true;
@@ -142,7 +142,7 @@ void CompileJob::onExecute()
 }
 
 
-void CompileJob::generate(const String& rel, const String& src, const String& target)
+void CompileJob::generate(const String& rel, const String& src, const String& /*target*/)
 {
 	logs.info() << "building " << rel;
 	TiXmlDocument doc(src.c_str());
