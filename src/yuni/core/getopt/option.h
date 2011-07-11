@@ -3,6 +3,7 @@
 
 # include "../string.h"
 # include "../customstring.h"
+# include <cassert>
 
 
 /*!
