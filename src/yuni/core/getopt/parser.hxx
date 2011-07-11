@@ -1,6 +1,8 @@
 #ifndef __YUNI_CORE_GETOPT_PARSER_HXX__
 # define __YUNI_CORE_GETOPT_PARSER_HXX__
 
+# include <cassert>
+
 
 namespace Yuni
 {
