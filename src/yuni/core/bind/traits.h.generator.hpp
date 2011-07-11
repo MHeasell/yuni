@@ -465,7 +465,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		mutable R (C::*pMember)(<%=generator.list(i)%>);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(<%=generator.list(i)%>)>
 
