@@ -165,6 +165,11 @@ else(MSVC)
 endif(MSVC)
 
 
+if (NOT WIN32)
+	find_package(Threads REQUIRED)
+	link_libraries(${CMAKE_THREAD_LIBS_INIT})
+	LIBYUNI_CONFIG_LIB_RAW_COMMAND("both" "core" "${CMAKE_THREAD_LIBS_INIT}")
+endif()
 
 #
 # Generating informations about the platform
