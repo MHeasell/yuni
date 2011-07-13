@@ -32,7 +32,6 @@ namespace Audio
 			signal.wait();
 		}
 
-		
 		if (pReady)
 		{
 			sHasRunningInstance = 1;
