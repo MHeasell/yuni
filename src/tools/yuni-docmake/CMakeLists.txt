@@ -1,6 +1,6 @@
 
 YMESSAGE("")
-YMESSAGE("yunidoc-make")
+YMESSAGE("yuni-docmake")
 YMESSAGE("")
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/CommonSettings.cmake")
@@ -39,7 +39,7 @@ set(src
 	)
 
 # Build the in-tree version of yuni-config.
-add_executable(yunidoc-make ${src})
+add_executable(yuni-docmake ${src})
 
-target_link_libraries(yunidoc-make  yuni-static-core)
+target_link_libraries(yuni-docmake  yuni-static-core)
 

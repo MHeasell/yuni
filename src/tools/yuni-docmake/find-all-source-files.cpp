@@ -10,6 +10,8 @@ using namespace Yuni;
 
 void Make::findAllSourceFiles()
 {
+	logs.info() << "Looking for articles...";
+
 	std::vector<CompileJob*> jobs;
 	jobs.resize(nbJobs);
 	for (unsigned int i = 0; i != jobs.size(); ++i)
@@ -41,6 +43,8 @@ void Make::findAllSourceFiles()
 	if (count)
 	{
 		logs.info() << count << (count > 1 ? " articles to build, " : "article to build, ") << nbJobs << (nbJobs > 1 ? " threads" : " thread");
+		logs.info();
+		logs.checkpoint() << "Building...";
 		for (unsigned int i = 0; i != jobs.size(); ++i)
 			queueService += jobs[i];
 	}

@@ -12,8 +12,6 @@
 namespace Yuni
 {
 
-
-
 	/*!
 	** \brief A linked list
 	*/
