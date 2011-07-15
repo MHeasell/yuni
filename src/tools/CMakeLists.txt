@@ -3,6 +3,6 @@ if(NOT YUNI_AUTO_COMPILE_YUNI_CONFIG)
 endif(NOT YUNI_AUTO_COMPILE_YUNI_CONFIG)
 
 if(YUNI_MODULE_DOCS)
-	add_subdirectory(yunidoc-make)
+	add_subdirectory(yuni-docmake)
 endif()
 
