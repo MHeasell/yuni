@@ -14,7 +14,7 @@ technical and philosophical choices for Yuni.
 We want Yuni to be fast. At least as fast as alternatives, and faster
 whenever possible.
 </li>
-<li><b>* Portability :</b>
+<li><b>Portability :</b>
 The code must be portable and work seamlessly on every supported platform.
 The only exception is UI, where windows and controls must follow the visual
 codes of the host OS. Yuni also provides defines to help you manage your own
@@ -22,8 +22,8 @@ non-portable code.
 </li>
 <li><b>Elegance :</b>
 We want Yuni to be elegant both in how it is written and in the interfaces it
-offers to users. Beautiful code is more easily debugged and maintained. Nice
-API encourages use. We also follow a strict coding style to ensure code
+offers to users. Beautiful code is more easily debugged and maintained. A
+nice API encourages use. We also follow a strict coding style to ensure code
 legibility and homogeneity.
 </li>
 <li><b>Abstraction :</b>

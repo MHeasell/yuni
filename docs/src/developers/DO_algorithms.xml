@@ -1,0 +1,188 @@
+<article>
+<title>Distributed Objects algorithms</title>
+
+<h1>Glossary</h1>
+<ul>
+  <li>DObject : Distributed Object, set of properties able to react to
+	asynchronous messages.</li>
+  <li>Replica : Partial or complete read-only image of a DObject located
+	on another node, automatically synchronized with its original DObject.</li>
+  <li>Node : Physical calculation unit, several nodes form a cluster.
+	A node can be uniquely represented by an IP address, and a port
+	number.</li>
+  <li>Node weight : Constraint determining the node's propension to host
+	DObjects.</li>
+  <li>Topology : Repartition of K DObjects among N Nodes.</li>
+</ul>
+
+<h1>Problems at hand</h1>
+<ul>
+  <li>Problem 1 : How to balance a topology given a set of arbitrary constraints.</li>
+  <li>Problem 2 : How to synchronize the replicas with their reference DObject.</li>
+  <li>Problem 3 : How to detect node failures and what to do.</li>
+  <li>Problem 4 : How to promote a replica as the new DObject when a node fails.</li>
+  <li>Problem 5 : How to give weight to a node and update this weight.</li>
+  <li>Problem 6 : How to group DObjects and update group contents.</li>
+</ul>
+
+<h1>Key programming concepts</h1>
+<ul>
+  <li>Identity : what is this DObject, and how to identify it uniquely</li>
+  <li>Replicas : how many, where and how to reach them</li>
+  <li>Behavior : what messages the replicas can send and receive to other DObjects</li>
+  <li>State : actual data, either fully in one place or as the sum of data in the replicas</li>
+  <li>Interfaces (endpoints) : how to interact locally with a replica (events, UI, ...)</li>
+  <li>Reference : a reference to a DObject contains all the info required to build a replica of it</li>
+  <li>Types : Object typing determines the interfaces, state and behavior of the DObject</li>
+</ul>
+
+<h1>Question 1</h1>
+<p>
+  We have been discussing a paradigm where every DObject always has an existing physical
+  representation on one node. This representation would be the original and the replicas
+  would be either full or partial copies. It is called <it>primary-backup</it> scheme
+  (<it>master-slave</it> scheme).
+</p>
+
+<table border="none">
+  <tr><td>[DObject1]</td><td>&rarr;</td><td>[OriginalFull]</td></tr>
+  <tr><td></td><td>&rarr;</td><td>[Replica1Partial]</td></tr>
+  <tr><td></td><td>&rarr;</td><td>[Replica2Full]</td></tr>
+  <tr><td></td><td>&rarr;</td><td>[Replica3Partial]</td></tr>
+</table>
+
+<p>
+  However, another paradigm would be to make sure that all the data in a DObject exists
+  physically among all the replicas, meaning there would not be a single master original.
+  It is called <it>multi-primary</it> scheme (<it>multi-master</it> scheme).
+</p>
+
+<table border="none">
+  <tr><td>[DObject1]</td><td>&rarr;</td><td>[Replica1Partial]</td></tr>
+  <tr><td></td><td>&rarr;</td><td>[Replica2Partial]</td></tr>
+  <tr><td></td><td>&rarr;</td><td>[Replica3Partial]</td></tr>
+</table>
+<p>
+  (supposing the 3 replicas together contain all the data for the DObject)
+</p>
+
+<ul>
+  <li>Is this second paradigm acceptable in terms of node failure recovery ?</li>
+  <li>Is it acceptable in terms of data syncing ?</li>
+</ul>
+
+<h1>Tackling Problem 1</h1>
+
+<ul>
+<li>Problem 1 : How to balance a topology given a set of arbitrary constraints.</li>
+</ul>
+<p>
+The topology has to be determined depending on a number of events :
+</p>
+<ul>
+<li>Creation of a DObject</li>
+<li>Destruction of a DObject</li>
+<li>Use of a DObject</li>
+<li>Node failure</li>
+<li>Delay to use a replica exceeded</li>
+<li>Node load not compliant with its weight</li>
+</ul>
+<p>
+This is considering that creation and destruction of replicas are part
+of the algorithm calculating the topology, and are not exterior events
+altering the system.
+</p>
+
+<p>
+Let us consider each of these events in turn and analyze what the
+desired behaviour would be.
+</p>
+
+<h2>Creation of a DObject</h2>
+
+<p>
+When creating a DObject, it is important to know from which node the
+creation was requested because it will probably be used immediately
+there. Therefore, the best node to create a DObject is the one who
+asked that it be created.
+</p>
+
+<h2>Destruction of a DObject</h2>
+
+<p>
+When a node requests that a DObject be destroyed, all the replicas
+have to be destroyed first. However, what should we do if a node
+requests destruction while another is still using the DObject ?
+</p>
+
+<h2>Use of a DObject</h2>
+
+<p>
+A DObject being used be it for reading or writing will probably be the
+most occuring event during a system's lifetime. As such it will be
+crucial to balance the algorithm around this event properly and this
+will require a lot of trial and error. What can be said is that:
+</p>
+<ul>
+<li>A first use of a DObject by a node leads to a replica being created</li>
+<li>Lack of use for a long (to be determined) time leads to the
+  replica being destroyed or the original DObject being moved : this
+  means that it must be possible for the algorithm to calculate a
+  best destination depending on node weights and uses of the DObject</li>
+<li>Use of a replica by its node leads to the countdown to its
+  destruction being reset</li>
+</ul>
+
+<h2>Node failure</h2>
+
+<p>
+Node failure is a problem of its own but in the context of determining
+topology, node failure is important because it forces the system to
+move out all the original DObjects on the node. The algorithm will
+have to find a destination for each DObject the same way it has to
+when the original DObject is moved for other reasons (see <b>Use of a
+DObject</b>).
+</p>
+
+<h2>Delay to use a replica exceeded</h2>
+
+<p>
+This point has been discussed in <b>Use of a DObject</b>
+</p>
+
+<h2>Node load not compliant with its weight</h2>
+
+<p>
+A node being given a weight determining how much of the load of the
+system it should support, non-compliance can mean either that the node
+supports too much load or not enough. The weight mechanism is not yet
+clearly defined, but mostly we can anticipate that the most
+problematic case is if a node is overloaded. In this case, original
+DObjects may be moved depending on usage from this node and other
+nodes, and depending on the load / weight ratio of the other nodes
+(e.g. if all nodes are in overload, unloading one will only make
+another one worse).
+</p>
+<p>
+This rebalancing of the load may come into conflict with the other
+mechanisms. A simple example would be the following :
+</p>
+<ul>
+<li>Node <i>N1</i> has a very high weight</li>
+<li>Node <i>N2</i> has a very low weight</li>
+<li>Node <i>N1</i> stores the original of many DObjects</li>
+<li>Node <i>N2</i> stores replicas of all these DObjects</li>
+<li>Node <i>N1</i> never uses any of the DObjects</li>
+<li>Node <i>N2</i> uses all of the DObjects very often</li>
+</ul>
+<p>
+This is a critical case where DObject usage dictates that all the
+originals should be moved to <i>N2</i> but weight dictates that the
+originals should be kept on <i>N1</i>. In this simple (only two
+nodes) and improbable (very heterogeneous distribution) example,
+weight hinders the normal behaviour. It should be noted that <i>N2</i>
+stores all replicas anyway and so in no way can it really keep a very
+low load whatever the topology.
+</p>
+
+</article>
