@@ -70,31 +70,20 @@ namespace Thread
 			// Launch the code
 			do
 			{
-				thread.pSignalHavePaused.reset();
 				if (!thread.onExecute())
-				{
-					thread.pSignalHavePaused.notify();
 					break;
-				}
 				if (thread.pShouldStop || !thread.pStarted)
-				{
-					thread.pSignalHavePaused.notify();
 					break;
-				}
 				// Notifying the thread that it has just been paused
 				thread.onPause();
-				thread.pSignalHavePaused.notify();
 				// Waiting for being waked up
 				thread.pSignalWakeUp.wait();
 
 				// We have been waked up ! But perhaps we should abort as soon as
-				//possible...
+				// possible...
 				Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
 				if (thread.pShouldStop || !thread.pStarted)
-				{
-					thread.pSignalHavePaused.notify();
 					break;
-				}
 			}
 			while (true);
 
@@ -114,7 +103,6 @@ namespace Thread
 			// signal the start() method in the parent thread
 			thread.pStarted = false;
 			thread.pSignalStartup.notify();
-			thread.pSignalHavePaused.notify();
 		}
 
 		thread.pSignalHaveStopped.notify();
@@ -195,7 +183,6 @@ namespace Thread
 		// Reset the signal
 		pSignalStartup.reset();
 		pSignalHaveStopped.reset();
-		pSignalHavePaused.reset();
 		pSignalMustStop.reset();
 		pSignalWakeUp.reset();
 
@@ -287,7 +274,6 @@ namespace Thread
 		pStarted = false;
 		pInnerFlagMutex.unlock();
 
-
 		return status;
 
 		# else // YUNI_NO_THREAD_SAFE
@@ -322,7 +308,7 @@ namespace Thread
 				return errNone;
 		}
 
-		if (!pSignalHavePaused.wait(timeout)) // We timed out.
+		if (!pSignalHaveStopped.wait(timeout)) // We timed out.
 			return errTimeout;
 
 		return errNone;

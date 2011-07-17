@@ -3961,7 +3961,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		mutable R (C::*pMember)(A0);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0)>
 

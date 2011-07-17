@@ -21,11 +21,12 @@ public:
 public:
 	Yuni::String input;
 	Yuni::String htdocs;
-	unsigned int nbJobs;
+	static unsigned int nbJobs;
 	bool printVersion;
-	bool debug;
-	bool verbose;
-	bool clean;
+	static bool debug;
+	static bool verbose;
+	static bool clean;
+	static bool shortUrl;
 
 }; // class Make
 

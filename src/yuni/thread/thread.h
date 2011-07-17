@@ -241,8 +241,6 @@ namespace Thread
 		Signal pSignalStartup;
 		//! Signal for stopping
 		Signal pSignalHaveStopped;
-		//! Signal
-		Signal pSignalHavePaused;
 		//! The thread must stop as soon as possible
 		Signal pSignalMustStop;
 		//! The thread can wake up

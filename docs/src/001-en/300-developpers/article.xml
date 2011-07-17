@@ -1,0 +1,17 @@
+<title>Developpers</title>
+<pragma:toc value="0" />
+<pragma:quicklinks value="0" />
+<pragma:history value="0" />
+<pragma:accesspath value="quicklinks" />
+<pragma:directoryindex />
+
+<h1>Bug tracking system</h1>
+<p>
+We use <a href="http://www.redmine.org">redmine</a> as our project management application, available at this address : <a href="https://dev.libyuni.org">https://dev.libyuni.org</a>
+</p>
+<ul>
+<li><a href="https://dev.libyuni.org/projects/yuni-framework/issues?query_id=2">All tickets</a> for the current milestone (v0.2)</li>
+<li><a href="https://dev.libyuni.org/projects/yuni-framework/issues">Create a new ticket</a> (registered users only)</li>
+<li><a href="https://dev.libyuni.org/projects/yuni-framework/roadmap">Roadmap</a> of the project</li>
+<li><a href="https://dev.libyuni.org/projects/yuni-framework/repository">Browse the source of the current development version</a></li>
+</ul>

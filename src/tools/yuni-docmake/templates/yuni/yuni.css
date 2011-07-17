@@ -5,6 +5,8 @@ body,html {
 	margin					:0;
 	padding					:0;
 	font-size				:9pt;
+	background-image		:url('../images/back.png');
+	background-repeat		:repeat-x;
 }
 .layout {
 	width					:100%;
@@ -17,39 +19,35 @@ body,html {
 	min-width				:10px;
 }
 .leftspace {
-	width					:240px;
+	width					:200px;
 	min-width				:10px;
 }
 .title {
 	font-size				:12pt;
 	padding-left			:0.7em;
 }
-.path {
-	font-size				:9pt;
-}
-.path a {
-	font-family				:helvetica, tahoma, arial, sans-serif;
-	text-decoration			:none;
-	color					:#766;
-	padding					:0.2em 0.3em 0.2em 0.3em;
-}
-.path a:hover {
-	background-color		:#333;
-	color					:#eee;
-}
-.path span {
-	padding					:0;
-}
 #parent {
-	background-image		:url('arrow.png');
+	background-image		:url('../images/arrow.png');
 	background-position		:center left;
 	background-repeat		:no-repeat;
 	padding-left			:20px;
 }
-.logo {
-	/*background-image		:url('logo.png');
+#mainmenu input {
+	border					:1px solid #aad;
+	padding					:2px 0.5em;
+	background-image		:url('../images/search.png');
 	background-repeat		:no-repeat;
-	background-position		:center center;*/
+	background-position		:5px center;
+	padding-left			:25px;
+	background-color		:#eee;
+}
+#mainmenu input:focus {
+	background-color		:#eee;
+	-moz-box-shadow: 0 0 5px white;
+	-webkit-box-shadow: 0 0 5px white;
+	box-shadow: 0 0 5px white;
+}
+.logo {
 	width					:85px;
 	height					:96px;
 	min-width				:85px;
@@ -58,6 +56,7 @@ body,html {
 .unbreakable {
 	white-space				:nowrap;
 	color:#933;
+	text-shadow				:1px 1px 1px #eee;
 }
 .unbreakable strong {
 	color:black;
@@ -90,30 +89,31 @@ body,html {
 	padding					:4em 1em 2em 2em;
 	font-family				:helvetica, tahoma, arial, sans-serif;
 	font-size				:8pt;
+	padding-right			:3em;
 }
-.leftmenu a {
-	text-decoration			:none;
-	color					:#337;
-	padding					:0.2em 0.8em 0.2em 0.5em;
-	display					:block;
-	color					:#697286;
+.leftmenu fieldset {
+	margin-bottom:1em;
+	font-weight:bold;
+	border:1px solid #bbd;
+	margin-right:3em;
+	padding-top:1em;
 }
-.leftmenu .selected {
-	font-weight				:bold;
-	color					:#444;
-	color					:#4c556b;
+.leftmenu fieldset a {
+	text-decoration:none;
+	padding:0.2em 0.5em;
+	padding-left:1em;
+	display:block;
+	color:#697286;
+	font-weight:normal;
+	white-space:nowrap;
 }
-.leftmenu a:hover {
-	background-color		:black;
+.leftmenu fieldset a:hover {
+	background-color		:#333;
 	color					:white;
 }
-.leftmenu ol {
-	padding					:0 0em 2em 1.8em;
-	color:#A88;
-}
-.leftmenu ol li {
-	padding					:0.1em 0em;
-	margin:0;
+.leftmenu fieldset a span {
+	color:#c9704c;
+	padding-left:0.2em;
 }
 .laycontent {
 	padding-left			:1em;
@@ -129,7 +129,12 @@ body,html {
 .toc {
 	float					:right;
 	border					:1px solid #cce;
+	border					:1px solid #99adbc;
 	background-color		:#eef;
+	background-color		:#c9d5de;
+	background:#dfe5ea;
+	background:#e6ebef;
+	border-color:#b6c2ca;
 	font-size				:8pt;
 	padding					:0.5em 1em 0 1em;
 	margin					:2em 1.5em 0.7em 1.2em;
@@ -166,11 +171,11 @@ body,html {
 	padding					:0.1em 0.2em;
 }
 .toc a:hover {
-	background-color		:black;
+	background-color		:#333;
 	color					:white;
 }
 .modified {
-	padding-top				:130pt;
+	padding-top				:200pt;
 	font-size				:9pt;
 	text-align				:right;
 	font-style				:italic;
@@ -182,18 +187,44 @@ body,html {
 	border-collapse			:collapse;
 	font-family				:Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	font-size				:9pt;
-	text-align				:right;
+	color:#eee;
+	background:#333;
+	border:3px solid black;
+	border-left-style:none;
+	border-right-style:none;
+	border-bottom-style:none;
 }
-.footerlogo  {
-	background-image		:url('bottom.png');
-	background-repeat		:no-repeat;
-	background-position		:right center;
-	text-align				:right;
-	width					:40px;
-	min-width				:40px;
-	min-height				:36px;
-	height					:36px;
-	margin-top				:30pt;
+.footer td {
+	vertical-align:bottom;
+	padding:1em 1em 2em 1em;
+}
+.footer td a {
+	display:block;
+	color:#ccc;
+	padding:0.1em 0.8em;
+	padding-right:1.8em;
+	margin:0;
+	text-decoration:none;
+}
+.footer td a:hover {
+	background:black;
+}
+.footerlink {
+	white-space				:nowrap;
+	width:10px;
+	padding-top:2em !important;
+	vertical-align:top !important;
+}
+.footerlink.right {
+	text-align:right;
+	padding-right:1em;
+	padding-left:1em !important;
+	padding-top:2.1em !important;
+	background-color:#444;
+	text-transform:uppercase;
+	color:#ccd;
+	white-space:nowrap;
+	width:10px;
 }
 .content {
 	font-family				:'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
@@ -234,6 +265,9 @@ body,html {
 }
 .content ul {
 }
+.content b {
+	color: #111;
+}
 .content table {
 	border-collapse			:collapse;
 	border					:1px solid #99adbc;
@@ -267,7 +301,7 @@ body,html {
 	border-top-style		:none;
 }
 .content a:hover {
-	background-color		:black;
+	background-color		:#444;
 	color					:white;
 	border-color			:black;
 }

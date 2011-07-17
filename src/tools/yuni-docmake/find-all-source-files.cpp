@@ -8,9 +8,12 @@
 using namespace Yuni;
 
 
+# define SEP Core::IO::Separator
+
+
 void Make::findAllSourceFiles()
 {
-	logs.info() << "Looking for articles...";
+	logs.notice() << "Looking for articles...";
 
 	std::vector<CompileJob*> jobs;
 	jobs.resize(nbJobs);
@@ -18,7 +21,7 @@ void Make::findAllSourceFiles()
 		jobs[i] = new CompileJob(input, htdocs);
 
 	Core::IO::Directory::Info info(input);
-	String relative;
+	String tmp;
 	unsigned int slotIndex = 0;
 	unsigned int count = 0;
 	for (Core::IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != info.recursive_end(); ++i)
@@ -29,6 +32,17 @@ void Make::findAllSourceFiles()
 		const String& name = *i;
 		const String& filename = i.filename();
 
+		if (i.isFolder())
+		{
+			if (filename.contains(".svn"))
+				continue;
+			tmp.clear() << filename << SEP << "article.xml";
+			if (!Core::IO::File::Exists(tmp))
+			{
+				logs.warning() << "missing article.xml in " << filename;
+			}
+			continue;
+		}
 		if (!i.isFile() || name != "article.xml")
 			continue;
 		assert(filename.size() > input.size());
@@ -42,9 +56,9 @@ void Make::findAllSourceFiles()
 
 	if (count)
 	{
-		logs.info() << count << (count > 1 ? " articles to build, " : "article to build, ") << nbJobs << (nbJobs > 1 ? " threads" : " thread");
+		logs.info() << count << (count > 1 ? " articles to build, " : "article to build, ") << nbJobs
+			<< (nbJobs > 1 ? " threads" : " thread");
 		logs.info();
-		logs.checkpoint() << "Building...";
 		for (unsigned int i = 0; i != jobs.size(); ++i)
 			queueService += jobs[i];
 	}
