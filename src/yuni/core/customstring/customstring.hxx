@@ -3141,6 +3141,7 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset) const
 	{
+		assert(offset < AncestorType::size && "string, operator[] : index out of bounds");
 		return AncestorType::data[offset];
 	}
 
@@ -3150,6 +3151,7 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (
 		const typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset)
 	{
+		assert(offset < AncestorType::size && "string, operator[] : index out of bounds");
 		return AncestorType::data[offset];
 	}
 

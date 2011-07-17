@@ -19,21 +19,21 @@ namespace Checksum
 	**
 	** Compute the MD5 from a string :
 	** \code
-	** Yuni::Hash::MD5 md5;
+	** Yuni::Hash::Checksum::MD5 md5;
 	** md5.fromString("Hello world");
 	** std::cout << md5.value() << std::endl;
 	** \endcode
 	**
 	** Another way to do it (1/2 - recommended) :
 	** \code
-	** Yuni::Hash::MD5 md5;
+	** Yuni::Hash::Checksum::MD5 md5;
 	** std::cout << md5.fromString("Hello world") << std::endl;
 	** std::cout << md5.value() << std::endl; // will remain the same than before
 	** \endcode
 	**
 	** Another way to do it (2/2) :
 	** \code
-	** std::cout << Yuni::Hash::MD5::FromString("Hello world") << std::endl;
+	** std::cout << Yuni::Hash::Checksum::MD5::FromString("Hello world") << std::endl;
 	** \endcode
 	**
 	** Compute a lot of MD5 from a string :
@@ -76,7 +76,7 @@ namespace Checksum
 		virtual const String& fromRawData(const void* rawdata, uint64 size = AutoDetectNullChar);
 		virtual const String& fromFile(const String& filename);
 
-	}; // class Hash::MD5
+	}; // class Hash::Checksum::MD5
 
 
 

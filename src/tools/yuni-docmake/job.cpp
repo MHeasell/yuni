@@ -3,11 +3,10 @@
 #include "logs.h"
 #include <yuni/core/io/io.h>
 #include "tinyxml/tinyxml.h"
-#include <deque>
-#include <set>
-#include <map>
 #include <iostream>
 #include <yuni/core/slist.h>
+#include "indexes.h"
+#include "job-writer.h"
 
 
 #define SEP  Core::IO::Separator
@@ -23,16 +22,15 @@ namespace // anonymous
 	class XMLVisitor : public TiXmlVisitor
 	{
 	public:
-		enum State
-		{
-			stNone = 0,
-			stTitle,
-		};
-
-	public:
-		XMLVisitor(TiXmlDocument& document, const String& filename);
-
+		//! \name Constructor
+		//@{
+		/*!
+		** \brief Constructor
+		*/
+		XMLVisitor(ArticleData& article, TiXmlDocument& document);
+		//! Destructor
 		virtual ~XMLVisitor();
+		//@}
 
 		virtual bool VisitEnter(const TiXmlDocument& /*doc*/ );
 
@@ -47,25 +45,7 @@ namespace // anonymous
 		virtual bool Visit(const TiXmlComment& /*comment*/);
 		virtual bool Visit(const TiXmlUnknown& /*unknown*/);
 
-		bool error() const {return pError;}
-
-	private:
-		typedef std::deque<float>  CoeffStack;
-		typedef CustomString<16,false>  Tag;
-		typedef std::set<Tag>  TagSet;
-		typedef CustomString<32,false>  Word;
-
-		class WordStat
-		{
-		public:
-			WordStat()
-				:coeff(0.f), count(0)
-			{}
-			float coeff;
-			unsigned int count;
-		};
-
-		typedef std::map<Word, WordStat>  WordCount;
+		bool error() const {return pArticle.error;}
 
 	private:
 		void pushCoeff(float coeff);
@@ -77,31 +57,20 @@ namespace // anonymous
 		void seo(const StringAdapter& string);
 
 	private:
-		//!
-		TagSet  pAllowedTagsInParagraph;
-		//! The coefficient stack
-		CoeffStack  pCoeffStack;
-		//! The current coefficient
-		float pCoeff;
-		//! Current state
-		State pState;
-		//! Title of the page
-		String pTitle;
-		//! An error has occured
-		bool pError;
 		//! Within a paragraph
 		bool pWithinParagraph;
 		//! XML document
 		TiXmlDocument& pDocument;
 		//! XML Filename
 		const String& pFilename;
-
-		//! \name SEO
-		//@{
-		Word pWord;
+		//! Current state
+		ArticleData::State pState;
 		//!
-		WordCount pWordCount;
-		//@}
+		float pCoeff;
+		//! The coefficient stack
+		ArticleData::CoeffStack  pCoeffStack;
+
+		ArticleData& pArticle;
 
 	}; // class XMLVisitor
 
@@ -109,32 +78,14 @@ namespace // anonymous
 
 
 
-	XMLVisitor::XMLVisitor(TiXmlDocument& document, const String& filename) :
-		pCoeff(1.f),
-		pState(stNone),
-		pError(false),
+	XMLVisitor::XMLVisitor(ArticleData& article, TiXmlDocument& document) :
 		pWithinParagraph(false),
 		pDocument(document),
-		pFilename(filename)
+		pFilename(article.relativeFilename),
+		pArticle(article)
 	{
-		pAllowedTagsInParagraph.insert("a");
-		pAllowedTagsInParagraph.insert("b");
-		pAllowedTagsInParagraph.insert("i");
-		pAllowedTagsInParagraph.insert("u");
-		pAllowedTagsInParagraph.insert("br");
-		pAllowedTagsInParagraph.insert("code");
-		pAllowedTagsInParagraph.insert("sub");
-		pAllowedTagsInParagraph.insert("sup");
-		pAllowedTagsInParagraph.insert("big");
-		pAllowedTagsInParagraph.insert("button");
-		pAllowedTagsInParagraph.insert("em");
-		pAllowedTagsInParagraph.insert("img");
-		pAllowedTagsInParagraph.insert("input");
-		pAllowedTagsInParagraph.insert("kbd");
-		pAllowedTagsInParagraph.insert("small");
-		pAllowedTagsInParagraph.insert("span");
-		pAllowedTagsInParagraph.insert("strong");
-		pAllowedTagsInParagraph.insert("textarea");
+		pState = ArticleData::stNone;
+		pCoeff = 1.0f;
 	}
 
 
@@ -158,32 +109,78 @@ namespace // anonymous
 	bool XMLVisitor::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* /*attr*/)
 	{
 		const TIXML_STRING& name = element.ValueTStr();
-		Tag tag = name.c_str();
+		ArticleData::Tag tag = name.c_str();
 
 		pushCoeffFromString(name);
 		switch (pState)
 		{
-			case stNone:
+			case ArticleData::stNone:
 				{
-					if (tag == "title")
+					if (tag.startsWith("pragma:"))
 					{
-						pState = stTitle;
-						pTitle.clear();
+						bool value;
+						if (tag == "pragma:toc")
+						{
+							if (TIXML_SUCCESS == element.QueryBoolAttribute("value", &value))
+								pArticle.showTOC = value;
+							else
+								logs.error() << pFilename << ": invalid value for pragma:toc";
+						}
+						else if (tag == "pragma:quicklinks")
+						{
+							if (TIXML_SUCCESS == element.QueryBoolAttribute("value", &value))
+								pArticle.showQuickLinks = value;
+							else
+								logs.error() << pFilename << ": invalid value for pragma:quicklinks";
+						}
+						else if (tag == "pragma:history")
+						{
+							if (TIXML_SUCCESS == element.QueryBoolAttribute("value", &value))
+								pArticle.showHistory = value;
+							else
+								logs.error() << pFilename << ": invalid value for pragma:history";
+						}
+						else if (tag == "pragma:directoryindex")
+						{
+							String src = pArticle.htdocsFilename;
+							const StringAdapter string = element.Attribute("src");
+							src << SEP << string;
+							Core::IO::Normalize(pArticle.directoryIndex, src);
+						}
+						else if (tag == "pragma:accesspath")
+						{
+							CustomString<32,false> string = element.Attribute("value");
+							string.toLower();
+							if (string != "quicklinks")
+								logs.error() << pFilename << ": invalid access path overlay";
+							else
+								pArticle.accessPath = string;
+						}
+						else
+							logs.warning() << pFilename << ": unknown setting: " << tag;
 					}
-					if (pWithinParagraph && pAllowedTagsInParagraph.find(tag) == pAllowedTagsInParagraph.end())
+					else
+					{
+						if (tag == "title")
+						{
+							pState = ArticleData::stTitle;
+							pArticle.title.clear();
+						}
+					}
+					if (pWithinParagraph && pArticle.allowedTagsInParagraph.find(tag) == pArticle.allowedTagsInParagraph.end())
 					{
 						logs.error() << pFilename << ": invalid tag within a paragraph";
-						pError = true;
+						pArticle.error = true;
 						return false;
 					}
 					if (tag == "p")
 						pWithinParagraph = true;
 					break;
 				}
-			case stTitle:
+			case ArticleData::stTitle:
 				{
 					logs.error() << pFilename << ": invalid nested tag for 'title'";
-					pError = true;
+					pArticle.error = true;
 					return false;
 				}
 			default:
@@ -199,12 +196,12 @@ namespace // anonymous
 
 		switch (pState)
 		{
-			case stTitle:
+			case ArticleData::stTitle:
 				{
-					if (!pTitle.empty() && pTitle.last() != ' ')
-						pTitle += ' ';
-					pTitle += text.c_str();
-					pTitle.trim();
+					if (!pArticle.title.empty() && pArticle.title.last() != ' ')
+						pArticle.title += ' ';
+					pArticle.title += text.c_str();
+					pArticle.title.trim();
 					break;
 				}
 			default:
@@ -245,15 +242,15 @@ namespace // anonymous
 
 		switch (pState)
 		{
-			case stNone:
+			case ArticleData::stNone:
 				{
 					if (name == "p")
 						pWithinParagraph = false;
 				}
-			case stTitle:
+			case ArticleData::stTitle:
 				{
 					if (name == "title")
-						pState = stNone;
+						pState = ArticleData::stNone;
 					break;
 				}
 			default:
@@ -276,8 +273,8 @@ namespace // anonymous
 	{
 		pCoeffStack.pop_back();
 		pCoeff = 1.0f;
-		CoeffStack::const_iterator end = pCoeffStack.end();
-		for (CoeffStack::const_iterator i = pCoeffStack.begin(); i != end; ++i)
+		ArticleData::CoeffStack::const_iterator end = pCoeffStack.end();
+		for (ArticleData::CoeffStack::const_iterator i = pCoeffStack.begin(); i != end; ++i)
 			pCoeff *= *i;
 	}
 
@@ -338,18 +335,20 @@ namespace // anonymous
 		if (list.empty())
 			return;
 
+		ArticleData::Word word;
 		const List::const_iterator end = list.end();
 		for (List::const_iterator i = list.begin(); i != end; ++i)
 		{
-			pWord = *i;
-			pWord.toLower();
+			word = *i;
+			word.toLower();
 
-			WordStat& stat = pWordCount[pWord];
+			ArticleData::WordStat& stat = pArticle.wordCount[word];
 			++stat.count;
 			if (pCoeff > stat.coeff)
 				stat.coeff = pCoeff;
 		}
 	}
+
 
 
 
@@ -375,36 +374,105 @@ CompileJob::~CompileJob()
 }
 
 
+bool CompileJob::extractOrder(const String& path)
+{
+	Core::IO::ExtractFilePath(pTmp, path);
+	String::Size offset = pTmp.find_last_of("-/\\");
+	if (offset == String::npos)
+		return false;
+	if (pTmp[offset] != '-' || offset < 2)
+		return false;
+	CustomString<8,false> s;
+	s.resize(3);
+	s[2] = pTmp[offset - 1];
+	s[1] = pTmp[offset - 2];
+	s[0] = pTmp[offset - 3];
+	if (!s.to(pArticle.order))
+		return false;
+	return (pArticle.order < 1000u);
+}
+
+
 void CompileJob::onExecute()
 {
 	String target;
-	String relative;
 	const String::Vector::const_iterator end = pSources.end();
 	for (String::Vector::const_iterator i = pSources.begin(); i != end; ++i)
 	{
 		const String& entry = *i;
-		relative.assign(entry.c_str() + pInput.size() + 1, entry.size() - pInput.size() - 1);
-		target.clear() << pHtdocs << SEP << relative;
-		target.replace("article.xml", "index.html");
-		generate(relative, entry, target);
+
+		pArticle.reset();
+		pArticle.originalFilename = entry;
+		pArticle.relativeFilename.assign(entry.c_str() + pInput.size() + 1, entry.size() - pInput.size() - 1);
+
+		pArticle.htdocsFilename.clear() << '/' << pArticle.relativeFilename;
+		pArticle.htdocsFilename.replace('\\', '/');
+		{
+			String::Size offset = pArticle.htdocsFilename.find_last_of('/');
+			if (offset != String::npos)
+				pArticle.htdocsFilename.resize(offset);
+		}
+		if (!pArticle.htdocsFilename)
+			pArticle.htdocsFilename = "/";
+
+		String::Size offset = 0;
+		do
+		{
+			offset = pArticle.htdocsFilename.find('/', offset);
+			if (pArticle.htdocsFilename.size() < 4 || offset > pArticle.htdocsFilename.size() - 4)
+				break;
+			++offset;
+			if (pArticle.htdocsFilename[offset + 3] != '-')
+				break;
+
+			bool isDigit = true;
+			for (unsigned int i = offset; i < offset + 3; ++i)
+			{
+				if (!String::IsDigit(pArticle.htdocsFilename[i]))
+				{
+					isDigit = false;
+					break;
+				}
+			}
+			if (isDigit)
+				pArticle.htdocsFilename.erase(offset, 4);
+		}
+		while (true);
+
+		// Generate the
+		analyzeArticle();
+		if (pArticle.error)
+			continue;
+		DocIndex::Write(pArticle);
+
+		JobWriter::Add(pInput, pHtdocs, pArticle);
 	}
 }
 
 
-void CompileJob::generate(const String& rel, const String& src, const String& /*target*/)
+void CompileJob::analyzeArticle()
 {
-	logs.info() << "building " << rel;
-	TiXmlDocument doc(src.c_str());
-	if (!doc.LoadFile())
+	logs.debug() << "extracting " << pArticle.relativeFilename;
+
+	if (!extractOrder(pArticle.originalFilename))
+		pArticle.order = 1000;
+
+	TiXmlDocument doc;
+	if (!doc.LoadFile(pArticle.originalFilename.c_str(), TIXML_ENCODING_UTF8))
 	{
-		logs.error() << src << ", l" << doc.ErrorRow() << ": " << doc.ErrorDesc();
+		logs.error() << pArticle.relativeFilename << ", l" << doc.ErrorRow() << ": " << doc.ErrorDesc();
 		return;
 	}
 
 	// Analyze the XML document
-	XMLVisitor visitor(doc, rel);
+	XMLVisitor visitor(pArticle, doc);
 	if (!doc.Accept(&visitor) || visitor.error())
+	{
+		pArticle.error = true;
 		return;
+	}
+	if (!pArticle.title)
+		Core::IO::ExtractFileName(pArticle.title, pArticle.htdocsFilename, false);
 }
 
 

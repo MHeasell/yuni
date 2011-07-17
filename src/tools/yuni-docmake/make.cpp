@@ -10,12 +10,17 @@
 using namespace Yuni;
 
 
+unsigned int Make::nbJobs = 1;
+bool Make::debug    = false;
+bool Make::verbose  = false;
+bool Make::clean    = false;
+bool Make::shortUrl = false;
+
+
+
 
 Make::Make() :
-	printVersion(false),
-	debug(false),
-	verbose(false),
-	clean(false)
+	printVersion(false)
 {
 }
 
@@ -33,6 +38,7 @@ bool Make::parseCommandLine(int argc, char** argv)
 	opts.add(input, ' ', "input", "Source folder");
 	opts.add(htdocs, ' ', "htdocs", "htdocs folder");
 	opts.addFlag(clean, 'c', "clean", "Clean the htdocs folder first");
+	opts.addFlag(shortUrl, 's', "short-url", "Use short url");
 	opts.add(nbJobs, 'j', "jobs", String() << "Number of concurrent jobs (default: " << nbJobs
 			 << ", max: " << cpuCount  << ')');
 

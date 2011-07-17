@@ -6,6 +6,7 @@
 # include <yuni/job/job.h>
 # include <yuni/job/queue.h>
 # include <vector>
+# include "article.h"
 
 
 
@@ -24,15 +25,25 @@ public:
 
 	void add(const Yuni::String& filename) {pSources.push_back(filename);}
 
+
 private:
 	virtual void onExecute();
 
-	void generate(const Yuni::String& rel, const Yuni::String& src, const Yuni::String& target);
+	void analyzeArticle();
+
+	/*!
+	** \brief Try to extract the order contained within a given path
+	*/
+	bool extractOrder(const Yuni::String& path);
 
 private:
 	const Yuni::String& pInput;
 	const Yuni::String& pHtdocs;
 	Yuni::String::Vector  pSources;
+
+	ArticleData pArticle;
+	//! Temporary string
+	Yuni::String pTmp;
 
 }; // class CompileJob
 

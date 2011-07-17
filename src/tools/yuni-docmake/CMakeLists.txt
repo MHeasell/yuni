@@ -16,19 +16,59 @@ add_definitions("-DYUNI_INSTALL_PREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
 add_definitions("-DYUNI_SOURCE_TREE=\"${YUNI_SOURCE_TREE}\"")
 
 
+# Writing index-db.hxx
+file(STRINGS index-db.sql INDEX_DB)
+file(STRINGS index-db-cleanup.sql INDEX_DB_CLEANUP)
+set(HXX_FILE "\n\n")
+set(HXX_FILE "${HXX_FILE}namespace DocIndex\n")
+set(HXX_FILE "${HXX_FILE}{\n")
+set(HXX_FILE "${HXX_FILE}namespace // anonymous\n")
+set(HXX_FILE "${HXX_FILE}{\n")
+set(HXX_FILE "${HXX_FILE}\n\ttemplate<class StringT>\n")
+set(HXX_FILE "${HXX_FILE}\tstatic void PrepareSQLScript(StringT& out)\n")
+set(HXX_FILE "${HXX_FILE}\t{\n")
+set(HXX_FILE "${HXX_FILE}\t\tout.clear()\n")
+foreach(l ${INDEX_DB})
+	set(HXX_FILE "${HXX_FILE}\t\t\t<< \"${l}\\n\"\n")
+endforeach()
+set(HXX_FILE "${HXX_FILE}\t\t\t;\n")
+set(HXX_FILE "${HXX_FILE}\t}\n\n\n")
+
+set(HXX_FILE "${HXX_FILE}\n\ttemplate<class StringT>\n")
+set(HXX_FILE "${HXX_FILE}\tstatic void PrepareSQLScriptCleanup(StringT& out)\n")
+set(HXX_FILE "${HXX_FILE}\t{\n")
+set(HXX_FILE "${HXX_FILE}\t\tout.clear()\n")
+foreach(l ${INDEX_DB_CLEANUP})
+	set(HXX_FILE "${HXX_FILE}\t\t\t<< \"${l}\\n\"\n")
+endforeach()
+set(HXX_FILE "${HXX_FILE}\t\t\t;\n")
+set(HXX_FILE "${HXX_FILE}\t}\n\n\n\n")
+
+set(HXX_FILE "${HXX_FILE}} // anonymous namespace\n")
+set(HXX_FILE "${HXX_FILE}} // namespace DocIndex\n\n")
+file(WRITE index-db.hxx "${HXX_FILE}")
+
+
 
 set(src
 	sqlite/sqlite3.c
 	sqlite/sqlite3.h
 	sqlite/sqlite3ext.h
+	article.h
+	article.cpp
 	make.h
 	make.cpp
 	job.h
 	job.cpp
+	job-writer.h
+	job-writer.cpp
 	logs.h
 	logs.cpp
 	find-all-source-files.cpp
 	main.cpp
+	indexes.h
+	indexes.cpp
+	index-db.hxx
 
 	tinyxml/tinystr.cpp
 	tinyxml/tinystr.h
