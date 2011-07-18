@@ -128,12 +128,34 @@ namespace CustomString
 	public:
 		static void Perform(CustomStringT& s, const void* rhs)
 		{
-			typename CustomStringT::Type buffer[32];
-			// On Windows, it may return a negative value
-			if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, sizeof(buffer), "%p", rhs) >= 0)
+			if (!rhs)
+				s.appendWithoutChecking("0x0", 3);
+			else
 			{
-				s.appendWithoutChecking(buffer,
-					Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+				# ifdef YUNI_OS_MSVC
+				// With Visual Studio, the option %p does not provide the prefix 0x
+				typename CustomStringT::Type buffer[32];
+				buffer[0] = '0';
+				buffer[1] = 'x';
+				// On Windows, it may return a negative value
+				if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer + 2, sizeof(buffer) - 2, "%p", rhs) >= 0)
+				{
+					s.appendWithoutChecking(buffer,
+						Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+				}
+				else
+					s.appendWithoutChecking("0x0", 3);
+				# else
+				typename CustomStringT::Type buffer[32];
+				// On Windows, it may return a negative value
+				if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, sizeof(buffer), "%p", rhs) >= 0)
+				{
+					s.appendWithoutChecking(buffer,
+						Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+				}
+				else
+					s.appendWithoutChecking("0x0", 3);
+				# endif
 			}
 		}
 	};
