@@ -86,10 +86,7 @@ namespace Thread
 					// The signal must be reset for future use
 					// However for thread-safety issues, we have to lock the thread itself
 					if (thread.pShouldStop || !thread.pStarted)
-					{
-						thread.pSignalHavePaused.notify();
 						break;
-					}
 				}
 
 				// If we don't have to stop, the signal must be reset for future use
