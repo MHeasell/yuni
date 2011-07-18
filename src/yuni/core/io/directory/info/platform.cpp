@@ -214,7 +214,7 @@ namespace Directory
 		struct stat s;
 		# else
 		struct _wfinddatai64_t data;
-		long h;
+		intptr_t h;
 		bool callNext;
 		# endif
 

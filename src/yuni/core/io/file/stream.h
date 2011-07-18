@@ -235,9 +235,6 @@ namespace File
 		*/
 		template<unsigned int CSizeT, bool ExpT, bool ZeroT>
 		size_t read(CustomString<CSizeT,ExpT,ZeroT>&  buffer);
-
-		template<class C, int CSizeT>
-		size_t read(StringBase<C, CSizeT>&  buffer);
 		//@}
 
 

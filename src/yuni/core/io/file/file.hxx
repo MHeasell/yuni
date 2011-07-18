@@ -52,12 +52,12 @@ namespace File
 		if (0 == Traits::CString<StringT>::zeroTerminated)
 		{
 			return Yuni::Private::Core::IO::SizeNotZeroTerminated(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename), size);
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,unsigned int>::Value(filename), size);
 		}
 		else
 		{
 			return Yuni::Private::Core::IO::Size(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename), size);
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,unsigned int>::Value(filename), size);
 		}
 	}
 
@@ -73,13 +73,13 @@ namespace File
 		if (Traits::CString<StringT>::zeroTerminated)
 		{
 			return Yuni::Private::Core::IO::Size(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename), size)
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,unsigned int>::Value(filename), size)
 				? size : 0;
 		}
 		else
 		{
 			return Yuni::Private::Core::IO::Size(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,size_t>::Value(filename), size)
+				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,unsigned int>::Value(filename), size)
 				? size : 0;
 		}
 	}

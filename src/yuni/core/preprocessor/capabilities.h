@@ -334,5 +334,11 @@ namespace System
 # endif
 
 
+# ifdef YUNI_OS_MSVC
+// Annoying warning from Visual Studio :
+// decorated name length exceeded, name was truncated
+#	pragma warning( disable : 4503)
+# endif
+
 
 #endif /* __YUNI_PREPROCESSOR_OS_DETECTION_H__ */
