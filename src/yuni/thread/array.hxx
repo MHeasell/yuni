@@ -420,7 +420,7 @@ namespace Thread
 	inline unsigned int Array<T>::count() const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		return pList.size();
+		return (unsigned int) pList.size();
 	}
 
 

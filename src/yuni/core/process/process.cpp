@@ -38,7 +38,7 @@ namespace Process
 		{
 			if (pArguments)
 				deleteAllArguments();
-			const unsigned int count = args.size();
+			const unsigned int count = (unsigned int) args.size();
 			if (!count)
 			{
 				pArguments = nullptr;

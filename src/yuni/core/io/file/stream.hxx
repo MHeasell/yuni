@@ -269,35 +269,19 @@ namespace File
 		// Assert to prevent SegV
 		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
 
-		typedef typename CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>::Char C;
+		typedef CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> StringType;
+		typedef typename StringType::Char C;
 		// Reading the file
 		const size_t result = ::fread(buffer.data(), 1, sizeof(C) * buffer.size(), pFd);
 		// Setting the good size, because we may have read less than asked
 		if (result < buffer.size())
-			buffer.truncate(result);
+			buffer.truncate((typename StringType::Size) result);
 		// Making sure that the buffer is zero-terminated if required
 		if (buffer.zeroTerminated)
 			*((C*)(buffer.data() + buffer.size())) = C();
 		return result;
 	}
 
-
-	template<class C, int ChunkSizeT>
-	inline size_t
-	Stream::read(StringBase<C, ChunkSizeT>& buffer)
-	{
-		// Assert to prevent SegV
-		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
-
-		// Reading the file
-		const size_t result = ::fread(buffer.data(), 1, sizeof(C) * buffer.size(), pFd);
-		// Setting the good size, because we may have read less than asked
-		if (result < buffer.size())
-			buffer.truncate(result);
-		// Making sure that the buffer is zero-terminated if required
-		*((C*)(buffer.data() + buffer.size())) = C();
-		return result;
-	}
 
 
 	template<class U>

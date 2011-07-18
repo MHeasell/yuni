@@ -176,7 +176,7 @@ namespace DynamicLibrary
 		if (filename)
 		{
 			// Loading
-			const unsigned int length = strlen(filename);
+			const unsigned int length = (unsigned int) strlen(filename);
 			if (!length)
 				return false;
 			wchar_t* buffer = new wchar_t[length + 10];
