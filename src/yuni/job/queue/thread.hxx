@@ -46,7 +46,7 @@ namespace Jobs
 			// It is actually better to perform the test before executing the job
 			if (shouldAbort())
 			{
-				// Notify the scheduler that this thread does no longer work
+				// Notify the scheduler that this thread goes to sleep
 				pScheduler.schedulerDecrementWorkerCount();
 				// We have to stop, no need for hibernating
 				return false;
@@ -60,11 +60,11 @@ namespace Jobs
 			// This method uses a lock and the destruction of the job may take some
 			// time.
 			// However, there is absolutely no guarantee that the job will be
-			// destroyed in this thread.
+			// destroyed at this point but we don't care anymore
 			pJob = nullptr;
 		}
 
-		// Notify the scheduler that this thread does no longer work
+		// Notify the scheduler that this thread goes to sleep
 		pScheduler.schedulerDecrementWorkerCount();
 
 		// Returning true, for hibernation

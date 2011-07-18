@@ -81,9 +81,23 @@ namespace Thread
 
 				// We have been waked up ! But perhaps we should abort as soon as
 				// possible...
-				Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
-				if (thread.pShouldStop || !thread.pStarted)
-					break;
+				{
+					Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
+					// The signal must be reset for future use
+					// However for thread-safety issues, we have to lock the thread itself
+					if (thread.pShouldStop || !thread.pStarted)
+					{
+						thread.pSignalHavePaused.notify();
+						break;
+					}
+				}
+
+				// If we don't have to stop, the signal must be reset for future use
+				// But the the thread itself must be locked
+				{
+					::Yuni::Thread::IThread::ThreadingPolicy threadLocker(thread);
+					thread.pSignalWakeUp.reset();
+				}
 			}
 			while (true);
 
