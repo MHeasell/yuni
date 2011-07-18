@@ -90,54 +90,6 @@ namespace Extension
 
 
 
-	template<int ChunkSizeT>
-	class IntoCString<StringBase<char,ChunkSizeT> >
-	{
-	public:
-		enum { valid = 1, converted = 0, zeroTerminated = 1, };
-
-	public:
-		static const char* Perform(const Yuni::StringBase<char,ChunkSizeT>& container)
-		{
-			return container.c_str();
-		}
-	};
-
-	template<int ChunkSizeT,
-		template <class> class OwspP, template <class> class ChckP, class ConvP,
-		template <class> class StorP, template <class> class ConsP>
-	class IntoCString<Yuni::SmartPtr<StringBase<char, ChunkSizeT>, OwspP,ChckP,ConvP,StorP,ConsP> >
-	{
-	public:
-		typedef Yuni::StringBase<char, ChunkSizeT> StringBaseType;
-		typedef Yuni::SmartPtr<StringBase<char,ChunkSizeT>, OwspP,ChckP,ConvP,StorP,ConsP> StringBaseTypePtr;
-		enum { valid = 1, converted = 0, zeroTerminated = 1, };
-
-	public:
-		static const char* Perform(const StringBaseTypePtr& container)
-		{
-			return (!container) ? NULL : container->c_str();
-		}
-	};
-
-
-
-
-
-	template<int ChunkSizeT>
-	class IntoCString<StringBase<char,ChunkSizeT>* >
-	{
-	public:
-		enum { valid = 1, converted = 0, zeroTerminated = 1, };
-
-	public:
-		static const char* Perform(const Yuni::StringBase<char,ChunkSizeT>* const container)
-		{
-			return container ? container->c_str() : NULL;
-		}
-	};
-
-
 	template<class T, class Alloc>
 	class IntoCString<std::basic_string<char,T,Alloc> >
 	{
@@ -158,12 +110,12 @@ namespace Extension
 	class IntoCString<Yuni::SmartPtr<std::basic_string<char, T,Alloc>, OwspP,ChckP,ConvP,StorP,ConsP> >
 	{
 	public:
-		typedef std::basic_string<char, T,Alloc> StringBaseType;
-		typedef Yuni::SmartPtr<std::basic_string<char,T,Alloc>, OwspP,ChckP,ConvP,StorP,ConsP> StringBaseTypePtr;
+		typedef std::basic_string<char, T,Alloc> StringType;
+		typedef Yuni::SmartPtr<std::basic_string<char,T,Alloc>, OwspP,ChckP,ConvP,StorP,ConsP> StringTypePtr;
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
-		static const char* Perform(const StringBaseTypePtr& container)
+		static const char* Perform(const StringTypePtr& container)
 		{
 			return (!container) ? NULL : container->c_str();
 		}
