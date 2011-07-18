@@ -3,6 +3,14 @@
 
 # include "../../traits/length.h"
 
+
+# ifdef YUNI_OS_MSVC
+#	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf_s(BUFFER,SIZE,F,V)
+# else
+#	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::snprintf(BUFFER,SIZE,F,V)
+# endif
+
+
 namespace Yuni
 {
 namespace Extension
@@ -37,7 +45,48 @@ namespace CustomString
 	};
 
 
-	// cha*
+	// char*
+	template<class CustomStringT>
+	class Assign<CustomStringT, void*>
+	{
+	public:
+		static void Perform(CustomStringT& s, const void* rhs)
+		{
+			if (!rhs)
+				s.assignWithoutChecking("0x0", 3);
+			else
+			{
+				# ifdef YUNI_OS_MSVC
+				// With Visual Studio, the option %p does not provide the prefix 0x
+				typename CustomStringT::Type buffer[32];
+				buffer[0] = '0';
+				buffer[1] = 'x';
+				// On Windows, it may return a negative value
+				if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer + 2, sizeof(buffer) - 2, "%p", rhs) >= 0)
+				{
+					s.appendWithoutChecking(buffer,
+						Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+				}
+				else
+					s.assignWithoutChecking("0x0", 3);
+				# else
+				typename CustomStringT::Type buffer[32];
+				// On Windows, it may return a negative value
+				if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, sizeof(buffer), "%p", rhs) >= 0)
+				{
+					s.assignWithoutChecking(buffer,
+						Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+				}
+				else
+					s.assignWithoutChecking("0x0", 3);
+				# endif
+			}
+		}
+	};
+
+
+
+	// char*
 	template<class CustomStringT>
 	class Assign<CustomStringT, char*>
 	{
@@ -45,7 +94,10 @@ namespace CustomString
 		static void Perform(CustomStringT& s, const char* rhs)
 		{
 			if (rhs)
-				s.assignWithoutChecking(rhs, Yuni::Traits::Length<char*, typename CustomStringT::Size>::Value(rhs));
+			{
+				s.assignWithoutChecking(rhs,
+					Yuni::Traits::Length<char*, typename CustomStringT::Size>::Value(rhs));
+			}
 			else
 				s.clear();
 		}
@@ -119,5 +171,7 @@ namespace CustomString
 } // namespace CustomString
 } // namespace Extension
 } // namespace Yuni
+
+# undef YUNI_PRIVATE_MEMBUF_SPTRINF
 
 #endif // __YUNI_CORE_CUSTOM_STRING_TRAITS_ASSIGN_H__
