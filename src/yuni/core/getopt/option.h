@@ -38,20 +38,6 @@ namespace GetOptImpl
 	};
 
 
-	template<class C, int Chnk>
-	class Value<StringBase<C, Chnk> >
-	{
-	public:
-		static bool Add(StringBase<C,Chnk>& out, const char* c_str, const String::size_type len)
-		{
-			if (len)
-				out.assign(c_str, len);
-			else
-				out.clear();
-			return true;
-		}
-	};
-
 	template<unsigned int ChunkT, bool ExpT, bool ZeroT>
 	class Value<CustomString<ChunkT, ExpT, ZeroT> >
 	{
@@ -62,7 +48,6 @@ namespace GetOptImpl
 			return true;
 		}
 	};
-
 
 
 	template<class C, class Traits, class Alloc>
@@ -79,6 +64,7 @@ namespace GetOptImpl
 		}
 	};
 
+
 	template<template<class,class> class L, class T, class Alloc>
 	class Value<L<T, Alloc> >
 	{
@@ -94,20 +80,6 @@ namespace GetOptImpl
 	};
 
 
-	template<template<class, class> class L, class C, int Chnk, class Alloc>
-	class Value<L<StringBase<C,Chnk>, Alloc> >
-	{
-	public:
-		static bool Add(L<StringBase<C, Chnk>, Alloc>& out, const char* c_str, const String::size_type len)
-		{
-            StringBase<C,Chnk> s;
-            s.assign(c_str, len);
-			out.push_back(s);
-			return true;
-		}
-	};
-
-
 	template<template<class, class> class L, unsigned int ChunkT, bool ExpT, bool ZeroT, class Alloc>
 	class Value<L<CustomString<ChunkT,ExpT, ZeroT>, Alloc> >
 	{
@@ -118,7 +90,6 @@ namespace GetOptImpl
 			return true;
 		}
 	};
-
 
 
 	template<template<class, class> class L, class C, class Traits, class AllocS, class Alloc>
@@ -214,16 +185,6 @@ namespace GetOptImpl
 
 
 
-	template<class C, int Chnk>
-	class Flag<StringBase<C, Chnk> >
-	{
-	public:
-		static void Enable(StringBase<C,Chnk>& out)
-		{
-			out = "true";
-		}
-	};
-
 
 	template<unsigned int ChunkT, bool ExpT, bool ZeroT>
 	class Flag<CustomString<ChunkT,ExpT,ZeroT> >
@@ -256,16 +217,6 @@ namespace GetOptImpl
 		}
 	};
 
-
-	template<template<class, class> class L, class C, int Chnk, class Alloc>
-	class Flag<L<StringBase<C,Chnk>, Alloc> >
-	{
-	public:
-		static void Enable(L<StringBase<C, Chnk>, Alloc>& out)
-		{
-			out.push_back("true");
-		}
-	};
 
 	template<template<class, class> class L, unsigned int ChunkT, bool ExpT, bool ZeroT, class Alloc>
 	class Flag<L<CustomString<ChunkT,ExpT,ZeroT>, Alloc> >

@@ -86,8 +86,8 @@ namespace Algorithm
 		** \return The check digit, -1 if an error has occured
 		*/
 		//! TODO Need implementation for `Luhn Mod N`
-		//		template<typename T = String::Char, int N = 40>
-		//		static int ModN(const StringBase<T,N>& s, int (*codepoint)(const StringBase<T,N>::Char));
+		//		template<class StringT>
+		//		static int ModN(const StringT& s, int (*codepoint)(const StringT::Char));
 
 	}; // class Luhn
 
