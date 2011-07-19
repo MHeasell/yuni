@@ -59,9 +59,9 @@ namespace Length
 	//! \brief Millimeter
 	//! \ingroup UnitLength
 	YUNI_UNIT_IMPL(Millimetre, "millimetre", "mm", double, 1e-3);
-	//! \brief Micronmetre
+	//! \brief Micrometre
 	//! \ingroup UnitLength
-	YUNI_UNIT_IMPL(Micronmetre, "micronmetre", "µ,", double, 1e-6);
+	YUNI_UNIT_IMPL(Micrometre, "micrometre", "µ,", double, 1e-6);
 	//! \brief Nanometre
 	//! \ingroup UnitLength
 	YUNI_UNIT_IMPL(Nanometre, "nanometre", "nm,", double, 1e-9);
@@ -89,4 +89,4 @@ namespace Length
 
 # include "../undef.h"
 
-#endif/// __YUNI_CORE_UNIT_LENGTH_METRIC_H__
+#endif // __YUNI_CORE_UNIT_LENGTH_METRIC_H__

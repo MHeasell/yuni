@@ -27,11 +27,11 @@ namespace Luminance
 
 	//! \brief SI (Candela per square metre)
 	//! \ingroup UnitLuminance
-	YUNI_UNIT_IMPL(SIBaseUnit, "candela", "", int, 1);
+	YUNI_UNIT_IMPL(SIBaseUnit, "candela", "cd", int, 1);
 
 	//! \brief Candela (per square metre)
 	//! \ingroup UnitLuminance
-	YUNI_UNIT_IMPL(Candela, "candela", "", int, 1);
+	YUNI_UNIT_IMPL(Candela, "candela", "cd", int, 1);
 	//! \brief Lambert
 	//! \ingroup UnitLuminance
 	YUNI_UNIT_IMPL(Lambert, "lambert", "L", double, 3183.09886);
