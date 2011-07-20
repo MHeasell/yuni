@@ -2,6 +2,7 @@
 <tag>dobject</tag>
 <tag>algorithm</tag>
 
+
 <h1>Glossary</h1>
 <ul>
   <li>DObject : Distributed Object, set of properties able to react to
@@ -16,6 +17,7 @@
   <li>Topology : Repartition of K DObjects among N Nodes.</li>
 </ul>
 
+
 <h1>Problems at hand</h1>
 <ul>
   <li>Problem 1 : How to balance a topology given a set of arbitrary constraints.</li>
@@ -25,6 +27,7 @@
   <li>Problem 5 : How to give weight to a node and update this weight.</li>
   <li>Problem 6 : How to group DObjects and update group contents.</li>
 </ul>
+
 
 <h1>Key programming concepts</h1>
 <ul>
@@ -36,6 +39,7 @@
   <li>Reference : a reference to a DObject contains all the info required to build a replica of it</li>
   <li>Types : Object typing determines the interfaces, state and behavior of the DObject</li>
 </ul>
+
 
 <h1>Question 1</h1>
 <p>
@@ -71,6 +75,7 @@
   <li>Is this second paradigm acceptable in terms of node failure recovery ?</li>
   <li>Is it acceptable in terms of data syncing ?</li>
 </ul>
+
 
 <h1>Tackling Problem 1</h1>
 
@@ -186,3 +191,93 @@ stores all replicas anyway and so in no way can it really keep a very
 low load whatever the topology.
 </p>
 
+
+<h1>Tackling Problem 2</h1>
+
+<ul>
+<li>Problem 2 : How to synchronize the replicas with their reference DObject.</li>
+</ul>
+<p>
+TODO
+</p>
+
+
+<h1>Tackling Problem 3</h1>
+
+<ul>
+<li>Problem 3 : How to detect node failures and what to do.</li>
+</ul>
+<p>
+To this problem I would add : how to add a node dynamically to the
+system. This is related because it also has to do with how nodes have
+a knowledge of each other, and communicate one with the other.
+</p>
+<p>
+The possible causes of node failures are :
+</p>
+<ul>
+<li>Hardware failure (power cut, power button, reset button, network card burned, &hellip;)</li>
+<li>System failure (freeze, crash, shutdown, reboot, &hellip;)</li>
+<li>Network disconnection (wifi loss, cable unplugged, switch broke, ISP cut the line, &hellip;)</li>
+<li>Application crash</li>
+</ul>
+<p>
+However, from our point of view, whatever the reason, the node failure
+results in a single visible symptom : at some point, the node stops
+answering network requests.
+</p>
+<p>
+In terms of detection of the failure, several possibilities are open.
+An intuitive answer would be to regularly ping the nodes to ensure
+that they are still responsive. This can be done either by a master
+node, or more subtly using a neighbour machanism where neighbour nodes
+check on each other. Even further down that road is a group mechanism
+with a sentinel node for the group. A different approach is to simply
+wait for a request to this node to fail. We will now study more closely
+each of these proposals.
+</p>
+
+<h2>Master node pinging</h2>
+
+<p>
+This is probably not the best answer to the problem, but for the sake
+of completeness, we shall investigate it anyway. Having a master node
+pinging the rest of the nodes regularly has two main drawbacks :
+</p>
+<ul>
+<li>The master may be very far from some of the nodes</li>
+<li>The master itself may fail</li>
+<li>The mechanism does not scale well</li>
+<li>The master must know all the nodes</li>
+</ul>
+<p>
+In order to alleviate the first problem, the master might be chosen
+intelligently in terms of physical topology of the network.
+</p>
+<p>
+For the second problem, the only solution is to have a secondary
+master that checks regularly on the master node. If the master fails,
+the secondary master is promoted to master and a secondary master is
+chosen to check on him. However, it is clear that this mechanism is
+not elegant and may endanger the system if the master and secondary
+master fail at the same moment (common network or power source).
+</p>
+<p>
+For the third problem, there is no solution. With a huge number of
+nodes, the master will struggle (or simply not be able) to ping them
+all. Having the secondary master do a part of the job does not scale
+either.
+</p>
+<p>
+The last problem is not really a problem, it just means that any new
+node entering the system must register only to the master node, which
+is actually quite simple.
+</p>
+
+<h2>Neighbour pinging</h2>
+
+<p>
+In this case, nodes that are close (in network access distance) will
+check on each other, which will reduce the mechanism's overhead on the
+network compared to checking on very distant nodes.
+</p>
