@@ -189,12 +189,12 @@ namespace File
 					if (minus < numRead)
 					{
 						numRead -= minus;
-						out.append((const char*) buffer, numRead);
+						out.append((const char*) buffer, (unsigned int) numRead);
 					}
 					return ioErrMemoryLimit;
 				}
 				// we use the standard method `append()` to allow the use of std::string
-				out.append((const char*) buffer, numRead);
+				out.append((const char*) buffer, (unsigned int) numRead);
 			}
 			return ioErrNone;
 		}

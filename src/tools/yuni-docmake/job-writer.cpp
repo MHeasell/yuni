@@ -111,7 +111,7 @@ namespace // anonymous
 		if (pToDelete.empty())
 			return;
 		// start from the last item to delete
-		unsigned int i = pToDelete.size();
+		unsigned int i = (unsigned int) pToDelete.size();
 		do
 		{
 			--i;
