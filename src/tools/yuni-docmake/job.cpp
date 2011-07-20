@@ -208,7 +208,7 @@ namespace // anonymous
 				if (!text.empty())
 				{
 					StringAdapter adapter;
-					adapter.adapt(text.c_str(), text.size());
+					adapter.adapt(text.c_str(), (unsigned int) text.size());
 					seo(adapter);
 				}
 				break;
