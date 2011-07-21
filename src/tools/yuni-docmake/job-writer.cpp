@@ -6,6 +6,7 @@
 #include "tinyxml/tinyxml.h"
 #include <yuni/core/hash//checksum//md5.h>
 #include "indexes.h"
+#include "webpage.hxx"
 
 
 using namespace Yuni;
@@ -181,11 +182,8 @@ void JobWriter::PushAllInQueue()
 
 bool JobWriter::ReadTemplateIndex()
 {
-	bool res = (Core::IO::ioErrNone == Core::IO::File::LoadFromFile(gTemplateContent,
-		"/Users/milipili/projects/yuni/sources/docs/src/tools/yuni-docmake/templates/yuni/index.html"));
-	if (!res)
-		logs.error() << "impossible to load template";
-	return res;
+	PrepareWebPageHtml(gTemplateContent);
+	return true;
 }
 
 

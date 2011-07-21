@@ -27,8 +27,10 @@ Make::Make() :
 
 bool Make::parseCommandLine(int argc, char** argv)
 {
-	unsigned int cpuCount = System::CPU::Count();
-	nbJobs = cpuCount;
+	// The total number of CPU
+	const unsigned int cpuCount = System::CPU::Count();
+	// The most appropriate number of simultaneous jobs
+	nbJobs = (cpuCount > 4) ? 4 : cpuCount;
 
 	// The Command line parser
 	GetOpt::Parser opts;
