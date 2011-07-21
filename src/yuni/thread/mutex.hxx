@@ -19,14 +19,20 @@ namespace Yuni
 			** is unavailable, the calling thread spinsdwSpinCount times before performing a
 			** wait operation on a semaphore associated with the critical section. If the critical
 			** section becomes free during the spin operation, the calling thread avoids the
-			** wait operation. 
+			** wait operation.
 			** \see http://msdn.microsoft.com/en-us/library/ms683476%28v=vs.85%29.aspx
 			*/
 			spinCount = 3000,
 		};
 		InitializeCriticalSectionAndSpinCount(&pSection, spinCount);
 		# else
+		#	ifndef NDEBUG
+		pthread_mutexattr_init(&pMutexAttr);
+		pthread_mutexattr_settype(&pMutexAttr, PTHREAD_MUTEX_ERRORCHECK);
+		::pthread_mutex_init(&pPthreadLock, &pMutexAttr);
+		#	else
 		::pthread_mutex_init(&pPthreadLock, NULL);
+		#	endif
 		# endif
 		# endif
 	}
@@ -57,6 +63,22 @@ namespace Yuni
 	*/
 
 
+	inline Mutex::~Mutex()
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		DeleteCriticalSection(&pSection);
+		# else
+		pthread_mutex_destroy(&pPthreadLock);
+		#	ifndef NDEBUG
+		pthread_mutexattr_destroy(&pMutexAttr);
+		#	endif
+		# endif
+		# endif
+	}
+
+
+
 	inline Mutex::Mutex(const Mutex&)
 	{
 		// Do nothing on purpose
@@ -67,18 +89,6 @@ namespace Yuni
 	{
 		// Do nothing on purpose
 		return *this;
-	}
-
-
-	inline Mutex::~Mutex()
-	{
-		# ifndef YUNI_NO_THREAD_SAFE
-		# ifdef YUNI_OS_WINDOWS
-		DeleteCriticalSection(&pSection);
-		# else
-		pthread_mutex_destroy(&pPthreadLock);
-		# endif
-		# endif
 	}
 
 

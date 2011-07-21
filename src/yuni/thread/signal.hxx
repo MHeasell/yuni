@@ -32,4 +32,4 @@ namespace Thread
 } // namespace Thread
 } // namespace Yuni
 
-#endif // __YUNI_THREAD_SIGNAL_H__
+#endif // __YUNI_THREAD_SIGNAL_HXX__

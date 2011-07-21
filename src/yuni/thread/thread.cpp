@@ -45,7 +45,7 @@ namespace Thread
 		assert(arg && "Yuni Thread Internal: invalid argument (pthread callback)");
 		if (!arg)
 			return 0;
-			
+
 		// Get back our object.
 		Yuni::Thread::IThread& thread = *((Yuni::Thread::IThread *) arg);
 		assert(!thread.pStarted && "Yuni Thread: The thread is already started");
@@ -59,14 +59,12 @@ namespace Thread
 		if (thread.onStarting())
 		{
 			// onStarting authorized us to continue. So say we are now running.
-			// NOTE: We should not lock pMutex for pStarted here.
-			//       The lock on pMutex is held by start(),
-			//       and we hold a condition lock on start(), so all is well.
-			thread.pStarted = true;
-
-			// signal the start() method in the parent thread
-			thread.pSignalStartup.notify();
-
+			{
+				Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
+				thread.pStarted = true;
+				// signal the start() method in the parent thread
+				thread.pSignalStartup.notify();
+			}
 			// Launch the code
 			do
 			{
@@ -103,15 +101,15 @@ namespace Thread
 
 			// We have stopped executing user code, and are exiting.
 			// Signal any threads waiting for our termination.
-			thread.pInnerFlagMutex.lock();
+			Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
 			thread.pShouldStop = true;
 			thread.pStarted = false;
-			thread.pInnerFlagMutex.unlock();
 		}
 		else
 		{
 			// The startup failed. So, pStarted is left to false.
 			// signal the start() method in the parent thread
+			Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
 			thread.pStarted = false;
 			thread.pSignalStartup.notify();
 		}
@@ -169,7 +167,7 @@ namespace Thread
 		{
 			// It is dangerous to call this method here. The VTable might be corrupted
 			// and it may produce strange results
-			stop(); 
+			stop();
 		}
 	}
 

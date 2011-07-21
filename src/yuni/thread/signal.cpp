@@ -19,6 +19,7 @@ namespace Yuni
 namespace Thread
 {
 
+
 	Signal::Signal()
 	{
 		#ifndef YUNI_NO_THREAD_SAFE
@@ -26,7 +27,7 @@ namespace Thread
 		// Making sure that our pseudo HANDLE type is valid
 		assert(sizeof(HANDLE) >= sizeof(void*) && "Invalid type for Signal::pHandle");
 
-		pHandle = (void*) CreateEvent( 
+		pHandle = (void*) CreateEvent(
 				NULL,     // default security attributes
 				TRUE,     // manual-reset event
 				FALSE,    // initial state is nonsignaled
@@ -34,8 +35,8 @@ namespace Thread
 
 		# else
 		pSignalled = false;
-		::pthread_mutex_init(&pMutex, NULL);
-		::pthread_cond_init(&pCondition, NULL);
+		::pthread_mutex_init(&pMutex, nullptr);
+		::pthread_cond_init(&pCondition, nullptr);
 		# endif
 		#endif
 	}
@@ -62,9 +63,9 @@ namespace Thread
 		return (pHandle && ResetEvent(pHandle));
 		# else
 
-		pthread_mutex_lock(&pMutex);
+		::pthread_mutex_lock(&pMutex);
 		pSignalled = false;
-		pthread_mutex_unlock(&pMutex);
+		::pthread_mutex_unlock(&pMutex);
 		return true;
 		# endif
 
@@ -86,19 +87,22 @@ namespace Thread
 
 		// The pthread_cond_wait will unlock the mutex and wait for
 		// signalling.
+		::pthread_mutex_lock(&pMutex);
 
-		int pthread_cond_wait_error;
-		pthread_mutex_lock(&pMutex);
-		do
+		while (!pSignalled)
 		{
+			// Wait for signal
+			// Note that the pthread_cond_wait routine will automatically and
+			// atomically unlock mutex while it waits.
+			//
 			// Spurious wakeups from this function can occur.
 			// Therefore we must check out pSignalled variable to ensure we have
 			// really been signalled.
-			pthread_cond_wait_error = ::pthread_cond_wait(&pCondition, &pMutex);
-		} while (pSignalled != true);
+			::pthread_cond_wait(&pCondition, &pMutex);
+		}
 
 		// The condition was signalled: the mutex is now locked again.
-		pthread_mutex_unlock(&pMutex);
+		::pthread_mutex_unlock(&pMutex);
 		# endif
 
 		# else // NO THREADSAFE
@@ -112,16 +116,18 @@ namespace Thread
 		# ifdef YUNI_OS_WINDOWS
 		if (pHandle)
 		{
-			switch (WaitForSingleObject(pHandle, static_cast<DWORD>(timeout)))
-			{
-				case WAIT_OBJECT_0:
-					return true;
-				default:
-					break;
-			}
+			if (WAIT_OBJECT_0 == WaitForSingleObject(pHandle, static_cast<DWORD>(timeout)))
+				return true;
 		}
 		return false;
 		# else
+
+		::pthread_mutex_lock(&pMutex);
+		if (pSignalled)
+		{
+			::pthread_mutex_unlock(&pMutex);
+			return true;
+		}
 
 		Yuni::timeval now;
 		struct timespec t;
@@ -133,20 +139,25 @@ namespace Thread
 		t.tv_sec   =  static_cast<time_t>(now.tv_sec + timeout / 1000 + (t.tv_nsec / 1000000000L));
 		t.tv_nsec  %= 1000000000L;
 
-		int error;
-		pthread_mutex_lock(&pMutex);
+		int error = 0;
+
 		do
 		{
-			// Avoid spurious wakeups (see waitUnlocked() above for explanations)
+			// Wait for signal
+			// Note that the pthread_cond_wait routine will automatically and
+			// atomically unlock mutex while it waits.
+			//
+			// Avoid spurious wakeups (see wait() above for explanations)
 			error = ::pthread_cond_timedwait(&pCondition, &pMutex, &t);
 		}
-		while (pSignalled != true // Condition not verified
+		while (!pSignalled        // Condition not verified
 			&& error != ETIMEDOUT // We have not timedout
-			&& error != EINVAL);  // When t is in the past, we got EINVAL. We consider this as a timeout.
+			&& error != EINVAL);   // When t is in the past, we got EINVAL. We consider this as a timeout.
 
-		pthread_mutex_unlock(&pMutex);
+		bool result = (pSignalled != false);
+		::pthread_mutex_unlock(&pMutex);
 		// The condition was signalled or has timeoutted:
-		return (pSignalled != false);
+		return result;
 		# endif
 
 		# else // NO THREADSAFE
