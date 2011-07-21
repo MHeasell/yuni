@@ -102,6 +102,9 @@ namespace Yuni
 		# else
 		//! The PThread mutex
 		::pthread_mutex_t pPthreadLock;
+		# ifndef NDEBUG
+		pthread_mutexattr_t pMutexAttr;
+		# endif
 		# endif
 		# endif
 
