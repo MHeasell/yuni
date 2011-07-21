@@ -62,8 +62,6 @@ set(YUNI_MODULE_LIST
 		display
 		keyboard
 		mouse
-	script
-		lua
 	ui
 	net
 		netserver
@@ -314,7 +312,8 @@ if(MODULES)
 		YMESSAGE(" Main and virtual modules")
 		YMESSAGE("    +core          : The core module (needed)")
 		YMESSAGE("    -/+tests       : Atomic Tests for the yuni framework")
-		YMESSAGE("    +all           : Enable all main modules (ui,script,tests,...)")
+		YMESSAGE("    +all           : Enable all main modules (ui,tests,...)")
+		YMESSAGE("    -/+doc         : Documentation Tools")
 		#YMESSAGE(" The VFS module")
 		#YMESSAGE("    -/+vfs         : The Virtual filesystem")
 		#YMESSAGE("    -/+vfs-local   : Support for the local filesystems")
@@ -325,9 +324,6 @@ if(MODULES)
 		YMESSAGE("    -/+mouse       : The Mouse device")
 		YMESSAGE(" The audio modules")
 		YMESSAGE("    -/+audio       : The Audio module (default: disabled)")
-		YMESSAGE(" The scripting modules")
-		YMESSAGE("    -/+script      : The script module (default: disabled)")
-		YMESSAGE("    -/+lua         : The Lua extension (default: enabled)")
 		YMESSAGE(" The ui modules")
 		YMESSAGE("    -/+ui          : The ui module (default: disabled)")
 		YMESSAGE(" The virtual machine module")
