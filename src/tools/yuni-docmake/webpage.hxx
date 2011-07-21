@@ -90,7 +90,7 @@ namespace // anonymous
 			<< "<fieldset><legend>&nbsp;Quick links&nbsp;</legend>\n"
 			<< "	<a href=\"@{ROOT}/en/documentation\">Documentation</a>\n"
 			<< "	<a href=\"@{ROOT}/en/downloads\">Download</a>\n"
-			<< "	<a href=\"@{ROOT}/en/developpers\">Developpers</a>\n"
+			<< "	<a href=\"@{ROOT}/en/developers\">Developers</a>\n"
 			<< "	<a href=\"@{ROOT}/en/links\">Links</a>\n"
 			<< "	<a href=\"@{ROOT}/en/contacts\">Contacts</a>\n"
 			<< "</fieldset>\n"
