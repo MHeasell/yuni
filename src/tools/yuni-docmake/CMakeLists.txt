@@ -106,7 +106,7 @@ add_executable(yuni-docmake ${src})
 
 target_link_libraries(yuni-docmake  yuni-static-core)
 
-if(UNIX)
+if(UNIX AND NOT APPLE)
 	# The DL library is required on Unixes for using SQlite
 	target_link_libraries(yuni-docmake  dl)
 endif()
