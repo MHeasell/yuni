@@ -98,7 +98,11 @@ endif(WIN32 OR WIN64)
 # C++0x
 check_cxx_compiler_flag("-std=c++0x" YUNI_HAS_GCC_CPP0X_SUPPORT)
 if(YUNI_HAS_GCC_CPP0X_SUPPORT)
-	LIBYUNI_CONFIG_CFLAG("both" "core"	"-std=c++0x")
+	if(MINGW)
+		LIBYUNI_CONFIG_CFLAG("both" "core"	"-std=gnu++0x")
+	else()
+		LIBYUNI_CONFIG_CFLAG("both" "core"	"-std=c++0x")
+	endif()
 endif()
 
 
@@ -111,7 +115,11 @@ check_cxx_source_compiles("#include <stdint.h>
 
 # C++0x nullptr
 if(YUNI_HAS_GCC_CPP0X_SUPPORT)
-	set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
+	if(MINGW)
+		set(CMAKE_REQUIRED_FLAGS "-std=gnu++0x")
+	else()
+		set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
+	endif()
 endif()
 check_cxx_source_compiles("
     #include <cstddef>
