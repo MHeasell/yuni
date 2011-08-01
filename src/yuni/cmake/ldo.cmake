@@ -1,6 +1,6 @@
 
 
-YMESSAGE(":: [Module] Live Distributed Objects  (EXPERIMENTAL, FOR ADVANCED USERS ONLY)")
+YMESSAGE_MODULE("Live Distributed Objects  (EXPERIMENTAL, FOR ADVANCED USERS ONLY)")
 
 LIBYUNI_CONFIG_LIB("both" "ldo" "yuni-static-ldo")
 

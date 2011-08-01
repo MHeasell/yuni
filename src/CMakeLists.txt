@@ -4,10 +4,9 @@ cmake_minimum_required(VERSION 2.8)
 message(STATUS "${CMAKE_CXX_FLAGS}")
 include("cmake/message.cmake")
 
-YMESSAGE("")
-YMESSAGE("The Yuni Framework")
-YMESSAGE("")
 project(Yuni-Framework) 
+YMESSAGE("")
+YMESSAGE_BOLD("The Yuni Framework")
 
 
 # Package informations
@@ -165,3 +164,14 @@ if(YUNI_AUTO_COMPILE_YUNI_CONFIG)
             WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tools/yuni-config-bootstrap")
 endif()
 
+
+
+if(YUNI_ERROR_HAS_OCCURED)
+	message(STATUS "")
+	message(STATUS "")
+	if(UNIX)
+		message(SEND_ERROR "[1;31mAn error has occured. Aborting. [0m")
+	else()
+		message(SEND_ERROR "An error has occured. Aborting.")
+	endif()
+endif()
