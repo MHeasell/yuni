@@ -109,7 +109,6 @@ if(MODULES)
 			set(YUNI_MODULE_NET true)
 			set(YUNI_MODULE_NET_MESSAGES true)
 			set(YUNI_MODULE_UI true)
-			set(YUNI_MODULE_DATABASE true)
 			set(YUNI_MODULE_ALGORITHMS true)
 			set(YUNI_MODULE_EXTRA_MARKDOWN true)
 			set(YUNI_MODULE_LDO true)
@@ -357,13 +356,6 @@ endif()
 
 
 
-
-if(YUNI_MODULE_DATABASE)
-	if(NOT YUNI_MODULE_DB_PSQL)
-		YMESSAGE("[!!] Warning: No external extension for the `database` module. The module has been disabled.")
-		set(YUNI_MODULE_DATABASE false)
-	endif()
-endif()
 
 
 

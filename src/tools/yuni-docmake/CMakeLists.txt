@@ -1,6 +1,6 @@
 
 YMESSAGE("")
-YMESSAGE("yuni-docmake")
+YMESSAGE_BOLD("yuni-docmake")
 YMESSAGE("")
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/CommonSettings.cmake")

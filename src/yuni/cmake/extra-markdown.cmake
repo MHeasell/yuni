@@ -1,5 +1,5 @@
 
-YMESSAGE(":: [Module] Markdown  (EXPERIMENTAL, FOR ADVANCED USERS ONLY)")
+YMESSAGE_MODULE("Markdown  (EXPERIMENTAL, FOR ADVANCED USERS ONLY)")
 
 LIBYUNI_CONFIG_LIB("both" "markdown"      "yuni-static-extra-markdown")
 

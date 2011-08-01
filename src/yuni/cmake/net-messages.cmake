@@ -1,5 +1,5 @@
 
-YMESSAGE(":: [Module] Network Messages  (EXPERIMENTAL, FOR ADVANCED USERS ONLY)")
+YMESSAGE_MODULE("Network Messages  (EXPERIMENTAL, FOR ADVANCED USERS ONLY)")
 
 LIBYUNI_CONFIG_LIB("both" "net-messages"        "yuni-static-net-messages")
 
