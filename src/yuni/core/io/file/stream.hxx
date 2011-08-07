@@ -14,8 +14,8 @@ namespace File
 {
 
 
-	inline Stream::Stream()
-		:pFd(NULL)
+	inline Stream::Stream() :
+		pFd(NULL)
 	{
 		// Do nothing
 	}
@@ -49,8 +49,19 @@ namespace File
 
 
 	template<class U>
+	inline bool Stream::openRW(const U& filename)
+	{
+		// note: added this to avoid name resolution conflicts
+		return this->open(filename, Core::IO::OpenMode::write | Core::IO::OpenMode::truncate);
+	}
+
+
+	template<class U>
 	inline bool Stream::open(const U& filename, const int mode)
 	{
+		// The filename must be a valid string
+		YUNI_STATIC_ASSERT(Traits::CString<U>::valid, InvalidTypeForFilename);
+
 		// Close the file if already opened
 		if (pFd)
 			(void)::fclose(pFd);

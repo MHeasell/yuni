@@ -105,6 +105,11 @@ endif()
 #endif(YUNI_MODULE_ALGORITHMS)
 
 
+if(YUNI_MODULE_DOCUMENTATION)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/documentation.cmake")
+endif()
+
+
 if(YUNI_MODULE_EXTRA_MARKDOWN)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/extra-markdown.cmake")
 endif()
