@@ -62,19 +62,10 @@ function toggle_toc() {
 <table class="layout">
 <tr>
 <td class="leftspace"></td>
+<!--
 <td class="logo"><img src="@{ROOT}/theme/default/images/logo.png" alt="Yuni Logo" /></td>
-<td class="title"><span class="unbreakable"><strong>Yuni </strong>Framework</span>
-<div class="breadCrumbHolder module">
-<div id="breadCrumb0" class="breadCrumb module">
-<ul>
-<li><a href="@{ROOT}/@{INDEX}">Home</a></li>
-@{URL_PARTS}
-</ul>
-</div>
-</div>
-
-
-</td>
+-->
+<td class="title"><span class="unbreakable"><strong>Yuni </strong>Framework</span></td>
 <td class="links">
 <div id="mainmenu"><input type="text"/></div>
 </td>
@@ -82,22 +73,40 @@ function toggle_toc() {
 </tr>
 
 <!-- space -->
+<!--
 <tr>
 <td></td><td></td><td class="vspace"></td><td></td>
 </tr>
+-->
+
 
 <tr>
-<td colspan="2" class="leftmenu">
+<td class="leftmenu">
 <div>
 
 @{QUICKLINKS_BEGIN}
 <fieldset><legend>&nbsp;Quick links&nbsp;</legend>
-	<a href="@{ROOT}/en/documentation/@{INDEX}">Documentation</a>
+	<a href="@{ROOT}/en/@{INDEX}">Home</a>
 	<a href="@{ROOT}/en/downloads/@{INDEX}">Download</a>
 	<a href="@{ROOT}/en/developers/@{INDEX}">Developers</a>
 	<a href="@{ROOT}/en/links/@{INDEX}">Links</a>
 	<a href="@{ROOT}/en/contacts/@{INDEX}">Contacts</a>
 </fieldset>
+<fieldset><legend>&nbsp;Documentation&nbsp;</legend>
+	<p>
+	Stable version (0.2)
+	</p>
+	<a href="@{ROOT}/en/documentation/@{INDEX}">Documentation</a>
+	<a href="@{ROOT}/en/documentation/v0.2/users/@{INDEX}">User's manual</a>
+	<a href="@{ROOT}/en/documentation/v0.2/doxygen/@{INDEX}">Doxygen</a>
+	<br />
+	<p>
+	Development version
+	</p>
+	<a href="@{ROOT}/en/documentation/trunk/user/@{INDEX}">User's manual (trunk)</a>
+	<a href="@{ROOT}/en/documentation/trunk/doxygen/@{INDEX}">Doxygen (trunk)</a>
+</fieldset>
+
 @{QUICKLINKS_END}
 <!--
 <fieldset><legend>&nbsp;Page&nbsp;</legend>
@@ -115,6 +124,20 @@ function toggle_toc() {
 </div>
 </td>
 <td class="laycontent" colspan="2">
+
+
+
+
+<h1>@{TITLE}</h1>
+<div class="breadCrumbHolder module">
+<div id="breadCrumb0" class="breadCrumb module">
+<ul>
+<li><a href="@{ROOT}/@{INDEX}">Home</a></li>
+@{URL_PARTS}
+</ul>
+</div>
+</div>
+
 
 
 @{TOC_BEGIN}
@@ -150,11 +173,6 @@ function toggle_toc() {
 
 
 
-
-
-<h1>@{TITLE}</h1>
-
-
 <div class="content">
 
 @{CONTENT}
@@ -173,29 +191,6 @@ Last modified : September 11, 2011
 </tr>
 </table>
 
-
-<table class="footer">
-<tr>
-<td style="width:240px;min-width:240px"></td>
-<td class="footerlink right">sitemap</td>
-<td class="footerlink">
-<a href="@{ROOT}/en/documentation/@{INDEX}">Documentation</a>
-<a href="@{ROOT}/en/downloads/@{INDEX}">Downloads</a>
-<a href="@{ROOT}/en/links/@{INDEX}">Links</a>
-<a href="@{ROOT}/en/contacts/@{INDEX}">Contacts</a>
-<a href="@{ROOT}/en/sitemap/@{INDEX}">Sitemap</a>
-</td>
-<td class="footerlink right">Documentation</td>
-<td class="footerlink">
-<a href="@{ROOT}/en/documentation/v0.2/user/@{INDEX}">User's manual (v0.2)</a>
-<a href="@{ROOT}/en/documentation/v0.2/doxygen/@{INDEX}">Doxygen (v0.2)</a>
-<a href="@{ROOT}/en/documentation/trunk/user/@{INDEX}">User's manual (trunk)</a>
-<a href="@{ROOT}/en/documentation/trunk/doxygen/@{INDEX}">Doxygen (trunk)</a>
-
-</td>
-<td></td>
-</tr>
-</table>
 
 
 </div>

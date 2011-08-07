@@ -5,8 +5,9 @@ body,html {
 	margin					:0;
 	padding					:0;
 	font-size				:9pt;
-	background-image		:url('../images/back.png');
+/*	background-image		:url('../images/back.png'); */
 	background-repeat		:repeat-x;
+	background-color:#f8f8f8;
 }
 .layout {
 	width					:100%;
@@ -19,12 +20,21 @@ body,html {
 	min-width				:10px;
 }
 .leftspace {
-	width					:200px;
-	min-width				:10px;
+	background-color:white;
 }
 .title {
-	font-size				:12pt;
-	padding-left			:0.7em;
+	font-size:14pt;
+	padding-left:1.6em;
+	background-image:url('../images/logo.png');
+	padding-left:110px;
+	background-repeat:no-repeat;
+	background-position:15px center;
+	min-height:90px;
+	height:100px;
+	border:1px solid #ccc;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:none;
 }
 #parent {
 	background-image		:url('../images/arrow.png');
@@ -52,11 +62,12 @@ body,html {
 	height					:96px;
 	min-width				:85px;
 	min-height				:96px;
+	background-color:white;
 }
 .unbreakable {
 	white-space				:nowrap;
 	color:#933;
-	text-shadow				:1px 1px 1px #eee;
+	text-shadow				:1px 1px 4px #aaa;
 }
 .unbreakable strong {
 	color:black;
@@ -84,19 +95,25 @@ body,html {
 	margin-right			:0.3em;
 }
 .leftmenu {
-	min-width:6em;
+	min-width:10em;
+	width:10em;
 	vertical-align:top;
 	padding					:4em 1em 2em 2em;
 	font-family				:helvetica, tahoma, arial, sans-serif;
 	font-size				:8pt;
 	padding-right			:3em;
+	background-color:white;
 }
 .leftmenu fieldset {
+	width:100%;
 	margin-bottom:1em;
 	font-weight:bold;
 	border:1px solid #bbd;
 	margin-right:3em;
 	padding-top:1em;
+	border-bottom-style:none;
+	border-left-style:none;
+	border-right-style:none;
 }
 .leftmenu fieldset a {
 	text-decoration:none;
@@ -115,13 +132,25 @@ body,html {
 	color:#c9704c;
 	padding-left:0.2em;
 }
+.leftmenu fieldset p {
+	font-weight:normal;
+	padding:0;
+	margin:0;
+	padding-left:1em;
+	padding:0.2em 1em 0.2em 1em;
+}
 .laycontent {
-	padding-left			:1em;
+	padding-left			:3em;
+	border:1px solid #ccc;
+	border-top-style:none;
+	border-bottom-style:none;
+	border-right-style:none;
 }
 .laycontent h1 {
 	font-size				:15pt;
 	color					:#000;
 	text-shadow				:1px 1px 3px #ddd;
+	margin-top:2.5em;
 }
 .vspace {
 	height					:22pt;
@@ -176,6 +205,7 @@ body,html {
 }
 .modified {
 	padding-top				:200pt;
+	margin-bottom			:40pt;
 	font-size				:9pt;
 	text-align				:right;
 	font-style				:italic;
@@ -230,7 +260,6 @@ body,html {
 .content {
 	font-family				:'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	font-size				:8pt;
-	background-color:#fff;
 }
 .content .directoryindex {
 	margin					:45pt 0 0 0;
@@ -262,7 +291,7 @@ body,html {
 .content .class_name_pre {
 	padding					:0.5em 1em 0.5em 1em;
 	margin-left				:3em !important;
-	border					:5px solid #ddd;
+	border					:1px solid #ddd;
 	border-top-style		:none;
 	border-bottom-style		:none;
 	border-right-style		:none;

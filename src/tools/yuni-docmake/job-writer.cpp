@@ -164,7 +164,7 @@ namespace // anonymous
 
 
 
-void JobWriter::Add(const Yuni::String& input, const Yuni::String& htdocs, const ArticleData& article)
+void JobWriter::Add(const String& input, const String& htdocs, const ArticleData& article)
 {
 	JobWriter* job = new JobWriter(input, htdocs, article);
 	gMutex.lock();
@@ -190,7 +190,7 @@ bool JobWriter::ReadTemplateIndex()
 }
 
 
-JobWriter::JobWriter(const Yuni::String& input, const Yuni::String& htdocs, const ArticleData& article) :
+JobWriter::JobWriter(const String& input, const String& htdocs, const ArticleData& article) :
 	pInput(input),
 	pHtdocs(htdocs),
 	pArticle(article)

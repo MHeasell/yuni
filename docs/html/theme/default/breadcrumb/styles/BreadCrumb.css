@@ -35,11 +35,9 @@
 	height: 21px;
 	overflow: hidden;
 	width: 990px;
-	padding:5px;
 	width:100%;
 	font-size:8.5pt;
 	font-family:'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-	text-shadow				:2px 2px 5px #fff;
 }
 .breadCrumb a {
 	text-decoration:none;
@@ -65,10 +63,11 @@
 	height: 21px;
 	overflow: hidden;
 	line-height: 21px;
-	margin: 0px 6px 0px 0;
-	padding: 0px 10px 0px 0;
+	margin: 0px 0px 0px 0;
+	padding: 0px 16px 0px 0;
 	font-size: .9167em;
 	background: url(../Images/Chevron.gif) no-repeat 100% 0;
+	background: url(../Images/separator.png) no-repeat 100% 0;
 }
 .breadCrumb ul li div.chevronOverlay
 {

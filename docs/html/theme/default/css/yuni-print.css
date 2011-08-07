@@ -13,3 +13,14 @@
 .space {
 	width:0;
 }
+.title {
+	background-image:none !important;
+	padding-left:0em;
+}
+.leftmenu {
+	width:1em !important;
+}
+.laycontent {
+	border-style:none;
+	padding-left:0;
+}
