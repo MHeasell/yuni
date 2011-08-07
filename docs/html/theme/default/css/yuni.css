@@ -21,6 +21,9 @@ body,html {
 }
 .leftspace {
 	background-color:#f8f8f8;
+	background-image:url('../images/shadow.png');
+	background-position:100% center;
+	background-repeat:repeat-y;
 }
 .title {
 	font-size:14pt;
@@ -41,21 +44,6 @@ body,html {
 	background-position		:center left;
 	background-repeat		:no-repeat;
 	padding-left			:20px;
-}
-#mainmenu input {
-	border					:1px solid #aad;
-	padding					:2px 0.5em;
-	background-image		:url('../images/search.png');
-	background-repeat		:no-repeat;
-	background-position		:5px center;
-	padding-left			:25px;
-	background-color		:#eee;
-}
-#mainmenu input:focus {
-	background-color		:#eee;
-	-moz-box-shadow: 0 0 5px white;
-	-webkit-box-shadow: 0 0 5px white;
-	box-shadow: 0 0 5px white;
 }
 .logo {
 	width					:85px;
@@ -103,9 +91,16 @@ body,html {
 	font-size				:8pt;
 	padding-right			:3em;
 	background-color:#f8f8f8;
+	background-image:url('../images/shadow.png');
+	background-position:100% center;
+	background-repeat:repeat-y;
+}
+.leftmenu input {
+	width:100%;
+	margin-bottom:2em;
 }
 .leftmenu fieldset {
-	width:100%;
+	width:90%;
 	margin-bottom:1em;
 	font-weight:bold;
 	border:1px solid #bbd;
@@ -140,7 +135,7 @@ body,html {
 	padding:0.2em 1em 0.2em 1em;
 }
 .laycontent {
-	padding-left			:3em;
+	padding-left			:4em;
 	border:1px solid #ccc;
 	border-top-style:none;
 	border-bottom-style:none;
