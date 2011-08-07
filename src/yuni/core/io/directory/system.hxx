@@ -32,7 +32,7 @@ namespace System
 		{
 			if (!Yuni::System::Environment::Read("TMP", out, false))
 			{
-				if (!System::Environment::Read("TEMP", out, false))
+				if (!Yuni::System::Environment::Read("TEMP", out, false))
 					return false;
 			}
 		}
