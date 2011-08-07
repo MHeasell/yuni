@@ -24,7 +24,7 @@ namespace Environment
 	** \brief Get a value from the current environment
 	**
 	** \param name Name of the variable
-	** \param out Variable of type 'string'/'container' where the value will be appened
+	** \param[out] out Variable of type 'string'/'container' where the value will be appened
 	** \param emptyBefore True to empty the parameter `out` before
 	** \return True if the operation succeeded, false otherwise
 	*/

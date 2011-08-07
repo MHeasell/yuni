@@ -570,6 +570,8 @@ set(SRC_CORE_IO_DIRECTORY
 		core/io/directory/copy.cpp
 		core/io/directory/info.h
 		core/io/directory/iterator.h
+		core/io/directory/system.h
+		core/io/directory/system.hxx
 )
 source_group(core\\io\\directory FILES ${SRC_CORE_IO_DIRECTORY})
 
