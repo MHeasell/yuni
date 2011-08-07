@@ -121,7 +121,7 @@ body,html {
 .laycontent h1 {
 	font-size				:15pt;
 	color					:#000;
-	text-shadow				:2px 2px 2px #999;
+	text-shadow				:1px 1px 3px #ddd;
 }
 .vspace {
 	height					:22pt;
@@ -139,9 +139,9 @@ body,html {
 	padding					:0.5em 1em 0 1em;
 	margin					:2em 1.5em 0.7em 1.2em;
 	font-family				:helvetica, tahoma, arial, sans-serif;
-	-moz-box-shadow: 0 0 5px #888;
-	-webkit-box-shadow: 0 0 5px#888;
-	box-shadow: 0 0 5px #888;
+	-moz-box-shadow: 0 0 5px #aaa;
+	-webkit-box-shadow: 0 0 5px #aaa;
+	box-shadow: 0 0 5px #aaa;
 }
 .toc div {
 	padding-bottom			:0.5em;
@@ -234,7 +234,7 @@ body,html {
 }
 .content .directoryindex {
 	margin					:45pt 0 0 0;
-	text-shadow				:2px 2px 2px #999;
+	text-shadow				:2px 2px 2px #bbb;
 	color					:#245079 !important;
 }
 .content .directoryindex a {
@@ -245,7 +245,7 @@ body,html {
 .content h1 {
 	font-size				:12pt;
 	margin					:45pt 0 0 0;
-	text-shadow				:2px 2px 2px #999;
+	text-shadow				:2px 2px 2px #ddd;
 }
 .content h2 {
 	font-size				:10pt;
@@ -257,7 +257,7 @@ body,html {
 	font-size				:8pt;
 	text-align				:justify;
 	text-justify			:distribute;
-	text-indent				:1.4em;
+	text-indent				:0em;
 }
 .content .class_name_pre {
 	padding					:0.5em 1em 0.5em 1em;
@@ -284,9 +284,9 @@ body,html {
 	border-collapse			:collapse;
 	border					:1px solid #99adbc;
 	margin					:0.5em;
-	-moz-box-shadow: 0 0 5px #999;
-	-webkit-box-shadow: 0 0 5px #999;
-	box-shadow: 0 0 5px #999;
+	-moz-box-shadow: 0 0 5px #bbb;
+	-webkit-box-shadow: 0 0 5px #bbb;
+	box-shadow: 0 0 5px #bbb;
 
 }
 .content table tr:hover {

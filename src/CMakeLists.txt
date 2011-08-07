@@ -81,7 +81,7 @@ set(YUNI_VERSIONED_INST_PATH "yuni/${YUNI_VERSION}")
 set(YUNI_OUTPUT_DIRECTORY    "${CMAKE_CURRENT_BINARY_DIR}/build/${YUNI_TARGET}/")
 set(YUNI_SOURCE_TREE         "${CMAKE_CURRENT_SOURCE_DIR}/yuni/")
 
-YMESSAGE("Folders")
+YMESSAGE_BOLD("Folders")
 YMESSAGE("         Source: ${CMAKE_CURRENT_SOURCE_DIR}")
 YMESSAGE("     Build into: ${CMAKE_CURRENT_BINARY_DIR}")
 
@@ -175,3 +175,10 @@ if(YUNI_ERROR_HAS_OCCURED)
 		message(SEND_ERROR "An error has occured. Aborting.")
 	endif()
 endif()
+
+
+
+
+# Empty message, for beauty :)
+YMESSAGE("") # done
+

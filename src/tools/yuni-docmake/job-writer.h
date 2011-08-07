@@ -35,11 +35,16 @@ public:
 private:
 	virtual void onExecute();
 
+	void prepareVariables(const Yuni::String& filenameInHtdocs);
+
+private:
+	typedef std::map<Yuni::String, Yuni::String>  Variables;
 
 private:
 	const Yuni::String& pInput;
 	const Yuni::String& pHtdocs;
 	ArticleData pArticle;
+	Variables pVars;
 
 }; // class CompileJob
 

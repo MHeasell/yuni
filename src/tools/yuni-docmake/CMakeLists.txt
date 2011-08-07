@@ -1,7 +1,6 @@
 
 YMESSAGE("")
 YMESSAGE_BOLD("yuni-docmake")
-YMESSAGE("")
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/CommonSettings.cmake")
 include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/Modules.cmake")
@@ -79,15 +78,15 @@ set(src
 	sqlite/sqlite3ext.h
 	article.h
 	article.cpp
-	make.h
-	make.cpp
+	program.h
+	program.cpp
+	program-find-all-source-files.cpp
 	job.h
 	job.cpp
 	job-writer.h
 	job-writer.cpp
 	logs.h
 	logs.cpp
-	find-all-source-files.cpp
 	main.cpp
 	indexes.h
 	indexes.cpp

@@ -7,9 +7,11 @@
 #include <yuni/core/hash//checksum//md5.h>
 #include "indexes.h"
 #include "webpage.hxx"
+#include "program.h"
 
 
 using namespace Yuni;
+using namespace Yuni::Tool::DocMake;
 
 # define SEP Core::IO::Separator
 
@@ -200,44 +202,19 @@ JobWriter::~JobWriter()
 }
 
 
-void JobWriter::onExecute()
+void JobWriter::prepareVariables(const String& filenameInHtdocs)
 {
-	logs.debug() << "writing " << pArticle.htdocsFilename;
-
-	String s;
-
-	if (pArticle.htdocsFilename != "/")
-	{
-		s << pHtdocs << SEP << pArticle.htdocsFilename;
-		# ifdef YUNI_OS_WINDOWS
-		s.replace('/', '\\');
-		# endif
-		if (!Core::IO::Directory::Create(s))
-		{
-			logs.error() << "impossible to create " << s;
-			return;
-		}
-	}
-
-	s << SEP << "index.html";
-	String content = gTemplateContent;
-
-	content.replace("@{TITLE}", pArticle.title);
-	// Root folder
 	String tmp;
-	String root;
-	{
-		unsigned int c = pArticle.htdocsFilename.countChar('/');
-		if (!c)
-			root = ".";
-		else
-		{
-			root << "..";
-			for (unsigned int i = 1; i != c; ++i)
-				root << "/..";
-		}
-	}
+	pVars.clear();
 
+	// @{INDEX}
+	if (Program::shortUrl)
+		pVars["INDEX"] = nullptr;
+	else
+		pVars["INDEX"] = Program::indexFilename;
+
+	// @{TITLE}
+	pVars["TITLE"] = pArticle.title;
 
 	TiXmlDocument doc;
 	doc.SetTabSize(4);
@@ -256,10 +233,23 @@ void JobWriter::onExecute()
 		}
 	}
 
-	// @{URL}
+	// @{ROOT}
+	String& root = pVars["ROOT"];
 	{
-		content.replace("@{URL}",  pArticle.htdocsFilename);
+		unsigned int c = pArticle.htdocsFilename.countChar('/');
+		if (!c)
+			root = ".";
+		else
+		{
+			tmp.clear() << "..";
+			for (unsigned int i = 1; i != c; ++i)
+				tmp << "/..";
+			root = tmp;
+		}
 	}
+
+	// @{URL}
+	pVars["URL"] = pArticle.htdocsFilename;
 
 	// @{URL_PARTS}
 	{
@@ -274,7 +264,7 @@ void JobWriter::onExecute()
 				for (unsigned int i = 0; i < list.size() - 1; ++i)
 				{
 					tmp << '/' << list[i];
-					address << "<li><a href=\"" << root << tmp << "\">";
+					address << "<li><a href=\"" << root << tmp << '/' << pVars["INDEX"] << "\">";
 					if (!DocIndex::AppendArticleTitleFromPath(address, tmp))
 						address << list[i];
 					address << "</a></li>\n";
@@ -285,48 +275,42 @@ void JobWriter::onExecute()
 		{
 			if (pArticle.accessPath == "quicklinks")
 			{
-				address << "<li><a href=\"@{ROOT}/en/documentation/\">Documentation</a></li>\n";
-				address << "<li><a href=\"@{ROOT}/en/downloads/\">Downloads</a></li>\n";
-				address << "<li><a href=\"@{ROOT}/en/developpers/\">Developpers</a></li>\n";
-				address << "<li><a href=\"@{ROOT}/en/links/\">Links</a></li>\n";
-				address << "<li><a href=\"@{ROOT}/en/contacts/\">Contacts</a></li>\n";
+				address << "<li><a href=\"@{ROOT}/en/documentation/" << pVars["INDEX"] << "\">Documentation</a></li>\n";
+				address << "<li><a href=\"@{ROOT}/en/downloads/" << pVars["INDEX"] << "\">Downloads</a></li>\n";
+				address << "<li><a href=\"@{ROOT}/en/developers/" << pVars["INDEX"] << "\">Developpers</a></li>\n";
+				address << "<li><a href=\"@{ROOT}/en/links/" << pVars["INDEX"] << "\">Links</a></li>\n";
+				address << "<li><a href=\"@{ROOT}/en/contacts/" << pVars["INDEX"] << "\">Contacts</a></li>\n";
 			}
 		}
-		content.replace("@{URL_PARTS}",  address);
+		pVars["URL_PARTS"] = address;
 	}
 
-	// TOC
+
+	// @{TOC_...}
 	if (pArticle.showTOC)
 	{
-		content.replace("@{TOC_BEGIN}", "");
-		content.replace("@{TOC_END}", "");
+		pVars["TOC_BEGIN"] = "";
+		pVars["TOC_END"] = "";
 	}
 	else
 	{
-		content.replace("@{TOC_BEGIN}", "<!--");
-		content.replace("@{TOC_END}", "-->");
+		pVars["TOC_BEGIN"] = "<!--";
+		pVars["TOC_END"] = "-->";
 	}
 
 	// Quick links
 	if (pArticle.showQuickLinks)
 	{
-		content.replace("@{QUICKLINKS_BEGIN}", "");
-		content.replace("@{QUICKLINKS_END}", "");
+		pVars["QUICKLINKS_BEGIN"] = "";
+		pVars["QUICKLINKS_END"] = "";
 	}
 	else
 	{
-		content.replace("@{QUICKLINKS_BEGIN}", "<!--");
-		content.replace("@{QUICKLINKS_END}", "-->");
+		pVars["QUICKLINKS_BEGIN"] = "<!--";
+		pVars["QUICKLINKS_END"] = "-->";
 	}
 
-	// Tags
-	{
-		content.replace("@{TAGFIELD_BEGIN}", "<!--");
-		content.replace("@{TAGFIELD_COUNT}", "0 tag");
-		content.replace("@{TAGFIELD_END}", "-->");
-	}
-
-	// content
+	// @{CONTENT}
 	if (pArticle.originalFilename.notEmpty())
 	{
 		# ifdef YUNI_OS_WINDOWS
@@ -335,34 +319,113 @@ void JobWriter::onExecute()
 		tmp.clear() << "C:\\yuni-doc-tmp-";
 		# endif
 		Hash::Checksum::MD5 md5;
-		tmp << md5[s];
+		tmp << md5[filenameInHtdocs];
 		doc.SaveFile(tmp.c_str());
 		String srcContent;
 		Core::IO::File::LoadFromFile(srcContent, tmp);
 		Core::IO::File::Delete(tmp);
 
-		content.replace("@{CONTENT}",  srcContent);
+		pVars["CONTENT"] = srcContent;
 	}
 	else
-		content.replace("@{CONTENT}",  "");
+		pVars["CONTENT"] = "";
 
-	// Directory Index
+	// @{DIRECTORY_INPUT}
 	if (pArticle.directoryIndex.notEmpty())
 	{
 		DocIndex::BuildDirectoryIndex(tmp, pArticle.directoryIndex);
-		content.replace("@{DIRECTORY_INDEX}",  tmp);
+		pVars["DIRECTORY_INDEX"] = tmp;
 	}
 	else
-		content.replace("@{DIRECTORY_INDEX}",  "");
+		pVars["DIRECTORY_INDEX"] = "";
 
+}
+
+
+void JobWriter::onExecute()
+{
+	// Looking for the target filename
+	String filenameInHtdocs;
+	{
+		String s = pHtdocs;
+		if (pArticle.htdocsFilename != "/")
+		{
+			s << SEP << pArticle.htdocsFilename;
+			# ifdef YUNI_OS_WINDOWS
+			s.replace('/', '\\');
+			# endif
+			if (!Core::IO::Directory::Create(s))
+			{
+				logs.error() << "impossible to create the directory " << s;
+				return;
+			}
+		}
+
+		s << SEP << Program::indexFilename;
+		Core::IO::Normalize(filenameInHtdocs, s);
+	}
+
+	// Console verbose / debug
+	{
+		if (Program::debug)
+			logs.info() << "generating " << pArticle.htdocsFilename << " -> " << filenameInHtdocs;
+		else
+		{
+			if (Program::verbose)
+				logs.info() << "generating " << pArticle.htdocsFilename;
+		}
+	}
+
+	// Prepare all variables
+	prepareVariables(filenameInHtdocs);
+
+	String content = gTemplateContent;
+	const String& root = pVars["ROOT"];
+
+	// @{TITLE}
+	content.replace("@{TITLE}", pVars["TITLE"]);
+
+	String tmp;
+
+	// @{URL}
+	content.replace("@{URL}", pVars["URL"]);
+
+	// @{URL_PARTS}
+	content.replace("@{URL_PARTS}",  pVars["URL_PARTS"]);
+
+	// TOC
+	content.replace("@{TOC_BEGIN}", pVars["TOC_BEGIN"]);
+	content.replace("@{TOC_END}", pVars["TOC_END"]);
+
+	// Quick links
+	content.replace("@{QUICKLINKS_BEGIN}", pVars["QUICKLINKS_BEGIN"]);
+	content.replace("@{QUICKLINKS_END}", pVars["QUICKLINKS_END"]);
+
+	// Tags
+	{
+		content.replace("@{TAGFIELD_BEGIN}", "<!--");
+		content.replace("@{TAGFIELD_COUNT}", "0 tag");
+		content.replace("@{TAGFIELD_END}", "-->");
+	}
+
+	// @{CONTENT}
+	content.replace("@{CONTENT}", pVars["CONTENT"]);
+	
+	// Directory Index
+	content.replace("@{DIRECTORY_INDEX}",  pVars["DIRECTORY_INDEX"]);
+
+	// The replacement of the variable "root" must be done after all replacement
+	content.replace("@{ROOT}",  root);
+	// The index filename
+	content.replace("@{INDEX}", pVars["INDEX"]);
 
 	// Replace all pseudo linefeed
 	content.replace("&#x0A;", "\n");
-	// The replacement of the variable "root" must be done after all replacement
-	content.replace("@{ROOT}",  root);
 
-	if (!Core::IO::File::SaveToFile(s, content))
-		logs.error() << "impossible to write " << s;
+	if (!Core::IO::File::SaveToFile(filenameInHtdocs, content))
+	{
+		logs.error() << "impossible to generate '" << pArticle.htdocsFilename << "' into '" << filenameInHtdocs << "'";
+	}
 }
 
 

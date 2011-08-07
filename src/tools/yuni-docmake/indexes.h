@@ -17,7 +17,7 @@ namespace DocIndex
 	void Write(const ArticleData& article);
 
 
-	void RemoveNonExistingEntries(const Yuni::String& htdocs);
+	void RemoveNonExistingEntries();
 
 	void Vacuum();
 
@@ -26,6 +26,18 @@ namespace DocIndex
 
 
 	void BuildDirectoryIndex(Yuni::String& out, const Yuni::String& path);
+
+
+
+	/*!
+	** \brief Build a sitemap
+	**
+	** \see http://en.wikipedia.org/wiki/Site_map
+	** \see http://en.wikipedia.org/wiki/Google_Sitemaps
+	**
+	** This method must be ran from the main thread
+	*/
+	void BuildSitemap();
 
 
 } // namespace DocIndex
