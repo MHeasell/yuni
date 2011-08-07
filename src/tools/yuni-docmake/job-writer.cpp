@@ -1,6 +1,7 @@
 
 #include "job-writer.h"
 #include <yuni/core/io/directory.h>
+#include <yuni/core/io/directory/system.h>
 #include "job.h"
 #include "logs.h"
 #include "tinyxml/tinyxml.h"
@@ -313,22 +314,26 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 	// @{CONTENT}
 	if (pArticle.originalFilename.notEmpty())
 	{
-		# ifdef YUNI_OS_WINDOWS
-		tmp.clear() << "/tmp/yuni-doc-tmp-";
-		# else
-		tmp.clear() << "C:\\yuni-doc-tmp-";
-		# endif
-		Hash::Checksum::MD5 md5;
-		tmp << md5[filenameInHtdocs];
-		doc.SaveFile(tmp.c_str());
-		String srcContent;
-		Core::IO::File::LoadFromFile(srcContent, tmp);
-		Core::IO::File::Delete(tmp);
+		if (Core::IO::Directory::System::Temporary(tmp))
+		{
+			tmp << SEP << "yuni-doc-tmp-";
+			Hash::Checksum::MD5 md5;
+			tmp << md5[filenameInHtdocs];
+			doc.SaveFile(tmp.c_str());
+			String srcContent;
+			Core::IO::File::LoadFromFile(srcContent, tmp);
+			Core::IO::File::Delete(tmp);
 
-		pVars["CONTENT"] = srcContent;
+			pVars["CONTENT"] = srcContent;
+		}
+		else
+		{
+			pVars["CONTENT"] = nullptr;
+			logs.error() << "impossible to retrieve the temporary folder location";
+		}
 	}
 	else
-		pVars["CONTENT"] = "";
+		pVars["CONTENT"] = nullptr;
 
 	// @{DIRECTORY_INPUT}
 	if (pArticle.directoryIndex.notEmpty())

@@ -16,21 +16,21 @@ namespace System
 {
 
 
-	template<StringT>
-	bool Temporary(StringT& out, bool emptyBefore = true)
+	template<class StringT>
+	bool Temporary(StringT& out, bool emptyBefore)
 	{
 		if (emptyBefore)
 			out.clear();
 		# ifdef YUNI_OS_WINDOWS
-		if (!System::Environment::Read("TEMP", out, false))
+		if (!Yuni::System::Environment::Read("TEMP", out, false))
 		{
-			if (!System::Environment::Read("TMP", out, false))
+			if (!Yuni::System::Environment::Read("TMP", out, false))
 				return false;
 		}
 		# else
-		if (!System::Environment::Read("TMPDIR", out, false))
+		if (!Yuni::System::Environment::Read("TMPDIR", out, false))
 		{
-			if (!System::Environment::Read("TMP", out, false))
+			if (!Yuni::System::Environment::Read("TMP", out, false))
 			{
 				if (!System::Environment::Read("TEMP", out, false))
 					return false;
@@ -43,17 +43,20 @@ namespace System
 
 
 
-	template<StringT>
+	template<class StringT>
 	bool UserHome(StringT& out, bool emptyBefore)
 	{
 		if (emptyBefore)
 			out.clear();
 
 		# ifdef YUNI_OS_WINDOWS
-		System::Environment::Read("HOMEDRIVE", out, false);
-		return System::Environment::Read("HOMEPATH", out, false);
+		if (!Yuni::System::Environment::Read("HOMEDRIVE", out, false))
+			out << "C:"; // C by default
+		if (!Yuni::System::Environment::Read("HOMEPATH", out, false))
+			out << '\\';
+		return true;
 		# else
-		return System::Environment::Read("HOME", out, false);
+		return Yuni::System::Environment::Read("HOME", out, false);
 		# endif
 	}
 
