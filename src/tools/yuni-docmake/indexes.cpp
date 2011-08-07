@@ -347,10 +347,15 @@ namespace DocIndex
 			{
 				const StringAdapter title = result[y++];
 				const String href  = result[y++];
+				if (!href) // must not be empty
+					continue;
 
 				for (unsigned int x = 0; x != level; ++x)
 					out << '\t';
-				out << "<li><a href=\"@{ROOT}/" << href;
+				out << "<li><a href=\"@{ROOT}";
+				if (href[0] != '/')
+					out << '/';
+				out << href;
 				if (!Program::shortUrl)
 					out << "/" << Program::indexFilename;
 				out << "\">" << title << "</a></li>\n";
