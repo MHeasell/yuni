@@ -36,7 +36,7 @@
 	overflow: hidden;
 	width: 990px;
 	width:100%;
-	font-size:8.5pt;
+	font-size:9pt;
 	font-family:'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 }
 .breadCrumb a {
@@ -67,7 +67,7 @@
 	padding: 0px 16px 0px 0;
 	font-size: .9167em;
 	background: url(../Images/Chevron.gif) no-repeat 100% 0;
-	background: url(../Images/separator.png) no-repeat 100% 0;
+	background: url(../Images/separator.png) no-repeat 100% 40%;
 }
 .breadCrumb ul li div.chevronOverlay
 {
