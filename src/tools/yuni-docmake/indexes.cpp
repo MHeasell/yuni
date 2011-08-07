@@ -211,9 +211,16 @@ namespace DocIndex
 		}
 		if (article.directoryIndex.notEmpty())
 		{
+			// We want UNIX-style paths
+			# ifdef YUNI_OS_WINDOWS
+			String directoryIndex = article.directoryIndex;
+			directoryIndex.replace('\\', '/');
+			# else
+			const String& directoryIndex = article.directoryIndex;
+			# endif
 			query.clear() << "UPDATE articles SET dir_index = $1 WHERE rel_path = $2;";
 			sqlite3_prepare_v2(gDB, query.c_str(), -1, &stmt, NULL);
-			sqlite3_bind_text(stmt, 1, article.directoryIndex.c_str(), article.directoryIndex.size(), NULL);
+			sqlite3_bind_text(stmt, 1, directoryIndex.c_str(), directoryIndex.size(), NULL);
 			sqlite3_bind_text(stmt, 2, article.relativeFilename.c_str(), article.relativeFilename.size(), NULL);
 			sqlite3_step(stmt);
 			sqlite3_finalize(stmt);
@@ -302,10 +309,18 @@ namespace DocIndex
 
 		static void InternalBuildDirectoryIndex(String& out, const String& path, unsigned int level)
 		{
+			// We want UNIX-styles paths
+			# ifdef YUNI_OS_WINDOWS
+			String srcPath = path;
+			srcPath.replace('\\', '/');
+			# else
+			const String& srcPath = path;
+			# endif
+
 			char** result;
 			int rowCount, colCount;
 			String query = "SELECT title, html_href FROM articles WHERE parent = \"";
-			query << path << "\" ORDER BY parent_order ASC, title";
+			query << srcPath << "\" ORDER BY parent_order ASC, title";
 			if (SQLITE_OK != sqlite3_get_table(gDB, query.c_str(), &result, &rowCount, &colCount, NULL))
 				return;
 

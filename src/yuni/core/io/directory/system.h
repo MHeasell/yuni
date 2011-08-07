@@ -24,7 +24,7 @@ namespace System
 	** \param[out] out Variable of type 'string'/'container' where the value will be appened
 	** \return True if the operation succeeded, false otherwise
 	*/
-	template<StringT> bool Temporary(StringT& out, bool emptyBefore = true);
+	template<class StringT> bool Temporary(StringT& out, bool emptyBefore = true);
 
 
 	/*!
@@ -33,7 +33,7 @@ namespace System
 	** \param[out] out Variable of type 'string'/'container' where the value will be appened
 	** \return True if the operation succeeded, false otherwise
 	*/
-	template<StringT> bool UserHome(StringT& out, bool emptyBefore = true);
+	template<class StringT> bool UserHome(StringT& out, bool emptyBefore = true);
 
 
 
