@@ -16,16 +16,13 @@
  */
 .syntaxhighlighter {
   background-color: white !important;
-background-color:#f8f8f8 !important;
 	font-size:9pt !important;
 }
 .syntaxhighlighter .line.alt1 {
   background-color: white !important;
-background-color:#f8f8f8 !important;
 }
 .syntaxhighlighter .line.alt2 {
   background-color: white !important;
-background-color:#f8f8f8 !important;
 }
 .syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
   background-color: #c3defe !important;
