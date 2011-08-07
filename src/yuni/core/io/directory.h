@@ -63,7 +63,8 @@ namespace Directory
 		*/
 		template<class StringT> bool Set(const StringT& path);
 
-	} // anonymous Current
+	} // namespace Current
+
 
 
 
