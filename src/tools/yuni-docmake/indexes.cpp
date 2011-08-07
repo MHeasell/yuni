@@ -2,15 +2,20 @@
 #include "indexes.h"
 #include "sqlite/sqlite3.h"
 #include <yuni/core/io/file.h>
+#include <yuni/core/math.h>
 #include "logs.h"
 #include "index-db.hxx"
-#include "make.h"
+#include "program.h"
+#ifndef YUNI_OS_WINDOWS
+# include "stdlib.h" // man 3 system
+#endif
 
 
 # define SEP Core::IO::Separator
 
 
 using namespace Yuni;
+using namespace Yuni::Tool::DocMake;
 
 
 namespace DocIndex
@@ -216,7 +221,7 @@ namespace DocIndex
 	}
 
 
-	void RemoveNonExistingEntries(const Yuni::String& htdocs)
+	void RemoveNonExistingEntries()
 	{
 		if (!gDB)
 			return;
@@ -246,7 +251,7 @@ namespace DocIndex
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row, ++y)
 			{
 				const StringAdapter relPath = result[y];
-				s.clear() << htdocs << SEP << relPath;
+				s.clear() << Program::input << SEP << relPath;
 				if (!Core::IO::File::Exists(s))
 				{
 					logs.info() << "The entry '" << relPath << "' is deprecated";
@@ -331,8 +336,8 @@ namespace DocIndex
 				for (unsigned int x = 0; x != level; ++x)
 					out << '\t';
 				out << "<li><a href=\"@{ROOT}/" << href;
-				if (!Make::shortUrl)
-					out << "/index.html";
+				if (!Program::shortUrl)
+					out << "/" << Program::indexFilename;
 				out << "\">" << title << "</a></li>\n";
 				InternalBuildDirectoryIndex(out, href, level + 1);
 			}
@@ -357,12 +362,121 @@ namespace DocIndex
 	} // anonymous namespace
 
 
+
 	void BuildDirectoryIndex(String& out, const String& path)
 	{
 		out.clear();
 		InternalBuildDirectoryIndex(out, path, 0);
 	}
 
+
+
+	void BuildSitemap()
+	{
+		String filename;
+		filename << Program::htdocs << SEP << "sitemap.xml";
+		if (Program::verbose)
+			logs.info() << "writing " << filename;
+
+		Core::IO::File::Stream out;
+		if (!out.openRW(filename))
+		{
+			logs.error() << "sitemap: impossible to write " << filename;
+			return;
+		}
+
+		// Begining of the sitemap
+		out << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"
+			<< "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+
+
+		float weightMin = 0.f;
+		float weightMax = 0.f;
+		char** result;
+		int rowCount, colCount;
+		String href;
+
+		// Looking for weights limits
+		{
+			const char* const query = "SELECT MIN(weight), MAX(weight) FROM articles WHERE weight > 0.2;";
+			if (SQLITE_OK == sqlite3_get_table(gDB, query, &result, &rowCount, &colCount, NULL))
+			{
+				if (rowCount == 1)
+				{
+					unsigned int y = 2;
+					const StringAdapter minW = result[y++];
+					const StringAdapter maxW = result[y++];
+
+					weightMin = minW.to<float>();
+					weightMax = maxW.to<float>();
+
+					if (Math::Equals(weightMin, weightMax))
+					{
+						// The two values must not be equal to avoid a division by zero
+						weightMin -= 0.1f;
+						weightMax += 0.1f;
+					}
+				}
+				sqlite3_free_table(result);
+			}
+		}
+
+		const char* const query = "SELECT html_href,weight,modified FROM articles WHERE weight > 0.2 ORDER BY html_href";
+		if (SQLITE_OK == sqlite3_get_table(gDB, query, &result, &rowCount, &colCount, NULL))
+		{
+			if (rowCount)
+			{
+				unsigned int y = 3;
+				for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
+				{
+					href = result[y++];
+					const StringAdapter weightStr   = result[y++];
+					const String modifiedStr = result[y++];
+
+					if (href.size() <= 1) // avoid invalid paths, such as '/'
+						continue;
+
+					// Weight of the article
+					const float weight = weightStr.to<float>();
+					if (weight < weightMin || weight > weightMax)
+						continue; // should never happen
+
+					// Checking if the hef is less than 2048 chars
+					if (href.size() >= 2048)
+					{
+						logs.warning() << "sitemap: invalid href (> 2048 char), skipped : " << href;
+						continue;
+					}
+
+					// Priority, for the sitemap (%)
+					const float priority = ((weight - weightMin) / (weightMax - weightMin));
+
+					// Escaping
+					// TODO use a better routine for doing that
+					href.replace("&", "&amp;");
+					href.replace("'", "&apos;");
+					href.replace("\"", "&quot;");
+					href.replace("<", "&lt;");
+					href.replace(">", "&gt;");
+
+					out << "<url>\n";
+					out << "\t<loc>" << href << "</loc>\n";
+					// The default priority in a sitemap is 0.5
+					if (!Math::Equals(priority, 0.5f))
+						out << "\t<priority>" << priority << "</priority>\n";
+					out << "</url>\n";
+				}
+			}
+			sqlite3_free_table(result);
+		}
+		out << "</urlset>\n";
+
+		// trying gzip
+		# ifndef YUNI_OS_WINDOWS
+		//href.clear() << "gzip -f -9 \"" << filename << "\"";
+		//system(href.c_str());
+		# endif
+	}
 
 
 

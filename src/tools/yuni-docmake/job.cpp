@@ -7,11 +7,14 @@
 #include <yuni/core/slist.h>
 #include "indexes.h"
 #include "job-writer.h"
+#include "program.h"
 
 
 #define SEP  Core::IO::Separator
 
 using namespace Yuni;
+using namespace Yuni::Tool::DocMake;
+
 
 Yuni::Job::QueueService<>  queueService;
 
@@ -452,7 +455,8 @@ void CompileJob::onExecute()
 
 void CompileJob::analyzeArticle()
 {
-	logs.debug() << "extracting " << pArticle.relativeFilename;
+	if (Program::verbose)
+		logs.info() << "extracting " << pArticle.relativeFilename;
 
 	if (!extractOrder(pArticle.originalFilename))
 		pArticle.order = 1000;
