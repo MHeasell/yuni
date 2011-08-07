@@ -1,4 +1,36 @@
 
+#
+# CMake Generator / Compiler
+#
+YMESSAGE_TITLE("Generator : "  "${CMAKE_GENERATOR}")
+if(MSVC)
+	YMESSAGE("Compiler: Visual Studio")
+endif()
+
+if(MINGW)
+	YMESSAGE("Compiler: MinGW")
+endif()
+
+if(XCODE)
+	YMESSAGE("Compiler: XCode")
+endif()
+if(CMAKE_COMPILER_IS_GNUCXX)
+	if(NOT GNUCXX_VERSION)
+		# -dumpversion might be used
+		execute_process(COMMAND ${CMAKE_CXX_COMPILER} "--version" OUTPUT_VARIABLE GNUCXX_VERSION_N ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
+		string(REGEX REPLACE "Copyright.*" "" GNUCXX_VERSION_N "${GNUCXX_VERSION_N}")
+		string(STRIP "${GNUCXX_VERSION_N}" GNUCXX_VERSION_N)
+		set(GNUCXX_VERSION "${GNUCXX_VERSION_N}" CACHE INTERNAL "Version of the Gnu Gxx compiler")
+	endif()
+	YMESSAGE("g++ Variant : ${GNUCXX_VERSION}")
+endif()
+
+
+
+
+#
+# Information about the current operating system
+#
 if(APPLE)
 	execute_process(COMMAND sw_vers -productName OUTPUT_VARIABLE SW_PN OUTPUT_STRIP_TRAILING_WHITESPACE)
 	execute_process(COMMAND sw_vers -productVersion OUTPUT_VARIABLE SW_PV OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -21,29 +53,5 @@ else()
 	YMESSAGE("System: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 endif()
 
-YMESSAGE("Generator : ${CMAKE_GENERATOR}")
-
-if(MSVC)
-	YMESSAGE("Compiler: Visual Studio")
-endif()
-
-if(MINGW)
-	YMESSAGE("Compiler: MinGW")
-endif()
-
-if(XCODE)
-	YMESSAGE("Compiler: XCode")
-endif()
-
-if(CMAKE_COMPILER_IS_GNUCXX)
-	if(NOT GNUCXX_VERSION)
-		# -dumpversion might be used
-		execute_process(COMMAND ${CMAKE_CXX_COMPILER} "--version" OUTPUT_VARIABLE GNUCXX_VERSION_N ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
-		string(REGEX REPLACE "Copyright.*" "" GNUCXX_VERSION_N "${GNUCXX_VERSION_N}")
-		string(STRIP "${GNUCXX_VERSION_N}" GNUCXX_VERSION_N)
-		set(GNUCXX_VERSION "${GNUCXX_VERSION_N}" CACHE INTERNAL "Version of the Gnu Gxx compiler")
-	endif()
-	YMESSAGE("g++ Variant : ${GNUCXX_VERSION}")
-endif()
 
 

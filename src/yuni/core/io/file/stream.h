@@ -118,6 +118,17 @@ namespace File
 		template<class U> bool open(const U& filename, const int mode = OpenMode::read);
 
 		/*!
+		** \brief Open a file for writing
+		**
+		** This method is strictly equivalent to :
+		** \code
+		** open(filename, Core::IO::OpenMode::write | Core::IO::OpenMode::truncate);
+		** \endcode
+		** \param filename Any string reprensenting an UTF8 relative or absolute filename
+		*/
+		template<class U> bool openRW(const U& filename);
+
+		/*!
 		** \brief Close the file if opened
 		*/
 		bool close();

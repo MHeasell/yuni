@@ -39,7 +39,7 @@ set(YUNI_MODULE_ALGORITHMS                false)
 set(YUNI_MODULE_EXTRA_MARKDOWN            false)
 
 # Doc
-set(YUNI_MODULE_DOCS                      false)
+set(YUNI_MODULE_DOCUMENTATION             false)
 
 
 
@@ -289,12 +289,12 @@ if(MODULES)
 		# docs
 		if("${it}" STREQUAL "docs" OR "${it}" STREQUAL "doc")
 			set(KeywordIsKnown true)
-			set(YUNI_MODULE_DOCS true)
+			set(YUNI_MODULE_DOCUMENTATION true)
 		endif()
 		# -docs
-		if("${it}" STREQUAL "-markdown")
+		if("${it}" STREQUAL "-doc" OR "${it}" STREQUAL "docs")
 			set(KeywordIsKnown true)
-			set(YUNI_MODULE_EXTRA_MARKDOWN false)
+			set(YUNI_MODULE_DOCUMENTATION false)
 		endif()
 
 		if(NOT KeywordIsKnown)
@@ -312,7 +312,7 @@ if(MODULES)
 		YMESSAGE("    +core          : The core module (needed)")
 		YMESSAGE("    -/+tests       : Atomic Tests for the yuni framework")
 		YMESSAGE("    +all           : Enable all main modules (ui,tests,...)")
-		YMESSAGE("    -/+doc         : Documentation Tools")
+		YMESSAGE("    -/+docs        : Documentation Tools")
 		#YMESSAGE(" The VFS module")
 		#YMESSAGE("    -/+vfs         : The Virtual filesystem")
 		#YMESSAGE("    -/+vfs-local   : Support for the local filesystems")
@@ -343,9 +343,6 @@ endif()
 if(YUNI_MODULE_UI)
 	set(YUNI_MODULE_DEVICES true)
 	set(YUNI_MODULE_DEVICE_DISPLAY true)
-endif()
-if(YUNI_MODULE_DOCS)
-	set(YUNI_MODULE_EXTRA_MARKDOWN true)
 endif()
 if(YUNI_MODULE_LDO)
 	set(YUNI_MODULE_NET_MESSAGES true)
@@ -420,7 +417,7 @@ if(YUNI_MODULE_EXTRA_MARKDOWN)
 	LIST(APPEND YUNI_MODULE_AVAILABLE markdown)
 endif()
 
-if(YUNI_MODULE_DOCS)
+if(YUNI_MODULE_DOCUMENTATION)
 	LIST(APPEND YUNI_MODULE_AVAILABLE docs)
 endif()
 
