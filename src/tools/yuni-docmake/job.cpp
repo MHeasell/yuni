@@ -379,17 +379,28 @@ CompileJob::~CompileJob()
 
 bool CompileJob::extractOrder(const String& path)
 {
+
+	// Getting the raw folder name
+	// For the following URL :
+	// /Users/milipili/projects/yuni/sources/docs/docs/src/001-en/300-developers/100-recommended-softwares/article.xml
+	// We will get
+	// /Users/milipili/projects/yuni/sources/docs/docs/src/001-en/300-developers/100-recommended-softwares
 	Core::IO::ExtractFilePath(pTmp, path);
-	String::Size offset = pTmp.find_last_of("-/\\");
-	if (offset == String::npos)
+
+	// Looking for the final slash
+	const String::Size offset = pTmp.find_last_of("/\\");
+	if (offset == String::npos || offset + 4 >= pTmp.size())
 		return false;
-	if (pTmp[offset] != '-' || offset < 2)
+	// We only want to match string like /XXX-xxxxxx...
+	if (pTmp[offset + 4] != '-')
 		return false;
+
+	// We are optimistic. The first 3 chars should be a number most of the time
 	CustomString<8,false> s;
 	s.resize(3);
-	s[2] = pTmp[offset - 1];
-	s[1] = pTmp[offset - 2];
-	s[0] = pTmp[offset - 3];
+	s[2] = pTmp[offset + 3];
+	s[1] = pTmp[offset + 2];
+	s[0] = pTmp[offset + 1];
 	if (!s.to(pArticle.order))
 		return false;
 	return (pArticle.order < 1000u);
@@ -458,8 +469,13 @@ void CompileJob::analyzeArticle()
 	if (Program::verbose)
 		logs.info() << "extracting " << pArticle.relativeFilename;
 
-	if (!extractOrder(pArticle.originalFilename))
-		pArticle.order = 1000;
+	// Article order
+	{
+		if (!extractOrder(pArticle.originalFilename))
+			pArticle.order = 1000u;
+		if (Program::debug)
+			logs.info() << "  :: " << pArticle.originalFilename << ", order = " << pArticle.order;
+	}
 
 	TiXmlDocument doc;
 	if (!doc.LoadFile(pArticle.originalFilename.c_str(), TIXML_ENCODING_UTF8))
