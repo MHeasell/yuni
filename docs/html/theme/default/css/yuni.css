@@ -7,7 +7,7 @@ body,html {
 	font-size				:9pt;
 /*	background-image		:url('../images/back.png'); */
 	background-repeat		:repeat-x;
-	background-color:#f8f8f8;
+	background:white;
 }
 .layout {
 	width					:100%;
@@ -20,7 +20,7 @@ body,html {
 	min-width				:10px;
 }
 .leftspace {
-	background-color:white;
+	background-color:#f8f8f8;
 }
 .title {
 	font-size:14pt;
@@ -102,7 +102,7 @@ body,html {
 	font-family				:helvetica, tahoma, arial, sans-serif;
 	font-size				:8pt;
 	padding-right			:3em;
-	background-color:white;
+	background-color:#f8f8f8;
 }
 .leftmenu fieldset {
 	width:100%;
