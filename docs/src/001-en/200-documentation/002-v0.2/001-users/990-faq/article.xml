@@ -20,10 +20,9 @@ we sincerely hope the result will be up to our expectations and yours.
 
 <h2><b>Q:</b> What do you mean by high-level ?</h2>
 <p><b>A:</b>
-Yes, it might seem a bit of a utopia. However, it is clear there is a need
-for something like that for C++ and no other project has yet managed to
-provide for this need. We strive for excellency and will do our very best;
-we sincerely hope the result will be up to our expectations and yours.
+We mean that low-level aspects of development (memory management, threading,
+network, ...) are wrapped up in abstracted objects and interfaces to provide
+these features with a more intuitive API.
 </p>
 
 <h2><b>Q:</b> Is Yuni a 3D engine ?</h2>
@@ -91,7 +90,7 @@ for those.
 <h2><b>Q:</b> What compiler should I use to compile Yuni ?</h2>
 <p><b>A:</b>
 GCC, MS Visual Studio 9+ and MinGW are officially supported. We hope to
-have ICC and SunCC support in the future.
+have ICC, SunCC and Clang support in the future.
 </p>
 
 <h2><b>Q:</b> Does Yuni support 64-bit operating systems ?</h2>
