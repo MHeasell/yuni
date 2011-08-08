@@ -2,6 +2,13 @@
 # define __YUNI_CORE_PREPROCESSOR_MATH_H__
 
 
+/*!
+** \brief Check if a number if a power of 2
+**
+** The method used is "Complement and Compare"
+*/
+# define YUNI_IS_POWER_OF_TWO(x)  ((x != 0) && ((x & (~x + 1)) == x))
+
 
 /*!
 ** \brief Compute x + y
