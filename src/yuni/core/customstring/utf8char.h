@@ -59,14 +59,14 @@ namespace UTF8
 		};
 
 	public:
-		Char()
-			:pValue(0)
+		Char() :
+			pValue(0)
 		{}
-		Char(const Char& rhs)
-			:pValue(rhs.pValue)
+		Char(const Char& rhs) :
+			pValue(rhs.pValue)
 		{}
-		explicit Char(char c)
-			:pValue((unsigned int) c)
+		explicit Char(char c) :
+			pValue((unsigned int) c)
 		{}
 
 		/*!

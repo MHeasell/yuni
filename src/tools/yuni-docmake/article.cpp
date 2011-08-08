@@ -1,5 +1,11 @@
 
 #include "article.h"
+#include "logs.h"
+#include "program.h"
+
+using namespace Yuni;
+using namespace Yuni::Tool::DocMake;
+
 
 
 ArticleData::ArticleData()
@@ -26,6 +32,11 @@ ArticleData::ArticleData()
 }
 
 
+ArticleData::~ArticleData()
+{
+}
+
+
 void ArticleData::reset()
 {
 	coeff = 1.0f;
@@ -38,6 +49,85 @@ void ArticleData::reset()
 	showHistory = true;
 	showQuickLinks = true;
 	accessPath.clear();
+	tocItems.clear();
+}
+
+
+
+void ArticleData::tocAppend(unsigned int level, const String& caption)
+{
+	TOCItem* item = new TOCItem();
+	String& itID = item->hrefID;
+	String& itCaption = item->caption;
+
+	item->level = level;
+	itCaption = caption;
+	itCaption.trim();
+	if (!itCaption)
+		itCaption = "Missing Header";
+
+	bool lastWasInvalid = true;
+	const String::const_utf8iterator end = itCaption.utf8end();
+	for (String::const_utf8iterator i = itCaption.utf8begin(); i != end; ++i)
+	{
+		const char c = (char) *i;
+		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
+		{
+			itID += c;
+			lastWasInvalid = false;
+		}
+		else
+		{
+			if (!lastWasInvalid)
+				itID += '_';
+			lastWasInvalid = true;
+		}
+	}
+	itID.trim('_');
+	itID.toLower();
+
+	// Adding line feed
+	itCaption.replace(". ", ".<br />");
+
+	// adding the new toc item
+	tocItems.push_back(item);
+}
+
+
+void ArticleData::tocRefactoring()
+{
+	if (tocItems.size() <= 1)
+	{
+		tocItems.clear();
+		showTOC = false;
+	}
+	else
+	{
+		typedef std::set<String>  Set;
+		Set  set;
+		String tmp;
+		for (unsigned int i = 0; i != tocItems.size(); ++i)
+		{
+			TOCItem& item = *(tocItems[i]);
+			String& id = item.hrefID;
+			if (set.find(id) != set.end())
+			{
+				for (unsigned int rank = 2; rank < 1000; ++rank)
+				{
+					tmp.clear() << id << '_' << rank;
+					if (set.find(tmp) == set.end())
+					{
+						id << '_' << rank;
+						break;
+					}
+				}
+			}
+			set.insert(id);
+
+			if (Program::debug)
+				logs.info() << "  :: " << relativeFilename << ": h" << item.level << ' ' << item.caption;
+		}
+	}
 }
 
 

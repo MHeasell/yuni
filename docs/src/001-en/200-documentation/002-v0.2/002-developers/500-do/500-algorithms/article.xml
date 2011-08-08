@@ -49,11 +49,11 @@
   (<i>master-slave</i> scheme).
 </p>
 
-<table border="none">
-  <tr><th>[DObject1]</th><th>&rarr;</th><th>[OriginalFull]</th></tr>
-  <tr><td></td><td>&rarr;</td><td>[Replica1Partial]</td></tr>
-  <tr><td></td><td>&rarr;</td><td>[Replica2Full]</td></tr>
-  <tr><td></td><td>&rarr;</td><td>[Replica3Partial]</td></tr>
+<table class="nostyle">
+  <tr><td>[DObject1]</td><td>&#8594;</td><td>[OriginalFull]</td></tr>
+  <tr><td></td><td>&#8594;</td><td>[Replica1Partial]</td></tr>
+  <tr><td></td><td>&#8594;</td><td>[Replica2Full]</td></tr>
+  <tr><td></td><td>&#8594;</td><td>[Replica3Partial]</td></tr>
 </table>
 
 <p>
@@ -62,10 +62,10 @@
   It is called <i>multi-primary</i> scheme (<i>multi-master</i> scheme).
 </p>
 
-<table border="none">
-  <tr><th>[DObject1]</th><th>&rarr;</th><th>[Replica1Partial]</th></tr>
-  <tr><td></td><td>&rarr;</td><td>[Replica2Partial]</td></tr>
-  <tr><td></td><td>&rarr;</td><td>[Replica3Partial]</td></tr>
+<table class="nostyle">
+  <tr><td>[DObject1]</td><td>&#8594;</td><td>[Replica1Partial]</td></tr>
+  <tr><td></td><td>&#8594;</td><td>[Replica2Partial]</td></tr>
+  <tr><td></td><td>&#8594;</td><td>[Replica3Partial]</td></tr>
 </table>
 <p>
   (supposing the 3 replicas together contain all the data for the DObject)

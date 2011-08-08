@@ -75,6 +75,10 @@ namespace // anonymous
 
 		ArticleData& pArticle;
 
+		//! Last TOC level (1: h1, 2: h2...)
+		unsigned int pLastTOCLevel;
+		String pTOCCaption;
+
 	}; // class XMLVisitor
 
 
@@ -85,7 +89,8 @@ namespace // anonymous
 		pWithinParagraph(false),
 		pDocument(document),
 		pFilename(article.relativeFilename),
-		pArticle(article)
+		pArticle(article),
+		pLastTOCLevel(0)
 	{
 		pState = ArticleData::stNone;
 		pCoeff = 1.0f;
@@ -169,6 +174,23 @@ namespace // anonymous
 							pState = ArticleData::stTitle;
 							pArticle.title.clear();
 						}
+						else if (tag == "h1")
+						{
+							pLastTOCLevel = 1;
+							pTOCCaption.clear();
+							pState = ArticleData::stTOCItem;
+						}
+						else if (tag == "h2")
+						{
+							pTOCCaption.clear();
+							if (!pLastTOCLevel)
+							{
+								logs.error() << "found h2 without h1. Adding an empty h1";
+								pArticle.tocAppend(1, pTOCCaption);
+							}
+							pLastTOCLevel = 2;
+							pState = ArticleData::stTOCItem;
+						}
 					}
 					if (pWithinParagraph && pArticle.allowedTagsInParagraph.find(tag) == pArticle.allowedTagsInParagraph.end())
 					{
@@ -185,6 +207,15 @@ namespace // anonymous
 					logs.error() << pFilename << ": invalid nested tag for 'title'";
 					pArticle.error = true;
 					return false;
+				}
+			case ArticleData::stTOCItem:
+				{
+					if (tag == "h1" || tag == "h2")
+					{
+						logs.error() << "invalid nested header  (h1,h2)";
+						return false;
+					}
+					break;
 				}
 			default:
 				break;
@@ -205,6 +236,14 @@ namespace // anonymous
 						pArticle.title += ' ';
 					pArticle.title += text.c_str();
 					pArticle.title.trim();
+					break;
+				}
+			case ArticleData::stTOCItem:
+				{
+					if (!pTOCCaption.empty() && pTOCCaption.last() != ' ')
+						pTOCCaption += ' ';
+					pTOCCaption += text.c_str();
+					pTOCCaption.trim();
 					break;
 				}
 			default:
@@ -254,6 +293,16 @@ namespace // anonymous
 				{
 					if (name == "title")
 						pState = ArticleData::stNone;
+					break;
+				}
+			case ArticleData::stTOCItem:
+				{
+					if (name == "h1" || name == "h2")
+					{
+						pState = ArticleData::stNone;
+						pArticle.tocAppend(pLastTOCLevel, pTOCCaption);
+						pTOCCaption.clear();
+					}
 					break;
 				}
 			default:
@@ -474,7 +523,7 @@ void CompileJob::analyzeArticle()
 		if (!extractOrder(pArticle.originalFilename))
 			pArticle.order = 1000u;
 		if (Program::debug)
-			logs.info() << "  :: " << pArticle.originalFilename << ", order = " << pArticle.order;
+			logs.info() << "  :: " << pArticle.relativeFilename << ", order = " << pArticle.order;
 	}
 
 	TiXmlDocument doc;
@@ -493,6 +542,9 @@ void CompileJob::analyzeArticle()
 	}
 	if (!pArticle.title)
 		Core::IO::ExtractFileName(pArticle.title, pArticle.htdocsFilename, false);
+
+	// TOC refactoring
+	pArticle.tocRefactoring();
 }
 
 
