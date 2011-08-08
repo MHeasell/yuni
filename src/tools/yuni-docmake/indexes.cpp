@@ -225,6 +225,25 @@ namespace DocIndex
 			sqlite3_step(stmt);
 			sqlite3_finalize(stmt);
 		}
+
+		// TOC
+		if (!article.tocItems.empty())
+		{
+			for (unsigned int i = 0; i != article.tocItems.size(); ++i)
+			{
+				// alias to the current TOC item
+				const ArticleData::TOCItem& item = *(article.tocItems[i]);
+
+				query.clear() << "INSERT INTO toc (html_href,indx,lvl,href_id,caption) VALUES ($1," << i << ','
+					<< item.level << ",$2,$3);";
+				sqlite3_prepare_v2(gDB, query.c_str(), -1, &stmt, NULL);
+				sqlite3_bind_text(stmt, 1, article.htdocsFilename.c_str(), article.htdocsFilename.size(), NULL);
+				sqlite3_bind_text(stmt, 2, item.hrefID.c_str(), item.hrefID.size(), NULL);
+				sqlite3_bind_text(stmt, 3, item.caption.c_str(), item.caption.size(), NULL);
+				sqlite3_step(stmt);
+				sqlite3_finalize(stmt);
+			}
+		}
 	}
 
 

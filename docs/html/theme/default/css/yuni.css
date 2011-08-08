@@ -5,8 +5,6 @@ body,html {
 	margin					:0;
 	padding					:0;
 	font-size				:9pt;
-/*	background-image		:url('../images/back.png'); */
-	background-repeat		:repeat-x;
 	background:white;
 }
 .layout {
@@ -16,7 +14,7 @@ body,html {
 	margin					:0;
 }
 .space {
-	width					:11%;
+	width					:6em;
 	min-width				:10px;
 }
 .leftspace {
@@ -141,6 +139,7 @@ body,html {
 	padding:0.2em 1em 0.2em 1em;
 }
 .laycontent {
+	z-index:100;
 	padding-left			:4em;
 	border:1px solid #ccc;
 	border-top-style:none;
@@ -158,20 +157,17 @@ body,html {
 }
 .toc {
 	float					:right;
-	border					:1px solid #cce;
-	border					:1px solid #99adbc;
-	background-color		:#eef;
-	background-color		:#c9d5de;
-	background:#dfe5ea;
-	background:#e6ebef;
+	border					:1px solid #ccc;
+	background-color:#f8f8f8;
+	background-color:#f8f8fc;
 	border-color:#b6c2ca;
-	font-size				:8pt;
+	font-size				:8.5pt;
 	padding					:0.5em 1em 0 1em;
-	margin					:2em 1.5em 0.7em 1.2em;
+	margin					:2em 1.5em 2em 2em;
 	font-family				:helvetica, tahoma, arial, sans-serif;
-	-moz-box-shadow: 0 0 5px #aaa;
-	-webkit-box-shadow: 0 0 5px #aaa;
-	box-shadow: 0 0 5px #aaa;
+	-moz-box-shadow: 0 2px 5px #bbb;
+	-webkit-box-shadow: 0 2px 5px #bbb;
+	box-shadow: 0 2px 5px #bbb;
 }
 .toc div {
 	padding-bottom			:0.5em;
@@ -187,18 +183,26 @@ body,html {
 	padding-bottom			:0;
 }
 .toc ol {
-	padding					:0.2em 1em 0.2em 2em;
+	padding					:0.1em 1em 0.1em 2em;
 	margin					:0;
 	color					:#933;
 }
 .toc ol li ol {
 	color					:#A99;
+	padding-right:0 !important;
 }
 .toc a {
 	text-decoration			:none;
-	color					:#222;
+	color					:black;
 	display					:block;
-	padding					:0.1em 0.2em;
+	padding					:0.2em 0.2em;
+	padding-right:0.6em;
+}
+.toc ol li ol a {
+	color:#666 !important;
+}
+.toc ol li ol a:hover {
+	color:white !important;
 }
 .toc a:hover {
 	background-color		:#333;
@@ -271,6 +275,8 @@ body,html {
 	text-shadow				:none;
 	border-color			:#ddd;
 	color					:#744;
+	background-image		:none !important;
+	padding-left			:0.3em !important;
 }
 .content h1 {
 	font-size				:12pt;
@@ -310,6 +316,27 @@ body,html {
 .content b {
 	color: #111;
 }
+table .nostyle {
+	border-style:none !important;
+	background-color:transparent !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+table .nostyle tr:hover {
+	background-color:transparent !important;
+}
+table .nostyle tr th {
+	text-align:left !important;
+	border-style:none !important;
+	background-color:transparent !important;
+	font-weight:bold !important;
+}
+table .nostyle tr td {
+	border-style:none !important;
+	text-align:left !important;
+	vertical-align:top !important;
+}
 .content table {
 	border-collapse			:collapse;
 	border					:1px solid #99adbc;
@@ -336,11 +363,15 @@ body,html {
 .content a {
 	text-decoration			:none;
 	color					:#c24913;
-	padding					:0.1em 0.2em;
+	padding					:0.1em 0.3em;
 	border					:1px solid #e9936d;
 	border-left-style		:none;
 	border-right-style		:none;
 	border-top-style		:none;
+	background-image		:url('../images/external.png');
+	background-position		:0 center;
+	background-repeat		:no-repeat;
+	padding-left			:18px;
 }
 .content a:hover {
 	background-color		:#444;

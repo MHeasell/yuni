@@ -26,6 +26,15 @@ CREATE INDEX ix_art_relpath ON articles(rel_path);
 CREATE INDEX ix_art_parent ON articles(parent);
 
 
+CREATE TABLE toc (
+	html_href              TEXT NOT NULL REFERENCES articles(html_href) ON DELETE CASCADE,
+	indx                   INTEGER NOT NULL,
+	lvl                    INTEGER NOT NULL,
+	href_id                TEXT NOT NULL,
+	caption                TEXT NOT NULL,
+	PRIMARY KEY (html_href,indx)
+);
+
 CREATE TABLE words (
 	id                     INTEGER PRIMARY KEY AUTOINCREMENT,
 	weight                 REAL NOT NULL DEFAULT 1.0,

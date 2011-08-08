@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
 <meta name="language" content="en" />
-<title>@{TITLE}</title>
+<title>@{TITLE} - Yuni framework</title>
 <meta name="copyright" content="libyuni.org 2011" />
 <meta name="rating" content="general" />
 <meta name="author" content="libyuni.org" />
@@ -126,8 +126,8 @@ function toggle_toc() {
 @{TAGFIELD_END}
 </div>
 </td>
-<td class="laycontent" colspan="2">
 
+<td class="laycontent" colspan="2">
 
 
 
@@ -142,37 +142,17 @@ function toggle_toc() {
 </div>
 
 
-
 @{TOC_BEGIN}
 <div id="toc" class="toc">
 <div>
 <span><b>&nbsp;TOC</b> <a id="toclink" href="javascript:toggle_toc()">[ Hide ]</a></span>
 <div id="toclist" style="display:block">
-<ol>
-	<li><a href="#">Ownership</a>
-	<ol>
-		<li><a href="#">Reference counted (thread safe)</a></li>
-		<li><a href="#">Reference counted (not thread safe)</a></li>
-	</ol>
-	</li>
-	<li><a href="#">Ownership</a>
-	<ol>
-		<li><a href="#">Reference counted (thread safe)</a></li>
-		<li><a href="#">Reference counted (not thread safe)</a></li>
-	</ol>
-	</li>
-	<li><a href="#">Ownership</a>
-	<ol>
-		<li><a href="#">Reference counted (thread safe)</a></li>
-		<li><a href="#">Reference counted (not thread safe)</a></li>
-	</ol>
-	</li>
-
-</ol>
+@{TOC_CONTENT}
 </div>
 </div>
 </div>
 @{TOC_END}
+
 
 
 

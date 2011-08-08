@@ -32,13 +32,32 @@
 		{
 			stNone = 0,
 			stTitle,
+			stTOCItem,
 		};
 
+		class TOCItem
+		{
+		public:
+			typedef Yuni::SmartPtr<TOCItem>  Ptr;
+			typedef std::vector<Ptr> Vector;
+
+		public:
+			//! Item level (1: h1, 2: h2)
+			unsigned int level;
+			//! ID
+			Yuni::String hrefID;
+			//! Caption
+			Yuni::String caption;
+		};
 
 	public:
 		ArticleData();
+		~ArticleData();
 
 		void reset();
+
+		void tocAppend(unsigned int level, const Yuni::String& caption);
+		void tocRefactoring();
 
 	public:
 		//! The original XML file
@@ -77,6 +96,9 @@
 		WordCount wordCount;
 		//! Tags
 		TagSet tags;
+
+		//! TOC items
+		TOCItem::Vector tocItems;
 
 	}; // class ArticleData
 

@@ -59,6 +59,8 @@ namespace // anonymous
 		ArticleData& pArticle;
 		std::vector<TiXmlElement*> pToDelete;
 
+		unsigned int pCurrentTOCItemIndex;
+
 	}; // class XMLVisitor
 
 
@@ -67,7 +69,8 @@ namespace // anonymous
 
 	XMLVisitor::XMLVisitor(ArticleData& article, TiXmlDocument& document) :
 		pDocument(document),
-		pArticle(article)
+		pArticle(article),
+		pCurrentTOCItemIndex(0)
 	{
 	}
 
@@ -93,14 +96,23 @@ namespace // anonymous
 	{
 		const TIXML_STRING& name = element.ValueTStr();
 		ArticleData::Tag tag = name.c_str();
+		TiXmlElement* e = const_cast<TiXmlElement*>(&element);
 
 		if (tag == "title" || tag == "tag" || tag.startsWith("pragma:"))
 			pToDelete.push_back(const_cast<TiXmlElement*>(&element));
 		else
 		{
-			if (tag == "source")
+			if (tag == "h1" || tag == "h2")
 			{
-				TiXmlElement* e = const_cast<TiXmlElement*>(&element);
+				// Forcing the id
+				if (pCurrentTOCItemIndex < pArticle.tocItems.size())
+				{
+					e->SetAttribute("id", pArticle.tocItems[pCurrentTOCItemIndex]->hrefID.c_str());
+					++pCurrentTOCItemIndex;
+				}
+			}
+			else if (tag == "source")
+			{
 				e->SetValue("pre");
 				e->RemoveAttribute("type");
 				e->SetAttribute("class", "brush: cpp; gutter: false; class-name: 'class_name_pre'");
@@ -126,8 +138,12 @@ namespace // anonymous
 	}
 
 
-	bool XMLVisitor::Visit(const TiXmlText&)
+	bool XMLVisitor::Visit(const TiXmlText& text)
 	{
+		const TIXML_STRING& name = text.ValueTStr();
+		String v = name.c_str();
+		if (v.contains("rarr"))
+			std::cout << v << std::endl;
 		return true;
 	}
 
@@ -288,7 +304,7 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 
 
 	// @{TOC_...}
-	if (pArticle.showTOC)
+	if (pArticle.showTOC && pArticle.tocItems.size() > 1)
 	{
 		pVars["TOC_BEGIN"] = "";
 		pVars["TOC_END"] = "";
@@ -298,6 +314,38 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 		pVars["TOC_BEGIN"] = "<!--";
 		pVars["TOC_END"] = "-->";
 	}
+
+	// @{TOC_CONTENT}
+	if (pArticle.tocItems.size() != 0 && pArticle.showTOC)
+	{
+		tmp.clear();
+		tmp << "<ol>\n";
+		for (unsigned int i = 0; i != pArticle.tocItems.size(); ++i)
+		{
+			const ArticleData::TOCItem& item = *pArticle.tocItems[i];
+			if (item.level == 2)
+			{
+				tmp << "\t\t<li><a href=\"#" << item.hrefID << "\">"
+					<< item.caption << "</a></li>\n";
+				if (i + 1 == pArticle.tocItems.size())
+					tmp << "\t</ol>\n";
+			}
+			else
+			{
+				if (i)
+					tmp << "\t</ol>\n\t</li>\n";
+				tmp << "\t<li><a href=\"#" << item.hrefID << "\">"
+					<< item.caption << "</a>\n\t";
+				if (i + 1 == pArticle.tocItems.size())
+					tmp << "</li>\n";
+				else
+					tmp << "<ol>\n";
+			}
+		}
+		tmp << "</ol>\n";
+		pVars["TOC_CONTENT"] = tmp;
+	}
+
 
 	// Quick links
 	if (pArticle.showQuickLinks)
@@ -401,6 +449,7 @@ void JobWriter::onExecute()
 	// TOC
 	content.replace("@{TOC_BEGIN}", pVars["TOC_BEGIN"]);
 	content.replace("@{TOC_END}", pVars["TOC_END"]);
+	content.replace("@{TOC_CONTENT}", pVars["TOC_CONTENT"]);
 
 	// Quick links
 	content.replace("@{QUICKLINKS_BEGIN}", pVars["QUICKLINKS_BEGIN"]);
