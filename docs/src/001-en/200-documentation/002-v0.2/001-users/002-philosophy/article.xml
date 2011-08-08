@@ -158,7 +158,7 @@ for these drawbacks :
 <li>C++ can be very low-level. But it does not have to be. Yuni offers some high-
   level concepts that are missing from C++ to help you think and code more
   abstractly : delegates, events, singletons, jobs. Also it encapsulates
-  low-level routines with OO interfaces : math, string, getopt, io, ...
+  low-level routines inside OO interfaces : math, string, getopt, io, ...
 </li>
 <li>C++ has no native MT support in the language, and there is not much we can do
   about that. Also, few people are willing to write cross-platform threading
