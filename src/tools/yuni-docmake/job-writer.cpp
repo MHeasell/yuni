@@ -320,26 +320,35 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 	{
 		tmp.clear();
 		tmp << "<ol>\n";
+		bool hasOL = false;
 		for (unsigned int i = 0; i != pArticle.tocItems.size(); ++i)
 		{
 			const ArticleData::TOCItem& item = *pArticle.tocItems[i];
 			if (item.level == 2)
 			{
+				if (!hasOL)
+				{
+					hasOL = true;
+					tmp << "\t<ol>\n";
+				}
 				tmp << "\t\t<li><a href=\"#" << item.hrefID << "\">"
 					<< item.caption << "</a></li>\n";
 				if (i + 1 == pArticle.tocItems.size())
-					tmp << "\t</ol>\n";
+					tmp << "\t</ol>\n\t</li>\n";
 			}
 			else
 			{
 				if (i)
-					tmp << "\t</ol>\n\t</li>\n";
+				{
+					if (hasOL)
+						tmp << "\t</ol>\n";
+					tmp << "\t</li>\n";
+				}
 				tmp << "\t<li><a href=\"#" << item.hrefID << "\">"
-					<< item.caption << "</a>\n\t";
+					<< item.caption << "</a>\n";
+				hasOL = false;
 				if (i + 1 == pArticle.tocItems.size())
-					tmp << "</li>\n";
-				else
-					tmp << "<ol>\n";
+					tmp << "\t</li>\n";
 			}
 		}
 		tmp << "</ol>\n";
