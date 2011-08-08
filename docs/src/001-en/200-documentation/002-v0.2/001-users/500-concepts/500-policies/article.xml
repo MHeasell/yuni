@@ -1,16 +1,6 @@
 <title>Policies</title>
 
-<h1>Description</h1>
-<p>
-This section will deal with some important concepts in Yuni. Some may already
-be familiar to you, and others may be new. These concepts were not invented
-by the Yuni team, but they are fundamental to the understanding of how Yuni
-works, and therefore to the correct use of Yuni.
-</p>
-
-<h1>Policies</h1>
-
-<h2>The Strategy pattern</h2>
+<h1>The Strategy pattern</h1>
 <p>
 Some of you may already be familiar with the Strategy design pattern. It
 allows for an algorithm to be composited using "bricks". This means that for
@@ -83,7 +73,7 @@ flexible algorithms with generic behaviours. This is an interesting and useful
 pattern in and of itself, but the way we implement it in Yuni is a bit different.
 </p>
 
-<h2>Policies</h2>
+<h1>Policies</h1>
 <p>
 We use a static version of this pattern as described in
 <a href="http://en.wikipedia.org/wiki/Modern_C%2B%2B_Design">Modern C++ Design</a> (by Andrei
@@ -202,7 +192,7 @@ be chosen at compile time and cannot be changed during execution.
 </p>
 
 
-<h2>How to use policies in Yuni</h2>
+<h1>How to use policies in Yuni</h1>
 <p>
 Yuni uses policies for various powerful features, mainly derived from
 <a href="http://en.wikipedia.org/wiki/Modern_C%2B%2B_Design">Modern C++ Design</a>. Currently, these are :
