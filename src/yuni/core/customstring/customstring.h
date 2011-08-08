@@ -33,7 +33,7 @@
 namespace Yuni
 {
 
-	//! A convenient standard string implementation
+	//! Standard string implementation
 	typedef CustomString<> String;
 
 
@@ -1538,6 +1538,7 @@ namespace Yuni
 		/*!
 		** \brief Ensure that there is enough allocated space for X caracters
 		**
+		** The content will remain untouched.
 		** \param min The minimum capacity of the string (in bytes)
 		*/
 		void reserve(Size minCapacity);
@@ -1545,10 +1546,7 @@ namespace Yuni
 		/*!
 		** \brief Resize the string to 'len' bytes
 		**
-		** The current content will remain untouched but all extra bytes will not be
-		** initialized.
-		** If the string can not be expanded, the new size will not be greater than 'ChunkSize'.
-		**
+		** The content will remain untouched.
 		** \param len The new length (in bytes) of the string
 		*/
 		void resize(const Size len);
@@ -1557,7 +1555,7 @@ namespace Yuni
 		** \brief Resize the string to 'len' bytes and fill the new content (if any)
 		**
 		** The new content (if any) will be filled with 'pattern'.
-		** If the string can not be expanded, the new size will not be greater than 'ChunkSize'.
+		** If the string can not be expanded, the new size will not be greater than the capacity.
 		**
 		** \code
 		** String s;
@@ -1586,8 +1584,7 @@ namespace Yuni
 		** the buffer will be reallocated to reduce as much as possible the amount
 		** of memory used by the string.
 		** It does not modify the size of the string, only its capacity.
-		** This method has no effect when the template parameter 'ExpandableT'
-		** is true.
+		** This method has no effect if the string is not expandable.
 		*/
 		void shrink();
 
