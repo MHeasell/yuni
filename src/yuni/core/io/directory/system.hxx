@@ -28,12 +28,14 @@ namespace System
 				return false;
 		}
 		# else
+		// On UNIXes, the environment variable TMPDIR must be checked
+		// first. Unfortunately, It may happen that no env variable is available.
 		if (!Yuni::System::Environment::Read("TMPDIR", out, false))
 		{
 			if (!Yuni::System::Environment::Read("TMP", out, false))
 			{
 				if (!Yuni::System::Environment::Read("TEMP", out, false))
-					return false;
+					out += "/tmp";
 			}
 		}
 		# endif
@@ -51,9 +53,9 @@ namespace System
 
 		# ifdef YUNI_OS_WINDOWS
 		if (!Yuni::System::Environment::Read("HOMEDRIVE", out, false))
-			out << "C:"; // C by default
+			out += "C:"; // C by default
 		if (!Yuni::System::Environment::Read("HOMEPATH", out, false))
-			out << '\\';
+			out += '\\';
 		return true;
 		# else
 		return Yuni::System::Environment::Read("HOME", out, false);
