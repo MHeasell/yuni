@@ -33,8 +33,13 @@ namespace Environment
 
 		if (emptyBefore)
 			out.clear();
-		out += ::getenv(Traits::CString<StringT>::Perform(name));
-		return true;
+		const char* e = ::getenv(Traits::CString<StringT>::Perform(name));
+		if (e && '\0' != *e)
+		{
+			out += e;
+			return true;
+		}
+		return false;
 	}
 
 
