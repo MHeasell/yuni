@@ -325,7 +325,7 @@ namespace BindImpl
 		//! Storage type
 		typedef typename Static::Remove::RefOnly<A<%=i-1%>>::Type UserDataTypeByCopy;
 		//! The user data
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithFunctionAndUserData<U, R(<%=generator.list(i)%>)>
 
@@ -465,7 +465,7 @@ namespace BindImpl
 		//! Pointer-to-member
 		mutable R (C::*pMember)(<%=generator.list(i)%>);
 		//! Userdata
-		mutable UserDataTypeByCopy pUserdata;
+		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(<%=generator.list(i)%>)>
 

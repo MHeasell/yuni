@@ -134,7 +134,6 @@ IF(Yuni_FOUND)
 	# Adding Testcases
 	#
 	Add_SubDirectory(automated)
-	Add_SubDirectory(interactive)
 ENDIF(Yuni_FOUND)
 
 
