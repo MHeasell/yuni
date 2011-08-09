@@ -67,7 +67,7 @@
 	padding: 0px 16px 0px 0;
 	font-size: .9167em;
 	background: url(../Images/Chevron.gif) no-repeat 100% 0;
-	background: url(../Images/separator.png) no-repeat 100% 40%;
+	background: url(../../images/separator.png) no-repeat 100% 40%;
 }
 .breadCrumb ul li div.chevronOverlay
 {
