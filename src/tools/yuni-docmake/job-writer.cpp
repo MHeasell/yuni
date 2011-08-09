@@ -376,6 +376,8 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 			tmp << SEP << "yuni-doc-tmp-";
 			Hash::Checksum::MD5 md5;
 			tmp << md5[filenameInHtdocs];
+			if (Program::debug)
+				logs.info() << "  :: writing " << tmp;
 			doc.SaveFile(tmp.c_str());
 			String srcContent;
 			Core::IO::File::LoadFromFile(srcContent, tmp);
@@ -400,7 +402,6 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 	}
 	else
 		pVars["DIRECTORY_INDEX"] = "";
-
 }
 
 
