@@ -45,8 +45,6 @@ set(YUNI_MODULE_DOCUMENTATION             false)
 
 # Tests
 set(YUNI_TESTS   false)
-# Samples
-set(YUNI_SAMPLES false)
 
 
 
@@ -112,7 +110,7 @@ if(MODULES)
 			set(YUNI_MODULE_ALGORITHMS true)
 			set(YUNI_MODULE_EXTRA_MARKDOWN true)
 			set(YUNI_MODULE_LDO true)
-			set(YUNI_SAMPLES true)
+			set(YUNI_MODULE_DOCUMENTATION true)
 			set(YUNI_TESTS true)
 			set(KeywordIsKnown true)
 		endif()
