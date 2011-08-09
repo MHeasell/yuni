@@ -9,6 +9,13 @@
 <li><a href="http://www.amazon.fr/Modern-Design-Generic-Programming-Patterns/dp/0201704315">Modern C++ Design</a> : Generic Programming and Design Patterns Applied</li>
 </ul>
 
+<h1>C / C++</h1>
+<ul>
+<li><a href="http://loki-lib.sourceforge.net/">Loki</a> : C++ library of designs, containing flexible implementations of common design patterns and idioms</li>
+<li><a href="http://www.ffmpeg.org">ffmpeg</a> : Tools to record, convert, stream and play multimedia content including libavcodec and libavformat, two libraries used by many other open source projects</li>
+<li><a href="http://www.sqlite.org">SQLite</a> : Cross-platform C library that implements a self-contained, embeddable, zero-configuration SQL database engine</li>
+<li><a href="http://connect.creativelabs.com/openal/default.aspx">OpenAL</a> : Cross-platform 3D audio API</li>
+</ul>
 
 <h1>Mac OS Tools</h1>
 <ul>
