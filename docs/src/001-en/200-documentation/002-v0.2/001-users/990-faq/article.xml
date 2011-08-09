@@ -27,25 +27,19 @@ these features with a more intuitive API.
 
 <h2><b>Q:</b> Is Yuni a 3D engine ?</h2>
 <p><b>A:</b>
-No it is not. Yuni _offers_ a 3D engine as one of its many features.
-</p>
-
-<h2><b>Q:</b> Ok, so you offer a 3D engine and a set of tools around it. A bit like Ogre.</h2>
-<p><b>A:</b>
-Well no, because Ogre's 3D engine is the core of its development. Whereas
-Yuni's major asset would be its LDO (Live Distributed Objects) system.
-Yuni's 3D engine has the particularity of using these LDOs to offer
-seamlessly distributed 3D.
+No it is not. However Yuni will offer a 3D engine as one of its many features.
 </p>
 
 <h2><b>Q:</b> You offer "bind"s, threading, static asserts, smart pointers. Are you competing with Boost and / or Loki ?</h2>
 <p><b>A:</b>
-With Boost, definitely, and on many points. Not so much with Loki, first
-because M. Alexandrescu's work is an inspiration to us, and second because
-Loki and Yuni's scope are not comparable. We tend to offer only the
-features we deem useful to our much larger context.
+We have some common features with Boost, clearly, but our purpose is not to
+rewrite Boost, simply to provide what is necessary for everyday C++ development.
+We are not competing with Loki either, first because M. Alexandrescu's work is an
+inspiration to us, and second because Loki and Yuni's scope are not comparable.
+We tend to offer only the features we deem useful to our much larger context.
 </p>
 
+<!--
 <h2><b>Q:</b> Seems like you also offer cross-platform window / controls management. Are you competing with QT and wxWidgets then ? </h2>
 <p><b>A:</b>
 On those points, yes. Our Yuni::UI module is a possible replacement for
@@ -53,6 +47,7 @@ these libraries, but follows our guidelines. Our strong point is that all
 graphic controls are distributed objects. Naturally, we offer seamless
 visual integration for all supported systems.
 </p>
+-->
 
 <h2><b>Q:</b> Is it <b>really</b> portable ? How many platforms are supported ?</h2>
 <p><b>A:</b>
@@ -76,12 +71,14 @@ Yuni::GetOpt, Yuni::Math, or even Yuni::SmartPtr, even in a 100-line
 command-line-only program.
 </p>
 
+<!--
 <h2><b>Q:</b> Yuni seems to be 3D-oriented. Can I do simple 2D graphics ?</h2>
 <p><b>A:</b>
 Of course. We offer bitmap graphics using OpenGL / DirectX, because
 everyone needs that, but we advise to use vector graphics. We embed Cairo
 for those.
 </p>
+-->
 
 
 
@@ -89,8 +86,8 @@ for those.
 
 <h2><b>Q:</b> What compiler should I use to compile Yuni ?</h2>
 <p><b>A:</b>
-GCC, MS Visual Studio 9+ and MinGW are officially supported. We hope to
-have ICC, SunCC and Clang support in the future.
+GCC 4.x, MS Visual Studio 9+ and MinGW 4.x are officially supported.
+It should work with ICC. We hope to provide Clang support in a near future.
 </p>
 
 <h2><b>Q:</b> Does Yuni support 64-bit operating systems ?</h2>
