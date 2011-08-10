@@ -357,10 +357,7 @@ namespace DocIndex
 			}
 			for (unsigned int x = 0; x != level; ++x)
 				out << '\t';
-			if (level)
-				out << "<li><ul>\n";
-			else
-				out << "<ul>\n";
+			out << "<ul>\n";
 			unsigned int y = 2;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
 			{
