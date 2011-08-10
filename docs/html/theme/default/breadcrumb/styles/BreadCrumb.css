@@ -98,7 +98,8 @@
 	padding: 0;
 	margin-top: 2px;
 	overflow: hidden;
-	background:url(../Images/IconHome.gif) no-repeat 0 0;
+	/*background:url(../Images/IconHome.gif) no-repeat 0 0; */
+	background:url(../../images/home.png) no-repeat center center;
 }
 .breadCrumb ul li.first a:hover
 {

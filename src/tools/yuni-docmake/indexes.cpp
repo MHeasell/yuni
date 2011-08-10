@@ -28,7 +28,7 @@ namespace DocIndex
 
 		enum
 		{
-			dbVersion = 1,
+			dbVersion = 2,
 		};
 
 		static sqlite3* gDB = nullptr;
@@ -511,6 +511,161 @@ namespace DocIndex
 		# endif
 	}
 
+
+
+	static int TryToFindWordID(const ArticleData::Word& term)
+	{
+		sqlite3_stmt* stmt;
+		if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT id FROM terms WHERE term = $1", -1, &stmt, NULL))
+			return -1;
+		sqlite3_bind_text(stmt, 1, term.c_str(), term.size(), NULL);
+		if (SQLITE_ROW != sqlite3_step(stmt))
+		{
+			sqlite3_finalize(stmt);
+			return -1;
+		}
+		const StringAdapter idstr = (const char*) sqlite3_column_text(stmt, 0);
+		int result = -1;
+		if (!(!idstr))
+		{
+			if (!idstr.to(result))
+				result = -1;
+		}
+		sqlite3_finalize(stmt);
+		return result;
+	}
+
+
+	int RegisterWordReference(const ArticleData::Word& term)
+	{
+		int id = TryToFindWordID(term);
+		if (id < 0)
+		{
+			sqlite3_stmt* stmt;
+			const char* const query = "INSERT INTO terms (term) VALUES ($1);";
+			sqlite3_prepare_v2(gDB, query, -1, &stmt, NULL);
+			sqlite3_bind_text(stmt, 1, term.c_str(), term.size(), NULL);
+			sqlite3_step(stmt);
+			sqlite3_finalize(stmt);
+
+			// Try again
+			id = TryToFindWordID(term);
+		}
+		return id;
+	}
+
+
+	int FindArticleID(const Yuni::String& href)
+	{
+		sqlite3_stmt* stmt;
+		if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT id FROM articles WHERE html_href = $1", -1, &stmt, NULL))
+			return -1;
+		sqlite3_bind_text(stmt, 1, href.c_str(), href.size(), NULL);
+		if (SQLITE_ROW != sqlite3_step(stmt))
+		{
+			sqlite3_finalize(stmt);
+			return -1;
+		}
+		const StringAdapter idstr = (const char*) sqlite3_column_text(stmt, 0);
+		int result = -1;
+		if (!(!idstr))
+		{
+			if (!idstr.to(result))
+				result = -1;
+		}
+		sqlite3_finalize(stmt);
+		return result;
+	}
+
+
+	void RegisterWordIDsForASingleArticle(int articleid, const int* termid,
+		const int* countInArticle,
+		unsigned int count)
+	{
+		CustomString<1024> query;
+		query << "BEGIN;\n";
+		query << "DELETE FROM terms_per_article WHERE article_id = " << articleid << ";\n";
+		for (unsigned int i = 0; i != count; ++i)
+		{
+			query << "INSERT INTO terms_per_article (term_id,article_id,count_in_page,weight) VALUES ("
+				<< termid[i] << ','
+				<< articleid << ','
+				<< countInArticle[i] << ','
+				<< "1.0" << ");\n";
+		}
+		query << "COMMIT;\n";
+
+		sqlite3_exec(gDB, query.c_str(), NULL, NULL, NULL);
+	}
+
+
+	static uint64  FindMaxOccurrenceForAnyTerm()
+	{
+		const char* const query = "SELECT SUM(count_in_page) AS s from terms_per_article GROUP BY term_id ORDER BY s DESC LIMIT 1;";
+		sqlite3_stmt* stmt;
+		if (SQLITE_OK != sqlite3_prepare_v2(gDB, query, -1, &stmt, NULL))
+			return 0;
+
+		if (SQLITE_ROW != sqlite3_step(stmt))
+		{
+			sqlite3_finalize(stmt);
+			return 0;
+		}
+		const StringAdapter rstr = (const char*) sqlite3_column_text(stmt, 0);
+		const uint64 r = rstr.to<uint64>();
+		sqlite3_finalize(stmt);
+		return r;
+	}
+
+
+	static void  UpdateAllRelativeTermWeight(uint64 maxO)
+	{
+		char** result;
+		int rowCount, colCount;
+		const char* const query = "SELECT term_id, SUM(count_in_page) FROM terms_per_article GROUP BY term_id;";
+		if (SQLITE_OK != sqlite3_get_table(gDB, query, &result, &rowCount, &colCount, NULL))
+			return;
+
+		CustomString<128 * 1024> s;
+		s << "BEGIN;\n";
+		if (rowCount)
+		{
+			unsigned int y = 1;
+			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
+			{
+				const StringAdapter termID = result[++y];
+				const StringAdapter scount  = result[++y];
+				if (!termID || !scount)
+					continue;
+				unsigned int count = scount.to<unsigned int>();
+				double d = 1. - (count * 0.5 / maxO);
+				s << "UPDATE terms SET weight_rel_others = " << d << " WHERE id = " << termID << ";\n";
+			}
+		}
+
+		sqlite3_free_table(result);
+
+		if (rowCount)
+		{
+			s << "COMMIT;\n";
+			sqlite3_exec(gDB, s.c_str(), NULL, NULL, NULL);
+		}
+	}
+
+
+	void UpdateAllSEOWeights()
+	{
+		// Finding the maximum occurence of any term
+		{
+			uint64 maxO = FindMaxOccurrenceForAnyTerm();
+			UpdateAllRelativeTermWeight(maxO);
+		}
+		// calculating the total weight for each term
+		{
+			const char* const query = "UPDATE terms SET weight = weight_user * weight_rel_others;";
+			sqlite3_exec(gDB, query, NULL, NULL, NULL);
+		}
+	}
 
 
 } // namespace DocIndex

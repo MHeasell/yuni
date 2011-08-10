@@ -58,19 +58,18 @@ function toggle_toc() {
 //-->
 </script>
 
-
-<table class="layout">
+<div class="layout">
+<!--
 <tr>
 <td class="leftspace"></td>
-<!--
-<td class="logo"><img src="@{ROOT}/theme/default/images/logo.png" alt="Yuni Logo" /></td>
--->
+*** <td class="logo"><img src="@{ROOT}/theme/default/images/logo.png" alt="Yuni Logo" /></td>
 <td class="title"><span class="unbreakable"><strong>Yuni </strong>Framework</span></td>
 <td class="links">
 <div id="mainmenu"></div>
 </td>
 <td class="space"></td>
 </tr>
+-->
 
 <!-- space -->
 <!--
@@ -80,9 +79,61 @@ function toggle_toc() {
 -->
 
 
-<tr>
-<td class="leftmenu">
+<div class="laycontent">
+
+
+
+<h1>@{TITLE}</h1>
+<div class="breadCrumbHolder module">
+<div id="breadCrumb0" class="breadCrumb module">
+<ul>
+<li><a href="@{ROOT}/@{INDEX}">Home</a></li>
+@{URL_PARTS}
+</ul>
+</div>
+</div>
+
+
+@{TOC_BEGIN}
+<div id="toc" class="toc">
 <div>
+<span><b>&nbsp;TOC</b> <a id="toclink" href="javascript:toggle_toc()">[ Hide ]</a></span>
+<div id="toclist" style="display:block">
+@{TOC_CONTENT}
+</div>
+</div>
+</div>
+@{TOC_END}
+
+
+
+
+<div class="content">
+
+@{CONTENT}
+@{DIRECTORY_INDEX}
+
+</div> <!-- content -->
+
+
+<div class="modified">
+Last modified : August 11, 2011
+</div>
+
+
+</div>
+
+
+
+<div class="leftmenu">
+
+<div class="titled">
+<span class="unbreakable"><strong>Yuni </strong>Framework</span>
+</div>
+
+
+
+<div class="menud">
 
 <!--
 <fieldset><legend>&nbsp;Search&nbsp;</legend>
@@ -130,55 +181,7 @@ function toggle_toc() {
 </fieldset>
 @{TAGFIELD_END}
 </div>
-</td>
-
-<td class="laycontent" colspan="2">
-
-
-
-<h1>@{TITLE}</h1>
-<div class="breadCrumbHolder module">
-<div id="breadCrumb0" class="breadCrumb module">
-<ul>
-<li><a href="@{ROOT}/@{INDEX}">Home</a></li>
-@{URL_PARTS}
-</ul>
 </div>
-</div>
-
-
-@{TOC_BEGIN}
-<div id="toc" class="toc">
-<div>
-<span><b>&nbsp;TOC</b> <a id="toclink" href="javascript:toggle_toc()">[ Hide ]</a></span>
-<div id="toclist" style="display:block">
-@{TOC_CONTENT}
-</div>
-</div>
-</div>
-@{TOC_END}
-
-
-
-
-<div class="content">
-
-@{CONTENT}
-@{DIRECTORY_INDEX}
-
-</div> <!-- content -->
-
-
-<div class="modified">
-Last modified : September 11, 2011
-</div>
-
-
-</td>
-<td></td>
-</tr>
-</table>
-
 
 
 

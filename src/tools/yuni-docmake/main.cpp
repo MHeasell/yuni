@@ -6,6 +6,7 @@
 #include "job-writer.h"
 #include "indexes.h"
 #include "tinyxml/tinyxml.h"
+#include <yuni/core/system/suspend.h>
 
 
 
@@ -37,21 +38,29 @@ int main(int argc, char** argv)
 	logs.info() << "Extracting SEO data";
 	{
 		queueService.start();
+		while (CompileJob::SomeRemain())
+			Yuni::SuspendMilliSeconds(150);
 		queueService.wait();
 		queueService.stop();
 	}
+
+	logs.info() << "Optimizing SEO data";
+	DocIndex::UpdateAllSEOWeights();
 
 	logs.info() << "Generating HTML files into htdocs";
-	JobWriter::PushAllInQueue();
 	if (JobWriter::ReadTemplateIndex())
 	{
+		JobWriter::PushAllInQueue();
 		queueService.start();
+		while (JobWriter::SomeRemain())
+			Yuni::SuspendMilliSeconds(150);
+
 		queueService.wait();
 		queueService.stop();
-	}
 
-	logs.info() << "Generating sitemap";
-	DocIndex::BuildSitemap();
+		logs.info() << "Generating sitemap";
+		DocIndex::BuildSitemap();
+	}
 
 	DocIndex::Vacuum();
 	DocIndex::Close();

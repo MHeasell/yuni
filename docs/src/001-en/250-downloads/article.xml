@@ -1,22 +1,32 @@
 <title>Downloads</title>
 <pragma:toc value="0" />
 <pragma:history value="0" />
+<pragma:accesspath value="quicklinks" />
 
 
 <h1>Source Code</h1>
 
-<h2>Last stable (v0.1)</h2>
-<table class="nostyle">
-<tr><td>tar/gz</td><td><a href="#">libyuni-src-v0.1.tar.gz</a></td></tr>
-<tr><td>zip</td><td><a href="#">libyuni-src-v0.1.zip</a></td></tr>
-</table>
+<table class="nostyle vspace">
+<tr>
+<td class="borderright">
+	<img src="../../theme/default/images/archive.png" title="cpp" alt="cpp" />
+</td>
+<td>
+	<h2>Last stable (v0.1.1)</h2>
+	<table class="nostyle">
+	<tr><td>tar/gz</td><td><a href="../../downloads/yuni-v0.1.1.tar.gz">yuni-v0.1.1.tar.gz</a></td></tr>
+	</table>
 
-<h2>Daily snapshot</h2>
-<table class="nostyle">
-<tr><td>tar/gz</td><td><a href="#">libyuni-src-v0.1-20110809.tar.gz</a></td></tr>
-<tr><td>zip</td><td><a href="#">libyuni-src-v0.1-20110809.zip</a></td></tr>
+	<!--
+	<h2>Daily snapshot</h2>
+	<table class="nostyle">
+	<tr><td>tar/gz</td><td><a href="#">libyuni-src-v0.1-20110809.tar.gz</a></td></tr>
+	<tr><td>zip</td><td><a href="#">libyuni-src-v0.1-20110809.zip</a></td></tr>
+	</table>
+	-->
+</td>
+</tr>
 </table>
-
 
 <h1>External dependencies, DevPacks</h1>
 <p>

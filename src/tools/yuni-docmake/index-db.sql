@@ -35,15 +35,19 @@ CREATE TABLE toc (
 	PRIMARY KEY (html_href,indx)
 );
 
-CREATE TABLE words (
+CREATE TABLE terms (
 	id                     INTEGER PRIMARY KEY AUTOINCREMENT,
+	weight_user            REAL NOT NULL DEFAULT 1.0,
+	weight_rel_others      REAL NOT NULL DEFAULT 1.0,
+	-- The total weight
 	weight                 REAL NOT NULL DEFAULT 1.0,
-	word                   TEXT NOT NULL UNIQUE
+	term                   TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE words_per_article (
-	word_id                INTEGER NOT NULL REFERENCES words(id) ON DELETE CASCADE,
+CREATE TABLE terms_per_article (
+	term_id                INTEGER NOT NULL REFERENCES terms(id) ON DELETE CASCADE,
 	article_id             INTEGER NOT NULL REFERENCES articles(id) ON DELETE CASCADE,
+	count_in_page          INTEGER NOT NULL DEFAULT 0,
 	weight                 REAL NOT NULL DEFAULT 1.0
 );
 
