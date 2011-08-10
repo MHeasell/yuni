@@ -382,10 +382,7 @@ namespace DocIndex
 
 			for (unsigned int x = 0; x != level; ++x)
 				out << '\t';
-			if (level)
-				out << "</ul></li>\n";
-			else
-				out << "</ul>\n";
+			out << "</ul>\n";
 
 			if (!level)
 			{
