@@ -13,6 +13,9 @@
 class JobWriter : public Yuni::Job::IJob
 {
 public:
+	static bool SomeRemain();
+
+public:
 	static void Add(const Yuni::String& input, const Yuni::String& htdocs, const ArticleData& article);
 
 	static void PushAllInQueue();
@@ -31,10 +34,12 @@ public:
 	//@}
 
 
+	const ArticleData& article() const {return pArticle;}
 
 private:
 	virtual void onExecute();
 
+	bool articleIDIndatabase();
 	void prepareVariables(const Yuni::String& filenameInHtdocs);
 
 private:
@@ -45,6 +50,8 @@ private:
 	const Yuni::String& pHtdocs;
 	ArticleData pArticle;
 	Variables pVars;
+	//! Article ID in database
+	int pArticleID;
 
 }; // class CompileJob
 

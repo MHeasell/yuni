@@ -18,6 +18,8 @@ using namespace Yuni::Tool::DocMake;
 
 Yuni::Job::QueueService<>  queueService;
 
+static Yuni::Atomic::Int<>  gCompileJobCount = 0;
+
 
 namespace // anonymous
 {
@@ -383,7 +385,7 @@ namespace // anonymous
 			return;
 		typedef LinkedList<String> List;
 		List list;
-		string.split(list, " \r\n\t:;!@#$%^&*()_+{}|\"'\\/.,?><=-");
+		string.split(list, " \r\n\t:;!@#$%^&*()_+{}[]|\"'\\/.,?><=-");
 		if (list.empty())
 			return;
 
@@ -418,11 +420,19 @@ CompileJob::CompileJob(const Yuni::String& input, const Yuni::String& htdocs) :
 	pInput(input),
 	pHtdocs(htdocs)
 {
+	++gCompileJobCount;
 }
 
 
 CompileJob::~CompileJob()
 {
+	--gCompileJobCount;
+}
+
+
+bool CompileJob::SomeRemain()
+{
+	return !(!gCompileJobCount);
 }
 
 
@@ -464,10 +474,14 @@ void CompileJob::onExecute()
 	{
 		const String& entry = *i;
 
+		// Resetting data related to the article
 		pArticle.reset();
+		// The original filename (absolute)
 		pArticle.originalFilename = entry;
+		// The relative filename, from the source folder
 		pArticle.relativeFilename.assign(entry.c_str() + pInput.size() + 1, entry.size() - pInput.size() - 1);
 
+		// The final filename within the htdocs folder
 		pArticle.htdocsFilename.clear() << '/' << pArticle.relativeFilename;
 		pArticle.htdocsFilename.replace('\\', '/');
 		{
@@ -502,12 +516,15 @@ void CompileJob::onExecute()
 		}
 		while (true);
 
-		// Generate the
+		// Post analyzis about the article
 		analyzeArticle();
 		if (pArticle.error)
 			continue;
+
+		// Writing the article in the database
 		DocIndex::Write(pArticle);
 
+		// Preparing a new job, with a copy of the data related to the article
 		JobWriter::Add(pInput, pHtdocs, pArticle);
 	}
 }

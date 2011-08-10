@@ -23,6 +23,11 @@ namespace // anonymous
 	static std::vector<JobWriter*>  gJobList;
 	static String gTemplateContent;
 
+	static Yuni::Atomic::Int<>  gCompileJobCount = 0;
+
+	//! Structure for storing all existing words within the whole documentation
+	typedef std::map<ArticleData::Word, int>  AllWords;
+	static AllWords  gAllWords;
 
 
 	class XMLVisitor : public TiXmlVisitor
@@ -98,6 +103,21 @@ namespace // anonymous
 		ArticleData::Tag tag = name.c_str();
 		TiXmlElement* e = const_cast<TiXmlElement*>(&element);
 
+		// Attributes
+		TiXmlAttribute* attr = const_cast<TiXmlAttribute*>(element.FirstAttribute());
+		for (; attr; attr = attr->Next())
+		{
+			const StringAdapter e = attr->Value();
+			if (e.contains("%%7B") || e.contains("%%7D"))
+			{
+				String s = e;
+				s.replace("%%7B", "{");
+				s.replace("%%7D", "}");
+				attr->SetValue(s.c_str());
+			}
+		}
+
+
 		if (tag == "title" || tag == "tag" || tag.startsWith("pragma:"))
 			pToDelete.push_back(const_cast<TiXmlElement*>(&element));
 		else
@@ -121,6 +141,7 @@ namespace // anonymous
 
 		return true;
 	}
+
 
 	void XMLVisitor::deleteUselessTags()
 	{
@@ -178,14 +199,67 @@ namespace // anonymous
 
 
 
+static unsigned int COUNT = 0;
 
 
 void JobWriter::Add(const String& input, const String& htdocs, const ArticleData& article)
 {
+	// Preparing a new job
+	// The article content will be copied
 	JobWriter* job = new JobWriter(input, htdocs, article);
+	// The new article
+	const ArticleData& newArticle = job->article();
+
+	// Keeping the new job in a safe place, for later use
+	++COUNT;
 	gMutex.lock();
 	gJobList.push_back(job);
 	gMutex.unlock();
+	--COUNT;
+
+	// Preparing the global word dictionary
+	unsigned int registrationCount = 0;
+	if (!newArticle.wordCount.empty())
+	{
+		// The article ID
+		int articleID = DocIndex::FindArticleID(newArticle.htdocsFilename);
+
+		// All word ids for the page
+		int* wordIDs = new int[newArticle.wordCount.size()];
+		int* countInArticle = new int[newArticle.wordCount.size()];
+
+		// Registering all new terms
+		unsigned int wIx = 0;
+		const ArticleData::WordCount::const_iterator end = newArticle.wordCount.end();
+		ArticleData::WordCount::const_iterator i = newArticle.wordCount.begin();
+		for (; i != end; ++i, ++wIx)
+		{
+			// The word itself
+			const ArticleData::Word& word = i->first;
+			const ArticleData::WordStat& stats = i->second;
+
+			countInArticle[wIx] = stats.count;
+
+			const AllWords::const_iterator it = gAllWords.find(word);
+			if (it == gAllWords.end())
+			{
+				++registrationCount;
+				const int newWordID = DocIndex::RegisterWordReference(word);
+				gAllWords[word] = newWordID;
+				wordIDs[wIx] = newWordID;
+			}
+			else
+				wordIDs[wIx] = it->second;
+		}
+
+		DocIndex::RegisterWordIDsForASingleArticle(articleID, wordIDs, countInArticle, wIx);
+
+		delete[] countInArticle;
+		delete[] wordIDs;
+	}
+
+	if (registrationCount && Program::verbose)
+		logs.info() << "  :: registered " << registrationCount << " terms";
 }
 
 
@@ -209,13 +283,22 @@ bool JobWriter::ReadTemplateIndex()
 JobWriter::JobWriter(const String& input, const String& htdocs, const ArticleData& article) :
 	pInput(input),
 	pHtdocs(htdocs),
-	pArticle(article)
+	pArticle(article),
+	pArticleID(-1)
 {
+	++gCompileJobCount;
 }
 
 
 JobWriter::~JobWriter()
 {
+	--gCompileJobCount;
+}
+
+
+bool JobWriter::SomeRemain()
+{
+	return !(!gCompileJobCount);
 }
 
 
@@ -405,8 +488,19 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 }
 
 
+bool JobWriter::articleIDIndatabase()
+{
+	pArticleID = DocIndex::FindArticleID(pArticle.htdocsFilename);
+	if (pArticleID < 0)
+		return false;
+	return true;
+}
+
 void JobWriter::onExecute()
 {
+	if (!articleIDIndatabase())
+		return;
+
 	// Looking for the target filename
 	String filenameInHtdocs;
 	{

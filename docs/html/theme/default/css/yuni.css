@@ -8,14 +8,10 @@ body,html {
 	background:white;
 }
 .layout {
-	width					:100%;
 	border-collapse			:collapse;
 	padding					:0;
 	margin					:0;
-}
-.space {
-	width					:6em;
-	min-width				:10px;
+	padding-left:210px;
 }
 .leftspace {
 	background-color:#f8f8f8;
@@ -23,102 +19,65 @@ body,html {
 	background-position:100% center;
 	background-repeat:repeat-y;
 }
-.title {
-	font-size:14pt;
-	padding-left:1.6em;
-	background-image:url('../images/logo.png');
-	padding-left:110px;
-	background-repeat:no-repeat;
-	background-position:15px center;
-	min-height:90px;
-	height:100px;
-	border:1px solid #ccc;
-	border-right-style:none;
-	border-top-style:none;
-	border-bottom-style:none;
-}
 #parent {
 	background-image		:url('../images/arrow.png');
 	background-position		:center left;
 	background-repeat		:no-repeat;
 	padding-left			:20px;
 }
-.logo {
-	width					:85px;
-	height					:96px;
-	min-width				:85px;
-	min-height				:96px;
-	background-color:white;
-}
-.unbreakable {
-	white-space				:nowrap;
-	color:#933;
-	text-shadow				:1px 1px 4px #aaa;
-}
-.unbreakable strong {
-	color:black;
-}
-.links {
-	padding					:0 1em 0 1em;
-	text-align				:right;
-	white-space				:nowrap;
-	width					:10px;
-}
-.links a {
-	text-decoration			:none;
-	color					:#766;
-	padding					:0.2em 0.4em 0.2em 0.4em;
-}
-.links a:hover {
-	background-color		:#333;
-	color					:#eee;
-}
-.links span {
-	border					:1px solid #966;
-	border-left-style		:none;
-	border-top-style		:none;
-	border-bottom-style		:none;
-	margin-right			:0.3em;
-}
 .leftmenu {
-	min-width:16em;
-	width:16em;
+	position:fixed;
+	left:0;
+	top:0;
+	bottom:0;
+	min-width:170px;
+	width:170px;
 	vertical-align:top;
-	padding					:4em 1em 2em 2em;
+	padding					:2em 2.5em 2em 2.5em;
 	font-family				:helvetica, tahoma, arial, sans-serif;
 	font-size				:8pt;
-	padding-right			:1em;
 	background-color:#f8f8f8;
 	background-image:url('../images/shadow.png');
 	background-position:100% center;
 	background-repeat:repeat-y;
 }
-.leftmenu div {
-	position:fixed;
-	min-width:16em;
-	width:16em;
+.leftmenu .titled {
+	font-size:14pt;
+	background-image:url('../images/logo.png');
+	background-repeat:no-repeat;
+	background-position:center 0;
+	text-align:center;
+	padding:80px 0.5em 2em 0.5em !important;
+}
+.leftmenu .titled .unbreakable {
+	color:#933;
+	text-shadow				:1px 1px 4px #aaa;
+}
+.leftmenu .titled .unbreakable strong {
+	color:black;
+}
+
+
+.leftmenu .menud {
+	top:160px;
 }
 .leftmenu input {
-	width:83%;
+	width:100%;
 	outline:none;
 	border:1px solid #bbd;
-	padding:0.3em 0em;
+	padding:0.2em 0em;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
-	padding-left:10px;
-	padding-right:10px;
 }
 .leftmenu input:focus {
 	border-color:#ebb;
 }
 .leftmenu fieldset {
-	width:90%;
 	margin:0;
 	margin-bottom:1em;
 	font-weight:bold;
 	border:1px solid #bbd;
-	margin-right:3em;
 	padding-top:1em;
 	border-bottom-style:none;
 	border-left-style:none;
@@ -127,7 +86,7 @@ body,html {
 }
 .leftmenu fieldset a {
 	text-decoration:none;
-	padding:0.2em 0.5em;
+	padding:1px 0.5em;
 	padding-left:1em;
 	display:block;
 	color:#697286;
@@ -150,8 +109,8 @@ body,html {
 	padding:0.2em 1em 0.2em 1em;
 }
 .laycontent {
-	z-index:100;
-	padding-left			:4em;
+	padding-right:5em;
+	padding-left			:5em;
 	border:1px solid #ccc;
 	border-top-style:none;
 	border-bottom-style:none;
@@ -159,13 +118,20 @@ body,html {
 }
 .laycontent h1 {
 	font-size				:15pt;
-	color					:#000;
+	color:#933;
 	text-shadow				:1px 1px 3px #ddd;
-	margin-top:2.5em;
+	margin-top:62px;
+	margin-bottom:0.5em;
 }
-.vspace {
-	height					:22pt;
+.laycontent h1 strong {
+	color					:#000;
+	text-shadow				:1px 1px 4px #aaa;
 }
+.laycontent h1 span {
+	color:#ccc;
+	font-weight:normal;
+}
+
 .toc {
 	float					:right;
 	border					:1px solid #ccc;
@@ -203,10 +169,10 @@ body,html {
 	padding-right:0 !important;
 }
 .toc a {
-	text-decoration			:none;
-	color					:black;
-	display					:block;
-	padding					:0.2em 0.2em;
+	text-decoration:none;
+	color:black;
+	display:block;
+	padding:1px 0.2em;
 	padding-right:0.6em;
 }
 .toc ol li ol a {
@@ -229,7 +195,6 @@ body,html {
 }
 .footer {
 	margin-top				:50pt;
-	width					:100%;
 	border-collapse			:collapse;
 	font-family				:Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	font-size				:9pt;
@@ -293,6 +258,15 @@ body,html {
 	font-size				:12pt;
 	margin					:45pt 0 0 0;
 	text-shadow				:2px 2px 2px #ddd;
+	color:#400;
+}
+td > h1:first-child {
+	margin-top:0 !important;
+	padding-top:0 !important;
+}
+td > h2:first-child {
+	margin-top:0 !important;
+	padding-top:0 !important;
 }
 .content h2 {
 	font-size				:10pt;
@@ -327,27 +301,41 @@ body,html {
 .content b {
 	color: #111;
 }
-table .nostyle {
+.nostyle {
 	border-style:none !important;
 	background-color:transparent !important;
 	-moz-box-shadow: none !important;
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
 }
-table .nostyle tr:hover {
+.nostyle tr:hover {
 	background-color:transparent !important;
 }
-table .nostyle tr th {
+.nostyle tr th {
 	text-align:left !important;
 	border-style:none !important;
 	background-color:transparent !important;
 	font-weight:bold !important;
 }
-table .nostyle tr td {
+.nostyle tr td {
 	border-style:none !important;
 	text-align:left !important;
 	vertical-align:top !important;
 }
+.vspace {
+	margin-top:25pt !important;
+}
+.borderright {
+	border-right:solid 1px #000 !important;
+}
+.nostyle .borderright {
+	border-right:solid 1px #ccc !important;
+}
+
+.borderleft {
+	border-left:1px solid #aaa !important;
+}
+
 .content table {
 	border-collapse			:collapse;
 	border					:1px solid #99adbc;
@@ -364,11 +352,11 @@ table .nostyle tr td {
 	background-color		:#c9d5de;
 	color					:black;
 	font-weight				:normal;
-	padding					:0.2em 0.9em;
+	padding					:0.2em 1em;
 	border					:1px solid #99adbc;
 }
 .content table tr td {
-	padding					:0.2em 0.9em;
+	padding					:0.2em 1em;
 	border					:1px solid #99adbc;
 }
 .content a {

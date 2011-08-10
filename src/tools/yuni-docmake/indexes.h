@@ -40,6 +40,25 @@ namespace DocIndex
 	void BuildSitemap();
 
 
+	/*!
+	** \brief Register a term in the database
+	**
+	** \return The ID in the database
+	*/
+	int RegisterWordReference(const ArticleData::Word& term);
+
+	void RegisterWordIDsForASingleArticle(int articleid, const int* termid,
+		const int* countInArticle,
+		unsigned int count);
+
+
+	void UpdateAllSEOWeights();
+
+
+	int FindArticleID(const Yuni::String& href);
+
+
+
 } // namespace DocIndex
 
 #endif // __YUNI_DOCMAKE_INDEXES_H__
