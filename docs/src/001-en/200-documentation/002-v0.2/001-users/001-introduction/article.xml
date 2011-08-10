@@ -5,10 +5,10 @@
 <p>
 Yuni is a cross-platform C++ framework for developing high-level, complex and
 fast applications. Yuni can be useful in all kinds of applications, from simple
-100-line programs to full-blown 3D applications intends to provide a complete
-set of coherent API. It intends to be a reliable and simple bridge between
-different worlds, allowing to write all sorts of applications, while letting
-the developer focus on her real work.
+100-line programs to full-blown 3D applications. It intends to provide a complete
+set of coherent API and to be a reliable and simple bridge between different
+worlds, allowing to write all sorts of applications while letting the developer
+focus on her real work.
 </p>
 <p>
 The Yuni project is connected to all these domains :
@@ -46,7 +46,7 @@ command-line-only programs, many-windowed applications, collaborative 3D
 worlds, massively parallel solver, or most anything else.
 </p>
 <p>
-Yuni is only meant for C++.
+Yuni is <em>only</em> meant for C++.
 C will not do. Yuni is written entirely in C++, and relies heavily on OO
 concepts and C++ templates. Also, a large part of Yuni is entirely static,
 which means that it will have to be included and compiled as C++.
