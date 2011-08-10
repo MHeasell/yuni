@@ -79,9 +79,10 @@
 
 <h1>Tackling Problem 1</h1>
 
-<ul>
-<li>Problem 1 : How to balance a topology given a set of arbitrary constraints.</li>
-</ul>
+<p>
+<b><em>Problem 1 : How to balance a topology given a set of arbitrary constraints.</em></b>
+</p>
+
 <p>
 The topology has to be determined depending on a number of events :
 </p>
@@ -116,9 +117,13 @@ asked that it be created.
 <h2>Destruction of a DObject</h2>
 
 <p>
-When a node requests that a DObject be destroyed, all the replicas
-have to be destroyed first. However, what should we do if a node
-requests destruction while another is still using the DObject ?
+Since data destruction will only occur through garbage collection when
+no more reference to the DObject exists, it will actually be the
+responsibility of the garbage collector to analyze if a DObject must be
+destroyed. When the GC requests that a DObject be destroyed, all the
+replicas have to be destroyed first (some replicas can remain even
+though the reference that created it is lost, if the timeout for the
+destruction of the replica has not yet been reached).
 </p>
 
 <h2>Use of a DObject</h2>
@@ -194,9 +199,10 @@ low load whatever the topology.
 
 <h1>Tackling Problem 2</h1>
 
-<ul>
-<li>Problem 2 : How to synchronize the replicas with their reference DObject.</li>
-</ul>
+<p>
+<b><em>Problem 2 : How to synchronize the replicas with their reference DObject.</em></b>
+</p>
+
 <p>
 TODO
 </p>
@@ -204,9 +210,10 @@ TODO
 
 <h1>Tackling Problem 3</h1>
 
-<ul>
-<li>Problem 3 : How to detect node failures and what to do.</li>
-</ul>
+<p>
+<b><em>Problem 3 : How to detect node failures and what to do.</em></b>
+</p>
+
 <p>
 To this problem I would add : how to add a node dynamically to the
 system. This is related because it also has to do with how nodes have
@@ -244,12 +251,12 @@ This is probably not the best answer to the problem, but for the sake
 of completeness, we shall investigate it anyway. Having a master node
 pinging the rest of the nodes regularly has two main drawbacks :
 </p>
-<ul>
+<ol>
 <li>The master may be very far from some of the nodes</li>
 <li>The master itself may fail</li>
 <li>The mechanism does not scale well</li>
 <li>The master must know all the nodes</li>
-</ul>
+</ol>
 <p>
 In order to alleviate the first problem, the master might be chosen
 intelligently in terms of physical topology of the network.
@@ -279,5 +286,243 @@ is actually quite simple.
 <p>
 In this case, nodes that are close (in network access distance) will
 check on each other, which will reduce the mechanism's overhead on the
-network compared to checking on very distant nodes.
+network compared to checking on very distant nodes. In terms of
+information, each node need only know its neighbours. It will check on
+them regularly and they will check on it. This method is much more
+scalable. A node entering the system will have to register to all its
+close neighbours and all the nodes will keep a list of their
+neighbours that will have to be updated with the additions and
+removals. This might end up being a lot of management.
 </p>
+
+<h2>Node regions</h2>
+
+<p>
+In order to organize the nodes by proximity, but avoid having all
+nodes participating in a keep-alive process that may hinder network
+performance and CPU usage, creating node regions may be a solution.
+For each region, a single node would act as master node for the region
+and keep the list of nodes in the region, as well as the address of
+master nodes from neighbour regions.
+</p>
+
+
+<h1>Tackling Problem 4</h1>
+
+<p>
+<b><em>Problem 4 : How to promote a replica as the new DObject when a node fails.</em></b>
+</p>
+
+<p>
+When a node containing the original data for a DObject fails, the first thing
+to do is find a way to reconstitute all the data for this DObject from other
+nodes. There are several possible situations depending on whether the node
+that failed acted as unique original for the DObject, or if it had only
+partial data and shared this role with other nodes with partial data. Another
+factor is whether the data is fully contained by an existing replica of the
+DObject, which would make the node containing this replica a good choice to get
+the data from. Let us describe the proper behaviour depending on these
+factors :
+</p>
+
+<table>
+<tr>
+  <th></th>
+  <th>Another node has all the lost data</th>
+  <th>Several nodes together have all the lost data</th>
+  <th>Some data was lost for good</th>
+</tr>
+<tr>
+  <th>Lost node contained sole original</th>
+  <td>The node becomes the new sole original</td>
+  <td>The data is copied from these nodes to a single node that becomes the original</td>
+  <td>Make the replica with most values the new original, fill it with data from replicas and set the lost values to default</td>
+</tr>
+<tr>
+  <th>Lost node contained partial original data</th>
+  <td>The node replaces the old node as part of the originals</td>
+  <td>The nodes become part of the originals
+      <br />OR<br />
+      The data is copied from these nodes to a single node that becomes part of the originals</td>
+  <td>Make the replica with most values part of the originals, fill it with retrieved data from replicas and set the lost values to default</td>
+</tr>
+</table>
+
+<p>
+From this table, we can see that a major information required for proper
+management is to know which data is on which node for each DObject, and
+what data was lost when a node stopped answering. By lost, we mean that
+either the node had a single original for the DObject, or the data were
+not in possession of any other of the several originals for the DObject.
+</p>
+
+
+<h1>Tackling Problem 5</h1>
+
+<p>
+<b><em>Problem 5 : How to give weight to a node and update this weight.</em></b>
+</p>
+
+
+<h1>Tackling Problem 6</h1>
+
+<p>
+<b><em>Problem 6 : How to group DObjects and update group contents.</em></b>
+</p>
+
+
+<h1>Node grouping</h1>
+
+<p>
+Following previous discussions, we intend to use a grouping system for nodes.
+Each group will have a representative node that will check on the other nodes'
+status and will report to the rest of the representative nodes from other
+groups.
+This mechanism will make things more scalable overall, and will help avoid an
+explosion in node management overhead. In terms of network topology, each group
+would be a Star, and the full system containing the various groups would be a
+Mesh (see Wikipedia on
+<a href="http://en.wikipedia.org/wiki/Network_topology">Network Topology</a>
+for explanations).
+</p>
+
+<h2>Node Group Creation</h2>
+
+<p>
+The number of groups, and how they are formed depends on the current state of
+the system. The following are several typical cases :
+</p>
+<ul>
+<li>
+<b>1 node :</b>
+Everything is local, node failure is fatal.
+</li>
+<li>
+<b>Several but few nodes :</b>
+A single group with a master and a secondary master that check on each other,
+and on the rest of the nodes.
+</li>
+<li>
+<b>Many nodes :</b>
+Several groups with a master and secondary master in each group.
+</li>
+</ul>
+
+<p>
+Depending on the use case, it may be very easy or very hard for the user to
+know how to group the nodes by herself. For example, if two universities
+connect their networks in a single system to do some common calculations, it
+is known by the user that they should be in separate groups because the latency
+between machines in a university is probably much lower than latency between
+the two networks. However, in the context of an MMO game, each node connects
+separately from any other, and it is probably easier for an automated system
+to discover which nodes are closest to each other.
+</p>
+
+<h2>Node Group Destruction</h2>
+
+<p>
+In much the same way as automatic grouping of new nodes may lead to a new group
+being created, nodes being removed from the system can lead to a group being
+automatically destroyed.
+</p>
+
+<h2>Node Group Size And Balance</h2>
+
+<p>
+Group sizes should be approximately balanced. For this, minimum and maximum
+sizes should be provided, and the algorithm should try to balance the groups
+around these values. Also, the total number of nodes is important in the
+balance : a good mean value for group size when there are enough nodes would be
+<b><i>Total Number Of Nodes / Total Number of Groups</i></b>.
+</p>
+
+<p>
+To balance the groups, the algorithm may alternatively :
+</p>
+<ul>
+<li>create groups</li>
+<li>destroy groups</li>
+<li>move nodes from one group to another</li>
+</ul>
+<p>
+During balance, it is important to keep minimizing distance between nodes as
+described in Node Group Creation.
+</p>
+
+
+<h1>Conclusions</h1>
+
+<h2>User variables</h2>
+
+<p>
+Following what was said in previous discussions, some configurable user values
+need to be offered.
+</p>
+<ul>
+<li>
+  <b>DObject usage timeout :</b>
+  This value determines the delay of non-use of a replica on a node before the
+  replica is considered useless and is destroyed to free memory on the node.
+</li>
+<li>
+  <b>Ping timeout :</b>
+  Since some nodes keep pinging other nodes to check if they are alive, it is
+  necessary for an answer delay to be specified. A good defulat value is
+  important here but it must remain configurable in case some networks are
+  particularly prone to have slow ping replies.
+</li>
+<li>
+  <b>Minimum group size :</b>
+  A group should not have too few nodes because it means the number of groups
+  will be very high and group management overhead will increase. Groups that
+  have too few nodes will be destroyed and their nodes reassigned to other
+  groups.
+</li>
+<li>
+  <b>Maximum group size :</b>
+  A group should not have too many nodes because then the whole point of
+  splitting into groups is lost. This value will also determine at which size
+  a small network will be split into two groups. Minimum and maximum group
+  size are linked and must remain coherent.
+</li>
+</ul>
+
+
+<h2>Algorithms</h2>
+
+<p>
+As a summary of the previous thoughts, the work to be done emerges in the form
+of several algorithms to be written.
+</p>
+
+<table>
+<tr>
+  <th>Algorithm</th>
+  <th>Input</th>
+  <th>Output</th>
+  <th>Problems handled</th>
+  <th>Remarks</th></tr>
+<tr>
+  <td>Node grouping</td>
+  <td>Nodes, Distances, Minimum group size</td>
+  <td>Node -> Group (as master, secondary or normal node)</td>
+  <td>How to create groups when starting the system ?<br />
+      Which group should hold a dynamically added node ?</td>
+  <td>Group creation may occur</td></tr>
+<tr>
+  <td>Failure Recovery</td>
+  <td>Nodes, Distances, Weights, Ping timeout, DObject usage</td>
+  <td>Changes in DObject topology, Changes in groups</td>
+  <td>How to manage groups on node failure ?<br />
+      How to manage DObjects on node failure ?</td>
+  <td>The same algorithm applies if a node is removed normally from the system<br />
+      Group destruction may occur.</td></tr>
+<tr>
+  <td>DObject Ownership</td>
+  <td>Nodes, Distances, Weights, Usage timeout, DObject usage</td>
+  <td>DObject -> Node list</td>
+  <td>Which node(s) should provide the original copy for a DObject ?</td>
+  <td>Each DObject may have several nodes acting as a full copy together</td></tr>
+</table>
+
