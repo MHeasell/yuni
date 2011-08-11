@@ -377,7 +377,7 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 			{
 				address << "<li><a href=\"@{ROOT}/en/documentation/" << pVars["INDEX"] << "\">Documentation</a></li>\n";
 				address << "<li><a href=\"@{ROOT}/en/downloads/" << pVars["INDEX"] << "\">Downloads</a></li>\n";
-				address << "<li><a href=\"@{ROOT}/en/developers/" << pVars["INDEX"] << "\">Developpers</a></li>\n";
+				address << "<li><a href=\"@{ROOT}/en/developers/" << pVars["INDEX"] << "\">Developers</a></li>\n";
 				address << "<li><a href=\"@{ROOT}/en/links/" << pVars["INDEX"] << "\">Links</a></li>\n";
 				address << "<li><a href=\"@{ROOT}/en/contacts/" << pVars["INDEX"] << "\">Contacts</a></li>\n";
 			}
