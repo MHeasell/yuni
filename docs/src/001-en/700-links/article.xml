@@ -25,8 +25,8 @@
 
 <h1>Linux Tools</h1>
 <ul>
-<li><a href="http://valgrind.org/">Valgrind</a>, for Memory leaks and Code profiling</li>
-<li><a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a>, Profile data visualization</li>
+<li><a href="http://valgrind.org/">Valgrind</a> : Memory leaks detection and Code profiling</li>
+<li><a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a> : Profile data visualization</li>
 </ul>
 
 <h1>Windows Tools</h1>
