@@ -15,6 +15,8 @@ class JobWriter : public Yuni::Job::IJob
 public:
 	static bool SomeRemain();
 
+	static void SEOBuildAllTermReferences();
+
 public:
 	static void Add(const Yuni::String& input, const Yuni::String& htdocs, const ArticleData& article);
 

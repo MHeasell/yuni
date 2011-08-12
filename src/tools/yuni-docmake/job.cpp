@@ -294,7 +294,15 @@ namespace // anonymous
 			case ArticleData::stTitle:
 				{
 					if (name == "title")
+					{
 						pState = ArticleData::stNone;
+						StringAdapter s = pArticle.title;
+
+						float oldCoeff = pCoeff;
+						pCoeff = 3.f;
+						seo(s);
+						pCoeff = oldCoeff;
+					}
 					break;
 				}
 			case ArticleData::stTOCItem:
@@ -302,6 +310,11 @@ namespace // anonymous
 					if (name == "h1" || name == "h2")
 					{
 						pState = ArticleData::stNone;
+						float oldCoeff = pCoeff;
+						pCoeff = (pLastTOCLevel == 1) ? 2.5f : 2.f;
+						StringAdapter s = pTOCCaption;
+						seo(s);
+						pCoeff = oldCoeff;
 						pArticle.tocAppend(pLastTOCLevel, pTOCCaption);
 						pTOCCaption.clear();
 					}

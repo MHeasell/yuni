@@ -198,8 +198,24 @@ namespace // anonymous
 } // anonymous namespace
 
 
+void JobWriter::SEOBuildAllTermReferences()
+{
+	String filename;
+	filename << Program::htdocs << SEP << "seo" << SEP << "data.js";
+	Core::IO::File::Stream file;
 
-static unsigned int COUNT = 0;
+	if (file.openRW(filename))
+	{
+		file << "if(1){var f=function(id,n,d) {SEO.termNames[n]=id;SEO.terms[id]=d};";
+		Yuni::MutexLocker locker(gMutex);
+
+		const AllWords::const_iterator end = gAllWords.end();
+		for (AllWords::const_iterator i = gAllWords.begin(); i != end; ++i)
+			DocIndex::BuildSEOTermReference(file, i->first, i->second);
+		file << " }\n";
+	}
+}
+
 
 
 void JobWriter::Add(const String& input, const String& htdocs, const ArticleData& article)
@@ -211,11 +227,9 @@ void JobWriter::Add(const String& input, const String& htdocs, const ArticleData
 	const ArticleData& newArticle = job->article();
 
 	// Keeping the new job in a safe place, for later use
-	++COUNT;
 	gMutex.lock();
 	gJobList.push_back(job);
 	gMutex.unlock();
-	--COUNT;
 
 	// Preparing the global word dictionary
 	unsigned int registrationCount = 0;
@@ -568,7 +582,7 @@ void JobWriter::onExecute()
 
 	// @{CONTENT}
 	content.replace("@{CONTENT}", pVars["CONTENT"]);
-	
+
 	// Directory Index
 	content.replace("@{DIRECTORY_INDEX}",  pVars["DIRECTORY_INDEX"]);
 

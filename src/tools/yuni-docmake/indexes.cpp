@@ -668,4 +668,84 @@ namespace DocIndex
 	}
 
 
+	void BuildSEOTermReference(Core::IO::File::Stream& file, const ArticleData::Word& term, int termid)
+	{
+		char** result;
+		int rowCount, colCount;
+		CustomString<256,false> query;
+		query << "SELECT t.article_id,t.count_in_page,t.weight * w.weight"
+			<< " FROM terms_per_article AS t, terms as w"
+			<< " WHERE term_id = " << termid << " AND w.id = t.term_id";
+		if (SQLITE_OK != sqlite3_get_table(gDB, query.c_str(), &result, &rowCount, &colCount, NULL))
+			return;
+
+		CustomString<1024> s;
+		s << "f(" << termid << ",'" << term << "',[";
+		if (rowCount)
+		{
+			unsigned int y = 2;
+			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
+			{
+				const StringAdapter articleID = result[++y];
+				const StringAdapter scount   = result[++y];
+				const StringAdapter sweight  = result[++y];
+				if (row)
+					s << ',';
+				s
+					<< "{a:" << articleID // article ID
+					<< ",c:" << scount    // count
+					<< ",w:" << sweight   // weight
+					<< '}';
+			}
+		}
+		sqlite3_free_table(result);
+		s << "]);\n";
+
+		file << s;
+	}
+
+
+
+	void BuildSEOArticlesReference()
+	{
+		char** result;
+		int rowCount, colCount;
+		CustomString<128,false> query;
+		query << "SELECT id,html_href,title,weight FROM articles;";
+		if (SQLITE_OK != sqlite3_get_table(gDB, query.c_str(), &result, &rowCount, &colCount, NULL))
+			return;
+
+		CustomString<1024 * 128> s;
+		s << "if (1) { var f=function(id,d) {SEO.articles[id] = d};";
+		if (rowCount)
+		{
+			unsigned int y = 3;
+			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
+			{
+				const StringAdapter articleID = result[++y];
+				const StringAdapter href      = result[++y];
+				const StringAdapter title     = result[++y];
+				const StringAdapter sweight   = result[++y];
+
+				s
+					<< "f(" << articleID << ",{"
+					<< "t:\"" << title << '"'// article ID
+					<< ",h:\"" << href << '"'// article ID
+					<< ",w:" << sweight   // weight
+					<< "});";
+			}
+		}
+		sqlite3_free_table(result);
+
+		s << " }\n";
+
+		String filename;
+		filename << Program::htdocs << SEP << "seo" << SEP << "data.js";
+		Core::IO::File::AppendContent(filename, s);
+	}
+
+
+
+
+
 } // namespace DocIndex
