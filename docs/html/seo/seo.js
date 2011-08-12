@@ -21,9 +21,26 @@ SEO = {
 		var tks = query.split(new RegExp("[ ,;/|]", "g"));
 		var tokens = new Array();
 		var weight = 1.0;
+		var registerToken = function(t, i, bonus) {
+			var termID = SEO.termNames[t];
+			if (termID <= 0)
+				return;
+			var r = {
+				id: termID,
+				term: t,
+				w: 1.0 * (weight * bonus),
+				pages: SEO.terms[termID]
+			};
+			// updating weights
+			for (var j = 0; j != r.pages.length; ++j)
+				r.pages[j].wResult = r.pages[j].w * r.w;
+				console.log("register  " + t + ",    w:" + r.w);
+			tokens.push(r);
+		}
+		console.log("------------");
 		for (var i = 0; i < tks.length; ++i)
 		{
-			if (tks[i] == "")
+			if (tks[i] == "") // invalid token
 				continue;
 			var t = tks[i];
 		
@@ -36,25 +53,26 @@ SEO = {
 				do {
 					switch (t.charAt(0))
 					{
-						case '-': weight = 0;t = t.substring(1);break;
+						case '-': weight = 0.01;t = t.substring(1);break;
 						case '+': weight = +1.0;t = t.substring(1);break;
 						default:cont = false;
 					}
 				} while (cont);
 
-				var tid = SEO.termNames[t];
-				if (!tid || tid <= 0)
-					continue;
-				var r = {
-					id: tid,
-					term: t,
-					w: weight + 0.5 * (i / tks.length),//* ((tks.length - i) / tks.length),
-					pages: SEO.terms[tid]
-				};
-				// updating weights
-				for (var j = 0; j != r.pages.length; ++j)
-					r.pages[j].w *= r.w;
-				tokens.push(r);
+				var snex = SEO.soundex(t);
+				for (var nm in SEO.termNames) {
+					if (nm == t) {
+						registerToken(nm, i, 1.1);
+						continue;
+					}
+					var sub = (t.length > 2) && (nm.toLowerCase().indexOf(t) != -1);
+					if (sub)
+						registerToken(nm, i, 1.0);
+					else {
+						if (SEO.soundex(nm) == snex)
+							registerToken(nm, i, 1.0);
+					}
+				}
 			}
 		}
 
@@ -66,13 +84,13 @@ SEO = {
 				if (!pages[articleid]) {
 					pages[articleid] = {
 						a: articleid,
-						w: r.pages[j].w,
+						w: r.pages[j].wResult,
 					};
 				} else {
 					if (r.w > 0)
-						pages[articleid].w *= 1.3;
+						pages[articleid].wResult *= 1.3;
 					else
-						pages[articleid].w = 0;
+						pages[articleid].wResult = 0;
 				}
 			}
 		}
@@ -91,22 +109,80 @@ SEO = {
 					return -1;
 				return 0;
 			});
-			var s = '<span>research</span>';
-			for (var t in tokens) {
-				var tok = tokens[t];
-				s += " " + tok.term;
-			}
-			s += "<br />";
+			s = "";
 			for (var i in result) {
 				var r = result[i];
 				s += "<a href=\"" + root + SEO.articles[r.id].h  + "/" + index + "\">"
-					+ "<span>" + SEO.articles[r.id].t + "</span>  "
+					+ r.w + "<span>" + SEO.articles[r.id].t + "</span>  "
 					+ SEO.articles[r.id].h + "</a>";
 			}
 			div.innerHTML = s;
 		}
 		else
 			div.innerHTML = "<a href='#'><span>No result</span></a>";
+	},
+
+	soundex: function (str) {
+		// Calculate the soundex key of a string  
+		// 
+		// version: 1107.2516
+		// discuss at: http://phpjs.org/functions/soundex
+		// +   original by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
+		// +    tweaked by: Jack
+		// +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+		// +   bugfixed by: Onno Marsman
+		// +      input by: Brett Zamir (http://brett-zamir.me)
+		// +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+		// +   original by: Arnout Kazemier (http://www.3rd-Eden.com)
+		// +    revised by: Rafał Kukawski (http://blog.kukawski.pl)
+		// *     example 1: soundex('Kevin');
+		// *     returns 1: 'K150'
+		// *     example 2: soundex('Ellery');
+		// *     returns 2: 'E460'
+		// *     example 3: soundex('Euler');
+		// *     returns 3: 'E460'
+		str = (str + '').toUpperCase();
+		if (!str) {
+			return '';
+		}
+		var sdx = [0, 0, 0, 0],
+			m = {
+			B: 1,
+			  F: 1,
+			  P: 1,
+			  V: 1,
+			   C: 2,
+			   G: 2,
+			   J: 2,
+			   K: 2,
+			   Q: 2,
+			   S: 2,
+			   X: 2,
+			   Z: 2,
+			   D: 3,
+			   T: 3,
+			   L: 4,
+			   M: 5,
+			   N: 5,
+			   R: 6
+			},
+			i = 0,
+			j, s = 0,
+			c, p;
+
+		while ((c = str.charAt(i++)) && s < 4) {
+			if (j = m[c]) {
+				if (j !== p) {
+					sdx[s++] = p = j;
+				}
+			} else {
+				s += i === 1;
+				p = 0;
+			}
+		}
+
+		sdx[0] = str.charAt(0);
+		return sdx.join('');
 	}
 
 };
