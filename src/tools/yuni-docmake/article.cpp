@@ -50,6 +50,7 @@ void ArticleData::reset()
 	showQuickLinks = true;
 	accessPath.clear();
 	tocItems.clear();
+	wordCount.clear();
 }
 
 

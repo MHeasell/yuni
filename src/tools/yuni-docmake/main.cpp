@@ -46,6 +46,8 @@ int main(int argc, char** argv)
 
 	logs.info() << "Optimizing SEO data";
 	DocIndex::UpdateAllSEOWeights();
+	JobWriter::SEOBuildAllTermReferences();
+	DocIndex::BuildSEOArticlesReference();
 
 	logs.info() << "Generating HTML files into htdocs";
 	if (JobWriter::ReadTemplateIndex())

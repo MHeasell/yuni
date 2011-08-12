@@ -3,6 +3,7 @@
 
 # include <yuni/yuni.h>
 # include <yuni/core/string.h>
+# include <yuni/core/io/file.h>
 # include "article.h"
 
 
@@ -57,6 +58,11 @@ namespace DocIndex
 
 	int FindArticleID(const Yuni::String& href);
 
+
+
+	void BuildSEOTermReference(Yuni::Core::IO::File::Stream& file, const ArticleData::Word& term, int termid);
+
+	void BuildSEOArticlesReference();
 
 
 } // namespace DocIndex

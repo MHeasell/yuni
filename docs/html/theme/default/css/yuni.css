@@ -62,10 +62,10 @@ body,html {
 	top:160px;
 }
 .leftmenu input {
-	width:100%;
+	width:90%;
 	outline:none;
 	border:1px solid #bbd;
-	padding:0.2em 0em;
+	padding:0.2em 0.7em;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
@@ -376,4 +376,43 @@ td > h2:first-child {
 	background-color		:#444;
 	color					:white;
 	border-color			:black;
+}
+.spotlight {
+	display:none;
+	font-size:9pt !important;
+	position:fixed;
+	background-color:#000;
+	max-height:70%;
+	padding:1em 1em;
+	border:1px solid white;
+	font-weight:normal !important;
+
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	opacity:0.85;
+
+	-moz-box-shadow: 0 0px 8px #555;
+	-webkit-box-shadow: 0 0px 8px #555;
+	box-shadow: 0 0px 8px #555;
+
+}
+.spotlight a {
+	color:#558 !important;
+	font-family				:verdana !important;
+	font-size:8.7pt !important;
+	text-decoration:none;
+	padding:0.1em 0.8em !important;
+	padding-right:0.3em !important;
+	font-weight:normal !important;
+}
+.spotlight a:hover {
+	background-color:#933 !important;
+	color:#d88 !important;
+}
+.spotlight span {
+	font-size:9pt;
+	color:white !important;
+	font-weight:normal !important;
+	padding-right:1em !important;
 }
