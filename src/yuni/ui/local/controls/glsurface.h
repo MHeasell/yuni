@@ -17,7 +17,7 @@ namespace Local
 	/*!
 	** \brief Abstract surface for OpenGL Rendering
 	*/
-    class GLSurface: public Surface
+	class GLSurface: public Surface
 	{
 	public:
 		//! \name Constructor & Destructor
