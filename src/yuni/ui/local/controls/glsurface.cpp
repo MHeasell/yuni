@@ -1,8 +1,13 @@
 
+# include "../../../yuni.h"
 # include "glsurface.h"
-# include <GL/gl.h>
-# include <GL/glu.h>
-
+# ifndef YUNI_OS_MAC
+#	include <GL/gl.h>
+#	include <GL/glu.h>
+# else
+#	include <OpenGL/gl.h>
+#	include <OpenGL/glu.h>
+# endif // YUNI_OS_MAC
 
 namespace Yuni
 {
