@@ -1792,30 +1792,6 @@ namespace Yuni
 		void convertSlashesIntoBackslashes();
 
 		/*!
-		** \brief Explode a string into several segments
-		**
-		** Here is an example of how to convert a string to a list of int :
-		** \code
-		** std::list<int>  list;
-		** String("22::80::443::993").explode(list, ":");
-		** std::cout << list << std::endl;
-		** \endcode
-		**
-		** \param[out] out All segments that have been found
-		** \param sep Sequence of chars considered as a separator
-		** \param keepEmptyElements True to keep empty items
-		** \param trimElements Trim each item found
-		** \param emptyBefore True to clear the vector before fulfill it
-		**
-		** \warning Do not take care of string representation (with `'` or `"`)
-		** \deprecated Consider `split` instead. It will be removed in the next v0.2
-		*/
-		template<template<class,class> class U, class UType, class Alloc, typename StringT>
-		YUNI_DEPRECATED("Consider `split` instead (will be removed in the next v0.2)",
-		void explode(U<UType,Alloc>& out, const StringT& sep,
-			bool emptyBefore = true, const bool keepEmptyElements = false, const bool trimElements = true) const);
-
-		/*!
 		** \brief Split a string into several segments
 		**
 		** Here is an example of how to convert a string to a list of int :
