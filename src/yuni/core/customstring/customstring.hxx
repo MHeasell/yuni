@@ -2978,18 +2978,6 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	template<template<class,class> class U, class UType, class Alloc, class StringT>
-	inline void
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::explode(U<UType,Alloc>& out, const StringT& sep,
-		bool emptyBefore, bool keepEmptyElements, bool trimElements) const
-	{
-		// This method is deprecated
-		// You should consider `split` instead
-		split(out, sep, keepEmptyElements, trimElements, emptyBefore);
-	}
-
-
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline char
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::first() const
 	{
