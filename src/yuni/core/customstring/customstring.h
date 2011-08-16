@@ -64,7 +64,7 @@ namespace Yuni
 	** 	std::cout << "char at offset " << i.offset() << ": " << *i << std::endl;
 	** \endcode
 	**
-	** Example for convertions :
+	** Example for conversions :
 	** \code
 	** String s;
 	** s << "example for double = " << 42.6;
@@ -72,13 +72,13 @@ namespace Yuni
 	**
 	** s = "42";
 	** int i = s.to<int>();
-	** std::cout << "Convertion without check for int: " << i << std::endl;
+	** std::cout << "Conversion without check for int: " << i << std::endl;
 	** if (s.to(i))
 	** {
-	** 	std::cout << "Convertion with check for int: " << i << std::endl;
+	** 	std::cout << "Conversion with check for int: " << i << std::endl;
 	** }
 	** else
-	** 	std::cout << "Convertion failed for int " << std::endl;
+	** 	std::cout << "Conversion failed for int " << std::endl;
 	**
 	** Color::RGB<> rgb(142, 230, 12);
 	** s.clear() << "example for rgb = " << rgb;
@@ -87,10 +87,10 @@ namespace Yuni
 	** Color::RGBA<> rgba;
 	** s = " rgb( 42, 58, 234)";
 	** s.to(rgba);
-	** std::cout << "Convertion from string to rgba : " << rgba << std::endl;
+	** std::cout << "Conversion from string to rgba : " << rgba << std::endl;
 	** s = " rgba( 42, 58, 234, 67)";
 	** s.to(rgba);
-	** std::cout << "Convertion from string to rgba : " << rgba << std::endl;
+	** std::cout << "Conversion from string to rgba : " << rgba << std::endl;
 	** \endcode
 	**
 	** \warning This class is not thread-safe
@@ -290,7 +290,7 @@ namespace Yuni
 		/*!
 		** \brief Constructor by copy from iterator
 		**
-		** \param begin An iterator pointing to the begining of a sequence
+		** \param begin An iterator pointing to the beginning of a sequence
 		** \param end  An iterator pointing to the end of a sequence
 		*/
 		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2>
@@ -299,7 +299,7 @@ namespace Yuni
 		/*!
 		** \brief Constructor by copy from iterator
 		**
-		** \param begin An iterator pointing to the begining of a sequence
+		** \param begin An iterator pointing to the beginning of a sequence
 		** \param end  An iterator pointing to the end of a sequence
 		** \param separator A string to add between each item
 		*/
@@ -387,7 +387,7 @@ namespace Yuni
 		** be converted by the string (see specializations in the namespace
 		** `Yuni::Extension::CustomString`).
 		**
-		** \param begin An iterator pointing to the begining of a sequence
+		** \param begin An iterator pointing to the beginning of a sequence
 		** \param end  An iterator pointing to the end of a sequence
 		*/
 		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2>
@@ -412,7 +412,7 @@ namespace Yuni
 		** std::cout << sub2 << std::endl; // ん, に
 		** \endcode
 		**
-		** \param begin An iterator pointing to the begining of a sequence
+		** \param begin An iterator pointing to the beginning of a sequence
 		** \param end  An iterator pointing to the end of a sequence
 		** \param separator The string separator to use between each item
 		*/
@@ -439,7 +439,7 @@ namespace Yuni
 		** std::cout << sub2 << std::endl; // ん, に
 		** \endcode
 		**
-		** \param begin An iterator pointing to the begining of a sequence
+		** \param begin An iterator pointing to the beginning of a sequence
 		** \param end  An iterator pointing to the end of a sequence
 		** \param separator The string separator to use between each item
 		** \param enclosure The enclosure string
@@ -464,7 +464,7 @@ namespace Yuni
 		** Yuni::Extension::CustomString).
 		**
 		** \see namespace Yuni::Extension::CustomString
-		** \param begin  An iterator pointing to the begining of a sequence
+		** \param begin  An iterator pointing to the beginning of a sequence
 		** \param end    An iterator pointing to the end of a sequence
 		*/
 		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2>
@@ -491,7 +491,7 @@ namespace Yuni
 		**
 		** \see namespace Yuni::Extension::CustomString
 		**
-		** \param begin     An iterator pointing to the begining of a sequence
+		** \param begin     An iterator pointing to the beginning of a sequence
 		** \param end       An iterator pointing to the end of a sequence
 		** \param separator The string separator to use between each item
 		*/
@@ -520,7 +520,7 @@ namespace Yuni
 		**
 		** \see namespace Yuni::Extension::CustomString
 		**
-		** \param begin     An iterator pointing to the begining of a sequence
+		** \param begin     An iterator pointing to the beginning of a sequence
 		** \param end       An iterator pointing to the end of a sequence
 		** \param separator The string separator to use between each item
 		** \param enclosure The enclosure string
@@ -628,7 +628,7 @@ namespace Yuni
 		void insert(const IIterator<ModelT,ConstT>& it, const StringT& string);
 
 		/*!
-		** \brief Insert a raw C-String at the begining of in the string
+		** \brief Insert a raw C-String at the beginning of in the string
 		**
 		** \param cstr A C-String
 		** \param size Size of the string
@@ -638,7 +638,7 @@ namespace Yuni
 		bool prepend(const char* const cstr, const Size size);
 
 		/*!
-		** \brief Insert a single item at the begining of the string
+		** \brief Insert a single item at the beginning of the string
 		**
 		** \param c A single item
 		** \return True if the string has been inserted, false otherwise
@@ -647,7 +647,7 @@ namespace Yuni
 		bool prepend(const char c);
 
 		/*!
-		** \brief Insert an arbitrary C-String at the begining of the string
+		** \brief Insert an arbitrary C-String at the beginning of the string
 		**
 		** \param u Any CString container
 		** \return True if the string has been inserted, false otherwise
@@ -656,7 +656,7 @@ namespace Yuni
 		template<class StringT> bool prepend(const StringT& s);
 
 		/*!
-		** \brief Insert an arbitrary C-String at the begining the string
+		** \brief Insert an arbitrary C-String at the beginning the string
 		**
 		** \param s Any CString container
 		** \param size The size to use for the given container
@@ -1159,32 +1159,32 @@ namespace Yuni
 		template<class StringT> Size ifind_last_of(const StringT& seq, Size offset = npos) const;
 
 		/*!
-		** \brief Get if a given string can be found at the begining
+		** \brief Get if a given string can be found at the beginning
 		*/
 		bool startsWith(const char* const cstr, const Size len) const;
 
 		/*!
-		** \brief Get if a given string can be found at the begining
+		** \brief Get if a given string can be found at the beginning
 		*/
 		template<class StringT> bool startsWith(const StringT& s) const;
 
 		/*!
-		** \brief Get if a given char can be found at the begining
+		** \brief Get if a given char can be found at the beginning
 		*/
 		bool startsWith(char c) const;
 
 		/*!
-		** \brief Get if a given string can be found at the begining (case insensitive)
+		** \brief Get if a given string can be found at the beginning (case insensitive)
 		*/
 		bool istartsWith(const char* const cstr, const Size len) const;
 
 		/*!
-		** \brief Get if a given string can be found at the begining (case insensitive)
+		** \brief Get if a given string can be found at the beginning (case insensitive)
 		*/
 		template<class StringT> bool istartsWith(const StringT& s) const;
 
 		/*!
-		** \brief Get if a given char can be found at the begining (case insensitive)
+		** \brief Get if a given char can be found at the beginning (case insensitive)
 		*/
 		bool istartsWith(char c) const;
 
@@ -1227,7 +1227,7 @@ namespace Yuni
 		//! \brief Erase
 		//@{
 		/*!
-		** \brief Remove iup to `n` characters from the end of the string
+		** \brief Remove up to `n` characters from the end of the string
 		*/
 		void chop(unsigned int n);
 
@@ -1254,12 +1254,12 @@ namespace Yuni
 		//! \name Trimming
 		//@{
 		/*!
-		** \brief Remove all white-spaces (" \t\r\n") from the begining and the end
+		** \brief Remove all white-spaces (" \t\r\n") from the beginning and the end
 		**   of the string
 		*/
 		void trim();
 		/*!
-		** \brief Remove all white-spaces from the begining and the end of the string
+		** \brief Remove all white-spaces from the beginning and the end of the string
 		*/
 		void trim(const char c);
 		/*!
@@ -1279,12 +1279,12 @@ namespace Yuni
 		void trimRight(const char c);
 
 		/*!
-		** \brief Removes all items equal to one of those in 'u' from the begining
+		** \brief Removes all items equal to one of those in 'u' from the beginning
 		**   of the string
 		*/
 		template<class StringT> void trimLeft(const StringT& whitespaces);
 		/*!
-		** \brief Remove all items equal to 'c' from the begining of the string
+		** \brief Remove all items equal to 'c' from the beginning of the string
 		*/
 		void trimLeft(const char c);
 		//@}
@@ -1322,7 +1322,7 @@ namespace Yuni
 		void erase(const IIterator<ModelT,ConstT>& offset, const Size len);
 
 		/*!
-		** \brief Replace all occurences of a string by another one
+		** \brief Replace all occurrences of a string by another one
 		**
 		** \param from The string to find
 		** \param to   The string to replace with
@@ -1331,7 +1331,7 @@ namespace Yuni
 		void replace(const StringT1& from, const StringT2& to);
 
 		/*!
-		** \brief Replace all occurences of a string by another one
+		** \brief Replace all occurrences of a string by another one
 		**
 		** \param offset The offset where to start from
 		** \param from The string to find
@@ -1341,7 +1341,7 @@ namespace Yuni
 		void replace(Size offset, const StringT1& from, const StringT2& to);
 
 		/*!
-		** \brief Replace all occurences of a given char by another one
+		** \brief Replace all occurrences of a given char by another one
 		**
 		** \param from The character to search
 		** \param to   The replacement
@@ -1349,7 +1349,7 @@ namespace Yuni
 		void replace(char from, char to);
 
 		/*!
-		** \brief Replace all occurences of a given char by another one
+		** \brief Replace all occurrences of a given char by another one
 		**
 		** \param offset The offset where to start from
 		** \param from The character to search
@@ -1358,7 +1358,7 @@ namespace Yuni
 		void replace(Size offset, char from, char to);
 
 		/*!
-		** \brief Replace all occurences of a given char by another one (case insensitive)
+		** \brief Replace all occurrences of a given char by another one (case insensitive)
 		**
 		** \param from The character to search
 		** \param to   The replacement
@@ -1366,7 +1366,7 @@ namespace Yuni
 		void ireplace(char from, char to);
 
 		/*!
-		** \brief Replace all occurences of a given char by another one (case insensitive)
+		** \brief Replace all occurrences of a given char by another one (case insensitive)
 		**
 		** \param offset The offset where to start from
 		** \param from The character to search
@@ -1375,7 +1375,7 @@ namespace Yuni
 		void ireplace(Size offset, char from, char to);
 
 		/*!
-		** \brief Replace all occurences of a string by another one (case insensitive)
+		** \brief Replace all occurrences of a string by another one (case insensitive)
 		**
 		** \param from The string to find
 		** \param to   The string to replace with
@@ -1384,7 +1384,7 @@ namespace Yuni
 		void ireplace(const StringT1& from, const StringT2& to);
 
 		/*!
-		** \brief Replace all occurences of a string by another one (case insensitive)
+		** \brief Replace all occurrences of a string by another one (case insensitive)
 		**
 		** \param offset The offset where to start from
 		** \param from The string to find
@@ -1741,7 +1741,7 @@ namespace Yuni
 		** \brief Append formatted string
 		**
 		** The format is the standard printf format.
-		** \param format The format, reprensented by a zero-terminated string
+		** \param format The format, represented by a zero-terminated string
 		** \return Always *this
 		*/
 		template<class StringT> CustomString& appendFormat(const StringT& format, ...);
@@ -1838,9 +1838,9 @@ namespace Yuni
 			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const;
 
 		/*!
-		** \brief Dupplicate N times the content of the string
+		** \brief Duplicate N times the content of the string
 		*/
-		void dupplicate(int n);
+		void duplicate(int n);
 
 
 		/*!
@@ -1859,7 +1859,7 @@ namespace Yuni
 		** a = b; // Put your comments here
 		** b =
 		** c = ; // b = c, empty values
-		** return cariage = A long string\non two lines
+		** return carriage = A long string\non two lines
 		** "key" = "All characters are allowed here, like semicolons; :)"
 		** \endcode
 		**
