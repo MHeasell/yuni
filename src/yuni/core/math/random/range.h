@@ -2,6 +2,7 @@
 # define __YUNI_CORE_MATH_RANDOM_RANGE_H__
 
 # include "../math.h"
+# include "distribution.h"
 
 
 namespace Yuni
