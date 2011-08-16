@@ -3032,7 +3032,7 @@ namespace Yuni
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
-	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::dupplicate(int n)
+	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::duplicate(int n)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CustomString_Adapter_ReadOnly);
 		if (n > 0 && AncestorType::size > 0)
@@ -3286,7 +3286,7 @@ namespace Yuni
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>&
 	CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator *= (int n)
 	{
-		dupplicate(n);
+		duplicate(n);
 		return *this;
 	}
 
