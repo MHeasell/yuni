@@ -33,11 +33,11 @@ int main()
 </source>
 
 
-<h1>Type convertions</h1>
+<h1>Type conversions</h1>
 <p>
 This string is already able to perform a lot of conversions on its own. All standard types are supported.
 </p>
-<h2>type to string</h2>
+<h2>Type to String</h2>
 <source type="cpp">
 String s;
 s &lt;&lt; "Hello world : " &lt;&lt; 42;
@@ -59,7 +59,7 @@ std::cout &lt;&lt; "std::string : " &lt;&lt; s &lt;&lt; std::endl;
 </source>
 
 
-<h2>string to type</h2>
+<h2>String to Type</h2>
 <source type="cpp">
 String s;
 int i;
@@ -104,7 +104,7 @@ u = s.to&lt;unsigned int&gt;();
 
 
 <h2>Supported types by default</h2>
-<p>Here is the list by default of all supported types for convertion :</p>
+<p>Here is the list of all default supported types for conversion :</p>
 <ul>
 <li><code>char*</code></li>
 <li><code>char</code></li>
