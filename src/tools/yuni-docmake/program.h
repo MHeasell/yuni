@@ -33,6 +33,9 @@ namespace DocMake
 		static String htdocs;
 		//! The index filename
 		static String indexFilename;
+		//! The web root (ex: http://www.libyuni.org)
+		static String webroot;
+
 		static unsigned int nbJobs;
 		bool printVersion;
 		static bool debug;

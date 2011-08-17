@@ -25,6 +25,7 @@ namespace DocMake
 	String Program::input;
 	String Program::htdocs;
 	String Program::indexFilename = "index.html";
+	String Program::webroot = "/";
 
 
 
@@ -49,6 +50,7 @@ namespace DocMake
 		opts.addParagraph("\nOptions:");
 		opts.add(input         ,' ', "input", "Source folder");
 		opts.add(htdocs        ,' ', "htdocs", "htdocs folder");
+		opts.add(webroot       ,'w', "webroot", "The web root (ex: http://www.libyuni.org)");
 		opts.add(indexFilename ,'i', "index", "index filename (default: index.html)");
 		opts.addFlag(clean     ,'c', "clean", "Clean the htdocs folder first");
 		opts.addFlag(shortUrl  ,'s', "short-url", "Use short url");
