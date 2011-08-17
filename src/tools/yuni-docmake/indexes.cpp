@@ -493,7 +493,7 @@ namespace DocIndex
 					href.replace(">", "&gt;");
 
 					out << "<url>\n";
-					out << "\t<loc>" << href << "</loc>\n";
+					out << "\t<loc>" << Program::webroot << href << "</loc>\n";
 					// The default priority in a sitemap is 0.5
 					if (!Math::Equals(priority, 0.5f))
 						out << "\t<priority>" << priority << "</priority>\n";
