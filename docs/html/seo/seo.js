@@ -35,9 +35,7 @@ SEO = {
 			// console.log("register  " + t + ",    w:" + r.w);
 			for (var j = 0; j != r.pages.length; ++j)
 			{
-				if (isNaN(r.pages[j].wResult))
-					r.pages[j].wResult = 1.0;
-				r.pages[j].wResult *= r.pages[j].w * r.w;
+				r.pages[j].wResult = r.pages[j].w * r.w;
 			}
 			tokens.push(r);
 		}
