@@ -299,7 +299,7 @@ namespace // anonymous
 						StringAdapter s = pArticle.title;
 
 						float oldCoeff = pCoeff;
-						pCoeff = 3.f;
+						pCoeff = 5.f;
 						seo(s);
 						pCoeff = oldCoeff;
 					}
@@ -311,7 +311,7 @@ namespace // anonymous
 					{
 						pState = ArticleData::stNone;
 						float oldCoeff = pCoeff;
-						pCoeff = (pLastTOCLevel == 1) ? 2.5f : 2.f;
+						pCoeff = (pLastTOCLevel == 1) ? 3.f : 2.f;
 						StringAdapter s = pTOCCaption;
 						seo(s);
 						pCoeff = oldCoeff;

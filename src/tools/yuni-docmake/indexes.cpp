@@ -580,6 +580,7 @@ namespace DocIndex
 
 	void RegisterWordIDsForASingleArticle(int articleid, const int* termid,
 		const int* countInArticle,
+		const float* weights,
 		unsigned int count)
 	{
 		CustomString<1024> query;
@@ -591,7 +592,7 @@ namespace DocIndex
 				<< termid[i] << ','
 				<< articleid << ','
 				<< countInArticle[i] << ','
-				<< "1.0" << ");\n";
+				<< weights[i] << ");\n";
 		}
 		query << "COMMIT;\n";
 

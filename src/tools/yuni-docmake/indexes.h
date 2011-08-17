@@ -50,6 +50,7 @@ namespace DocIndex
 
 	void RegisterWordIDsForASingleArticle(int articleid, const int* termid,
 		const int* countInArticle,
+		const float* weights,
 		unsigned int count);
 
 
