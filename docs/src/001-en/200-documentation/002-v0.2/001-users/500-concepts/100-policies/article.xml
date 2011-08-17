@@ -12,12 +12,12 @@ For example, we can imagine a few ways to grant an access or not :
 <source>
 struct IAllowAccessStrategy
 {
-	virtual bool allowed(cont char* user, const char* pass) = 0;
+	virtual bool allowed(const char* user, const char* pass) = 0;
 };
 
 struct Never: public IAllowAccessStrategy
 {
-	virtual bool allowed(cont char* user, const char* pass)
+	virtual bool allowed(const char* user, const char* pass)
 	{
 		return false;
 	}
@@ -25,7 +25,7 @@ struct Never: public IAllowAccessStrategy
 
 struct Always: public IAllowAccessStrategy
 {
-	virtual bool allowed(cont char* user, const char* pass)
+	virtual bool allowed(const char* user, const char* pass)
 	{
 		return true;
 	}
@@ -33,7 +33,7 @@ struct Always: public IAllowAccessStrategy
 
 struct CheckValidAccount: public IAllowAccessStrategy
 {
-	virtual bool allowed(cont char* user, const char* pass)
+	virtual bool allowed(const char* user, const char* pass)
 	{
 		return PasswordManager.IsValidAccount(user, pass);
 	}
@@ -88,7 +88,7 @@ Let us present the above example with policies :
 <source>
 struct Never
 {
-	static bool Allowed(cont char* user, const char* pass)
+	static bool Allowed(const char* user, const char* pass)
 	{
 		return false;
 	}
@@ -96,7 +96,7 @@ struct Never
 
 struct Always
 {
-	static bool Allowed(cont char* user, const char* pass)
+	static bool Allowed(const char* user, const char* pass)
 	{
 		return true;
 	}
@@ -104,7 +104,7 @@ struct Always
 
 struct CheckValidAccount
 {
-	static bool Allowed(cont char* user, const char* pass)
+	static bool Allowed(const char* user, const char* pass)
 	{
 		return PasswordManager.IsValidAccount(user, pass);
 	}
@@ -192,7 +192,7 @@ be chosen at compile time and cannot be changed during execution.
 </p>
 
 
-<h1>How to use policies in Yuni</h1>
+<h1>Policies in Yuni</h1>
 <p>
 Yuni uses policies for various powerful features, mainly derived from
 <a href="http://en.wikipedia.org/wiki/Modern_C%2B%2B_Design">Modern C++ Design</a>. Currently, these are :
