@@ -230,17 +230,21 @@
 */
 /* Usage Example :
 ** \code
-** YUNI_THREAD_LOCAL int myThreadLocalVariable = 0;
+** YUNI_THREAD_LOCAL_STORAGE(int)  myThreadLocalVariable = 0;
 ** \endcode
 **
 ** \see Rules and Limitations for TLS on Windows http://msdn.microsoft.com/en-us/library/2s9wt68x.aspx
+** \see http://gcc.gnu.org/onlinedocs/gcc-4.2.4/gcc/Thread_002dLocal.html
+** \see http://msdn.microsoft.com/en-us/library/6e298fy4(VS.71).aspx
 */
-# if defined(YUNI_OS_MSVC) || defined(__INTEL_COMPILER)
-#	define YUNI_THREAD_LOCAL __declspec(thread)
-#	define YUNI_HAS_THREAD_LOCAL_STORAGE 1
+# if defined(YUNI_OS_BORLAND)
+#	define YUNI_THREAD_LOCAL_STORAGE(type)  type __thread
 # else
-#	define YUNI_THREAD_LOCAL __thread
-#	define YUNI_HAS_THREAD_LOCAL_STORAGE 1
+#	if defined(YUNI_OS_WINDOWS) && (defined(YUNI_OS_MSVC) || defined(__INTEL_COMPILER))
+#		define YUNI_THREAD_LOCAL_STORAGE(type)  __declspec(thread) type
+#	else
+#		define YUNI_THREAD_LOCAL_STORAGE(type)  __thread type
+#	endif
 # endif
 
 
