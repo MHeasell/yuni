@@ -240,6 +240,7 @@ void JobWriter::Add(const String& input, const String& htdocs, const ArticleData
 
 		// All word ids for the page
 		int* wordIDs = new int[newArticle.wordCount.size()];
+		float* weights = new float[newArticle.wordCount.size()];
 		int* countInArticle = new int[newArticle.wordCount.size()];
 
 		// Registering all new terms
@@ -253,6 +254,7 @@ void JobWriter::Add(const String& input, const String& htdocs, const ArticleData
 			const ArticleData::WordStat& stats = i->second;
 
 			countInArticle[wIx] = stats.count;
+			weights[wIx] = stats.coeff;
 
 			const AllWords::const_iterator it = gAllWords.find(word);
 			if (it == gAllWords.end())
@@ -266,8 +268,9 @@ void JobWriter::Add(const String& input, const String& htdocs, const ArticleData
 				wordIDs[wIx] = it->second;
 		}
 
-		DocIndex::RegisterWordIDsForASingleArticle(articleID, wordIDs, countInArticle, wIx);
+		DocIndex::RegisterWordIDsForASingleArticle(articleID, wordIDs, countInArticle, weights, wIx);
 
+		delete[] weights;
 		delete[] countInArticle;
 		delete[] wordIDs;
 	}

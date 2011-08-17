@@ -32,12 +32,15 @@ SEO = {
 				pages: SEO.terms[termID]
 			};
 			// updating weights
+			// console.log("register  " + t + ",    w:" + r.w);
 			for (var j = 0; j != r.pages.length; ++j)
-				r.pages[j].wResult = r.pages[j].w * r.w;
-				console.log("register  " + t + ",    w:" + r.w);
+			{
+				if (isNaN(r.pages[j].wResult))
+					r.pages[j].wResult = 1.0;
+				r.pages[j].wResult *= r.pages[j].w * r.w;
+			}
 			tokens.push(r);
 		}
-		console.log("------------");
 		for (var i = 0; i < tks.length; ++i)
 		{
 			if (tks[i] == "") // invalid token
@@ -67,10 +70,10 @@ SEO = {
 					}
 					var sub = (t.length > 2) && (nm.toLowerCase().indexOf(t) != -1);
 					if (sub)
-						registerToken(nm, i, 1.0);
+						registerToken(nm, i, 0.8);
 					else {
 						if (SEO.soundex(nm) == snex)
-							registerToken(nm, i, 1.0);
+							registerToken(nm, i, 0.7);
 					}
 				}
 			}
@@ -87,10 +90,7 @@ SEO = {
 						w: r.pages[j].wResult,
 					};
 				} else {
-					if (r.w > 0)
-						pages[articleid].wResult *= 1.3;
-					else
-						pages[articleid].wResult = 0;
+					pages[articleid].w *= r.pages[j].wResult;
 				}
 			}
 		}
@@ -113,8 +113,8 @@ SEO = {
 			for (var i in result) {
 				var r = result[i];
 				s += "<a href=\"" + root + SEO.articles[r.id].h  + "/" + index + "\">"
-					+ r.w + "<span>" + SEO.articles[r.id].t + "</span>  "
-					+ SEO.articles[r.id].h + "</a>";
+					+ "<span>" + SEO.articles[r.id].t + "</span>  "
+					+ SEO.articles[r.id].h + " &nbsp;</a>";
 			}
 			div.innerHTML = s;
 		}
