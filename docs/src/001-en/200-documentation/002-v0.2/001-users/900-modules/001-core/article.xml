@@ -31,9 +31,6 @@ Charset manipulation.
 <li><b>Yuni::Color :</b>
 Generic color manipulation and conversion.
 </li>
-<li><b>Yuni::CustomString :</b>
-Generic data array manipulation, basis for Yuni::String.
-</li>
 <li><b>Yuni::DynamicLibrary :</b>
 Dynamic library loading and access.
 </li>
@@ -91,7 +88,7 @@ Set of static computations (done at compile time).
 <li><b>Yuni::STL :</b>
 Additional algorithms for the standard template library.
 </li>
-<li><b>Yuni::String :</b>
+<li><b><a href="string/@{INDEX}">Yuni::String</a> :</b>
 Fast and full-featured character string.
 </li>
 <li><b>Yuni::System :</b>
