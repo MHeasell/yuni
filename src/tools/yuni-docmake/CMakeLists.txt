@@ -71,6 +71,14 @@ file(WRITE webpage.hxx "${HXX_FILE}")
 
 
 
+add_library(yuni-docmake-static-tinyxml STATIC
+	tinyxml/tinystr.cpp
+	tinyxml/tinystr.h
+	tinyxml/tinyxml.cpp
+	tinyxml/tinyxml.h
+	tinyxml/tinyxmlerror.cpp
+	tinyxml/tinyxmlparser.cpp
+	)
 
 set(src
 	sqlite/sqlite3.c
@@ -91,21 +99,28 @@ set(src
 	indexes.h
 	indexes.cpp
 	index-db.hxx
-
-	tinyxml/tinystr.cpp
-	tinyxml/tinystr.h
-	tinyxml/tinyxml.cpp
-	tinyxml/tinyxml.h
-	tinyxml/tinyxmlerror.cpp
-	tinyxml/tinyxmlparser.cpp
 	)
 
 # Build the in-tree version of yuni-config.
 add_executable(yuni-docmake ${src})
 
-target_link_libraries(yuni-docmake  yuni-static-core)
+target_link_libraries(yuni-docmake  yuni-static-core yuni-docmake-static-tinyxml)
 
 if(UNIX AND NOT APPLE)
 	# The DL library is required on Unixes for using SQlite
 	target_link_libraries(yuni-docmake  dl)
 endif()
+
+
+
+
+set(src_helper
+	convert.cpp
+	)
+
+# Build the in-tree version of yuni-config.
+add_executable(yuni-convert-xmldoxygen-to-doc ${src_helper})
+
+target_link_libraries(yuni-convert-xmldoxygen-to-doc  yuni-static-core yuni-docmake-static-tinyxml)
+
+
