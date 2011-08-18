@@ -280,21 +280,31 @@ td > h2:first-child {
 	text-justify			:distribute;
 	text-indent				:0em;
 }
-.content .class_name_pre {
+.syntaxhighlighter {
+}
+.content code {
+	color					:#33A;
+}
+.content pre {
 	padding					:0.5em 1em 0.5em 1em;
-	margin-left				:3em !important;
+	margin-left				:3.5em !important;
 	border					:1px solid #ddd;
 	border-top-style		:none;
 	border-bottom-style		:none;
 	border-right-style		:none;
 }
-.content .class_name_pre table {
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
+.content pre .keyword {
+	color:#922;
+	font-weight:bold;
 }
-.content code {
-	color					:#33A;
+.content pre .number {
+	color:#292;
+}
+.content pre .comment {
+	color:#33e;
+}
+.content pre .string {
+	color:green;
 }
 .content ul {
 }

@@ -136,6 +136,7 @@ namespace // anonymous
 				e->SetValue("pre");
 				e->RemoveAttribute("type");
 				e->SetAttribute("class", "brush: cpp; gutter: false; class-name: 'class_name_pre'");
+				e->SetAttribute("class", "cpp");
 			}
 		}
 
