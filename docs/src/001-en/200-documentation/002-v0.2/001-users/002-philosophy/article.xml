@@ -78,23 +78,23 @@ arguments). Of course if you simply want to use the default behaviour, you
 could write :
 </p>
 <source type="cpp">
-	class MyEventLoop : public Yuni::Core::EventLoop::IEventLoop&lt;MyEventLoop&gt;
-	{
-		Yuni::String pMyString;
-	};
+class MyEventLoop : public Yuni::Core::EventLoop::IEventLoop&lt;MyEventLoop&gt;
+{
+	Yuni::String pMyString;
+};
 </source>
 <p>
 But if you want to have full control over how to create your Yuni objects and
 do :
 </p>
 <source type="cpp">
-	class MyEventLoop : public Yuni::Core::EventLoop::IEventLoop&lt;MyEventLoop,
-		Yuni::Core::EventLoop::Flow::Timer&lt;MyEventLoop&gt;,
-		Yuni::Core::EventLoop::Statistics::None,
-		false&gt;
-	{
-		Yuni::CustomString&lt;256,false&gt; pMyString;
-	};
+class MyEventLoop : public Yuni::Core::EventLoop::IEventLoop&lt;MyEventLoop,
+	Yuni::Core::EventLoop::Flow::Timer&lt;MyEventLoop&gt;,
+	Yuni::Core::EventLoop::Statistics::None,
+	false&gt;
+{
+	Yuni::CustomString&lt;256,false&gt; pMyString;
+};
 </source>
 <p>
 Well you can. Because we care about you.
