@@ -133,10 +133,15 @@ namespace // anonymous
 			}
 			else if (tag == "source")
 			{
+				CustomString<16,false> type = e->Attribute("type");
 				e->SetValue("pre");
 				e->RemoveAttribute("type");
-				e->SetAttribute("class", "brush: cpp; gutter: false; class-name: 'class_name_pre'");
-				e->SetAttribute("class", "cpp");
+
+				type.toLower();
+				if (!type || type == "cpp" || type == "c++")
+					e->SetAttribute("class", "cpp");
+				else if (type == "lua")
+					e->SetAttribute("class", "lua");
 			}
 		}
 

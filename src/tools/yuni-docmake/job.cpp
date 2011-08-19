@@ -355,7 +355,7 @@ namespace // anonymous
 		}
 		if (name == "h1")
 		{
-			pushCoeff(2.5f);
+			pushCoeff(3.f);
 			return;
 		}
 		if (name == "h2")
@@ -365,12 +365,22 @@ namespace // anonymous
 		}
 		if (name == "h3")
 		{
-			pushCoeff(1.25f);
+			pushCoeff(1.7f);
 			return;
 		}
 		if (name == "h4")
 		{
-			pushCoeff(1.20f);
+			pushCoeff(1.60f);
+			return;
+		}
+		if (name == "h5")
+		{
+			pushCoeff(1.55f);
+			return;
+		}
+		if (name == "h6")
+		{
+			pushCoeff(1.50f);
 			return;
 		}
 		if (name == "b")
@@ -386,6 +396,16 @@ namespace // anonymous
 		if (name == "var")
 		{
 			pushCoeff(0.f);
+			return;
+		}
+		if (name == "pre")
+		{
+			pushCoeff(0.95f);
+			return;
+		}
+		if (name == "code")
+		{
+			pushCoeff(0.95f);
 			return;
 		}
 		pushCoeff(1.f);
