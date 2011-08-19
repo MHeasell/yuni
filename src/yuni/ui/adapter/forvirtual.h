@@ -21,6 +21,7 @@ namespace Adapter
 	public:
 		ForVirtual();
 		ForVirtual(Private::UI::Local::Adapter::ForRepresentation* forRepresentation);
+		virtual ~ForVirtual() {}
 
 	public:
 		virtual void sendShowWindow(const Yuni::UI::GUID& applicationID, IComponent::ID id) const = 0;

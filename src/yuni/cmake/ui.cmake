@@ -53,7 +53,7 @@ list(APPEND SRC_UI
 
 	# Local components
 	ui/local/controls/surface.h
-	ui/local/controls/glsurface.h ui/local/controls/glsurface.cpp
+	ui/local/controls/glsurface.h
 
 	# Adapter stuff
 	ui/local/adapter/forrepresentation.h
@@ -71,8 +71,40 @@ list(APPEND SRC_UI
 # OpenGL
 #
 find_package(OpenGL)
-set(YUNI_HAS_OPENGL  1)
-LIBYUNI_CONFIG_INCLUDE_PATH("both" "ui" "${OPENGL_INCLUDE_DIR}")
+set(YUNI_HAS_OPENGL  OPENGL_FOUND)
+
+# Found
+if (YUNI_HAS_OPENGL)
+	YMESSAGE("      Using OpenGL from system")
+	YMESSAGE("      -> OpenGL Libraries : ${OPENGL_INCLUDE_DIR}")
+
+	# yuni-config
+	LIBYUNI_CONFIG_INCLUDE_PATH("both" "audio" "${OPENGL_INCLUDE_DIR}")
+	LIBYUNI_CONFIG_LIB("both" "audio" "${OPENGL_LIBRARY}")
+	if (APPLE)
+		# Frameworks
+		LIBYUNI_CONFIG_FRAMEWORK("both" "ui" OpenGL)
+	endif ()
+	# Includes
+	set(CMAKE_REQUIRED_INCLUDES "${OPENGL_INCLUDE_DIR}")
+	# Check everything is in order
+	check_include_files("gl.h" YUNI_HAS_GL_GL_H)
+	check_include_files("GL/gl.h" YUNI_HAS_GL_GL_H)
+	check_include_files("OpenGL/gl.h" YUNI_HAS_GL_GL_H)
+	if (NOT YUNI_HAS_AL_AL_H)
+		set(YUNI_CMAKE_ERROR 1)
+		YMESSAGE(    "[!!] Impossible to find gl.h. Please check your profile.")
+		YMESSAGE(    " * Packages needed on Debian: libopengl-dev")
+		YMESSAGE(    " * Packages needed on Fedora: opengl-devel")
+	endif ()
+
+	# Our files that require GL to compile
+	list(APPEND SRC_UI ui/local/controls/glsurface.cpp)
+
+# Not found
+else ()
+	YFATAL("[!!] OpenGL support was not found !")
+endif ()
 
 
 #
