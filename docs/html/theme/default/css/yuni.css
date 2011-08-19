@@ -256,7 +256,7 @@ body,html {
 }
 .content h1 {
 	font-size				:12pt;
-	margin					:45pt 0 0 0;
+	margin					:47pt 0 15pt 0;
 	text-shadow				:2px 2px 2px #ddd;
 	color:#400;
 }
