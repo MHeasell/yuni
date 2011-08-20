@@ -88,9 +88,7 @@ Set of static computations (done at compile time).
 <li><b>Yuni::STL :</b>
 Additional algorithms for the standard template library.
 </li>
-<li><b><a href="string/@{INDEX}">Yuni::String</a> :</b>
-Fast and full-featured character string.
-</li>
+<li><a href="string/@{INDEX}">Yuni::String</a> : Fast and full-featured character string.</li>
 <li><b>Yuni::System :</b>
 System capabilities detection and replacements, and OS-dependent features.
 </li>
