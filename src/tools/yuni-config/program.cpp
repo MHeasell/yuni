@@ -254,10 +254,10 @@ namespace Yuni
 				if (String::npos != i->find_first_of(YUNI_LIBYUNI_CONFIG_SEPARATORS))
 				{
 					// This item seems to be actually a list of several requested modules
-					// We will explode the string to get the real list
+					// We will split the string to get the real list
 					item = *i;
 					pOptModules.erase(i);
-					item.explode(pOptModules, YUNI_LIBYUNI_CONFIG_SEPARATORS, false, false, true);
+					item.split(pOptModules, YUNI_LIBYUNI_CONFIG_SEPARATORS, false, false, true);
 					mustContinue = true;
 					break;
 				}

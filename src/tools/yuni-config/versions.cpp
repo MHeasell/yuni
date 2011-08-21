@@ -122,7 +122,7 @@ namespace VersionInfo
 				if (key == "version.target")
 					info.compilationMode = value;
 				if (key == "modules.available")
-					value.explode(info.modules, ";\"', \t", false);
+					value.split(info.modules, ";\"', \t", false);
 				if (key == "support.opengl")
 					info.supportOpenGL = value.to<bool>();
 				if (key == "support.directx")
