@@ -9,7 +9,7 @@ a given feature, we want to provide several exchangeable behaviours.
 <p>
 For example, we can imagine a few ways to grant an access or not :
 </p>
-<source>
+<source type="cpp">
 struct IAllowAccessStrategy
 {
 	virtual bool allowed(const char* user, const char* pass) = 0;
@@ -46,7 +46,7 @@ behaviours have to inherit a common strategy. That is because the call will
 look like this :
 </p>
 
-<source>
+<source type="cpp">
 class AccountManager
 {
 public:
@@ -85,7 +85,7 @@ and cannot be modified during execution.
 <p>
 Let us present the above example with policies :
 </p>
-<source>
+<source type="cpp">
 struct Never
 {
 	static bool Allowed(const char* user, const char* pass)
@@ -129,7 +129,7 @@ offered by an algorithm that can accept any conforming object without its
 having to implement an explicit interface is non-negligible. Consider the
 following :
 </p>
-<source>
+<source type="cpp">
 struct Comparer
 {
 	template&lt;class T, class U&gt;
@@ -156,7 +156,7 @@ defines a size() method with a compatible return type. This mechanism of implici
 interface conformance is what really allows policies to work. Now that this is
 clear, here is how we use the policies we defined before :
 </p>
-<source>
+<source type="cpp">
 template&lt;class AccessPolicyT = Policy::CheckValidAccount&gt;
 class AccountManager
 {
@@ -222,11 +222,11 @@ choose one of the proposed policies Yuni provides for a given behaviour.
 For example, you can choose to use the default values for a smart pointer and
 simply write :
 </p>
-<source>
+<source type="cpp">
 SmartPtr&lt;MyClass&gt; ptr;
 </source>
 <p>Or you can choose to configure some or all of the policies, e.g. :</p>
-<source>
+<source type="cpp">
 SmartPtr&lt;MyClass, Policy::Ownership::DestructiveCopy, Policy::Checking::NeverNull&gt; ptr;
 </source>
 
