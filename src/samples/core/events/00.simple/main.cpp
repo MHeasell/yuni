@@ -20,7 +20,7 @@ Event<void (const String&, const String&)> emailHasBeenReceived;
 ** \brief A subscriber class
 **
 ** To be able to receive events, the class must inherit from the base class
-** `Yuni::Event::Receiver`
+** `Yuni::IEventObserver`
 */
 class Subscriber : public IEventObserver<Subscriber>
 {
