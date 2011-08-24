@@ -1,6 +1,93 @@
 <title>Smart pointers</title>
 
+<h1>The Problems</h1>
+
+<h2>Memory management</h2>
+
 <p>
-TODO
+In C++, all data allocation and deallocation has to be done by hand using
+<code>new</code> and <code>delete</code>.
+Although this allows for a lot of control over object lifetime, this management
+unfortunately becomes very tedious and error-prone on the scale of a large
+program. In particular, some deletions might be forgotten and lead to memory
+leaks, or the program might even crash if a pointer is deleted twice.
 </p>
 
+<h2>Threading</h2>
+
+<p>
+The main problem with multi-threaded applications is to synchronize access to
+resources shared by several threads. Each time an object is used, it has to be
+properly protected by one of many mechanisms to avoid some dreadful problems
+(deadlocks, race conditions and who-knows-what-else). This protection has a
+high programming cost, since it is up to the developer to add for example the
+specific mutex locking each time the resource is being used. This is a
+time-consuming and error-prone process that we would gladly do without.
+</p>
+
+
+<h1>Smart Pointers</h1>
+
+<h2>Definition</h2>
+
+<p>
+A smart pointer is a class that has pointer semantics, and hides a real pointer
+behind a layer that allows additional data access management.
+</p>
+
+<h2>Various Types</h2>
+
+<h2>Some Implementations</h2>
+
+<p>
+Some well-known implementations of a smart pointer exist :
+</p>
+<ul>
+<li>The <a href="http://www.cplusplus.com/reference/std/memory/auto_ptr/">Standard Template Library</a> offers auto_ptr (which is a scoped pointer)</li>
+<li><a href="http://www.boost.org/doc/libs/1_47_0/libs/smart_ptr/smart_ptr.htm">Boost</a> offers shared_ptr, scoped_ptr, intrusive_ptr, weak_ptr, and some array versions of the same</li>
+<li><a href="http://loki-lib.sourceforge.net/index.php">Loki</a> offers Loki::SmartPtr, a generic policy-configured smart pointer from which Yuni's is inspired</li>
+</ul>
+<p>
+For a discussion of these three implementations and how they differ, you may read Herb Sutter's <a href="http://drdobbs.com/184403837/">The New C++:Smart(er) Pointers</a>.
+</p>
+
+<h1>Smart Pointers in Yuni</h1>
+
+<p>
+For the moment, Yuni only provides an implementation of a shared pointer.
+The smart pointer class is located in the <code>yuni/core/smartptr.h</code>
+header and has the following name :
+</p>
+<ul>
+<li><code>Yuni::SmartPtr</code></li>
+</ul>
+<p>
+It is a class template that uses <a href="../policies/index.html">Policies</a>
+to allow for user customization.
+</p>
+
+<p>
+Some examples of <code>Yuni::SmartPtr</code> instantiations follow :
+</p>
+<source type="cpp">
+#include &lt;yuni/core/smartptr.h&gt;
+
+class MyClass
+{};
+
+int main()
+{
+	// Smart pointer on type MyClass with default policy values
+	Yuni::SmartPtr&lt;MyClass&gt; ptr1;
+	// Smart pointer on type MyClass with destructive copy, and rejecting null values.
+	Yuni::SmartPtr&lt;MyClass, Policy::Ownership::DestructiveCopy, Policy::Checking::NeverNull&gt; ptr2;
+	// Smart pointer on type MyClass with destructive copy, and rejecting null values.
+	Yuni::SmartPtr&lt;MyClass, Policy::Ownership::DestructiveCopy, Policy::Checking::NeverNull&gt; ptr2;
+	return 0;
+}
+</source>
+<p>
+It is important to note that depending on the Storage Policy, it may be
+necessary to have complete type in order to create a smart pointer containing
+the type.
+</p>
