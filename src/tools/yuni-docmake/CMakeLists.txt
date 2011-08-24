@@ -116,6 +116,8 @@ endif()
 
 set(src_helper
 	convert.cpp
+	logs.h
+	logs.cpp
 	)
 
 # Build the in-tree version of yuni-config.

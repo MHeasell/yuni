@@ -165,12 +165,14 @@ namespace // anonymous
 	}
 
 
-	bool XMLVisitor::Visit(const TiXmlText& text)
+	bool XMLVisitor::Visit(const TiXmlText&)
 	{
+		/*
 		const TIXML_STRING& name = text.ValueTStr();
 		String v = name.c_str();
 		if (v.contains("rarr"))
 			std::cout << v << std::endl;
+			*/
 		return true;
 	}
 

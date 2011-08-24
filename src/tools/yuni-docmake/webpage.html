@@ -25,9 +25,7 @@
 <link rel='stylesheet' type='text/css' media='all' href="@{ROOT}/theme/default/css/yuni.css" />
 <link rel='stylesheet' type='text/css' media='print' href="@{ROOT}/theme/default/css/yuni-print.css" />
 
-<link rel="stylesheet" href="@{ROOT}/theme/default/breadcrumb/styles/BreadCrumb.css" type="text/css" />
 <script type="text/javascript" src="@{ROOT}/theme/default/breadcrumb/js/jquery.js"></script>
-<script src="@{ROOT}/theme/default/breadcrumb/js/jquery.easing.1.3.js" type="text/javascript"></script>
 <script src="@{ROOT}/theme/default/breadcrumb/js/jquery.jBreadCrumb.1.1.js" type="text/javascript"></script>
 
 <!-- Offline search -->
@@ -68,38 +66,17 @@ function toggle_toc() {
 </script>
 
 <div class="layout">
-<!--
-<tr>
-<td class="leftspace"></td>
-*** <td class="logo"><img src="@{ROOT}/theme/default/images/logo.png" alt="Yuni Logo" /></td>
-<td class="title"><span class="unbreakable"><strong>Yuni </strong>Framework</span></td>
-<td class="links">
-<div id="mainmenu"></div>
-</td>
-<td class="space"></td>
-</tr>
--->
-
-<!-- space -->
-<!--
-<tr>
-<td></td><td></td><td class="vspace"></td><td></td>
-</tr>
--->
-
 
 <div class="laycontent">
 
 
 
 <h1>@{TITLE}</h1>
-<div class="breadCrumbHolder module">
-<div id="breadCrumb0" class="breadCrumb module">
+<div class="path">
 <ul>
-<li><a href="@{ROOT}/@{INDEX}">Home</a></li>
+<li class="home"><a class="home" href="@{ROOT}/@{INDEX}">&nbsp;</a></li>
 @{URL_PARTS}
 </ul>
-</div>
 </div>
 
 

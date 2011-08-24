@@ -185,24 +185,16 @@ body,html {
 .toc a:hover {
 	background-color		:#333;
 	color					:white;
-
 	border:1px solid #384253 !important;
-	/*
-	padding:0.2em 0.4em 0.2em 0.4em !important;
-	padding-left			:18px !important;*/
-
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-
 	background-color:#707f97 !important;
 	color:white !important;
-
 	-moz-box-shadow: 0 2px 5px #bbb;
 	-webkit-box-shadow: 0 2px 5px #bbb;
 	box-shadow: 0 2px 5px #bbb;
 	text-shadow				:2px 2px 2px #444;
-
 }
 .modified {
 	padding-top				:200pt;
@@ -406,12 +398,7 @@ td > h2:first-child {
 	background-color		:#444;
 	color					:white;
 	border-color			:black;
-
 	border:1px solid #384253 !important;
-	/*
-	padding:0.2em 0.4em 0.2em 0.4em !important;
-	padding-left			:18px !important;*/
-
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
@@ -474,4 +461,60 @@ td > h2:first-child {
 	text-shadow				:2px 2px 2px #bbb;
 	color					:#245079 !important;
 	padding-bottom:0.5em;
+}
+.path {
+	padding-bottom:2em;
+}
+.path ul {
+	background-image:url('../images/home.png');
+	background-repeat:no-repeat;
+	background-position:left center;
+	padding: 0;
+	margin:0;
+}
+.path ul li {
+	display:block;
+	float:left;
+	background-image:url('../images/separator.png');
+	background-repeat:no-repeat;
+	background-position:-2px center;
+	color:#224f7b;
+	padding:0 0px 0 12px;
+	margin:0;
+	font-size:8.5pt;
+}
+.path ul li a {
+	text-decoration:none;
+	color:#224f7b;
+	border:1px solid transparent;
+	padding:0.2em 0.5em 0.2em 0.5em;
+}
+.path ul li.home {
+	background-image:none !important;
+	padding:0 !important;
+}
+.path ul li a.home {
+	background-image:url('../images/home.png') !important;
+	background-repeat:no-repeat;
+	background-position:center center;
+	min-width:28px;
+	width:28px;
+	padding-left:8px;
+	padding-right:8px;
+}
+
+.path ul li a:hover {
+	background-color		:#333;
+	color					:white;
+	border-color			:black;
+	border:1px solid #384253 !important;
+
+	background-color:#666 !important;
+	color:white !important;
+
+	-moz-box-shadow: 0 2px 5px #bbb;
+	-webkit-box-shadow: 0 2px 5px #bbb;
+	box-shadow: 0 2px 5px #bbb;
+	text-shadow				:2px 2px 2px #444;
+
 }

@@ -62,7 +62,7 @@ header and has the following name :
 <li><code>Yuni::SmartPtr</code></li>
 </ul>
 <p>
-It is a class template that uses <a href="../policies/index.html">Policies</a>
+It is a class template that uses <a href="../policies/@{INDEX}">Policies</a>
 to allow for user customization.
 </p>
 
