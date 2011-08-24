@@ -38,9 +38,9 @@ int main(int argc, char** argv)
 	logs.info() << "Extracting SEO data";
 	{
 		queueService.start();
+		queueService.wait();
 		while (CompileJob::SomeRemain())
 			Yuni::SuspendMilliSeconds(150);
-		queueService.wait();
 		queueService.stop();
 	}
 
@@ -54,10 +54,10 @@ int main(int argc, char** argv)
 	{
 		JobWriter::PushAllInQueue();
 		queueService.start();
+		queueService.wait();
 		while (JobWriter::SomeRemain())
 			Yuni::SuspendMilliSeconds(150);
 
-		queueService.wait();
 		queueService.stop();
 
 		logs.info() << "Generating sitemap";
