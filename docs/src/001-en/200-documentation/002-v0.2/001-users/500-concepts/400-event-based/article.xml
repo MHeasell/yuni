@@ -168,7 +168,7 @@ in the calling thread.
 </ul>
 <p>
 For both policies, it is possible to write your own as long as they conform to
-the implicit interface (see <a href="../100-policies/article.xml">Policies</a>).
+the implicit interface (see <a href="../policies/index.html">Policies</a>).
 </p>
 
 <p>
