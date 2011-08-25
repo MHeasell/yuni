@@ -26,18 +26,127 @@ time-consuming and error-prone process that we would gladly do without.
 </p>
 
 
-<h1>Smart Pointers</h1>
-
-<h2>Definition</h2>
+<h1>Definition</h1>
 
 <p>
-A smart pointer is a class that has pointer semantics, and hides a real pointer
-behind a layer that allows additional data access management.
+A smart pointer is a class that has pointer semantics, and hides the real data
+behind a layer that allows additional data access management. The way the data
+are stored and how they are precisely managed determines the type of smart
+pointer.
 </p>
 
-<h2>Various Types</h2>
+<h1>Smart Pointer Types</h1>
 
-<h2>Some Implementations</h2>
+<p>
+Several types of smart pointer exist. They have different lifetimes, different
+ways to consider the pointer's ownership. For this reason, each one corresponds
+to a precise usage, and is only adapted to a limited number of situations.
+Using an improper smart pointer to solve a problem may bring a lot more
+problems than you already had. For this listing, we shall use denominations
+that are fairly common, although other literature may use other terms.
+</p>
+
+<h2>Scoped pointer</h2>
+<p>
+As the name indicates, the scope pointer carries the internal pointer only over
+a limited scope. It is meant to be created on the stack to hold an allocated
+pointer. It will then simply delete the pointer when going out of scope. A
+typical usage of the scoped pointer is object return values. Consider the
+following :
+</p>
+<source type="cpp">
+class A;
+
+A* foo();
+
+int main()
+{
+	A* a = foo();
+	// Should I delete a ?
+	return 0;
+}
+</source>
+<p>
+It is impossible to know whether we should delete variable <code>a</code>
+without reading the implementation of function <code>foo</code>. To solve this,
+<code>foo</code> could return a scoped pointer.
+</p>
+<source type="cpp">
+ScopedPtr&lt;A&gt; foo();
+
+int main()
+{
+	ScopedPtr&lt;A&gt; a = foo();
+	return 0;
+}
+</source>
+<p>
+Here, by returning a scoped pointer, <code>foo</code> specifically surrenders
+the ownership of the returned pointer. When going out of scope, the scoped
+pointer will delete its internal <code>A*</code>. For those who wondered,
+by definition smart pointers are small objects and can be returned on the
+stack and copied without too much overhead. The scoped pointer has full
+ownership of the internal pointer, so you should never have several scoped
+pointers managing the same data.
+</p>
+
+<h2>Shared pointer</h2>
+<p>
+A shared pointer allows to share ownership of the internal pointer with other
+shared pointers. The data will be deleted when the last shared pointer managing
+it is destroyed. For this reason, the lifetime of the data is linked to the
+lifetime of all the shared pointers managing it. Implementations of the shared
+pointer can rely on reference counting or on a linked list of shared pointers.
+This is clearly the most useful of smart pointers as it caters to most
+situations. It allows for full-scale garbage collection without the massive
+overhead of a garbage collector, and also helps a lot with multi-threading.
+</p>
+<source type="cpp">
+struct A
+{
+	void doSomething() {}
+};
+
+// A new shared pointer is created that copies the value parameter
+void foo(SharedPtr&lt;A&gt; ptr2)
+{
+	// On entry, reference count is 2
+
+	// Do something with our object
+	ptr2->doSomething();
+
+} // "ptr2" goes out of scope, reference count decreases to 1
+
+int main()
+{
+	// Create a shared pointer on an allocated instance of A
+	SharedPtr&lt;A&gt; ptr(new A());
+	// Here, the reference count is 1
+	foo(ptr);
+	// Do something with our object again
+	ptr->doSomething();
+	return 0;
+} // "ptr" goes out of scope, reference count is 0, the object is deleted
+</source>
+<p>
+Notice that if we had used a scope pointer here instead of the shared pointer,
+our object would have been deleted when exiting function <code>foo</code>. This
+would have lead to a crash on the second call to <code>A::doSomething</code>.
+</p>
+
+<h2>Weak Pointer</h2>
+
+<p>
+A weak pointer acts as an observer of an object. As such, it does not take
+ownership of the data. It is meant to be used in conjunction with one or
+several shared pointers on the same object. When the last shared pointer is
+destroyed, the object is released and all weak pointers to it become invalid.
+Depending on the implementation, they can be set to null, they can throw on
+access or simply have undefined behaviour.
+</p>
+
+
+<h1>Smart Pointer Implementations</h1>
 
 <p>
 Some well-known implementations of a smart pointer exist :
@@ -70,6 +179,7 @@ to allow for user customization.
 Some examples of <code>Yuni::SmartPtr</code> instantiations follow :
 </p>
 <source type="cpp">
+#include &lt;yuni/yuni.h&gt;
 #include &lt;yuni/core/smartptr.h&gt;
 
 class MyClass
@@ -81,8 +191,9 @@ int main()
 	Yuni::SmartPtr&lt;MyClass&gt; ptr1;
 	// Smart pointer on type MyClass with destructive copy, and rejecting null values.
 	Yuni::SmartPtr&lt;MyClass, Policy::Ownership::DestructiveCopy, Policy::Checking::NeverNull&gt; ptr2;
-	// Smart pointer on type MyClass with destructive copy, and rejecting null values.
-	Yuni::SmartPtr&lt;MyClass, Policy::Ownership::DestructiveCopy, Policy::Checking::NeverNull&gt; ptr2;
+	// Smart pointer on type MyClass with no MT support, no conversion, array storage, and const propagation.
+	Yuni::SmartPtr&lt;MyClass, Policy::Ownership::ReferenceCounted, Policy::Checking::None,
+		Policy::Conversion::Disallow, Policy::Storage::Array, Policy::Constness::PropagateConst&gt; ptr3;
 	return 0;
 }
 </source>
