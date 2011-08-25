@@ -2,9 +2,7 @@
 # define __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_HXX__
 
 # include <ctype.h>
-# ifndef NDEBUG
-#	include <cassert>
-# endif
+# include <cassert>
 # ifdef YUNI_HAS_VA_COPY
 #	include <stdarg.h>
 # endif // YUNI_HAS_VA_COPY
