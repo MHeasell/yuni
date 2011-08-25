@@ -152,9 +152,9 @@ access or simply have undefined behaviour.
 Some well-known implementations of a smart pointer exist :
 </p>
 <ul>
-<li>The <a href="http://www.cplusplus.com/reference/std/memory/auto_ptr/">Standard Template Library</a> offers auto_ptr (which is a scoped pointer)</li>
-<li><a href="http://www.boost.org/doc/libs/1_47_0/libs/smart_ptr/smart_ptr.htm">Boost</a> offers shared_ptr, scoped_ptr, intrusive_ptr, weak_ptr, and some array versions of the same</li>
+<li><a href="http://www.boost.org/doc/libs/1_47_0/libs/smart_ptr/smart_ptr.htm">Boost</a> offers shared_ptr, scoped_ptr, intrusive_ptr, weak_ptr, and some array versions of the same. These classes should be directly available in C++0x</li>
 <li><a href="http://loki-lib.sourceforge.net/index.php">Loki</a> offers Loki::SmartPtr, a generic policy-configured smart pointer from which Yuni's is inspired</li>
+<li>The <a href="http://www.cplusplus.com/reference/std/memory/auto_ptr/">Standard Template Library</a> offers auto_ptr (which is a scoped pointer - deprecated in C++0x)</li>
 </ul>
 <p>
 For a discussion of these three implementations and how they differ, you may read Herb Sutter's <a href="http://drdobbs.com/184403837/">The New C++:Smart(er) Pointers</a>.
@@ -163,7 +163,7 @@ For a discussion of these three implementations and how they differ, you may rea
 <h1>Smart Pointers in Yuni</h1>
 
 <p>
-For the moment, Yuni only provides an implementation of a shared pointer.
+Yuni provides an implementation of a shared pointer.
 The smart pointer class is located in the <code>yuni/core/smartptr.h</code>
 header and has the following name :
 </p>
@@ -202,3 +202,69 @@ It is important to note that depending on the Storage Policy, it may be
 necessary to have complete type in order to create a smart pointer containing
 the type.
 </p>
+
+<p>
+Because each class may require some special treatments which might change over
+time, the Yuni's coding style proposes the use of the typedef <code>Ptr</code>
+for any reference to a smart pointer.
+</p>
+<source type="cpp">
+#include &lt;yuni/yuni.h&gt;
+#include &lt;yuni/core/smartptr.h&gt;
+#include &lt;iostream&gt;
+
+
+class Fibonacci
+{
+public:
+	//! The most suitable smart pointer for the class
+	Yuni::SmartPtr&lt;Fibonacci, Yuni::Policy::Ownership::ReferenceCounted> Ptr;
+
+public:
+	Fibonacci() :
+		result(0)
+	{
+	}
+
+	void calculateNth(unsigned int n)
+	{
+		unsigned int fn1 = 1;
+		unsigned int fn  = 0;
+
+		for (unsigned int i = 0; i != n; ++i)
+		{
+			unsigned int tmpFn1 = fn1;
+			unsigned int tmpFn  = fn + fn1;
+			fn1 = tmpFn1;
+			fn  = tmpFn;
+		}
+		result = fn;
+	}
+
+public:
+	unsigned int result;
+};
+
+
+void PrintResults(Fibonacci::Ptr fibonacci)
+{
+	std::cout &lt;&lt; "Result : " &lt;&lt; fibonacci->result &lt;&lt; std::endl;
+}
+
+
+int main()
+{
+	// A class, with a non thread-safe smart pointer.
+	//
+	// We don't need thread safe variables since the program has only one thread.
+	// However, things may evolve in the future. We will only have to modify the
+	// typedef 'Ptr' without changing another line of code.
+	Fibonacci::Ptr  fibonacci = new Fibonacci();
+	// Compute the 12th fibonacci number
+	fibonacci->calculateNth(12);
+
+	// Example of another class or function which would use our class
+	PrintResults(fibonacci);
+	return 0;
+}
+</source>
