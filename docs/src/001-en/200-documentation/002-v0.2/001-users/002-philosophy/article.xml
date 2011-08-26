@@ -45,7 +45,8 @@ provided.
 </li>
 <li><b>Versatility :</b>
 Yuni must be able to adapt to your needs. We do that by offering statically
-configurable classes (using templates, and particularly policies),
+configurable classes (using templates, and particularly
+<a href="../concepts/policies/@{INDEX}">policies</a>),
 dynamically configurable behaviours (using method arguments), and by
 providing	an extension mechanism that you can use to add features to some
 Yuni objects. Also, Yuni adapts to your level by offering good default values
@@ -142,9 +143,9 @@ All those are reasonably valid points. Now here is how Yuni tries to compensate
 for these drawbacks :
 </p>
 <ol>
-<li>Yuni offers Smart Pointers, which bring easier and safer memory management.
-  They also avoid memory leaks without the massive overhead of a garbage
-  collector.
+<li>Yuni offers <a href="../concepts/smartptr/@{INDEX}">Smart Pointers</a>,
+  which bring easier and safer memory management. They also avoid memory leaks
+  without the massive overhead of a garbage collector.
 </li>
 <li>Efficiency being one of our prime concerns, Yuni's code is supposed to be
   reasonably fast. However incorrect use of a given feature can lead to

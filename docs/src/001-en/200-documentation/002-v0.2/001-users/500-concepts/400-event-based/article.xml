@@ -117,7 +117,8 @@ are the useful classes included from <code>yuni/core/event.h</code> :
 <ul>
 <!-- TODO : Add links to the API -->
 <li><code>Yuni::Event</code> is the class representing an event</li>
-<li><code>Yuni::IEventObserver</code> is an abstract base class with a CRTP for event listeners</li>
+<li><code>Yuni::IEventObserver</code> is an abstract base class with a
+<a href="../../../glossary/@{INDEX}">CRTP</a> for event listeners</li>
 </ul>
 <p>
 <!-- For the moment, point to the repository, since the samples are not in the web site -->
@@ -134,10 +135,12 @@ main program loop, or in a new thread. The corresponding class can be found in
 </p>
 <ul>
 <!-- TODO : Add links to the API -->
-<li><code>Yuni::Core::EventLoop::IEventLoop</code> is an abstract base class with a CRTP for event loops</li>
+<li><code>Yuni::Core::EventLoop::IEventLoop</code> is an abstract base class
+with a <a href="../../../glossary/@{INDEX}">CRTP</a> for event loops</li>
 </ul>
 <p>
-In addition to its first template parameter used for the CRTP,
+In addition to its first template parameter used for the
+<a href="../../../glossary/@{INDEX}">CRTP</a>,
 <code>IEventLoop</code> has three other template parameters that act as options
 to configure its behaviour :
 </p>
@@ -168,7 +171,7 @@ in the calling thread.
 </ul>
 <p>
 For both policies, it is possible to write your own as long as they conform to
-the implicit interface (see <a href="../policies/index.html">Policies</a>).
+the implicit interface (see <a href="../policies/@{INDEX}">Policies</a>).
 </p>
 
 <p>
