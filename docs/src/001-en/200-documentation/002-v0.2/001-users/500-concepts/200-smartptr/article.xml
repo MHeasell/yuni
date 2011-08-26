@@ -141,9 +141,49 @@ A weak pointer acts as an observer of an object. As such, it does not take
 ownership of the data. It is meant to be used in conjunction with one or
 several shared pointers on the same object. When the last shared pointer is
 destroyed, the object is released and all weak pointers to it become invalid.
-Depending on the implementation, they can be set to null, they can throw on
-access or simply have undefined behaviour.
+Depending on the implementation, they can be set to null, throw on access or
+simply have undefined behaviour. A possible usage example could be :
 </p>
+<source type="cpp">
+struct A
+{
+	A() { valid = false; }
+	bool valid;
+};
+
+struct Observer
+{
+	Observer(Shared&lt;A&gt; sharedA)
+	{
+		// Get a weak pointer on our object
+		weakA = sharedA;
+	}
+
+	bool finished()
+	{
+		// A good smart pointer should overload operator!= to handle this
+		if (weakA != nullptr)
+			return weakA-&gt;valid;
+	}
+
+	WeakPtr&lt;A&gt; weakA;
+};
+
+int main()
+{
+	SharedPtr&lt;A&gt; sharedA(new A());
+	Observer observer(sharedA);
+
+	for (uint i = 0; i &lt; 200; ++i)
+	{
+		if (i &gt; 42)
+			sharedA-&gt;valid = true;
+		if (observer.finished())
+			break;
+	}
+	return 0;
+}
+</source>
 
 
 <h1>Smart Pointer Implementations</h1>
@@ -152,12 +192,14 @@ access or simply have undefined behaviour.
 Some well-known implementations of a smart pointer exist :
 </p>
 <ul>
-<li><a href="http://www.boost.org/doc/libs/1_47_0/libs/smart_ptr/smart_ptr.htm">Boost</a> offers shared_ptr, scoped_ptr, intrusive_ptr, weak_ptr, and some array versions of the same. These classes should be directly available in C++0x</li>
+<li><a href="http://www.boost.org/doc/libs/1_47_0/libs/smart_ptr/smart_ptr.htm">Boost</a> offers several types of smart pointers. These classes should be directly available in C++0x</li>
 <li><a href="http://loki-lib.sourceforge.net/index.php">Loki</a> offers Loki::SmartPtr, a generic policy-configured smart pointer from which Yuni's is inspired</li>
 <li>The <a href="http://www.cplusplus.com/reference/std/memory/auto_ptr/">Standard Template Library</a> offers auto_ptr (which is a scoped pointer - deprecated in C++0x)</li>
 </ul>
 <p>
-For a discussion of these three implementations and how they differ, you may read Herb Sutter's <a href="http://drdobbs.com/184403837/">The New C++:Smart(er) Pointers</a>.
+For a discussion of these three implementations and how they differ, you may
+read Herb Sutter's <a href="http://drdobbs.com/184403837/">The New C++:Smart(er)
+Pointers</a>.
 </p>
 
 <h1>Smart Pointers in Yuni</h1>
@@ -167,12 +209,13 @@ Yuni provides an implementation of a shared pointer.
 The smart pointer class is located in the <code>yuni/core/smartptr.h</code>
 header and has the following name :
 </p>
+<!-- TODO : add the API link -->
 <ul>
 <li><code>Yuni::SmartPtr</code></li>
 </ul>
 <p>
 It is a class template that uses <a href="../policies/@{INDEX}">Policies</a>
-to allow for user customization.
+to allow user customization.
 </p>
 
 <p>
@@ -205,8 +248,8 @@ the type.
 
 <p>
 Because each class may require some special treatments which might change over
-time, the Yuni's coding style proposes the use of the typedef <code>Ptr</code>
-for any reference to a smart pointer.
+time, Yuni's coding style recommends the use of a <code>Ptr</code> typedef for
+any reference to a smart pointer.
 </p>
 <source type="cpp">
 #include &lt;yuni/yuni.h&gt;
@@ -218,7 +261,7 @@ class Fibonacci
 {
 public:
 	//! The most suitable smart pointer for the class
-	Yuni::SmartPtr&lt;Fibonacci, Yuni::Policy::Ownership::ReferenceCounted> Ptr;
+	typedef Yuni::SmartPtr&lt;Fibonacci, Yuni::Policy::Ownership::ReferenceCounted> Ptr;
 
 public:
 	Fibonacci() :
