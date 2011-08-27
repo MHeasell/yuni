@@ -391,7 +391,7 @@ namespace CustomString
 				# else
 				out = (float)strtof(cstr, &pend);
 				# endif
-				return (pend != nullptr && '\0' == *pend);
+				return (pend && '\0' == *pend);
 			}
 			out = 0.f;
 			return true;
