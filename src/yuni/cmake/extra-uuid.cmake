@@ -2,7 +2,18 @@ YMESSAGE_MODULE("UUID")
 
 LIBYUNI_CONFIG_LIB("both" "uuid" "yuni-static-uuid")
 LIBYUNI_CONFIG_DEPENDENCY("uuid" "core") # core is required
+if(NOT APPLE AND UNIX)
+	# -luuid
+	LIBYUNI_CONFIG_LIB("both", "uuid", "uuid")
+endif()
 
+check_include_files("uuid/uuid.h" YUNI_HAS_UUID_H)
+if(NOT YUNI_HAS_UUID_H)
+	set(YUNI_CMAKE_ERROR 1)
+	YMESSAGE(    "[!!] Impossible to find uuid/uuid.h.")
+	YMESSAGE(    " * Packages needed on Debian: libuuid1, uuid-dev")
+	YMESSAGE(    " * Packages needed on redhat: libuuid-devel")
+endif()
 
 
 add_library(yuni-static-uuid STATIC

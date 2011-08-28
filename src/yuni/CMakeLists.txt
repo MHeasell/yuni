@@ -145,5 +145,6 @@ if("${YUNI_CMAKE_ERROR}" GREATER 0)
 	YMESSAGE("")
 	YERROR("An error has occured. Aborting.")
 	YMESSAGE("")
+	message(FATAL_ERROR  "Aborting.")
 endif()
 
