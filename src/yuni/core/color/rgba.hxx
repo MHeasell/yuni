@@ -485,8 +485,9 @@ namespace CustomString
 {
 
 	template<class CustomStringT, class T>
-	struct Append<CustomStringT, Yuni::Color::RGBA<T> >
+	class Append<CustomStringT, Yuni::Color::RGBA<T> >
 	{
+	public:
 		static void Perform(CustomStringT& s, const Yuni::Color::RGBA<T>& rhs)
 		{
 			rhs.print(s);

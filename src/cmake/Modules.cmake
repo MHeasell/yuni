@@ -37,6 +37,8 @@ set(YUNI_MODULE_ALGORITHMS                false)
 
 # Markdown
 set(YUNI_MODULE_EXTRA_MARKDOWN            false)
+# UUID
+set(YUNI_MODULE_EXTRA_UUID                false)
 
 # Doc
 set(YUNI_MODULE_DOCUMENTATION             false)
@@ -67,6 +69,7 @@ set(YUNI_MODULE_LIST
 	ldo
 	# extra
 		markdown
+		uuid
 	docs
 	)
 
@@ -109,6 +112,7 @@ if(MODULES)
 			set(YUNI_MODULE_UI true)
 			set(YUNI_MODULE_ALGORITHMS true)
 			set(YUNI_MODULE_EXTRA_MARKDOWN true)
+			set(YUNI_MODULE_EXTRA_ALL true)
 			set(YUNI_MODULE_LDO true)
 			set(YUNI_MODULE_DOCUMENTATION true)
 			set(YUNI_TESTS true)
@@ -283,6 +287,16 @@ if(MODULES)
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_EXTRA_MARKDOWN false)
 		endif()
+		# uuid
+		if("${it}" STREQUAL "uuid")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_EXTRA_UUID true)
+		endif()
+		# -uuid
+		if("${it}" STREQUAL "-uuid")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_EXTRA_UUID false)
+		endif()
 
 		# docs
 		if("${it}" STREQUAL "docs" OR "${it}" STREQUAL "doc")
@@ -327,6 +341,7 @@ if(MODULES)
 		YMESSAGE("    -/+vm          : The Virtual machine")
 		YMESSAGE(" The extra modules")
 		YMESSAGE("    -/+markdown    : Markdown (default: disabled)")
+		YMESSAGE("    -/+uuid        : UUID (default: disabled)")
 		YMESSAGE(" The algorithms")
 		YMESSAGE("    -/+algorithms  : Standard algorithms")
 		YMESSAGE("")

@@ -1,0 +1,136 @@
+#ifndef __YUNI_UUID_UUID_H__
+# define __YUNI_UUID_UUID_H__
+
+# include "../yuni.h"
+# include "../core/string.h"
+# include "fwd.h"
+
+
+namespace Yuni
+{
+
+	/*!
+	** \brief Universally unique identifier (UUID)
+	**
+	** Printing to cout a new UUID :
+	** \code
+	** #include <yuni/yuni.h>
+	** #include <yuni/uuid/uuid.h>
+	** #include <iostream>
+	**
+	** using namespace Yuni;
+	**
+	** int main()
+	** {
+	**	UUID uuid;
+	**	uuid.generate();
+	**	std::cout << "GUID: " << uuid << std::endl;
+	**	return 0;
+	** }
+	** \endcode
+	**
+	** Conversions :
+	** \code
+	** UUID uuid;
+	** uuid.generate();
+	** String s = uuid;
+	** std::cout << s << std::endl;
+	**
+	** uuid = "BDBBD619-DA48-4BAE-B62A-CFFF1C291A8C";
+	** std::cout << uuid << std::endl;
+	**
+	** s = "70395DB8-E113-46D8-A2C0-522B59B03A96";
+	** uuid = s;
+	** std::cout << uuid << std::endl;
+	** \endcode
+	*/
+	class UUID
+	{
+	public:
+		//! \name Constructor
+		//@{
+		/*!
+		** \brief Default constructor
+		*/
+		UUID();
+		/*!
+		** \brief Copy constructor
+		*/
+		UUID(const UUID& rhs);
+		/*!
+		** \brief Constructor from a string
+		*/
+		template<class StringT> UUID(const StringT& string);
+		//@}
+
+
+		//! \name UUID
+		//@{
+		/*!
+		** \brief Generate a new UUID
+		*/
+		void generate();
+
+		/*!
+		** \brief Set the UUID to null
+		*/
+		void clear();
+
+		//! Get if the UUID is null (e.g. 000000000-0000-0000-0000-0000000000000)
+		bool null() const;
+
+		/*!
+		** \brief Assign from a string
+		**
+		** Contrary to the operator =, the internal value will remain untouched
+		** if the conversion failed.
+		*/
+		template<class StringT> bool assign(const StringT& string);
+		//@}
+
+
+		//! \name Operators
+		//@{
+		//! Copy operator
+		UUID& operator = (const UUID& rhs);
+		/*!
+		** \brief Assignment from a string
+		**
+		** The UUID will be reset if the conversion failed.
+		*/
+		template<class StringT> UUID& operator = (const StringT& string);
+		//! Null
+		bool operator ! () const;
+		//@}
+
+	protected:
+		/*!
+		** \brief Write the UUID into string in a C-String
+		**
+		** \param cstring A char* string, which must be 37-bytes length
+		*/
+		void writeToCString(char* cstring) const;
+
+		/*!
+		** \brief Initialize the UUID from a c-string
+		*/
+		bool initializeFromCString(const char* cstring);
+
+	public:
+		//! Storage
+		typedef unsigned char StorageType[16];
+
+	private:
+		//! Inner value
+		StorageType pValue;
+		// Friend
+		friend class Yuni::Private::UUID::Helper;
+	};
+
+
+
+} // namespace Yuni
+
+# include "uuid.hxx"
+
+#endif // __YUNI_UUID_UUID_H__
