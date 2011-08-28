@@ -21,7 +21,7 @@ BF348FB0-63E9-4355-888D-23AEF99F6BFD
 See the <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier">article on Wikipedia</a> for more informations.
 </p>
 
-<h1>Generating an UUID</h1>
+<h1>Generating a UUID</h1>
 <source type="cpp">
 #include &lt;yuni/yuni.h&gt;
 #include &lt;yuni/core/string.h&gt;
