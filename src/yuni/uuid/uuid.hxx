@@ -12,6 +12,7 @@ namespace Yuni
 			clear();
 	}
 
+
 	inline bool UUID::operator ! () const
 	{
 		return null();
@@ -47,7 +48,7 @@ namespace Yuni
 
 
 	template<class StringT>
-	inline UUID& UUID::operator = (const StringT& string)
+	UUID& UUID::operator = (const StringT& string)
 	{
 		if (!assign(string))
 			clear();
@@ -56,6 +57,11 @@ namespace Yuni
 
 
 } // namespace Yuni
+
+
+
+
+
 
 
 namespace Yuni
@@ -79,6 +85,12 @@ namespace UUID
 } // namespace Private
 } // namespace Yuni
 
+
+
+
+
+
+
 namespace Yuni
 {
 namespace Extension
@@ -97,7 +109,8 @@ namespace CustomString
 			Yuni::Private::UUID::Helper::WriteToCString((char*)s.data() + currentLength, rhs);
 			s.removeLast();
 		}
-	};
+
+	}; // class Append
 
 
 	template<>
@@ -117,13 +130,15 @@ namespace CustomString
 			return TargetType(s);
 		}
 
+	}; // class Into
 
-	};
 
 		
 } // namespace CustomString
 } // namespace Extension
 } // namespace Yuni
+
+
 
 
 
