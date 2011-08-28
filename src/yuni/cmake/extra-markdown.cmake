@@ -28,3 +28,11 @@ list(APPEND SRC_MARKDOWN
 
 add_library(yuni-static-extra-markdown STATIC ${SRC_MARKDOWN})
 
+# Setting output path
+SET_TARGET_PROPERTIES(yuni-static-extra-markdown PROPERTIES 
+		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
+
+# Installation
+INSTALL(TARGETS yuni-static-extra-markdown ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+
+
