@@ -17,7 +17,7 @@ namespace Yuni
 
 		# ifndef YUNI_OS_WINDOWS
 		assert(sizeof(uuid_t) == 16);
-		uuid_generate(pValue);
+		uuid_generate(pValue.cstring);
 		# else
 		# endif
 	}
@@ -27,7 +27,7 @@ namespace Yuni
 	{
 		assert(cstring && "invalid pointer");
 		# ifndef YUNI_OS_WINDOWS
-		uuid_unparse(pValue, cstring);
+		uuid_unparse(pValue.cstring, cstring);
 		# else
 		# endif
 	}
@@ -37,50 +37,92 @@ namespace Yuni
 	{
 		# ifndef YUNI_OS_WINDOWS
 		// Why uuid_parse takes a char* and not a const char* ??
-		return !uuid_parse(const_cast<char*>(cstring), pValue);
+		return !uuid_parse(const_cast<char*>(cstring), pValue.cstring);
 		# else
 		return false;
 		# endif
 	}
 
 
+
 	bool UUID::null() const
 	{
-		for (unsigned int i = 0; i != 16; ++i)
-		{
-			if (pValue[i])
-				return false;
-		}
-		return true;
+		return !pValue.n32[0] && !pValue.n32[1] && !pValue.n32[2] && !pValue.n32[3];
+	}
+
+	
+	void UUID::clear()
+	{
+		pValue.n32[0] = 0;
+		pValue.n32[1] = 0;
+		pValue.n32[2] = 0;
+		pValue.n32[3] = 0;
 	}
 
 
 	UUID::UUID()
 	{
-		for (unsigned int i = 0; i != 16; ++i)
-			pValue[0] = 0;
+		pValue.n32[0] = 0;
+		pValue.n32[1] = 0;
+		pValue.n32[2] = 0;
+		pValue.n32[3] = 0;
 	}
 
 
 	UUID::UUID(const UUID& rhs)
 	{
-		for (unsigned int i = 0; i != 16; ++i)
-			pValue[i] = rhs.pValue[i];
+		pValue.n32[0] = rhs.pValue.n32[0];
+		pValue.n32[1] = rhs.pValue.n32[1];
+		pValue.n32[2] = rhs.pValue.n32[2];
+		pValue.n32[3] = rhs.pValue.n32[3];
 	}
 
 
-	void UUID::clear()
+	UUID::UUID(Flag flag)
 	{
-		for (unsigned int i = 0; i != 16; ++i)
-			pValue[0] = 0;
+		switch (flag)
+		{
+			case fGenerate: generate(); break;
+			case fNull: clear(); break;
+		}
 	}
+
 
 
 	UUID& UUID::operator = (const UUID& rhs)
 	{
-		for (unsigned int i = 0; i != 16; ++i)
-			pValue[i] = rhs.pValue[i];
+		pValue.n32[0] = rhs.pValue.n32[0];
+		pValue.n32[1] = rhs.pValue.n32[1];
+		pValue.n32[2] = rhs.pValue.n32[2];
+		pValue.n32[3] = rhs.pValue.n32[3];
 		return *this;
+	}
+
+
+	bool UUID::operator == (const UUID& rhs) const
+	{
+		return (pValue.n32[0] == rhs.pValue.n32[0])
+			&& (pValue.n32[1] == rhs.pValue.n32[1])
+			&& (pValue.n32[2] == rhs.pValue.n32[2])
+			&& (pValue.n32[3] == rhs.pValue.n32[3]);
+	}
+
+
+	bool UUID::operator != (const UUID& rhs) const
+	{
+		return (pValue.n32[0] != rhs.pValue.n32[0])
+			|| (pValue.n32[1] != rhs.pValue.n32[1])
+			|| (pValue.n32[2] != rhs.pValue.n32[2])
+			|| (pValue.n32[3] != rhs.pValue.n32[3]);
+	}
+
+
+	bool UUID::operator < (const UUID& rhs) const
+	{
+		return pValue.n32[3] < rhs.pValue.n32[3]
+			&& pValue.n32[2] < rhs.pValue.n32[2]
+			&& pValue.n32[1] < rhs.pValue.n32[1]
+			&& pValue.n32[0] < rhs.pValue.n32[0];
 	}
 
 

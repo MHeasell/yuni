@@ -47,16 +47,33 @@ namespace Yuni
 	class UUID
 	{
 	public:
+		enum Flag
+		{
+			//! Set the UUID to null
+			fNull,
+			//! Generate a new UUID
+			fGenerate,
+		};
+
+	public:
 		//! \name Constructor
 		//@{
 		/*!
 		** \brief Default constructor
+		**
+		** The UUID will be set to null.
 		*/
 		UUID();
 		/*!
 		** \brief Copy constructor
 		*/
 		UUID(const UUID& rhs);
+		/*!
+		** \brief Constructor with flags
+		**
+		** \param flag Flag to know how to initialize the UUID
+		*/
+		UUID(Flag flag);
 		/*!
 		** \brief Constructor from a string
 		*/
@@ -101,7 +118,14 @@ namespace Yuni
 		template<class StringT> UUID& operator = (const StringT& string);
 		//! Null
 		bool operator ! () const;
+		//! Comparison
+		bool operator == (const UUID& rhs) const;
+		//! Comparison
+		bool operator != (const UUID& rhs) const;
+		//! Strict weak comparison
+		bool operator < (const UUID& rhs) const;
 		//@}
+
 
 	protected:
 		/*!
@@ -117,8 +141,11 @@ namespace Yuni
 		bool initializeFromCString(const char* cstring);
 
 	public:
-		//! Storage
-		typedef unsigned char StorageType[16];
+		union StorageType
+		{
+			unsigned char cstring[16];
+			uint32 n32[2];
+		};
 
 	private:
 		//! Inner value
@@ -126,6 +153,8 @@ namespace Yuni
 		// Friend
 		friend class Yuni::Private::UUID::Helper;
 	};
+
+
 
 
 
