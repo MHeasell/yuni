@@ -100,7 +100,7 @@ namespace File
 		/*!
 		** \brief Destructor
 		**
-		** The file will be closed if opened
+		** The file will be closed if necessary
 		*/
 		~Stream();
 		//@}
@@ -110,6 +110,8 @@ namespace File
 		//@{
 		/*!
 		** \brief Open a file
+		**
+		** The file will be previously closed if necessary.
 		**
 		** \param filename Any string reprensenting an UTF8 relative or absolute filename
 		** \param mode The open mode to use
@@ -124,7 +126,10 @@ namespace File
 		** \code
 		** open(filename, Core::IO::OpenMode::write | Core::IO::OpenMode::truncate);
 		** \endcode
+		** The file will be previously closed if necessary.
+		**
 		** \param filename Any string reprensenting an UTF8 relative or absolute filename
+		** \return True if the operation succeeded, false otherwise
 		*/
 		template<class U> bool openRW(const U& filename);
 
