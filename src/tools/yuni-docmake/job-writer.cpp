@@ -138,10 +138,15 @@ namespace // anonymous
 				e->RemoveAttribute("type");
 
 				type.toLower();
-				if (!type || type == "cpp" || type == "c++")
-					e->SetAttribute("class", "cpp");
-				else if (type == "lua")
-					e->SetAttribute("class", "lua");
+				if (type != "none")
+				{
+					if (!type || type == "cpp" || type == "c++")
+						e->SetAttribute("class", "cpp");
+					else if (type == "lua")
+						e->SetAttribute("class", "lua");
+					else if (type == "java")
+						e->SetAttribute("class", "java");
+				}
 			}
 		}
 
