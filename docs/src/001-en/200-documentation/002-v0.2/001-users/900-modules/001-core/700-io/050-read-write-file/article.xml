@@ -14,8 +14,11 @@ Contrary to some other implementations, this class reads and writes data 'as it'
 That means that no conversion is performed when reading or writing.
 </p>
 <p>
-Closing a file is implicit. It is automatically closed at the destruction of the object
-or when opening another file.
+A file is opened with <code>open</code> (or directly from the constructor). Data is
+usually read with <code>read</code> or <code>readline</code>. Writing to the file
+is the same as writing to a data stream. Closing a file is implicit. It is
+automatically closed at the destruction of the object or when another file
+is opened.
 </p>
 
 
@@ -26,7 +29,7 @@ or when opening another file.
 This example reads each file given from the command line and write them to the
 console (<code>std::cout</code>).
 </p>
-<source>
+<source type="cpp">
 #include &lt;yuni/yuni.h&gt;
 #include &lt;yuni/core/io/file.h&gt;
 #include &lt;iostream&gt;
@@ -69,7 +72,7 @@ int main(int argc, char** argv)
 This exemple is the same as before, except we will read the file line by line
 and printing the line number in the same time.
 </p>
-<source>
+<source type="cpp">
 #include &lt;yuni/yuni.h&gt;
 #include &lt;yuni/core/io/file.h&gt;
 #include &lt;iostream&gt;
@@ -108,10 +111,10 @@ int main(int argc, char** argv)
 
 
 
-<h1>Writing into a file</h1>
+<h1>Writing to a file</h1>
 <p>
-Writing into a file is as simple as writing to any data stream.
-This exemple will write <code>"Hello world !\n"</code> into a filename given from the command line.
+Writing to a file is as simple as writing to any data stream.
+This exemple will write <code>"Hello world !\n"</code> to a filename given from the command line.
 </p>
 <source>
 #include &lt;yuni/yuni.h&gt;
