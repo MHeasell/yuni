@@ -3,9 +3,9 @@
 #ifndef YUNI_OS_WINDOWS
 # include <uuid/uuid.h>
 #else
+# include <objbase.h>
 #endif
 #include <cassert>
-
 
 namespace Yuni
 {
@@ -19,6 +19,9 @@ namespace Yuni
 		assert(sizeof(uuid_t) == 16);
 		uuid_generate(pValue.cstring);
 		# else
+		if (S_OK != ::CoCreateGuid((::GUID*)pValue.cstring))
+			// Sadly, the call can fail
+			clear();
 		# endif
 	}
 
@@ -29,6 +32,14 @@ namespace Yuni
 		# ifndef YUNI_OS_WINDOWS
 		uuid_unparse(pValue.cstring, cstring);
 		# else
+		// StringFromGUID2 returns a string enclosed in braces
+		// Anything less than 39 would make the call fail
+		wchar_t buffer[39];
+		::StringFromGUID2(*(::GUID*)pValue.cstring, buffer, 39);
+		// Convert to non-wide string, and cut the prepended and appended braces
+		::wcstombs(cstring, buffer + 1, 36);
+		// Do not forget the null terminator
+		cstring[36] = '\0';
 		# endif
 	}
 
@@ -39,7 +50,10 @@ namespace Yuni
 		// Why uuid_parse takes a char* and not a const char* ??
 		return !uuid_parse(const_cast<char*>(cstring), pValue.cstring);
 		# else
-		return false;
+		// Stop complaining, the Windows implementation is way worse.
+		char* cstring_noconst = const_cast<char*>(cstring);
+		unsigned char* cstring_unsigned = (unsigned char*)(cstring_noconst);
+		return RPC_S_OK == ::UuidFromString(cstring_unsigned, (::GUID*)pValue.cstring);
 		# endif
 	}
 
@@ -50,7 +64,7 @@ namespace Yuni
 		return !pValue.n32[0] && !pValue.n32[1] && !pValue.n32[2] && !pValue.n32[3];
 	}
 
-	
+
 	void UUID::clear()
 	{
 		pValue.n32[0] = 0;

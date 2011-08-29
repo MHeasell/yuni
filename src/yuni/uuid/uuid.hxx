@@ -133,7 +133,7 @@ namespace CustomString
 	}; // class Into
 
 
-		
+
 } // namespace CustomString
 } // namespace Extension
 } // namespace Yuni

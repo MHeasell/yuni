@@ -57,7 +57,7 @@ namespace Private
 
 		/*!
 		** \brief Replace all occurences of a single char
-		*/ 
+		*/
 		void replace(char from, char to);
 
 		//! \name Operators
