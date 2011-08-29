@@ -108,6 +108,16 @@ namespace // anonymous
 			switch (pCompound->kind)
 			{
 				case Compound::kdNamespace: buildNamespace();break;
+				case Compound::kdClass: break;
+				case Compound::kdFunction: break;
+				case Compound::kdVariable: break;
+				case Compound::kdTypedef: break;
+				case Compound::kdEnum: break;
+				case Compound::kdFile: break;
+				case Compound::kdFolder: break;
+				case Compound::kdGroup: break;
+				case Compound::kdUnknown: break;
+				case Compound::kdMax: break;
 			}
 		}
 
@@ -371,7 +381,7 @@ namespace // anonymous
 
 
 
-int main(int argc, char** argv)
+int main(int /*argc*/, char** /*argv*/)
 {
 	if (ReadIndex(Options::src))
 	{
