@@ -1,3 +1,160 @@
-<title>Read / Write a file</title>
+<title>Reading from and writing to files</title>
 
-<p>TODO</p>
+<h1>Description</h1>
+<ul>
+<li><b>class : </b><code>Yuni::Core::IO::File::Stream</code></li>
+<li><b>include : </b><code>&lt;yuni/core/io/file.h&gt;</code></li>
+</ul>
+<p>
+The class <code>Core::IO::File::Stream</code> provides an independent platform
+interface for reading from and writing to files.
+All filenames passed to this interface must be UTF-8 encoded. This class can be
+used as a data stream (like <code>Yuni::String</code> or <code>std::cout</code>).
+Contrary to some other implementations, this class reads and writes data 'as it'.
+That means that no conversion is performed when reading or writing.
+</p>
+<p>
+Closing a file is implicit. It is automatically closed at the destruction of the object
+or when opening another file.
+</p>
+
+
+<h1>Reading a file</h1>
+
+<h2>Reading Raw data files</h2>
+<p>
+This example reads each file given from the command line and write them to the
+console (<code>std::cout</code>).
+</p>
+<source>
+#include &lt;yuni/yuni.h&gt;
+#include &lt;yuni/core/io/file.h&gt;
+#include &lt;iostream&gt;
+
+
+int main(int argc, char** argv)
+{
+	if (argc &lt;= 1)
+		return 0;
+
+	// We will read our file chunk by chunk (4K for each chunk)
+	Yuni::CustomString&lt;4096&gt; buffer;
+
+	// For each filename given from the command line
+	for (int i = 1; i &lt; argc; ++i)
+	{
+		// The filename to read
+		const char* filename = argv[i];
+
+		Yuni::Core::IO::File::Stream file;
+		if (file.open(filename))
+		{
+			std::cout &lt;&lt; "reading " &lt;&lt; filename &lt;&lt; std::endl;
+			while (true)
+			{
+				// Trying to read the next chunk from the file
+				if (!file.read(buffer))
+					break;
+				// Writing it to the standard output
+				std::cout &lt;&lt; buffer;
+			}
+
+			// We have reached the end of the file
+			std::cout &lt;&lt; std::endl;
+		}
+		else
+			std::cout &lt;&lt; "!! impossible to open " &lt;&lt; filename &lt;&lt; std::endl;
+	}
+	return 0;
+}
+</source>
+
+
+<h2>Reading a file line by line</h2>
+<p>
+This exemple is the same as before, except we will read the file line by line
+and printing the line number in the same time.
+</p>
+<source>
+#include &lt;yuni/yuni.h&gt;
+#include &lt;yuni/core/io/file.h&gt;
+#include &lt;iostream&gt;
+
+
+int main(int argc, char** argv)
+{
+	if (argc &lt;= 1)
+		return 0;
+
+	// We will read our file chunk by chunk (4K for each chunk)
+	Yuni::CustomString&lt;4096&gt; line;
+
+	for (int i = 1; i &lt; argc; ++i)
+	{
+		// The filename to read
+		const char* filename = argv[i];
+
+		Yuni::Core::IO::File::Stream file;
+		if (file.open(filename))
+		{
+			std::cout &lt;&lt; "reading " &lt;&lt; filename &lt;&lt; std::endl;
+			unsigned int line = 0;
+			while (true)
+			{
+				++line;
+				// Trying to read the next line
+				if (!file.readline(buffer))
+					break;
+				// Writing the line to the standard output
+				std::cout &lt;&lt; line &lt;&lt; ": " &lt;&lt; buffer;
+			}
+
+			// We have reached the end of the file
+			std::cout &lt;&lt; std::endl;
+		}
+		else
+			std::cout &lt;&lt; "!! impossible to open " &lt;&lt; filename &lt;&lt; std::endl;
+	}
+	return 0;
+}
+</source>
+
+
+
+<h1>Writing into a file</h1>
+<p>
+Writing into a file is as simple as writing to any data stream.
+This exemple will write <code>"Hello world !\n"</code> into a filename given from the command line.
+</p>
+<source>
+#include &lt;yuni/yuni.h&gt;
+#include &lt;yuni/core/io/file.h&gt;
+#include &lt;iostream&gt;
+
+
+int main(int argc, char** argv)
+{
+	if (argv &lt;= 1)
+		return 0;
+
+	// The filename where to write some data
+	const char* filename = argv[1];
+
+	Yuni::Core::IO::File::Stream file;
+	// Trying to open the filename in read/write mode. If the file exists it will
+	// truncated.
+	if (file.openRW(filename))
+	{
+		file &lt;&lt; "Hello world !\n";
+	}
+	else
+		std::cout &lt;&lt; "impossible to write " &lt;&lt; filename &lt;&lt; std::endl;
+	return 0;
+}
+</source>
+<p>
+Any datatype that a <code>Yuni::String</code> understands can be used here.
+</p>
+
+
+

@@ -14,7 +14,7 @@ future.
 <p>
 In its canonical form, a UUID is represented by 32 hexadecimal digits. For example :
 </p>
-<source>
+<source type="none">
 bf348fb0-63e9-4355-888d-23aef99f6bfd
 </source>
 <p>
