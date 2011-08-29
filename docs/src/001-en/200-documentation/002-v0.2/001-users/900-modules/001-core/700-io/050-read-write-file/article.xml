@@ -50,14 +50,8 @@ int main(int argc, char** argv)
 		if (file.open(filename))
 		{
 			std::cout &lt;&lt; "reading " &lt;&lt; filename &lt;&lt; std::endl;
-			while (true)
-			{
-				// Trying to read the next chunk from the file
-				if (!file.read(buffer))
-					break;
-				// Writing it to the standard output
-				std::cout &lt;&lt; buffer;
-			}
+			while (file.read(buffer))
+				std::cout &lt;&lt; buffer; // Writing it to the standard output
 
 			// We have reached the end of the file
 			std::cout &lt;&lt; std::endl;
@@ -99,15 +93,8 @@ int main(int argc, char** argv)
 		{
 			std::cout &lt;&lt; "reading " &lt;&lt; filename &lt;&lt; std::endl;
 			unsigned int line = 0;
-			while (true)
-			{
-				++line;
-				// Trying to read the next line
-				if (!file.readline(buffer))
-					break;
-				// Writing the line to the standard output
-				std::cout &lt;&lt; line &lt;&lt; ": " &lt;&lt; buffer;
-			}
+			while (file.readline(line))
+				std::cout &lt;&lt; (++line) &lt;&lt; ": " &lt;&lt; buffer;
 
 			// We have reached the end of the file
 			std::cout &lt;&lt; std::endl;
