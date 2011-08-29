@@ -22,7 +22,7 @@ is opened.
 </p>
 
 
-<h1>Reading a file</h1>
+<h1>Reading from a file</h1>
 
 <h2>Reading Raw data files</h2>
 <p>
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
 </source>
 
 
-<h2>Reading a file line by line</h2>
+<h2>Reading from a file line by line</h2>
 <p>
 This exemple is the same as before, except we will read the file line by line
 and printing the line number in the same time.
