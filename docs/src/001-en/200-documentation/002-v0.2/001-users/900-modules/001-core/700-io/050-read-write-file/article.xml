@@ -132,7 +132,7 @@ int main(int argc, char** argv)
 
 	Yuni::Core::IO::File::Stream file;
 	// Trying to open the filename in read/write mode. If the file exists it will
-	// truncated.
+	// be truncated.
 	if (file.openRW(filename))
 	{
 		file &lt;&lt; "Hello world !\n";
