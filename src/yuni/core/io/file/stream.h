@@ -216,9 +216,11 @@ namespace File
 		**
 		** It reads a line into the buffer pointed to by #s until either a terminating
 		** newline or EOF, which it replaces with ’\0’.
-		** The maximum number of char read is `buffer.capacity()`. For code robutness
+		** The maximum number of char read is `buffer.chunkSize`. For code robutness
 		** (to prevent against misuses) this routine will reserve space according to
-		** the capacity.
+		** the chunk size.
+		**
+		** The newline, if any, is retained.
 		**
 		** \param buffer The buffer where to write the line
 		*/
