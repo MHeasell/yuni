@@ -4,10 +4,10 @@
 <h1>Description</h1>
 <p>
 The UUID module provides a platform-independent API for generating Universally
-unique identifier (UUID).
-The UUID is 16 bytes (128 bits) long, which gives approximately
+unique identifiers (UUID).
+A UUID is 16 bytes (128 bits) long, which gives approximately
 3.4x10<sup>38</sup> unique values.
-The new UUID can reasonably be considered unique among all UUIDs created on the
+A new UUID can reasonably be considered unique among all UUIDs created on the
 local system, and among UUIDs created on other systems in the past and in the
 future.
 </p>
@@ -15,7 +15,7 @@ future.
 In its canonical form, a UUID is represented by 32 hexadecimal digits. For example :
 </p>
 <source>
-BF348FB0-63E9-4355-888D-23AEF99F6BFD
+bf348fb0-63e9-4355-888d-23aef99f6bfd
 </source>
 <p>
 See the <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier">article on Wikipedia</a> for more informations.
@@ -57,7 +57,8 @@ int main()
 </source>
 
 <p>
-Here are several ways to convert a string to a UUID :
+Here are several ways to convert a string to a UUID. The provided UUID can be
+both lower or upper case. However no space must remain.
 </p>
 <source type="cpp">
 #include &lt;yuni/yuni.h&gt;
@@ -75,7 +76,7 @@ int main()
 	std::cout &lt;&lt; myuuid &lt;&lt; std::endl;
 
 	// From a string (Yuni::String, std::string, char*...)
-	s = "58CD8D53-EF31-4119-A7BC-B8FE4B8ACF66";
+	s = "58CD8D53-Ef31-4119-A7bc-B8FE4B8ACF66";
 	myuuid = s;
 	std::cout &lt;&lt; myuuid &lt;&lt; std::endl;
 
