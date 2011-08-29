@@ -2,8 +2,12 @@
 
 
 <h1>Description</h1>
+<ul>
+<li><b>class : </b><code>Yuni::String</code></li>
+<li><b>include : </b><code>&lt;yuni/core/string.h&gt;</code></li>
+</ul>
 <p>
-<code>Yuni::String</code> (or <code>Yuni::CustomString&lt;&gt;</code>) is a class representing an UTF-8 character string of arbitrary length (limited by MAX_UINT, which is 4294967296).
+The class <code>Yuni::String</code> (or <code>Yuni::CustomString&lt;&gt;</code>) represents an UTF-8 character string of arbitrary length (limited by MAX_UINT, which is 4294967296).
 </p>
 
 <h1>Comparison of <code>Yuni::String</code> with other string classes</h1>
