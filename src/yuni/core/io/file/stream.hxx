@@ -147,9 +147,9 @@ namespace File
 	{
 		// The buffer must be reserved to its full capacity just before
 		// Assuming we have a mere Yuni::String, the internal may be null.
-		buffer.reserve(buffer.capacity());
+		buffer.reserve(buffer.chunkSize);
 		// Read data from the file
-		if ((NULL != ::fgets((char*)buffer.data(), static_cast<int>(buffer.capacity()), pFd)))
+		if ((NULL != ::fgets((char*)buffer.data(), static_cast<int>(buffer.chunkSize), pFd)))
 		{
 			// We may have read less than expected. So we have to resize the string
 			// to perform maintenance (about the internal size and the final zero)
@@ -283,14 +283,14 @@ namespace File
 	Stream::read(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
 	{
 		// Resizing the buffer
-		buffer.resize(buffer.chunkSize);
+		buffer.reserve(buffer.chunkSize);
 		// Assert to prevent SegV
 		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
 
 		typedef CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> StringType;
 		typedef typename StringType::Char C;
 		// Reading the file
-		const size_t result = ::fread(buffer.data(), 1, sizeof(C) * buffer.size(), pFd);
+		const size_t result = ::fread(buffer.data(), 1, sizeof(C) * buffer.chunkSize, pFd);
 		// Setting the good size, because we may have read less than asked
 		if (result < buffer.size())
 			buffer.truncate((typename StringType::Size) result);
