@@ -58,7 +58,6 @@ namespace Yuni
 	}
 
 
-
 	bool UUID::null() const
 	{
 		return !pValue.n32[0] && !pValue.n32[1] && !pValue.n32[2] && !pValue.n32[3];

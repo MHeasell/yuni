@@ -144,7 +144,7 @@ namespace Yuni
 		union StorageType
 		{
 			unsigned char cstring[16];
-			uint32 n32[2];
+			uint32 n32[4];
 		};
 
 	private:
@@ -152,7 +152,8 @@ namespace Yuni
 		StorageType pValue;
 		// Friend
 		friend class Yuni::Private::UUID::Helper;
-	};
+
+	}; // class UUID
 
 
 
