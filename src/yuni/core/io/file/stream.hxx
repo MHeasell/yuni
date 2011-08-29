@@ -180,8 +180,10 @@ namespace File
 	}
 
 
-	namespace
+
+	namespace // anonymous
 	{
+
 		template<int IsStringT, class U>
 		struct StreamTraitsWrite
 		{
@@ -210,7 +212,10 @@ namespace File
 				return ::fwrite(translator.c_str(), 1, translator.size(), pFd);
 			}
 		};
-	}
+
+	} // anonymous namespace
+
+
 
 	template<class U>
 	inline size_t Stream::write(const U& buffer)
@@ -277,6 +282,8 @@ namespace File
 	inline size_t
 	Stream::read(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
 	{
+		// Resizing the buffer
+		buffer.resize(buffer.chunkSize);
 		// Assert to prevent SegV
 		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
 
