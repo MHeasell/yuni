@@ -7,6 +7,8 @@
 #endif
 #include <cassert>
 
+
+
 namespace Yuni
 {
 
@@ -99,7 +101,6 @@ namespace Yuni
 			case fNull: clear(); break;
 		}
 	}
-
 
 
 	UUID& UUID::operator = (const UUID& rhs)
