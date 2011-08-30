@@ -299,7 +299,7 @@ namespace // anonymous
 			Compound::Ptr compound = pStack.front();
 
 			const TIXML_STRING& name = text.ValueTStr();
-			compound->name.append(name.c_str(), name.size());
+			compound->name.append(name.c_str(), (unsigned int)name.size());
 		}
 		return true;
 	}
