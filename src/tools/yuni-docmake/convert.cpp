@@ -1,6 +1,6 @@
 
 #include <yuni/yuni.h>
-#include <yuni/core/io/file.h>
+#include <yuni/io/file.h>
 #include "tinyxml/tinyxml.h"
 #include "logs.h"
 #include <map>
@@ -11,7 +11,7 @@
 
 using namespace Yuni;
 
-#define SEP Core::IO::Separator
+#define SEP IO::Separator
 
 
 Yuni::Job::QueueService<>  queueService;

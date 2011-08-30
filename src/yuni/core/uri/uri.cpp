@@ -1,7 +1,7 @@
 
 #include <ctype.h>
 #include "uri.h"
-#include "../io/file.h"
+#include "../../io/file.h"
 #include "../customstring.h"
 
 
@@ -217,12 +217,12 @@ namespace Yuni
 				if (infos.path.size() < 1000)
 				{
 					String tmp(infos.path);
-					Core::IO::Normalize(tmp, infos.path);
+					IO::Normalize(tmp, infos.path);
 				}
 				else
 				{
 					CustomString<1024, false, false> tmp(infos.path);
-					Core::IO::Normalize(tmp, infos.path);
+					IO::Normalize(tmp, infos.path);
 				}
 			}
 		}

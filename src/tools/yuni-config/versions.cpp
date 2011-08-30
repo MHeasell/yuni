@@ -1,11 +1,11 @@
 
 #include "versions.h"
-#include <yuni/core/io/directory.h>
-#include <yuni/core/io/file.h>
+#include <yuni/io/directory.h>
+#include <yuni/io/file.h>
 #include <iostream>
 
 
-#define SEP Core::IO::Separator
+#define SEP IO::Separator
 
 
 namespace Yuni
@@ -42,7 +42,7 @@ namespace VersionInfo
 		String yuniMarker;
 		yuniMarker << root << SEP << "mark-for-yuni-sources";
 
-		if (Core::IO::File::Exists(yuniMarker))
+		if (IO::File::Exists(yuniMarker))
 		{
 			if (pOptDebug)
 				std::cout << "[yuni-config][debug] found special yuni marker `" << yuniMarker << "`" << std::endl;
@@ -57,7 +57,7 @@ namespace VersionInfo
 
 		# ifdef YUNI_OS_MSVC //Visual Studio
 		// For dealing with the paths like '{Debug,Release}/yuni-config.exe'
-		if (Core::IO::File::Exists(String() << root << "\\..\\mark-for-yuni-sources"))
+		if (IO::File::Exists(String() << root << "\\..\\mark-for-yuni-sources"))
 			loadFromPath(root + "\\..\\..\\..\\..");
 		# endif
 	}
@@ -77,7 +77,7 @@ namespace VersionInfo
 	void List::loadFromPath(const String& folder)
 	{
 		String path;
-		Core::IO::Normalize(path, folder);
+		IO::Normalize(path, folder);
 		if (pOptDebug)
 			std::cout << "[yuni-config][debug] :: reading `" << path << "`" << std::endl;
 
@@ -85,18 +85,18 @@ namespace VersionInfo
 		info.mapping = mappingStandard;
 		String s(path);
 		s << SEP << "yuni.version";
-		if (!Core::IO::File::Exists(s))
+		if (!IO::File::Exists(s))
 		{
 			s.clear() << path << SEP << "include" << SEP << "yuni" << SEP << "yuni.version";
-			if (!Core::IO::File::Exists(s))
+			if (!IO::File::Exists(s))
 			{
 				info.mapping = mappingSVNSources;
 				s.clear() << path << SEP << "src" << SEP << "yuni" << SEP << "yuni.version";
-				if (!Core::IO::File::Exists(s))
+				if (!IO::File::Exists(s))
 					return;
 			}
 		}
-		Core::IO::File::Stream file;
+		IO::File::Stream file;
 		if (file.open(s))
 		{
 			String key;
@@ -241,7 +241,7 @@ namespace VersionInfo
 		}
 		out << "yuni.config." << this->compiler;
 
-		if (!Core::IO::File::Exists(out))
+		if (!IO::File::Exists(out))
 		{
 			if (displayError)
 				std::cout << "Error: impossible to open the config file '" << out << "'\n";
@@ -249,7 +249,7 @@ namespace VersionInfo
 		}
 
 		options.clear();
-		Core::IO::File::Stream file;
+		IO::File::Stream file;
 		if (file.open(out))
 		{
 			CustomString<8192> buffer;
@@ -317,7 +317,7 @@ namespace VersionInfo
 
 			if (group == "path.include")
 			{
-				Core::IO::Normalize(norm, value);
+				IO::Normalize(norm, value);
 				switch (compliant)
 				{
 					case gcc          :
@@ -339,7 +339,7 @@ namespace VersionInfo
 
 			if (group == "path.lib")
 			{
-				Core::IO::Normalize(norm, value);
+				IO::Normalize(norm, value);
 				switch (compliant)
 				{
 					case gcc          :
@@ -354,7 +354,7 @@ namespace VersionInfo
 
 			if (group == "lib")
 			{
-				Core::IO::Normalize(norm, value);
+				IO::Normalize(norm, value);
 				switch (compliant)
 				{
 					case gcc          : s.libs[String() << "-l" << QuotePath(norm)] = true; break;

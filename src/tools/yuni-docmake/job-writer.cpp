@@ -1,7 +1,7 @@
 
 #include "job-writer.h"
-#include <yuni/core/io/directory.h>
-#include <yuni/core/io/directory/system.h>
+#include <yuni/io/directory.h>
+#include <yuni/io/directory/system.h>
 #include "job.h"
 #include "logs.h"
 #include "tinyxml/tinyxml.h"
@@ -14,7 +14,7 @@
 using namespace Yuni;
 using namespace Yuni::Tool::DocMake;
 
-# define SEP Core::IO::Separator
+# define SEP IO::Separator
 
 
 namespace // anonymous
@@ -215,7 +215,7 @@ void JobWriter::SEOBuildAllTermReferences()
 {
 	String filename;
 	filename << Program::htdocs << SEP << "seo" << SEP << "data.js";
-	Core::IO::File::Stream file;
+	IO::File::Stream file;
 
 	if (file.openRW(filename))
 	{
@@ -484,7 +484,7 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 	// @{CONTENT}
 	if (pArticle.originalFilename.notEmpty())
 	{
-		if (Core::IO::Directory::System::Temporary(tmp))
+		if (IO::Directory::System::Temporary(tmp))
 		{
 			tmp << SEP << "yuni-doc-tmp-";
 			Hash::Checksum::MD5 md5;
@@ -493,8 +493,8 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 				logs.info() << "  :: writing " << tmp;
 			doc.SaveFile(tmp.c_str());
 			String srcContent;
-			Core::IO::File::LoadFromFile(srcContent, tmp);
-			Core::IO::File::Delete(tmp);
+			IO::File::LoadFromFile(srcContent, tmp);
+			IO::File::Delete(tmp);
 
 			pVars["CONTENT"] = srcContent;
 		}
@@ -541,7 +541,7 @@ void JobWriter::onExecute()
 			# ifdef YUNI_OS_WINDOWS
 			s.replace('/', '\\');
 			# endif
-			if (!Core::IO::Directory::Create(s))
+			if (!IO::Directory::Create(s))
 			{
 				logs.error() << "impossible to create the directory " << s;
 				return;
@@ -549,7 +549,7 @@ void JobWriter::onExecute()
 		}
 
 		s << SEP << Program::indexFilename;
-		Core::IO::Normalize(filenameInHtdocs, s);
+		IO::Normalize(filenameInHtdocs, s);
 	}
 
 	// Console verbose / debug
@@ -610,7 +610,7 @@ void JobWriter::onExecute()
 	// Replace all pseudo linefeed
 	content.replace("&#x0A;", "\n");
 
-	if (!Core::IO::File::SaveToFile(filenameInHtdocs, content))
+	if (!IO::File::SaveToFile(filenameInHtdocs, content))
 	{
 		logs.error() << "impossible to generate '" << pArticle.htdocsFilename << "' into '" << filenameInHtdocs << "'";
 	}

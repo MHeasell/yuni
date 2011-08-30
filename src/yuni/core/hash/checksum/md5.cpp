@@ -1,8 +1,7 @@
 
 #include "md5.h"
 #include "../../../core/system/windows.hdr.h"
-#include <fstream>
-#include "../../io/file/stream.h"
+#include "../../../io/file/stream.h"
 
 
 
@@ -405,7 +404,7 @@ namespace Checksum
 	const String& MD5::fromFile(const String& filename)
 	{
 		pValue.clear();
-		Core::IO::File::Stream stream;
+		IO::File::Stream stream;
 		if (stream.open(filename))
 		{
 			MD5TypeState state;

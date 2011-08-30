@@ -42,20 +42,20 @@ add_definitions("-DYUNI_SOURCE_TREE=\"${YUNI_SOURCE_TREE}\"")
 set(src
 	../../yuni/core/version/version.cpp
 	../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.cpp
-	../../yuni/core/io/io.cpp
-	../../yuni/core/io/file/file.cpp
-	../../yuni/core/io/file/openmode.cpp
-	../../yuni/core/io/file/stream.cpp
-	../../yuni/core/io/exists.cpp
-	../../yuni/core/io/directory/current.cpp
+	../../yuni/io/io.cpp
+	../../yuni/io/file/file.cpp
+	../../yuni/io/file/openmode.cpp
+	../../yuni/io/file/stream.cpp
+	../../yuni/io/exists.cpp
+	../../yuni/io/directory/current.cpp
 	../../yuni/core/customstring/traits/traits.cpp
 
 	# iterator
-	../../yuni/core/io/directory/iterator.h
-	../../yuni/core/io/directory/iterator/iterator.h
-	../../yuni/core/io/directory/iterator/iterator.hxx
-	../../yuni/core/io/directory/iterator/iterator.cpp
-	../../yuni/core/io/directory/iterator/detachedthread.h
+	../../yuni/io/directory/iterator.h
+	../../yuni/io/directory/iterator/iterator.h
+	../../yuni/io/directory/iterator/iterator.hxx
+	../../yuni/io/directory/iterator/iterator.cpp
+	../../yuni/io/directory/iterator/detachedthread.h
 
 	versions.h versions.hxx versions.cpp
 	program.h program.hxx program.cpp

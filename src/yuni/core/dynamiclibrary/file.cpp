@@ -5,8 +5,8 @@
 # include <dlfcn.h>
 #endif
 #include <stdio.h>
-#include "../io/file.h"
-#include "../io/directory.h"
+#include "../../io/file.h"
+#include "../../io/directory.h"
 
 
 
@@ -69,9 +69,9 @@ namespace DynamicLibrary
 			# define TEST_THEN_LOAD(EXT) \
 				out.clear(); \
 				if (!path.empty()) \
-					out << path << Core::IO::Separator; \
+					out << path << IO::Separator; \
 				out << prefix << filename << EXT; \
-				if (Core::IO::File::Exists(out)) \
+				if (IO::File::Exists(out)) \
 					return true
 
 			# ifdef YUNI_OS_DARWIN
@@ -126,7 +126,7 @@ namespace DynamicLibrary
 		if (!filename.empty())
 		{
 			// If the file name is absolute, there is no need for research
-			if (Core::IO::IsAbsolute(filename))
+			if (IO::IsAbsolute(filename))
 				return loadFromRawFilename(filename.c_str(), r, v);
 
 			// A temporary string, where to write the absolute filename

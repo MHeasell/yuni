@@ -20,7 +20,7 @@ namespace Logs
 			pFile.close();
 			return true;
 		}
-		return pFile.open(pOutputFilename, Core::IO::OpenMode::write | Core::IO::OpenMode::append);
+		return pFile.open(pOutputFilename, IO::OpenMode::write | IO::OpenMode::append);
 	}
 
 
@@ -37,7 +37,7 @@ namespace Logs
 		pFile.close();
 		return (pOutputFilename.empty())
 			? true
-			: pFile.open(pOutputFilename, Core::IO::OpenMode::write | Core::IO::OpenMode::append);
+			: pFile.open(pOutputFilename, IO::OpenMode::write | IO::OpenMode::append);
 	}
 
 
