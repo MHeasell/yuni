@@ -236,7 +236,7 @@ namespace // anonymous
 				{
 					if (!pArticle.title.empty() && pArticle.title.last() != ' ')
 						pArticle.title += ' ';
-					pArticle.title.append(text.c_str(), text.size());
+					pArticle.title.append(text.c_str(), (unsigned int)text.size());
 					pArticle.title.trim();
 					break;
 				}
@@ -244,7 +244,7 @@ namespace // anonymous
 				{
 					if (!pTOCCaption.empty() && pTOCCaption.last() != ' ')
 						pTOCCaption += ' ';
-					pTOCCaption.append(text.c_str(), text.size());
+					pTOCCaption.append(text.c_str(), (unsigned int)text.size());
 					pTOCCaption.trim();
 					break;
 				}

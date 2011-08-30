@@ -639,7 +639,7 @@ namespace DocIndex
 				if (!termID || !scount)
 					continue;
 				unsigned int count = scount.to<unsigned int>();
-				double d = 1. - (count * 0.5 / maxO);
+				double d = 1. - (count * 0.5 / (double)maxO);
 				s << "UPDATE terms SET weight_rel_others = " << d << " WHERE id = " << termID << ";\n";
 			}
 		}
