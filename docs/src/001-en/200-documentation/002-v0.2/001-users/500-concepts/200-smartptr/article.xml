@@ -215,8 +215,62 @@ header and has the following name :
 </ul>
 <p>
 It is a class template that uses <a href="../policies/@{INDEX}">Policies</a>
-to allow user customization.
+to allow for user customization. It accepts six type parameters, among which
+there are five policies.
 </p>
+<ul>
+<li>
+<b>T :</b>
+This is the type pointed to. It allows the smart pointer to be used on any
+type.
+</li>
+<li>
+<b>OwspP :</b>
+The ownership policy describes the way ownership is managed when the smart
+pointer is copied. Possible values are :
+  <ul>
+  <li><code>Yuni::Policy::Ownership::ReferenceCounted</code>
+  offers reference counting for a single-threaded use
+  </li>
+  <li><code>Yuni::Policy::Ownership::ReferenceCountedMT</code>
+  offers reference counting for multi-threaded use
+  </li>
+  <li><code>Yuni::Policy::Ownership::COMReferenceCounted</code>
+  offers intrusive reference counting (COM object-style)
+  </li>
+  <li><code>Yuni::Policy::Ownership::DestructiveCopy</code>
+  destroys the current smart pointer and gives ownership to the other smart pointer
+  </li>
+  <li><code>Yuni::Policy::Ownership::NoCopy</code>
+  forbids copying the smart pointer using a compile-time assertion
+  </li>
+  </ul>
+</li>
+<li>
+<b>ChckP :</b>
+The checking policy can accomplish some value checking on the internal pointer.
+  <ul>
+  <li><code>Yuni::Policy::Checking::None</code>
+  does nothing
+  </li>
+  <li><code>Yuni::Policy::Checking::NeverNull</code>
+  forbids initializing the smart pointer to <code>null</code> at compile time, and will
+  throw an exception if it is assigned <code>null</code> at run time.
+  </ul>
+</li>
+<li>
+<b>ConvP :</b>
+The conversion policy
+</li>
+<li>
+<b>StorP :</b>
+The storage policy
+</li>
+<li>
+<b>ConsP :</b>
+The constness policy
+</li>
+</ul>
 
 <p>
 Some examples of <code>Yuni::SmartPtr</code> instantiations follow :
