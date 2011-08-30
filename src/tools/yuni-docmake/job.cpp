@@ -1,7 +1,7 @@
 
 #include "job.h"
 #include "logs.h"
-#include <yuni/core/io/io.h>
+#include <yuni/io/io.h>
 #include "tinyxml/tinyxml.h"
 #include <iostream>
 #include <yuni/core/slist.h>
@@ -10,7 +10,7 @@
 #include "program.h"
 
 
-#define SEP  Core::IO::Separator
+#define SEP  IO::Separator
 
 using namespace Yuni;
 using namespace Yuni::Tool::DocMake;
@@ -155,7 +155,7 @@ namespace // anonymous
 							String src = pArticle.htdocsFilename;
 							const StringAdapter string = element.Attribute("src");
 							src << SEP << string;
-							Core::IO::Normalize(pArticle.directoryIndex, src);
+							IO::Normalize(pArticle.directoryIndex, src);
 						}
 						else if (tag == "pragma:accesspath")
 						{
@@ -477,7 +477,7 @@ bool CompileJob::extractOrder(const String& path)
 	// /Users/milipili/projects/yuni/sources/docs/docs/src/001-en/300-developers/100-recommended-softwares/article.xml
 	// We will get
 	// /Users/milipili/projects/yuni/sources/docs/docs/src/001-en/300-developers/100-recommended-softwares
-	Core::IO::ExtractFilePath(pTmp, path);
+	IO::ExtractFilePath(pTmp, path);
 
 	// Looking for the final slash
 	const String::Size offset = pTmp.find_last_of("/\\");
@@ -591,7 +591,7 @@ void CompileJob::analyzeArticle()
 		return;
 	}
 	if (!pArticle.title)
-		Core::IO::ExtractFileName(pArticle.title, pArticle.htdocsFilename, false);
+		IO::ExtractFileName(pArticle.title, pArticle.htdocsFilename, false);
 
 	// TOC refactoring
 	pArticle.tocRefactoring();

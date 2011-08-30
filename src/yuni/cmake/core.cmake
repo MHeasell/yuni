@@ -550,63 +550,63 @@ set(SRC_CORE_PROCESS
 source_group(core\\process FILES ${SRC_CORE_PROCESS})
 
 
-set(SRC_CORE_IO_FILENAME
-		core/io/io.h
-		core/io/io.cpp
-		core/io/exists.cpp
-		core/io/io.hxx
+set(SRC_IO_FILENAME
+		io/io.h
+		io/io.cpp
+		io/exists.cpp
+		io/io.hxx
 )
-source_group(core\\io FILES ${SRC_CORE_IO_FILENAME})
+source_group(io FILES ${SRC_IO_FILENAME})
 
 
 
-set(SRC_CORE_IO_DIRECTORY
-		core/io/directory.h
-		core/io/directory/directory.hxx
-		core/io/directory/commons.h
-		core/io/directory/remove.cpp
-		core/io/directory/current.cpp
-		core/io/directory/make.cpp
-		core/io/directory/copy.cpp
-		core/io/directory/info.h
-		core/io/directory/iterator.h
-		core/io/directory/system.h
-		core/io/directory/system.hxx
+set(SRC_IO_DIRECTORY
+		io/directory.h
+		io/directory/directory.hxx
+		io/directory/commons.h
+		io/directory/remove.cpp
+		io/directory/current.cpp
+		io/directory/make.cpp
+		io/directory/copy.cpp
+		io/directory/info.h
+		io/directory/iterator.h
+		io/directory/system.h
+		io/directory/system.hxx
 )
-source_group(core\\io\\directory FILES ${SRC_CORE_IO_DIRECTORY})
+source_group(io\\directory FILES ${SRC_IO_DIRECTORY})
 
-set(SRC_CORE_IO_DIRECTORY_ITERATOR
-		core/io/directory/iterator/iterator.cpp
-		core/io/directory/iterator/iterator.h
-		core/io/directory/iterator/iterator.hxx
-		core/io/directory/iterator/detachedthread.h
+set(SRC_IO_DIRECTORY_ITERATOR
+		io/directory/iterator/iterator.cpp
+		io/directory/iterator/iterator.h
+		io/directory/iterator/iterator.hxx
+		io/directory/iterator/detachedthread.h
 )
-source_group(core\\io\\directory\\iterator FILES ${SRC_CORE_IO_DIRECTORY_ITERATOR})
+source_group(io\\directory\\iterator FILES ${SRC_IO_DIRECTORY_ITERATOR})
 
 
-set(SRC_CORE_IO_DIRECTORY_INFO
-		core/io/directory/info/iterator.h
-		core/io/directory/info/info.h
-		core/io/directory/info/info.hxx
-		core/io/directory/info/info.cpp
-		core/io/directory/info/platform.cpp
-		core/io/directory/info/platform.h
+set(SRC_IO_DIRECTORY_INFO
+		io/directory/info/iterator.h
+		io/directory/info/info.h
+		io/directory/info/info.hxx
+		io/directory/info/info.cpp
+		io/directory/info/platform.cpp
+		io/directory/info/platform.h
 )
-source_group(core\\io\\directory\\Info FILES ${SRC_CORE_IO_DIRECTORY_INFO})
+source_group(io\\directory\\Info FILES ${SRC_IO_DIRECTORY_INFO})
 
 
 
-set(SRC_CORE_IO_FILE
-		core/io/file/openmode.h
-		core/io/file/openmode.cpp
-		core/io/file/stream.h
-		core/io/file/stream.hxx
-		core/io/file/stream.cpp
-		core/io/file.h
-		core/io/file/file.hxx
-		core/io/file/file.cpp
+set(SRC_IO_FILE
+		io/file/openmode.h
+		io/file/openmode.cpp
+		io/file/stream.h
+		io/file/stream.hxx
+		io/file/stream.cpp
+		io/file.h
+		io/file/file.hxx
+		io/file/file.cpp
 )
-source_group(core\\io\\file FILES ${SRC_CORE_IO_FILE})
+source_group(io\\file FILES ${SRC_IO_FILE})
 
 
 set(SRC_CORE_GETOPT
@@ -683,14 +683,6 @@ set(SRC_JOBS
 source_group(jobs FILES ${SRC_JOBS})
 
 
-# Application
-set(SRC_APPLICATION
-		application/application.h
-		application/application.hxx application/application.cpp
-		application/console.h application/console.cpp)
-source_group(core\\application FILES ${SRC_APPLICATION})
-
-
 set(SRC_CORE_COLOR
 		# Color
 		core/color/rgba.h
@@ -741,11 +733,11 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_SYSTEM_CONSOLE}
 		${SRC_CORE_STRING}
 		${SRC_CORE_STL} ${SRC_CORE_VALIDATOR}
-		${SRC_CORE_IO_FILENAME}
-		${SRC_CORE_IO_DIRECTORY}
-		${SRC_CORE_IO_DIRECTORY_INFO}
-		${SRC_CORE_IO_DIRECTORY_ITERATOR}
-		${SRC_CORE_IO_FILE}
+		${SRC_IO_FILENAME}
+		${SRC_IO_DIRECTORY}
+		${SRC_IO_DIRECTORY_INFO}
+		${SRC_IO_DIRECTORY_ITERATOR}
+		${SRC_IO_FILE}
 		${SRC_CORE_PROCESS}
 		${SRC_CORE_LOGS}
 		${SRC_CORE_ATOMIC}
@@ -769,7 +761,6 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_GETOPT}
 		${SRC_PREDICATES_RESULTS}
 		${SRC_THREADS} ${SRC_JOBS}
-		${SRC_APPLICATION}
 	)
 
 # Setting output path
@@ -781,7 +772,7 @@ install(TARGETS yuni-static-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_P
 
 # Install Core-related headers
 install(
-	DIRECTORY application core job thread
+	DIRECTORY core job thread
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 	FILES_MATCHING
 		PATTERN "*.h"

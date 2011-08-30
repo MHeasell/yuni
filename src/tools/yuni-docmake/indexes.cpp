@@ -1,7 +1,7 @@
 
 #include "indexes.h"
 #include "sqlite/sqlite3.h"
-#include <yuni/core/io/file.h>
+#include <yuni/io/file.h>
 #include <yuni/core/math.h>
 #include "logs.h"
 #include "index-db.hxx"
@@ -11,7 +11,7 @@
 #endif
 
 
-# define SEP Core::IO::Separator
+# define SEP IO::Separator
 
 
 using namespace Yuni;
@@ -278,7 +278,7 @@ namespace DocIndex
 			{
 				const StringAdapter relPath = result[y];
 				s.clear() << Program::input << SEP << relPath;
-				if (!Core::IO::File::Exists(s))
+				if (!IO::File::Exists(s))
 				{
 					logs.info() << "The entry '" << relPath << "' is deprecated";
 					s.clear() << "DELETE FROM articles WHERE rel_path = $1;";
@@ -411,7 +411,7 @@ namespace DocIndex
 		if (Program::verbose)
 			logs.info() << "writing " << filename;
 
-		Core::IO::File::Stream out;
+		IO::File::Stream out;
 		if (!out.openRW(filename))
 		{
 			logs.error() << "sitemap: impossible to write " << filename;
@@ -669,7 +669,7 @@ namespace DocIndex
 	}
 
 
-	void BuildSEOTermReference(Core::IO::File::Stream& file, const ArticleData::Word& term, int termid)
+	void BuildSEOTermReference(IO::File::Stream& file, const ArticleData::Word& term, int termid)
 	{
 		char** result;
 		int rowCount, colCount;
@@ -742,7 +742,7 @@ namespace DocIndex
 
 		String filename;
 		filename << Program::htdocs << SEP << "seo" << SEP << "data.js";
-		Core::IO::File::AppendContent(filename, s);
+		IO::File::AppendContent(filename, s);
 	}
 
 

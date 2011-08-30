@@ -84,17 +84,17 @@ namespace DocMake
 		}
 		{
 			String tmp;
-			Core::IO::MakeAbsolute(tmp, input);
-			Core::IO::Normalize(input, tmp);
-			Core::IO::MakeAbsolute(tmp, htdocs);
-			Core::IO::Normalize(htdocs, tmp);
+			IO::MakeAbsolute(tmp, input);
+			IO::Normalize(input, tmp);
+			IO::MakeAbsolute(tmp, htdocs);
+			IO::Normalize(htdocs, tmp);
 		}
-		if (!Core::IO::Directory::Exists(input))
+		if (!IO::Directory::Exists(input))
 		{
 			logs.error() << "IO Error: Directory does not exist: " << input;
 			return false;
 		}
-		if (!Core::IO::Directory::Exists(htdocs))
+		if (!IO::Directory::Exists(htdocs))
 		{
 			logs.error() << "IO Error: Directory does not exist: " << htdocs;
 			return false;

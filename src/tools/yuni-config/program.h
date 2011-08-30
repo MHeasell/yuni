@@ -7,12 +7,7 @@
 # include <yuni/yuni.h>
 # include <yuni/core/string.h>
 # include <yuni/core/getopt.h>
-# include <iostream>
-# include <list>
-# include <set>
 # include "versions.h"
-# include <yuni/core/io/directory.h>
-# include <algorithm>
 
 
 

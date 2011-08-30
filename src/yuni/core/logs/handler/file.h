@@ -2,7 +2,7 @@
 # define __YUNI_CORE_LOGS_HANDLERS_FILE_H__
 
 # include "../null.h"
-# include "../../io/file.h"
+# include "../../../io/file.h"
 # include <cassert>
 
 
@@ -71,7 +71,7 @@ namespace Logs
 		//! The originale filename
 		String pOutputFilename;
 		//! File
-		Core::IO::File::Stream pFile;
+		IO::File::Stream pFile;
 
 	}; // class File
 

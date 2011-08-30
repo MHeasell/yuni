@@ -1,13 +1,13 @@
 
 #include "program.h"
-#include <yuni/core/io/directory/info.h>
+#include <yuni/io/directory/info.h>
 #include "job.h"
 #include "logs.h"
 
 
 
 
-# define SEP Core::IO::Separator
+# define SEP IO::Separator
 
 
 
@@ -28,11 +28,11 @@ namespace DocMake
 		for (unsigned int i = 0; i != jobs.size(); ++i)
 			jobs[i] = new CompileJob(input, htdocs);
 
-		Core::IO::Directory::Info info(input);
+		IO::Directory::Info info(input);
 		String tmp;
 		unsigned int slotIndex = 0;
 		unsigned int count = 0;
-		for (Core::IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != info.recursive_end(); ++i)
+		for (IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != info.recursive_end(); ++i)
 		{
 			// assert
 			assert(!(!(*i)));
@@ -51,7 +51,7 @@ namespace DocMake
 				// Ok, the folder interrests us
 				// checking if th default article file is present
 				tmp.clear() << filename << SEP << "article.xml";
-				if (!Core::IO::File::Exists(tmp))
+				if (!IO::File::Exists(tmp))
 					logs.warning() << "missing article.xml in " << filename;
 			}
 			else

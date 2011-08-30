@@ -1,5 +1,7 @@
 
 #include "program.h"
+#include <yuni/io/directory.h>
+#include <iostream>
 
 #define YUNI_LIBYUNI_CONFIG_SEPARATORS ", ;:\t\n"
 
@@ -110,16 +112,16 @@ namespace Yuni
 		# else
 
 		const String argv0 = a0;
-		if (Core::IO::IsAbsolute(argv0))
+		if (IO::IsAbsolute(argv0))
 		{
-			Core::IO::ExtractFilePath(pRootPath, argv0);
+			IO::ExtractFilePath(pRootPath, argv0);
 		}
 		else
 		{
-			Core::IO::Directory::Current::Get(pRootPath);
-			pRootPath << Core::IO::Separator;
+			IO::Directory::Current::Get(pRootPath);
+			pRootPath << IO::Separator;
 			String t;
-			Core::IO::ExtractFilePath(t, argv0);
+			IO::ExtractFilePath(t, argv0);
 			pRootPath += t;
 			pRootPath.removeTrailingSlash();
 		}
@@ -136,13 +138,13 @@ namespace Yuni
 		{
 			// Current Directory
 			String pwd;
-			Core::IO::Directory::Current::Get(pwd);
+			IO::Directory::Current::Get(pwd);
 
 			String tmp;
 			const String::List::iterator end = pOptPrefix.end();
 			for (String::List::iterator i = pOptPrefix.begin(); i != end; ++i)
 			{
-				Core::IO::MakeAbsolute(tmp, *i, pwd);
+				IO::MakeAbsolute(tmp, *i, pwd);
 				*i = tmp;
 			}
 		}
