@@ -256,6 +256,7 @@ The checking policy can accomplish some value checking on the internal pointer.
   <li><code>Yuni::Policy::Checking::NeverNull</code>
   forbids initializing the smart pointer to <code>null</code> at compile time, and will
   throw an exception if it is assigned <code>null</code> at run time.
+  </li>
   </ul>
 </li>
 <li>
