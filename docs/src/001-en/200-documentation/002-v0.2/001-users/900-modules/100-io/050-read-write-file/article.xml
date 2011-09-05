@@ -3,10 +3,10 @@
 
 <h1>Convenient routines</h1>
 <ul>
-<li><b>include : </b><code>&lt;yuni/core/io/file.h&gt;</code></li>
+<li><b>include : </b><code>&lt;yuni/io/file.h&gt;</code></li>
 </ul>
 <p>
-The namespace <code>Yuni::Core::IO::File</code> provides some convenient routines
+The class <code>Yuni::IO::File</code> provides some convenient routines
 for reading from and writing to a file without pain.
 </p>
 <h2>Reading a whole file at once</h2>
@@ -57,7 +57,7 @@ like using the class <code>Yuni::Core::IO::File::Stream</code>.
 <h1>Fine-grained access to file data (<code>Yuni::Core::IO::File::Stream</code>)</h1>
 <ul>
 <li><b>class : </b><code>Yuni::Core::IO::File::Stream</code></li>
-<li><b>include : </b><code>&lt;yuni/core/io/file.h&gt;</code></li>
+<li><b>include : </b><code>&lt;yuni/io/file.h&gt;</code></li>
 </ul>
 <p>
 The class <code>Core::IO::File::Stream</code> provides an independent platform
@@ -91,7 +91,7 @@ console (<code>std::cout</code>).
 </p>
 <source type="cpp">
 #include &lt;yuni/yuni.h&gt;
-#include &lt;yuni/core/io/file.h&gt;
+#include &lt;yuni/io/file.h&gt;
 #include &lt;iostream&gt;
 
 
@@ -134,7 +134,7 @@ and print the line number at the same time.
 </p>
 <source type="cpp">
 #include &lt;yuni/yuni.h&gt;
-#include &lt;yuni/core/io/file.h&gt;
+#include &lt;yuni/io/file.h&gt;
 #include &lt;iostream&gt;
 
 
@@ -179,7 +179,7 @@ This example will write <code>"Hello world !\n"</code> to a filename given from 
 </p>
 <source type="cpp">
 #include &lt;yuni/yuni.h&gt;
-#include &lt;yuni/core/io/file.h&gt;
+#include &lt;yuni/io/file.h&gt;
 #include &lt;iostream&gt;
 
 

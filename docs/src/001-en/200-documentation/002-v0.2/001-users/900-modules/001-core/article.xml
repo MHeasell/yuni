@@ -46,7 +46,7 @@ Command-line arguments parser.
 <li><b>Yuni::Hash :</b>
 Hash table and checksum.
 </li>
-<li><a href="io/@{INDEX}">Yuni::Core::IO</a> : Input / Output management, file and directory access.</li>
+<li><a href="../io/@{INDEX}">Yuni::IO</a> : Input / Output management, file and directory access.</li>
 <li><b>Yuni::Iterator :</b>
 Generic iterator for any kind of collection.
 </li>
