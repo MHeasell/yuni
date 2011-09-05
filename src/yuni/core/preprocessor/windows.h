@@ -3,7 +3,9 @@
 
 
 /* Microsoft Windows */
-# define YUNI_OS_WINDOWS
+# ifndef YUNI_OS_WINDOWS
+#	define YUNI_OS_WINDOWS
+# endif // YUNI_OS_WINDOWS
 # define YUNI_OS_NAME "Microsoft Windows"
 
 # undef  YUNI_OS_FLAG_WINDOWS
