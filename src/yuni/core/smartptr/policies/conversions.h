@@ -9,7 +9,7 @@ namespace Policy
 {
 
 /*!
-** \brief Convertion policies
+** \brief Conversion policies
 ** \ingroup Policies
 */
 namespace Conversion
