@@ -233,7 +233,7 @@ pointer is copied. Possible values are :
   offers reference counting for a single-threaded use
   </li>
   <li><code>Yuni::Policy::Ownership::ReferenceCountedMT</code>
-  offers reference counting for multi-threaded use
+  offers reference counting for multi-threaded use (this is the default)
   </li>
   <li><code>Yuni::Policy::Ownership::COMReferenceCounted</code>
   offers intrusive reference counting (COM object-style)
@@ -251,7 +251,7 @@ pointer is copied. Possible values are :
 The checking policy can accomplish some value checking on the internal pointer.
   <ul>
   <li><code>Yuni::Policy::Checking::None</code>
-  does nothing
+  does nothing (this is the default)
   </li>
   <li><code>Yuni::Policy::Checking::NeverNull</code>
   forbids initializing the smart pointer to <code>null</code> at compile time, and will
@@ -260,15 +260,43 @@ The checking policy can accomplish some value checking on the internal pointer.
 </li>
 <li>
 <b>ConvP :</b>
-The conversion policy
+The conversion policy specifies whether conversion to the raw pointer type is
+allowed.
+  <ul>
+  <li><code>Yuni::Policy::Conversion::Allow</code>
+  allows conversion to the raw pointer type (this is the default)
+  </li>
+  <li><code>Yuni::Policy::Conversion::Disallow</code>
+  forbids conversion to the raw pointer type
+  </li>
+  </ul>
 </li>
 <li>
 <b>StorP :</b>
-The storage policy
+The storage policy defines how the raw data is actually stored inside the smart
+pointer. The interface to access it through the smart pointer remains of course
+the same.
+  <ul>
+  <li><code>Yuni::Policy::Storage::Pointer</code>
+  stores a single raw pointer to the type (this is the default)
+  </li>
+  <li><code>Yuni::Policy::Storage::Array</code>
+  stores an array of values of the given type
+  </li>
+  </ul>
 </li>
 <li>
 <b>ConsP :</b>
-The constness policy
+The constness policy determines whether constness should be propagated from the
+pointer to pointee.
+  <ul>
+  <li><code>Yuni::Policy::Constness::DontPropagateConst</code>
+  does not propagate constness of the smart pointer to the pointee (this is the default)
+  </li>
+  <li><code>Yuni::Policy::Constness::PropagateConst</code>
+  propagates constness of the smart pointer to the pointee
+  </li>
+  </ul>
 </li>
 </ul>
 
