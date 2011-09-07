@@ -70,6 +70,21 @@
 <a href="../class/yuni/boundingbox/@{INDEX}">Yuni::BoundingBox</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/cstring/@{INDEX}">Yuni::CString</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/cstring/model/@{INDEX}">Yuni::CString::Model</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/cstring/model/byteiterator/@{INDEX}">Yuni::CString::Model::ByteIterator</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/cstring/model/nulliterator/@{INDEX}">Yuni::CString::Model::NullIterator</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/cstring/model/utf8iterator/@{INDEX}">Yuni::CString::Model::UTF8Iterator</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/charset/converter/@{INDEX}">Yuni::Charset::Converter</a>
 </td><td></td></tr>
 <tr><td>
@@ -110,21 +125,6 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/core/utils/hexdump/@{INDEX}">Yuni::Core::Utils::Hexdump</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/customstring/@{INDEX}">Yuni::CustomString</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/customstring/model/@{INDEX}">Yuni::CustomString::Model</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/customstring/model/byteiterator/@{INDEX}">Yuni::CustomString::Model::ByteIterator</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/customstring/model/nulliterator/@{INDEX}">Yuni::CustomString::Model::NullIterator</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/customstring/model/utf8iterator/@{INDEX}">Yuni::CustomString::Model::UTF8Iterator</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/default/@{INDEX}">Yuni::Default</a>
@@ -271,25 +271,25 @@
 <a href="../class/yuni/exceptions/badcast/@{INDEX}">Yuni::Exceptions::BadCast</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/extension/cstring/append/@{INDEX}">Yuni::Extension::CString::Append</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/extension/cstring/assign/@{INDEX}">Yuni::Extension::CString::Assign</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/extension/cstring/autodetectbasenumber/@{INDEX}">Yuni::Extension::CString::AutoDetectBaseNumber</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/extension/cstring/fill/@{INDEX}">Yuni::Extension::CString::Fill</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/extension/cstring/into/@{INDEX}">Yuni::Extension::CString::Into</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/extension/color/rgb/@{INDEX}">Yuni::Extension::Color::RGB</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/extension/color/rgba/@{INDEX}">Yuni::Extension::Color::RGBA</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/extension/customstring/append/@{INDEX}">Yuni::Extension::CustomString::Append</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/extension/customstring/assign/@{INDEX}">Yuni::Extension::CustomString::Assign</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/extension/customstring/autodetectbasenumber/@{INDEX}">Yuni::Extension::CustomString::AutoDetectBaseNumber</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/extension/customstring/fill/@{INDEX}">Yuni::Extension::CustomString::Fill</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/extension/customstring/into/@{INDEX}">Yuni::Extension::CustomString::Into</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/extension/intocstring/@{INDEX}">Yuni::Extension::IntoCString</a>
