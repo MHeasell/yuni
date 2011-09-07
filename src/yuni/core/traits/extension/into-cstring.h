@@ -42,14 +42,14 @@ namespace Extension
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	class IntoCString<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> >
+	class IntoCString<Yuni::CString<ChunkSizeT, ExpandableT,ZeroTerminatedT> >
 	{
 	public:
-		typedef Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
-		enum { valid = 1, converted = 0, zeroTerminated = CustomStringType::zeroTerminated, };
+		typedef Yuni::CString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CStringType;
+		enum { valid = 1, converted = 0, zeroTerminated = CStringType::zeroTerminated, };
 
 	public:
-		static const char* Perform(const CustomStringType& container)
+		static const char* Perform(const CStringType& container)
 		{
 			return container.c_str();
 		}
@@ -58,15 +58,15 @@ namespace Extension
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT,
 		template <class> class OwspP, template <class> class ChckP, class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	class IntoCString<Yuni::SmartPtr<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP> >
+	class IntoCString<Yuni::SmartPtr<Yuni::CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP> >
 	{
 	public:
-		typedef Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
-		typedef Yuni::SmartPtr<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP> CustomStringTypePtr;
-		enum { valid = 1, converted = 0, zeroTerminated = CustomStringType::zeroTerminated, };
+		typedef Yuni::CString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CStringType;
+		typedef Yuni::SmartPtr<Yuni::CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>, OwspP,ChckP,ConvP,StorP,ConsP> CStringTypePtr;
+		enum { valid = 1, converted = 0, zeroTerminated = CStringType::zeroTerminated, };
 
 	public:
-		static const char* Perform(const CustomStringTypePtr& container)
+		static const char* Perform(const CStringTypePtr& container)
 		{
 			return (!container) ? NULL : container->c_str();
 		}
@@ -75,14 +75,14 @@ namespace Extension
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	class IntoCString<Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>* >
+	class IntoCString<Yuni::CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>* >
 	{
 	public:
-		typedef typename Yuni::CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CustomStringType;
-		enum { valid = 1, converted = 0, zeroTerminated = CustomStringType::zeroTerminated, };
+		typedef typename Yuni::CString<ChunkSizeT, ExpandableT,ZeroTerminatedT> CStringType;
+		enum { valid = 1, converted = 0, zeroTerminated = CStringType::zeroTerminated, };
 
 	public:
-		static const char* Perform(const CustomStringType* const container)
+		static const char* Perform(const CStringType* const container)
 		{
 			return container ? container->data() : NULL;
 		}

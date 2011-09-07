@@ -1,4 +1,5 @@
 
+#include "../io.h"
 #include "../directory.h"
 #ifndef YUNI_OS_WINDOWS
 # include <unistd.h>

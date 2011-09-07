@@ -6,21 +6,21 @@ namespace Yuni
 {
 namespace Extension
 {
-namespace CustomString
+namespace CString
 {
 
-	template<class CustomStringT, class C> class Append;
+	template<class CStringT, class C> class Append;
 	template<class T> class Into;
 
 
 	// Atomic<>
-	template<class CustomStringT, int SizeT, template<class> class TP>
-	class Append<CustomStringT, Yuni::Atomic::Int<SizeT,TP> >
+	template<class CStringT, int SizeT, template<class> class TP>
+	class Append<CStringT, Yuni::Atomic::Int<SizeT,TP> >
 	{
 	public:
-		typedef typename CustomStringT::Type TypeC;
+		typedef typename CStringT::Type TypeC;
 		typedef typename Static::Remove::Const<TypeC>::Type C;
-		static void Perform(CustomStringT& s, const Yuni::Atomic::Int<SizeT, TP>& rhs)
+		static void Perform(CStringT& s, const Yuni::Atomic::Int<SizeT, TP>& rhs)
 		{
 			s.append((typename Yuni::Atomic::Int<SizeT, TP>::ScalarType) rhs);
 		}
@@ -54,7 +54,7 @@ namespace CustomString
 
 
 
-} // namespace CustomString
+} // namespace CString
 } // namespace Extension
 } // namespace Yuni
 

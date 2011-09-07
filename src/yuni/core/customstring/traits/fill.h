@@ -8,15 +8,15 @@ namespace Yuni
 {
 namespace Extension
 {
-namespace CustomString
+namespace CString
 {
 
 
-	template<class CustomStringT, class StringT>
+	template<class CStringT, class StringT>
 	class Fill
 	{
 	public:
-		static void Perform(char* data, typename CustomStringT::Size size, const StringT& pattern)
+		static void Perform(char* data, typename CStringT::Size size, const StringT& pattern)
 		{
 			const unsigned int patternSize = Traits::Length<StringT,unsigned int>::Value(pattern);
 			const char* const cstr = Traits::CString<StringT>::Perform(pattern);
@@ -26,12 +26,12 @@ namespace CustomString
 			// If equals to 1, it is merely a single char
 			if (patternSize == 1)
 			{
-				for (typename CustomStringT::Size i = 0; i < size; ++i)
+				for (typename CStringT::Size i = 0; i < size; ++i)
 					data[i] = *cstr;
 				return;
 			}
 			// We have to copy N times the pattern
-			typename CustomStringT::Size p = 0;
+			typename CStringT::Size p = 0;
 			while (p + patternSize <= size)
 			{
 				(void)::memcpy(data + p, cstr, patternSize * sizeof(char));
@@ -43,13 +43,13 @@ namespace CustomString
 	};
 
 
-	template<class CustomStringT>
-	class Fill<CustomStringT, char>
+	template<class CStringT>
+	class Fill<CStringT, char>
 	{
 	public:
-		static void Perform(char* data, typename CustomStringT::Size size, const char rhs)
+		static void Perform(char* data, typename CStringT::Size size, const char rhs)
 		{
-			for (typename CustomStringT::Size i = 0; i != size; ++i)
+			for (typename CStringT::Size i = 0; i != size; ++i)
 				data[i] = rhs;
 		}
 	};
@@ -57,7 +57,8 @@ namespace CustomString
 
 
 
-} // namespace CustomString
+
+} // namespace CString
 } // namespace Extension
 } // namespace Yuni
 

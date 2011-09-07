@@ -9,7 +9,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace CustomStringImpl
+namespace CStringImpl
 {
 
 
@@ -108,7 +108,7 @@ namespace CustomStringImpl
 
 
 
-} // namespace CustomStringImpl
+} // namespace CStringImpl
 } // namespace Private
 } // namespace Yuni
 

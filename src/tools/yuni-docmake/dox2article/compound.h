@@ -19,7 +19,7 @@ namespace Dox2Article
 	{
 	public:
 		//! Reference ID
-		typedef CustomString<256,false> RefID;
+		typedef CString<256,false> RefID;
 		//! The most suitable smart ptr
 		typedef SmartPtr<Compound>  Ptr;
 		//! Map

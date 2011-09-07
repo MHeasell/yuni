@@ -2,6 +2,7 @@
 #include "platform.h"
 #include "../../../core/slist.h"
 #include <cassert>
+#include "../../io.h"
 #include "../../directory.h"
 #include "../info.h"
 

@@ -47,7 +47,7 @@ namespace Bit
 		//! Size
 		typedef unsigned int Size;
 		//! Buffer Type
-		typedef CustomString<20, true, false> BufferType;
+		typedef CString<20, true, false> BufferType;
 		enum
 		{
 			//! Invalide offset

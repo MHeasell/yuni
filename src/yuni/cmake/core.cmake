@@ -552,9 +552,13 @@ source_group(core\\process FILES ${SRC_CORE_PROCESS})
 
 set(SRC_IO_FILENAME
 		io/io.h
-		io/io.cpp
+		io/constants.cpp
+		io/constants.h
 		io/exists.cpp
 		io/io.hxx
+		io/error.h
+		io/filename-manipulation.h
+		io/filename-manipulation.hxx
 )
 source_group(io FILES ${SRC_IO_FILENAME})
 
@@ -566,7 +570,7 @@ set(SRC_IO_DIRECTORY
 		io/directory/commons.h
 		io/directory/remove.cpp
 		io/directory/current.cpp
-		io/directory/make.cpp
+		io/directory/create.cpp
 		io/directory/copy.cpp
 		io/directory/info.h
 		io/directory/iterator.h

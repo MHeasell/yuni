@@ -18,18 +18,18 @@ struct Model
 	{
 	public:
 		//! Type of the original string
-		typedef CustomStringType StringType;
+		typedef CStringType StringType;
 
 		//! The type of the orignal object
 		typedef UTF8::Char value_type;
 		//! An unsigned integral type
-		typedef typename CustomStringType::size_type  size_type;
+		typedef typename CStringType::size_type  size_type;
 		//! A signed integral type
-		typedef typename CustomStringType::difference_type  difference_type;
+		typedef typename CStringType::difference_type  difference_type;
 
 		enum
 		{
-			iteratorModelForCustomString = 1,
+			iteratorModelForCString = 1,
 			//! A non-zero value if the iterator can go forward
 			canGoForward  = true,
 			//! A non-zero value if the iterator can go backward
@@ -109,18 +109,18 @@ struct Model
 	{
 	public:
 		//! Type of the original string
-		typedef CustomStringType StringType;
+		typedef CStringType StringType;
 
 		//! The type of the orignal object
 		typedef UTF8::Char value_type;
 		//! An unsigned integral type
-		typedef typename CustomStringType::size_type  size_type;
+		typedef typename CStringType::size_type  size_type;
 		//! A signed integral type
-		typedef typename CustomStringType::difference_type  difference_type;
+		typedef typename CStringType::difference_type  difference_type;
 
 		enum
 		{
-			iteratorModelForCustomString = 1,
+			iteratorModelForCString = 1,
 			//! A non-zero value if the iterator can go forward
 			canGoForward  = true,
 			//! A non-zero value if the iterator can go backward
@@ -282,18 +282,18 @@ struct Model
 	{
 	public:
 		//! Type of the original string
-		typedef CustomStringType StringType;
+		typedef CStringType StringType;
 
 		//! The type of the orignal object
 		typedef char value_type;
 		//! An unsigned integral type
-		typedef typename CustomStringType::size_type  size_type;
+		typedef typename CStringType::size_type  size_type;
 		//! A signed integral type
-		typedef typename CustomStringType::difference_type  difference_type;
+		typedef typename CStringType::difference_type  difference_type;
 
 		enum
 		{
-			iteratorModelForCustomString = 1,
+			iteratorModelForCString = 1,
 			//! A non-zero value if the iterator can go forward
 			canGoForward  = true,
 			//! A non-zero value if the iterator can go backward

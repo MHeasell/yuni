@@ -141,7 +141,7 @@ namespace File
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	bool
-	Stream::readline(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
+	Stream::readline(CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
 	{
 		// The buffer must be reserved to its full capacity just before
 		// Assuming we have a mere Yuni::String, the internal may be null.
@@ -151,7 +151,7 @@ namespace File
 		{
 			// We may have read less than expected. So we have to resize the string
 			// to perform maintenance (about the internal size and the final zero)
-			typedef typename CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>::Char  Char;
+			typedef typename CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>::Char  Char;
 			buffer.resize(static_cast<unsigned int>(::strlen(buffer.c_str()) / sizeof(Char)));
 			return true;
 		}
@@ -187,7 +187,7 @@ namespace File
 		{
 			static size_t Perform(FILE* pFd, const U& u)
 			{
-				// Assert, if a typename CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
+				// Assert, if a typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
 				YUNI_STATIC_ASSERT(Traits::CString<U>::valid, Stream_InvalidTypeForBuffer);
 				// Assert, if the length of the container can not be found at compile time
 				YUNI_STATIC_ASSERT(Traits::Length<U>::valid,  Stream_InvalidTypeForBufferSize);
@@ -278,14 +278,14 @@ namespace File
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline size_t
-	Stream::read(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
+	Stream::read(CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
 	{
 		// Resizing the buffer
 		buffer.reserve(buffer.chunkSize);
 		// Assert to prevent SegV
 		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
 
-		typedef CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT> StringType;
+		typedef CString<ChunkSizeT, ExpandableT,ZeroTerminatedT> StringType;
 		typedef typename StringType::Char C;
 		// Reading the file
 		const size_t result = ::fread(buffer.data(), 1, sizeof(C) * buffer.chunkSize, pFd);

@@ -95,14 +95,14 @@ namespace Yuni
 {
 namespace Extension
 {
-namespace CustomString
+namespace CString
 {
 
-	template<class CustomStringT>
-	class Append<CustomStringT, Yuni::UUID>
+	template<class CStringT>
+	class Append<CStringT, Yuni::UUID>
 	{
 	public:
-		static void Perform(CustomStringT& s, const Yuni::UUID& rhs)
+		static void Perform(CStringT& s, const Yuni::UUID& rhs)
 		{
 			const unsigned int currentLength = s.size();
 			s.resize(s.size() + 37); // 36 + 1 zero-terminated
@@ -134,7 +134,7 @@ namespace CustomString
 
 
 
-} // namespace CustomString
+} // namespace CString
 } // namespace Extension
 } // namespace Yuni
 

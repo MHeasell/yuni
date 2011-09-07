@@ -3,6 +3,7 @@
 
 # include "../../../yuni.h"
 # include "../../../core/string.h"
+# include "../../io.h"
 # include "../../directory.h"
 # include "detachedthread.h"
 

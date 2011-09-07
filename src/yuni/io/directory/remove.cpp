@@ -1,4 +1,5 @@
 
+#include "../io.h"
 #include "../directory.h"
 #include <errno.h>
 #ifdef YUNI_HAS_STDLIB_H
@@ -22,44 +23,23 @@
 
 namespace Yuni
 {
-namespace Private
-{
 namespace IO
 {
 namespace Directory
 {
 
-# ifdef YUNI_OS_WINDOWS
 
-	bool Remove(const char* path)
-	{
-		WString<true> fsource(path);
-		if (fsource.empty())
-			return false;
-
-		SHFILEOPSTRUCTW shf;
-		shf.hwnd = NULL;
-
-		shf.wFunc = FO_DELETE;
-		shf.pFrom = fsource.c_str();
-		shf.pTo = fsource.c_str();
-		shf.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI;
-
-		const int cr = SHFileOperationW(&shf);
-		return (!cr);
-	}
-
-# else
+# ifndef YUNI_OS_WINDOWS
 
 
 	namespace // Anonymous namespace
 	{
 
-		bool RmDirRecursiveInternal(const char path[])
+		static bool RmDirRecursiveInternal(const char* path)
 		{
 			DIR* dp;
 			struct dirent* ep;
-			CustomString<2096> buffer;
+			CString<2096> buffer;
 			struct stat st;
 
 			if (NULL != (dp = ::opendir(path)))
@@ -89,22 +69,43 @@ namespace Directory
 	} // anonymous namespace
 
 
+	# endif
 
 
-	bool Remove(const char path[])
+
+
+	bool Remove(const StringAdapter& path)
 	{
-		if (NULL == path || '\0' == *path)
+		if (path.empty())
 			return true;
-		return RmDirRecursiveInternal(path);
+
+		# ifdef YUNI_OS_WINDOWS
+		WString<true> fsource(path);
+		if (fsource.empty())
+			return false;
+
+		SHFILEOPSTRUCTW shf;
+		shf.hwnd = NULL;
+
+		shf.wFunc = FO_DELETE;
+		shf.pFrom = fsource.c_str();
+		shf.pTo = fsource.c_str();
+		shf.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI;
+
+		const int cr = SHFileOperationW(&shf);
+		return (!cr);
+
+		# else
+		return RmDirRecursiveInternal(path.c_str());
+		# endif
 	}
 
 
-# endif
+
 
 
 
 } // namespace Directory
 } // namespace IO
-} // namespace Private
 } // namespace Yuni
 

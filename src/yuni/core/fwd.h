@@ -18,9 +18,9 @@ namespace Yuni
 	struct None {};
 
 
-	// Forward declaration for the base class CustomString<>
+	// Forward declaration for the base class String
 	template<unsigned int ChunkSizeT = 128, bool ExpandableT = true, bool ZeroTerminatedT = true>
-	class CustomString;
+	class CString;
 
 
 } // namespace Yuni

@@ -14,7 +14,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace CustomStringImpl
+namespace CStringImpl
 {
 
 	// Const qualifier from the adapter mode
@@ -202,7 +202,7 @@ namespace CustomStringImpl
 		//! Our buffer
 		typename QualifierFromAdapterMode<(0 != adapter), C>::Type data;
 		// Friend
-		template<unsigned int SizeT, bool ExpT, bool ZeroT> friend class Yuni::CustomString;
+		template<unsigned int SizeT, bool ExpT, bool ZeroT> friend class Yuni::CString;
 
 	}; // class Data
 
@@ -328,7 +328,7 @@ namespace CustomStringImpl
 		C data[capacity + 1];
 
 		// Friend
-		template<unsigned int SizeT, bool ExpT, bool ZeroT> friend class Yuni::CustomString;
+		template<unsigned int SizeT, bool ExpT, bool ZeroT> friend class Yuni::CString;
 
 	}; // class Data;
 
@@ -338,7 +338,7 @@ namespace CustomStringImpl
 
 
 
-} // namespace CustomStringImpl
+} // namespace CStringImpl
 } // namespace Private
 } // namespace Yuni
 

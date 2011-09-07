@@ -15,7 +15,7 @@ namespace Directory
 
 		void NormalizeTinyDirectoryPath(String& path)
 		{
-			CustomString<1024, false, false> tmp = path;
+			CString<1024, false, false> tmp = path;
 			IO::Normalize(path, tmp);
 		}
 

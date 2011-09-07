@@ -64,7 +64,7 @@ namespace Markdown
 		typedef std::map<String, Node::Ptr> MapID;
 
 	private:
-		CustomString<4096> pLine;
+		CString<4096> pLine;
 		bool pHasLineBreak;
 		unsigned int pQuoteLevel;
 		Signature pCurrentLineSignature;

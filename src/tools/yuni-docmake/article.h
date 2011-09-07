@@ -12,9 +12,9 @@
 	{
 	public:
 		typedef std::deque<float>  CoeffStack;
-		typedef Yuni::CustomString<32,false>  Tag;
+		typedef Yuni::CString<32,false>  Tag;
 		typedef std::set<Tag>  TagSet;
-		typedef Yuni::CustomString<32,false>  Word;
+		typedef Yuni::CString<32,false>  Word;
 
 		class WordStat
 		{

@@ -9,7 +9,7 @@ namespace Yuni
 {
 namespace Extension
 {
-namespace CustomString
+namespace CString
 {
 
 
@@ -60,13 +60,13 @@ namespace CustomString
 
 
 	/*!
-	** \brief CustomString<>, with the same POD type
+	** \brief String, with the same POD type
 	*/
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	class Into<Yuni::CustomString<ChunkSizeT, ExpandableT, ZeroTerminatedT> >
+	class Into<Yuni::CString<ChunkSizeT, ExpandableT, ZeroTerminatedT> >
 	{
 	public:
-		typedef Yuni::CustomString<ChunkSizeT, ExpandableT, ZeroTerminatedT> TargetType;
+		typedef Yuni::CString<ChunkSizeT, ExpandableT, ZeroTerminatedT> TargetType;
 		enum { valid = 1 };
 
 		template<class StringT> static bool Perform(const StringT& s, TargetType& out)
@@ -551,7 +551,7 @@ namespace CustomString
 
 
 
-} // namespace CustomString
+} // namespace CString
 } // namespace Extension
 } // namespace Yuni
 

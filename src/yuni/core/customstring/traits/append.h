@@ -16,24 +16,24 @@ namespace Yuni
 {
 namespace Extension
 {
-namespace CustomString
+namespace CString
 {
 
-	template<class CustomStringT, class C>
+	template<class CStringT, class C>
 	class Append
 	{
 	public:
 		// Unknown type
-		YUNI_STATIC_ASSERT(false, CustomString_AppendUnknownType);
+		YUNI_STATIC_ASSERT(false, CString_AppendUnknownType);
 	};
 
 
 	// C*
-	template<class CustomStringT, class T>
-	class Append<CustomStringT, T*>
+	template<class CStringT, class T>
+	class Append<CStringT, T*>
 	{
 	public:
-		static void Perform(CustomStringT& s, const T* rhs)
+		static void Perform(CStringT& s, const T* rhs)
 		{
 			s += (void*) rhs;
 		}
@@ -41,26 +41,26 @@ namespace CustomString
 
 
 	// char*
-	template<class CustomStringT>
-	class Append<CustomStringT, char*>
+	template<class CStringT>
+	class Append<CStringT, char*>
 	{
 	public:
-		typedef typename CustomStringT::Type TypeC;
+		typedef typename CStringT::Type TypeC;
 		typedef typename Static::Remove::Const<TypeC>::Type C;
-		static void Perform(CustomStringT& s, const C* rhs)
+		static void Perform(CStringT& s, const C* rhs)
 		{
 			if (rhs)
-				s.appendWithoutChecking(rhs, Yuni::Traits::Length<C*,typename CustomStringT::Size>::Value(rhs));
+				s.appendWithoutChecking(rhs, Yuni::Traits::Length<C*,typename CStringT::Size>::Value(rhs));
 		}
 	};
 
 	// C[N]
-	template<class CustomStringT, int N>
-	class Append<CustomStringT, char[N]>
+	template<class CStringT, int N>
+	class Append<CStringT, char[N]>
 	{
 	public:
-		typedef typename CustomStringT::Type C;
-		static void Perform(CustomStringT& s, const C rhs[N])
+		typedef typename CStringT::Type C;
+		static void Perform(CStringT& s, const C rhs[N])
 		{
 			if (N > 0)
 			{
@@ -72,12 +72,12 @@ namespace CustomString
 	};
 
 	// C
-	template<class CustomStringT>
-	class Append<CustomStringT, char>
+	template<class CStringT>
+	class Append<CStringT, char>
 	{
 	public:
 		typedef char C;
-		static void Perform(CustomStringT& s, const C rhs)
+		static void Perform(CStringT& s, const C rhs)
 		{
 			s.appendWithoutChecking(rhs);
 		}
@@ -85,33 +85,33 @@ namespace CustomString
 
 
 	// C
-	template<class CustomStringT>
-	class Append<CustomStringT, unsigned char>
+	template<class CStringT>
+	class Append<CStringT, unsigned char>
 	{
 	public:
 		typedef unsigned char C;
-		static void Perform(CustomStringT& s, const C rhs)
+		static void Perform(CStringT& s, const C rhs)
 		{
 			s.appendWithoutChecking(static_cast<char>(rhs));
 		}
 	};
 
 	// nullptr
-	template<class CustomStringT>
-	class Append<CustomStringT, Yuni::NullPtr>
+	template<class CStringT>
+	class Append<CStringT, Yuni::NullPtr>
 	{
 	public:
-		static void Perform(CustomStringT&, const Yuni::NullPtr&)
+		static void Perform(CStringT&, const Yuni::NullPtr&)
 		{ /* Do nothing */ }
 	};
 
 
 	// bool
-	template<class CustomStringT>
-	class Append<CustomStringT, bool>
+	template<class CStringT>
+	class Append<CStringT, bool>
 	{
 	public:
-		static void Perform(CustomStringT& s, const bool rhs)
+		static void Perform(CStringT& s, const bool rhs)
 		{
 			if (rhs)
 				s.appendWithoutChecking("true", 4);
@@ -122,11 +122,11 @@ namespace CustomString
 
 
 	// void*
-	template<class CustomStringT>
-	class Append<CustomStringT, void*>
+	template<class CStringT>
+	class Append<CStringT, void*>
 	{
 	public:
-		static void Perform(CustomStringT& s, const void* rhs)
+		static void Perform(CStringT& s, const void* rhs)
 		{
 			if (!rhs)
 				s.appendWithoutChecking("0x0", 3);
@@ -134,24 +134,24 @@ namespace CustomString
 			{
 				# ifdef YUNI_OS_MSVC
 				// With Visual Studio, the option %p does not provide the prefix 0x
-				typename CustomStringT::Type buffer[32];
+				typename CStringT::Type buffer[32];
 				buffer[0] = '0';
 				buffer[1] = 'x';
 				// On Windows, it may return a negative value
 				if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer + 2, sizeof(buffer) - 2, "%p", rhs) >= 0)
 				{
 					s.appendWithoutChecking(buffer,
-						Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+						Yuni::Traits::Length<typename CStringT::Type*, typename CStringT::Size>::Value(buffer));
 				}
 				else
 					s.appendWithoutChecking("0x0", 3);
 				# else
-				typename CustomStringT::Type buffer[32];
+				typename CStringT::Type buffer[32];
 				// On Windows, it may return a negative value
 				if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, sizeof(buffer), "%p", rhs) >= 0)
 				{
 					s.appendWithoutChecking(buffer,
-						Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+						Yuni::Traits::Length<typename CStringT::Type*, typename CStringT::Size>::Value(buffer));
 				}
 				else
 					s.appendWithoutChecking("0x0", 3);
@@ -162,11 +162,11 @@ namespace CustomString
 
 
 	// void*
-	template<class CustomStringT>
-	class Append<CustomStringT, Yuni::UTF8::Char>
+	template<class CStringT>
+	class Append<CStringT, Yuni::UTF8::Char>
 	{
 	public:
-		static void Perform(CustomStringT& s, const Yuni::UTF8::Char& rhs)
+		static void Perform(CStringT& s, const Yuni::UTF8::Char& rhs)
 		{
 			rhs.write(s);
 		}
@@ -176,31 +176,31 @@ namespace CustomString
 
 
 # define YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL(BUFSIZE, FORMAT, TYPE) \
-	template<class CustomStringT> \
-	class Append<CustomStringT, TYPE> \
+	template<class CStringT> \
+	class Append<CStringT, TYPE> \
 	{ \
 	public: \
-		static void Perform(CustomStringT& s, const TYPE rhs) \
+		static void Perform(CStringT& s, const TYPE rhs) \
 		{ \
-			typename CustomStringT::Type buffer[BUFSIZE]; \
+			typename CStringT::Type buffer[BUFSIZE]; \
 			/* On Windows, it may return a negative value */ \
 			if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, BUFSIZE, FORMAT, rhs) >= 0) \
 			{ \
 				buffer[BUFSIZE - 1] = '\0'; /* making sure that it is zero-terminated */ \
 				s.appendWithoutChecking(buffer, \
-					Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer)); \
+					Yuni::Traits::Length<typename CStringT::Type*, typename CStringT::Size>::Value(buffer)); \
 			} \
 		} \
 	}
 
 # define YUNI_PRIVATE_MEMORY_BUFFER_APPEND_IMPL_INT(TYPE) \
-	template<class CustomStringT> \
-	class Append<CustomStringT, TYPE> \
+	template<class CStringT> \
+	class Append<CStringT, TYPE> \
 	{ \
 	public: \
-		static void Perform(CustomStringT& s, const TYPE rhs) \
+		static void Perform(CStringT& s, const TYPE rhs) \
 		{ \
-			Yuni::Private::CustomStringImpl::From<Math::Base::Decimal, TYPE>::AppendTo(s, rhs); \
+			Yuni::Private::CStringImpl::From<Math::Base::Decimal, TYPE>::AppendTo(s, rhs); \
 		} \
 	}
 
@@ -222,12 +222,12 @@ namespace CustomString
 
 
 	// std::vector<>
-	template<class CustomStringT, class T>
-	class Append<CustomStringT, std::vector<T> >
+	template<class CStringT, class T>
+	class Append<CStringT, std::vector<T> >
 	{
 	public:
 		typedef std::vector<T> ListType;
-		static void Perform(CustomStringT& s, const ListType& rhs)
+		static void Perform(CStringT& s, const ListType& rhs)
 		{
 			s += '[';
 			if (!rhs.empty())
@@ -245,12 +245,12 @@ namespace CustomString
 
 
 	// std::vector<>
-	template<class CustomStringT, class T>
-	class Append<CustomStringT, std::list<T> >
+	template<class CStringT, class T>
+	class Append<CStringT, std::list<T> >
 	{
 	public:
 		typedef std::list<T> ListType;
-		static void Perform(CustomStringT& s, const ListType& rhs)
+		static void Perform(CStringT& s, const ListType& rhs)
 		{
 			s += '[';
 			if (!rhs.empty())
@@ -271,7 +271,7 @@ namespace CustomString
 
 
 
-} // namespace CustomString
+} // namespace CString
 } // namespace Extension
 } // namespace Yuni
 

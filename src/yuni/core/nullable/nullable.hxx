@@ -377,13 +377,13 @@ namespace Yuni
 {
 namespace Extension
 {
-namespace CustomString
+namespace CString
 {
 
-	template<class CustomStringT, class T, class Alloc>
-	struct Append<CustomStringT, Yuni::Nullable<T, Alloc> >
+	template<class CStringT, class T, class Alloc>
+	struct Append<CStringT, Yuni::Nullable<T, Alloc> >
 	{
-		static void Perform(CustomStringT& s, const Yuni::Nullable<T,Alloc>& rhs)
+		static void Perform(CStringT& s, const Yuni::Nullable<T,Alloc>& rhs)
 		{
 			if (!rhs.null())
 				s << rhs.value();
@@ -416,7 +416,7 @@ namespace CustomString
 	};
 
 
-} // namespace CustomString
+} // namespace CString
 } // namespace Extension
 } // namespace Yuni
 

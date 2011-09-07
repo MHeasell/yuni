@@ -130,7 +130,7 @@ namespace UTF8
 		//! The UTF-8 character
 		uint32 pValue;
 		// A friend !
-		template<unsigned int, bool, bool> friend class Yuni::CustomString;
+		template<unsigned int, bool, bool> friend class Yuni::CString;
 	};
 
 

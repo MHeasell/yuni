@@ -34,7 +34,7 @@ namespace Yuni
 {
 
 	//! Standard string implementation
-	typedef CustomString<> String;
+	typedef CString<> String;
 
 
 
@@ -52,9 +52,9 @@ namespace Yuni
 	**  - char*
 	**  - C[]
 	**  - std::basic_string<char>
-	**  - Yuni::CustomString<...>
+	**  - Yuni::CString<...>
 	**  - SmartPtr<std::basic_string<char>, ...>
-	**  - SmartPtr<CustomString<...>, ...>
+	**  - SmartPtr<CString<...>, ...>
 	**
 	** Example for iterating through all character (the recommended way)
 	** \code
@@ -100,8 +100,8 @@ namespace Yuni
 	** \tparam ZeroTerminatedT True to make the string zero-terminated
 	*/
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	class CustomString
-		:protected Private::CustomStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>
+	class CString
+		:protected Private::CStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>
 	{
 	public:
 		//! POD type
@@ -110,11 +110,11 @@ namespace Yuni
 		typedef char Type;
 
 		//! Ancestor
-		typedef Private::CustomStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>  AncestorType;
+		typedef Private::CStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>  AncestorType;
 		//! Size type
 		typedef typename AncestorType::Size Size;
 		//! Self
-		typedef CustomString<ChunkSizeT,ExpandableT,ZeroTerminatedT>  CustomStringType;
+		typedef CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>  CStringType;
 
 		//! \name Compatibility with std::string
 		//@{
@@ -133,13 +133,13 @@ namespace Yuni
 		//@}
 
 		//! Smartptr
-		typedef SmartPtr<CustomStringType> Ptr;
+		typedef SmartPtr<CStringType> Ptr;
 		//! A String vector
-		typedef std::vector<CustomStringType> Vector;
+		typedef std::vector<CStringType> Vector;
 		//! A String vector
 		typedef std::vector<Ptr> VectorPtr;
 		//! A String list
-		typedef std::list<CustomStringType> List;
+		typedef std::list<CStringType> List;
 		//! A string list
 		typedef std::list<Ptr> ListPtr;
 
@@ -167,10 +167,10 @@ namespace Yuni
 
 		//! Self, which can be written
 		typedef typename Static::If<adapter || !zeroTerminated || (!expandable && chunkSize > 512),
-			CustomString<>, CustomStringType>::RetTrue  WritableType;
+			CString<>, CStringType>::RetTrue  WritableType;
 
 		// Checking for a minimal chunk size
-		YUNI_STATIC_ASSERT(adapter || chunkSize > 3, CustomString_MinimalChunkSizeRequired);
+		YUNI_STATIC_ASSERT(adapter || chunkSize > 3, CString_MinimalChunkSizeRequired);
 
 	public:
 		//! \name CString comparison
@@ -213,7 +213,7 @@ namespace Yuni
 
 
 	private:
-		// Implements the following iterator models for CustomString<>
+		// Implements the following iterator models for String
 		# include "iterator.h"
 
 	public:
@@ -237,17 +237,17 @@ namespace Yuni
 		/*!
 		** \brief Default Constructor
 		*/
-		CustomString();
+		CString();
 
 		/*!
 		** \brief Copy constructor
 		*/
-		CustomString(const CustomString& rhs);
+		CString(const CString& rhs);
 
 		/*!
 		** \brief Constructor from a mere CString
 		*/
-		CustomString(const char* const block, const Size blockSize);
+		CString(const char* const block, const Size blockSize);
 
 		/*!
 		** \brief Constructor from a copy of a substring of 's'
@@ -256,7 +256,7 @@ namespace Yuni
 		** 'offset'.
 		*/
 		template<unsigned int SizeT, bool ExpT, bool ZeroT>
-		CustomString(const CustomString<SizeT,ExpT,ZeroT>& s, Size offset);
+		CString(const CString<SizeT,ExpT,ZeroT>& s, Size offset);
 
 		/*!
 		** \brief Constructor from a copy of a substring of 's'
@@ -266,7 +266,7 @@ namespace Yuni
 		** of 's' is reached before).
 		*/
 		template<unsigned int SizeT, bool ExpT, bool ZeroT>
-		CustomString(const CustomString<SizeT,ExpT,ZeroT>& s, Size offset, Size n /*= npos*/);
+		CString(const CString<SizeT,ExpT,ZeroT>& s, Size offset, Size n /*= npos*/);
 
 		/*!
 		** \brief Constructor from a copy of a substring of 's' (std::string)
@@ -275,7 +275,7 @@ namespace Yuni
 		** 'offset'.
 		*/
 		template<class TraitsT, class AllocT>
-		CustomString(const std::basic_string<char,TraitsT,AllocT>& s, Size offset);
+		CString(const std::basic_string<char,TraitsT,AllocT>& s, Size offset);
 
 		/*!
 		** \brief Constructor from a copy of a substring of 's' (std::string)
@@ -285,7 +285,7 @@ namespace Yuni
 		** of 's' is reached before).
 		*/
 		template<class TraitsT, class AllocT>
-		CustomString(const std::basic_string<char,TraitsT,AllocT>& s, Size offset, Size n /*= npos*/);
+		CString(const std::basic_string<char,TraitsT,AllocT>& s, Size offset, Size n /*= npos*/);
 
 		/*!
 		** \brief Constructor by copy from iterator
@@ -294,7 +294,7 @@ namespace Yuni
 		** \param end  An iterator pointing to the end of a sequence
 		*/
 		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2>
-		CustomString(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end);
+		CString(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end);
 
 		/*!
 		** \brief Constructor by copy from iterator
@@ -304,27 +304,27 @@ namespace Yuni
 		** \param separator A string to add between each item
 		*/
 		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT>
-		CustomString(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end, const StringT& separator);
+		CString(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end, const StringT& separator);
 
 		/*!
 		** \brief Constructor with a default value
 		*/
-		template<class U> CustomString(const U& rhs);
+		template<class U> CString(const U& rhs);
 
 		/*!
 		** \brief Construct a string formed by a repetition of the character c, n times
 		*/
-		CustomString(size_t n, char c);
+		CString(size_t n, char c);
 
 		/*!
 		** \brief Construct a string formed by a repetition of the character c, n times
 		*/
-		CustomString(size_t n, unsigned char c);
+		CString(size_t n, unsigned char c);
 
 		/*!
 		** \brief Destructor
 		*/
-		~CustomString();
+		~CString();
 		//@}
 
 
@@ -385,7 +385,7 @@ namespace Yuni
 		**
 		** The type held by the iterator can be anything as long as the type can
 		** be converted by the string (see specializations in the namespace
-		** `Yuni::Extension::CustomString`).
+		** `Yuni::Extension::CString`).
 		**
 		** \param begin An iterator pointing to the beginning of a sequence
 		** \param end  An iterator pointing to the end of a sequence
@@ -398,7 +398,7 @@ namespace Yuni
 		**
 		** The type held by the iterator can be anything as long as the type can
 		** be converted by the string (see specializations in the namespace
-		** `Yuni::Extension::CustomString`).
+		** `Yuni::Extension::CString`).
 		**
 		** \code
 		** String s = "string: こんにちは";
@@ -425,7 +425,7 @@ namespace Yuni
 		**
 		** The type held by the iterator can be anything as long as the type can
 		** be converted by the string (see specializations in the namespace
-		** `Yuni::Extension::CustomString`).
+		** `Yuni::Extension::CString`).
 		**
 		** \code
 		** String s = "string: こんにちは";
@@ -461,9 +461,9 @@ namespace Yuni
 		**
 		** The type held by the iterator can be anything as long as it can
 		** be converted by the string (see specializations in the namespace
-		** Yuni::Extension::CustomString).
+		** Yuni::Extension::CString).
 		**
-		** \see namespace Yuni::Extension::CustomString
+		** \see namespace Yuni::Extension::CString
 		** \param begin  An iterator pointing to the beginning of a sequence
 		** \param end    An iterator pointing to the end of a sequence
 		*/
@@ -475,7 +475,7 @@ namespace Yuni
 		**
 		** The type held by the iterator can be anything as long as it can
 		** be converted by the string (see specializations in the namespace
-		** Yuni::Extension::CustomString).
+		** Yuni::Extension::CString).
 		**
 		** \code
 		** String s = "string: こんにちは";
@@ -489,7 +489,7 @@ namespace Yuni
 		** std::cout << sub2 << std::endl; // ん, に
 		** \endcode
 		**
-		** \see namespace Yuni::Extension::CustomString
+		** \see namespace Yuni::Extension::CString
 		**
 		** \param begin     An iterator pointing to the beginning of a sequence
 		** \param end       An iterator pointing to the end of a sequence
@@ -504,7 +504,7 @@ namespace Yuni
 		**
 		** The type held by the iterator can be anything as long as it can
 		** be converted by the string (see specializations in the namespace
-		** Yuni::Extension::CustomString).
+		** Yuni::Extension::CString).
 		**
 		** \code
 		** String s = "string: こんにちは";
@@ -518,7 +518,7 @@ namespace Yuni
 		** std::cout << sub2 << std::endl; // "ん", "に"
 		** \endcode
 		**
-		** \see namespace Yuni::Extension::CustomString
+		** \see namespace Yuni::Extension::CString
 		**
 		** \param begin     An iterator pointing to the beginning of a sequence
 		** \param end       An iterator pointing to the end of a sequence
@@ -1302,7 +1302,7 @@ namespace Yuni
 		**
 		** \return Always *this
 		*/
-		CustomString& clear();
+		CString& clear();
 
 		/*!
 		** \brief Erase a part of the string
@@ -1405,11 +1405,11 @@ namespace Yuni
 		/*!
 		** \brief Convert the case (lower case) of characters in the string (O(N))
 		*/
-		CustomString& toLower();
+		CString& toLower();
 		/*!
 		** \brief Convert the case (upper case) of characters in the string (O(N))
 		*/
-		CustomString& toUpper();
+		CString& toUpper();
 		//@}
 
 
@@ -1652,7 +1652,7 @@ namespace Yuni
 		** \brief Get if the cstr is empty
 		**
 		** \code
-		** CustomString<> s;
+		** String s;
 		** s.empty();          // returns true
 		** s.null();           // returns true
 		**
@@ -1678,7 +1678,7 @@ namespace Yuni
 		** method `data()` will return NULL.
 		**
 		** \code
-		** CustomString<> s;
+		** String s;
 		** s.empty();          // returns true
 		** s.null();           // returns true
 		**
@@ -1735,7 +1735,7 @@ namespace Yuni
 		** \param format The format, reprensented by a zero-terminated string
 		** \return Always *this
 		*/
-		template<class StringT> CustomString& format(const StringT& format, ...);
+		template<class StringT> CString& format(const StringT& format, ...);
 
 		/*!
 		** \brief Append formatted string
@@ -1744,7 +1744,7 @@ namespace Yuni
 		** \param format The format, represented by a zero-terminated string
 		** \return Always *this
 		*/
-		template<class StringT> CustomString& appendFormat(const StringT& format, ...);
+		template<class StringT> CString& appendFormat(const StringT& format, ...);
 
 		/*!
 		** \brief Append a formatted string to the end of the current string
@@ -1874,14 +1874,14 @@ namespace Yuni
 		char& operator [] (const Size offset);
 
 		//! The operator `+=` (append)
-		template<class U> CustomString& operator += (const U& rhs);
+		template<class U> CString& operator += (const U& rhs);
 		//! The operator `<<` (append)
-		template<class U> CustomString& operator << (const U& rhs);
+		template<class U> CString& operator << (const U& rhs);
 
 		//! The operator `=` (assign - copy)
-		CustomString& operator = (const CustomString& rhs);
+		CString& operator = (const CString& rhs);
 		//! The operator `=` (assign)
-		template<class U> CustomString& operator = (const U& rhs);
+		template<class U> CString& operator = (const U& rhs);
 
 		//! The operator `<`
 		template<class StringT> bool operator <  (const StringT& rhs) const;
@@ -1894,7 +1894,7 @@ namespace Yuni
 		template<class StringT> bool operator >= (const StringT& rhs) const;
 
 		//! The operator `==`
-		bool operator == (const CustomString& rhs) const;
+		bool operator == (const CString& rhs) const;
 		//! The operator `==`
 		template<class StringT> bool operator == (const StringT& rhs) const;
 
@@ -1905,7 +1905,7 @@ namespace Yuni
 		bool operator ! () const;
 
 		//! The operator *=, to dupplicate N times the content of the string
-		CustomString& operator *= (int n);
+		CString& operator *= (int n);
 		//@}
 
 
@@ -1937,15 +1937,15 @@ namespace Yuni
 
 	private:
 		// our friends !
-		template<class, class, int> friend class Private::CustomStringImpl::From;
-		template<class, class> friend class Yuni::Extension::CustomString::Append;
-		template<class, class> friend class Yuni::Extension::CustomString::Assign;
-		template<class, class> friend class Yuni::Extension::CustomString::Fill;
-		template<class, bool>  friend struct Private::CustomStringImpl::AdapterAssign;
-		template<class, bool>  friend struct Private::CustomStringImpl::Consume;
-		template<unsigned int, bool, bool> friend class CustomString;
+		template<class, class, int> friend class Private::CStringImpl::From;
+		template<class, class> friend class Yuni::Extension::CString::Append;
+		template<class, class> friend class Yuni::Extension::CString::Assign;
+		template<class, class> friend class Yuni::Extension::CString::Fill;
+		template<class, bool>  friend struct Private::CStringImpl::AdapterAssign;
+		template<class, bool>  friend struct Private::CStringImpl::Consume;
+		template<unsigned int, bool, bool> friend class CString;
 
-	}; // class CustomString
+	}; // class CString
 
 
 
@@ -1973,7 +1973,7 @@ namespace Yuni
 	** std::cout << adapter << " (size: " << adapter.size() << ")" << std::endl;
 	** \endcode
 	*/
-	typedef CustomString<0, true, false>  StringAdapter;
+	typedef CString<0, true, false>  StringAdapter;
 
 
 

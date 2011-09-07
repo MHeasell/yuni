@@ -100,7 +100,7 @@ namespace IO
 		# else
 		if (len < 1020)
 		{
-			CustomString<1024, false, true> copy;
+			CString<1024, false, true> copy;
 			copy.assign(filename, len);
 			return Yuni::Private::IO::Size(copy.c_str(), copy.size(), value);
 		}
@@ -118,15 +118,15 @@ namespace IO
 
 
 
-	Yuni::IO::IOError YnDeleteFile(const char* const filename, unsigned int len)
+	Yuni::IO::Error YnDeleteFile(const char* const filename, unsigned int len)
 	{
 		if (!len)
-			return Yuni::IO::ioErrUnknown;
+			return Yuni::IO::errUnknown;
 
 		# ifndef YUNI_OS_WINDOWS
 		if (unlink(filename))
-			return Yuni::IO::ioErrUnknown;
-		return Yuni::IO::ioErrNone;
+			return Yuni::IO::errUnknown;
+		return Yuni::IO::errNone;
 		# else
 
 		const char* const p = filename;
@@ -136,35 +136,35 @@ namespace IO
 
 		// Driver letters
 		if (len == 2 && p[1] == ':')
-			return Yuni::IO::ioErrBadFilename;
+			return Yuni::IO::errBadFilename;
 
 		String  norm;
 		Yuni::IO::Normalize(norm, p, len);
 		// Conversion into wchar_t
 		WString<true> wstr(norm);
 		if (wstr.empty())
-			return Yuni::IO::ioErrUnknown;
+			return Yuni::IO::errUnknown;
 		wstr.replace('/', '\\');
 
 		if (DeleteFileW(wstr.c_str()))
-			return Yuni::IO::ioErrNone;
-		return Yuni::IO::ioErrUnknown;
+			return Yuni::IO::errNone;
+		return Yuni::IO::errUnknown;
 		# endif
 	}
 
 
-	Yuni::IO::IOError DeleteFileNotZeroTerminated(const char* const filename, unsigned int len)
+	Yuni::IO::Error DeleteFileNotZeroTerminated(const char* const filename, unsigned int len)
 	{
 		# ifndef YUNI_OS_WINDOWS
 		if (len < 1020)
 		{
-			CustomString<1024, false, true> copy;
+			CString<1024, false, true> copy;
 			copy.assign(filename, len);
 			return YnDeleteFile(copy.c_str(), copy.size());
 		}
 		else
 		{
-			CustomString<> copy;
+			CString<> copy;
 			copy.assign(filename, len);
 			return YnDeleteFile(copy.c_str(), copy.size());
 		}
@@ -174,7 +174,7 @@ namespace IO
 	}
 
 
-	Yuni::IO::IOError Copy(Yuni::IO::File::Stream& in, Yuni::IO::File::Stream& out)
+	Yuni::IO::Error Copy(Yuni::IO::File::Stream& in, Yuni::IO::File::Stream& out)
 	{
 		enum { size = 8192 };
 
@@ -189,7 +189,7 @@ namespace IO
 			{
 				off_t offset = 0;
 				if (-1 != sendfile(fdOUT, fdIN, &offset, (size_t) st.st_size))
-					return Yuni::IO::ioErrNone;
+					return Yuni::IO::errNone;
 			}
 
 			// fallback to the standard copy
@@ -200,7 +200,7 @@ namespace IO
 				write(fdOUT, buffer, numRead);
 
 			delete[] buffer;
-			return Yuni::IO::ioErrNone;
+			return Yuni::IO::errNone;
 		}
 
 		# else
@@ -211,7 +211,7 @@ namespace IO
 		while ((numRead = in.read(buffer, size)) != 0)
 			out.write(buffer, numRead);
 		delete[] buffer;
-		return Yuni::IO::ioErrNone;
+		return Yuni::IO::errNone;
 
 		# endif
 	}

@@ -63,7 +63,7 @@ namespace Audio
 		unsigned int pIDs[maxBufferCount];
 
 		//! Buffer for storing raw data
-		CustomString<bufferSize, false, false> pData;
+		CString<bufferSize, false, false> pData;
 
 	}; // class Sound
 

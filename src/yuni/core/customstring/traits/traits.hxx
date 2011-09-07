@@ -7,7 +7,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace CustomStringImpl
+namespace CStringImpl
 {
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT, class C>
@@ -163,7 +163,7 @@ namespace CustomStringImpl
 			C* newdata = (C*)::realloc(const_cast<char*>(data), (size_t)(sizeof(C) * newcapacity));
 			// The returned value can be NULL
 			if (!newdata)
-				throw "Yuni::CustomString: Impossible to realloc";
+				throw "Yuni::CString: Impossible to realloc";
 			{
 				data = newdata;
 				capacity = newcapacity;
@@ -299,7 +299,7 @@ namespace CustomStringImpl
 
 
 
-} // namespace CustomStringImpl
+} // namespace CStringImpl
 } // namespace Private
 } // namespace Yuni
 
