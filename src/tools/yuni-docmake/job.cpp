@@ -159,7 +159,7 @@ namespace // anonymous
 						}
 						else if (tag == "pragma:accesspath")
 						{
-							CustomString<32,false> string = element.Attribute("value");
+							CString<32,false> string = element.Attribute("value");
 							string.toLower();
 							if (string != "quicklinks")
 								logs.error() << pFilename << ": invalid access path overlay";
@@ -168,7 +168,7 @@ namespace // anonymous
 						}
 						else if (tag == "pragma:weight")
 						{
-							CustomString<32,false> string = element.Attribute("value");
+							CString<32,false> string = element.Attribute("value");
 							float weight;
 							if (!string.to(weight) || weight < 0.f || weight > 10.f)
 								logs.error() << pFilename << ": invalid page weight (decimal, range 0..10)";
@@ -497,7 +497,7 @@ bool CompileJob::extractOrder(const String& path)
 		return false;
 
 	// We are optimistic. The first 3 chars should be a number most of the time
-	CustomString<8,false> s;
+	CString<8,false> s;
 	s.resize(3);
 	s[2] = pTmp[offset + 3];
 	s[1] = pTmp[offset + 2];

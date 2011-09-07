@@ -14,7 +14,7 @@ namespace Net
 {
 
 	//! Raw Address for a host (IP/DNS)
-	typedef CustomString<256, false>  HostAddress;
+	typedef CString<256, false>  HostAddress;
 
 
 

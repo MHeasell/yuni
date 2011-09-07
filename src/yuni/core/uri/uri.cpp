@@ -221,7 +221,7 @@ namespace Yuni
 				}
 				else
 				{
-					CustomString<1024, false, false> tmp(infos.path);
+					CString<1024> tmp(infos.path);
 					IO::Normalize(tmp, infos.path);
 				}
 			}

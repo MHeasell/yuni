@@ -77,14 +77,14 @@ namespace File
 	/*!
 	** \brief Load the entire content of a file into memory
 	**
-	** If the file size is greater than @hardlimit, the content will be truncated (see 'ioErrMemoryLimit').
+	** If the file size is greater than @hardlimit, the content will be truncated (see 'errMemoryLimit').
 	** \param[out] out The content of the file
 	** \param filename The filename to open
 	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded
-	** \return ioErrNone if successful
+	** \return errNone if successful
 	*/
 	template<class StringT1, class StringT2>
-	IOError LoadFromFile(StringT1& out, const StringT2& filename, const uint64 hardlimit = sizeHardLimit);
+	IO::Error LoadFromFile(StringT1& out, const StringT2& filename, const uint64 hardlimit = sizeHardLimit);
 
 
 	/*!
@@ -104,10 +104,10 @@ namespace File
 	** \param from The source file
 	** \param to The target file
 	** \param overwrite Overwrite the target file if already exists
-	** \return ioErrNone if the operation succeeded
+	** \return errNone if the operation succeeded
 	*/
 	template<class StringT1, class StringT2>
-	IOError Copy(const StringT1& from, const StringT2& to, bool overwrite = true);
+	IO::Error Copy(const StringT1& from, const StringT2& to, bool overwrite = true);
 
 
 	/*!
@@ -115,7 +115,7 @@ namespace File
 	**
 	** \param filename The file to delete
 	*/
-	template<class StringT> IOError Delete(const StringT& filename);
+	template<class StringT> IO::Error Delete(const StringT& filename);
 
 
 	/*!

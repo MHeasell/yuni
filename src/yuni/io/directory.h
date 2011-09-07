@@ -71,8 +71,7 @@ namespace Directory
 	** \param mode Access permissions (ignored on the MS Windows platforms)
 	** \return True if the operation succeeded, false otherwise
 	*/
-	template<class StringT>
-	bool Create(const StringT& path, unsigned int mode = 0755);
+	bool Create(const StringAdapter& path, unsigned int mode = 0755);
 	//@}
 
 
@@ -84,7 +83,7 @@ namespace Directory
 	** \param p The path to delete
 	** \return True if the operation succeeded False otherwise
 	*/
-	template<class StringT> bool Remove(const StringT& path);
+	bool Remove(const StringAdapter& path);
 	//@}
 
 
@@ -133,7 +132,7 @@ namespace Directory
 } // namespace IO
 } // namespace Yuni
 
-# include "directory/directory.hxx"
 # include "io.h"
+# include "directory/directory.hxx"
 
 #endif // __YUNI_IO_DIRECTORY_H__

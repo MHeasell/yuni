@@ -47,7 +47,7 @@ namespace File
 	** if (file.open("myfile.txt"))
 	** {
 	** 		// A buffer. The given capacity will be the maximum length for a single line
-	** 		CustomString<4096> buffer;
+	** 		CString<4096> buffer;
 	** 		while (file.readline(buffer))
 	** 		{
 	** 			// do something with the buffer
@@ -228,7 +228,7 @@ namespace File
 		** \param buffer The buffer where to write the line
 		*/
 		template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-		bool readline(CustomString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer);
+		bool readline(CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer);
 
 		/*!
 		** \brief Read a buffer
@@ -250,7 +250,7 @@ namespace File
 		** \return The number of bytes that have been read
 		*/
 		template<unsigned int CSizeT, bool ExpT, bool ZeroT>
-		size_t read(CustomString<CSizeT,ExpT,ZeroT>&  buffer);
+		size_t read(CString<CSizeT,ExpT,ZeroT>&  buffer);
 		//@}
 
 
@@ -273,7 +273,7 @@ namespace File
 		/*!
 		** \brief Write any arbitrary buffer
 		**
-		** \param buffer An arbitrary buffer (const char*, String, CustomString)
+		** \param buffer An arbitrary buffer (const char*, String, CString)
 		** \return The number of bytes that have been written
 		*/
 		template<class U> size_t write(const U& buffer);
@@ -281,7 +281,7 @@ namespace File
 		/*!
 		** \brief Write any arbitrary buffer
 		**
-		** \param buffer An arbitrary buffer (const char*, String, CustomString)
+		** \param buffer An arbitrary buffer (const char*, String, CString)
 		** \param size Size of the buffer to write
 		** \return The number of bytes that have been written
 		*/

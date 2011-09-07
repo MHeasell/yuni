@@ -19,10 +19,10 @@ namespace IO
 
 	// DeleteFile is actually a macro and will be replaced by DeleteFileW
 	// with Visual Studio. Consequently we can not use the word DeleteFile.....
-	Yuni::IO::IOError YnDeleteFile(const char* const filename, unsigned int len);
-	Yuni::IO::IOError DeleteFileNotZeroTerminated(const char* const filename, unsigned int len);
+	Yuni::IO::Error YnDeleteFile(const char* const filename, unsigned int len);
+	Yuni::IO::Error DeleteFileNotZeroTerminated(const char* const filename, unsigned int len);
 
-	Yuni::IO::IOError Copy(Yuni::IO::File::Stream& in, Yuni::IO::File::Stream& out);
+	Yuni::IO::Error Copy(Yuni::IO::File::Stream& in, Yuni::IO::File::Stream& out);
 
 } // namespace IO
 } // namespace Private
@@ -127,10 +127,10 @@ namespace File
 
 
 	template<class StringT1, class StringT2>
-	IOError Copy(const StringT1& from, const StringT2& to, bool overwrite)
+	Error Copy(const StringT1& from, const StringT2& to, bool overwrite)
 	{
 		if (!overwrite && IO::Exists(to))
-			return ioErrOverwriteNotAllowed;
+			return errOverwriteNotAllowed;
 
 		// Open the source file
 		Yuni::IO::File::Stream fromFile(from, OpenMode::read);
@@ -140,7 +140,7 @@ namespace File
 			if (toFile.opened())
 				return Yuni::Private::IO::Copy(fromFile, toFile);
 		}
-		return ioErrNotFound;
+		return errNotFound;
 	}
 
 
@@ -157,9 +157,8 @@ namespace File
 	}
 
 
-
 	template<class StringT1, class StringT2>
-	IO::IOError
+	IO::Error
 	LoadFromFile(StringT1& out, const StringT2& filename, const uint64 hardlimit)
 	{
 		out.clear();
@@ -186,21 +185,20 @@ namespace File
 						numRead -= minus;
 						out.append((const char*) buffer, (unsigned int) numRead);
 					}
-					return ioErrMemoryLimit;
+					return errMemoryLimit;
 				}
 				// we use the standard method `append()` to allow the use of std::string
 				out.append((const char*) buffer, (unsigned int) numRead);
 			}
-			return ioErrNone;
+			return errNone;
 		}
-		return ioErrNotFound;
+		return errNotFound;
 	}
 
 
 
-
 	template<class StringT>
-	inline IOError Delete(const StringT& filename)
+	inline Error Delete(const StringT& filename)
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOFileExists_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOFileExists_InvalidTypeForBufferSize);

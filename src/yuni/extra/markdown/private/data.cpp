@@ -128,7 +128,7 @@ namespace Markdown
 		// No pragma command. We can go on !
 		if (debug)
 		{
-			CustomString<100,false> strline = line;
+			CString<100,false> strline = line;
 			strline << ", @=" << x << ' ';
 			if (strline.size() < 20)
 				strline.resize(20, '.');

@@ -90,7 +90,7 @@ namespace LogImpl
 		** The chunk size can not be merely the default one; Log entries often
 		** contain path of filename for example.
 		*/
-		Yuni::CustomString<FILENAME_MAX, false, true> pBuffer;
+		Yuni::CString<FILENAME_MAX, false, true> pBuffer;
 
 	}; // class Buffer
 

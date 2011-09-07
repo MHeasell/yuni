@@ -448,7 +448,7 @@ namespace Color
 
 	template<class T>
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroT>
-	void RGBA<T>::print(CustomString<ChunkSizeT, ExpandableT, ZeroT>& string) const
+	void RGBA<T>::print(CString<ChunkSizeT, ExpandableT, ZeroT>& string) const
 	{
 		string << "rgba("
 			<< static_cast<PrintType>(red) << ','
@@ -461,7 +461,7 @@ namespace Color
 	template<class StreamT>
 	void RGBA<T>::print(StreamT& out) const
 	{
-		CustomString<64, false, true> string;
+		CString<64, false, true> string;
 		string
 			<< static_cast<PrintType>(red) << ','
 			<< static_cast<PrintType>(green) << ','
@@ -481,14 +481,14 @@ namespace Yuni
 {
 namespace Extension
 {
-namespace CustomString
+namespace CString
 {
 
-	template<class CustomStringT, class T>
-	class Append<CustomStringT, Yuni::Color::RGBA<T> >
+	template<class CStringT, class T>
+	class Append<CStringT, Yuni::Color::RGBA<T> >
 	{
 	public:
-		static void Perform(CustomStringT& s, const Yuni::Color::RGBA<T>& rhs)
+		static void Perform(CStringT& s, const Yuni::Color::RGBA<T>& rhs)
 		{
 			rhs.print(s);
 		}
@@ -558,7 +558,7 @@ namespace CustomString
 			}
 
 			// A temporary string buffer for convertion
-			Yuni::CustomString<30, false> tmp;
+			Yuni::CString<30, false> tmp;
 			// A copy of the offset
 			typename StringT::const_utf8iterator j = i;
 			// A temporary value for calculations
@@ -621,7 +621,7 @@ namespace CustomString
 	};
 
 
-} // namespace CustomString
+} // namespace CString
 } // namespace Extension
 } // namespace Yuni
 

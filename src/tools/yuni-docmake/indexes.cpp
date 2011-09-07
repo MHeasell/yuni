@@ -37,7 +37,7 @@ namespace DocIndex
 		static bool ResetDBIndex()
 		{
 			logs.info() << "the index database needs to be rebuilt";
-			CustomString<2096> script;
+			CString<2096> script;
 
 			// Cleanup
 			PrepareSQLScriptCleanup(script);
@@ -164,7 +164,7 @@ namespace DocIndex
 	{
 		if (!gDB)
 			return;
-		CustomString<256> query;
+		CString<256> query;
 
 		query.clear() << "DELETE FROM articles WHERE rel_path = $1;";
 		sqlite3_stmt* stmt;
@@ -254,7 +254,7 @@ namespace DocIndex
 
 		logs.info() << "Looking for deprecated entries in the database";
 
-		CustomString<512> s = "DELETE FROM articles WHERE rel_path = \"\";";
+		CString<512> s = "DELETE FROM articles WHERE rel_path = \"\";";
 		{
 			sqlite3_stmt* stmt;
 			sqlite3_prepare_v2(gDB, s.c_str(), -1, &stmt, NULL);
@@ -587,7 +587,7 @@ namespace DocIndex
 		const float* weights,
 		unsigned int count)
 	{
-		CustomString<1024> query;
+		CString<1024> query;
 		query << "BEGIN;\n";
 		query << "DELETE FROM terms_per_article WHERE article_id = " << articleid << ";\n";
 		for (unsigned int i = 0; i != count; ++i)
@@ -631,7 +631,7 @@ namespace DocIndex
 		if (SQLITE_OK != sqlite3_get_table(gDB, query, &result, &rowCount, &colCount, NULL))
 			return;
 
-		CustomString<128 * 1024> s;
+		CString<128 * 1024> s;
 		s << "BEGIN;\n";
 		if (rowCount)
 		{
@@ -677,14 +677,14 @@ namespace DocIndex
 	{
 		char** result;
 		int rowCount, colCount;
-		CustomString<256,false> query;
+		CString<256,false> query;
 		query << "SELECT t.article_id,t.count_in_page,t.weight * w.weight"
 			<< " FROM terms_per_article AS t, terms as w"
 			<< " WHERE term_id = " << termid << " AND w.id = t.term_id";
 		if (SQLITE_OK != sqlite3_get_table(gDB, query.c_str(), &result, &rowCount, &colCount, NULL))
 			return;
 
-		CustomString<1024> s;
+		CString<1024> s;
 		s << "f(" << termid << ",'" << term << "',[";
 		if (rowCount)
 		{
@@ -715,12 +715,12 @@ namespace DocIndex
 	{
 		char** result;
 		int rowCount, colCount;
-		CustomString<128,false> query;
+		CString<128,false> query;
 		query << "SELECT id,html_href,title,weight FROM articles;";
 		if (SQLITE_OK != sqlite3_get_table(gDB, query.c_str(), &result, &rowCount, &colCount, NULL))
 			return;
 
-		CustomString<1024 * 128> s;
+		CString<1024 * 128> s;
 		s << "if (1) { var f=function(id,d) {SEO.articles[id] = d};";
 		if (rowCount)
 		{

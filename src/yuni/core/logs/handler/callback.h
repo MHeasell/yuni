@@ -46,8 +46,8 @@ namespace Logs
 
 
 	public:
-		Yuni::Event<void (int, const CustomString<>&)> callback;
-		CustomString<> pDispatchedMessage;
+		Yuni::Event<void (int, const String&)> callback;
+		String pDispatchedMessage;
 
 	}; // class Callback
 

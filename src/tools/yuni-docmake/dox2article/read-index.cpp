@@ -81,8 +81,8 @@ namespace Dox2Article
 
 		XMLIndexVisitor::~XMLIndexVisitor()
 		{
-			CustomString<128,false>  result;
-			CustomString<64,false>  name;
+			CString<128,false>  result;
+			CString<64,false>  name;
 
 			logs.info() << "Compound statistics from index";
 			for (unsigned int i = 1; i != Compound::kdMax; ++i)

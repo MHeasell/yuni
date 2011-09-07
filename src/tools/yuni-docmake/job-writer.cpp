@@ -133,7 +133,7 @@ namespace // anonymous
 			}
 			else if (tag == "source")
 			{
-				CustomString<16,false> type = e->Attribute("type");
+				CString<16,false> type = e->Attribute("type");
 				e->SetValue("pre");
 				e->RemoveAttribute("type");
 

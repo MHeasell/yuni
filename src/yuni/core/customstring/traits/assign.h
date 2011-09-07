@@ -15,30 +15,30 @@ namespace Yuni
 {
 namespace Extension
 {
-namespace CustomString
+namespace CString
 {
 
 
-	template<class CustomStringT, class C>
+	template<class CStringT, class C>
 	class Assign
 	{
 	public:
-		static void Perform(CustomStringT& s, const C& rhs)
+		static void Perform(CStringT& s, const C& rhs)
 		{
 			// By Default, we will clear the buffer and then append the new content
 			// Which is the standard behavior but may not the most efficient way
 			s.clear();
-			Yuni::Extension::CustomString::Append<CustomStringT, C>::Perform(s, rhs);
+			Yuni::Extension::CString::Append<CStringT, C>::Perform(s, rhs);
 		}
 	};
 
 
 	// T*
-	template<class CustomStringT, class T>
-	class Assign<CustomStringT, T*>
+	template<class CStringT, class T>
+	class Assign<CStringT, T*>
 	{
 	public:
-		static void Perform(CustomStringT& s, const T* rhs)
+		static void Perform(CStringT& s, const T* rhs)
 		{
 			s = (void*) rhs;
 		}
@@ -46,11 +46,11 @@ namespace CustomString
 
 
 	// char*
-	template<class CustomStringT>
-	class Assign<CustomStringT, void*>
+	template<class CStringT>
+	class Assign<CStringT, void*>
 	{
 	public:
-		static void Perform(CustomStringT& s, const void* rhs)
+		static void Perform(CStringT& s, const void* rhs)
 		{
 			if (!rhs)
 				s.assignWithoutChecking("0x0", 3);
@@ -58,24 +58,24 @@ namespace CustomString
 			{
 				# ifdef YUNI_OS_MSVC
 				// With Visual Studio, the option %p does not provide the prefix 0x
-				typename CustomStringT::Type buffer[32];
+				typename CStringT::Type buffer[32];
 				buffer[0] = '0';
 				buffer[1] = 'x';
 				// On Windows, it may return a negative value
 				if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer + 2, sizeof(buffer) - 2, "%p", rhs) >= 0)
 				{
 					s.appendWithoutChecking(buffer,
-						Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+						Yuni::Traits::Length<typename CStringT::Type*, typename CStringT::Size>::Value(buffer));
 				}
 				else
 					s.assignWithoutChecking("0x0", 3);
 				# else
-				typename CustomStringT::Type buffer[32];
+				typename CStringT::Type buffer[32];
 				// On Windows, it may return a negative value
 				if (YUNI_PRIVATE_MEMBUF_SPTRINF(buffer, sizeof(buffer), "%p", rhs) >= 0)
 				{
 					s.assignWithoutChecking(buffer,
-						Yuni::Traits::Length<typename CustomStringT::Type*, typename CustomStringT::Size>::Value(buffer));
+						Yuni::Traits::Length<typename CStringT::Type*, typename CStringT::Size>::Value(buffer));
 				}
 				else
 					s.assignWithoutChecking("0x0", 3);
@@ -87,16 +87,16 @@ namespace CustomString
 
 
 	// char*
-	template<class CustomStringT>
-	class Assign<CustomStringT, char*>
+	template<class CStringT>
+	class Assign<CStringT, char*>
 	{
 	public:
-		static void Perform(CustomStringT& s, const char* rhs)
+		static void Perform(CStringT& s, const char* rhs)
 		{
 			if (rhs)
 			{
 				s.assignWithoutChecking(rhs,
-					Yuni::Traits::Length<char*, typename CustomStringT::Size>::Value(rhs));
+					Yuni::Traits::Length<char*, typename CStringT::Size>::Value(rhs));
 			}
 			else
 				s.clear();
@@ -105,12 +105,12 @@ namespace CustomString
 
 
 	// C[N]
-	template<class CustomStringT, int N>
-	class Assign<CustomStringT, char[N]>
+	template<class CStringT, int N>
+	class Assign<CStringT, char[N]>
 	{
 	public:
 		typedef char C;
-		static void Perform(CustomStringT& s, const C rhs[N])
+		static void Perform(CStringT& s, const C rhs[N])
 		{
 			if (N > 0)
 			{
@@ -125,11 +125,11 @@ namespace CustomString
 
 
 	// C
-	template<class CustomStringT>
-	class Assign<CustomStringT, char>
+	template<class CStringT>
+	class Assign<CStringT, char>
 	{
 	public:
-		static void Perform(CustomStringT& s, const char rhs)
+		static void Perform(CStringT& s, const char rhs)
 		{
 			s.assignWithoutChecking(rhs);
 		}
@@ -137,11 +137,11 @@ namespace CustomString
 
 
 	// nullptr
-	template<class CustomStringT>
-	class Assign<CustomStringT, Yuni::NullPtr>
+	template<class CStringT>
+	class Assign<CStringT, Yuni::NullPtr>
 	{
 	public:
-		static void Perform(CustomStringT& s, const Yuni::NullPtr&)
+		static void Perform(CStringT& s, const Yuni::NullPtr&)
 		{
 			s.clear();
 		}
@@ -150,11 +150,11 @@ namespace CustomString
 
 
 	// bool
-	template<class CustomStringT>
-	class Assign<CustomStringT, bool>
+	template<class CStringT>
+	class Assign<CStringT, bool>
 	{
 	public:
-		static void Perform(CustomStringT& s, const bool rhs)
+		static void Perform(CStringT& s, const bool rhs)
 		{
 			if (rhs)
 				s.assignWithoutChecking("true", 4);
@@ -168,7 +168,7 @@ namespace CustomString
 
 
 
-} // namespace CustomString
+} // namespace CString
 } // namespace Extension
 } // namespace Yuni
 
