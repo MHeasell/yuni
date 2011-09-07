@@ -14,7 +14,7 @@ int main(int argc, char** argv)
 
 	Markdown::Reader  reader;
 	Markdown::Renderer::Html html;
-	CustomString<4096> buffer;
+	CString<4096> buffer;
 
 	for (int i = 1; i < argc; ++i)
 	{
