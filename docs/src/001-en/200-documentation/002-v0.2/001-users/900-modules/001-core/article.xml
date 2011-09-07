@@ -1,7 +1,7 @@
 <title>Core</title>
 
 
-<h1>Description</h1>
+<h2>Description</h2>
 <p>
 The Core module is the heart of Yuni. It is required as a dependency
 for all the other modules. It includes features that any C++ application
@@ -10,7 +10,7 @@ is compiled by default.
 </p>
 
 
-<h1>Contents</h1>
+<h2>Contents</h2>
 
 <ul>
 <li><b>Yuni::Any :</b>
@@ -117,7 +117,7 @@ Version management (major / minor).
 </ul>
 
 
-<h1>System dependencies</h1>
+<h2>System dependencies</h2>
 <ul>
 <li>None</li>
 </ul>

@@ -1,7 +1,7 @@
 <title>License</title>
 <pragma:toc value="0" />
 
-<h1>Yuni's License</h1>
+<h2>Yuni's License</h2>
 <p>
 YUNI's default license is the GNU Lesser Public License (LGPL), with some
 exclusions (see below). This basically means that you can get the full source
@@ -55,14 +55,14 @@ However, the original YUNI source code with all modifications must always be
 made available.
 </p>
 
-<h2>Links</h2>
+<h3>Links</h3>
 <ul>
 <li>Wikipedia : <a href="http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License">http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License</a></li>
 <li>gnu.org : <a href="http://www.gnu.org/licenses/lgpl.html">http://www.gnu.org/licenses/lgpl.html</a></li>
 </ul>
 
 
-<h1>license.txt</h1>
+<h2>license.txt</h2>
 <source>
 YUNI's default license is the GNU Lesser Public License (LGPL), with some
 exclusions (see below). This basically means that you can get the full source

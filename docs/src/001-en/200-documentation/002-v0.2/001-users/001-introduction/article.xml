@@ -1,7 +1,7 @@
 <title>Introduction</title>
 
 
-<h1>Definition</h1>
+<h2>Definition</h2>
 <p>
 Yuni is a cross-platform C++ framework for developing high-level, complex and
 fast applications. Yuni can be useful in all kinds of applications, from simple
@@ -30,7 +30,7 @@ The Yuni project is connected to all these domains :
 </ul>
 
 
-<h1>Misconceptions</h1>
+<h2>Misconceptions</h2>
 <p>
 Yuni is not a 3D engine nor a game engine.
 It offers a 3D engine as part of a wide-range library interested in multimedia
@@ -53,7 +53,7 @@ which means that it will have to be included and compiled as C++.
 </p>
 
 
-<h1>Target audience</h1>
+<h2>Target audience</h2>
 <p>
 Yuni is meant to be used by developers who already know C++, like it and want
 to use it for writing any kind of application without worrying about the

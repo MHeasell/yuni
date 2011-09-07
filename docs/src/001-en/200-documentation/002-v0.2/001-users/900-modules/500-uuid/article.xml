@@ -1,7 +1,7 @@
 <title>UUID</title>
 
 
-<h1>Description</h1>
+<h2>Description</h2>
 <p>
 The UUID module provides a platform-independent API for generating Universally
 unique identifiers (UUID).
@@ -21,7 +21,7 @@ bf348fb0-63e9-4355-888d-23aef99f6bfd
 See the <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier">article on Wikipedia</a> for more informations.
 </p>
 
-<h1>Generating a UUID</h1>
+<h2>Generating a UUID</h2>
 <source type="cpp">
 #include &lt;yuni/yuni.h&gt;
 #include &lt;yuni/core/string.h&gt;
@@ -37,7 +37,7 @@ int main()
 }
 </source>
 
-<h1>Conversion from / to the canonical form</h1>
+<h2>Conversion from / to the canonical form</h2>
 <p>
 The class is able to directly perform conversion with strings in both ways.
 </p>
@@ -94,7 +94,7 @@ int main()
 
 
 
-<h1>System dependencies</h1>
+<h2>System dependencies</h2>
 <ul>
 <li><a href="../core/@{INDEX}">Yuni::Core</a></li>
 <li>Linux : libuuid

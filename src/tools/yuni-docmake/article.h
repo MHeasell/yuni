@@ -69,6 +69,8 @@
 
 		//!
 		TagSet  allowedTagsInParagraph;
+		//! Page weight
+		float pageWeight;
 		//! The current coefficient
 		float coeff;
 		//! Title of the page

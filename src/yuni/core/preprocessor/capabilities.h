@@ -168,7 +168,7 @@
 
 
 /*!
-** \macro YUNI_DEPRECATED
+** \def YUNI_DEPRECATED
 ** \brief Deprecated
 */
 # if defined(YUNI_OS_GCC)
@@ -250,7 +250,7 @@
 
 
 /*!
-** \define YUNI_VA_COPY
+** \def YUNI_VA_COPY
 ** \brief Copy one variable argument list into another
 **
 ** You should use va_end to release the new list

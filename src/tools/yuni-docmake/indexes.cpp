@@ -188,7 +188,7 @@ namespace DocIndex
 				<< " VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);";
 			sqlite3_prepare_v2(gDB, query.c_str(), -1, &stmt, NULL);
 			sqlite3_bind_int(stmt, 1, (int)article.order);
-			sqlite3_bind_double(stmt, 2, article.coeff);
+			sqlite3_bind_double(stmt, 2, article.pageWeight);
 			sqlite3_bind_int(stmt, 3, (article.showQuickLinks ? 1 : 0));
 			sqlite3_bind_int(stmt, 4, (article.showHistory ? 1 : 0)); // show history
 			sqlite3_bind_int(stmt, 5, (article.showTOC ? 1 : 0)); // show toc
@@ -457,6 +457,8 @@ namespace DocIndex
 		const char* const query = "SELECT html_href,weight,modified FROM articles WHERE weight > 0.2 ORDER BY html_href";
 		if (SQLITE_OK == sqlite3_get_table(gDB, query, &result, &rowCount, &colCount, NULL))
 		{
+			String tmp;
+
 			if (rowCount)
 			{
 				unsigned int y = 3;
@@ -493,7 +495,9 @@ namespace DocIndex
 					href.replace(">", "&gt;");
 
 					out << "<url>\n";
-					out << "\t<loc>" << Program::webroot << href << "</loc>\n";
+					tmp.clear() << Program::webroot << href;
+					tmp.replace("//", "/");
+					out << "\t<loc>" << tmp << "</loc>\n";
 					// The default priority in a sitemap is 0.5
 					if (!Math::Equals(priority, 0.5f))
 						out << "\t<priority>" << priority << "</priority>\n";

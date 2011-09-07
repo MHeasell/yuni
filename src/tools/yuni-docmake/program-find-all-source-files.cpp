@@ -52,7 +52,13 @@ namespace DocMake
 				// checking if th default article file is present
 				tmp.clear() << filename << SEP << "article.xml";
 				if (!IO::File::Exists(tmp))
+				{
 					logs.warning() << "missing article.xml in " << filename;
+					String content;
+					content << "<title></title>\n";
+					content << "<pragma:directoryindex />\n";
+					IO::File::SetContent(tmp, content);
+				}
 			}
 			else
 			{

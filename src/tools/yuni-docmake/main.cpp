@@ -15,12 +15,12 @@ int main(int argc, char** argv)
 {
 	using namespace Yuni::Tool::DocMake;
 
-	logs.applicationName("yuni-docmake");
+	logs.applicationName("edln-make");
 	Program program;
 	if (!program.parseCommandLine(argc, argv))
 		return EXIT_FAILURE;
 
-	logs.checkpoint() << "Yuni Documentation Builder";
+	logs.checkpoint() << "Edalene Make";
 	if (!DocIndex::Open(program.htdocs))
 		return EXIT_FAILURE;
 

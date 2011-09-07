@@ -1,7 +1,7 @@
 <title>Recommended Softwares</title>
 
-<h1>Linux Tools</h1>
-<h2>Valgrind, for Memory leaks and Code profiling</h2>
+<h2>Linux Tools</h2>
+<h3>Valgrind, for Memory leaks and Code profiling</h3>
 <p>
 "Valgrind is an instrumentation framework for building dynamic analysis tools. There are Valgrind tools that can automatically detect many memory management and threading bugs, and profile your programs in detail".
 </p>
@@ -9,7 +9,7 @@
 website : <a href="http://valgrind.org/">http://valgrind.org/</a>
 </p>
 
-<h2>KCacheGrind, Profile data visualization</h2>
+<h3>KCacheGrind, Profile data visualization</h3>
 <p>
 "Callgrind uses runtime instrumentation via the Valgrind framework for its cache
 simulation and call-graph generation. This way, even shared libraries and dynamically
@@ -22,9 +22,9 @@ use KCachegrind.".
 website : <a href="http://kcachegrind.sourceforge.net/html/Home.html">http://kcachegrind.sourceforge.net/html/Home.html</a>
 </p>
 
-<h1>Windows Tools</h1>
+<h2>Windows Tools</h2>
 
-<h2>Dependency Walker</h2>
+<h3>Dependency Walker</h3>
 <p>
 "Dependency Walker is a free utility that scans any 32-bit or 64-bit Windows module
 (exe, dll, ocx, sys, etc.) and builds a hierarchical tree diagram of all dependent

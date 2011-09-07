@@ -1,6 +1,6 @@
 
 YMESSAGE("")
-YMESSAGE_BOLD("yuni-docmake")
+YMESSAGE_BOLD("edln-make")
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/CommonSettings.cmake")
 include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/Modules.cmake")
@@ -8,11 +8,6 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/Modules.cmake")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../..")
 include_directories(tinyxml)
-
-# Add definitions to help finding yuni parameters once installed (prefix + versioned path)
-add_definitions("-DYUNI_VERSIONED_INST_PATH=\"${YUNI_VERSIONED_INST_PATH}\"")
-add_definitions("-DYUNI_INSTALL_PREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
-add_definitions("-DYUNI_SOURCE_TREE=\"${YUNI_SOURCE_TREE}\"")
 
 
 # Writing index-db.hxx
@@ -71,7 +66,7 @@ file(WRITE webpage.hxx "${HXX_FILE}")
 
 
 
-add_library(yuni-docmake-static-tinyxml STATIC
+add_library(edln-make-static-tinyxml STATIC
 	tinyxml/tinystr.cpp
 	tinyxml/tinystr.h
 	tinyxml/tinyxml.cpp
@@ -80,7 +75,8 @@ add_library(yuni-docmake-static-tinyxml STATIC
 	tinyxml/tinyxmlparser.cpp
 	)
 
-set(src
+
+add_executable(edln-make
 	sqlite/sqlite3.c
 	sqlite/sqlite3.h
 	sqlite/sqlite3ext.h
@@ -99,30 +95,47 @@ set(src
 	indexes.h
 	indexes.cpp
 	index-db.hxx
-	)
+)
 
-# Build the in-tree version of yuni-config.
-add_executable(yuni-docmake ${src})
-
-target_link_libraries(yuni-docmake  yuni-static-core yuni-docmake-static-tinyxml)
+target_link_libraries(edln-make
+	yuni-static-core
+	edln-make-static-tinyxml)
 
 if(UNIX AND NOT APPLE)
 	# The DL library is required on Unixes for using SQlite
-	target_link_libraries(yuni-docmake  dl)
+	target_link_libraries(edln-make  dl)
 endif()
 
 
 
-
-set(src_helper
-	convert.cpp
-	logs.h
-	logs.cpp
-	)
+# ---
+# --- dox2article
+# ---
 
 # Build the in-tree version of yuni-config.
-add_executable(yuni-convert-xmldoxygen-to-doc ${src_helper})
+add_executable(edln-dox2article
+	dox2article/main.cpp
+	dox2article/compound.h
+	dox2article/compound.hxx
+	dox2article/compound.cpp
+	dox2article/options.h
+	dox2article/options.cpp
+	dox2article/read-index.h
+	dox2article/read-index.cpp
+	dox2article/job.h
+	dox2article/job.cpp
+	dox2article/job-compound-explorer.h
+	dox2article/job-compound-explorer.cpp
+	dox2article/job-compound-writer.h
+	dox2article/job-compound-writer.cpp
+	dox2article/indexes.h
+	dox2article/indexes.cpp
+	logs.h
+	logs.cpp
+)
 
-target_link_libraries(yuni-convert-xmldoxygen-to-doc  yuni-static-core yuni-docmake-static-tinyxml)
+target_link_libraries(edln-dox2article
+	yuni-static-core
+	edln-make-static-tinyxml)
 
 

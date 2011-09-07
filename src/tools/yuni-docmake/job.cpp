@@ -77,7 +77,7 @@ namespace // anonymous
 
 		ArticleData& pArticle;
 
-		//! Last TOC level (1: h1, 2: h2...)
+		//! Last TOC level (1: h2, 2: h3...)
 		unsigned int pLastTOCLevel;
 		String pTOCCaption;
 
@@ -166,6 +166,15 @@ namespace // anonymous
 							else
 								pArticle.accessPath = string;
 						}
+						else if (tag == "pragma:weight")
+						{
+							CustomString<32,false> string = element.Attribute("value");
+							float weight;
+							if (!string.to(weight) || weight < 0.f || weight > 10.f)
+								logs.error() << pFilename << ": invalid page weight (decimal, range 0..10)";
+							else
+								pArticle.pageWeight = weight;
+						}
 						else
 							logs.warning() << pFilename << ": unknown setting: " << tag;
 					}
@@ -176,22 +185,27 @@ namespace // anonymous
 							pState = ArticleData::stTitle;
 							pArticle.title.clear();
 						}
-						else if (tag == "h1")
+						else if (tag == "h2")
 						{
 							pLastTOCLevel = 1;
 							pTOCCaption.clear();
 							pState = ArticleData::stTOCItem;
 						}
-						else if (tag == "h2")
+						else if (tag == "h3")
 						{
 							pTOCCaption.clear();
 							if (!pLastTOCLevel)
 							{
-								logs.error() << "found h2 without h1. Adding an empty h1";
+								logs.error() << "found h3 without h2. Adding an empty h2";
 								pArticle.tocAppend(1, pTOCCaption);
 							}
 							pLastTOCLevel = 2;
 							pState = ArticleData::stTOCItem;
+						}
+						else if (tag == "h1")
+						{
+							logs.error() << "The tag h1 is reserved for the page title";
+							return false;
 						}
 					}
 					if (pWithinParagraph && pArticle.allowedTagsInParagraph.find(tag) == pArticle.allowedTagsInParagraph.end())
@@ -212,9 +226,9 @@ namespace // anonymous
 				}
 			case ArticleData::stTOCItem:
 				{
-					if (tag == "h1" || tag == "h2")
+					if (tag == "h2" || tag == "h3")
 					{
-						logs.error() << "invalid nested header  (h1,h2)";
+						logs.error() << "invalid nested header  (h2,h3)";
 						return false;
 					}
 					break;
@@ -307,7 +321,7 @@ namespace // anonymous
 				}
 			case ArticleData::stTOCItem:
 				{
-					if (name == "h1" || name == "h2")
+					if (name == "h2" || name == "h3")
 					{
 						pState = ArticleData::stNone;
 						float oldCoeff = pCoeff;
@@ -353,34 +367,29 @@ namespace // anonymous
 			pushCoeff(1.f);
 			return;
 		}
-		if (name == "h1")
+		if (name == "h2")
 		{
 			pushCoeff(3.f);
 			return;
 		}
-		if (name == "h2")
+		if (name == "h3")
 		{
 			pushCoeff(2.0f);
 			return;
 		}
-		if (name == "h3")
+		if (name == "h4")
 		{
 			pushCoeff(1.7f);
 			return;
 		}
-		if (name == "h4")
+		if (name == "h5")
 		{
 			pushCoeff(1.60f);
 			return;
 		}
-		if (name == "h5")
-		{
-			pushCoeff(1.55f);
-			return;
-		}
 		if (name == "h6")
 		{
-			pushCoeff(1.50f);
+			pushCoeff(1.55f);
 			return;
 		}
 		if (name == "b")
