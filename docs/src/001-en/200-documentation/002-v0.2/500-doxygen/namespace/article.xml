@@ -61,10 +61,10 @@
 <a href="../namespace/yuni/extension/@{INDEX}">Yuni::Extension</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../namespace/yuni/extension/color/@{INDEX}">Yuni::Extension::Color</a>
+<a href="../namespace/yuni/extension/cstring/@{INDEX}">Yuni::Extension::CString</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../namespace/yuni/extension/customstring/@{INDEX}">Yuni::Extension::CustomString</a>
+<a href="../namespace/yuni/extension/color/@{INDEX}">Yuni::Extension::Color</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/geometry/@{INDEX}">Yuni::Geometry</a>
