@@ -42,7 +42,7 @@ add_definitions("-DYUNI_SOURCE_TREE=\"${YUNI_SOURCE_TREE}\"")
 set(src
 	../../yuni/core/version/version.cpp
 	../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.cpp
-	../../yuni/io/io.cpp
+	../../yuni/io/constants.cpp
 	../../yuni/io/file/file.cpp
 	../../yuni/io/file/openmode.cpp
 	../../yuni/io/file/stream.cpp
