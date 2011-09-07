@@ -105,7 +105,7 @@ namespace VersionInfo
 			Version version;
 
 	 		// A buffer. The given capacity will be the maximum length for a single line
-	 		CustomString<8192> buffer;
+	 		CString<8192> buffer;
 			buffer.reserve(8000);
 	 		while (file.readline(buffer))
 			{
@@ -252,7 +252,7 @@ namespace VersionInfo
 		IO::File::Stream file;
 		if (file.open(out))
 		{
-			CustomString<8192> buffer;
+			CString<8192> buffer;
 			while (file.readline(buffer))
 				options.push_back(buffer);
 		}
