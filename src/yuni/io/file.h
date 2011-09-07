@@ -106,8 +106,7 @@ namespace File
 	** \param overwrite Overwrite the target file if already exists
 	** \return errNone if the operation succeeded
 	*/
-	template<class StringT1, class StringT2>
-	IO::Error Copy(const StringT1& from, const StringT2& to, bool overwrite = true);
+	IO::Error Copy(const StringAdapter& from, const StringAdapter& to, bool overwrite = true);
 
 
 	/*!

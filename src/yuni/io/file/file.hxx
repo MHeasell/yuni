@@ -22,7 +22,6 @@ namespace IO
 	Yuni::IO::Error YnDeleteFile(const char* const filename, unsigned int len);
 	Yuni::IO::Error DeleteFileNotZeroTerminated(const char* const filename, unsigned int len);
 
-	Yuni::IO::Error Copy(Yuni::IO::File::Stream& in, Yuni::IO::File::Stream& out);
 
 } // namespace IO
 } // namespace Private
@@ -125,23 +124,6 @@ namespace File
 		return false;
 	}
 
-
-	template<class StringT1, class StringT2>
-	Error Copy(const StringT1& from, const StringT2& to, bool overwrite)
-	{
-		if (!overwrite && IO::Exists(to))
-			return errOverwriteNotAllowed;
-
-		// Open the source file
-		Yuni::IO::File::Stream fromFile(from, OpenMode::read);
-		if (fromFile.opened())
-		{
-			Yuni::IO::File::Stream toFile(to, OpenMode::write | OpenMode::truncate);
-			if (toFile.opened())
-				return Yuni::Private::IO::Copy(fromFile, toFile);
-		}
-		return errNotFound;
-	}
 
 
 	template<class StringT, class U>

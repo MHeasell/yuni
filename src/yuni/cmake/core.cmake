@@ -609,6 +609,7 @@ set(SRC_IO_FILE
 		io/file.h
 		io/file/file.hxx
 		io/file/file.cpp
+		io/file/copy.cpp
 )
 source_group(io\\file FILES ${SRC_IO_FILE})
 
