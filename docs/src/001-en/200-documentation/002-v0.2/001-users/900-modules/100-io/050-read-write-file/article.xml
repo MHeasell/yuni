@@ -1,7 +1,7 @@
 <title>Reading from and writing to files</title>
 
 
-<h1>Convenient routines</h1>
+<h2>Convenient routines</h2>
 <ul>
 <li><b>include : </b><code>&lt;yuni/io/file.h&gt;</code></li>
 </ul>
@@ -9,7 +9,7 @@
 The class <code>Yuni::IO::File</code> provides some convenient routines
 for reading from and writing to a file without pain.
 </p>
-<h2>Reading a whole file at once</h2>
+<h3>Reading a whole file at once</h3>
 <source type="cpp">
 String content;
 switch (Core::IO::File::LoadFromFile(content, "myfile.txt"))
@@ -28,7 +28,7 @@ switch (Core::IO::File::LoadFromFile(content, "myfile.txt"))
 std::cout &lt;&lt; content &lt;&lt; std::endl;
 </source>
 
-<h2>Writing to a file</h2>
+<h3>Writing to a file</h3>
 <source type="cpp">
 // If the file already exists, it will be truncated
 String content = "Hello world !\n";
@@ -37,7 +37,7 @@ if (!Core::IO::File::SetContent("myfile.txt", content))
 </source>
 
 
-<h2>Appending to a file</h2>
+<h3>Appending to a file</h3>
 <source type="cpp">
 // The content will be added at the end of the file
 String content = "Some text !\n";
@@ -46,7 +46,7 @@ if (!Core::IO::File::AppendContent("myfile.txt", content))
 </source>
 
 
-<h2>Drawbacks</h2>
+<h3>Drawbacks</h3>
 <p>
 Although convenient, those routines can be memory hungry in some cases. In a
 critical code, you may prefer other ways, with a finer-grained access control,
@@ -54,7 +54,7 @@ like using the class <code>Yuni::Core::IO::File::Stream</code>.
 </p>
 
 
-<h1>Fine-grained access to file data (<code>Yuni::Core::IO::File::Stream</code>)</h1>
+<h2>Fine-grained access to file data (<code>Yuni::Core::IO::File::Stream</code>)</h2>
 <ul>
 <li><b>class : </b><code>Yuni::Core::IO::File::Stream</code></li>
 <li><b>include : </b><code>&lt;yuni/io/file.h&gt;</code></li>
@@ -84,7 +84,7 @@ using <code>close</code>.
 
 
 
-<h2>Reading from raw data files</h2>
+<h3>Reading from raw data files</h3>
 <p>
 This example reads each file given from the command line and writes them to the
 console (<code>std::cout</code>).
@@ -127,7 +127,7 @@ int main(int argc, char** argv)
 </source>
 
 
-<h2>Reading from a file line by line</h2>
+<h3>Reading from a file line by line</h3>
 <p>
 This example is the same as before, except we will read the file line by line
 and print the line number at the same time.
@@ -172,7 +172,7 @@ int main(int argc, char** argv)
 
 
 
-<h2>Writing to a file</h2>
+<h3>Writing to a file</h3>
 <p>
 Writing to a file is as simple as writing to any data stream.
 This example will write <code>"Hello world !\n"</code> to a filename given from the command line.

@@ -122,7 +122,7 @@ namespace // anonymous
 			pToDelete.push_back(const_cast<TiXmlElement*>(&element));
 		else
 		{
-			if (tag == "h1" || tag == "h2")
+			if (tag == "h2" || tag == "h3")
 			{
 				// Forcing the id
 				if (pCurrentTOCItemIndex < pArticle.tocItems.size())

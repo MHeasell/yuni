@@ -1,8 +1,8 @@
 <title>Smart pointers</title>
 
-<h1>The Problems</h1>
+<h2>The Problems</h2>
 
-<h2>Memory management</h2>
+<h3>Memory management</h3>
 
 <p>
 In C++, all data allocation and deallocation has to be done by hand using
@@ -13,7 +13,7 @@ program. In particular, some deletions might be forgotten and lead to memory
 leaks, or the program might even crash if a pointer is deleted twice.
 </p>
 
-<h2>Threading</h2>
+<h3>Threading</h3>
 
 <p>
 The main problem with multi-threaded applications is to synchronize access to
@@ -26,7 +26,7 @@ time-consuming and error-prone process that we would gladly do without.
 </p>
 
 
-<h1>Definition</h1>
+<h2>Definition</h2>
 
 <p>
 A smart pointer is a class that has pointer semantics, and hides the real data
@@ -35,7 +35,7 @@ are stored and how they are precisely managed determines the type of smart
 pointer.
 </p>
 
-<h1>Smart Pointer Types</h1>
+<h2>Smart Pointer Types</h2>
 
 <p>
 Several types of smart pointer exist. They have different lifetimes, different
@@ -46,7 +46,7 @@ problems than you already had. For this listing, we shall use denominations
 that are fairly common, although other literature may use other terms.
 </p>
 
-<h2>Scoped pointer</h2>
+<h3>Scoped pointer</h3>
 <p>
 As the name indicates, the scope pointer carries the internal pointer only over
 a limited scope. It is meant to be created on the stack to hold an allocated
@@ -90,7 +90,7 @@ ownership of the internal pointer, so you should never have several scoped
 pointers managing the same data.
 </p>
 
-<h2>Shared pointer</h2>
+<h3>Shared pointer</h3>
 <p>
 A shared pointer allows to share ownership of the internal pointer with other
 shared pointers. The data will be deleted when the last shared pointer managing
@@ -134,7 +134,7 @@ our object would have been deleted when exiting function <code>foo</code>. This
 would have lead to a crash on the second call to <code>A::doSomething</code>.
 </p>
 
-<h2>Weak Pointer</h2>
+<h3>Weak Pointer</h3>
 
 <p>
 A weak pointer acts as an observer of an object. As such, it does not take
@@ -186,7 +186,7 @@ int main()
 </source>
 
 
-<h1>Smart Pointer Implementations</h1>
+<h2>Smart Pointer Implementations</h2>
 
 <p>
 Some well-known implementations of a smart pointer exist :
@@ -202,7 +202,7 @@ read Herb Sutter's <a href="http://drdobbs.com/184403837/">The New C++:Smart(er)
 Pointers</a>.
 </p>
 
-<h1>Smart Pointers in Yuni</h1>
+<h2>Smart Pointers in Yuni</h2>
 
 <p>
 Yuni provides an implementation of a shared pointer.

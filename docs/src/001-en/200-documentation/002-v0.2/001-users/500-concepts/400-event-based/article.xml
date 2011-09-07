@@ -1,6 +1,6 @@
 <title>Event-Based Programming</title>
 
-<h1>Why use events ?</h1>
+<h2>Why use events ?</h2>
 
 <p>
 Event-based programming is a solution to a specific problem, namely :
@@ -13,7 +13,7 @@ instruction after the other.
 </p>
 
 
-<h1>Events and Handlers</h1>
+<h2>Events and Handlers</h2>
 
 <p>
 Event-based programming is based on messages that are sent when certain
@@ -56,7 +56,7 @@ all be informed when the event is sent.
 </p>
 
 
-<h1>Thread Safety</h1>
+<h2>Thread Safety</h2>
 
 <p>
 Thread safety and events are a notoriously shaky combination, so much so that
@@ -69,7 +69,7 @@ the bigger part of the problems.
 </p>
 
 
-<h1>Event Loop</h1>
+<h2>Event Loop</h2>
 
 <p>
 An Event Loop is a construct in which events being sent are fed into an event
@@ -106,9 +106,9 @@ The common process behind all event loops is :
 </ol>
 
 
-<h1>Events in Yuni</h1>
+<h2>Events in Yuni</h2>
 
-<h2>Simple case</h2>
+<h3>Simple case</h3>
 
 <p>
 In order to create a simple event and have a listener subscribe to it, these
@@ -118,7 +118,7 @@ are the useful classes included from <code>yuni/core/event.h</code> :
 <!-- TODO : Add links to the API -->
 <li><code>Yuni::Event</code> is the class representing an event</li>
 <li><code>Yuni::IEventObserver</code> is an abstract base class with a
-<a href="../../../glossary/@{INDEX}">CRTP</a> for event listeners</li>
+<a href="../../../glossary/crtp/@{INDEX}">CRTP</a> for event listeners</li>
 </ul>
 <p>
 <!-- For the moment, point to the repository, since the samples are not in the web site -->
@@ -126,7 +126,7 @@ For an example of how to use these classes, please see
 <a href="https://dev.libyuni.org/projects/yuni-framework/repository/entry/tags/0.1.1/src/samples/core/events/00.simple/main.cpp">the corresponding sample</a>.
 </p>
 
-<h2>Event Loop</h2>
+<h3>Event Loop</h3>
 
 <p>
 Yuni offers a generic event loop, which can be run in the main thread as the
@@ -136,11 +136,11 @@ main program loop, or in a new thread. The corresponding class can be found in
 <ul>
 <!-- TODO : Add links to the API -->
 <li><code>Yuni::Core::EventLoop::IEventLoop</code> is an abstract base class
-with a <a href="../../../glossary/@{INDEX}">CRTP</a> for event loops</li>
+with a <a href="../../../glossary/crtp/@{INDEX}">CRTP</a> for event loops</li>
 </ul>
 <p>
 In addition to its first template parameter used for the
-<a href="../../../glossary/@{INDEX}">CRTP</a>,
+<a href="../../../glossary/crtp/@{INDEX}">CRTP</a>,
 <code>IEventLoop</code> has three other template parameters that act as options
 to configure its behaviour :
 </p>

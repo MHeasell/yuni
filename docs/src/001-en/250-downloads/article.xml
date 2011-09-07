@@ -4,7 +4,7 @@
 <pragma:accesspath value="quicklinks" />
 
 
-<h1>Source Code</h1>
+<h2>Source Code</h2>
 
 <table class="nostyle vspace">
 <tr>
@@ -12,13 +12,13 @@
 	<img src="../../theme/default/images/archive.png" title="cpp" alt="cpp" />
 </td>
 <td>
-	<h2>Last stable (v0.1.1)</h2>
+	<h3>Last stable (v0.1.1)</h3>
 	<table class="nostyle">
 	<tr><td>tar/gz</td><td><a href="../../downloads/yuni-v0.1.1.tar.gz">yuni-v0.1.1.tar.gz</a></td></tr>
 	</table>
 
 	<!--
-	<h2>Daily snapshot</h2>
+	<h3>Daily snapshot</h3>
 	<table class="nostyle">
 	<tr><td>tar/gz</td><td><a href="#">libyuni-src-v0.1-20110809.tar.gz</a></td></tr>
 	<tr><td>zip</td><td><a href="#">libyuni-src-v0.1-20110809.zip</a></td></tr>
@@ -28,7 +28,7 @@
 </tr>
 </table>
 
-<h1>External dependencies, DevPacks</h1>
+<h2>External dependencies, DevPacks</h2>
 <p>
 All devpacks are available here : <a href="http://devpacks.libyuni.org">http://devpacks.libyuni.org</a>
 </p>

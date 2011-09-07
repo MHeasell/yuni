@@ -39,6 +39,7 @@ ArticleData::~ArticleData()
 
 void ArticleData::reset()
 {
+	pageWeight = 1.0f;
 	coeff = 1.0f;
 	title.clear();
 	error = false;

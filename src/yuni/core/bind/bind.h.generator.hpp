@@ -199,7 +199,7 @@ namespace Yuni
 		** \brief Bind to a function with a custom and persistent user data
 		**
 		** \tparam U The type of the user data
-		** \param pointer A pointer-to-function
+		** \param pointer  A pointer-to-function
 		** \param userdata The userdata that will be copied and stored
 		*/
 		template<class U>
@@ -209,7 +209,7 @@ namespace Yuni
 		** \brief Bind to an object member
 		**
 		** \tparam C Any class
-		** \param c A pointer to an object (can be null)
+		** \param c      A pointer to an object (can be null)
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(C* c, R (C::*member)(<%=generator.list(i)%>));
@@ -234,7 +234,7 @@ namespace Yuni
 		** \brief Bind to a const object member
 		**
 		** \tparam C Any class
-		** \param c A pointer to an object (can be null)
+		** \param c      A pointer to an object (can be null)
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(<%=generator.list(i)%>) const);
@@ -245,8 +245,9 @@ namespace Yuni
 		**
 		** \tparam U The type of the user data
 		** \tparam C Any class
-		** \param c A pointer to an object (can be null)
-		** \param member A pointer-to-member
+		** \param c        A pointer to an object (can be null)
+		** \param member   A pointer-to-member
+		** \param userdata User data
 		*/
 		template<class U, class C>
 		void bind(C* c, R (C::*member)(<%=generator.list(i,'A', "", ", ")%>U), typename WithUserData<U>::ParameterType userdata);
@@ -257,8 +258,9 @@ namespace Yuni
 		** \brief Bind to an object member with a custom and persistent user data
 		**
 		** \tparam C Any smartptr
-		** \param c A pointer to an object (can be null)
-		** \param member A pointer-to-member
+		** \param c        A pointer to an object (can be null)
+		** \param member   A pointer-to-member
+		** \param userdata User data
 		*/
 		template<class U, class C,
 			template <class> class OwspP, template <class> class ChckP, class ConvP,
@@ -279,6 +281,8 @@ namespace Yuni
 
 		/*!
 		** \brief Bind from a library symbol
+		**
+		** \param symbol A symbol from a dynamic library
 		*/
 		void bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		//@} // Bind
@@ -313,6 +317,8 @@ namespace Yuni
 		** Nothing will happen if the pointer is null
 		** However, the returned value may not be what we shall expect
 		** (the default constructor of the returned type is used in this case).
+		**
+		** \param userdata  Some user data
 		*/
 		template<class UserTypeT, template<class UserTypeGT, class ArgumentIndexTypeT> class ArgGetterT>
 		R callWithArgumentGetter(UserTypeT userdata) const;
@@ -323,6 +329,8 @@ namespace Yuni
 		//@{
 		/*!
 		** \brief Print the value to the std::ostream
+		**
+		** \param out A stream used to write output
 		*/
 		void print(std::ostream& out) const;
 		//@}

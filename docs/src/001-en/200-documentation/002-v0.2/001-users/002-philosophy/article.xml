@@ -1,7 +1,7 @@
 <title>Philosophy</title>
 
 
-<h1>Values</h1>
+<h2>Values</h2>
 <p>
 The Yuni team believes it is important to be clear as to what is important to
 us. Stating clearly the values we believe in helps to be consistent in
@@ -56,7 +56,7 @@ behaviour for advanced users who want to access all the power inside.
 </ul>
 
 
-<h1>Structure</h1>
+<h2>Structure</h2>
 <p>
 Yuni's structure is a direct consequence of the values we believe in. Yuni is
 a set of libraries because it allows for modularity. Yuni hides useless classes
@@ -70,7 +70,7 @@ are required dependencies for all the other modules. All the other modules are
 optional and can be used on a case-by-case basis.
 </p>
 
-<h1>Love is in the small things</h1>
+<h2>Love is in the small things</h2>
 <p>
 We want Yuni to be useful for all kinds of projects, and for all kinds of
 developers. This is why we put a lot of attention to details. For example, we
@@ -124,7 +124,7 @@ cater to everyone, to the best of our ability.
 </p>
 
 
-<h1>Helping people to like C++</h1>
+<h2>Helping people to like C++</h2>
 <p>
 This is a list of things that are often pointed as "bad" about the C++
 language. It is by no means objective or complete, but will serve as a support

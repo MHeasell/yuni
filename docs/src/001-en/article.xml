@@ -5,7 +5,7 @@
 <pragma:accesspath value="quicklinks" />
 
 
-<h1>What is Yuni ?</h1>
+<h2>What is Yuni ?</h2>
 <p>
 Yuni is a cross-platform C++ framework for developing high-level, complex and
 fast applications. Yuni can be useful in all kinds of applications, from simple

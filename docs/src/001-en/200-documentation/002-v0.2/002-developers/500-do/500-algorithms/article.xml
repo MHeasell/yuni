@@ -3,7 +3,7 @@
 <tag>algorithm</tag>
 
 
-<h1>Glossary</h1>
+<h2>Glossary</h2>
 <ul>
   <li>DObject : Distributed Object, set of properties able to react to
 	asynchronous messages.</li>
@@ -18,7 +18,7 @@
 </ul>
 
 
-<h1>Problems at hand</h1>
+<h2>Problems at hand</h2>
 <ul>
   <li>Problem 1 : How to balance a topology given a set of arbitrary constraints.</li>
   <li>Problem 2 : How to synchronize the replicas with their reference DObject.</li>
@@ -29,7 +29,7 @@
 </ul>
 
 
-<h1>Key programming concepts</h1>
+<h2>Key programming concepts</h2>
 <ul>
   <li>Identity : what is this DObject, and how to identify it uniquely</li>
   <li>Replicas : how many, where and how to reach them</li>
@@ -41,7 +41,7 @@
 </ul>
 
 
-<h1>Question 1</h1>
+<h2>Question 1</h2>
 <p>
   We have been discussing a paradigm where every DObject always has an existing physical
   representation on one node. This representation would be the original and the replicas
@@ -77,7 +77,7 @@
 </ul>
 
 
-<h1>Tackling Problem 1</h1>
+<h2>Tackling Problem 1</h2>
 
 <p>
 <b><em>Problem 1 : How to balance a topology given a set of arbitrary constraints.</em></b>
@@ -105,7 +105,7 @@ Let us consider each of these events in turn and analyze what the
 desired behaviour would be.
 </p>
 
-<h2>Creation of a DObject</h2>
+<h3>Creation of a DObject</h3>
 
 <p>
 When creating a DObject, it is important to know from which node the
@@ -114,7 +114,7 @@ there. Therefore, the best node to create a DObject is the one who
 asked that it be created.
 </p>
 
-<h2>Destruction of a DObject</h2>
+<h3>Destruction of a DObject</h3>
 
 <p>
 Since data destruction will only occur through garbage collection when
@@ -126,7 +126,7 @@ though the reference that created it is lost, if the timeout for the
 destruction of the replica has not yet been reached).
 </p>
 
-<h2>Use of a DObject</h2>
+<h3>Use of a DObject</h3>
 
 <p>
 A DObject being used be it for reading or writing will probably be the
@@ -144,7 +144,7 @@ will require a lot of trial and error. What can be said is that:
   destruction being reset</li>
 </ul>
 
-<h2>Node failure</h2>
+<h3>Node failure</h3>
 
 <p>
 Node failure is a problem of its own but in the context of determining
@@ -155,13 +155,13 @@ when the original DObject is moved for other reasons (see <b>Use of a
 DObject</b>).
 </p>
 
-<h2>Delay to use a replica exceeded</h2>
+<h3>Delay to use a replica exceeded</h3>
 
 <p>
 This point has been discussed in <b>Use of a DObject</b>
 </p>
 
-<h2>Node load not compliant with its weight</h2>
+<h3>Node load not compliant with its weight</h3>
 
 <p>
 A node being given a weight determining how much of the load of the
@@ -197,7 +197,7 @@ low load whatever the topology.
 </p>
 
 
-<h1>Tackling Problem 2</h1>
+<h2>Tackling Problem 2</h2>
 
 <p>
 <b><em>Problem 2 : How to synchronize the replicas with their reference DObject.</em></b>
@@ -208,7 +208,7 @@ TODO
 </p>
 
 
-<h1>Tackling Problem 3</h1>
+<h2>Tackling Problem 3</h2>
 
 <p>
 <b><em>Problem 3 : How to detect node failures and what to do.</em></b>
@@ -244,7 +244,7 @@ wait for a request to this node to fail. We will now study more closely
 each of these proposals.
 </p>
 
-<h2>Master node pinging</h2>
+<h3>Master node pinging</h3>
 
 <p>
 This is probably not the best answer to the problem, but for the sake
@@ -281,7 +281,7 @@ node entering the system must register only to the master node, which
 is actually quite simple.
 </p>
 
-<h2>Neighbour pinging</h2>
+<h3>Neighbour pinging</h3>
 
 <p>
 In this case, nodes that are close (in network access distance) will
@@ -295,7 +295,7 @@ neighbours that will have to be updated with the additions and
 removals. This might end up being a lot of management.
 </p>
 
-<h2>Node regions</h2>
+<h3>Node regions</h3>
 
 <p>
 In order to organize the nodes by proximity, but avoid having all
@@ -307,7 +307,7 @@ master nodes from neighbour regions.
 </p>
 
 
-<h1>Tackling Problem 4</h1>
+<h2>Tackling Problem 4</h2>
 
 <p>
 <b><em>Problem 4 : How to promote a replica as the new DObject when a node fails.</em></b>
@@ -357,7 +357,7 @@ not in possession of any other of the several originals for the DObject.
 </p>
 
 
-<h1>Tackling Problem 5</h1>
+<h2>Tackling Problem 5</h2>
 
 <p>
 <b><em>Problem 5 : How to give weight to a node and update this weight.</em></b>
@@ -368,7 +368,7 @@ TODO
 </p>
 
 
-<h1>Tackling Problem 6</h1>
+<h2>Tackling Problem 6</h2>
 
 <p>
 <b><em>Problem 6 : How to group DObjects and update group contents.</em></b>
@@ -379,7 +379,7 @@ TODO
 </p>
 
 
-<h1>Node grouping</h1>
+<h2>Node grouping</h2>
 
 <p>
 Following previous discussions, we intend to use a grouping system for nodes.
@@ -394,7 +394,7 @@ Mesh (see Wikipedia on
 for explanations).
 </p>
 
-<h2>Node Group Creation</h2>
+<h3>Node Group Creation</h3>
 
 <p>
 The number of groups, and how they are formed depends on the current state of
@@ -427,7 +427,7 @@ separately from any other, and it is probably easier for an automated system
 to discover which nodes are closest to each other.
 </p>
 
-<h2>Node Group Destruction</h2>
+<h3>Node Group Destruction</h3>
 
 <p>
 In much the same way as automatic grouping of new nodes may lead to a new group
@@ -435,7 +435,7 @@ being created, nodes being removed from the system can lead to a group being
 automatically destroyed.
 </p>
 
-<h2>Node Group Size And Balance</h2>
+<h3>Node Group Size And Balance</h3>
 
 <p>
 Group sizes should be approximately balanced. For this, minimum and maximum
@@ -459,9 +459,9 @@ described in Node Group Creation.
 </p>
 
 
-<h1>Conclusions</h1>
+<h2>Conclusions</h2>
 
-<h2>User variables</h2>
+<h3>User variables</h3>
 
 <p>
 Following what was said in previous discussions, some configurable user values
@@ -497,7 +497,7 @@ need to be offered.
 </ul>
 
 
-<h2>Algorithms</h2>
+<h3>Algorithms</h3>
 
 <p>
 As a summary of the previous thoughts, the work to be done emerges in the form

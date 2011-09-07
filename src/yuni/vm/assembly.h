@@ -58,13 +58,13 @@ namespace VM
 
 		//! \name Add
 		//@{
-		//! add <ret>, <R1>, <R2>: <ret> = <R1> + <R2>
+		//! add ret, R1, R2: ret = R1 + R2
 		void add(uint8 ret, uint8 r1, uint8 r2);
-		//! addu <ret>, <R1>, <R2>: <ret> = <R1> + <R2>  (unsigned)
+		//! addu ret, R1, R2: ret = R1 + R2  (unsigned)
 		void addu(uint8 ret, uint8 r1, uint8 r2);
-		//! addi <ret>, <R1>, I: <ret> = <R1> + I
+		//! addi ret, R1, I: ret = R1 + I
 		void addi(uint8 ret, uint8 r1, sint64 i);
-		//! addui <ret>, <R1>, I: <ret> = <R1> + I (unsigned)
+		//! addui ret, R1, I: ret = R1 + I (unsigned)
 		void addui(uint8 ret, uint8 r1, uint64 i);
 		//@}
 

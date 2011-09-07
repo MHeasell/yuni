@@ -1,20 +1,20 @@
 <title>String</title>
 
 
-<h1>Description</h1>
+<h2>Description</h2>
 <ul>
 <li><b>class : </b><code>Yuni::String</code></li>
 <li><b>include : </b><code>&lt;yuni/core/string.h&gt;</code></li>
 </ul>
 <p>
-The class <code>Yuni::String</code> (or <code>Yuni::CustomString&lt;&gt;</code>) represents an UTF-8 character string of arbitrary length (limited by MAX_UINT, which is 4294967296).
+The class <code>Yuni::String</code> (or <code>Yuni::CString&lt;&gt;</code>, which stands for `custom string`) represents an UTF-8 character string of arbitrary length (limited by MAX_UINT, which is 4294967296).
 </p>
 
-<h1>Comparison of <code>Yuni::String</code> with other string classes</h1>
+<h2>Comparison of <code>Yuni::String</code> with other string classes</h2>
 
 
 
-<h1>Basic usage</h1>
+<h2>Basic usage</h2>
 <p>
 This class behaves like a <code>std::ostream</code>
 </p>
@@ -37,11 +37,11 @@ int main()
 </source>
 
 
-<h1>Type conversions</h1>
+<h2>Type conversions</h2>
 <p>
 This string is already able to perform a lot of conversions on its own. All standard types are supported.
 </p>
-<h2>Type to String</h2>
+<h3>Type to String</h3>
 <source type="cpp">
 String s;
 s &lt;&lt; "Hello world : " &lt;&lt; 42;
@@ -63,7 +63,7 @@ std::cout &lt;&lt; "std::string : " &lt;&lt; s &lt;&lt; std::endl;
 </source>
 
 
-<h2>String to Type</h2>
+<h3>String to Type</h3>
 <source type="cpp">
 String s;
 int i;
@@ -107,7 +107,7 @@ u = s.to&lt;unsigned int&gt;();
 
 
 
-<h2>Supported types by default</h2>
+<h3>Supported types by default</h3>
 <p>Here is the list of all default supported types for conversion :</p>
 <ul>
 <li><code>char*</code></li>
@@ -129,7 +129,7 @@ u = s.to&lt;unsigned int&gt;();
 
 
 
-<h1>Tuning <code>Yuni::String</code> for your application</h1>
+<h2>Tuning <code>Yuni::String</code> for your application</h2>
 <p>
 <code>Yuni::String</code> is actually a typedef on <code>Yuni::CustomString&lt;&gt;</code>
 </p>
