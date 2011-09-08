@@ -80,7 +80,7 @@ namespace Directory
 			return true;
 
 		# ifdef YUNI_OS_WINDOWS
-		WString<true> fsource(path);
+		Private::WString<true> fsource(path);
 		if (fsource.empty())
 			return false;
 
