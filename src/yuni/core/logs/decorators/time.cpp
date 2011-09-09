@@ -31,17 +31,21 @@ namespace LogsDecorator
 
 	void WriteCurrentTimestampToBuffer(char buffer[32])
 	{
-		time_t rawtime;
-		::time(&rawtime);
+		# ifdef YUNI_OS_MSVC
+		_time64_t rawtime = ::_time64(nullptr);
+		# else
+		time_t rawtime = ::time(nullptr);
+		# endif
+
 		struct tm timeinfo;
 
 		# if defined(YUNI_OS_MSVC)
-		/* Microsoft Visual Studio */
-		::localtime_s(&timeinfo, &rawtime);
+		// Microsoft Visual Studio
+		::localtime64_s(&timeinfo, &rawtime);
 		// MSDN specifies that the buffer length value must be >= 26 for validity.
 		::asctime_s(buffer, 32, &timeinfo);
 		# else
-		/* Unixes */
+		// Unixes
 		::localtime_r(&rawtime, &timeinfo);
 		::asctime_r(&timeinfo, buffer);
 		# endif
