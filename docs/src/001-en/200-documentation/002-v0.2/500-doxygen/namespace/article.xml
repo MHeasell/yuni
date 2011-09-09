@@ -37,9 +37,6 @@
 <a href="../namespace/yuni/core/eventloop/statistics/@{INDEX}">Yuni::Core::EventLoop::Statistics</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../namespace/yuni/core/inifile/@{INDEX}">Yuni::Core::INIFile</a>
-</td><td></td></tr>
-<tr><td>
 <a href="../namespace/yuni/core/stl/@{INDEX}">Yuni::Core::STL</a>
 </td><td></td></tr>
 <tr><td>
@@ -130,9 +127,6 @@
 <a href="../namespace/yuni/math/random/@{INDEX}">Yuni::Math::Random</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../namespace/yuni/memory/@{INDEX}">Yuni::Memory</a>
-</td><td></td></tr>
-<tr><td>
 <a href="../namespace/yuni/net/@{INDEX}">Yuni::Net</a>
 </td><td></td></tr>
 <tr><td>
@@ -173,123 +167,6 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/private/@{INDEX}">Yuni::Private</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/any/@{INDEX}">Yuni::Private::Any</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/atomicimpl/@{INDEX}">Yuni::Private::AtomicImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/audio/@{INDEX}">Yuni::Private::Audio</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/bindimpl/@{INDEX}">Yuni::Private::BindImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/cstringimpl/@{INDEX}">Yuni::Private::CStringImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/color/@{INDEX}">Yuni::Private::Color</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/core/@{INDEX}">Yuni::Private::Core</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/core/eventloop/@{INDEX}">Yuni::Private::Core::EventLoop</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/eventimpl/@{INDEX}">Yuni::Private::EventImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/getoptimpl/@{INDEX}">Yuni::Private::GetOptImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/io/@{INDEX}">Yuni::Private::IO</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/io/directory/@{INDEX}">Yuni::Private::IO::Directory</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/io/directory/iterator/@{INDEX}">Yuni::Private::IO::Directory::Iterator</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/istringimpl/@{INDEX}">Yuni::Private::IStringImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/indextable/@{INDEX}">Yuni::Private::IndexTable</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/jobs/@{INDEX}">Yuni::Private::Jobs</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/linkedlistimpl/@{INDEX}">Yuni::Private::LinkedListImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/logimpl/@{INDEX}">Yuni::Private::LogImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/logsdecorator/@{INDEX}">Yuni::Private::LogsDecorator</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/markdown/@{INDEX}">Yuni::Private::Markdown</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/mathimpl/@{INDEX}">Yuni::Private::MathImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/net/@{INDEX}">Yuni::Private::Net</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/net/message/@{INDEX}">Yuni::Private::Net::Message</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/nullableimpl/@{INDEX}">Yuni::Private::NullableImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/process/@{INDEX}">Yuni::Private::Process</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/queueservice/@{INDEX}">Yuni::Private::QueueService</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/system/@{INDEX}">Yuni::Private::System</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/thread/@{INDEX}">Yuni::Private::Thread</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/ui/@{INDEX}">Yuni::Private::UI</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/ui/local/@{INDEX}">Yuni::Private::UI::Local</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/ui/local/adapter/@{INDEX}">Yuni::Private::UI::Local::Adapter</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/ui/local/window/@{INDEX}">Yuni::Private::UI::Local::Window</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/uuid/@{INDEX}">Yuni::Private::UUID</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/uri/@{INDEX}">Yuni::Private::Uri</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/vm/@{INDEX}">Yuni::Private::VM</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/vm/instruction/@{INDEX}">Yuni::Private::VM::Instruction</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/validatorimpl/@{INDEX}">Yuni::Private::ValidatorImpl</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/validatorimpl/text/@{INDEX}">Yuni::Private::ValidatorImpl::Text</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/private/variant/@{INDEX}">Yuni::Private::Variant</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/result/@{INDEX}">Yuni::Result</a>
@@ -335,9 +212,6 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/thread/@{INDEX}">Yuni::Thread</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/thread/local/@{INDEX}">Yuni::Thread::Local</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/traits/@{INDEX}">Yuni::Traits</a>
@@ -388,4 +262,4 @@
 <a href="../namespace/std/@{INDEX}">std</a>
 </td><td></td></tr>
 </table>
-<p><i>(total: 128 namespaces)</i></p>
+<p><i>(total: 86 namespaces)</i></p>

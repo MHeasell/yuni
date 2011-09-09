@@ -31,6 +31,7 @@ namespace Dox2Article
 				<< "<pragma:directoryindex content=\"nofollow\" />"
 				<< "\n\n"
 				<< "<h2>API Reference</h2>\n"
+				<< "<p><b>Beware: THIS DOCUMENTATION IS INCOMPLETE AND WE'RE CURRENTLY WORKING ON IT</b></p>\n"
 				<< "<ul>\n"
 				<< "<li><a href=\"class/@{INDEX}\">All classes</a></li>\n"
 				<< "<li><a href=\"namespace/@{INDEX}\">All namespaces</a></li>\n"
