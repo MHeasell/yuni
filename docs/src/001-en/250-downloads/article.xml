@@ -12,9 +12,11 @@
 	<img src="../../theme/default/images/archive.png" title="cpp" alt="cpp" />
 </td>
 <td>
-	<h3>Last stable (v0.1.1)</h3>
+	<b>Last stable (v0.1.1)</b>
 	<table class="nostyle">
-	<tr><td>tar/gz</td><td><a href="../../downloads/yuni-v0.1.1.tar.gz">yuni-v0.1.1.tar.gz</a></td></tr>
+	<tr><td>tar/gz</td><td><a href="../../downloads/yuni-v0.1.1.tar.gz">yuni-v0.1.1.tar.gz</a> (2.0Mo)</td></tr>
+	<tr><td>zip</td><td><a href="../../downloads/yuni-v0.1.1.zip">yuni-v0.1.1.zip</a> (2.4Mo)</td></tr>
+	<tr><td>svn repos.</td><td><a href="https://svn.iwi.me/yuni/tags/0.1.1">https://svn.iwi.me/yuni/tags/0.1.1</a></td></tr>
 	</table>
 
 	<!--
