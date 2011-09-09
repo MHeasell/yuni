@@ -721,6 +721,13 @@ set(SRC_CORE_MISC
 )
 source_group(core\\any FILES ${SRC_CORE_ANY})
 
+set(SRC_DATETIME
+		datetime/timestamp.h
+		datetime/timestamp.hxx
+		datetime/timestamp.cpp
+)
+source_group(datetime\\ FILES ${SRC_DATETIME})
+
 
 
 add_library(yuni-static-core STATIC
@@ -738,6 +745,7 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_SYSTEM_CONSOLE}
 		${SRC_CORE_STRING}
 		${SRC_CORE_STL} ${SRC_CORE_VALIDATOR}
+		${SRC_DATETIME}
 		${SRC_IO_FILENAME}
 		${SRC_IO_DIRECTORY}
 		${SRC_IO_DIRECTORY_INFO}
