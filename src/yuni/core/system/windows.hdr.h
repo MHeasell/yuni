@@ -13,8 +13,8 @@
 #	ifndef _WIN32_WINNT /* currently mingw does not define, mingw64 does */
 #		define _WIN32_WINNT 0x0500 /* At least windows 2000 */
 #	endif
-#	include <windows.h>
 #	include <winsock2.h>
+#	include <windows.h>
 #	include <stdio.h>
 #	include <stdlib.h>
 #	include <time.h>
