@@ -17,6 +17,7 @@ CREATE TABLE articles (
 	show_history           INTEGER NOT NULL DEFAULT 1,
 	show_toc               INTEGER NOT NULL DEFAULT 1,
 	modified               INTEGER NOT NULL DEFAULT 0,
+	directory_index        INTEGER NOT NULL DEFAULT 2, -- dicAll
 	parent                 TEXT NOT NULL,
 	force_access_path      TEXT DEFAULT NULL,
 	dir_index              TEXT DEFAULT NULL
@@ -50,5 +51,6 @@ CREATE TABLE terms_per_article (
 	count_in_page          INTEGER NOT NULL DEFAULT 0,
 	weight                 REAL NOT NULL DEFAULT 1.0
 );
+
 
 

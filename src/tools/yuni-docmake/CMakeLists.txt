@@ -82,6 +82,8 @@ add_executable(edln-make
 	sqlite/sqlite3ext.h
 	article.h
 	article.cpp
+	dictionary.h
+	dictionary.cpp
 	program.h
 	program.cpp
 	program-find-all-source-files.cpp

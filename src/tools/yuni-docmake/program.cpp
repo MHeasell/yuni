@@ -52,10 +52,10 @@ namespace DocMake
 		opts.add(htdocs        ,' ', "htdocs", "htdocs folder");
 		opts.add(webroot       ,'w', "webroot", "The web root (ex: http://www.libyuni.org)");
 		opts.add(indexFilename ,'i', "index", "index filename (default: index.html)");
-		opts.addFlag(clean     ,'c', "clean", "Clean the htdocs folder first");
+		opts.addFlag(clean     ,'c', "clean", "Clean the index db");
 		opts.addFlag(shortUrl  ,'s', "short-url", "Use short url");
 		opts.add(nbJobs        ,'j', "jobs", String() << "Number of concurrent jobs (default: " << nbJobs
-				 << ", max: " << cpuCount  << ')');
+			<< ", max: " << cpuCount  << ')');
 
 		// Help
 		opts.addParagraph("\nHelp");

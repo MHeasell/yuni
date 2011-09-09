@@ -5,6 +5,7 @@
 # include <yuni/core/string.h>
 # include <yuni/io/file.h>
 # include "article.h"
+# include "dictionary.h"
 
 
 namespace DocIndex
@@ -26,8 +27,10 @@ namespace DocIndex
 	bool AppendArticleTitleFromPath(Yuni::String& out, const Yuni::String& path);
 
 
-	void BuildDirectoryIndex(Yuni::String& out, const Yuni::String& path);
+	void BuildDirectoryIndex(Yuni::Clob& out, const Yuni::String& path);
 
+
+	Yuni::sint64 ArticleLastModificationTimeFromCache(const ArticleData& article);
 
 
 	/*!
@@ -46,7 +49,7 @@ namespace DocIndex
 	**
 	** \return The ID in the database
 	*/
-	int RegisterWordReference(const ArticleData::Word& term);
+	int RegisterWordReference(const Dictionary::Word& term);
 
 	void RegisterWordIDsForASingleArticle(int articleid, const int* termid,
 		const int* countInArticle,
@@ -61,10 +64,12 @@ namespace DocIndex
 
 
 
-	void BuildSEOTermReference(Yuni::IO::File::Stream& file, const ArticleData::Word& term, int termid);
+	void BuildSEOTermReference(Yuni::Clob& data);
 
 	void BuildSEOArticlesReference();
 
+
+	void* DatabaseHandle();
 
 } // namespace DocIndex
 

@@ -39,6 +39,7 @@ ArticleData::~ArticleData()
 
 void ArticleData::reset()
 {
+	modificationTime = 0;
 	pageWeight = 1.0f;
 	coeff = 1.0f;
 	title.clear();
@@ -52,6 +53,7 @@ void ArticleData::reset()
 	accessPath.clear();
 	tocItems.clear();
 	wordCount.clear();
+	directoryIndexContent = dicAll;
 }
 
 
