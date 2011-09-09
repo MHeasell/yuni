@@ -136,7 +136,7 @@ namespace IO
 	/*!
 	** \brief Normalize a filename
 	**
-	** The input can be a Windows-style or a Unix-style path, with mixed slasles and anti-slashes.
+	** The input can be a Windows-style or a Unix-style path, with mixed slashes and anti-slashes.
 	** This routine removes dot segments (`.` and `..`) from a given filename (when
 	** possible).
 	** Any final slash will be removed.
