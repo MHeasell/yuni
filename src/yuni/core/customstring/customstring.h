@@ -36,6 +36,8 @@ namespace Yuni
 	//! Standard string implementation
 	typedef CString<> String;
 
+	//! Character Large Object
+	typedef CString<4096>  Clob;
 
 
 	/*!
@@ -1572,7 +1574,7 @@ namespace Yuni
 		** \endcode
 		**
 		** \param len The new length (in bytes) of the string
-		** \parent pattern The pattern to use to fill the new content
+		** \param pattern The pattern to use to fill the new content
 		** \see fill()
 		*/
 		template<class StringT> void resize(const Size len, const StringT& pattern);
@@ -1777,7 +1779,7 @@ namespace Yuni
 		** \param pattern A pattern
 		** \warning This method should not be used in a new code and will be removed
 		**   as soon as possible
-		** \TODO To be removed as soon as possible
+		** \todo To be removed as soon as possible
 		*/
 		template<class StringT> bool glob(const StringT& pattern) const;
 
@@ -1839,16 +1841,14 @@ namespace Yuni
 		** "key" = "All characters are allowed here, like semicolons; :)"
 		** \endcode
 		**
-		** \param s A line (ex: `   category=core vtol ctrl_v level1 weapon  notsub ;`)
 		** \param[out] key The key that has been found
 		** \param[out] value The associated value
-		** \param chcase The key will be converted to lowercase if equals to `soIgnoreCase`
+		** \param ignoreCase True to be case insensitive
 		**
 		** \see ExtractKeyvalue()
 		*/
 		template<class StringT1, class StringT2>
 		void extractKeyValue(StringT1& key, StringT2& value, bool ignoreCase = false) const;
-
 		//@}
 
 
@@ -1856,6 +1856,9 @@ namespace Yuni
 		//@{
 		/*!
 		** \brief Adapt from a mere C-String
+		**
+		** \param cstring A C-string
+		** \param length Length of the string
 		*/
 		void adapt(const char* cstring, Size length);
 
