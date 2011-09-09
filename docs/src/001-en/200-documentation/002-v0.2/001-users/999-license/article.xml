@@ -1,5 +1,8 @@
+
 <title>License</title>
-<pragma:toc value="0" />
+<pragma:toc visible="0" />
+
+
 
 <h2>Yuni's License</h2>
 <p>
@@ -14,7 +17,7 @@ require, as long as you:
 </p>
 
 <p>
-Pass on the (modified) YUNI source code with your software, with original 
+Pass on the (modified) YUNI source code with your software, with original
 copyrights intact :
 </p>
 <ul>

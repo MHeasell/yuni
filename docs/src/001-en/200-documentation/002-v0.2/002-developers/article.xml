@@ -1,2 +1,2 @@
 <title>Developers</title>
-<pragma:directoryindex />
+<pragma:directoryindex src="." />

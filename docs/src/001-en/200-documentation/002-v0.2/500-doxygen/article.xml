@@ -1,4 +1,6 @@
 <title>Doxygen</title>
+<pragma:weight value="0.55" />
+<pragma:directoryindex content="nofollow" />
 
 <h2>API Reference</h2>
 <ul>

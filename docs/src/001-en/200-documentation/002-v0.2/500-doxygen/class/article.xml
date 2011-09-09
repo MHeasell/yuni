@@ -34,7 +34,7 @@
 <a href="../class/yuni/appenditerator/@{INDEX}">Yuni::AppendIterator</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../class/yuni/atomic/yuni_atomic_inherits/@{INDEX}">Yuni::Atomic::YUNI_ATOMIC_INHERITS</a>
+<a href="../class/yuni/atomic/int/@{INDEX}">Yuni::Atomic::Int</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/audio/emitter/@{INDEX}">Yuni::Audio::Emitter</a>
@@ -67,6 +67,9 @@
 <a href="../class/yuni/bind/@{INDEX}">Yuni::Bind</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/bind/staticassert_bind_badfunctionormembersignature/@{INDEX}">Yuni::Bind::StaticAssert_Bind_BadFunctionOrMemberSignature</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/boundingbox/@{INDEX}">Yuni::BoundingBox</a>
 </td><td></td></tr>
 <tr><td>
@@ -83,6 +86,9 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/cstring/model/utf8iterator/@{INDEX}">Yuni::CString::Model::UTF8Iterator</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/cstring/staticassert_cstring_minimalchunksizerequired/@{INDEX}">Yuni::CString::StaticAssert_CString_MinimalChunkSizeRequired</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/charset/converter/@{INDEX}">Yuni::Charset::Converter</a>
@@ -113,6 +119,9 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/core/eventloop/statistics/none/@{INDEX}">Yuni::Core::EventLoop::Statistics::None</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/core/inifile/reader/@{INDEX}">Yuni::Core::INIFile::Reader</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/core/stl/delete/@{INDEX}">Yuni::Core::STL::Delete</a>
@@ -272,6 +281,9 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/extension/cstring/append/@{INDEX}">Yuni::Extension::CString::Append</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/extension/cstring/append/staticassert_cstring_appendunknowntype/@{INDEX}">Yuni::Extension::CString::Append::StaticAssert_CString_AppendUnknownType</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/extension/cstring/assign/@{INDEX}">Yuni::Extension::CString::Assign</a>
@@ -493,10 +505,19 @@
 <a href="../class/yuni/math/random/table/@{INDEX}">Yuni::Math::Random::Table</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/math/random/table/staticassert_mathrandomtable_invalidtablesize/@{INDEX}">Yuni::Math::Random::Table::StaticAssert_MathRandomTable_InvalidTableSize</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/math/roundtoint/@{INDEX}">Yuni::Math::RoundToInt</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/math/squarerootint/@{INDEX}">Yuni::Math::SquareRootInt</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/memory/itransaction/@{INDEX}">Yuni::Memory::ITransaction</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/memory/region/@{INDEX}">Yuni::Memory::Region</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/mutex/@{INDEX}">Yuni::Mutex</a>
@@ -637,6 +658,216 @@
 <a href="../class/yuni/policy/storage/pointer/@{INDEX}">Yuni::Policy::Storage::Pointer</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/private/any/empty/@{INDEX}">Yuni::Private::Any::Empty</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/any/functions/@{INDEX}">Yuni::Private::Any::Functions</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/any/functions/typemanipulator/@{INDEX}">Yuni::Private::Any::Functions::TypeManipulator</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/any/table/@{INDEX}">Yuni::Private::Any::Table</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/any/typemanipulationtable/@{INDEX}">Yuni::Private::Any::TypeManipulationTable</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/atomicimpl/operator/@{INDEX}">Yuni::Private::AtomicImpl::Operator</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/atomicimpl/threadingpolicy/@{INDEX}">Yuni::Private::AtomicImpl::ThreadingPolicy</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/atomicimpl/typefromsize/@{INDEX}">Yuni::Private::AtomicImpl::TypeFromSize</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/atomicimpl/volatile/@{INDEX}">Yuni::Private::AtomicImpl::Volatile</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/audio/av/@{INDEX}">Yuni::Private::Audio::AV</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/audio/audiofile/@{INDEX}">Yuni::Private::Audio::AudioFile</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/audio/audiostream/@{INDEX}">Yuni::Private::Audio::AudioStream</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/audio/openal/@{INDEX}">Yuni::Private::Audio::OpenAL</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/bindimpl/argument/@{INDEX}">Yuni::Private::BindImpl::Argument</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/bindimpl/parameter/@{INDEX}">Yuni::Private::BindImpl::Parameter</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/bindimpl/unbind/@{INDEX}">Yuni::Private::BindImpl::Unbind</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/cstringimpl/adapterassign/@{INDEX}">Yuni::Private::CStringImpl::AdapterAssign</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/cstringimpl/consume/@{INDEX}">Yuni::Private::CStringImpl::Consume</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/cstringimpl/data/@{INDEX}">Yuni::Private::CStringImpl::Data</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/cstringimpl/from/@{INDEX}">Yuni::Private::CStringImpl::From</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/cstringimpl/qualifierfromadaptermode/@{INDEX}">Yuni::Private::CStringImpl::QualifierFromAdapterMode</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/cstringimpl/typeinfo/@{INDEX}">Yuni::Private::CStringImpl::TypeInfo</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/color/calculation/@{INDEX}">Yuni::Private::Color::Calculation</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/color/defaultvalues/@{INDEX}">Yuni::Private::Color::DefaultValues</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/color/print/@{INDEX}">Yuni::Private::Color::Print</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/color/signedtype/@{INDEX}">Yuni::Private::Color::SignedType</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/core/eventloop/thread/@{INDEX}">Yuni::Private::Core::EventLoop::Thread</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/eventimpl/emptypredicate/@{INDEX}">Yuni::Private::EventImpl::EmptyPredicate</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/eventimpl/predicateremoveobject/@{INDEX}">Yuni::Private::EventImpl::PredicateRemoveObject</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/eventimpl/predicateremoveobserverbase/@{INDEX}">Yuni::Private::EventImpl::PredicateRemoveObserverBase</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/eventimpl/predicateremovewithoutchecks/@{INDEX}">Yuni::Private::EventImpl::PredicateRemoveWithoutChecks</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/getoptimpl/flag/@{INDEX}">Yuni::Private::GetOptImpl::Flag</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/getoptimpl/ioption/@{INDEX}">Yuni::Private::GetOptImpl::IOption</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/getoptimpl/option/@{INDEX}">Yuni::Private::GetOptImpl::Option</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/getoptimpl/paragraph/@{INDEX}">Yuni::Private::GetOptImpl::Paragraph</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/getoptimpl/value/@{INDEX}">Yuni::Private::GetOptImpl::Value</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/io/directory/iterator/idetachedthread/@{INDEX}">Yuni::Private::IO::Directory::Iterator::IDetachedThread</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/io/directory/iterator/interface/@{INDEX}">Yuni::Private::IO::Directory::Iterator::Interface</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/io/directory/iterator/options/@{INDEX}">Yuni::Private::IO::Directory::Iterator::Options</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/indextable/indexedby/@{INDEX}">Yuni::Private::IndexTable::IndexedBy</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/jobs/queuethread/@{INDEX}">Yuni::Private::Jobs::QueueThread</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/linkedlistimpl/compare/@{INDEX}">Yuni::Private::LinkedListImpl::Compare</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/logimpl/buffer/@{INDEX}">Yuni::Private::LogImpl::Buffer</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/markdown/readerdata/@{INDEX}">Yuni::Private::Markdown::ReaderData</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/markdown/signature/@{INDEX}">Yuni::Private::Markdown::Signature</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/mathimpl/distance2d/@{INDEX}">Yuni::Private::MathImpl::Distance2D</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/mathimpl/distance3d/@{INDEX}">Yuni::Private::MathImpl::Distance3D</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/net/message/worker/@{INDEX}">Yuni::Private::Net::Message::Worker</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/nullableimpl/holder/@{INDEX}">Yuni::Private::NullableImpl::Holder</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/nullableimpl/isnullable/@{INDEX}">Yuni::Private::NullableImpl::IsNullable</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/queueservice/jobaccessor/@{INDEX}">Yuni::Private::QueueService::JobAccessor</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/queueservice/waitingroom/@{INDEX}">Yuni::Private::QueueService::WaitingRoom</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/adapter/forrepresentation/@{INDEX}">Yuni::Private::UI::Local::Adapter::ForRepresentation</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/adapter/localforrepresentation/@{INDEX}">Yuni::Private::UI::Local::Adapter::LocalForRepresentation</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/glsurface/@{INDEX}">Yuni::Private::UI::Local::GLSurface</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/glxsurface/@{INDEX}">Yuni::Private::UI::Local::GLXSurface</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/iqueueservice/@{INDEX}">Yuni::Private::UI::Local::IQueueService</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/surface/@{INDEX}">Yuni::Private::UI::Local::Surface</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/wglsurface/@{INDEX}">Yuni::Private::UI::Local::WGLSurface</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/window/iwindow/@{INDEX}">Yuni::Private::UI::Local::Window::IWindow</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/window/locker/@{INDEX}">Yuni::Private::UI::Local::Window::Locker</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/ui/local/window/x11/@{INDEX}">Yuni::Private::UI::Local::Window::X11</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/uuid/helper/@{INDEX}">Yuni::Private::UUID::Helper</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/uri/informations/@{INDEX}">Yuni::Private::Uri::Informations</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/vm/program/@{INDEX}">Yuni::Private::VM::Program</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/variant/adata/@{INDEX}">Yuni::Private::Variant::AData</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/variant/converter/@{INDEX}">Yuni::Private::Variant::Converter</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/variant/data/@{INDEX}">Yuni::Private::Variant::Data</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/variant/dataconverter/@{INDEX}">Yuni::Private::Variant::DataConverter</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/private/variant/idataconverter/@{INDEX}">Yuni::Private::Variant::IDataConverter</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/process/@{INDEX}">Yuni::Process</a>
 </td><td></td></tr>
 <tr><td>
@@ -751,7 +982,13 @@
 <a href="../class/yuni/thread/array/@{INDEX}">Yuni::Thread::Array</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/thread/array/staticassert_threadarray_t_mustinheritfrom_ithread/@{INDEX}">Yuni::Thread::Array::StaticAssert_ThreadArray_T_MustInheritFrom_IThread</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/thread/ithread/@{INDEX}">Yuni::Thread::IThread</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/thread/local/ptr/@{INDEX}">Yuni::Thread::Local::Ptr</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/thread/signal/@{INDEX}">Yuni::Thread::Signal</a>
@@ -818,6 +1055,276 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/unit/angle/sibaseunit/@{INDEX}">Yuni::Unit::Angle::SIBaseUnit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/bit/@{INDEX}">Yuni::Unit::Data::Bit::Bit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/exabit/@{INDEX}">Yuni::Unit::Data::Bit::Exabit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/gigabit/@{INDEX}">Yuni::Unit::Data::Bit::Gigabit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/hectobit/@{INDEX}">Yuni::Unit::Data::Bit::Hectobit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/kilobit/@{INDEX}">Yuni::Unit::Data::Bit::Kilobit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/megabit/@{INDEX}">Yuni::Unit::Data::Bit::Megabit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/petabit/@{INDEX}">Yuni::Unit::Data::Bit::Petabit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/sibaseunit/@{INDEX}">Yuni::Unit::Data::Bit::SIBaseUnit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/terabit/@{INDEX}">Yuni::Unit::Data::Bit::Terabit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/bit/zettabit/@{INDEX}">Yuni::Unit::Data::Bit::Zettabit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/exaoctet/@{INDEX}">Yuni::Unit::Data::Octet::Exaoctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/exbioctet/@{INDEX}">Yuni::Unit::Data::Octet::Exbioctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/gibioctet/@{INDEX}">Yuni::Unit::Data::Octet::Gibioctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/gigaoctet/@{INDEX}">Yuni::Unit::Data::Octet::Gigaoctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/kibioctet/@{INDEX}">Yuni::Unit::Data::Octet::Kibioctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/kilooctet/@{INDEX}">Yuni::Unit::Data::Octet::Kilooctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/mebioctet/@{INDEX}">Yuni::Unit::Data::Octet::Mebioctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/megaoctet/@{INDEX}">Yuni::Unit::Data::Octet::Megaoctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/octet/@{INDEX}">Yuni::Unit::Data::Octet::Octet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/pebioctet/@{INDEX}">Yuni::Unit::Data::Octet::Pebioctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/petaoctet/@{INDEX}">Yuni::Unit::Data::Octet::Petaoctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/sibaseunit/@{INDEX}">Yuni::Unit::Data::Octet::SIBaseUnit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/tebioctet/@{INDEX}">Yuni::Unit::Data::Octet::Tebioctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/teraoctet/@{INDEX}">Yuni::Unit::Data::Octet::Teraoctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/yobioctet/@{INDEX}">Yuni::Unit::Data::Octet::Yobioctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/zebioctet/@{INDEX}">Yuni::Unit::Data::Octet::Zebioctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/data/octet/zettaoctet/@{INDEX}">Yuni::Unit::Data::Octet::Zettaoctet</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/astronomical/@{INDEX}">Yuni::Unit::Length::Astronomical</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/attometre/@{INDEX}">Yuni::Unit::Length::Attometre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/barleycorn/@{INDEX}">Yuni::Unit::Length::Barleycorn</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/cablelength/@{INDEX}">Yuni::Unit::Length::CableLength</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/cablelengthimperial/@{INDEX}">Yuni::Unit::Length::CableLengthImperial</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/cablelengthus/@{INDEX}">Yuni::Unit::Length::CableLengthUS</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/centimetre/@{INDEX}">Yuni::Unit::Length::Centimetre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/chain/@{INDEX}">Yuni::Unit::Length::Chain</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/cubit/@{INDEX}">Yuni::Unit::Length::Cubit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/decametre/@{INDEX}">Yuni::Unit::Length::Decametre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/decimetre/@{INDEX}">Yuni::Unit::Length::Decimetre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/ell/@{INDEX}">Yuni::Unit::Length::Ell</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/exametre/@{INDEX}">Yuni::Unit::Length::Exametre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/fathom/@{INDEX}">Yuni::Unit::Length::Fathom</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/fentometre/@{INDEX}">Yuni::Unit::Length::Fentometre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/fermi/@{INDEX}">Yuni::Unit::Length::Fermi</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/finger/@{INDEX}">Yuni::Unit::Length::Finger</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/foot/@{INDEX}">Yuni::Unit::Length::Foot</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/footbenoit/@{INDEX}">Yuni::Unit::Length::FootBenoit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/footclarkecape/@{INDEX}">Yuni::Unit::Length::FootClarkeCape</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/footindian/@{INDEX}">Yuni::Unit::Length::FootIndian</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/footsear/@{INDEX}">Yuni::Unit::Length::FootSear</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/footus/@{INDEX}">Yuni::Unit::Length::FootUS</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/frenchcharriere/@{INDEX}">Yuni::Unit::Length::FrenchCharriere</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/furlong/@{INDEX}">Yuni::Unit::Length::Furlong</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/geographicalmile/@{INDEX}">Yuni::Unit::Length::GeographicalMile</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/gigametre/@{INDEX}">Yuni::Unit::Length::Gigametre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/hand/@{INDEX}">Yuni::Unit::Length::Hand</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/hectometre/@{INDEX}">Yuni::Unit::Length::Hectometre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/inch/@{INDEX}">Yuni::Unit::Length::Inch</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/kilometre/@{INDEX}">Yuni::Unit::Length::Kilometre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/league/@{INDEX}">Yuni::Unit::Length::League</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/lightday/@{INDEX}">Yuni::Unit::Length::LightDay</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/lighthour/@{INDEX}">Yuni::Unit::Length::LightHour</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/lightminute/@{INDEX}">Yuni::Unit::Length::LightMinute</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/lightsecond/@{INDEX}">Yuni::Unit::Length::LightSecond</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/lightyear/@{INDEX}">Yuni::Unit::Length::LightYear</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/line/@{INDEX}">Yuni::Unit::Length::Line</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/linkgunter/@{INDEX}">Yuni::Unit::Length::LinkGunter</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/linkramsden/@{INDEX}">Yuni::Unit::Length::LinkRamsden</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/megametre/@{INDEX}">Yuni::Unit::Length::Megametre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/metre/@{INDEX}">Yuni::Unit::Length::Metre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/mickey/@{INDEX}">Yuni::Unit::Length::Mickey</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/micrometre/@{INDEX}">Yuni::Unit::Length::Micrometre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/micron/@{INDEX}">Yuni::Unit::Length::Micron</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/mil/@{INDEX}">Yuni::Unit::Length::Mil</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/mile/@{INDEX}">Yuni::Unit::Length::Mile</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/mileus/@{INDEX}">Yuni::Unit::Length::MileUS</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/millimetre/@{INDEX}">Yuni::Unit::Length::Millimetre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/nail/@{INDEX}">Yuni::Unit::Length::Nail</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/nanometre/@{INDEX}">Yuni::Unit::Length::Nanometre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/nauticalleague/@{INDEX}">Yuni::Unit::Length::NauticalLeague</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/nauticalmile/@{INDEX}">Yuni::Unit::Length::NauticalMile</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/nauticalmileadmiralty/@{INDEX}">Yuni::Unit::Length::NauticalMileAdmiralty</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/parsec/@{INDEX}">Yuni::Unit::Length::Parsec</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/petametre/@{INDEX}">Yuni::Unit::Length::Petametre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/picometre/@{INDEX}">Yuni::Unit::Length::Picometre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/sibaseunit/@{INDEX}">Yuni::Unit::Length::SIBaseUnit</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/terametre/@{INDEX}">Yuni::Unit::Length::Terametre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/yoctometre/@{INDEX}">Yuni::Unit::Length::Yoctometre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/yottametre/@{INDEX}">Yuni::Unit::Length::Yottametre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/zeptometre/@{INDEX}">Yuni::Unit::Length::Zeptometre</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/unit/length/zettametre/@{INDEX}">Yuni::Unit::Length::Zettametre</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/unit/luminance/candela/@{INDEX}">Yuni::Unit::Luminance::Candela</a>
@@ -949,4 +1456,4 @@
 <a href="../class/iterator/@{INDEX}">iterator</a>
 </td><td></td></tr>
 </table>
-<p><i>(total: 315 classes)</i></p>
+<p><i>(total: 484 classes)</i></p>

@@ -1,6 +1,2 @@
-<title>YUNI_ATOMIC_INHERITS</title>
-<pragma:weight value="0.9" />
-<tag name="doxygen" />
-<tag name="class" />
-
-
+<title></title>
+<pragma:directoryindex src="." />
