@@ -1,2 +1,2 @@
 <title>User's manual</title>
-<pragma:directoryindex />
+<pragma:directoryindex src="." />

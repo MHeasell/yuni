@@ -33,9 +33,10 @@ SEO = {
 			};
 			// updating weights
 			// console.log("register  " + t + ",    w:" + r.w);
-			for (var j = 0; j != r.pages.length; ++j)
-			{
-				r.pages[j].wResult = r.pages[j].w * r.w;
+			if (r.pages) {
+				for (var j = 0; j != r.pages.length; ++j) {
+					r.pages[j].wResult = r.pages[j].w * r.w;
+				}
 			}
 			tokens.push(r);
 		}
@@ -44,7 +45,7 @@ SEO = {
 			if (tks[i] == "") // invalid token
 				continue;
 			var t = tks[i];
-		
+
 			if (t == "+")
 				weight = 1.0;
 			else if (t == "-")

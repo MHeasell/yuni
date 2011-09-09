@@ -1,5 +1,5 @@
 <title>Concepts</title>
-<pragma:directoryindex />
+<pragma:directoryindex src="." />
 
 
 <h2>Understanding how Yuni works</h2>

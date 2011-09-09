@@ -190,9 +190,11 @@ body,html {
 	border-radius: 3px;
 	background-color:#707f97 !important;
 	color:white !important;
+	/*
 	-moz-box-shadow: 0 2px 5px #bbb;
 	-webkit-box-shadow: 0 2px 5px #bbb;
 	box-shadow: 0 2px 5px #bbb;
+	*/
 	text-shadow				:2px 2px 2px #444;
 }
 .modified {
