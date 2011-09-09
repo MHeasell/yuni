@@ -22,6 +22,8 @@ namespace IO
 	Yuni::IO::Error YnDeleteFile(const char* const filename, unsigned int len);
 	Yuni::IO::Error DeleteFileNotZeroTerminated(const char* const filename, unsigned int len);
 
+	sint64 LastModificationTime(const StringAdapter& filename);
+
 
 } // namespace IO
 } // namespace Private
@@ -197,6 +199,21 @@ namespace File
 				Traits::CString<StringT>::Perform(filename),
 				Traits::Length<StringT,unsigned int>::Value(filename));
 		}
+	}
+
+
+	template<class StringT>
+	inline sint64 LastModificationTime(const StringT& filename)
+	{
+		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, InvalidTypeForBuffer);
+		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  InvalidTypeForBufferSize);
+
+		if (0 == Traits::CString<StringT>::zeroTerminated)
+		{
+			String tmp = filename;
+			return Yuni::Private::IO::LastModificationTime(tmp);
+		}
+		return Yuni::Private::IO::LastModificationTime(filename);
 	}
 
 

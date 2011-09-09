@@ -40,6 +40,7 @@ namespace Directory
 		/*!
 		** \brief Get the current directory
 		**
+		** \param[out] out The variable where the current directory will be written
 		** \param clearBefore True to clean @out before
 		*/
 		template<class StringT> void Get(StringT& out, bool clearBefore = true);
@@ -48,11 +49,14 @@ namespace Directory
 		** \brief Get the current directory
 		**
 		** Performance Tip: Perfer Get(String&) which avoid several string copy
+		** \return The current directory
 		*/
 		String Get();
 
 		/*!
 		** \brief Set the current directory
+		**
+		** \param path The new current directory
 		** \return True if the operation succeeded
 		*/
 		template<class StringT> bool Set(const StringT& path);

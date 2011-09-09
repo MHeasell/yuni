@@ -20,6 +20,7 @@ namespace System
 	** \brief Get the temporary folder
 	**
 	** \param[out] out Variable of type 'string'/'container' where the value will be appened
+	** \param emptyBefore True to empty the variable \p out before anything else
 	** \return True if the operation succeeded, false otherwise
 	*/
 	template<class StringT>

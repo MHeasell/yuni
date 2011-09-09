@@ -7,6 +7,7 @@
 #include "stream.h"
 #include "../../core/system/windows.hdr.h"
 #include "../../core/string.h"
+#include "../../core/customstring/wstring.h"
 
 #ifndef YUNI_OS_WINDOWS
 // lock
@@ -32,25 +33,16 @@ namespace File
 
 	Stream::HandleType Stream::OpenFileOnWindows(const char* filename, const int mode)
 	{
-		const size_t len = Traits::Length<const char*, size_t>::Value(filename);
-		if (!len)
+		Private::WString<> wfilenm(filename);
+		if (wfilenm.empty())
 			return NULL;
-		wchar_t* buffer = new wchar_t[len + 2];
-		const int n = MultiByteToWideChar(CP_UTF8, 0, filename, static_cast<int>(len), buffer, static_cast<int>(len));
-		if (n <= 0)
-		{
-			delete[] buffer;
-			return NULL;
-		}
-		buffer[n] = L'\0';
 		FILE* f;
 		# ifdef YUNI_OS_MSVC
-		if (0 != _wfopen_s(&f, buffer, OpenMode::ToWCString(mode)))
-			f = NULL;
+		if (0 != _wfopen_s(&f, wfilenm.c_str(), OpenMode::ToWCString(mode)))
+			return NULL;
 		# else
-		f = _wfopen(buffer, OpenMode::ToWCString(mode));
+		f = _wfopen(wfilenm.c_str(), OpenMode::ToWCString(mode));
 		# endif
-		delete[] buffer;
 		return f;
 	}
 

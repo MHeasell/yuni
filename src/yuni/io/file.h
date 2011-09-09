@@ -71,6 +71,15 @@ namespace File
 	template<class StringT> uint64 Size(const StringT& filename);
 
 
+	//! \name Date / Time
+	//@{
+	/*!
+	** \brief Get the unix timestamp of the last modification
+	*/
+	template<class StringT>
+	sint64 LastModificationTime(const StringT& filename);
+	//@}
+
 
 	//! \name Load the content of a file
 	//@{
