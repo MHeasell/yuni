@@ -34,7 +34,7 @@ namespace Extension
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
-		static const char* Perform(const char* const container)
+		static const char* Perform(const char* container)
 		{
 			return container; /* identity */
 		}
