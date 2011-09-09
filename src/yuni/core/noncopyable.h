@@ -24,9 +24,9 @@ namespace Yuni
 		/*!
 		** \brief Default constructor
 		*/
-		NonCopyable () {}
+		NonCopyable() {}
 		//! Protected non-virtual destructor
-		~NonCopyable () {}
+		~NonCopyable() {}
 		//@}
 
 	private:
@@ -34,7 +34,8 @@ namespace Yuni
 		NonCopyable (const NonCopyable &) {}
 		//! Private copy operator
 		// The implementation is provided to avoid compilation issues with Visual Studio
-		T & operator = (const T &) {return static_cast<T*>(this);}
+		template<class U>
+		T& operator = (const U&) {return *static_cast<T*>(this);}
 
 	}; // class NonCopyable
 
