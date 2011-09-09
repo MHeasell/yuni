@@ -10,6 +10,12 @@
 # include <unistd.h>
 #endif
 
+#ifndef YUNI_OS_WINDOWS
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#endif
+
 
 namespace Yuni
 {
@@ -168,6 +174,73 @@ namespace IO
 		return YnDeleteFile(filename, len);
 		# endif
 	}
+
+
+
+
+	# ifdef YUNI_OS_WINDOWS
+	bool GetLastWriteTime(HANDLE hFile)
+	{
+		FILETIME ftCreate, ftAccess, ftWrite;
+		SYSTEMTIME stUTC, stLocal;
+		DWORD dwRet;
+
+		// Retrieve the file times for the file.
+		if (!GetFileTime(hFile, &ftCreate, &ftAccess, &ftWrite))
+			return false;
+
+		// Convert the last-write time to local time.
+		FileTimeToSystemTime(&ftWrite, &stUTC);
+		SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
+
+		return (S_OK == dwRet);
+	}
+
+	# endif
+
+
+
+	sint64 LastModificationTime(const StringAdapter& filename)
+	{
+		# ifdef YUNI_OS_WINDOWS
+		Private::WString<> wfilenm(filename);
+		if (wfilenm.empty())
+			return 0;
+		HANDLE hFile = CreateFile(wfilenm.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL,
+			OPEN_EXISTING, 0, NULL);
+		if (hFile == INVALID_HANDLE_VALUE)
+			return 0;
+
+		FILETIME ftCreate, ftAccess, ftWrite;
+		// Retrieve the file times for the file.
+		if (GetFileTime(hFile, &ftCreate, &ftAccess, &ftWrite))
+		{
+			CloseHandle(hFile);
+
+			LARGE_INTEGER date, adjust;
+			date.HighPart = ftWrite.dwHighDateTime;
+			date.LowPart = ftWrite.dwLowDateTime;
+
+			// 100-nanoseconds = milliseconds * 10000
+			adjust.QuadPart = 11644473600000 * 10000;
+
+			// removes the diff between 1970 and 1601
+			date.QuadPart -= adjust.QuadPart;
+
+			// converts back from 100-nanoseconds to seconds
+			return date.QuadPart / 10000000;
+		}
+
+		CloseHandle(hFile);
+		return 0;
+		# else
+		struct stat st;
+		if (!stat(filename.c_str(), &st))
+			return st.st_mtime;
+		return 0;
+		# endif
+	}
+
 
 
 

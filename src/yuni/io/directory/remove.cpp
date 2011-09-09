@@ -20,6 +20,9 @@
 #include <stdio.h>
 
 
+#define SEP Yuni::IO::Separator
+
+
 
 namespace Yuni
 {
@@ -46,7 +49,7 @@ namespace Directory
 			{
 				while (NULL != (ep = ::readdir(dp)))
 				{
-					buffer.clear() << path << Yuni::IO::Separator << (const char*)ep->d_name;
+					buffer.clear() << path << SEP << (const char*)ep->d_name;
 					if (0 == ::stat(buffer.c_str(), &st))
 					{
 						if (S_ISDIR(st.st_mode))
