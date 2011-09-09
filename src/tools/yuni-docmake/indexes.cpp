@@ -556,10 +556,10 @@ namespace DocIndex
 					href.replace("\"", "&quot;");
 					href.replace("<", "&lt;");
 					href.replace(">", "&gt;");
+					href.replace("//", "/");
 
 					dat << "<url>\n";
 					tmp.clear() << Program::webroot << href;
-					tmp.replace("//", "/");
 					dat << "\t<loc>" << tmp << "</loc>\n";
 					// The default priority in a sitemap is 0.5
 					if (!Math::Equals(priority, 0.5f))
