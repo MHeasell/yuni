@@ -32,7 +32,11 @@ public:
 private:
 	virtual void onExecute();
 
-	void analyzeArticle();
+	/*!
+	** \brief
+	**
+	*/
+	bool analyzeArticle();
 
 	/*!
 	** \brief Try to extract the order contained within a given path

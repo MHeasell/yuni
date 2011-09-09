@@ -3,6 +3,7 @@
 #include "sqlite/sqlite3.h"
 #include <yuni/io/file.h>
 #include <yuni/core/math.h>
+#include <yuni/datetime/timestamp.h>
 #include "logs.h"
 #include "index-db.hxx"
 #include "program.h"
@@ -28,7 +29,7 @@ namespace DocIndex
 
 		enum
 		{
-			dbVersion = 2,
+			dbVersion = 3,
 		};
 
 		static sqlite3* gDB = nullptr;
@@ -37,7 +38,8 @@ namespace DocIndex
 		static bool ResetDBIndex()
 		{
 			logs.info() << "the index database needs to be rebuilt";
-			CString<2096> script;
+
+			Clob script;
 
 			// Cleanup
 			PrepareSQLScriptCleanup(script);
@@ -101,6 +103,11 @@ namespace DocIndex
 	} // anonymous namespace
 
 
+	void* DatabaseHandle()
+	{
+		return gDB;
+	}
+
 
 	bool Open(const String& folder)
 	{
@@ -110,9 +117,17 @@ namespace DocIndex
 			gDB = nullptr;
 		}
 
-		logs.info() << "opening index database";
 		String uri;
-		uri.clear() << folder << SEP << "yuni-doc-index";
+		uri << folder << SEP << "yuni-doc-index";
+
+		if (Program::clean)
+		{
+			IO::File::Delete(uri);
+			logs.info() << "opening index database (purge)";
+		}
+		else
+			logs.info() << "opening index database";
+
 		switch (sqlite3_open(uri.c_str(), &gDB))
 		{
 			case SQLITE_OK:
@@ -160,10 +175,35 @@ namespace DocIndex
 	}
 
 
+	Yuni::sint64 ArticleLastModificationTimeFromCache(const ArticleData& article)
+	{
+		if (!article.relativeFilename)
+			return -1;
+
+		// prepare the SQL statement from the command line
+		sqlite3_stmt* stmt;
+		if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT modified FROM articles WHERE rel_path = $1", -1, &stmt, 0))
+			return -1;
+		sqlite3_bind_text(stmt, 1, article.relativeFilename.c_str(), article.relativeFilename.size(), NULL);
+
+		if (SQLITE_ROW == sqlite3_step(stmt))
+		{
+			const StringAdapter modified = (const char*) sqlite3_column_text(stmt, 0);
+			sint64 value;
+			if (!modified.to<sint64>(value))
+				value = -1;
+			sqlite3_finalize(stmt);
+			return value;
+		}
+		return -1;
+	}
+
+
 	void Write(const ArticleData& article)
 	{
 		if (!gDB)
 			return;
+
 		CString<256> query;
 
 		query.clear() << "DELETE FROM articles WHERE rel_path = $1;";
@@ -174,29 +214,38 @@ namespace DocIndex
 		sqlite3_finalize(stmt);
 
 		String parent = article.htdocsFilename;
+		if (!parent)
+			parent = '/';
+		else
 		{
 			String::Size offset = parent.find_last_of("/\\");
-			if (offset != String::npos)
-				parent.resize(offset);
+			if (offset < parent.size())
+			{
+				if (!offset)
+					parent = '/';
+				else
+					parent.resize(offset);
+			}
 		}
-		if (!parent)
-			parent = "/";
 
 		// Insert the new article
 		{
-			query.clear() << "INSERT INTO articles (parent_order, weight, show_quick_links, show_history, show_toc, modified, rel_path,html_href, title,parent)"
-				<< " VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);";
+			query.clear() << "INSERT INTO articles (parent_order, weight, show_quick_links"
+				<< ", show_history"
+				<< ", show_toc, modified, rel_path,html_href, title,parent,directory_index)"
+				<< " VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11);";
 			sqlite3_prepare_v2(gDB, query.c_str(), -1, &stmt, NULL);
 			sqlite3_bind_int(stmt, 1, (int)article.order);
 			sqlite3_bind_double(stmt, 2, article.pageWeight);
 			sqlite3_bind_int(stmt, 3, (article.showQuickLinks ? 1 : 0));
 			sqlite3_bind_int(stmt, 4, (article.showHistory ? 1 : 0)); // show history
 			sqlite3_bind_int(stmt, 5, (article.showTOC ? 1 : 0)); // show toc
-			sqlite3_bind_int64(stmt, 6, time(NULL));
+			sqlite3_bind_int64(stmt, 6, article.modificationTime);
 			sqlite3_bind_text(stmt, 7, article.relativeFilename.c_str(), article.relativeFilename.size(), NULL);
 			sqlite3_bind_text(stmt, 8, article.htdocsFilename.c_str(), article.htdocsFilename.size(), NULL);
 			sqlite3_bind_text(stmt, 9, article.title.c_str(), article.title.size(), NULL);
 			sqlite3_bind_text(stmt, 10, parent.c_str(), parent.size(), NULL);
+			sqlite3_bind_int(stmt, 11, (int)article.directoryIndexContent);
 			sqlite3_step(stmt);
 			sqlite3_finalize(stmt);
 		}
@@ -326,7 +375,7 @@ namespace DocIndex
 	namespace // anonymous
 	{
 
-		static void InternalBuildDirectoryIndex(String& out, const String& path, unsigned int level)
+		static void InternalBuildDirectoryIndex(Clob& out, const String& path, unsigned int level)
 		{
 			// We want UNIX-styles paths
 			# ifdef YUNI_OS_WINDOWS
@@ -338,8 +387,8 @@ namespace DocIndex
 
 			char** result;
 			int rowCount, colCount;
-			String query = "SELECT title, html_href FROM articles WHERE parent = \"";
-			query << srcPath << "\" ORDER BY parent_order ASC, title";
+			String query = "SELECT title, html_href,directory_index FROM articles WHERE parent = \"";
+			query << srcPath << "\" AND directory_index > 0 ORDER BY parent_order ASC, title";
 			if (SQLITE_OK != sqlite3_get_table(gDB, query.c_str(), &result, &rowCount, &colCount, NULL))
 				return;
 
@@ -358,11 +407,15 @@ namespace DocIndex
 			for (unsigned int x = 0; x != level; ++x)
 				out << '\t';
 			out << "<ul>\n";
-			unsigned int y = 2;
+			unsigned int y = 3;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
 			{
 				const StringAdapter title = result[y++];
 				const String href  = result[y++];
+				unsigned int dic = StringAdapter(result[y++]).to<unsigned int>();
+				if (dic >= ArticleData::dicMax)
+					dic = ArticleData::dicAll;
+
 				if (!href) // must not be empty
 					continue;
 
@@ -375,7 +428,9 @@ namespace DocIndex
 				if (!Program::shortUrl)
 					out << "/" << Program::indexFilename;
 				out << "\">" << title << "</a></li>\n";
-				InternalBuildDirectoryIndex(out, href, level + 1);
+
+				if (dic >= ArticleData::dicAll)
+					InternalBuildDirectoryIndex(out, href, level + 1);
 			}
 
 			sqlite3_free_table(result);
@@ -396,7 +451,7 @@ namespace DocIndex
 
 
 
-	void BuildDirectoryIndex(String& out, const String& path)
+	void BuildDirectoryIndex(Clob& out, const String& path)
 	{
 		out.clear();
 		InternalBuildDirectoryIndex(out, path, 0);
@@ -418,8 +473,9 @@ namespace DocIndex
 			return;
 		}
 
+		Clob dat;
 		// Begining of the sitemap
-		out << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"
+		dat << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"
 			<< "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 
 
@@ -431,7 +487,7 @@ namespace DocIndex
 
 		// Looking for weights limits
 		{
-			const char* const query = "SELECT MIN(weight), MAX(weight) FROM articles WHERE weight > 0.2;";
+			const char* const query = "SELECT MIN(weight), MAX(weight) FROM articles WHERE weight > 0;";
 			if (SQLITE_OK == sqlite3_get_table(gDB, query, &result, &rowCount, &colCount, NULL))
 			{
 				if (rowCount == 1)
@@ -461,6 +517,8 @@ namespace DocIndex
 
 			if (rowCount)
 			{
+				CString<64,false> formattedDate;
+
 				unsigned int y = 3;
 				for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
 				{
@@ -472,9 +530,7 @@ namespace DocIndex
 						continue;
 
 					// Weight of the article
-					const float weight = weightStr.to<float>();
-					if (weight < weightMin || weight > weightMax)
-						continue; // should never happen
+					float weight = weightStr.to<float>();
 
 					// Checking if the hef is less than 2048 chars
 					if (href.size() >= 2048)
@@ -484,7 +540,14 @@ namespace DocIndex
 					}
 
 					// Priority, for the sitemap (%)
-					const float priority = ((weight - weightMin) / (weightMax - weightMin));
+					float priority = ((weight - weightMin) / (weightMax - weightMin));
+					if (priority < 0.1f)
+						priority = 0.1f;
+					else
+					{
+						if (priority > 1.f)
+							priority = 1.f;
+					}
 
 					// Escaping
 					// TODO use a better routine for doing that
@@ -494,21 +557,26 @@ namespace DocIndex
 					href.replace("<", "&lt;");
 					href.replace(">", "&gt;");
 
-					out << "<url>\n";
+					dat << "<url>\n";
 					tmp.clear() << Program::webroot << href;
 					tmp.replace("//", "/");
-					out << "\t<loc>" << tmp << "</loc>\n";
+					dat << "\t<loc>" << tmp << "</loc>\n";
 					// The default priority in a sitemap is 0.5
 					if (!Math::Equals(priority, 0.5f))
-						out << "\t<priority>" << priority << "</priority>\n";
-					out << "</url>\n";
+						dat << "\t<priority>" << priority << "</priority>\n";
+					dat << "\t<lastmod>";
+					DateTime::TimestampToString(dat, "%Y-%m-%d", modifiedStr.to<sint64>(), false);
+					dat << "</lastmod>\n";
+					dat << "</url>\n";
 				}
 			}
 			sqlite3_free_table(result);
 		}
-		out << "</urlset>\n";
+		dat << "</urlset>\n";
+		out << dat;
 
 		// trying gzip
+		out.close();
 		# ifndef YUNI_OS_WINDOWS
 		//href.clear() << "gzip -f -9 \"" << filename << "\"";
 		//system(href.c_str());
@@ -517,7 +585,7 @@ namespace DocIndex
 
 
 
-	static int TryToFindWordID(const ArticleData::Word& term)
+	static int TryToFindWordID(const Dictionary::Word& term)
 	{
 		sqlite3_stmt* stmt;
 		if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT id FROM terms WHERE term = $1", -1, &stmt, NULL))
@@ -540,7 +608,7 @@ namespace DocIndex
 	}
 
 
-	int RegisterWordReference(const ArticleData::Word& term)
+	int RegisterWordReference(const Dictionary::Word& term)
 	{
 		int id = TryToFindWordID(term);
 		if (id < 0)
@@ -673,40 +741,49 @@ namespace DocIndex
 	}
 
 
-	void BuildSEOTermReference(IO::File::Stream& file, const ArticleData::Word& term, int termid)
+	void BuildSEOTermReference(Clob& data)
 	{
 		char** result;
 		int rowCount, colCount;
-		CString<256,false> query;
-		query << "SELECT t.article_id,t.count_in_page,t.weight * w.weight"
+		CString<512,false> query;
+		query << "SELECT w.id,w.term, t.article_id,t.count_in_page,t.weight * w.weight"
 			<< " FROM terms_per_article AS t, terms as w"
-			<< " WHERE term_id = " << termid << " AND w.id = t.term_id";
+			<< " WHERE w.id = t.term_id ORDER BY term_id";
 		if (SQLITE_OK != sqlite3_get_table(gDB, query.c_str(), &result, &rowCount, &colCount, NULL))
 			return;
 
-		CString<1024> s;
-		s << "f(" << termid << ",'" << term << "',[";
 		if (rowCount)
 		{
-			unsigned int y = 2;
+			sint64 oldTermID = -1;
+			unsigned int y = 5;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
 			{
-				const StringAdapter articleID = result[++y];
-				const StringAdapter scount   = result[++y];
-				const StringAdapter sweight  = result[++y];
-				if (row)
-					s << ',';
-				s
+				const sint64 termid = StringAdapter(result[y++]).to<sint64>();
+				const StringAdapter term = result[y++];
+				const StringAdapter articleID = result[y++];
+				const StringAdapter scount   = result[y++];
+				const StringAdapter sweight  = result[y++];
+				if (termid < 0)
+					continue;
+				if (termid != oldTermID)
+				{
+					oldTermID = termid;
+					if (row)
+						data << "]);\n";
+					data << "f(" << termid << ",'" << term << "',[";
+				}
+				else
+					data << ',';
+
+				data
 					<< "{a:" << articleID // article ID
 					<< ",c:" << scount    // count
 					<< ",w:" << sweight   // weight
 					<< '}';
 			}
+			data << "]);\n";
 		}
 		sqlite3_free_table(result);
-		s << "]);\n";
-
-		file << s;
 	}
 
 

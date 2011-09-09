@@ -27,7 +27,9 @@ namespace Dox2Article
 		{
 			file
 				<< "<title>Doxygen</title>\n"
-				<< '\n'
+				<< "<pragma:weight value=\"0.55\" />\n"
+				<< "<pragma:directoryindex content=\"nofollow\" />"
+				<< "\n\n"
 				<< "<h2>API Reference</h2>\n"
 				<< "<ul>\n"
 				<< "<li><a href=\"class/@{INDEX}\">All classes</a></li>\n"

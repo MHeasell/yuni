@@ -6,9 +6,11 @@
 #include "logs.h"
 #include "tinyxml/tinyxml.h"
 #include <yuni/core/hash//checksum//md5.h>
+#include <yuni/datetime/timestamp.h>
 #include "indexes.h"
 #include "webpage.hxx"
 #include "program.h"
+#include "dictionary.h"
 
 
 using namespace Yuni;
@@ -25,10 +27,7 @@ namespace // anonymous
 
 	static Yuni::Atomic::Int<>  gCompileJobCount = 0;
 
-	//! Structure for storing all existing words within the whole documentation
-	typedef std::map<ArticleData::Word, int>  AllWords;
-	static AllWords  gAllWords;
-
+	
 
 	class XMLVisitor : public TiXmlVisitor
 	{
@@ -219,14 +218,14 @@ void JobWriter::SEOBuildAllTermReferences()
 
 	if (file.openRW(filename))
 	{
-		file << "if(1){var f=function(id,n,d) {SEO.termNames[n]=id;SEO.terms[id]=d};";
-		Yuni::MutexLocker locker(gMutex);
-
-		const AllWords::const_iterator end = gAllWords.end();
-		for (AllWords::const_iterator i = gAllWords.begin(); i != end; ++i)
-			DocIndex::BuildSEOTermReference(file, i->first, i->second);
-		file << " }\n";
+		Clob data;
+		data << "if(1){var f=function(id,n,d) {SEO.termNames[n]=id;SEO.terms[id]=d};";
+		DocIndex::BuildSEOTermReference(data);
+		data << " }\n";
+		file << data;
 	}
+	else
+		logs.error() << "impossible to write " << filename;
 }
 
 
@@ -258,27 +257,28 @@ void JobWriter::Add(const String& input, const String& htdocs, const ArticleData
 
 		// Registering all new terms
 		unsigned int wIx = 0;
-		const ArticleData::WordCount::const_iterator end = newArticle.wordCount.end();
-		ArticleData::WordCount::const_iterator i = newArticle.wordCount.begin();
+		const Dictionary::WordsCount::const_iterator end = newArticle.wordCount.end();
+		Dictionary::WordsCount::const_iterator i = newArticle.wordCount.begin();
 		for (; i != end; ++i, ++wIx)
 		{
 			// The word itself
-			const ArticleData::Word& word = i->first;
-			const ArticleData::WordStat& stats = i->second;
+			const Dictionary::Word& word = i->first;
+			const Dictionary::WordStat& stats = i->second;
 
 			countInArticle[wIx] = stats.count;
 			weights[wIx] = stats.coeff;
 
-			const AllWords::const_iterator it = gAllWords.find(word);
-			if (it == gAllWords.end())
+			sint64 newWordID = Dictionary::FindWordID(word);
+			if (newWordID < 0)
 			{
+				Yuni::MutexLocker locker(Dictionary::mutex);
 				++registrationCount;
-				const int newWordID = DocIndex::RegisterWordReference(word);
-				gAllWords[word] = newWordID;
+				newWordID = DocIndex::RegisterWordReference(word);
+				Dictionary::allWords[word] = newWordID;
 				wordIDs[wIx] = newWordID;
 			}
 			else
-				wordIDs[wIx] = it->second;
+				wordIDs[wIx] = newWordID;
 		}
 
 		DocIndex::RegisterWordIDsForASingleArticle(articleID, wordIDs, countInArticle, weights, wIx);
@@ -336,6 +336,12 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 {
 	String tmp;
 	pVars.clear();
+
+	//! @{MODIFIED}
+	{
+		pVars["MODIFIED_TIMESTAMP"] = pArticle.modificationTime;
+		DateTime::TimestampToString(pVars["MODIFIED"], "%A, %B %e, %Y");
+	}
 
 	// @{INDEX}
 	if (Program::shortUrl)
@@ -510,8 +516,9 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 	// @{DIRECTORY_INPUT}
 	if (pArticle.directoryIndex.notEmpty())
 	{
-		DocIndex::BuildDirectoryIndex(tmp, pArticle.directoryIndex);
-		pVars["DIRECTORY_INDEX"] = tmp;
+		Clob data;
+		DocIndex::BuildDirectoryIndex(data, pArticle.directoryIndex);
+		pVars["DIRECTORY_INDEX"] = data;
 	}
 	else
 		pVars["DIRECTORY_INDEX"] = "";
@@ -555,12 +562,9 @@ void JobWriter::onExecute()
 	// Console verbose / debug
 	{
 		if (Program::debug)
-			logs.info() << "generating " << pArticle.htdocsFilename << " -> " << filenameInHtdocs;
-		else
-		{
-			if (Program::verbose)
-				logs.info() << "generating " << pArticle.htdocsFilename;
-		}
+			logs.info() << "building " << pArticle.htdocsFilename << " -> " << filenameInHtdocs;
+		//else
+		//	logs.info() << "building " << pArticle.htdocsFilename;
 	}
 
 	// Prepare all variables
@@ -598,6 +602,10 @@ void JobWriter::onExecute()
 
 	// @{CONTENT}
 	content.replace("@{CONTENT}", pVars["CONTENT"]);
+
+	// @{MODIFIED}
+	content.replace("@{MODIFIED}", pVars["MODIFIED"]);
+	content.replace("@{MODIFIED_TIMESTAMP}", pVars["MODIFIED_TIMESTAMP"]);
 
 	// Directory Index
 	content.replace("@{DIRECTORY_INDEX}",  pVars["DIRECTORY_INDEX"]);

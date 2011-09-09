@@ -27,6 +27,9 @@ int main(int argc, char** argv)
 	// The condensed mode of tinyxml may removed all linefeed
 	TiXmlBase::SetCondenseWhiteSpace(false);
 
+	// Preload all terms from the index db
+	Dictionary::PreloadFromIndexDB();
+
 	// Remove all entries within the database which are no longer
 	// available
 	DocIndex::RemoveNonExistingEntries();
@@ -35,28 +38,28 @@ int main(int argc, char** argv)
 	program.findAllSourceFiles();
 
 	// Extract information from all those articles
-	logs.info() << "Extracting SEO data";
+	logs.info() << "reading articles...";
 	{
 		queueService.start();
 		queueService.wait();
 		while (CompileJob::SomeRemain())
-			Yuni::SuspendMilliSeconds(150);
+			Yuni::SuspendMilliSeconds(200);
 		queueService.stop();
 	}
 
-	logs.info() << "Optimizing SEO data";
+	logs.info() << "building SEO data";
 	DocIndex::UpdateAllSEOWeights();
 	JobWriter::SEOBuildAllTermReferences();
 	DocIndex::BuildSEOArticlesReference();
 
-	logs.info() << "Generating HTML files into htdocs";
+	logs.info() << "generating HTML files into htdocs";
 	if (JobWriter::ReadTemplateIndex())
 	{
 		JobWriter::PushAllInQueue();
 		queueService.start();
 		queueService.wait();
 		while (JobWriter::SomeRemain())
-			Yuni::SuspendMilliSeconds(150);
+			Yuni::SuspendMilliSeconds(200);
 
 		queueService.stop();
 

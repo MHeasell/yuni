@@ -62,6 +62,9 @@ namespace // anonymous
 		void seo(const StringAdapter& string);
 
 	private:
+		//!
+		float pCoeff;
+
 		//! Within a paragraph
 		bool pWithinParagraph;
 		//! XML document
@@ -70,17 +73,15 @@ namespace // anonymous
 		const String& pFilename;
 		//! Current state
 		ArticleData::State pState;
-		//!
-		float pCoeff;
-		//! The coefficient stack
-		ArticleData::CoeffStack  pCoeffStack;
-
 		ArticleData& pArticle;
 
 		//! Last TOC level (1: h2, 2: h3...)
 		unsigned int pLastTOCLevel;
 		String pTOCCaption;
 
+		enum { coeffStackMax = 256 };
+		float pCoeffStack[coeffStackMax];
+		unsigned int pCoeffStackIndex;
 	}; // class XMLVisitor
 
 
@@ -88,14 +89,16 @@ namespace // anonymous
 
 
 	XMLVisitor::XMLVisitor(ArticleData& article, TiXmlDocument& document) :
+		pCoeff(1.f),
 		pWithinParagraph(false),
 		pDocument(document),
 		pFilename(article.relativeFilename),
+		pState(ArticleData::stNone),
 		pArticle(article),
-		pLastTOCLevel(0)
+		pLastTOCLevel(0),
+		pCoeffStackIndex(0)
 	{
-		pState = ArticleData::stNone;
-		pCoeff = 1.0f;
+		memset(pCoeffStack, 0, sizeof(pCoeffStack));
 	}
 
 
@@ -132,9 +135,9 @@ namespace // anonymous
 						if (tag == "pragma:toc")
 						{
 							if (TIXML_SUCCESS == element.QueryBoolAttribute("value", &value))
+								logs.warning() << pFilename << ": pragma:toc: the field value is deprecated";
+							if (TIXML_SUCCESS == element.QueryBoolAttribute("visible", &value))
 								pArticle.showTOC = value;
-							else
-								logs.error() << pFilename << ": invalid value for pragma:toc";
 						}
 						else if (tag == "pragma:quicklinks")
 						{
@@ -152,10 +155,29 @@ namespace // anonymous
 						}
 						else if (tag == "pragma:directoryindex")
 						{
-							String src = pArticle.htdocsFilename;
 							const StringAdapter string = element.Attribute("src");
-							src << SEP << string;
-							IO::Normalize(pArticle.directoryIndex, src);
+							if (string.notEmpty())
+							{
+								String src = pArticle.htdocsFilename;
+								src << SEP << string;
+								IO::Normalize(pArticle.directoryIndex, src);
+							}
+
+							const CString<42,false> content = element.Attribute("content");
+							if (content.notEmpty())
+							{
+								if (content == "nofollow")
+									pArticle.directoryIndexContent = ArticleData::dicNoFollow;
+								else if (content == "noindex")
+									pArticle.directoryIndexContent = ArticleData::dicNoIndex;
+								else if (content == "all")
+									pArticle.directoryIndexContent = ArticleData::dicAll;
+								else
+									logs.error() << "invalid directory index content flag (expected: 'all', 'nofollow' or 'noindex')";
+							}
+
+							if (!string && !content)
+								logs.warning() << pFilename << ": pragma:directoryindex: missing attribute 'src' or 'content'";
 						}
 						else if (tag == "pragma:accesspath")
 						{
@@ -345,18 +367,27 @@ namespace // anonymous
 
 	void XMLVisitor::pushCoeff(float coeff)
 	{
-		pCoeffStack.push_back(coeff);
+		if (pCoeffStackIndex < coeffStackMax)
+			pCoeffStack[pCoeffStackIndex] = coeff;
+		++pCoeffStackIndex;
 		pCoeff *= coeff;
 	}
 
 
 	void XMLVisitor::popCoeff()
 	{
-		pCoeffStack.pop_back();
-		pCoeff = 1.0f;
-		ArticleData::CoeffStack::const_iterator end = pCoeffStack.end();
-		for (ArticleData::CoeffStack::const_iterator i = pCoeffStack.begin(); i != end; ++i)
-			pCoeff *= *i;
+		if (pCoeffStack)
+		{
+			pCoeff = 1.f;
+			for (unsigned int i = 0; i != pCoeffStackIndex; ++i)
+				pCoeff *= pCoeffStack[i];
+			--pCoeffStackIndex;
+		}
+		else
+		{
+			pCoeff = 1.f;
+			pCoeffStackIndex = 0;
+		}
 	}
 
 
@@ -431,14 +462,14 @@ namespace // anonymous
 		if (list.empty())
 			return;
 
-		ArticleData::Word word;
+		Dictionary::Word word;
 		const List::const_iterator end = list.end();
 		for (List::const_iterator i = list.begin(); i != end; ++i)
 		{
 			word = *i;
 			word.toLower();
 
-			ArticleData::WordStat& stat = pArticle.wordCount[word];
+			Dictionary::WordStat& stat = pArticle.wordCount[word];
 			++stat.count;
 			if (pCoeff > stat.coeff)
 				stat.coeff = pCoeff;
@@ -559,8 +590,7 @@ void CompileJob::onExecute()
 		while (true);
 
 		// Post analyzis about the article
-		analyzeArticle();
-		if (pArticle.error)
+		if (!analyzeArticle() || pArticle.error)
 			continue;
 
 		// Writing the article in the database
@@ -572,10 +602,22 @@ void CompileJob::onExecute()
 }
 
 
-void CompileJob::analyzeArticle()
+bool CompileJob::analyzeArticle()
 {
+	sint64 lastWrite = IO::File::LastModificationTime(pArticle.originalFilename);
+	pArticle.modificationTime = lastWrite;
+	if (lastWrite)
+	{
+		// Trying to check if we really have to perform an analyzis
+		if (DocIndex::ArticleLastModificationTimeFromCache(pArticle) == lastWrite)
+		{
+			// Actually, no.
+			return false;
+		}
+	}
+
 	if (Program::verbose)
-		logs.info() << "extracting " << pArticle.relativeFilename;
+		logs.info() << "reading " << pArticle.relativeFilename;
 
 	// Article order
 	{
@@ -589,7 +631,7 @@ void CompileJob::analyzeArticle()
 	if (!doc.LoadFile(pArticle.originalFilename.c_str(), TIXML_ENCODING_UTF8))
 	{
 		logs.error() << pArticle.relativeFilename << ", l" << doc.ErrorRow() << ": " << doc.ErrorDesc();
-		return;
+		return false;
 	}
 
 	// Analyze the XML document
@@ -597,13 +639,15 @@ void CompileJob::analyzeArticle()
 	if (!doc.Accept(&visitor) || visitor.error())
 	{
 		pArticle.error = true;
-		return;
+		return false;
 	}
 	if (!pArticle.title)
 		IO::ExtractFileName(pArticle.title, pArticle.htdocsFilename, false);
 
 	// TOC refactoring
 	pArticle.tocRefactoring();
+
+	return true;
 }
 
 

@@ -8,7 +8,10 @@
 
 
 typedef Yuni::Logs::StdCout<>  DocMakeLogsHandlers;
-typedef Yuni::Logs::Time< Yuni::Logs::ApplicationName< Yuni::Logs::VerbosityLevel<Yuni::Logs::Message<> > > >  DocMakeLogsDecorators;
+typedef /*Yuni::Logs::Time<*/
+		Yuni::Logs::ApplicationName<
+		Yuni::Logs::VerbosityLevel<Yuni::Logs::Message<>
+		> > /*>*/  DocMakeLogsDecorators;
 
 
 typedef Yuni::Logs::Logger<DocMakeLogsHandlers, DocMakeLogsDecorators>   DocMakeLogs;

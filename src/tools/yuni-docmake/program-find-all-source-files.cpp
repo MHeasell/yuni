@@ -56,7 +56,7 @@ namespace DocMake
 					logs.warning() << "missing article.xml in " << filename;
 					String content;
 					content << "<title></title>\n";
-					content << "<pragma:directoryindex />\n";
+					content << "<pragma:directoryindex src=\".\" />\n";
 					IO::File::SetContent(tmp, content);
 				}
 			}
@@ -83,7 +83,7 @@ namespace DocMake
 		// Statistics about the articles to generate
 		if (count)
 		{
-			logs.info() << count << (count > 1 ? " articles to build, " : "article to build, ") << nbJobs
+			logs.info() << count << (count > 1 ? " articles, " : "article to build, ") << nbJobs
 				<< (nbJobs > 1 ? " threads" : " thread");
 			logs.info();
 			for (unsigned int i = 0; i != jobs.size(); ++i)
