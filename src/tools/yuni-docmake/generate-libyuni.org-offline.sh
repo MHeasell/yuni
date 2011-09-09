@@ -1,4 +1,4 @@
 #!/bin/sh
 
-./yuni-docmake --input=../../../docs/src --htdocs=../../../docs/html
+./edln-make --input=../../../docs/src --htdocs=../../../docs/html
 
