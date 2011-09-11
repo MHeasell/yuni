@@ -106,11 +106,17 @@ namespace Job
 
 		/*!
 		** \brief Wait until all jobs are finished
+		*/
+		void wait();
+
+		/*!
+		** \brief Wait until all jobs are finished
+		**
 		** \param timeout Timeout
 		** \param pollInterval Interval in milliseconds between each poll when waiting
 		** \return True if no all jobs are finished, false if the timeout has been reached
 		*/
-		bool wait(unsigned int timeout = defaultTimeout * 2, unsigned int pollInterval = 70);
+		bool wait(unsigned int timeout, unsigned int pollInterval = 150);
 
 		/*!
 		** \brief Stop the service
