@@ -10,8 +10,8 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">None</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">None</a></span>(const None &lt; U &gt;<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">None</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">None</a></span>(const None &lt; U &gt;<b>&amp;</b> ); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; DEstructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">File</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">File</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Constructor - Load an dynamic library.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">File</a></span>(const String<b>&amp;</b> filename, const Relocation r, const Visibility v); [inline]</code></p>
+<code> <span class="method"><a href="#">File</a></span>(const String<b>&amp;</b> filename, const Relocation r, const Visibility v); [inline]</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>File</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>File</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Loading / Unloading</h3>

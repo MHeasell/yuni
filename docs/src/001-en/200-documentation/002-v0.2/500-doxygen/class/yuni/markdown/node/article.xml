@@ -202,10 +202,10 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Node</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Node</a></span>(const Type t); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Node</a></span>(const Type t, const StringT<b>&amp;</b> text); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Node</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Node</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Node</a></span>(const Type t); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Node</a></span>(const Type t, const StringT<b>&amp;</b> text); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Node</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StreamT &gt;<br />void <span class="method"><a href="#">dump</a></span>(StreamT<b>&amp;</b> out, unsigned int level) <span class="keyword">const</span>; [inline]</code></p>
 <p class="doxygen_fun"><code>void <span class="method"><a href="#">flattenText</a></span>(String<b>&amp;</b> out) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Print the entire tree to the output stream.<br />

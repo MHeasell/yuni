@@ -18,11 +18,11 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Symbol</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Symbol</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Constructor with a given handle.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Symbol</a></span>(const Handle p); [inline]</code></p>
+<code> <span class="method"><a href="#">Symbol</a></span>(const Handle p); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Symbol</a></span>(const Symbol<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Symbol</a></span>(const Symbol<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Get if the symbol is invalid.<br />
 <code>bool <span class="method"><a href="#">null</a></span>() <span class="keyword">const</span>; [inline]</code></p>
 <p class="doxygen_fun">Get if the symbol is valid.<br />

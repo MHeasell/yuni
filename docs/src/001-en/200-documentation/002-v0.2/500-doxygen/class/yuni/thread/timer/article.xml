@@ -33,15 +33,15 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Timer</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Timer</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Constructor with a time interval.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Timer</a></span>(const unsigned int interval); [inline]</code></p>
+<code> <span class="method"><a href="#">Timer</a></span>(const unsigned int interval); [inline]</code></p>
 <p class="doxygen_fun">Constructor with a time interval + cycle count.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Timer</a></span>(const unsigned int interval, const unsigned int cycles); [inline]</code></p>
+<code> <span class="method"><a href="#">Timer</a></span>(const unsigned int interval, const unsigned int cycles); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Timer</a></span>(const Timer<b>&amp;</b> rhs);</code></p>
+<code> <span class="method"><a href="#">Timer</a></span>(const Timer<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Timer</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Timer</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Settings (Time interval &amp; Cycles)</h3>

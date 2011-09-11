@@ -9,13 +9,13 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Port</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Port</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Constructor with a given value.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Port</a></span>(unsigned int rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Port</a></span>(unsigned int rhs); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Port</a></span>(const Port<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Port</a></span>(const Port<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Constructor from a null pointer.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Port</a></span>(const NullPtr<b>&amp;</b> ); [inline]</code></p>
+<code> <span class="method"><a href="#">Port</a></span>(const NullPtr<b>&amp;</b> ); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Value</h3>

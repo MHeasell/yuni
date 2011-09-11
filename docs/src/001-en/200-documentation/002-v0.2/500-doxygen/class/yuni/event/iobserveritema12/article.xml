@@ -10,7 +10,7 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>IObserverItemA12</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>IObserverItemA12</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code>IObserver * <span class="method"><a href="#">observer</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun"><code>bool <span class="method"><a href="#">equalsTo</a></span>(const IObserver<b>*</b> o) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun"><code>R <span class="method"><a href="#">fireEvent</a></span>(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) <span class="keyword">const</span>;</code></p>

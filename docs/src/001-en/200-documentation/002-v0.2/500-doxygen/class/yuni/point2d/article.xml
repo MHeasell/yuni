@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Point2D</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Point2D</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Constructor.<br />
-<code><span class="keyword">template</span>&lt;typename U , typename V &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Point2D</a></span>(const U x1, const V y1); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U , typename V &gt;<br /> <span class="method"><a href="#">Point2D</a></span>(const U x1, const V y1); [inline]</code></p>
 <p class="doxygen_fun">Constructor by copy.<br />
-<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Point2D</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">Point2D</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
 <p class="doxygen_fun">Reset the point to origin.<br />
 <code>Point2D &lt; T &gt; &amp; <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Move the point to new coordinates.<br />

@@ -36,9 +36,9 @@
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">NullIterator</a></span>(const StringType<b>&amp;</b> s); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">NullIterator</a></span>(const NullIterator<b>&amp;</b> copy); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">NullIterator</a></span>(const ModelT<b>&amp;</b> copy); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">NullIterator</a></span>(const StringType<b>&amp;</b> s); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">NullIterator</a></span>(const NullIterator<b>&amp;</b> copy); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /> <span class="method"><a href="#">NullIterator</a></span>(const ModelT<b>&amp;</b> copy); [inline]</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> model); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected

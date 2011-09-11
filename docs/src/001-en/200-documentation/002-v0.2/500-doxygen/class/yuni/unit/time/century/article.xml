@@ -185,16 +185,16 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(const sint16 u); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(const sint32 u); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(const sint64 u); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(const uint16 u); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(const uint32 u); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(const uint64 u); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(const float u); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(const double u); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class Q1 , typename T1 , class C1 , typename P1 , typename N1 &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Century</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Century</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Century</a></span>(const sint16 u); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Century</a></span>(const sint32 u); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Century</a></span>(const sint64 u); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Century</a></span>(const uint16 u); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Century</a></span>(const uint32 u); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Century</a></span>(const uint64 u); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Century</a></span>(const float u); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Century</a></span>(const double u); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class Q1 , typename T1 , class C1 , typename P1 , typename N1 &gt;<br /> <span class="method"><a href="#">Century</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>

@@ -9,9 +9,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IConnection</a></span>(unsigned int id);</code></p>
+<code> <span class="method"><a href="#">IConnection</a></span>(unsigned int id);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>IConnection</a></span>();</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>IConnection</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

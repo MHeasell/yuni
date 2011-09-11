@@ -25,8 +25,8 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Sound</a></span>(Private::Audio::AudioStream<b>*</b> stream); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Sound</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Sound</a></span>(Private::Audio::AudioStream<b>*</b> stream); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Sound</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code>bool <span class="method"><a href="#">prepareDispatched</a></span>(unsigned int source);</code></p>
 <p class="doxygen_fun"><code>bool <span class="method"><a href="#">destroyDispatched</a></span>();</code></p>
 <p class="doxygen_fun"><code>bool <span class="method"><a href="#">updateDispatched</a></span>(unsigned int source);</code></p>

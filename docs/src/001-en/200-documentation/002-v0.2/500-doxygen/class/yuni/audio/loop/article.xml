@@ -85,7 +85,7 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Loop</a></span>(QueueService<b>*</b> audioService);</code></p>
+<code> <span class="method"><a href="#">Loop</a></span>(QueueService<b>*</b> audioService);</code></p>
 <p class="doxygen_fun">Redefinition of the onLoop() callback.<br />
 <code>bool <span class="method"><a href="#">onLoop</a></span>();</code></p>
 <p class="doxygen_fun">Start the event loop.<br />

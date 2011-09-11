@@ -75,31 +75,31 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>();</code></p>
+<code> <span class="method"><a href="#">CString</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(const CString<b>&amp;</b> rhs);</code></p>
+<code> <span class="method"><a href="#">CString</a></span>(const CString<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Constructor from a mere CString .<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(const char<b>*</b>const block, const Size blockSize);</code></p>
+<code> <span class="method"><a href="#">CString</a></span>(const char<b>*</b>const block, const Size blockSize);</code></p>
 <p class="doxygen_fun">Constructor from a copy of a substring of 's'.<br />
-<code><span class="keyword">template</span>&lt;unsigned int SizeT, bool ExpT, bool ZeroT&gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(const CString &lt; SizeT, ExpT, ZeroT &gt;<b>&amp;</b> s, Size offset);</code></p>
+<code><span class="keyword">template</span>&lt;unsigned int SizeT, bool ExpT, bool ZeroT&gt;<br /> <span class="method"><a href="#">CString</a></span>(const CString &lt; SizeT, ExpT, ZeroT &gt;<b>&amp;</b> s, Size offset);</code></p>
 <p class="doxygen_fun">Constructor from a copy of a substring of 's'.<br />
-<code><span class="keyword">template</span>&lt;unsigned int SizeT, bool ExpT, bool ZeroT&gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(const CString &lt; SizeT, ExpT, ZeroT &gt;<b>&amp;</b> s, Size offset, Size n);</code></p>
+<code><span class="keyword">template</span>&lt;unsigned int SizeT, bool ExpT, bool ZeroT&gt;<br /> <span class="method"><a href="#">CString</a></span>(const CString &lt; SizeT, ExpT, ZeroT &gt;<b>&amp;</b> s, Size offset, Size n);</code></p>
 <p class="doxygen_fun">Constructor from a copy of a substring of 's' (std::string)<br />
-<code><span class="keyword">template</span>&lt;class TraitsT , class AllocT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(const std::basic_string&lt; char, TraitsT, AllocT &gt;<b>&amp;</b> s, Size offset);</code></p>
+<code><span class="keyword">template</span>&lt;class TraitsT , class AllocT &gt;<br /> <span class="method"><a href="#">CString</a></span>(const std::basic_string&lt; char, TraitsT, AllocT &gt;<b>&amp;</b> s, Size offset);</code></p>
 <p class="doxygen_fun">Constructor from a copy of a substring of 's' (std::string)<br />
-<code><span class="keyword">template</span>&lt;class TraitsT , class AllocT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(const std::basic_string&lt; char, TraitsT, AllocT &gt;<b>&amp;</b> s, Size offset, Size n);</code></p>
+<code><span class="keyword">template</span>&lt;class TraitsT , class AllocT &gt;<br /> <span class="method"><a href="#">CString</a></span>(const std::basic_string&lt; char, TraitsT, AllocT &gt;<b>&amp;</b> s, Size offset, Size n);</code></p>
 <p class="doxygen_fun">Constructor by copy from iterator.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2&gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end);</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2&gt;<br /> <span class="method"><a href="#">CString</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end);</code></p>
 <p class="doxygen_fun">Constructor by copy from iterator.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator);</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT &gt;<br /> <span class="method"><a href="#">CString</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator);</code></p>
 <p class="doxygen_fun">Constructor with a default value.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(const U<b>&amp;</b> rhs);</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">CString</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Construct a string formed by a repetition of the character c, n times.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(size_t n, char c);</code></p>
+<code> <span class="method"><a href="#">CString</a></span>(size_t n, char c);</code></p>
 <p class="doxygen_fun">Construct a string formed by a repetition of the character c, n times.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">CString</a></span>(size_t n, unsigned char c);</code></p>
+<code> <span class="method"><a href="#">CString</a></span>(size_t n, unsigned char c);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>CString</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>CString</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Append / Assign / Fill</h3>

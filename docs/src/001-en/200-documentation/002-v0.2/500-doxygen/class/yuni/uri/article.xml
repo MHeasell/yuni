@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Uri</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Uri</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Constructor with a string, to directly construct the URI.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Uri</a></span>(const String<b>&amp;</b> s);</code></p>
+<code> <span class="method"><a href="#">Uri</a></span>(const String<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Uri</a></span>(const Uri<b>&amp;</b> rhs);</code></p>
+<code> <span class="method"><a href="#">Uri</a></span>(const Uri<b>&amp;</b> rhs);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Informations about the URI structure</h3>

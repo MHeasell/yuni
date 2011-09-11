@@ -17,7 +17,7 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">ApplicationName</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">ApplicationName</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class Handler , class VerbosityType , class O , class StringT &gt;<br />void <span class="method"><a href="#">internalDecoratorAddPrefix</a></span>(O<b>&amp;</b> out, const StringT<b>&amp;</b> s) <span class="keyword">const</span>; [inline]</code></p>
 </td></tr>
 </table>

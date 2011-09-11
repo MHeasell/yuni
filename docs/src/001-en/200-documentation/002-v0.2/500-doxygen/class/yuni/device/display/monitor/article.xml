@@ -9,13 +9,13 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors and Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Monitor</a></span>();</code></p>
+<code> <span class="method"><a href="#">Monitor</a></span>();</code></p>
 <p class="doxygen_fun">Constructor with values.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Monitor</a></span>(const String<b>&amp;</b> nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b);</code></p>
+<code> <span class="method"><a href="#">Monitor</a></span>(const String<b>&amp;</b> nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b);</code></p>
 <p class="doxygen_fun">Constructor by copy.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Monitor</a></span>(const Monitor<b>&amp;</b> c);</code></p>
+<code> <span class="method"><a href="#">Monitor</a></span>(const Monitor<b>&amp;</b> c);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Monitor</a></span>();</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Monitor</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Handle</h3>

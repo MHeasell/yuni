@@ -22,9 +22,9 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Iterator</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Iterator</a></span>(const Iterator<b>&amp;</b> rhs); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Iterator</a></span>(Item<b>*</b> c); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(const Iterator<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(Item<b>*</b> c); [inline]</code></p>
 <p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
 <p class="doxygen_fun">Increment the iterator by the distance 1.<br />
 <code>void <span class="method"><a href="#">forward</a></span>(); [inline]</code></p>

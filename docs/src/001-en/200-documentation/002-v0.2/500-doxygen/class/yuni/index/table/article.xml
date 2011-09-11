@@ -27,12 +27,12 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Table</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Table</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Table</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code>void <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code>size_t <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Table</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Table</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Table</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code>void <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code>size_t <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
 </td></tr>

@@ -9,13 +9,13 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Stream</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Stream</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor (not allowed, it will fail at compile time)<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Stream</a></span>(const Stream<b>&amp;</b> rhs);</code></p>
+<code> <span class="method"><a href="#">Stream</a></span>(const Stream<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Open a file.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Stream</a></span>(const U<b>&amp;</b> filename, const int mode); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">Stream</a></span>(const U<b>&amp;</b> filename, const int mode); [inline]</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Stream</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Stream</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Open / Close a file</h3>

@@ -40,27 +40,27 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>();</code></p>
+<code> <span class="method"><a href="#">Button</a></span>();</code></p>
 <p class="doxygen_fun">Constructor with parent.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent);</code></p>
+<code> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent);</code></p>
 <p class="doxygen_fun">Constructor with caption.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption); [inline]</code></p>
 <p class="doxygen_fun">Constructor with parent and caption.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption); [inline]</code></p>
 <p class="doxygen_fun">Constructor with dimensions.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Constructor with parent and dimensions.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Full constructor.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption, float x, float y, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption, float x, float y, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Full constructor with parent.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, float x, float y, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, float x, float y, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Full constructor.<br />
-<code><span class="keyword">template</span>&lt;class StringT , class T &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption, Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT , class T &gt;<br /> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption, Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Full constructor with parent.<br />
-<code><span class="keyword">template</span>&lt;class StringT , class T &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT , class T &gt;<br /> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Virtual destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Button</a></span>();</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Button</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Caption</h3>
