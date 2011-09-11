@@ -4,3 +4,39 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Table</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p>The total number of keys. A non-zero value if each key is unique.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p>The total number of keys. A non-zero value if each key is unique.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p class="doxygen_typedef">Ancestor.<br />
+<code><span class="keyword">typedef</span> Yuni::Private::IndexTable::Table&lt; T &gt; <span class="method"><a href="#">AncestorType</a></span>;</code></p>
+<p class="doxygen_typedef">Type of the value.<br />
+<code><span class="keyword">typedef</span> typedef AncestorType::ValueType <span class="method"><a href="#">ValueType</a></span>;</code></p>
+<p class="doxygen_typedef">Ancestor.<br />
+<code><span class="keyword">typedef</span> Yuni::Private::IndexTable::Table&lt; T &gt; <span class="method"><a href="#">AncestorType</a></span>;</code></p>
+<p class="doxygen_typedef">Type of the value.<br />
+<code><span class="keyword">typedef</span> typedef AncestorType::ValueType <span class="method"><a href="#">ValueType</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Table</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Table</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>size_t <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Table</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Table</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>size_t <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

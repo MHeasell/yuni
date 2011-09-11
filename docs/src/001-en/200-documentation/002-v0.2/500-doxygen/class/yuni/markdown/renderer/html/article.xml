@@ -4,3 +4,51 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Html</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Html</a></span>();</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Html</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Enable / Disable nodes</h3>
+<p class="doxygen_fun">Ignore a type of node.<br />
+<code>void <span class="method"><a href="#">discard</a></span>(Node::Type ndtype); [inline]</code></p>
+<p class="doxygen_fun">Consider all types of node.<br />
+<code>void <span class="method"><a href="#">enableAllNodes</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Rendering</h3>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">render</a></span>(const Reader<b>&amp;</b> reader);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+<p><code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var">Tags composition.<br />
+<code>String <span class="method"><a href="#">composition</a></span>;</code></p>
+<p class="doxygen_var">Flag to enable/disable each type of node.<br />
+<code>bool <span class="method"><a href="#">enable</a></span>;</code></p>
+<p class="doxygen_var"><code>bool <span class="method"><a href="#">paragraphSkipIfAlone</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Reset all default values.<br />
+<code>void <span class="method"><a href="#">resetDefaultValues</a></span>();</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

@@ -4,3 +4,37 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>ThreadInfo</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">The most suitable smart pointer for the class.<br />
+<code><span class="keyword">typedef</span> SmartPtr &lt; ThreadInfo &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
+<p class="doxygen_typedef">Vector of ThreadInfo .<br />
+<code><span class="keyword">typedef</span> std::vector&lt; typename ThreadInfo::Ptr &gt; <span class="method"><a href="#">Vector</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var">Reference to the working thread.<br />
+<code>Thread::IThread::Ptr <span class="method"><a href="#">thread</a></span>;</code></p>
+<p class="doxygen_var">Reference to the job currently in execution.<br />
+<code>Job::IJob::Ptr <span class="method"><a href="#">job</a></span>;</code></p>
+<p class="doxygen_var">Flag to know if the thread has a job currently in execution.<br />
+<code>bool <span class="method"><a href="#">hasJob</a></span>;</code></p>
+<p class="doxygen_var">State of the job (if any)<br />
+<code>Job::State <span class="method"><a href="#">state</a></span>;</code></p>
+<p class="doxygen_var">Flag to know if the job is canceling its work.<br />
+<code>bool <span class="method"><a href="#">canceling</a></span>;</code></p>
+<p class="doxygen_var">Progression (in percent) of the job (if any, between 0 and 100)<br />
+<code>int <span class="method"><a href="#">progression</a></span>;</code></p>
+<p class="doxygen_var">Name of the job.<br />
+<code>String <span class="method"><a href="#">name</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

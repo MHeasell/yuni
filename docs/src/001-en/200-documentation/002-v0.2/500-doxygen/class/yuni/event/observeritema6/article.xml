@@ -4,3 +4,27 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>ObserverItemA6</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default Constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">ObserverItemA6</a></span>(C<b>*</b> o, R(C::*)(A0, A1, A2, A3, A4, A5) method); [inline]</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>ObserverItemA6</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Fire the event.<br />
+<code>R <span class="method"><a href="#">fireEvent</a></span>(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get a pointer to the observer object.<br />
+<code>IObserver * <span class="method"><a href="#">observer</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Test if the class contains a given observer.<br />
+<code>bool <span class="method"><a href="#">equalsTo</a></span>(const IObserver<b>*</b> o) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

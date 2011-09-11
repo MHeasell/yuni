@@ -4,3 +4,18 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>IObserverItemA3</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>IObserverItemA3</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>IObserver * <span class="method"><a href="#">observer</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">equalsTo</a></span>(const IObserver<b>*</b> o) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>R <span class="method"><a href="#">fireEvent</a></span>(A0 a0, A1 a1, A2 a2) <span class="keyword">const</span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

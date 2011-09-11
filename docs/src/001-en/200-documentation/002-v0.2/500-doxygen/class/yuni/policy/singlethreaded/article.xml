@@ -4,3 +4,25 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>SingleThreaded</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">SingleThreaded</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">SingleThreaded</a></span>(const SingleThreaded<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>SingleThreaded</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p>Get if this policy is thread-safe.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

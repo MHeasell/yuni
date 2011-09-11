@@ -4,3 +4,15 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>NullHandler</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class LoggerT , class VerbosityType , class StringT &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">internalDecoratorWriteWL</a></span>(LoggerT<b>&amp;</b> , const StringT<b>&amp;</b> ); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

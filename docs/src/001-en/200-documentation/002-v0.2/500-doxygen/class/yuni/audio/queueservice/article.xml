@@ -4,3 +4,66 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>QueueService</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor and destructor</h3>
+<p class="doxygen_fun">Constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">QueueService</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>QueueService</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Private operations</h3>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">QueueService</a></span>(const QueueService<b>&amp;</b> );</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>QueueService &amp; <span class="method"><a href="#">operator=</a></span>(const QueueService<b>&amp;</b> );</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">The threading policy.<br />
+<code><span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; QueueService &gt; <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
+<p>Get if this policy is thread-safe.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var">Control block for emitters.<br />
+<code>Emitters <span class="method"><a href="#">emitter</a></span>;</code></p>
+<p class="doxygen_var">Control block for audio buffers.<br />
+<code>Bank <span class="method"><a href="#">bank</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Public</h3>
+<p>Friend declaration.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p>Friend declaration.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p>Friend declaration.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Start the audio service.<br />
+<code>bool <span class="method"><a href="#">start</a></span>();</code></p>
+<p class="doxygen_fun">Stop the audio service.<br />
+<code>void <span class="method"><a href="#">stop</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_var">Mutex.<br />
+<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

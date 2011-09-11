@@ -4,3 +4,25 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>If</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> IfTrue <span class="method"><a href="#">ResultType</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> IfTrue <span class="method"><a href="#">Type</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> Remove::All &lt; IfTrue &gt;:: Type <span class="method"><a href="#">RetTrue</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> Remove::All &lt; IfFalse &gt;:: Type <span class="method"><a href="#">RetFalse</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">static</span> RetTrue &amp; <span class="method"><a href="#">choose</a></span>(RetTrue<b>&amp;</b> tr, RetFalse<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> const RetTrue &amp; <span class="method"><a href="#">choose</a></span>(const RetTrue<b>&amp;</b> tr, const RetFalse<b>&amp;</b> ); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

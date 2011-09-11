@@ -269,15 +269,17 @@ body,html {
 	padding-left			:0.3em !important;
 	text-shadow				:2px 2px 2px #ccc;
 }
+.content .visibility {
+	font-size				:10pt;
+	color					:#245079;
+	padding-left			:2em;
+	margin					:25pt 0 0 0;
+}
 .content h2 {
 	font-size				:12pt;
 	margin					:47pt 0 15pt 0;
 	text-shadow				:2px 2px 2px #bbb;
 	color:#400;
-}
-.content h2 code {
-	font-size:12pt;
-	color:#449;
 }
 td > h1:first-child {
 	margin-top:0 !important;
@@ -293,6 +295,13 @@ td > h2:first-child {
 	padding-left			:2em;
 	margin					:25pt 0 0 0;
 }
+.content .h2noleftspace {
+	padding-left			:0em !important;
+}
+.content .h3noleftspace {
+	padding-left			:0em !important;
+}
+
 .content p {
 	font-size				:8pt;
 	text-align				:justify;
@@ -305,6 +314,29 @@ td > h2:first-child {
 	color					:#33A;
 	font-family				:Monaco, monospace;
 	font-size:10px;
+}
+.content code .keyword {
+	color:#666;
+	font-weight:bold;
+}
+.content code .method {
+	color:#933;
+}
+.content .id {
+}
+
+.content code .method a {
+	background-image:none !important;
+	background-color:#eee;
+	padding-left:0.3em;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-shadow	:2px 2px 2px white;
+}
+.content code .method a:hover {
+	text-shadow	:1px 1px 1px black;
 }
 .content pre {
 	font-family				:Monaco, monospace;
@@ -527,5 +559,24 @@ td > h2:first-child {
 	box-shadow: 0 2px 5px #bbb;
 	*/
 	text-shadow				:2px 2px 2px #444;
-
+}
+.doxygen_fun {
+	background-image:url('../images/doxygen/function.png');
+	background-repeat:no-repeat;
+	padding-left:25px;
+}
+.doxygen_typedef {
+	background-image:url('../images/doxygen/typedef.png');
+	background-repeat:no-repeat;
+	padding-left:25px;
+}
+.doxygen_var {
+	background-image:url('../images/doxygen/var.png');
+	background-repeat:no-repeat;
+	padding-left:25px;
+}
+.doxygen_enum {
+	background-image:url('../images/doxygen/enum.png');
+	background-repeat:no-repeat;
+	padding-left:25px;
 }

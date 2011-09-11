@@ -4,3 +4,53 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Reader</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Reader</a></span>();</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Reader</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Document</h3>
+<p class="doxygen_fun">End the parsing of a document.<br />
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">beginDocument</a></span>(const StringT<b>&amp;</b> filename); [inline]</code></p>
+<p class="doxygen_fun">End the parsing of a document.<br />
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const StringT<b>&amp;</b> text); [inline]</code></p>
+<p class="doxygen_fun">End the parsing of a document.<br />
+<code>void <span class="method"><a href="#">endDocument</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Error tracking</h3>
+<p class="doxygen_fun">Set the current filename.<br />
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">hintFilename</a></span>(const StringT<b>&amp;</b> filename); [inline]</code></p>
+<p class="doxygen_fun">Get the current filename.<br />
+<code>const String &amp; <span class="method"><a href="#">hintFilename</a></span>() <span class="keyword">const</span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Root node</h3>
+<p class="doxygen_fun">Get the root node.<br />
+<code>Node::Ptr <span class="method"><a href="#">root</a></span>() <span class="keyword">const</span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Append.<br />
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Reader &amp; <span class="method"><a href="#">operator+=</a></span>(const StringT<b>&amp;</b> text); [inline]</code></p>
+<p class="doxygen_fun">Append.<br />
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Reader &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const StringT<b>&amp;</b> text); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var"><code>Event &lt; void()&gt; <span class="method"><a href="#">onBeginDocument</a></span>;</code></p>
+<p class="doxygen_var">Event .<br />
+<code>Event &lt; void(const String &amp;)&gt; <span class="method"><a href="#">onParseFilename</a></span>;</code></p>
+<p class="doxygen_var"><code>Event &lt; void()&gt; <span class="method"><a href="#">onEndDocument</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

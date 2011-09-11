@@ -4,3 +4,45 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Process</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Process</a></span>();</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Process</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">The threading policy.<br />
+<code><span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; Process &gt; <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
+<p>Get if this policy is thread-safe.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Execute the process.<br />
+<code>bool <span class="method"><a href="#">execute</a></span>(unsigned int timeout);</code></p>
+<p class="doxygen_fun">Wait for the end of the sub-process.<br />
+<code>void <span class="method"><a href="#">wait</a></span>();</code></p>
+<p class="doxygen_fun">Cancel the execution of the sub-process.<br />
+<code>void <span class="method"><a href="#">cancel</a></span>();</code></p>
+<p class="doxygen_fun">Get if the process is currently running.<br />
+<code>bool <span class="method"><a href="#">running</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_var">Mutex.<br />
+<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

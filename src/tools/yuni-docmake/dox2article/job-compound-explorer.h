@@ -25,14 +25,24 @@ namespace Job
 		static void Dispatch();
 
 	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Default constructor
+		**
+		** \param compound The compound to analyze
+		*/
 		CompoundExplorer(const Compound::Ptr& compound);
+		//! Destructor
 		virtual ~CompoundExplorer();
+		//@}
 
 
 	protected:
 		virtual void onExecute();
 
 	private:
+		//! Compound to analyze
 		Compound::Ptr pCompound;
 
 	}; // class CompoundExplorer

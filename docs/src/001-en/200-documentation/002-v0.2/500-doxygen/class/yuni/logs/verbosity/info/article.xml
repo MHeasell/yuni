@@ -4,3 +4,31 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Info</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var">Text Color for displaying the verbosity.<br />
+<code>const System::Console::Color <span class="method"><a href="#">color</a></span>;</code></p>
+<p class="doxygen_var">Message Text Color .<br />
+<code>const System::Console::Color <span class="method"><a href="#">messageColor</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">AppendName</a></span>(U<b>&amp;</b> u); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

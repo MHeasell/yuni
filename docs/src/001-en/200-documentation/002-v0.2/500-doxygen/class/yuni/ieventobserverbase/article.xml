@@ -4,3 +4,33 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>IEventObserverBase</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Public</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+<p><code><i>(unmanaged tag)</i></code></p>
+<p><code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IEventObserverBase</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>IEventObserverBase</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun">Increment a reference count for a given bound event.<br />
+<code>void <span class="method"><a href="#">boundEventIncrementReference</a></span>(IEvent<b>*</b> evt) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Decrementing a reference ocunt for a given bound event.<br />
+<code>void <span class="method"><a href="#">boundEventDecrementReference</a></span>(IEvent<b>*</b> evt) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Remove an boundEvent from the table.<br />
+<code>void <span class="method"><a href="#">boundEventRemoveFromTable</a></span>(IEvent<b>*</b> evt) <span class="keyword">const</span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

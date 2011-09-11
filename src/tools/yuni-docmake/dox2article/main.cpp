@@ -26,8 +26,8 @@ namespace Dox2Article
 	public:
 		Program()
 		{
-			allSymbols = new Compound::Map[Compound::kdMax];
-			allSymbolsByName = new Compound::Map[Compound::kdMax];
+			allSymbols = new Compound::Map[kdMax];
+			allSymbolsByName = new Compound::Map[kdMax];
 		}
 
 		~Program()

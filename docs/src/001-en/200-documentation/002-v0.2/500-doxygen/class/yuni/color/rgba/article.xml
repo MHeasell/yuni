@@ -4,3 +4,86 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>RGBA</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">RGBA</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">RGBA</a></span>(const RGBA<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Constructor with default values.<br />
+<code><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">RGBA</a></span>(R r, G g, B b, A a); [inline]</code></p>
+<p class="doxygen_fun">Constructor with default values.<br />
+<code><span class="keyword">template</span>&lt;class R , class G , class B &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">RGBA</a></span>(R r, G g, B b); [inline]</code></p>
+<p class="doxygen_fun">Constructor with default values.<br />
+<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">RGBA</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Assign</h3>
+<p class="doxygen_fun">Assign all channels at once.<br />
+<code><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;<br />void <span class="method"><a href="#">assign</a></span>(R r, G g, B b, A a); [inline]</code></p>
+<p class="doxygen_fun">Reset all channels at once.<br />
+<code><span class="keyword">template</span>&lt;class R , class G , class B &gt;<br />void <span class="method"><a href="#">assign</a></span>(R r, G g, B b); [inline]</code></p>
+<p class="doxygen_fun">Reset all channels at once from a single value.<br />
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">assign</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Misc</h3>
+<p class="doxygen_fun">Get if the color will be visible.<br />
+<code>bool <span class="method"><a href="#">visible</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Check if all channels are valid.<br />
+<code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Stream printing</h3>
+<p class="doxygen_fun">Print the color value.<br />
+<code><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroT&gt;<br />void <span class="method"><a href="#">print</a></span>(CString &lt; ChunkSizeT, ExpandableT, ZeroT &gt;<b>&amp;</b> string) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Print the color value.<br />
+<code><span class="keyword">template</span>&lt;class StreamT &gt;<br />void <span class="method"><a href="#">print</a></span>(StreamT<b>&amp;</b> out) <span class="keyword">const</span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Increase or decrease all channels.<br />
+<code><span class="keyword">template</span>&lt;class U &gt;<br />RGBA &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
+<p class="doxygen_fun">Increase or decrease all channels.<br />
+<code><span class="keyword">template</span>&lt;class U &gt;<br />RGBA &amp; <span class="method"><a href="#">operator-=</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>RGBA &amp; <span class="method"><a href="#">operator=</a></span>(const RGBA<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>RGBA &amp; <span class="method"><a href="#">operator=</a></span>(const Yuni::NullPtr<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code><span class="keyword">template</span>&lt;class U &gt;<br />RGBA &amp; <span class="method"><a href="#">operator=</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Comparison.<br />
+<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">operator==</a></span>(const U<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Comparison.<br />
+<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">operator!=</a></span>(const U<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p>A non-zero value if the class has a transparency channel. The upper bound for this color model. The lower bound for this color model.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p class="doxygen_typedef">Type used for channels.<br />
+<code><span class="keyword">typedef</span> T <span class="method"><a href="#">Type</a></span>;</code></p>
+<p class="doxygen_typedef">The most appropriate type for printing.<br />
+<code><span class="keyword">typedef</span> Yuni::Private::Color::Print&lt; T &gt;:: Type <span class="method"><a href="#">PrintType</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var">The red channel.<br />
+<code>Type <span class="method"><a href="#">red</a></span>;</code></p>
+<p class="doxygen_var">The green channel.<br />
+<code>Type <span class="method"><a href="#">green</a></span>;</code></p>
+<p class="doxygen_var">The blue channel.<br />
+<code>Type <span class="method"><a href="#">blue</a></span>;</code></p>
+<p class="doxygen_var">The alpha channel (transparency)<br />
+<code>Type <span class="method"><a href="#">alpha</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

@@ -4,3 +4,37 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Symbol</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">Handle for a symbol.<br />
+<code><span class="keyword">typedef</span> void * <span class="method"><a href="#">Handle</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Symbol</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Constructor with a given handle.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Symbol</a></span>(const Handle p); [inline]</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Symbol</a></span>(const Symbol<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Get if the symbol is invalid.<br />
+<code>bool <span class="method"><a href="#">null</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get if the symbol is valid.<br />
+<code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Copy operator.<br />
+<code>Symbol &amp; <span class="method"><a href="#">operator=</a></span>(const Symbol<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Copy operator.<br />
+<code>Symbol &amp; <span class="method"><a href="#">operator=</a></span>(const Symbol::Handle hndl); [inline]</code></p>
+<p class="doxygen_fun">Get the handle of the symbol.<br />
+<code>Handle <span class="method"><a href="#">ptr</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

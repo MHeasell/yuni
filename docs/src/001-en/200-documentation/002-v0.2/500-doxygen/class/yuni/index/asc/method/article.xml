@@ -4,3 +4,16 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Method</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> MethodT&lt; KeyT, ValueT, true, UniqueT &gt; <span class="method"><a href="#">Type</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> MethodT&lt; KeyT, ValueT, true, UniqueT &gt; <span class="method"><a href="#">Type</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

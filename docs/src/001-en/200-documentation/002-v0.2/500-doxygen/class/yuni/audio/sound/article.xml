@@ -4,3 +4,45 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Sound</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+<p class="doxygen_typedef">Pointer type.<br />
+<code><span class="keyword">typedef</span> SmartPtr &lt; Sound &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
+<p class="doxygen_typedef">Map from a string to a Sound::Ptr .<br />
+<code><span class="keyword">typedef</span> std::map&lt; String , Ptr &gt; <span class="method"><a href="#">Map</a></span>;</code></p>
+<p class="doxygen_typedef">Threading Policy .<br />
+<code><span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; Sound &gt; <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
+<p>Get if this policy is thread-safe.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Sound</a></span>(Private::Audio::AudioStream<b>*</b> stream); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Sound</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">prepareDispatched</a></span>(unsigned int source);</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">destroyDispatched</a></span>();</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">updateDispatched</a></span>(unsigned int source);</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">stream</a></span>(Private::Audio::AudioStream<b>*</b> stream); [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Get the duration of the stream, 0 if not set.<br />
+<code>unsigned int <span class="method"><a href="#">duration</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_var">Mutex.<br />
+<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

@@ -55,7 +55,7 @@ namespace Dox2Article
 			//!
 			Compound::Deque  pStack;
 			//! Stats
-			unsigned int pStats[Compound::kdMax];
+			unsigned int pStats[kdMax];
 			//!
 			bool pInName;
 			//!
@@ -74,7 +74,7 @@ namespace Dox2Article
 		{
 			assert(&pDocument != NULL);
 
-			for (unsigned int i = 0; i != Compound::kdMax; ++i)
+			for (unsigned int i = 0; i != kdMax; ++i)
 				pStats[i] = 0u;
 		}
 
@@ -85,10 +85,10 @@ namespace Dox2Article
 			CString<64,false>  name;
 
 			logs.info() << "Compound statistics from index";
-			for (unsigned int i = 1; i != Compound::kdMax; ++i)
+			for (unsigned int i = 1; i != kdMax; ++i)
 			{
 				name.clear();
-				Compound::AppendKindToString(name, (Compound::Kind) i);
+				Compound::AppendKindToString(name, (CompoundType) i);
 
 				result.clear();
 				result.resize(10, ' ');

@@ -4,3 +4,62 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>UUID</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">UUID</a></span>();</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">UUID</a></span>(const UUID<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun">Constructor with flags.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">UUID</a></span>(Flag flag);</code></p>
+<p class="doxygen_fun">Constructor from a string.<br />
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">UUID</a></span>(const StringT<b>&amp;</b> string); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">UUID</h3>
+<p class="doxygen_fun">Generate a new UUID .<br />
+<code>void <span class="method"><a href="#">generate</a></span>();</code></p>
+<p class="doxygen_fun">Set the UUID to null.<br />
+<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
+<p class="doxygen_fun">Get if the UUID is null (e.g. 000000000-0000-0000-0000-0000000000000)<br />
+<code>bool <span class="method"><a href="#">null</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Assign from a string.<br />
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">assign</a></span>(const StringT<b>&amp;</b> string);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Copy operator.<br />
+<code>UUID &amp; <span class="method"><a href="#">operator=</a></span>(const UUID<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun">Assignment from a string.<br />
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />UUID &amp; <span class="method"><a href="#">operator=</a></span>(const StringT<b>&amp;</b> string);</code></p>
+<p class="doxygen_fun">Null.<br />
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Comparison.<br />
+<code>bool <span class="method"><a href="#">operator==</a></span>(const UUID<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Comparison.<br />
+<code>bool <span class="method"><a href="#">operator!=</a></span>(const UUID<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Strict weak comparison.<br />
+<code>bool <span class="method"><a href="#">operator&lt;</a></span>(const UUID<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p>Set the UUID to null. Generate a new UUID .<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun">Write the UUID into string in a C-String.<br />
+<code>void <span class="method"><a href="#">writeToCString</a></span>(char<b>*</b> cstring) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Initialize the UUID from a c-string.<br />
+<code>bool <span class="method"><a href="#">initializeFromCString</a></span>(const char<b>*</b> cstring);</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

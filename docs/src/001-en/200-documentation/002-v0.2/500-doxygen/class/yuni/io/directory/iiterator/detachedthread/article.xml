@@ -4,3 +4,77 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>DetachedThread</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Execution flow</h3>
+<p class="doxygen_fun">Start the execution of the thread, if not already started.<br />
+<code>Error <span class="method"><a href="#">start</a></span>();</code></p>
+<p class="doxygen_fun">Stop the execution of the thread and wait for it, if not already stopped.<br />
+<code>Error <span class="method"><a href="#">stop</a></span>(unsigned int timeout);</code></p>
+<p class="doxygen_fun">Wait for an infinite amount of time for the end of the thread.<br />
+<code>Error <span class="method"><a href="#">wait</a></span>();</code></p>
+<p class="doxygen_fun">Wait for the end of the thread.<br />
+<code>Error <span class="method"><a href="#">wait</a></span>(unsigned int timeout);</code></p>
+<p class="doxygen_fun">Restart the thread.<br />
+<code>Error <span class="method"><a href="#">restart</a></span>(unsigned int timeout);</code></p>
+<p class="doxygen_fun">Ask to Stop the execution of the thread as soon as possible.<br />
+<code>void <span class="method"><a href="#">gracefulStop</a></span>();</code></p>
+<p class="doxygen_fun">Get if the thread is currently running.<br />
+<code>bool <span class="method"><a href="#">started</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Interrupt the thread if suspended.<br />
+<code>void <span class="method"><a href="#">wakeUp</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Get if the thread is currently stopped.<br />
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">DetachedThread</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>DetachedThread</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">The threading policy.<br />
+<code><span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; IThread &gt; <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
+<p class="doxygen_typedef">The most suitable smart pointer for the class.<br />
+<code><span class="keyword">typedef</span> SmartPtr &lt; IThread &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
+<p>Get if this policy is thread-safe.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun">Suspend the execution of the thread of X miliseconds.<br />
+<code>bool <span class="method"><a href="#">suspend</a></span>(const unsigned int delay);</code></p>
+<p class="doxygen_fun">Get if the thread should abort as soon as possible.<br />
+<code>bool <span class="method"><a href="#">shouldAbort</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Event : The thread has just been started.<br />
+<code>bool <span class="method"><a href="#">onStarting</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Event : The thread is running.<br />
+<code>bool <span class="method"><a href="#">onExecute</a></span>();</code></p>
+<p class="doxygen_fun">Event : The thread has finished its job and is waiting for being re-executed.<br />
+<code>void <span class="method"><a href="#">onPause</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Event : The thread has been gracefully stopped.<br />
+<code>void <span class="method"><a href="#">onStop</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Event : The thread has been killed.<br />
+<code>void <span class="method"><a href="#">onKill</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_var">Mutex.<br />
+<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

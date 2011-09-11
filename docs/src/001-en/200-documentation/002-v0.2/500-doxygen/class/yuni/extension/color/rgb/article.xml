@@ -4,3 +4,24 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>RGB</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> RGBType::Type <span class="method"><a href="#">Type</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> RGBType::template Calculation&lt; T &gt;:: Type <span class="method"><a href="#">CalculationType</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">static</span> void <span class="method"><a href="#">Assign</a></span>(RGBType<b>&amp;</b> color, const T<b>&amp;</b> value); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> bool <span class="method"><a href="#">IsEqual</a></span>(RGBType<b>&amp;</b> color, const T<b>&amp;</b> value); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;bool PlusT&gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">Increase</a></span>(RGBType<b>&amp;</b> color, const T<b>&amp;</b> value); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

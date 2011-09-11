@@ -4,3 +4,15 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>VerbosityLevel</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class Handler , class VerbosityType , class O , class StringT &gt;<br />void <span class="method"><a href="#">internalDecoratorAddPrefix</a></span>(O<b>&amp;</b> out, const StringT<b>&amp;</b> s) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

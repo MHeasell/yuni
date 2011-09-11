@@ -4,3 +4,94 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Application</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default application.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Application</a></span>();</code></p>
+<p class="doxygen_fun">Constructor with a given name.<br />
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Application</a></span>(const StringT<b>&amp;</b> name); [inline]</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Application</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Windows managmenet</h3>
+<p class="doxygen_fun">Add a window to the application.<br />
+<code>void <span class="method"><a href="#">add</a></span>(const Window::Ptr<b>&amp;</b> wnd);</code></p>
+<p class="doxygen_fun">Remove a window from the application using its ID .<br />
+<code>void <span class="method"><a href="#">remove</a></span>(IComponent::ID id);</code></p>
+<p class="doxygen_fun">Remove a window from the application.<br />
+<code>void <span class="method"><a href="#">remove</a></span>(const Window::Ptr<b>&amp;</b> wnd);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun"><code>Application &amp; <span class="method"><a href="#">operator+=</a></span>(Window<b>*</b> wnd);</code></p>
+<p class="doxygen_fun"><code>Application &amp; <span class="method"><a href="#">operator+=</a></span>(const Window::Ptr<b>&amp;</b> wnd);</code></p>
+<p class="doxygen_fun"><code>Application &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(Window<b>*</b> wnd);</code></p>
+<p class="doxygen_fun"><code>Application &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const Window::Ptr<b>&amp;</b> wnd);</code></p>
+<p class="doxygen_fun"><code>Application &amp; <span class="method"><a href="#">operator-=</a></span>(IComponent::ID id);</code></p>
+<p class="doxygen_fun"><code>Application &amp; <span class="method"><a href="#">operator-=</a></span>(Window<b>*</b> wnd);</code></p>
+<p class="doxygen_fun"><code>Application &amp; <span class="method"><a href="#">operator-=</a></span>(const Window::Ptr<b>&amp;</b> wnd);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">Smart pointer.<br />
+<code><span class="keyword">typedef</span> SmartPtr &lt; Application &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
+<p class="doxygen_typedef">Map from a unique ID .<br />
+<code><span class="keyword">typedef</span> std::map&lt; GUID , Application::Ptr &gt; <span class="method"><a href="#">Map</a></span>;</code></p>
+<p class="doxygen_typedef">Event observer type.<br />
+<code><span class="keyword">typedef</span> IEventObserver &lt; Application &gt; <span class="method"><a href="#">EventObserverType</a></span>;</code></p>
+<p class="doxygen_typedef">Threading policy.<br />
+<code><span class="keyword">typedef</span> EventObserverType::ThreadingPolicy <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
+<p class="doxygen_typedef">Type of the Event observer.<br />
+<code><span class="keyword">typedef</span> IEventObserver &lt; Application , Policy::ObjectLevelLockable &gt; <span class="method"><a href="#">IEventObserverType</a></span>;</code></p>
+<p>Get if this policy is thread-safe.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_var">Application string identifier.<br />
+<code>const GUID <span class="method"><a href="#">pGUID</a></span>;</code></p>
+<p class="doxygen_var">Application name, used for display.<br />
+<code>const String <span class="method"><a href="#">pName</a></span>;</code></p>
+<p class="doxygen_var">Application windows.<br />
+<code>Window::Map <span class="method"><a href="#">pWindows</a></span>;</code></p>
+<p class="doxygen_var">Mutex .<br />
+<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Public</h3>
+<p>Friend : required for access to events.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Show all the application's windows.<br />
+<code>void <span class="method"><a href="#">show</a></span>();</code></p>
+<p class="doxygen_fun">Quit the application.<br />
+<code>void <span class="method"><a href="#">quit</a></span>();</code></p>
+<p class="doxygen_fun">Get the identifier for this application.<br />
+<code>const GUID &amp; <span class="method"><a href="#">guid</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Get the name of this application.<br />
+<code>const String &amp; <span class="method"><a href="#">name</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Generate a locally unique ID .<br />
+<code>IComponent::ID <span class="method"><a href="#">createID</a></span>() <span class="keyword">const</span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun">Destroy all existing and future bound events.<br />
+<code>void <span class="method"><a href="#">destroyBoundEvents</a></span>();</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

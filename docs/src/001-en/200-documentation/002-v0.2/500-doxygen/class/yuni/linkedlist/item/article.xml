@@ -4,3 +4,30 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Item</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var">The next item in the list.<br />
+<code>Item * <span class="method"><a href="#">next</a></span>;</code></p>
+<p class="doxygen_var">The real value.<br />
+<code>T <span class="method"><a href="#">data</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Item</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Item</a></span>(const Item<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Item</a></span>(Item<b>*</b> n); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Item</a></span>(reference_type value); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Item</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Item</a></span>(Item<b>*</b> n, reference_type value); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Item</a></span>(Item<b>*</b> n, const U<b>&amp;</b> value); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

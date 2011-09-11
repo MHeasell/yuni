@@ -4,3 +4,70 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Desktop</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Desktop</a></span>();</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Desktop</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Applications</h3>
+<p class="doxygen_fun">Add an application to this desktop.<br />
+<code>void <span class="method"><a href="#">add</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
+<p class="doxygen_fun">Add an application to this desktop.<br />
+<code><span class="keyword">template</span>&lt;typename StringT &gt;<br />void <span class="method"><a href="#">remove</a></span>(const StringT<b>&amp;</b> id); [inline]</code></p>
+<p class="doxygen_fun">Add an application to this desktop.<br />
+<code>void <span class="method"><a href="#">remove</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun"><code>Desktop &amp; <span class="method"><a href="#">operator+=</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
+<p class="doxygen_fun"><code>Desktop &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename StringT &gt;<br />Desktop &amp; <span class="method"><a href="#">operator-=</a></span>(const StringT<b>&amp;</b> id); [inline]</code></p>
+<p class="doxygen_fun"><code>Desktop &amp; <span class="method"><a href="#">operator-=</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">Smart pointer.<br />
+<code><span class="keyword">typedef</span> SmartPtr &lt; Desktop &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
+<p class="doxygen_typedef">Threading policy.<br />
+<code><span class="keyword">typedef</span> IEventObserver &lt; Desktop &gt; <span class="method"><a href="#">EventObserverType</a></span>;</code></p>
+<p class="doxygen_typedef">Threading policy.<br />
+<code><span class="keyword">typedef</span> EventObserverType::ThreadingPolicy <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
+<p class="doxygen_typedef">Type of the Event observer.<br />
+<code><span class="keyword">typedef</span> IEventObserver &lt; Desktop , Policy::ObjectLevelLockable &gt; <span class="method"><a href="#">IEventObserverType</a></span>;</code></p>
+<p>Get if this policy is thread-safe.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Show all applications and windows in this desktop.<br />
+<code>void <span class="method"><a href="#">show</a></span>();</code></p>
+<p class="doxygen_fun">Quit the desktop and all its applications.<br />
+<code>void <span class="method"><a href="#">quit</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun">Destroy all existing and future bound events.<br />
+<code>void <span class="method"><a href="#">destroyBoundEvents</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_var">Mutex .<br />
+<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

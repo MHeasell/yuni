@@ -4,3 +4,34 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>IEvent</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">IEvent list.<br />
+<code><span class="keyword">typedef</span> std::map&lt; IEvent *, unsigned int &gt; <span class="method"><a href="#">Map</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Public</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IEvent</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>IEvent</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun">Unregister an observer.<br />
+<code>void <span class="method"><a href="#">unregisterObserver</a></span>(const IEventObserverBase<b>*</b> pointer);</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

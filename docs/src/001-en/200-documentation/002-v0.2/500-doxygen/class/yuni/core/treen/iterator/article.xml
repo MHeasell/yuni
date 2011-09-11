@@ -4,3 +4,64 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>iterator</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">STL Compatibility</h3>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> NodeT <span class="method"><a href="#">value_type</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> NodeT * <span class="method"><a href="#">pointer</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> NodeT &amp; <span class="method"><a href="#">reference</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> std::bidirectional_iterator_tag <span class="method"><a href="#">iterator_category</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> ptrdiff_t <span class="method"><a href="#">difference_type</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">iterator</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">iterator</a></span>(const iterator<b>&amp;</b> it); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">iterator</a></span>(const NodeT<b>&amp;</b> p); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Comparisons</h3>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator==</a></span>(const IteratorType<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!=</a></span>(const IteratorType<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;</a></span>(const IteratorType<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;</a></span>(const IteratorType<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;=</a></span>(const IteratorType<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;=</a></span>(const IteratorType<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> iterator <span class="method"><a href="#">IteratorType</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> Ptr <span class="method"><a href="#">NodeT</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> NodeT * <span class="method"><a href="#">PointerType</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_var"><code>NodeT <span class="method"><a href="#">pNode</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator++</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator--</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>NodeT &amp; <span class="method"><a href="#">operator*</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>const NodeT &amp; <span class="method"><a href="#">operator*</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>NodeT &amp; <span class="method"><a href="#">operator-&gt;</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>const NodeT &amp; <span class="method"><a href="#">operator-&gt;</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>IteratorType <span class="method"><a href="#">operator--</a></span>(int ); [inline]</code></p>
+<p class="doxygen_fun"><code>IteratorType <span class="method"><a href="#">operator++</a></span>(int ); [inline]</code></p>
+<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator+=</a></span>(int n); [inline]</code></p>
+<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator-=</a></span>(int n); [inline]</code></p>
+<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator+=</a></span>(unsigned int n); [inline]</code></p>
+<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator-=</a></span>(unsigned int n); [inline]</code></p>
+<p class="doxygen_fun"><code>IteratorType <span class="method"><a href="#">operator-</a></span>(int n); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

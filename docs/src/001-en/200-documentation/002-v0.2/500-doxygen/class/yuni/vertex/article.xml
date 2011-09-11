@@ -4,3 +4,38 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Vertex</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors and destructors</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vertex</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vertex</a></span>(const Point3D &lt; float &gt;<b>&amp;</b> position); [inline]</code></p>
+<p class="doxygen_fun">Default constructor.<br />
+<code><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vertex</a></span>(const U x, const V y, const W z); [inline]</code></p>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Vertex</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Comparison operator (equal with)<br />
+<code>bool <span class="method"><a href="#">operator==</a></span>(const Vertex<b>&amp;</b> other) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Comparison operator (non equal with)<br />
+<code>bool <span class="method"><a href="#">operator!=</a></span>(const Vertex<b>&amp;</b> other) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Position of the vertex in space.<br />
+<code>const Point3D &lt; float &gt; &amp; <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get a string representing the object to use as hash key.<br />
+<code>String <span class="method"><a href="#">toString</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Generate the OpenGL code for this vertex.<br />
+<code>std::ostream &amp; <span class="method"><a href="#">glPrint</a></span>(std::ostream<b>&amp;</b> out) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

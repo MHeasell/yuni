@@ -4,3 +4,22 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>IObserver</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>IObserver</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">internalAttachEvent</a></span>(IEvent<b>*</b> evt);</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">internalDetachEvent</a></span>(const IEvent<b>*</b> evt);</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

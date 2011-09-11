@@ -4,3 +4,35 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Mutex</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default constructor, non recursive by default.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Mutex</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Mutex</a></span>(const Mutex<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Mutex</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Lock &amp; Unlock</h3>
+<p class="doxygen_fun">Lock the mutex.<br />
+<code>void <span class="method"><a href="#">lock</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Release the lock.<br />
+<code>void <span class="method"><a href="#">unlock</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">PThread wrapper</h3>
+<p class="doxygen_fun">Get the original PThread mutex.<br />
+<code>::pthread_mutex_t &amp; <span class="method"><a href="#">pthreadMutex</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Operator = (do nothing)<br />
+<code>Mutex &amp; <span class="method"><a href="#">operator=</a></span>(const Mutex<b>&amp;</b> ); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>
