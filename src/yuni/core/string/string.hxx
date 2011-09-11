@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_HXX__
-# define __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_HXX__
+#ifndef __YUNI_CORE_STRING_STRING_HXX__
+# define __YUNI_CORE_STRING_STRING_HXX__
 
 # include <ctype.h>
 # include <cassert>
@@ -212,18 +212,18 @@ namespace Yuni
 		struct TraitsSelectorAssign
 		{
 			template<class U, class CStringT>
-			static inline void Perform(const U& u, CStringT& customstring)
+			static inline void Perform(const U& u, CStringT& string)
 			{
-				customstring.assign(Traits::CString<U>::Perform(u), Traits::Length<U,typename CStringT::Size>::Value(u));
+				string.assign(Traits::CString<U>::Perform(u), Traits::Length<U,typename CStringT::Size>::Value(u));
 			};
 		};
 
 		template<> struct TraitsSelectorAssign<true, true>
 		{
 			template<class U, class CStringT>
-			static inline void Perform(const U& u, CStringT& customstring)
+			static inline void Perform(const U& u, CStringT& string)
 			{
-				customstring.adapt(Traits::CString<U>::Perform(u), Traits::Length<U,typename CStringT::Size>::Value(u));
+				string.adapt(Traits::CString<U>::Perform(u), Traits::Length<U,typename CStringT::Size>::Value(u));
 			};
 		};
 
@@ -231,11 +231,11 @@ namespace Yuni
 		template<bool AdapterT> struct TraitsSelectorAssign<false, AdapterT>
 		{
 			template<class U, class CStringT>
-			static inline void Perform(const U& u, CStringT& customstring)
+			static inline void Perform(const U& u, CStringT& string)
 			{
 				YUNI_STATIC_ASSERT(!AdapterT, CString_Adapter_ReadOnly);
 				typedef typename Static::Remove::Const<U>::Type UType;
-				Yuni::Extension::CString::Assign<CStringT, UType>::Perform(customstring, u);
+				Yuni::Extension::CString::Assign<CStringT, UType>::Perform(string, u);
 			}
 		};
 
@@ -243,19 +243,19 @@ namespace Yuni
 		struct TraitsSelectorAppend
 		{
 			template<class U, class CStringT>
-			static inline void Perform(const U& u, CStringT& customstring)
+			static inline void Perform(const U& u, CStringT& string)
 			{
-				customstring.append(Traits::CString<U>::Perform(u), Traits::Length<U,typename CStringT::Size>::Value(u));
+				string.append(Traits::CString<U>::Perform(u), Traits::Length<U,typename CStringT::Size>::Value(u));
 			};
 		};
 
 		template<> struct TraitsSelectorAppend<false>
 		{
 			template<class U, class CStringT>
-			static inline void Perform(const U& u, CStringT& customstring)
+			static inline void Perform(const U& u, CStringT& string)
 			{
 				typedef typename Static::Remove::Const<U>::Type UType;
-				Yuni::Extension::CString::Append<CStringT, UType>::Perform(customstring, u);
+				Yuni::Extension::CString::Append<CStringT, UType>::Perform(string, u);
 			}
 		};
 
@@ -2646,7 +2646,7 @@ namespace Yuni
 				break;
 		}
 		// Making sure that the string is zero-terminated if required
-		// The const_cast is only here to make it compile when the customstring
+		// The const_cast is only here to make it compile when the string
 		// is an adapter
 		if (!adapter && zeroTerminated)
 			const_cast<char*>(AncestorType::data)[AncestorType::size] = Char();
@@ -3412,4 +3412,4 @@ namespace Yuni
 
 } // namespace Yuni
 
-#endif // __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_HXX__
+#endif // __YUNI_CORE_STRING_STRING_HXX__

@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_H__
-# define __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_H__
+#ifndef __YUNI_CORE_STRING_STRING_H__
+# define __YUNI_CORE_STRING_STRING_H__
 
 # include "../../yuni.h"
 # include "../static/remove.h"
@@ -29,7 +29,6 @@
 
 
 
-
 namespace Yuni
 {
 
@@ -38,6 +37,8 @@ namespace Yuni
 
 	//! Character Large Object
 	typedef CString<4096>  Clob;
+
+
 
 
 	/*!
@@ -1953,6 +1954,8 @@ namespace Yuni
 
 
 
+
+
 	/*!
 	** \brief String adapters
 	**
@@ -1982,10 +1985,11 @@ namespace Yuni
 
 
 
+
 } // namespace Yuni
 
 # include "iterator.hxx"
-# include "customstring.hxx"
+# include "string.hxx"
 # include "operators.hxx"
 
-#endif // __YUNI_CORE_CUSTOMSTRING_CUSTOMSTRING_H__
+#endif // __YUNI_CORE_STRING_STRING_H__

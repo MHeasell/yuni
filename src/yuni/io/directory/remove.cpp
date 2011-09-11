@@ -16,7 +16,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "../../core/string.h"
-#include "../../core/customstring/wstring.h"
+#include "../../core/string/wstring.h"
 #include <stdio.h>
 
 

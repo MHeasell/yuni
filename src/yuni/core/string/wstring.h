@@ -1,10 +1,10 @@
-#ifndef __YUNI_CORE_CUSTOMSTRING_WSTRING_H__
-# define __YUNI_CORE_CUSTOMSTRING_WSTRING_H__
+#ifndef __YUNI_CORE_STRING_WSTRING_H__
+# define __YUNI_CORE_STRING_WSTRING_H__
 
 # ifdef YUNI_OS_WINDOWS
 
 # include "../../yuni.h"
-# include "customstring.h"
+# include "string.h"
 # include "../system/windows.hdr.h"
 # include "../noncopyable.h"
 
@@ -82,10 +82,11 @@ namespace Private
 
 
 
+
 } // namespace Private
 } // namespace Yuni
 
 # include "wstring.hxx"
 
 # endif // YUNI_OS_WINDOWS
-#endif // __YUNI_CORE_CUSTOMSTRING_WSTRING_H__
+#endif // __YUNI_CORE_STRING_WSTRING_H__

@@ -4,7 +4,7 @@
 #include "../directory.h"
 #include <ctype.h>
 #include <string.h>
-#include "../../core/customstring/wstring.h"
+#include "../../core/string/wstring.h"
 
 #ifndef YUNI_OS_WINDOWS
 # include <unistd.h>

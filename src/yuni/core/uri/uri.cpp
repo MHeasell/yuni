@@ -2,7 +2,7 @@
 #include <ctype.h>
 #include "uri.h"
 #include "../../io/file.h"
-#include "../customstring.h"
+#include "../string.h"
 
 
 

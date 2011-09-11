@@ -2,7 +2,7 @@
 # define __YUNI_CORE_BIT_BIT_ARRAY_H__
 
 # include "../../yuni.h"
-# include "../customstring.h"
+# include "../string.h"
 # include "bit.h"
 # include <iostream>
 
@@ -13,7 +13,6 @@ namespace Core
 {
 namespace Bit
 {
-
 
 	/*!
 	** \brief Array of bits
@@ -266,7 +265,6 @@ namespace Bit
 } // namespace Core
 } // namespace Yuni
 
-
 # include "array.hxx"
 
 
@@ -279,6 +277,5 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::Core::Bit::Arra
 	return out;
 }
 //@}
-
 
 #endif // __YUNI_CORE_BIT_BIT_ARRAY_H__

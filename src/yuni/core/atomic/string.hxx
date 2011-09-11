@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_ATOMIC_CUSTOMSTRING_HXX__
-# define __YUNI_CORE_ATOMIC_CUSTOMSTRING_HXX__
+#ifndef __YUNI_CORE_ATOMIC_STRING_HXX__
+# define __YUNI_CORE_ATOMIC_STRING_HXX__
 
 
 namespace Yuni
@@ -58,4 +58,4 @@ namespace CString
 } // namespace Extension
 } // namespace Yuni
 
-#endif // __YUNI_CORE_ATOMIC_CUSTOMSTRING_HXX__
+#endif // __YUNI_CORE_ATOMIC_STRING_HXX__

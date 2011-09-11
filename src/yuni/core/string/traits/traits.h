@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_H__
-# define __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_H__
+#ifndef __YUNI_CORE_STRING_TRAITS_TRAITS_H__
+# define __YUNI_CORE_STRING_TRAITS_TRAITS_H__
 
 # include "../../../yuni.h"
 # ifdef YUNI_HAS_STDLIB_H
@@ -344,4 +344,4 @@ namespace CStringImpl
 
 # include "traits.hxx"
 
-#endif // __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_H__
+#endif // __YUNI_CORE_STRING_TRAITS_TRAITS_H__

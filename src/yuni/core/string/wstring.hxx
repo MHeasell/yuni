@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_CUSTOMSTRING_WSTRING_HXX__
-# define __YUNI_CORE_CUSTOMSTRING_WSTRING_HXX__
+#ifndef __YUNI_CORE_STRING_WSTRING_HXX__
+# define __YUNI_CORE_STRING_WSTRING_HXX__
 
 # ifdef YUNI_OS_WINDOWS
 
@@ -162,4 +162,4 @@ namespace Private
 } // namespace Yuni
 
 # endif // YUNI_OS_WINDOWS
-#endif // __YUNI_CORE_CUSTOMSTRING_WSTRING_HXX__
+#endif // __YUNI_CORE_STRING_WSTRING_HXX__
