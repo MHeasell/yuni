@@ -4,3 +4,32 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Usage</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Usage</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Usage</a></span>(const Usage<b>&amp;</b> copy); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var">The amount of the available physical memory (in bytes)<br />
+<code>uint64 <span class="method"><a href="#">available</a></span>;</code></p>
+<p class="doxygen_var">The amount of the total physical memory (in bytes)<br />
+<code>uint64 <span class="method"><a href="#">total</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Update information about the current memory usage.<br />
+<code>bool <span class="method"><a href="#">update</a></span>();</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

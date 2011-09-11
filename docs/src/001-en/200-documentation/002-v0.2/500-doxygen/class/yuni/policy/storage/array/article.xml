@@ -4,3 +4,61 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Array</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Array</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Array</a></span>(const Array<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Array</a></span>(const Pointer &lt; U &gt;<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Array</a></span>(const StoredType<b>&amp;</b> p); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Get the data</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+<p><code><i>(unmanaged tag)</i></code></p>
+<p><code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">The operator -&gt;<br />
+<code>PointerType <span class="method"><a href="#">operator-&gt;</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">The operator *.<br />
+<code>ReferenceType <span class="method"><a href="#">operator*</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">The type stored.<br />
+<code><span class="keyword">typedef</span> T * <span class="method"><a href="#">StoredType</a></span>;</code></p>
+<p class="doxygen_typedef">The type used by the operator -&gt;<br />
+<code><span class="keyword">typedef</span> T * <span class="method"><a href="#">PointerType</a></span>;</code></p>
+<p class="doxygen_typedef">The type used by the operator *.<br />
+<code><span class="keyword">typedef</span> T &amp; <span class="method"><a href="#">ReferenceType</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">The default value for this type.<br />
+<code><span class="keyword">static</span> StoredType <span class="method"><a href="#">DefaultValue</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Swap the data.<br />
+<code>void <span class="method"><a href="#">swapPointer</a></span>(Array<b>&amp;</b> rhs); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun">Destroy the inner data.<br />
+<code>void <span class="method"><a href="#">destroy</a></span>(); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

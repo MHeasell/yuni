@@ -4,3 +4,36 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Signal</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Signal</a></span>();</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Signal</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Operator !<br />
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Reset the internal state.<br />
+<code>bool <span class="method"><a href="#">reset</a></span>();</code></p>
+<p class="doxygen_fun">Wait for being notified.<br />
+<code>void <span class="method"><a href="#">wait</a></span>();</code></p>
+<p class="doxygen_fun">Wait for being notified.<br />
+<code>bool <span class="method"><a href="#">wait</a></span>(unsigned int timeout);</code></p>
+<p class="doxygen_fun">Notify the waiter.<br />
+<code>bool <span class="method"><a href="#">notify</a></span>();</code></p>
+<p class="doxygen_fun">Get if the signal is valid.<br />
+<code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

@@ -4,3 +4,44 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Triangle</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors</h3>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Triangle</a></span>(const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2, const Vertex<b>&amp;</b> v3); [inline]</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Triangle</a></span>(const Triangle<b>&amp;</b> t); [inline]</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Triangle</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Accessors</h3>
+<p class="doxygen_fun">Get the normal (unit) vector to this triangle.<br />
+<code>const Vertex &amp; <span class="method"><a href="#">vertex1</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get the normal (unit) vector to this triangle.<br />
+<code>const Vertex &amp; <span class="method"><a href="#">vertex2</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get the normal (unit) vector to this triangle.<br />
+<code>const Vertex &amp; <span class="method"><a href="#">vertex3</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get the normal (unit) vector to this triangle.<br />
+<code>const Vector3D &lt; float &gt; &amp; <span class="method"><a href="#">normal</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> SmartPtr &lt; Triangle &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Print the triangle.<br />
+<code>std::ostream &amp; <span class="method"><a href="#">print</a></span>(std::ostream<b>&amp;</b> out) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Generate the OpenGL code for this triangle.<br />
+<code>std::ostream &amp; <span class="method"><a href="#">glPrint</a></span>(std::ostream<b>&amp;</b> out) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

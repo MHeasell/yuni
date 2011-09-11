@@ -4,3 +4,20 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>DISPLAY_DEVICE_FULL</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var"><code>DWORD <span class="method"><a href="#">cb</a></span>;</code></p>
+<p class="doxygen_var"><code>TCHAR <span class="method"><a href="#">DeviceName</a></span>;</code></p>
+<p class="doxygen_var"><code>TCHAR <span class="method"><a href="#">DeviceString</a></span>;</code></p>
+<p class="doxygen_var"><code>DWORD <span class="method"><a href="#">StateFlags</a></span>;</code></p>
+<p class="doxygen_var"><code>TCHAR <span class="method"><a href="#">DeviceID</a></span>;</code></p>
+<p class="doxygen_var"><code>TCHAR <span class="method"><a href="#">DeviceKey</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

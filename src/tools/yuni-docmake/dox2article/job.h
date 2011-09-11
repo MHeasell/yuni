@@ -17,14 +17,6 @@ namespace Job
 {
 
 
-	/*!
-	** \brief Get if some job remain to be executed
-	*/
-	bool QueueServiceIsEmpty();
-
-
-
-
 	class IJob : public Yuni::Job::IJob
 	{
 	public:
@@ -33,11 +25,11 @@ namespace Job
 		/*!
 		** \brief Default constructor
 		*/
-		IJob();
+		IJob() {}
 		/*!
 		** \brief Destructor
 		*/
-		virtual ~IJob();
+		virtual ~IJob() {}
 		//@}
 
 	}; // class IJob

@@ -4,3 +4,48 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>PlayList</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Typedefs</h3>
+<p class="doxygen_typedef">The most suitable smart pointer for the class.<br />
+<code><span class="keyword">typedef</span> SmartPtr &lt; PlayList &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
+<p class="doxygen_typedef">Size type.<br />
+<code><span class="keyword">typedef</span> unsigned int <span class="method"><a href="#">Size</a></span>;</code></p>
+<p class="doxygen_typedef">The Threading Policy .<br />
+<code><span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; ISound &gt; <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p>Get if this policy is thread-safe.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Empty constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">PlayList</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>Size <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Add a sound at the end of the playlist.<br />
+<code>void <span class="method"><a href="#">append</a></span>(SmartPtr &lt; ISound &gt;<b>&amp;</b> sound);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename StringT &gt;<br />void <span class="method"><a href="#">remove</a></span>(const StringT<b>&amp;</b> soundID);</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">play</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">pause</a></span>(bool paused);</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">previous</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">next</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">shuffle</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_var">Mutex.<br />
+<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

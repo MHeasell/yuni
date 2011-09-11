@@ -96,7 +96,7 @@ namespace DocMake
 		// Statistics about the articles to generate
 		if (count)
 		{
-			logs.info() << count << (count > 1 ? " articles, " : "article to build, ") << nbJobs
+			logs.info() << count << (count > 1 ? " articles, " : "article, ") << nbJobs
 				<< (nbJobs > 1 ? " threads" : " thread");
 			logs.info();
 			for (unsigned int i = 0; i != jobs.size(); ++i)

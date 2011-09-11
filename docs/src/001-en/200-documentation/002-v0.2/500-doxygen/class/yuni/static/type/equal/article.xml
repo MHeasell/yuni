@@ -4,3 +4,17 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Equal</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> Static::Remove::All &lt; A &gt;::Type <span class="method"><a href="#">BaseTypeA</a></span>;</code></p>
+<p class="doxygen_typedef"><code><span class="keyword">typedef</span> Static::Remove::All &lt; B &gt;::Type <span class="method"><a href="#">BaseTypeB</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

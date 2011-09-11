@@ -4,3 +4,58 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Assembly</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Assembly</a></span>();</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Assembly</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Execution flow</h3>
+<p class="doxygen_fun">Check the validity of the assembly code.<br />
+<code>bool <span class="method"><a href="#">validate</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Execute the program.<br />
+<code>int <span class="method"><a href="#">execute</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Intrinsic functions</h3>
+<p class="doxygen_fun">intrinsic function<br />
+<code>void <span class="method"><a href="#">intrinsic</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">intrinsic function, with 1 parameter<br />
+<code>void <span class="method"><a href="#">intrinsic</a></span>(uint8 r1); [inline]</code></p>
+<p class="doxygen_fun">intrinsic function, with 2 parameters<br />
+<code>void <span class="method"><a href="#">intrinsic</a></span>(uint8 r1, uint8 r2); [inline]</code></p>
+<p class="doxygen_fun">intrinsic function, with 3 parameters<br />
+<code>void <span class="method"><a href="#">intrinsic</a></span>(uint8 r1, uint8 r2, uint8 r3); [inline]</code></p>
+<p class="doxygen_fun">intrinsic function, with 4 parameters<br />
+<code>void <span class="method"><a href="#">intrinsic</a></span>(uint8 r1, uint8 r2, uint8 r3, uint8 r4); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Add</h3>
+<p class="doxygen_fun">add ret, R1, R2: ret = R1 + R2<br />
+<code>void <span class="method"><a href="#">add</a></span>(uint8 ret, uint8 r1, uint8 r2); [inline]</code></p>
+<p class="doxygen_fun">addu ret, R1, R2: ret = R1 + R2 (unsigned)<br />
+<code>void <span class="method"><a href="#">addu</a></span>(uint8 ret, uint8 r1, uint8 r2); [inline]</code></p>
+<p class="doxygen_fun">addi ret, R1, I: ret = R1 + I<br />
+<code>void <span class="method"><a href="#">addi</a></span>(uint8 ret, uint8 r1, sint64 i); [inline]</code></p>
+<p class="doxygen_fun">addui ret, R1, I: ret = R1 + I (unsigned)<br />
+<code>void <span class="method"><a href="#">addui</a></span>(uint8 ret, uint8 r1, uint64 i); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Misc. functions</h3>
+<p class="doxygen_fun">nop<br />
+<code>void <span class="method"><a href="#">nop</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Abort the execution of the program.<br />
+<code>void <span class="method"><a href="#">exit</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Set the value of the exit code from the value of a register.<br />
+<code>void <span class="method"><a href="#">exitCode</a></span>(uint8 r1); [inline]</code></p>
+<p class="doxygen_fun">Set the value of the exit code from an immediate value.<br />
+<code>void <span class="method"><a href="#">exitCodei</a></span>(sint8 i); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

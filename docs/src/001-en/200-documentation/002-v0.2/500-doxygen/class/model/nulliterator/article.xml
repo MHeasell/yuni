@@ -4,3 +4,68 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>NullIterator</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p>A non-zero value if the iterator can go forward. A non-zero value if the iterator can go backward.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p>A non-zero value if the iterator can go forward. A non-zero value if the iterator can go backward.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p class="doxygen_typedef">Type of the original string.<br />
+<code><span class="keyword">typedef</span> CStringType <span class="method"><a href="#">StringType</a></span>;</code></p>
+<p class="doxygen_typedef">The type of the orignal object.<br />
+<code><span class="keyword">typedef</span> UTF8::Char <span class="method"><a href="#">value_type</a></span>;</code></p>
+<p class="doxygen_typedef">An unsigned integral type.<br />
+<code><span class="keyword">typedef</span> CStringType::size_type <span class="method"><a href="#">size_type</a></span>;</code></p>
+<p class="doxygen_typedef">A signed integral type.<br />
+<code><span class="keyword">typedef</span> CStringType::difference_type <span class="method"><a href="#">difference_type</a></span>;</code></p>
+<p class="doxygen_typedef">The type of the orignal object.<br />
+<code><span class="keyword">typedef</span> String <span class="method"><a href="#">value_type</a></span>;</code></p>
+<p class="doxygen_typedef">An unsigned integral type.<br />
+<code><span class="keyword">typedef</span> uint64 <span class="method"><a href="#">uint64ype</a></span>;</code></p>
+<p class="doxygen_typedef">A signed integral type.<br />
+<code><span class="keyword">typedef</span> sint64 <span class="method"><a href="#">difference_type</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Get the current offset in the string.<br />
+<code>Size <span class="method"><a href="#">offset</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get a reference to the original string.<br />
+<code>const StringType &amp; <span class="method"><a href="#">string</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get the current offset in the string.<br />
+<code>Size <span class="method"><a href="#">rawOffset</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">NullIterator</a></span>(const StringType<b>&amp;</b> s); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">NullIterator</a></span>(const NullIterator<b>&amp;</b> copy); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">NullIterator</a></span>(const ModelT<b>&amp;</b> copy); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> model); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">NullIterator</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">NullIterator</a></span>(const NullIterator<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">NullIterator</a></span>(const ModelT<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">equals</a></span>(const NullIterator<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const ModelT<b>&amp;</b> model); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> ) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Protected
+</div></td>
+<td><h3 class="h3noleftspace">Protected
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">static</span> void <span class="method"><a href="#">forward</a></span>(difference_type ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /><span class="keyword">static</span> bool <span class="method"><a href="#">equals</a></span>(const ModelT<b>&amp;</b> model); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> void <span class="method"><a href="#">forward</a></span>(difference_type ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> ); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

@@ -4,3 +4,28 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Callback</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var"><code>Yuni::Event &lt; void(int, const String &amp;)&gt; <span class="method"><a href="#">callback</a></span>;</code></p>
+<p class="doxygen_var"><code>String <span class="method"><a href="#">pDispatchedMessage</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class LoggerT , class VerbosityType , class StringT &gt;<br />void <span class="method"><a href="#">internalDecoratorWriteWL</a></span>(LoggerT<b>&amp;</b> logger, const StringT<b>&amp;</b> s); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

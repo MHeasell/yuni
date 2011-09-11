@@ -4,3 +4,68 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>YUNI_ATOMIC_INHERITS</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors</h3>
+<p class="doxygen_fun">Default Constructor.<br />
+<code> <span class="method"><a href="#">Int</a></span>();</code></p>
+<p class="doxygen_fun">Constructor with an initial value (int16)<br />
+<code> <span class="method"><a href="#">Int</a></span>(const sint16 v);</code></p>
+<p class="doxygen_fun">Constructor with an initial value (int32)<br />
+<code> <span class="method"><a href="#">Int</a></span>(const sint32 v);</code></p>
+<p class="doxygen_fun">Constructor with an initial value (int64)<br />
+<code> <span class="method"><a href="#">Int</a></span>(const sint64 v);</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">Int</a></span>(const Int<b>&amp;</b> v);</code></p>
+<p class="doxygen_fun">Copy constructor from another type and another threading policy.<br />
+<code><span class="keyword">template</span>&lt;int Size2, template&lt; class &gt; class TP2&gt;<br /> <span class="method"><a href="#">Int</a></span>(const Int&lt; Size2, TP2 &gt;<b>&amp;</b> v);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Pre increment operator.<br />
+<code>ScalarType <span class="method"><a href="#">operator++</a></span>();</code></p>
+<p class="doxygen_fun">Pre decrement operator.<br />
+<code>ScalarType <span class="method"><a href="#">operator--</a></span>();</code></p>
+<p class="doxygen_fun">Post increment operator.<br />
+<code>ScalarType <span class="method"><a href="#">operator++</a></span>(int );</code></p>
+<p class="doxygen_fun">Post decrement operator.<br />
+<code>ScalarType <span class="method"><a href="#">operator--</a></span>(int );</code></p>
+<p class="doxygen_fun">Pre increment operator.<br />
+<code>Int &amp; <span class="method"><a href="#">operator=</a></span>(const ScalarType v);</code></p>
+<p class="doxygen_fun">Increment.<br />
+<code>Int &amp; <span class="method"><a href="#">operator+=</a></span>(const ScalarType v);</code></p>
+<p class="doxygen_fun">Decrement.<br />
+<code>Int &amp; <span class="method"><a href="#">operator-=</a></span>(const ScalarType v);</code></p>
+<p class="doxygen_fun">Cast operator.<br />
+<code> <span class="method"><a href="#">operator ScalarType</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">not<br />
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p>Get if the class must be thread-safe. Get if the class must be thread-safe.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p>Get if we have to guarantee ourselves the thread-safety.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p>Size (in bits) of the scalar type.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p class="doxygen_typedef">The Threading Policy .<br />
+<code><span class="keyword">typedef</span> Private::AtomicImpl::ThreadingPolicy&lt; threadSafe, Int&lt; Size, TP &gt; &gt;:: Type <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
+<p class="doxygen_typedef">The scalar type.<br />
+<code><span class="keyword">typedef</span> Private::AtomicImpl::TypeFromSize&lt; Size &gt;:: Type <span class="method"><a href="#">Type</a></span>;</code></p>
+<p class="doxygen_typedef">The scalar type.<br />
+<code><span class="keyword">typedef</span> Type <span class="method"><a href="#">ScalarType</a></span>;</code></p>
+<p class="doxygen_typedef">Type of the inner variable.<br />
+<code><span class="keyword">typedef</span> Private::AtomicImpl::Volatile&lt; threadSafe, Type &gt;:: Type <span class="method"><a href="#">InnerType</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Public</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

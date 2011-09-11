@@ -4,3 +4,17 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Compound</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+<p class="doxygen_typedef">The original type.<br />
+<code><span class="keyword">typedef</span> T <span class="method"><a href="#">BaseType</a></span>;</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

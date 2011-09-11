@@ -60,8 +60,8 @@ namespace Dox2Article
 			file << "<tr><th>Name</th><th>Description</th></tr>";
 			unsigned int total = 0;
 
-			Compound::Map::iterator end = allSymbolsByName[Compound::kdNamespace].end();
-			for (Compound::Map::iterator i = allSymbolsByName[Compound::kdNamespace].begin(); i != end; ++i)
+			Compound::Map::iterator end = allSymbolsByName[kdNamespace].end();
+			for (Compound::Map::iterator i = allSymbolsByName[kdNamespace].begin(); i != end; ++i)
 			{
 				const Compound::Ptr compoundptr = i->second;
 				const Compound& compound = *compoundptr;
@@ -108,8 +108,8 @@ namespace Dox2Article
 			file << "<tr><th>Name</th><th>Description</th></tr>";
 			unsigned int total = 0;
 
-			Compound::Map::iterator end = allSymbolsByName[Compound::kdClass].end();
-			for (Compound::Map::iterator i = allSymbolsByName[Compound::kdClass].begin(); i != end; ++i)
+			Compound::Map::iterator end = allSymbolsByName[kdClass].end();
+			for (Compound::Map::iterator i = allSymbolsByName[kdClass].begin(); i != end; ++i)
 			{
 				const Compound::Ptr compoundptr = i->second;
 				const Compound& compound = *compoundptr;

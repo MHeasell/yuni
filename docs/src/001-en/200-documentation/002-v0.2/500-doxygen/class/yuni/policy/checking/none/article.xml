@@ -4,3 +4,25 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>None</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">None</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">None</a></span>(const None &lt; U &gt;<b>&amp;</b> ); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">static</span> void <span class="method"><a href="#">onDefault</a></span>(const T<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> void <span class="method"><a href="#">onInit</a></span>(const T<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> void <span class="method"><a href="#">onDereference</a></span>(const T<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> void <span class="method"><a href="#">swapPointer</a></span>(None<b>&amp;</b> ); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

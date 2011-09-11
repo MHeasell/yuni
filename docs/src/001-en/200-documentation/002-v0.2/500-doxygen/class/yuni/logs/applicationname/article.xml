@@ -4,3 +4,23 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>ApplicationName</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Apllication Name</h3>
+<p class="doxygen_fun">Set the Application name.<br />
+<code>const String &amp; <span class="method"><a href="#">applicationName</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Set the Application name.<br />
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">applicationName</a></span>(const U<b>&amp;</b> s); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">ApplicationName</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class Handler , class VerbosityType , class O , class StringT &gt;<br />void <span class="method"><a href="#">internalDecoratorAddPrefix</a></span>(O<b>&amp;</b> out, const StringT<b>&amp;</b> s) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

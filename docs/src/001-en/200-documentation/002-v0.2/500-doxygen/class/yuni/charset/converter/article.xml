@@ -4,3 +4,36 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Converter</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors and destructors</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Converter</a></span>();</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Converter</a></span>(Charset::Type fromCS, Charset::Type toCS, Charset::Unconvertable opts);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Converter</a></span>(const char<b>*</b> fromCS, const char<b>*</b> toCS);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Converter</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code>int <span class="method"><a href="#">lastError</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Closes the conversion context.<br />
+<code>void <span class="method"><a href="#">close</a></span>();</code></p>
+<p class="doxygen_fun">Resets the conversion context.<br />
+<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
+<p class="doxygen_fun">Performs a conversion on memory buffers.<br />
+<code><span class="keyword">template</span>&lt;typename SrcStringT , typename DstStringT &gt;<br />bool <span class="method"><a href="#">convert</a></span>(SrcStringT<b>&amp;</b> source, DstStringT<b>&amp;</b> destination, bool isLastBuffer);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename SrcStringT , typename DtsStringT &gt;<br />bool <span class="method"><a href="#">convert</a></span>(SrcStringT<b>&amp;</b> source, DtsStringT<b>&amp;</b> destination, bool isLastBuffer);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>(Charset::Type type);</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

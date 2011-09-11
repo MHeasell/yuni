@@ -4,3 +4,33 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>ITransaction</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">ITransaction</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>ITransaction</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p>Readonly mode.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p>The transaction is idle. The transaction is active. The transaction has been aborted. Transaction state.<br />
+<code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">begin</a></span>();</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">commit</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">rollback</a></span>(); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

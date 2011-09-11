@@ -11,8 +11,7 @@ namespace Dox2Article
 
 
 	template<class StringT>
-	Compound::Kind
-	Compound::StringToKind(const StringT& str)
+	CompoundType Compound::StringToKind(const StringT& str)
 	{
 		if (str == "function")
 			return kdFunction;
@@ -39,19 +38,19 @@ namespace Dox2Article
 
 
 	template<class StreamT>
-	void Compound::AppendKindToString(StreamT& out, Kind kind)
+	void Compound::AppendKindToString(StreamT& out, CompoundType kind)
 	{
 		switch (kind)
 		{
-			case kdClass:      out += "class";break;
-			case kdNamespace:  out += "namespace";break;
-			case kdFunction:   out += "function";break;
-			case kdTypedef:    out += "typedef";break;
-			case kdEnum:       out += "enum";break;
-			case kdVariable:   out += "variable";break;
-			case kdFile:       out += "file";break;
-			case kdFolder:     out += "folder";break;
-			case kdGroup:      out += "group";break;
+			case kdClass:      out << "class";break;
+			case kdNamespace:  out << "namespace";break;
+			case kdFunction:   out << "function";break;
+			case kdTypedef:    out << "typedef";break;
+			case kdEnum:       out << "enum";break;
+			case kdVariable:   out << "variable";break;
+			case kdFile:       out << "file";break;
+			case kdFolder:     out << "folder";break;
+			case kdGroup:      out << "group";break;
 			case kdUnknown:break;
 			case kdMax:break;
 		}

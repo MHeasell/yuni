@@ -4,3 +4,58 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Any</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors</h3>
+<p class="doxygen_fun">Copy of an existing variable.<br />
+<code><span class="keyword">template</span>&lt;typename T &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>(const T<b>&amp;</b> source);</code></p>
+<p class="doxygen_fun">Copy of an existing const C string.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>(const char<b>*</b> source); [inline]</code></p>
+<p class="doxygen_fun">Copy of an existing const C string.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>(char<b>*</b> source); [inline]</code></p>
+<p class="doxygen_fun">Empty constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>();</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>(const Any<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Any</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Alteration methods</h3>
+<p class="doxygen_fun">Assignment from another Any .<br />
+<code>Any &amp; <span class="method"><a href="#">assign</a></span>(const Any<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun">Assignment from any object.<br />
+<code><span class="keyword">template</span>&lt;typename T &gt;<br />Any &amp; <span class="method"><a href="#">assign</a></span>(const T<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun">Specialized assign for C Strings.<br />
+<code>Any &amp; <span class="method"><a href="#">assign</a></span>(const char<b>*</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Assignment operator for convenience.<br />
+<code><span class="keyword">template</span>&lt;typename T &gt;<br />Any &amp; <span class="method"><a href="#">operator=</a></span>(T const<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Resets the Any to an empty state.<br />
+<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Information methods</h3>
+<p class="doxygen_fun">Returns the type_info of the held variable.<br />
+<code>const std::type_info &amp; <span class="method"><a href="#">type</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Returns true if the object is of the specified type.<br />
+<code><span class="keyword">template</span>&lt;typename T &gt;<br />bool <span class="method"><a href="#">is</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Checks if the any has been assigned a value.<br />
+<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Retrieval methods</h3>
+<p class="doxygen_fun">Casts the Any to the T type. Throws a Yuni::Exceptions::BadCast if not possible.<br />
+<code><span class="keyword">template</span>&lt;typename T &gt;<br />const T &amp; <span class="method"><a href="#">to</a></span>() <span class="keyword">const</span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Swaps a any with another.<br />
+<code><span class="keyword">static</span> void <span class="method"><a href="#">Swap</a></span>(Any<b>&amp;</b> one, Any<b>&amp;</b> other);</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

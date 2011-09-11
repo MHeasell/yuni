@@ -4,3 +4,37 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Or</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors</h3>
+<p class="doxygen_fun">Default Constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Or</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Default Constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Or</a></span>(bool defaultValue); [inline]</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Or</a></span>(const Or<b>&amp;</b> rhs); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">Type of the result.<br />
+<code><span class="keyword">typedef</span> bool <span class="method"><a href="#">ResultType</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Take into account a new value.<br />
+<code>void <span class="method"><a href="#">operator()</a></span>(const T<b>&amp;</b> v); [inline]</code></p>
+<p class="doxygen_fun">The Final result.<br />
+<code>ResultType <span class="method"><a href="#">result</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Reset the internal counter.<br />
+<code>void <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>(bool v); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

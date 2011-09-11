@@ -4,3 +4,24 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>DynamicCastWhenInherits</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Test if two pointer are equivalent (means "represents the same real object")<br />
+<code><span class="keyword">template</span>&lt;class U , class V &gt;<br /><span class="keyword">static</span> bool <span class="method"><a href="#">Equals</a></span>(const U<b>*</b> ref, const V<b>*</b> objPointer); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> BaseT * <span class="method"><a href="#">Perform</a></span>(U<b>*</b> object); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> const BaseT * <span class="method"><a href="#">PerformConst</a></span>(const U<b>*</b> object); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

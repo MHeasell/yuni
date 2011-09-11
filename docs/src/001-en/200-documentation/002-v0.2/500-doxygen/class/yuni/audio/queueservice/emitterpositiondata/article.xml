@@ -4,3 +4,22 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>EmitterPositionData</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_var"><code>Thread::Signal &amp; <span class="method"><a href="#">signal</a></span>;</code></p>
+<p class="doxygen_var"><code>float &amp; <span class="method"><a href="#">data</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">EmitterPositionData</a></span>(Thread::Signal<b>&amp;</b> s, float<b>&amp;</b> f); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

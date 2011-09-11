@@ -4,3 +4,69 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Port</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Port</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Constructor with a given value.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Port</a></span>(unsigned int rhs); [inline]</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Port</a></span>(const Port<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Constructor from a null pointer.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Port</a></span>(const NullPtr<b>&amp;</b> ); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Value</h3>
+<p class="doxygen_fun">Get the port number.<br />
+<code>unsigned int <span class="method"><a href="#">value</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get if the port is valid.<br />
+<code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Ranges</h3>
+<p class="doxygen_fun">Get if the port is well-known (0..1023)<br />
+<code>bool <span class="method"><a href="#">wellKnown</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get if the port is registered (0..49151)<br />
+<code>bool <span class="method"><a href="#">registered</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get if the port is dynamic and/or private (&gt;= 49152)<br />
+<code>bool <span class="method"><a href="#">dynamic</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get if no port is allocated.<br />
+<code>bool <span class="method"><a href="#">none</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Assignment.<br />
+<code>Port &amp; <span class="method"><a href="#">operator=</a></span>(unsigned int rhs); [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>Port &amp; <span class="method"><a href="#">operator=</a></span>(const Port<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>Port &amp; <span class="method"><a href="#">operator=</a></span>(const Yuni::NullPtr<b>&amp;</b> );</code></p>
+<p class="doxygen_fun">Append.<br />
+<code>Port &amp; <span class="method"><a href="#">operator+=</a></span>(unsigned int rhs); [inline]</code></p>
+<p class="doxygen_fun">Sub.<br />
+<code>Port &amp; <span class="method"><a href="#">operator-=</a></span>(unsigned int rhs); [inline]</code></p>
+<p class="doxygen_fun">Comparison.<br />
+<code>bool <span class="method"><a href="#">operator==</a></span>(unsigned int rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>bool <span class="method"><a href="#">operator==</a></span>(const Port<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>bool <span class="method"><a href="#">operator!=</a></span>(unsigned int rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>bool <span class="method"><a href="#">operator!=</a></span>(const Port<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Inequality.<br />
+<code>bool <span class="method"><a href="#">operator&lt;</a></span>(const Port<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>bool <span class="method"><a href="#">operator&gt;</a></span>(const Port<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>bool <span class="method"><a href="#">operator&lt;=</a></span>(const Port<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>bool <span class="method"><a href="#">operator&gt;=</a></span>(const Port<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

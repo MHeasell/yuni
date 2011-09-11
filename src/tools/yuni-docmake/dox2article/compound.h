@@ -5,6 +5,7 @@
 # include <yuni/core/string.h>
 # include <map>
 # include <deque>
+# include <vector>
 
 
 namespace Yuni
@@ -13,6 +14,76 @@ namespace Edalene
 {
 namespace Dox2Article
 {
+
+	//! Any kind of compound
+	enum CompoundType
+	{
+		kdUnknown = 0,
+		kdNamespace,
+		kdClass,
+		kdFunction,
+		kdVariable,
+		kdTypedef,
+		kdEnum,
+		kdFile,
+		kdFolder,
+		kdGroup,
+		kdMax
+	};
+
+
+	class Parameter
+	{
+	public:
+		typedef SmartPtr<Parameter>  Ptr;
+		typedef std::vector<Ptr>  Vector;
+
+	public:
+		String name;
+		String type;
+	};
+
+
+	class Member
+	{
+	public:
+		typedef SmartPtr<Member>  Ptr;
+		typedef std::vector<Ptr>  Vector;
+
+	public:
+		CompoundType  kind;
+		String id;
+		String name;
+		String brief;
+		CString<16,false>  visibility;
+		String type;
+		bool isStatic;
+		bool isConst;
+		bool isExplicit;
+		bool isInline;
+		Parameter::Vector parameters;
+		Parameter::Vector templates;
+
+	}; // class Member
+
+
+
+	class Section
+	{
+	public:
+		typedef SmartPtr<Section>  Ptr;
+		typedef std::deque<Ptr>  Deque;
+		typedef std::vector<Ptr> Vector;
+
+	public:
+		String caption;
+		CString<32,false>  kind;
+		CString<16,false>  visibility;
+		bool isStatic;
+		Member::Vector members;
+
+	}; // class Section
+
 
 
 	class Compound
@@ -27,28 +98,12 @@ namespace Dox2Article
 		//! Deque
 		typedef std::deque<Ptr>  Deque;
 
-		//! Any kind of compound
-		enum Kind
-		{
-			kdUnknown = 0,
-			kdNamespace,
-			kdClass,
-			kdFunction,
-			kdVariable,
-			kdTypedef,
-			kdEnum,
-			kdFile,
-			kdFolder,
-			kdGroup,
-			kdMax
-		};
-
-		//! All symbols, ordered by their type
+				//! All symbols, ordered by their type
 		typedef Map*  MapPerKind;
 
 	public:
-		template<class StringT> static Kind  StringToKind(const StringT& str);
-		template<class StreamT> static void AppendKindToString(StreamT& out, Kind kind);
+		template<class StringT> static CompoundType  StringToKind(const StringT& str);
+		template<class StreamT> static void AppendKindToString(StreamT& out, CompoundType kind);
 
 	public:
 		Compound();
@@ -59,7 +114,7 @@ namespace Dox2Article
 
 	public:
 		//! Kind of compound
-		Kind kind;
+		CompoundType kind;
 		//! Reference ID
 		RefID refid;
 		//!
@@ -69,7 +124,10 @@ namespace Dox2Article
 
 		Map members;
 
+		//! The parent compound
 		Compound* parent;
+		//! All sections
+		Section::Vector sections;
 
 	}; // class Compound
 

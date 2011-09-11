@@ -4,3 +4,108 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>IIterator</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
+<p class="doxygen_fun">Default Constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>();</code></p>
+<p class="doxygen_fun">Copy constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const IteratorType<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun">Copy constructor from any iterator.<br />
+<code><span class="keyword">template</span>&lt;class M , bool C&gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const IIterator &lt; M, C &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Assignation from a custom type, defined by the real implementation.<br />
+<code><span class="keyword">template</span>&lt;class U1 &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const U1<b>&amp;</b> u1); [inline]</code></p>
+<p class="doxygen_fun">Assignation from two custom types, defined by the real implementation.<br />
+<code><span class="keyword">template</span>&lt;class U1 , class U2 &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const U1<b>&amp;</b> u1, const U2<b>&amp;</b> u2); [inline]</code></p>
+<p class="doxygen_fun">Assignation from three custom types, defined by the real implementation.<br />
+<code><span class="keyword">template</span>&lt;class U1 , class U2 , class U3 &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const U1<b>&amp;</b> u1, const U2<b>&amp;</b> u2, const U3<b>&amp;</b> u3); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Common operations</h3>
+<p class="doxygen_fun">Increment the iterator by the distance 1.<br />
+<code>void <span class="method"><a href="#">forward</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Increment the iterator by the distance n.<br />
+<code>void <span class="method"><a href="#">forward</a></span>(difference_type n);</code></p>
+<p class="doxygen_fun">Decrement the iterator by the distance n.<br />
+<code>void <span class="method"><a href="#">backward</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Decrement the iterator by the distance n.<br />
+<code>void <span class="method"><a href="#">backward</a></span>(difference_type n);</code></p>
+<p class="doxygen_fun">Increment/Decrement the iterator by the distance n.<br />
+<code>void <span class="method"><a href="#">advance</a></span>(difference_type n); [inline]</code></p>
+<p class="doxygen_fun">Get the distance between this iterator and another one.<br />
+<code><span class="keyword">template</span>&lt;class M , bool C&gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const IIterator &lt; M, C &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Dereferencing.<br />
+<code>reference <span class="method"><a href="#">operator*</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Dereferencing (const)<br />
+<code>const_reference <span class="method"><a href="#">operator*</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Dereferencing.<br />
+<code>pointer <span class="method"><a href="#">operator-&gt;</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Dereferencing (const)<br />
+<code>const_pointer <span class="method"><a href="#">operator-&gt;</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Increment the operator by the distance 1.<br />
+<code>IteratorType &amp; <span class="method"><a href="#">operator++</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Decrement the iterator by the distance 1.<br />
+<code>IteratorType &amp; <span class="method"><a href="#">operator--</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">(Post) Increment the iterator by the distance 1<br />
+<code>IteratorType <span class="method"><a href="#">operator++</a></span>(int ); [inline]</code></p>
+<p class="doxygen_fun">(Post) Decrement the iterator by the distance 1<br />
+<code>IteratorType <span class="method"><a href="#">operator--</a></span>(int ); [inline]</code></p>
+<p class="doxygen_fun">Increment the operator by the distance n.<br />
+<code>IteratorType &amp; <span class="method"><a href="#">operator+=</a></span>(difference_type n);</code></p>
+<p class="doxygen_fun">Decrement the operator by the distance n.<br />
+<code>IteratorType &amp; <span class="method"><a href="#">operator-=</a></span>(difference_type n);</code></p>
+<p class="doxygen_fun">Equality comparison.<br />
+<code><span class="keyword">template</span>&lt;class M , bool C&gt;<br />bool <span class="method"><a href="#">operator==</a></span>(const IIterator &lt; M, C &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Non-equality comparison.<br />
+<code><span class="keyword">template</span>&lt;class M , bool C&gt;<br />bool <span class="method"><a href="#">operator!=</a></span>(const IIterator &lt; M, C &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code>IteratorType &amp; <span class="method"><a href="#">operator=</a></span>(const IteratorType<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun">Assignment.<br />
+<code><span class="keyword">template</span>&lt;class M , bool C&gt;<br />IteratorType &amp; <span class="method"><a href="#">operator=</a></span>(const IIterator &lt; M, C &gt;<b>&amp;</b> rhs); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p>A non-zero value for const qualifier. A non-zero value if the iterator can go forward. A non-zero value if the iterator can go backward.<br />
+<code><i>(unmanaged tag)</i></code></p>
+<p class="doxygen_typedef">The model implementation.<br />
+<code><span class="keyword">typedef</span> ModelT <span class="method"><a href="#">ModelType</a></span>;</code></p>
+<p class="doxygen_typedef">The iterator type.<br />
+<code><span class="keyword">typedef</span> IIterator &lt; ModelT, ConstT &gt; <span class="method"><a href="#">IteratorType</a></span>;</code></p>
+<p class="doxygen_typedef">Category.<br />
+<code><span class="keyword">typedef</span> IteratorType <span class="method"><a href="#">iterator_category</a></span>;</code></p>
+<p class="doxygen_typedef">Ancestor.<br />
+<code><span class="keyword">typedef</span> ModelT <span class="method"><a href="#">AncestorType</a></span>;</code></p>
+<p class="doxygen_typedef">Value type.<br />
+<code><span class="keyword">typedef</span> ModelT::value_type <span class="method"><a href="#">value_type</a></span>;</code></p>
+<p class="doxygen_typedef">Difference type.<br />
+<code><span class="keyword">typedef</span> ModelT::difference_type <span class="method"><a href="#">difference_type</a></span>;</code></p>
+<p class="doxygen_typedef">Pointer.<br />
+<code><span class="keyword">typedef</span> Static::If &lt; ConstT, const value_type *, value_type * &gt;::Type <span class="method"><a href="#">pointer</a></span>;</code></p>
+<p class="doxygen_typedef">Const pointer.<br />
+<code><span class="keyword">typedef</span> const value_type * <span class="method"><a href="#">const_pointer</a></span>;</code></p>
+<p class="doxygen_typedef">Reference.<br />
+<code><span class="keyword">typedef</span> Static::If &lt; ConstT, const value_type &amp;, value_type &amp; &gt;::Type <span class="method"><a href="#">reference</a></span>;</code></p>
+<p class="doxygen_typedef">Const reference.<br />
+<code><span class="keyword">typedef</span> const value_type &amp; <span class="method"><a href="#">const_reference</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Public</h3>
+<p><code><i>(unmanaged tag)</i></code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT , bool ConstT&gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT , bool ConstT&gt;<br />IIterator &lt; ModelT, ConstT &gt; &amp; <span class="method"><a href="#">operator=</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> rhs); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

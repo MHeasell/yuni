@@ -4,3 +4,119 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>Vector3D</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Constructor.<br />
+<code><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(const U x1, const V y1, const W z1); [inline]</code></p>
+<p class="doxygen_fun">Constructor using two points.<br />
+<code><span class="keyword">template</span>&lt;typename U , typename V &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(const Point3D &lt; U &gt;<b>&amp;</b> origin, const Point3D &lt; V &gt;<b>&amp;</b> end); [inline]</code></p>
+<p class="doxygen_fun">Constructor by copy.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(const Vector3D<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun">Constructor by copy.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> v); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Reset the coordinates</h3>
+<p class="doxygen_fun">Reset the vector to the null vector.<br />
+<code>Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Translation</h3>
+<p class="doxygen_fun">Add the same value for all coordinates to the vector.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />void <span class="method"><a href="#">translate</a></span>(const U k); [inline]</code></p>
+<p class="doxygen_fun">Translate the point with relative coordinates.<br />
+<code><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;<br />void <span class="method"><a href="#">translate</a></span>(const U x1, const V y1, const W z1); [inline]</code></p>
+<p class="doxygen_fun">Translate the point with relative coordinates from another Point.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />void <span class="method"><a href="#">translate</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Components</h3>
+<p class="doxygen_fun">Get if the vector is null.<br />
+<code>bool <span class="method"><a href="#">null</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Compute the magnitude of the vector.<br />
+<code>T <span class="method"><a href="#">magnitude</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Compute the square magnitude of the vector.<br />
+<code>T <span class="method"><a href="#">squareMagnitude</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Compute the dot product with another arbitrary vector.<br />
+<code>T <span class="method"><a href="#">dotProduct</a></span>(const Vector3D<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Normalize the vector (coefficient = 1.)<br />
+<code>Vector3D &amp; <span class="method"><a href="#">normalize</a></span>();</code></p>
+<p class="doxygen_fun">Normalize the vector with a different coefficient.<br />
+<code>Vector3D &amp; <span class="method"><a href="#">normalize</a></span>(const T coeff);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Mean</h3>
+<p class="doxygen_fun">Calculate the mean between two points.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />Vector3D &amp; <span class="method"><a href="#">mean</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<p class="doxygen_fun">Calculate the mean between two points.<br />
+<code><span class="keyword">template</span>&lt;typename U , typename V &gt;<br />Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">mean</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> p1, const Vector3D &lt; V &gt;<b>&amp;</b> p2); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_var">X component.<br />
+<code>T <span class="method"><a href="#">x</a></span>;</code></p>
+<p class="doxygen_var">Y component.<br />
+<code>T <span class="method"><a href="#">y</a></span>;</code></p>
+<p class="doxygen_var">Z component.<br />
+<code>T <span class="method"><a href="#">z</a></span>;</code></p>
+<p class="doxygen_fun">Reset all coordinates.<br />
+<code><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const U x1, const V y1, const W z1); [inline]</code></p>
+<p class="doxygen_fun">Copy all coordinates from another vector.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> v); [inline]</code></p>
+<p class="doxygen_fun">Reset a vector using two points.<br />
+<code><span class="keyword">template</span>&lt;typename U , typename V &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const Point3D &lt; U &gt;<b>&amp;</b> origin, const Point3D &lt; V &gt;<b>&amp;</b> end); [inline]</code></p>
+<p class="doxygen_fun">Translate the point with the same value for all coordinates.<br />
+<code>Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">operator+=</a></span>(const T k); [inline]</code></p>
+<p class="doxygen_fun">Translate the point with relative coordinates.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">operator+=</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<p class="doxygen_fun">Translate the point with the same value for all coordinates.<br />
+<code>Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">operator-=</a></span>(const T k); [inline]</code></p>
+<p class="doxygen_fun">Translate the point with relative coordinates.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">operator-=</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<p class="doxygen_fun">Uniform scaling.<br />
+<code>Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">operator*=</a></span>(const T k); [inline]</code></p>
+<p class="doxygen_fun">Dot product.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">operator*=</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<p class="doxygen_fun">Uniform scaling.<br />
+<code>Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">operator/=</a></span>(const T k); [inline]</code></p>
+<p class="doxygen_fun">Dot product.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">operator/=</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<p class="doxygen_fun">Comparison operator (equal with)<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />bool <span class="method"><a href="#">operator==</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Comparison operator (non equal with)<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />bool <span class="method"><a href="#">operator!=</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Assign new values for all coordinates from another vector.<br />
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />Vector3D &lt; T &gt; &amp; <span class="method"><a href="#">operator=</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<p class="doxygen_fun">Print the vector.<br />
+<code>std::ostream &amp; <span class="method"><a href="#">print</a></span>(std::ostream<b>&amp;</b> out) <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Compute the mean between two arbitrary vectors.<br />
+<code><span class="keyword">static</span> Vector3D <span class="method"><a href="#">Mean</a></span>(const Vector3D<b>&amp;</b> p1, const Vector3D<b>&amp;</b> p2); [inline]</code></p>
+<p class="doxygen_fun">Compute the magnitude of the addition of two arbitrary vectors.<br />
+<code><span class="keyword">static</span> T <span class="method"><a href="#">Magnitude</a></span>(const Vector3D<b>&amp;</b> p1, const Vector3D<b>&amp;</b> p2); [inline]</code></p>
+<p class="doxygen_fun">Compute the dot product of two arbitrary vectors.<br />
+<code><span class="keyword">static</span> T <span class="method"><a href="#">DotProduct</a></span>(const Vector3D<b>&amp;</b> p1, const Vector3D<b>&amp;</b> p2); [inline]</code></p>
+<p class="doxygen_fun">Compute the cross product of two arbitrary vectors.<br />
+<code><span class="keyword">static</span> Vector3D <span class="method"><a href="#">CrossProduct</a></span>(const Vector3D<b>&amp;</b> p1, const Vector3D<b>&amp;</b> p2); [inline]</code></p>
+<p class="doxygen_fun">Compute the angle between two arbitrary vectors.<br />
+<code><span class="keyword">static</span> T <span class="method"><a href="#">Angle</a></span>(const Vector3D<b>&amp;</b> p1, const Vector3D<b>&amp;</b> p2); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Compute the angle between two vectors, with a specific return type.<br />
+<code><span class="keyword">template</span>&lt;class R &gt;<br />void <span class="method"><a href="#">Angle</a></span>(R<b>&amp;</b> out, const Vector3D &lt; T &gt;<b>&amp;</b> p1, const Vector3D &lt; T &gt;<b>&amp;</b> p2); [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>

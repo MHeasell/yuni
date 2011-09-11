@@ -4,3 +4,64 @@
 <tag name="class" />
 
 
+
+<h2>Summary of the class <code>List</code></h2><table class="nostyle">
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Constructors &amp;* Destructor</h3>
+<p class="doxygen_fun">Default constructor.<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">List</a></span>();</code></p>
+<p class="doxygen_fun">Copy constructor (the copy will share the same informations)<br />
+<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">List</a></span>(const List<b>&amp;</b> c); [inline]</code></p>
+<p class="doxygen_fun">Destructor.<br />
+<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>List</a></span>(); [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Refresh</h3>
+<p class="doxygen_fun">Refresh informations about the monitors.<br />
+<code>bool <span class="method"><a href="#">refresh</a></span>(uint32 minWidth, uint32 minHeight, uint8 minDepth);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Primary display</h3>
+<p class="doxygen_fun">Get the primary display.<br />
+<code>Monitor::Ptr <span class="method"><a href="#">primary</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Searching</h3>
+<p class="doxygen_fun">Get an iterator at the beginning of the list.<br />
+<code>iterator <span class="method"><a href="#">begin</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Get an iterator at the beginning of the list.<br />
+<code>const_iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get an iterator at the end of the list.<br />
+<code>iterator <span class="method"><a href="#">end</a></span>(); [inline]</code></p>
+<p class="doxygen_fun">Get an iterator at the end of the list.<br />
+<code>const_iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Find a monitor by its handle.<br />
+<code>Monitor::Ptr <span class="method"><a href="#">findByHandle</a></span>(const Monitor::Handle hwn) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Find a monitor by its guid.<br />
+<code>Monitor::Ptr <span class="method"><a href="#">findByGUID</a></span>(const String<b>&amp;</b> guid) <span class="keyword">const</span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public</div></td>
+<td><h3 class="h3noleftspace">Operators</h3>
+<p class="doxygen_fun">Operator `=` (the copy will share the same information)<br />
+<code>List &amp; <span class="method"><a href="#">operator=</a></span>(const List<b>&amp;</b> rhs);</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_typedef">An interator.<br />
+<code><span class="keyword">typedef</span> MonitorVector::iterator <span class="method"><a href="#">iterator</a></span>;</code></p>
+<p class="doxygen_typedef">A const iterator.<br />
+<code><span class="keyword">typedef</span> MonitorVector::const_iterator <span class="method"><a href="#">const_iterator</a></span>;</code></p>
+</td></tr>
+<tr><td><div class="visibility">Public
+</div></td>
+<td><h3 class="h3noleftspace">Public
+</h3>
+<p class="doxygen_fun">Get the number of monitors.<br />
+<code>size_t <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+</td></tr>
+</table>
+
+
+<h2>Detailed Description</h2>
