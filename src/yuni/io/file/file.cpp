@@ -183,17 +183,18 @@ namespace IO
 	{
 		FILETIME ftCreate, ftAccess, ftWrite;
 		SYSTEMTIME stUTC, stLocal;
-		DWORD dwRet;
 
 		// Retrieve the file times for the file.
 		if (!GetFileTime(hFile, &ftCreate, &ftAccess, &ftWrite))
 			return false;
 
 		// Convert the last-write time to local time.
-		FileTimeToSystemTime(&ftWrite, &stUTC);
-		SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
+		if (!FileTimeToSystemTime(&ftWrite, &stUTC))
+			return false;
+		if (!SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal))
+			return false;
 
-		return (S_OK == dwRet);
+		return true;
 	}
 
 	# endif
@@ -206,7 +207,7 @@ namespace IO
 		Private::WString<> wfilenm(filename);
 		if (wfilenm.empty())
 			return 0;
-		HANDLE hFile = CreateFile(wfilenm.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL,
+		HANDLE hFile = CreateFileW(wfilenm.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL,
 			OPEN_EXISTING, 0, NULL);
 		if (hFile == INVALID_HANDLE_VALUE)
 			return 0;
