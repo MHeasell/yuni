@@ -72,56 +72,79 @@ namespace Job
 
 
 
-	template<class SchedulerT>
-	class QueueServicePoll : public Thread::Timer
+	namespace // anonymous
 	{
-	public:
-		QueueServicePoll(SchedulerT& scheduler, Yuni::Private::QueueService::WaitingRoom& room,
-			unsigned int pollInterval)
-			:Thread::Timer(pollInterval), pRoom(room),
-			pScheduler(scheduler), pStatus(false)
-		{}
-		virtual ~QueueServicePoll()
-		{
-			stop();
-		}
 
-		bool status() const {return pStatus;}
-
-	protected:
-		virtual bool onInterval(unsigned int)
+		template<class SchedulerT>
+		class QueueServiceWaitHelper : public Thread::Timer
 		{
-			if (pRoom.empty())
+		public:
+			QueueServiceWaitHelper(SchedulerT& scheduler, Yuni::Private::QueueService::WaitingRoom& room,
+				unsigned int pollInterval) :
+				Thread::Timer(pollInterval), pRoom(room),
+				pScheduler(scheduler), pStatus(false)
+			{}
+			virtual ~QueueServiceWaitHelper()
 			{
-				// Checking if the scheduler still has workers
-				if (pScheduler.idle())
-				{
-					pStatus = true;
-					// We can stop now
-					return false;
-				}
+				stop();
 			}
-			// Continuing...
-			return true;
+
+			bool status() const {return pStatus;}
+
+		protected:
+			virtual bool onInterval(unsigned int)
+			{
+				if (pRoom.empty())
+				{
+					// Checking if the scheduler still has workers
+					if (pScheduler.idle())
+					{
+						pStatus = true;
+						// We can stop now
+						return false;
+					}
+				}
+				// Continuing...
+				return true;
+			}
+
+		private:
+			//! Reference to the waiting room
+			Yuni::Private::QueueService::WaitingRoom& pRoom;
+			//! Reference to the scheduler
+			SchedulerT& pScheduler;
+			//! The returned status
+			bool pStatus;
+
+		}; // class QueueServiceWaitHelper
+
+	} // anonymous namespace
+
+
+
+	template<class SchedulerT>
+	void QueueService<SchedulerT>::wait()
+	{
+		// TODO QueueService::wait: Find a more efficient way for doing this
+		if (pWaitingRoom.notEmpty())
+		{
+			QueueServiceWaitHelper<SchedulerT> helper(static_cast<SchedulerT&>(*this), pWaitingRoom, 150);
+			helper.start();
+			helper.wait();
 		}
-
-	private:
-		Yuni::Private::QueueService::WaitingRoom& pRoom;
-		SchedulerT& pScheduler;
-		bool pStatus;
-	};
-
+	}
 
 
 	template<class SchedulerT>
 	bool QueueService<SchedulerT>::wait(unsigned int timeout, unsigned int pollInterval)
 	{
+		// TODO QueueService::wait: Find a more efficient way for doing this
 		if (pWaitingRoom.notEmpty())
 		{
-			QueueServicePoll<SchedulerT> wait(static_cast<SchedulerT&>(*this), pWaitingRoom, pollInterval);
-			wait.start();
-			wait.wait(timeout);
-			return wait.status();
+			QueueServiceWaitHelper<SchedulerT> helper(static_cast<SchedulerT&>(*this), pWaitingRoom, pollInterval);
+			helper.start();
+			helper.wait(timeout);
+			return helper.status();
 		}
 		return true;
 	}
