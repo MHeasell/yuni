@@ -3,11 +3,9 @@
 #include <yuni/io/directory/info.h>
 #include "job.h"
 #include "logs.h"
+#include "indexes.h"
 
-
-
-
-# define SEP IO::Separator
+#define SEP IO::Separator
 
 
 
@@ -32,6 +30,8 @@ namespace DocMake
 		String tmp;
 		unsigned int slotIndex = 0;
 		unsigned int count = 0;
+		String relative;
+
 		for (IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != info.recursive_end(); ++i)
 		{
 			// assert
@@ -70,6 +70,19 @@ namespace DocMake
 				// A few asserts...
 				assert(filename.size() > input.size());
 				assert(slotIndex < jobs.size());
+
+				// Checking for local modifications
+				if (!Program::clean)
+				{
+					relative.assign(filename.c_str() + input.size() + 1, filename.size() - input.size() - 1);
+					sint64 lastWrite = IO::File::LastModificationTime(filename);
+					if (lastWrite)
+					{
+						// Trying to check if we really have to perform an analyzis
+						if (DocIndex::ArticleLastModificationTimeFromCache(relative) == lastWrite)
+							continue;
+					}
+				}
 
 				// Creating a new job for generating this article
 				jobs[slotIndex]->add(filename);

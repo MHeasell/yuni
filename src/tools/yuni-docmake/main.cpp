@@ -42,8 +42,6 @@ int main(int argc, char** argv)
 	{
 		queueService.start();
 		queueService.wait();
-		while (CompileJob::SomeRemain())
-			Yuni::SuspendMilliSeconds(200);
 		queueService.stop();
 	}
 
@@ -58,9 +56,6 @@ int main(int argc, char** argv)
 		JobWriter::PushAllInQueue();
 		queueService.start();
 		queueService.wait();
-		while (JobWriter::SomeRemain())
-			Yuni::SuspendMilliSeconds(200);
-
 		queueService.stop();
 
 		logs.info() << "Generating sitemap";

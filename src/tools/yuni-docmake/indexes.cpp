@@ -175,16 +175,16 @@ namespace DocIndex
 	}
 
 
-	Yuni::sint64 ArticleLastModificationTimeFromCache(const ArticleData& article)
+	Yuni::sint64 ArticleLastModificationTimeFromCache(const String& filename)
 	{
-		if (!article.relativeFilename)
+		if (!filename)
 			return -1;
 
 		// prepare the SQL statement from the command line
 		sqlite3_stmt* stmt;
 		if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT modified FROM articles WHERE rel_path = $1", -1, &stmt, 0))
 			return -1;
-		sqlite3_bind_text(stmt, 1, article.relativeFilename.c_str(), article.relativeFilename.size(), NULL);
+		sqlite3_bind_text(stmt, 1, filename.c_str(), filename.size(), NULL);
 
 		if (SQLITE_ROW == sqlite3_step(stmt))
 		{

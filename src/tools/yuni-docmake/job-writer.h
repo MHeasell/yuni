@@ -13,8 +13,6 @@
 class JobWriter : public Yuni::Job::IJob
 {
 public:
-	static bool SomeRemain();
-
 	static void SEOBuildAllTermReferences();
 
 public:

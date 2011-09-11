@@ -13,9 +13,6 @@
 class CompileJob : public Yuni::Job::IJob
 {
 public:
-	static bool SomeRemain();
-
-public:
 	//! \name Constructor & Destructor
 	//@{
 	/*!
