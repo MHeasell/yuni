@@ -190,7 +190,7 @@ set(SRC_CORE_ATOMIC
 		core/atomic/int.h
 		core/atomic/int.hxx
 		core/atomic/traits.h
-		core/atomic/customstring.hxx
+		core/atomic/string.hxx
 )
 source_group(core\\atomic FILES ${SRC_CORE_ATOMIC})
 
@@ -259,26 +259,26 @@ source_group(core\\linkedlist FILES ${SRC_CORE_SLIST})
 
 
 set(SRC_CORE_STRING
-		core/customstring/customstring.h
-		core/customstring/customstring.hxx
-		core/customstring/operators.hxx
-		core/customstring/iterator.h
-		core/customstring/iterator.hxx
-		core/customstring/utf8char.h
-		core/customstring/utf8char.hxx
-		core/customstring/traits/append.h
-		core/customstring/traits/assign.h
-		core/customstring/traits/fill.h
-		core/customstring/traits/integer.h
-		core/customstring/traits/vnsprintf.h
-		core/customstring/traits/traits.h
-		core/customstring/traits/traits.cpp
-		core/customstring/traits/traits.hxx
-		core/customstring/traits/into.h
+		core/string/string.h
+		core/string/string.hxx
+		core/string/operators.hxx
+		core/string/iterator.h
+		core/string/iterator.hxx
+		core/string/utf8char.h
+		core/string/utf8char.hxx
+		core/string/traits/append.h
+		core/string/traits/assign.h
+		core/string/traits/fill.h
+		core/string/traits/integer.h
+		core/string/traits/vnsprintf.h
+		core/string/traits/traits.h
+		core/string/traits/traits.cpp
+		core/string/traits/traits.hxx
+		core/string/traits/into.h
 
 		# Wide String
-		core/customstring/wstring.h
-		core/customstring/wstring.hxx
+		core/string/wstring.h
+		core/string/wstring.hxx
 
 		core/string.h
 )

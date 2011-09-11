@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_CUSTOMSTRING_OPERATORS_H__
-# define __YUNI_CORE_CUSTOMSTRING_OPERATORS_H__
+#ifndef __YUNI_CORE_STRING_OPERATORS_H__
+# define __YUNI_CORE_STRING_OPERATORS_H__
 
 
 
@@ -147,4 +147,4 @@ operator != (const std::basic_string<char,TraitsT,AllocT>& lhs, const Yuni::CStr
 //@}
 
 
-#endif // __YUNI_CORE_CUSTOMSTRING_OPERATORS_H__
+#endif // __YUNI_CORE_STRING_OPERATORS_H__

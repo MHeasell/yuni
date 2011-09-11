@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_HXX__
-# define __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_HXX__
+#ifndef __YUNI_CORE_STRING_TRAITS_TRAITS_HXX__
+# define __YUNI_CORE_STRING_TRAITS_TRAITS_HXX__
 
 
 
@@ -303,4 +303,4 @@ namespace CStringImpl
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_CORE_CUSTOMSTRING_TRAITS_TRAITS_HXX__
+#endif // __YUNI_CORE_STRING_TRAITS_TRAITS_HXX__

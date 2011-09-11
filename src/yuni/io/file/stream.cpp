@@ -7,7 +7,7 @@
 #include "stream.h"
 #include "../../core/system/windows.hdr.h"
 #include "../../core/string.h"
-#include "../../core/customstring/wstring.h"
+#include "../../core/string/wstring.h"
 
 #ifndef YUNI_OS_WINDOWS
 // lock

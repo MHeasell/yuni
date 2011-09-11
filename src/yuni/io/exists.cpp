@@ -1,7 +1,7 @@
 #include "io.h"
 #include "../core/system/windows.hdr.h"
-#include "../core/customstring.h"
-#include "../core/customstring/wstring.h"
+#include "../core/string.h"
+#include "../core/string/wstring.h"
 #include <sys/stat.h>
 
 #ifndef YUNI_OS_WINDOWS

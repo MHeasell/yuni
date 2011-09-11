@@ -2,7 +2,6 @@
 # define __YUNI_CORE_GETOPT_OPTION_H__
 
 # include "../string.h"
-# include "../customstring.h"
 # include <cassert>
 
 

@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_CUSTOMSTRING_ITERATOR_H__
-# define __YUNI_CORE_CUSTOMSTRING_ITERATOR_H__
+#ifndef __YUNI_CORE_STRING_ITERATOR_H__
+# define __YUNI_CORE_STRING_ITERATOR_H__
 
 
 // !!! Do not use includes here
@@ -445,4 +445,4 @@ struct Model
 
 }; // class Model
 
-#endif // __YUNI_CORE_CUSTOMSTRING_ITERATOR_H__
+#endif // __YUNI_CORE_STRING_ITERATOR_H__
