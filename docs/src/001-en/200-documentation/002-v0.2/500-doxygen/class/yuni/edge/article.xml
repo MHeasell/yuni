@@ -8,9 +8,9 @@
 <h2>Summary of the class <code>Edge</code></h2><table class="nostyle">
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors and destructors</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Edge</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Edge</a></span>(const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Edge</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Edge</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Edge</a></span>(const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Edge</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

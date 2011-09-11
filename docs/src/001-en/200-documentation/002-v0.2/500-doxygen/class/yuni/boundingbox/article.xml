@@ -9,9 +9,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors and destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">BoundingBox</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">BoundingBox</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">BoundingBox</a></span>(const Point3D &lt; T &gt;<b>&amp;</b> min, const Point3D &lt; T &gt;<b>&amp;</b> max); [inline]</code></p>
+<code> <span class="method"><a href="#">BoundingBox</a></span>(const Point3D &lt; T &gt;<b>&amp;</b> min, const Point3D &lt; T &gt;<b>&amp;</b> max); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

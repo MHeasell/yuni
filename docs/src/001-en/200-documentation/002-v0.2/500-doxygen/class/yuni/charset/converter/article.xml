@@ -8,10 +8,10 @@
 <h2>Summary of the class <code>Converter</code></h2><table class="nostyle">
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors and destructors</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Converter</a></span>();</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Converter</a></span>(Charset::Type fromCS, Charset::Type toCS, Charset::Unconvertable opts);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Converter</a></span>(const char<b>*</b> fromCS, const char<b>*</b> toCS);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Converter</a></span>();</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Converter</a></span>();</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Converter</a></span>(Charset::Type fromCS, Charset::Type toCS, Charset::Unconvertable opts);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Converter</a></span>(const char<b>*</b> fromCS, const char<b>*</b> toCS);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Converter</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Construct from a simple buffer.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Hexdump</a></span>(const char<b>*</b> buffer, unsigned int size); [inline]</code></p>
+<code> <span class="method"><a href="#">Hexdump</a></span>(const char<b>*</b> buffer, unsigned int size); [inline]</code></p>
 <p class="doxygen_fun">Copy ctor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Hexdump</a></span>(const Hexdump<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Hexdump</a></span>(const Hexdump<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Construct from a string (or like) object.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Hexdump</a></span>(const U<b>&amp;</b> buffer); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">Hexdump</a></span>(const U<b>&amp;</b> buffer); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Dump functions</h3>

@@ -9,17 +9,17 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">LinkedList</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">LinkedList</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">LinkedList</a></span>(const LinkedList<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">LinkedList</a></span>(const LinkedList<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor from another linked list.<br />
-<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">LinkedList</a></span>(const LinkedList &lt; U, A &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">LinkedList</a></span>(const LinkedList &lt; U, A &gt;<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor from a standard std::list.<br />
-<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">LinkedList</a></span>(const std::list&lt; U, A &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">LinkedList</a></span>(const std::list&lt; U, A &gt;<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Copy Constructor from a standard std::vector.<br />
-<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">LinkedList</a></span>(const std::vector&lt; U, A &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">LinkedList</a></span>(const std::vector&lt; U, A &gt;<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>LinkedList</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>LinkedList</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Iterators &amp; Accessors</h3>

@@ -9,13 +9,13 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Bind</a></span>();</code></p>
+<code> <span class="method"><a href="#">Bind</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Bind</a></span>(const Bind<b>&amp;</b> rhs);</code></p>
+<code> <span class="method"><a href="#">Bind</a></span>(const Bind<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Bind</a></span>(const Yuni::DynamicLibrary::Symbol<b>&amp;</b> symbol);</code></p>
+<code> <span class="method"><a href="#">Bind</a></span>(const Yuni::DynamicLibrary::Symbol<b>&amp;</b> symbol);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Bind</a></span>();</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Bind</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

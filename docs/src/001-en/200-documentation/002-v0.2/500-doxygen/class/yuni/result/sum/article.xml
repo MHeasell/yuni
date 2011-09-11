@@ -9,9 +9,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Sum</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Sum</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Sum</a></span>(const Sum<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Sum</a></span>(const Sum<b>&amp;</b> rhs); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

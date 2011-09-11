@@ -9,13 +9,13 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">UUID</a></span>();</code></p>
+<code> <span class="method"><a href="#">UUID</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">UUID</a></span>(const UUID<b>&amp;</b> rhs);</code></p>
+<code> <span class="method"><a href="#">UUID</a></span>(const UUID<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Constructor with flags.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">UUID</a></span>(Flag flag);</code></p>
+<code> <span class="method"><a href="#">UUID</a></span>(Flag flag);</code></p>
 <p class="doxygen_fun">Constructor from a string.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">UUID</a></span>(const StringT<b>&amp;</b> string); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">UUID</a></span>(const StringT<b>&amp;</b> string); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">UUID</h3>

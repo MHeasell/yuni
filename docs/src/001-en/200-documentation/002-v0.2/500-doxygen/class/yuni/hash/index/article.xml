@@ -11,7 +11,7 @@
 <p class="doxygen_fun">Destructor.<br />
 <code> <span class="method"><a href="#">Table</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Table</a></span>();</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

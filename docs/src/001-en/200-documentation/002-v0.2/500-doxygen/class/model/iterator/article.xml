@@ -35,11 +35,11 @@
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Iterator</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Iterator</a></span>(const StringT<b>&amp;</b> directory); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Iterator</a></span>(const NullIterator<b>&amp;</b> ); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Iterator</a></span>(const Iterator<b>&amp;</b> copy); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Iterator</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Iterator</a></span>(const StringT<b>&amp;</b> directory); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(const NullIterator<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(const Iterator<b>&amp;</b> copy); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Iterator</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>(); [inline]</code></p>
 <p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>(difference_type n); [inline]</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> model); [inline]</code></p>

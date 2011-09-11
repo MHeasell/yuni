@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Logger</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Logger</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Logger</a></span>(const Logger<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Logger</a></span>(const Logger<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Logger</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Logger</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Checkpoint</h3>

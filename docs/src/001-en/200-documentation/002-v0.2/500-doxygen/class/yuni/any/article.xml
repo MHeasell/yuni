@@ -9,17 +9,17 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Copy of an existing variable.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>(const T<b>&amp;</b> source);</code></p>
+<code><span class="keyword">template</span>&lt;typename T &gt;<br /> <span class="method"><a href="#">Any</a></span>(const T<b>&amp;</b> source);</code></p>
 <p class="doxygen_fun">Copy of an existing const C string.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>(const char<b>*</b> source); [inline]</code></p>
+<code> <span class="method"><a href="#">Any</a></span>(const char<b>*</b> source); [inline]</code></p>
 <p class="doxygen_fun">Copy of an existing const C string.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>(char<b>*</b> source); [inline]</code></p>
+<code> <span class="method"><a href="#">Any</a></span>(char<b>*</b> source); [inline]</code></p>
 <p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>();</code></p>
+<code> <span class="method"><a href="#">Any</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Any</a></span>(const Any<b>&amp;</b> rhs);</code></p>
+<code> <span class="method"><a href="#">Any</a></span>(const Any<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Any</a></span>();</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Any</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Alteration methods</h3>

@@ -40,23 +40,23 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IControl</a></span>();</code></p>
+<code> <span class="method"><a href="#">IControl</a></span>();</code></p>
 <p class="doxygen_fun">Constructor with parent.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IControl</a></span>(IControl::Ptr parent);</code></p>
+<code> <span class="method"><a href="#">IControl</a></span>(IControl::Ptr parent);</code></p>
 <p class="doxygen_fun">Constructor with dimensions.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IControl</a></span>(float width, float height);</code></p>
+<code> <span class="method"><a href="#">IControl</a></span>(float width, float height);</code></p>
 <p class="doxygen_fun">Constructor with dimensions and parent.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IControl</a></span>(IControl::Ptr parent, float width, float height);</code></p>
+<code> <span class="method"><a href="#">IControl</a></span>(IControl::Ptr parent, float width, float height);</code></p>
 <p class="doxygen_fun">Full constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IControl</a></span>(float x, float y, float width, float height);</code></p>
+<code> <span class="method"><a href="#">IControl</a></span>(float x, float y, float width, float height);</code></p>
 <p class="doxygen_fun">Full constructor with parent.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IControl</a></span>(IControl::Ptr parent, float x, float y, float width, float height);</code></p>
+<code> <span class="method"><a href="#">IControl</a></span>(IControl::Ptr parent, float x, float y, float width, float height);</code></p>
 <p class="doxygen_fun">Full constructor.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IControl</a></span>(Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename T &gt;<br /> <span class="method"><a href="#">IControl</a></span>(Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Full constructor with parent.<br />
-<code><span class="keyword">template</span>&lt;class T &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IControl</a></span>(IControl::Ptr parent, const Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class T &gt;<br /> <span class="method"><a href="#">IControl</a></span>(IControl::Ptr parent, const Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Virtual destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>IControl</a></span>();</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>IControl</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

@@ -9,13 +9,13 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Shortest constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Emitter</a></span>(bool loop); [inline]</code></p>
+<code> <span class="method"><a href="#">Emitter</a></span>(bool loop); [inline]</code></p>
 <p class="doxygen_fun">Constructor with 3D position.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position, bool loop); [inline]</code></p>
+<code> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position, bool loop); [inline]</code></p>
 <p class="doxygen_fun">Constructor with position, velocity and direction.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position, const Vector3D &lt;&gt;<b>&amp;</b> velocity, const Vector3D &lt;&gt;<b>&amp;</b> direction, bool loop); [inline]</code></p>
+<code> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position, const Vector3D &lt;&gt;<b>&amp;</b> velocity, const Vector3D &lt;&gt;<b>&amp;</b> direction, bool loop); [inline]</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Emitter</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Emitter</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Methods</h3>

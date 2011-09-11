@@ -10,8 +10,8 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">MoveConstructor</a></span>(T<b>&amp;</b> r); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">MoveConstructor</a></span>(const MoveConstructor<b>&amp;</b> r); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">MoveConstructor</a></span>(T<b>&amp;</b> r); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">MoveConstructor</a></span>(const MoveConstructor<b>&amp;</b> r); [inline]</code></p>
 <p class="doxygen_fun">Case-operator.<br />
 <code> <span class="method"><a href="#">operator T &amp;</a></span>() <span class="keyword">const</span>; [inline]</code></p>
 </td></tr>

@@ -9,9 +9,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Resolution</a></span>(const uint32 w, const uint32 h, const uint8 b);</code></p>
+<code> <span class="method"><a href="#">Resolution</a></span>(const uint32 w, const uint32 h, const uint8 b);</code></p>
 <p class="doxygen_fun">Constructor by copy.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Resolution</a></span>(const Resolution<b>&amp;</b> c); [inline]</code></p>
+<code> <span class="method"><a href="#">Resolution</a></span>(const Resolution<b>&amp;</b> c); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Information about the current mode</h3>

@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp;* Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">List</a></span>();</code></p>
+<code> <span class="method"><a href="#">List</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor (the copy will share the same informations)<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">List</a></span>(const List<b>&amp;</b> c); [inline]</code></p>
+<code> <span class="method"><a href="#">List</a></span>(const List<b>&amp;</b> c); [inline]</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>List</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>List</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Refresh</h3>

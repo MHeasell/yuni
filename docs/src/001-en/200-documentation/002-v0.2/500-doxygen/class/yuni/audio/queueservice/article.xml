@@ -9,14 +9,14 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor and destructor</h3>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">QueueService</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">QueueService</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>QueueService</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>QueueService</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Private operations</h3>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">QueueService</a></span>(const QueueService<b>&amp;</b> );</code></p>
+<code> <span class="method"><a href="#">QueueService</a></span>(const QueueService<b>&amp;</b> );</code></p>
 <p class="doxygen_fun">Assignment.<br />
 <code>QueueService &amp; <span class="method"><a href="#">operator=</a></span>(const QueueService<b>&amp;</b> );</code></p>
 </td></tr>

@@ -59,15 +59,15 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Short constructor.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Window</a></span>(const StringT<b>&amp;</b> title); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Window</a></span>(const StringT<b>&amp;</b> title); [inline]</code></p>
 <p class="doxygen_fun">Constructor with dimensions.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Window</a></span>(const StringT<b>&amp;</b> title, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Window</a></span>(const StringT<b>&amp;</b> title, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Constructor with start position coordinates.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Window</a></span>(const StringT<b>&amp;</b> title, float x, float y, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Window</a></span>(const StringT<b>&amp;</b> title, float x, float y, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Constructor with start position as a point.<br />
-<code><span class="keyword">template</span>&lt;class StringT , class T &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Window</a></span>(const StringT<b>&amp;</b> title, const Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT , class T &gt;<br /> <span class="method"><a href="#">Window</a></span>(const StringT<b>&amp;</b> title, const Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
 <p class="doxygen_fun">Virtual destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Window</a></span>();</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Window</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Methods</h3>

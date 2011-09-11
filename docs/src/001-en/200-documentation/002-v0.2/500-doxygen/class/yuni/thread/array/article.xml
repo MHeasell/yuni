@@ -9,15 +9,15 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Array</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Array</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Array</a></span>(const Array<b>&amp;</b> rhs);</code></p>
+<code> <span class="method"><a href="#">Array</a></span>(const Array<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Constructor with a given amount of thread.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Array</a></span>(unsigned int n); [inline]</code></p>
+<code> <span class="method"><a href="#">Array</a></span>(unsigned int n); [inline]</code></p>
 <p class="doxygen_fun">Constructor, with a given amount of thread.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Array</a></span>(unsigned int n, bool autoStart); [inline]</code></p>
+<code> <span class="method"><a href="#">Array</a></span>(unsigned int n, bool autoStart); [inline]</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Array</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Array</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Settings</h3>

@@ -9,19 +9,19 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Nullable</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Nullable</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Nullable</a></span>(const Nullable<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Nullable</a></span>(const Nullable<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Move constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Nullable</a></span>(Static::MoveConstructor &lt; Nullable &gt; rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Nullable</a></span>(Static::MoveConstructor &lt; Nullable &gt; rhs); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code><span class="keyword">template</span>&lt;class Alloc1 &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Nullable</a></span>(const Nullable &lt; T, Alloc1 &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class Alloc1 &gt;<br /> <span class="method"><a href="#">Nullable</a></span>(const Nullable &lt; T, Alloc1 &gt;<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Constructor with a default value.<br />
-<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Nullable</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">Nullable</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Constructor with a default value.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Nullable</a></span>(const_pointer v);</code></p>
+<code> <span class="method"><a href="#">Nullable</a></span>(const_pointer v);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Nullable</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Nullable</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Iterators</h3>

@@ -17,7 +17,7 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">EmitterPositionData</a></span>(Thread::Signal<b>&amp;</b> s, float<b>&amp;</b> f); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">EmitterPositionData</a></span>(Thread::Signal<b>&amp;</b> s, float<b>&amp;</b> f); [inline]</code></p>
 </td></tr>
 </table>
 

@@ -9,15 +9,15 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Vector3D</a></span>(); [inline]</code></p>
 <p class="doxygen_fun">Constructor.<br />
-<code><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(const U x1, const V y1, const W z1); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;<br /> <span class="method"><a href="#">Vector3D</a></span>(const U x1, const V y1, const W z1); [inline]</code></p>
 <p class="doxygen_fun">Constructor using two points.<br />
-<code><span class="keyword">template</span>&lt;typename U , typename V &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(const Point3D &lt; U &gt;<b>&amp;</b> origin, const Point3D &lt; V &gt;<b>&amp;</b> end); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U , typename V &gt;<br /> <span class="method"><a href="#">Vector3D</a></span>(const Point3D &lt; U &gt;<b>&amp;</b> origin, const Point3D &lt; V &gt;<b>&amp;</b> end); [inline]</code></p>
 <p class="doxygen_fun">Constructor by copy.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(const Vector3D<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Vector3D</a></span>(const Vector3D<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Constructor by copy.<br />
-<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Vector3D</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> v); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">Vector3D</a></span>(const Vector3D &lt; U &gt;<b>&amp;</b> v); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Reset the coordinates</h3>

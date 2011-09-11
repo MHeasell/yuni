@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Triangle</a></span>(const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2, const Vertex<b>&amp;</b> v3); [inline]</code></p>
+<code> <span class="method"><a href="#">Triangle</a></span>(const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2, const Vertex<b>&amp;</b> v3); [inline]</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">Triangle</a></span>(const Triangle<b>&amp;</b> t); [inline]</code></p>
+<code> <span class="method"><a href="#">Triangle</a></span>(const Triangle<b>&amp;</b> t); [inline]</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">destructor</a></span> <span class="method"><a href="#"><b> ~ </b>Triangle</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Triangle</a></span>(); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Accessors</h3>

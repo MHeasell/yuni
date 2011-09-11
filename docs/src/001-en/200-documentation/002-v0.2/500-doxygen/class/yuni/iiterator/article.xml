@@ -9,17 +9,17 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>();</code></p>
+<code> <span class="method"><a href="#">IIterator</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const IteratorType<b>&amp;</b> rhs);</code></p>
+<code> <span class="method"><a href="#">IIterator</a></span>(const IteratorType<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Copy constructor from any iterator.<br />
-<code><span class="keyword">template</span>&lt;class M , bool C&gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const IIterator &lt; M, C &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class M , bool C&gt;<br /> <span class="method"><a href="#">IIterator</a></span>(const IIterator &lt; M, C &gt;<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun">Assignation from a custom type, defined by the real implementation.<br />
-<code><span class="keyword">template</span>&lt;class U1 &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const U1<b>&amp;</b> u1); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U1 &gt;<br /> <span class="method"><a href="#">IIterator</a></span>(const U1<b>&amp;</b> u1); [inline]</code></p>
 <p class="doxygen_fun">Assignation from two custom types, defined by the real implementation.<br />
-<code><span class="keyword">template</span>&lt;class U1 , class U2 &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const U1<b>&amp;</b> u1, const U2<b>&amp;</b> u2); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U1 , class U2 &gt;<br /> <span class="method"><a href="#">IIterator</a></span>(const U1<b>&amp;</b> u1, const U2<b>&amp;</b> u2); [inline]</code></p>
 <p class="doxygen_fun">Assignation from three custom types, defined by the real implementation.<br />
-<code><span class="keyword">template</span>&lt;class U1 , class U2 , class U3 &gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const U1<b>&amp;</b> u1, const U2<b>&amp;</b> u2, const U3<b>&amp;</b> u3); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U1 , class U2 , class U3 &gt;<br /> <span class="method"><a href="#">IIterator</a></span>(const U1<b>&amp;</b> u1, const U2<b>&amp;</b> u2, const U3<b>&amp;</b> u3); [inline]</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Common operations</h3>
@@ -102,7 +102,7 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT , bool ConstT&gt;<br /> <span class="method"><a href="#">constructor</a></span> <span class="method"><a href="#">IIterator</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT , bool ConstT&gt;<br /> <span class="method"><a href="#">IIterator</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> rhs); [inline]</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT , bool ConstT&gt;<br />IIterator &lt; ModelT, ConstT &gt; &amp; <span class="method"><a href="#">operator=</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> rhs); [inline]</code></p>
 </td></tr>
 </table>
