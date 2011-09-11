@@ -25,8 +25,6 @@ namespace // anonymous
 	static std::vector<JobWriter*>  gJobList;
 	static String gTemplateContent;
 
-	static Yuni::Atomic::Int<>  gCompileJobCount = 0;
-
 	
 
 	class XMLVisitor : public TiXmlVisitor
@@ -288,7 +286,7 @@ void JobWriter::Add(const String& input, const String& htdocs, const ArticleData
 		delete[] wordIDs;
 	}
 
-	if (registrationCount && Program::verbose)
+	if (registrationCount && Program::debug)
 		logs.info() << "  :: registered " << registrationCount << " terms";
 }
 
@@ -316,19 +314,11 @@ JobWriter::JobWriter(const String& input, const String& htdocs, const ArticleDat
 	pArticle(article),
 	pArticleID(-1)
 {
-	++gCompileJobCount;
 }
 
 
 JobWriter::~JobWriter()
 {
-	--gCompileJobCount;
-}
-
-
-bool JobWriter::SomeRemain()
-{
-	return !(!gCompileJobCount);
 }
 
 
@@ -562,9 +552,12 @@ void JobWriter::onExecute()
 	// Console verbose / debug
 	{
 		if (Program::debug)
-			logs.info() << "building " << pArticle.htdocsFilename << " -> " << filenameInHtdocs;
-		//else
-		//	logs.info() << "building " << pArticle.htdocsFilename;
+			logs.info() << "generating " << pArticle.htdocsFilename << " -> " << filenameInHtdocs;
+		else
+		{
+			if (Program::verbose)
+				logs.info() << "generating " << pArticle.htdocsFilename;
+		}
 	}
 
 	// Prepare all variables

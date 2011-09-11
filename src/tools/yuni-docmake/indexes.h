@@ -30,7 +30,7 @@ namespace DocIndex
 	void BuildDirectoryIndex(Yuni::Clob& out, const Yuni::String& path);
 
 
-	Yuni::sint64 ArticleLastModificationTimeFromCache(const ArticleData& article);
+	Yuni::sint64 ArticleLastModificationTimeFromCache(const Yuni::String& filename);
 
 
 	/*!

@@ -18,7 +18,6 @@ using namespace Yuni::Tool::DocMake;
 
 Yuni::Job::QueueService<>  queueService;
 
-static Yuni::Atomic::Int<>  gCompileJobCount = 0;
 
 
 namespace // anonymous
@@ -493,19 +492,11 @@ CompileJob::CompileJob(const Yuni::String& input, const Yuni::String& htdocs) :
 	pInput(input),
 	pHtdocs(htdocs)
 {
-	++gCompileJobCount;
 }
 
 
 CompileJob::~CompileJob()
 {
-	--gCompileJobCount;
-}
-
-
-bool CompileJob::SomeRemain()
-{
-	return !(!gCompileJobCount);
 }
 
 
@@ -553,6 +544,9 @@ void CompileJob::onExecute()
 		pArticle.originalFilename = entry;
 		// The relative filename, from the source folder
 		pArticle.relativeFilename.assign(entry.c_str() + pInput.size() + 1, entry.size() - pInput.size() - 1);
+
+		// Last modification time
+		pArticle.modificationTime = IO::File::LastModificationTime(entry);
 
 		// The final filename within the htdocs folder
 		pArticle.htdocsFilename.clear() << '/' << pArticle.relativeFilename;
@@ -604,18 +598,6 @@ void CompileJob::onExecute()
 
 bool CompileJob::analyzeArticle()
 {
-	sint64 lastWrite = IO::File::LastModificationTime(pArticle.originalFilename);
-	pArticle.modificationTime = lastWrite;
-	if (lastWrite)
-	{
-		// Trying to check if we really have to perform an analyzis
-		if (DocIndex::ArticleLastModificationTimeFromCache(pArticle) == lastWrite)
-		{
-			// Actually, no.
-			return false;
-		}
-	}
-
 	if (Program::verbose)
 		logs.info() << "reading " << pArticle.relativeFilename;
 
