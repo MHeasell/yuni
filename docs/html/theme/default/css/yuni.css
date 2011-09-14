@@ -329,6 +329,7 @@ td > h2:first-child {
 	background-image:none !important;
 	background-color:#eee;
 	padding-left:0.3em;
+	font-weight:bold;
 
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
