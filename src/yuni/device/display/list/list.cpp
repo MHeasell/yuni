@@ -56,6 +56,13 @@ namespace Display
 	}
 
 
+	List::List(const List& c):
+		pMonitors(c.pMonitors),
+		pPrimary(c.pPrimary),
+		pNullMonitor(c.pNullMonitor)
+	{}
+
+
 	List& List::operator = (const List& rhs)
 	{
 		pMonitors    = rhs.pMonitors;

@@ -776,6 +776,11 @@ add_library(yuni-static-core STATIC
 		${SRC_THREADS} ${SRC_JOBS}
 	)
 
+if (WIN32 OR WIN64)
+	add_definitions("-DUNICODE")
+	add_definitions("-D_UNICODE")
+endif ()
+
 # Setting output path
 set_target_properties(yuni-static-core PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")

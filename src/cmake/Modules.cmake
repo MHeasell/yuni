@@ -29,6 +29,10 @@ set(YUNI_MODULE_NET_MESSAGES              false)
 # LDO
 set(YUNI_MODULE_LDO                       false)
 
+# Graphics
+set(YUNI_MODULE_GRAPHICS                  false)
+set(YUNI_MODULE_OPENGL                    false)
+
 # UI (User Interface)
 set(YUNI_MODULE_UI                        false)
 
@@ -51,7 +55,7 @@ set(YUNI_TESTS   false)
 
 
 # The list of all available modules
-# There is no need for `core`, which are implicit
+# There is no need for `core`, which is implicit
 set(YUNI_MODULE_LIST
 	algorithms
 	vm
@@ -62,6 +66,8 @@ set(YUNI_MODULE_LIST
 		display
 		keyboard
 		mouse
+	graphics
+		opengl
 	ui
 	net
 		netserver
@@ -109,6 +115,8 @@ if(MODULES)
 			set(YUNI_MODULE_AUDIO true)
 			set(YUNI_MODULE_NET true)
 			set(YUNI_MODULE_NET_MESSAGES true)
+			set(YUNI_MODULE_GRAPHICS true)
+			set(YUNI_MODULE_OPENGL true)
 			set(YUNI_MODULE_UI true)
 			set(YUNI_MODULE_ALGORITHMS true)
 			set(YUNI_MODULE_EXTRA_MARKDOWN true)
@@ -266,6 +274,28 @@ if(MODULES)
 			set(YUNI_TESTS false)
 		endif()
 
+		# graphics (Graphic renderers)
+		if("${it}" STREQUAL "graphics")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_GRAPHICS true)
+		endif()
+		# -graphics
+		if("${it}" STREQUAL "-graphics")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_GRAPHICS false)
+		endif()
+
+		# OpenGL renderer
+		if("${it}" STREQUAL "opengl")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_OPENGL true)
+		endif()
+		# -opengl
+		if("${it}" STREQUAL "-opengl")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_OPENGL false)
+		endif()
+
 		# ui (User Interface)
 		if("${it}" STREQUAL "ui")
 			set(KeywordIsKnown true)
@@ -335,6 +365,8 @@ if(MODULES)
 		YMESSAGE("    -/+mouse       : The Mouse device")
 		YMESSAGE(" The audio modules")
 		YMESSAGE("    -/+audio       : The Audio module (default: disabled)")
+		YMESSAGE(" The graphics modules")
+		YMESSAGE("    -/+opengl      : The OpenGL renderer module (default: disabled)")
 		YMESSAGE(" The ui modules")
 		YMESSAGE("    -/+ui          : The ui module (default: disabled)")
 		YMESSAGE(" The virtual machine module")
@@ -351,8 +383,11 @@ endif()
 
 
 #
-# Dependancies
+# Dependencies
 #
+if(YUNI_MODULE_OPENGL)
+	set(YUNI_MODULE_GRAPHICS true)
+endif()
 if(YUNI_MODULE_UI)
 	set(YUNI_MODULE_DEVICES true)
 	set(YUNI_MODULE_DEVICE_DISPLAY true)
@@ -420,6 +455,13 @@ endif()
 
 if(YUNI_MODULE_AUDIO)
 	list(APPEND YUNI_MODULE_AVAILABLE audio)
+endif()
+
+if(YUNI_MODULE_GRAPHICS)
+	list(APPEND YUNI_MODULE_AVAILABLE graphics)
+	if (YUNI_MODULE_OPENGL)
+		list(APPEND YUNI_MODULE_AVAILABLE opengl)
+	endif()
 endif()
 
 if(YUNI_MODULE_UI)
