@@ -1,5 +1,5 @@
 
-YMESSAGE(":: [Module] Audio")
+YMESSAGE_MODULE("Audio")
 
 
 LIBYUNI_CONFIG_LIB("both" "audio"      "yuni-static-audio-core")

@@ -12,8 +12,8 @@
 #	define YUNI_DEVICE_DISPLAY_INVALIDHANDLE  (uint32(-1))
 # else
 # 	if defined(YUNI_OS_WINDOWS)
-#		define YUNI_DEVICE_DISPLAY_HANDLE         uint32
-#		define YUNI_DEVICE_DISPLAY_INVALIDHANDLE  (uint32(-1))
+#		define YUNI_DEVICE_DISPLAY_HANDLE         wchar_t*
+#		define YUNI_DEVICE_DISPLAY_INVALIDHANDLE  0
 # 	else
 /* Unixes - X11 */
 #		define YUNI_DEVICE_DISPLAY_HANDLE         int
@@ -52,7 +52,7 @@ namespace Display
 		*/
 		typedef YUNI_DEVICE_DISPLAY_HANDLE  Handle;
 		//! Value for an invalid handle
-		static const Handle InvalidHandle = YUNI_DEVICE_DISPLAY_INVALIDHANDLE;
+		static const Handle InvalidHandle;
 
 
 	public:
@@ -217,6 +217,12 @@ namespace Display
 
 		//! The MD5 for the guid - avoid multiple md5 calculations
 		String pMD5Cache;
+
+		# ifdef YUNI_OS_WINDOWS
+
+		wchar_t pDeviceID[128];
+
+		# endif
 
 	}; // class Monitor
 

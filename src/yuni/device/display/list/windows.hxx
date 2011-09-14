@@ -10,57 +10,54 @@ namespace Display
 {
 
 
-	// Use the following structure rather than DISPLAY_DEVICE, since some old
-	// versions of DISPLAY_DEVICE are missing the last two fields and this can
-	// cause problems with EnumDisplayDevices on Windows 2000.
-	struct DISPLAY_DEVICE_FULL
+	static SingleMonitorFound* findMonitor(const wchar_t* monitorID, MonitorsFound& lst)
 	{
-		DWORD  cb;
-		TCHAR  DeviceName[32];
-		TCHAR  DeviceString[128];
-		DWORD  StateFlags;
-		TCHAR  DeviceID[128];
-		TCHAR  DeviceKey[128];
-	};
+		// Converting from wide char to multibyte in order to compare with Yuni::String
+		const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, monitorID, -1, NULL, 0,  NULL, NULL);
+		if (sizeRequired <= 0)
+			return NULL;
+		String newID;
+		newID.reserve((unsigned int) sizeRequired);
+		WideCharToMultiByte(CP_UTF8, 0, monitorID, -1, (char*)newID.data(), sizeRequired,  NULL, NULL);
+		newID.resize(((unsigned int) sizeRequired) - 1);
 
-
-	static SingleMonitorFound* findMonitor(const Yuni::String& monitorID, MonitorsFound& lst)
-	{
 		unsigned int i;
-		for (i = 0; i < lst.size() && lst[i].first->guid() != monitorID; ++i)
+		for (i = 0; i < lst.size() && lst[i].first->guid() != newID; ++i)
 			;
 		return (i >= lst.size()) ? NULL : &lst[i];
 	}
 
-	static void addResolutions(DISPLAY_DEVICE_FULL& device, SmartPtr<OrderedResolutions> res)
+
+	static void addResolutions(DISPLAY_DEVICEW& device, SmartPtr<OrderedResolutions> res)
 	{
-		DEVMODE devMode;
-		devMode.dmSize = sizeof(DEVMODE);
+		DEVMODEW devMode;
+		devMode.dmSize = sizeof(devMode);
 		devMode.dmDriverExtra = 32;
 
-		for (unsigned int i = 0; EnumDisplaySettings(device.DeviceName, i, &devMode); ++i)
+		for (unsigned int i = 0; EnumDisplaySettingsW(device.DeviceName, i, &devMode); ++i)
 		{
 			(*res)[devMode.dmPelsWidth][devMode.dmPelsHeight][(uint8)devMode.dmBitsPerPel] = true;
 		}
 	}
+
 
 	/*!
 	** \brief Windows-specific implementation for the monitor / resolution list refresh
 	*/
 	static void refreshForWindows(MonitorsFound& lst)
 	{
-		DISPLAY_DEVICE_FULL displayDevice;
-		displayDevice.cb = sizeof (DISPLAY_DEVICE_FULL);
+		DISPLAY_DEVICEW displayDevice;
+		displayDevice.cb = sizeof(DISPLAY_DEVICEW);
 		// Loop on all display devices
-		for (unsigned int countDevices = 0; EnumDisplayDevices(NULL, countDevices, (DISPLAY_DEVICE*)&displayDevice, 0); ++countDevices)
+		for (unsigned int countDevices = 0; EnumDisplayDevicesW(NULL, countDevices, (DISPLAY_DEVICEW*)&displayDevice, 0); ++countDevices)
 		{
 			// Ignore mirrored displays
 			if (!(displayDevice.StateFlags & DISPLAY_DEVICE_MIRRORING_DRIVER) && (displayDevice.StateFlags & DISPLAY_DEVICE_ATTACHED_TO_DESKTOP))
 			{
-				DISPLAY_DEVICE_FULL monitorDisplayDevice;
-				monitorDisplayDevice.cb = sizeof (DISPLAY_DEVICE_FULL);
+				DISPLAY_DEVICEW monitorDisplayDevice;
+				monitorDisplayDevice.cb = sizeof(DISPLAY_DEVICEW);
 				// A second call is necessary to get the monitor name associated with the display
-				EnumDisplayDevices(displayDevice.DeviceName, 0, (DISPLAY_DEVICE*)&monitorDisplayDevice, 0);
+				EnumDisplayDevicesW(displayDevice.DeviceName, 0, (DISPLAY_DEVICEW*)&monitorDisplayDevice, 0);
 				bool mainDisplay = (0 != (displayDevice.StateFlags & DISPLAY_DEVICE_PRIMARY_DEVICE));
 
 				// Check if we have already stored info on this monitor
@@ -70,8 +67,16 @@ namespace Display
 				SmartPtr<OrderedResolutions> res;
 				if (newMonitor)
 				{
+					// Converting from wide char to multibyte in order to compare with Yuni::String
+					const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, monitorDisplayDevice.DeviceString, -1, NULL, 0,  NULL, NULL);
+					if (sizeRequired <= 0)
+						continue;
+					String newID;
+					newID.reserve((unsigned int) sizeRequired);
+					WideCharToMultiByte(CP_UTF8, 0, monitorDisplayDevice.DeviceString, -1, (char*)newID.data(), sizeRequired,  NULL, NULL);
+					newID.resize(((unsigned int) sizeRequired) - 1);
 					// Create the new monitor
-					monitor = new Monitor(monitorDisplayDevice.DeviceString, (Monitor::Handle)monitorDisplayDevice.DeviceID, mainDisplay, true, true);
+					monitor = new Monitor(newID, (Monitor::Handle)monitorDisplayDevice.DeviceID, mainDisplay, true, true);
 					res = new OrderedResolutions();
 				}
 				else
@@ -98,6 +103,8 @@ namespace Display
 	{
 		refreshForWindows(lst);
 	}
+
+
 
 
 

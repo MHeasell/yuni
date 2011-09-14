@@ -1,4 +1,5 @@
 
+#include <cassert>
 #include "monitor.h"
 #include "../../core/hash/checksum/md5.h"
 
@@ -9,6 +10,9 @@ namespace Device
 {
 namespace Display
 {
+
+	const Monitor::Handle Monitor::InvalidHandle = YUNI_DEVICE_DISPLAY_INVALIDHANDLE;
+
 
 	void Monitor::addSafeResolutions()
 	{
@@ -30,6 +34,11 @@ namespace Display
 		:pHandle(hwn), pProductName(nm), pResolutions(),
 		pPrimary(p), pHardwareAcceleration(a), pBuiltin(b)
 	{
+		#ifdef YUNI_OS_WINDOWS
+		assert(NULL != hwn && "Invalid Monitor handle in Monitor::Monitor !");
+		memcpy(pDeviceID, hwn, sizeof(wchar_t) * 128);
+		pHandle = pDeviceID;
+		#endif
 		addSafeResolutions();
 	}
 

@@ -89,6 +89,12 @@ if(YUNI_MODULE_LDO)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/ldo.cmake")
 endif()
 
+if(YUNI_MODULE_GRAPHICS)
+	if (YUNI_MODULE_OPENGL)
+		include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/graphics-opengl.cmake")
+	endif()
+endif()
+
 if(YUNI_MODULE_UI)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/ui.cmake")
 endif()
