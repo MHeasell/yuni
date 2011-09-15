@@ -3,6 +3,10 @@
 #include "../directory.h"
 #include "commons.h"
 #include "../file.h"
+#ifdef YUNI_OS_WINDOWS
+# include "../core/string/wstring.h"
+#endif
+
 
 namespace Yuni
 {
@@ -25,50 +29,31 @@ namespace Directory
 				String norm;
 				Yuni::IO::Normalize(norm, path, len);
 
-				wchar_t* buffer = new wchar_t[norm.size() + 10];
-				buffer[0] = L'\\';
-				buffer[1] = L'\\';
-				buffer[2] = L'?';
-				buffer[3] = L'\\';
-				const int n = MultiByteToWideChar(CP_UTF8, 0, norm.c_str(), norm.size(), buffer + 4, norm.size());
-				if (!n)
-				{
-					delete[] buffer;
+				Private::WString<true> wstr(norm);
+				if (wstr.size() < 4)
 					return false;
-				}
-				// The Win32 function MultiByteToWideChar() does not append the final zero
-				// when a valid length is given (!= -1)
-				buffer[n + 4] = L'\0';
-
-				wchar_t* t = buffer + 4;
+				wchar_t* t = wstr.c_str() + 4;
 
 				while (*t != L'\0')
 				{
 					if ((*t == L'\\' || *t == L'/') && (*(t-1) != ':'))
 					{
 						*t = L'\0';
-						if (!CreateDirectoryW(buffer, nullptr))
+						if (!CreateDirectoryW(wstr.c_str(), nullptr))
 						{
 							if (GetLastError() != ERROR_ALREADY_EXISTS)
-							{
-								delete[] buffer;
 								return false;
-							}
 						}
 						*t = L'\\';
 					}
 					++t;
 				}
 
-				if (!CreateDirectoryW(buffer, nullptr))
+				if (!CreateDirectoryW(wstr.c_str(), nullptr))
 				{
 					if (GetLastError() != ERROR_ALREADY_EXISTS)
-					{
-						delete[] buffer;
 						return false;
-					}
 				}
-				delete[] buffer;
 			}
 			return true;
 		}
