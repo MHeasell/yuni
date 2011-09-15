@@ -165,7 +165,7 @@ namespace EventLoop
 
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
-	void IEventLoop<ParentT,FlowT,StatsT,DetachedT>::stop(const unsigned int timeout)
+	void IEventLoop<ParentT,FlowT,StatsT,DetachedT>::stop(unsigned int timeout)
 	{
 		// Locking for checking internal status and inserting a 'stop' request
 		{

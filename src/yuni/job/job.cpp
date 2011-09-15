@@ -10,10 +10,10 @@ namespace Job
 {
 
 
-	bool IJob::suspend(const unsigned int delay) const
+	bool IJob::suspend(unsigned int delay) const
 	{
 		// This method must only be called from a thread
-		assert(pThread != NULL && "Job: The pointer to the attached thread must not be NULL");
+		assert(pThread && "Job: The pointer to the attached thread must not be NULL");
 
 		// We can suspend the job only if it is running
 		if (pState == stateRunning)
@@ -32,6 +32,8 @@ namespace Job
 
 	void IJob::execute(Thread::IThread* t)
 	{
+		// note: \p t can be null
+
 		// Reseting data
 		// We will keep the state in `waiting` until we have properly set
 		// all other values
@@ -48,7 +50,7 @@ namespace Job
 		pState = stateIdle;
 
 		// Other values
-		pThread = NULL;
+		pThread = nullptr;
 		pProgression = 100;
 	}
 

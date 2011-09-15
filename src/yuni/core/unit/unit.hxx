@@ -27,50 +27,50 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline
-	Abstract<Q,Child,T,P,N>::Abstract(const sint16 u)
+	Abstract<Q,Child,T,P,N>::Abstract(sint16 u)
 		:pValue((T)u)
 	{}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline
-	Abstract<Q,Child,T,P,N>::Abstract(const sint32 u)
+	Abstract<Q,Child,T,P,N>::Abstract(sint32 u)
 		:pValue((T)u)
 	{}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline
-	Abstract<Q,Child,T,P,N>::Abstract(const sint64 u)
+	Abstract<Q,Child,T,P,N>::Abstract(sint64 u)
 		:pValue((T)u)
 	{}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline
-	Abstract<Q,Child,T,P,N>::Abstract(const uint16 u)
+	Abstract<Q,Child,T,P,N>::Abstract(uint16 u)
 		:pValue((T)u)
 	{}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline
-	Abstract<Q,Child,T,P,N>::Abstract(const uint32 u)
+	Abstract<Q,Child,T,P,N>::Abstract(uint32 u)
 		:pValue((T)u)
 	{}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline
-	Abstract<Q,Child,T,P,N>::Abstract(const uint64 u)
+	Abstract<Q,Child,T,P,N>::Abstract(uint64 u)
 		:pValue((T)u)
 	{}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline
-	Abstract<Q,Child,T,P,N>::Abstract(const float u)
+	Abstract<Q,Child,T,P,N>::Abstract(float u)
 		:pValue((T)u)
 	{}
 
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline
-	Abstract<Q,Child,T,P,N>::Abstract(const double u)
+	Abstract<Q,Child,T,P,N>::Abstract(double u)
 		:pValue((T)u)
 	{}
 
@@ -132,21 +132,21 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator != (const int u) const
+	Abstract<Q,Child,T,P,N>::operator != (int u) const
 	{
 		return pValue != (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator != (const unsigned int u) const
+	Abstract<Q,Child,T,P,N>::operator != (unsigned int u) const
 	{
 		return pValue != (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator != (const float u) const
+	Abstract<Q,Child,T,P,N>::operator != (float u) const
 	{
 		return pValue != (T)u;
 	}
@@ -154,7 +154,7 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator != (const double u) const
+	Abstract<Q,Child,T,P,N>::operator != (double u) const
 	{
 		return pValue != (T)u;
 	}
@@ -179,21 +179,21 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator == (const int u) const
+	Abstract<Q,Child,T,P,N>::operator == (int u) const
 	{
 		return pValue == (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator == (const unsigned int u) const
+	Abstract<Q,Child,T,P,N>::operator == (unsigned int u) const
 	{
 		return pValue == (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator == (const float u) const
+	Abstract<Q,Child,T,P,N>::operator == (float u) const
 	{
 		return pValue == (T)u;
 	}
@@ -201,7 +201,7 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator == (const double u) const
+	Abstract<Q,Child,T,P,N>::operator == (double u) const
 	{
 		return pValue == (T)u;
 	}
@@ -225,21 +225,21 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator <= (const int u) const
+	Abstract<Q,Child,T,P,N>::operator <= (int u) const
 	{
 		return pValue <= (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator <= (const unsigned int u) const
+	Abstract<Q,Child,T,P,N>::operator <= (unsigned int u) const
 	{
 		return pValue <= (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator <= (const float u) const
+	Abstract<Q,Child,T,P,N>::operator <= (float u) const
 	{
 		return pValue <= (T)u;
 	}
@@ -247,14 +247,14 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator <= (const double u) const
+	Abstract<Q,Child,T,P,N>::operator <= (double u) const
 	{
 		return pValue <= (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator <= (const long double u) const
+	Abstract<Q,Child,T,P,N>::operator <= (long double u) const
 	{
 		return pValue <= (T)u;
 	}
@@ -279,21 +279,21 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator >= (const int u) const
+	Abstract<Q,Child,T,P,N>::operator >= (int u) const
 	{
 		return pValue >= (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator >= (const unsigned int u) const
+	Abstract<Q,Child,T,P,N>::operator >= (unsigned int u) const
 	{
 		return pValue >= (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator >= (const float u) const
+	Abstract<Q,Child,T,P,N>::operator >= (float u) const
 	{
 		return pValue >= (T)u;
 	}
@@ -301,7 +301,7 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator >= (const double u) const
+	Abstract<Q,Child,T,P,N>::operator >= (double u) const
 	{
 		return pValue >= (T)u;
 	}
@@ -325,21 +325,21 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator < (const int u) const
+	Abstract<Q,Child,T,P,N>::operator < (int u) const
 	{
 		return pValue < (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator < (const unsigned int u) const
+	Abstract<Q,Child,T,P,N>::operator < (unsigned int u) const
 	{
 		return pValue < (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator < (const float u) const
+	Abstract<Q,Child,T,P,N>::operator < (float u) const
 	{
 		return pValue < (T)u;
 	}
@@ -347,7 +347,7 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator < (const double u) const
+	Abstract<Q,Child,T,P,N>::operator < (double u) const
 	{
 		return pValue < (T)u;
 	}
@@ -371,21 +371,21 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator > (const int u) const
+	Abstract<Q,Child,T,P,N>::operator > (int u) const
 	{
 		return pValue > (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator > (const unsigned int u) const
+	Abstract<Q,Child,T,P,N>::operator > (unsigned int u) const
 	{
 		return pValue > (T)u;
 	}
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator > (const float u) const
+	Abstract<Q,Child,T,P,N>::operator > (float u) const
 	{
 		return pValue > (T)u;
 	}
@@ -393,7 +393,7 @@ namespace Unit
 
 	template<class Q, class Child, typename T, typename P, typename N>
 	inline bool
-	Abstract<Q,Child,T,P,N>::operator > (const double u) const
+	Abstract<Q,Child,T,P,N>::operator > (double u) const
 	{
 		return pValue > (T)u;
 	}
@@ -422,7 +422,7 @@ namespace Unit
 # define YUNI_UNIT_OPERATOR_ASSIGN(OP,TYPE) \
 	template<class Q, class Child, typename T, typename P, typename N> \
 	inline Abstract<Q,Child,T,P,N>& \
-	Abstract<Q,Child,T,P,N>::operator OP (const TYPE u) \
+	Abstract<Q,Child,T,P,N>::operator OP (TYPE u) \
 	{ \
 		pValue OP (T)u; \
 		return *this; \

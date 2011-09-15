@@ -2626,9 +2626,10 @@ namespace Yuni
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
 
-		const unsigned int ptrlen = Traits::Length<StringT,Size>::Value(whitespaces);
+		const uint ptrlen = Traits::Length<StringT, uint>::Value(whitespaces);
 		if (!ptrlen || empty())
 			return;
+
 		const char* const ptr = Traits::CString<StringT>::Perform(whitespaces);
 		unsigned int i;
 		while (AncestorType::size > 0)
@@ -2660,9 +2661,10 @@ namespace Yuni
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
 
-		const unsigned int ptrlen = Traits::Length<StringT,Size>::Value(whitespaces);
+		const uint ptrlen = Traits::Length<StringT, uint>::Value(whitespaces);
 		if (!ptrlen || empty())
 			return;
+
 		const char* const ptr = Traits::CString<StringT>::Perform(whitespaces);
 		Size count = 0;
 		unsigned int i;

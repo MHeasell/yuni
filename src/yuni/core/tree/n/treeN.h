@@ -93,11 +93,11 @@ namespace Core
 	**		}
 	**
 	** protected:
-	**		virtual void printBeginWL(std::ostream& out, const unsigned int) const
+	**		virtual void printBeginWL(std::ostream& out, unsigned int) const
 	**		{
 	**			out << "<node><![CDATA[" << pValue << "]]>";
 	**		}
-	**		virtual void printBeginWL(std::ostream& out, const unsigned int) const
+	**		virtual void printBeginWL(std::ostream& out, unsigned int) const
 	**		{
 	**			out << "</node>";
 	**		}
@@ -470,7 +470,7 @@ namespace Core
 		**
 		** Should only be used for debugging purposes only
 		*/
-		std::ostream& print(std::ostream& out, const bool recursive = true, const unsigned int level = 0);
+		std::ostream& print(std::ostream& out, bool recursive = true, unsigned int level = 0);
 
 
 		//! \name Pointer management
@@ -489,9 +489,9 @@ namespace Core
 		virtual bool isInvalidatedWL() {return true;}
 
 		//! (only used for debugging)
-		virtual void printBeginWL(std::ostream& out, const unsigned int level) const;
+		virtual void printBeginWL(std::ostream& out, unsigned int level) const;
 		//! (only used for debugging)
-		virtual void printEndWL(std::ostream& out, const unsigned int level) const;
+		virtual void printEndWL(std::ostream& out, unsigned int level) const;
 
 		//! Remove all children
 		void clearWL();

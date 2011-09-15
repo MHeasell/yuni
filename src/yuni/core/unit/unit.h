@@ -140,26 +140,25 @@ namespace Unit
 	public:
 		//! \name Constructors
 		//@{
-
 		//! Default constructor
 		Abstract();
 
 		//! Constructor from a raw value
-		Abstract(const sint16 u);
+		Abstract(sint16 u);
 		//! Constructor from a raw value
-		Abstract(const sint32 u);
+		Abstract(sint32 u);
 		//! Constructor from a raw value
-		Abstract(const sint64 u);
+		Abstract(sint64 u);
 		//! Constructor from a raw value
-		Abstract(const uint16 u);
+		Abstract(uint16 u);
 		//! Constructor from a raw value
-		Abstract(const uint32 u);
+		Abstract(uint32 u);
 		//! Constructor from a raw value
-		Abstract(const uint64 u);
+		Abstract(uint64 u);
 		//! Constructor from a raw value
-		Abstract(const float u);
+		Abstract(float u);
 		//! Constructor from a raw value
-		Abstract(const double u);
+		Abstract(double u);
 
 		/*!
 		** \brief Copy Constructor (from the same unit of measurement)
@@ -214,15 +213,15 @@ namespace Unit
 		//! \name Opertor `=`
 		//@{
 		// Builtin types
-		AbstractType& operator = (const sint16 u);
-		AbstractType& operator = (const sint32 u);
-		AbstractType& operator = (const sint64 u);
-		AbstractType& operator = (const uint16 u);
-		AbstractType& operator = (const uint32 u);
-		AbstractType& operator = (const uint64 u);
-		AbstractType& operator = (const float u);
-		AbstractType& operator = (const double u);
-		AbstractType& operator = (const long double u);
+		AbstractType& operator = (sint16 u);
+		AbstractType& operator = (sint32 u);
+		AbstractType& operator = (sint64 u);
+		AbstractType& operator = (uint16 u);
+		AbstractType& operator = (uint32 u);
+		AbstractType& operator = (uint64 u);
+		AbstractType& operator = (float u);
+		AbstractType& operator = (double u);
+		AbstractType& operator = (long double u);
 		// Itself (same quantity)
 		template<typename P1>
 		AbstractType& operator = (const Abstract<Q,Child, T,P1,N>& rhs);
@@ -235,15 +234,15 @@ namespace Unit
 		//! \name Operators `+=`
 		//@{
 		// Builtin types
-		AbstractType& operator += (const sint16 u);
-		AbstractType& operator += (const sint32 u);
-		AbstractType& operator += (const sint64 u);
-		AbstractType& operator += (const uint16 u);
-		AbstractType& operator += (const uint32 u);
-		AbstractType& operator += (const uint64 u);
-		AbstractType& operator += (const float u);
-		AbstractType& operator += (const double u);
-		AbstractType& operator += (const long double u);
+		AbstractType& operator += (sint16 u);
+		AbstractType& operator += (sint32 u);
+		AbstractType& operator += (sint64 u);
+		AbstractType& operator += (uint16 u);
+		AbstractType& operator += (uint32 u);
+		AbstractType& operator += (uint64 u);
+		AbstractType& operator += (float u);
+		AbstractType& operator += (double u);
+		AbstractType& operator += (long double u);
 		// Itself (same quantity)
 		template<typename P1>
 		AbstractType& operator += (const Abstract<Q,Child, T,P1,N>& rhs);
@@ -255,15 +254,15 @@ namespace Unit
 		//! \name Operators `-=`
 		//@{
 		// Builtin types
-		AbstractType& operator -= (const sint16 u);
-		AbstractType& operator -= (const sint32 u);
-		AbstractType& operator -= (const sint64 u);
-		AbstractType& operator -= (const uint16 u);
-		AbstractType& operator -= (const uint32 u);
-		AbstractType& operator -= (const uint64 u);
-		AbstractType& operator -= (const float u);
-		AbstractType& operator -= (const double u);
-		AbstractType& operator -= (const long double u);
+		AbstractType& operator -= (sint16 u);
+		AbstractType& operator -= (sint32 u);
+		AbstractType& operator -= (sint64 u);
+		AbstractType& operator -= (uint16 u);
+		AbstractType& operator -= (uint32 u);
+		AbstractType& operator -= (uint64 u);
+		AbstractType& operator -= (float u);
+		AbstractType& operator -= (double u);
+		AbstractType& operator -= (long double u);
 		// Itself (same quantity)
 		template<typename P1>
 		AbstractType& operator -= (const Abstract<Q,Child, T,P1,N>& rhs);
@@ -275,15 +274,15 @@ namespace Unit
 		//! \name Operators `*=`
 		//@{
 		// Builtin types
-		AbstractType& operator *= (const sint16 u);
-		AbstractType& operator *= (const sint32 u);
-		AbstractType& operator *= (const sint64 u);
-		AbstractType& operator *= (const uint16 u);
-		AbstractType& operator *= (const uint32 u);
-		AbstractType& operator *= (const uint64 u);
-		AbstractType& operator *= (const float u);
-		AbstractType& operator *= (const double u);
-		AbstractType& operator *= (const long double u);
+		AbstractType& operator *= (sint16 u);
+		AbstractType& operator *= (sint32 u);
+		AbstractType& operator *= (sint64 u);
+		AbstractType& operator *= (uint16 u);
+		AbstractType& operator *= (uint32 u);
+		AbstractType& operator *= (uint64 u);
+		AbstractType& operator *= (float u);
+		AbstractType& operator *= (double u);
+		AbstractType& operator *= (long double u);
 		// Itself (same quantity)
 		template<typename P1>
 		AbstractType& operator *= (const Abstract<Q,Child, T,P1,N>& rhs);
@@ -295,15 +294,15 @@ namespace Unit
 		//! \name Operators `/=`
 		//@{
 		// Builtin types
-		AbstractType& operator /= (const sint16 u);
-		AbstractType& operator /= (const sint32 u);
-		AbstractType& operator /= (const sint64 u);
-		AbstractType& operator /= (const uint16 u);
-		AbstractType& operator /= (const uint32 u);
-		AbstractType& operator /= (const uint64 u);
-		AbstractType& operator /= (const float u);
-		AbstractType& operator /= (const double u);
-		AbstractType& operator /= (const long double u);
+		AbstractType& operator /= (sint16 u);
+		AbstractType& operator /= (sint32 u);
+		AbstractType& operator /= (sint64 u);
+		AbstractType& operator /= (uint16 u);
+		AbstractType& operator /= (uint32 u);
+		AbstractType& operator /= (uint64 u);
+		AbstractType& operator /= (float u);
+		AbstractType& operator /= (double u);
+		AbstractType& operator /= (long double u);
 		// Itself (same quantity)
 		template<typename P1>
 		AbstractType& operator /= (const Abstract<Q,Child, T,P1,N>& rhs);
@@ -315,11 +314,11 @@ namespace Unit
 		//! \name Operators `<=`
 		//@{
 		// Builtin types
-		bool operator <= (const int u) const;
-		bool operator <= (const unsigned int u) const;
-		bool operator <= (const float u) const;
-		bool operator <= (const double u) const;
-		bool operator <= (const long double u) const;
+		bool operator <= (int u) const;
+		bool operator <= (unsigned int u) const;
+		bool operator <= (float u) const;
+		bool operator <= (double u) const;
+		bool operator <= (long double u) const;
 		// Itself (same quantity)
 		template<typename P1>
 		bool operator <= (const Abstract<Q,Child, T,P1,N>& rhs) const;
@@ -331,10 +330,10 @@ namespace Unit
 		//! \name Operators `>=`
 		//@{
 		// Builtin types
-		bool operator >= (const int u) const;
-		bool operator >= (const unsigned int u) const;
-		bool operator >= (const float u) const;
-		bool operator >= (const double u) const;
+		bool operator >= (int u) const;
+		bool operator >= (unsigned int u) const;
+		bool operator >= (float u) const;
+		bool operator >= (double u) const;
 		// Itself (same quantity)
 		template<typename P1>
 		bool operator >= (const Abstract<Q,Child, T,P1,N>& rhs) const;
@@ -346,10 +345,10 @@ namespace Unit
 		//! \name Operators `<`
 		//@{
 		// Builtin types
-		bool operator < (const int u) const;
-		bool operator < (const unsigned int u) const;
-		bool operator < (const float u) const;
-		bool operator < (const double u) const;
+		bool operator < (int u) const;
+		bool operator < (unsigned int u) const;
+		bool operator < (float u) const;
+		bool operator < (double u) const;
 		// Itself (same quantity)
 		template<typename P1>
 		bool operator < (const Abstract<Q,Child, T,P1,N>& rhs) const;
@@ -361,10 +360,10 @@ namespace Unit
 		//! \name Operators `>`
 		//@{
 		// Builtin types
-		bool operator > (const int u) const;
-		bool operator > (const unsigned int u) const;
-		bool operator > (const float u) const;
-		bool operator > (const double u) const;
+		bool operator > (int u) const;
+		bool operator > (unsigned int u) const;
+		bool operator > (float u) const;
+		bool operator > (double u) const;
 		// Itself (same quantity)
 		template<typename P1>
 		bool operator > (const Abstract<Q,Child, T,P1,N>& rhs) const;
@@ -376,10 +375,10 @@ namespace Unit
 		//! \name Operators `==`
 		//@{
 		// Builtin types
-		bool operator == (const int u) const;
-		bool operator == (const unsigned int u) const;
-		bool operator == (const float u) const;
-		bool operator == (const double u) const;
+		bool operator == (int u) const;
+		bool operator == (unsigned int u) const;
+		bool operator == (float u) const;
+		bool operator == (double u) const;
 		// Itself (same quantity)
 		template<typename P1>
 		bool operator == (const Abstract<Q,Child, T,P1,N>& rhs) const;
@@ -391,10 +390,10 @@ namespace Unit
 		//! \name Operators `!=`
 		//@{
 		// Builtin types
-		bool operator != (const int u) const;
-		bool operator != (const unsigned int u) const;
-		bool operator != (const float u) const;
-		bool operator != (const double u) const;
+		bool operator != (int u) const;
+		bool operator != (unsigned int u) const;
+		bool operator != (float u) const;
+		bool operator != (double u) const;
 		// Itself (same quantity)
 		template<typename P1>
 		bool operator != (const Abstract<Q,Child, T,P1,N>& rhs) const;

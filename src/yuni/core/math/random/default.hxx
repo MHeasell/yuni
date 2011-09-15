@@ -10,7 +10,6 @@ namespace Random
 {
 
 
-
 	inline void Default::reset()
 	{
 		// Initializing the random generator with a standard seed
@@ -19,7 +18,8 @@ namespace Random
 		::rand();
 	}
 
-	inline void Default::reset(const unsigned int seed)
+
+	inline void Default::reset(unsigned int seed)
 	{
 		// Initializing the random generator with the given seed
 		::srand(seed);
@@ -27,21 +27,23 @@ namespace Random
 		::rand();
 	}
 
+
 	inline Default::Value Default::next()
 	{
 		return rand();
 	}
+
 
 	inline Default::Value Default::min()
 	{
 		return 0;
 	}
 
+
 	inline Default::Value Default::max()
 	{
 		return RAND_MAX;
 	}
-
 
 
 	template<class U>
