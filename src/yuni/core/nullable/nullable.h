@@ -12,8 +12,6 @@
 namespace Yuni
 {
 
-
-
 	/*!
 	** \brief A nullable value type
 	**
@@ -120,6 +118,7 @@ namespace Yuni
 		typedef iterator_base<false> reverse_iterator;
 		//! Const Reverse iterator
 		typedef iterator_base<true>  const_reverse_iterator;
+
 
 	public:
 		//! \name Constructors
@@ -340,10 +339,7 @@ namespace Yuni
 		//! The comparison operator
 		bool operator != (const NullPtr&) const;
 
-		bool operator < (const Nullable& rhs) const
-		{
-			return false;
-		}
+		bool operator < (const Nullable& rhs) const;
 
 		//! The operator !  (if (!value) ...)
 		bool operator ! () const;
@@ -383,19 +379,11 @@ namespace Yuni
 
 
 
+
+
 } // namespace Yuni
 
 # include "nullable.hxx"
-
-
-template<typename T, class Alloc>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Nullable<T,Alloc>& rhs)
-{
-	rhs.print(out, "(null)");
-	return out;
-}
-
-
-
+# include "extension.hxx"
 
 #endif // __YUNI_CORE_NULLABLE_NULLABLE_H__
