@@ -132,7 +132,7 @@ namespace Job
 		** \brief Execute the job
 		**
 		** In standard uses, 't' must not be NULL.
-		** \param t The thread which will execute this job
+		** \param t The thread which will execute this job (can be null)
 		*/
 		void execute(Thread::IThread* t);
 		//@}
@@ -166,7 +166,7 @@ namespace Job
 		** \return True indicates that the job should stop immediately
 		** \see IThread::suspend()
 		*/
-		bool suspend(const unsigned int delay = 0) const;
+		bool suspend(unsigned int delay = 0) const;
 
 		/*!
 		** \brief Get if the job should abort as soon as possible

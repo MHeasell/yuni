@@ -129,7 +129,7 @@ namespace EventLoop
 		**
 		** \param timeout The number of milliseconds to wait before killing the event loop
 		*/
-		void stop(const unsigned int timeout = 5000 /* 5 seconds */);
+		void stop(unsigned int timeout = 5000 /* 5 seconds */);
 
 		/*!
 		** \brief Post a new request into the queue
