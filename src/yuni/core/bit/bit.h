@@ -26,8 +26,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 namespace Bit
 {
 
@@ -56,7 +54,6 @@ namespace Bit
 
 
 } // namespace Bit
-} // namespace Core
 } // namespace Yuni
 
 # include "bit.hxx"

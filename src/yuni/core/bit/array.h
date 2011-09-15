@@ -9,8 +9,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 namespace Bit
 {
 
@@ -25,7 +23,7 @@ namespace Bit
 	**
 	**
 	** \code
-	** Core::Bit::Array bits(50);
+	** Bit::Array bits(50);
 	** std::cout << bits << "\n";
 	**
 	** bits.set(12);
@@ -52,6 +50,7 @@ namespace Bit
 			//! Invalide offset
 			npos = (unsigned int) (-1),
 		};
+
 	public:
 		//! \name Constructors & Destructor
 		//@{
@@ -262,7 +261,6 @@ namespace Bit
 
 
 } // namespace Bit
-} // namespace Core
 } // namespace Yuni
 
 # include "array.hxx"
@@ -271,7 +269,7 @@ namespace Bit
 
 //! \name Operator overload for stream printing
 //@{
-inline std::ostream& operator << (std::ostream& out, const Yuni::Core::Bit::Array& rhs)
+inline std::ostream& operator << (std::ostream& out, const Yuni::Bit::Array& rhs)
 {
 	rhs.print(out);
 	return out;
