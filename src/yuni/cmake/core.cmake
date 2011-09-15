@@ -235,6 +235,16 @@ set(SRC_CORE_TRAITS
 source_group(core\\traits FILES ${SRC_CORE_TRAITS})
 
 
+set(SRC_CORE_NULLABLE
+		core/nullable.h
+		core/nullable/nullable.h
+		core/nullable/nullable.hxx
+		core/nullable/extension.hxx
+		core/nullable/holder.h
+)
+source_group(core\\nullable FILES ${SRC_CORE_NULLABLE})
+
+
 set(SRC_CORE_EXCEPTIONS
 		core/exceptions.h
 		core/exceptions/badcast.h
@@ -747,6 +757,7 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_SYSTEM_WINDOWS}
 		${SRC_CORE_SYSTEM_CONSOLE}
 		${SRC_CORE_STRING}
+		${SRC_CORE_NULLABLE}
 		${SRC_CORE_STL} ${SRC_CORE_VALIDATOR}
 		${SRC_DATETIME}
 		${SRC_IO_FILENAME}
