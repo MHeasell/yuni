@@ -4,6 +4,8 @@
 
 #ifdef YUNI_WINDOWSYSTEM_MSW
 
+#include "../../../core/string/wstring.h"
+
 namespace Yuni
 {
 namespace Private
@@ -170,7 +172,7 @@ namespace Window
 		// We Don't Want A Menu
 		wc.lpszMenuName = nullptr;
 		// Set The Class Name
-		wc.lpszClassName = Traits::CString<String>::Perform(pWindowClassName);
+		wc.lpszClassName = L"YuniWindowClass";
 
 		// Attempt To Register The Window Class
 		if (!RegisterClassEx(&wc))
@@ -221,12 +223,12 @@ namespace Window
 		}
 
 		// Adjust window to true requested size
-		AdjustWindowRectEx(&windowRect, dwStyle, FALSE, dwExStyle);
+		AdjustWindowRectEx(&windowRect, dwStyle, false, dwExStyle);
 
 		// Create The Window
 		if (!(pHWnd = CreateWindowEx(dwExStyle,
-				Traits::CString<String>::Perform(pWindowClassName), // Class name
-				Traits::CString<String>::Perform(pCaption), // Title
+				L"YuniWindowClass", // Class name
+				Private::WString<>(pCaption), // Title
 				dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // Style
 				(int)pLeft, (int)pTop, // Window Position
 				windowRect.right - windowRect.left, windowRect.bottom - windowRect.top,

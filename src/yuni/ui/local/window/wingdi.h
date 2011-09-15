@@ -4,6 +4,7 @@
 # include "../../../yuni.h"
 
 # ifdef YUNI_WINDOWSYSTEM_MSW
+
 #	include "../../../core/system/windows.hdr.h"
 #	include "window.h"
 
@@ -147,8 +148,6 @@ namespace Window
 		static WindowList sWindowList;
 
 	protected:
-		//! MS Windows sorts its windows by "class"
-		String pWindowClassName;
 		//! Instance handle
 		HINSTANCE pHInstance;
 		//! Window handle

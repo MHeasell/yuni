@@ -32,7 +32,8 @@ namespace Local
 		if (!(pDC = GetDC(pHWnd)))
 		{
 			destroy();
-			MessageBox(NULL, "Can't create a GL device context.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, L"Can't create a GL device context.",
+				L"GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -68,14 +69,14 @@ namespace Local
 		if (!pixelFormat)
 		{
 			destroy();
-			MessageBox(NULL, "Can't find a suitable PixelFormat.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, L"Can't find a suitable PixelFormat.", L"GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 		// Are We Able To Set The Pixel Format?
 		if (!SetPixelFormat(pDC, pixelFormat, &pfd))
 		{
 			destroy();
-			MessageBox(NULL, "Can't set the PixelFormat.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, L"Can't set the PixelFormat.", L"GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -83,7 +84,7 @@ namespace Local
 		if (!(pRC = wglCreateContext(pDC)))
 		{
 			destroy();
-			MessageBox(NULL, "Can't create a GL rendering context.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, L"Can't create a GL rendering context.", L"GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -91,7 +92,7 @@ namespace Local
 		if (!wglMakeCurrent(pDC, pRC))
 		{
 			destroy();
-			MessageBox(NULL, "Can't activate the GL Rendering Context.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, L"Can't activate the GL Rendering Context.", L"GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 
@@ -109,7 +110,7 @@ namespace Local
 		if (!GLSurface::initialize())
 		{
 			destroy();
-			MessageBox(NULL, "Initialization failed.", "GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(NULL, L"Initialization failed.", L"GL Initialization Error", MB_OK | MB_ICONEXCLAMATION);
 			return false;
 		}
 		return true;
@@ -123,16 +124,16 @@ namespace Local
 		{
 			// Are We Able To Release The DC And RC Contexts?
 			if (!wglMakeCurrent(NULL, NULL))
-				MessageBox(NULL, "Release of DC and RC failed.", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+				MessageBox(NULL, L"Release of DC and RC failed.", L"SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 			// Are We Able To Delete The RC?
 			if (!wglDeleteContext(pRC))
-				MessageBox(NULL, "Release Rendering Context Failed.", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+				MessageBox(NULL, L"Release Rendering Context Failed.", L"SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 			pRC = NULL;
 		}
 		// Are We Able To Release The DC?
 		if (pDC && !ReleaseDC(pHWnd, pDC))
 		{
-			MessageBox(NULL, "Release Device Context Failed.", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+			MessageBox(NULL, L"Release Device Context Failed.", L"SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 			pDC = NULL;
 		}
 	}
