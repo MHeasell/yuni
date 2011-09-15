@@ -4,8 +4,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 namespace Bit
 {
 
@@ -244,7 +242,6 @@ namespace Bit
 
 
 } // namespace Bit
-} // namespace Core
 } // namespace Yuni
 
 #endif // __YUNI_CORE_BIT_BIT_ARRAY_HXX__

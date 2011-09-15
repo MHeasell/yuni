@@ -5,8 +5,6 @@
 
 namespace Yuni
 {
-namespace Core
-{
 namespace Bit
 {
 
@@ -19,7 +17,7 @@ namespace Bit
 			// bitmask
 			static const unsigned char mask[] = { 128, 64, 32, 16, 8, 4, 2, 1 };
 			// alias to npos
-			enum { npos = Yuni::Core::Bit::Array::npos };
+			enum { npos = Yuni::Bit::Array::npos };
 
 			for (unsigned int i = (offset >> 3); i < pBuffer.size(); ++i)
 			{
@@ -129,6 +127,5 @@ namespace Bit
 
 
 } // namespace Bit
-} // namespace Core
 } // namespace Yuni
 
