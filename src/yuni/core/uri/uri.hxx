@@ -1,13 +1,30 @@
 #ifndef __YUNI_CORE_URI_URI_HXX__
 # define __YUNI_CORE_URI_URI_HXX__
 
-
 namespace Yuni
 {
 
+	template<class StringT>
+	Uri::Uri(const StringT& s)
+	{
+		extractURIFromString(s);
+	}
 
-	inline Uri::Uri()
-	{}
+
+	template<class StringT>
+	void Uri::path(const StringT& s)
+	{
+		pInfos.path = s;
+		pInfos.isValid = true;
+	}
+
+
+	template<class StringT>
+	void Uri::user(const StringT& s)
+	{
+		pInfos.user = s;
+		pInfos.isValid = true;
+	}
 
 
 	inline void Uri::clear()
@@ -42,11 +59,14 @@ namespace Yuni
 		return pInfos.password;
 	}
 
-	inline void Uri::password(const String& s)
+
+	template<class StringT>
+	void Uri::password(const StringT& s)
 	{
 		pInfos.password = s;
 		pInfos.isValid = true;
 	}
+
 
 	inline const String& Uri::path() const
 	{
@@ -58,12 +78,23 @@ namespace Yuni
 		return pInfos.query;
 	}
 
+
+	template<class StringT>
+	void Uri::query(const StringT& s)
+	{
+		pInfos.query = s;
+		pInfos.isValid = true;
+	}
+
+
 	inline const String& Uri::fragment() const
 	{
 		return pInfos.fragment;
 	}
 
-	inline void Uri::fragment(const String& s)
+
+	template<class StringT>
+	void Uri::fragment(const StringT& s)
 	{
 		pInfos.fragment = s;
 		pInfos.isValid = true;
@@ -121,21 +152,26 @@ namespace Yuni
 		return *this;
 	}
 
-	inline Uri& Uri::operator = (const String& rhs)
+
+	template<class StringT>
+	inline Uri& Uri::operator = (const StringT& rhs)
 	{
 		extractURIFromString(rhs);
 		return *this;
 	}
+
 
 	inline bool Uri::operator == (const Uri& rhs) const
 	{
 		return pInfos.isEqualsTo(rhs.pInfos);
 	}
 
+
 	inline bool Uri::operator != (const Uri& rhs) const
 	{
 		return !((*this) == rhs);
 	}
+
 
 	inline String Uri::operator() () const
 	{
@@ -146,6 +182,22 @@ namespace Yuni
 	inline void Uri::scheme(const Net::Protocol::Type& type)
 	{
 		pInfos.scheme = Net::Protocol::ToScheme(type);
+		pInfos.isValid = true;
+	}
+
+
+	template<class StringT>
+	void Uri::server(const StringT& s)
+	{
+		pInfos.server = s;
+		pInfos.isValid = true;
+	}
+
+
+	template<class StringT>
+	void Uri::scheme(const StringT& s)
+	{
+		pInfos.scheme = s;
 		pInfos.isValid = true;
 	}
 
