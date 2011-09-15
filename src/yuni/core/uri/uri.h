@@ -10,10 +10,8 @@
 
 
 
-
 namespace Yuni
 {
-
 
 	/*!
 	** \brief Uniform resource Identifier
@@ -136,7 +134,7 @@ namespace Yuni
 		/*!
 		** \brief Constructor with a string, to directly construct the URI
 		*/
-		Uri(const String& s);
+		template<class StringT> Uri(const StringT& s);
 
 		/*!
 		** \brief Copy constructor
@@ -155,45 +153,45 @@ namespace Yuni
 		//! Scheme (lowercase)
 		const String& scheme() const;
 		//! Set the scheme
-		void scheme(const String& s);
+		template<class StringT> void scheme(const StringT& s);
 		void scheme(const Net::Protocol::Type& type);
 
 		//! Server
 		const String& server() const;
 		//! Set the server
-		void server(const String& s);
+		template<class StringT> void server(const StringT& s);
 
 		//! Port (equals to `INT_MIN` if none)
 		int port() const;
 		//! Set the port value (only if strictly positive, or equals to INT_MIN do disable it)
-		void port(const int p);
+		void port(int p);
 
 		//! User
 		const String& user() const;
 		//! Set the user
-		void user(const String& s);
+		template<class StringT> void user(const StringT& s);
 
 		//! Password
 		const String& password() const;
 		//! Set the password
-		void password(const String& s);
+		template<class StringT> void password(const StringT& s);
 
 		//! Path
 		const String& path() const;
 		//! Set the path
-		void path(const String& s);
+		template<class StringT> void path(const StringT& s);
 		//! Set a default path (`/`) if there is no path
 		void defaultPathIfEmpty();
 
 		//! Query
 		const String& query() const;
 		//! Set the query
-		void query(const String& s);
+		template<class StringT> void query(const StringT& s);
 
 		//! Fragment
 		const String& fragment() const;
 		//! Set the fragment
-		void fragment(const String& s);
+		template<class StringT> void fragment(const StringT& s);
 
 		/*!
 		** \brief Get if the URI was valid during the last extract
@@ -252,7 +250,7 @@ namespace Yuni
 		//@{
 		//! The operator =
 		Uri& operator = (const Uri& rhs);
-		Uri& operator = (const String& rhs);
+		template<class StringT> Uri& operator = (const StringT& rhs);
 
 		//! The operator ==
 		bool operator == (const Uri& rhs) const;
@@ -268,7 +266,7 @@ namespace Yuni
 		** \brief Build URI Informations from a string
 		** \param raw The string
 		*/
-		void extractURIFromString(const String& raw);
+		void extractURIFromString(const StringAdapter& raw);
 
 	private:
 		//! Structured Informations about the URI
