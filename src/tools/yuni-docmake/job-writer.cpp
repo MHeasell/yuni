@@ -25,7 +25,7 @@ namespace // anonymous
 	static std::vector<JobWriter*>  gJobList;
 	static String gTemplateContent;
 
-	
+
 
 	class XMLVisitor : public TiXmlVisitor
 	{
@@ -249,7 +249,7 @@ void JobWriter::Add(const String& input, const String& htdocs, const ArticleData
 		int articleID = DocIndex::FindArticleID(newArticle.htdocsFilename);
 
 		// All word ids for the page
-		int* wordIDs = new int[newArticle.wordCount.size()];
+		Dictionary::WordID* wordIDs = new Dictionary::WordID[newArticle.wordCount.size()];
 		float* weights = new float[newArticle.wordCount.size()];
 		int* countInArticle = new int[newArticle.wordCount.size()];
 
@@ -266,7 +266,7 @@ void JobWriter::Add(const String& input, const String& htdocs, const ArticleData
 			countInArticle[wIx] = stats.count;
 			weights[wIx] = stats.coeff;
 
-			sint64 newWordID = Dictionary::FindWordID(word);
+			Dictionary::WordID newWordID = Dictionary::FindWordID(word);
 			if (newWordID < 0)
 			{
 				Yuni::MutexLocker locker(Dictionary::mutex);

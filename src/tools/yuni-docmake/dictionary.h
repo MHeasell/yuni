@@ -12,6 +12,8 @@ namespace Dictionary
 	//! A single word
 	typedef Yuni::CString<32,false>  Word;
 
+	//! Word ID
+	typedef int  WordID;
 
 	/*!
 	** \brief Statistics for a single word
@@ -32,7 +34,7 @@ namespace Dictionary
 
 
 	//! Association between a word and its ID
-	typedef std::map<Word, int>  AllWords;
+	typedef std::map<Word, WordID>  AllWords;
 
 
 	extern Yuni::Mutex mutex;
@@ -50,7 +52,7 @@ namespace Dictionary
 	** \brief
 	** \return -1 if not found
 	*/
-	Yuni::sint64 FindWordID(const Word& word);
+	WordID FindWordID(const Word& word);
 
 
 } // namespace Dictionary

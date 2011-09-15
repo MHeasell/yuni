@@ -117,7 +117,7 @@ source_group(Audio\\Ffmpeg FILES ${SRC_AUDIO_FFMPEG})
 add_library(yuni-static-audio-core STATIC ${SRC_AUDIO_FFMPEG} ${SRC_AUDIO})
 
 # Setting output path
-set_target_properties(yuni-static-audio-core PROPERTIES 
+set_target_properties(yuni-static-audio-core PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation

@@ -55,7 +55,7 @@ namespace Yuni
 		// Stop complaining, the Windows implementation is way worse.
 		char* cstring_noconst = const_cast<char*>(cstring);
 		unsigned char* cstring_unsigned = (unsigned char*)(cstring_noconst);
-		return RPC_S_OK == ::UuidFromString(cstring_unsigned, (::GUID*)pValue.cstring);
+		return RPC_S_OK == ::UuidFromStringA(cstring_unsigned, (::GUID*)pValue.cstring);
 		# endif
 	}
 

@@ -18,7 +18,7 @@ namespace Dictionary
 
 
 
-	Yuni::sint64 FindWordID(const Word& word)
+	WordID FindWordID(const Word& word)
 	{
 		Yuni::MutexLocker locker(mutex);
 		const AllWords::const_iterator it = allWords.find(word);
@@ -53,7 +53,7 @@ namespace Dictionary
 			{
 				const StringAdapter sid  = result[y++];
 				const Word term = result[y++];
-				allWords[term] = sid.to<sint64>();
+				allWords[term] = sid.to<WordID>();
 			}
 		}
 		sqlite3_free_table(result);
