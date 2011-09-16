@@ -246,8 +246,6 @@ namespace Job
 								if (member.isConst)
 									out << " <span class=\"keyword\">const</span>";
 								out << ';';
-								if (member.isInline)
-									out << " [inline]";
 								break;
 							}
 						case kdTypedef:
