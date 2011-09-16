@@ -368,7 +368,7 @@ namespace Yuni
 
 
 	template<class T, class Alloc>
-	inline bool Nullable<T,Alloc>:operator < (const Nullable& rhs) const
+	inline bool Nullable<T,Alloc>::operator < (const Nullable& rhs) const
 	{
 		return false;
 	}
