@@ -15,20 +15,20 @@ namespace DateTime
 	static unsigned int FormatString(char* buffer, unsigned int size, const char* format, sint64 timestamp)
 	{
 		assert(format && '\0' != *format && "invalid format");
-		
+
 		unsigned int written;
 
 		// Note that unlike on (all?) POSIX systems, in the Microsoft
-		// C library locatime() and gmtime() are multi-thread-safe, as the
+		// C library localtime() and gmtime() are multi-thread-safe, as the
 		// returned pointer points to a thread-local variable. So there is no
 		// need for localtime_r() and gmtime_r().
 
-		// \note The variable stdtimestamp is used t ensure the compilation on
+		// \note The variable stdtimestamp is used to ensure the compilation on
 		//  32bits platforms
 
 		# ifdef YUNI_OS_MINGW
 		// MinGW
-		time_t stdtimestamp = timestamp;
+		time_t stdtimestamp = static_cast<time_t>(timestamp);
 		written = (unsigned int)::strftime(buffer, size, format, ::localtime(&stdtimestamp));
 		# else
 		struct tm timeinfo;
@@ -38,7 +38,7 @@ namespace DateTime
 		written = (unsigned int)::strftime(buffer, size, format, &timeinfo);
 		#	else
 		// Unixes
-		time_t stdtimestamp = timestamp;
+		time_t stdtimestamp = static_cast<time_t>(timestamp);
 		::localtime_r(&stdtimestamp, &timeinfo);
 		written = (unsigned int)::strftime(buffer, size, format, &timeinfo);
 		#	endif
