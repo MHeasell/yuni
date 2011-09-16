@@ -4,7 +4,7 @@
 #include "commons.h"
 #include "../file.h"
 #ifdef YUNI_OS_WINDOWS
-# include "../core/string/wstring.h"
+# include "../../core/string/wstring.h"
 #endif
 
 
