@@ -13,7 +13,7 @@ namespace Yuni
 {
 
 	/*!
-	** \brief A linked list
+	** \brief A singly linked list
 	*/
 	template<class T, class Alloc = None>
 	class LinkedList
@@ -21,7 +21,7 @@ namespace Yuni
 	public:
 		//! Size type
 		typedef unsigned int Size;
-		//! Size tpye (STL compliant)
+		//! Size type (STL compliant)
 		typedef Size size_type;
 
 		//! Value type
@@ -52,7 +52,7 @@ namespace Yuni
 		enum
 		{
 			/*!
-			** \brief A non-zero value to base the comparison between values on a deferenced pointer
+			** \brief Indicates whether to base the comparison between values on a dereferenced pointer
 			**
 			** \internal This check is used when the type T is a reference
 			*/
@@ -86,7 +86,7 @@ namespace Yuni
 		template<class U, class A> explicit LinkedList(const std::list<U,A>& rhs);
 
 		/*!
-		** \brief Copy Constructor from a standard std::vector
+		** \brief Copy constructor from a standard std::vector
 		*/
 		template<class U, class A> explicit LinkedList(const std::vector<U,A>& rhs);
 
@@ -98,18 +98,18 @@ namespace Yuni
 		//! \name Iterators & Accessors
 		//@{
 		/*!
-		** \brief Get an iterator at the begining of the list
+		** \brief Get an iterator at the beginning of the list
 		*/
 		iterator begin();
 		const_iterator begin() const;
 
 		/*!
-		** \brief Get an iterator at the enf of the list
+		** \brief Get an iterator at the end of the list
 		*/
 		iterator end();
 		const_iterator end() const;
 
-		//! Get the front item
+		//! Get the first item
 		reference_type front();
 		const_reference_type front() const;
 
@@ -122,7 +122,7 @@ namespace Yuni
 		//! \name Find
 		//@{
 		/*!
-		** \brief Get the first item equals to a given value
+		** \brief Get the first item equal to a given value
 		**
 		** \param value The value to look for
 		** \return An iterator to the item found
@@ -131,7 +131,7 @@ namespace Yuni
 		iterator find(const_reference_type value);
 
 		/*!
-		** \brief Get the first item equals to a given value
+		** \brief Get the first item equal to a given value
 		**
 		** \param value The value to look for
 		** \return An iterator to the item found
@@ -166,7 +166,7 @@ namespace Yuni
 		template<class U, class A> void push_back(const std::vector<U,A>& rhs);
 
 		/*!
-		** \brief Add a value at the begining of the list (default constructor)
+		** \brief Add a value at the beginning of the list (default constructor)
 		*/
 		void push_front();
 		/*!
@@ -176,15 +176,15 @@ namespace Yuni
 		void push_front(reference_type value);
 
 		/*!
-		** \brief Add a list of values at the begining of the list
+		** \brief Add a list of values at the beginning of the list
 		*/
 		template<class U, class A> void push_front(const LinkedList<U,A>& rhs);
 		/*!
-		** \brief Add a list of values at the begining of the list
+		** \brief Add a list of values at the beginning of the list
 		*/
 		template<class U, class A> void push_front(const std::list<U,A>& rhs);
 		/*!
-		** \brief Add a list of values at the begining of the list
+		** \brief Add a list of values at the beginning of the list
 		*/
 		template<class U, class A> void push_front(const std::vector<U,A>& rhs);
 
@@ -198,12 +198,12 @@ namespace Yuni
 		//! \name Remove
 		//@{
 		/*!
-		** \brief Remove the item pointed by the iterator
+		** \brief Remove the item pointed to by the iterator
 		*/
 		void erase(iterator& i);
 
 		/*!
-		** \brief Remove any item equals to a given value
+		** \brief Remove any item equal to a given value
 		**
 		** \code
 		** Yuni::LinkedList<int> list;
@@ -236,7 +236,7 @@ namespace Yuni
 		Size remove(reference_type value);
 
 		/*!
-		** \brief Remove any item equals to a value in the given list
+		** \brief Remove any item equal to a value in the given list
 		**
 		** \param list A list of value to look for
 		** \return The number of items that have been removed
@@ -244,7 +244,7 @@ namespace Yuni
 		template<class U, class A> Size remove(const LinkedList<U,A>& rhs);
 
 		/*!
-		** \brief Remove any item equals to a value in the given list
+		** \brief Remove any item equal to a value in the given list
 		**
 		** \param list A list of value to look for
 		** \return The number of items that have been removed
@@ -252,7 +252,7 @@ namespace Yuni
 		template<class U, class A> Size remove(const std::list<U,A>& rhs);
 
 		/*!
-		** \brief Remove any item equals to a value in the given list
+		** \brief Remove any item equal to a value in the given list
 		**
 		** \param list A list of value to look for
 		** \return The number of items that have been removed
@@ -270,13 +270,13 @@ namespace Yuni
 		//@{
 		/*!
 		** \brief Get if the container is empty
-		** \return True if the contrainer is empty, false otherwise
+		** \return True if the container is empty, false otherwise
 		*/
 		bool empty() const;
 
 		/*!
 		** \brief Get if the container is not empty
-		** \return True if the contrainer is not empty, false otherwise
+		** \return True if the container is not empty, false otherwise
 		*/
 		bool notEmpty() const;
 
@@ -312,7 +312,7 @@ namespace Yuni
 		template<class U> LinkedList& operator << (const U& value);
 
 		/*!
-		** \brief Remove all items equals to 'value'
+		** \brief Remove all items equal to 'value'
 		**
 		** \param value The value to look for
 		** \return Always *this
@@ -323,7 +323,7 @@ namespace Yuni
 		** \brief Check if the container is empty
 		**
 		** This operator is strictly equivalent to the method 'empty()'
-		** \return True if the contrainer is empty, false otherwise
+		** \return True if the container is empty, false otherwise
 		*/
 		bool operator ! () const;
 		//@}
@@ -369,7 +369,7 @@ namespace Yuni
 		void doClear();
 
 	protected:
-		//! The Head of the list
+		//! The head of the list
 		Item* pHead;
 		//! The last item in the list
 		Item* pLast;
