@@ -10,9 +10,9 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">Perform</a></span>(StringT<b>&amp;</b> s, const IteratorT<b>&amp;</b> begin, const IteratorT2<b>&amp;</b> end); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 , class SeparatorT &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">Perform</a></span>(StringT<b>&amp;</b> s, const IteratorT<b>&amp;</b> begin, const IteratorT2<b>&amp;</b> end, const SeparatorT<b>&amp;</b> separator); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 , class SeparatorT , class EnclosureT &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">Perform</a></span>(StringT<b>&amp;</b> s, const IteratorT<b>&amp;</b> begin, const IteratorT2<b>&amp;</b> end, const SeparatorT<b>&amp;</b> separator, const EnclosureT<b>&amp;</b> enclosure); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">Perform</a></span>(StringT<b>&amp;</b> s, const IteratorT<b>&amp;</b> begin, const IteratorT2<b>&amp;</b> end);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 , class SeparatorT &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">Perform</a></span>(StringT<b>&amp;</b> s, const IteratorT<b>&amp;</b> begin, const IteratorT2<b>&amp;</b> end, const SeparatorT<b>&amp;</b> separator);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 , class SeparatorT , class EnclosureT &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">Perform</a></span>(StringT<b>&amp;</b> s, const IteratorT<b>&amp;</b> begin, const IteratorT2<b>&amp;</b> end, const SeparatorT<b>&amp;</b> separator, const EnclosureT<b>&amp;</b> enclosure);</code></p>
 </td></tr>
 </table>
 

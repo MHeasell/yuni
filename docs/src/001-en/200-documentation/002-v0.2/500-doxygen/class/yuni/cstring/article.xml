@@ -24,24 +24,24 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">CString comparison</h3>
 <p class="doxygen_fun">Compare two string like strcmp()<br />
-<code><span class="keyword">static</span> int <span class="method"><a href="#">Compare</a></span>(const char<b>*</b>const s1, unsigned int l1, const char<b>*</b>const s2, unsigned int l2); [inline]</code></p>
+<code><span class="keyword">static</span> int <span class="method"><a href="#">Compare</a></span>(const char<b>*</b>const s1, unsigned int l1, const char<b>*</b>const s2, unsigned int l2);</code></p>
 <p class="doxygen_fun">Compare two string like strcmp() (insensitive)<br />
-<code><span class="keyword">static</span> int <span class="method"><a href="#">CompareInsensitive</a></span>(const char<b>*</b>const s1, unsigned int l1, const char<b>*</b>const s2, unsigned int l2); [inline]</code></p>
+<code><span class="keyword">static</span> int <span class="method"><a href="#">CompareInsensitive</a></span>(const char<b>*</b>const s1, unsigned int l1, const char<b>*</b>const s2, unsigned int l2);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Faster implementation of some commons routines</h3>
 <p class="doxygen_fun">Upper case to lower case letter conversion (man 3 tolower)<br />
-<code><span class="keyword">static</span> int <span class="method"><a href="#">ToLower</a></span>(int c); [inline]</code></p>
+<code><span class="keyword">static</span> int <span class="method"><a href="#">ToLower</a></span>(int c);</code></p>
 <p class="doxygen_fun">Lower case to upper case letter conversion (man 3 toupper)<br />
-<code><span class="keyword">static</span> int <span class="method"><a href="#">ToUpper</a></span>(int c); [inline]</code></p>
+<code><span class="keyword">static</span> int <span class="method"><a href="#">ToUpper</a></span>(int c);</code></p>
 <p class="doxygen_fun">White-space character test.<br />
-<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsSpace</a></span>(int c); [inline]</code></p>
+<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsSpace</a></span>(int c);</code></p>
 <p class="doxygen_fun">decimal-digit character test<br />
-<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsDigit</a></span>(int c); [inline]</code></p>
+<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsDigit</a></span>(int c);</code></p>
 <p class="doxygen_fun">decimal-digit character test (without zero)<br />
-<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsDigitNonZero</a></span>(int c); [inline]</code></p>
+<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsDigitNonZero</a></span>(int c);</code></p>
 <p class="doxygen_fun">alphabetic character test<br />
-<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsAlpha</a></span>(int c); [inline]</code></p>
+<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsAlpha</a></span>(int c);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Iterators</h3>
@@ -56,21 +56,21 @@
 <p class="doxygen_typedef">Null iterator.<br />
 <code><span class="keyword">typedef</span> IIterator &lt; typename Model::NullIterator , true &gt; <span class="method"><a href="#">null_iterator</a></span>;</code></p>
 <p class="doxygen_fun">Get an iterator on UTF8 characters pointing to the beginning of the string.<br />
-<code>utf8iterator <span class="method"><a href="#">utf8begin</a></span>(); [inline]</code></p>
+<code>utf8iterator <span class="method"><a href="#">utf8begin</a></span>();</code></p>
 <p class="doxygen_fun">Get an iterator on UTF8 characters pointing to the beginning of the string.<br />
-<code>const_utf8iterator <span class="method"><a href="#">utf8begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const_utf8iterator <span class="method"><a href="#">utf8begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get an iterator on UTF8 characters pointing to the end of the string.<br />
-<code>null_iterator <span class="method"><a href="#">utf8end</a></span>(); [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">utf8end</a></span>();</code></p>
 <p class="doxygen_fun">Get an iterator on UTF8 characters pointing to the end of the string.<br />
-<code>null_iterator <span class="method"><a href="#">utf8end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">utf8end</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get an iterator pointing to the beginning of the string.<br />
-<code>iterator <span class="method"><a href="#">begin</a></span>(); [inline]</code></p>
+<code>iterator <span class="method"><a href="#">begin</a></span>();</code></p>
 <p class="doxygen_fun">Get an iterator pointing to the beginning of the string.<br />
-<code>const_iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const_iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get an iterator pointing to the end of the string.<br />
-<code>null_iterator <span class="method"><a href="#">end</a></span>(); [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">end</a></span>();</code></p>
 <p class="doxygen_fun">Get an iterator pointing to the end of the string.<br />
-<code>null_iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
@@ -99,42 +99,42 @@
 <p class="doxygen_fun">Construct a string formed by a repetition of the character c, n times.<br />
 <code> <span class="method"><a href="#">CString</a></span>(size_t n, unsigned char c);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>CString</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>CString</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Append / Assign / Fill</h3>
 <p class="doxygen_fun">Assign a new value to the string.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">assign</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">assign</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Copy a raw C-String.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const StringT<b>&amp;</b> str, const Size size);</code></p>
 <p class="doxygen_fun">Copy a raw C-String.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const StringT<b>&amp;</b> str, const Size size, const Size offset);</code></p>
 <p class="doxygen_fun">Assign to the string all items within.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2&gt;<br />void <span class="method"><a href="#">assign</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2&gt;<br />void <span class="method"><a href="#">assign</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end);</code></p>
 <p class="doxygen_fun">Assign to the string all items within.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator);</code></p>
 <p class="doxygen_fun">Assign to thestring all items within.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT , class EnclosureT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator, const EnclosureT<b>&amp;</b> enclosure); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT , class EnclosureT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator, const EnclosureT<b>&amp;</b> enclosure);</code></p>
 <p class="doxygen_fun">Append to the end of the string a new value.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">append</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">append</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Append to the end of the string all items within.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2&gt;<br />void <span class="method"><a href="#">append</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2&gt;<br />void <span class="method"><a href="#">append</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end);</code></p>
 <p class="doxygen_fun">Append to the end of the string all items within.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator);</code></p>
 <p class="doxygen_fun">Append to the end of the string all items within a range.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT , class EnclosureT &gt;<br />void <span class="method"><a href="#">append</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator, const EnclosureT<b>&amp;</b> enclosure); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class ModelT2 , bool ConstT2, class StringT , class EnclosureT &gt;<br />void <span class="method"><a href="#">append</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> begin, const IIterator &lt; ModelT2, ConstT2 &gt;<b>&amp;</b> end, const StringT<b>&amp;</b> separator, const EnclosureT<b>&amp;</b> enclosure);</code></p>
 <p class="doxygen_fun">Append to the end of the string a new value.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const StringT<b>&amp;</b> s, const Size size);</code></p>
 <p class="doxygen_fun">Append to the end of the string a new value.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const StringT<b>&amp;</b> s, const Size size, const Size offset);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">write</a></span>(const U<b>&amp;</b> cstr); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">write</a></span>(const U<b>&amp;</b> cstr, const Size size); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">write</a></span>(const U<b>&amp;</b> cstr);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">write</a></span>(const U<b>&amp;</b> cstr, const Size size);</code></p>
 <p class="doxygen_fun">Append a single signed char.<br />
-<code>void <span class="method"><a href="#">put</a></span>(const char c); [inline]</code></p>
+<code>void <span class="method"><a href="#">put</a></span>(const char c);</code></p>
 <p class="doxygen_fun">Append a single unsigned char.<br />
-<code>void <span class="method"><a href="#">put</a></span>(const unsigned char c); [inline]</code></p>
+<code>void <span class="method"><a href="#">put</a></span>(const unsigned char c);</code></p>
 <p class="doxygen_fun">Assign a new value to the string.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">put</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">put</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Insert a raw C-String at a given position in the string.<br />
 <code>bool <span class="method"><a href="#">insert</a></span>(const Size offset, const char<b>*</b>const cstr, const Size size);</code></p>
 <p class="doxygen_fun">Insert a single item at a given position in the string.<br />
@@ -144,35 +144,35 @@
 <p class="doxygen_fun">Insert an arbitrary C-String at a given position in the string.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">insert</a></span>(const Size offset, const StringT<b>&amp;</b> u, const Size size);</code></p>
 <p class="doxygen_fun">Insert any arbitrary string at a given offset provided by an iterator.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class StringT &gt;<br />void <span class="method"><a href="#">insert</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> it, const StringT<b>&amp;</b> string); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT, class StringT &gt;<br />void <span class="method"><a href="#">insert</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> it, const StringT<b>&amp;</b> string);</code></p>
 <p class="doxygen_fun">Insert a raw C-String at the beginning of in the string.<br />
 <code>bool <span class="method"><a href="#">prepend</a></span>(const char<b>*</b>const cstr, const Size size);</code></p>
 <p class="doxygen_fun">Insert a single item at the beginning of the string.<br />
-<code>bool <span class="method"><a href="#">prepend</a></span>(const char c); [inline]</code></p>
+<code>bool <span class="method"><a href="#">prepend</a></span>(const char c);</code></p>
 <p class="doxygen_fun">Insert an arbitrary C-String at the beginning of the string.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">prepend</a></span>(const StringT<b>&amp;</b> s); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">prepend</a></span>(const StringT<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun">Insert an arbitrary C-String at the beginning the string.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">prepend</a></span>(const StringT<b>&amp;</b> u, const Size size);</code></p>
 <p class="doxygen_fun">Overwrite a region of the string.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwrite</a></span>(const Size offset, const StringT<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun">Overwrite a region of the string.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwrite</a></span>(const StringT<b>&amp;</b> s); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwrite</a></span>(const StringT<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun">Overwrite a region of the string.<br />
 <code>void <span class="method"><a href="#">overwrite</a></span>(const Size offset, const char<b>*</b>const cstr, const Size size);</code></p>
 <p class="doxygen_fun">Overwrite a region of the string from the right of the string.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwriteRight</a></span>(const StringT<b>&amp;</b> s); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwriteRight</a></span>(const StringT<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun">Overwrite a region of the string from the right of the string.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwriteRight</a></span>(const Size offset, const StringT<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun">Overwrite a region of the string from the center of the string.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwriteCenter</a></span>(const StringT<b>&amp;</b> s); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwriteCenter</a></span>(const StringT<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun">Fill the entire string with a given pattern.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">fill</a></span>(const StringT<b>&amp;</b> pattern);</code></p>
 <p class="doxygen_fun">Fill the entire string with a given pattern from a given offset.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">fill</a></span>(Size offset, const StringT<b>&amp;</b> pattern);</code></p>
 <p class="doxygen_fun">Equivalent to append()<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">push_back</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">push_back</a></span>(const U<b>&amp;</b> u);</code></p>
 <p class="doxygen_fun">Equivalent to prepend()<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">push_front</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">push_front</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Search / Replace</h3>
@@ -195,7 +195,7 @@
 <p class="doxygen_fun">Find the offset of a raw sub-string with a given length (in bytes)<br />
 <code>Size <span class="method"><a href="#">find</a></span>(const char<b>*</b>const cstr, Size offset, Size len) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of any supported CString .<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">find</a></span>(const StringT<b>&amp;</b> s, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">find</a></span>(const StringT<b>&amp;</b> s, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of a sub-string (ignoring the case)<br />
 <code>Size <span class="method"><a href="#">ifind</a></span>(char c) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of a sub-string (ignoring the case)<br />
@@ -203,7 +203,7 @@
 <p class="doxygen_fun">Find the offset of a raw sub-string with a given length (in bytes) (ignoring the case)<br />
 <code>Size <span class="method"><a href="#">ifind</a></span>(const char<b>*</b>const cstr, Size offset, Size len) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of any supported CString (ignoring the case)<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">ifind</a></span>(const StringT<b>&amp;</b> s, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">ifind</a></span>(const StringT<b>&amp;</b> s, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of a sub-string.<br />
 <code>Size <span class="method"><a href="#">rfind</a></span>(char c) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of a sub-string.<br />
@@ -211,7 +211,7 @@
 <p class="doxygen_fun">Find the offset of a raw sub-string with a given length (in bytes)<br />
 <code>Size <span class="method"><a href="#">rfind</a></span>(const char<b>*</b>const cstr, Size offset, Size len) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of any supported CString .<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">rfind</a></span>(const StringT<b>&amp;</b> s, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">rfind</a></span>(const StringT<b>&amp;</b> s, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of a sub-string (ignoring the case)<br />
 <code>Size <span class="method"><a href="#">irfind</a></span>(char c) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of a sub-string (ignoring the case)<br />
@@ -219,7 +219,7 @@
 <p class="doxygen_fun">Find the offset of a raw sub-string with a given length (in bytes) (ignoring the case)<br />
 <code>Size <span class="method"><a href="#">irfind</a></span>(const char<b>*</b>const cstr, Size offset, Size len) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the offset of any supported CString (ignoring the case)<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">irfind</a></span>(const StringT<b>&amp;</b> s, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">irfind</a></span>(const StringT<b>&amp;</b> s, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the string contains at least one occurence of a given char.<br />
 <code>bool <span class="method"><a href="#">hasChar</a></span>(char c) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the string contains at least one occurence of a given unsigned char.<br />
@@ -235,73 +235,73 @@
 <p class="doxygen_fun">Find the offset of any supported CString from the left.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">indexOf</a></span>(Size offset, const StringT<b>&amp;</b> s) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string for an individual character.<br />
-<code>Size <span class="method"><a href="#">find_first_of</a></span>(char c, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">find_first_of</a></span>(char c, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string for an individual character (case insensitive)<br />
-<code>Size <span class="method"><a href="#">ifind_first_of</a></span>(char c, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">ifind_first_of</a></span>(char c, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string for any of the characters that are part of `seq`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">find_first_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">find_first_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string for any of the characters that are part of `seq` (ignoring the case)<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">ifind_first_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">ifind_first_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string for the first character that is not `c`.<br />
-<code>Size <span class="method"><a href="#">find_first_not_of</a></span>(char c, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">find_first_not_of</a></span>(char c, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string for the first character that is not `c` (case insensitive)<br />
-<code>Size <span class="method"><a href="#">ifind_first_not_of</a></span>(char c, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">ifind_first_not_of</a></span>(char c, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string for any of the characters that are not part of `seq`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">find_first_not_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">find_first_not_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string for any of the characters that are not part of `seq` (case insensitive)<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">ifind_first_not_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">ifind_first_not_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string from the end for an individual character.<br />
-<code>Size <span class="method"><a href="#">find_last_of</a></span>(char c) <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">find_last_of</a></span>(char c) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string from the end for an individual character (ignoring the case)<br />
-<code>Size <span class="method"><a href="#">ifind_last_of</a></span>(char c) <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">ifind_last_of</a></span>(char c) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string from the end for an individual character.<br />
-<code>Size <span class="method"><a href="#">find_last_of</a></span>(char c, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">find_last_of</a></span>(char c, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string from the end for any of the characters that are part of `seq`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">find_last_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">find_last_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Searches the string from the end for any of the characters that are part of `seq` (ignoring the case)<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">ifind_last_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Size <span class="method"><a href="#">ifind_last_of</a></span>(const StringT<b>&amp;</b> seq, Size offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the beginning.<br />
 <code>bool <span class="method"><a href="#">startsWith</a></span>(const char<b>*</b>const cstr, const Size len) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the beginning.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">startsWith</a></span>(const StringT<b>&amp;</b> s) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">startsWith</a></span>(const StringT<b>&amp;</b> s) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given char can be found at the beginning.<br />
-<code>bool <span class="method"><a href="#">startsWith</a></span>(char c) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">startsWith</a></span>(char c) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the beginning (case insensitive)<br />
 <code>bool <span class="method"><a href="#">istartsWith</a></span>(const char<b>*</b>const cstr, const Size len) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the beginning (case insensitive)<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">istartsWith</a></span>(const StringT<b>&amp;</b> s) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">istartsWith</a></span>(const StringT<b>&amp;</b> s) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given char can be found at the beginning (case insensitive)<br />
-<code>bool <span class="method"><a href="#">istartsWith</a></span>(char c) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">istartsWith</a></span>(char c) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the end.<br />
 <code>bool <span class="method"><a href="#">endsWith</a></span>(const char<b>*</b>const cstr, const Size len) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the end.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">endsWith</a></span>(const StringT<b>&amp;</b> s) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">endsWith</a></span>(const StringT<b>&amp;</b> s) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the end.<br />
-<code>bool <span class="method"><a href="#">endsWith</a></span>(char c) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">endsWith</a></span>(char c) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the end (case insensitive)<br />
 <code>bool <span class="method"><a href="#">iendsWith</a></span>(const char<b>*</b>const cstr, const Size len) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the end (case insensitive)<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">iendsWith</a></span>(const StringT<b>&amp;</b> s) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">iendsWith</a></span>(const StringT<b>&amp;</b> s) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a given string can be found at the end (case insensitive)<br />
-<code>bool <span class="method"><a href="#">iendsWith</a></span>(char c) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">iendsWith</a></span>(char c) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Public</h3>
 <p class="doxygen_fun">Erase.<br />
-<code>void <span class="method"><a href="#">chop</a></span>(unsigned int n); [inline]</code></p>
+<code>void <span class="method"><a href="#">chop</a></span>(unsigned int n);</code></p>
 <p class="doxygen_fun">Remove the last char.<br />
-<code>void <span class="method"><a href="#">removeLast</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">removeLast</a></span>();</code></p>
 <p class="doxygen_fun">Remove the trailing slash or backslash at the end of the string (if any)<br />
-<code>void <span class="method"><a href="#">removeTrailingSlash</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">removeTrailingSlash</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Trimming</h3>
 <p class="doxygen_fun">Remove all white-spaces (" \t\r\n") from the beginning and the end of the string.<br />
-<code>void <span class="method"><a href="#">trim</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">trim</a></span>();</code></p>
 <p class="doxygen_fun">Remove all white-spaces from the beginning and the end of the string.<br />
-<code>void <span class="method"><a href="#">trim</a></span>(const char c); [inline]</code></p>
+<code>void <span class="method"><a href="#">trim</a></span>(const char c);</code></p>
 <p class="doxygen_fun">Removes all items equal to one of those in 'whitespaces' from the end of the string.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">trim</a></span>(const StringT<b>&amp;</b> whitespaces); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">trim</a></span>(const StringT<b>&amp;</b> whitespaces);</code></p>
 <p class="doxygen_fun">Removes all items equal to one of those in 'u' from the end of the string.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">trimRight</a></span>(const StringT<b>&amp;</b> whitespaces);</code></p>
 <p class="doxygen_fun">Remove all items equal to 'c' from the end of the string.<br />
@@ -314,25 +314,25 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Remove / Erase</h3>
 <p class="doxygen_fun">Empty the string.<br />
-<code>CString &amp; <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
+<code>CString &amp; <span class="method"><a href="#">clear</a></span>();</code></p>
 <p class="doxygen_fun">Erase a part of the string.<br />
 <code>void <span class="method"><a href="#">erase</a></span>(const Size offset, const Size len);</code></p>
 <p class="doxygen_fun">Erase a part of the string.<br />
-<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT&gt;<br />void <span class="method"><a href="#">erase</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> offset, const Size len); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class ModelT , bool ConstT&gt;<br />void <span class="method"><a href="#">erase</a></span>(const IIterator &lt; ModelT, ConstT &gt;<b>&amp;</b> offset, const Size len);</code></p>
 <p class="doxygen_fun">Replace all occurrences of a string by another one.<br />
-<code><span class="keyword">template</span>&lt;class StringT1 , class StringT2 &gt;<br />void <span class="method"><a href="#">replace</a></span>(const StringT1<b>&amp;</b> from, const StringT2<b>&amp;</b> to); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT1 , class StringT2 &gt;<br />void <span class="method"><a href="#">replace</a></span>(const StringT1<b>&amp;</b> from, const StringT2<b>&amp;</b> to);</code></p>
 <p class="doxygen_fun">Replace all occurrences of a string by another one.<br />
 <code><span class="keyword">template</span>&lt;class StringT1 , class StringT2 &gt;<br />void <span class="method"><a href="#">replace</a></span>(Size offset, const StringT1<b>&amp;</b> from, const StringT2<b>&amp;</b> to);</code></p>
 <p class="doxygen_fun">Replace all occurrences of a given char by another one.<br />
-<code>void <span class="method"><a href="#">replace</a></span>(char from, char to); [inline]</code></p>
+<code>void <span class="method"><a href="#">replace</a></span>(char from, char to);</code></p>
 <p class="doxygen_fun">Replace all occurrences of a given char by another one.<br />
-<code>void <span class="method"><a href="#">replace</a></span>(Size offset, char from, char to); [inline]</code></p>
+<code>void <span class="method"><a href="#">replace</a></span>(Size offset, char from, char to);</code></p>
 <p class="doxygen_fun">Replace all occurrences of a given char by another one (case insensitive)<br />
-<code>void <span class="method"><a href="#">ireplace</a></span>(char from, char to); [inline]</code></p>
+<code>void <span class="method"><a href="#">ireplace</a></span>(char from, char to);</code></p>
 <p class="doxygen_fun">Replace all occurrences of a given char by another one (case insensitive)<br />
-<code>void <span class="method"><a href="#">ireplace</a></span>(Size offset, char from, char to); [inline]</code></p>
+<code>void <span class="method"><a href="#">ireplace</a></span>(Size offset, char from, char to);</code></p>
 <p class="doxygen_fun">Replace all occurrences of a string by another one (case insensitive)<br />
-<code><span class="keyword">template</span>&lt;class StringT1 , class StringT2 &gt;<br />void <span class="method"><a href="#">ireplace</a></span>(const StringT1<b>&amp;</b> from, const StringT2<b>&amp;</b> to); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT1 , class StringT2 &gt;<br />void <span class="method"><a href="#">ireplace</a></span>(const StringT1<b>&amp;</b> from, const StringT2<b>&amp;</b> to);</code></p>
 <p class="doxygen_fun">Replace all occurrences of a string by another one (case insensitive)<br />
 <code><span class="keyword">template</span>&lt;class StringT1 , class StringT2 &gt;<br />void <span class="method"><a href="#">ireplace</a></span>(Size offset, const StringT1<b>&amp;</b> from, const StringT2<b>&amp;</b> to);</code></p>
 <p class="doxygen_fun">Remove the 'n' first characters.<br />
@@ -348,20 +348,20 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Comparisons</h3>
 <p class="doxygen_fun">Get if the string is equals to another one.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the string is equals to another one (ignoring case)<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">equalsInsensitive</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">equalsInsensitive</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Compare the string with another one.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />int <span class="method"><a href="#">compare</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />int <span class="method"><a href="#">compare</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Compare the string with another one (ignoring the case)<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />int <span class="method"><a href="#">compareInsensitive</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />int <span class="method"><a href="#">compareInsensitive</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Conversions</h3>
 <p class="doxygen_fun">Convert the string into something else.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />U <span class="method"><a href="#">to</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />U <span class="method"><a href="#">to</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Convert the string into something else.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">to</a></span>(U<b>&amp;</b> out) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">to</a></span>(U<b>&amp;</b> out) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Iterating through the string</h3>
@@ -381,36 +381,36 @@
 <p class="doxygen_fun">Resize the string to 'len' bytes and fill the new content (if any)<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">resize</a></span>(const Size len, const StringT<b>&amp;</b> pattern);</code></p>
 <p class="doxygen_fun">Releases any memory not required to store the character data.<br />
-<code>void <span class="method"><a href="#">shrink</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">shrink</a></span>();</code></p>
 <p class="doxygen_fun">Perform a full check about UTF8 validity.<br />
-<code>bool <span class="method"><a href="#">utf8valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">utf8valid</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Perform a full check about UTF8 validity.<br />
 <code>UTF8::Error <span class="method"><a href="#">utf8valid</a></span>(Size<b>&amp;</b> offset) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Perform a fast check about UTF8 validity.<br />
 <code>bool <span class="method"><a href="#">utf8validFast</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Compute the number of UTF-8 characters.<br />
-<code>Size <span class="method"><a href="#">utf8size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">utf8size</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the current size of the string (in bytes)<br />
-<code>Size <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>Size <span class="method"><a href="#">length</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>size_t <span class="method"><a href="#">sizeInBytes</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>Size <span class="method"><a href="#">length</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>size_t <span class="method"><a href="#">sizeInBytes</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">the maximum number of characters that the string object can hold (for STL compliance)<br />
-<code>size_t <span class="method"><a href="#">max_size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>size_t <span class="method"><a href="#">max_size</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the cstr is empty.<br />
-<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the cstr is null.<br />
-<code>bool <span class="method"><a href="#">null</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">null</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the string is not empty (the exact opposite of `empty()`)<br />
-<code>bool <span class="method"><a href="#">notEmpty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">notEmpty</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the current capacity of the string (in bytes)<br />
-<code>Size <span class="method"><a href="#">capacity</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>size_t <span class="method"><a href="#">capacityInBytes</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">capacity</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>size_t <span class="method"><a href="#">capacityInBytes</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">A pointer to the original cstr (might be NULL)<br />
-<code>const char * <span class="method"><a href="#">c_str</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const char * <span class="method"><a href="#">c_str</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">A pointer to the original cstr (might be NULL)<br />
-<code>const char * <span class="method"><a href="#">data</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const char * <span class="method"><a href="#">data</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the item at a given position in a safe way.<br />
-<code>char * <span class="method"><a href="#">data</a></span>(); [inline]</code></p>
+<code>char * <span class="method"><a href="#">data</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Formatted buffer</h3>
@@ -419,14 +419,14 @@
 <p class="doxygen_fun">Append formatted string.<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />CString &amp; <span class="method"><a href="#">appendFormat</a></span>(const StringT<b>&amp;</b> format, ... );</code></p>
 <p class="doxygen_fun">Append a formatted string to the end of the current string.<br />
-<code>void <span class="method"><a href="#">vappendFormat</a></span>(const char<b>*</b>const format, va_list args);</code></p>
+<code>void <span class="method"><a href="#">vappendFormat</a></span>(const char<b>*</b> format, va_list args);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Misc</h3>
 <p class="doxygen_fun">Get the first char of the string.<br />
-<code>char <span class="method"><a href="#">first</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>char <span class="method"><a href="#">first</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the last char of the string.<br />
-<code>char <span class="method"><a href="#">last</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>char <span class="method"><a href="#">last</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the string matches a simple pattern ('*' only managed)<br />
 <code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">glob</a></span>(const StringT<b>&amp;</b> pattern) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Convert all backslashes into slashes.<br />
@@ -438,14 +438,14 @@
 <p class="doxygen_fun">Duplicate N times the content of the string.<br />
 <code>void <span class="method"><a href="#">duplicate</a></span>(int n);</code></p>
 <p class="doxygen_fun">Extract the key and its value from a string (mainly provided by TDF files or Ini files)<br />
-<code><span class="keyword">template</span>&lt;class StringT1 , class StringT2 &gt;<br />void <span class="method"><a href="#">extractKeyValue</a></span>(StringT1<b>&amp;</b> key, StringT2<b>&amp;</b> value, bool ignoreCase) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT1 , class StringT2 &gt;<br />void <span class="method"><a href="#">extractKeyValue</a></span>(StringT1<b>&amp;</b> key, StringT2<b>&amp;</b> value, bool ignoreCase) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Adaptor only</h3>
 <p class="doxygen_fun">Adapt from a mere C-String.<br />
-<code>void <span class="method"><a href="#">adapt</a></span>(const char<b>*</b> cstring, Size length); [inline]</code></p>
+<code>void <span class="method"><a href="#">adapt</a></span>(const char<b>*</b> cstring, Size length);</code></p>
 <p class="doxygen_fun">Adapt from any known string.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">adapt</a></span>(const StringT<b>&amp;</b> string); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">adapt</a></span>(const StringT<b>&amp;</b> string);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
@@ -454,29 +454,29 @@
 <p class="doxygen_fun">The operator `[]`, for accessing to a single char (the offset must be valid)<br />
 <code>char &amp; <span class="method"><a href="#">operator[]</a></span>(const Size offset);</code></p>
 <p class="doxygen_fun">The operator `+=` (append)<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />CString &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />CString &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">The operator `&lt;&lt;` (append)<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />CString &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />CString &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">The operator `=` (assign - copy)<br />
-<code>CString &amp; <span class="method"><a href="#">operator=</a></span>(const CString<b>&amp;</b> rhs); [inline]</code></p>
+<code>CString &amp; <span class="method"><a href="#">operator=</a></span>(const CString<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">The operator `=` (assign)<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />CString &amp; <span class="method"><a href="#">operator=</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />CString &amp; <span class="method"><a href="#">operator=</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">The operator `&lt;`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator&lt;</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator&lt;</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator `&gt;`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator&gt;</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator&gt;</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator `&lt;=`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator&lt;=</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator&lt;=</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator `&gt;=`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator&gt;=</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator&gt;=</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator `==`.<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const CString<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator==</a></span>(const CString<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator `==`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator==</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator==</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator `!=`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator!=</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">operator!=</a></span>(const StringT<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator `!` (if (!s) ... - equivalent to if (s.empty()))<br />
-<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator *=, to dupplicate N times the content of the string.<br />
 <code>CString &amp; <span class="method"><a href="#">operator*=</a></span>(int n);</code></p>
 </td></tr>
@@ -530,19 +530,19 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const StringT<b>&amp;</b> s, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const StringT<b>&amp;</b> str, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const StringT<b>&amp;</b> str, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const StringT<b>&amp;</b> str, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const StringT<b>&amp;</b> s, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const StringT<b>&amp;</b> str, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const StringT<b>&amp;</b> str, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">assign</a></span>(const StringT<b>&amp;</b> str, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset);</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">fill</a></span>(typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> pattern);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size <span class="method"><a href="#">indexOf</a></span>(typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">insert</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">insert</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size <span class="method"><a href="#">indexOf</a></span>(typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">insert</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">insert</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size);</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT&gt;<br />bool <span class="method"><a href="#">insert</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const char<b>*</b>const cstr, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size);</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT&gt;<br />bool <span class="method"><a href="#">insert</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const char c);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">prepend</a></span>(const StringT<b>&amp;</b> s, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwrite</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwriteRight</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">prepend</a></span>(const StringT<b>&amp;</b> s, const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size size);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwrite</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">overwriteRight</a></span>(const typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size offset, const StringT<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">resize</a></span>(typename CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;:: Size len, const StringT<b>&amp;</b> pattern);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
@@ -554,13 +554,13 @@
 <p class="doxygen_fun">Append without checking for pointer validity.<br />
 <code>Size <span class="method"><a href="#">appendWithoutChecking</a></span>(const char<b>*</b>const block, const Size blockSize);</code></p>
 <p class="doxygen_fun">Append without checking for pointer validity.<br />
-<code>Size <span class="method"><a href="#">appendWithoutChecking</a></span>(const char c); [inline]</code></p>
+<code>Size <span class="method"><a href="#">appendWithoutChecking</a></span>(const char c);</code></p>
 <p class="doxygen_fun">Assign without checking for pointer validity.<br />
-<code>Size <span class="method"><a href="#">assignWithoutChecking</a></span>(const char c); [inline]</code></p>
+<code>Size <span class="method"><a href="#">assignWithoutChecking</a></span>(const char c);</code></p>
 <p class="doxygen_fun">Adapt without any check.<br />
-<code>void <span class="method"><a href="#">adaptWithoutChecking</a></span>(const char<b>*</b>const cstring, Size size); [inline]</code></p>
+<code>void <span class="method"><a href="#">adaptWithoutChecking</a></span>(const char<b>*</b>const cstring, Size size);</code></p>
 <p class="doxygen_fun">Decal the inner data pointer (must only be used when the class is an adapter)<br />
-<code>void <span class="method"><a href="#">decalOffset</a></span>(Size count); [inline]</code></p>
+<code>void <span class="method"><a href="#">decalOffset</a></span>(Size count);</code></p>
 </td></tr>
 </table>
 

@@ -9,7 +9,7 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Parser</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Parser</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
 <code> <span class="method"><a href="#"><b> ~ </b>Parser</a></span>();</code></p>
 </td></tr>
@@ -31,7 +31,7 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Remaining arguments</h3>
 <p class="doxygen_fun">Set the target variable where remaining arguments will be writtent.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">remainingArguments</a></span>(U<b>&amp;</b> var); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">remainingArguments</a></span>(U<b>&amp;</b> var);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Command line parsing</h3>
@@ -48,7 +48,7 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Errors</h3>
 <p class="doxygen_fun">The count of errors that have been encountered.<br />
-<code>unsigned int <span class="method"><a href="#">errors</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">errors</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Public</h3>

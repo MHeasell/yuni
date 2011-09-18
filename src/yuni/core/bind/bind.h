@@ -112,10 +112,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Copy constructor
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -248,10 +252,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -588,10 +596,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -928,10 +940,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -1268,10 +1284,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -1608,10 +1628,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -1948,10 +1972,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -2288,10 +2316,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -2628,10 +2660,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -2968,10 +3004,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -3308,10 +3348,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -3648,10 +3692,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -3988,10 +4036,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -4328,10 +4380,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -4668,10 +4724,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -5008,10 +5068,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -5348,10 +5412,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -5688,10 +5756,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -6028,10 +6100,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -6368,10 +6444,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -6708,10 +6788,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -7048,10 +7132,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -7388,10 +7476,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -7728,10 +7820,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -8068,10 +8164,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -8408,10 +8508,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -8748,10 +8852,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -9088,10 +9196,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -9428,10 +9540,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -9768,10 +9884,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -10108,10 +10228,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -10448,10 +10572,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -10788,10 +10916,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -11128,10 +11260,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -11468,10 +11604,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -11808,10 +11948,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -12148,10 +12292,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -12488,10 +12636,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -12828,10 +12980,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -13168,10 +13324,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -13508,10 +13668,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -13848,10 +14012,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -14188,10 +14356,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -14528,10 +14700,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -14868,10 +15044,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -15208,10 +15388,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -15548,10 +15732,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -15888,10 +16076,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -16228,10 +16420,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -16568,10 +16764,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -16908,10 +17108,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
@@ -17248,10 +17452,14 @@ namespace Yuni
 		Bind();
 		/*!
 		** \brief Copy constructor
+		**
+		** \param rhs Another bind object
 		*/
 		Bind(const Bind& rhs);
 		/*!
 		** \brief Constructor from a library symbol
+		**
+		** \param symbol Symbol from a dynamic library
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!

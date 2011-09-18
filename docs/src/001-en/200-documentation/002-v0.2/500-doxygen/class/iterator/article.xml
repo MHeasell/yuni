@@ -8,9 +8,9 @@
 <h2>Summary of the class <code>iterator</code></h2><table class="nostyle">
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">iterator</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">iterator</a></span>(const iterator<b>&amp;</b> it); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">iterator</a></span>(const NodeT<b>&amp;</b> p); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">iterator</a></span>();</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">iterator</a></span>(const iterator<b>&amp;</b> it);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">iterator</a></span>(const NodeT<b>&amp;</b> p);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
@@ -23,8 +23,8 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun"><code> <span class="method"><a href="#">YUNI_CORE_TREE_N_ITERATOR_PRE</a></span>(iterator );</code></p>
-<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator++</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator--</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator++</a></span>();</code></p>
+<p class="doxygen_fun"><code>IteratorType &amp; <span class="method"><a href="#">operator--</a></span>();</code></p>
 </td></tr>
 </table>
 

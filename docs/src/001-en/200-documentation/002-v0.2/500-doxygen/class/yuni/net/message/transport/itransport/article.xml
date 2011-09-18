@@ -9,25 +9,25 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">ITransport</a></span>(Mode m); [inline]</code></p>
+<code> <span class="method"><a href="#">ITransport</a></span>(Mode m);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>ITransport</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>ITransport</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Attached thread</h3>
 <p class="doxygen_fun">Get the attached thread.<br />
-<code>Thread::IThread * <span class="method"><a href="#">attachedThread</a></span>(); [inline]</code></p>
+<code>Thread::IThread * <span class="method"><a href="#">attachedThread</a></span>();</code></p>
 <p class="doxygen_fun">Get the attached thread (const)<br />
-<code>const Thread::IThread * <span class="method"><a href="#">attachedThread</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Thread::IThread * <span class="method"><a href="#">attachedThread</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the attached thread.<br />
-<code>void <span class="method"><a href="#">attachedThread</a></span>(Thread::IThread<b>*</b> thread); [inline]</code></p>
+<code>void <span class="method"><a href="#">attachedThread</a></span>(Thread::IThread<b>*</b> thread);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Public</h3>
 <p class="doxygen_fun">Service.<br />
-<code>Yuni::Net::Error <span class="method"><a href="#">execute</a></span>(); [inline]</code></p>
+<code>Yuni::Net::Error <span class="method"><a href="#">execute</a></span>();</code></p>
 <p class="doxygen_fun">Execute the transport layer.<br />
-<code>Yuni::Net::Error <span class="method"><a href="#">operator()</a></span>(); [inline]</code></p>
+<code>Yuni::Net::Error <span class="method"><a href="#">operator()</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

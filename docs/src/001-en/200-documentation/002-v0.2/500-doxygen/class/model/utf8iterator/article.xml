@@ -26,32 +26,32 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Get the current offset in the string.<br />
-<code>Size <span class="method"><a href="#">offset</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">offset</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get a reference to the original string.<br />
-<code>StringType &amp; <span class="method"><a href="#">string</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>const StringType &amp; <span class="method"><a href="#">string</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>StringType &amp; <span class="method"><a href="#">string</a></span>();</code></p>
+<p class="doxygen_fun"><code>const StringType &amp; <span class="method"><a href="#">string</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the current offset in the string.<br />
-<code>Size <span class="method"><a href="#">rawOffset</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">findFirstNonSpace</a></span>(const Size end); [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">find</a></span>(const char c, const Size endOffset); [inline]</code></p>
+<code>Size <span class="method"><a href="#">rawOffset</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">findFirstNonSpace</a></span>(const Size end);</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">find</a></span>(const char c, const Size endOffset);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">UTF8Iterator</a></span>(const StringType<b>&amp;</b> s, size_type offset); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">UTF8Iterator</a></span>(const NullIterator<b>&amp;</b> s); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">UTF8Iterator</a></span>(const StringType<b>&amp;</b> s); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">UTF8Iterator</a></span>(const UTF8Iterator<b>&amp;</b> copy); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>(difference_type n); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> model); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> model) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const ModelT<b>&amp;</b> model) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>UTF8::Char &amp; <span class="method"><a href="#">operator*</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>const UTF8::Char &amp; <span class="method"><a href="#">operator*</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>UTF8::Char * <span class="method"><a href="#">operator-&gt;</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>const UTF8::Char * <span class="method"><a href="#">operator-&gt;</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">UTF8Iterator</a></span>(const StringType<b>&amp;</b> s, size_type offset);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">UTF8Iterator</a></span>(const NullIterator<b>&amp;</b> s);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">UTF8Iterator</a></span>(const StringType<b>&amp;</b> s);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">UTF8Iterator</a></span>(const UTF8Iterator<b>&amp;</b> copy);</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>(difference_type n);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> model);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> model) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const ModelT<b>&amp;</b> model) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>UTF8::Char &amp; <span class="method"><a href="#">operator*</a></span>();</code></p>
+<p class="doxygen_fun"><code>const UTF8::Char &amp; <span class="method"><a href="#">operator*</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>UTF8::Char * <span class="method"><a href="#">operator-&gt;</a></span>();</code></p>
+<p class="doxygen_fun"><code>const UTF8::Char * <span class="method"><a href="#">operator-&gt;</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

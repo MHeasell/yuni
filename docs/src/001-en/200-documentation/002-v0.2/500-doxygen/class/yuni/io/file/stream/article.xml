@@ -9,65 +9,65 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">Stream</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Stream</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor (not allowed, it will fail at compile time)<br />
 <code> <span class="method"><a href="#">Stream</a></span>(const Stream<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Open a file.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">Stream</a></span>(const U<b>&amp;</b> filename, const int mode); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">Stream</a></span>(const U<b>&amp;</b> filename, const int mode);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Stream</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Stream</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Open / Close a file</h3>
 <p class="doxygen_fun">Open a file.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">open</a></span>(const U<b>&amp;</b> filename, const int mode); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">open</a></span>(const U<b>&amp;</b> filename, const int mode);</code></p>
 <p class="doxygen_fun">Open a file for writing.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">openRW</a></span>(const U<b>&amp;</b> filename); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">openRW</a></span>(const U<b>&amp;</b> filename);</code></p>
 <p class="doxygen_fun">Close the file if opened.<br />
 <code>bool <span class="method"><a href="#">close</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Stream</h3>
 <p class="doxygen_fun">Get if a file is currently opened.<br />
-<code>bool <span class="method"><a href="#">opened</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">opened</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the end-of-file has been reached.<br />
-<code>bool <span class="method"><a href="#">eof</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">eof</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the current value of the file position indicator.<br />
-<code>ssize_t <span class="method"><a href="#">tell</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>ssize_t <span class="method"><a href="#">tell</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the position in the stream.<br />
 <code>bool <span class="method"><a href="#">seek</a></span>(ssize_t offset, SeekOrigin origin);</code></p>
 <p class="doxygen_fun">Set the position indicator associated with the currently opened file from the beginning of the file.<br />
-<code>bool <span class="method"><a href="#">seekFromBeginning</a></span>(ssize_t offset); [inline]</code></p>
+<code>bool <span class="method"><a href="#">seekFromBeginning</a></span>(ssize_t offset);</code></p>
 <p class="doxygen_fun">Set the position indicator associated with the currently opened file from the end of the file.<br />
-<code>bool <span class="method"><a href="#">seekFromEndOfFile</a></span>(ssize_t offset); [inline]</code></p>
+<code>bool <span class="method"><a href="#">seekFromEndOfFile</a></span>(ssize_t offset);</code></p>
 <p class="doxygen_fun">Move the position indicator from the current position in the stream.<br />
-<code>bool <span class="method"><a href="#">seekMove</a></span>(ssize_t offset); [inline]</code></p>
+<code>bool <span class="method"><a href="#">seekMove</a></span>(ssize_t offset);</code></p>
 <p class="doxygen_fun">Flush the last I/O operations.<br />
-<code>bool <span class="method"><a href="#">flush</a></span>(); [inline]</code></p>
+<code>bool <span class="method"><a href="#">flush</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Read</h3>
 <p class="doxygen_fun">Read a single char.<br />
-<code>char <span class="method"><a href="#">get</a></span>(); [inline]</code></p>
+<code>char <span class="method"><a href="#">get</a></span>();</code></p>
 <p class="doxygen_fun">Read a line from the file.<br />
-<code>bool <span class="method"><a href="#">readline</a></span>(char<b>*</b> buffer, size_t maxSize); [inline]</code></p>
+<code>bool <span class="method"><a href="#">readline</a></span>(char<b>*</b> buffer, size_t maxSize);</code></p>
 <p class="doxygen_fun">Read a line from the file.<br />
 <code><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT&gt;<br />bool <span class="method"><a href="#">readline</a></span>(CString &lt; ChunkSizeT, ExpandableT, ZeroTerminatedT &gt;<b>&amp;</b> buffer);</code></p>
 <p class="doxygen_fun">Read a buffer.<br />
-<code>size_t <span class="method"><a href="#">read</a></span>(char<b>*</b> buffer, const size_t size); [inline]</code></p>
+<code>size_t <span class="method"><a href="#">read</a></span>(char<b>*</b> buffer, const size_t size);</code></p>
 <p class="doxygen_fun">Read data into a string buffer.<br />
-<code><span class="keyword">template</span>&lt;unsigned int CSizeT, bool ExpT, bool ZeroT&gt;<br />size_t <span class="method"><a href="#">read</a></span>(CString &lt; CSizeT, ExpT, ZeroT &gt;<b>&amp;</b> buffer); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;unsigned int CSizeT, bool ExpT, bool ZeroT&gt;<br />size_t <span class="method"><a href="#">read</a></span>(CString &lt; CSizeT, ExpT, ZeroT &gt;<b>&amp;</b> buffer);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Write</h3>
 <p class="doxygen_fun">Write a chr to the stream.<br />
-<code>bool <span class="method"><a href="#">put</a></span>(const char c); [inline]</code></p>
+<code>bool <span class="method"><a href="#">put</a></span>(const char c);</code></p>
 <p class="doxygen_fun">Write a raw buffer.<br />
-<code>size_t <span class="method"><a href="#">write</a></span>(const char<b>*</b> buffer, const size_t size); [inline]</code></p>
+<code>size_t <span class="method"><a href="#">write</a></span>(const char<b>*</b> buffer, const size_t size);</code></p>
 <p class="doxygen_fun">Write any arbitrary buffer.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />size_t <span class="method"><a href="#">write</a></span>(const U<b>&amp;</b> buffer); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />size_t <span class="method"><a href="#">write</a></span>(const U<b>&amp;</b> buffer);</code></p>
 <p class="doxygen_fun">Write any arbitrary buffer.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />size_t <span class="method"><a href="#">write</a></span>(const U<b>&amp;</b> buffer, const size_t size); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />size_t <span class="method"><a href="#">write</a></span>(const U<b>&amp;</b> buffer, const size_t size);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Locking</h3>
@@ -81,22 +81,22 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Native</h3>
 <p class="doxygen_fun">Get the OS Dependant handle.<br />
-<code>HandleType <span class="method"><a href="#">nativeHandle</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>HandleType <span class="method"><a href="#">nativeHandle</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">True if the stream if not opened.<br />
-<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">operator += (write)<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Stream &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Stream &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> u);</code></p>
 <p class="doxygen_fun">operator += (write)<br />
-<code>Stream &amp; <span class="method"><a href="#">operator+=</a></span>(const char c); [inline]</code></p>
+<code>Stream &amp; <span class="method"><a href="#">operator+=</a></span>(const char c);</code></p>
 <p class="doxygen_fun">operator &lt;&lt; (write)<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Stream &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Stream &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> u);</code></p>
 <p class="doxygen_fun">operator &lt;&lt; (write)<br />
-<code>Stream &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const char c); [inline]</code></p>
+<code>Stream &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const char c);</code></p>
 <p class="doxygen_fun">Operator &gt;&gt; (read)<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Stream &amp; <span class="method"><a href="#">operator&gt;&gt;</a></span>(U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Stream &amp; <span class="method"><a href="#">operator&gt;&gt;</a></span>(U<b>&amp;</b> rhs);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

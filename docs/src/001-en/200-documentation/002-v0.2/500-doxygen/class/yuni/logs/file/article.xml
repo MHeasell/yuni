@@ -19,13 +19,13 @@
 <p class="doxygen_fun">Try to (re)open a target log file.<br />
 <code><span class="keyword">template</span>&lt;typename U &gt;<br />bool <span class="method"><a href="#">logfile</a></span>(const U<b>&amp;</b> filename);</code></p>
 <p class="doxygen_fun">Get the last opened log file.<br />
-<code>String <span class="method"><a href="#">logfile</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>String <span class="method"><a href="#">logfile</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Reopen the log file.<br />
-<code>bool <span class="method"><a href="#">reopenLogfile</a></span>(); [inline]</code></p>
+<code>bool <span class="method"><a href="#">reopenLogfile</a></span>();</code></p>
 <p class="doxygen_fun">Close the log file.<br />
-<code>void <span class="method"><a href="#">closeLogfile</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">closeLogfile</a></span>();</code></p>
 <p class="doxygen_fun">Get if a log file is opened.<br />
-<code>bool <span class="method"><a href="#">logFileIsOpened</a></span>(); [inline]</code></p>
+<code>bool <span class="method"><a href="#">logFileIsOpened</a></span>();</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class LoggerT , class VerbosityType , class StringT &gt;<br />void <span class="method"><a href="#">internalDecoratorWriteWL</a></span>(LoggerT<b>&amp;</b> logger, const StringT<b>&amp;</b> s);</code></p>
 </td></tr>
 </table>

@@ -30,17 +30,17 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />iterator <span class="method"><a href="#">addOrUpdate</a></span>(const K<b>&amp;</b> key); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K , class V &gt;<br />iterator <span class="method"><a href="#">addOrUpdate</a></span>(const K<b>&amp;</b> key, const V<b>&amp;</b> value); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />iterator <span class="method"><a href="#">addOrUpdate</a></span>(const K<b>&amp;</b> key);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K , class V &gt;<br />iterator <span class="method"><a href="#">addOrUpdate</a></span>(const K<b>&amp;</b> key, const V<b>&amp;</b> value);</code></p>
 <p class="doxygen_fun">Remove all items.<br />
-<code>void <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
 <p class="doxygen_fun">Clear all deleted items (if any)<br />
-<code>void <span class="method"><a href="#">purge</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />bool <span class="method"><a href="#">exists</a></span>(const K<b>&amp;</b> key) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />bool <span class="method"><a href="#">remove</a></span>(const K<b>&amp;</b> key); [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>size_type <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const K<b>&amp;</b> key); [inline]</code></p>
+<code>void <span class="method"><a href="#">purge</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />bool <span class="method"><a href="#">exists</a></span>(const K<b>&amp;</b> key) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />bool <span class="method"><a href="#">remove</a></span>(const K<b>&amp;</b> key);</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>size_type <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const K<b>&amp;</b> key);</code></p>
 </td></tr>
 </table>
 

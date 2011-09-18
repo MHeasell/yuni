@@ -25,7 +25,7 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Get the local unique ID of the connection.<br />
-<code>unsigned int <span class="method"><a href="#">id</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">id</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Disconnect the client.<br />
 <code>void <span class="method"><a href="#">disconnect</a></span>();</code></p>
 <p class="doxygen_fun">Send a buffer.<br />

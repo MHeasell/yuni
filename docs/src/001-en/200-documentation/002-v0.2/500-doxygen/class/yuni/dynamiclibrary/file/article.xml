@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; DEstructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">File</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">File</a></span>();</code></p>
 <p class="doxygen_fun">Constructor - Load an dynamic library.<br />
-<code> <span class="method"><a href="#">File</a></span>(const String<b>&amp;</b> filename, const Relocation r, const Visibility v); [inline]</code></p>
+<code> <span class="method"><a href="#">File</a></span>(const String<b>&amp;</b> filename, const Relocation r, const Visibility v);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>File</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>File</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Loading / Unloading</h3>
@@ -22,30 +22,30 @@
 <p class="doxygen_fun">Load a dynamic library from its filename.<br />
 <code>bool <span class="method"><a href="#">loadFromRawFilename</a></span>(const char<b>*</b> filename, const Relocation r, const Visibility v);</code></p>
 <p class="doxygen_fun">Load a dynamic library from its filename.<br />
-<code>bool <span class="method"><a href="#">loadFromRawFilename</a></span>(const String<b>&amp;</b> filename, const Relocation r, const Visibility v); [inline]</code></p>
+<code>bool <span class="method"><a href="#">loadFromRawFilename</a></span>(const String<b>&amp;</b> filename, const Relocation r, const Visibility v);</code></p>
 <p class="doxygen_fun">Unload the dynamic library.<br />
 <code>void <span class="method"><a href="#">unload</a></span>();</code></p>
 <p class="doxygen_fun">Get if the dynamic library is loaded.<br />
-<code>bool <span class="method"><a href="#">loaded</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">loaded</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the filename of the loaded library.<br />
-<code>const String &amp; <span class="method"><a href="#">filename</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const String &amp; <span class="method"><a href="#">filename</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Symbols</h3>
 <p class="doxygen_fun">Get if a symbol exists in the library.<br />
-<code>bool <span class="method"><a href="#">hasSymbol</a></span>(const String<b>&amp;</b> name) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">hasSymbol</a></span>(const String<b>&amp;</b> name) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Try to resolve the address of an exported symbol by the library.<br />
-<code>Symbol <span class="method"><a href="#">resolve</a></span>(const String<b>&amp;</b> name) <span class="keyword">const</span>; [inline]</code></p>
+<code>Symbol <span class="method"><a href="#">resolve</a></span>(const String<b>&amp;</b> name) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Handle</h3>
 <p class="doxygen_fun">Get the OS Dependant handle of the dynamic library.<br />
-<code>Handle <span class="method"><a href="#">handle</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Handle <span class="method"><a href="#">handle</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">The operator [].<br />
-<code>Symbol <span class="method"><a href="#">operator[]</a></span>(const String<b>&amp;</b> name) <span class="keyword">const</span>; [inline]</code></p>
+<code>Symbol <span class="method"><a href="#">operator[]</a></span>(const String<b>&amp;</b> name) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

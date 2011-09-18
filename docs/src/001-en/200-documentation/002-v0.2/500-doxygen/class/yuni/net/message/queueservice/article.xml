@@ -31,7 +31,7 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Messages</h3>
 <p class="doxygen_fun">Send a message to all peers.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Error <span class="method"><a href="#">sendAll</a></span>(const StringT<b>&amp;</b> buffer); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Error <span class="method"><a href="#">sendAll</a></span>(const StringT<b>&amp;</b> buffer);</code></p>
 <p class="doxygen_fun">Send a raw buffer as message to all peers.<br />
 <code>Error <span class="method"><a href="#">sendAll</a></span>(const char<b>*</b>const buffer, unsigned int length);</code></p>
 <p class="doxygen_fun">Get the maximum size (in bytes) of a message.<br />

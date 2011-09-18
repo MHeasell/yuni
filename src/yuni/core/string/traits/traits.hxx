@@ -177,7 +177,7 @@ namespace CStringImpl
 	template<unsigned int ChunkSizeT, bool ZeroTerminatedT, class C>
 	typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size
 	Data<ChunkSizeT,false,ZeroTerminatedT,C>::assignWithoutChecking(const C* const block,
-		typename Data<ChunkSizeT,false,ZeroTerminatedT,C>::Size blockSize)
+		Size blockSize)
 	{
 		// We have to trunk the size if we are outer limits
 		// This condition is a little faster than the folowing replacement code :

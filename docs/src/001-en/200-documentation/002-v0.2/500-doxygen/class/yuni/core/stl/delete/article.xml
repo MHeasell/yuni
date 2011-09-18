@@ -10,7 +10,7 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code>const Delete &amp; <span class="method"><a href="#">operator()</a></span>(T<b>*</b> ptr) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>const Delete &amp; <span class="method"><a href="#">operator()</a></span>(T<b>*</b> ptr) <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

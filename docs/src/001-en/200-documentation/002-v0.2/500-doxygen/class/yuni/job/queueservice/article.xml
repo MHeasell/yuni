@@ -9,9 +9,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">QueueService</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">QueueService</a></span>();</code></p>
 <p class="doxygen_fun">Constructor, with an autostart mode.<br />
-<code> <span class="method"><a href="#">QueueService</a></span>(bool autostart); [inline]</code></p>
+<code> <span class="method"><a href="#">QueueService</a></span>(bool autostart);</code></p>
 <p class="doxygen_fun">Destructor.<br />
 <code> <span class="method"><a href="#"><b> ~ </b>QueueService</a></span>();</code></p>
 </td></tr>
@@ -20,11 +20,13 @@
 <p class="doxygen_fun">Start the service and execute the jobs.<br />
 <code>bool <span class="method"><a href="#">start</a></span>();</code></p>
 <p class="doxygen_fun">Wait until all jobs are finished.<br />
+<code>void <span class="method"><a href="#">wait</a></span>();</code></p>
+<p class="doxygen_fun">Wait until all jobs are finished.<br />
 <code>bool <span class="method"><a href="#">wait</a></span>(unsigned int timeout, unsigned int pollInterval);</code></p>
 <p class="doxygen_fun">Stop the service.<br />
 <code>bool <span class="method"><a href="#">stop</a></span>(unsigned int timeout);</code></p>
 <p class="doxygen_fun">Stop then start the service.<br />
-<code>bool <span class="method"><a href="#">restart</a></span>(unsigned int timeout); [inline]</code></p>
+<code>bool <span class="method"><a href="#">restart</a></span>(unsigned int timeout);</code></p>
 <p class="doxygen_fun">Get if the service is started.<br />
 <code>bool <span class="method"><a href="#">started</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
@@ -39,26 +41,26 @@
 <p class="doxygen_fun">Add a job into the queue.<br />
 <code>void <span class="method"><a href="#">add</a></span>(IJob<b>*</b> job, Priority priority);</code></p>
 <p class="doxygen_fun">Retrieve information about the activity of the queue manager.<br />
-<code>void <span class="method"><a href="#">activitySnapshot</a></span>(typename ThreadInfo::Vector<b>&amp;</b> out); [inline]</code></p>
+<code>void <span class="method"><a href="#">activitySnapshot</a></span>(typename ThreadInfo::Vector<b>&amp;</b> out);</code></p>
 <p class="doxygen_fun">Get the number of jobs waiting to be executed.<br />
-<code>unsigned int <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Threads</h3>
 <p class="doxygen_fun">Get the number of threads.<br />
-<code>unsigned int <span class="method"><a href="#">threadCount</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">threadCount</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">The operator &lt;&lt; (add a job)<br />
-<code>QueueService &amp; <span class="method"><a href="#">operator+=</a></span>(IJob<b>*</b> job); [inline]</code></p>
+<code>QueueService &amp; <span class="method"><a href="#">operator+=</a></span>(IJob<b>*</b> job);</code></p>
 <p class="doxygen_fun">The operator &lt;&lt; (add a job)<br />
-<code>QueueService &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(IJob<b>*</b> job); [inline]</code></p>
+<code>QueueService &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(IJob<b>*</b> job);</code></p>
 <p class="doxygen_fun">The operator &lt;&lt; (add a job)<br />
-<code>QueueService &amp; <span class="method"><a href="#">operator+=</a></span>(const IJob::Ptr<b>&amp;</b> job); [inline]</code></p>
+<code>QueueService &amp; <span class="method"><a href="#">operator+=</a></span>(const IJob::Ptr<b>&amp;</b> job);</code></p>
 <p class="doxygen_fun">The operator &lt;&lt; (add a job)<br />
-<code>QueueService &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const IJob::Ptr<b>&amp;</b> job); [inline]</code></p>
+<code>QueueService &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const IJob::Ptr<b>&amp;</b> job);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

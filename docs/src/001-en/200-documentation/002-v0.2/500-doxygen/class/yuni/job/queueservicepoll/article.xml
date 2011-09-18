@@ -21,29 +21,29 @@
 <p class="doxygen_fun">Ask to Stop the execution of the thread as soon as possible.<br />
 <code>void <span class="method"><a href="#">gracefulStop</a></span>();</code></p>
 <p class="doxygen_fun">Get if the thread is currently running.<br />
-<code>bool <span class="method"><a href="#">started</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">started</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Interrupt the thread if suspended.<br />
 <code>void <span class="method"><a href="#">wakeUp</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Get if the thread is currently stopped.<br />
-<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Settings (Time interval &amp; Cycles)</h3>
 <p class="doxygen_fun">Reload the settings.<br />
-<code>void <span class="method"><a href="#">reload</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">reload</a></span>();</code></p>
 <p class="doxygen_fun">Modify then Reload the settings.<br />
 <code>void <span class="method"><a href="#">reload</a></span>(unsigned int interval);</code></p>
 <p class="doxygen_fun">Modify then Reload the settings.<br />
 <code>void <span class="method"><a href="#">reload</a></span>(unsigned int interval, unsigned int cycles);</code></p>
 <p class="doxygen_fun">Get the time interval (in milliseconds)<br />
-<code>unsigned int <span class="method"><a href="#">interval</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">interval</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the time interval (in `ms`)<br />
 <code>void <span class="method"><a href="#">interval</a></span>(const unsigned int t);</code></p>
 <p class="doxygen_fun">Get the number of cycle to run.<br />
-<code>unsigned int <span class="method"><a href="#">cycleCount</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">cycleCount</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the number of cycle to run.<br />
 <code>void <span class="method"><a href="#">cycleCount</a></span>(const unsigned int n);</code></p>
 </td></tr>
@@ -51,30 +51,30 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">QueueServicePoll</a></span>(SchedulerT<b>&amp;</b> scheduler, Yuni::Private::QueueService::WaitingRoom<b>&amp;</b> room, unsigned int pollInterval); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>QueueServicePoll</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">status</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">QueueServicePoll</a></span>(SchedulerT<b>&amp;</b> scheduler, Yuni::Private::QueueService::WaitingRoom<b>&amp;</b> room, unsigned int pollInterval);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>QueueServicePoll</a></span>();</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">status</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
 <p class="doxygen_fun">Event : Execute a new cycle.<br />
-<code>bool <span class="method"><a href="#">onInterval</a></span>(unsigned cycle); [inline]</code></p>
+<code>bool <span class="method"><a href="#">onInterval</a></span>(unsigned cycle);</code></p>
 <p class="doxygen_fun">Event : The timer has just been started.<br />
-<code>bool <span class="method"><a href="#">onStarting</a></span>(); [inline]</code></p>
+<code>bool <span class="method"><a href="#">onStarting</a></span>();</code></p>
 <p class="doxygen_fun">Event : The timer has been stopped.<br />
-<code>void <span class="method"><a href="#">onStopped</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">onStopped</a></span>();</code></p>
 <p class="doxygen_fun">Suspend the execution of the thread of X miliseconds.<br />
 <code>bool <span class="method"><a href="#">suspend</a></span>(const unsigned int delay);</code></p>
 <p class="doxygen_fun">Get if the thread should abort as soon as possible.<br />
-<code>bool <span class="method"><a href="#">shouldAbort</a></span>(); [inline]</code></p>
+<code>bool <span class="method"><a href="#">shouldAbort</a></span>();</code></p>
 <p class="doxygen_fun">Event : The thread has finished its job and is waiting for being re-executed.<br />
-<code>void <span class="method"><a href="#">onPause</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">onPause</a></span>();</code></p>
 <p class="doxygen_fun">Event : The thread has been gracefully stopped.<br />
-<code>void <span class="method"><a href="#">onStop</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">onStop</a></span>();</code></p>
 <p class="doxygen_fun">Event : The thread has been killed.<br />
-<code>void <span class="method"><a href="#">onKill</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">onKill</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

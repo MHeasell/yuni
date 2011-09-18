@@ -11,31 +11,31 @@
 <p class="doxygen_fun">Constructor.<br />
 <code> <span class="method"><a href="#">Resolution</a></span>(const uint32 w, const uint32 h, const uint8 b);</code></p>
 <p class="doxygen_fun">Constructor by copy.<br />
-<code> <span class="method"><a href="#">Resolution</a></span>(const Resolution<b>&amp;</b> c); [inline]</code></p>
+<code> <span class="method"><a href="#">Resolution</a></span>(const Resolution<b>&amp;</b> c);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Information about the current mode</h3>
 <p class="doxygen_fun">The width of the monitor/screen.<br />
-<code>uint32 <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>uint32 <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The height of the monitor/screen.<br />
-<code>uint32 <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>uint32 <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Bit per pixel.<br />
-<code>uint8 <span class="method"><a href="#">bitPerPixel</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>uint8 <span class="method"><a href="#">bitPerPixel</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Comparison operator (equal with)<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator==</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Comparison operator (non equal with)<br />
-<code>bool <span class="method"><a href="#">operator!=</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!=</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Comparison operator (less than)<br />
 <code>bool <span class="method"><a href="#">operator&lt;</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Comparison operator (less than or equal)<br />
-<code>bool <span class="method"><a href="#">operator&lt;=</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator&lt;=</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Comparison operator (greater than)<br />
 <code>bool <span class="method"><a href="#">operator&gt;</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Comparison operator (greater than or equal)<br />
-<code>bool <span class="method"><a href="#">operator&gt;=</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator&gt;=</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Assign new values from another resolution.<br />
 <code>Resolution &amp; <span class="method"><a href="#">operator=</a></span>(const Resolution<b>&amp;</b> p);</code></p>
 </td></tr>

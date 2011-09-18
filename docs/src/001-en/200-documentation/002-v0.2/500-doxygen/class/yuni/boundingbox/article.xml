@@ -9,28 +9,28 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors and destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">BoundingBox</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">BoundingBox</a></span>();</code></p>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">BoundingBox</a></span>(const Point3D &lt; T &gt;<b>&amp;</b> min, const Point3D &lt; T &gt;<b>&amp;</b> max); [inline]</code></p>
+<code> <span class="method"><a href="#">BoundingBox</a></span>(const Point3D &lt; T &gt;<b>&amp;</b> min, const Point3D &lt; T &gt;<b>&amp;</b> max);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Get the minimum coordinates of the box.<br />
-<code>const Point3D &lt; T &gt; &amp; <span class="method"><a href="#">min</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Point3D &lt; T &gt; &amp; <span class="method"><a href="#">min</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the maximum coordinates of the box.<br />
-<code>const Point3D &lt; T &gt; &amp; <span class="method"><a href="#">max</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Point3D &lt; T &gt; &amp; <span class="method"><a href="#">max</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the center of the box.<br />
-<code>const Point3D &lt; T &gt; &amp; <span class="method"><a href="#">center</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Point3D &lt; T &gt; &amp; <span class="method"><a href="#">center</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Add a point that can possibly grow the bounding box.<br />
 <code>void <span class="method"><a href="#">addPoint</a></span>(const Point3D &lt; T &gt;<b>&amp;</b> point);</code></p>
 <p class="doxygen_fun">Add a triangle that can possibly grow the bounding box.<br />
-<code>void <span class="method"><a href="#">addTriangle</a></span>(const Triangle<b>&amp;</b> tri); [inline]</code></p>
+<code>void <span class="method"><a href="#">addTriangle</a></span>(const Triangle<b>&amp;</b> tri);</code></p>
 <p class="doxygen_fun">Is the point inside the bounding box?<br />
-<code>bool <span class="method"><a href="#">contains</a></span>(const Point3D &lt; T &gt;<b>&amp;</b> point) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">contains</a></span>(const Point3D &lt; T &gt;<b>&amp;</b> point) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Reset the bounding box to 0 size.<br />
-<code><span class="keyword">template</span>&lt;typename U &gt;<br />void <span class="method"><a href="#">reset</a></span>(Point3D &lt; U &gt; newCenter); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />void <span class="method"><a href="#">reset</a></span>(Point3D &lt; U &gt; newCenter);</code></p>
 </td></tr>
 </table>
 

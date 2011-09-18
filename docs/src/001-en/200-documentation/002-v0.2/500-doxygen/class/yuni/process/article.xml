@@ -33,7 +33,7 @@
 <p class="doxygen_fun">Cancel the execution of the sub-process.<br />
 <code>void <span class="method"><a href="#">cancel</a></span>();</code></p>
 <p class="doxygen_fun">Get if the process is currently running.<br />
-<code>bool <span class="method"><a href="#">running</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">running</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>

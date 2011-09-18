@@ -9,9 +9,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor and destructor</h3>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">QueueService</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">QueueService</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>QueueService</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>QueueService</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Private operations</h3>

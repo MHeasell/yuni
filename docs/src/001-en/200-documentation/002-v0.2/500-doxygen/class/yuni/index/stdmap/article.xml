@@ -17,10 +17,10 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const U<b>&amp;</b> key); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />const ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const U<b>&amp;</b> key) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const U<b>&amp;</b> key); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />const ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const U<b>&amp;</b> key) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const U<b>&amp;</b> key);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />const ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const U<b>&amp;</b> key) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const U<b>&amp;</b> key);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />const ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const U<b>&amp;</b> key) <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

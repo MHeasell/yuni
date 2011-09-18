@@ -9,85 +9,85 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Nullable</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Nullable</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Nullable</a></span>(const Nullable<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Nullable</a></span>(const Nullable<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Move constructor.<br />
-<code> <span class="method"><a href="#">Nullable</a></span>(Static::MoveConstructor &lt; Nullable &gt; rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Nullable</a></span>(Static::MoveConstructor &lt; Nullable &gt; rhs);</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code><span class="keyword">template</span>&lt;class Alloc1 &gt;<br /> <span class="method"><a href="#">Nullable</a></span>(const Nullable &lt; T, Alloc1 &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class Alloc1 &gt;<br /> <span class="method"><a href="#">Nullable</a></span>(const Nullable &lt; T, Alloc1 &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Constructor with a default value.<br />
-<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">Nullable</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">Nullable</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Constructor with a default value.<br />
 <code> <span class="method"><a href="#">Nullable</a></span>(const_pointer v);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Nullable</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Nullable</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Iterators</h3>
 <p class="doxygen_fun">Returns an iterator pointing to the beginning of the vector.<br />
-<code>iterator <span class="method"><a href="#">begin</a></span>(); [inline]</code></p>
+<code>iterator <span class="method"><a href="#">begin</a></span>();</code></p>
 <p class="doxygen_fun">Returns a const_iterator pointing to the beginning of the vector.<br />
-<code>const_iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const_iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Returns a iterator pointing to the end of the vector.<br />
-<code>iterator <span class="method"><a href="#">end</a></span>(); [inline]</code></p>
+<code>iterator <span class="method"><a href="#">end</a></span>();</code></p>
 <p class="doxygen_fun">Returns a const_iterator pointing to the end of the vector.<br />
-<code>const_iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const_iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Returns a reverse_iterator pointing to the beginning of the reversed vector.<br />
-<code>reverse_iterator <span class="method"><a href="#">rbegin</a></span>(); [inline]</code></p>
+<code>reverse_iterator <span class="method"><a href="#">rbegin</a></span>();</code></p>
 <p class="doxygen_fun">Returns a const_reverse_iterator pointing to the beginning of the reversed vector.<br />
-<code>const_reverse_iterator <span class="method"><a href="#">rbegin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const_reverse_iterator <span class="method"><a href="#">rbegin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Returns a reverse_iterator pointing to the end of the reversed vector.<br />
-<code>reverse_iterator <span class="method"><a href="#">rend</a></span>(); [inline]</code></p>
+<code>reverse_iterator <span class="method"><a href="#">rend</a></span>();</code></p>
 <p class="doxygen_fun">Returns a const_reverse_iterator pointing to the end of the reversed vector.<br />
-<code>const_reverse_iterator <span class="method"><a href="#">rend</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const_reverse_iterator <span class="method"><a href="#">rend</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Value</h3>
 <p class="doxygen_fun">Get the current value, or a default one if null.<br />
-<code>Type <span class="method"><a href="#">value</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Type <span class="method"><a href="#">value</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the current value, or a default one if null.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Type <span class="method"><a href="#">value</a></span>(const U<b>&amp;</b> nullValue) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Type <span class="method"><a href="#">value</a></span>(const U<b>&amp;</b> nullValue) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Get a reference to the inner variable.<br />
-<code>reference <span class="method"><a href="#">operator*</a></span>(); [inline]</code></p>
+<code>reference <span class="method"><a href="#">operator*</a></span>();</code></p>
 <p class="doxygen_fun">Get a reference to the inner variable.<br />
-<code>reference <span class="method"><a href="#">operator-&gt;</a></span>(); [inline]</code></p>
+<code>reference <span class="method"><a href="#">operator-&gt;</a></span>();</code></p>
 <p class="doxygen_fun">Operator =.<br />
-<code>Nullable &amp; <span class="method"><a href="#">operator=</a></span>(const Nullable<b>&amp;</b> rhs); [inline]</code></p>
+<code>Nullable &amp; <span class="method"><a href="#">operator=</a></span>(const Nullable<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator =.<br />
-<code><span class="keyword">template</span>&lt;class Alloc1 &gt;<br />Nullable &amp; <span class="method"><a href="#">operator=</a></span>(const Nullable &lt; T, Alloc1 &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class Alloc1 &gt;<br />Nullable &amp; <span class="method"><a href="#">operator=</a></span>(const Nullable &lt; T, Alloc1 &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator =.<br />
-<code>Nullable &amp; <span class="method"><a href="#">operator=</a></span>(const NullPtr<b>&amp;</b> ); [inline]</code></p>
+<code>Nullable &amp; <span class="method"><a href="#">operator=</a></span>(const NullPtr<b>&amp;</b> );</code></p>
 <p class="doxygen_fun">Operator =.<br />
 <code>Nullable &amp; <span class="method"><a href="#">operator=</a></span>(const_pointer rhs);</code></p>
 <p class="doxygen_fun">Operator =.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Nullable &amp; <span class="method"><a href="#">operator=</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Nullable &amp; <span class="method"><a href="#">operator=</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator =.<br />
-<code>Nullable &amp; <span class="method"><a href="#">operator=</a></span>(void<b>*</b> const); [inline]</code></p>
+<code>Nullable &amp; <span class="method"><a href="#">operator=</a></span>(void<b>*</b> const);</code></p>
 <p class="doxygen_fun">The comparison operator.<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const Nullable<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator==</a></span>(const Nullable<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The comparison operator.<br />
-<code>bool <span class="method"><a href="#">operator!=</a></span>(const Nullable<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!=</a></span>(const Nullable<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The comparison operator.<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const NullPtr<b>&amp;</b> ) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator==</a></span>(const NullPtr<b>&amp;</b> ) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The comparison operator.<br />
-<code>bool <span class="method"><a href="#">operator!=</a></span>(const NullPtr<b>&amp;</b> ) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!=</a></span>(const NullPtr<b>&amp;</b> ) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get a reference to the inner variable.<br />
-<code>bool <span class="method"><a href="#">operator&lt;</a></span>(const Nullable<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator&lt;</a></span>(const Nullable<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator ! (if (!value) ...)<br />
-<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Cast-Operator</h3>
 <p class="doxygen_fun">Cast-Operator.<br />
-<code> <span class="method"><a href="#">operator Static::MoveConstructor&lt; Nullable &gt;</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">operator Static::MoveConstructor&lt; Nullable &gt;</a></span>();</code></p>
 <p class="doxygen_fun">Cast-Operator for `if (a) ...`.<br />
-<code> <span class="method"><a href="#">operator AutomaticConversion *</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code> <span class="method"><a href="#">operator AutomaticConversion *</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Cast-Operator.<br />
-<code> <span class="method"><a href="#">operator Type</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code> <span class="method"><a href="#">operator Type</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -131,43 +131,43 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Returns the size of the container (actually 0 or 1)<br />
-<code>size_type <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>size_type <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Test if the container is empty.<br />
-<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Test if the variable is null.<br />
-<code>bool <span class="method"><a href="#">null</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">null</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Returns the n'th element.<br />
-<code>reference <span class="method"><a href="#">operator[]</a></span>(size_type n); [inline]</code></p>
+<code>reference <span class="method"><a href="#">operator[]</a></span>(size_type n);</code></p>
 <p class="doxygen_fun">Returns the n'th element.<br />
-<code>const_reference <span class="method"><a href="#">operator[]</a></span>(size_type n) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>reference <span class="method"><a href="#">front</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>reference <span class="method"><a href="#">back</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>const_reference <span class="method"><a href="#">front</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>const_reference <span class="method"><a href="#">back</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const_reference <span class="method"><a href="#">operator[]</a></span>(size_type n) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>reference <span class="method"><a href="#">front</a></span>();</code></p>
+<p class="doxygen_fun"><code>reference <span class="method"><a href="#">back</a></span>();</code></p>
+<p class="doxygen_fun"><code>const_reference <span class="method"><a href="#">front</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>const_reference <span class="method"><a href="#">back</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Insert a new element at the end.<br />
-<code>void <span class="method"><a href="#">push_back</a></span>(const_reference rhs); [inline]</code></p>
+<code>void <span class="method"><a href="#">push_back</a></span>(const_reference rhs);</code></p>
 <p class="doxygen_fun">Remove the last element (set the value to NULL)<br />
-<code>void <span class="method"><a href="#">pop_back</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">pop_back</a></span>();</code></p>
 <p class="doxygen_fun">Swap the content with another nullable object.<br />
-<code><span class="keyword">template</span>&lt;class Alloc1 &gt;<br />void <span class="method"><a href="#">swap</a></span>(Nullable &lt; T, Alloc1 &gt;<b>&amp;</b> rhs); [inline]</code></p>
-<p class="doxygen_fun"><code>iterator <span class="method"><a href="#">insert</a></span>(iterator , const_reference x); [inline]</code></p>
-<p class="doxygen_fun"><code>iterator <span class="method"><a href="#">erase</a></span>(iterator pos); [inline]</code></p>
-<p class="doxygen_fun"><code>iterator <span class="method"><a href="#">erase</a></span>(iterator first, iterator last); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class Alloc1 &gt;<br />void <span class="method"><a href="#">swap</a></span>(Nullable &lt; T, Alloc1 &gt;<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun"><code>iterator <span class="method"><a href="#">insert</a></span>(iterator , const_reference x);</code></p>
+<p class="doxygen_fun"><code>iterator <span class="method"><a href="#">erase</a></span>(iterator pos);</code></p>
+<p class="doxygen_fun"><code>iterator <span class="method"><a href="#">erase</a></span>(iterator first, iterator last);</code></p>
 <p class="doxygen_fun">Set the value to NULL.<br />
-<code>void <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
 <p class="doxygen_fun">Inserts or erases elements at the end such that the size becomes n.<br />
 <code>void <span class="method"><a href="#">resize</a></span>(const size_type n, const T<b>&amp;</b> t);</code></p>
 <p class="doxygen_fun">Print the value to an stream.<br />
-<code><span class="keyword">template</span>&lt;class S , class U &gt;<br />void <span class="method"><a href="#">print</a></span>(S<b>&amp;</b> out, const U<b>&amp;</b> nullValue) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class S , class U &gt;<br />void <span class="method"><a href="#">print</a></span>(S<b>&amp;</b> out, const U<b>&amp;</b> nullValue) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Returns the largest possible size of the container.<br />
-<code><span class="keyword">static</span> size_type <span class="method"><a href="#">max_size</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> size_type <span class="method"><a href="#">max_size</a></span>();</code></p>
 <p class="doxygen_fun">Returns the largest possible size of the container.<br />
-<code><span class="keyword">static</span> size_type <span class="method"><a href="#">capacity</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> size_type <span class="method"><a href="#">capacity</a></span>();</code></p>
 <p class="doxygen_fun">Reserve N elements.<br />
 <code><span class="keyword">static</span> void <span class="method"><a href="#">reserve</a></span>(size_type N);</code></p>
 </td></tr>

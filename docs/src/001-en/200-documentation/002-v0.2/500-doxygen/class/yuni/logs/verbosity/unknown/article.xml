@@ -25,8 +25,8 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">AppendName</a></span>(U<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">AppendName</a></span>(U<b>&amp;</b> );</code></p>
 </td></tr>
 </table>
 

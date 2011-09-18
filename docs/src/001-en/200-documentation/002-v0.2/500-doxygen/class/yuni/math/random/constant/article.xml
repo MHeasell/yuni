@@ -10,16 +10,16 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Constant</a></span>(const T v); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Constant</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>const Value <span class="method"><a href="#">next</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Constant</a></span>(const T v);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Constant</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>();</code></p>
+<p class="doxygen_fun"><code>const Value <span class="method"><a href="#">next</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

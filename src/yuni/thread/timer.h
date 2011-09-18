@@ -231,7 +231,6 @@ namespace Thread
 		** \note There is no real need to use suspend() in this method, it will already be
 		** done for you.
 		**
-		** \param cycleCount The current cycle number. 0 in the case of an infinite timer
 		** \return True to stop and to destroy the thread
 		*/
 		virtual bool onExecute();

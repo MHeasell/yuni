@@ -9,9 +9,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">HighestPriorityFirst</a></span>(Private::QueueService::WaitingRoom<b>&amp;</b> room); [inline]</code></p>
+<code> <span class="method"><a href="#">HighestPriorityFirst</a></span>(Private::QueueService::WaitingRoom<b>&amp;</b> room);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>HighestPriorityFirst</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>HighestPriorityFirst</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -24,30 +24,30 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">minimumThreadCount</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">minimumThreadCount</a></span>(unsigned int); [inline]</code></p>
-<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">maximumThreadCount</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">maximumThreadCount</a></span>(unsigned int n); [inline]</code></p>
+<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">minimumThreadCount</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">minimumThreadCount</a></span>(unsigned int);</code></p>
+<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">maximumThreadCount</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">maximumThreadCount</a></span>(unsigned int n);</code></p>
 <p class="doxygen_fun">Get if the scheduler is idle.<br />
-<code>bool <span class="method"><a href="#">idle</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">idle</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
 <p class="doxygen_fun">Start all threads to execute the jobs.<br />
-<code>bool <span class="method"><a href="#">schedulerStart</a></span>(); [inline]</code></p>
+<code>bool <span class="method"><a href="#">schedulerStart</a></span>();</code></p>
 <p class="doxygen_fun">Stop all working threads.<br />
-<code>bool <span class="method"><a href="#">schedulerStop</a></span>(unsigned int timeout); [inline]</code></p>
+<code>bool <span class="method"><a href="#">schedulerStop</a></span>(unsigned int timeout);</code></p>
 <p class="doxygen_fun">Event : A job has just been added into the waiting room.<br />
-<code>void <span class="method"><a href="#">schedulerNotifyNewJobInWaitingRoom</a></span>(Yuni::Job::Priority ); [inline]</code></p>
+<code>void <span class="method"><a href="#">schedulerNotifyNewJobInWaitingRoom</a></span>(Yuni::Job::Priority );</code></p>
 <p class="doxygen_fun">Get the next job to execute.<br />
-<code>bool <span class="method"><a href="#">nextJob</a></span>(IJob::Ptr<b>&amp;</b> out); [inline]</code></p>
+<code>bool <span class="method"><a href="#">nextJob</a></span>(IJob::Ptr<b>&amp;</b> out);</code></p>
 <p class="doxygen_fun">Get the number of threads currently in use.<br />
-<code>unsigned int <span class="method"><a href="#">schedulerThreadCount</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class PredicateT &gt;<br />void <span class="method"><a href="#">schedulerForeachThread</a></span>(PredicateT<b>&amp;</b> predicate); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">schedulerIncrementWorkerCount</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">schedulerDecrementWorkerCount</a></span>(); [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">schedulerThreadCount</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class PredicateT &gt;<br />void <span class="method"><a href="#">schedulerForeachThread</a></span>(PredicateT<b>&amp;</b> predicate);</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">schedulerIncrementWorkerCount</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">schedulerDecrementWorkerCount</a></span>();</code></p>
 </td></tr>
 </table>
 

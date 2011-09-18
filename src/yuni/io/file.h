@@ -86,7 +86,7 @@ namespace File
 	/*!
 	** \brief Load the entire content of a file into memory
 	**
-	** If the file size is greater than @hardlimit, the content will be truncated (see 'errMemoryLimit').
+	** If the file size is greater than \p hardlimit, the content will be truncated (see 'errMemoryLimit').
 	** \param[out] out The content of the file
 	** \param filename The filename to open
 	** \param hardlimit If the size of the file exceeds this limit, it will not be loaded

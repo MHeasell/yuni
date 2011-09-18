@@ -27,8 +27,8 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">PlayList</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>Size <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code> <span class="method"><a href="#">PlayList</a></span>();</code></p>
+<p class="doxygen_fun"><code>Size <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Add a sound at the end of the playlist.<br />
 <code>void <span class="method"><a href="#">append</a></span>(SmartPtr &lt; ISound &gt;<b>&amp;</b> sound);</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename StringT &gt;<br />void <span class="method"><a href="#">remove</a></span>(const StringT<b>&amp;</b> soundID);</code></p>

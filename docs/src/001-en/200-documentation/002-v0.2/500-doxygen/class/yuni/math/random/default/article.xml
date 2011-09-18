@@ -31,22 +31,22 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Get the name of the distribution.<br />
-<code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">static</span> Value <span class="method"><a href="#">min</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">static</span> Value <span class="method"><a href="#">max</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> Value <span class="method"><a href="#">min</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> Value <span class="method"><a href="#">max</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Default</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Default</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Default</a></span>();</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Default</a></span>();</code></p>
 <p class="doxygen_fun">(Re)Iniitalize the random number generator<br />
-<code>void <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>(const unsigned int seed); [inline]</code></p>
+<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>(unsigned int seed);</code></p>
 <p class="doxygen_fun">Generate the next random number.<br />
-<code>Value <span class="method"><a href="#">next</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />Default &amp; <span class="method"><a href="#">operator&gt;&gt;</a></span>(U<b>&amp;</b> u); [inline]</code></p>
+<code>Value <span class="method"><a href="#">next</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />Default &amp; <span class="method"><a href="#">operator&gt;&gt;</a></span>(U<b>&amp;</b> u);</code></p>
 </td></tr>
 </table>
 

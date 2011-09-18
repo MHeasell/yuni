@@ -4,7 +4,6 @@
 /* !!! "C compatibility" header !!! */
 
 /*!
-** \file stdint.h
 ** \brief Standard types used by the Yuni Library
 */
 

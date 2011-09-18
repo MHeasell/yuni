@@ -9,27 +9,27 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">Array</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Array</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
 <code> <span class="method"><a href="#">Array</a></span>(const Array<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Constructor with a given amount of thread.<br />
-<code> <span class="method"><a href="#">Array</a></span>(unsigned int n); [inline]</code></p>
+<code> <span class="method"><a href="#">Array</a></span>(unsigned int n);</code></p>
 <p class="doxygen_fun">Constructor, with a given amount of thread.<br />
-<code> <span class="method"><a href="#">Array</a></span>(unsigned int n, bool autoStart); [inline]</code></p>
+<code> <span class="method"><a href="#">Array</a></span>(unsigned int n, bool autoStart);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Array</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Array</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Settings</h3>
 <p class="doxygen_fun">Get if the new thread are automatically started.<br />
-<code>bool <span class="method"><a href="#">autoStart</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">autoStart</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set if the new thread are automatically started.<br />
-<code>void <span class="method"><a href="#">autoStart</a></span>(const bool v); [inline]</code></p>
+<code>void <span class="method"><a href="#">autoStart</a></span>(const bool v);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Get the pointer to a specific thread.<br />
-<code>T::Ptr <span class="method"><a href="#">operator[]</a></span>(unsigned int index) <span class="keyword">const</span>; [inline]</code></p>
+<code>T::Ptr <span class="method"><a href="#">operator[]</a></span>(unsigned int index) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Copy operator.<br />
 <code>Array &amp; <span class="method"><a href="#">operator=</a></span>(const Array<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Copy operator.<br />
@@ -37,9 +37,9 @@
 <p class="doxygen_fun">Aggregate.<br />
 <code>Array &amp; <span class="method"><a href="#">operator+=</a></span>(const Array<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Aggregate.<br />
-<code>Array &amp; <span class="method"><a href="#">operator+=</a></span>(T<b>*</b> rhs); [inline]</code></p>
+<code>Array &amp; <span class="method"><a href="#">operator+=</a></span>(T<b>*</b> rhs);</code></p>
 <p class="doxygen_fun">Aggregate.<br />
-<code>Array &amp; <span class="method"><a href="#">operator+=</a></span>(const typename T::Ptr<b>&amp;</b> rhs); [inline]</code></p>
+<code>Array &amp; <span class="method"><a href="#">operator+=</a></span>(const typename T::Ptr<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Aggregate.<br />
 <code>Array &amp; <span class="method"><a href="#">operator+=</a></span>(const Ptr<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Aggregate.<br />
@@ -47,9 +47,9 @@
 <p class="doxygen_fun">Aggregate.<br />
 <code>Array &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const Ptr<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Aggregate.<br />
-<code>Array &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(T<b>*</b> rhs); [inline]</code></p>
+<code>Array &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(T<b>*</b> rhs);</code></p>
 <p class="doxygen_fun">Aggregate.<br />
-<code>Array &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const typename T::Ptr<b>&amp;</b> rhs); [inline]</code></p>
+<code>Array &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const typename T::Ptr<b>&amp;</b> rhs);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -82,7 +82,7 @@
 <code>void <span class="method"><a href="#">add</a></span>(typename T::Ptr thread);</code></p>
 <p class="doxygen_fun">Add an existing thread into the container.<br />
 <code>void <span class="method"><a href="#">add</a></span>(typename T::Ptr thread, bool autostart);</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">push_back</a></span>(typename T::Ptr thread); [inline]</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">push_back</a></span>(typename T::Ptr thread);</code></p>
 <p class="doxygen_fun">Resize the pool.<br />
 <code>void <span class="method"><a href="#">resize</a></span>(unsigned int n);</code></p>
 <p class="doxygen_fun">Start all threads.<br />
@@ -96,10 +96,10 @@
 <p class="doxygen_fun">Wake up all threads.<br />
 <code>void <span class="method"><a href="#">wakeUp</a></span>();</code></p>
 <p class="doxygen_fun">Get the number of threads.<br />
-<code>unsigned int <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the array is empty.<br />
-<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Execute a predicate for each thread in pool.<br />
 <code><span class="keyword">template</span>&lt;class PredicateT &gt;<br />void <span class="method"><a href="#">foreachThread</a></span>(PredicateT<b>&amp;</b> predicate) <span class="keyword">const</span>;</code></p>
 </td></tr>

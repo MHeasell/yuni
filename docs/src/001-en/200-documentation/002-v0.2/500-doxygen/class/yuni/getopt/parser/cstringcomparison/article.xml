@@ -10,7 +10,7 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator()</a></span>(const char<b>*</b> s1, const char<b>*</b> s2) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator()</a></span>(const char<b>*</b> s1, const char<b>*</b> s2) <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

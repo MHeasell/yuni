@@ -9,15 +9,15 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">ExceptionList</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">ExceptionList</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
 <code> <span class="method"><a href="#">ExceptionList</a></span>(const ExceptionList<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;<br /> <span class="method"><a href="#">ExceptionList</a></span>(const ExceptionList &lt; OtherDefaultPolicy &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;<br /> <span class="method"><a href="#">ExceptionList</a></span>(const ExceptionList &lt; OtherDefaultPolicy &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Constructor with a default exception list.<br />
-<code> <span class="method"><a href="#">ExceptionList</a></span>(const String::Vector<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">ExceptionList</a></span>(const String::Vector<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Constructor with a default exception list.<br />
-<code> <span class="method"><a href="#">ExceptionList</a></span>(const String::List<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">ExceptionList</a></span>(const String::List<b>&amp;</b> rhs);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">String validation</h3>
@@ -27,30 +27,30 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Add an exception in the list</h3>
 <p class="doxygen_fun">Add an exception.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">exception</a></span>(const U<b>&amp;</b> e); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">exception</a></span>(const U<b>&amp;</b> e);</code></p>
 <p class="doxygen_fun">Operator += on an arbitrary string.<br />
-<code><span class="keyword">template</span>&lt;typename U &gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Add an exception.<br />
-<code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator+=</a></span>(const ExceptionList &lt; OtherDefaultPolicy &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator+=</a></span>(const ExceptionList &lt; OtherDefaultPolicy &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator += on a std::vector.<br />
-<code>ExceptionList &amp; <span class="method"><a href="#">operator+=</a></span>(const String::Vector<b>&amp;</b> rhs); [inline]</code></p>
+<code>ExceptionList &amp; <span class="method"><a href="#">operator+=</a></span>(const String::Vector<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator += on a std::list.<br />
-<code>ExceptionList &amp; <span class="method"><a href="#">operator+=</a></span>(const String::List<b>&amp;</b> rhs); [inline]</code></p>
+<code>ExceptionList &amp; <span class="method"><a href="#">operator+=</a></span>(const String::List<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator &lt;&lt; on an arbitrary string.<br />
-<code><span class="keyword">template</span>&lt;typename U &gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator &lt;&lt; on another exception list.<br />
-<code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const ExceptionList &lt; OtherDefaultPolicy &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const ExceptionList &lt; OtherDefaultPolicy &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator &lt;&lt; on a std::vector.<br />
-<code>ExceptionList &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const String::Vector<b>&amp;</b> rhs); [inline]</code></p>
+<code>ExceptionList &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const String::Vector<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator &lt;&lt; on a std::list.<br />
 <code>ExceptionList &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const String::List<b>&amp;</b> rhs);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Reset the exception list</h3>
 <p class="doxygen_fun">Operator =.<br />
-<code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator=</a></span>(const ExceptionList &lt; OtherDefaultPolicy &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;<br />ExceptionList &amp; <span class="method"><a href="#">operator=</a></span>(const ExceptionList &lt; OtherDefaultPolicy &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator =.<br />
-<code>ExceptionList &amp; <span class="method"><a href="#">operator=</a></span>(const String::Vector<b>&amp;</b> rhs); [inline]</code></p>
+<code>ExceptionList &amp; <span class="method"><a href="#">operator=</a></span>(const String::Vector<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Operator =.<br />
 <code>ExceptionList &amp; <span class="method"><a href="#">operator=</a></span>(const String::List<b>&amp;</b> rhs);</code></p>
 </td></tr>
@@ -58,8 +58,8 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy DefaultPolicy&gt;<br /> <span class="method"><a href="#">ExceptionList</a></span>(const ExceptionList &lt; DefaultPolicy &gt;<b>&amp;</b> rhs); [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator()</a></span>(const U<b>&amp;</b> u) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy DefaultPolicy&gt;<br /> <span class="method"><a href="#">ExceptionList</a></span>(const ExceptionList &lt; DefaultPolicy &gt;<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator()</a></span>(const U<b>&amp;</b> u) <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

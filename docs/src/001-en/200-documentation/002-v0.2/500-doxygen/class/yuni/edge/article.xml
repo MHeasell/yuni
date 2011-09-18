@@ -8,9 +8,9 @@
 <h2>Summary of the class <code>Edge</code></h2><table class="nostyle">
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors and destructors</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Edge</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Edge</a></span>(const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Edge</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Edge</a></span>();</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Edge</a></span>(const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Edge</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -27,12 +27,12 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Access to the vertices composing the edge.<br />
-<code>const Vertex &amp; <span class="method"><a href="#">vertex1</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>const Vertex &amp; <span class="method"><a href="#">vertex2</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Vertex &amp; <span class="method"><a href="#">vertex1</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>const Vertex &amp; <span class="method"><a href="#">vertex2</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Comparison operator (equal with)<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const Edge<b>&amp;</b> other) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator==</a></span>(const Edge<b>&amp;</b> other) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Comparison operator (non equal with)<br />
-<code>bool <span class="method"><a href="#">operator!=</a></span>(const Edge<b>&amp;</b> other) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!=</a></span>(const Edge<b>&amp;</b> other) <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

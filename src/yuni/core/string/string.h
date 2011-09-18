@@ -827,7 +827,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string
 		**
 		** \param cstr An arbitrary string
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size find(char c) const;
 
@@ -835,7 +835,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string
 		**
 		** \param cstr An arbitrary string
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size find(char c, Size offset) const;
 
@@ -844,7 +844,7 @@ namespace Yuni
 		**
 		** \param cstr An arbitrary string
 		** \param len Size of the given cstr
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size find(const char* const cstr, Size offset, Size len) const;
 
@@ -852,7 +852,7 @@ namespace Yuni
 		** \brief Find the offset of any supported CString
 		**
 		** \param cstr Any supported CString
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		template<class StringT> Size find(const StringT& s, Size offset = 0) const;
 
@@ -861,7 +861,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string (ignoring the case)
 		**
 		** \param c A character
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size ifind(char c) const;
 
@@ -869,7 +869,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string (ignoring the case)
 		**
 		** \param cstr An arbitrary string
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size ifind(char c, Size offset) const;
 
@@ -878,7 +878,7 @@ namespace Yuni
 		**
 		** \param cstr An arbitrary string
 		** \param len Size of the given cstr
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size ifind(const char* const cstr, Size offset, Size len) const;
 
@@ -886,7 +886,7 @@ namespace Yuni
 		** \brief Find the offset of any supported CString (ignoring the case)
 		**
 		** \param cstr Any supported CString
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		template<class StringT> Size ifind(const StringT& s, Size offset = 0) const;
 
@@ -895,7 +895,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string
 		**
 		** \param c A character
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size rfind(char c) const;
 
@@ -903,7 +903,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string
 		**
 		** \param c A character
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size rfind(char c, Size offset) const;
 
@@ -911,8 +911,9 @@ namespace Yuni
 		** \brief Find the offset of a raw sub-string with a given length (in bytes)
 		**
 		** \param cstr An arbitrary string
+		** \param offset The position in the string where to start from
 		** \param len Size of the given cstr
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size rfind(const char* const cstr, Size offset, Size len) const;
 
@@ -920,7 +921,8 @@ namespace Yuni
 		** \brief Find the offset of any supported CString
 		**
 		** \param cstr Any supported CString
-		** \return The offset of the first occurence found, `npos` if not found
+		** \param offset The position in the string where to start from
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		template<class StringT> Size rfind(const StringT& s, Size offset = npos) const;
 
@@ -929,7 +931,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string (ignoring the case)
 		**
 		** \param cstr An arbitrary string
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size irfind(char c) const;
 
@@ -937,7 +939,7 @@ namespace Yuni
 		** \brief Find the offset of a sub-string (ignoring the case)
 		**
 		** \param cstr An arbitrary string
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size irfind(char c, Size offset) const;
 
@@ -946,7 +948,7 @@ namespace Yuni
 		**
 		** \param cstr An arbitrary string
 		** \param len Size of the given cstr
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size irfind(const char* const cstr, Size offset, Size len) const;
 
@@ -954,7 +956,7 @@ namespace Yuni
 		** \brief Find the offset of any supported CString (ignoring the case)
 		**
 		** \param cstr Any supported CString
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		template<class StringT> Size irfind(const StringT& s, Size offset = npos) const;
 
@@ -985,7 +987,7 @@ namespace Yuni
 		**   into consideration for possible matches. A value of 0 means that the
 		**   entire string is considered
 		** \param cstr An arbitrary string character
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size indexOf(Size offset, const char cstr) const;
 
@@ -997,7 +999,7 @@ namespace Yuni
 		**   entire string is considered
 		** \param cstr An arbitrary C-string
 		** \param len Size of the given string
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		Size indexOf(Size offset, const char* const cstr, const Size len) const;
 
@@ -1008,7 +1010,7 @@ namespace Yuni
 		**   into consideration for possible matches. A value of 0 means that the
 		**   entire string is considered
 		** \param cstr Any supported String
-		** \return The offset of the first occurence found, `npos` if not found
+		** \return The position of the first occurence found, `npos` if not found
 		*/
 		template<class StringT> Size indexOf(Size offset, const StringT& s) const;
 
@@ -1509,11 +1511,11 @@ namespace Yuni
 		** while (true);
 		** \endcode
 		**
-		** \tparam InvalidateOffsetIfErrorT True to automatically set the offset
+		** \tparam InvalidateOffsetIfErrorT True to automatically set the \p offset
 		**   parameter to `(Size)-1` when the result is not `errNone`
 		** \param[out] offset Offset in the string
 		** \param[out] out    The UTF-8 char
-		** \return True if an UTF8 char has been found, false otherwise (@offset may become invalid)
+		** \return True if an UTF8 char has been found, false otherwise (\p offset may become invalid)
 		*/
 		template<bool InvalidateOffsetIfErrorT>
 		UTF8::Error utf8next(Size& offset, UTF8::Char& out) const;
@@ -1526,7 +1528,7 @@ namespace Yuni
 		** \brief Get the item at a given position in a safe way
 		**
 		** Contrary to the operator [], it is safe to use an invalid offset
-		** \return The item at position 'offset', a default value if the offset is out of bound
+		** \return The item at position \p offset, a default value if the offset is out of bound
 		*/
 		int at(const Size offset) const;
 
@@ -1542,7 +1544,7 @@ namespace Yuni
 		** \brief Ensure that there is enough allocated space for X caracters
 		**
 		** The content will remain untouched.
-		** \param min The minimum capacity of the string (in bytes)
+		** \param minCapacity The minimum capacity of the string (in bytes)
 		*/
 		void reserve(Size minCapacity);
 
@@ -1754,8 +1756,9 @@ namespace Yuni
 		**
 		** The format is the standard printf format.
 		** \param format The format, represented by a zero-terminated C-String
+		** \param args   The arguments required by the format
 		*/
-		void vappendFormat(const char* const format, va_list args);
+		void vappendFormat(const char* format, va_list args);
 		//@}
 
 

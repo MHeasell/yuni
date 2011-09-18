@@ -9,7 +9,7 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">Bank</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Bank</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
 <code> <span class="method"><a href="#">Bank</a></span>(const Bank<b>&amp;</b> );</code></p>
 </td></tr>
@@ -33,13 +33,13 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Clear the bank, free the loaded buffers.<br />
-<code>void <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
 <p class="doxygen_fun">Load sound file from given path.<br />
-<code><span class="keyword">template</span>&lt;typename StringT &gt;<br />bool <span class="method"><a href="#">load</a></span>(const StringT<b>&amp;</b> name); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename StringT &gt;<br />bool <span class="method"><a href="#">load</a></span>(const StringT<b>&amp;</b> name);</code></p>
 <p class="doxygen_fun">Get the duration of a loaded sound.<br />
-<code><span class="keyword">template</span>&lt;typename StringT &gt;<br />unsigned int <span class="method"><a href="#">duration</a></span>(const StringT<b>&amp;</b> name); [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">load</a></span>(const String<b>&amp;</b> filePath); [inline]</code></p>
-<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">duration</a></span>(const String<b>&amp;</b> name); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename StringT &gt;<br />unsigned int <span class="method"><a href="#">duration</a></span>(const StringT<b>&amp;</b> name);</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">load</a></span>(const String<b>&amp;</b> filePath);</code></p>
+<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">duration</a></span>(const String<b>&amp;</b> name);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>

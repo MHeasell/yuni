@@ -16,7 +16,7 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Operator !<br />
-<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -31,7 +31,7 @@
 <p class="doxygen_fun">Notify the waiter.<br />
 <code>bool <span class="method"><a href="#">notify</a></span>();</code></p>
 <p class="doxygen_fun">Get if the signal is valid.<br />
-<code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

@@ -10,7 +10,7 @@ namespace Net
 {
 
 	/*!
-	** \brief Errors that can be returned by routines in the 'Yuni::Net' module
+	** \brief Errors that can be returned by routines in the \p 'Yuni::Net' module
 	*/
 	enum Error
 	{

@@ -1,8 +1,7 @@
 #ifndef __YUNI_CORE_DYNAMICLIBRARY_FILE_H__
 # define __YUNI_CORE_DYNAMICLIBRARY_FILE_H__
 /*!
-** \file file.h
-** Header for Yuni::DynamicLibrary::File, a class for manipulating Executable Object Files
+** 'brief Header for Yuni::DynamicLibrary::File, a class for manipulating Executable Object Files
 */
 
 # include "../../yuni.h"

@@ -23,19 +23,19 @@
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">NullIterator</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">NullIterator</a></span>(const NullIterator<b>&amp;</b> ); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /> <span class="method"><a href="#">NullIterator</a></span>(const ModelT<b>&amp;</b> ); [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">equals</a></span>(const NullIterator<b>&amp;</b> ); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const ModelT<b>&amp;</b> model); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> ) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">NullIterator</a></span>();</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">NullIterator</a></span>(const NullIterator<b>&amp;</b> );</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /> <span class="method"><a href="#">NullIterator</a></span>(const ModelT<b>&amp;</b> );</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">equals</a></span>(const NullIterator<b>&amp;</b> );</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const ModelT<b>&amp;</b> model);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> ) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">static</span> void <span class="method"><a href="#">forward</a></span>(difference_type ); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> void <span class="method"><a href="#">forward</a></span>(difference_type );</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> );</code></p>
 </td></tr>
 </table>
 

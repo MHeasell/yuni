@@ -9,9 +9,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">IChecksum</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">IChecksum</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>IChecksum</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>IChecksum</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
@@ -25,19 +25,19 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Reset the hash value.<br />
-<code>void <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
 <p class="doxygen_fun">Compute the hash from a string.<br />
-<code>const String &amp; <span class="method"><a href="#">fromString</a></span>(const String<b>&amp;</b> s); [inline]</code></p>
+<code>const String &amp; <span class="method"><a href="#">fromString</a></span>(const String<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun">Compute the hash from raw data.<br />
 <code>const String &amp; <span class="method"><a href="#">fromRawData</a></span>(const void<b>*</b> rawdata, uint64 size);</code></p>
 <p class="doxygen_fun">Compute the hash of a given file.<br />
 <code>const String &amp; <span class="method"><a href="#">fromFile</a></span>(const String<b>&amp;</b> filename);</code></p>
 <p class="doxygen_fun">Get the last hash value.<br />
-<code>const String &amp; <span class="method"><a href="#">value</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const String &amp; <span class="method"><a href="#">value</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the hash value.<br />
-<code>const String &amp; <span class="method"><a href="#">operator()</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const String &amp; <span class="method"><a href="#">operator()</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Compute the hash value from a string and returns it.<br />
-<code>const String &amp; <span class="method"><a href="#">operator[]</a></span>(const String<b>&amp;</b> s); [inline]</code></p>
+<code>const String &amp; <span class="method"><a href="#">operator[]</a></span>(const String<b>&amp;</b> s);</code></p>
 </td></tr>
 </table>
 

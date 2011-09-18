@@ -20,9 +20,9 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">BadCast</a></span>(const std::type_info<b>&amp;</b> src, const std::type_info<b>&amp;</b> dest); [inline]</code></p>
+<code> <span class="method"><a href="#">BadCast</a></span>(const std::type_info<b>&amp;</b> src, const std::type_info<b>&amp;</b> dest);</code></p>
 <p class="doxygen_fun">Description printed by libstdc++.<br />
-<code>const char * <span class="method"><a href="#">what</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const char * <span class="method"><a href="#">what</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

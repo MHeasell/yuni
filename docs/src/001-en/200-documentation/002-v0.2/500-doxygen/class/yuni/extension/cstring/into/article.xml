@@ -16,8 +16,8 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /><span class="keyword">static</span> bool <span class="method"><a href="#">Perform</a></span>(const StringT<b>&amp;</b> , T<b>&amp;</b> out); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /><span class="keyword">static</span> T <span class="method"><a href="#">Perform</a></span>(const StringT<b>&amp;</b> ); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /><span class="keyword">static</span> bool <span class="method"><a href="#">Perform</a></span>(const StringT<b>&amp;</b> , T<b>&amp;</b> out);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /><span class="keyword">static</span> T <span class="method"><a href="#">Perform</a></span>(const StringT<b>&amp;</b> );</code></p>
 </td></tr>
 </table>
 
