@@ -11,9 +11,9 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Creation of the data.<br />
-<code><span class="keyword">static</span> T * <span class="method"><a href="#">Create</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> T * <span class="method"><a href="#">Create</a></span>();</code></p>
 <p class="doxygen_fun">Destruction of the data.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">Destroy</a></span>(U<b>*</b> data); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">Destroy</a></span>(U<b>*</b> data);</code></p>
 </td></tr>
 </table>
 

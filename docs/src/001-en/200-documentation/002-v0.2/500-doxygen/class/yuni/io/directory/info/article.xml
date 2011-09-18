@@ -25,66 +25,66 @@
 <p class="doxygen_typedef">A generic null iterator.<br />
 <code><span class="keyword">typedef</span> Yuni::IIterator &lt; Model::NullIterator , true &gt; <span class="method"><a href="#">null_iterator</a></span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>null_iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>file_iterator <span class="method"><a href="#">file_begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>file_iterator <span class="method"><a href="#">file_begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>null_iterator <span class="method"><a href="#">file_end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">file_end</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>folder_iterator <span class="method"><a href="#">folder_begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>folder_iterator <span class="method"><a href="#">folder_begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>null_iterator <span class="method"><a href="#">folder_end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">folder_end</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>recursive_iterator <span class="method"><a href="#">recursive_begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>recursive_iterator <span class="method"><a href="#">recursive_begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>null_iterator <span class="method"><a href="#">recursive_end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">recursive_end</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>recursive_file_iterator <span class="method"><a href="#">recursive_file_begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>recursive_file_iterator <span class="method"><a href="#">recursive_file_begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>null_iterator <span class="method"><a href="#">recursive_file_end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">recursive_file_end</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>recursive_folder_iterator <span class="method"><a href="#">recursive_folder_begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>recursive_folder_iterator <span class="method"><a href="#">recursive_folder_begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Options for performing an iteration.<br />
-<code>null_iterator <span class="method"><a href="#">recursive_folder_end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>null_iterator <span class="method"><a href="#">recursive_folder_end</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Info</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Info</a></span>();</code></p>
 <p class="doxygen_fun">Constructor.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Info</a></span>(const StringT<b>&amp;</b> directory); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Info</a></span>(const StringT<b>&amp;</b> directory);</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Info</a></span>(const Info<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Info</a></span>(const Info<b>&amp;</b> rhs);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Common operations</h3>
 <p class="doxygen_fun">Create the directory recursively.<br />
-<code>bool <span class="method"><a href="#">create</a></span>(unsigned int mode) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">create</a></span>(unsigned int mode) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Remove the directory and all its content.<br />
-<code>bool <span class="method"><a href="#">remove</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">remove</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Clean the directory (remove all its content)<br />
 <code>bool <span class="method"><a href="#">clean</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Copy the directory and its content into another location.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">copy</a></span>(const StringT<b>&amp;</b> destination) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />bool <span class="method"><a href="#">copy</a></span>(const StringT<b>&amp;</b> destination) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set as the current directory.<br />
-<code>bool <span class="method"><a href="#">setAsCurrentDirectory</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">setAsCurrentDirectory</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Assignement.<br />
-<code>Info &amp; <span class="method"><a href="#">operator=</a></span>(const Info<b>&amp;</b> rhs); [inline]</code></p>
+<code>Info &amp; <span class="method"><a href="#">operator=</a></span>(const Info<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Assignment, for any types convertible into a string.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Info &amp; <span class="method"><a href="#">operator=</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Info &amp; <span class="method"><a href="#">operator=</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Comparison.<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const Info<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator==</a></span>(const Info<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Comparison.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">operator==</a></span>(const U<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">operator==</a></span>(const U<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Assignement.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Info &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Info &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Assignement.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Info &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Info &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> rhs);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -96,15 +96,15 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Get if the directory exists.<br />
-<code>bool <span class="method"><a href="#">exists</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">exists</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Normalize the directory path.<br />
 <code>void <span class="method"><a href="#">normalize</a></span>();</code></p>
 <p class="doxygen_fun">Normalize the directory path.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">normalize</a></span>(StringT<b>&amp;</b> tmp); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">normalize</a></span>(StringT<b>&amp;</b> tmp);</code></p>
 <p class="doxygen_fun">Get a reference to the directory string itself (const)<br />
-<code>const String &amp; <span class="method"><a href="#">directory</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const String &amp; <span class="method"><a href="#">directory</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get a reference to the directory string itself.<br />
-<code>String &amp; <span class="method"><a href="#">directory</a></span>(); [inline]</code></p>
+<code>String &amp; <span class="method"><a href="#">directory</a></span>();</code></p>
 </td></tr>
 </table>
 

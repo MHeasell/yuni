@@ -4,6 +4,9 @@
 <p>This is a list of all classes in Yuni.</p>
 <table>
 <tr><th>Name</th><th>Description</th></tr><tr><td>
+<a href="../class/depthprefixiterator/@{INDEX}">DepthPrefixIterator</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/iterator/@{INDEX}">Iterator</a>
 </td><td></td></tr>
 <tr><td>
@@ -67,6 +70,9 @@
 <a href="../class/yuni/bind/@{INDEX}">Yuni::Bind</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/bit/array/@{INDEX}">Yuni::Bit::Array</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/boundingbox/@{INDEX}">Yuni::BoundingBox</a>
 </td><td></td></tr>
 <tr><td>
@@ -100,9 +106,6 @@
 <a href="../class/yuni/color/rgba/calculation/@{INDEX}">Yuni::Color::RGBA::Calculation</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../class/yuni/core/bit/array/@{INDEX}">Yuni::Core::Bit::Array</a>
-</td><td></td></tr>
-<tr><td>
 <a href="../class/yuni/core/eventloop/flow/continuous/@{INDEX}">Yuni::Core::EventLoop::Flow::Continuous</a>
 </td><td></td></tr>
 <tr><td>
@@ -118,6 +121,9 @@
 <a href="../class/yuni/core/stl/delete/@{INDEX}">Yuni::Core::STL::Delete</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/core/tree/depthprefixiterator/@{INDEX}">Yuni::Core::Tree::DepthPrefixIterator</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/core/treen/@{INDEX}">Yuni::Core::TreeN</a>
 </td><td></td></tr>
 <tr><td>
@@ -128,9 +134,6 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/default/@{INDEX}">Yuni::Default</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/device/display/display_device_full/@{INDEX}">Yuni::Device::Display::DISPLAY_DEVICE_FULL</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/device/display/list/@{INDEX}">Yuni::Device::Display::List</a>
@@ -374,9 +377,6 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/job/queueservice/threadinfo/@{INDEX}">Yuni::Job::QueueService::ThreadInfo</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/job/queueservicepoll/@{INDEX}">Yuni::Job::QueueServicePoll</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/job/scheduler/highestpriorityfirst/@{INDEX}">Yuni::Job::Scheduler::HighestPriorityFirst</a>

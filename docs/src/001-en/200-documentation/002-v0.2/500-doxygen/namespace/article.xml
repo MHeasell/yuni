@@ -16,6 +16,9 @@
 <a href="../namespace/yuni/audio/@{INDEX}">Yuni::Audio</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../namespace/yuni/bit/@{INDEX}">Yuni::Bit</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../namespace/yuni/charset/@{INDEX}">Yuni::Charset</a>
 </td><td></td></tr>
 <tr><td>
@@ -23,9 +26,6 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/core/@{INDEX}">Yuni::Core</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/core/bit/@{INDEX}">Yuni::Core::Bit</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/core/eventloop/@{INDEX}">Yuni::Core::EventLoop</a>
@@ -40,7 +40,13 @@
 <a href="../namespace/yuni/core/stl/@{INDEX}">Yuni::Core::STL</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../namespace/yuni/core/tree/@{INDEX}">Yuni::Core::Tree</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../namespace/yuni/core/utils/@{INDEX}">Yuni::Core::Utils</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../namespace/yuni/datetime/@{INDEX}">Yuni::DateTime</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/device/@{INDEX}">Yuni::Device</a>
@@ -262,4 +268,4 @@
 <a href="../namespace/std/@{INDEX}">std</a>
 </td><td></td></tr>
 </table>
-<p><i>(total: 86 namespaces)</i></p>
+<p><i>(total: 88 namespaces)</i></p>

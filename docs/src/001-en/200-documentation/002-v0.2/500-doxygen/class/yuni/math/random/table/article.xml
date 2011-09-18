@@ -9,9 +9,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Table</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Table</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -29,24 +29,24 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Reset the random number generator.<br />
-<code>void <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
 <p class="doxygen_fun">Get the next random number.<br />
-<code>const Value <span class="method"><a href="#">next</a></span>(); [inline]</code></p>
+<code>const Value <span class="method"><a href="#">next</a></span>();</code></p>
 <p class="doxygen_fun">Fill the table with a new set of random numbers.<br />
-<code>void <span class="method"><a href="#">fill</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">fill</a></span>();</code></p>
 <p class="doxygen_fun">The operator `&gt;&gt;`.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Table &amp; <span class="method"><a href="#">operator&gt;&gt;</a></span>(U<b>&amp;</b> u); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Table &amp; <span class="method"><a href="#">operator&gt;&gt;</a></span>(U<b>&amp;</b> u);</code></p>
 <p class="doxygen_fun">The operator `()`.<br />
-<code>const Value <span class="method"><a href="#">operator()</a></span>(); [inline]</code></p>
+<code>const Value <span class="method"><a href="#">operator()</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Name of the distribution.<br />
-<code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>();</code></p>
 <p class="doxygen_fun">Get the number of random number in the table.<br />
-<code><span class="keyword">static</span> int <span class="method"><a href="#">size</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> int <span class="method"><a href="#">size</a></span>();</code></p>
 </td></tr>
 </table>
 

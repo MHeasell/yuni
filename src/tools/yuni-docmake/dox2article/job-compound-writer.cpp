@@ -310,7 +310,7 @@ namespace Job
 			else
 				file << name;
 			file << "</title>\n";
-			file << "<pragma:weight value=\"0.45\" />\n";
+			file << "<pragma:weight value=\"0.40\" />\n";
 			file << "<tag name=\"doxygen\" />\n";
 			file << "<tag name=\"namespace\" />\n";
 			file << "\n\n";

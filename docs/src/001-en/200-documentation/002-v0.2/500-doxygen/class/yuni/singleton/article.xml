@@ -52,7 +52,7 @@
 <td><h3 class="h3noleftspace">Protected
 </h3>
 <p class="doxygen_fun">Protected constructor !<br />
-<code> <span class="method"><a href="#">Singleton</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Singleton</a></span>();</code></p>
 </td></tr>
 </table>
 

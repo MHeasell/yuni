@@ -9,46 +9,46 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">LinkedList</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">LinkedList</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">LinkedList</a></span>(const LinkedList<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">LinkedList</a></span>(const LinkedList<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Copy constructor from another linked list.<br />
-<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">LinkedList</a></span>(const LinkedList &lt; U, A &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">LinkedList</a></span>(const LinkedList &lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Copy constructor from a standard std::list.<br />
-<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">LinkedList</a></span>(const std::list&lt; U, A &gt;<b>&amp;</b> rhs); [inline]</code></p>
-<p class="doxygen_fun">Copy Constructor from a standard std::vector.<br />
-<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">LinkedList</a></span>(const std::vector&lt; U, A &gt;<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">LinkedList</a></span>(const std::list&lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun">Copy constructor from a standard std::vector.<br />
+<code><span class="keyword">template</span>&lt;class U , class A &gt;<br /> <span class="method"><a href="#">LinkedList</a></span>(const std::vector&lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>LinkedList</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>LinkedList</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Iterators &amp; Accessors</h3>
-<p class="doxygen_fun">Get an iterator at the begining of the list.<br />
-<code>iterator <span class="method"><a href="#">begin</a></span>(); [inline]</code></p>
-<p class="doxygen_fun">Get an iterator at the begining of the list.<br />
-<code>const_iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun">Get an iterator at the enf of the list.<br />
-<code>iterator <span class="method"><a href="#">end</a></span>(); [inline]</code></p>
-<p class="doxygen_fun">Get an iterator at the begining of the list.<br />
-<code>const_iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun">Get the front item.<br />
-<code>reference_type <span class="method"><a href="#">front</a></span>(); [inline]</code></p>
-<p class="doxygen_fun">Get an iterator at the begining of the list.<br />
-<code>const_reference_type <span class="method"><a href="#">front</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun">Get an iterator at the beginning of the list.<br />
+<code>iterator <span class="method"><a href="#">begin</a></span>();</code></p>
+<p class="doxygen_fun">Get an iterator at the beginning of the list.<br />
+<code>const_iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Get an iterator at the end of the list.<br />
+<code>iterator <span class="method"><a href="#">end</a></span>();</code></p>
+<p class="doxygen_fun">Get an iterator at the beginning of the list.<br />
+<code>const_iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun">Get the first item.<br />
+<code>reference_type <span class="method"><a href="#">front</a></span>();</code></p>
+<p class="doxygen_fun">Get an iterator at the beginning of the list.<br />
+<code>const_reference_type <span class="method"><a href="#">front</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the last item.<br />
-<code>reference_type <span class="method"><a href="#">back</a></span>(); [inline]</code></p>
-<p class="doxygen_fun">Get an iterator at the begining of the list.<br />
-<code>const_reference_type <span class="method"><a href="#">back</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>reference_type <span class="method"><a href="#">back</a></span>();</code></p>
+<p class="doxygen_fun">Get an iterator at the beginning of the list.<br />
+<code>const_reference_type <span class="method"><a href="#">back</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Find</h3>
-<p class="doxygen_fun">Get the first item equals to a given value.<br />
+<p class="doxygen_fun">Get the first item equal to a given value.<br />
 <code><span class="keyword">template</span>&lt;class U &gt;<br />iterator <span class="method"><a href="#">find</a></span>(const U<b>&amp;</b> value);</code></p>
-<p class="doxygen_fun">Get the first item equals to a given value.<br />
+<p class="doxygen_fun">Get the first item equal to a given value.<br />
 <code>iterator <span class="method"><a href="#">find</a></span>(const_reference_type value);</code></p>
-<p class="doxygen_fun">Get the first item equals to a given value.<br />
+<p class="doxygen_fun">Get the first item equal to a given value.<br />
 <code><span class="keyword">template</span>&lt;class U &gt;<br />const_iterator <span class="method"><a href="#">find</a></span>(const U<b>&amp;</b> value) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the first item equals to a given value.<br />
+<p class="doxygen_fun">Get the first item equal to a given value.<br />
 <code>const_iterator <span class="method"><a href="#">find</a></span>(const_reference_type value) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
@@ -56,43 +56,43 @@
 <p class="doxygen_fun">Add a value at the end of the list (default constructor)<br />
 <code>void <span class="method"><a href="#">push_back</a></span>();</code></p>
 <p class="doxygen_fun">Add a value at the end of the list.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">push_back</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">push_back</a></span>(const U<b>&amp;</b> value);</code></p>
 <p class="doxygen_fun">Add a value at the end of the list (default constructor)<br />
-<code>void <span class="method"><a href="#">push_back</a></span>(reference_type value); [inline]</code></p>
+<code>void <span class="method"><a href="#">push_back</a></span>(reference_type value);</code></p>
 <p class="doxygen_fun">Add a list of values at the end of the list.<br />
 <code><span class="keyword">template</span>&lt;class U , class A &gt;<br />void <span class="method"><a href="#">push_back</a></span>(const LinkedList &lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Add a list of values at the end of the list.<br />
 <code><span class="keyword">template</span>&lt;class U , class A &gt;<br />void <span class="method"><a href="#">push_back</a></span>(const std::list&lt; U, A &gt; rhs);</code></p>
 <p class="doxygen_fun">Add a list of values at the end of the list.<br />
 <code><span class="keyword">template</span>&lt;class U , class A &gt;<br />void <span class="method"><a href="#">push_back</a></span>(const std::vector&lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Add a value at the begining of the list (default constructor)<br />
+<p class="doxygen_fun">Add a value at the beginning of the list (default constructor)<br />
 <code>void <span class="method"><a href="#">push_front</a></span>();</code></p>
 <p class="doxygen_fun">Add a value at the begining of the list.<br />
 <code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">push_front</a></span>(const U<b>&amp;</b> value);</code></p>
 <p class="doxygen_fun">Add a value at the end of the list (default constructor)<br />
 <code>void <span class="method"><a href="#">push_front</a></span>(reference_type value);</code></p>
-<p class="doxygen_fun">Add a list of values at the begining of the list.<br />
+<p class="doxygen_fun">Add a list of values at the beginning of the list.<br />
 <code><span class="keyword">template</span>&lt;class U , class A &gt;<br />void <span class="method"><a href="#">push_front</a></span>(const LinkedList &lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Add a list of values at the begining of the list.<br />
+<p class="doxygen_fun">Add a list of values at the beginning of the list.<br />
 <code><span class="keyword">template</span>&lt;class U , class A &gt;<br />void <span class="method"><a href="#">push_front</a></span>(const std::list&lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Add a list of values at the begining of the list.<br />
+<p class="doxygen_fun">Add a list of values at the beginning of the list.<br />
 <code><span class="keyword">template</span>&lt;class U , class A &gt;<br />void <span class="method"><a href="#">push_front</a></span>(const std::vector&lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Remove the first element.<br />
 <code>void <span class="method"><a href="#">pop_front</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Remove</h3>
-<p class="doxygen_fun">Remove the item pointed by the iterator.<br />
+<p class="doxygen_fun">Remove the item pointed to by the iterator.<br />
 <code>void <span class="method"><a href="#">erase</a></span>(iterator<b>&amp;</b> i);</code></p>
-<p class="doxygen_fun">Remove any item equals to a given value.<br />
+<p class="doxygen_fun">Remove any item equal to a given value.<br />
 <code><span class="keyword">template</span>&lt;class U &gt;<br />Size <span class="method"><a href="#">remove</a></span>(const U<b>&amp;</b> value);</code></p>
-<p class="doxygen_fun">Remove the item pointed by the iterator.<br />
+<p class="doxygen_fun">Remove the item pointed to by the iterator.<br />
 <code>Size <span class="method"><a href="#">remove</a></span>(reference_type value);</code></p>
-<p class="doxygen_fun">Remove any item equals to a value in the given list.<br />
+<p class="doxygen_fun">Remove any item equal to a value in the given list.<br />
 <code><span class="keyword">template</span>&lt;class U , class A &gt;<br />Size <span class="method"><a href="#">remove</a></span>(const LinkedList &lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Remove any item equals to a value in the given list.<br />
+<p class="doxygen_fun">Remove any item equal to a value in the given list.<br />
 <code><span class="keyword">template</span>&lt;class U , class A &gt;<br />Size <span class="method"><a href="#">remove</a></span>(const std::list&lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Remove any item equals to a value in the given list.<br />
+<p class="doxygen_fun">Remove any item equal to a value in the given list.<br />
 <code><span class="keyword">template</span>&lt;class U , class A &gt;<br />Size <span class="method"><a href="#">remove</a></span>(const std::vector&lt; U, A &gt;<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Remove all items at once.<br />
 <code>void <span class="method"><a href="#">clear</a></span>();</code></p>
@@ -100,30 +100,30 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Memory</h3>
 <p class="doxygen_fun">Get if the container is empty.<br />
-<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the container is not empty.<br />
-<code>bool <span class="method"><a href="#">notEmpty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">notEmpty</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the number of items in the container.<br />
-<code>Size <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Size <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Clear then add the value.<br />
-<code>LinkedList &amp; <span class="method"><a href="#">operator=</a></span>(const LinkedList<b>&amp;</b> value); [inline]</code></p>
+<code>LinkedList &amp; <span class="method"><a href="#">operator=</a></span>(const LinkedList<b>&amp;</b> value);</code></p>
 <p class="doxygen_fun">Append a new item at the end of the list.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />LinkedList &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />LinkedList &amp; <span class="method"><a href="#">operator+=</a></span>(const U<b>&amp;</b> value);</code></p>
 <p class="doxygen_fun">Append a new item at the end of the list.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />LinkedList &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
-<p class="doxygen_fun">Remove all items equals to 'value'.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />LinkedList &amp; <span class="method"><a href="#">operator-=</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />LinkedList &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> value);</code></p>
+<p class="doxygen_fun">Remove all items equal to 'value'.<br />
+<code><span class="keyword">template</span>&lt;class U &gt;<br />LinkedList &amp; <span class="method"><a href="#">operator-=</a></span>(const U<b>&amp;</b> value);</code></p>
 <p class="doxygen_fun">Check if the container is empty.<br />
-<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
-<p>A non-zero value to base the comparison between values on a deferenced pointer.<br />
+<p>Indicates whether to base the comparison between values on a dereferenced pointer.<br />
 <code><i>(unmanaged tag)</i></code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
@@ -132,7 +132,7 @@
 </h3>
 <p class="doxygen_typedef">Size type.<br />
 <code><span class="keyword">typedef</span> unsigned int <span class="method"><a href="#">Size</a></span>;</code></p>
-<p class="doxygen_typedef">Size tpye (STL compliant)<br />
+<p class="doxygen_typedef">Size type (STL compliant)<br />
 <code><span class="keyword">typedef</span> Size <span class="method"><a href="#">size_type</a></span>;</code></p>
 <p class="doxygen_typedef">Value type.<br />
 <code><span class="keyword">typedef</span> T <span class="method"><a href="#">Type</a></span>;</code></p>
@@ -156,7 +156,7 @@
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
-<p class="doxygen_var">The Head of the list.<br />
+<p class="doxygen_var">The head of the list.<br />
 <code>Item * <span class="method"><a href="#">pHead</a></span>;</code></p>
 <p class="doxygen_var">The last item in the list.<br />
 <code>Item * <span class="method"><a href="#">pLast</a></span>;</code></p>

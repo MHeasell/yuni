@@ -102,6 +102,7 @@ namespace Text
 		//@{
 		/*!
 		** \brief Add an exception
+		**
 		** \param e The exception (arbitrary string)
 		*/
 		template<class U> void exception(const U& e);

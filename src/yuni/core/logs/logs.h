@@ -60,7 +60,7 @@ namespace Logs
 	**
 	**
 	** \tparam TP The Threading Policy
-	** \tapram Handlers A static list of all message handlers
+	** \tparam Handlers A static list of all message handlers
 	** \tparam Decorators A static list of all decorators
 	*/
 	template<

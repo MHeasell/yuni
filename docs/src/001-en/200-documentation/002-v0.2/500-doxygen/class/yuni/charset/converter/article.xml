@@ -17,8 +17,8 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code>int <span class="method"><a href="#">lastError</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>int <span class="method"><a href="#">lastError</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Closes the conversion context.<br />
 <code>void <span class="method"><a href="#">close</a></span>();</code></p>
 <p class="doxygen_fun">Resets the conversion context.<br />

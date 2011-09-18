@@ -9,13 +9,13 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Shortest constructor.<br />
-<code> <span class="method"><a href="#">Emitter</a></span>(bool loop); [inline]</code></p>
+<code> <span class="method"><a href="#">Emitter</a></span>(bool loop);</code></p>
 <p class="doxygen_fun">Constructor with 3D position.<br />
-<code> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position, bool loop); [inline]</code></p>
+<code> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position, bool loop);</code></p>
 <p class="doxygen_fun">Constructor with position, velocity and direction.<br />
-<code> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position, const Vector3D &lt;&gt;<b>&amp;</b> velocity, const Vector3D &lt;&gt;<b>&amp;</b> direction, bool loop); [inline]</code></p>
+<code> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position, const Vector3D &lt;&gt;<b>&amp;</b> velocity, const Vector3D &lt;&gt;<b>&amp;</b> direction, bool loop);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Emitter</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Emitter</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Methods</h3>
@@ -33,25 +33,25 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Accessors</h3>
 <p class="doxygen_fun">Set the 3D position of the emitter.<br />
-<code>void <span class="method"><a href="#">position</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position); [inline]</code></p>
+<code>void <span class="method"><a href="#">position</a></span>(const Point3D &lt;&gt;<b>&amp;</b> position);</code></p>
 <p class="doxygen_fun">Get the 3D position of the emitter.<br />
-<code>Point3D <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Point3D <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the velocity of the emitter.<br />
-<code>void <span class="method"><a href="#">velocity</a></span>(const Vector3D &lt;&gt;<b>&amp;</b> position); [inline]</code></p>
+<code>void <span class="method"><a href="#">velocity</a></span>(const Vector3D &lt;&gt;<b>&amp;</b> position);</code></p>
 <p class="doxygen_fun">Get the velocity of the emitter.<br />
-<code>Vector3D <span class="method"><a href="#">velocity</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Vector3D <span class="method"><a href="#">velocity</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the direction of the emitter.<br />
-<code>void <span class="method"><a href="#">direction</a></span>(const Vector3D &lt;&gt;<b>&amp;</b> position); [inline]</code></p>
+<code>void <span class="method"><a href="#">direction</a></span>(const Vector3D &lt;&gt;<b>&amp;</b> position);</code></p>
 <p class="doxygen_fun">Get the direction of the emitter.<br />
-<code>Vector3D <span class="method"><a href="#">direction</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Vector3D <span class="method"><a href="#">direction</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the volume modifier on the emitter.<br />
-<code>void <span class="method"><a href="#">gain</a></span>(float newGain); [inline]</code></p>
+<code>void <span class="method"><a href="#">gain</a></span>(float newGain);</code></p>
 <p class="doxygen_fun">Get the current volume modifier.<br />
-<code>float <span class="method"><a href="#">gain</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>float <span class="method"><a href="#">gain</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the elapsed playback time (in seconds)<br />
 <code>sint64 <span class="method"><a href="#">elapsedTime</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the identifier for the emitter.<br />
-<code>unsigned int <span class="method"><a href="#">id</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">id</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

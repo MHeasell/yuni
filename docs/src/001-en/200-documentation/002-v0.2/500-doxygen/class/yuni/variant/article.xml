@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Constructs an empty Variant .<br />
-<code> <span class="method"><a href="#">Variant</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Variant</a></span>();</code></p>
 <p class="doxygen_fun">Constructs a copy of an existing Variant .<br />
-<code> <span class="method"><a href="#">Variant</a></span>(const Variant<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Variant</a></span>(const Variant<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Constructs a Variant based on an existing variable of simple type.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br /> <span class="method"><a href="#">Variant</a></span>(const T<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename T &gt;<br /> <span class="method"><a href="#">Variant</a></span>(const T<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Destructor.<br />
 <code> <span class="method"><a href="#"><b> ~ </b>Variant</a></span>();</code></p>
 </td></tr>
@@ -22,20 +22,20 @@
 <p class="doxygen_fun">Assignment from an existing Variant .<br />
 <code>void <span class="method"><a href="#">assign</a></span>(const Variant<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Assignment from a simple type.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br />void <span class="method"><a href="#">assign</a></span>(const T<b>&amp;</b> rhs); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename T &gt;<br />void <span class="method"><a href="#">assign</a></span>(const T<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Specific assignment from C strings.<br />
-<code>void <span class="method"><a href="#">assign</a></span>(const char<b>*</b> rhs); [inline]</code></p>
+<code>void <span class="method"><a href="#">assign</a></span>(const char<b>*</b> rhs);</code></p>
 <p class="doxygen_fun">Resets the Variant to an empty one.<br />
 <code>void <span class="method"><a href="#">clear</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Information methods</h3>
 <p class="doxygen_fun">Returns true if the Variant is empty.<br />
-<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operator overloads</h3>
-<p class="doxygen_fun"><code>Variant &amp; <span class="method"><a href="#">operator=</a></span>(const Variant<b>&amp;</b> rhs); [inline]</code></p>
+<p class="doxygen_fun"><code>Variant &amp; <span class="method"><a href="#">operator=</a></span>(const Variant<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename T &gt;<br />Variant &amp; <span class="method"><a href="#">operator=</a></span>(const T<b>&amp;</b> rhs);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>

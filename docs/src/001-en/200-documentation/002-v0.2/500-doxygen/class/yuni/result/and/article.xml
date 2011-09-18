@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">And</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">And</a></span>();</code></p>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">And</a></span>(bool defaultValue); [inline]</code></p>
+<code> <span class="method"><a href="#">And</a></span>(bool defaultValue);</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">And</a></span>(const And<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">And</a></span>(const And<b>&amp;</b> rhs);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -27,12 +27,12 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Take into account a new value.<br />
-<code>void <span class="method"><a href="#">operator()</a></span>(const T<b>&amp;</b> v); [inline]</code></p>
+<code>void <span class="method"><a href="#">operator()</a></span>(const T<b>&amp;</b> v);</code></p>
 <p class="doxygen_fun">The Final result.<br />
-<code>ResultType <span class="method"><a href="#">result</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>ResultType <span class="method"><a href="#">result</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Reset the internal counter.<br />
-<code>void <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>(bool v); [inline]</code></p>
+<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>(bool v);</code></p>
 </td></tr>
 </table>
 

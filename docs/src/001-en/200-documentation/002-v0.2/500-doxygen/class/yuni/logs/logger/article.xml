@@ -9,56 +9,56 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">Logger</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Logger</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Logger</a></span>(const Logger<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Logger</a></span>(const Logger<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Logger</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Logger</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Checkpoint</h3>
-<p class="doxygen_fun"><code>CheckpointBuffer <span class="method"><a href="#">checkpoint</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />CheckpointBuffer <span class="method"><a href="#">checkpoint</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<p class="doxygen_fun"><code>CheckpointBuffer <span class="method"><a href="#">checkpoint</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />CheckpointBuffer <span class="method"><a href="#">checkpoint</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Notice</h3>
-<p class="doxygen_fun"><code>NoticeBuffer <span class="method"><a href="#">notice</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />NoticeBuffer <span class="method"><a href="#">notice</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<p class="doxygen_fun"><code>NoticeBuffer <span class="method"><a href="#">notice</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />NoticeBuffer <span class="method"><a href="#">notice</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Info</h3>
-<p class="doxygen_fun"><code>InfoBuffer <span class="method"><a href="#">info</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />InfoBuffer <span class="method"><a href="#">info</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<p class="doxygen_fun"><code>InfoBuffer <span class="method"><a href="#">info</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />InfoBuffer <span class="method"><a href="#">info</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Warning</h3>
-<p class="doxygen_fun"><code>WarningBuffer <span class="method"><a href="#">warning</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />WarningBuffer <span class="method"><a href="#">warning</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<p class="doxygen_fun"><code>WarningBuffer <span class="method"><a href="#">warning</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />WarningBuffer <span class="method"><a href="#">warning</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Error</h3>
-<p class="doxygen_fun"><code>ErrorBuffer <span class="method"><a href="#">error</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />ErrorBuffer <span class="method"><a href="#">error</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<p class="doxygen_fun"><code>ErrorBuffer <span class="method"><a href="#">error</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />ErrorBuffer <span class="method"><a href="#">error</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Progress</h3>
-<p class="doxygen_fun"><code>ProgressBuffer <span class="method"><a href="#">progress</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />ProgressBuffer <span class="method"><a href="#">progress</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<p class="doxygen_fun"><code>ProgressBuffer <span class="method"><a href="#">progress</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />ProgressBuffer <span class="method"><a href="#">progress</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Fatal</h3>
-<p class="doxygen_fun"><code>FatalBuffer <span class="method"><a href="#">fatal</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />FatalBuffer <span class="method"><a href="#">fatal</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<p class="doxygen_fun"><code>FatalBuffer <span class="method"><a href="#">fatal</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />FatalBuffer <span class="method"><a href="#">fatal</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Compatibility notice</h3>
-<p class="doxygen_fun"><code>CompatibilityBuffer <span class="method"><a href="#">compatibility</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />CompatibilityBuffer <span class="method"><a href="#">compatibility</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<p class="doxygen_fun"><code>CompatibilityBuffer <span class="method"><a href="#">compatibility</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />CompatibilityBuffer <span class="method"><a href="#">compatibility</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Debug (disabled if NDEBUG defined)</h3>
-<p class="doxygen_fun"><code>DebugBuffer <span class="method"><a href="#">debug</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />DebugBuffer <span class="method"><a href="#">debug</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<p class="doxygen_fun"><code>DebugBuffer <span class="method"><a href="#">debug</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename U &gt;<br />DebugBuffer <span class="method"><a href="#">debug</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -91,9 +91,9 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Start a custom verbosity level message.<br />
-<code><span class="keyword">template</span>&lt;class C &gt;<br />Private::LogImpl::Buffer&lt; LoggerType , C, C::enabled &gt; <span class="method"><a href="#">custom</a></span>(); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class C &gt;<br />Private::LogImpl::Buffer&lt; LoggerType , C, C::enabled &gt; <span class="method"><a href="#">custom</a></span>();</code></p>
 <p class="doxygen_fun">Start a message with no verbosity level (always displayed)<br />
-<code><span class="keyword">template</span>&lt;typename U &gt;<br />UnknownBuffer <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> u); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U &gt;<br />UnknownBuffer <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U<b>&amp;</b> u);</code></p>
 </td></tr>
 </table>
 

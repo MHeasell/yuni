@@ -9,15 +9,15 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">IComponent</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">IComponent</a></span>();</code></p>
 <p class="doxygen_fun">Constructor with dimensions.<br />
-<code> <span class="method"><a href="#">IComponent</a></span>(float width, float height); [inline]</code></p>
+<code> <span class="method"><a href="#">IComponent</a></span>(float width, float height);</code></p>
 <p class="doxygen_fun">Full constructor.<br />
-<code> <span class="method"><a href="#">IComponent</a></span>(float x, float y, float width, float height); [inline]</code></p>
+<code> <span class="method"><a href="#">IComponent</a></span>(float x, float y, float width, float height);</code></p>
 <p class="doxygen_fun">Full constructor.<br />
-<code><span class="keyword">template</span>&lt;class T &gt;<br /> <span class="method"><a href="#">IComponent</a></span>(const Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class T &gt;<br /> <span class="method"><a href="#">IComponent</a></span>(const Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height);</code></p>
 <p class="doxygen_fun">Virtual destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>IComponent</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>IComponent</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Methods</h3>
@@ -27,27 +27,27 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Accessors</h3>
 <p class="doxygen_fun">Get the class name (identifier for the type of component)<br />
-<code>const ClassName &amp; <span class="method"><a href="#">className</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const ClassName &amp; <span class="method"><a href="#">className</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the class name (identifier for the type of component)<br />
-<code>void <span class="method"><a href="#">className</a></span>(ClassName<b>&amp;</b> ); [inline]</code></p>
+<code>void <span class="method"><a href="#">className</a></span>(ClassName<b>&amp;</b> );</code></p>
 <p class="doxygen_fun">Get the unique Identifier for this component.<br />
-<code>ID <span class="method"><a href="#">id</a></span>(); [inline]</code></p>
+<code>ID <span class="method"><a href="#">id</a></span>();</code></p>
 <p class="doxygen_fun">Get the width of the component.<br />
-<code>float <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>float <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the height of the component.<br />
-<code>float <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>float <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the position of the component.<br />
-<code>Point2D &lt; float &gt; <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Point2D &lt; float &gt; <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the size of the component.<br />
-<code>void <span class="method"><a href="#">size</a></span>(float<b>&amp;</b> width, float<b>&amp;</b> height) <span class="keyword">const</span>; [inline]</code></p>
+<code>void <span class="method"><a href="#">size</a></span>(float<b>&amp;</b> width, float<b>&amp;</b> height) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the X position of the component.<br />
-<code>float <span class="method"><a href="#">x</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>float <span class="method"><a href="#">x</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the Y position of the component.<br />
-<code>float <span class="method"><a href="#">y</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>float <span class="method"><a href="#">y</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Pointer management</h3>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">addRef</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">addRef</a></span>();</code></p>
 <p class="doxygen_fun"><code>void <span class="method"><a href="#">release</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
@@ -92,9 +92,9 @@
 <td><h3 class="h3noleftspace">Protected
 </h3>
 <p class="doxygen_fun">Protected resize, without locks.<br />
-<code>void <span class="method"><a href="#">resizeWL</a></span>(float<b>&amp;</b> newWidth, float<b>&amp;</b> newHeight); [inline]</code></p>
+<code>void <span class="method"><a href="#">resizeWL</a></span>(float<b>&amp;</b> newWidth, float<b>&amp;</b> newHeight);</code></p>
 <p class="doxygen_fun">Detach the component from the tree.<br />
-<code>void <span class="method"><a href="#">detachWL</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">detachWL</a></span>();</code></p>
 <p class="doxygen_fun">Destroy all existing and future bound events.<br />
 <code>void <span class="method"><a href="#">destroyBoundEvents</a></span>();</code></p>
 </td></tr>

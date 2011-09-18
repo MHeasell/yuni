@@ -200,8 +200,6 @@ namespace Directory
 		** \brief Wait for the end of the operation (infinite amount of time)
 		**
 		** This routine has no effect if not in detached mode.
-		** \param timeout The timeout in milliseconds
-		** \return An error status (`errNone` if succeeded)
 		*/
 		void wait();
 
@@ -210,7 +208,6 @@ namespace Directory
 		**
 		** This routine has no effect if not in detached mode.
 		** \param timeout The timeout in milliseconds
-		** \return An error status (`errNone` if succeeded)
 		*/
 		void wait(const uint32 timeout);
 

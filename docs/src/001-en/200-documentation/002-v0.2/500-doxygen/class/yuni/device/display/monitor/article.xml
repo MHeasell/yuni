@@ -20,21 +20,21 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Handle</h3>
 <p class="doxygen_fun">Get the index of the current selected monitor.<br />
-<code>Monitor::Handle <span class="method"><a href="#">handle</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Monitor::Handle <span class="method"><a href="#">handle</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the handle of this monitor is valid.<br />
-<code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Identifiers</h3>
 <p class="doxygen_fun">Get the human readable name of the monitor, if any.<br />
-<code>const String &amp; <span class="method"><a href="#">productName</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const String &amp; <span class="method"><a href="#">productName</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get an unique id for this screen.<br />
 <code>const String &amp; <span class="method"><a href="#">guid</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Informations about the monitor</h3>
 <p class="doxygen_fun">Get all available resolutions for this screen.<br />
-<code>const Resolution::Vector &amp; <span class="method"><a href="#">resolutions</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Resolution::Vector &amp; <span class="method"><a href="#">resolutions</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the recommended resolution for this device.<br />
 <code>Resolution::Ptr <span class="method"><a href="#">recommendedResolution</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Remove all resolutions.<br />
@@ -42,11 +42,11 @@
 <p class="doxygen_fun">Get if a resolution is valid for this monitor.<br />
 <code>bool <span class="method"><a href="#">resolutionIsValid</a></span>(const Resolution::Ptr<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if this monitor is the primary display.<br />
-<code>bool <span class="method"><a href="#">primary</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">primary</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the device is hardware accelerated.<br />
-<code>bool <span class="method"><a href="#">hardwareAcceleration</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">hardwareAcceleration</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the monitor is a builtin device.<br />
-<code>bool <span class="method"><a href="#">builtin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">builtin</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>

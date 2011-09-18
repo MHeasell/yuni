@@ -9,13 +9,13 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Version</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Version</a></span>();</code></p>
 <p class="doxygen_fun">Constructor with a given version.<br />
-<code> <span class="method"><a href="#">Version</a></span>(unsigned int h); [inline]</code></p>
+<code> <span class="method"><a href="#">Version</a></span>(unsigned int h);</code></p>
 <p class="doxygen_fun">Constructor with a given version.<br />
-<code> <span class="method"><a href="#">Version</a></span>(unsigned int h, unsigned int l); [inline]</code></p>
+<code> <span class="method"><a href="#">Version</a></span>(unsigned int h, unsigned int l);</code></p>
 <p class="doxygen_fun">Constructor with a given version.<br />
-<code> <span class="method"><a href="#">Version</a></span>(unsigned int h, unsigned int l, unsigned int r); [inline]</code></p>
+<code> <span class="method"><a href="#">Version</a></span>(unsigned int h, unsigned int l, unsigned int r);</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
 <code> <span class="method"><a href="#">Version</a></span>(const Version<b>&amp;</b> c);</code></p>
 </td></tr>
@@ -31,7 +31,7 @@
 <p class="doxygen_fun">Check if this version is less than another one.<br />
 <code>bool <span class="method"><a href="#">isLessThan</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Check if this version is equal to another one.<br />
-<code>bool <span class="method"><a href="#">isEqualTo</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">isEqualTo</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Check if this version is greater than another one.<br />
 <code>bool <span class="method"><a href="#">isGreaterThan</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 </td></tr>
@@ -43,17 +43,17 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">The operator &lt;.<br />
-<code>bool <span class="method"><a href="#">operator&lt;</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator&lt;</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator &lt;=.<br />
-<code>bool <span class="method"><a href="#">operator&lt;=</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator&lt;=</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator &gt;<br />
-<code>bool <span class="method"><a href="#">operator&gt;</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator&gt;</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator &lt;=.<br />
-<code>bool <span class="method"><a href="#">operator&gt;=</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator&gt;=</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator ==.<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator==</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator !=.<br />
-<code>bool <span class="method"><a href="#">operator!=</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!=</a></span>(const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The operator =.<br />
 <code>Version &amp; <span class="method"><a href="#">operator=</a></span>(const Version<b>&amp;</b> rhs);</code></p>
 </td></tr>

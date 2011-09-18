@@ -207,10 +207,11 @@ namespace File
 		/*!
 		** \brief Read a line from the file
 		**
-		** It reads a line into the buffer pointed to by #s until either a terminating
+		** It reads a line into the buffer pointed to by \p buffer until either a terminating
 		** newline or EOF, which it replaces with ’\0’.
+		**
 		** \param buffer The buffer where to write the line
-		** \param size The maximum allowed size for the buffer
+		** \param maxSize The maximum allowed size for the buffer
 		*/
 		bool readline(char* buffer, size_t maxSize);
 

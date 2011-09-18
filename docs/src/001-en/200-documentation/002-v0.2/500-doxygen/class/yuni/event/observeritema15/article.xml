@@ -9,20 +9,20 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">ObserverItemA15</a></span>(C<b>*</b> o, R(C::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) method); [inline]</code></p>
+<code> <span class="method"><a href="#">ObserverItemA15</a></span>(C<b>*</b> o, R(C::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) method);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>ObserverItemA15</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>ObserverItemA15</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Fire the event.<br />
-<code>R <span class="method"><a href="#">fireEvent</a></span>(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) <span class="keyword">const</span>; [inline]</code></p>
+<code>R <span class="method"><a href="#">fireEvent</a></span>(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get a pointer to the observer object.<br />
-<code>IObserver * <span class="method"><a href="#">observer</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>IObserver * <span class="method"><a href="#">observer</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Test if the class contains a given observer.<br />
-<code>bool <span class="method"><a href="#">equalsTo</a></span>(const IObserver<b>*</b> o) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">equalsTo</a></span>(const IObserver<b>*</b> o) <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

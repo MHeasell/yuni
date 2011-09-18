@@ -34,11 +34,9 @@ namespace IO
 	** The file name will be extracted according the last occurence
 	** of the system-dependant path-separator (if systemDependant = true)
 	**
-	** \param p The original filename
+	** \param[out] out        The bare filename from the original one
+	** \param p               The original filename
 	** \param systemDependant Consider only the system-dependant path-separator
-	** \return The bare filename from the original one
-	**
-	** \see Paths::Separator
 	*/
 	template<class StringT1, class StringT2>
 	void ExtractFileName(StringT1& out, const StringT2& p, const bool systemDependant = true);
@@ -50,11 +48,9 @@ namespace IO
 	** The file name will be extracted according the last occurence
 	** of the system-dependant path-separator (if systemDependant = true).
 	**
-	** \param p The original file name
+	** \param[out] out        The bare file name without its extension
+	** \param p               The original file name
 	** \param systemDependant Consider only the system-dependant path-separator
-	** \return The bare file name without its extension
-	**
-	** \see Paths::Separator
 	*/
 	template<class StringT1, class StringT2>
 	void ExtractFileNameWithoutExtension(StringT1& out, const StringT2& p, const bool systemDependant = true);
@@ -97,19 +93,19 @@ namespace IO
 	** The current directory will be used when the given path is not absolute.
 	** \param[out] out         The variable where to write the result
 	** \param      filename    The filename to make absolute
-	** \param      clearBefore True to clean @out before
+	** \param      clearBefore True to clean \p out before
 	*/
 	template<class StringT1, class StringT2>
-	void MakeAbsolute(StringT1& out, const StringT2& path, bool clearBefore = true);
+	void MakeAbsolute(StringT1& out, const StringT2& filename, bool clearBefore = true);
 
 	/*!
 	** \brief Make a path absolute
 	**
 	** The current directory will be used when the given path is not absolute.
 	** \param[out] out         The variable where to write the result
-	** \param      filename    The filename to make absolute
+	** \param      path        The filename to make absolute
 	** \param      currentPath A custom current path to use if the filename is not absolute
-	** \param      clearBefore True to clean @out before
+	** \param      clearBefore True to clean \p out before
 	*/
 	template<class StringT1, class StringT2, class StringT3>
 	void MakeAbsolute(StringT1& out, const StringT2& path, const StringT3& currentPath, bool clearBefore = true);
@@ -141,11 +137,11 @@ namespace IO
 	** possible).
 	** Any final slash will be removed.
 	**
-	** \bug The relative filenames like C:..\folder1\folder2 are not handled properly
+	** \bug The relative filenames like "C:..\\folder1\\folder2" are not handled properly
 	**
 	** \param[out] out            A string (any class compliant to std::string) where to write the result
 	** \param      in             A path/filename to normalize
-	** \param      inLength       Length of #in (optional, -1 for autodetection)
+	** \param      inLength       Length of \p in (optional, -1 for autodetection)
 	** \param      replaceSlashes True to replace slashes according the local OS conventions. False to keep
 	**                            as it.
 	*/

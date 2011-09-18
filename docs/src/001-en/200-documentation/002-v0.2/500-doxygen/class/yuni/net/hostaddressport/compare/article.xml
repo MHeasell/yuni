@@ -10,7 +10,7 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator()</a></span>(const HostAddressPort<b>&amp;</b> a, const HostAddressPort<b>&amp;</b> b) <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator()</a></span>(const HostAddressPort<b>&amp;</b> a, const HostAddressPort<b>&amp;</b> b) <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

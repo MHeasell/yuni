@@ -9,42 +9,42 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">TreeN</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">TreeN</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>TreeN</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>TreeN</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Parent of the node</h3>
 <p class="doxygen_fun">Get the parent of the node.<br />
-<code>Ptr <span class="method"><a href="#">parent</a></span>(); [inline]</code></p>
+<code>Ptr <span class="method"><a href="#">parent</a></span>();</code></p>
 <p class="doxygen_fun">Get the parent of the node.<br />
-<code>Ptr <span class="method"><a href="#">parent</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>Ptr <span class="method"><a href="#">parent</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">ReAttach to another parent.<br />
-<code>void <span class="method"><a href="#">parent</a></span>(Ptr newParent); [inline]</code></p>
+<code>void <span class="method"><a href="#">parent</a></span>(Ptr newParent);</code></p>
 <p class="doxygen_fun">Detach the node from its parent.<br />
-<code>void <span class="method"><a href="#">detachFromParent</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">detachFromParent</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Adding</h3>
 <p class="doxygen_fun">Append a child node to the end of the list.<br />
 <code>void <span class="method"><a href="#">append</a></span>(Ptr<b>&amp;</b> node);</code></p>
 <p class="doxygen_fun">Append a child node to the end of the list.<br />
-<code>void <span class="method"><a href="#">append</a></span>(T<b>*</b> node); [inline]</code></p>
+<code>void <span class="method"><a href="#">append</a></span>(T<b>*</b> node);</code></p>
 <p class="doxygen_fun">Append a child node at the end.<br />
-<code>void <span class="method"><a href="#">push_back</a></span>(Ptr<b>&amp;</b> node); [inline]</code></p>
+<code>void <span class="method"><a href="#">push_back</a></span>(Ptr<b>&amp;</b> node);</code></p>
 <p class="doxygen_fun">Append a child node to the end of the list.<br />
-<code>void <span class="method"><a href="#">push_back</a></span>(T<b>*</b> node); [inline]</code></p>
+<code>void <span class="method"><a href="#">push_back</a></span>(T<b>*</b> node);</code></p>
 <p class="doxygen_fun">Append a child node at the begining.<br />
-<code>void <span class="method"><a href="#">push_front</a></span>(Ptr<b>&amp;</b> node); [inline]</code></p>
+<code>void <span class="method"><a href="#">push_front</a></span>(Ptr<b>&amp;</b> node);</code></p>
 <p class="doxygen_fun">Append a child node to the end of the list.<br />
-<code>void <span class="method"><a href="#">push_front</a></span>(T<b>*</b> node); [inline]</code></p>
+<code>void <span class="method"><a href="#">push_front</a></span>(T<b>*</b> node);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Removing</h3>
 <p class="doxygen_fun">Remove all children.<br />
 <code>void <span class="method"><a href="#">clear</a></span>();</code></p>
 <p class="doxygen_fun">Remove a child node.<br />
-<code>bool <span class="method"><a href="#">remove</a></span>(Ptr<b>&amp;</b> node); [inline]</code></p>
+<code>bool <span class="method"><a href="#">remove</a></span>(Ptr<b>&amp;</b> node);</code></p>
 <p class="doxygen_fun">Remove the n-th child of the node.<br />
 <code>bool <span class="method"><a href="#">remove</a></span>(const SizeType index);</code></p>
 <p class="doxygen_fun">Remove all children.<br />
@@ -53,44 +53,44 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Searching</h3>
 <p class="doxygen_fun">Return iterator to the first child of the node.<br />
-<code>iterator <span class="method"><a href="#">begin</a></span>(); [inline]</code></p>
+<code>iterator <span class="method"><a href="#">begin</a></span>();</code></p>
 <p class="doxygen_fun">Return iterator to the first child of the node.<br />
-<code>const iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const iterator <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Return iterator to the last child of the node.<br />
-<code>iterator <span class="method"><a href="#">end</a></span>(); [inline]</code></p>
+<code>iterator <span class="method"><a href="#">end</a></span>();</code></p>
 <p class="doxygen_fun">Return iterator to the first child of the node.<br />
-<code>const iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const iterator <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Find the n-th child of the node.<br />
 <code>Ptr <span class="method"><a href="#">find</a></span>(const SizeType index);</code></p>
 <p class="doxygen_fun">Return iterator to the first child of the node.<br />
 <code>Ptr <span class="method"><a href="#">find</a></span>(const SignedSizeType index);</code></p>
 <p class="doxygen_fun">Get if the node has children.<br />
-<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Return iterator to the first child of the node.<br />
-<code>SizeType <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>SizeType <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Alias for count()<br />
-<code>SizeType <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>SizeType <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the first child.<br />
-<code>Ptr <span class="method"><a href="#">firstChild</a></span>(); [inline]</code></p>
+<code>Ptr <span class="method"><a href="#">firstChild</a></span>();</code></p>
 <p class="doxygen_fun">Return iterator to the first child of the node.<br />
-<code>const Ptr <span class="method"><a href="#">firstChild</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Ptr <span class="method"><a href="#">firstChild</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the last child.<br />
-<code>Ptr <span class="method"><a href="#">lastChild</a></span>(); [inline]</code></p>
+<code>Ptr <span class="method"><a href="#">lastChild</a></span>();</code></p>
 <p class="doxygen_fun">Return iterator to the first child of the node.<br />
-<code>const Ptr <span class="method"><a href="#">lastChild</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Ptr <span class="method"><a href="#">lastChild</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the previous sibling.<br />
-<code>Ptr <span class="method"><a href="#">previousSibling</a></span>(); [inline]</code></p>
+<code>Ptr <span class="method"><a href="#">previousSibling</a></span>();</code></p>
 <p class="doxygen_fun">Return iterator to the first child of the node.<br />
-<code>const Ptr <span class="method"><a href="#">previousSibling</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Ptr <span class="method"><a href="#">previousSibling</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the next sibling.<br />
-<code>Ptr <span class="method"><a href="#">nextSibling</a></span>(); [inline]</code></p>
+<code>Ptr <span class="method"><a href="#">nextSibling</a></span>();</code></p>
 <p class="doxygen_fun">Return iterator to the first child of the node.<br />
-<code>const Ptr <span class="method"><a href="#">nextSibling</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>const Ptr <span class="method"><a href="#">nextSibling</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Extra</h3>
 <p class="doxygen_fun">Get if the node is a leaf.<br />
-<code>bool <span class="method"><a href="#">leaf</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">leaf</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Computes the depth of this node.<br />
 <code>SizeType <span class="method"><a href="#">depth</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Computes the height from this node.<br />
@@ -99,7 +99,7 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Comparisons</h3>
 <p class="doxygen_fun">Test if the current node is equals to another one.<br />
-<code>bool <span class="method"><a href="#">equals</a></span>(const Ptr<b>&amp;</b> node) <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">equals</a></span>(const Ptr<b>&amp;</b> node) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Z-Order</h3>
@@ -111,33 +111,33 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Public</h3>
 <p class="doxygen_fun">Schedule an asynchronous update of the item (depending upon the implementation)<br />
-<code>void <span class="method"><a href="#">invalidate</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">invalidate</a></span>();</code></p>
 <p class="doxygen_fun">Get if the item is invalidated (depending upon the implementation)<br />
-<code>bool <span class="method"><a href="#">isInvalidated</a></span>(); [inline]</code></p>
+<code>bool <span class="method"><a href="#">isInvalidated</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Append a child at the end.<br />
-<code>Node &amp; <span class="method"><a href="#">operator+=</a></span>(Ptr<b>&amp;</b> node); [inline]</code></p>
+<code>Node &amp; <span class="method"><a href="#">operator+=</a></span>(Ptr<b>&amp;</b> node);</code></p>
 <p class="doxygen_fun">Append a child at the end.<br />
-<code>Node &amp; <span class="method"><a href="#">operator+=</a></span>(T<b>*</b> node); [inline]</code></p>
+<code>Node &amp; <span class="method"><a href="#">operator+=</a></span>(T<b>*</b> node);</code></p>
 <p class="doxygen_fun">Remove a child node.<br />
-<code>Node &amp; <span class="method"><a href="#">operator-=</a></span>(Ptr<b>&amp;</b> node); [inline]</code></p>
+<code>Node &amp; <span class="method"><a href="#">operator-=</a></span>(Ptr<b>&amp;</b> node);</code></p>
 <p class="doxygen_fun">Append a child at the end.<br />
-<code>Node &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(Ptr<b>&amp;</b> node); [inline]</code></p>
+<code>Node &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(Ptr<b>&amp;</b> node);</code></p>
 <p class="doxygen_fun">Append a child at the end.<br />
-<code>Node &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(T<b>*</b> node); [inline]</code></p>
+<code>Node &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(T<b>*</b> node);</code></p>
 <p class="doxygen_fun">Comparison with another node.<br />
-<code>Node &amp; <span class="method"><a href="#">operator==</a></span>(const Ptr<b>&amp;</b> node) <span class="keyword">const</span>; [inline]</code></p>
+<code>Node &amp; <span class="method"><a href="#">operator==</a></span>(const Ptr<b>&amp;</b> node) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the n-th child of the node.<br />
-<code>Ptr <span class="method"><a href="#">operator[]</a></span>(const SizeType index); [inline]</code></p>
+<code>Ptr <span class="method"><a href="#">operator[]</a></span>(const SizeType index);</code></p>
 <p class="doxygen_fun">Get the n-th child of the node.<br />
-<code>Ptr <span class="method"><a href="#">operator[]</a></span>(const SignedSizeType index); [inline]</code></p>
+<code>Ptr <span class="method"><a href="#">operator[]</a></span>(const SignedSizeType index);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Pointer management</h3>
 <p class="doxygen_fun">Increment the internal reference counter.<br />
-<code>void <span class="method"><a href="#">addRef</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>void <span class="method"><a href="#">addRef</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Decrement the internal reference counter.<br />
 <code>void <span class="method"><a href="#">release</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
@@ -204,20 +204,20 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Print the entire tree to the output stream.<br />
-<code>std::ostream &amp; <span class="method"><a href="#">print</a></span>(std::ostream<b>&amp;</b> out, const bool recursive, const unsigned int level);</code></p>
+<code>std::ostream &amp; <span class="method"><a href="#">print</a></span>(std::ostream<b>&amp;</b> out, bool recursive, unsigned int level);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
 <p class="doxygen_fun">Invalidate the item.<br />
-<code>void <span class="method"><a href="#">invalidateWL</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">invalidateWL</a></span>();</code></p>
 <p class="doxygen_fun">Get if the item is invalidated.<br />
-<code>bool <span class="method"><a href="#">isInvalidatedWL</a></span>(); [inline]</code></p>
+<code>bool <span class="method"><a href="#">isInvalidatedWL</a></span>();</code></p>
 <p class="doxygen_fun">(only used for debugging)<br />
-<code>void <span class="method"><a href="#">printBeginWL</a></span>(std::ostream<b>&amp;</b> out, const unsigned int level) <span class="keyword">const</span>; [inline]</code></p>
+<code>void <span class="method"><a href="#">printBeginWL</a></span>(std::ostream<b>&amp;</b> out, unsigned int level) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">(only used for debugging)<br />
-<code>void <span class="method"><a href="#">printEndWL</a></span>(std::ostream<b>&amp;</b> out, const unsigned int level) <span class="keyword">const</span>; [inline]</code></p>
+<code>void <span class="method"><a href="#">printEndWL</a></span>(std::ostream<b>&amp;</b> out, unsigned int level) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Remove all children.<br />
 <code>void <span class="method"><a href="#">clearWL</a></span>();</code></p>
 <p class="doxygen_fun">Append a child to the end of the list.<br />
@@ -225,7 +225,7 @@
 <p class="doxygen_fun">Append a child to the end of the list.<br />
 <code>void <span class="method"><a href="#">pushFrontWL</a></span>(Ptr<b>&amp;</b> node);</code></p>
 <p class="doxygen_fun">Detach from the parent.<br />
-<code>void <span class="method"><a href="#">detachFromParentWL</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">detachFromParentWL</a></span>();</code></p>
 <p class="doxygen_fun">Find a child node from its index (slow)<br />
 <code>Ptr <span class="method"><a href="#">findFromIndexWL</a></span>(const SizeType index);</code></p>
 </td></tr>

@@ -229,6 +229,7 @@ namespace Yuni
 		**	return 0;
 		** }
 		** \endcode
+		**
 		** \param value The value to look for
 		** \return The count of deleted items
 		*/
@@ -238,7 +239,7 @@ namespace Yuni
 		/*!
 		** \brief Remove any item equal to a value in the given list
 		**
-		** \param list A list of value to look for
+		** \param rhs A list of values to remove
 		** \return The number of items that have been removed
 		*/
 		template<class U, class A> Size remove(const LinkedList<U,A>& rhs);
@@ -246,7 +247,7 @@ namespace Yuni
 		/*!
 		** \brief Remove any item equal to a value in the given list
 		**
-		** \param list A list of value to look for
+		** \param rhs A list of values to remove
 		** \return The number of items that have been removed
 		*/
 		template<class U, class A> Size remove(const std::list<U,A>& rhs);
@@ -254,7 +255,7 @@ namespace Yuni
 		/*!
 		** \brief Remove any item equal to a value in the given list
 		**
-		** \param list A list of value to look for
+		** \param rhs A list of values to remove
 		** \return The number of items that have been removed
 		*/
 		template<class U, class A> Size remove(const std::vector<U,A>& rhs);

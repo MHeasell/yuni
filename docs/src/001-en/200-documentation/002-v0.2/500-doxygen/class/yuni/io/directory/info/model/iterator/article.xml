@@ -23,31 +23,31 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">isFile</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">isFolder</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>const String &amp; <span class="method"><a href="#">filename</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>const String &amp; <span class="method"><a href="#">parent</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>uint64 <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">isFile</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">isFolder</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>const String &amp; <span class="method"><a href="#">filename</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>const String &amp; <span class="method"><a href="#">parent</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>uint64 <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
 <td><h3 class="h3noleftspace">Protected
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Iterator</a></span>(const StringT<b>&amp;</b> directory); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(const NullIterator<b>&amp;</b> ); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(const Iterator<b>&amp;</b> copy); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Iterator</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>(difference_type n); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> model); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> ) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">equals</a></span>(const NullIterator<b>&amp;</b> ) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const ModelT<b>&amp;</b> model) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>const String &amp; <span class="method"><a href="#">operator*</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>const String * <span class="method"><a href="#">operator-&gt;</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Iterator</a></span>(const StringT<b>&amp;</b> directory);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(const NullIterator<b>&amp;</b> );</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(const Iterator<b>&amp;</b> copy);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Iterator</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>();</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>(difference_type n);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> model);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> ) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">equals</a></span>(const NullIterator<b>&amp;</b> ) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const ModelT<b>&amp;</b> model) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>const String &amp; <span class="method"><a href="#">operator*</a></span>();</code></p>
+<p class="doxygen_fun"><code>const String * <span class="method"><a href="#">operator-&gt;</a></span>();</code></p>
 </td></tr>
 </table>
 

@@ -9,18 +9,18 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Rect2D</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Rect2D</a></span>();</code></p>
 <p class="doxygen_fun">Construct the rectangle to cover two 2D-points.<br />
-<code><span class="keyword">template</span>&lt;class U , class V &gt;<br /> <span class="method"><a href="#">Rect2D</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> a, const Point2D &lt; V &gt;<b>&amp;</b> b); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class V &gt;<br /> <span class="method"><a href="#">Rect2D</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> a, const Point2D &lt; V &gt;<b>&amp;</b> b);</code></p>
 <p class="doxygen_fun">Constructor with given coordinates.<br />
-<code><span class="keyword">template</span>&lt;class U , class V , class W , class X &gt;<br /> <span class="method"><a href="#">Rect2D</a></span>(const U ax1, const V ay1, const W ax2, const X ay2); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class V , class W , class X &gt;<br /> <span class="method"><a href="#">Rect2D</a></span>(const U ax1, const V ay1, const W ax2, const X ay2);</code></p>
 <p class="doxygen_fun">Construct the rectangle to cover two other rectangles.<br />
-<code><span class="keyword">template</span>&lt;class U , class V &gt;<br /> <span class="method"><a href="#">Rect2D</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> a, const Rect2D &lt; V &gt;<b>&amp;</b> b); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class V &gt;<br /> <span class="method"><a href="#">Rect2D</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> a, const Rect2D &lt; V &gt;<b>&amp;</b> b);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Reset values</h3>
 <p class="doxygen_fun">Reset all coordinates to zero.<br />
-<code>Rect2D &lt; T &gt; &amp; <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
+<code>Rect2D &lt; T &gt; &amp; <span class="method"><a href="#">reset</a></span>();</code></p>
 <p class="doxygen_fun">Reset the rectangle coordinates to cover two 2D-points.<br />
 <code><span class="keyword">template</span>&lt;class U , class V &gt;<br />Rect2D &lt; T &gt; &amp; <span class="method"><a href="#">reset</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> a, const Point2D &lt; V &gt;<b>&amp;</b> b);</code></p>
 <p class="doxygen_fun">Reset the rectangle coordinates to cover two 2D-points.<br />
@@ -31,49 +31,49 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Measurement</h3>
 <p class="doxygen_fun">Get the surface occupied by the rectangle.<br />
-<code>T <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>T <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the width of the rectangle.<br />
-<code>T <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>T <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the height of the rectangle.<br />
-<code>T <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>T <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Move the entire rect</h3>
 <p class="doxygen_fun">Move the entire rect.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">move</a></span>(const U ax1, const U ay1); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">move</a></span>(const U ax1, const U ay1);</code></p>
 <p class="doxygen_fun">Move the entire rect.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">move</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">move</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p);</code></p>
 <p class="doxygen_fun">Move the entire rect.<br />
-<code><span class="keyword">template</span>&lt;class U , class V &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const U<b>&amp;</b> ax1, const V<b>&amp;</b> ay1); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class V &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const U<b>&amp;</b> ax1, const V<b>&amp;</b> ay1);</code></p>
 <p class="doxygen_fun">Move the entire rect.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p);</code></p>
 <p class="doxygen_fun">Reset the rectangle coordinates to cover two 2D-points.<br />
-<code><span class="keyword">template</span>&lt;class U , class V &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> a, const Point2D &lt; V &gt;<b>&amp;</b> b); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class V &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> a, const Point2D &lt; V &gt;<b>&amp;</b> b);</code></p>
 <p class="doxygen_fun">Reset the rectangle coordinates to cover two other rectangles.<br />
-<code><span class="keyword">template</span>&lt;class U , class V &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> a, const Rect2D &lt; V &gt;<b>&amp;</b> b); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class V &gt;<br />void <span class="method"><a href="#">operator()</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> a, const Rect2D &lt; V &gt;<b>&amp;</b> b);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Geometrical localisation</h3>
 <p class="doxygen_fun">Get if a point is contained inside the rect.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">contains</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">contains</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if a point is contained inside the rect.<br />
-<code><span class="keyword">template</span>&lt;class U , class V &gt;<br />bool <span class="method"><a href="#">contains</a></span>(const U nx, const V ny) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U , class V &gt;<br />bool <span class="method"><a href="#">contains</a></span>(const U nx, const V ny) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if another rectangle is contained inside this rectangle.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">contains</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> r) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">contains</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> r) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if another rectangle collides with this rectangle.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">collidedWith</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> r) <span class="keyword">const</span>; [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />bool <span class="method"><a href="#">collidedWith</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> r) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Assignment</h3>
 <p class="doxygen_fun">Move the entire rect.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Rect2D &lt; T &gt; &amp; <span class="method"><a href="#">operator=</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Rect2D &lt; T &gt; &amp; <span class="method"><a href="#">operator=</a></span>(const Point2D &lt; U &gt;<b>&amp;</b> p);</code></p>
 <p class="doxygen_fun">Assign new values for all coordinates from another rect.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />Rect2D &lt; T &gt; &amp; <span class="method"><a href="#">operator=</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> p); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br />Rect2D &lt; T &gt; &amp; <span class="method"><a href="#">operator=</a></span>(const Rect2D &lt; U &gt;<b>&amp;</b> p);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Stream printing</h3>
 <p class="doxygen_fun">Print the point.<br />
-<code>std::ostream &amp; <span class="method"><a href="#">print</a></span>(std::ostream<b>&amp;</b> out) <span class="keyword">const</span>; [inline]</code></p>
+<code>std::ostream &amp; <span class="method"><a href="#">print</a></span>(std::ostream<b>&amp;</b> out) <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -106,9 +106,9 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Get the equivalent Point2D for the top left.<br />
-<code>PointType <span class="method"><a href="#">topLeft</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>PointType <span class="method"><a href="#">topLeft</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get the equivalent Point2D for the bottom right.<br />
-<code>PointType <span class="method"><a href="#">bottomRight</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>PointType <span class="method"><a href="#">bottomRight</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Swap coordinates if needed to have x1/y1 at the top-left and x2/y2 at the bottom-right.<br />
 <code>void <span class="method"><a href="#">normalize</a></span>();</code></p>
 </td></tr>

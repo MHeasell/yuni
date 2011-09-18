@@ -11,7 +11,7 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Checks whether a string of digits is a valid credit card number.<br />
-<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsValidCreditCardNumber</a></span>(const String<b>&amp;</b> s); [inline]</code></p>
+<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsValidCreditCardNumber</a></span>(const String<b>&amp;</b> s);</code></p>
 <p class="doxygen_fun">Generate the check digit of a string using the `Luhn mode 10` algorithm.<br />
 <code><span class="keyword">static</span> int <span class="method"><a href="#">Mod10</a></span>(const String<b>&amp;</b> s);</code></p>
 </td></tr>

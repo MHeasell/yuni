@@ -9,16 +9,16 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Events triggered by the public interface of the event loop (from any thread)</h3>
 <p class="doxygen_fun">The event loop has just started.<br />
-<code><span class="keyword">static</span> bool <span class="method"><a href="#">onStart</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> bool <span class="method"><a href="#">onStart</a></span>();</code></p>
 <p class="doxygen_fun">The event loop has just stopped.<br />
-<code><span class="keyword">static</span> bool <span class="method"><a href="#">onStop</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> bool <span class="method"><a href="#">onStop</a></span>();</code></p>
 <p class="doxygen_fun">A new request has just been added into the queue.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> bool <span class="method"><a href="#">onRequestPosted</a></span>(const U<b>&amp;</b> request); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> bool <span class="method"><a href="#">onRequestPosted</a></span>(const U<b>&amp;</b> request);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Events triggered from the main thread of the event loop</h3>
 <p class="doxygen_fun">The event loop has started a new cycle.<br />
-<code>bool <span class="method"><a href="#">onNewCycle</a></span>(); [inline]</code></p>
+<code>bool <span class="method"><a href="#">onNewCycle</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
@@ -30,20 +30,20 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Events triggered by the public interface of the event loop (from any thread)</h3>
 <p class="doxygen_fun">The event loop has just started.<br />
-<code><span class="keyword">static</span> void <span class="method"><a href="#">onStart</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> void <span class="method"><a href="#">onStart</a></span>();</code></p>
 <p class="doxygen_fun">The event loop has just stopped.<br />
-<code><span class="keyword">static</span> void <span class="method"><a href="#">onStop</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> void <span class="method"><a href="#">onStop</a></span>();</code></p>
 <p class="doxygen_fun">A new request has just been added into the queue.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">onRequestPosted</a></span>(const U<b>&amp;</b> request); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">onRequestPosted</a></span>(const U<b>&amp;</b> request);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Events triggered from the main thread of the event loop</h3>
 <p class="doxygen_fun">The event loop has started a new cycle.<br />
-<code><span class="keyword">static</span> void <span class="method"><a href="#">onNewCycle</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> void <span class="method"><a href="#">onNewCycle</a></span>();</code></p>
 <p class="doxygen_fun">The event loop is processing a request.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">onProcessRequest</a></span>(const U<b>&amp;</b> request); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class U &gt;<br /><span class="keyword">static</span> void <span class="method"><a href="#">onProcessRequest</a></span>(const U<b>&amp;</b> request);</code></p>
 <p class="doxygen_fun">The event loop has just finished a cycle.<br />
-<code><span class="keyword">static</span> void <span class="method"><a href="#">onEndOfCycle</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> void <span class="method"><a href="#">onEndOfCycle</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -91,11 +91,11 @@
 <p class="doxygen_fun">Start the event loop.<br />
 <code>void <span class="method"><a href="#">start</a></span>();</code></p>
 <p class="doxygen_fun">Gracefully stop the execution of the event loop, and wait for it.<br />
-<code>void <span class="method"><a href="#">stop</a></span>(const unsigned int timeout);</code></p>
+<code>void <span class="method"><a href="#">stop</a></span>(unsigned int timeout);</code></p>
 <p class="doxygen_fun">Post a new request into the queue.<br />
 <code>void <span class="method"><a href="#">dispatch</a></span>(const RequestType<b>&amp;</b> request);</code></p>
 <p class="doxygen_fun">Set the timeout to wait between each cycle.<br />
-<code>void <span class="method"><a href="#">timeout</a></span>(unsigned int t); [inline]</code></p>
+<code>void <span class="method"><a href="#">timeout</a></span>(unsigned int t);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>
@@ -104,7 +104,7 @@
 <p class="doxygen_fun">Suspend the thread.<br />
 <code>void <span class="method"><a href="#">suspend</a></span>(unsigned int timeout);</code></p>
 <p class="doxygen_fun">Event triggered from the constructor of the event loop.<br />
-<code>void <span class="method"><a href="#">onInitialize</a></span>(EventLoopType<b>*</b> e); [inline]</code></p>
+<code>void <span class="method"><a href="#">onInitialize</a></span>(EventLoopType<b>*</b> e);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>

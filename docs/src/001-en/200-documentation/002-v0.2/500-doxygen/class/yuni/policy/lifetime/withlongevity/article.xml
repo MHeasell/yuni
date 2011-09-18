@@ -11,9 +11,9 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Track various longevities in a priority list.<br />
-<code><span class="keyword">static</span> void <span class="method"><a href="#">ScheduleDestruction</a></span>(DestructionFunction callback); [inline]</code></p>
+<code><span class="keyword">static</span> void <span class="method"><a href="#">ScheduleDestruction</a></span>(DestructionFunction callback);</code></p>
 <p class="doxygen_fun">Throw if longevities were not given properly.<br />
-<code><span class="keyword">static</span> void <span class="method"><a href="#">OnDeadReference</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> void <span class="method"><a href="#">OnDeadReference</a></span>();</code></p>
 </td></tr>
 </table>
 

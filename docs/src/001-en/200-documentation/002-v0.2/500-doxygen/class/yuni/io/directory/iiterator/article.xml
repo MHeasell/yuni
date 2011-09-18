@@ -9,18 +9,18 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">IIterator</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">IIterator</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">IIterator</a></span>(const IIterator<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">IIterator</a></span>(const IIterator<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>IIterator</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>IIterator</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Search paths</h3>
 <p class="doxygen_fun">Clear the list of path.<br />
-<code>void <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
 <p class="doxygen_fun">Add a new entry in the search paths.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">add</a></span>(const StringT<b>&amp;</b> folder); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">add</a></span>(const StringT<b>&amp;</b> folder);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Execution flow</h3>
@@ -29,9 +29,9 @@
 <p class="doxygen_fun">Stop the traversing of the root folder.<br />
 <code>bool <span class="method"><a href="#">stop</a></span>(const uint32 timeout);</code></p>
 <p class="doxygen_fun">Wait for the end of the operation (infinite amount of time)<br />
-<code>void <span class="method"><a href="#">wait</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">wait</a></span>();</code></p>
 <p class="doxygen_fun">Wait for the end of the operation.<br />
-<code>void <span class="method"><a href="#">wait</a></span>(const uint32 timeout); [inline]</code></p>
+<code>void <span class="method"><a href="#">wait</a></span>(const uint32 timeout);</code></p>
 <p class="doxygen_fun">Ask to Stop the traversing as soon as possible.<br />
 <code>void <span class="method"><a href="#">gracefulStop</a></span>();</code></p>
 <p class="doxygen_fun">Get if the detached thread is currently running.<br />
@@ -60,21 +60,21 @@
 <td><h3 class="h3noleftspace">Protected
 </h3>
 <p class="doxygen_fun">Event : An iteration has started.<br />
-<code>bool <span class="method"><a href="#">onStart</a></span>(const String<b>&amp;</b> root); [inline]</code></p>
+<code>bool <span class="method"><a href="#">onStart</a></span>(const String<b>&amp;</b> root);</code></p>
 <p class="doxygen_fun">Event : The operation is complete.<br />
-<code>void <span class="method"><a href="#">onTerminate</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">onTerminate</a></span>();</code></p>
 <p class="doxygen_fun">The process has been aborted.<br />
-<code>void <span class="method"><a href="#">onAbort</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">onAbort</a></span>();</code></p>
 <p class="doxygen_fun">Event : Starting to Traverse a new folder.<br />
-<code>Flow <span class="method"><a href="#">onBeginFolder</a></span>(const String<b>&amp;</b> filename, const String<b>&amp;</b> parent, const String<b>&amp;</b> name); [inline]</code></p>
+<code>Flow <span class="method"><a href="#">onBeginFolder</a></span>(const String<b>&amp;</b> filename, const String<b>&amp;</b> parent, const String<b>&amp;</b> name);</code></p>
 <p class="doxygen_fun">Event : A folder has been traversed.<br />
-<code>void <span class="method"><a href="#">onEndFolder</a></span>(const String<b>&amp;</b> filename, const String<b>&amp;</b> parent, const String<b>&amp;</b> name); [inline]</code></p>
+<code>void <span class="method"><a href="#">onEndFolder</a></span>(const String<b>&amp;</b> filename, const String<b>&amp;</b> parent, const String<b>&amp;</b> name);</code></p>
 <p class="doxygen_fun">Event : A file has been found.<br />
-<code>Flow <span class="method"><a href="#">onFile</a></span>(const String<b>&amp;</b> filename, const String<b>&amp;</b> parent, const String<b>&amp;</b> name, uint64 size); [inline]</code></p>
+<code>Flow <span class="method"><a href="#">onFile</a></span>(const String<b>&amp;</b> filename, const String<b>&amp;</b> parent, const String<b>&amp;</b> name, uint64 size);</code></p>
 <p class="doxygen_fun">Event : It was impossible to open a folder.<br />
-<code>Flow <span class="method"><a href="#">onError</a></span>(const String<b>&amp;</b> filename); [inline]</code></p>
+<code>Flow <span class="method"><a href="#">onError</a></span>(const String<b>&amp;</b> filename);</code></p>
 <p class="doxygen_fun">Event : It was impossible to the status of a file.<br />
-<code>Flow <span class="method"><a href="#">onAccessError</a></span>(const String<b>&amp;</b> filename); [inline]</code></p>
+<code>Flow <span class="method"><a href="#">onAccessError</a></span>(const String<b>&amp;</b> filename);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>

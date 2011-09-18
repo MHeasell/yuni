@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Public</h3>
 <p class="doxygen_fun">name Constructor &amp; Destructor<br />
-<code> <span class="method"><a href="#">Event</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Event</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Event</a></span>(const Event<b>&amp;</b> rhs); [inline]</code></p>
+<code> <span class="method"><a href="#">Event</a></span>(const Event<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Event</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Event</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Connection</h3>
@@ -31,26 +31,26 @@
 <p class="doxygen_fun">Disconnect all methods of an arbitrary object connected to the event.<br />
 <code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">remove</a></span>(const U<b>*</b> object);</code></p>
 <p class="doxygen_fun">Disconnect all.<br />
-<code>void <span class="method"><a href="#">clear</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Misc</h3>
 <p class="doxygen_fun">Get the number of current connections.<br />
-<code>unsigned int <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the event does not have any single callback.<br />
-<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the event has at least one callback.<br />
-<code>bool <span class="method"><a href="#">notEmpty</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">notEmpty</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Assignment with a nullptr (equivalent to clear() )<br />
-<code>Event &amp; <span class="method"><a href="#">operator=</a></span>(const NullPtr<b>&amp;</b> ); [inline]</code></p>
+<code>Event &amp; <span class="method"><a href="#">operator=</a></span>(const NullPtr<b>&amp;</b> );</code></p>
 <p class="doxygen_fun">Copy operator.<br />
-<code>Event &amp; <span class="method"><a href="#">operator=</a></span>(const Event<b>&amp;</b> rhs); [inline]</code></p>
+<code>Event &amp; <span class="method"><a href="#">operator=</a></span>(const Event<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Get if the event is empty.<br />
-<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

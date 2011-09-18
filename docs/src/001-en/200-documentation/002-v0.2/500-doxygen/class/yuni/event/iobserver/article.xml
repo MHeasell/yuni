@@ -10,7 +10,7 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>IObserver</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>IObserver</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>

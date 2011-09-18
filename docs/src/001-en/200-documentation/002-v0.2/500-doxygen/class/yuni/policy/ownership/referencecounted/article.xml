@@ -9,11 +9,11 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructors</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">ReferenceCounted</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">ReferenceCounted</a></span>();</code></p>
 <p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">ReferenceCounted</a></span>(const ReferenceCounted<b>&amp;</b> c); [inline]</code></p>
+<code> <span class="method"><a href="#">ReferenceCounted</a></span>(const ReferenceCounted<b>&amp;</b> c);</code></p>
 <p class="doxygen_fun">Copy constructor for any king of template parameter.<br />
-<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">ReferenceCounted</a></span>(const ReferenceCounted &lt; U &gt;<b>&amp;</b> c); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename U &gt;<br /> <span class="method"><a href="#">ReferenceCounted</a></span>(const ReferenceCounted &lt; U &gt;<b>&amp;</b> c);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -27,12 +27,12 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Initialization from a raw pointer.<br />
-<code>void <span class="method"><a href="#">initFromRawPointer</a></span>(const T<b>&amp;</b> ); [inline]</code></p>
+<code>void <span class="method"><a href="#">initFromRawPointer</a></span>(const T<b>&amp;</b> );</code></p>
 <p class="doxygen_fun">Clone this object.<br />
-<code>T <span class="method"><a href="#">clone</a></span>(const T<b>&amp;</b> rhs); [inline]</code></p>
+<code>T <span class="method"><a href="#">clone</a></span>(const T<b>&amp;</b> rhs);</code></p>
 <p class="doxygen_fun">Release the reference.<br />
-<code>bool <span class="method"><a href="#">release</a></span>(const T<b>&amp;</b> ); [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">swapPointer</a></span>(ReferenceCounted<b>&amp;</b> rhs); [inline]</code></p>
+<code>bool <span class="method"><a href="#">release</a></span>(const T<b>&amp;</b> );</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">swapPointer</a></span>(ReferenceCounted<b>&amp;</b> rhs);</code></p>
 </td></tr>
 </table>
 

@@ -9,41 +9,41 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Contructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">IJob</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">IJob</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>IJob</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>IJob</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">ID Card</h3>
 <p class="doxygen_fun">Get the full human-readable name of this job.<br />
-<code>String <span class="method"><a href="#">name</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>String <span class="method"><a href="#">name</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the name of the job.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">name</a></span>(const StringT<b>&amp;</b> s); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">name</a></span>(const StringT<b>&amp;</b> s);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Progression</h3>
 <p class="doxygen_fun">Get the progression in percent (value between 0 and 100)<br />
 <code>int <span class="method"><a href="#">progression</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the job is finished.<br />
-<code>bool <span class="method"><a href="#">finished</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">finished</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">States</h3>
 <p class="doxygen_fun">Get the current state of the job.<br />
-<code>enum Job::State <span class="method"><a href="#">state</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>enum Job::State <span class="method"><a href="#">state</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the job is idle.<br />
-<code>bool <span class="method"><a href="#">idle</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">idle</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the job is waiting for being executed.<br />
-<code>bool <span class="method"><a href="#">waiting</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">waiting</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the job is running.<br />
-<code>bool <span class="method"><a href="#">running</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">running</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the job is canceling its work (and it is currently running)<br />
 <code>bool <span class="method"><a href="#">canceling</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Execution flow</h3>
 <p class="doxygen_fun">Ask to the job to cancel its work as soon as possible.<br />
-<code>void <span class="method"><a href="#">cancel</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">cancel</a></span>();</code></p>
 <p class="doxygen_fun">Execute the job.<br />
 <code>void <span class="method"><a href="#">execute</a></span>(Thread::IThread<b>*</b> t);</code></p>
 </td></tr>
@@ -73,13 +73,13 @@
 <p class="doxygen_fun">Implement this method to define your own time-consuming task.<br />
 <code>void <span class="method"><a href="#">onExecute</a></span>();</code></p>
 <p class="doxygen_fun">Set the progression in percent (0..100)<br />
-<code>void <span class="method"><a href="#">progression</a></span>(const int p); [inline]</code></p>
+<code>void <span class="method"><a href="#">progression</a></span>(const int p);</code></p>
 <p class="doxygen_fun">Suspend the execution of the job during X miliseconds.<br />
-<code>bool <span class="method"><a href="#">suspend</a></span>(const unsigned int delay) <span class="keyword">const</span>;</code></p>
+<code>bool <span class="method"><a href="#">suspend</a></span>(unsigned int delay) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Get if the job should abort as soon as possible.<br />
-<code>bool <span class="method"><a href="#">shouldAbort</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>bool <span class="method"><a href="#">shouldAbort</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Set the name of the job without locking.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">nameWL</a></span>(const StringT<b>&amp;</b> newName); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">nameWL</a></span>(const StringT<b>&amp;</b> newName);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>

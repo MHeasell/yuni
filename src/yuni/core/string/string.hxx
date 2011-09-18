@@ -2821,7 +2821,7 @@ namespace Yuni
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	void
-	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::vappendFormat(const char* const format, va_list args)
+	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::vappendFormat(const char* format, va_list args)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
 		// Nothing to do if the format is empty

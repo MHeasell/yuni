@@ -18,7 +18,7 @@
 <p class="doxygen_fun">Add an application to this desktop.<br />
 <code>void <span class="method"><a href="#">add</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
 <p class="doxygen_fun">Add an application to this desktop.<br />
-<code><span class="keyword">template</span>&lt;typename StringT &gt;<br />void <span class="method"><a href="#">remove</a></span>(const StringT<b>&amp;</b> id); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;typename StringT &gt;<br />void <span class="method"><a href="#">remove</a></span>(const StringT<b>&amp;</b> id);</code></p>
 <p class="doxygen_fun">Add an application to this desktop.<br />
 <code>void <span class="method"><a href="#">remove</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
 </td></tr>
@@ -26,7 +26,7 @@
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun"><code>Desktop &amp; <span class="method"><a href="#">operator+=</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
 <p class="doxygen_fun"><code>Desktop &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename StringT &gt;<br />Desktop &amp; <span class="method"><a href="#">operator-=</a></span>(const StringT<b>&amp;</b> id); [inline]</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename StringT &gt;<br />Desktop &amp; <span class="method"><a href="#">operator-=</a></span>(const StringT<b>&amp;</b> id);</code></p>
 <p class="doxygen_fun"><code>Desktop &amp; <span class="method"><a href="#">operator-=</a></span>(const Application::Ptr<b>&amp;</b> app);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public

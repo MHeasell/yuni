@@ -23,9 +23,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Range</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">Range</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Range</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Range</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
@@ -39,18 +39,18 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Get the name of the distribution.<br />
-<code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">static</span> const T <span class="method"><a href="#">min</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">static</span> const T <span class="method"><a href="#">max</a></span>(); [inline]</code></p>
+<code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> const T <span class="method"><a href="#">min</a></span>();</code></p>
+<p class="doxygen_fun"><code><span class="keyword">static</span> const T <span class="method"><a href="#">max</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">Reset the random number generator.<br />
-<code>void <span class="method"><a href="#">reset</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
 <p class="doxygen_fun">Get the next random number.<br />
-<code>const Value <span class="method"><a href="#">next</a></span>(); [inline]</code></p>
+<code>const Value <span class="method"><a href="#">next</a></span>();</code></p>
 </td></tr>
 </table>
 

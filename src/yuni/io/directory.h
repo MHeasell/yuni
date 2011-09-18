@@ -41,7 +41,7 @@ namespace Directory
 		** \brief Get the current directory
 		**
 		** \param[out] out The variable where the current directory will be written
-		** \param clearBefore True to clean @out before
+		** \param clearBefore True to clean \p out before
 		*/
 		template<class StringT> void Get(StringT& out, bool clearBefore = true);
 
@@ -71,7 +71,7 @@ namespace Directory
 	/*!
 	** \brief Create a directory recursively
 	**
-	** \param p The path to create if it does not exist
+	** \param path The path to create if it does not exist
 	** \param mode Access permissions (ignored on the MS Windows platforms)
 	** \return True if the operation succeeded, false otherwise
 	*/
@@ -84,7 +84,7 @@ namespace Directory
 	/*!
 	** \brief Recursively delete a directory and its content
 	**
-	** \param p The path to delete
+	** \param path The path to delete
 	** \return True if the operation succeeded False otherwise
 	*/
 	bool Remove(const StringAdapter& path);

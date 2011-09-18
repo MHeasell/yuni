@@ -22,22 +22,22 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(const Iterator<b>&amp;</b> rhs); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(Item<b>*</b> c); [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>();</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(const Iterator<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Iterator</a></span>(Item<b>*</b> c);</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Increment the iterator by the distance 1.<br />
-<code>void <span class="method"><a href="#">forward</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">forward</a></span>();</code></p>
 <p class="doxygen_fun">Increment the iterator by the distance n.<br />
-<code>void <span class="method"><a href="#">forward</a></span>(difference_type n); [inline]</code></p>
+<code>void <span class="method"><a href="#">forward</a></span>(difference_type n);</code></p>
 <p class="doxygen_fun">Get the distance between this iterator and another one.<br />
-<code>difference_type <span class="method"><a href="#">distance</a></span>(const Iterator<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>reference_type <span class="method"><a href="#">operator*</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>const_reference_type <span class="method"><a href="#">operator*</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>pointer_type <span class="method"><a href="#">operator-&gt;</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code>const_pointer_type <span class="method"><a href="#">operator-&gt;</a></span>() <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">equals</a></span>(const Iterator<b>&amp;</b> rhs) <span class="keyword">const</span>; [inline]</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>(const Iterator<b>&amp;</b> rhs); [inline]</code></p>
+<code>difference_type <span class="method"><a href="#">distance</a></span>(const Iterator<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>reference_type <span class="method"><a href="#">operator*</a></span>();</code></p>
+<p class="doxygen_fun"><code>const_reference_type <span class="method"><a href="#">operator*</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>pointer_type <span class="method"><a href="#">operator-&gt;</a></span>();</code></p>
+<p class="doxygen_fun"><code>const_pointer_type <span class="method"><a href="#">operator-&gt;</a></span>() <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>bool <span class="method"><a href="#">equals</a></span>(const Iterator<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>(const Iterator<b>&amp;</b> rhs);</code></p>
 </td></tr>
 </table>
 

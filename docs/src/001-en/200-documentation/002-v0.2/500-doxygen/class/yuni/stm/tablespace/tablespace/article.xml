@@ -18,13 +18,13 @@
 <td><h3 class="h3noleftspace">Public
 </h3>
 <p class="doxygen_fun">The current size (in bytes) of the tablespace.<br />
-<code>uint64 <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>uint64 <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The capacity of the tablespace (in bytes)<br />
-<code>uint64 <span class="method"><a href="#">capacity</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>uint64 <span class="method"><a href="#">capacity</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">Block size (in bytes)<br />
-<code>unsigned int <span class="method"><a href="#">blockSize</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">blockSize</a></span>() <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun">The total of blocks in the tablespace.<br />
-<code>unsigned int <span class="method"><a href="#">blockCount</a></span>() <span class="keyword">const</span>; [inline]</code></p>
+<code>unsigned int <span class="method"><a href="#">blockCount</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
 </table>
 

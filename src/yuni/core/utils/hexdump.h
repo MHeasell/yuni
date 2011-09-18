@@ -46,6 +46,7 @@ namespace Utils
 		//@{
 		/*!
 		** \brief Construct from a simple buffer.
+		**
 		** \param[in] buffer A pointer to a raw buffer.
 		** \param[in] size The size to dump.
 		*/
@@ -53,14 +54,15 @@ namespace Utils
 
 		/*!
 		** \brief Copy ctor.
+		**
 		** \param[in] rhs The original Hexdump instance
 		*/
 		Hexdump(const Hexdump& rhs);
 
 		/*!
 		** \brief Construct from a string (or like) object.
-		** \param[in] os The stream to output the hexdump on.
-		** \param[in] mp The Hexdump instance to dump.
+		**
+		** \param[in] buffer The stream to output the hexdump on.
 		*/
 		template<class U> Hexdump(const U& buffer);
 		//@}

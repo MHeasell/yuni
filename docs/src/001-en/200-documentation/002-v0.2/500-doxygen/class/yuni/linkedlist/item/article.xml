@@ -19,13 +19,13 @@
 </div></td>
 <td><h3 class="h3noleftspace">Public
 </h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>(); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>(const Item<b>&amp;</b> rhs); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>(Item<b>*</b> n); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>(reference_type value); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">Item</a></span>(const U<b>&amp;</b> value); [inline]</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>(Item<b>*</b> n, reference_type value); [inline]</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">Item</a></span>(Item<b>*</b> n, const U<b>&amp;</b> value); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>();</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>(const Item<b>&amp;</b> rhs);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>(Item<b>*</b> n);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>(reference_type value);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">Item</a></span>(const U<b>&amp;</b> value);</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#">Item</a></span>(Item<b>*</b> n, reference_type value);</code></p>
+<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">Item</a></span>(Item<b>*</b> n, const U<b>&amp;</b> value);</code></p>
 </td></tr>
 </table>
 

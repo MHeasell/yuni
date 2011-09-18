@@ -286,7 +286,7 @@ namespace Thread
 
 
 	template<class T>
-	Array<T>& Array<T>::operator = (const typename Array<T>::Ptr& rhs)
+	Array<T>& Array<T>::operator = (const Ptr& rhs)
 	{
 		typename Array<T>::Ptr keepReference = rhs;
 		typename ThreadingPolicy::MutexLocker lockerR(*keepReference);
@@ -310,7 +310,7 @@ namespace Thread
 
 
 	template<class T>
-	Array<T>& Array<T>::operator += (const typename Array<T>::Ptr& rhs)
+	Array<T>& Array<T>::operator += (const Ptr& rhs)
 	{
 		typename Array<T>::Ptr keepReference = rhs;
 		typename ThreadingPolicy::MutexLocker lockerR(*keepReference);
@@ -335,7 +335,7 @@ namespace Thread
 
 
 	template<class T>
-	Array<T>& Array<T>::operator << (const typename Array<T>::Ptr& rhs)
+	Array<T>& Array<T>::operator << (const Ptr& rhs)
 	{
 		typename Array<T>::Ptr keepReference = rhs;
 		typename ThreadingPolicy::MutexLocker lockerR(*keepReference);

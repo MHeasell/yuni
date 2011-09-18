@@ -18,7 +18,7 @@
 </h3>
 <p class="doxygen_fun"><code> <span class="method"><a href="#">ForVirtual</a></span>();</code></p>
 <p class="doxygen_fun"><code> <span class="method"><a href="#">ForVirtual</a></span>(Private::UI::Local::Adapter::ForRepresentation<b>*</b> forRepresentation);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>ForVirtual</a></span>(); [inline]</code></p>
+<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>ForVirtual</a></span>();</code></p>
 <p class="doxygen_fun"><code>void <span class="method"><a href="#">sendShowWindow</a></span>(const Yuni::UI::GUID<b>&amp;</b> applicationID, IComponent::ID id) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun"><code>void <span class="method"><a href="#">sendHideWindow</a></span>(const Yuni::UI::GUID<b>&amp;</b> applicationID, IComponent::ID id) <span class="keyword">const</span>;</code></p>
 <p class="doxygen_fun"><code>void <span class="method"><a href="#">sendCloseWindow</a></span>(const Yuni::UI::GUID<b>&amp;</b> applicationID, IComponent::ID id) <span class="keyword">const</span>;</code></p>

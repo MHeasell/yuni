@@ -9,7 +9,7 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
 <p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">IEventLoop</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#">IEventLoop</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
 <code> <span class="method"><a href="#"><b> ~ </b>IEventLoop</a></span>();</code></p>
 </td></tr>
@@ -58,7 +58,7 @@
 <p class="doxygen_fun">Start the event loop.<br />
 <code>void <span class="method"><a href="#">start</a></span>();</code></p>
 <p class="doxygen_fun">Gracefully stop the execution of the event loop, and wait for it.<br />
-<code>void <span class="method"><a href="#">stop</a></span>(const unsigned int timeout);</code></p>
+<code>void <span class="method"><a href="#">stop</a></span>(unsigned int timeout);</code></p>
 <p class="doxygen_fun">Post a new request into the queue.<br />
 <code>void <span class="method"><a href="#">dispatch</a></span>(const RequestType<b>&amp;</b> request);</code></p>
 </td></tr>
@@ -74,7 +74,7 @@
 <td><h3 class="h3noleftspace">Protected
 </h3>
 <p class="doxygen_fun">Suspend the thread.<br />
-<code>void <span class="method"><a href="#">suspend</a></span>(unsigned int timeout); [inline]</code></p>
+<code>void <span class="method"><a href="#">suspend</a></span>(unsigned int timeout);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Protected
 </div></td>

@@ -16,16 +16,16 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Document</h3>
 <p class="doxygen_fun">End the parsing of a document.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">beginDocument</a></span>(const StringT<b>&amp;</b> filename); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">beginDocument</a></span>(const StringT<b>&amp;</b> filename);</code></p>
 <p class="doxygen_fun">End the parsing of a document.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const StringT<b>&amp;</b> text); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">append</a></span>(const StringT<b>&amp;</b> text);</code></p>
 <p class="doxygen_fun">End the parsing of a document.<br />
 <code>void <span class="method"><a href="#">endDocument</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Error tracking</h3>
 <p class="doxygen_fun">Set the current filename.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">hintFilename</a></span>(const StringT<b>&amp;</b> filename); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">hintFilename</a></span>(const StringT<b>&amp;</b> filename);</code></p>
 <p class="doxygen_fun">Get the current filename.<br />
 <code>const String &amp; <span class="method"><a href="#">hintFilename</a></span>() <span class="keyword">const</span>;</code></p>
 </td></tr>
@@ -37,9 +37,9 @@
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Operators</h3>
 <p class="doxygen_fun">Append.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Reader &amp; <span class="method"><a href="#">operator+=</a></span>(const StringT<b>&amp;</b> text); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Reader &amp; <span class="method"><a href="#">operator+=</a></span>(const StringT<b>&amp;</b> text);</code></p>
 <p class="doxygen_fun">Append.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Reader &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const StringT<b>&amp;</b> text); [inline]</code></p>
+<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Reader &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const StringT<b>&amp;</b> text);</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public
 </div></td>

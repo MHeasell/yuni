@@ -11,14 +11,14 @@
 <p class="doxygen_fun">Default constructor.<br />
 <code> <span class="method"><a href="#">Html</a></span>();</code></p>
 <p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Html</a></span>(); [inline]</code></p>
+<code> <span class="method"><a href="#"><b> ~ </b>Html</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Enable / Disable nodes</h3>
 <p class="doxygen_fun">Ignore a type of node.<br />
-<code>void <span class="method"><a href="#">discard</a></span>(Node::Type ndtype); [inline]</code></p>
+<code>void <span class="method"><a href="#">discard</a></span>(Node::Type ndtype);</code></p>
 <p class="doxygen_fun">Consider all types of node.<br />
-<code>void <span class="method"><a href="#">enableAllNodes</a></span>(); [inline]</code></p>
+<code>void <span class="method"><a href="#">enableAllNodes</a></span>();</code></p>
 </td></tr>
 <tr><td><div class="visibility">Public</div></td>
 <td><h3 class="h3noleftspace">Rendering</h3>

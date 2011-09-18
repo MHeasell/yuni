@@ -32,7 +32,7 @@ namespace UTF8
 		**
 		** This information is provided by the lead character (= the first char given by @p)
 		** \param p Address of a potential utf8 char
-		** \return The size in bytes of the UTF8 char at the address @p (1,2,3, or 4, 0 if invalid).
+		** \return The size in bytes of the UTF8 char at the address \p p  (1,2,3, or 4, 0 if invalid).
 		*/
 		static unsigned int Size(const void* p);
 
