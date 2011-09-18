@@ -4,7 +4,7 @@ body,html {
 	color					:#444;
 	margin					:0;
 	padding					:0;
-	font-size				:9pt;
+	font-size				:10pt;
 	background:white;
 }
 .layout {
@@ -35,7 +35,7 @@ body,html {
 	vertical-align:top;
 	padding					:2em 2.5em 2em 2.5em;
 	font-family				:helvetica, tahoma, arial, sans-serif;
-	font-size				:8pt;
+	font-size				:9pt;
 	background-color:#f8f8f8;
 	background-image:url('../images/shadow.png');
 	background-position:100% center;
@@ -252,7 +252,7 @@ body,html {
 }
 .content {
 	font-family				:'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-	font-size				:8pt;
+	font-size				:9pt;
 }
 .content .directoryindex {
 	margin					:45pt 0 0 0;
@@ -290,7 +290,7 @@ td > h2:first-child {
 	padding-top:0 !important;
 }
 .content h3 {
-	font-size				:10pt;
+	font-size				:11pt;
 	color					:#245079;
 	padding-left			:2em;
 	margin					:25pt 0 0 0;
@@ -303,7 +303,7 @@ td > h2:first-child {
 }
 
 .content p {
-	font-size				:8pt;
+	font-size				:9pt;
 	text-align				:justify;
 	text-justify			:distribute;
 	text-indent				:0em;
@@ -313,7 +313,7 @@ td > h2:first-child {
 .content code {
 	color					:#33A;
 	font-family				:Monaco, monospace;
-	font-size:10px;
+	font-size:9pt;
 }
 .content code .keyword {
 	color:#666;
@@ -340,8 +340,8 @@ td > h2:first-child {
 	text-shadow	:1px 1px 1px black;
 }
 .content pre {
-	font-family				:Monaco, monospace;
-	font-size:10px;
+	font-family				:Monaco, Lucida Console;
+	font-size:11px;
 	padding					:0.5em 1em 0.5em 1em;
 	margin-left				:3.5em !important;
 	border					:1px solid #ddd;
