@@ -34,7 +34,7 @@ namespace DateTime
 		struct tm timeinfo;
 		#	ifdef YUNI_OS_MSVC
 		// Microsoft Visual Studio
-		::localtime64_s(&timeinfo, &timestamp);
+		_localtime64_s(&timeinfo, &timestamp);
 		written = (unsigned int)::strftime(buffer, size, format, &timeinfo);
 		#	else
 		// Unixes

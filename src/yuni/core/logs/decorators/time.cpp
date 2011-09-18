@@ -1,6 +1,9 @@
 
 #include "../../system/windows.hdr.h"
 #include <time.h>
+#ifdef YUNI_OS_WINDOWS
+# include <wchar.h>
+#endif
 #include "time.h"
 
 
@@ -32,7 +35,7 @@ namespace LogsDecorator
 	void WriteCurrentTimestampToBuffer(char buffer[32])
 	{
 		# ifdef YUNI_OS_MSVC
-		_time64_t rawtime = ::_time64(nullptr);
+		__time64_t rawtime = ::_time64(nullptr);
 		# else
 		time_t rawtime = ::time(nullptr);
 		# endif
@@ -41,9 +44,9 @@ namespace LogsDecorator
 
 		# if defined(YUNI_OS_MSVC)
 		// Microsoft Visual Studio
-		::localtime64_s(&timeinfo, &rawtime);
+		_localtime64_s(&timeinfo, &rawtime);
 		// MSDN specifies that the buffer length value must be >= 26 for validity.
-		::asctime_s(buffer, 32, &timeinfo);
+		asctime_s(buffer, 32, &timeinfo);
 		# else
 		// Unixes
 		::localtime_r(&rawtime, &timeinfo);
