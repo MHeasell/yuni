@@ -199,11 +199,11 @@ namespace Core
 		//! \name Iterators
 		//@{
 		// Default iterators
-		typedef IIterator<Tree::DepthPrefixIterator<Node>, false> iterator;
-		typedef IIterator<Tree::DepthPrefixIterator<Node>, true> const_iterator;
+		typedef IIterator<Private::Core::Tree::ChildIterator<Node>, false> iterator;
+		typedef IIterator<Private::Core::Tree::ChildIterator<Node>, true> const_iterator;
 		// Depth-first traversal
-		typedef IIterator<Tree::DepthPrefixIterator<Node>, false> depth_prefix_iterator;
-		typedef IIterator<Tree::DepthPrefixIterator<Node>, true> const_depth_prefix_iterator;
+		typedef IIterator<Private::Core::Tree::DepthPrefixIterator<Node>, false> depth_prefix_iterator;
+		typedef IIterator<Private::Core::Tree::DepthPrefixIterator<Node>, true> const_depth_prefix_iterator;
 
 		// class iterator;
 

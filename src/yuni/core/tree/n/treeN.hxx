@@ -272,11 +272,11 @@ namespace Core
 			std::stack<Ptr> queue;
 
 			// Getting a copy of the list of all children
-			const iterator end;
-			for (iterator i = begin(); i != end; ++i)
+			const iterator endIt = end();
+			for (iterator i = begin(); i != endIt; ++i)
 				queue.push(&*i);
 
-			// Now we have a copy of the list, we can safely removing the links
+			// Now we have a copy of the list, we can safely remove the links
 			// with our children
 
 			while (!queue.empty())
