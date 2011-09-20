@@ -1,6 +1,8 @@
 #ifndef __YUNI_CORE_TREE_N_ITERATOR_H__
 # define __YUNI_CORE_TREE_N_ITERATOR_H__
 
+# include "../../../iterator/iterator.h"
+
 namespace Yuni
 {
 namespace Core
@@ -9,26 +11,20 @@ namespace Tree
 {
 
 
-	template<class NodeT, bool ConstT>
-	class DepthPrefixIterator: public IIterator<DepthPrefixIterator<NodeT, ConstT>, ConstT>
+	template<class NodeT>
+	class DepthPrefixIterator
 	{
 	public:
-		typedef DepthPrefixIterator<NodeT, ConstT>  IteratorType;
+		typedef DepthPrefixIterator<NodeT>  Type;
 
-		typedef IIterator<DepthPrefixIterator<NodeT, ConstT>, ConstT>  BaseIterator;
+		typedef typename NodeT::Ptr NodePtr;
 
-		typedef typename NodeT::Ptr Ptr;
-
-		//! \name  STL Compatibility
-		//@{
 		typedef NodeT  value_type;
-		typedef NodeT*  pointer;
-		typedef const NodeT*  const_pointer;
-		typedef NodeT&  reference;
-		typedef const NodeT&  const_reference;
-		typedef std::bidirectional_iterator_tag  iterator_category;
-		typedef ptrdiff_t  difference_type;
-		//@}
+		typedef int  difference_type;
+		typedef value_type&  reference;
+		typedef const value_type&  const_reference;
+		typedef value_type*  pointer;
+		typedef const value_type*  const_pointer;
 
 	public:
 		enum
@@ -40,20 +36,14 @@ namespace Tree
 	public:
 		//! \name Constructors
 		//@{
-		DepthPrefixIterator():
-			BaseIterator(), pNode(), pGoingUp(false)
-		{}
-		DepthPrefixIterator(const DepthPrefixIterator& it):
-			BaseIterator(it),
-			pNode(it.pNode),
-			pGoingUp(false)
-		{}
-		DepthPrefixIterator(const NodeT& p):
-			BaseIterator(p), pNode(p), pGoingUp(false)
-		{}
-		DepthPrefixIterator(const Ptr& p):
-			BaseIterator(p), pNode(p.pointer()), pGoingUp(false)
-		{}
+		DepthPrefixIterator();
+
+		DepthPrefixIterator(const Type& it);
+
+		template<class N>
+		DepthPrefixIterator(const DepthPrefixIterator<N>& p);
+
+		DepthPrefixIterator(const NodePtr& p);
 		//@}
 
 		//! \name Static overloads from IIterator
@@ -68,8 +58,14 @@ namespace Tree
 
 		void advance(difference_type n);
 
-		template<class N, bool C>
-		difference_type distance(const DepthPrefixIterator<N,C>& rhs) const;
+		template<class N>
+		bool equals(const DepthPrefixIterator<N>& rhs) const;
+
+		template<class N>
+		void reset(const DepthPrefixIterator<N>& rhs);
+
+		template<class N>
+		difference_type distance(const DepthPrefixIterator<N>& rhs) const;
 		//@}
 
 
@@ -77,36 +73,22 @@ namespace Tree
 		//@{
 
 		//! The operator `*`
-		DepthPrefixIterator<NodeT,ConstT>::reference operator * ();
+		reference operator * ();
 
 		//! The operator `*`
-		DepthPrefixIterator<NodeT,ConstT>::const_reference operator * () const;
+		const_reference operator * () const;
 
 		//! The operator `->`
-		DepthPrefixIterator<NodeT,ConstT>::pointer operator -> ();
+		pointer operator -> ();
 
 		//! The operator `->`
-		DepthPrefixIterator<NodeT,ConstT>::const_pointer operator -> () const;
-
-		//! The operator `==`
-		bool operator == (const IteratorType& rhs) const {return pNode == rhs.pNode;}
-		//! The operator `!=`
-		bool operator != (const IteratorType& rhs) const {return pNode != rhs.pNode;}
-		//! The operator `<`
-		bool operator < (const IteratorType& rhs) const {return pNode < rhs.pNode;}
-		//! The operator `>`
-		bool operator > (const IteratorType& rhs) const {return pNode > rhs.pNode;}
-		//! The operator `<=`
-		bool operator <= (const IteratorType& rhs) const {return pNode <= rhs.pNode;}
-		//! The operator `>=`
-		bool operator >= (const IteratorType& rhs) const {return pNode >= rhs.pNode;}
+		const_pointer operator -> () const;
 
 		//@}
 
 	private:
-		NodeT* pNode;
-
-		bool pGoingUp;
+		//! The actual data
+		pointer pNode;
 	};
 
 
