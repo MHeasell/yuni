@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.8)
 message(STATUS "${CMAKE_CXX_FLAGS}")
 include("cmake/message.cmake")
 
-project(Yuni-Framework) 
+project(Yuni-Framework)
 YMESSAGE("")
 YMESSAGE_BOLD("The Yuni Framework")
 

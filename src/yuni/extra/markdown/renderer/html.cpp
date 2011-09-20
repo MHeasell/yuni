@@ -104,7 +104,7 @@ namespace Renderer
 			return;
 
 		std::cout << composition[type][partBegin] << rawNode.innerText;
-		
+
 		switch (rawNode.size())
 		{
 			case 0:
@@ -117,7 +117,7 @@ namespace Renderer
 					{
 						const Node::iterator end = rawChild.end();
 						for (Node::iterator i = rawChild.begin(); i != end; ++i)
-							renderNode(*i);
+							renderNode(&*i);
 					}
 					else
 						renderNode(child);
@@ -127,7 +127,7 @@ namespace Renderer
 				{
 					const Node::iterator end = rawNode.end();
 					for (Node::iterator i = rawNode.begin(); i != end; ++i)
-						renderNode(*i);
+						renderNode(&*i);
 				}
 		}
 

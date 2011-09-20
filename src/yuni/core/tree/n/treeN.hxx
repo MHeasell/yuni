@@ -274,10 +274,10 @@ namespace Core
 			// Getting a copy of the list of all children
 			const iterator end;
 			for (iterator i = begin(); i != end; ++i)
-				queue.push(*i);
+				queue.push(&*i);
 
-			// Now we have a copy of the list, we can safely removing our links
-			// with out children
+			// Now we have a copy of the list, we can safely removing the links
+			// with our children
 
 			while (!queue.empty())
 			{

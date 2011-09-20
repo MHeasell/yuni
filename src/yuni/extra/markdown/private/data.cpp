@@ -511,7 +511,7 @@ namespace Markdown
 			{
 				const Node::iterator end = rawNode.end();
 				for (Node::iterator i = rawNode.begin(); i != end; ++i)
-					postParseTree(*i);
+					postParseTree(&*i);
 			}
 		}
 	}

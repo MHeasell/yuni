@@ -7,6 +7,7 @@
 # include <stack>
 # include "../../static/if.h"
 # include "../../smartptr/smartptr.h"
+# include "iterator/iterator.h"
 # include <ostream>
 # include <cassert>
 
@@ -22,7 +23,7 @@ namespace Core
 	** \brief A generic N-ary tree class.
 	**
 	** This class provides a generic and thread-safe implementation for
-	** N-ary trees. It behaves like a STL container class.
+	** N-ary trees. It behaves like an STL container class.
 	**
 	** \code
 	** class MyNode : public Core::TreeN<MyNode, Policy::SingleThreaded>
@@ -123,8 +124,8 @@ namespace Core
 	** }
 	** \endcode
 	**
-	** \note Contrary to a STL-like container class, this class is not designed
-	**       to be directly used, but to be a base class.
+	** \note Contrary to an STL-like container class, this class is not designed
+	**       to be instantiated directly, but to be used as a base class.
 	**
 	** \note Each node is managed by a smart pointer, and assuming the
 	**       `SingleThreaded` policy is not used, it is safe to manipulate a
@@ -135,11 +136,11 @@ namespace Core
 	** \note Any checking policy might be used (passed to the smart pointer).
 	**       However, we want to be able to have NULL pointers.
 	**
-	** \note This implementation will be more efficient when handling large dataset,
+	** \note This implementation will be more efficient when handling large datasets,
 	**       and in a multithreaded context.
 	**
 	**
-	** \tparam T The real type of the tree class
+	** \tparam T The real type of the tree class (CRTP)
 	** \tparam TP The Threading policy
 	** \tparam ChckP  The Checking policy
 	** \tparam ConvP  The Conversion policy
@@ -173,14 +174,14 @@ namespace Core
 		typedef typename Ptr::StoragePolicy    StoragePolicy;
 		//! The Ownership policy
 		typedef typename Ptr::OwnershipPolicy  OwnershipPolicy;
-		//! The conversion policy
+		//! The Conversion policy
 		typedef typename Ptr::ConversionPolicy ConversionPolicy;
-		//! The checking policy
+		//! The Checking policy
 		typedef typename Ptr::CheckingPolicy   CheckingPolicy;
 		//! The Constness policy
 		typedef typename Ptr::ConstnessPolicy  ConstnessPolicy;
 
-		//! A const Pointer
+		//! A const pointer
 		typedef typename Ptr::ConstSmartPtrType ConstPtr;
 		//! A non-const pointer
 		typedef typename Ptr::NonConstSmartPtrType NonConstPtr;
@@ -195,12 +196,21 @@ namespace Core
 		//! A list of nodes (std::list)
 		typedef std::list<Ptr>    List;
 
-		// iterators
-		class iterator;
+		//! \name Iterators
+		//@{
+		// Default iterators
+		typedef IIterator<Tree::DepthPrefixIterator<Node>, false> iterator;
+		typedef IIterator<Tree::DepthPrefixIterator<Node>, true> const_iterator;
+		// Depth-first traversal
+		typedef IIterator<Tree::DepthPrefixIterator<Node>, false> depth_prefix_iterator;
+		typedef IIterator<Tree::DepthPrefixIterator<Node>, true> const_depth_prefix_iterator;
 
-		# include "treeN.iterator.def.h"
-		# include "treeN.iterator.h"
-		# include "treeN.iterator.undef.h"
+		// class iterator;
+
+		// # include "treeN.iterator.def.h"
+		// # include "treeN.iterator.h"
+		// # include "treeN.iterator.undef.h"
+		//@}
 
 	public:
 		//! \name Constructors & Destructor

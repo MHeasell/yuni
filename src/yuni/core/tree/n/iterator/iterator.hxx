@@ -8,74 +8,113 @@ namespace Core
 namespace Tree
 {
 
-	template<class NodeT, bool ConstT>
-	inline typename DepthPrefixIterator<NodeT,ConstT>::reference
-	DepthPrefixIterator<NodeT,ConstT>::operator * ()
+	template<class NodeT>
+	inline DepthPrefixIterator<NodeT>::DepthPrefixIterator():
+		pNode(nullptr)
+	{}
+
+
+	template<class NodeT>
+	inline DepthPrefixIterator<NodeT>::DepthPrefixIterator(const Type& it):
+		pNode(it.pNode)
+	{}
+
+
+	template<class NodeT>
+	template<class N>
+	inline DepthPrefixIterator<NodeT>::DepthPrefixIterator(const DepthPrefixIterator<N>& p):
+		pNode(p.pNode)
+	{}
+
+
+	template<class NodeT>
+	inline DepthPrefixIterator<NodeT>::DepthPrefixIterator(const NodePtr& p):
+		pNode(p.pointer())
+	{}
+
+
+	template<class NodeT>
+	inline typename DepthPrefixIterator<NodeT>::reference
+	DepthPrefixIterator<NodeT>::operator * ()
 	{
 		return *pNode;
 	}
 
 
-	template<class NodeT, bool ConstT>
-	inline typename DepthPrefixIterator<NodeT,ConstT>::const_reference
-	DepthPrefixIterator<NodeT,ConstT>::operator * () const
+	template<class NodeT>
+	inline typename DepthPrefixIterator<NodeT>::const_reference
+	DepthPrefixIterator<NodeT>::operator * () const
 	{
 		return *pNode;
 	}
 
 
-	template<class NodeT, bool ConstT>
-	inline typename DepthPrefixIterator<NodeT,ConstT>::pointer
-	DepthPrefixIterator<NodeT,ConstT>::operator -> ()
+	template<class NodeT>
+	inline typename DepthPrefixIterator<NodeT>::pointer
+	DepthPrefixIterator<NodeT>::operator -> ()
 	{
-		return NodeT::operator -> ();
+		return pNode;
 	}
 
 
-	template<class NodeT, bool ConstT>
-	inline typename DepthPrefixIterator<NodeT,ConstT>::const_pointer
-	DepthPrefixIterator<NodeT,ConstT>::operator -> () const
+	template<class NodeT>
+	inline typename DepthPrefixIterator<NodeT>::const_pointer
+	DepthPrefixIterator<NodeT>::operator -> () const
 	{
-		return NodeT::operator -> ();
+		return pNode;
 	}
 
 
-	template<class NodeT, bool ConstT>
-	void DepthPrefixIterator<NodeT, ConstT>::forward()
+	template<class NodeT>
+	template<class N>
+	inline bool DepthPrefixIterator<NodeT>::equals(const DepthPrefixIterator<N>& rhs) const
+	{
+		return pNode == rhs.pNode;
+	}
+
+
+	template<class NodeT>
+	template<class N>
+	inline void DepthPrefixIterator<NodeT>::reset(const DepthPrefixIterator<N>& rhs)
+	{
+		pNode = rhs.pNode;
+	}
+
+
+	template<class NodeT>
+	void DepthPrefixIterator<NodeT>::forward()
 	{
 		// This is depth-first traversal, so do the children first
 		if (!pNode->empty())
 		{
-			pNode = pNode[0];
+			pNode = (*pNode)[0].pointer();
 			return;
 		}
 		// If we reached a leaf, do the siblings
-		pointer next = pNode->nextSibling();
+		NodePtr next = pNode->nextSibling().pointer();
 		if (next)
-			pNode = next;
+			pNode = next.pointer();
 		// If there are no siblings
 		else
 		{
-			// Keep the bottom-most node, it might be iterator::end
-			pointer bottom = pNode;
 			// Climb back the parents until we find siblings
 			while (pNode->parent() && !pNode->parent()->nextSibling())
-				pNode = pNode->parent();
+				pNode = pNode->parent().pointer();
 			// If we reached the right-most sibling of the root,
-			// it means the bottom node was actually the last one to traverse
+			// it means we have finished.
 			if (!pNode->parent() && !pNode->parent()->nextSibling())
 			{
-				pNode = bottom;
+				pNode = nullptr;
 				return;
 			}
 			// Otherwise, the next sibling we found is the next node to traverse
-			pNode = pNode->parent()->nextSibling();
+			pNode = pNode->parent()->nextSibling().pointer();
 		}
 	}
 
 
-	template<class NodeT, bool ConstT>
-	void DepthPrefixIterator<NodeT, ConstT>::forward(difference_type n)
+	template<class NodeT>
+	void DepthPrefixIterator<NodeT>::forward(difference_type n)
 	{
 		// TODO: There is possibility to optimize this a lot
 		while (n--)
@@ -85,14 +124,14 @@ namespace Tree
 	}
 
 
-	template<class NodeT, bool ConstT>
-	void DepthPrefixIterator<NodeT, ConstT>::backward()
+	template<class NodeT>
+	void DepthPrefixIterator<NodeT>::backward()
 	{
 	}
 
 
-	template<class NodeT, bool ConstT>
-	void DepthPrefixIterator<NodeT, ConstT>::backward(difference_type n)
+	template<class NodeT>
+	void DepthPrefixIterator<NodeT>::backward(difference_type n)
 	{
 		// TODO: There is possibility to optimize this a lot
 		while (n--)
