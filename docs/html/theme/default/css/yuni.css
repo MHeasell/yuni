@@ -1,11 +1,11 @@
 body,html {
 	background-color		:white;
-	font-family				:'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 11px/12px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	color					:#444;
 	margin					:0;
 	padding					:0;
-	font-size				:10pt;
 	background:white;
+	font-size				:9pt;
 }
 .layout {
 	border-collapse			:collapse;
@@ -34,20 +34,19 @@ body,html {
 	width:170px;
 	vertical-align:top;
 	padding					:2em 2.5em 2em 2.5em;
-	font-family				:helvetica, tahoma, arial, sans-serif;
-	font-size				:9pt;
+	font: 12px/14px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	background-color:#f8f8f8;
 	background-image:url('../images/shadow.png');
 	background-position:100% center;
 	background-repeat:repeat-y;
 }
 .leftmenu .titled {
-	font-size:14pt;
+	font: 18px/20px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	background-image:url('../images/logo.png');
 	background-repeat:no-repeat;
 	background-position:center 0;
 	text-align:center;
-	padding:80px 0.5em 2em 0.5em !important;
+	padding:90px 0.5em 2em 0.5em !important;
 }
 .leftmenu .titled .unbreakable {
 	color:#933;
@@ -83,11 +82,11 @@ body,html {
 	border-left-style:none;
 	border-right-style:none;
 	padding-right:0;
+	padding-left:0;
 }
 .leftmenu fieldset a {
 	text-decoration:none;
 	padding:1px 0.5em;
-	padding-left:1em;
 	display:block;
 	color:#697286;
 	font-weight:normal;
@@ -103,10 +102,8 @@ body,html {
 }
 .leftmenu fieldset p {
 	font-weight:normal;
-	padding:0;
 	margin:0;
-	padding-left:1em;
-	padding:0.2em 1em 0.2em 1em;
+	padding:0.2em 0.5em 0.4em 0.5em;
 }
 .laycontent {
 	padding-right:5em;
@@ -117,7 +114,7 @@ body,html {
 	border-right-style:none;
 }
 .laycontent h1 {
-	font-size				:15pt;
+	font: 24px/28px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	color:#933;
 	text-shadow				:1px 1px 3px #ddd;
 	margin-top:62px;
@@ -138,10 +135,9 @@ body,html {
 	background-color:#f8f8f8;
 	background-color:#f8f8fc;
 	border-color:#b6c2ca;
-	font-size				:8.5pt;
 	padding					:0.5em 1em 0 1em;
 	margin					:2em 1.5em 2em 2em;
-	font-family				:helvetica, tahoma, arial, sans-serif;
+	font: 11px/12px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	-moz-box-shadow: 0 2px 5px #bbb;
 	-webkit-box-shadow: 0 2px 5px #bbb;
 	box-shadow: 0 2px 5px #bbb;
@@ -200,21 +196,8 @@ body,html {
 .modified {
 	padding-top				:200pt;
 	margin-bottom			:40pt;
-	font-size				:9pt;
 	text-align				:right;
-	font-style				:italic;
-	font-family				:Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-}
-.footer {
-	margin-top				:50pt;
-	border-collapse			:collapse;
-	font-family				:Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-	font-size				:9pt;
-	color:#eee;
-	border:1px solid #bbb;
-	border-left-style:none;
-	border-right-style:none;
-	background:#eee;
+	font: 11px/12px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 }
 .footer td {
 	vertical-align:bottom;
@@ -251,8 +234,8 @@ body,html {
 	width:10px;
 }
 .content {
-	font-family				:'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-	font-size				:9pt;
+	font: 13px/16px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font-size:9pt;
 }
 .content .directoryindex {
 	margin					:45pt 0 0 0;
@@ -270,16 +253,15 @@ body,html {
 	text-shadow				:2px 2px 2px #ccc;
 }
 .content .visibility {
-	font-size				:10pt;
 	color					:#245079;
 	padding-left			:2em;
 	margin					:25pt 0 0 0;
 }
 .content h2 {
-	font-size				:12pt;
+	font: 18px/22px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	margin					:47pt 0 15pt 0;
-	text-shadow				:2px 2px 2px #bbb;
-	color:#400;
+	text-shadow				:2px 2px 5px #aaa;
+	color:#000;
 }
 td > h1:first-child {
 	margin-top:0 !important;
@@ -290,7 +272,8 @@ td > h2:first-child {
 	padding-top:0 !important;
 }
 .content h3 {
-	font-size				:11pt;
+	font: 16px/18px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	text-shadow				:2px 2px 5px #bbb;
 	color					:#245079;
 	padding-left			:2em;
 	margin					:25pt 0 0 0;
@@ -477,11 +460,10 @@ td > h2:first-child {
 .spotlight a {
 	color:#558 !important;
 	font-family				:verdana !important;
-	font-size:8.7pt !important;
 	text-decoration:none;
 	padding:0.1em 0.8em !important;
 	padding-right:0.3em !important;
-	font-weight:normal !important;
+	font: 12px/14px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 }
 .spotlight a:hover {
 	background-color:#933 !important;
@@ -524,7 +506,6 @@ td > h2:first-child {
 	color:#224f7b;
 	padding:0 0px 0 12px;
 	margin:0;
-	font-size:8.5pt;
 }
 .path ul li a {
 	text-decoration:none;
