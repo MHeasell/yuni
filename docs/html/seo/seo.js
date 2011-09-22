@@ -109,11 +109,14 @@ SEO = {
 				return 0;
 			});
 			s = "";
+			var count = 0;
 			for (var i in result) {
 				var r = result[i];
 				s += "<a href=\"" + root + SEO.articles[r.id].h  + "/" + index + "\">"
 					+ "<span>" + SEO.articles[r.id].t + "</span>  "
 					+ SEO.articles[r.id].h + " &nbsp;</a>";
+				if (++count > 42)
+					break;
 			}
 			div.innerHTML = s;
 		}
