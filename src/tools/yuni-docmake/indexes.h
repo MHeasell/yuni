@@ -62,6 +62,7 @@ namespace DocIndex
 
 	int FindArticleID(const Yuni::String& href);
 
+	void AppendChildrenList(Yuni::String& text, const Yuni::String& path, const Yuni::String& current);
 
 
 	void BuildSEOTermReference(Yuni::Clob& data);
@@ -70,6 +71,8 @@ namespace DocIndex
 
 
 	void* DatabaseHandle();
+
+
 
 } // namespace DocIndex
 

@@ -845,6 +845,36 @@ namespace DocIndex
 	}
 
 
+	void AppendChildrenList(Yuni::String& text, const String& path, const String& current)
+	{
+		if (!path)
+			return;
+
+		sqlite3_stmt* stmt;
+		if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT title,html_href FROM articles WHERE parent = $1 ORDER BY parent_order,LOWER(title)", -1, &stmt, NULL))
+			return;
+		sqlite3_bind_text(stmt, 1, path.c_str(), path.size(), NULL);
+		unsigned int count = 0;
+		while (SQLITE_ROW == sqlite3_step(stmt))
+		{
+			if (!count++)
+			{
+				text << '\n';
+				text << "\t<ul>\n";
+			}
+			const StringAdapter title = (const char*) sqlite3_column_text(stmt, 0);
+			const StringAdapter href  = (const char*) sqlite3_column_text(stmt, 1);
+			text << "\t<li><a ";
+			if (title.equalsInsensitive(current))
+				text << "class=\"itemselected\" ";
+			text << "href=\"@{ROOT}" << href << "/@{INDEX}\">" << title << "</a></li>\n";
+		}
+		if (count)
+			text << "\t</ul>";
+
+		sqlite3_finalize(stmt);
+		return;
+	}
 
 
 

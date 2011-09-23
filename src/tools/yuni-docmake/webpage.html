@@ -182,19 +182,12 @@ Last modified : @{MODIFIED}
 
 
 
-<script>hljs.tabReplace = '    ';hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
-jQuery.fn.jBreadCrumb.defaults.easing = 'linear';
-jQuery(document).ready(function()
-{
-	jQuery("#breadCrumb0").jBreadCrumb();
-})
-
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
 $(document).ready(function() {
-  $('pre').each(function(i, e) {console.log("Gotcha : " + e);hljs.highlightBlock(e, '    ')});
+  $('pre').each(function(i, e) {hljs.highlightBlock(e, '    ')});
   });
 </script>
-<!--<script type="text/javascript">SyntaxHighlighter.all();</script>
--->
 </body>
 </html>
