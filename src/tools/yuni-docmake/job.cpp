@@ -512,13 +512,11 @@ CompileJob::CompileJob(const Yuni::String& input, const Yuni::String& htdocs) :
 	pInput(input),
 	pHtdocs(htdocs)
 {
-	logs.debug() << "[probe][" << (void*) this << "] added directory " << input;
 }
 
 
 CompileJob::~CompileJob()
 {
-	logs.debug() << "[probe][" << (void*) this << "] destroyed";
 }
 
 
@@ -555,7 +553,6 @@ bool CompileJob::extractOrder(const String& path)
 
 void CompileJob::onExecute()
 {
-	logs.debug() << "[probe][" << (void*) this << "] analyzing " << pSources.size() << " items";
 	String target;
 	unsigned int sourceCount = (unsigned int)pSources.size();
 	for (unsigned int  i = 0; i != sourceCount; ++i)
