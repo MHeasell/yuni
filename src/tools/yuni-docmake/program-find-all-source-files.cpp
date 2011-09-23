@@ -21,6 +21,7 @@ namespace DocMake
 	{
 		logs.notice() << "Looking for articles...";
 
+		unsigned int upToDateCount = 0;
 		std::vector<CompileJob*> jobs;
 		jobs.resize(nbJobs);
 		for (unsigned int i = 0; i != jobs.size(); ++i)
@@ -80,7 +81,10 @@ namespace DocMake
 					{
 						// Trying to check if we really have to perform an analyzis
 						if (DocIndex::ArticleLastModificationTimeFromCache(relative) == lastWrite)
+						{
+							++upToDateCount;
 							continue;
+						}
 					}
 				}
 
@@ -108,6 +112,18 @@ namespace DocMake
 			// useless jobs
 			for (unsigned int i = 0; i != jobs.size(); ++i)
 				delete jobs[i];
+		}
+
+		switch (upToDateCount)
+		{
+			case 0:
+				break;
+			case 1:
+				logs.info() << "1 article up-to-date";
+				break;
+			default:
+				logs.info() << upToDateCount << " articles already up to date";
+
 		}
 	}
 

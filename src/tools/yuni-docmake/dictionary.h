@@ -21,8 +21,8 @@ namespace Dictionary
 	class WordStat
 	{
 	public:
-		WordStat()
-			:coeff(0.f), count(0)
+		WordStat() :
+			coeff(0.f), count(0)
 		{}
 		float coeff;
 		unsigned int count;

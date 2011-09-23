@@ -7,6 +7,7 @@ CREATE TABLE index_header (
 CREATE TABLE articles (
 	id                     INTEGER PRIMARY KEY AUTOINCREMENT,
 	-- Psuedo index file
+	lang                   TEXT NOT NULL DEFAULT 'en',
 	rel_path               TEXT NOT NULL,
 	html_href              TEXT NOT NULL UNIQUE,
 	title                  TEXT NOT NULL,

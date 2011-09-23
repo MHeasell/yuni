@@ -6,7 +6,6 @@
 # include "dictionary.h"
 # include <deque>
 # include <set>
-# include <map>
 
 
 	class ArticleData
@@ -52,8 +51,15 @@
 		};
 
 	public:
+		//! \name Constructor & Destructor
+		//@{
+		/*!
+		** \brief Default constructor
+		*/
 		ArticleData();
+		//! Destructor
 		~ArticleData();
+		//@}
 
 		void reset();
 
@@ -67,6 +73,9 @@
 		Yuni::String relativeFilename;
 		//! The target filename within the htdocs folder
 		Yuni::String htdocsFilename;
+
+		//! Language
+		Yuni::CString<16,false> language;
 
 		//! Date of the last modification
 		Yuni::sint64 modificationTime;

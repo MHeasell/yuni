@@ -332,6 +332,14 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 		pVars["MODIFIED_TIMESTAMP"] = pArticle.modificationTime;
 		DateTime::TimestampToString(pVars["MODIFIED"], "%A, %B %e, %Y");
 	}
+	//! @{DATE}
+	{
+		pVars["MODIFIED_ISO8601"] = pArticle.modificationTime;
+		DateTime::TimestampToString(pVars["MODIFIED"], "%Y-%m-%d");
+	}
+
+	// @{LANG}
+	pVars["LANG"] = pArticle.language;
 
 	// @{INDEX}
 	if (Program::shortUrl)
@@ -341,6 +349,9 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 
 	// @{TITLE}
 	pVars["TITLE"] = pArticle.title;
+
+	// @{DESCRIPTION}
+	pVars["DESCRIPTION"] = "";
 
 	TiXmlDocument doc;
 	doc.SetTabSize(4);
@@ -410,7 +421,6 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 		}
 		pVars["URL_PARTS"] = address;
 	}
-
 
 	// @{TOC_...}
 	if (pArticle.showTOC && pArticle.tocItems.size() > 1)
@@ -568,6 +578,8 @@ void JobWriter::onExecute()
 
 	// @{TITLE}
 	content.replace("@{TITLE}", pVars["TITLE"]);
+	// @{DESCRIPTION}
+	content.replace("@{DESCRIPTION}", pVars["DESCRIPTION"]);
 
 	String tmp;
 
@@ -596,9 +608,13 @@ void JobWriter::onExecute()
 	// @{CONTENT}
 	content.replace("@{CONTENT}", pVars["CONTENT"]);
 
+	// @{LANG}
+	content.replace("@{LANG}", pVars["LANG"]);
+
 	// @{MODIFIED}
 	content.replace("@{MODIFIED}", pVars["MODIFIED"]);
 	content.replace("@{MODIFIED_TIMESTAMP}", pVars["MODIFIED_TIMESTAMP"]);
+	content.replace("@{MODIFIED_ISO8601}", pVars["MODIFIED_ISO8601"]);
 
 	// Directory Index
 	content.replace("@{DIRECTORY_INDEX}",  pVars["DIRECTORY_INDEX"]);
