@@ -10,8 +10,8 @@ namespace Private
 namespace QueueService
 {
 
-	WaitingRoom::WaitingRoom()
-		:pJobCount(0)
+	WaitingRoom::WaitingRoom() :
+		pJobCount(0)
 	{}
 
 
@@ -24,7 +24,7 @@ namespace QueueService
 		// Locking the priority queue
 		// We should avoid ThreadingPolicy::MutexLocker since it may not be
 		// the good threading policy for these mutexes
-		pMutexes[priorityDefault].lock();
+		Yuni::MutexLocker locker(pMutexes[priorityDefault]);
 
 		// Resetting some internal variables of the job
 		Yuni::Private::QueueService::JobAccessor<Yuni::Job::IJob>::AddedInTheWaitingRoom(*job);
@@ -34,9 +34,6 @@ namespace QueueService
 		// Resetting our internal state
 		hasJob[priorityDefault] = 1;
 		++pJobCount;
-
-		// Unlocking
-		pMutexes[priorityDefault].unlock();
 	}
 
 
@@ -45,7 +42,7 @@ namespace QueueService
 		// Locking the priority queue
 		// We should avoid ThreadingPolicy::MutexLocker since it may not be
 		// the good threading policy for these mutexes
-		pMutexes[priority].lock();
+		Yuni::MutexLocker locker(pMutexes[priority]);
 
 		// Resetting some internal variables of the job
 		Yuni::Private::QueueService::JobAccessor<Yuni::Job::IJob>::AddedInTheWaitingRoom(*job);
@@ -55,9 +52,6 @@ namespace QueueService
 		// Resetting our internal state
 		hasJob[priority] = 1;
 		++pJobCount;
-
-		// Unlocking
-		pMutexes[priority].unlock();
 	}
 
 
@@ -65,7 +59,7 @@ namespace QueueService
 	{
 		// We should avoid ThreadingPolicy::MutexLocker since it may not be
 		// the good threading policy for these mutexes
-		pMutexes[priority].lock();
+		Yuni::MutexLocker locker(pMutexes[priority]);
 
 		if (!pJobs[priority].empty())
 		{
@@ -74,20 +68,15 @@ namespace QueueService
 			// Removing it from the list of waiting jobs
 			pJobs[priority].pop_front();
 			// Resetting atomic variables about the internal status
-			hasJob[priority] = pJobs[priority].empty() ? 0 : 1;
+			hasJob[priority] = (pJobs[priority].empty() ? 0 : 1);
 
 			--pJobCount;
-
-			pMutexes[priority].unlock();
 			return true;
 		}
 
 		// It does not remain any job for this priority. Aborting.
 		// Resetting some variable
 		hasJob[priority] = 0;
-
-		// Global status
-		pMutexes[priority].unlock();
 		return false;
 	}
 

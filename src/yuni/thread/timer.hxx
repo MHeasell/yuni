@@ -7,27 +7,6 @@ namespace Yuni
 namespace Thread
 {
 
-	inline Timer::Timer()
-		:IThread(), pTimeInterval(defaultInterval), pCycleCount(infinite)
-	{}
-
-
-	inline Timer::Timer(const unsigned int interval)
-		:IThread(), pTimeInterval(interval), pCycleCount(infinite)
-	{}
-
-
-	inline Timer::Timer(const unsigned int interval, const unsigned int cycles)
-		:IThread(), pTimeInterval(interval), pCycleCount(cycles)
-	{}
-
-
-	inline Timer::~Timer()
-	{
-		assert(started() == false);
-	}
-
-
 	inline unsigned int Timer::interval() const
 	{
 		Yuni::MutexLocker locker(pTimerMutex);

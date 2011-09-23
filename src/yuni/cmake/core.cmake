@@ -695,6 +695,7 @@ set(SRC_JOBS
 
 		# Scheduler
 		job/scheduler/highestpriorityfirst.h
+		job/scheduler/highestpriorityfirst.cpp
 		job/scheduler/highestpriorityfirst.hxx
 		)
 source_group(jobs FILES ${SRC_JOBS})

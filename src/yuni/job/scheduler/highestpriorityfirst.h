@@ -40,28 +40,13 @@ namespace Scheduler
 		~HighestPriorityFirst();
 		//@}
 
-		unsigned int minimumThreadCount() const
-		{
-			return pMaximumThreadCount;
-		}
+		unsigned int minimumThreadCount() const;
 
-		bool minimumThreadCount(unsigned int)
-		{
-			return false;
-		}
+		bool minimumThreadCount(unsigned int);
 
-		unsigned int maximumThreadCount() const
-		{
-			return pMaximumThreadCount;
-		}
+		unsigned int maximumThreadCount() const;
 
-		bool maximumThreadCount(unsigned int n)
-		{
-			if (n < 1 || n > 512)
-				return false;
-			pMaximumThreadCount = n;
-			return true;
-		}
+		bool maximumThreadCount(unsigned int n);
 
 		/*!
 		** \brief Get if the scheduler is idle
@@ -72,91 +57,29 @@ namespace Scheduler
 		/*!
 		** \brief Start all threads to execute the jobs
 		*/
-		bool schedulerStart()
-		{
-			if (!pStarted)
-			{
-				pStarted = 1;
-				pServiceMutex.lock();
-
-				// Creating all threads we need
-				pThreads.clear();
-				for (unsigned int i = 0; i != pMaximumThreadCount; ++i)
-					pThreads += new Yuni::Private::Jobs::QueueThread<SchedulerType>(*this);
-
-				// Starting all threads at once
-				pThreads.start();
-				pServiceMutex.unlock();
-			}
-			return true;
-		}
-
+		bool schedulerStart();
 
 		/*!
 		** \brief Stop all working threads
 		*/
-		bool schedulerStop(unsigned int timeout)
-		{
-			if (pStarted)
-			{
-				pStarted = 0;
-				pServiceMutex.lock();
-				// Stopping all threads
-				pThreads.stop(timeout);
-				pThreads.clear();
-				pServiceMutex.unlock();
-			}
-			return true;
-		}
+		bool schedulerStop(unsigned int timeout);
 
 		/*!
 		** \brief Event: A job has just been added into the waiting room
 		**
 		** \param priority The priority of this job
 		*/
-		void schedulerNotifyNewJobInWaitingRoom(Yuni::Job::Priority)
-		{
-			pThreads.wakeUp();
-		}
-
+		void schedulerNotifyNewJobInWaitingRoom(Yuni::Job::Priority);
 
 		/*!
 		** \brief Get the next job to execute
 		*/
-		bool nextJob(IJob::Ptr& out)
-		{
-			while (!pWaitingRoom.empty())
-			{
-				if (pWaitingRoom.hasJob[priorityHigh])
-				{
-					if (pWaitingRoom.pop(out, priorityHigh))
-						return true;
-					continue;
-				}
-				if (pWaitingRoom.hasJob[priorityDefault])
-				{
-					if (pWaitingRoom.pop(out, priorityDefault))
-						return true;
-					continue;
-				}
-				if (pWaitingRoom.hasJob[priorityLow])
-				{
-					if (pWaitingRoom.pop(out, priorityLow))
-						return true;
-					continue;
-				}
-			}
-			return false;
-		}
-
+		bool nextJob(IJob::Ptr& out);
 
 		/*!
 		** \brief Get the number of threads currently in use
 		*/
-		unsigned int schedulerThreadCount() const
-		{
-			return pThreads.count();
-		}
+		unsigned int schedulerThreadCount() const;
 
 		template<class PredicateT>
 		void schedulerForeachThread(PredicateT& predicate)
@@ -164,15 +87,9 @@ namespace Scheduler
 			pThreads.foreachThread(predicate);
 		}
 
-		void schedulerIncrementWorkerCount()
-		{
-			++pWorkerCount;
-		}
+		void schedulerIncrementWorkerCount();
 
-		void schedulerDecrementWorkerCount()
-		{
-			--pWorkerCount;
-		}
+		void schedulerDecrementWorkerCount();
 
 
 	private:

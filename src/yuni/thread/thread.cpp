@@ -52,7 +52,8 @@ namespace Thread
 
 		# ifndef YUNI_OS_WINDOWS
 		// pthread - Adjust cancellation behaviors
-		::pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+		// note : the following option should not be used with C++
+		// ::pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 		::pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
 		# endif
 
