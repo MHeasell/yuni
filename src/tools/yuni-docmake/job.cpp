@@ -120,7 +120,7 @@ namespace // anonymous
 
 	bool XMLVisitor::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* /*attr*/)
 	{
-		const TIXML_STRING& name = element.ValueTStr();
+		const TIXML_STRING name = element.ValueTStr();
 		ArticleData::Tag tag = name.c_str();
 
 		pushCoeffFromString(name);
@@ -137,6 +137,14 @@ namespace // anonymous
 								logs.warning() << pFilename << ": pragma:toc: the field value is deprecated";
 							if (TIXML_SUCCESS == element.QueryBoolAttribute("visible", &value))
 								pArticle.showTOC = value;
+						}
+						else if (tag == "pragma:lang")
+						{
+							// see http://www.seoconsultants.com/meta-tags/language
+							const StringAdapter string = element.Attribute("value");
+							pArticle.language = string;
+							pArticle.language.trim();
+							pArticle.language.toLower();
 						}
 						else if (tag == "pragma:quicklinks")
 						{
@@ -269,18 +277,30 @@ namespace // anonymous
 		{
 			case ArticleData::stTitle:
 				{
-					if (!pArticle.title.empty() && pArticle.title.last() != ' ')
-						pArticle.title += ' ';
-					pArticle.title.append(text.c_str(), (unsigned int)text.size());
-					pArticle.title.trim();
+					assert(pArticle.title.capacity() < 1024);
+					if (pArticle.title.size() + (unsigned int) text.size() > 512)
+						logs.error() << "invalid title length (> 512)";
+					else
+					{
+						if (!pArticle.title.empty() && pArticle.title.last() != ' ')
+							pArticle.title += ' ';
+						pArticle.title.append(text.c_str(), (unsigned int)text.size());
+						pArticle.title.trim();
+					}
 					break;
 				}
 			case ArticleData::stTOCItem:
 				{
-					if (!pTOCCaption.empty() && pTOCCaption.last() != ' ')
-						pTOCCaption += ' ';
-					pTOCCaption.append(text.c_str(), (unsigned int)text.size());
-					pTOCCaption.trim();
+					assert(pTOCCaption.capacity() < 1024);
+					if (pTOCCaption.size() + text.size() > 512)
+						logs.error() << "invalid caption length (>512)";
+					else
+					{
+						if (!pTOCCaption.empty() && pTOCCaption.last() != ' ')
+							pTOCCaption += ' ';
+						pTOCCaption.append(text.c_str(), (unsigned int)text.size());
+						pTOCCaption.trim();
+					}
 					break;
 				}
 			default:
@@ -455,7 +475,7 @@ namespace // anonymous
 	{
 		if (pCoeff < 0.1f)
 			return;
-		typedef LinkedList<String> List;
+		typedef Yuni::LinkedList<String> List;
 		List list;
 		string.split(list, " \r\n\t:;!@#$%^&*()_+{}[]|\"'\\/.,?><=-");
 		if (list.empty())
@@ -492,11 +512,13 @@ CompileJob::CompileJob(const Yuni::String& input, const Yuni::String& htdocs) :
 	pInput(input),
 	pHtdocs(htdocs)
 {
+	logs.debug() << "[probe][" << (void*) this << "] added directory " << input;
 }
 
 
 CompileJob::~CompileJob()
 {
+	logs.debug() << "[probe][" << (void*) this << "] destroyed";
 }
 
 
@@ -530,13 +552,16 @@ bool CompileJob::extractOrder(const String& path)
 }
 
 
+
 void CompileJob::onExecute()
 {
+	logs.debug() << "[probe][" << (void*) this << "] analyzing " << pSources.size() << " items";
 	String target;
-	const String::Vector::const_iterator end = pSources.end();
-	for (String::Vector::const_iterator i = pSources.begin(); i != end; ++i)
+	unsigned int sourceCount = (unsigned int)pSources.size();
+	for (unsigned int  i = 0; i != sourceCount; ++i)
 	{
-		const String& entry = *i;
+		assert(i < pSources.size());
+		const String& entry = pSources[i];
 
 		// Resetting data related to the article
 		pArticle.reset();
@@ -570,9 +595,9 @@ void CompileJob::onExecute()
 				break;
 
 			bool isDigit = true;
-			for (unsigned int i = offset; i < offset + 3; ++i)
+			for (unsigned int j = offset; j < offset + 3; ++j)
 			{
-				if (!String::IsDigit(pArticle.htdocsFilename[i]))
+				if (!String::IsDigit(pArticle.htdocsFilename[j]))
 				{
 					isDigit = false;
 					break;
@@ -589,7 +614,6 @@ void CompileJob::onExecute()
 
 		// Writing the article in the database
 		DocIndex::Write(pArticle);
-
 		// Preparing a new job, with a copy of the data related to the article
 		JobWriter::Add(pInput, pHtdocs, pArticle);
 	}

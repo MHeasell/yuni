@@ -39,7 +39,7 @@ namespace Job
 	{
 		// Write articles
 		{
-			unsigned int count = allSymbolsByRefID.size();
+			unsigned int count = (unsigned int) allSymbolsByRefID.size();
 			switch (count)
 			{
 				case 0: logs.info() << "No article";break;
@@ -138,7 +138,7 @@ namespace Job
 			out << "<h2>Summary of the class <code>" << pageTitle << "</code></h2>";
 			out << "<table class=\"nostyle\">\n";
 
-			unsigned int count = pCompound->sections.size();
+			unsigned int count = (unsigned int) pCompound->sections.size();
 			for (unsigned int i = 0; i != count; ++i)
 			{
 				const Section::Ptr& sectionptr = pCompound->sections[i];
@@ -171,7 +171,7 @@ namespace Job
 				else
 					out << "<h3 class=\"h3noleftspace\">" << visibility << "</h3>\n";
 
-				unsigned int memcount = section.members.size();
+				unsigned int memcount = (unsigned int) section.members.size();
 				for (unsigned int j = 0; j != memcount; ++j)
 				{
 					const Member::Ptr& memberptr = section.members[j];

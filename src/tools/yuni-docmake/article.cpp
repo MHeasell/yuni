@@ -8,8 +8,8 @@ using namespace Yuni::Tool::DocMake;
 
 
 
-ArticleData::ArticleData()
-	:error(true)
+ArticleData::ArticleData() :
+	error(true)
 {
 	allowedTagsInParagraph.insert("a");
 	allowedTagsInParagraph.insert("b");
@@ -39,21 +39,26 @@ ArticleData::~ArticleData()
 
 void ArticleData::reset()
 {
+	assert(title.capacity() < 1024);
+	assert(accessPath.capacity() < 1024 * 1024);
+
 	modificationTime = 0;
 	pageWeight = 1.0f;
 	coeff = 1.0f;
-	title.clear();
 	error = false;
 	order = (unsigned int) -1;
-	directoryIndex.clear();
-	tags.clear();
 	showTOC = true;
 	showHistory = true;
 	showQuickLinks = true;
+	directoryIndexContent = dicAll;
+
+	language = "en";
+	title.clear();
+	tags.clear();
+	directoryIndex.clear();
 	accessPath.clear();
 	tocItems.clear();
 	wordCount.clear();
-	directoryIndexContent = dicAll;
 }
 
 
