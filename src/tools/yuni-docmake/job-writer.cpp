@@ -62,6 +62,8 @@ namespace // anonymous
 		std::vector<TiXmlElement*> pToDelete;
 
 		unsigned int pCurrentTOCItemIndex;
+		unsigned int pH2Index;
+		unsigned int pH3Index;
 
 	}; // class XMLVisitor
 
@@ -72,7 +74,9 @@ namespace // anonymous
 	XMLVisitor::XMLVisitor(ArticleData& article, TiXmlDocument& document) :
 		pDocument(document),
 		pArticle(article),
-		pCurrentTOCItemIndex(0)
+		pCurrentTOCItemIndex(0),
+		pH2Index(0),
+		pH3Index(0)
 	{
 	}
 
@@ -114,7 +118,6 @@ namespace // anonymous
 			}
 		}
 
-
 		if (tag == "title" || tag == "tag" || tag.startsWith("pragma:"))
 			pToDelete.push_back(const_cast<TiXmlElement*>(&element));
 		else
@@ -127,6 +130,13 @@ namespace // anonymous
 					e->SetAttribute("id", pArticle.tocItems[pCurrentTOCItemIndex]->hrefID.c_str());
 					++pCurrentTOCItemIndex;
 				}
+				if (tag[1] == '2')
+				{
+					++pH2Index;
+					pH3Index = 0;
+				}
+				else
+					++pH3Index;
 			}
 			else if (tag == "source")
 			{
@@ -330,12 +340,11 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 	//! @{MODIFIED}
 	{
 		pVars["MODIFIED_TIMESTAMP"] = pArticle.modificationTime;
-		DateTime::TimestampToString(pVars["MODIFIED"], "%A, %B %e, %Y");
+		DateTime::TimestampToString(pVars["MODIFIED"], "%A, %B %e, %Y", pArticle.modificationTime);
 	}
-	//! @{DATE}
+	//! @{MODIFIED_ISO8601}
 	{
-		pVars["MODIFIED_ISO8601"] = pArticle.modificationTime;
-		DateTime::TimestampToString(pVars["MODIFIED"], "%Y-%m-%d");
+		DateTime::TimestampToString(pVars["MODIFIED_ISO8601"], "%Y-%m-%d", pArticle.modificationTime);
 	}
 
 	// @{LANG}
@@ -396,15 +405,23 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 			String::Vector list;
 			pArticle.htdocsFilename.split(list, "/");
 			tmp.clear();
+			String path;
+			String caption;
 			if (!list.empty())
 			{
-				for (unsigned int i = 0; i < list.size() - 1; ++i)
+				for (unsigned int i = 0; i < list.size(); ++i)
 				{
 					tmp << '/' << list[i];
+					path.clear() << root << tmp;
 					address << "<li><a href=\"" << root << tmp << '/' << pVars["INDEX"] << "\">";
-					if (!DocIndex::AppendArticleTitleFromPath(address, tmp))
-						address << list[i];
-					address << "</a></li>\n";
+					caption.clear();
+					if (!DocIndex::AppendArticleTitleFromPath(caption, tmp))
+						caption << list[i];
+					address << caption << "</a>";
+
+					IO::ExtractFilePath(path, tmp);
+					DocIndex::AppendChildrenList(address, path, caption);
+					address << "</li>\n";
 				}
 			}
 		}
