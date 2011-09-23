@@ -101,7 +101,7 @@ int main(int argc, char** argv)
 		return 0;
 
 	// We will read our file chunk by chunk (4K for each chunk)
-	Yuni::CustomString&lt;4096&gt; buffer;
+	Yuni::Clob buffer;
 
 	// For each filename given from the command line
 	for (int i = 1; i &lt; argc; ++i)
@@ -144,7 +144,7 @@ int main(int argc, char** argv)
 		return 0;
 
 	// We will read our file chunk by chunk (4K for each chunk)
-	Yuni::CustomString&lt;4096&gt; line;
+	Yuni::Clob line;
 
 	for (int i = 1; i &lt; argc; ++i)
 	{
