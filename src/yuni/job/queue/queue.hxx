@@ -2,6 +2,7 @@
 # define __YUNI_JOB_QUEUE_QUEUE_HXX__
 
 # include "../../thread/timer.h"
+# include <iostream>
 
 
 namespace Yuni
@@ -9,22 +10,21 @@ namespace Yuni
 namespace Job
 {
 
-
-
 	template<class SchedulerT>
-	inline QueueService<SchedulerT>::QueueService()
-		:SchedulerPolicy(pWaitingRoom), pWaitingRoom()
+	inline QueueService<SchedulerT>::QueueService() :
+		SchedulerPolicy(pWaitingRoom),
+		pWaitingRoom()
 	{}
 
+
 	template<class SchedulerT>
-	inline QueueService<SchedulerT>::QueueService(bool autostart)
-		:SchedulerPolicy(pWaitingRoom), pWaitingRoom()
+	inline QueueService<SchedulerT>::QueueService(bool autostart) :
+		SchedulerPolicy(pWaitingRoom),
+		pWaitingRoom()
 	{
 		if (autostart)
 			start();
 	}
-
-
 
 
 	template<class SchedulerT>
@@ -81,8 +81,10 @@ namespace Job
 		public:
 			QueueServiceWaitHelper(SchedulerT& scheduler, Yuni::Private::QueueService::WaitingRoom& room,
 				unsigned int pollInterval) :
-				Thread::Timer(pollInterval), pRoom(room),
-				pScheduler(scheduler), pStatus(false)
+				Thread::Timer(pollInterval),
+				pRoom(room),
+				pScheduler(scheduler),
+				pStatus(false)
 			{}
 			virtual ~QueueServiceWaitHelper()
 			{
@@ -94,15 +96,12 @@ namespace Job
 		protected:
 			virtual bool onInterval(unsigned int)
 			{
-				if (pRoom.empty())
+				// Checking if the scheduler still has workers
+				if (pRoom.empty() && pScheduler.idle())
 				{
-					// Checking if the scheduler still has workers
-					if (pScheduler.idle())
-					{
-						pStatus = true;
-						// We can stop now
-						return false;
-					}
+					pStatus = true;
+					// We can stop now
+					return false;
 				}
 				// Continuing...
 				return true;
@@ -126,12 +125,9 @@ namespace Job
 	void QueueService<SchedulerT>::wait()
 	{
 		// TODO QueueService::wait: Find a more efficient way for doing this
-		if (pWaitingRoom.notEmpty())
-		{
-			QueueServiceWaitHelper<SchedulerT> helper(static_cast<SchedulerT&>(*this), pWaitingRoom, 150);
-			helper.start();
-			helper.wait();
-		}
+		QueueServiceWaitHelper<SchedulerT> helper(static_cast<SchedulerT&>(*this), pWaitingRoom, 150);
+		helper.start();
+		helper.wait();
 	}
 
 
@@ -139,14 +135,10 @@ namespace Job
 	bool QueueService<SchedulerT>::wait(unsigned int timeout, unsigned int pollInterval)
 	{
 		// TODO QueueService::wait: Find a more efficient way for doing this
-		if (pWaitingRoom.notEmpty())
-		{
-			QueueServiceWaitHelper<SchedulerT> helper(static_cast<SchedulerT&>(*this), pWaitingRoom, pollInterval);
-			helper.start();
-			helper.wait(timeout);
-			return helper.status();
-		}
-		return true;
+		QueueServiceWaitHelper<SchedulerT> helper(static_cast<SchedulerT&>(*this), pWaitingRoom, pollInterval);
+		helper.start();
+		helper.wait(timeout);
+		return helper.status();
 	}
 
 
@@ -249,53 +241,58 @@ namespace Job
 	}
 
 
-	template<class SchedulerT>
-	class ActivityPredicate
+	namespace // anonymous
 	{
-	public:
-		//!
-		typedef typename QueueService<SchedulerT>::ThreadInfo ThreadInfoType;
-		typedef typename ThreadInfoType::Vector VectorType;
 
-	public:
-		ActivityPredicate(VectorType& out)
-			:pList(out)
+		template<class SchedulerT>
+		class ActivityPredicate
 		{
-			pList.clear();
-		}
+		public:
+			//!
+			typedef typename QueueService<SchedulerT>::ThreadInfo ThreadInfoType;
+			typedef typename ThreadInfoType::Vector VectorType;
 
-		template<class ThreadPtrT>
-		bool operator () (const ThreadPtrT& thread)
-		{
-			ThreadInfoType* info = new ThreadInfoType();
-			info->thread = thread;
-			if (!(!(info->thread)))
+		public:
+			ActivityPredicate(VectorType& out)
+				:pList(out)
 			{
-				info->job = thread->currentJob();
-				if (!(!(info->job)))
-				{
-					// We have a job which is currently working !
-					info->hasJob = true;
-					info->job->fillInformation(*info);
-					pList.push_back(info);
-					return true;
-				}
+				pList.clear();
 			}
-			info->hasJob = false;
-			info->state = Yuni::Job::stateIdle;
-			info->canceling = false;
-			info->progression = 0;
-			pList.push_back(info);
-			return true;
-		}
 
-	private:
-		VectorType& pList;
-	};
+			template<class ThreadPtrT>
+			bool operator () (const ThreadPtrT& thread)
+			{
+				ThreadInfoType* info = new ThreadInfoType();
+				info->thread = thread;
+				if (!(!(info->thread)))
+				{
+					info->job = thread->currentJob();
+					if (!(!(info->job)))
+					{
+						// We have a job which is currently working !
+						info->hasJob = true;
+						info->job->fillInformation(*info);
+						pList.push_back(info);
+						return true;
+					}
+				}
+				info->hasJob = false;
+				info->state = Yuni::Job::stateIdle;
+				info->canceling = false;
+				info->progression = 0;
+				pList.push_back(info);
+				return true;
+			}
+
+		private:
+			VectorType& pList;
+		};
+
+	} // anonymous namespace
 
 
 	template<class SchedulerT>
-	inline void QueueService<SchedulerT>::activitySnapshot(
+	void QueueService<SchedulerT>::activitySnapshot(
 		typename QueueService<SchedulerT>::ThreadInfo::Vector& out)
 	{
 		ActivityPredicate<SchedulerT> predicate(out);

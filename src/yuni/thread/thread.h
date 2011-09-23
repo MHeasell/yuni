@@ -260,6 +260,8 @@ namespace Thread
 		volatile bool pStarted;
 		//! Should stop the thread ?
 		volatile bool pShouldStop;
+		//! Get if the thread is paused
+		Atomic::Int<> pPaused;
 
 		# ifndef YUNI_NO_THREAD_SAFE
 		// our friend

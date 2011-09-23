@@ -4,6 +4,7 @@
 # include "../../traits/length.h"
 # include "integer.h"
 # include <stdio.h>
+# include <cassert>
 
 # ifdef YUNI_OS_MSVC
 #	define YUNI_PRIVATE_MEMBUF_SPTRINF(BUFFER,SIZE, F, V)  ::sprintf_s(BUFFER,SIZE,F,V)
@@ -62,7 +63,7 @@ namespace CString
 		typedef typename CStringT::Type C;
 		static void Perform(CStringT& s, const C rhs[N])
 		{
-			if (N > 0)
+			if (N > 0 && rhs)
 			{
 				// The calculation with `N` is required to properly handle
 				// both a zero-terminated buffer and a simple array
@@ -168,6 +169,7 @@ namespace CString
 	public:
 		static void Perform(CStringT& s, const Yuni::UTF8::Char& rhs)
 		{
+			assert(&rhs != NULL);
 			rhs.write(s);
 		}
 	};

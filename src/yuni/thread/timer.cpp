@@ -8,9 +8,36 @@ namespace Yuni
 namespace Thread
 {
 
+	Timer::Timer() :
+		IThread(),
+		pTimeInterval(defaultInterval),
+		pCycleCount(infinite)
+	{}
 
-	Timer::Timer(const Timer& rhs)
-		:IThread()
+
+	Timer::Timer(const unsigned int interval) :
+		IThread(),
+		pTimeInterval(interval),
+		pCycleCount(infinite)
+	{}
+
+
+	Timer::Timer(const unsigned int interval, const unsigned int cycles) :
+		IThread(),
+		pTimeInterval(interval),
+		pCycleCount(cycles)
+	{}
+
+
+	Timer::~Timer()
+	{
+		assert(started() == false);
+	}
+
+
+
+	Timer::Timer(const Timer& rhs) :
+		IThread()
 	{
 		rhs.pTimerMutex.lock();
 		pTimeInterval = rhs.pTimeInterval;
@@ -40,7 +67,7 @@ namespace Thread
 		{
 			if (IThread::suspend(nnTimeInterval))
 				break;
-			if (!onInterval(0))
+			if (!onInterval(infinite /* no cycle */))
 				break;
 			if (pShouldReload)
 				return false;
@@ -75,13 +102,15 @@ namespace Thread
 		while (true)
 		{
 			// Lock
+			// Note : pTimerMutex will be unlocked by internalRunInfiniteLoop
+			// and internalRunFixedNumberOfCycles
 			pTimerMutex.lock();
 
 			// No cycle to do, aborting now
 			if (!pCycleCount)
 			{
 				pTimerMutex.unlock();
-				return true;
+				return false;
 			}
 
 			// infinite loop
