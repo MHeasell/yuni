@@ -8,38 +8,38 @@ namespace Yuni
 namespace Private
 {
 
-	template<bool UNCPrefix>
+	template<bool UNCPrefix, bool AppendSeparatorT>
 	template<class StringT>
-	inline WString<UNCPrefix>::WString(const StringT& string)
+	inline WString<UNCPrefix, AppendSeparatorT>::WString(const StringT& string)
 	{
 		prepareWString(Traits::CString<StringT>::Perform(string),
 			Traits::Length<StringT, unsigned int>::Value(string));
 	}
 
 
-	template<bool UNCPrefix>
-	inline WString<UNCPrefix>::WString(const char* cstring, unsigned int size)
+	template<bool UNCPrefix, bool AppendSeparatorT>
+	inline WString<UNCPrefix, AppendSeparatorT>::WString(const char* cstring, unsigned int size)
 	{
 		prepareWString(cstring, size);
 	}
 
 
-	template<bool UNCPrefix>
-	inline WString<UNCPrefix>::~WString()
+	template<bool UNCPrefix, bool AppendSeparatorT>
+	inline WString<UNCPrefix, AppendSeparatorT>::~WString()
 	{
 		delete[] pWString;
 	}
 
 
-	template<bool UNCPrefix>
-	inline unsigned int WString<UNCPrefix>::size() const
+	template<bool UNCPrefix, bool AppendSeparatorT>
+	inline unsigned int WString<UNCPrefix, AppendSeparatorT>::size() const
 	{
 		return pSize;
 	}
 
 
-	template<bool UNCPrefix>
-	inline void WString<UNCPrefix>::replace(char from, char to)
+	template<bool UNCPrefix, bool AppendSeparatorT>
+	inline void WString<UNCPrefix, AppendSeparatorT>::replace(char from, char to)
 	{
 		for (unsigned int i = 0; i != pSize; ++i)
 		{
@@ -49,36 +49,36 @@ namespace Private
 	}
 
 
-	template<bool UNCPrefix>
-	inline bool WString<UNCPrefix>::empty() const
+	template<bool UNCPrefix, bool AppendSeparatorT>
+	inline bool WString<UNCPrefix, AppendSeparatorT>::empty() const
 	{
 		return !pSize;
 	}
 
 
-	template<bool UNCPrefix>
-	inline const wchar_t* WString<UNCPrefix>::c_str() const
+	template<bool UNCPrefix, bool AppendSeparatorT>
+	inline const wchar_t* WString<UNCPrefix, AppendSeparatorT>::c_str() const
 	{
 		return pWString;
 	}
 
 
-	template<bool UNCPrefix>
-	inline wchar_t* WString<UNCPrefix>::c_str()
+	template<bool UNCPrefix, bool AppendSeparatorT>
+	inline wchar_t* WString<UNCPrefix, AppendSeparatorT>::c_str()
 	{
 		return pWString;
 	}
 
 
-	template<bool UNCPrefix>
-	inline WString<UNCPrefix>::operator const wchar_t* () const
+	template<bool UNCPrefix, bool AppendSeparatorT>
+	inline WString<UNCPrefix, AppendSeparatorT>::operator const wchar_t* () const
 	{
 		return pWString;
 	}
 
 
-	template<bool UNCPrefix>
-	void WString<UNCPrefix>::prepareWString(const char* const cstring, unsigned int size)
+	template<bool UNCPrefix, bool AppendSeparatorT>
+	void WString<UNCPrefix, AppendSeparatorT>::prepareWString(const char* const cstring, unsigned int size)
 	{
 		if (!size)
 		{
@@ -105,13 +105,13 @@ namespace Private
 
 		// Size of the wide string. This value may be modified if there is not
 		// enough room for converting the C-String
-		pSize = size + offset;
+		pSize = size + offset + (AppendSeparatorT ? 1 : 0);
 
 		// Allocate and convert the C-String. Several iterations may be required
 		// for allocating enough room for the conversion.
 		do
 		{
-			pWString = new wchar_t[pSize + 1];
+			pWString = new wchar_t[pSize + (AppendSeparatorT ? 1 : 0) + 1];
 			if (!pWString)
 			{
 				// Impossible to allocate the buffer. Aborting.
@@ -148,7 +148,17 @@ namespace Private
 				return;
 			}
 			// Adding the final zero
-			pWString[n + offset] = L'\0';
+			if (!AppendSeparatorT)
+			{
+				pWString[n + offset] = L'\0';
+				pSize = n + offset;
+			}
+			else
+			{
+				pWString[n + offset] = L'\\';
+				pWString[n + offset + 1] = L'\0';
+				pSize = n + offset + 1;
+			}
 			return;
 		}
 		while (true);
