@@ -16,9 +16,11 @@ namespace Private
 
 	/*!
 	** \brief Convert a C-String into a Wide String (Windows Only)
+	**
+	** \TODO This class should be dedicated to Yuni::IO
 	*/
-	template<bool UNCPrefix = false>
-	class WString : private NonCopyable<WString<UNCPrefix> >
+	template<bool UNCPrefix = false, bool AppendSeparatorT = false>
+	class WString : private NonCopyable<WString<UNCPrefix, AppendSeparatorT> >
 	{
 	public:
 		//! \name Constructor & Destructor

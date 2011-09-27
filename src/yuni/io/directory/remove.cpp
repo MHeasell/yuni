@@ -19,7 +19,7 @@
 #include "../../core/string/wstring.h"
 #include <stdio.h>
 
-
+#include <fstream>
 #define SEP Yuni::IO::Separator
 
 
@@ -31,8 +31,7 @@ namespace IO
 namespace Directory
 {
 
-
-# ifndef YUNI_OS_WINDOWS
+	# ifndef YUNI_OS_WINDOWS
 
 
 	namespace // Anonymous namespace
@@ -75,6 +74,92 @@ namespace Directory
 	# endif
 
 
+	# ifdef YUNI_OS_WINDOWS
+
+	namespace // anonymous
+	{
+
+		static bool RecursiveDeleteWindow(const wchar_t* path)
+		{
+			// WARNING This function requires a final backslash !
+			enum
+			{
+				maxLen = (MAX_PATH < 1024) ? 1024 : MAX_PATH,
+			};
+
+			// temporary buffer
+			WIN32_FIND_DATAW filedata;
+			HANDLE handle = FindFirstFileW(path, &filedata);
+			if (handle != INVALID_HANDLE_VALUE)
+			{
+				// temporary buffer for filename manipulation
+				// The creation of this variable is delayed to avoid useless
+				// memory allocation on empty folders
+				wchar_t* filename = nullptr;
+				do
+				{
+					// Dots folders are meaningless (`.` and `..`)
+					if (filedata.cFileName[0] == L'.')
+					{
+						if (!wcscmp(filedata.cFileName, L".") || !wcscmp(filedata.cFileName, L".."))
+							continue;
+					}
+
+					if (!filename)
+						filename = new wchar_t[maxLen];
+
+					// Prepare the new filename
+					{
+						int written = swprintf_s(filename, maxLen, L"%s\\%s", path, filedata.cFileName);
+						if (written <= 0 || written == maxLen)
+						{
+							FindClose(handle); 
+							delete[] filename;
+							return false;
+						}
+					}
+
+					// Recursively delete the sub-folder
+					if ((filedata.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+					{
+						if (!RecursiveDeleteWindow(filename))
+						{ 
+							FindClose(handle); 
+							delete[] filename;
+							return false;
+						}
+					}
+					else
+					{
+						// Simply delete the file
+						// If the file has the read-only attribute, trying to
+						// remove it first.
+						if (0 != (filedata.dwFileAttributes & FILE_ATTRIBUTE_READONLY))
+							SetFileAttributesW(filename, FILE_ATTRIBUTE_NORMAL);
+						// Trying to delete the file
+						if (!DeleteFileW(filename))
+						{
+							FindClose(handle); 
+							delete[] filename;
+							return false;
+						}
+					}
+				}
+				while (FindNextFileW(handle, &filedata));
+
+				// resource cleanup
+				delete[] filename;
+				FindClose(handle);
+			}
+
+			// Remove the directory itself
+			return (0 != RemoveDirectoryW(path));
+		}
+
+	} // anonymous
+
+	# endif
+
 
 
 	bool Remove(const StringAdapter& path)
@@ -83,27 +168,18 @@ namespace Directory
 			return true;
 
 		# ifdef YUNI_OS_WINDOWS
-		Private::WString<true> fsource(path);
+		using namespace std;
+	
+		Private::WString<true, true> fsource(path);
 		if (fsource.empty())
 			return false;
-
-		SHFILEOPSTRUCTW shf;
-		shf.hwnd = NULL;
-
-		shf.wFunc = FO_DELETE;
-		shf.pFrom = fsource.c_str();
-		shf.pTo = fsource.c_str();
-		shf.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI;
-
-		const int cr = SHFileOperationW(&shf);
-		return (!cr);
-
+		// In case we were given UNIX slashes
+		fsource.replace(L'/', L'\\');
+		return RecursiveDeleteWindow(fsource.c_str());
 		# else
 		return RmDirRecursiveInternal(path.c_str());
 		# endif
 	}
-
-
 
 
 
