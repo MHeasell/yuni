@@ -167,7 +167,7 @@ namespace Extension
 	public:
 		static SizeT Value(const StringType& container)
 		{
-			return container.size();
+			return (SizeT)container.size();
 		}
 	};
 
