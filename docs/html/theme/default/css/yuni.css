@@ -261,9 +261,10 @@ body,html {
 }
 .content h2 {
 	font: 18px/22px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-	margin					:52pt 0 15pt 0;
-	text-shadow				:2px 2px 5px #aaa;
-	color:#000;
+	margin: 55pt 0 15pt 0;
+	text-shadow: 2px 2px 5px #aaa;
+	font-weight: bold;
+	color: #000;
 }
 td > h1:first-child {
 	margin-top:0 !important;

@@ -1,11 +1,11 @@
 
 #include <yuni/yuni.h>
-#include "logs.h"
+#include "../logs.h"
 #include "program.h"
 #include "job.h"
 #include "job-writer.h"
 #include "indexes.h"
-#include "tinyxml/tinyxml.h"
+#include "../tinyxml/tinyxml.h"
 #include <yuni/core/system/suspend.h>
 
 

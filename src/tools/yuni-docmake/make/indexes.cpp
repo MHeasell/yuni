@@ -1,10 +1,10 @@
 
 #include "indexes.h"
-#include "sqlite/sqlite3.h"
+#include "../sqlite/sqlite3.h"
 #include <yuni/io/file.h>
 #include <yuni/core/math.h>
 #include <yuni/datetime/timestamp.h>
-#include "logs.h"
+#include "../logs.h"
 #include "index-db.hxx"
 #include "program.h"
 #ifndef YUNI_OS_WINDOWS
@@ -29,7 +29,7 @@ namespace DocIndex
 
 		enum
 		{
-			dbVersion = 4,
+			dbVersion = 5,
 		};
 
 		static sqlite3* gDB = nullptr;
@@ -40,17 +40,31 @@ namespace DocIndex
 			logs.info() << "the index database needs to be rebuilt";
 
 			Clob script;
+			char* message = nullptr;
 
 			// Cleanup
 			PrepareSQLScriptCleanup(script);
-			sqlite3_exec(gDB, script.c_str(), NULL, NULL, NULL);
+			if (SQLITE_OK != sqlite3_exec(gDB, script.c_str(), NULL, NULL, &message))
+			{
+				logs.error() << "database: " << message;
+				sqlite3_free(message);
+			}
 
 			// Create tables
 			PrepareSQLScript(script);
-			sqlite3_exec(gDB, script.c_str(), NULL, NULL, NULL);
+			if (SQLITE_OK != sqlite3_exec(gDB, script.c_str(), NULL, NULL, &message))
+			{
+				logs.error() << "database: " << message;
+				sqlite3_free(message);
+			}
 
 			script.clear() << "INSERT INTO index_header (version) VALUES (" << (unsigned int) dbVersion << ");";
-			sqlite3_exec(gDB, script.c_str(), NULL, NULL, NULL);
+			if (SQLITE_OK != sqlite3_exec(gDB, script.c_str(), NULL, NULL, &message))
+			{
+				logs.error() << "database: " << message;
+				sqlite3_free(message);
+			}
+
 			return true;
 		}
 

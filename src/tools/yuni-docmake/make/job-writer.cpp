@@ -3,8 +3,8 @@
 #include <yuni/io/directory.h>
 #include <yuni/io/directory/system.h>
 #include "job.h"
-#include "logs.h"
-#include "tinyxml/tinyxml.h"
+#include "../logs.h"
+#include "../tinyxml/tinyxml.h"
 #include <yuni/core/hash//checksum//md5.h>
 #include <yuni/datetime/timestamp.h>
 #include "indexes.h"

@@ -4,7 +4,7 @@
 #include <yuni/core/system/cpu.h>
 #include <yuni/core/math.h>
 #include <yuni/core/getopt.h>
-#include "logs.h"
+#include "../logs.h"
 
 
 

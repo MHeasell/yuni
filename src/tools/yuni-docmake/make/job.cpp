@@ -1,8 +1,8 @@
 
 #include "job.h"
-#include "logs.h"
+#include "../logs.h"
 #include <yuni/io/io.h>
-#include "tinyxml/tinyxml.h"
+#include "../tinyxml/tinyxml.h"
 #include <iostream>
 #include <yuni/core/slist.h>
 #include "indexes.h"

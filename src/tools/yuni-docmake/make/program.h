@@ -3,7 +3,6 @@
 
 # include <yuni/yuni.h>
 # include <yuni/core/string.h>
-# include "sqlite/sqlite3.h"
 
 
 namespace Yuni
