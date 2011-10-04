@@ -31,8 +31,7 @@ std::cout &lt;&lt; content &lt;&lt; std::endl;
 <h3>Writing to a file</h3>
 <source type="cpp">
 // If the file already exists, it will be truncated
-String content = "Hello world !\n";
-if (!IO::File::SetContent("myfile.txt", content))
+if (!IO::File::SetContent("myfile.txt", "Hello world !\n"))
 	std::cout &lt;&lt; "impossible to write to the file" &lt;&lt; std::endl;
 </source>
 
@@ -40,8 +39,7 @@ if (!IO::File::SetContent("myfile.txt", content))
 <h3>Appending to a file</h3>
 <source type="cpp">
 // The content will be added at the end of the file
-String content = "Some text !\n";
-if (!IO::File::AppendContent("myfile.txt", content))
+if (!IO::File::AppendContent("myfile.txt", "Some text !\n"))
 	std::cout &lt;&lt; "impossible to append to the file" &lt;&lt; std::endl;
 </source>
 
