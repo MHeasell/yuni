@@ -1,8 +1,8 @@
 
 #include "dictionary.h"
-#include "sqlite/sqlite3.h"
+#include "../sqlite/sqlite3.h"
 #include "indexes.h"
-#include "logs.h"
+#include "../logs.h"
 
 
 

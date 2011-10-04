@@ -11,8 +11,8 @@ include_directories(tinyxml)
 
 
 # Writing index-db.hxx
-file(STRINGS index-db.sql INDEX_DB)
-file(STRINGS index-db-cleanup.sql INDEX_DB_CLEANUP)
+file(STRINGS make/index-db.sql INDEX_DB)
+file(STRINGS make/index-db-cleanup.sql INDEX_DB_CLEANUP)
 set(HXX_FILE "\n\n")
 set(HXX_FILE "${HXX_FILE}namespace DocIndex\n")
 set(HXX_FILE "${HXX_FILE}{\n")
@@ -42,10 +42,10 @@ set(HXX_FILE "${HXX_FILE}\t}\n\n\n\n")
 
 set(HXX_FILE "${HXX_FILE}} // anonymous namespace\n")
 set(HXX_FILE "${HXX_FILE}} // namespace DocIndex\n\n")
-file(WRITE index-db.hxx "${HXX_FILE}")
+file(WRITE make/index-db.hxx "${HXX_FILE}")
 
-# Writing index-db.hxx
-file(STRINGS webpage.html WEBPAGE_HTML)
+# Writing webpage.hxx
+file(STRINGS make/webpage.html WEBPAGE_HTML)
 set(HXX_FILE "\n\n")
 set(HXX_FILE "${HXX_FILE}namespace // anonymous\n")
 set(HXX_FILE "${HXX_FILE}{\n")
@@ -62,7 +62,7 @@ set(HXX_FILE "${HXX_FILE}\t}\n\n\n\n")
 
 set(HXX_FILE "${HXX_FILE}} // anonymous namespace\n")
 set(HXX_FILE "${HXX_FILE}\n\n")
-file(WRITE webpage.hxx "${HXX_FILE}")
+file(WRITE make/webpage.hxx "${HXX_FILE}")
 
 
 
@@ -80,23 +80,23 @@ add_executable(edln-make
 	sqlite/sqlite3.c
 	sqlite/sqlite3.h
 	sqlite/sqlite3ext.h
-	article.h
-	article.cpp
-	dictionary.h
-	dictionary.cpp
-	program.h
-	program.cpp
-	program-find-all-source-files.cpp
-	job.h
-	job.cpp
-	job-writer.h
-	job-writer.cpp
+	make/article.h
+	make/article.cpp
+	make/dictionary.h
+	make/dictionary.cpp
+	make/program.h
+	make/program.cpp
+	make/program-find-all-source-files.cpp
+	make/job.h
+	make/job.cpp
+	make/job-writer.h
+	make/job-writer.cpp
 	logs.h
 	logs.cpp
-	main.cpp
-	indexes.h
-	indexes.cpp
-	index-db.hxx
+	make/main.cpp
+	make/indexes.h
+	make/indexes.cpp
+	make/index-db.hxx
 )
 
 target_link_libraries(edln-make

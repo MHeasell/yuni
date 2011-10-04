@@ -1,6 +1,6 @@
 
 #include "article.h"
-#include "logs.h"
+#include "../logs.h"
 #include "program.h"
 
 using namespace Yuni;

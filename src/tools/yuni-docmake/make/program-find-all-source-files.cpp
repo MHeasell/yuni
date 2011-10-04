@@ -2,7 +2,7 @@
 #include "program.h"
 #include <yuni/io/directory/info.h>
 #include "job.h"
-#include "logs.h"
+#include "../logs.h"
 #include "indexes.h"
 
 #define SEP IO::Separator
@@ -75,12 +75,14 @@ namespace DocMake
 				// Checking for local modifications
 				if (!Program::clean)
 				{
+					// The relative filename
 					relative.assign(filename.c_str() + input.size() + 1, filename.size() - input.size() - 1);
-					sint64 lastWrite = IO::File::LastModificationTime(filename);
-					if (lastWrite)
+					sint64 lastWriteFromCache = DocIndex::ArticleLastModificationTimeFromCache(relative);
+					if (lastWriteFromCache > 0)
 					{
+						sint64 lastWrite = IO::File::LastModificationTime(filename);
 						// Trying to check if we really have to perform an analyzis
-						if (DocIndex::ArticleLastModificationTimeFromCache(relative) == lastWrite)
+						if (lastWriteFromCache == lastWrite)
 						{
 							++upToDateCount;
 							continue;
