@@ -1,54 +1,61 @@
 <title>Bank</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Bank</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors</h3>
-<p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">Bank</a></span>();</code></p>
-<p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Bank</a></span>(const Bank<b>&amp;</b> );</code></p>
+<h2><code>Bank</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef"><code><span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; Bank &gt; <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
-<p>Get if this policy is thread-safe.<br />
-<code><i>(unmanaged tag)</i></code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Empty constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Bank</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Public</h3>
-<p>Friend declaration.<br />
-<code><i>(unmanaged tag)</i></code></p>
-<p>Friend declaration.<br />
-<code><i>(unmanaged tag)</i></code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Bank</a></span>:  (const Bank<b>&amp;</b> );</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Clear the bank, free the loaded buffers.<br />
-<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
-<p class="doxygen_fun">Load sound file from given path.<br />
-<code><span class="keyword">template</span>&lt;typename StringT &gt;<br />bool <span class="method"><a href="#">load</a></span>(const StringT<b>&amp;</b> name);</code></p>
-<p class="doxygen_fun">Get the duration of a loaded sound.<br />
-<code><span class="keyword">template</span>&lt;typename StringT &gt;<br />unsigned int <span class="method"><a href="#">duration</a></span>(const StringT<b>&amp;</b> name);</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">load</a></span>(const String<b>&amp;</b> filePath);</code></p>
-<p class="doxygen_fun"><code>unsigned int <span class="method"><a href="#">duration</a></span>(const String<b>&amp;</b> name);</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_var">Mutex.<br />
-<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; Bank &gt;;</code>
+</td></tr>
+<tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td></td><td class="doxnone">Friend declaration.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td></td><td class="doxnone">Friend declaration.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Clear the bank, free the loaded buffers.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Load sound file from given path.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">load</a></span>: bool (const StringT<b>&amp;</b> name);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the duration of a loaded sound.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">duration</a></span>: unsigned int (const StringT<b>&amp;</b> name);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">load</a></span>: bool (const String<b>&amp;</b> filePath);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">duration</a></span>: unsigned int (const String<b>&amp;</b> name);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Mutex.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pMutex</a></span>: Mutex;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

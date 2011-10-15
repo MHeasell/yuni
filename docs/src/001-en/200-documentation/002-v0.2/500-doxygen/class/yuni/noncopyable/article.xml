@@ -1,19 +1,20 @@
 <title>NonCopyable</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>NonCopyable</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
-<p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">NonCopyable</a></span>();</code></p>
-<p class="doxygen_fun">Protected non-virtual destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>NonCopyable</a></span>();</code></p>
+<h2><code>NonCopyable</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">NonCopyable</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Protected non-virtual destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>NonCopyable</a></span>:  ();</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

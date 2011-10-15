@@ -1,99 +1,130 @@
 <title>Uri</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Uri</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors</h3>
-<p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Uri</a></span>();</code></p>
-<p class="doxygen_fun">Constructor with a string, to directly construct the URI.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Uri</a></span>(const StringT<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Uri</a></span>(const Uri<b>&amp;</b> rhs);</code></p>
+<h2><code>Uri</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Informations about the URI structure</h3>
-<p class="doxygen_fun">Clear all informations about the URI structure.<br />
-<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
-<p class="doxygen_fun">Scheme (lowercase)<br />
-<code>const String &amp; <span class="method"><a href="#">scheme</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the scheme.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">scheme</a></span>(const StringT<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Clear all informations about the URI structure.<br />
-<code>void <span class="method"><a href="#">scheme</a></span>(const Net::Protocol::Type<b>&amp;</b> type);</code></p>
-<p class="doxygen_fun">Server.<br />
-<code>const String &amp; <span class="method"><a href="#">server</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the server.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">server</a></span>(const StringT<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Port (equals to `INT_MIN` if none)<br />
-<code>int <span class="method"><a href="#">port</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the port value (only if strictly positive, or equals to INT_MIN do disable it)<br />
-<code>void <span class="method"><a href="#">port</a></span>(int p);</code></p>
-<p class="doxygen_fun">User.<br />
-<code>const String &amp; <span class="method"><a href="#">user</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the user.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">user</a></span>(const StringT<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Password.<br />
-<code>const String &amp; <span class="method"><a href="#">password</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the password.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">password</a></span>(const StringT<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Path.<br />
-<code>const String &amp; <span class="method"><a href="#">path</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the path.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">path</a></span>(const StringT<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Set a default path (`/`) if there is no path.<br />
-<code>void <span class="method"><a href="#">defaultPathIfEmpty</a></span>();</code></p>
-<p class="doxygen_fun">Query.<br />
-<code>const String &amp; <span class="method"><a href="#">query</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the query.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">query</a></span>(const StringT<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Fragment.<br />
-<code>const String &amp; <span class="method"><a href="#">fragment</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the fragment.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">fragment</a></span>(const StringT<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Get if the URI was valid during the last extract.<br />
-<code>bool <span class="method"><a href="#">isValid</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Uri</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Scheme</h3>
-<p class="doxygen_fun">Try to find out the network protocol from the scheme.<br />
-<code>Net::Protocol::Type <span class="method"><a href="#">protocol</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Convenient method to know if the URI is merely a file.<br />
-<code>bool <span class="method"><a href="#">schemeIsFile</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the scheme is `HTTP` or `HTTPS`.<br />
-<code>bool <span class="method"><a href="#">schemeIsHTTP</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the scheme is `FTP`.<br />
-<code>bool <span class="method"><a href="#">schemeIsFTP</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the scheme is `SSH`.<br />
-<code>bool <span class="method"><a href="#">schemeIsSSH</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the scheme is `LDAP`.<br />
-<code>bool <span class="method"><a href="#">schemeIsLDAP</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a string, to directly construct the URI.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Uri</a></span>:  (const StringT<b>&amp;</b> s);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Conversion</h3>
-<p class="doxygen_fun">Reconstruct the URI to a string.<br />
-<code>String <span class="method"><a href="#">toString</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Print this URI to a stream output.<br />
-<code>std::ostream &amp; <span class="method"><a href="#">print</a></span>(std::ostream<b>&amp;</b> out) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Uri</a></span>:  (const Uri<b>&amp;</b> rhs);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators</h3>
-<p class="doxygen_fun">The operator =.<br />
-<code>Uri &amp; <span class="method"><a href="#">operator=</a></span>(const Uri<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">The operator =.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Uri &amp; <span class="method"><a href="#">operator=</a></span>(const StringT<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">The operator ==.<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const Uri<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">The operator !=.<br />
-<code>bool <span class="method"><a href="#">operator!=</a></span>(const Uri<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">The operator ()<br />
-<code>String <span class="method"><a href="#">operator()</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Informations about the URI structure <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Clear all informations about the URI structure.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Scheme (lowercase)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">scheme</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the scheme.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">scheme</a></span>: void (const StringT<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Clear all informations about the URI structure.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">scheme</a></span>: void (const Net::Protocol::Type<b>&amp;</b> type);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Server.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">server</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the server.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">server</a></span>: void (const StringT<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Port (equals to `INT_MIN` if none)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">port</a></span>: int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the port value (only if strictly positive, or equals to INT_MIN do disable it)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">port</a></span>: void (int p);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">User.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">user</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the user.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">user</a></span>: void (const StringT<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Password.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">password</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the password.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">password</a></span>: void (const StringT<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Path.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">path</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the path.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">path</a></span>: void (const StringT<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set a default path (`/`) if there is no path.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">defaultPathIfEmpty</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Query.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">query</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the query.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">query</a></span>: void (const StringT<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Fragment.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">fragment</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the fragment.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">fragment</a></span>: void (const StringT<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the URI was valid during the last extract.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">isValid</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Scheme <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Try to find out the network protocol from the scheme.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">protocol</a></span>: Net::Protocol::Type () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Convenient method to know if the URI is merely a file.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">schemeIsFile</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheme is `HTTP` or `HTTPS`.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">schemeIsHTTP</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheme is `FTP`.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">schemeIsFTP</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheme is `SSH`.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">schemeIsSSH</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheme is `LDAP`.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">schemeIsLDAP</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Conversion <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Reconstruct the URI to a string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">toString</a></span>: String () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Print this URI to a stream output.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">print</a></span>: std::ostream &amp; (std::ostream<b>&amp;</b> out) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The operator =.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator=</a></span>: Uri &amp; (const Uri<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The operator =.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator=</a></span>: Uri &amp; (const StringT<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The operator ==.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator==</a></span>: bool (const Uri<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The operator !=.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Uri<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The operator ()<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator()</a></span>: String () <span class="keyword">const</span>;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

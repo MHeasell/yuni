@@ -1,112 +1,139 @@
 <title>Timer</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Timer</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Execution flow</h3>
-<p class="doxygen_fun">Start the execution of the thread, if not already started.<br />
-<code>Error <span class="method"><a href="#">start</a></span>();</code></p>
-<p class="doxygen_fun">Stop the execution of the thread and wait for it, if not already stopped.<br />
-<code>Error <span class="method"><a href="#">stop</a></span>(unsigned int timeout);</code></p>
-<p class="doxygen_fun">Wait for an infinite amount of time for the end of the thread.<br />
-<code>Error <span class="method"><a href="#">wait</a></span>();</code></p>
-<p class="doxygen_fun">Wait for the end of the thread.<br />
-<code>Error <span class="method"><a href="#">wait</a></span>(unsigned int timeout);</code></p>
-<p class="doxygen_fun">Restart the thread.<br />
-<code>Error <span class="method"><a href="#">restart</a></span>(unsigned int timeout);</code></p>
-<p class="doxygen_fun">Ask to Stop the execution of the thread as soon as possible.<br />
-<code>void <span class="method"><a href="#">gracefulStop</a></span>();</code></p>
-<p class="doxygen_fun">Get if the thread is currently running.<br />
-<code>bool <span class="method"><a href="#">started</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Interrupt the thread if suspended.<br />
-<code>void <span class="method"><a href="#">wakeUp</a></span>();</code></p>
+<h2><code>Timer</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Execution flow <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators</h3>
-<p class="doxygen_fun">Get if the thread is currently stopped.<br />
-<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Start the execution of the thread, if not already started.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">start</a></span>: Error ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
-<p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Timer</a></span>();</code></p>
-<p class="doxygen_fun">Constructor with a time interval.<br />
-<code> <span class="method"><a href="#">Timer</a></span>(const unsigned int interval);</code></p>
-<p class="doxygen_fun">Constructor with a time interval + cycle count.<br />
-<code> <span class="method"><a href="#">Timer</a></span>(const unsigned int interval, const unsigned int cycles);</code></p>
-<p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Timer</a></span>(const Timer<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Timer</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Stop the execution of the thread and wait for it, if not already stopped.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">stop</a></span>: Error (unsigned int timeout);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Settings (Time interval &amp; Cycles)</h3>
-<p class="doxygen_fun">Reload the settings.<br />
-<code>void <span class="method"><a href="#">reload</a></span>();</code></p>
-<p class="doxygen_fun">Modify then Reload the settings.<br />
-<code>void <span class="method"><a href="#">reload</a></span>(unsigned int interval);</code></p>
-<p class="doxygen_fun">Modify then Reload the settings.<br />
-<code>void <span class="method"><a href="#">reload</a></span>(unsigned int interval, unsigned int cycles);</code></p>
-<p class="doxygen_fun">Get the time interval (in milliseconds)<br />
-<code>unsigned int <span class="method"><a href="#">interval</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the time interval (in `ms`)<br />
-<code>void <span class="method"><a href="#">interval</a></span>(const unsigned int t);</code></p>
-<p class="doxygen_fun">Get the number of cycle to run.<br />
-<code>unsigned int <span class="method"><a href="#">cycleCount</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the number of cycle to run.<br />
-<code>void <span class="method"><a href="#">cycleCount</a></span>(const unsigned int n);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Wait for an infinite amount of time for the end of the thread.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">wait</a></span>: Error ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators</h3>
-<p class="doxygen_fun">The assignment operator (=)<br />
-<code>Timer &amp; <span class="method"><a href="#">operator=</a></span>(const Timer<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Wait for the end of the thread.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">wait</a></span>: Error (unsigned int timeout);</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p>Special value to use for an infinite loop. The default time interval (in milliseconds)<br />
-<code><i>(unmanaged tag)</i></code></p>
-<p class="doxygen_typedef">The Threading policy.<br />
-<code><span class="keyword">typedef</span> IThread::ThreadingPolicy <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
-<p class="doxygen_typedef">The most suitable smart pointer for the class.<br />
-<code><span class="keyword">typedef</span> SmartPtr &lt; IThread &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
-<p>Get if this policy is thread-safe.<br />
-<code><i>(unmanaged tag)</i></code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Restart the thread.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">restart</a></span>: Error (unsigned int timeout);</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_fun">Event : The timer has just been started.<br />
-<code>bool <span class="method"><a href="#">onStarting</a></span>();</code></p>
-<p class="doxygen_fun">Event : Execute a new cycle.<br />
-<code>bool <span class="method"><a href="#">onInterval</a></span>(unsigned int cycle);</code></p>
-<p class="doxygen_fun">Event : The timer has been stopped.<br />
-<code>void <span class="method"><a href="#">onStopped</a></span>();</code></p>
-<p class="doxygen_fun">Suspend the execution of the thread of X miliseconds.<br />
-<code>bool <span class="method"><a href="#">suspend</a></span>(const unsigned int delay);</code></p>
-<p class="doxygen_fun">Get if the thread should abort as soon as possible.<br />
-<code>bool <span class="method"><a href="#">shouldAbort</a></span>();</code></p>
-<p class="doxygen_fun">Event : The thread has finished its job and is waiting for being re-executed.<br />
-<code>void <span class="method"><a href="#">onPause</a></span>();</code></p>
-<p class="doxygen_fun">Event : The thread has been gracefully stopped.<br />
-<code>void <span class="method"><a href="#">onStop</a></span>();</code></p>
-<p class="doxygen_fun">Event : The thread has been killed.<br />
-<code>void <span class="method"><a href="#">onKill</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Ask to Stop the execution of the thread as soon as possible.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">gracefulStop</a></span>: void ();</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_var">Mutex.<br />
-<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the thread is currently running.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">started</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Interrupt the thread if suspended.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">wakeUp</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the thread is currently stopped.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Timer</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a time interval.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Timer</a></span>:  (const unsigned int interval);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a time interval + cycle count.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Timer</a></span>:  (const unsigned int interval, const unsigned int cycles);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Timer</a></span>:  (const Timer<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>Timer</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Settings (Time interval &amp; Cycles) <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Reload the settings.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reload</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Modify then Reload the settings.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reload</a></span>: void (unsigned int interval);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Modify then Reload the settings.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reload</a></span>: void (unsigned int interval, unsigned int cycles);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the time interval (in milliseconds)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">interval</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the time interval (in `ms`)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">interval</a></span>: void (const unsigned int t);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the number of cycle to run.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">cycleCount</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the number of cycle to run.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">cycleCount</a></span>: void (const unsigned int n);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The assignment operator (=)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator=</a></span>: Timer &amp; (const Timer<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td></td><td class="doxnone">Special value to use for an infinite loop. The default time interval (in milliseconds)<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The Threading policy.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> IThread::ThreadingPolicy;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer for the class.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; IThread &gt;;</code>
+</td></tr>
+<tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Event : The timer has just been started.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">onStarting</a></span>: bool ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Event : Execute a new cycle.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">onInterval</a></span>: bool (unsigned int cycle);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Event : The timer has been stopped.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">onStopped</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Suspend the execution of the thread of X miliseconds.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">suspend</a></span>: bool (const unsigned int delay);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the thread should abort as soon as possible.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">shouldAbort</a></span>: bool ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Event : The thread has finished its job and is waiting for being re-executed.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">onPause</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Event : The thread has been gracefully stopped.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">onStop</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Event : The thread has been killed.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">onKill</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Mutex.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pMutex</a></span>: Mutex;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

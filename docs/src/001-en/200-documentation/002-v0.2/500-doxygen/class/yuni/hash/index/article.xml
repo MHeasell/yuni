@@ -1,48 +1,60 @@
 <title>Index</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Index</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#">Table</a></span>();</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>();</code></p>
+<h2><code>Index</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef">Type of the key.<br />
-<code><span class="keyword">typedef</span> KeyT <span class="method"><a href="#">KeyType</a></span>;</code></p>
-<p class="doxygen_typedef">Type for a value.<br />
-<code><span class="keyword">typedef</span> ValueT <span class="method"><a href="#">ValueType</a></span>;</code></p>
-<p class="doxygen_typedef">The real implementation.<br />
-<code><span class="keyword">typedef</span> ImplT <span class="method"><a href="#">ImplementationType</a></span>;</code></p>
-<p class="doxygen_typedef">Size.<br />
-<code><span class="keyword">typedef</span> ImplementationType::size_type <span class="method"><a href="#">size_type</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Table</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />iterator <span class="method"><a href="#">addOrUpdate</a></span>(const K<b>&amp;</b> key);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K , class V &gt;<br />iterator <span class="method"><a href="#">addOrUpdate</a></span>(const K<b>&amp;</b> key, const V<b>&amp;</b> value);</code></p>
-<p class="doxygen_fun">Remove all items.<br />
-<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
-<p class="doxygen_fun">Clear all deleted items (if any)<br />
-<code>void <span class="method"><a href="#">purge</a></span>();</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />bool <span class="method"><a href="#">exists</a></span>(const K<b>&amp;</b> key) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />bool <span class="method"><a href="#">remove</a></span>(const K<b>&amp;</b> key);</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>size_type <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class K &gt;<br />ValueType &amp; <span class="method"><a href="#">operator[]</a></span>(const K<b>&amp;</b> key);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the key.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">KeyType</a></span>: <span class="keyword">typedef</span> KeyT;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Type for a value.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ValueType</a></span>: <span class="keyword">typedef</span> ValueT;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The real implementation.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ImplementationType</a></span>: <span class="keyword">typedef</span> ImplT;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Size.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">size_type</a></span>: <span class="keyword">typedef</span> ImplementationType::size_type;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">addOrUpdate</a></span>: iterator (const K<b>&amp;</b> key);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">addOrUpdate</a></span>: iterator (const K<b>&amp;</b> key, const V<b>&amp;</b> value);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Remove all items.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Clear all deleted items (if any)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">purge</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">exists</a></span>: bool (const K<b>&amp;</b> key) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">remove</a></span>: bool (const K<b>&amp;</b> key);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">size</a></span>: size_type () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator[]</a></span>: ValueType &amp; (const K<b>&amp;</b> key);</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

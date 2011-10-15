@@ -1,30 +1,32 @@
 <title>BadCast</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>BadCast</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_var">Cast source.<br />
-<code>const char * <span class="method"><a href="#">from</a></span>;</code></p>
-<p class="doxygen_var">Cast target.<br />
-<code>const char * <span class="method"><a href="#">to</a></span>;</code></p>
+<h2><code>BadCast</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">BadCast</a></span>(const std::type_info<b>&amp;</b> src, const std::type_info<b>&amp;</b> dest);</code></p>
-<p class="doxygen_fun">Description printed by libstdc++.<br />
-<code>const char * <span class="method"><a href="#">what</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_var"></td><td class="doxnone">Cast source.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">from</a></span>: const char *;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Cast target.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">to</a></span>: const char *;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">BadCast</a></span>:  (const std::type_info<b>&amp;</b> src, const std::type_info<b>&amp;</b> dest);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Description printed by libstdc++.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">what</a></span>: const char * () <span class="keyword">const</span>;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

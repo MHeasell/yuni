@@ -1,33 +1,36 @@
 <title>Hexdump</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Hexdump</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
-<p class="doxygen_fun">Construct from a simple buffer.<br />
-<code> <span class="method"><a href="#">Hexdump</a></span>(const char<b>*</b> buffer, unsigned int size);</code></p>
-<p class="doxygen_fun">Copy ctor.<br />
-<code> <span class="method"><a href="#">Hexdump</a></span>(const Hexdump<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Construct from a string (or like) object.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br /> <span class="method"><a href="#">Hexdump</a></span>(const U<b>&amp;</b> buffer);</code></p>
+<h2><code>Hexdump</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Dump functions</h3>
-<p class="doxygen_fun">Dumps the current buffer to a stream.<br />
-<code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">dump</a></span>(U<b>&amp;</b> outStream) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Dumps the current buffer to a string.<br />
-<code>String <span class="method"><a href="#">dump</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Construct from a simple buffer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Hexdump</a></span>:  (const char<b>*</b> buffer, unsigned int size);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators</h3>
-<p class="doxygen_fun">Operator =.<br />
-<code>Hexdump &amp; <span class="method"><a href="#">operator=</a></span>(const Hexdump<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy ctor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Hexdump</a></span>:  (const Hexdump<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Construct from a string (or like) object.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Hexdump</a></span>:  (const U<b>&amp;</b> buffer);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Dump functions <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Dumps the current buffer to a stream.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">dump</a></span>: void (U<b>&amp;</b> outStream) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Dumps the current buffer to a string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">dump</a></span>: String () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Operator =.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator=</a></span>: Hexdump &amp; (const Hexdump<b>&amp;</b> rhs);</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

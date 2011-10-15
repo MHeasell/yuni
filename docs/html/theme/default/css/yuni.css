@@ -1,11 +1,11 @@
 body,html {
 	background-color		:white;
-	font: 11px/12px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 1em/1.2em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	color					:#444;
 	margin					:0;
 	padding					:0;
 	background:white;
-	font-size				:9pt;
+	font-size				:85%;
 }
 .layout {
 	border-collapse			:collapse;
@@ -34,14 +34,14 @@ body,html {
 	width:170px;
 	vertical-align:top;
 	padding					:2em 2.5em 2em 2.5em;
-	font: 12px/14px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 1em/1.25em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	background-color:#f8f8f8;
 	background-image:url('../images/shadow.png');
 	background-position:100% center;
 	background-repeat:repeat-y;
 }
 .leftmenu .titled {
-	font: 18px/20px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 1.5em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	background-image:url('../images/logo.png');
 	background-repeat:no-repeat;
 	background-position:center 0;
@@ -50,7 +50,7 @@ body,html {
 }
 .leftmenu .titled .unbreakable {
 	color:#933;
-	text-shadow				:1px 1px 4px #aaa;
+	text-shadow:1px 1px 4px #aaa;
 }
 .leftmenu .titled .unbreakable strong {
 	color:black;
@@ -117,7 +117,7 @@ body,html {
 	border-right-style:none;
 }
 .laycontent h1 {
-	font: 24px/28px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 2em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	color:#933;
 	text-shadow				:1px 1px 3px #ddd;
 	margin-top:62px;
@@ -140,7 +140,7 @@ body,html {
 	border-color:#b6c2ca;
 	padding					:0.5em 1em 0 1em;
 	margin					:2em 1.5em 2em 2em;
-	font: 11px/12px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 0.97em/1.1em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	-moz-box-shadow: 0 2px 5px #bbb;
 	-webkit-box-shadow: 0 2px 5px #bbb;
 	box-shadow: 0 2px 5px #bbb;
@@ -195,7 +195,7 @@ body,html {
 	padding-top				:200pt;
 	margin-bottom			:40pt;
 	text-align				:right;
-	font: 11px/12px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 0.92em/1em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 }
 .footer td {
 	vertical-align:bottom;
@@ -232,8 +232,7 @@ body,html {
 	width:10px;
 }
 .content {
-	font: 13px/16px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-	font-size:9pt;
+	font: 1em/1.35em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 }
 .content .directoryindex {
 	margin					:45pt 0 0 0;
@@ -260,7 +259,7 @@ body,html {
 	margin					:31pt 0 0 0;
 }
 .content h2 {
-	font: 18px/22px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 1.6em/1.8em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	margin: 55pt 0 15pt 0;
 	text-shadow: 2px 2px 5px #aaa;
 	font-weight: bold;
@@ -275,7 +274,7 @@ td > h2:first-child {
 	padding-top:0 !important;
 }
 .content h3 {
-	font: 16px/18px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 1.3em/1.4em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	text-shadow				:2px 2px 5px #bbb;
 	color					:#245079;
 	padding-left			:2em;
@@ -289,7 +288,6 @@ td > h2:first-child {
 }
 
 .content p {
-	font-size				:9pt;
 	text-align				:justify;
 	text-justify			:distribute;
 	text-indent				:0em;
@@ -299,7 +297,6 @@ td > h2:first-child {
 .content code {
 	color					:#33A;
 	font-family				:Monaco, monospace;
-	font-size:11px;
 }
 .content code .keyword {
 	color:#666;
@@ -315,7 +312,6 @@ td > h2:first-child {
 	background-image:none !important;
 	background-color:#eee;
 	padding-left:0.3em;
-	/*font-weight:bold; ugly on OS X */
 
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -328,7 +324,7 @@ td > h2:first-child {
 }
 .content pre {
 	font-family				:Monaco, 'Lucida Console';
-	font-size:11px;
+	font-size:0.92em;
 	padding					:0.5em 1em 0.5em 1em;
 	margin-left				:3.5em !important;
 	border					:1px solid #ddd;
@@ -349,7 +345,11 @@ td > h2:first-child {
 .content pre .string {
 	color:green;
 }
-.content ul {
+.content ul li {
+	padding-top:0.2em;
+}
+.content ol li {
+	padding-top:0.2em;
 }
 .content b {
 	color: #111;
@@ -388,7 +388,6 @@ td > h2:first-child {
 .borderleft {
 	border-left:1px solid #aaa !important;
 }
-
 .content table {
 	border-collapse			:collapse;
 	border					:1px solid #99adbc;
@@ -435,7 +434,6 @@ td > h2:first-child {
 }
 .spotlight {
 	display:none;
-	font-size:9pt !important;
 	position:fixed;
 	background-color:#000;
 	max-height:70%;
@@ -458,14 +456,13 @@ td > h2:first-child {
 	text-decoration:none;
 	padding:0.1em 0.8em !important;
 	padding-right:0.3em !important;
-	font: 12px/14px 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 1em/1.27em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 }
 .spotlight a:hover {
 	background-color:#933 !important;
 	color:#d88 !important;
 }
 .spotlight span {
-	font-size:9pt;
 	color:white !important;
 	font-weight:normal !important;
 	padding-right:1em !important;
@@ -511,11 +508,6 @@ td > h2:first-child {
 	background-color:#000;
 	background-image:none;
 	opacity:0.85;
-	/*
-	-moz-box-shadow: 0 0px 8px #555;
-	-webkit-box-shadow: 0 0px 8px #555;
-	box-shadow: 0 0px 8px #555;
-	border:1px solid white;*/
 	margin-top:3px;
 	margin-left:-12px;
 	padding-top:3px;
@@ -525,10 +517,10 @@ td > h2:first-child {
 	max-height:80%;
 }
 .path ul li a {
+	font-size:1em;
 	text-decoration:none;
 	color:#224f7b;
 	border:1px solid transparent;
-	/*padding:2px 5px 2px 5px;*/
 	padding-left:4px;
 	padding-right:4px;
 }
@@ -550,15 +542,12 @@ td > h2:first-child {
 	padding-left:3px;
 }
 .path ul li ul li a {
-	font-size:9pt;
+	font-size:1em;
 	display:block;
 	background-color:#000;
 	background-image:none;
 	color:#ccc !important;
-	padding-top:3px;
-	padding-bottom:3px;
-	padding-right:30px;
-	padding-left:15px;
+	padding:0.25em 30px 0.25em 15px;
 }
 .path ul li ul li a.itemselected {
 	background-color:#273444 !important;
@@ -579,23 +568,81 @@ td > h2:first-child {
 	color:white !important;
 	text-shadow				:1px 1px 3px #444;
 }
+.doxygen_table {
+	width:100%;
+	border-style:none !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+.doxygen_table tr {
+}
+.doxygen_table tr:hover {
+	background-color:transparent !important;
+}
+.doxygen_table .doxnone {
+	border-top-style:none !important;
+	border-left-style:none !important;
+	border-right-style:none !important;
+	border-color:#f2f2ff !important;
+}
+.doxygen_table td {
+	border:1px solid #ccc;
+	background-position:center center;
+	padding-top:1em !important;
+	padding-bottom:1em !important;
+	text-align:left !important;
+}
+.doxygen_table td a {
+	color:#1E4176;
+	font-weight:bold;
+}
+.doxygen_table td code {
+	color:#778 !important;
+}
+.doxygen_section {
+	border-top-style:none;
+	border-left-style:none;
+	border-right-style:none;
+	padding-top:0.2em;
+	padding-left:0em !important;
+	padding-bottom:0.2em;
+}
+.doxygen_visibility {
+	float:right;
+	font-size:0.9em;
+	font-weight:normal !important;
+	color:#666 !important;
+	text-shadow:none;
+}
+.doxygen_name_spacer {
+	padding-top:0.3em;
+}
 .doxygen_fun {
 	background-image:url('../images/doxygen/function.png');
 	background-repeat:no-repeat;
-	padding-left:25px;
+	background-color:#f6f6f6;
+	border:1px solid #ddd !important;
+	width:10px;
 }
 .doxygen_typedef {
 	background-image:url('../images/doxygen/typedef.png');
 	background-repeat:no-repeat;
-	padding-left:25px;
+	background-color:#f6f6f6;
+	border:1px solid #ddd !important;
+	width:10px;
 }
 .doxygen_var {
 	background-image:url('../images/doxygen/var.png');
 	background-repeat:no-repeat;
-	padding-left:25px;
+	background-color:#f6f6f6;
+	border:1px solid #ddd !important;
+	width:10px;
 }
 .doxygen_enum {
 	background-image:url('../images/doxygen/enum.png');
 	background-repeat:no-repeat;
-	padding-left:25px;
+	background-color:#f6f6f6;
+	border:1px solid #ddd !important;
+	width:10px;
 }

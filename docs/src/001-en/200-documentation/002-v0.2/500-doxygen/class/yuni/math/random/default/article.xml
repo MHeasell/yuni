@@ -1,54 +1,63 @@
 <title>Default</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Default</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Informations about the random number generator</h3>
-<p class="doxygen_fun">Get the name of the distribution.<br />
-<code>const char * <span class="method"><a href="#">name</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">The lower bound (including itself)<br />
-<code>const Value <span class="method"><a href="#">min</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">The Upper bound (but not including itself)<br />
-<code>const Value <span class="method"><a href="#">max</a></span>() <span class="keyword">const</span>;</code></p>
+<h2><code>Default</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Informations about the random number generator <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators</h3>
-<p class="doxygen_fun"><code>const Value <span class="method"><a href="#">operator()</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the name of the distribution.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">name</a></span>: const char * () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef">Type of a single random number.<br />
-<code><span class="keyword">typedef</span> int <span class="method"><a href="#">Value</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The lower bound (including itself)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">min</a></span>: const Value () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Get the name of the distribution.<br />
-<code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>();</code></p>
-<p class="doxygen_fun"><code><span class="keyword">static</span> Value <span class="method"><a href="#">min</a></span>();</code></p>
-<p class="doxygen_fun"><code><span class="keyword">static</span> Value <span class="method"><a href="#">max</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The Upper bound (but not including itself)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">max</a></span>: const Value () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Default</a></span>();</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Default</a></span>();</code></p>
-<p class="doxygen_fun">(Re)Iniitalize the random number generator<br />
-<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>(unsigned int seed);</code></p>
-<p class="doxygen_fun">Generate the next random number.<br />
-<code>Value <span class="method"><a href="#">next</a></span>();</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />Default &amp; <span class="method"><a href="#">operator&gt;&gt;</a></span>(U<b>&amp;</b> u);</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator()</a></span>: const Value ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Type of a single random number.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Value</a></span>: <span class="keyword">typedef</span> int;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the name of the distribution.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Name</a></span>: <span class="keyword">static</span> const char * ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">min</a></span>: <span class="keyword">static</span> Value ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">max</a></span>: <span class="keyword">static</span> Value ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Default</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>Default</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">(Re)Iniitalize the random number generator<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reset</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">reset</a></span>: void (unsigned int seed);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Generate the next random number.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">next</a></span>: Value ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;&gt;</a></span>: Default &amp; (U<b>&amp;</b> u);</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

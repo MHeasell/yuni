@@ -1,37 +1,38 @@
 <title>IEvent</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>IEvent</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef">IEvent list.<br />
-<code><span class="keyword">typedef</span> std::map&lt; IEvent *, unsigned int &gt; <span class="method"><a href="#">Map</a></span>;</code></p>
+<h2><code>IEvent</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Public</h3>
-<p><code><i>(unmanaged tag)</i></code></p>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">IEvent list.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Map</a></span>: <span class="keyword">typedef</span> std::map&lt; IEvent *, unsigned int &gt;;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">IEvent</a></span>();</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>IEvent</a></span>();</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_fun">Unregister an observer.<br />
-<code>void <span class="method"><a href="#">unregisterObserver</a></span>(const IEventObserverBase<b>*</b> pointer);</code></p>
+<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">IEvent</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>IEvent</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Unregister an observer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">unregisterObserver</a></span>: void (const IEventObserverBase<b>*</b> pointer);</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

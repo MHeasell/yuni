@@ -1,54 +1,62 @@
 <title>MD5</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>MD5</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
-<p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">MD5</a></span>();</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>MD5</a></span>();</code></p>
+<h2><code>MD5</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Compute the hash from a string.<br />
-<code><span class="keyword">static</span> String <span class="method"><a href="#">FromString</a></span>(const String<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Compute the hash from raw data.<br />
-<code><span class="keyword">static</span> String <span class="method"><a href="#">FromRawData</a></span>(const void<b>*</b> rawdata, uint64 size);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">MD5</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Compute the hash from raw data.<br />
-<code>const String &amp; <span class="method"><a href="#">fromRawData</a></span>(const void<b>*</b> rawdata, uint64 size);</code></p>
-<p class="doxygen_fun">Compute the hash of a given file.<br />
-<code>const String &amp; <span class="method"><a href="#">fromFile</a></span>(const String<b>&amp;</b> filename);</code></p>
-<p class="doxygen_fun">Reset the hash value.<br />
-<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
-<p class="doxygen_fun">Compute the hash from a string.<br />
-<code>const String &amp; <span class="method"><a href="#">fromString</a></span>(const String<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun">Get the last hash value.<br />
-<code>const String &amp; <span class="method"><a href="#">value</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the hash value.<br />
-<code>const String &amp; <span class="method"><a href="#">operator()</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Compute the hash value from a string and returns it.<br />
-<code>const String &amp; <span class="method"><a href="#">operator[]</a></span>(const String<b>&amp;</b> s);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>MD5</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_var">The hash value.<br />
-<code>String <span class="method"><a href="#">pValue</a></span>;</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Compute the hash from a string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">FromString</a></span>: <span class="keyword">static</span> String (const String<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Compute the hash from raw data.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">FromRawData</a></span>: <span class="keyword">static</span> String (const void<b>*</b> rawdata, uint64 size);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Compute the hash from raw data.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">fromRawData</a></span>: const String &amp; (const void<b>*</b> rawdata, uint64 size);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Compute the hash of a given file.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">fromFile</a></span>: const String &amp; (const String<b>&amp;</b> filename);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Reset the hash value.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reset</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Compute the hash from a string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">fromString</a></span>: const String &amp; (const String<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the last hash value.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">value</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the hash value.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator()</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Compute the hash value from a string and returns it.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator[]</a></span>: const String &amp; (const String<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">The hash value.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pValue</a></span>: String;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

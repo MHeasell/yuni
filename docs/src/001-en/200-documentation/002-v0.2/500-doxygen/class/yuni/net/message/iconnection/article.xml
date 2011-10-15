@@ -1,39 +1,43 @@
 <title>IConnection</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>IConnection</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
-<p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">IConnection</a></span>(unsigned int id);</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>IConnection</a></span>();</code></p>
+<h2><code>IConnection</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef">The most suitable smart pointer for the class.<br />
-<code><span class="keyword">typedef</span> SmartPtr &lt; IConnection &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">IConnection</a></span>:  (unsigned int id);</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Get the local unique ID of the connection.<br />
-<code>unsigned int <span class="method"><a href="#">id</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Disconnect the client.<br />
-<code>void <span class="method"><a href="#">disconnect</a></span>();</code></p>
-<p class="doxygen_fun">Send a buffer.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">send</a></span>(const StringT<b>&amp;</b> data);</code></p>
-<p class="doxygen_fun">Send a buffer with a custom size.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">send</a></span>(const StringT<b>&amp;</b> data, unsigned int size);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>IConnection</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer for the class.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; IConnection &gt;;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the local unique ID of the connection.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">id</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Disconnect the client.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">disconnect</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Send a buffer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">send</a></span>: void (const StringT<b>&amp;</b> data);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Send a buffer with a custom size.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">send</a></span>: void (const StringT<b>&amp;</b> data, unsigned int size);</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

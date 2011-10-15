@@ -1,69 +1,76 @@
 <title>ITransport</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>ITransport</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
-<p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">ITransport</a></span>(Mode m);</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>ITransport</a></span>();</code></p>
+<h2><code>ITransport</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Attached thread</h3>
-<p class="doxygen_fun">Get the attached thread.<br />
-<code>Thread::IThread * <span class="method"><a href="#">attachedThread</a></span>();</code></p>
-<p class="doxygen_fun">Get the attached thread (const)<br />
-<code>const Thread::IThread * <span class="method"><a href="#">attachedThread</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the attached thread.<br />
-<code>void <span class="method"><a href="#">attachedThread</a></span>(Thread::IThread<b>*</b> thread);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">ITransport</a></span>:  (Mode m);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Public</h3>
-<p class="doxygen_fun">Service.<br />
-<code>Yuni::Net::Error <span class="method"><a href="#">execute</a></span>();</code></p>
-<p class="doxygen_fun">Execute the transport layer.<br />
-<code>Yuni::Net::Error <span class="method"><a href="#">operator()</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>ITransport</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef">The most suitable smart pointer for the class.<br />
-<code><span class="keyword">typedef</span> SmartPtr &lt; ITransport &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
-<p class="doxygen_typedef">Set.<br />
-<code><span class="keyword">typedef</span> std::set&lt; Ptr &gt; <span class="method"><a href="#">Set</a></span>;</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Attached thread <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_var">Address to listen.<br />
-<code>HostAddress <span class="method"><a href="#">address</a></span>;</code></p>
-<p class="doxygen_var">Port .<br />
-<code>Port <span class="method"><a href="#">port</a></span>;</code></p>
-<p class="doxygen_var">Mode (server/client)<br />
-<code>const Mode <span class="method"><a href="#">mode</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the attached thread.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">attachedThread</a></span>: Thread::IThread * ();</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_var">The attached thread.<br />
-<code>Thread::IThread * <span class="method"><a href="#">pAttachedThread</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the attached thread (const)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">attachedThread</a></span>: const Thread::IThread * () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_fun">Execute the transport layer.<br />
-<code>Yuni::Net::Error <span class="method"><a href="#">onExecute</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the attached thread.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">attachedThread</a></span>: void (Thread::IThread<b>*</b> thread);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Service.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">execute</a></span>: Yuni::Net::Error ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Execute the transport layer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator()</a></span>: Yuni::Net::Error ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer for the class.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; ITransport &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Set.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Set</a></span>: <span class="keyword">typedef</span> std::set&lt; Ptr &gt;;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Address to listen.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">address</a></span>: HostAddress;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Port .<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">port</a></span>: Port;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Mode (server/client)<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">mode</a></span>: const Mode;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">The attached thread.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pAttachedThread</a></span>: Thread::IThread *;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Execute the transport layer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">onExecute</a></span>: Yuni::Net::Error ();</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

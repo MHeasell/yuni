@@ -1,58 +1,76 @@
 <title>Char</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Char</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p>The maximum valid code point.<br />
-<code><i>(unmanaged tag)</i></code></p>
+<h2><code>Char</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Public</h3>
-<p><code><i>(unmanaged tag)</i></code></p>
+<tr><td></td><td class="doxnone">The maximum valid code point.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Get the length in bytes of the UTF8 character.<br />
-<code><span class="keyword">static</span> unsigned int <span class="method"><a href="#">Size</a></span>(const void<b>*</b> p);</code></p>
-<p class="doxygen_fun">Extract the first unsigned char from a raw buffer.<br />
-<code><span class="keyword">static</span> unsigned char <span class="method"><a href="#">Mask8Bits</a></span>(const void<b>*</b> p);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">static</span> unsigned char <span class="method"><a href="#">Mask8Bits</a></span>(const char p);</code></p>
-<p class="doxygen_fun">Is the UTF-8 a simple ascii char ?<br />
-<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsASCII</a></span>(unsigned char c);</code></p>
-<p class="doxygen_fun">Check if the two first bits are set.<br />
-<code><span class="keyword">static</span> bool <span class="method"><a href="#">IsTrail</a></span>(unsigned char c);</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Char</a></span>();</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Char</a></span>(const Char<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Char</a></span>(char c);</code></p>
-<p class="doxygen_fun">The size of the UTF8 character, in bytes.<br />
-<code>unsigned int <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>uint32 <span class="method"><a href="#">value</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class StreamT &gt;<br />void <span class="method"><a href="#">write</a></span>(StreamT<b>&amp;</b> out) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">reset</a></span>();</code></p>
-<p class="doxygen_fun"><code>Char &amp; <span class="method"><a href="#">operator=</a></span>(const Char<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun"><code>Char &amp; <span class="method"><a href="#">operator=</a></span>(const char c);</code></p>
-<p class="doxygen_fun"><code>Char &amp; <span class="method"><a href="#">operator=</a></span>(const unsigned char c);</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator==</a></span>(const char c) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!=</a></span>(const char c) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator==</a></span>(const unsigned char c) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!=</a></span>(const unsigned char c) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">operator char</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the length in bytes of the UTF8 character.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Size</a></span>: <span class="keyword">static</span> unsigned int (const void<b>*</b> p);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Extract the first unsigned char from a raw buffer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Mask8Bits</a></span>: <span class="keyword">static</span> unsigned char (const void<b>*</b> p);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Mask8Bits</a></span>: <span class="keyword">static</span> unsigned char (const char p);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Is the UTF-8 a simple ascii char ?<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">IsASCII</a></span>: <span class="keyword">static</span> bool (unsigned char c);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Check if the two first bits are set.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">IsTrail</a></span>: <span class="keyword">static</span> bool (unsigned char c);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Char</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Char</a></span>:  (const Char<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Char</a></span>:  (char c);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The size of the UTF8 character, in bytes.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">size</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">value</a></span>: uint32 () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">write</a></span>: void (StreamT<b>&amp;</b> out) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">reset</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: Char &amp; (const Char<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: Char &amp; (const char c);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: Char &amp; (const unsigned char c);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (const char c) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (const char c) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (const unsigned char c) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (const unsigned char c) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator char</a></span>:  () <span class="keyword">const</span>;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

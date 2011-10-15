@@ -1,94 +1,109 @@
 <title>IJob</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>IJob</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Contructor &amp; Destructor</h3>
-<p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">IJob</a></span>();</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>IJob</a></span>();</code></p>
+<h2><code>IJob</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Contructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">ID Card</h3>
-<p class="doxygen_fun">Get the full human-readable name of this job.<br />
-<code>String <span class="method"><a href="#">name</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the name of the job.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">name</a></span>(const StringT<b>&amp;</b> s);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">IJob</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Progression</h3>
-<p class="doxygen_fun">Get the progression in percent (value between 0 and 100)<br />
-<code>int <span class="method"><a href="#">progression</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the job is finished.<br />
-<code>bool <span class="method"><a href="#">finished</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>IJob</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">States</h3>
-<p class="doxygen_fun">Get the current state of the job.<br />
-<code>enum Job::State <span class="method"><a href="#">state</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the job is idle.<br />
-<code>bool <span class="method"><a href="#">idle</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the job is waiting for being executed.<br />
-<code>bool <span class="method"><a href="#">waiting</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the job is running.<br />
-<code>bool <span class="method"><a href="#">running</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the job is canceling its work (and it is currently running)<br />
-<code>bool <span class="method"><a href="#">canceling</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">ID Card <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Execution flow</h3>
-<p class="doxygen_fun">Ask to the job to cancel its work as soon as possible.<br />
-<code>void <span class="method"><a href="#">cancel</a></span>();</code></p>
-<p class="doxygen_fun">Execute the job.<br />
-<code>void <span class="method"><a href="#">execute</a></span>(Thread::IThread<b>*</b> t);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the full human-readable name of this job.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">name</a></span>: String () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef">The most suitable smart pointer for the class.<br />
-<code><span class="keyword">typedef</span> SmartPtr &lt; IJob &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
-<p class="doxygen_typedef">The threading policy.<br />
-<code><span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; IJob &gt; <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
-<p class="doxygen_typedef">List of jobs.<br />
-<code><span class="keyword">typedef</span> std::list&lt; Ptr &gt; <span class="method"><a href="#">List</a></span>;</code></p>
-<p>Get if this policy is thread-safe.<br />
-<code><i>(unmanaged tag)</i></code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the name of the job.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">name</a></span>: void (const StringT<b>&amp;</b> s);</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class T &gt;<br />void <span class="method"><a href="#">fillInformation</a></span>(T<b>&amp;</b> info);</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Progression <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_fun">Implement this method to define your own time-consuming task.<br />
-<code>void <span class="method"><a href="#">onExecute</a></span>();</code></p>
-<p class="doxygen_fun">Set the progression in percent (0..100)<br />
-<code>void <span class="method"><a href="#">progression</a></span>(const int p);</code></p>
-<p class="doxygen_fun">Suspend the execution of the job during X miliseconds.<br />
-<code>bool <span class="method"><a href="#">suspend</a></span>(unsigned int delay) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the job should abort as soon as possible.<br />
-<code>bool <span class="method"><a href="#">shouldAbort</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the name of the job without locking.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">nameWL</a></span>(const StringT<b>&amp;</b> newName);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the progression in percent (value between 0 and 100)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">progression</a></span>: int () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_var">Mutex.<br />
-<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the job is finished.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">finished</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">States <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the current state of the job.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">state</a></span>: enum Job::State () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the job is idle.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">idle</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the job is waiting for being executed.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">waiting</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the job is running.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">running</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the job is canceling its work (and it is currently running)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">canceling</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Execution flow <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Ask to the job to cancel its work as soon as possible.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">cancel</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Execute the job.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">execute</a></span>: void (Thread::IThread<b>*</b> t);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer for the class.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; IJob &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The threading policy.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; IJob &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">List of jobs.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">List</a></span>: <span class="keyword">typedef</span> std::list&lt; Ptr &gt;;</code>
+</td></tr>
+<tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">fillInformation</a></span>: void (T<b>&amp;</b> info);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Implement this method to define your own time-consuming task.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">onExecute</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the progression in percent (0..100)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">progression</a></span>: void (const int p);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Suspend the execution of the job during X miliseconds.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">suspend</a></span>: bool (unsigned int delay) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the job should abort as soon as possible.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">shouldAbort</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the name of the job without locking.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">nameWL</a></span>: void (const StringT<b>&amp;</b> newName);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Mutex.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pMutex</a></span>: Mutex;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

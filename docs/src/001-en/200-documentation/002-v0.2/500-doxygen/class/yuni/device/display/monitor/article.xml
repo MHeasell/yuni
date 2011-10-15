@@ -1,109 +1,131 @@
 <title>Monitor</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Monitor</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors and Destructor</h3>
-<p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Monitor</a></span>();</code></p>
-<p class="doxygen_fun">Constructor with values.<br />
-<code> <span class="method"><a href="#">Monitor</a></span>(const String<b>&amp;</b> nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b);</code></p>
-<p class="doxygen_fun">Constructor by copy.<br />
-<code> <span class="method"><a href="#">Monitor</a></span>(const Monitor<b>&amp;</b> c);</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Monitor</a></span>();</code></p>
+<h2><code>Monitor</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors and Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Handle</h3>
-<p class="doxygen_fun">Get the index of the current selected monitor.<br />
-<code>Monitor::Handle <span class="method"><a href="#">handle</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the handle of this monitor is valid.<br />
-<code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Monitor</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Identifiers</h3>
-<p class="doxygen_fun">Get the human readable name of the monitor, if any.<br />
-<code>const String &amp; <span class="method"><a href="#">productName</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get an unique id for this screen.<br />
-<code>const String &amp; <span class="method"><a href="#">guid</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with values.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Monitor</a></span>:  (const String<b>&amp;</b> nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Informations about the monitor</h3>
-<p class="doxygen_fun">Get all available resolutions for this screen.<br />
-<code>const Resolution::Vector &amp; <span class="method"><a href="#">resolutions</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the recommended resolution for this device.<br />
-<code>Resolution::Ptr <span class="method"><a href="#">recommendedResolution</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Remove all resolutions.<br />
-<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
-<p class="doxygen_fun">Get if a resolution is valid for this monitor.<br />
-<code>bool <span class="method"><a href="#">resolutionIsValid</a></span>(const Resolution::Ptr<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if this monitor is the primary display.<br />
-<code>bool <span class="method"><a href="#">primary</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the device is hardware accelerated.<br />
-<code>bool <span class="method"><a href="#">hardwareAcceleration</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the monitor is a builtin device.<br />
-<code>bool <span class="method"><a href="#">builtin</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor by copy.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Monitor</a></span>:  (const Monitor<b>&amp;</b> c);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators</h3>
-<p class="doxygen_fun">Append a resolution.<br />
-<code>Monitor &amp; <span class="method"><a href="#">operator+=</a></span>(Resolution<b>*</b> rhs);</code></p>
-<p class="doxygen_fun">Append a resolution.<br />
-<code>Monitor &amp; <span class="method"><a href="#">operator+=</a></span>(const Resolution::Ptr<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Append a resolution.<br />
-<code>Monitor &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(Resolution<b>*</b> rhs);</code></p>
-<p class="doxygen_fun">Append a resolution.<br />
-<code>Monitor &amp; <span class="method"><a href="#">operator&lt;&lt;</a></span>(const Resolution::Ptr<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>Monitor</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef">The most suitable smart pointer to use with the class `Monitor`.<br />
-<code><span class="keyword">typedef</span> SmartPtr &lt; Monitor &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
-<p class="doxygen_typedef">Handle for a single monitor.<br />
-<code><span class="keyword">typedef</span> int <span class="method"><a href="#">Handle</a></span>;</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Handle <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_var">Value for an invalid handle.<br />
-<code>const Handle <span class="method"><a href="#">InvalidHandle</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the index of the current selected monitor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">handle</a></span>: Monitor::Handle () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_var">The index of the monitor.<br />
-<code>Monitor::Handle <span class="method"><a href="#">pHandle</a></span>;</code></p>
-<p class="doxygen_var">Name of the current monitor.<br />
-<code>String <span class="method"><a href="#">pProductName</a></span>;</code></p>
-<p class="doxygen_var">All resolutions.<br />
-<code>Resolution::Vector <span class="method"><a href="#">pResolutions</a></span>;</code></p>
-<p class="doxygen_var">Primary.<br />
-<code>bool <span class="method"><a href="#">pPrimary</a></span>;</code></p>
-<p class="doxygen_var">Hardware Acceleration.<br />
-<code>bool <span class="method"><a href="#">pHardwareAcceleration</a></span>;</code></p>
-<p class="doxygen_var">Builtin device.<br />
-<code>bool <span class="method"><a href="#">pBuiltin</a></span>;</code></p>
-<p class="doxygen_var">The MD5 for the guid - avoid multiple md5 calculations.<br />
-<code>String <span class="method"><a href="#">pMD5Cache</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the handle of this monitor is valid.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Add a new resolution in the list.<br />
-<code>void <span class="method"><a href="#">add</a></span>(const Resolution::Ptr<b>&amp;</b> r);</code></p>
-<p class="doxygen_fun">Add some safe resolutions.<br />
-<code>void <span class="method"><a href="#">addSafeResolutions</a></span>();</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Identifiers <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the human readable name of the monitor, if any.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">productName</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get an unique id for this screen.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">guid</a></span>: const String &amp; ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Informations about the monitor <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get all available resolutions for this screen.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">resolutions</a></span>: const Resolution::Vector &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the recommended resolution for this device.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">recommendedResolution</a></span>: Resolution::Ptr () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Remove all resolutions.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if a resolution is valid for this monitor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">resolutionIsValid</a></span>: bool (const Resolution::Ptr<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if this monitor is the primary display.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">primary</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the device is hardware accelerated.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">hardwareAcceleration</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the monitor is a builtin device.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">builtin</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Append a resolution.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator+=</a></span>: Monitor &amp; (Resolution<b>*</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Append a resolution.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator+=</a></span>: Monitor &amp; (const Resolution::Ptr<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Append a resolution.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Monitor &amp; (Resolution<b>*</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Append a resolution.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Monitor &amp; (const Resolution::Ptr<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer to use with the class `Monitor`.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; Monitor &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Handle for a single monitor.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Handle</a></span>: <span class="keyword">typedef</span> int;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Value for an invalid handle.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">InvalidHandle</a></span>: const Handle;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">The index of the monitor.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pHandle</a></span>: Monitor::Handle;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Name of the current monitor.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pProductName</a></span>: String;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">All resolutions.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pResolutions</a></span>: Resolution::Vector;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Primary.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pPrimary</a></span>: bool;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Hardware Acceleration.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pHardwareAcceleration</a></span>: bool;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Builtin device.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pBuiltin</a></span>: bool;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">The MD5 for the guid - avoid multiple md5 calculations.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pMD5Cache</a></span>: String;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Add a new resolution in the list.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">add</a></span>: void (const Resolution::Ptr<b>&amp;</b> r);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Add some safe resolutions.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">addSafeResolutions</a></span>: void ();</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

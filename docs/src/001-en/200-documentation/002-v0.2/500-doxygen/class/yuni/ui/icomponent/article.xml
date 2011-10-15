@@ -1,104 +1,131 @@
 <title>IComponent</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>IComponent</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
-<p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">IComponent</a></span>();</code></p>
-<p class="doxygen_fun">Constructor with dimensions.<br />
-<code> <span class="method"><a href="#">IComponent</a></span>(float width, float height);</code></p>
-<p class="doxygen_fun">Full constructor.<br />
-<code> <span class="method"><a href="#">IComponent</a></span>(float x, float y, float width, float height);</code></p>
-<p class="doxygen_fun">Full constructor.<br />
-<code><span class="keyword">template</span>&lt;class T &gt;<br /> <span class="method"><a href="#">IComponent</a></span>(const Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height);</code></p>
-<p class="doxygen_fun">Virtual destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>IComponent</a></span>();</code></p>
+<h2><code>IComponent</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Methods</h3>
-<p class="doxygen_fun">Resize the component.<br />
-<code>void <span class="method"><a href="#">resize</a></span>(float width, float height);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Empty constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">IComponent</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Accessors</h3>
-<p class="doxygen_fun">Get the class name (identifier for the type of component)<br />
-<code>const ClassName &amp; <span class="method"><a href="#">className</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the class name (identifier for the type of component)<br />
-<code>void <span class="method"><a href="#">className</a></span>(ClassName<b>&amp;</b> );</code></p>
-<p class="doxygen_fun">Get the unique Identifier for this component.<br />
-<code>ID <span class="method"><a href="#">id</a></span>();</code></p>
-<p class="doxygen_fun">Get the width of the component.<br />
-<code>float <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the height of the component.<br />
-<code>float <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the position of the component.<br />
-<code>Point2D &lt; float &gt; <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the size of the component.<br />
-<code>void <span class="method"><a href="#">size</a></span>(float<b>&amp;</b> width, float<b>&amp;</b> height) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the X position of the component.<br />
-<code>float <span class="method"><a href="#">x</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the Y position of the component.<br />
-<code>float <span class="method"><a href="#">y</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with dimensions.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">IComponent</a></span>:  (float width, float height);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Pointer management</h3>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">addRef</a></span>();</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">release</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Full constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">IComponent</a></span>:  (float x, float y, float width, float height);</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef"><code><span class="keyword">typedef</span> SmartPtrInfo &lt; IComponent &gt;::Type <span class="method"><a href="#">Ptr</a></span>;</code></p>
-<p class="doxygen_typedef">Ancestor type.<br />
-<code><span class="keyword">typedef</span> IEventObserver &lt; IComponent , Policy::ObjectLevelLockable &gt; <span class="method"><a href="#">EventObserverType</a></span>;</code></p>
-<p class="doxygen_typedef">Threading policy.<br />
-<code><span class="keyword">typedef</span> EventObserverType::ThreadingPolicy <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
-<p class="doxygen_typedef">A class name is a string tag representing a type of component.<br />
-<code><span class="keyword">typedef</span> CString &lt; 64, false, false &gt; <span class="method"><a href="#">ClassName</a></span>;</code></p>
-<p class="doxygen_typedef">Unique local identifier.<br />
-<code><span class="keyword">typedef</span> Yuni::UI::ID::Type <span class="method"><a href="#">ID</a></span>;</code></p>
-<p class="doxygen_typedef">Type of the Event observer.<br />
-<code><span class="keyword">typedef</span> IEventObserver &lt; IComponent , Policy::ObjectLevelLockable &gt; <span class="method"><a href="#">IEventObserverType</a></span>;</code></p>
-<p>Get if this policy is thread-safe.<br />
-<code><i>(unmanaged tag)</i></code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Full constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">IComponent</a></span>:  (const Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height);</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_var">Unique local identifier.<br />
-<code>const ID <span class="method"><a href="#">pLocalID</a></span>;</code></p>
-<p class="doxygen_var">Class name for this component (type of component)<br />
-<code>ClassName <span class="method"><a href="#">pClass</a></span>;</code></p>
-<p class="doxygen_var">Adapter for Virtual UI &lt;-&gt; UI Representation communication.<br />
-<code>Adapter::ForVirtual * <span class="method"><a href="#">pAdapter</a></span>;</code></p>
-<p class="doxygen_var">Position of the component relative to its parent.<br />
-<code>Point2D &lt; float &gt; <span class="method"><a href="#">pPosition</a></span>;</code></p>
-<p class="doxygen_var">Width of the component.<br />
-<code>float <span class="method"><a href="#">pWidth</a></span>;</code></p>
-<p class="doxygen_var">Height of the component.<br />
-<code>float <span class="method"><a href="#">pHeight</a></span>;</code></p>
-<p class="doxygen_var">Mutex .<br />
-<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Virtual destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>IComponent</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_fun">Protected resize, without locks.<br />
-<code>void <span class="method"><a href="#">resizeWL</a></span>(float<b>&amp;</b> newWidth, float<b>&amp;</b> newHeight);</code></p>
-<p class="doxygen_fun">Detach the component from the tree.<br />
-<code>void <span class="method"><a href="#">detachWL</a></span>();</code></p>
-<p class="doxygen_fun">Destroy all existing and future bound events.<br />
-<code>void <span class="method"><a href="#">destroyBoundEvents</a></span>();</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Methods <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Resize the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">resize</a></span>: void (float width, float height);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Accessors <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the class name (identifier for the type of component)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">className</a></span>: const ClassName &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the class name (identifier for the type of component)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">className</a></span>: void (ClassName<b>&amp;</b> );</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the unique Identifier for this component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">id</a></span>: ID ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the width of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">width</a></span>: float () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the height of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">height</a></span>: float () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the position of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">position</a></span>: Point2D &lt; float &gt; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the size of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">size</a></span>: void (float<b>&amp;</b> width, float<b>&amp;</b> height) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the X position of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">x</a></span>: float () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the Y position of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">y</a></span>: float () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Pointer management <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">addRef</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">release</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtrInfo &lt; IComponent &gt;::Type;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Ancestor type.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">EventObserverType</a></span>: <span class="keyword">typedef</span> IEventObserver &lt; IComponent , Policy::ObjectLevelLockable &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Threading policy.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> EventObserverType::ThreadingPolicy;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">A class name is a string tag representing a type of component.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ClassName</a></span>: <span class="keyword">typedef</span> CString &lt; 64, false, false &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Unique local identifier.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ID</a></span>: <span class="keyword">typedef</span> Yuni::UI::ID::Type;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the Event observer.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">IEventObserverType</a></span>: <span class="keyword">typedef</span> IEventObserver &lt; IComponent , Policy::ObjectLevelLockable &gt;;</code>
+</td></tr>
+<tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Unique local identifier.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pLocalID</a></span>: const ID;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Class name for this component (type of component)<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pClass</a></span>: ClassName;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Adapter for Virtual UI &lt;-&gt; UI Representation communication.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pAdapter</a></span>: Adapter::ForVirtual *;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Position of the component relative to its parent.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pPosition</a></span>: Point2D &lt; float &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Width of the component.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pWidth</a></span>: float;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Height of the component.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pHeight</a></span>: float;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Mutex .<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pMutex</a></span>: Mutex;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Protected resize, without locks.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">resizeWL</a></span>: void (float<b>&amp;</b> newWidth, float<b>&amp;</b> newHeight);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Detach the component from the tree.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">detachWL</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destroy all existing and future bound events.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">destroyBoundEvents</a></span>: void ();</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

@@ -1,61 +1,72 @@
 <title>Any</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Any</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors</h3>
-<p class="doxygen_fun">Copy of an existing variable.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br /> <span class="method"><a href="#">Any</a></span>(const T<b>&amp;</b> source);</code></p>
-<p class="doxygen_fun">Copy of an existing const C string.<br />
-<code> <span class="method"><a href="#">Any</a></span>(const char<b>*</b> source);</code></p>
-<p class="doxygen_fun">Copy of an existing const C string.<br />
-<code> <span class="method"><a href="#">Any</a></span>(char<b>*</b> source);</code></p>
-<p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">Any</a></span>();</code></p>
-<p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Any</a></span>(const Any<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Any</a></span>();</code></p>
+<h2><code>Any</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Alteration methods</h3>
-<p class="doxygen_fun">Assignment from another Any .<br />
-<code>Any &amp; <span class="method"><a href="#">assign</a></span>(const Any<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Assignment from any object.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br />Any &amp; <span class="method"><a href="#">assign</a></span>(const T<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Specialized assign for C Strings.<br />
-<code>Any &amp; <span class="method"><a href="#">assign</a></span>(const char<b>*</b> rhs);</code></p>
-<p class="doxygen_fun">Assignment operator for convenience.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br />Any &amp; <span class="method"><a href="#">operator=</a></span>(T const<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Resets the Any to an empty state.<br />
-<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy of an existing variable.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Any</a></span>:  (const T<b>&amp;</b> source);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Information methods</h3>
-<p class="doxygen_fun">Returns the type_info of the held variable.<br />
-<code>const std::type_info &amp; <span class="method"><a href="#">type</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Returns true if the object is of the specified type.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br />bool <span class="method"><a href="#">is</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Checks if the any has been assigned a value.<br />
-<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy of an existing const C string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Any</a></span>:  (const char<b>*</b> source);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Retrieval methods</h3>
-<p class="doxygen_fun">Casts the Any to the T type. Throws a Yuni::Exceptions::BadCast if not possible.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br />const T &amp; <span class="method"><a href="#">to</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy of an existing const C string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Any</a></span>:  (char<b>*</b> source);</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Swaps a any with another.<br />
-<code><span class="keyword">static</span> void <span class="method"><a href="#">Swap</a></span>(Any<b>&amp;</b> one, Any<b>&amp;</b> other);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Empty constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Any</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Any</a></span>:  (const Any<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>Any</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Alteration methods <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment from another Any .<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">assign</a></span>: Any &amp; (const Any<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment from any object.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">assign</a></span>: Any &amp; (const T<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Specialized assign for C Strings.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">assign</a></span>: Any &amp; (const char<b>*</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment operator for convenience.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator=</a></span>: Any &amp; (T const<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Resets the Any to an empty state.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reset</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Information methods <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Returns the type_info of the held variable.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">type</a></span>: const std::type_info &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Returns true if the object is of the specified type.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">is</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Checks if the any has been assigned a value.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Retrieval methods <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Casts the Any to the T type. Throws a Yuni::Exceptions::BadCast if not possible.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">to</a></span>: const T &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Swaps a any with another.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Swap</a></span>: <span class="keyword">static</span> void (Any<b>&amp;</b> one, Any<b>&amp;</b> other);</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

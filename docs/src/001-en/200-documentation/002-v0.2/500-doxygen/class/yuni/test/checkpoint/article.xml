@@ -1,26 +1,28 @@
 <title>Checkpoint</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Checkpoint</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
-<p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">Checkpoint</a></span>(const char<b>*</b> id);</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Checkpoint</a></span>();</code></p>
+<h2><code>Checkpoint</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator()</a></span>(bool b);</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator()</a></span>(bool b, const char<b>*</b> msg);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Checkpoint</a></span>:  (const char<b>*</b> id);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>Checkpoint</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator()</a></span>: bool (bool b);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator()</a></span>: bool (bool b, const char<b>*</b> msg);</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

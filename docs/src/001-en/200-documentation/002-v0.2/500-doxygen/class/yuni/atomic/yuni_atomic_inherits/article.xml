@@ -1,71 +1,90 @@
 <title>YUNI_ATOMIC_INHERITS</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>YUNI_ATOMIC_INHERITS</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors</h3>
-<p class="doxygen_fun">Default Constructor.<br />
-<code> <span class="method"><a href="#">Int</a></span>();</code></p>
-<p class="doxygen_fun">Constructor with an initial value (int16)<br />
-<code> <span class="method"><a href="#">Int</a></span>(const sint16 v);</code></p>
-<p class="doxygen_fun">Constructor with an initial value (int32)<br />
-<code> <span class="method"><a href="#">Int</a></span>(const sint32 v);</code></p>
-<p class="doxygen_fun">Constructor with an initial value (int64)<br />
-<code> <span class="method"><a href="#">Int</a></span>(const sint64 v);</code></p>
-<p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Int</a></span>(const Int<b>&amp;</b> v);</code></p>
-<p class="doxygen_fun">Copy constructor from another type and another threading policy.<br />
-<code><span class="keyword">template</span>&lt;int Size2, template&lt; class &gt; class TP2&gt;<br /> <span class="method"><a href="#">Int</a></span>(const Int&lt; Size2, TP2 &gt;<b>&amp;</b> v);</code></p>
+<h2><code>YUNI_ATOMIC_INHERITS</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators</h3>
-<p class="doxygen_fun">Pre increment operator.<br />
-<code>ScalarType <span class="method"><a href="#">operator++</a></span>();</code></p>
-<p class="doxygen_fun">Pre decrement operator.<br />
-<code>ScalarType <span class="method"><a href="#">operator--</a></span>();</code></p>
-<p class="doxygen_fun">Post increment operator.<br />
-<code>ScalarType <span class="method"><a href="#">operator++</a></span>(int );</code></p>
-<p class="doxygen_fun">Post decrement operator.<br />
-<code>ScalarType <span class="method"><a href="#">operator--</a></span>(int );</code></p>
-<p class="doxygen_fun">Pre increment operator.<br />
-<code>Int &amp; <span class="method"><a href="#">operator=</a></span>(const ScalarType v);</code></p>
-<p class="doxygen_fun">Increment.<br />
-<code>Int &amp; <span class="method"><a href="#">operator+=</a></span>(const ScalarType v);</code></p>
-<p class="doxygen_fun">Decrement.<br />
-<code>Int &amp; <span class="method"><a href="#">operator-=</a></span>(const ScalarType v);</code></p>
-<p class="doxygen_fun">Cast operator.<br />
-<code> <span class="method"><a href="#">operator ScalarType</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">not<br />
-<code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Int</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p>Get if the class must be thread-safe. Get if the class must be thread-safe.<br />
-<code><i>(unmanaged tag)</i></code></p>
-<p>Get if we have to guarantee ourselves the thread-safety.<br />
-<code><i>(unmanaged tag)</i></code></p>
-<p>Size (in bits) of the scalar type.<br />
-<code><i>(unmanaged tag)</i></code></p>
-<p class="doxygen_typedef">The Threading Policy .<br />
-<code><span class="keyword">typedef</span> Private::AtomicImpl::ThreadingPolicy&lt; threadSafe, Int&lt; Size, TP &gt; &gt;:: Type <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
-<p class="doxygen_typedef">The scalar type.<br />
-<code><span class="keyword">typedef</span> Private::AtomicImpl::TypeFromSize&lt; Size &gt;:: Type <span class="method"><a href="#">Type</a></span>;</code></p>
-<p class="doxygen_typedef">The scalar type.<br />
-<code><span class="keyword">typedef</span> Type <span class="method"><a href="#">ScalarType</a></span>;</code></p>
-<p class="doxygen_typedef">Type of the inner variable.<br />
-<code><span class="keyword">typedef</span> Private::AtomicImpl::Volatile&lt; threadSafe, Type &gt;:: Type <span class="method"><a href="#">InnerType</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with an initial value (int16)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Int</a></span>:  (const sint16 v);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Public</h3>
-<p><code><i>(unmanaged tag)</i></code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with an initial value (int32)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Int</a></span>:  (const sint32 v);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with an initial value (int64)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Int</a></span>:  (const sint64 v);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Int</a></span>:  (const Int<b>&amp;</b> v);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor from another type and another threading policy.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Int</a></span>:  (const Int&lt; Size2, TP2 &gt;<b>&amp;</b> v);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Pre increment operator.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator++</a></span>: ScalarType ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Pre decrement operator.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator--</a></span>: ScalarType ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Post increment operator.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator++</a></span>: ScalarType (int );</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Post decrement operator.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator--</a></span>: ScalarType (int );</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Pre increment operator.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator=</a></span>: Int &amp; (const ScalarType v);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Increment.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator+=</a></span>: Int &amp; (const ScalarType v);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Decrement.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator-=</a></span>: Int &amp; (const ScalarType v);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Cast operator.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator ScalarType</a></span>:  () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">not<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td></td><td class="doxnone">Get if the class must be thread-safe. Get if the class must be thread-safe.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td></td><td class="doxnone">Get if we have to guarantee ourselves the thread-safety.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td></td><td class="doxnone">Size (in bits) of the scalar type.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The Threading Policy .<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::ThreadingPolicy&lt; threadSafe, Int&lt; Size, TP &gt; &gt;:: Type;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The scalar type.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::TypeFromSize&lt; Size &gt;:: Type;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The scalar type.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ScalarType</a></span>: <span class="keyword">typedef</span> Type;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the inner variable.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">InnerType</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::Volatile&lt; threadSafe, Type &gt;:: Type;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>
