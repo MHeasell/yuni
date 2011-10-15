@@ -1,111 +1,138 @@
 <title>Array</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Array</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors &amp; Destructor</h3>
-<p class="doxygen_fun">Default constructor.<br />
-<code> <span class="method"><a href="#">Array</a></span>();</code></p>
-<p class="doxygen_fun">Constructor, with an initial number of bits.<br />
-<code> <span class="method"><a href="#">Array</a></span>(unsigned int n);</code></p>
-<p class="doxygen_fun">Constructor, with an initial number of bits and a value for each of them.<br />
-<code> <span class="method"><a href="#">Array</a></span>(unsigned int n, bool value);</code></p>
-<p class="doxygen_fun">Copy constructor.<br />
-<code> <span class="method"><a href="#">Array</a></span>(const Array<b>&amp;</b> copy);</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Array</a></span>();</code></p>
+<h2><code>Array</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Bit manipulation</h3>
-<p class="doxygen_fun">Unset all bits at once.<br />
-<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
-<p class="doxygen_fun">Set/Unset all bits at once.<br />
-<code>void <span class="method"><a href="#">reset</a></span>(bool value);</code></p>
-<p class="doxygen_fun">Set the Ith bit.<br />
-<code>void <span class="method"><a href="#">set</a></span>(unsigned int i);</code></p>
-<p class="doxygen_fun">Set/Unset the Ith bit.<br />
-<code>void <span class="method"><a href="#">set</a></span>(unsigned int i, bool value);</code></p>
-<p class="doxygen_fun">Unset the Ith bit.<br />
-<code>void <span class="method"><a href="#">unset</a></span>(unsigned int i);</code></p>
-<p class="doxygen_fun">Unset all bits at once.<br />
-<code>void <span class="method"><a href="#">unset</a></span>();</code></p>
-<p class="doxygen_fun">Get if the Ith bit is set.<br />
-<code>bool <span class="method"><a href="#">get</a></span>(unsigned int i) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get if the Ith bit is set.<br />
-<code>bool <span class="method"><a href="#">test</a></span>(unsigned int i) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Test if any bit is set.<br />
-<code>bool <span class="method"><a href="#">any</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Test if no bit is set.<br />
-<code>bool <span class="method"><a href="#">none</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Test if all bit are set.<br />
-<code>bool <span class="method"><a href="#">all</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Array</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Import/Export</h3>
-<p class="doxygen_fun">Load an array of bit from a buffer.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">loadFromBuffer</a></span>(const StringT<b>&amp;</b> buffer);</code></p>
-<p class="doxygen_fun">Load an array of bit from a buffer.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">loadFromBuffer</a></span>(const StringT<b>&amp;</b> buffer, unsigned int size);</code></p>
-<p class="doxygen_fun">Save the array of bits into another buffer (which may use any type)<br />
-<code><span class="keyword">template</span>&lt;class AnyBufferT &gt;<br />void <span class="method"><a href="#">saveToBuffer</a></span>(AnyBufferT<b>&amp;</b> u);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor, with an initial number of bits.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Array</a></span>:  (unsigned int n);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Lookup</h3>
-<p class="doxygen_fun">Find the first bit set or unset from a given offset.<br />
-<code><span class="keyword">template</span>&lt;bool ValueT&gt;<br />unsigned int <span class="method"><a href="#">find</a></span>(unsigned int offset) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Find the first N bit set or unset from a given offset.<br />
-<code><span class="keyword">template</span>&lt;bool ValueT&gt;<br />unsigned int <span class="method"><a href="#">findN</a></span>(unsigned int count, unsigned int offset) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor, with an initial number of bits and a value for each of them.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Array</a></span>:  (unsigned int n, bool value);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Memory management</h3>
-<p class="doxygen_fun">The number of bits within the buffer.<br />
-<code>unsigned int <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">The number of bits within the buffer.<br />
-<code>unsigned int <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">The size in bytes needed to store all bits within the buffer.<br />
-<code>unsigned int <span class="method"><a href="#">sizeInBytes</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Reserve an amount of bits.<br />
-<code>void <span class="method"><a href="#">reserve</a></span>(unsigned int n);</code></p>
-<p class="doxygen_fun">Truncate to an amount of bits.<br />
-<code>void <span class="method"><a href="#">truncate</a></span>(unsigned int n);</code></p>
-<p class="doxygen_fun">Resize the internal buffer to a given amount of bit.<br />
-<code>void <span class="method"><a href="#">resize</a></span>(unsigned int n);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Array</a></span>:  (const Array<b>&amp;</b> copy);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Stream</h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class U &gt;<br />void <span class="method"><a href="#">print</a></span>(U<b>&amp;</b> out) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>Array</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators</h3>
-<p class="doxygen_fun">The operator `=`.<br />
-<code>Array &amp; <span class="method"><a href="#">operator=</a></span>(const Array<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">The operator `=`.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />Array &amp; <span class="method"><a href="#">operator=</a></span>(const StringT<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Bit manipulation <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p>Invalide offset.<br />
-<code><i>(unmanaged tag)</i></code></p>
-<p class="doxygen_typedef">Size.<br />
-<code><span class="keyword">typedef</span> unsigned int <span class="method"><a href="#">Size</a></span>;</code></p>
-<p class="doxygen_typedef">Buffer Type.<br />
-<code><span class="keyword">typedef</span> CString &lt; 20, true, false &gt; <span class="method"><a href="#">BufferType</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Unset all bits at once.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reset</a></span>: void ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code>const char * <span class="method"><a href="#">c_str</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>const char * <span class="method"><a href="#">data</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>char * <span class="method"><a href="#">data</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set/Unset all bits at once.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reset</a></span>: void (bool value);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the Ith bit.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">set</a></span>: void (unsigned int i);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set/Unset the Ith bit.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">set</a></span>: void (unsigned int i, bool value);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Unset the Ith bit.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">unset</a></span>: void (unsigned int i);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Unset all bits at once.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">unset</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the Ith bit is set.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">get</a></span>: bool (unsigned int i) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the Ith bit is set.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">test</a></span>: bool (unsigned int i) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Test if any bit is set.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">any</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Test if no bit is set.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">none</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Test if all bit are set.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">all</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Import/Export <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Load an array of bit from a buffer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">loadFromBuffer</a></span>: void (const StringT<b>&amp;</b> buffer);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Load an array of bit from a buffer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">loadFromBuffer</a></span>: void (const StringT<b>&amp;</b> buffer, unsigned int size);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Save the array of bits into another buffer (which may use any type)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">saveToBuffer</a></span>: void (AnyBufferT<b>&amp;</b> u);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Lookup <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Find the first bit set or unset from a given offset.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">find</a></span>: unsigned int (unsigned int offset) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Find the first N bit set or unset from a given offset.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">findN</a></span>: unsigned int (unsigned int count, unsigned int offset) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Memory management <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The number of bits within the buffer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">size</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The number of bits within the buffer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">count</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The size in bytes needed to store all bits within the buffer.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">sizeInBytes</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Reserve an amount of bits.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reserve</a></span>: void (unsigned int n);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Truncate to an amount of bits.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">truncate</a></span>: void (unsigned int n);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Resize the internal buffer to a given amount of bit.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">resize</a></span>: void (unsigned int n);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Stream <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">print</a></span>: void (U<b>&amp;</b> out) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The operator `=`.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator=</a></span>: Array &amp; (const Array<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The operator `=`.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator=</a></span>: Array &amp; (const StringT<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td></td><td class="doxnone">Invalide offset.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Size.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Size</a></span>: <span class="keyword">typedef</span> unsigned int;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Buffer Type.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">BufferType</a></span>: <span class="keyword">typedef</span> CString &lt; 20, true, false &gt;;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">c_str</a></span>: const char * () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">data</a></span>: const char * () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">data</a></span>: char * ();</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

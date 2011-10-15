@@ -1,12 +1,12 @@
 <title>None</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>None</code></h2><table class="nostyle">
+<h2><code>None</code></h2><table class="doxygen_table">
 </table>
 
 
-<h2>Detailed Description</h2>

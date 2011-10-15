@@ -1,172 +1,227 @@
 <title>Button</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Button</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Methods</h3>
-<p class="doxygen_fun">Resize the component.<br />
-<code>void <span class="method"><a href="#">resize</a></span>(float width, float height);</code></p>
+<h2><code>Button</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Accessors</h3>
-<p class="doxygen_fun">Get the class name (identifier for the type of component)<br />
-<code>const ClassName &amp; <span class="method"><a href="#">className</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the class name (identifier for the type of component)<br />
-<code>void <span class="method"><a href="#">className</a></span>(ClassName<b>&amp;</b> );</code></p>
-<p class="doxygen_fun">Get the unique Identifier for this component.<br />
-<code>ID <span class="method"><a href="#">id</a></span>();</code></p>
-<p class="doxygen_fun">Get the width of the component.<br />
-<code>float <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the height of the component.<br />
-<code>float <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the position of the component.<br />
-<code>Point2D &lt; float &gt; <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the size of the component.<br />
-<code>void <span class="method"><a href="#">size</a></span>(float<b>&amp;</b> width, float<b>&amp;</b> height) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the X position of the component.<br />
-<code>float <span class="method"><a href="#">x</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the Y position of the component.<br />
-<code>float <span class="method"><a href="#">y</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Resize the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">resize</a></span>: void (float width, float height);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Pointer management</h3>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">addRef</a></span>();</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">release</a></span>();</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Accessors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructor &amp; Destructor</h3>
-<p class="doxygen_fun">Empty constructor.<br />
-<code> <span class="method"><a href="#">Button</a></span>();</code></p>
-<p class="doxygen_fun">Constructor with parent.<br />
-<code> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent);</code></p>
-<p class="doxygen_fun">Constructor with caption.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption);</code></p>
-<p class="doxygen_fun">Constructor with parent and caption.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption);</code></p>
-<p class="doxygen_fun">Constructor with dimensions.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption, float width, float height);</code></p>
-<p class="doxygen_fun">Constructor with parent and dimensions.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, float width, float height);</code></p>
-<p class="doxygen_fun">Full constructor.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption, float x, float y, float width, float height);</code></p>
-<p class="doxygen_fun">Full constructor with parent.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br /> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, float x, float y, float width, float height);</code></p>
-<p class="doxygen_fun">Full constructor.<br />
-<code><span class="keyword">template</span>&lt;class StringT , class T &gt;<br /> <span class="method"><a href="#">Button</a></span>(const StringT<b>&amp;</b> caption, Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height);</code></p>
-<p class="doxygen_fun">Full constructor with parent.<br />
-<code><span class="keyword">template</span>&lt;class StringT , class T &gt;<br /> <span class="method"><a href="#">Button</a></span>(const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height);</code></p>
-<p class="doxygen_fun">Virtual destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Button</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the class name (identifier for the type of component)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">className</a></span>: const ClassName &amp; () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Caption</h3>
-<p class="doxygen_fun">Get the caption of the button.<br />
-<code>String <span class="method"><a href="#">caption</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the caption.<br />
-<code><span class="keyword">template</span>&lt;class StringT &gt;<br />void <span class="method"><a href="#">caption</a></span>(const StringT<b>&amp;</b> value);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the class name (identifier for the type of component)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">className</a></span>: void (ClassName<b>&amp;</b> );</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef">Smart pointer.<br />
-<code><span class="keyword">typedef</span> IComponent::SmartPtrInfo &lt; Button &gt;::Type <span class="method"><a href="#">Ptr</a></span>;</code></p>
-<p class="doxygen_typedef">Vector of controls.<br />
-<code><span class="keyword">typedef</span> std::vector&lt; Ptr &gt; <span class="method"><a href="#">Vector</a></span>;</code></p>
-<p class="doxygen_typedef">Threading Policy .<br />
-<code><span class="keyword">typedef</span> IComponent::ThreadingPolicy <span class="method"><a href="#">ThreadingPolicy</a></span>;</code></p>
-<p class="doxygen_typedef">Map of controls.<br />
-<code><span class="keyword">typedef</span> std::map&lt; IComponent::ID , Ptr &gt; <span class="method"><a href="#">Map</a></span>;</code></p>
-<p class="doxygen_typedef">Sorted (by depth in UI tree) map of controls.<br />
-<code><span class="keyword">typedef</span> std::map&lt; size_t, Map &gt; <span class="method"><a href="#">DepthSortedMap</a></span>;</code></p>
-<p class="doxygen_typedef">Ancestor type.<br />
-<code><span class="keyword">typedef</span> IEventObserver &lt; IComponent , Policy::ObjectLevelLockable &gt; <span class="method"><a href="#">EventObserverType</a></span>;</code></p>
-<p class="doxygen_typedef">A class name is a string tag representing a type of component.<br />
-<code><span class="keyword">typedef</span> CString &lt; 64, false, false &gt; <span class="method"><a href="#">ClassName</a></span>;</code></p>
-<p class="doxygen_typedef">Unique local identifier.<br />
-<code><span class="keyword">typedef</span> Yuni::UI::ID::Type <span class="method"><a href="#">ID</a></span>;</code></p>
-<p class="doxygen_typedef">Type of the Event observer.<br />
-<code><span class="keyword">typedef</span> IEventObserver &lt; IComponent , Policy::ObjectLevelLockable &gt; <span class="method"><a href="#">IEventObserverType</a></span>;</code></p>
-<p>Get if this policy is thread-safe.<br />
-<code><i>(unmanaged tag)</i></code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the unique Identifier for this component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">id</a></span>: ID ();</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_var">Text caption on the button.<br />
-<code>String <span class="method"><a href="#">pCaption</a></span>;</code></p>
-<p class="doxygen_var">Parent control. Null by default.<br />
-<code>IControlContainer * <span class="method"><a href="#">pParent</a></span>;</code></p>
-<p class="doxygen_var">Children controls.<br />
-<code>IControl::Map <span class="method"><a href="#">pChildren</a></span>;</code></p>
-<p class="doxygen_var">Depth in the UI tree : 0 if no parent, parent level + 1 otherwise.<br />
-<code>unsigned int <span class="method"><a href="#">pDepth</a></span>;</code></p>
-<p class="doxygen_var">Unique local identifier.<br />
-<code>const ID <span class="method"><a href="#">pLocalID</a></span>;</code></p>
-<p class="doxygen_var">Class name for this component (type of component)<br />
-<code>ClassName <span class="method"><a href="#">pClass</a></span>;</code></p>
-<p class="doxygen_var">Adapter for Virtual UI &lt;-&gt; UI Representation communication.<br />
-<code>Adapter::ForVirtual * <span class="method"><a href="#">pAdapter</a></span>;</code></p>
-<p class="doxygen_var">Position of the component relative to its parent.<br />
-<code>Point2D &lt; float &gt; <span class="method"><a href="#">pPosition</a></span>;</code></p>
-<p class="doxygen_var">Width of the component.<br />
-<code>float <span class="method"><a href="#">pWidth</a></span>;</code></p>
-<p class="doxygen_var">Height of the component.<br />
-<code>float <span class="method"><a href="#">pHeight</a></span>;</code></p>
-<p class="doxygen_var">Mutex .<br />
-<code>Mutex <span class="method"><a href="#">pMutex</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the width of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">width</a></span>: float () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Ask the control to update its local representation.<br />
-<code>void <span class="method"><a href="#">update</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the parent.<br />
-<code>IControl::Ptr <span class="method"><a href="#">parent</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Set the parent.<br />
-<code>void <span class="method"><a href="#">parent</a></span>(IControl::Ptr newParent);</code></p>
-<p class="doxygen_fun">Get the children.<br />
-<code>IControl::Map <span class="method"><a href="#">children</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Is there a parent ?<br />
-<code>bool <span class="method"><a href="#">hasParent</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Depth in the UI tree, 0 if root.<br />
-<code>unsigned int <span class="method"><a href="#">depth</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Catch the focus.<br />
-<code>void <span class="method"><a href="#">focus</a></span>();</code></p>
-<p class="doxygen_fun">Enable / disable the control.<br />
-<code>void <span class="method"><a href="#">enabled</a></span>(bool e);</code></p>
-<p class="doxygen_fun">Get if the control is enabled.<br />
-<code>bool <span class="method"><a href="#">enabled</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">visible</a></span>(bool e);</code></p>
-<p class="doxygen_fun">Get if the control is visible.<br />
-<code>bool <span class="method"><a href="#">visible</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the height of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">height</a></span>: float () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_fun">Set the parent (without locking)<br />
-<code>void <span class="method"><a href="#">parentWL</a></span>(const IControl::Ptr<b>&amp;</b> newParent);</code></p>
-<p class="doxygen_fun">Detach from the tree.<br />
-<code>void <span class="method"><a href="#">detachWL</a></span>();</code></p>
-<p class="doxygen_fun">Add a child.<br />
-<code>void <span class="method"><a href="#">addChildWL</a></span>(const IControl::Ptr<b>&amp;</b> child);</code></p>
-<p class="doxygen_fun">Remove a child.<br />
-<code>bool <span class="method"><a href="#">removeChildWL</a></span>(const IControl::Ptr<b>&amp;</b> child);</code></p>
-<p class="doxygen_fun">Update the given component's local representation.<br />
-<code>void <span class="method"><a href="#">updateComponentWL</a></span>(const IComponent::ID<b>&amp;</b> componentID) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Protected resize, without locks.<br />
-<code>void <span class="method"><a href="#">resizeWL</a></span>(float<b>&amp;</b> newWidth, float<b>&amp;</b> newHeight);</code></p>
-<p class="doxygen_fun">Destroy all existing and future bound events.<br />
-<code>void <span class="method"><a href="#">destroyBoundEvents</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the position of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">position</a></span>: Point2D &lt; float &gt; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the size of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">size</a></span>: void (float<b>&amp;</b> width, float<b>&amp;</b> height) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the X position of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">x</a></span>: float () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the Y position of the component.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">y</a></span>: float () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Pointer management <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">addRef</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">release</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Empty constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with parent.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  (const IControl::Ptr<b>&amp;</b> parent);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with caption.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  (const StringT<b>&amp;</b> caption);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with parent and caption.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  (const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with dimensions.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  (const StringT<b>&amp;</b> caption, float width, float height);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with parent and dimensions.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  (const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, float width, float height);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Full constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  (const StringT<b>&amp;</b> caption, float x, float y, float width, float height);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Full constructor with parent.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  (const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, float x, float y, float width, float height);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Full constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  (const StringT<b>&amp;</b> caption, Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Full constructor with parent.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Button</a></span>:  (const IControl::Ptr<b>&amp;</b> parent, const StringT<b>&amp;</b> caption, Point2D &lt; T &gt;<b>&amp;</b> pos, float width, float height);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Virtual destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>Button</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Caption <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the caption of the button.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">caption</a></span>: String () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the caption.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">caption</a></span>: void (const StringT<b>&amp;</b> value);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Smart pointer.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> IComponent::SmartPtrInfo &lt; Button &gt;::Type;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Vector of controls.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Threading Policy .<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> IComponent::ThreadingPolicy;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Map of controls.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Map</a></span>: <span class="keyword">typedef</span> std::map&lt; IComponent::ID , Ptr &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Sorted (by depth in UI tree) map of controls.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">DepthSortedMap</a></span>: <span class="keyword">typedef</span> std::map&lt; size_t, Map &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Ancestor type.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">EventObserverType</a></span>: <span class="keyword">typedef</span> IEventObserver &lt; IComponent , Policy::ObjectLevelLockable &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">A class name is a string tag representing a type of component.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ClassName</a></span>: <span class="keyword">typedef</span> CString &lt; 64, false, false &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Unique local identifier.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">ID</a></span>: <span class="keyword">typedef</span> Yuni::UI::ID::Type;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the Event observer.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">IEventObserverType</a></span>: <span class="keyword">typedef</span> IEventObserver &lt; IComponent , Policy::ObjectLevelLockable &gt;;</code>
+</td></tr>
+<tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Text caption on the button.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pCaption</a></span>: String;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Parent control. Null by default.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pParent</a></span>: IControlContainer *;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Children controls.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pChildren</a></span>: IControl::Map;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Depth in the UI tree : 0 if no parent, parent level + 1 otherwise.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pDepth</a></span>: unsigned int;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Unique local identifier.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pLocalID</a></span>: const ID;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Class name for this component (type of component)<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pClass</a></span>: ClassName;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Adapter for Virtual UI &lt;-&gt; UI Representation communication.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pAdapter</a></span>: Adapter::ForVirtual *;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Position of the component relative to its parent.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pPosition</a></span>: Point2D &lt; float &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Width of the component.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pWidth</a></span>: float;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Height of the component.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pHeight</a></span>: float;</code>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">Mutex .<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pMutex</a></span>: Mutex;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Ask the control to update its local representation.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">update</a></span>: void () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the parent.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">parent</a></span>: IControl::Ptr () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the parent.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">parent</a></span>: void (IControl::Ptr newParent);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the children.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">children</a></span>: IControl::Map () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Is there a parent ?<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">hasParent</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Depth in the UI tree, 0 if root.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">depth</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Catch the focus.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">focus</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Enable / disable the control.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">enabled</a></span>: void (bool e);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the control is enabled.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">enabled</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">visible</a></span>: void (bool e);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the control is visible.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">visible</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Set the parent (without locking)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">parentWL</a></span>: void (const IControl::Ptr<b>&amp;</b> newParent);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Detach from the tree.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">detachWL</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Add a child.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">addChildWL</a></span>: void (const IControl::Ptr<b>&amp;</b> child);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Remove a child.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">removeChildWL</a></span>: bool (const IControl::Ptr<b>&amp;</b> child);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Update the given component's local representation.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">updateComponentWL</a></span>: void (const IComponent::ID<b>&amp;</b> componentID) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Protected resize, without locks.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">resizeWL</a></span>: void (float<b>&amp;</b> newWidth, float<b>&amp;</b> newHeight);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destroy all existing and future bound events.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">destroyBoundEvents</a></span>: void ();</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

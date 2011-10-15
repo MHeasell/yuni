@@ -42,8 +42,8 @@ namespace Job
 			unsigned int count = (unsigned int) allSymbolsByRefID.size();
 			switch (count)
 			{
-				case 0: logs.info() << "No article";break;
-				case 1: logs.info() << "writing 1 article";break;
+				case 0:  logs.info() << "No article";break;
+				case 1:  logs.info() << "writing 1 article";break;
 				default: logs.info() << "writing " << count << " articles";break;
 			}
 		}
@@ -77,7 +77,7 @@ namespace Job
 
 	void CompoundWriter::onExecute()
 	{
-		if (pCompound->name.empty() || pCompound->name.contains('@'))
+		if (!pCompound->name || pCompound->name.contains('@'))
 			return;
 
 		switch (pCompound->kind)
@@ -131,12 +131,13 @@ namespace Job
 				pageTitle << name;
 			out << "<title>" << pageTitle << "</title>\n";
 			out << "<pragma:weight value=\"0.5\" />\n";
+			out << "<pragma:toc visible=\"false\" />\n";
 			out << "<tag name=\"doxygen\" />\n";
 			out << "<tag name=\"class\" />\n";
 			out << "\n\n\n";
 
-			out << "<h2>Summary of the class <code>" << pageTitle << "</code></h2>";
-			out << "<table class=\"nostyle\">\n";
+			out << "<h2><code>" << pageTitle << "</code></h2>";
+			out << "<table class=\"doxygen_table\">\n";
 
 			unsigned int count = (unsigned int) pCompound->sections.size();
 			for (unsigned int i = 0; i != count; ++i)
@@ -156,20 +157,24 @@ namespace Job
 				}
 				else visibility = "Public";
 
-				out << "<tr><td>";
-//				if (lastVisibility != visibility)
+				out << "<tr><td class=\"doxnone\"></td><td class=\"doxnone\">";
+				/*
+				// if (lastVisibility != visibility)
+				if (0)
 				{
 					out << "<div class=\"visibility\">" << visibility << "</div>";
 					lastVisibility = visibility;
 				}
 				out << "</td>\n<td>";
+				*/
 				if (section.caption.notEmpty())
 				{
 					HtmlEntities(tmp, section.caption);
-					out << "<h3 class=\"h3noleftspace\">" << tmp << "</h3>\n";
+					out << "<h3 class=\"doxygen_section\">" << tmp << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
 				}
 				else
-					out << "<h3 class=\"h3noleftspace\">" << visibility << "</h3>\n";
+					out << "<h3 class=\"doxygen_section\">" << visibility << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
+				out << "</td></tr>\n";
 
 				unsigned int memcount = (unsigned int) section.members.size();
 				for (unsigned int j = 0; j != memcount; ++j)
@@ -178,28 +183,32 @@ namespace Job
 					const Member& member = *memberptr;
 					if (member.name == "YUNI_STATIC_ASSERT")
 						continue;
+
+				
+					out << "<tr>";
 					HtmlEntities(tmp, member.name);
 					HtmlEntities(type, member.type);
 					HtmlEntities(brief, member.brief);
 
 					switch (member.kind)
 					{
-						case kdFunction: out << "<p class=\"doxygen_fun\">";break;
-						case kdTypedef:  out << "<p class=\"doxygen_typedef\">";break;
-						case kdVariable: out << "<p class=\"doxygen_var\">";break;
-						case kdEnum:     out << "<p class=\"doxygen_enum\">";break;
-						default: out << "<p>";break;
+						case kdFunction: out << "<td class=\"doxygen_fun\">";break;
+						case kdTypedef:  out << "<td class=\"doxygen_typedef\">";break;
+						case kdVariable: out << "<td class=\"doxygen_var\">";break;
+						case kdEnum:     out << "<td class=\"doxygen_enum\">";break;
+						default: out << "<td>";break;
 					}
+					out << "</td><td class=\"doxnone\">";
 
 					if (brief.notEmpty())
-						out << brief << "<br />\n";
+						out << brief << "<div class=\"doxygen_name_spacer\"></div>\n";
 					out << "<code>";
 
 					switch (member.kind)
 					{
 						case kdFunction:
 							{
-								if (!member.templates.empty())
+								if (!member.templates.empty() && 0)
 								{
 									out << "<span class=\"keyword\">template</span>&lt;";
 									for (unsigned int p = 0; p != member.templates.size(); ++p)
@@ -216,19 +225,23 @@ namespace Job
 									}
 									out << "&gt;<br />";
 								}
-								if (member.isStatic)
-									out << "<span class=\"keyword\">static</span> ";
-								out << type;
 								if (tmp.first() == '~')
 								{
 									String t = tmp;
 									t.replace("~", "<b> ~ </b>");
-									out << " <span class=\"method\"><a href=\"#\">" << t << "</a></span>(";
+									out << " <span class=\"method\"><a href=\"#\">" << t << "</a></span>";
 								}
 								else
 								{
-									out << " <span class=\"method\"><a href=\"#\">" << tmp << "</a></span>(";
+									out << " <span class=\"method\"><a href=\"#\">" << tmp << "</a></span>";
 								}
+
+								out << ": ";
+
+								if (member.isStatic)
+									out << "<span class=\"keyword\">static</span> ";
+
+								out << type << " (";
 
 								for (unsigned int p = 0; p != member.parameters.size(); ++p)
 								{
@@ -250,35 +263,32 @@ namespace Job
 							}
 						case kdTypedef:
 							{
-								out << "<span class=\"keyword\">typedef</span> ";
+								out << "<span class=\"method\"><a href=\"#\">" << tmp << "</a></span>";
+								out << ": <span class=\"keyword\">typedef</span> ";
 								out << type;
-								out << " <span class=\"method\"><a href=\"#\">" << tmp << "</a></span>";
 								out << ';';
 								break;
 							}
 						case kdVariable:
 							{
-								out << type;
-								out << " <span class=\"method\"><a href=\"#\">" << tmp << "</a></span>";
+								out << "<span class=\"method\"><a href=\"#\">" << tmp << "</a></span>";
+								out << ": " << type;
 								out << ';';
 								break;
 							}
 						default:
 		//					Compound::AppendKindToString(std::cout, member.kind);
 		//					std::cout << '\n';
-							out << "<i>(unmanaged tag)</i>";
+							out << "<i>(unmanaged tag: " << (unsigned int) member.kind << ")</i>";
 							break;
 					}
-					out << "</code></p>\n";
+					out << "</code>\n";
+					out << "</td>";
+					out << "</tr>\n";
 				}
-
-				out << "</td>";
-				out << "</tr>\n";
 			}
 
 			out << "</table>\n\n\n";
-			out << "<h2>Detailed Description</h2>";
-			out << '\n';
 
 			// Writing the file
 			file << out;

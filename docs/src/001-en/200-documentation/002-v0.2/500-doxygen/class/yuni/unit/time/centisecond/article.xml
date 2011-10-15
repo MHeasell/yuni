@@ -1,209 +1,307 @@
 <title>Centisecond</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Centisecond</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operator `=`</h3>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const sint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const sint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const sint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const uint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const uint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const uint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const float u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const double u);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename P1 &gt;<br />AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const Abstract &lt; Quantity, Type , T, P1, double &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class Q1 , typename T1 , class C1 , typename P1 , typename N1 &gt;<br />AbstractType &amp; <span class="method"><a href="#">operator=</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code></p>
+<h2><code>Centisecond</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator `=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Value</h3>
-<p class="doxygen_fun">The value, without any conversion.<br />
-<code>T <span class="method"><a href="#">value</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const sint16 u);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Informations about the Unit</h3>
-<p class="doxygen_fun">Symbol used for the Unit of measurement (may be empty)<br />
-<code>const char * <span class="method"><a href="#">symbol</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Name of the Unit of measurement.<br />
-<code>const char * <span class="method"><a href="#">unitName</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Relation to SI.<br />
-<code>double <span class="method"><a href="#">relationToSI</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const sint32 u);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Conversion to SI</h3>
-<p class="doxygen_fun"><code>U <span class="method"><a href="#">toSIBaseUnit</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const sint64 u);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `+=`</h3>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(sint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(sint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(sint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(uint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(uint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(uint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(float u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(double u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(long double u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator+=</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const uint16 u);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `-=`</h3>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(sint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(sint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(sint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(uint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(uint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(uint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(float u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(double u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(long double u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator-=</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const uint32 u);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `*=`</h3>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(sint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(sint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(sint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(uint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(uint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(uint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(float u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(double u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(long double u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator*=</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const uint64 u);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `/=`</h3>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(sint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(sint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(sint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(uint16 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(uint32 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(uint64 u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(float u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(double u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(long double u);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator/=</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const float u);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `&lt;=`</h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;=</a></span>(int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;=</a></span>(unsigned int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;=</a></span>(float u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;=</a></span>(double u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;=</a></span>(long double u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;=</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;=</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const double u);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `&gt;=`</h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;=</a></span>(int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;=</a></span>(unsigned int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;=</a></span>(float u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;=</a></span>(double u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;=</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;=</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const Abstract &lt; Quantity, Type , T, P1, double &gt;<b>&amp;</b> rhs);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `&lt;`</h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;</a></span>(int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;</a></span>(unsigned int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;</a></span>(float u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;</a></span>(double u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&lt;</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType &amp; (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `&gt;`</h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;</a></span>(int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;</a></span>(unsigned int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;</a></span>(float u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;</a></span>(double u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator&gt;</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Value <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `==`</h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator==</a></span>(int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator==</a></span>(unsigned int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator==</a></span>(float u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator==</a></span>(double u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator==</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator==</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The value, without any conversion.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">value</a></span>: T () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators `!=`</h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!=</a></span>(int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!=</a></span>(unsigned int u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!=</a></span>(float u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!=</a></span>(double u) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!=</a></span>(const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!=</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Informations about the Unit <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operator `++`</h3>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator++</a></span>();</code></p>
-<p class="doxygen_fun"><code>AbstractType <span class="method"><a href="#">operator++</a></span>(int );</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Symbol used for the Unit of measurement (may be empty)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">symbol</a></span>: const char * () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operator `--`</h3>
-<p class="doxygen_fun"><code>AbstractType &amp; <span class="method"><a href="#">operator--</a></span>();</code></p>
-<p class="doxygen_fun"><code>AbstractType <span class="method"><a href="#">operator--</a></span>(int );</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Name of the Unit of measurement.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">unitName</a></span>: const char * () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operator `!`</h3>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Relation to SI.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">relationToSI</a></span>: double () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef"><code><span class="keyword">typedef</span> Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P, double &gt; <span class="method"><a href="#">AbstractType</a></span>;</code></p>
-<p class="doxygen_typedef"><code><span class="keyword">typedef</span> Centisecond &lt; T, P &gt; <span class="method"><a href="#">Type</a></span>;</code></p>
-<p class="doxygen_typedef">The SI category.<br />
-<code><span class="keyword">typedef</span> Quantity <span class="method"><a href="#">QuantityType</a></span>;</code></p>
-<p class="doxygen_typedef">The stored type.<br />
-<code><span class="keyword">typedef</span> T <span class="method"><a href="#">InnerType</a></span>;</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Conversion to SI <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code><span class="keyword">static</span> const char * <span class="method"><a href="#">Symbol</a></span>();</code></p>
-<p class="doxygen_fun"><code><span class="keyword">static</span> const char * <span class="method"><a href="#">UnitName</a></span>();</code></p>
-<p class="doxygen_fun"><code><span class="keyword">static</span> double <span class="method"><a href="#">RelationToSI</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">toSIBaseUnit</a></span>: U () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Centisecond</a></span>();</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Centisecond</a></span>(const sint16 u);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Centisecond</a></span>(const sint32 u);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Centisecond</a></span>(const sint64 u);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Centisecond</a></span>(const uint16 u);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Centisecond</a></span>(const uint32 u);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Centisecond</a></span>(const uint64 u);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Centisecond</a></span>(const float u);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Centisecond</a></span>(const double u);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class Q1 , typename T1 , class C1 , typename P1 , typename N1 &gt;<br /> <span class="method"><a href="#">Centisecond</a></span>(const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `+=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_var">The value.<br />
-<code>T <span class="method"><a href="#">pValue</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (sint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (sint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (sint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (uint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (uint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (uint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (float u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (double u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (long double u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType &amp; (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `-=` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (sint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (sint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (sint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (uint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (uint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (uint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (float u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (double u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (long double u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType &amp; (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `*=` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (sint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (sint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (sint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (uint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (uint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (uint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (float u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (double u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (long double u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType &amp; (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `/=` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (sint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (sint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (sint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (uint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (uint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (uint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (float u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (double u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (long double u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType &amp; (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `&lt;=` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (unsigned int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (float u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (double u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (long double u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `&gt;=` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (unsigned int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (float u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (double u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `&lt;` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (unsigned int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (float u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (double u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `&gt;` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (unsigned int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (float u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (double u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `==` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (unsigned int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (float u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (double u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `!=` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (unsigned int u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (float u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (double u) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (const Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P1, double &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator `++` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator++</a></span>: AbstractType &amp; ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator++</a></span>: AbstractType (int );</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator `--` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator--</a></span>: AbstractType &amp; ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator--</a></span>: AbstractType (int );</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator `!` <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">AbstractType</a></span>: <span class="keyword">typedef</span> Abstract &lt; Quantity, Centisecond &lt; T, P &gt;, T, P, double &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> Centisecond &lt; T, P &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The SI category.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">QuantityType</a></span>: <span class="keyword">typedef</span> Quantity;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The stored type.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">InnerType</a></span>: <span class="keyword">typedef</span> T;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Symbol</a></span>: <span class="keyword">static</span> const char * ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">UnitName</a></span>: <span class="keyword">static</span> const char * ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">RelationToSI</a></span>: <span class="keyword">static</span> double ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  (const sint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  (const sint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  (const sint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  (const uint16 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  (const uint32 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  (const uint64 u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  (const float u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  (const double u);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Centisecond</a></span>:  (const Abstract &lt; Q1, C1, T1, P1, N1 &gt;<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone">The value.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">pValue</a></span>: T;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

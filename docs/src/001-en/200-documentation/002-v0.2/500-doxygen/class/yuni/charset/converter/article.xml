@@ -1,39 +1,47 @@
 <title>Converter</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Converter</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors and destructors</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Converter</a></span>();</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Converter</a></span>(Charset::Type fromCS, Charset::Type toCS, Charset::Unconvertable opts);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Converter</a></span>(const char<b>*</b> fromCS, const char<b>*</b> toCS);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Converter</a></span>();</code></p>
+<h2><code>Converter</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors and destructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code>int <span class="method"><a href="#">lastError</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Closes the conversion context.<br />
-<code>void <span class="method"><a href="#">close</a></span>();</code></p>
-<p class="doxygen_fun">Resets the conversion context.<br />
-<code>void <span class="method"><a href="#">reset</a></span>();</code></p>
-<p class="doxygen_fun">Performs a conversion on memory buffers.<br />
-<code><span class="keyword">template</span>&lt;typename SrcStringT , typename DstStringT &gt;<br />bool <span class="method"><a href="#">convert</a></span>(SrcStringT<b>&amp;</b> source, DstStringT<b>&amp;</b> destination, bool isLastBuffer);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename SrcStringT , typename DtsStringT &gt;<br />bool <span class="method"><a href="#">convert</a></span>(SrcStringT<b>&amp;</b> source, DtsStringT<b>&amp;</b> destination, bool isLastBuffer);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Converter</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun"><code><span class="keyword">static</span> const char * <span class="method"><a href="#">Name</a></span>(Charset::Type type);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Converter</a></span>:  (Charset::Type fromCS, Charset::Type toCS, Charset::Unconvertable opts);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Converter</a></span>:  (const char<b>*</b> fromCS, const char<b>*</b> toCS);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>Converter</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">lastError</a></span>: int () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Closes the conversion context.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">close</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Resets the conversion context.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">reset</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Performs a conversion on memory buffers.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">convert</a></span>: bool (SrcStringT<b>&amp;</b> source, DstStringT<b>&amp;</b> destination, bool isLastBuffer);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">convert</a></span>: bool (SrcStringT<b>&amp;</b> source, DtsStringT<b>&amp;</b> destination, bool isLastBuffer);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Name</a></span>: <span class="keyword">static</span> const char * (Charset::Type type);</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

@@ -1,60 +1,82 @@
 <title>ByteIterator</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>ByteIterator</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p>A non-zero value if the iterator can go forward. A non-zero value if the iterator can go backward.<br />
-<code><i>(unmanaged tag)</i></code></p>
-<p class="doxygen_typedef">Type of the original string.<br />
-<code><span class="keyword">typedef</span> CStringType <span class="method"><a href="#">StringType</a></span>;</code></p>
-<p class="doxygen_typedef">The type of the orignal object.<br />
-<code><span class="keyword">typedef</span> char <span class="method"><a href="#">value_type</a></span>;</code></p>
-<p class="doxygen_typedef">An unsigned integral type.<br />
-<code><span class="keyword">typedef</span> CStringType::size_type <span class="method"><a href="#">size_type</a></span>;</code></p>
-<p class="doxygen_typedef">A signed integral type.<br />
-<code><span class="keyword">typedef</span> CStringType::difference_type <span class="method"><a href="#">difference_type</a></span>;</code></p>
+<h2><code>ByteIterator</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Get the current offset in the string.<br />
-<code>Size <span class="method"><a href="#">offset</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get a reference to the original string.<br />
-<code>StringType &amp; <span class="method"><a href="#">string</a></span>();</code></p>
-<p class="doxygen_fun"><code>const StringType &amp; <span class="method"><a href="#">string</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Get the current offset in the string.<br />
-<code>Size <span class="method"><a href="#">rawOffset</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">findFirstNonSpace</a></span>(const Size end);</code></p>
-<p class="doxygen_fun"><code>bool <span class="method"><a href="#">find</a></span>(const char c, const Size endOffset);</code></p>
+<tr><td></td><td class="doxnone">A non-zero value if the iterator can go forward. A non-zero value if the iterator can go backward.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td><div class="visibility">Protected
-</div></td>
-<td><h3 class="h3noleftspace">Protected
-</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">ByteIterator</a></span>(const StringType<b>&amp;</b> s, size_type offset);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">ByteIterator</a></span>(const NullIterator<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">ByteIterator</a></span>(const StringType<b>&amp;</b> s);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">ByteIterator</a></span>(const ByteIterator<b>&amp;</b> copy);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">ByteIterator</a></span>(const UTF8Iterator<b>&amp;</b> copy);</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>();</code></p>
-<p class="doxygen_fun"><code>void <span class="method"><a href="#">forward</a></span>(difference_type n);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />void <span class="method"><a href="#">reset</a></span>(const ModelT<b>&amp;</b> model);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />difference_type <span class="method"><a href="#">distance</a></span>(const ModelT<b>&amp;</b> model) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;class ModelT &gt;<br />bool <span class="method"><a href="#">equals</a></span>(const ModelT<b>&amp;</b> model) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>char &amp; <span class="method"><a href="#">operator*</a></span>();</code></p>
-<p class="doxygen_fun"><code>const char &amp; <span class="method"><a href="#">operator*</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>char * <span class="method"><a href="#">operator-&gt;</a></span>();</code></p>
-<p class="doxygen_fun"><code>const char * <span class="method"><a href="#">operator-&gt;</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the original string.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">StringType</a></span>: <span class="keyword">typedef</span> CStringType;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The type of the orignal object.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">value_type</a></span>: <span class="keyword">typedef</span> char;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">An unsigned integral type.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">size_type</a></span>: <span class="keyword">typedef</span> CStringType::size_type;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">A signed integral type.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">difference_type</a></span>: <span class="keyword">typedef</span> CStringType::difference_type;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the current offset in the string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">offset</a></span>: Size () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get a reference to the original string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">string</a></span>: StringType &amp; ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">string</a></span>: const StringType &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get the current offset in the string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">rawOffset</a></span>: Size () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">findFirstNonSpace</a></span>: bool (const Size end);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">find</a></span>: bool (const char c, const Size endOffset);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
+ <code class="doxygen_visibility">Protected
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">ByteIterator</a></span>:  (const StringType<b>&amp;</b> s, size_type offset);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">ByteIterator</a></span>:  (const NullIterator<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">ByteIterator</a></span>:  (const StringType<b>&amp;</b> s);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">ByteIterator</a></span>:  (const ByteIterator<b>&amp;</b> copy);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">ByteIterator</a></span>:  (const UTF8Iterator<b>&amp;</b> copy);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">forward</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">forward</a></span>: void (difference_type n);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">reset</a></span>: void (const ModelT<b>&amp;</b> model);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">distance</a></span>: difference_type (const ModelT<b>&amp;</b> model) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">equals</a></span>: bool (const ModelT<b>&amp;</b> model) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: char &amp; ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: const char &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: char * ();</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: const char * () <span class="keyword">const</span>;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

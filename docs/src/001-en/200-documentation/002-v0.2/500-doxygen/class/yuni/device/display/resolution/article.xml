@@ -1,68 +1,79 @@
 <title>Resolution</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Resolution</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors</h3>
-<p class="doxygen_fun">Constructor.<br />
-<code> <span class="method"><a href="#">Resolution</a></span>(const uint32 w, const uint32 h, const uint8 b);</code></p>
-<p class="doxygen_fun">Constructor by copy.<br />
-<code> <span class="method"><a href="#">Resolution</a></span>(const Resolution<b>&amp;</b> c);</code></p>
+<h2><code>Resolution</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Information about the current mode</h3>
-<p class="doxygen_fun">The width of the monitor/screen.<br />
-<code>uint32 <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">The height of the monitor/screen.<br />
-<code>uint32 <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Bit per pixel.<br />
-<code>uint8 <span class="method"><a href="#">bitPerPixel</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Resolution</a></span>:  (const uint32 w, const uint32 h, const uint8 b);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operators</h3>
-<p class="doxygen_fun">Comparison operator (equal with)<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Comparison operator (non equal with)<br />
-<code>bool <span class="method"><a href="#">operator!=</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Comparison operator (less than)<br />
-<code>bool <span class="method"><a href="#">operator&lt;</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Comparison operator (less than or equal)<br />
-<code>bool <span class="method"><a href="#">operator&lt;=</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Comparison operator (greater than)<br />
-<code>bool <span class="method"><a href="#">operator&gt;</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Comparison operator (greater than or equal)<br />
-<code>bool <span class="method"><a href="#">operator&gt;=</a></span>(const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Assign new values from another resolution.<br />
-<code>Resolution &amp; <span class="method"><a href="#">operator=</a></span>(const Resolution<b>&amp;</b> p);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor by copy.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Resolution</a></span>:  (const Resolution<b>&amp;</b> c);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Stream printing</h3>
-<p class="doxygen_fun">Print the resolution.<br />
-<code>std::ostream &amp; <span class="method"><a href="#">print</a></span>(std::ostream<b>&amp;</b> out) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Information about the current mode <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p>The smallest value allowed for the width of the screen. The smallest allowed value for the height of the screen. The highest allowed for the width of the screen. The highest allowed value for the height of the screen.<br />
-<code><i>(unmanaged tag)</i></code></p>
-<p class="doxygen_typedef">The most suitable smart pointer to use with the class `Resolution`.<br />
-<code><span class="keyword">typedef</span> SmartPtr &lt; Resolution &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
-<p class="doxygen_typedef">Vector of resolutions.<br />
-<code><span class="keyword">typedef</span> std::vector&lt; Ptr &gt; <span class="method"><a href="#">Vector</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The width of the monitor/screen.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">width</a></span>: uint32 () <span class="keyword">const</span>;</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Convert these informations into an human readable string.<br />
-<code>String <span class="method"><a href="#">toString</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">The height of the monitor/screen.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">height</a></span>: uint32 () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Bit per pixel.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">bitPerPixel</a></span>: uint8 () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (equal with)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator==</a></span>: bool (const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (non equal with)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (less than)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (less than or equal)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (greater than)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (greater than or equal)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Resolution<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Assign new values from another resolution.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator=</a></span>: Resolution &amp; (const Resolution<b>&amp;</b> p);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Stream printing <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Print the resolution.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">print</a></span>: std::ostream &amp; (std::ostream<b>&amp;</b> out) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td></td><td class="doxnone">The smallest value allowed for the width of the screen. The smallest allowed value for the height of the screen. The highest allowed for the width of the screen. The highest allowed value for the height of the screen.<div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer to use with the class `Resolution`.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; Resolution &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Vector of resolutions.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr &gt;;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Convert these informations into an human readable string.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">toString</a></span>: String () <span class="keyword">const</span>;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

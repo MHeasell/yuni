@@ -1,40 +1,47 @@
 <title>Edge</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Edge</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors and destructors</h3>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Edge</a></span>();</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#">Edge</a></span>(const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2);</code></p>
-<p class="doxygen_fun"><code> <span class="method"><a href="#"><b> ~ </b>Edge</a></span>();</code></p>
+<h2><code>Edge</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors and destructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_typedef"><code><span class="keyword">typedef</span> SmartPtr &lt; Edge &gt; <span class="method"><a href="#">Ptr</a></span>;</code></p>
-<p class="doxygen_typedef">Vector of Edges.<br />
-<code><span class="keyword">typedef</span> std::vector&lt; SmartPtr &lt; Edge &gt; &gt; <span class="method"><a href="#">Vector</a></span>;</code></p>
-<p class="doxygen_typedef">List of Edges.<br />
-<code><span class="keyword">typedef</span> std::list&lt; SmartPtr &lt; Edge &gt; &gt; <span class="method"><a href="#">List</a></span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Edge</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public
-</div></td>
-<td><h3 class="h3noleftspace">Public
-</h3>
-<p class="doxygen_fun">Access to the vertices composing the edge.<br />
-<code>const Vertex &amp; <span class="method"><a href="#">vertex1</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun"><code>const Vertex &amp; <span class="method"><a href="#">vertex2</a></span>() <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Comparison operator (equal with)<br />
-<code>bool <span class="method"><a href="#">operator==</a></span>(const Edge<b>&amp;</b> other) <span class="keyword">const</span>;</code></p>
-<p class="doxygen_fun">Comparison operator (non equal with)<br />
-<code>bool <span class="method"><a href="#">operator!=</a></span>(const Edge<b>&amp;</b> other) <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Edge</a></span>:  (const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>Edge</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; Edge &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">Vector of Edges.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; SmartPtr &lt; Edge &gt; &gt;;</code>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone">List of Edges.<div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">List</a></span>: <span class="keyword">typedef</span> std::list&lt; SmartPtr &lt; Edge &gt; &gt;;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
+ <code class="doxygen_visibility">Public
+</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Access to the vertices composing the edge.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">vertex1</a></span>: const Vertex &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">vertex2</a></span>: const Vertex &amp; () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (equal with)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator==</a></span>: bool (const Edge<b>&amp;</b> other) <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (non equal with)<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Edge<b>&amp;</b> other) <span class="keyword">const</span>;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>

@@ -1,48 +1,55 @@
 <title>Variant</title>
 <pragma:weight value="0.5" />
+<pragma:toc visible="false" />
 <tag name="doxygen" />
 <tag name="class" />
 
 
 
-<h2>Summary of the class <code>Variant</code></h2><table class="nostyle">
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Constructors</h3>
-<p class="doxygen_fun">Constructs an empty Variant .<br />
-<code> <span class="method"><a href="#">Variant</a></span>();</code></p>
-<p class="doxygen_fun">Constructs a copy of an existing Variant .<br />
-<code> <span class="method"><a href="#">Variant</a></span>(const Variant<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Constructs a Variant based on an existing variable of simple type.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br /> <span class="method"><a href="#">Variant</a></span>(const T<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Destructor.<br />
-<code> <span class="method"><a href="#"><b> ~ </b>Variant</a></span>();</code></p>
+<h2><code>Variant</code></h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Alteration methods</h3>
-<p class="doxygen_fun">Assignment from an existing Variant .<br />
-<code>void <span class="method"><a href="#">assign</a></span>(const Variant<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Assignment from a simple type.<br />
-<code><span class="keyword">template</span>&lt;typename T &gt;<br />void <span class="method"><a href="#">assign</a></span>(const T<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun">Specific assignment from C strings.<br />
-<code>void <span class="method"><a href="#">assign</a></span>(const char<b>*</b> rhs);</code></p>
-<p class="doxygen_fun">Resets the Variant to an empty one.<br />
-<code>void <span class="method"><a href="#">clear</a></span>();</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructs an empty Variant .<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Variant</a></span>:  ();</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Information methods</h3>
-<p class="doxygen_fun">Returns true if the Variant is empty.<br />
-<code>bool <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructs a copy of an existing Variant .<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Variant</a></span>:  (const Variant<b>&amp;</b> rhs);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Operator overloads</h3>
-<p class="doxygen_fun"><code>Variant &amp; <span class="method"><a href="#">operator=</a></span>(const Variant<b>&amp;</b> rhs);</code></p>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename T &gt;<br />Variant &amp; <span class="method"><a href="#">operator=</a></span>(const T<b>&amp;</b> rhs);</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Constructs a Variant based on an existing variable of simple type.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">Variant</a></span>:  (const T<b>&amp;</b> rhs);</code>
 </td></tr>
-<tr><td><div class="visibility">Public</div></td>
-<td><h3 class="h3noleftspace">Retrieval methods</h3>
-<p class="doxygen_fun"><code><span class="keyword">template</span>&lt;typename T &gt;<br />T <span class="method"><a href="#">to</a></span>() <span class="keyword">const</span>;</code></p>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#"><b> ~ </b>Variant</a></span>:  ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Alteration methods <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment from an existing Variant .<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">assign</a></span>: void (const Variant<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment from a simple type.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">assign</a></span>: void (const T<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Specific assignment from C strings.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">assign</a></span>: void (const char<b>*</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Resets the Variant to an empty one.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Information methods <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Returns true if the Variant is empty.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator overloads <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: Variant &amp; (const Variant<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: Variant &amp; (const T<b>&amp;</b> rhs);</code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Retrieval methods <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">to</a></span>: T () <span class="keyword">const</span>;</code>
 </td></tr>
 </table>
 
 
-<h2>Detailed Description</h2>
