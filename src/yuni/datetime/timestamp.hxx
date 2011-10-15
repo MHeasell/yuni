@@ -47,7 +47,7 @@ namespace DateTime
 				return true;
 
 			const char* cstrformat = Traits::CString<StringT2>::Perform(format);
-			guesssize += 64; // arbitrary value
+			guesssize += 128; // arbitrary value
 			char* buffer = Yuni::Private::DateTime::FormatStringDynBuffer(guesssize, cstrformat, timestamp);
 			if (buffer)
 			{
