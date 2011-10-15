@@ -110,10 +110,14 @@ namespace Directory
 
 					// Prepare the new filename
 					{
+						#ifdef YUNI_OS_MINGW
+						int written = snwprintf(filename, maxLen, L"%s\\%s", path, filedata.cFileName);
+						#else
 						int written = swprintf_s(filename, maxLen, L"%s\\%s", path, filedata.cFileName);
+						#endif // YUNI_OS_MINGW
 						if (written <= 0 || written == maxLen)
 						{
-							FindClose(handle); 
+							FindClose(handle);
 							delete[] filename;
 							return false;
 						}
@@ -123,8 +127,8 @@ namespace Directory
 					if ((filedata.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
 					{
 						if (!RecursiveDeleteWindow(filename))
-						{ 
-							FindClose(handle); 
+						{
+							FindClose(handle);
 							delete[] filename;
 							return false;
 						}
@@ -139,7 +143,7 @@ namespace Directory
 						// Trying to delete the file
 						if (!DeleteFileW(filename))
 						{
-							FindClose(handle); 
+							FindClose(handle);
 							delete[] filename;
 							return false;
 						}
@@ -169,7 +173,7 @@ namespace Directory
 
 		# ifdef YUNI_OS_WINDOWS
 		using namespace std;
-	
+
 		Private::WString<true, true> fsource(path);
 		if (fsource.empty())
 			return false;
