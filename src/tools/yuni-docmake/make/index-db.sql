@@ -1,7 +1,9 @@
 
 
 CREATE TABLE index_header (
-	version                INTEGER NOT NULL DEFAULT 1
+	version                INTEGER NOT NULL DEFAULT 1,
+	--
+	dirty                  INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE articles (
