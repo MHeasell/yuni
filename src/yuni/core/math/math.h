@@ -98,7 +98,7 @@ namespace Math
 	** \param c The third expression
 	** \return The expression considered as the grater
 	*/
-	template<class T> inline const T& Max(const T& a, const T& b, const T& c);
+	template<class U, class V, class W> inline U Max(U a, V b, W c);
 
 	/*!
 	** \brief Get the smallest expression
@@ -117,7 +117,7 @@ namespace Math
 	** \param c The third expression
 	** \return The expression considered as the smaller
 	*/
-	template<class T> inline const T& Min(const T& a, const T& b, const T& c);
+	template<class U, class V, class W> inline U Min(U a, V b, W c);
 
 
 	/*!
@@ -135,7 +135,7 @@ namespace Math
 	** \brief Ensure that an expression is contained in a range of values (with custom types)
 	**
 	** Most of the time, `MinMax` will produce the wanted result. But in some
-	** cases, it may be ineficient, due to type matching and would produce strange
+	** cases, it may be inefficient, due to type matching and would produce strange
 	** results (such as integer overflow).
 	** This method is thus a variant from `MinMax` to allow the user to use custom
 	** input types.

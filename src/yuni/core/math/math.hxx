@@ -44,10 +44,10 @@ namespace Math
 	}
 
 
-	template<class T>
-	inline const T& Max(const T& a, const T& b, const T& c)
+	template<class U, class V, class W>
+	inline U Max(U a, V b, W c)
 	{
-		return Max<T,T>(Max<T,T>(a, b), c);
+		return Max<U,W>(Max<U,V>(a, b), c);
 	}
 
 
@@ -59,10 +59,10 @@ namespace Math
 
 
 
-	template<class T>
-	inline const T& Min(const T& a, const T& b, const T& c)
+	template<class U, class V, class W>
+	inline U Min(U a, V b, W c)
 	{
-		return Min<T>(Min<T>(a, b), c);
+		return Min<U, W>(Min<U,V>(a, b), c);
 	}
 
 
