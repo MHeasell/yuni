@@ -133,7 +133,7 @@ namespace Job
 			out << "<pragma:weight value=\"0.5\" />\n";
 			out << "<pragma:toc visible=\"false\" />\n";
 			out << "<tag name=\"doxygen\" />\n";
-			out << "<tag name=\"class\" />\n";
+			out << "<tag name=\"dox:class\" />\n";
 			out << "\n\n\n";
 
 			out << "<h2><code>" << pageTitle << "</code></h2>";
@@ -322,7 +322,7 @@ namespace Job
 			file << "</title>\n";
 			file << "<pragma:weight value=\"0.40\" />\n";
 			file << "<tag name=\"doxygen\" />\n";
-			file << "<tag name=\"namespace\" />\n";
+			file << "<tag name=\"dox:namespace\" />\n";
 			file << "\n\n";
 		}
 	}

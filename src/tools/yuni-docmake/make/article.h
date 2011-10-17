@@ -12,8 +12,6 @@
 	{
 	public:
 		typedef std::deque<float>  CoeffStack;
-		typedef Yuni::CString<32,false>  Tag;
-		typedef std::set<Tag>  TagSet;
 
 
 		enum State
@@ -66,6 +64,13 @@
 		void tocAppend(unsigned int level, const Yuni::String& caption);
 		void tocRefactoring();
 
+		/*!
+		** \brief Insert a list of tags
+		**
+		** \param text A list of tags, separated by spaces or special characters
+		*/
+		void insertTags(const Yuni::StringAdapter& text);
+
 	public:
 		//! The original XML file
 		Yuni::String originalFilename;
@@ -81,7 +86,7 @@
 		Yuni::sint64 modificationTime;
 
 		//!
-		TagSet  allowedTagsInParagraph;
+		Dictionary::TagSet  allowedTagsInParagraph;
 		//! Page weight
 		float pageWeight;
 		//! The current coefficient
@@ -109,11 +114,10 @@
 
 		//! SEO
 		Dictionary::WordsCount wordCount;
-		//! Tags
-		TagSet tags;
-
 		//! TOC items
 		TOCItem::Vector tocItems;
+		//! Tags
+		Dictionary::TagSet tags;
 
 		//! Directory content index
 		DirectoryIndexContent directoryIndexContent;
