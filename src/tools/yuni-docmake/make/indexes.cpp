@@ -29,7 +29,7 @@ namespace DocIndex
 
 		enum
 		{
-			dbVersion = 6,
+			dbVersion = 7, // arbitrary value
 		};
 
 		static sqlite3* gDB = nullptr;
@@ -37,7 +37,8 @@ namespace DocIndex
 
 		static bool ResetDBIndex(const String& filename)
 		{
-			logs.info() << "the index database needs to be rebuilt";
+			if (!Program::quiet)
+				logs.info() << "the index database needs to be rebuilt";
 
 			// Close the sqlite handle
 			Close();
@@ -143,12 +144,7 @@ namespace DocIndex
 		uri << folder << SEP << "yuni-doc-index";
 
 		if (Program::clean)
-		{
 			IO::File::Delete(uri);
-			logs.info() << "opening index database (purge)";
-		}
-		else
-			logs.info() << "opening index database";
 
 		switch (sqlite3_open(uri.c_str(), &gDB))
 		{
@@ -341,7 +337,8 @@ namespace DocIndex
 		if (!gDB)
 			return;
 
-		logs.info() << "Looking for deprecated entries in the database";
+		if (!Program::quiet)
+			logs.info() << "Looking for deprecated entries in the database";
 
 		CString<512> s = "DELETE FROM articles WHERE rel_path = \"\";";
 		{
@@ -358,10 +355,13 @@ namespace DocIndex
 
 		if (rowCount)
 		{
-			if (rowCount == 1)
-				logs.info() << "1 article available in the index db";
-			else
-				logs.info() << rowCount << " articles available in the index db";
+			if (!Program::quiet)
+			{
+				if (rowCount == 1)
+					logs.info() << "1 article available in the index db";
+				else
+					logs.info() << rowCount << " articles available in the index db";
+			}
 			unsigned int y = 1;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row, ++y)
 			{
@@ -369,7 +369,9 @@ namespace DocIndex
 				s.clear() << Program::input << SEP << relPath;
 				if (!IO::File::Exists(s))
 				{
-					logs.info() << "The entry '" << relPath << "' is deprecated";
+					if (!Program::quiet)
+						logs.info() << "The entry '" << relPath << "' is deprecated";
+
 					s.clear() << "DELETE FROM articles WHERE rel_path = $1;";
 					sqlite3_stmt* stmt;
 					sqlite3_prepare_v2(gDB, s.c_str(), s.size(), &stmt, NULL);

@@ -41,6 +41,7 @@ namespace DocMake
 		static bool verbose;
 		static bool clean;
 		static bool shortUrl;
+		static bool quiet;
 
 	}; // class Make
 

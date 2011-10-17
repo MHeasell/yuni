@@ -3,6 +3,7 @@
 #include "../sqlite/sqlite3.h"
 #include "indexes.h"
 #include "../logs.h"
+#include "program.h"
 
 
 
@@ -43,10 +44,13 @@ namespace Dictionary
 
 		if (rowCount)
 		{
-			if (rowCount == 1)
-				logs.info() << "Preloading 1 term from the index db";
-			else
-				logs.info() << "Preloading " << rowCount << " terms from the index db";
+			if (!Tool::DocMake::Program::quiet)
+			{
+				if (rowCount == 1)
+					logs.info() << "Preloading 1 term from the index db";
+				else
+					logs.info() << "Preloading " << rowCount << " terms from the index db";
+			}
 
 			unsigned int y = 2;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)

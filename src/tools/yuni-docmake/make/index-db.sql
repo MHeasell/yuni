@@ -54,6 +54,12 @@ CREATE TABLE terms_per_article (
 );
 
 
+CREATE TABLE tags_per_article (
+	article_id             INTEGER NOT NULL REFERENCES articles(id) ON DELETE CASCADE,
+	tagname                TEXT NOT NULL,
+	PRIMARY KEY (article_id, tagname)
+);
+
 CREATE TABLE deps (
 	input                  TEXT NOT NULL PRIMARY KEY,
 	html_href              TEXT NOT NULL,

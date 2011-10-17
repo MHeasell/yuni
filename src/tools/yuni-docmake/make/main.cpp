@@ -20,7 +20,8 @@ int main(int argc, char** argv)
 	if (!program.parseCommandLine(argc, argv))
 		return EXIT_FAILURE;
 
-	logs.checkpoint() << "Edalene Make";
+	if (!Program::quiet)
+		logs.checkpoint() << "Edalene Make";
 	if (!DocIndex::Open(program.htdocs))
 		return EXIT_FAILURE;
 
@@ -38,19 +39,23 @@ int main(int argc, char** argv)
 	program.findAllSourceFiles();
 
 	// Extract information from all those articles
-	logs.info() << "reading articles...";
 	{
+		if (!Program::quiet)
+			logs.info() << "reading articles...";
+
 		queueService.start();
 		queueService.wait();
 		queueService.stop();
 	}
 
-	logs.info() << "building SEO data";
+	if (!Program::quiet)
+		logs.info() << "building SEO data";
 	DocIndex::UpdateAllSEOWeights();
 	JobWriter::SEOBuildAllTermReferences();
 	DocIndex::BuildSEOArticlesReference();
 
-	logs.info() << "generating HTML files into htdocs";
+	if (!Program::quiet)
+		logs.info() << "generating HTML files into htdocs";
 	if (JobWriter::ReadTemplateIndex())
 	{
 		JobWriter::PushAllInQueue();
@@ -58,14 +63,19 @@ int main(int argc, char** argv)
 		queueService.wait();
 		queueService.stop();
 
-		logs.info() << "Generating sitemap";
+		if (!Program::quiet)
+			logs.info() << "Generating sitemap";
 		DocIndex::BuildSitemap();
 	}
 
 	DocIndex::Vacuum();
 	DocIndex::Close();
-	logs.info();
-	logs.info() << "Done.";
+
+	if (!Program::quiet)
+	{
+		logs.info();
+		logs.info() << "Done.";
+	}
 	return 0;
 }
 
