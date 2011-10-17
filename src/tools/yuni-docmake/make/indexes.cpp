@@ -94,7 +94,7 @@ namespace DocIndex
 		}
 
 
-		static bool CheckDBVersion(const String& dbfilename)
+		static bool CheckDatabaseIntegrity(const String& dbfilename)
 		{
 			// prepare the SQL statement from the command line
 			static const char* const query = "SELECT version,dirty FROM index_header";
@@ -163,7 +163,7 @@ namespace DocIndex
 		{
 			case SQLITE_OK:
 				{
-					if (!UsePragma() || !CheckDBVersion(uri))
+					if (!UsePragma() || !CheckDatabaseIntegrity(uri))
 					{
 						Close();
 						return false;
