@@ -1986,9 +1986,32 @@ namespace Yuni
 
 
 
+} // namespace Yuni
 
 
+namespace Yuni
+{
+namespace Traits
+{
 
+	/*!
+	** \brief Class helper to know if a type is a valid string representation
+	*/
+	template<class U>
+	class IsString
+	{
+	public:
+		enum
+		{
+			//! A non-zero value if the type 'U' is a valid string representation
+			yes = (Traits::CString<U>::valid && Traits::Length<U>::valid),
+			//! A non-zero value if the type 'U' is _not_ a valid string representation
+			no  = (!Traits::CString<U>::valid && !Traits::Length<U>::valid),
+		};
+	};
+
+
+} // namespace Traits
 } // namespace Yuni
 
 # include "iterator.hxx"
