@@ -4,6 +4,7 @@
 # include <yuni/yuni.h>
 # include <yuni/core/string.h>
 # include <map>
+# include <set>
 
 
 namespace Dictionary
@@ -11,6 +12,8 @@ namespace Dictionary
 
 	//! A single word
 	typedef Yuni::CString<32,false>  Word;
+	//! A single tag
+	typedef Yuni::CString<42,false>  Tag;
 
 	//! Word ID
 	typedef int  WordID;
@@ -31,6 +34,9 @@ namespace Dictionary
 
 	//! Statistics for a set of words
 	typedef std::map<Word, WordStat>  WordsCount;
+
+	//! Set of tags
+	typedef std::set<Tag>  TagSet;
 
 
 	//! Association between a word and its ID

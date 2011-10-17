@@ -121,7 +121,7 @@ namespace // anonymous
 	bool XMLVisitor::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* /*attr*/)
 	{
 		const TIXML_STRING name = element.ValueTStr();
-		ArticleData::Tag tag = name.c_str();
+		const Dictionary::Tag tag = name.c_str();
 
 		pushCoeffFromString(name);
 		switch (pState)
@@ -131,7 +131,14 @@ namespace // anonymous
 					if (tag.startsWith("pragma:"))
 					{
 						bool value;
-						if (tag == "pragma:toc")
+						if (tag == "pragma:tag")
+						{
+							const StringAdapter string1 = element.Attribute("value");
+							pArticle.insertTags(string1);
+							const StringAdapter string2 = element.Attribute("name");
+							pArticle.insertTags(string2);
+						}
+						else if (tag == "pragma:toc")
 						{
 							if (TIXML_SUCCESS == element.QueryBoolAttribute("value", &value))
 								logs.warning() << pFilename << ": pragma:toc: the field value is deprecated";
@@ -235,6 +242,13 @@ namespace // anonymous
 						{
 							logs.error() << "The tag h1 is reserved for the page title";
 							return false;
+						}
+						else if (tag == "tag")
+						{
+							const StringAdapter string1 = element.Attribute("value");
+							pArticle.insertTags(string1);
+							const StringAdapter string2 = element.Attribute("name");
+							pArticle.insertTags(string2);
 						}
 					}
 					if (pWithinParagraph && pArticle.allowedTagsInParagraph.find(tag) == pArticle.allowedTagsInParagraph.end())

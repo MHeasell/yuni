@@ -238,6 +238,12 @@ body,html {
 	margin					:45pt 0 0 0;
 	text-shadow				:2px 2px 2px #bbb;
 	color:#689BD6 !important;
+	padding-left:25px;
+	padding-top:0.2em;
+	padding-bottom:0.2em;
+	background-image:url('../images/folder.png');
+	background-position:left 1px;
+	background-repeat:no-repeat;
 }
 .content .directoryindex ul {
 	color:#666 !important;
@@ -253,6 +259,30 @@ body,html {
 	text-shadow				:2px 2px 2px #ccc;
 	color:#333 !important;
 }
+.content .tagindex {
+	margin					:45pt 0 0 0;
+	text-shadow				:2px 2px 2px #bbb;
+	color:#689BD6 !important;
+	padding-left:25px;
+	padding-top:0.2em;
+	padding-bottom:0.2em;
+	background-image:url('../images/tag.png');
+	background-position:left 1px;
+	background-repeat:no-repeat;
+}
+.content .tagindex a {
+	text-shadow				:none;
+	border-bottom-color			:transparent;
+	color					:#744;
+	color:#697286;
+	color					:#c24913;
+	background-image		:none !important;
+	padding-left			:0.3em !important;
+	text-shadow				:2px 2px 2px #ccc;
+	color:#333 !important;
+	padding-right:0.3em;
+}
+
 .content .visibility {
 	color					:#245079;
 	padding-left			:2em;

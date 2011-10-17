@@ -29,10 +29,37 @@ namespace DocIndex
 
 		enum
 		{
-			dbVersion = 7, // arbitrary value
+			dbVersion = 9, // arbitrary value
 		};
 
 		static sqlite3* gDB = nullptr;
+
+
+		template<class StringT>
+		static sint64 RetrieveArticleID(const StringT& href)
+		{
+			if (!gDB || !href)
+				return -1;
+
+			sqlite3_stmt* stmt;
+			if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT id FROM articles WHERE html_href = $1", -1, &stmt, NULL))
+				return -1;
+			sqlite3_bind_text(stmt, 1, href.c_str(), href.size(), NULL);
+			if (SQLITE_ROW != sqlite3_step(stmt))
+			{
+				sqlite3_finalize(stmt);
+				return -1;
+			}
+			const StringAdapter id = (const char*) sqlite3_column_text(stmt, 0);
+			sint64 result;
+			if (!id.to(result))
+			{
+				sqlite3_finalize(stmt);
+				return -1;
+			}
+			sqlite3_finalize(stmt);
+			return result;
+		}
 
 
 		static bool ResetDBIndex(const String& filename)
@@ -244,7 +271,9 @@ namespace DocIndex
 			return;
 
 		CString<256> query;
+		const char* message;
 
+		// Delete the article, and all its data
 		query.clear() << "DELETE FROM articles WHERE rel_path = $1;";
 		sqlite3_stmt* stmt = nullptr;
 		if (SQLITE_OK != sqlite3_prepare_v2(gDB, query.c_str(), -1, &stmt, NULL))
@@ -278,7 +307,10 @@ namespace DocIndex
 				<< ", show_toc, modified, rel_path,html_href, title,parent,directory_index,lang)"
 				<< " VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12);";
 			if (SQLITE_OK != sqlite3_prepare_v2(gDB, query.c_str(), -1, &stmt, NULL))
+			{
 				logs.error() << "invalid SQL query: " << query;
+				return;
+			}
 			else
 			{
 				sqlite3_bind_int(stmt,    1,  (int)article.order);
@@ -297,6 +329,13 @@ namespace DocIndex
 				sqlite3_finalize(stmt);
 			}
 		}
+		sint64 articleID = RetrieveArticleID(article.htdocsFilename);
+		if (articleID < 0)
+		{
+			logs.error() << "Invalid article ID after inserting, " << article.htdocsFilename;
+			return;
+		}
+
 		if (article.accessPath.notEmpty())
 		{
 			query.clear() << "UPDATE articles SET force_access_path = $1 WHERE rel_path = $2;";
@@ -348,6 +387,27 @@ namespace DocIndex
 				sqlite3_bind_text(stmt, 3, item.caption.c_str(), item.caption.size(), NULL);
 				sqlite3_step(stmt);
 				sqlite3_finalize(stmt);
+			}
+		}
+
+		// Tags
+		if (!article.tags.empty())
+		{
+			Dictionary::TagSet::const_iterator end = article.tags.end();
+			for (Dictionary::TagSet::const_iterator i = article.tags.begin(); i != end; ++i)
+			{
+				const Dictionary::Tag& tagname = *i;
+
+				query.clear() << "INSERT INTO tags_per_article (article_id,tagname) VALUES (" << articleID << ",$1);";
+				int error;
+				if (SQLITE_OK == (error = sqlite3_prepare_v2(gDB, query.c_str(), query.size(), &stmt, NULL)))
+				{
+					sqlite3_bind_text(stmt, 1, tagname.c_str(), tagname.size(), NULL);
+					sqlite3_step(stmt);
+					sqlite3_finalize(stmt);
+				}
+				else
+					logs.error() << "impossible to register tag for " << article.htdocsFilename << ", err." << error;
 			}
 		}
 	}

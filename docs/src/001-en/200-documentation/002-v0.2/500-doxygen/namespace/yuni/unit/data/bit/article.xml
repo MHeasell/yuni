@@ -1,6 +1,6 @@
 <title>Bit</title>
 <pragma:weight value="0.40" />
 <tag name="doxygen" />
-<tag name="namespace" />
+<tag name="dox:namespace" />
 
 

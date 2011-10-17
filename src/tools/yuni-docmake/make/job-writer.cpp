@@ -101,7 +101,7 @@ namespace // anonymous
 	bool XMLVisitor::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* /*attr*/)
 	{
 		const TIXML_STRING& name = element.ValueTStr();
-		ArticleData::Tag tag = name.c_str();
+		const Dictionary::Tag tag = name.c_str();
 		TiXmlElement* e = const_cast<TiXmlElement*>(&element);
 
 		// Attributes
@@ -439,16 +439,50 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 		pVars["URL_PARTS"] = address;
 	}
 
+	// @{TAGS_BEGIN,...}
+	if (pArticle.tags.empty())
+	{
+		pVars["TAGS_BEGIN"] = "<!--";
+		pVars["TAGS_END"]   = "-->";
+		pVars["TAGS_LIST"]  = nullptr;
+	}
+	else
+	{
+		pVars["TAGS_BEGIN"] = nullptr;
+		pVars["TAGS_END"]   = nullptr;
+		String& list = pVars["TAGS_LIST"];
+		list << "\n\n\n\n\t<div class=\"tagindex\">\n";
+		switch (pArticle.tags.size())
+		{
+			case 0:  list << "0 tag : ";break;
+			case 1:  list << "1 tag : ";break;
+			default: list << pArticle.tags.size() << " tags : ";break;
+		}
+
+		Dictionary::TagSet::const_iterator end = pArticle.tags.end();
+		bool first = true;
+		for (Dictionary::TagSet::const_iterator i = pArticle.tags.begin(); i != end; ++i)
+		{
+			if (!first)
+				list += "\t\t, ";
+			else
+				list += "\t\t";
+			list << "<a href=\"#\">" << *i << "</a>\n";
+			first = false;
+		}
+		list << "\t</div>\n\n";
+	}
+
 	// @{TOC_...}
 	if (pArticle.showTOC && pArticle.tocItems.size() > 1)
 	{
-		pVars["TOC_BEGIN"] = "";
-		pVars["TOC_END"] = "";
+		pVars["TOC_BEGIN"] = nullptr;
+		pVars["TOC_END"]   = nullptr;
 	}
 	else
 	{
 		pVars["TOC_BEGIN"] = "<!--";
-		pVars["TOC_END"] = "-->";
+		pVars["TOC_END"]   = "-->";
 	}
 
 	// @{TOC_CONTENT}
@@ -616,11 +650,9 @@ void JobWriter::onExecute()
 	content.replace("@{QUICKLINKS_END}", pVars["QUICKLINKS_END"]);
 
 	// Tags
-	{
-		content.replace("@{TAGFIELD_BEGIN}", "<!--");
-		content.replace("@{TAGFIELD_COUNT}", "0 tag");
-		content.replace("@{TAGFIELD_END}", "-->");
-	}
+	content.replace("@{TAGS_BEGIN}", pVars["TAGS_BEGIN"]);
+	content.replace("@{TAGS_LIST}", pVars["TAGS_LIST"]);
+	content.replace("@{TAGS_END}", pVars["TAGS_END"]);
 
 	// @{CONTENT}
 	content.replace("@{CONTENT}", pVars["CONTENT"]);

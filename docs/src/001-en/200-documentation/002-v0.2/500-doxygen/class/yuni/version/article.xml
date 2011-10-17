@@ -2,7 +2,7 @@
 <pragma:weight value="0.5" />
 <pragma:toc visible="false" />
 <tag name="doxygen" />
-<tag name="class" />
+<tag name="dox:class" />
 
 
 

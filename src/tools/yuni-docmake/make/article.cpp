@@ -140,3 +140,21 @@ void ArticleData::tocRefactoring()
 }
 
 
+void ArticleData::insertTags(const Yuni::StringAdapter& text)
+{
+	if (!text)
+		return;
+	Dictionary::Tag::Vector list;
+	text.split(list, " ,;|\t\r\n/\\");
+	if (!list.empty())
+	{
+		const Dictionary::Tag::Vector::iterator end = list.end();
+		for (Dictionary::Tag::Vector::iterator i = list.begin(); i != end; ++i)
+		{
+			(*i).toLower();
+			tags.insert(*i);
+		}
+	}
+}
+
+
