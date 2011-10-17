@@ -29,26 +29,32 @@ namespace DocIndex
 
 		enum
 		{
-			dbVersion = 5,
+			dbVersion = 6,
 		};
 
 		static sqlite3* gDB = nullptr;
 
 
-		static bool ResetDBIndex()
+		static bool ResetDBIndex(const String& filename)
 		{
 			logs.info() << "the index database needs to be rebuilt";
 
+			// Close the sqlite handle
+			Close();
+			// Destroy the sqlite database
+			IO::File::Delete(filename);
+			// Try to reopen it
+			switch (sqlite3_open(filename.c_str(), &gDB))
+			{
+				case SQLITE_OK:
+					break;
+				default:
+					logs.error() << "impossible to re-open the database after deletion.";
+					return false;
+			}
+
 			Clob script;
 			char* message = nullptr;
-
-			// Cleanup
-			PrepareSQLScriptCleanup(script);
-			if (SQLITE_OK != sqlite3_exec(gDB, script.c_str(), NULL, NULL, &message))
-			{
-				logs.error() << "database: " << message;
-				sqlite3_free(message);
-			}
 
 			// Create tables
 			PrepareSQLScript(script);
@@ -87,16 +93,18 @@ namespace DocIndex
 		}
 
 
-		static bool CheckDBVersion()
+		static bool CheckDBVersion(const String& dbfilename)
 		{
 			// prepare the SQL statement from the command line
 			sqlite3_stmt* stmt;
 			if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT version FROM index_header", -1, &stmt, 0))
 			{
-				if (!ResetDBIndex())
+				sqlite3_finalize(stmt);
+				if (!ResetDBIndex(dbfilename))
 					return false;
 				if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT version FROM index_header", -1, &stmt, 0))
 				{
+					sqlite3_finalize(stmt);
 					logs.error() << "impossible to retrieve information from the header";
 					return false;
 				}
@@ -111,7 +119,7 @@ namespace DocIndex
 				}
 			}
 			sqlite3_finalize(stmt);
-			return ResetDBIndex();
+			return ResetDBIndex(dbfilename);
 		}
 
 	} // anonymous namespace
@@ -146,7 +154,7 @@ namespace DocIndex
 		{
 			case SQLITE_OK:
 				{
-					if (!UsePragma() || !CheckDBVersion())
+					if (!UsePragma() || !CheckDBVersion(uri))
 					{
 						Close();
 						return false;
