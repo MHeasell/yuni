@@ -97,26 +97,39 @@ namespace DocIndex
 		static bool CheckDBVersion(const String& dbfilename)
 		{
 			// prepare the SQL statement from the command line
+			static const char* const query = "SELECT version,dirty FROM index_header";
+
 			sqlite3_stmt* stmt;
-			if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT version FROM index_header", -1, &stmt, 0))
+			if (SQLITE_OK != sqlite3_prepare_v2(gDB, query, -1, &stmt, 0))
 			{
 				sqlite3_finalize(stmt);
 				if (!ResetDBIndex(dbfilename))
 					return false;
-				if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT version FROM index_header", -1, &stmt, 0))
+				if (SQLITE_OK != sqlite3_prepare_v2(gDB, query, -1, &stmt, 0))
 				{
 					sqlite3_finalize(stmt);
-					logs.error() << "impossible to retrieve information from the header";
-					return false;
+					stmt = nullptr;
+					if (!Program::quiet)
+						logs.info() << "The database index format needs update. Performing a full reindex";
 				}
 			}
-			if (SQLITE_ROW == sqlite3_step(stmt))
+			if (stmt && SQLITE_ROW == sqlite3_step(stmt))
 			{
 				const StringAdapter version = (const char*) sqlite3_column_text(stmt, 0);
-				if (version.to<int>() == dbVersion)
+				const StringAdapter dirty   = (const char*) sqlite3_column_text(stmt, 1);
+				if (dirty.to<bool>())
 				{
-					sqlite3_finalize(stmt);
-					return true;
+					logs.warning() << "The database index is marked as dirty. Performing a full reindex";
+				}
+				else
+				{
+					if (version.to<int>() == dbVersion)
+					{
+						sqlite3_finalize(stmt);
+						return true;
+					}
+					if (!Program::quiet)
+						logs.info() << "The database index format needs update. Performing a full reindex";
 				}
 			}
 			sqlite3_finalize(stmt);
@@ -172,6 +185,11 @@ namespace DocIndex
 			default:
 				return false;
 		}
+
+		// Mark the database index as dirty
+		if (SQLITE_OK != sqlite3_exec(gDB, "UPDATE index_header SET dirty = 1", NULL, NULL, NULL))
+			return false;
+
 		return true;
 	}
 
@@ -180,6 +198,9 @@ namespace DocIndex
 	{
 		if (gDB)
 		{
+			// Mark the database index as non-dirty
+			sqlite3_exec(gDB, "UPDATE index_header SET dirty = 0", NULL, NULL, NULL);
+			// Close the handle
 			sqlite3_close(gDB);
 			gDB = nullptr;
 		}

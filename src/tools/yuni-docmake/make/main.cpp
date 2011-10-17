@@ -42,7 +42,6 @@ int main(int argc, char** argv)
 	{
 		if (!Program::quiet)
 			logs.info() << "reading articles...";
-
 		queueService.start();
 		queueService.wait();
 		queueService.stop();
