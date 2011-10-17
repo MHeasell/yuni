@@ -19,7 +19,8 @@ namespace DocMake
 
 	void Program::findAllSourceFiles()
 	{
-		logs.notice() << "Looking for articles...";
+		if (!Program::quiet)
+			logs.notice() << "Looking for articles...";
 
 		unsigned int upToDateCount = 0;
 		std::vector<CompileJob*> jobs;
@@ -102,9 +103,12 @@ namespace DocMake
 		// Statistics about the articles to generate
 		if (count)
 		{
-			logs.info() << count << (count > 1 ? " articles, " : "article, ") << nbJobs
-				<< (nbJobs > 1 ? " threads" : " thread");
-			logs.info();
+			if (!Program::quiet)
+			{
+				logs.info() << count << (count > 1 ? " articles, " : "article, ") << nbJobs
+					<< (nbJobs > 1 ? " threads" : " thread");
+				logs.info();
+			}
 			for (unsigned int i = 0; i != jobs.size(); ++i)
 				queueService += jobs[i];
 		}
@@ -116,16 +120,18 @@ namespace DocMake
 				delete jobs[i];
 		}
 
-		switch (upToDateCount)
+		if (!Program::quiet)
 		{
-			case 0:
-				break;
-			case 1:
-				logs.info() << "1 article up-to-date";
-				break;
-			default:
-				logs.info() << upToDateCount << " articles already up to date";
-
+			switch (upToDateCount)
+			{
+				case 0:
+					break;
+				case 1:
+					logs.info() << "1 article up-to-date";
+					break;
+				default:
+					logs.info() << upToDateCount << " articles already up to date";
+			}
 		}
 	}
 

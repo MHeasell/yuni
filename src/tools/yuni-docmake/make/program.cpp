@@ -21,6 +21,7 @@ namespace DocMake
 	bool Program::verbose  = false;
 	bool Program::clean    = false;
 	bool Program::shortUrl = false;
+	bool Program::quiet    = false;
 
 	String Program::input;
 	String Program::htdocs;
@@ -59,6 +60,7 @@ namespace DocMake
 
 		// Help
 		opts.addParagraph("\nHelp");
+		opts.addFlag(quiet, 'q', "quiet", "Do not print any message, only warnings and errors");
 		opts.addFlag(verbose, ' ', "verbose", "Print any error message");
 		opts.addFlag(debug, ' ', "debug", "Print debug messages");
 		opts.addFlag(printVersion, 'v', "version", "Print the version and exit");
