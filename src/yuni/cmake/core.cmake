@@ -519,7 +519,14 @@ set(SRC_CORE_TREE_N
 		core/tree/n/treeN.h
 		core/tree/n/treeN.hxx
 		core/tree/n/iterator/iterator.h
-		core/tree/n/iterator/iterator.hxx
+		core/tree/n/iterator/childiterator.h
+		core/tree/n/iterator/childiterator.hxx
+		core/tree/n/iterator/depthprefixiterator.h
+		core/tree/n/iterator/depthprefixiterator.hxx
+		core/tree/n/iterator/depthinfixiterator.h
+		core/tree/n/iterator/depthinfixiterator.hxx
+		core/tree/n/iterator/depthsuffixiterator.h
+		core/tree/n/iterator/depthsuffixiterator.hxx
 )
 source_group(core\\tree FILES ${SRC_CORE_TREE_N})
 
