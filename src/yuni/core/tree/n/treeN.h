@@ -7,6 +7,7 @@
 # include <stack>
 # include "../../static/if.h"
 # include "../../smartptr/smartptr.h"
+# include "../../iterator/iterator.h"
 # include "iterator/iterator.h"
 # include <ostream>
 # include <cassert>
@@ -198,12 +199,16 @@ namespace Core
 
 		//! \name Iterators
 		//@{
-		// Default iterators
+		// Default iterators (iterate on the node's children only)
 		typedef IIterator<Private::Core::Tree::ChildIterator<Node>, false> iterator;
 		typedef IIterator<Private::Core::Tree::ChildIterator<Node>, true> const_iterator;
-		// Depth-first traversal
+		// Depth-first traversal (full tree)
+		//   Prefix
 		typedef IIterator<Private::Core::Tree::DepthPrefixIterator<Node>, false> depth_prefix_iterator;
 		typedef IIterator<Private::Core::Tree::DepthPrefixIterator<Node>, true> const_depth_prefix_iterator;
+		//   Infix
+		typedef IIterator<Private::Core::Tree::DepthInfixIterator<Node>, false> depth_infix_iterator;
+		typedef IIterator<Private::Core::Tree::DepthInfixIterator<Node>, true> const_depth_infix_iterator;
 
 		// class iterator;
 

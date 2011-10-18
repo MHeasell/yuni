@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_TREE_N_ITERATOR_HXX__
-# define __YUNI_CORE_TREE_N_ITERATOR_HXX__
+#ifndef __YUNI_CORE_TREE_N_DEPTH_PREFIX_ITERATOR_HXX__
+# define __YUNI_CORE_TREE_N_DEPTH_PREFIX_ITERATOR_HXX__
 
 namespace Yuni
 {
@@ -9,117 +9,6 @@ namespace Core
 {
 namespace Tree
 {
-
-
-	template<class NodeT>
-	inline ChildIterator<NodeT>::ChildIterator():
-		pNode(nullptr)
-	{}
-
-
-	template<class NodeT>
-	inline ChildIterator<NodeT>::ChildIterator(const Type& it):
-		pNode(it.pNode)
-	{}
-
-
-	template<class NodeT>
-	template<class N>
-	inline ChildIterator<NodeT>::ChildIterator(const ChildIterator<N>& p):
-		pNode(p.pNode)
-	{}
-
-
-	template<class NodeT>
-	inline ChildIterator<NodeT>::ChildIterator(const NodePtr& p):
-		pNode(p)
-	{}
-
-
-	template<class NodeT>
-	inline typename ChildIterator<NodeT>::reference
-	ChildIterator<NodeT>::operator * ()
-	{
-		return *pNode;
-	}
-
-
-	template<class NodeT>
-	inline typename ChildIterator<NodeT>::const_reference
-	ChildIterator<NodeT>::operator * () const
-	{
-		return *pNode;
-	}
-
-
-	template<class NodeT>
-	inline typename ChildIterator<NodeT>::pointer
-	ChildIterator<NodeT>::operator -> ()
-	{
-		return pNode.pointer();
-	}
-
-
-	template<class NodeT>
-	inline typename ChildIterator<NodeT>::const_pointer
-	ChildIterator<NodeT>::operator -> () const
-	{
-		return pNode.pointer();
-	}
-
-
-	template<class NodeT>
-	template<class N>
-	inline bool ChildIterator<NodeT>::equals(const ChildIterator<N>& rhs) const
-	{
-		return pNode == rhs.pNode;
-	}
-
-
-	template<class NodeT>
-	template<class N>
-	inline void ChildIterator<NodeT>::reset(const ChildIterator<N>& rhs)
-	{
-		pNode = rhs.pNode;
-	}
-
-
-	template<class NodeT>
-	void ChildIterator<NodeT>::forward()
-	{
-		pNode = pNode->nextSibling();
-	}
-
-
-	template<class NodeT>
-	void ChildIterator<NodeT>::forward(difference_type n)
-	{
-		while (n--)
-		{
-			forward();
-		}
-	}
-
-
-	template<class NodeT>
-	void ChildIterator<NodeT>::backward()
-	{
-		pNode = pNode->previousSibling();
-	}
-
-
-	template<class NodeT>
-	void ChildIterator<NodeT>::backward(difference_type n)
-	{
-		while (n--)
-		{
-			backward();
-		}
-	}
-
-
-
-
 
 
 	template<class NodeT>
@@ -198,7 +87,7 @@ namespace Tree
 	template<class NodeT>
 	void DepthPrefixIterator<NodeT>::forward()
 	{
-		// This is depth-first traversal, so do the children first
+		// This is depth-first prefix traversal, so do the children first
 		if (!pNode->empty())
 		{
 			pNode = (*pNode)[0];
@@ -214,9 +103,9 @@ namespace Tree
 			// Climb back the parents until we find siblings
 			while (pNode->parent() && !pNode->parent()->nextSibling())
 				pNode = pNode->parent();
-			// If we reached the right-most sibling of the root,
-			// it means we have finished.
-			if (!pNode->parent() && !pNode->parent()->nextSibling())
+			// If there is still no sibling, it means we reached
+			// the right-most sibling of the root, which means we have finished.
+			if (!pNode->nextSibling())
 			{
 				pNode = nullptr;
 				return;
@@ -230,7 +119,7 @@ namespace Tree
 	template<class NodeT>
 	void DepthPrefixIterator<NodeT>::forward(difference_type n)
 	{
-		// TODO: There is possibility to optimize this a lot
+		// FIXME : There is possibility to optimize this a lot
 		while (n--)
 		{
 			forward();
@@ -241,13 +130,32 @@ namespace Tree
 	template<class NodeT>
 	void DepthPrefixIterator<NodeT>::backward()
 	{
+		// If we are on the root, stop
+		if (!pNode->parent())
+		{
+			pNode = nullptr;
+			return;
+		}
+		// If this is the left-most child, go to the parent
+		if (!pNode->previousSibling())
+		{
+			pNode = pNode->parent();
+			return;
+		}
+		// Go to the previous sibling
+		pNode = pNode->previousSibling();
+		// If the sibling has no child, return it
+		if (pNode->empty())
+			return;
+		// Otherwise, go to its right-most child
+		pNode = pNode->lastChild();
 	}
 
 
 	template<class NodeT>
 	void DepthPrefixIterator<NodeT>::backward(difference_type n)
 	{
-		// TODO: There is possibility to optimize this a lot
+		// FIXME : There is possibility to optimize this a lot
 		while (n--)
 		{
 			backward();
@@ -261,4 +169,4 @@ namespace Tree
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_CORE_TREE_N_ITERATOR_HXX__
+#endif // __YUNI_CORE_TREE_N_DEPTH_PREFIX_ITERATOR_HXX__
