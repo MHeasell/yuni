@@ -238,6 +238,70 @@ namespace Yuni
 		template<typename U>
 		Point3D<T>& operator = (const Point3D<U>& p) { x = (T)p.x; y = (T)p.y; z = (T)p.z; return (*this); }
 
+		/*!
+		** \brief Check if a point's coordinates are < to another's
+		**
+		** \param p The point to compare with
+		** \return true if this < p, false otherwise
+		**
+		** \remarks X is compared first, then if necessary Y, then Z.
+		*/
+		template<typename U>
+		bool operator < (const Point3D<U>& p) const
+		{
+			if (!Math::Equals(x, (T)p.x))
+				return x < (T)p.x;
+			if (!Math::Equals(y, (T)p.y))
+				return y < (T)p.y;
+			return z < (T)p.z;
+		}
+
+		/*!
+		** \brief Check if a point's coordinates are <= to another's
+		**
+		** \param p The point to compare with
+		** \return true if this <= p, false otherwise
+		**
+		** \remarks X is compared first, then if necessary Y, then Z.
+		*/
+		template<typename U>
+		bool operator <= (const Point3D<U>& p) const
+		{
+			return !(*this > p);
+		}
+
+		/*!
+		** \brief Check if a point's coordinates are > to another's
+		**
+		** \param p The point to compare with
+		** \return true if this > p, false otherwise
+		**
+		** \remarks X is compared first, then if necessary Y, then Z.
+		*/
+		template<typename U>
+		bool operator > (const Point3D<U>& p) const
+		{
+			if (!Math::Equals(x, (T)p.x))
+				return x > (T)p.x;
+			if (!Math::Equals(y, (T)p.y))
+				return y > (T)p.y;
+			return z > (T)p.z;
+		}
+
+		/*!
+		** \brief Check if a point's coordinates are >= to another's
+		**
+		** \param p The point to compare with
+		** \return true if this >= p, false otherwise
+		**
+		** \remarks X is compared first, then if necessary Y, then Z.
+		*/
+		template<typename U>
+		bool operator >= (const Point3D<U>& p) const
+		{
+			return !(*this < p);
+		}
+
 		//} Operators
 
 
