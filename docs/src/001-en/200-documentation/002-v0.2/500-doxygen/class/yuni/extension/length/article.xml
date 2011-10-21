@@ -7,19 +7,17 @@
 
 
 <h2><code>Length</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">SizeType</a></span>: <span class="keyword">typedef</span> SizeT;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Value</a></span>: <span class="keyword">static</span> SizeT (const U<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="Value_28541319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">Value</a></span>: <span class="keyword">static</span> SizeT (const U&amp; );
+</code>
 </td></tr>
 </table>
 

@@ -7,15 +7,15 @@
 
 
 <h2><code>Luhn</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Checks whether a string of digits is a valid credit card number.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">IsValidCreditCardNumber</a></span>: <span class="keyword">static</span> bool (const String<b>&amp;</b> s);</code>
+<code> <span class="method"><a href="#">IsValidCreditCardNumber</a></span>: <span class="keyword">static</span> bool (const String&amp; s);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Generate the check digit of a string using the `Luhn mode 10` algorithm.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Mod10</a></span>: <span class="keyword">static</span> int (const String<b>&amp;</b> s);</code>
+<code> <span class="method"><a href="#">Mod10</a></span>: <span class="keyword">static</span> int (const String&amp; s);
+</code>
 </td></tr>
 </table>
 

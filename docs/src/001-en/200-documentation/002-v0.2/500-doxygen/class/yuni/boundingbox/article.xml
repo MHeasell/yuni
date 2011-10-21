@@ -10,35 +10,43 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors and destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">BoundingBox</a></span>:  ();</code>
+<code> <span class="method"><a href="#">BoundingBox</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">BoundingBox</a></span>:  (const Point3D &lt; T &gt;<b>&amp;</b> min, const Point3D &lt; T &gt;<b>&amp;</b> max);</code>
+<code> <span class="method"><a href="#">BoundingBox</a></span>:  (const Point3D&lt;T&gt;&amp; min, const Point3D&lt;T&gt;&amp; max);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the minimum coordinates of the box.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">min</a></span>: const Point3D &lt; T &gt; &amp; () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">min</a></span>: const Point3D&lt;T&gt;&amp; () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the maximum coordinates of the box.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">max</a></span>: const Point3D &lt; T &gt; &amp; () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">max</a></span>: const Point3D&lt;T&gt;&amp; () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the center of the box.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">center</a></span>: const Point3D &lt; T &gt; &amp; () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">center</a></span>: const Point3D&lt;T&gt;&amp; () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add a point that can possibly grow the bounding box.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">addPoint</a></span>: void (const Point3D &lt; T &gt;<b>&amp;</b> point);</code>
+<code> <span class="method"><a href="#">addPoint</a></span>: void (const Point3D&lt;T&gt;&amp; point);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add a triangle that can possibly grow the bounding box.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">addTriangle</a></span>: void (const Triangle<b>&amp;</b> tri);</code>
+<code> <span class="method"><a href="#">addTriangle</a></span>: void (const Triangle&amp; tri);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Is the point inside the bounding box?<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">contains</a></span>: bool (const Point3D &lt; T &gt;<b>&amp;</b> point) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">contains</a></span>: bool (const Point3D&lt;T&gt;&amp; point) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reset the bounding box to 0 size.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: void (Point3D &lt; U &gt; newCenter);</code>
+<code><div id="reset_50471319137233_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">reset</a></span>: void (Point3D&lt;U&gt; newCenter);
+</code>
 </td></tr>
 </table>
 

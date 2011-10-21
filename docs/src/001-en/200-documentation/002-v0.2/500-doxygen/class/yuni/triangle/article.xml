@@ -10,43 +10,48 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Triangle</a></span>:  (const Vertex<b>&amp;</b> v1, const Vertex<b>&amp;</b> v2, const Vertex<b>&amp;</b> v3);</code>
+<code> <span class="method"><a href="#">Triangle</a></span>:  (const Vertex&amp; v1, const Vertex&amp; v2, const Vertex&amp; v3);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Triangle</a></span>:  (const Triangle<b>&amp;</b> t);</code>
+<code> <span class="method"><a href="#">Triangle</a></span>:  (const Triangle&amp; t);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Triangle</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Triangle</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Accessors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the normal (unit) vector to this triangle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">vertex1</a></span>: const Vertex &amp; () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">vertex1</a></span>: const Vertex&amp; () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the normal (unit) vector to this triangle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">vertex2</a></span>: const Vertex &amp; () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">vertex2</a></span>: const Vertex&amp; () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the normal (unit) vector to this triangle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">vertex3</a></span>: const Vertex &amp; () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">vertex3</a></span>: const Vertex&amp; () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the normal (unit) vector to this triangle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">normal</a></span>: const Vector3D &lt; float &gt; &amp; ();</code>
+<code> <span class="method"><a href="#">normal</a></span>: const Vector3D&lt;float&gt;&amp; ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; Triangle &gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Triangle&gt;;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Print the triangle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">print</a></span>: std::ostream &amp; (std::ostream<b>&amp;</b> out) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Generate the OpenGL code for this triangle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">glPrint</a></span>: std::ostream &amp; (std::ostream<b>&amp;</b> out) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">glPrint</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 

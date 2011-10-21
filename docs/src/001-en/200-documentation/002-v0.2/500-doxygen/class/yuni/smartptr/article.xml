@@ -13,19 +13,19 @@
 <code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> T;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The Storage policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">StoragePolicy</a></span>: <span class="keyword">typedef</span> StorP&lt; T &gt;;</code>
+<code><span class="method"><a href="#">StoragePolicy</a></span>: <span class="keyword">typedef</span> StorP&lt; T&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The Ownership policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">OwnershipPolicy</a></span>: <span class="keyword">typedef</span> OwspP&lt; typename StorP&lt; T &gt;:: PointerType &gt;;</code>
+<code><span class="method"><a href="#">OwnershipPolicy</a></span>: <span class="keyword">typedef</span> OwspP&lt; typename StorP&lt; T&gt;:: PointerType&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The conversion policy.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">ConversionPolicy</a></span>: <span class="keyword">typedef</span> ConvP;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The checking policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">CheckingPolicy</a></span>: <span class="keyword">typedef</span> ChckP&lt; typename StorP&lt; T &gt;:: StoredType &gt;;</code>
+<code><span class="method"><a href="#">CheckingPolicy</a></span>: <span class="keyword">typedef</span> ChckP&lt; typename StorP&lt; T&gt;:: StoredType&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The Constness policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ConstnessPolicy</a></span>: <span class="keyword">typedef</span> ConsP&lt; T &gt;;</code>
+<code><span class="method"><a href="#">ConstnessPolicy</a></span>: <span class="keyword">typedef</span> ConsP&lt; T&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">the Pointer type<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">PointerType</a></span>: <span class="keyword">typedef</span> StoragePolicy::PointerType;</code>
@@ -37,159 +37,213 @@
 <code><span class="method"><a href="#">ReferenceType</a></span>: <span class="keyword">typedef</span> StoragePolicy::ReferenceType;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The Pointer type (const)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ConstPointerType</a></span>: <span class="keyword">typedef</span> ConstnessPolicy::Type *;</code>
+<code><span class="method"><a href="#">ConstPointerType</a></span>: <span class="keyword">typedef</span> ConstnessPolicy::Type*;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The Reference type (const)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ConstReferenceType</a></span>: <span class="keyword">typedef</span> ConstnessPolicy::Type &amp;;</code>
+<code><span class="method"><a href="#">ConstReferenceType</a></span>: <span class="keyword">typedef</span> ConstnessPolicy::Type&amp;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Alias to itself.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">SmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; T, OwspP, ChckP, ConvP, StorP, ConsP &gt;;</code>
+<code><span class="method"><a href="#">SmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">A smart pointer with a const pointer.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ConstSmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; T, OwspP, ChckP, ConvP, StorP, Policy::Constness::PropagateConst &gt;;</code>
+<code><span class="method"><a href="#">ConstSmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, Policy::Constness::PropagateConst&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">A smart pointer with a non-const pointer.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">NonConstSmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; T, OwspP, ChckP, ConvP, StorP, Policy::Constness::DontPropagateConst &gt;;</code>
+<code><span class="method"><a href="#">NonConstSmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, Policy::Constness::DontPropagateConst&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The Type to use for the copy constructor.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">CopyType</a></span>: <span class="keyword">typedef</span> Static::If &lt; OwnershipPolicy::destructiveCopy, SmartPtrType , const SmartPtrType &gt;::ResultType;</code>
+<code><span class="method"><a href="#">CopyType</a></span>: <span class="keyword">typedef</span> Static::If&lt;OwnershipPolicy::destructiveCopy, SmartPtrType, const SmartPtrType&gt;::ResultType;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Vector.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; SmartPtrType &gt;;</code>
+<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; SmartPtrType&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">List.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">List</a></span>: <span class="keyword">typedef</span> std::list&lt; SmartPtrType &gt;;</code>
+<code><span class="method"><a href="#">List</a></span>: <span class="keyword">typedef</span> std::list&lt; SmartPtrType&gt;;</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  ();</code>
+<code> <span class="method"><a href="#">SmartPtr</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a given pointer, when implicit types are not allowed.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  (ExplicitStoredType ptr);</code>
+<code> <span class="method"><a href="#">SmartPtr</a></span>:  (ExplicitStoredType ptr);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a given pointer, when implicit types are allowed.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  (ImplicitStoredType ptr);</code>
+<code> <span class="method"><a href="#">SmartPtr</a></span>:  (ImplicitStoredType ptr);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a null pointer.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  (const NullPtr<b>&amp;</b> );</code>
+<code> <span class="method"><a href="#">SmartPtr</a></span>:  (const NullPtr&amp; );
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  (CopyType<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">SmartPtr</a></span>:  (CopyType&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  (const SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs);</code>
+<code><div id="SmartPtr_34421319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">SmartPtr</a></span>:  (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  (SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs);</code>
+<code><div id="SmartPtr_34471319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">SmartPtr</a></span>:  (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Move Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  (Static::MoveConstructor &lt; SmartPtrType &gt; rhs);</code>
+<code> <span class="method"><a href="#">SmartPtr</a></span>:  (Static::MoveConstructor&lt;SmartPtrType&gt; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>SmartPtr</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>SmartPtr</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Swap <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Swap from another smartptr.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">swap</a></span>: void (SmartPtr<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">swap</a></span>: void (SmartPtr&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator * / -&gt; <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: PointerType ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: PointerType ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: ConstPointerType () <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: ConstPointerType () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: ReferenceType ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: ReferenceType ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: ConstReferenceType () <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: ConstReferenceType () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator = <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: SmartPtr &amp; (CopyType<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">operator=</a></span>: SmartPtr&amp; (CopyType&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reset.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: SmartPtr &amp; (const NullPtr<b>&amp;</b> );</code>
+<code> <span class="method"><a href="#">operator=</a></span>: SmartPtr&amp; (const NullPtr&amp; );
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy from another smartptr.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: SmartPtr &amp; (const SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs);</code>
+<code><div id="operator=_34661319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">operator=</a></span>: SmartPtr&amp; (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy from another smartptr.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: SmartPtr &amp; (SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs);</code>
+<code><div id="operator=_34671319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">operator=</a></span>: SmartPtr&amp; (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Comparisons <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Operator `!` (to enable if (!mysmartptr) ...)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">operator `==`<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const NullPtr<b>&amp;</b> ) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator==</a></span>: bool (const NullPtr&amp; ) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">operator `!=`<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (const NullPtr<b>&amp;</b> ) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator!=</a></span>: bool (const NullPtr&amp; ) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">operator `==`<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code><div id="operator==_34711319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">operator==</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Operator `!=`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (const SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code><div id="operator!=_34721319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">operator!=</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Operator `&lt;`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code><div id="operator<_34731319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">operator&lt;</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Operator `&gt;`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code><div id="operator>_34741319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">operator&gt;</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Operator `&lt;=`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code><div id="operator<=_34751319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">operator&lt;=</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Operator `&gt;=`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code><div id="operator>=_34771319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">operator&gt;=</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Cast-Operator <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Cast-Operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator Static::MoveConstructor&lt; SmartPtr &gt;</a></span>:  ();</code>
+<code> <span class="method"><a href="#">operator Static::MoveConstructor&lt; SmartPtr &gt;</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Cast-Operator for `if (mySmartPtr) ...`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator AutomaticConversion *</a></span>:  () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator AutomaticConversion *</a></span>:  () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the internal stored pointer (weak pointer) by the smart pointer.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">WeakPointer</a></span>: <span class="keyword">static</span> T * (const SmartPtr<b>&amp;</b> p);</code>
+<code> <span class="method"><a href="#">WeakPointer</a></span>: <span class="keyword">static</span> T* (const SmartPtr&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Perform a dynamic_cast on a smartptr.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">DynamicCast</a></span>: <span class="keyword">static</span> S1 (SmartPtr p);</code>
+<code><div id="DynamicCast_34861319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class S1 &gt;</div>
+ <span class="method"><a href="#">DynamicCast</a></span>: <span class="keyword">static</span> S1 (SmartPtr p);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get a pointer to the object, like operator -&gt; would do.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">pointer</a></span>: PointerType ();</code>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get a pointer to the object, like operator -&gt; would do.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">pointer</a></span>: ConstPointerType () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">pointer</a></span>: PointerType ();
+</code>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone">Get a pointer to the object, like operator -&gt; would do.<div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">pointer</a></span>: ConstPointerType () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor with Dynamic casting.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  (const SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs, const DynamicCastArg<b>&amp;</b> );</code>
+<code><div id="SmartPtr_34911319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">SmartPtr</a></span>:  (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; );
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor with Dynamic casting.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">SmartPtr</a></span>:  (SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs, const DynamicCastArg<b>&amp;</b> );</code>
+<code><div id="SmartPtr_34941319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">SmartPtr</a></span>:  (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; );
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">SmartPtr</a></span>:  (typename SmartPtr &lt; T, OwspP, ChckP, ConvP, StorP, ConsP &gt;::ExplicitStoredType ptr);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="SmartPtr_34971319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
+ <span class="method"><a href="#">SmartPtr</a></span>:  (typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;::ExplicitStoredType ptr);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">SmartPtr</a></span>:  (typename SmartPtr &lt; T, OwspP, ChckP, ConvP, StorP, ConsP &gt;:: CopyType<b>&amp;</b> rhs);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="SmartPtr_35001319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
+ <span class="method"><a href="#">SmartPtr</a></span>:  (typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: CopyType&amp; rhs);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">SmartPtr</a></span>:  (SmartPtr &lt; T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1 &gt;<b>&amp;</b> rhs, const typename SmartPtr &lt; T, OwspP, ChckP, ConvP, StorP, ConsP &gt;:: DynamicCastArg<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="SmartPtr_35031319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">SmartPtr</a></span>:  (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: DynamicCastArg&amp; );
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">SmartPtr</a></span>:  (Static::MoveConstructor &lt; SmartPtr &lt; T, OwspP, ChckP, ConvP, StorP, ConsP &gt; &gt; rhs);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="SmartPtr_35081319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
+ <span class="method"><a href="#">SmartPtr</a></span>:  (Static::MoveConstructor&lt;SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;&gt; rhs);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: SmartPtr &lt; T, OwspP, ChckP, ConvP, StorP, ConsP &gt; &amp; (typename SmartPtr &lt; T, OwspP, ChckP, ConvP, StorP, ConsP &gt;:: CopyType<b>&amp;</b> rhs);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="operator=_35131319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
+ <span class="method"><a href="#">operator=</a></span>: SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;&amp; (typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: CopyType&amp; rhs);
+</code>
 </td></tr>
 </table>
 

@@ -7,40 +7,44 @@
 
 
 <h2><code>Symbol</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Handle for a symbol.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Handle</a></span>: <span class="keyword">typedef</span> void *;</code>
+<code><span class="method"><a href="#">Handle</a></span>: <span class="keyword">typedef</span> void*;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Symbol</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Symbol</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a given handle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Symbol</a></span>:  (const Handle p);</code>
+<code> <span class="method"><a href="#">Symbol</a></span>:  (const Handle p);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Symbol</a></span>:  (const Symbol<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">Symbol</a></span>:  (const Symbol&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the symbol is invalid.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">null</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">null</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the symbol is valid.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Symbol &amp; (const Symbol<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">operator=</a></span>: Symbol&amp; (const Symbol&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Symbol &amp; (const Symbol::Handle hndl);</code>
+<code> <span class="method"><a href="#">operator=</a></span>: Symbol&amp; (const Symbol::Handle hndl);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the handle of the symbol.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">ptr</a></span>: Handle () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">ptr</a></span>: Handle () <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 

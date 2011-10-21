@@ -10,94 +10,109 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">IIterator</a></span>:  ();</code>
+<code> <span class="method"><a href="#">IIterator</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">IIterator</a></span>:  (const IIterator<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">IIterator</a></span>:  (const IIterator&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>IIterator</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>IIterator</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Search paths <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Clear the list of path.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+<code> <span class="method"><a href="#">clear</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add a new entry in the search paths.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">add</a></span>: void (const StringT<b>&amp;</b> folder);</code>
+<code><div id="add_30001319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">add</a></span>: void (const StringT&amp; folder);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Execution flow <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Perform the traversing the root folder.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">start</a></span>: bool ();</code>
+<code> <span class="method"><a href="#">start</a></span>: bool ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Stop the traversing of the root folder.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">stop</a></span>: bool (const uint32 timeout);</code>
+<code> <span class="method"><a href="#">stop</a></span>: bool (const uint32 timeout);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Wait for the end of the operation (infinite amount of time)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">wait</a></span>: void ();</code>
+<code> <span class="method"><a href="#">wait</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Wait for the end of the operation.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">wait</a></span>: void (const uint32 timeout);</code>
+<code> <span class="method"><a href="#">wait</a></span>: void (const uint32 timeout);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Ask to Stop the traversing as soon as possible.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">gracefulStop</a></span>: void ();</code>
+<code> <span class="method"><a href="#">gracefulStop</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the detached thread is currently running.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">started</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">started</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">assignment<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: IIterator &amp; (const IIterator<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">operator=</a></span>: IIterator&amp; (const IIterator&amp; rhs);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone">Detached mode. The default timeout for stopping a thread.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Itself.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">IteratorType</a></span>: <span class="keyword">typedef</span> IIterator &lt; detached &gt;;</code>
+<code><span class="method"><a href="#">IteratorType</a></span>: <span class="keyword">typedef</span> IIterator&lt;detached&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The threading policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; IteratorType &gt;;</code>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;IteratorType&gt;;</code>
 </td></tr>
 <tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected <code class="doxygen_visibility">Protected</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Event : An iteration has started.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onStart</a></span>: bool (const String<b>&amp;</b> root);</code>
+<code> <span class="method"><a href="#">onStart</a></span>: bool (const String&amp; root);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Event : The operation is complete.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onTerminate</a></span>: void ();</code>
+<code> <span class="method"><a href="#">onTerminate</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The process has been aborted.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onAbort</a></span>: void ();</code>
+<code> <span class="method"><a href="#">onAbort</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Event : Starting to Traverse a new folder.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onBeginFolder</a></span>: Flow (const String<b>&amp;</b> filename, const String<b>&amp;</b> parent, const String<b>&amp;</b> name);</code>
+<code> <span class="method"><a href="#">onBeginFolder</a></span>: Flow (const String&amp; filename, const String&amp; parent, const String&amp; name);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Event : A folder has been traversed.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onEndFolder</a></span>: void (const String<b>&amp;</b> filename, const String<b>&amp;</b> parent, const String<b>&amp;</b> name);</code>
+<code> <span class="method"><a href="#">onEndFolder</a></span>: void (const String&amp; filename, const String&amp; parent, const String&amp; name);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Event : A file has been found.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onFile</a></span>: Flow (const String<b>&amp;</b> filename, const String<b>&amp;</b> parent, const String<b>&amp;</b> name, uint64 size);</code>
+<code> <span class="method"><a href="#">onFile</a></span>: Flow (const String&amp; filename, const String&amp; parent, const String&amp; name, uint64 size);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Event : It was impossible to open a folder.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onError</a></span>: Flow (const String<b>&amp;</b> filename);</code>
+<code> <span class="method"><a href="#">onError</a></span>: Flow (const String&amp; filename);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Event : It was impossible to the status of a file.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onAccessError</a></span>: Flow (const String<b>&amp;</b> filename);</code>
+<code> <span class="method"><a href="#">onAccessError</a></span>: Flow (const String&amp; filename);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected <code class="doxygen_visibility">Protected</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone">Mutex.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">pMutex</a></span>: Mutex;</code>

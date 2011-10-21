@@ -10,24 +10,29 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Allocator</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Allocator</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Allocator</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Allocator</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">allocate</a></span>: Pointer (uint64 size);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">allocate</a></span>: Pointer (uint64 size);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">release</a></span>: void (Pointer ptr);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">release</a></span>: void (Pointer ptr);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">begin</a></span>: Transaction::Handle ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">begin</a></span>: Transaction::Handle ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">commit</a></span>: bool (Transaction::Handle handle);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">commit</a></span>: bool (Transaction::Handle handle);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">rollback</a></span>: void (Transaction::Handle handle);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">rollback</a></span>: void (Transaction::Handle handle);
+</code>
 </td></tr>
 </table>
 

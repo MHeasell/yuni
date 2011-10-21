@@ -10,14 +10,14 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Table</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Table</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the key.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">KeyType</a></span>: <span class="keyword">typedef</span> KeyT;</code>
@@ -31,29 +31,41 @@
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Size.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">size_type</a></span>: <span class="keyword">typedef</span> ImplementationType::size_type;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">addOrUpdate</a></span>: iterator (const K<b>&amp;</b> key);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="addOrUpdate_1611319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class K &gt;</div>
+ <span class="method"><a href="#">addOrUpdate</a></span>: iterator (const K&amp; key);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">addOrUpdate</a></span>: iterator (const K<b>&amp;</b> key, const V<b>&amp;</b> value);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="addOrUpdate_1621319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class K , class V &gt;</div>
+ <span class="method"><a href="#">addOrUpdate</a></span>: iterator (const K&amp; key, const V&amp; value);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove all items.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+<code> <span class="method"><a href="#">clear</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Clear all deleted items (if any)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">purge</a></span>: void ();</code>
+<code> <span class="method"><a href="#">purge</a></span>: void ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">exists</a></span>: bool (const K<b>&amp;</b> key) <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="exists_1651319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class K &gt;</div>
+ <span class="method"><a href="#">exists</a></span>: bool (const K&amp; key) <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">remove</a></span>: bool (const K<b>&amp;</b> key);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="remove_1661319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class K &gt;</div>
+ <span class="method"><a href="#">remove</a></span>: bool (const K&amp; key);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">size</a></span>: size_type () <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">size</a></span>: size_type () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator[]</a></span>: ValueType &amp; (const K<b>&amp;</b> key);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="operator[]_1691319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class K &gt;</div>
+ <span class="method"><a href="#">operator[]</a></span>: ValueType&amp; (const K&amp; key);
+</code>
 </td></tr>
 </table>
 

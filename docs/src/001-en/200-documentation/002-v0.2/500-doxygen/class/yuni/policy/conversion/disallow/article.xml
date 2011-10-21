@@ -7,27 +7,24 @@
 
 
 <h2><code>Disallow</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Disallow</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Disallow</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Disallow</a></span>:  (const Allow<b>&amp;</b> );</code>
+<code> <span class="method"><a href="#">Disallow</a></span>:  (const Allow&amp; );
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">swapPointer</a></span>: <span class="keyword">static</span> void (Disallow<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">swapPointer</a></span>: <span class="keyword">static</span> void (Disallow&amp; );
+</code>
 </td></tr>
 </table>
 

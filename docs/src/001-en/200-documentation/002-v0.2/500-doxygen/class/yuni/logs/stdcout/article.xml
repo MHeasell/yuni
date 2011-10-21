@@ -7,17 +7,15 @@
 
 
 <h2><code>StdCout</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">internalDecoratorWriteWL</a></span>: void (LoggerT<b>&amp;</b> logger, const StringT<b>&amp;</b> s);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="internalDecoratorWriteWL_44721319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class LoggerT , class VerbosityType , class StringT &gt;</div>
+ <span class="method"><a href="#">internalDecoratorWriteWL</a></span>: void (LoggerT&amp; logger, const StringT&amp; s);
+</code>
 </td></tr>
 </table>
 

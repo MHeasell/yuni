@@ -10,179 +10,226 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Parent of the node <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the parent of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">parent</a></span>: Ptr ();</code>
+<code> <span class="method"><a href="#">parent</a></span>: Ptr ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the parent of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">parent</a></span>: Ptr () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">parent</a></span>: Ptr () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">ReAttach to another parent.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">parent</a></span>: void (Ptr newParent);</code>
+<code> <span class="method"><a href="#">parent</a></span>: void (Ptr newParent);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Detach the node from its parent.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">detachFromParent</a></span>: void ();</code>
+<code> <span class="method"><a href="#">detachFromParent</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Adding <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child node to the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">append</a></span>: void (Ptr<b>&amp;</b> node);</code>
+<code> <span class="method"><a href="#">append</a></span>: void (Ptr&amp; node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child node to the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">append</a></span>: void (Node<b>*</b> node);</code>
+<code> <span class="method"><a href="#">append</a></span>: void (Node* node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child node at the end.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">push_back</a></span>: void (Ptr<b>&amp;</b> node);</code>
+<code> <span class="method"><a href="#">push_back</a></span>: void (Ptr&amp; node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child node to the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">push_back</a></span>: void (Node<b>*</b> node);</code>
+<code> <span class="method"><a href="#">push_back</a></span>: void (Node* node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child node at the begining.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">push_front</a></span>: void (Ptr<b>&amp;</b> node);</code>
+<code> <span class="method"><a href="#">push_front</a></span>: void (Ptr&amp; node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child node to the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">push_front</a></span>: void (Node<b>*</b> node);</code>
+<code> <span class="method"><a href="#">push_front</a></span>: void (Node* node);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Removing <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove all children.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+<code> <span class="method"><a href="#">clear</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove a child node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">remove</a></span>: bool (Ptr<b>&amp;</b> node);</code>
+<code> <span class="method"><a href="#">remove</a></span>: bool (Ptr&amp; node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove the n-th child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">remove</a></span>: bool (const SizeType index);</code>
+<code> <span class="method"><a href="#">remove</a></span>: bool (const SizeType index);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove all children.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">remove</a></span>: bool (const SignedSizeType index);</code>
+<code> <span class="method"><a href="#">remove</a></span>: bool (const SignedSizeType index);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Searching <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the first child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">begin</a></span>: iterator ();</code>
+<code> <span class="method"><a href="#">begin</a></span>: iterator ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the first child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">begin</a></span>: const iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">begin</a></span>: const iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the last child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">end</a></span>: iterator ();</code>
+<code> <span class="method"><a href="#">end</a></span>: iterator ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the first child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">end</a></span>: const iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">end</a></span>: const iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Find the n-th child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">find</a></span>: Ptr (const SizeType index);</code>
+<code> <span class="method"><a href="#">find</a></span>: Ptr (const SizeType index);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the first child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">find</a></span>: Ptr (const SignedSizeType index);</code>
+<code> <span class="method"><a href="#">find</a></span>: Ptr (const SignedSizeType index);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the node has children.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the first child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">count</a></span>: SizeType () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">count</a></span>: SizeType () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Alias for count()<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">size</a></span>: SizeType () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">size</a></span>: SizeType () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the first child.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">firstChild</a></span>: Ptr ();</code>
+<code> <span class="method"><a href="#">firstChild</a></span>: Ptr ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the first child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">firstChild</a></span>: const Ptr () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">firstChild</a></span>: const Ptr () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the last child.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">lastChild</a></span>: Ptr ();</code>
+<code> <span class="method"><a href="#">lastChild</a></span>: Ptr ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the first child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">lastChild</a></span>: const Ptr () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">lastChild</a></span>: const Ptr () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the previous sibling.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">previousSibling</a></span>: Ptr ();</code>
+<code> <span class="method"><a href="#">previousSibling</a></span>: Ptr ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the first child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">previousSibling</a></span>: const Ptr () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">previousSibling</a></span>: const Ptr () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the next sibling.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">nextSibling</a></span>: Ptr ();</code>
+<code> <span class="method"><a href="#">nextSibling</a></span>: Ptr ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Return iterator to the first child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">nextSibling</a></span>: const Ptr () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">nextSibling</a></span>: const Ptr () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Extra <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the node is a leaf.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">leaf</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">leaf</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Computes the depth of this node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">depth</a></span>: SizeType () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">depth</a></span>: SizeType () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Computes the height from this node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">treeHeight</a></span>: SizeType ();</code>
+<code> <span class="method"><a href="#">treeHeight</a></span>: SizeType ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Comparisons <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Test if the current node is equals to another one.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">equals</a></span>: bool (const Ptr<b>&amp;</b> node) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">equals</a></span>: bool (const Ptr&amp; node) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Z-Order <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Move the node to the end.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">bringToFront</a></span>: void ();</code>
+<code> <span class="method"><a href="#">bringToFront</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Move the node to the begining.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">sendToBack</a></span>: void ();</code>
+<code> <span class="method"><a href="#">sendToBack</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Schedule an asynchronous update of the item (depending upon the implementation)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">invalidate</a></span>: void ();</code>
+<code> <span class="method"><a href="#">invalidate</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the item is invalidated (depending upon the implementation)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">isInvalidated</a></span>: bool ();</code>
+<code> <span class="method"><a href="#">isInvalidated</a></span>: bool ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child at the end.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Node &amp; (Ptr<b>&amp;</b> node);</code>
+<code> <span class="method"><a href="#">operator+=</a></span>: Node&amp; (Ptr&amp; node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child at the end.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Node &amp; (Node<b>*</b> node);</code>
+<code> <span class="method"><a href="#">operator+=</a></span>: Node&amp; (Node* node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove a child node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator-=</a></span>: Node &amp; (Ptr<b>&amp;</b> node);</code>
+<code> <span class="method"><a href="#">operator-=</a></span>: Node&amp; (Ptr&amp; node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child at the end.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Node &amp; (Ptr<b>&amp;</b> node);</code>
+<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Node&amp; (Ptr&amp; node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append a child at the end.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Node &amp; (Node<b>*</b> node);</code>
+<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Node&amp; (Node* node);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Comparison with another node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: Node &amp; (const Ptr<b>&amp;</b> node) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator==</a></span>: Node&amp; (const Ptr&amp; node) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the n-th child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator[]</a></span>: Ptr (const SizeType index);</code>
+<code> <span class="method"><a href="#">operator[]</a></span>: Ptr (const SizeType index);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the n-th child of the node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator[]</a></span>: Ptr (const SignedSizeType index);</code>
+<code> <span class="method"><a href="#">operator[]</a></span>: Ptr (const SignedSizeType index);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Pointer management <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Increment the internal reference counter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">addRef</a></span>: void () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">addRef</a></span>: void () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Decrement the internal reference counter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">release</a></span>: void () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">release</a></span>: void () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone">A markdown document. A document header. TOC (Table Of Content) Body for a document. Header (level 1, block) Header (level 2, block) Header (level 3, block) Header (level 4, block) Header (level 5, block) Header (level 6, block) Raw text. Paragraph. Quote. Emphasis. Bold (inline) Horizontal line. Unordered list. Ordered list. List item (ordered or unordered) Line break (br) Pragma directive. Number of items. Type for a single node.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Our ancestor.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">AncestorType</a></span>: <span class="keyword">typedef</span> Core::TreeN &lt; Node , Policy::SingleThreaded &gt;;</code>
+<code><span class="method"><a href="#">AncestorType</a></span>: <span class="keyword">typedef</span> Core::TreeN&lt;Node, Policy::SingleThreaded&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Smart pointer.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> AncestorType::Ptr;</code>
@@ -191,16 +238,16 @@
 <code><span class="method"><a href="#">Node</a></span>: <span class="keyword">typedef</span> Node;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The template class tree node.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">TreeNNode</a></span>: <span class="keyword">typedef</span> TreeN&lt; Node , Policy::SingleThreaded , Policy::Checking::None , Policy::Conversion::Allow &gt;;</code>
+<code><span class="method"><a href="#">TreeNNode</a></span>: <span class="keyword">typedef</span> TreeN&lt; Node, Policy::SingleThreaded, Policy::Checking::None, Policy::Conversion::Allow&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The threading policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::SingleThreaded &lt; TreeNNode &gt;;</code>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::SingleThreaded&lt;TreeNNode&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">A thread-safe node type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">PtrThreadSafe</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; Node , Policy::Ownership::COMReferenceCounted , Policy::Checking::None , Policy::Conversion::Allow &gt;;</code>
+<code><span class="method"><a href="#">PtrThreadSafe</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Node, Policy::Ownership::COMReferenceCounted, Policy::Checking::None, Policy::Conversion::Allow&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">A default node type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">PtrSingleThreaded</a></span>: <span class="keyword">typedef</span> SmartPtr &lt; Node , Policy::Ownership::COMReferenceCounted , Policy::Checking::None , Policy::Conversion::Allow &gt;;</code>
+<code><span class="method"><a href="#">PtrSingleThreaded</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Node, Policy::Ownership::COMReferenceCounted, Policy::Checking::None, Policy::Conversion::Allow&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The Storage policy.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">StoragePolicy</a></span>: <span class="keyword">typedef</span> Ptr::StoragePolicy;</code>
@@ -230,17 +277,15 @@
 <code><span class="method"><a href="#">SignedSizeType</a></span>: <span class="keyword">typedef</span> int;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">A vector of nodes (std::vector)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr &gt;;</code>
+<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">A list of nodes (std::list)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">List</a></span>: <span class="keyword">typedef</span> std::list&lt; Ptr &gt;;</code>
+<code><span class="method"><a href="#">List</a></span>: <span class="keyword">typedef</span> std::list&lt; Ptr&gt;;</code>
 </td></tr>
 <tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">type</a></span>: Type;</code>
 </td></tr>
@@ -250,87 +295,41 @@
 <tr><td class="doxygen_var"></td><td class="doxnone">ID of the node.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">id</a></span>: String;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Convert a node type into a mere c-string.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">TypeToCString</a></span>: <span class="keyword">static</span> const char * (Type t);</code>
+<code> <span class="method"><a href="#">TypeToCString</a></span>: <span class="keyword">static</span> const char* (Type t);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if a type is a block.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">ShouldAppendAParagraphNode</a></span>: <span class="keyword">static</span> bool (Type t);</code>
+<code> <span class="method"><a href="#">ShouldAppendAParagraphNode</a></span>: <span class="keyword">static</span> bool (Type t);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Node</a></span>:  ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Node</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Node</a></span>:  (const Type t);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Node</a></span>:  (const Type t);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Node</a></span>:  (const Type t, const StringT<b>&amp;</b> text);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="Node_47191319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">Node</a></span>:  (const Type t, const StringT&amp; text);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>Node</a></span>:  ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>Node</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">dump</a></span>: void (StreamT<b>&amp;</b> out, unsigned int level) <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="dump_47211319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
+ <span class="method"><a href="#">dump</a></span>: void (StreamT&amp; out, unsigned int level) <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">flattenText</a></span>: void (String<b>&amp;</b> out) <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">flattenText</a></span>: void (String&amp; out) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Print the entire tree to the output stream.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">print</a></span>: std::ostream &amp; (std::ostream<b>&amp;</b> out, bool recursive, unsigned int level);</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Parent.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pParent</a></span>: Node *;</code>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">How many children do we have ?<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pChildrenCount</a></span>: SizeType;</code>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The previous sibling.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pPreviousSibling</a></span>: Ptr;</code>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The next sibling.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pNextSibling</a></span>: Ptr;</code>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The first child.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pFirstChild</a></span>: Ptr;</code>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The last child.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pLastChild</a></span>: Ptr;</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Invalidate the item.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">invalidateWL</a></span>: void ();</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the item is invalidated.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">isInvalidatedWL</a></span>: bool ();</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">(only used for debugging)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">printBeginWL</a></span>: void (std::ostream<b>&amp;</b> out, unsigned int level) <span class="keyword">const</span>;</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">(only used for debugging)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">printEndWL</a></span>: void (std::ostream<b>&amp;</b> out, unsigned int level) <span class="keyword">const</span>;</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove all children.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clearWL</a></span>: void ();</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Append a child to the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">pushBackWL</a></span>: void (Ptr<b>&amp;</b> node);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Append a child to the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">pushFrontWL</a></span>: void (Ptr<b>&amp;</b> node);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Detach from the parent.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">detachFromParentWL</a></span>: void ();</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Find a child node from its index (slow)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">findFromIndexWL</a></span>: Ptr (const SizeType index);</code>
+<code> <span class="method"><a href="#">print</a></span>: std::ostream&amp; (std::ostream&amp; out, bool recursive, unsigned int level);
+</code>
 </td></tr>
 </table>
 

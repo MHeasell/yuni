@@ -10,82 +10,106 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Port</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Port</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a given value.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Port</a></span>:  (unsigned int rhs);</code>
+<code> <span class="method"><a href="#">Port</a></span>:  (unsigned int rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Port</a></span>:  (const Port<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">Port</a></span>:  (const Port&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor from a null pointer.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Port</a></span>:  (const NullPtr<b>&amp;</b> );</code>
+<code> <span class="method"><a href="#">Port</a></span>:  (const NullPtr&amp; );
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Value <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the port number.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">value</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">value</a></span>: unsigned int () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the port is valid.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Ranges <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the port is well-known (0..1023)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">wellKnown</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">wellKnown</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the port is registered (0..49151)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">registered</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">registered</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the port is dynamic and/or private (&gt;= 49152)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">dynamic</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">dynamic</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if no port is allocated.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">none</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">none</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Port &amp; (unsigned int rhs);</code>
+<code> <span class="method"><a href="#">operator=</a></span>: Port&amp; (unsigned int rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Port &amp; (const Port<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">operator=</a></span>: Port&amp; (const Port&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Port &amp; (const Yuni::NullPtr<b>&amp;</b> );</code>
+<code> <span class="method"><a href="#">operator=</a></span>: Port&amp; (const Yuni::NullPtr&amp; );
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Append.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Port &amp; (unsigned int rhs);</code>
+<code> <span class="method"><a href="#">operator+=</a></span>: Port&amp; (unsigned int rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Sub.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator-=</a></span>: Port &amp; (unsigned int rhs);</code>
+<code> <span class="method"><a href="#">operator-=</a></span>: Port&amp; (unsigned int rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Comparison.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (unsigned int rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator==</a></span>: bool (unsigned int rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const Port<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator==</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (unsigned int rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator!=</a></span>: bool (unsigned int rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Port<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Inequality.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Port<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Port<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Port<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Port<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 

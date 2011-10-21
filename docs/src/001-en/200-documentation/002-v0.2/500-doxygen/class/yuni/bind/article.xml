@@ -10,20 +10,22 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Bind</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Bind</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Bind</a></span>:  (const Bind<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">Bind</a></span>:  (const Bind&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Bind</a></span>:  (const Yuni::DynamicLibrary::Symbol<b>&amp;</b> symbol);</code>
+<code> <span class="method"><a href="#">Bind</a></span>:  (const Yuni::DynamicLibrary::Symbol&amp; symbol);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Bind</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Bind</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 </table>
 

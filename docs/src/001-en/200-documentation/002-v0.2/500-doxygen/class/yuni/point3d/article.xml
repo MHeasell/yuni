@@ -10,16 +10,23 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Point3D</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Point3D</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Point3D</a></span>:  (const U x1, const V y1);</code>
+<code><div id="Point3D_24291319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">Point3D</a></span>:  (const U x1, const V y1);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Point3D</a></span>:  (const U x1, const V y1, const W z1);</code>
+<code><div id="Point3D_24301319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;</div>
+ <span class="method"><a href="#">Point3D</a></span>:  (const U x1, const V y1, const W z1);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor by copy.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Point3D</a></span>:  (const Point3D &lt; U &gt;<b>&amp;</b> p);</code>
+<code><div id="Point3D_24321319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">Point3D</a></span>:  (const Point3D&lt;U&gt;&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
@@ -33,72 +40,107 @@
 <code><span class="method"><a href="#">z</a></span>: T;</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reset all coordinates.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator()</a></span>: void (const U x1, const V y1, const W z1);</code>
+<code><div id="operator()_24391319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;</div>
+ <span class="method"><a href="#">operator()</a></span>: void (const U x1, const V y1, const W z1);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy all coordinates from another point.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator()</a></span>: void (const Point3D &lt; U &gt;<b>&amp;</b> p);</code>
+<code><div id="operator()_24411319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">operator()</a></span>: void (const Point3D&lt;U&gt;&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Translate the point with the same value for all coordinates.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Point3D &lt; T &gt; &amp; (const U k);</code>
+<code><div id="operator+=_24421319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">operator+=</a></span>: Point3D&lt;T&gt;&amp; (const U k);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Translate the point with relative coordinates.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Point3D &lt; T &gt; &amp; (const Point3D &lt; U &gt;<b>&amp;</b> p);</code>
+<code><div id="operator+=_24431319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">operator+=</a></span>: Point3D&lt;T&gt;&amp; (const Point3D&lt;U&gt;&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (equal with)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const Point3D &lt; U &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code><div id="operator==_24441319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">operator==</a></span>: bool (const Point3D&lt;U&gt;&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (non equal with)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Point3D &lt; U &gt;<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code><div id="operator!=_24451319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">operator!=</a></span>: bool (const Point3D&lt;U&gt;&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assign new values for all coordinates from another point.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Point3D &amp; (const Point3D<b>&amp;</b> p);</code>
+<code><div id="operator=_24461319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">operator=</a></span>: Point3D&amp; (const Point3D&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assign new values for all coordinates from another point.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Point3D &lt; T &gt; &amp; (const Point3D &lt; U &gt;<b>&amp;</b> p);</code>
+<code><div id="operator=_24471319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">operator=</a></span>: Point3D&lt;T&gt;&amp; (const Point3D&lt;U&gt;&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Print the point.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">print</a></span>: StreamT &amp; (StreamT<b>&amp;</b> out) <span class="keyword">const</span>;</code>
+<code><div id="print_24481319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
+ <span class="method"><a href="#">print</a></span>: StreamT&amp; (StreamT&amp; out) <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Calculate the mean between two points.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Mean</a></span>: <span class="keyword">static</span> Point3D &lt; T &gt; &amp; (const Point3D &lt; U &gt;<b>&amp;</b> p1, const Point3D &lt; V &gt;<b>&amp;</b> p2);</code>
+<code><div id="Mean_24491319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">Mean</a></span>: <span class="keyword">static</span> Point3D&lt;T&gt;&amp; (const Point3D&lt;U&gt;&amp; p1, const Point3D&lt;V&gt;&amp; p2);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reset the point to origin.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: Point3D &lt; T &gt; &amp; ();</code>
+<code> <span class="method"><a href="#">reset</a></span>: Point3D&lt;T&gt;&amp; ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Move the point to new coordinates.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">move</a></span>: void (const U x1, const V y1, const W z1);</code>
+<code><div id="move_24511319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;</div>
+ <span class="method"><a href="#">move</a></span>: void (const U x1, const V y1, const W z1);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Move the point to new coordinates.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">move</a></span>: void (const Point3D &lt; U &gt;<b>&amp;</b> p);</code>
+<code><div id="move_24521319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">move</a></span>: void (const Point3D&lt;U&gt;&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Translate the point with the same value for all coordinates.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">translate</a></span>: void (const U k);</code>
+<code><div id="translate_24531319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">translate</a></span>: void (const U k);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Translate the point with relative coordinates.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">translate</a></span>: void (const U x1, const V y1, const W z1);</code>
+<code><div id="translate_24541319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;</div>
+ <span class="method"><a href="#">translate</a></span>: void (const U x1, const V y1, const W z1);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Translate the point with relative coordinates from another Point.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">translate</a></span>: void (const Point3D &lt; U &gt;<b>&amp;</b> p);</code>
+<code><div id="translate_24551319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">translate</a></span>: void (const Point3D&lt;U&gt;&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Calculate the mean between two points The calling object is modified to store the value.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">mean</a></span>: void (const Point3D &lt; U &gt;<b>&amp;</b> p);</code>
+<code><div id="mean_24561319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">mean</a></span>: void (const Point3D&lt;U&gt;&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Calculate the mean between two points.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">mean</a></span>: Point3D &lt; T &gt; &amp; (const Point3D &lt; U &gt;<b>&amp;</b> p1, const Point3D &lt; V &gt;<b>&amp;</b> p2);</code>
+<code><div id="mean_24571319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">mean</a></span>: Point3D&lt;T&gt;&amp; (const Point3D&lt;U&gt;&amp; p1, const Point3D&lt;V&gt;&amp; p2);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the point is close to another point.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">closeTo</a></span>: bool (const Point3D &lt; U &gt;<b>&amp;</b> rhs, const V delta) <span class="keyword">const</span>;</code>
+<code><div id="closeTo_24581319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">closeTo</a></span>: bool (const Point3D&lt;U&gt;&amp; rhs, const V delta) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the point is close to another point.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">closeTo</a></span>: bool (const U x1, const V y1, const W z1, const D delta) <span class="keyword">const</span>;</code>
+<code><div id="closeTo_24611319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V , typename W , typename D &gt;</div>
+ <span class="method"><a href="#">closeTo</a></span>: bool (const U x1, const V y1, const W z1, const D delta) <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 

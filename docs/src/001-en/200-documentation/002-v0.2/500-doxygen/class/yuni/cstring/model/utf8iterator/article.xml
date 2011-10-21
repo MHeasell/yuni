@@ -7,9 +7,7 @@
 
 
 <h2><code>UTF8Iterator</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone">A non-zero value if the iterator can go forward. A non-zero value if the iterator can go backward.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
@@ -26,54 +24,28 @@
 <tr><td class="doxygen_typedef"></td><td class="doxnone">A signed integral type.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">difference_type</a></span>: <span class="keyword">typedef</span> CStringType::difference_type;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the current offset in the string.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">offset</a></span>: Size () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">offset</a></span>: Size () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get a reference to the original string.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">string</a></span>: StringType &amp; ();</code>
+<code> <span class="method"><a href="#">string</a></span>: StringType&amp; ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">string</a></span>: const StringType &amp; () <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">string</a></span>: const StringType&amp; () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the current offset in the string.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">rawOffset</a></span>: Size () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">rawOffset</a></span>: Size () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">findFirstNonSpace</a></span>: bool (const Size end);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">findFirstNonSpace</a></span>: bool (const Size end);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">find</a></span>: bool (const char c, const Size endOffset);</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">UTF8Iterator</a></span>:  (const StringType<b>&amp;</b> s, size_type offset);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">UTF8Iterator</a></span>:  (const NullIterator<b>&amp;</b> s);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">UTF8Iterator</a></span>:  (const StringType<b>&amp;</b> s);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">UTF8Iterator</a></span>:  (const UTF8Iterator<b>&amp;</b> copy);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">forward</a></span>: void ();</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">forward</a></span>: void (difference_type n);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">reset</a></span>: void (const ModelT<b>&amp;</b> model);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">distance</a></span>: difference_type (const ModelT<b>&amp;</b> model) <span class="keyword">const</span>;</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">equals</a></span>: bool (const ModelT<b>&amp;</b> model) <span class="keyword">const</span>;</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: UTF8::Char &amp; ();</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: const UTF8::Char &amp; () <span class="keyword">const</span>;</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: UTF8::Char * ();</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: const UTF8::Char * () <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">find</a></span>: bool (const char c, const Size endOffset);
+</code>
 </td></tr>
 </table>
 

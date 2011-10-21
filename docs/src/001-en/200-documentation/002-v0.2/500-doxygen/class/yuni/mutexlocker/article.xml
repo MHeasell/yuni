@@ -10,10 +10,12 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">MutexLocker</a></span>:  (Mutex<b>&amp;</b> m);</code>
+<code> <span class="method"><a href="#">MutexLocker</a></span>:  (Mutex&amp; m);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>MutexLocker</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>MutexLocker</a></span>:  ();
+</code>
 </td></tr>
 </table>
 

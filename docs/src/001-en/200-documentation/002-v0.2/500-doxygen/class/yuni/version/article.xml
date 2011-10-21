@@ -10,70 +10,86 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Version</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Version</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a given version.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Version</a></span>:  (unsigned int h);</code>
+<code> <span class="method"><a href="#">Version</a></span>:  (unsigned int h);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a given version.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Version</a></span>:  (unsigned int h, unsigned int l);</code>
+<code> <span class="method"><a href="#">Version</a></span>:  (unsigned int h, unsigned int l);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a given version.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Version</a></span>:  (unsigned int h, unsigned int l, unsigned int r);</code>
+<code> <span class="method"><a href="#">Version</a></span>:  (unsigned int h, unsigned int l, unsigned int r);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Version</a></span>:  (const Version<b>&amp;</b> c);</code>
+<code> <span class="method"><a href="#">Version</a></span>:  (const Version&amp; c);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Conversions <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the version in an human-readable string.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">toString</a></span>: String () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">toString</a></span>: String () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Comparisons <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the version is null.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">null</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">null</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Check if this version is less than another one.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">isLessThan</a></span>: bool (const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">isLessThan</a></span>: bool (const Version&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Check if this version is equal to another one.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">isEqualTo</a></span>: bool (const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">isEqualTo</a></span>: bool (const Version&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Check if this version is greater than another one.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">isGreaterThan</a></span>: bool (const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">isGreaterThan</a></span>: bool (const Version&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">ostream <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Print the version to a ostream.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">print</a></span>: void (std::ostream<b>&amp;</b> out) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">print</a></span>: void (std::ostream&amp; out) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator &lt;.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Version&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator &lt;=.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Version&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator &gt;<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Version&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator &lt;=.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Version&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator ==.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator==</a></span>: bool (const Version&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator !=.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Version<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Version&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator =.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Version &amp; (const Version<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">operator=</a></span>: Version&amp; (const Version&amp; rhs);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone">The major version number.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">hi</a></span>: unsigned int;</code>
@@ -84,12 +100,11 @@
 <tr><td class="doxygen_var"></td><td class="doxnone">Revision.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">revision</a></span>: unsigned int;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the version of the Yuni Library.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">InternalLib</a></span>: <span class="keyword">static</span> void (Version<b>&amp;</b> v);</code>
+<code> <span class="method"><a href="#">InternalLib</a></span>: <span class="keyword">static</span> void (Version&amp; v);
+</code>
 </td></tr>
 </table>
 

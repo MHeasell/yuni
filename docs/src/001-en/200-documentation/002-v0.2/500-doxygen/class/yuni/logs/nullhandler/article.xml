@@ -7,11 +7,11 @@
 
 
 <h2><code>NullHandler</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">internalDecoratorWriteWL</a></span>: <span class="keyword">static</span> void (LoggerT<b>&amp;</b> , const StringT<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="internalDecoratorWriteWL_70511319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class LoggerT , class VerbosityType , class StringT &gt;</div>
+ <span class="method"><a href="#">internalDecoratorWriteWL</a></span>: <span class="keyword">static</span> void (LoggerT&amp; , const StringT&amp; );
+</code>
 </td></tr>
 </table>
 

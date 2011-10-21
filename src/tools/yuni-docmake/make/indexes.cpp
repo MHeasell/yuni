@@ -271,7 +271,6 @@ namespace DocIndex
 			return;
 
 		CString<256> query;
-		const char* message;
 
 		// Delete the article, and all its data
 		query.clear() << "DELETE FROM articles WHERE rel_path = $1;";

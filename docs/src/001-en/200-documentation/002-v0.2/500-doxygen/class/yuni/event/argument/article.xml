@@ -7,12 +7,10 @@
 
 
 <h2><code>Argument</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the argument at position I (zero-based)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> BindType::template Argument &lt; I &gt;:: Type;</code>
+<code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> BindType::template Argument&lt;I&gt;:: Type;</code>
 </td></tr>
 </table>
 

@@ -7,15 +7,16 @@
 
 
 <h2><code>EmptyConstructor</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Creation of the data.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Create</a></span>: <span class="keyword">static</span> T * ();</code>
+<code> <span class="method"><a href="#">Create</a></span>: <span class="keyword">static</span> T* ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destruction of the data.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Destroy</a></span>: <span class="keyword">static</span> void (U<b>*</b> data);</code>
+<code><div id="Destroy_57921319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">Destroy</a></span>: <span class="keyword">static</span> void (U* data);
+</code>
 </td></tr>
 </table>
 

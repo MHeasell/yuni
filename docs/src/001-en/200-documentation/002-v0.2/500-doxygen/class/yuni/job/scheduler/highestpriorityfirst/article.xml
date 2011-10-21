@@ -10,57 +10,35 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">HighestPriorityFirst</a></span>:  (Private::QueueService::WaitingRoom<b>&amp;</b> room);</code>
+<code> <span class="method"><a href="#">HighestPriorityFirst</a></span>:  (Private::QueueService::WaitingRoom&amp; room);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>HighestPriorityFirst</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>HighestPriorityFirst</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The scheduler itself.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">SchedulerType</a></span>: <span class="keyword">typedef</span> HighestPriorityFirst;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">minimumThreadCount</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">minimumThreadCount</a></span>: unsigned int () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">minimumThreadCount</a></span>: bool (unsigned int);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">minimumThreadCount</a></span>: bool (unsigned int);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">maximumThreadCount</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">maximumThreadCount</a></span>: unsigned int () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">maximumThreadCount</a></span>: bool (unsigned int n);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">maximumThreadCount</a></span>: bool (unsigned int n);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheduler is idle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">idle</a></span>: bool () <span class="keyword">const</span>;</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Start all threads to execute the jobs.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">schedulerStart</a></span>: bool ();</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Stop all working threads.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">schedulerStop</a></span>: bool (unsigned int timeout);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Event : A job has just been added into the waiting room.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">schedulerNotifyNewJobInWaitingRoom</a></span>: void (Yuni::Job::Priority );</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the next job to execute.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">nextJob</a></span>: bool (IJob::Ptr<b>&amp;</b> out);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the number of threads currently in use.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">schedulerThreadCount</a></span>: unsigned int () <span class="keyword">const</span>;</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">schedulerForeachThread</a></span>: void (PredicateT<b>&amp;</b> predicate);</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">schedulerIncrementWorkerCount</a></span>: void ();</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">schedulerDecrementWorkerCount</a></span>: void ();</code>
+<code> <span class="method"><a href="#">idle</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 

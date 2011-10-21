@@ -10,14 +10,14 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Table</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Table</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone">The table size.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
@@ -26,36 +26,40 @@
 <code><span class="method"><a href="#">Value</a></span>: <span class="keyword">typedef</span> D::Value;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The threading policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> TP&lt; Table &lt; D, TableSize, Cyclic, TP &gt; &gt;;</code>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> TP&lt; Table&lt;D, TableSize, Cyclic, TP&gt;&gt;;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reset the random number generator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: void ();</code>
+<code> <span class="method"><a href="#">reset</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the next random number.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">next</a></span>: const Value ();</code>
+<code> <span class="method"><a href="#">next</a></span>: const Value ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Fill the table with a new set of random numbers.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">fill</a></span>: void ();</code>
+<code> <span class="method"><a href="#">fill</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator `&gt;&gt;`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&gt;&gt;</a></span>: Table &amp; (U<b>&amp;</b> u);</code>
+<code><div id="operator>>_47321319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">operator&gt;&gt;</a></span>: Table&amp; (U&amp; u);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator `()`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator()</a></span>: const Value ();</code>
+<code> <span class="method"><a href="#">operator()</a></span>: const Value ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Name of the distribution.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Name</a></span>: <span class="keyword">static</span> const char * ();</code>
+<code> <span class="method"><a href="#">Name</a></span>: <span class="keyword">static</span> const char* ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the number of random number in the table.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">size</a></span>: <span class="keyword">static</span> int ();</code>
+<code> <span class="method"><a href="#">size</a></span>: <span class="keyword">static</span> int ();
+</code>
 </td></tr>
 </table>
 

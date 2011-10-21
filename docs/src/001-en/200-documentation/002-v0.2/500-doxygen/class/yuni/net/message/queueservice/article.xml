@@ -10,42 +10,54 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">QueueService</a></span>:  ();</code>
+<code> <span class="method"><a href="#">QueueService</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>QueueService</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>QueueService</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Addresses management <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">listen</a></span>: Error (const StringAdapter<b>&amp;</b> address, const Port<b>&amp;</b> port, TransportLayer transport);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">listen</a></span>: Error (const StringAdapter&amp; address, const Port&amp; port, TransportLayer transport);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add a new address where the server should listen for incoming connections.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">listen</a></span>: Error (const StringAdapter<b>&amp;</b> address, const Port<b>&amp;</b> port, Transport::ITransport::Ptr transport);</code>
+<code> <span class="method"><a href="#">listen</a></span>: Error (const StringAdapter&amp; address, const Port&amp; port, Transport::ITransport::Ptr transport);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Clear all addresses where the server should listen for incoming connections.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+<code> <span class="method"><a href="#">clear</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Service management <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Try to start the queue service.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">start</a></span>: Error ();</code>
+<code> <span class="method"><a href="#">start</a></span>: Error ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Stop the server.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">stop</a></span>: Error ();</code>
+<code> <span class="method"><a href="#">stop</a></span>: Error ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Messages <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Send a message to all peers.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">sendAll</a></span>: Error (const StringT<b>&amp;</b> buffer);</code>
+<code><div id="sendAll_27381319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">sendAll</a></span>: Error (const StringT&amp; buffer);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Send a raw buffer as message to all peers.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">sendAll</a></span>: Error (const char<b>*</b>const buffer, unsigned int length);</code>
+<code> <span class="method"><a href="#">sendAll</a></span>: Error (const char*const buffer, unsigned int length);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the maximum size (in bytes) of a message.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">messageMaxSize</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">messageMaxSize</a></span>: unsigned int () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Set the maximum size (in bytes, &gt; 0) of a message.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">messageMaxSize</a></span>: bool (unsigned int size);</code>
+<code> <span class="method"><a href="#">messageMaxSize</a></span>: bool (unsigned int size);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Events <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
@@ -65,70 +77,43 @@
 <code><span class="method"><a href="#">onError</a></span>: OnError;</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Event : A client try to connect to the server.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onClientAccept</a></span>: OnClientAccept ();</code>
+<code> <span class="method"><a href="#">onClientAccept</a></span>: OnClientAccept ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone">The queue service is currently stopped. The queue service is currently starting. The queue service is working. The queue service is current stopping its work. Different states of a queue service.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The threading policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; QueueService &gt;;</code>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;QueueService&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Prototype event: The queue service is starting.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">OnStarting</a></span>: <span class="keyword">typedef</span> Event &lt; void( Error &amp;)&gt;;</code>
+<code><span class="method"><a href="#">OnStarting</a></span>: <span class="keyword">typedef</span> Event&lt;void( Error&amp;)&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Prototype event: The queue service has started.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">OnStarted</a></span>: <span class="keyword">typedef</span> Event &lt; void()&gt;;</code>
+<code><span class="method"><a href="#">OnStarted</a></span>: <span class="keyword">typedef</span> Event&lt;void()&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Prototype event: The queue service is stopping.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">OnStopping</a></span>: <span class="keyword">typedef</span> Event &lt; void()&gt;;</code>
+<code><span class="method"><a href="#">OnStopping</a></span>: <span class="keyword">typedef</span> Event&lt;void()&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Prototype event: The queue service has been stopped.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">OnStopped</a></span>: <span class="keyword">typedef</span> Event &lt; void()&gt;;</code>
+<code><span class="method"><a href="#">OnStopped</a></span>: <span class="keyword">typedef</span> Event&lt;void()&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Prototype event: An error has occured.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">OnError</a></span>: <span class="keyword">typedef</span> Event &lt; void( State , Error )&gt;;</code>
+<code><span class="method"><a href="#">OnError</a></span>: <span class="keyword">typedef</span> Event&lt;void( State, Error )&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Prototype event: accepting a client.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">OnClientAccept</a></span>: <span class="keyword">typedef</span> Event &lt; void(bool &amp;, const String &amp;, Port , const String &amp;, Port )&gt;;</code>
+<code><span class="method"><a href="#">OnClientAccept</a></span>: <span class="keyword">typedef</span> Event&lt;void(bool&amp;, const String&amp;, Port, const String&amp;, Port )&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Prototype event: A client has connected.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">OnClientConnected</a></span>: <span class="keyword">typedef</span> Event &lt; void(const IConnection::Ptr &amp;)&gt;;</code>
+<code><span class="method"><a href="#">OnClientConnected</a></span>: <span class="keyword">typedef</span> Event&lt;void(const IConnection::Ptr&amp;)&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Prototype event: A client has disconnected.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">OnClientDisconnected</a></span>: <span class="keyword">typedef</span> Event &lt; void(const IConnection::Ptr &amp;)&gt;;</code>
+<code><span class="method"><a href="#">OnClientDisconnected</a></span>: <span class="keyword">typedef</span> Event&lt;void(const IConnection::Ptr&amp;)&gt;;</code>
 </td></tr>
 <tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Event : A client has been successfully connected to the server.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Worker</a></span>: <span class="keyword">typedef</span> Yuni::Private::Net::Message::Worker;</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">All workers.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pWorkers</a></span>: Thread::Array &lt; Worker &gt;;</code>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">All addresses to listen.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pListenInfos</a></span>: Transport::ITransport::Set;</code>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The maximum size (in bytes) of a message.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pMessageMaxSize</a></span>: unsigned int;</code>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Flag to know the state of the server.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pState</a></span>: State;</code>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Mutex.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pMutex</a></span>: Mutex;</code>
 </td></tr>
 </table>
 

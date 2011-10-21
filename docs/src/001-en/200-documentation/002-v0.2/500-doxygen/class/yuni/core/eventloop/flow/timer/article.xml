@@ -10,44 +10,40 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Timer</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Timer</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Events triggered by the public interface of the event loop (from any thread) <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The event loop has just started.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onStart</a></span>: <span class="keyword">static</span> bool ();</code>
+<code> <span class="method"><a href="#">onStart</a></span>: <span class="keyword">static</span> bool ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The event loop has just stopped.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onStop</a></span>: <span class="keyword">static</span> bool ();</code>
+<code> <span class="method"><a href="#">onStop</a></span>: <span class="keyword">static</span> bool ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">A new request has just been added into the queue.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onRequestPosted</a></span>: <span class="keyword">static</span> bool (const U<b>&amp;</b> request);</code>
+<code><div id="onRequestPosted_65241319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">onRequestPosted</a></span>: <span class="keyword">static</span> bool (const U&amp; request);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Events triggered from the main thread of the event loop <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The event loop has started a new cycle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onNewCycle</a></span>: bool ();</code>
+<code> <span class="method"><a href="#">onNewCycle</a></span>: bool ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the event loop.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">EventLoopType</a></span>: <span class="keyword">typedef</span> EventLoopT;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Set the timeout to wait between each cycle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">timeout</a></span>: void (unsigned int t);</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Event triggered from the constructor of the event loop.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onInitialize</a></span>: void (EventLoopType<b>*</b> e);</code>
+<code> <span class="method"><a href="#">timeout</a></span>: void (unsigned int t);
+</code>
 </td></tr>
 </table>
 

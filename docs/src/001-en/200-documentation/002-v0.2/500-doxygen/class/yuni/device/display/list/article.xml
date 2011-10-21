@@ -10,52 +10,62 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp;* Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">List</a></span>:  ();</code>
+<code> <span class="method"><a href="#">List</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor (the copy will share the same informations)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">List</a></span>:  (const List<b>&amp;</b> c);</code>
+<code> <span class="method"><a href="#">List</a></span>:  (const List&amp; c);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>List</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>List</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Refresh <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Refresh informations about the monitors.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">refresh</a></span>: bool (uint32 minWidth, uint32 minHeight, uint8 minDepth);</code>
+<code> <span class="method"><a href="#">refresh</a></span>: bool (uint32 minWidth, uint32 minHeight, uint8 minDepth);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Primary display <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the primary display.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">primary</a></span>: Monitor::Ptr () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">primary</a></span>: Monitor::Ptr () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Searching <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">begin</a></span>: iterator ();</code>
+<code> <span class="method"><a href="#">begin</a></span>: iterator ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">begin</a></span>: const_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">begin</a></span>: const_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">end</a></span>: iterator ();</code>
+<code> <span class="method"><a href="#">end</a></span>: iterator ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">end</a></span>: const_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">end</a></span>: const_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Find a monitor by its handle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">findByHandle</a></span>: Monitor::Ptr (const Monitor::Handle hwn) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">findByHandle</a></span>: Monitor::Ptr (const Monitor::Handle hwn) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Find a monitor by its guid.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">findByGUID</a></span>: Monitor::Ptr (const String<b>&amp;</b> guid) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">findByGUID</a></span>: Monitor::Ptr (const String&amp; guid) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Operator `=` (the copy will share the same information)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: List &amp; (const List<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">operator=</a></span>: List&amp; (const List&amp; rhs);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">An interator.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">iterator</a></span>: <span class="keyword">typedef</span> MonitorVector::iterator;</code>
@@ -63,12 +73,11 @@
 <tr><td class="doxygen_typedef"></td><td class="doxnone">A const iterator.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">const_iterator</a></span>: <span class="keyword">typedef</span> MonitorVector::const_iterator;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the number of monitors.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">size</a></span>: size_t () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">size</a></span>: size_t () <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 
