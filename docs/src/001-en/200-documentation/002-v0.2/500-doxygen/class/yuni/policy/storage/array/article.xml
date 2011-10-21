@@ -9,13 +9,18 @@
 <h2><code>Array</code></h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Array</a></span>:  ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Array</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Array</a></span>:  (const Array<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Array</a></span>:  (const Array&amp; );
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Array</a></span>:  (const Pointer &lt; U &gt;<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="Array_63921319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">Array</a></span>:  (const Pointer&lt;U&gt;&amp; );
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Array</a></span>:  (const StoredType<b>&amp;</b> p);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Array</a></span>:  (const StoredType&amp; p);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Get the data <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
@@ -28,44 +33,35 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator -&gt;<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator-&gt;</a></span>: PointerType () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator-&gt;</a></span>: PointerType () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The operator *.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator*</a></span>: ReferenceType () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator*</a></span>: ReferenceType () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The type stored.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">StoredType</a></span>: <span class="keyword">typedef</span> T *;</code>
+<code><span class="method"><a href="#">StoredType</a></span>: <span class="keyword">typedef</span> T*;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The type used by the operator -&gt;<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">PointerType</a></span>: <span class="keyword">typedef</span> T *;</code>
+<code><span class="method"><a href="#">PointerType</a></span>: <span class="keyword">typedef</span> T*;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The type used by the operator *.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ReferenceType</a></span>: <span class="keyword">typedef</span> T &amp;;</code>
+<code><span class="method"><a href="#">ReferenceType</a></span>: <span class="keyword">typedef</span> T&amp;;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The default value for this type.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">DefaultValue</a></span>: <span class="keyword">static</span> StoredType ();</code>
+<code> <span class="method"><a href="#">DefaultValue</a></span>: <span class="keyword">static</span> StoredType ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Swap the data.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">swapPointer</a></span>: void (Array<b>&amp;</b> rhs);</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destroy the inner data.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">destroy</a></span>: void ();</code>
+<code> <span class="method"><a href="#">swapPointer</a></span>: void (Array&amp; rhs);
+</code>
 </td></tr>
 </table>
 

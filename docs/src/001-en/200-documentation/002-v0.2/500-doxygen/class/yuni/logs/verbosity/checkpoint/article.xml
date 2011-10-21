@@ -7,15 +7,11 @@
 
 
 <h2><code>Checkpoint</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone">Text Color for displaying the verbosity.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">color</a></span>: const System::Console::Color;</code>
@@ -23,13 +19,14 @@
 <tr><td class="doxygen_var"></td><td class="doxnone">Message Text Color .<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">messageColor</a></span>: const System::Console::Color;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Name</a></span>: <span class="keyword">static</span> const char * ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Name</a></span>: <span class="keyword">static</span> const char* ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">AppendName</a></span>: <span class="keyword">static</span> void (U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="AppendName_50571319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">AppendName</a></span>: <span class="keyword">static</span> void (U&amp; u);
+</code>
 </td></tr>
 </table>
 

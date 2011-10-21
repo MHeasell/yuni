@@ -7,19 +7,16 @@
 
 
 <h2><code>InitData</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">signal</a></span>: Thread::Signal &amp;;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">signal</a></span>: Thread::Signal&amp;;</code>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">ready</a></span>: bool &amp;;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">ready</a></span>: bool&amp;;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">InitData</a></span>:  (Thread::Signal<b>&amp;</b> s, bool<b>&amp;</b> r);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">InitData</a></span>:  (Thread::Signal&amp; s, bool&amp; r);
+</code>
 </td></tr>
 </table>
 

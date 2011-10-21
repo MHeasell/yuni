@@ -10,34 +10,40 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Signal</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Signal</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Signal</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Signal</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Operator !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reset the internal state.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: bool ();</code>
+<code> <span class="method"><a href="#">reset</a></span>: bool ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Wait for being notified.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">wait</a></span>: void ();</code>
+<code> <span class="method"><a href="#">wait</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Wait for being notified.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">wait</a></span>: bool (unsigned int timeout);</code>
+<code> <span class="method"><a href="#">wait</a></span>: bool (unsigned int timeout);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Notify the waiter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">notify</a></span>: bool ();</code>
+<code> <span class="method"><a href="#">notify</a></span>: bool ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the signal is valid.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 

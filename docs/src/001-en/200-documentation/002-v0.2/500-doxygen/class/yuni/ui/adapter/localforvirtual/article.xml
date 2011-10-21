@@ -7,27 +7,25 @@
 
 
 <h2><code>LocalForVirtual</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">LocalForVirtual</a></span>:  ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">LocalForVirtual</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">LocalForVirtual</a></span>:  (Private::UI::Local::Adapter::LocalForRepresentation<b>*</b> forRepresentation);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">LocalForVirtual</a></span>:  (Private::UI::Local::Adapter::LocalForRepresentation* forRepresentation);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>LocalForVirtual</a></span>:  ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>LocalForVirtual</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">sendShowWindow</a></span>: void (const Yuni::UI::GUID<b>&amp;</b> applicationID, IComponent::ID id) <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">sendShowWindow</a></span>: void (const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">sendHideWindow</a></span>: void (const Yuni::UI::GUID<b>&amp;</b> applicationID, IComponent::ID id) <span class="keyword">const</span>;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">sendHideWindow</a></span>: void (const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span>;
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">sendCloseWindow</a></span>: void (const Yuni::UI::GUID<b>&amp;</b> applicationID, IComponent::ID id) <span class="keyword">const</span>;</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">pDestination</a></span>: Private::UI::Local::Adapter::ForRepresentation *;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">sendCloseWindow</a></span>: void (const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 

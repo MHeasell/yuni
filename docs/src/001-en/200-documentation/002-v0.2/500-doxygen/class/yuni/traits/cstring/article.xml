@@ -7,25 +7,23 @@
 
 
 <h2><code>CString</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone">A non-zero value if the specialization is valid. A non-zero value if the data have been converted. A non-zero value if the data is zero-terminated.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The original type without its const qualifier.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> Static::Remove::Const &lt; U &gt;:: Type;</code>
+<code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> Static::Remove::Const&lt;U&gt;:: Type;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Extension .<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ExtensionType</a></span>: <span class="keyword">typedef</span> Extension::IntoCString &lt; Type &gt;;</code>
+<code><span class="method"><a href="#">ExtensionType</a></span>: <span class="keyword">typedef</span> Extension::IntoCString&lt;Type&gt;;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get a C-String representation of an arbitrary contrainer.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Perform</a></span>: <span class="keyword">static</span> const char * (const T<b>&amp;</b> t);</code>
+<code><div id="Perform_9991319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class T &gt;</div>
+ <span class="method"><a href="#">Perform</a></span>: <span class="keyword">static</span> const char* (const T&amp; t);
+</code>
 </td></tr>
 </table>
 

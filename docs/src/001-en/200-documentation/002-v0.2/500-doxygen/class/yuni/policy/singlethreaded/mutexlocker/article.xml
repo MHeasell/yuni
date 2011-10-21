@@ -7,15 +7,17 @@
 
 
 <h2><code>MutexLocker</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">MutexLocker</a></span>:  ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">MutexLocker</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">MutexLocker</a></span>:  (const C<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="MutexLocker_61331319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class C &gt;</div>
+ <span class="method"><a href="#">MutexLocker</a></span>:  (const C&amp; );
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>MutexLocker</a></span>:  ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>MutexLocker</a></span>:  ();
+</code>
 </td></tr>
 </table>
 

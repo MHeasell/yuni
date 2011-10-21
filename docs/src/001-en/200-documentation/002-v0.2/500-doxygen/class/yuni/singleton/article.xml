@@ -7,61 +7,53 @@
 
 
 <h2><code>Singleton</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Stored singleton type.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">StoredType</a></span>: <span class="keyword">typedef</span> T;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Creation policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">CreationPolicy</a></span>: <span class="keyword">typedef</span> CreationT&lt; T &gt;;</code>
+<code><span class="method"><a href="#">CreationPolicy</a></span>: <span class="keyword">typedef</span> CreationT&lt; T&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Lifetime policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">LifetimePolicy</a></span>: <span class="keyword">typedef</span> LifetimeT&lt; T &gt;;</code>
+<code><span class="method"><a href="#">LifetimePolicy</a></span>: <span class="keyword">typedef</span> LifetimeT&lt; T&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Threading policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> ThreadingT&lt; Singleton &lt; T, CreationT, LifetimeT, ThreadingT &gt; &gt;;</code>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> ThreadingT&lt; Singleton&lt;T, CreationT, LifetimeT, ThreadingT&gt;&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Type as stored in the singleton (volatile if necessary)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Reference</a></span>: <span class="keyword">typedef</span> T &amp;;</code>
+<code><span class="method"><a href="#">Reference</a></span>: <span class="keyword">typedef</span> T&amp;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Volatile pointer.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">VolatilePtr</a></span>: <span class="keyword">typedef</span> ThreadingPolicy::template Volatile&lt; T * &gt;::Type;</code>
+<code><span class="method"><a href="#">VolatilePtr</a></span>: <span class="keyword">typedef</span> ThreadingPolicy::template Volatile&lt; T*&gt;::Type;</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the instance of this singleton.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Instance</a></span>: <span class="keyword">static</span> Reference ();</code>
+<code> <span class="method"><a href="#">Instance</a></span>: <span class="keyword">static</span> Reference ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor will fail at compile time !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Singleton</a></span>:  (const Singleton<b>&amp;</b> );</code>
+<code> <span class="method"><a href="#">Singleton</a></span>:  (const Singleton&amp; );
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment operator will fail at compile time !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Singleton &amp; (const Singleton<b>&amp;</b> );</code>
+<code> <span class="method"><a href="#">operator=</a></span>: Singleton&amp; (const Singleton&amp; );
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Address-of operator will fail at compile time !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&amp;</a></span>: Singleton &lt; T, CreationT, LifetimeT, ThreadingT &gt; * ();</code>
+<code> <span class="method"><a href="#">operator&amp;</a></span>: Singleton&lt;T, CreationT, LifetimeT, ThreadingT&gt;* ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Address-of operator will fail at compile time !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&amp;</a></span>: const Singleton * () <span class="keyword">const</span>;</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Protected constructor !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Singleton</a></span>:  ();</code>
+<code> <span class="method"><a href="#">operator&amp;</a></span>: const Singleton* () <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 

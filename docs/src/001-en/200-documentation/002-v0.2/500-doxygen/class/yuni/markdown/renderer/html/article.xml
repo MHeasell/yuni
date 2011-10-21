@@ -10,34 +10,35 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Html</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Html</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Html</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Html</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Enable / Disable nodes <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Ignore a type of node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">discard</a></span>: void (Node::Type ndtype);</code>
+<code> <span class="method"><a href="#">discard</a></span>: void (Node::Type ndtype);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Consider all types of node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">enableAllNodes</a></span>: void ();</code>
+<code> <span class="method"><a href="#">enableAllNodes</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Rendering <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">render</a></span>: bool (const Reader<b>&amp;</b> reader);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">render</a></span>: bool (const Reader&amp; reader);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
-</td></tr>
-<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone">Tags composition.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">composition</a></span>: String;</code>
@@ -47,12 +48,11 @@
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">paragraphSkipIfAlone</a></span>: bool;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reset all default values.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">resetDefaultValues</a></span>: void ();</code>
+<code> <span class="method"><a href="#">resetDefaultValues</a></span>: void ();
+</code>
 </td></tr>
 </table>
 

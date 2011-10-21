@@ -7,11 +7,9 @@
 
 
 <h2><code>All</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> Remove::Volatile &lt; typename Remove::Const &lt; typename Remove::Reference &lt; T &gt;:: Type &gt;:: Type &gt;:: Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> Remove::Volatile&lt;typename Remove::Const&lt;typename Remove::Reference&lt;T&gt;:: Type&gt;:: Type&gt;:: Type;</code>
 </td></tr>
 </table>
 

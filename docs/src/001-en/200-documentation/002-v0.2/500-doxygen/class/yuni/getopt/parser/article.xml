@@ -10,64 +10,84 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Parser</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Parser</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Parser</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Parser</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Adding an option <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add an option.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">add</a></span>: void (U<b>&amp;</b> var, const char shortName, bool visible);</code>
+<code><div id="add_50161319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">add</a></span>: void (U&amp; var, const char shortName, bool visible);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add an option.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">add</a></span>: void (U<b>&amp;</b> var, const char shortName, const S<b>&amp;</b> longName, bool visible);</code>
+<code><div id="add_50181319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class S &gt;</div>
+ <span class="method"><a href="#">add</a></span>: void (U&amp; var, const char shortName, const S&amp; longName, bool visible);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add an option.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">add</a></span>: void (U<b>&amp;</b> var, const char shortName, const S<b>&amp;</b> longName, const D<b>&amp;</b> description, bool visible);</code>
+<code><div id="add_50211319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class S , class D &gt;</div>
+ <span class="method"><a href="#">add</a></span>: void (U&amp; var, const char shortName, const S&amp; longName, const D&amp; description, bool visible);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add an option that does not require an additional parameter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">addFlag</a></span>: void (U<b>&amp;</b> var, const char shortName, bool visible);</code>
+<code><div id="addFlag_50241319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">addFlag</a></span>: void (U&amp; var, const char shortName, bool visible);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add an option that does not require an additional parameter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">addFlag</a></span>: void (U<b>&amp;</b> var, const char shortName, const S<b>&amp;</b> longName, bool visible);</code>
+<code><div id="addFlag_50261319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class S &gt;</div>
+ <span class="method"><a href="#">addFlag</a></span>: void (U&amp; var, const char shortName, const S&amp; longName, bool visible);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add an option that does not require an additional parameter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">addFlag</a></span>: void (U<b>&amp;</b> var, const char shortName, const S<b>&amp;</b> longName, const D<b>&amp;</b> description, bool visible);</code>
+<code><div id="addFlag_50271319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class S , class D &gt;</div>
+ <span class="method"><a href="#">addFlag</a></span>: void (U&amp; var, const char shortName, const S&amp; longName, const D&amp; description, bool visible);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Remaining arguments <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Set the target variable where remaining arguments will be writtent.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">remainingArguments</a></span>: void (U<b>&amp;</b> var);</code>
+<code><div id="remainingArguments_50281319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">remainingArguments</a></span>: void (U&amp; var);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Command line parsing <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Parse the command line.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator()</a></span>: bool (int argc, char<b>*</b> argv);</code>
+<code> <span class="method"><a href="#">operator()</a></span>: bool (int argc, char* argv);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Help usage <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add a text paragraph after the last added option.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">addParagraph</a></span>: void (const U<b>&amp;</b> text);</code>
+<code><div id="addParagraph_50301319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">addParagraph</a></span>: void (const U&amp; text);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Generate and display an help usage.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">helpUsage</a></span>: void (const char<b>*</b> argv0);</code>
+<code> <span class="method"><a href="#">helpUsage</a></span>: void (const char* argv0);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Errors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The count of errors that have been encountered.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">errors</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">errors</a></span>: unsigned int () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove all options.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clear</a></span>: void ();</code>
+<code> <span class="method"><a href="#">clear</a></span>: void ();
+</code>
 </td></tr>
 </table>
 

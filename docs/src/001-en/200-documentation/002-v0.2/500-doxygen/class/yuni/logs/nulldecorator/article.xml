@@ -7,11 +7,11 @@
 
 
 <h2><code>NullDecorator</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">internalDecoratorAddPrefix</a></span>: <span class="keyword">static</span> void (O<b>&amp;</b> , const StringT<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="internalDecoratorAddPrefix_34081319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class Handler , class VerbosityType , class O , class StringT &gt;</div>
+ <span class="method"><a href="#">internalDecoratorAddPrefix</a></span>: <span class="keyword">static</span> void (O&amp; , const StringT&amp; );
+</code>
 </td></tr>
 </table>
 

@@ -10,35 +10,38 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Or</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Or</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Or</a></span>:  (bool defaultValue);</code>
+<code> <span class="method"><a href="#">Or</a></span>:  (bool defaultValue);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Or</a></span>:  (const Or<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">Or</a></span>:  (const Or&amp; rhs);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the result.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">ResultType</a></span>: <span class="keyword">typedef</span> bool;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Take into account a new value.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator()</a></span>: void (const T<b>&amp;</b> v);</code>
+<code> <span class="method"><a href="#">operator()</a></span>: void (const T&amp; v);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The Final result.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">result</a></span>: ResultType () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">result</a></span>: ResultType () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reset the internal counter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: void ();</code>
+<code> <span class="method"><a href="#">reset</a></span>: void ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">reset</a></span>: void (bool v);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">reset</a></span>: void (bool v);
+</code>
 </td></tr>
 </table>
 

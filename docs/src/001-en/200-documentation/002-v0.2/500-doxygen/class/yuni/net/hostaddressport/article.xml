@@ -7,19 +7,15 @@
 
 
 <h2><code>HostAddressPort</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Vector.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; HostAddressPort &gt;;</code>
+<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; HostAddressPort&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Set.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Set</a></span>: <span class="keyword">typedef</span> std::set&lt; HostAddressPort , Compare &gt;;</code>
+<code><span class="method"><a href="#">Set</a></span>: <span class="keyword">typedef</span> std::set&lt; HostAddressPort, Compare&gt;;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone">Raw host address (IP/DNS)<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">address</a></span>: HostAddress;</code>
@@ -27,12 +23,11 @@
 <tr><td class="doxygen_var"></td><td class="doxnone">Socket port number.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">port</a></span>: Port;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reset the host address and port.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: void ();</code>
+<code> <span class="method"><a href="#">reset</a></span>: void ();
+</code>
 </td></tr>
 </table>
 

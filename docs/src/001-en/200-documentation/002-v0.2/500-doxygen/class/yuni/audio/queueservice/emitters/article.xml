@@ -7,11 +7,9 @@
 
 
 <h2><code>Emitters</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable &lt; Emitters &gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;Emitters&gt;;</code>
 </td></tr>
 <tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
@@ -21,88 +19,117 @@
 <tr><td></td><td class="doxnone">Friend declaration.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">get</a></span>: Emitter::Ptr (const StringT<b>&amp;</b> name);</code>
+<code><div id="get_34801319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">get</a></span>: Emitter::Ptr (const StringT&amp; name);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Add an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">add</a></span>: bool (const StringT<b>&amp;</b> name);</code>
+<code><div id="add_34821319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">add</a></span>: bool (const StringT&amp; name);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Attach an emitter to a buffer.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">attach</a></span>: bool (const StringT<b>&amp;</b> name, const StringT2<b>&amp;</b> attachedBuffer);</code>
+<code><div id="attach_34851319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT , typename StringT2 &gt;</div>
+ <span class="method"><a href="#">attach</a></span>: bool (const StringT&amp; name, const StringT2&amp; attachedBuffer);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Attach an emitter to a buffer.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">attach</a></span>: bool (Emitter::Ptr name, const StringT<b>&amp;</b> attachedBuffer);</code>
+<code><div id="attach_34871319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">attach</a></span>: bool (Emitter::Ptr name, const StringT&amp; attachedBuffer);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Modify an emitter's data.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">modify</a></span>: bool (const StringT<b>&amp;</b> name, bool loop);</code>
+<code><div id="modify_34901319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">modify</a></span>: bool (const StringT&amp; name, bool loop);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Modify an emitter's data.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">modify</a></span>: bool (Emitter::Ptr name, bool loop);</code>
+<code> <span class="method"><a href="#">modify</a></span>: bool (Emitter::Ptr name, bool loop);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Move an emitter around.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">move</a></span>: bool (const StringT<b>&amp;</b> name, const Point3D &lt;&gt;<b>&amp;</b> position);</code>
+<code><div id="move_34931319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Move an emitter around.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;<b>&amp;</b> position);</code>
+<code> <span class="method"><a href="#">move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Move an emitter around.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">move</a></span>: bool (const StringT<b>&amp;</b> name, const Point3D &lt;&gt;<b>&amp;</b> position, const Vector3D &lt;&gt;<b>&amp;</b> velocity, const Vector3D &lt;&gt;<b>&amp;</b> direction);</code>
+<code><div id="move_34961319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Move an emitter around.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;<b>&amp;</b> position, const Vector3D &lt;&gt;<b>&amp;</b> velocity, const Vector3D &lt;&gt;<b>&amp;</b> direction);</code>
+<code> <span class="method"><a href="#">move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get elapsed playback time on an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">elapsedTime</a></span>: sint64 (const StringT<b>&amp;</b> name);</code>
+<code><div id="elapsedTime_34991319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">elapsedTime</a></span>: sint64 (const StringT&amp; name);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get elapsed playback time on an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">elapsedTime</a></span>: sint64 (Emitter::Ptr emitter);</code>
+<code> <span class="method"><a href="#">elapsedTime</a></span>: sint64 (Emitter::Ptr emitter);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Start playback on an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">play</a></span>: bool (const StringT<b>&amp;</b> name);</code>
+<code><div id="play_35021319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">play</a></span>: bool (const StringT&amp; name);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Start playback on an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">play</a></span>: bool (Emitter::Ptr emitter);</code>
+<code> <span class="method"><a href="#">play</a></span>: bool (Emitter::Ptr emitter);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Stop playback on an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">stop</a></span>: bool (const StringT<b>&amp;</b> name);</code>
+<code><div id="stop_35051319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">stop</a></span>: bool (const StringT&amp; name);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Stop playback on an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">stop</a></span>: bool (const Emitter::Ptr<b>&amp;</b> emitter);</code>
+<code> <span class="method"><a href="#">stop</a></span>: bool (const Emitter::Ptr&amp; emitter);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">remove</a></span>: bool (const StringT<b>&amp;</b> name);</code>
+<code><div id="remove_35071319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">remove</a></span>: bool (const StringT&amp; name);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove an emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">remove</a></span>: bool (Emitter::Ptr name);</code>
+<code> <span class="method"><a href="#">remove</a></span>: bool (Emitter::Ptr name);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">get</a></span>: Emitter::Ptr (const String<b>&amp;</b> name);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">get</a></span>: Emitter::Ptr (const String&amp; name);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">add</a></span>: bool (const String<b>&amp;</b> emitterName);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">add</a></span>: bool (const String&amp; emitterName);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">attach</a></span>: bool (const String<b>&amp;</b> emitterName, const String<b>&amp;</b> bufferName);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">attach</a></span>: bool (const String&amp; emitterName, const String&amp; bufferName);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">attach</a></span>: bool (Emitter::Ptr emitter, const String<b>&amp;</b> bufferName);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">attach</a></span>: bool (Emitter::Ptr emitter, const String&amp; bufferName);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">move</a></span>: bool (const String<b>&amp;</b> emitterName, const Point3D &lt;&gt;<b>&amp;</b> position);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">move</a></span>: bool (const String&amp; emitterName, const Point3D &lt;&gt;&amp; position);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">move</a></span>: bool (const String<b>&amp;</b> emitterStr, const Point3D &lt;&gt;<b>&amp;</b> position, const Vector3D &lt;&gt;<b>&amp;</b> velocity, const Vector3D &lt;&gt;<b>&amp;</b> direction);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">move</a></span>: bool (const String&amp; emitterStr, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">elapsedTime</a></span>: sint64 (const String<b>&amp;</b> name);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">elapsedTime</a></span>: sint64 (const String&amp; name);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">play</a></span>: bool (const String<b>&amp;</b> name);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">play</a></span>: bool (const String&amp; name);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">stop</a></span>: bool (const String<b>&amp;</b> name);</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected
- <code class="doxygen_visibility">Protected
-</code></h3>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Mutex.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pMutex</a></span>: Mutex;</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">stop</a></span>: bool (const String&amp; name);
+</code>
 </td></tr>
 </table>
 

@@ -7,32 +7,36 @@
 
 
 <h2><code>File</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Try to (re)open a target log file.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">logfile</a></span>: bool (const U<b>&amp;</b> filename);</code>
+<code><div id="logfile_20491319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">logfile</a></span>: bool (const U&amp; filename);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get the last opened log file.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">logfile</a></span>: String () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">logfile</a></span>: String () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Reopen the log file.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reopenLogfile</a></span>: bool ();</code>
+<code> <span class="method"><a href="#">reopenLogfile</a></span>: bool ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Close the log file.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">closeLogfile</a></span>: void ();</code>
+<code> <span class="method"><a href="#">closeLogfile</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if a log file is opened.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">logFileIsOpened</a></span>: bool ();</code>
+<code> <span class="method"><a href="#">logFileIsOpened</a></span>: bool ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">internalDecoratorWriteWL</a></span>: void (LoggerT<b>&amp;</b> logger, const StringT<b>&amp;</b> s);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="internalDecoratorWriteWL_20541319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class LoggerT , class VerbosityType , class StringT &gt;</div>
+ <span class="method"><a href="#">internalDecoratorWriteWL</a></span>: void (LoggerT&amp; logger, const StringT&amp; s);
+</code>
 </td></tr>
 </table>
 

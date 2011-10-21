@@ -13,132 +13,166 @@
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The default iterator, for iterating through all files and folders within a directory.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator &lt; Model::Iterator &lt; itFile|itFolder &gt;, true &gt;;</code>
+<code><span class="method"><a href="#">iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFile|itFolder&gt;, true&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The default iterator, for iterating through all files within a directory.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">file_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator &lt; Model::Iterator &lt; itFile &gt;, true &gt;;</code>
+<code><span class="method"><a href="#">file_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFile&gt;, true&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The default iterator, for iterating through all folders within a directory.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">folder_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator &lt; Model::Iterator &lt; itFolder &gt;, true &gt;;</code>
+<code><span class="method"><a href="#">folder_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFolder&gt;, true&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The default iterator, for recursively iterating through all files and folders within a directory.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">recursive_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator &lt; Model::Iterator &lt; itAll &gt;, true &gt;;</code>
+<code><span class="method"><a href="#">recursive_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itAll&gt;, true&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The default iterator, for iterating through all files within a directory.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">recursive_file_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator &lt; Model::Iterator &lt; itFile|itRecursive &gt;, true &gt;;</code>
+<code><span class="method"><a href="#">recursive_file_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFile|itRecursive&gt;, true&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The default iterator, for iterating through all folders within a directory.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">recursive_folder_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator &lt; Model::Iterator &lt; itFolder|itRecursive &gt;, true &gt;;</code>
+<code><span class="method"><a href="#">recursive_folder_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFolder|itRecursive&gt;, true&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">A generic null iterator.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">null_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator &lt; Model::NullIterator , true &gt;;</code>
+<code><span class="method"><a href="#">null_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::NullIterator, true&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">begin</a></span>: iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">begin</a></span>: iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">end</a></span>: null_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">end</a></span>: null_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">file_begin</a></span>: file_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">file_begin</a></span>: file_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">file_end</a></span>: null_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">file_end</a></span>: null_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">folder_begin</a></span>: folder_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">folder_begin</a></span>: folder_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">folder_end</a></span>: null_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">folder_end</a></span>: null_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">recursive_begin</a></span>: recursive_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">recursive_begin</a></span>: recursive_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">recursive_end</a></span>: null_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">recursive_end</a></span>: null_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">recursive_file_begin</a></span>: recursive_file_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">recursive_file_begin</a></span>: recursive_file_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">recursive_file_end</a></span>: null_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">recursive_file_end</a></span>: null_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">recursive_folder_begin</a></span>: recursive_folder_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">recursive_folder_begin</a></span>: recursive_folder_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Options for performing an iteration.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">recursive_folder_end</a></span>: null_iterator () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">recursive_folder_end</a></span>: null_iterator () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Info</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Info</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Info</a></span>:  (const StringT<b>&amp;</b> directory);</code>
+<code><div id="Info_55171319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">Info</a></span>:  (const StringT&amp; directory);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Info</a></span>:  (const Info<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">Info</a></span>:  (const Info&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Common operations <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Create the directory recursively.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">create</a></span>: bool (unsigned int mode) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">create</a></span>: bool (unsigned int mode) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Remove the directory and all its content.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">remove</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">remove</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Clean the directory (remove all its content)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clean</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">clean</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy the directory and its content into another location.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">copy</a></span>: bool (const StringT<b>&amp;</b> destination) <span class="keyword">const</span>;</code>
+<code><div id="copy_55221319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">copy</a></span>: bool (const StringT&amp; destination) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Set as the current directory.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">setAsCurrentDirectory</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">setAsCurrentDirectory</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignement.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Info &amp; (const Info<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">operator=</a></span>: Info&amp; (const Info&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignment, for any types convertible into a string.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Info &amp; (const U<b>&amp;</b> rhs);</code>
+<code><div id="operator=_55251319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">operator=</a></span>: Info&amp; (const U&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Comparison.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const Info<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">operator==</a></span>: bool (const Info&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Comparison.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const U<b>&amp;</b> rhs) <span class="keyword">const</span>;</code>
+<code><div id="operator==_55271319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">operator==</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignement.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Info &amp; (const U<b>&amp;</b> rhs);</code>
+<code><div id="operator+=_55281319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">operator+=</a></span>: Info&amp; (const U&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Assignement.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Info &amp; (const U<b>&amp;</b> rhs);</code>
+<code><div id="operator<<_55291319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">operator&lt;&lt;</a></span>: Info&amp; (const U&amp; rhs);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get if the directory exists.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">exists</a></span>: bool () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">exists</a></span>: bool () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Normalize the directory path.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">normalize</a></span>: void ();</code>
+<code> <span class="method"><a href="#">normalize</a></span>: void ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Normalize the directory path.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">normalize</a></span>: void (StringT<b>&amp;</b> tmp);</code>
+<code><div id="normalize_55321319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">normalize</a></span>: void (StringT&amp; tmp);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get a reference to the directory string itself (const)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">directory</a></span>: const String &amp; () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">directory</a></span>: const String&amp; () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Get a reference to the directory string itself.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">directory</a></span>: String &amp; ();</code>
+<code> <span class="method"><a href="#">directory</a></span>: String&amp; ();
+</code>
 </td></tr>
 </table>
 

@@ -10,35 +10,37 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">DestructiveCopy</a></span>:  ();</code>
+<code> <span class="method"><a href="#">DestructiveCopy</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">DestructiveCopy</a></span>:  (const DestructiveCopy &lt; U &gt;<b>&amp;</b> );</code>
+<code><div id="DestructiveCopy_48851319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">DestructiveCopy</a></span>:  (const DestructiveCopy&lt;U&gt;&amp; );
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone">Get if the ownership policy is destructive.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Initialization from a raw pointer.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">initFromRawPointer</a></span>: void (const T<b>&amp;</b> );</code>
+<code> <span class="method"><a href="#">initFromRawPointer</a></span>: void (const T&amp; );
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Clone this object.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clone</a></span>: <span class="keyword">static</span> T (U<b>&amp;</b> rhs);</code>
+<code><div id="clone_48921319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">clone</a></span>: <span class="keyword">static</span> T (U&amp; rhs);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">release</a></span>: <span class="keyword">static</span> bool (const T<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">release</a></span>: <span class="keyword">static</span> bool (const T&amp; );
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">swapPointer</a></span>: <span class="keyword">static</span> void (DestructiveCopy<b>&amp;</b> );</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">swapPointer</a></span>: <span class="keyword">static</span> void (DestructiveCopy&amp; );
+</code>
 </td></tr>
 </table>
 

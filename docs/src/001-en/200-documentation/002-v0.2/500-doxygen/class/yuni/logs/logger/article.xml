@@ -10,80 +10,108 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Logger</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Logger</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Logger</a></span>:  (const Logger<b>&amp;</b> rhs);</code>
+<code> <span class="method"><a href="#">Logger</a></span>:  (const Logger&amp; rhs);
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Logger</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Logger</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Checkpoint <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">checkpoint</a></span>: CheckpointBuffer ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">checkpoint</a></span>: CheckpointBuffer ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">checkpoint</a></span>: CheckpointBuffer (const U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="checkpoint_461319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">checkpoint</a></span>: CheckpointBuffer (const U&amp; u);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Notice <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">notice</a></span>: NoticeBuffer ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">notice</a></span>: NoticeBuffer ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">notice</a></span>: NoticeBuffer (const U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="notice_511319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">notice</a></span>: NoticeBuffer (const U&amp; u);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Info <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">info</a></span>: InfoBuffer ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">info</a></span>: InfoBuffer ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">info</a></span>: InfoBuffer (const U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="info_551319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">info</a></span>: InfoBuffer (const U&amp; u);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Warning <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">warning</a></span>: WarningBuffer ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">warning</a></span>: WarningBuffer ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">warning</a></span>: WarningBuffer (const U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="warning_591319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">warning</a></span>: WarningBuffer (const U&amp; u);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Error <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">error</a></span>: ErrorBuffer ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">error</a></span>: ErrorBuffer ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">error</a></span>: ErrorBuffer (const U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="error_621319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">error</a></span>: ErrorBuffer (const U&amp; u);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Progress <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">progress</a></span>: ProgressBuffer ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">progress</a></span>: ProgressBuffer ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">progress</a></span>: ProgressBuffer (const U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="progress_671319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">progress</a></span>: ProgressBuffer (const U&amp; u);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Fatal <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">fatal</a></span>: FatalBuffer ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">fatal</a></span>: FatalBuffer ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">fatal</a></span>: FatalBuffer (const U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="fatal_711319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">fatal</a></span>: FatalBuffer (const U&amp; u);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Compatibility notice <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">compatibility</a></span>: CompatibilityBuffer ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">compatibility</a></span>: CompatibilityBuffer ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">compatibility</a></span>: CompatibilityBuffer (const U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="compatibility_751319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">compatibility</a></span>: CompatibilityBuffer (const U&amp; u);
+</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Debug (disabled if NDEBUG defined) <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">debug</a></span>: DebugBuffer ();</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">debug</a></span>: DebugBuffer ();
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">debug</a></span>: DebugBuffer (const U<b>&amp;</b> u);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="debug_791319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">debug</a></span>: DebugBuffer (const U&amp; u);
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td></td><td class="doxnone">The default verbose level. Settings for the logger.<div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The full prototype of the logger.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">LoggerType</a></span>: <span class="keyword">typedef</span> Logger &lt; Handlers, Decorators, TP &gt;;</code>
+<code><span class="method"><a href="#">LoggerType</a></span>: <span class="keyword">typedef</span> Logger&lt;Handlers, Decorators, TP&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">The Threading Policy .<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> TP&lt; LoggerType &gt;;</code>
+<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> TP&lt; LoggerType&gt;;</code>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Handlers.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">HandlersType</a></span>: <span class="keyword">typedef</span> Handlers;</code>
@@ -91,9 +119,7 @@
 <tr><td class="doxygen_typedef"></td><td class="doxnone">Decorators.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">DecoratorsType</a></span>: <span class="keyword">typedef</span> Decorators;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone">The current maximum verbosity level allowed to be displayed.<div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">verbosityLevel</a></span>: int;</code>
@@ -102,15 +128,17 @@
 </td></tr>
 <tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Start a custom verbosity level message.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">custom</a></span>: Private::LogImpl::Buffer&lt; LoggerType , C, C::enabled &gt; ();</code>
+<code><div id="custom_931319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class C &gt;</div>
+ <span class="method"><a href="#">custom</a></span>: Private::LogImpl::Buffer&lt; LoggerType, C, C::enabled&gt; ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Start a message with no verbosity level (always displayed)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: UnknownBuffer (const U<b>&amp;</b> u);</code>
+<code><div id="operator<<_961319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">operator&lt;&lt;</a></span>: UnknownBuffer (const U&amp; u);
+</code>
 </td></tr>
 </table>
 

@@ -7,23 +7,23 @@
 
 
 <h2><code>RGBA</code></h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> RGBType::Type;</code>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">CalculationType</a></span>: <span class="keyword">typedef</span> RGBType::template Calculation&lt; T &gt;:: Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">CalculationType</a></span>: <span class="keyword">typedef</span> RGBType::template Calculation&lt; T&gt;:: Type;</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Assign</a></span>: <span class="keyword">static</span> void (RGBType<b>&amp;</b> color, const T<b>&amp;</b> value);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Assign</a></span>: <span class="keyword">static</span> void (RGBType&amp; color, const T&amp; value);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">IsEqual</a></span>: <span class="keyword">static</span> bool (RGBType<b>&amp;</b> color, const T<b>&amp;</b> value);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">IsEqual</a></span>: <span class="keyword">static</span> bool (RGBType&amp; color, const T&amp; value);
+</code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Increase</a></span>: <span class="keyword">static</span> void (RGBType<b>&amp;</b> color, const T<b>&amp;</b> value);</code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="Increase_14981319137232_templ" style="display:none"><span class="keyword">template</span>&lt;bool PlusT&gt;</div>
+ <span class="method"><a href="#">Increase</a></span>: <span class="keyword">static</span> void (RGBType&amp; color, const T&amp; value);
+</code>
 </td></tr>
 </table>
 

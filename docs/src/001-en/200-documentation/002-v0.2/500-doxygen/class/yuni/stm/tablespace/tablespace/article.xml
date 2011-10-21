@@ -10,26 +10,30 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Tablespace</a></span>:  ();</code>
+<code> <span class="method"><a href="#">Tablespace</a></span>:  ();
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Tablespace</a></span>:  ();</code>
+<code> <span class="method"><a href="#"><b> ~ </b>Tablespace</a></span>:  ();
+</code>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public
- <code class="doxygen_visibility">Public
-</code></h3>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The current size (in bytes) of the tablespace.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">size</a></span>: uint64 () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">size</a></span>: uint64 () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The capacity of the tablespace (in bytes)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">capacity</a></span>: uint64 () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">capacity</a></span>: uint64 () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">Block size (in bytes)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">blockSize</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">blockSize</a></span>: unsigned int () <span class="keyword">const</span>;
+</code>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone">The total of blocks in the tablespace.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">blockCount</a></span>: unsigned int () <span class="keyword">const</span>;</code>
+<code> <span class="method"><a href="#">blockCount</a></span>: unsigned int () <span class="keyword">const</span>;
+</code>
 </td></tr>
 </table>
 

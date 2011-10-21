@@ -1,6 +1,7 @@
 
 #include "job-compound-writer.h"
 #include <yuni/core/system/suspend.h>
+#include <yuni/datetime/timestamp.h>
 #include "../logs.h"
 #include "options.h"
 
@@ -28,6 +29,21 @@ namespace Job
 			out.replace("&", "&amp;");
 			out.replace("<", "&lt;");
 			out.replace(">", "&gt;");
+		}
+
+		static Atomic::Int<> GenerationNumericID;
+
+
+
+		template<class StringT>
+		static void ArrangeTypename(StringT& str)
+		{
+			str.replace(" *", "*");
+			str.replace(" &amp;", "&amp;");
+			str.replace(" &lt; ", "&lt;");
+			str.replace(" &gt; ", "&gt;");
+			str.replace(" &gt;","&gt;");
+			str.replace(" , ", ", ");
 		}
 
 
@@ -119,6 +135,7 @@ namespace Job
 			String brief;
 			String paramType;
 			String paramName;
+			String id;
 			Clob out;
 			// Getting the name
 			const String& name = pCompound->name;
@@ -139,6 +156,8 @@ namespace Job
 			out << "<h2><code>" << pageTitle << "</code></h2>";
 			out << "<table class=\"doxygen_table\">\n";
 
+			bool isAbstract = (pageTitle.first() == 'I');
+
 			unsigned int count = (unsigned int) pCompound->sections.size();
 			for (unsigned int i = 0; i != count; ++i)
 			{
@@ -146,16 +165,21 @@ namespace Job
 				const Section& section = *sectionptr;
 
 				if (section.kind.startsWith("public-"))
-					visibility = "Public\n";
+					visibility = "Public";
 				else if (section.kind.startsWith("protected-"))
-					visibility = "Protected\n";
+					visibility = "Protected";
 				else if (section.kind.startsWith("private-"))
 				{
 					visibility = "Private";
 					// Skipping all private members
 					continue;
 				}
-				else visibility = "Public";
+				else
+					visibility = "Public";
+
+				// Protected and private data should not be displayed when the class is not inherited
+				if (!isAbstract && visibility != "Public")
+					continue;
 
 				out << "<tr><td class=\"doxnone\"></td><td class=\"doxnone\">";
 				/*
@@ -184,10 +208,14 @@ namespace Job
 					if (member.name == "YUNI_STATIC_ASSERT")
 						continue;
 
-				
 					out << "<tr>";
+
+
+					id.clear() << member.name << '_' << (++GenerationNumericID) << DateTime::CurrentTimestamp();
+					id.replace('-', '_'); // prevent against int overflow
 					HtmlEntities(tmp, member.name);
 					HtmlEntities(type, member.type);
+					ArrangeTypename(type);
 					HtmlEntities(brief, member.brief);
 
 					switch (member.kind)
@@ -208,8 +236,9 @@ namespace Job
 					{
 						case kdFunction:
 							{
-								if (!member.templates.empty() && 0)
+								if (!member.templates.empty())
 								{
+									out << "<div id=\"" << id << "_templ\" style=\"display:none\">";
 									out << "<span class=\"keyword\">template</span>&lt;";
 									for (unsigned int p = 0; p != member.templates.size(); ++p)
 									{
@@ -219,11 +248,10 @@ namespace Job
 										const Parameter& param = *paramstr;
 										HtmlEntities(paramType, param.type);
 										HtmlEntities(paramName, param.name);
-										paramType.replace(" &amp;", "<b>&amp;</b>");
-										paramType.replace(" *", "<b>*</b>");
+										ArrangeTypename(paramType);
 										out << paramType << ' ' << paramName;
 									}
-									out << "&gt;<br />";
+									out << "&gt;</div>\n";
 								}
 								if (tmp.first() == '~')
 								{
@@ -251,14 +279,13 @@ namespace Job
 									const Parameter& param = *paramstr;
 									HtmlEntities(paramType, param.type);
 									HtmlEntities(paramName, param.name);
-									paramType.replace(" &amp;", "<b>&amp;</b>");
-									paramType.replace(" *", "<b>*</b>");
+									ArrangeTypename(paramType);
 									out << paramType << ' ' << paramName;
 								}
 								out << ')';
 								if (member.isConst)
 									out << " <span class=\"keyword\">const</span>";
-								out << ';';
+								out << ";\n";
 								break;
 							}
 						case kdTypedef:
@@ -294,6 +321,7 @@ namespace Job
 			file << out;
 		}
 	}
+
 
 
 	void CompoundWriter::buildNamespace()
