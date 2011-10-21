@@ -9,14 +9,14 @@
 */
 
 /*!
-** \brief An Arbitrarily (or nearly so) small positive quantity
+** \brief An arbitrary (or nearly so) small positive quantity
 **
 ** \ingroup Math
 */
 # define YUNI_EPSILON        1.e-6
 
 /*!
-** \brief Pi, A Mathematical constant (π)
+** \brief Pi, a mathematical constant (π)
 **
 ** Pi is a mathematical constant whose value is the ratio of any circle's
 ** circumference to its diameter in Euclidean space.
