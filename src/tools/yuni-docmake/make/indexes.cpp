@@ -265,7 +265,7 @@ namespace DocIndex
 	}
 
 
-	void Write(const ArticleData& article)
+	void Write(ArticleData& article)
 	{
 		if (!gDB)
 			return;
@@ -328,8 +328,10 @@ namespace DocIndex
 				sqlite3_finalize(stmt);
 			}
 		}
-		sint64 articleID = RetrieveArticleID(article.htdocsFilename);
-		if (articleID < 0)
+
+		// Getting the article ID
+		article.id = RetrieveArticleID(article.htdocsFilename);
+		if (article.id < 0)
 		{
 			logs.error() << "Invalid article ID after inserting, " << article.htdocsFilename;
 			return;
@@ -397,7 +399,7 @@ namespace DocIndex
 			{
 				const Dictionary::Tag& tagname = *i;
 
-				query.clear() << "INSERT INTO tags_per_article (article_id,tagname) VALUES (" << articleID << ",$1);";
+				query.clear() << "INSERT INTO tags_per_article (article_id,tagname) VALUES (" << article.id << ",$1);";
 				int error;
 				if (SQLITE_OK == (error = sqlite3_prepare_v2(gDB, query.c_str(), query.size(), &stmt, NULL)))
 				{
@@ -772,7 +774,7 @@ namespace DocIndex
 	}
 
 
-	void RegisterWordIDsForASingleArticle(int articleid, const int* termid,
+	void RegisterWordIDsForASingleArticle(ArticleID articleid, const int* termid,
 		const int* countInArticle,
 		const float* weights,
 		unsigned int count)
@@ -912,37 +914,30 @@ namespace DocIndex
 
 	void BuildSEOArticlesReference()
 	{
-		char** result;
-		int rowCount, colCount;
-		CString<128,false> query;
-		query << "SELECT id,html_href,title,weight FROM articles;";
-		if (SQLITE_OK != sqlite3_get_table(gDB, query.c_str(), &result, &rowCount, &colCount, NULL))
+		sqlite3_stmt* stmt;
+		if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT id,html_href,title,weight FROM articles;", -1, &stmt, NULL))
 			return;
 
-		CString<1024 * 128> s;
-		s << "if (1) { var f=function(id,d) {SEO.articles[id] = d};";
-		if (rowCount)
-		{
-			unsigned int y = 3;
-			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
-			{
-				const StringAdapter articleID = result[++y];
-				const StringAdapter href      = result[++y];
-				const StringAdapter title     = result[++y];
-				const StringAdapter sweight   = result[++y];
+		CString<1024 * 128> s("if (1) { var f=function(id,d) {SEO.articles[id] = d};");
 
-				s
-					<< "f(" << articleID << ",{"
-					<< "t:\"" << title << '"'// article ID
-					<< ",h:\"" << href << '"'// article ID
-					<< ",w:" << sweight   // weight
-					<< "});";
-			}
+		while (SQLITE_ROW == sqlite3_step(stmt))
+		{
+			const StringAdapter articleID = (const char*) sqlite3_column_text(stmt, 0);
+			const StringAdapter href      = (const char*) sqlite3_column_text(stmt, 1);
+			const StringAdapter title     = (const char*) sqlite3_column_text(stmt, 2);
+			const StringAdapter sweight   = (const char*) sqlite3_column_text(stmt, 3);
+			s
+				<< "f(" << articleID << ",{"
+				<< "t:\"" << title << '"'// article ID
+				<< ",h:\"" << href << '"'// article ID
+				<< ",w:" << sweight   // weight
+				<< "});";
 		}
-		sqlite3_free_table(result);
+		sqlite3_finalize(stmt);
 
 		s << " }\n";
 
+		// Writing the JS file
 		String filename;
 		filename << Program::htdocs << SEP << "seo" << SEP << "data.js";
 		IO::File::AppendContent(filename, s);
@@ -979,6 +974,26 @@ namespace DocIndex
 		sqlite3_finalize(stmt);
 		return;
 	}
+
+
+	void RetrieveTagList(ArticleData& article)
+	{
+		article.tags.clear();
+		if (article.id < 0)
+			return;
+
+		sqlite3_stmt* stmt;
+		if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT tagname FROM tags_per_article WHERE article_id = $1", -1, &stmt, NULL))
+			return;
+		sqlite3_bind_int(stmt, 1, article.id);
+		while (SQLITE_ROW == sqlite3_step(stmt))
+		{
+			const StringAdapter tagname = (const char*) sqlite3_column_text(stmt, 0);
+			article.tags.insert(tagname);
+		}
+		sqlite3_finalize(stmt);
+	}
+
 
 
 

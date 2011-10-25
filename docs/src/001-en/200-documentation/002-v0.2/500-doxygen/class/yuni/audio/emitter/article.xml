@@ -6,113 +6,218 @@
 
 
 
-<h2><code>Emitter</code></h2><table class="doxygen_table">
+<h2>An audio emitter is an object from which the sound is played.<br /></h2>
+<div>Audio emitters can be placed in space, and be moved around.<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Shortest constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Emitter</a></span>:  (bool loop);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Shortest constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Emitter_35481319583276')">+ Emitter</a></span>:  (bool loop);
 </code>
+</div></td></tr><tr id="Emitter_35481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Position, speed and direction default to (0,0,0)<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with 3D position.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Emitter</a></span>:  (const Point3D &lt;&gt;&amp; position, bool loop);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with 3D position.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Emitter_35491319583276')">+ Emitter</a></span>:  (const Point3D &lt;&gt;&amp; position, bool loop);
 </code>
+</div></td></tr><tr id="Emitter_35491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Speed and velocity default to (0,0,0)<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with position, velocity and direction.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Emitter</a></span>:  (const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction, bool loop);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with position, velocity and direction.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Emitter_35501319583276')">+ Emitter</a></span>:  (const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction, bool loop);
 </code>
+</div></td></tr><tr id="Emitter_35501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Emitter</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Emitter_35511319583276')">+ <b> ~ </b>Emitter</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Emitter_35511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Attach a buffer to the emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">attachBufferDispatched</a></span>: bool (Sound::Ptr&amp; buffer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Attach a buffer to the emitter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('attachBufferDispatched_35521319583276')">+ attachBufferDispatched</a></span>: bool (Sound::Ptr&amp; buffer);
 </code>
+</div></td></tr><tr id="attachBufferDispatched_35521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Prepare the emitter for playing.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">prepareDispatched</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Prepare the emitter for playing.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('prepareDispatched_35531319583276')">+ prepareDispatched</a></span>: bool ();
 </code>
+</div></td></tr><tr id="prepareDispatched_35531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Play the sound.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">playSoundDispatched</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Play the sound.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('playSoundDispatched_35541319583276')">+ playSoundDispatched</a></span>: bool ();
 </code>
+</div></td></tr><tr id="playSoundDispatched_35541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Play the sound.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">playSoundDispatched</a></span>: bool (Sound::Ptr&amp; buffer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Play the sound.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('playSoundDispatched_35551319583276')">+ playSoundDispatched</a></span>: bool (Sound::Ptr&amp; buffer);
 </code>
+</div></td></tr><tr id="playSoundDispatched_35551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Update buffers if necessary.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">updateDispatched</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Update buffers if necessary.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('updateDispatched_35561319583276')">+ updateDispatched</a></span>: bool ();
 </code>
+</div></td></tr><tr id="updateDispatched_35561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Accessors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the 3D position of the emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">position</a></span>: void (const Point3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the 3D position of the emitter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('position_35571319583276')">+ position</a></span>: void (const Point3D &lt;&gt;&amp; position);
 </code>
+</div></td></tr><tr id="position_35571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the 3D position of the emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">position</a></span>: Point3D () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the 3D position of the emitter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('position_35581319583276')">+ position</a></span>: Point3D () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="position_35581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the velocity of the emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">velocity</a></span>: void (const Vector3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the velocity of the emitter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('velocity_35591319583276')">+ velocity</a></span>: void (const Vector3D &lt;&gt;&amp; position);
 </code>
+</div></td></tr><tr id="velocity_35591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the velocity of the emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">velocity</a></span>: Vector3D () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the velocity of the emitter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('velocity_35601319583276')">+ velocity</a></span>: Vector3D () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="velocity_35601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the direction of the emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">direction</a></span>: void (const Vector3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the direction of the emitter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('direction_35611319583276')">+ direction</a></span>: void (const Vector3D &lt;&gt;&amp; position);
 </code>
+</div></td></tr><tr id="direction_35611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the direction of the emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">direction</a></span>: Vector3D () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the direction of the emitter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('direction_35621319583276')">+ direction</a></span>: Vector3D () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="direction_35621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the volume modifier on the emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">gain</a></span>: void (float newGain);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the volume modifier on the emitter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('gain_35631319583276')">+ gain</a></span>: void (float newGain);
 </code>
+</div></td></tr><tr id="gain_35631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> newGain</code> 0.0f for no sound, 1.0f to keep sound as is, &gt; 1.0f to amplify sound Set the volume modifier<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the current volume modifier.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">gain</a></span>: float () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the current volume modifier.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('gain_35641319583276')">+ gain</a></span>: float () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="gain_35641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the elapsed playback time (in seconds)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">elapsedTime</a></span>: sint64 () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the elapsed playback time (in seconds)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('elapsedTime_35651319583276')">+ elapsedTime</a></span>: sint64 () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="elapsedTime_35651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>return</code>  Time elapsed since the emitter started playback. 0 if not playing.<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the identifier for the emitter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">id</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the identifier for the emitter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('id_35661319583276')">+ id</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="id_35661319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">Default value for attenuation (enabled) Default value for looping (false)<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@0DefaultAttenuationDefaultLooping_35671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer for the class.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Emitter&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Ptr_35681319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Emitter&gt;;</code>
+</div></td></tr><tr id="Ptr_35681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Threading Policy .<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;Emitter&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Threading Policy .<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_35691319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;Emitter&gt;;</code>
+</div></td></tr><tr id="ThreadingPolicy_35691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Map.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Map</a></span>: <span class="keyword">typedef</span> std::map&lt; String, Ptr&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Map.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Map_35701319583276')">+ Map</a></span>: <span class="keyword">typedef</span> std::map&lt; String, Ptr&gt;;</code>
+</div></td></tr><tr id="Map_35701319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@369_35711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Default value for pitch (1.0)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">DefaultPitch</a></span>: const float;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Default value for pitch (1.0)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('DefaultPitch_35721319583276')">+ DefaultPitch</a></span>: const float;</code>
+</div></td></tr><tr id="DefaultPitch_35721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Default value for gain (1.0)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">DefaultGain</a></span>: const float;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Default value for gain (1.0)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('DefaultGain_35731319583276')">+ DefaultGain</a></span>: const float;</code>
+</div></td></tr><tr id="DefaultGain_35731319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

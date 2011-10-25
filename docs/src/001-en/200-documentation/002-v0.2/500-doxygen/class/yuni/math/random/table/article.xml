@@ -6,60 +6,128 @@
 
 
 
-<h2><code>Table</code></h2><table class="doxygen_table">
+<h2>Pre-Cached table of random numbers.<br /></h2>
+<div>This class behaves like any other random number generator except random numbers come from a prefetch cache.<br /><source type="cpp">  #include  &lt;iostream&gt;
+  #include  &lt; yuni/core/math/random/default.h &gt;
+  #include  &lt; yuni/core/math/random/table.h &gt;
+
+  using  namespace  Yuni;
+
+  int  main()
+  {
+         //  A  table  for  pre-cached  random  numbers
+         Math::Random::Table&lt;Math::Random::Default&gt;   randomTable;
+         //  Generating  a  set  pre-cached  random  numbers
+         std::cout  &lt;&lt;  "Generating  "  &lt;&lt;  randomTable. size ()  &lt;&lt;  "  random  numbers..."  &lt;&lt;  std::endl;
+         randomTable. reset ();
+
+         std::cout  &lt;&lt;  "A  random  number  :  "  &lt;&lt;  randomTable()  &lt;&lt;  std::endl;
+         std::cout  &lt;&lt;  "Another  one      :  "  &lt;&lt;  randomTable()  &lt;&lt;  std::endl;
+         return  0;
+  }
+</source>
+<br /> Do not forget that you have to reset the random number generator yourself, As this operation may be costly, You may want to control it. The other reason is that some specific parameters may be required<br /> Even if it is possible to make this class thread-safe (using the godd threading policy, it is no really advised. The real purpose of this class is to avoid the high cost of a Random number generation (in a real-time game for example) and additional locks might be costly as well. In most cases you would prefer a `table` per thread.<br /><br />Parameters :<ul><li><code> D</code> Any random number generator<br /></li><li><code> TableSize</code> The count of random numbers to cache<br /></li><li><code> Cyclic</code> True to Cycle through the list or False to regenerate a new set when all pre-cached random numbers are exhausted<br /></li><li><code> TP</code> The Threading Policy<br /></li></ul><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Table</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Table_46631319583276')">+ Table</a></span>:  ();
 </code>
+</div></td></tr><tr id="Table_46631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The table will be filled with random numbers provided by the given distribution.<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Table_46641319583276')">+ <b> ~ </b>Table</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Table_46641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">The table size.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@214tableSize_46651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Type for a single random number.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Value</a></span>: <span class="keyword">typedef</span> D::Value;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type for a single random number.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Value_46661319583276')">+ Value</a></span>: <span class="keyword">typedef</span> D::Value;</code>
+</div></td></tr><tr id="Value_46661319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The threading policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> TP&lt; Table&lt;D, TableSize, Cyclic, TP&gt;&gt;;</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Reset the random number generator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: void ();
-</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the next random number.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">next</a></span>: const Value ();
-</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Fill the table with a new set of random numbers.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">fill</a></span>: void ();
-</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator `&gt;&gt;`.<div class="doxygen_name_spacer"></div>
-<code><div id="operator>>_47321319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator&gt;&gt;</a></span>: Table&amp; (U&amp; u);
-</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator `()`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator()</a></span>: const Value ();
-</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_46671319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> TP&lt; Table&lt;D, TableSize, Cyclic, TP&gt;&gt;;</code>
+</div></td></tr><tr id="ThreadingPolicy_46671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Name of the distribution.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Name</a></span>: <span class="keyword">static</span> const char* ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the random number generator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('reset_46681319583276')">+ reset</a></span>: void ();
 </code>
+</div></td></tr><tr id="reset_46681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The method `fill()` will be implicity called to generate a new set of random numbers.<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the number of random number in the table.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">size</a></span>: <span class="keyword">static</span> int ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the next random number.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('next_46691319583276')">+ next</a></span>: const Value ();
 </code>
+</div></td></tr><tr id="next_46691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Fill the table with a new set of random numbers.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('fill_46701319583276')">+ fill</a></span>: void ();
+</code>
+</div></td></tr><tr id="fill_46701319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator `&gt;&gt;`.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator>>_46711319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator>>_46711319583276')">+ operator&gt;&gt;</a></span>: Table&amp; (U&amp; u);
+</code>
+</div></td></tr><tr id="operator>>_46711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator `()`.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator()_46721319583276')">+ operator()</a></span>: const Value ();
+</code>
+</div></td></tr><tr id="operator()_46721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Name of the distribution.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Name_46731319583276')">+ Name</a></span>: <span class="keyword">static</span> const char* ();
+</code>
+</div></td></tr><tr id="Name_46731319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">This name is given by the template parameter D.<br />
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the number of random number in the table.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('size_46741319583276')">+ size</a></span>: <span class="keyword">static</span> int ();
+</code>
+</div></td></tr><tr id="size_46741319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

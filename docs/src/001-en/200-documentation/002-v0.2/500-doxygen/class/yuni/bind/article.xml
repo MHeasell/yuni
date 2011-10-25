@@ -6,26 +6,94 @@
 
 
 
-<h2><code>Bind</code></h2><table class="doxygen_table">
+<h2>A delegate implementation.<br /></h2>
+<div>How to bind a mere function :<source type="cpp">  #include  &lt;iostream&gt;
+  #include  &lt;yuni/bind.h&gt;
+
+  static  int  Foo( int  value)
+  {
+     std::cout  &lt;&lt;  "Foo:  "  &lt;&lt;  value  &lt;&lt;  std::endl;
+     return  0;
+  }
+
+  int  main()
+  {
+     Yuni::Bind&lt;int (int)&gt;  callback;
+     callback.bind(&amp;Foo);
+     callback(42);
+     callback(61);
+     callback(-1)
+     return  0;
+  }
+</source>
+<br /> How to bind a member of an object :<source type="cpp">  #include  &lt;iostream&gt;
+  #include  &lt;yuni/bind.h&gt;
+
+  class  Foo
+  {
+  public :
+     int  bar( int  value)
+     {
+         std::cout  &lt;&lt;  "Foo::bar   :  "  &lt;&lt;  value  &lt;&lt;  std::endl;
+         return  0;
+     }
+     int  bar2( int  value)
+     {
+         std::cout  &lt;&lt;  "Foo::bar2  :  "  &lt;&lt;  value  &lt;&lt;  std::endl;
+         return  0;
+     }
+  };
+
+  int  main()
+  {
+     Foo  foo;
+     Yuni::Bind&lt;int (int)&gt;  callback;
+     callback.bind(foo,  &amp;Foo::bar);
+     callback(42);
+     callback(61);
+     callback(-1)
+     callback.bind(foo,  &amp;Foo::bar2);
+     callback(42);
+     callback(61);
+     callback(-1)
+     return  0;
+  }
+</source>
+<br /> This class is thread-safe, this is guaranteed by the use of smartptr.<br /><div><b>note</b> :  This class does not take care of deleted objects. It is the responsibility of the user to unbind the delegate before the linked object is delete and/or to not invoke the delegate when the object does not exist.<br /> It is safe to provide a null pointer when binding the delegate<br /> It is always safe to invoke the delegate when unbound.<br /></div><br />Parameters :<ul><li><code> P</code> The prototype of the targetted function/member<br /></li></ul><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Bind</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Bind_28411319583276')">+ Bind</a></span>:  ();
 </code>
+</div></td></tr><tr id="Bind_28411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Bind</a></span>:  (const Bind&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Bind_28421319583276')">+ Bind</a></span>:  (const Bind&amp; rhs);
 </code>
+</div></td></tr><tr id="Bind_28421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> Another bind object<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Bind</a></span>:  (const Yuni::DynamicLibrary::Symbol&amp; symbol);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Bind_28431319583276')">+ Bind</a></span>:  (const Yuni::DynamicLibrary::Symbol&amp; symbol);
 </code>
+</div></td></tr><tr id="Bind_28431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> symbol</code> Symbol from a dynamic library<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Bind</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Bind_28441319583276')">+ <b> ~ </b>Bind</a></span>:  ();
 </code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</div></td></tr><tr id="~Bind_28441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

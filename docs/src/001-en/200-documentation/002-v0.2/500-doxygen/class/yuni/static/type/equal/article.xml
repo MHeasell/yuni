@@ -6,14 +6,33 @@
 
 
 
-<h2><code>Equal</code></h2><table class="doxygen_table">
+<h2>Determine if two types (without any identifier) are identical.<br /></h2>
+<div><source type="cpp">     std::cout  &lt;&lt;  Equal&lt;int,  bool&gt;::Yes  &lt;&lt;  std::endl;  //  print  0
+     std::cout  &lt;&lt;  Equal&lt;int,  int&gt;::Yes  &lt;&lt;  std::endl;  //  print  1
+     std::cout  &lt;&lt;  Equal&lt;int,  int&amp;&gt;::Yes  &lt;&lt;  std::endl;  //  print  1
+     std::cout  &lt;&lt;  Equal&lt;int,  const  int&gt;::Yes  &lt;&lt;  std::endl;  //  print  1
+</source>
+<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@241YesYesNoNo_44101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">BaseTypeA</a></span>: <span class="keyword">typedef</span> Static::Remove::All&lt;A&gt;::Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('BaseTypeA_44111319583276')">+ BaseTypeA</a></span>: <span class="keyword">typedef</span> Static::Remove::All&lt;A&gt;::Type;</code>
+</div></td></tr><tr id="BaseTypeA_44111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">BaseTypeB</a></span>: <span class="keyword">typedef</span> Static::Remove::All&lt;B&gt;::Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('BaseTypeB_44121319583276')">+ BaseTypeB</a></span>: <span class="keyword">typedef</span> Static::Remove::All&lt;B&gt;::Type;</code>
+</div></td></tr><tr id="BaseTypeB_44121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

@@ -6,96 +6,186 @@
 
 
 
-<h2><code>IEventLoop</code></h2><table class="doxygen_table">
+<h2>A Synchronous Event Demultiplexer (Reactor pattern)<br /></h2>
+<div>This class handles requests (from any thread or process) from a single thread. It is designed to run code that can not be thread-safe, like calls to OpenGL or OpenAL routines. If those requests must be run from the main thread (e.g. OpenGL), the event loop must not be detached (see the template parameter 'DetachedT') and the method 'start()' must be executed from the main thread.<br /> Here is a sample to create a minimalist event loop<source type="cpp">  class  MyEventLoop  :  public  Core::EventLoop:: IEventLoop &lt;MyEventLoop&gt;
+  {
+  public :
+     bool  onLoop ()
+     {
+         std::cout  &lt;&lt;  "loop  !\n" ;
+     }
+  };
+</source>
+<br /><br />Parameters :<ul><li><code> ParentT</code> The parent class (CRTP)<br /></li><li><code> FlowT</code> The flow policy<br /></li><li><code> StatsT</code> The statistics policy<br /></li><li><code> DetechedT</code> A non-zero value to use a separate thread than the calling one for running the event loop. This value should always be true for code safety unless that you want to execute the event loop from the calling thread (e.g. the main thread). In this case, you _have_ to take care about blocking system calls that would prevent the loop to stop.<br /></li></ul><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">IEventLoop</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('IEventLoop_14821319583276')">+ IEventLoop</a></span>:  ();
 </code>
+</div></td></tr><tr id="IEventLoop_14821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>IEventLoop</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~IEventLoop_14831319583276')">+ <b> ~ </b>IEventLoop</a></span>:  ();
 </code>
+</div></td></tr><tr id="~IEventLoop_14831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator += : Dispatch a new request.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: IEventLoop&amp; (const RequestType&amp; request);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator += : Dispatch a new request.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_14841319583276')">+ operator+=</a></span>: IEventLoop&amp; (const RequestType&amp; request);
 </code>
+</div></td></tr><tr id="operator+=_14841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator &lt;&lt; : Dispatch a new request.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: IEventLoop&amp; (const RequestType&amp; request);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator &lt;&lt; : Dispatch a new request.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_14851319583276')">+ operator&lt;&lt;</a></span>: IEventLoop&amp; (const RequestType&amp; request);
 </code>
+</div></td></tr><tr id="operator<<_14851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">A non-zero value if a separate thread must be used for running the event loop instead of the calling one.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@172detached_14861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Parent.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ParentType</a></span>: <span class="keyword">typedef</span> ParentT;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Parent.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ParentType_14871319583276')">+ ParentType</a></span>: <span class="keyword">typedef</span> ParentT;</code>
+</div></td></tr><tr id="ParentType_14871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">A request.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">RequestType</a></span>: <span class="keyword">typedef</span> Bind&lt;bool()&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A request.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('RequestType_14881319583276')">+ RequestType</a></span>: <span class="keyword">typedef</span> Bind&lt;bool()&gt;;</code>
+</div></td></tr><tr id="RequestType_14881319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">List of requests.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">RequestListType</a></span>: <span class="keyword">typedef</span> LinkedList&lt;RequestType&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">List of requests.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('RequestListType_14891319583276')">+ RequestListType</a></span>: <span class="keyword">typedef</span> LinkedList&lt;RequestType&gt;;</code>
+</div></td></tr><tr id="RequestListType_14891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The Event loop.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">EventLoopType</a></span>: <span class="keyword">typedef</span> IEventLoop&lt;ParentType, FlowT, StatsT, DetachedT&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Event loop.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('EventLoopType_14901319583276')">+ EventLoopType</a></span>: <span class="keyword">typedef</span> IEventLoop&lt;ParentType, FlowT, StatsT, DetachedT&gt;;</code>
+</div></td></tr><tr id="EventLoopType_14901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer for the class.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;EventLoopType&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Ptr_14911319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;EventLoopType&gt;;</code>
+</div></td></tr><tr id="Ptr_14911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The threading policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockableNotRecursive&lt;EventLoopType&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_14921319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockableNotRecursive&lt;EventLoopType&gt;;</code>
+</div></td></tr><tr id="ThreadingPolicy_14921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The thread used for the inner loop.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadType</a></span>: <span class="keyword">typedef</span> Yuni::Private::Core::EventLoop::Thread&lt; EventLoopType&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The thread used for the inner loop.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadType_14931319583276')">+ ThreadType</a></span>: <span class="keyword">typedef</span> Yuni::Private::Core::EventLoop::Thread&lt; EventLoopType&gt;;</code>
+</div></td></tr><tr id="ThreadType_14931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The flow policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">FlowPolicy</a></span>: <span class="keyword">typedef</span> FlowT&lt; EventLoopType&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The flow policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('FlowPolicy_14941319583276')">+ FlowPolicy</a></span>: <span class="keyword">typedef</span> FlowT&lt; EventLoopType&gt;;</code>
+</div></td></tr><tr id="FlowPolicy_14941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The statistics policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">StatisticsPolicy</a></span>: <span class="keyword">typedef</span> StatsT&lt; EventLoopType&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The statistics policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('StatisticsPolicy_14951319583276')">+ StatisticsPolicy</a></span>: <span class="keyword">typedef</span> StatsT&lt; EventLoopType&gt;;</code>
+</div></td></tr><tr id="StatisticsPolicy_14951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@370_14961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Start the event loop.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('start_14971319583276')">+ start</a></span>: void ();
+</code>
+</div></td></tr><tr id="start_14971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">This method will be non-blocking in detached mode and the event loop will be ran from another thread. Otherwise it will block until the loop is stopped by a call to `stop()` from another thread or a request that had failed.<br />
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Gracefully stop the execution of the event loop, and wait for it.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('stop_14981319583276')">+ stop</a></span>: void (unsigned int timeout);
+</code>
+</div></td></tr><tr id="stop_14981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">In detached mode, the method will wait for the end of the execution of the detached thread, and will kill it if the timeout expires. When the event loop is not detached, there is no guarantee that the event loop is really stopped after the call to this method, since there is no control on the thread that had called start() .<br /><br />Parameters :<ul><li><code> timeout</code> The number of milliseconds to wait before killing the event loop<br /></li></ul><br />
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Post a new request into the queue.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('dispatch_14991319583276')">+ dispatch</a></span>: void (const RequestType&amp; request);
+</code>
+</div></td></tr><tr id="dispatch_14991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> request</code> A request, which is merely a delegate via the class Bind&lt;&gt;)<br /></li></ul><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Start the event loop.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">start</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">On loop event handler.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('onLoop_15001319583276')">+ onLoop</a></span>: <span class="keyword">static</span> bool ();
 </code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Gracefully stop the execution of the event loop, and wait for it.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">stop</a></span>: void (unsigned int timeout);
-</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Post a new request into the queue.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">dispatch</a></span>: void (const RequestType&amp; request);
-</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">On loop event handler.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">onLoop</a></span>: <span class="keyword">static</span> bool ();
-</code>
+</div></td></tr><tr id="onLoop_15001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><b>warning</b> :  Has to be redefined by children classes !<br /></div><div><code>return</code>  False to stop the loop<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected <code class="doxygen_visibility">Protected</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Suspend the thread.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">suspend</a></span>: void (unsigned int timeout);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Suspend the thread.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('suspend_15011319583276')"># suspend</a></span>: void (unsigned int timeout);
 </code>
+</div></td></tr><tr id="suspend_15011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected <code class="doxygen_visibility">Protected</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Mutex.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pMutex</a></span>: Mutex;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Mutex.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('pMutex_15021319583276')"># pMutex</a></span>: Mutex;</code>
+</div></td></tr><tr id="pMutex_15021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

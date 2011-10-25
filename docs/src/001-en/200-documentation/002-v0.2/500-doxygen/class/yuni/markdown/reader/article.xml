@@ -6,70 +6,122 @@
 
 
 
-<h2><code>Reader</code></h2><table class="doxygen_table">
+<h2>Reader</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Reader</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Reader_1691319583276')">+ Reader</a></span>:  ();
 </code>
+</div></td></tr><tr id="Reader_1691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Reader</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Reader_1701319583276')">+ <b> ~ </b>Reader</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Reader_1701319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Document <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">End the parsing of a document.<div class="doxygen_name_spacer"></div>
-<code><div id="beginDocument_1721319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">beginDocument</a></span>: void (const StringT&amp; filename);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">End the parsing of a document.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="beginDocument_1711319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('beginDocument_1711319583276')">+ beginDocument</a></span>: void (const StringT&amp; filename);
 </code>
+</div></td></tr><tr id="beginDocument_1711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">End the parsing of a document.<div class="doxygen_name_spacer"></div>
-<code><div id="append_1731319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">append</a></span>: void (const StringT&amp; text);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">End the parsing of a document.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="append_1721319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('append_1721319583276')">+ append</a></span>: void (const StringT&amp; text);
 </code>
+</div></td></tr><tr id="append_1721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">End the parsing of a document.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">endDocument</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">End the parsing of a document.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('endDocument_1731319583276')">+ endDocument</a></span>: void ();
 </code>
+</div></td></tr><tr id="endDocument_1731319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Error tracking <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the current filename.<div class="doxygen_name_spacer"></div>
-<code><div id="hintFilename_1751319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">hintFilename</a></span>: void (const StringT&amp; filename);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the current filename.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="hintFilename_1741319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('hintFilename_1741319583276')">+ hintFilename</a></span>: void (const StringT&amp; filename);
 </code>
+</div></td></tr><tr id="hintFilename_1741319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The current position will be reset.<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the current filename.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">hintFilename</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the current filename.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('hintFilename_1751319583276')">+ hintFilename</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="hintFilename_1751319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Root node <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the root node.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">root</a></span>: Node::Ptr () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the root node.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('root_1761319583276')">+ root</a></span>: Node::Ptr () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="root_1761319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Append.<div class="doxygen_name_spacer"></div>
-<code><div id="operator+=_1781319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">operator+=</a></span>: Reader&amp; (const StringT&amp; text);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator+=_1771319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator+=_1771319583276')">+ operator+=</a></span>: Reader&amp; (const StringT&amp; text);
 </code>
+</div></td></tr><tr id="operator+=_1771319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Append.<div class="doxygen_name_spacer"></div>
-<code><div id="operator<<_1791319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">operator&lt;&lt;</a></span>: Reader&amp; (const StringT&amp; text);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator<<_1781319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator<<_1781319583276')">+ operator&lt;&lt;</a></span>: Reader&amp; (const StringT&amp; text);
 </code>
+</div></td></tr><tr id="operator<<_1781319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">onBeginDocument</a></span>: Event&lt;void()&gt;;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('onBeginDocument_1791319583276')">+ onBeginDocument</a></span>: Event&lt;void()&gt;;</code>
+</div></td></tr><tr id="onBeginDocument_1791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Event .<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">onParseFilename</a></span>: Event&lt;void(const String&amp;)&gt;;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Event .<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('onParseFilename_1801319583276')">+ onParseFilename</a></span>: Event&lt;void(const String&amp;)&gt;;</code>
+</div></td></tr><tr id="onParseFilename_1801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">onEndDocument</a></span>: Event&lt;void()&gt;;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('onEndDocument_1811319583276')">+ onEndDocument</a></span>: Event&lt;void()&gt;;</code>
+</div></td></tr><tr id="onEndDocument_1811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

@@ -6,16 +6,25 @@
 
 
 
-<h2><code>AllowAll</code></h2><table class="doxygen_table">
+<h2>Allow all strings / char.<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Perform a validation on any type of string.<div class="doxygen_name_spacer"></div>
-<code><div id="validate_64571319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">validate</a></span>: bool (const U&amp; u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Perform a validation on any type of string.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="validate_63531319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('validate_63531319583276')">+ validate</a></span>: bool (const U&amp; u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="validate_63531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> u</code> An arbitrary string<br /></li></ul><div><code>return</code>  True if valid, false otherwise<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator()</a></span>: bool (const U&amp; u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator()_63541319583276')">+ operator()</a></span>: bool (const U&amp; u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator()_63541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>see</code> :  validate()<br /></div><br />
+</div>
 </td></tr>
 </table>
 

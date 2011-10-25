@@ -6,12 +6,14 @@
 
 
 
-<h2><code>Method</code></h2><table class="doxygen_table">
+<h2>Method</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> MethodT&lt; KeyT, ValueT, false, UniqueT&gt;;</code>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> MethodT&lt; KeyT, ValueT, false, UniqueT&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('Type_48781319583276')">+ Type</a></span>: <span class="keyword">typedef</span> MethodT&lt; KeyT, ValueT, false, UniqueT&gt;;</code>
+</div></td></tr><tr id="Type_48781319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

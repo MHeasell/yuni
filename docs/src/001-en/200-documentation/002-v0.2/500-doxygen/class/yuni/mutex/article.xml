@@ -6,42 +6,71 @@
 
 
 
-<h2><code>Mutex</code></h2><table class="doxygen_table">
+<h2>Mechanism to avoid the simultaneous use of a common resource.<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor, non recursive by default.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Mutex</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor, non recursive by default.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Mutex_34571319583276')">+ Mutex</a></span>:  ();
 </code>
+</div></td></tr><tr id="Mutex_34571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Mutex</a></span>:  (const Mutex&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Mutex_34581319583276')">+ Mutex</a></span>:  (const Mutex&amp; );
 </code>
+</div></td></tr><tr id="Mutex_34581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Copy constructor<br /> This constructor does actually nothing but it allows the compilation of other classes which would implement a copy constructor<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Mutex</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Mutex_34591319583276')">+ <b> ~ </b>Mutex</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Mutex_34591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Lock &amp; Unlock <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Lock the mutex.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">lock</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Lock the mutex.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('lock_34601319583276')">+ lock</a></span>: void ();
 </code>
+</div></td></tr><tr id="lock_34601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Release the lock.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">unlock</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Release the lock.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('unlock_34611319583276')">+ unlock</a></span>: void ();
 </code>
+</div></td></tr><tr id="unlock_34611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">PThread wrapper <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the original PThread mutex.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">pthreadMutex</a></span>: ::pthread_mutex_t&amp; ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the original PThread mutex.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('pthreadMutex_34621319583276')">+ pthreadMutex</a></span>: ::pthread_mutex_t&amp; ();
 </code>
+</div></td></tr><tr id="pthreadMutex_34621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Operator = (do nothing)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Mutex&amp; (const Mutex&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator = (do nothing)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_34631319583276')">+ operator=</a></span>: Mutex&amp; (const Mutex&amp; );
 </code>
+</div></td></tr><tr id="operator=_34631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

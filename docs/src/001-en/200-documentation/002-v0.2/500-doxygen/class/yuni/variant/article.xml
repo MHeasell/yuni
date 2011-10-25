@@ -6,65 +6,120 @@
 
 
 
-<h2><code>Variant</code></h2><table class="doxygen_table">
+<h2>Variant type implementation.<br /></h2>
+<div>This is an implementation of Variants that handles a limited range of types (classical ones), but that can make automagic conversions between them, if such a conversion is possible.<br /> It differs from Any , which can handle almost any type (with the notable exception of arrays), but cannot automatically convert from a type to another.<br /> How to use:<source type="cpp">  Variant  v( int (12));
+
+  std::cout  &lt;&lt;  v.to&lt; float &gt;()  &lt;&lt;  std::endl;
+  std::cout  &lt;&lt;  v.to&lt; String &gt;()  &lt;&lt;  std::endl;
+</source>
+<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructs an empty Variant .<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Variant</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructs an empty Variant .<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Variant_19421319583276')">+ Variant</a></span>:  ();
 </code>
+</div></td></tr><tr id="Variant_19421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructs a copy of an existing Variant .<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Variant</a></span>:  (const Variant&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructs a copy of an existing Variant .<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Variant_19431319583276')">+ Variant</a></span>:  (const Variant&amp; rhs);
 </code>
+</div></td></tr><tr id="Variant_19431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructs a Variant based on an existing variable of simple type.<div class="doxygen_name_spacer"></div>
-<code><div id="Variant_19591319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">Variant</a></span>:  (const T&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructs a Variant based on an existing variable of simple type.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="Variant_19441319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('Variant_19441319583276')">+ Variant</a></span>:  (const T&amp; rhs);
 </code>
+</div></td></tr><tr id="Variant_19441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Variant</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Variant_19451319583276')">+ <b> ~ </b>Variant</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Variant_19451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Alteration methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment from an existing Variant .<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">assign</a></span>: void (const Variant&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment from an existing Variant .<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('assign_19461319583276')">+ assign</a></span>: void (const Variant&amp; rhs);
 </code>
+</div></td></tr><tr id="assign_19461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment from a simple type.<div class="doxygen_name_spacer"></div>
-<code><div id="assign_19621319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">assign</a></span>: void (const T&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment from a simple type.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="assign_19471319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('assign_19471319583276')">+ assign</a></span>: void (const T&amp; rhs);
 </code>
+</div></td></tr><tr id="assign_19471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Specific assignment from C strings.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">assign</a></span>: void (const char* rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Specific assignment from C strings.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('assign_19481319583276')">+ assign</a></span>: void (const char* rhs);
 </code>
+</div></td></tr><tr id="assign_19481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Resets the Variant to an empty one.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clear</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Resets the Variant to an empty one.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('clear_19491319583276')">+ clear</a></span>: void ();
 </code>
+</div></td></tr><tr id="clear_19491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Information methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Returns true if the Variant is empty.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Returns true if the Variant is empty.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('empty_19501319583276')">+ empty</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="empty_19501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator overloads <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: Variant&amp; (const Variant&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator=_19511319583276')">+ operator=</a></span>: Variant&amp; (const Variant&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_19511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="operator=_19671319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">operator=</a></span>: Variant&amp; (const T&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="operator=_19521319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator=_19521319583276')">+ operator=</a></span>: Variant&amp; (const T&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_19521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Retrieval methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="to_19681319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">to</a></span>: T () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="to_19531319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('to_19531319583276')">+ to</a></span>: T () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="to_19531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

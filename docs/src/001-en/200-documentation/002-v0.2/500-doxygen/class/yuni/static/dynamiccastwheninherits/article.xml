@@ -6,25 +6,43 @@
 
 
 
-<h2><code>DynamicCastWhenInherits</code></h2><table class="doxygen_table">
+<h2>Perform dynamic_cast operations only when a class `C` inherits from another one `BaseT`.<br /></h2>
+<div>Parameters :<ul><li><code> C</code> Any class (may be virtual)<br /></li><li><code> BaseT</code> The base class to compare with (may be virtual)<br /></li></ul><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@231YesNo_49641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Test if two pointer are equivalent (means "represents the same real object")<div class="doxygen_name_spacer"></div>
-<code><div id="Equals_50361319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
- <span class="method"><a href="#">Equals</a></span>: <span class="keyword">static</span> bool (const U* ref, const V* objPointer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Test if two pointer are equivalent (means "represents the same real object")<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="Equals_49651319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('Equals_49651319583276')">+ Equals</a></span>: <span class="keyword">static</span> bool (const U* ref, const V* objPointer);
 </code>
+</div></td></tr><tr id="Equals_49651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> ref</code> A pointer to a base class<br /></li><li><code> objPointer</code> A pointer to any descendant of `ref`<br /></li></ul><div><code>return</code>  True if C inherits from BaseT and that the two pointer are dynamically equal (represent the same object)<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="Perform_50371319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">Perform</a></span>: <span class="keyword">static</span> BaseT* (U* object);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Perform_49671319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('Perform_49671319583276')">+ Perform</a></span>: <span class="keyword">static</span> BaseT* (U* object);
 </code>
+</div></td></tr><tr id="Perform_49671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="PerformConst_50381319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">PerformConst</a></span>: <span class="keyword">static</span> const BaseT* (const U* object);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="PerformConst_49681319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('PerformConst_49681319583276')">+ PerformConst</a></span>: <span class="keyword">static</span> const BaseT* (const U* object);
 </code>
+</div></td></tr><tr id="PerformConst_49681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

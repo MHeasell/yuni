@@ -6,37 +6,74 @@
 
 
 
-<h2><code>ThreadInfo</code></h2><table class="doxygen_table">
+<h2>Information about a single thread.<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer for the class.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;ThreadInfo&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Ptr_62381319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;ThreadInfo&gt;;</code>
+</div></td></tr><tr id="Ptr_62381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Vector of ThreadInfo .<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; typename ThreadInfo::Ptr&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Vector of ThreadInfo .<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Vector_62391319583276')">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; typename ThreadInfo::Ptr&gt;;</code>
+</div></td></tr><tr id="Vector_62391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Reference to the working thread.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">thread</a></span>: Thread::IThread::Ptr;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Reference to the working thread.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('thread_62401319583276')">+ thread</a></span>: Thread::IThread::Ptr;</code>
+</div></td></tr><tr id="thread_62401319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Reference to the job currently in execution.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">job</a></span>: Job::IJob::Ptr;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Reference to the job currently in execution.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('job_62411319583276')">+ job</a></span>: Job::IJob::Ptr;</code>
+</div></td></tr><tr id="job_62411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Flag to know if the thread has a job currently in execution.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">hasJob</a></span>: bool;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Flag to know if the thread has a job currently in execution.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('hasJob_62421319583276')">+ hasJob</a></span>: bool;</code>
+</div></td></tr><tr id="hasJob_62421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">State of the job (if any)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">state</a></span>: Job::State;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">State of the job (if any)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('state_62431319583276')">+ state</a></span>: Job::State;</code>
+</div></td></tr><tr id="state_62431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Flag to know if the job is canceling its work.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">canceling</a></span>: bool;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Flag to know if the job is canceling its work.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('canceling_62441319583276')">+ canceling</a></span>: bool;</code>
+</div></td></tr><tr id="canceling_62441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Progression (in percent) of the job (if any, between 0 and 100)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">progression</a></span>: int;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Progression (in percent) of the job (if any, between 0 and 100)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('progression_62451319583276')">+ progression</a></span>: int;</code>
+</div></td></tr><tr id="progression_62451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Name of the job.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">name</a></span>: String;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Name of the job.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('name_62461319583276')">+ name</a></span>: String;</code>
+</div></td></tr><tr id="name_62461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

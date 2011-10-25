@@ -6,26 +6,47 @@
 
 
 
-<h2><code>NeverNull</code></h2><table class="doxygen_table">
+<h2>Ensure the pointer can never be null<br /> The default constructor (which inits at null) is disabled statically by not defining onDefault.<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">NeverNull</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('NeverNull_34651319583276')">+ NeverNull</a></span>:  ();
 </code>
+</div></td></tr><tr id="NeverNull_34651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="NeverNull_35291319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">NeverNull</a></span>:  (const NeverNull&lt;U&gt;&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="NeverNull_34661319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('NeverNull_34661319583276')">+ NeverNull</a></span>:  (const NeverNull&lt;U&gt;&amp; );
 </code>
+</div></td></tr><tr id="NeverNull_34661319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">onInit</a></span>: <span class="keyword">static</span> void (const T&amp; ptr);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('onInit_34671319583276')">+ onInit</a></span>: <span class="keyword">static</span> void (const T&amp; ptr);
 </code>
+</div></td></tr><tr id="onInit_34671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">onDereference</a></span>: <span class="keyword">static</span> void (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('onDereference_34681319583276')">+ onDereference</a></span>: <span class="keyword">static</span> void (const T&amp; );
 </code>
+</div></td></tr><tr id="onDereference_34681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">swapPointer</a></span>: <span class="keyword">static</span> void (NeverNull&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('swapPointer_34691319583276')">+ swapPointer</a></span>: <span class="keyword">static</span> void (NeverNull&amp; );
 </code>
+</div></td></tr><tr id="swapPointer_34691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

@@ -34,6 +34,8 @@ namespace Dox2Article
 	{
 		name.trim("\t\n ");
 		htdocs.clear();
+		brief.clear();
+		description.clear();
 		switch (kind)
 		{
 			case kdFunction:
@@ -55,6 +57,8 @@ namespace Dox2Article
 			case kdFolder:
 				 break;
 			case kdGroup:
+				 break;
+			case kdFriend:
 				 break;
 			case kdUnknown:
 				 break;

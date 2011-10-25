@@ -6,54 +6,104 @@
 
 
 
-<h2><code>Singleton</code></h2><table class="doxygen_table">
+<h2>Holder for a singleton class.<br /></h2>
+<div>Manages creation, deletion and access in a MT environment<br /> For protection, some operations will fail at compile time. For example, supposing MySingleton inherits Singleton&lt;&gt; :<source type="cpp">  int  main( void )
+  {
+      MySingleton&amp;  instance  =  MySingleton::Instance ();
+      //  Here  we  viciously  try  to  delete  the  instance
+      delete  &amp;instance;
+      return  0;
+  }
+</source>
+<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Stored singleton type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">StoredType</a></span>: <span class="keyword">typedef</span> T;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Stored singleton type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('StoredType_21131319583276')">+ StoredType</a></span>: <span class="keyword">typedef</span> T;</code>
+</div></td></tr><tr id="StoredType_21131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Creation policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">CreationPolicy</a></span>: <span class="keyword">typedef</span> CreationT&lt; T&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Creation policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('CreationPolicy_21151319583276')">+ CreationPolicy</a></span>: <span class="keyword">typedef</span> CreationT&lt; T&gt;;</code>
+</div></td></tr><tr id="CreationPolicy_21151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Lifetime policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">LifetimePolicy</a></span>: <span class="keyword">typedef</span> LifetimeT&lt; T&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Lifetime policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('LifetimePolicy_21171319583276')">+ LifetimePolicy</a></span>: <span class="keyword">typedef</span> LifetimeT&lt; T&gt;;</code>
+</div></td></tr><tr id="LifetimePolicy_21171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Threading policy.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> ThreadingT&lt; Singleton&lt;T, CreationT, LifetimeT, ThreadingT&gt;&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Threading policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_21181319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> ThreadingT&lt; Singleton&lt;T, CreationT, LifetimeT, ThreadingT&gt;&gt;;</code>
+</div></td></tr><tr id="ThreadingPolicy_21181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Type as stored in the singleton (volatile if necessary)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Reference</a></span>: <span class="keyword">typedef</span> T&amp;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type as stored in the singleton (volatile if necessary)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Reference_21201319583276')">+ Reference</a></span>: <span class="keyword">typedef</span> T&amp;;</code>
+</div></td></tr><tr id="Reference_21201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Volatile pointer.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">VolatilePtr</a></span>: <span class="keyword">typedef</span> ThreadingPolicy::template Volatile&lt; T*&gt;::Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Volatile pointer.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('VolatilePtr_21211319583276')">+ VolatilePtr</a></span>: <span class="keyword">typedef</span> ThreadingPolicy::template Volatile&lt; T*&gt;::Type;</code>
+</div></td></tr><tr id="VolatilePtr_21211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the instance of this singleton.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Instance_21231319583276')">+ Instance</a></span>: <span class="keyword">static</span> Reference ();
+</code>
+</div></td></tr><tr id="Instance_21231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the instance of this singleton.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Instance</a></span>: <span class="keyword">static</span> Reference ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor will fail at compile time !<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Singleton_21251319583276')">+ Singleton</a></span>:  (const Singleton&amp; );
 </code>
+</div></td></tr><tr id="Singleton_21251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor will fail at compile time !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Singleton</a></span>:  (const Singleton&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment operator will fail at compile time !<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_21281319583276')">+ operator=</a></span>: Singleton&amp; (const Singleton&amp; );
 </code>
+</div></td></tr><tr id="operator=_21281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment operator will fail at compile time !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Singleton&amp; (const Singleton&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Address-of operator will fail at compile time !<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator&_21301319583276')">+ operator&amp;</a></span>: Singleton&lt;T, CreationT, LifetimeT, ThreadingT&gt;* ();
 </code>
+</div></td></tr><tr id="operator&_21301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Address-of operator will fail at compile time !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&amp;</a></span>: Singleton&lt;T, CreationT, LifetimeT, ThreadingT&gt;* ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Address-of operator will fail at compile time !<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator&_21321319583276')">+ operator&amp;</a></span>: const Singleton* () <span class="keyword">const</span>;
 </code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Address-of operator will fail at compile time !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&amp;</a></span>: const Singleton* () <span class="keyword">const</span>;
-</code>
+</div></td></tr><tr id="operator&_21321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

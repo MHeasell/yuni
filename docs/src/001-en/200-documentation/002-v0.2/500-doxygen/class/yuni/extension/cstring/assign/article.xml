@@ -6,11 +6,15 @@
 
 
 
-<h2><code>Assign</code></h2><table class="doxygen_table">
+<h2>Assign</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Perform</a></span>: <span class="keyword">static</span> void (CStringT&amp; s, const C&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Perform_9921319583276')">+ Perform</a></span>: <span class="keyword">static</span> void (CStringT&amp; s, const C&amp; rhs);
 </code>
+</div></td></tr><tr id="Perform_9921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

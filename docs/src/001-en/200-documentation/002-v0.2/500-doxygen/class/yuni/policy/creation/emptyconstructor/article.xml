@@ -6,17 +6,27 @@
 
 
 
-<h2><code>EmptyConstructor</code></h2><table class="doxygen_table">
+<h2>Singleton creation using the new operator and an empty constructor.<br /></h2>
+<div>Parameters :<ul><li><code> T</code> The data type<br /></li></ul><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Creation of the data.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Create</a></span>: <span class="keyword">static</span> T* ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Creation of the data.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Create_57261319583276')">+ Create</a></span>: <span class="keyword">static</span> T* ();
 </code>
+</div></td></tr><tr id="Create_57261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destruction of the data.<div class="doxygen_name_spacer"></div>
-<code><div id="Destroy_57921319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">Destroy</a></span>: <span class="keyword">static</span> void (U* data);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destruction of the data.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="Destroy_57271319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('Destroy_57271319583276')">+ Destroy</a></span>: <span class="keyword">static</span> void (U* data);
 </code>
+</div></td></tr><tr id="Destroy_57271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

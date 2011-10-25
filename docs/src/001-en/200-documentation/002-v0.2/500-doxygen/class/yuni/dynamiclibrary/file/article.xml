@@ -6,84 +6,221 @@
 
 
 
-<h2><code>File</code></h2><table class="doxygen_table">
+<h2>An Executable Object file.<br /></h2>
+<div>Here is an example of a typical use of a dynamic library. Assuming we have the following shared library :<source type="cpp">  #include  &lt; yuni/yuni.h &gt;  //  For  `YUNI_LIB_EXPORT`,  which  is  OS  Dependant
+  #include  &lt;string.h&gt;     //  For  `strlen()`
+
+  extern  "C"  YUNI_LIB_EXPORT  const  char *  myname( void )
+  {
+     return  "The  'my'  library" ;
+  }
+
+  extern  "C"  YUNI_LIB_EXPORT  int  mylength( const  char *  s)
+  {
+     return  s  ?  strlen(s)  :  0;
+  }
+</source>
+<br /> We could safely use it in this way, which is the simplest one :<source type="cpp">  #include  &lt; yuni/yuni.h &gt;
+  #include  &lt; yuni/core/dynamiclibrary.h &gt;
+  #include  &lt; yuni/core/bind.h &gt;
+  #include  &lt;iostream&gt;
+
+
+  using  namespace  Yuni;
+
+  int  main( void )
+  {
+         //  Our  dynamic  library
+         //  (might  be  `mylib.so`  on  Unix,  `my.dynlib`  on  Darwin,  or  `my.dll`  on  Windows)
+         //  The  current  path  (`./`)  is  by  default  in  the  search  paths
+         DynamicLibrary::File  lib( "my" );
+
+         //  Binding  with  a  C  function,  which  has  only  one  argument  and  an  `int`
+         //  as  its  returned  type
+         //  warning:  This  binding  will  be  only  valid  for  the  lifetime  of  the
+         //  variable  `lib`.  After  that,  you  should  encounter  some  crash  if  you
+         //  try  to  use  it.
+         Bind&lt;int (const char*)&gt;  f  =  lib[ "mylength" ];
+
+         //  Calling  the  exported  function
+         //  It  is  safe  to  directly  call  the  function  like  this.
+         //  The  default  constructor  of  the  returned  type  is  used  if  the  library
+         //  has  not  been  successfully  loaded.
+         int  result  =  f( "Hello  world" );
+
+         std::cout  &lt;&lt;  "Library  loaded  :  "  &lt;&lt;  (lib. loaded ()  ?  "Yes"  :  "No" )  &lt;&lt;  std::endl;
+         std::cout  &lt;&lt;  "Returned  Value  :  "  &lt;&lt;  result  &lt;&lt;  std::endl;
+
+         //  Extra:  Displaying  the  name  of  our  library
+         Bind&lt;const char* ()&gt;  libname  =  lib[ "myname" ];
+         const  char *  s  =  libname();
+         std::cout  &lt;&lt;  "Library  name:  "  &lt;&lt;  (s  ?  s  :  "(null)" )  &lt;&lt;  std::endl;
+  }
+</source>
+<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; DEstructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">File</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('File_12591319583276')">+ File</a></span>:  ();
 </code>
+</div></td></tr><tr id="File_12591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor - Load an dynamic library.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">File</a></span>:  (const String&amp; filename, const Relocation r, const Visibility v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor - Load an dynamic library.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('File_12601319583276')">+ File</a></span>:  (const String&amp; filename, const Relocation r, const Visibility v);
 </code>
+</div></td></tr><tr id="File_12601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> filename</code> Filename of the library to load<br /></li><li><code> r</code> The relocation mode (no effect on Windows)<br /></li><li><code> v</code> The visibility mode (no effect on Windows)<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>File</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~File_12611319583276')">+ <b> ~ </b>File</a></span>:  ();
 </code>
+</div></td></tr><tr id="~File_12611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The library will be automatically unloaded if needed.<br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Loading / Unloading <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Load a dynamic library from its filename.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">loadFromFile</a></span>: bool (const String&amp; filename, const Relocation r, const Visibility v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Load a dynamic library from its filename.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('loadFromFile_12621319583276')">+ loadFromFile</a></span>: bool (const String&amp; filename, const Relocation r, const Visibility v);
 </code>
+</div></td></tr><tr id="loadFromFile_12621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The filename may be modified, according the current operating system. A prefix and/or a suffix may be added to suit to the OS.<br /> The prefix : `lib` may be added as prefix on Unix platforms The suffixes :<ul><li> Mac OS : .dylib, .bundle, .so<br /></li><li> Unix/Linux : .so<br /></li><li> AIX : .a<br /></li><li> HP-UX : .sl, .so<br /></li><li> Windows : .dll<br /></li></ul><br /> The library will be searched in all system-specific library locations (e.g. LD_LIBRARY_PATH on Unix), then in all given search paths, unless the file name has an absolute path.<br /> If a library is already loaded, it will be unloaded first.<br /><br />Parameters :<ul><li><code> filename</code> The absolute or relative filename to the library<br /></li><li><code> r</code> The relocation mode (no effect on Windows)<br /></li><li><code> v</code> The visibility mode (no effect on Windows)<br /></li></ul><div><code>return</code>  True if the library has been loaded<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Load a dynamic library from its filename.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">loadFromRawFilename</a></span>: bool (const char* filename, const Relocation r, const Visibility v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Load a dynamic library from its filename.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('loadFromRawFilename_12631319583276')">+ loadFromRawFilename</a></span>: bool (const char* filename, const Relocation r, const Visibility v);
 </code>
+</div></td></tr><tr id="loadFromRawFilename_12631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">No operation will be made on the filename, contrary to load() where a suffic and/or a prefix might be added.<br /> If a library is already loaded, it will be unloaded first.<br /><br />Parameters :<ul><li><code> filename</code> The absolute or relative filename to the library<br /></li><li><code> r</code> The relocation mode (no effect on Windows)<br /></li><li><code> v</code> The visibility mode (no effect on Windows)<br /></li></ul><div><code>return</code>  True if the library has been loaded<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Load a dynamic library from its filename.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">loadFromRawFilename</a></span>: bool (const String&amp; filename, const Relocation r, const Visibility v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Load a dynamic library from its filename.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('loadFromRawFilename_12641319583276')">+ loadFromRawFilename</a></span>: bool (const String&amp; filename, const Relocation r, const Visibility v);
 </code>
+</div></td></tr><tr id="loadFromRawFilename_12641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The filename may be modified, according the current operating system. A prefix and/or a suffix may be added to suit to the OS.<br /> The prefix : `lib` may be added as prefix on Unix platforms The suffixes :<ul><li> Mac OS : .dylib, .bundle, .so<br /></li><li> Unix/Linux : .so<br /></li><li> AIX : .a<br /></li><li> HP-UX : .sl, .so<br /></li><li> Windows : .dll<br /></li></ul><br /> The library will be searched in all system-specific library locations (e.g. LD_LIBRARY_PATH on Unix), then in all given search paths, unless the file name has an absolute path.<br /> If a library is already loaded, it will be unloaded first.<br /><br />Parameters :<ul><li><code> filename</code> The absolute or relative filename to the library<br /></li><li><code> r</code> The relocation mode (no effect on Windows)<br /></li><li><code> v</code> The visibility mode (no effect on Windows)<br /></li></ul><div><code>return</code>  True if the library has been loaded<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Unload the dynamic library.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">unload</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Unload the dynamic library.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('unload_12651319583276')">+ unload</a></span>: void ();
 </code>
+</div></td></tr><tr id="unload_12651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Nothing will be done if the library is not already loaded<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the dynamic library is loaded.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">loaded</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the dynamic library is loaded.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('loaded_12661319583276')">+ loaded</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="loaded_12661319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the filename of the loaded library.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">filename</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the filename of the loaded library.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('filename_12671319583276')">+ filename</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="filename_12671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>return</code>  The full filename of the library, or empty if not loaded<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Symbols <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if a symbol exists in the library.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">hasSymbol</a></span>: bool (const String&amp; name) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if a symbol exists in the library.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('hasSymbol_12681319583276')">+ hasSymbol</a></span>: bool (const String&amp; name) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="hasSymbol_12681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> name</code> Name of the exported symbol<br /></li></ul><div><code>return</code>  True if the library is loaded and the symbol exists, False otherwise<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Try to resolve the address of an exported symbol by the library.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">resolve</a></span>: Symbol (const String&amp; name) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Try to resolve the address of an exported symbol by the library.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('resolve_12691319583276')">+ resolve</a></span>: Symbol (const String&amp; name) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="resolve_12691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><source type="cpp">  Yuni::DynamicLibrary::File  lib;
+  if  (lib.load( "my" ))
+  {
+         //  The  shared  library  has  been  loaded
+         //  We  can  try  to  resolve  a  symbol
+         Yuni::DynamicLibrary::Symbol  s  =  lib. resolve ( "myentry" );
+         if  (s. valid ())
+         {
+             //  The  symbol  has  been  found,  let's  continue
+             //  ...
+         }
+         else
+         {
+             //  The  symbol  has  not  been  found  in  the  library
+         }
+  }
+</source>
+<br /><br />Parameters :<ul><li><code> name</code> Name of the exported symbol<br /></li></ul><div><code>return</code>  The Symbol . Use Symbol::valid() or Symbol::null() to know if the result is valid<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Handle <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the OS Dependant handle of the dynamic library.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">handle</a></span>: Handle () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the OS Dependant handle of the dynamic library.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('handle_12701319583276')">+ handle</a></span>: Handle () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="handle_12701319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator [].<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator[]</a></span>: Symbol (const String&amp; name) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator [].<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator[]_12711319583276')">+ operator[]</a></span>: Symbol (const String&amp; name) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator[]_12711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>see</code> :  resolve()<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">Relocations shall be performed at an implementation-defined time (see RTLD_LAZY, Unix only) Relocation options.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Relocation options.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="RelocationrelocationLazyrelocationNow_12721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">When an object is brought into the address space of a process, it may contain references to symbols whose addresses are not known until the object is loaded. These references shall be relocated before the symbols can be accessed (man dlopen).<br /> These options are actually ignored on Windows.<br />
+</div>
 </td></tr>
-<tr><td></td><td class="doxnone">OS Dependant default implementation. The object’s symbols shall be made available for the relocation processing of any other object (Unix only) The object’s symbols shall not be made available for the relocation processing of any other object (Unix only) Scope of visibility options.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Scope of visibility options.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="VisibilityvisibilityDefaultvisibilityGlobalvisibilityLocal_12731319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">OS Dependant Handle of a shared library.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Handle</a></span>: <span class="keyword">typedef</span> void*;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">OS Dependant Handle of a shared library.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Handle_12741319583276')">+ Handle</a></span>: <span class="keyword">typedef</span> void*;</code>
+</div></td></tr><tr id="Handle_12741319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">An invalid handle.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">NullHandle</a></span>: const Handle;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">An invalid handle.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('NullHandle_12751319583276')">+ NullHandle</a></span>: const Handle;</code>
+</div></td></tr><tr id="NullHandle_12751319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

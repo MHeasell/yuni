@@ -6,85 +6,157 @@
 
 
 
-<h2><code>Any</code></h2><table class="doxygen_table">
+<h2>Classic Any type implementation.<br /> This is a relatively classic, yet (i hope) fast implementation of a Any type.<br /></h2>
+<div>How to use:<source type="cpp">  Any  v(3.14);
+
+  if  (v.is&lt; double &gt;())
+    //  Be  sure  to  check  the  type  before,  otherwise  Any  will  throw  an  exception.
+    std::cout  &lt;&lt;  v.cast&lt; double &gt;();
+</source>
+<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy of an existing variable.<div class="doxygen_name_spacer"></div>
-<code><div id="Any_34351319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">Any</a></span>:  (const T&amp; source);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy of an existing variable.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="Any_34031319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('Any_34031319583276')">+ Any</a></span>:  (const T&amp; source);
 </code>
+</div></td></tr><tr id="Any_34031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy of an existing const C string.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Any</a></span>:  (const char* source);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy of an existing const C string.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Any_34061319583276')">+ Any</a></span>:  (const char* source);
 </code>
+</div></td></tr><tr id="Any_34061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy of an existing const C string.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Any</a></span>:  (char* source);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy of an existing const C string.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Any_34081319583276')">+ Any</a></span>:  (char* source);
 </code>
+</div></td></tr><tr id="Any_34081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Empty constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Any</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Empty constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Any_34091319583276')">+ Any</a></span>:  ();
 </code>
+</div></td></tr><tr id="Any_34091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Any</a></span>:  (const Any&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Any_34101319583276')">+ Any</a></span>:  (const Any&amp; rhs);
 </code>
+</div></td></tr><tr id="Any_34101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Any</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Any_34111319583276')">+ <b> ~ </b>Any</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Any_34111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Alteration methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment from another Any .<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">assign</a></span>: Any&amp; (const Any&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment from another Any .<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('assign_34131319583276')">+ assign</a></span>: Any&amp; (const Any&amp; rhs);
 </code>
+</div></td></tr><tr id="assign_34131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The Any to assign from<br /></li></ul><div><code>return</code>  This Any<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment from any object.<div class="doxygen_name_spacer"></div>
-<code><div id="assign_34481319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">assign</a></span>: Any&amp; (const T&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment from any object.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="assign_34141319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('assign_34141319583276')">+ assign</a></span>: Any&amp; (const T&amp; rhs);
 </code>
+</div></td></tr><tr id="assign_34141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The object to assign from<br /></li></ul><div><code>return</code>  This Any<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Specialized assign for C Strings.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">assign</a></span>: Any&amp; (const char* rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Specialized assign for C Strings.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('assign_34161319583276')">+ assign</a></span>: Any&amp; (const char* rhs);
 </code>
+</div></td></tr><tr id="assign_34161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment operator for convenience.<div class="doxygen_name_spacer"></div>
-<code><div id="operator=_34501319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">operator=</a></span>: Any&amp; (T const&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment operator for convenience.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator=_34171319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator=_34171319583276')">+ operator=</a></span>: Any&amp; (T const&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_34171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Resets the Any to an empty state.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Resets the Any to an empty state.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('reset_34181319583276')">+ reset</a></span>: void ();
 </code>
+</div></td></tr><tr id="reset_34181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Information methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Returns the type_info of the held variable.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">type</a></span>: const std::type_info&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Returns the type_info of the held variable.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('type_34201319583276')">+ type</a></span>: const std::type_info&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="type_34201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Can be used to compare with typeid(MyType).<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Returns true if the object is of the specified type.<div class="doxygen_name_spacer"></div>
-<code><div id="is_34561319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">is</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Returns true if the object is of the specified type.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="is_34211319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('is_34211319583276')">+ is</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="is_34211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Checks if the any has been assigned a value.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Checks if the any has been assigned a value.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('empty_34221319583276')">+ empty</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="empty_34221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>return</code>  True if the any contains no value.<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Retrieval methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Casts the Any to the T type. Throws a Yuni::Exceptions::BadCast if not possible.<div class="doxygen_name_spacer"></div>
-<code><div id="to_34611319137232_templ" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">to</a></span>: const T&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Casts the Any to the T type. Throws a Yuni::Exceptions::BadCast if not possible.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="to_34241319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('to_34241319583276')">+ to</a></span>: const T&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="to_34241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>return</code>  A T object.<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Swaps a any with another.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Swap</a></span>: <span class="keyword">static</span> void (Any&amp; one, Any&amp; other);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Swaps a any with another.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Swap_34251319583276')">+ Swap</a></span>: <span class="keyword">static</span> void (Any&amp; one, Any&amp; other);
 </code>
+</div></td></tr><tr id="Swap_34251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> one</code> Any 1<br /></li><li><code> other</code> Any 2<br /></li></ul><br />
+</div>
 </td></tr>
 </table>
 

@@ -2,6 +2,7 @@
 #include "article.h"
 #include "../logs.h"
 #include "program.h"
+#include "indexes.h"
 
 using namespace Yuni;
 using namespace Yuni::Tool::DocMake;
@@ -42,6 +43,7 @@ void ArticleData::reset()
 	assert(title.capacity() < 1024);
 	assert(accessPath.capacity() < 1024 * 1024);
 
+	id = -1;
 	modificationTime = 0;
 	pageWeight = 1.0f;
 	coeff = 1.0f;
@@ -155,6 +157,12 @@ void ArticleData::insertTags(const Yuni::StringAdapter& text)
 			tags.insert(*i);
 		}
 	}
+}
+
+
+void ArticleData::reloadTagsFromDatabase()
+{
+	DocIndex::RetrieveTagList(*this);
 }
 
 

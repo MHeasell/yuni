@@ -28,6 +28,7 @@ namespace Dox2Article
 		kdFile,
 		kdFolder,
 		kdGroup,
+		kdFriend,
 		kdMax
 	};
 
@@ -55,6 +56,7 @@ namespace Dox2Article
 		String id;
 		String name;
 		String brief;
+		String detailedDescription;
 		CString<16,false>  visibility;
 		String type;
 		bool isStatic;
@@ -121,6 +123,11 @@ namespace Dox2Article
 		String name;
 
 		String htdocs;
+
+		//! Brief
+		String brief;
+		//! Detailed description
+		String description;
 
 		Map members;
 

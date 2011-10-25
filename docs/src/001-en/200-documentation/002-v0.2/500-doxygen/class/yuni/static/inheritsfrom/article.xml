@@ -6,11 +6,32 @@
 
 
 
-<h2><code>InheritsFrom</code></h2><table class="doxygen_table">
+<h2>Statically check if an arbitrary class C is a descendant of another one.<br /></h2>
+<div><source type="cpp">  #include  &lt;yuni/static/inherit.h&gt;
+  #include  &lt;iostream&gt;
+
+  class  Base  {};
+
+  class  A  :  public  Base  {};
+
+  class  B  {};
+
+  int  main()
+  {
+     std::cout  &lt;&lt;  "A  inherits  from  Base  :"  &lt;&lt;  Yuni::Static::InheritsFrom&lt;A,Base&gt;::Yes  &lt;&lt;  "\n" ;
+     std::cout  &lt;&lt;  "B  inherits  from  Base  :"  &lt;&lt;  Yuni::Static::InheritsFrom&lt;B,Base&gt;::Yes  &lt;&lt;  "\n" ;
+     return  0;
+  }
+</source>
+<br /><br />Parameters :<ul><li><code> C</code> Any class (may be virtual)<br /></li><li><code> BaseT</code> The base class to compare with (may be virtual)<br /></li></ul><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">A non-zero value if C inherits from BaseT. A non-zero value if C does not inherit from BaseT.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@233YesNo_62681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 
