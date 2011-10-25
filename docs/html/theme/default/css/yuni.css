@@ -295,6 +295,10 @@ body,html {
 	font-weight: bold;
 	color: #000;
 }
+.content h2 code {
+	background-color:transparent;
+	color:#115;
+}
 td > h1:first-child {
 	margin-top:0 !important;
 	padding-top:0 !important;
@@ -327,6 +331,12 @@ td > h2:first-child {
 .content code {
 	color					:#33A;
 	font-family				:Monaco, 'Lucida Console', monospace;
+	background-color:#f2f2ff;
+	padding:0.1em 0.4em 0.1em 0.4em;
+	color:#778 !important;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 .content code .keyword {
 	color:#666;
@@ -593,13 +603,34 @@ td > h2:first-child {
 	border-top-style:none !important;
 	border-left-style:none !important;
 	border-right-style:none !important;
+	border-bottom-style:none !important;
 	border-color:#f2f2ff !important;
+}
+.doxygen_brief {
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	background-color:#fbfbfb;
+	border:1px solid #f0f0f0;
+	padding:0.6em 1em;
+}
+.doxygen_brief code {
+	background-color:transparent;
+}
+.doxygen_table .doxreturn {
+	background-image:url('../images/arrow.return.gif');
+	background-position:center 0.8em;
+	background-repeat:no-repeat;
+}
+.doxygen_table .doxygen_desc code {
+	background-color:#f2f2ff;
+	padding:0.1em 0.4em 0.1em 0.4em;
 }
 .doxygen_table td {
 	border:1px solid #ccc;
 	background-position:center center;
-	padding-top:0.6em !important;
-	padding-bottom:0.6em !important;
+	padding-top:0.35em !important;
+	padding-bottom:0.35em !important;
 	text-align:left !important;
 }
 .doxygen_table td a {
@@ -625,7 +656,7 @@ td > h2:first-child {
 	text-shadow:none;
 }
 .doxygen_name_spacer {
-	padding-top:0.3em;
+	padding-top:0.4em;
 }
 code .method {
 	color:#933;
@@ -636,9 +667,9 @@ code .method a {
 	background-color:#eee;
 	padding-left:0.3em;
 
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 
 	text-shadow	:2px 2px 2px white;
 	color:#bb3333;
@@ -674,4 +705,18 @@ code .method a:hover {
 	background-color:#f6f6f6;
 	border-style:none !important;
 	width:10px;
+}
+.doxygen_desc {
+	padding-top:0.2em;
+	padding-bottom:0.8em;
+	padding-left:1em;
+	margin-left:0em;
+	margin-bottom:1em;
+	border-top-style:none;
+	border-bottom-style:none;
+	border-right-style:none;
+}
+.doxygen_tmpllist {
+	padding-top:0.2em;
+	padding-bottom:0.3em;
 }

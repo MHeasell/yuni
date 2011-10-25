@@ -6,17 +6,24 @@
 
 
 
-<h2><code>HexaUppercase</code></h2><table class="doxygen_table">
+<h2>HexaUppercase</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">the nth power of b<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@207n_28931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Digits.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Digit</a></span>: <span class="keyword">static</span> const char* ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Digits.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Digit_28951319583276')">+ Digit</a></span>: <span class="keyword">static</span> const char* ();
 </code>
+</div></td></tr><tr id="Digit_28951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

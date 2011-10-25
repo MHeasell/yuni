@@ -6,20 +6,35 @@
 
 
 
-<h2><code>NullIterator</code></h2><table class="doxygen_table">
+<h2>NullIterator</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">A non-zero value if the iterator can go forward. A non-zero value if the iterator can go backward.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@354canGoForwardcanGoBackward_8701319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The type of the orignal object.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">value_type</a></span>: <span class="keyword">typedef</span> String;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The type of the orignal object.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('value_type_8711319583276')">+ value_type</a></span>: <span class="keyword">typedef</span> String;</code>
+</div></td></tr><tr id="value_type_8711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">An unsigned integral type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">uint64ype</a></span>: <span class="keyword">typedef</span> uint64;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">An unsigned integral type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('uint64ype_8721319583276')">+ uint64ype</a></span>: <span class="keyword">typedef</span> uint64;</code>
+</div></td></tr><tr id="uint64ype_8721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">A signed integral type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">difference_type</a></span>: <span class="keyword">typedef</span> sint64;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A signed integral type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('difference_type_8731319583276')">+ difference_type</a></span>: <span class="keyword">typedef</span> sint64;</code>
+</div></td></tr><tr id="difference_type_8731319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

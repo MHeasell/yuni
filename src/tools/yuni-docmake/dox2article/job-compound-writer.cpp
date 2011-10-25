@@ -107,6 +107,7 @@ namespace Job
 			case kdFile: break;
 			case kdFolder: break;
 			case kdGroup: break;
+			case kdFriend: break;
 			case kdUnknown: break;
 			case kdMax: break;
 		}
@@ -132,10 +133,10 @@ namespace Job
 			String visibility;
 			String lastVisibility;
 			String type;
-			String brief;
 			String paramType;
 			String paramName;
 			String id;
+			String toggle;
 			Clob out;
 			// Getting the name
 			const String& name = pCompound->name;
@@ -153,7 +154,14 @@ namespace Job
 			out << "<tag name=\"dox:class\" />\n";
 			out << "\n\n\n";
 
-			out << "<h2><code>" << pageTitle << "</code></h2>";
+			if (pCompound->brief.notEmpty())
+				out << "<h2>" << pCompound->brief << "</h2>\n";
+			else
+				out << "<h2>" << pageTitle << "</h2>";
+
+			if (pCompound->description.notEmpty())
+				out << "<div>" << pCompound->description << "</div>\n";
+
 			out << "<table class=\"doxygen_table\">\n";
 
 			bool isAbstract = (pageTitle.first() == 'I');
@@ -164,13 +172,19 @@ namespace Job
 				const Section::Ptr& sectionptr = pCompound->sections[i];
 				const Section& section = *sectionptr;
 
+				char umlSymbol = '+';
+
 				if (section.kind.startsWith("public-"))
 					visibility = "Public";
 				else if (section.kind.startsWith("protected-"))
+				{
 					visibility = "Protected";
+					umlSymbol = '#';
+				}
 				else if (section.kind.startsWith("private-"))
 				{
 					visibility = "Private";
+					umlSymbol = '-';
 					// Skipping all private members
 					continue;
 				}
@@ -181,25 +195,27 @@ namespace Job
 				if (!isAbstract && visibility != "Public")
 					continue;
 
-				out << "<tr><td class=\"doxnone\"></td><td class=\"doxnone\">";
+				String subtitle;
+				subtitle << "<tr><td class=\"doxnone\"></td><td class=\"doxnone\">";
 				/*
 				// if (lastVisibility != visibility)
 				if (0)
 				{
-					out << "<div class=\"visibility\">" << visibility << "</div>";
+					subtitle << "<div class=\"visibility\">" << visibility << "</div>";
 					lastVisibility = visibility;
 				}
-				out << "</td>\n<td>";
+				subtitle << "</td>\n<td>";
 				*/
 				if (section.caption.notEmpty())
 				{
 					HtmlEntities(tmp, section.caption);
-					out << "<h3 class=\"doxygen_section\">" << tmp << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
+					subtitle << "<h3 class=\"doxygen_section\">" << tmp << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
 				}
 				else
-					out << "<h3 class=\"doxygen_section\">" << visibility << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
-				out << "</td></tr>\n";
+					subtitle << "<h3 class=\"doxygen_section\">" << visibility << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
+				subtitle << "</td></tr>\n";
 
+				bool subtitleAlreadyWritten = false;
 				unsigned int memcount = (unsigned int) section.members.size();
 				for (unsigned int j = 0; j != memcount; ++j)
 				{
@@ -207,16 +223,23 @@ namespace Job
 					const Member& member = *memberptr;
 					if (member.name == "YUNI_STATIC_ASSERT")
 						continue;
+					if (member.kind == kdFriend)
+						continue;
 
+					if (!subtitleAlreadyWritten)
+						out << subtitle;
+
+					subtitleAlreadyWritten = true;
 					out << "<tr>";
 
 
 					id.clear() << member.name << '_' << (++GenerationNumericID) << DateTime::CurrentTimestamp();
 					id.replace('-', '_'); // prevent against int overflow
+					toggle.clear() << "toggleVisibility('" << id << "')";
+
 					HtmlEntities(tmp, member.name);
 					HtmlEntities(type, member.type);
 					ArrangeTypename(type);
-					HtmlEntities(brief, member.brief);
 
 					switch (member.kind)
 					{
@@ -226,10 +249,10 @@ namespace Job
 						case kdEnum:     out << "<td class=\"doxygen_enum\">";break;
 						default: out << "<td>";break;
 					}
-					out << "</td><td class=\"doxnone\">";
+					out << "</td><td class=\"doxnone\"><div class=\"doxygen_brief\">";
 
-					if (brief.notEmpty())
-						out << brief << "<div class=\"doxygen_name_spacer\"></div>\n";
+					if (member.brief.notEmpty())
+						out << member.brief << "<div class=\"doxygen_name_spacer\"></div>\n";
 					out << "<code>";
 
 					switch (member.kind)
@@ -238,7 +261,7 @@ namespace Job
 							{
 								if (!member.templates.empty())
 								{
-									out << "<div id=\"" << id << "_templ\" style=\"display:none\">";
+									out << "<div class=\"doxygen_tmpllist\" id=\"" << id << "_tmpl\" style=\"display:none\">";
 									out << "<span class=\"keyword\">template</span>&lt;";
 									for (unsigned int p = 0; p != member.templates.size(); ++p)
 									{
@@ -253,15 +276,17 @@ namespace Job
 									}
 									out << "&gt;</div>\n";
 								}
+
+
 								if (tmp.first() == '~')
 								{
 									String t = tmp;
 									t.replace("~", "<b> ~ </b>");
-									out << " <span class=\"method\"><a href=\"#\">" << t << "</a></span>";
+									out << " <span class=\"method\"><a href=\"javascript:" << toggle << "\">" << umlSymbol << ' ' << t << "</a></span>";
 								}
 								else
 								{
-									out << " <span class=\"method\"><a href=\"#\">" << tmp << "</a></span>";
+									out << " <span class=\"method\"><a href=\"javascript:" << toggle << "\">" << umlSymbol << ' ' << tmp << "</a></span>";
 								}
 
 								out << ": ";
@@ -290,7 +315,7 @@ namespace Job
 							}
 						case kdTypedef:
 							{
-								out << "<span class=\"method\"><a href=\"#\">" << tmp << "</a></span>";
+								out << "<span class=\"method\"><a href=\"javascript:" << toggle << "\">" << umlSymbol << ' ' << tmp << "</a></span>";
 								out << ": <span class=\"keyword\">typedef</span> ";
 								out << type;
 								out << ';';
@@ -298,18 +323,36 @@ namespace Job
 							}
 						case kdVariable:
 							{
-								out << "<span class=\"method\"><a href=\"#\">" << tmp << "</a></span>";
+								out << "<span class=\"method\"><a href=\"javascript:" << toggle << "\">" << umlSymbol << ' ' << tmp << "</a></span>";
 								out << ": " << type;
 								out << ';';
 								break;
 							}
+						case kdFriend:
+							{
+								out << "<span class=\"method\">friend <a href=\"javascript:" << toggle << "\">" << tmp << "</a></span>";
+								break;
+							}
 						default:
-		//					Compound::AppendKindToString(std::cout, member.kind);
-		//					std::cout << '\n';
+							// Compound::AppendKindToString(std::cout, member.kind);
+							// std::cout << '\n';
 							out << "<i>(unmanaged tag: " << (unsigned int) member.kind << ")</i>";
 							break;
 					}
 					out << "</code>\n";
+
+					out << "</div></td>";
+
+					out << "</tr>";
+					out << "<tr id=\"" << id << "_desc\" style=\"display:none\"><td class=\"doxnone doxreturn\"></td><td class=\"doxnone\">\n";
+					out << "<div class=\"doxygen_name_spacer\"></div>\n<div class=\"doxygen_desc\">";
+
+					if (member.detailedDescription.notEmpty())
+						out << member.detailedDescription;
+					else
+						out << "<i>no description</i>";
+
+					out << "\n</div>\n";
 					out << "</td>";
 					out << "</tr>\n";
 				}

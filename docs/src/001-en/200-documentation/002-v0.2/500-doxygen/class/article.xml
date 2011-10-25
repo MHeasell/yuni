@@ -4,9 +4,6 @@
 <p>This is a list of all classes in Yuni.</p>
 <table>
 <tr><th>Name</th><th>Description</th></tr><tr><td>
-<a href="../class/depthprefixiterator/@{INDEX}">DepthPrefixIterator</a>
-</td><td></td></tr>
-<tr><td>
 <a href="../class/iterator/@{INDEX}">Iterator</a>
 </td><td></td></tr>
 <tr><td>
@@ -121,13 +118,7 @@
 <a href="../class/yuni/core/stl/delete/@{INDEX}">Yuni::Core::STL::Delete</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../class/yuni/core/tree/depthprefixiterator/@{INDEX}">Yuni::Core::Tree::DepthPrefixIterator</a>
-</td><td></td></tr>
-<tr><td>
 <a href="../class/yuni/core/treen/@{INDEX}">Yuni::Core::TreeN</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/core/treen/iterator/@{INDEX}">Yuni::Core::TreeN::iterator</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/core/utils/hexdump/@{INDEX}">Yuni::Core::Utils::Hexdump</a>
@@ -367,9 +358,6 @@
 <a href="../class/yuni/index/table/@{INDEX}">Yuni::Index::Table</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../class/yuni/job/activitypredicate/@{INDEX}">Yuni::Job::ActivityPredicate</a>
-</td><td></td></tr>
-<tr><td>
 <a href="../class/yuni/job/ijob/@{INDEX}">Yuni::Job::IJob</a>
 </td><td></td></tr>
 <tr><td>
@@ -497,6 +485,12 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/math/squarerootint/@{INDEX}">Yuni::Math::SquareRootInt</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/memory/itransactor/@{INDEX}">Yuni::Memory::ITransactor</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/memory/transaction/itransaction/@{INDEX}">Yuni::Memory::Transaction::ITransaction</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/mutex/@{INDEX}">Yuni::Mutex</a>
@@ -763,6 +757,9 @@
 <a href="../class/yuni/traits/cstring/@{INDEX}">Yuni::Traits::CString</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/traits/isstring/@{INDEX}">Yuni::Traits::IsString</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/traits/length/@{INDEX}">Yuni::Traits::Length</a>
 </td><td></td></tr>
 <tr><td>
@@ -945,8 +942,5 @@
 <tr><td>
 <a href="../class/imaxdiv_t/@{INDEX}">imaxdiv_t</a>
 </td><td></td></tr>
-<tr><td>
-<a href="../class/iterator/@{INDEX}">iterator</a>
-</td><td></td></tr>
 </table>
-<p><i>(total: 315 classes)</i></p>
+<p><i>(total: 313 classes)</i></p>

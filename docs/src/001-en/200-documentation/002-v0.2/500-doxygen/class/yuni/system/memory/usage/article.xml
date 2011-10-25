@@ -6,30 +6,52 @@
 
 
 
-<h2><code>Usage</code></h2><table class="doxygen_table">
+<h2>Information about the current memory usage.<br /></h2>
+<div>When information about the current memory usage could not be retrieved, some default values are used (see defaultTotal and defaultAvailable). This is the case for example when the implementation is missing for the current operating system. This method ensures that the values are always valid.<br /> Performance tip: If you're interrested in a single value, you should use the corresponding global routine instead, which will be at least as fast as this this class, sometimes better.<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Usage</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Usage_9781319583276')">+ Usage</a></span>:  ();
 </code>
+</div></td></tr><tr id="Usage_9781319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Usage</a></span>:  (const Usage&amp; copy);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Usage_9791319583276')">+ Usage</a></span>:  (const Usage&amp; copy);
 </code>
+</div></td></tr><tr id="Usage_9791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The values will remain untouched.<br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The amount of the available physical memory (in bytes)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">available</a></span>: uint64;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The amount of the available physical memory (in bytes)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('available_9801319583276')">+ available</a></span>: uint64;</code>
+</div></td></tr><tr id="available_9801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The amount of the total physical memory (in bytes)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">total</a></span>: uint64;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The amount of the total physical memory (in bytes)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('total_9811319583276')">+ total</a></span>: uint64;</code>
+</div></td></tr><tr id="total_9811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Update information about the current memory usage.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">update</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Update information about the current memory usage.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('update_9821319583276')">+ update</a></span>: bool ();
 </code>
+</div></td></tr><tr id="update_9821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">This routine is automatically called by the constructor.<br />
+</div>
 </td></tr>
 </table>
 

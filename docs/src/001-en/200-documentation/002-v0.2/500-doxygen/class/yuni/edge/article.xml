@@ -6,44 +6,85 @@
 
 
 
-<h2><code>Edge</code></h2><table class="doxygen_table">
+<h2>An edge is a segment between two vertices.<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors and destructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Edge</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Edge_23491319583276')">+ Edge</a></span>:  ();
 </code>
+</div></td></tr><tr id="Edge_23491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Edge</a></span>:  (const Vertex&amp; v1, const Vertex&amp; v2);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Edge_23501319583276')">+ Edge</a></span>:  (const Vertex&amp; v1, const Vertex&amp; v2);
 </code>
+</div></td></tr><tr id="Edge_23501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#"><b> ~ </b>Edge</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('~Edge_23511319583276')">+ <b> ~ </b>Edge</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Edge_23511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Edge&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('Ptr_23521319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Edge&gt;;</code>
+</div></td></tr><tr id="Ptr_23521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Vector of Edges.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; SmartPtr&lt;Edge&gt;&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Vector of Edges.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Vector_23531319583276')">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; SmartPtr&lt;Edge&gt;&gt;;</code>
+</div></td></tr><tr id="Vector_23531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">List of Edges.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">List</a></span>: <span class="keyword">typedef</span> std::list&lt; SmartPtr&lt;Edge&gt;&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">List of Edges.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('List_23541319583276')">+ List</a></span>: <span class="keyword">typedef</span> std::list&lt; SmartPtr&lt;Edge&gt;&gt;;</code>
+</div></td></tr><tr id="List_23541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Access to the vertices composing the edge.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">vertex1</a></span>: const Vertex&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Access to the vertices composing the edge.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('vertex1_23551319583276')">+ vertex1</a></span>: const Vertex&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="vertex1_23551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">vertex2</a></span>: const Vertex&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('vertex2_23561319583276')">+ vertex2</a></span>: const Vertex&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="vertex2_23561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (equal with)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const Edge&amp; other) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (equal with)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator==_23571319583276')">+ operator==</a></span>: bool (const Edge&amp; other) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_23571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> other</code> The other edge to compare with<br /></li></ul><div><code>return</code>  True if the two edges share the same points<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison operator (non equal with)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Edge&amp; other) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (non equal with)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator!=_23581319583276')">+ operator!=</a></span>: bool (const Edge&amp; other) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_23581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> other</code> The other edge to compare with<br /></li></ul><div><code>return</code>  True if the two edges do not share the same points<br /></div><br />
+</div>
 </td></tr>
 </table>
 

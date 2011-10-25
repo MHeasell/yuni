@@ -40,9 +40,6 @@
 <a href="../namespace/yuni/core/stl/@{INDEX}">Yuni::Core::STL</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../namespace/yuni/core/tree/@{INDEX}">Yuni::Core::Tree</a>
-</td><td></td></tr>
-<tr><td>
 <a href="../namespace/yuni/core/utils/@{INDEX}">Yuni::Core::Utils</a>
 </td><td></td></tr>
 <tr><td>
@@ -131,6 +128,12 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/math/random/@{INDEX}">Yuni::Math::Random</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../namespace/yuni/memory/@{INDEX}">Yuni::Memory</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../namespace/yuni/memory/transaction/@{INDEX}">Yuni::Memory::Transaction</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../namespace/yuni/net/@{INDEX}">Yuni::Net</a>
@@ -268,4 +271,4 @@
 <a href="../namespace/std/@{INDEX}">std</a>
 </td><td></td></tr>
 </table>
-<p><i>(total: 88 namespaces)</i></p>
+<p><i>(total: 89 namespaces)</i></p>

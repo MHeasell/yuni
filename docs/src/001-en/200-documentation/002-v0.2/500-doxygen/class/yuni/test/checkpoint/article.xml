@@ -6,24 +6,40 @@
 
 
 
-<h2><code>Checkpoint</code></h2><table class="doxygen_table">
+<h2>Checkpoint</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Checkpoint</a></span>:  (const char* id);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Checkpoint_50141319583276')">+ Checkpoint</a></span>:  (const char* id);
 </code>
+</div></td></tr><tr id="Checkpoint_50141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Checkpoint</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Checkpoint_50151319583276')">+ <b> ~ </b>Checkpoint</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Checkpoint_50151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator()</a></span>: bool (bool b);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator()_50171319583276')">+ operator()</a></span>: bool (bool b);
 </code>
+</div></td></tr><tr id="operator()_50171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator()</a></span>: bool (bool b, const char* msg);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator()_50181319583276')">+ operator()</a></span>: bool (bool b, const char* msg);
 </code>
+</div></td></tr><tr id="operator()_50181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

@@ -6,78 +6,157 @@
 
 
 
-<h2><code>List</code></h2><table class="doxygen_table">
+<h2>Informations about all available display.<br /></h2>
+<div>The best way to enumerate all available resolutions of all monitors :<source type="cpp">  int  main()
+  {
+     typedef  Device::Display::List  MonitorIterator;
+     Device::Display::List  monitors;
+     monitors.refresh();
+     for  (MonitorIterator  i  =  monitors.begin();  i  !=  monitors.end();  ++i)
+     {
+         std::cout  &lt;&lt;  "  *  Monitor  :  "  &lt;&lt;  (*i)-&gt;name()  &lt;&lt;  std::endl;
+         //  All  resolutions  for  this  monitor
+         for  (Display::Resolution::Vector::iterator  r  =  (*i)-&gt;resolutions().begin();
+             r  !=  (*i)-&gt;resolutions().end();  ++r)
+         {
+             std::cout  &lt;&lt;  "     .  "  &lt;&lt;  *r  &lt;&lt;  std::endl;
+         }
+     }
+  }
+</source>
+<div><b>warning</b> :  This class is not thread-safe<br /></div><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp;* Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">List</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('List_13001319583276')">+ List</a></span>:  ();
 </code>
+</div></td></tr><tr id="List_13001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor (the copy will share the same informations)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">List</a></span>:  (const List&amp; c);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor (the copy will share the same informations)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('List_13011319583276')">+ List</a></span>:  (const List&amp; c);
 </code>
+</div></td></tr><tr id="List_13011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>List</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~List_13021319583276')">+ <b> ~ </b>List</a></span>:  ();
 </code>
+</div></td></tr><tr id="~List_13021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Refresh <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Refresh informations about the monitors.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">refresh</a></span>: bool (uint32 minWidth, uint32 minHeight, uint8 minDepth);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Refresh informations about the monitors.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('refresh_13031319583276')">+ refresh</a></span>: bool (uint32 minWidth, uint32 minHeight, uint8 minDepth);
 </code>
+</div></td></tr><tr id="refresh_13031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">In any cases, this method ensures to provide a valid primary display, and an not empty list even if monitors could not be found. (it would provide a default monitor with default resolutions in this case)<br /><br />Parameters :<ul><li><code> minWidth</code> The minimum acceptable width<br /></li><li><code> minHeight</code> The minimum acceptable height<br /></li><li><code> minDepth</code> The minimum acceptable depth<br /></li></ul><div><code>return</code>  True if the operation succeeded<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Primary display <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the primary display.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">primary</a></span>: Monitor::Ptr () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the primary display.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('primary_13041319583276')">+ primary</a></span>: Monitor::Ptr () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="primary_13041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The result is guaranteed to be valid for use.<br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Searching <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">begin</a></span>: iterator ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('begin_13051319583276')">+ begin</a></span>: iterator ();
 </code>
+</div></td></tr><tr id="begin_13051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">begin</a></span>: const_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('begin_13061319583276')">+ begin</a></span>: const_iterator () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="begin_13061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">end</a></span>: iterator ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the end of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('end_13071319583276')">+ end</a></span>: iterator ();
 </code>
+</div></td></tr><tr id="end_13071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">end</a></span>: const_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the end of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('end_13081319583276')">+ end</a></span>: const_iterator () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="end_13081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Find a monitor by its handle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">findByHandle</a></span>: Monitor::Ptr (const Monitor::Handle hwn) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Find a monitor by its handle.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('findByHandle_13091319583276')">+ findByHandle</a></span>: Monitor::Ptr (const Monitor::Handle hwn) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="findByHandle_13091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>return</code>  A reference to a monitor. Use the method `valid()` to know if the monitor has been found<br /></div><br />Parameters :<ul><li><code> hwn</code> The handle to find<br /></li></ul><div><code>see</code> :  Monitor::valid()<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Find a monitor by its guid.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">findByGUID</a></span>: Monitor::Ptr (const String&amp; guid) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Find a monitor by its guid.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('findByGUID_13101319583276')">+ findByGUID</a></span>: Monitor::Ptr (const String&amp; guid) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="findByGUID_13101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>return</code>  A reference to a monitor. Use the method `valid()` to know if the monitor has been found<br /></div><br />Parameters :<ul><li><code> guid</code> The guid to find<br /></li></ul><div><code>see</code> :  Monitor::valid()<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Operator `=` (the copy will share the same information)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: List&amp; (const List&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator `=` (the copy will share the same information)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_13111319583276')">+ operator=</a></span>: List&amp; (const List&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_13111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">An interator.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">iterator</a></span>: <span class="keyword">typedef</span> MonitorVector::iterator;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">An interator.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('iterator_13121319583276')">+ iterator</a></span>: <span class="keyword">typedef</span> MonitorVector::iterator;</code>
+</div></td></tr><tr id="iterator_13121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">A const iterator.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">const_iterator</a></span>: <span class="keyword">typedef</span> MonitorVector::const_iterator;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A const iterator.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('const_iterator_13131319583276')">+ const_iterator</a></span>: <span class="keyword">typedef</span> MonitorVector::const_iterator;</code>
+</div></td></tr><tr id="const_iterator_13131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the number of monitors.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">size</a></span>: size_t () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the number of monitors.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('size_13141319583276')">+ size</a></span>: size_t () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="size_13141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

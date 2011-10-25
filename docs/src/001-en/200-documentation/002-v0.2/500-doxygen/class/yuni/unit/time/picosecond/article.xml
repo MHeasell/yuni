@@ -6,405 +6,878 @@
 
 
 
-<h2><code>Picosecond</code></h2><table class="doxygen_table">
+<h2>Picosecond .<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator `=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const sint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator=_63561319583276')">+ operator=</a></span>: AbstractType&amp; (const sint16 u);
 </code>
+</div></td></tr><tr id="operator=_63561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Builtin types<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const sint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator=_63571319583276')">+ operator=</a></span>: AbstractType&amp; (const sint32 u);
 </code>
+</div></td></tr><tr id="operator=_63571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Builtin types<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const sint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator=_63581319583276')">+ operator=</a></span>: AbstractType&amp; (const sint64 u);
 </code>
+</div></td></tr><tr id="operator=_63581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Builtin types<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const uint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator=_63591319583276')">+ operator=</a></span>: AbstractType&amp; (const uint16 u);
 </code>
+</div></td></tr><tr id="operator=_63591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Builtin types<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const uint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator=_63601319583276')">+ operator=</a></span>: AbstractType&amp; (const uint32 u);
 </code>
+</div></td></tr><tr id="operator=_63601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Builtin types<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const uint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator=_63611319583276')">+ operator=</a></span>: AbstractType&amp; (const uint64 u);
 </code>
+</div></td></tr><tr id="operator=_63611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Builtin types<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const float u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator=_63621319583276')">+ operator=</a></span>: AbstractType&amp; (const float u);
 </code>
+</div></td></tr><tr id="operator=_63621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Builtin types<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator=_63631319583276')">+ operator=</a></span>: AbstractType&amp; (const double u);
 </code>
+</div></td></tr><tr id="operator=_63631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Builtin types<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="operator=_64681319137233_templ" style="display:none"><span class="keyword">template</span>&lt;typename P1 &gt;</div>
- <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Type, T, P1, double&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="operator=_63641319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename P1 &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator=_63641319583276')">+ operator=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Type, T, P1, double&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_63641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Itself (same metric)<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="operator=_64691319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class Q1 , typename T1 , class C1 , typename P1 , typename N1 &gt;</div>
- <span class="method"><a href="#">operator=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="operator=_63651319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class Q1 , typename T1 , class C1 , typename P1 , typename N1 &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator=_63651319583276')">+ operator=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_63651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Builtin types<br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Value <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The value, without any conversion.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">value</a></span>: T () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The value, without any conversion.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('value_63671319583276')">+ value</a></span>: T () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="value_63671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Informations about the Unit <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Symbol used for the Unit of measurement (may be empty)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">symbol</a></span>: const char* () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Symbol used for the Unit of measurement (may be empty)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('symbol_63681319583276')">+ symbol</a></span>: const char* () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="symbol_63681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Name of the Unit of measurement.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">unitName</a></span>: const char* () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Name of the Unit of measurement.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('unitName_63691319583276')">+ unitName</a></span>: const char* () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="unitName_63691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Relation to SI.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">relationToSI</a></span>: double () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Relation to SI.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('relationToSI_63701319583276')">+ relationToSI</a></span>: double () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="relationToSI_63701319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Conversion to SI <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">toSIBaseUnit</a></span>: U () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('toSIBaseUnit_63711319583276')">+ toSIBaseUnit</a></span>: U () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="toSIBaseUnit_63711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `+=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (sint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63721319583276')">+ operator+=</a></span>: AbstractType&amp; (sint16 u);
 </code>
+</div></td></tr><tr id="operator+=_63721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (sint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63731319583276')">+ operator+=</a></span>: AbstractType&amp; (sint32 u);
 </code>
+</div></td></tr><tr id="operator+=_63731319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (sint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63741319583276')">+ operator+=</a></span>: AbstractType&amp; (sint64 u);
 </code>
+</div></td></tr><tr id="operator+=_63741319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (uint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63751319583276')">+ operator+=</a></span>: AbstractType&amp; (uint16 u);
 </code>
+</div></td></tr><tr id="operator+=_63751319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (uint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63761319583276')">+ operator+=</a></span>: AbstractType&amp; (uint32 u);
 </code>
+</div></td></tr><tr id="operator+=_63761319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (uint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63771319583276')">+ operator+=</a></span>: AbstractType&amp; (uint64 u);
 </code>
+</div></td></tr><tr id="operator+=_63771319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (float u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63781319583276')">+ operator+=</a></span>: AbstractType&amp; (float u);
 </code>
+</div></td></tr><tr id="operator+=_63781319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63791319583276')">+ operator+=</a></span>: AbstractType&amp; (double u);
 </code>
+</div></td></tr><tr id="operator+=_63791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (long double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63801319583276')">+ operator+=</a></span>: AbstractType&amp; (long double u);
 </code>
+</div></td></tr><tr id="operator+=_63801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63811319583276')">+ operator+=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator+=_63811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_63821319583276')">+ operator+=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator+=_63821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `-=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (sint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63831319583276')">+ operator-=</a></span>: AbstractType&amp; (sint16 u);
 </code>
+</div></td></tr><tr id="operator_=_63831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (sint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63841319583276')">+ operator-=</a></span>: AbstractType&amp; (sint32 u);
 </code>
+</div></td></tr><tr id="operator_=_63841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (sint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63851319583276')">+ operator-=</a></span>: AbstractType&amp; (sint64 u);
 </code>
+</div></td></tr><tr id="operator_=_63851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (uint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63861319583276')">+ operator-=</a></span>: AbstractType&amp; (uint16 u);
 </code>
+</div></td></tr><tr id="operator_=_63861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (uint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63881319583276')">+ operator-=</a></span>: AbstractType&amp; (uint32 u);
 </code>
+</div></td></tr><tr id="operator_=_63881319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (uint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63891319583276')">+ operator-=</a></span>: AbstractType&amp; (uint64 u);
 </code>
+</div></td></tr><tr id="operator_=_63891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (float u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63911319583276')">+ operator-=</a></span>: AbstractType&amp; (float u);
 </code>
+</div></td></tr><tr id="operator_=_63911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63931319583276')">+ operator-=</a></span>: AbstractType&amp; (double u);
 </code>
+</div></td></tr><tr id="operator_=_63931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (long double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63951319583276')">+ operator-=</a></span>: AbstractType&amp; (long double u);
 </code>
+</div></td></tr><tr id="operator_=_63951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63961319583276')">+ operator-=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator_=_63961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_63991319583276')">+ operator-=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator_=_63991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `*=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (sint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64011319583276')">+ operator*=</a></span>: AbstractType&amp; (sint16 u);
 </code>
+</div></td></tr><tr id="operator*=_64011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (sint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64021319583276')">+ operator*=</a></span>: AbstractType&amp; (sint32 u);
 </code>
+</div></td></tr><tr id="operator*=_64021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (sint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64031319583276')">+ operator*=</a></span>: AbstractType&amp; (sint64 u);
 </code>
+</div></td></tr><tr id="operator*=_64031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (uint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64041319583276')">+ operator*=</a></span>: AbstractType&amp; (uint16 u);
 </code>
+</div></td></tr><tr id="operator*=_64041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (uint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64051319583276')">+ operator*=</a></span>: AbstractType&amp; (uint32 u);
 </code>
+</div></td></tr><tr id="operator*=_64051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (uint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64061319583276')">+ operator*=</a></span>: AbstractType&amp; (uint64 u);
 </code>
+</div></td></tr><tr id="operator*=_64061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (float u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64071319583276')">+ operator*=</a></span>: AbstractType&amp; (float u);
 </code>
+</div></td></tr><tr id="operator*=_64071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64081319583276')">+ operator*=</a></span>: AbstractType&amp; (double u);
 </code>
+</div></td></tr><tr id="operator*=_64081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (long double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64091319583276')">+ operator*=</a></span>: AbstractType&amp; (long double u);
 </code>
+</div></td></tr><tr id="operator*=_64091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64101319583276')">+ operator*=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator*=_64101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*=_64111319583276')">+ operator*=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator*=_64111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `/=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (sint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64121319583276')">+ operator/=</a></span>: AbstractType&amp; (sint16 u);
 </code>
+</div></td></tr><tr id="operator/=_64121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (sint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64131319583276')">+ operator/=</a></span>: AbstractType&amp; (sint32 u);
 </code>
+</div></td></tr><tr id="operator/=_64131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (sint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64141319583276')">+ operator/=</a></span>: AbstractType&amp; (sint64 u);
 </code>
+</div></td></tr><tr id="operator/=_64141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (uint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64151319583276')">+ operator/=</a></span>: AbstractType&amp; (uint16 u);
 </code>
+</div></td></tr><tr id="operator/=_64151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (uint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64161319583276')">+ operator/=</a></span>: AbstractType&amp; (uint32 u);
 </code>
+</div></td></tr><tr id="operator/=_64161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (uint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64171319583276')">+ operator/=</a></span>: AbstractType&amp; (uint64 u);
 </code>
+</div></td></tr><tr id="operator/=_64171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (float u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64181319583276')">+ operator/=</a></span>: AbstractType&amp; (float u);
 </code>
+</div></td></tr><tr id="operator/=_64181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64191319583276')">+ operator/=</a></span>: AbstractType&amp; (double u);
 </code>
+</div></td></tr><tr id="operator/=_64191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (long double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64201319583276')">+ operator/=</a></span>: AbstractType&amp; (long double u);
 </code>
+</div></td></tr><tr id="operator/=_64201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64211319583276')">+ operator/=</a></span>: AbstractType&amp; (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator/=_64211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator/=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator/=_64241319583276')">+ operator/=</a></span>: AbstractType&amp; (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="operator/=_64241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `&lt;=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<=_64261319583276')">+ operator&lt;=</a></span>: bool (int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<=_64261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<=_64271319583276')">+ operator&lt;=</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<=_64271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (float u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<=_64291319583276')">+ operator&lt;=</a></span>: bool (float u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<=_64291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (double u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<=_64311319583276')">+ operator&lt;=</a></span>: bool (double u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<=_64311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (long double u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<=_64331319583276')">+ operator&lt;=</a></span>: bool (long double u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<=_64331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<=_64351319583276')">+ operator&lt;=</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<=_64351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<=_64371319583276')">+ operator&lt;=</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<=_64371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `&gt;=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>=_64381319583276')">+ operator&gt;=</a></span>: bool (int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>=_64381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>=_64391319583276')">+ operator&gt;=</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>=_64391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (float u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>=_64401319583276')">+ operator&gt;=</a></span>: bool (float u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>=_64401319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (double u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>=_64411319583276')">+ operator&gt;=</a></span>: bool (double u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>=_64411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>=_64421319583276')">+ operator&gt;=</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>=_64421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>=_64431319583276')">+ operator&gt;=</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>=_64431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `&lt;` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<_64441319583276')">+ operator&lt;</a></span>: bool (int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<_64441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<_64451319583276')">+ operator&lt;</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<_64451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (float u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<_64461319583276')">+ operator&lt;</a></span>: bool (float u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<_64461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (double u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<_64471319583276')">+ operator&lt;</a></span>: bool (double u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<_64471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<_64481319583276')">+ operator&lt;</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<_64481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<_64491319583276')">+ operator&lt;</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<_64491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `&gt;` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>_64501319583276')">+ operator&gt;</a></span>: bool (int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>_64501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>_64511319583276')">+ operator&gt;</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>_64511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (float u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>_64521319583276')">+ operator&gt;</a></span>: bool (float u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>_64521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (double u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>_64531319583276')">+ operator&gt;</a></span>: bool (double u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>_64531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>_64541319583276')">+ operator&gt;</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>_64541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>_64551319583276')">+ operator&gt;</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>_64551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `==` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator==_64561319583276')">+ operator==</a></span>: bool (int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_64561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator==_64571319583276')">+ operator==</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_64571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (float u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator==_64581319583276')">+ operator==</a></span>: bool (float u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_64581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (double u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator==_64591319583276')">+ operator==</a></span>: bool (double u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_64591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator==_64601319583276')">+ operator==</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_64601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator==_64611319583276')">+ operator==</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_64611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators `!=` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator!=_64621319583276')">+ operator!=</a></span>: bool (int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_64621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator!=_64631319583276')">+ operator!=</a></span>: bool (unsigned int u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_64631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (float u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator!=_64641319583276')">+ operator!=</a></span>: bool (float u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_64641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (double u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator!=_64651319583276')">+ operator!=</a></span>: bool (double u) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_64651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator!=_64661319583276')">+ operator!=</a></span>: bool (const Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P1, double&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_64661319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator!=_64681319583276')">+ operator!=</a></span>: bool (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_64681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator `++` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator++</a></span>: AbstractType&amp; ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator++_64711319583276')">+ operator++</a></span>: AbstractType&amp; ();
 </code>
+</div></td></tr><tr id="operator++_64711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator++</a></span>: AbstractType (int );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator++_64721319583276')">+ operator++</a></span>: AbstractType (int );
 </code>
+</div></td></tr><tr id="operator++_64721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator `--` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator--</a></span>: AbstractType&amp; ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator___64751319583276')">+ operator--</a></span>: AbstractType&amp; ();
 </code>
+</div></td></tr><tr id="operator___64751319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator--</a></span>: AbstractType (int );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator___64761319583276')">+ operator--</a></span>: AbstractType (int );
 </code>
+</div></td></tr><tr id="operator___64761319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator `!` <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator!_64791319583276')">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!_64791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">AbstractType</a></span>: <span class="keyword">typedef</span> Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P, double&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('AbstractType_64801319583276')">+ AbstractType</a></span>: <span class="keyword">typedef</span> Abstract&lt;Quantity, Picosecond&lt;T, P&gt;, T, P, double&gt;;</code>
+</div></td></tr><tr id="AbstractType_64801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Base class<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> Picosecond&lt;T, P&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('Type_64831319583276')">+ Type</a></span>: <span class="keyword">typedef</span> Picosecond&lt;T, P&gt;;</code>
+</div></td></tr><tr id="Type_64831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Type<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The SI category.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">QuantityType</a></span>: <span class="keyword">typedef</span> Quantity;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The SI category.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('QuantityType_64841319583276')">+ QuantityType</a></span>: <span class="keyword">typedef</span> Quantity;</code>
+</div></td></tr><tr id="QuantityType_64841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The stored type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">InnerType</a></span>: <span class="keyword">typedef</span> T;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The stored type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('InnerType_64861319583276')">+ InnerType</a></span>: <span class="keyword">typedef</span> T;</code>
+</div></td></tr><tr id="InnerType_64861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Symbol</a></span>: <span class="keyword">static</span> const char* ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Symbol_64871319583276')">+ Symbol</a></span>: <span class="keyword">static</span> const char* ();
 </code>
+</div></td></tr><tr id="Symbol_64871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Unit of measurement<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">UnitName</a></span>: <span class="keyword">static</span> const char* ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('UnitName_64881319583276')">+ UnitName</a></span>: <span class="keyword">static</span> const char* ();
 </code>
+</div></td></tr><tr id="UnitName_64881319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Unit of measurement<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">RelationToSI</a></span>: <span class="keyword">static</span> double ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('RelationToSI_64891319583276')">+ RelationToSI</a></span>: <span class="keyword">static</span> double ();
 </code>
+</div></td></tr><tr id="RelationToSI_64891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Relation to SI<br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Picosecond</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Picosecond_64911319583276')">+ Picosecond</a></span>:  ();
 </code>
+</div></td></tr><tr id="Picosecond_64911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Default constructor<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Picosecond</a></span>:  (const sint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Picosecond_64921319583276')">+ Picosecond</a></span>:  (const sint16 u);
 </code>
+</div></td></tr><tr id="Picosecond_64921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Constructor from a fundamental value<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Picosecond</a></span>:  (const sint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Picosecond_64951319583276')">+ Picosecond</a></span>:  (const sint32 u);
 </code>
+</div></td></tr><tr id="Picosecond_64951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Constructor from a fundamental value<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Picosecond</a></span>:  (const sint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Picosecond_64971319583276')">+ Picosecond</a></span>:  (const sint64 u);
 </code>
+</div></td></tr><tr id="Picosecond_64971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Constructor from a fundamental value<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Picosecond</a></span>:  (const uint16 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Picosecond_64981319583276')">+ Picosecond</a></span>:  (const uint16 u);
 </code>
+</div></td></tr><tr id="Picosecond_64981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Constructor from a fundamental value<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Picosecond</a></span>:  (const uint32 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Picosecond_65001319583276')">+ Picosecond</a></span>:  (const uint32 u);
 </code>
+</div></td></tr><tr id="Picosecond_65001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Constructor from a fundamental value<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Picosecond</a></span>:  (const uint64 u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Picosecond_65011319583276')">+ Picosecond</a></span>:  (const uint64 u);
 </code>
+</div></td></tr><tr id="Picosecond_65011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Constructor from a fundamental value<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Picosecond</a></span>:  (const float u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Picosecond_65031319583276')">+ Picosecond</a></span>:  (const float u);
 </code>
+</div></td></tr><tr id="Picosecond_65031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Constructor from a fundamental value<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Picosecond</a></span>:  (const double u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Picosecond_65051319583276')">+ Picosecond</a></span>:  (const double u);
 </code>
+</div></td></tr><tr id="Picosecond_65051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Constructor from a fundamental value<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="Picosecond_65931319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class Q1 , typename T1 , class C1 , typename P1 , typename N1 &gt;</div>
- <span class="method"><a href="#">Picosecond</a></span>:  (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Picosecond_65071319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class Q1 , typename T1 , class C1 , typename P1 , typename N1 &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('Picosecond_65071319583276')">+ Picosecond</a></span>:  (const Abstract&lt;Q1, C1, T1, P1, N1&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="Picosecond_65071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Constructor from another unit<br />
+</div>
 </td></tr>
 </table>
 

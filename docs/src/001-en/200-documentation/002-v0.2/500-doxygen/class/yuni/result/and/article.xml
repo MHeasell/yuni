@@ -6,42 +6,74 @@
 
 
 
-<h2><code>And</code></h2><table class="doxygen_table">
+<h2>And</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">And</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('And_4901319583276')">+ And</a></span>:  ();
 </code>
+</div></td></tr><tr id="And_4901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">And</a></span>:  (bool defaultValue);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('And_4911319583276')">+ And</a></span>:  (bool defaultValue);
 </code>
+</div></td></tr><tr id="And_4911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">And</a></span>:  (const And&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('And_4921319583276')">+ And</a></span>:  (const And&amp; rhs);
 </code>
+</div></td></tr><tr id="And_4921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the result.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ResultType</a></span>: <span class="keyword">typedef</span> bool;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the result.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ResultType_4931319583276')">+ ResultType</a></span>: <span class="keyword">typedef</span> bool;</code>
+</div></td></tr><tr id="ResultType_4931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Take into account a new value.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator()</a></span>: void (const T&amp; v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Take into account a new value.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator()_4941319583276')">+ operator()</a></span>: void (const T&amp; v);
 </code>
+</div></td></tr><tr id="operator()_4941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The Final result.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">result</a></span>: ResultType () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The Final result.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('result_4951319583276')">+ result</a></span>: ResultType () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="result_4951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Reset the internal counter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the internal counter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('reset_4961319583276')">+ reset</a></span>: void ();
 </code>
+</div></td></tr><tr id="reset_4961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">reset</a></span>: void (bool v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('reset_4971319583276')">+ reset</a></span>: void (bool v);
 </code>
+</div></td></tr><tr id="reset_4971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

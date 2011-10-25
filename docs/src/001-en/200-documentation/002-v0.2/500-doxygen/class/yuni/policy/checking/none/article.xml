@@ -6,29 +6,54 @@
 
 
 
-<h2><code>None</code></h2><table class="doxygen_table">
+<h2>Do not make any check.<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">None</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('None_30091319583276')">+ None</a></span>:  ();
 </code>
+</div></td></tr><tr id="None_30091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="None_30721319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">None</a></span>:  (const None&lt;U&gt;&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="None_30101319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('None_30101319583276')">+ None</a></span>:  (const None&lt;U&gt;&amp; );
 </code>
+</div></td></tr><tr id="None_30101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">onDefault</a></span>: <span class="keyword">static</span> void (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('onDefault_30111319583276')">+ onDefault</a></span>: <span class="keyword">static</span> void (const T&amp; );
 </code>
+</div></td></tr><tr id="onDefault_30111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">onInit</a></span>: <span class="keyword">static</span> void (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('onInit_30121319583276')">+ onInit</a></span>: <span class="keyword">static</span> void (const T&amp; );
 </code>
+</div></td></tr><tr id="onInit_30121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">onDereference</a></span>: <span class="keyword">static</span> void (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('onDereference_30131319583276')">+ onDereference</a></span>: <span class="keyword">static</span> void (const T&amp; );
 </code>
+</div></td></tr><tr id="onDereference_30131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">swapPointer</a></span>: <span class="keyword">static</span> void (None&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('swapPointer_30141319583276')">+ swapPointer</a></span>: <span class="keyword">static</span> void (None&amp; );
 </code>
+</div></td></tr><tr id="swapPointer_30141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

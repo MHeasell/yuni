@@ -6,167 +6,330 @@
 
 
 
-<h2><code>Array</code></h2><table class="doxygen_table">
+<h2>Container for thread.<br /></h2>
+<div>This class is a convenient container for dealing with several threads at the same time.<br /> Performance Tip: If the threads within this container are destined to die, you should use the method stop() before destroying this class. This method will make them stop gracefully and asynchronously and you should earn a lot of time.<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Array</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Array_21891319583276')">+ Array</a></span>:  ();
 </code>
+</div></td></tr><tr id="Array_21891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Array</a></span>:  (const Array&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Array_21901319583276')">+ Array</a></span>:  (const Array&amp; rhs);
 </code>
+</div></td></tr><tr id="Array_21901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a given amount of thread.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Array</a></span>:  (unsigned int n);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a given amount of thread.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Array_21911319583276')">+ Array</a></span>:  (unsigned int n);
 </code>
+</div></td></tr><tr id="Array_21911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor, with a given amount of thread.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Array</a></span>:  (unsigned int n, bool autoStart);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor, with a given amount of thread.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Array_21921319583276')">+ Array</a></span>:  (unsigned int n, bool autoStart);
 </code>
+</div></td></tr><tr id="Array_21921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Array</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Array_21931319583276')">+ <b> ~ </b>Array</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Array_21931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Settings <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the new thread are automatically started.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">autoStart</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the new thread are automatically started.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('autoStart_21941319583276')">+ autoStart</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="autoStart_21941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set if the new thread are automatically started.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">autoStart</a></span>: void (const bool v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set if the new thread are automatically started.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('autoStart_21951319583276')">+ autoStart</a></span>: void (const bool v);
 </code>
+</div></td></tr><tr id="autoStart_21951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the pointer to a specific thread.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator[]</a></span>: T::Ptr (unsigned int index) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the pointer to a specific thread.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator[]_21961319583276')">+ operator[]</a></span>: T::Ptr (unsigned int index) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator[]_21961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> index</code> A zero-based index of the thread (invalid values accepted)<br /></li></ul><div><code>return</code>  A pointer to the thread (can be NULL if the index is invalid)<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Array&amp; (const Array&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy operator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_21971319583276')">+ operator=</a></span>: Array&amp; (const Array&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_21971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Array&amp; (const Ptr&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy operator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_21981319583276')">+ operator=</a></span>: Array&amp; (const Ptr&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_21981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Aggregate.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Array&amp; (const Array&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Aggregate.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_21991319583276')">+ operator+=</a></span>: Array&amp; (const Array&amp; rhs);
 </code>
+</div></td></tr><tr id="operator+=_21991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Aggregate.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Array&amp; (T* rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Aggregate.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_22001319583276')">+ operator+=</a></span>: Array&amp; (T* rhs);
 </code>
+</div></td></tr><tr id="operator+=_22001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Aggregate.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Array&amp; (const typename T::Ptr&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Aggregate.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_22011319583276')">+ operator+=</a></span>: Array&amp; (const typename T::Ptr&amp; rhs);
 </code>
+</div></td></tr><tr id="operator+=_22011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Aggregate.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Array&amp; (const Ptr&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Aggregate.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_22021319583276')">+ operator+=</a></span>: Array&amp; (const Ptr&amp; rhs);
 </code>
+</div></td></tr><tr id="operator+=_22021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Aggregate.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Array&amp; (const Array&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Aggregate.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_22031319583276')">+ operator&lt;&lt;</a></span>: Array&amp; (const Array&amp; rhs);
 </code>
+</div></td></tr><tr id="operator<<_22031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Aggregate.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Array&amp; (const Ptr&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Aggregate.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_22041319583276')">+ operator&lt;&lt;</a></span>: Array&amp; (const Ptr&amp; rhs);
 </code>
+</div></td></tr><tr id="operator<<_22041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Aggregate.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Array&amp; (T* rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Aggregate.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_22051319583276')">+ operator&lt;&lt;</a></span>: Array&amp; (T* rhs);
 </code>
+</div></td></tr><tr id="operator<<_22051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Aggregate.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;&lt;</a></span>: Array&amp; (const typename T::Ptr&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Aggregate.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_22061319583276')">+ operator&lt;&lt;</a></span>: Array&amp; (const typename T::Ptr&amp; rhs);
 </code>
+</div></td></tr><tr id="operator<<_22061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">A hard limit value for the number of threads in the pool.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@366maxThreadsLimit_22071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Itself.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ArrayType</a></span>: <span class="keyword">typedef</span> Array&lt;T&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Itself.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ArrayType_22081319583276')">+ ArrayType</a></span>: <span class="keyword">typedef</span> Array&lt;T&gt;;</code>
+</div></td></tr><tr id="ArrayType_22081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The most suitable smart pointer.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;ArrayType&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Ptr_22091319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;ArrayType&gt;;</code>
+</div></td></tr><tr id="Ptr_22091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Thread .<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadType</a></span>: <span class="keyword">typedef</span> T;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Thread .<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadType_22101319583276')">+ ThreadType</a></span>: <span class="keyword">typedef</span> T;</code>
+</div></td></tr><tr id="ThreadType_22101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Smart Pointer for the thread.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadPtr</a></span>: <span class="keyword">typedef</span> T::Ptr;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Smart Pointer for the thread.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadPtr_22111319583276')">+ ThreadPtr</a></span>: <span class="keyword">typedef</span> T::Ptr;</code>
+</div></td></tr><tr id="ThreadPtr_22111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Threading Policy .<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;ArrayType&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Threading Policy .<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_22121319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;ArrayType&gt;;</code>
+</div></td></tr><tr id="ThreadingPolicy_22121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Thread list.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadList</a></span>: <span class="keyword">typedef</span> std::vector&lt; typename T::Ptr&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Thread list.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadList_22131319583276')">+ ThreadList</a></span>: <span class="keyword">typedef</span> std::vector&lt; typename T::Ptr&gt;;</code>
+</div></td></tr><tr id="ThreadList_22131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td></td><td class="doxnone">Get if this policy is thread-safe.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@369_22141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Clear the pool (remove all threads)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clear</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Clear the pool (remove all threads)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('clear_22151319583276')">+ clear</a></span>: void ();
 </code>
+</div></td></tr><tr id="clear_22151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Performance Tip: If the threads within this container are destined to die, you should use the method stop() before destroying this class. This method will make them stop gracefully and asynchronously and you should earn a lot of time.<br /><div><b>warning</b> :  This method may block until all removed threads are destroyed (and stopped) if they are not used any longer.<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add an existing thread into the container.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">add</a></span>: void (typename T::Ptr thread);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add an existing thread into the container.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('add_22161319583276')">+ add</a></span>: void (typename T::Ptr thread);
 </code>
+</div></td></tr><tr id="add_22161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The thread will be automatically started if autoStart() is true.<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add an existing thread into the container.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">add</a></span>: void (typename T::Ptr thread, bool autostart);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add an existing thread into the container.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('add_22171319583276')">+ add</a></span>: void (typename T::Ptr thread, bool autostart);
 </code>
+</div></td></tr><tr id="add_22171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> thread</code> The thread to add<br /></li><li><code> autostart</code> True to start the thread before adding it, false to do nothing (whatever the value of autoStart() )<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">push_back</a></span>: void (typename T::Ptr thread);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('push_back_22181319583276')">+ push_back</a></span>: void (typename T::Ptr thread);
 </code>
+</div></td></tr><tr id="push_back_22181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>see</code> :  add(typename T::Ptr)<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Resize the pool.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">resize</a></span>: void (unsigned int n);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Resize the pool.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('resize_22191319583276')">+ resize</a></span>: void (unsigned int n);
 </code>
+</div></td></tr><tr id="resize_22191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">This method will have no effect if the new number of threads is equal to the number of threads currently in the pool. If the new value is greater than the current one, some new threads will be created, otherwise the remaining threads will be removed from the pool. A thread that has been removed is not necessary stopped neither destroyed, since all threads in the pool are managed by a smart pointer.<br /><div><b>warning</b> :  This method may block until all removed threads are destroyed (and stopped) if they are not used any longer.<br /></div><br />Parameters :<ul><li><code> n</code> The new number of threads in the pool<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Start all threads.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">start</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Start all threads.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('start_22201319583276')">+ start</a></span>: void ();
 </code>
+</div></td></tr><tr id="start_22201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Ask to all threads to stop their execution as soon as possible.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">gracefulStop</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Ask to all threads to stop their execution as soon as possible.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('gracefulStop_22211319583276')">+ gracefulStop</a></span>: void ();
 </code>
+</div></td></tr><tr id="gracefulStop_22211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Stop all threads.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">stop</a></span>: void (unsigned int timeout);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Stop all threads.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('stop_22221319583276')">+ stop</a></span>: void (unsigned int timeout);
 </code>
+</div></td></tr><tr id="stop_22221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><b>warning</b> :  This method may block until all removed threads are destroyed (and stopped) if they are not used any longer.<br /></div><br />Parameters :<ul><li><code> timeout</code> A timeout for waiting a thread to stop (in milliseconds)<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Restart all threads.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">restart</a></span>: void (unsigned int timeout);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Restart all threads.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('restart_22231319583276')">+ restart</a></span>: void (unsigned int timeout);
 </code>
+</div></td></tr><tr id="restart_22231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><b>warning</b> :  This method may block until all removed threads are destroyed (and stopped) if they are not used any longer.<br /></div><br />Parameters :<ul><li><code> timeout</code> A timeout for waiting a thread to stop (in milliseconds)<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Wake up all threads.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">wakeUp</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Wake up all threads.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('wakeUp_22241319583276')">+ wakeUp</a></span>: void ();
 </code>
+</div></td></tr><tr id="wakeUp_22241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">This action will have no effect for all threads not already started.<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the number of threads.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">size</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the number of threads.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('size_22251319583276')">+ size</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="size_22251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">count</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('count_22261319583276')">+ count</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="count_22261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>see</code> :  size()<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the array is empty.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the array is empty.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('empty_22271319583276')">+ empty</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="empty_22271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Execute a predicate for each thread in pool.<div class="doxygen_name_spacer"></div>
-<code><div id="foreachThread_22441319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class PredicateT &gt;</div>
- <span class="method"><a href="#">foreachThread</a></span>: void (PredicateT&amp; predicate) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Execute a predicate for each thread in pool.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="foreachThread_22281319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class PredicateT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('foreachThread_22281319583276')">+ foreachThread</a></span>: void (PredicateT&amp; predicate) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="foreachThread_22281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The following prototype will be used :<source type="cpp">  bool  operator  ()  ( typename  T::Ptr&amp;  thread);
+</source>
+<br />
+</div>
 </td></tr>
 </table>
 

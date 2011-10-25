@@ -71,7 +71,11 @@
 		*/
 		void insertTags(const Yuni::StringAdapter& text);
 
+		void reloadTagsFromDatabase();
+
 	public:
+		//! Article ID
+		Yuni::sint64 id;
 		//! The original XML file
 		Yuni::String originalFilename;
 		//! Relative filename

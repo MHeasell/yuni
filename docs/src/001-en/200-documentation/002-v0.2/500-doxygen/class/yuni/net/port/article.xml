@@ -6,110 +6,208 @@
 
 
 
-<h2><code>Port</code></h2><table class="doxygen_table">
+<h2>Socket Port number.<br /></h2>
+<div><div><code>see</code> :  http://www.iana.org/assignments/port-numbers<br /></div><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Port</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Port_28171319583276')">+ Port</a></span>:  ();
 </code>
+</div></td></tr><tr id="Port_28171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a given value.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Port</a></span>:  (unsigned int rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a given value.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Port_28181319583276')">+ Port</a></span>:  (unsigned int rhs);
 </code>
+</div></td></tr><tr id="Port_28181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Port</a></span>:  (const Port&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Port_28191319583276')">+ Port</a></span>:  (const Port&amp; rhs);
 </code>
+</div></td></tr><tr id="Port_28191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor from a null pointer.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Port</a></span>:  (const NullPtr&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor from a null pointer.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Port_28201319583276')">+ Port</a></span>:  (const NullPtr&amp; );
 </code>
+</div></td></tr><tr id="Port_28201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Value <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the port number.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">value</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the port number.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('value_28211319583276')">+ value</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="value_28211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the port is valid.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the port is valid.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('valid_28221319583276')">+ valid</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="valid_28221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Ranges <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the port is well-known (0..1023)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">wellKnown</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the port is well-known (0..1023)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('wellKnown_28231319583276')">+ wellKnown</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="wellKnown_28231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the port is registered (0..49151)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">registered</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the port is registered (0..49151)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('registered_28241319583276')">+ registered</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="registered_28241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the port is dynamic and/or private (&gt;= 49152)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">dynamic</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the port is dynamic and/or private (&gt;= 49152)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('dynamic_28251319583276')">+ dynamic</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="dynamic_28251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if no port is allocated.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">none</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if no port is allocated.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('none_28261319583276')">+ none</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="none_28261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Port&amp; (unsigned int rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_28271319583276')">+ operator=</a></span>: Port&amp; (unsigned int rhs);
 </code>
+</div></td></tr><tr id="operator=_28271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Port&amp; (const Port&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_28281319583276')">+ operator=</a></span>: Port&amp; (const Port&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_28281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Port&amp; (const Yuni::NullPtr&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_28291319583276')">+ operator=</a></span>: Port&amp; (const Yuni::NullPtr&amp; );
 </code>
+</div></td></tr><tr id="operator=_28291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Append.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Port&amp; (unsigned int rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_28301319583276')">+ operator+=</a></span>: Port&amp; (unsigned int rhs);
 </code>
+</div></td></tr><tr id="operator+=_28301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Sub.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator-=</a></span>: Port&amp; (unsigned int rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Sub.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator_=_28311319583276')">+ operator-=</a></span>: Port&amp; (unsigned int rhs);
 </code>
+</div></td></tr><tr id="operator_=_28311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (unsigned int rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator==_28321319583276')">+ operator==</a></span>: bool (unsigned int rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_28321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator==_28331319583276')">+ operator==</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_28331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (unsigned int rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator!=_28341319583276')">+ operator!=</a></span>: bool (unsigned int rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_28341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator!=_28351319583276')">+ operator!=</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_28351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator!_28361319583276')">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!_28361319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Inequality.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Inequality.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator<_28371319583276')">+ operator&lt;</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<_28371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator>_28381319583276')">+ operator&gt;</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>_28381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator<=_28391319583276')">+ operator&lt;=</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator<=_28391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator>=_28401319583276')">+ operator&gt;=</a></span>: bool (const Port&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator>=_28401319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

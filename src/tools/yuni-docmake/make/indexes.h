@@ -11,12 +11,15 @@
 namespace DocIndex
 {
 
+	//! Article ID
+	typedef Yuni::sint64  ArticleID;
+
 
 	bool Open(const Yuni::String& folder);
 
 	void Close();
 
-	void Write(const ArticleData& article);
+	void Write(ArticleData& article);
 
 
 	void RemoveNonExistingEntries();
@@ -51,7 +54,7 @@ namespace DocIndex
 	*/
 	int RegisterWordReference(const Dictionary::Word& term);
 
-	void RegisterWordIDsForASingleArticle(int articleid, const int* termid,
+	void RegisterWordIDsForASingleArticle(Yuni::sint64 articleid, const int* termid,
 		const int* countInArticle,
 		const float* weights,
 		unsigned int count);
@@ -64,6 +67,10 @@ namespace DocIndex
 
 	void AppendChildrenList(Yuni::String& text, const Yuni::String& path, const Yuni::String& current);
 
+	/*!
+	** \brief Retrieve the tag list of a single article
+	*/
+	void RetrieveTagList(ArticleData& article);
 
 	void BuildSEOTermReference(Yuni::Clob& data);
 

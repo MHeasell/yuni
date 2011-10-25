@@ -6,169 +6,361 @@
 
 
 
-<h2><code>Uri</code></h2><table class="doxygen_table">
+<h2>Uniform resource Identifier.<br /></h2>
+<div>This implementation of URIs follows the RFC 3986<div><code>see</code> :  http://www.ietf.org/rfc/rfc3986.txt<br /></div> Here are some examples of URIs (extracted from the RFC itself)<source type="cpp">  file: ///etc/hosts
+  ftp : //ftp.is.co.za/rfc/rfc1808.txt
+  http : //www.ietf.org/rfc/rfc3986.txt
+  ldap : //[2001:db8::7]/c=GB?objectClass?one
+  mailto:John.Doe@example.com
+  news :comp.infosystems.www.servers.unix
+  tel:+1-816-555-1212
+  telnet: //192.0.2.16:80/
+  urn:oasis:names:specification:docbook:dtd:xml:4.1.2
+</source>
+<br /> Composition (extracted from the RFC too) :<source type="cpp">   foo: //example.com:8042/over/there?name=ferret#nose
+   \_/    \______________/\_________/  \_________/  \__/
+    |            |             |             |         |
+  scheme      authority        path         query    fragment
+    |    _____________________|__
+   /  \  /                         \
+   urn:example:animal:ferret:nose
+</source>
+<br /> Here is a typical way of how to use this class :<source type="cpp">  Uri  uri( "http://www.example.org" );
+  uri.defaultPathIfEmpty();  //  Ensure  the  path  is  not  empty
+  switch  (uri.protocol())
+  {
+         case  Net::Protocol::http   :  ...;  break ;  //  Deals  with  the  HTTP  protocol
+         case  Net::Protocol::ftp    :  ...;  break ;  //  Deals  with  the  FTP  protocol
+         default :  ...;  //  Unsupported  protocol
+  }
+</source>
+<br /> It is possible to modify only a part of the URI :<source type="cpp">  //  The  original  URI
+  Uri  uri( "http://www.example.org/?myquery=foo" );
+
+  uri.query( "anotherquery=bar" );
+  std::cout  &lt;&lt;  uri  &lt;&lt;  std::endl;  //  http://www.example.org/?anotherquery=bar
+
+  uri.user( "myuser" );
+  std::cout  &lt;&lt;  uri  &lt;&lt;  std::endl;  //  http://myuser@www.example.org/?anotherquery=bar
+</source>
+<br /><div><b>note</b> :  An URL refers to a subset of URIs<br /> Modifying an URI : If any modification is brought to any part of the URI, the returned value of the method `isValid()` should no longer be used, because this variable is set when the URI is built from a simple string.<br /> Special scheme : When the scheme `file` is used, the server field should not be used (`file://foo/tmp` should lead to `/tmp`, but `file:///foo/tmp` will lead to `/foo/tmp`).<br /> Suffix reference : The URI syntax is designed for unambiguous reference to resources but traditional uses allow (for convenient reasons) a suffix of the URI as a reference consisting of only the authority and path portions of the URI, such as `www.libyuni.org` or `google`. This class does not make any changes on the server name :<source type="cpp">  Uri  uri( "google" );
+  std::cout  &lt;&lt;  uri.server()  &lt;&lt;  std::endl;  //  `google`
+
+  Uri  uri2( "www.libyuni.org" );
+  std::cout  &lt;&lt;  uri2.server()  &lt;&lt;  std::endl;  //  `www.libyuni.org`
+
+  Uri  uri3( "www.libyuni.org/downloads" );
+  //  Server:  `www.libyuni.org`,  path:  `/downloads`
+  std::cout  &lt;&lt;  "Server:  `"  &lt;&lt;  uri3.server()  &lt;&lt;  "`,  path:  `"  &lt;&lt;  uri3.path()  &lt;&lt;  "`"  &lt;&lt;  std::endl;
+</source>
+<br /> IPv6 addresses : According to the RFC, IPv6 addresses must be enclosed in brackets (ex: `http://[2001:db8::7]`)<br /> Dot segments Removal : In the most cases, the special segments `.` and `..` will be removed (`file:///path/./to/../somewhere` will give `file:///path/somewhere`). However it can not be done for the begining of relative paths (`file://../../relative/./path` will give `file://../../relative/path`). Consequently a path that starts with a dot is a relative path.<br /></div> Bug This implementation does not handle at all escaped caracters<br /><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Uri</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Uri_52981319583276')">+ Uri</a></span>:  ();
 </code>
+</div></td></tr><tr id="Uri_52981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with a string, to directly construct the URI.<div class="doxygen_name_spacer"></div>
-<code><div id="Uri_54611319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">Uri</a></span>:  (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a string, to directly construct the URI.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="Uri_53001319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('Uri_53001319583276')">+ Uri</a></span>:  (const StringT&amp; s);
 </code>
+</div></td></tr><tr id="Uri_53001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Uri</a></span>:  (const Uri&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Uri_53021319583276')">+ Uri</a></span>:  (const Uri&amp; rhs);
 </code>
+</div></td></tr><tr id="Uri_53021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Informations about the URI structure <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Clear all informations about the URI structure.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clear</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Clear all informations about the URI structure.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('clear_53051319583276')">+ clear</a></span>: void ();
 </code>
+</div></td></tr><tr id="clear_53051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Scheme (lowercase)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">scheme</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Scheme (lowercase)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('scheme_53071319583276')">+ scheme</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="scheme_53071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the scheme.<div class="doxygen_name_spacer"></div>
-<code><div id="scheme_54651319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">scheme</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the scheme.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="scheme_53091319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('scheme_53091319583276')">+ scheme</a></span>: void (const StringT&amp; s);
 </code>
+</div></td></tr><tr id="scheme_53091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Clear all informations about the URI structure.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">scheme</a></span>: void (const Net::Protocol::Type&amp; type);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Clear all informations about the URI structure.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('scheme_53111319583276')">+ scheme</a></span>: void (const Net::Protocol::Type&amp; type);
 </code>
+</div></td></tr><tr id="scheme_53111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Server.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">server</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Server.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('server_53121319583276')">+ server</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="server_53121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the server.<div class="doxygen_name_spacer"></div>
-<code><div id="server_54681319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">server</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the server.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="server_53141319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('server_53141319583276')">+ server</a></span>: void (const StringT&amp; s);
 </code>
+</div></td></tr><tr id="server_53141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Port (equals to `INT_MIN` if none)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">port</a></span>: int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Port (equals to `INT_MIN` if none)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('port_53161319583276')">+ port</a></span>: int () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="port_53161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the port value (only if strictly positive, or equals to INT_MIN do disable it)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">port</a></span>: void (int p);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the port value (only if strictly positive, or equals to INT_MIN do disable it)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('port_53181319583276')">+ port</a></span>: void (int p);
 </code>
+</div></td></tr><tr id="port_53181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">User.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">user</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">User.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('user_53201319583276')">+ user</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="user_53201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the user.<div class="doxygen_name_spacer"></div>
-<code><div id="user_54721319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">user</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the user.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="user_53221319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('user_53221319583276')">+ user</a></span>: void (const StringT&amp; s);
 </code>
+</div></td></tr><tr id="user_53221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Password.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">password</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Password.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('password_53241319583276')">+ password</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="password_53241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the password.<div class="doxygen_name_spacer"></div>
-<code><div id="password_54741319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">password</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the password.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="password_53261319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('password_53261319583276')">+ password</a></span>: void (const StringT&amp; s);
 </code>
+</div></td></tr><tr id="password_53261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Path.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">path</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Path.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('path_53281319583276')">+ path</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="path_53281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the path.<div class="doxygen_name_spacer"></div>
-<code><div id="path_54761319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">path</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the path.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="path_53301319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('path_53301319583276')">+ path</a></span>: void (const StringT&amp; s);
 </code>
+</div></td></tr><tr id="path_53301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set a default path (`/`) if there is no path.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">defaultPathIfEmpty</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set a default path (`/`) if there is no path.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('defaultPathIfEmpty_53331319583276')">+ defaultPathIfEmpty</a></span>: void ();
 </code>
+</div></td></tr><tr id="defaultPathIfEmpty_53331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Query.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">query</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Query.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('query_53341319583276')">+ query</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="query_53341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the query.<div class="doxygen_name_spacer"></div>
-<code><div id="query_54791319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">query</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the query.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="query_53351319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('query_53351319583276')">+ query</a></span>: void (const StringT&amp; s);
 </code>
+</div></td></tr><tr id="query_53351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Fragment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">fragment</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Fragment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('fragment_53371319583276')">+ fragment</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="fragment_53371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Set the fragment.<div class="doxygen_name_spacer"></div>
-<code><div id="fragment_54811319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">fragment</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the fragment.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="fragment_53391319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('fragment_53391319583276')">+ fragment</a></span>: void (const StringT&amp; s);
 </code>
+</div></td></tr><tr id="fragment_53391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the URI was valid during the last extract.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">isValid</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the URI was valid during the last extract.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('isValid_53411319583276')">+ isValid</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="isValid_53411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><b>note</b> :  If any modification is brought to any part of the URI, the returned value of this method should no longer be used, because this variable is set when the URI is built from a simple string.<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Scheme <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Try to find out the network protocol from the scheme.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">protocol</a></span>: Net::Protocol::Type () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Try to find out the network protocol from the scheme.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('protocol_53431319583276')">+ protocol</a></span>: Net::Protocol::Type () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="protocol_53431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Convenient method to know if the URI is merely a file.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">schemeIsFile</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Convenient method to know if the URI is merely a file.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('schemeIsFile_53451319583276')">+ schemeIsFile</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="schemeIsFile_53451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheme is `HTTP` or `HTTPS`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">schemeIsHTTP</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the scheme is `HTTP` or `HTTPS`.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('schemeIsHTTP_53471319583276')">+ schemeIsHTTP</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="schemeIsHTTP_53471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheme is `FTP`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">schemeIsFTP</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the scheme is `FTP`.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('schemeIsFTP_53491319583276')">+ schemeIsFTP</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="schemeIsFTP_53491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheme is `SSH`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">schemeIsSSH</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the scheme is `SSH`.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('schemeIsSSH_53511319583276')">+ schemeIsSSH</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="schemeIsSSH_53511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheme is `LDAP`.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">schemeIsLDAP</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the scheme is `LDAP`.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('schemeIsLDAP_53521319583276')">+ schemeIsLDAP</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="schemeIsLDAP_53521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Conversion <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Reconstruct the URI to a string.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">toString</a></span>: String () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reconstruct the URI to a string.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('toString_53551319583276')">+ toString</a></span>: String () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="toString_53551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Print this URI to a stream output.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print this URI to a stream output.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('print_53561319583276')">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="print_53561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> out</code> The stream output<br /></li></ul><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator =.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Uri&amp; (const Uri&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator =.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_53581319583276')">+ operator=</a></span>: Uri&amp; (const Uri&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_53581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator =.<div class="doxygen_name_spacer"></div>
-<code><div id="operator=_54971319137233_templ" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">operator=</a></span>: Uri&amp; (const StringT&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator =.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator=_53601319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator=_53601319583276')">+ operator=</a></span>: Uri&amp; (const StringT&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_53601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator ==.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator==</a></span>: bool (const Uri&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator ==.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator==_53621319583276')">+ operator==</a></span>: bool (const Uri&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_53621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator !=.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!=</a></span>: bool (const Uri&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator !=.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator!=_53641319583276')">+ operator!=</a></span>: bool (const Uri&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_53641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">The operator ()<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator()</a></span>: String () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator ()<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator()_53671319583276')">+ operator()</a></span>: String () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator()_53671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

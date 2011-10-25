@@ -6,28 +6,48 @@
 
 
 
-<h2><code>HostAddressPort</code></h2><table class="doxygen_table">
+<h2>HostAddressPort</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Vector.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; HostAddressPort&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Vector.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Vector_9831319583276')">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; HostAddressPort&gt;;</code>
+</div></td></tr><tr id="Vector_9831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Set.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Set</a></span>: <span class="keyword">typedef</span> std::set&lt; HostAddressPort, Compare&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Set.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Set_9841319583276')">+ Set</a></span>: <span class="keyword">typedef</span> std::set&lt; HostAddressPort, Compare&gt;;</code>
+</div></td></tr><tr id="Set_9841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Raw host address (IP/DNS)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">address</a></span>: HostAddress;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Raw host address (IP/DNS)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('address_9851319583276')">+ address</a></span>: HostAddress;</code>
+</div></td></tr><tr id="address_9851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Socket port number.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">port</a></span>: Port;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Socket port number.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('port_9861319583276')">+ port</a></span>: Port;</code>
+</div></td></tr><tr id="port_9861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Reset the host address and port.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the host address and port.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('reset_9871319583276')">+ reset</a></span>: void ();
 </code>
+</div></td></tr><tr id="reset_9871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

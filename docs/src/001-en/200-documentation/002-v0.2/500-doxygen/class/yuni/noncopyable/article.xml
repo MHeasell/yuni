@@ -6,16 +6,31 @@
 
 
 
-<h2><code>NonCopyable</code></h2><table class="doxygen_table">
+<h2>Prevent objects of a class from being copy-constructed or assigned to each other.<br /></h2>
+<div><source type="cpp">  class  ClassThatCanNotBeCopied  :  private  NonCopyable &lt;ClassThatCanNotBeCopied&gt;
+  {
+  //  ...
+  };
+</source>
+<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">NonCopyable</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('NonCopyable_37691319583276')">+ NonCopyable</a></span>:  ();
 </code>
+</div></td></tr><tr id="NonCopyable_37691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Protected non-virtual destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>NonCopyable</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Protected non-virtual destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~NonCopyable_37701319583276')">+ <b> ~ </b>NonCopyable</a></span>:  ();
 </code>
+</div></td></tr><tr id="~NonCopyable_37701319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

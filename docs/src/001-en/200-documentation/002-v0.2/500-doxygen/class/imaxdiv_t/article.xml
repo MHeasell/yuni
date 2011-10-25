@@ -6,12 +6,20 @@
 
 
 
-<h2><code>imaxdiv_t</code></h2><table class="doxygen_table">
+<h2>imaxdiv_t</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">quot</a></span>: intmax_t;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('quot_68851319583276')">+ quot</a></span>: intmax_t;</code>
+</div></td></tr><tr id="quot_68851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><code><span class="method"><a href="#">rem</a></span>: intmax_t;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('rem_68871319583276')">+ rem</a></span>: intmax_t;</code>
+</div></td></tr><tr id="rem_68871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

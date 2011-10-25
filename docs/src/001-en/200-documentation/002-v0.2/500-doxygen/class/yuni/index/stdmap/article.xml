@@ -6,30 +6,32 @@
 
 
 
-<h2><code>StdMap</code></h2><table class="doxygen_table">
+<h2>StdMap</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
-</td></tr>
-<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@174uniqueKey_24011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="operator[]_24621319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator[]</a></span>: ValueType&amp; (const U&amp; key);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="operator[]_24021319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator[]_24021319583276')">+ operator[]</a></span>: ValueType&amp; (const U&amp; key);
 </code>
+</div></td></tr><tr id="operator[]_24021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="operator[]_24631319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator[]</a></span>: const ValueType&amp; (const U&amp; key) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="operator[]_24031319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator[]_24031319583276')">+ operator[]</a></span>: const ValueType&amp; (const U&amp; key) <span class="keyword">const</span>;
 </code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="operator[]_24641319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator[]</a></span>: ValueType&amp; (const U&amp; key);
-</code>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code><div id="operator[]_24651319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator[]</a></span>: const ValueType&amp; (const U&amp; key) <span class="keyword">const</span>;
-</code>
+</div></td></tr><tr id="operator[]_24031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

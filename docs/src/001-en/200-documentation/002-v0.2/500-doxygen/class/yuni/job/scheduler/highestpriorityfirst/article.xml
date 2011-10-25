@@ -6,39 +6,72 @@
 
 
 
-<h2><code>HighestPriorityFirst</code></h2><table class="doxygen_table">
+<h2>Basic Scheduler , where the job with the highest priority is executed in first.<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">HighestPriorityFirst</a></span>:  (Private::QueueService::WaitingRoom&amp; room);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('HighestPriorityFirst_11171319583276')">+ HighestPriorityFirst</a></span>:  (Private::QueueService::WaitingRoom&amp; room);
 </code>
+</div></td></tr><tr id="HighestPriorityFirst_11171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> room</code> Reference to the Waiting room<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>HighestPriorityFirst</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~HighestPriorityFirst_11181319583276')">+ <b> ~ </b>HighestPriorityFirst</a></span>:  ();
 </code>
+</div></td></tr><tr id="~HighestPriorityFirst_11181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The scheduler itself.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">SchedulerType</a></span>: <span class="keyword">typedef</span> HighestPriorityFirst;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The scheduler itself.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('SchedulerType_11191319583276')">+ SchedulerType</a></span>: <span class="keyword">typedef</span> HighestPriorityFirst;</code>
+</div></td></tr><tr id="SchedulerType_11191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">minimumThreadCount</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('minimumThreadCount_11201319583276')">+ minimumThreadCount</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="minimumThreadCount_11201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">minimumThreadCount</a></span>: bool (unsigned int);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('minimumThreadCount_11211319583276')">+ minimumThreadCount</a></span>: bool (unsigned int);
 </code>
+</div></td></tr><tr id="minimumThreadCount_11211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">maximumThreadCount</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('maximumThreadCount_11221319583276')">+ maximumThreadCount</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="maximumThreadCount_11221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">maximumThreadCount</a></span>: bool (unsigned int n);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('maximumThreadCount_11231319583276')">+ maximumThreadCount</a></span>: bool (unsigned int n);
 </code>
+</div></td></tr><tr id="maximumThreadCount_11231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the scheduler is idle.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">idle</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the scheduler is idle.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('idle_11241319583276')">+ idle</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="idle_11241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

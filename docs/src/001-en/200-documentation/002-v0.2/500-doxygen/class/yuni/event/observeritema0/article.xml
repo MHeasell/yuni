@@ -6,30 +6,51 @@
 
 
 
-<h2><code>ObserverItemA0</code></h2><table class="doxygen_table">
+<h2>ObserverItemA0</h2><div>Parameters :<ul><li><code> C</code> The real type of the observer<br /></li><li><code> Mode</code> The mode when firing the event<br /></li><li><code> R</code> The type of the returned value<br /></li></ul><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">ObserverItemA0</a></span>:  (C* o, R(C::*)() method);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('ObserverItemA0_39591319583276')">+ ObserverItemA0</a></span>:  (C* o, R(C::*)() method);
 </code>
+</div></td></tr><tr id="ObserverItemA0_39591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> o</code> Pointer to the object<br /></li><li><code> method</code> Pointer to member<br /></li></ul><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>ObserverItemA0</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~ObserverItemA0_39611319583276')">+ <b> ~ </b>ObserverItemA0</a></span>:  ();
 </code>
+</div></td></tr><tr id="~ObserverItemA0_39611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Fire the event.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">fireEvent</a></span>: R () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Fire the event.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('fireEvent_39631319583276')">+ fireEvent</a></span>: R () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="fireEvent_39631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get a pointer to the observer object.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">observer</a></span>: IObserver* () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get a pointer to the observer object.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('observer_39651319583276')">+ observer</a></span>: IObserver* () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="observer_39651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Test if the class contains a given observer.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">equalsTo</a></span>: bool (const IObserver* o) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Test if the class contains a given observer.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('equalsTo_39671319583276')">+ equalsTo</a></span>: bool (const IObserver* o) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="equalsTo_39671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

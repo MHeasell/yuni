@@ -6,44 +6,77 @@
 
 
 
-<h2><code>Signal</code></h2><table class="doxygen_table">
+<h2>Mecanism for notifying a waiting thread of the occurrence of a particular event.<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Signal</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Signal_60411319583276')">+ Signal</a></span>:  ();
 </code>
+</div></td></tr><tr id="Signal_60411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>Signal</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~Signal_60421319583276')">+ <b> ~ </b>Signal</a></span>:  ();
 </code>
+</div></td></tr><tr id="~Signal_60421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Operator !<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator !<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator!_60431319583276')">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!_60431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Reset the internal state.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">reset</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the internal state.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('reset_60441319583276')">+ reset</a></span>: bool ();
 </code>
+</div></td></tr><tr id="reset_60441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Wait for being notified.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">wait</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Wait for being notified.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('wait_60451319583276')">+ wait</a></span>: void ();
 </code>
+</div></td></tr><tr id="wait_60451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Wait for being notified.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">wait</a></span>: bool (unsigned int timeout);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Wait for being notified.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('wait_60461319583276')">+ wait</a></span>: bool (unsigned int timeout);
 </code>
+</div></td></tr><tr id="wait_60461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> timeout</code> A timeout, in milliseconds<br /></li></ul><div><code>return</code>  True if the signal has been notified, false if the timeout has been reached<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Notify the waiter.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">notify</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Notify the waiter.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('notify_60471319583276')">+ notify</a></span>: bool ();
 </code>
+</div></td></tr><tr id="notify_60471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the signal is valid.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the signal is valid.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('valid_60481319583276')">+ valid</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="valid_60481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

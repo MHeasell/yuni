@@ -23,6 +23,8 @@ namespace Dox2Article
 			return kdVariable;
 		else if (str == "typedef")
 			return kdTypedef;
+		else if (str == "enum")
+			return kdEnum;
 		else if (str == "file")
 			return kdFile;
 		else if (str == "namespace")
@@ -31,7 +33,8 @@ namespace Dox2Article
 			return kdFolder;
 		else if (str == "group")
 			return kdGroup;
-
+		else if (str == "friend")
+			return kdFriend;
 		return kdUnknown;
 	}
 
@@ -51,6 +54,7 @@ namespace Dox2Article
 			case kdFile:       out << "file";break;
 			case kdFolder:     out << "folder";break;
 			case kdGroup:      out << "group";break;
+			case kdFriend:     out << "friend";break;
 			case kdUnknown:break;
 			case kdMax:break;
 		}

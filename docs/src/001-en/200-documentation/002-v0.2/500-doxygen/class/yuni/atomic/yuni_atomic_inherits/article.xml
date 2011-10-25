@@ -6,98 +6,184 @@
 
 
 
-<h2><code>YUNI_ATOMIC_INHERITS</code></h2><table class="doxygen_table">
+<h2>An atomic scalar type.<br /></h2>
+<div>An atomic scalar value is a value that may be updated atomically (means without the use of a mutex).<br /><source type="cpp">  Atomic::Int&lt;32&gt;  i;
+  ++i;
+</source>
+<br /><br />Parameters :<ul><li><code> Size</code> Size (in bits) of the scalar type (16 or 32 or 64)<br /></li><li><code> TP</code> A threading policy to guarantee thread-safety or not<br /></li></ul><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Int</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Int_67431319583276')">+ Int</a></span>:  ();
 </code>
+</div></td></tr><tr id="Int_67431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with an initial value (int16)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Int</a></span>:  (const sint16 v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with an initial value (int16)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Int_67441319583276')">+ Int</a></span>:  (const sint16 v);
 </code>
+</div></td></tr><tr id="Int_67441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with an initial value (int32)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Int</a></span>:  (const sint32 v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with an initial value (int32)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Int_67451319583276')">+ Int</a></span>:  (const sint32 v);
 </code>
+</div></td></tr><tr id="Int_67451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with an initial value (int64)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Int</a></span>:  (const sint64 v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with an initial value (int64)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Int_67461319583276')">+ Int</a></span>:  (const sint64 v);
 </code>
+</div></td></tr><tr id="Int_67461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">Int</a></span>:  (const Int&amp; v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('Int_67471319583276')">+ Int</a></span>:  (const Int&amp; v);
 </code>
+</div></td></tr><tr id="Int_67471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor from another type and another threading policy.<div class="doxygen_name_spacer"></div>
-<code><div id="Int_68351319137233_templ" style="display:none"><span class="keyword">template</span>&lt;int Size2, template&lt; class&gt;class TP2&gt;</div>
- <span class="method"><a href="#">Int</a></span>:  (const Int&lt; Size2, TP2&gt;&amp; v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor from another type and another threading policy.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="Int_67481319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;int Size2, template&lt; class&gt;class TP2&gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('Int_67481319583276')">+ Int</a></span>:  (const Int&lt; Size2, TP2&gt;&amp; v);
 </code>
+</div></td></tr><tr id="Int_67481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Pre increment operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator++</a></span>: ScalarType ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Pre increment operator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator++_67491319583276')">+ operator++</a></span>: ScalarType ();
 </code>
+</div></td></tr><tr id="operator++_67491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Pre decrement operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator--</a></span>: ScalarType ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Pre decrement operator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator___67501319583276')">+ operator--</a></span>: ScalarType ();
 </code>
+</div></td></tr><tr id="operator___67501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Post increment operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator++</a></span>: ScalarType (int );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Post increment operator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator++_67511319583276')">+ operator++</a></span>: ScalarType (int );
 </code>
+</div></td></tr><tr id="operator++_67511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Post decrement operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator--</a></span>: ScalarType (int );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Post decrement operator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator___67521319583276')">+ operator--</a></span>: ScalarType (int );
 </code>
+</div></td></tr><tr id="operator___67521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Pre increment operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: Int&amp; (const ScalarType v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Pre increment operator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_67531319583276')">+ operator=</a></span>: Int&amp; (const ScalarType v);
 </code>
+</div></td></tr><tr id="operator=_67531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Increment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator+=</a></span>: Int&amp; (const ScalarType v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Increment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_67541319583276')">+ operator+=</a></span>: Int&amp; (const ScalarType v);
 </code>
+</div></td></tr><tr id="operator+=_67541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Decrement.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator-=</a></span>: Int&amp; (const ScalarType v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Decrement.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator_=_67551319583276')">+ operator-=</a></span>: Int&amp; (const ScalarType v);
 </code>
+</div></td></tr><tr id="operator_=_67551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Cast operator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator ScalarType</a></span>:  () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Cast operator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator ScalarType_67561319583276')">+ operator ScalarType</a></span>:  () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator ScalarType_67561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">not<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">not<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator!_67571319583276')">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!_67571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">Get if the class must be thread-safe. Get if the class must be thread-safe.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@2threadSafethreadSafe_67591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td></td><td class="doxnone">Get if we have to guarantee ourselves the thread-safety.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@3mustUseMutex_67611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td></td><td class="doxnone">Size (in bits) of the scalar type.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@4size_67621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The Threading Policy .<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::ThreadingPolicy&lt; threadSafe, Int&lt; Size, TP&gt;&gt;:: Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Threading Policy .<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_67641319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::ThreadingPolicy&lt; threadSafe, Int&lt; Size, TP&gt;&gt;:: Type;</code>
+</div></td></tr><tr id="ThreadingPolicy_67641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The threading policy will be Policy::SingleThreaded in all cases, except when the compiler or the operating system can not provide methods on atomic scalar types. It is the case when the version of gcc is &lt; 4.1 for example.<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The scalar type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::TypeFromSize&lt; Size&gt;:: Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The scalar type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Type_67661319583276')">+ Type</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::TypeFromSize&lt; Size&gt;:: Type;</code>
+</div></td></tr><tr id="Type_67661319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The scalar type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ScalarType</a></span>: <span class="keyword">typedef</span> Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The scalar type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ScalarType_67671319583276')">+ ScalarType</a></span>: <span class="keyword">typedef</span> Type;</code>
+</div></td></tr><tr id="ScalarType_67671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Type of the inner variable.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">InnerType</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::Volatile&lt; threadSafe, Type&gt;:: Type;</code>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td></td><td class="doxnone"><code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the inner variable.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('InnerType_67691319583276')">+ InnerType</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::Volatile&lt; threadSafe, Type&gt;:: Type;</code>
+</div></td></tr><tr id="InnerType_67691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Most of the time the keyword `volatile` is required (to avoid dangerous optimizations by the compiler), except when there is no need for thread-safety or when a mutex is used.<br />
+</div>
 </td></tr>
 </table>
 

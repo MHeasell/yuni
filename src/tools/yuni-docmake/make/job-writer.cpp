@@ -440,6 +440,8 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 	}
 
 	// @{TAGS_BEGIN,...}
+	// The tags may have been changed because of the dependancies
+	pArticle.reloadTagsFromDatabase();
 	if (pArticle.tags.empty())
 	{
 		pVars["TAGS_BEGIN"] = "<!--";

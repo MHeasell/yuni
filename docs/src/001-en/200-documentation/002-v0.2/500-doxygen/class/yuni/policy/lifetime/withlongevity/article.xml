@@ -6,16 +6,26 @@
 
 
 
-<h2><code>WithLongevity</code></h2><table class="doxygen_table">
+<h2>Singletons with longevity are destroyed in increasing value of their longevity.<br /></h2>
+<div>Among singletons with the same longevity, last in first out order is ensured<br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Track various longevities in a priority list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">ScheduleDestruction</a></span>: <span class="keyword">static</span> void (DestructionFunction callback);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Track various longevities in a priority list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('ScheduleDestruction_9931319583276')">+ ScheduleDestruction</a></span>: <span class="keyword">static</span> void (DestructionFunction callback);
 </code>
+</div></td></tr><tr id="ScheduleDestruction_9931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Throw if longevities were not given properly.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">OnDeadReference</a></span>: <span class="keyword">static</span> void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Throw if longevities were not given properly.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('OnDeadReference_9941319583276')">+ OnDeadReference</a></span>: <span class="keyword">static</span> void ();
 </code>
+</div></td></tr><tr id="OnDeadReference_9941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

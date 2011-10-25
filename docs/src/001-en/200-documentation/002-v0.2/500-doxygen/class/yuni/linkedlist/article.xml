@@ -6,258 +6,508 @@
 
 
 
-<h2><code>LinkedList</code></h2><table class="doxygen_table">
+<h2>A singly linked list.<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">LinkedList</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('LinkedList_3811319583276')">+ LinkedList</a></span>:  ();
 </code>
+</div></td></tr><tr id="LinkedList_3811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">LinkedList</a></span>:  (const LinkedList&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('LinkedList_3821319583276')">+ LinkedList</a></span>:  (const LinkedList&amp; rhs);
 </code>
+</div></td></tr><tr id="LinkedList_3821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor from another linked list.<div class="doxygen_name_spacer"></div>
-<code><div id="LinkedList_3881319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">LinkedList</a></span>:  (const LinkedList&lt;U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor from another linked list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="LinkedList_3831319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('LinkedList_3831319583276')">+ LinkedList</a></span>:  (const LinkedList&lt;U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="LinkedList_3831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor from a standard std::list.<div class="doxygen_name_spacer"></div>
-<code><div id="LinkedList_3891319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">LinkedList</a></span>:  (const std::list&lt; U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor from a standard std::list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="LinkedList_3841319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('LinkedList_3841319583276')">+ LinkedList</a></span>:  (const std::list&lt; U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="LinkedList_3841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor from a standard std::vector.<div class="doxygen_name_spacer"></div>
-<code><div id="LinkedList_3901319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">LinkedList</a></span>:  (const std::vector&lt; U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor from a standard std::vector.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="LinkedList_3851319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('LinkedList_3851319583276')">+ LinkedList</a></span>:  (const std::vector&lt; U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="LinkedList_3851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Destructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#"><b> ~ </b>LinkedList</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('~LinkedList_3861319583276')">+ <b> ~ </b>LinkedList</a></span>:  ();
 </code>
+</div></td></tr><tr id="~LinkedList_3861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Iterators &amp; Accessors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">begin</a></span>: iterator ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('begin_3871319583276')">+ begin</a></span>: iterator ();
 </code>
+</div></td></tr><tr id="begin_3871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">begin</a></span>: const_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('begin_3881319583276')">+ begin</a></span>: const_iterator () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="begin_3881319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the end of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">end</a></span>: iterator ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the end of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('end_3891319583276')">+ end</a></span>: iterator ();
 </code>
+</div></td></tr><tr id="end_3891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">end</a></span>: const_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('end_3901319583276')">+ end</a></span>: const_iterator () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="end_3901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the first item.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">front</a></span>: reference_type ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the first item.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('front_3911319583276')">+ front</a></span>: reference_type ();
 </code>
+</div></td></tr><tr id="front_3911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">front</a></span>: const_reference_type () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('front_3921319583276')">+ front</a></span>: const_reference_type () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="front_3921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the last item.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">back</a></span>: reference_type ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the last item.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('back_3931319583276')">+ back</a></span>: reference_type ();
 </code>
+</div></td></tr><tr id="back_3931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get an iterator at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">back</a></span>: const_reference_type () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an iterator at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('back_3941319583276')">+ back</a></span>: const_reference_type () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="back_3941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Find <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the first item equal to a given value.<div class="doxygen_name_spacer"></div>
-<code><div id="find_4001319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">find</a></span>: iterator (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the first item equal to a given value.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="find_3951319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('find_3951319583276')">+ find</a></span>: iterator (const U&amp; value);
 </code>
+</div></td></tr><tr id="find_3951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> value</code> The value to look for<br /></li></ul><div><code>return</code>  An iterator to the item found<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the first item equal to a given value.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">find</a></span>: iterator (const_reference_type value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the first item equal to a given value.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('find_3961319583276')">+ find</a></span>: iterator (const_reference_type value);
 </code>
+</div></td></tr><tr id="find_3961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> value</code> The value to look for<br /></li></ul><div><code>return</code>  An iterator to the item found<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the first item equal to a given value.<div class="doxygen_name_spacer"></div>
-<code><div id="find_4021319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">find</a></span>: const_iterator (const U&amp; value) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the first item equal to a given value.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="find_3971319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('find_3971319583276')">+ find</a></span>: const_iterator (const U&amp; value) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="find_3971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> value</code> The value to look for<br /></li></ul><div><code>return</code>  An iterator to the item found<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the first item equal to a given value.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">find</a></span>: const_iterator (const_reference_type value) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the first item equal to a given value.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('find_3981319583276')">+ find</a></span>: const_iterator (const_reference_type value) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="find_3981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> value</code> The value to look for<br /></li></ul><div><code>return</code>  An iterator to the item found<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Add <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a value at the end of the list (default constructor)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">push_back</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a value at the end of the list (default constructor)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('push_back_3991319583276')">+ push_back</a></span>: void ();
 </code>
+</div></td></tr><tr id="push_back_3991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a value at the end of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="push_back_4051319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">push_back</a></span>: void (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a value at the end of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="push_back_4001319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('push_back_4001319583276')">+ push_back</a></span>: void (const U&amp; value);
 </code>
+</div></td></tr><tr id="push_back_4001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a value at the end of the list (default constructor)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">push_back</a></span>: void (reference_type value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a value at the end of the list (default constructor)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('push_back_4011319583276')">+ push_back</a></span>: void (reference_type value);
 </code>
+</div></td></tr><tr id="push_back_4011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a list of values at the end of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="push_back_4071319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">push_back</a></span>: void (const LinkedList&lt;U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a list of values at the end of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="push_back_4021319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('push_back_4021319583276')">+ push_back</a></span>: void (const LinkedList&lt;U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="push_back_4021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a list of values at the end of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="push_back_4091319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">push_back</a></span>: void (const std::list&lt; U, A&gt; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a list of values at the end of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="push_back_4031319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('push_back_4031319583276')">+ push_back</a></span>: void (const std::list&lt; U, A&gt; rhs);
 </code>
+</div></td></tr><tr id="push_back_4031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a list of values at the end of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="push_back_4111319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">push_back</a></span>: void (const std::vector&lt; U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a list of values at the end of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="push_back_4041319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('push_back_4041319583276')">+ push_back</a></span>: void (const std::vector&lt; U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="push_back_4041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a value at the beginning of the list (default constructor)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">push_front</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a value at the beginning of the list (default constructor)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('push_front_4051319583276')">+ push_front</a></span>: void ();
 </code>
+</div></td></tr><tr id="push_front_4051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a value at the begining of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="push_front_4131319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">push_front</a></span>: void (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a value at the begining of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="push_front_4061319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('push_front_4061319583276')">+ push_front</a></span>: void (const U&amp; value);
 </code>
+</div></td></tr><tr id="push_front_4061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a value at the end of the list (default constructor)<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">push_front</a></span>: void (reference_type value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a value at the end of the list (default constructor)<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('push_front_4071319583276')">+ push_front</a></span>: void (reference_type value);
 </code>
+</div></td></tr><tr id="push_front_4071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a list of values at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="push_front_4161319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">push_front</a></span>: void (const LinkedList&lt;U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a list of values at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="push_front_4081319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('push_front_4081319583276')">+ push_front</a></span>: void (const LinkedList&lt;U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="push_front_4081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a list of values at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="push_front_4171319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">push_front</a></span>: void (const std::list&lt; U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a list of values at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="push_front_4091319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('push_front_4091319583276')">+ push_front</a></span>: void (const std::list&lt; U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="push_front_4091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Add a list of values at the beginning of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="push_front_4181319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">push_front</a></span>: void (const std::vector&lt; U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a list of values at the beginning of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="push_front_4101319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('push_front_4101319583276')">+ push_front</a></span>: void (const std::vector&lt; U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="push_front_4101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove the first element.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">pop_front</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove the first element.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('pop_front_4111319583276')">+ pop_front</a></span>: void ();
 </code>
+</div></td></tr><tr id="pop_front_4111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Remove <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove the item pointed to by the iterator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">erase</a></span>: void (iterator&amp; i);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove the item pointed to by the iterator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('erase_4121319583276')">+ erase</a></span>: void (iterator&amp; i);
 </code>
+</div></td></tr><tr id="erase_4121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove any item equal to a given value.<div class="doxygen_name_spacer"></div>
-<code><div id="remove_4211319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">remove</a></span>: Size (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove any item equal to a given value.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="remove_4131319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('remove_4131319583276')">+ remove</a></span>: Size (const U&amp; value);
 </code>
+</div></td></tr><tr id="remove_4131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><source type="cpp">  Yuni::LinkedList&lt;int&gt;  list;
+  list. push_back (10);
+  list. push_back (42);
+  list. remove (42);
+</source>
+<br /><source type="cpp">  struct  PredicateRemove
+  {
+         bool  operator == ( const  int &amp;  rhs)  const
+         {
+             return  !(rhs  %  2);
+         }
+  };
+
+  int  main( void )
+  {
+     Yuni::LinkedList&lt;int&gt;   list;
+     list  &lt;&lt;  10  &lt;&lt;  11  &lt;&lt;  2  &lt;&lt;  42;
+     list. remove (PredicateRemove());
+     return  0;
+  }
+</source>
+<br /><br />Parameters :<ul><li><code> value</code> The value to look for<br /></li></ul><div><code>return</code>  The count of deleted items<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove the item pointed to by the iterator.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">remove</a></span>: Size (reference_type value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove the item pointed to by the iterator.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('remove_4141319583276')">+ remove</a></span>: Size (reference_type value);
 </code>
+</div></td></tr><tr id="remove_4141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove any item equal to a value in the given list.<div class="doxygen_name_spacer"></div>
-<code><div id="remove_4231319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">remove</a></span>: Size (const LinkedList&lt;U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove any item equal to a value in the given list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="remove_4151319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('remove_4151319583276')">+ remove</a></span>: Size (const LinkedList&lt;U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="remove_4151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> A list of values to remove<br /></li></ul><div><code>return</code>  The number of items that have been removed<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove any item equal to a value in the given list.<div class="doxygen_name_spacer"></div>
-<code><div id="remove_4241319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">remove</a></span>: Size (const std::list&lt; U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove any item equal to a value in the given list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="remove_4161319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('remove_4161319583276')">+ remove</a></span>: Size (const std::list&lt; U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="remove_4161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> A list of values to remove<br /></li></ul><div><code>return</code>  The number of items that have been removed<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove any item equal to a value in the given list.<div class="doxygen_name_spacer"></div>
-<code><div id="remove_4251319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
- <span class="method"><a href="#">remove</a></span>: Size (const std::vector&lt; U, A&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove any item equal to a value in the given list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="remove_4171319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('remove_4171319583276')">+ remove</a></span>: Size (const std::vector&lt; U, A&gt;&amp; rhs);
 </code>
+</div></td></tr><tr id="remove_4171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> A list of values to remove<br /></li></ul><div><code>return</code>  The number of items that have been removed<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove all items at once.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">clear</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove all items at once.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('clear_4181319583276')">+ clear</a></span>: void ();
 </code>
+</div></td></tr><tr id="clear_4181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Memory <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the container is empty.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">empty</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the container is empty.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('empty_4191319583276')">+ empty</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="empty_4191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>return</code>  True if the container is empty, false otherwise<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the container is not empty.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">notEmpty</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the container is not empty.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('notEmpty_4201319583276')">+ notEmpty</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="notEmpty_4201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div><code>return</code>  True if the container is not empty, false otherwise<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get the number of items in the container.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">size</a></span>: Size () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the number of items in the container.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('size_4211319583276')">+ size</a></span>: Size () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="size_4211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Clear then add the value.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: LinkedList&amp; (const LinkedList&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Clear then add the value.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_4221319583276')">+ operator=</a></span>: LinkedList&amp; (const LinkedList&amp; value);
 </code>
+</div></td></tr><tr id="operator=_4221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> value</code> The value to copy<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Append a new item at the end of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="operator+=_4311319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator+=</a></span>: LinkedList&amp; (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a new item at the end of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator+=_4231319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator+=_4231319583276')">+ operator+=</a></span>: LinkedList&amp; (const U&amp; value);
 </code>
+</div></td></tr><tr id="operator+=_4231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> value</code> The value to copy and add<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Append a new item at the end of the list.<div class="doxygen_name_spacer"></div>
-<code><div id="operator<<_4321319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator&lt;&lt;</a></span>: LinkedList&amp; (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a new item at the end of the list.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator<<_4241319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator<<_4241319583276')">+ operator&lt;&lt;</a></span>: LinkedList&amp; (const U&amp; value);
 </code>
+</div></td></tr><tr id="operator<<_4241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> value</code> The value to copy and add<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Remove all items equal to 'value'.<div class="doxygen_name_spacer"></div>
-<code><div id="operator_=_4331319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator-=</a></span>: LinkedList&amp; (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove all items equal to 'value'.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator_=_4251319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator_=_4251319583276')">+ operator-=</a></span>: LinkedList&amp; (const U&amp; value);
 </code>
+</div></td></tr><tr id="operator_=_4251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">Parameters :<ul><li><code> value</code> The value to look for<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Check if the container is empty.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator!</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Check if the container is empty.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator!_4261319583276')">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!_4261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">This operator is strictly equivalent to the method 'empty()'<div><code>return</code>  True if the container is empty, false otherwise<br /></div><br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Size type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Size</a></span>: <span class="keyword">typedef</span> unsigned int;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Size type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Size_4271319583276')">+ Size</a></span>: <span class="keyword">typedef</span> unsigned int;</code>
+</div></td></tr><tr id="Size_4271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Size type (STL compliant)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">size_type</a></span>: <span class="keyword">typedef</span> Size;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Size type (STL compliant)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('size_type_4281319583276')">+ size_type</a></span>: <span class="keyword">typedef</span> Size;</code>
+</div></td></tr><tr id="size_type_4281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Value type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> T;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Value type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Type_4291319583276')">+ Type</a></span>: <span class="keyword">typedef</span> T;</code>
+</div></td></tr><tr id="Type_4291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Value type.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ValueType</a></span>: <span class="keyword">typedef</span> T;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Value type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ValueType_4301319583276')">+ ValueType</a></span>: <span class="keyword">typedef</span> T;</code>
+</div></td></tr><tr id="ValueType_4301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Value type (STL compliant)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">value_type</a></span>: <span class="keyword">typedef</span> T;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Value type (STL compliant)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('value_type_4311319583276')">+ value_type</a></span>: <span class="keyword">typedef</span> T;</code>
+</div></td></tr><tr id="value_type_4311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Reference.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">reference_type</a></span>: <span class="keyword">typedef</span> T&amp;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Reference.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('reference_type_4321319583276')">+ reference_type</a></span>: <span class="keyword">typedef</span> T&amp;;</code>
+</div></td></tr><tr id="reference_type_4321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Reference (const)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">const_reference_type</a></span>: <span class="keyword">typedef</span> const T&amp;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Reference (const)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('const_reference_type_4331319583276')">+ const_reference_type</a></span>: <span class="keyword">typedef</span> const T&amp;;</code>
+</div></td></tr><tr id="const_reference_type_4331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Pointer.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">pointer_type</a></span>: <span class="keyword">typedef</span> T*;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Pointer.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('pointer_type_4341319583276')">+ pointer_type</a></span>: <span class="keyword">typedef</span> T*;</code>
+</div></td></tr><tr id="pointer_type_4341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Pointer (const)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">const_pointer_type</a></span>: <span class="keyword">typedef</span> const T*;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Pointer (const)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('const_pointer_type_4351319583276')">+ const_pointer_type</a></span>: <span class="keyword">typedef</span> const T*;</code>
+</div></td></tr><tr id="const_pointer_type_4351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Iterator (STL compliant)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Iterator, false&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Iterator (STL compliant)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('iterator_4361319583276')">+ iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Iterator, false&gt;;</code>
+</div></td></tr><tr id="iterator_4361319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">const_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Iterator, true&gt;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('const_iterator_4371319583276')">+ const_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Iterator, true&gt;;</code>
+</div></td></tr><tr id="const_iterator_4371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

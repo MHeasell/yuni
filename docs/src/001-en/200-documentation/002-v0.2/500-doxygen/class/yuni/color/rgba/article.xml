@@ -6,130 +6,234 @@
 
 
 
-<h2><code>RGBA</code></h2><table class="doxygen_table">
+<h2>32Bits RGB Color Model (additive color model + transparency)<br /></h2>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Default constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">RGBA</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('RGBA_8741319583276')">+ RGBA</a></span>:  ();
 </code>
+</div></td></tr><tr id="RGBA_8741319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Copy constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">RGBA</a></span>:  (const RGBA&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('RGBA_8751319583276')">+ RGBA</a></span>:  (const RGBA&amp; rhs);
 </code>
+</div></td></tr><tr id="RGBA_8751319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with default values.<div class="doxygen_name_spacer"></div>
-<code><div id="RGBA_8801319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;</div>
- <span class="method"><a href="#">RGBA</a></span>:  (R r, G g, B b, A a);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with default values.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="RGBA_8761319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('RGBA_8761319583276')">+ RGBA</a></span>:  (R r, G g, B b, A a);
 </code>
+</div></td></tr><tr id="RGBA_8761319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with default values.<div class="doxygen_name_spacer"></div>
-<code><div id="RGBA_8811319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class R , class G , class B &gt;</div>
- <span class="method"><a href="#">RGBA</a></span>:  (R r, G g, B b);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with default values.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="RGBA_8771319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class R , class G , class B &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('RGBA_8771319583276')">+ RGBA</a></span>:  (R r, G g, B b);
 </code>
+</div></td></tr><tr id="RGBA_8771319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor with default values.<div class="doxygen_name_spacer"></div>
-<code><div id="RGBA_8821319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">RGBA</a></span>:  (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with default values.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="RGBA_8781319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('RGBA_8781319583276')">+ RGBA</a></span>:  (const U&amp; value);
 </code>
+</div></td></tr><tr id="RGBA_8781319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Assign <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assign all channels at once.<div class="doxygen_name_spacer"></div>
-<code><div id="assign_8831319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;</div>
- <span class="method"><a href="#">assign</a></span>: void (R r, G g, B b, A a);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assign all channels at once.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="assign_8791319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('assign_8791319583276')">+ assign</a></span>: void (R r, G g, B b, A a);
 </code>
+</div></td></tr><tr id="assign_8791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Reset all channels at once.<div class="doxygen_name_spacer"></div>
-<code><div id="assign_8841319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class R , class G , class B &gt;</div>
- <span class="method"><a href="#">assign</a></span>: void (R r, G g, B b);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset all channels at once.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="assign_8801319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class R , class G , class B &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('assign_8801319583276')">+ assign</a></span>: void (R r, G g, B b);
 </code>
+</div></td></tr><tr id="assign_8801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">The alpha channel will have a default value (opaque)<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Reset all channels at once from a single value.<div class="doxygen_name_spacer"></div>
-<code><div id="assign_8851319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">assign</a></span>: void (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset all channels at once from a single value.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="assign_8811319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('assign_8811319583276')">+ assign</a></span>: void (const U&amp; value);
 </code>
+</div></td></tr><tr id="assign_8811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Misc <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Get if the color will be visible.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">visible</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the color will be visible.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('visible_8821319583276')">+ visible</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="visible_8821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">This method is equivalent to manually check the alpha channel with the lower bound<br />
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Check if all channels are valid.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">valid</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Check if all channels are valid.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('valid_8831319583276')">+ valid</a></span>: bool () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="valid_8831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">This method is only useful when the channels are modified manually.<br />
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Stream printing <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Print the color value.<div class="doxygen_name_spacer"></div>
-<code><div id="print_8881319137232_templ" style="display:none"><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroT&gt;</div>
- <span class="method"><a href="#">print</a></span>: void (CString&lt;ChunkSizeT, ExpandableT, ZeroT&gt;&amp; string) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print the color value.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="print_8841319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroT&gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('print_8841319583276')">+ print</a></span>: void (CString&lt;ChunkSizeT, ExpandableT, ZeroT&gt;&amp; string) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="print_8841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Print the color value.<div class="doxygen_name_spacer"></div>
-<code><div id="print_8891319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
- <span class="method"><a href="#">print</a></span>: void (StreamT&amp; out) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print the color value.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="print_8851319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('print_8851319583276')">+ print</a></span>: void (StreamT&amp; out) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="print_8851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Increase or decrease all channels.<div class="doxygen_name_spacer"></div>
-<code><div id="operator+=_8901319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator+=</a></span>: RGBA&amp; (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Increase or decrease all channels.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator+=_8861319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator+=_8861319583276')">+ operator+=</a></span>: RGBA&amp; (const U&amp; value);
 </code>
+</div></td></tr><tr id="operator+=_8861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Increase or decrease all channels.<div class="doxygen_name_spacer"></div>
-<code><div id="operator_=_8911319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator-=</a></span>: RGBA&amp; (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Increase or decrease all channels.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator_=_8871319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator_=_8871319583276')">+ operator-=</a></span>: RGBA&amp; (const U&amp; value);
 </code>
+</div></td></tr><tr id="operator_=_8871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: RGBA&amp; (const RGBA&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_8881319583276')">+ operator=</a></span>: RGBA&amp; (const RGBA&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_8881319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">operator=</a></span>: RGBA&amp; (const Yuni::NullPtr&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('operator=_8891319583276')">+ operator=</a></span>: RGBA&amp; (const Yuni::NullPtr&amp; );
 </code>
+</div></td></tr><tr id="operator=_8891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Assignment.<div class="doxygen_name_spacer"></div>
-<code><div id="operator=_8951319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator=</a></span>: RGBA&amp; (const U&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator=_8901319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator=_8901319583276')">+ operator=</a></span>: RGBA&amp; (const U&amp; rhs);
 </code>
+</div></td></tr><tr id="operator=_8901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison.<div class="doxygen_name_spacer"></div>
-<code><div id="operator==_8971319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator==</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator==_8911319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator==_8911319583276')">+ operator==</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator==_8911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Comparison.<div class="doxygen_name_spacer"></div>
-<code><div id="operator!=_8991319137232_templ" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">operator!=</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison.<br /><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist" id="operator!=_8921319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="javascript:toggleVisibility('operator!=_8921319583276')">+ operator!=</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="operator!=_8921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td></td><td class="doxnone">A non-zero value if the class has a transparency channel. The upper bound for this color model. The lower bound for this color model.<div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 0)</i></code>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
+</div></td></tr><tr id="@168hasTransparencyupperBoundlowerBound_8931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Type used for channels.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> T;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type used for channels.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Type_8941319583276')">+ Type</a></span>: <span class="keyword">typedef</span> T;</code>
+</div></td></tr><tr id="Type_8941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">The most appropriate type for printing.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">PrintType</a></span>: <span class="keyword">typedef</span> Yuni::Private::Color::Print&lt; T&gt;:: Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most appropriate type for printing.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('PrintType_8951319583276')">+ PrintType</a></span>: <span class="keyword">typedef</span> Yuni::Private::Color::Print&lt; T&gt;:: Type;</code>
+</div></td></tr><tr id="PrintType_8951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The red channel.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">red</a></span>: Type;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The red channel.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('red_8961319583276')">+ red</a></span>: Type;</code>
+</div></td></tr><tr id="red_8961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The green channel.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">green</a></span>: Type;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The green channel.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('green_8971319583276')">+ green</a></span>: Type;</code>
+</div></td></tr><tr id="green_8971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The blue channel.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">blue</a></span>: Type;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The blue channel.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('blue_8981319583276')">+ blue</a></span>: Type;</code>
+</div></td></tr><tr id="blue_8981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">The alpha channel (transparency)<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">alpha</a></span>: Type;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The alpha channel (transparency)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('alpha_8991319583276')">+ alpha</a></span>: Type;</code>
+</div></td></tr><tr id="alpha_8991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

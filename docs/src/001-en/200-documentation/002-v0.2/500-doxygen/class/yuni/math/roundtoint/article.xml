@@ -6,17 +6,29 @@
 
 
 
-<h2><code>RoundToInt</code></h2><table class="doxygen_table">
+<h2>RoundToInt</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> T;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('Type_35751319583276')">+ Type</a></span>: <span class="keyword">typedef</span> T;</code>
+</div></td></tr><tr id="Type_35751319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">ResultType</a></span>: <span class="keyword">typedef</span> R;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('ResultType_35761319583276')">+ ResultType</a></span>: <span class="keyword">typedef</span> R;</code>
+</div></td></tr><tr id="ResultType_35761319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">Value</a></span>: <span class="keyword">static</span> ResultType (Type x);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Value_35771319583276')">+ Value</a></span>: <span class="keyword">static</span> ResultType (Type x);
 </code>
+</div></td></tr><tr id="Value_35771319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

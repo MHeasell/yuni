@@ -23,6 +23,16 @@ namespace Job
 	namespace  // anonymous
 	{
 
+		template<class StringT1>
+		inline void HtmlEntities(StringT1& out, const char* string, unsigned int length)
+		{
+			out.assign(string, length);
+			out.replace("&", "&amp;");
+			out.replace("<", "&lt;");
+			out.replace(">", "&gt;");
+		}
+
+
 
 		class XMLCompoundVisitor : public TiXmlVisitor
 		{
@@ -50,6 +60,9 @@ namespace Job
 			virtual bool Visit(const TiXmlComment& /*comment*/);
 			virtual bool Visit(const TiXmlUnknown& /*unknown*/);
 
+			Member::Ptr currentMember();
+
+			void startNewParagraph(String* text);
 
 		private:
 			Compound& pCompound;
@@ -61,11 +74,22 @@ namespace Job
 			bool pInMemberDefinition;
 			bool pInMemberParam;
 			bool pInMemberBrief;
+			bool pInMemberDetailedDescription;
 			bool pInMemberTemplates;
 			//! XML document
 			TiXmlDocument& pDocument;
 			//!
 			Section::Deque pSections;
+
+			//! \name Paragraph
+			//@{
+			//!
+			String* pCurrentParagraph;
+			//! Temporary string
+			String pS;
+			//! Codeline
+			unsigned int pParagraphCodelineCount;
+			//@}
 
 		}; // class XMLCompoundVisitor
 
@@ -81,14 +105,28 @@ namespace Job
 			pInMemberDefName(false),
 			pInMemberParam(false),
 			pInMemberBrief(false),
+			pInMemberDetailedDescription(false),
 			pInMemberTemplates(false),
-			pDocument(document)
+			pDocument(document),
+			pCurrentParagraph(nullptr)
 		{
 		}
 
 
 		XMLCompoundVisitor::~XMLCompoundVisitor()
 		{
+		}
+
+
+		Member::Ptr XMLCompoundVisitor::currentMember()
+		{
+			if (!pSections.empty())
+			{
+				Section::Ptr section = pSections.front();
+				if (!(!section) && !section->members.empty())
+					return section->members[section->members.size() - 1];
+			}
+			return nullptr;
 		}
 
 
@@ -117,6 +155,8 @@ namespace Job
 				Member* member = new Member();
 				member->id = element.Attribute("id");
 				member->kind = Compound::StringToKind(StringAdapter(element.Attribute("kind")));
+				if (member->kind == kdUnknown)
+					logs.warning() << "unknown type: " << StringAdapter(element.Attribute("kind"));
 				member->visibility = element.Attribute("prot");
 				member->isStatic = StringAdapter(element.Attribute("static")).to<bool>();
 				member->isConst = StringAdapter(element.Attribute("const")).to<bool>();
@@ -129,6 +169,8 @@ namespace Job
 				pInMemberDefinition = false;
 				pInMemberParam = false;
 				pInMemberBrief = false;
+				pInMemberDetailedDescription = false;
+				pCurrentParagraph = nullptr;
 				return true;
 			}
 			if (strname == "name")
@@ -157,26 +199,100 @@ namespace Job
 			if (strname == "briefdescription")
 			{
 				if (pInMemberDef)
+				{
+					Member::Ptr member = currentMember();
+					startNewParagraph((!member) ? nullptr : &(member->brief));
 					pInMemberBrief = true;
+				}
+				else
+					startNewParagraph(&(pCompound.brief));
 			}
-			if (strname == "param")
+			if (strname == "detaileddescription")
 			{
 				if (pInMemberDef)
 				{
-					if (!pSections.empty())
+					Member::Ptr member = currentMember();
+					startNewParagraph((!member) ? nullptr : &(member->detailedDescription));
+					pInMemberDetailedDescription = true;
+				}
+				else
+					startNewParagraph(&(pCompound.description));
+			}
+			if (strname == "parameterlist")
+			{
+				if (pCurrentParagraph)
+				{
+					if ((*pCurrentParagraph).notEmpty())
+						(*pCurrentParagraph) += "<br />";
+					(*pCurrentParagraph) += "Parameters :<ul>";
+				}
+			}
+			if (strname == "parameteritem")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "<li>";
+			}
+			if (strname == "parameternamelist")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "<code>";
+			}
+			if (strname == "programlisting")
+			{
+				if (pCurrentParagraph)
+				{
+					if (!pParagraphCodelineCount)
+						(*pCurrentParagraph) += "<source type=\"cpp\">";
+				}
+			}
+			if (strname == "itemizedlist")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "<ul>";
+			}
+			if (strname == "listitem")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "<li>";
+			}
+			if (strname == "simplesect")
+			{
+				if (pCurrentParagraph)
+				{
+					StringAdapter kind = element.Attribute("kind");
+					if (kind == "return")
+						(*pCurrentParagraph) += "<div><code>return</code> ";
+					else if (kind == "warning")
+						(*pCurrentParagraph) += "<div><b>warning</b> : ";
+					else if (kind == "see")
+						(*pCurrentParagraph) += "<div><code>see</code> : ";
+					else if (kind == "note")
+						(*pCurrentParagraph) += "<div><b>note</b> : ";
+					else if (kind == "remark")
+						(*pCurrentParagraph) += "<div><b>remark</b> : ";
+					else if (kind == "attention")
+						(*pCurrentParagraph) += "<div><b>attention</b> : ";
+					else
 					{
-						Section::Ptr section = pSections.front();
-						if (!(!section) && !section->members.empty())
-						{
-							Member::Ptr member = section->members[section->members.size() - 1];
-							if (pInMemberTemplates)
-								member->templates.push_back(new Parameter());
-							else
-								member->parameters.push_back(new Parameter());
-							pInMemberParam = true;
-						}
+						logs.warning() << "unmanaged simplesect '" << kind;
+						(*pCurrentParagraph) += "<div>";
 					}
+				}
+			}
 
+			if (strname == "param")
+			{
+				if (pInMemberDef && !pCurrentParagraph)
+				{
+					Member::Ptr member = currentMember();
+					if (!(!member))
+					{
+						if (pInMemberTemplates)
+							member->templates.push_back(new Parameter());
+						else
+							member->parameters.push_back(new Parameter());
+						pInMemberParam = true;
+					}
 				}
 			}
 			if (strname == "sectiondef")
@@ -193,6 +309,8 @@ namespace Job
 				pInMemberDefName = false;
 				pInMemberDefinition = false;
 				pInMemberBrief = false;
+				pInMemberDetailedDescription = false;
+				pCurrentParagraph = nullptr;
 				return true;
 			}
 			if (strname == "header")
@@ -212,6 +330,8 @@ namespace Job
 					pInMemberDefName = false;
 					pInMemberDefinition = false;
 					pInMemberBrief = false;
+					pInMemberDetailedDescription = false;
+					pCurrentParagraph = nullptr;
 				}
 				return true;
 			}
@@ -302,24 +422,6 @@ namespace Job
 				}
 				return true;
 			}
-			if (pInMemberDef && pInMemberBrief)
-			{
-				if (!pSections.empty())
-				{
-					Section::Ptr section = pSections.front();
-					if (!(!section) && !section->members.empty())
-					{
-						Member::Ptr member = section->members[section->members.size() - 1];
-						const TIXML_STRING& name = text.ValueTStr();
-
-						if (member->brief.notEmpty())
-							member->brief += ' ';
-						member->brief.append(name.c_str(), (unsigned int)name.size());
-					}
-				}
-				return true;
-			}
-
 			if (pInSectionHeader)
 			{
 				Section::Ptr section = pSections.front();
@@ -330,6 +432,17 @@ namespace Job
 				}
 				return true;
 			}
+
+			if (pCurrentParagraph)
+			{
+				const TIXML_STRING& name = text.ValueTStr();
+				if ((*pCurrentParagraph).notEmpty())
+					(*pCurrentParagraph) += ' ';
+				HtmlEntities(pS, name.c_str(), (unsigned int)name.size());
+				(*pCurrentParagraph) += pS;
+				return true;
+			}
+
 			return true;
 		}
 
@@ -380,9 +493,71 @@ namespace Job
 			}
 			if (strname == "briefdescription")
 			{
-				if (pInMemberDef)
-					pInMemberBrief = false;
+				if (pCurrentParagraph)
+					(*pCurrentParagraph).trim();
+				pInMemberBrief = false;
+				pCurrentParagraph = nullptr;
 			}
+			if (strname == "detaileddescription")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph).trim();
+				pInMemberDetailedDescription = false;
+				pCurrentParagraph = nullptr;
+			}
+			if (strname == "parameterlist")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "</ul>";
+			}
+			if (strname == "parameteritem")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "</li>";
+			}
+			if (strname == "parameternamelist")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "</code>";
+			}
+			if (strname == "programlisting")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "</source>\n";
+			}
+			if (strname == "codeline")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += '\n';
+			}
+			if (strname == "itemizedlist")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "</ul>";
+			}
+			if (strname == "para")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "<br />";
+			}
+
+			if (strname == "listitem")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "</li>";
+			}
+
+			if (strname == "sp")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += ' ';
+			}
+			if (strname == "simplesect")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "</div>";
+			}
+
 			if (strname == "templateparamlist")
 			{
 				if (pInMemberDef)
@@ -493,6 +668,17 @@ namespace Job
 	}
 
 
+	void XMLCompoundVisitor::startNewParagraph(String* text)
+	{
+		if (text)
+		{
+			(*text).clear();
+			pCurrentParagraph = text;
+			pParagraphCodelineCount = 0;
+		}
+		else
+			pCurrentParagraph = nullptr;
+	}
 
 
 

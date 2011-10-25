@@ -31,6 +31,7 @@ namespace System
 	** \brief Get the user's home folder
 	**
 	** \param[out] out Variable of type 'string'/'container' where the value will be appened
+	** \param emptyBefore True to clear the given variable \p out before
 	** \return True if the operation succeeded, false otherwise
 	*/
 	template<class StringT>

@@ -9,94 +9,94 @@
 <h2><code>iterator</code></h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">STL Compatibility <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">value_type</a></span>: <span class="keyword">typedef</span> NodeT;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">+ value_type</a></span>: <span class="keyword">typedef</span> NodeT;</code>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">pointer</a></span>: <span class="keyword">typedef</span> NodeT*;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">+ pointer</a></span>: <span class="keyword">typedef</span> NodeT*;</code>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">reference</a></span>: <span class="keyword">typedef</span> NodeT&amp;;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">+ reference</a></span>: <span class="keyword">typedef</span> NodeT&amp;;</code>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">iterator_category</a></span>: <span class="keyword">typedef</span> std::bidirectional_iterator_tag;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">+ iterator_category</a></span>: <span class="keyword">typedef</span> std::bidirectional_iterator_tag;</code>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">difference_type</a></span>: <span class="keyword">typedef</span> ptrdiff_t;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">+ difference_type</a></span>: <span class="keyword">typedef</span> ptrdiff_t;</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">iterator</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('iterator_57711319225431_templ')">+ iterator</a></span>:  ();
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">iterator</a></span>:  (const iterator&amp; it);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('iterator_57721319225431_templ')">+ iterator</a></span>:  (const iterator&amp; it);
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">iterator</a></span>:  (const NodeT&amp; p);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('iterator_57731319225431_templ')">+ iterator</a></span>:  (const NodeT&amp; p);
 </code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Comparisons <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator==</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator==_57741319225431_templ')">+ operator==</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator!=</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator!=_57751319225431_templ')">+ operator!=</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator<_57761319225431_templ')">+ operator&lt;</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator>_57771319225431_templ')">+ operator&gt;</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&lt;=</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator<=_57781319225431_templ')">+ operator&lt;=</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator&gt;=</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator>=_57791319225431_templ')">+ operator&gt;=</a></span>: bool (const IteratorType&amp; rhs) <span class="keyword">const</span>;
 </code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">IteratorType</a></span>: <span class="keyword">typedef</span> iterator;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">+ IteratorType</a></span>: <span class="keyword">typedef</span> iterator;</code>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">NodeT</a></span>: <span class="keyword">typedef</span> Ptr;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">+ NodeT</a></span>: <span class="keyword">typedef</span> Ptr;</code>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">PointerType</a></span>: <span class="keyword">typedef</span> NodeT*;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><code><span class="method"><a href="#">+ PointerType</a></span>: <span class="keyword">typedef</span> NodeT*;</code>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator++</a></span>: IteratorType&amp; ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator++_57831319225431_templ')">+ operator++</a></span>: IteratorType&amp; ();
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator--</a></span>: IteratorType&amp; ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator___57841319225431_templ')">+ operator--</a></span>: IteratorType&amp; ();
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: NodeT&amp; ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator*_57851319225431_templ')">+ operator*</a></span>: NodeT&amp; ();
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator*</a></span>: const NodeT&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator*_57861319225431_templ')">+ operator*</a></span>: const NodeT&amp; () <span class="keyword">const</span>;
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: NodeT&amp; ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator_>_57871319225431_templ')">+ operator-&gt;</a></span>: NodeT&amp; ();
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-&gt;</a></span>: const NodeT&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator_>_57881319225431_templ')">+ operator-&gt;</a></span>: const NodeT&amp; () <span class="keyword">const</span>;
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator--</a></span>: IteratorType (int );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator___57891319225431_templ')">+ operator--</a></span>: IteratorType (int );
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator++</a></span>: IteratorType (int );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator++_57911319225431_templ')">+ operator++</a></span>: IteratorType (int );
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: IteratorType&amp; (int n);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_57931319225431_templ')">+ operator+=</a></span>: IteratorType&amp; (int n);
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: IteratorType&amp; (int n);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_57951319225431_templ')">+ operator-=</a></span>: IteratorType&amp; (int n);
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator+=</a></span>: IteratorType&amp; (unsigned int n);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_57971319225431_templ')">+ operator+=</a></span>: IteratorType&amp; (unsigned int n);
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-=</a></span>: IteratorType&amp; (unsigned int n);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_57991319225431_templ')">+ operator-=</a></span>: IteratorType&amp; (unsigned int n);
 </code>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="#">operator-</a></span>: IteratorType (int n);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><code> <span class="method"><a href="javascript:toggleVisibility('operator__58011319225431_templ')">+ operator-</a></span>: IteratorType (int n);
 </code>
 </td></tr>
 </table>

@@ -6,17 +6,31 @@
 
 
 
-<h2><code>PointerToMember</code></h2><table class="doxygen_table">
+<h2>Pointer-to-member of any Class.<br /></h2>
+<div>Parameters :<ul><li><code> C</code> Any class<br /></li></ul><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Mere type for C.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Class</a></span>: <span class="keyword">typedef</span> BindType::template PointerToMember&lt;C&gt;:: Class;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Mere type for C.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Class_22951319583276')">+ Class</a></span>: <span class="keyword">typedef</span> BindType::template PointerToMember&lt;C&gt;:: Class;</code>
+</div></td></tr><tr id="Class_22951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Type for a pointer-to-member.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">Type</a></span>: <span class="keyword">typedef</span> BindType::template PointerToMember&lt;C&gt;:: Type;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type for a pointer-to-member.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('Type_22961319583276')">+ Type</a></span>: <span class="keyword">typedef</span> BindType::template PointerToMember&lt;C&gt;:: Type;</code>
+</div></td></tr><tr id="Type_22961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone">Type for a const pointer-to-member.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">ConstType</a></span>: <span class="keyword">typedef</span> BindType::template PointerToMember&lt;C&gt;:: ConstType;</code>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type for a const pointer-to-member.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('ConstType_22971319583276')">+ ConstType</a></span>: <span class="keyword">typedef</span> BindType::template PointerToMember&lt;C&gt;:: ConstType;</code>
+</div></td></tr><tr id="ConstType_22971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 

@@ -6,24 +6,42 @@
 
 
 
-<h2><code>BadCast</code></h2><table class="doxygen_table">
+<h2>Is thrown in case of impossible cast from one type to another.<br /></h2>
+<div><div><code>see</code> :  Any<br /></div><br /></div>
+<table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Cast source.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">from</a></span>: const char*;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Cast source.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('from_23241319583276')">+ from</a></span>: const char*;</code>
+</div></td></tr><tr id="from_23241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone">Cast target.<div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">to</a></span>: const char*;</code>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Cast target.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="javascript:toggleVisibility('to_23251319583276')">+ to</a></span>: const char*;</code>
+</div></td></tr><tr id="to_23251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Constructor.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">BadCast</a></span>:  (const std::type_info&amp; src, const std::type_info&amp; dest);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('BadCast_23261319583276')">+ BadCast</a></span>:  (const std::type_info&amp; src, const std::type_info&amp; dest);
 </code>
+</div></td></tr><tr id="BadCast_23261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone">Description printed by libstdc++.<div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">what</a></span>: const char* () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Description printed by libstdc++.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="javascript:toggleVisibility('what_23271319583276')">+ what</a></span>: const char* () <span class="keyword">const</span>;
 </code>
+</div></td></tr><tr id="what_23271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><i>no description</i>
+</div>
 </td></tr>
 </table>
 
