@@ -12,11 +12,11 @@ namespace Yuni
 {
 
 	/*!
-	** \brief Classic Any type implementation.
+	** \brief An Any is a container for a value of any type.
 	** \ingroup Core
 	**
 	** This is a relatively classic, yet (i hope) fast implementation of
-	** a Any type.
+	** an Any type.
 	**
 	** How to use:
 	** \code
@@ -31,7 +31,7 @@ namespace Yuni
 	{
 	public:
 		/*!
-		** \brief Swaps a any with another
+		** \brief Swaps an any with another
 		** \param[in,out] one Any 1
 		** \param[in,out] other Any 2
 		*/

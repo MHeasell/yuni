@@ -44,22 +44,21 @@ namespace Yuni
 	/*!
 	** \brief Character string
 	**
-	** The class provides a useful way to manipulate and store sequences of
-	** characters.
+	** The class manipulates and stores sequences of characters.
 	**
 	** The class is a template class, you may prefer the convenient alias
-	** `Yuni::String` most of the time.
+	** <tt>Yuni::String</tt> most of the time.
 	**
-	** The supported external types are the following :
-	**  - C
-	**  - char*
-	**  - C[]
-	**  - std::basic_string<char>
-	**  - Yuni::CString<...>
-	**  - SmartPtr<std::basic_string<char>, ...>
-	**  - SmartPtr<CString<...>, ...>
+	** The following external types can be inserted / converted to a <tt>Yuni::CString</tt> :
+	**  - <tt>C</tt>
+	**  - <tt>char*</tt>
+	**  - <tt>C[]</tt>
+	**  - <tt>std::basic_string<char> </tt>
+	**  - <tt>Yuni::CString<...> </tt>
+	**  - <tt>SmartPtr<std::basic_string<char>, ...> </tt>
+	**  - <tt>SmartPtr<CString<...>, ...> </tt>
 	**
-	** Example for iterating through all character (the recommended way)
+	** Example for iterating through all characters (the recommended way)
 	** \code
 	** String t = "こんにちは";
 	** const String::const_utf8iterator end = t.utf8end();
@@ -179,7 +178,7 @@ namespace Yuni
 		//! \name CString comparison
 		//@{
 		/*!
-		** \brief Compare two string like strcmp()
+		** \brief Compare two strings like strcmp()
 		**
 		** The comparison is done using unsigned characters.
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
@@ -188,7 +187,7 @@ namespace Yuni
 		static int Compare(const char* const s1, unsigned int l1, const char* const s2, unsigned int l2);
 
 		/*!
-		** \brief Compare two string like strcmp() (insensitive)
+		** \brief Compare two strings like stricmp() (case-insensitive)
 		**
 		** The comparison is done using unsigned characters.
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
@@ -198,7 +197,7 @@ namespace Yuni
 		//@}
 
 
-		//! \name Faster implementation of some commons routines
+		//! \name Faster implementation of some common routines
 		//@{
 		//! Upper case to lower case letter conversion (man 3 tolower)
 		static int ToLower(int c);
@@ -1541,7 +1540,7 @@ namespace Yuni
 		void truncate(const Size newSize);
 
 		/*!
-		** \brief Ensure that there is enough allocated space for X caracters
+		** \brief Ensure that there is enough allocated space for X characters
 		**
 		** The content will remain untouched.
 		** \param minCapacity The minimum capacity of the string (in bytes)
