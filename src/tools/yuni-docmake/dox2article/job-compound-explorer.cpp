@@ -206,6 +206,7 @@ namespace Job
 				}
 				else
 					startNewParagraph(&(pCompound.brief));
+				return true;
 			}
 			if (strname == "detaileddescription")
 			{
@@ -217,15 +218,13 @@ namespace Job
 				}
 				else
 					startNewParagraph(&(pCompound.description));
+				return true;
 			}
 			if (strname == "parameterlist")
 			{
 				if (pCurrentParagraph)
-				{
-					if ((*pCurrentParagraph).notEmpty())
-						(*pCurrentParagraph) += "<br />";
-					(*pCurrentParagraph) += "Parameters :<ul>";
-				}
+					(*pCurrentParagraph) += "<div class=\"doxygen_params\">Parameters :</div><ul>";
+				return true;
 			}
 			if (strname == "parameteritem")
 			{
@@ -244,16 +243,25 @@ namespace Job
 					if (!pParagraphCodelineCount)
 						(*pCurrentParagraph) += "<source type=\"cpp\">";
 				}
+				return true;
+			}
+			if (strname == "computeroutput")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "<code>";
+				return true;
 			}
 			if (strname == "itemizedlist")
 			{
 				if (pCurrentParagraph)
 					(*pCurrentParagraph) += "<ul>";
+				return true;
 			}
 			if (strname == "listitem")
 			{
 				if (pCurrentParagraph)
 					(*pCurrentParagraph) += "<li>";
+				return true;
 			}
 			if (strname == "simplesect")
 			{
@@ -278,6 +286,7 @@ namespace Job
 						(*pCurrentParagraph) += "<div>";
 					}
 				}
+				return true;
 			}
 
 			if (strname == "param")
@@ -294,6 +303,7 @@ namespace Job
 						pInMemberParam = true;
 					}
 				}
+				return true;
 			}
 			if (strname == "sectiondef")
 			{
@@ -524,49 +534,64 @@ namespace Job
 			{
 				if (pCurrentParagraph)
 					(*pCurrentParagraph) += "</source>\n";
+				return true;
+			}
+			if (strname == "computeroutput")
+			{
+				if (pCurrentParagraph)
+					(*pCurrentParagraph) += "</code>";
+				return true;
 			}
 			if (strname == "codeline")
 			{
 				if (pCurrentParagraph)
 					(*pCurrentParagraph) += '\n';
+				return true;
 			}
 			if (strname == "itemizedlist")
 			{
 				if (pCurrentParagraph)
 					(*pCurrentParagraph) += "</ul>";
+				return true;
 			}
 			if (strname == "para")
 			{
-				if (pCurrentParagraph)
+				if (pCurrentParagraph && !(*pCurrentParagraph).endsWith("<br />"))
 					(*pCurrentParagraph) += "<br />";
+				return true;
 			}
 
 			if (strname == "listitem")
 			{
 				if (pCurrentParagraph)
 					(*pCurrentParagraph) += "</li>";
+				return true;
 			}
 
 			if (strname == "sp")
 			{
 				if (pCurrentParagraph)
 					(*pCurrentParagraph) += ' ';
+				return true;
 			}
 			if (strname == "simplesect")
 			{
 				if (pCurrentParagraph)
 					(*pCurrentParagraph) += "</div>";
+				return true;
 			}
 
 			if (strname == "templateparamlist")
 			{
 				if (pInMemberDef)
 					pInMemberTemplates = false;
+				return true;
 			}
 			if (strname == "param")
 			{
 				if (pInMemberDef)
 					pInMemberParam = false;
+				return true;
 			}
 			if (strname == "sectiondef")
 			{
