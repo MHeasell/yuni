@@ -985,7 +985,7 @@ namespace DocIndex
 		sqlite3_stmt* stmt;
 		if (SQLITE_OK != sqlite3_prepare_v2(gDB, "SELECT tagname FROM tags_per_article WHERE article_id = $1", -1, &stmt, NULL))
 			return;
-		sqlite3_bind_int(stmt, 1, article.id);
+		sqlite3_bind_int64(stmt, 1, article.id);
 		while (SQLITE_ROW == sqlite3_step(stmt))
 		{
 			const StringAdapter tagname = (const char*) sqlite3_column_text(stmt, 0);
