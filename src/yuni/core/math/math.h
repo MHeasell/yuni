@@ -352,6 +352,19 @@ namespace Math
 	template<class T, class R> struct RoundToInt;
 
 
+	/*!
+	** \brief Determine whether a value is in fact an integer or not
+	**
+	** \param x A number
+	**
+	** \code
+	** IsInteger(2.000000); // true
+	** IsInteger(2.000001); // false
+	** \endcode
+	*/
+	template<class T> inline bool IsInteger(T x);
+
+
 
 
 } // namespace Math

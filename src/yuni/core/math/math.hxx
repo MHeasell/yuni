@@ -559,6 +559,11 @@ namespace Math
 	# endif
 
 
+	template<class T> inline bool IsInteger(T x)
+	{
+		return !(Abs(Fract(x)) > 0.0);
+	}
+
 
 
 } // namespace Math
