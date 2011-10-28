@@ -119,6 +119,7 @@ add_executable(edln-dox2article
 	dox2article/job-compound-writer.cpp
 	dox2article/indexes.h
 	dox2article/indexes.cpp
+	dox2article/toolbox.h
 	logs.h
 	logs.cpp
 )

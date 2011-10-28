@@ -189,13 +189,3 @@ SEO = {
 
 };
 
-
-
-function toggleVisibility(name) {
-	var o = document.getElementById(name + '_tmpl');
-	if (o)
-		o.style.display = (o.style.display == "none") ? "" : "none";
-	var p = document.getElementById(name + '_desc');
-	if (p)
-		p.style.display = (p.style.display == "none") ? "" : "none";
-}

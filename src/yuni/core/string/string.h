@@ -988,7 +988,7 @@ namespace Yuni
 		** \param cstr An arbitrary string character
 		** \return The position of the first occurence found, `npos` if not found
 		*/
-		Size indexOf(Size offset, const char cstr) const;
+		unsigned int indexOf(Size offset, const char cstr) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
@@ -1000,7 +1000,7 @@ namespace Yuni
 		** \param len Size of the given string
 		** \return The position of the first occurence found, `npos` if not found
 		*/
-		Size indexOf(Size offset, const char* const cstr, const Size len) const;
+		unsigned int indexOf(Size offset, const char* const cstr, const Size len) const;
 
 		/*!
 		** \brief Find the offset of any supported CString from the left
@@ -1011,7 +1011,7 @@ namespace Yuni
 		** \param cstr Any supported String
 		** \return The position of the first occurence found, `npos` if not found
 		*/
-		template<class StringT> Size indexOf(Size offset, const StringT& s) const;
+		template<class StringT> unsigned int indexOf(Size offset, const StringT& s) const;
 
 		/*!
 		** \brief Searches the string for an individual character

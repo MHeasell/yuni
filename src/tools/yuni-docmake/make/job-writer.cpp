@@ -413,6 +413,8 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 				{
 					tmp << '/' << list[i];
 					path.clear() << root << tmp;
+					if (!i)
+						continue;
 					address << "<li><a href=\"" << root << tmp << '/' << pVars["INDEX"] << "\">";
 					caption.clear();
 					if (!DocIndex::AppendArticleTitleFromPath(caption, tmp))
@@ -680,7 +682,8 @@ void JobWriter::onExecute()
 
 	if (!IO::File::SaveToFile(filenameInHtdocs, content))
 	{
-		logs.error() << "impossible to generate '" << pArticle.htdocsFilename << "' into '" << filenameInHtdocs << "'";
+		logs.error() << "impossible to generate '" << pArticle.htdocsFilename
+			<< "' into '" << filenameInHtdocs << "'";
 	}
 }
 
