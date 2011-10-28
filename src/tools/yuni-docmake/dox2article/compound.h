@@ -21,10 +21,10 @@ namespace Dox2Article
 		kdUnknown = 0,
 		kdNamespace,
 		kdClass,
-		kdFunction,
-		kdVariable,
 		kdTypedef,
 		kdEnum,
+		kdFunction,
+		kdVariable,
 		kdFile,
 		kdFolder,
 		kdGroup,
@@ -100,7 +100,7 @@ namespace Dox2Article
 		//! Deque
 		typedef std::deque<Ptr>  Deque;
 
-				//! All symbols, ordered by their type
+		//! All symbols, ordered by their type
 		typedef Map*  MapPerKind;
 
 	public:

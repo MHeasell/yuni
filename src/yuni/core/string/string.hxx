@@ -1158,7 +1158,7 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
+	unsigned int
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::indexOf(
 		typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset, const char c) const
 	{
@@ -1379,12 +1379,9 @@ namespace Yuni
 
 
 
-
-
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
-	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::indexOf(
-		typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset,
+	unsigned int
+	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::indexOf(Size offset,
 		const char* const cstr, const typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size len) const
 	{
 		if (cstr && len && len <= AncestorType::size)
@@ -1406,9 +1403,8 @@ namespace Yuni
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class StringT>
-	inline typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size
-	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::indexOf(
-		typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Size offset, const StringT& s) const
+	unsigned int
+	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::indexOf(Size offset, const StringT& s) const
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CString_InvalidTypeForBufferSize);

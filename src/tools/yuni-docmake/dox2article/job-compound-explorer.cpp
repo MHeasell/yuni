@@ -4,6 +4,7 @@
 #include <yuni/core/system/suspend.h>
 #include "../tinyxml/tinyxml.h"
 #include "options.h"
+#include "toolbox.h"
 
 #define SEP Yuni::IO::Separator
 
@@ -22,16 +23,6 @@ namespace Job
 
 	namespace  // anonymous
 	{
-
-		template<class StringT1>
-		inline void HtmlEntities(StringT1& out, const char* string, unsigned int length)
-		{
-			out.assign(string, length);
-			out.replace("&", "&amp;");
-			out.replace("<", "&lt;");
-			out.replace(">", "&gt;");
-		}
-
 
 
 		class XMLCompoundVisitor : public TiXmlVisitor
@@ -448,7 +439,7 @@ namespace Job
 				const TIXML_STRING& name = text.ValueTStr();
 				if ((*pCurrentParagraph).notEmpty())
 					(*pCurrentParagraph) += ' ';
-				HtmlEntities(pS, name.c_str(), (unsigned int)name.size());
+				HtmlEntities(pS, StringAdapter(name.c_str(), (unsigned int)name.size()));
 				(*pCurrentParagraph) += pS;
 				return true;
 			}

@@ -150,8 +150,7 @@ body,html {
 }
 .toc div #toclink {
 	color					:#E99;
-	padding-left			:0.7em;
-	padding-right			:0.7em;
+	padding:0.15em 0.7em;
 	display					:inline !important;
 }
 .toc div #toclist {
@@ -392,7 +391,6 @@ td > h2:first-child {
 }
 .nostyle tr td {
 	border-style:none !important;
-	text-align:left !important;
 	vertical-align:top !important;
 }
 .vspace {
@@ -618,9 +616,6 @@ td > h2:first-child {
 	background-color:transparent;
 }
 .doxygen_table .doxreturn {
-	background-image:url('../images/arrow.return.gif');
-	background-position:center 0.8em;
-	background-repeat:no-repeat;
 }
 .doxygen_table .doxygen_desc code {
 	background-color:#f2f2ff;
@@ -706,6 +701,10 @@ code .method a:hover {
 	border-style:none !important;
 	width:10px;
 }
+.doxygen_params {
+	padding:0;
+	padding-top:0.6em;
+}
 .doxygen_desc {
 	padding-top:0.2em;
 	padding-bottom:0.8em;
@@ -719,4 +718,12 @@ code .method a:hover {
 .doxygen_tmpllist {
 	padding-top:0.2em;
 	padding-bottom:0.3em;
+}
+.doxygen_index {
+	text-align:right !important;
+	white-space:nowrap;
+	padding-right:0 !important;
+}
+.doxygen_index_def {
+	padding-left:0 !important;
 }

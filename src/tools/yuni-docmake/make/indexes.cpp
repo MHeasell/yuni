@@ -29,7 +29,7 @@ namespace DocIndex
 
 		enum
 		{
-			dbVersion = 9, // arbitrary value
+			dbVersion = 10, // arbitrary value
 		};
 
 		static sqlite3* gDB = nullptr;
@@ -146,7 +146,7 @@ namespace DocIndex
 				const StringAdapter dirty   = (const char*) sqlite3_column_text(stmt, 1);
 				if (dirty.to<bool>())
 				{
-					logs.warning() << "The database index is marked as dirty. Performing a full reindex";
+					logs.info() << "The database index is marked as dirty. Performing a full reindex";
 				}
 				else
 				{

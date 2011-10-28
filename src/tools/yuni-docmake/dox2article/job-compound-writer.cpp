@@ -4,6 +4,7 @@
 #include <yuni/datetime/timestamp.h>
 #include "../logs.h"
 #include "options.h"
+#include "toolbox.h"
 
 
 #define SEP IO::Separator
@@ -22,30 +23,7 @@ namespace Job
 	namespace // anonymous
 	{
 
-		template<class StringT1, class StringT2>
-		inline void HtmlEntities(StringT1& out, const StringT2& string)
-		{
-			out = string;
-			out.replace("&", "&amp;");
-			out.replace("<", "&lt;");
-			out.replace(">", "&gt;");
-		}
-
 		static Atomic::Int<> GenerationNumericID;
-
-
-
-		template<class StringT>
-		static void ArrangeTypename(StringT& str)
-		{
-			str.replace(" *", "*");
-			str.replace(" &amp;", "&amp;");
-			str.replace(" &lt; ", "&lt;");
-			str.replace(" &gt; ", "&gt;");
-			str.replace(" &gt;","&gt;");
-			str.replace(" , ", ", ");
-		}
-
 
 	} // anonymous namespace
 
@@ -129,238 +107,90 @@ namespace Job
 		IO::File::Stream file;
 		if (file.openRW(filename))
 		{
-			String tmp;
-			String visibility;
-			String lastVisibility;
-			String type;
-			String paramType;
-			String paramName;
-			String id;
-			String toggle;
-			Clob out;
 			// Getting the name
 			const String& name = pCompound->name;
 
-			String::Size offset = name.find_last_of(":\\/");
+			fileOut.clear();
+
 			String pageTitle;
-			if (offset < name.size() && offset + 1 < name.size())
-				pageTitle.append(name.c_str() + offset + 1, name.size() - (offset + 1));
-			else
-				pageTitle << name;
-			out << "<title>" << pageTitle << "</title>\n";
-			out << "<pragma:weight value=\"0.5\" />\n";
-			out << "<pragma:toc visible=\"false\" />\n";
-			out << "<tag name=\"doxygen\" />\n";
-			out << "<tag name=\"dox:class\" />\n";
-			out << "\n\n\n";
+			{
+				String tmp;
+				String::Size offset = name.find_last_of(":\\/");
+				if (offset < name.size() && offset + 1 < name.size())
+					pageTitle.append(name.c_str() + offset + 1, name.size() - (offset + 1));
+				else
+					pageTitle << name;
+				PrepareTitle(tmp, pageTitle);
+				fileOut << "<title>" << tmp << "</title>\n";
+				fileOut << "<pragma:weight value=\"0.5\" />\n";
+				fileOut << "<pragma:toc visible=\"false\" />\n";
+				fileOut << "<tag name=\"doxygen\" />\n";
+				fileOut << "<tag name=\"dox:class\" />\n";
+				fileOut << "\n\n\n";
 
-			if (pCompound->brief.notEmpty())
-				out << "<h2>" << pCompound->brief << "</h2>\n";
-			else
-				out << "<h2>" << pageTitle << "</h2>";
-
-			if (pCompound->description.notEmpty())
-				out << "<div>" << pCompound->description << "</div>\n";
-
-			out << "<table class=\"doxygen_table\">\n";
+				fileOut << "<h2>";
+				if (pCompound->brief.notEmpty())
+					PrepareTitle(tmp, pCompound->brief);
+				else
+					PrepareTitle(tmp, pageTitle);
+				// in some cases, a final point is in the string, and it is not especially beautiful
+				fileOut << tmp;
+				fileOut << "</h2>\n";
+			}
 
 			bool isAbstract = (pageTitle.first() == 'I');
 
-			unsigned int count = (unsigned int) pCompound->sections.size();
-			for (unsigned int i = 0; i != count; ++i)
+			OrderedSection sectionmap;
+			buildSectionMapping(sectionmap, isAbstract);
+
+			if (!sectionmap.empty())
 			{
-				const Section::Ptr& sectionptr = pCompound->sections[i];
-				const Section& section = *sectionptr;
-
-				char umlSymbol = '+';
-
-				if (section.kind.startsWith("public-"))
-					visibility = "Public";
-				else if (section.kind.startsWith("protected-"))
+				// resetting temporary stream outputs
+				out.clear();
+				for (unsigned int i = 0; i != 2; ++i)
 				{
-					visibility = "Protected";
-					umlSymbol = '#';
+					for (unsigned int j = 0; j != (unsigned int) kdMax; ++j)
+						outC[i][j].clear();
 				}
-				else if (section.kind.startsWith("private-"))
+
+				// Starting the table
+				out << "<table class=\"doxygen_table\">\n";
+
+				// iterating through all sections found
+				OrderedSection::const_iterator end = sectionmap.end();
+				for (OrderedSection::const_iterator i = sectionmap.begin(); i != end; ++i)
 				{
-					visibility = "Private";
-					umlSymbol = '-';
-					// Skipping all private members
-					continue;
+					// Append all sections found
+					Section::Vector::const_iterator send = i->second.end();
+					for (Section::Vector::const_iterator j = i->second.begin(); j != send; ++j)
+						appendClassSection(/*section*/ *(*j), isAbstract);
 				}
-				else
-					visibility = "Public";
 
-				// Protected and private data should not be displayed when the class is not inherited
-				if (!isAbstract && visibility != "Public")
-					continue;
+				// End of table
+				out << "</table>\n\n\n";
+			}
+			
+			// Writing the begining of the article (title...)
+			file << fileOut;
 
-				String subtitle;
-				subtitle << "<tr><td class=\"doxnone\"></td><td class=\"doxnone\">";
-				/*
-				// if (lastVisibility != visibility)
-				if (0)
+			// Preparing indexes from temporary buffers
+			fileOut.clear();
+			for (unsigned int i = 1; i < 2; --i)
+			{
+				for (unsigned int j = 0; j != (unsigned int) kdMax; ++j)
 				{
-					subtitle << "<div class=\"visibility\">" << visibility << "</div>";
-					lastVisibility = visibility;
-				}
-				subtitle << "</td>\n<td>";
-				*/
-				if (section.caption.notEmpty())
-				{
-					HtmlEntities(tmp, section.caption);
-					subtitle << "<h3 class=\"doxygen_section\">" << tmp << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
-				}
-				else
-					subtitle << "<h3 class=\"doxygen_section\">" << visibility << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
-				subtitle << "</td></tr>\n";
-
-				bool subtitleAlreadyWritten = false;
-				unsigned int memcount = (unsigned int) section.members.size();
-				for (unsigned int j = 0; j != memcount; ++j)
-				{
-					const Member::Ptr& memberptr = section.members[j];
-					const Member& member = *memberptr;
-					if (member.name == "YUNI_STATIC_ASSERT")
-						continue;
-					if (member.kind == kdFriend)
-						continue;
-
-					if (!subtitleAlreadyWritten)
-						out << subtitle;
-
-					subtitleAlreadyWritten = true;
-					out << "<tr>";
-
-
-					id.clear() << member.name << '_' << (++GenerationNumericID) << DateTime::CurrentTimestamp();
-					id.replace('-', '_'); // prevent against int overflow
-					toggle.clear() << "toggleVisibility('" << id << "')";
-
-					HtmlEntities(tmp, member.name);
-					HtmlEntities(type, member.type);
-					ArrangeTypename(type);
-
-					switch (member.kind)
-					{
-						case kdFunction: out << "<td class=\"doxygen_fun\">";break;
-						case kdTypedef:  out << "<td class=\"doxygen_typedef\">";break;
-						case kdVariable: out << "<td class=\"doxygen_var\">";break;
-						case kdEnum:     out << "<td class=\"doxygen_enum\">";break;
-						default: out << "<td>";break;
-					}
-					out << "</td><td class=\"doxnone\"><div class=\"doxygen_brief\">";
-
-					if (member.brief.notEmpty())
-						out << member.brief << "<div class=\"doxygen_name_spacer\"></div>\n";
-					out << "<code>";
-
-					switch (member.kind)
-					{
-						case kdFunction:
-							{
-								if (!member.templates.empty())
-								{
-									out << "<div class=\"doxygen_tmpllist\" id=\"" << id << "_tmpl\" style=\"display:none\">";
-									out << "<span class=\"keyword\">template</span>&lt;";
-									for (unsigned int p = 0; p != member.templates.size(); ++p)
-									{
-										if (p)
-											out << ", ";
-										const Parameter::Ptr& paramstr = member.templates[p];
-										const Parameter& param = *paramstr;
-										HtmlEntities(paramType, param.type);
-										HtmlEntities(paramName, param.name);
-										ArrangeTypename(paramType);
-										out << paramType << ' ' << paramName;
-									}
-									out << "&gt;</div>\n";
-								}
-
-
-								if (tmp.first() == '~')
-								{
-									String t = tmp;
-									t.replace("~", "<b> ~ </b>");
-									out << " <span class=\"method\"><a href=\"javascript:" << toggle << "\">" << umlSymbol << ' ' << t << "</a></span>";
-								}
-								else
-								{
-									out << " <span class=\"method\"><a href=\"javascript:" << toggle << "\">" << umlSymbol << ' ' << tmp << "</a></span>";
-								}
-
-								out << ": ";
-
-								if (member.isStatic)
-									out << "<span class=\"keyword\">static</span> ";
-
-								out << type << " (";
-
-								for (unsigned int p = 0; p != member.parameters.size(); ++p)
-								{
-									if (p)
-										out << ", ";
-									const Parameter::Ptr& paramstr = member.parameters[p];
-									const Parameter& param = *paramstr;
-									HtmlEntities(paramType, param.type);
-									HtmlEntities(paramName, param.name);
-									ArrangeTypename(paramType);
-									out << paramType << ' ' << paramName;
-								}
-								out << ')';
-								if (member.isConst)
-									out << " <span class=\"keyword\">const</span>";
-								out << ";\n";
-								break;
-							}
-						case kdTypedef:
-							{
-								out << "<span class=\"method\"><a href=\"javascript:" << toggle << "\">" << umlSymbol << ' ' << tmp << "</a></span>";
-								out << ": <span class=\"keyword\">typedef</span> ";
-								out << type;
-								out << ';';
-								break;
-							}
-						case kdVariable:
-							{
-								out << "<span class=\"method\"><a href=\"javascript:" << toggle << "\">" << umlSymbol << ' ' << tmp << "</a></span>";
-								out << ": " << type;
-								out << ';';
-								break;
-							}
-						case kdFriend:
-							{
-								out << "<span class=\"method\">friend <a href=\"javascript:" << toggle << "\">" << tmp << "</a></span>";
-								break;
-							}
-						default:
-							// Compound::AppendKindToString(std::cout, member.kind);
-							// std::cout << '\n';
-							out << "<i>(unmanaged tag: " << (unsigned int) member.kind << ")</i>";
-							break;
-					}
-					out << "</code>\n";
-
-					out << "</div></td>";
-
-					out << "</tr>";
-					out << "<tr id=\"" << id << "_desc\" style=\"display:none\"><td class=\"doxnone doxreturn\"></td><td class=\"doxnone\">\n";
-					out << "<div class=\"doxygen_name_spacer\"></div>\n<div class=\"doxygen_desc\">";
-
-					if (member.detailedDescription.notEmpty())
-						out << member.detailedDescription;
-					else
-						out << "<i>no description</i>";
-
-					out << "\n</div>\n";
-					out << "</td>";
-					out << "</tr>\n";
+					if (outC[i][j].notEmpty())
+						appendClassIndex(fileOut, (i != 0) /*isPublic*/, (CompoundType) j, outC[i][j]);
 				}
 			}
+			if (fileOut.notEmpty())
+				fileOut << "<h2>Detailed Description</h2>";
+			if (pCompound->description.notEmpty())
+				fileOut << "<div>" << pCompound->description << "</div>\n";
 
-			out << "</table>\n\n\n";
-
-			// Writing the file
+			// Writing indexes
+			file << fileOut;
+			// Writing detailed description
 			file << out;
 		}
 	}
@@ -398,6 +228,332 @@ namespace Job
 		}
 	}
 
+
+
+	void CompoundWriter::buildSectionMapping(OrderedSection& map, bool isAbstract)
+	{
+		// just in case
+		map.clear();
+		// Section ID
+		CString<48,false> id;
+
+		unsigned int count = (unsigned int) pCompound->sections.size();
+		for (unsigned int i = 0; i != count; ++i)
+		{
+			const Section::Ptr& sectionptr = pCompound->sections[i];
+			if (!sectionptr) // just in case
+				continue;
+			const Section& section = *sectionptr;
+
+			if (section.kind.startsWith("public-"))
+				id = "0-public";
+			else if (section.kind.startsWith("protected-"))
+			{
+				// Protected and private data should not be displayed when the class is not inherited
+				if (!isAbstract)
+					continue;
+				id = "1-protected";
+			}
+			else if (section.kind.startsWith("private-"))
+			{
+				// Skipping all private members
+				continue;
+			}
+			else
+				id = "0-public";
+
+			// We will accept the fact that the first item is enough
+			// to determine the section order
+			//
+			// In the same time, this loop will filter empty sections
+			// (push_back will never be called) which may occur in some
+			// rare cases
+			unsigned int memcount = (unsigned int) section.members.size();
+			for (unsigned int j = 0; j != memcount; ++j)
+			{
+				const Member::Ptr& memberptr = section.members[j];
+				const Member& member = *memberptr;
+
+				// useless stuff - junk
+				if (member.name == "YUNI_STATIC_ASSERT")
+					continue;
+				if (member.kind == kdFriend)
+					continue;
+
+				if (member.kind == kdFunction)
+					id += "-1-method";
+				else if (member.kind == kdVariable)
+					id += "-2-vars";
+				else
+					id += "-0-typedef-enum";
+
+				map[id].push_back(sectionptr);
+				break;
+			}
+		}
+	}
+
+
+	void CompoundWriter::prepareClassSubtitle(const Section& section)
+	{
+		subtitle = "<tr><td class=\"doxnone\"></td><td class=\"doxnone\">";
+
+		if (section.caption.notEmpty())
+		{
+			HtmlEntities(sectionName, section.caption);
+			subtitle << "<h3 class=\"doxygen_section\">" << sectionName << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
+		}
+		else
+		{
+			sectionName.clear();
+			subtitle << "<h3 class=\"doxygen_section\">" << visibility << " <code class=\"doxygen_visibility\">" << visibility << "</code></h3>\n";
+		}
+		subtitle << "</td></tr>\n";
+	}
+
+
+
+	void CompoundWriter::appendClassSection(const Section& section, bool isAbstract)
+	{
+		umlSymbol = '+';
+		visibility.clear();
+		bool isPublic = true;
+
+		if (section.kind.startsWith("public-"))
+			visibility = "Public";
+		else if (section.kind.startsWith("protected-"))
+		{
+			// Protected and private data should not be displayed when the class is not inherited
+			if (!isAbstract)
+				return;
+			visibility = "Protected";
+			umlSymbol = '#';
+			isPublic = false;
+		}
+		else if (section.kind.startsWith("private-"))
+		{
+			// Skipping all private members
+			return;
+			//visibility = "Private";
+			//umlSymbol = '-';
+		}
+		else
+			visibility = "Public";
+
+		// class subtitle
+		prepareClassSubtitle(section);
+
+		bool subtitleAlreadyWritten = false;
+		bool firstIndexMember = true;
+		unsigned int memcount = (unsigned int) section.members.size();
+		for (unsigned int j = 0; j != memcount; ++j)
+		{
+			const Member::Ptr& memberptr = section.members[j];
+			const Member& member = *memberptr;
+			if (member.name == "YUNI_STATIC_ASSERT")
+				continue;
+			if (member.kind == kdFriend)
+				continue;
+
+			if (!subtitleAlreadyWritten)
+			{
+				out << subtitle;
+				subtitleAlreadyWritten = true;
+			}
+
+			if (firstIndexMember && (member.kind == kdFunction || member.kind == kdTypedef))
+			{
+				firstIndexMember = false;
+				Clob& outIx = outC[isPublic][member.kind];
+				if (outIx.empty())
+				{
+					outIx<< "<table class=\"nostyle\">";
+					outIx << "<tr><td></td><td><h4>";
+				}
+				else
+					outIx << "<tr><td></td><td><br /><h4>";
+				outIx << sectionName << "</h4></td></tr>\n";
+			}
+
+			out << "<tr>";
+
+			id.clear() << member.name << '_' << (++GenerationNumericID) << DateTime::CurrentTimestamp();
+			id.replace('-', '_'); // prevent against int overflow
+			toggle.clear() << "toggleVisibility('" << id << "')";
+
+			HtmlEntities(name, member.name);
+			HtmlEntities(type, member.type);
+			ArrangeTypename(type);
+
+			switch (member.kind)
+			{
+				case kdFunction: out << "<td class=\"doxygen_fun\">";break;
+				case kdTypedef:  out << "<td class=\"doxygen_typedef\">";break;
+				case kdVariable: out << "<td class=\"doxygen_var\">";break;
+				case kdEnum:     out << "<td class=\"doxygen_enum\">";break;
+				default: out << "<td>";break;
+			}
+			out << "</td><td class=\"doxnone\"><div class=\"doxygen_brief\">";
+
+			if (member.brief.notEmpty())
+				out << member.brief << "<div class=\"doxygen_name_spacer\"></div>\n";
+			out << "<code>";
+
+			switch (member.kind)
+			{
+				case kdFunction:
+					appendClassFunction(member, isPublic);
+					break;
+				case kdTypedef:
+					appendClassTypedef(isPublic);
+					break;
+				case kdVariable:
+					appendClassVariable();
+					break;
+				default:
+					out << "<i>(unmanaged tag: " << (unsigned int) member.kind << ")</i>";
+					break;
+			}
+
+			out << "</code>\n";
+
+			out << "</div></td>";
+
+			out << "</tr>";
+			out << "<tr id=\"" << id << "_desc\"><td class=\"doxnone doxreturn\"></td><td class=\"doxnone\">\n";
+			out << "<div class=\"doxygen_name_spacer\"></div>\n<div class=\"doxygen_desc\">";
+
+			if (member.detailedDescription.notEmpty())
+				out << member.detailedDescription;
+
+			out << "\n</div>\n";
+			out << "</td>";
+			out << "</tr>\n";
+
+		} // each member
+	}
+
+
+
+	void CompoundWriter::appendClassFunction(const Member& member, bool isPublic)
+	{
+		Clob& outIx = outC[isPublic][kdFunction];
+		if (outIx.empty())
+			outIx << "<table class=\"nostyle\">";
+		outIx << "<tr><td class=\"doxygen_index\"><code>";
+		if (member.isStatic)
+			outIx << "<span class=\"keyword\">static</span> ";
+		outIx << type << ' ';
+		outIx << "</code></td><td class=\"doxygen_index_def\"><code>";
+
+		if (!member.templates.empty())
+		{
+			out << "<div class=\"doxygen_tmpllist\" id=\"" << id << "_tmpl\">";
+			out << "<span class=\"keyword\">template</span>&lt;";
+			for (unsigned int p = 0; p != member.templates.size(); ++p)
+			{
+				if (p)
+					out << ", ";
+				const Parameter::Ptr& paramstr = member.templates[p];
+				const Parameter& param = *paramstr;
+				HtmlEntities(paramType, param.type);
+				HtmlEntities(paramName, param.name);
+				ArrangeTypename(paramType);
+				out << paramType << ' ' << paramName;
+			}
+			out << "&gt;</div>\n";
+		}
+
+		if (name.first() == '~')
+		{
+			String t = name;
+			t.replace("~", "<b> ~ </b>");
+			out << " <span class=\"method\"><a href=\"#\">" << umlSymbol << ' ' << t << "</a></span>";
+			outIx << " <span class=\"method\"><a href=\"#\">" << t << "</a></span>";
+		}
+		else
+		{
+			out << " <span class=\"method\"><a href=\"#\">" << umlSymbol << ' ' << name << "</a></span>";
+			outIx << " <span class=\"method\"><a href=\"#\">" << name << "</a></span>";
+		}
+
+		out << ": ";
+
+		if (member.isStatic)
+			out   << "<span class=\"keyword\">static</span> ";
+
+		out   << type << " (";
+		outIx << '(';
+
+		for (unsigned int p = 0; p != member.parameters.size(); ++p)
+		{
+			if (p)
+			{
+				out << ", ";
+				outIx << ", ";
+			}
+			const Parameter::Ptr& paramstr = member.parameters[p];
+			const Parameter& param = *paramstr;
+			HtmlEntities(paramType, param.type);
+			HtmlEntities(paramName, param.name);
+			ArrangeTypename(paramType);
+			out << paramType << ' ' << paramName;
+			outIx << paramType << ' ' << paramName;
+		}
+		out << ')';
+		outIx << ')';
+		if (member.isConst)
+		{
+			out  << " <span class=\"keyword\">const</span>";
+			outIx << " <span class=\"keyword\">const</span>";
+		}
+		out << ";\n";
+		outIx << "</code></td></tr>\n";
+	}
+
+
+
+	void CompoundWriter::appendClassTypedef(bool isPublic)
+	{
+		Clob& outIx = outC[isPublic][kdTypedef];
+		if (outIx.empty())
+			outIx << "<table class=\"nostyle\">";
+		outIx
+			<< "<tr><td class=\"doxygen_index\"><code><span class=\"keyword\">typedef</span></code></td>"
+			<< "<td class=\"doxygen_index_def\"><code><span class=\"method\"><a href=\"#\">" << name << "</a></span> : "
+			<< type
+			<< "</code></td></tr>\n";
+		out
+			<< "<span class=\"method\"><a href=\"#\">" << umlSymbol << ' ' << name << "</a></span>"
+			<< ": <span class=\"keyword\">typedef</span> "
+			<< type
+			<< ";\n";
+	}
+
+
+	void CompoundWriter::appendClassVariable()
+	{
+		out << "<span class=\"method\"><a href=\"#\">" << umlSymbol << ' ' << name << "</a></span>";
+		out << ": " << type;
+		out << ';';
+	}
+
+
+	void CompoundWriter::appendClassIndex(Clob& output, bool isPublic, CompoundType compoundType, const Clob& data)
+	{
+		output << "<h3>";
+		if (isPublic)
+			output << "Public ";
+		else
+			output << "Protected ";
+
+		Compound::AppendKindToString(output, compoundType);
+		output << "</h3>\n";
+
+		output << "<div class=\"doxygen_brief\">";
+		output << data;
+		output << "</table></div>\n\n";
+	}
 
 
 
