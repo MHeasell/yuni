@@ -1,4 +1,4 @@
 #!/bin/sh
 
-./edln-make --input=../../../docs/src --htdocs=../../../docs/html --clean
+./edln-make ./www.libyuni.org.edln --clean -t production
 

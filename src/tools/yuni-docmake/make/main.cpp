@@ -21,8 +21,11 @@ int main(int argc, char** argv)
 		return EXIT_FAILURE;
 
 	if (!Program::quiet)
+	{
 		logs.checkpoint() << "Edalene Make";
-	if (!DocIndex::Open(program.htdocs))
+		program.printInformations();
+	}
+	if (!DocIndex::Open())
 		return EXIT_FAILURE;
 
 	// The condensed mode of tinyxml may removed all linefeed
@@ -71,10 +74,7 @@ int main(int argc, char** argv)
 	DocIndex::Close();
 
 	if (!Program::quiet)
-	{
-		logs.info();
 		logs.info() << "Done.";
-	}
 	return 0;
 }
 

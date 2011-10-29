@@ -172,7 +172,7 @@ namespace DocIndex
 	}
 
 
-	bool Open(const String& folder)
+	bool Open()
 	{
 		if (gDB)
 		{
@@ -180,17 +180,14 @@ namespace DocIndex
 			gDB = nullptr;
 		}
 
-		String uri;
-		uri << folder << SEP << "yuni-doc-index";
-
 		if (Program::clean)
-			IO::File::Delete(uri);
+			IO::File::Delete(Program::indexCacheFilename);
 
-		switch (sqlite3_open(uri.c_str(), &gDB))
+		switch (sqlite3_open(Program::indexCacheFilename.c_str(), &gDB))
 		{
 			case SQLITE_OK:
 				{
-					if (!UsePragma() || !CheckDatabaseIntegrity(uri))
+					if (!UsePragma() || !CheckDatabaseIntegrity(Program::indexCacheFilename))
 					{
 						Close();
 						return false;
@@ -198,7 +195,7 @@ namespace DocIndex
 					break;
 				}
 			case SQLITE_PERM:
-				logs.error() << "not enough permissions to open " << uri;
+				logs.error() << "not enough permissions to open " << Program::indexCacheFilename;
 				return false;
 			case SQLITE_BUSY:
 				logs.error() << "The index database is locked.";
@@ -207,7 +204,7 @@ namespace DocIndex
 				logs.error() << "The index database is malformed";
 				return false;
 			case SQLITE_CANTOPEN:
-				logs.error() << "Unable to open " << uri;
+				logs.error() << "Unable to open " << Program::indexCacheFilename;
 				return false;
 			default:
 				return false;
@@ -216,7 +213,6 @@ namespace DocIndex
 		// Mark the database index as dirty
 		if (SQLITE_OK != sqlite3_exec(gDB, "UPDATE index_header SET dirty = 1", NULL, NULL, NULL))
 			return false;
-
 		return true;
 	}
 
