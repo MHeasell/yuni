@@ -38,9 +38,9 @@ namespace // anonymous
 			typedef SmartPtr<Curve> Ptr;
 			typedef std::vector<Ptr> Vector;
 		public:
-			Curve()
+			Curve() :
+				showPoints(true)
 			{
-				std::cout << "new curve\n";
 			}
 
 		public:
@@ -48,6 +48,7 @@ namespace // anonymous
 			String caption;
 			String::Vector x;
 			String::Vector y;
+			bool showPoints;
 		};
 	public:
 		Chart(TiXmlElement* parentNode) :
@@ -62,7 +63,6 @@ namespace // anonymous
 				<< "$(function () {\n";
 			script
 				<< "\t$.plot($(\"#dvchart_" << id << "\"), [\n";
-			std::cout << curves.size() << std::endl;
 
 			for (unsigned int i = 0; i != curves.size(); ++i)
 			{
@@ -75,7 +75,6 @@ namespace // anonymous
 					<< "\t\t\tdata: [";
 
 				unsigned int max = Math::Max(curve.x.size(), curve.y.size());
-				std::cout << " >>> " << max << std::endl;
 				for (unsigned int pt = 0; pt != max; ++pt)
 				{
 					if (pt)
@@ -93,7 +92,12 @@ namespace // anonymous
 					script << ']';
 				}
 				script << "],\n"
-					<< "\t\t\t" << curve.type << ": { show: true }\n"
+					<< "\t\t\t" << curve.type << ": { show: true }";
+				if (curve.type == "lines" && curve.showPoints)
+					script << ",\n\t\t\tpoints: { show: true }";
+				script << '\n';
+
+				script
 					<< "\t\t}";
 			}
 			script << '\n';
@@ -107,6 +111,8 @@ namespace // anonymous
 				<< "\t\t},\n"
 				<< "\t\tgrid: {\n"
 				<< "\t\t\tborderWidth: 1,\n"
+				<< "\t\t\tclickable: true,\n"
+				<< "\t\t\thoverable: true,\n"
 				<< "\t\t\tborderColor: \"rgb(190,190,190)\",\n"
 				<< "\t\t\tautoHighlight: true\n"
 				<< "\t\t}\n"
@@ -229,7 +235,7 @@ namespace // anonymous
 				pCurrentChart->curves.push_back(pCurrentChart->currentCurve);
 				pCurrentChart->currentCurve->caption = element.Attribute("label");
 				const StringAdapter type = element.Attribute("type");
-				if (!type || (type != "lines" && type != "bars"))
+				if (!type || (type != "lines" && type != "bars" && type != "points"))
 				{
 					if (type.notEmpty())
 						logs.warning() << "invalid curve type, got '" << type << "'";
@@ -392,7 +398,6 @@ namespace // anonymous
 			id.clear() << "dvchart_" << i;
 			const Chart& chart = *(pCharts[i]);
 			chart.generateJS(script, i);
-			std::cout << script << std::endl;
 
 			TiXmlElement td("td");
 			td.SetAttribute("id", id.c_str());
