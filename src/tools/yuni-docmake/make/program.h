@@ -25,6 +25,10 @@ namespace DocMake
 
 		void findAllSourceFiles();
 
+		bool readProfile(const String& filename);
+
+		void printInformations() const;
+
 	public:
 		//! The input folder
 		static String input;
@@ -34,6 +38,11 @@ namespace DocMake
 		static String indexFilename;
 		//! The web root (ex: http://www.libyuni.org)
 		static String webroot;
+		//! The profile
+		static String profile;
+		//! The target
+		static String target;
+		static String indexCacheFilename;
 
 		static unsigned int nbJobs;
 		bool printVersion;

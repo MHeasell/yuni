@@ -15,7 +15,7 @@ namespace DocIndex
 	typedef Yuni::sint64  ArticleID;
 
 
-	bool Open(const Yuni::String& folder);
+	bool Open();
 
 	void Close();
 
