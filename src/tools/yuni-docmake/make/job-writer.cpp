@@ -26,6 +26,103 @@ namespace // anonymous
 	static String gTemplateContent;
 
 
+	class Chart
+	{
+	public:
+		typedef SmartPtr<Chart> Ptr;
+		typedef std::vector<Ptr> Vector;
+
+		class Curve
+		{
+		public:
+			typedef SmartPtr<Curve> Ptr;
+			typedef std::vector<Ptr> Vector;
+		public:
+			Curve()
+			{
+				std::cout << "new curve\n";
+			}
+
+		public:
+			CString<16,false> type;
+			String caption;
+			String::Vector x;
+			String::Vector y;
+		};
+	public:
+		Chart(TiXmlElement* parentNode) :
+			xmlNode(parentNode)
+		{
+		}
+
+		void generateJS(Clob& script, unsigned int id) const
+		{
+			script.clear();
+			script
+				<< "$(function () {\n";
+			script
+				<< "\t$.plot($(\"#dvchart_" << id << "\"), [\n";
+			std::cout << curves.size() << std::endl;
+
+			for (unsigned int i = 0; i != curves.size(); ++i)
+			{
+				const Curve& curve = *(curves[i]);
+				if (i)
+					script << ",\n";
+				script
+					<< "\t\t\{\n"
+					<< "\t\t\tlabel: \"" << curve.caption << "\",\n"
+					<< "\t\t\tdata: [";
+
+				unsigned int max = Math::Max(curve.x.size(), curve.y.size());
+				std::cout << " >>> " << max << std::endl;
+				for (unsigned int pt = 0; pt != max; ++pt)
+				{
+					if (pt)
+						script << ", ";
+					script << '[';
+					if (pt < curve.x.size())
+						script << curve.x[pt];
+					else
+						script << '0';
+					script << ',';
+					if (pt < curve.y.size())
+						script << curve.y[pt];
+					else
+						script << '0';
+					script << ']';
+				}
+				script << "],\n"
+					<< "\t\t\t" << curve.type << ": { show: true }\n"
+					<< "\t\t}";
+			}
+			script << '\n';
+
+			script
+				<< "\t],\n"
+				<< "\t{\n"
+				<< "\t\txaxis: {\n"
+				<< "\t\t},\n"
+				<< "\t\tyaxis: {\n"
+				<< "\t\t},\n"
+				<< "\t\tgrid: {\n"
+				<< "\t\t\tborderWidth: 1,\n"
+				<< "\t\t\tborderColor: \"rgb(190,190,190)\",\n"
+				<< "\t\t\tautoHighlight: true\n"
+				<< "\t\t}\n"
+				<< "\t});\n"
+				<< "});";
+		}
+
+	public:
+		//! The original XML node
+		TiXmlElement* xmlNode;
+		//!
+		Curve::Ptr currentCurve;
+		//!
+		Curve::Vector curves;
+	};
+
 
 	class XMLVisitor : public TiXmlVisitor
 	{
@@ -53,6 +150,7 @@ namespace // anonymous
 		virtual bool Visit(const TiXmlComment& /*comment*/);
 		virtual bool Visit(const TiXmlUnknown& /*unknown*/);
 
+		void createAllCharts();
 		void deleteUselessTags();
 
 	private:
@@ -60,6 +158,12 @@ namespace // anonymous
 		TiXmlDocument& pDocument;
 		ArticleData& pArticle;
 		std::vector<TiXmlElement*> pToDelete;
+
+		//! \name Charting
+		//@{
+		Chart::Ptr pCurrentChart;
+		Chart::Vector pCharts;
+		//@}
 
 		unsigned int pCurrentTOCItemIndex;
 		unsigned int pH2Index;
@@ -117,46 +221,92 @@ namespace // anonymous
 				attr->SetValue(s.c_str());
 			}
 		}
-
-		if (tag == "title" || tag == "tag" || tag.startsWith("pragma:"))
-			pToDelete.push_back(const_cast<TiXmlElement*>(&element));
-		else
+		if (!(!pCurrentChart))
 		{
-			if (tag == "h2" || tag == "h3")
+			if (tag == "curve")
 			{
-				// Forcing the id
-				if (pCurrentTOCItemIndex < pArticle.tocItems.size())
+				pCurrentChart->currentCurve = new Chart::Curve();
+				pCurrentChart->curves.push_back(pCurrentChart->currentCurve);
+				pCurrentChart->currentCurve->caption = element.Attribute("label");
+				const StringAdapter type = element.Attribute("type");
+				if (!type || (type != "lines" && type != "bars"))
 				{
-					e->SetAttribute("id", pArticle.tocItems[pCurrentTOCItemIndex]->hrefID.c_str());
-					++pCurrentTOCItemIndex;
-				}
-				if (tag[1] == '2')
-				{
-					++pH2Index;
-					pH3Index = 0;
+					if (type.notEmpty())
+						logs.warning() << "invalid curve type, got '" << type << "'";
+					pCurrentChart->currentCurve->type = "lines";
 				}
 				else
-					++pH3Index;
+					pCurrentChart->currentCurve->type = type;
+				return true;
 			}
-			else if (tag == "source")
+			if (tag == "x")
 			{
-				CString<16,false> type = e->Attribute("type");
-				e->SetValue("pre");
-				e->RemoveAttribute("type");
+				if (!pCurrentChart->currentCurve)
+					return false;
+				const StringAdapter value = element.GetText();
+				if (value.notEmpty())
+					value.split(pCurrentChart->currentCurve->x, " ,;\t\r\n|");
+				return true;
+			}
+			if (tag == "y")
+			{
+				if (!pCurrentChart->currentCurve)
+					return false;
+				const StringAdapter value = element.GetText();
+				if (value.notEmpty())
+					value.split(pCurrentChart->currentCurve->y, " ,;\t\r\n|");
+				return true;
+			}
+			// Invalid tag within a chart
+			return false;
+		}
+		if (tag == "chart")
+		{
+			// This node must be removed at the final end
+			pToDelete.push_back(const_cast<TiXmlElement*>(&element));
+			pCurrentChart = new Chart(const_cast<TiXmlElement*>(&element));
+			pCharts.push_back(pCurrentChart);
+			return true;
+		}
+		if (tag == "title" || tag == "tag" || tag.startsWith("pragma:"))
+		{
+			pToDelete.push_back(const_cast<TiXmlElement*>(&element));
+			return true;
+		}
+		if (tag == "h2" || tag == "h3")
+		{
+			// Forcing the id
+			if (pCurrentTOCItemIndex < pArticle.tocItems.size())
+			{
+				e->SetAttribute("id", pArticle.tocItems[pCurrentTOCItemIndex]->hrefID.c_str());
+				++pCurrentTOCItemIndex;
+			}
+			if (tag[1] == '2')
+			{
+				++pH2Index;
+				pH3Index = 0;
+			}
+			else
+				++pH3Index;
+			return true;
+		}
+		if (tag == "source")
+		{
+			CString<16,false> type = e->Attribute("type");
+			e->SetValue("pre");
+			e->RemoveAttribute("type");
 
-				type.toLower();
-				if (type != "none")
-				{
-					if (!type || type == "cpp" || type == "c++")
-						e->SetAttribute("class", "cpp");
-					else if (type == "lua")
-						e->SetAttribute("class", "lua");
-					else if (type == "java")
-						e->SetAttribute("class", "java");
-				}
+			type.toLower();
+			if (type != "none")
+			{
+				if (!type || type == "cpp" || type == "c++")
+					e->SetAttribute("class", "cpp");
+				else if (type == "lua")
+					e->SetAttribute("class", "lua");
+				else if (type == "java")
+					e->SetAttribute("class", "java");
 			}
 		}
-
 		return true;
 	}
 
@@ -208,9 +358,66 @@ namespace // anonymous
 
 
 
-	bool XMLVisitor::VisitExit(const TiXmlElement&)
+	bool XMLVisitor::VisitExit(const TiXmlElement& element)
 	{
+		const TIXML_STRING& name = element.ValueTStr();
+		const Dictionary::Tag tag = name.c_str();
+
+		if (!(!pCurrentChart))
+		{
+			if (tag == "chart")
+			{
+				pCurrentChart = nullptr;
+				return true;
+			}
+			if (tag == "curve")
+			{
+				if (!(!pCurrentChart))
+					pCurrentChart->currentCurve = nullptr;
+				return true;
+			}
+		}
 		return true;
+	}
+
+
+	void XMLVisitor::createAllCharts()
+	{
+		if (pCharts.empty())
+			return;
+		Clob script;
+		String id;
+		for (unsigned int i = 0; i != pCharts.size(); ++i)
+		{
+			id.clear() << "dvchart_" << i;
+			const Chart& chart = *(pCharts[i]);
+			chart.generateJS(script, i);
+			std::cout << script << std::endl;
+
+			TiXmlElement td("td");
+			td.SetAttribute("id", id.c_str());
+			td.SetAttribute("style", "width:600px;height:300px");
+
+			TiXmlElement emptytd("td");
+			emptytd.InsertEndChild(TiXmlText(" "));
+
+			TiXmlElement tr("tr");
+			tr.InsertEndChild(emptytd);
+			tr.InsertEndChild(td);
+			tr.InsertEndChild(emptytd);
+
+			TiXmlElement table("table");
+			table.SetAttribute("class", "nostyle");
+			table.SetAttribute("style", "width:100%");
+			table.InsertEndChild(tr);
+			chart.xmlNode->Parent()->InsertBeforeChild(chart.xmlNode, table);
+
+			TiXmlElement js("script");
+			js.SetAttribute("type", "text/javascript");
+			TiXmlText text(script.c_str());
+			js.InsertEndChild(text);
+			chart.xmlNode->Parent()->InsertBeforeChild(chart.xmlNode, js);
+		}
 	}
 
 
@@ -375,6 +582,7 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 		{
 			XMLVisitor visitor(pArticle, doc);
 			doc.Accept(&visitor);
+			visitor.createAllCharts();
 			visitor.deleteUselessTags();
 		}
 	}
@@ -583,10 +791,9 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 bool JobWriter::articleIDIndatabase()
 {
 	pArticleID = DocIndex::FindArticleID(pArticle.htdocsFilename);
-	if (pArticleID < 0)
-		return false;
-	return true;
+	return (pArticleID >= 0);
 }
+
 
 void JobWriter::onExecute()
 {
@@ -679,6 +886,8 @@ void JobWriter::onExecute()
 
 	// Replace all pseudo linefeed
 	content.replace("&#x0A;", "\n");
+	content.replace("&#x09;", "\t");
+	content.replace("&quot;", "\"");
 
 	if (!IO::File::SaveToFile(filenameInHtdocs, content))
 	{
