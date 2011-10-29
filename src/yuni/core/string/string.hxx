@@ -1,6 +1,7 @@
 #ifndef __YUNI_CORE_STRING_STRING_HXX__
 # define __YUNI_CORE_STRING_STRING_HXX__
 
+# include <iostream>
 # include <ctype.h>
 # include <cassert>
 # ifdef YUNI_HAS_VA_COPY
@@ -521,19 +522,21 @@ namespace Yuni
 		{
 			if (str)
 			{
-				bool escape = false;
 				typename StringT::Size pos(0);
 				while (pos < maxLen)
 				{
-					if ('\\' == str[pos])
-						escape = !escape;
+					char c = str[pos];
+					if ('\\' == c)
+					{
+						pos += 2;
+						continue;
+					}
 					else
 					{
-						if (quote == str[pos] && escape)
+						if (quote == c)
 							return pos;
-						escape = false;
+						++pos;
 					}
-					++pos;
 				}
 			}
 			return StringT::npos;
@@ -3357,13 +3360,14 @@ namespace Yuni
 			key.toLower();
 
 		// Looking for the first interesting char
-		Size leftValue(equal);
-		++leftValue; // After the symbol `=`
-		while (leftValue < AncestorType::size && (AncestorType::data[leftValue] == ' ' || AncestorType::data[leftValue] == '\t' ||AncestorType::data[leftValue] == '\r' ||AncestorType::data[leftValue] == '\n'))
-			++leftValue;
-		if (leftValue < AncestorType::size) // Empty value
+		Size rv(equal);
+		++rv; // After the symbol `=`
+		while (rv < AncestorType::size && (AncestorType::data[rv] == ' ' || AncestorType::data[rv] == '\t' ||AncestorType::data[rv] == '\r' ||AncestorType::data[rv] == '\n'))
+			++rv;
+		if (rv < AncestorType::size) // Empty value
 		{
-			switch (AncestorType::data[leftValue])
+			char c = AncestorType::data[rv];
+			switch (c)
 			{
 				case ';':
 					// Empty value
@@ -3372,30 +3376,28 @@ namespace Yuni
 				case '\'':
 					{
 						// Value enclosed in a string
-						++leftValue;
-						const typename AncestorType::Size next
-							= FindEndOfSequence<CStringType>(AncestorType::data + leftValue,
-												AncestorType::data[leftValue - 1],
-												AncestorType::size - leftValue);
+						++rv;
+						typename AncestorType::Size next;
+						next = FindEndOfSequence<CStringType>(AncestorType::data + rv, c, AncestorType::size - rv);
 						if (next != npos)
-							value.assignFromEscapedCharacters(AncestorType::data, next, leftValue);
+							value.append(AncestorType::data + rv, next);
+							//value.assignFromEscapedCharacters(AncestorType::data, next, rv);
 						else
-							value.append(AncestorType::data + leftValue,
-										 AncestorType::size - leftValue);
+							value.append(AncestorType::data + rv, AncestorType::size - rv);
 						break;
 					}
 				case '/':
 					// Empty value if we have a comment otherwise '/' is a valid entry
-					if (leftValue + 1 >= AncestorType::size || AncestorType::data[leftValue + 1] == '/')
+					if (rv + 1 >= AncestorType::size || AncestorType::data[rv + 1] == '/')
 						break;
 				default:
 					{
 						// Standard value
-						const Size semicolon = find_first_of(';', leftValue);
+						const Size semicolon = find_first_of(';', rv);
 						if (npos != semicolon)
-							value.append(*this, semicolon - leftValue, leftValue);
+							value.append(*this, semicolon - rv, rv);
 						else
-							value.append(*this, AncestorType::size - leftValue, leftValue);
+							value.append(*this, AncestorType::size - rv, rv);
 						value.trimRight(" \t\n\r");
 						break;
 					}
