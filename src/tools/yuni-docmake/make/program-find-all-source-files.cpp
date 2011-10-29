@@ -105,7 +105,7 @@ namespace DocMake
 		{
 			if (!Program::quiet)
 			{
-				logs.info() << count << (count > 1 ? " articles, " : "article, ") << nbJobs
+				logs.info() << count << (count > 1 ? " articles, " : " article, ") << nbJobs
 					<< (nbJobs > 1 ? " threads" : " thread");
 				logs.info();
 			}
