@@ -176,6 +176,12 @@ namespace // anonymous
 								src << SEP << string;
 								IO::Normalize(pArticle.directoryIndex, src);
 							}
+							else
+							{
+								String src = pArticle.htdocsFilename;
+								src << SEP << ".";
+								IO::Normalize(pArticle.directoryIndex, src);
+							}
 
 							const CString<42,false> content = element.Attribute("content");
 							if (content.notEmpty())

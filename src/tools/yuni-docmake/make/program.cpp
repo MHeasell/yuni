@@ -42,6 +42,16 @@ namespace DocMake
 	}
 
 
+	Program::~Program()
+	{
+		if (pProfileFile.opened())
+		{
+			pProfileFile.unlock();
+			pProfileFile.close();
+		}
+	}
+
+
 	bool Program::parseCommandLine(int argc, char** argv)
 	{
 		// The total number of CPU
@@ -86,7 +96,9 @@ namespace DocMake
 				logs.error() << "Profile not found : " << profile;
 			return false;
 		}
+
 		// Read the profile
+		// The profile will be locked for prevent any concurrent use
 		if (!readProfile(profile))
 			return false;
 
@@ -149,12 +161,18 @@ namespace DocMake
 
 	bool Program::readProfile(const String& filename)
 	{
-		IO::File::Stream file;
-		if (!file.open(filename))
+		if (pProfileFile.opened())
+		{
+			pProfileFile.unlock();
+			pProfileFile.close();
+		}
+		if (!pProfileFile.open(filename))
 		{
 			logs.error() << "impossible to read the profile : " << filename;
 			return false;
 		}
+
+		pProfileFile.lockExclusive();
 
 		target.toLower();
 		Clob buffer;
@@ -162,7 +180,7 @@ namespace DocMake
 		String value;
 		String currentProfile;
 		bool skip = true;
-		while (file.readline(buffer))
+		while (pProfileFile.readline(buffer))
 		{
 			if (!buffer)
 				continue;

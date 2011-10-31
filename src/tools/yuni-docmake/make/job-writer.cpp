@@ -39,7 +39,8 @@ namespace // anonymous
 			typedef std::vector<Ptr> Vector;
 		public:
 			Curve() :
-				showPoints(true)
+				showPoints(true),
+				fill(true)
 			{
 			}
 
@@ -49,10 +50,13 @@ namespace // anonymous
 			String::Vector x;
 			String::Vector y;
 			bool showPoints;
+			bool fill;
 		};
+
 	public:
 		Chart(TiXmlElement* parentNode) :
-			xmlNode(parentNode)
+			xmlNode(parentNode),
+			legendPosition("ne")
 		{
 		}
 
@@ -91,8 +95,10 @@ namespace // anonymous
 						script << '0';
 					script << ']';
 				}
-				script << "],\n"
-					<< "\t\t\t" << curve.type << ": { show: true }";
+				script << "],\n";
+				script << "\t\t\t" << curve.type << ": { show: true, fill: "
+					<< ((curve.fill) ? "true" : "false")
+					<< " }";
 				if (curve.type == "lines" && curve.showPoints)
 					script << ",\n\t\t\tpoints: { show: true }";
 				script << '\n';
@@ -108,6 +114,11 @@ namespace // anonymous
 				<< "\t\txaxis: {\n"
 				<< "\t\t},\n"
 				<< "\t\tyaxis: {\n"
+				<< "\t\t},\n"
+				<< "\t\tseries: {\n"
+				<< "\t\t},\n"
+				<< "\t\tlegend: {\n"
+				<< "\t\t\tposition: \"" << legendPosition << "\",\n"
 				<< "\t\t},\n"
 				<< "\t\tgrid: {\n"
 				<< "\t\t\tborderWidth: 1,\n"
@@ -127,6 +138,8 @@ namespace // anonymous
 		Curve::Ptr currentCurve;
 		//!
 		Curve::Vector curves;
+		//! Legend position
+		CString<8,false> legendPosition;
 	};
 
 
@@ -238,17 +251,37 @@ namespace // anonymous
 				if (!type || (type != "lines" && type != "bars" && type != "points"))
 				{
 					if (type.notEmpty())
-						logs.warning() << "invalid curve type, got '" << type << "'";
+						logs.warning() << pArticle.relativeFilename << ": invalid curve type, got '" << type << "'";
 					pCurrentChart->currentCurve->type = "lines";
 				}
 				else
 					pCurrentChart->currentCurve->type = type;
+
+				const StringAdapter fill = element.Attribute("fill");
+				if (fill.notEmpty())
+					pCurrentChart->currentCurve->fill = fill.to<bool>();
+
 				return true;
 			}
+			if (tag == "legend")
+			{
+				const StringAdapter pos = element.Attribute("position");
+				if (pos.notEmpty())
+				{
+					if (pos != "ne" && pos != "nw" && pos != "se" && pos != "sw")
+					{
+						logs.warning() << pArticle.relativeFilename << ": invalid legend position (valid values: ne, nw, se, sw)";
+						return false;
+					}
+					pCurrentChart->legendPosition = pos;
+				}
+				return true;
+			}
+
+			if (!pCurrentChart->currentCurve)
+				return false;
 			if (tag == "x")
 			{
-				if (!pCurrentChart->currentCurve)
-					return false;
 				const StringAdapter value = element.GetText();
 				if (value.notEmpty())
 					value.split(pCurrentChart->currentCurve->x, " ,;\t\r\n|");
@@ -256,13 +289,12 @@ namespace // anonymous
 			}
 			if (tag == "y")
 			{
-				if (!pCurrentChart->currentCurve)
-					return false;
 				const StringAdapter value = element.GetText();
 				if (value.notEmpty())
 					value.split(pCurrentChart->currentCurve->y, " ,;\t\r\n|");
 				return true;
 			}
+
 			// Invalid tag within a chart
 			return false;
 		}
