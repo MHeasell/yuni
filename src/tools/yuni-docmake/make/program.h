@@ -3,6 +3,7 @@
 
 # include <yuni/yuni.h>
 # include <yuni/core/string.h>
+# include <yuni/io/file.h>
 
 
 namespace Yuni
@@ -20,6 +21,7 @@ namespace DocMake
 		** \brief Default constructor
 		*/
 		Program();
+		~Program();
 
 		bool parseCommandLine(int argc, char** argv);
 
@@ -51,6 +53,10 @@ namespace DocMake
 		static bool clean;
 		static bool shortUrl;
 		static bool quiet;
+
+	private:
+		//! Profile file
+		Yuni::IO::File::Stream pProfileFile;
 
 	}; // class Make
 

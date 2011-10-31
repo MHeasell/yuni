@@ -296,12 +296,14 @@ namespace File
 		** \brief Lock the file for a shared access
 		**
 		** \warning The implementation is missing on Windows (#346)
+		** \warning The user must call `unlock`
 		*/
 		bool lockShared();
 		/*!
 		** \brief Lock the file for an exclusive access
 		**
 		** \warning The implementation is missing on Windows (#346)
+		** \warning The user must call `unlock`
 		*/
 		bool lockExclusive();
 
