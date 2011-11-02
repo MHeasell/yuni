@@ -249,7 +249,11 @@ namespace Yuni
 		template<typename U>
 		bool operator < (const Point3D<U>& p) const
 		{
-			return x < (T)p.x || y < (T)p.y || z < (T)p.z;
+			if (!Math::Equals(x, (T)p.x))
+				return x < (T)p.x;
+			if (!Math::Equals(y, (T)p.y))
+				return y < (T)p.y;
+			return z < (T)p.z;
 		}
 
 		/*!
